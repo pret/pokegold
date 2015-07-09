@@ -4,7 +4,7 @@ This is a disassembly of Pokémon Gold.
 
 It builds the following rom:
 
-* Pokemon - Gold Version (USA, Europe)
+* Pokemon - Gold Version (USA, Europe).gbc `md5:a6924ce1f9ad2228e1c6580779b23878`
 
 To set up the repository, see [**INSTALL.md**](INSTALL.md).
 
