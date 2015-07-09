@@ -1,11 +1,10 @@
-# Pokémon Crystal
+# Pokémon Gold
 
-This is a disassembly of Pokémon Crystal.
+This is a disassembly of Pokémon Gold.
 
-It builds the following roms:
+It builds the following rom:
 
-* Pokemon - Crystal Version (UE) (V1.0) [C][!].gbc `md5: 9f2922b235a5eeb78d65594e82ef5dde`
-* Pokemon - Crystal Version (UE) (V1.1) [C][!].gbc `md5: 301899b8087289a6436b0a241fbbb474`
+* Pokemon - Gold Version (USA, Europe)
 
 To set up the repository, see [**INSTALL.md**](INSTALL.md).
 
@@ -13,7 +12,9 @@ To set up the repository, see [**INSTALL.md**](INSTALL.md).
 ## See also
 
 * Disassembly of [**Pokémon Red/Blue**][pokered]
+* Disassembly of [**Pokémon Crystal**][pokecrystal]
 * irc: **irc.freenode.net** [**#pret**][irc]
 
 [pokered]: https://github.com/iimarckus/pokered
+[pokecrystal]: https://github.com/kanzure/pokecrystal
 [irc]: https://kiwiirc.com/client/irc.freenode.net/?#pret
