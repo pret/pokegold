@@ -1,384 +1,383 @@
+SECTION "bank0", HOME
+INCBIN "baserom.gbc", $0, $4000
 
-SECTION "bank00", ROM0[$00]
-INCBIN "binsplit/bank00.bin"
+SECTION "bank1", DATA, BANK[$1]
+INCBIN "baserom.gbc", $4000, $4000
 
-SECTION "bank01", ROMX, BANK[$01]
-INCBIN "binsplit/bank01.bin"
+SECTION "bank2", DATA, BANK[$2]
+INCBIN "baserom.gbc", $8000, $4000
 
-SECTION "bank02", ROMX, BANK[$02]
-INCBIN "binsplit/bank02.bin"
+SECTION "bank3", DATA, BANK[$3]
+INCBIN "baserom.gbc", $c000, $4000
 
-SECTION "bank03", ROMX, BANK[$03]
-INCBIN "binsplit/bank03.bin"
+SECTION "bank4", DATA, BANK[$4]
+INCBIN "baserom.gbc", $10000, $4000
 
-SECTION "bank04", ROMX, BANK[$04]
-INCBIN "binsplit/bank04.bin"
+SECTION "bank5", DATA, BANK[$5]
+INCBIN "baserom.gbc", $14000, $4000
 
-SECTION "bank05", ROMX, BANK[$05]
-INCBIN "binsplit/bank05.bin"
+SECTION "bank6", DATA, BANK[$6]
+INCBIN "baserom.gbc", $18000, $4000
 
-SECTION "bank06", ROMX, BANK[$06]
-INCBIN "binsplit/bank06.bin"
+SECTION "bank7", DATA, BANK[$7]
+INCBIN "baserom.gbc", $1c000, $4000
 
-SECTION "bank07", ROMX, BANK[$07]
-INCBIN "binsplit/bank07.bin"
+SECTION "bank8", DATA, BANK[$8]
+INCBIN "baserom.gbc", $20000, $4000
 
-SECTION "bank08", ROMX, BANK[$08]
-INCBIN "binsplit/bank08.bin"
+SECTION "bank9", DATA, BANK[$9]
+INCBIN "baserom.gbc", $24000, $4000
 
-SECTION "bank09", ROMX, BANK[$09]
-INCBIN "binsplit/bank09.bin"
+SECTION "banka", DATA, BANK[$a]
+INCBIN "baserom.gbc", $28000, $4000
 
-SECTION "bank0a", ROMX, BANK[$0a]
-INCBIN "binsplit/bank0a.bin"
+SECTION "bankb", DATA, BANK[$b]
+INCBIN "baserom.gbc", $2c000, $4000
 
-SECTION "bank0b", ROMX, BANK[$0b]
-INCBIN "binsplit/bank0b.bin"
+SECTION "bankc", DATA, BANK[$c]
+INCBIN "baserom.gbc", $30000, $4000
 
-SECTION "bank0c", ROMX, BANK[$0c]
-INCBIN "binsplit/bank0c.bin"
+SECTION "bankd", DATA, BANK[$d]
+INCBIN "baserom.gbc", $34000, $4000
 
-SECTION "bank0d", ROMX, BANK[$0d]
-INCBIN "binsplit/bank0d.bin"
+SECTION "banke", DATA, BANK[$e]
+INCBIN "baserom.gbc", $38000, $4000
 
-SECTION "bank0e", ROMX, BANK[$0e]
-INCBIN "binsplit/bank0e.bin"
+SECTION "bankf", DATA, BANK[$f]
+INCBIN "baserom.gbc", $3c000, $4000
 
-SECTION "bank0f", ROMX, BANK[$0f]
-INCBIN "binsplit/bank0f.bin"
+SECTION "bank10", DATA, BANK[$10]
+INCBIN "baserom.gbc", $40000, $4000
 
-SECTION "bank10", ROMX, BANK[$10]
-INCBIN "binsplit/bank10.bin"
+SECTION "bank11", DATA, BANK[$11]
+INCBIN "baserom.gbc", $44000, $4000
 
-SECTION "bank11", ROMX, BANK[$11]
-INCBIN "binsplit/bank11.bin"
+SECTION "bank12", DATA, BANK[$12]
+INCBIN "baserom.gbc", $48000, $4000
 
-SECTION "bank12", ROMX, BANK[$12]
-INCBIN "binsplit/bank12.bin"
+SECTION "bank13", DATA, BANK[$13]
+INCBIN "baserom.gbc", $4c000, $4000
 
-SECTION "bank13", ROMX, BANK[$13]
-INCBIN "binsplit/bank13.bin"
+SECTION "bank14", DATA, BANK[$14]
+INCBIN "baserom.gbc", $50000, $4000
 
-SECTION "bank14", ROMX, BANK[$14]
-INCBIN "binsplit/bank14.bin"
+SECTION "bank15", DATA, BANK[$15]
+INCBIN "baserom.gbc", $54000, $4000
 
-SECTION "bank15", ROMX, BANK[$15]
-INCBIN "binsplit/bank15.bin"
+SECTION "bank16", DATA, BANK[$16]
+INCBIN "baserom.gbc", $58000, $4000
 
-SECTION "bank16", ROMX, BANK[$16]
-INCBIN "binsplit/bank16.bin"
+SECTION "bank17", DATA, BANK[$17]
+INCBIN "baserom.gbc", $5c000, $4000
 
-SECTION "bank17", ROMX, BANK[$17]
-INCBIN "binsplit/bank17.bin"
+SECTION "bank18", DATA, BANK[$18]
+INCBIN "baserom.gbc", $60000, $4000
 
-SECTION "bank18", ROMX, BANK[$18]
-INCBIN "binsplit/bank18.bin"
+SECTION "bank19", DATA, BANK[$19]
+INCBIN "baserom.gbc", $64000, $4000
 
-SECTION "bank19", ROMX, BANK[$19]
-INCBIN "binsplit/bank19.bin"
+SECTION "bank1a", DATA, BANK[$1a]
+INCBIN "baserom.gbc", $68000, $4000
 
-SECTION "bank1a", ROMX, BANK[$1a]
-INCBIN "binsplit/bank1a.bin"
+SECTION "bank1b", DATA, BANK[$1b]
+INCBIN "baserom.gbc", $6c000, $4000
 
-SECTION "bank1b", ROMX, BANK[$1b]
-INCBIN "binsplit/bank1b.bin"
+SECTION "bank1c", DATA, BANK[$1c]
+INCBIN "baserom.gbc", $70000, $4000
 
-SECTION "bank1c", ROMX, BANK[$1c]
-INCBIN "binsplit/bank1c.bin"
+SECTION "bank1d", DATA, BANK[$1d]
+INCBIN "baserom.gbc", $74000, $4000
 
-SECTION "bank1d", ROMX, BANK[$1d]
-INCBIN "binsplit/bank1d.bin"
+SECTION "bank1e", DATA, BANK[$1e]
+INCBIN "baserom.gbc", $78000, $4000
 
-SECTION "bank1e", ROMX, BANK[$1e]
-INCBIN "binsplit/bank1e.bin"
+SECTION "bank1f", DATA, BANK[$1f]
+INCBIN "baserom.gbc", $7c000, $4000
 
-SECTION "bank1f", ROMX, BANK[$1f]
-INCBIN "binsplit/bank1f.bin"
+SECTION "bank20", DATA, BANK[$20]
+INCBIN "baserom.gbc", $80000, $4000
 
-SECTION "bank20", ROMX, BANK[$20]
-INCBIN "binsplit/bank20.bin"
+SECTION "bank21", DATA, BANK[$21]
+INCBIN "baserom.gbc", $84000, $4000
 
-SECTION "bank21", ROMX, BANK[$21]
-INCBIN "binsplit/bank21.bin"
+SECTION "bank22", DATA, BANK[$22]
+INCBIN "baserom.gbc", $88000, $4000
 
-SECTION "bank22", ROMX, BANK[$22]
-INCBIN "binsplit/bank22.bin"
+SECTION "bank23", DATA, BANK[$23]
+INCBIN "baserom.gbc", $8c000, $4000
 
-SECTION "bank23", ROMX, BANK[$23]
-INCBIN "binsplit/bank23.bin"
+SECTION "bank24", DATA, BANK[$24]
+INCBIN "baserom.gbc", $90000, $4000
 
-SECTION "bank24", ROMX, BANK[$24]
-INCBIN "binsplit/bank24.bin"
+SECTION "bank25", DATA, BANK[$25]
+INCBIN "baserom.gbc", $94000, $4000
 
-SECTION "bank25", ROMX, BANK[$25]
-INCBIN "binsplit/bank25.bin"
+SECTION "bank26", DATA, BANK[$26]
+INCBIN "baserom.gbc", $98000, $4000
 
-SECTION "bank26", ROMX, BANK[$26]
-INCBIN "binsplit/bank26.bin"
+SECTION "bank27", DATA, BANK[$27]
+INCBIN "baserom.gbc", $9c000, $4000
 
-SECTION "bank27", ROMX, BANK[$27]
-INCBIN "binsplit/bank27.bin"
+SECTION "bank28", DATA, BANK[$28]
+INCBIN "baserom.gbc", $a0000, $4000
 
-SECTION "bank28", ROMX, BANK[$28]
-INCBIN "binsplit/bank28.bin"
+SECTION "bank29", DATA, BANK[$29]
+INCBIN "baserom.gbc", $a4000, $4000
 
-SECTION "bank29", ROMX, BANK[$29]
-INCBIN "binsplit/bank29.bin"
+SECTION "bank2a", DATA, BANK[$2a]
+INCBIN "baserom.gbc", $a8000, $4000
 
-SECTION "bank2a", ROMX, BANK[$2a]
-INCBIN "binsplit/bank2a.bin"
+SECTION "bank2b", DATA, BANK[$2b]
+INCBIN "baserom.gbc", $ac000, $4000
 
-SECTION "bank2b", ROMX, BANK[$2b]
-INCBIN "binsplit/bank2b.bin"
+SECTION "bank2c", DATA, BANK[$2c]
+INCBIN "baserom.gbc", $b0000, $4000
 
-SECTION "bank2c", ROMX, BANK[$2c]
-INCBIN "binsplit/bank2c.bin"
+SECTION "bank2d", DATA, BANK[$2d]
+INCBIN "baserom.gbc", $b4000, $4000
 
-SECTION "bank2d", ROMX, BANK[$2d]
-INCBIN "binsplit/bank2d.bin"
+SECTION "bank2e", DATA, BANK[$2e]
+INCBIN "baserom.gbc", $b8000, $4000
 
-SECTION "bank2e", ROMX, BANK[$2e]
-INCBIN "binsplit/bank2e.bin"
+SECTION "bank2f", DATA, BANK[$2f]
+INCBIN "baserom.gbc", $bc000, $4000
 
-SECTION "bank2f", ROMX, BANK[$2f]
-INCBIN "binsplit/bank2f.bin"
+SECTION "bank30", DATA, BANK[$30]
+INCBIN "baserom.gbc", $c0000, $4000
 
-SECTION "bank30", ROMX, BANK[$30]
-INCBIN "binsplit/bank30.bin"
+SECTION "bank31", DATA, BANK[$31]
+INCBIN "baserom.gbc", $c4000, $4000
 
-SECTION "bank31", ROMX, BANK[$31]
-INCBIN "binsplit/bank31.bin"
+SECTION "bank32", DATA, BANK[$32]
+INCBIN "baserom.gbc", $c8000, $4000
 
-SECTION "bank32", ROMX, BANK[$32]
-INCBIN "binsplit/bank32.bin"
+SECTION "bank33", DATA, BANK[$33]
+INCBIN "baserom.gbc", $cc000, $4000
 
-SECTION "bank33", ROMX, BANK[$33]
-INCBIN "binsplit/bank33.bin"
+SECTION "bank34", DATA, BANK[$34]
+INCBIN "baserom.gbc", $d0000, $4000
 
-SECTION "bank34", ROMX, BANK[$34]
-INCBIN "binsplit/bank34.bin"
+SECTION "bank35", DATA, BANK[$35]
+INCBIN "baserom.gbc", $d4000, $4000
 
-SECTION "bank35", ROMX, BANK[$35]
-INCBIN "binsplit/bank35.bin"
+SECTION "bank36", DATA, BANK[$36]
+INCBIN "baserom.gbc", $d8000, $4000
 
-SECTION "bank36", ROMX, BANK[$36]
-INCBIN "binsplit/bank36.bin"
+SECTION "bank37", DATA, BANK[$37]
+INCBIN "baserom.gbc", $dc000, $4000
 
-SECTION "bank37", ROMX, BANK[$37]
-INCBIN "binsplit/bank37.bin"
+SECTION "bank38", DATA, BANK[$38]
+INCBIN "baserom.gbc", $e0000, $4000
 
-SECTION "bank38", ROMX, BANK[$38]
-INCBIN "binsplit/bank38.bin"
+SECTION "bank39", DATA, BANK[$39]
+INCBIN "baserom.gbc", $e4000, $4000
 
-SECTION "bank39", ROMX, BANK[$39]
-INCBIN "binsplit/bank39.bin"
+SECTION "bank3a", DATA, BANK[$3a]
+INCBIN "baserom.gbc", $e8000, $4000
 
-SECTION "bank3a", ROMX, BANK[$3a]
-INCBIN "binsplit/bank3a.bin"
+SECTION "bank3b", DATA, BANK[$3b]
+INCBIN "baserom.gbc", $ec000, $4000
 
-SECTION "bank3b", ROMX, BANK[$3b]
-INCBIN "binsplit/bank3b.bin"
+SECTION "bank3c", DATA, BANK[$3c]
+INCBIN "baserom.gbc", $f0000, $4000
 
-SECTION "bank3c", ROMX, BANK[$3c]
-INCBIN "binsplit/bank3c.bin"
+SECTION "bank3d", DATA, BANK[$3d]
+INCBIN "baserom.gbc", $f4000, $4000
 
-SECTION "bank3d", ROMX, BANK[$3d]
-INCBIN "binsplit/bank3d.bin"
+SECTION "bank3e", DATA, BANK[$3e]
+INCBIN "baserom.gbc", $f8000, $4000
 
-SECTION "bank3e", ROMX, BANK[$3e]
-INCBIN "binsplit/bank3e.bin"
+SECTION "bank3f", DATA, BANK[$3f]
+INCBIN "baserom.gbc", $fc000, $4000
 
-SECTION "bank3f", ROMX, BANK[$3f]
-INCBIN "binsplit/bank3f.bin"
+SECTION "bank40", DATA, BANK[$40]
+INCBIN "baserom.gbc", $100000, $4000
 
-SECTION "bank40", ROMX, BANK[$40]
-INCBIN "binsplit/bank40.bin"
+SECTION "bank41", DATA, BANK[$41]
+INCBIN "baserom.gbc", $104000, $4000
 
-SECTION "bank41", ROMX, BANK[$41]
-INCBIN "binsplit/bank41.bin"
+SECTION "bank42", DATA, BANK[$42]
+INCBIN "baserom.gbc", $108000, $4000
 
-SECTION "bank42", ROMX, BANK[$42]
-INCBIN "binsplit/bank42.bin"
+SECTION "bank43", DATA, BANK[$43]
+INCBIN "baserom.gbc", $10c000, $4000
 
-SECTION "bank43", ROMX, BANK[$43]
-INCBIN "binsplit/bank43.bin"
+SECTION "bank44", DATA, BANK[$44]
+INCBIN "baserom.gbc", $110000, $4000
 
-SECTION "bank44", ROMX, BANK[$44]
-INCBIN "binsplit/bank44.bin"
+SECTION "bank45", DATA, BANK[$45]
+INCBIN "baserom.gbc", $114000, $4000
 
-SECTION "bank45", ROMX, BANK[$45]
-INCBIN "binsplit/bank45.bin"
+SECTION "bank46", DATA, BANK[$46]
+INCBIN "baserom.gbc", $118000, $4000
 
-SECTION "bank46", ROMX, BANK[$46]
-INCBIN "binsplit/bank46.bin"
+SECTION "bank47", DATA, BANK[$47]
+INCBIN "baserom.gbc", $11c000, $4000
 
-SECTION "bank47", ROMX, BANK[$47]
-INCBIN "binsplit/bank47.bin"
+SECTION "bank48", DATA, BANK[$48]
+INCBIN "baserom.gbc", $120000, $4000
 
-SECTION "bank48", ROMX, BANK[$48]
-INCBIN "binsplit/bank48.bin"
+SECTION "bank49", DATA, BANK[$49]
+INCBIN "baserom.gbc", $124000, $4000
 
-SECTION "bank49", ROMX, BANK[$49]
-INCBIN "binsplit/bank49.bin"
+SECTION "bank4a", DATA, BANK[$4a]
+INCBIN "baserom.gbc", $128000, $4000
 
-SECTION "bank4a", ROMX, BANK[$4a]
-INCBIN "binsplit/bank4a.bin"
+SECTION "bank4b", DATA, BANK[$4b]
+INCBIN "baserom.gbc", $12c000, $4000
 
-SECTION "bank4b", ROMX, BANK[$4b]
-INCBIN "binsplit/bank4b.bin"
+SECTION "bank4c", DATA, BANK[$4c]
+INCBIN "baserom.gbc", $130000, $4000
 
-SECTION "bank4c", ROMX, BANK[$4c]
-INCBIN "binsplit/bank4c.bin"
+SECTION "bank4d", DATA, BANK[$4d]
+INCBIN "baserom.gbc", $134000, $4000
 
-SECTION "bank4d", ROMX, BANK[$4d]
-INCBIN "binsplit/bank4d.bin"
+SECTION "bank4e", DATA, BANK[$4e]
+INCBIN "baserom.gbc", $138000, $4000
 
-SECTION "bank4e", ROMX, BANK[$4e]
-INCBIN "binsplit/bank4e.bin"
+SECTION "bank4f", DATA, BANK[$4f]
+INCBIN "baserom.gbc", $13c000, $4000
 
-SECTION "bank4f", ROMX, BANK[$4f]
-INCBIN "binsplit/bank4f.bin"
+SECTION "bank50", DATA, BANK[$50]
+INCBIN "baserom.gbc", $140000, $4000
 
-SECTION "bank50", ROMX, BANK[$50]
-INCBIN "binsplit/bank50.bin"
+SECTION "bank51", DATA, BANK[$51]
+INCBIN "baserom.gbc", $144000, $4000
 
-SECTION "bank51", ROMX, BANK[$51]
-INCBIN "binsplit/bank51.bin"
+SECTION "bank52", DATA, BANK[$52]
+INCBIN "baserom.gbc", $148000, $4000
 
-SECTION "bank52", ROMX, BANK[$52]
-INCBIN "binsplit/bank52.bin"
+SECTION "bank53", DATA, BANK[$53]
+INCBIN "baserom.gbc", $14c000, $4000
 
-SECTION "bank53", ROMX, BANK[$53]
-INCBIN "binsplit/bank53.bin"
+SECTION "bank54", DATA, BANK[$54]
+INCBIN "baserom.gbc", $150000, $4000
 
-SECTION "bank54", ROMX, BANK[$54]
-INCBIN "binsplit/bank54.bin"
+SECTION "bank55", DATA, BANK[$55]
+INCBIN "baserom.gbc", $154000, $4000
 
-SECTION "bank55", ROMX, BANK[$55]
-INCBIN "binsplit/bank55.bin"
+SECTION "bank56", DATA, BANK[$56]
+INCBIN "baserom.gbc", $158000, $4000
 
-SECTION "bank56", ROMX, BANK[$56]
-INCBIN "binsplit/bank56.bin"
+SECTION "bank57", DATA, BANK[$57]
+INCBIN "baserom.gbc", $15c000, $4000
 
-SECTION "bank57", ROMX, BANK[$57]
-INCBIN "binsplit/bank57.bin"
+SECTION "bank58", DATA, BANK[$58]
+INCBIN "baserom.gbc", $160000, $4000
 
-SECTION "bank58", ROMX, BANK[$58]
-INCBIN "binsplit/bank58.bin"
+SECTION "bank59", DATA, BANK[$59]
+INCBIN "baserom.gbc", $164000, $4000
 
-SECTION "bank59", ROMX, BANK[$59]
-INCBIN "binsplit/bank59.bin"
+SECTION "bank5a", DATA, BANK[$5a]
+INCBIN "baserom.gbc", $168000, $4000
 
-SECTION "bank5a", ROMX, BANK[$5a]
-INCBIN "binsplit/bank5a.bin"
+SECTION "bank5b", DATA, BANK[$5b]
+INCBIN "baserom.gbc", $16c000, $4000
 
-SECTION "bank5b", ROMX, BANK[$5b]
-INCBIN "binsplit/bank5b.bin"
+SECTION "bank5c", DATA, BANK[$5c]
+INCBIN "baserom.gbc", $170000, $4000
 
-SECTION "bank5c", ROMX, BANK[$5c]
-INCBIN "binsplit/bank5c.bin"
+SECTION "bank5d", DATA, BANK[$5d]
+INCBIN "baserom.gbc", $174000, $4000
 
-SECTION "bank5d", ROMX, BANK[$5d]
-INCBIN "binsplit/bank5d.bin"
+SECTION "bank5e", DATA, BANK[$5e]
+INCBIN "baserom.gbc", $178000, $4000
 
-SECTION "bank5e", ROMX, BANK[$5e]
-INCBIN "binsplit/bank5e.bin"
+SECTION "bank5f", DATA, BANK[$5f]
+INCBIN "baserom.gbc", $17c000, $4000
 
-SECTION "bank5f", ROMX, BANK[$5f]
-INCBIN "binsplit/bank5f.bin"
+SECTION "bank60", DATA, BANK[$60]
+INCBIN "baserom.gbc", $180000, $4000
 
-SECTION "bank60", ROMX, BANK[$60]
-INCBIN "binsplit/bank60.bin"
+SECTION "bank61", DATA, BANK[$61]
+INCBIN "baserom.gbc", $184000, $4000
 
-SECTION "bank61", ROMX, BANK[$61]
-INCBIN "binsplit/bank61.bin"
+SECTION "bank62", DATA, BANK[$62]
+INCBIN "baserom.gbc", $188000, $4000
 
-SECTION "bank62", ROMX, BANK[$62]
-INCBIN "binsplit/bank62.bin"
+SECTION "bank63", DATA, BANK[$63]
+INCBIN "baserom.gbc", $18c000, $4000
 
-SECTION "bank63", ROMX, BANK[$63]
-INCBIN "binsplit/bank63.bin"
+SECTION "bank64", DATA, BANK[$64]
+INCBIN "baserom.gbc", $190000, $4000
 
-SECTION "bank64", ROMX, BANK[$64]
-INCBIN "binsplit/bank64.bin"
+SECTION "bank65", DATA, BANK[$65]
+INCBIN "baserom.gbc", $194000, $4000
 
-SECTION "bank65", ROMX, BANK[$65]
-INCBIN "binsplit/bank65.bin"
+SECTION "bank66", DATA, BANK[$66]
+INCBIN "baserom.gbc", $198000, $4000
 
-SECTION "bank66", ROMX, BANK[$66]
-INCBIN "binsplit/bank66.bin"
+SECTION "bank67", DATA, BANK[$67]
+INCBIN "baserom.gbc", $19c000, $4000
 
-SECTION "bank67", ROMX, BANK[$67]
-INCBIN "binsplit/bank67.bin"
+SECTION "bank68", DATA, BANK[$68]
+INCBIN "baserom.gbc", $1a0000, $4000
 
-SECTION "bank68", ROMX, BANK[$68]
-INCBIN "binsplit/bank68.bin"
+SECTION "bank69", DATA, BANK[$69]
+INCBIN "baserom.gbc", $1a4000, $4000
 
-SECTION "bank69", ROMX, BANK[$69]
-INCBIN "binsplit/bank69.bin"
+SECTION "bank6a", DATA, BANK[$6a]
+INCBIN "baserom.gbc", $1a8000, $4000
 
-SECTION "bank6a", ROMX, BANK[$6a]
-INCBIN "binsplit/bank6a.bin"
+SECTION "bank6b", DATA, BANK[$6b]
+INCBIN "baserom.gbc", $1ac000, $4000
 
-SECTION "bank6b", ROMX, BANK[$6b]
-INCBIN "binsplit/bank6b.bin"
+SECTION "bank6c", DATA, BANK[$6c]
+INCBIN "baserom.gbc", $1b0000, $4000
 
-SECTION "bank6c", ROMX, BANK[$6c]
-INCBIN "binsplit/bank6c.bin"
+SECTION "bank6d", DATA, BANK[$6d]
+INCBIN "baserom.gbc", $1b4000, $4000
 
-SECTION "bank6d", ROMX, BANK[$6d]
-INCBIN "binsplit/bank6d.bin"
+SECTION "bank6e", DATA, BANK[$6e]
+INCBIN "baserom.gbc", $1b8000, $4000
 
-SECTION "bank6e", ROMX, BANK[$6e]
-INCBIN "binsplit/bank6e.bin"
+SECTION "bank6f", DATA, BANK[$6f]
+INCBIN "baserom.gbc", $1bc000, $4000
 
-SECTION "bank6f", ROMX, BANK[$6f]
-INCBIN "binsplit/bank6f.bin"
+SECTION "bank70", DATA, BANK[$70]
+INCBIN "baserom.gbc", $1c0000, $4000
 
-SECTION "bank70", ROMX, BANK[$70]
-INCBIN "binsplit/bank70.bin"
+SECTION "bank71", DATA, BANK[$71]
+INCBIN "baserom.gbc", $1c4000, $4000
 
-SECTION "bank71", ROMX, BANK[$71]
-INCBIN "binsplit/bank71.bin"
+SECTION "bank72", DATA, BANK[$72]
+INCBIN "baserom.gbc", $1c8000, $4000
 
-SECTION "bank72", ROMX, BANK[$72]
-INCBIN "binsplit/bank72.bin"
+SECTION "bank73", DATA, BANK[$73]
+INCBIN "baserom.gbc", $1cc000, $4000
 
-SECTION "bank73", ROMX, BANK[$73]
-INCBIN "binsplit/bank73.bin"
+SECTION "bank74", DATA, BANK[$74]
+INCBIN "baserom.gbc", $1d0000, $4000
 
-SECTION "bank74", ROMX, BANK[$74]
-INCBIN "binsplit/bank74.bin"
+SECTION "bank75", DATA, BANK[$75]
+INCBIN "baserom.gbc", $1d4000, $4000
 
-SECTION "bank75", ROMX, BANK[$75]
-INCBIN "binsplit/bank75.bin"
+SECTION "bank76", DATA, BANK[$76]
+INCBIN "baserom.gbc", $1d8000, $4000
 
-SECTION "bank76", ROMX, BANK[$76]
-INCBIN "binsplit/bank76.bin"
+SECTION "bank77", DATA, BANK[$77]
+INCBIN "baserom.gbc", $1dc000, $4000
 
-SECTION "bank77", ROMX, BANK[$77]
-INCBIN "binsplit/bank77.bin"
+SECTION "bank78", DATA, BANK[$78]
+INCBIN "baserom.gbc", $1e0000, $4000
 
-SECTION "bank78", ROMX, BANK[$78]
-INCBIN "binsplit/bank78.bin"
+SECTION "bank79", DATA, BANK[$79]
+INCBIN "baserom.gbc", $1e4000, $4000
 
-SECTION "bank79", ROMX, BANK[$79]
-INCBIN "binsplit/bank79.bin"
+SECTION "bank7a", DATA, BANK[$7a]
+INCBIN "baserom.gbc", $1e8000, $4000
 
-SECTION "bank7a", ROMX, BANK[$7a]
-INCBIN "binsplit/bank7a.bin"
+SECTION "bank7b", DATA, BANK[$7b]
+INCBIN "baserom.gbc", $1ec000, $4000
 
-SECTION "bank7b", ROMX, BANK[$7b]
-INCBIN "binsplit/bank7b.bin"
+SECTION "bank7c", DATA, BANK[$7c]
+INCBIN "baserom.gbc", $1f0000, $4000
 
-SECTION "bank7c", ROMX, BANK[$7c]
-INCBIN "binsplit/bank7c.bin"
+SECTION "bank7d", DATA, BANK[$7d]
+INCBIN "baserom.gbc", $1f4000, $4000
 
-SECTION "bank7d", ROMX, BANK[$7d]
-INCBIN "binsplit/bank7d.bin"
+SECTION "bank7e", DATA, BANK[$7e]
+INCBIN "baserom.gbc", $1f8000, $4000
 
-SECTION "bank7e", ROMX, BANK[$7e]
-INCBIN "binsplit/bank7e.bin"
-
-SECTION "bank7f", ROMX, BANK[$7f]
-INCBIN "binsplit/bank7f.bin"
+SECTION "bank7f", DATA, BANK[$7f]
+INCBIN "baserom.gbc", $1fc000, $4000
