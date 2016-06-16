@@ -3,7 +3,7 @@ VBlank::
 	push bc ; 151
 	push de ; 152
 	push hl ; 153
-	ld a, [hMenuReturn] ; 154
+	ld a, [hVBlank] ; 154
 	and $7 ; 156
 	ld e, a ; 158
 	ld d, $0 ; 159
@@ -68,7 +68,7 @@ Function180::
 	call Function162b ; 1bc
 	call Function1642 ; 1bf
 Function1c2::
-	ld a, [hBGMapUpdate] ; 1c2
+	ld a, [hOAMUpdate] ; 1c2
 	and a ; 1c4
 	jr nz, Function1ca ; 1c5
 	call hPushOAM ; 1c7
@@ -88,9 +88,9 @@ Function1d8::
 	ld [$cee9], a ; 1df
 Function1e2::
 	call Function8e6 ; 1e2
-	ld a, $3a ; 1e5
+	ld a, BANK(Functione805c) ; 1e5
 	rst Bankswitch ; 1e7
-	call $405c ; 1e8
+	call Functione805c ; 1e8
 	ld a, [$d155] ; 1eb
 	rst Bankswitch ; 1ee
 	ld a, [$ff9a] ; 1ef
@@ -111,7 +111,7 @@ Function1f4::
 	call Function15d0 ; 209
 	call hPushOAM ; 20c
 Function20f::
-	ld a, [$ffc8] ; 20f
+	ld a, [hLCDCPointer] ; 20f
 	or a ; 211
 	jr z, Function219 ; 212
 	ld c, a ; 214
@@ -131,9 +131,9 @@ Function219::
 	or $2 ; 22a
 	ld [rIF], a ; 22c
 	ei ; 22e
-	ld a, $3a ; 22f
+	ld a, BANK(Functione805c) ; 22f
 	rst Bankswitch ; 231
-	call $405c ; 232
+	call Functione805c ; 232
 	ld a, [$d155] ; 235
 	rst Bankswitch ; 238
 	ld a, $1f ; 239
@@ -142,15 +142,15 @@ Function219::
 ; 23e
 
 Function23e::
-	ld a, [$ffe8] ; 23e
+	ld a, [hCGB] ; 23e
 	and a ; 240
 	jp nz, Functionbe3 ; 241
 	ld a, [$cf43] ; 244
-	ld [$ff47], a ; 247
+	ld [rBGP], a ; 247
 	ld a, [$cf44] ; 249
-	ld [$ff48], a ; 24c
+	ld [rOBP0], a ; 24c
 	ld a, [$cf45] ; 24e
-	ld [$ff49], a ; 251
+	ld [rOBP1], a ; 251
 	and a ; 253
 	ret ; 254
 ; 255
@@ -165,9 +165,9 @@ Function255::
 	xor a ; 266
 	ld [$ceea], a ; 267
 	call Function1ebf ; 26a
-	ld a, $3a ; 26d
+	ld a, BANK(Functione805c) ; 26d
 	rst Bankswitch ; 26f
-	call $405c ; 270
+	call Functione805c ; 270
 	ld a, [$d155] ; 273
 	rst Bankswitch ; 276
 	ret ; 277
@@ -192,9 +192,9 @@ Function28c::
 	ld [rIE], a ; 298
 	ld [rIF], a ; 29a
 	ei ; 29c
-	ld a, $3a ; 29d
+	ld a, BANK(Functione805c) ; 29d
 	rst Bankswitch ; 29f
-	call $405c ; 2a0
+	call Functione805c ; 2a0
 	ld a, [$d155] ; 2a3
 	rst Bankswitch ; 2a6
 	di ; 2a7
@@ -208,9 +208,9 @@ Function28c::
 Function2b0::
 	ld a, [hROMBank] ; 2b0
 	ld [$d155], a ; 2b2
-	ld a, $3a ; 2b5
+	ld a, BANK(Functione805c) ; 2b5
 	rst Bankswitch ; 2b7
-	call $405c ; 2b8
+	call Functione805c ; 2b8
 	ld a, [$d155] ; 2bb
 	rst Bankswitch ; 2be
 	xor a ; 2bf
@@ -263,9 +263,9 @@ Function311::
 	ld [rIE], a ; 316
 	ld [rIF], a ; 318
 	ei ; 31a
-	ld a, $3a ; 31b
+	ld a, BANK(Functione805c) ; 31b
 	rst Bankswitch ; 31d
-	call $405c ; 31e
+	call Functione805c ; 31e
 	ld a, [$d155] ; 321
 	rst Bankswitch ; 324
 	di ; 325

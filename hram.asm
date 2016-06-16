@@ -1,125 +1,128 @@
 HRAM_START         EQU $ff80
-hPushOAM           EQU $ff80
+hPushOAM           EQU $ff80 ; 10 bytes
 
-hROMBankBackup     EQU $ff8a
-hBuffer            EQU $ff8b
-hFF8C              EQU $ff8c
-hRTCDayHi          EQU $ff8d
-hRTCDayLo          EQU $ff8e
-hRTCHours          EQU $ff8f
-hRTCMinutes        EQU $ff90
-hRTCSeconds        EQU $ff91
+hROMBankBackup     EQU $ff8c
+hBuffer            EQU $ff8d
+hFF8C              EQU $ff8e
+hRTCDayHi          EQU $ff8f
+hRTCDayLo          EQU $ff90
+hRTCHours          EQU $ff91
+hRTCMinutes        EQU $ff92
+hRTCSeconds        EQU $ff93
 
-hHours             EQU $ff94
+hHours             EQU $ff96
 
-hMinutes           EQU $ff96
+hMinutes           EQU $ff98
 
-hSeconds           EQU $ff98
+hSeconds           EQU $ff9a
 
 hVBlankCounter     EQU $ff9d
 
 hROMBank           EQU $ff9f
-hVBlank            EQU $ff9e
-hMapEntryMethod    EQU $ff9f
-hMenuReturn        EQU $ffa0
+hVBlank            EQU $ffa0
+hMapEntryMethod    EQU $ffa1
+hMenuReturn        EQU $ffa2
 
-hJoypadReleased    EQU $ffa2
-hJoypadPressed     EQU $ffa3
-hJoypadDown        EQU $ffa4
-hJoypadSum         EQU $ffa5
-hJoyReleased       EQU $ffa6
-hJoyPressed        EQU $ffa7
-hJoyDown           EQU $ffa8
-hJoyLast           EQU $ffa9
-hInMenu            EQU $ffaa
+hJoypadReleased    EQU $ffa4
+hJoypadPressed     EQU $ffa5
+hJoypadDown        EQU $ffa6
+hJoypadSum         EQU $ffa7
+hJoyReleased       EQU $ffa8
+hJoyPressed        EQU $ffa9
+hJoyDown           EQU $ffaa
+hJoyLast           EQU $ffab
+hInMenu            EQU $ffac
 
-hPrinter           EQU $ffac
-hGraphicStartTile           EQU $ffad
-hMoveMon           EQU $ffae
-hMapObjectIndexBuffer EQU $ffaf
-hObjectStructIndexBuffer EQU $ffb0
+hPrinter           EQU $ffae
+hGraphicStartTile           EQU $ffaf
+hMoveMon           EQU $ffb0
+hMapObjectIndexBuffer EQU $ffb1
+hObjectStructIndexBuffer EQU $ffb2
 
-hConnectionStripLength EQU $ffaf
-hConnectedMapWidth EQU $ffb0
+hConnectionStripLength EQU $ffb1
+hConnectedMapWidth EQU $ffb2
 
-hPastLeadingZeroes EQU $ffb3
+hPastLeadingZeroes EQU $ffb5
 
-hStringCmpString1  EQU $ffb1
-hStringCmpString2  EQU $ffb5
+hStringCmpString1  EQU $ffb3
+hStringCmpString2  EQU $ffb7
 
-hDividend          EQU $ffb3 ; length in b register, before 'call Divide' (max 4 bytes)
-hDivisor           EQU $ffb7 ; 1 byte long
-hQuotient          EQU $ffb4 ; result (3 bytes long)
+hDividend          EQU $ffb5 ; length in b register, before 'call Divide' (max 4 bytes)
+hDivisor           EQU $ffb9 ; 1 byte long
+hQuotient          EQU $ffb6 ; result (3 bytes long)
+hRemainder         EQU $ffb9
 
-hMultiplicand      EQU $ffb4 ; 3 bytes long
-hMultiplier        EQU $ffb7 ; 1 byte long
-hProduct           EQU $ffb3 ; result (4 bytes long)
+hMultiplicand      EQU $ffb6 ; 3 bytes long
+hMultiplier        EQU $ffb9 ; 1 byte long
+hProduct           EQU $ffb5 ; result (4 bytes long)
 
-hMathBuffer        EQU $ffb8
+hMathBuffer        EQU $ffba
 
-hPrintNum1         EQU $ffb3
-hPrintNum2         EQU $ffb4
-hPrintNum3         EQU $ffb5
-hPrintNum4         EQU $ffb6
-hPrintNum5         EQU $ffb7
-hPrintNum6         EQU $ffb8
-hPrintNum7         EQU $ffb9
-hPrintNum8         EQU $ffba
-hPrintNum9         EQU $ffbb
-hPrintNum10        EQU $ffbc
+hPrintNum1         EQU $ffb5
+hPrintNum2         EQU $ffb6
+hPrintNum3         EQU $ffb7
+hPrintNum4         EQU $ffb8
+hPrintNum5         EQU $ffb9
+hPrintNum6         EQU $ffba
+hPrintNum7         EQU $ffbb
+hPrintNum8         EQU $ffbc
+hPrintNum9         EQU $ffbd
+hPrintNum10        EQU $ffbe
 
-hUsedSpriteIndex   EQU $ffbd
-hUsedSpriteTile    EQU $ffbe
-hFFBF              EQU $ffbf
-hFFC0              EQU $ffc0
-hFFC1              EQU $ffc1
+hMGStatusFlags     EQU $ffbe
+
+hUsedSpriteIndex   EQU $ffbf
+hUsedSpriteTile    EQU $ffc0
+hFFBF              EQU $ffc1
 hFFC2              EQU $ffc2
-hMoneyTemp         EQU $ffc3
+hFFC3              EQU $ffc3
+hFFC4              EQU $ffc4
+hMoneyTemp         EQU $ffc5
 
-hFFC6              EQU $ffc6
-hFFC7              EQU $ffc7
-hFFC8              EQU $ffc8
-hMobileReceive     EQU $ffc9
-hFFCA              EQU $ffca
-hLinkPlayerNumber  EQU $ffcb
-hFFCC              EQU $ffcc
-hSerialSend        EQU $ffcd
-hSerialReceive     EQU $ffce
+hMGJoypadPressed   EQU $ffc5
+hMGJoypadReleased  EQU $ffc6
+
+hLCDCPointer       EQU $ffc8
+hLYOverrideStart   EQU $ffc9
+hLYOverrideEnd     EQU $ffca
+hMobileReceive     EQU $ffcb
+hFFCA              EQU $ffcc
+hLinkPlayerNumber  EQU $ffcd
+hFFCC              EQU $ffce
+hSerialSend        EQU $ffcf
+hSerialReceive     EQU $ffd0
 
 hSCX               EQU $ffd1
 hSCY               EQU $ffd2
 hWX                EQU $ffd3
 hWY                EQU $ffd4
-hTilesPerCycle     EQU $ffd3
-hBGMapMode         EQU $ffd4
-hBGMapThird        EQU $ffd5
-hBGMapAddress      EQU $ffd6
+hTilesPerCycle     EQU $ffd5
+hBGMapMode         EQU $ffd6
+hBGMapThird        EQU $ffd7
+hBGMapAddress      EQU $ffd8
 
-hOAMUpdate         EQU $ffd8
-hSPBuffer          EQU $ffd9
+hOAMUpdate         EQU $ffda
+hSPBuffer          EQU $ffdb
 
-hBGMapUpdate       EQU $ffda
-hFFDC              EQU $ffdc
+hBGMapUpdate       EQU $ffdd
+hFFDC              EQU $ffde
 
-hMapAnims          EQU $ffde
-hTileAnimFrame     EQU $ffdf
+hMapAnims          EQU $ffe0
+hTileAnimFrame     EQU $ffe1
 
-hLastTalked        EQU $ffe0
+hLastTalked        EQU $ffe2
 
 hRandom            EQU $ffe3
 hRandomAdd         EQU $ffe3
 hRandomSub         EQU $ffe4
-
-
-hSecondsBackup     EQU $ffe3
-hBattleTurn        EQU $ffe4 ; Which trainers turn is it? 0: Player, 1: Opponent Trainer
-hCGBPalUpdate      EQU $ffe5
-hCGB               EQU $ffe6
-hSGB               EQU $ffe7
-hDMATransfer       EQU $ffe8
-hMobile            EQU $ffe9
-hFFEA              EQU $ffea
-hClockResetTrigger EQU $ffeb
+hSecondsBackup     EQU $ffe5
+hBattleTurn        EQU $ffe6 ; Which trainers turn is it? 0: Player, 1: Opponent Trainer
+hCGBPalUpdate      EQU $ffe7
+hCGB               EQU $ffe8
+hSGB               EQU $ffe9
+hDMATransfer       EQU $ffea
+hMobile            EQU $ffeb
+hFFEA              EQU $ffec
+hClockResetTrigger EQU $ffed
 
 HRAM_END EQU $ffff
-

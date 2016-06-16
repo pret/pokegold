@@ -172,7 +172,10 @@ SECTION "bank39", DATA, BANK[$39]
 	dr $e4000, $e8000
 
 SECTION "bank3a", DATA, BANK[$3a]
-	dr $e8000, $ec000
+	dr $e8000, $e805c
+
+Functione805c::
+	dr $e805c, $ec000
 
 SECTION "bank3b", DATA, BANK[$3b]
 	dr $ec000, $f0000
