@@ -1,4 +1,4 @@
-Function343:: ; 343
+RTC:: ; 343
 ; update time and time-sensitive palettes
 
 ; rtc enabled?

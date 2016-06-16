@@ -18,9 +18,9 @@ Serial:: ; 6aa (0:06aa)
 	ld a, [hLinkPlayerNumber]
 	cp $2
 	jr z, .player2
-	ld a, $0
+	ld a, 0 << rSC_ON
 	ld [rSC], a
-	ld a, $80
+	ld a, 1 << rSC_ON
 	ld [rSC], a
 	jr .player2
 
@@ -174,7 +174,7 @@ Function73b:: ; 73b (0:073b)
 	jr nz, .rIE_not_equal_8
 
 	ld [wce5d], a
-	ld a, $50
+	ld a, 80
 	ld [wce5d + 1], a
 
 .rIE_not_equal_8
@@ -201,7 +201,7 @@ Function73b:: ; 73b (0:073b)
 	ld a, [rIE]
 	and $f
 	cp $8
-	ld a, $fe
+	ld a, SERIAL_NO_DATA_BYTE
 	ret z
 	ld a, [hl]
 	ld [hSerialSend], a
@@ -230,8 +230,8 @@ SerialDisconnected:: ; 7e4 (0:07e4)
 	ret
 
 Function7ec:: ; 7ec
-	ld hl, wce56
-	ld de, wce51
+	ld hl, wPlayerLinkAction
+	ld de, wOtherPlayerLinkMode
 	ld c, $2
 	ld a, $1
 	ld [hFFCE], a
@@ -269,7 +269,7 @@ Function822:: ; 822
 
 WaitLinkTransfer:: ; 82e (0:082e)
 	ld a, $ff
-	ld [wce52], a
+	ld [wOtherPlayerLinkAction], a
 .loop
 	call LinkTransfer
 	call DelayFrame
@@ -290,7 +290,7 @@ WaitLinkTransfer:: ; 82e (0:082e)
 	pop hl
 
 .check
-	ld a, [wce52]
+	ld a, [wOtherPlayerLinkAction]
 	inc a
 	jr z, .loop
 
@@ -308,25 +308,26 @@ WaitLinkTransfer:: ; 82e (0:082e)
 	dec b
 	jr nz, .acknowledge
 
-	ld a, [wce52]
-	ld [wce51], a
+	ld a, [wOtherPlayerLinkAction]
+	ld [wOtherPlayerLinkMode], a
 	ret
 
 LinkTransfer:: ; 872 (0:0872)
 	push bc
-	ld b, $60
+	ld b, SERIAL_TIMECAPSULE
 	ld a, [wLinkMode]
-	cp $1
-	jr z, .asm_888
-	ld b, $60
-	jr c, .asm_888
-	cp $2
-	ld b, $70
-	jr z, .asm_888
-	ld b, $80
-.asm_888
+	cp LINK_TIMECAPSULE
+	jr z, .got_high_nybble
+	ld b, SERIAL_TIMECAPSULE
+	jr c, .got_high_nybble
+	cp LINK_TRADECENTER
+	ld b, SERIAL_TRADECENTER
+	jr z, .got_high_nybble
+	ld b, SERIAL_BATTLE
+
+.got_high_nybble
 	call LinkTransferReceive
-	ld a, [wce56]
+	ld a, [wPlayerLinkAction]
 	add b
 	ld [hSerialSend], a
 	ld a, [hLinkPlayerNumber]
@@ -343,15 +344,15 @@ LinkTransfer:: ; 872 (0:0872)
 
 LinkTransferReceive:: ; 8a4 (0:08a4)
 	ld a, [hSerialReceive]
-	ld [wce51], a
+	ld [wOtherPlayerLinkMode], a
 	and $f0
 	cp b
 	ret nz
 	xor a
 	ld [hSerialReceive], a
-	ld a, [wce51]
+	ld a, [wOtherPlayerLinkMode]
 	and $f
-	ld [wce52], a
+	ld [wOtherPlayerLinkAction], a
 	ret
 
 LinkDataReceived:: ; 8b9 (0:08b9)

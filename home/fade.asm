@@ -46,12 +46,12 @@ RotatePalettesRight::
 .loop
 	push de
 	ld a, [hli]
-	call Functionc61
+	call DmgToCgbBGPals
 	ld a, [hli]
 	ld e, a
 	ld a, [hli]
 	ld d, a
-	call Functionc83
+	call DmgToCgbObjPals
 	ld c, 8
 	call DelayFrames
 	pop de
@@ -89,9 +89,9 @@ RotatePalettesLeft::
 	ld d, a
 	ld a, [hld]
 	ld e, a
-	call Functionc83
+	call DmgToCgbObjPals
 	ld a, [hld]
-	call Functionc61
+	call DmgToCgbBGPals
 	ld c, 8
 	call DelayFrames
 	pop de

@@ -18,7 +18,10 @@ GameInit::
 ENDC
 
 SECTION "bank2", DATA, BANK[$2]
-	dr $8000, $9cfd
+SwapTextboxPalettes::
+	dr $8000, $804f
+ScrollBGMapPalettes::
+	dr $804f, $9cfd
 InitCGBPals:: ; 9cfd
 	dr $9cfd, $c000
 
@@ -365,7 +368,9 @@ SECTION "bank6f", DATA, BANK[$6f]
 	dr $1bc000, $1c0000
 
 SECTION "bank70", DATA, BANK[$70]
-	dr $1c0000, $1c4000
+	dr $1c0000, $1c0de9
+_DudeAutoInput_A::
+	dr $1c0de9, $1c4000
 
 SECTION "bank71", DATA, BANK[$71]
 	dr $1c4000, $1c8000

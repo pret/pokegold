@@ -27,18 +27,6 @@ ENDC
 ENDC
 ENDM
 
-callba_hc: macro
-	ld a, \1
-	ld hl, \2
-	rst FarCall
-endm
-
-callab_hc: macro
-	ld hl, \2
-	ld a, \1
-	rst FarCall
-endm
-
 RGB: MACRO
 	dw ((\3) << 10) + ((\2) << 5) + (\1)
 	ENDM

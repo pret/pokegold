@@ -125,23 +125,21 @@ wDontPlayMapMusicOnReload:: ds 1
 wMusicEnd::
 
 SECTION "WRAM", WRAM0
-wc1c2:: ds 1 ; c1c2
-wc1c3:: ds 1 ; c1c3
-wc1c4:: ds 1 ; c1c4
+wLZAddress:: dw ; c1c2
+wLZBank:: ds 1 ; c1c4
 wc1c5:: ds 1 ; c1c5
-wc1c6:: ds 1 ; c1c6
-wc1c7:: ds 1 ; c1c7
-wc1c8:: ds 1 ; c1c8
-wc1c9:: ds 1 ; c1c9
-wc1ca:: ds 1 ; c1ca
+
+wInputType:: ds 1 ; c1c6
+wAutoInputAddress:: dw ; c1c7
+wAutoInputBank:: ds 1 ; c1c9
+wAutoInputLength:: ds 1 ; c1ca
+
 wc1cb:: ds 1 ; c1cb
-wc1cc:: ds 1 ; c1cc
+wGameLogicPaused:: ds 1 ; c1cc
 wRTCEnabled:: ds 1
 wc1ce:: ds 1 ; c1ce
-wc1cf:: ds 1 ; c1cf
-wc1d0:: ds 1 ; c1d0
-wc1d1:: ds 1 ; c1d1
-wc1d2:: ds 1 ; c1d2
+wMapTimeOfDay:: ds 1 ; c1cf
+	ds 3
 wPrinterConnectionOpen:: ds 1
 wc1d4:: ds 1 ; c1d4
 wc1d5:: ds 1 ; c1d5
@@ -187,262 +185,12 @@ wc1fc:: ds 1 ; c1fc
 wc1fd:: ds 1 ; c1fd
 wc1fe:: ds 1 ; c1fe
 wc1ff:: ds 1 ; c1ff
-wc200:: ds 1 ; c200
-wc201:: ds 1 ; c201
-wc202:: ds 1 ; c202
-wc203:: ds 1 ; c203
-wc204:: ds 1 ; c204
-wc205:: ds 1 ; c205
-wc206:: ds 1 ; c206
-wc207:: ds 1 ; c207
-wc208:: ds 1 ; c208
-wc209:: ds 1 ; c209
-wc20a:: ds 1 ; c20a
-wc20b:: ds 1 ; c20b
-wc20c:: ds 1 ; c20c
-wc20d:: ds 1 ; c20d
-wc20e:: ds 1 ; c20e
-wc20f:: ds 1 ; c20f
-wc210:: ds 1 ; c210
-wc211:: ds 1 ; c211
-wc212:: ds 1 ; c212
-wc213:: ds 1 ; c213
-wc214:: ds 1 ; c214
-wc215:: ds 1 ; c215
-wc216:: ds 1 ; c216
-wc217:: ds 1 ; c217
-wc218:: ds 1 ; c218
-wc219:: ds 1 ; c219
-wc21a:: ds 1 ; c21a
-wc21b:: ds 1 ; c21b
-wc21c:: ds 1 ; c21c
-wc21d:: ds 1 ; c21d
-wc21e:: ds 1 ; c21e
-wc21f:: ds 1 ; c21f
-wc220:: ds 1 ; c220
-wc221:: ds 1 ; c221
-wc222:: ds 1 ; c222
-wc223:: ds 1 ; c223
-wc224:: ds 1 ; c224
-wc225:: ds 1 ; c225
-wc226:: ds 1 ; c226
-wc227:: ds 1 ; c227
-wc228:: ds 1 ; c228
-wc229:: ds 1 ; c229
-wc22a:: ds 1 ; c22a
-wc22b:: ds 1 ; c22b
-wc22c:: ds 1 ; c22c
-wc22d:: ds 1 ; c22d
-wc22e:: ds 1 ; c22e
-wc22f:: ds 1 ; c22f
-wc230:: ds 1 ; c230
-wc231:: ds 1 ; c231
-wc232:: ds 1 ; c232
-wc233:: ds 1 ; c233
-wc234:: ds 1 ; c234
-wc235:: ds 1 ; c235
-wc236:: ds 1 ; c236
-wc237:: ds 1 ; c237
-wc238:: ds 1 ; c238
-wc239:: ds 1 ; c239
-wc23a:: ds 1 ; c23a
-wc23b:: ds 1 ; c23b
-wc23c:: ds 1 ; c23c
-wc23d:: ds 1 ; c23d
-wc23e:: ds 1 ; c23e
-wc23f:: ds 1 ; c23f
-wc240:: ds 1 ; c240
-wc241:: ds 1 ; c241
-wc242:: ds 1 ; c242
-wc243:: ds 1 ; c243
-wc244:: ds 1 ; c244
-wc245:: ds 1 ; c245
-wc246:: ds 1 ; c246
-wc247:: ds 1 ; c247
-wc248:: ds 1 ; c248
-wc249:: ds 1 ; c249
-wc24a:: ds 1 ; c24a
-wc24b:: ds 1 ; c24b
-wc24c:: ds 1 ; c24c
-wc24d:: ds 1 ; c24d
-wc24e:: ds 1 ; c24e
-wc24f:: ds 1 ; c24f
-wc250:: ds 1 ; c250
-wc251:: ds 1 ; c251
-wc252:: ds 1 ; c252
-wc253:: ds 1 ; c253
-wc254:: ds 1 ; c254
-wc255:: ds 1 ; c255
-wc256:: ds 1 ; c256
-wc257:: ds 1 ; c257
-wc258:: ds 1 ; c258
-wc259:: ds 1 ; c259
-wc25a:: ds 1 ; c25a
-wc25b:: ds 1 ; c25b
-wc25c:: ds 1 ; c25c
-wc25d:: ds 1 ; c25d
-wc25e:: ds 1 ; c25e
-wc25f:: ds 1 ; c25f
-wc260:: ds 1 ; c260
-wc261:: ds 1 ; c261
-wc262:: ds 1 ; c262
-wc263:: ds 1 ; c263
-wc264:: ds 1 ; c264
-wc265:: ds 1 ; c265
-wc266:: ds 1 ; c266
-wc267:: ds 1 ; c267
-wc268:: ds 1 ; c268
-wc269:: ds 1 ; c269
-wc26a:: ds 1 ; c26a
-wc26b:: ds 1 ; c26b
-wc26c:: ds 1 ; c26c
-wc26d:: ds 1 ; c26d
-wc26e:: ds 1 ; c26e
-wc26f:: ds 1 ; c26f
-wc270:: ds 1 ; c270
-wc271:: ds 1 ; c271
-wc272:: ds 1 ; c272
-wc273:: ds 1 ; c273
-wc274:: ds 1 ; c274
-wc275:: ds 1 ; c275
-wc276:: ds 1 ; c276
-wc277:: ds 1 ; c277
-wc278:: ds 1 ; c278
-wc279:: ds 1 ; c279
-wc27a:: ds 1 ; c27a
-wc27b:: ds 1 ; c27b
-wc27c:: ds 1 ; c27c
-wc27d:: ds 1 ; c27d
-wc27e:: ds 1 ; c27e
-wc27f:: ds 1 ; c27f
-wc280:: ds 1 ; c280
-wc281:: ds 1 ; c281
-wc282:: ds 1 ; c282
-wc283:: ds 1 ; c283
-wc284:: ds 1 ; c284
-wc285:: ds 1 ; c285
-wc286:: ds 1 ; c286
-wc287:: ds 1 ; c287
-wc288:: ds 1 ; c288
-wc289:: ds 1 ; c289
-wc28a:: ds 1 ; c28a
-wc28b:: ds 1 ; c28b
-wc28c:: ds 1 ; c28c
-wc28d:: ds 1 ; c28d
-wc28e:: ds 1 ; c28e
-wc28f:: ds 1 ; c28f
-wc290:: ds 1 ; c290
-wc291:: ds 1 ; c291
-wc292:: ds 1 ; c292
-wc293:: ds 1 ; c293
-wc294:: ds 1 ; c294
-wc295:: ds 1 ; c295
-wc296:: ds 1 ; c296
-wc297:: ds 1 ; c297
-wc298:: ds 1 ; c298
-wc299:: ds 1 ; c299
-wc29a:: ds 1 ; c29a
-wc29b:: ds 1 ; c29b
-wc29c:: ds 1 ; c29c
-wc29d:: ds 1 ; c29d
-wc29e:: ds 1 ; c29e
-wc29f:: ds 1 ; c29f
-wc2a0:: ds 1 ; c2a0
-wc2a1:: ds 1 ; c2a1
-wc2a2:: ds 1 ; c2a2
-wc2a3:: ds 1 ; c2a3
-wc2a4:: ds 1 ; c2a4
-wc2a5:: ds 1 ; c2a5
-wc2a6:: ds 1 ; c2a6
-wc2a7:: ds 1 ; c2a7
-wc2a8:: ds 1 ; c2a8
-wc2a9:: ds 1 ; c2a9
-wc2aa:: ds 1 ; c2aa
-wc2ab:: ds 1 ; c2ab
-wc2ac:: ds 1 ; c2ac
-wc2ad:: ds 1 ; c2ad
-wc2ae:: ds 1 ; c2ae
-wc2af:: ds 1 ; c2af
-wc2b0:: ds 1 ; c2b0
-wc2b1:: ds 1 ; c2b1
-wc2b2:: ds 1 ; c2b2
-wc2b3:: ds 1 ; c2b3
-wc2b4:: ds 1 ; c2b4
-wc2b5:: ds 1 ; c2b5
-wc2b6:: ds 1 ; c2b6
-wc2b7:: ds 1 ; c2b7
-wc2b8:: ds 1 ; c2b8
-wc2b9:: ds 1 ; c2b9
-wc2ba:: ds 1 ; c2ba
-wc2bb:: ds 1 ; c2bb
-wc2bc:: ds 1 ; c2bc
-wc2bd:: ds 1 ; c2bd
-wc2be:: ds 1 ; c2be
-wc2bf:: ds 1 ; c2bf
-wc2c0:: ds 1 ; c2c0
-wc2c1:: ds 1 ; c2c1
-wc2c2:: ds 1 ; c2c2
-wc2c3:: ds 1 ; c2c3
-wc2c4:: ds 1 ; c2c4
-wc2c5:: ds 1 ; c2c5
-wc2c6:: ds 1 ; c2c6
-wc2c7:: ds 1 ; c2c7
-wc2c8:: ds 1 ; c2c8
-wc2c9:: ds 1 ; c2c9
-wc2ca:: ds 1 ; c2ca
-wc2cb:: ds 1 ; c2cb
-wc2cc:: ds 1 ; c2cc
-wc2cd:: ds 1 ; c2cd
-wc2ce:: ds 1 ; c2ce
-wc2cf:: ds 1 ; c2cf
-wc2d0:: ds 1 ; c2d0
-wc2d1:: ds 1 ; c2d1
-wc2d2:: ds 1 ; c2d2
-wc2d3:: ds 1 ; c2d3
-wc2d4:: ds 1 ; c2d4
-wc2d5:: ds 1 ; c2d5
-wc2d6:: ds 1 ; c2d6
-wc2d7:: ds 1 ; c2d7
-wc2d8:: ds 1 ; c2d8
-wc2d9:: ds 1 ; c2d9
-wc2da:: ds 1 ; c2da
-wc2db:: ds 1 ; c2db
-wc2dc:: ds 1 ; c2dc
-wc2dd:: ds 1 ; c2dd
-wc2de:: ds 1 ; c2de
-wc2df:: ds 1 ; c2df
-wc2e0:: ds 1 ; c2e0
-wc2e1:: ds 1 ; c2e1
-wc2e2:: ds 1 ; c2e2
-wc2e3:: ds 1 ; c2e3
-wc2e4:: ds 1 ; c2e4
-wc2e5:: ds 1 ; c2e5
-wc2e6:: ds 1 ; c2e6
-wc2e7:: ds 1 ; c2e7
-wc2e8:: ds 1 ; c2e8
-wc2e9:: ds 1 ; c2e9
-wc2ea:: ds 1 ; c2ea
-wc2eb:: ds 1 ; c2eb
-wc2ec:: ds 1 ; c2ec
-wc2ed:: ds 1 ; c2ed
-wc2ee:: ds 1 ; c2ee
-wc2ef:: ds 1 ; c2ef
-wc2f0:: ds 1 ; c2f0
-wc2f1:: ds 1 ; c2f1
-wc2f2:: ds 1 ; c2f2
-wc2f3:: ds 1 ; c2f3
-wc2f4:: ds 1 ; c2f4
-wc2f5:: ds 1 ; c2f5
-wc2f6:: ds 1 ; c2f6
-wc2f7:: ds 1 ; c2f7
-wc2f8:: ds 1 ; c2f8
-wc2f9:: ds 1 ; c2f9
-wc2fa:: ds 1 ; c2fa
-wc2fb:: ds 1 ; c2fb
-wc2fc:: ds 1 ; c2fc
-wc2fd:: ds 1 ; c2fd
-wc2fe:: ds 1 ; c2fe
-wc2ff:: ds 1 ; c2ff
+
+SECTION "GBC Palettes", WRAM0
+wUnknBGPals:: ds 8 * 8 ; c200
+wUnknOBPals:: ds 8 * 8 ; c240
+wBGPals::     ds 8 * 8 ; c280
+wOBPals::     ds 8 * 8 ; c2c0
 
 SECTION "OAM Buffer", WRAM0
 wOAMBuffer:: ; c300
@@ -453,6 +201,8 @@ wTileMap:: ; c3a0
 	ds SCREEN_HEIGHT * SCREEN_WIDTH
 
 SECTION "Animated Objects", WRAM0
+wTileMapBackup:: ; c508
+	; ds SCREEN_HEIGHT * SCREEN_WIDTH
 wAnimatedObjectDynamicVTileOffsets:: ds 10 * 2 ; c508
 wAnimatedObjectStructs:: ; c51c
 ; Field  0: Index
@@ -2675,12 +2425,12 @@ wce4d:: ds 1 ; ce4d
 wce4e:: ds 1 ; ce4e
 wce4f:: ds 1 ; ce4f
 wce50:: ds 1 ; ce50
-wce51:: ds 1 ; ce51
-wce52:: ds 1 ; ce52
+wOtherPlayerLinkMode:: ds 1 ; ce51
+wOtherPlayerLinkAction:: ds 1 ; ce52
 wce53:: ds 1 ; ce53
 wce54:: ds 1 ; ce54
 wce55:: ds 1 ; ce55
-wce56:: ds 1 ; ce56
+wPlayerLinkAction:: ds 1 ; ce56
 wce57:: ds 1 ; ce57
 wce58:: ds 1 ; ce58
 wce59:: ds 1 ; ce59
@@ -3086,7 +2836,11 @@ wd03e:: ds 1 ; d03e
 wd03f:: ds 1 ; d03f
 wd040:: ds 1 ; d040
 wd041:: ds 1 ; d041
-wLinkMode:: ds 1
+
+wLinkMode:: ds 1 ; d042
+; 0 not in link battle
+; 1 link battle
+
 wd043:: ds 1 ; d043
 wd044:: ds 1 ; d044
 wd045:: ds 1 ; d045

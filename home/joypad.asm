@@ -4,11 +4,12 @@ JoypadInt:: ; 8df (0:08df)
 	ld [hJoyPressed], a
 	ld [hJoyDown], a
 	ret
+
 Joypad:: ; 8e6 (0:08e6)
 	ld a, [wd8ba]
 	and $d0
 	ret nz
-	ld a, [wc1cc]
+	ld a, [wGameLogicPaused]
 	and a
 	ret nz
 	ld a, $20
@@ -52,14 +53,15 @@ Joypad:: ; 8e6 (0:08e6)
 	cp $f
 	jp z, Reset
 	ret
-Function935:: ; 935 (0:0935)
+
+GetJoypad:: ; 935 (0:0935)
 	push af
 	push hl
 	push de
 	push bc
-	ld a, [wc1c6]
+	ld a, [wInputType]
 	cp $ff
-	jr z, .asm_958
+	jr z, .auto
 	ld a, [hJoypadDown]
 	ld b, a
 	ld a, [hJoyDown]
@@ -74,141 +76,163 @@ Function935:: ; 935 (0:0935)
 	ld c, a
 	ld a, b
 	ld [hJoyDown], a
-.asm_953
+.quit
 	pop bc
 	pop de
 	pop hl
 	pop af
 	ret
-.asm_958
+
+.auto
 	ld a, [hROMBank]
 	push af
-	ld a, [wc1c9]
+	ld a, [wAutoInputBank]
 	rst Bankswitch
-	ld hl, wc1c7
+	ld hl, wAutoInputAddress
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
-	ld a, [wc1ca]
+	ld a, [wAutoInputLength]
 	and a
-	jr z, .asm_973
+	jr z, .updateauto
 	dec a
-	ld [wc1ca], a
+	ld [wAutoInputLength], a
 	pop af
 	rst Bankswitch
-	jr .asm_953
-.asm_973
+	jr .quit
+
+.updateauto
 	ld a, [hli]
 	cp $ff
-	jr z, .asm_991
+	jr z, .stopauto
 	ld b, a
 	ld a, [hli]
-	ld [wc1ca], a
+	ld [wAutoInputLength], a
 	cp $ff
-	jr nz, .asm_987
+	jr nz, .next
 	dec hl
 	dec hl
 	ld b, $0
-	jr .asm_996
-.asm_987
+	jr .finishauto
+
+.next
 	ld a, l
-	ld [wc1c7], a
+	ld [wAutoInputAddress], a
 	ld a, h
-	ld [wc1c8], a
-	jr .asm_996
-.asm_991
-	call Function9bb
+	ld [wAutoInputAddress + 1], a
+	jr .finishauto
+
+.stopauto
+	call StopAutoInput
 	ld b, $0
-.asm_996
+.finishauto
 	pop af
 	rst Bankswitch
 	ld a, b
 	ld [hJoyPressed], a
 	ld [hJoyDown], a
-	jr .asm_953
-	ld [wc1c9], a
+	jr .quit
+
+StartAutoInput::
+	ld [wAutoInputBank], a
 	ld a, l
-	ld [wc1c7], a
+	ld [wAutoInputAddress], a
 	ld a, h
-	ld [wc1c8], a
+	ld [wAutoInputAddress + 1], a
 	xor a
-	ld [wc1ca], a
+	ld [wAutoInputLength], a
 	xor a
 	ld [hJoyPressed], a
 	ld [hJoyReleased], a
 	ld [hJoyDown], a
 	ld a, $ff
-	ld [wc1c6], a
+	ld [wInputType], a
 	ret
-Function9bb:: ; 9bb (0:09bb)
+
+StopAutoInput:: ; 9bb (0:09bb)
 	xor a
-	ld [wc1c9], a
-	ld [wc1c7], a
-	ld [wc1c8], a
-	ld [wc1ca], a
-	ld [wc1c6], a
+	ld [wAutoInputBank], a
+	ld [wAutoInputAddress], a
+	ld [wAutoInputAddress + 1], a
+	ld [wAutoInputLength], a
+	ld [wInputType], a
 	ret
-.asm_9cc
+
+JoyTitleScreenInput::
+.loop
 	call DelayFrame
 	push bc
-	call Functiona08
+	call JoyTextDelay
 	pop bc
+
 	ld a, [hJoyDown]
-	cp $46
-	jr z, .asm_9e5
+	cp D_UP | SELECT | B_BUTTON
+	jr z, .keycombo
+
 	ld a, [hJoyLast]
-	and $9
-	jr nz, .asm_9e5
+	and START | A_BUTTON
+	jr nz, .keycombo
+
 	dec c
-	jr nz, .asm_9cc
+	jr nz, .loop
+
 	and a
 	ret
-.asm_9e5
+
+.keycombo
 	scf
 	ret
-.asm_9e7
+
+JoyWaitAorB::
 	call DelayFrame
-	call Function935
+	call GetJoypad
 	ld a, [hJoyPressed]
-	and $3
+	and A_BUTTON | B_BUTTON
 	ret nz
-	call Function343
-	jr .asm_9e7
+	call RTC
+	jr JoyWaitAorB
+
+WaitButton::
 	ld a, [hOAMUpdate]
 	push af
 	ld a, $1
 	ld [hOAMUpdate], a
 	call Function344c
-	call .asm_9e7
+	call JoyWaitAorB
 	pop af
 	ld [hOAMUpdate], a
 	ret
-Functiona08:: ; a08 (0:0a08)
-	call Function935
+
+JoyTextDelay:: ; a08 (0:0a08)
+	call GetJoypad
 	ld a, [hInMenu]
 	and a
 	ld a, [hJoyPressed]
-	jr z, .asm_a14
+	jr z, .ok
 	ld a, [hJoyDown]
-.asm_a14
+.ok
 	ld [hJoyLast], a
 	ld a, [hJoyPressed]
 	and a
-	jr z, .asm_a21
-	ld a, $f
+	jr z, .checkframedelay
+	ld a, 15
 	ld [wTextDelayFrames], a
 	ret
-.asm_a21
+
+.checkframedelay
 	ld a, [wTextDelayFrames]
 	and a
-	jr z, .asm_a2b
+	jr z, .restartframedelay
 	xor a
 	ld [hJoyLast], a
 	ret
-.asm_a2b
-	ld a, $5
+
+.restartframedelay
+	ld a, 5
 	ld [wTextDelayFrames], a
 	ret
+
+WaitPressAorB_BlinkCursor::
 	ld a, [hMapObjectIndexBuffer]
 	push af
 	ld a, [hObjectStructIndexBuffer]
@@ -217,66 +241,72 @@ Functiona08:: ; a08 (0:0a08)
 	ld [hMapObjectIndexBuffer], a
 	ld a, $6
 	ld [hObjectStructIndexBuffer], a
-.asm_a3e
+.loop
 	push hl
 	hlcoord 18, 17
-	call Functionab6
+	call BlinkCursor
 	pop hl
-	call Functiona08
+	call JoyTextDelay
 	ld a, [hJoyLast]
-	and $3
-	jr z, .asm_a3e
+	and A_BUTTON | B_BUTTON
+	jr z, .loop
 	pop af
 	ld [hObjectStructIndexBuffer], a
 	pop af
 	ld [hMapObjectIndexBuffer], a
 	ret
-.asm_a56
-	call Functiona08
+
+SimpleWaitPressAorB::
+.loop
+	call JoyTextDelay
 	ld a, [hJoyLast]
-	and $3
-	jr z, .asm_a56
+	and A_BUTTON | B_BUTTON
+	jr z, .loop
 	ret
+
+ButtonSound::
 	ld a, [wLinkMode]
 	and a
-	jr nz, .asm_a72
-	call Functiona77
+	jr nz, .link_delay
+	call JoyWaitInput
 	push de
-	ld de, $8
-	call Function3e24
+	ld de, SFX_READ_TEXT_2
+	call PlaySound
 	pop de
 	ret
-.asm_a72
-	ld c, $41
+
+.link_delay
+	ld c, 65
 	jp DelayFrames
-Functiona77:: ; a77 (0:0a77)
+
+JoyWaitInput:: ; a77 (0:0a77)
 	ld a, [hOAMUpdate]
 	push af
 	ld a, $1
 	ld [hOAMUpdate], a
-	ld a, [wc1c6]
+	ld a, [wInputType]
 	or a
-	jr z, .asm_a8a
-	ld a, $70
-	ld hl, $4de9
-	rst FarCall
-.asm_a8a
-	call Functionaa6
-	call Functiona08
+	jr z, .wait_loop
+	callba _DudeAutoInput_A
+
+.wait_loop
+	call JoyBlinkCursor
+	call JoyTextDelay
 	ld a, [hJoyPressed]
-	and $3
-	jr nz, .asm_aa2
-	call Function343
+	and A_BUTTON | B_BUTTON
+	jr nz, .received_input
+	call RTC
 	ld a, $1
 	ld [hBGMapMode], a
 	call DelayFrame
-	jr .asm_a8a
-.asm_aa2
+	jr .wait_loop
+
+.received_input
 	pop af
 	ld [hOAMUpdate], a
 	ret
 
-Functionaa6:: ; aa6 (0:0aa6)
+JoyBlinkCursor:: ; aa6 (0:0aa6)
 	ld a, [hVBlankCounter]
 	and $10
 	jr z, .cursor_off
@@ -289,7 +319,7 @@ Functionaa6:: ; aa6 (0:0aa6)
 	Coorda 18, 17
 	ret
 
-Functionab6:: ; ab6 (0:0ab6)
+BlinkCursor:: ; ab6 (0:0ab6)
 	push bc
 	ld a, [hl]
 	ld b, a
