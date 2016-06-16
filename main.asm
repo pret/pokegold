@@ -103,7 +103,13 @@ SECTION "bank22", DATA, BANK[$22]
 	dr $88000, $8c000
 
 SECTION "bank23", DATA, BANK[$23]
-	dr $8c000, $90000
+	dr $8c000, $8c366
+
+_TimeOfDayPals:: ; 8c366
+	dr $8c366, $8c397
+
+_UpdateTimePals:: ; 8c397
+	dr $8c397, $90000
 
 SECTION "bank24", DATA, BANK[$24]
 	dr $90000, $94000
@@ -174,7 +180,7 @@ SECTION "bank39", DATA, BANK[$39]
 SECTION "bank3a", DATA, BANK[$3a]
 	dr $e8000, $e805c
 
-Functione805c::
+_UpdateSound::
 	dr $e805c, $ec000
 
 SECTION "bank3b", DATA, BANK[$3b]

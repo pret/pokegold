@@ -12,12 +12,14 @@ Start::
 SECTION "bank0", HOME[$150]
 INCLUDE "home/vblank.asm"
 INCLUDE "home/delay.asm"
-
-Function343::
-	dr $343, $41b
+INCLUDE "home/rtc.asm"
+INCLUDE "home/fade.asm"
 
 LCD::
-	dr $41b, $5c6
+	dr $41b, $467
+
+UpdateTime::
+	dr $467, $5c6
 
 Start_::
 	dr $5c6, $6aa
@@ -28,25 +30,32 @@ Serial::
 JoypadInt::
 	dr $8df, $8e6
 
-Function8e6::
+Joypad::
 	dr $8e6, $bdf
 
-Functionbdf::
-	dr $bdf, $be3
+UpdatePalsIfCGB::
+	ld a, [hCGB]
+	and a
+	ret z
+UpdateCGBPals::
+	dr $be3, $c61
 
-Functionbe3::
-	dr $be3, $1458
+Functionc61::
+	dr $c61, $c83
 
-Function1458::
+Functionc83::
+	dr $c83, $1458
+
+UpdateBGMapBuffer::
 	dr $1458, $14bb
 
-Function14bb::
+UpdateBGMap::
 	dr $14bb, $1579
 
 Function1579::
 	dr $1579, $15d0
 
-Function15d0::
+Serve2bppRequest::
 	dr $15d0, $162b
 
 Function162b::
@@ -55,7 +64,7 @@ Function162b::
 Function1642::
 	dr $1642, $1ebf
 
-Function1ebf::
+AskSerial::
 	dr $1ebf, $1efa
 
 Function1efa::
