@@ -16,6 +16,26 @@ INCLUDE "macros/mobile.asm"
 INCLUDE "macros/trainer.asm"
 INCLUDE "macros/trade_anim.asm"
 
+dr: MACRO
+IF \3 == 1
+INCBIN "baserom-silver.gbc", \1, \2 - \1
+ELSE
+INCBIN "baserom-gold.gbc", \1, \2 - \1
+ENDC
+ENDM
+
+callba_hc: macro
+	ld a, \1
+	ld hl, \2
+	rst FarCall
+endm
+
+callab_hc: macro
+	ld hl, \2
+	ld a, \1
+	rst FarCall
+endm
+
 RGB: MACRO
 	dw ((\3) << 10) + ((\2) << 5) + (\1)
 	ENDM
@@ -269,8 +289,4 @@ jumptable: MACRO
 	ld l, a
 	jp [hl]
 endm
-
-dr: MACRO ; Needed until fully disassembled
-INCBIN "baserom.gbc", \1, \2 - \1
-ENDM
 

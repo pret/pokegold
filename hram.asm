@@ -16,7 +16,7 @@ hMinutes           EQU $ff96
 
 hSeconds           EQU $ff98
 
-hVBlankCounter     EQU $ff9b
+hVBlankCounter     EQU $ff9d
 
 hROMBank           EQU $ff9f
 hVBlank            EQU $ff9e
@@ -86,10 +86,10 @@ hFFCC              EQU $ffcc
 hSerialSend        EQU $ffcd
 hSerialReceive     EQU $ffce
 
-hSCX               EQU $ffcf
-hSCY               EQU $ffd0
-hWX                EQU $ffd1
-hWY                EQU $ffd2
+hSCX               EQU $ffd1
+hSCY               EQU $ffd2
+hWX                EQU $ffd3
+hWY                EQU $ffd4
 hTilesPerCycle     EQU $ffd3
 hBGMapMode         EQU $ffd4
 hBGMapThird        EQU $ffd5
@@ -98,7 +98,7 @@ hBGMapAddress      EQU $ffd6
 hOAMUpdate         EQU $ffd8
 hSPBuffer          EQU $ffd9
 
-hBGMapUpdate       EQU $ffdb
+hBGMapUpdate       EQU $ffda
 hFFDC              EQU $ffdc
 
 hMapAnims          EQU $ffde
@@ -106,9 +106,11 @@ hTileAnimFrame     EQU $ffdf
 
 hLastTalked        EQU $ffe0
 
-hRandom            EQU $ffe1
-hRandomAdd         EQU $ffe1
-hRandomSub         EQU $ffe2
+hRandom            EQU $ffe3
+hRandomAdd         EQU $ffe3
+hRandomSub         EQU $ffe4
+
+
 hSecondsBackup     EQU $ffe3
 hBattleTurn        EQU $ffe4 ; Which trainers turn is it? 0: Player, 1: Opponent Trainer
 hCGBPalUpdate      EQU $ffe5

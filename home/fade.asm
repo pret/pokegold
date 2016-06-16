@@ -1,117 +1,109 @@
-; Functions to fade the screen in and out.
 
+Function360::
+	ld a, [$d568] ; 360
+	ld b, a ; 363
+	ld hl, $40c ; 364
+	ld a, l ; 367
+	sub b ; 368
+	ld l, a ; 369
+	jr nc, Function36d ; 36a
+	dec h ; 36c
+	ld a, [hli] ; 36d
+	ldh [$ff47], a ; 36e
+	ld a, [hli] ; 370
+	ldh [$ff48], a ; 371
+	ld a, [hli] ; 373
+	ldh [$ff49], a ; 374
+	ret ; 376
+; 377
 
-Function48c:: ; 48c
-	ld a, [TimeOfDayPal]
-	ld b, a
-	ld hl, IncGradGBPalTable_11
-	ld a, l
-	sub b
-	ld l, a
-	jr nc, .okay
-	dec h
+Function377::
+	ldh a, [$ffe8] ; 377
+	and a ; 379
+	jr z, Function383 ; 37a
+	ld hl, $3eb ; 37c
+	ld b, $4 ; 37f
+	jr Function39b ; 381
+; 383
 
-.okay
-	ld a, [hli]
-	ld [rBGP], a
-	ld a, [hli]
-	ld [rOBP0], a
-	ld a, [hli]
-	ld [rOBP1], a
-	ret
-; 4a3
+Function383::
+	ld hl, $403 ; 383
+	ld b, $4 ; 386
+	jr Function39b ; 388
+; 38a
 
+Function38a::
+	ldh a, [$ffe8] ; 38a
+	and a ; 38c
+	jr z, Function396 ; 38d
+	ld hl, $3fa ; 38f
+	ld b, $3 ; 392
+	jr Function39b ; 394
+; 396
 
-RotateFourPalettesRight:: ; 4a3
-	ld a, [hCGB]
-	and a
-	jr z, .dmg
-	ld hl, IncGradGBPalTable_00
-	ld b, 4
-	jr RotatePalettesRight
+Function396::
+	ld hl, $412 ; 396
+	ld b, $3 ; 399
+	push de ; 39b
+	ld a, [hli] ; 39c
+	call Functionc61 ; 39d
+	ld a, [hli] ; 3a0
+	ld e, a ; 3a1
+	ld a, [hli] ; 3a2
+	ld d, a ; 3a3
+	call Functionc83 ; 3a4
+	ld c, $8 ; 3a7
+	call DelayFrames ; 3a9
+	pop de ; 3ac
+	dec b ; 3ad
+	jr nz, Function39b ; 3ae
+	ret ; 3b0
+; 3b1
 
-.dmg
-	ld hl, IncGradGBPalTable_08
-	ld b, 4
-	jr RotatePalettesRight
-; 4b6
+Function3b1::
+	ldh a, [$ffe8] ; 3b1
+	and a ; 3b3
+	jr z, Function3bd ; 3b4
+	ld hl, $3f6 ; 3b6
+	ld b, $4 ; 3b9
+	jr Function3d5 ; 3bb
+; 3bd
 
-RotateThreePalettesRight:: ; 4b6
-	ld a, [hCGB]
-	and a
-	jr z, .dmg
-	ld hl, IncGradGBPalTable_05
-	ld b, 3
-	jr RotatePalettesRight
+Function3bd::
+	ld hl, $40e ; 3bd
+	ld b, $4 ; 3c0
+	jr Function3d5 ; 3c2
+; 3c4
 
-.dmg
-	ld hl, IncGradGBPalTable_13
-	ld b, 3
-RotatePalettesRight:: ; 4c7
-; Rotate palettes to the right and fill with loaded colors from the left
-; If we're already at the leftmost color, fill with the leftmost color
-	push de
-	ld a, [hli]
-	call DmgToCgbBGPals
-	ld a, [hli]
-	ld e, a
-	ld a, [hli]
-	ld d, a
-	call DmgToCgbObjPals
-	ld c, 8
-	call DelayFrames
-	pop de
-	dec b
-	jr nz, RotatePalettesRight
-	ret
-; 4dd
+Function3c4::
+	ldh a, [$ffe8] ; 3c4
+	and a ; 3c6
+	jr z, Function3d0 ; 3c7
+	ld hl, $3ff ; 3c9
+	ld b, $3 ; 3cc
+	jr Function3d5 ; 3ce
+; 3d0
 
-RotateFourPalettesLeft:: ; 4dd
-	ld a, [hCGB]
-	and a
-	jr z, .dmg
-	ld hl, IncGradGBPalTable_04 - 1
-	ld b, 4
-	jr RotatePalettesLeft
+Function3d0::
+	ld hl, $417 ; 3d0
+	ld b, $3 ; 3d3
+	push de ; 3d5
+	ld a, [hld] ; 3d6
+	ld d, a ; 3d7
+	ld a, [hld] ; 3d8
+	ld e, a ; 3d9
+	call Functionc83 ; 3da
+	ld a, [hld] ; 3dd
+	call Functionc61 ; 3de
+	ld c, $8 ; 3e1
+	call DelayFrames ; 3e3
+	pop de ; 3e6
+	dec b ; 3e7
+	jr nz, Function3d5 ; 3e8
+	ret ; 3ea
+; 3eb
 
-.dmg
-	ld hl, IncGradGBPalTable_12 - 1
-	ld b, 4
-	jr RotatePalettesLeft
-; 4f0
-
-RotateThreePalettesLeft:: ; 4f0
-	ld a, [hCGB]
-	and a
-	jr z, .dmg
-	ld hl, IncGradGBPalTable_07 - 1
-	ld b, 3
-	jr RotatePalettesLeft
-
-.dmg
-	ld hl, IncGradGBPalTable_15 - 1
-	ld b, 3
-RotatePalettesLeft:: ; 501
-; Rotate palettes to the left and fill with loaded colors from the right
-; If we're already at the rightmost color, fill with the rightmost color
-	push de
-	ld a, [hld]
-	ld d, a
-	ld a, [hld]
-	ld e, a
-	call DmgToCgbObjPals
-	ld a, [hld]
-	call DmgToCgbBGPals
-	ld c, 8
-	call DelayFrames
-	pop de
-	dec b
-	jr nz, RotatePalettesLeft
-	ret
-; 517
-
-
-; 517
+Function3eb::
 IncGradGBPalTable_00:: db %11111111, %11111111, %11111111
 IncGradGBPalTable_01:: db %11111110, %11111110, %11111110
 IncGradGBPalTable_02:: db %11111001, %11111001, %11111001
@@ -133,4 +125,4 @@ IncGradGBPalTable_13:: db %10010000, %10000000, %10010000
 IncGradGBPalTable_14:: db %01000000, %01000000, %01000000
 
 IncGradGBPalTable_15:: db %00000000, %00000000, %00000000
-; 547
+; 41b
