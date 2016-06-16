@@ -1,58 +1,38 @@
-; LCD handling
-
-
-Function547:: ; 547
-; Unreferenced
-	ld a, [hFFC6]
-	cp rSCX - $ff00
-	ret nz
-	ld c, a
-	ld a, [LYOverrides]
-	ld [$ff00+c], a
-	ret
-; 552
-
-
-LCD:: ; 552
+LCD:: ; 41b (0:041b)
 	push af
-	ld a, [hFFC6]
+	ld a, [hLCDCPointer]
 	and a
 	jr z, .done
-
-; At this point it's assumed we're in WRAM bank 5!
-	push bc
+	push hl
 	ld a, [rLY]
-	ld c, a
-	ld b, LYOverrides >> 8
-	ld a, [bc]
-	ld b, a
-	ld a, [hFFC6]
-	ld c, a
-	ld a, b
-	ld [$ff00+c], a
-	pop bc
-
+	ld l, a
+	ld h, wLYOverrides >> 8
+	ld h, [hl]
+	ld a, [hLCDCPointer]
+	ld l, a
+	ld a, h
+	ld h, rSCY >> 8
+	ld [hl], a
+	pop hl
 .done
 	pop af
 	reti
-; 568
 
-
-DisableLCD:: ; 568
+DisableLCD::
 ; Turn the LCD off
 
 ; Don't need to do anything if the LCD is already off
 	ld a, [rLCDC]
-	bit 7, a ; lcd enable
+	bit 7, a
 	ret z
 
 	xor a
 	ld [rIF], a
 	ld a, [rIE]
 	ld b, a
-	
+
 ; Disable VBlank
-	res 0, a ; vblank
+	res 0, a
 	ld [rIE], a
 
 .wait
@@ -62,7 +42,7 @@ DisableLCD:: ; 568
 	jr nz, .wait
 
 	ld a, [rLCDC]
-	and %01111111 ; lcd enable off
+	and %01111111
 	ld [rLCDC], a
 
 	xor a
@@ -70,12 +50,9 @@ DisableLCD:: ; 568
 	ld a, b
 	ld [rIE], a
 	ret
-; 58a
 
-
-EnableLCD:: ; 58a
+EnableLCD::
 	ld a, [rLCDC]
-	set 7, a ; lcd enable
+	set 7, a
 	ld [rLCDC], a
 	ret
-; 591

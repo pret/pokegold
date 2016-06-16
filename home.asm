@@ -7,22 +7,16 @@ INCLUDE "interrupts.asm"
 SECTION "start", HOME[$100]
 Start::
 	nop
-	jp Start_
+	jp _Start
 
 SECTION "bank0", HOME[$150]
 INCLUDE "home/vblank.asm"
 INCLUDE "home/delay.asm"
 INCLUDE "home/rtc.asm"
 INCLUDE "home/fade.asm"
-
-LCD::
-	dr $41b, $467
-
-UpdateTime::
-	dr $467, $5c6
-
-Start_::
-	dr $5c6, $6aa
+INCLUDE "home/lcd.asm"
+INCLUDE "home/time.asm"
+INCLUDE "home/init.asm"
 
 Serial::
 	dr $6aa, $8df
@@ -71,4 +65,25 @@ Function1efa::
 	dr $1efa, $2e27
 
 FarCall_hl::
-	dr $2e27, $3fee
+	dr $2e27, $2e49
+
+Function2e49::
+	dr $2e49, $30e1
+
+OpenSRAM::
+	dr $30e1, $30f1
+
+CloseSRAM::
+	dr $30f1, $30ff
+
+Function30ff::
+	dr $30ff, $314c
+
+Function314c::
+	dr $314c, $3564
+
+Function3564::
+	dr $3564, $3d4f
+
+Function3d4f::
+	dr $3d4f, $3fee

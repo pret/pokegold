@@ -1793,6 +1793,8 @@ wc6fc:: ds 1
 wc6fd:: ds 1
 wc6fe:: ds 1
 wc6ff:: ds 1
+
+wLYOverrides::
 wc700:: ds 1
 wc701:: ds 1
 wc702:: ds 1
@@ -3950,101 +3952,13 @@ wcf67:: ds 1
 wcf68:: ds 1
 wcf69:: ds 1
 wcf6a:: ds 1
-wcf6b:: ds 1
-wcf6c:: ds 1
-wcf6d:: ds 1
-wcf6e:: ds 1
-wcf6f:: ds 1
-wcf70:: ds 1
-wcf71:: ds 1
-wcf72:: ds 1
-wcf73:: ds 1
-wcf74:: ds 1
-wcf75:: ds 1
-wcf76:: ds 1
-wcf77:: ds 1
-wcf78:: ds 1
-wcf79:: ds 1
-wcf7a:: ds 1
-wcf7b:: ds 1
-wcf7c:: ds 1
-wcf7d:: ds 1
-wcf7e:: ds 1
-wcf7f:: ds 1
-wcf80:: ds 1
-wcf81:: ds 1
-wcf82:: ds 1
-wcf83:: ds 1
-wcf84:: ds 1
-wcf85:: ds 1
-wcf86:: ds 1
-wcf87:: ds 1
-wcf88:: ds 1
-wcf89:: ds 1
-wcf8a:: ds 1
-wcf8b:: ds 1
-wcf8c:: ds 1
-wcf8d:: ds 1
-wcf8e:: ds 1
-wcf8f:: ds 1
-wcf90:: ds 1
-wcf91:: ds 1
-wcf92:: ds 1
-wcf93:: ds 1
-wcf94:: ds 1
-wcf95:: ds 1
-wcf96:: ds 1
-wcf97:: ds 1
-wcf98:: ds 1
-wcf99:: ds 1
-wcf9a:: ds 1
-wcf9b:: ds 1
-wcf9c:: ds 1
-wcf9d:: ds 1
-wcf9e:: ds 1
-wcf9f:: ds 1
-wcfa0:: ds 1
-wcfa1:: ds 1
-wcfa2:: ds 1
-wcfa3:: ds 1
-wcfa4:: ds 1
-wcfa5:: ds 1
-wcfa6:: ds 1
-wcfa7:: ds 1
-wcfa8:: ds 1
-wcfa9:: ds 1
-wcfaa:: ds 1
-wcfab:: ds 1
-wcfac:: ds 1
-wcfad:: ds 1
-wcfae:: ds 1
-wcfaf:: ds 1
-wcfb0:: ds 1
-wcfb1:: ds 1
-wcfb2:: ds 1
-wcfb3:: ds 1
-wcfb4:: ds 1
-wcfb5:: ds 1
-wcfb6:: ds 1
-wcfb7:: ds 1
-wcfb8:: ds 1
-wcfb9:: ds 1
-wcfba:: ds 1
-wcfbb:: ds 1
-wcfbc:: ds 1
-wcfbd:: ds 1
-wcfbe:: ds 1
-wcfbf:: ds 1
-wcfc0:: ds 1
-wcfc1:: ds 1
-wcfc2:: ds 1
-wcfc3:: ds 1
-wcfc4:: ds 1
-wcfc5:: ds 1
-wcfc6:: ds 1
-wcfc7:: ds 1
-wcfc8:: ds 1
-wcfc9:: ds 1
+
+wStringBuffer1:: ds 19 ; cf6b
+wStringBuffer2:: ds 19 ; cf7e
+wStringBuffer3:: ds 19 ; cf91
+wStringBuffer4:: ds 19 ; cfa4
+wStringBuffer5:: ds 19 ; cfb7
+
 wcfca:: ds 1
 wcfcb:: ds 1
 wcfcc:: ds 1
@@ -7948,3 +7862,5 @@ wStackBottom::
 wStack::
 wStackTop::
 	ds 1
+
+INCLUDE "sram.asm"

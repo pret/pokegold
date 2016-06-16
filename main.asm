@@ -1,10 +1,25 @@
 INCLUDE "constants.asm"
 
 SECTION "bank1", DATA, BANK[$1]
-	dr $4000, $8000
+	dr $4000, $4032
+Function4032::
+
+IF DEF(GOLD)
+	dr $4032, $6545
+Function6545::
+	dr $6545, $8000
+ENDC
+
+IF DEF(SILVER)
+	dr $4032, $650b
+Function650b::
+	dr $650b, $8000
+ENDC
 
 SECTION "bank2", DATA, BANK[$2]
-	dr $8000, $c000
+	dr $8000, $9cfd
+Function9cfd:: ; 9cfd
+	dr $9cfd, $c000
 
 SECTION "bank3", DATA, BANK[$3]
 	dr $c000, $10000
@@ -13,7 +28,13 @@ SECTION "bank4", DATA, BANK[$4]
 	dr $10000, $14000
 
 SECTION "bank5", DATA, BANK[$5]
-	dr $14000, $18000
+	dr $14000, $14032
+Function14032:: ; 14032
+	dr $14032, $14089
+Function14089:: ; 14089
+	dr $14089, $140ff
+Function140ff:: ; 140ff
+	dr $140ff, $18000
 
 SECTION "bank6", DATA, BANK[$6]
 	dr $18000, $1c000
