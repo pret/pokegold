@@ -17,10 +17,12 @@ INCLUDE "macros/trainer.asm"
 INCLUDE "macros/trade_anim.asm"
 
 dr: MACRO
-IF \3 == 1
-INCBIN "baserom-silver.gbc", \1, \2 - \1
-ELSE
+IF DEF(GOLD)
 INCBIN "baserom-gold.gbc", \1, \2 - \1
+ELSE
+IF DEF(SILVER)
+INCBIN "baserom-silver.gbc", \1, \2 - \1
+ENDC
 ENDC
 ENDM
 

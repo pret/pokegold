@@ -144,7 +144,7 @@ Function219::
 Function23e::
 	ld a, [$ffe8] ; 23e
 	and a ; 240
-	jp nz, $be3 ; 241
+	jp nz, Functionbe3 ; 241
 	ld a, [$cf43] ; 244
 	ld [$ff47], a ; 247
 	ld a, [$cf44] ; 249

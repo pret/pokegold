@@ -1,16 +1,16 @@
 ; Game Boy hardware interrupts
 
-SECTION "vblank", ROM0[$40]
-	jp VBlank ; $0150
+SECTION "vblank",ROM0[$40]
+	jp VBlank
 
-SECTION "lcd", ROM0[$48]
-	jp LCD ; $041b
+SECTION "lcd",ROM0[$48]
+	jp LCD
 
-SECTION "timer", ROM0[$50]
+SECTION "timer",ROM0[$50]
 	reti
 
-SECTION "serial", ROM0[$58]
-	jp Serial ; $06aa
+SECTION "serial",ROM0[$58]
+	jp Serial
 
-SECTION "joypad", ROM0[$60]
-	jp JoypadInt ; $08df
+SECTION "joypad",ROM0[$60]
+	jp JoypadInt

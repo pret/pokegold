@@ -1,11 +1,5 @@
 INCLUDE "constants.asm"
 
-SECTION "preheader", HOME
-	dr $0, $104, 1
-
-SECTION "bank0", HOME[$150]
-	dr $150, $4000, 1
-
 SECTION "bank1", DATA, BANK[$1]
 	dr $4000, $8000, 1
 
