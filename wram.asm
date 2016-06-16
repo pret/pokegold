@@ -99,7 +99,7 @@ wCryLength:: ; c1b2
 	ds 2
 wLastVolume:: ; c1b4
 	ds 1
-wc1b5:: ds 1
+wc1b5:: ds 1 ; c1b5
 wSFXPriority:: ; c1b6
 ; if nonzero, turn off music when playing sfx
 	ds 1
@@ -125,3505 +125,2838 @@ wDontPlayMapMusicOnReload:: ds 1
 wMusicEnd::
 
 SECTION "WRAM", WRAM0
-wc1c2:: ds 1
-wc1c3:: ds 1
-wc1c4:: ds 1
-wc1c5:: ds 1
-wc1c6:: ds 1
-wc1c7:: ds 1
-wc1c8:: ds 1
-wc1c9:: ds 1
-wc1ca:: ds 1
-wc1cb:: ds 1
-wc1cc:: ds 1
+wc1c2:: ds 1 ; c1c2
+wc1c3:: ds 1 ; c1c3
+wc1c4:: ds 1 ; c1c4
+wc1c5:: ds 1 ; c1c5
+wc1c6:: ds 1 ; c1c6
+wc1c7:: ds 1 ; c1c7
+wc1c8:: ds 1 ; c1c8
+wc1c9:: ds 1 ; c1c9
+wc1ca:: ds 1 ; c1ca
+wc1cb:: ds 1 ; c1cb
+wc1cc:: ds 1 ; c1cc
 wRTCEnabled:: ds 1
-wc1ce:: ds 1
-wc1cf:: ds 1
-wc1d0:: ds 1
-wc1d1:: ds 1
-wc1d2:: ds 1
+wc1ce:: ds 1 ; c1ce
+wc1cf:: ds 1 ; c1cf
+wc1d0:: ds 1 ; c1d0
+wc1d1:: ds 1 ; c1d1
+wc1d2:: ds 1 ; c1d2
 wPrinterConnectionOpen:: ds 1
-wc1d4:: ds 1
-wc1d5:: ds 1
-wc1d6:: ds 1
-wc1d7:: ds 1
-wc1d8:: ds 1
-wc1d9:: ds 1
-wc1da:: ds 1
-wc1db:: ds 1
-wc1dc:: ds 1
-wc1dd:: ds 1
-wc1de:: ds 1
-wc1df:: ds 1
-wc1e0:: ds 1
-wc1e1:: ds 1
-wc1e2:: ds 1
-wc1e3:: ds 1
-wc1e4:: ds 1
-wc1e5:: ds 1
-wc1e6:: ds 1
-wc1e7:: ds 1
-wc1e8:: ds 1
-wc1e9:: ds 1
-wc1ea:: ds 1
-wc1eb:: ds 1
-wc1ec:: ds 1
-wc1ed:: ds 1
-wc1ee:: ds 1
-wc1ef:: ds 1
-wc1f0:: ds 1
-wc1f1:: ds 1
-wc1f2:: ds 1
-wc1f3:: ds 1
-wc1f4:: ds 1
-wc1f5:: ds 1
-wc1f6:: ds 1
-wc1f7:: ds 1
-wc1f8:: ds 1
-wc1f9:: ds 1
-wc1fa:: ds 1
-wc1fb:: ds 1
-wc1fc:: ds 1
-wc1fd:: ds 1
-wc1fe:: ds 1
-wc1ff:: ds 1
-wc200:: ds 1
-wc201:: ds 1
-wc202:: ds 1
-wc203:: ds 1
-wc204:: ds 1
-wc205:: ds 1
-wc206:: ds 1
-wc207:: ds 1
-wc208:: ds 1
-wc209:: ds 1
-wc20a:: ds 1
-wc20b:: ds 1
-wc20c:: ds 1
-wc20d:: ds 1
-wc20e:: ds 1
-wc20f:: ds 1
-wc210:: ds 1
-wc211:: ds 1
-wc212:: ds 1
-wc213:: ds 1
-wc214:: ds 1
-wc215:: ds 1
-wc216:: ds 1
-wc217:: ds 1
-wc218:: ds 1
-wc219:: ds 1
-wc21a:: ds 1
-wc21b:: ds 1
-wc21c:: ds 1
-wc21d:: ds 1
-wc21e:: ds 1
-wc21f:: ds 1
-wc220:: ds 1
-wc221:: ds 1
-wc222:: ds 1
-wc223:: ds 1
-wc224:: ds 1
-wc225:: ds 1
-wc226:: ds 1
-wc227:: ds 1
-wc228:: ds 1
-wc229:: ds 1
-wc22a:: ds 1
-wc22b:: ds 1
-wc22c:: ds 1
-wc22d:: ds 1
-wc22e:: ds 1
-wc22f:: ds 1
-wc230:: ds 1
-wc231:: ds 1
-wc232:: ds 1
-wc233:: ds 1
-wc234:: ds 1
-wc235:: ds 1
-wc236:: ds 1
-wc237:: ds 1
-wc238:: ds 1
-wc239:: ds 1
-wc23a:: ds 1
-wc23b:: ds 1
-wc23c:: ds 1
-wc23d:: ds 1
-wc23e:: ds 1
-wc23f:: ds 1
-wc240:: ds 1
-wc241:: ds 1
-wc242:: ds 1
-wc243:: ds 1
-wc244:: ds 1
-wc245:: ds 1
-wc246:: ds 1
-wc247:: ds 1
-wc248:: ds 1
-wc249:: ds 1
-wc24a:: ds 1
-wc24b:: ds 1
-wc24c:: ds 1
-wc24d:: ds 1
-wc24e:: ds 1
-wc24f:: ds 1
-wc250:: ds 1
-wc251:: ds 1
-wc252:: ds 1
-wc253:: ds 1
-wc254:: ds 1
-wc255:: ds 1
-wc256:: ds 1
-wc257:: ds 1
-wc258:: ds 1
-wc259:: ds 1
-wc25a:: ds 1
-wc25b:: ds 1
-wc25c:: ds 1
-wc25d:: ds 1
-wc25e:: ds 1
-wc25f:: ds 1
-wc260:: ds 1
-wc261:: ds 1
-wc262:: ds 1
-wc263:: ds 1
-wc264:: ds 1
-wc265:: ds 1
-wc266:: ds 1
-wc267:: ds 1
-wc268:: ds 1
-wc269:: ds 1
-wc26a:: ds 1
-wc26b:: ds 1
-wc26c:: ds 1
-wc26d:: ds 1
-wc26e:: ds 1
-wc26f:: ds 1
-wc270:: ds 1
-wc271:: ds 1
-wc272:: ds 1
-wc273:: ds 1
-wc274:: ds 1
-wc275:: ds 1
-wc276:: ds 1
-wc277:: ds 1
-wc278:: ds 1
-wc279:: ds 1
-wc27a:: ds 1
-wc27b:: ds 1
-wc27c:: ds 1
-wc27d:: ds 1
-wc27e:: ds 1
-wc27f:: ds 1
-wc280:: ds 1
-wc281:: ds 1
-wc282:: ds 1
-wc283:: ds 1
-wc284:: ds 1
-wc285:: ds 1
-wc286:: ds 1
-wc287:: ds 1
-wc288:: ds 1
-wc289:: ds 1
-wc28a:: ds 1
-wc28b:: ds 1
-wc28c:: ds 1
-wc28d:: ds 1
-wc28e:: ds 1
-wc28f:: ds 1
-wc290:: ds 1
-wc291:: ds 1
-wc292:: ds 1
-wc293:: ds 1
-wc294:: ds 1
-wc295:: ds 1
-wc296:: ds 1
-wc297:: ds 1
-wc298:: ds 1
-wc299:: ds 1
-wc29a:: ds 1
-wc29b:: ds 1
-wc29c:: ds 1
-wc29d:: ds 1
-wc29e:: ds 1
-wc29f:: ds 1
-wc2a0:: ds 1
-wc2a1:: ds 1
-wc2a2:: ds 1
-wc2a3:: ds 1
-wc2a4:: ds 1
-wc2a5:: ds 1
-wc2a6:: ds 1
-wc2a7:: ds 1
-wc2a8:: ds 1
-wc2a9:: ds 1
-wc2aa:: ds 1
-wc2ab:: ds 1
-wc2ac:: ds 1
-wc2ad:: ds 1
-wc2ae:: ds 1
-wc2af:: ds 1
-wc2b0:: ds 1
-wc2b1:: ds 1
-wc2b2:: ds 1
-wc2b3:: ds 1
-wc2b4:: ds 1
-wc2b5:: ds 1
-wc2b6:: ds 1
-wc2b7:: ds 1
-wc2b8:: ds 1
-wc2b9:: ds 1
-wc2ba:: ds 1
-wc2bb:: ds 1
-wc2bc:: ds 1
-wc2bd:: ds 1
-wc2be:: ds 1
-wc2bf:: ds 1
-wc2c0:: ds 1
-wc2c1:: ds 1
-wc2c2:: ds 1
-wc2c3:: ds 1
-wc2c4:: ds 1
-wc2c5:: ds 1
-wc2c6:: ds 1
-wc2c7:: ds 1
-wc2c8:: ds 1
-wc2c9:: ds 1
-wc2ca:: ds 1
-wc2cb:: ds 1
-wc2cc:: ds 1
-wc2cd:: ds 1
-wc2ce:: ds 1
-wc2cf:: ds 1
-wc2d0:: ds 1
-wc2d1:: ds 1
-wc2d2:: ds 1
-wc2d3:: ds 1
-wc2d4:: ds 1
-wc2d5:: ds 1
-wc2d6:: ds 1
-wc2d7:: ds 1
-wc2d8:: ds 1
-wc2d9:: ds 1
-wc2da:: ds 1
-wc2db:: ds 1
-wc2dc:: ds 1
-wc2dd:: ds 1
-wc2de:: ds 1
-wc2df:: ds 1
-wc2e0:: ds 1
-wc2e1:: ds 1
-wc2e2:: ds 1
-wc2e3:: ds 1
-wc2e4:: ds 1
-wc2e5:: ds 1
-wc2e6:: ds 1
-wc2e7:: ds 1
-wc2e8:: ds 1
-wc2e9:: ds 1
-wc2ea:: ds 1
-wc2eb:: ds 1
-wc2ec:: ds 1
-wc2ed:: ds 1
-wc2ee:: ds 1
-wc2ef:: ds 1
-wc2f0:: ds 1
-wc2f1:: ds 1
-wc2f2:: ds 1
-wc2f3:: ds 1
-wc2f4:: ds 1
-wc2f5:: ds 1
-wc2f6:: ds 1
-wc2f7:: ds 1
-wc2f8:: ds 1
-wc2f9:: ds 1
-wc2fa:: ds 1
-wc2fb:: ds 1
-wc2fc:: ds 1
-wc2fd:: ds 1
-wc2fe:: ds 1
-wc2ff:: ds 1
-wc300:: ds 1
-wc301:: ds 1
-wc302:: ds 1
-wc303:: ds 1
-wc304:: ds 1
-wc305:: ds 1
-wc306:: ds 1
-wc307:: ds 1
-wc308:: ds 1
-wc309:: ds 1
-wc30a:: ds 1
-wc30b:: ds 1
-wc30c:: ds 1
-wc30d:: ds 1
-wc30e:: ds 1
-wc30f:: ds 1
-wc310:: ds 1
-wc311:: ds 1
-wc312:: ds 1
-wc313:: ds 1
-wc314:: ds 1
-wc315:: ds 1
-wc316:: ds 1
-wc317:: ds 1
-wc318:: ds 1
-wc319:: ds 1
-wc31a:: ds 1
-wc31b:: ds 1
-wc31c:: ds 1
-wc31d:: ds 1
-wc31e:: ds 1
-wc31f:: ds 1
-wc320:: ds 1
-wc321:: ds 1
-wc322:: ds 1
-wc323:: ds 1
-wc324:: ds 1
-wc325:: ds 1
-wc326:: ds 1
-wc327:: ds 1
-wc328:: ds 1
-wc329:: ds 1
-wc32a:: ds 1
-wc32b:: ds 1
-wc32c:: ds 1
-wc32d:: ds 1
-wc32e:: ds 1
-wc32f:: ds 1
-wc330:: ds 1
-wc331:: ds 1
-wc332:: ds 1
-wc333:: ds 1
-wc334:: ds 1
-wc335:: ds 1
-wc336:: ds 1
-wc337:: ds 1
-wc338:: ds 1
-wc339:: ds 1
-wc33a:: ds 1
-wc33b:: ds 1
-wc33c:: ds 1
-wc33d:: ds 1
-wc33e:: ds 1
-wc33f:: ds 1
-wc340:: ds 1
-wc341:: ds 1
-wc342:: ds 1
-wc343:: ds 1
-wc344:: ds 1
-wc345:: ds 1
-wc346:: ds 1
-wc347:: ds 1
-wc348:: ds 1
-wc349:: ds 1
-wc34a:: ds 1
-wc34b:: ds 1
-wc34c:: ds 1
-wc34d:: ds 1
-wc34e:: ds 1
-wc34f:: ds 1
-wc350:: ds 1
-wc351:: ds 1
-wc352:: ds 1
-wc353:: ds 1
-wc354:: ds 1
-wc355:: ds 1
-wc356:: ds 1
-wc357:: ds 1
-wc358:: ds 1
-wc359:: ds 1
-wc35a:: ds 1
-wc35b:: ds 1
-wc35c:: ds 1
-wc35d:: ds 1
-wc35e:: ds 1
-wc35f:: ds 1
-wc360:: ds 1
-wc361:: ds 1
-wc362:: ds 1
-wc363:: ds 1
-wc364:: ds 1
-wc365:: ds 1
-wc366:: ds 1
-wc367:: ds 1
-wc368:: ds 1
-wc369:: ds 1
-wc36a:: ds 1
-wc36b:: ds 1
-wc36c:: ds 1
-wc36d:: ds 1
-wc36e:: ds 1
-wc36f:: ds 1
-wc370:: ds 1
-wc371:: ds 1
-wc372:: ds 1
-wc373:: ds 1
-wc374:: ds 1
-wc375:: ds 1
-wc376:: ds 1
-wc377:: ds 1
-wc378:: ds 1
-wc379:: ds 1
-wc37a:: ds 1
-wc37b:: ds 1
-wc37c:: ds 1
-wc37d:: ds 1
-wc37e:: ds 1
-wc37f:: ds 1
-wc380:: ds 1
-wc381:: ds 1
-wc382:: ds 1
-wc383:: ds 1
-wc384:: ds 1
-wc385:: ds 1
-wc386:: ds 1
-wc387:: ds 1
-wc388:: ds 1
-wc389:: ds 1
-wc38a:: ds 1
-wc38b:: ds 1
-wc38c:: ds 1
-wc38d:: ds 1
-wc38e:: ds 1
-wc38f:: ds 1
-wc390:: ds 1
-wc391:: ds 1
-wc392:: ds 1
-wc393:: ds 1
-wc394:: ds 1
-wc395:: ds 1
-wc396:: ds 1
-wc397:: ds 1
-wc398:: ds 1
-wc399:: ds 1
-wc39a:: ds 1
-wc39b:: ds 1
-wc39c:: ds 1
-wc39d:: ds 1
-wc39e:: ds 1
-wc39f:: ds 1
-wc3a0:: ds 1
-wc3a1:: ds 1
-wc3a2:: ds 1
-wc3a3:: ds 1
-wc3a4:: ds 1
-wc3a5:: ds 1
-wc3a6:: ds 1
-wc3a7:: ds 1
-wc3a8:: ds 1
-wc3a9:: ds 1
-wc3aa:: ds 1
-wc3ab:: ds 1
-wc3ac:: ds 1
-wc3ad:: ds 1
-wc3ae:: ds 1
-wc3af:: ds 1
-wc3b0:: ds 1
-wc3b1:: ds 1
-wc3b2:: ds 1
-wc3b3:: ds 1
-wc3b4:: ds 1
-wc3b5:: ds 1
-wc3b6:: ds 1
-wc3b7:: ds 1
-wc3b8:: ds 1
-wc3b9:: ds 1
-wc3ba:: ds 1
-wc3bb:: ds 1
-wc3bc:: ds 1
-wc3bd:: ds 1
-wc3be:: ds 1
-wc3bf:: ds 1
-wc3c0:: ds 1
-wc3c1:: ds 1
-wc3c2:: ds 1
-wc3c3:: ds 1
-wc3c4:: ds 1
-wc3c5:: ds 1
-wc3c6:: ds 1
-wc3c7:: ds 1
-wc3c8:: ds 1
-wc3c9:: ds 1
-wc3ca:: ds 1
-wc3cb:: ds 1
-wc3cc:: ds 1
-wc3cd:: ds 1
-wc3ce:: ds 1
-wc3cf:: ds 1
-wc3d0:: ds 1
-wc3d1:: ds 1
-wc3d2:: ds 1
-wc3d3:: ds 1
-wc3d4:: ds 1
-wc3d5:: ds 1
-wc3d6:: ds 1
-wc3d7:: ds 1
-wc3d8:: ds 1
-wc3d9:: ds 1
-wc3da:: ds 1
-wc3db:: ds 1
-wc3dc:: ds 1
-wc3dd:: ds 1
-wc3de:: ds 1
-wc3df:: ds 1
-wc3e0:: ds 1
-wc3e1:: ds 1
-wc3e2:: ds 1
-wc3e3:: ds 1
-wc3e4:: ds 1
-wc3e5:: ds 1
-wc3e6:: ds 1
-wc3e7:: ds 1
-wc3e8:: ds 1
-wc3e9:: ds 1
-wc3ea:: ds 1
-wc3eb:: ds 1
-wc3ec:: ds 1
-wc3ed:: ds 1
-wc3ee:: ds 1
-wc3ef:: ds 1
-wc3f0:: ds 1
-wc3f1:: ds 1
-wc3f2:: ds 1
-wc3f3:: ds 1
-wc3f4:: ds 1
-wc3f5:: ds 1
-wc3f6:: ds 1
-wc3f7:: ds 1
-wc3f8:: ds 1
-wc3f9:: ds 1
-wc3fa:: ds 1
-wc3fb:: ds 1
-wc3fc:: ds 1
-wc3fd:: ds 1
-wc3fe:: ds 1
-wc3ff:: ds 1
-wc400:: ds 1
-wc401:: ds 1
-wc402:: ds 1
-wc403:: ds 1
-wc404:: ds 1
-wc405:: ds 1
-wc406:: ds 1
-wc407:: ds 1
-wc408:: ds 1
-wc409:: ds 1
-wc40a:: ds 1
-wc40b:: ds 1
-wc40c:: ds 1
-wc40d:: ds 1
-wc40e:: ds 1
-wc40f:: ds 1
-wc410:: ds 1
-wc411:: ds 1
-wc412:: ds 1
-wc413:: ds 1
-wc414:: ds 1
-wc415:: ds 1
-wc416:: ds 1
-wc417:: ds 1
-wc418:: ds 1
-wc419:: ds 1
-wc41a:: ds 1
-wc41b:: ds 1
-wc41c:: ds 1
-wc41d:: ds 1
-wc41e:: ds 1
-wc41f:: ds 1
-wc420:: ds 1
-wc421:: ds 1
-wc422:: ds 1
-wc423:: ds 1
-wc424:: ds 1
-wc425:: ds 1
-wc426:: ds 1
-wc427:: ds 1
-wc428:: ds 1
-wc429:: ds 1
-wc42a:: ds 1
-wc42b:: ds 1
-wc42c:: ds 1
-wc42d:: ds 1
-wc42e:: ds 1
-wc42f:: ds 1
-wc430:: ds 1
-wc431:: ds 1
-wc432:: ds 1
-wc433:: ds 1
-wc434:: ds 1
-wc435:: ds 1
-wc436:: ds 1
-wc437:: ds 1
-wc438:: ds 1
-wc439:: ds 1
-wc43a:: ds 1
-wc43b:: ds 1
-wc43c:: ds 1
-wc43d:: ds 1
-wc43e:: ds 1
-wc43f:: ds 1
-wc440:: ds 1
-wc441:: ds 1
-wc442:: ds 1
-wc443:: ds 1
-wc444:: ds 1
-wc445:: ds 1
-wc446:: ds 1
-wc447:: ds 1
-wc448:: ds 1
-wc449:: ds 1
-wc44a:: ds 1
-wc44b:: ds 1
-wc44c:: ds 1
-wc44d:: ds 1
-wc44e:: ds 1
-wc44f:: ds 1
-wc450:: ds 1
-wc451:: ds 1
-wc452:: ds 1
-wc453:: ds 1
-wc454:: ds 1
-wc455:: ds 1
-wc456:: ds 1
-wc457:: ds 1
-wc458:: ds 1
-wc459:: ds 1
-wc45a:: ds 1
-wc45b:: ds 1
-wc45c:: ds 1
-wc45d:: ds 1
-wc45e:: ds 1
-wc45f:: ds 1
-wc460:: ds 1
-wc461:: ds 1
-wc462:: ds 1
-wc463:: ds 1
-wc464:: ds 1
-wc465:: ds 1
-wc466:: ds 1
-wc467:: ds 1
-wc468:: ds 1
-wc469:: ds 1
-wc46a:: ds 1
-wc46b:: ds 1
-wc46c:: ds 1
-wc46d:: ds 1
-wc46e:: ds 1
-wc46f:: ds 1
-wc470:: ds 1
-wc471:: ds 1
-wc472:: ds 1
-wc473:: ds 1
-wc474:: ds 1
-wc475:: ds 1
-wc476:: ds 1
-wc477:: ds 1
-wc478:: ds 1
-wc479:: ds 1
-wc47a:: ds 1
-wc47b:: ds 1
-wc47c:: ds 1
-wc47d:: ds 1
-wc47e:: ds 1
-wc47f:: ds 1
-wc480:: ds 1
-wc481:: ds 1
-wc482:: ds 1
-wc483:: ds 1
-wc484:: ds 1
-wc485:: ds 1
-wc486:: ds 1
-wc487:: ds 1
-wc488:: ds 1
-wc489:: ds 1
-wc48a:: ds 1
-wc48b:: ds 1
-wc48c:: ds 1
-wc48d:: ds 1
-wc48e:: ds 1
-wc48f:: ds 1
-wc490:: ds 1
-wc491:: ds 1
-wc492:: ds 1
-wc493:: ds 1
-wc494:: ds 1
-wc495:: ds 1
-wc496:: ds 1
-wc497:: ds 1
-wc498:: ds 1
-wc499:: ds 1
-wc49a:: ds 1
-wc49b:: ds 1
-wc49c:: ds 1
-wc49d:: ds 1
-wc49e:: ds 1
-wc49f:: ds 1
-wc4a0:: ds 1
-wc4a1:: ds 1
-wc4a2:: ds 1
-wc4a3:: ds 1
-wc4a4:: ds 1
-wc4a5:: ds 1
-wc4a6:: ds 1
-wc4a7:: ds 1
-wc4a8:: ds 1
-wc4a9:: ds 1
-wc4aa:: ds 1
-wc4ab:: ds 1
-wc4ac:: ds 1
-wc4ad:: ds 1
-wc4ae:: ds 1
-wc4af:: ds 1
-wc4b0:: ds 1
-wc4b1:: ds 1
-wc4b2:: ds 1
-wc4b3:: ds 1
-wc4b4:: ds 1
-wc4b5:: ds 1
-wc4b6:: ds 1
-wc4b7:: ds 1
-wc4b8:: ds 1
-wc4b9:: ds 1
-wc4ba:: ds 1
-wc4bb:: ds 1
-wc4bc:: ds 1
-wc4bd:: ds 1
-wc4be:: ds 1
-wc4bf:: ds 1
-wc4c0:: ds 1
-wc4c1:: ds 1
-wc4c2:: ds 1
-wc4c3:: ds 1
-wc4c4:: ds 1
-wc4c5:: ds 1
-wc4c6:: ds 1
-wc4c7:: ds 1
-wc4c8:: ds 1
-wc4c9:: ds 1
-wc4ca:: ds 1
-wc4cb:: ds 1
-wc4cc:: ds 1
-wc4cd:: ds 1
-wc4ce:: ds 1
-wc4cf:: ds 1
-wc4d0:: ds 1
-wc4d1:: ds 1
-wc4d2:: ds 1
-wc4d3:: ds 1
-wc4d4:: ds 1
-wc4d5:: ds 1
-wc4d6:: ds 1
-wc4d7:: ds 1
-wc4d8:: ds 1
-wc4d9:: ds 1
-wc4da:: ds 1
-wc4db:: ds 1
-wc4dc:: ds 1
-wc4dd:: ds 1
-wc4de:: ds 1
-wc4df:: ds 1
-wc4e0:: ds 1
-wc4e1:: ds 1
-wc4e2:: ds 1
-wc4e3:: ds 1
-wc4e4:: ds 1
-wc4e5:: ds 1
-wc4e6:: ds 1
-wc4e7:: ds 1
-wc4e8:: ds 1
-wc4e9:: ds 1
-wc4ea:: ds 1
-wc4eb:: ds 1
-wc4ec:: ds 1
-wc4ed:: ds 1
-wc4ee:: ds 1
-wc4ef:: ds 1
-wc4f0:: ds 1
-wc4f1:: ds 1
-wc4f2:: ds 1
-wc4f3:: ds 1
-wc4f4:: ds 1
-wc4f5:: ds 1
-wc4f6:: ds 1
-wc4f7:: ds 1
-wc4f8:: ds 1
-wc4f9:: ds 1
-wc4fa:: ds 1
-wc4fb:: ds 1
-wc4fc:: ds 1
-wc4fd:: ds 1
-wc4fe:: ds 1
-wc4ff:: ds 1
-wc500:: ds 1
-wc501:: ds 1
-wc502:: ds 1
-wc503:: ds 1
-wc504:: ds 1
-wc505:: ds 1
-wc506:: ds 1
-wc507:: ds 1
-wc508:: ds 1
-wc509:: ds 1
-wc50a:: ds 1
-wc50b:: ds 1
-wc50c:: ds 1
-wc50d:: ds 1
-wc50e:: ds 1
-wc50f:: ds 1
-wc510:: ds 1
-wc511:: ds 1
-wc512:: ds 1
-wc513:: ds 1
-wc514:: ds 1
-wc515:: ds 1
-wc516:: ds 1
-wc517:: ds 1
-wc518:: ds 1
-wc519:: ds 1
-wc51a:: ds 1
-wc51b:: ds 1
-wc51c:: ds 1
-wc51d:: ds 1
-wc51e:: ds 1
-wc51f:: ds 1
-wc520:: ds 1
-wc521:: ds 1
-wc522:: ds 1
-wc523:: ds 1
-wc524:: ds 1
-wc525:: ds 1
-wc526:: ds 1
-wc527:: ds 1
-wc528:: ds 1
-wc529:: ds 1
-wc52a:: ds 1
-wc52b:: ds 1
-wc52c:: ds 1
-wc52d:: ds 1
-wc52e:: ds 1
-wc52f:: ds 1
-wc530:: ds 1
-wc531:: ds 1
-wc532:: ds 1
-wc533:: ds 1
-wc534:: ds 1
-wc535:: ds 1
-wc536:: ds 1
-wc537:: ds 1
-wc538:: ds 1
-wc539:: ds 1
-wc53a:: ds 1
-wc53b:: ds 1
-wc53c:: ds 1
-wc53d:: ds 1
-wc53e:: ds 1
-wc53f:: ds 1
-wc540:: ds 1
-wc541:: ds 1
-wc542:: ds 1
-wc543:: ds 1
-wc544:: ds 1
-wc545:: ds 1
-wc546:: ds 1
-wc547:: ds 1
-wc548:: ds 1
-wc549:: ds 1
-wc54a:: ds 1
-wc54b:: ds 1
-wc54c:: ds 1
-wc54d:: ds 1
-wc54e:: ds 1
-wc54f:: ds 1
-wc550:: ds 1
-wc551:: ds 1
-wc552:: ds 1
-wc553:: ds 1
-wc554:: ds 1
-wc555:: ds 1
-wc556:: ds 1
-wc557:: ds 1
-wc558:: ds 1
-wc559:: ds 1
-wc55a:: ds 1
-wc55b:: ds 1
-wc55c:: ds 1
-wc55d:: ds 1
-wc55e:: ds 1
-wc55f:: ds 1
-wc560:: ds 1
-wc561:: ds 1
-wc562:: ds 1
-wc563:: ds 1
-wc564:: ds 1
-wc565:: ds 1
-wc566:: ds 1
-wc567:: ds 1
-wc568:: ds 1
-wc569:: ds 1
-wc56a:: ds 1
-wc56b:: ds 1
-wc56c:: ds 1
-wc56d:: ds 1
-wc56e:: ds 1
-wc56f:: ds 1
-wc570:: ds 1
-wc571:: ds 1
-wc572:: ds 1
-wc573:: ds 1
-wc574:: ds 1
-wc575:: ds 1
-wc576:: ds 1
-wc577:: ds 1
-wc578:: ds 1
-wc579:: ds 1
-wc57a:: ds 1
-wc57b:: ds 1
-wc57c:: ds 1
-wc57d:: ds 1
-wc57e:: ds 1
-wc57f:: ds 1
-wc580:: ds 1
-wc581:: ds 1
-wc582:: ds 1
-wc583:: ds 1
-wc584:: ds 1
-wc585:: ds 1
-wc586:: ds 1
-wc587:: ds 1
-wc588:: ds 1
-wc589:: ds 1
-wc58a:: ds 1
-wc58b:: ds 1
-wc58c:: ds 1
-wc58d:: ds 1
-wc58e:: ds 1
-wc58f:: ds 1
-wc590:: ds 1
-wc591:: ds 1
-wc592:: ds 1
-wc593:: ds 1
-wc594:: ds 1
-wc595:: ds 1
-wc596:: ds 1
-wc597:: ds 1
-wc598:: ds 1
-wc599:: ds 1
-wc59a:: ds 1
-wc59b:: ds 1
-wc59c:: ds 1
-wc59d:: ds 1
-wc59e:: ds 1
-wc59f:: ds 1
-wc5a0:: ds 1
-wc5a1:: ds 1
-wc5a2:: ds 1
-wc5a3:: ds 1
-wc5a4:: ds 1
-wc5a5:: ds 1
-wc5a6:: ds 1
-wc5a7:: ds 1
-wc5a8:: ds 1
-wc5a9:: ds 1
-wc5aa:: ds 1
-wc5ab:: ds 1
-wc5ac:: ds 1
-wc5ad:: ds 1
-wc5ae:: ds 1
-wc5af:: ds 1
-wc5b0:: ds 1
-wc5b1:: ds 1
-wc5b2:: ds 1
-wc5b3:: ds 1
-wc5b4:: ds 1
-wc5b5:: ds 1
-wc5b6:: ds 1
-wc5b7:: ds 1
-wc5b8:: ds 1
-wc5b9:: ds 1
-wc5ba:: ds 1
-wc5bb:: ds 1
-wc5bc:: ds 1
-wc5bd:: ds 1
-wc5be:: ds 1
-wc5bf:: ds 1
-wc5c0:: ds 1
-wc5c1:: ds 1
-wc5c2:: ds 1
-wc5c3:: ds 1
-wc5c4:: ds 1
-wc5c5:: ds 1
-wc5c6:: ds 1
-wc5c7:: ds 1
-wc5c8:: ds 1
-wc5c9:: ds 1
-wc5ca:: ds 1
-wc5cb:: ds 1
-wc5cc:: ds 1
-wc5cd:: ds 1
-wc5ce:: ds 1
-wc5cf:: ds 1
-wc5d0:: ds 1
-wc5d1:: ds 1
-wc5d2:: ds 1
-wc5d3:: ds 1
-wc5d4:: ds 1
-wc5d5:: ds 1
-wc5d6:: ds 1
-wc5d7:: ds 1
-wc5d8:: ds 1
-wc5d9:: ds 1
-wc5da:: ds 1
-wc5db:: ds 1
-wc5dc:: ds 1
-wc5dd:: ds 1
-wc5de:: ds 1
-wc5df:: ds 1
-wc5e0:: ds 1
-wc5e1:: ds 1
-wc5e2:: ds 1
-wc5e3:: ds 1
-wc5e4:: ds 1
-wc5e5:: ds 1
-wc5e6:: ds 1
-wc5e7:: ds 1
-wc5e8:: ds 1
-wc5e9:: ds 1
-wc5ea:: ds 1
-wc5eb:: ds 1
-wc5ec:: ds 1
-wc5ed:: ds 1
-wc5ee:: ds 1
-wc5ef:: ds 1
-wc5f0:: ds 1
-wc5f1:: ds 1
-wc5f2:: ds 1
-wc5f3:: ds 1
-wc5f4:: ds 1
-wc5f5:: ds 1
-wc5f6:: ds 1
-wc5f7:: ds 1
-wc5f8:: ds 1
-wc5f9:: ds 1
-wc5fa:: ds 1
-wc5fb:: ds 1
-wc5fc:: ds 1
-wc5fd:: ds 1
-wc5fe:: ds 1
-wc5ff:: ds 1
-wc600:: ds 1
-wc601:: ds 1
-wc602:: ds 1
-wc603:: ds 1
-wc604:: ds 1
-wc605:: ds 1
-wc606:: ds 1
-wc607:: ds 1
-wc608:: ds 1
-wc609:: ds 1
-wc60a:: ds 1
-wc60b:: ds 1
-wc60c:: ds 1
-wc60d:: ds 1
-wc60e:: ds 1
-wc60f:: ds 1
-wc610:: ds 1
-wc611:: ds 1
-wc612:: ds 1
-wc613:: ds 1
-wc614:: ds 1
-wc615:: ds 1
-wc616:: ds 1
-wc617:: ds 1
-wc618:: ds 1
-wc619:: ds 1
-wc61a:: ds 1
-wc61b:: ds 1
-wc61c:: ds 1
-wc61d:: ds 1
-wc61e:: ds 1
-wc61f:: ds 1
-wc620:: ds 1
-wc621:: ds 1
-wc622:: ds 1
-wc623:: ds 1
-wc624:: ds 1
-wc625:: ds 1
-wc626:: ds 1
-wc627:: ds 1
-wc628:: ds 1
-wc629:: ds 1
-wc62a:: ds 1
-wc62b:: ds 1
-wc62c:: ds 1
-wc62d:: ds 1
-wc62e:: ds 1
-wc62f:: ds 1
-wc630:: ds 1
-wc631:: ds 1
-wc632:: ds 1
-wc633:: ds 1
-wc634:: ds 1
-wc635:: ds 1
-wc636:: ds 1
-wc637:: ds 1
-wc638:: ds 1
-wc639:: ds 1
-wc63a:: ds 1
-wc63b:: ds 1
-wc63c:: ds 1
-wc63d:: ds 1
-wc63e:: ds 1
-wc63f:: ds 1
-wc640:: ds 1
-wc641:: ds 1
-wc642:: ds 1
-wc643:: ds 1
-wc644:: ds 1
-wc645:: ds 1
-wc646:: ds 1
-wc647:: ds 1
-wc648:: ds 1
-wc649:: ds 1
-wc64a:: ds 1
-wc64b:: ds 1
-wc64c:: ds 1
-wc64d:: ds 1
-wc64e:: ds 1
-wc64f:: ds 1
-wc650:: ds 1
-wc651:: ds 1
-wc652:: ds 1
-wc653:: ds 1
-wc654:: ds 1
-wc655:: ds 1
-wc656:: ds 1
-wc657:: ds 1
-wc658:: ds 1
-wc659:: ds 1
-wc65a:: ds 1
-wc65b:: ds 1
-wc65c:: ds 1
-wc65d:: ds 1
-wc65e:: ds 1
-wc65f:: ds 1
-wc660:: ds 1
-wc661:: ds 1
-wc662:: ds 1
-wc663:: ds 1
-wc664:: ds 1
-wc665:: ds 1
-wc666:: ds 1
-wc667:: ds 1
-wc668:: ds 1
-wc669:: ds 1
-wc66a:: ds 1
-wc66b:: ds 1
-wc66c:: ds 1
-wc66d:: ds 1
-wc66e:: ds 1
-wc66f:: ds 1
-wc670:: ds 1
-wc671:: ds 1
-wc672:: ds 1
-wc673:: ds 1
-wc674:: ds 1
-wc675:: ds 1
-wc676:: ds 1
-wc677:: ds 1
-wc678:: ds 1
-wc679:: ds 1
-wc67a:: ds 1
-wc67b:: ds 1
-wc67c:: ds 1
-wc67d:: ds 1
-wc67e:: ds 1
-wc67f:: ds 1
-wc680:: ds 1
-wc681:: ds 1
-wc682:: ds 1
-wc683:: ds 1
-wc684:: ds 1
-wc685:: ds 1
-wc686:: ds 1
-wc687:: ds 1
-wc688:: ds 1
-wc689:: ds 1
-wc68a:: ds 1
-wc68b:: ds 1
-wc68c:: ds 1
-wc68d:: ds 1
-wc68e:: ds 1
-wc68f:: ds 1
-wc690:: ds 1
-wc691:: ds 1
-wc692:: ds 1
-wc693:: ds 1
-wc694:: ds 1
-wc695:: ds 1
-wc696:: ds 1
-wc697:: ds 1
-wc698:: ds 1
-wc699:: ds 1
-wc69a:: ds 1
-wc69b:: ds 1
-wc69c:: ds 1
-wc69d:: ds 1
-wc69e:: ds 1
-wc69f:: ds 1
-wc6a0:: ds 1
-wc6a1:: ds 1
-wc6a2:: ds 1
-wc6a3:: ds 1
-wc6a4:: ds 1
-wc6a5:: ds 1
-wc6a6:: ds 1
-wc6a7:: ds 1
-wc6a8:: ds 1
-wc6a9:: ds 1
-wc6aa:: ds 1
-wc6ab:: ds 1
-wc6ac:: ds 1
-wc6ad:: ds 1
-wc6ae:: ds 1
-wc6af:: ds 1
-wc6b0:: ds 1
-wc6b1:: ds 1
-wc6b2:: ds 1
-wc6b3:: ds 1
-wc6b4:: ds 1
-wc6b5:: ds 1
-wc6b6:: ds 1
-wc6b7:: ds 1
-wc6b8:: ds 1
-wc6b9:: ds 1
-wc6ba:: ds 1
-wc6bb:: ds 1
-wc6bc:: ds 1
-wc6bd:: ds 1
-wc6be:: ds 1
-wc6bf:: ds 1
-wc6c0:: ds 1
-wc6c1:: ds 1
-wc6c2:: ds 1
-wc6c3:: ds 1
-wc6c4:: ds 1
-wc6c5:: ds 1
-wc6c6:: ds 1
-wc6c7:: ds 1
-wc6c8:: ds 1
-wc6c9:: ds 1
-wc6ca:: ds 1
-wc6cb:: ds 1
-wc6cc:: ds 1
-wc6cd:: ds 1
-wc6ce:: ds 1
-wc6cf:: ds 1
-wc6d0:: ds 1
-wc6d1:: ds 1
-wc6d2:: ds 1
-wc6d3:: ds 1
-wc6d4:: ds 1
-wc6d5:: ds 1
-wc6d6:: ds 1
-wc6d7:: ds 1
-wc6d8:: ds 1
-wc6d9:: ds 1
-wc6da:: ds 1
-wc6db:: ds 1
-wc6dc:: ds 1
-wc6dd:: ds 1
-wc6de:: ds 1
-wc6df:: ds 1
-wc6e0:: ds 1
-wc6e1:: ds 1
-wc6e2:: ds 1
-wc6e3:: ds 1
-wc6e4:: ds 1
-wc6e5:: ds 1
-wc6e6:: ds 1
-wc6e7:: ds 1
-wc6e8:: ds 1
-wc6e9:: ds 1
-wc6ea:: ds 1
-wc6eb:: ds 1
-wc6ec:: ds 1
-wc6ed:: ds 1
-wc6ee:: ds 1
-wc6ef:: ds 1
-wc6f0:: ds 1
-wc6f1:: ds 1
-wc6f2:: ds 1
-wc6f3:: ds 1
-wc6f4:: ds 1
-wc6f5:: ds 1
-wc6f6:: ds 1
-wc6f7:: ds 1
-wc6f8:: ds 1
-wc6f9:: ds 1
-wc6fa:: ds 1
-wc6fb:: ds 1
-wc6fc:: ds 1
-wc6fd:: ds 1
-wc6fe:: ds 1
-wc6ff:: ds 1
+wc1d4:: ds 1 ; c1d4
+wc1d5:: ds 1 ; c1d5
+wc1d6:: ds 1 ; c1d6
+wc1d7:: ds 1 ; c1d7
+wc1d8:: ds 1 ; c1d8
+wc1d9:: ds 1 ; c1d9
+wc1da:: ds 1 ; c1da
+wc1db:: ds 1 ; c1db
+wc1dc:: ds 1 ; c1dc
+wc1dd:: ds 1 ; c1dd
+wc1de:: ds 1 ; c1de
+wc1df:: ds 1 ; c1df
+wc1e0:: ds 1 ; c1e0
+wc1e1:: ds 1 ; c1e1
+wc1e2:: ds 1 ; c1e2
+wc1e3:: ds 1 ; c1e3
+wc1e4:: ds 1 ; c1e4
+wc1e5:: ds 1 ; c1e5
+wc1e6:: ds 1 ; c1e6
+wc1e7:: ds 1 ; c1e7
+wc1e8:: ds 1 ; c1e8
+wc1e9:: ds 1 ; c1e9
+wc1ea:: ds 1 ; c1ea
+wc1eb:: ds 1 ; c1eb
+wc1ec:: ds 1 ; c1ec
+wc1ed:: ds 1 ; c1ed
+wc1ee:: ds 1 ; c1ee
+wc1ef:: ds 1 ; c1ef
+wc1f0:: ds 1 ; c1f0
+wc1f1:: ds 1 ; c1f1
+wc1f2:: ds 1 ; c1f2
+wc1f3:: ds 1 ; c1f3
+wc1f4:: ds 1 ; c1f4
+wc1f5:: ds 1 ; c1f5
+wc1f6:: ds 1 ; c1f6
+wc1f7:: ds 1 ; c1f7
+wc1f8:: ds 1 ; c1f8
+wc1f9:: ds 1 ; c1f9
+wc1fa:: ds 1 ; c1fa
+wc1fb:: ds 1 ; c1fb
+wc1fc:: ds 1 ; c1fc
+wc1fd:: ds 1 ; c1fd
+wc1fe:: ds 1 ; c1fe
+wc1ff:: ds 1 ; c1ff
+wc200:: ds 1 ; c200
+wc201:: ds 1 ; c201
+wc202:: ds 1 ; c202
+wc203:: ds 1 ; c203
+wc204:: ds 1 ; c204
+wc205:: ds 1 ; c205
+wc206:: ds 1 ; c206
+wc207:: ds 1 ; c207
+wc208:: ds 1 ; c208
+wc209:: ds 1 ; c209
+wc20a:: ds 1 ; c20a
+wc20b:: ds 1 ; c20b
+wc20c:: ds 1 ; c20c
+wc20d:: ds 1 ; c20d
+wc20e:: ds 1 ; c20e
+wc20f:: ds 1 ; c20f
+wc210:: ds 1 ; c210
+wc211:: ds 1 ; c211
+wc212:: ds 1 ; c212
+wc213:: ds 1 ; c213
+wc214:: ds 1 ; c214
+wc215:: ds 1 ; c215
+wc216:: ds 1 ; c216
+wc217:: ds 1 ; c217
+wc218:: ds 1 ; c218
+wc219:: ds 1 ; c219
+wc21a:: ds 1 ; c21a
+wc21b:: ds 1 ; c21b
+wc21c:: ds 1 ; c21c
+wc21d:: ds 1 ; c21d
+wc21e:: ds 1 ; c21e
+wc21f:: ds 1 ; c21f
+wc220:: ds 1 ; c220
+wc221:: ds 1 ; c221
+wc222:: ds 1 ; c222
+wc223:: ds 1 ; c223
+wc224:: ds 1 ; c224
+wc225:: ds 1 ; c225
+wc226:: ds 1 ; c226
+wc227:: ds 1 ; c227
+wc228:: ds 1 ; c228
+wc229:: ds 1 ; c229
+wc22a:: ds 1 ; c22a
+wc22b:: ds 1 ; c22b
+wc22c:: ds 1 ; c22c
+wc22d:: ds 1 ; c22d
+wc22e:: ds 1 ; c22e
+wc22f:: ds 1 ; c22f
+wc230:: ds 1 ; c230
+wc231:: ds 1 ; c231
+wc232:: ds 1 ; c232
+wc233:: ds 1 ; c233
+wc234:: ds 1 ; c234
+wc235:: ds 1 ; c235
+wc236:: ds 1 ; c236
+wc237:: ds 1 ; c237
+wc238:: ds 1 ; c238
+wc239:: ds 1 ; c239
+wc23a:: ds 1 ; c23a
+wc23b:: ds 1 ; c23b
+wc23c:: ds 1 ; c23c
+wc23d:: ds 1 ; c23d
+wc23e:: ds 1 ; c23e
+wc23f:: ds 1 ; c23f
+wc240:: ds 1 ; c240
+wc241:: ds 1 ; c241
+wc242:: ds 1 ; c242
+wc243:: ds 1 ; c243
+wc244:: ds 1 ; c244
+wc245:: ds 1 ; c245
+wc246:: ds 1 ; c246
+wc247:: ds 1 ; c247
+wc248:: ds 1 ; c248
+wc249:: ds 1 ; c249
+wc24a:: ds 1 ; c24a
+wc24b:: ds 1 ; c24b
+wc24c:: ds 1 ; c24c
+wc24d:: ds 1 ; c24d
+wc24e:: ds 1 ; c24e
+wc24f:: ds 1 ; c24f
+wc250:: ds 1 ; c250
+wc251:: ds 1 ; c251
+wc252:: ds 1 ; c252
+wc253:: ds 1 ; c253
+wc254:: ds 1 ; c254
+wc255:: ds 1 ; c255
+wc256:: ds 1 ; c256
+wc257:: ds 1 ; c257
+wc258:: ds 1 ; c258
+wc259:: ds 1 ; c259
+wc25a:: ds 1 ; c25a
+wc25b:: ds 1 ; c25b
+wc25c:: ds 1 ; c25c
+wc25d:: ds 1 ; c25d
+wc25e:: ds 1 ; c25e
+wc25f:: ds 1 ; c25f
+wc260:: ds 1 ; c260
+wc261:: ds 1 ; c261
+wc262:: ds 1 ; c262
+wc263:: ds 1 ; c263
+wc264:: ds 1 ; c264
+wc265:: ds 1 ; c265
+wc266:: ds 1 ; c266
+wc267:: ds 1 ; c267
+wc268:: ds 1 ; c268
+wc269:: ds 1 ; c269
+wc26a:: ds 1 ; c26a
+wc26b:: ds 1 ; c26b
+wc26c:: ds 1 ; c26c
+wc26d:: ds 1 ; c26d
+wc26e:: ds 1 ; c26e
+wc26f:: ds 1 ; c26f
+wc270:: ds 1 ; c270
+wc271:: ds 1 ; c271
+wc272:: ds 1 ; c272
+wc273:: ds 1 ; c273
+wc274:: ds 1 ; c274
+wc275:: ds 1 ; c275
+wc276:: ds 1 ; c276
+wc277:: ds 1 ; c277
+wc278:: ds 1 ; c278
+wc279:: ds 1 ; c279
+wc27a:: ds 1 ; c27a
+wc27b:: ds 1 ; c27b
+wc27c:: ds 1 ; c27c
+wc27d:: ds 1 ; c27d
+wc27e:: ds 1 ; c27e
+wc27f:: ds 1 ; c27f
+wc280:: ds 1 ; c280
+wc281:: ds 1 ; c281
+wc282:: ds 1 ; c282
+wc283:: ds 1 ; c283
+wc284:: ds 1 ; c284
+wc285:: ds 1 ; c285
+wc286:: ds 1 ; c286
+wc287:: ds 1 ; c287
+wc288:: ds 1 ; c288
+wc289:: ds 1 ; c289
+wc28a:: ds 1 ; c28a
+wc28b:: ds 1 ; c28b
+wc28c:: ds 1 ; c28c
+wc28d:: ds 1 ; c28d
+wc28e:: ds 1 ; c28e
+wc28f:: ds 1 ; c28f
+wc290:: ds 1 ; c290
+wc291:: ds 1 ; c291
+wc292:: ds 1 ; c292
+wc293:: ds 1 ; c293
+wc294:: ds 1 ; c294
+wc295:: ds 1 ; c295
+wc296:: ds 1 ; c296
+wc297:: ds 1 ; c297
+wc298:: ds 1 ; c298
+wc299:: ds 1 ; c299
+wc29a:: ds 1 ; c29a
+wc29b:: ds 1 ; c29b
+wc29c:: ds 1 ; c29c
+wc29d:: ds 1 ; c29d
+wc29e:: ds 1 ; c29e
+wc29f:: ds 1 ; c29f
+wc2a0:: ds 1 ; c2a0
+wc2a1:: ds 1 ; c2a1
+wc2a2:: ds 1 ; c2a2
+wc2a3:: ds 1 ; c2a3
+wc2a4:: ds 1 ; c2a4
+wc2a5:: ds 1 ; c2a5
+wc2a6:: ds 1 ; c2a6
+wc2a7:: ds 1 ; c2a7
+wc2a8:: ds 1 ; c2a8
+wc2a9:: ds 1 ; c2a9
+wc2aa:: ds 1 ; c2aa
+wc2ab:: ds 1 ; c2ab
+wc2ac:: ds 1 ; c2ac
+wc2ad:: ds 1 ; c2ad
+wc2ae:: ds 1 ; c2ae
+wc2af:: ds 1 ; c2af
+wc2b0:: ds 1 ; c2b0
+wc2b1:: ds 1 ; c2b1
+wc2b2:: ds 1 ; c2b2
+wc2b3:: ds 1 ; c2b3
+wc2b4:: ds 1 ; c2b4
+wc2b5:: ds 1 ; c2b5
+wc2b6:: ds 1 ; c2b6
+wc2b7:: ds 1 ; c2b7
+wc2b8:: ds 1 ; c2b8
+wc2b9:: ds 1 ; c2b9
+wc2ba:: ds 1 ; c2ba
+wc2bb:: ds 1 ; c2bb
+wc2bc:: ds 1 ; c2bc
+wc2bd:: ds 1 ; c2bd
+wc2be:: ds 1 ; c2be
+wc2bf:: ds 1 ; c2bf
+wc2c0:: ds 1 ; c2c0
+wc2c1:: ds 1 ; c2c1
+wc2c2:: ds 1 ; c2c2
+wc2c3:: ds 1 ; c2c3
+wc2c4:: ds 1 ; c2c4
+wc2c5:: ds 1 ; c2c5
+wc2c6:: ds 1 ; c2c6
+wc2c7:: ds 1 ; c2c7
+wc2c8:: ds 1 ; c2c8
+wc2c9:: ds 1 ; c2c9
+wc2ca:: ds 1 ; c2ca
+wc2cb:: ds 1 ; c2cb
+wc2cc:: ds 1 ; c2cc
+wc2cd:: ds 1 ; c2cd
+wc2ce:: ds 1 ; c2ce
+wc2cf:: ds 1 ; c2cf
+wc2d0:: ds 1 ; c2d0
+wc2d1:: ds 1 ; c2d1
+wc2d2:: ds 1 ; c2d2
+wc2d3:: ds 1 ; c2d3
+wc2d4:: ds 1 ; c2d4
+wc2d5:: ds 1 ; c2d5
+wc2d6:: ds 1 ; c2d6
+wc2d7:: ds 1 ; c2d7
+wc2d8:: ds 1 ; c2d8
+wc2d9:: ds 1 ; c2d9
+wc2da:: ds 1 ; c2da
+wc2db:: ds 1 ; c2db
+wc2dc:: ds 1 ; c2dc
+wc2dd:: ds 1 ; c2dd
+wc2de:: ds 1 ; c2de
+wc2df:: ds 1 ; c2df
+wc2e0:: ds 1 ; c2e0
+wc2e1:: ds 1 ; c2e1
+wc2e2:: ds 1 ; c2e2
+wc2e3:: ds 1 ; c2e3
+wc2e4:: ds 1 ; c2e4
+wc2e5:: ds 1 ; c2e5
+wc2e6:: ds 1 ; c2e6
+wc2e7:: ds 1 ; c2e7
+wc2e8:: ds 1 ; c2e8
+wc2e9:: ds 1 ; c2e9
+wc2ea:: ds 1 ; c2ea
+wc2eb:: ds 1 ; c2eb
+wc2ec:: ds 1 ; c2ec
+wc2ed:: ds 1 ; c2ed
+wc2ee:: ds 1 ; c2ee
+wc2ef:: ds 1 ; c2ef
+wc2f0:: ds 1 ; c2f0
+wc2f1:: ds 1 ; c2f1
+wc2f2:: ds 1 ; c2f2
+wc2f3:: ds 1 ; c2f3
+wc2f4:: ds 1 ; c2f4
+wc2f5:: ds 1 ; c2f5
+wc2f6:: ds 1 ; c2f6
+wc2f7:: ds 1 ; c2f7
+wc2f8:: ds 1 ; c2f8
+wc2f9:: ds 1 ; c2f9
+wc2fa:: ds 1 ; c2fa
+wc2fb:: ds 1 ; c2fb
+wc2fc:: ds 1 ; c2fc
+wc2fd:: ds 1 ; c2fd
+wc2fe:: ds 1 ; c2fe
+wc2ff:: ds 1 ; c2ff
+
+SECTION "OAM Buffer", WRAM0
+wOAMBuffer:: ; c300
+	ds 4 * 40
+
+SECTION "TileMap", WRAM0
+wTileMap:: ; c3a0
+	ds SCREEN_HEIGHT * SCREEN_WIDTH
+
+SECTION "Animated Objects", WRAM0
+wAnimatedObjectDynamicVTileOffsets:: ds 10 * 2 ; c508
+wAnimatedObjectStructs:: ; c51c
+; Field  0: Index
+; Fields 1-3: Loaded from AnimatedObjectStructSeqData
+wAnimatedObjectStruct1::  sprite_anim_struct wAnimatedObjectStruct1  ; c51c
+wAnimatedObjectStruct2::  sprite_anim_struct wAnimatedObjectStruct2  ; c52c
+wAnimatedObjectStruct3::  sprite_anim_struct wAnimatedObjectStruct3  ; c53c
+wAnimatedObjectStruct4::  sprite_anim_struct wAnimatedObjectStruct4  ; c54c
+wAnimatedObjectStruct5::  sprite_anim_struct wAnimatedObjectStruct5  ; c55c
+wAnimatedObjectStruct6::  sprite_anim_struct wAnimatedObjectStruct6  ; c56c
+wAnimatedObjectStruct7::  sprite_anim_struct wAnimatedObjectStruct7  ; c57c
+wAnimatedObjectStruct8::  sprite_anim_struct wAnimatedObjectStruct8  ; c58c
+wAnimatedObjectStruct9::  sprite_anim_struct wAnimatedObjectStruct9  ; c59c
+wAnimatedObjectStruct10:: sprite_anim_struct wAnimatedObjectStruct10 ; c5ac
+wAnimatedObjectStructsEnd::
+
+wAnimatedObjectStructCount:: ds 1 ; c5bc
+wCurrSpriteOAMAddr:: ds 1 ; c5bd
+
+wCurIcon:: ; c5be
+	ds 1
+
+wCurIconTile:: ds 1 ; c5bf
+wAnimatedObjectStructAddrBackup::
+wAnimatedObjectStructIDBuffer::
+wCurrSpriteAddSubFlags:: ; c5c0
+	ds 2
+wCurrAnimVTile:: ds 1 ; c5c2
+wCurrAnimXCoord:: ds 1 ; c5c3
+wCurrAnimYCoord:: ds 1 ; c5c4
+wCurrAnimXOffset:: ds 1 ; c5c5
+wCurrAnimYOffset:: ds 1 ; c5c6
+wGlobalAnimYOffset:: ds 1 ; c5c7
+wGlobalAnimXOffset:: ds 1 ; c5c8
+wAnimatedObjectsEnd:: ; c5c9
+
+wc5c9:: ds 1 ; c5c9
+wc5ca:: ds 1 ; c5ca
+wc5cb:: ds 1 ; c5cb
+wc5cc:: ds 1 ; c5cc
+wc5cd:: ds 1 ; c5cd
+wc5ce:: ds 1 ; c5ce
+wc5cf:: ds 1 ; c5cf
+wc5d0:: ds 1 ; c5d0
+wc5d1:: ds 1 ; c5d1
+wc5d2:: ds 1 ; c5d2
+wc5d3:: ds 1 ; c5d3
+wc5d4:: ds 1 ; c5d4
+wc5d5:: ds 1 ; c5d5
+wc5d6:: ds 1 ; c5d6
+wc5d7:: ds 1 ; c5d7
+wc5d8:: ds 1 ; c5d8
+wc5d9:: ds 1 ; c5d9
+wc5da:: ds 1 ; c5da
+wc5db:: ds 1 ; c5db
+wc5dc:: ds 1 ; c5dc
+wc5dd:: ds 1 ; c5dd
+wc5de:: ds 1 ; c5de
+wc5df:: ds 1 ; c5df
+wc5e0:: ds 1 ; c5e0
+wc5e1:: ds 1 ; c5e1
+wc5e2:: ds 1 ; c5e2
+wc5e3:: ds 1 ; c5e3
+wc5e4:: ds 1 ; c5e4
+wc5e5:: ds 1 ; c5e5
+wc5e6:: ds 1 ; c5e6
+wc5e7:: ds 1 ; c5e7
+wc5e8:: ds 1 ; c5e8
+wc5e9:: ds 1 ; c5e9
+wc5ea:: ds 1 ; c5ea
+wc5eb:: ds 1 ; c5eb
+wc5ec:: ds 1 ; c5ec
+wc5ed:: ds 1 ; c5ed
+wc5ee:: ds 1 ; c5ee
+wc5ef:: ds 1 ; c5ef
+wc5f0:: ds 1 ; c5f0
+wc5f1:: ds 1 ; c5f1
+wc5f2:: ds 1 ; c5f2
+wc5f3:: ds 1 ; c5f3
+wc5f4:: ds 1 ; c5f4
+wc5f5:: ds 1 ; c5f5
+wc5f6:: ds 1 ; c5f6
+wc5f7:: ds 1 ; c5f7
+wc5f8:: ds 1 ; c5f8
+wc5f9:: ds 1 ; c5f9
+wc5fa:: ds 1 ; c5fa
+wc5fb:: ds 1 ; c5fb
+wc5fc:: ds 1 ; c5fc
+wc5fd:: ds 1 ; c5fd
+wc5fe:: ds 1 ; c5fe
+wc5ff:: ds 1 ; c5ff
+wc600:: ds 1 ; c600
+wc601:: ds 1 ; c601
+wc602:: ds 1 ; c602
+wc603:: ds 1 ; c603
+wc604:: ds 1 ; c604
+wc605:: ds 1 ; c605
+wc606:: ds 1 ; c606
+wc607:: ds 1 ; c607
+wc608:: ds 1 ; c608
+wc609:: ds 1 ; c609
+wc60a:: ds 1 ; c60a
+wc60b:: ds 1 ; c60b
+wc60c:: ds 1 ; c60c
+wc60d:: ds 1 ; c60d
+wc60e:: ds 1 ; c60e
+wc60f:: ds 1 ; c60f
+wc610:: ds 1 ; c610
+wc611:: ds 1 ; c611
+wc612:: ds 1 ; c612
+wc613:: ds 1 ; c613
+wc614:: ds 1 ; c614
+wc615:: ds 1 ; c615
+wc616:: ds 1 ; c616
+wc617:: ds 1 ; c617
+wc618:: ds 1 ; c618
+wc619:: ds 1 ; c619
+wc61a:: ds 1 ; c61a
+wc61b:: ds 1 ; c61b
+wc61c:: ds 1 ; c61c
+wc61d:: ds 1 ; c61d
+wc61e:: ds 1 ; c61e
+wc61f:: ds 1 ; c61f
+wc620:: ds 1 ; c620
+wc621:: ds 1 ; c621
+wc622:: ds 1 ; c622
+wc623:: ds 1 ; c623
+wc624:: ds 1 ; c624
+wc625:: ds 1 ; c625
+wc626:: ds 1 ; c626
+wc627:: ds 1 ; c627
+wc628:: ds 1 ; c628
+wc629:: ds 1 ; c629
+wc62a:: ds 1 ; c62a
+wc62b:: ds 1 ; c62b
+wc62c:: ds 1 ; c62c
+wc62d:: ds 1 ; c62d
+wc62e:: ds 1 ; c62e
+wc62f:: ds 1 ; c62f
+wc630:: ds 1 ; c630
+wc631:: ds 1 ; c631
+wc632:: ds 1 ; c632
+wc633:: ds 1 ; c633
+wc634:: ds 1 ; c634
+wc635:: ds 1 ; c635
+wc636:: ds 1 ; c636
+wc637:: ds 1 ; c637
+wc638:: ds 1 ; c638
+wc639:: ds 1 ; c639
+wc63a:: ds 1 ; c63a
+wc63b:: ds 1 ; c63b
+wc63c:: ds 1 ; c63c
+wc63d:: ds 1 ; c63d
+wc63e:: ds 1 ; c63e
+wc63f:: ds 1 ; c63f
+wc640:: ds 1 ; c640
+wc641:: ds 1 ; c641
+wc642:: ds 1 ; c642
+wc643:: ds 1 ; c643
+wc644:: ds 1 ; c644
+wc645:: ds 1 ; c645
+wc646:: ds 1 ; c646
+wc647:: ds 1 ; c647
+wc648:: ds 1 ; c648
+wc649:: ds 1 ; c649
+wc64a:: ds 1 ; c64a
+wc64b:: ds 1 ; c64b
+wc64c:: ds 1 ; c64c
+wc64d:: ds 1 ; c64d
+wc64e:: ds 1 ; c64e
+wc64f:: ds 1 ; c64f
+wc650:: ds 1 ; c650
+wc651:: ds 1 ; c651
+wc652:: ds 1 ; c652
+wc653:: ds 1 ; c653
+wc654:: ds 1 ; c654
+wc655:: ds 1 ; c655
+wc656:: ds 1 ; c656
+wc657:: ds 1 ; c657
+wc658:: ds 1 ; c658
+wc659:: ds 1 ; c659
+wc65a:: ds 1 ; c65a
+wc65b:: ds 1 ; c65b
+wc65c:: ds 1 ; c65c
+wc65d:: ds 1 ; c65d
+wc65e:: ds 1 ; c65e
+wc65f:: ds 1 ; c65f
+wc660:: ds 1 ; c660
+wc661:: ds 1 ; c661
+wc662:: ds 1 ; c662
+wc663:: ds 1 ; c663
+wc664:: ds 1 ; c664
+wc665:: ds 1 ; c665
+wc666:: ds 1 ; c666
+wc667:: ds 1 ; c667
+wc668:: ds 1 ; c668
+wc669:: ds 1 ; c669
+wc66a:: ds 1 ; c66a
+wc66b:: ds 1 ; c66b
+wc66c:: ds 1 ; c66c
+wc66d:: ds 1 ; c66d
+wc66e:: ds 1 ; c66e
+wc66f:: ds 1 ; c66f
+wc670:: ds 1 ; c670
+wc671:: ds 1 ; c671
+wc672:: ds 1 ; c672
+wc673:: ds 1 ; c673
+wc674:: ds 1 ; c674
+wc675:: ds 1 ; c675
+wc676:: ds 1 ; c676
+wc677:: ds 1 ; c677
+wc678:: ds 1 ; c678
+wc679:: ds 1 ; c679
+wc67a:: ds 1 ; c67a
+wc67b:: ds 1 ; c67b
+wc67c:: ds 1 ; c67c
+wc67d:: ds 1 ; c67d
+wc67e:: ds 1 ; c67e
+wc67f:: ds 1 ; c67f
+wc680:: ds 1 ; c680
+wc681:: ds 1 ; c681
+wc682:: ds 1 ; c682
+wc683:: ds 1 ; c683
+wc684:: ds 1 ; c684
+wc685:: ds 1 ; c685
+wc686:: ds 1 ; c686
+wc687:: ds 1 ; c687
+wc688:: ds 1 ; c688
+wc689:: ds 1 ; c689
+wc68a:: ds 1 ; c68a
+wc68b:: ds 1 ; c68b
+wc68c:: ds 1 ; c68c
+wc68d:: ds 1 ; c68d
+wc68e:: ds 1 ; c68e
+wc68f:: ds 1 ; c68f
+wc690:: ds 1 ; c690
+wc691:: ds 1 ; c691
+wc692:: ds 1 ; c692
+wc693:: ds 1 ; c693
+wc694:: ds 1 ; c694
+wc695:: ds 1 ; c695
+wc696:: ds 1 ; c696
+wc697:: ds 1 ; c697
+wc698:: ds 1 ; c698
+wc699:: ds 1 ; c699
+wc69a:: ds 1 ; c69a
+wc69b:: ds 1 ; c69b
+wc69c:: ds 1 ; c69c
+wc69d:: ds 1 ; c69d
+wc69e:: ds 1 ; c69e
+wc69f:: ds 1 ; c69f
+wc6a0:: ds 1 ; c6a0
+wc6a1:: ds 1 ; c6a1
+wc6a2:: ds 1 ; c6a2
+wc6a3:: ds 1 ; c6a3
+wc6a4:: ds 1 ; c6a4
+wc6a5:: ds 1 ; c6a5
+wc6a6:: ds 1 ; c6a6
+wc6a7:: ds 1 ; c6a7
+wc6a8:: ds 1 ; c6a8
+wc6a9:: ds 1 ; c6a9
+wc6aa:: ds 1 ; c6aa
+wc6ab:: ds 1 ; c6ab
+wc6ac:: ds 1 ; c6ac
+wc6ad:: ds 1 ; c6ad
+wc6ae:: ds 1 ; c6ae
+wc6af:: ds 1 ; c6af
+wc6b0:: ds 1 ; c6b0
+wc6b1:: ds 1 ; c6b1
+wc6b2:: ds 1 ; c6b2
+wc6b3:: ds 1 ; c6b3
+wc6b4:: ds 1 ; c6b4
+wc6b5:: ds 1 ; c6b5
+wc6b6:: ds 1 ; c6b6
+wc6b7:: ds 1 ; c6b7
+wc6b8:: ds 1 ; c6b8
+wc6b9:: ds 1 ; c6b9
+wc6ba:: ds 1 ; c6ba
+wc6bb:: ds 1 ; c6bb
+wc6bc:: ds 1 ; c6bc
+wc6bd:: ds 1 ; c6bd
+wc6be:: ds 1 ; c6be
+wc6bf:: ds 1 ; c6bf
+wc6c0:: ds 1 ; c6c0
+wc6c1:: ds 1 ; c6c1
+wc6c2:: ds 1 ; c6c2
+wc6c3:: ds 1 ; c6c3
+wc6c4:: ds 1 ; c6c4
+wc6c5:: ds 1 ; c6c5
+wc6c6:: ds 1 ; c6c6
+wc6c7:: ds 1 ; c6c7
+wc6c8:: ds 1 ; c6c8
+wc6c9:: ds 1 ; c6c9
+wc6ca:: ds 1 ; c6ca
+wc6cb:: ds 1 ; c6cb
+wc6cc:: ds 1 ; c6cc
+wc6cd:: ds 1 ; c6cd
+wc6ce:: ds 1 ; c6ce
+wc6cf:: ds 1 ; c6cf
+wc6d0:: ds 1 ; c6d0
+wc6d1:: ds 1 ; c6d1
+wc6d2:: ds 1 ; c6d2
+wc6d3:: ds 1 ; c6d3
+wc6d4:: ds 1 ; c6d4
+wc6d5:: ds 1 ; c6d5
+wc6d6:: ds 1 ; c6d6
+wc6d7:: ds 1 ; c6d7
+wc6d8:: ds 1 ; c6d8
+wc6d9:: ds 1 ; c6d9
+wc6da:: ds 1 ; c6da
+wc6db:: ds 1 ; c6db
+wc6dc:: ds 1 ; c6dc
+wc6dd:: ds 1 ; c6dd
+wc6de:: ds 1 ; c6de
+wc6df:: ds 1 ; c6df
+wc6e0:: ds 1 ; c6e0
+wc6e1:: ds 1 ; c6e1
+wc6e2:: ds 1 ; c6e2
+wc6e3:: ds 1 ; c6e3
+wc6e4:: ds 1 ; c6e4
+wc6e5:: ds 1 ; c6e5
+wc6e6:: ds 1 ; c6e6
+wc6e7:: ds 1 ; c6e7
+wc6e8:: ds 1 ; c6e8
+wc6e9:: ds 1 ; c6e9
+wc6ea:: ds 1 ; c6ea
+wc6eb:: ds 1 ; c6eb
+wc6ec:: ds 1 ; c6ec
+wc6ed:: ds 1 ; c6ed
+wc6ee:: ds 1 ; c6ee
+wc6ef:: ds 1 ; c6ef
+wc6f0:: ds 1 ; c6f0
+wc6f1:: ds 1 ; c6f1
+wc6f2:: ds 1 ; c6f2
+wc6f3:: ds 1 ; c6f3
+wc6f4:: ds 1 ; c6f4
+wc6f5:: ds 1 ; c6f5
+wc6f6:: ds 1 ; c6f6
+wc6f7:: ds 1 ; c6f7
+wc6f8:: ds 1 ; c6f8
+wc6f9:: ds 1 ; c6f9
+wc6fa:: ds 1 ; c6fa
+wc6fb:: ds 1 ; c6fb
+wc6fc:: ds 1 ; c6fc
+wc6fd:: ds 1 ; c6fd
+wc6fe:: ds 1 ; c6fe
+wc6ff:: ds 1 ; c6ff
 
 wLYOverrides::
-wc700:: ds 1
-wc701:: ds 1
-wc702:: ds 1
-wc703:: ds 1
-wc704:: ds 1
-wc705:: ds 1
-wc706:: ds 1
-wc707:: ds 1
-wc708:: ds 1
-wc709:: ds 1
-wc70a:: ds 1
-wc70b:: ds 1
-wc70c:: ds 1
-wc70d:: ds 1
-wc70e:: ds 1
-wc70f:: ds 1
-wc710:: ds 1
-wc711:: ds 1
-wc712:: ds 1
-wc713:: ds 1
-wc714:: ds 1
-wc715:: ds 1
-wc716:: ds 1
-wc717:: ds 1
-wc718:: ds 1
-wc719:: ds 1
-wc71a:: ds 1
-wc71b:: ds 1
-wc71c:: ds 1
-wc71d:: ds 1
-wc71e:: ds 1
-wc71f:: ds 1
-wc720:: ds 1
-wc721:: ds 1
-wc722:: ds 1
-wc723:: ds 1
-wc724:: ds 1
-wc725:: ds 1
-wc726:: ds 1
-wc727:: ds 1
-wc728:: ds 1
-wc729:: ds 1
-wc72a:: ds 1
-wc72b:: ds 1
-wc72c:: ds 1
-wc72d:: ds 1
-wc72e:: ds 1
-wc72f:: ds 1
-wc730:: ds 1
-wc731:: ds 1
-wc732:: ds 1
-wc733:: ds 1
-wc734:: ds 1
-wc735:: ds 1
-wc736:: ds 1
-wc737:: ds 1
-wc738:: ds 1
-wc739:: ds 1
-wc73a:: ds 1
-wc73b:: ds 1
-wc73c:: ds 1
-wc73d:: ds 1
-wc73e:: ds 1
-wc73f:: ds 1
-wc740:: ds 1
-wc741:: ds 1
-wc742:: ds 1
-wc743:: ds 1
-wc744:: ds 1
-wc745:: ds 1
-wc746:: ds 1
-wc747:: ds 1
-wc748:: ds 1
-wc749:: ds 1
-wc74a:: ds 1
-wc74b:: ds 1
-wc74c:: ds 1
-wc74d:: ds 1
-wc74e:: ds 1
-wc74f:: ds 1
-wc750:: ds 1
-wc751:: ds 1
-wc752:: ds 1
-wc753:: ds 1
-wc754:: ds 1
-wc755:: ds 1
-wc756:: ds 1
-wc757:: ds 1
-wc758:: ds 1
-wc759:: ds 1
-wc75a:: ds 1
-wc75b:: ds 1
-wc75c:: ds 1
-wc75d:: ds 1
-wc75e:: ds 1
-wc75f:: ds 1
-wc760:: ds 1
-wc761:: ds 1
-wc762:: ds 1
-wc763:: ds 1
-wc764:: ds 1
-wc765:: ds 1
-wc766:: ds 1
-wc767:: ds 1
-wc768:: ds 1
-wc769:: ds 1
-wc76a:: ds 1
-wc76b:: ds 1
-wc76c:: ds 1
-wc76d:: ds 1
-wc76e:: ds 1
-wc76f:: ds 1
-wc770:: ds 1
-wc771:: ds 1
-wc772:: ds 1
-wc773:: ds 1
-wc774:: ds 1
-wc775:: ds 1
-wc776:: ds 1
-wc777:: ds 1
-wc778:: ds 1
-wc779:: ds 1
-wc77a:: ds 1
-wc77b:: ds 1
-wc77c:: ds 1
-wc77d:: ds 1
-wc77e:: ds 1
-wc77f:: ds 1
-wc780:: ds 1
-wc781:: ds 1
-wc782:: ds 1
-wc783:: ds 1
-wc784:: ds 1
-wc785:: ds 1
-wc786:: ds 1
-wc787:: ds 1
-wc788:: ds 1
-wc789:: ds 1
-wc78a:: ds 1
-wc78b:: ds 1
-wc78c:: ds 1
-wc78d:: ds 1
-wc78e:: ds 1
-wc78f:: ds 1
-wc790:: ds 1
-wc791:: ds 1
-wc792:: ds 1
-wc793:: ds 1
-wc794:: ds 1
-wc795:: ds 1
-wc796:: ds 1
-wc797:: ds 1
-wc798:: ds 1
-wc799:: ds 1
-wc79a:: ds 1
-wc79b:: ds 1
-wc79c:: ds 1
-wc79d:: ds 1
-wc79e:: ds 1
-wc79f:: ds 1
-wc7a0:: ds 1
-wc7a1:: ds 1
-wc7a2:: ds 1
-wc7a3:: ds 1
-wc7a4:: ds 1
-wc7a5:: ds 1
-wc7a6:: ds 1
-wc7a7:: ds 1
-wc7a8:: ds 1
-wc7a9:: ds 1
-wc7aa:: ds 1
-wc7ab:: ds 1
-wc7ac:: ds 1
-wc7ad:: ds 1
-wc7ae:: ds 1
-wc7af:: ds 1
-wc7b0:: ds 1
-wc7b1:: ds 1
-wc7b2:: ds 1
-wc7b3:: ds 1
-wc7b4:: ds 1
-wc7b5:: ds 1
-wc7b6:: ds 1
-wc7b7:: ds 1
-wc7b8:: ds 1
-wc7b9:: ds 1
-wc7ba:: ds 1
-wc7bb:: ds 1
-wc7bc:: ds 1
-wc7bd:: ds 1
-wc7be:: ds 1
-wc7bf:: ds 1
-wc7c0:: ds 1
-wc7c1:: ds 1
-wc7c2:: ds 1
-wc7c3:: ds 1
-wc7c4:: ds 1
-wc7c5:: ds 1
-wc7c6:: ds 1
-wc7c7:: ds 1
-wc7c8:: ds 1
-wc7c9:: ds 1
-wc7ca:: ds 1
-wc7cb:: ds 1
-wc7cc:: ds 1
-wc7cd:: ds 1
-wc7ce:: ds 1
-wc7cf:: ds 1
-wc7d0:: ds 1
-wc7d1:: ds 1
-wc7d2:: ds 1
-wc7d3:: ds 1
-wc7d4:: ds 1
-wc7d5:: ds 1
-wc7d6:: ds 1
-wc7d7:: ds 1
-wc7d8:: ds 1
-wc7d9:: ds 1
-wc7da:: ds 1
-wc7db:: ds 1
-wc7dc:: ds 1
-wc7dd:: ds 1
-wc7de:: ds 1
-wc7df:: ds 1
-wc7e0:: ds 1
-wc7e1:: ds 1
-wc7e2:: ds 1
-wc7e3:: ds 1
-wc7e4:: ds 1
-wc7e5:: ds 1
-wc7e6:: ds 1
-wc7e7:: ds 1
-wc7e8:: ds 1
-wc7e9:: ds 1
-wc7ea:: ds 1
-wc7eb:: ds 1
-wc7ec:: ds 1
-wc7ed:: ds 1
-wc7ee:: ds 1
-wc7ef:: ds 1
-wc7f0:: ds 1
-wc7f1:: ds 1
-wc7f2:: ds 1
-wc7f3:: ds 1
-wc7f4:: ds 1
-wc7f5:: ds 1
-wc7f6:: ds 1
-wc7f7:: ds 1
-wc7f8:: ds 1
-wc7f9:: ds 1
-wc7fa:: ds 1
-wc7fb:: ds 1
-wc7fc:: ds 1
-wc7fd:: ds 1
-wc7fe:: ds 1
-wc7ff:: ds 1
-wc800:: ds 1
-wc801:: ds 1
-wc802:: ds 1
-wc803:: ds 1
-wc804:: ds 1
-wc805:: ds 1
-wc806:: ds 1
-wc807:: ds 1
-wc808:: ds 1
-wc809:: ds 1
-wc80a:: ds 1
-wc80b:: ds 1
-wc80c:: ds 1
-wc80d:: ds 1
-wc80e:: ds 1
-wc80f:: ds 1
-wc810:: ds 1
-wc811:: ds 1
-wc812:: ds 1
-wc813:: ds 1
-wc814:: ds 1
-wc815:: ds 1
-wc816:: ds 1
-wc817:: ds 1
-wc818:: ds 1
-wc819:: ds 1
-wc81a:: ds 1
-wc81b:: ds 1
-wc81c:: ds 1
-wc81d:: ds 1
-wc81e:: ds 1
-wc81f:: ds 1
-wc820:: ds 1
-wc821:: ds 1
-wc822:: ds 1
-wc823:: ds 1
-wc824:: ds 1
-wc825:: ds 1
-wc826:: ds 1
-wc827:: ds 1
-wc828:: ds 1
-wc829:: ds 1
-wc82a:: ds 1
-wc82b:: ds 1
-wc82c:: ds 1
-wc82d:: ds 1
-wc82e:: ds 1
-wc82f:: ds 1
-wc830:: ds 1
-wc831:: ds 1
-wc832:: ds 1
-wc833:: ds 1
-wc834:: ds 1
-wc835:: ds 1
-wc836:: ds 1
-wc837:: ds 1
-wc838:: ds 1
-wc839:: ds 1
-wc83a:: ds 1
-wc83b:: ds 1
-wc83c:: ds 1
-wc83d:: ds 1
-wc83e:: ds 1
-wc83f:: ds 1
-wc840:: ds 1
-wc841:: ds 1
-wc842:: ds 1
-wc843:: ds 1
-wc844:: ds 1
-wc845:: ds 1
-wc846:: ds 1
-wc847:: ds 1
-wc848:: ds 1
-wc849:: ds 1
-wc84a:: ds 1
-wc84b:: ds 1
-wc84c:: ds 1
-wc84d:: ds 1
-wc84e:: ds 1
-wc84f:: ds 1
-wc850:: ds 1
-wc851:: ds 1
-wc852:: ds 1
-wc853:: ds 1
-wc854:: ds 1
-wc855:: ds 1
-wc856:: ds 1
-wc857:: ds 1
-wc858:: ds 1
-wc859:: ds 1
-wc85a:: ds 1
-wc85b:: ds 1
-wc85c:: ds 1
-wc85d:: ds 1
-wc85e:: ds 1
-wc85f:: ds 1
-wc860:: ds 1
-wc861:: ds 1
-wc862:: ds 1
-wc863:: ds 1
-wc864:: ds 1
-wc865:: ds 1
-wc866:: ds 1
-wc867:: ds 1
-wc868:: ds 1
-wc869:: ds 1
-wc86a:: ds 1
-wc86b:: ds 1
-wc86c:: ds 1
-wc86d:: ds 1
-wc86e:: ds 1
-wc86f:: ds 1
-wc870:: ds 1
-wc871:: ds 1
-wc872:: ds 1
-wc873:: ds 1
-wc874:: ds 1
-wc875:: ds 1
-wc876:: ds 1
-wc877:: ds 1
-wc878:: ds 1
-wc879:: ds 1
-wc87a:: ds 1
-wc87b:: ds 1
-wc87c:: ds 1
-wc87d:: ds 1
-wc87e:: ds 1
-wc87f:: ds 1
-wc880:: ds 1
-wc881:: ds 1
-wc882:: ds 1
-wc883:: ds 1
-wc884:: ds 1
-wc885:: ds 1
-wc886:: ds 1
-wc887:: ds 1
-wc888:: ds 1
-wc889:: ds 1
-wc88a:: ds 1
-wc88b:: ds 1
-wc88c:: ds 1
-wc88d:: ds 1
-wc88e:: ds 1
-wc88f:: ds 1
-wc890:: ds 1
-wc891:: ds 1
-wc892:: ds 1
-wc893:: ds 1
-wc894:: ds 1
-wc895:: ds 1
-wc896:: ds 1
-wc897:: ds 1
-wc898:: ds 1
-wc899:: ds 1
-wc89a:: ds 1
-wc89b:: ds 1
-wc89c:: ds 1
-wc89d:: ds 1
-wc89e:: ds 1
-wc89f:: ds 1
-wc8a0:: ds 1
-wc8a1:: ds 1
-wc8a2:: ds 1
-wc8a3:: ds 1
-wc8a4:: ds 1
-wc8a5:: ds 1
-wc8a6:: ds 1
-wc8a7:: ds 1
-wc8a8:: ds 1
-wc8a9:: ds 1
-wc8aa:: ds 1
-wc8ab:: ds 1
-wc8ac:: ds 1
-wc8ad:: ds 1
-wc8ae:: ds 1
-wc8af:: ds 1
-wc8b0:: ds 1
-wc8b1:: ds 1
-wc8b2:: ds 1
-wc8b3:: ds 1
-wc8b4:: ds 1
-wc8b5:: ds 1
-wc8b6:: ds 1
-wc8b7:: ds 1
-wc8b8:: ds 1
-wc8b9:: ds 1
-wc8ba:: ds 1
-wc8bb:: ds 1
-wc8bc:: ds 1
-wc8bd:: ds 1
-wc8be:: ds 1
-wc8bf:: ds 1
-wc8c0:: ds 1
-wc8c1:: ds 1
-wc8c2:: ds 1
-wc8c3:: ds 1
-wc8c4:: ds 1
-wc8c5:: ds 1
-wc8c6:: ds 1
-wc8c7:: ds 1
-wc8c8:: ds 1
-wc8c9:: ds 1
-wc8ca:: ds 1
-wc8cb:: ds 1
-wc8cc:: ds 1
-wc8cd:: ds 1
-wc8ce:: ds 1
-wc8cf:: ds 1
-wc8d0:: ds 1
-wc8d1:: ds 1
-wc8d2:: ds 1
-wc8d3:: ds 1
-wc8d4:: ds 1
-wc8d5:: ds 1
-wc8d6:: ds 1
-wc8d7:: ds 1
-wc8d8:: ds 1
-wc8d9:: ds 1
-wc8da:: ds 1
-wc8db:: ds 1
-wc8dc:: ds 1
-wc8dd:: ds 1
-wc8de:: ds 1
-wc8df:: ds 1
-wc8e0:: ds 1
-wc8e1:: ds 1
-wc8e2:: ds 1
-wc8e3:: ds 1
-wc8e4:: ds 1
-wc8e5:: ds 1
-wc8e6:: ds 1
-wc8e7:: ds 1
-wc8e8:: ds 1
-wc8e9:: ds 1
-wc8ea:: ds 1
-wc8eb:: ds 1
-wc8ec:: ds 1
-wc8ed:: ds 1
-wc8ee:: ds 1
-wc8ef:: ds 1
-wc8f0:: ds 1
-wc8f1:: ds 1
-wc8f2:: ds 1
-wc8f3:: ds 1
-wc8f4:: ds 1
-wc8f5:: ds 1
-wc8f6:: ds 1
-wc8f7:: ds 1
-wc8f8:: ds 1
-wc8f9:: ds 1
-wc8fa:: ds 1
-wc8fb:: ds 1
-wc8fc:: ds 1
-wc8fd:: ds 1
-wc8fe:: ds 1
-wc8ff:: ds 1
-wc900:: ds 1
-wc901:: ds 1
-wc902:: ds 1
-wc903:: ds 1
-wc904:: ds 1
-wc905:: ds 1
-wc906:: ds 1
-wc907:: ds 1
-wc908:: ds 1
-wc909:: ds 1
-wc90a:: ds 1
-wc90b:: ds 1
-wc90c:: ds 1
-wc90d:: ds 1
-wc90e:: ds 1
-wc90f:: ds 1
-wc910:: ds 1
-wc911:: ds 1
-wc912:: ds 1
-wc913:: ds 1
-wc914:: ds 1
-wc915:: ds 1
-wc916:: ds 1
-wc917:: ds 1
-wc918:: ds 1
-wc919:: ds 1
-wc91a:: ds 1
-wc91b:: ds 1
-wc91c:: ds 1
-wc91d:: ds 1
-wc91e:: ds 1
-wc91f:: ds 1
-wc920:: ds 1
-wc921:: ds 1
-wc922:: ds 1
-wc923:: ds 1
-wc924:: ds 1
-wc925:: ds 1
-wc926:: ds 1
-wc927:: ds 1
-wc928:: ds 1
-wc929:: ds 1
-wc92a:: ds 1
-wc92b:: ds 1
-wc92c:: ds 1
-wc92d:: ds 1
-wc92e:: ds 1
-wc92f:: ds 1
-wc930:: ds 1
-wc931:: ds 1
-wc932:: ds 1
-wc933:: ds 1
-wc934:: ds 1
-wc935:: ds 1
-wc936:: ds 1
-wc937:: ds 1
-wc938:: ds 1
-wc939:: ds 1
-wc93a:: ds 1
-wc93b:: ds 1
-wc93c:: ds 1
-wc93d:: ds 1
-wc93e:: ds 1
-wc93f:: ds 1
-wc940:: ds 1
-wc941:: ds 1
-wc942:: ds 1
-wc943:: ds 1
-wc944:: ds 1
-wc945:: ds 1
-wc946:: ds 1
-wc947:: ds 1
-wc948:: ds 1
-wc949:: ds 1
-wc94a:: ds 1
-wc94b:: ds 1
-wc94c:: ds 1
-wc94d:: ds 1
-wc94e:: ds 1
-wc94f:: ds 1
-wc950:: ds 1
-wc951:: ds 1
-wc952:: ds 1
-wc953:: ds 1
-wc954:: ds 1
-wc955:: ds 1
-wc956:: ds 1
-wc957:: ds 1
-wc958:: ds 1
-wc959:: ds 1
-wc95a:: ds 1
-wc95b:: ds 1
-wc95c:: ds 1
-wc95d:: ds 1
-wc95e:: ds 1
-wc95f:: ds 1
-wc960:: ds 1
-wc961:: ds 1
-wc962:: ds 1
-wc963:: ds 1
-wc964:: ds 1
-wc965:: ds 1
-wc966:: ds 1
-wc967:: ds 1
-wc968:: ds 1
-wc969:: ds 1
-wc96a:: ds 1
-wc96b:: ds 1
-wc96c:: ds 1
-wc96d:: ds 1
-wc96e:: ds 1
-wc96f:: ds 1
-wc970:: ds 1
-wc971:: ds 1
-wc972:: ds 1
-wc973:: ds 1
-wc974:: ds 1
-wc975:: ds 1
-wc976:: ds 1
-wc977:: ds 1
-wc978:: ds 1
-wc979:: ds 1
-wc97a:: ds 1
-wc97b:: ds 1
-wc97c:: ds 1
-wc97d:: ds 1
-wc97e:: ds 1
-wc97f:: ds 1
-wc980:: ds 1
-wc981:: ds 1
-wc982:: ds 1
-wc983:: ds 1
-wc984:: ds 1
-wc985:: ds 1
-wc986:: ds 1
-wc987:: ds 1
-wc988:: ds 1
-wc989:: ds 1
-wc98a:: ds 1
-wc98b:: ds 1
-wc98c:: ds 1
-wc98d:: ds 1
-wc98e:: ds 1
-wc98f:: ds 1
-wc990:: ds 1
-wc991:: ds 1
-wc992:: ds 1
-wc993:: ds 1
-wc994:: ds 1
-wc995:: ds 1
-wc996:: ds 1
-wc997:: ds 1
-wc998:: ds 1
-wc999:: ds 1
-wc99a:: ds 1
-wc99b:: ds 1
-wc99c:: ds 1
-wc99d:: ds 1
-wc99e:: ds 1
-wc99f:: ds 1
-wc9a0:: ds 1
-wc9a1:: ds 1
-wc9a2:: ds 1
-wc9a3:: ds 1
-wc9a4:: ds 1
-wc9a5:: ds 1
-wc9a6:: ds 1
-wc9a7:: ds 1
-wc9a8:: ds 1
-wc9a9:: ds 1
-wc9aa:: ds 1
-wc9ab:: ds 1
-wc9ac:: ds 1
-wc9ad:: ds 1
-wc9ae:: ds 1
-wc9af:: ds 1
-wc9b0:: ds 1
-wc9b1:: ds 1
-wc9b2:: ds 1
-wc9b3:: ds 1
-wc9b4:: ds 1
-wc9b5:: ds 1
-wc9b6:: ds 1
-wc9b7:: ds 1
-wc9b8:: ds 1
-wc9b9:: ds 1
-wc9ba:: ds 1
-wc9bb:: ds 1
-wc9bc:: ds 1
-wc9bd:: ds 1
-wc9be:: ds 1
-wc9bf:: ds 1
-wc9c0:: ds 1
-wc9c1:: ds 1
-wc9c2:: ds 1
-wc9c3:: ds 1
-wc9c4:: ds 1
-wc9c5:: ds 1
-wc9c6:: ds 1
-wc9c7:: ds 1
-wc9c8:: ds 1
-wc9c9:: ds 1
-wc9ca:: ds 1
-wc9cb:: ds 1
-wc9cc:: ds 1
-wc9cd:: ds 1
-wc9ce:: ds 1
-wc9cf:: ds 1
-wc9d0:: ds 1
-wc9d1:: ds 1
-wc9d2:: ds 1
-wc9d3:: ds 1
-wc9d4:: ds 1
-wc9d5:: ds 1
-wc9d6:: ds 1
-wc9d7:: ds 1
-wc9d8:: ds 1
-wc9d9:: ds 1
-wc9da:: ds 1
-wc9db:: ds 1
-wc9dc:: ds 1
-wc9dd:: ds 1
-wc9de:: ds 1
-wc9df:: ds 1
-wc9e0:: ds 1
-wc9e1:: ds 1
-wc9e2:: ds 1
-wc9e3:: ds 1
-wc9e4:: ds 1
-wc9e5:: ds 1
-wc9e6:: ds 1
-wc9e7:: ds 1
-wc9e8:: ds 1
-wc9e9:: ds 1
-wc9ea:: ds 1
-wc9eb:: ds 1
-wc9ec:: ds 1
-wc9ed:: ds 1
-wc9ee:: ds 1
-wc9ef:: ds 1
-wc9f0:: ds 1
-wc9f1:: ds 1
-wc9f2:: ds 1
-wc9f3:: ds 1
-wc9f4:: ds 1
-wc9f5:: ds 1
-wc9f6:: ds 1
-wc9f7:: ds 1
-wc9f8:: ds 1
-wc9f9:: ds 1
-wc9fa:: ds 1
-wc9fb:: ds 1
-wc9fc:: ds 1
-wc9fd:: ds 1
-wc9fe:: ds 1
-wc9ff:: ds 1
-wca00:: ds 1
-wca01:: ds 1
-wca02:: ds 1
-wca03:: ds 1
-wca04:: ds 1
-wca05:: ds 1
-wca06:: ds 1
-wca07:: ds 1
-wca08:: ds 1
-wca09:: ds 1
-wca0a:: ds 1
-wca0b:: ds 1
-wca0c:: ds 1
-wca0d:: ds 1
-wca0e:: ds 1
-wca0f:: ds 1
-wca10:: ds 1
-wca11:: ds 1
-wca12:: ds 1
-wca13:: ds 1
-wca14:: ds 1
-wca15:: ds 1
-wca16:: ds 1
-wca17:: ds 1
-wca18:: ds 1
-wca19:: ds 1
-wca1a:: ds 1
-wca1b:: ds 1
-wca1c:: ds 1
-wca1d:: ds 1
-wca1e:: ds 1
-wca1f:: ds 1
-wca20:: ds 1
-wca21:: ds 1
-wca22:: ds 1
-wca23:: ds 1
-wca24:: ds 1
-wca25:: ds 1
-wca26:: ds 1
-wca27:: ds 1
-wca28:: ds 1
-wca29:: ds 1
-wca2a:: ds 1
-wca2b:: ds 1
-wca2c:: ds 1
-wca2d:: ds 1
-wca2e:: ds 1
-wca2f:: ds 1
-wca30:: ds 1
-wca31:: ds 1
-wca32:: ds 1
-wca33:: ds 1
-wca34:: ds 1
-wca35:: ds 1
-wca36:: ds 1
-wca37:: ds 1
-wca38:: ds 1
-wca39:: ds 1
-wca3a:: ds 1
-wca3b:: ds 1
-wca3c:: ds 1
-wca3d:: ds 1
-wca3e:: ds 1
-wca3f:: ds 1
-wca40:: ds 1
-wca41:: ds 1
-wca42:: ds 1
-wca43:: ds 1
-wca44:: ds 1
-wca45:: ds 1
-wca46:: ds 1
-wca47:: ds 1
-wca48:: ds 1
-wca49:: ds 1
-wca4a:: ds 1
-wca4b:: ds 1
-wca4c:: ds 1
-wca4d:: ds 1
-wca4e:: ds 1
-wca4f:: ds 1
-wca50:: ds 1
-wca51:: ds 1
-wca52:: ds 1
-wca53:: ds 1
-wca54:: ds 1
-wca55:: ds 1
-wca56:: ds 1
-wca57:: ds 1
-wca58:: ds 1
-wca59:: ds 1
-wca5a:: ds 1
-wca5b:: ds 1
-wca5c:: ds 1
-wca5d:: ds 1
-wca5e:: ds 1
-wca5f:: ds 1
-wca60:: ds 1
-wca61:: ds 1
-wca62:: ds 1
-wca63:: ds 1
-wca64:: ds 1
-wca65:: ds 1
-wca66:: ds 1
-wca67:: ds 1
-wca68:: ds 1
-wca69:: ds 1
-wca6a:: ds 1
-wca6b:: ds 1
-wca6c:: ds 1
-wca6d:: ds 1
-wca6e:: ds 1
-wca6f:: ds 1
-wca70:: ds 1
-wca71:: ds 1
-wca72:: ds 1
-wca73:: ds 1
-wca74:: ds 1
-wca75:: ds 1
-wca76:: ds 1
-wca77:: ds 1
-wca78:: ds 1
-wca79:: ds 1
-wca7a:: ds 1
-wca7b:: ds 1
-wca7c:: ds 1
-wca7d:: ds 1
-wca7e:: ds 1
-wca7f:: ds 1
-wca80:: ds 1
-wca81:: ds 1
-wca82:: ds 1
-wca83:: ds 1
-wca84:: ds 1
-wca85:: ds 1
-wca86:: ds 1
-wca87:: ds 1
-wca88:: ds 1
-wca89:: ds 1
-wca8a:: ds 1
-wca8b:: ds 1
-wca8c:: ds 1
-wca8d:: ds 1
-wca8e:: ds 1
-wca8f:: ds 1
-wca90:: ds 1
-wca91:: ds 1
-wca92:: ds 1
-wca93:: ds 1
-wca94:: ds 1
-wca95:: ds 1
-wca96:: ds 1
-wca97:: ds 1
-wca98:: ds 1
-wca99:: ds 1
-wca9a:: ds 1
-wca9b:: ds 1
-wca9c:: ds 1
-wca9d:: ds 1
-wca9e:: ds 1
-wca9f:: ds 1
-wcaa0:: ds 1
-wcaa1:: ds 1
-wcaa2:: ds 1
-wcaa3:: ds 1
-wcaa4:: ds 1
-wcaa5:: ds 1
-wcaa6:: ds 1
-wcaa7:: ds 1
-wcaa8:: ds 1
-wcaa9:: ds 1
-wcaaa:: ds 1
-wcaab:: ds 1
-wcaac:: ds 1
-wcaad:: ds 1
-wcaae:: ds 1
-wcaaf:: ds 1
-wcab0:: ds 1
-wcab1:: ds 1
-wcab2:: ds 1
-wcab3:: ds 1
-wcab4:: ds 1
-wcab5:: ds 1
-wcab6:: ds 1
-wcab7:: ds 1
-wcab8:: ds 1
-wcab9:: ds 1
-wcaba:: ds 1
-wcabb:: ds 1
-wcabc:: ds 1
-wcabd:: ds 1
-wcabe:: ds 1
-wcabf:: ds 1
-wcac0:: ds 1
-wcac1:: ds 1
-wcac2:: ds 1
-wcac3:: ds 1
-wcac4:: ds 1
-wcac5:: ds 1
-wcac6:: ds 1
-wcac7:: ds 1
-wcac8:: ds 1
-wcac9:: ds 1
-wcaca:: ds 1
-wcacb:: ds 1
-wcacc:: ds 1
-wcacd:: ds 1
-wcace:: ds 1
-wcacf:: ds 1
-wcad0:: ds 1
-wcad1:: ds 1
-wcad2:: ds 1
-wcad3:: ds 1
-wcad4:: ds 1
-wcad5:: ds 1
-wcad6:: ds 1
-wcad7:: ds 1
-wcad8:: ds 1
-wcad9:: ds 1
-wcada:: ds 1
-wcadb:: ds 1
-wcadc:: ds 1
-wcadd:: ds 1
-wcade:: ds 1
-wcadf:: ds 1
-wcae0:: ds 1
-wcae1:: ds 1
-wcae2:: ds 1
-wcae3:: ds 1
-wcae4:: ds 1
-wcae5:: ds 1
-wcae6:: ds 1
-wcae7:: ds 1
-wcae8:: ds 1
-wcae9:: ds 1
-wcaea:: ds 1
-wcaeb:: ds 1
-wcaec:: ds 1
-wcaed:: ds 1
-wcaee:: ds 1
-wcaef:: ds 1
-wcaf0:: ds 1
-wcaf1:: ds 1
-wcaf2:: ds 1
-wcaf3:: ds 1
-wcaf4:: ds 1
-wcaf5:: ds 1
-wcaf6:: ds 1
-wcaf7:: ds 1
-wcaf8:: ds 1
-wcaf9:: ds 1
-wcafa:: ds 1
-wcafb:: ds 1
-wcafc:: ds 1
-wcafd:: ds 1
-wcafe:: ds 1
-wcaff:: ds 1
-wcb00:: ds 1
-wcb01:: ds 1
-wcb02:: ds 1
-wcb03:: ds 1
-wcb04:: ds 1
-wcb05:: ds 1
-wcb06:: ds 1
-wcb07:: ds 1
-wcb08:: ds 1
-wcb09:: ds 1
-wcb0a:: ds 1
-wcb0b:: ds 1
-wcb0c:: ds 1
-wcb0d:: ds 1
-wcb0e:: ds 1
-wcb0f:: ds 1
-wcb10:: ds 1
-wcb11:: ds 1
-wcb12:: ds 1
-wcb13:: ds 1
-wcb14:: ds 1
-wcb15:: ds 1
-wcb16:: ds 1
-wcb17:: ds 1
-wcb18:: ds 1
-wcb19:: ds 1
-wcb1a:: ds 1
-wcb1b:: ds 1
-wcb1c:: ds 1
-wcb1d:: ds 1
-wcb1e:: ds 1
-wcb1f:: ds 1
-wcb20:: ds 1
-wcb21:: ds 1
-wcb22:: ds 1
-wcb23:: ds 1
-wcb24:: ds 1
-wcb25:: ds 1
-wcb26:: ds 1
-wcb27:: ds 1
-wcb28:: ds 1
-wcb29:: ds 1
-wcb2a:: ds 1
-wcb2b:: ds 1
-wcb2c:: ds 1
-wcb2d:: ds 1
-wcb2e:: ds 1
-wcb2f:: ds 1
-wcb30:: ds 1
-wcb31:: ds 1
-wcb32:: ds 1
-wcb33:: ds 1
-wcb34:: ds 1
-wcb35:: ds 1
-wcb36:: ds 1
-wcb37:: ds 1
-wcb38:: ds 1
-wcb39:: ds 1
-wcb3a:: ds 1
-wcb3b:: ds 1
-wcb3c:: ds 1
-wcb3d:: ds 1
-wcb3e:: ds 1
-wcb3f:: ds 1
-wcb40:: ds 1
-wcb41:: ds 1
-wcb42:: ds 1
-wcb43:: ds 1
-wcb44:: ds 1
-wcb45:: ds 1
-wcb46:: ds 1
-wcb47:: ds 1
-wcb48:: ds 1
-wcb49:: ds 1
-wcb4a:: ds 1
-wcb4b:: ds 1
-wcb4c:: ds 1
-wcb4d:: ds 1
-wcb4e:: ds 1
-wcb4f:: ds 1
-wcb50:: ds 1
-wcb51:: ds 1
-wcb52:: ds 1
-wcb53:: ds 1
-wcb54:: ds 1
-wcb55:: ds 1
-wcb56:: ds 1
-wcb57:: ds 1
-wcb58:: ds 1
-wcb59:: ds 1
-wcb5a:: ds 1
-wcb5b:: ds 1
-wcb5c:: ds 1
-wcb5d:: ds 1
-wcb5e:: ds 1
-wcb5f:: ds 1
-wcb60:: ds 1
-wcb61:: ds 1
-wcb62:: ds 1
-wcb63:: ds 1
-wcb64:: ds 1
-wcb65:: ds 1
-wcb66:: ds 1
-wcb67:: ds 1
-wcb68:: ds 1
-wcb69:: ds 1
-wcb6a:: ds 1
-wcb6b:: ds 1
-wcb6c:: ds 1
-wcb6d:: ds 1
-wcb6e:: ds 1
-wcb6f:: ds 1
-wcb70:: ds 1
-wcb71:: ds 1
-wcb72:: ds 1
-wcb73:: ds 1
-wcb74:: ds 1
-wcb75:: ds 1
-wcb76:: ds 1
-wcb77:: ds 1
-wcb78:: ds 1
-wcb79:: ds 1
-wcb7a:: ds 1
-wcb7b:: ds 1
-wcb7c:: ds 1
-wcb7d:: ds 1
-wcb7e:: ds 1
-wcb7f:: ds 1
-wcb80:: ds 1
-wcb81:: ds 1
-wcb82:: ds 1
-wcb83:: ds 1
-wcb84:: ds 1
-wcb85:: ds 1
-wcb86:: ds 1
-wcb87:: ds 1
-wcb88:: ds 1
-wcb89:: ds 1
-wcb8a:: ds 1
-wcb8b:: ds 1
-wcb8c:: ds 1
-wcb8d:: ds 1
-wcb8e:: ds 1
-wcb8f:: ds 1
-wcb90:: ds 1
-wcb91:: ds 1
-wcb92:: ds 1
-wcb93:: ds 1
-wcb94:: ds 1
-wcb95:: ds 1
-wcb96:: ds 1
-wcb97:: ds 1
-wcb98:: ds 1
-wcb99:: ds 1
-wcb9a:: ds 1
-wcb9b:: ds 1
-wcb9c:: ds 1
-wcb9d:: ds 1
-wcb9e:: ds 1
-wcb9f:: ds 1
-wcba0:: ds 1
-wcba1:: ds 1
-wcba2:: ds 1
-wcba3:: ds 1
-wcba4:: ds 1
-wcba5:: ds 1
-wcba6:: ds 1
-wcba7:: ds 1
-wcba8:: ds 1
-wcba9:: ds 1
-wcbaa:: ds 1
-wcbab:: ds 1
-wcbac:: ds 1
-wcbad:: ds 1
-wcbae:: ds 1
-wcbaf:: ds 1
-wcbb0:: ds 1
-wcbb1:: ds 1
-wcbb2:: ds 1
-wcbb3:: ds 1
-wcbb4:: ds 1
-wcbb5:: ds 1
-wcbb6:: ds 1
-wcbb7:: ds 1
-wcbb8:: ds 1
-wcbb9:: ds 1
-wcbba:: ds 1
-wcbbb:: ds 1
-wcbbc:: ds 1
-wcbbd:: ds 1
-wcbbe:: ds 1
-wcbbf:: ds 1
-wcbc0:: ds 1
-wcbc1:: ds 1
-wcbc2:: ds 1
-wcbc3:: ds 1
-wcbc4:: ds 1
-wcbc5:: ds 1
-wcbc6:: ds 1
-wcbc7:: ds 1
-wcbc8:: ds 1
-wcbc9:: ds 1
-wcbca:: ds 1
-wcbcb:: ds 1
-wcbcc:: ds 1
-wcbcd:: ds 1
-wcbce:: ds 1
-wcbcf:: ds 1
-wcbd0:: ds 1
-wcbd1:: ds 1
-wcbd2:: ds 1
-wcbd3:: ds 1
-wcbd4:: ds 1
-wcbd5:: ds 1
-wcbd6:: ds 1
-wcbd7:: ds 1
-wcbd8:: ds 1
-wcbd9:: ds 1
-wcbda:: ds 1
-wcbdb:: ds 1
-wcbdc:: ds 1
-wcbdd:: ds 1
-wcbde:: ds 1
-wcbdf:: ds 1
-wcbe0:: ds 1
-wcbe1:: ds 1
-wcbe2:: ds 1
-wcbe3:: ds 1
-wcbe4:: ds 1
-wcbe5:: ds 1
-wcbe6:: ds 1
-wcbe7:: ds 1
-wcbe8:: ds 1
-wcbe9:: ds 1
-wcbea:: ds 1
-wcbeb:: ds 1
-wcbec:: ds 1
-wcbed:: ds 1
-wcbee:: ds 1
-wcbef:: ds 1
-wcbf0:: ds 1
-wcbf1:: ds 1
-wcbf2:: ds 1
-wcbf3:: ds 1
-wcbf4:: ds 1
-wcbf5:: ds 1
-wcbf6:: ds 1
-wcbf7:: ds 1
-wcbf8:: ds 1
-wcbf9:: ds 1
-wcbfa:: ds 1
-wcbfb:: ds 1
-wcbfc:: ds 1
-wcbfd:: ds 1
-wcbfe:: ds 1
-wcbff:: ds 1
-wcc00:: ds 1
-wcc01:: ds 1
-wcc02:: ds 1
-wcc03:: ds 1
-wcc04:: ds 1
-wcc05:: ds 1
-wcc06:: ds 1
-wcc07:: ds 1
-wcc08:: ds 1
-wcc09:: ds 1
-wcc0a:: ds 1
-wcc0b:: ds 1
-wcc0c:: ds 1
-wcc0d:: ds 1
-wcc0e:: ds 1
-wcc0f:: ds 1
-wcc10:: ds 1
-wcc11:: ds 1
-wcc12:: ds 1
-wcc13:: ds 1
-wcc14:: ds 1
-wcc15:: ds 1
-wcc16:: ds 1
-wcc17:: ds 1
-wcc18:: ds 1
-wcc19:: ds 1
-wcc1a:: ds 1
-wcc1b:: ds 1
-wcc1c:: ds 1
-wcc1d:: ds 1
-wcc1e:: ds 1
-wcc1f:: ds 1
-wcc20:: ds 1
-wcc21:: ds 1
-wcc22:: ds 1
-wcc23:: ds 1
-wcc24:: ds 1
-wcc25:: ds 1
-wcc26:: ds 1
-wcc27:: ds 1
-wcc28:: ds 1
-wcc29:: ds 1
-wcc2a:: ds 1
-wcc2b:: ds 1
-wcc2c:: ds 1
-wcc2d:: ds 1
-wcc2e:: ds 1
-wcc2f:: ds 1
-wcc30:: ds 1
-wcc31:: ds 1
-wcc32:: ds 1
-wcc33:: ds 1
-wcc34:: ds 1
-wcc35:: ds 1
-wcc36:: ds 1
-wcc37:: ds 1
-wcc38:: ds 1
-wcc39:: ds 1
-wcc3a:: ds 1
-wcc3b:: ds 1
-wcc3c:: ds 1
-wcc3d:: ds 1
-wcc3e:: ds 1
-wcc3f:: ds 1
-wcc40:: ds 1
-wcc41:: ds 1
-wcc42:: ds 1
-wcc43:: ds 1
-wcc44:: ds 1
-wcc45:: ds 1
-wcc46:: ds 1
-wcc47:: ds 1
-wcc48:: ds 1
-wcc49:: ds 1
-wcc4a:: ds 1
-wcc4b:: ds 1
-wcc4c:: ds 1
-wcc4d:: ds 1
-wcc4e:: ds 1
-wcc4f:: ds 1
-wcc50:: ds 1
-wcc51:: ds 1
-wcc52:: ds 1
-wcc53:: ds 1
-wcc54:: ds 1
-wcc55:: ds 1
-wcc56:: ds 1
-wcc57:: ds 1
-wcc58:: ds 1
-wcc59:: ds 1
-wcc5a:: ds 1
-wcc5b:: ds 1
-wcc5c:: ds 1
-wcc5d:: ds 1
-wcc5e:: ds 1
-wcc5f:: ds 1
-wcc60:: ds 1
-wcc61:: ds 1
-wcc62:: ds 1
-wcc63:: ds 1
-wcc64:: ds 1
-wcc65:: ds 1
-wcc66:: ds 1
-wcc67:: ds 1
-wcc68:: ds 1
-wcc69:: ds 1
-wcc6a:: ds 1
-wcc6b:: ds 1
-wcc6c:: ds 1
-wcc6d:: ds 1
-wcc6e:: ds 1
-wcc6f:: ds 1
-wcc70:: ds 1
-wcc71:: ds 1
-wcc72:: ds 1
-wcc73:: ds 1
-wcc74:: ds 1
-wcc75:: ds 1
-wcc76:: ds 1
-wcc77:: ds 1
-wcc78:: ds 1
-wcc79:: ds 1
-wcc7a:: ds 1
-wcc7b:: ds 1
-wcc7c:: ds 1
-wcc7d:: ds 1
-wcc7e:: ds 1
-wcc7f:: ds 1
-wcc80:: ds 1
-wcc81:: ds 1
-wcc82:: ds 1
-wcc83:: ds 1
-wcc84:: ds 1
-wcc85:: ds 1
-wcc86:: ds 1
-wcc87:: ds 1
-wcc88:: ds 1
-wcc89:: ds 1
-wcc8a:: ds 1
-wcc8b:: ds 1
-wcc8c:: ds 1
-wcc8d:: ds 1
-wcc8e:: ds 1
-wcc8f:: ds 1
-wcc90:: ds 1
-wcc91:: ds 1
-wcc92:: ds 1
-wcc93:: ds 1
-wcc94:: ds 1
-wcc95:: ds 1
-wcc96:: ds 1
-wcc97:: ds 1
-wcc98:: ds 1
-wcc99:: ds 1
-wcc9a:: ds 1
-wcc9b:: ds 1
-wcc9c:: ds 1
-wcc9d:: ds 1
-wcc9e:: ds 1
-wcc9f:: ds 1
-wcca0:: ds 1
-wcca1:: ds 1
-wcca2:: ds 1
-wcca3:: ds 1
-wcca4:: ds 1
-wcca5:: ds 1
-wcca6:: ds 1
-wcca7:: ds 1
-wcca8:: ds 1
-wcca9:: ds 1
-wccaa:: ds 1
-wccab:: ds 1
-wccac:: ds 1
-wccad:: ds 1
-wccae:: ds 1
-wccaf:: ds 1
-wccb0:: ds 1
-wccb1:: ds 1
-wccb2:: ds 1
-wccb3:: ds 1
-wccb4:: ds 1
-wccb5:: ds 1
-wccb6:: ds 1
-wccb7:: ds 1
-wccb8:: ds 1
-wccb9:: ds 1
-wccba:: ds 1
-wccbb:: ds 1
-wccbc:: ds 1
-wccbd:: ds 1
-wccbe:: ds 1
-wccbf:: ds 1
-wccc0:: ds 1
-wccc1:: ds 1
-wccc2:: ds 1
-wccc3:: ds 1
-wccc4:: ds 1
-wccc5:: ds 1
-wccc6:: ds 1
-wccc7:: ds 1
-wccc8:: ds 1
-wccc9:: ds 1
-wccca:: ds 1
-wcccb:: ds 1
-wcccc:: ds 1
-wcccd:: ds 1
-wccce:: ds 1
-wcccf:: ds 1
-wccd0:: ds 1
-wccd1:: ds 1
-wccd2:: ds 1
-wccd3:: ds 1
-wccd4:: ds 1
-wccd5:: ds 1
-wccd6:: ds 1
-wccd7:: ds 1
-wccd8:: ds 1
-wccd9:: ds 1
-wccda:: ds 1
-wccdb:: ds 1
-wccdc:: ds 1
-wccdd:: ds 1
-wccde:: ds 1
-wccdf:: ds 1
-wcce0:: ds 1
-wcce1:: ds 1
-wcce2:: ds 1
-wcce3:: ds 1
-wcce4:: ds 1
-wcce5:: ds 1
-wcce6:: ds 1
-wcce7:: ds 1
-wcce8:: ds 1
-wcce9:: ds 1
-wccea:: ds 1
-wcceb:: ds 1
-wccec:: ds 1
-wcced:: ds 1
-wccee:: ds 1
-wccef:: ds 1
-wccf0:: ds 1
-wccf1:: ds 1
-wccf2:: ds 1
-wccf3:: ds 1
-wccf4:: ds 1
-wccf5:: ds 1
-wccf6:: ds 1
-wccf7:: ds 1
-wccf8:: ds 1
-wccf9:: ds 1
-wccfa:: ds 1
-wccfb:: ds 1
-wccfc:: ds 1
-wccfd:: ds 1
-wccfe:: ds 1
-wccff:: ds 1
-wcd00:: ds 1
-wcd01:: ds 1
-wcd02:: ds 1
-wcd03:: ds 1
-wcd04:: ds 1
-wcd05:: ds 1
-wcd06:: ds 1
-wcd07:: ds 1
-wcd08:: ds 1
-wcd09:: ds 1
-wcd0a:: ds 1
-wcd0b:: ds 1
-wcd0c:: ds 1
-wcd0d:: ds 1
-wcd0e:: ds 1
-wcd0f:: ds 1
-wcd10:: ds 1
-wcd11:: ds 1
-wcd12:: ds 1
-wcd13:: ds 1
-wcd14:: ds 1
-wcd15:: ds 1
-wcd16:: ds 1
-wcd17:: ds 1
-wcd18:: ds 1
-wcd19:: ds 1
-wcd1a:: ds 1
-wcd1b:: ds 1
-wcd1c:: ds 1
-wcd1d:: ds 1
-wcd1e:: ds 1
-wcd1f:: ds 1
-wcd20:: ds 1
-wcd21:: ds 1
-wcd22:: ds 1
-wcd23:: ds 1
-wcd24:: ds 1
-wcd25:: ds 1
-wcd26:: ds 1
-wcd27:: ds 1
-wcd28:: ds 1
-wcd29:: ds 1
-wcd2a:: ds 1
-wcd2b:: ds 1
-wcd2c:: ds 1
-wcd2d:: ds 1
-wcd2e:: ds 1
-wcd2f:: ds 1
-wcd30:: ds 1
-wcd31:: ds 1
-wcd32:: ds 1
-wcd33:: ds 1
-wcd34:: ds 1
-wcd35:: ds 1
-wcd36:: ds 1
-wcd37:: ds 1
-wcd38:: ds 1
-wcd39:: ds 1
-wcd3a:: ds 1
-wcd3b:: ds 1
-wcd3c:: ds 1
-wcd3d:: ds 1
-wcd3e:: ds 1
-wcd3f:: ds 1
-wcd40:: ds 1
-wcd41:: ds 1
-wcd42:: ds 1
-wcd43:: ds 1
-wcd44:: ds 1
-wcd45:: ds 1
-wcd46:: ds 1
-wcd47:: ds 1
-wcd48:: ds 1
-wcd49:: ds 1
-wcd4a:: ds 1
-wcd4b:: ds 1
-wcd4c:: ds 1
-wcd4d:: ds 1
-wcd4e:: ds 1
-wcd4f:: ds 1
-wcd50:: ds 1
-wcd51:: ds 1
-wcd52:: ds 1
-wcd53:: ds 1
-wcd54:: ds 1
-wcd55:: ds 1
-wcd56:: ds 1
-wcd57:: ds 1
-wcd58:: ds 1
-wcd59:: ds 1
-wcd5a:: ds 1
-wcd5b:: ds 1
-wcd5c:: ds 1
-wcd5d:: ds 1
-wcd5e:: ds 1
-wcd5f:: ds 1
-wcd60:: ds 1
-wcd61:: ds 1
-wcd62:: ds 1
-wcd63:: ds 1
-wcd64:: ds 1
-wcd65:: ds 1
-wcd66:: ds 1
-wcd67:: ds 1
-wcd68:: ds 1
-wcd69:: ds 1
-wcd6a:: ds 1
-wcd6b:: ds 1
-wcd6c:: ds 1
-wcd6d:: ds 1
-wcd6e:: ds 1
-wcd6f:: ds 1
-wcd70:: ds 1
-wcd71:: ds 1
-wcd72:: ds 1
-wcd73:: ds 1
-wcd74:: ds 1
-wcd75:: ds 1
-wcd76:: ds 1
-wcd77:: ds 1
-wcd78:: ds 1
-wcd79:: ds 1
-wcd7a:: ds 1
-wcd7b:: ds 1
-wcd7c:: ds 1
-wcd7d:: ds 1
-wcd7e:: ds 1
-wcd7f:: ds 1
-wcd80:: ds 1
-wcd81:: ds 1
-wcd82:: ds 1
-wcd83:: ds 1
-wcd84:: ds 1
-wcd85:: ds 1
-wcd86:: ds 1
-wcd87:: ds 1
-wcd88:: ds 1
-wcd89:: ds 1
-wcd8a:: ds 1
-wcd8b:: ds 1
-wcd8c:: ds 1
-wcd8d:: ds 1
-wcd8e:: ds 1
-wcd8f:: ds 1
-wcd90:: ds 1
-wcd91:: ds 1
-wcd92:: ds 1
-wcd93:: ds 1
-wcd94:: ds 1
-wcd95:: ds 1
-wcd96:: ds 1
-wcd97:: ds 1
-wcd98:: ds 1
-wcd99:: ds 1
-wcd9a:: ds 1
-wcd9b:: ds 1
-wcd9c:: ds 1
-wcd9d:: ds 1
-wcd9e:: ds 1
-wcd9f:: ds 1
-wcda0:: ds 1
-wcda1:: ds 1
-wcda2:: ds 1
-wcda3:: ds 1
-wcda4:: ds 1
-wcda5:: ds 1
-wcda6:: ds 1
-wcda7:: ds 1
-wcda8:: ds 1
-wcda9:: ds 1
-wcdaa:: ds 1
-wcdab:: ds 1
-wcdac:: ds 1
-wcdad:: ds 1
-wcdae:: ds 1
-wcdaf:: ds 1
-wcdb0:: ds 1
-wcdb1:: ds 1
-wcdb2:: ds 1
-wcdb3:: ds 1
-wcdb4:: ds 1
-wcdb5:: ds 1
-wcdb6:: ds 1
-wcdb7:: ds 1
-wcdb8:: ds 1
-wcdb9:: ds 1
-wcdba:: ds 1
-wcdbb:: ds 1
-wcdbc:: ds 1
-wcdbd:: ds 1
-wcdbe:: ds 1
-wcdbf:: ds 1
-wcdc0:: ds 1
-wcdc1:: ds 1
-wcdc2:: ds 1
-wcdc3:: ds 1
-wcdc4:: ds 1
-wcdc5:: ds 1
-wcdc6:: ds 1
-wcdc7:: ds 1
-wcdc8:: ds 1
-wcdc9:: ds 1
-wcdca:: ds 1
-wcdcb:: ds 1
-wcdcc:: ds 1
-wcdcd:: ds 1
-wcdce:: ds 1
-wcdcf:: ds 1
-wcdd0:: ds 1
-wcdd1:: ds 1
-wcdd2:: ds 1
-wcdd3:: ds 1
-wcdd4:: ds 1
-wcdd5:: ds 1
-wcdd6:: ds 1
-wcdd7:: ds 1
-wcdd8:: ds 1
-wcdd9:: ds 1
-wcdda:: ds 1
-wcddb:: ds 1
-wcddc:: ds 1
-wcddd:: ds 1
-wcdde:: ds 1
-wcddf:: ds 1
-wcde0:: ds 1
-wcde1:: ds 1
-wcde2:: ds 1
-wcde3:: ds 1
-wcde4:: ds 1
-wcde5:: ds 1
-wcde6:: ds 1
-wcde7:: ds 1
-wcde8:: ds 1
-wcde9:: ds 1
-wcdea:: ds 1
-wcdeb:: ds 1
-wcdec:: ds 1
-wcded:: ds 1
-wcdee:: ds 1
-wcdef:: ds 1
-wcdf0:: ds 1
-wcdf1:: ds 1
-wcdf2:: ds 1
-wcdf3:: ds 1
-wcdf4:: ds 1
-wcdf5:: ds 1
-wcdf6:: ds 1
-wcdf7:: ds 1
-wcdf8:: ds 1
-wcdf9:: ds 1
-wcdfa:: ds 1
-wcdfb:: ds 1
-wcdfc:: ds 1
-wcdfd:: ds 1
-wcdfe:: ds 1
-wcdff:: ds 1
-wce00:: ds 1
-wce01:: ds 1
-wce02:: ds 1
-wce03:: ds 1
-wce04:: ds 1
-wce05:: ds 1
-wce06:: ds 1
-wce07:: ds 1
-wce08:: ds 1
-wce09:: ds 1
-wce0a:: ds 1
-wce0b:: ds 1
-wce0c:: ds 1
-wce0d:: ds 1
-wce0e:: ds 1
-wce0f:: ds 1
-wce10:: ds 1
-wce11:: ds 1
-wce12:: ds 1
-wce13:: ds 1
-wce14:: ds 1
-wce15:: ds 1
-wce16:: ds 1
-wce17:: ds 1
-wce18:: ds 1
-wce19:: ds 1
-wce1a:: ds 1
-wce1b:: ds 1
-wce1c:: ds 1
-wce1d:: ds 1
-wce1e:: ds 1
-wce1f:: ds 1
-wce20:: ds 1
-wce21:: ds 1
-wce22:: ds 1
-wce23:: ds 1
-wce24:: ds 1
-wce25:: ds 1
-wce26:: ds 1
-wce27:: ds 1
-wce28:: ds 1
-wce29:: ds 1
-wce2a:: ds 1
-wce2b:: ds 1
-wce2c:: ds 1
-wce2d:: ds 1
-wce2e:: ds 1
-wce2f:: ds 1
-wce30:: ds 1
-wce31:: ds 1
-wce32:: ds 1
-wce33:: ds 1
-wce34:: ds 1
-wce35:: ds 1
-wce36:: ds 1
-wce37:: ds 1
-wce38:: ds 1
-wce39:: ds 1
-wce3a:: ds 1
-wce3b:: ds 1
-wce3c:: ds 1
-wce3d:: ds 1
-wce3e:: ds 1
-wce3f:: ds 1
-wce40:: ds 1
-wce41:: ds 1
-wce42:: ds 1
-wce43:: ds 1
-wce44:: ds 1
-wce45:: ds 1
-wce46:: ds 1
-wce47:: ds 1
-wce48:: ds 1
-wce49:: ds 1
-wce4a:: ds 1
-wce4b:: ds 1
-wce4c:: ds 1
-wce4d:: ds 1
-wce4e:: ds 1
-wce4f:: ds 1
-wce50:: ds 1
-wce51:: ds 1
-wce52:: ds 1
-wce53:: ds 1
-wce54:: ds 1
-wce55:: ds 1
-wce56:: ds 1
-wce57:: ds 1
-wce58:: ds 1
-wce59:: ds 1
-wce5a:: ds 1
+wc700:: ds 1 ; c700
+wc701:: ds 1 ; c701
+wc702:: ds 1 ; c702
+wc703:: ds 1 ; c703
+wc704:: ds 1 ; c704
+wc705:: ds 1 ; c705
+wc706:: ds 1 ; c706
+wc707:: ds 1 ; c707
+wc708:: ds 1 ; c708
+wc709:: ds 1 ; c709
+wc70a:: ds 1 ; c70a
+wc70b:: ds 1 ; c70b
+wc70c:: ds 1 ; c70c
+wc70d:: ds 1 ; c70d
+wc70e:: ds 1 ; c70e
+wc70f:: ds 1 ; c70f
+wc710:: ds 1 ; c710
+wc711:: ds 1 ; c711
+wc712:: ds 1 ; c712
+wc713:: ds 1 ; c713
+wc714:: ds 1 ; c714
+wc715:: ds 1 ; c715
+wc716:: ds 1 ; c716
+wc717:: ds 1 ; c717
+wc718:: ds 1 ; c718
+wc719:: ds 1 ; c719
+wc71a:: ds 1 ; c71a
+wc71b:: ds 1 ; c71b
+wc71c:: ds 1 ; c71c
+wc71d:: ds 1 ; c71d
+wc71e:: ds 1 ; c71e
+wc71f:: ds 1 ; c71f
+wc720:: ds 1 ; c720
+wc721:: ds 1 ; c721
+wc722:: ds 1 ; c722
+wc723:: ds 1 ; c723
+wc724:: ds 1 ; c724
+wc725:: ds 1 ; c725
+wc726:: ds 1 ; c726
+wc727:: ds 1 ; c727
+wc728:: ds 1 ; c728
+wc729:: ds 1 ; c729
+wc72a:: ds 1 ; c72a
+wc72b:: ds 1 ; c72b
+wc72c:: ds 1 ; c72c
+wc72d:: ds 1 ; c72d
+wc72e:: ds 1 ; c72e
+wc72f:: ds 1 ; c72f
+wc730:: ds 1 ; c730
+wc731:: ds 1 ; c731
+wc732:: ds 1 ; c732
+wc733:: ds 1 ; c733
+wc734:: ds 1 ; c734
+wc735:: ds 1 ; c735
+wc736:: ds 1 ; c736
+wc737:: ds 1 ; c737
+wc738:: ds 1 ; c738
+wc739:: ds 1 ; c739
+wc73a:: ds 1 ; c73a
+wc73b:: ds 1 ; c73b
+wc73c:: ds 1 ; c73c
+wc73d:: ds 1 ; c73d
+wc73e:: ds 1 ; c73e
+wc73f:: ds 1 ; c73f
+wc740:: ds 1 ; c740
+wc741:: ds 1 ; c741
+wc742:: ds 1 ; c742
+wc743:: ds 1 ; c743
+wc744:: ds 1 ; c744
+wc745:: ds 1 ; c745
+wc746:: ds 1 ; c746
+wc747:: ds 1 ; c747
+wc748:: ds 1 ; c748
+wc749:: ds 1 ; c749
+wc74a:: ds 1 ; c74a
+wc74b:: ds 1 ; c74b
+wc74c:: ds 1 ; c74c
+wc74d:: ds 1 ; c74d
+wc74e:: ds 1 ; c74e
+wc74f:: ds 1 ; c74f
+wc750:: ds 1 ; c750
+wc751:: ds 1 ; c751
+wc752:: ds 1 ; c752
+wc753:: ds 1 ; c753
+wc754:: ds 1 ; c754
+wc755:: ds 1 ; c755
+wc756:: ds 1 ; c756
+wc757:: ds 1 ; c757
+wc758:: ds 1 ; c758
+wc759:: ds 1 ; c759
+wc75a:: ds 1 ; c75a
+wc75b:: ds 1 ; c75b
+wc75c:: ds 1 ; c75c
+wc75d:: ds 1 ; c75d
+wc75e:: ds 1 ; c75e
+wc75f:: ds 1 ; c75f
+wc760:: ds 1 ; c760
+wc761:: ds 1 ; c761
+wc762:: ds 1 ; c762
+wc763:: ds 1 ; c763
+wc764:: ds 1 ; c764
+wc765:: ds 1 ; c765
+wc766:: ds 1 ; c766
+wc767:: ds 1 ; c767
+wc768:: ds 1 ; c768
+wc769:: ds 1 ; c769
+wc76a:: ds 1 ; c76a
+wc76b:: ds 1 ; c76b
+wc76c:: ds 1 ; c76c
+wc76d:: ds 1 ; c76d
+wc76e:: ds 1 ; c76e
+wc76f:: ds 1 ; c76f
+wc770:: ds 1 ; c770
+wc771:: ds 1 ; c771
+wc772:: ds 1 ; c772
+wc773:: ds 1 ; c773
+wc774:: ds 1 ; c774
+wc775:: ds 1 ; c775
+wc776:: ds 1 ; c776
+wc777:: ds 1 ; c777
+wc778:: ds 1 ; c778
+wc779:: ds 1 ; c779
+wc77a:: ds 1 ; c77a
+wc77b:: ds 1 ; c77b
+wc77c:: ds 1 ; c77c
+wc77d:: ds 1 ; c77d
+wc77e:: ds 1 ; c77e
+wc77f:: ds 1 ; c77f
+wc780:: ds 1 ; c780
+wc781:: ds 1 ; c781
+wc782:: ds 1 ; c782
+wc783:: ds 1 ; c783
+wc784:: ds 1 ; c784
+wc785:: ds 1 ; c785
+wc786:: ds 1 ; c786
+wc787:: ds 1 ; c787
+wc788:: ds 1 ; c788
+wc789:: ds 1 ; c789
+wc78a:: ds 1 ; c78a
+wc78b:: ds 1 ; c78b
+wc78c:: ds 1 ; c78c
+wc78d:: ds 1 ; c78d
+wc78e:: ds 1 ; c78e
+wc78f:: ds 1 ; c78f
+wc790:: ds 1 ; c790
+wc791:: ds 1 ; c791
+wc792:: ds 1 ; c792
+wc793:: ds 1 ; c793
+wc794:: ds 1 ; c794
+wc795:: ds 1 ; c795
+wc796:: ds 1 ; c796
+wc797:: ds 1 ; c797
+wc798:: ds 1 ; c798
+wc799:: ds 1 ; c799
+wc79a:: ds 1 ; c79a
+wc79b:: ds 1 ; c79b
+wc79c:: ds 1 ; c79c
+wc79d:: ds 1 ; c79d
+wc79e:: ds 1 ; c79e
+wc79f:: ds 1 ; c79f
+wc7a0:: ds 1 ; c7a0
+wc7a1:: ds 1 ; c7a1
+wc7a2:: ds 1 ; c7a2
+wc7a3:: ds 1 ; c7a3
+wc7a4:: ds 1 ; c7a4
+wc7a5:: ds 1 ; c7a5
+wc7a6:: ds 1 ; c7a6
+wc7a7:: ds 1 ; c7a7
+wc7a8:: ds 1 ; c7a8
+wc7a9:: ds 1 ; c7a9
+wc7aa:: ds 1 ; c7aa
+wc7ab:: ds 1 ; c7ab
+wc7ac:: ds 1 ; c7ac
+wc7ad:: ds 1 ; c7ad
+wc7ae:: ds 1 ; c7ae
+wc7af:: ds 1 ; c7af
+wc7b0:: ds 1 ; c7b0
+wc7b1:: ds 1 ; c7b1
+wc7b2:: ds 1 ; c7b2
+wc7b3:: ds 1 ; c7b3
+wc7b4:: ds 1 ; c7b4
+wc7b5:: ds 1 ; c7b5
+wc7b6:: ds 1 ; c7b6
+wc7b7:: ds 1 ; c7b7
+wc7b8:: ds 1 ; c7b8
+wc7b9:: ds 1 ; c7b9
+wc7ba:: ds 1 ; c7ba
+wc7bb:: ds 1 ; c7bb
+wc7bc:: ds 1 ; c7bc
+wc7bd:: ds 1 ; c7bd
+wc7be:: ds 1 ; c7be
+wc7bf:: ds 1 ; c7bf
+wc7c0:: ds 1 ; c7c0
+wc7c1:: ds 1 ; c7c1
+wc7c2:: ds 1 ; c7c2
+wc7c3:: ds 1 ; c7c3
+wc7c4:: ds 1 ; c7c4
+wc7c5:: ds 1 ; c7c5
+wc7c6:: ds 1 ; c7c6
+wc7c7:: ds 1 ; c7c7
+wc7c8:: ds 1 ; c7c8
+wc7c9:: ds 1 ; c7c9
+wc7ca:: ds 1 ; c7ca
+wc7cb:: ds 1 ; c7cb
+wc7cc:: ds 1 ; c7cc
+wc7cd:: ds 1 ; c7cd
+wc7ce:: ds 1 ; c7ce
+wc7cf:: ds 1 ; c7cf
+wc7d0:: ds 1 ; c7d0
+wc7d1:: ds 1 ; c7d1
+wc7d2:: ds 1 ; c7d2
+wc7d3:: ds 1 ; c7d3
+wc7d4:: ds 1 ; c7d4
+wc7d5:: ds 1 ; c7d5
+wc7d6:: ds 1 ; c7d6
+wc7d7:: ds 1 ; c7d7
+wc7d8:: ds 1 ; c7d8
+wc7d9:: ds 1 ; c7d9
+wc7da:: ds 1 ; c7da
+wc7db:: ds 1 ; c7db
+wc7dc:: ds 1 ; c7dc
+wc7dd:: ds 1 ; c7dd
+wc7de:: ds 1 ; c7de
+wc7df:: ds 1 ; c7df
+wc7e0:: ds 1 ; c7e0
+wc7e1:: ds 1 ; c7e1
+wc7e2:: ds 1 ; c7e2
+wc7e3:: ds 1 ; c7e3
+wc7e4:: ds 1 ; c7e4
+wc7e5:: ds 1 ; c7e5
+wc7e6:: ds 1 ; c7e6
+wc7e7:: ds 1 ; c7e7
+wc7e8:: ds 1 ; c7e8
+wc7e9:: ds 1 ; c7e9
+wc7ea:: ds 1 ; c7ea
+wc7eb:: ds 1 ; c7eb
+wc7ec:: ds 1 ; c7ec
+wc7ed:: ds 1 ; c7ed
+wc7ee:: ds 1 ; c7ee
+wc7ef:: ds 1 ; c7ef
+wc7f0:: ds 1 ; c7f0
+wc7f1:: ds 1 ; c7f1
+wc7f2:: ds 1 ; c7f2
+wc7f3:: ds 1 ; c7f3
+wc7f4:: ds 1 ; c7f4
+wc7f5:: ds 1 ; c7f5
+wc7f6:: ds 1 ; c7f6
+wc7f7:: ds 1 ; c7f7
+wc7f8:: ds 1 ; c7f8
+wc7f9:: ds 1 ; c7f9
+wc7fa:: ds 1 ; c7fa
+wc7fb:: ds 1 ; c7fb
+wc7fc:: ds 1 ; c7fc
+wc7fd:: ds 1 ; c7fd
+wc7fe:: ds 1 ; c7fe
+wc7ff:: ds 1 ; c7ff
+wc800:: ds 1 ; c800
+wc801:: ds 1 ; c801
+wc802:: ds 1 ; c802
+wc803:: ds 1 ; c803
+wc804:: ds 1 ; c804
+wc805:: ds 1 ; c805
+wc806:: ds 1 ; c806
+wc807:: ds 1 ; c807
+wc808:: ds 1 ; c808
+wc809:: ds 1 ; c809
+wc80a:: ds 1 ; c80a
+wc80b:: ds 1 ; c80b
+wc80c:: ds 1 ; c80c
+wc80d:: ds 1 ; c80d
+wc80e:: ds 1 ; c80e
+wc80f:: ds 1 ; c80f
+wc810:: ds 1 ; c810
+wc811:: ds 1 ; c811
+wc812:: ds 1 ; c812
+wc813:: ds 1 ; c813
+wc814:: ds 1 ; c814
+wc815:: ds 1 ; c815
+wc816:: ds 1 ; c816
+wc817:: ds 1 ; c817
+wc818:: ds 1 ; c818
+wc819:: ds 1 ; c819
+wc81a:: ds 1 ; c81a
+wc81b:: ds 1 ; c81b
+wc81c:: ds 1 ; c81c
+wc81d:: ds 1 ; c81d
+wc81e:: ds 1 ; c81e
+wc81f:: ds 1 ; c81f
+wc820:: ds 1 ; c820
+wc821:: ds 1 ; c821
+wc822:: ds 1 ; c822
+wc823:: ds 1 ; c823
+wc824:: ds 1 ; c824
+wc825:: ds 1 ; c825
+wc826:: ds 1 ; c826
+wc827:: ds 1 ; c827
+wc828:: ds 1 ; c828
+wc829:: ds 1 ; c829
+wc82a:: ds 1 ; c82a
+wc82b:: ds 1 ; c82b
+wc82c:: ds 1 ; c82c
+wc82d:: ds 1 ; c82d
+wc82e:: ds 1 ; c82e
+wc82f:: ds 1 ; c82f
+wc830:: ds 1 ; c830
+wc831:: ds 1 ; c831
+wc832:: ds 1 ; c832
+wc833:: ds 1 ; c833
+wc834:: ds 1 ; c834
+wc835:: ds 1 ; c835
+wc836:: ds 1 ; c836
+wc837:: ds 1 ; c837
+wc838:: ds 1 ; c838
+wc839:: ds 1 ; c839
+wc83a:: ds 1 ; c83a
+wc83b:: ds 1 ; c83b
+wc83c:: ds 1 ; c83c
+wc83d:: ds 1 ; c83d
+wc83e:: ds 1 ; c83e
+wc83f:: ds 1 ; c83f
+wc840:: ds 1 ; c840
+wc841:: ds 1 ; c841
+wc842:: ds 1 ; c842
+wc843:: ds 1 ; c843
+wc844:: ds 1 ; c844
+wc845:: ds 1 ; c845
+wc846:: ds 1 ; c846
+wc847:: ds 1 ; c847
+wc848:: ds 1 ; c848
+wc849:: ds 1 ; c849
+wc84a:: ds 1 ; c84a
+wc84b:: ds 1 ; c84b
+wc84c:: ds 1 ; c84c
+wc84d:: ds 1 ; c84d
+wc84e:: ds 1 ; c84e
+wc84f:: ds 1 ; c84f
+wc850:: ds 1 ; c850
+wc851:: ds 1 ; c851
+wc852:: ds 1 ; c852
+wc853:: ds 1 ; c853
+wc854:: ds 1 ; c854
+wc855:: ds 1 ; c855
+wc856:: ds 1 ; c856
+wc857:: ds 1 ; c857
+wc858:: ds 1 ; c858
+wc859:: ds 1 ; c859
+wc85a:: ds 1 ; c85a
+wc85b:: ds 1 ; c85b
+wc85c:: ds 1 ; c85c
+wc85d:: ds 1 ; c85d
+wc85e:: ds 1 ; c85e
+wc85f:: ds 1 ; c85f
+wc860:: ds 1 ; c860
+wc861:: ds 1 ; c861
+wc862:: ds 1 ; c862
+wc863:: ds 1 ; c863
+wc864:: ds 1 ; c864
+wc865:: ds 1 ; c865
+wc866:: ds 1 ; c866
+wc867:: ds 1 ; c867
+wc868:: ds 1 ; c868
+wc869:: ds 1 ; c869
+wc86a:: ds 1 ; c86a
+wc86b:: ds 1 ; c86b
+wc86c:: ds 1 ; c86c
+wc86d:: ds 1 ; c86d
+wc86e:: ds 1 ; c86e
+wc86f:: ds 1 ; c86f
+wc870:: ds 1 ; c870
+wc871:: ds 1 ; c871
+wc872:: ds 1 ; c872
+wc873:: ds 1 ; c873
+wc874:: ds 1 ; c874
+wc875:: ds 1 ; c875
+wc876:: ds 1 ; c876
+wc877:: ds 1 ; c877
+wc878:: ds 1 ; c878
+wc879:: ds 1 ; c879
+wc87a:: ds 1 ; c87a
+wc87b:: ds 1 ; c87b
+wc87c:: ds 1 ; c87c
+wc87d:: ds 1 ; c87d
+wc87e:: ds 1 ; c87e
+wc87f:: ds 1 ; c87f
+wc880:: ds 1 ; c880
+wc881:: ds 1 ; c881
+wc882:: ds 1 ; c882
+wc883:: ds 1 ; c883
+wc884:: ds 1 ; c884
+wc885:: ds 1 ; c885
+wc886:: ds 1 ; c886
+wc887:: ds 1 ; c887
+wc888:: ds 1 ; c888
+wc889:: ds 1 ; c889
+wc88a:: ds 1 ; c88a
+wc88b:: ds 1 ; c88b
+wc88c:: ds 1 ; c88c
+wc88d:: ds 1 ; c88d
+wc88e:: ds 1 ; c88e
+wc88f:: ds 1 ; c88f
+wc890:: ds 1 ; c890
+wc891:: ds 1 ; c891
+wc892:: ds 1 ; c892
+wc893:: ds 1 ; c893
+wc894:: ds 1 ; c894
+wc895:: ds 1 ; c895
+wc896:: ds 1 ; c896
+wc897:: ds 1 ; c897
+wc898:: ds 1 ; c898
+wc899:: ds 1 ; c899
+wc89a:: ds 1 ; c89a
+wc89b:: ds 1 ; c89b
+wc89c:: ds 1 ; c89c
+wc89d:: ds 1 ; c89d
+wc89e:: ds 1 ; c89e
+wc89f:: ds 1 ; c89f
+wc8a0:: ds 1 ; c8a0
+wc8a1:: ds 1 ; c8a1
+wc8a2:: ds 1 ; c8a2
+wc8a3:: ds 1 ; c8a3
+wc8a4:: ds 1 ; c8a4
+wc8a5:: ds 1 ; c8a5
+wc8a6:: ds 1 ; c8a6
+wc8a7:: ds 1 ; c8a7
+wc8a8:: ds 1 ; c8a8
+wc8a9:: ds 1 ; c8a9
+wc8aa:: ds 1 ; c8aa
+wc8ab:: ds 1 ; c8ab
+wc8ac:: ds 1 ; c8ac
+wc8ad:: ds 1 ; c8ad
+wc8ae:: ds 1 ; c8ae
+wc8af:: ds 1 ; c8af
+wc8b0:: ds 1 ; c8b0
+wc8b1:: ds 1 ; c8b1
+wc8b2:: ds 1 ; c8b2
+wc8b3:: ds 1 ; c8b3
+wc8b4:: ds 1 ; c8b4
+wc8b5:: ds 1 ; c8b5
+wc8b6:: ds 1 ; c8b6
+wc8b7:: ds 1 ; c8b7
+wc8b8:: ds 1 ; c8b8
+wc8b9:: ds 1 ; c8b9
+wc8ba:: ds 1 ; c8ba
+wc8bb:: ds 1 ; c8bb
+wc8bc:: ds 1 ; c8bc
+wc8bd:: ds 1 ; c8bd
+wc8be:: ds 1 ; c8be
+wc8bf:: ds 1 ; c8bf
+wc8c0:: ds 1 ; c8c0
+wc8c1:: ds 1 ; c8c1
+wc8c2:: ds 1 ; c8c2
+wc8c3:: ds 1 ; c8c3
+wc8c4:: ds 1 ; c8c4
+wc8c5:: ds 1 ; c8c5
+wc8c6:: ds 1 ; c8c6
+wc8c7:: ds 1 ; c8c7
+wc8c8:: ds 1 ; c8c8
+wc8c9:: ds 1 ; c8c9
+wc8ca:: ds 1 ; c8ca
+wc8cb:: ds 1 ; c8cb
+wc8cc:: ds 1 ; c8cc
+wc8cd:: ds 1 ; c8cd
+wc8ce:: ds 1 ; c8ce
+wc8cf:: ds 1 ; c8cf
+wc8d0:: ds 1 ; c8d0
+wc8d1:: ds 1 ; c8d1
+wc8d2:: ds 1 ; c8d2
+wc8d3:: ds 1 ; c8d3
+wc8d4:: ds 1 ; c8d4
+wc8d5:: ds 1 ; c8d5
+wc8d6:: ds 1 ; c8d6
+wc8d7:: ds 1 ; c8d7
+wc8d8:: ds 1 ; c8d8
+wc8d9:: ds 1 ; c8d9
+wc8da:: ds 1 ; c8da
+wc8db:: ds 1 ; c8db
+wc8dc:: ds 1 ; c8dc
+wc8dd:: ds 1 ; c8dd
+wc8de:: ds 1 ; c8de
+wc8df:: ds 1 ; c8df
+wc8e0:: ds 1 ; c8e0
+wc8e1:: ds 1 ; c8e1
+wc8e2:: ds 1 ; c8e2
+wc8e3:: ds 1 ; c8e3
+wc8e4:: ds 1 ; c8e4
+wc8e5:: ds 1 ; c8e5
+wc8e6:: ds 1 ; c8e6
+wc8e7:: ds 1 ; c8e7
+wc8e8:: ds 1 ; c8e8
+wc8e9:: ds 1 ; c8e9
+wc8ea:: ds 1 ; c8ea
+wc8eb:: ds 1 ; c8eb
+wc8ec:: ds 1 ; c8ec
+wc8ed:: ds 1 ; c8ed
+wc8ee:: ds 1 ; c8ee
+wc8ef:: ds 1 ; c8ef
+wc8f0:: ds 1 ; c8f0
+wc8f1:: ds 1 ; c8f1
+wc8f2:: ds 1 ; c8f2
+wc8f3:: ds 1 ; c8f3
+wc8f4:: ds 1 ; c8f4
+wc8f5:: ds 1 ; c8f5
+wc8f6:: ds 1 ; c8f6
+wc8f7:: ds 1 ; c8f7
+wc8f8:: ds 1 ; c8f8
+wc8f9:: ds 1 ; c8f9
+wc8fa:: ds 1 ; c8fa
+wc8fb:: ds 1 ; c8fb
+wc8fc:: ds 1 ; c8fc
+wc8fd:: ds 1 ; c8fd
+wc8fe:: ds 1 ; c8fe
+wc8ff:: ds 1 ; c8ff
+wc900:: ds 1 ; c900
+wc901:: ds 1 ; c901
+wc902:: ds 1 ; c902
+wc903:: ds 1 ; c903
+wc904:: ds 1 ; c904
+wc905:: ds 1 ; c905
+wc906:: ds 1 ; c906
+wc907:: ds 1 ; c907
+wc908:: ds 1 ; c908
+wc909:: ds 1 ; c909
+wc90a:: ds 1 ; c90a
+wc90b:: ds 1 ; c90b
+wc90c:: ds 1 ; c90c
+wc90d:: ds 1 ; c90d
+wc90e:: ds 1 ; c90e
+wc90f:: ds 1 ; c90f
+wc910:: ds 1 ; c910
+wc911:: ds 1 ; c911
+wc912:: ds 1 ; c912
+wc913:: ds 1 ; c913
+wc914:: ds 1 ; c914
+wc915:: ds 1 ; c915
+wc916:: ds 1 ; c916
+wc917:: ds 1 ; c917
+wc918:: ds 1 ; c918
+wc919:: ds 1 ; c919
+wc91a:: ds 1 ; c91a
+wc91b:: ds 1 ; c91b
+wc91c:: ds 1 ; c91c
+wc91d:: ds 1 ; c91d
+wc91e:: ds 1 ; c91e
+wc91f:: ds 1 ; c91f
+wc920:: ds 1 ; c920
+wc921:: ds 1 ; c921
+wc922:: ds 1 ; c922
+wc923:: ds 1 ; c923
+wc924:: ds 1 ; c924
+wc925:: ds 1 ; c925
+wc926:: ds 1 ; c926
+wc927:: ds 1 ; c927
+wc928:: ds 1 ; c928
+wc929:: ds 1 ; c929
+wc92a:: ds 1 ; c92a
+wc92b:: ds 1 ; c92b
+wc92c:: ds 1 ; c92c
+wc92d:: ds 1 ; c92d
+wc92e:: ds 1 ; c92e
+wc92f:: ds 1 ; c92f
+wc930:: ds 1 ; c930
+wc931:: ds 1 ; c931
+wc932:: ds 1 ; c932
+wc933:: ds 1 ; c933
+wc934:: ds 1 ; c934
+wc935:: ds 1 ; c935
+wc936:: ds 1 ; c936
+wc937:: ds 1 ; c937
+wc938:: ds 1 ; c938
+wc939:: ds 1 ; c939
+wc93a:: ds 1 ; c93a
+wc93b:: ds 1 ; c93b
+wc93c:: ds 1 ; c93c
+wc93d:: ds 1 ; c93d
+wc93e:: ds 1 ; c93e
+wc93f:: ds 1 ; c93f
+wc940:: ds 1 ; c940
+wc941:: ds 1 ; c941
+wc942:: ds 1 ; c942
+wc943:: ds 1 ; c943
+wc944:: ds 1 ; c944
+wc945:: ds 1 ; c945
+wc946:: ds 1 ; c946
+wc947:: ds 1 ; c947
+wc948:: ds 1 ; c948
+wc949:: ds 1 ; c949
+wc94a:: ds 1 ; c94a
+wc94b:: ds 1 ; c94b
+wc94c:: ds 1 ; c94c
+wc94d:: ds 1 ; c94d
+wc94e:: ds 1 ; c94e
+wc94f:: ds 1 ; c94f
+wc950:: ds 1 ; c950
+wc951:: ds 1 ; c951
+wc952:: ds 1 ; c952
+wc953:: ds 1 ; c953
+wc954:: ds 1 ; c954
+wc955:: ds 1 ; c955
+wc956:: ds 1 ; c956
+wc957:: ds 1 ; c957
+wc958:: ds 1 ; c958
+wc959:: ds 1 ; c959
+wc95a:: ds 1 ; c95a
+wc95b:: ds 1 ; c95b
+wc95c:: ds 1 ; c95c
+wc95d:: ds 1 ; c95d
+wc95e:: ds 1 ; c95e
+wc95f:: ds 1 ; c95f
+wc960:: ds 1 ; c960
+wc961:: ds 1 ; c961
+wc962:: ds 1 ; c962
+wc963:: ds 1 ; c963
+wc964:: ds 1 ; c964
+wc965:: ds 1 ; c965
+wc966:: ds 1 ; c966
+wc967:: ds 1 ; c967
+wc968:: ds 1 ; c968
+wc969:: ds 1 ; c969
+wc96a:: ds 1 ; c96a
+wc96b:: ds 1 ; c96b
+wc96c:: ds 1 ; c96c
+wc96d:: ds 1 ; c96d
+wc96e:: ds 1 ; c96e
+wc96f:: ds 1 ; c96f
+wc970:: ds 1 ; c970
+wc971:: ds 1 ; c971
+wc972:: ds 1 ; c972
+wc973:: ds 1 ; c973
+wc974:: ds 1 ; c974
+wc975:: ds 1 ; c975
+wc976:: ds 1 ; c976
+wc977:: ds 1 ; c977
+wc978:: ds 1 ; c978
+wc979:: ds 1 ; c979
+wc97a:: ds 1 ; c97a
+wc97b:: ds 1 ; c97b
+wc97c:: ds 1 ; c97c
+wc97d:: ds 1 ; c97d
+wc97e:: ds 1 ; c97e
+wc97f:: ds 1 ; c97f
+wc980:: ds 1 ; c980
+wc981:: ds 1 ; c981
+wc982:: ds 1 ; c982
+wc983:: ds 1 ; c983
+wc984:: ds 1 ; c984
+wc985:: ds 1 ; c985
+wc986:: ds 1 ; c986
+wc987:: ds 1 ; c987
+wc988:: ds 1 ; c988
+wc989:: ds 1 ; c989
+wc98a:: ds 1 ; c98a
+wc98b:: ds 1 ; c98b
+wc98c:: ds 1 ; c98c
+wc98d:: ds 1 ; c98d
+wc98e:: ds 1 ; c98e
+wc98f:: ds 1 ; c98f
+wc990:: ds 1 ; c990
+wc991:: ds 1 ; c991
+wc992:: ds 1 ; c992
+wc993:: ds 1 ; c993
+wc994:: ds 1 ; c994
+wc995:: ds 1 ; c995
+wc996:: ds 1 ; c996
+wc997:: ds 1 ; c997
+wc998:: ds 1 ; c998
+wc999:: ds 1 ; c999
+wc99a:: ds 1 ; c99a
+wc99b:: ds 1 ; c99b
+wc99c:: ds 1 ; c99c
+wc99d:: ds 1 ; c99d
+wc99e:: ds 1 ; c99e
+wc99f:: ds 1 ; c99f
+wc9a0:: ds 1 ; c9a0
+wc9a1:: ds 1 ; c9a1
+wc9a2:: ds 1 ; c9a2
+wc9a3:: ds 1 ; c9a3
+wc9a4:: ds 1 ; c9a4
+wc9a5:: ds 1 ; c9a5
+wc9a6:: ds 1 ; c9a6
+wc9a7:: ds 1 ; c9a7
+wc9a8:: ds 1 ; c9a8
+wc9a9:: ds 1 ; c9a9
+wc9aa:: ds 1 ; c9aa
+wc9ab:: ds 1 ; c9ab
+wc9ac:: ds 1 ; c9ac
+wc9ad:: ds 1 ; c9ad
+wc9ae:: ds 1 ; c9ae
+wc9af:: ds 1 ; c9af
+wc9b0:: ds 1 ; c9b0
+wc9b1:: ds 1 ; c9b1
+wc9b2:: ds 1 ; c9b2
+wc9b3:: ds 1 ; c9b3
+wc9b4:: ds 1 ; c9b4
+wc9b5:: ds 1 ; c9b5
+wc9b6:: ds 1 ; c9b6
+wc9b7:: ds 1 ; c9b7
+wc9b8:: ds 1 ; c9b8
+wc9b9:: ds 1 ; c9b9
+wc9ba:: ds 1 ; c9ba
+wc9bb:: ds 1 ; c9bb
+wc9bc:: ds 1 ; c9bc
+wc9bd:: ds 1 ; c9bd
+wc9be:: ds 1 ; c9be
+wc9bf:: ds 1 ; c9bf
+wc9c0:: ds 1 ; c9c0
+wc9c1:: ds 1 ; c9c1
+wc9c2:: ds 1 ; c9c2
+wc9c3:: ds 1 ; c9c3
+wc9c4:: ds 1 ; c9c4
+wc9c5:: ds 1 ; c9c5
+wc9c6:: ds 1 ; c9c6
+wc9c7:: ds 1 ; c9c7
+wc9c8:: ds 1 ; c9c8
+wc9c9:: ds 1 ; c9c9
+wc9ca:: ds 1 ; c9ca
+wc9cb:: ds 1 ; c9cb
+wc9cc:: ds 1 ; c9cc
+wc9cd:: ds 1 ; c9cd
+wc9ce:: ds 1 ; c9ce
+wc9cf:: ds 1 ; c9cf
+wc9d0:: ds 1 ; c9d0
+wc9d1:: ds 1 ; c9d1
+wc9d2:: ds 1 ; c9d2
+wc9d3:: ds 1 ; c9d3
+wc9d4:: ds 1 ; c9d4
+wc9d5:: ds 1 ; c9d5
+wc9d6:: ds 1 ; c9d6
+wc9d7:: ds 1 ; c9d7
+wc9d8:: ds 1 ; c9d8
+wc9d9:: ds 1 ; c9d9
+wc9da:: ds 1 ; c9da
+wc9db:: ds 1 ; c9db
+wc9dc:: ds 1 ; c9dc
+wc9dd:: ds 1 ; c9dd
+wc9de:: ds 1 ; c9de
+wc9df:: ds 1 ; c9df
+wc9e0:: ds 1 ; c9e0
+wc9e1:: ds 1 ; c9e1
+wc9e2:: ds 1 ; c9e2
+wc9e3:: ds 1 ; c9e3
+wc9e4:: ds 1 ; c9e4
+wc9e5:: ds 1 ; c9e5
+wc9e6:: ds 1 ; c9e6
+wc9e7:: ds 1 ; c9e7
+wc9e8:: ds 1 ; c9e8
+wc9e9:: ds 1 ; c9e9
+wc9ea:: ds 1 ; c9ea
+wc9eb:: ds 1 ; c9eb
+wc9ec:: ds 1 ; c9ec
+wc9ed:: ds 1 ; c9ed
+wc9ee:: ds 1 ; c9ee
+wc9ef:: ds 1 ; c9ef
+wc9f0:: ds 1 ; c9f0
+wc9f1:: ds 1 ; c9f1
+wc9f2:: ds 1 ; c9f2
+wc9f3:: ds 1 ; c9f3
+wc9f4:: ds 1 ; c9f4
+wc9f5:: ds 1 ; c9f5
+wc9f6:: ds 1 ; c9f6
+wc9f7:: ds 1 ; c9f7
+wc9f8:: ds 1 ; c9f8
+wc9f9:: ds 1 ; c9f9
+wc9fa:: ds 1 ; c9fa
+wc9fb:: ds 1 ; c9fb
+wc9fc:: ds 1 ; c9fc
+wc9fd:: ds 1 ; c9fd
+wc9fe:: ds 1 ; c9fe
+wc9ff:: ds 1 ; c9ff
+wca00:: ds 1 ; ca00
+wca01:: ds 1 ; ca01
+wca02:: ds 1 ; ca02
+wca03:: ds 1 ; ca03
+wca04:: ds 1 ; ca04
+wca05:: ds 1 ; ca05
+wca06:: ds 1 ; ca06
+wca07:: ds 1 ; ca07
+wca08:: ds 1 ; ca08
+wca09:: ds 1 ; ca09
+wca0a:: ds 1 ; ca0a
+wca0b:: ds 1 ; ca0b
+wca0c:: ds 1 ; ca0c
+wca0d:: ds 1 ; ca0d
+wca0e:: ds 1 ; ca0e
+wca0f:: ds 1 ; ca0f
+wca10:: ds 1 ; ca10
+wca11:: ds 1 ; ca11
+wca12:: ds 1 ; ca12
+wca13:: ds 1 ; ca13
+wca14:: ds 1 ; ca14
+wca15:: ds 1 ; ca15
+wca16:: ds 1 ; ca16
+wca17:: ds 1 ; ca17
+wca18:: ds 1 ; ca18
+wca19:: ds 1 ; ca19
+wca1a:: ds 1 ; ca1a
+wca1b:: ds 1 ; ca1b
+wca1c:: ds 1 ; ca1c
+wca1d:: ds 1 ; ca1d
+wca1e:: ds 1 ; ca1e
+wca1f:: ds 1 ; ca1f
+wca20:: ds 1 ; ca20
+wca21:: ds 1 ; ca21
+wca22:: ds 1 ; ca22
+wca23:: ds 1 ; ca23
+wca24:: ds 1 ; ca24
+wca25:: ds 1 ; ca25
+wca26:: ds 1 ; ca26
+wca27:: ds 1 ; ca27
+wca28:: ds 1 ; ca28
+wca29:: ds 1 ; ca29
+wca2a:: ds 1 ; ca2a
+wca2b:: ds 1 ; ca2b
+wca2c:: ds 1 ; ca2c
+wca2d:: ds 1 ; ca2d
+wca2e:: ds 1 ; ca2e
+wca2f:: ds 1 ; ca2f
+wca30:: ds 1 ; ca30
+wca31:: ds 1 ; ca31
+wca32:: ds 1 ; ca32
+wca33:: ds 1 ; ca33
+wca34:: ds 1 ; ca34
+wca35:: ds 1 ; ca35
+wca36:: ds 1 ; ca36
+wca37:: ds 1 ; ca37
+wca38:: ds 1 ; ca38
+wca39:: ds 1 ; ca39
+wca3a:: ds 1 ; ca3a
+wca3b:: ds 1 ; ca3b
+wca3c:: ds 1 ; ca3c
+wca3d:: ds 1 ; ca3d
+wca3e:: ds 1 ; ca3e
+wca3f:: ds 1 ; ca3f
+wca40:: ds 1 ; ca40
+wca41:: ds 1 ; ca41
+wca42:: ds 1 ; ca42
+wca43:: ds 1 ; ca43
+wca44:: ds 1 ; ca44
+wca45:: ds 1 ; ca45
+wca46:: ds 1 ; ca46
+wca47:: ds 1 ; ca47
+wca48:: ds 1 ; ca48
+wca49:: ds 1 ; ca49
+wca4a:: ds 1 ; ca4a
+wca4b:: ds 1 ; ca4b
+wca4c:: ds 1 ; ca4c
+wca4d:: ds 1 ; ca4d
+wca4e:: ds 1 ; ca4e
+wca4f:: ds 1 ; ca4f
+wca50:: ds 1 ; ca50
+wca51:: ds 1 ; ca51
+wca52:: ds 1 ; ca52
+wca53:: ds 1 ; ca53
+wca54:: ds 1 ; ca54
+wca55:: ds 1 ; ca55
+wca56:: ds 1 ; ca56
+wca57:: ds 1 ; ca57
+wca58:: ds 1 ; ca58
+wca59:: ds 1 ; ca59
+wca5a:: ds 1 ; ca5a
+wca5b:: ds 1 ; ca5b
+wca5c:: ds 1 ; ca5c
+wca5d:: ds 1 ; ca5d
+wca5e:: ds 1 ; ca5e
+wca5f:: ds 1 ; ca5f
+wca60:: ds 1 ; ca60
+wca61:: ds 1 ; ca61
+wca62:: ds 1 ; ca62
+wca63:: ds 1 ; ca63
+wca64:: ds 1 ; ca64
+wca65:: ds 1 ; ca65
+wca66:: ds 1 ; ca66
+wca67:: ds 1 ; ca67
+wca68:: ds 1 ; ca68
+wca69:: ds 1 ; ca69
+wca6a:: ds 1 ; ca6a
+wca6b:: ds 1 ; ca6b
+wca6c:: ds 1 ; ca6c
+wca6d:: ds 1 ; ca6d
+wca6e:: ds 1 ; ca6e
+wca6f:: ds 1 ; ca6f
+wca70:: ds 1 ; ca70
+wca71:: ds 1 ; ca71
+wca72:: ds 1 ; ca72
+wca73:: ds 1 ; ca73
+wca74:: ds 1 ; ca74
+wca75:: ds 1 ; ca75
+wca76:: ds 1 ; ca76
+wca77:: ds 1 ; ca77
+wca78:: ds 1 ; ca78
+wca79:: ds 1 ; ca79
+wca7a:: ds 1 ; ca7a
+wca7b:: ds 1 ; ca7b
+wca7c:: ds 1 ; ca7c
+wca7d:: ds 1 ; ca7d
+wca7e:: ds 1 ; ca7e
+wca7f:: ds 1 ; ca7f
+wca80:: ds 1 ; ca80
+wca81:: ds 1 ; ca81
+wca82:: ds 1 ; ca82
+wca83:: ds 1 ; ca83
+wca84:: ds 1 ; ca84
+wca85:: ds 1 ; ca85
+wca86:: ds 1 ; ca86
+wca87:: ds 1 ; ca87
+wca88:: ds 1 ; ca88
+wca89:: ds 1 ; ca89
+wca8a:: ds 1 ; ca8a
+wca8b:: ds 1 ; ca8b
+wca8c:: ds 1 ; ca8c
+wca8d:: ds 1 ; ca8d
+wca8e:: ds 1 ; ca8e
+wca8f:: ds 1 ; ca8f
+wca90:: ds 1 ; ca90
+wca91:: ds 1 ; ca91
+wca92:: ds 1 ; ca92
+wca93:: ds 1 ; ca93
+wca94:: ds 1 ; ca94
+wca95:: ds 1 ; ca95
+wca96:: ds 1 ; ca96
+wca97:: ds 1 ; ca97
+wca98:: ds 1 ; ca98
+wca99:: ds 1 ; ca99
+wca9a:: ds 1 ; ca9a
+wca9b:: ds 1 ; ca9b
+wca9c:: ds 1 ; ca9c
+wca9d:: ds 1 ; ca9d
+wca9e:: ds 1 ; ca9e
+wca9f:: ds 1 ; ca9f
+wcaa0:: ds 1 ; caa0
+wcaa1:: ds 1 ; caa1
+wcaa2:: ds 1 ; caa2
+wcaa3:: ds 1 ; caa3
+wcaa4:: ds 1 ; caa4
+wcaa5:: ds 1 ; caa5
+wcaa6:: ds 1 ; caa6
+wcaa7:: ds 1 ; caa7
+wcaa8:: ds 1 ; caa8
+wcaa9:: ds 1 ; caa9
+wcaaa:: ds 1 ; caaa
+wcaab:: ds 1 ; caab
+wcaac:: ds 1 ; caac
+wcaad:: ds 1 ; caad
+wcaae:: ds 1 ; caae
+wcaaf:: ds 1 ; caaf
+wcab0:: ds 1 ; cab0
+wcab1:: ds 1 ; cab1
+wcab2:: ds 1 ; cab2
+wcab3:: ds 1 ; cab3
+wcab4:: ds 1 ; cab4
+wcab5:: ds 1 ; cab5
+wcab6:: ds 1 ; cab6
+wcab7:: ds 1 ; cab7
+wcab8:: ds 1 ; cab8
+wcab9:: ds 1 ; cab9
+wcaba:: ds 1 ; caba
+wcabb:: ds 1 ; cabb
+wcabc:: ds 1 ; cabc
+wcabd:: ds 1 ; cabd
+wcabe:: ds 1 ; cabe
+wcabf:: ds 1 ; cabf
+wcac0:: ds 1 ; cac0
+wcac1:: ds 1 ; cac1
+wcac2:: ds 1 ; cac2
+wcac3:: ds 1 ; cac3
+wcac4:: ds 1 ; cac4
+wcac5:: ds 1 ; cac5
+wcac6:: ds 1 ; cac6
+wcac7:: ds 1 ; cac7
+wcac8:: ds 1 ; cac8
+wcac9:: ds 1 ; cac9
+wcaca:: ds 1 ; caca
+wcacb:: ds 1 ; cacb
+wcacc:: ds 1 ; cacc
+wcacd:: ds 1 ; cacd
+wcace:: ds 1 ; cace
+wcacf:: ds 1 ; cacf
+wcad0:: ds 1 ; cad0
+wcad1:: ds 1 ; cad1
+wcad2:: ds 1 ; cad2
+wcad3:: ds 1 ; cad3
+wcad4:: ds 1 ; cad4
+wcad5:: ds 1 ; cad5
+wcad6:: ds 1 ; cad6
+wcad7:: ds 1 ; cad7
+wcad8:: ds 1 ; cad8
+wcad9:: ds 1 ; cad9
+wcada:: ds 1 ; cada
+wcadb:: ds 1 ; cadb
+wcadc:: ds 1 ; cadc
+wcadd:: ds 1 ; cadd
+wcade:: ds 1 ; cade
+wcadf:: ds 1 ; cadf
+wcae0:: ds 1 ; cae0
+wcae1:: ds 1 ; cae1
+wcae2:: ds 1 ; cae2
+wcae3:: ds 1 ; cae3
+wcae4:: ds 1 ; cae4
+wcae5:: ds 1 ; cae5
+wcae6:: ds 1 ; cae6
+wcae7:: ds 1 ; cae7
+wcae8:: ds 1 ; cae8
+wcae9:: ds 1 ; cae9
+wcaea:: ds 1 ; caea
+wcaeb:: ds 1 ; caeb
+wcaec:: ds 1 ; caec
+wcaed:: ds 1 ; caed
+wcaee:: ds 1 ; caee
+wcaef:: ds 1 ; caef
+wcaf0:: ds 1 ; caf0
+wcaf1:: ds 1 ; caf1
+wcaf2:: ds 1 ; caf2
+wcaf3:: ds 1 ; caf3
+wcaf4:: ds 1 ; caf4
+wcaf5:: ds 1 ; caf5
+wcaf6:: ds 1 ; caf6
+wcaf7:: ds 1 ; caf7
+wcaf8:: ds 1 ; caf8
+wcaf9:: ds 1 ; caf9
+wcafa:: ds 1 ; cafa
+wcafb:: ds 1 ; cafb
+wcafc:: ds 1 ; cafc
+wcafd:: ds 1 ; cafd
+wcafe:: ds 1 ; cafe
+wcaff:: ds 1 ; caff
+wcb00:: ds 1 ; cb00
+wcb01:: ds 1 ; cb01
+wcb02:: ds 1 ; cb02
+wcb03:: ds 1 ; cb03
+wcb04:: ds 1 ; cb04
+wcb05:: ds 1 ; cb05
+wcb06:: ds 1 ; cb06
+wcb07:: ds 1 ; cb07
+wcb08:: ds 1 ; cb08
+wcb09:: ds 1 ; cb09
+wcb0a:: ds 1 ; cb0a
+wcb0b:: ds 1 ; cb0b
+wcb0c:: ds 1 ; cb0c
+wcb0d:: ds 1 ; cb0d
+wcb0e:: ds 1 ; cb0e
+wcb0f:: ds 1 ; cb0f
+wcb10:: ds 1 ; cb10
+wcb11:: ds 1 ; cb11
+wcb12:: ds 1 ; cb12
+wcb13:: ds 1 ; cb13
+wcb14:: ds 1 ; cb14
+wcb15:: ds 1 ; cb15
+wcb16:: ds 1 ; cb16
+wcb17:: ds 1 ; cb17
+wcb18:: ds 1 ; cb18
+wcb19:: ds 1 ; cb19
+wcb1a:: ds 1 ; cb1a
+wcb1b:: ds 1 ; cb1b
+wcb1c:: ds 1 ; cb1c
+wcb1d:: ds 1 ; cb1d
+wcb1e:: ds 1 ; cb1e
+wcb1f:: ds 1 ; cb1f
+wcb20:: ds 1 ; cb20
+wcb21:: ds 1 ; cb21
+wcb22:: ds 1 ; cb22
+wcb23:: ds 1 ; cb23
+wcb24:: ds 1 ; cb24
+wcb25:: ds 1 ; cb25
+wcb26:: ds 1 ; cb26
+wcb27:: ds 1 ; cb27
+wcb28:: ds 1 ; cb28
+wcb29:: ds 1 ; cb29
+wcb2a:: ds 1 ; cb2a
+wcb2b:: ds 1 ; cb2b
+wcb2c:: ds 1 ; cb2c
+wcb2d:: ds 1 ; cb2d
+wcb2e:: ds 1 ; cb2e
+wcb2f:: ds 1 ; cb2f
+wcb30:: ds 1 ; cb30
+wcb31:: ds 1 ; cb31
+wcb32:: ds 1 ; cb32
+wcb33:: ds 1 ; cb33
+wcb34:: ds 1 ; cb34
+wcb35:: ds 1 ; cb35
+wcb36:: ds 1 ; cb36
+wcb37:: ds 1 ; cb37
+wcb38:: ds 1 ; cb38
+wcb39:: ds 1 ; cb39
+wcb3a:: ds 1 ; cb3a
+wcb3b:: ds 1 ; cb3b
+wcb3c:: ds 1 ; cb3c
+wcb3d:: ds 1 ; cb3d
+wcb3e:: ds 1 ; cb3e
+wcb3f:: ds 1 ; cb3f
+wcb40:: ds 1 ; cb40
+wcb41:: ds 1 ; cb41
+wcb42:: ds 1 ; cb42
+wcb43:: ds 1 ; cb43
+wcb44:: ds 1 ; cb44
+wcb45:: ds 1 ; cb45
+wcb46:: ds 1 ; cb46
+wcb47:: ds 1 ; cb47
+wcb48:: ds 1 ; cb48
+wcb49:: ds 1 ; cb49
+wcb4a:: ds 1 ; cb4a
+wcb4b:: ds 1 ; cb4b
+wcb4c:: ds 1 ; cb4c
+wcb4d:: ds 1 ; cb4d
+wcb4e:: ds 1 ; cb4e
+wcb4f:: ds 1 ; cb4f
+wcb50:: ds 1 ; cb50
+wcb51:: ds 1 ; cb51
+wcb52:: ds 1 ; cb52
+wcb53:: ds 1 ; cb53
+wcb54:: ds 1 ; cb54
+wcb55:: ds 1 ; cb55
+wcb56:: ds 1 ; cb56
+wcb57:: ds 1 ; cb57
+wcb58:: ds 1 ; cb58
+wcb59:: ds 1 ; cb59
+wcb5a:: ds 1 ; cb5a
+wcb5b:: ds 1 ; cb5b
+wcb5c:: ds 1 ; cb5c
+wcb5d:: ds 1 ; cb5d
+wcb5e:: ds 1 ; cb5e
+wcb5f:: ds 1 ; cb5f
+wcb60:: ds 1 ; cb60
+wcb61:: ds 1 ; cb61
+wcb62:: ds 1 ; cb62
+wcb63:: ds 1 ; cb63
+wcb64:: ds 1 ; cb64
+wcb65:: ds 1 ; cb65
+wcb66:: ds 1 ; cb66
+wcb67:: ds 1 ; cb67
+wcb68:: ds 1 ; cb68
+wcb69:: ds 1 ; cb69
+wcb6a:: ds 1 ; cb6a
+wcb6b:: ds 1 ; cb6b
+wcb6c:: ds 1 ; cb6c
+wcb6d:: ds 1 ; cb6d
+wcb6e:: ds 1 ; cb6e
+wcb6f:: ds 1 ; cb6f
+wcb70:: ds 1 ; cb70
+wcb71:: ds 1 ; cb71
+wcb72:: ds 1 ; cb72
+wcb73:: ds 1 ; cb73
+wcb74:: ds 1 ; cb74
+wcb75:: ds 1 ; cb75
+wcb76:: ds 1 ; cb76
+wcb77:: ds 1 ; cb77
+wcb78:: ds 1 ; cb78
+wcb79:: ds 1 ; cb79
+wcb7a:: ds 1 ; cb7a
+wcb7b:: ds 1 ; cb7b
+wcb7c:: ds 1 ; cb7c
+wcb7d:: ds 1 ; cb7d
+wcb7e:: ds 1 ; cb7e
+wcb7f:: ds 1 ; cb7f
+wcb80:: ds 1 ; cb80
+wcb81:: ds 1 ; cb81
+wcb82:: ds 1 ; cb82
+wcb83:: ds 1 ; cb83
+wcb84:: ds 1 ; cb84
+wcb85:: ds 1 ; cb85
+wcb86:: ds 1 ; cb86
+wcb87:: ds 1 ; cb87
+wcb88:: ds 1 ; cb88
+wcb89:: ds 1 ; cb89
+wcb8a:: ds 1 ; cb8a
+wcb8b:: ds 1 ; cb8b
+wcb8c:: ds 1 ; cb8c
+wcb8d:: ds 1 ; cb8d
+wcb8e:: ds 1 ; cb8e
+wcb8f:: ds 1 ; cb8f
+wcb90:: ds 1 ; cb90
+wcb91:: ds 1 ; cb91
+wcb92:: ds 1 ; cb92
+wcb93:: ds 1 ; cb93
+wcb94:: ds 1 ; cb94
+wcb95:: ds 1 ; cb95
+wcb96:: ds 1 ; cb96
+wcb97:: ds 1 ; cb97
+wcb98:: ds 1 ; cb98
+wcb99:: ds 1 ; cb99
+wcb9a:: ds 1 ; cb9a
+wcb9b:: ds 1 ; cb9b
+wcb9c:: ds 1 ; cb9c
+wcb9d:: ds 1 ; cb9d
+wcb9e:: ds 1 ; cb9e
+wcb9f:: ds 1 ; cb9f
+wcba0:: ds 1 ; cba0
+wcba1:: ds 1 ; cba1
+wcba2:: ds 1 ; cba2
+wcba3:: ds 1 ; cba3
+wcba4:: ds 1 ; cba4
+wcba5:: ds 1 ; cba5
+wcba6:: ds 1 ; cba6
+wcba7:: ds 1 ; cba7
+wcba8:: ds 1 ; cba8
+wcba9:: ds 1 ; cba9
+wcbaa:: ds 1 ; cbaa
+wcbab:: ds 1 ; cbab
+wcbac:: ds 1 ; cbac
+wcbad:: ds 1 ; cbad
+wcbae:: ds 1 ; cbae
+wcbaf:: ds 1 ; cbaf
+wcbb0:: ds 1 ; cbb0
+wcbb1:: ds 1 ; cbb1
+wcbb2:: ds 1 ; cbb2
+wcbb3:: ds 1 ; cbb3
+wcbb4:: ds 1 ; cbb4
+wcbb5:: ds 1 ; cbb5
+wcbb6:: ds 1 ; cbb6
+wcbb7:: ds 1 ; cbb7
+wcbb8:: ds 1 ; cbb8
+wcbb9:: ds 1 ; cbb9
+wcbba:: ds 1 ; cbba
+wcbbb:: ds 1 ; cbbb
+wcbbc:: ds 1 ; cbbc
+wcbbd:: ds 1 ; cbbd
+wcbbe:: ds 1 ; cbbe
+wcbbf:: ds 1 ; cbbf
+wcbc0:: ds 1 ; cbc0
+wcbc1:: ds 1 ; cbc1
+wcbc2:: ds 1 ; cbc2
+wcbc3:: ds 1 ; cbc3
+wcbc4:: ds 1 ; cbc4
+wcbc5:: ds 1 ; cbc5
+wcbc6:: ds 1 ; cbc6
+wcbc7:: ds 1 ; cbc7
+wcbc8:: ds 1 ; cbc8
+wcbc9:: ds 1 ; cbc9
+wcbca:: ds 1 ; cbca
+wcbcb:: ds 1 ; cbcb
+wcbcc:: ds 1 ; cbcc
+wcbcd:: ds 1 ; cbcd
+wcbce:: ds 1 ; cbce
+wcbcf:: ds 1 ; cbcf
+wcbd0:: ds 1 ; cbd0
+wcbd1:: ds 1 ; cbd1
+wcbd2:: ds 1 ; cbd2
+wcbd3:: ds 1 ; cbd3
+wcbd4:: ds 1 ; cbd4
+wcbd5:: ds 1 ; cbd5
+wcbd6:: ds 1 ; cbd6
+wcbd7:: ds 1 ; cbd7
+wcbd8:: ds 1 ; cbd8
+wcbd9:: ds 1 ; cbd9
+wcbda:: ds 1 ; cbda
+wcbdb:: ds 1 ; cbdb
+wcbdc:: ds 1 ; cbdc
+wcbdd:: ds 1 ; cbdd
+wcbde:: ds 1 ; cbde
+wcbdf:: ds 1 ; cbdf
+wcbe0:: ds 1 ; cbe0
+wcbe1:: ds 1 ; cbe1
+wcbe2:: ds 1 ; cbe2
+wcbe3:: ds 1 ; cbe3
+wcbe4:: ds 1 ; cbe4
+wcbe5:: ds 1 ; cbe5
+wcbe6:: ds 1 ; cbe6
+wcbe7:: ds 1 ; cbe7
+wcbe8:: ds 1 ; cbe8
+wcbe9:: ds 1 ; cbe9
+wcbea:: ds 1 ; cbea
+wcbeb:: ds 1 ; cbeb
+wcbec:: ds 1 ; cbec
+wcbed:: ds 1 ; cbed
+wcbee:: ds 1 ; cbee
+wcbef:: ds 1 ; cbef
+wcbf0:: ds 1 ; cbf0
+wcbf1:: ds 1 ; cbf1
+wcbf2:: ds 1 ; cbf2
+wcbf3:: ds 1 ; cbf3
+wcbf4:: ds 1 ; cbf4
+wcbf5:: ds 1 ; cbf5
+wcbf6:: ds 1 ; cbf6
+wcbf7:: ds 1 ; cbf7
+wcbf8:: ds 1 ; cbf8
+wcbf9:: ds 1 ; cbf9
+wcbfa:: ds 1 ; cbfa
+wcbfb:: ds 1 ; cbfb
+wcbfc:: ds 1 ; cbfc
+wcbfd:: ds 1 ; cbfd
+wcbfe:: ds 1 ; cbfe
+wcbff:: ds 1 ; cbff
+wcc00:: ds 1 ; cc00
+wcc01:: ds 1 ; cc01
+wcc02:: ds 1 ; cc02
+wcc03:: ds 1 ; cc03
+wcc04:: ds 1 ; cc04
+wcc05:: ds 1 ; cc05
+wcc06:: ds 1 ; cc06
+wcc07:: ds 1 ; cc07
+wcc08:: ds 1 ; cc08
+wcc09:: ds 1 ; cc09
+wcc0a:: ds 1 ; cc0a
+wcc0b:: ds 1 ; cc0b
+wcc0c:: ds 1 ; cc0c
+wcc0d:: ds 1 ; cc0d
+wcc0e:: ds 1 ; cc0e
+wcc0f:: ds 1 ; cc0f
+wcc10:: ds 1 ; cc10
+wcc11:: ds 1 ; cc11
+wcc12:: ds 1 ; cc12
+wcc13:: ds 1 ; cc13
+wcc14:: ds 1 ; cc14
+wcc15:: ds 1 ; cc15
+wcc16:: ds 1 ; cc16
+wcc17:: ds 1 ; cc17
+wcc18:: ds 1 ; cc18
+wcc19:: ds 1 ; cc19
+wcc1a:: ds 1 ; cc1a
+wcc1b:: ds 1 ; cc1b
+wcc1c:: ds 1 ; cc1c
+wcc1d:: ds 1 ; cc1d
+wcc1e:: ds 1 ; cc1e
+wcc1f:: ds 1 ; cc1f
+wcc20:: ds 1 ; cc20
+wcc21:: ds 1 ; cc21
+wcc22:: ds 1 ; cc22
+wcc23:: ds 1 ; cc23
+wcc24:: ds 1 ; cc24
+wcc25:: ds 1 ; cc25
+wcc26:: ds 1 ; cc26
+wcc27:: ds 1 ; cc27
+wcc28:: ds 1 ; cc28
+wcc29:: ds 1 ; cc29
+wcc2a:: ds 1 ; cc2a
+wcc2b:: ds 1 ; cc2b
+wcc2c:: ds 1 ; cc2c
+wcc2d:: ds 1 ; cc2d
+wcc2e:: ds 1 ; cc2e
+wcc2f:: ds 1 ; cc2f
+wcc30:: ds 1 ; cc30
+wcc31:: ds 1 ; cc31
+wcc32:: ds 1 ; cc32
+wcc33:: ds 1 ; cc33
+wcc34:: ds 1 ; cc34
+wcc35:: ds 1 ; cc35
+wcc36:: ds 1 ; cc36
+wcc37:: ds 1 ; cc37
+wcc38:: ds 1 ; cc38
+wcc39:: ds 1 ; cc39
+wcc3a:: ds 1 ; cc3a
+wcc3b:: ds 1 ; cc3b
+wcc3c:: ds 1 ; cc3c
+wcc3d:: ds 1 ; cc3d
+wcc3e:: ds 1 ; cc3e
+wcc3f:: ds 1 ; cc3f
+wcc40:: ds 1 ; cc40
+wcc41:: ds 1 ; cc41
+wcc42:: ds 1 ; cc42
+wcc43:: ds 1 ; cc43
+wcc44:: ds 1 ; cc44
+wcc45:: ds 1 ; cc45
+wcc46:: ds 1 ; cc46
+wcc47:: ds 1 ; cc47
+wcc48:: ds 1 ; cc48
+wcc49:: ds 1 ; cc49
+wcc4a:: ds 1 ; cc4a
+wcc4b:: ds 1 ; cc4b
+wcc4c:: ds 1 ; cc4c
+wcc4d:: ds 1 ; cc4d
+wcc4e:: ds 1 ; cc4e
+wcc4f:: ds 1 ; cc4f
+wcc50:: ds 1 ; cc50
+wcc51:: ds 1 ; cc51
+wcc52:: ds 1 ; cc52
+wcc53:: ds 1 ; cc53
+wcc54:: ds 1 ; cc54
+wcc55:: ds 1 ; cc55
+wcc56:: ds 1 ; cc56
+wcc57:: ds 1 ; cc57
+wcc58:: ds 1 ; cc58
+wcc59:: ds 1 ; cc59
+wcc5a:: ds 1 ; cc5a
+wcc5b:: ds 1 ; cc5b
+wcc5c:: ds 1 ; cc5c
+wcc5d:: ds 1 ; cc5d
+wcc5e:: ds 1 ; cc5e
+wcc5f:: ds 1 ; cc5f
+wcc60:: ds 1 ; cc60
+wcc61:: ds 1 ; cc61
+wcc62:: ds 1 ; cc62
+wcc63:: ds 1 ; cc63
+wcc64:: ds 1 ; cc64
+wcc65:: ds 1 ; cc65
+wcc66:: ds 1 ; cc66
+wcc67:: ds 1 ; cc67
+wcc68:: ds 1 ; cc68
+wcc69:: ds 1 ; cc69
+wcc6a:: ds 1 ; cc6a
+wcc6b:: ds 1 ; cc6b
+wcc6c:: ds 1 ; cc6c
+wcc6d:: ds 1 ; cc6d
+wcc6e:: ds 1 ; cc6e
+wcc6f:: ds 1 ; cc6f
+wcc70:: ds 1 ; cc70
+wcc71:: ds 1 ; cc71
+wcc72:: ds 1 ; cc72
+wcc73:: ds 1 ; cc73
+wcc74:: ds 1 ; cc74
+wcc75:: ds 1 ; cc75
+wcc76:: ds 1 ; cc76
+wcc77:: ds 1 ; cc77
+wcc78:: ds 1 ; cc78
+wcc79:: ds 1 ; cc79
+wcc7a:: ds 1 ; cc7a
+wcc7b:: ds 1 ; cc7b
+wcc7c:: ds 1 ; cc7c
+wcc7d:: ds 1 ; cc7d
+wcc7e:: ds 1 ; cc7e
+wcc7f:: ds 1 ; cc7f
+wcc80:: ds 1 ; cc80
+wcc81:: ds 1 ; cc81
+wcc82:: ds 1 ; cc82
+wcc83:: ds 1 ; cc83
+wcc84:: ds 1 ; cc84
+wcc85:: ds 1 ; cc85
+wcc86:: ds 1 ; cc86
+wcc87:: ds 1 ; cc87
+wcc88:: ds 1 ; cc88
+wcc89:: ds 1 ; cc89
+wcc8a:: ds 1 ; cc8a
+wcc8b:: ds 1 ; cc8b
+wcc8c:: ds 1 ; cc8c
+wcc8d:: ds 1 ; cc8d
+wcc8e:: ds 1 ; cc8e
+wcc8f:: ds 1 ; cc8f
+wcc90:: ds 1 ; cc90
+wcc91:: ds 1 ; cc91
+wcc92:: ds 1 ; cc92
+wcc93:: ds 1 ; cc93
+wcc94:: ds 1 ; cc94
+wcc95:: ds 1 ; cc95
+wcc96:: ds 1 ; cc96
+wcc97:: ds 1 ; cc97
+wcc98:: ds 1 ; cc98
+wcc99:: ds 1 ; cc99
+wcc9a:: ds 1 ; cc9a
+wcc9b:: ds 1 ; cc9b
+wcc9c:: ds 1 ; cc9c
+wcc9d:: ds 1 ; cc9d
+wcc9e:: ds 1 ; cc9e
+wcc9f:: ds 1 ; cc9f
+wcca0:: ds 1 ; cca0
+wcca1:: ds 1 ; cca1
+wcca2:: ds 1 ; cca2
+wcca3:: ds 1 ; cca3
+wcca4:: ds 1 ; cca4
+wcca5:: ds 1 ; cca5
+wcca6:: ds 1 ; cca6
+wcca7:: ds 1 ; cca7
+wcca8:: ds 1 ; cca8
+wcca9:: ds 1 ; cca9
+wccaa:: ds 1 ; ccaa
+wccab:: ds 1 ; ccab
+wccac:: ds 1 ; ccac
+wccad:: ds 1 ; ccad
+wccae:: ds 1 ; ccae
+wccaf:: ds 1 ; ccaf
+wccb0:: ds 1 ; ccb0
+wccb1:: ds 1 ; ccb1
+wccb2:: ds 1 ; ccb2
+wccb3:: ds 1 ; ccb3
+wccb4:: ds 1 ; ccb4
+wccb5:: ds 1 ; ccb5
+wccb6:: ds 1 ; ccb6
+wccb7:: ds 1 ; ccb7
+wccb8:: ds 1 ; ccb8
+wccb9:: ds 1 ; ccb9
+wccba:: ds 1 ; ccba
+wccbb:: ds 1 ; ccbb
+wccbc:: ds 1 ; ccbc
+wccbd:: ds 1 ; ccbd
+wccbe:: ds 1 ; ccbe
+wccbf:: ds 1 ; ccbf
+wccc0:: ds 1 ; ccc0
+wccc1:: ds 1 ; ccc1
+wccc2:: ds 1 ; ccc2
+wccc3:: ds 1 ; ccc3
+wccc4:: ds 1 ; ccc4
+wccc5:: ds 1 ; ccc5
+wccc6:: ds 1 ; ccc6
+wccc7:: ds 1 ; ccc7
+wccc8:: ds 1 ; ccc8
+wccc9:: ds 1 ; ccc9
+wccca:: ds 1 ; ccca
+wcccb:: ds 1 ; cccb
+wcccc:: ds 1 ; cccc
+wcccd:: ds 1 ; cccd
+wccce:: ds 1 ; ccce
+wcccf:: ds 1 ; cccf
+wccd0:: ds 1 ; ccd0
+wccd1:: ds 1 ; ccd1
+wccd2:: ds 1 ; ccd2
+wccd3:: ds 1 ; ccd3
+wccd4:: ds 1 ; ccd4
+wccd5:: ds 1 ; ccd5
+wccd6:: ds 1 ; ccd6
+wccd7:: ds 1 ; ccd7
+wccd8:: ds 1 ; ccd8
+wccd9:: ds 1 ; ccd9
+wccda:: ds 1 ; ccda
+wccdb:: ds 1 ; ccdb
+wccdc:: ds 1 ; ccdc
+wccdd:: ds 1 ; ccdd
+wccde:: ds 1 ; ccde
+wccdf:: ds 1 ; ccdf
+wcce0:: ds 1 ; cce0
+wcce1:: ds 1 ; cce1
+wcce2:: ds 1 ; cce2
+wcce3:: ds 1 ; cce3
+wcce4:: ds 1 ; cce4
+wcce5:: ds 1 ; cce5
+wcce6:: ds 1 ; cce6
+wcce7:: ds 1 ; cce7
+wcce8:: ds 1 ; cce8
+wcce9:: ds 1 ; cce9
+wccea:: ds 1 ; ccea
+wcceb:: ds 1 ; cceb
+wccec:: ds 1 ; ccec
+wcced:: ds 1 ; cced
+wccee:: ds 1 ; ccee
+wccef:: ds 1 ; ccef
+wccf0:: ds 1 ; ccf0
+wccf1:: ds 1 ; ccf1
+wccf2:: ds 1 ; ccf2
+wccf3:: ds 1 ; ccf3
+wccf4:: ds 1 ; ccf4
+wccf5:: ds 1 ; ccf5
+wccf6:: ds 1 ; ccf6
+wccf7:: ds 1 ; ccf7
+wccf8:: ds 1 ; ccf8
+wccf9:: ds 1 ; ccf9
+wccfa:: ds 1 ; ccfa
+wccfb:: ds 1 ; ccfb
+wccfc:: ds 1 ; ccfc
+wccfd:: ds 1 ; ccfd
+wccfe:: ds 1 ; ccfe
+wccff:: ds 1 ; ccff
+wcd00:: ds 1 ; cd00
+wcd01:: ds 1 ; cd01
+wcd02:: ds 1 ; cd02
+wcd03:: ds 1 ; cd03
+wcd04:: ds 1 ; cd04
+wcd05:: ds 1 ; cd05
+wcd06:: ds 1 ; cd06
+wcd07:: ds 1 ; cd07
+wcd08:: ds 1 ; cd08
+wcd09:: ds 1 ; cd09
+wcd0a:: ds 1 ; cd0a
+wcd0b:: ds 1 ; cd0b
+wcd0c:: ds 1 ; cd0c
+wcd0d:: ds 1 ; cd0d
+wcd0e:: ds 1 ; cd0e
+wcd0f:: ds 1 ; cd0f
+wcd10:: ds 1 ; cd10
+wcd11:: ds 1 ; cd11
+wcd12:: ds 1 ; cd12
+wcd13:: ds 1 ; cd13
+wcd14:: ds 1 ; cd14
+wcd15:: ds 1 ; cd15
+wcd16:: ds 1 ; cd16
+wcd17:: ds 1 ; cd17
+wcd18:: ds 1 ; cd18
+wcd19:: ds 1 ; cd19
+wcd1a:: ds 1 ; cd1a
+wcd1b:: ds 1 ; cd1b
+wcd1c:: ds 1 ; cd1c
+wcd1d:: ds 1 ; cd1d
+wcd1e:: ds 1 ; cd1e
+wcd1f:: ds 1 ; cd1f
+wcd20:: ds 1 ; cd20
+wcd21:: ds 1 ; cd21
+wcd22:: ds 1 ; cd22
+wcd23:: ds 1 ; cd23
+wcd24:: ds 1 ; cd24
+wcd25:: ds 1 ; cd25
+wcd26:: ds 1 ; cd26
+wcd27:: ds 1 ; cd27
+wcd28:: ds 1 ; cd28
+wcd29:: ds 1 ; cd29
+wcd2a:: ds 1 ; cd2a
+wcd2b:: ds 1 ; cd2b
+wcd2c:: ds 1 ; cd2c
+wcd2d:: ds 1 ; cd2d
+wcd2e:: ds 1 ; cd2e
+wcd2f:: ds 1 ; cd2f
+wcd30:: ds 1 ; cd30
+wcd31:: ds 1 ; cd31
+wcd32:: ds 1 ; cd32
+wcd33:: ds 1 ; cd33
+wcd34:: ds 1 ; cd34
+wcd35:: ds 1 ; cd35
+wcd36:: ds 1 ; cd36
+wcd37:: ds 1 ; cd37
+wcd38:: ds 1 ; cd38
+wcd39:: ds 1 ; cd39
+wcd3a:: ds 1 ; cd3a
+wcd3b:: ds 1 ; cd3b
+wcd3c:: ds 1 ; cd3c
+wcd3d:: ds 1 ; cd3d
+wcd3e:: ds 1 ; cd3e
+wcd3f:: ds 1 ; cd3f
+wcd40:: ds 1 ; cd40
+wcd41:: ds 1 ; cd41
+wcd42:: ds 1 ; cd42
+wcd43:: ds 1 ; cd43
+wcd44:: ds 1 ; cd44
+wcd45:: ds 1 ; cd45
+wcd46:: ds 1 ; cd46
+wcd47:: ds 1 ; cd47
+wcd48:: ds 1 ; cd48
+wcd49:: ds 1 ; cd49
+wcd4a:: ds 1 ; cd4a
+wcd4b:: ds 1 ; cd4b
+wcd4c:: ds 1 ; cd4c
+wcd4d:: ds 1 ; cd4d
+wcd4e:: ds 1 ; cd4e
+wcd4f:: ds 1 ; cd4f
+wcd50:: ds 1 ; cd50
+wcd51:: ds 1 ; cd51
+wcd52:: ds 1 ; cd52
+wcd53:: ds 1 ; cd53
+wcd54:: ds 1 ; cd54
+wcd55:: ds 1 ; cd55
+wcd56:: ds 1 ; cd56
+wcd57:: ds 1 ; cd57
+wcd58:: ds 1 ; cd58
+wcd59:: ds 1 ; cd59
+wcd5a:: ds 1 ; cd5a
+wcd5b:: ds 1 ; cd5b
+wcd5c:: ds 1 ; cd5c
+wcd5d:: ds 1 ; cd5d
+wcd5e:: ds 1 ; cd5e
+wcd5f:: ds 1 ; cd5f
+wcd60:: ds 1 ; cd60
+wcd61:: ds 1 ; cd61
+wcd62:: ds 1 ; cd62
+wcd63:: ds 1 ; cd63
+wcd64:: ds 1 ; cd64
+wcd65:: ds 1 ; cd65
+wcd66:: ds 1 ; cd66
+wcd67:: ds 1 ; cd67
+wcd68:: ds 1 ; cd68
+wcd69:: ds 1 ; cd69
+wcd6a:: ds 1 ; cd6a
+wcd6b:: ds 1 ; cd6b
+wcd6c:: ds 1 ; cd6c
+wcd6d:: ds 1 ; cd6d
+wcd6e:: ds 1 ; cd6e
+wcd6f:: ds 1 ; cd6f
+wcd70:: ds 1 ; cd70
+wcd71:: ds 1 ; cd71
+wcd72:: ds 1 ; cd72
+wcd73:: ds 1 ; cd73
+wcd74:: ds 1 ; cd74
+wcd75:: ds 1 ; cd75
+wcd76:: ds 1 ; cd76
+wcd77:: ds 1 ; cd77
+wcd78:: ds 1 ; cd78
+wcd79:: ds 1 ; cd79
+wcd7a:: ds 1 ; cd7a
+wcd7b:: ds 1 ; cd7b
+wcd7c:: ds 1 ; cd7c
+wcd7d:: ds 1 ; cd7d
+wcd7e:: ds 1 ; cd7e
+wcd7f:: ds 1 ; cd7f
+wcd80:: ds 1 ; cd80
+wcd81:: ds 1 ; cd81
+wcd82:: ds 1 ; cd82
+wcd83:: ds 1 ; cd83
+wcd84:: ds 1 ; cd84
+wcd85:: ds 1 ; cd85
+wcd86:: ds 1 ; cd86
+wcd87:: ds 1 ; cd87
+wcd88:: ds 1 ; cd88
+wcd89:: ds 1 ; cd89
+wcd8a:: ds 1 ; cd8a
+wcd8b:: ds 1 ; cd8b
+wcd8c:: ds 1 ; cd8c
+wcd8d:: ds 1 ; cd8d
+wcd8e:: ds 1 ; cd8e
+wcd8f:: ds 1 ; cd8f
+wcd90:: ds 1 ; cd90
+wcd91:: ds 1 ; cd91
+wcd92:: ds 1 ; cd92
+wcd93:: ds 1 ; cd93
+wcd94:: ds 1 ; cd94
+wcd95:: ds 1 ; cd95
+wcd96:: ds 1 ; cd96
+wcd97:: ds 1 ; cd97
+wcd98:: ds 1 ; cd98
+wcd99:: ds 1 ; cd99
+wcd9a:: ds 1 ; cd9a
+wcd9b:: ds 1 ; cd9b
+wcd9c:: ds 1 ; cd9c
+wcd9d:: ds 1 ; cd9d
+wcd9e:: ds 1 ; cd9e
+wcd9f:: ds 1 ; cd9f
+wcda0:: ds 1 ; cda0
+wcda1:: ds 1 ; cda1
+wcda2:: ds 1 ; cda2
+wcda3:: ds 1 ; cda3
+wcda4:: ds 1 ; cda4
+wcda5:: ds 1 ; cda5
+wcda6:: ds 1 ; cda6
+wcda7:: ds 1 ; cda7
+wcda8:: ds 1 ; cda8
+wcda9:: ds 1 ; cda9
+wcdaa:: ds 1 ; cdaa
+wcdab:: ds 1 ; cdab
+wcdac:: ds 1 ; cdac
+wcdad:: ds 1 ; cdad
+wcdae:: ds 1 ; cdae
+wcdaf:: ds 1 ; cdaf
+wcdb0:: ds 1 ; cdb0
+wcdb1:: ds 1 ; cdb1
+wcdb2:: ds 1 ; cdb2
+wcdb3:: ds 1 ; cdb3
+wcdb4:: ds 1 ; cdb4
+wcdb5:: ds 1 ; cdb5
+wcdb6:: ds 1 ; cdb6
+wcdb7:: ds 1 ; cdb7
+wcdb8:: ds 1 ; cdb8
+wcdb9:: ds 1 ; cdb9
+wcdba:: ds 1 ; cdba
+wcdbb:: ds 1 ; cdbb
+wcdbc:: ds 1 ; cdbc
+wcdbd:: ds 1 ; cdbd
+wcdbe:: ds 1 ; cdbe
+wcdbf:: ds 1 ; cdbf
+wcdc0:: ds 1 ; cdc0
+wcdc1:: ds 1 ; cdc1
+wcdc2:: ds 1 ; cdc2
+wcdc3:: ds 1 ; cdc3
+wcdc4:: ds 1 ; cdc4
+wcdc5:: ds 1 ; cdc5
+wcdc6:: ds 1 ; cdc6
+wcdc7:: ds 1 ; cdc7
+wcdc8:: ds 1 ; cdc8
+wcdc9:: ds 1 ; cdc9
+wcdca:: ds 1 ; cdca
+wcdcb:: ds 1 ; cdcb
+wcdcc:: ds 1 ; cdcc
+wcdcd:: ds 1 ; cdcd
+wcdce:: ds 1 ; cdce
+wcdcf:: ds 1 ; cdcf
+wcdd0:: ds 1 ; cdd0
+wcdd1:: ds 1 ; cdd1
+wcdd2:: ds 1 ; cdd2
+wcdd3:: ds 1 ; cdd3
+wcdd4:: ds 1 ; cdd4
+wcdd5:: ds 1 ; cdd5
+wcdd6:: ds 1 ; cdd6
+wcdd7:: ds 1 ; cdd7
+wcdd8:: ds 1 ; cdd8
+wcdd9:: ds 1 ; cdd9
+wcdda:: ds 1 ; cdda
+wcddb:: ds 1 ; cddb
+wcddc:: ds 1 ; cddc
+wcddd:: ds 1 ; cddd
+wcdde:: ds 1 ; cdde
+wcddf:: ds 1 ; cddf
+wcde0:: ds 1 ; cde0
+wcde1:: ds 1 ; cde1
+wcde2:: ds 1 ; cde2
+wcde3:: ds 1 ; cde3
+wcde4:: ds 1 ; cde4
+wcde5:: ds 1 ; cde5
+wcde6:: ds 1 ; cde6
+wcde7:: ds 1 ; cde7
+wcde8:: ds 1 ; cde8
+wcde9:: ds 1 ; cde9
+wcdea:: ds 1 ; cdea
+wcdeb:: ds 1 ; cdeb
+wcdec:: ds 1 ; cdec
+wcded:: ds 1 ; cded
+wcdee:: ds 1 ; cdee
+wcdef:: ds 1 ; cdef
+wcdf0:: ds 1 ; cdf0
+wcdf1:: ds 1 ; cdf1
+wcdf2:: ds 1 ; cdf2
+wcdf3:: ds 1 ; cdf3
+wcdf4:: ds 1 ; cdf4
+wcdf5:: ds 1 ; cdf5
+wcdf6:: ds 1 ; cdf6
+wcdf7:: ds 1 ; cdf7
+wcdf8:: ds 1 ; cdf8
+wcdf9:: ds 1 ; cdf9
+wcdfa:: ds 1 ; cdfa
+wcdfb:: ds 1 ; cdfb
+wcdfc:: ds 1 ; cdfc
+wcdfd:: ds 1 ; cdfd
+wcdfe:: ds 1 ; cdfe
+wcdff:: ds 1 ; cdff
+wce00:: ds 1 ; ce00
+wce01:: ds 1 ; ce01
+wce02:: ds 1 ; ce02
+wce03:: ds 1 ; ce03
+wce04:: ds 1 ; ce04
+wce05:: ds 1 ; ce05
+wce06:: ds 1 ; ce06
+wce07:: ds 1 ; ce07
+wce08:: ds 1 ; ce08
+wce09:: ds 1 ; ce09
+wce0a:: ds 1 ; ce0a
+wce0b:: ds 1 ; ce0b
+wce0c:: ds 1 ; ce0c
+wce0d:: ds 1 ; ce0d
+wce0e:: ds 1 ; ce0e
+wce0f:: ds 1 ; ce0f
+wce10:: ds 1 ; ce10
+wce11:: ds 1 ; ce11
+wce12:: ds 1 ; ce12
+wce13:: ds 1 ; ce13
+wce14:: ds 1 ; ce14
+wce15:: ds 1 ; ce15
+wce16:: ds 1 ; ce16
+wce17:: ds 1 ; ce17
+wce18:: ds 1 ; ce18
+wce19:: ds 1 ; ce19
+wce1a:: ds 1 ; ce1a
+wce1b:: ds 1 ; ce1b
+wce1c:: ds 1 ; ce1c
+wce1d:: ds 1 ; ce1d
+wce1e:: ds 1 ; ce1e
+wce1f:: ds 1 ; ce1f
+wce20:: ds 1 ; ce20
+wce21:: ds 1 ; ce21
+wce22:: ds 1 ; ce22
+wce23:: ds 1 ; ce23
+wce24:: ds 1 ; ce24
+wce25:: ds 1 ; ce25
+wce26:: ds 1 ; ce26
+wce27:: ds 1 ; ce27
+wce28:: ds 1 ; ce28
+wce29:: ds 1 ; ce29
+wce2a:: ds 1 ; ce2a
+wce2b:: ds 1 ; ce2b
+wce2c:: ds 1 ; ce2c
+wce2d:: ds 1 ; ce2d
+wce2e:: ds 1 ; ce2e
+wce2f:: ds 1 ; ce2f
+wce30:: ds 1 ; ce30
+wce31:: ds 1 ; ce31
+wce32:: ds 1 ; ce32
+wce33:: ds 1 ; ce33
+wce34:: ds 1 ; ce34
+wce35:: ds 1 ; ce35
+wce36:: ds 1 ; ce36
+wce37:: ds 1 ; ce37
+wce38:: ds 1 ; ce38
+wce39:: ds 1 ; ce39
+wce3a:: ds 1 ; ce3a
+wce3b:: ds 1 ; ce3b
+wce3c:: ds 1 ; ce3c
+wce3d:: ds 1 ; ce3d
+wce3e:: ds 1 ; ce3e
+wce3f:: ds 1 ; ce3f
+wce40:: ds 1 ; ce40
+wce41:: ds 1 ; ce41
+wce42:: ds 1 ; ce42
+wce43:: ds 1 ; ce43
+wce44:: ds 1 ; ce44
+wce45:: ds 1 ; ce45
+wce46:: ds 1 ; ce46
+wce47:: ds 1 ; ce47
+wce48:: ds 1 ; ce48
+wce49:: ds 1 ; ce49
+wce4a:: ds 1 ; ce4a
+wce4b:: ds 1 ; ce4b
+wce4c:: ds 1 ; ce4c
+wce4d:: ds 1 ; ce4d
+wce4e:: ds 1 ; ce4e
+wce4f:: ds 1 ; ce4f
+wce50:: ds 1 ; ce50
+wce51:: ds 1 ; ce51
+wce52:: ds 1 ; ce52
+wce53:: ds 1 ; ce53
+wce54:: ds 1 ; ce54
+wce55:: ds 1 ; ce55
+wce56:: ds 1 ; ce56
+wce57:: ds 1 ; ce57
+wce58:: ds 1 ; ce58
+wce59:: ds 1 ; ce59
+wce5a:: ds 1 ; ce5a
 wLinkTimeoutFrames:: ds 2
-wce5d:: ds 2
-wce5f:: ds 1
-wce60:: ds 1
-wce61:: ds 1
-wce62:: ds 1
-wce63:: ds 1
-wce64:: ds 1
-wce65:: ds 1
-wce66:: ds 1
-wce67:: ds 1
-wce68:: ds 1
-wce69:: ds 1
-wce6a:: ds 1
-wce6b:: ds 1
-wce6c:: ds 1
-wce6d:: ds 1
-wce6e:: ds 1
-wce6f:: ds 1
-wce70:: ds 1
-wce71:: ds 1
-wce72:: ds 1
-wce73:: ds 1
-wce74:: ds 1
-wce75:: ds 1
-wce76:: ds 1
-wce77:: ds 1
-wce78:: ds 1
-wce79:: ds 1
-wce7a:: ds 1
-wce7b:: ds 1
-wce7c:: ds 1
-wce7d:: ds 1
-wce7e:: ds 1
-wce7f:: ds 1
-wce80:: ds 1
-wce81:: ds 1
-wce82:: ds 1
-wce83:: ds 1
-wce84:: ds 1
-wce85:: ds 1
-wce86:: ds 1
-wce87:: ds 1
-wce88:: ds 1
-wce89:: ds 1
-wce8a:: ds 1
-wce8b:: ds 1
-wce8c:: ds 1
-wce8d:: ds 1
-wce8e:: ds 1
-wce8f:: ds 1
-wce90:: ds 1
-wce91:: ds 1
-wce92:: ds 1
-wce93:: ds 1
-wce94:: ds 1
-wce95:: ds 1
-wce96:: ds 1
-wce97:: ds 1
-wce98:: ds 1
-wce99:: ds 1
-wce9a:: ds 1
-wce9b:: ds 1
-wce9c:: ds 1
-wce9d:: ds 1
-wce9e:: ds 1
-wce9f:: ds 1
-wcea0:: ds 1
-wcea1:: ds 1
-wcea2:: ds 1
-wcea3:: ds 1
-wcea4:: ds 1
-wcea5:: ds 1
-wcea6:: ds 1
-wcea7:: ds 1
-wcea8:: ds 1
-wcea9:: ds 1
-wceaa:: ds 1
-wceab:: ds 1
-wceac:: ds 1
-wcead:: ds 1
-wceae:: ds 1
-wceaf:: ds 1
-wceb0:: ds 1
-wceb1:: ds 1
-wceb2:: ds 1
-wceb3:: ds 1
-wceb4:: ds 1
-wceb5:: ds 1
-wceb6:: ds 1
-wceb7:: ds 1
-wceb8:: ds 1
-wceb9:: ds 1
-wceba:: ds 1
-wcebb:: ds 1
-wcebc:: ds 1
-wcebd:: ds 1
-wcebe:: ds 1
-wcebf:: ds 1
-wcec0:: ds 1
-wcec1:: ds 1
-wcec2:: ds 1
-wcec3:: ds 1
-wcec4:: ds 1
-wcec5:: ds 1
-wcec6:: ds 1
-wcec7:: ds 1
-wcec8:: ds 1
-wcec9:: ds 1
-wceca:: ds 1
-wcecb:: ds 1
-wcecc:: ds 1
-wcecd:: ds 1
-wcece:: ds 1
-wcecf:: ds 1
-wced0:: ds 1
-wced1:: ds 1
-wced2:: ds 1
-wced3:: ds 1
-wced4:: ds 1
-wced5:: ds 1
-wced6:: ds 1
-wced7:: ds 1
-wced8:: ds 1
-wced9:: ds 1
-wceda:: ds 1
-wcedb:: ds 1
-wcedc:: ds 1
-wcedd:: ds 1
-wcede:: ds 1
-wcedf:: ds 1
-wcee0:: ds 1
-wcee1:: ds 1
-wcee2:: ds 1
-wcee3:: ds 1
-wcee4:: ds 1
-wcee5:: ds 1
-wcee6:: ds 1
-wcee7:: ds 1
+wce5d:: ds 2 ; ce5d
+wce5f:: ds 1 ; ce5f
+wce60:: ds 1 ; ce60
+wce61:: ds 1 ; ce61
+wce62:: ds 1 ; ce62
+wce63:: ds 1 ; ce63
+wce64:: ds 1 ; ce64
+wce65:: ds 1 ; ce65
+wce66:: ds 1 ; ce66
+wce67:: ds 1 ; ce67
+wce68:: ds 1 ; ce68
+wce69:: ds 1 ; ce69
+wce6a:: ds 1 ; ce6a
+wce6b:: ds 1 ; ce6b
+wce6c:: ds 1 ; ce6c
+wce6d:: ds 1 ; ce6d
+wce6e:: ds 1 ; ce6e
+wce6f:: ds 1 ; ce6f
+wce70:: ds 1 ; ce70
+wce71:: ds 1 ; ce71
+wce72:: ds 1 ; ce72
+wce73:: ds 1 ; ce73
+wce74:: ds 1 ; ce74
+wce75:: ds 1 ; ce75
+wce76:: ds 1 ; ce76
+wce77:: ds 1 ; ce77
+wce78:: ds 1 ; ce78
+wce79:: ds 1 ; ce79
+wce7a:: ds 1 ; ce7a
+wce7b:: ds 1 ; ce7b
+wce7c:: ds 1 ; ce7c
+wce7d:: ds 1 ; ce7d
+wce7e:: ds 1 ; ce7e
+wce7f:: ds 1 ; ce7f
+wce80:: ds 1 ; ce80
+wce81:: ds 1 ; ce81
+wce82:: ds 1 ; ce82
+wce83:: ds 1 ; ce83
+wce84:: ds 1 ; ce84
+wce85:: ds 1 ; ce85
+wce86:: ds 1 ; ce86
+wce87:: ds 1 ; ce87
+wce88:: ds 1 ; ce88
+wce89:: ds 1 ; ce89
+wce8a:: ds 1 ; ce8a
+wce8b:: ds 1 ; ce8b
+wce8c:: ds 1 ; ce8c
+wce8d:: ds 1 ; ce8d
+wce8e:: ds 1 ; ce8e
+wce8f:: ds 1 ; ce8f
+wce90:: ds 1 ; ce90
+wce91:: ds 1 ; ce91
+wce92:: ds 1 ; ce92
+wce93:: ds 1 ; ce93
+wce94:: ds 1 ; ce94
+wce95:: ds 1 ; ce95
+wce96:: ds 1 ; ce96
+wce97:: ds 1 ; ce97
+wce98:: ds 1 ; ce98
+wce99:: ds 1 ; ce99
+wce9a:: ds 1 ; ce9a
+wce9b:: ds 1 ; ce9b
+wce9c:: ds 1 ; ce9c
+wce9d:: ds 1 ; ce9d
+wce9e:: ds 1 ; ce9e
+wce9f:: ds 1 ; ce9f
+wcea0:: ds 1 ; cea0
+wcea1:: ds 1 ; cea1
+wcea2:: ds 1 ; cea2
+wcea3:: ds 1 ; cea3
+wcea4:: ds 1 ; cea4
+wcea5:: ds 1 ; cea5
+wcea6:: ds 1 ; cea6
+wcea7:: ds 1 ; cea7
+wcea8:: ds 1 ; cea8
+wcea9:: ds 1 ; cea9
+wceaa:: ds 1 ; ceaa
+wceab:: ds 1 ; ceab
+wceac:: ds 1 ; ceac
+wcead:: ds 1 ; cead
+wceae:: ds 1 ; ceae
+wceaf:: ds 1 ; ceaf
+wceb0:: ds 1 ; ceb0
+wceb1:: ds 1 ; ceb1
+wceb2:: ds 1 ; ceb2
+wceb3:: ds 1 ; ceb3
+wceb4:: ds 1 ; ceb4
+wceb5:: ds 1 ; ceb5
+wceb6:: ds 1 ; ceb6
+wceb7:: ds 1 ; ceb7
+wceb8:: ds 1 ; ceb8
+wceb9:: ds 1 ; ceb9
+wceba:: ds 1 ; ceba
+wcebb:: ds 1 ; cebb
+wcebc:: ds 1 ; cebc
+wcebd:: ds 1 ; cebd
+wcebe:: ds 1 ; cebe
+wcebf:: ds 1 ; cebf
+wcec0:: ds 1 ; cec0
+wcec1:: ds 1 ; cec1
+wcec2:: ds 1 ; cec2
+wcec3:: ds 1 ; cec3
+wcec4:: ds 1 ; cec4
+wcec5:: ds 1 ; cec5
+wcec6:: ds 1 ; cec6
+wcec7:: ds 1 ; cec7
+wcec8:: ds 1 ; cec8
+wcec9:: ds 1 ; cec9
+wceca:: ds 1 ; ceca
+wcecb:: ds 1 ; cecb
+wcecc:: ds 1 ; cecc
+wcecd:: ds 1 ; cecd
+wcece:: ds 1 ; cece
+wcecf:: ds 1 ; cecf
+wced0:: ds 1 ; ced0
+wced1:: ds 1 ; ced1
+wced2:: ds 1 ; ced2
+wced3:: ds 1 ; ced3
+wced4:: ds 1 ; ced4
+wced5:: ds 1 ; ced5
+wced6:: ds 1 ; ced6
+wced7:: ds 1 ; ced7
+wced8:: ds 1 ; ced8
+wced9:: ds 1 ; ced9
+wceda:: ds 1 ; ceda
+wcedb:: ds 1 ; cedb
+wcedc:: ds 1 ; cedc
+wcedd:: ds 1 ; cedd
+wcede:: ds 1 ; cede
+wcedf:: ds 1 ; cedf
+wcee0:: ds 1 ; cee0
+wcee1:: ds 1 ; cee1
+wcee2:: ds 1 ; cee2
+wcee3:: ds 1 ; cee3
+wcee4:: ds 1 ; cee4
+wcee5:: ds 1 ; cee5
+wcee6:: ds 1 ; cee6
+wcee7:: ds 1 ; cee7
 
 wOverworldDelay:: ds 1 ; cee8
 wTextDelayFrames:: ds 1 ; cee9
 wVBlankOccurred:: ds 1 ; ceea
 
-wceeb:: ds 1
-wceec:: ds 1
-wceed:: ds 1
-wceee:: ds 1
-wceef:: ds 1
-wcef0:: ds 1
-wcef1:: ds 1
-wcef2:: ds 1
-wcef3:: ds 1
-wcef4:: ds 1
-wcef5:: ds 1
-wcef6:: ds 1
-wcef7:: ds 1
-wcef8:: ds 1
-wcef9:: ds 1
-wcefa:: ds 1
-wcefb:: ds 1
-wcefc:: ds 1
-wcefd:: ds 1
-wcefe:: ds 1
-wceff:: ds 1
-wcf00:: ds 1
-wcf01:: ds 1
-wcf02:: ds 1
-wcf03:: ds 1
-wcf04:: ds 1
-wcf05:: ds 1
-wcf06:: ds 1
-wcf07:: ds 1
-wcf08:: ds 1
-wcf09:: ds 1
-wcf0a:: ds 1
-wcf0b:: ds 1
-wcf0c:: ds 1
-wcf0d:: ds 1
-wcf0e:: ds 1
-wcf0f:: ds 1
-wcf10:: ds 1
-wcf11:: ds 1
-wcf12:: ds 1
-wcf13:: ds 1
-wcf14:: ds 1
-wcf15:: ds 1
-wcf16:: ds 1
-wcf17:: ds 1
-wcf18:: ds 1
-wcf19:: ds 1
-wcf1a:: ds 1
-wcf1b:: ds 1
-wcf1c:: ds 1
-wcf1d:: ds 1
-wcf1e:: ds 1
-wcf1f:: ds 1
-wcf20:: ds 1
-wcf21:: ds 1
-wcf22:: ds 1
-wcf23:: ds 1
-wcf24:: ds 1
-wcf25:: ds 1
-wcf26:: ds 1
-wcf27:: ds 1
-wcf28:: ds 1
-wcf29:: ds 1
-wcf2a:: ds 1
-wcf2b:: ds 1
-wcf2c:: ds 1
-wcf2d:: ds 1
-wcf2e:: ds 1
-wcf2f:: ds 1
-wcf30:: ds 1
-wcf31:: ds 1
-wcf32:: ds 1
-wcf33:: ds 1
-wcf34:: ds 1
-wcf35:: ds 1
-wcf36:: ds 1
-wcf37:: ds 1
-wcf38:: ds 1
-wcf39:: ds 1
-wcf3a:: ds 1
-wcf3b:: ds 1
-wcf3c:: ds 1
-wcf3d:: ds 1
-wcf3e:: ds 1
-wcf3f:: ds 1
-wcf40:: ds 1
-wcf41:: ds 1
-wcf42:: ds 1
+wceeb:: ds 1 ; ceeb
+wceec:: ds 1 ; ceec
+wceed:: ds 1 ; ceed
+wceee:: ds 1 ; ceee
+wceef:: ds 1 ; ceef
+wcef0:: ds 1 ; cef0
+wcef1:: ds 1 ; cef1
+wcef2:: ds 1 ; cef2
+wcef3:: ds 1 ; cef3
+wcef4:: ds 1 ; cef4
+wcef5:: ds 1 ; cef5
+wcef6:: ds 1 ; cef6
+wcef7:: ds 1 ; cef7
+wcef8:: ds 1 ; cef8
+wcef9:: ds 1 ; cef9
+wcefa:: ds 1 ; cefa
+wcefb:: ds 1 ; cefb
+wcefc:: ds 1 ; cefc
+wcefd:: ds 1 ; cefd
+wcefe:: ds 1 ; cefe
+wceff:: ds 1 ; ceff
+wcf00:: ds 1 ; cf00
+wcf01:: ds 1 ; cf01
+wcf02:: ds 1 ; cf02
+wcf03:: ds 1 ; cf03
+wcf04:: ds 1 ; cf04
+wcf05:: ds 1 ; cf05
+wcf06:: ds 1 ; cf06
+wcf07:: ds 1 ; cf07
+wcf08:: ds 1 ; cf08
+wcf09:: ds 1 ; cf09
+wcf0a:: ds 1 ; cf0a
+wcf0b:: ds 1 ; cf0b
+wcf0c:: ds 1 ; cf0c
+wcf0d:: ds 1 ; cf0d
+wcf0e:: ds 1 ; cf0e
+wcf0f:: ds 1 ; cf0f
+wcf10:: ds 1 ; cf10
+wcf11:: ds 1 ; cf11
+wcf12:: ds 1 ; cf12
+wcf13:: ds 1 ; cf13
+wcf14:: ds 1 ; cf14
+wcf15:: ds 1 ; cf15
+wcf16:: ds 1 ; cf16
+wcf17:: ds 1 ; cf17
+wcf18:: ds 1 ; cf18
+wcf19:: ds 1 ; cf19
+wcf1a:: ds 1 ; cf1a
+wcf1b:: ds 1 ; cf1b
+wcf1c:: ds 1 ; cf1c
+wcf1d:: ds 1 ; cf1d
+wcf1e:: ds 1 ; cf1e
+wcf1f:: ds 1 ; cf1f
+wcf20:: ds 1 ; cf20
+wcf21:: ds 1 ; cf21
+wcf22:: ds 1 ; cf22
+wcf23:: ds 1 ; cf23
+wcf24:: ds 1 ; cf24
+wcf25:: ds 1 ; cf25
+wcf26:: ds 1 ; cf26
+wcf27:: ds 1 ; cf27
+wcf28:: ds 1 ; cf28
+wcf29:: ds 1 ; cf29
+wcf2a:: ds 1 ; cf2a
+wcf2b:: ds 1 ; cf2b
+wcf2c:: ds 1 ; cf2c
+wcf2d:: ds 1 ; cf2d
+wcf2e:: ds 1 ; cf2e
+wcf2f:: ds 1 ; cf2f
+wcf30:: ds 1 ; cf30
+wcf31:: ds 1 ; cf31
+wcf32:: ds 1 ; cf32
+wcf33:: ds 1 ; cf33
+wcf34:: ds 1 ; cf34
+wcf35:: ds 1 ; cf35
+wcf36:: ds 1 ; cf36
+wcf37:: ds 1 ; cf37
+wcf38:: ds 1 ; cf38
+wcf39:: ds 1 ; cf39
+wcf3a:: ds 1 ; cf3a
+wcf3b:: ds 1 ; cf3b
+wcf3c:: ds 1 ; cf3c
+wcf3d:: ds 1 ; cf3d
+wcf3e:: ds 1 ; cf3e
+wcf3f:: ds 1 ; cf3f
+wcf40:: ds 1 ; cf40
+wcf41:: ds 1 ; cf41
+wcf42:: ds 1 ; cf42
 wBGP:: ds 1
 wOBP0:: ds 1
 wOPB1:: ds 1
-wcf46:: ds 1
-wcf47:: ds 1
-wcf48:: ds 1
-wcf49:: ds 1
-wcf4a:: ds 1
-wcf4b:: ds 1
-wcf4c:: ds 1
-wcf4d:: ds 1
-wcf4e:: ds 1
-wcf4f:: ds 1
-wcf50:: ds 1
-wcf51:: ds 1
-wcf52:: ds 1
-wcf53:: ds 1
-wcf54:: ds 1
-wcf55:: ds 1
-wcf56:: ds 1
-wcf57:: ds 1
-wcf58:: ds 1
-wcf59:: ds 1
-wcf5a:: ds 1
-wcf5b:: ds 1
-wcf5c:: ds 1
-wcf5d:: ds 1
-wcf5e:: ds 1
-wcf5f:: ds 1
-wcf60:: ds 1
-wcf61:: ds 1
-wcf62:: ds 1
-wcf63:: ds 1
-wcf64:: ds 1
-wcf65:: ds 1
-wcf66:: ds 1
-wcf67:: ds 1
-wcf68:: ds 1
-wcf69:: ds 1
-wcf6a:: ds 1
+wcf46:: ds 1 ; cf46
+wcf47:: ds 1 ; cf47
+wcf48:: ds 1 ; cf48
+wcf49:: ds 1 ; cf49
+wcf4a:: ds 1 ; cf4a
+wcf4b:: ds 1 ; cf4b
+wcf4c:: ds 1 ; cf4c
+wcf4d:: ds 1 ; cf4d
+wcf4e:: ds 1 ; cf4e
+wcf4f:: ds 1 ; cf4f
+wcf50:: ds 1 ; cf50
+wcf51:: ds 1 ; cf51
+wcf52:: ds 1 ; cf52
+wcf53:: ds 1 ; cf53
+wcf54:: ds 1 ; cf54
+wcf55:: ds 1 ; cf55
+wcf56:: ds 1 ; cf56
+wcf57:: ds 1 ; cf57
+wcf58:: ds 1 ; cf58
+wcf59:: ds 1 ; cf59
+wcf5a:: ds 1 ; cf5a
+wcf5b:: ds 1 ; cf5b
+wcf5c:: ds 1 ; cf5c
+wcf5d:: ds 1 ; cf5d
+wcf5e:: ds 1 ; cf5e
+wcf5f:: ds 1 ; cf5f
+wcf60:: ds 1 ; cf60
+wcf61:: ds 1 ; cf61
+wcf62:: ds 1 ; cf62
+wcf63:: ds 1 ; cf63
+wcf64:: ds 1 ; cf64
+wcf65:: ds 1 ; cf65
+wcf66:: ds 1 ; cf66
+wcf67:: ds 1 ; cf67
+wcf68:: ds 1 ; cf68
+wcf69:: ds 1 ; cf69
+wcf6a:: ds 1 ; cf6a
 
 wStringBuffer1:: ds 19 ; cf6b
 wStringBuffer2:: ds 19 ; cf7e
@@ -3631,3902 +2964,3902 @@ wStringBuffer3:: ds 19 ; cf91
 wStringBuffer4:: ds 19 ; cfa4
 wStringBuffer5:: ds 19 ; cfb7
 
-wcfca:: ds 1
-wcfcb:: ds 1
-wcfcc:: ds 1
-wcfcd:: ds 1
-wcfce:: ds 1
-wcfcf:: ds 1
-wcfd0:: ds 1
-wcfd1:: ds 1
-wcfd2:: ds 1
-wcfd3:: ds 1
-wcfd4:: ds 1
-wcfd5:: ds 1
-wcfd6:: ds 1
-wcfd7:: ds 1
-wcfd8:: ds 1
-wcfd9:: ds 1
-wcfda:: ds 1
-wcfdb:: ds 1
-wcfdc:: ds 1
-wcfdd:: ds 1
-wcfde:: ds 1
-wcfdf:: ds 1
-wcfe0:: ds 1
-wcfe1:: ds 1
-wcfe2:: ds 1
-wcfe3:: ds 1
-wcfe4:: ds 1
+wcfca:: ds 1 ; cfca
+wcfcb:: ds 1 ; cfcb
+wcfcc:: ds 1 ; cfcc
+wcfcd:: ds 1 ; cfcd
+wcfce:: ds 1 ; cfce
+wcfcf:: ds 1 ; cfcf
+wcfd0:: ds 1 ; cfd0
+wcfd1:: ds 1 ; cfd1
+wcfd2:: ds 1 ; cfd2
+wcfd3:: ds 1 ; cfd3
+wcfd4:: ds 1 ; cfd4
+wcfd5:: ds 1 ; cfd5
+wcfd6:: ds 1 ; cfd6
+wcfd7:: ds 1 ; cfd7
+wcfd8:: ds 1 ; cfd8
+wcfd9:: ds 1 ; cfd9
+wcfda:: ds 1 ; cfda
+wcfdb:: ds 1 ; cfdb
+wcfdc:: ds 1 ; cfdc
+wcfdd:: ds 1 ; cfdd
+wcfde:: ds 1 ; cfde
+wcfdf:: ds 1 ; cfdf
+wcfe0:: ds 1 ; cfe0
+wcfe1:: ds 1 ; cfe1
+wcfe2:: ds 1 ; cfe2
+wcfe3:: ds 1 ; cfe3
+wcfe4:: ds 1 ; cfe4
 wVramState:: ds 1
-wcfe6:: ds 1
-wcfe7:: ds 1
-wcfe8:: ds 1
-wcfe9:: ds 1
-wcfea:: ds 1
-wcfeb:: ds 1
-wcfec:: ds 1
-wcfed:: ds 1
-wcfee:: ds 1
-wcfef:: ds 1
-wcff0:: ds 1
-wcff1:: ds 1
-wcff2:: ds 1
-wcff3:: ds 1
-wcff4:: ds 1
-wcff5:: ds 1
-wcff6:: ds 1
-wcff7:: ds 1
-wcff8:: ds 1
-wcff9:: ds 1
-wcffa:: ds 1
-wcffb:: ds 1
-wcffc:: ds 1
-wcffd:: ds 1
-wcffe:: ds 1
-wcfff:: ds 1
+wcfe6:: ds 1 ; cfe6
+wcfe7:: ds 1 ; cfe7
+wcfe8:: ds 1 ; cfe8
+wcfe9:: ds 1 ; cfe9
+wcfea:: ds 1 ; cfea
+wcfeb:: ds 1 ; cfeb
+wcfec:: ds 1 ; cfec
+wcfed:: ds 1 ; cfed
+wcfee:: ds 1 ; cfee
+wcfef:: ds 1 ; cfef
+wcff0:: ds 1 ; cff0
+wcff1:: ds 1 ; cff1
+wcff2:: ds 1 ; cff2
+wcff3:: ds 1 ; cff3
+wcff4:: ds 1 ; cff4
+wcff5:: ds 1 ; cff5
+wcff6:: ds 1 ; cff6
+wcff7:: ds 1 ; cff7
+wcff8:: ds 1 ; cff8
+wcff9:: ds 1 ; cff9
+wcffa:: ds 1 ; cffa
+wcffb:: ds 1 ; cffb
+wcffc:: ds 1 ; cffc
+wcffd:: ds 1 ; cffd
+wcffe:: ds 1 ; cffe
+wcfff:: ds 1 ; cfff
 
 SECTION "WRAM1", WRAMX, BANK[$1]
-wd000:: ds 1
-wd001:: ds 1
-wd002:: ds 1
-wd003:: ds 1
-wd004:: ds 1
-wd005:: ds 1
-wd006:: ds 1
-wd007:: ds 1
-wd008:: ds 1
-wd009:: ds 1
-wd00a:: ds 1
-wd00b:: ds 1
-wd00c:: ds 1
-wd00d:: ds 1
-wd00e:: ds 1
-wd00f:: ds 1
-wd010:: ds 1
-wd011:: ds 1
-wd012:: ds 1
-wd013:: ds 1
-wd014:: ds 1
-wd015:: ds 1
-wd016:: ds 1
-wd017:: ds 1
-wd018:: ds 1
-wd019:: ds 1
-wd01a:: ds 1
-wd01b:: ds 1
-wd01c:: ds 1
-wd01d:: ds 1
-wd01e:: ds 1
-wd01f:: ds 1
-wd020:: ds 1
-wd021:: ds 1
-wd022:: ds 1
-wd023:: ds 1
-wd024:: ds 1
-wd025:: ds 1
-wd026:: ds 1
-wd027:: ds 1
-wd028:: ds 1
-wd029:: ds 1
-wd02a:: ds 1
-wd02b:: ds 1
-wd02c:: ds 1
-wd02d:: ds 1
-wd02e:: ds 1
-wd02f:: ds 1
-wd030:: ds 1
-wd031:: ds 1
-wd032:: ds 1
-wd033:: ds 1
-wd034:: ds 1
-wd035:: ds 1
-wd036:: ds 1
-wd037:: ds 1
-wd038:: ds 1
-wd039:: ds 1
-wd03a:: ds 1
-wd03b:: ds 1
-wd03c:: ds 1
-wd03d:: ds 1
-wd03e:: ds 1
-wd03f:: ds 1
-wd040:: ds 1
-wd041:: ds 1
+wd000:: ds 1 ; d000
+wd001:: ds 1 ; d001
+wd002:: ds 1 ; d002
+wd003:: ds 1 ; d003
+wd004:: ds 1 ; d004
+wd005:: ds 1 ; d005
+wd006:: ds 1 ; d006
+wd007:: ds 1 ; d007
+wd008:: ds 1 ; d008
+wd009:: ds 1 ; d009
+wd00a:: ds 1 ; d00a
+wd00b:: ds 1 ; d00b
+wd00c:: ds 1 ; d00c
+wd00d:: ds 1 ; d00d
+wd00e:: ds 1 ; d00e
+wd00f:: ds 1 ; d00f
+wd010:: ds 1 ; d010
+wd011:: ds 1 ; d011
+wd012:: ds 1 ; d012
+wd013:: ds 1 ; d013
+wd014:: ds 1 ; d014
+wd015:: ds 1 ; d015
+wd016:: ds 1 ; d016
+wd017:: ds 1 ; d017
+wd018:: ds 1 ; d018
+wd019:: ds 1 ; d019
+wd01a:: ds 1 ; d01a
+wd01b:: ds 1 ; d01b
+wd01c:: ds 1 ; d01c
+wd01d:: ds 1 ; d01d
+wd01e:: ds 1 ; d01e
+wd01f:: ds 1 ; d01f
+wd020:: ds 1 ; d020
+wd021:: ds 1 ; d021
+wd022:: ds 1 ; d022
+wd023:: ds 1 ; d023
+wd024:: ds 1 ; d024
+wd025:: ds 1 ; d025
+wd026:: ds 1 ; d026
+wd027:: ds 1 ; d027
+wd028:: ds 1 ; d028
+wd029:: ds 1 ; d029
+wd02a:: ds 1 ; d02a
+wd02b:: ds 1 ; d02b
+wd02c:: ds 1 ; d02c
+wd02d:: ds 1 ; d02d
+wd02e:: ds 1 ; d02e
+wd02f:: ds 1 ; d02f
+wd030:: ds 1 ; d030
+wd031:: ds 1 ; d031
+wd032:: ds 1 ; d032
+wd033:: ds 1 ; d033
+wd034:: ds 1 ; d034
+wd035:: ds 1 ; d035
+wd036:: ds 1 ; d036
+wd037:: ds 1 ; d037
+wd038:: ds 1 ; d038
+wd039:: ds 1 ; d039
+wd03a:: ds 1 ; d03a
+wd03b:: ds 1 ; d03b
+wd03c:: ds 1 ; d03c
+wd03d:: ds 1 ; d03d
+wd03e:: ds 1 ; d03e
+wd03f:: ds 1 ; d03f
+wd040:: ds 1 ; d040
+wd041:: ds 1 ; d041
 wLinkMode:: ds 1
-wd043:: ds 1
-wd044:: ds 1
-wd045:: ds 1
-wd046:: ds 1
-wd047:: ds 1
-wd048:: ds 1
-wd049:: ds 1
-wd04a:: ds 1
-wd04b:: ds 1
-wd04c:: ds 1
-wd04d:: ds 1
-wd04e:: ds 1
-wd04f:: ds 1
-wd050:: ds 1
-wd051:: ds 1
-wd052:: ds 1
-wd053:: ds 1
-wd054:: ds 1
-wd055:: ds 1
-wd056:: ds 1
-wd057:: ds 1
-wd058:: ds 1
-wd059:: ds 1
-wd05a:: ds 1
-wd05b:: ds 1
-wd05c:: ds 1
-wd05d:: ds 1
-wd05e:: ds 1
-wd05f:: ds 1
-wd060:: ds 1
-wd061:: ds 1
-wd062:: ds 1
-wd063:: ds 1
-wd064:: ds 1
-wd065:: ds 1
-wd066:: ds 1
-wd067:: ds 1
-wd068:: ds 1
-wd069:: ds 1
-wd06a:: ds 1
-wd06b:: ds 1
-wd06c:: ds 1
-wd06d:: ds 1
-wd06e:: ds 1
-wd06f:: ds 1
-wd070:: ds 1
-wd071:: ds 1
-wd072:: ds 1
-wd073:: ds 1
-wd074:: ds 1
-wd075:: ds 1
-wd076:: ds 1
-wd077:: ds 1
-wd078:: ds 1
-wd079:: ds 1
-wd07a:: ds 1
-wd07b:: ds 1
-wd07c:: ds 1
-wd07d:: ds 1
-wd07e:: ds 1
-wd07f:: ds 1
-wd080:: ds 1
-wd081:: ds 1
-wd082:: ds 1
-wd083:: ds 1
-wd084:: ds 1
-wd085:: ds 1
-wd086:: ds 1
-wd087:: ds 1
-wd088:: ds 1
-wd089:: ds 1
-wd08a:: ds 1
-wd08b:: ds 1
-wd08c:: ds 1
-wd08d:: ds 1
-wd08e:: ds 1
-wd08f:: ds 1
-wd090:: ds 1
-wd091:: ds 1
-wd092:: ds 1
-wd093:: ds 1
-wd094:: ds 1
-wd095:: ds 1
-wd096:: ds 1
-wd097:: ds 1
-wd098:: ds 1
-wd099:: ds 1
-wd09a:: ds 1
-wd09b:: ds 1
-wd09c:: ds 1
-wd09d:: ds 1
-wd09e:: ds 1
-wd09f:: ds 1
-wd0a0:: ds 1
-wd0a1:: ds 1
-wd0a2:: ds 1
-wd0a3:: ds 1
-wd0a4:: ds 1
-wd0a5:: ds 1
-wd0a6:: ds 1
-wd0a7:: ds 1
-wd0a8:: ds 1
-wd0a9:: ds 1
-wd0aa:: ds 1
-wd0ab:: ds 1
-wd0ac:: ds 1
-wd0ad:: ds 1
-wd0ae:: ds 1
-wd0af:: ds 1
-wd0b0:: ds 1
-wd0b1:: ds 1
-wd0b2:: ds 1
-wd0b3:: ds 1
-wd0b4:: ds 1
-wd0b5:: ds 1
-wd0b6:: ds 1
-wd0b7:: ds 1
-wd0b8:: ds 1
-wd0b9:: ds 1
-wd0ba:: ds 1
-wd0bb:: ds 1
-wd0bc:: ds 1
-wd0bd:: ds 1
-wd0be:: ds 1
-wd0bf:: ds 1
-wd0c0:: ds 1
-wd0c1:: ds 1
-wd0c2:: ds 1
-wd0c3:: ds 1
-wd0c4:: ds 1
-wd0c5:: ds 1
-wd0c6:: ds 1
-wd0c7:: ds 1
-wd0c8:: ds 1
-wd0c9:: ds 1
-wd0ca:: ds 1
-wd0cb:: ds 1
-wd0cc:: ds 1
-wd0cd:: ds 1
-wd0ce:: ds 1
-wd0cf:: ds 1
-wd0d0:: ds 1
-wd0d1:: ds 1
-wd0d2:: ds 1
-wd0d3:: ds 1
-wd0d4:: ds 1
-wd0d5:: ds 1
-wd0d6:: ds 1
-wd0d7:: ds 1
-wd0d8:: ds 1
-wd0d9:: ds 1
-wd0da:: ds 1
-wd0db:: ds 1
-wd0dc:: ds 1
-wd0dd:: ds 1
-wd0de:: ds 1
-wd0df:: ds 1
-wd0e0:: ds 1
-wd0e1:: ds 1
-wd0e2:: ds 1
-wd0e3:: ds 1
-wd0e4:: ds 1
-wd0e5:: ds 1
-wd0e6:: ds 1
-wd0e7:: ds 1
-wd0e8:: ds 1
-wd0e9:: ds 1
-wd0ea:: ds 1
-wd0eb:: ds 1
-wd0ec:: ds 1
-wd0ed:: ds 1
-wd0ee:: ds 1
-wd0ef:: ds 1
-wd0f0:: ds 1
-wd0f1:: ds 1
-wd0f2:: ds 1
-wd0f3:: ds 1
-wd0f4:: ds 1
-wd0f5:: ds 1
-wd0f6:: ds 1
-wd0f7:: ds 1
-wd0f8:: ds 1
-wd0f9:: ds 1
-wd0fa:: ds 1
-wd0fb:: ds 1
-wd0fc:: ds 1
-wd0fd:: ds 1
-wd0fe:: ds 1
-wd0ff:: ds 1
-wd100:: ds 1
-wd101:: ds 1
-wd102:: ds 1
-wd103:: ds 1
-wd104:: ds 1
-wd105:: ds 1
-wd106:: ds 1
-wd107:: ds 1
-wd108:: ds 1
-wd109:: ds 1
-wd10a:: ds 1
-wd10b:: ds 1
-wd10c:: ds 1
-wd10d:: ds 1
-wd10e:: ds 1
-wd10f:: ds 1
-wd110:: ds 1
-wd111:: ds 1
-wd112:: ds 1
-wd113:: ds 1
-wd114:: ds 1
-wd115:: ds 1
-wd116:: ds 1
-wd117:: ds 1
-wd118:: ds 1
-wd119:: ds 1
-wd11a:: ds 1
-wd11b:: ds 1
-wd11c:: ds 1
-wd11d:: ds 1
-wd11e:: ds 1
-wd11f:: ds 1
-wd120:: ds 1
-wd121:: ds 1
-wd122:: ds 1
-wd123:: ds 1
-wd124:: ds 1
-wd125:: ds 1
-wd126:: ds 1
-wd127:: ds 1
-wd128:: ds 1
-wd129:: ds 1
-wd12a:: ds 1
-wd12b:: ds 1
-wd12c:: ds 1
-wd12d:: ds 1
-wd12e:: ds 1
-wd12f:: ds 1
-wd130:: ds 1
-wd131:: ds 1
-wd132:: ds 1
-wd133:: ds 1
-wd134:: ds 1
-wd135:: ds 1
-wd136:: ds 1
-wd137:: ds 1
-wd138:: ds 1
-wd139:: ds 1
-wd13a:: ds 1
-wd13b:: ds 1
-wd13c:: ds 1
-wd13d:: ds 1
-wd13e:: ds 1
-wd13f:: ds 1
-wd140:: ds 1
-wd141:: ds 1
-wd142:: ds 1
-wd143:: ds 1
-wd144:: ds 1
-wd145:: ds 1
-wd146:: ds 1
-wd147:: ds 1
-wd148:: ds 1
-wd149:: ds 1
-wd14a:: ds 1
-wd14b:: ds 1
-wd14c:: ds 1
-wd14d:: ds 1
-wd14e:: ds 1
-wd14f:: ds 1
-wd150:: ds 1
-wd151:: ds 1
-wd152:: ds 1
-wd153:: ds 1
-wd154:: ds 1
+wd043:: ds 1 ; d043
+wd044:: ds 1 ; d044
+wd045:: ds 1 ; d045
+wd046:: ds 1 ; d046
+wd047:: ds 1 ; d047
+wd048:: ds 1 ; d048
+wd049:: ds 1 ; d049
+wd04a:: ds 1 ; d04a
+wd04b:: ds 1 ; d04b
+wd04c:: ds 1 ; d04c
+wd04d:: ds 1 ; d04d
+wd04e:: ds 1 ; d04e
+wd04f:: ds 1 ; d04f
+wd050:: ds 1 ; d050
+wd051:: ds 1 ; d051
+wd052:: ds 1 ; d052
+wd053:: ds 1 ; d053
+wd054:: ds 1 ; d054
+wd055:: ds 1 ; d055
+wd056:: ds 1 ; d056
+wd057:: ds 1 ; d057
+wd058:: ds 1 ; d058
+wd059:: ds 1 ; d059
+wd05a:: ds 1 ; d05a
+wd05b:: ds 1 ; d05b
+wd05c:: ds 1 ; d05c
+wd05d:: ds 1 ; d05d
+wd05e:: ds 1 ; d05e
+wd05f:: ds 1 ; d05f
+wd060:: ds 1 ; d060
+wd061:: ds 1 ; d061
+wd062:: ds 1 ; d062
+wd063:: ds 1 ; d063
+wd064:: ds 1 ; d064
+wd065:: ds 1 ; d065
+wd066:: ds 1 ; d066
+wd067:: ds 1 ; d067
+wd068:: ds 1 ; d068
+wd069:: ds 1 ; d069
+wd06a:: ds 1 ; d06a
+wd06b:: ds 1 ; d06b
+wd06c:: ds 1 ; d06c
+wd06d:: ds 1 ; d06d
+wd06e:: ds 1 ; d06e
+wd06f:: ds 1 ; d06f
+wd070:: ds 1 ; d070
+wd071:: ds 1 ; d071
+wd072:: ds 1 ; d072
+wd073:: ds 1 ; d073
+wd074:: ds 1 ; d074
+wd075:: ds 1 ; d075
+wd076:: ds 1 ; d076
+wd077:: ds 1 ; d077
+wd078:: ds 1 ; d078
+wd079:: ds 1 ; d079
+wd07a:: ds 1 ; d07a
+wd07b:: ds 1 ; d07b
+wd07c:: ds 1 ; d07c
+wd07d:: ds 1 ; d07d
+wd07e:: ds 1 ; d07e
+wd07f:: ds 1 ; d07f
+wd080:: ds 1 ; d080
+wd081:: ds 1 ; d081
+wd082:: ds 1 ; d082
+wd083:: ds 1 ; d083
+wd084:: ds 1 ; d084
+wd085:: ds 1 ; d085
+wd086:: ds 1 ; d086
+wd087:: ds 1 ; d087
+wd088:: ds 1 ; d088
+wd089:: ds 1 ; d089
+wd08a:: ds 1 ; d08a
+wd08b:: ds 1 ; d08b
+wd08c:: ds 1 ; d08c
+wd08d:: ds 1 ; d08d
+wd08e:: ds 1 ; d08e
+wd08f:: ds 1 ; d08f
+wd090:: ds 1 ; d090
+wd091:: ds 1 ; d091
+wd092:: ds 1 ; d092
+wd093:: ds 1 ; d093
+wd094:: ds 1 ; d094
+wd095:: ds 1 ; d095
+wd096:: ds 1 ; d096
+wd097:: ds 1 ; d097
+wd098:: ds 1 ; d098
+wd099:: ds 1 ; d099
+wd09a:: ds 1 ; d09a
+wd09b:: ds 1 ; d09b
+wd09c:: ds 1 ; d09c
+wd09d:: ds 1 ; d09d
+wd09e:: ds 1 ; d09e
+wd09f:: ds 1 ; d09f
+wd0a0:: ds 1 ; d0a0
+wd0a1:: ds 1 ; d0a1
+wd0a2:: ds 1 ; d0a2
+wd0a3:: ds 1 ; d0a3
+wd0a4:: ds 1 ; d0a4
+wd0a5:: ds 1 ; d0a5
+wd0a6:: ds 1 ; d0a6
+wd0a7:: ds 1 ; d0a7
+wd0a8:: ds 1 ; d0a8
+wd0a9:: ds 1 ; d0a9
+wd0aa:: ds 1 ; d0aa
+wd0ab:: ds 1 ; d0ab
+wd0ac:: ds 1 ; d0ac
+wd0ad:: ds 1 ; d0ad
+wd0ae:: ds 1 ; d0ae
+wd0af:: ds 1 ; d0af
+wd0b0:: ds 1 ; d0b0
+wd0b1:: ds 1 ; d0b1
+wd0b2:: ds 1 ; d0b2
+wd0b3:: ds 1 ; d0b3
+wd0b4:: ds 1 ; d0b4
+wd0b5:: ds 1 ; d0b5
+wd0b6:: ds 1 ; d0b6
+wd0b7:: ds 1 ; d0b7
+wd0b8:: ds 1 ; d0b8
+wd0b9:: ds 1 ; d0b9
+wd0ba:: ds 1 ; d0ba
+wd0bb:: ds 1 ; d0bb
+wd0bc:: ds 1 ; d0bc
+wd0bd:: ds 1 ; d0bd
+wd0be:: ds 1 ; d0be
+wd0bf:: ds 1 ; d0bf
+wd0c0:: ds 1 ; d0c0
+wd0c1:: ds 1 ; d0c1
+wd0c2:: ds 1 ; d0c2
+wd0c3:: ds 1 ; d0c3
+wd0c4:: ds 1 ; d0c4
+wd0c5:: ds 1 ; d0c5
+wd0c6:: ds 1 ; d0c6
+wd0c7:: ds 1 ; d0c7
+wd0c8:: ds 1 ; d0c8
+wd0c9:: ds 1 ; d0c9
+wd0ca:: ds 1 ; d0ca
+wd0cb:: ds 1 ; d0cb
+wd0cc:: ds 1 ; d0cc
+wd0cd:: ds 1 ; d0cd
+wd0ce:: ds 1 ; d0ce
+wd0cf:: ds 1 ; d0cf
+wd0d0:: ds 1 ; d0d0
+wd0d1:: ds 1 ; d0d1
+wd0d2:: ds 1 ; d0d2
+wd0d3:: ds 1 ; d0d3
+wd0d4:: ds 1 ; d0d4
+wd0d5:: ds 1 ; d0d5
+wd0d6:: ds 1 ; d0d6
+wd0d7:: ds 1 ; d0d7
+wd0d8:: ds 1 ; d0d8
+wd0d9:: ds 1 ; d0d9
+wd0da:: ds 1 ; d0da
+wd0db:: ds 1 ; d0db
+wd0dc:: ds 1 ; d0dc
+wd0dd:: ds 1 ; d0dd
+wd0de:: ds 1 ; d0de
+wd0df:: ds 1 ; d0df
+wd0e0:: ds 1 ; d0e0
+wd0e1:: ds 1 ; d0e1
+wd0e2:: ds 1 ; d0e2
+wd0e3:: ds 1 ; d0e3
+wd0e4:: ds 1 ; d0e4
+wd0e5:: ds 1 ; d0e5
+wd0e6:: ds 1 ; d0e6
+wd0e7:: ds 1 ; d0e7
+wd0e8:: ds 1 ; d0e8
+wd0e9:: ds 1 ; d0e9
+wd0ea:: ds 1 ; d0ea
+wd0eb:: ds 1 ; d0eb
+wd0ec:: ds 1 ; d0ec
+wd0ed:: ds 1 ; d0ed
+wd0ee:: ds 1 ; d0ee
+wd0ef:: ds 1 ; d0ef
+wd0f0:: ds 1 ; d0f0
+wd0f1:: ds 1 ; d0f1
+wd0f2:: ds 1 ; d0f2
+wd0f3:: ds 1 ; d0f3
+wd0f4:: ds 1 ; d0f4
+wd0f5:: ds 1 ; d0f5
+wd0f6:: ds 1 ; d0f6
+wd0f7:: ds 1 ; d0f7
+wd0f8:: ds 1 ; d0f8
+wd0f9:: ds 1 ; d0f9
+wd0fa:: ds 1 ; d0fa
+wd0fb:: ds 1 ; d0fb
+wd0fc:: ds 1 ; d0fc
+wd0fd:: ds 1 ; d0fd
+wd0fe:: ds 1 ; d0fe
+wd0ff:: ds 1 ; d0ff
+wd100:: ds 1 ; d100
+wd101:: ds 1 ; d101
+wd102:: ds 1 ; d102
+wd103:: ds 1 ; d103
+wd104:: ds 1 ; d104
+wd105:: ds 1 ; d105
+wd106:: ds 1 ; d106
+wd107:: ds 1 ; d107
+wd108:: ds 1 ; d108
+wd109:: ds 1 ; d109
+wd10a:: ds 1 ; d10a
+wd10b:: ds 1 ; d10b
+wd10c:: ds 1 ; d10c
+wd10d:: ds 1 ; d10d
+wd10e:: ds 1 ; d10e
+wd10f:: ds 1 ; d10f
+wd110:: ds 1 ; d110
+wd111:: ds 1 ; d111
+wd112:: ds 1 ; d112
+wd113:: ds 1 ; d113
+wd114:: ds 1 ; d114
+wd115:: ds 1 ; d115
+wd116:: ds 1 ; d116
+wd117:: ds 1 ; d117
+wd118:: ds 1 ; d118
+wd119:: ds 1 ; d119
+wd11a:: ds 1 ; d11a
+wd11b:: ds 1 ; d11b
+wd11c:: ds 1 ; d11c
+wd11d:: ds 1 ; d11d
+wd11e:: ds 1 ; d11e
+wd11f:: ds 1 ; d11f
+wd120:: ds 1 ; d120
+wd121:: ds 1 ; d121
+wd122:: ds 1 ; d122
+wd123:: ds 1 ; d123
+wd124:: ds 1 ; d124
+wd125:: ds 1 ; d125
+wd126:: ds 1 ; d126
+wd127:: ds 1 ; d127
+wd128:: ds 1 ; d128
+wd129:: ds 1 ; d129
+wd12a:: ds 1 ; d12a
+wd12b:: ds 1 ; d12b
+wd12c:: ds 1 ; d12c
+wd12d:: ds 1 ; d12d
+wd12e:: ds 1 ; d12e
+wd12f:: ds 1 ; d12f
+wd130:: ds 1 ; d130
+wd131:: ds 1 ; d131
+wd132:: ds 1 ; d132
+wd133:: ds 1 ; d133
+wd134:: ds 1 ; d134
+wd135:: ds 1 ; d135
+wd136:: ds 1 ; d136
+wd137:: ds 1 ; d137
+wd138:: ds 1 ; d138
+wd139:: ds 1 ; d139
+wd13a:: ds 1 ; d13a
+wd13b:: ds 1 ; d13b
+wd13c:: ds 1 ; d13c
+wd13d:: ds 1 ; d13d
+wd13e:: ds 1 ; d13e
+wd13f:: ds 1 ; d13f
+wd140:: ds 1 ; d140
+wd141:: ds 1 ; d141
+wd142:: ds 1 ; d142
+wd143:: ds 1 ; d143
+wd144:: ds 1 ; d144
+wd145:: ds 1 ; d145
+wd146:: ds 1 ; d146
+wd147:: ds 1 ; d147
+wd148:: ds 1 ; d148
+wd149:: ds 1 ; d149
+wd14a:: ds 1 ; d14a
+wd14b:: ds 1 ; d14b
+wd14c:: ds 1 ; d14c
+wd14d:: ds 1 ; d14d
+wd14e:: ds 1 ; d14e
+wd14f:: ds 1 ; d14f
+wd150:: ds 1 ; d150
+wd151:: ds 1 ; d151
+wd152:: ds 1 ; d152
+wd153:: ds 1 ; d153
+wd154:: ds 1 ; d154
 wROMBankBackup:: ds 1
-wd156:: ds 1
-wd157:: ds 1
-wd158:: ds 1
-wd159:: ds 1
-wd15a:: ds 1
-wd15b:: ds 1
-wd15c:: ds 1
-wd15d:: ds 1
-wd15e:: ds 1
-wd15f:: ds 1
-wd160:: ds 1
-wd161:: ds 1
-wd162:: ds 1
-wd163:: ds 1
-wd164:: ds 1
-wd165:: ds 1
-wd166:: ds 1
-wd167:: ds 1
-wd168:: ds 1
-wd169:: ds 1
-wd16a:: ds 1
-wd16b:: ds 1
-wd16c:: ds 1
-wd16d:: ds 1
-wd16e:: ds 1
-wd16f:: ds 1
-wd170:: ds 1
-wd171:: ds 1
-wd172:: ds 1
-wd173:: ds 1
-wd174:: ds 1
-wd175:: ds 1
-wd176:: ds 1
-wd177:: ds 1
-wd178:: ds 1
-wd179:: ds 1
-wd17a:: ds 1
-wd17b:: ds 1
-wd17c:: ds 1
-wd17d:: ds 1
-wd17e:: ds 1
-wd17f:: ds 1
-wd180:: ds 1
-wd181:: ds 1
-wd182:: ds 1
-wd183:: ds 1
-wd184:: ds 1
-wd185:: ds 1
-wd186:: ds 1
-wd187:: ds 1
-wd188:: ds 1
-wd189:: ds 1
-wd18a:: ds 1
-wd18b:: ds 1
-wd18c:: ds 1
-wd18d:: ds 1
-wd18e:: ds 1
-wd18f:: ds 1
-wd190:: ds 1
-wd191:: ds 1
-wd192:: ds 1
-wd193:: ds 1
-wd194:: ds 1
-wd195:: ds 1
-wd196:: ds 1
-wd197:: ds 1
-wd198:: ds 1
-wd199:: ds 1
-wd19a:: ds 1
-wd19b:: ds 1
-wd19c:: ds 1
-wd19d:: ds 1
-wd19e:: ds 1
-wd19f:: ds 1
-wd1a0:: ds 1
-wd1a1:: ds 1
-wd1a2:: ds 1
-wd1a3:: ds 1
-wd1a4:: ds 1
-wd1a5:: ds 1
-wd1a6:: ds 1
-wd1a7:: ds 1
-wd1a8:: ds 1
-wd1a9:: ds 1
-wd1aa:: ds 1
-wd1ab:: ds 1
-wd1ac:: ds 1
-wd1ad:: ds 1
-wd1ae:: ds 1
-wd1af:: ds 1
-wd1b0:: ds 1
-wd1b1:: ds 1
-wd1b2:: ds 1
-wd1b3:: ds 1
-wd1b4:: ds 1
-wd1b5:: ds 1
-wd1b6:: ds 1
-wd1b7:: ds 1
-wd1b8:: ds 1
-wd1b9:: ds 1
-wd1ba:: ds 1
-wd1bb:: ds 1
-wd1bc:: ds 1
-wd1bd:: ds 1
-wd1be:: ds 1
-wd1bf:: ds 1
-wd1c0:: ds 1
-wd1c1:: ds 1
-wd1c2:: ds 1
-wd1c3:: ds 1
-wd1c4:: ds 1
-wd1c5:: ds 1
-wd1c6:: ds 1
-wd1c7:: ds 1
-wd1c8:: ds 1
-wd1c9:: ds 1
-wd1ca:: ds 1
-wd1cb:: ds 1
-wd1cc:: ds 1
-wd1cd:: ds 1
-wd1ce:: ds 1
-wd1cf:: ds 1
-wd1d0:: ds 1
-wd1d1:: ds 1
-wd1d2:: ds 1
-wd1d3:: ds 1
-wd1d4:: ds 1
-wd1d5:: ds 1
-wd1d6:: ds 1
-wd1d7:: ds 1
-wd1d8:: ds 1
-wd1d9:: ds 1
-wd1da:: ds 1
-wd1db:: ds 1
-wd1dc:: ds 1
-wd1dd:: ds 1
-wd1de:: ds 1
-wd1df:: ds 1
-wd1e0:: ds 1
-wd1e1:: ds 1
-wd1e2:: ds 1
-wd1e3:: ds 1
-wd1e4:: ds 1
-wd1e5:: ds 1
-wd1e6:: ds 1
-wd1e7:: ds 1
-wd1e8:: ds 1
-wd1e9:: ds 1
-wd1ea:: ds 1
-wd1eb:: ds 1
-wd1ec:: ds 1
-wd1ed:: ds 1
-wd1ee:: ds 1
-wd1ef:: ds 1
-wd1f0:: ds 1
-wd1f1:: ds 1
-wd1f2:: ds 1
-wd1f3:: ds 1
-wd1f4:: ds 1
-wd1f5:: ds 1
-wd1f6:: ds 1
-wd1f7:: ds 1
-wd1f8:: ds 1
-wd1f9:: ds 1
-wd1fa:: ds 1
-wd1fb:: ds 1
-wd1fc:: ds 1
-wd1fd:: ds 1
-wd1fe:: ds 1
-wd1ff:: ds 1
-wd200:: ds 1
-wd201:: ds 1
-wd202:: ds 1
-wd203:: ds 1
-wd204:: ds 1
-wd205:: ds 1
-wd206:: ds 1
-wd207:: ds 1
-wd208:: ds 1
-wd209:: ds 1
-wd20a:: ds 1
-wd20b:: ds 1
-wd20c:: ds 1
-wd20d:: ds 1
-wd20e:: ds 1
-wd20f:: ds 1
-wd210:: ds 1
-wd211:: ds 1
-wd212:: ds 1
-wd213:: ds 1
-wd214:: ds 1
-wd215:: ds 1
-wd216:: ds 1
-wd217:: ds 1
-wd218:: ds 1
-wd219:: ds 1
-wd21a:: ds 1
-wd21b:: ds 1
-wd21c:: ds 1
-wd21d:: ds 1
-wd21e:: ds 1
-wd21f:: ds 1
-wd220:: ds 1
-wd221:: ds 1
-wd222:: ds 1
-wd223:: ds 1
-wd224:: ds 1
-wd225:: ds 1
-wd226:: ds 1
-wd227:: ds 1
-wd228:: ds 1
-wd229:: ds 1
-wd22a:: ds 1
-wd22b:: ds 1
-wd22c:: ds 1
-wd22d:: ds 1
-wd22e:: ds 1
-wd22f:: ds 1
-wd230:: ds 1
-wd231:: ds 1
-wd232:: ds 1
-wd233:: ds 1
-wd234:: ds 1
-wd235:: ds 1
-wd236:: ds 1
-wd237:: ds 1
-wd238:: ds 1
-wd239:: ds 1
-wd23a:: ds 1
-wd23b:: ds 1
-wd23c:: ds 1
-wd23d:: ds 1
-wd23e:: ds 1
-wd23f:: ds 1
-wd240:: ds 1
-wd241:: ds 1
-wd242:: ds 1
-wd243:: ds 1
-wd244:: ds 1
-wd245:: ds 1
-wd246:: ds 1
-wd247:: ds 1
-wd248:: ds 1
-wd249:: ds 1
-wd24a:: ds 1
-wd24b:: ds 1
-wd24c:: ds 1
-wd24d:: ds 1
-wd24e:: ds 1
-wd24f:: ds 1
-wd250:: ds 1
-wd251:: ds 1
-wd252:: ds 1
-wd253:: ds 1
-wd254:: ds 1
-wd255:: ds 1
-wd256:: ds 1
-wd257:: ds 1
-wd258:: ds 1
-wd259:: ds 1
-wd25a:: ds 1
-wd25b:: ds 1
-wd25c:: ds 1
-wd25d:: ds 1
-wd25e:: ds 1
-wd25f:: ds 1
-wd260:: ds 1
-wd261:: ds 1
-wd262:: ds 1
-wd263:: ds 1
-wd264:: ds 1
-wd265:: ds 1
-wd266:: ds 1
-wd267:: ds 1
-wd268:: ds 1
-wd269:: ds 1
-wd26a:: ds 1
-wd26b:: ds 1
-wd26c:: ds 1
-wd26d:: ds 1
-wd26e:: ds 1
-wd26f:: ds 1
-wd270:: ds 1
-wd271:: ds 1
-wd272:: ds 1
-wd273:: ds 1
-wd274:: ds 1
-wd275:: ds 1
-wd276:: ds 1
-wd277:: ds 1
-wd278:: ds 1
-wd279:: ds 1
-wd27a:: ds 1
-wd27b:: ds 1
-wd27c:: ds 1
-wd27d:: ds 1
-wd27e:: ds 1
-wd27f:: ds 1
-wd280:: ds 1
-wd281:: ds 1
-wd282:: ds 1
-wd283:: ds 1
-wd284:: ds 1
-wd285:: ds 1
-wd286:: ds 1
-wd287:: ds 1
-wd288:: ds 1
-wd289:: ds 1
-wd28a:: ds 1
-wd28b:: ds 1
-wd28c:: ds 1
-wd28d:: ds 1
-wd28e:: ds 1
-wd28f:: ds 1
-wd290:: ds 1
-wd291:: ds 1
-wd292:: ds 1
-wd293:: ds 1
-wd294:: ds 1
-wd295:: ds 1
-wd296:: ds 1
-wd297:: ds 1
-wd298:: ds 1
-wd299:: ds 1
-wd29a:: ds 1
-wd29b:: ds 1
-wd29c:: ds 1
-wd29d:: ds 1
-wd29e:: ds 1
-wd29f:: ds 1
-wd2a0:: ds 1
-wd2a1:: ds 1
-wd2a2:: ds 1
-wd2a3:: ds 1
-wd2a4:: ds 1
-wd2a5:: ds 1
-wd2a6:: ds 1
-wd2a7:: ds 1
-wd2a8:: ds 1
-wd2a9:: ds 1
-wd2aa:: ds 1
-wd2ab:: ds 1
-wd2ac:: ds 1
-wd2ad:: ds 1
-wd2ae:: ds 1
-wd2af:: ds 1
-wd2b0:: ds 1
-wd2b1:: ds 1
-wd2b2:: ds 1
-wd2b3:: ds 1
-wd2b4:: ds 1
-wd2b5:: ds 1
-wd2b6:: ds 1
-wd2b7:: ds 1
-wd2b8:: ds 1
-wd2b9:: ds 1
-wd2ba:: ds 1
-wd2bb:: ds 1
-wd2bc:: ds 1
-wd2bd:: ds 1
-wd2be:: ds 1
-wd2bf:: ds 1
-wd2c0:: ds 1
-wd2c1:: ds 1
-wd2c2:: ds 1
-wd2c3:: ds 1
-wd2c4:: ds 1
-wd2c5:: ds 1
-wd2c6:: ds 1
-wd2c7:: ds 1
-wd2c8:: ds 1
-wd2c9:: ds 1
-wd2ca:: ds 1
-wd2cb:: ds 1
-wd2cc:: ds 1
-wd2cd:: ds 1
-wd2ce:: ds 1
-wd2cf:: ds 1
-wd2d0:: ds 1
-wd2d1:: ds 1
-wd2d2:: ds 1
-wd2d3:: ds 1
-wd2d4:: ds 1
-wd2d5:: ds 1
-wd2d6:: ds 1
-wd2d7:: ds 1
-wd2d8:: ds 1
-wd2d9:: ds 1
-wd2da:: ds 1
-wd2db:: ds 1
-wd2dc:: ds 1
-wd2dd:: ds 1
-wd2de:: ds 1
-wd2df:: ds 1
-wd2e0:: ds 1
-wd2e1:: ds 1
-wd2e2:: ds 1
-wd2e3:: ds 1
-wd2e4:: ds 1
-wd2e5:: ds 1
-wd2e6:: ds 1
-wd2e7:: ds 1
-wd2e8:: ds 1
-wd2e9:: ds 1
-wd2ea:: ds 1
-wd2eb:: ds 1
-wd2ec:: ds 1
-wd2ed:: ds 1
-wd2ee:: ds 1
-wd2ef:: ds 1
-wd2f0:: ds 1
-wd2f1:: ds 1
-wd2f2:: ds 1
-wd2f3:: ds 1
-wd2f4:: ds 1
-wd2f5:: ds 1
-wd2f6:: ds 1
-wd2f7:: ds 1
-wd2f8:: ds 1
-wd2f9:: ds 1
-wd2fa:: ds 1
-wd2fb:: ds 1
-wd2fc:: ds 1
-wd2fd:: ds 1
-wd2fe:: ds 1
-wd2ff:: ds 1
-wd300:: ds 1
-wd301:: ds 1
-wd302:: ds 1
-wd303:: ds 1
-wd304:: ds 1
-wd305:: ds 1
-wd306:: ds 1
-wd307:: ds 1
-wd308:: ds 1
-wd309:: ds 1
-wd30a:: ds 1
-wd30b:: ds 1
-wd30c:: ds 1
-wd30d:: ds 1
-wd30e:: ds 1
-wd30f:: ds 1
-wd310:: ds 1
-wd311:: ds 1
-wd312:: ds 1
-wd313:: ds 1
-wd314:: ds 1
-wd315:: ds 1
-wd316:: ds 1
-wd317:: ds 1
-wd318:: ds 1
-wd319:: ds 1
-wd31a:: ds 1
-wd31b:: ds 1
-wd31c:: ds 1
-wd31d:: ds 1
-wd31e:: ds 1
-wd31f:: ds 1
-wd320:: ds 1
-wd321:: ds 1
-wd322:: ds 1
-wd323:: ds 1
-wd324:: ds 1
-wd325:: ds 1
-wd326:: ds 1
-wd327:: ds 1
-wd328:: ds 1
-wd329:: ds 1
-wd32a:: ds 1
-wd32b:: ds 1
-wd32c:: ds 1
-wd32d:: ds 1
-wd32e:: ds 1
-wd32f:: ds 1
-wd330:: ds 1
-wd331:: ds 1
-wd332:: ds 1
-wd333:: ds 1
-wd334:: ds 1
-wd335:: ds 1
-wd336:: ds 1
-wd337:: ds 1
-wd338:: ds 1
-wd339:: ds 1
-wd33a:: ds 1
-wd33b:: ds 1
-wd33c:: ds 1
-wd33d:: ds 1
-wd33e:: ds 1
-wd33f:: ds 1
-wd340:: ds 1
-wd341:: ds 1
-wd342:: ds 1
-wd343:: ds 1
-wd344:: ds 1
-wd345:: ds 1
-wd346:: ds 1
-wd347:: ds 1
-wd348:: ds 1
-wd349:: ds 1
-wd34a:: ds 1
-wd34b:: ds 1
-wd34c:: ds 1
-wd34d:: ds 1
-wd34e:: ds 1
-wd34f:: ds 1
-wd350:: ds 1
-wd351:: ds 1
-wd352:: ds 1
-wd353:: ds 1
-wd354:: ds 1
-wd355:: ds 1
-wd356:: ds 1
-wd357:: ds 1
-wd358:: ds 1
-wd359:: ds 1
-wd35a:: ds 1
-wd35b:: ds 1
-wd35c:: ds 1
-wd35d:: ds 1
-wd35e:: ds 1
-wd35f:: ds 1
-wd360:: ds 1
-wd361:: ds 1
-wd362:: ds 1
-wd363:: ds 1
-wd364:: ds 1
-wd365:: ds 1
-wd366:: ds 1
-wd367:: ds 1
-wd368:: ds 1
-wd369:: ds 1
-wd36a:: ds 1
-wd36b:: ds 1
-wd36c:: ds 1
-wd36d:: ds 1
-wd36e:: ds 1
-wd36f:: ds 1
-wd370:: ds 1
-wd371:: ds 1
-wd372:: ds 1
-wd373:: ds 1
-wd374:: ds 1
-wd375:: ds 1
-wd376:: ds 1
-wd377:: ds 1
-wd378:: ds 1
-wd379:: ds 1
-wd37a:: ds 1
-wd37b:: ds 1
-wd37c:: ds 1
-wd37d:: ds 1
-wd37e:: ds 1
-wd37f:: ds 1
-wd380:: ds 1
-wd381:: ds 1
-wd382:: ds 1
-wd383:: ds 1
-wd384:: ds 1
-wd385:: ds 1
-wd386:: ds 1
-wd387:: ds 1
-wd388:: ds 1
-wd389:: ds 1
-wd38a:: ds 1
-wd38b:: ds 1
-wd38c:: ds 1
-wd38d:: ds 1
-wd38e:: ds 1
-wd38f:: ds 1
-wd390:: ds 1
-wd391:: ds 1
-wd392:: ds 1
-wd393:: ds 1
-wd394:: ds 1
-wd395:: ds 1
-wd396:: ds 1
-wd397:: ds 1
-wd398:: ds 1
-wd399:: ds 1
-wd39a:: ds 1
-wd39b:: ds 1
-wd39c:: ds 1
-wd39d:: ds 1
-wd39e:: ds 1
-wd39f:: ds 1
-wd3a0:: ds 1
-wd3a1:: ds 1
-wd3a2:: ds 1
-wd3a3:: ds 1
-wd3a4:: ds 1
-wd3a5:: ds 1
-wd3a6:: ds 1
-wd3a7:: ds 1
-wd3a8:: ds 1
-wd3a9:: ds 1
-wd3aa:: ds 1
-wd3ab:: ds 1
-wd3ac:: ds 1
-wd3ad:: ds 1
-wd3ae:: ds 1
-wd3af:: ds 1
-wd3b0:: ds 1
-wd3b1:: ds 1
-wd3b2:: ds 1
-wd3b3:: ds 1
-wd3b4:: ds 1
-wd3b5:: ds 1
-wd3b6:: ds 1
-wd3b7:: ds 1
-wd3b8:: ds 1
-wd3b9:: ds 1
-wd3ba:: ds 1
-wd3bb:: ds 1
-wd3bc:: ds 1
-wd3bd:: ds 1
-wd3be:: ds 1
-wd3bf:: ds 1
-wd3c0:: ds 1
-wd3c1:: ds 1
-wd3c2:: ds 1
-wd3c3:: ds 1
-wd3c4:: ds 1
-wd3c5:: ds 1
-wd3c6:: ds 1
-wd3c7:: ds 1
-wd3c8:: ds 1
-wd3c9:: ds 1
-wd3ca:: ds 1
-wd3cb:: ds 1
-wd3cc:: ds 1
-wd3cd:: ds 1
-wd3ce:: ds 1
-wd3cf:: ds 1
-wd3d0:: ds 1
-wd3d1:: ds 1
-wd3d2:: ds 1
-wd3d3:: ds 1
-wd3d4:: ds 1
-wd3d5:: ds 1
-wd3d6:: ds 1
-wd3d7:: ds 1
-wd3d8:: ds 1
-wd3d9:: ds 1
-wd3da:: ds 1
-wd3db:: ds 1
-wd3dc:: ds 1
-wd3dd:: ds 1
-wd3de:: ds 1
-wd3df:: ds 1
-wd3e0:: ds 1
-wd3e1:: ds 1
-wd3e2:: ds 1
-wd3e3:: ds 1
-wd3e4:: ds 1
-wd3e5:: ds 1
-wd3e6:: ds 1
-wd3e7:: ds 1
-wd3e8:: ds 1
-wd3e9:: ds 1
-wd3ea:: ds 1
-wd3eb:: ds 1
-wd3ec:: ds 1
-wd3ed:: ds 1
-wd3ee:: ds 1
-wd3ef:: ds 1
-wd3f0:: ds 1
-wd3f1:: ds 1
-wd3f2:: ds 1
-wd3f3:: ds 1
-wd3f4:: ds 1
-wd3f5:: ds 1
-wd3f6:: ds 1
-wd3f7:: ds 1
-wd3f8:: ds 1
-wd3f9:: ds 1
-wd3fa:: ds 1
-wd3fb:: ds 1
-wd3fc:: ds 1
-wd3fd:: ds 1
-wd3fe:: ds 1
-wd3ff:: ds 1
-wd400:: ds 1
-wd401:: ds 1
-wd402:: ds 1
-wd403:: ds 1
-wd404:: ds 1
-wd405:: ds 1
-wd406:: ds 1
-wd407:: ds 1
-wd408:: ds 1
-wd409:: ds 1
-wd40a:: ds 1
-wd40b:: ds 1
-wd40c:: ds 1
-wd40d:: ds 1
-wd40e:: ds 1
-wd40f:: ds 1
-wd410:: ds 1
-wd411:: ds 1
-wd412:: ds 1
-wd413:: ds 1
-wd414:: ds 1
-wd415:: ds 1
-wd416:: ds 1
-wd417:: ds 1
-wd418:: ds 1
-wd419:: ds 1
-wd41a:: ds 1
-wd41b:: ds 1
-wd41c:: ds 1
-wd41d:: ds 1
-wd41e:: ds 1
-wd41f:: ds 1
-wd420:: ds 1
-wd421:: ds 1
-wd422:: ds 1
-wd423:: ds 1
-wd424:: ds 1
-wd425:: ds 1
-wd426:: ds 1
-wd427:: ds 1
-wd428:: ds 1
-wd429:: ds 1
-wd42a:: ds 1
-wd42b:: ds 1
-wd42c:: ds 1
-wd42d:: ds 1
-wd42e:: ds 1
-wd42f:: ds 1
-wd430:: ds 1
-wd431:: ds 1
-wd432:: ds 1
-wd433:: ds 1
-wd434:: ds 1
-wd435:: ds 1
-wd436:: ds 1
-wd437:: ds 1
-wd438:: ds 1
-wd439:: ds 1
-wd43a:: ds 1
-wd43b:: ds 1
-wd43c:: ds 1
-wd43d:: ds 1
-wd43e:: ds 1
-wd43f:: ds 1
-wd440:: ds 1
-wd441:: ds 1
-wd442:: ds 1
-wd443:: ds 1
-wd444:: ds 1
-wd445:: ds 1
-wd446:: ds 1
-wd447:: ds 1
-wd448:: ds 1
-wd449:: ds 1
-wd44a:: ds 1
-wd44b:: ds 1
-wd44c:: ds 1
-wd44d:: ds 1
-wd44e:: ds 1
-wd44f:: ds 1
-wd450:: ds 1
-wd451:: ds 1
-wd452:: ds 1
-wd453:: ds 1
-wd454:: ds 1
-wd455:: ds 1
-wd456:: ds 1
-wd457:: ds 1
-wd458:: ds 1
-wd459:: ds 1
-wd45a:: ds 1
-wd45b:: ds 1
-wd45c:: ds 1
-wd45d:: ds 1
-wd45e:: ds 1
-wd45f:: ds 1
-wd460:: ds 1
-wd461:: ds 1
-wd462:: ds 1
-wd463:: ds 1
-wd464:: ds 1
-wd465:: ds 1
-wd466:: ds 1
-wd467:: ds 1
-wd468:: ds 1
-wd469:: ds 1
-wd46a:: ds 1
-wd46b:: ds 1
-wd46c:: ds 1
-wd46d:: ds 1
-wd46e:: ds 1
-wd46f:: ds 1
-wd470:: ds 1
-wd471:: ds 1
-wd472:: ds 1
-wd473:: ds 1
-wd474:: ds 1
-wd475:: ds 1
-wd476:: ds 1
-wd477:: ds 1
-wd478:: ds 1
-wd479:: ds 1
-wd47a:: ds 1
-wd47b:: ds 1
-wd47c:: ds 1
-wd47d:: ds 1
-wd47e:: ds 1
-wd47f:: ds 1
-wd480:: ds 1
-wd481:: ds 1
-wd482:: ds 1
-wd483:: ds 1
-wd484:: ds 1
-wd485:: ds 1
-wd486:: ds 1
-wd487:: ds 1
-wd488:: ds 1
-wd489:: ds 1
-wd48a:: ds 1
-wd48b:: ds 1
-wd48c:: ds 1
-wd48d:: ds 1
-wd48e:: ds 1
-wd48f:: ds 1
-wd490:: ds 1
-wd491:: ds 1
-wd492:: ds 1
-wd493:: ds 1
-wd494:: ds 1
-wd495:: ds 1
-wd496:: ds 1
-wd497:: ds 1
-wd498:: ds 1
-wd499:: ds 1
-wd49a:: ds 1
-wd49b:: ds 1
-wd49c:: ds 1
-wd49d:: ds 1
-wd49e:: ds 1
-wd49f:: ds 1
-wd4a0:: ds 1
-wd4a1:: ds 1
-wd4a2:: ds 1
-wd4a3:: ds 1
-wd4a4:: ds 1
-wd4a5:: ds 1
-wd4a6:: ds 1
-wd4a7:: ds 1
-wd4a8:: ds 1
-wd4a9:: ds 1
-wd4aa:: ds 1
-wd4ab:: ds 1
-wd4ac:: ds 1
-wd4ad:: ds 1
-wd4ae:: ds 1
-wd4af:: ds 1
-wd4b0:: ds 1
-wd4b1:: ds 1
-wd4b2:: ds 1
-wd4b3:: ds 1
-wd4b4:: ds 1
-wd4b5:: ds 1
-wd4b6:: ds 1
-wd4b7:: ds 1
-wd4b8:: ds 1
-wd4b9:: ds 1
-wd4ba:: ds 1
-wd4bb:: ds 1
-wd4bc:: ds 1
-wd4bd:: ds 1
-wd4be:: ds 1
-wd4bf:: ds 1
-wd4c0:: ds 1
-wd4c1:: ds 1
-wd4c2:: ds 1
-wd4c3:: ds 1
-wd4c4:: ds 1
-wd4c5:: ds 1
-wd4c6:: ds 1
-wd4c7:: ds 1
-wd4c8:: ds 1
-wd4c9:: ds 1
-wd4ca:: ds 1
-wd4cb:: ds 1
-wd4cc:: ds 1
-wd4cd:: ds 1
-wd4ce:: ds 1
-wd4cf:: ds 1
-wd4d0:: ds 1
-wd4d1:: ds 1
-wd4d2:: ds 1
-wd4d3:: ds 1
-wd4d4:: ds 1
-wd4d5:: ds 1
-wd4d6:: ds 1
-wd4d7:: ds 1
-wd4d8:: ds 1
-wd4d9:: ds 1
-wd4da:: ds 1
-wd4db:: ds 1
-wd4dc:: ds 1
-wd4dd:: ds 1
-wd4de:: ds 1
-wd4df:: ds 1
-wd4e0:: ds 1
-wd4e1:: ds 1
-wd4e2:: ds 1
-wd4e3:: ds 1
-wd4e4:: ds 1
-wd4e5:: ds 1
-wd4e6:: ds 1
-wd4e7:: ds 1
-wd4e8:: ds 1
-wd4e9:: ds 1
-wd4ea:: ds 1
-wd4eb:: ds 1
-wd4ec:: ds 1
-wd4ed:: ds 1
-wd4ee:: ds 1
-wd4ef:: ds 1
-wd4f0:: ds 1
-wd4f1:: ds 1
-wd4f2:: ds 1
-wd4f3:: ds 1
-wd4f4:: ds 1
-wd4f5:: ds 1
-wd4f6:: ds 1
-wd4f7:: ds 1
-wd4f8:: ds 1
-wd4f9:: ds 1
-wd4fa:: ds 1
-wd4fb:: ds 1
-wd4fc:: ds 1
-wd4fd:: ds 1
-wd4fe:: ds 1
-wd4ff:: ds 1
-wd500:: ds 1
-wd501:: ds 1
-wd502:: ds 1
-wd503:: ds 1
-wd504:: ds 1
-wd505:: ds 1
-wd506:: ds 1
-wd507:: ds 1
-wd508:: ds 1
-wd509:: ds 1
-wd50a:: ds 1
-wd50b:: ds 1
-wd50c:: ds 1
-wd50d:: ds 1
-wd50e:: ds 1
-wd50f:: ds 1
-wd510:: ds 1
-wd511:: ds 1
-wd512:: ds 1
-wd513:: ds 1
-wd514:: ds 1
-wd515:: ds 1
-wd516:: ds 1
-wd517:: ds 1
-wd518:: ds 1
-wd519:: ds 1
-wd51a:: ds 1
-wd51b:: ds 1
-wd51c:: ds 1
-wd51d:: ds 1
-wd51e:: ds 1
-wd51f:: ds 1
-wd520:: ds 1
-wd521:: ds 1
-wd522:: ds 1
-wd523:: ds 1
-wd524:: ds 1
-wd525:: ds 1
-wd526:: ds 1
-wd527:: ds 1
-wd528:: ds 1
-wd529:: ds 1
-wd52a:: ds 1
-wd52b:: ds 1
-wd52c:: ds 1
-wd52d:: ds 1
-wd52e:: ds 1
-wd52f:: ds 1
-wd530:: ds 1
-wd531:: ds 1
-wd532:: ds 1
-wd533:: ds 1
-wd534:: ds 1
-wd535:: ds 1
-wd536:: ds 1
-wd537:: ds 1
-wd538:: ds 1
-wd539:: ds 1
-wd53a:: ds 1
-wd53b:: ds 1
-wd53c:: ds 1
-wd53d:: ds 1
-wd53e:: ds 1
-wd53f:: ds 1
-wd540:: ds 1
-wd541:: ds 1
-wd542:: ds 1
-wd543:: ds 1
-wd544:: ds 1
-wd545:: ds 1
-wd546:: ds 1
-wd547:: ds 1
-wd548:: ds 1
-wd549:: ds 1
-wd54a:: ds 1
-wd54b:: ds 1
-wd54c:: ds 1
-wd54d:: ds 1
-wd54e:: ds 1
-wd54f:: ds 1
-wd550:: ds 1
-wd551:: ds 1
-wd552:: ds 1
-wd553:: ds 1
-wd554:: ds 1
-wd555:: ds 1
-wd556:: ds 1
-wd557:: ds 1
-wd558:: ds 1
-wd559:: ds 1
-wd55a:: ds 1
-wd55b:: ds 1
-wd55c:: ds 1
-wd55d:: ds 1
-wd55e:: ds 1
-wd55f:: ds 1
-wd560:: ds 1
-wd561:: ds 1
-wd562:: ds 1
-wd563:: ds 1
-wd564:: ds 1
-wd565:: ds 1
-wd566:: ds 1
-wd567:: ds 1
+wd156:: ds 1 ; d156
+wd157:: ds 1 ; d157
+wd158:: ds 1 ; d158
+wd159:: ds 1 ; d159
+wd15a:: ds 1 ; d15a
+wd15b:: ds 1 ; d15b
+wd15c:: ds 1 ; d15c
+wd15d:: ds 1 ; d15d
+wd15e:: ds 1 ; d15e
+wd15f:: ds 1 ; d15f
+wd160:: ds 1 ; d160
+wd161:: ds 1 ; d161
+wd162:: ds 1 ; d162
+wd163:: ds 1 ; d163
+wd164:: ds 1 ; d164
+wd165:: ds 1 ; d165
+wd166:: ds 1 ; d166
+wd167:: ds 1 ; d167
+wd168:: ds 1 ; d168
+wd169:: ds 1 ; d169
+wd16a:: ds 1 ; d16a
+wd16b:: ds 1 ; d16b
+wd16c:: ds 1 ; d16c
+wd16d:: ds 1 ; d16d
+wd16e:: ds 1 ; d16e
+wd16f:: ds 1 ; d16f
+wd170:: ds 1 ; d170
+wd171:: ds 1 ; d171
+wd172:: ds 1 ; d172
+wd173:: ds 1 ; d173
+wd174:: ds 1 ; d174
+wd175:: ds 1 ; d175
+wd176:: ds 1 ; d176
+wd177:: ds 1 ; d177
+wd178:: ds 1 ; d178
+wd179:: ds 1 ; d179
+wd17a:: ds 1 ; d17a
+wd17b:: ds 1 ; d17b
+wd17c:: ds 1 ; d17c
+wd17d:: ds 1 ; d17d
+wd17e:: ds 1 ; d17e
+wd17f:: ds 1 ; d17f
+wd180:: ds 1 ; d180
+wd181:: ds 1 ; d181
+wd182:: ds 1 ; d182
+wd183:: ds 1 ; d183
+wd184:: ds 1 ; d184
+wd185:: ds 1 ; d185
+wd186:: ds 1 ; d186
+wd187:: ds 1 ; d187
+wd188:: ds 1 ; d188
+wd189:: ds 1 ; d189
+wd18a:: ds 1 ; d18a
+wd18b:: ds 1 ; d18b
+wd18c:: ds 1 ; d18c
+wd18d:: ds 1 ; d18d
+wd18e:: ds 1 ; d18e
+wd18f:: ds 1 ; d18f
+wd190:: ds 1 ; d190
+wd191:: ds 1 ; d191
+wd192:: ds 1 ; d192
+wd193:: ds 1 ; d193
+wd194:: ds 1 ; d194
+wd195:: ds 1 ; d195
+wd196:: ds 1 ; d196
+wd197:: ds 1 ; d197
+wd198:: ds 1 ; d198
+wd199:: ds 1 ; d199
+wd19a:: ds 1 ; d19a
+wd19b:: ds 1 ; d19b
+wd19c:: ds 1 ; d19c
+wd19d:: ds 1 ; d19d
+wd19e:: ds 1 ; d19e
+wd19f:: ds 1 ; d19f
+wd1a0:: ds 1 ; d1a0
+wd1a1:: ds 1 ; d1a1
+wd1a2:: ds 1 ; d1a2
+wd1a3:: ds 1 ; d1a3
+wd1a4:: ds 1 ; d1a4
+wd1a5:: ds 1 ; d1a5
+wd1a6:: ds 1 ; d1a6
+wd1a7:: ds 1 ; d1a7
+wd1a8:: ds 1 ; d1a8
+wd1a9:: ds 1 ; d1a9
+wd1aa:: ds 1 ; d1aa
+wd1ab:: ds 1 ; d1ab
+wd1ac:: ds 1 ; d1ac
+wd1ad:: ds 1 ; d1ad
+wd1ae:: ds 1 ; d1ae
+wd1af:: ds 1 ; d1af
+wd1b0:: ds 1 ; d1b0
+wd1b1:: ds 1 ; d1b1
+wd1b2:: ds 1 ; d1b2
+wd1b3:: ds 1 ; d1b3
+wd1b4:: ds 1 ; d1b4
+wd1b5:: ds 1 ; d1b5
+wd1b6:: ds 1 ; d1b6
+wd1b7:: ds 1 ; d1b7
+wd1b8:: ds 1 ; d1b8
+wd1b9:: ds 1 ; d1b9
+wd1ba:: ds 1 ; d1ba
+wd1bb:: ds 1 ; d1bb
+wd1bc:: ds 1 ; d1bc
+wd1bd:: ds 1 ; d1bd
+wd1be:: ds 1 ; d1be
+wd1bf:: ds 1 ; d1bf
+wd1c0:: ds 1 ; d1c0
+wd1c1:: ds 1 ; d1c1
+wd1c2:: ds 1 ; d1c2
+wd1c3:: ds 1 ; d1c3
+wd1c4:: ds 1 ; d1c4
+wd1c5:: ds 1 ; d1c5
+wd1c6:: ds 1 ; d1c6
+wd1c7:: ds 1 ; d1c7
+wd1c8:: ds 1 ; d1c8
+wd1c9:: ds 1 ; d1c9
+wd1ca:: ds 1 ; d1ca
+wd1cb:: ds 1 ; d1cb
+wd1cc:: ds 1 ; d1cc
+wd1cd:: ds 1 ; d1cd
+wd1ce:: ds 1 ; d1ce
+wd1cf:: ds 1 ; d1cf
+wd1d0:: ds 1 ; d1d0
+wd1d1:: ds 1 ; d1d1
+wd1d2:: ds 1 ; d1d2
+wd1d3:: ds 1 ; d1d3
+wd1d4:: ds 1 ; d1d4
+wd1d5:: ds 1 ; d1d5
+wd1d6:: ds 1 ; d1d6
+wd1d7:: ds 1 ; d1d7
+wd1d8:: ds 1 ; d1d8
+wd1d9:: ds 1 ; d1d9
+wd1da:: ds 1 ; d1da
+wd1db:: ds 1 ; d1db
+wd1dc:: ds 1 ; d1dc
+wd1dd:: ds 1 ; d1dd
+wd1de:: ds 1 ; d1de
+wd1df:: ds 1 ; d1df
+wd1e0:: ds 1 ; d1e0
+wd1e1:: ds 1 ; d1e1
+wd1e2:: ds 1 ; d1e2
+wd1e3:: ds 1 ; d1e3
+wd1e4:: ds 1 ; d1e4
+wd1e5:: ds 1 ; d1e5
+wd1e6:: ds 1 ; d1e6
+wd1e7:: ds 1 ; d1e7
+wd1e8:: ds 1 ; d1e8
+wd1e9:: ds 1 ; d1e9
+wd1ea:: ds 1 ; d1ea
+wd1eb:: ds 1 ; d1eb
+wd1ec:: ds 1 ; d1ec
+wd1ed:: ds 1 ; d1ed
+wd1ee:: ds 1 ; d1ee
+wd1ef:: ds 1 ; d1ef
+wd1f0:: ds 1 ; d1f0
+wd1f1:: ds 1 ; d1f1
+wd1f2:: ds 1 ; d1f2
+wd1f3:: ds 1 ; d1f3
+wd1f4:: ds 1 ; d1f4
+wd1f5:: ds 1 ; d1f5
+wd1f6:: ds 1 ; d1f6
+wd1f7:: ds 1 ; d1f7
+wd1f8:: ds 1 ; d1f8
+wd1f9:: ds 1 ; d1f9
+wd1fa:: ds 1 ; d1fa
+wd1fb:: ds 1 ; d1fb
+wd1fc:: ds 1 ; d1fc
+wd1fd:: ds 1 ; d1fd
+wd1fe:: ds 1 ; d1fe
+wd1ff:: ds 1 ; d1ff
+wd200:: ds 1 ; d200
+wd201:: ds 1 ; d201
+wd202:: ds 1 ; d202
+wd203:: ds 1 ; d203
+wd204:: ds 1 ; d204
+wd205:: ds 1 ; d205
+wd206:: ds 1 ; d206
+wd207:: ds 1 ; d207
+wd208:: ds 1 ; d208
+wd209:: ds 1 ; d209
+wd20a:: ds 1 ; d20a
+wd20b:: ds 1 ; d20b
+wd20c:: ds 1 ; d20c
+wd20d:: ds 1 ; d20d
+wd20e:: ds 1 ; d20e
+wd20f:: ds 1 ; d20f
+wd210:: ds 1 ; d210
+wd211:: ds 1 ; d211
+wd212:: ds 1 ; d212
+wd213:: ds 1 ; d213
+wd214:: ds 1 ; d214
+wd215:: ds 1 ; d215
+wd216:: ds 1 ; d216
+wd217:: ds 1 ; d217
+wd218:: ds 1 ; d218
+wd219:: ds 1 ; d219
+wd21a:: ds 1 ; d21a
+wd21b:: ds 1 ; d21b
+wd21c:: ds 1 ; d21c
+wd21d:: ds 1 ; d21d
+wd21e:: ds 1 ; d21e
+wd21f:: ds 1 ; d21f
+wd220:: ds 1 ; d220
+wd221:: ds 1 ; d221
+wd222:: ds 1 ; d222
+wd223:: ds 1 ; d223
+wd224:: ds 1 ; d224
+wd225:: ds 1 ; d225
+wd226:: ds 1 ; d226
+wd227:: ds 1 ; d227
+wd228:: ds 1 ; d228
+wd229:: ds 1 ; d229
+wd22a:: ds 1 ; d22a
+wd22b:: ds 1 ; d22b
+wd22c:: ds 1 ; d22c
+wd22d:: ds 1 ; d22d
+wd22e:: ds 1 ; d22e
+wd22f:: ds 1 ; d22f
+wd230:: ds 1 ; d230
+wd231:: ds 1 ; d231
+wd232:: ds 1 ; d232
+wd233:: ds 1 ; d233
+wd234:: ds 1 ; d234
+wd235:: ds 1 ; d235
+wd236:: ds 1 ; d236
+wd237:: ds 1 ; d237
+wd238:: ds 1 ; d238
+wd239:: ds 1 ; d239
+wd23a:: ds 1 ; d23a
+wd23b:: ds 1 ; d23b
+wd23c:: ds 1 ; d23c
+wd23d:: ds 1 ; d23d
+wd23e:: ds 1 ; d23e
+wd23f:: ds 1 ; d23f
+wd240:: ds 1 ; d240
+wd241:: ds 1 ; d241
+wd242:: ds 1 ; d242
+wd243:: ds 1 ; d243
+wd244:: ds 1 ; d244
+wd245:: ds 1 ; d245
+wd246:: ds 1 ; d246
+wd247:: ds 1 ; d247
+wd248:: ds 1 ; d248
+wd249:: ds 1 ; d249
+wd24a:: ds 1 ; d24a
+wd24b:: ds 1 ; d24b
+wd24c:: ds 1 ; d24c
+wd24d:: ds 1 ; d24d
+wd24e:: ds 1 ; d24e
+wd24f:: ds 1 ; d24f
+wd250:: ds 1 ; d250
+wd251:: ds 1 ; d251
+wd252:: ds 1 ; d252
+wd253:: ds 1 ; d253
+wd254:: ds 1 ; d254
+wd255:: ds 1 ; d255
+wd256:: ds 1 ; d256
+wd257:: ds 1 ; d257
+wd258:: ds 1 ; d258
+wd259:: ds 1 ; d259
+wd25a:: ds 1 ; d25a
+wd25b:: ds 1 ; d25b
+wd25c:: ds 1 ; d25c
+wd25d:: ds 1 ; d25d
+wd25e:: ds 1 ; d25e
+wd25f:: ds 1 ; d25f
+wd260:: ds 1 ; d260
+wd261:: ds 1 ; d261
+wd262:: ds 1 ; d262
+wd263:: ds 1 ; d263
+wd264:: ds 1 ; d264
+wd265:: ds 1 ; d265
+wd266:: ds 1 ; d266
+wd267:: ds 1 ; d267
+wd268:: ds 1 ; d268
+wd269:: ds 1 ; d269
+wd26a:: ds 1 ; d26a
+wd26b:: ds 1 ; d26b
+wd26c:: ds 1 ; d26c
+wd26d:: ds 1 ; d26d
+wd26e:: ds 1 ; d26e
+wd26f:: ds 1 ; d26f
+wd270:: ds 1 ; d270
+wd271:: ds 1 ; d271
+wd272:: ds 1 ; d272
+wd273:: ds 1 ; d273
+wd274:: ds 1 ; d274
+wd275:: ds 1 ; d275
+wd276:: ds 1 ; d276
+wd277:: ds 1 ; d277
+wd278:: ds 1 ; d278
+wd279:: ds 1 ; d279
+wd27a:: ds 1 ; d27a
+wd27b:: ds 1 ; d27b
+wd27c:: ds 1 ; d27c
+wd27d:: ds 1 ; d27d
+wd27e:: ds 1 ; d27e
+wd27f:: ds 1 ; d27f
+wd280:: ds 1 ; d280
+wd281:: ds 1 ; d281
+wd282:: ds 1 ; d282
+wd283:: ds 1 ; d283
+wd284:: ds 1 ; d284
+wd285:: ds 1 ; d285
+wd286:: ds 1 ; d286
+wd287:: ds 1 ; d287
+wd288:: ds 1 ; d288
+wd289:: ds 1 ; d289
+wd28a:: ds 1 ; d28a
+wd28b:: ds 1 ; d28b
+wd28c:: ds 1 ; d28c
+wd28d:: ds 1 ; d28d
+wd28e:: ds 1 ; d28e
+wd28f:: ds 1 ; d28f
+wd290:: ds 1 ; d290
+wd291:: ds 1 ; d291
+wd292:: ds 1 ; d292
+wd293:: ds 1 ; d293
+wd294:: ds 1 ; d294
+wd295:: ds 1 ; d295
+wd296:: ds 1 ; d296
+wd297:: ds 1 ; d297
+wd298:: ds 1 ; d298
+wd299:: ds 1 ; d299
+wd29a:: ds 1 ; d29a
+wd29b:: ds 1 ; d29b
+wd29c:: ds 1 ; d29c
+wd29d:: ds 1 ; d29d
+wd29e:: ds 1 ; d29e
+wd29f:: ds 1 ; d29f
+wd2a0:: ds 1 ; d2a0
+wd2a1:: ds 1 ; d2a1
+wd2a2:: ds 1 ; d2a2
+wd2a3:: ds 1 ; d2a3
+wd2a4:: ds 1 ; d2a4
+wd2a5:: ds 1 ; d2a5
+wd2a6:: ds 1 ; d2a6
+wd2a7:: ds 1 ; d2a7
+wd2a8:: ds 1 ; d2a8
+wd2a9:: ds 1 ; d2a9
+wd2aa:: ds 1 ; d2aa
+wd2ab:: ds 1 ; d2ab
+wd2ac:: ds 1 ; d2ac
+wd2ad:: ds 1 ; d2ad
+wd2ae:: ds 1 ; d2ae
+wd2af:: ds 1 ; d2af
+wd2b0:: ds 1 ; d2b0
+wd2b1:: ds 1 ; d2b1
+wd2b2:: ds 1 ; d2b2
+wd2b3:: ds 1 ; d2b3
+wd2b4:: ds 1 ; d2b4
+wd2b5:: ds 1 ; d2b5
+wd2b6:: ds 1 ; d2b6
+wd2b7:: ds 1 ; d2b7
+wd2b8:: ds 1 ; d2b8
+wd2b9:: ds 1 ; d2b9
+wd2ba:: ds 1 ; d2ba
+wd2bb:: ds 1 ; d2bb
+wd2bc:: ds 1 ; d2bc
+wd2bd:: ds 1 ; d2bd
+wd2be:: ds 1 ; d2be
+wd2bf:: ds 1 ; d2bf
+wd2c0:: ds 1 ; d2c0
+wd2c1:: ds 1 ; d2c1
+wd2c2:: ds 1 ; d2c2
+wd2c3:: ds 1 ; d2c3
+wd2c4:: ds 1 ; d2c4
+wd2c5:: ds 1 ; d2c5
+wd2c6:: ds 1 ; d2c6
+wd2c7:: ds 1 ; d2c7
+wd2c8:: ds 1 ; d2c8
+wd2c9:: ds 1 ; d2c9
+wd2ca:: ds 1 ; d2ca
+wd2cb:: ds 1 ; d2cb
+wd2cc:: ds 1 ; d2cc
+wd2cd:: ds 1 ; d2cd
+wd2ce:: ds 1 ; d2ce
+wd2cf:: ds 1 ; d2cf
+wd2d0:: ds 1 ; d2d0
+wd2d1:: ds 1 ; d2d1
+wd2d2:: ds 1 ; d2d2
+wd2d3:: ds 1 ; d2d3
+wd2d4:: ds 1 ; d2d4
+wd2d5:: ds 1 ; d2d5
+wd2d6:: ds 1 ; d2d6
+wd2d7:: ds 1 ; d2d7
+wd2d8:: ds 1 ; d2d8
+wd2d9:: ds 1 ; d2d9
+wd2da:: ds 1 ; d2da
+wd2db:: ds 1 ; d2db
+wd2dc:: ds 1 ; d2dc
+wd2dd:: ds 1 ; d2dd
+wd2de:: ds 1 ; d2de
+wd2df:: ds 1 ; d2df
+wd2e0:: ds 1 ; d2e0
+wd2e1:: ds 1 ; d2e1
+wd2e2:: ds 1 ; d2e2
+wd2e3:: ds 1 ; d2e3
+wd2e4:: ds 1 ; d2e4
+wd2e5:: ds 1 ; d2e5
+wd2e6:: ds 1 ; d2e6
+wd2e7:: ds 1 ; d2e7
+wd2e8:: ds 1 ; d2e8
+wd2e9:: ds 1 ; d2e9
+wd2ea:: ds 1 ; d2ea
+wd2eb:: ds 1 ; d2eb
+wd2ec:: ds 1 ; d2ec
+wd2ed:: ds 1 ; d2ed
+wd2ee:: ds 1 ; d2ee
+wd2ef:: ds 1 ; d2ef
+wd2f0:: ds 1 ; d2f0
+wd2f1:: ds 1 ; d2f1
+wd2f2:: ds 1 ; d2f2
+wd2f3:: ds 1 ; d2f3
+wd2f4:: ds 1 ; d2f4
+wd2f5:: ds 1 ; d2f5
+wd2f6:: ds 1 ; d2f6
+wd2f7:: ds 1 ; d2f7
+wd2f8:: ds 1 ; d2f8
+wd2f9:: ds 1 ; d2f9
+wd2fa:: ds 1 ; d2fa
+wd2fb:: ds 1 ; d2fb
+wd2fc:: ds 1 ; d2fc
+wd2fd:: ds 1 ; d2fd
+wd2fe:: ds 1 ; d2fe
+wd2ff:: ds 1 ; d2ff
+wd300:: ds 1 ; d300
+wd301:: ds 1 ; d301
+wd302:: ds 1 ; d302
+wd303:: ds 1 ; d303
+wd304:: ds 1 ; d304
+wd305:: ds 1 ; d305
+wd306:: ds 1 ; d306
+wd307:: ds 1 ; d307
+wd308:: ds 1 ; d308
+wd309:: ds 1 ; d309
+wd30a:: ds 1 ; d30a
+wd30b:: ds 1 ; d30b
+wd30c:: ds 1 ; d30c
+wd30d:: ds 1 ; d30d
+wd30e:: ds 1 ; d30e
+wd30f:: ds 1 ; d30f
+wd310:: ds 1 ; d310
+wd311:: ds 1 ; d311
+wd312:: ds 1 ; d312
+wd313:: ds 1 ; d313
+wd314:: ds 1 ; d314
+wd315:: ds 1 ; d315
+wd316:: ds 1 ; d316
+wd317:: ds 1 ; d317
+wd318:: ds 1 ; d318
+wd319:: ds 1 ; d319
+wd31a:: ds 1 ; d31a
+wd31b:: ds 1 ; d31b
+wd31c:: ds 1 ; d31c
+wd31d:: ds 1 ; d31d
+wd31e:: ds 1 ; d31e
+wd31f:: ds 1 ; d31f
+wd320:: ds 1 ; d320
+wd321:: ds 1 ; d321
+wd322:: ds 1 ; d322
+wd323:: ds 1 ; d323
+wd324:: ds 1 ; d324
+wd325:: ds 1 ; d325
+wd326:: ds 1 ; d326
+wd327:: ds 1 ; d327
+wd328:: ds 1 ; d328
+wd329:: ds 1 ; d329
+wd32a:: ds 1 ; d32a
+wd32b:: ds 1 ; d32b
+wd32c:: ds 1 ; d32c
+wd32d:: ds 1 ; d32d
+wd32e:: ds 1 ; d32e
+wd32f:: ds 1 ; d32f
+wd330:: ds 1 ; d330
+wd331:: ds 1 ; d331
+wd332:: ds 1 ; d332
+wd333:: ds 1 ; d333
+wd334:: ds 1 ; d334
+wd335:: ds 1 ; d335
+wd336:: ds 1 ; d336
+wd337:: ds 1 ; d337
+wd338:: ds 1 ; d338
+wd339:: ds 1 ; d339
+wd33a:: ds 1 ; d33a
+wd33b:: ds 1 ; d33b
+wd33c:: ds 1 ; d33c
+wd33d:: ds 1 ; d33d
+wd33e:: ds 1 ; d33e
+wd33f:: ds 1 ; d33f
+wd340:: ds 1 ; d340
+wd341:: ds 1 ; d341
+wd342:: ds 1 ; d342
+wd343:: ds 1 ; d343
+wd344:: ds 1 ; d344
+wd345:: ds 1 ; d345
+wd346:: ds 1 ; d346
+wd347:: ds 1 ; d347
+wd348:: ds 1 ; d348
+wd349:: ds 1 ; d349
+wd34a:: ds 1 ; d34a
+wd34b:: ds 1 ; d34b
+wd34c:: ds 1 ; d34c
+wd34d:: ds 1 ; d34d
+wd34e:: ds 1 ; d34e
+wd34f:: ds 1 ; d34f
+wd350:: ds 1 ; d350
+wd351:: ds 1 ; d351
+wd352:: ds 1 ; d352
+wd353:: ds 1 ; d353
+wd354:: ds 1 ; d354
+wd355:: ds 1 ; d355
+wd356:: ds 1 ; d356
+wd357:: ds 1 ; d357
+wd358:: ds 1 ; d358
+wd359:: ds 1 ; d359
+wd35a:: ds 1 ; d35a
+wd35b:: ds 1 ; d35b
+wd35c:: ds 1 ; d35c
+wd35d:: ds 1 ; d35d
+wd35e:: ds 1 ; d35e
+wd35f:: ds 1 ; d35f
+wd360:: ds 1 ; d360
+wd361:: ds 1 ; d361
+wd362:: ds 1 ; d362
+wd363:: ds 1 ; d363
+wd364:: ds 1 ; d364
+wd365:: ds 1 ; d365
+wd366:: ds 1 ; d366
+wd367:: ds 1 ; d367
+wd368:: ds 1 ; d368
+wd369:: ds 1 ; d369
+wd36a:: ds 1 ; d36a
+wd36b:: ds 1 ; d36b
+wd36c:: ds 1 ; d36c
+wd36d:: ds 1 ; d36d
+wd36e:: ds 1 ; d36e
+wd36f:: ds 1 ; d36f
+wd370:: ds 1 ; d370
+wd371:: ds 1 ; d371
+wd372:: ds 1 ; d372
+wd373:: ds 1 ; d373
+wd374:: ds 1 ; d374
+wd375:: ds 1 ; d375
+wd376:: ds 1 ; d376
+wd377:: ds 1 ; d377
+wd378:: ds 1 ; d378
+wd379:: ds 1 ; d379
+wd37a:: ds 1 ; d37a
+wd37b:: ds 1 ; d37b
+wd37c:: ds 1 ; d37c
+wd37d:: ds 1 ; d37d
+wd37e:: ds 1 ; d37e
+wd37f:: ds 1 ; d37f
+wd380:: ds 1 ; d380
+wd381:: ds 1 ; d381
+wd382:: ds 1 ; d382
+wd383:: ds 1 ; d383
+wd384:: ds 1 ; d384
+wd385:: ds 1 ; d385
+wd386:: ds 1 ; d386
+wd387:: ds 1 ; d387
+wd388:: ds 1 ; d388
+wd389:: ds 1 ; d389
+wd38a:: ds 1 ; d38a
+wd38b:: ds 1 ; d38b
+wd38c:: ds 1 ; d38c
+wd38d:: ds 1 ; d38d
+wd38e:: ds 1 ; d38e
+wd38f:: ds 1 ; d38f
+wd390:: ds 1 ; d390
+wd391:: ds 1 ; d391
+wd392:: ds 1 ; d392
+wd393:: ds 1 ; d393
+wd394:: ds 1 ; d394
+wd395:: ds 1 ; d395
+wd396:: ds 1 ; d396
+wd397:: ds 1 ; d397
+wd398:: ds 1 ; d398
+wd399:: ds 1 ; d399
+wd39a:: ds 1 ; d39a
+wd39b:: ds 1 ; d39b
+wd39c:: ds 1 ; d39c
+wd39d:: ds 1 ; d39d
+wd39e:: ds 1 ; d39e
+wd39f:: ds 1 ; d39f
+wd3a0:: ds 1 ; d3a0
+wd3a1:: ds 1 ; d3a1
+wd3a2:: ds 1 ; d3a2
+wd3a3:: ds 1 ; d3a3
+wd3a4:: ds 1 ; d3a4
+wd3a5:: ds 1 ; d3a5
+wd3a6:: ds 1 ; d3a6
+wd3a7:: ds 1 ; d3a7
+wd3a8:: ds 1 ; d3a8
+wd3a9:: ds 1 ; d3a9
+wd3aa:: ds 1 ; d3aa
+wd3ab:: ds 1 ; d3ab
+wd3ac:: ds 1 ; d3ac
+wd3ad:: ds 1 ; d3ad
+wd3ae:: ds 1 ; d3ae
+wd3af:: ds 1 ; d3af
+wd3b0:: ds 1 ; d3b0
+wd3b1:: ds 1 ; d3b1
+wd3b2:: ds 1 ; d3b2
+wd3b3:: ds 1 ; d3b3
+wd3b4:: ds 1 ; d3b4
+wd3b5:: ds 1 ; d3b5
+wd3b6:: ds 1 ; d3b6
+wd3b7:: ds 1 ; d3b7
+wd3b8:: ds 1 ; d3b8
+wd3b9:: ds 1 ; d3b9
+wd3ba:: ds 1 ; d3ba
+wd3bb:: ds 1 ; d3bb
+wd3bc:: ds 1 ; d3bc
+wd3bd:: ds 1 ; d3bd
+wd3be:: ds 1 ; d3be
+wd3bf:: ds 1 ; d3bf
+wd3c0:: ds 1 ; d3c0
+wd3c1:: ds 1 ; d3c1
+wd3c2:: ds 1 ; d3c2
+wd3c3:: ds 1 ; d3c3
+wd3c4:: ds 1 ; d3c4
+wd3c5:: ds 1 ; d3c5
+wd3c6:: ds 1 ; d3c6
+wd3c7:: ds 1 ; d3c7
+wd3c8:: ds 1 ; d3c8
+wd3c9:: ds 1 ; d3c9
+wd3ca:: ds 1 ; d3ca
+wd3cb:: ds 1 ; d3cb
+wd3cc:: ds 1 ; d3cc
+wd3cd:: ds 1 ; d3cd
+wd3ce:: ds 1 ; d3ce
+wd3cf:: ds 1 ; d3cf
+wd3d0:: ds 1 ; d3d0
+wd3d1:: ds 1 ; d3d1
+wd3d2:: ds 1 ; d3d2
+wd3d3:: ds 1 ; d3d3
+wd3d4:: ds 1 ; d3d4
+wd3d5:: ds 1 ; d3d5
+wd3d6:: ds 1 ; d3d6
+wd3d7:: ds 1 ; d3d7
+wd3d8:: ds 1 ; d3d8
+wd3d9:: ds 1 ; d3d9
+wd3da:: ds 1 ; d3da
+wd3db:: ds 1 ; d3db
+wd3dc:: ds 1 ; d3dc
+wd3dd:: ds 1 ; d3dd
+wd3de:: ds 1 ; d3de
+wd3df:: ds 1 ; d3df
+wd3e0:: ds 1 ; d3e0
+wd3e1:: ds 1 ; d3e1
+wd3e2:: ds 1 ; d3e2
+wd3e3:: ds 1 ; d3e3
+wd3e4:: ds 1 ; d3e4
+wd3e5:: ds 1 ; d3e5
+wd3e6:: ds 1 ; d3e6
+wd3e7:: ds 1 ; d3e7
+wd3e8:: ds 1 ; d3e8
+wd3e9:: ds 1 ; d3e9
+wd3ea:: ds 1 ; d3ea
+wd3eb:: ds 1 ; d3eb
+wd3ec:: ds 1 ; d3ec
+wd3ed:: ds 1 ; d3ed
+wd3ee:: ds 1 ; d3ee
+wd3ef:: ds 1 ; d3ef
+wd3f0:: ds 1 ; d3f0
+wd3f1:: ds 1 ; d3f1
+wd3f2:: ds 1 ; d3f2
+wd3f3:: ds 1 ; d3f3
+wd3f4:: ds 1 ; d3f4
+wd3f5:: ds 1 ; d3f5
+wd3f6:: ds 1 ; d3f6
+wd3f7:: ds 1 ; d3f7
+wd3f8:: ds 1 ; d3f8
+wd3f9:: ds 1 ; d3f9
+wd3fa:: ds 1 ; d3fa
+wd3fb:: ds 1 ; d3fb
+wd3fc:: ds 1 ; d3fc
+wd3fd:: ds 1 ; d3fd
+wd3fe:: ds 1 ; d3fe
+wd3ff:: ds 1 ; d3ff
+wd400:: ds 1 ; d400
+wd401:: ds 1 ; d401
+wd402:: ds 1 ; d402
+wd403:: ds 1 ; d403
+wd404:: ds 1 ; d404
+wd405:: ds 1 ; d405
+wd406:: ds 1 ; d406
+wd407:: ds 1 ; d407
+wd408:: ds 1 ; d408
+wd409:: ds 1 ; d409
+wd40a:: ds 1 ; d40a
+wd40b:: ds 1 ; d40b
+wd40c:: ds 1 ; d40c
+wd40d:: ds 1 ; d40d
+wd40e:: ds 1 ; d40e
+wd40f:: ds 1 ; d40f
+wd410:: ds 1 ; d410
+wd411:: ds 1 ; d411
+wd412:: ds 1 ; d412
+wd413:: ds 1 ; d413
+wd414:: ds 1 ; d414
+wd415:: ds 1 ; d415
+wd416:: ds 1 ; d416
+wd417:: ds 1 ; d417
+wd418:: ds 1 ; d418
+wd419:: ds 1 ; d419
+wd41a:: ds 1 ; d41a
+wd41b:: ds 1 ; d41b
+wd41c:: ds 1 ; d41c
+wd41d:: ds 1 ; d41d
+wd41e:: ds 1 ; d41e
+wd41f:: ds 1 ; d41f
+wd420:: ds 1 ; d420
+wd421:: ds 1 ; d421
+wd422:: ds 1 ; d422
+wd423:: ds 1 ; d423
+wd424:: ds 1 ; d424
+wd425:: ds 1 ; d425
+wd426:: ds 1 ; d426
+wd427:: ds 1 ; d427
+wd428:: ds 1 ; d428
+wd429:: ds 1 ; d429
+wd42a:: ds 1 ; d42a
+wd42b:: ds 1 ; d42b
+wd42c:: ds 1 ; d42c
+wd42d:: ds 1 ; d42d
+wd42e:: ds 1 ; d42e
+wd42f:: ds 1 ; d42f
+wd430:: ds 1 ; d430
+wd431:: ds 1 ; d431
+wd432:: ds 1 ; d432
+wd433:: ds 1 ; d433
+wd434:: ds 1 ; d434
+wd435:: ds 1 ; d435
+wd436:: ds 1 ; d436
+wd437:: ds 1 ; d437
+wd438:: ds 1 ; d438
+wd439:: ds 1 ; d439
+wd43a:: ds 1 ; d43a
+wd43b:: ds 1 ; d43b
+wd43c:: ds 1 ; d43c
+wd43d:: ds 1 ; d43d
+wd43e:: ds 1 ; d43e
+wd43f:: ds 1 ; d43f
+wd440:: ds 1 ; d440
+wd441:: ds 1 ; d441
+wd442:: ds 1 ; d442
+wd443:: ds 1 ; d443
+wd444:: ds 1 ; d444
+wd445:: ds 1 ; d445
+wd446:: ds 1 ; d446
+wd447:: ds 1 ; d447
+wd448:: ds 1 ; d448
+wd449:: ds 1 ; d449
+wd44a:: ds 1 ; d44a
+wd44b:: ds 1 ; d44b
+wd44c:: ds 1 ; d44c
+wd44d:: ds 1 ; d44d
+wd44e:: ds 1 ; d44e
+wd44f:: ds 1 ; d44f
+wd450:: ds 1 ; d450
+wd451:: ds 1 ; d451
+wd452:: ds 1 ; d452
+wd453:: ds 1 ; d453
+wd454:: ds 1 ; d454
+wd455:: ds 1 ; d455
+wd456:: ds 1 ; d456
+wd457:: ds 1 ; d457
+wd458:: ds 1 ; d458
+wd459:: ds 1 ; d459
+wd45a:: ds 1 ; d45a
+wd45b:: ds 1 ; d45b
+wd45c:: ds 1 ; d45c
+wd45d:: ds 1 ; d45d
+wd45e:: ds 1 ; d45e
+wd45f:: ds 1 ; d45f
+wd460:: ds 1 ; d460
+wd461:: ds 1 ; d461
+wd462:: ds 1 ; d462
+wd463:: ds 1 ; d463
+wd464:: ds 1 ; d464
+wd465:: ds 1 ; d465
+wd466:: ds 1 ; d466
+wd467:: ds 1 ; d467
+wd468:: ds 1 ; d468
+wd469:: ds 1 ; d469
+wd46a:: ds 1 ; d46a
+wd46b:: ds 1 ; d46b
+wd46c:: ds 1 ; d46c
+wd46d:: ds 1 ; d46d
+wd46e:: ds 1 ; d46e
+wd46f:: ds 1 ; d46f
+wd470:: ds 1 ; d470
+wd471:: ds 1 ; d471
+wd472:: ds 1 ; d472
+wd473:: ds 1 ; d473
+wd474:: ds 1 ; d474
+wd475:: ds 1 ; d475
+wd476:: ds 1 ; d476
+wd477:: ds 1 ; d477
+wd478:: ds 1 ; d478
+wd479:: ds 1 ; d479
+wd47a:: ds 1 ; d47a
+wd47b:: ds 1 ; d47b
+wd47c:: ds 1 ; d47c
+wd47d:: ds 1 ; d47d
+wd47e:: ds 1 ; d47e
+wd47f:: ds 1 ; d47f
+wd480:: ds 1 ; d480
+wd481:: ds 1 ; d481
+wd482:: ds 1 ; d482
+wd483:: ds 1 ; d483
+wd484:: ds 1 ; d484
+wd485:: ds 1 ; d485
+wd486:: ds 1 ; d486
+wd487:: ds 1 ; d487
+wd488:: ds 1 ; d488
+wd489:: ds 1 ; d489
+wd48a:: ds 1 ; d48a
+wd48b:: ds 1 ; d48b
+wd48c:: ds 1 ; d48c
+wd48d:: ds 1 ; d48d
+wd48e:: ds 1 ; d48e
+wd48f:: ds 1 ; d48f
+wd490:: ds 1 ; d490
+wd491:: ds 1 ; d491
+wd492:: ds 1 ; d492
+wd493:: ds 1 ; d493
+wd494:: ds 1 ; d494
+wd495:: ds 1 ; d495
+wd496:: ds 1 ; d496
+wd497:: ds 1 ; d497
+wd498:: ds 1 ; d498
+wd499:: ds 1 ; d499
+wd49a:: ds 1 ; d49a
+wd49b:: ds 1 ; d49b
+wd49c:: ds 1 ; d49c
+wd49d:: ds 1 ; d49d
+wd49e:: ds 1 ; d49e
+wd49f:: ds 1 ; d49f
+wd4a0:: ds 1 ; d4a0
+wd4a1:: ds 1 ; d4a1
+wd4a2:: ds 1 ; d4a2
+wd4a3:: ds 1 ; d4a3
+wd4a4:: ds 1 ; d4a4
+wd4a5:: ds 1 ; d4a5
+wd4a6:: ds 1 ; d4a6
+wd4a7:: ds 1 ; d4a7
+wd4a8:: ds 1 ; d4a8
+wd4a9:: ds 1 ; d4a9
+wd4aa:: ds 1 ; d4aa
+wd4ab:: ds 1 ; d4ab
+wd4ac:: ds 1 ; d4ac
+wd4ad:: ds 1 ; d4ad
+wd4ae:: ds 1 ; d4ae
+wd4af:: ds 1 ; d4af
+wd4b0:: ds 1 ; d4b0
+wd4b1:: ds 1 ; d4b1
+wd4b2:: ds 1 ; d4b2
+wd4b3:: ds 1 ; d4b3
+wd4b4:: ds 1 ; d4b4
+wd4b5:: ds 1 ; d4b5
+wd4b6:: ds 1 ; d4b6
+wd4b7:: ds 1 ; d4b7
+wd4b8:: ds 1 ; d4b8
+wd4b9:: ds 1 ; d4b9
+wd4ba:: ds 1 ; d4ba
+wd4bb:: ds 1 ; d4bb
+wd4bc:: ds 1 ; d4bc
+wd4bd:: ds 1 ; d4bd
+wd4be:: ds 1 ; d4be
+wd4bf:: ds 1 ; d4bf
+wd4c0:: ds 1 ; d4c0
+wd4c1:: ds 1 ; d4c1
+wd4c2:: ds 1 ; d4c2
+wd4c3:: ds 1 ; d4c3
+wd4c4:: ds 1 ; d4c4
+wd4c5:: ds 1 ; d4c5
+wd4c6:: ds 1 ; d4c6
+wd4c7:: ds 1 ; d4c7
+wd4c8:: ds 1 ; d4c8
+wd4c9:: ds 1 ; d4c9
+wd4ca:: ds 1 ; d4ca
+wd4cb:: ds 1 ; d4cb
+wd4cc:: ds 1 ; d4cc
+wd4cd:: ds 1 ; d4cd
+wd4ce:: ds 1 ; d4ce
+wd4cf:: ds 1 ; d4cf
+wd4d0:: ds 1 ; d4d0
+wd4d1:: ds 1 ; d4d1
+wd4d2:: ds 1 ; d4d2
+wd4d3:: ds 1 ; d4d3
+wd4d4:: ds 1 ; d4d4
+wd4d5:: ds 1 ; d4d5
+wd4d6:: ds 1 ; d4d6
+wd4d7:: ds 1 ; d4d7
+wd4d8:: ds 1 ; d4d8
+wd4d9:: ds 1 ; d4d9
+wd4da:: ds 1 ; d4da
+wd4db:: ds 1 ; d4db
+wd4dc:: ds 1 ; d4dc
+wd4dd:: ds 1 ; d4dd
+wd4de:: ds 1 ; d4de
+wd4df:: ds 1 ; d4df
+wd4e0:: ds 1 ; d4e0
+wd4e1:: ds 1 ; d4e1
+wd4e2:: ds 1 ; d4e2
+wd4e3:: ds 1 ; d4e3
+wd4e4:: ds 1 ; d4e4
+wd4e5:: ds 1 ; d4e5
+wd4e6:: ds 1 ; d4e6
+wd4e7:: ds 1 ; d4e7
+wd4e8:: ds 1 ; d4e8
+wd4e9:: ds 1 ; d4e9
+wd4ea:: ds 1 ; d4ea
+wd4eb:: ds 1 ; d4eb
+wd4ec:: ds 1 ; d4ec
+wd4ed:: ds 1 ; d4ed
+wd4ee:: ds 1 ; d4ee
+wd4ef:: ds 1 ; d4ef
+wd4f0:: ds 1 ; d4f0
+wd4f1:: ds 1 ; d4f1
+wd4f2:: ds 1 ; d4f2
+wd4f3:: ds 1 ; d4f3
+wd4f4:: ds 1 ; d4f4
+wd4f5:: ds 1 ; d4f5
+wd4f6:: ds 1 ; d4f6
+wd4f7:: ds 1 ; d4f7
+wd4f8:: ds 1 ; d4f8
+wd4f9:: ds 1 ; d4f9
+wd4fa:: ds 1 ; d4fa
+wd4fb:: ds 1 ; d4fb
+wd4fc:: ds 1 ; d4fc
+wd4fd:: ds 1 ; d4fd
+wd4fe:: ds 1 ; d4fe
+wd4ff:: ds 1 ; d4ff
+wd500:: ds 1 ; d500
+wd501:: ds 1 ; d501
+wd502:: ds 1 ; d502
+wd503:: ds 1 ; d503
+wd504:: ds 1 ; d504
+wd505:: ds 1 ; d505
+wd506:: ds 1 ; d506
+wd507:: ds 1 ; d507
+wd508:: ds 1 ; d508
+wd509:: ds 1 ; d509
+wd50a:: ds 1 ; d50a
+wd50b:: ds 1 ; d50b
+wd50c:: ds 1 ; d50c
+wd50d:: ds 1 ; d50d
+wd50e:: ds 1 ; d50e
+wd50f:: ds 1 ; d50f
+wd510:: ds 1 ; d510
+wd511:: ds 1 ; d511
+wd512:: ds 1 ; d512
+wd513:: ds 1 ; d513
+wd514:: ds 1 ; d514
+wd515:: ds 1 ; d515
+wd516:: ds 1 ; d516
+wd517:: ds 1 ; d517
+wd518:: ds 1 ; d518
+wd519:: ds 1 ; d519
+wd51a:: ds 1 ; d51a
+wd51b:: ds 1 ; d51b
+wd51c:: ds 1 ; d51c
+wd51d:: ds 1 ; d51d
+wd51e:: ds 1 ; d51e
+wd51f:: ds 1 ; d51f
+wd520:: ds 1 ; d520
+wd521:: ds 1 ; d521
+wd522:: ds 1 ; d522
+wd523:: ds 1 ; d523
+wd524:: ds 1 ; d524
+wd525:: ds 1 ; d525
+wd526:: ds 1 ; d526
+wd527:: ds 1 ; d527
+wd528:: ds 1 ; d528
+wd529:: ds 1 ; d529
+wd52a:: ds 1 ; d52a
+wd52b:: ds 1 ; d52b
+wd52c:: ds 1 ; d52c
+wd52d:: ds 1 ; d52d
+wd52e:: ds 1 ; d52e
+wd52f:: ds 1 ; d52f
+wd530:: ds 1 ; d530
+wd531:: ds 1 ; d531
+wd532:: ds 1 ; d532
+wd533:: ds 1 ; d533
+wd534:: ds 1 ; d534
+wd535:: ds 1 ; d535
+wd536:: ds 1 ; d536
+wd537:: ds 1 ; d537
+wd538:: ds 1 ; d538
+wd539:: ds 1 ; d539
+wd53a:: ds 1 ; d53a
+wd53b:: ds 1 ; d53b
+wd53c:: ds 1 ; d53c
+wd53d:: ds 1 ; d53d
+wd53e:: ds 1 ; d53e
+wd53f:: ds 1 ; d53f
+wd540:: ds 1 ; d540
+wd541:: ds 1 ; d541
+wd542:: ds 1 ; d542
+wd543:: ds 1 ; d543
+wd544:: ds 1 ; d544
+wd545:: ds 1 ; d545
+wd546:: ds 1 ; d546
+wd547:: ds 1 ; d547
+wd548:: ds 1 ; d548
+wd549:: ds 1 ; d549
+wd54a:: ds 1 ; d54a
+wd54b:: ds 1 ; d54b
+wd54c:: ds 1 ; d54c
+wd54d:: ds 1 ; d54d
+wd54e:: ds 1 ; d54e
+wd54f:: ds 1 ; d54f
+wd550:: ds 1 ; d550
+wd551:: ds 1 ; d551
+wd552:: ds 1 ; d552
+wd553:: ds 1 ; d553
+wd554:: ds 1 ; d554
+wd555:: ds 1 ; d555
+wd556:: ds 1 ; d556
+wd557:: ds 1 ; d557
+wd558:: ds 1 ; d558
+wd559:: ds 1 ; d559
+wd55a:: ds 1 ; d55a
+wd55b:: ds 1 ; d55b
+wd55c:: ds 1 ; d55c
+wd55d:: ds 1 ; d55d
+wd55e:: ds 1 ; d55e
+wd55f:: ds 1 ; d55f
+wd560:: ds 1 ; d560
+wd561:: ds 1 ; d561
+wd562:: ds 1 ; d562
+wd563:: ds 1 ; d563
+wd564:: ds 1 ; d564
+wd565:: ds 1 ; d565
+wd566:: ds 1 ; d566
+wd567:: ds 1 ; d567
 wTimeOfDayPal:: ds 1
-wd569:: ds 1
-wd56a:: ds 1
-wd56b:: ds 1
-wd56c:: ds 1
-wd56d:: ds 1
-wd56e:: ds 1
-wd56f:: ds 1
-wd570:: ds 1
-wd571:: ds 1
-wd572:: ds 1
-wd573:: ds 1
-wd574:: ds 1
-wd575:: ds 1
-wd576:: ds 1
-wd577:: ds 1
-wd578:: ds 1
-wd579:: ds 1
-wd57a:: ds 1
-wd57b:: ds 1
-wd57c:: ds 1
-wd57d:: ds 1
-wd57e:: ds 1
-wd57f:: ds 1
-wd580:: ds 1
-wd581:: ds 1
-wd582:: ds 1
-wd583:: ds 1
-wd584:: ds 1
-wd585:: ds 1
-wd586:: ds 1
-wd587:: ds 1
-wd588:: ds 1
-wd589:: ds 1
-wd58a:: ds 1
-wd58b:: ds 1
-wd58c:: ds 1
-wd58d:: ds 1
-wd58e:: ds 1
-wd58f:: ds 1
-wd590:: ds 1
-wd591:: ds 1
-wd592:: ds 1
-wd593:: ds 1
-wd594:: ds 1
-wd595:: ds 1
-wd596:: ds 1
-wd597:: ds 1
-wd598:: ds 1
-wd599:: ds 1
-wd59a:: ds 1
-wd59b:: ds 1
-wd59c:: ds 1
-wd59d:: ds 1
-wd59e:: ds 1
-wd59f:: ds 1
-wd5a0:: ds 1
-wd5a1:: ds 1
-wd5a2:: ds 1
-wd5a3:: ds 1
-wd5a4:: ds 1
-wd5a5:: ds 1
-wd5a6:: ds 1
-wd5a7:: ds 1
-wd5a8:: ds 1
-wd5a9:: ds 1
-wd5aa:: ds 1
-wd5ab:: ds 1
-wd5ac:: ds 1
-wd5ad:: ds 1
-wd5ae:: ds 1
-wd5af:: ds 1
-wd5b0:: ds 1
-wd5b1:: ds 1
-wd5b2:: ds 1
-wd5b3:: ds 1
-wd5b4:: ds 1
-wd5b5:: ds 1
-wd5b6:: ds 1
-wd5b7:: ds 1
-wd5b8:: ds 1
-wd5b9:: ds 1
-wd5ba:: ds 1
-wd5bb:: ds 1
-wd5bc:: ds 1
-wd5bd:: ds 1
-wd5be:: ds 1
-wd5bf:: ds 1
-wd5c0:: ds 1
-wd5c1:: ds 1
-wd5c2:: ds 1
-wd5c3:: ds 1
-wd5c4:: ds 1
-wd5c5:: ds 1
-wd5c6:: ds 1
-wd5c7:: ds 1
-wd5c8:: ds 1
-wd5c9:: ds 1
-wd5ca:: ds 1
-wd5cb:: ds 1
-wd5cc:: ds 1
-wd5cd:: ds 1
-wd5ce:: ds 1
-wd5cf:: ds 1
-wd5d0:: ds 1
-wd5d1:: ds 1
-wd5d2:: ds 1
-wd5d3:: ds 1
-wd5d4:: ds 1
-wd5d5:: ds 1
-wd5d6:: ds 1
-wd5d7:: ds 1
-wd5d8:: ds 1
-wd5d9:: ds 1
-wd5da:: ds 1
-wd5db:: ds 1
-wd5dc:: ds 1
-wd5dd:: ds 1
-wd5de:: ds 1
-wd5df:: ds 1
-wd5e0:: ds 1
-wd5e1:: ds 1
-wd5e2:: ds 1
-wd5e3:: ds 1
-wd5e4:: ds 1
-wd5e5:: ds 1
-wd5e6:: ds 1
-wd5e7:: ds 1
-wd5e8:: ds 1
-wd5e9:: ds 1
-wd5ea:: ds 1
-wd5eb:: ds 1
-wd5ec:: ds 1
-wd5ed:: ds 1
-wd5ee:: ds 1
-wd5ef:: ds 1
-wd5f0:: ds 1
-wd5f1:: ds 1
-wd5f2:: ds 1
-wd5f3:: ds 1
-wd5f4:: ds 1
-wd5f5:: ds 1
-wd5f6:: ds 1
-wd5f7:: ds 1
-wd5f8:: ds 1
-wd5f9:: ds 1
-wd5fa:: ds 1
-wd5fb:: ds 1
-wd5fc:: ds 1
-wd5fd:: ds 1
-wd5fe:: ds 1
-wd5ff:: ds 1
-wd600:: ds 1
-wd601:: ds 1
-wd602:: ds 1
-wd603:: ds 1
-wd604:: ds 1
-wd605:: ds 1
-wd606:: ds 1
-wd607:: ds 1
-wd608:: ds 1
-wd609:: ds 1
-wd60a:: ds 1
-wd60b:: ds 1
-wd60c:: ds 1
-wd60d:: ds 1
-wd60e:: ds 1
-wd60f:: ds 1
-wd610:: ds 1
-wd611:: ds 1
-wd612:: ds 1
-wd613:: ds 1
-wd614:: ds 1
-wd615:: ds 1
-wd616:: ds 1
-wd617:: ds 1
-wd618:: ds 1
-wd619:: ds 1
-wd61a:: ds 1
-wd61b:: ds 1
-wd61c:: ds 1
-wd61d:: ds 1
-wd61e:: ds 1
-wd61f:: ds 1
-wd620:: ds 1
-wd621:: ds 1
-wd622:: ds 1
-wd623:: ds 1
-wd624:: ds 1
-wd625:: ds 1
-wd626:: ds 1
-wd627:: ds 1
-wd628:: ds 1
-wd629:: ds 1
-wd62a:: ds 1
-wd62b:: ds 1
-wd62c:: ds 1
-wd62d:: ds 1
-wd62e:: ds 1
-wd62f:: ds 1
-wd630:: ds 1
-wd631:: ds 1
-wd632:: ds 1
-wd633:: ds 1
-wd634:: ds 1
-wd635:: ds 1
-wd636:: ds 1
-wd637:: ds 1
-wd638:: ds 1
-wd639:: ds 1
-wd63a:: ds 1
-wd63b:: ds 1
-wd63c:: ds 1
-wd63d:: ds 1
-wd63e:: ds 1
-wd63f:: ds 1
-wd640:: ds 1
-wd641:: ds 1
-wd642:: ds 1
-wd643:: ds 1
-wd644:: ds 1
-wd645:: ds 1
-wd646:: ds 1
-wd647:: ds 1
-wd648:: ds 1
-wd649:: ds 1
-wd64a:: ds 1
-wd64b:: ds 1
-wd64c:: ds 1
-wd64d:: ds 1
-wd64e:: ds 1
-wd64f:: ds 1
-wd650:: ds 1
-wd651:: ds 1
-wd652:: ds 1
-wd653:: ds 1
-wd654:: ds 1
-wd655:: ds 1
-wd656:: ds 1
-wd657:: ds 1
-wd658:: ds 1
-wd659:: ds 1
-wd65a:: ds 1
-wd65b:: ds 1
-wd65c:: ds 1
-wd65d:: ds 1
-wd65e:: ds 1
-wd65f:: ds 1
-wd660:: ds 1
-wd661:: ds 1
-wd662:: ds 1
-wd663:: ds 1
-wd664:: ds 1
-wd665:: ds 1
-wd666:: ds 1
-wd667:: ds 1
-wd668:: ds 1
-wd669:: ds 1
-wd66a:: ds 1
-wd66b:: ds 1
-wd66c:: ds 1
-wd66d:: ds 1
-wd66e:: ds 1
-wd66f:: ds 1
-wd670:: ds 1
-wd671:: ds 1
-wd672:: ds 1
-wd673:: ds 1
-wd674:: ds 1
-wd675:: ds 1
-wd676:: ds 1
-wd677:: ds 1
-wd678:: ds 1
-wd679:: ds 1
-wd67a:: ds 1
-wd67b:: ds 1
-wd67c:: ds 1
-wd67d:: ds 1
-wd67e:: ds 1
-wd67f:: ds 1
-wd680:: ds 1
-wd681:: ds 1
-wd682:: ds 1
-wd683:: ds 1
-wd684:: ds 1
-wd685:: ds 1
-wd686:: ds 1
-wd687:: ds 1
-wd688:: ds 1
-wd689:: ds 1
-wd68a:: ds 1
-wd68b:: ds 1
-wd68c:: ds 1
-wd68d:: ds 1
-wd68e:: ds 1
-wd68f:: ds 1
-wd690:: ds 1
-wd691:: ds 1
-wd692:: ds 1
-wd693:: ds 1
-wd694:: ds 1
-wd695:: ds 1
-wd696:: ds 1
-wd697:: ds 1
-wd698:: ds 1
-wd699:: ds 1
-wd69a:: ds 1
-wd69b:: ds 1
-wd69c:: ds 1
-wd69d:: ds 1
-wd69e:: ds 1
-wd69f:: ds 1
-wd6a0:: ds 1
-wd6a1:: ds 1
-wd6a2:: ds 1
-wd6a3:: ds 1
-wd6a4:: ds 1
-wd6a5:: ds 1
-wd6a6:: ds 1
-wd6a7:: ds 1
-wd6a8:: ds 1
-wd6a9:: ds 1
-wd6aa:: ds 1
-wd6ab:: ds 1
-wd6ac:: ds 1
-wd6ad:: ds 1
-wd6ae:: ds 1
-wd6af:: ds 1
-wd6b0:: ds 1
-wd6b1:: ds 1
-wd6b2:: ds 1
-wd6b3:: ds 1
-wd6b4:: ds 1
-wd6b5:: ds 1
-wd6b6:: ds 1
-wd6b7:: ds 1
-wd6b8:: ds 1
-wd6b9:: ds 1
-wd6ba:: ds 1
-wd6bb:: ds 1
-wd6bc:: ds 1
-wd6bd:: ds 1
-wd6be:: ds 1
-wd6bf:: ds 1
-wd6c0:: ds 1
-wd6c1:: ds 1
-wd6c2:: ds 1
-wd6c3:: ds 1
-wd6c4:: ds 1
-wd6c5:: ds 1
-wd6c6:: ds 1
-wd6c7:: ds 1
-wd6c8:: ds 1
-wd6c9:: ds 1
-wd6ca:: ds 1
-wd6cb:: ds 1
-wd6cc:: ds 1
-wd6cd:: ds 1
-wd6ce:: ds 1
-wd6cf:: ds 1
-wd6d0:: ds 1
-wd6d1:: ds 1
-wd6d2:: ds 1
-wd6d3:: ds 1
-wd6d4:: ds 1
-wd6d5:: ds 1
-wd6d6:: ds 1
-wd6d7:: ds 1
-wd6d8:: ds 1
-wd6d9:: ds 1
-wd6da:: ds 1
-wd6db:: ds 1
-wd6dc:: ds 1
-wd6dd:: ds 1
-wd6de:: ds 1
-wd6df:: ds 1
-wd6e0:: ds 1
-wd6e1:: ds 1
-wd6e2:: ds 1
-wd6e3:: ds 1
-wd6e4:: ds 1
-wd6e5:: ds 1
-wd6e6:: ds 1
-wd6e7:: ds 1
-wd6e8:: ds 1
-wd6e9:: ds 1
-wd6ea:: ds 1
-wd6eb:: ds 1
-wd6ec:: ds 1
-wd6ed:: ds 1
-wd6ee:: ds 1
-wd6ef:: ds 1
-wd6f0:: ds 1
-wd6f1:: ds 1
-wd6f2:: ds 1
-wd6f3:: ds 1
-wd6f4:: ds 1
-wd6f5:: ds 1
-wd6f6:: ds 1
-wd6f7:: ds 1
-wd6f8:: ds 1
-wd6f9:: ds 1
-wd6fa:: ds 1
-wd6fb:: ds 1
-wd6fc:: ds 1
-wd6fd:: ds 1
-wd6fe:: ds 1
-wd6ff:: ds 1
-wd700:: ds 1
-wd701:: ds 1
-wd702:: ds 1
-wd703:: ds 1
-wd704:: ds 1
-wd705:: ds 1
-wd706:: ds 1
-wd707:: ds 1
-wd708:: ds 1
-wd709:: ds 1
-wd70a:: ds 1
-wd70b:: ds 1
-wd70c:: ds 1
-wd70d:: ds 1
-wd70e:: ds 1
-wd70f:: ds 1
-wd710:: ds 1
-wd711:: ds 1
-wd712:: ds 1
-wd713:: ds 1
-wd714:: ds 1
-wd715:: ds 1
-wd716:: ds 1
-wd717:: ds 1
-wd718:: ds 1
-wd719:: ds 1
-wd71a:: ds 1
-wd71b:: ds 1
-wd71c:: ds 1
-wd71d:: ds 1
-wd71e:: ds 1
-wd71f:: ds 1
-wd720:: ds 1
-wd721:: ds 1
-wd722:: ds 1
-wd723:: ds 1
-wd724:: ds 1
-wd725:: ds 1
-wd726:: ds 1
-wd727:: ds 1
-wd728:: ds 1
-wd729:: ds 1
-wd72a:: ds 1
-wd72b:: ds 1
-wd72c:: ds 1
-wd72d:: ds 1
-wd72e:: ds 1
-wd72f:: ds 1
-wd730:: ds 1
-wd731:: ds 1
-wd732:: ds 1
-wd733:: ds 1
-wd734:: ds 1
-wd735:: ds 1
-wd736:: ds 1
-wd737:: ds 1
-wd738:: ds 1
-wd739:: ds 1
-wd73a:: ds 1
-wd73b:: ds 1
-wd73c:: ds 1
-wd73d:: ds 1
-wd73e:: ds 1
-wd73f:: ds 1
-wd740:: ds 1
-wd741:: ds 1
-wd742:: ds 1
-wd743:: ds 1
-wd744:: ds 1
-wd745:: ds 1
-wd746:: ds 1
-wd747:: ds 1
-wd748:: ds 1
-wd749:: ds 1
-wd74a:: ds 1
-wd74b:: ds 1
-wd74c:: ds 1
-wd74d:: ds 1
-wd74e:: ds 1
-wd74f:: ds 1
-wd750:: ds 1
-wd751:: ds 1
-wd752:: ds 1
-wd753:: ds 1
-wd754:: ds 1
-wd755:: ds 1
-wd756:: ds 1
-wd757:: ds 1
-wd758:: ds 1
-wd759:: ds 1
-wd75a:: ds 1
-wd75b:: ds 1
-wd75c:: ds 1
-wd75d:: ds 1
-wd75e:: ds 1
-wd75f:: ds 1
-wd760:: ds 1
-wd761:: ds 1
-wd762:: ds 1
-wd763:: ds 1
-wd764:: ds 1
-wd765:: ds 1
-wd766:: ds 1
-wd767:: ds 1
-wd768:: ds 1
-wd769:: ds 1
-wd76a:: ds 1
-wd76b:: ds 1
-wd76c:: ds 1
-wd76d:: ds 1
-wd76e:: ds 1
-wd76f:: ds 1
-wd770:: ds 1
-wd771:: ds 1
-wd772:: ds 1
-wd773:: ds 1
-wd774:: ds 1
-wd775:: ds 1
-wd776:: ds 1
-wd777:: ds 1
-wd778:: ds 1
-wd779:: ds 1
-wd77a:: ds 1
-wd77b:: ds 1
-wd77c:: ds 1
-wd77d:: ds 1
-wd77e:: ds 1
-wd77f:: ds 1
-wd780:: ds 1
-wd781:: ds 1
-wd782:: ds 1
-wd783:: ds 1
-wd784:: ds 1
-wd785:: ds 1
-wd786:: ds 1
-wd787:: ds 1
-wd788:: ds 1
-wd789:: ds 1
-wd78a:: ds 1
-wd78b:: ds 1
-wd78c:: ds 1
-wd78d:: ds 1
-wd78e:: ds 1
-wd78f:: ds 1
-wd790:: ds 1
-wd791:: ds 1
-wd792:: ds 1
-wd793:: ds 1
-wd794:: ds 1
-wd795:: ds 1
-wd796:: ds 1
-wd797:: ds 1
-wd798:: ds 1
-wd799:: ds 1
-wd79a:: ds 1
-wd79b:: ds 1
-wd79c:: ds 1
-wd79d:: ds 1
-wd79e:: ds 1
-wd79f:: ds 1
-wd7a0:: ds 1
-wd7a1:: ds 1
-wd7a2:: ds 1
-wd7a3:: ds 1
-wd7a4:: ds 1
-wd7a5:: ds 1
-wd7a6:: ds 1
-wd7a7:: ds 1
-wd7a8:: ds 1
-wd7a9:: ds 1
-wd7aa:: ds 1
-wd7ab:: ds 1
-wd7ac:: ds 1
-wd7ad:: ds 1
-wd7ae:: ds 1
-wd7af:: ds 1
-wd7b0:: ds 1
-wd7b1:: ds 1
-wd7b2:: ds 1
-wd7b3:: ds 1
-wd7b4:: ds 1
-wd7b5:: ds 1
-wd7b6:: ds 1
-wd7b7:: ds 1
-wd7b8:: ds 1
-wd7b9:: ds 1
-wd7ba:: ds 1
-wd7bb:: ds 1
-wd7bc:: ds 1
-wd7bd:: ds 1
-wd7be:: ds 1
-wd7bf:: ds 1
-wd7c0:: ds 1
-wd7c1:: ds 1
-wd7c2:: ds 1
-wd7c3:: ds 1
-wd7c4:: ds 1
-wd7c5:: ds 1
-wd7c6:: ds 1
-wd7c7:: ds 1
-wd7c8:: ds 1
-wd7c9:: ds 1
-wd7ca:: ds 1
-wd7cb:: ds 1
-wd7cc:: ds 1
-wd7cd:: ds 1
-wd7ce:: ds 1
-wd7cf:: ds 1
-wd7d0:: ds 1
-wd7d1:: ds 1
-wd7d2:: ds 1
-wd7d3:: ds 1
-wd7d4:: ds 1
-wd7d5:: ds 1
-wd7d6:: ds 1
-wd7d7:: ds 1
-wd7d8:: ds 1
-wd7d9:: ds 1
-wd7da:: ds 1
-wd7db:: ds 1
-wd7dc:: ds 1
-wd7dd:: ds 1
-wd7de:: ds 1
-wd7df:: ds 1
-wd7e0:: ds 1
-wd7e1:: ds 1
-wd7e2:: ds 1
-wd7e3:: ds 1
-wd7e4:: ds 1
-wd7e5:: ds 1
-wd7e6:: ds 1
-wd7e7:: ds 1
-wd7e8:: ds 1
-wd7e9:: ds 1
-wd7ea:: ds 1
-wd7eb:: ds 1
-wd7ec:: ds 1
-wd7ed:: ds 1
-wd7ee:: ds 1
-wd7ef:: ds 1
-wd7f0:: ds 1
-wd7f1:: ds 1
-wd7f2:: ds 1
-wd7f3:: ds 1
-wd7f4:: ds 1
-wd7f5:: ds 1
-wd7f6:: ds 1
-wd7f7:: ds 1
-wd7f8:: ds 1
-wd7f9:: ds 1
-wd7fa:: ds 1
-wd7fb:: ds 1
-wd7fc:: ds 1
-wd7fd:: ds 1
-wd7fe:: ds 1
-wd7ff:: ds 1
-wd800:: ds 1
-wd801:: ds 1
-wd802:: ds 1
-wd803:: ds 1
-wd804:: ds 1
-wd805:: ds 1
-wd806:: ds 1
-wd807:: ds 1
-wd808:: ds 1
-wd809:: ds 1
-wd80a:: ds 1
-wd80b:: ds 1
-wd80c:: ds 1
-wd80d:: ds 1
-wd80e:: ds 1
-wd80f:: ds 1
-wd810:: ds 1
-wd811:: ds 1
-wd812:: ds 1
-wd813:: ds 1
-wd814:: ds 1
-wd815:: ds 1
-wd816:: ds 1
-wd817:: ds 1
-wd818:: ds 1
-wd819:: ds 1
-wd81a:: ds 1
-wd81b:: ds 1
-wd81c:: ds 1
-wd81d:: ds 1
-wd81e:: ds 1
-wd81f:: ds 1
-wd820:: ds 1
-wd821:: ds 1
-wd822:: ds 1
-wd823:: ds 1
-wd824:: ds 1
-wd825:: ds 1
-wd826:: ds 1
-wd827:: ds 1
-wd828:: ds 1
-wd829:: ds 1
-wd82a:: ds 1
-wd82b:: ds 1
-wd82c:: ds 1
-wd82d:: ds 1
-wd82e:: ds 1
-wd82f:: ds 1
-wd830:: ds 1
-wd831:: ds 1
-wd832:: ds 1
-wd833:: ds 1
-wd834:: ds 1
-wd835:: ds 1
-wd836:: ds 1
-wd837:: ds 1
-wd838:: ds 1
-wd839:: ds 1
-wd83a:: ds 1
-wd83b:: ds 1
-wd83c:: ds 1
-wd83d:: ds 1
-wd83e:: ds 1
-wd83f:: ds 1
-wd840:: ds 1
-wd841:: ds 1
-wd842:: ds 1
-wd843:: ds 1
-wd844:: ds 1
-wd845:: ds 1
-wd846:: ds 1
-wd847:: ds 1
-wd848:: ds 1
-wd849:: ds 1
-wd84a:: ds 1
-wd84b:: ds 1
-wd84c:: ds 1
-wd84d:: ds 1
-wd84e:: ds 1
-wd84f:: ds 1
-wd850:: ds 1
-wd851:: ds 1
-wd852:: ds 1
-wd853:: ds 1
-wd854:: ds 1
-wd855:: ds 1
-wd856:: ds 1
-wd857:: ds 1
-wd858:: ds 1
-wd859:: ds 1
-wd85a:: ds 1
-wd85b:: ds 1
-wd85c:: ds 1
-wd85d:: ds 1
-wd85e:: ds 1
-wd85f:: ds 1
-wd860:: ds 1
-wd861:: ds 1
-wd862:: ds 1
-wd863:: ds 1
-wd864:: ds 1
-wd865:: ds 1
-wd866:: ds 1
-wd867:: ds 1
-wd868:: ds 1
-wd869:: ds 1
-wd86a:: ds 1
-wd86b:: ds 1
-wd86c:: ds 1
-wd86d:: ds 1
-wd86e:: ds 1
-wd86f:: ds 1
-wd870:: ds 1
-wd871:: ds 1
-wd872:: ds 1
-wd873:: ds 1
-wd874:: ds 1
-wd875:: ds 1
-wd876:: ds 1
-wd877:: ds 1
-wd878:: ds 1
-wd879:: ds 1
-wd87a:: ds 1
-wd87b:: ds 1
-wd87c:: ds 1
-wd87d:: ds 1
-wd87e:: ds 1
-wd87f:: ds 1
-wd880:: ds 1
-wd881:: ds 1
-wd882:: ds 1
-wd883:: ds 1
-wd884:: ds 1
-wd885:: ds 1
-wd886:: ds 1
-wd887:: ds 1
-wd888:: ds 1
-wd889:: ds 1
-wd88a:: ds 1
-wd88b:: ds 1
-wd88c:: ds 1
-wd88d:: ds 1
-wd88e:: ds 1
-wd88f:: ds 1
-wd890:: ds 1
-wd891:: ds 1
-wd892:: ds 1
-wd893:: ds 1
-wd894:: ds 1
-wd895:: ds 1
-wd896:: ds 1
-wd897:: ds 1
-wd898:: ds 1
-wd899:: ds 1
-wd89a:: ds 1
-wd89b:: ds 1
-wd89c:: ds 1
-wd89d:: ds 1
-wd89e:: ds 1
-wd89f:: ds 1
-wd8a0:: ds 1
-wd8a1:: ds 1
-wd8a2:: ds 1
-wd8a3:: ds 1
-wd8a4:: ds 1
-wd8a5:: ds 1
-wd8a6:: ds 1
-wd8a7:: ds 1
-wd8a8:: ds 1
-wd8a9:: ds 1
-wd8aa:: ds 1
-wd8ab:: ds 1
-wd8ac:: ds 1
-wd8ad:: ds 1
-wd8ae:: ds 1
-wd8af:: ds 1
-wd8b0:: ds 1
-wd8b1:: ds 1
-wd8b2:: ds 1
-wd8b3:: ds 1
-wd8b4:: ds 1
-wd8b5:: ds 1
-wd8b6:: ds 1
-wd8b7:: ds 1
-wd8b8:: ds 1
-wd8b9:: ds 1
-wd8ba:: ds 1
-wd8bb:: ds 1
-wd8bc:: ds 1
-wd8bd:: ds 1
-wd8be:: ds 1
-wd8bf:: ds 1
-wd8c0:: ds 1
-wd8c1:: ds 1
-wd8c2:: ds 1
-wd8c3:: ds 1
-wd8c4:: ds 1
-wd8c5:: ds 1
-wd8c6:: ds 1
-wd8c7:: ds 1
-wd8c8:: ds 1
-wd8c9:: ds 1
-wd8ca:: ds 1
-wd8cb:: ds 1
-wd8cc:: ds 1
-wd8cd:: ds 1
-wd8ce:: ds 1
-wd8cf:: ds 1
-wd8d0:: ds 1
-wd8d1:: ds 1
-wd8d2:: ds 1
-wd8d3:: ds 1
-wd8d4:: ds 1
-wd8d5:: ds 1
-wd8d6:: ds 1
-wd8d7:: ds 1
-wd8d8:: ds 1
-wd8d9:: ds 1
-wd8da:: ds 1
-wd8db:: ds 1
-wd8dc:: ds 1
-wd8dd:: ds 1
-wd8de:: ds 1
-wd8df:: ds 1
-wd8e0:: ds 1
-wd8e1:: ds 1
-wd8e2:: ds 1
-wd8e3:: ds 1
-wd8e4:: ds 1
-wd8e5:: ds 1
-wd8e6:: ds 1
-wd8e7:: ds 1
-wd8e8:: ds 1
-wd8e9:: ds 1
-wd8ea:: ds 1
-wd8eb:: ds 1
-wd8ec:: ds 1
-wd8ed:: ds 1
-wd8ee:: ds 1
-wd8ef:: ds 1
-wd8f0:: ds 1
-wd8f1:: ds 1
-wd8f2:: ds 1
-wd8f3:: ds 1
-wd8f4:: ds 1
-wd8f5:: ds 1
-wd8f6:: ds 1
-wd8f7:: ds 1
-wd8f8:: ds 1
-wd8f9:: ds 1
-wd8fa:: ds 1
-wd8fb:: ds 1
-wd8fc:: ds 1
-wd8fd:: ds 1
-wd8fe:: ds 1
-wd8ff:: ds 1
-wd900:: ds 1
-wd901:: ds 1
-wd902:: ds 1
-wd903:: ds 1
-wd904:: ds 1
-wd905:: ds 1
-wd906:: ds 1
-wd907:: ds 1
-wd908:: ds 1
-wd909:: ds 1
-wd90a:: ds 1
-wd90b:: ds 1
-wd90c:: ds 1
-wd90d:: ds 1
-wd90e:: ds 1
-wd90f:: ds 1
-wd910:: ds 1
-wd911:: ds 1
-wd912:: ds 1
-wd913:: ds 1
-wd914:: ds 1
-wd915:: ds 1
-wd916:: ds 1
-wd917:: ds 1
-wd918:: ds 1
-wd919:: ds 1
-wd91a:: ds 1
-wd91b:: ds 1
-wd91c:: ds 1
-wd91d:: ds 1
-wd91e:: ds 1
-wd91f:: ds 1
-wd920:: ds 1
-wd921:: ds 1
-wd922:: ds 1
-wd923:: ds 1
-wd924:: ds 1
-wd925:: ds 1
-wd926:: ds 1
-wd927:: ds 1
-wd928:: ds 1
-wd929:: ds 1
-wd92a:: ds 1
-wd92b:: ds 1
-wd92c:: ds 1
-wd92d:: ds 1
-wd92e:: ds 1
-wd92f:: ds 1
-wd930:: ds 1
-wd931:: ds 1
-wd932:: ds 1
-wd933:: ds 1
-wd934:: ds 1
-wd935:: ds 1
-wd936:: ds 1
-wd937:: ds 1
-wd938:: ds 1
-wd939:: ds 1
-wd93a:: ds 1
-wd93b:: ds 1
-wd93c:: ds 1
-wd93d:: ds 1
-wd93e:: ds 1
-wd93f:: ds 1
-wd940:: ds 1
-wd941:: ds 1
-wd942:: ds 1
-wd943:: ds 1
-wd944:: ds 1
-wd945:: ds 1
-wd946:: ds 1
-wd947:: ds 1
-wd948:: ds 1
-wd949:: ds 1
-wd94a:: ds 1
-wd94b:: ds 1
-wd94c:: ds 1
-wd94d:: ds 1
-wd94e:: ds 1
-wd94f:: ds 1
-wd950:: ds 1
-wd951:: ds 1
-wd952:: ds 1
-wd953:: ds 1
-wd954:: ds 1
-wd955:: ds 1
-wd956:: ds 1
-wd957:: ds 1
-wd958:: ds 1
-wd959:: ds 1
-wd95a:: ds 1
-wd95b:: ds 1
-wd95c:: ds 1
-wd95d:: ds 1
-wd95e:: ds 1
-wd95f:: ds 1
-wd960:: ds 1
-wd961:: ds 1
-wd962:: ds 1
-wd963:: ds 1
-wd964:: ds 1
-wd965:: ds 1
-wd966:: ds 1
-wd967:: ds 1
-wd968:: ds 1
-wd969:: ds 1
-wd96a:: ds 1
-wd96b:: ds 1
-wd96c:: ds 1
-wd96d:: ds 1
-wd96e:: ds 1
-wd96f:: ds 1
-wd970:: ds 1
-wd971:: ds 1
-wd972:: ds 1
-wd973:: ds 1
-wd974:: ds 1
-wd975:: ds 1
-wd976:: ds 1
-wd977:: ds 1
-wd978:: ds 1
-wd979:: ds 1
-wd97a:: ds 1
-wd97b:: ds 1
-wd97c:: ds 1
-wd97d:: ds 1
-wd97e:: ds 1
-wd97f:: ds 1
-wd980:: ds 1
-wd981:: ds 1
-wd982:: ds 1
-wd983:: ds 1
-wd984:: ds 1
-wd985:: ds 1
-wd986:: ds 1
-wd987:: ds 1
-wd988:: ds 1
-wd989:: ds 1
-wd98a:: ds 1
-wd98b:: ds 1
-wd98c:: ds 1
-wd98d:: ds 1
-wd98e:: ds 1
-wd98f:: ds 1
-wd990:: ds 1
-wd991:: ds 1
-wd992:: ds 1
-wd993:: ds 1
-wd994:: ds 1
-wd995:: ds 1
-wd996:: ds 1
-wd997:: ds 1
-wd998:: ds 1
-wd999:: ds 1
-wd99a:: ds 1
-wd99b:: ds 1
-wd99c:: ds 1
-wd99d:: ds 1
-wd99e:: ds 1
-wd99f:: ds 1
-wd9a0:: ds 1
-wd9a1:: ds 1
-wd9a2:: ds 1
-wd9a3:: ds 1
-wd9a4:: ds 1
-wd9a5:: ds 1
-wd9a6:: ds 1
-wd9a7:: ds 1
-wd9a8:: ds 1
-wd9a9:: ds 1
-wd9aa:: ds 1
-wd9ab:: ds 1
-wd9ac:: ds 1
-wd9ad:: ds 1
-wd9ae:: ds 1
-wd9af:: ds 1
-wd9b0:: ds 1
-wd9b1:: ds 1
-wd9b2:: ds 1
-wd9b3:: ds 1
-wd9b4:: ds 1
-wd9b5:: ds 1
-wd9b6:: ds 1
-wd9b7:: ds 1
-wd9b8:: ds 1
-wd9b9:: ds 1
-wd9ba:: ds 1
-wd9bb:: ds 1
-wd9bc:: ds 1
-wd9bd:: ds 1
-wd9be:: ds 1
-wd9bf:: ds 1
-wd9c0:: ds 1
-wd9c1:: ds 1
-wd9c2:: ds 1
-wd9c3:: ds 1
-wd9c4:: ds 1
-wd9c5:: ds 1
-wd9c6:: ds 1
-wd9c7:: ds 1
-wd9c8:: ds 1
-wd9c9:: ds 1
-wd9ca:: ds 1
-wd9cb:: ds 1
-wd9cc:: ds 1
-wd9cd:: ds 1
-wd9ce:: ds 1
-wd9cf:: ds 1
-wd9d0:: ds 1
-wd9d1:: ds 1
-wd9d2:: ds 1
-wd9d3:: ds 1
-wd9d4:: ds 1
-wd9d5:: ds 1
-wd9d6:: ds 1
-wd9d7:: ds 1
-wd9d8:: ds 1
-wd9d9:: ds 1
-wd9da:: ds 1
-wd9db:: ds 1
-wd9dc:: ds 1
-wd9dd:: ds 1
-wd9de:: ds 1
-wd9df:: ds 1
-wd9e0:: ds 1
-wd9e1:: ds 1
-wd9e2:: ds 1
-wd9e3:: ds 1
-wd9e4:: ds 1
-wd9e5:: ds 1
-wd9e6:: ds 1
-wd9e7:: ds 1
-wd9e8:: ds 1
-wd9e9:: ds 1
-wd9ea:: ds 1
-wd9eb:: ds 1
-wd9ec:: ds 1
-wd9ed:: ds 1
-wd9ee:: ds 1
-wd9ef:: ds 1
-wd9f0:: ds 1
-wd9f1:: ds 1
-wd9f2:: ds 1
-wd9f3:: ds 1
-wd9f4:: ds 1
-wd9f5:: ds 1
-wd9f6:: ds 1
-wd9f7:: ds 1
-wd9f8:: ds 1
-wd9f9:: ds 1
-wd9fa:: ds 1
-wd9fb:: ds 1
-wd9fc:: ds 1
-wd9fd:: ds 1
-wd9fe:: ds 1
-wd9ff:: ds 1
-wda00:: ds 1
-wda01:: ds 1
-wda02:: ds 1
-wda03:: ds 1
-wda04:: ds 1
-wda05:: ds 1
-wda06:: ds 1
-wda07:: ds 1
-wda08:: ds 1
-wda09:: ds 1
-wda0a:: ds 1
-wda0b:: ds 1
-wda0c:: ds 1
-wda0d:: ds 1
-wda0e:: ds 1
-wda0f:: ds 1
-wda10:: ds 1
-wda11:: ds 1
-wda12:: ds 1
-wda13:: ds 1
-wda14:: ds 1
-wda15:: ds 1
-wda16:: ds 1
-wda17:: ds 1
-wda18:: ds 1
-wda19:: ds 1
-wda1a:: ds 1
-wda1b:: ds 1
-wda1c:: ds 1
-wda1d:: ds 1
-wda1e:: ds 1
-wda1f:: ds 1
-wda20:: ds 1
-wda21:: ds 1
-wda22:: ds 1
-wda23:: ds 1
-wda24:: ds 1
-wda25:: ds 1
-wda26:: ds 1
-wda27:: ds 1
-wda28:: ds 1
-wda29:: ds 1
-wda2a:: ds 1
-wda2b:: ds 1
-wda2c:: ds 1
-wda2d:: ds 1
-wda2e:: ds 1
-wda2f:: ds 1
-wda30:: ds 1
-wda31:: ds 1
-wda32:: ds 1
-wda33:: ds 1
-wda34:: ds 1
-wda35:: ds 1
-wda36:: ds 1
-wda37:: ds 1
-wda38:: ds 1
-wda39:: ds 1
-wda3a:: ds 1
-wda3b:: ds 1
-wda3c:: ds 1
-wda3d:: ds 1
-wda3e:: ds 1
-wda3f:: ds 1
-wda40:: ds 1
-wda41:: ds 1
-wda42:: ds 1
-wda43:: ds 1
-wda44:: ds 1
-wda45:: ds 1
-wda46:: ds 1
-wda47:: ds 1
-wda48:: ds 1
-wda49:: ds 1
-wda4a:: ds 1
-wda4b:: ds 1
-wda4c:: ds 1
-wda4d:: ds 1
-wda4e:: ds 1
-wda4f:: ds 1
-wda50:: ds 1
-wda51:: ds 1
-wda52:: ds 1
-wda53:: ds 1
-wda54:: ds 1
-wda55:: ds 1
-wda56:: ds 1
-wda57:: ds 1
-wda58:: ds 1
-wda59:: ds 1
-wda5a:: ds 1
-wda5b:: ds 1
-wda5c:: ds 1
-wda5d:: ds 1
-wda5e:: ds 1
-wda5f:: ds 1
-wda60:: ds 1
-wda61:: ds 1
-wda62:: ds 1
-wda63:: ds 1
-wda64:: ds 1
-wda65:: ds 1
-wda66:: ds 1
-wda67:: ds 1
-wda68:: ds 1
-wda69:: ds 1
-wda6a:: ds 1
-wda6b:: ds 1
-wda6c:: ds 1
-wda6d:: ds 1
-wda6e:: ds 1
-wda6f:: ds 1
-wda70:: ds 1
-wda71:: ds 1
-wda72:: ds 1
-wda73:: ds 1
-wda74:: ds 1
-wda75:: ds 1
-wda76:: ds 1
-wda77:: ds 1
-wda78:: ds 1
-wda79:: ds 1
-wda7a:: ds 1
-wda7b:: ds 1
-wda7c:: ds 1
-wda7d:: ds 1
-wda7e:: ds 1
-wda7f:: ds 1
-wda80:: ds 1
-wda81:: ds 1
-wda82:: ds 1
-wda83:: ds 1
-wda84:: ds 1
-wda85:: ds 1
-wda86:: ds 1
-wda87:: ds 1
-wda88:: ds 1
-wda89:: ds 1
-wda8a:: ds 1
-wda8b:: ds 1
-wda8c:: ds 1
-wda8d:: ds 1
-wda8e:: ds 1
-wda8f:: ds 1
-wda90:: ds 1
-wda91:: ds 1
-wda92:: ds 1
-wda93:: ds 1
-wda94:: ds 1
-wda95:: ds 1
-wda96:: ds 1
-wda97:: ds 1
-wda98:: ds 1
-wda99:: ds 1
-wda9a:: ds 1
-wda9b:: ds 1
-wda9c:: ds 1
-wda9d:: ds 1
-wda9e:: ds 1
-wda9f:: ds 1
-wdaa0:: ds 1
-wdaa1:: ds 1
-wdaa2:: ds 1
-wdaa3:: ds 1
-wdaa4:: ds 1
-wdaa5:: ds 1
-wdaa6:: ds 1
-wdaa7:: ds 1
-wdaa8:: ds 1
-wdaa9:: ds 1
-wdaaa:: ds 1
-wdaab:: ds 1
-wdaac:: ds 1
-wdaad:: ds 1
-wdaae:: ds 1
-wdaaf:: ds 1
-wdab0:: ds 1
-wdab1:: ds 1
-wdab2:: ds 1
-wdab3:: ds 1
-wdab4:: ds 1
-wdab5:: ds 1
-wdab6:: ds 1
-wdab7:: ds 1
-wdab8:: ds 1
-wdab9:: ds 1
-wdaba:: ds 1
-wdabb:: ds 1
-wdabc:: ds 1
-wdabd:: ds 1
-wdabe:: ds 1
-wdabf:: ds 1
-wdac0:: ds 1
-wdac1:: ds 1
-wdac2:: ds 1
-wdac3:: ds 1
-wdac4:: ds 1
-wdac5:: ds 1
-wdac6:: ds 1
-wdac7:: ds 1
-wdac8:: ds 1
-wdac9:: ds 1
-wdaca:: ds 1
-wdacb:: ds 1
-wdacc:: ds 1
-wdacd:: ds 1
-wdace:: ds 1
-wdacf:: ds 1
-wdad0:: ds 1
-wdad1:: ds 1
-wdad2:: ds 1
-wdad3:: ds 1
-wdad4:: ds 1
-wdad5:: ds 1
-wdad6:: ds 1
-wdad7:: ds 1
-wdad8:: ds 1
-wdad9:: ds 1
-wdada:: ds 1
-wdadb:: ds 1
-wdadc:: ds 1
-wdadd:: ds 1
-wdade:: ds 1
-wdadf:: ds 1
-wdae0:: ds 1
-wdae1:: ds 1
-wdae2:: ds 1
-wdae3:: ds 1
-wdae4:: ds 1
-wdae5:: ds 1
-wdae6:: ds 1
-wdae7:: ds 1
-wdae8:: ds 1
-wdae9:: ds 1
-wdaea:: ds 1
-wdaeb:: ds 1
-wdaec:: ds 1
-wdaed:: ds 1
-wdaee:: ds 1
-wdaef:: ds 1
-wdaf0:: ds 1
-wdaf1:: ds 1
-wdaf2:: ds 1
-wdaf3:: ds 1
-wdaf4:: ds 1
-wdaf5:: ds 1
-wdaf6:: ds 1
-wdaf7:: ds 1
-wdaf8:: ds 1
-wdaf9:: ds 1
-wdafa:: ds 1
-wdafb:: ds 1
-wdafc:: ds 1
-wdafd:: ds 1
-wdafe:: ds 1
-wdaff:: ds 1
-wdb00:: ds 1
-wdb01:: ds 1
-wdb02:: ds 1
-wdb03:: ds 1
-wdb04:: ds 1
-wdb05:: ds 1
-wdb06:: ds 1
-wdb07:: ds 1
-wdb08:: ds 1
-wdb09:: ds 1
-wdb0a:: ds 1
-wdb0b:: ds 1
-wdb0c:: ds 1
-wdb0d:: ds 1
-wdb0e:: ds 1
-wdb0f:: ds 1
-wdb10:: ds 1
-wdb11:: ds 1
-wdb12:: ds 1
-wdb13:: ds 1
-wdb14:: ds 1
-wdb15:: ds 1
-wdb16:: ds 1
-wdb17:: ds 1
-wdb18:: ds 1
-wdb19:: ds 1
-wdb1a:: ds 1
-wdb1b:: ds 1
-wdb1c:: ds 1
-wdb1d:: ds 1
-wdb1e:: ds 1
-wdb1f:: ds 1
-wdb20:: ds 1
-wdb21:: ds 1
-wdb22:: ds 1
-wdb23:: ds 1
-wdb24:: ds 1
-wdb25:: ds 1
-wdb26:: ds 1
-wdb27:: ds 1
-wdb28:: ds 1
-wdb29:: ds 1
-wdb2a:: ds 1
-wdb2b:: ds 1
-wdb2c:: ds 1
-wdb2d:: ds 1
-wdb2e:: ds 1
-wdb2f:: ds 1
-wdb30:: ds 1
-wdb31:: ds 1
-wdb32:: ds 1
-wdb33:: ds 1
-wdb34:: ds 1
-wdb35:: ds 1
-wdb36:: ds 1
-wdb37:: ds 1
-wdb38:: ds 1
-wdb39:: ds 1
-wdb3a:: ds 1
-wdb3b:: ds 1
-wdb3c:: ds 1
-wdb3d:: ds 1
-wdb3e:: ds 1
-wdb3f:: ds 1
-wdb40:: ds 1
-wdb41:: ds 1
-wdb42:: ds 1
-wdb43:: ds 1
-wdb44:: ds 1
-wdb45:: ds 1
-wdb46:: ds 1
-wdb47:: ds 1
-wdb48:: ds 1
-wdb49:: ds 1
-wdb4a:: ds 1
-wdb4b:: ds 1
-wdb4c:: ds 1
-wdb4d:: ds 1
-wdb4e:: ds 1
-wdb4f:: ds 1
-wdb50:: ds 1
-wdb51:: ds 1
-wdb52:: ds 1
-wdb53:: ds 1
-wdb54:: ds 1
-wdb55:: ds 1
-wdb56:: ds 1
-wdb57:: ds 1
-wdb58:: ds 1
-wdb59:: ds 1
-wdb5a:: ds 1
-wdb5b:: ds 1
-wdb5c:: ds 1
-wdb5d:: ds 1
-wdb5e:: ds 1
-wdb5f:: ds 1
-wdb60:: ds 1
-wdb61:: ds 1
-wdb62:: ds 1
-wdb63:: ds 1
-wdb64:: ds 1
-wdb65:: ds 1
-wdb66:: ds 1
-wdb67:: ds 1
-wdb68:: ds 1
-wdb69:: ds 1
-wdb6a:: ds 1
-wdb6b:: ds 1
-wdb6c:: ds 1
-wdb6d:: ds 1
-wdb6e:: ds 1
-wdb6f:: ds 1
-wdb70:: ds 1
-wdb71:: ds 1
-wdb72:: ds 1
-wdb73:: ds 1
-wdb74:: ds 1
-wdb75:: ds 1
-wdb76:: ds 1
-wdb77:: ds 1
-wdb78:: ds 1
-wdb79:: ds 1
-wdb7a:: ds 1
-wdb7b:: ds 1
-wdb7c:: ds 1
-wdb7d:: ds 1
-wdb7e:: ds 1
-wdb7f:: ds 1
-wdb80:: ds 1
-wdb81:: ds 1
-wdb82:: ds 1
-wdb83:: ds 1
-wdb84:: ds 1
-wdb85:: ds 1
-wdb86:: ds 1
-wdb87:: ds 1
-wdb88:: ds 1
-wdb89:: ds 1
-wdb8a:: ds 1
-wdb8b:: ds 1
-wdb8c:: ds 1
-wdb8d:: ds 1
-wdb8e:: ds 1
-wdb8f:: ds 1
-wdb90:: ds 1
-wdb91:: ds 1
-wdb92:: ds 1
-wdb93:: ds 1
-wdb94:: ds 1
-wdb95:: ds 1
-wdb96:: ds 1
-wdb97:: ds 1
-wdb98:: ds 1
-wdb99:: ds 1
-wdb9a:: ds 1
-wdb9b:: ds 1
-wdb9c:: ds 1
-wdb9d:: ds 1
-wdb9e:: ds 1
-wdb9f:: ds 1
-wdba0:: ds 1
-wdba1:: ds 1
-wdba2:: ds 1
-wdba3:: ds 1
-wdba4:: ds 1
-wdba5:: ds 1
-wdba6:: ds 1
-wdba7:: ds 1
-wdba8:: ds 1
-wdba9:: ds 1
-wdbaa:: ds 1
-wdbab:: ds 1
-wdbac:: ds 1
-wdbad:: ds 1
-wdbae:: ds 1
-wdbaf:: ds 1
-wdbb0:: ds 1
-wdbb1:: ds 1
-wdbb2:: ds 1
-wdbb3:: ds 1
-wdbb4:: ds 1
-wdbb5:: ds 1
-wdbb6:: ds 1
-wdbb7:: ds 1
-wdbb8:: ds 1
-wdbb9:: ds 1
-wdbba:: ds 1
-wdbbb:: ds 1
-wdbbc:: ds 1
-wdbbd:: ds 1
-wdbbe:: ds 1
-wdbbf:: ds 1
-wdbc0:: ds 1
-wdbc1:: ds 1
-wdbc2:: ds 1
-wdbc3:: ds 1
-wdbc4:: ds 1
-wdbc5:: ds 1
-wdbc6:: ds 1
-wdbc7:: ds 1
-wdbc8:: ds 1
-wdbc9:: ds 1
-wdbca:: ds 1
-wdbcb:: ds 1
-wdbcc:: ds 1
-wdbcd:: ds 1
-wdbce:: ds 1
-wdbcf:: ds 1
-wdbd0:: ds 1
-wdbd1:: ds 1
-wdbd2:: ds 1
-wdbd3:: ds 1
-wdbd4:: ds 1
-wdbd5:: ds 1
-wdbd6:: ds 1
-wdbd7:: ds 1
-wdbd8:: ds 1
-wdbd9:: ds 1
-wdbda:: ds 1
-wdbdb:: ds 1
-wdbdc:: ds 1
-wdbdd:: ds 1
-wdbde:: ds 1
-wdbdf:: ds 1
-wdbe0:: ds 1
-wdbe1:: ds 1
-wdbe2:: ds 1
-wdbe3:: ds 1
-wdbe4:: ds 1
-wdbe5:: ds 1
-wdbe6:: ds 1
-wdbe7:: ds 1
-wdbe8:: ds 1
-wdbe9:: ds 1
-wdbea:: ds 1
-wdbeb:: ds 1
-wdbec:: ds 1
-wdbed:: ds 1
-wdbee:: ds 1
-wdbef:: ds 1
-wdbf0:: ds 1
-wdbf1:: ds 1
-wdbf2:: ds 1
-wdbf3:: ds 1
-wdbf4:: ds 1
-wdbf5:: ds 1
-wdbf6:: ds 1
-wdbf7:: ds 1
-wdbf8:: ds 1
-wdbf9:: ds 1
-wdbfa:: ds 1
-wdbfb:: ds 1
-wdbfc:: ds 1
-wdbfd:: ds 1
-wdbfe:: ds 1
-wdbff:: ds 1
-wdc00:: ds 1
-wdc01:: ds 1
-wdc02:: ds 1
-wdc03:: ds 1
-wdc04:: ds 1
-wdc05:: ds 1
-wdc06:: ds 1
-wdc07:: ds 1
-wdc08:: ds 1
-wdc09:: ds 1
-wdc0a:: ds 1
-wdc0b:: ds 1
-wdc0c:: ds 1
-wdc0d:: ds 1
-wdc0e:: ds 1
-wdc0f:: ds 1
-wdc10:: ds 1
-wdc11:: ds 1
-wdc12:: ds 1
-wdc13:: ds 1
-wdc14:: ds 1
-wdc15:: ds 1
-wdc16:: ds 1
-wdc17:: ds 1
-wdc18:: ds 1
-wdc19:: ds 1
-wdc1a:: ds 1
-wdc1b:: ds 1
-wdc1c:: ds 1
-wdc1d:: ds 1
-wdc1e:: ds 1
-wdc1f:: ds 1
-wdc20:: ds 1
-wdc21:: ds 1
-wdc22:: ds 1
-wdc23:: ds 1
-wdc24:: ds 1
-wdc25:: ds 1
-wdc26:: ds 1
-wdc27:: ds 1
-wdc28:: ds 1
-wdc29:: ds 1
-wdc2a:: ds 1
-wdc2b:: ds 1
-wdc2c:: ds 1
-wdc2d:: ds 1
-wdc2e:: ds 1
-wdc2f:: ds 1
-wdc30:: ds 1
-wdc31:: ds 1
-wdc32:: ds 1
-wdc33:: ds 1
-wdc34:: ds 1
-wdc35:: ds 1
-wdc36:: ds 1
-wdc37:: ds 1
-wdc38:: ds 1
-wdc39:: ds 1
-wdc3a:: ds 1
-wdc3b:: ds 1
-wdc3c:: ds 1
-wdc3d:: ds 1
-wdc3e:: ds 1
-wdc3f:: ds 1
-wdc40:: ds 1
-wdc41:: ds 1
-wdc42:: ds 1
-wdc43:: ds 1
-wdc44:: ds 1
-wdc45:: ds 1
-wdc46:: ds 1
-wdc47:: ds 1
-wdc48:: ds 1
-wdc49:: ds 1
-wdc4a:: ds 1
-wdc4b:: ds 1
-wdc4c:: ds 1
-wdc4d:: ds 1
-wdc4e:: ds 1
-wdc4f:: ds 1
-wdc50:: ds 1
-wdc51:: ds 1
-wdc52:: ds 1
-wdc53:: ds 1
-wdc54:: ds 1
-wdc55:: ds 1
-wdc56:: ds 1
-wdc57:: ds 1
-wdc58:: ds 1
-wdc59:: ds 1
-wdc5a:: ds 1
-wdc5b:: ds 1
-wdc5c:: ds 1
-wdc5d:: ds 1
-wdc5e:: ds 1
-wdc5f:: ds 1
-wdc60:: ds 1
-wdc61:: ds 1
-wdc62:: ds 1
-wdc63:: ds 1
-wdc64:: ds 1
-wdc65:: ds 1
-wdc66:: ds 1
-wdc67:: ds 1
-wdc68:: ds 1
-wdc69:: ds 1
-wdc6a:: ds 1
-wdc6b:: ds 1
-wdc6c:: ds 1
-wdc6d:: ds 1
-wdc6e:: ds 1
-wdc6f:: ds 1
-wdc70:: ds 1
-wdc71:: ds 1
-wdc72:: ds 1
-wdc73:: ds 1
-wdc74:: ds 1
-wdc75:: ds 1
-wdc76:: ds 1
-wdc77:: ds 1
-wdc78:: ds 1
-wdc79:: ds 1
-wdc7a:: ds 1
-wdc7b:: ds 1
-wdc7c:: ds 1
-wdc7d:: ds 1
-wdc7e:: ds 1
-wdc7f:: ds 1
-wdc80:: ds 1
-wdc81:: ds 1
-wdc82:: ds 1
-wdc83:: ds 1
-wdc84:: ds 1
-wdc85:: ds 1
-wdc86:: ds 1
-wdc87:: ds 1
-wdc88:: ds 1
-wdc89:: ds 1
-wdc8a:: ds 1
-wdc8b:: ds 1
-wdc8c:: ds 1
-wdc8d:: ds 1
-wdc8e:: ds 1
-wdc8f:: ds 1
-wdc90:: ds 1
-wdc91:: ds 1
-wdc92:: ds 1
-wdc93:: ds 1
-wdc94:: ds 1
-wdc95:: ds 1
-wdc96:: ds 1
-wdc97:: ds 1
-wdc98:: ds 1
-wdc99:: ds 1
-wdc9a:: ds 1
-wdc9b:: ds 1
-wdc9c:: ds 1
-wdc9d:: ds 1
-wdc9e:: ds 1
-wdc9f:: ds 1
-wdca0:: ds 1
-wdca1:: ds 1
-wdca2:: ds 1
-wdca3:: ds 1
-wdca4:: ds 1
-wdca5:: ds 1
-wdca6:: ds 1
-wdca7:: ds 1
-wdca8:: ds 1
-wdca9:: ds 1
-wdcaa:: ds 1
-wdcab:: ds 1
-wdcac:: ds 1
-wdcad:: ds 1
-wdcae:: ds 1
-wdcaf:: ds 1
-wdcb0:: ds 1
-wdcb1:: ds 1
-wdcb2:: ds 1
-wdcb3:: ds 1
-wdcb4:: ds 1
-wdcb5:: ds 1
-wdcb6:: ds 1
-wdcb7:: ds 1
-wdcb8:: ds 1
-wdcb9:: ds 1
-wdcba:: ds 1
-wdcbb:: ds 1
-wdcbc:: ds 1
-wdcbd:: ds 1
-wdcbe:: ds 1
-wdcbf:: ds 1
-wdcc0:: ds 1
-wdcc1:: ds 1
-wdcc2:: ds 1
-wdcc3:: ds 1
-wdcc4:: ds 1
-wdcc5:: ds 1
-wdcc6:: ds 1
-wdcc7:: ds 1
-wdcc8:: ds 1
-wdcc9:: ds 1
-wdcca:: ds 1
-wdccb:: ds 1
-wdccc:: ds 1
-wdccd:: ds 1
-wdcce:: ds 1
-wdccf:: ds 1
-wdcd0:: ds 1
-wdcd1:: ds 1
-wdcd2:: ds 1
-wdcd3:: ds 1
-wdcd4:: ds 1
-wdcd5:: ds 1
-wdcd6:: ds 1
-wdcd7:: ds 1
-wdcd8:: ds 1
-wdcd9:: ds 1
-wdcda:: ds 1
-wdcdb:: ds 1
-wdcdc:: ds 1
-wdcdd:: ds 1
-wdcde:: ds 1
-wdcdf:: ds 1
-wdce0:: ds 1
-wdce1:: ds 1
-wdce2:: ds 1
-wdce3:: ds 1
-wdce4:: ds 1
-wdce5:: ds 1
-wdce6:: ds 1
-wdce7:: ds 1
-wdce8:: ds 1
-wdce9:: ds 1
-wdcea:: ds 1
-wdceb:: ds 1
-wdcec:: ds 1
-wdced:: ds 1
-wdcee:: ds 1
-wdcef:: ds 1
-wdcf0:: ds 1
-wdcf1:: ds 1
-wdcf2:: ds 1
-wdcf3:: ds 1
-wdcf4:: ds 1
-wdcf5:: ds 1
-wdcf6:: ds 1
-wdcf7:: ds 1
-wdcf8:: ds 1
-wdcf9:: ds 1
-wdcfa:: ds 1
-wdcfb:: ds 1
-wdcfc:: ds 1
-wdcfd:: ds 1
-wdcfe:: ds 1
-wdcff:: ds 1
-wdd00:: ds 1
-wdd01:: ds 1
-wdd02:: ds 1
-wdd03:: ds 1
-wdd04:: ds 1
-wdd05:: ds 1
-wdd06:: ds 1
-wdd07:: ds 1
-wdd08:: ds 1
-wdd09:: ds 1
-wdd0a:: ds 1
-wdd0b:: ds 1
-wdd0c:: ds 1
-wdd0d:: ds 1
-wdd0e:: ds 1
-wdd0f:: ds 1
-wdd10:: ds 1
-wdd11:: ds 1
-wdd12:: ds 1
-wdd13:: ds 1
-wdd14:: ds 1
-wdd15:: ds 1
-wdd16:: ds 1
-wdd17:: ds 1
-wdd18:: ds 1
-wdd19:: ds 1
-wdd1a:: ds 1
-wdd1b:: ds 1
-wdd1c:: ds 1
-wdd1d:: ds 1
-wdd1e:: ds 1
-wdd1f:: ds 1
-wdd20:: ds 1
-wdd21:: ds 1
-wdd22:: ds 1
-wdd23:: ds 1
-wdd24:: ds 1
-wdd25:: ds 1
-wdd26:: ds 1
-wdd27:: ds 1
-wdd28:: ds 1
-wdd29:: ds 1
-wdd2a:: ds 1
-wdd2b:: ds 1
-wdd2c:: ds 1
-wdd2d:: ds 1
-wdd2e:: ds 1
-wdd2f:: ds 1
-wdd30:: ds 1
-wdd31:: ds 1
-wdd32:: ds 1
-wdd33:: ds 1
-wdd34:: ds 1
-wdd35:: ds 1
-wdd36:: ds 1
-wdd37:: ds 1
-wdd38:: ds 1
-wdd39:: ds 1
-wdd3a:: ds 1
-wdd3b:: ds 1
-wdd3c:: ds 1
-wdd3d:: ds 1
-wdd3e:: ds 1
-wdd3f:: ds 1
-wdd40:: ds 1
-wdd41:: ds 1
-wdd42:: ds 1
-wdd43:: ds 1
-wdd44:: ds 1
-wdd45:: ds 1
-wdd46:: ds 1
-wdd47:: ds 1
-wdd48:: ds 1
-wdd49:: ds 1
-wdd4a:: ds 1
-wdd4b:: ds 1
-wdd4c:: ds 1
-wdd4d:: ds 1
-wdd4e:: ds 1
-wdd4f:: ds 1
-wdd50:: ds 1
-wdd51:: ds 1
-wdd52:: ds 1
-wdd53:: ds 1
-wdd54:: ds 1
-wdd55:: ds 1
-wdd56:: ds 1
-wdd57:: ds 1
-wdd58:: ds 1
-wdd59:: ds 1
-wdd5a:: ds 1
-wdd5b:: ds 1
-wdd5c:: ds 1
-wdd5d:: ds 1
-wdd5e:: ds 1
-wdd5f:: ds 1
-wdd60:: ds 1
-wdd61:: ds 1
-wdd62:: ds 1
-wdd63:: ds 1
-wdd64:: ds 1
-wdd65:: ds 1
-wdd66:: ds 1
-wdd67:: ds 1
-wdd68:: ds 1
-wdd69:: ds 1
-wdd6a:: ds 1
-wdd6b:: ds 1
-wdd6c:: ds 1
-wdd6d:: ds 1
-wdd6e:: ds 1
-wdd6f:: ds 1
-wdd70:: ds 1
-wdd71:: ds 1
-wdd72:: ds 1
-wdd73:: ds 1
-wdd74:: ds 1
-wdd75:: ds 1
-wdd76:: ds 1
-wdd77:: ds 1
-wdd78:: ds 1
-wdd79:: ds 1
-wdd7a:: ds 1
-wdd7b:: ds 1
-wdd7c:: ds 1
-wdd7d:: ds 1
-wdd7e:: ds 1
-wdd7f:: ds 1
-wdd80:: ds 1
-wdd81:: ds 1
-wdd82:: ds 1
-wdd83:: ds 1
-wdd84:: ds 1
-wdd85:: ds 1
-wdd86:: ds 1
-wdd87:: ds 1
-wdd88:: ds 1
-wdd89:: ds 1
-wdd8a:: ds 1
-wdd8b:: ds 1
-wdd8c:: ds 1
-wdd8d:: ds 1
-wdd8e:: ds 1
-wdd8f:: ds 1
-wdd90:: ds 1
-wdd91:: ds 1
-wdd92:: ds 1
-wdd93:: ds 1
-wdd94:: ds 1
-wdd95:: ds 1
-wdd96:: ds 1
-wdd97:: ds 1
-wdd98:: ds 1
-wdd99:: ds 1
-wdd9a:: ds 1
-wdd9b:: ds 1
-wdd9c:: ds 1
-wdd9d:: ds 1
-wdd9e:: ds 1
-wdd9f:: ds 1
-wdda0:: ds 1
-wdda1:: ds 1
-wdda2:: ds 1
-wdda3:: ds 1
-wdda4:: ds 1
-wdda5:: ds 1
-wdda6:: ds 1
-wdda7:: ds 1
-wdda8:: ds 1
-wdda9:: ds 1
-wddaa:: ds 1
-wddab:: ds 1
-wddac:: ds 1
-wddad:: ds 1
-wddae:: ds 1
-wddaf:: ds 1
-wddb0:: ds 1
-wddb1:: ds 1
-wddb2:: ds 1
-wddb3:: ds 1
-wddb4:: ds 1
-wddb5:: ds 1
-wddb6:: ds 1
-wddb7:: ds 1
-wddb8:: ds 1
-wddb9:: ds 1
-wddba:: ds 1
-wddbb:: ds 1
-wddbc:: ds 1
-wddbd:: ds 1
-wddbe:: ds 1
-wddbf:: ds 1
-wddc0:: ds 1
-wddc1:: ds 1
-wddc2:: ds 1
-wddc3:: ds 1
-wddc4:: ds 1
-wddc5:: ds 1
-wddc6:: ds 1
-wddc7:: ds 1
-wddc8:: ds 1
-wddc9:: ds 1
-wddca:: ds 1
-wddcb:: ds 1
-wddcc:: ds 1
-wddcd:: ds 1
-wddce:: ds 1
-wddcf:: ds 1
-wddd0:: ds 1
-wddd1:: ds 1
-wddd2:: ds 1
-wddd3:: ds 1
-wddd4:: ds 1
-wddd5:: ds 1
-wddd6:: ds 1
-wddd7:: ds 1
-wddd8:: ds 1
-wddd9:: ds 1
-wddda:: ds 1
-wdddb:: ds 1
-wdddc:: ds 1
-wdddd:: ds 1
-wddde:: ds 1
-wdddf:: ds 1
-wdde0:: ds 1
-wdde1:: ds 1
-wdde2:: ds 1
-wdde3:: ds 1
-wdde4:: ds 1
-wdde5:: ds 1
-wdde6:: ds 1
-wdde7:: ds 1
-wdde8:: ds 1
-wdde9:: ds 1
-wddea:: ds 1
-wddeb:: ds 1
-wddec:: ds 1
-wdded:: ds 1
-wddee:: ds 1
-wddef:: ds 1
-wddf0:: ds 1
-wddf1:: ds 1
-wddf2:: ds 1
-wddf3:: ds 1
-wddf4:: ds 1
-wddf5:: ds 1
-wddf6:: ds 1
-wddf7:: ds 1
-wddf8:: ds 1
-wddf9:: ds 1
-wddfa:: ds 1
-wddfb:: ds 1
-wddfc:: ds 1
-wddfd:: ds 1
-wddfe:: ds 1
-wddff:: ds 1
-wde00:: ds 1
-wde01:: ds 1
-wde02:: ds 1
-wde03:: ds 1
-wde04:: ds 1
-wde05:: ds 1
-wde06:: ds 1
-wde07:: ds 1
-wde08:: ds 1
-wde09:: ds 1
-wde0a:: ds 1
-wde0b:: ds 1
-wde0c:: ds 1
-wde0d:: ds 1
-wde0e:: ds 1
-wde0f:: ds 1
-wde10:: ds 1
-wde11:: ds 1
-wde12:: ds 1
-wde13:: ds 1
-wde14:: ds 1
-wde15:: ds 1
-wde16:: ds 1
-wde17:: ds 1
-wde18:: ds 1
-wde19:: ds 1
-wde1a:: ds 1
-wde1b:: ds 1
-wde1c:: ds 1
-wde1d:: ds 1
-wde1e:: ds 1
-wde1f:: ds 1
-wde20:: ds 1
-wde21:: ds 1
-wde22:: ds 1
-wde23:: ds 1
-wde24:: ds 1
-wde25:: ds 1
-wde26:: ds 1
-wde27:: ds 1
-wde28:: ds 1
-wde29:: ds 1
-wde2a:: ds 1
-wde2b:: ds 1
-wde2c:: ds 1
-wde2d:: ds 1
-wde2e:: ds 1
-wde2f:: ds 1
-wde30:: ds 1
-wde31:: ds 1
-wde32:: ds 1
-wde33:: ds 1
-wde34:: ds 1
-wde35:: ds 1
-wde36:: ds 1
-wde37:: ds 1
-wde38:: ds 1
-wde39:: ds 1
-wde3a:: ds 1
-wde3b:: ds 1
-wde3c:: ds 1
-wde3d:: ds 1
-wde3e:: ds 1
-wde3f:: ds 1
-wde40:: ds 1
-wde41:: ds 1
-wde42:: ds 1
-wde43:: ds 1
-wde44:: ds 1
-wde45:: ds 1
-wde46:: ds 1
-wde47:: ds 1
-wde48:: ds 1
-wde49:: ds 1
-wde4a:: ds 1
-wde4b:: ds 1
-wde4c:: ds 1
-wde4d:: ds 1
-wde4e:: ds 1
-wde4f:: ds 1
-wde50:: ds 1
-wde51:: ds 1
-wde52:: ds 1
-wde53:: ds 1
-wde54:: ds 1
-wde55:: ds 1
-wde56:: ds 1
-wde57:: ds 1
-wde58:: ds 1
-wde59:: ds 1
-wde5a:: ds 1
-wde5b:: ds 1
-wde5c:: ds 1
-wde5d:: ds 1
-wde5e:: ds 1
-wde5f:: ds 1
-wde60:: ds 1
-wde61:: ds 1
-wde62:: ds 1
-wde63:: ds 1
-wde64:: ds 1
-wde65:: ds 1
-wde66:: ds 1
-wde67:: ds 1
-wde68:: ds 1
-wde69:: ds 1
-wde6a:: ds 1
-wde6b:: ds 1
-wde6c:: ds 1
-wde6d:: ds 1
-wde6e:: ds 1
-wde6f:: ds 1
-wde70:: ds 1
-wde71:: ds 1
-wde72:: ds 1
-wde73:: ds 1
-wde74:: ds 1
-wde75:: ds 1
-wde76:: ds 1
-wde77:: ds 1
-wde78:: ds 1
-wde79:: ds 1
-wde7a:: ds 1
-wde7b:: ds 1
-wde7c:: ds 1
-wde7d:: ds 1
-wde7e:: ds 1
-wde7f:: ds 1
-wde80:: ds 1
-wde81:: ds 1
-wde82:: ds 1
-wde83:: ds 1
-wde84:: ds 1
-wde85:: ds 1
-wde86:: ds 1
-wde87:: ds 1
-wde88:: ds 1
-wde89:: ds 1
-wde8a:: ds 1
-wde8b:: ds 1
-wde8c:: ds 1
-wde8d:: ds 1
-wde8e:: ds 1
-wde8f:: ds 1
-wde90:: ds 1
-wde91:: ds 1
-wde92:: ds 1
-wde93:: ds 1
-wde94:: ds 1
-wde95:: ds 1
-wde96:: ds 1
-wde97:: ds 1
-wde98:: ds 1
-wde99:: ds 1
-wde9a:: ds 1
-wde9b:: ds 1
-wde9c:: ds 1
-wde9d:: ds 1
-wde9e:: ds 1
-wde9f:: ds 1
-wdea0:: ds 1
-wdea1:: ds 1
-wdea2:: ds 1
-wdea3:: ds 1
-wdea4:: ds 1
-wdea5:: ds 1
-wdea6:: ds 1
-wdea7:: ds 1
-wdea8:: ds 1
-wdea9:: ds 1
-wdeaa:: ds 1
-wdeab:: ds 1
-wdeac:: ds 1
-wdead:: ds 1
-wdeae:: ds 1
-wdeaf:: ds 1
-wdeb0:: ds 1
-wdeb1:: ds 1
-wdeb2:: ds 1
-wdeb3:: ds 1
-wdeb4:: ds 1
-wdeb5:: ds 1
-wdeb6:: ds 1
-wdeb7:: ds 1
-wdeb8:: ds 1
-wdeb9:: ds 1
-wdeba:: ds 1
-wdebb:: ds 1
-wdebc:: ds 1
-wdebd:: ds 1
-wdebe:: ds 1
-wdebf:: ds 1
-wdec0:: ds 1
-wdec1:: ds 1
-wdec2:: ds 1
-wdec3:: ds 1
-wdec4:: ds 1
-wdec5:: ds 1
-wdec6:: ds 1
-wdec7:: ds 1
-wdec8:: ds 1
-wdec9:: ds 1
-wdeca:: ds 1
-wdecb:: ds 1
-wdecc:: ds 1
-wdecd:: ds 1
-wdece:: ds 1
-wdecf:: ds 1
-wded0:: ds 1
-wded1:: ds 1
-wded2:: ds 1
-wded3:: ds 1
-wded4:: ds 1
-wded5:: ds 1
-wded6:: ds 1
-wded7:: ds 1
-wded8:: ds 1
-wded9:: ds 1
-wdeda:: ds 1
-wdedb:: ds 1
-wdedc:: ds 1
-wdedd:: ds 1
-wdede:: ds 1
-wdedf:: ds 1
-wdee0:: ds 1
-wdee1:: ds 1
-wdee2:: ds 1
-wdee3:: ds 1
-wdee4:: ds 1
-wdee5:: ds 1
-wdee6:: ds 1
-wdee7:: ds 1
-wdee8:: ds 1
-wdee9:: ds 1
-wdeea:: ds 1
-wdeeb:: ds 1
-wdeec:: ds 1
-wdeed:: ds 1
-wdeee:: ds 1
-wdeef:: ds 1
-wdef0:: ds 1
-wdef1:: ds 1
-wdef2:: ds 1
-wdef3:: ds 1
-wdef4:: ds 1
-wdef5:: ds 1
-wdef6:: ds 1
-wdef7:: ds 1
-wdef8:: ds 1
-wdef9:: ds 1
-wdefa:: ds 1
-wdefb:: ds 1
-wdefc:: ds 1
-wdefd:: ds 1
-wdefe:: ds 1
-wdeff:: ds 1
+wd569:: ds 1 ; d569
+wd56a:: ds 1 ; d56a
+wd56b:: ds 1 ; d56b
+wd56c:: ds 1 ; d56c
+wd56d:: ds 1 ; d56d
+wd56e:: ds 1 ; d56e
+wd56f:: ds 1 ; d56f
+wd570:: ds 1 ; d570
+wd571:: ds 1 ; d571
+wd572:: ds 1 ; d572
+wd573:: ds 1 ; d573
+wd574:: ds 1 ; d574
+wd575:: ds 1 ; d575
+wd576:: ds 1 ; d576
+wd577:: ds 1 ; d577
+wd578:: ds 1 ; d578
+wd579:: ds 1 ; d579
+wd57a:: ds 1 ; d57a
+wd57b:: ds 1 ; d57b
+wd57c:: ds 1 ; d57c
+wd57d:: ds 1 ; d57d
+wd57e:: ds 1 ; d57e
+wd57f:: ds 1 ; d57f
+wd580:: ds 1 ; d580
+wd581:: ds 1 ; d581
+wd582:: ds 1 ; d582
+wd583:: ds 1 ; d583
+wd584:: ds 1 ; d584
+wd585:: ds 1 ; d585
+wd586:: ds 1 ; d586
+wd587:: ds 1 ; d587
+wd588:: ds 1 ; d588
+wd589:: ds 1 ; d589
+wd58a:: ds 1 ; d58a
+wd58b:: ds 1 ; d58b
+wd58c:: ds 1 ; d58c
+wd58d:: ds 1 ; d58d
+wd58e:: ds 1 ; d58e
+wd58f:: ds 1 ; d58f
+wd590:: ds 1 ; d590
+wd591:: ds 1 ; d591
+wd592:: ds 1 ; d592
+wd593:: ds 1 ; d593
+wd594:: ds 1 ; d594
+wd595:: ds 1 ; d595
+wd596:: ds 1 ; d596
+wd597:: ds 1 ; d597
+wd598:: ds 1 ; d598
+wd599:: ds 1 ; d599
+wd59a:: ds 1 ; d59a
+wd59b:: ds 1 ; d59b
+wd59c:: ds 1 ; d59c
+wd59d:: ds 1 ; d59d
+wd59e:: ds 1 ; d59e
+wd59f:: ds 1 ; d59f
+wd5a0:: ds 1 ; d5a0
+wd5a1:: ds 1 ; d5a1
+wd5a2:: ds 1 ; d5a2
+wd5a3:: ds 1 ; d5a3
+wd5a4:: ds 1 ; d5a4
+wd5a5:: ds 1 ; d5a5
+wd5a6:: ds 1 ; d5a6
+wd5a7:: ds 1 ; d5a7
+wd5a8:: ds 1 ; d5a8
+wd5a9:: ds 1 ; d5a9
+wd5aa:: ds 1 ; d5aa
+wd5ab:: ds 1 ; d5ab
+wd5ac:: ds 1 ; d5ac
+wd5ad:: ds 1 ; d5ad
+wd5ae:: ds 1 ; d5ae
+wd5af:: ds 1 ; d5af
+wd5b0:: ds 1 ; d5b0
+wd5b1:: ds 1 ; d5b1
+wd5b2:: ds 1 ; d5b2
+wd5b3:: ds 1 ; d5b3
+wd5b4:: ds 1 ; d5b4
+wd5b5:: ds 1 ; d5b5
+wd5b6:: ds 1 ; d5b6
+wd5b7:: ds 1 ; d5b7
+wd5b8:: ds 1 ; d5b8
+wd5b9:: ds 1 ; d5b9
+wd5ba:: ds 1 ; d5ba
+wd5bb:: ds 1 ; d5bb
+wd5bc:: ds 1 ; d5bc
+wd5bd:: ds 1 ; d5bd
+wd5be:: ds 1 ; d5be
+wd5bf:: ds 1 ; d5bf
+wd5c0:: ds 1 ; d5c0
+wd5c1:: ds 1 ; d5c1
+wd5c2:: ds 1 ; d5c2
+wd5c3:: ds 1 ; d5c3
+wd5c4:: ds 1 ; d5c4
+wd5c5:: ds 1 ; d5c5
+wd5c6:: ds 1 ; d5c6
+wd5c7:: ds 1 ; d5c7
+wd5c8:: ds 1 ; d5c8
+wd5c9:: ds 1 ; d5c9
+wd5ca:: ds 1 ; d5ca
+wd5cb:: ds 1 ; d5cb
+wd5cc:: ds 1 ; d5cc
+wd5cd:: ds 1 ; d5cd
+wd5ce:: ds 1 ; d5ce
+wd5cf:: ds 1 ; d5cf
+wd5d0:: ds 1 ; d5d0
+wd5d1:: ds 1 ; d5d1
+wd5d2:: ds 1 ; d5d2
+wd5d3:: ds 1 ; d5d3
+wd5d4:: ds 1 ; d5d4
+wd5d5:: ds 1 ; d5d5
+wd5d6:: ds 1 ; d5d6
+wd5d7:: ds 1 ; d5d7
+wd5d8:: ds 1 ; d5d8
+wd5d9:: ds 1 ; d5d9
+wd5da:: ds 1 ; d5da
+wd5db:: ds 1 ; d5db
+wd5dc:: ds 1 ; d5dc
+wd5dd:: ds 1 ; d5dd
+wd5de:: ds 1 ; d5de
+wd5df:: ds 1 ; d5df
+wd5e0:: ds 1 ; d5e0
+wd5e1:: ds 1 ; d5e1
+wd5e2:: ds 1 ; d5e2
+wd5e3:: ds 1 ; d5e3
+wd5e4:: ds 1 ; d5e4
+wd5e5:: ds 1 ; d5e5
+wd5e6:: ds 1 ; d5e6
+wd5e7:: ds 1 ; d5e7
+wd5e8:: ds 1 ; d5e8
+wd5e9:: ds 1 ; d5e9
+wd5ea:: ds 1 ; d5ea
+wd5eb:: ds 1 ; d5eb
+wd5ec:: ds 1 ; d5ec
+wd5ed:: ds 1 ; d5ed
+wd5ee:: ds 1 ; d5ee
+wd5ef:: ds 1 ; d5ef
+wd5f0:: ds 1 ; d5f0
+wd5f1:: ds 1 ; d5f1
+wd5f2:: ds 1 ; d5f2
+wd5f3:: ds 1 ; d5f3
+wd5f4:: ds 1 ; d5f4
+wd5f5:: ds 1 ; d5f5
+wd5f6:: ds 1 ; d5f6
+wd5f7:: ds 1 ; d5f7
+wd5f8:: ds 1 ; d5f8
+wd5f9:: ds 1 ; d5f9
+wd5fa:: ds 1 ; d5fa
+wd5fb:: ds 1 ; d5fb
+wd5fc:: ds 1 ; d5fc
+wd5fd:: ds 1 ; d5fd
+wd5fe:: ds 1 ; d5fe
+wd5ff:: ds 1 ; d5ff
+wd600:: ds 1 ; d600
+wd601:: ds 1 ; d601
+wd602:: ds 1 ; d602
+wd603:: ds 1 ; d603
+wd604:: ds 1 ; d604
+wd605:: ds 1 ; d605
+wd606:: ds 1 ; d606
+wd607:: ds 1 ; d607
+wd608:: ds 1 ; d608
+wd609:: ds 1 ; d609
+wd60a:: ds 1 ; d60a
+wd60b:: ds 1 ; d60b
+wd60c:: ds 1 ; d60c
+wd60d:: ds 1 ; d60d
+wd60e:: ds 1 ; d60e
+wd60f:: ds 1 ; d60f
+wd610:: ds 1 ; d610
+wd611:: ds 1 ; d611
+wd612:: ds 1 ; d612
+wd613:: ds 1 ; d613
+wd614:: ds 1 ; d614
+wd615:: ds 1 ; d615
+wd616:: ds 1 ; d616
+wd617:: ds 1 ; d617
+wd618:: ds 1 ; d618
+wd619:: ds 1 ; d619
+wd61a:: ds 1 ; d61a
+wd61b:: ds 1 ; d61b
+wd61c:: ds 1 ; d61c
+wd61d:: ds 1 ; d61d
+wd61e:: ds 1 ; d61e
+wd61f:: ds 1 ; d61f
+wd620:: ds 1 ; d620
+wd621:: ds 1 ; d621
+wd622:: ds 1 ; d622
+wd623:: ds 1 ; d623
+wd624:: ds 1 ; d624
+wd625:: ds 1 ; d625
+wd626:: ds 1 ; d626
+wd627:: ds 1 ; d627
+wd628:: ds 1 ; d628
+wd629:: ds 1 ; d629
+wd62a:: ds 1 ; d62a
+wd62b:: ds 1 ; d62b
+wd62c:: ds 1 ; d62c
+wd62d:: ds 1 ; d62d
+wd62e:: ds 1 ; d62e
+wd62f:: ds 1 ; d62f
+wd630:: ds 1 ; d630
+wd631:: ds 1 ; d631
+wd632:: ds 1 ; d632
+wd633:: ds 1 ; d633
+wd634:: ds 1 ; d634
+wd635:: ds 1 ; d635
+wd636:: ds 1 ; d636
+wd637:: ds 1 ; d637
+wd638:: ds 1 ; d638
+wd639:: ds 1 ; d639
+wd63a:: ds 1 ; d63a
+wd63b:: ds 1 ; d63b
+wd63c:: ds 1 ; d63c
+wd63d:: ds 1 ; d63d
+wd63e:: ds 1 ; d63e
+wd63f:: ds 1 ; d63f
+wd640:: ds 1 ; d640
+wd641:: ds 1 ; d641
+wd642:: ds 1 ; d642
+wd643:: ds 1 ; d643
+wd644:: ds 1 ; d644
+wd645:: ds 1 ; d645
+wd646:: ds 1 ; d646
+wd647:: ds 1 ; d647
+wd648:: ds 1 ; d648
+wd649:: ds 1 ; d649
+wd64a:: ds 1 ; d64a
+wd64b:: ds 1 ; d64b
+wd64c:: ds 1 ; d64c
+wd64d:: ds 1 ; d64d
+wd64e:: ds 1 ; d64e
+wd64f:: ds 1 ; d64f
+wd650:: ds 1 ; d650
+wd651:: ds 1 ; d651
+wd652:: ds 1 ; d652
+wd653:: ds 1 ; d653
+wd654:: ds 1 ; d654
+wd655:: ds 1 ; d655
+wd656:: ds 1 ; d656
+wd657:: ds 1 ; d657
+wd658:: ds 1 ; d658
+wd659:: ds 1 ; d659
+wd65a:: ds 1 ; d65a
+wd65b:: ds 1 ; d65b
+wd65c:: ds 1 ; d65c
+wd65d:: ds 1 ; d65d
+wd65e:: ds 1 ; d65e
+wd65f:: ds 1 ; d65f
+wd660:: ds 1 ; d660
+wd661:: ds 1 ; d661
+wd662:: ds 1 ; d662
+wd663:: ds 1 ; d663
+wd664:: ds 1 ; d664
+wd665:: ds 1 ; d665
+wd666:: ds 1 ; d666
+wd667:: ds 1 ; d667
+wd668:: ds 1 ; d668
+wd669:: ds 1 ; d669
+wd66a:: ds 1 ; d66a
+wd66b:: ds 1 ; d66b
+wd66c:: ds 1 ; d66c
+wd66d:: ds 1 ; d66d
+wd66e:: ds 1 ; d66e
+wd66f:: ds 1 ; d66f
+wd670:: ds 1 ; d670
+wd671:: ds 1 ; d671
+wd672:: ds 1 ; d672
+wd673:: ds 1 ; d673
+wd674:: ds 1 ; d674
+wd675:: ds 1 ; d675
+wd676:: ds 1 ; d676
+wd677:: ds 1 ; d677
+wd678:: ds 1 ; d678
+wd679:: ds 1 ; d679
+wd67a:: ds 1 ; d67a
+wd67b:: ds 1 ; d67b
+wd67c:: ds 1 ; d67c
+wd67d:: ds 1 ; d67d
+wd67e:: ds 1 ; d67e
+wd67f:: ds 1 ; d67f
+wd680:: ds 1 ; d680
+wd681:: ds 1 ; d681
+wd682:: ds 1 ; d682
+wd683:: ds 1 ; d683
+wd684:: ds 1 ; d684
+wd685:: ds 1 ; d685
+wd686:: ds 1 ; d686
+wd687:: ds 1 ; d687
+wd688:: ds 1 ; d688
+wd689:: ds 1 ; d689
+wd68a:: ds 1 ; d68a
+wd68b:: ds 1 ; d68b
+wd68c:: ds 1 ; d68c
+wd68d:: ds 1 ; d68d
+wd68e:: ds 1 ; d68e
+wd68f:: ds 1 ; d68f
+wd690:: ds 1 ; d690
+wd691:: ds 1 ; d691
+wd692:: ds 1 ; d692
+wd693:: ds 1 ; d693
+wd694:: ds 1 ; d694
+wd695:: ds 1 ; d695
+wd696:: ds 1 ; d696
+wd697:: ds 1 ; d697
+wd698:: ds 1 ; d698
+wd699:: ds 1 ; d699
+wd69a:: ds 1 ; d69a
+wd69b:: ds 1 ; d69b
+wd69c:: ds 1 ; d69c
+wd69d:: ds 1 ; d69d
+wd69e:: ds 1 ; d69e
+wd69f:: ds 1 ; d69f
+wd6a0:: ds 1 ; d6a0
+wd6a1:: ds 1 ; d6a1
+wd6a2:: ds 1 ; d6a2
+wd6a3:: ds 1 ; d6a3
+wd6a4:: ds 1 ; d6a4
+wd6a5:: ds 1 ; d6a5
+wd6a6:: ds 1 ; d6a6
+wd6a7:: ds 1 ; d6a7
+wd6a8:: ds 1 ; d6a8
+wd6a9:: ds 1 ; d6a9
+wd6aa:: ds 1 ; d6aa
+wd6ab:: ds 1 ; d6ab
+wd6ac:: ds 1 ; d6ac
+wd6ad:: ds 1 ; d6ad
+wd6ae:: ds 1 ; d6ae
+wd6af:: ds 1 ; d6af
+wd6b0:: ds 1 ; d6b0
+wd6b1:: ds 1 ; d6b1
+wd6b2:: ds 1 ; d6b2
+wd6b3:: ds 1 ; d6b3
+wd6b4:: ds 1 ; d6b4
+wd6b5:: ds 1 ; d6b5
+wd6b6:: ds 1 ; d6b6
+wd6b7:: ds 1 ; d6b7
+wd6b8:: ds 1 ; d6b8
+wd6b9:: ds 1 ; d6b9
+wd6ba:: ds 1 ; d6ba
+wd6bb:: ds 1 ; d6bb
+wd6bc:: ds 1 ; d6bc
+wd6bd:: ds 1 ; d6bd
+wd6be:: ds 1 ; d6be
+wd6bf:: ds 1 ; d6bf
+wd6c0:: ds 1 ; d6c0
+wd6c1:: ds 1 ; d6c1
+wd6c2:: ds 1 ; d6c2
+wd6c3:: ds 1 ; d6c3
+wd6c4:: ds 1 ; d6c4
+wd6c5:: ds 1 ; d6c5
+wd6c6:: ds 1 ; d6c6
+wd6c7:: ds 1 ; d6c7
+wd6c8:: ds 1 ; d6c8
+wd6c9:: ds 1 ; d6c9
+wd6ca:: ds 1 ; d6ca
+wd6cb:: ds 1 ; d6cb
+wd6cc:: ds 1 ; d6cc
+wd6cd:: ds 1 ; d6cd
+wd6ce:: ds 1 ; d6ce
+wd6cf:: ds 1 ; d6cf
+wd6d0:: ds 1 ; d6d0
+wd6d1:: ds 1 ; d6d1
+wd6d2:: ds 1 ; d6d2
+wd6d3:: ds 1 ; d6d3
+wd6d4:: ds 1 ; d6d4
+wd6d5:: ds 1 ; d6d5
+wd6d6:: ds 1 ; d6d6
+wd6d7:: ds 1 ; d6d7
+wd6d8:: ds 1 ; d6d8
+wd6d9:: ds 1 ; d6d9
+wd6da:: ds 1 ; d6da
+wd6db:: ds 1 ; d6db
+wd6dc:: ds 1 ; d6dc
+wd6dd:: ds 1 ; d6dd
+wd6de:: ds 1 ; d6de
+wd6df:: ds 1 ; d6df
+wd6e0:: ds 1 ; d6e0
+wd6e1:: ds 1 ; d6e1
+wd6e2:: ds 1 ; d6e2
+wd6e3:: ds 1 ; d6e3
+wd6e4:: ds 1 ; d6e4
+wd6e5:: ds 1 ; d6e5
+wd6e6:: ds 1 ; d6e6
+wd6e7:: ds 1 ; d6e7
+wd6e8:: ds 1 ; d6e8
+wd6e9:: ds 1 ; d6e9
+wd6ea:: ds 1 ; d6ea
+wd6eb:: ds 1 ; d6eb
+wd6ec:: ds 1 ; d6ec
+wd6ed:: ds 1 ; d6ed
+wd6ee:: ds 1 ; d6ee
+wd6ef:: ds 1 ; d6ef
+wd6f0:: ds 1 ; d6f0
+wd6f1:: ds 1 ; d6f1
+wd6f2:: ds 1 ; d6f2
+wd6f3:: ds 1 ; d6f3
+wd6f4:: ds 1 ; d6f4
+wd6f5:: ds 1 ; d6f5
+wd6f6:: ds 1 ; d6f6
+wd6f7:: ds 1 ; d6f7
+wd6f8:: ds 1 ; d6f8
+wd6f9:: ds 1 ; d6f9
+wd6fa:: ds 1 ; d6fa
+wd6fb:: ds 1 ; d6fb
+wd6fc:: ds 1 ; d6fc
+wd6fd:: ds 1 ; d6fd
+wd6fe:: ds 1 ; d6fe
+wd6ff:: ds 1 ; d6ff
+wd700:: ds 1 ; d700
+wd701:: ds 1 ; d701
+wd702:: ds 1 ; d702
+wd703:: ds 1 ; d703
+wd704:: ds 1 ; d704
+wd705:: ds 1 ; d705
+wd706:: ds 1 ; d706
+wd707:: ds 1 ; d707
+wd708:: ds 1 ; d708
+wd709:: ds 1 ; d709
+wd70a:: ds 1 ; d70a
+wd70b:: ds 1 ; d70b
+wd70c:: ds 1 ; d70c
+wd70d:: ds 1 ; d70d
+wd70e:: ds 1 ; d70e
+wd70f:: ds 1 ; d70f
+wd710:: ds 1 ; d710
+wd711:: ds 1 ; d711
+wd712:: ds 1 ; d712
+wd713:: ds 1 ; d713
+wd714:: ds 1 ; d714
+wd715:: ds 1 ; d715
+wd716:: ds 1 ; d716
+wd717:: ds 1 ; d717
+wd718:: ds 1 ; d718
+wd719:: ds 1 ; d719
+wd71a:: ds 1 ; d71a
+wd71b:: ds 1 ; d71b
+wd71c:: ds 1 ; d71c
+wd71d:: ds 1 ; d71d
+wd71e:: ds 1 ; d71e
+wd71f:: ds 1 ; d71f
+wd720:: ds 1 ; d720
+wd721:: ds 1 ; d721
+wd722:: ds 1 ; d722
+wd723:: ds 1 ; d723
+wd724:: ds 1 ; d724
+wd725:: ds 1 ; d725
+wd726:: ds 1 ; d726
+wd727:: ds 1 ; d727
+wd728:: ds 1 ; d728
+wd729:: ds 1 ; d729
+wd72a:: ds 1 ; d72a
+wd72b:: ds 1 ; d72b
+wd72c:: ds 1 ; d72c
+wd72d:: ds 1 ; d72d
+wd72e:: ds 1 ; d72e
+wd72f:: ds 1 ; d72f
+wd730:: ds 1 ; d730
+wd731:: ds 1 ; d731
+wd732:: ds 1 ; d732
+wd733:: ds 1 ; d733
+wd734:: ds 1 ; d734
+wd735:: ds 1 ; d735
+wd736:: ds 1 ; d736
+wd737:: ds 1 ; d737
+wd738:: ds 1 ; d738
+wd739:: ds 1 ; d739
+wd73a:: ds 1 ; d73a
+wd73b:: ds 1 ; d73b
+wd73c:: ds 1 ; d73c
+wd73d:: ds 1 ; d73d
+wd73e:: ds 1 ; d73e
+wd73f:: ds 1 ; d73f
+wd740:: ds 1 ; d740
+wd741:: ds 1 ; d741
+wd742:: ds 1 ; d742
+wd743:: ds 1 ; d743
+wd744:: ds 1 ; d744
+wd745:: ds 1 ; d745
+wd746:: ds 1 ; d746
+wd747:: ds 1 ; d747
+wd748:: ds 1 ; d748
+wd749:: ds 1 ; d749
+wd74a:: ds 1 ; d74a
+wd74b:: ds 1 ; d74b
+wd74c:: ds 1 ; d74c
+wd74d:: ds 1 ; d74d
+wd74e:: ds 1 ; d74e
+wd74f:: ds 1 ; d74f
+wd750:: ds 1 ; d750
+wd751:: ds 1 ; d751
+wd752:: ds 1 ; d752
+wd753:: ds 1 ; d753
+wd754:: ds 1 ; d754
+wd755:: ds 1 ; d755
+wd756:: ds 1 ; d756
+wd757:: ds 1 ; d757
+wd758:: ds 1 ; d758
+wd759:: ds 1 ; d759
+wd75a:: ds 1 ; d75a
+wd75b:: ds 1 ; d75b
+wd75c:: ds 1 ; d75c
+wd75d:: ds 1 ; d75d
+wd75e:: ds 1 ; d75e
+wd75f:: ds 1 ; d75f
+wd760:: ds 1 ; d760
+wd761:: ds 1 ; d761
+wd762:: ds 1 ; d762
+wd763:: ds 1 ; d763
+wd764:: ds 1 ; d764
+wd765:: ds 1 ; d765
+wd766:: ds 1 ; d766
+wd767:: ds 1 ; d767
+wd768:: ds 1 ; d768
+wd769:: ds 1 ; d769
+wd76a:: ds 1 ; d76a
+wd76b:: ds 1 ; d76b
+wd76c:: ds 1 ; d76c
+wd76d:: ds 1 ; d76d
+wd76e:: ds 1 ; d76e
+wd76f:: ds 1 ; d76f
+wd770:: ds 1 ; d770
+wd771:: ds 1 ; d771
+wd772:: ds 1 ; d772
+wd773:: ds 1 ; d773
+wd774:: ds 1 ; d774
+wd775:: ds 1 ; d775
+wd776:: ds 1 ; d776
+wd777:: ds 1 ; d777
+wd778:: ds 1 ; d778
+wd779:: ds 1 ; d779
+wd77a:: ds 1 ; d77a
+wd77b:: ds 1 ; d77b
+wd77c:: ds 1 ; d77c
+wd77d:: ds 1 ; d77d
+wd77e:: ds 1 ; d77e
+wd77f:: ds 1 ; d77f
+wd780:: ds 1 ; d780
+wd781:: ds 1 ; d781
+wd782:: ds 1 ; d782
+wd783:: ds 1 ; d783
+wd784:: ds 1 ; d784
+wd785:: ds 1 ; d785
+wd786:: ds 1 ; d786
+wd787:: ds 1 ; d787
+wd788:: ds 1 ; d788
+wd789:: ds 1 ; d789
+wd78a:: ds 1 ; d78a
+wd78b:: ds 1 ; d78b
+wd78c:: ds 1 ; d78c
+wd78d:: ds 1 ; d78d
+wd78e:: ds 1 ; d78e
+wd78f:: ds 1 ; d78f
+wd790:: ds 1 ; d790
+wd791:: ds 1 ; d791
+wd792:: ds 1 ; d792
+wd793:: ds 1 ; d793
+wd794:: ds 1 ; d794
+wd795:: ds 1 ; d795
+wd796:: ds 1 ; d796
+wd797:: ds 1 ; d797
+wd798:: ds 1 ; d798
+wd799:: ds 1 ; d799
+wd79a:: ds 1 ; d79a
+wd79b:: ds 1 ; d79b
+wd79c:: ds 1 ; d79c
+wd79d:: ds 1 ; d79d
+wd79e:: ds 1 ; d79e
+wd79f:: ds 1 ; d79f
+wd7a0:: ds 1 ; d7a0
+wd7a1:: ds 1 ; d7a1
+wd7a2:: ds 1 ; d7a2
+wd7a3:: ds 1 ; d7a3
+wd7a4:: ds 1 ; d7a4
+wd7a5:: ds 1 ; d7a5
+wd7a6:: ds 1 ; d7a6
+wd7a7:: ds 1 ; d7a7
+wd7a8:: ds 1 ; d7a8
+wd7a9:: ds 1 ; d7a9
+wd7aa:: ds 1 ; d7aa
+wd7ab:: ds 1 ; d7ab
+wd7ac:: ds 1 ; d7ac
+wd7ad:: ds 1 ; d7ad
+wd7ae:: ds 1 ; d7ae
+wd7af:: ds 1 ; d7af
+wd7b0:: ds 1 ; d7b0
+wd7b1:: ds 1 ; d7b1
+wd7b2:: ds 1 ; d7b2
+wd7b3:: ds 1 ; d7b3
+wd7b4:: ds 1 ; d7b4
+wd7b5:: ds 1 ; d7b5
+wd7b6:: ds 1 ; d7b6
+wd7b7:: ds 1 ; d7b7
+wd7b8:: ds 1 ; d7b8
+wd7b9:: ds 1 ; d7b9
+wd7ba:: ds 1 ; d7ba
+wd7bb:: ds 1 ; d7bb
+wd7bc:: ds 1 ; d7bc
+wd7bd:: ds 1 ; d7bd
+wd7be:: ds 1 ; d7be
+wd7bf:: ds 1 ; d7bf
+wd7c0:: ds 1 ; d7c0
+wd7c1:: ds 1 ; d7c1
+wd7c2:: ds 1 ; d7c2
+wd7c3:: ds 1 ; d7c3
+wd7c4:: ds 1 ; d7c4
+wd7c5:: ds 1 ; d7c5
+wd7c6:: ds 1 ; d7c6
+wd7c7:: ds 1 ; d7c7
+wd7c8:: ds 1 ; d7c8
+wd7c9:: ds 1 ; d7c9
+wd7ca:: ds 1 ; d7ca
+wd7cb:: ds 1 ; d7cb
+wd7cc:: ds 1 ; d7cc
+wd7cd:: ds 1 ; d7cd
+wd7ce:: ds 1 ; d7ce
+wd7cf:: ds 1 ; d7cf
+wd7d0:: ds 1 ; d7d0
+wd7d1:: ds 1 ; d7d1
+wd7d2:: ds 1 ; d7d2
+wd7d3:: ds 1 ; d7d3
+wd7d4:: ds 1 ; d7d4
+wd7d5:: ds 1 ; d7d5
+wd7d6:: ds 1 ; d7d6
+wd7d7:: ds 1 ; d7d7
+wd7d8:: ds 1 ; d7d8
+wd7d9:: ds 1 ; d7d9
+wd7da:: ds 1 ; d7da
+wd7db:: ds 1 ; d7db
+wd7dc:: ds 1 ; d7dc
+wd7dd:: ds 1 ; d7dd
+wd7de:: ds 1 ; d7de
+wd7df:: ds 1 ; d7df
+wd7e0:: ds 1 ; d7e0
+wd7e1:: ds 1 ; d7e1
+wd7e2:: ds 1 ; d7e2
+wd7e3:: ds 1 ; d7e3
+wd7e4:: ds 1 ; d7e4
+wd7e5:: ds 1 ; d7e5
+wd7e6:: ds 1 ; d7e6
+wd7e7:: ds 1 ; d7e7
+wd7e8:: ds 1 ; d7e8
+wd7e9:: ds 1 ; d7e9
+wd7ea:: ds 1 ; d7ea
+wd7eb:: ds 1 ; d7eb
+wd7ec:: ds 1 ; d7ec
+wd7ed:: ds 1 ; d7ed
+wd7ee:: ds 1 ; d7ee
+wd7ef:: ds 1 ; d7ef
+wd7f0:: ds 1 ; d7f0
+wd7f1:: ds 1 ; d7f1
+wd7f2:: ds 1 ; d7f2
+wd7f3:: ds 1 ; d7f3
+wd7f4:: ds 1 ; d7f4
+wd7f5:: ds 1 ; d7f5
+wd7f6:: ds 1 ; d7f6
+wd7f7:: ds 1 ; d7f7
+wd7f8:: ds 1 ; d7f8
+wd7f9:: ds 1 ; d7f9
+wd7fa:: ds 1 ; d7fa
+wd7fb:: ds 1 ; d7fb
+wd7fc:: ds 1 ; d7fc
+wd7fd:: ds 1 ; d7fd
+wd7fe:: ds 1 ; d7fe
+wd7ff:: ds 1 ; d7ff
+wd800:: ds 1 ; d800
+wd801:: ds 1 ; d801
+wd802:: ds 1 ; d802
+wd803:: ds 1 ; d803
+wd804:: ds 1 ; d804
+wd805:: ds 1 ; d805
+wd806:: ds 1 ; d806
+wd807:: ds 1 ; d807
+wd808:: ds 1 ; d808
+wd809:: ds 1 ; d809
+wd80a:: ds 1 ; d80a
+wd80b:: ds 1 ; d80b
+wd80c:: ds 1 ; d80c
+wd80d:: ds 1 ; d80d
+wd80e:: ds 1 ; d80e
+wd80f:: ds 1 ; d80f
+wd810:: ds 1 ; d810
+wd811:: ds 1 ; d811
+wd812:: ds 1 ; d812
+wd813:: ds 1 ; d813
+wd814:: ds 1 ; d814
+wd815:: ds 1 ; d815
+wd816:: ds 1 ; d816
+wd817:: ds 1 ; d817
+wd818:: ds 1 ; d818
+wd819:: ds 1 ; d819
+wd81a:: ds 1 ; d81a
+wd81b:: ds 1 ; d81b
+wd81c:: ds 1 ; d81c
+wd81d:: ds 1 ; d81d
+wd81e:: ds 1 ; d81e
+wd81f:: ds 1 ; d81f
+wd820:: ds 1 ; d820
+wd821:: ds 1 ; d821
+wd822:: ds 1 ; d822
+wd823:: ds 1 ; d823
+wd824:: ds 1 ; d824
+wd825:: ds 1 ; d825
+wd826:: ds 1 ; d826
+wd827:: ds 1 ; d827
+wd828:: ds 1 ; d828
+wd829:: ds 1 ; d829
+wd82a:: ds 1 ; d82a
+wd82b:: ds 1 ; d82b
+wd82c:: ds 1 ; d82c
+wd82d:: ds 1 ; d82d
+wd82e:: ds 1 ; d82e
+wd82f:: ds 1 ; d82f
+wd830:: ds 1 ; d830
+wd831:: ds 1 ; d831
+wd832:: ds 1 ; d832
+wd833:: ds 1 ; d833
+wd834:: ds 1 ; d834
+wd835:: ds 1 ; d835
+wd836:: ds 1 ; d836
+wd837:: ds 1 ; d837
+wd838:: ds 1 ; d838
+wd839:: ds 1 ; d839
+wd83a:: ds 1 ; d83a
+wd83b:: ds 1 ; d83b
+wd83c:: ds 1 ; d83c
+wd83d:: ds 1 ; d83d
+wd83e:: ds 1 ; d83e
+wd83f:: ds 1 ; d83f
+wd840:: ds 1 ; d840
+wd841:: ds 1 ; d841
+wd842:: ds 1 ; d842
+wd843:: ds 1 ; d843
+wd844:: ds 1 ; d844
+wd845:: ds 1 ; d845
+wd846:: ds 1 ; d846
+wd847:: ds 1 ; d847
+wd848:: ds 1 ; d848
+wd849:: ds 1 ; d849
+wd84a:: ds 1 ; d84a
+wd84b:: ds 1 ; d84b
+wd84c:: ds 1 ; d84c
+wd84d:: ds 1 ; d84d
+wd84e:: ds 1 ; d84e
+wd84f:: ds 1 ; d84f
+wd850:: ds 1 ; d850
+wd851:: ds 1 ; d851
+wd852:: ds 1 ; d852
+wd853:: ds 1 ; d853
+wd854:: ds 1 ; d854
+wd855:: ds 1 ; d855
+wd856:: ds 1 ; d856
+wd857:: ds 1 ; d857
+wd858:: ds 1 ; d858
+wd859:: ds 1 ; d859
+wd85a:: ds 1 ; d85a
+wd85b:: ds 1 ; d85b
+wd85c:: ds 1 ; d85c
+wd85d:: ds 1 ; d85d
+wd85e:: ds 1 ; d85e
+wd85f:: ds 1 ; d85f
+wd860:: ds 1 ; d860
+wd861:: ds 1 ; d861
+wd862:: ds 1 ; d862
+wd863:: ds 1 ; d863
+wd864:: ds 1 ; d864
+wd865:: ds 1 ; d865
+wd866:: ds 1 ; d866
+wd867:: ds 1 ; d867
+wd868:: ds 1 ; d868
+wd869:: ds 1 ; d869
+wd86a:: ds 1 ; d86a
+wd86b:: ds 1 ; d86b
+wd86c:: ds 1 ; d86c
+wd86d:: ds 1 ; d86d
+wd86e:: ds 1 ; d86e
+wd86f:: ds 1 ; d86f
+wd870:: ds 1 ; d870
+wd871:: ds 1 ; d871
+wd872:: ds 1 ; d872
+wd873:: ds 1 ; d873
+wd874:: ds 1 ; d874
+wd875:: ds 1 ; d875
+wd876:: ds 1 ; d876
+wd877:: ds 1 ; d877
+wd878:: ds 1 ; d878
+wd879:: ds 1 ; d879
+wd87a:: ds 1 ; d87a
+wd87b:: ds 1 ; d87b
+wd87c:: ds 1 ; d87c
+wd87d:: ds 1 ; d87d
+wd87e:: ds 1 ; d87e
+wd87f:: ds 1 ; d87f
+wd880:: ds 1 ; d880
+wd881:: ds 1 ; d881
+wd882:: ds 1 ; d882
+wd883:: ds 1 ; d883
+wd884:: ds 1 ; d884
+wd885:: ds 1 ; d885
+wd886:: ds 1 ; d886
+wd887:: ds 1 ; d887
+wd888:: ds 1 ; d888
+wd889:: ds 1 ; d889
+wd88a:: ds 1 ; d88a
+wd88b:: ds 1 ; d88b
+wd88c:: ds 1 ; d88c
+wd88d:: ds 1 ; d88d
+wd88e:: ds 1 ; d88e
+wd88f:: ds 1 ; d88f
+wd890:: ds 1 ; d890
+wd891:: ds 1 ; d891
+wd892:: ds 1 ; d892
+wd893:: ds 1 ; d893
+wd894:: ds 1 ; d894
+wd895:: ds 1 ; d895
+wd896:: ds 1 ; d896
+wd897:: ds 1 ; d897
+wd898:: ds 1 ; d898
+wd899:: ds 1 ; d899
+wd89a:: ds 1 ; d89a
+wd89b:: ds 1 ; d89b
+wd89c:: ds 1 ; d89c
+wd89d:: ds 1 ; d89d
+wd89e:: ds 1 ; d89e
+wd89f:: ds 1 ; d89f
+wd8a0:: ds 1 ; d8a0
+wd8a1:: ds 1 ; d8a1
+wd8a2:: ds 1 ; d8a2
+wd8a3:: ds 1 ; d8a3
+wd8a4:: ds 1 ; d8a4
+wd8a5:: ds 1 ; d8a5
+wd8a6:: ds 1 ; d8a6
+wd8a7:: ds 1 ; d8a7
+wd8a8:: ds 1 ; d8a8
+wd8a9:: ds 1 ; d8a9
+wd8aa:: ds 1 ; d8aa
+wd8ab:: ds 1 ; d8ab
+wd8ac:: ds 1 ; d8ac
+wd8ad:: ds 1 ; d8ad
+wd8ae:: ds 1 ; d8ae
+wd8af:: ds 1 ; d8af
+wd8b0:: ds 1 ; d8b0
+wd8b1:: ds 1 ; d8b1
+wd8b2:: ds 1 ; d8b2
+wd8b3:: ds 1 ; d8b3
+wd8b4:: ds 1 ; d8b4
+wd8b5:: ds 1 ; d8b5
+wd8b6:: ds 1 ; d8b6
+wd8b7:: ds 1 ; d8b7
+wd8b8:: ds 1 ; d8b8
+wd8b9:: ds 1 ; d8b9
+wd8ba:: ds 1 ; d8ba
+wd8bb:: ds 1 ; d8bb
+wd8bc:: ds 1 ; d8bc
+wd8bd:: ds 1 ; d8bd
+wd8be:: ds 1 ; d8be
+wd8bf:: ds 1 ; d8bf
+wd8c0:: ds 1 ; d8c0
+wd8c1:: ds 1 ; d8c1
+wd8c2:: ds 1 ; d8c2
+wd8c3:: ds 1 ; d8c3
+wd8c4:: ds 1 ; d8c4
+wd8c5:: ds 1 ; d8c5
+wd8c6:: ds 1 ; d8c6
+wd8c7:: ds 1 ; d8c7
+wd8c8:: ds 1 ; d8c8
+wd8c9:: ds 1 ; d8c9
+wd8ca:: ds 1 ; d8ca
+wd8cb:: ds 1 ; d8cb
+wd8cc:: ds 1 ; d8cc
+wd8cd:: ds 1 ; d8cd
+wd8ce:: ds 1 ; d8ce
+wd8cf:: ds 1 ; d8cf
+wd8d0:: ds 1 ; d8d0
+wd8d1:: ds 1 ; d8d1
+wd8d2:: ds 1 ; d8d2
+wd8d3:: ds 1 ; d8d3
+wd8d4:: ds 1 ; d8d4
+wd8d5:: ds 1 ; d8d5
+wd8d6:: ds 1 ; d8d6
+wd8d7:: ds 1 ; d8d7
+wd8d8:: ds 1 ; d8d8
+wd8d9:: ds 1 ; d8d9
+wd8da:: ds 1 ; d8da
+wd8db:: ds 1 ; d8db
+wd8dc:: ds 1 ; d8dc
+wd8dd:: ds 1 ; d8dd
+wd8de:: ds 1 ; d8de
+wd8df:: ds 1 ; d8df
+wd8e0:: ds 1 ; d8e0
+wd8e1:: ds 1 ; d8e1
+wd8e2:: ds 1 ; d8e2
+wd8e3:: ds 1 ; d8e3
+wd8e4:: ds 1 ; d8e4
+wd8e5:: ds 1 ; d8e5
+wd8e6:: ds 1 ; d8e6
+wd8e7:: ds 1 ; d8e7
+wd8e8:: ds 1 ; d8e8
+wd8e9:: ds 1 ; d8e9
+wd8ea:: ds 1 ; d8ea
+wd8eb:: ds 1 ; d8eb
+wd8ec:: ds 1 ; d8ec
+wd8ed:: ds 1 ; d8ed
+wd8ee:: ds 1 ; d8ee
+wd8ef:: ds 1 ; d8ef
+wd8f0:: ds 1 ; d8f0
+wd8f1:: ds 1 ; d8f1
+wd8f2:: ds 1 ; d8f2
+wd8f3:: ds 1 ; d8f3
+wd8f4:: ds 1 ; d8f4
+wd8f5:: ds 1 ; d8f5
+wd8f6:: ds 1 ; d8f6
+wd8f7:: ds 1 ; d8f7
+wd8f8:: ds 1 ; d8f8
+wd8f9:: ds 1 ; d8f9
+wd8fa:: ds 1 ; d8fa
+wd8fb:: ds 1 ; d8fb
+wd8fc:: ds 1 ; d8fc
+wd8fd:: ds 1 ; d8fd
+wd8fe:: ds 1 ; d8fe
+wd8ff:: ds 1 ; d8ff
+wd900:: ds 1 ; d900
+wd901:: ds 1 ; d901
+wd902:: ds 1 ; d902
+wd903:: ds 1 ; d903
+wd904:: ds 1 ; d904
+wd905:: ds 1 ; d905
+wd906:: ds 1 ; d906
+wd907:: ds 1 ; d907
+wd908:: ds 1 ; d908
+wd909:: ds 1 ; d909
+wd90a:: ds 1 ; d90a
+wd90b:: ds 1 ; d90b
+wd90c:: ds 1 ; d90c
+wd90d:: ds 1 ; d90d
+wd90e:: ds 1 ; d90e
+wd90f:: ds 1 ; d90f
+wd910:: ds 1 ; d910
+wd911:: ds 1 ; d911
+wd912:: ds 1 ; d912
+wd913:: ds 1 ; d913
+wd914:: ds 1 ; d914
+wd915:: ds 1 ; d915
+wd916:: ds 1 ; d916
+wd917:: ds 1 ; d917
+wd918:: ds 1 ; d918
+wd919:: ds 1 ; d919
+wd91a:: ds 1 ; d91a
+wd91b:: ds 1 ; d91b
+wd91c:: ds 1 ; d91c
+wd91d:: ds 1 ; d91d
+wd91e:: ds 1 ; d91e
+wd91f:: ds 1 ; d91f
+wd920:: ds 1 ; d920
+wd921:: ds 1 ; d921
+wd922:: ds 1 ; d922
+wd923:: ds 1 ; d923
+wd924:: ds 1 ; d924
+wd925:: ds 1 ; d925
+wd926:: ds 1 ; d926
+wd927:: ds 1 ; d927
+wd928:: ds 1 ; d928
+wd929:: ds 1 ; d929
+wd92a:: ds 1 ; d92a
+wd92b:: ds 1 ; d92b
+wd92c:: ds 1 ; d92c
+wd92d:: ds 1 ; d92d
+wd92e:: ds 1 ; d92e
+wd92f:: ds 1 ; d92f
+wd930:: ds 1 ; d930
+wd931:: ds 1 ; d931
+wd932:: ds 1 ; d932
+wd933:: ds 1 ; d933
+wd934:: ds 1 ; d934
+wd935:: ds 1 ; d935
+wd936:: ds 1 ; d936
+wd937:: ds 1 ; d937
+wd938:: ds 1 ; d938
+wd939:: ds 1 ; d939
+wd93a:: ds 1 ; d93a
+wd93b:: ds 1 ; d93b
+wd93c:: ds 1 ; d93c
+wd93d:: ds 1 ; d93d
+wd93e:: ds 1 ; d93e
+wd93f:: ds 1 ; d93f
+wd940:: ds 1 ; d940
+wd941:: ds 1 ; d941
+wd942:: ds 1 ; d942
+wd943:: ds 1 ; d943
+wd944:: ds 1 ; d944
+wd945:: ds 1 ; d945
+wd946:: ds 1 ; d946
+wd947:: ds 1 ; d947
+wd948:: ds 1 ; d948
+wd949:: ds 1 ; d949
+wd94a:: ds 1 ; d94a
+wd94b:: ds 1 ; d94b
+wd94c:: ds 1 ; d94c
+wd94d:: ds 1 ; d94d
+wd94e:: ds 1 ; d94e
+wd94f:: ds 1 ; d94f
+wd950:: ds 1 ; d950
+wd951:: ds 1 ; d951
+wd952:: ds 1 ; d952
+wd953:: ds 1 ; d953
+wd954:: ds 1 ; d954
+wd955:: ds 1 ; d955
+wd956:: ds 1 ; d956
+wd957:: ds 1 ; d957
+wd958:: ds 1 ; d958
+wd959:: ds 1 ; d959
+wd95a:: ds 1 ; d95a
+wd95b:: ds 1 ; d95b
+wd95c:: ds 1 ; d95c
+wd95d:: ds 1 ; d95d
+wd95e:: ds 1 ; d95e
+wd95f:: ds 1 ; d95f
+wd960:: ds 1 ; d960
+wd961:: ds 1 ; d961
+wd962:: ds 1 ; d962
+wd963:: ds 1 ; d963
+wd964:: ds 1 ; d964
+wd965:: ds 1 ; d965
+wd966:: ds 1 ; d966
+wd967:: ds 1 ; d967
+wd968:: ds 1 ; d968
+wd969:: ds 1 ; d969
+wd96a:: ds 1 ; d96a
+wd96b:: ds 1 ; d96b
+wd96c:: ds 1 ; d96c
+wd96d:: ds 1 ; d96d
+wd96e:: ds 1 ; d96e
+wd96f:: ds 1 ; d96f
+wd970:: ds 1 ; d970
+wd971:: ds 1 ; d971
+wd972:: ds 1 ; d972
+wd973:: ds 1 ; d973
+wd974:: ds 1 ; d974
+wd975:: ds 1 ; d975
+wd976:: ds 1 ; d976
+wd977:: ds 1 ; d977
+wd978:: ds 1 ; d978
+wd979:: ds 1 ; d979
+wd97a:: ds 1 ; d97a
+wd97b:: ds 1 ; d97b
+wd97c:: ds 1 ; d97c
+wd97d:: ds 1 ; d97d
+wd97e:: ds 1 ; d97e
+wd97f:: ds 1 ; d97f
+wd980:: ds 1 ; d980
+wd981:: ds 1 ; d981
+wd982:: ds 1 ; d982
+wd983:: ds 1 ; d983
+wd984:: ds 1 ; d984
+wd985:: ds 1 ; d985
+wd986:: ds 1 ; d986
+wd987:: ds 1 ; d987
+wd988:: ds 1 ; d988
+wd989:: ds 1 ; d989
+wd98a:: ds 1 ; d98a
+wd98b:: ds 1 ; d98b
+wd98c:: ds 1 ; d98c
+wd98d:: ds 1 ; d98d
+wd98e:: ds 1 ; d98e
+wd98f:: ds 1 ; d98f
+wd990:: ds 1 ; d990
+wd991:: ds 1 ; d991
+wd992:: ds 1 ; d992
+wd993:: ds 1 ; d993
+wd994:: ds 1 ; d994
+wd995:: ds 1 ; d995
+wd996:: ds 1 ; d996
+wd997:: ds 1 ; d997
+wd998:: ds 1 ; d998
+wd999:: ds 1 ; d999
+wd99a:: ds 1 ; d99a
+wd99b:: ds 1 ; d99b
+wd99c:: ds 1 ; d99c
+wd99d:: ds 1 ; d99d
+wd99e:: ds 1 ; d99e
+wd99f:: ds 1 ; d99f
+wd9a0:: ds 1 ; d9a0
+wd9a1:: ds 1 ; d9a1
+wd9a2:: ds 1 ; d9a2
+wd9a3:: ds 1 ; d9a3
+wd9a4:: ds 1 ; d9a4
+wd9a5:: ds 1 ; d9a5
+wd9a6:: ds 1 ; d9a6
+wd9a7:: ds 1 ; d9a7
+wd9a8:: ds 1 ; d9a8
+wd9a9:: ds 1 ; d9a9
+wd9aa:: ds 1 ; d9aa
+wd9ab:: ds 1 ; d9ab
+wd9ac:: ds 1 ; d9ac
+wd9ad:: ds 1 ; d9ad
+wd9ae:: ds 1 ; d9ae
+wd9af:: ds 1 ; d9af
+wd9b0:: ds 1 ; d9b0
+wd9b1:: ds 1 ; d9b1
+wd9b2:: ds 1 ; d9b2
+wd9b3:: ds 1 ; d9b3
+wd9b4:: ds 1 ; d9b4
+wd9b5:: ds 1 ; d9b5
+wd9b6:: ds 1 ; d9b6
+wd9b7:: ds 1 ; d9b7
+wd9b8:: ds 1 ; d9b8
+wd9b9:: ds 1 ; d9b9
+wd9ba:: ds 1 ; d9ba
+wd9bb:: ds 1 ; d9bb
+wd9bc:: ds 1 ; d9bc
+wd9bd:: ds 1 ; d9bd
+wd9be:: ds 1 ; d9be
+wd9bf:: ds 1 ; d9bf
+wd9c0:: ds 1 ; d9c0
+wd9c1:: ds 1 ; d9c1
+wd9c2:: ds 1 ; d9c2
+wd9c3:: ds 1 ; d9c3
+wd9c4:: ds 1 ; d9c4
+wd9c5:: ds 1 ; d9c5
+wd9c6:: ds 1 ; d9c6
+wd9c7:: ds 1 ; d9c7
+wd9c8:: ds 1 ; d9c8
+wd9c9:: ds 1 ; d9c9
+wd9ca:: ds 1 ; d9ca
+wd9cb:: ds 1 ; d9cb
+wd9cc:: ds 1 ; d9cc
+wd9cd:: ds 1 ; d9cd
+wd9ce:: ds 1 ; d9ce
+wd9cf:: ds 1 ; d9cf
+wd9d0:: ds 1 ; d9d0
+wd9d1:: ds 1 ; d9d1
+wd9d2:: ds 1 ; d9d2
+wd9d3:: ds 1 ; d9d3
+wd9d4:: ds 1 ; d9d4
+wd9d5:: ds 1 ; d9d5
+wd9d6:: ds 1 ; d9d6
+wd9d7:: ds 1 ; d9d7
+wd9d8:: ds 1 ; d9d8
+wd9d9:: ds 1 ; d9d9
+wd9da:: ds 1 ; d9da
+wd9db:: ds 1 ; d9db
+wd9dc:: ds 1 ; d9dc
+wd9dd:: ds 1 ; d9dd
+wd9de:: ds 1 ; d9de
+wd9df:: ds 1 ; d9df
+wd9e0:: ds 1 ; d9e0
+wd9e1:: ds 1 ; d9e1
+wd9e2:: ds 1 ; d9e2
+wd9e3:: ds 1 ; d9e3
+wd9e4:: ds 1 ; d9e4
+wd9e5:: ds 1 ; d9e5
+wd9e6:: ds 1 ; d9e6
+wd9e7:: ds 1 ; d9e7
+wd9e8:: ds 1 ; d9e8
+wd9e9:: ds 1 ; d9e9
+wd9ea:: ds 1 ; d9ea
+wd9eb:: ds 1 ; d9eb
+wd9ec:: ds 1 ; d9ec
+wd9ed:: ds 1 ; d9ed
+wd9ee:: ds 1 ; d9ee
+wd9ef:: ds 1 ; d9ef
+wd9f0:: ds 1 ; d9f0
+wd9f1:: ds 1 ; d9f1
+wd9f2:: ds 1 ; d9f2
+wd9f3:: ds 1 ; d9f3
+wd9f4:: ds 1 ; d9f4
+wd9f5:: ds 1 ; d9f5
+wd9f6:: ds 1 ; d9f6
+wd9f7:: ds 1 ; d9f7
+wd9f8:: ds 1 ; d9f8
+wd9f9:: ds 1 ; d9f9
+wd9fa:: ds 1 ; d9fa
+wd9fb:: ds 1 ; d9fb
+wd9fc:: ds 1 ; d9fc
+wd9fd:: ds 1 ; d9fd
+wd9fe:: ds 1 ; d9fe
+wd9ff:: ds 1 ; d9ff
+wda00:: ds 1 ; da00
+wda01:: ds 1 ; da01
+wda02:: ds 1 ; da02
+wda03:: ds 1 ; da03
+wda04:: ds 1 ; da04
+wda05:: ds 1 ; da05
+wda06:: ds 1 ; da06
+wda07:: ds 1 ; da07
+wda08:: ds 1 ; da08
+wda09:: ds 1 ; da09
+wda0a:: ds 1 ; da0a
+wda0b:: ds 1 ; da0b
+wda0c:: ds 1 ; da0c
+wda0d:: ds 1 ; da0d
+wda0e:: ds 1 ; da0e
+wda0f:: ds 1 ; da0f
+wda10:: ds 1 ; da10
+wda11:: ds 1 ; da11
+wda12:: ds 1 ; da12
+wda13:: ds 1 ; da13
+wda14:: ds 1 ; da14
+wda15:: ds 1 ; da15
+wda16:: ds 1 ; da16
+wda17:: ds 1 ; da17
+wda18:: ds 1 ; da18
+wda19:: ds 1 ; da19
+wda1a:: ds 1 ; da1a
+wda1b:: ds 1 ; da1b
+wda1c:: ds 1 ; da1c
+wda1d:: ds 1 ; da1d
+wda1e:: ds 1 ; da1e
+wda1f:: ds 1 ; da1f
+wda20:: ds 1 ; da20
+wda21:: ds 1 ; da21
+wda22:: ds 1 ; da22
+wda23:: ds 1 ; da23
+wda24:: ds 1 ; da24
+wda25:: ds 1 ; da25
+wda26:: ds 1 ; da26
+wda27:: ds 1 ; da27
+wda28:: ds 1 ; da28
+wda29:: ds 1 ; da29
+wda2a:: ds 1 ; da2a
+wda2b:: ds 1 ; da2b
+wda2c:: ds 1 ; da2c
+wda2d:: ds 1 ; da2d
+wda2e:: ds 1 ; da2e
+wda2f:: ds 1 ; da2f
+wda30:: ds 1 ; da30
+wda31:: ds 1 ; da31
+wda32:: ds 1 ; da32
+wda33:: ds 1 ; da33
+wda34:: ds 1 ; da34
+wda35:: ds 1 ; da35
+wda36:: ds 1 ; da36
+wda37:: ds 1 ; da37
+wda38:: ds 1 ; da38
+wda39:: ds 1 ; da39
+wda3a:: ds 1 ; da3a
+wda3b:: ds 1 ; da3b
+wda3c:: ds 1 ; da3c
+wda3d:: ds 1 ; da3d
+wda3e:: ds 1 ; da3e
+wda3f:: ds 1 ; da3f
+wda40:: ds 1 ; da40
+wda41:: ds 1 ; da41
+wda42:: ds 1 ; da42
+wda43:: ds 1 ; da43
+wda44:: ds 1 ; da44
+wda45:: ds 1 ; da45
+wda46:: ds 1 ; da46
+wda47:: ds 1 ; da47
+wda48:: ds 1 ; da48
+wda49:: ds 1 ; da49
+wda4a:: ds 1 ; da4a
+wda4b:: ds 1 ; da4b
+wda4c:: ds 1 ; da4c
+wda4d:: ds 1 ; da4d
+wda4e:: ds 1 ; da4e
+wda4f:: ds 1 ; da4f
+wda50:: ds 1 ; da50
+wda51:: ds 1 ; da51
+wda52:: ds 1 ; da52
+wda53:: ds 1 ; da53
+wda54:: ds 1 ; da54
+wda55:: ds 1 ; da55
+wda56:: ds 1 ; da56
+wda57:: ds 1 ; da57
+wda58:: ds 1 ; da58
+wda59:: ds 1 ; da59
+wda5a:: ds 1 ; da5a
+wda5b:: ds 1 ; da5b
+wda5c:: ds 1 ; da5c
+wda5d:: ds 1 ; da5d
+wda5e:: ds 1 ; da5e
+wda5f:: ds 1 ; da5f
+wda60:: ds 1 ; da60
+wda61:: ds 1 ; da61
+wda62:: ds 1 ; da62
+wda63:: ds 1 ; da63
+wda64:: ds 1 ; da64
+wda65:: ds 1 ; da65
+wda66:: ds 1 ; da66
+wda67:: ds 1 ; da67
+wda68:: ds 1 ; da68
+wda69:: ds 1 ; da69
+wda6a:: ds 1 ; da6a
+wda6b:: ds 1 ; da6b
+wda6c:: ds 1 ; da6c
+wda6d:: ds 1 ; da6d
+wda6e:: ds 1 ; da6e
+wda6f:: ds 1 ; da6f
+wda70:: ds 1 ; da70
+wda71:: ds 1 ; da71
+wda72:: ds 1 ; da72
+wda73:: ds 1 ; da73
+wda74:: ds 1 ; da74
+wda75:: ds 1 ; da75
+wda76:: ds 1 ; da76
+wda77:: ds 1 ; da77
+wda78:: ds 1 ; da78
+wda79:: ds 1 ; da79
+wda7a:: ds 1 ; da7a
+wda7b:: ds 1 ; da7b
+wda7c:: ds 1 ; da7c
+wda7d:: ds 1 ; da7d
+wda7e:: ds 1 ; da7e
+wda7f:: ds 1 ; da7f
+wda80:: ds 1 ; da80
+wda81:: ds 1 ; da81
+wda82:: ds 1 ; da82
+wda83:: ds 1 ; da83
+wda84:: ds 1 ; da84
+wda85:: ds 1 ; da85
+wda86:: ds 1 ; da86
+wda87:: ds 1 ; da87
+wda88:: ds 1 ; da88
+wda89:: ds 1 ; da89
+wda8a:: ds 1 ; da8a
+wda8b:: ds 1 ; da8b
+wda8c:: ds 1 ; da8c
+wda8d:: ds 1 ; da8d
+wda8e:: ds 1 ; da8e
+wda8f:: ds 1 ; da8f
+wda90:: ds 1 ; da90
+wda91:: ds 1 ; da91
+wda92:: ds 1 ; da92
+wda93:: ds 1 ; da93
+wda94:: ds 1 ; da94
+wda95:: ds 1 ; da95
+wda96:: ds 1 ; da96
+wda97:: ds 1 ; da97
+wda98:: ds 1 ; da98
+wda99:: ds 1 ; da99
+wda9a:: ds 1 ; da9a
+wda9b:: ds 1 ; da9b
+wda9c:: ds 1 ; da9c
+wda9d:: ds 1 ; da9d
+wda9e:: ds 1 ; da9e
+wda9f:: ds 1 ; da9f
+wdaa0:: ds 1 ; daa0
+wdaa1:: ds 1 ; daa1
+wdaa2:: ds 1 ; daa2
+wdaa3:: ds 1 ; daa3
+wdaa4:: ds 1 ; daa4
+wdaa5:: ds 1 ; daa5
+wdaa6:: ds 1 ; daa6
+wdaa7:: ds 1 ; daa7
+wdaa8:: ds 1 ; daa8
+wdaa9:: ds 1 ; daa9
+wdaaa:: ds 1 ; daaa
+wdaab:: ds 1 ; daab
+wdaac:: ds 1 ; daac
+wdaad:: ds 1 ; daad
+wdaae:: ds 1 ; daae
+wdaaf:: ds 1 ; daaf
+wdab0:: ds 1 ; dab0
+wdab1:: ds 1 ; dab1
+wdab2:: ds 1 ; dab2
+wdab3:: ds 1 ; dab3
+wdab4:: ds 1 ; dab4
+wdab5:: ds 1 ; dab5
+wdab6:: ds 1 ; dab6
+wdab7:: ds 1 ; dab7
+wdab8:: ds 1 ; dab8
+wdab9:: ds 1 ; dab9
+wdaba:: ds 1 ; daba
+wdabb:: ds 1 ; dabb
+wdabc:: ds 1 ; dabc
+wdabd:: ds 1 ; dabd
+wdabe:: ds 1 ; dabe
+wdabf:: ds 1 ; dabf
+wdac0:: ds 1 ; dac0
+wdac1:: ds 1 ; dac1
+wdac2:: ds 1 ; dac2
+wdac3:: ds 1 ; dac3
+wdac4:: ds 1 ; dac4
+wdac5:: ds 1 ; dac5
+wdac6:: ds 1 ; dac6
+wdac7:: ds 1 ; dac7
+wdac8:: ds 1 ; dac8
+wdac9:: ds 1 ; dac9
+wdaca:: ds 1 ; daca
+wdacb:: ds 1 ; dacb
+wdacc:: ds 1 ; dacc
+wdacd:: ds 1 ; dacd
+wdace:: ds 1 ; dace
+wdacf:: ds 1 ; dacf
+wdad0:: ds 1 ; dad0
+wdad1:: ds 1 ; dad1
+wdad2:: ds 1 ; dad2
+wdad3:: ds 1 ; dad3
+wdad4:: ds 1 ; dad4
+wdad5:: ds 1 ; dad5
+wdad6:: ds 1 ; dad6
+wdad7:: ds 1 ; dad7
+wdad8:: ds 1 ; dad8
+wdad9:: ds 1 ; dad9
+wdada:: ds 1 ; dada
+wdadb:: ds 1 ; dadb
+wdadc:: ds 1 ; dadc
+wdadd:: ds 1 ; dadd
+wdade:: ds 1 ; dade
+wdadf:: ds 1 ; dadf
+wdae0:: ds 1 ; dae0
+wdae1:: ds 1 ; dae1
+wdae2:: ds 1 ; dae2
+wdae3:: ds 1 ; dae3
+wdae4:: ds 1 ; dae4
+wdae5:: ds 1 ; dae5
+wdae6:: ds 1 ; dae6
+wdae7:: ds 1 ; dae7
+wdae8:: ds 1 ; dae8
+wdae9:: ds 1 ; dae9
+wdaea:: ds 1 ; daea
+wdaeb:: ds 1 ; daeb
+wdaec:: ds 1 ; daec
+wdaed:: ds 1 ; daed
+wdaee:: ds 1 ; daee
+wdaef:: ds 1 ; daef
+wdaf0:: ds 1 ; daf0
+wdaf1:: ds 1 ; daf1
+wdaf2:: ds 1 ; daf2
+wdaf3:: ds 1 ; daf3
+wdaf4:: ds 1 ; daf4
+wdaf5:: ds 1 ; daf5
+wdaf6:: ds 1 ; daf6
+wdaf7:: ds 1 ; daf7
+wdaf8:: ds 1 ; daf8
+wdaf9:: ds 1 ; daf9
+wdafa:: ds 1 ; dafa
+wdafb:: ds 1 ; dafb
+wdafc:: ds 1 ; dafc
+wdafd:: ds 1 ; dafd
+wdafe:: ds 1 ; dafe
+wdaff:: ds 1 ; daff
+wdb00:: ds 1 ; db00
+wdb01:: ds 1 ; db01
+wdb02:: ds 1 ; db02
+wdb03:: ds 1 ; db03
+wdb04:: ds 1 ; db04
+wdb05:: ds 1 ; db05
+wdb06:: ds 1 ; db06
+wdb07:: ds 1 ; db07
+wdb08:: ds 1 ; db08
+wdb09:: ds 1 ; db09
+wdb0a:: ds 1 ; db0a
+wdb0b:: ds 1 ; db0b
+wdb0c:: ds 1 ; db0c
+wdb0d:: ds 1 ; db0d
+wdb0e:: ds 1 ; db0e
+wdb0f:: ds 1 ; db0f
+wdb10:: ds 1 ; db10
+wdb11:: ds 1 ; db11
+wdb12:: ds 1 ; db12
+wdb13:: ds 1 ; db13
+wdb14:: ds 1 ; db14
+wdb15:: ds 1 ; db15
+wdb16:: ds 1 ; db16
+wdb17:: ds 1 ; db17
+wdb18:: ds 1 ; db18
+wdb19:: ds 1 ; db19
+wdb1a:: ds 1 ; db1a
+wdb1b:: ds 1 ; db1b
+wdb1c:: ds 1 ; db1c
+wdb1d:: ds 1 ; db1d
+wdb1e:: ds 1 ; db1e
+wdb1f:: ds 1 ; db1f
+wdb20:: ds 1 ; db20
+wdb21:: ds 1 ; db21
+wdb22:: ds 1 ; db22
+wdb23:: ds 1 ; db23
+wdb24:: ds 1 ; db24
+wdb25:: ds 1 ; db25
+wdb26:: ds 1 ; db26
+wdb27:: ds 1 ; db27
+wdb28:: ds 1 ; db28
+wdb29:: ds 1 ; db29
+wdb2a:: ds 1 ; db2a
+wdb2b:: ds 1 ; db2b
+wdb2c:: ds 1 ; db2c
+wdb2d:: ds 1 ; db2d
+wdb2e:: ds 1 ; db2e
+wdb2f:: ds 1 ; db2f
+wdb30:: ds 1 ; db30
+wdb31:: ds 1 ; db31
+wdb32:: ds 1 ; db32
+wdb33:: ds 1 ; db33
+wdb34:: ds 1 ; db34
+wdb35:: ds 1 ; db35
+wdb36:: ds 1 ; db36
+wdb37:: ds 1 ; db37
+wdb38:: ds 1 ; db38
+wdb39:: ds 1 ; db39
+wdb3a:: ds 1 ; db3a
+wdb3b:: ds 1 ; db3b
+wdb3c:: ds 1 ; db3c
+wdb3d:: ds 1 ; db3d
+wdb3e:: ds 1 ; db3e
+wdb3f:: ds 1 ; db3f
+wdb40:: ds 1 ; db40
+wdb41:: ds 1 ; db41
+wdb42:: ds 1 ; db42
+wdb43:: ds 1 ; db43
+wdb44:: ds 1 ; db44
+wdb45:: ds 1 ; db45
+wdb46:: ds 1 ; db46
+wdb47:: ds 1 ; db47
+wdb48:: ds 1 ; db48
+wdb49:: ds 1 ; db49
+wdb4a:: ds 1 ; db4a
+wdb4b:: ds 1 ; db4b
+wdb4c:: ds 1 ; db4c
+wdb4d:: ds 1 ; db4d
+wdb4e:: ds 1 ; db4e
+wdb4f:: ds 1 ; db4f
+wdb50:: ds 1 ; db50
+wdb51:: ds 1 ; db51
+wdb52:: ds 1 ; db52
+wdb53:: ds 1 ; db53
+wdb54:: ds 1 ; db54
+wdb55:: ds 1 ; db55
+wdb56:: ds 1 ; db56
+wdb57:: ds 1 ; db57
+wdb58:: ds 1 ; db58
+wdb59:: ds 1 ; db59
+wdb5a:: ds 1 ; db5a
+wdb5b:: ds 1 ; db5b
+wdb5c:: ds 1 ; db5c
+wdb5d:: ds 1 ; db5d
+wdb5e:: ds 1 ; db5e
+wdb5f:: ds 1 ; db5f
+wdb60:: ds 1 ; db60
+wdb61:: ds 1 ; db61
+wdb62:: ds 1 ; db62
+wdb63:: ds 1 ; db63
+wdb64:: ds 1 ; db64
+wdb65:: ds 1 ; db65
+wdb66:: ds 1 ; db66
+wdb67:: ds 1 ; db67
+wdb68:: ds 1 ; db68
+wdb69:: ds 1 ; db69
+wdb6a:: ds 1 ; db6a
+wdb6b:: ds 1 ; db6b
+wdb6c:: ds 1 ; db6c
+wdb6d:: ds 1 ; db6d
+wdb6e:: ds 1 ; db6e
+wdb6f:: ds 1 ; db6f
+wdb70:: ds 1 ; db70
+wdb71:: ds 1 ; db71
+wdb72:: ds 1 ; db72
+wdb73:: ds 1 ; db73
+wdb74:: ds 1 ; db74
+wdb75:: ds 1 ; db75
+wdb76:: ds 1 ; db76
+wdb77:: ds 1 ; db77
+wdb78:: ds 1 ; db78
+wdb79:: ds 1 ; db79
+wdb7a:: ds 1 ; db7a
+wdb7b:: ds 1 ; db7b
+wdb7c:: ds 1 ; db7c
+wdb7d:: ds 1 ; db7d
+wdb7e:: ds 1 ; db7e
+wdb7f:: ds 1 ; db7f
+wdb80:: ds 1 ; db80
+wdb81:: ds 1 ; db81
+wdb82:: ds 1 ; db82
+wdb83:: ds 1 ; db83
+wdb84:: ds 1 ; db84
+wdb85:: ds 1 ; db85
+wdb86:: ds 1 ; db86
+wdb87:: ds 1 ; db87
+wdb88:: ds 1 ; db88
+wdb89:: ds 1 ; db89
+wdb8a:: ds 1 ; db8a
+wdb8b:: ds 1 ; db8b
+wdb8c:: ds 1 ; db8c
+wdb8d:: ds 1 ; db8d
+wdb8e:: ds 1 ; db8e
+wdb8f:: ds 1 ; db8f
+wdb90:: ds 1 ; db90
+wdb91:: ds 1 ; db91
+wdb92:: ds 1 ; db92
+wdb93:: ds 1 ; db93
+wdb94:: ds 1 ; db94
+wdb95:: ds 1 ; db95
+wdb96:: ds 1 ; db96
+wdb97:: ds 1 ; db97
+wdb98:: ds 1 ; db98
+wdb99:: ds 1 ; db99
+wdb9a:: ds 1 ; db9a
+wdb9b:: ds 1 ; db9b
+wdb9c:: ds 1 ; db9c
+wdb9d:: ds 1 ; db9d
+wdb9e:: ds 1 ; db9e
+wdb9f:: ds 1 ; db9f
+wdba0:: ds 1 ; dba0
+wdba1:: ds 1 ; dba1
+wdba2:: ds 1 ; dba2
+wdba3:: ds 1 ; dba3
+wdba4:: ds 1 ; dba4
+wdba5:: ds 1 ; dba5
+wdba6:: ds 1 ; dba6
+wdba7:: ds 1 ; dba7
+wdba8:: ds 1 ; dba8
+wdba9:: ds 1 ; dba9
+wdbaa:: ds 1 ; dbaa
+wdbab:: ds 1 ; dbab
+wdbac:: ds 1 ; dbac
+wdbad:: ds 1 ; dbad
+wdbae:: ds 1 ; dbae
+wdbaf:: ds 1 ; dbaf
+wdbb0:: ds 1 ; dbb0
+wdbb1:: ds 1 ; dbb1
+wdbb2:: ds 1 ; dbb2
+wdbb3:: ds 1 ; dbb3
+wdbb4:: ds 1 ; dbb4
+wdbb5:: ds 1 ; dbb5
+wdbb6:: ds 1 ; dbb6
+wdbb7:: ds 1 ; dbb7
+wdbb8:: ds 1 ; dbb8
+wdbb9:: ds 1 ; dbb9
+wdbba:: ds 1 ; dbba
+wdbbb:: ds 1 ; dbbb
+wdbbc:: ds 1 ; dbbc
+wdbbd:: ds 1 ; dbbd
+wdbbe:: ds 1 ; dbbe
+wdbbf:: ds 1 ; dbbf
+wdbc0:: ds 1 ; dbc0
+wdbc1:: ds 1 ; dbc1
+wdbc2:: ds 1 ; dbc2
+wdbc3:: ds 1 ; dbc3
+wdbc4:: ds 1 ; dbc4
+wdbc5:: ds 1 ; dbc5
+wdbc6:: ds 1 ; dbc6
+wdbc7:: ds 1 ; dbc7
+wdbc8:: ds 1 ; dbc8
+wdbc9:: ds 1 ; dbc9
+wdbca:: ds 1 ; dbca
+wdbcb:: ds 1 ; dbcb
+wdbcc:: ds 1 ; dbcc
+wdbcd:: ds 1 ; dbcd
+wdbce:: ds 1 ; dbce
+wdbcf:: ds 1 ; dbcf
+wdbd0:: ds 1 ; dbd0
+wdbd1:: ds 1 ; dbd1
+wdbd2:: ds 1 ; dbd2
+wdbd3:: ds 1 ; dbd3
+wdbd4:: ds 1 ; dbd4
+wdbd5:: ds 1 ; dbd5
+wdbd6:: ds 1 ; dbd6
+wdbd7:: ds 1 ; dbd7
+wdbd8:: ds 1 ; dbd8
+wdbd9:: ds 1 ; dbd9
+wdbda:: ds 1 ; dbda
+wdbdb:: ds 1 ; dbdb
+wdbdc:: ds 1 ; dbdc
+wdbdd:: ds 1 ; dbdd
+wdbde:: ds 1 ; dbde
+wdbdf:: ds 1 ; dbdf
+wdbe0:: ds 1 ; dbe0
+wdbe1:: ds 1 ; dbe1
+wdbe2:: ds 1 ; dbe2
+wdbe3:: ds 1 ; dbe3
+wdbe4:: ds 1 ; dbe4
+wdbe5:: ds 1 ; dbe5
+wdbe6:: ds 1 ; dbe6
+wdbe7:: ds 1 ; dbe7
+wdbe8:: ds 1 ; dbe8
+wdbe9:: ds 1 ; dbe9
+wdbea:: ds 1 ; dbea
+wdbeb:: ds 1 ; dbeb
+wdbec:: ds 1 ; dbec
+wdbed:: ds 1 ; dbed
+wdbee:: ds 1 ; dbee
+wdbef:: ds 1 ; dbef
+wdbf0:: ds 1 ; dbf0
+wdbf1:: ds 1 ; dbf1
+wdbf2:: ds 1 ; dbf2
+wdbf3:: ds 1 ; dbf3
+wdbf4:: ds 1 ; dbf4
+wdbf5:: ds 1 ; dbf5
+wdbf6:: ds 1 ; dbf6
+wdbf7:: ds 1 ; dbf7
+wdbf8:: ds 1 ; dbf8
+wdbf9:: ds 1 ; dbf9
+wdbfa:: ds 1 ; dbfa
+wdbfb:: ds 1 ; dbfb
+wdbfc:: ds 1 ; dbfc
+wdbfd:: ds 1 ; dbfd
+wdbfe:: ds 1 ; dbfe
+wdbff:: ds 1 ; dbff
+wdc00:: ds 1 ; dc00
+wdc01:: ds 1 ; dc01
+wdc02:: ds 1 ; dc02
+wdc03:: ds 1 ; dc03
+wdc04:: ds 1 ; dc04
+wdc05:: ds 1 ; dc05
+wdc06:: ds 1 ; dc06
+wdc07:: ds 1 ; dc07
+wdc08:: ds 1 ; dc08
+wdc09:: ds 1 ; dc09
+wdc0a:: ds 1 ; dc0a
+wdc0b:: ds 1 ; dc0b
+wdc0c:: ds 1 ; dc0c
+wdc0d:: ds 1 ; dc0d
+wdc0e:: ds 1 ; dc0e
+wdc0f:: ds 1 ; dc0f
+wdc10:: ds 1 ; dc10
+wdc11:: ds 1 ; dc11
+wdc12:: ds 1 ; dc12
+wdc13:: ds 1 ; dc13
+wdc14:: ds 1 ; dc14
+wdc15:: ds 1 ; dc15
+wdc16:: ds 1 ; dc16
+wdc17:: ds 1 ; dc17
+wdc18:: ds 1 ; dc18
+wdc19:: ds 1 ; dc19
+wdc1a:: ds 1 ; dc1a
+wdc1b:: ds 1 ; dc1b
+wdc1c:: ds 1 ; dc1c
+wdc1d:: ds 1 ; dc1d
+wdc1e:: ds 1 ; dc1e
+wdc1f:: ds 1 ; dc1f
+wdc20:: ds 1 ; dc20
+wdc21:: ds 1 ; dc21
+wdc22:: ds 1 ; dc22
+wdc23:: ds 1 ; dc23
+wdc24:: ds 1 ; dc24
+wdc25:: ds 1 ; dc25
+wdc26:: ds 1 ; dc26
+wdc27:: ds 1 ; dc27
+wdc28:: ds 1 ; dc28
+wdc29:: ds 1 ; dc29
+wdc2a:: ds 1 ; dc2a
+wdc2b:: ds 1 ; dc2b
+wdc2c:: ds 1 ; dc2c
+wdc2d:: ds 1 ; dc2d
+wdc2e:: ds 1 ; dc2e
+wdc2f:: ds 1 ; dc2f
+wdc30:: ds 1 ; dc30
+wdc31:: ds 1 ; dc31
+wdc32:: ds 1 ; dc32
+wdc33:: ds 1 ; dc33
+wdc34:: ds 1 ; dc34
+wdc35:: ds 1 ; dc35
+wdc36:: ds 1 ; dc36
+wdc37:: ds 1 ; dc37
+wdc38:: ds 1 ; dc38
+wdc39:: ds 1 ; dc39
+wdc3a:: ds 1 ; dc3a
+wdc3b:: ds 1 ; dc3b
+wdc3c:: ds 1 ; dc3c
+wdc3d:: ds 1 ; dc3d
+wdc3e:: ds 1 ; dc3e
+wdc3f:: ds 1 ; dc3f
+wdc40:: ds 1 ; dc40
+wdc41:: ds 1 ; dc41
+wdc42:: ds 1 ; dc42
+wdc43:: ds 1 ; dc43
+wdc44:: ds 1 ; dc44
+wdc45:: ds 1 ; dc45
+wdc46:: ds 1 ; dc46
+wdc47:: ds 1 ; dc47
+wdc48:: ds 1 ; dc48
+wdc49:: ds 1 ; dc49
+wdc4a:: ds 1 ; dc4a
+wdc4b:: ds 1 ; dc4b
+wdc4c:: ds 1 ; dc4c
+wdc4d:: ds 1 ; dc4d
+wdc4e:: ds 1 ; dc4e
+wdc4f:: ds 1 ; dc4f
+wdc50:: ds 1 ; dc50
+wdc51:: ds 1 ; dc51
+wdc52:: ds 1 ; dc52
+wdc53:: ds 1 ; dc53
+wdc54:: ds 1 ; dc54
+wdc55:: ds 1 ; dc55
+wdc56:: ds 1 ; dc56
+wdc57:: ds 1 ; dc57
+wdc58:: ds 1 ; dc58
+wdc59:: ds 1 ; dc59
+wdc5a:: ds 1 ; dc5a
+wdc5b:: ds 1 ; dc5b
+wdc5c:: ds 1 ; dc5c
+wdc5d:: ds 1 ; dc5d
+wdc5e:: ds 1 ; dc5e
+wdc5f:: ds 1 ; dc5f
+wdc60:: ds 1 ; dc60
+wdc61:: ds 1 ; dc61
+wdc62:: ds 1 ; dc62
+wdc63:: ds 1 ; dc63
+wdc64:: ds 1 ; dc64
+wdc65:: ds 1 ; dc65
+wdc66:: ds 1 ; dc66
+wdc67:: ds 1 ; dc67
+wdc68:: ds 1 ; dc68
+wdc69:: ds 1 ; dc69
+wdc6a:: ds 1 ; dc6a
+wdc6b:: ds 1 ; dc6b
+wdc6c:: ds 1 ; dc6c
+wdc6d:: ds 1 ; dc6d
+wdc6e:: ds 1 ; dc6e
+wdc6f:: ds 1 ; dc6f
+wdc70:: ds 1 ; dc70
+wdc71:: ds 1 ; dc71
+wdc72:: ds 1 ; dc72
+wdc73:: ds 1 ; dc73
+wdc74:: ds 1 ; dc74
+wdc75:: ds 1 ; dc75
+wdc76:: ds 1 ; dc76
+wdc77:: ds 1 ; dc77
+wdc78:: ds 1 ; dc78
+wdc79:: ds 1 ; dc79
+wdc7a:: ds 1 ; dc7a
+wdc7b:: ds 1 ; dc7b
+wdc7c:: ds 1 ; dc7c
+wdc7d:: ds 1 ; dc7d
+wdc7e:: ds 1 ; dc7e
+wdc7f:: ds 1 ; dc7f
+wdc80:: ds 1 ; dc80
+wdc81:: ds 1 ; dc81
+wdc82:: ds 1 ; dc82
+wdc83:: ds 1 ; dc83
+wdc84:: ds 1 ; dc84
+wdc85:: ds 1 ; dc85
+wdc86:: ds 1 ; dc86
+wdc87:: ds 1 ; dc87
+wdc88:: ds 1 ; dc88
+wdc89:: ds 1 ; dc89
+wdc8a:: ds 1 ; dc8a
+wdc8b:: ds 1 ; dc8b
+wdc8c:: ds 1 ; dc8c
+wdc8d:: ds 1 ; dc8d
+wdc8e:: ds 1 ; dc8e
+wdc8f:: ds 1 ; dc8f
+wdc90:: ds 1 ; dc90
+wdc91:: ds 1 ; dc91
+wdc92:: ds 1 ; dc92
+wdc93:: ds 1 ; dc93
+wdc94:: ds 1 ; dc94
+wdc95:: ds 1 ; dc95
+wdc96:: ds 1 ; dc96
+wdc97:: ds 1 ; dc97
+wdc98:: ds 1 ; dc98
+wdc99:: ds 1 ; dc99
+wdc9a:: ds 1 ; dc9a
+wdc9b:: ds 1 ; dc9b
+wdc9c:: ds 1 ; dc9c
+wdc9d:: ds 1 ; dc9d
+wdc9e:: ds 1 ; dc9e
+wdc9f:: ds 1 ; dc9f
+wdca0:: ds 1 ; dca0
+wdca1:: ds 1 ; dca1
+wdca2:: ds 1 ; dca2
+wdca3:: ds 1 ; dca3
+wdca4:: ds 1 ; dca4
+wdca5:: ds 1 ; dca5
+wdca6:: ds 1 ; dca6
+wdca7:: ds 1 ; dca7
+wdca8:: ds 1 ; dca8
+wdca9:: ds 1 ; dca9
+wdcaa:: ds 1 ; dcaa
+wdcab:: ds 1 ; dcab
+wdcac:: ds 1 ; dcac
+wdcad:: ds 1 ; dcad
+wdcae:: ds 1 ; dcae
+wdcaf:: ds 1 ; dcaf
+wdcb0:: ds 1 ; dcb0
+wdcb1:: ds 1 ; dcb1
+wdcb2:: ds 1 ; dcb2
+wdcb3:: ds 1 ; dcb3
+wdcb4:: ds 1 ; dcb4
+wdcb5:: ds 1 ; dcb5
+wdcb6:: ds 1 ; dcb6
+wdcb7:: ds 1 ; dcb7
+wdcb8:: ds 1 ; dcb8
+wdcb9:: ds 1 ; dcb9
+wdcba:: ds 1 ; dcba
+wdcbb:: ds 1 ; dcbb
+wdcbc:: ds 1 ; dcbc
+wdcbd:: ds 1 ; dcbd
+wdcbe:: ds 1 ; dcbe
+wdcbf:: ds 1 ; dcbf
+wdcc0:: ds 1 ; dcc0
+wdcc1:: ds 1 ; dcc1
+wdcc2:: ds 1 ; dcc2
+wdcc3:: ds 1 ; dcc3
+wdcc4:: ds 1 ; dcc4
+wdcc5:: ds 1 ; dcc5
+wdcc6:: ds 1 ; dcc6
+wdcc7:: ds 1 ; dcc7
+wdcc8:: ds 1 ; dcc8
+wdcc9:: ds 1 ; dcc9
+wdcca:: ds 1 ; dcca
+wdccb:: ds 1 ; dccb
+wdccc:: ds 1 ; dccc
+wdccd:: ds 1 ; dccd
+wdcce:: ds 1 ; dcce
+wdccf:: ds 1 ; dccf
+wdcd0:: ds 1 ; dcd0
+wdcd1:: ds 1 ; dcd1
+wdcd2:: ds 1 ; dcd2
+wdcd3:: ds 1 ; dcd3
+wdcd4:: ds 1 ; dcd4
+wdcd5:: ds 1 ; dcd5
+wdcd6:: ds 1 ; dcd6
+wdcd7:: ds 1 ; dcd7
+wdcd8:: ds 1 ; dcd8
+wdcd9:: ds 1 ; dcd9
+wdcda:: ds 1 ; dcda
+wdcdb:: ds 1 ; dcdb
+wdcdc:: ds 1 ; dcdc
+wdcdd:: ds 1 ; dcdd
+wdcde:: ds 1 ; dcde
+wdcdf:: ds 1 ; dcdf
+wdce0:: ds 1 ; dce0
+wdce1:: ds 1 ; dce1
+wdce2:: ds 1 ; dce2
+wdce3:: ds 1 ; dce3
+wdce4:: ds 1 ; dce4
+wdce5:: ds 1 ; dce5
+wdce6:: ds 1 ; dce6
+wdce7:: ds 1 ; dce7
+wdce8:: ds 1 ; dce8
+wdce9:: ds 1 ; dce9
+wdcea:: ds 1 ; dcea
+wdceb:: ds 1 ; dceb
+wdcec:: ds 1 ; dcec
+wdced:: ds 1 ; dced
+wdcee:: ds 1 ; dcee
+wdcef:: ds 1 ; dcef
+wdcf0:: ds 1 ; dcf0
+wdcf1:: ds 1 ; dcf1
+wdcf2:: ds 1 ; dcf2
+wdcf3:: ds 1 ; dcf3
+wdcf4:: ds 1 ; dcf4
+wdcf5:: ds 1 ; dcf5
+wdcf6:: ds 1 ; dcf6
+wdcf7:: ds 1 ; dcf7
+wdcf8:: ds 1 ; dcf8
+wdcf9:: ds 1 ; dcf9
+wdcfa:: ds 1 ; dcfa
+wdcfb:: ds 1 ; dcfb
+wdcfc:: ds 1 ; dcfc
+wdcfd:: ds 1 ; dcfd
+wdcfe:: ds 1 ; dcfe
+wdcff:: ds 1 ; dcff
+wdd00:: ds 1 ; dd00
+wdd01:: ds 1 ; dd01
+wdd02:: ds 1 ; dd02
+wdd03:: ds 1 ; dd03
+wdd04:: ds 1 ; dd04
+wdd05:: ds 1 ; dd05
+wdd06:: ds 1 ; dd06
+wdd07:: ds 1 ; dd07
+wdd08:: ds 1 ; dd08
+wdd09:: ds 1 ; dd09
+wdd0a:: ds 1 ; dd0a
+wdd0b:: ds 1 ; dd0b
+wdd0c:: ds 1 ; dd0c
+wdd0d:: ds 1 ; dd0d
+wdd0e:: ds 1 ; dd0e
+wdd0f:: ds 1 ; dd0f
+wdd10:: ds 1 ; dd10
+wdd11:: ds 1 ; dd11
+wdd12:: ds 1 ; dd12
+wdd13:: ds 1 ; dd13
+wdd14:: ds 1 ; dd14
+wdd15:: ds 1 ; dd15
+wdd16:: ds 1 ; dd16
+wdd17:: ds 1 ; dd17
+wdd18:: ds 1 ; dd18
+wdd19:: ds 1 ; dd19
+wdd1a:: ds 1 ; dd1a
+wdd1b:: ds 1 ; dd1b
+wdd1c:: ds 1 ; dd1c
+wdd1d:: ds 1 ; dd1d
+wdd1e:: ds 1 ; dd1e
+wdd1f:: ds 1 ; dd1f
+wdd20:: ds 1 ; dd20
+wdd21:: ds 1 ; dd21
+wdd22:: ds 1 ; dd22
+wdd23:: ds 1 ; dd23
+wdd24:: ds 1 ; dd24
+wdd25:: ds 1 ; dd25
+wdd26:: ds 1 ; dd26
+wdd27:: ds 1 ; dd27
+wdd28:: ds 1 ; dd28
+wdd29:: ds 1 ; dd29
+wdd2a:: ds 1 ; dd2a
+wdd2b:: ds 1 ; dd2b
+wdd2c:: ds 1 ; dd2c
+wdd2d:: ds 1 ; dd2d
+wdd2e:: ds 1 ; dd2e
+wdd2f:: ds 1 ; dd2f
+wdd30:: ds 1 ; dd30
+wdd31:: ds 1 ; dd31
+wdd32:: ds 1 ; dd32
+wdd33:: ds 1 ; dd33
+wdd34:: ds 1 ; dd34
+wdd35:: ds 1 ; dd35
+wdd36:: ds 1 ; dd36
+wdd37:: ds 1 ; dd37
+wdd38:: ds 1 ; dd38
+wdd39:: ds 1 ; dd39
+wdd3a:: ds 1 ; dd3a
+wdd3b:: ds 1 ; dd3b
+wdd3c:: ds 1 ; dd3c
+wdd3d:: ds 1 ; dd3d
+wdd3e:: ds 1 ; dd3e
+wdd3f:: ds 1 ; dd3f
+wdd40:: ds 1 ; dd40
+wdd41:: ds 1 ; dd41
+wdd42:: ds 1 ; dd42
+wdd43:: ds 1 ; dd43
+wdd44:: ds 1 ; dd44
+wdd45:: ds 1 ; dd45
+wdd46:: ds 1 ; dd46
+wdd47:: ds 1 ; dd47
+wdd48:: ds 1 ; dd48
+wdd49:: ds 1 ; dd49
+wdd4a:: ds 1 ; dd4a
+wdd4b:: ds 1 ; dd4b
+wdd4c:: ds 1 ; dd4c
+wdd4d:: ds 1 ; dd4d
+wdd4e:: ds 1 ; dd4e
+wdd4f:: ds 1 ; dd4f
+wdd50:: ds 1 ; dd50
+wdd51:: ds 1 ; dd51
+wdd52:: ds 1 ; dd52
+wdd53:: ds 1 ; dd53
+wdd54:: ds 1 ; dd54
+wdd55:: ds 1 ; dd55
+wdd56:: ds 1 ; dd56
+wdd57:: ds 1 ; dd57
+wdd58:: ds 1 ; dd58
+wdd59:: ds 1 ; dd59
+wdd5a:: ds 1 ; dd5a
+wdd5b:: ds 1 ; dd5b
+wdd5c:: ds 1 ; dd5c
+wdd5d:: ds 1 ; dd5d
+wdd5e:: ds 1 ; dd5e
+wdd5f:: ds 1 ; dd5f
+wdd60:: ds 1 ; dd60
+wdd61:: ds 1 ; dd61
+wdd62:: ds 1 ; dd62
+wdd63:: ds 1 ; dd63
+wdd64:: ds 1 ; dd64
+wdd65:: ds 1 ; dd65
+wdd66:: ds 1 ; dd66
+wdd67:: ds 1 ; dd67
+wdd68:: ds 1 ; dd68
+wdd69:: ds 1 ; dd69
+wdd6a:: ds 1 ; dd6a
+wdd6b:: ds 1 ; dd6b
+wdd6c:: ds 1 ; dd6c
+wdd6d:: ds 1 ; dd6d
+wdd6e:: ds 1 ; dd6e
+wdd6f:: ds 1 ; dd6f
+wdd70:: ds 1 ; dd70
+wdd71:: ds 1 ; dd71
+wdd72:: ds 1 ; dd72
+wdd73:: ds 1 ; dd73
+wdd74:: ds 1 ; dd74
+wdd75:: ds 1 ; dd75
+wdd76:: ds 1 ; dd76
+wdd77:: ds 1 ; dd77
+wdd78:: ds 1 ; dd78
+wdd79:: ds 1 ; dd79
+wdd7a:: ds 1 ; dd7a
+wdd7b:: ds 1 ; dd7b
+wdd7c:: ds 1 ; dd7c
+wdd7d:: ds 1 ; dd7d
+wdd7e:: ds 1 ; dd7e
+wdd7f:: ds 1 ; dd7f
+wdd80:: ds 1 ; dd80
+wdd81:: ds 1 ; dd81
+wdd82:: ds 1 ; dd82
+wdd83:: ds 1 ; dd83
+wdd84:: ds 1 ; dd84
+wdd85:: ds 1 ; dd85
+wdd86:: ds 1 ; dd86
+wdd87:: ds 1 ; dd87
+wdd88:: ds 1 ; dd88
+wdd89:: ds 1 ; dd89
+wdd8a:: ds 1 ; dd8a
+wdd8b:: ds 1 ; dd8b
+wdd8c:: ds 1 ; dd8c
+wdd8d:: ds 1 ; dd8d
+wdd8e:: ds 1 ; dd8e
+wdd8f:: ds 1 ; dd8f
+wdd90:: ds 1 ; dd90
+wdd91:: ds 1 ; dd91
+wdd92:: ds 1 ; dd92
+wdd93:: ds 1 ; dd93
+wdd94:: ds 1 ; dd94
+wdd95:: ds 1 ; dd95
+wdd96:: ds 1 ; dd96
+wdd97:: ds 1 ; dd97
+wdd98:: ds 1 ; dd98
+wdd99:: ds 1 ; dd99
+wdd9a:: ds 1 ; dd9a
+wdd9b:: ds 1 ; dd9b
+wdd9c:: ds 1 ; dd9c
+wdd9d:: ds 1 ; dd9d
+wdd9e:: ds 1 ; dd9e
+wdd9f:: ds 1 ; dd9f
+wdda0:: ds 1 ; dda0
+wdda1:: ds 1 ; dda1
+wdda2:: ds 1 ; dda2
+wdda3:: ds 1 ; dda3
+wdda4:: ds 1 ; dda4
+wdda5:: ds 1 ; dda5
+wdda6:: ds 1 ; dda6
+wdda7:: ds 1 ; dda7
+wdda8:: ds 1 ; dda8
+wdda9:: ds 1 ; dda9
+wddaa:: ds 1 ; ddaa
+wddab:: ds 1 ; ddab
+wddac:: ds 1 ; ddac
+wddad:: ds 1 ; ddad
+wddae:: ds 1 ; ddae
+wddaf:: ds 1 ; ddaf
+wddb0:: ds 1 ; ddb0
+wddb1:: ds 1 ; ddb1
+wddb2:: ds 1 ; ddb2
+wddb3:: ds 1 ; ddb3
+wddb4:: ds 1 ; ddb4
+wddb5:: ds 1 ; ddb5
+wddb6:: ds 1 ; ddb6
+wddb7:: ds 1 ; ddb7
+wddb8:: ds 1 ; ddb8
+wddb9:: ds 1 ; ddb9
+wddba:: ds 1 ; ddba
+wddbb:: ds 1 ; ddbb
+wddbc:: ds 1 ; ddbc
+wddbd:: ds 1 ; ddbd
+wddbe:: ds 1 ; ddbe
+wddbf:: ds 1 ; ddbf
+wddc0:: ds 1 ; ddc0
+wddc1:: ds 1 ; ddc1
+wddc2:: ds 1 ; ddc2
+wddc3:: ds 1 ; ddc3
+wddc4:: ds 1 ; ddc4
+wddc5:: ds 1 ; ddc5
+wddc6:: ds 1 ; ddc6
+wddc7:: ds 1 ; ddc7
+wddc8:: ds 1 ; ddc8
+wddc9:: ds 1 ; ddc9
+wddca:: ds 1 ; ddca
+wddcb:: ds 1 ; ddcb
+wddcc:: ds 1 ; ddcc
+wddcd:: ds 1 ; ddcd
+wddce:: ds 1 ; ddce
+wddcf:: ds 1 ; ddcf
+wddd0:: ds 1 ; ddd0
+wddd1:: ds 1 ; ddd1
+wddd2:: ds 1 ; ddd2
+wddd3:: ds 1 ; ddd3
+wddd4:: ds 1 ; ddd4
+wddd5:: ds 1 ; ddd5
+wddd6:: ds 1 ; ddd6
+wddd7:: ds 1 ; ddd7
+wddd8:: ds 1 ; ddd8
+wddd9:: ds 1 ; ddd9
+wddda:: ds 1 ; ddda
+wdddb:: ds 1 ; dddb
+wdddc:: ds 1 ; dddc
+wdddd:: ds 1 ; dddd
+wddde:: ds 1 ; ddde
+wdddf:: ds 1 ; dddf
+wdde0:: ds 1 ; dde0
+wdde1:: ds 1 ; dde1
+wdde2:: ds 1 ; dde2
+wdde3:: ds 1 ; dde3
+wdde4:: ds 1 ; dde4
+wdde5:: ds 1 ; dde5
+wdde6:: ds 1 ; dde6
+wdde7:: ds 1 ; dde7
+wdde8:: ds 1 ; dde8
+wdde9:: ds 1 ; dde9
+wddea:: ds 1 ; ddea
+wddeb:: ds 1 ; ddeb
+wddec:: ds 1 ; ddec
+wdded:: ds 1 ; dded
+wddee:: ds 1 ; ddee
+wddef:: ds 1 ; ddef
+wddf0:: ds 1 ; ddf0
+wddf1:: ds 1 ; ddf1
+wddf2:: ds 1 ; ddf2
+wddf3:: ds 1 ; ddf3
+wddf4:: ds 1 ; ddf4
+wddf5:: ds 1 ; ddf5
+wddf6:: ds 1 ; ddf6
+wddf7:: ds 1 ; ddf7
+wddf8:: ds 1 ; ddf8
+wddf9:: ds 1 ; ddf9
+wddfa:: ds 1 ; ddfa
+wddfb:: ds 1 ; ddfb
+wddfc:: ds 1 ; ddfc
+wddfd:: ds 1 ; ddfd
+wddfe:: ds 1 ; ddfe
+wddff:: ds 1 ; ddff
+wde00:: ds 1 ; de00
+wde01:: ds 1 ; de01
+wde02:: ds 1 ; de02
+wde03:: ds 1 ; de03
+wde04:: ds 1 ; de04
+wde05:: ds 1 ; de05
+wde06:: ds 1 ; de06
+wde07:: ds 1 ; de07
+wde08:: ds 1 ; de08
+wde09:: ds 1 ; de09
+wde0a:: ds 1 ; de0a
+wde0b:: ds 1 ; de0b
+wde0c:: ds 1 ; de0c
+wde0d:: ds 1 ; de0d
+wde0e:: ds 1 ; de0e
+wde0f:: ds 1 ; de0f
+wde10:: ds 1 ; de10
+wde11:: ds 1 ; de11
+wde12:: ds 1 ; de12
+wde13:: ds 1 ; de13
+wde14:: ds 1 ; de14
+wde15:: ds 1 ; de15
+wde16:: ds 1 ; de16
+wde17:: ds 1 ; de17
+wde18:: ds 1 ; de18
+wde19:: ds 1 ; de19
+wde1a:: ds 1 ; de1a
+wde1b:: ds 1 ; de1b
+wde1c:: ds 1 ; de1c
+wde1d:: ds 1 ; de1d
+wde1e:: ds 1 ; de1e
+wde1f:: ds 1 ; de1f
+wde20:: ds 1 ; de20
+wde21:: ds 1 ; de21
+wde22:: ds 1 ; de22
+wde23:: ds 1 ; de23
+wde24:: ds 1 ; de24
+wde25:: ds 1 ; de25
+wde26:: ds 1 ; de26
+wde27:: ds 1 ; de27
+wde28:: ds 1 ; de28
+wde29:: ds 1 ; de29
+wde2a:: ds 1 ; de2a
+wde2b:: ds 1 ; de2b
+wde2c:: ds 1 ; de2c
+wde2d:: ds 1 ; de2d
+wde2e:: ds 1 ; de2e
+wde2f:: ds 1 ; de2f
+wde30:: ds 1 ; de30
+wde31:: ds 1 ; de31
+wde32:: ds 1 ; de32
+wde33:: ds 1 ; de33
+wde34:: ds 1 ; de34
+wde35:: ds 1 ; de35
+wde36:: ds 1 ; de36
+wde37:: ds 1 ; de37
+wde38:: ds 1 ; de38
+wde39:: ds 1 ; de39
+wde3a:: ds 1 ; de3a
+wde3b:: ds 1 ; de3b
+wde3c:: ds 1 ; de3c
+wde3d:: ds 1 ; de3d
+wde3e:: ds 1 ; de3e
+wde3f:: ds 1 ; de3f
+wde40:: ds 1 ; de40
+wde41:: ds 1 ; de41
+wde42:: ds 1 ; de42
+wde43:: ds 1 ; de43
+wde44:: ds 1 ; de44
+wde45:: ds 1 ; de45
+wde46:: ds 1 ; de46
+wde47:: ds 1 ; de47
+wde48:: ds 1 ; de48
+wde49:: ds 1 ; de49
+wde4a:: ds 1 ; de4a
+wde4b:: ds 1 ; de4b
+wde4c:: ds 1 ; de4c
+wde4d:: ds 1 ; de4d
+wde4e:: ds 1 ; de4e
+wde4f:: ds 1 ; de4f
+wde50:: ds 1 ; de50
+wde51:: ds 1 ; de51
+wde52:: ds 1 ; de52
+wde53:: ds 1 ; de53
+wde54:: ds 1 ; de54
+wde55:: ds 1 ; de55
+wde56:: ds 1 ; de56
+wde57:: ds 1 ; de57
+wde58:: ds 1 ; de58
+wde59:: ds 1 ; de59
+wde5a:: ds 1 ; de5a
+wde5b:: ds 1 ; de5b
+wde5c:: ds 1 ; de5c
+wde5d:: ds 1 ; de5d
+wde5e:: ds 1 ; de5e
+wde5f:: ds 1 ; de5f
+wde60:: ds 1 ; de60
+wde61:: ds 1 ; de61
+wde62:: ds 1 ; de62
+wde63:: ds 1 ; de63
+wde64:: ds 1 ; de64
+wde65:: ds 1 ; de65
+wde66:: ds 1 ; de66
+wde67:: ds 1 ; de67
+wde68:: ds 1 ; de68
+wde69:: ds 1 ; de69
+wde6a:: ds 1 ; de6a
+wde6b:: ds 1 ; de6b
+wde6c:: ds 1 ; de6c
+wde6d:: ds 1 ; de6d
+wde6e:: ds 1 ; de6e
+wde6f:: ds 1 ; de6f
+wde70:: ds 1 ; de70
+wde71:: ds 1 ; de71
+wde72:: ds 1 ; de72
+wde73:: ds 1 ; de73
+wde74:: ds 1 ; de74
+wde75:: ds 1 ; de75
+wde76:: ds 1 ; de76
+wde77:: ds 1 ; de77
+wde78:: ds 1 ; de78
+wde79:: ds 1 ; de79
+wde7a:: ds 1 ; de7a
+wde7b:: ds 1 ; de7b
+wde7c:: ds 1 ; de7c
+wde7d:: ds 1 ; de7d
+wde7e:: ds 1 ; de7e
+wde7f:: ds 1 ; de7f
+wde80:: ds 1 ; de80
+wde81:: ds 1 ; de81
+wde82:: ds 1 ; de82
+wde83:: ds 1 ; de83
+wde84:: ds 1 ; de84
+wde85:: ds 1 ; de85
+wde86:: ds 1 ; de86
+wde87:: ds 1 ; de87
+wde88:: ds 1 ; de88
+wde89:: ds 1 ; de89
+wde8a:: ds 1 ; de8a
+wde8b:: ds 1 ; de8b
+wde8c:: ds 1 ; de8c
+wde8d:: ds 1 ; de8d
+wde8e:: ds 1 ; de8e
+wde8f:: ds 1 ; de8f
+wde90:: ds 1 ; de90
+wde91:: ds 1 ; de91
+wde92:: ds 1 ; de92
+wde93:: ds 1 ; de93
+wde94:: ds 1 ; de94
+wde95:: ds 1 ; de95
+wde96:: ds 1 ; de96
+wde97:: ds 1 ; de97
+wde98:: ds 1 ; de98
+wde99:: ds 1 ; de99
+wde9a:: ds 1 ; de9a
+wde9b:: ds 1 ; de9b
+wde9c:: ds 1 ; de9c
+wde9d:: ds 1 ; de9d
+wde9e:: ds 1 ; de9e
+wde9f:: ds 1 ; de9f
+wdea0:: ds 1 ; dea0
+wdea1:: ds 1 ; dea1
+wdea2:: ds 1 ; dea2
+wdea3:: ds 1 ; dea3
+wdea4:: ds 1 ; dea4
+wdea5:: ds 1 ; dea5
+wdea6:: ds 1 ; dea6
+wdea7:: ds 1 ; dea7
+wdea8:: ds 1 ; dea8
+wdea9:: ds 1 ; dea9
+wdeaa:: ds 1 ; deaa
+wdeab:: ds 1 ; deab
+wdeac:: ds 1 ; deac
+wdead:: ds 1 ; dead
+wdeae:: ds 1 ; deae
+wdeaf:: ds 1 ; deaf
+wdeb0:: ds 1 ; deb0
+wdeb1:: ds 1 ; deb1
+wdeb2:: ds 1 ; deb2
+wdeb3:: ds 1 ; deb3
+wdeb4:: ds 1 ; deb4
+wdeb5:: ds 1 ; deb5
+wdeb6:: ds 1 ; deb6
+wdeb7:: ds 1 ; deb7
+wdeb8:: ds 1 ; deb8
+wdeb9:: ds 1 ; deb9
+wdeba:: ds 1 ; deba
+wdebb:: ds 1 ; debb
+wdebc:: ds 1 ; debc
+wdebd:: ds 1 ; debd
+wdebe:: ds 1 ; debe
+wdebf:: ds 1 ; debf
+wdec0:: ds 1 ; dec0
+wdec1:: ds 1 ; dec1
+wdec2:: ds 1 ; dec2
+wdec3:: ds 1 ; dec3
+wdec4:: ds 1 ; dec4
+wdec5:: ds 1 ; dec5
+wdec6:: ds 1 ; dec6
+wdec7:: ds 1 ; dec7
+wdec8:: ds 1 ; dec8
+wdec9:: ds 1 ; dec9
+wdeca:: ds 1 ; deca
+wdecb:: ds 1 ; decb
+wdecc:: ds 1 ; decc
+wdecd:: ds 1 ; decd
+wdece:: ds 1 ; dece
+wdecf:: ds 1 ; decf
+wded0:: ds 1 ; ded0
+wded1:: ds 1 ; ded1
+wded2:: ds 1 ; ded2
+wded3:: ds 1 ; ded3
+wded4:: ds 1 ; ded4
+wded5:: ds 1 ; ded5
+wded6:: ds 1 ; ded6
+wded7:: ds 1 ; ded7
+wded8:: ds 1 ; ded8
+wded9:: ds 1 ; ded9
+wdeda:: ds 1 ; deda
+wdedb:: ds 1 ; dedb
+wdedc:: ds 1 ; dedc
+wdedd:: ds 1 ; dedd
+wdede:: ds 1 ; dede
+wdedf:: ds 1 ; dedf
+wdee0:: ds 1 ; dee0
+wdee1:: ds 1 ; dee1
+wdee2:: ds 1 ; dee2
+wdee3:: ds 1 ; dee3
+wdee4:: ds 1 ; dee4
+wdee5:: ds 1 ; dee5
+wdee6:: ds 1 ; dee6
+wdee7:: ds 1 ; dee7
+wdee8:: ds 1 ; dee8
+wdee9:: ds 1 ; dee9
+wdeea:: ds 1 ; deea
+wdeeb:: ds 1 ; deeb
+wdeec:: ds 1 ; deec
+wdeed:: ds 1 ; deed
+wdeee:: ds 1 ; deee
+wdeef:: ds 1 ; deef
+wdef0:: ds 1 ; def0
+wdef1:: ds 1 ; def1
+wdef2:: ds 1 ; def2
+wdef3:: ds 1 ; def3
+wdef4:: ds 1 ; def4
+wdef5:: ds 1 ; def5
+wdef6:: ds 1 ; def6
+wdef7:: ds 1 ; def7
+wdef8:: ds 1 ; def8
+wdef9:: ds 1 ; def9
+wdefa:: ds 1 ; defa
+wdefb:: ds 1 ; defb
+wdefc:: ds 1 ; defc
+wdefd:: ds 1 ; defd
+wdefe:: ds 1 ; defe
+wdeff:: ds 1 ; deff
 
 SECTION "Stack", WRAMX[$df00], BANK[$1]
 wStackBottom::

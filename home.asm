@@ -18,12 +18,10 @@ INCLUDE "home/lcd.asm"
 INCLUDE "home/time.asm"
 INCLUDE "home/init.asm"
 INCLUDE "home/serial.asm"
+INCLUDE "home/joypad.asm"
 
-JoypadInt::
-	dr $8df, $8e6
-
-Joypad::
-	dr $8e6, $bdf
+Functionaf0:: ; af0
+	dr $af0, $bdf
 
 UpdatePalsIfCGB::
 	ld a, [hCGB]
@@ -87,10 +85,16 @@ BackUpTilesToBuffer::
 	dr $3158, $3164
 
 ReloadTilesFromBuffer::
-	dr $3164, $3564
+	dr $3164, $344c
+
+Function344c::
+	dr $344c, $3564
 
 Function3564::
 	dr $3564, $3d4f
 
 DisableAudio::
-	dr $3d4f, $3fee
+	dr $3d4f, $3e24
+
+Function3e24::
+	dr $3e24, $3fee
