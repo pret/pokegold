@@ -15,6 +15,7 @@ INCLUDE "macros/rst.asm"
 INCLUDE "macros/mobile.asm"
 INCLUDE "macros/trainer.asm"
 INCLUDE "macros/trade_anim.asm"
+INCLUDE "macros/wram.asm"
 
 dr: MACRO
 IF DEF(GOLD)

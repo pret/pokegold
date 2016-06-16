@@ -17,9 +17,7 @@ INCLUDE "home/fade.asm"
 INCLUDE "home/lcd.asm"
 INCLUDE "home/time.asm"
 INCLUDE "home/init.asm"
-
-Serial::
-	dr $6aa, $8df
+INCLUDE "home/serial.asm"
 
 JoypadInt::
 	dr $8df, $8e6
@@ -56,7 +54,10 @@ Function162b::
 	dr $162b, $1642
 
 Function1642::
-	dr $1642, $1ebf
+	dr $1642, $1eb3
+
+PrinterReceive::
+	dr $1eb3, $1ebf
 
 AskSerial::
 	dr $1ebf, $1efa
@@ -67,7 +68,7 @@ Function1efa::
 FarCall_hl::
 	dr $2e27, $2e49
 
-Function2e49::
+Predef::
 	dr $2e49, $30e1
 
 OpenSRAM::
@@ -79,11 +80,17 @@ CloseSRAM::
 Function30ff::
 	dr $30ff, $314c
 
-Function314c::
-	dr $314c, $3564
+ByteFill::
+	dr $314c, $3158
+
+BackUpTilesToBuffer::
+	dr $3158, $3164
+
+ReloadTilesFromBuffer::
+	dr $3164, $3564
 
 Function3564::
 	dr $3564, $3d4f
 
-Function3d4f::
+DisableAudio::
 	dr $3d4f, $3fee

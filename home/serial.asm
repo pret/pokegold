@@ -1,42 +1,28 @@
-Serial:: ; 6ef
-; The serial interrupt.
-
+Serial:: ; 6aa (0:06aa)
 	push af
 	push bc
 	push de
 	push hl
 
-	ld a, [hMobileReceive]
-	and a
-	jr nz, .mobile
-
-	ld a, [wc2d4]
+	ld a, [wPrinterConnectionOpen]
 	bit 0, a
 	jr nz, .printer
 
 	ld a, [hLinkPlayerNumber]
-	inc a ; is it equal to -1?
+	inc a
 	jr z, .init_player_number
-
 	ld a, [rSB]
 	ld [hSerialReceive], a
-
 	ld a, [hSerialSend]
 	ld [rSB], a
-
 	ld a, [hLinkPlayerNumber]
 	cp $2
 	jr z, .player2
-
-	ld a, 0 << rSC_ON
+	ld a, $0
 	ld [rSC], a
-	ld a, 1 << rSC_ON
+	ld a, $80
 	ld [rSC], a
 	jr .player2
-
-.mobile
-	call MobileReceive
-	jr .end
 
 .printer
 	call PrinterReceive
@@ -65,6 +51,7 @@ Serial:: ; 6ef
 	bit 7, a
 	jr nz, .wait_bit_7
 
+	; cycle the serial controller
 	ld a, 0 << rSC_ON
 	ld [rSC], a
 	ld a, 1 << rSC_ON
@@ -74,11 +61,10 @@ Serial:: ; 6ef
 ._player2
 	xor a
 	ld [rSB], a
-
 .player2
 	ld a, $1
-	ld [hFFCA], a
-	ld a, -2
+	ld [hFFCC], a
+	ld a, SERIAL_NO_DATA_BYTE
 	ld [hSerialSend], a
 
 .end
@@ -87,15 +73,14 @@ Serial:: ; 6ef
 	pop bc
 	pop af
 	reti
-; 75f
 
-Function75f:: ; 75f
+Function710:: ; 710
 	ld a, $1
-	ld [hFFCC], a
+	ld [hFFCE], a
 .loop
 	ld a, [hl]
 	ld [hSerialSend], a
-	call Function78a
+	call Function73b
 	push bc
 	ld b, a
 	inc hl
@@ -103,16 +88,16 @@ Function75f:: ; 75f
 .wait
 	dec a
 	jr nz, .wait
-	ld a, [hFFCC]
+	ld a, [hFFCE]
 	and a
 	ld a, b
 	pop bc
 	jr z, .load
 	dec hl
-	cp $fd
+	cp SERIAL_PREAMBLE_BYTE
 	jr nz, .loop
 	xor a
-	ld [hFFCC], a
+	ld [hFFCE], a
 	jr .loop
 
 .load
@@ -123,95 +108,96 @@ Function75f:: ; 75f
 	or c
 	jr nz, .loop
 	ret
-; 78a
 
-Function78a:: ; 78a
+Function73b:: ; 73b (0:073b)
+.loop
 	xor a
-	ld [hFFCA], a
+	ld [hFFCC], a
 	ld a, [hLinkPlayerNumber]
 	cp $2
-	jr nz, .asm_79b
-	ld a, $1
+	jr nz, .loop2
+	ld a, (1 << rSC_CLOCK) | (0 << rSC_ON)
 	ld [rSC], a
-	ld a, $81
+	ld a, (1 << rSC_CLOCK) | (1 << rSC_ON)
 	ld [rSC], a
-
-.asm_79b
-	ld a, [hFFCA]
+.loop2
+	ld a, [hFFCC]
 	and a
-	jr nz, .asm_7e5
+	jr nz, .reset_ffcc
 	ld a, [hLinkPlayerNumber]
 	cp $1
-	jr nz, .asm_7c0
-	call Function82b
-	jr z, .asm_7c0
-	call .asm_825
+	jr nz, .not_player_1_or_wLinkTimeoutFrames_zero
+	call CheckLinkTimeout
+	jr z, .not_player_1_or_wLinkTimeoutFrames_zero
+	call Serial15CycleDelay
 	push hl
-	ld hl, wcf5c
+	ld hl, wLinkTimeoutFrames + 1
 	inc [hl]
-	jr nz, .asm_7b7
+	jr nz, .no_rollover_up
 	dec hl
 	inc [hl]
 
-.asm_7b7
+.no_rollover_up
 	pop hl
-	call Function82b
-	jr nz, .asm_79b
-	jp Function833
+	call CheckLinkTimeout
+	jr nz, .loop2
+	jp SerialDisconnected
 
-.asm_7c0
+.not_player_1_or_wLinkTimeoutFrames_zero
 	ld a, [rIE]
 	and $f
 	cp $8
-	jr nz, .asm_79b
-	ld a, [wcf5d]
+	jr nz, .loop2
+	ld a, [wce5d]
 	dec a
-	ld [wcf5d], a
-	jr nz, .asm_79b
-	ld a, [wcf5d + 1]
+	ld [wce5d], a
+	jr nz, .loop2
+	ld a, [wce5d + 1]
 	dec a
-	ld [wcf5d + 1], a
-	jr nz, .asm_79b
+	ld [wce5d + 1], a
+	jr nz, .loop2
 	ld a, [hLinkPlayerNumber]
 	cp $1
-	jr z, .asm_7e5
-	ld a, $ff
-.asm_7e2
-	dec a
-	jr nz, .asm_7e2
+	jr z, .reset_ffcc
 
-.asm_7e5
+	ld a, $ff
+.delay_255_cycles
+	dec a
+	jr nz, .delay_255_cycles
+
+.reset_ffcc
 	xor a
-	ld [hFFCA], a
+	ld [hFFCC], a
 	ld a, [rIE]
 	and $f
 	sub $8
-	jr nz, .asm_7f8
-	ld [wcf5d], a
-	ld a, $50
-	ld [wcf5d + 1], a
+	jr nz, .rIE_not_equal_8
 
-.asm_7f8
+	ld [wce5d], a
+	ld a, $50
+	ld [wce5d + 1], a
+
+.rIE_not_equal_8
 	ld a, [hSerialReceive]
-	cp $fe
+	cp SERIAL_NO_DATA_BYTE
 	ret nz
-	call Function82b
-	jr z, .asm_813
+	call CheckLinkTimeout
+	jr z, .link_timed_out
 	push hl
-	ld hl, wcf5c
+	ld hl, wLinkTimeoutFrames + 1
 	ld a, [hl]
 	dec a
 	ld [hld], a
 	inc a
-	jr nz, .asm_80d
+	jr nz, .no_rollover
 	dec [hl]
 
-.asm_80d
+.no_rollover
 	pop hl
-	call Function82b
-	jr z, Function833
+	call CheckLinkTimeout
+	jr z, SerialDisconnected
 
-.asm_813
+.link_timed_out
 	ld a, [rIE]
 	and $f
 	cp $8
@@ -220,84 +206,77 @@ Function78a:: ; 78a
 	ld a, [hl]
 	ld [hSerialSend], a
 	call DelayFrame
-	jp Function78a
+	jp .loop
 
-.asm_825
+Serial15CycleDelay:: ; 7d6 (0:07d6)
 	ld a, $f
-.asm_827
+.loop
 	dec a
-	jr nz, .asm_827
+	jr nz, .loop
 	ret
-; 82b
 
-Function82b:: ; 82b
+CheckLinkTimeout:: ; 7dc (0:07dc)
 	push hl
-	ld hl, wcf5b
+	ld hl, wLinkTimeoutFrames
 	ld a, [hli]
 	or [hl]
 	pop hl
 	ret
-; 833
 
-Function833:: ; 833
+SerialDisconnected:: ; 7e4 (0:07e4)
 	dec a
-	ld [wcf5b], a
-	ld [wcf5c], a
+	ld [wLinkTimeoutFrames], a
+	ld [wLinkTimeoutFrames + 1], a
 	ret
-; 83b
 
-Function83b:: ; 83b
-	ld hl, wPlayerLinkAction
-	ld de, wOtherPlayerLinkMode
+Function7ec:: ; 7ec
+	ld hl, wce56
+	ld de, wce51
 	ld c, $2
 	ld a, $1
-	ld [hFFCC], a
-.asm_847
+	ld [hFFCE], a
+.asm_7f8
 	call DelayFrame
 	ld a, [hl]
 	ld [hSerialSend], a
-	call Function78a
+	call Function73b
 	ld b, a
 	inc hl
-	ld a, [hFFCC]
+	ld a, [hFFCE]
 	and a
 	ld a, $0
-	ld [hFFCC], a
-	jr nz, .asm_847
+	ld [hFFCE], a
+	jr nz, .asm_7f8
 	ld a, b
 	ld [de], a
 	inc de
 	dec c
-	jr nz, .asm_847
+	jr nz, .asm_7f8
 	ret
-; 862
 
-Function862:: ; 862
-	call LoadTileMapToTempTileMap
+Function813:: ; 813
+	call BackUpTilesToBuffer
 	callab PlaceWaitingText
-	call Function87d
-	jp Call_LoadTempTileMapToTileMap
-; 871
+	call WaitLinkTransfer
+	jp ReloadTilesFromBuffer
 
-
-Function871:: ; 871
-	call LoadTileMapToTempTileMap
+Function822:: ; 822
+	call BackUpTilesToBuffer
 	callab PlaceWaitingText
-	jp Function87d
-; 87d
+	jp WaitLinkTransfer
 
 ; One "giant" leap for machinekind
 
-Function87d:: ; 87d
+WaitLinkTransfer:: ; 82e (0:082e)
 	ld a, $ff
-	ld [wOtherPlayerLinkAction], a
+	ld [wce52], a
 .loop
 	call LinkTransfer
 	call DelayFrame
-	call Function82b
+	call CheckLinkTimeout
 	jr z, .check
 	push hl
-	ld hl, wcf5c
+	ld hl, wLinkTimeoutFrames + 1
 	dec [hl]
 	jr nz, .skip
 	dec hl
@@ -305,13 +284,13 @@ Function87d:: ; 87d
 	jr nz, .skip
 	pop hl
 	xor a
-	jp Function833
+	jp SerialDisconnected
 
 .skip
 	pop hl
 
 .check
-	ld a, [wOtherPlayerLinkAction]
+	ld a, [wce52]
 	inc a
 	jr z, .loop
 
@@ -329,59 +308,53 @@ Function87d:: ; 87d
 	dec b
 	jr nz, .acknowledge
 
-	ld a, [wOtherPlayerLinkAction]
-	ld [wOtherPlayerLinkMode], a
+	ld a, [wce52]
+	ld [wce51], a
 	ret
-; 8c1
 
-LinkTransfer:: ; 8c1
+LinkTransfer:: ; 872 (0:0872)
 	push bc
-	ld b, SERIAL_TIMECAPSULE
+	ld b, $60
 	ld a, [wLinkMode]
-	cp LINK_TIMECAPSULE
-	jr z, .got_high_nybble
-	ld b, SERIAL_TIMECAPSULE
-	jr c, .got_high_nybble
-	cp LINK_TRADECENTER
-	ld b, SERIAL_TRADECENTER
-	jr z, .got_high_nybble
-	ld b, SERIAL_BATTLE
-
-.got_high_nybble
-	call .Receive
-	ld a, [wPlayerLinkAction]
+	cp $1
+	jr z, .asm_888
+	ld b, $60
+	jr c, .asm_888
+	cp $2
+	ld b, $70
+	jr z, .asm_888
+	ld b, $80
+.asm_888
+	call LinkTransferReceive
+	ld a, [wce56]
 	add b
 	ld [hSerialSend], a
 	ld a, [hLinkPlayerNumber]
 	cp $2
-	jr nz, .player_1
+	jr nz, .asm_89f
 	ld a, $1
 	ld [rSC], a
 	ld a, $81
 	ld [rSC], a
-
-.player_1
-	call .Receive
+.asm_89f
+	call LinkTransferReceive
 	pop bc
 	ret
-; 8f3
 
-.Receive ; 8f3
+LinkTransferReceive:: ; 8a4 (0:08a4)
 	ld a, [hSerialReceive]
-	ld [wOtherPlayerLinkMode], a
+	ld [wce51], a
 	and $f0
 	cp b
 	ret nz
 	xor a
 	ld [hSerialReceive], a
-	ld a, [wOtherPlayerLinkMode]
+	ld a, [wce51]
 	and $f
-	ld [wOtherPlayerLinkAction], a
+	ld [wce52], a
 	ret
-; 908
 
-LinkDataReceived:: ; 908
-; Let the other system know that the data has been received.
+LinkDataReceived:: ; 8b9 (0:08b9)
 	xor a
 	ld [hSerialSend], a
 	ld a, [hLinkPlayerNumber]
@@ -392,9 +365,8 @@ LinkDataReceived:: ; 908
 	ld a, $81
 	ld [rSC], a
 	ret
-; 919
 
-Function919:: ; 919
+Function8ca:: ; 8ca
 	ld a, [wLinkMode]
 	and a
 	ret nz
@@ -407,4 +379,3 @@ Function919:: ; 919
 	ld a, $80
 	ld [rSC], a
 	ret
-; 92e

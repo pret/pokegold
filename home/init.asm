@@ -1,5 +1,5 @@
 Reset:: ; 5b0 (0:05b0)
-	call Function3d4f
+	call DisableAudio
 	xor a
 	ld [hMapAnims], a
 	call Function3564
@@ -42,6 +42,7 @@ Init:: ; 5d1 (0:05d1)
 	ld a, [rLY]
 	cp 145
 	jr nz, .wait
+
 	xor a
 	ld [rLCDC], a
 
@@ -64,75 +65,94 @@ Init:: ; 5d1 (0:05d1)
 	xor a
 	ld hl, HRAM_START
 	ld bc, HRAM_END - HRAM_START
-	call Function314c
+	call ByteFill
 	pop af
 	ld [hCGB], a
+
 	call Function30ff
-	ld a, $1
+
+	ld a, BANK(LoadPushOAM)
 	rst Bankswitch
-	call Function4032
+
+	call LoadPushOAM
+
 	xor a
 	ld [hMapAnims], a
 	ld [hSCX], a
 	ld [hSCY], a
 	ld [rJOYP], a
-	ld a, $8
+
+	ld a, $8 ; HBlank int enable
 	ld [rSTAT], a
+
 	ld a, $90
 	ld [hWY], a
 	ld [rWY], a
+
 	ld a, $7
 	ld [hWX], a
 	ld [rWX], a
-	ld a, $ff
+
+	ld a, -1
 	ld [hLinkPlayerNumber], a
+
 	ld h, $98
-	call Function699
+	call BlankBGMap
 	ld h, $9c
-	call Function699
+	call BlankBGMap
 
-	callab Function9cfd
+	callab InitCGBPals
+
 	ld a, $9c
-
 	ld [hBGMapAddress + 1], a
 	xor a
 	ld [hBGMapAddress], a
-	callba Function14089
-	ld a, $a
+
+	callba StartClock
+
+	ld a, SRAM_ENABLE
 	ld [MBC3SRamEnable], a
-	ld a, $0
+	ld a, SRAM_DISABLE
 	ld [MBC3LatchClock], a
 	ld [MBC3SRamEnable], a
-	ld a, $e3
+
+	ld a, %11100011
+	; LCD on
+	; Win tilemap 1
+	; Win on
+	; BG/Win tiledata 0
+	; BG Tilemap 0
+	; OBJ 8x8
+	; OBJ on
+	; BG on
 	ld [rLCDC], a
+
 	ld a, $1f
 	ld [rIE], a
 	ei
+
 	call DelayFrame
+
 	ld a, $30
-	call Function2e49
-	call Function3d4f
+	call Predef
+
+	call DisableAudio
 	xor a
-	ld [wc1c0], a
-IF DEF(GOLD)
-	jp Function6545
-ENDC
-IF DEF(SILVER)
-	jp Function650b
-ENDC
+	ld [wMapMusic], a
+	jp GameInit
 
 ClearVRAM:: ; 68e (0:068e)
 	ld hl, $8000
 	ld bc, $2000
 	xor a
-	call Function314c
+	call ByteFill
 	ret
 
-Function699:: ; 699 (0:0699)
+BlankBGMap:: ; 699 (0:0699)
 	ld a, $7f
 	jr asm_69e
 
-Function69d:: ; 69d
+FillBGMap:: ; 69d
 	ld a, l
 asm_69e
 	ld de, $400

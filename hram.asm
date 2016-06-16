@@ -3,7 +3,7 @@ hPushOAM           EQU $ff80 ; 10 bytes
 
 hROMBankBackup     EQU $ff8c
 hBuffer            EQU $ff8d
-hFF8C              EQU $ff8e
+hFF8E              EQU $ff8e
 hRTCDayHi          EQU $ff8f
 hRTCDayLo          EQU $ff90
 hRTCHours          EQU $ff91
@@ -73,7 +73,7 @@ hMGStatusFlags     EQU $ffbe
 
 hUsedSpriteIndex   EQU $ffbf
 hUsedSpriteTile    EQU $ffc0
-hFFBF              EQU $ffc1
+hFFC1              EQU $ffc1
 hFFC2              EQU $ffc2
 hFFC3              EQU $ffc3
 hFFC4              EQU $ffc4
@@ -86,9 +86,9 @@ hLCDCPointer       EQU $ffc8
 hLYOverrideStart   EQU $ffc9
 hLYOverrideEnd     EQU $ffca
 hMobileReceive     EQU $ffcb
-hFFCA              EQU $ffcc
+hFFCC              EQU $ffcc
 hLinkPlayerNumber  EQU $ffcd
-hFFCC              EQU $ffce
+hFFCE              EQU $ffce
 hSerialSend        EQU $ffcf
 hSerialReceive     EQU $ffd0
 
@@ -105,7 +105,7 @@ hOAMUpdate         EQU $ffda
 hSPBuffer          EQU $ffdb
 
 hBGMapUpdate       EQU $ffdd
-hFFDC              EQU $ffde
+hFFDE              EQU $ffde
 
 hMapAnims          EQU $ffe0
 hTileAnimFrame     EQU $ffe1
@@ -122,7 +122,7 @@ hCGB               EQU $ffe8
 hSGB               EQU $ffe9
 hDMATransfer       EQU $ffea
 hMobile            EQU $ffeb
-hFFEA              EQU $ffec
+hFFEC              EQU $ffec
 hClockResetTrigger EQU $ffed
 
 HRAM_END EQU $ffff

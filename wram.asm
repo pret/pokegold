@@ -1,456 +1,130 @@
 INCLUDE "constants.asm"
 
-SECTION "WRAM0", WRAM0
-wc000:: ds 1
-wc001:: ds 1
-wc002:: ds 1
-wc003:: ds 1
-wc004:: ds 1
-wc005:: ds 1
-wc006:: ds 1
-wc007:: ds 1
-wc008:: ds 1
-wc009:: ds 1
-wc00a:: ds 1
-wc00b:: ds 1
-wc00c:: ds 1
-wc00d:: ds 1
-wc00e:: ds 1
-wc00f:: ds 1
-wc010:: ds 1
-wc011:: ds 1
-wc012:: ds 1
-wc013:: ds 1
-wc014:: ds 1
-wc015:: ds 1
-wc016:: ds 1
-wc017:: ds 1
-wc018:: ds 1
-wc019:: ds 1
-wc01a:: ds 1
-wc01b:: ds 1
-wc01c:: ds 1
-wc01d:: ds 1
-wc01e:: ds 1
-wc01f:: ds 1
-wc020:: ds 1
-wc021:: ds 1
-wc022:: ds 1
-wc023:: ds 1
-wc024:: ds 1
-wc025:: ds 1
-wc026:: ds 1
-wc027:: ds 1
-wc028:: ds 1
-wc029:: ds 1
-wc02a:: ds 1
-wc02b:: ds 1
-wc02c:: ds 1
-wc02d:: ds 1
-wc02e:: ds 1
-wc02f:: ds 1
-wc030:: ds 1
-wc031:: ds 1
-wc032:: ds 1
-wc033:: ds 1
-wc034:: ds 1
-wc035:: ds 1
-wc036:: ds 1
-wc037:: ds 1
-wc038:: ds 1
-wc039:: ds 1
-wc03a:: ds 1
-wc03b:: ds 1
-wc03c:: ds 1
-wc03d:: ds 1
-wc03e:: ds 1
-wc03f:: ds 1
-wc040:: ds 1
-wc041:: ds 1
-wc042:: ds 1
-wc043:: ds 1
-wc044:: ds 1
-wc045:: ds 1
-wc046:: ds 1
-wc047:: ds 1
-wc048:: ds 1
-wc049:: ds 1
-wc04a:: ds 1
-wc04b:: ds 1
-wc04c:: ds 1
-wc04d:: ds 1
-wc04e:: ds 1
-wc04f:: ds 1
-wc050:: ds 1
-wc051:: ds 1
-wc052:: ds 1
-wc053:: ds 1
-wc054:: ds 1
-wc055:: ds 1
-wc056:: ds 1
-wc057:: ds 1
-wc058:: ds 1
-wc059:: ds 1
-wc05a:: ds 1
-wc05b:: ds 1
-wc05c:: ds 1
-wc05d:: ds 1
-wc05e:: ds 1
-wc05f:: ds 1
-wc060:: ds 1
-wc061:: ds 1
-wc062:: ds 1
-wc063:: ds 1
-wc064:: ds 1
-wc065:: ds 1
-wc066:: ds 1
-wc067:: ds 1
-wc068:: ds 1
-wc069:: ds 1
-wc06a:: ds 1
-wc06b:: ds 1
-wc06c:: ds 1
-wc06d:: ds 1
-wc06e:: ds 1
-wc06f:: ds 1
-wc070:: ds 1
-wc071:: ds 1
-wc072:: ds 1
-wc073:: ds 1
-wc074:: ds 1
-wc075:: ds 1
-wc076:: ds 1
-wc077:: ds 1
-wc078:: ds 1
-wc079:: ds 1
-wc07a:: ds 1
-wc07b:: ds 1
-wc07c:: ds 1
-wc07d:: ds 1
-wc07e:: ds 1
-wc07f:: ds 1
-wc080:: ds 1
-wc081:: ds 1
-wc082:: ds 1
-wc083:: ds 1
-wc084:: ds 1
-wc085:: ds 1
-wc086:: ds 1
-wc087:: ds 1
-wc088:: ds 1
-wc089:: ds 1
-wc08a:: ds 1
-wc08b:: ds 1
-wc08c:: ds 1
-wc08d:: ds 1
-wc08e:: ds 1
-wc08f:: ds 1
-wc090:: ds 1
-wc091:: ds 1
-wc092:: ds 1
-wc093:: ds 1
-wc094:: ds 1
-wc095:: ds 1
-wc096:: ds 1
-wc097:: ds 1
-wc098:: ds 1
-wc099:: ds 1
-wc09a:: ds 1
-wc09b:: ds 1
-wc09c:: ds 1
-wc09d:: ds 1
-wc09e:: ds 1
-wc09f:: ds 1
-wc0a0:: ds 1
-wc0a1:: ds 1
-wc0a2:: ds 1
-wc0a3:: ds 1
-wc0a4:: ds 1
-wc0a5:: ds 1
-wc0a6:: ds 1
-wc0a7:: ds 1
-wc0a8:: ds 1
-wc0a9:: ds 1
-wc0aa:: ds 1
-wc0ab:: ds 1
-wc0ac:: ds 1
-wc0ad:: ds 1
-wc0ae:: ds 1
-wc0af:: ds 1
-wc0b0:: ds 1
-wc0b1:: ds 1
-wc0b2:: ds 1
-wc0b3:: ds 1
-wc0b4:: ds 1
-wc0b5:: ds 1
-wc0b6:: ds 1
-wc0b7:: ds 1
-wc0b8:: ds 1
-wc0b9:: ds 1
-wc0ba:: ds 1
-wc0bb:: ds 1
-wc0bc:: ds 1
-wc0bd:: ds 1
-wc0be:: ds 1
-wc0bf:: ds 1
-wc0c0:: ds 1
-wc0c1:: ds 1
-wc0c2:: ds 1
-wc0c3:: ds 1
-wc0c4:: ds 1
-wc0c5:: ds 1
-wc0c6:: ds 1
-wc0c7:: ds 1
-wc0c8:: ds 1
-wc0c9:: ds 1
-wc0ca:: ds 1
-wc0cb:: ds 1
-wc0cc:: ds 1
-wc0cd:: ds 1
-wc0ce:: ds 1
-wc0cf:: ds 1
-wc0d0:: ds 1
-wc0d1:: ds 1
-wc0d2:: ds 1
-wc0d3:: ds 1
-wc0d4:: ds 1
-wc0d5:: ds 1
-wc0d6:: ds 1
-wc0d7:: ds 1
-wc0d8:: ds 1
-wc0d9:: ds 1
-wc0da:: ds 1
-wc0db:: ds 1
-wc0dc:: ds 1
-wc0dd:: ds 1
-wc0de:: ds 1
-wc0df:: ds 1
-wc0e0:: ds 1
-wc0e1:: ds 1
-wc0e2:: ds 1
-wc0e3:: ds 1
-wc0e4:: ds 1
-wc0e5:: ds 1
-wc0e6:: ds 1
-wc0e7:: ds 1
-wc0e8:: ds 1
-wc0e9:: ds 1
-wc0ea:: ds 1
-wc0eb:: ds 1
-wc0ec:: ds 1
-wc0ed:: ds 1
-wc0ee:: ds 1
-wc0ef:: ds 1
-wc0f0:: ds 1
-wc0f1:: ds 1
-wc0f2:: ds 1
-wc0f3:: ds 1
-wc0f4:: ds 1
-wc0f5:: ds 1
-wc0f6:: ds 1
-wc0f7:: ds 1
-wc0f8:: ds 1
-wc0f9:: ds 1
-wc0fa:: ds 1
-wc0fb:: ds 1
-wc0fc:: ds 1
-wc0fd:: ds 1
-wc0fe:: ds 1
-wc0ff:: ds 1
-wc100:: ds 1
-wc101:: ds 1
-wc102:: ds 1
-wc103:: ds 1
-wc104:: ds 1
-wc105:: ds 1
-wc106:: ds 1
-wc107:: ds 1
-wc108:: ds 1
-wc109:: ds 1
-wc10a:: ds 1
-wc10b:: ds 1
-wc10c:: ds 1
-wc10d:: ds 1
-wc10e:: ds 1
-wc10f:: ds 1
-wc110:: ds 1
-wc111:: ds 1
-wc112:: ds 1
-wc113:: ds 1
-wc114:: ds 1
-wc115:: ds 1
-wc116:: ds 1
-wc117:: ds 1
-wc118:: ds 1
-wc119:: ds 1
-wc11a:: ds 1
-wc11b:: ds 1
-wc11c:: ds 1
-wc11d:: ds 1
-wc11e:: ds 1
-wc11f:: ds 1
-wc120:: ds 1
-wc121:: ds 1
-wc122:: ds 1
-wc123:: ds 1
-wc124:: ds 1
-wc125:: ds 1
-wc126:: ds 1
-wc127:: ds 1
-wc128:: ds 1
-wc129:: ds 1
-wc12a:: ds 1
-wc12b:: ds 1
-wc12c:: ds 1
-wc12d:: ds 1
-wc12e:: ds 1
-wc12f:: ds 1
-wc130:: ds 1
-wc131:: ds 1
-wc132:: ds 1
-wc133:: ds 1
-wc134:: ds 1
-wc135:: ds 1
-wc136:: ds 1
-wc137:: ds 1
-wc138:: ds 1
-wc139:: ds 1
-wc13a:: ds 1
-wc13b:: ds 1
-wc13c:: ds 1
-wc13d:: ds 1
-wc13e:: ds 1
-wc13f:: ds 1
-wc140:: ds 1
-wc141:: ds 1
-wc142:: ds 1
-wc143:: ds 1
-wc144:: ds 1
-wc145:: ds 1
-wc146:: ds 1
-wc147:: ds 1
-wc148:: ds 1
-wc149:: ds 1
-wc14a:: ds 1
-wc14b:: ds 1
-wc14c:: ds 1
-wc14d:: ds 1
-wc14e:: ds 1
-wc14f:: ds 1
-wc150:: ds 1
-wc151:: ds 1
-wc152:: ds 1
-wc153:: ds 1
-wc154:: ds 1
-wc155:: ds 1
-wc156:: ds 1
-wc157:: ds 1
-wc158:: ds 1
-wc159:: ds 1
-wc15a:: ds 1
-wc15b:: ds 1
-wc15c:: ds 1
-wc15d:: ds 1
-wc15e:: ds 1
-wc15f:: ds 1
-wc160:: ds 1
-wc161:: ds 1
-wc162:: ds 1
-wc163:: ds 1
-wc164:: ds 1
-wc165:: ds 1
-wc166:: ds 1
-wc167:: ds 1
-wc168:: ds 1
-wc169:: ds 1
-wc16a:: ds 1
-wc16b:: ds 1
-wc16c:: ds 1
-wc16d:: ds 1
-wc16e:: ds 1
-wc16f:: ds 1
-wc170:: ds 1
-wc171:: ds 1
-wc172:: ds 1
-wc173:: ds 1
-wc174:: ds 1
-wc175:: ds 1
-wc176:: ds 1
-wc177:: ds 1
-wc178:: ds 1
-wc179:: ds 1
-wc17a:: ds 1
-wc17b:: ds 1
-wc17c:: ds 1
-wc17d:: ds 1
-wc17e:: ds 1
-wc17f:: ds 1
-wc180:: ds 1
-wc181:: ds 1
-wc182:: ds 1
-wc183:: ds 1
-wc184:: ds 1
-wc185:: ds 1
-wc186:: ds 1
-wc187:: ds 1
-wc188:: ds 1
-wc189:: ds 1
-wc18a:: ds 1
-wc18b:: ds 1
-wc18c:: ds 1
-wc18d:: ds 1
-wc18e:: ds 1
-wc18f:: ds 1
-wc190:: ds 1
-wc191:: ds 1
-wc192:: ds 1
-wc193:: ds 1
-wc194:: ds 1
-wc195:: ds 1
-wc196:: ds 1
-wc197:: ds 1
-wc198:: ds 1
-wc199:: ds 1
-wc19a:: ds 1
-wc19b:: ds 1
-wc19c:: ds 1
-wc19d:: ds 1
-wc19e:: ds 1
-wc19f:: ds 1
-wc1a0:: ds 1
-wc1a1:: ds 1
-wc1a2:: ds 1
-wc1a3:: ds 1
-wc1a4:: ds 1
-wc1a5:: ds 1
-wc1a6:: ds 1
-wc1a7:: ds 1
-wc1a8:: ds 1
-wc1a9:: ds 1
-wc1aa:: ds 1
-wc1ab:: ds 1
-wc1ac:: ds 1
-wc1ad:: ds 1
-wc1ae:: ds 1
-wc1af:: ds 1
-wc1b0:: ds 1
-wc1b1:: ds 1
-wc1b2:: ds 1
-wc1b3:: ds 1
-wc1b4:: ds 1
+SECTION "Audio", WRAM0
+wc000::
+wMusic::
+wMusicPlaying:: ; c000
+; nonzero if playing
+	ds 1
+
+Channels::
+wChannel1:: channel_struct Channel1 ; c101
+wChannel2:: channel_struct Channel2 ; c133
+wChannel3:: channel_struct Channel3 ; c165
+wChannel4:: channel_struct Channel4 ; c197
+
+SFXChannels::
+wChannel5:: channel_struct Channel5 ; c1c9
+wChannel6:: channel_struct Channel6 ; c1fb
+wChannel7:: channel_struct Channel7 ; c12d
+wChannel8:: channel_struct Channel8 ; c15f
+
+	ds 1 ; c191
+wCurTrackDuty:: ds 1
+wCurTrackIntensity:: ds 1
+wCurTrackFrequency:: dw
+wc196:: ds 1 ; BCD value, dummied out
+wCurNoteDuration:: ds 1 ; used in MusicE0 and LoadNote
+
+CurMusicByte:: ; c198
+	ds 1
+wCurChannel:: ; c199
+	ds 1
+wVolume:: ; c19a
+; corresponds to $ff24
+; Channel control / ON-OFF / Volume (R/W)
+;   bit 7 - Vin->SO2 ON/OFF
+;   bit 6-4 - SO2 output level (volume) (# 0-7)
+;   bit 3 - Vin->SO1 ON/OFF
+;   bit 2-0 - SO1 output level (volume) (# 0-7)
+	ds 1
+wSoundOutput:: ; c19b
+; corresponds to $ff25
+; bit 4-7: ch1-4 so2 on/off
+; bit 0-3: ch1-4 so1 on/off
+	ds 1
+wSoundInput:: ; c19c
+; corresponds to $ff26
+; bit 7: global on/off
+; bit 0: ch1 on/off
+; bit 1: ch2 on/off
+; bit 2: ch3 on/off
+; bit 3: ch4 on/off
+	ds 1
+
+MusicID::
+wMusicIDLo:: ; c19d
+	ds 1
+wMusicIDHi:: ; c19e
+	ds 1
+wMusicBank:: ; c19f
+	ds 1
+wNoiseSampleAddress::
+wNoiseSampleAddressLo:: ; c1a0
+	ds 1
+wNoiseSampleAddressHi:: ; c1a1
+	ds 1
+wNoiseSampleDelay:: ; noise delay? ; c1a2
+	ds 1
+; c1a3
+	ds 1
+wMusicNoiseSampleSet:: ; c1a4
+	ds 1
+wSFXNoiseSampleSet:: ; c1a5
+	ds 1
+wDanger:: ; c1a6
+; bit 7: on/off
+; bit 4: pitch
+; bit 0-3: counter
+	ds 1
+wMusicFade:: ; c1a7
+; fades volume over x frames
+; bit 7: fade in/out
+; bit 0-5: number of frames for each volume level
+; $00 = none (default)
+	ds 1
+wMusicFadeCount:: ; c1a8
+	ds 1
+wMusicFadeID::
+wc1a9::
+wMusicFadeIDLo:: ; c1a9
+	ds 1
+wc1aa::
+wMusicFadeIDHi:: ; c1aa
+	ds 1
+	ds 5
+wCryPitch:: ; c1b0
+	ds 2
+wCryLength:: ; c1b2
+	ds 2
+wLastVolume:: ; c1b4
+	ds 1
 wc1b5:: ds 1
-wc1b6:: ds 1
-wc1b7:: ds 1
-wc1b8:: ds 1
-wc1b9:: ds 1
-wc1ba:: ds 1
-wc1bb:: ds 1
-wc1bc:: ds 1
-wc1bd:: ds 1
-wc1be:: ds 1
-wc1bf:: ds 1
-wc1c0:: ds 1
-wc1c1:: ds 1
+wSFXPriority:: ; c1b6
+; if nonzero, turn off music when playing sfx
+	ds 1
+	ds 1
+wChannel1JumpCondition:: ds 1
+wChannel2JumpCondition:: ds 1
+wChannel3JumpCondition:: ds 1
+wChannel4JumpCondition:: ds 1
+wStereoPanningMask:: ds 1 ; c1bc
+wCryTracks:: ; c1bd
+; plays only in left or right track depending on what side the monster is on
+; both tracks active outside of battle
+	ds 1
+wSFXDuration:: ds 1
+wCurSFX:: ; c1bf
+; id of sfx currently playing
+	ds 1
+wChannelsEnd::
+wMapMusic:: ; c1c0
+	ds 1
+
+wDontPlayMapMusicOnReload:: ds 1
+wMusicEnd::
+
+SECTION "WRAM", WRAM0
 wc1c2:: ds 1
 wc1c3:: ds 1
 wc1c4:: ds 1
@@ -468,7 +142,7 @@ wc1cf:: ds 1
 wc1d0:: ds 1
 wc1d1:: ds 1
 wc1d2:: ds 1
-wc1d3:: ds 1
+wPrinterConnectionOpen:: ds 1
 wc1d4:: ds 1
 wc1d5:: ds 1
 wc1d6:: ds 1
@@ -3678,10 +3352,8 @@ wce57:: ds 1
 wce58:: ds 1
 wce59:: ds 1
 wce5a:: ds 1
-wce5b:: ds 1
-wce5c:: ds 1
-wce5d:: ds 1
-wce5e:: ds 1
+wLinkTimeoutFrames:: ds 2
+wce5d:: ds 2
 wce5f:: ds 1
 wce60:: ds 1
 wce61:: ds 1
@@ -4081,7 +3753,7 @@ wd03e:: ds 1
 wd03f:: ds 1
 wd040:: ds 1
 wd041:: ds 1
-wd042:: ds 1
+wLinkMode:: ds 1
 wd043:: ds 1
 wd044:: ds 1
 wd045:: ds 1
