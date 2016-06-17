@@ -86,12 +86,12 @@ VBlank0:: ; 180
 	call UpdatePalsIfCGB
 	jr c, .done
 	call UpdateBGMap
-	call Serve2bppRequest
 
 	; These have their own timing checks.
 
-	call Function1579
-	call Function162b
+	call Serve2bppRequest
+	call Serve1bppRequest
+	call AnimateTileset
 	call Function1642
 
 .done
@@ -346,8 +346,8 @@ VBlank3:: ; 2c4
 
 	call Serve2bppRequest
 
-	call Function1579
-	call Function162b
+	call Serve1bppRequest
+	call AnimateTileset
 
 	call hPushOAM
 

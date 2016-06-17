@@ -23,21 +23,7 @@ INCLUDE "home/decompress.asm"
 INCLUDE "home/palettes.asm"
 INCLUDE "home/copy.asm"
 INCLUDE "home/text.asm"
-
-UpdateBGMapBuffer::
-	dr $1458, $14bb
-
-UpdateBGMap::
-	dr $14bb, $1579
-
-Function1579::
-	dr $1579, $15d0
-
-Serve2bppRequest::
-	dr $15d0, $162b
-
-Function162b::
-	dr $162b, $1642
+INCLUDE "home/video.asm"
 
 Function1642::
 	dr $1642, $196f

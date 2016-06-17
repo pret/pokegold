@@ -1839,7 +1839,9 @@ wcc1c:: ds 1 ; cc1c
 wcc1d:: ds 1 ; cc1d
 wcc1e:: ds 1 ; cc1e
 wcc1f:: ds 1 ; cc1f
-wcc20:: ds 1 ; cc20
+
+SECTION "Video", WRAM0
+wBGMapBuffer:: ds 1 ; cc20
 wcc21:: ds 1 ; cc21
 wcc22:: ds 1 ; cc22
 wcc23:: ds 1 ; cc23
@@ -1879,7 +1881,7 @@ wcc44:: ds 1 ; cc44
 wcc45:: ds 1 ; cc45
 wcc46:: ds 1 ; cc46
 wcc47:: ds 1 ; cc47
-wcc48:: ds 1 ; cc48
+wBGMapPalBuffer:: ds 1 ; cc48
 wcc49:: ds 1 ; cc49
 wcc4a:: ds 1 ; cc4a
 wcc4b:: ds 1 ; cc4b
@@ -1919,7 +1921,7 @@ wcc6c:: ds 1 ; cc6c
 wcc6d:: ds 1 ; cc6d
 wcc6e:: ds 1 ; cc6e
 wcc6f:: ds 1 ; cc6f
-wcc70:: ds 1 ; cc70
+wBGMapBufferPtrs:: ds 1 ; cc70
 wcc71:: ds 1 ; cc71
 wcc72:: ds 1 ; cc72
 wcc73:: ds 1 ; cc73

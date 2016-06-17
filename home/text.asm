@@ -11,7 +11,7 @@ TEXTBOX_INNERY EQU TEXTBOX_Y + 2
 TEXTBOX_PAL EQU 7
 
 ClearBox:: ; ebd (0:0ebd)
-	ld a, $7f
+	ld a, " "
 FillBoxWithByte::
 	ld de, SCREEN_WIDTH
 .row
@@ -30,7 +30,7 @@ FillBoxWithByte::
 
 ClearTileMap::
 	ld hl, wTileMap
-	ld a, $7f
+	ld a, " "
 	ld bc, SCREEN_WIDTH * SCREEN_HEIGHT
 	call ByteFill
 	ld a, [rLCDC]
@@ -39,7 +39,7 @@ ClearTileMap::
 	jp WaitBGMap
 
 FillScreenWithTextboxPal::
-	ld a, $7
+	ld a, TEXTBOX_PAL
 	hlcoord 0, 0, wAttrMap
 	ld bc, SCREEN_WIDTH * SCREEN_HEIGHT
 	call ByteFill
@@ -120,9 +120,9 @@ TextBoxPalette
 	ret
 
 SpeechTextBox:: ; f45 (0:0f45)
-	hlcoord 0, 12
-	ld b, $4
-	ld c, $12
+	hlcoord TEXTBOX_X, TEXTBOX_Y
+	ld b, TEXTBOX_INNERH
+	ld c, TEXTBOX_INNERW
 	jp TextBox
 
 TestText::
@@ -137,7 +137,7 @@ RadioTerminator:: ; 1052
 
 PrintText::
 	call SetUpTextBox
-	bccoord 1, 14
+	bccoord TEXTBOX_INNERX, TEXTBOX_INNERY
 	call PlaceHLTextAtBC
 	ret
 
@@ -399,7 +399,7 @@ HalfLineChar:: ; 1176 (0:1176)
 
 LineChar:: ; 117f (0:117f)
 	pop hl
-	hlcoord 1, 16
+	hlcoord TEXTBOX_INNERX, TEXTBOX_INNERY + 2
 	push hl
 	jp NextChar
 
@@ -412,13 +412,13 @@ Paragraph:: ; 1187 (0:1187)
 .asm_1192
 	call Text_WaitBGMap
 	call ButtonSound
-	hlcoord 1, 14
-	lb bc, 3, 18
+	hlcoord TEXTBOX_INNERX, TEXTBOX_INNERY
+	lb bc, TEXTBOX_INNERH - 1, TEXTBOX_INNERW
 	call ClearBox
 	call UnloadBlinkingCursor
 	ld c, 20
 	call DelayFrames
-	hlcoord 1, 14
+	hlcoord TEXTBOX_INNERX, TEXTBOX_INNERY
 	pop de
 	jp NextChar
 
@@ -439,7 +439,7 @@ Char4C:: ; 11c8 (0:11c8)
 	push de
 	call TextScroll
 	call TextScroll
-	hlcoord 1, 16
+	hlcoord TEXTBOX_INNERX, TEXTBOX_INNERY + 2
 	pop de
 	jp NextChar
 
@@ -497,13 +497,13 @@ NullChar:: ; 120c (0:120c)
 	done
 
 TextScroll:: ; 121d (0:121d)
-	hlcoord 0, 14
-	decoord 0, 13
+	hlcoord TEXTBOX_X, TEXTBOX_INNERY
+	decoord TEXTBOX_X, TEXTBOX_INNERY - 1
 	ld bc, 3 * SCREEN_WIDTH
 	call CopyBytes
-	hlcoord 1, 16
+	hlcoord TEXTBOX_INNERX, TEXTBOX_INNERY + 2
 	ld a, " "
-	ld bc, 18
+	ld bc, TEXTBOX_INNERW
 	call ByteFill
 	ld c, 5
 	call DelayFrames
