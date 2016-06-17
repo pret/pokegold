@@ -16,7 +16,7 @@ FarDecompress:: ; b40
 
 
 Decompress:: ; b50
-; Pokemon Crystal uses an lz variant for compression.
+; Pokemon Gold and Silver use an lz variant for compression.
 ; This is mainly (but not necessarily) used for graphics.
 
 ; This function decompresses lz-compressed data from hl to de.

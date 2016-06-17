@@ -181,7 +181,7 @@ ClearVBank1::
 
 Functiond2a::
 	ld hl, wTileMap
-	ld de, wccd9
+	ld de, wAttrMap
 	ld bc, SCREEN_WIDTH * SCREEN_HEIGHT
 .asm_d33
 	ld a, [hli]

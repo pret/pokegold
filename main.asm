@@ -38,7 +38,9 @@ Function14032:: ; 14032
 StartClock:: ; 14089
 	dr $14089, $140ff
 Function140ff:: ; 140ff
-	dr $140ff, $18000
+	dr $140ff, $1413c
+Function1413c:: ; 413c
+	dr $1413c, $18000
 
 SECTION "bank6", DATA, BANK[$6]
 	dr $18000, $1c000
@@ -50,6 +52,7 @@ SECTION "bank8", DATA, BANK[$8]
 	dr $20000, $24000
 
 SECTION "bank9", DATA, BANK[$9]
+StringBufferPointers::
 	dr $24000, $28000
 
 SECTION "banka", DATA, BANK[$a]
@@ -65,7 +68,10 @@ SECTION "bankd", DATA, BANK[$d]
 	dr $34000, $38000
 
 SECTION "banke", DATA, BANK[$e]
-	dr $38000, $3c000
+	dr $38000, $398f2
+
+Battle_GetTrainerName:: ; 398f2
+	dr $398f2, $3c000
 
 SECTION "bankf", DATA, BANK[$f]
 	dr $3c000, $40000
@@ -218,7 +224,12 @@ SECTION "bank3d", DATA, BANK[$3d]
 	dr $f4000, $f8000
 
 SECTION "bank3e", DATA, BANK[$3e]
-	dr $f8000, $fc000
+Functionf8000::
+	dr $f8000, $f800c
+Functionf800c::
+	dr $f800c, $f8032
+Functionf8032::
+	dr $f8032, $fc000
 
 SECTION "bank3f", DATA, BANK[$3f]
 	dr $fc000, $100000

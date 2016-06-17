@@ -197,7 +197,7 @@ WaitButton::
 	push af
 	ld a, $1
 	ld [hOAMUpdate], a
-	call Function344c
+	call WaitBGMap
 	call JoyWaitAorB
 	pop af
 	ld [hOAMUpdate], a
@@ -271,7 +271,7 @@ ButtonSound::
 	call JoyWaitInput
 	push de
 	ld de, SFX_READ_TEXT_2
-	call PlaySound
+	call PlaySFX
 	pop de
 	ret
 
