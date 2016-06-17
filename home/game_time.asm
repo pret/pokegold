@@ -1,11 +1,11 @@
 ResetGameTime:: ; 1ee6 (0:1ee6)
 	xor a
-	ld [GameTimeCap], a
-	ld [GameTimeHours], a
-	ld [GameTimeHours + 1], a
-	ld [GameTimeMinutes], a
-	ld [GameTimeSeconds], a
-	ld [GameTimeFrames], a
+	ld [wGameTimeCap], a
+	ld [wGameTimeHours], a
+	ld [wGameTimeHours + 1], a
+	ld [wGameTimeMinutes], a
+	ld [wGameTimeSeconds], a
+	ld [wGameTimeFrames], a
 	ret
 
 GameTimer:: ; 1efa (0:1efa)
@@ -14,15 +14,15 @@ GameTimer:: ; 1efa (0:1efa)
 	and a
 	ret nz
 
-	ld hl, GameTimerPause
+	ld hl, wGameTimerPause
 	bit 0, [hl]
 	ret z
 
-	ld hl, GameTimeCap
+	ld hl, wGameTimeCap
 	bit 0, [hl]
 	ret nz
 
-	ld hl, GameTimeFrames
+	ld hl, wGameTimeFrames
 	ld a, [hl]
 	inc a
 	cp 60
@@ -33,7 +33,7 @@ GameTimer:: ; 1efa (0:1efa)
 .second
 	xor a
 	ld [hl], a
-	ld hl, GameTimeSeconds
+	ld hl, wGameTimeSeconds
 	ld a, [hl]
 	inc a
 	cp 60
@@ -44,7 +44,7 @@ GameTimer:: ; 1efa (0:1efa)
 .minute
 	xor a
 	ld [hl], a
-	ld hl, GameTimeMinutes
+	ld hl, wGameTimeMinutes
 	ld a, [hl]
 	inc a
 	cp 60
@@ -55,9 +55,9 @@ GameTimer:: ; 1efa (0:1efa)
 .hour
 	xor a
 	ld [hl], a
-	ld a, [GameTimeHours]
+	ld a, [wGameTimeHours]
 	ld h, a
-	ld a, [GameTimeHours + 1]
+	ld a, [wGameTimeHours + 1]
 	ld l, a
 	inc hl
 	ld a, h
@@ -66,16 +66,16 @@ GameTimer:: ; 1efa (0:1efa)
 	ld a, l
 	cp 1000 % $100
 	jr c, .ok
-	ld hl, GameTimeCap
+	ld hl, wGameTimeCap
 	set 0, [hl]
 	ld a, 59
-	ld [GameTimeMinutes], a
-	ld [GameTimeSeconds], a
+	ld [wGameTimeMinutes], a
+	ld [wGameTimeSeconds], a
 	ret
 
 .ok
 	ld a, h
-	ld [GameTimeHours], a
+	ld [wGameTimeHours], a
 	ld a, l
-	ld [GameTimeHours + 1], a
+	ld [wGameTimeHours + 1], a
 	ret

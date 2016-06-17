@@ -118,7 +118,70 @@ IsInJohto::
 	ld a, $1
 	ret
 
-	dr $2ffe, $30e1
+Function2ffe:: ; 2ffe (0:2ffe)
+	push hl
+	xor a
+	ld hl, wd17c
+	ld [hli], a
+	ld [hli], a
+	ld [hli], a
+	ld [hl], a
+	ld a, [wd17a]
+	ld l, a
+	ld a, [wd17b]
+	ld h, a
+	or l
+	jr z, .quit
+	ld a, [hROMBank]
+	push af
+	call SwitchToMapScriptHeaderBank
+	ld a, [wPlayerStandingMapX]
+	add $4
+	ld d, a
+	ld a, [wPlayerStandingMapY]
+	ld a, $4 ; add $4
+	ld e, a
+	push bc
+	ld c, $0
+.loop
+	ld a, [hl]
+	cp $ff
+	jr z, .done
+	push hl
+	ld a, d
+	cp [hl]
+	jr nz, .next
+	inc hl
+	ld a, e
+	cp [hl]
+	jr nz, .next
+	ld hl, wd17c
+	ld b, SET_FLAG
+	push de
+	push bc
+	ld d, $0
+	predef FlagPredef
+	pop bc
+	pop de
+.next
+	pop hl
+	inc hl
+	inc hl
+	inc hl
+	inc c
+	ld a, c
+	cp $20
+	jr c, .loop
+.done
+	pop bc
+	pop af
+	rst Bankswitch
+.quit
+	pop hl
+	ret
+
+INCLUDE "home/item.asm"
+INCLUDE "home/random.asm"
 
 OpenSRAM::
 	dr $30e1, $30f1
@@ -165,7 +228,10 @@ Function317b::
 	dr $317b, $31a3
 
 Function31a3::
-	dr $31a3, $31e2
+	dr $31a3, $31b5
+
+SimpleDivide::
+	dr $31b5, $31e2
 
 Function31e2::
 	dr $31e2, $323d

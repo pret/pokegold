@@ -48,14 +48,43 @@ CopyObjectStruct_::
 Sine_e::
 	dr $8ac9, $8b3b
 GetPredefPointer::
-	dr $8b3b, $9cfd
+	dr $8b3b, $8b5b
+PredefPointers::
+	dr $8b5b, $9cfd
 InitCGBPals:: ; 9cfd
 	dr $9cfd, $c000
 
 SECTION "bank3", DATA, BANK[$3]
 	dr $c000, $c01b
 EngineFlagAction:: ; c01b
-	dr $c01b, $10000
+
+IF DEF(GOLD)
+	dr $c01b, $d1e2
+ReceiveItem_::
+	dr $d1e2, $d21a
+TossItem_::
+	dr $d21a, $d251
+CheckItem_::
+	dr $d251, $d434
+CheckTossableItem_::
+	dr $d434, $e7a6
+DoItemEffect_::
+	dr $e7a6, $10000
+ENDC
+
+IF DEF(SILVER)
+	dr $c01b, $d1e0
+ReceiveItem_::
+	dr $d1e0, $d218
+TossItem_::
+	dr $d218, $d24f
+CheckItem_::
+	dr $d24f, $d432
+CheckTossableItem_::
+	dr $d432, $e7a4
+DoItemEffect_::
+	dr $e7a4, $10000
+ENDC
 
 SECTION "bank4", DATA, BANK[$4]
 	dr $10000, $14000
@@ -134,7 +163,9 @@ Battle_GetTrainerName:: ; 398f2
 	dr $398f2, $3c000
 
 SECTION "bankf", DATA, BANK[$f]
-	dr $3c000, $40000
+	dr $3c000, $3ec11
+BattleRandom_:: ; 3ec11
+	dr $3ec11, $40000
 
 SECTION "bank10", DATA, BANK[$10]
 	dr $40000, $44000

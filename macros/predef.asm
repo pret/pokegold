@@ -1,3 +1,7 @@
+predef_const: MACRO
+	enum \1Predef
+ENDM
+
 add_predef: MACRO
 \1Predef::
 	dwb \1, BANK(\1)

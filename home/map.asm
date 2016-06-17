@@ -1411,7 +1411,7 @@ CheckObjectMask::
 .asm_282c
 	ld e, a
 	ld d, $0
-	ld hl, MapObjectsEnd
+	ld hl, wMapObjectsEnd
 	add hl, de
 	ld a, [hl]
 .asm_2834
@@ -1431,7 +1431,7 @@ UnmaskObject:: ; 2841 (0:2841)
 	ld a, [hMapObjectIndexBuffer]
 	ld e, a
 	ld d, $0
-	ld hl, MapObjectsEnd
+	ld hl, wMapObjectsEnd
 	add hl, de
 	ld [hl], $0
 	ret
@@ -1737,7 +1737,7 @@ SaveScreen_LoadNeighbor::
 
 GetMovementPermissions:: ; 2a05 (0:2a05)
 	xor a
-	ld [TilePermissions], a
+	ld [wTilePermissions], a
 	call .LeftRight
 	call .UpDown
 	ld a, [wPlayerStandingMapX]
@@ -1757,7 +1757,7 @@ GetMovementPermissions:: ; 2a05 (0:2a05)
 	adc h
 	ld h, a
 	ld a, [hl]
-	ld hl, TilePermissions
+	ld hl, wTilePermissions
 	or [hl]
 	ld [hl], a
 	ret
@@ -1818,7 +1818,7 @@ GetMovementPermissions:: ; 2a05 (0:2a05)
 	cp $7
 	ret nz
 .asm_2a90
-	ld hl, TilePermissions
+	ld hl, wTilePermissions
 	set 3, [hl]
 	ret
 
@@ -1834,7 +1834,7 @@ GetMovementPermissions:: ; 2a05 (0:2a05)
 	cp $5
 	ret nz
 .asm_2aaa
-	ld hl, TilePermissions
+	ld hl, wTilePermissions
 	set 3, [hl]
 	ret
 
@@ -1850,7 +1850,7 @@ GetMovementPermissions:: ; 2a05 (0:2a05)
 	cp $7
 	ret nz
 .asm_2ac4
-	ld hl, TilePermissions
+	ld hl, wTilePermissions
 	set 3, [hl]
 	ret
 
@@ -1866,7 +1866,7 @@ GetMovementPermissions:: ; 2a05 (0:2a05)
 	cp $6
 	ret nz
 .asm_2ade
-	ld hl, TilePermissions
+	ld hl, wTilePermissions
 	set 3, [hl]
 	ret
 

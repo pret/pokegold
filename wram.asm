@@ -8,17 +8,17 @@ wMusicPlaying:: ; c000
 ; nonzero if playing
 	ds 1
 
-Channels::
-wChannel1:: channel_struct Channel1 ; c101
-wChannel2:: channel_struct Channel2 ; c133
-wChannel3:: channel_struct Channel3 ; c165
-wChannel4:: channel_struct Channel4 ; c197
+wChannels::
+wChannel1:: channel_struct wChannel1 ; c101
+wChannel2:: channel_struct wChannel2 ; c133
+wChannel3:: channel_struct wChannel3 ; c165
+wChannel4:: channel_struct wChannel4 ; c197
 
-SFXChannels::
-wChannel5:: channel_struct Channel5 ; c1c9
-wChannel6:: channel_struct Channel6 ; c1fb
-wChannel7:: channel_struct Channel7 ; c12d
-wChannel8:: channel_struct Channel8 ; c15f
+wSFXChannels::
+wChannel5:: channel_struct wChannel5 ; c1c9
+wChannel6:: channel_struct wChannel6 ; c1fb
+wChannel7:: channel_struct wChannel7 ; c12d
+wChannel8:: channel_struct wChannel8 ; c15f
 
 	ds 1 ; c191
 wCurTrackDuty:: ds 1
@@ -27,7 +27,7 @@ wCurTrackFrequency:: dw
 wc196:: ds 1 ; BCD value, dummied out
 wCurNoteDuration:: ds 1 ; used in MusicE0 and LoadNote
 
-CurMusicByte:: ; c198
+wCurMusicByte:: ; c198
 	ds 1
 wCurChannel:: ; c199
 	ds 1
@@ -53,7 +53,7 @@ wSoundInput:: ; c19c
 ; bit 3: ch4 on/off
 	ds 1
 
-MusicID::
+wMusicID::
 wMusicIDLo:: ; c19d
 	ds 1
 wMusicIDHi:: ; c19e
@@ -2135,7 +2135,7 @@ wTileDown:: ds 1 ; cea3
 wTileUp:: ds 1 ; cea4
 wTileLeft:: ds 1 ; cea5
 wTileRight:: ds 1 ; cea6
-TilePermissions:: ds 1 ; cea7
+wTilePermissions:: ds 1 ; cea7
 
 wWindowData::
 wWindowStackPointer:: dw ; cea8
@@ -2827,11 +2827,11 @@ wd1e7:: ds 1 ; d1e7
 wd1e8:: ds 1 ; d1e8
 wd1e9:: ds 1 ; d1e9
 
-GameTimeCap::     ds 1 ; d1ea
-GameTimeHours::   ds 2 ; d1eb
-GameTimeMinutes:: ds 1 ; d1ed
-GameTimeSeconds:: ds 1 ; d1ee
-GameTimeFrames::  ds 1 ; d1ef
+wGameTimeCap::     ds 1 ; d1ea
+wGameTimeHours::   ds 2 ; d1eb
+wGameTimeMinutes:: ds 1 ; d1ed
+wGameTimeSeconds:: ds 1 ; d1ee
+wGameTimeFrames::  ds 1 ; d1ef
 
 wd1f0:: ds 1 ; d1f0
 wd1f1:: ds 1 ; d1f1
@@ -2942,7 +2942,7 @@ wMapObjects:: ; d445
 	map_object wMap13 ; d515
 	map_object wMap14 ; d525
 	map_object wMap15 ; d535
-MapObjectsEnd:: ; d545
+wMapObjectsEnd:: ; d545
 
 wd545:: ds 1 ; d545
 wd546:: ds 1 ; d546
@@ -3580,7 +3580,7 @@ wd8b4:: ds 1 ; d8b4
 wd8b5:: ds 1 ; d8b5
 wd8b6:: ds 1 ; d8b6
 wd8b7:: ds 1 ; d8b7
-GameTimerPause:: ds 1 ; d8b8
+wGameTimerPause:: ds 1 ; d8b8
 wd8b9:: ds 1 ; d8b9
 wd8ba:: ds 1 ; d8ba
 wd8bb:: ds 1 ; d8bb

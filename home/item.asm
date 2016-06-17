@@ -1,30 +1,26 @@
-DoItemEffect:: ; 2f3f
-	callba _DoItemEffect
+DoItemEffect::
+	callba DoItemEffect_
 	ret
-; 2f46
 
-CheckTossableItem:: ; 2f46
+CheckTossableItem::
 	push hl
 	push de
 	push bc
-	callba _CheckTossableItem
+	callba CheckTossableItem_
 	pop bc
 	pop de
 	pop hl
 	ret
-; 2f53
 
-TossItem:: ; 2f53
+TossItem::
 	push hl
 	push de
 	push bc
 	ld a, [hROMBank]
 	push af
-	ld a, BANK(_TossItem)
+	ld a, BANK(TossItem_)
 	rst Bankswitch
-
-	call _TossItem
-
+	call TossItem_
 	pop bc
 	ld a, b
 	rst Bankswitch
@@ -32,19 +28,16 @@ TossItem:: ; 2f53
 	pop de
 	pop hl
 	ret
-; 2f66
 
-ReceiveItem:: ; 2f66
+ReceiveItem::
 	push bc
 	ld a, [hROMBank]
 	push af
-	ld a, BANK(_ReceiveItem)
+	ld a, BANK(ReceiveItem_)
 	rst Bankswitch
 	push hl
 	push de
-
-	call _ReceiveItem
-
+	call ReceiveItem_
 	pop de
 	pop hl
 	pop bc
@@ -52,19 +45,16 @@ ReceiveItem:: ; 2f66
 	rst Bankswitch
 	pop bc
 	ret
-; 2f79
 
-CheckItem:: ; 2f79
+CheckItem::
 	push hl
 	push de
 	push bc
 	ld a, [hROMBank]
 	push af
-	ld a, BANK(_CheckItem)
+	ld a, BANK(CheckItem_)
 	rst Bankswitch
-
-	call _CheckItem
-
+	call CheckItem_
 	pop bc
 	ld a, b
 	rst Bankswitch
@@ -72,4 +62,3 @@ CheckItem:: ; 2f79
 	pop de
 	pop hl
 	ret
-; 2f8c
