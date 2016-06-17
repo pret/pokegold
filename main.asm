@@ -21,13 +21,21 @@ Function58c5::
 IF DEF(GOLD)
 	dr $58c5, $6545
 GameInit::
-	dr $6545, $8000
+	dr $6545, $6551
+ReanchorBGMap_NoOAMUpdate:: ; 6551
+	dr $6551, $65cb
+LoadFonts_NoOAMUpdate:: ; 65cb
+	dr $65cb, $754e
 ENDC
 
 IF DEF(SILVER)
 	dr $58c5, $650b
 GameInit::
-	dr $650b, $8000
+	dr $650b, $6517
+ReanchorBGMap_NoOAMUpdate:: ; 6517
+	dr $6517, $6591
+LoadFonts_NoOAMUpdate:: ; 6591
+	dr $6591, $7514
 ENDC
 
 SECTION "bank2", DATA, BANK[$2]
@@ -45,7 +53,9 @@ InitCGBPals:: ; 9cfd
 	dr $9cfd, $c000
 
 SECTION "bank3", DATA, BANK[$3]
-	dr $c000, $10000
+	dr $c000, $c01b
+EngineFlagAction:: ; c01b
+	dr $c01b, $10000
 
 SECTION "bank4", DATA, BANK[$4]
 	dr $10000, $14000
@@ -61,7 +71,9 @@ Function140ff:: ; 140ff
 Function1413c:: ; 1413c
 	dr $1413c, $1414b
 RefreshSprites:: ; 1414b
-	dr $1414b, $1416d
+	dr $1414b, $1415c
+Function1415c:: ; 1415c
+	dr $1415c, $1416d
 Function1416d:: ; 1416d
 	dr $1416d, $14317
 DoesSpriteHaveFacings_:: ; 14317

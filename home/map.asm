@@ -194,10 +194,10 @@ ReturnToMapFromSubmenu::
 
 Function2086::
 	call Clear_wc6e8
-	call Function2f10
-	call Function2f1d
+	call ResetMapBufferEventFlags
+	call ResetFlashIfOutOfCave
 	call GetCurrentMapTrigger
-	call Function2f16
+	call ResetBikeFlags
 	ld a, $5
 	call RunMapCallback
 	callba Function97c2a
@@ -287,7 +287,7 @@ Function212d::
 	jr nz, .asm_2151
 	ld hl, wVramState
 	set 0, [hl]
-	call Function2ef1
+	call SafeUpdateSprites
 .asm_2151
 	xor a
 	ld [wd182], a
@@ -2100,7 +2100,7 @@ FadeToMenu::
 	call LoadStandardMenuDataHeader
 	callba Function8c3ab
 	call Function30ff
-	call Function2f93
+	call DisableSpriteUpdates
 	ret
 
 CloseSubmenu::
@@ -2122,7 +2122,7 @@ FinishExitMenu::
 	call Function3583
 	call Function3456
 	callba FadeInPalettes
-	call Function2fa4
+	call EnableSpriteUpdates
 	ret
 
 ReturnToMapWithSpeechTextbox::

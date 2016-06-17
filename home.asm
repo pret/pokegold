@@ -33,37 +33,92 @@ INCLUDE "home/handshake.asm"
 INCLUDE "home/game_time.asm"
 INCLUDE "home/map.asm"
 
-Function2e16:: ; 2e16
-; Inexplicably blank
-; Seen in predef pointers
-rept 16
+InexplicablyEmptyFunction:: ; 2e16
+; Inexplicably empty.
+; Seen in PredefPointers.
+	rept 16
 	nop
-endr
+	endr
 	ret
 
 INCLUDE "home/farcall.asm"
 INCLUDE "home/predef.asm"
+INCLUDE "home/window.asm"
+INCLUDE "home/flag.asm"
 
-Function2e80:: ; 2e6c (0:2e6c)
-	dr $2e80, $2ef1
+Function2f7b::
+	ld a, [wMonStatusFlags]
+	bit 1, a
+	ret z
+	ld a, [hJoyDown]
+	bit 1, a
+	ret
 
-Function2ef1::
-	dr $2ef1, $2f10
+xor_a::
+	xor a
+	ret
 
-Function2f10::
-	dr $2f10, $2f16
+xor_a_dec_a::
+	xor a
+	dec a
+	ret
 
-Function2f16::
-	dr $2f16, $2f1d
+Function2f8b::
+	push hl
+	ld hl, wMonStatusFlags
+	bit 1, [hl]
+	pop hl
+	ret
 
-Function2f1d::
-	dr $2f1d, $2f93
+DisableSpriteUpdates:: ; 2f93 (0:2f93)
+	xor a
+	ld [hMapAnims], a
+	ld a, [wVramState]
+	res 0, a
+	ld [wVramState], a
+	ld a, $0
+	ld [wRTCEnabled], a
+	ret
 
-Function2f93::
-	dr $2f93, $2fa4
+EnableSpriteUpdates:: ; 2fa4 (0:2fa4)
+	ld a, $1
+	ld [wRTCEnabled], a
+	ld a, [wVramState]
+	set 0, a
+	ld [wVramState], a
+	ld a, $1
+	ld [hMapAnims], a
+	ret
 
-Function2fa4::
-	dr $2fa4, $30e1
+INCLUDE "home/string.asm"
+
+IsInJohto::
+	ld a, [wMapGroup]
+	ld b, a
+	ld a, [wMapNumber]
+	ld c, a
+	call GetWorldMapLocation
+	cp $5e
+	jr z, .asm_2ff9
+	cp $0
+	jr nz, .asm_2ff5
+	ld a, [wd9f6]
+	ld b, a
+	ld a, [wd9f7]
+	ld c, a
+	call GetWorldMapLocation
+.asm_2ff5
+	cp $2e
+	jr nc, .asm_2ffb
+.asm_2ff9
+	xor a
+	ret
+
+.asm_2ffb
+	ld a, $1
+	ret
+
+	dr $2ffe, $30e1
 
 OpenSRAM::
 	dr $30e1, $30f1
@@ -128,7 +183,10 @@ Function3456::
 	dr $3456, $3472
 
 ApplyTilemap::
-	dr $3472, $3564
+	dr $3472, $348e
+
+Function348e::
+	dr $348e, $3564
 
 Function3564::
 	dr $3564, $3583

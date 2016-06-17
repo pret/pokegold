@@ -1,39 +1,35 @@
-ResetMapBufferEventFlags:: ; 2e50
+ResetMapBufferEventFlags:: ; 2f10 (0:2f10)
 	xor a
-	ld hl, EventFlags
+	ld hl, wEventFlags
 	ld [hli], a
 	ret
-; 2e56
 
-ResetBikeFlags:: ; 2e56
+ResetBikeFlags:: ; 2f16 (0:2f16)
 	xor a
-	ld hl, BikeFlags
+	ld hl, wBikeFlags
 	ld [hli], a
 	ld [hl], a
 	ret
-; 2e5d
 
-ResetFlashIfOutOfCave:: ; 2e5d
+ResetFlashIfOutOfCave:: ; 2f1d (0:2f1d)
 	ld a, [wPermission]
 	cp $2
-	jr z, .asm_2e69
+	jr z, .asm_2f29
 	cp $1
-	jr z, .asm_2e69
+	jr z, .asm_2f29
 	ret
 
-.asm_2e69
-	ld hl, StatusFlags
+.asm_2f29
+	ld hl, wStatusFlags
 	res 2, [hl]
 	ret
-; 2e6f
 
-
-EventFlagAction:: ; 0x2e6f
-	ld hl, EventFlags
+EventFlagAction::
+	ld hl, wEventFlags
 	call FlagAction
 	ret
 
-FlagAction:: ; 0x2e76
+FlagAction:: ; 2f36 (0:2f36)
 ; Perform action b on bit de in flag array hl.
 
 ; inputs:
@@ -99,14 +95,11 @@ FlagAction:: ; 0x2e76
 	and [hl]
 	ld [hl], a
 	ret
-; 0x2ead
 
-
-CheckReceivedDex:: ; 2ead
+CheckReceivedDex::
 	ld de, ENGINE_POKEDEX
 	ld b, CHECK_FLAG
 	callba EngineFlagAction
 	ld a, c
 	and a
 	ret
-; 2ebb

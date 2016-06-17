@@ -1,84 +1,69 @@
-RefreshScreen:: ; 2dba
-
+Function2e80:: ; 2e80 (0:2e80)
 	call ClearWindowData
 	ld a, [hROMBank]
 	push af
-	ld a, BANK(Function6454) ; and BANK(Function64bf)
+	ld a, BANK(ReanchorBGMap_NoOAMUpdate) ; and BANK(LoadFonts_NoOAMUpdate)
 	rst Bankswitch
-
-	call Function6454
-	call Function2e20
-	call Function64bf
-
+	call ReanchorBGMap_NoOAMUpdate
+	call _OpenAndCloseMenu_HDMATransferTileMapAndAttrMap
+	call LoadFonts_NoOAMUpdate
 	pop af
 	rst Bankswitch
 	ret
-; 2dcf
 
-
-CloseText:: ; 2dcf
+CloseText
 	ld a, [hOAMUpdate]
 	push af
 	ld a, $1
 	ld [hOAMUpdate], a
-
 	call .CloseText
-
 	pop af
 	ld [hOAMUpdate], a
-	ld hl, VramState
-	res 6, [hl]
 	ret
-; 2de2
 
-.CloseText ; 2de2
+.CloseText:
 	call ClearWindowData
 	xor a
 	ld [hBGMapMode], a
 	call OverworldTextModeSwitch
-	call Function2e20
+	call _OpenAndCloseMenu_HDMATransferTileMapAndAttrMap
 	xor a
 	ld [hBGMapMode], a
-	call Function2e31
+	call SafeUpdateSprites
 	ld a, $90
 	ld [hWY], a
-	call ReplaceKrisSprite
-	callba ReturnFromMapSetupScript
-	callba LoadOverworldFont
+	callba Function1415c
+	call Functiond97
+	ld hl, wd565
+	res 7, [hl]
+	call ResetBGWindow
 	ret
-; 2e08
 
-OpenText:: ; 2e08
+OpenText::
 	call ClearWindowData
 	ld a, [hROMBank]
 	push af
-	ld a, BANK(Function6454) ; and BANK(Function64bf)
+	ld a, BANK(ReanchorBGMap_NoOAMUpdate) ; and BANK(LoadFonts_NoOAMUpdate)
 	rst Bankswitch
-
-	call Function6454 ; clear bgmap
+	call ReanchorBGMap_NoOAMUpdate
 	call SpeechTextBox
-	call Function2e20 ; anchor bgmap
-	call Function64bf ; load font
+	call _OpenAndCloseMenu_HDMATransferTileMapAndAttrMap
+	call LoadFonts_NoOAMUpdate
 	pop af
 	rst Bankswitch
-
 	ret
-; 2e20
 
-Function2e20:: ; 2e20
+_OpenAndCloseMenu_HDMATransferTileMapAndAttrMap:: ; 2ee3 (0:2ee3)
 	ld a, [hOAMUpdate]
 	push af
 	ld a, $1
 	ld [hOAMUpdate], a
-
-	callba Function104110
-
+	call Function348e
 	pop af
 	ld [hOAMUpdate], a
 	ret
-; 2e31
 
-Function2e31:: ; 2e31
+SafeUpdateSprites:: ; 2ef1 (0:2ef1)
 	ld a, [hOAMUpdate]
 	push af
 	ld a, [hBGMapMode]
@@ -96,4 +81,8 @@ Function2e31:: ; 2e31
 	pop af
 	ld [hOAMUpdate], a
 	ret
-; 2e4e
+
+Function2f0e::
+	scf
+	ret
+

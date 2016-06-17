@@ -216,7 +216,7 @@ MenuWriteText:: ; 1cf6 (0:1cf6)
 	ld [hBGMapMode], a
 	call GetMenuIndexSet
 	call RunMenuItemPrintingFunction
-	call Function2ef1
+	call SafeUpdateSprites
 	ld a, [hOAMUpdate]
 	push af
 	ld a, $1
