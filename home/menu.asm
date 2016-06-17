@@ -1,78 +1,61 @@
-; Functions used in displaying and handling menus.
-
-
-LoadMenuDataHeader::
+LoadMenuDataHeader:: ; 1bac (0:1bac)
 	call CopyMenuDataHeader
 	call PushWindow
 	ret
 
-CopyMenuDataHeader::
+CopyMenuDataHeader:: ; 1bb3 (0:1bb3)
 	ld de, wMenuDataHeader
 	ld bc, wMenuDataHeaderEnd - wMenuDataHeader
 	call CopyBytes
-	ld a, [hROMBank]
-	ld [wMenuDataBank], a
 	ret
-; 0x1d4b
 
-StoreTo_wMenuCursorBuffer:: ; 1d4b
+StoreTo_wMenuCursorBuffer
 	ld [wMenuCursorBuffer], a
 	ret
-; 1d4f
 
-
-MenuTextBox:: ; 1d4f
+MenuTextBox:: ; 1bc1 (0:1bc1)
 	push hl
 	call LoadMenuTextBox
 	pop hl
 	jp PrintText
-; 1d57
 
-ret_1d57:: ; 1d57
-; unreferenced
+; XXX
+ret_1bc9
 	ret
-; 1d58
 
-LoadMenuTextBox:: ; 1d58
+LoadMenuTextBox:: ; 1bca (0:1bca)
 	ld hl, .MenuDataHeader
 	call LoadMenuDataHeader
 	ret
-; 1d5f
-
-.MenuDataHeader ; 1d5f
+.MenuDataHeader:
 	db $40 ; tile backup
 	db 12, 0 ; start coords
 	db 17, 19 ; end coords
-	dw VTiles0
+	dw $8000
 	db 0 ; default option
-; 1d67
 
-MenuTextBoxBackup:: ; 1d67
+MenuTextBoxBackup::
 	call MenuTextBox
 	call CloseWindow
 	ret
-; 1d6e
 
-LoadStandardMenuDataHeader:: ; 1d6e
+LoadStandardMenuDataHeader::
 	ld hl, .MenuDataHeader
 	call LoadMenuDataHeader
 	ret
-; 1d75
 
-.MenuDataHeader ; 1d75
+.MenuDataHeader: ; 1d75
 	db $40 ; tile backup
 	db 0, 0 ; start coords
 	db 17, 19 ; end coords
 	dw 0
 	db 1 ; default option
-; 1d7d
 
-Call_ExitMenu:: ; 1d7d
+Call_ExitMenu::
 	call ExitMenu
 	ret
-; 1d81
 
-VerticalMenu::
+VerticalMenu:: ; 1bf3 (0:1bf3)
 	xor a
 	ld [hBGMapMode], a
 	call MenuBox
@@ -82,28 +65,25 @@ VerticalMenu::
 	call CopyMenuData2
 	ld a, [wMenuData2Flags]
 	bit 7, a
-	jr z, .cancel
+	jr z, .asm_1c19
 	call InitVerticalMenuCursor
 	call StaticMenuJoypad
 	call MenuClickSound
 	bit 1, a
-	jr z, .okay
-.cancel
+	jr z, .asm_1c1b
+.asm_1c19
 	scf
 	ret
-
-.okay
+.asm_1c1b
 	and a
 	ret
-; 0x1dab
 
-GetMenu2:: ; 1dab
+GetMenu2::
 	call LoadMenuDataHeader
 	call VerticalMenu
 	call CloseWindow
 	ld a, [wMenuCursorY]
 	ret
-; 1db8
 
 CopyNameFromMenu::
 	push hl
@@ -116,94 +96,74 @@ CopyNameFromMenu::
 	inc hl
 	inc hl
 	pop af
-	call GetNthString
+	call Function3654
 	ld d, h
 	ld e, l
-	call CopyName1
+	call Function317b
 	pop bc
 	pop hl
 	ret
-; 0x1dcf
 
-
-YesNoBox:: ; 1dcf
+YesNoBox::
 	lb bc, SCREEN_WIDTH - 6, 7
-
-PlaceYesNoBox:: ; 1dd2
+PlaceYesNoBox::
 	jr _YesNoBox
 
-PlaceGenericTwoOptionBox:: ; 1dd4
+PlaceGenericTwoOptionBox::
 	call LoadMenuDataHeader
 	jr InterpretTwoOptionMenu
 
-_YesNoBox:: ; 1dd9
-; Return nc (yes) or c (no).
+_YesNoBox::
 	push bc
 	ld hl, YesNoMenuDataHeader
 	call CopyMenuDataHeader
 	pop bc
-; This seems to be an overflow prevention, but
-; it was coded wrong.
-	ld a, b
-	cp SCREEN_WIDTH - 6
-	jr nz, .okay ; should this be "jr nc"?
-	ld a, SCREEN_WIDTH - 6
-	ld b, a
-
-.okay
 	ld a, b
 	ld [wMenuBorderLeftCoord], a
-	add 5
+	add $5
 	ld [wMenuBorderRightCoord], a
 	ld a, c
 	ld [wMenuBorderTopCoord], a
-	add 4
+	add $4
 	ld [wMenuBorderBottomCoord], a
 	call PushWindow
-
-InterpretTwoOptionMenu:: ; 1dfe
+InterpretTwoOptionMenu::
 	call VerticalMenu
 	push af
 	ld c, $f
 	call DelayFrames
 	call CloseWindow
 	pop af
-	jr c, .no
+	jr c, .asm_1c80
 	ld a, [wMenuCursorY]
-	cp 2 ; no
-	jr z, .no
+	cp $2
+	jr z, .asm_1c80
 	and a
 	ret
-
-.no
-	ld a, 2
+.asm_1c80
+	ld a, $2
 	ld [wMenuCursorY], a
 	scf
 	ret
-; 1e1d
-
-YesNoMenuDataHeader:: ; 1e1d
+YesNoMenuDataHeader:: ; 1c87 (0:1c87)
 	db $40 ; tile backup
 	db 5, 10 ; start coords
 	db 9, 15 ; end coords
 	dw .MenuData2
 	db 1 ; default option
-; 1e25
 
-.MenuData2 ; 1e25
+.MenuData2: ; 1e25
 	db $c0 ; flags
 	db 2
 	db "YES@"
 	db "NO@"
-; 1e2e
 
-OffsetMenuDataHeader:: ; 1e2e
-	call _OffsetMenuDataHeader
+OffsetMenuDataHeader::
+	call OffsetMenuDataHeader_
 	call PushWindow
 	ret
-; 1e35
 
-_OffsetMenuDataHeader:: ; 1e35
+OffsetMenuDataHeader_:: ; 1c9f (0:1c9f)
 	push de
 	call CopyMenuDataHeader
 	pop de
@@ -226,39 +186,37 @@ _OffsetMenuDataHeader:: ; 1e35
 	add l
 	ld [wMenuBorderBottomCoord], a
 	ret
-; 1e5d
 
-DoNthMenu:: ; 1e5d
-	call MenuFunc_1e7f
+DoNthMenu::
+	call DrawVariableLengthMenuBox
 	call MenuWriteText
-	call Function1eff
-	call Function1f23
+	call InitMenuCursorAndButtonPermissions
+	call GetStaticMenuJoypad
 	call GetMenuJoypad
 	call MenuClickSound
 	ret
-; 1e70
 
-SetUpMenu:: ; 1e70
-	call MenuFunc_1e7f ; ???
+SetUpMenu::
+	call DrawVariableLengthMenuBox
 	call MenuWriteText
-	call Function1eff ; set up selection pointer
-	ld hl, w2DMenuFlags1
+	call InitMenuCursorAndButtonPermissions
+	ld hl, wcedc
 	set 7, [hl]
 	ret
 
-MenuFunc_1e7f::
+DrawVariableLengthMenuBox:: ; 1ce9 (0:1ce9)
 	call CopyMenuData2
 	call GetMenuIndexSet
-	call Function1ea6
+	call AutomaticGetMenuBottomCoord
 	call MenuBox
 	ret
 
-MenuWriteText::
+MenuWriteText:: ; 1cf6 (0:1cf6)
 	xor a
 	ld [hBGMapMode], a
-	call GetMenuIndexSet ; sort out the text
-	call Function1eda ; actually write it
-	call Function2e31
+	call GetMenuIndexSet
+	call RunMenuItemPrintingFunction
+	call Function2ef1
 	ld a, [hOAMUpdate]
 	push af
 	ld a, $1
@@ -267,9 +225,8 @@ MenuWriteText::
 	pop af
 	ld [hOAMUpdate], a
 	ret
-; 0x1ea6
 
-Function1ea6:: ; 1ea6
+AutomaticGetMenuBottomCoord:: ; 1d10 (0:1d10)
 	ld a, [wMenuBorderLeftCoord]
 	ld c, a
 	ld a, [wMenuBorderRightCoord]
@@ -283,165 +240,146 @@ Function1ea6:: ; 1ea6
 	add b
 	ld [wMenuBorderBottomCoord], a
 	ret
-; 1ebd
 
-GetMenuIndexSet:: ; 1ebd
+GetMenuIndexSet:: ; 1d27 (0:1d27)
 	ld hl, wMenuData2IndicesPointer
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
 	ld a, [wWhichIndexSet]
 	and a
-	jr z, .skip
+	jr z, .asm_1d3d
 	ld b, a
-	ld c, -1
-.loop
+	ld c, $ff
+.asm_1d36
 	ld a, [hli]
 	cp c
-	jr nz, .loop
+	jr nz, .asm_1d36
 	dec b
-	jr nz, .loop
-
-.skip
+	jr nz, .asm_1d36
+.asm_1d3d
 	ld d, h
 	ld e, l
 	ld a, [hl]
 	ld [wMenuData2Items], a
 	ret
-; 1eda
 
-Function1eda:: ; 1eda
+RunMenuItemPrintingFunction:: ; 1d44 (0:1d44)
 	call MenuBoxCoord2Tile
 	ld bc, 2 * SCREEN_WIDTH + 2
 	add hl, bc
-.loop
+.asm_1d4b
 	inc de
 	ld a, [de]
-	cp -1
+	cp $ff
 	ret z
-	ld [MenuSelection], a
+	ld [wMenuSelection], a
 	push de
 	push hl
 	ld d, h
 	ld e, l
 	ld hl, wMenuData2DisplayFunctionPointer
-	call .__wMenuData2DisplayFunction__
+	call ._hl_
 	pop hl
-	ld de, 2 * SCREEN_WIDTH
+	ld de, $28
 	add hl, de
 	pop de
-	jr .loop
-; 1efb
+	jr .asm_1d4b
 
-.__wMenuData2DisplayFunction__ ; 1efb
+._hl_ ; 1d65 (0:1d65)
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
 	jp [hl]
-; 1eff
 
-Function1eff:: ; 1eff
+InitMenuCursorAndButtonPermissions:: ; 1d69 (0:1d69)
 	call InitVerticalMenuCursor
 	ld hl, wMenuJoypadFilter
 	ld a, [wMenuData2Flags]
 	bit 3, a
-	jr z, .disallow_select
-	set START_F, [hl]
-
-.disallow_select
+	jr z, .asm_1d78
+	set 3, [hl]
+.asm_1d78
 	ld a, [wMenuData2Flags]
 	bit 2, a
-	jr z, .disallow_left_right
-	set D_LEFT_F, [hl]
-	set D_RIGHT_F, [hl]
-
-.disallow_left_right
+	jr z, .asm_1d83
+	set 5, [hl]
+	set 4, [hl]
+.asm_1d83
 	ret
-; 1f1a
 
-
-Function1f1a:: ; 1f1a
+GetScrollingMenuJoypad::
 	call ScrollingMenuJoypad
 	ld hl, wMenuJoypadFilter
 	and [hl]
-	jr Function1f2a
-; 1f23
+	jr ContinueGettingMenuJoypad
 
-Function1f23:: ; 1f23
+GetStaticMenuJoypad:: ; 1d8d (0:1d8d)
 	xor a
 	ld [wMenuJoypad], a
 	call StaticMenuJoypad
-; 1f2a
-
-Function1f2a:: ; 1f2a
-	bit A_BUTTON_F, a
-	jr nz, .a_button
-	bit B_BUTTON_F, a
-	jr nz, .b_start
-	bit START_F, a
-	jr nz, .b_start
-	bit D_RIGHT_F, a
-	jr nz, .d_right
-	bit D_LEFT_F, a
-	jr nz, .d_left
+ContinueGettingMenuJoypad::
+	bit 0, a
+	jr nz, .asm_1dbc
+	bit 1, a
+	jr nz, .asm_1dd7
+	bit 3, a
+	jr nz, .asm_1dd7
+	bit 4, a
+	jr nz, .asm_1dae
+	bit 5, a
+	jr nz, .asm_1db5
 	xor a
 	ld [wMenuJoypad], a
-	jr .done
-
-.d_right
-	ld a, D_RIGHT
+	jr .asm_1dc1
+.asm_1dae
+	ld a, $10
 	ld [wMenuJoypad], a
-	jr .done
-
-.d_left
-	ld a, D_LEFT
+	jr .asm_1dc1
+.asm_1db5
+	ld a, $20
 	ld [wMenuJoypad], a
-	jr .done
-
-.a_button
-	ld a, A_BUTTON
+	jr .asm_1dc1
+.asm_1dbc
+	ld a, $1
 	ld [wMenuJoypad], a
-
-.done
+.asm_1dc1
 	call GetMenuIndexSet
 	ld a, [wMenuCursorY]
 	ld l, a
 	ld h, $0
 	add hl, de
 	ld a, [hl]
-	ld [MenuSelection], a
+	ld [wMenuSelection], a
 	ld a, [wMenuCursorY]
 	ld [wMenuCursorBuffer], a
 	and a
 	ret
-
-.b_start
-	ld a, B_BUTTON
+.asm_1dd7
+	ld a, $2
 	ld [wMenuJoypad], a
-	ld a, -1
-	ld [MenuSelection], a
+	ld a, $ff
+	ld [wMenuSelection], a
 	scf
 	ret
-; 1f79
 
-PlaceMenuStrings:: ; 1f79
+PlaceMenuStrings::
 	push de
 	ld hl, wMenuData2PointerTableAddr
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
-	ld a, [MenuSelection]
-	call GetNthString
+	ld a, [wMenuSelection]
+	call Function3654
 	ld d, h
 	ld e, l
 	pop hl
 	call PlaceString
 	ret
-; 1f8d
 
-PlaceNthMenuStrings:: ; 1f8d
+PlaceNthMenuStrings::
 	push de
-	ld a, [MenuSelection]
+	ld a, [wMenuSelection]
 	call GetMenuDataPointerTableEntry
 	inc hl
 	inc hl
@@ -451,10 +389,8 @@ PlaceNthMenuStrings:: ; 1f8d
 	pop hl
 	call PlaceString
 	ret
-; 1f9e
 
-Function1f9e:: ; 1f9e
-; unreferenced
+Function1e08::
 	call GetMenuDataPointerTableEntry
 	inc hl
 	inc hl
@@ -462,18 +398,16 @@ Function1f9e:: ; 1f9e
 	ld d, [hl]
 	ld e, a
 	ret
-; 1fa7
 
-MenuJumptable:: ; 1fa7
-	ld a, [MenuSelection]
+MenuJumptable::
+	ld a, [wMenuSelection]
 	call GetMenuDataPointerTableEntry
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
 	jp [hl]
-; 1fb1
 
-GetMenuDataPointerTableEntry:: ; 1fb1
+GetMenuDataPointerTableEntry:: ; 1e1b (0:1e1b)
 	ld e, a
 	ld d, $0
 	ld hl, wMenuData2PointerTableAddr
@@ -485,107 +419,88 @@ GetMenuDataPointerTableEntry:: ; 1fb1
 	add hl, de
 	add hl, de
 	ret
-; 1fbf
 
-ClearWindowData:: ; 1fbf
-	ld hl, wWindowStackPointer
+ClearWindowData::
+	ld hl, wWindowData
 	call .bytefill
 	ld hl, wMenuDataHeader
 	call .bytefill
-	ld hl, wMenuData2Flags
+	ld hl, wMenuData2
 	call .bytefill
-	ld hl, w2DMenuCursorInitY
+	ld hl, wMenuData3
 	call .bytefill
-
-	ld a, [rSVBK]
-	push af
-	ld a, $7
-	ld [rSVBK], a
-
 	xor a
-	ld hl, wWindowStackBottom
+	call OpenSRAM
+	xor a
+	ld hl, sWindowStackTop
 	ld [hld], a
 	ld [hld], a
 	ld a, l
 	ld [wWindowStackPointer], a
 	ld a, h
 	ld [wWindowStackPointer + 1], a
-
-	pop af
-	ld [rSVBK], a
+	call CloseSRAM
 	ret
-; 1ff0
 
-.bytefill: ; 1ff0
-	ld bc, $0010
+.bytefill
+	ld bc, $10
 	xor a
 	call ByteFill
 	ret
-; 1ff8
 
-MenuClickSound:: ; 1ff8
+MenuClickSound:: ; 1e5f (0:1e5f)
 	push af
-	and A_BUTTON | B_BUTTON
-	jr z, .nosound
-	ld hl, wMenuFlags
-	bit 3, [hl]
-	jr nz, .nosound
+	and $3
+	jr z, .asm_1e6e
+	ld hl, wMenuDataHeader
+	bit 3, a
+	jr nz, .asm_1e6e
 	call PlayClickSFX
-.nosound
+.asm_1e6e
 	pop af
 	ret
-; 2009
-
-
-PlayClickSFX:: ; 2009
+PlayClickSFX:: ; 1e70 (0:1e70)
 	push de
 	ld de, SFX_READ_TEXT_2
 	call PlaySFX
 	pop de
 	ret
-; 0x2012
 
-MenuTextBoxWaitButton:: ; 2012
+MenuTextBoxWaitButton::
 	call MenuTextBox
 	call WaitButton
 	call ExitMenu
 	ret
-; 201c
 
-Place2DMenuItemName:: ; 201c
-	ld [hBuffer], a
+Place2DMenuItemName::
+	ld [wBuffer], a
 	ld a, [hROMBank]
 	push af
-	ld a, [hBuffer]
+	ld a, [wBuffer]
 	rst Bankswitch
-
 	call PlaceString
 	pop af
 	rst Bankswitch
-
 	ret
-; 202a
 
-_2DMenu:: ; 202a
+_2DMenu::
+	call CopyMenuData2
 	ld a, [hROMBank]
-	ld [wMenuData2_2DMenuItemStringsBank], a
-	callba _2DMenu_
+	ld [wMenuDataBank], a
+	push af
+	ld a, BANK(_2DMenu_)
+	rst Bankswitch
+	call _2DMenu_
+	pop bc
+	ld a, b
+	rst Bankswitch
 	ld a, [wMenuCursorBuffer]
 	ret
-; 2039
 
-InterpretBattleMenu:: ; 2039
-	ld a, [hROMBank]
-	ld [wMenuData2_2DMenuItemStringsBank], a
-	callba _InterpretBattleMenu
-	ld a, [wMenuCursorBuffer]
+ResetBGWindow::
+	xor a
+	ld [hBGMapMode], a
+	ld a, $90
+	ld [rWY], a
+	ld [hWY], a
 	ret
-; 2048
-
-InterpretMobileMenu:: ; 2048
-	ld a, [hROMBank]
-	ld [wMenuData2_2DMenuItemStringsBank], a
-	callba _InterpretMobileMenu
-	ld a, [wMenuCursorBuffer]
-	ret
-; 2057

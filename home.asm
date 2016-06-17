@@ -27,9 +27,8 @@ INCLUDE "home/video.asm"
 INCLUDE "home/map_objects.asm"
 INCLUDE "home/sine.asm"
 INCLUDE "home/movement.asm"
-
-SetMenuAttributes:: ; 1a4e
-	dr $1a4e, $1eb3
+INCLUDE "home/tilemap.asm"
+INCLUDE "home/menu.asm"
 
 PrinterReceive::
 	dr $1eb3, $1ebf
@@ -50,7 +49,10 @@ FarCall_hl::
 	dr $2e27, $2e49
 
 Predef::
-	dr $2e49, $30e1
+	dr $2e49, $2ef1
+
+Function2ef1::
+	dr $2ef1, $30e1
 
 OpenSRAM::
 	dr $30e1, $30f1
@@ -115,7 +117,10 @@ Function3564::
 	dr $3564, $35b9
 
 GetWeekday::
-	dr $35b9, $39f9
+	dr $35b9, $3654
+
+Function3654::
+	dr $3654, $39f9
 
 PlayCry::
 	dr $39f9, $3ade

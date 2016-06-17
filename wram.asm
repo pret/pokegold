@@ -2131,12 +2131,13 @@ wcea4:: ds 1 ; cea4
 wcea5:: ds 1 ; cea5
 wcea6:: ds 1 ; cea6
 wcea7:: ds 1 ; cea7
-wcea8:: ds 1 ; cea8
-wcea9:: ds 1 ; cea9
-wceaa:: ds 1 ; ceaa
-wceab:: ds 1 ; ceab
+
+wWindowData::
+wWindowStackPointer:: dw ; cea8
+wMenuJoypad:: ds 1 ; ceaa
+wMenuSelection:: ds 1 ; ceab
 wceac:: ds 1 ; ceac
-wcead:: ds 1 ; cead
+wWhichIndexSet:: ds 1 ; cead
 wceae:: ds 1 ; ceae
 wceaf:: ds 1 ; ceaf
 wceb0:: ds 1 ; ceb0
@@ -2147,14 +2148,16 @@ wceb4:: ds 1 ; ceb4
 wceb5:: ds 1 ; ceb5
 wceb6:: ds 1 ; ceb6
 wceb7:: ds 1 ; ceb7
+wWindowDataEnd::
+
+wMenuDataHeader::
 wceb8:: ds 1 ; ceb8
-wceb9:: ds 1 ; ceb9
-wceba:: ds 1 ; ceba
-wcebb:: ds 1 ; cebb
-wcebc:: ds 1 ; cebc
-wcebd:: ds 1 ; cebd
-wcebe:: ds 1 ; cebe
-wcebf:: ds 1 ; cebf
+wMenuBorderTopCoord:: ds 1 ; ceb9
+wMenuBorderLeftCoord:: ds 1 ; ceba
+wMenuBorderBottomCoord:: ds 1 ; cebb
+wMenuBorderRightCoord:: ds 1 ; cebc
+wMenuData2Pointer:: dw ; cebd
+wMenuCursorBuffer:: ds 1 ; cebf
 wcec0:: ds 1 ; cec0
 wcec1:: ds 1 ; cec1
 wcec2:: ds 1 ; cec2
@@ -2163,13 +2166,15 @@ wcec4:: ds 1 ; cec4
 wcec5:: ds 1 ; cec5
 wcec6:: ds 1 ; cec6
 wcec7:: ds 1 ; cec7
-wcec8:: ds 1 ; cec8
-wcec9:: ds 1 ; cec9
-wceca:: ds 1 ; ceca
-wcecb:: ds 1 ; cecb
-wcecc:: ds 1 ; cecc
-wcecd:: ds 1 ; cecd
-wcece:: ds 1 ; cece
+wMenuDataHeaderEnd::
+
+wMenuData2::
+wMenuData2Flags:: ds 1 ; cec8
+wMenuData2Items:: ds 1 ; cec9
+wMenuData2IndicesPointer:: ds 1 ; ceca
+wMenuDataBank:: ds 1 ; cecb
+wMenuData2DisplayFunctionPointer:: dw ; cecc
+wMenuData2PointerTableAddr:: ds 1 ; cece
 wcecf:: ds 1 ; cecf
 wced0:: ds 1 ; ced0
 wced1:: ds 1 ; ced1
@@ -2179,22 +2184,26 @@ wced4:: ds 1 ; ced4
 wced5:: ds 1 ; ced5
 wced6:: ds 1 ; ced6
 wced7:: ds 1 ; ced7
-wced8:: ds 1 ; ced8
+wMenuData2End::
+
+wMenuData3::
+w2DMenuCursorInitY:: ds 1 ; ced8
 wced9:: ds 1 ; ced9
 wceda:: ds 1 ; ceda
 wcedb:: ds 1 ; cedb
 wcedc:: ds 1 ; cedc
 wcedd:: ds 1 ; cedd
 wcede:: ds 1 ; cede
-wcedf:: ds 1 ; cedf
-wcee0:: ds 1 ; cee0
+wMenuJoypadFilter:: ds 1 ; cedf
+wMenuCursorY:: ds 1 ; cee0
 wcee1:: ds 1 ; cee1
 wcee2:: ds 1 ; cee2
-wcee3:: ds 1 ; cee3
+wCursorCurrentTile:: ds 1 ; cee3
 wcee4:: ds 1 ; cee4
 wcee5:: ds 1 ; cee5
 wcee6:: ds 1 ; cee6
 wcee7:: ds 1 ; cee7
+wMenuData3End::
 
 wOverworldDelay:: ds 1 ; cee8
 wTextDelayFrames:: ds 1 ; cee9

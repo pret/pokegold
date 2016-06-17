@@ -496,12 +496,6 @@ loadbytec2cf: macro
 	db \1 ; byte
 	endm
 
-	enum farwritetext_command
-farwritetext: macro
-	db farwritetext_command
-	dba \1
-	endm
-
 	enum writetext_command
 writetext: macro
 	db writetext_command

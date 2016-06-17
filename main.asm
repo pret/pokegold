@@ -70,7 +70,19 @@ SECTION "bank8", DATA, BANK[$8]
 
 SECTION "bank9", DATA, BANK[$9]
 StringBufferPointers::
-	dr $24000, $28000
+	dr $24000, $2400e
+_2DMenu_::
+	dr $2400e, $24136
+StaticMenuJoypad_::
+	dr $24136, $24139
+ScrollingMenuJoypad_::
+	dr $24139, $242a0
+PushWindow_::
+	dr $242a0, $24307
+ExitMenu_::
+	dr $24307, $24395
+InitVerticalMenuCursor_::
+	dr $24395, $28000
 
 SECTION "banka", DATA, BANK[$a]
 	dr $28000, $2c000
