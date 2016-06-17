@@ -1,89 +1,120 @@
+The source files are assembled into a rom using [**rgbds**](https://github.com/bentley/rgbds).
+These instructions explain how to set up the tools required to build.
+
+If you run into trouble, ask on irc ([**freenode#pret**](https://kiwiirc.com/client/irc.freenode.net/?#pret)).
+
+
+# NOTICE
+
+Currently the repository requires prebuilt copies of Pokémon Gold and Pokémon Silver.  You can find their MD5sums in README.md.  Due to legal issues, we are unable to provide direct links to these ROMs, but a quick Google search should point you in the right direction.
+
+You will need to rename the GOLD ROM to **baserom-gold.gbc** and the SILVER ROM to **baserom-silver.gbc** in order to build the respective version of the game.
+
 # Linux
 
-Note that this requires python2.7 for the moment.
+Python 2.7 is required.
 
-	sudo apt-get install make gcc bison git python python-setuptools
+```bash
+sudo apt-get install make gcc bison git python
 
-	git clone git://github.com/bentley/rgbds.git
-	cd rgbds
-	sudo make install
-	cd ..
+git clone https://github.com/bentley/rgbds
+cd rgbds
+sudo make install
+cd ..
 
-	git clone --recursive git://github.com/kanzure/pokecrystal.git
-	cd pokecrystal
+git clone --recursive https://github.com/pikalaxalt/pokegold
+cd pokegold
+```
 
-To build **pokecrystal.gbc**:
+To build **pokegold.gbc**:
 
-	make
+```bash
+make gold
+```
+
+To build **pokesilver.gbc**:
+
+```bash
+make silver
+```
+
+To build both ROMs:
+
+```bash
+make
+```
 
 
-# OS X
+# Mac
 
-On 10.8 or earlier, download and install **Command Line Tools for Xcode**.
+In **Terminal**, run:
 
-On 10.9 or later:
+```bash
+xcode-select --install
 
-	xcode-select --install
+git clone https://github.com/bentley/rgbds
+cd rgbds
+sudo make install
+cd ..
 
-In the shell, run:
+git clone --recursive https://github.com/pikalaxalt/pokegold
+cd pokegold
+```
 
-	git clone git://github.com/bentley/rgbds.git
-	cd rgbds
-	sudo make install
-	cd ..
+To build **pokegold.gbc**:
 
-	git clone --recursive git://github.com/kanzure/pokecrystal.git
-	cd pokecrystal
+```bash
+make gold
+```
 
-To build **pokecrystal.gbc**:
+To build **pokesilver.gbc**:
 
-	make
+```bash
+make silver
+```
+
+To build both ROMs:
+
+```bash
+make
+```
 
 
 # Windows
 
-To build on Windows, use [**Cygwin**](http://cygwin.com/install.html) (32-bit).
+To build on Windows, install [**Cygwin**](http://cygwin.com/install.html) with the default settings.
 
-In the installer, select the following packages: `make` `git` `python` `python-setuptools` `gcc` `libsasl2` `ca-certificates`
+In the installer, select the following packages: `make` `git` `python` `gettext`
 
 Then get the most recent version of [**rgbds**](https://github.com/bentley/rgbds/releases/).
-Put `rgbasm.exe`, `rgblink.exe` and `rgbfix.exe` in `C:\cygwin\usr\local\bin`.
+Extract the archive and put `rgbasm.exe`, `rgblink.exe` and `rgbfix.exe` in `C:\cygwin64\usr\local\bin`.
 
 In the **Cygwin terminal**:
 
-	git clone --recursive git://github.com/kanzure/pokecrystal.git
-	cd pokecrystal
+```bash
 
-To build:
-
-	make
-
-
-# Vagrant
-
-The simplest way to get pokecrystal to compile is to use Vagrant and
-VirtualBox. Follow these steps:
-
-* [Download and install Vagrant](http://www.vagrantup.com/downloads.html)
-* Follow the instructions to [download and install VirtualBox](http://docs-v1.vagrantup.com/v1/docs/getting-started/)
-* Run these commands:
-
-```
-	vagrant box add pokecrystal http://diyhpl.us/~bryan/irc/pokecrystal/pokecrystal.box
-	mkdir vagrantbox
-	cd vagrantbox
-	vagrant init pokecrystal
-	vagrant up
-	vagrant ssh -c "cd /vagrant && git clone --recursive git://github.com/kanzure/pokecrystal.git"
-	vagrant ssh
+git clone --recursive https://github.com/pikalaxalt/pokegold
+cd pokegold
 ```
 
-Running "vagrant ssh" will give you a shell to type commands into for compiling
-the source code. Then the "virtualbox" directory on the host appears as a shared
-folder inside of the guest virtual machine at "/vagrant".
+To build **pokegold.gbc**:
 
-To build the project, run these commands in the guest (that is, inside "vagrant
-ssh"):
+```bash
+make gold
+```
 
-	cd /vagrant/pokecrystal
-	make
+To build **pokesilver.gbc**:
+
+```bash
+make silver
+```
+
+To build both ROMs:
+
+```bash
+make
+```
+
+## notes
+
+- If `gettext` no longer exists, grab `libsasl2-3` `ca-certificates`.
