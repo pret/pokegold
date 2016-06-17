@@ -15,7 +15,7 @@ noise: macro
 	endm
 
 musicheader: macro
-	; number of tracks, which track, address
+	; number of tracks, track idx, address
 	dbw ((\1 - 1) << 6) + (\2 - 1), \3
 	endm
 
@@ -29,7 +29,7 @@ octave: macro
 	db notetype_cmd - (\1)
 	endm
 
-notetype: macro ; d8
+notetype: macro
 	db notetype_cmd
 	db \1 ; note_length
 	if _NARG >= 2
@@ -38,139 +38,138 @@ notetype: macro ; d8
 	endm
 
 	enum forceoctave_cmd
-forceoctave: macro ; d9
+forceoctave: macro
 	db forceoctave_cmd
 	db \1 ; octave
 	endm
 
 	enum tempo_cmd
-tempo: macro ; da
+tempo: macro
 	db tempo_cmd
 	bigdw \1 ; tempo
 	endm
 
 	enum dutycycle_cmd
-dutycycle: macro ; db
+dutycycle: macro
 	db dutycycle_cmd
 	db \1 ; duty_cycle
 	endm
 
 	enum intensity_cmd
-intensity: macro ; dc
+intensity: macro
 	db intensity_cmd
 	db \1 ; intensity
 	endm
 
 	enum soundinput_cmd
-soundinput: macro ; dd
+soundinput: macro
 	db soundinput_cmd
 	db \1 ; input
 	endm
 
-	enum unknownmusic0xde_cmd
-unknownmusic0xde: macro ; de
-	db unknownmusic0xde_cmd
-	db \1 ; unknown
+	enum sound_duty_cmd
+sound_duty: macro
+	db sound_duty_cmd
+	db \1 | (\2 << 2) | (\3 << 4) | (\4 << 6) ; duty sequence
 	endm
 
 	enum togglesfx_cmd
-togglesfx: macro ; df
+togglesfx: macro
 	db togglesfx_cmd
 	endm
 
-	enum unknownmusic0xe0_cmd
-unknownmusic0xe0: macro ; e0
-	db unknownmusic0xe0_cmd
+	enum slidepitchto_cmd
+slidepitchto: macro
+	db slidepitchto_cmd
 	db \1 ; unknown
-	; db \2 ; unknown
 	dn \2, \3 ; octave, pitch
 	endm
 
 	enum vibrato_cmd
-vibrato: macro ; e1
+vibrato: macro
 	db vibrato_cmd
 	db \1 ; delay
 	db \2 ; extent
 	endm
 
 	enum unknownmusic0xe2_cmd
-unknownmusic0xe2: macro ; e2
+unknownmusic0xe2: macro
 	db unknownmusic0xe2_cmd
 	db \1 ; unknown
 	endm
 
 	enum togglenoise_cmd
-togglenoise: macro ; e3
+togglenoise: macro
 	db togglenoise_cmd
 	db \1 ; id
 	endm
 
 	enum panning_cmd
-panning: macro ; e4
+panning: macro
 	db panning_cmd
 	db \1 ; tracks
 	endm
 
 	enum volume_cmd
-volume: macro ; e5
+volume: macro
 	db volume_cmd
 	db \1 ; volume
 	endm
 
 	enum tone_cmd
-tone: macro ; e6
+tone: macro
 	db tone_cmd
 	bigdw \1 ; tone
 	endm
 
 	enum unknownmusic0xe7_cmd
-unknownmusic0xe7: macro ; e7
+unknownmusic0xe7: macro
 	db unknownmusic0xe7_cmd
 	db \1 ; unknown
 	endm
 
 	enum unknownmusic0xe8_cmd
-unknownmusic0xe8: macro ; e8
+unknownmusic0xe8: macro
 	db unknownmusic0xe8_cmd
 	db \1 ; unknown
 	endm
 
 	enum tempo_relative_cmd
-tempo_relative: macro ; e9
+tempo_relative: macro
 	db tempo_relative_cmd
 	bigdw \1 ; value
 	endm
 
 	enum restartchannel_cmd
-restartchannel: macro ; ea
+restartchannel: macro
 	db restartchannel_cmd
 	dw \1 ; address
 	endm
 
 	enum newsong_cmd
-newsong: macro ; eb
+newsong: macro
 	db newsong_cmd
 	bigdw \1 ; id
 	endm
 
 	enum sfxpriorityon_cmd
-sfxpriorityon: macro ; ec
+sfxpriorityon: macro
 	db sfxpriorityon_cmd
 	endm
 
 	enum sfxpriorityoff_cmd
-sfxpriorityoff: macro ; ed
+sfxpriorityoff: macro
 	db sfxpriorityoff_cmd
 	endm
 
 	enum unknownmusic0xee_cmd
-unknownmusic0xee: macro ; ee
+unknownmusic0xee: macro
 	db unknownmusic0xee_cmd
 	dw \1 ; address
 	endm
 
 	enum stereopanning_cmd
-stereopanning: macro ; ef
+stereopanning: macro
 	db stereopanning_cmd
 	db \1 ; tracks
 	endm
@@ -246,19 +245,19 @@ jumpchannel: macro
 	endm
 
 	enum loopchannel_cmd
-loopchannel: macro ; fd
+loopchannel: macro
 	db loopchannel_cmd
 	db \1 ; count
 	dw \2 ; address
 	endm
 
 	enum callchannel_cmd
-callchannel: macro ; fe
+callchannel: macro
 	db callchannel_cmd
 	dw \1 ; address
 	endm
 
 	enum endchannel_cmd
-endchannel: macro ; ff
+endchannel: macro
 	db endchannel_cmd
 	endm

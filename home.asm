@@ -1,4 +1,4 @@
-INCLUDE "constants.asm"
+INCLUDE "includes.asm"
 
 ; rst vectors
 INCLUDE "rst.asm"
@@ -25,9 +25,11 @@ INCLUDE "home/copy.asm"
 INCLUDE "home/text.asm"
 INCLUDE "home/video.asm"
 INCLUDE "home/map_objects.asm"
+INCLUDE "home/sine.asm"
+INCLUDE "home/movement.asm"
 
-Function19ac::
-	dr $19ac, $1eb3
+SetMenuAttributes:: ; 1a4e
+	dr $1a4e, $1eb3
 
 PrinterReceive::
 	dr $1eb3, $1ebf

@@ -2,19 +2,19 @@
 
 ; pitch
 	const_def
-	const __ ; 0
-	const C_ ; 1
-	const C# ; 2
-	const D_ ; 3
-	const D# ; 4
-	const E_ ; 5
-	const F_ ; 6
-	const F# ; 7
-	const G_ ; 8
-	const G# ; 9
-	const A_ ; a
-	const A# ; b
-	const B_ ; c
+	const __
+	const C_
+	const C#
+	const D_
+	const D#
+	const E_
+	const F_
+	const F#
+	const G_
+	const G#
+	const A_
+	const A#
+	const B_
 
 ; channel
 	const_def
@@ -41,7 +41,7 @@ SOUND_REST EQU 5
 ; Flags2
 
 SOUND_VIBRATO EQU 0
-SOUND_UNKN_09 EQU 1
+SOUND_PITCH_WHEEL EQU 1
 SOUND_DUTY EQU 2
 SOUND_UNKN_0B EQU 3
 SOUND_CRY_PITCH EQU 4
@@ -51,7 +51,7 @@ SOUND_UNKN_0F EQU 7
 
 ; Flags3
 SOUND_VIBRATO_DIR EQU 0
-SOUND_UNKN_11 EQU 1
+SOUND_PITCH_WHEEL_DIR EQU 1
 
 ; NoteFlags
 NOTE_UNKN_0 EQU 0

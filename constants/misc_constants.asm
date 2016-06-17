@@ -18,10 +18,12 @@ LV_CHAR EQU $6e
 ; GetName types
 PKMN_NAME     EQU 1
 MOVE_NAME     EQU 2
+; dummied out EQU 3
 ITEM_NAME     EQU 4
 PARTY_OT_NAME EQU 5
 ENEMY_OT_NAME EQU 6
 TRAINER_NAME  EQU 7
+; broken ptr  EQU 8
 
 ; hp
 HP_GREEN  EQU 0
@@ -172,7 +174,7 @@ const_value = 1
 	const HAPPINESS_REVIVALHERB       ; 11
 	const HAPPINESS_MASSAGE           ; 12
 	const HAPPINESS_GAINLEVELATHOME   ; 13
-	
+
 
 	const_def
 	const LINK_NULL
@@ -212,6 +214,23 @@ NUM_JOHTO_BADGES EQU const_value
 NUM_KANTO_BADGES EQU const_value
 NUM_BADGES EQU NUM_JOHTO_BADGES + NUM_KANTO_BADGES
 NUM_KANA EQU $2d
+
+	const_def
+	const EZCHAT_POKEMON
+	const EZCHAT_TYPES
+	const EZCHAT_GREETINGS
+	const EZCHAT_PEOPLE
+	const EZCHAT_BATTLE
+	const EZCHAT_EXCLAMATIONS
+	const EZCHAT_CONVERSATION
+	const EZCHAT_FEELINGS
+	const EZCHAT_CONDITIONS
+	const EZCHAT_LIFE
+	const EZCHAT_HOBBIES
+	const EZCHAT_ACTIONS
+	const EZCHAT_TIME
+	const EZCHAT_FAREWELLS
+	const EZCHAT_THISANDTHAT
 
 SWARM_DUNSPARCE EQU 0
 SWARM_YANMA     EQU 1
@@ -259,4 +278,3 @@ SERIAL_NO_DATA_BYTE EQU $FE
 
 ; signals the end of one part of a patch list (there are two parts) for player/enemy party data
 SERIAL_PATCH_LIST_PART_TERMINATOR EQU $FF
-

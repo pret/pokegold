@@ -1,21 +1,6 @@
-Cosine:: ; 1b0f
-; Return d * cos(a) in hl
-	add $10 ; 90 degrees
-
-Sine:: ; 1b11
-; Return d * sin(a) in hl
-; a is a signed 6-bit value.
-
+Cosine:: ; 19ac (0:19ac)
+	add $10
+Sine::
 	ld e, a
-
-	ld a, [hROMBank]
-	push af
-	ld a, BANK(_Sine)
-	rst Bankswitch
-
-	call _Sine
-
-	pop af
-	rst Bankswitch
+	homecall Sine_e
 	ret
-; 1b1e

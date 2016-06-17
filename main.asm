@@ -1,4 +1,4 @@
-INCLUDE "constants.asm"
+INCLUDE "includes.asm"
 
 SECTION "bank1", DATA, BANK[$1]
 PlaceWaitingText::
@@ -32,7 +32,9 @@ SwapTextboxPalettes::
 ScrollBGMapPalettes::
 	dr $804f, $86d7
 CopyObjectStruct_::
-	dr $86d7, $9cfd
+	dr $86d7, $8ac9
+Sine_e::
+	dr $8ac9, $9cfd
 InitCGBPals:: ; 9cfd
 	dr $9cfd, $c000
 

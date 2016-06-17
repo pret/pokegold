@@ -10,7 +10,7 @@ MAP_NONE   EQU 0
 
 	mapgroup OLIVINE_POKECENTER_1F,                       4,  5 ;  1
 	mapgroup OLIVINE_GYM,                                 8,  5 ;  2
-	mapgroup OLIVINE_VOLTORB_HOUSE,                       4,  4 ;  3
+	mapgroup OLIVINE_TIMS_HOUSE,                          4,  4 ;  3
 	mapgroup OLIVINE_HOUSE_BETA,                          4,  4 ;  4
 	mapgroup OLIVINE_PUNISHMENT_SPEECH_HOUSE,             4,  4 ;  5
 	mapgroup OLIVINE_GOOD_ROD_HOUSE,                      4,  4 ;  6
@@ -144,7 +144,7 @@ MAP_NONE   EQU 0
 	mapgroup BLACKTHORN_GYM_1F,                           9,  5 ;  1
 	mapgroup BLACKTHORN_GYM_2F,                           9,  5 ;  2
 	mapgroup BLACKTHORN_DRAGON_SPEECH_HOUSE,              4,  4 ;  3
-	mapgroup BLACKTHORN_DODRIO_TRADE_HOUSE,               4,  4 ;  4
+	mapgroup BLACKTHORN_EMYS_HOUSE,                       4,  4 ;  4
 	mapgroup BLACKTHORN_MART,                             4,  6 ;  5
 	mapgroup BLACKTHORN_POKECENTER_1F,                    4,  5 ;  6
 	mapgroup MOVE_DELETERS_HOUSE,                         4,  4 ;  7
@@ -233,7 +233,7 @@ MAP_NONE   EQU 0
 	mapgroup GOLDENROD_MAGNET_TRAIN_STATION,              9, 10 ;  7
 	mapgroup GOLDENROD_FLOWER_SHOP,                       4,  4 ;  8
 	mapgroup GOLDENROD_PP_SPEECH_HOUSE,                   4,  4 ;  9
-	mapgroup GOLDENROD_NAME_RATERS_HOUSE,                 4,  4 ; 10
+	mapgroup GOLDENROD_NAME_RATER,                        4,  4 ; 10
 	mapgroup GOLDENROD_DEPT_STORE_1F,                     4,  8 ; 11
 	mapgroup GOLDENROD_DEPT_STORE_2F,                     4,  8 ; 12
 	mapgroup GOLDENROD_DEPT_STORE_3F,                     4,  8 ; 13
@@ -518,39 +518,39 @@ const_value SET 1
 
 ; object struct
 	const_def
-	const OBJECT_SPRITE
-	const OBJECT_MAP_OBJECT_INDEX
-	const OBJECT_SPRITE_TILE
-	const OBJECT_MOVEMENTTYPE
-	const OBJECT_FLAGS1
-	const OBJECT_FLAGS2
-	const OBJECT_PALETTE
-	const OBJECT_DIRECTION_WALKING
-	const OBJECT_FACING
-	const OBJECT_STEP_TYPE
-	const OBJECT_STEP_DURATION
-	const OBJECT_ACTION
-	const OBJECT_STEP_FRAME
-	const OBJECT_FACING_STEP
-	const OBJECT_NEXT_TILE
-	const OBJECT_STANDING_TILE
-	const OBJECT_NEXT_MAP_X
-	const OBJECT_NEXT_MAP_Y
-	const OBJECT_MAP_X
-	const OBJECT_MAP_Y
-	const OBJECT_INIT_X
-	const OBJECT_INIT_Y
-	const OBJECT_RADIUS
-	const OBJECT_SPRITE_X
-	const OBJECT_SPRITE_Y
-	const OBJECT_SPRITE_X_OFFSET
-	const OBJECT_SPRITE_Y_OFFSET
-	const OBJECT_MOVEMENT_BYTE_INDEX
-	const OBJECT_28
-	const OBJECT_29
-	const OBJECT_30
-	const OBJECT_31
-	const OBJECT_RANGE
+	const OBJECT_SPRITE              ; 00
+	const OBJECT_MAP_OBJECT_INDEX    ; 01
+	const OBJECT_SPRITE_TILE         ; 02
+	const OBJECT_MOVEMENTTYPE        ; 03
+	const OBJECT_FLAGS1              ; 04
+	const OBJECT_FLAGS2              ; 05
+	const OBJECT_PALETTE             ; 06
+	const OBJECT_DIRECTION_WALKING   ; 07
+	const OBJECT_FACING              ; 08
+	const OBJECT_STEP_TYPE           ; 09
+	const OBJECT_STEP_DURATION       ; 0a
+	const OBJECT_ACTION              ; 0b
+	const OBJECT_STEP_FRAME          ; 0c
+	const OBJECT_FACING_STEP         ; 0d
+	const OBJECT_NEXT_TILE           ; 0e
+	const OBJECT_STANDING_TILE       ; 0f
+	const OBJECT_NEXT_MAP_X          ; 10
+	const OBJECT_NEXT_MAP_Y          ; 11
+	const OBJECT_MAP_X               ; 12
+	const OBJECT_MAP_Y               ; 13
+	const OBJECT_INIT_X              ; 14
+	const OBJECT_INIT_Y              ; 15
+	const OBJECT_RADIUS              ; 16
+	const OBJECT_SPRITE_X            ; 17
+	const OBJECT_SPRITE_Y            ; 18
+	const OBJECT_SPRITE_X_OFFSET     ; 19
+	const OBJECT_SPRITE_Y_OFFSET     ; 1a
+	const OBJECT_MOVEMENT_BYTE_INDEX ; 1b
+	const OBJECT_28                  ; 1c
+	const OBJECT_29                  ; 1d
+	const OBJECT_30                  ; 1e
+	const OBJECT_31                  ; 1f
+	const OBJECT_RANGE               ; 20
 ; 33-39 are not used
 
 ; map object struct
@@ -707,3 +707,5 @@ CMDQUEUE_04    EQU 4
 CMDQUEUE_05    EQU 5
 CMDQUEUE_ENTRY_SIZE EQU 6
 CMDQUEUE_CAPACITY EQU 4
+
+CMDQUEUE_STONETABLE EQU 2

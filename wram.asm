@@ -1,4 +1,5 @@
-INCLUDE "constants.asm"
+INCLUDE "includes.asm"
+INCLUDE "macros/wram.asm"
 
 SECTION "Audio", WRAM0
 wc000::
@@ -2201,12 +2202,20 @@ wVBlankOccurred:: ds 1 ; ceea
 
 wceeb:: ds 1 ; ceeb
 wceec:: ds 1 ; ceec
+
+wMovementBufferCount:: ; ceed
 wceed:: ds 1 ; ceed
+
+wMovementBufferPerson::
 wceee:: ds 1 ; ceee
+
 wceef:: ds 1 ; ceef
 wcef0:: ds 1 ; cef0
 wcef1:: ds 1 ; cef1
+
+wMovementBuffer::
 wcef2:: ds 1 ; cef2
+
 wcef3:: ds 1 ; cef3
 wcef4:: ds 1 ; cef4
 wcef5:: ds 1 ; cef5
