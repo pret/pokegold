@@ -17,7 +17,7 @@ VBlank::
 	push de
 	jp [hl]
 .return
-	call Function1efa
+	call GameTimer
 	pop hl
 	pop de
 	pop bc

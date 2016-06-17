@@ -496,6 +496,12 @@ loadbytec2cf: macro
 	db \1 ; byte
 	endm
 
+	enum farwritetext_command
+farwritetext: macro
+	db farwritetext_command
+	dba \1
+	endm
+
 	enum writetext_command
 writetext: macro
 	db writetext_command
@@ -530,14 +536,6 @@ jumptextfaceplayer: macro
 	db jumptextfaceplayer_command
 	dw \1 ; text_pointer
 	endm
-
-; IF _CRYSTAL
-	enum farjumptext_command
-farjumptext: macro
-	db farjumptext_command
-	dba \1
-	endm
-; ENDC
 
 	enum jumptext_command
 jumptext: macro

@@ -10,18 +10,22 @@ SpriteMovementData::
 DeleteMapObject::
 	dr $4358, $557f
 Function557f::
-	dr $557f, $5795
+	dr $557f, $5730
+Function5730::
+	dr $5730, $5795
 StopFollow::
 	dr $5795, $5896
 UpdateSprites_::
+	dr $5896, $58c5
+Function58c5::
 IF DEF(GOLD)
-	dr $5896, $6545
+	dr $58c5, $6545
 GameInit::
 	dr $6545, $8000
 ENDC
 
 IF DEF(SILVER)
-	dr $5896, $650b
+	dr $58c5, $650b
 GameInit::
 	dr $650b, $8000
 ENDC
@@ -34,7 +38,9 @@ ScrollBGMapPalettes::
 CopyObjectStruct_::
 	dr $86d7, $8ac9
 Sine_e::
-	dr $8ac9, $9cfd
+	dr $8ac9, $8b3b
+GetPredefPointer::
+	dr $8b3b, $9cfd
 InitCGBPals:: ; 9cfd
 	dr $9cfd, $c000
 
@@ -52,17 +58,30 @@ StartClock:: ; 14089
 	dr $14089, $140ff
 Function140ff:: ; 140ff
 	dr $140ff, $1413c
-Function1413c:: ; 413c
-	dr $1413c, $14317
+Function1413c:: ; 1413c
+	dr $1413c, $1414b
+RefreshSprites:: ; 1414b
+	dr $1414b, $1416d
+Function1416d:: ; 1416d
+	dr $1416d, $14317
 DoesSpriteHaveFacings_:: ; 14317
 	dr $14317, $14334
 GetSpritePalette_:: ; 14334
-	dr $14334, $18000
+	dr $14334, $14a18
+Function14a18:: ; 14a18
+	dr $14a18, $14a2d
+Function14a2d:: ; 14a2d
+	dr $14a2d, $15484
+RunMapSetupScript::
+	dr $15484, $15612
+Function15612:: ; 15612
+	dr $15612, $18000
 
 SECTION "bank6", DATA, BANK[$6]
 	dr $18000, $1c000
 
 SECTION "bank7", DATA, BANK[$7]
+LoadMapGroupRoof::
 	dr $1c000, $20000
 
 SECTION "bank8", DATA, BANK[$8]
@@ -157,25 +176,56 @@ SECTION "bank20", DATA, BANK[$20]
 	dr $80000, $84000
 
 SECTION "bank21", DATA, BANK[$21]
-	dr $84000, $88000
+	dr $84000, $842db
+
+PrinterReceive_:: ; 842db
+	dr $842db, $88000
 
 SECTION "bank22", DATA, BANK[$22]
 	dr $88000, $8c000
 
 SECTION "bank23", DATA, BANK[$23]
-	dr $8c000, $8c366
+	dr $8c000, $8c356
+
+UpdateTimeOfDayPal:: ; 8c356
+	dr $8c356, $8c366
 
 _TimeOfDayPals:: ; 8c366
 	dr $8c366, $8c397
 
 _UpdateTimePals:: ; 8c397
-	dr $8c397, $90000
+	dr $8c397, $8c3a0
+
+FadeInPalettes:: ; 8c3a0
+	dr $8c3a0, $8c3ab
+
+Function8c3ab:: ; 8c3ab
+	dr $8c3ab, $8c3e9
+
+Function8c3e9:: ; 8c3e9
+	dr $8c3e9, $90000
 
 SECTION "bank24", DATA, BANK[$24]
 	dr $90000, $94000
 
 SECTION "bank25", DATA, BANK[$25]
-	dr $94000, $98000
+MapTriggers:: ; 94000
+	dr $94000, $940ed
+
+MapGroupPointers::
+	dr $940ed, $96b89
+
+EnableScriptMode:: ; 96b89
+	dr $96b89, $96b91
+
+ScriptEvents:: ; 96b91
+	dr $96b91, $97365
+
+CallCallback:: ; 97365
+	dr $97365, $97c2a
+
+Function97c2a:: ; 97c2a
+	dr $97c2a, $98000
 
 SECTION "bank26", DATA, BANK[$26]
 	dr $98000, $9c000
@@ -378,7 +428,16 @@ SECTION "bank64", DATA, BANK[$64]
 	dr $190000, $194000
 
 SECTION "bank65", DATA, BANK[$65]
-	dr $194000, $198000
+	dr $194000, $195b84
+
+ObjectEventText_:: ; 195b84
+	dr $195b84, $195b93
+
+BGEventText_:: ; 195b93
+	dr $195b93, $195b9d
+
+CoordinatesEventText_:: ; 195b9d
+	dr $195b9d, $198000
 
 SECTION "bank66", DATA, BANK[$66]
 	dr $198000, $19c000

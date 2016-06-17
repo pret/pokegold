@@ -1,50 +1,41 @@
-PrinterReceive:: ; 2057
-	ld a, [hROMBank]
-	push af
-	ld a, BANK(_PrinterReceive)
-	rst Bankswitch
-
-	call _PrinterReceive
-	pop af
-	rst Bankswitch
-
+PrinterReceive:: ; 1eb3 (0:1eb3)
+	homecall PrinterReceive_
 	ret
-; 2063
 
-AskSerial:: ; 2063
+AskSerial:: ; 1ebf (0:1ebf)
 ; send out a handshake while serial int is off
-	ld a, [wc2d4]
+	ld a, [wPrinterConnectionOpen]
 	bit 0, a
 	ret z
-	
-	ld a, [wc2d5]
+
+; if we're still interpreting data, don't try to receive
+	ld a, [wPrinterOpcode]
 	and a
 	ret nz
-	
+
 ; once every 6 frames
-	ld hl, wca8a
+	ld hl, wHandshakeFrameDelay
 	inc [hl]
 	ld a, [hl]
 	cp 6
 	ret c
-	
+
 	xor a
 	ld [hl], a
-	
-	ld a, $c
-	ld [wc2d5], a
-	
+
+	ld a, 12
+	ld [wPrinterOpcode], a
+
 ; handshake
 	ld a, $88
 	ld [rSB], a
-	
+
 ; switch to internal clock
 	ld a, %00000001
 	ld [rSC], a
-	
+
 ; start transfer
 	ld a, %10000001
 	ld [rSC], a
-	
+
 	ret
-; 208a

@@ -29,30 +29,41 @@ INCLUDE "home/sine.asm"
 INCLUDE "home/movement.asm"
 INCLUDE "home/tilemap.asm"
 INCLUDE "home/menu.asm"
+INCLUDE "home/handshake.asm"
+INCLUDE "home/game_time.asm"
+INCLUDE "home/map.asm"
 
-PrinterReceive::
-	dr $1eb3, $1ebf
+Function2e16:: ; 2e16
+; Inexplicably blank
+; Seen in predef pointers
+rept 16
+	nop
+endr
+	ret
 
-AskSerial::
-	dr $1ebf, $1efa
+INCLUDE "home/farcall.asm"
+INCLUDE "home/predef.asm"
 
-Function1efa::
-	dr $1efa, $2835
-
-Function2835::
-	dr $2835, $2841
-
-Function2841::
-	dr $2841, $2e27
-
-FarCall_hl::
-	dr $2e27, $2e49
-
-Predef::
-	dr $2e49, $2ef1
+Function2e80:: ; 2e6c (0:2e6c)
+	dr $2e80, $2ef1
 
 Function2ef1::
-	dr $2ef1, $30e1
+	dr $2ef1, $2f10
+
+Function2f10::
+	dr $2f10, $2f16
+
+Function2f16::
+	dr $2f16, $2f1d
+
+Function2f1d::
+	dr $2f1d, $2f93
+
+Function2f93::
+	dr $2f93, $2fa4
+
+Function2fa4::
+	dr $2fa4, $30e1
 
 OpenSRAM::
 	dr $30e1, $30f1
@@ -105,16 +116,25 @@ Function31e2::
 	dr $31e2, $323d
 
 PrintNum::
-	dr $323d, $344c
+	dr $323d, $3449
+
+Function3449::
+	dr $3449, $344c
 
 WaitBGMap::
-	dr $344c, $3472
+	dr $344c, $3456
+
+Function3456::
+	dr $3456, $3472
 
 ApplyTilemap::
 	dr $3472, $3564
 
 Function3564::
-	dr $3564, $35b9
+	dr $3564, $3583
+
+Function3583::
+	dr $3583, $35b9
 
 GetWeekday::
 	dr $35b9, $3654

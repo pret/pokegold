@@ -289,7 +289,7 @@ Function17ea::
 
 CopyObjectStruct::
 	ld [hMapObjectIndexBuffer], a
-	call Function2841
+	call UnmaskObject
 	ld a, [hConnectionStripLength]
 	call GetMapObject
 	callba CopyObjectStruct_
@@ -327,7 +327,7 @@ DeleteOject_CheckStopFollow:: ; 1822 (0:1822)
 
 DeleteObjectStruct::
 	call ApplyDeletionToMapObject
-	call Function2835
+	call MaskObject
 	ret
 
 CopyPlayerObjectTemplate::

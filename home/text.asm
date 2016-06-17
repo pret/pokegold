@@ -137,6 +137,7 @@ RadioTerminator:: ; 1052
 
 PrintText::
 	call SetUpTextBox
+PrintTextBoxText::
 	bccoord TEXTBOX_INNERX, TEXTBOX_INNERY
 	call PlaceHLTextAtBC
 	ret

@@ -142,7 +142,7 @@ wc1ce:: ds 1 ; c1ce
 wMapTimeOfDay:: ds 1 ; c1cf
 	ds 3
 wPrinterConnectionOpen:: ds 1
-wc1d4:: ds 1 ; c1d4
+wPrinterOpcode:: ds 1 ; c1d4
 wc1d5:: ds 1 ; c1d5
 wc1d6:: ds 1 ; c1d6
 wc1d7:: ds 1 ; c1d7
@@ -203,6 +203,7 @@ wTileMap:: ; c3a0
 wTileMapEnd:: ; c508
 
 SECTION "Animated Objects", WRAM0
+wMisc:: ; c508
 wTileMapBackup:: ; c508
 	; ds SCREEN_HEIGHT * SCREEN_WIDTH
 wAnimatedObjectDynamicVTileOffsets:: ds 10 * 2 ; c508
@@ -553,6 +554,7 @@ wc6fd:: ds 1 ; c6fd
 wc6fe:: ds 1 ; c6fe
 wc6ff:: ds 1 ; c6ff
 
+wOverworldMap::
 wLYOverrides::
 wc700:: ds 1 ; c700
 wc701:: ds 1 ; c701
@@ -1204,7 +1206,7 @@ wc986:: ds 1 ; c986
 wc987:: ds 1 ; c987
 wc988:: ds 1 ; c988
 wc989:: ds 1 ; c989
-wc98a:: ds 1 ; c98a
+wHandshakeFrameDelay:: ds 1 ; c98a
 wc98b:: ds 1 ; c98b
 wc98c:: ds 1 ; c98c
 wc98d:: ds 1 ; c98d
@@ -1828,6 +1830,8 @@ wcc10:: ds 1 ; cc10
 wcc11:: ds 1 ; cc11
 wcc12:: ds 1 ; cc12
 wcc13:: ds 1 ; cc13
+wOverworldMapEnd::
+
 wcc14:: ds 1 ; cc14
 wcc15:: ds 1 ; cc15
 wcc16:: ds 1 ; cc16
@@ -2126,11 +2130,12 @@ wce9f:: ds 1 ; ce9f
 wcea0:: ds 1 ; cea0
 wcea1:: ds 1 ; cea1
 wcea2:: ds 1 ; cea2
-wcea3:: ds 1 ; cea3
-wcea4:: ds 1 ; cea4
-wcea5:: ds 1 ; cea5
-wcea6:: ds 1 ; cea6
-wcea7:: ds 1 ; cea7
+
+wTileDown:: ds 1 ; cea3
+wTileUp:: ds 1 ; cea4
+wTileLeft:: ds 1 ; cea5
+wTileRight:: ds 1 ; cea6
+TilePermissions:: ds 1 ; cea7
 
 wWindowData::
 wWindowStackPointer:: dw ; cea8
@@ -2369,13 +2374,10 @@ wcfd7:: ds 1 ; cfd7
 wcfd8:: ds 1 ; cfd8
 wcfd9:: ds 1 ; cfd9
 wcfda:: ds 1 ; cfda
-wcfdb:: ds 1 ; cfdb
-wcfdc:: ds 1 ; cfdc
-wcfdd:: ds 1 ; cfdd
-wcfde:: ds 1 ; cfde
-wcfdf:: ds 1 ; cfdf
-wcfe0:: ds 1 ; cfe0
-wcfe1:: ds 1 ; cfe1
+wPredefID:: ds 1 ; cfdb
+wPredefHLBuffer:: dw ; cfdc
+wPredefPointerBuffer:: dw ; cfde
+wFarCallBCBuffer:: dw ; cfe0
 wcfe2:: ds 1 ; cfe2
 wcfe3:: ds 1 ; cfe3
 wcfe4:: ds 1 ; cfe4
@@ -2508,8 +2510,8 @@ wd05c:: ds 1 ; d05c
 
 wUsedSprites:: ds SPRITE_GFX_LIST_CAPACITY ; d05d
 
-wd07d:: ds 1 ; d07d
-wd07e:: ds 1 ; d07e
+wOverworldMapAnchor:: dw ; d07d
+
 wd07f:: ds 1 ; d07f
 wd080:: ds 1 ; d080
 wd081:: ds 1 ; d081
@@ -2517,9 +2519,9 @@ wd082:: ds 1 ; d082
 wd083:: ds 1 ; d083
 wd084:: ds 1 ; d084
 wd085:: ds 1 ; d085
-wd086:: ds 1 ; d086
+wMapBorderBlock:: ds 1 ; d086
 wd087:: ds 1 ; d087
-wd088:: ds 1 ; d088
+wMapWidth:: ds 1 ; d088
 wd089:: ds 1 ; d089
 wd08a:: ds 1 ; d08a
 wd08b:: ds 1 ; d08b
@@ -2580,9 +2582,8 @@ wd0c1:: ds 1 ; d0c1
 wd0c2:: ds 1 ; d0c2
 wd0c3:: ds 1 ; d0c3
 wd0c4:: ds 1 ; d0c4
-wd0c5:: ds 1 ; d0c5
-wd0c6:: ds 1 ; d0c6
-wd0c7:: ds 1 ; d0c7
+wTilesetBlocksBank:: ds 1 ; d0c5
+wTilesetBlocksAddress:: dw ; d0c6
 wd0c8:: ds 1 ; d0c8
 wd0c9:: ds 1 ; d0c9
 wd0ca:: ds 1 ; d0ca
@@ -2825,12 +2826,13 @@ wd1e6:: ds 1 ; d1e6
 wd1e7:: ds 1 ; d1e7
 wd1e8:: ds 1 ; d1e8
 wd1e9:: ds 1 ; d1e9
-wd1ea:: ds 1 ; d1ea
-wd1eb:: ds 1 ; d1eb
-wd1ec:: ds 1 ; d1ec
-wd1ed:: ds 1 ; d1ed
-wd1ee:: ds 1 ; d1ee
-wd1ef:: ds 1 ; d1ef
+
+GameTimeCap::     ds 1 ; d1ea
+GameTimeHours::   ds 2 ; d1eb
+GameTimeMinutes:: ds 1 ; d1ed
+GameTimeSeconds:: ds 1 ; d1ee
+GameTimeFrames::  ds 1 ; d1ef
+
 wd1f0:: ds 1 ; d1f0
 wd1f1:: ds 1 ; d1f1
 wd1f2:: ds 1 ; d1f2
@@ -3825,7 +3827,7 @@ wd8b4:: ds 1 ; d8b4
 wd8b5:: ds 1 ; d8b5
 wd8b6:: ds 1 ; d8b6
 wd8b7:: ds 1 ; d8b7
-wd8b8:: ds 1 ; d8b8
+GameTimerPause:: ds 1 ; d8b8
 wd8b9:: ds 1 ; d8b9
 wd8ba:: ds 1 ; d8ba
 wd8bb:: ds 1 ; d8bb
@@ -3962,8 +3964,7 @@ wd93d:: ds 1 ; d93d
 wd93e:: ds 1 ; d93e
 wd93f:: ds 1 ; d93f
 wd940:: ds 1 ; d940
-wd941:: ds 1 ; d941
-wd942:: ds 1 ; d942
+wCurrentMapTriggerPointer:: dw ; d941
 wd943:: ds 1 ; d943
 wd944:: ds 1 ; d944
 wd945:: ds 1 ; d945
@@ -4153,8 +4154,9 @@ wd9fc:: ds 1 ; d9fc
 wd9fd:: ds 1 ; d9fd
 wd9fe:: ds 1 ; d9fe
 wd9ff:: ds 1 ; d9ff
-wda00:: ds 1 ; da00
-wda01:: ds 1 ; da01
+
+wMapGroup:: ds 1 ; da00
+wMapNumber:: ds 1 ; da01
 wda02:: ds 1 ; da02
 wda03:: ds 1 ; da03
 wda04:: ds 1 ; da04
