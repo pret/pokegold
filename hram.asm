@@ -17,7 +17,7 @@ hMinutes           EQU $ff98
 hSeconds           EQU $ff9a
 
 hVBlankCounter     EQU $ff9d
-
+hFF9E              EQU $ff9e
 hROMBank           EQU $ff9f
 hVBlank            EQU $ffa0
 hMapEntryMethod    EQU $ffa1

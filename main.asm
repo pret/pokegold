@@ -4,15 +4,24 @@ SECTION "bank1", DATA, BANK[$1]
 PlaceWaitingText::
 	dr $4000, $4032
 LoadPushOAM::
-
+	dr $4032, $4274
+SpriteMovementData::
+	dr $4274, $4358
+DeleteMapObject::
+	dr $4358, $557f
+Function557f::
+	dr $557f, $5795
+StopFollow::
+	dr $5795, $5896
+UpdateSprites_::
 IF DEF(GOLD)
-	dr $4032, $6545
+	dr $5896, $6545
 GameInit::
 	dr $6545, $8000
 ENDC
 
 IF DEF(SILVER)
-	dr $4032, $650b
+	dr $5896, $650b
 GameInit::
 	dr $650b, $8000
 ENDC
@@ -21,7 +30,9 @@ SECTION "bank2", DATA, BANK[$2]
 SwapTextboxPalettes::
 	dr $8000, $804f
 ScrollBGMapPalettes::
-	dr $804f, $9cfd
+	dr $804f, $86d7
+CopyObjectStruct_::
+	dr $86d7, $9cfd
 InitCGBPals:: ; 9cfd
 	dr $9cfd, $c000
 
@@ -40,7 +51,11 @@ StartClock:: ; 14089
 Function140ff:: ; 140ff
 	dr $140ff, $1413c
 Function1413c:: ; 413c
-	dr $1413c, $18000
+	dr $1413c, $14317
+DoesSpriteHaveFacings_:: ; 14317
+	dr $14317, $14334
+GetSpritePalette_:: ; 14334
+	dr $14334, $18000
 
 SECTION "bank6", DATA, BANK[$6]
 	dr $18000, $1c000
@@ -229,7 +244,10 @@ Functionf8000::
 Functionf800c::
 	dr $f800c, $f8032
 Functionf8032::
-	dr $f8032, $fc000
+	dr $f8032, $fb4be
+
+TileCollisionTable::
+	dr $fb4be, $fc000
 
 SECTION "bank3f", DATA, BANK[$3f]
 	dr $fc000, $100000

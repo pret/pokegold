@@ -326,3 +326,56 @@ AnimateTileset:: ; 162b (0:162b)
 	ld hl, rLCDC
 	set 1, [hl]
 	ret
+
+Function1642:: ; 1642 (0:1642)
+	nop
+	ld a, [hFF9E]
+	and a
+	ret z
+	dec a
+	jr z, .one
+	dec a
+	jr z, .two
+	ld a, $2
+	ld [hFF9E], a
+	ld hl, hBGMapAddress
+	ld a, [hli]
+	ld h, [hl]
+	ld l, a
+	ld de, SCREEN_WIDTH
+	add hl, de
+	ld b, $12
+	ld a, $60
+.loop1
+rept 12
+	ld [hli], a
+endr
+	add hl, de
+	dec b
+	jr nz, .loop1
+	ret
+
+.two
+	ld a, $1
+	ld de, $240
+	jr .go
+
+.one
+	xor a
+	ld de, $320
+.go
+	ld [hFF9E], a
+	ld hl, hBGMapAddress
+	ld a, [hli]
+	ld h, [hl]
+	ld l, a
+	add hl, de
+	ld b, $e
+	ld a, $60
+.loop2
+rept 16
+	ld [hli], a
+endr
+	dec b
+	jr nz, .loop2
+	ret

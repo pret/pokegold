@@ -24,12 +24,10 @@ INCLUDE "home/palettes.asm"
 INCLUDE "home/copy.asm"
 INCLUDE "home/text.asm"
 INCLUDE "home/video.asm"
+INCLUDE "home/map_objects.asm"
 
-Function1642::
-	dr $1642, $196f
-
-UpdateSprites::
-	dr $196f, $1eb3
+Function19ac::
+	dr $19ac, $1eb3
 
 PrinterReceive::
 	dr $1eb3, $1ebf
@@ -38,7 +36,13 @@ AskSerial::
 	dr $1ebf, $1efa
 
 Function1efa::
-	dr $1efa, $2e27
+	dr $1efa, $2835
+
+Function2835::
+	dr $2835, $2841
+
+Function2841::
+	dr $2841, $2e27
 
 FarCall_hl::
 	dr $2e27, $2e49
@@ -56,7 +60,10 @@ Function30ff::
 	dr $30ff, $311a
 
 CopyBytes::
-	dr $311a, $313c
+	dr $311a, $3128
+
+Function3128::
+	dr $3128, $313c
 
 GetFarHalfword::
 	dr $313c, $314c
@@ -85,7 +92,10 @@ ReloadTilesFromBuffer_::
 	jp CopyBytes
 
 Function317b::
-	dr $317b, $31e2
+	dr $317b, $31a3
+
+Function31a3::
+	dr $31a3, $31e2
 
 Function31e2::
 	dr $31e2, $323d
