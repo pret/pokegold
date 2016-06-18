@@ -49,10 +49,9 @@ PushOAMEnd
 
 INCLUDE "engine/map_objects.asm"
 
-Function58c5::
-
+MainMenu_: ; 5a4d
 IF DEF(GOLD)
-	dr $58c5, $6545
+	dr $5a4d, $6545
 GameInit:: ; 6545
 	dr $6545, $6551
 ReanchorBGMap_NoOAMUpdate:: ; 6551
@@ -70,7 +69,7 @@ CheckNPCMovementPermissions: ; 6fa0
 ENDC
 
 IF DEF(SILVER)
-	dr $58c5, $650b
+	dr $5a4d, $650b
 GameInit:: ; 650b
 	dr $650b, $6517
 ReanchorBGMap_NoOAMUpdate:: ; 6517
@@ -97,7 +96,9 @@ CopyDECoordsToMapObject:
 CopyObjectStruct_::
 	dr $86d7, $8876
 CopyTempObjectToObjectStruct:
-	dr $8876, $8ac9
+	dr $8876, $8a7a
+QueueFollowerFirstStep:
+	dr $8a7a, $8ac9
 Sine_e::
 	dr $8ac9, $8b3b
 GetPredefPointer::
@@ -170,7 +171,9 @@ GetSpritePalette_:: ; 14334
 Function14a18:: ; 14a18
 	dr $14a18, $14a2d
 Function14a2d:: ; 14a2d
-	dr $14a2d, $15484
+	dr $14a2d, $14a44
+Function14a44: ; 14a44
+	dr $14a44, $15484
 RunMapSetupScript::
 	dr $15484, $15612
 Function15612:: ; 15612
