@@ -169,269 +169,608 @@ MovementPointers: ; 501d
 	dw Function5135
 	dw Function5109
 
-Function50cf:
-	dr $50cf, $50d6
-
-Function50d6:
-	dr $50d6, $50dd
-
-Function50dd:
-	dr $50dd, $50e4
-
-Function50e4:
-	dr $50e4, $5109
-
-Function5109:
-	dr $5109, $5128
-
-Function5128:
-	dr $5128, $5135
-
-Function5135:
-	dr $5135, $514a
-
-Function514a:
-	dr $514a, $5157
-
-Function5157:
-	dr $5157, $5160
-
-Function5160:
-	dr $5160, $517a
-
-Function517a:
-	dr $517a, $519c
-
-Function519c:
-	dr $519c, $51af
-
-Function51af:
-	dr $51af, $51c1
-
-Function51c1:
-	dr $51c1, $51c5
-
-Function51c5:
-	dr $51c5, $51c9
-
-Function51c9:
-	dr $51c9, $51cd
-
-Function51cd:
-	dr $51cd, $51d1
-
-Function51d1:
-	dr $51d1, $51d5
-
-Function51d5:
-	dr $51d5, $51d9
-
-Function51d9:
-	dr $51d9, $51dd
-
-Function51dd:
-	dr $51dd, $51e1
-
-Function51e1:
-	dr $51e1, $51fe
-
-Function51fe:
-	dr $51fe, $5218
-
-Function5218:
-	dr $5218, $5232
-
-Function5232:
-	dr $5232, $523b
-
-Function523b:
-	dr $523b, $5244
-
-Function5244:
-	dr $5244, $524d
-
-Function524d:
-	dr $524d, $5256
-
-Function5256:
-	dr $5256, $525f
-
-Function525f:
-	dr $525f, $5268
-
-Function5268:
-	dr $5268, $526e
-
-Function526e:
-	dr $526e, $5274
-
-Function5274:
-	dr $5274, $527d
-
-Function527d:
-	dr $527d, $5281
-
-Function5281:
-	dr $5281, $5285
-
-Function5285:
-	dr $5285, $5289
-
-Function5289:
-	dr $5289, $529f
-
-Function529f:
-	dr $529f, $52a4
-
-Function52a4:
-	dr $52a4, $52a9
-
-Function52a9:
-	dr $52a9, $52ae
-
-Function52ae:
-	dr $52ae, $52b3
-
-Function52b3:
-	dr $52b3, $52b8
-
-Function52b8:
-	dr $52b8, $52bd
-
-Function52bd:
-	dr $52bd, $52c2
-
-Function52c2:
-	dr $52c2, $52c7
-
-Function52c7:
-	dr $52c7, $52cc
-
-Function52cc:
-	dr $52cc, $52d1
-
-Function52d1:
-	dr $52d1, $52d6
-
-Function52d6:
-	dr $52d6, $52db
-
-Function52db:
-	dr $52db, $52e0
-
-Function52e0:
-	dr $52e0, $52e5
-
-Function52e5:
-	dr $52e5, $52ea
-
-Function52ea:
-	dr $52ea, $52ef
-
-Function52ef:
-	dr $52ef, $52f4
-
-Function52f4:
-	dr $52f4, $52f9
-
-Function52f9:
-	dr $52f9, $52fe
-
-Function52fe:
-	dr $52fe, $5303
-
-Function5303:
-	dr $5303, $5308
-
-Function5308:
-	dr $5308, $530d
-
-Function530d:
-	dr $530d, $5312
-
-Function5312:
-	dr $5312, $5317
-
-Function5317:
-	dr $5317, $531c
-
-Function531c:
-	dr $531c, $5321
-
-Function5321:
-	dr $5321, $5326
-
-Function5326:
-	dr $5326, $532b
-
-Function532b:
-	dr $532b, $5330
-
-Function5330:
-	dr $5330, $5335
-
-Function5335:
-	dr $5335, $533a
-
-Function533a:
-	dr $533a, $533f
-
-Function533f:
-	dr $533f, $5344
-
-Function5344:
-	dr $5344, $5349
-
-Function5349:
-	dr $5349, $534e
-
-Function534e:
-	dr $534e, $5353
-
-Function5353:
-	dr $5353, $5358
-
-Function5358:
-	dr $5358, $535d
-
-Function535d:
-	dr $535d, $5362
-
-Function5362:
-	dr $5362, $5367
-
-Function5367:
-	dr $5367, $536c
-
-Function536c:
-	dr $536c, $5371
-
-Function5371:
-	dr $5371, $5376
-
-Function5376:
-	dr $5376, $537b
-
-Function537b:
-	dr $537b, $5380
-
-Function5380:
-	dr $5380, $5385
-
-Function5385:
-	dr $5385, $538a
-
-Function538a:
-	dr $538a, $538f
-
-Function538f:
-	dr $538f, $5393
-
-Function5393:
-	dr $5393, $5397
-
-Function5397:
-	dr $5397, $539b
-
-Function539b:
-	dr $539b, $53b1
+Function50cf: ; 50cf (1:50cf)
+	ld hl, $9
+	add hl, bc
+	ld [hl], $c
+	ret
+
+Function50d6: ; 50d6 (1:50d6)
+	ld hl, $9
+	add hl, bc
+	ld [hl], $d
+	ret
+
+Function50dd: ; 50dd (1:50dd)
+	ld hl, $9
+	add hl, bc
+	ld [hl], $e
+	ret
+
+Function50e4: ; 50e4 (1:50e4)
+	call GetSpriteDirection
+	rlca
+	rlca
+	ld hl, $c
+	add hl, bc
+	ld [hl], a
+	ld hl, $b
+	add hl, bc
+	ld [hl], $4
+	call Function5006
+	ld hl, $a
+	add hl, bc
+	ld [hl], a
+	ld hl, $9
+	add hl, bc
+	ld [hl], $3
+	ld hl, $7
+	add hl, bc
+	ld [hl], $ff
+	ret
+
+Function5109: ; 5109 (1:5109)
+	call GetSpriteDirection
+	rlca
+	rlca
+	ld hl, $c
+	add hl, bc
+	ld [hl], a
+	call Function5006
+	ld hl, $a
+	add hl, bc
+	ld [hl], a
+	ld hl, $7
+	add hl, bc
+	ld [hl], $ff
+	ld hl, $9
+	add hl, bc
+	ld [hl], $12
+	ret
+
+Function5128: ; 5128 (1:5128)
+	ld hl, $b
+	add hl, bc
+	ld [hl], $6
+	ld hl, $9
+	add hl, bc
+	ld [hl], $10
+	ret
+
+Function5135: ; 5135 (1:5135)
+	call Function5006
+	ld hl, $a
+	add hl, bc
+	ld [hl], a
+	ld hl, $b
+	add hl, bc
+	ld [hl], $1
+	ld hl, $9
+	add hl, bc
+	ld [hl], $11
+	ret
+
+Function514a: ; 514a (1:514a)
+	ld hl, $b
+	add hl, bc
+	ld [hl], $6
+	ld hl, $9
+	add hl, bc
+	ld [hl], $1
+	ret
+
+Function5157: ; 5157 (1:5157)
+	ld hl, $1b
+	add hl, bc
+	ld [hl], $0
+	jp Function500d
+
+Function5160: ; 5160 (1:5160)
+	call RestoreDefaultMovement
+	ld hl, $3
+	add hl, bc
+	ld [hl], a
+	ld hl, $1b
+	add hl, bc
+	ld [hl], $0
+	ld hl, wVramState
+	res 7, [hl]
+	ld hl, $9
+	add hl, bc
+	ld [hl], $1
+	ret
+
+Function517a: ; 517a (1:517a)
+	call RestoreDefaultMovement
+	ld hl, $3
+	add hl, bc
+	ld [hl], a
+	ld hl, $1b
+	add hl, bc
+	ld [hl], $0
+	call Function5006
+	ld hl, $a
+	add hl, bc
+	ld [hl], a
+	ld hl, $9
+	add hl, bc
+	ld [hl], $3
+	ld hl, wVramState
+	res 7, [hl]
+	ret
+
+Function519c: ; 519c (1:519c)
+	call DeleteMapObject
+	ld hl, wObjectFollow_Leader
+	ld a, [hMapObjectIndexBuffer]
+	cp [hl]
+	jr nz, .asm_51a9
+	ld [hl], $ff
+.asm_51a9
+	ld hl, wVramState
+	res 7, [hl]
+	ret
+
+Function51af: ; 51af (1:51af)
+	ld hl, $b
+	add hl, bc
+	ld [hl], $1
+	ld hl, $9
+	add hl, bc
+	ld [hl], $4
+	ld hl, wVramState
+	res 7, [hl]
+	ret
+
+Function51c1: ; 51c1 (1:51c1)
+	ld a, $1
+	jr asm_51e6
+
+Function51c5: ; 51c5 (1:51c5)
+	ld a, $2
+	jr asm_51e6
+
+Function51c9: ; 51c9 (1:51c9)
+	ld a, $3
+	jr asm_51e6
+
+Function51cd: ; 51cd (1:51cd)
+	ld a, $4
+	jr asm_51e6
+
+Function51d1: ; 51d1 (1:51d1)
+	ld a, $5
+	jr asm_51e6
+
+Function51d5: ; 51d5 (1:51d5)
+	ld a, $6
+	jr asm_51e6
+
+Function51d9: ; 51d9 (1:51d9)
+	ld a, $7
+	jr asm_51e6
+
+Function51dd: ; 51dd (1:51dd)
+	ld a, $8
+	jr asm_51e6
+
+Function51e1: ; 51e1 (1:51e1)
+	call Function5006
+	jr asm_51e6
+
+asm_51e6
+	ld hl, $a
+	add hl, bc
+	ld [hl], a
+	ld hl, $9
+	add hl, bc
+	ld [hl], $3
+	ld hl, $b
+	add hl, bc
+	ld [hl], $1
+	ld hl, $7
+	add hl, bc
+	ld [hl], $ff
+	ret
+
+Function51fe: ; 51fe (1:51fe)
+	ld a, $1
+	ld hl, $a
+	add hl, bc
+	ld [hl], a
+	ld hl, $9
+	add hl, bc
+	ld [hl], $b
+	ld hl, $b
+	add hl, bc
+	ld [hl], $3
+	ld hl, $7
+	add hl, bc
+	ld [hl], $ff
+	ret
+
+Function5218: ; 5218 (1:5218)
+	ld a, $18
+	ld hl, $a
+	add hl, bc
+	ld [hl], a
+	ld hl, $9
+	add hl, bc
+	ld [hl], $3
+	ld hl, $b
+	add hl, bc
+	ld [hl], $b
+	ld hl, $7
+	add hl, bc
+	ld [hl], $ff
+	ret
+
+Function5232: ; 5232 (1:5232)
+	ld hl, $4
+	add hl, bc
+	res 3, [hl]
+	jp Function500d
+
+Function523b: ; 523b (1:523b)
+	ld hl, $4
+	add hl, bc
+	set 3, [hl]
+	jp Function500d
+
+Function5244: ; 5244 (1:5244)
+	ld hl, $4
+	add hl, bc
+	res 2, [hl]
+	jp Function500d
+
+Function524d: ; 524d (1:524d)
+	ld hl, $4
+	add hl, bc
+	set 2, [hl]
+	jp Function500d
+
+Function5256: ; 5256 (1:5256)
+	ld hl, $4
+	add hl, bc
+	res 0, [hl]
+	jp Function500d
+
+Function525f: ; 525f (1:525f)
+	ld hl, $4
+	add hl, bc
+	set 0, [hl]
+	jp Function500d
+
+Function5268: ; 5268 (1:5268)
+	call Function5518
+	jp Function500d
+
+Function526e: ; 526e (1:526e)
+	call Function54e6
+	jp Function500d
+
+Function5274: ; 5274 (1:5274)
+	call Function5006
+	call Function5504
+	jp Function500d
+
+Function527d: ; 527d (1:527d)
+	ld a, $0
+	jr asm_528d
+
+Function5281: ; 5281 (1:5281)
+	ld a, $4
+	jr asm_528d
+
+Function5285: ; 5285 (1:5285)
+	ld a, $8
+	jr asm_528d
+
+Function5289: ; 5289 (1:5289)
+	ld a, $c
+	jr asm_528d
+
+asm_528d
+	ld hl, $8
+	add hl, bc
+	ld [hl], a
+	ld hl, $b
+	add hl, bc
+	ld [hl], $1
+	ld hl, $7
+	add hl, bc
+	ld [hl], $ff
+	ret
+
+Function529f: ; 529f (1:529f)
+	ld a, $0
+	jp Function53b1
+
+Function52a4: ; 52a4 (1:52a4)
+	ld a, $1
+	jp Function53b1
+
+Function52a9: ; 52a9 (1:52a9)
+	ld a, $2
+	jp Function53b1
+
+Function52ae: ; 52ae (1:52ae)
+	ld a, $3
+	jp Function53b1
+
+Function52b3: ; 52b3 (1:52b3)
+	ld a, $4
+	jp Function53b1
+
+Function52b8: ; 52b8 (1:52b8)
+	ld a, $5
+	jp Function53b1
+
+Function52bd: ; 52bd (1:52bd)
+	ld a, $6
+	jp Function53b1
+
+Function52c2: ; 52c2 (1:52c2)
+	ld a, $7
+	jp Function53b1
+
+Function52c7: ; 52c7 (1:52c7)
+	ld a, $8
+	jp Function53b1
+
+Function52cc: ; 52cc (1:52cc)
+	ld a, $9
+	jp Function53b1
+
+Function52d1: ; 52d1 (1:52d1)
+	ld a, $a
+	jp Function53b1
+
+Function52d6: ; 52d6 (1:52d6)
+	ld a, $b
+	jp Function53b1
+
+Function52db: ; 52db (1:52db)
+	ld a, $0
+	jp Function53e5
+
+Function52e0: ; 52e0 (1:52e0)
+	ld a, $1
+	jp Function53e5
+
+Function52e5: ; 52e5 (1:52e5)
+	ld a, $2
+	jp Function53e5
+
+Function52ea: ; 52ea (1:52ea)
+	ld a, $3
+	jp Function53e5
+
+Function52ef: ; 52ef (1:52ef)
+	ld a, $4
+	jp Function53e5
+
+Function52f4: ; 52f4 (1:52f4)
+	ld a, $5
+	jp Function53e5
+
+Function52f9: ; 52f9 (1:52f9)
+	ld a, $6
+	jp Function53e5
+
+Function52fe: ; 52fe (1:52fe)
+	ld a, $7
+	jp Function53e5
+
+Function5303: ; 5303 (1:5303)
+	ld a, $8
+	jp Function53e5
+
+Function5308: ; 5308 (1:5308)
+	ld a, $9
+	jp Function53e5
+
+Function530d: ; 530d (1:530d)
+	ld a, $a
+	jp Function53e5
+
+Function5312: ; 5312 (1:5312)
+	ld a, $b
+	jp Function53e5
+
+Function5317: ; 5317 (1:5317)
+	ld a, $0
+	jp Function5407
+
+Function531c: ; 531c (1:531c)
+	ld a, $1
+	jp Function5407
+
+Function5321: ; 5321 (1:5321)
+	ld a, $2
+	jp Function5407
+
+Function5326: ; 5326 (1:5326)
+	ld a, $3
+	jp Function5407
+
+Function532b: ; 532b (1:532b)
+	ld a, $4
+	jp Function5407
+
+Function5330: ; 5330 (1:5330)
+	ld a, $5
+	jp Function5407
+
+Function5335: ; 5335 (1:5335)
+	ld a, $6
+	jp Function5407
+
+Function533a: ; 533a (1:533a)
+	ld a, $7
+	jp Function5407
+
+Function533f: ; 533f (1:533f)
+	ld a, $8
+	jp Function5407
+
+Function5344: ; 5344 (1:5344)
+	ld a, $9
+	jp Function5407
+
+Function5349: ; 5349 (1:5349)
+	ld a, $a
+	jp Function5407
+
+Function534e: ; 534e (1:534e)
+	ld a, $b
+	jp Function5407
+
+Function5353: ; 5353 (1:5353)
+	ld a, $0
+	jp Function5429
+
+Function5358: ; 5358 (1:5358)
+	ld a, $1
+	jp Function5429
+
+Function535d: ; 535d (1:535d)
+	ld a, $2
+	jp Function5429
+
+Function5362: ; 5362 (1:5362)
+	ld a, $3
+	jp Function5429
+
+Function5367: ; 5367 (1:5367)
+	ld a, $4
+	jp Function5429
+
+Function536c: ; 536c (1:536c)
+	ld a, $5
+	jp Function5429
+
+Function5371: ; 5371 (1:5371)
+	ld a, $6
+	jp Function5429
+
+Function5376: ; 5376 (1:5376)
+	ld a, $7
+	jp Function5429
+
+Function537b: ; 537b (1:537b)
+	ld a, $8
+	jp Function5429
+
+Function5380: ; 5380 (1:5380)
+	ld a, $9
+	jp Function5429
+
+Function5385: ; 5385 (1:5385)
+	ld a, $a
+	jp Function5429
+
+Function538a: ; 538a (1:538a)
+	ld a, $b
+	jp Function5429
+
+Function538f: ; 538f (1:538f)
+	ld a, $0
+	jr asm_539f
+
+Function5393: ; 5393 (1:5393)
+	ld a, $4
+	jr asm_539f
+
+Function5397: ; 5397 (1:5397)
+	ld a, $8
+	jr asm_539f
+
+Function539b: ; 539b (1:539b)
+	ld a, $c
+	jr asm_539f
+
+asm_539f
+	ld hl, $1d
+	add hl, bc
+	ld [hl], a
+	ld hl, $b
+	add hl, bc
+	ld [hl], $2
+	ld hl, $9
+	add hl, bc
+	ld [hl], $a
+	ret
+
+Function53b1: ; 53b1 (1:53b1)
+	call InitStep
+	call UpdateGrassPriority
+	ld hl, $b
+	add hl, bc
+	ld [hl], $2
+	ld hl, $e
+	add hl, bc
+	ld a, [hl]
+	call CheckSuperTallGrassTile
+	jr z, .asm_53cc
+	call CheckGrassTile
+	jr c, .asm_53cf
+.asm_53cc
+	call Function54f5
+.asm_53cf
+	ld hl, wCenteredObject
+	ld a, [hConnectionStripLength]
+	cp [hl]
+	jr z, .asm_53de
+	ld hl, $9
+	add hl, bc
+	ld [hl], $2
+	ret
+
+.asm_53de
+	ld hl, $9
+	add hl, bc
+	ld [hl], $6
+	ret
+
+Function53e5: ; 53e5 (1:53e5)
+	call InitStep
+	call UpdateGrassPriority
+	ld hl, $b
+	add hl, bc
+	ld [hl], $4
+	ld hl, wCenteredObject
+	ld a, [hMapObjectIndexBuffer]
+	cp [hl]
+	jr z, .asm_5400
+	ld hl, $9
+	add hl, bc
+	ld [hl], $2
+	ret
+
+.asm_5400
+	ld hl, $9
+	add hl, bc
+	ld [hl], $6
+	ret
+
+Function5407: ; 5407 (1:5407)
+	call InitStep
+	call UpdateGrassPriority
+	ld hl, $b
+	add hl, bc
+	ld [hl], $1
+	ld hl, wCenteredObject
+	ld a, [hConnectionStripLength]
+	cp [hl]
+	jr z, .asm_5422
+	ld hl, $9
+	add hl, bc
+	ld [hl], $2
+	ret
+
+.asm_5422
+	ld hl, $9
+	add hl, bc
+	ld [hl], $6
+	ret

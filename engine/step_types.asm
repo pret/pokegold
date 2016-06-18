@@ -560,9 +560,7 @@ Function4ea4: ; 4ea4 (1:4ea4)
 	add hl, bc
 	ld a, [hl]
 	ld b, a
-	ld a, $2
-	ld hl, UselessAndA + 1
-	rst FarCall
+	callba CopyDECoordsToMapObject
 	pop bc
 	ld hl, $5
 	add hl, bc

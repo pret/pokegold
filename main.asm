@@ -91,9 +91,13 @@ SECTION "bank2", ROMX, BANK[$2]
 SwapTextboxPalettes::
 	dr $8000, $804f
 ScrollBGMapPalettes::
-	dr $804f, $86d7
+	dr $804f, $8653
+CopyDECoordsToMapObject:
+	dr $8653, $86d7
 CopyObjectStruct_::
-	dr $86d7, $8ac9
+	dr $86d7, $8876
+CopyTempObjectToObjectStruct:
+	dr $8876, $8ac9
 Sine_e::
 	dr $8ac9, $8b3b
 GetPredefPointer::
