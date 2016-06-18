@@ -274,7 +274,7 @@ Function2112::
 
 Function2128::
 	ld b, $9
-	jp Function3583
+	jp GetSGBLayout
 
 Function212d::
 	call ClearSprites
@@ -2119,7 +2119,7 @@ ExitAllMenus::
 	call Functiond2a
 FinishExitMenu::
 	ld b, $9
-	call Function3583
+	call GetSGBLayout
 	call Function3456
 	callba FadeInPalettes
 	call EnableSpriteUpdates
@@ -2140,7 +2140,7 @@ ReturnToMapWithSpeechTextbox::
 	call UpdateSprites
 	call Function3456
 	ld b, $9
-	call Function3583
+	call GetSGBLayout
 	call UpdateTimePals
 	call DelayFrame
 	ld a, $1

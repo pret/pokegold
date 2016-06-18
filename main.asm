@@ -96,6 +96,7 @@ DoItemEffect_::
 ENDC
 
 SECTION "bank4", DATA, BANK[$4]
+Function10000::
 	dr $10000, $14000
 
 SECTION "bank5", DATA, BANK[$5]
@@ -510,7 +511,14 @@ SECTION "bank6b", DATA, BANK[$6b]
 	dr $1ac000, $1b0000
 
 SECTION "bank6c", DATA, BANK[$6c]
-	dr $1b0000, $1b4000
+ItemNames::
+	dr $1b0000, $1b0955
+TrainerClassNames::
+	dr $1b0955, $1b0b74
+PokemonNames::
+	dr $1b0b74, $1b1574
+MoveNames::
+	dr $1b1574, $1b4000
 
 SECTION "bank6d", DATA, BANK[$6d]
 	dr $1b4000, $1b8000

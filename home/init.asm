@@ -2,7 +2,7 @@ Reset:: ; 5b0 (0:05b0)
 	call DisableAudio
 	xor a
 	ld [hMapAnims], a
-	call Function3564
+	call ClearPalettes
 	ei
 	ld hl, wd8ba
 	set 7, [hl]

@@ -705,30 +705,316 @@ Function343a::
 	ret
 
 Function3449::
-	call Function3564
-WaitBGMap::
-	dr $344c, $3456
+	call ClearPalettes
+WaitBGMap:: ; 344c (0:344c)
+	ld a, $1
+	ld [hBGMapMode], a
+	ld c, $4
+	call DelayFrames
+	ret
 
-Function3456::
-	dr $3456, $3472
+Function3456:: ; 3456 (0:3456)
+	ld a, [hCGB]
+	and a
+	jr z, .asm_3464
+	ld a, $2
+	ld [hBGMapMode], a
+	ld c, $4
+	call DelayFrames
+.asm_3464
+	ld a, $1
+	ld [hBGMapMode], a
+	ld c, $4
+	call DelayFrames
+	ret
 
-ApplyTilemap::
-	dr $3472, $348e
+CheckCGB::
+	ld a, [hCGB]
+	and a
+	ret
 
-Function348e::
-	dr $348e, $3564
+ApplyTilemap:: ; 3472 (0:3472)
+	ld a, [hCGB]
+	and a
+	jr z, .asm_3484
+	ld a, [wRTCEnabled]
+	cp $0
+	jr z, .asm_3484
+	ld a, $1
+	ld [hBGMapMode], a
+	jr LoadEDTile
 
-Function3564::
-	dr $3564, $3583
+.asm_3484
+	ld a, $1
+	ld [hBGMapMode], a
+	ld c, $4
+	call DelayFrames
+	ret
 
-Function3583::
-	dr $3583, $35b9
+CGBOnly_LoadEDTile:: ; 348e (0:348e)
+	ld a, [hCGB]
+	and a
+	jr z, WaitBGMap
+LoadEDTile::
+	ld a, [hBGMapMode]
+	push af
+	xor a
+	ld [hBGMapMode], a
+	ld a, [hMapAnims]
+	push af
+	xor a
+	ld [hMapAnims], a
+.asm_349f
+	ld a, [rLY]
+	cp $7f
+	jr c, .asm_349f
+	di
+	ld a, $1
+	ld [rVBK], a
+	ld hl, wAttrMap
+	call Function34c8
+	ld a, $0
+	ld [rVBK], a
+	ld hl, wTileMap
+	call Function34c8
+.asm_34ba
+	ld a, [rLY]
+	cp $7f
+	jr c, .asm_34ba
+	ei
+	pop af
+	ld [hMapAnims], a
+	pop af
+	ld [hBGMapMode], a
+	ret
+
+Function34c8:: ; 34c8 (0:34c8)
+	ld [hSPBuffer], sp
+	ld sp, hl
+	ld a, [hBGMapAddress + 1]
+	ld h, a
+	ld l, $0
+	ld a, $12
+	ld [hTilesPerCycle], a
+	ld b, $2
+	ld c, rSTAT % $100
+.asm_34d9
+rept 10
+	pop de
+.loop_\@
+	ld a, [$ff00+c]
+	and b
+	jr nz, .loop_\@
+	ld [hl], e
+	inc l
+	ld [hl], d
+	inc l
+endr
+	ld de, $c
+	add hl, de
+	ld a, [hTilesPerCycle]
+	dec a
+	ld [hTilesPerCycle], a
+	jr nz, .asm_34d9
+	ld a, [hSPBuffer]
+	ld l, a
+	ld a, [hSPBuffer + 1]
+	ld h, a
+	ld sp, hl
+	ret
+
+SetPalettes::
+	ld a, [hCGB]
+	and a
+	jr nz, .asm_3556
+	ld a, $e4
+	ld [rBGP], a
+	ld a, $d0
+	ld [rOBP0], a
+	ld [rOBP1], a
+	ret
+
+.asm_3556
+	push de
+	ld a, $e4
+	call DmgToCgbBGPals
+	ld de, $e4e4
+	call DmgToCgbObjPals
+	pop de
+	ret
+
+ClearPalettes:: ; 3564 (0:3564)
+	ld a, [hCGB]
+	and a
+	jr nz, .asm_3571
+	xor a
+	ld [rBGP], a
+	ld [rOBP0], a
+	ld [rOBP1], a
+	ret
+
+.asm_3571
+	ld hl, wBGPals
+	ld bc, $80
+	ld a, $ff
+	call ByteFill
+	ld a, $1
+	ld [hCGBPalUpdate], a
+	ret
+
+GetMemSGBLayout::
+	ld b, $ff
+GetSGBLayout:: ; 3583 (0:3583)
+	ld a, [hCGB]
+	and a
+	jr nz, .asm_358c
+	ld a, [hSGB]
+	and a
+	ret z
+.asm_358c
+	predef_jump Predef_LoadSGBLayout
+
+SetHPPal::
+	call GetHPPal
+	ld [hl], d
+	ret
+
+GetHPPal:: ; 3596 (0:3596)
+	ld d, $0
+	ld a, e
+	cp $18
+	ret nc
+	inc d
+	cp $a
+	ret nc
+	inc d
+	ret
+
+CountSetBits::
+	ld c, $0
+.asm_35a4
+	ld a, [hli]
+	ld e, a
+	ld d, $8
+.asm_35a8
+	srl e
+	ld a, $0
+	adc c
+	ld c, a
+	dec d
+	jr nz, .asm_35a8
+	dec b
+	jr nz, .asm_35a4
+	ld a, c
+	ld [wd151], a
+	ret
 
 GetWeekday::
-	dr $35b9, $3654
+	ld a, [wCurDay]
+.mod
+	sub 7
+	jr nc, .mod
+	add 7
+	ret
 
-Function3654::
-	dr $3654, $39f9
+INCLUDE "home/pokedex_flags.asm"
+
+NamesPointers:: ; 35ee (0:35ee)
+	dba PokemonNames
+	dba MoveNames
+	dbw 0, 0
+	dba ItemNames
+	dbw 0, wPartyMonOT
+	dbw 0, $de7d
+	dba TrainerClassNames
+	dba Function10000
+
+GetName:: ; 3606
+	ld a, [hROMBank]
+	push af
+	push hl
+	push bc
+	push de
+	ld a, [wce61]
+	cp $1
+	jr nz, .asm_3624
+	ld a, [wce60]
+	ld [wd151], a
+	call GetPokemonName
+	ld hl, $b
+	add hl, de
+	ld e, l
+	ld d, h
+	jr .asm_3646
+.asm_3624
+	ld a, [wce61]
+	dec a
+	ld e, a
+	ld d, $0
+	ld hl, NamesPointers
+	add hl, de
+	add hl, de
+	add hl, de
+	ld a, [hli]
+	rst Bankswitch
+	ld a, [hli]
+	ld h, [hl]
+	ld l, a
+	ld a, [wce60]
+	dec a
+	call GetNthString
+	ld de, wStringBuffer1
+	ld bc, $d
+	call CopyBytes
+.asm_3646
+	ld a, e
+	ld [wcffe], a
+	ld a, d
+	ld [wcfff], a
+	pop de
+	pop bc
+	pop hl
+	pop af
+	rst Bankswitch
+	ret
+
+GetNthString:: ; 3654 (0:3654)
+	and a
+	ret z
+	push bc
+	ld b, a
+	ld c, "@"
+.asm_365a
+	ld a, [hli]
+	cp c
+	jr nz, .asm_365a
+	dec b
+	jr nz, .asm_365a
+	pop bc
+	ret
+
+GetBasePokemonName::
+	push hl
+	call GetPokemonName
+	ld hl, wStringBuffer1
+.loop
+	ld a, [hl]
+	cp "@"
+	jr z, .quit
+	cp "♂"
+	jr z, .end
+	cp "♀"
+	jr z, .end
+	inc hl
+	jr .loop
+.end
+	ld [hl], "@"
+.quit
+	pop hl
+	ret
+
+GetPokemonName::
+	dr $367e, $39f9
 
 PlayCry::
 	dr $39f9, $3ade

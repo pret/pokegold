@@ -58,7 +58,7 @@ _OpenAndCloseMenu_HDMATransferTileMapAndAttrMap:: ; 2ee3 (0:2ee3)
 	push af
 	ld a, $1
 	ld [hOAMUpdate], a
-	call Function348e
+	call CGBOnly_LoadEDTile
 	pop af
 	ld [hOAMUpdate], a
 	ret

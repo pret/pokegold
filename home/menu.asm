@@ -96,7 +96,7 @@ CopyNameFromMenu::
 	inc hl
 	inc hl
 	pop af
-	call Function3654
+	call GetNthString
 	ld d, h
 	ld e, l
 	call Function317b
@@ -370,7 +370,7 @@ PlaceMenuStrings::
 	ld h, [hl]
 	ld l, a
 	ld a, [wMenuSelection]
-	call Function3654
+	call GetNthString
 	ld d, h
 	ld e, l
 	pop hl

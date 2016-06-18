@@ -115,7 +115,7 @@ FixTime:: ; 4de (0:04de)
 	ld c, a
 	ld a, [wd1dc]
 	adc c
-	ld [wd1f2], a
+	ld [wCurDay], a
 	ret
 
 SetTimeOfDay::
