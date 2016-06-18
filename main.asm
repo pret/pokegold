@@ -1,6 +1,6 @@
 INCLUDE "includes.asm"
 
-SECTION "bank1", DATA, BANK[$1]
+SECTION "bank1", ROMX, BANK[$1]
 PlaceWaitingText::
 	dr $4000, $4032
 LoadPushOAM::
@@ -51,7 +51,7 @@ Divide_:: ; 67e3
 	dr $67e3, $7514
 ENDC
 
-SECTION "bank2", DATA, BANK[$2]
+SECTION "bank2", ROMX, BANK[$2]
 SwapTextboxPalettes::
 	dr $8000, $804f
 ScrollBGMapPalettes::
@@ -65,9 +65,9 @@ GetPredefPointer::
 PredefPointers::
 	dr $8b5b, $9cfd
 InitCGBPals:: ; 9cfd
-	dr $9cfd, $c000
+	dr $9cfd, $bc3a
 
-SECTION "bank3", DATA, BANK[$3]
+SECTION "bank3", ROMX, BANK[$3]
 	dr $c000, $c01b
 EngineFlagAction:: ; c01b
 
@@ -84,7 +84,7 @@ GetTMHMNumber::
 CheckTossableItem_::
 	dr $d434, $e7a6
 DoItemEffect_::
-	dr $e7a6, $10000
+	dr $e7a6, $fa3e
 ENDC
 
 IF DEF(SILVER)
@@ -100,14 +100,14 @@ GetTMHMNumber::
 CheckTossableItem_::
 	dr $d432, $e7a4
 DoItemEffect_::
-	dr $e7a4, $10000
+	dr $e7a4, $fa3c
 ENDC
 
-SECTION "bank4", DATA, BANK[$4]
+SECTION "bank4", ROMX, BANK[$4]
 Function10000::
-	dr $10000, $14000
+	dr $10000, $13e03
 
-SECTION "bank5", DATA, BANK[$5]
+SECTION "bank5", ROMX, BANK[$5]
 	dr $14000, $14032
 Function14032:: ; 14032
 	dr $14032, $14089
@@ -134,19 +134,19 @@ Function14a2d:: ; 14a2d
 RunMapSetupScript::
 	dr $15484, $15612
 Function15612:: ; 15612
-	dr $15612, $18000
+	dr $15612, $1783e
 
-SECTION "bank6", DATA, BANK[$6]
-	dr $18000, $1c000
+SECTION "bank6", ROMX, BANK[$6]
+	dr $18000, $1bdbc
 
-SECTION "bank7", DATA, BANK[$7]
+SECTION "bank7", ROMX, BANK[$7]
 LoadMapGroupRoof::
-	dr $1c000, $20000
+	dr $1c000, $1ffbd
 
-SECTION "bank8", DATA, BANK[$8]
+SECTION "bank8", ROMX, BANK[$8]
 	dr $20000, $24000
 
-SECTION "bank9", DATA, BANK[$9]
+SECTION "bank9", ROMX, BANK[$9]
 StringBufferPointers::
 	dr $24000, $2400e
 _2DMenu_::
@@ -166,94 +166,94 @@ InitScrollingMenu::
 ScrollingMenu_::
 	dr $244f3, $28000
 
-SECTION "banka", DATA, BANK[$a]
+SECTION "banka", ROMX, BANK[$a]
 	dr $28000, $2c000
 
-SECTION "bankb", DATA, BANK[$b]
+SECTION "bankb", ROMX, BANK[$b]
 	dr $2c000, $30000
 
-SECTION "bankc", DATA, BANK[$c]
+SECTION "bankc", ROMX, BANK[$c]
 	dr $30000, $34000
 
-SECTION "bankd", DATA, BANK[$d]
+SECTION "bankd", ROMX, BANK[$d]
 	dr $34000, $38000
 
-SECTION "banke", DATA, BANK[$e]
+SECTION "banke", ROMX, BANK[$e]
 	dr $38000, $398f2
 
 Battle_GetTrainerName:: ; 398f2
 	dr $398f2, $3c000
 
-SECTION "bankf", DATA, BANK[$f]
+SECTION "bankf", ROMX, BANK[$f]
 	dr $3c000, $3ec11
 BattleRandom_:: ; 3ec11
 	dr $3ec11, $40000
 
-SECTION "bank10", DATA, BANK[$10]
+SECTION "bank10", ROMX, BANK[$10]
 	dr $40000, $44000
 
-SECTION "bank11", DATA, BANK[$11]
+SECTION "bank11", ROMX, BANK[$11]
 	dr $44000, $48000
 
-SECTION "bank12", DATA, BANK[$12]
+SECTION "bank12", ROMX, BANK[$12]
 	dr $48000, $4c000
 
-SECTION "bank13", DATA, BANK[$13]
+SECTION "bank13", ROMX, BANK[$13]
 	dr $4c000, $50000
 
-SECTION "bank14", DATA, BANK[$14]
+SECTION "bank14", ROMX, BANK[$14]
 	dr $50000, $51b0b
 BaseData:: ; 51b0b
 	dr $51b0b, $53a83
 UnknownEggPic:: ; 53a83
 	dr $53a83, $54000
 
-SECTION "bank15", DATA, BANK[$15]
+SECTION "bank15", ROMX, BANK[$15]
 	dr $54000, $58000
 
-SECTION "bank16", DATA, BANK[$16]
+SECTION "bank16", ROMX, BANK[$16]
 	dr $58000, $5c000
 
-SECTION "bank17", DATA, BANK[$17]
+SECTION "bank17", ROMX, BANK[$17]
 	dr $5c000, $60000
 
-SECTION "bank18", DATA, BANK[$18]
+SECTION "bank18", ROMX, BANK[$18]
 	dr $60000, $64000
 
-SECTION "bank19", DATA, BANK[$19]
+SECTION "bank19", ROMX, BANK[$19]
 	dr $64000, $68000
 
-SECTION "bank1a", DATA, BANK[$1a]
+SECTION "bank1a", ROMX, BANK[$1a]
 	dr $68000, $6c000
 
-SECTION "bank1b", DATA, BANK[$1b]
+SECTION "bank1b", ROMX, BANK[$1b]
 	dr $6c000, $70000
 
-SECTION "bank1c", DATA, BANK[$1c]
+SECTION "bank1c", ROMX, BANK[$1c]
 	dr $70000, $74000
 
-SECTION "bank1d", DATA, BANK[$1d]
+SECTION "bank1d", ROMX, BANK[$1d]
 	dr $74000, $78000
 
-SECTION "bank1e", DATA, BANK[$1e]
+SECTION "bank1e", ROMX, BANK[$1e]
 	dr $78000, $7c000
 
-SECTION "bank1f", DATA, BANK[$1f]
+SECTION "bank1f", ROMX, BANK[$1f]
 	dr $7c000, $80000
 
-SECTION "bank20", DATA, BANK[$20]
+SECTION "bank20", ROMX, BANK[$20]
 	dr $80000, $84000
 
-SECTION "bank21", DATA, BANK[$21]
+SECTION "bank21", ROMX, BANK[$21]
 	dr $84000, $842db
 
 PrinterReceive_:: ; 842db
 	dr $842db, $88000
 
-SECTION "bank22", DATA, BANK[$22]
+SECTION "bank22", ROMX, BANK[$22]
 	dr $88000, $8c000
 
-SECTION "bank23", DATA, BANK[$23]
+SECTION "bank23", ROMX, BANK[$23]
 	dr $8c000, $8c356
 
 UpdateTimeOfDayPal:: ; 8c356
@@ -280,10 +280,10 @@ InitAnimatedObjectStruct_:: ; 8d1f7
 ReinitAnimatedObjectFrame_:: ; 8d332
 	dr $8d332, $90000
 
-SECTION "bank24", DATA, BANK[$24]
+SECTION "bank24", ROMX, BANK[$24]
 	dr $90000, $94000
 
-SECTION "bank25", DATA, BANK[$25]
+SECTION "bank25", ROMX, BANK[$25]
 MapTriggers:: ; 94000
 	dr $94000, $940ed
 
@@ -302,69 +302,69 @@ CallCallback:: ; 97365
 Function97c2a:: ; 97c2a
 	dr $97c2a, $98000
 
-SECTION "bank26", DATA, BANK[$26]
+SECTION "bank26", ROMX, BANK[$26]
 	dr $98000, $9c000
 
-SECTION "bank27", DATA, BANK[$27]
+SECTION "bank27", ROMX, BANK[$27]
 	dr $9c000, $a0000
 
-SECTION "bank28", DATA, BANK[$28]
+SECTION "bank28", ROMX, BANK[$28]
 	dr $a0000, $a4000
 
-SECTION "bank29", DATA, BANK[$29]
+SECTION "bank29", ROMX, BANK[$29]
 	dr $a4000, $a8000
 
-SECTION "bank2a", DATA, BANK[$2a]
+SECTION "bank2a", ROMX, BANK[$2a]
 	dr $a8000, $ac000
 
-SECTION "bank2b", DATA, BANK[$2b]
+SECTION "bank2b", ROMX, BANK[$2b]
 	dr $ac000, $b0000
 
-SECTION "bank2c", DATA, BANK[$2c]
+SECTION "bank2c", ROMX, BANK[$2c]
 	dr $b0000, $b4000
 
-SECTION "bank2d", DATA, BANK[$2d]
+SECTION "bank2d", ROMX, BANK[$2d]
 	dr $b4000, $b8000
 
-SECTION "bank2e", DATA, BANK[$2e]
+SECTION "bank2e", ROMX, BANK[$2e]
 	dr $b8000, $bc000
 
-SECTION "bank2f", DATA, BANK[$2f]
+SECTION "bank2f", ROMX, BANK[$2f]
 	dr $bc000, $c0000
 
-SECTION "bank30", DATA, BANK[$30]
+SECTION "bank30", ROMX, BANK[$30]
 	dr $c0000, $c4000
 
-SECTION "bank31", DATA, BANK[$31]
+SECTION "bank31", ROMX, BANK[$31]
 	dr $c4000, $c8000
 
-SECTION "bank32", DATA, BANK[$32]
+SECTION "bank32", ROMX, BANK[$32]
 BattleAnimations:: ; Not actually where it is, I just needed the label for BANK to work
 	dr $c8000, $cc000
 
-SECTION "bank33", DATA, BANK[$33]
+SECTION "bank33", ROMX, BANK[$33]
 BattleAnimCommands::  ; Not actually where it is, I just needed the label for BANK to work
 	dr $cc000, $d0000
 
-SECTION "bank34", DATA, BANK[$34]
+SECTION "bank34", ROMX, BANK[$34]
 	dr $d0000, $d4000
 
-SECTION "bank35", DATA, BANK[$35]
+SECTION "bank35", ROMX, BANK[$35]
 	dr $d4000, $d8000
 
-SECTION "bank36", DATA, BANK[$36]
+SECTION "bank36", ROMX, BANK[$36]
 	dr $d8000, $dc000
 
-SECTION "bank37", DATA, BANK[$37]
+SECTION "bank37", ROMX, BANK[$37]
 	dr $dc000, $e0000
 
-SECTION "bank38", DATA, BANK[$38]
+SECTION "bank38", ROMX, BANK[$38]
 	dr $e0000, $e4000
 
-SECTION "bank39", DATA, BANK[$39]
+SECTION "bank39", ROMX, BANK[$39]
 	dr $e4000, $e8000
 
-SECTION "bank3a", DATA, BANK[$3a]
+SECTION "bank3a", ROMX, BANK[$3a]
 DisableAudio_::
 	dr $e8000, $e805c
 
@@ -380,18 +380,18 @@ PlayCryHeader_::
 PlaySFX_::
 	dr $e8c04, $ec000
 
-SECTION "bank3b", DATA, BANK[$3b]
+SECTION "bank3b", ROMX, BANK[$3b]
 	dr $ec000, $f0000
 
-SECTION "bank3c", DATA, BANK[$3c]
+SECTION "bank3c", ROMX, BANK[$3c]
 	dr $f0000, $f2747
 CryHeaders::
 	dr $f2747, $f4000
 
-SECTION "bank3d", DATA, BANK[$3d]
+SECTION "bank3d", ROMX, BANK[$3d]
 	dr $f4000, $f8000
 
-SECTION "bank3e", DATA, BANK[$3e]
+SECTION "bank3e", ROMX, BANK[$3e]
 Functionf8000::
 	dr $f8000, $f800c
 Functionf800c::
@@ -402,122 +402,122 @@ Functionf8032::
 TileCollisionTable::
 	dr $fb4be, $fc000
 
-SECTION "bank3f", DATA, BANK[$3f]
+SECTION "bank3f", ROMX, BANK[$3f]
 	dr $fc000, $100000
 
-SECTION "bank40", DATA, BANK[$40]
+SECTION "bank40", ROMX, BANK[$40]
 BattleText:: ; Not actually where it is, I just needed the label for BANK to work
 	dr $100000, $104000
 
-SECTION "bank41", DATA, BANK[$41]
+SECTION "bank41", ROMX, BANK[$41]
 	dr $104000, $108000
 
-SECTION "bank42", DATA, BANK[$42]
+SECTION "bank42", ROMX, BANK[$42]
 	dr $108000, $10c000
 
-SECTION "bank43", DATA, BANK[$43]
+SECTION "bank43", ROMX, BANK[$43]
 	dr $10c000, $110000
 
-SECTION "bank44", DATA, BANK[$44]
+SECTION "bank44", ROMX, BANK[$44]
 	dr $110000, $114000
 
-SECTION "bank45", DATA, BANK[$45]
+SECTION "bank45", ROMX, BANK[$45]
 	dr $114000, $118000
 
-SECTION "bank46", DATA, BANK[$46]
+SECTION "bank46", ROMX, BANK[$46]
 	dr $118000, $11c000
 
-SECTION "bank47", DATA, BANK[$47]
+SECTION "bank47", ROMX, BANK[$47]
 	dr $11c000, $120000
 
-SECTION "bank48", DATA, BANK[$48]
+SECTION "bank48", ROMX, BANK[$48]
 	dr $120000, $124000
 
-SECTION "bank49", DATA, BANK[$49]
+SECTION "bank49", ROMX, BANK[$49]
 	dr $124000, $128000
 
-SECTION "bank4a", DATA, BANK[$4a]
+SECTION "bank4a", ROMX, BANK[$4a]
 	dr $128000, $12c000
 
-SECTION "bank4b", DATA, BANK[$4b]
+SECTION "bank4b", ROMX, BANK[$4b]
 	dr $12c000, $130000
 
-SECTION "bank4c", DATA, BANK[$4c]
+SECTION "bank4c", ROMX, BANK[$4c]
 	dr $130000, $134000
 
-SECTION "bank4d", DATA, BANK[$4d]
+SECTION "bank4d", ROMX, BANK[$4d]
 	dr $134000, $138000
 
-SECTION "bank4e", DATA, BANK[$4e]
+SECTION "bank4e", ROMX, BANK[$4e]
 	dr $138000, $13c000
 
-SECTION "bank4f", DATA, BANK[$4f]
+SECTION "bank4f", ROMX, BANK[$4f]
 	dr $13c000, $140000
 
-SECTION "bank50", DATA, BANK[$50]
+SECTION "bank50", ROMX, BANK[$50]
 	dr $140000, $144000
 
-SECTION "bank51", DATA, BANK[$51]
+SECTION "bank51", ROMX, BANK[$51]
 	dr $144000, $148000
 
-SECTION "bank52", DATA, BANK[$52]
+SECTION "bank52", ROMX, BANK[$52]
 	dr $148000, $14c000
 
-SECTION "bank53", DATA, BANK[$53]
+SECTION "bank53", ROMX, BANK[$53]
 	dr $14c000, $150000
 
-SECTION "bank54", DATA, BANK[$54]
+SECTION "bank54", ROMX, BANK[$54]
 	dr $150000, $154000
 
-SECTION "bank55", DATA, BANK[$55]
+SECTION "bank55", ROMX, BANK[$55]
 	dr $154000, $158000
 
-SECTION "bank56", DATA, BANK[$56]
+SECTION "bank56", ROMX, BANK[$56]
 	dr $158000, $15c000
 
-SECTION "bank57", DATA, BANK[$57]
+SECTION "bank57", ROMX, BANK[$57]
 	dr $15c000, $160000
 
-SECTION "bank58", DATA, BANK[$58]
+SECTION "bank58", ROMX, BANK[$58]
 	dr $160000, $164000
 
-SECTION "bank59", DATA, BANK[$59]
+SECTION "bank59", ROMX, BANK[$59]
 	dr $164000, $168000
 
-SECTION "bank5a", DATA, BANK[$5a]
+SECTION "bank5a", ROMX, BANK[$5a]
 	dr $168000, $16c000
 
-SECTION "bank5b", DATA, BANK[$5b]
+SECTION "bank5b", ROMX, BANK[$5b]
 	dr $16c000, $170000
 
-SECTION "bank5c", DATA, BANK[$5c]
+SECTION "bank5c", ROMX, BANK[$5c]
 	dr $170000, $174000
 
-SECTION "bank5d", DATA, BANK[$5d]
+SECTION "bank5d", ROMX, BANK[$5d]
 	dr $174000, $178000
 
-SECTION "bank5e", DATA, BANK[$5e]
+SECTION "bank5e", ROMX, BANK[$5e]
 	dr $178000, $17c000
 
-SECTION "bank5f", DATA, BANK[$5f]
+SECTION "bank5f", ROMX, BANK[$5f]
 	dr $17c000, $180000
 
-SECTION "bank60", DATA, BANK[$60]
+SECTION "bank60", ROMX, BANK[$60]
 	dr $180000, $184000
 
-SECTION "bank61", DATA, BANK[$61]
+SECTION "bank61", ROMX, BANK[$61]
 	dr $184000, $188000
 
-SECTION "bank62", DATA, BANK[$62]
+SECTION "bank62", ROMX, BANK[$62]
 	dr $188000, $18c000
 
-SECTION "bank63", DATA, BANK[$63]
+SECTION "bank63", ROMX, BANK[$63]
 	dr $18c000, $190000
 
-SECTION "bank64", DATA, BANK[$64]
+SECTION "bank64", ROMX, BANK[$64]
 	dr $190000, $194000
 
-SECTION "bank65", DATA, BANK[$65]
+SECTION "bank65", ROMX, BANK[$65]
 	dr $194000, $195b84
 
 ObjectEventText_:: ; 195b84
@@ -529,25 +529,25 @@ BGEventText_:: ; 195b93
 CoordinatesEventText_:: ; 195b9d
 	dr $195b9d, $198000
 
-SECTION "bank66", DATA, BANK[$66]
+SECTION "bank66", ROMX, BANK[$66]
 	dr $198000, $19c000
 
-SECTION "bank67", DATA, BANK[$67]
+SECTION "bank67", ROMX, BANK[$67]
 	dr $19c000, $1a0000
 
-SECTION "bank68", DATA, BANK[$68]
+SECTION "bank68", ROMX, BANK[$68]
 	dr $1a0000, $1a4000
 
-SECTION "bank69", DATA, BANK[$69]
+SECTION "bank69", ROMX, BANK[$69]
 	dr $1a4000, $1a8000
 
-SECTION "bank6a", DATA, BANK[$6a]
+SECTION "bank6a", ROMX, BANK[$6a]
 	dr $1a8000, $1ac000
 
-SECTION "bank6b", DATA, BANK[$6b]
+SECTION "bank6b", ROMX, BANK[$6b]
 	dr $1ac000, $1b0000
 
-SECTION "bank6c", DATA, BANK[$6c]
+SECTION "bank6c", ROMX, BANK[$6c]
 ItemNames::
 	dr $1b0000, $1b0955
 TrainerClassNames::
@@ -557,61 +557,61 @@ PokemonNames::
 MoveNames::
 	dr $1b1574, $1b4000
 
-SECTION "bank6d", DATA, BANK[$6d]
+SECTION "bank6d", ROMX, BANK[$6d]
 	dr $1b4000, $1b8000
 
-SECTION "bank6e", DATA, BANK[$6e]
+SECTION "bank6e", ROMX, BANK[$6e]
 	dr $1b8000, $1bc000
 
-SECTION "bank6f", DATA, BANK[$6f]
+SECTION "bank6f", ROMX, BANK[$6f]
 	dr $1bc000, $1c0000
 
-SECTION "bank70", DATA, BANK[$70]
+SECTION "bank70", ROMX, BANK[$70]
 	dr $1c0000, $1c0de9
 _DudeAutoInput_A::
 	dr $1c0de9, $1c4000
 
-SECTION "bank71", DATA, BANK[$71]
+SECTION "bank71", ROMX, BANK[$71]
 	dr $1c4000, $1c8000
 
-SECTION "bank72", DATA, BANK[$72]
+SECTION "bank72", ROMX, BANK[$72]
 	dr $1c8000, $1cc000
 
-SECTION "bank73", DATA, BANK[$73]
+SECTION "bank73", ROMX, BANK[$73]
 	dr $1cc000, $1d0000
 
-SECTION "bank74", DATA, BANK[$74]
+SECTION "bank74", ROMX, BANK[$74]
 	dr $1d0000, $1d4000
 
-SECTION "bank75", DATA, BANK[$75]
+SECTION "bank75", ROMX, BANK[$75]
 	dr $1d4000, $1d8000
 
-SECTION "bank76", DATA, BANK[$76]
+SECTION "bank76", ROMX, BANK[$76]
 	dr $1d8000, $1dc000
 
-SECTION "bank77", DATA, BANK[$77]
+SECTION "bank77", ROMX, BANK[$77]
 	dr $1dc000, $1e0000
 
-SECTION "bank78", DATA, BANK[$78]
+SECTION "bank78", ROMX, BANK[$78]
 	dr $1e0000, $1e4000
 
-SECTION "bank79", DATA, BANK[$79]
+SECTION "bank79", ROMX, BANK[$79]
 	dr $1e4000, $1e8000
 
-SECTION "bank7a", DATA, BANK[$7a]
+SECTION "bank7a", ROMX, BANK[$7a]
 	dr $1e8000, $1ec000
 
-SECTION "bank7b", DATA, BANK[$7b]
+SECTION "bank7b", ROMX, BANK[$7b]
 	dr $1ec000, $1f0000
 
-SECTION "bank7c", DATA, BANK[$7c]
+SECTION "bank7c", ROMX, BANK[$7c]
 	dr $1f0000, $1f4000
 
-SECTION "bank7d", DATA, BANK[$7d]
+SECTION "bank7d", ROMX, BANK[$7d]
 	dr $1f4000, $1f8000
 
-SECTION "bank7e", DATA, BANK[$7e]
+SECTION "bank7e", ROMX, BANK[$7e]
 	dr $1f8000, $1fc000
 
-SECTION "bank7f", DATA, BANK[$7f]
+SECTION "bank7f", ROMX, BANK[$7f]
 	dr $1fc000, $200000
