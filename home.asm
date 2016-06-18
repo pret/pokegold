@@ -1718,7 +1718,142 @@ GetCurNick::
 	pop hl
 	ret
 
-PrintBCDNumber::
-	dr $3ade, $3d4f
+PrintBCDNumber:: ; 3ade (0:3ade)
+	ld b, c
+	res 7, c
+	res 6, c
+	res 5, c
+	bit 5, b
+	jr z, .asm_3af0
+	bit 7, b
+	jr nz, .asm_3af0
+	ld [hl], $f0
+	inc hl
+.asm_3af0
+	ld a, [de]
+	swap a
+	call Function3b15
+	ld a, [de]
+	call Function3b15
+	inc de
+	dec c
+	jr nz, .asm_3af0
+	bit 7, b
+	jr z, .asm_3b14
+	bit 6, b
+	jr nz, .asm_3b07
+	dec hl
+.asm_3b07
+	bit 5, b
+	jr z, .asm_3b0e
+	ld [hl], $f0
+	inc hl
+.asm_3b0e
+	ld [hl], $f6
+	call Function31e2
+	inc hl
+.asm_3b14
+	ret
+
+Function3b15:: ; 3b15 (0:3b15)
+	and $f
+	and a
+	jr z, .asm_3b2f
+	bit 7, b
+	jr z, .asm_3b29
+	bit 5, b
+	jr z, .asm_3b27
+	ld [hl], $f0
+	inc hl
+	res 5, b
+.asm_3b27
+	res 7, b
+.asm_3b29
+	add $f6
+	ld [hli], a
+	jp Function31e2
+
+.asm_3b2f
+	bit 7, b
+	jr z, .asm_3b29
+	bit 6, b
+	ret nz
+	ld a, $7f
+	ld [hli], a
+	ret
+
+GetPartyParamLocation::
+	push bc
+	ld hl, wPartyMons
+	ld c, a
+	ld b, $0
+	add hl, bc
+	ld a, [wd005]
+	call GetPartyLocation
+	pop bc
+	ret
+
+GetPartyLocation:: ; 3b4a (0:3b4a)
+	ld bc, $30
+	jp AddNTimes
+
+Function3b51::
+	push hl
+	ld a, b
+	dec a
+	ld b, $0
+	add hl, bc
+	ld hl, BaseData + 0
+	ld bc, $20
+	call AddNTimes
+	pop bc
+	ld a, BANK(BaseData)
+	call GetFarHalfword
+	ld b, l
+	ld c, h
+	pop hl
+	ret
+
+INCLUDE "home/battle.asm"
+
+PushLYOverrides:: ; 3d0d
+	ld a, [hLCDCPointer]
+	and a
+	ret z
+	ld a, wLYOverridesBuffer % $100
+	ld [wRequested2bppSource], a
+	ld a, wLYOverridesBuffer / $100
+	ld [wRequested2bppSource + 1], a
+	ld a, wLYOverrides % $100
+	ld [wRequested2bppDest], a
+	ld a, wLYOverrides / $100
+	ld [wRequested2bppDest + 1], a
+	ld a, $9
+	ld [wRequested2bpp], a
+	ret
+
+InitAnimatedObjectStruct::
+	ld [wAnimatedObjectStructIDBuffer], a
+	ld a, [hROMBank]
+	push af
+	ld a, BANK(InitAnimatedObjectStruct_) ; $23
+	rst Bankswitch
+	ld a, [wAnimatedObjectStructIDBuffer]
+	call InitAnimatedObjectStruct_ ; $51f7
+	pop af
+	rst Bankswitch
+	ret
+
+ReinitAnimatedObjectFrame::
+	ld [wAnimatedObjectStructIDBuffer], a
+	ld a, [hROMBank]
+	push af
+	ld a, BANK(ReinitAnimatedObjectFrame_) ; $23
+	rst Bankswitch
+	ld a, [wAnimatedObjectStructIDBuffer]
+	call ReinitAnimatedObjectFrame_ ; $5332
+	pop af
+	rst Bankswitch
+	ret
 
 INCLUDE "home/audio.asm"

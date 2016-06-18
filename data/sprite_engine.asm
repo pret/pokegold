@@ -1,4 +1,4 @@
-SpriteAnimFrameData: ; 8dbfe
+AnimatedObjectFrameData: ; 8dbfe
 	dw .data_8dc6e
 	dw .data_8dc71
 	dw .data_8dc76
@@ -310,7 +310,7 @@ SpriteAnimFrameData: ; 8dbfe
 	db $50,$02, $5b,$02, $50,$02, $5b,$42
 	db $fe
 
-SpriteAnimOAMData: ; 8ddbc
+AnimatedObjectOAMData: ; 8ddbc
 	dbw $00, .data_8e16a
  	dbw $04, .data_8e16a
  	dbw $4c, .data_8ded1

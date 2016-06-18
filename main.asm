@@ -272,7 +272,13 @@ Function8c3ab:: ; 8c3ab
 	dr $8c3ab, $8c3e9
 
 Function8c3e9:: ; 8c3e9
-	dr $8c3e9, $90000
+	dr $8c3e9, $8d1f7
+
+InitAnimatedObjectStruct_:: ; 8d1f7
+	dr $8d1f7, $8d332
+
+ReinitAnimatedObjectFrame_:: ; 8d332
+	dr $8d332, $90000
 
 SECTION "bank24", DATA, BANK[$24]
 	dr $90000, $94000
@@ -333,9 +339,11 @@ SECTION "bank31", DATA, BANK[$31]
 	dr $c4000, $c8000
 
 SECTION "bank32", DATA, BANK[$32]
+BattleAnimations:: ; Not actually where it is, I just needed the label for BANK to work
 	dr $c8000, $cc000
 
 SECTION "bank33", DATA, BANK[$33]
+BattleAnimCommands::  ; Not actually where it is, I just needed the label for BANK to work
 	dr $cc000, $d0000
 
 SECTION "bank34", DATA, BANK[$34]
@@ -386,6 +394,7 @@ SECTION "bank3f", DATA, BANK[$3f]
 	dr $fc000, $100000
 
 SECTION "bank40", DATA, BANK[$40]
+BattleText:: ; Not actually where it is, I just needed the label for BANK to work
 	dr $100000, $104000
 
 SECTION "bank41", DATA, BANK[$41]

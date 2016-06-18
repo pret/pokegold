@@ -812,6 +812,9 @@ wc7fc:: ds 1 ; c7fc
 wc7fd:: ds 1 ; c7fd
 wc7fe:: ds 1 ; c7fe
 wc7ff:: ds 1 ; c7ff
+wLYOverridesEnd::
+
+wLYOverridesBuffer::
 wc800:: ds 1 ; c800
 wc801:: ds 1 ; c801
 wc802:: ds 1 ; c802
@@ -1068,6 +1071,8 @@ wc8fc:: ds 1 ; c8fc
 wc8fd:: ds 1 ; c8fd
 wc8fe:: ds 1 ; c8fe
 wc8ff:: ds 1 ; c8ff
+wLYOverridesBufferEnd::
+
 wc900:: ds 1 ; c900
 wc901:: ds 1 ; c901
 wc902:: ds 1 ; c902
@@ -1556,56 +1561,15 @@ wcae4:: ds 1 ; cae4
 wcae5:: ds 1 ; cae5
 wcae6:: ds 1 ; cae6
 wcae7:: ds 1 ; cae7
-wcae8:: ds 1 ; cae8
-wcae9:: ds 1 ; cae9
-wcaea:: ds 1 ; caea
-wcaeb:: ds 1 ; caeb
-wcaec:: ds 1 ; caec
-wcaed:: ds 1 ; caed
-wcaee:: ds 1 ; caee
-wcaef:: ds 1 ; caef
-wcaf0:: ds 1 ; caf0
-wcaf1:: ds 1 ; caf1
-wcaf2:: ds 1 ; caf2
-wcaf3:: ds 1 ; caf3
-wcaf4:: ds 1 ; caf4
-wcaf5:: ds 1 ; caf5
+
+wEnemyMoveStruct:: move_struct wEnemyMoveStruct
+wPlayerMoveStruct:: move_struct wPlayerMoveStruct
 
 wEnemyMonNick:: ds PKMN_NAME_LENGTH ; caf6
 wBattleMonNick:: ds PKMN_NAME_LENGTH ; cb01
 
-wcb0c:: ds 1 ; cb0c
-wcb0d:: ds 1 ; cb0d
-wcb0e:: ds 1 ; cb0e
-wcb0f:: ds 1 ; cb0f
-wcb10:: ds 1 ; cb10
-wcb11:: ds 1 ; cb11
-wcb12:: ds 1 ; cb12
-wcb13:: ds 1 ; cb13
-wcb14:: ds 1 ; cb14
-wcb15:: ds 1 ; cb15
-wcb16:: ds 1 ; cb16
-wcb17:: ds 1 ; cb17
-wcb18:: ds 1 ; cb18
-wcb19:: ds 1 ; cb19
-wcb1a:: ds 1 ; cb1a
-wcb1b:: ds 1 ; cb1b
-wcb1c:: ds 1 ; cb1c
-wcb1d:: ds 1 ; cb1d
-wcb1e:: ds 1 ; cb1e
-wcb1f:: ds 1 ; cb1f
-wcb20:: ds 1 ; cb20
-wcb21:: ds 1 ; cb21
-wcb22:: ds 1 ; cb22
-wcb23:: ds 1 ; cb23
-wcb24:: ds 1 ; cb24
-wcb25:: ds 1 ; cb25
-wcb26:: ds 1 ; cb26
-wcb27:: ds 1 ; cb27
-wcb28:: ds 1 ; cb28
-wcb29:: ds 1 ; cb29
-wcb2a:: ds 1 ; cb2a
-wcb2b:: ds 1 ; cb2b
+wBattleMon:: battle_struct wBattleMon ; cb0c
+
 wcb2c:: ds 1 ; cb2c
 wcb2d:: ds 1 ; cb2d
 wcb2e:: ds 1 ; cb2e
@@ -1619,21 +1583,21 @@ wOTClassName:: ds NAME_LENGTH ; cb34
 
 wcb3f:: ds 1 ; cb3f
 wcb40:: ds 1 ; cb40
-wcb41:: ds 1 ; cb41
+wCurOTMon:: ds 1 ; cb41
 wcb42:: ds 1 ; cb42
 wcb43:: ds 1 ; cb43
 wcb44:: ds 1 ; cb44
 wcb45:: ds 1 ; cb45
-wcb46:: ds 1 ; cb46
-wcb47:: ds 1 ; cb47
-wcb48:: ds 1 ; cb48
-wcb49:: ds 1 ; cb49
-wcb4a:: ds 1 ; cb4a
-wcb4b:: ds 1 ; cb4b
-wcb4c:: ds 1 ; cb4c
-wcb4d:: ds 1 ; cb4d
-wcb4e:: ds 1 ; cb4e
-wcb4f:: ds 1 ; cb4f
+wPlayerSubStatus1:: ds 1 ; cb46
+wPlayerSubStatus2:: ds 1 ; cb47
+wPlayerSubStatus3:: ds 1 ; cb48
+wPlayerSubStatus4:: ds 1 ; cb49
+wPlayerSubStatus5:: ds 1 ; cb4a
+wEnemySubStatus1:: ds 1 ; cb4b
+wEnemySubStatus2:: ds 1 ; cb4c
+wEnemySubStatus3:: ds 1 ; cb4d
+wEnemySubStatus4:: ds 1 ; cb4e
+wEnemySubStatus5:: ds 1 ; cb4f
 wcb50:: ds 1 ; cb50
 wcb51:: ds 1 ; cb51
 wcb52:: ds 1 ; cb52
@@ -1747,8 +1711,8 @@ wcbbd:: ds 1 ; cbbd
 wcbbe:: ds 1 ; cbbe
 wcbbf:: ds 1 ; cbbf
 wcbc0:: ds 1 ; cbc0
-wcbc1:: ds 1 ; cbc1
-wcbc2:: ds 1 ; cbc2
+wCurPlayerMove:: ds 1 ; cbc1
+wCurEnemyMove:: ds 1 ; cbc2
 wcbc3:: ds 1 ; cbc3
 wcbc4:: ds 1 ; cbc4
 wcbc5:: ds 1 ; cbc5
@@ -1768,8 +1732,8 @@ wcbd2:: ds 1 ; cbd2
 wcbd3:: ds 1 ; cbd3
 wcbd4:: ds 1 ; cbd4
 wcbd5:: ds 1 ; cbd5
-wcbd6:: ds 1 ; cbd6
-wcbd7:: ds 1 ; cbd7
+wLastEnemyCounterMove:: ds 1 ; cbd6
+wLastPlayerCounterMove:: ds 1 ; cbd7
 wcbd8:: ds 1 ; cbd8
 wcbd9:: ds 1 ; cbd9
 wcbda:: ds 1 ; cbda
@@ -1803,8 +1767,8 @@ wcbf5:: ds 1 ; cbf5
 wcbf6:: ds 1 ; cbf6
 wcbf7:: ds 1 ; cbf7
 wcbf8:: ds 1 ; cbf8
-wcbf9:: ds 1 ; cbf9
-wcbfa:: ds 1 ; cbfa
+wLastPlayerMove:: ds 1 ; cbf9
+wLastEnemyMove:: ds 1 ; cbfa
 wcbfb:: ds 1 ; cbfb
 wcbfc:: ds 1 ; cbfc
 wcbfd:: ds 1 ; cbfd
@@ -2357,6 +2321,12 @@ wStringBuffer3:: ds 19 ; cf91
 wStringBuffer4:: ds 19 ; cfa4
 wStringBuffer5:: ds 19 ; cfb7
 
+	ds -4
+
+wCurBattleMon:: ds 1 ; cfc6
+wcfc7:: ds 1 ; cfc7
+wcfc8:: ds 1 ; cfc8
+wcfc9:: ds 1 ; cfc9
 wcfca:: ds 1 ; cfca
 wcfcb:: ds 1 ; cfcb
 wcfcc:: ds 1 ; cfcc
@@ -2623,38 +2593,9 @@ wd0eb:: ds 1 ; d0eb
 wd0ec:: ds 1 ; d0ec
 wd0ed:: ds 1 ; d0ed
 wd0ee:: ds 1 ; d0ee
-wd0ef:: ds 1 ; d0ef
-wd0f0:: ds 1 ; d0f0
-wd0f1:: ds 1 ; d0f1
-wd0f2:: ds 1 ; d0f2
-wd0f3:: ds 1 ; d0f3
-wd0f4:: ds 1 ; d0f4
-wd0f5:: ds 1 ; d0f5
-wd0f6:: ds 1 ; d0f6
-wd0f7:: ds 1 ; d0f7
-wd0f8:: ds 1 ; d0f8
-wd0f9:: ds 1 ; d0f9
-wd0fa:: ds 1 ; d0fa
-wd0fb:: ds 1 ; d0fb
-wd0fc:: ds 1 ; d0fc
-wd0fd:: ds 1 ; d0fd
-wd0fe:: ds 1 ; d0fe
-wd0ff:: ds 1 ; d0ff
-wd100:: ds 1 ; d100
-wd101:: ds 1 ; d101
-wd102:: ds 1 ; d102
-wd103:: ds 1 ; d103
-wd104:: ds 1 ; d104
-wd105:: ds 1 ; d105
-wd106:: ds 1 ; d106
-wd107:: ds 1 ; d107
-wd108:: ds 1 ; d108
-wd109:: ds 1 ; d109
-wd10a:: ds 1 ; d10a
-wd10b:: ds 1 ; d10b
-wd10c:: ds 1 ; d10c
-wd10d:: ds 1 ; d10d
-wd10e:: ds 1 ; d10e
+
+wEnemyMon:: battle_struct wEnemyMon ; d0ef
+
 wd10f:: ds 1 ; d10f
 wd110:: ds 1 ; d110
 wd111:: ds 1 ; d111
@@ -2662,7 +2603,7 @@ wd112:: ds 1 ; d112
 wd113:: ds 1 ; d113
 wd114:: ds 1 ; d114
 wd115:: ds 1 ; d115
-wd116:: ds 1 ; d116
+wBattleMode:: ds 1 ; d116
 wd117:: ds 1 ; d117
 wd118:: ds 1 ; d118
 wBattleType:: ds 1 ; d119
@@ -2709,8 +2650,7 @@ wd13f:: ds 1 ; d13f
 wBaseDataEnd::
 
 wd140:: ds 1 ; d140
-wd141:: ds 1 ; d141
-wd142:: ds 1 ; d142
+wCurDamage:: ds 2 ; d141
 wd143:: ds 1 ; d143
 wd144:: ds 1 ; d144
 wd145:: ds 1 ; d145

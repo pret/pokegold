@@ -1,4 +1,4 @@
-ClearSpriteAnims: ; 8d174
+ClearAnimatedObjects: ; 8d174
 	ld hl, $c508 ; 23:5174
 	ld bc, $c1 ; 23:5177
 .loop
@@ -10,12 +10,12 @@ ClearSpriteAnims: ; 8d174
 	jr nz, .loop ; 23:5180
 	ret ; 23:5182
 
-PlaySpriteAnimationsAndDelayFrame: ; 8d182
-	call PlaySpriteAnimations ; 23:5183
+PlayAnimatedObjectationsAndDelayFrame: ; 8d182
+	call PlayAnimatedObjectations ; 23:5183
 	call $32e ; DelayFrame ; 23:5186
 	ret ; 23:5189
 
-PlaySpriteAnimations: ; 8d189
+PlayAnimatedObjectations: ; 8d189
 	push hl ; 23:518a
 	push de ; 23:518b
 	push bc ; 23:518c
@@ -101,7 +101,7 @@ DoNextFrameForFirst16Sprites: ; 8d1c9
 .cancel
 	ret ; 23:51f6
 
-InitSpriteAnimStruct_:: ; 8d1f7
+InitAnimatedObjectStruct_:: ; 8d1f7
 	push de ; 23:51f7
 	push af ; 23:51f8
 	ld hl, $c51c ; 23:51f9
@@ -132,7 +132,7 @@ InitSpriteAnimStruct_:: ; 8d1f7
 	pop af ; 23:5218
 	ld e, a ; 23:5219
 	ld d, $0 ; 23:521a
-	ld hl, SpriteAnimSeqData ; 23:521c
+	ld hl, AnimatedObjectSeqData ; 23:521c
 	add hl, de ; 23:521f
 	add hl, de ; 23:5220
 	add hl, de ; 23:5221
@@ -149,7 +149,7 @@ InitSpriteAnimStruct_:: ; 8d1f7
 	ld [hli], a ; 23:5230
 	inc de ; 23:5231
 	ld a, [de] ; 23:5232
-	call GetSpriteAnimVTile ; 23:5233
+	call GetAnimatedObjectVTile ; 23:5233
 	ld [hli], a ; 23:5236
 	pop de ; 23:5237
 	ld hl, $4 ; 23:5238
@@ -185,8 +185,8 @@ DeinitializeSprite: ; 8d257
 	ret ; 23:525d
 
 UpdateAnimFrame: ; 8d25e
-	call InitSpriteAnimBuffer ; 23:525e
-	call GetSpriteAnimFrame ; 23:5261
+	call InitAnimatedObjectBuffer ; 23:525e
+	call GetAnimatedObjectFrame ; 23:5261
 	cp $fd ; 23:5264
 	jr z, .done ; 23:5266
 	cp $fc ; 23:5268
@@ -299,7 +299,7 @@ GetSpriteOAMAttr: ; 8d2f0
 	or b ; 23:52fc
 	ret ; 23:52fd
 
-InitSpriteAnimBuffer: ; 8d2fe
+InitAnimatedObjectBuffer: ; 8d2fe
 	xor a ; 23:52fe
 	ld [$c5c0], a ; 23:52ff
 	ld hl, $3 ; 23:5302
@@ -316,7 +316,7 @@ InitSpriteAnimBuffer: ; 8d2fe
 	ld [$c5c6], a ; 23:5317
 	ret ; 23:531a
 
-GetSpriteAnimVTile: ; 8d31b
+GetAnimatedObjectVTile: ; 8d31b
 	push hl ; 23:531b
 	push bc ; 23:531c
 	ld hl, $c508 ; 23:531d
@@ -351,7 +351,7 @@ Function8d332: ; 8d332
 	ld [hl], $ff ; 23:5341
 	ret ; 23:5343
 
-GetSpriteAnimFrame: ; 8d344
+GetAnimatedObjectFrame: ; 8d344
 .loop
 	ld hl, $8 ; 23:5344
 	add hl, bc ; 23:5347
@@ -420,7 +420,7 @@ GetSpriteAnimFrame: ; 8d344
 	add hl, bc ; 23:539e
 	ld e, [hl] ; 23:539f
 	ld d, $0 ; 23:53a0
-	ld hl, SpriteAnimFrameData ; 23:53a2
+	ld hl, AnimatedObjectFrameData ; 23:53a2
 	add hl, de ; 23:53a5
 	add hl, de ; 23:53a6
 	ld e, [hl] ; 23:53a7
@@ -437,7 +437,7 @@ GetSpriteAnimFrame: ; 8d344
 GetFrameOAMPointer: ; 8d3b4
 	ld e, a ; 23:53b4
 	ld d, $0 ; 23:53b5
-	ld hl, SpriteAnimOAMData ; 23:53b7
+	ld hl, AnimatedObjectOAMData ; 23:53b7
 	add hl, de ; 23:53ba
 	add hl, de ; 23:53bb
 	add hl, de ; 23:53bc
@@ -464,7 +464,7 @@ BrokenGetStdGraphics: ; 8d3be
 	pop bc ; 23:53d4
 	ret ; 23:53d5
 
-SpriteAnimSeqData: ; 8d3d6
+AnimatedObjectSeqData: ; 8d3d6
 	db $01, $01, $00
 	db $04, $04, $00
 	db $05, $05, $00
@@ -623,7 +623,7 @@ EndOfExpBarGFX:
 SGBEndOfExpBarGFX:
 	dr $8e764, $8e774
 
-ClearSpriteAnims2
+ClearAnimatedObjects2
 	push hl ; 23:6774
 	push de ; 23:6775
 	push bc ; 23:6776
