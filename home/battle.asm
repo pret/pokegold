@@ -101,12 +101,8 @@ RefreshBattleHuds::
 	jp WaitBGMap
 
 UpdateBattleHuds:: ; 3bf8 (0:3bf8)
-	ld a, $f
-	ld hl, $5da9
-	rst FarCall
-	ld a, $f
-	ld hl, $5e97
-	rst FarCall
+	callba UpdatePlayerHUD
+	callba UpdateEnemyHUD
 	ret
 
 GetBattleVar::

@@ -64,7 +64,9 @@ CheckNickErrors:: ; 677e
 Multiply_:: ; 67bd
 	dr $67bd, $681d
 Divide_:: ; 681d
-	dr $681d, $754e
+	dr $681d, $6fa0
+CheckNPCMovementPermissions: ; 6fa0
+	dr $6fa0, $754e
 ENDC
 
 IF DEF(SILVER)
@@ -80,7 +82,9 @@ CheckNickErrors:: ; 6744
 Multiply_:: ; 6783
 	dr $6783, $67e3
 Divide_:: ; 67e3
-	dr $67e3, $7514
+	dr $67e3, $6f66
+CheckNPCMovementPermissions: ; 6f66
+	dr $6f66, $7514
 ENDC
 
 SECTION "bank2", ROMX, BANK[$2]
@@ -217,7 +221,13 @@ Battle_GetTrainerName:: ; 398f2
 	dr $398f2, $3c000
 
 SECTION "bankf", ROMX, BANK[$f]
-	dr $3c000, $3ec11
+	dr $3c000, $3dda9
+
+UpdatePlayerHUD::
+	dr $3dda9, $3de97
+
+UpdateEnemyHUD::
+	dr $3de97, $3ec11
 BattleRandom_:: ; 3ec11
 	dr $3ec11, $40000
 
