@@ -18,24 +18,33 @@ StopFollow::
 UpdateSprites_::
 	dr $5896, $58c5
 Function58c5::
+
 IF DEF(GOLD)
 	dr $58c5, $6545
-GameInit::
+GameInit:: ; 6545
 	dr $6545, $6551
 ReanchorBGMap_NoOAMUpdate:: ; 6551
 	dr $6551, $65cb
 LoadFonts_NoOAMUpdate:: ; 65cb
-	dr $65cb, $754e
+	dr $65cb, $67bd
+Multiply_:: ; 67bd
+	dr $67bd, $681d
+Divide_:: ; 681d
+	dr $681d, $754e
 ENDC
 
 IF DEF(SILVER)
 	dr $58c5, $650b
-GameInit::
+GameInit:: ; 650b
 	dr $650b, $6517
 ReanchorBGMap_NoOAMUpdate:: ; 6517
 	dr $6517, $6591
 LoadFonts_NoOAMUpdate:: ; 6591
-	dr $6591, $7514
+	dr $6591, $6783
+Multiply_:: ; 6783
+	dr $6783, $67e3
+Divide_:: ; 67e3
+	dr $67e3, $7514
 ENDC
 
 SECTION "bank2", DATA, BANK[$2]

@@ -69,7 +69,7 @@ Init:: ; 5d1 (0:05d1)
 	pop af
 	ld [hCGB], a
 
-	call Function30ff
+	call ClearSprites
 
 	ld a, BANK(LoadPushOAM)
 	rst Bankswitch

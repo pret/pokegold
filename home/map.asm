@@ -277,7 +277,7 @@ Function2128::
 	jp Function3583
 
 Function212d::
-	call Function30ff
+	call ClearSprites
 	call ResetBGWindow
 	call GetMovementPermissions
 	callba Function5730
@@ -583,7 +583,7 @@ Function230f:: ; 230f (0:230f)
 	ld a, c
 	dec a
 	ld bc, $5
-	call Function31a3
+	call AddNTimes
 	ld bc, $2
 	add hl, bc
 	ld a, [hli]
@@ -808,7 +808,7 @@ ReadMapTriggers:: ; 248b (0:248b)
 	and a
 	ret z
 	ld bc, $4
-	call Function31a3
+	call AddNTimes
 	ret
 
 ReadMapCallbacks:: ; 24a2 (0:24a2)
@@ -823,7 +823,7 @@ ReadMapCallbacks:: ; 24a2 (0:24a2)
 	and a
 	ret z
 	ld bc, $3
-	call Function31a3
+	call AddNTimes
 	ret
 
 ReadWarps:: ; 24b9 (0:24b9)
@@ -838,7 +838,7 @@ ReadWarps:: ; 24b9 (0:24b9)
 	and a
 	ret z
 	ld bc, $5
-	call Function31a3
+	call AddNTimes
 	ret
 
 ReadCoordEvents:: ; 24d0 (0:24d0)
@@ -853,7 +853,7 @@ ReadCoordEvents:: ; 24d0 (0:24d0)
 	and a
 	ret z
 	ld bc, $8
-	call Function31a3
+	call AddNTimes
 	ret
 
 ReadSignposts:: ; 24e7 (0:24e7)
@@ -868,7 +868,7 @@ ReadSignposts:: ; 24e7 (0:24e7)
 	and a
 	ret z
 	ld bc, $5
-	call Function31a3
+	call AddNTimes
 	ret
 
 ReadObjectEvents:: ; 24fe (0:24fe)
@@ -961,7 +961,7 @@ RestoreFacingAfterWarp::
 	ld c, a
 	ld b, $0
 	ld a, $5
-	call Function31a3
+	call AddNTimes
 	ld a, [hli]
 	ld [wda02], a
 	ld a, [hli]
@@ -1014,7 +1014,7 @@ GetCoordOfUpperLeftCorner:: ; 25a9 (0:25a9)
 	add $1
 	srl a
 .asm_25da
-	call Function31a3
+	call AddNTimes
 	ld a, l
 	ld [wOverworldMapAnchor], a
 	ld a, h
@@ -1938,7 +1938,7 @@ GetCoordTile:: ; 2b21 (0:2b21)
 	inc hl
 .asm_2b41
 	ld a, [wd0c8]
-	call Function3128
+	call SwapBytes
 	ret
 
 .asm_2b48
@@ -2099,7 +2099,7 @@ FadeToMenu::
 	ld [hBGMapMode], a
 	call LoadStandardMenuDataHeader
 	callba Function8c3ab
-	call Function30ff
+	call ClearSprites
 	call DisableSpriteUpdates
 	ret
 
@@ -2130,7 +2130,7 @@ ReturnToMapWithSpeechTextbox::
 	ld a, $1
 	ld [wRTCEnabled], a
 	call Function3449
-	call Function30ff
+	call ClearSprites
 	call ReloadTilesetAndPalettes
 	hlcoord 0, 12
 	lb bc, 4, 18
@@ -2150,7 +2150,7 @@ ReturnToMapWithSpeechTextbox::
 
 ReloadTilesetAndPalettes:: ; 2c87 (0:2c87)
 	call DisableLCD
-	call Function30ff
+	call ClearSprites
 	callba RefreshSprites
 	call Functiond9e
 	call Functiondac
@@ -2191,7 +2191,7 @@ GetAnyMapHeaderPointer:: ; 2cc6 (0:2cc6)
 	dec c
 	ld b, $0
 	ld a, $9
-	call Function31a3
+	call AddNTimes
 	ret
 
 GetMapHeaderMember:: ; 2cdd (0:2cdd)
@@ -2277,7 +2277,7 @@ GetAnyMapBlockdataBank:: ; 2d34 (0:2d34)
 	ld de, $3
 	add hl, de
 	ld a, c
-	call Function3128
+	call SwapBytes
 	rst Bankswitch
 	pop bc
 	pop de
@@ -2421,7 +2421,7 @@ LoadTilesetHeader:: ; 2dfa (0:2dfa)
 	ld hl, $56be
 	ld bc, $f
 	ld a, [wd082]
-	call Function31a3
+	call AddNTimes
 	ld de, wd0c2
 	ld bc, $f
 	ld a, $5

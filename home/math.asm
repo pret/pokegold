@@ -1,86 +1,71 @@
-AddNTimes:: ; 0x30fe
-; Add bc * a to hl.
+SkipNames::
+	ld bc, $b
 	and a
 	ret z
-.loop
+.asm_319e
 	add hl, bc
 	dec a
-	jr nz, .loop
+	jr nz, .asm_319e
 	ret
-; 0x3105
 
-SimpleMultiply:: ; 3105
-; Return a * c.
+AddNTimes:: ; 31a3 (0:31a3)
 	and a
 	ret z
+.asm_31a5
+	add hl, bc
+	dec a
+	jr nz, .asm_31a5
+	ret
 
+SimpleMultiply::
+	and a
+	ret z
 	push bc
 	ld b, a
 	xor a
-.loop
+.asm_31af
 	add c
 	dec b
-	jr nz, .loop
+	jr nz, .asm_31af
 	pop bc
 	ret
-; 3110
 
-
-SimpleDivide:: ; 3110
-; Divide a by c. Return quotient b and remainder a.
-	ld b, 0
-.loop
+SimpleDivide:: ; 31b5 (0:31b5)
+	ld b, $0
+.asm_31b7
 	inc b
 	sub c
-	jr nc, .loop
+	jr nc, .asm_31b7
 	dec b
 	add c
 	ret
-; 3119
 
-
-Multiply:: ; 3119
-; Multiply hMultiplicand (3 bytes) by hMultiplier. Result in hProduct.
-; All values are big endian.
+Multiply::
 	push hl
 	push bc
 
-	callab _Multiply
+	callab Multiply_ ; 1:67bd
 
 	pop bc
 	pop hl
 	ret
-; 3124
 
-
-Divide:: ; 3124
-; Divide hDividend length b (max 4 bytes) by hDivisor. Result in hQuotient.
-; All values are big endian.
+Divide::
 	push hl
 	push de
 	push bc
-	ld a, [hROMBank]
-	push af
-	ld a, BANK(_Divide)
-	rst Bankswitch
 
-	call _Divide
+	homecall Divide_ ; 1:681d
 
-	pop af
-	rst Bankswitch
 	pop bc
 	pop de
 	pop hl
 	ret
-; 3136
 
-
-SubtractSigned:: ; 3136
-; Return a - b, sign in carry.
+SubtractSigned::
 	sub b
 	ret nc
 	cpl
-	add 1
+	add $1
 	scf
 	ret
-; 313d

@@ -182,27 +182,38 @@ Function2ffe:: ; 2ffe (0:2ffe)
 
 INCLUDE "home/item.asm"
 INCLUDE "home/random.asm"
+INCLUDE "home/sram.asm"
 
-OpenSRAM::
-	dr $30e1, $30f1
+jp_hl::
+	jp [hl]
 
-CloseSRAM::
-	dr $30f1, $30ff
+jp_de::
+	push de
+	ret
 
-Function30ff::
-	dr $30ff, $311a
+ClearSprites:: ; 30ff (0:30ff)
+	ld hl, wOAMBuffer
+	ld b, $a0
+	xor a
+.asm_3105
+	ld [hli], a
+	dec b
+	jr nz, .asm_3105
+	ret
 
-CopyBytes::
-	dr $311a, $3128
+HideSprites::
+	ld hl, wOAMBuffer
+	ld de, $4
+	ld b, $28
+	ld a, $a0
+.asm_3114
+	ld [hl], a
+	add hl, de
+	dec b
+	jr nz, .asm_3114
+	ret
 
-Function3128::
-	dr $3128, $313c
-
-GetFarHalfword::
-	dr $313c, $314c
-
-ByteFill::
-	dr $314c, $3158
+INCLUDE "home/copy2.asm"
 
 BackUpTilesToBuffer::
 	hlcoord 0, 0
@@ -224,24 +235,477 @@ ReloadTilesFromBuffer_::
 	ld bc, SCREEN_HEIGHT * SCREEN_WIDTH
 	jp CopyBytes
 
-Function317b::
-	dr $317b, $31a3
+Function317b:: ; 317b (0:317b)
+	ld hl, wStringBuffer2
+.asm_317e
+	ld a, [de]
+	inc de
+	ld [hli], a
+	cp $50
+	jr nz, .asm_317e
+	ret
 
-Function31a3::
-	dr $31a3, $31b5
+IsInArray::
+	ld b, $0
+	ld c, a
+.asm_3189
+	ld a, [hl]
+	cp $ff
+	jr z, .asm_3195
+	cp c
+	jr z, .asm_3197
+	inc b
+	add hl, de
+	jr .asm_3189
+.asm_3195
+	and a
+	ret
+.asm_3197
+	scf
+	ret
 
-SimpleDivide::
-	dr $31b5, $31e2
+INCLUDE "home/math.asm"
 
-Function31e2::
-	dr $31e2, $323d
+Function31e2:: ; 31e2 (0:31e2)
+	ld a, [wd199]
+	bit 4, a
+	ret nz
+	ld a, [wTextBoxFlags]
+	bit 1, a
+	ret z
+	push hl
+	push de
+	push bc
+	ld hl, hOAMUpdate
+	ld a, [hl]
+	push af
+	ld [hl], a
+	ld a, [wTextBoxFlags]
+	bit 0, a
+	jr z, .asm_3205
+	ld a, [wd199]
+	and $7
+	jr .asm_3207
 
-PrintNum::
-	dr $323d, $3449
+.asm_3205
+	ld a, $1
+.asm_3207
+	ld [wTextDelayFrames], a
+.asm_320a
+	call GetJoypad
+	ld a, [wc1d6]
+	and a
+	jr nz, .asm_3224
+	ld a, [hJoyDown]
+	bit 0, a
+	jr z, .asm_321b
+	jr .asm_321f
+
+.asm_321b
+	bit 1, a
+	jr z, .asm_3224
+.asm_321f
+	call DelayFrame
+	jr .asm_322a
+
+.asm_3224
+	ld a, [wTextDelayFrames]
+	and a
+	jr nz, .asm_320a
+.asm_322a
+	pop af
+	ld [hOAMUpdate], a
+	pop bc
+	pop de
+	pop hl
+	ret
+
+Function3231::
+.asm_3231
+	ld a, [hli]
+	ld [de], a
+	inc de
+	ld a, h
+	cp b
+	jr nz, .asm_3231
+	ld a, l
+	cp c
+	jr nz, .asm_3231
+	ret
+
+PrintNum:: ; 323d (0:323d)
+	push bc
+	bit 5, b
+	jr z, .asm_324f
+	bit 7, b
+	jr nz, .asm_324a
+	bit 6, b
+	jr z, .asm_324f
+.asm_324a
+	ld a, $f0
+	ld [hli], a
+	res 5, b
+.asm_324f
+	xor a
+	ld [hPrintNum1], a
+	ld [hMultiplicand], a
+	ld [hStringCmpString2], a
+	ld a, b
+	and $f
+	cp $1
+	jr z, .asm_3277
+	cp $2
+	jr z, .asm_326e
+	ld a, [de]
+	ld [hQuotient], a
+	inc de
+	ld a, [de]
+	ld [hPrintNum3], a
+	inc de
+	ld a, [de]
+	ld [hPrintNum4], a
+	jr .asm_327a
+
+.asm_326e
+	ld a, [de]
+	ld [hStringCmpString2], a
+	inc de
+	ld a, [de]
+	ld [hPrintNum4], a
+	jr .asm_327a
+
+.asm_3277
+	ld a, [de]
+	ld [hPrintNum4], a
+.asm_327a
+	push de
+	ld d, b
+	ld a, c
+	swap a
+	and $f
+	ld e, a
+	ld a, c
+	and $f
+	ld b, a
+	ld c, $0
+	cp $2
+	jr z, .asm_32f2
+	cp $3
+	jr z, .asm_32e2
+	cp $4
+	jr z, .asm_32d1
+	cp $5
+	jr z, .asm_32c0
+	cp $6
+	jr z, .asm_32ae
+	ld a, $f
+	ld [hMultiplier], a
+	ld a, $42
+	ld [hPrintNum6], a
+	ld a, $40
+	ld [hPrintNum7], a
+	call Function3341
+	call Function33c0
+.asm_32ae
+	ld a, $1
+	ld [hPrintNum5], a
+	ld a, $86
+	ld [hPrintNum6], a
+	ld a, $a0
+	ld [hPrintNum7], a
+	call Function3341
+	call Function33c0
+.asm_32c0
+	xor a
+	ld [hRemainder], a
+	ld a, $27
+	ld [hMathBuffer], a
+	ld a, $10
+	ld [hPrintNum7], a
+	call Function3341
+	call Function33c0
+.asm_32d1
+	xor a
+	ld [hMultiplier], a
+	ld a, $3
+	ld [hPrintNum6], a
+	ld a, $e8
+	ld [hPrintNum7], a
+	call Function3341
+	call Function33c0
+.asm_32e2
+	xor a
+	ld [hMultiplier], a
+	xor a
+	ld [hMathBuffer], a
+	ld a, $64
+	ld [hPrintNum7], a
+	call Function3341
+	call Function33c0
+.asm_32f2
+	dec e
+	jr nz, .asm_32f9
+	ld a, $f6
+	ld [hPastLeadingZeroes], a
+.asm_32f9
+	ld c, $0
+	ld a, [hPrintNum4]
+.asm_32fd
+	cp $a
+	jr c, .asm_3306
+	sub $a
+	inc c
+	jr .asm_32fd
+
+.asm_3306
+	ld b, a
+	ld a, [hPrintNum1]
+	or c
+	jr nz, .asm_3311
+	call Function33ba
+	jr .asm_3323
+
+.asm_3311
+	call Function3330
+	push af
+	ld a, $f6
+	add c
+	ld [hl], a
+	pop af
+	ld [hDividend], a
+	inc e
+	dec e
+	jr nz, .asm_3323
+	inc hl
+	ld [hl], $e8
+.asm_3323
+	call Function33c0
+	call Function3330
+	ld a, $f6
+	add b
+	ld [hli], a
+	pop de
+	pop bc
+	ret
+
+Function3330:: ; 3330 (0:3330)
+	push af
+	ld a, [hPastLeadingZeroes]
+	and a
+	jr nz, .asm_333f
+	bit 5, d
+	jr z, .asm_333f
+	ld a, $f0
+	ld [hli], a
+	res 5, d
+.asm_333f
+	pop af
+	ret
+
+Function3341:: ; 3341 (0:3341)
+	dec e
+	jr nz, .asm_3348
+	ld a, $f6
+	ld [hProduct], a
+.asm_3348
+	ld c, $0
+.asm_334a
+	ld a, [hPrintNum5]
+	ld b, a
+	ld a, [hMultiplicand]
+	ld [hPrintNum8], a
+	cp b
+	jr c, .asm_339a
+	sub b
+	ld [hPrintNum2], a
+	ld a, [hPrintNum6]
+	ld b, a
+	ld a, [hPrintNum3]
+	ld [hPrintNum9], a
+	cp b
+	jr nc, .asm_336c
+	ld a, [hPrintNum2]
+	or $0
+	jr z, .asm_3396
+	dec a
+	ld [hPrintNum2], a
+	ld a, [hStringCmpString2]
+.asm_336c
+	sub b
+	ld [hPrintNum3], a
+	ld a, [hPrintNum7]
+	ld b, a
+	ld a, [hPrintNum4]
+	ld [hPrintNum10], a
+	cp b
+	jr nc, .asm_338c
+	ld a, [hStringCmpString2]
+	and a
+	jr nz, .asm_3387
+	ld a, [hQuotient]
+	and a
+	jr z, .asm_3392
+	dec a
+	ld [hMultiplicand], a
+	xor a
+.asm_3387
+	dec a
+	ld [hPrintNum3], a
+	ld a, [hPrintNum4]
+.asm_338c
+	sub b
+	ld [hPrintNum4], a
+	inc c
+	jr .asm_334a
+
+.asm_3392
+	ld a, [hPrintNum9]
+	ld [hStringCmpString2], a
+.asm_3396
+	ld a, [hPrintNum8]
+	ld [hPrintNum2], a
+.asm_339a
+	ld a, [hDividend]
+	or c
+	jr z, Function33ba
+	ld a, [hPrintNum1]
+	and a
+	jr nz, .asm_33ad
+	bit 5, d
+	jr z, .asm_33ad
+	ld a, $f0
+	ld [hli], a
+	res 5, d
+.asm_33ad
+	ld a, $f6
+	add c
+	ld [hl], a
+	ld [hPrintNum1], a
+	inc e
+	dec e
+	ret nz
+	inc hl
+	ld [hl], $e8
+	ret
+
+Function33ba:: ; 33ba (0:33ba)
+	bit 7, d
+	ret z
+	ld [hl], $f6
+	ret
+
+Function33c0:: ; 33c0 (0:33c0)
+	bit 7, d
+	jr nz, .asm_33cc
+	bit 6, d
+	jr z, .asm_33cc
+	ld a, [hProduct]
+	and a
+	ret z
+.asm_33cc
+	inc hl
+	ret
+
+Function33ce::
+; Print c-digit hex number from de to hl
+.asm_33ce
+	push bc
+	call Function33d7
+	pop bc
+	dec c
+	jr nz, .asm_33ce
+	ret
+
+Function33d7:: ; 33d7 (0:33d7)
+	ld a, [de]
+	swap a
+	and $f
+	call Function33e9
+	ld [hli], a
+	ld a, [de]
+	and $f
+	call Function33e9
+	ld [hli], a
+	inc de
+	ret
+
+Function33e9:: ; 33e9 (0:33e9)
+	ld bc, .digits
+	add c
+	ld c, a
+	ld a, $0
+	adc b
+	ld b, a
+	ld a, [bc]
+	ret
+
+.digits db "0123456789ABCDEF"
+
+Function3404::
+	ld [wBuffer], a
+	ld a, [hROMBank]
+	push af
+	ld a, [wBuffer]
+	rst Bankswitch
+	call PrintText
+	pop af
+	rst Bankswitch
+	ret
+
+Function3414::
+	ld a, [hROMBank]
+	push af
+	ld a, [hli]
+	rst Bankswitch
+	ld a, [hli]
+	ld h, [hl]
+	ld l, a
+	call jp_hl
+	pop hl
+	ld a, h
+	rst Bankswitch
+	ret
+
+Function3423::
+	ld a, [hROMBank]
+	ld [wcfd8], a
+	ld a, l
+	ld [wcfd9], a
+	ld a, h
+	ld [wcfda], a
+	ret
+
+Function3431::
+.asm_3431
+	ld a, [de]
+	cp [hl]
+	ret nz
+	inc de
+	inc hl
+	dec c
+	jr nz, .asm_3431
+	ret
+
+Function343a::
+.asm_343a
+	ld a, [de]
+	cp [hl]
+	jr nz, .asm_3447
+	inc de
+	inc hl
+	dec bc
+	ld a, b
+	or c
+	jr nz, .asm_343a
+	scf
+	ret
+
+.asm_3447
+	and a
+	ret
 
 Function3449::
-	dr $3449, $344c
-
+	call Function3564
 WaitBGMap::
 	dr $344c, $3456
 

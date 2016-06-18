@@ -3,8 +3,7 @@ predef_const: MACRO
 ENDM
 
 add_predef: MACRO
-\1Predef::
-	dwb \1, BANK(\1)
+\1Predef:: dab \1
 ENDM
 
 predef_id: MACRO

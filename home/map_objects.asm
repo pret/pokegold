@@ -187,7 +187,7 @@ CheckStandingOnEntrance::
 GetMapObject:: ; 176f (0:176f)
 	ld hl, wMapObjects
 	ld bc, $10
-	call Function31a3
+	call AddNTimes
 	ld b, h
 	ld c, l
 	ret
@@ -451,7 +451,7 @@ GetInitialFacing::
 	add hl, de
 	add hl, de
 	ld a, BANK(SpriteMovementData)
-	call Function3128
+	call SwapBytes
 	add a
 	add a
 	and $c
@@ -563,7 +563,7 @@ UpdateSprites:: ; 196f (0:196f)
 GetObjectStruct:: ; 1982 (0:1982)
 	ld bc, $28
 	ld hl, wObjectStructs
-	call Function31a3
+	call AddNTimes
 	ld b, h
 	ld c, l
 	ret
