@@ -124,9 +124,9 @@ VBlank0:: ; 180
 .ok2
 
 	call Joypad
-	ld a, BANK(_UpdateSound)
+	ld a, BANK(UpdateSound_)
 	rst Bankswitch
-	call _UpdateSound
+	call UpdateSound_
 	ld a, [wROMBankBackup]
 	rst Bankswitch
 	ld a, [hSeconds]
@@ -181,9 +181,9 @@ VBlank1:: ; 1f4
 	ld [rIF], a
 
 	ei
-	ld a, BANK(_UpdateSound)
+	ld a, BANK(UpdateSound_)
 	rst Bankswitch
-	call _UpdateSound
+	call UpdateSound_
 	ld a, [wROMBankBackup]
 	rst Bankswitch
 	; enable ints
@@ -230,9 +230,9 @@ VBlank4:: ; 255
 
 	call AskSerial
 
-	ld a, BANK(_UpdateSound)
+	ld a, BANK(UpdateSound_)
 	rst Bankswitch
-	call _UpdateSound
+	call UpdateSound_
 
 	ld a, [wROMBankBackup]
 	rst Bankswitch
@@ -271,9 +271,9 @@ VBlank5:: ; 278
 	ld [rIF], a
 
 	ei
-	ld a, BANK(_UpdateSound)
+	ld a, BANK(UpdateSound_)
 	rst Bankswitch
-	call _UpdateSound
+	call UpdateSound_
 	ld a, [wROMBankBackup]
 	rst Bankswitch
 	di
@@ -291,9 +291,9 @@ VBlank2:: ; 2b0
 	ld a, [hROMBank]
 	ld [wROMBankBackup], a
 
-	ld a, BANK(_UpdateSound)
+	ld a, BANK(UpdateSound_)
 	rst Bankswitch
-	call _UpdateSound
+	call UpdateSound_
 
 	ld a, [wROMBankBackup]
 	rst Bankswitch
@@ -369,9 +369,9 @@ VBlank3:: ; 2c4
 	ld [rIF], a
 
 	ei
-	ld a, BANK(_UpdateSound)
+	ld a, BANK(UpdateSound_)
 	rst Bankswitch
-	call _UpdateSound
+	call UpdateSound_
 	ld a, [wROMBankBackup]
 	rst Bankswitch
 	di

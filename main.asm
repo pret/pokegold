@@ -365,16 +365,28 @@ SECTION "bank39", DATA, BANK[$39]
 	dr $e4000, $e8000
 
 SECTION "bank3a", DATA, BANK[$3a]
+DisableAudio_::
 	dr $e8000, $e805c
 
-_UpdateSound::
-	dr $e805c, $ec000
+UpdateSound_::
+	dr $e805c, $e8b30
+
+PlayMusic_::
+	dr $e8b30, $e8b79
+
+PlayCryHeader_::
+	dr $e8b79, $e8c04
+
+PlaySFX_::
+	dr $e8c04, $ec000
 
 SECTION "bank3b", DATA, BANK[$3b]
 	dr $ec000, $f0000
 
 SECTION "bank3c", DATA, BANK[$3c]
-	dr $f0000, $f4000
+	dr $f0000, $f2747
+CryHeaders::
+	dr $f2747, $f4000
 
 SECTION "bank3d", DATA, BANK[$3d]
 	dr $f4000, $f8000

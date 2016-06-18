@@ -3205,7 +3205,7 @@ wd67e:: ds 1 ; d67e
 wd67f:: ds 1 ; d67f
 wd680:: ds 1 ; d680
 wd681:: ds 1 ; d681
-wd682:: ds 1 ; d682
+wPlayerBikeSurfState:: ds 1 ; d682
 wd683:: ds 1 ; d683
 wd684:: ds 1 ; d684
 wd685:: ds 1 ; d685

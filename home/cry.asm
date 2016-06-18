@@ -19,7 +19,7 @@ continue_cry_fn
 	jr c, .asm_3a12
 	ld e, c
 	ld d, b
-	call Function3de4
+	call PlayCryHeader
 	call WaitSFX
 .asm_3a12
 	pop bc
