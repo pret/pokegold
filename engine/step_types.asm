@@ -719,36 +719,3 @@ Function4fa8:
 	ld [wce87], a
 	ld a, [hl]
 	ret
-
-GetMovementByte:
-	ld hl, wMovementDataPointerBank
-	call GetMovementByte_
-	ret
-
-Function4fbd:
-	ld hl, $1b
-	add hl, bc
-	ld e, [hl]
-	inc [hl]
-	ld d, $0
-	ld hl, wMovementPerson
-	ld a, [hli]
-	ld h, [hl]
-	ld l, a
-	add hl, de
-	ld a, [hl]
-	ret
-
-Function4fce:
-	ld hl, $1b
-	add hl, bc
-	ld e, [hl]
-	inc [hl]
-	ld d, $0
-	ld hl, wce8f
-	ld a, [hli]
-	ld h, [hl]
-	ld l, a
-	add hl, de
-	ld a, [hl]
-	ret

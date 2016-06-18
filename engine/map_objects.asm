@@ -400,13 +400,12 @@ Function4732:
 
 INCLUDE "engine/movement_pattern.asm"
 INCLUDE "engine/step_types.asm"
+INCLUDE "engine/movement.asm"
 
-Function4fdf:
-	dr $4fdf, $4fe9
-Function4fe9:
-	dr $4fe9, $53b1
 Function53b1:
-	dr $53b1, $54d7
+	dr $53b1, $5457
+Function5457:
+	dr $5457, $54d7
 Function54d7:
 	dr $54d7, $557f
 Function557f::
