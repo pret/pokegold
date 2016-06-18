@@ -1,22 +1,54 @@
 INCLUDE "includes.asm"
 
 SECTION "bank1", ROMX, BANK[$1]
-PlaceWaitingText::
-	dr $4000, $4032
-LoadPushOAM::
-	dr $4032, $4274
-SpriteMovementData::
-	dr $4274, $4358
-DeleteMapObject::
-	dr $4358, $557f
-Function557f::
-	dr $557f, $5730
-Function5730::
-	dr $5730, $5795
-StopFollow::
-	dr $5795, $5896
-UpdateSprites_::
-	dr $5896, $58c5
+PlaceWaitingText:: ; 4000 (1:4000)
+	hlcoord 3, 10
+	ld b, $1
+	ld c, $b
+	ld a, [wBattleMode]
+	and a
+	jr z, .asm_4012
+	call TextBox
+	jr .asm_4017
+.asm_4012
+	predef Predef_LinkTextbox
+.asm_4017
+	hlcoord 4, 11
+	ld de, .Waiting
+	call PlaceString
+	ld c, 50
+	jp DelayFrames
+
+.Waiting:
+	db "Waiting...!@"
+
+Function4031:
+	ret
+
+LoadPushOAM:: ; 4032 (1:4032)
+	ld c, hPushOAM - $ff00
+	ld b, PushOAMEnd - PushOAM
+	ld hl, PushOAM
+.asm_4039
+	ld a, [hli]
+	ld [$ff00+c], a
+	inc c
+	dec b
+	jr nz, .asm_4039
+	ret
+
+PushOAM:
+	ld a, wOAMBuffer / $100
+	ld [rDMA], a
+	ld a, $28
+.asm_4046
+	dec a
+	jr nz, .asm_4046
+	ret
+PushOAMEnd
+
+INCLUDE "engine/map_objects.asm"
+
 Function58c5::
 
 IF DEF(GOLD)
