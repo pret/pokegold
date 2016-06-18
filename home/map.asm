@@ -294,7 +294,7 @@ Function212d::
 	ret
 
 Function2156::
-	ld a, [wce86]
+	ld a, [wPlayerStepDirection]
 	cp $ff
 	ret z
 	and a
@@ -351,7 +351,7 @@ Function2156::
 	ret
 
 Function21a3::
-	ld a, [wce86]
+	ld a, [wPlayerStepDirection]
 	and a
 	jp z, Function2263
 	cp $1
@@ -1659,7 +1659,7 @@ SaveScreen::
 	ld a, [wMapWidth]
 	add $6
 	ld [hConnectionStripLength], a
-	ld a, [wce86]
+	ld a, [wPlayerStepDirection]
 	and a
 	jr z, .asm_29bc
 	cp $1

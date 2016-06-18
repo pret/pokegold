@@ -2063,10 +2063,12 @@ wce7f:: ds 1 ; ce7f
 wce80:: ds 1 ; ce80
 wce81:: ds 1 ; ce81
 wce82:: ds 1 ; ce82
-wce83:: ds 1 ; ce83
-wce84:: ds 1 ; ce84
-wce85:: ds 1 ; ce85
-wce86:: ds 1 ; ce86
+
+wPlayerStepVectorX:: ds 1 ; ce83
+wPlayerStepVectorY:: ds 1 ; ce84
+wPlayerStepFlags:: ds 1 ; ce85
+wPlayerStepDirection:: ds 1 ; ce86
+
 wce87:: ds 1 ; ce87
 wce88:: ds 1 ; ce88
 wce89:: ds 1 ; ce89
