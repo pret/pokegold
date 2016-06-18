@@ -1,108 +1,74 @@
-PlayStereoCry:: ; 37b6
+PlayStereoCry:: ; 39f0 (0:39f0)
 	push af
-	ld a, 1
+	ld a, $1
 	ld [wStereoPanningMask], a
 	pop af
-	call _PlayCry
-	call WaitSFX
-	ret
-; 37c4
+	jr continue_cry_fn
 
-PlayStereoCry2:: ; 37c4
-; Don't wait for the cry to end.
-; Used during pic animations.
-	push af
-	ld a, 1
-	ld [wStereoPanningMask], a
-	pop af
-	jp _PlayCry
-; 37ce
-
-PlayCry:: ; 37ce
-	call PlayCry2
-	call WaitSFX
-	ret
-; 37d5
-
-PlayCry2:: ; 37d5
-; Don't wait for the cry to end.
+PlayCry:: ; 39f9 (0:39f9)
 	push af
 	xor a
 	ld [wStereoPanningMask], a
-	ld [CryTracks], a
+	ld [wCryTracks], a
 	pop af
-	call _PlayCry
-	ret
-; 37e2
-
-_PlayCry:: ; 37e2
+continue_cry_fn
 	push hl
 	push de
 	push bc
-
 	call GetCryIndex
-	jr c, .done
-
+	jr c, .asm_3a12
 	ld e, c
 	ld d, b
-	call PlayCryHeader
-
-.done
+	call Function3de4
+	call WaitSFX
+.asm_3a12
 	pop bc
 	pop de
 	pop hl
 	ret
-; 37f3
 
-LoadCryHeader:: ; 37f3
-; Load cry header bc.
-
+LoadCryHeader::
 	call GetCryIndex
 	ret c
-
 	ld a, [hROMBank]
 	push af
-	ld a, BANK(CryHeaders)
+	ld a, $3c
 	rst Bankswitch
-
-	ld hl, CryHeaders
-rept 6
+	ld hl, $6747
 	add hl, bc
-endr
-
+	add hl, bc
+	add hl, bc
+	add hl, bc
+	add hl, bc
+	add hl, bc
 	ld e, [hl]
 	inc hl
 	ld d, [hl]
 	inc hl
-
 	ld a, [hli]
-	ld [CryPitch], a
+	ld [wCryPitch], a
 	ld a, [hli]
-	ld [CryPitch + 1], a
+	ld [wCryPitch + 1], a
 	ld a, [hli]
-	ld [CryLength], a
+	ld [wCryLength], a
 	ld a, [hl]
-	ld [CryLength + 1], a
-
+	ld [wCryLength + 1], a
 	pop af
 	rst Bankswitch
 	and a
 	ret
-; 381e
 
-GetCryIndex:: ; 381e
+GetCryIndex:: ; 3a41 (0:3a41)
 	and a
-	jr z, .no
+	jr z, .asm_3a4e
 	cp NUM_POKEMON + 1
-	jr nc, .no
-
+	jr nc, .asm_3a4e
 	dec a
 	ld c, a
-	ld b, 0
+	ld b, $0
 	and a
 	ret
 
-.no
+.asm_3a4e
 	scf
 	ret
-; 382d

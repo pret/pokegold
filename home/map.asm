@@ -516,11 +516,11 @@ Function22c1:: ; 22c1 (0:22c1)
 	ld a, [wPlayerStandingMapX]
 	sub $4
 	ld d, a
-	ld a, [wd945]
+	ld a, [wCurrMapWarpCount]
 	and a
 	ret z
 	ld c, a
-	ld hl, wd946
+	ld hl, wCurrMapWarpHeaderPointer
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
@@ -551,7 +551,7 @@ Function22c1:: ; 22c1 (0:22c1)
 	pop hl
 	call Function22fe
 	ret nc
-	ld a, [wd945]
+	ld a, [wCurrMapWarpCount]
 	inc a
 	sub c
 	ld c, a
@@ -576,7 +576,7 @@ Function2302:: ; 2302 (0:2302)
 
 Function230f:: ; 230f (0:230f)
 	push bc
-	ld hl, wd946
+	ld hl, wCurrMapWarpHeaderPointer
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
@@ -829,11 +829,11 @@ ReadMapCallbacks:: ; 24a2 (0:24a2)
 ReadWarps:: ; 24b9 (0:24b9)
 	ld a, [hli]
 	ld c, a
-	ld [wd945], a
+	ld [wCurrMapWarpCount], a
 	ld a, l
-	ld [wd946], a
+	ld [wCurrMapWarpHeaderPointer], a
 	ld a, h
-	ld [wd947], a
+	ld [wCurrMapWarpHeaderPointer + 1], a
 	ld a, c
 	and a
 	ret z

@@ -2287,19 +2287,19 @@ wcf28:: ds 1 ; cf28
 wcf29:: ds 1 ; cf29
 wcf2a:: ds 1 ; cf2a
 wcf2b:: ds 1 ; cf2b
+wTempTrainerHeader::
 wcf2c:: ds 1 ; cf2c
 wcf2d:: ds 1 ; cf2d
 wcf2e:: ds 1 ; cf2e
 wcf2f:: ds 1 ; cf2f
 wcf30:: ds 1 ; cf30
 wcf31:: ds 1 ; cf31
-wcf32:: ds 1 ; cf32
-wcf33:: ds 1 ; cf33
-wcf34:: ds 1 ; cf34
-wcf35:: ds 1 ; cf35
+wWinTextPointer:: dw ; cf32
+wLossTextPointer:: dw ; cf34
 wcf36:: ds 1 ; cf36
 wcf37:: ds 1 ; cf37
 wcf38:: ds 1 ; cf38
+wTempTrainerHeaderEnd::
 wcf39:: ds 1 ; cf39
 wcf3a:: ds 1 ; cf3a
 wcf3b:: ds 1 ; cf3b
@@ -2665,13 +2665,15 @@ wd115:: ds 1 ; d115
 wd116:: ds 1 ; d116
 wd117:: ds 1 ; d117
 wd118:: ds 1 ; d118
-wd119:: ds 1 ; d119
+wBattleType:: ds 1 ; d119
 wd11a:: ds 1 ; d11a
 wd11b:: ds 1 ; d11b
 wd11c:: ds 1 ; d11c
 wTrainerClass:: ds 1 ; d11d
 wd11e:: ds 1 ; d11e
 wd11f:: ds 1 ; d11f
+
+wBaseData::
 wd120:: ds 1 ; d120
 wd121:: ds 1 ; d121
 wd122:: ds 1 ; d122
@@ -2704,6 +2706,8 @@ wd13c:: ds 1 ; d13c
 wd13d:: ds 1 ; d13d
 wd13e:: ds 1 ; d13e
 wd13f:: ds 1 ; d13f
+wBaseDataEnd::
+
 wd140:: ds 1 ; d140
 wd141:: ds 1 ; d141
 wd142:: ds 1 ; d142
@@ -3720,9 +3724,8 @@ wd940:: ds 1 ; d940
 wCurrentMapTriggerPointer:: dw ; d941
 wd943:: ds 1 ; d943
 wd944:: ds 1 ; d944
-wd945:: ds 1 ; d945
-wd946:: ds 1 ; d946
-wd947:: ds 1 ; d947
+wCurrMapWarpCount:: ds 1 ; d945
+wCurrMapWarpHeaderPointer:: dw ; d946
 wd948:: ds 1 ; d948
 wd949:: ds 1 ; d949
 wd94a:: ds 1 ; d94a

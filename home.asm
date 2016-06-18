@@ -641,7 +641,7 @@ Function33e9:: ; 33e9 (0:33e9)
 
 .digits db "0123456789ABCDEF"
 
-Function3404::
+FarPrintText::
 	ld [wBuffer], a
 	ld a, [hROMBank]
 	push af
@@ -1013,11 +1013,710 @@ GetBasePokemonName::
 	pop hl
 	ret
 
-GetPokemonName::
-	dr $367e, $39f9
+GetPokemonName:: ; 367e (0:367e)
+	ld a, [hROMBank]
+	push af
+	push hl
+	ld a, BANK(PokemonNames)
+	rst Bankswitch
+	ld a, [wd151]
+	dec a
+	ld hl, PokemonNames
+	ld e, a
+	ld d, $0
+rept PKMN_NAME_LENGTH +- 1
+	add hl, de
+endr
+	ld de, wStringBuffer1
+	push de
+	ld bc, PKMN_NAME_LENGTH - 1
+	call CopyBytes
+	ld hl, wStringBuffer1 + PKMN_NAME_LENGTH - 1
+	ld [hl], "@"
+	pop de
+	pop hl
+	pop af
+	rst Bankswitch
+	ret
 
-PlayCry::
-	dr $39f9, $3ade
+GetItemName
+	push hl
+	push bc
+	ld a, [wd151]
+	cp TM01
+	jr nc, .TM
+	ld [wce60], a
+	ld a, $4
+	ld [wce61], a
+	call GetName
+	jr .copied
+
+.TM
+	call GetTMHMName
+.copied
+	ld de, wStringBuffer1
+	pop bc
+	pop hl
+	ret
+
+GetTMHMName:: ; 36cc (0:36cc)
+	push hl
+	push de
+	push bc
+	ld a, [wd151]
+	push af
+	cp HM01
+	push af
+	jr c, .TM
+	ld hl, .HMText ; $3721
+	ld bc, $2
+	jr .copy
+
+.TM
+	ld hl, .TMText ; $371e
+	ld bc, $2
+.copy
+	ld de, wStringBuffer1
+	call CopyBytes
+	push de
+	ld a, [wd151]
+	ld c, a
+	callab GetTMHMNumber
+	pop de
+	pop af
+	ld a, c
+	jr c, .not_hm
+	sub NUM_TMS
+.not_hm
+	ld b, "0"
+.mod10
+	sub 10
+	jr c, .done_mod
+	inc b
+	jr .mod10
+
+.done_mod
+	add 10
+	push af
+	ld a, b
+	ld [de], a
+	inc de
+	pop af
+	ld b, "0"
+	add b
+	ld [de], a
+	inc de
+	ld a, "@"
+	ld [de], a
+	pop af
+	ld [wd151], a
+	pop bc
+	pop de
+	pop hl
+	ret
+
+.TMText db "TM@"
+.HMText db "HM@"
+
+IsHM::
+	cp HM01
+	jr c, .not_HM
+	scf
+	ret
+
+.not_HM
+	and a
+	ret
+
+IsHMMove::
+	ld hl, .HMMoves
+	ld de, $1
+	jp IsInArray
+
+.HMMoves
+	db CUT, FLY, SURF, STRENGTH, FLASH, WATERFALL, WHIRLPOOL, $FF
+
+GetMoveName::
+	push hl
+	ld a, $2
+	ld [wce61], a
+	ld a, [wd151]
+	ld [wce60], a
+	call GetName
+	ld de, wStringBuffer1
+	pop hl
+	ret
+
+ScrollingMenu::
+	call CopyMenuData2
+	ld a, [hROMBank]
+	push af
+	ld a, BANK(ScrollingMenu_)
+	rst Bankswitch
+	call InitScrollingMenu
+	call ScrollingMenuUpdatePalettes
+	call ScrollingMenu_
+	pop af
+	rst Bankswitch
+	ld a, [wMenuJoypad]
+	ret
+
+ScrollingMenuUpdatePalettes:: ; 3769 (0:3769)
+	ld hl, wVramState
+	bit 0, [hl]
+	jp nz, UpdateTimePals
+	jp SetPalettes
+
+DrawScrollingMenu::
+	ld a, [wMenuBorderTopCoord]
+	dec a
+	ld b, a
+	ld a, [wMenuBorderBottomCoord]
+	sub b
+	ld d, a
+	ld a, [wMenuBorderLeftCoord]
+	dec a
+	ld c, a
+	ld a, [wMenuBorderRightCoord]
+	sub c
+	ld e, a
+	push de
+	call Coord2Tile
+	pop bc
+	jp TextBox
+
+ScrollingMenuJoyTextDelay::
+	call DelayFrame
+	ld a, [hInMenu]
+	push af
+	ld a, $1
+	ld [hInMenu], a
+	call JoyTextDelay
+	pop af
+	ld [hInMenu], a
+	ld a, [hJoyLast]
+	and $f0
+	ld c, a
+	ld a, [hJoyPressed]
+	and $f
+	or c
+	ld c, a
+	ret
+
+HandleStoneQueue::
+	ld a, [hROMBank]
+	push af
+	call SwitchToMapScriptHeaderBank
+	call StoneQueueWarpAction
+	pop bc
+	ld a, b
+	rst Bankswitch
+	ret
+
+StoneQueueWarpAction:: ; 37b9 (0:37b9)
+	ld hl, $1
+	add hl, de
+	ld a, [hl]
+	cp $ff
+	jr z, .asm_37dc
+	ld l, a
+	push hl
+	call IsAnyMapObjectOnAWarp
+	pop hl
+	jr nc, .asm_37dc
+	ld d, a
+	ld e, l
+	call IsThisObjectInTheStoneTable
+	jr nc, .asm_37dc
+	call CallMapScript
+	callba EnableScriptMode
+	scf
+	ret
+
+.asm_37dc
+	and a
+	ret
+
+IsAnyMapObjectOnAWarp:: ; 37de (0:37de)
+	push de
+	ld hl, $10
+	add hl, de
+	ld a, [hl]
+	ld hl, $11
+	add hl, de
+	ld e, [hl]
+	sub $4
+	ld d, a
+	ld a, e
+	sub $4
+	ld e, a
+	call IsThisMapObjectOnAWarp
+	pop de
+	ret
+
+IsThisMapObjectOnAWarp:: ; 37f5 (0:37f5)
+	ld hl, wCurrMapWarpHeaderPointer
+	ld a, [hli]
+	ld h, [hl]
+	ld l, a
+	ld a, [wCurrMapWarpCount]
+	and a
+	jr z, .no_warps
+.find_warp_loop
+	push af
+	ld a, [hl]
+	cp e
+	jr nz, .next
+	inc hl
+	ld a, [hld]
+	cp d
+	jr nz, .next
+	jr .yes
+
+.next
+	ld a, $5
+	add l
+	ld l, a
+	jr nc, .asm_3814
+	inc h
+.asm_3814
+	pop af
+	dec a
+	jr nz, .find_warp_loop
+.no_warps
+	and a
+	ret
+
+.yes
+	pop af
+	ld d, a
+	ld a, [wCurrMapWarpCount]
+	sub d
+	inc a
+	scf
+	ret
+
+IsThisObjectInTheStoneTable:: ; 3823 (0:3823)
+	ld hl, $1
+	add hl, bc
+	ld a, [hli]
+	ld h, [hl]
+	ld l, a
+.asm_382a
+	ld a, [hli]
+	cp $ff
+	jr z, .asm_3840
+	cp d
+	jr nz, .asm_383b
+	ld a, [hli]
+	cp e
+	jr nz, .asm_383c
+	ld a, [hli]
+	ld h, [hl]
+	ld l, a
+	jr .asm_3842
+
+.asm_383b
+	inc hl
+.asm_383c
+	inc hl
+	inc hl
+	jr .asm_382a
+
+.asm_3840
+	and a
+	ret
+
+.asm_3842
+	scf
+	ret
+
+CheckTrainerBattle2::
+	ld a, [hROMBank]
+	push af
+	call SwitchToMapScriptHeaderBank
+	call CheckTrainerBattle
+	pop bc
+	ld a, b
+	rst Bankswitch
+	ret
+
+CheckTrainerBattle:: ; 3851 (0:3851)
+	ld a, $2
+	ld de, wMap2Object
+.asm_3856
+	push af
+	push de
+	ld hl, $1
+	add hl, de
+	ld a, [hl]
+	and a
+	jr z, .asm_389b
+	ld hl, $8
+	add hl, de
+	ld a, [hl]
+	and $f
+	cp $2
+	jr nz, .asm_389b
+	ld hl, MBC3SRamEnable
+	add hl, de
+	ld a, [hl]
+	cp $ff
+	jr z, .asm_389b
+	call GetObjectStruct
+	call FacingPlayerDistance_bc
+	jr nc, .asm_389b
+	ld hl, $9
+	add hl, de
+	ld a, [hl]
+	cp b
+	jr c, .asm_389b
+	push bc
+	push de
+	ld hl, $a
+	add hl, de
+	ld a, [hli]
+	ld h, [hl]
+	ld l, a
+	ld e, [hl]
+	inc hl
+	ld d, [hl]
+	ld b, $2
+	call EventFlagAction
+	ld a, c
+	pop de
+	pop bc
+	and a
+	jr z, .asm_38aa
+.asm_389b
+	pop de
+	ld hl, $10
+	add hl, de
+	ld d, h
+	ld e, l
+	pop af
+	inc a
+	cp $10
+	jr nz, .asm_3856
+	xor a
+	ret
+
+.asm_38aa
+	pop de
+	pop af
+	ld [hLastTalked], a
+	ld a, b
+	ld [wcf2a], a
+	ld a, c
+	ld [wcf2b], a
+	jr continue_trainer_function
+
+TalkToTrainer::
+	ld a, $1
+	ld [wcf2a], a
+	ld a, $ff
+	ld [wcf2b], a
+continue_trainer_function
+	call GetMapScriptHeaderBank
+	ld [wcf29], a
+	ld a, [hLastTalked]
+	call GetMapObject
+	ld hl, $a
+	add hl, bc
+	ld a, [wcf29]
+	call GetFarHalfword
+	ld de, wcf2c
+	ld bc, $d
+	ld a, [wcf29]
+	call FarCopyBytes
+	xor a
+	ld [wcf38], a
+	scf
+	ret
+
+FacingPlayerDistance_bc:: ; 38e9 (0:38e9)
+	push de
+	call FacingPlayerDistance
+	ld b, d
+	ld c, e
+	pop de
+	ret
+
+FacingPlayerDistance:: ; 38f1 (0:38f1)
+	ld hl, $10
+	add hl, bc
+	ld d, [hl]
+	ld hl, $11
+	add hl, bc
+	ld e, [hl]
+	ld a, [wPlayerStandingMapX]
+	cp d
+	jr z, .asm_3909
+	ld a, [wPlayerStandingMapY]
+	cp e
+	jr z, .asm_391d
+	and a
+	ret
+
+.asm_3909
+	ld a, [wPlayerStandingMapY]
+	sub e
+	jr z, .asm_3937
+	jr nc, .asm_3918
+	cpl
+	inc a
+	ld d, a
+	ld e, $4
+	jr .asm_392f
+
+.asm_3918
+	ld d, a
+	ld e, $0
+	jr .asm_392f
+
+.asm_391d
+	ld a, [wPlayerStandingMapX]
+	sub d
+	jr z, .asm_3937
+	jr nc, .asm_392c
+	cpl
+	inc a
+	ld d, a
+	ld e, $8
+	jr .asm_392f
+
+.asm_392c
+	ld d, a
+	ld e, $c
+.asm_392f
+	call GetSpriteDirection
+	cp e
+	jr nz, .asm_3937
+	scf
+	ret
+
+.asm_3937
+	and a
+	ret
+
+CheckTrainerFlag::
+	push bc
+	ld hl, $1
+	add hl, bc
+	ld a, [hl]
+	call GetMapObject
+	ld hl, $a
+	add hl, bc
+	ld a, [hli]
+	ld h, [hl]
+	ld l, a
+	call GetMapScriptHeaderBank
+	call GetFarHalfword
+	ld d, h
+	ld e, l
+	push de
+	ld b, $2
+	call EventFlagAction
+	pop de
+	ld a, c
+	and a
+	pop bc
+	ret
+
+PrintWinLossText::
+	ld a, [wBattleType]
+	cp $1
+	jr which_battle_end_text
+
+PrintWinText::
+	ld hl, wWinTextPointer
+	jr continue_battle_end_text
+
+which_battle_end_text
+	ld a, [wcfe9]
+	ld hl, wWinTextPointer
+	and a
+	jr z, continue_battle_end_text
+	ld hl, wLossTextPointer
+continue_battle_end_text
+	ld a, [hli]
+	ld h, [hl]
+	ld l, a
+	call GetMapScriptHeaderBank
+	call FarPrintText
+	call WaitBGMap
+	call WaitPressAorB_BlinkCursor
+	ret
+
+DrawBattleHPBar::
+	push hl
+	push de
+	push bc
+	ld a, $60
+	ld [hli], a
+	ld a, $61
+	ld [hli], a
+	push hl
+	ld a, $62
+.asm_3990
+	ld [hli], a
+	dec d
+	jr nz, .asm_3990
+	ld a, $6b
+	add b
+	ld [hl], a
+	pop hl
+	ld a, e
+	and a
+	jr nz, .asm_39a3
+	ld a, c
+	and a
+	jr z, .asm_39b6
+	ld e, $1
+.asm_39a3
+	ld a, e
+	sub $8
+	jr c, .asm_39b2
+	ld e, a
+	ld a, $6a
+	ld [hli], a
+	ld a, e
+	and a
+	jr z, .asm_39b6
+	jr .asm_39a3
+
+.asm_39b2
+	ld a, $62
+	add e
+	ld [hl], a
+.asm_39b6
+	pop bc
+	pop de
+	pop hl
+	ret
+
+PrepMonFrontpic::
+	ld a, $1
+	ld [wcf3b], a
+PrepMonFrontpic_::
+	ld a, [wd004]
+	and a
+	jr z, .not_pokemon
+	cp EGG
+	jr z, .egg
+	cp NUM_POKEMON + 1
+	jr nc, .not_pokemon
+.egg
+	push hl
+	ld de, $9000
+	predef GetFrontpic
+	pop hl
+	xor a
+	ld [hGraphicStartTile], a
+	lb bc, 7, 7
+	predef PlaceGraphic
+	xor a
+	ld [wcf3b], a
+	ret
+
+.not_pokemon
+	xor a
+	ld [wcf3b], a
+	inc a
+	ld [wd004], a
+	ret
+
+INCLUDE "home/cry.asm"
+
+PrintLevel:: ; 3a50
+	ld a, [wd02a]
+	ld [hl], $6e
+	inc hl
+	ld c, $2
+	cp MAX_LEVEL
+	jr c, Print8BitNumRightAlign
+	dec hl
+	inc c
+	jr Print8BitNumRightAlign
+
+PrintLevel_Force3Digits::
+	ld [hl], $6e
+	inc hl
+	ld c, $3
+Print8BitNumRightAlign::
+	ld [wd151], a
+	ld de, wd151
+	ld b, PRINTNUM_RIGHTALIGN | 1
+	jp PrintNum
+
+Function3a70::
+	ld hl, wd149
+	ld c, a
+	ld b, $0
+	add hl, bc
+	ld a, [hl]
+	ret
+
+GetBaseData::
+	push bc
+	push de
+	push hl
+	ld a, [hROMBank]
+	push af
+	ld a, BANK(BaseData) ; $14
+	rst Bankswitch
+	ld a, [wce60]
+	cp EGG
+	jr z, .egg
+	dec a
+	ld bc, $20
+	ld hl, BaseData ; $5b0b
+	call AddNTimes
+	ld de, wd120
+	ld bc, $20
+	call CopyBytes
+	jr .asm_3ab3
+
+.egg
+	ld de, UnknownEggPic ; $7a83
+	ln b, 5, 5
+	ld hl, wd131
+	ld [hl], b
+	ld hl, wd132
+	ld [hl], e
+	inc hl
+	ld [hl], d
+	inc hl
+	ld [hl], e
+	inc hl
+	ld [hl], d
+	jr .asm_3ab3
+
+.asm_3ab3
+	ld a, [wce60]
+	ld [wd120], a
+	pop af
+	rst Bankswitch
+	pop hl
+	pop de
+	pop bc
+	ret
+
+GetCurNick::
+	ld a, [wd005]
+	ld hl, wPartyMon1Nickname
+	push hl
+	push bc
+	call SkipNames
+	ld de, wStringBuffer1
+	push de
+	ld bc, $b
+	call CopyBytes
+	pop de
+	callab CheckNickErrors
+	pop bc
+	pop hl
+	ret
 
 PrintBCDNumber::
 	dr $3ade, $3d4f

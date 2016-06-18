@@ -26,7 +26,9 @@ GameInit:: ; 6545
 ReanchorBGMap_NoOAMUpdate:: ; 6551
 	dr $6551, $65cb
 LoadFonts_NoOAMUpdate:: ; 65cb
-	dr $65cb, $67bd
+	dr $65cb, $677e
+CheckNickErrors:: ; 677e
+	dr $677e, $67bd
 Multiply_:: ; 67bd
 	dr $67bd, $681d
 Divide_:: ; 681d
@@ -40,7 +42,9 @@ GameInit:: ; 650b
 ReanchorBGMap_NoOAMUpdate:: ; 6517
 	dr $6517, $6591
 LoadFonts_NoOAMUpdate:: ; 6591
-	dr $6591, $6783
+	dr $6591, $6744
+CheckNickErrors:: ; 6744
+	dr $6744, $6783
 Multiply_:: ; 6783
 	dr $6783, $67e3
 Divide_:: ; 67e3
@@ -74,7 +78,9 @@ ReceiveItem_::
 TossItem_::
 	dr $d21a, $d251
 CheckItem_::
-	dr $d251, $d434
+	dr $d251, $d414
+GetTMHMNumber::
+	dr $d414, $d434
 CheckTossableItem_::
 	dr $d434, $e7a6
 DoItemEffect_::
@@ -88,7 +94,9 @@ ReceiveItem_::
 TossItem_::
 	dr $d218, $d24f
 CheckItem_::
-	dr $d24f, $d432
+	dr $d24f, $d412
+GetTMHMNumber::
+	dr $d412, $d432
 CheckTossableItem_::
 	dr $d432, $e7a4
 DoItemEffect_::
@@ -152,7 +160,11 @@ PushWindow_::
 ExitMenu_::
 	dr $24307, $24395
 InitVerticalMenuCursor_::
-	dr $24395, $28000
+	dr $24395, $244d7
+InitScrollingMenu::
+	dr $244d7, $244f3
+ScrollingMenu_::
+	dr $244f3, $28000
 
 SECTION "banka", DATA, BANK[$a]
 	dr $28000, $2c000
@@ -190,7 +202,11 @@ SECTION "bank13", DATA, BANK[$13]
 	dr $4c000, $50000
 
 SECTION "bank14", DATA, BANK[$14]
-	dr $50000, $54000
+	dr $50000, $51b0b
+BaseData:: ; 51b0b
+	dr $51b0b, $53a83
+UnknownEggPic:: ; 53a83
+	dr $53a83, $54000
 
 SECTION "bank15", DATA, BANK[$15]
 	dr $54000, $58000
