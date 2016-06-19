@@ -198,20 +198,15 @@ CheckNickErrors:: ; 677e (1:677e)
 	db "<ROCKET>", "┘"       + 1
 	db -1 ; end
 
-Multiply_:: ; 67bd
-IF DEF(GOLD)
-	dr $67bd, $681d
-Divide_:: ; 681d
-	dr $681d, $6fa0
+INCLUDE "engine/math.asm"
+INCLUDE "items/item_attributes.asm"
 CheckNPCMovementPermissions: ; 6fa0
+
+IF DEF(GOLD)
 	dr $6fa0, $754e
 ENDC
 
 IF DEF(SILVER)
-	dr $6783, $67e3
-Divide_:: ; 67e3
-	dr $67e3, $6f66
-CheckNPCMovementPermissions: ; 6f66
 	dr $6f66, $7514
 ENDC
 

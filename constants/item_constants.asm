@@ -69,7 +69,7 @@
 	const SECRETPOTION ; $43
 	const S_S_TICKET   ; $44
 	const MYSTERY_EGG  ; $45
-	const CLEAR_BELL   ; $46
+	const ITEM_46      ; $46
 	const SILVER_WING  ; $47
 	const MOOMOO_MILK  ; $48
 	const QUICK_CLAW   ; $49
@@ -114,8 +114,8 @@
 	const EVERSTONE    ; $70
 	const SPELL_TAG    ; $71
 	const RAGECANDYBAR ; $72
-	const GS_BALL      ; $73
-	const BLUE_CARD    ; $74
+	const ITEM_73      ; $73
+	const ITEM_74      ; $74
 	const MIRACLE_SEED ; $75
 	const THICK_CLUB   ; $76
 	const FOCUS_BAND   ; $77
@@ -128,7 +128,7 @@
 	const LUCKY_EGG    ; $7E
 	const CARD_KEY     ; $7F
 	const MACHINE_PART ; $80
-	const EGG_TICKET   ; $81
+	const ITEM_81      ; $81
 	const LOST_ITEM    ; $82
 	const STARDUST     ; $83
 	const STAR_PIECE   ; $84
