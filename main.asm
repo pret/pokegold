@@ -199,15 +199,16 @@ CheckNickErrors:: ; 677e (1:677e)
 	db -1 ; end
 
 INCLUDE "engine/math.asm"
+ItemAttributes:
 INCLUDE "items/item_attributes.asm"
-CheckNPCMovementPermissions: ; 6fa0
+INCLUDE "engine/npc_movement.asm"
 
 IF DEF(GOLD)
-	dr $6fa0, $754e
+	dr $726c, $754e
 ENDC
 
 IF DEF(SILVER)
-	dr $6f66, $7514
+	dr $7232, $7514
 ENDC
 
 SECTION "bank2", ROMX, BANK[$2]
