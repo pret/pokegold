@@ -1187,7 +1187,7 @@ Function58b0: ; 58b0 (1:58b0)
 	jr nz, .asm_58bf
 	ret
 
-Function58c5:: ; 58c5 (1:58c5)
+ApplyBGMapAnchorToObjects:: ; 58c5 (1:58c5)
 	push hl
 	push de
 	push bc

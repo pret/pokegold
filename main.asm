@@ -51,12 +51,102 @@ INCLUDE "engine/map_objects.asm"
 INCLUDE "engine/main_menu.asm"
 INCLUDE "engine/title.asm"
 
-IF DEF(GOLD)
-ReanchorBGMap_NoOAMUpdate:: ; 6551
-	dr $6551, $65cb
-LoadFonts_NoOAMUpdate:: ; 65cb
-	dr $65cb, $677e
+ReanchorBGMap_NoOAMUpdate:: ; 6551 (1:6551)
+	call DelayFrame
+	ld a, [hOAMUpdate]
+	push af
+	ld a, $1
+	ld [hOAMUpdate], a
+	ld a, [hBGMapMode]
+	push af
+	xor a
+	ld [hBGMapMode], a
+	call Function656b
+	pop af
+	ld [hBGMapMode], a
+	pop af
+	ld [hOAMUpdate], a
+	ret
+
+Function656b: ; 656b (1:656b)
+	xor a
+	ld [hLCDCPointer], a
+	ld [hBGMapMode], a
+	ld hl, wd565
+	set 7, [hl]
+	res 2, [hl]
+	ld a, $90
+	ld [hWY], a
+	call OverworldTextModeSwitch
+	ld a, $9c
+	call .LoadBGMapAddrIntoHRAM
+	call _OpenAndCloseMenu_HDMATransferTileMapAndAttrMap
+	xor a
+	ld [hBGMapMode], a
+	ld [hWY], a
+	ld a, $98
+	call .LoadBGMapAddrIntoHRAM
+	call .WaitTransfer
+	xor a
+	ld [wd05b], a
+	ld a, $98
+	ld [wd05c], a
+	xor a
+	ld [hSCX], a
+	ld [hSCY], a
+	call ApplyBGMapAnchorToObjects
+	ret
+
+.LoadBGMapAddrIntoHRAM: ; 65a5 (1:65a5)
+	ld [hBGMapAddress + 1], a
+	xor a
+	ld [hBGMapAddress], a
+	ret
+
+.WaitTransfer: ; 65ab (1:65ab)
+	ld a, [hBGMapMode]
+	push af
+	xor a
+	ld [hBGMapMode], a
+	ld a, [hOAMUpdate]
+	push af
+	ld a, $1
+	ld [hOAMUpdate], a
+	ld a, $3
+	ld [hFF9E], a
+.asm_65bc
+	call DelayFrame
+	ld a, [hFF9E]
+	and a
+	jr nz, .asm_65bc
+	pop af
+	ld [hOAMUpdate], a
+	pop af
+	ld [hBGMapMode], a
+	ret
+
+LoadFonts_NoOAMUpdate:: ; 65cb (1:65cb)
+	ld a, [hOAMUpdate]
+	push af
+	ld a, $1
+	ld [hOAMUpdate], a
+	call .LoadGFX
+	pop af
+	ld [hOAMUpdate], a
+	ret
+
+.LoadGFX: ; 65d9 (1:65d9)
+	call LoadFontsExtra
+	ld a, $90
+	ld [hWY], a
+	call SafeUpdateSprites
+	call Functiond9e
+	ret
+
+INCLUDE "engine/learn.asm"
+
 CheckNickErrors:: ; 677e
+IF DEF(GOLD)
 	dr $677e, $67bd
 Multiply_:: ; 67bd
 	dr $67bd, $681d
@@ -67,11 +157,6 @@ CheckNPCMovementPermissions: ; 6fa0
 ENDC
 
 IF DEF(SILVER)
-ReanchorBGMap_NoOAMUpdate:: ; 6517
-	dr $6517, $6591
-LoadFonts_NoOAMUpdate:: ; 6591
-	dr $6591, $6744
-CheckNickErrors:: ; 6744
 	dr $6744, $6783
 Multiply_:: ; 6783
 	dr $6783, $67e3
@@ -256,7 +341,9 @@ BattleRandom_:: ; 3ec11
 	dr $3ec11, $40000
 
 SECTION "bank10", ROMX, BANK[$10]
-	dr $40000, $44000
+	dr $40000, $41afe
+Moves::
+	dr $41afe, $44000
 
 SECTION "bank11", ROMX, BANK[$11]
 	dr $44000, $44870
@@ -687,7 +774,23 @@ CoordinatesEventText_:: ; 195b9d
 	dr $195b9d, $198000
 
 SECTION "bank66", ROMX, BANK[$66]
-	dr $198000, $19c000
+	dr $198000, $1981e1
+Text_LearnedMove_::
+	dr $1981e1, $1981f8
+Text_ForgetWhich_::
+	dr $1981f8, $198219
+Text_StopLearning_::
+	dr $198219, $19822f
+Text_DidNotLearn_::
+	dr $19822f, $198249
+Text_TryingToLearn_::
+	dr $198249, $1982c0
+Text_1_2_and_Poof_::
+	dr $1982c0, $1982ce
+Text_PoofForgot_::
+	dr $1982ce, $1982f2
+Text_CantForgetHM_::
+	dr $1982f2, $19c000
 
 SECTION "bank67", ROMX, BANK[$67]
 	dr $19c000, $1a0000

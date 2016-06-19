@@ -224,7 +224,7 @@ Function20c7:: ; 20c7 (0:20c7)
 	ld [wd05b], a
 	ld [hSCY], a
 	ld [hSCX], a
-	callba Function58c5
+	callba ApplyBGMapAnchorToObjects
 	ld a, $60
 	ld bc, $400
 	ld hl, $9800

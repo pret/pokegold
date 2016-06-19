@@ -1705,6 +1705,7 @@ GetBaseData::
 GetCurNick::
 	ld a, [wd005]
 	ld hl, wPartyMon1Nickname
+GetNick::
 	push hl
 	push bc
 	call SkipNames
