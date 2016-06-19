@@ -202,14 +202,8 @@ INCLUDE "engine/math.asm"
 ItemAttributes:
 INCLUDE "items/item_attributes.asm"
 INCLUDE "engine/npc_movement.asm"
-
-IF DEF(GOLD)
-	dr $726c, $754e
-ENDC
-
-IF DEF(SILVER)
-	dr $7232, $7514
-ENDC
+INCLUDE "event/happiness_egg.asm"
+INCLUDE "event/special.asm"
 
 SECTION "bank2", ROMX, BANK[$2]
 SwapTextboxPalettes::
@@ -252,7 +246,11 @@ CheckItem_::
 GetTMHMNumber::
 	dr $d414, $d434
 CheckTossableItem_::
-	dr $d434, $e7a6
+	dr $d434, $e03f
+RemoveMonFromPartyOrBox:
+	dr $e03f, $e513
+CheckCurPartyMonFainted:
+	dr $e513, $e7a6
 DoItemEffect_::
 	dr $e7a6, $fa3e
 ENDC
@@ -268,7 +266,11 @@ CheckItem_::
 GetTMHMNumber::
 	dr $d412, $d432
 CheckTossableItem_::
-	dr $d432, $e7a4
+	dr $d432, $e03d
+RemoveMonFromPartyOrBox:
+	dr $e03d, $e511
+CheckCurPartyMonFainted:
+	dr $e511, $e7a4
 DoItemEffect_::
 	dr $e7a4, $fa3c
 ENDC
@@ -316,7 +318,9 @@ TryLoadSaveFile: ; 14ef5
 RunMapSetupScript::
 	dr $15484, $15612
 Function15612:: ; 15612
-	dr $15612, $1783e
+	dr $15612, $171d1
+Function171d1:
+	dr $171d1, $1783e
 
 SECTION "bank6", ROMX, BANK[$6]
 	dr $18000, $1bdbc
@@ -402,6 +406,7 @@ SECTION "bank13", ROMX, BANK[$13]
 	dr $4c000, $50000
 
 SECTION "bank14", ROMX, BANK[$14]
+Function50000:
 	dr $50000, $51b0b
 BaseData:: ; 51b0b
 	dr $51b0b, $53a83

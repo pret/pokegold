@@ -9,7 +9,7 @@
 	predef_const FillPP
 	predef_const TryAddMonToParty
 	predef_const AddTempmonToParty
-	predef_const SentGetPkmnIntoFromBox
+	predef_const SentGetPkmnIntoFromBox ; $8
 	predef_const SentPkmnIntoBox
 	predef_const GiveEgg
 	predef_const AnimateHPBar
@@ -17,7 +17,7 @@
 	predef_const CalcPkmnStatC
 	predef_const CanLearnTMHMMove
 	predef_const GetTMHMMove
-	predef_const Predef_LinkTextbox ; $ 10
+	predef_const Predef_LinkTextbox ; $10
 	predef_const PrintMoveDesc
 	predef_const UpdatePlayerHUD
 	predef_const PlaceGraphic
