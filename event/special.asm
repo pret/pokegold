@@ -34,7 +34,7 @@ Function73e1:
 	call SkipNames
 	ld de, ManiaName
 	call CopyName2
-	ld hl, wd968
+	ld hl, wDailyFlags
 	set 5, [hl]
 	ld a, $1
 	ld [wd173], a

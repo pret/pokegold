@@ -144,7 +144,7 @@ StepHappiness::
 	ret
 
 DaycareStep::
-	ld a, [wdc40]
+	ld a, [wDayCareMan]
 	bit 0, a
 	jr z, .daycare_lady
 	ld a, [wdc76]
@@ -164,7 +164,7 @@ DaycareStep::
 	ld a, 5242880 / $10000
 	ld [hl], a
 .daycare_lady
-	ld a, [wdc77]
+	ld a, [wDaycareLady]
 	bit 0, a
 	jr z, .check_egg
 	ld a, [wdcaf]
@@ -184,7 +184,7 @@ DaycareStep::
 	ld a, 5242880 / $10000
 	ld [hl], a
 .check_egg
-	ld hl, wdc40
+	ld hl, wDayCareMan
 	bit 5, [hl]
 	ret z
 	ld hl, wdc78
@@ -210,7 +210,7 @@ DaycareStep::
 	call Random
 	cp b
 	ret nc
-	ld hl, wdc40
+	ld hl, wDayCareMan
 	res 5, [hl]
 	set 6, [hl]
 	ret

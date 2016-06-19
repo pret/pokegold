@@ -2358,7 +2358,7 @@ GetMapHeaderMusic::
 	ret
 
 .asm_2dad
-	ld a, [wd572]
+	ld a, [wStatusFlags2]
 	bit 0, a
 	jr z, .asm_2db9
 	ld de, $56
@@ -2372,7 +2372,7 @@ GetMapHeaderMusic::
 	jr .asm_2daa
 
 .asm_2dc1
-	ld a, [wd572]
+	ld a, [wStatusFlags2]
 	bit 7, a
 	jr z, .asm_2dcd
 	ld de, $48

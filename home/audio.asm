@@ -341,7 +341,7 @@ SpecialMapMusic:: ; 3f40 (0:3f40)
 	jr z, .asm_3f59
 	cp $8
 	jr z, .asm_3f59
-	ld a, [wd572]
+	ld a, [wStatusFlags2]
 	bit 2, a
 	jr nz, .asm_3f5e
 .asm_3f52

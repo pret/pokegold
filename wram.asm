@@ -2894,12 +2894,12 @@ wd56e:: ds 1 ; d56e
 wd56f:: ds 1 ; d56f
 wd570:: ds 1 ; d570
 wStatusFlags:: ds 1 ; d571
-wd572:: ds 1 ; d572
+wStatusFlags2:: ds 1 ; d572
 wMoney:: ds 3 ; d573
 wd576:: ds 1 ; d576
 wd577:: ds 1 ; d577
 wd578:: ds 1 ; d578
-wd579:: ds 1 ; d579
+wMomSavingMoney:: ds 1 ; d579
 
 wCoins:: dw ; d57a
 
@@ -3161,7 +3161,7 @@ wd678:: ds 1 ; d678
 wd679:: ds 1 ; d679
 wd67a:: ds 1 ; d67a
 wd67b:: ds 1 ; d67b
-wd67c:: ds 1 ; d67c
+wPokegearFlags:: ds 1 ; d67c
 wd67d:: ds 1 ; d67d
 wd67e:: ds 1 ; d67e
 wd67f:: ds 1 ; d67f
@@ -3660,8 +3660,8 @@ wMomItemTriggerBalance:: ds 3 ; d963
 
 wd966:: ds 1 ; d966
 wd967:: ds 1 ; d967
-wd968:: ds 1 ; d968
-wd969:: ds 1 ; d969
+wDailyFlags:: ds 1 ; d968
+wWeeklyFlags:: ds 1 ; d969
 wd96a:: ds 1 ; d96a
 wd96b:: ds 1 ; d96b
 wd96c:: ds 1 ; d96c
@@ -3687,7 +3687,7 @@ wd97f:: ds 1 ; d97f
 wd980:: ds 1 ; d980
 wd981:: ds 1 ; d981
 wd982:: ds 1 ; d982
-wd983:: ds 1 ; d983
+wUnusedTwoDayTimerOn:: ds 1 ; d983
 wd984:: ds 1 ; d984
 wd985:: ds 1 ; d985
 wd986:: ds 1 ; d986
@@ -3787,17 +3787,17 @@ wd9e3:: ds 1 ; d9e3
 wd9e4:: ds 1 ; d9e4
 wd9e5:: ds 1 ; d9e5
 wd9e6:: ds 1 ; d9e6
-wd9e7:: ds 1 ; d9e7
+wLuckyNumberShowFlag:: ds 1 ; d9e7
 wd9e8:: ds 1 ; d9e8
 wd9e9:: ds 1 ; d9e9
 wd9ea:: ds 1 ; d9ea
 wd9eb:: ds 1 ; d9eb
 wd9ec:: ds 1 ; d9ec
 wd9ed:: ds 1 ; d9ed
-wd9ee:: ds 1 ; d9ee
-wd9ef:: ds 1 ; d9ef
-wd9f0:: ds 1 ; d9f0
-wd9f1:: ds 1 ; d9f1
+
+wMapData::
+wVisitedSpawns:: ds 4 ; flag_array NUM_SPAWNS ; d9ee
+
 wd9f2:: ds 1 ; d9f2
 wd9f3:: ds 1 ; d9f3
 wd9f4:: ds 1 ; d9f4
@@ -3905,35 +3905,10 @@ wdbe3:: ds 1 ; dbe3
 wPokedexCaught:: flag_array NUM_POKEMON ; dbe4
 wPokedexSeen::   flag_array NUM_POKEMON ; dc04
 
-wdc24:: ds 1 ; dc24
-wdc25:: ds 1 ; dc25
-wdc26:: ds 1 ; dc26
-wdc27:: ds 1 ; dc27
-wdc28:: ds 1 ; dc28
-wdc29:: ds 1 ; dc29
-wdc2a:: ds 1 ; dc2a
-wdc2b:: ds 1 ; dc2b
-wdc2c:: ds 1 ; dc2c
-wdc2d:: ds 1 ; dc2d
-wdc2e:: ds 1 ; dc2e
-wdc2f:: ds 1 ; dc2f
-wdc30:: ds 1 ; dc30
-wdc31:: ds 1 ; dc31
-wdc32:: ds 1 ; dc32
-wdc33:: ds 1 ; dc33
-wdc34:: ds 1 ; dc34
-wdc35:: ds 1 ; dc35
-wdc36:: ds 1 ; dc36
-wdc37:: ds 1 ; dc37
-wdc38:: ds 1 ; dc38
-wdc39:: ds 1 ; dc39
-wdc3a:: ds 1 ; dc3a
-wdc3b:: ds 1 ; dc3b
-wdc3c:: ds 1 ; dc3c
-wdc3d:: ds 1 ; dc3d
-wdc3e:: ds 1 ; dc3e
+wUnownDex:: ds 26 ; dc24
+wUnlockedUnowns:: ds 1 ; dc3e
 wdc3f:: ds 1 ; dc3f
-wdc40:: ds 1 ; dc40
+wDayCareMan:: ds 1 ; dc40
 wdc41:: ds 1 ; dc41
 wdc42:: ds 1 ; dc42
 wdc43:: ds 1 ; dc43
@@ -3988,7 +3963,7 @@ wdc73:: ds 1 ; dc73
 wdc74:: ds 1 ; dc74
 wdc75:: ds 1 ; dc75
 wdc76:: ds 1 ; dc76
-wdc77:: ds 1 ; dc77
+wDaycareLady:: ds 1 ; dc77
 wdc78:: ds 1 ; dc78
 wdc79:: ds 1 ; dc79
 wdc7a:: ds 1 ; dc7a

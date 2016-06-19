@@ -252,9 +252,7 @@ TimeOfDayTable: ; c012
 	db NITE, 1 << NITE
 	db -1
 
-EngineFlagAction:: ; c01b
-	dr $c01b, $c164
-
+INCLUDE "engine/engine_flags.asm"
 INCLUDE "engine/variables.asm"
 
 IF DEF(GOLD)
