@@ -145,10 +145,61 @@ LoadFonts_NoOAMUpdate:: ; 65cb (1:65cb)
 
 INCLUDE "engine/learn.asm"
 
-CheckNickErrors:: ; 677e
-IF DEF(GOLD)
-	dr $677e, $67bd
+CheckNickErrors:: ; 677e (1:677e)
+	push bc
+	push de
+	ld b, PKMN_NAME_LENGTH
+.checkchar
+	ld a, [de]
+	cp "@"
+	jr z, .done
+	ld hl, .textcommands
+	dec hl
+.loop
+	inc hl
+	ld a, [hl]
+	cp $ff
+	jr z, .next
+	ld a, [de]
+	cp [hl]
+	inc hl
+	jr c, .loop
+	cp [hl]
+	jr nc, .loop
+	ld a, "?"
+	ld [de], a
+	jr .loop
+.next
+	inc de
+	dec b
+	jr nz, .checkchar
+	pop de
+	push de
+	ld a, "?"
+	ld [de], a
+	inc de
+	ld a, "@"
+	ld [de], a
+.done
+	pop de
+	pop bc
+	ret
+
+.textcommands
+; table defining which characters are actually text commands
+; format:
+	;      ≥           <
+	db "<START>",  $04       + 1
+	db "<PLAY_G>", $18       + 1
+	db $1d,        "%"       + 1
+	db $35,        "<GREEN>" + 1
+	db "<ENEMY>",  "<ENEMY>" + 1
+	db $49,        "<TM>"    + 1
+	db "<ROCKET>", "┘"       + 1
+	db -1 ; end
+
 Multiply_:: ; 67bd
+IF DEF(GOLD)
 	dr $67bd, $681d
 Divide_:: ; 681d
 	dr $681d, $6fa0
@@ -157,8 +208,6 @@ CheckNPCMovementPermissions: ; 6fa0
 ENDC
 
 IF DEF(SILVER)
-	dr $6744, $6783
-Multiply_:: ; 6783
 	dr $6783, $67e3
 Divide_:: ; 67e3
 	dr $67e3, $6f66
