@@ -269,7 +269,7 @@ Function2112::
 	xor a
 	ld [hTileAnimFrame], a
 	callba Function1416d
-	call Functiondac
+	call LoadFontsExtra
 	ret
 
 Function2128::
@@ -1938,7 +1938,7 @@ GetCoordTile:: ; 2b21 (0:2b21)
 	inc hl
 .asm_2b41
 	ld a, [wd0c8]
-	call SwapBytes
+	call GetFarByte
 	ret
 
 .asm_2b48
@@ -2104,7 +2104,7 @@ FadeToMenu::
 	ret
 
 CloseSubmenu::
-	call Function3449
+	call ClearBGPalettes
 	call ReloadTilesetAndPalettes
 	call UpdateSprites
 	call Call_ExitMenu
@@ -2112,7 +2112,7 @@ CloseSubmenu::
 	jr FinishExitMenu
 
 ExitAllMenus::
-	call Function3449
+	call ClearBGPalettes
 	call Call_ExitMenu
 	call ReloadTilesetAndPalettes
 	call UpdateSprites
@@ -2129,7 +2129,7 @@ ReturnToMapWithSpeechTextbox::
 	push af
 	ld a, $1
 	ld [wRTCEnabled], a
-	call Function3449
+	call ClearBGPalettes
 	call ClearSprites
 	call ReloadTilesetAndPalettes
 	hlcoord 0, 12
@@ -2153,7 +2153,7 @@ ReloadTilesetAndPalettes:: ; 2c87 (0:2c87)
 	call ClearSprites
 	callba RefreshSprites
 	call Functiond9e
-	call Functiondac
+	call LoadFontsExtra
 	ld a, [hROMBank]
 	push af
 	ld a, [wMapGroup]
@@ -2277,7 +2277,7 @@ GetAnyMapBlockdataBank:: ; 2d34 (0:2d34)
 	ld de, $3
 	add hl, de
 	ld a, c
-	call SwapBytes
+	call GetFarByte
 	rst Bankswitch
 	pop bc
 	pop de

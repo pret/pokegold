@@ -243,7 +243,7 @@ FadeToMapMusic::
 	ld a, e
 	ld [wMusicFadeID], a
 	ld a, d
-	ld [wc1aa], a
+	ld [wMusicFadeID + 1], a
 	ld a, e
 	ld [wChannelsEnd], a
 .asm_3eb8

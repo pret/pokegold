@@ -6,7 +6,6 @@ CHRIS EQU __enum__
 	const PHONECONTACT_BIKESHOP
 	const PHONECONTACT_BILL
 	const PHONECONTACT_ELM
-	const PHONECONTACT_BUENA
 
 KRIS EQU __enum__
 	trainerclass FALKNER ; 1
@@ -611,9 +610,6 @@ KRIS EQU __enum__
 	const DIRK
 
 	trainerclass GRUNTF ; 42
-
-	trainerclass MYSTICALMAN ; 43
-	const EUSINE
 
 NUM_TRAINER_CLASSES EQU __enum__
 

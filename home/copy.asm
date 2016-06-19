@@ -36,7 +36,7 @@ Functionda5::
 	callba Functionf8032
 	ret
 
-Functiondac::
+LoadFontsExtra::
 	callba Functionf800c
 	ret
 

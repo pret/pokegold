@@ -237,12 +237,12 @@ ReloadTilesFromBuffer_::
 
 Function317b:: ; 317b (0:317b)
 	ld hl, wStringBuffer2
-.asm_317e
+CopyName2::
 	ld a, [de]
 	inc de
 	ld [hli], a
-	cp $50
-	jr nz, .asm_317e
+	cp "@"
+	jr nz, CopyName2
 	ret
 
 IsInArray::
@@ -704,7 +704,7 @@ Function343a::
 	and a
 	ret
 
-Function3449::
+ClearBGPalettes::
 	call ClearPalettes
 WaitBGMap:: ; 344c (0:344c)
 	ld a, $1
@@ -1629,7 +1629,7 @@ PrepMonFrontpic_::
 INCLUDE "home/cry.asm"
 
 PrintLevel:: ; 3a50
-	ld a, [wd02a]
+	ld a, [wTempMonLevel]
 	ld [hl], $6e
 	inc hl
 	ld c, $2

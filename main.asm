@@ -48,12 +48,10 @@ PushOAM:
 PushOAMEnd
 
 INCLUDE "engine/map_objects.asm"
+INCLUDE "engine/main_menu.asm"
+INCLUDE "engine/title.asm"
 
-MainMenu_: ; 5a4d
 IF DEF(GOLD)
-	dr $5a4d, $6545
-GameInit:: ; 6545
-	dr $6545, $6551
 ReanchorBGMap_NoOAMUpdate:: ; 6551
 	dr $6551, $65cb
 LoadFonts_NoOAMUpdate:: ; 65cb
@@ -69,9 +67,6 @@ CheckNPCMovementPermissions: ; 6fa0
 ENDC
 
 IF DEF(SILVER)
-	dr $5a4d, $650b
-GameInit:: ; 650b
-	dr $650b, $6517
 ReanchorBGMap_NoOAMUpdate:: ; 6517
 	dr $6517, $6591
 LoadFonts_NoOAMUpdate:: ; 6591
@@ -90,7 +85,9 @@ SECTION "bank2", ROMX, BANK[$2]
 SwapTextboxPalettes::
 	dr $8000, $804f
 ScrollBGMapPalettes::
-	dr $804f, $8653
+	dr $804f, $861a
+SpawnPlayer:
+	dr $861a, $8653
 CopyDECoordsToMapObject:
 	dr $8653, $86d7
 CopyObjectStruct_::
@@ -104,7 +101,9 @@ Sine_e::
 GetPredefPointer::
 	dr $8b3b, $8b5b
 PredefPointers::
-	dr $8b5b, $9cfd
+	dr $8b5b, $91e5
+ApplyMonOrTrainerPals:
+	dr $91e5, $9cfd
 InitCGBPals:: ; 9cfd
 	dr $9cfd, $bc3a
 
@@ -146,14 +145,22 @@ ENDC
 
 SECTION "bank4", ROMX, BANK[$4]
 Function10000::
-	dr $10000, $13e03
+	dr $10000, $117f1
+InitializeStartDay_:
+	dr $117f1, $11934
+Function11934:
+	dr $11934, $11aad
+NamingScreen:
+	dr $11aad, $13e03
 
 SECTION "bank5", ROMX, BANK[$5]
 	dr $14000, $14032
 Function14032:: ; 14032
 	dr $14032, $14089
 StartClock:: ; 14089
-	dr $14089, $140ff
+	dr $14089, $140dc
+ClockContinue: ; 140dc
+	dr $140dc, $140ff
 Function140ff:: ; 140ff
 	dr $140ff, $1413c
 Function1413c:: ; 1413c
@@ -173,7 +180,9 @@ Function14a18:: ; 14a18
 Function14a2d:: ; 14a2d
 	dr $14a2d, $14a44
 Function14a44: ; 14a44
-	dr $14a44, $15484
+	dr $14a44, $14ef5
+TryLoadSaveFile: ; 14ef5
+	dr $14ef5, $15484
 RunMapSetupScript::
 	dr $15484, $15612
 Function15612:: ; 15612
@@ -207,10 +216,18 @@ InitVerticalMenuCursor_::
 InitScrollingMenu::
 	dr $244d7, $244f3
 ScrollingMenu_::
-	dr $244f3, $28000
+	dr $244f3, $2692d
+InitDecorations: ; 2692d
+	dr $2692d, $28000
 
 SECTION "banka", ROMX, BANK[$a]
-	dr $28000, $2c000
+	dr $28000, $29dff
+Function29dff:
+	dr $29dff, $2a4bf
+MysteryGift_CopyReceivedDecosToPC:
+	dr $2a4bf, $2a8e0
+JumpRoamMons:
+	dr $2a8e0, $2c000
 
 SECTION "bankb", ROMX, BANK[$b]
 	dr $2c000, $30000
@@ -242,7 +259,9 @@ SECTION "bank10", ROMX, BANK[$10]
 	dr $40000, $44000
 
 SECTION "bank11", ROMX, BANK[$11]
-	dr $44000, $48000
+	dr $44000, $44870
+DeletePartyMonMail:
+	dr $44870, $48000
 
 SECTION "bank12", ROMX, BANK[$12]
 	dr $48000, $4c000
@@ -303,7 +322,13 @@ SECTION "bank22", ROMX, BANK[$22]
 	dr $88000, $8c000
 
 SECTION "bank23", ROMX, BANK[$23]
-	dr $8c000, $8c356
+	dr $8c000, $8c17a
+
+ResetClock_:
+	dr $8c17a, $8c310
+
+DeleteSaveData_:
+	dr $8c310, $8c356
 
 UpdateTimeOfDayPal:: ; 8c356
 	dr $8c356, $8c366
@@ -321,7 +346,13 @@ Function8c3ab:: ; 8c3ab
 	dr $8c3ab, $8c3e9
 
 Function8c3e9:: ; 8c3e9
-	dr $8c3e9, $8d1f7
+	dr $8c3e9, $8d174
+
+ClearAnimatedObjectBuffer:
+	dr $8d174, $8d18a
+
+AnimatedObjects_PlayFrame:
+	dr $8d18a, $8d1f7
 
 InitAnimatedObjectStruct_:: ; 8d1f7
 	dr $8d1f7, $8d332
@@ -330,14 +361,21 @@ ReinitAnimatedObjectFrame_:: ; 8d332
 	dr $8d332, $90000
 
 SECTION "bank24", ROMX, BANK[$24]
-	dr $90000, $94000
+	dr $90000, $90641
+InitClock:
+	dr $90641, $90b0f
+PrintHour:
+	dr $90b0f, $94000
 
 SECTION "bank25", ROMX, BANK[$25]
 MapTriggers:: ; 94000
 	dr $94000, $940ed
 
 MapGroupPointers::
-	dr $940ed, $96b89
+	dr $940ed, $965f9
+
+OverworldLoop::
+	dr $965f9, $96b89
 
 EnableScriptMode:: ; 96b89
 	dr $96b89, $96b91
@@ -352,7 +390,23 @@ Function97c2a:: ; 97c2a
 	dr $97c2a, $98000
 
 SECTION "bank26", ROMX, BANK[$26]
-	dr $98000, $9c000
+IF DEF(GOLD)
+TitleScreenGFX1:
+	dr $98000, $98476
+TitleScreenGFX2:
+	dr $98476, $98616
+GSIntroTilemap:
+	dr $98616, $9c000
+ENDC
+
+IF DEF(SILVER)
+TitleScreenGFX1:
+	dr $98000, $98498
+TitleScreenGFX2:
+	dr $98498, $9862a
+GSIntroTilemap:
+	dr $9862a, $9c000
+ENDC
 
 SECTION "bank27", ROMX, BANK[$27]
 	dr $9c000, $a0000
@@ -382,6 +436,7 @@ SECTION "bank2f", ROMX, BANK[$2f]
 	dr $bc000, $c0000
 
 SECTION "bank30", ROMX, BANK[$30]
+PlayerIcon:
 	dr $c0000, $c4000
 
 SECTION "bank31", ROMX, BANK[$31]
@@ -411,7 +466,32 @@ SECTION "bank38", ROMX, BANK[$38]
 	dr $e0000, $e4000
 
 SECTION "bank39", ROMX, BANK[$39]
-	dr $e4000, $e8000
+TitleScreenGFX5:
+	dr $e4000, $e41e0
+TitleScreenGFX3:
+IF DEF(GOLD)
+	dr $e41e0, $e4260
+TitleScreenGFX4:
+	dr $e4260, $e4608
+OptionsMenu:
+	dr $e4608, $e49a8
+Copyright_GFPresents:
+	dr $e49a8, $e4cb1
+GoldSilverIntro:
+	dr $e4cb1, $e8000
+ENDC
+
+IF DEF(SILVER)
+	dr $e41e0, $e4220
+TitleScreenGFX4:
+	dr $e4220, $e4450
+OptionsMenu:
+	dr $e4450, $e47f0
+Copyright_GFPresents:
+	dr $e47f0, $e4af9
+GoldSilverIntro:
+	dr $e4af9, $e8000
+ENDC
 
 SECTION "bank3a", ROMX, BANK[$3a]
 DisableAudio_::
@@ -449,7 +529,11 @@ Functionf8032::
 	dr $f8032, $fb4be
 
 TileCollisionTable::
-	dr $fb4be, $fc000
+	dr $fb4be, $fb5be
+Shrink1Pic:
+	dr $fb5be, $fb64e
+Shrink2Pic:
+	dr $fb64e, $fc000
 
 SECTION "bank3f", ROMX, BANK[$3f]
 	dr $fc000, $100000
@@ -567,7 +651,31 @@ SECTION "bank64", ROMX, BANK[$64]
 	dr $190000, $194000
 
 SECTION "bank65", ROMX, BANK[$65]
-	dr $194000, $195b84
+	dr $194000, $195610
+
+ClockTimeUnknownText_:: ; 195610
+	dr $195610, $195624
+
+OakText1_::
+	dr $195624, $195693
+
+OakText2_::
+	dr $195693, $1956d1
+
+OakText3_:: ; 1956d1
+	dr $1956d1, $1956d3
+
+OakText4_::
+	dr $1956d3, $19573f
+
+OakText5_::
+	dr $19573f, $1957b7
+
+OakText6_::
+	dr $1957b7, $1957dd
+
+OakText7_::
+	dr $1957dd, $195b84
 
 ObjectEventText_:: ; 195b84
 	dr $195b84, $195b93

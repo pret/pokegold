@@ -13,7 +13,7 @@ CopyBytes:: ; 311a (0:311a)
 	jr nz, .asm_311e
 	ret
 
-SwapBytes:: ; 3128 (0:3128)
+GetFarByte:: ; 3128 (0:3128)
 	ld [wBuffer], a
 	ld a, [hROMBank]
 	push af

@@ -451,7 +451,7 @@ GetInitialFacing::
 	add hl, de
 	add hl, de
 	ld a, BANK(SpriteMovementData)
-	call SwapBytes
+	call GetFarByte
 	add a
 	add a
 	and $c

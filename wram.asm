@@ -87,10 +87,8 @@ wMusicFade:: ; c1a7
 wMusicFadeCount:: ; c1a8
 	ds 1
 wMusicFadeID::
-wc1a9::
 wMusicFadeIDLo:: ; c1a9
 	ds 1
-wc1aa::
 wMusicFadeIDHi:: ; c1aa
 	ds 1
 	ds 5
@@ -2386,6 +2384,8 @@ wd000:: ds 1 ; d000
 wd001:: ds 1 ; d001
 wd002:: ds 1 ; d002
 wd003:: ds 1 ; d003
+
+wCurPartySpecies::
 wd004:: ds 1 ; d004
 wd005:: ds 1 ; d005
 wd006:: ds 1 ; d006
@@ -2393,54 +2393,9 @@ wd007:: ds 1 ; d007
 wd008:: ds 1 ; d008
 wd009:: ds 1 ; d009
 wd00a:: ds 1 ; d00a
-wd00b:: ds 1 ; d00b
-wd00c:: ds 1 ; d00c
-wd00d:: ds 1 ; d00d
-wd00e:: ds 1 ; d00e
-wd00f:: ds 1 ; d00f
-wd010:: ds 1 ; d010
-wd011:: ds 1 ; d011
-wd012:: ds 1 ; d012
-wd013:: ds 1 ; d013
-wd014:: ds 1 ; d014
-wd015:: ds 1 ; d015
-wd016:: ds 1 ; d016
-wd017:: ds 1 ; d017
-wd018:: ds 1 ; d018
-wd019:: ds 1 ; d019
-wd01a:: ds 1 ; d01a
-wd01b:: ds 1 ; d01b
-wd01c:: ds 1 ; d01c
-wd01d:: ds 1 ; d01d
-wd01e:: ds 1 ; d01e
-wd01f:: ds 1 ; d01f
-wd020:: ds 1 ; d020
-wd021:: ds 1 ; d021
-wd022:: ds 1 ; d022
-wd023:: ds 1 ; d023
-wd024:: ds 1 ; d024
-wd025:: ds 1 ; d025
-wd026:: ds 1 ; d026
-wd027:: ds 1 ; d027
-wd028:: ds 1 ; d028
-wd029:: ds 1 ; d029
-wd02a:: ds 1 ; d02a
-wd02b:: ds 1 ; d02b
-wd02c:: ds 1 ; d02c
-wd02d:: ds 1 ; d02d
-wd02e:: ds 1 ; d02e
-wd02f:: ds 1 ; d02f
-wd030:: ds 1 ; d030
-wd031:: ds 1 ; d031
-wd032:: ds 1 ; d032
-wd033:: ds 1 ; d033
-wd034:: ds 1 ; d034
-wd035:: ds 1 ; d035
-wd036:: ds 1 ; d036
-wd037:: ds 1 ; d037
-wd038:: ds 1 ; d038
-wd039:: ds 1 ; d039
-wd03a:: ds 1 ; d03a
+
+wTempMon:: party_struct wTempMon ; d00b
+
 wd03b:: ds 1 ; d03b
 wd03c:: ds 1 ; d03c
 wd03d:: ds 1 ; d03d
@@ -2739,6 +2694,8 @@ wd195:: ds 1 ; d195
 wd196:: ds 1 ; d196
 wd197:: ds 1 ; d197
 wd198:: ds 1 ; d198
+
+Options::
 wd199:: ds 1 ; d199
 wd19a:: ds 1 ; d19a
 wd19b:: ds 1 ; d19b
@@ -2747,8 +2704,10 @@ wd19d:: ds 1 ; d19d
 wd19e:: ds 1 ; d19e
 wd19f:: ds 1 ; d19f
 wd1a0:: ds 1 ; d1a0
-wd1a1:: ds 1 ; d1a1
-wd1a2:: ds 1 ; d1a2
+
+SECTION "Game Data", WRAMX, BANK[1]
+wGameData::
+wPlayerID:: dw ; d1a1
 
 wPlayersName:: ds NAME_LENGTH ; d1a3
 wMomsName:: ds NAME_LENGTH ; d1ae
@@ -2756,7 +2715,7 @@ wRivalsName:: ds NAME_LENGTH ; d1b9
 wRedsName:: ds NAME_LENGTH ; d1c4
 wGreensName:: ds NAME_LENGTH ; d1cf
 
-wd1da:: ds 1 ; d1da
+wSavedAtLeastOnce:: ds 1 ; d1da
 wd1db:: ds 1 ; d1db
 wd1dc:: ds 1 ; d1dc
 wd1dd:: ds 1 ; d1dd
@@ -2936,17 +2895,16 @@ wd56f:: ds 1 ; d56f
 wd570:: ds 1 ; d570
 wStatusFlags:: ds 1 ; d571
 wd572:: ds 1 ; d572
-wd573:: ds 1 ; d573
-wd574:: ds 1 ; d574
-wd575:: ds 1 ; d575
+wMoney:: ds 3 ; d573
 wd576:: ds 1 ; d576
 wd577:: ds 1 ; d577
 wd578:: ds 1 ; d578
 wd579:: ds 1 ; d579
-wd57a:: ds 1 ; d57a
-wd57b:: ds 1 ; d57b
-wd57c:: ds 1 ; d57c
-wd57d:: ds 1 ; d57d
+
+wCoins:: dw ; d57a
+wJohtoBadges:: ds 1 ; d57c
+wKantoBadges:: ds 1 ; d57d
+
 wd57e:: ds 1 ; d57e
 wd57f:: ds 1 ; d57f
 wd580:: ds 1 ; d580
@@ -3695,9 +3653,9 @@ wd95f:: ds 1 ; d95f
 wd960:: ds 1 ; d960
 wd961:: ds 1 ; d961
 wd962:: ds 1 ; d962
-wd963:: ds 1 ; d963
-wd964:: ds 1 ; d964
-wd965:: ds 1 ; d965
+
+wMomItemTriggerBalance:: ds 3 ; d963
+
 wd966:: ds 1 ; d966
 wd967:: ds 1 ; d967
 wd968:: ds 1 ; d968
@@ -4280,6 +4238,8 @@ wOTPartyMon3Nickname:: ds PKMN_NAME_LENGTH ; ded5
 wOTPartyMon4Nickname:: ds PKMN_NAME_LENGTH ; dee0
 wOTPartyMon5Nickname:: ds PKMN_NAME_LENGTH ; deeb
 wOTPartyMon6Nickname:: ds PKMN_NAME_LENGTH ; def6
+
+wGameDataEnd::
 
 SECTION "Stack", WRAMX[$dfff], BANK[1]
 
