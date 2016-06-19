@@ -24,13 +24,7 @@ LAST_TALKED EQU -2
 	const VAR_XCOORD           ; 12
 	const VAR_YCOORD           ; 13
 	const VAR_SPECIALPHONECALL ; 14
-	const VAR_BT_WIN_STREAK    ; 15
-	const VAR_KURT_APRICORNS   ; 16
-	const VAR_CALLERID         ; 17
-	const VAR_BLUECARDBALANCE  ; 18
-	const VAR_BUENASPASSWORD   ; 19
-	const VAR_KENJI_BREAK      ; 1a
-NUM_VARS EQU const_value       ; 1b
+NUM_VARS EQU const_value       ; 15
 
 RETVAR_STRBUF2 EQU (0 << 6)
 RETVAR_ADDR_DE EQU (1 << 6)

@@ -1533,7 +1533,7 @@ PrintWinText::
 	jr continue_battle_end_text
 
 which_battle_end_text
-	ld a, [wcfe9]
+	ld a, [wBattleResult]
 	ld hl, wWinTextPointer
 	and a
 	jr z, continue_battle_end_text

@@ -2355,7 +2355,7 @@ wVramState:: ds 1
 wcfe6:: ds 1 ; cfe6
 wcfe7:: ds 1 ; cfe7
 wcfe8:: ds 1 ; cfe8
-wcfe9:: ds 1 ; cfe9
+wBattleResult:: ds 1 ; cfe9
 wcfea:: ds 1 ; cfea
 wcfeb:: ds 1 ; cfeb
 wcfec:: ds 1 ; cfec
@@ -2902,6 +2902,8 @@ wd578:: ds 1 ; d578
 wd579:: ds 1 ; d579
 
 wCoins:: dw ; d57a
+
+wBadges::
 wJohtoBadges:: ds 1 ; d57c
 wKantoBadges:: ds 1 ; d57d
 

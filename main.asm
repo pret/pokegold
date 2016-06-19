@@ -233,13 +233,40 @@ InitCGBPals:: ; 9cfd
 	dr $9cfd, $bc3a
 
 SECTION "bank3", ROMX, BANK[$3]
-	dr $c000, $c01b
+CheckTime::
+	ld a, [wTimeOfDay]
+	ld hl, TimeOfDayTable
+	ld de, $2
+	call IsInArray
+	inc hl
+	ld c, [hl]
+	ret c
+	xor a
+	ld c, a
+	ret
+
+TimeOfDayTable: ; c012
+	db MORN, 1 << MORN
+	db DAY,  1 << DAY
+	db NITE, 1 << NITE
+	db NITE, 1 << NITE
+	db -1
+
 EngineFlagAction:: ; c01b
+	dr $c01b, $c164
+
+INCLUDE "engine/variables.asm"
 
 IF DEF(GOLD)
-	dr $c01b, $c69d
+	dr $c22b, $c5ac
+CountUnown:
+	dr $c5ac, $c661
+FlagPredef:
+	dr $c661, $c69d
 HealParty:
-	dr $c69d, $d1e2
+	dr $c69d, $c6de
+ComputeHPBarPixels:
+	dr $c6de, $d1e2
 ReceiveItem_::
 	dr $d1e2, $d21a
 TossItem_::
@@ -259,7 +286,11 @@ DoItemEffect_::
 ENDC
 
 IF DEF(SILVER)
-	dr $c01b, $c69b
+	dr $c22b, $c5aa
+CountUnown:
+	dr $c5aa, $c65f
+FlagPredef:
+	dr $c65f, $c69b
 HealParty:
 	dr $c69b, $d1e0
 ReceiveItem_::

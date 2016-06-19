@@ -297,9 +297,9 @@ Function5c41: ; 5c41 (1:5c41)
 
 	call Function5d1a
 
-	ld a, BANK(s1_ad6c)
+	ld a, BANK(sBoxCount)
 	call OpenSRAM
-	ld hl, s1_ad6c
+	ld hl, sBoxCount
 	call Function5d15
 	call CloseSRAM
 
