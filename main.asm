@@ -22,7 +22,7 @@ PlaceWaitingText:: ; 4000 (1:4000)
 .Waiting:
 	db "Waiting...!@"
 
-Function4031:
+Predef1:
 	ret
 
 LoadPushOAM:: ; 4032 (1:4032)
@@ -222,10 +222,11 @@ QueueFollowerFirstStep:
 	dr $8a7a, $8ac9
 Sine_e::
 	dr $8ac9, $8b3b
-GetPredefPointer::
-	dr $8b3b, $8b5b
-PredefPointers::
-	dr $8b5b, $91e5
+
+INCLUDE "engine/predef.asm"
+
+Function8c2d:
+	dr $8c2d, $91e5
 ApplyMonOrTrainerPals:
 	dr $91e5, $9cfd
 InitCGBPals:: ; 9cfd
@@ -236,7 +237,9 @@ SECTION "bank3", ROMX, BANK[$3]
 EngineFlagAction:: ; c01b
 
 IF DEF(GOLD)
-	dr $c01b, $d1e2
+	dr $c01b, $c69d
+HealParty:
+	dr $c69d, $d1e2
 ReceiveItem_::
 	dr $d1e2, $d21a
 TossItem_::
@@ -256,7 +259,9 @@ DoItemEffect_::
 ENDC
 
 IF DEF(SILVER)
-	dr $c01b, $d1e0
+	dr $c01b, $c69b
+HealParty:
+	dr $c69b, $d1e0
 ReceiveItem_::
 	dr $d1e0, $d218
 TossItem_::
