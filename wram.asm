@@ -2656,7 +2656,7 @@ wd16f:: ds 1 ; d16f
 wd170:: ds 1 ; d170
 wd171:: ds 1 ; d171
 wd172:: ds 1 ; d172
-wd173:: ds 1 ; d173
+wScriptVar:: ds 1 ; d173
 wd174:: ds 1 ; d174
 wd175:: ds 1 ; d175
 wd176:: ds 1 ; d176

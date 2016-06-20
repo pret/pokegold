@@ -37,12 +37,12 @@ Function73e1:
 	ld hl, wDailyFlags
 	set 5, [hl]
 	ld a, $1
-	ld [wd173], a
+	ld [wScriptVar], a
 	ret
 
 .asm_743f
 	xor a
-	ld [wd173], a
+	ld [wScriptVar], a
 	ret
 
 ManiaName:
@@ -96,36 +96,36 @@ Function7452:
 	callab RemoveMonFromPartyOrBox
 	ld a, $2
 .asm_74b6
-	ld [wd173], a
+	ld [wScriptVar], a
 	ret
 
 .asm_74ba
 	ld a, $1
-	ld [wd173], a
+	ld [wScriptVar], a
 	ret
 
 .asm_74c0
 	xor a
-	ld [wd173], a
+	ld [wScriptVar], a
 	ret
 
 .asm_74c5
 	ld a, $4
-	ld [wd173], a
+	ld [wScriptVar], a
 	ret
 
 Function74cb:
 	callba Function50000
 	jr c, .asm_74e2
 	ld a, [wd004]
-	ld [wd173], a
+	ld [wScriptVar], a
 	ld [wd151], a
 	call GetPokemonName
 	jp Function7542
 
 .asm_74e2
 	xor a
-	ld [wd173], a
+	ld [wScriptVar], a
 	ret
 
 Function74e7:
@@ -162,19 +162,19 @@ asm_74f4
 .asm_7518
 	inc hl
 	ld a, [hli]
-	ld [wd173], a
+	ld [wScriptVar], a
 	ld c, [hl]
 	call ChangeHappiness
 	ret
 
 .asm_7522
 	xor a
-	ld [wd173], a
+	ld [wScriptVar], a
 	ret
 
 .asm_7527
 	ld a, $1
-	ld [wd173], a
+	ld [wScriptVar], a
 	ret
 
 Data_752d:

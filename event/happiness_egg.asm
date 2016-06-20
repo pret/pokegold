@@ -4,7 +4,7 @@ GetFirstPokemonHappiness:
 	ld de, wPartySpecies
 .asm_7275
 	ld a, [de]
-	cp $fd
+	cp EGG
 	jr nz, .asm_727e
 	inc de
 	add hl, bc
@@ -13,19 +13,19 @@ GetFirstPokemonHappiness:
 .asm_727e
 	ld [wd151], a
 	ld a, [hl]
-	ld [wd173], a
+	ld [wScriptVar], a
 	call GetPokemonName
 	jp Function7542
 
 CheckFirstMonIsEgg:
 	ld a, [wPartySpecies]
 	ld [wd151], a
-	cp $fd
+	cp EGG
 	ld a, $1
 	jr z, .asm_7298
 	xor a
 .asm_7298
-	ld [wd173], a
+	ld [wScriptVar], a
 	call GetPokemonName
 	jp Function7542
 

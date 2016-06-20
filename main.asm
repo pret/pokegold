@@ -254,16 +254,10 @@ TimeOfDayTable: ; c012
 
 INCLUDE "engine/engine_flags.asm"
 INCLUDE "engine/variables.asm"
+INCLUDE "engine/specials.asm"
 
-IF DEF(GOLD)
-	dr $c22b, $c5ac
-CountUnown:
-	dr $c5ac, $c661
-FlagPredef:
-	dr $c661, $c69d
-HealParty:
-	dr $c69d, $c6de
 ComputeHPBarPixels:
+IF DEF(GOLD)
 	dr $c6de, $d1e2
 ReceiveItem_::
 	dr $d1e2, $d21a
@@ -284,13 +278,7 @@ DoItemEffect_::
 ENDC
 
 IF DEF(SILVER)
-	dr $c22b, $c5aa
-CountUnown:
-	dr $c5aa, $c65f
-FlagPredef:
-	dr $c65f, $c69b
-HealParty:
-	dr $c69b, $d1e0
+	dr $c6dc, $d1e0
 ReceiveItem_::
 	dr $d1e0, $d218
 TossItem_::
@@ -315,7 +303,9 @@ Function10000::
 InitializeStartDay_:
 	dr $117f1, $11934
 Function11934:
-	dr $11934, $11aad
+	dr $11934, $11aa3
+NamingScreen_:
+	dr $11aa3, $11aad
 NamingScreen:
 	dr $11aad, $13e03
 
