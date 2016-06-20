@@ -186,10 +186,21 @@ wc1fe:: ds 1 ; c1fe
 wc1ff:: ds 1 ; c1ff
 
 SECTION "GBC Palettes", WRAM0
-wUnknBGPals:: ds 8 * 8 ; c200
-wUnknOBPals:: ds 8 * 8 ; c240
-wBGPals::     ds 8 * 8 ; c280
-wOBPals::     ds 8 * 8 ; c2c0
+palbuffer: MACRO
+\1Pal0:: ds 8
+\1Pal1:: ds 8
+\1Pal2:: ds 8
+\1Pal3:: ds 8
+\1Pal4:: ds 8
+\1Pal5:: ds 8
+\1Pal6:: ds 8
+\1Pal7:: ds 8
+ENDM
+
+wTempBGPals:: palbuffer wTempBG ; c200
+wTempOBPals:: palbuffer wTempOB ; c240
+wBGPals::     palbuffer wBG     ; c280
+wOBPals::     palbuffer wOB     ; c2c0
 
 SECTION "OAM Buffer", WRAM0
 wOAMBuffer:: ; c300

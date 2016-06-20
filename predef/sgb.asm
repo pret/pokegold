@@ -71,7 +71,7 @@ Function8c97: ; 8c97 (2:4c97)
 	ld h, $0
 	add hl, hl
 	add hl, hl
-	ld de, BlkPacket_ad2d
+	ld de, Palettes_ad2d
 	add hl, de
 	ld a, [hli]
 	ld [wccac], a
@@ -86,7 +86,7 @@ Function8c97: ; 8c97 (2:4c97)
 	ld h, $0
 	add hl, hl
 	add hl, hl
-	ld de, BlkPacket_ad2d
+	ld de, Palettes_ad2d
 	add hl, de
 	ld a, [hli]
 	ld [wccb2], a
@@ -155,7 +155,7 @@ Function8d46: ; 8d46 (2:4d46)
 	ld h, $0
 	add hl, hl
 	add hl, hl
-	ld de, BlkPacket_ad2d
+	ld de, Palettes_ad2d
 	add hl, de
 	ld a, [hli]
 	ld [wccac], a

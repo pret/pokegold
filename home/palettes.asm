@@ -43,7 +43,7 @@ DmgToCgbBGPals:: ; c61 (0:0c61)
 	push de
 	push bc
 	ld hl, wBGPals
-	ld de, wUnknBGPals
+	ld de, wTempBGPals
 	ld a, [rBGP]
 	ld b, a
 	ld c, $8
@@ -69,7 +69,7 @@ DmgToCgbObjPals:: ; c83 (0:0c83)
 	push de
 	push bc
 	ld hl, wOBPals
-	ld de, wUnknOBPals
+	ld de, wTempOBPals
 	ld a, [rOBP0]
 	ld b, a
 	ld c, $8
@@ -91,7 +91,7 @@ DmgToCgbObjPal0::
 	push de
 	push bc
 	ld hl, wOBPals
-	ld de, wUnknOBPals
+	ld de, wTempOBPals
 	ld a, [rOBP0]
 	ld b, a
 	ld c, $1
@@ -115,7 +115,7 @@ DmgToCgbObjPal1::
 	push de
 	push bc
 	ld hl, wOBPals + 1 palettes
-	ld de, wUnknOBPals + 1 palettes
+	ld de, wTempOBPals + 1 palettes
 	ld a, [rOBP1]
 	ld b, a
 	ld c, $1

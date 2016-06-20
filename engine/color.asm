@@ -121,11 +121,11 @@ Function9102:
 	call CheckCGB
 	ret z
 	ld hl, .BGPal
-	ld de, wUnknBGPals
+	ld de, wTempBGPals
 	ld bc, $8
 	call CopyBytes
 	ld hl, .OBPal
-	ld de, wUnknOBPals
+	ld de, wTempOBPals
 	ld bc, $8
 	call CopyBytes
 	call Function9b28
@@ -164,7 +164,7 @@ Function9144:
 	jp PushSGBPals_
 
 .asm_9153
-	ld de, wUnknOBPals
+	ld de, wTempOBPals
 	ld a, $3b
 	call Function9ac7
 	jp Function9ad2
@@ -179,7 +179,7 @@ Function915e:
 	jp PushSGBPals_
 
 .asm_916d
-	ld de, wUnknOBPals
+	ld de, wTempOBPals
 	ld a, $3c
 	call Function9ac7
 	jp Function9ad2
@@ -210,7 +210,7 @@ Function9178:
 	jp PushSGBPals_
 
 .asm_91a9
-	ld de, wUnknOBPals
+	ld de, wTempOBPals
 	ld a, c
 	call Function9be4
 	call Function9adb
@@ -260,7 +260,7 @@ ApplyMonOrTrainerPals: ; 91e5 (2:51e5)
 	ld a, [wTrainerClass]
 	call Function9bda
 .asm_91fb
-	ld de, wUnknBGPals
+	ld de, wTempBGPals
 	call Function9adb
 	call Function9b1d
 	call Function9b35
@@ -324,11 +324,11 @@ LoadStatsScreenPals:
 	add hl, bc
 	add hl, bc
 	ld a, [hli]
-	ld [wUnknBGPals], a
-	ld [wUnknBGPals + $10], a
+	ld [wTempBGPals], a
+	ld [wTempBGPals + $10], a
 	ld a, [hl]
-	ld [wUnknBGPals + 1], a
-	ld [wUnknBGPals + $11], a
+	ld [wTempBGPals + 1], a
+	ld [wTempBGPals + $11], a
 	call Function9b28
 	ld a, $1
 	ld [hCGBPalUpdate], a
@@ -367,7 +367,7 @@ LoadMailPalettes:
 	ret
 
 .asm_92ae
-	ld de, wUnknBGPals
+	ld de, wTempBGPals
 	ld bc, $8
 	call CopyBytes
 	call Function9b28
@@ -431,7 +431,9 @@ INCLUDE "predef/cgb.asm"
 Function9a94:
 	dr $9a94, $9ab2
 Function9ab2:
-	dr $9ab2, $9ac7
+	dr $9ab2, $9ab7
+Function9ab7:
+	dr $9ab7, $9ac7
 Function9ac7:
 	dr $9ac7, $9ad2
 Function9ad2:
@@ -463,7 +465,9 @@ Function9bd3:
 Function9bda:
 	dr $9bda, $9be4
 Function9be4:
-	dr $9be4, $9c76
+	dr $9be4, $9c09
+Palettes_9c09:
+	dr $9c09, $9c76
 PushSGBPals_:
 	dr $9c76, $9cc0
 InitSGBBorder:
@@ -514,13 +518,17 @@ PalPacket_a005:
 	dr $a005, $a015
 
 PalPacket_a015:
-	dr $a015, $a025
+	db $51
+Palettes_a016:
+	dr $a016, $a025
 
 PalPacket_a025:
 	dr $a025, $a035
 
 PalPacket_a035:
-	dr $a035, $a045
+	db $51
+Palettes_a036:
+	dr $a036, $a045
 
 PalPacket_a045:
 	dr $a045, $a055
@@ -534,15 +542,24 @@ PalPacket_a095:
 	dr $a095, $a0a5
 
 PalPacket_a0a5:
-	dr $a0a5, $a0b5
+	db $51
+Palettes_a0a6:
+	dr $a0a6, $a0b5
 
 PalPacket_a0b5:
-	dr $a0b5, $a0c5
+	db $51
+Palettes_a0b6:
+	dr $a0b6, $a0c5
+
 PalPacket_a0c5:
-	dr $a0c5, $a0d5
+	db $51
+Palettes_a0c6:
+	dr $a0c6, $a0d5
 
 PalPacket_a0d5:
-	dr $a0d5, $a0e5
+	db $51
+Palettes_a0d6:
+	dr $a0d6, $a0e5
 
 PalPacket_a0e5:
 	dr $a0e5, $a105
@@ -551,13 +568,19 @@ PalPacket_a105:
 	dr $a105, $a115
 
 PalPacket_a115:
-	dr $a115, $a125
+	db $51
+Palettes_a116:
+	dr $a116, $a125
 
 PalPacket_a125:
-	dr $a125, $a135
+	db $51
+Palettes_a126:
+	dr $a126, $a135
 
 PalPacket_a135:
-	dr $a135, $a145
+	db $51
+Palettes_a136:
+	dr $a136, $a145
 
 PalPacket_a145:
 	dr $a145, $a155
@@ -567,8 +590,30 @@ PalPacket_a155:
 PalPacket_a165:
 	dr $a165, $ad2d
 
-BlkPacket_ad2d:
-	dr $ad2d, $ad3d
+Palettes_ad2d:
+	dr $ad2d, $ad39
+Palettes_ad39:
+	dr $ad39, $ad3d
 
 BlkPacket_ad3d:
-    dr $ad3d, $bc3a
+    dr $ad3d, $b649
+
+Functionb649:
+    dr $b649, $b796
+Palettes_b796:
+    dr $b796, $ba86
+
+Palettes_ba86:
+    dr $ba86, $bac6
+Palettes_bac6:
+    dr $bac6, $bb36
+Palettes_bb36:
+    dr $bb36, $bb5e
+Palettes_bb5e:
+    dr $bb5e, $bb6e
+Palettes_bb6e:
+    dr $bb6e, $bb9e
+Palettes_bb9e:
+    dr $bb9e, $bbbe
+Palettes_bbbe:
+    dr $bbbe, $bc3a
