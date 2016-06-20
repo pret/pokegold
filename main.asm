@@ -272,7 +272,15 @@ CheckTossableItem_::
 RemoveMonFromPartyOrBox:
 	dr $e03f, $e513
 CheckCurPartyMonFainted:
-	dr $e513, $e7a6
+	dr $e513, $e6a9
+Functione6a9:
+	dr $e6a9, $e6b0
+Functione6b0:
+	dr $e6b0, $e6b7
+Functione6b7:
+	dr $e6b7, $e6bd
+Functione6bd:
+	dr $e6bd, $e7a6
 DoItemEffect_::
 	dr $e7a6, $fa3e
 ENDC
@@ -292,7 +300,15 @@ CheckTossableItem_::
 RemoveMonFromPartyOrBox:
 	dr $e03d, $e511
 CheckCurPartyMonFainted:
-	dr $e511, $e7a4
+	dr $e511, $e6a7
+Functione6a9:
+	dr $e6a7, $e6ae
+Functione6b0:
+	dr $e6ae, $e6b5
+Functione6b7:
+	dr $e6b5, $e6bb
+Functione6bd:
+	dr $e6bb, $e7a4
 DoItemEffect_::
 	dr $e7a4, $fa3c
 ENDC

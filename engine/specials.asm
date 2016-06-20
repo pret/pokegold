@@ -139,22 +139,65 @@ SpecialNone: ; c389
 	ret
 
 Special_GameCornerPrizeMonCheckDex: ; c38a
-	dr $c38a, $c3ac
+	ld a, [wScriptVar]
+	dec a
+	call CheckCaughtMon
+	ret nz
+	ld a, [wScriptVar]
+	dec a
+	call SetSeenAndCaughtMon
+	call FadeToMenu
+	ld a, [wScriptVar]
+	ld [wd151], a
+	ld a, $3e
+	ld hl, $7981
+	rst FarCall
+	call ExitAllMenus
+	ret
 
 SpecialSeenMon: ; c3ac
-	dr $c3ac, $c3b4
+	ld a, [wScriptVar]
+	dec a
+	call SetSeenMon
+	ret
 
 Special_FindGreaterThanThatLevel: ; c3b4
-	dr $c3b4, $c3c2
+	ld a, [wScriptVar]
+	ld b, a
+	callba Functione6a9
+	jr z, asm_c3f2
+	jr asm_c3ec
 
 Special_FindAtLeastThatHappy: ; c3c2
-	dr $c3c2, $c3d0
+	ld a, [wScriptVar]
+	ld b, a
+	callba Functione6b0
+	jr z, asm_c3f2
+	jr asm_c3ec
 
 Special_FindThatSpecies: ; c3d0
-	dr $c3d0, $c3de
+	ld a, [wScriptVar]
+	ld b, a
+	callba Functione6b7
+	jr z, asm_c3f2
+	jr asm_c3ec
 
 Special_FindThatSpeciesYourTrainerID: ; c3de
-	dr $c3de, $c3f7
+	ld a, [wScriptVar]
+	ld b, a
+	callba Functione6bd
+	jr z, asm_c3f2
+	jr asm_c3ec
+
+asm_c3ec
+	ld a, $1
+	ld [wScriptVar], a
+	ret
+
+asm_c3f2
+	xor a
+	ld [wScriptVar], a
+	ret
 
 Special_NameRival: ; c3f7
 	ld b, $2
