@@ -311,16 +311,15 @@ ScrollBGMapPalettes:: ; 804f (2:404f)
 	jr nz, .asm_8055
 	ret
 
-Unknown8097:
-	dr $8097, $85d7
+INCLUDE "tilesets/palette_maps.asm"
+
 Unknown85d7:
-	dr $85d7, $85f1
+	rept 26
+	db PAL_BG_ROOF
+	endr
 
 INCLUDE "engine/player_object.asm"
-
-Sine_e::
-	dr $8ac9, $8b3b
-
+INCLUDE "engine/sine.asm"
 INCLUDE "engine/predef.asm"
 
 Predef_LoadSGBLayout:
