@@ -412,7 +412,7 @@ HasPersonReachedMovementLimit: ; 7183 (1:7183)
 IsPersonMovingOffEdgeOfScreen: ; 71cc (1:71cc)
 	ld hl, $10
 	add hl, bc
-	ld a, [wda03]
+	ld a, [wXCoord]
 	cp [hl]
 	jr z, .asm_71dd
 	jr nc, .asm_71f0
@@ -422,7 +422,7 @@ IsPersonMovingOffEdgeOfScreen: ; 71cc (1:71cc)
 .asm_71dd
 	ld hl, $11
 	add hl, bc
-	ld a, [wda02]
+	ld a, [wYCoord]
 	cp [hl]
 	jr z, .asm_71ee
 	jr nc, .asm_71f0

@@ -35,26 +35,26 @@ GetVarAction_::
 
 .VarActionTable:
 	dwb wStringBuffer2, RETVAR_STRBUF2
-	dwb $da22, RETVAR_STRBUF2
+	dwb wPartyCount, RETVAR_STRBUF2
 	dwb .BattleResult, RETVAR_EXECUTE
-	dwb $d119, RETVAR_ADDR_DE
-	dwb $d157, RETVAR_STRBUF2
+	dwb wBattleType, RETVAR_ADDR_DE
+	dwb wTimeOfDay, RETVAR_STRBUF2
 	dwb .CountCaughtMons, RETVAR_EXECUTE
 	dwb .CountSeenMons, RETVAR_EXECUTE
 	dwb .CountBadges, RETVAR_EXECUTE
-	dwb $d682, RETVAR_ADDR_DE
+	dwb wPlayerBikeSurfState, RETVAR_ADDR_DE
 	dwb .PlayerFacing, RETVAR_EXECUTE
-	dwb $ff96, RETVAR_STRBUF2
+	dwb hHours, RETVAR_STRBUF2
 	dwb .DayOfWeek, RETVAR_EXECUTE
-	dwb $da00, RETVAR_STRBUF2
-	dwb $da01, RETVAR_STRBUF2
+	dwb wMapGroup, RETVAR_STRBUF2
+	dwb wMapNumber, RETVAR_STRBUF2
 	dwb .UnownCaught, RETVAR_EXECUTE
-	dwb $d083, RETVAR_STRBUF2
+	dwb wPermission, RETVAR_STRBUF2
 	dwb .BoxFreeSpace, RETVAR_EXECUTE
-	dwb $d193, RETVAR_STRBUF2
-	dwb $da03, RETVAR_STRBUF2
-	dwb $da02, RETVAR_STRBUF2
-	dwb $d97b, RETVAR_STRBUF2
+	dwb wBugContestMinsRemaining, RETVAR_STRBUF2
+	dwb wXCoord, RETVAR_STRBUF2
+	dwb wYCoord, RETVAR_STRBUF2
+	dwb wSpecialPhoneCallID, RETVAR_STRBUF2
     dwb     0, 0
 
 .CountCaughtMons: ; 41cf

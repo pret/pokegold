@@ -368,9 +368,9 @@ Function21ba:: ; 21ba (0:21ba)
 	ld a, [wd0ab]
 	ld [wMapNumber], a
 	ld a, [wd0b3]
-	ld [wda03], a
+	ld [wXCoord], a
 	ld a, [wd0b2]
-	ld hl, wda02
+	ld hl, wYCoord
 	add [hl]
 	ld [hl], a
 	ld c, a
@@ -401,9 +401,9 @@ Function21f6:: ; 21f6 (0:21f6)
 	ld a, [wd0b7]
 	ld [wMapNumber], a
 	ld a, [wd0bf]
-	ld [wda03], a
+	ld [wXCoord], a
 	ld a, [wd0be]
-	ld hl, wda02
+	ld hl, wYCoord
 	add [hl]
 	ld [hl], a
 	ld c, a
@@ -434,9 +434,9 @@ Function2232:: ; 2232 (0:2232)
 	ld a, [wd093]
 	ld [wMapNumber], a
 	ld a, [wd09a]
-	ld [wda02], a
+	ld [wYCoord], a
 	ld a, [wd09b]
-	ld hl, wda03
+	ld hl, wXCoord
 	add [hl]
 	ld [hl], a
 	ld c, a
@@ -459,9 +459,9 @@ Function2263:: ; 2263 (0:2263)
 	ld a, [wd09f]
 	ld [wMapNumber], a
 	ld a, [wd0a6]
-	ld [wda02], a
+	ld [wYCoord], a
 	ld a, [wd0a7]
-	ld hl, wda03
+	ld hl, wXCoord
 	add [hl]
 	ld [hl], a
 	ld c, a
@@ -963,9 +963,9 @@ RestoreFacingAfterWarp::
 	ld a, $5
 	call AddNTimes
 	ld a, [hli]
-	ld [wda02], a
+	ld [wYCoord], a
 	ld a, [hli]
-	ld [wda03], a
+	ld [wXCoord], a
 	ld a, [hli]
 	cp $ff
 	jr nz, .asm_2592
@@ -985,7 +985,7 @@ BackUpWarp:: ; 2596 (0:2596)
 
 GetCoordOfUpperLeftCorner:: ; 25a9 (0:25a9)
 	ld hl, wc700
-	ld a, [wda03]
+	ld a, [wXCoord]
 	bit 0, a
 	jr nz, .asm_25b9
 	srl a
@@ -1003,7 +1003,7 @@ GetCoordOfUpperLeftCorner:: ; 25a9 (0:25a9)
 	add $6
 	ld c, a
 	ld b, $0
-	ld a, [wda02]
+	ld a, [wYCoord]
 	bit 0, a
 	jr nz, .asm_25d6
 	srl a
@@ -1019,10 +1019,10 @@ GetCoordOfUpperLeftCorner:: ; 25a9 (0:25a9)
 	ld [wOverworldMapAnchor], a
 	ld a, h
 	ld [wOverworldMapAnchor + 1], a
-	ld a, [wda02]
+	ld a, [wYCoord]
 	and $1
 	ld [wd07f], a
-	ld a, [wda03]
+	ld a, [wXCoord]
 	and $1
 	ld [wd080], a
 	ret

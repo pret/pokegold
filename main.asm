@@ -217,7 +217,9 @@ CopyDECoordsToMapObject:
 CopyObjectStruct_::
 	dr $86d7, $8876
 CopyTempObjectToObjectStruct:
-	dr $8876, $8a7a
+	dr $8876, $8969
+Function8969:
+	dr $8969, $8a7a
 QueueFollowerFirstStep:
 	dr $8a7a, $8ac9
 Sine_e::
@@ -225,10 +227,14 @@ Sine_e::
 
 INCLUDE "engine/predef.asm"
 
-Function8c2d:
-	dr $8c2d, $91e5
+Predef_LoadSGBLayout:
+	dr $8c2d, $9072
+CheckContestMon:
+	dr $9072, $91e5
 ApplyMonOrTrainerPals:
-	dr $91e5, $9cfd
+	dr $91e5, $9cc0
+InitSGBBorder:
+	dr $9cc0, $9cfd
 InitCGBPals:: ; 9cfd
 	dr $9cfd, $bc3a
 
@@ -258,7 +264,9 @@ INCLUDE "engine/specials.asm"
 
 ComputeHPBarPixels:
 IF DEF(GOLD)
-	dr $c6de, $d1e2
+	dr $c6de, $c725
+AnimateHPBar:
+	dr $c725, $d1e2
 ReceiveItem_::
 	dr $d1e2, $d21a
 TossItem_::
@@ -268,9 +276,33 @@ CheckItem_::
 GetTMHMNumber::
 	dr $d414, $d434
 CheckTossableItem_::
-	dr $d434, $e03f
+	dr $d434, $d892
+
+TryAddMonToParty::
+	dr $d892, $da73
+
+FillPP::
+	dr $da73, $da9c
+
+AddTempmonToParty::
+	dr $da9c, $db45
+
+SentGetPkmnIntoFromBox::
+	dr $db45, $de74
+
+SentPkmnIntoBox::
+	dr $de74, $df92
+
+GiveEgg::
+	dr $df92, $e03f
 RemoveMonFromPartyOrBox:
-	dr $e03f, $e513
+	dr $e03f, $e16d
+
+CalcPkmnStats::
+	dr $e16d, $e181
+
+CalcPkmnStatC::
+	dr $e181, $e513
 CheckCurPartyMonFainted:
 	dr $e513, $e6a9
 Functione6a9:
@@ -288,7 +320,9 @@ Functionf900:
 ENDC
 
 IF DEF(SILVER)
-	dr $c6dc, $d1e0
+	dr $c6dc, $c723
+AnimateHPBar:
+	dr $c723, $d1e0
 ReceiveItem_::
 	dr $d1e0, $d218
 TossItem_::
@@ -298,9 +332,33 @@ CheckItem_::
 GetTMHMNumber::
 	dr $d412, $d432
 CheckTossableItem_::
-	dr $d432, $e03d
+	dr $d432, $d890
+
+TryAddMonToParty::
+	dr $d890, $da71
+
+FillPP::
+	dr $da71, $da9a
+
+AddTempmonToParty::
+	dr $da9a, $db43
+
+SentGetPkmnIntoFromBox::
+	dr $db43, $de72
+
+SentPkmnIntoBox::
+	dr $de72, $df90
+
+GiveEgg::
+	dr $df90, $e03d
 RemoveMonFromPartyOrBox:
-	dr $e03d, $e511
+	dr $e03d, $e16b
+
+CalcPkmnStats::
+	dr $e16b, $e17f
+
+CalcPkmnStatC::
+	dr $e17f, $e511
 CheckCurPartyMonFainted:
 	dr $e511, $e6a7
 Functione6a9:
@@ -329,13 +387,32 @@ Function11917:
 Function1192e:
 	dr $1192e, $11934
 Function11934:
-	dr $11934, $11aa3
+	dr $11934, $11a25
+
+CanLearnTMHMMove::
+	dr $11a25, $11a56
+
+GetTMHMMove::
+	dr $11a56, $11aa3
 NamingScreen_:
 	dr $11aa3, $11aad
 NamingScreen:
-	dr $11aad, $13a5f
+	dr $11aad, $126fd
+Function126fd:
+	dr $126fd, $12e33
+
+PartyMonItemName::
+	dr $12e33, $1399d
+Function1399d:
+	dr $1399d, $13a5f
 Function13a5f:
-	dr $13a5f, $13e03
+	dr $13a5f, $13d64
+Function13d64:
+	dr $13d64, $13dce
+Function13dce:
+	dr $13dce, $13ded
+Function13ded:
+	dr $13ded, $13e03
 
 SECTION "bank5", ROMX, BANK[$5]
 	dr $14000, $14032
@@ -354,7 +431,9 @@ RefreshSprites:: ; 1414b
 Function1415c:: ; 1415c
 	dr $1415c, $1416d
 Function1416d:: ; 1416d
-	dr $1416d, $14317
+	dr $1416d, $14226
+Function14226:
+	dr $14226, $14317
 DoesSpriteHaveFacings_:: ; 14317
 	dr $14317, $14334
 GetSpritePalette_:: ; 14334
@@ -370,13 +449,29 @@ TryLoadSaveFile: ; 14ef5
 RunMapSetupScript::
 	dr $15484, $15612
 Function15612:: ; 15612
-	dr $15612, $159b0
+	dr $15612, $15871
+Function15871:
+	dr $15871, $159b0
 Function159b0:
-	dr $159b0, $16e3a
+	dr $159b0, $1646d
+Function1646d:
+	dr $1646d, $16935
+Function16935:
+	dr $16935, $16989
+Function16989:
+	dr $16989, $16b8c
+Function16b8c:
+	dr $16b8c, $16e3a
 Function16e3a:
-	dr $16e3a, $171d1
+	dr $16e3a, $16ff7
+Function16ff7:
+	dr $16ff7, $171d1
 Function171d1:
-	dr $171d1, $1783e
+	dr $171d1, $177a5
+Function177a5:
+	dr $177a5, $177c4
+Function177c4:
+	dr $177c4, $1783e
 
 SECTION "bank6", ROMX, BANK[$6]
 	dr $18000, $1bdbc
@@ -406,29 +501,100 @@ InitVerticalMenuCursor_::
 InitScrollingMenu::
 	dr $244d7, $244f3
 ScrollingMenu_::
-	dr $244f3, $24b8d
+	dr $244f3, $24a10
+Function24a10:
+	dr $24a10, $24a4d
+Function24a4d:
+	dr $24a4d, $24a76
+Function24a76:
+	dr $24a76, $24b8d
 Function24b8d:
-	dr $24b8d, $2692d
+	dr $24b8d, $267ca
+Function267ca:
+	dr $267ca, $2692d
 InitDecorations: ; 2692d
-	dr $2692d, $28000
+	dr $2692d, $271be
+Function271be:
+	dr $271be, $27216
+Function27216:
+	dr $27216, $28000
 
 SECTION "banka", ROMX, BANK[$a]
-	dr $28000, $29dff
+	dr $28000, $28d88
+
+Predef_LinkTextbox::
+	dr $28d88, $28dea
+
+TradeAnimation::
+	dr $28dea, $28e22
+
+TradeAnimationPlayer2::
+	dr $28e22, $29a47
+Function29a47:
+	dr $29a47, $29ac7
+Function29ac7:
+	dr $29ac7, $29ad9
+Function29ad9:
+	dr $29ad9, $29b22
+Function29b22:
+	dr $29b22, $29b2b
+Function29b2b:
+	dr $29b2b, $29b34
+Function29b34:
+	dr $29b34, $29b4b
+Function29b4b:
+	dr $29b4b, $29bcc
+Function29bcc:
+	dr $29bcc, $29c71
+Function29c71:
+	dr $29c71, $29c8d
+Function29c8d:
+	dr $29c8d, $29cba
+Function29cba:
+	dr $29cba, $29ccf
+Function29ccf:
+	dr $29ccf, $29ce4
+Function29ce4:
+	dr $29ce4, $29cf9
+Function29cf9:
+	dr $29cf9, $29d01
+Function29d01:
+	dr $29d01, $29d4e
+Function29d4e:
+	dr $29d4e, $29dff
 Function29dff:
 	dr $29dff, $2a4bf
 MysteryGift_CopyReceivedDecosToPC:
-	dr $2a4bf, $2a8e0
+	dr $2a4bf, $2a4e7
+Function2a4e7:
+	dr $2a4e7, $2a7d7
+Function2a7d7:
+	dr $2a7d7, $2a8e0
 JumpRoamMons:
-	dr $2a8e0, $2c000
+	dr $2a8e0, $2a9f7
+Function2a9f7:
+	dr $2a9f7, $2aa6b
+Function2aa6b:
+	dr $2aa6b, $2aab3
+Function2aab3:
+	dr $2aab3, $2c000
 
 SECTION "bankb", ROMX, BANK[$b]
-	dr $2c000, $30000
+	dr $2c000, $2c352
+Function2c352:
+	dr $2c352, $2c943
+
+PrintMoveDesc::
+	dr $2c943, $30000
 
 SECTION "bankc", ROMX, BANK[$c]
 	dr $30000, $34000
 
 SECTION "bankd", ROMX, BANK[$d]
-	dr $34000, $38000
+	dr $34000, $34923
+
+DecompressPredef::
+	dr $34923, $38000
 
 SECTION "banke", ROMX, BANK[$e]
 	dr $38000, $398f2
@@ -437,7 +603,10 @@ Battle_GetTrainerName:: ; 398f2
 	dr $398f2, $3c000
 
 SECTION "bankf", ROMX, BANK[$f]
-	dr $3c000, $3dda9
+	dr $3c000, $3d70a
+
+CheckPlayerPartyForFitPkmn::
+	dr $3d70a, $3dda9
 
 UpdatePlayerHUD::
 	dr $3dda9, $3de97
@@ -445,17 +614,41 @@ UpdatePlayerHUD::
 UpdateEnemyHUD::
 	dr $3de97, $3ec11
 BattleRandom_:: ; 3ec11
-	dr $3ec11, $3f55d
+	dr $3ec11, $3f196
+
+FillInExpBar::
+	dr $3f196, $3f243
+
+GetMonBackpic::
+	dr $3f243, $3f282
+
+GetMonFrontpic::
+	dr $3f282, $3f2c7
+
+StartBattle::
+	dr $3f2c7, $3f55d
 Function3f55d:
 	dr $3f55d, $40000
 
 SECTION "bank10", ROMX, BANK[$10]
 	dr $40000, $41afe
 Moves::
-	dr $41afe, $44000
+	dr $41afe, $421e9
+
+EvolveAfterBattle::
+	dr $421e9, $42483
+
+LearnLevelMoves::
+	dr $42483, $424dd
+
+FillMoves::
+	dr $424dd, $44000
 
 SECTION "bank11", ROMX, BANK[$11]
-	dr $44000, $44870
+	dr $44000, $44648
+
+PlaceGraphic::
+	dr $44648, $44870
 DeletePartyMonMail:
 	dr $44870, $48000
 
@@ -467,7 +660,67 @@ SECTION "bank13", ROMX, BANK[$13]
 
 SECTION "bank14", ROMX, BANK[$14]
 Function50000:
-	dr $50000, $51b0b
+	dr $50000, $5087d
+
+CopyPkmnToTempMon::
+	dr $5087d, $50940
+
+PrintMonTypes::
+	dr $50940, $5096d
+
+PrintMoveType::
+	dr $5096d, $50986
+
+PrintType::
+	dr $50986, $50997
+
+GetTypeName::
+	dr $50997, $50b3d
+
+DrawPlayerHP::
+	dr $50b3d, $50b41
+
+DrawEnemyHP::
+	dr $50b41, $50bae
+
+StatsScreenInit::
+	dr $50bae, $5128f
+
+PrintTempMonStats::
+	dr $5128f, $512f1
+
+GetGender::
+	dr $512f1, $51364
+
+ListMovePP::
+	dr $51364, $513e4
+
+Predef22::
+	dr $513e4, $51437
+
+PlaceNonFaintStatus::
+	dr $51437, $51478
+
+ListMoves::
+	dr $51478, $51749
+
+GetUnownLetter::
+	dr $51749, $51780
+
+GetFrontpic::
+	dr $51780, $51786
+
+NewPokedexEntry::
+	dr $51786, $51803
+
+GetBackpic::
+	dr $51803, $518a0
+
+FrontpicPredef::
+	dr $518a0, $518fa
+
+GetTrainerPic::
+	dr $518fa, $51b0b
 BaseData:: ; 51b0b
 	dr $51b0b, $53a83
 UnknownEggPic:: ; 53a83
@@ -528,7 +781,11 @@ ResetClock_:
 	dr $8c17a, $8c310
 
 DeleteSaveData_:
-	dr $8c310, $8c356
+	dr $8c310, $8c355
+
+Predef35::
+Predef36::
+	ret
 
 UpdateTimeOfDayPal:: ; 8c356
 	dr $8c356, $8c366
@@ -543,10 +800,22 @@ FadeInPalettes:: ; 8c3a0
 	dr $8c3a0, $8c3ab
 
 Function8c3ab:: ; 8c3ab
-	dr $8c3ab, $8c3e9
+	dr $8c3ab, $8c3b9
+
+Function8c3b9:
+	dr $8c3b9, $8c3c4
+
+Function8c3c4:
+	dr $8c3c4, $8c3e9
 
 Function8c3e9:: ; 8c3e9
-	dr $8c3e9, $8d174
+	dr $8c3e9, $8c513
+
+Predef_StartBattle::
+	dr $8c513, $8ce7c
+
+Function8ce7c:
+	dr $8ce7c, $8d174
 
 ClearAnimatedObjectBuffer:
 	dr $8d174, $8d18a
@@ -563,13 +832,24 @@ ReinitAnimatedObjectFrame_:: ; 8d332
 SECTION "bank24", ROMX, BANK[$24]
 	dr $90000, $90641
 InitClock:
-	dr $90641, $90b0f
+	dr $90641, $908dc
+Function908dc:
+	dr $908dc, $90a1b
+Function90a1b:
+	dr $90a1b, $90a54
+Function90a54:
+	dr $90a54, $90a8d
+Function90a8d:
+	dr $90a8d, $90b0f
 PrintHour:
 	dr $90b0f, $9188a
 Function9188a:
 	dr $9188a, $919c1
 Function919c1:
-	dr $919c1, $92c36
+	dr $919c1, $91c7f
+
+Area_::
+	dr $91c7f, $92c36
 Function92c36:
 	dr $92c36, $94000
 
@@ -590,7 +870,10 @@ ScriptEvents:: ; 96b91
 	dr $96b91, $97365
 
 CallCallback:: ; 97365
-	dr $97365, $97c2a
+	dr $97365, $97a59
+
+Function97a59:
+	dr $97a59, $97c2a
 
 Function97c2a:: ; 97c2a
 	dr $97c2a, $98000
@@ -648,15 +931,34 @@ PlayerIcon:
 SECTION "bank31", ROMX, BANK[$31]
 	dr $c4000, $c7a40
 Functionc7a40:
-	dr $c7a40, $c8000
+	dr $c7a40, $c7a5a
+Functionc7a5a:
+	dr $c7a5a, $c7bad
+Functionc7bad:
+	dr $c7bad, $c7bbf
+Functionc7bbf:
+	dr $c7bbf, $c8000
 
 SECTION "bank32", ROMX, BANK[$32]
 BattleAnimations:: ; Not actually where it is, I just needed the label for BANK to work
-	dr $c8000, $cc000
+	dr $c8000, $c80d6
+
+Predef2F::
+	dr $c80d6, $cbc76
+
+LoadPoisonBGPals::
+	dr $cbc76, $cc000
 
 SECTION "bank33", ROMX, BANK[$33]
 BattleAnimCommands::  ; Not actually where it is, I just needed the label for BANK to work
-	dr $cc000, $d0000
+	dr $cc000, $cc0d6
+
+Predef38::
+Predef39::
+	ret
+
+PlayBattleAnim::
+	dr $cc0d7, $d0000
 
 SECTION "bank34", ROMX, BANK[$34]
 	dr $d0000, $d4000
@@ -751,12 +1053,24 @@ Shrink1Pic:
 Shrink2Pic:
 	dr $fb64e, $fb7f7
 Functionfb7f7:
-	dr $fb7f7, $fb981
-Functionfb981:
-	dr $fb981, $fc000
+	dr $fb7f7, $fb94b
+Functionfb94b:
+	dr $fb94b, $fb981
+ConvertMon_1to2:
+	dr $fb981, $fba12
+
+CheckTypeMatchup::
+	dr $fba12, $fbc3c
+Functionfbc3c:
+	dr $fbc3c, $fbdd6
+Functionfbdd6:
+	dr $fbdd6, $fc000
 
 SECTION "bank3f", ROMX, BANK[$3f]
-	dr $fc000, $100000
+	nop
+Predef3A::
+	ret
+	dr $fc002, $100000
 
 SECTION "bank40", ROMX, BANK[$40]
 BattleText:: ; Not actually where it is, I just needed the label for BANK to work
@@ -966,7 +1280,9 @@ SECTION "bank6f", ROMX, BANK[$6f]
 	dr $1bc000, $1c0000
 
 SECTION "bank70", ROMX, BANK[$70]
-	dr $1c0000, $1c0de9
+	dr $1c0000, $1c0a66
+UpdateTimePredef::
+	dr $1c0a66, $1c0de9
 _DudeAutoInput_A::
 	dr $1c0de9, $1c4000
 

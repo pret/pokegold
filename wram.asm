@@ -2688,7 +2688,7 @@ wd18f:: ds 1 ; d18f
 wd190:: ds 1 ; d190
 wd191:: ds 1 ; d191
 wd192:: ds 1 ; d192
-wd193:: ds 1 ; d193
+wBugContestMinsRemaining:: ds 1 ; d193
 wd194:: ds 1 ; d194
 wd195:: ds 1 ; d195
 wd196:: ds 1 ; d196
@@ -3444,7 +3444,7 @@ wd977:: ds 1 ; d977
 wd978:: ds 1 ; d978
 wd979:: ds 1 ; d979
 wd97a:: ds 1 ; d97a
-wd97b:: ds 1 ; d97b
+wSpecialPhoneCallID:: ds 1 ; d97b
 wd97c:: ds 1 ; d97c
 wd97d:: ds 1 ; d97d
 wd97e:: ds 1 ; d97e
@@ -3580,8 +3580,8 @@ wd9ff:: ds 1 ; d9ff
 
 wMapGroup:: ds 1 ; da00
 wMapNumber:: ds 1 ; da01
-wda02:: ds 1 ; da02
-wda03:: ds 1 ; da03
+wYCoord:: ds 1 ; da02
+wXCoord:: ds 1 ; da03
 wda04:: ds 1 ; da04
 wda05:: ds 1 ; da05
 wda06:: ds 1 ; da06

@@ -36,7 +36,7 @@ Function437c:
 	ld hl, $5
 	add hl, bc
 	res 6, [hl]
-	ld a, [wda03]
+	ld a, [wXCoord]
 	ld e, a
 	ld hl, $10
 	add hl, bc
@@ -46,7 +46,7 @@ Function437c:
 	jr c, .asm_43b3
 	cp $c
 	jr nc, .asm_43b3
-	ld a, [wda02]
+	ld a, [wYCoord]
 	ld e, a
 	ld hl, $11
 	add hl, bc
@@ -62,7 +62,7 @@ Function437c:
 	ld hl, $5
 	add hl, bc
 	set 6, [hl]
-	ld a, [wda03]
+	ld a, [wXCoord]
 	ld e, a
 	ld hl, $14
 	add hl, bc
@@ -72,7 +72,7 @@ Function437c:
 	jr c, .asm_43df
 	cp $c
 	jr nc, .asm_43df
-	ld a, [wda02]
+	ld a, [wYCoord]
 	ld e, a
 	ld hl, $15
 	add hl, bc
@@ -760,7 +760,7 @@ Function5636: ; 5636 (1:5636)
 	ld e, [hl]
 	inc d
 	inc e
-	ld a, [wda03]
+	ld a, [wXCoord]
 	cp d
 	jr z, .asm_564f
 	jr nc, .asm_565e
@@ -768,7 +768,7 @@ Function5636: ; 5636 (1:5636)
 	cp d
 	jr c, .asm_565e
 .asm_564f
-	ld a, [wda02]
+	ld a, [wYCoord]
 	cp e
 	jr z, .asm_565c
 	jr nc, .asm_565e
