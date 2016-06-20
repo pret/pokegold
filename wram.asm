@@ -2518,8 +2518,7 @@ wd0cb:: ds 1 ; d0cb
 wd0cc:: ds 1 ; d0cc
 wd0cd:: ds 1 ; d0cd
 wd0ce:: ds 1 ; d0ce
-wd0cf:: ds 1 ; d0cf
-wd0d0:: ds 1 ; d0d0
+wTilesetPalettes:: dw ; d0cf
 wd0d1:: ds 1 ; d0d1
 wd0d2:: ds 1 ; d0d2
 wd0d3:: ds 1 ; d0d3

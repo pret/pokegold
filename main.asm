@@ -207,21 +207,117 @@ INCLUDE "event/special.asm"
 
 SECTION "bank2", ROMX, BANK[$2]
 SwapTextboxPalettes::
-	dr $8000, $804f
-ScrollBGMapPalettes::
-	dr $804f, $861a
-SpawnPlayer:
-	dr $861a, $8653
-CopyDECoordsToMapObject:
-	dr $8653, $86d7
-CopyObjectStruct_::
-	dr $86d7, $8876
-CopyTempObjectToObjectStruct:
-	dr $8876, $8969
-Function8969:
-	dr $8969, $8a7a
-QueueFollowerFirstStep:
-	dr $8a7a, $8ac9
+	ld hl, wTileMap
+	ld de, wAttrMap
+	ld b, $12
+.asm_8008
+	ld c, $14
+.asm_800a
+	ld a, [hli]
+	push hl
+	srl a
+	jr c, .asm_8024
+	ld hl, wTilesetPalettes
+	add [hl]
+	ld l, a
+	ld a, [wTilesetPalettes + 1]
+	adc $0
+	ld h, a
+	ld a, [hl]
+	and $f
+	bit 3, a
+	jr z, .asm_8045
+	jr .asm_8038
+
+.asm_8024
+	ld hl, wTilesetPalettes
+	add [hl]
+	ld l, a
+	ld a, [wTilesetPalettes + 1]
+	adc $0
+	ld h, a
+	ld a, [hl]
+	swap a
+	and $f
+	bit 3, a
+	jr z, .asm_8045
+.asm_8038
+	ld a, [wMapGroup]
+	dec a
+	ld hl, Unknown85d7
+	add l
+	ld l, a
+	jr nc, .asm_8044
+	inc h
+.asm_8044
+	ld a, [hl]
+.asm_8045
+	pop hl
+	ld [de], a
+	inc de
+	dec c
+	jr nz, .asm_800a
+	dec b
+	jr nz, .asm_8008
+	ret
+
+ScrollBGMapPalettes:: ; 804f (2:404f)
+	ld hl, wBGMapBuffer
+	ld de, wBGMapPalBuffer
+.asm_8055
+	ld a, [hli]
+	push hl
+	srl a
+	jr c, .asm_806f
+	ld hl, wTilesetPalettes
+	add [hl]
+	ld l, a
+	ld a, [wTilesetPalettes + 1]
+	adc $0
+	ld h, a
+	ld a, [hl]
+	and $f
+	bit 3, a
+	jr z, .asm_8090
+	jr .asm_8083
+
+.asm_806f
+	ld hl, wTilesetPalettes
+	add [hl]
+	ld l, a
+	ld a, [wTilesetPalettes + 1]
+	adc $0
+	ld h, a
+	ld a, [hl]
+	swap a
+	and $f
+	bit 3, a
+	jr z, .asm_8090
+.asm_8083
+	ld a, [wMapGroup]
+	dec a
+	ld hl, Unknown85d7
+	add l
+	ld l, a
+	jr nc, .asm_808f
+	inc h
+.asm_808f
+	ld a, [hl]
+.asm_8090
+	pop hl
+	ld [de], a
+	inc de
+	dec c
+	jr nz, .asm_8055
+	ret
+
+Unknown8097:
+	dr $8097, $85d7
+Unknown85d7:
+	dr $85d7, $85f1
+
+INCLUDE "engine/player_object.asm"
+
 Sine_e::
 	dr $8ac9, $8b3b
 

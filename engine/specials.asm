@@ -75,7 +75,7 @@ SpecialsPointers:
 	add_special PlayMapMusic
 	add_special RestartMapMusic
 	add_special Function126fd
-	add_special Function8969
+	add_special Special_SurfStartStep
 	add_special Special_FindGreaterThanThatLevel
 	add_special Special_FindAtLeastThatHappy
 	add_special Special_FindThatSpecies
