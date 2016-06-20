@@ -282,7 +282,9 @@ Functione6b7:
 Functione6bd:
 	dr $e6bd, $e7a6
 DoItemEffect_::
-	dr $e7a6, $fa3e
+	dr $e7a6, $f900
+Functionf900:
+	dr $f900, $fa3e
 ENDC
 
 IF DEF(SILVER)
@@ -310,20 +312,30 @@ Functione6b7:
 Functione6bd:
 	dr $e6bb, $e7a4
 DoItemEffect_::
-	dr $e7a4, $fa3c
+	dr $e7a4, $f8fe
+Functionf900
+	dr $f8fe, $fa3c
 ENDC
 
 SECTION "bank4", ROMX, BANK[$4]
 Function10000::
 	dr $10000, $117f1
 InitializeStartDay_:
-	dr $117f1, $11934
+	dr $117f1, $118f8
+Function118f8:
+	dr $118f8, $11917
+Function11917:
+	dr $11917, $1192e
+Function1192e:
+	dr $1192e, $11934
 Function11934:
 	dr $11934, $11aa3
 NamingScreen_:
 	dr $11aa3, $11aad
 NamingScreen:
-	dr $11aad, $13e03
+	dr $11aad, $13a5f
+Function13a5f:
+	dr $13a5f, $13e03
 
 SECTION "bank5", ROMX, BANK[$5]
 	dr $14000, $14032
@@ -358,7 +370,11 @@ TryLoadSaveFile: ; 14ef5
 RunMapSetupScript::
 	dr $15484, $15612
 Function15612:: ; 15612
-	dr $15612, $171d1
+	dr $15612, $159b0
+Function159b0:
+	dr $159b0, $16e3a
+Function16e3a:
+	dr $16e3a, $171d1
 Function171d1:
 	dr $171d1, $1783e
 
@@ -390,7 +406,9 @@ InitVerticalMenuCursor_::
 InitScrollingMenu::
 	dr $244d7, $244f3
 ScrollingMenu_::
-	dr $244f3, $2692d
+	dr $244f3, $24b8d
+Function24b8d:
+	dr $24b8d, $2692d
 InitDecorations: ; 2692d
 	dr $2692d, $28000
 
@@ -427,7 +445,9 @@ UpdatePlayerHUD::
 UpdateEnemyHUD::
 	dr $3de97, $3ec11
 BattleRandom_:: ; 3ec11
-	dr $3ec11, $40000
+	dr $3ec11, $3f55d
+Function3f55d:
+	dr $3f55d, $40000
 
 SECTION "bank10", ROMX, BANK[$10]
 	dr $40000, $41afe
@@ -493,7 +513,10 @@ SECTION "bank21", ROMX, BANK[$21]
 	dr $84000, $842db
 
 PrinterReceive_:: ; 842db
-	dr $842db, $88000
+	dr $842db, $84684
+
+Function84684:
+	dr $84684, $88000
 
 SECTION "bank22", ROMX, BANK[$22]
 	dr $88000, $8c000
@@ -542,7 +565,13 @@ SECTION "bank24", ROMX, BANK[$24]
 InitClock:
 	dr $90641, $90b0f
 PrintHour:
-	dr $90b0f, $94000
+	dr $90b0f, $9188a
+Function9188a:
+	dr $9188a, $919c1
+Function919c1:
+	dr $919c1, $92c36
+Function92c36:
+	dr $92c36, $94000
 
 SECTION "bank25", ROMX, BANK[$25]
 MapTriggers:: ; 94000
@@ -617,7 +646,9 @@ PlayerIcon:
 	dr $c0000, $c4000
 
 SECTION "bank31", ROMX, BANK[$31]
-	dr $c4000, $c8000
+	dr $c4000, $c7a40
+Functionc7a40:
+	dr $c7a40, $c8000
 
 SECTION "bank32", ROMX, BANK[$32]
 BattleAnimations:: ; Not actually where it is, I just needed the label for BANK to work
@@ -640,7 +671,15 @@ SECTION "bank37", ROMX, BANK[$37]
 	dr $dc000, $e0000
 
 SECTION "bank38", ROMX, BANK[$38]
-	dr $e0000, $e4000
+	dr $e0000, $e0002
+Functione0002:
+	dr $e0002, $e0909
+Functione0909:
+	dr $e0909, $e199d
+Functione199d:
+	dr $e199d, $e2668
+Functione2668:
+	dr $e2668, $e4000
 
 SECTION "bank39", ROMX, BANK[$39]
 TitleScreenGFX5:
@@ -710,7 +749,11 @@ TileCollisionTable::
 Shrink1Pic:
 	dr $fb5be, $fb64e
 Shrink2Pic:
-	dr $fb64e, $fc000
+	dr $fb64e, $fb7f7
+Functionfb7f7:
+	dr $fb7f7, $fb981
+Functionfb981:
+	dr $fb981, $fc000
 
 SECTION "bank3f", ROMX, BANK[$3f]
 	dr $fc000, $100000
@@ -825,7 +868,13 @@ SECTION "bank63", ROMX, BANK[$63]
 	dr $18c000, $190000
 
 SECTION "bank64", ROMX, BANK[$64]
-	dr $190000, $194000
+	dr $190000, $190ef3
+ReceivedMysteryGiftText_::
+	dr $190ef3, $190f0b
+NoCoinsText_::
+	dr $190f0b, $190f1f
+NoCoinCaseText_::
+	dr $190f1f, $194000
 
 SECTION "bank65", ROMX, BANK[$65]
 	dr $194000, $195610

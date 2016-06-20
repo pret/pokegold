@@ -303,13 +303,13 @@ Function5c41: ; 5c41 (1:5c41)
 	call Function5d15
 	call CloseSRAM
 
-	ld hl, wd5b7
+	ld hl, wNumItems
 	call Function5d15
-	ld hl, wd5e1
+	ld hl, wNumKeyItems
 	call Function5d15
-	ld hl, wd5fc
+	ld hl, wNumBalls
 	call Function5d15
-	ld hl, wd616
+	ld hl, wPCItems
 	call Function5d15
 
 	xor a

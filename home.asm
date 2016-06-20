@@ -668,6 +668,7 @@ Function3414::
 
 Function3423::
 	ld a, [hROMBank]
+Function3425::
 	ld [wcfd8], a
 	ld a, l
 	ld [wcfd9], a
@@ -1039,7 +1040,7 @@ endr
 	rst Bankswitch
 	ret
 
-GetItemName
+GetItemName::
 	push hl
 	push bc
 	ld a, [wd151]
