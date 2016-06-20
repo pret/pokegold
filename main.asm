@@ -691,7 +691,13 @@ SECTION "bankf", ROMX, BANK[$f]
 	dr $3c000, $3d70a
 
 CheckPlayerPartyForFitPkmn::
-	dr $3d70a, $3dda9
+	dr $3d70a, $3d8f5
+
+Function3d8f5:
+	dr $3d8f5, $3d907
+
+Function3d907:
+	dr $3d907, $3dda9
 
 UpdatePlayerHUD::
 	dr $3dda9, $3de97

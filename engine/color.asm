@@ -428,46 +428,282 @@ LoadMailPalettes:
 
 INCLUDE "predef/cgb.asm"
 
-Function9a94:
-	dr $9a94, $9ab2
-Function9ab2:
-	dr $9ab2, $9ab7
-Function9ab7:
-	dr $9ab7, $9ac7
-Function9ac7:
-	dr $9ac7, $9ad2
-Function9ad2:
-	dr $9ad2, $9adb
-Function9adb:
-	dr $9adb, $9af1
-Function9af1:
-	dr $9af1, $9b01
-Function9b01:
-	dr $9b01, $9b1d
-Function9b1d:
-	dr $9b1d, $9b28
-Function9b28:
-	dr $9b28, $9b35
-Function9b35:
-	dr $9b35, $9b75
-Function9b75:
-	dr $9b75, $9b9c
-Function9b9c:
-	dr $9b9c, $9ba9
-Function9ba9:
-	dr $9ba9, $9bba
-Function9bba:
-	dr $9bba, $9bcb
-Function9bcb:
-	dr $9bcb, $9bd3
-Function9bd3:
-	dr $9bd3, $9bda
-Function9bda:
-	dr $9bda, $9be4
-Function9be4:
-	dr $9be4, $9c09
+Function9a94: ; 9a94 (2:5a94)
+	ld hl, Palettes_9aaa
+	ld de, wTempBGPals
+	ld bc, $8
+	call CopyBytes
+	call Function9b28
+	call Function9b1d
+	call Function9b35
+	ret
+
+Palettes_9aaa:
+	RGB 31, 31, 31
+	RGB  9, 31, 31
+	RGB 10, 12, 31
+	RGB  0,  3, 19
+
+Function9ab2: ; 9ab2 (2:5ab2)
+	ld de, wTempBGPals
+	ld c, $4
+Function9ab7: ; 9ab7 (2:5ab7)
+	push bc
+	ld a, [hli]
+	push hl
+	call Function9ac7
+	call Function9ad2
+	pop hl
+	inc hl
+	pop bc
+	dec c
+	jr nz, Function9ab7
+	ret
+
+Function9ac7: ; 9ac7 (2:5ac7)
+	ld l, a
+	ld h, $0
+	add hl, hl
+	add hl, hl
+	add hl, hl
+	ld bc, Palettes_a265
+	add hl, bc
+	ret
+
+Function9ad2: ; 9ad2 (2:5ad2)
+	ld c, $8
+.asm_9ad4
+	ld a, [hli]
+	ld [de], a
+	inc de
+	dec c
+	jr nz, .asm_9ad4
+	ret
+
+Function9adb: ; 9adb (2:5adb)
+	ld a, $ff
+	ld [de], a
+	inc de
+	ld a, $7f
+	ld [de], a
+	inc de
+	ld c, $4
+.asm_9ae5
+	ld a, [hli]
+	ld [de], a
+	inc de
+	dec c
+	jr nz, .asm_9ae5
+	xor a
+	ld [de], a
+	inc de
+	ld [de], a
+	inc de
+	ret
+
+Function9af1: ; 9af1 (2:5af1)
+	push bc
+	push hl
+.asm_9af3
+	ld [hli], a
+	dec c
+	jr nz, .asm_9af3
+	pop hl
+	ld bc, $14
+	add hl, bc
+	pop bc
+	dec b
+	jr nz, Function9af1
+	ret
+
+Function9b01: ; 9b01 (2:5b01)
+	push af
+	push bc
+	push de
+	push hl
+	ld hl, wTempBGPals
+	ld c, $8
+.asm_9b0a
+	ld a, $ff
+	ld [hli], a
+	ld [hli], a
+	ld [hli], a
+	ld [hli], a
+	xor a
+	ld [hli], a
+	ld [hli], a
+	ld [hli], a
+	ld [hli], a
+	dec c
+	jr nz, .asm_9b0a
+	pop hl
+	pop de
+	pop bc
+	pop af
+	ret
+
+Function9b1d: ; 9b1d (2:5b1d)
+	hlcoord 0, 0, wAttrMap
+	ld bc, SCREEN_HEIGHT * SCREEN_WIDTH
+	xor a
+	call ByteFill
+	ret
+
+Function9b28: ; 9b28 (2:5b28)
+	ld hl, wTempBGPals
+	ld de, wBGPals
+	ld bc, $80
+	call CopyBytes
+	ret
+
+Function9b35: ; 9b35 (2:5b35)
+	ld a, [rLCDC]
+	bit 7, a
+	jr z, .asm_9b52
+	ld a, [hBGMapMode]
+	push af
+	ld a, $2
+	ld [hBGMapMode], a
+	call DelayFrame
+	call DelayFrame
+	call DelayFrame
+	call DelayFrame
+	pop af
+	ld [hBGMapMode], a
+	ret
+
+.asm_9b52
+	hlcoord 0, 0, wAttrMap
+	ld de, $9800
+	ld b, $12
+	ld a, $1
+	ld [rVBK], a
+.asm_9b5e
+	ld c, $14
+.asm_9b60
+	ld a, [hli]
+	ld [de], a
+	inc de
+	dec c
+	jr nz, .asm_9b60
+	ld a, $c
+	add e
+	jr nc, .asm_9b6c
+	inc d
+.asm_9b6c
+	ld e, a
+	dec b
+	jr nz, .asm_9b5e
+	ld a, $0
+	ld [rVBK], a
+	ret
+
+Function9b75: ; 9b75 (2:5b75)
+	ld hl, wcc9b
+	ld a, [wcca9]
+	ld e, a
+	ld d, $0
+	add hl, de
+	ld e, l
+	ld d, h
+	ld a, [de]
+	inc a
+	ld e, a
+	hlcoord 11, 2, wAttrMap
+	ld bc, $28
+	ld a, [wcca9]
+.asm_9b8d
+	and a
+	jr z, .asm_9b94
+	add hl, bc
+	dec a
+	jr .asm_9b8d
+
+.asm_9b94
+	lb bc, 2, 8
+	ld a, e
+	call Function9af1
+	ret
+
+Function9b9c: ; 9b9c (2:5b9c)
+	ld hl, Palettes_bac6
+	ld de, wTempOBPal0
+	ld bc, $10
+	call CopyBytes
+	ret
+
+Function9ba9: ; 9ba9 (2:5ba9)
+	push de
+	callba Function3d8f5
+	ld c, l
+	ld b, h
+	ld a, [wd0ee]
+	call Function9bcb
+	pop de
+	ret
+
+Function9bba: ; 9bba (2:5bba)
+	push de
+	callba Function3d907
+	ld c, l
+	ld b, h
+	ld a, [wd0ed]
+	call Function9bd3
+	pop de
+	ret
+
+Function9bcb: ; 9bcb (2:5bcb)
+	and a
+	jp nz, Function9c66
+	ld hl, PalPacket_b53d
+	ret
+
+Function9bd3: ; 9bd3 (2:5bd3)
+	and a
+	jp nz, Function9c66
+	ld a, [wTrainerClass]
+Function9bda: ; 9bda (2:5bda)
+	ld l, a
+	ld h, $0
+	add hl, hl
+	add hl, hl
+	ld bc, PalPacket_b53d
+	add hl, bc
+	ret
+
+Function9be4: ; 9be4 (2:5be4)
+	call Function9c5b
+	ret
+
+Function9be8:
+	ret
+
+Function9be9:
+	call CheckCGB
+	ret z
+	ld hl, Palettes_9c09
+	ld a, $90
+	ld [rOBPI], a
+	ld c, $30
+.asm_9bf6
+	ld a, [hli]
+	ld [rOBPD], a
+	dec c
+	jr nz, .asm_9bf6
+	ld hl, Palettes_9c09
+	ld de, wTempOBPal2
+	ld bc, $10
+	call CopyBytes
+	ret
+
 Palettes_9c09:
-	dr $9c09, $9c76
+	dr $9c09, $9c39
+Function9c39:
+	dr $9c39, $9c5b
+Function9c5b:
+	dr $9c5b, $9c66
+Function9c66:
+	dr $9c66, $9c76
 PushSGBPals_:
 	dr $9c76, $9cc0
 InitSGBBorder:
@@ -588,7 +824,16 @@ PalPacket_a155:
 	dr $a155, $a165
 
 PalPacket_a165:
-	dr $a165, $ad2d
+	dr $a165, $a265
+Palettes_a265:
+	dr $a265, $a4dd
+
+SGBBorderMap:
+	dr $a4dd, $a90d
+SGBBorderPalettes:
+	dr $a90d, $a98d
+SGBBorder:
+	dr $a98d, $ad2d
 
 Palettes_ad2d:
 	dr $ad2d, $ad39
@@ -596,7 +841,10 @@ Palettes_ad39:
 	dr $ad39, $ad3d
 
 BlkPacket_ad3d:
-    dr $ad3d, $b649
+    dr $ad3d, $b53d
+
+PalPacket_b53d
+    dr $b53d, $b649
 
 Functionb649:
     dr $b649, $b796
