@@ -117,7 +117,7 @@ SGB_ApplyPartyMenuHPPals:
 	ld [hl], e
 	ret
 
-Function8b07:
+Function9102:
 	call CheckCGB
 	ret z
 	ld hl, .BGPal
@@ -246,8 +246,185 @@ Function91b4:
 	call LoadEDTile
 	ret
 
-ApplyMonOrTrainerPals:
-	dr $91e5, $9311
+ApplyMonOrTrainerPals: ; 91e5 (2:51e5)
+	call CheckCGB
+	ret z
+	ld a, e
+	and a
+	jr z, .asm_91f5
+	ld a, [wd004]
+	call Function9be4
+	jr .asm_91fb
+
+.asm_91f5
+	ld a, [wTrainerClass]
+	call Function9bda
+.asm_91fb
+	ld de, wUnknBGPals
+	call Function9adb
+	call Function9b1d
+	call Function9b35
+	call Function9b28
+	ret
+
+ApplyHPBarPals:
+	ld a, [wd007]
+	and a
+	jr z, .asm_921a
+	cp $1
+	jr z, .asm_921f
+	cp $2
+	jr z, .asm_9236
+	ret
+
+.asm_921a
+	ld de, $c292
+	jr .asm_9222
+
+.asm_921f
+	ld de, $c29a
+.asm_9222
+	ld l, c
+	ld h, $0
+	add hl, hl
+	add hl, hl
+	ld bc, $6d2d
+	add hl, bc
+	ld bc, $4
+	call CopyBytes
+	ld a, $1
+	ld [hCGBPalUpdate], a
+	ret
+
+.asm_9236
+	ld e, c
+	inc e
+	hlcoord 11, 1, wAttrMap
+	ld bc, 2 * SCREEN_WIDTH
+	ld a, [wd005]
+.asm_9241
+	and a
+	jr z, .asm_9248
+	add hl, bc
+	dec a
+	jr .asm_9241
+
+.asm_9248
+	lb bc, 2, 8
+	ld a, e
+	call Function9af1
+	ret
+
+LoadStatsScreenPals:
+	call CheckCGB
+	ret z
+	ld hl, StatsScreenPals ; $54eb
+	ld b, $0
+	dec c
+	add hl, bc
+	add hl, bc
+	ld a, [hli]
+	ld [wUnknBGPals], a
+	ld [wUnknBGPals + $10], a
+	ld a, [hl]
+	ld [wUnknBGPals + 1], a
+	ld [wUnknBGPals + $11], a
+	call Function9b28
+	ld a, $1
+	ld [hCGBPalUpdate], a
+	ret
+
+LoadMailPalettes:
+	ld l, e
+	ld h, $0
+	add hl, hl
+	add hl, hl
+	add hl, hl
+	ld de, .MailPals
+	add hl, de
+	call CheckCGB
+	jr nz, .asm_92ae
+	push hl
+	ld hl, PalPacket_a155
+	ld de, wcca9
+	ld bc, $10
+	call CopyBytes
+	pop hl
+	inc hl
+	inc hl
+	ld a, [hli]
+	ld [wccac], a
+	ld a, [hli]
+	ld [wccad], a
+	ld a, [hli]
+	ld [wccae], a
+	ld a, [hli]
+	ld [wccaf], a
+	ld hl, wcca9
+	call PushSGBPals_
+	ld hl, BlkPacket_9ee5
+	call PushSGBPals_
+	ret
+
+.asm_92ae
+	ld de, wUnknBGPals
+	ld bc, $8
+	call CopyBytes
+	call Function9b28
+	call Function9b1d
+	call Function9b35
+	ret
+
+.MailPals:
+	RGB 20, 31, 11
+	RGB 31, 19, 00
+	RGB 31, 10, 09
+	RGB 00, 00, 00
+
+	RGB 15, 20, 31
+	RGB 30, 26, 00
+	RGB 31, 12, 00
+	RGB 00, 00, 00
+
+	RGB 24, 17, 31
+	RGB 30, 26, 00
+	RGB 08, 11, 31
+	RGB 00, 00, 00
+
+	RGB 31, 25, 17
+	RGB 31, 18, 04
+	RGB 28, 12, 05
+	RGB 00, 00, 00
+
+	RGB 19, 26, 31
+	RGB 31, 05, 08
+	RGB 31, 09, 31
+	RGB 00, 00, 00
+
+	RGB 31, 19, 28
+	RGB 31, 21, 00
+	RGB 12, 22, 00
+	RGB 00, 00, 00
+
+	RGB 19, 17, 23
+	RGB 30, 26, 00
+	RGB 31, 12, 00
+	RGB 00, 00, 00
+
+	RGB 07, 26, 31
+	RGB 26, 26, 27
+	RGB 31, 11, 11
+	RGB 00, 00, 00
+
+	RGB 21, 31, 21
+	RGB 30, 26, 00
+	RGB 31, 12, 00
+	RGB 00, 00, 00
+
+	RGB 07, 26, 31
+	RGB 31, 31, 00
+	RGB 00, 21, 00
+	RGB 00, 00, 00
 
 INCLUDE "predef/cgb.asm"
 
@@ -262,13 +439,21 @@ Function9ad2:
 Function9adb:
 	dr $9adb, $9af1
 Function9af1:
-	dr $9af1, $9b1d
+	dr $9af1, $9b01
+Function9b01:
+	dr $9b01, $9b1d
 Function9b1d:
 	dr $9b1d, $9b28
 Function9b28:
-	dr $9b28, $9b9c
+	dr $9b28, $9b35
+Function9b35:
+	dr $9b35, $9b75
+Function9b75:
+	dr $9b75, $9b9c
 Function9b9c:
-	dr $9b9c, $9be4
+	dr $9b9c, $9bda
+Function9bda:
+	dr $9bda, $9be4
 Function9be4:
 	dr $9be4, $9c76
 PushSGBPals_:

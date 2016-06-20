@@ -1928,7 +1928,7 @@ wcc94:: ds 1 ; cc94
 wcc95:: ds 1 ; cc95
 wcc96:: ds 1 ; cc96
 wcc97:: ds 1 ; cc97
-wcc98:: ds 1 ; cc98
+wColorLayoutPredefID:: ds 1 ; cc98
 wcc99:: ds 1 ; cc99
 wcc9a:: ds 1 ; cc9a
 wcc9b:: ds 1 ; cc9b
