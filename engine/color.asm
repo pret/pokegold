@@ -451,7 +451,15 @@ Function9b35:
 Function9b75:
 	dr $9b75, $9b9c
 Function9b9c:
-	dr $9b9c, $9bda
+	dr $9b9c, $9ba9
+Function9ba9:
+	dr $9ba9, $9bba
+Function9bba:
+	dr $9bba, $9bcb
+Function9bcb:
+	dr $9bcb, $9bd3
+Function9bd3:
+	dr $9bd3, $9bda
 Function9bda:
 	dr $9bda, $9be4
 Function9be4:
@@ -463,14 +471,104 @@ InitSGBBorder:
 InitCGBPals:: ; 9cfd
 	dr $9cfd, $9ee5
 BlkPacket_9ee5:
-	dr $9ee5, $9fa5
+	dr $9ee5, $9ef5
+
+BlkPacket_9ef5:
+	dr $9ef5, $9f05
+
+BlkPacket_9f05:
+	dr $9f05, $9f25
+
+BlkPacket_9f25:
+	dr $9f25, $9f35
+
+BlkPacket_9f35:
+	dr $9f35, $9f45
+
+BlkPacket_9f45:
+	dr $9f45, $9f55
+
+BlkPacket_9f55:
+	dr $9f55, $9f65
+
+BlkPacket_9f65:
+	dr $9f65, $9f75
+
+BlkPacket_9f75:
+	dr $9f75, $9f85
+
+BlkPacket_9f85:
+	dr $9f85, $9fa5
 BlkPacket_9fa5:
-	dr $9fa5, $a095
+	dr $9fa5, $9fd5
+
+BlkPacket_9fd5:
+	dr $9fd5, $9fe5
+
+BlkPacket_9fe5:
+	dr $9fe5, $9ff5
+
+BlkPacket_9ff5:
+	dr $9ff5, $a005
+PalPacket_a005:
+	dr $a005, $a015
+
+PalPacket_a015:
+	dr $a015, $a025
+
+PalPacket_a025:
+	dr $a025, $a035
+
+PalPacket_a035:
+	dr $a035, $a045
+
+PalPacket_a045:
+	dr $a045, $a055
+PalPacket_a055:
+	dr $a055, $a075
+PalPacket_a075:
+	dr $a075, $a085
+PalPacket_a085:
+	dr $a085, $a095
 PalPacket_a095:
 	dr $a095, $a0a5
+
 PalPacket_a0a5:
-	dr $a0a5, $a0c5
+	dr $a0a5, $a0b5
+
+PalPacket_a0b5:
+	dr $a0b5, $a0c5
 PalPacket_a0c5:
-	dr $a0c5, $a155
+	dr $a0c5, $a0d5
+
+PalPacket_a0d5:
+	dr $a0d5, $a0e5
+
+PalPacket_a0e5:
+	dr $a0e5, $a105
+
+PalPacket_a105:
+	dr $a105, $a115
+
+PalPacket_a115:
+	dr $a115, $a125
+
+PalPacket_a125:
+	dr $a125, $a135
+
+PalPacket_a135:
+	dr $a135, $a145
+
+PalPacket_a145:
+	dr $a145, $a155
 PalPacket_a155:
-	dr $a155, $bc3a
+	dr $a155, $a165
+
+PalPacket_a165:
+	dr $a165, $ad2d
+
+BlkPacket_ad2d:
+	dr $ad2d, $ad3d
+
+BlkPacket_ad3d:
+    dr $ad3d, $bc3a
