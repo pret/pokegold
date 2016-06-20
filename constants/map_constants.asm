@@ -244,10 +244,9 @@ MAP_NONE   EQU 0
 	mapgroup GOLDENROD_DEPT_STORE_ROOF,                   4,  8 ; 18
 	mapgroup GOLDENROD_GAME_CORNER,                       7, 10 ; 19
 	mapgroup GOLDENROD_POKECENTER_1F,                     4,  5 ; 20
-	mapgroup GOLDENROD_POKECOM_CENTER_2F_MOBILE,         16, 16 ; 21
-	mapgroup ILEX_FOREST_AZALEA_GATE,                     4,  5 ; 22
-	mapgroup ROUTE_34_ILEX_FOREST_GATE,                   4,  5 ; 23
-	mapgroup DAYCARE,                                     4,  5 ; 24
+	mapgroup ILEX_FOREST_AZALEA_GATE,                     4,  5 ; 21
+	mapgroup ROUTE_34_ILEX_FOREST_GATE,                   4,  5 ; 22
+	mapgroup DAYCARE,                                     4,  5 ; 23
 
 	newgroup                                                    ; 12
 
@@ -357,8 +356,6 @@ MAP_NONE   EQU 0
 	mapgroup TRADE_CENTER,                                4,  5 ;  2
 	mapgroup COLOSSEUM,                                   4,  5 ;  3
 	mapgroup TIME_CAPSULE,                                4,  5 ;  4
-	mapgroup MOBILE_TRADE_ROOM_MOBILE,                    4,  5 ;  5
-	mapgroup MOBILE_BATTLE_ROOM,                          4,  5 ;  6
 
 	newgroup                                                    ; 21
 
@@ -400,13 +397,6 @@ MAP_NONE   EQU 0
 	mapgroup CIANWOOD_PHARMACY,                           4,  4 ;  7
 	mapgroup CIANWOOD_CITY_PHOTO_STUDIO,                  4,  4 ;  8
 	mapgroup CIANWOOD_LUGIA_SPEECH_HOUSE,                 4,  4 ;  9
-	mapgroup POKE_SEERS_HOUSE,                            4,  4 ; 10
-	mapgroup BATTLE_TOWER_1F,                             5,  8 ; 11
-	mapgroup BATTLE_TOWER_BATTLE_ROOM,                    4,  4 ; 12
-	mapgroup BATTLE_TOWER_ELEVATOR,                       2,  2 ; 13
-	mapgroup BATTLE_TOWER_HALLWAY,                        2, 11 ; 14
-	mapgroup ROUTE_40_BATTLE_TOWER_GATE,                  4,  5 ; 15
-	mapgroup BATTLE_TOWER_OUTSIDE,                       14, 10 ; 16
 
 	newgroup                                                    ; 23
 
@@ -472,6 +462,7 @@ MAP_NONE   EQU 0
 	mapgroup MR_POKEMONS_HOUSE,                           4,  4 ; 10
 	mapgroup ROUTE_31_VIOLET_GATE,                        4,  5 ; 11
 
+NUM_MAP_GROUPS EQU const_value
 
 ; elevator floors
 

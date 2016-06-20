@@ -314,24 +314,14 @@ ScrollBGMapPalettes:: ; 804f (2:404f)
 INCLUDE "tilesets/palette_maps.asm"
 
 Unknown85d7:
-	rept 26
+	rept NUM_MAP_GROUPS
 	db PAL_BG_ROOF
 	endr
 
 INCLUDE "engine/player_object.asm"
 INCLUDE "engine/sine.asm"
 INCLUDE "engine/predef.asm"
-
-Predef_LoadSGBLayout:
-	dr $8c2d, $9072
-CheckContestMon:
-	dr $9072, $91e5
-ApplyMonOrTrainerPals:
-	dr $91e5, $9cc0
-InitSGBBorder:
-	dr $9cc0, $9cfd
-InitCGBPals:: ; 9cfd
-	dr $9cfd, $bc3a
+INCLUDE "engine/color.asm"
 
 SECTION "bank3", ROMX, BANK[$3]
 CheckTime::
