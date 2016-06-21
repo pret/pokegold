@@ -655,7 +655,7 @@ Function9bba: ; 9bba (2:5bba)
 Function9bcb: ; 9bcb (2:5bcb)
 	and a
 	jp nz, Function9c66
-	ld hl, PalPacket_b53d
+	ld hl, TrainerPalettes
 	ret
 
 Function9bd3: ; 9bd3 (2:5bd3)
@@ -667,7 +667,7 @@ Function9bda: ; 9bda (2:5bda)
 	ld h, $0
 	add hl, hl
 	add hl, hl
-	ld bc, PalPacket_b53d
+	ld bc, TrainerPalettes
 	add hl, bc
 	ret
 
@@ -755,7 +755,7 @@ Function9c5b: ; 9c5b (2:5c5b)
 	add hl, hl
 	add hl, hl
 	add hl, hl
-	ld bc, BlkPacket_ad3d
+	ld bc, PokemonPalettes
 	add hl, bc
 	ret
 
@@ -1137,108 +1137,218 @@ Function9ed9: ; 9ed9 (2:5ed9)
 	jr nz, .asm_9edc
 	ret
 
-BlkPacket_9ee5:
-	dr $9ee5, $9ef5
-BlkPacket_9ef5:
-	dr $9ef5, $9f05
-BlkPacket_9f05:
-	dr $9f05, $9f25
-BlkPacket_9f25:
-	dr $9f25, $9f35
-BlkPacket_9f35:
-	dr $9f35, $9f45
-BlkPacket_9f45:
-	dr $9f45, $9f55
-BlkPacket_9f55:
-	dr $9f55, $9f65
-BlkPacket_9f65:
-	dr $9f65, $9f75
-BlkPacket_9f75:
-	dr $9f75, $9f85
-BlkPacket_9f85:
-	dr $9f85, $9fa5
-BlkPacket_9fa5:
-	dr $9fa5, $9fd5
-BlkPacket_9fd5:
-	dr $9fd5, $9fe5
-BlkPacket_9fe5:
-	dr $9fe5, $9ff5
-BlkPacket_9ff5:
-	dr $9ff5, $a005
+BlkPacket_9ee5:	db $21, $01, $03, $00, $00, $00, $13, $11, $00, $00, $00, $00, $00, $00, $00, $00
+BlkPacket_9ef5:	db $21, $01, $07, $05, $00, $0a, $13, $0d, $00, $00, $00, $00, $00, $00, $00, $00
+BlkPacket_9f05:	db $22, $05, $07, $0a, $00, $0c, $13, $11, $03, $05, $01, $00, $0a, $03, $03, $00
+BlkPacket_9f15:	db $0a, $08, $13, $0a, $03, $0a, $00, $04, $08, $0b, $03, $0f, $0b, $00, $13, $07
+BlkPacket_9f25:	db $21, $01, $07, $05, $00, $00, $06, $06, $00, $00, $00, $00, $00, $00, $00, $00
+BlkPacket_9f35:	db $21, $01, $06, $05, $0b, $01, $13, $02, $00, $00, $00, $00, $00, $00, $00, $00
+BlkPacket_9f45:	db $21, $01, $07, $05, $00, $01, $07, $07, $00, $00, $00, $00, $00, $00, $00, $00
+BlkPacket_9f55:	db $21, $01, $07, $05, $01, $04, $07, $0a, $00, $00, $00, $00, $00, $00, $00, $00
+BlkPacket_9f65:	db $21, $01, $07, $05, $01, $01, $05, $05, $00, $00, $00, $00, $00, $00, $00, $00
+BlkPacket_9f75:	db $21, $01, $07, $05, $07, $05, $0d, $0b, $00, $00, $00, $00, $00, $00, $00, $00
+BlkPacket_9f85:	db $22, $05, $03, $05, $00, $00, $13, $0b, $03, $0a, $00, $04, $13, $09, $02, $0f
+BlkPacket_9f95:	db $00, $06, $13, $07, $03, $00, $04, $04, $0f, $09, $03, $00, $00, $0c, $13, $11
+BlkPacket_9fa5:	db $23, $07, $07, $10, $00, $00, $02, $0c, $02, $00, $0c, $01, $12, $02, $02, $00
+BlkPacket_9fb5:	db $0c, $03, $12, $04, $02, $00, $0c, $05, $12, $06, $02, $00, $0c, $07, $12, $08
+BlkPacket_9fc5:	db $02, $00, $0c, $09, $12, $0a, $02, $00, $0c, $0b, $12, $0c, $00, $00, $00, $00
+BlkPacket_9fd5:	db $21, $02, $07, $30, $00, $00, $13, $06, $02, $04, $05, $06, $0e, $06, $00, $00
+BlkPacket_9fe5:	db $21, $01, $07, $10, $00, $00, $13, $05, $00, $00, $00, $00, $00, $00, $00, $00
+BlkPacket_9ff5:	db $21, $02, $07, $0a, $00, $04, $13, $0d, $03, $05, $00, $06, $13, $0b, $00, $00
+
 PalPacket_a005:
-	dr $a005, $a015
+	db $51
+	RGB  8,  2,  0
+	RGB  9,  2,  0
+	RGB 10,  2,  0
+	RGB 11,  2,  0
+	db $00, $00, $00, $00, $00, $00, $00
+
 PalPacket_a015:
-	dr $a015, $a025
+	db $51
+	RGB 11,  1,  0
+	RGB  4,  1,  0
+	RGB  0,  1,  0
+	RGB  0,  0,  0
+	db $00, $00, $00, $00, $00, $00, $00
+
 PalPacket_a025:
-	dr $a025, $a035
+	db $51
+	RGB  1,  2,  0
+	RGB  2,  2,  0
+	RGB  3,  2,  0
+	RGB  4,  2,  0
+	db $00, $00, $00, $00, $00, $00, $00
+
 PalPacket_a035:
-	dr $a035, $a045
+	db $51
+	RGB 12,  2,  0
+	RGB 12,  2,  0
+	RGB 12,  2,  0
+	RGB 12,  2,  0
+	db $00, $00, $00, $00, $00, $00, $00
+
 PalPacket_a045:
-	dr $a045, $a055
+	db $51
+	RGB  0,  0,  0
+	RGB  0,  0,  0
+	RGB  0,  0,  0
+	RGB  0,  0,  0
+	db $00, $00, $00, $00, $00, $00, $00
+
 PalPacket_a055:
-	dr $a055, $a075
+	db $51
+	RGB 22,  1,  0
+	RGB  0,  0,  0
+	RGB  0,  0,  0
+	RGB  0,  0,  0
+	db $00, $00, $00, $00, $00, $00, $00
+
+PalPacket_a065:
+	db $51
+	RGB 23,  1,  0
+	RGB  0,  0,  0
+	RGB  0,  0,  0
+	RGB  0,  0,  0
+	db $00, $00, $00, $00, $00, $00, $00
+
 PalPacket_a075:
-	dr $a075, $a085
+	db $51
+	RGB 24,  1,  0
+	RGB 25,  1,  0
+	RGB  0,  0,  0
+	RGB  0,  0,  0
+	db $00, $00, $00, $00, $00, $00, $00
+
 PalPacket_a085:
-	dr $a085, $a095
+	db $51
+	RGB 26,  1,  0
+	RGB  0,  0,  0
+	RGB  0,  0,  0
+	RGB  0,  0,  0
+	db $00, $00, $00, $00, $00, $00, $00
+
 PalPacket_a095:
-	dr $a095, $a0a5
+	db $51
+	RGB 27,  1,  0
+	RGB  0,  0,  0
+	RGB  0,  0,  0
+	RGB  0,  0,  0
+	db $00, $00, $00, $00, $00, $00, $00
+
 PalPacket_a0a5:
-	dr $a0a5, $a0b5
+	db $51
+	RGB 28,  1,  0
+	RGB  0,  0,  0
+	RGB  0,  0,  0
+	RGB  0,  0,  0
+	db $00, $00, $00, $00, $00, $00, $00
+
 PalPacket_a0b5:
-	dr $a0b5, $a0c5
+	db $51
+	RGB 25,  1,  0
+	RGB  0,  0,  0
+	RGB  0,  0,  0
+	RGB  0,  0,  0
+	db $00, $00, $00, $00, $00, $00, $00
+
 PalPacket_a0c5:
-	dr $a0c5, $a0d5
+	db $51
+	RGB 14,  1,  0
+	RGB 15,  1,  0
+	RGB 16,  1,  0
+	RGB 17,  1,  0
+	db $00, $00, $00, $00, $00, $00, $00
+
 PalPacket_a0d5:
-	dr $a0d5, $a0e5
+	db $51
+	RGB 26,  0,  0
+	RGB 26,  0,  0
+	RGB 26,  0,  0
+	RGB 26,  0,  0
+	db $00, $00, $00, $00, $00, $00, $00
+
 PalPacket_a0e5:
-	dr $a0e5, $a105
+	db $51
+	RGB 18,  1,  0
+	RGB  0,  0,  0
+	RGB  0,  0,  0
+	RGB  0,  0,  0
+	db $00, $00, $00, $00, $00, $00, $00
+
+PalPacket_a0f5:
+	db $51
+	RGB 28,  1,  0
+	RGB  0,  0,  0
+	RGB  0,  0,  0
+	RGB  0,  0,  0
+	db $00, $00, $00, $00, $00, $00, $00
+
 PalPacket_a105:
-	dr $a105, $a115
+	db $51
+	RGB 29,  1,  0
+	RGB 30,  1,  0
+	RGB 31,  1,  0
+	RGB  0,  2,  0
+	db $00, $00, $00, $00, $00, $00, $00
+
 PalPacket_a115:
-	dr $a115, $a125
+	db $51
+	RGB 19,  1,  0
+	RGB 20,  1,  0
+	RGB 27,  0,  0
+	RGB 31,  0,  0
+	db $00, $00, $00, $00, $00, $00, $00
+
 PalPacket_a125:
-	dr $a125, $a135
+	db $51
+	RGB 27,  0,  0
+	RGB  0,  0,  0
+	RGB  0,  0,  0
+	RGB  0,  0,  0
+	db $00, $00, $00, $00, $00, $00, $00
+
 PalPacket_a135:
-	dr $a135, $a145
+	db $51
+	RGB 28,  0,  0
+	RGB  0,  0,  0
+	RGB  0,  0,  0
+	RGB  0,  0,  0
+	db $00, $00, $00, $00, $00, $00, $00
+
 PalPacket_a145:
-	dr $a145, $a155
-PalPacket_a155:
-	dr $a155, $a165
-PalPacket_a165:
-	dr $a165, $a175
-PalPacket_a175:
-	dr $a175, $a185
-PalPacket_a185:
-	dr $a185, $a195
-PalPacket_a195:
-	dr $a195, $a1a5
-PalPacket_a1a5:
-	dr $a1a5, $a1b5
-PalPacket_a1b5:
-	dr $a1b5, $a1c5
-PalPacket_a1c5:
-	dr $a1c5, $a1d5
-PalPacket_a1d5:
-	dr $a1d5, $a1e5
-PalPacket_a1e5:
-	dr $a1e5, $a1f5
-PalPacket_a1f5:
-	dr $a1f5, $a205
-PalPacket_a205:
-	dr $a205, $a215
-PalPacket_a215:
-	dr $a215, $a225
-PalPacket_a225:
-	dr $a225, $a235
-PalPacket_a235:
-	dr $a235, $a245
-PalPacket_a245:
-	dr $a245, $a255
-PalPacket_a255:
-	dr $a255, $a265
-Palettes_a265:
-	dr $a265, $a4dd
+	db $51
+	RGB 21,  1,  0
+	RGB  0,  0,  0
+	RGB  0,  0,  0
+	RGB  0,  0,  0
+	db $00, $00, $00, $00, $00, $00, $00
+
+PalPacket_a155: db $01, $ff, $7f, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00
+PalPacket_a165: db $09, $ff, $7f, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00
+PalPacket_a175: db $59, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00
+PalPacket_a185: db $89, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00
+PalPacket_a195: db $89, $01, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00
+PalPacket_a1a5: db $99, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00
+PalPacket_a1b5: db $a1, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00
+
+PalPacket_a1c5: db $b9, $01, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00
+PalPacket_a1d5: db $b9, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00
+PalPacket_a1e5: db $79, $5d, $08, $00, $0b, $8c, $d0, $f4, $60, $00, $00, $00, $00, $00, $00, $00
+PalPacket_a1f5: db $79, $52, $08, $00, $0b, $a9, $e7, $9f, $01, $c0, $7e, $e8, $e8, $e8, $e8, $e0
+PalPacket_a205: db $79, $47, $08, $00, $0b, $c4, $d0, $16, $a5, $cb, $c9, $05, $d0, $10, $a2, $28
+PalPacket_a215: db $79, $3c, $08, $00, $0b, $f0, $12, $a5, $c9, $c9, $c8, $d0, $1c, $a5, $ca, $c9
+PalPacket_a225: db $79, $31, $08, $00, $0b, $0c, $a5, $ca, $c9, $7e, $d0, $06, $a5, $cb, $c9, $7e
+PalPacket_a235: db $79, $26, $08, $00, $0b, $39, $cd, $48, $0c, $d0, $34, $a5, $c9, $c9, $80, $d0
+PalPacket_a245: db $79, $1b, $08, $00, $0b, $ea, $ea, $ea, $ea, $ea, $a9, $01, $cd, $4f, $0c, $d0
+PalPacket_a255: db $79, $10, $08, $00, $0b, $4c, $20, $08, $ea, $ea, $ea, $ea, $ea, $60, $ea, $ea
+
+IF DEF(GOLD)
+Palettes_a265: INCLUDE "gfx/pals/gold_a265.pal"
+ENDC
+IF DEF(SILVER)
+Palettes_a265: INCLUDE "gfx/pals/silver_a265.pal"
+ENDC
 
 IF DEF(GOLD)
 SGBBorderMap: INCBIN "gfx/sgb_border/gold.map"
@@ -1253,13 +1363,21 @@ SGBBorder: INCBIN "gfx/sgb_border/silver.2bpp"
 ENDC
 
 Palettes_ad2d:
-	dr $ad2d, $ad39
+	RGB 30, 26, 15
+	RGB 00, 23, 00
+
+	RGB 30, 26, 15
+	RGB 31, 21, 00
+
+	RGB 30, 26, 15
+	RGB 31, 00, 00
+
 Palettes_ad39:
-	dr $ad39, $ad3d
-BlkPacket_ad3d:
-    dr $ad3d, $b53d
-PalPacket_b53d
-    dr $b53d, $b649
+	RGB 30, 26, 15
+	RGB 04, 17, 31
+
+INCLUDE "gfx/pics/palette_pointers.asm"
+INCLUDE "gfx/trainers/palette_pointers.asm"
 
 Functionb649: ; b649 (2:7649)
 	ld a, [wPermission]

@@ -439,7 +439,7 @@ Function8f53: ; 8f53 (2:4f53)
 	add hl, hl
 	add hl, hl
 	add hl, hl
-	ld de, BlkPacket_ad3d
+	ld de, PokemonPalettes
 	add hl, de
 	ld a, [wce65]
 	and $3
