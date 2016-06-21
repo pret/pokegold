@@ -347,12 +347,67 @@ INCLUDE "engine/engine_flags.asm"
 INCLUDE "engine/variables.asm"
 INCLUDE "engine/specials.asm"
 
-ComputeHPBarPixels:
-IF DEF(GOLD)
-	dr $c6de, $c725
-AnimateHPBar:
-	dr $c725, $d1e2
+Functionc660:
+	nop
+FlagPredef:
+	push hl
+	push bc
+	push bc
+	srl c
+	srl c
+	srl c
+	ld b, $0
+	add hl, bc
+	pop bc
+	ld a, c
+	and $7
+	ld c, a
+	ld a, $1
+	jr z, .asm_c67a
+.asm_c676
+	add a
+	dec c
+	jr nz, .asm_c676
+.asm_c67a
+	ld c, a
+	dec b
+	jr z, .asm_c687
+	dec b
+	jr z, .asm_c68c
+	ld a, c
+	cpl
+	and [hl]
+	ld [hl], a
+	jr .asm_c699
+
+.asm_c687
+	ld a, [hl]
+	or c
+	ld [hl], a
+	jr .asm_c699
+
+.asm_c68c
+	ld a, d
+	cp $0
+	jr nz, .asm_c695
+	ld a, [hl]
+	and c
+	jr .asm_c699
+
+.asm_c695
+	call GetFarByte
+	and c
+.asm_c699
+	pop bc
+	pop hl
+	ld c, a
+	ret
+
+INCLUDE "engine/health.asm"
+INCLUDE "engine/overworld.asm"
+
 ReceiveItem_::
+IF DEF(GOLD)
 	dr $d1e2, $d21a
 TossItem_::
 	dr $d21a, $d251
@@ -408,10 +463,6 @@ Functionf900:
 ENDC
 
 IF DEF(SILVER)
-	dr $c6dc, $c723
-AnimateHPBar:
-	dr $c723, $d1e0
-ReceiveItem_::
 	dr $d1e0, $d218
 TossItem_::
 	dr $d218, $d24f
@@ -1303,10 +1354,19 @@ Text_UsedCut_::
 Text_NothingToCut_::
 	dr $1920f2, $19210f
 Text_UsedFlash_::
-	dr $19210f, $194000
+	dr $19210f, $192135
+UsedSurfText_::
+	dr $192135, $194000
 
 SECTION "bank65", ROMX, BANK[$65]
-	dr $194000, $195610
+CantSurfText_::
+	dr $194000, $194015
+
+AlreadySurfingText_::
+	dr $194015, $19402d
+
+AskSurfText_::
+	dr $19402d, $195610
 
 ClockTimeUnknownText_:: ; 195610
 	dr $195610, $195624

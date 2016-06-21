@@ -33,7 +33,7 @@ CloseText
 	ld a, $90
 	ld [hWY], a
 	callba Function1415c
-	call Functiond97
+	call ReplacePlayerSprite
 	ld hl, wd565
 	res 7, [hl]
 	call ResetBGWindow

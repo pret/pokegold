@@ -771,8 +771,7 @@ earthquake: macro
 	enum changemap_command
 changemap: macro
 	db changemap_command
-	db \1 ; map_bank
-	dw \2 ; map_data_pointer
+	dba \1 ; blockdata
 	endm
 
 	enum changeblock_command
@@ -1023,12 +1022,6 @@ warpfacing: macro
 	map \2 ; map
 	db \3 ; x
 	db \4 ; y
-	endm
-
-	enum battletowertext_command
-battletowertext: macro
-	db battletowertext_command
-	db \1 ; memory
 	endm
 
 	enum landmarktotext_command

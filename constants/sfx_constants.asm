@@ -190,21 +190,3 @@
 	const SFX_2_BOOPS                     ; bb
 	const SFX_GLASS_TING                  ; bc
 	const SFX_GLASS_TING_2                ; bd
-
-	const SFX_INTRO_UNOWN_1               ; be
-	const SFX_INTRO_UNOWN_2               ; bf
-	const SFX_INTRO_UNOWN_3               ; c0
-	const SFX_DITTO_POP_UP                ; c1
-	const SFX_DITTO_TRANSFORM             ; c2
-	const SFX_INTRO_SUICUNE_1             ; c3
-	const SFX_INTRO_PICHU                 ; c4
-	const SFX_INTRO_SUICUNE_2             ; c5
-	const SFX_INTRO_SUICUNE_3             ; c6
-	const SFX_DITTO_BOUNCE                ; c7
-	const SFX_INTRO_SUICUNE_4             ; c8
-	const SFX_GAME_FREAK_PRESENTS         ; c9
-	const SFX_TINGLE                      ; ca
-	const SFX_UNKNOWN_CB                  ; cb
-	const SFX_TWO_PC_BEEPS                ; cc
-	const SFX_4_NOTE_DITTY                ; cd
-	const SFX_TWINKLE                     ; ce

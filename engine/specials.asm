@@ -68,7 +68,7 @@ SpecialsPointers:
 	add_special UpdateTimePals
 	add_special ClearTileMap
 	add_special UpdateSprites
-	add_special Functiond97
+	add_special ReplacePlayerSprite
 	add_special Special_GameCornerPrizeMonCheckDex
 	add_special SpecialSeenMon
 	add_special WaitSFX, $03
@@ -553,105 +553,3 @@ Functionc652: ; c652 (3:4652)
 	ld a, [$abfd]
 	ld [wScriptVar], a
 	jp CloseSRAM
-
-Functionc660:
-	nop
-FlagPredef:
-	push hl
-	push bc
-	push bc
-	srl c
-	srl c
-	srl c
-	ld b, $0
-	add hl, bc
-	pop bc
-	ld a, c
-	and $7
-	ld c, a
-	ld a, $1
-	jr z, .asm_c67a
-.asm_c676
-	add a
-	dec c
-	jr nz, .asm_c676
-.asm_c67a
-	ld c, a
-	dec b
-	jr z, .asm_c687
-	dec b
-	jr z, .asm_c68c
-	ld a, c
-	cpl
-	and [hl]
-	ld [hl], a
-	jr .asm_c699
-
-.asm_c687
-	ld a, [hl]
-	or c
-	ld [hl], a
-	jr .asm_c699
-
-.asm_c68c
-	ld a, d
-	cp $0
-	jr nz, .asm_c695
-	ld a, [hl]
-	and c
-	jr .asm_c699
-
-.asm_c695
-	call GetFarByte
-	and c
-.asm_c699
-	pop bc
-	pop hl
-	ld c, a
-	ret
-
-HealParty: ; c69d (3:469d)
-	xor a
-	ld [wd005], a
-	ld hl, wPartySpecies
-.asm_c6a4
-	ld a, [hli]
-	cp $ff
-	jr z, .asm_c6bb
-	cp $fd
-	jr z, .asm_c6b2
-	push hl
-	call Functionc6bc
-	pop hl
-.asm_c6b2
-	ld a, [wd005]
-	inc a
-	ld [wd005], a
-	jr .asm_c6a4
-
-.asm_c6bb
-	ret
-
-Functionc6bc: ; c6bc (3:46bc)
-	ld a, $0
-	call GetPartyParamLocation
-	ld d, h
-	ld e, l
-	ld hl, $20
-	add hl, de
-	xor a
-	ld [hli], a
-	ld [hl], a
-	ld hl, $24
-	add hl, de
-	ld b, h
-	ld c, l
-	dec bc
-	dec bc
-	ld a, [hli]
-	ld [bc], a
-	inc bc
-	ld a, [hl]
-	ld [bc], a
-	callba Functionf900
-	ret

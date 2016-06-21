@@ -24,7 +24,7 @@ Functiond70:: ; d70 (0:0d70)
 	rst Bankswitch
 	ret
 
-Functiond97::
+ReplacePlayerSprite::
 	callba Function1413c
 	ret
 
