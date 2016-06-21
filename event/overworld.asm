@@ -503,7 +503,7 @@ TrySurfOW::
 .quit
 	xor a
 	ret
-;ca4b
+
 AskSurfScript:
 	opentext
 	writetext AskSurfText
@@ -517,9 +517,204 @@ AskSurfText:
 	db "@"
 
 FlyFunction:
+	call FieldMoveBufferReset
+.asm_ca5d
+	ld hl, .Jumptable
+	call DoFieldMoveAction
+	jr nc, .asm_ca5d
+	and $7f
+	ld [wFieldMoveSucceeded], a
+	ret
+
+.Jumptable
+	dw TryToFly
+	dw RunFlyScript
+	dw FailToFly
+
+TryToFly:
+	ld de, ENGINE_STORMBADGE
+	call FieldMoveBadgeCheck
+	jr c, .asm_caa4
+	call GetMapPermission
+	call CheckOutdoorMap
+	jr z, .asm_ca83
+	jr .asm_caa7
+
+.asm_ca83
+	xor a
+	ld [hMapAnims], a
+	call LoadStandardMenuDataHeader
+	call ClearSprites
+	ld a, $24
+	ld hl, $5a61
+	rst FarCall
+	ld a, e
+	cp $ff
+	jr z, .asm_caaa
+	cp $1c
+	jr nc, .asm_caaa
+	ld [wceec], a
+	call CloseWindow
+	ld a, $1
+	ret
+
+.asm_caa4
+	ld a, $82
+	ret
+
+.asm_caa7
+	ld a, $2
+	ret
+
+.asm_caaa
+	call CloseWindow
+	call WaitBGMap
+	ld a, $80
+	ret
+
+RunFlyScript:
+	ld hl, FlyScript
+	call QueueScript
+	ld a, $81
+	ret
+
+FailToFly:
+	call FieldMoveFailed
+	ld a, $82
+	ret
+
+FlyScript:
+	reloadmappart
+	callasm HideSprites
+	special UpdateTimePals
+	callasm FlyFromAnimation
+	farscall AbortBugCatchingContest
+	special WarpToSpawnPoint
+	callasm DelayLoadingNewSprites ; 1560c
+	writecode VAR_MOVEMENT, PLAYER_NORMAL
+	newloadmap MAPSETUP_TELEPORT
+	callasm FlyToAnimation
+	special WaitSFX
+	special ReplacePlayerSprite
+	callasm Function1415c
+	end
+
+WaterfallFunction: ; caed
+	call TryWaterfall
+	and $7f
+	ld [wFieldMoveSucceeded], a
+	ret
+
+TryWaterfall: ; caf6 (3:4af6)
+	ld de, ENGINE_RISINGBADGE
+	callba FieldMoveBadgeCheck ; same bank
+	ld a, $80
+	ret c
+	call CheckMapCanWaterfall
+	jr c, .asm_cb10
+	ld hl, Script_WaterfallFromMenu
+	call QueueScript
+	ld a, $81
+	ret
+
+.asm_cb10
+	call FieldMoveFailed
+	ld a, $80
+	ret
+
+CheckMapCanWaterfall: ; cb16 (3:4b16)
+	ld a, [wPlayerDirection]
+	and $c
+	cp FACE_UP
+	jr nz, .asm_cb29
+	ld a, [wTileUp]
+	call CheckWaterfallTile
+	jr nz, .asm_cb29
+	xor a
+	ret
+
+.asm_cb29
+	scf
+	ret
+
+Script_WaterfallFromMenu: ;cb2b
+	reloadmappart
+	special UpdateTimePals
+Script_UsedWaterfall:
+	callasm FieldMoveGetPartyNick
+	writetext Text_UsedWaterfall
+	waitbutton
+	closetext
+	playsound SFX_BUBBLEBEAM
+.loop
+	applymovement 0, WaterfallStep
+	callasm CheckContinueWaterfall
+	iffalse .loop
+	end
+
+WaterfallStep:
+	turn_waterfall UP
+	step_end
+
+CheckContinueWaterfall: ;cb49
+	xor a
+	ld [wScriptVar], a
+	ld a, [wPlayerStandingTile]
+	call CheckWaterfallTile
+	ret z
+	ld a, $1
+	ld [wScriptVar], a
+	ret
+
+Text_UsedWaterfall:
+	text_jump Text_UsedWaterfall_
+	db "@"
+
+TryWaterfallOW:
+	ld d, WATERFALL
+	call FieldMovePartyCheck
+	jr c, .asm_cb7d
+	ld de, ENGINE_RISINGBADGE
+	call FieldMoveEngineFlagCheck
+	jr c, .asm_cb7d
+	call CheckMapCanWaterfall
+	jr c, .asm_cb7d
+	ld a, BANK(Script_AskWaterfall)
+	ld hl, Script_AskWaterfall
+	call CallScript
+	scf
+	ret
+
+.asm_cb7d
+	ld a, BANK(Script_CantDoWaterfall)
+	ld hl, Script_CantDoWaterfall
+	call CallScript
+	scf
+	ret
+
+Script_CantDoWaterfall:;cb87
+	jumptext Text_CantDoWaterfall
+
+Text_CantDoWaterfall:
+	text_jump Text_CantDoWaterfall_
+	db "@"
+
+Script_AskWaterfall:
+	opentext
+	writetext Text_AskUseWaterfall
+	yesorno
+	iftrue Script_UsedWaterfall
+	closetext
+	end
+
+Text_AskUseWaterfall:
+	text_jump Text_AskUseWaterfall_
+	db "@"
+
+EscapeRopeFunction:
 IF DEF(GOLD)
-	dr $ca5a, $d1e2
+	dr $cb9e, $d1e2
 ENDC
 IF DEF(SILVER)
-	dr $ca58, $d1e0
+	dr $cb9c, $d1e0
 ENDC

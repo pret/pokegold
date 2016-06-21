@@ -13,7 +13,7 @@ Special:: ; c22b
 	ret
 
 SpecialsPointers:
-	add_special Function97a59
+	add_special WarpToSpawnPoint
 	add_special Function29b22
 	add_special Function29b4b
 	add_special Function29bcc

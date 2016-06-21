@@ -404,7 +404,7 @@ FlagPredef:
 	ret
 
 INCLUDE "engine/health.asm"
-INCLUDE "engine/overworld.asm"
+INCLUDE "event/overworld.asm"
 
 ReceiveItem_::
 IF DEF(GOLD)
@@ -539,7 +539,9 @@ GetTMHMMove::
 NamingScreen_:
 	dr $11aa3, $11aad
 NamingScreen:
-	dr $11aad, $126fd
+	dr $11aad, $1269a
+AbortBugCatchingContest::
+	dr $1269a, $126fd
 Function126fd:
 	dr $126fd, $12e33
 
@@ -591,7 +593,9 @@ CheckCutCollision:
 TryLoadSaveFile: ; 14ef5
 	dr $14ef5, $15484
 RunMapSetupScript::
-	dr $15484, $15612
+	dr $15484, $1560c
+DelayLoadingNewSprites:
+	dr $1560c, $15612
 Function15612:: ; 15612
 	dr $15612, $15871
 Function15871:
@@ -968,7 +972,13 @@ BlindingFlash:
 	dr $8ca6b, $8cbb8
 
 OWCutAnimation:
-	dr $8cbb8, $8ce7c
+	dr $8cbb8, $8cd65
+
+FlyFromAnimation:
+	dr $8cd65, $8cdab
+
+FlyToAnimation:
+	dr $8cdab, $8ce7c
 
 Function8ce7c:
 	dr $8ce7c, $8d174
@@ -1028,7 +1038,7 @@ ScriptEvents:: ; 96b91
 CallCallback:: ; 97365
 	dr $97365, $97a59
 
-Function97a59:
+WarpToSpawnPoint:
 	dr $97a59, $97c2a
 
 Function97c2a:: ; 97c2a
@@ -1366,7 +1376,16 @@ AlreadySurfingText_::
 	dr $194015, $19402d
 
 AskSurfText_::
-	dr $19402d, $195610
+	dr $19402d, $19404f
+
+Text_UsedWaterfall_::
+	dr $19404f, $194064
+
+Text_CantDoWaterfall_::
+	dr $194064, $194080
+
+Text_AskUseWaterfall_::
+	dr $194080, $195610
 
 ClockTimeUnknownText_:: ; 195610
 	dr $195610, $195624
