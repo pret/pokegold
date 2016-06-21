@@ -84,114 +84,112 @@ EngineFlagAction:: ; c01b
 ; 404d
 EngineFlags:
 ; All locations are in WRAM bank 1.
-engine_flag: MACRO
-	dwb \1, 1 << \2
-ENDM
+
 	; location, bit
-	engine_flag wPokegearFlags, 1 ; radio card       ; $0
-	engine_flag wPokegearFlags, 0 ; map card
-	engine_flag wPokegearFlags, 2 ; phone card
-	engine_flag wPokegearFlags, 3 ; expn card
-	engine_flag wPokegearFlags, 7 ; on/off
+	engine_flag ENGINE_RADIO_CARD
+	engine_flag ENGINE_MAP_CARD
+	engine_flag ENGINE_PHONE_CARD
+	engine_flag ENGINE_EXPN_CARD
+	engine_flag ENGINE_POKEGEAR
 
-	engine_flag wDayCareMan, 6 ; egg is ready
-	engine_flag wDayCareMan, 0 ; monster 1 in daycare
+	engine_flag ENGINE_DAYCARE_MAN_HAS_EGG
+	engine_flag ENGINE_DAYCARE_MAN_HAS_MON
 
-	engine_flag wDaycareLady, 0 ; monster 2 in daycare
+	engine_flag ENGINE_DAYCARE_LADY_HAS_MON
 
-	engine_flag wMomSavingMoney, 0 ; mom saving money ; $8
-	engine_flag wMomSavingMoney, 7 ; dst
+	engine_flag ENGINE_MOM_SAVING_MONEY
+	engine_flag ENGINE_DST
 
-	engine_flag wUnusedTwoDayTimerOn, 0 ; unused
+	engine_flag ENGINE_0A
 
-	engine_flag wStatusFlags, 0 ; pokedex
-	engine_flag wStatusFlags, 1 ; unown dex
-	engine_flag wStatusFlags, 3 ; pokerus
-	engine_flag wStatusFlags, 4 ; rocket signal on ch20
-	engine_flag wStatusFlags, 6 ; credits skip
-	engine_flag wStatusFlags2, 2 ; bug contest timer ; $10
-	engine_flag wStatusFlags2, 1 ; safari zone?
-	engine_flag wStatusFlags2, 0 ; rockets in radio tower
-	engine_flag wStatusFlags2, 4 ; bike shop call enabled (1024 bike steps reqd)
-	engine_flag wStatusFlags2, 5 ; give pokerus
-	engine_flag wStatusFlags2, 6 ; berry -> berry juice when trading?
-	engine_flag wStatusFlags2, 7 ; rockets in mahogany
+	engine_flag ENGINE_POKEDEX
+	engine_flag ENGINE_UNOWN_DEX
+	engine_flag ENGINE_POKERUS
+	engine_flag ENGINE_ROCKET_SIGNAL_ON_CH20
+	engine_flag ENGINE_CREDITS_SKIP
+	engine_flag ENGINE_BUG_CONTEST_TIMER
+	engine_flag ENGINE_SAFARI_ZONE
+	engine_flag ENGINE_ROCKETS_IN_RADIO_TOWER
+	engine_flag ENGINE_BIKE_SHOP_CALL_ENABLED
+	engine_flag ENGINE_GIVE_POKERUS
+	engine_flag ENGINE_FLORIA
+	engine_flag ENGINE_ROCKETS_IN_MAHOGANY
 
-	engine_flag wBikeFlags, 0 ; strength active
-	engine_flag wBikeFlags, 1 ; always on bike (cant surf)  ; $18
-	engine_flag wBikeFlags, 2 ; downhill (cycling road)
+	engine_flag ENGINE_STRENGTH_ACTIVE
+	engine_flag ENGINE_ALWAYS_ON_BIKE
+	engine_flag ENGINE_DOWNHILL
 
-	engine_flag wJohtoBadges, 0 ; zephyrbadge
-	engine_flag wJohtoBadges, 1 ; hivebadge
-	engine_flag wJohtoBadges, 2 ; plainbadge
-	engine_flag wJohtoBadges, 3 ; fogbadge
-	engine_flag wJohtoBadges, 4 ; mineralbadge
-	engine_flag wJohtoBadges, 5 ; stormbadge
-	engine_flag wJohtoBadges, 6 ; glacierbadge ; $20
-	engine_flag wJohtoBadges, 7 ; risingbadge
+	engine_flag ENGINE_ZEPHYRBADGE
+	engine_flag ENGINE_HIVEBADGE
+	engine_flag ENGINE_PLAINBADGE
+	engine_flag ENGINE_FOGBADGE
+	engine_flag ENGINE_MINERALBADGE
+	engine_flag ENGINE_STORMBADGE
+	engine_flag ENGINE_GLACIERBADGE
+	engine_flag ENGINE_RISINGBADGE
 
-	engine_flag wKantoBadges, 0 ; boulderbadge
-	engine_flag wKantoBadges, 1 ; cascadebadge
-	engine_flag wKantoBadges, 2 ; thunderbadge
-	engine_flag wKantoBadges, 3 ; rainbowbadge
-	engine_flag wKantoBadges, 4 ; soulbadge
-	engine_flag wKantoBadges, 5 ; marshbadge
-	engine_flag wKantoBadges, 6 ; volcanobadge ; $28
-	engine_flag wKantoBadges, 7 ; earthbadge
+	engine_flag ENGINE_BOULDERBADGE
+	engine_flag ENGINE_CASCADEBADGE
+	engine_flag ENGINE_THUNDERBADGE
+	engine_flag ENGINE_RAINBOWBADGE
+	engine_flag ENGINE_SOULBADGE
+	engine_flag ENGINE_MARSHBADGE
+	engine_flag ENGINE_VOLCANOBADGE
+	engine_flag ENGINE_EARTHBADGE
 
-	engine_flag wUnlockedUnowns, 0
-	engine_flag wUnlockedUnowns, 1
-	engine_flag wUnlockedUnowns, 2
-	engine_flag wUnlockedUnowns, 3
-	engine_flag wUnlockedUnowns, 4
-	engine_flag wUnlockedUnowns, 5
-	engine_flag wUnlockedUnowns, 6   ; $30
-	engine_flag wUnlockedUnowns, 7
+	engine_flag ENGINE_UNLOCKED_UNOWNS_1
+	engine_flag ENGINE_UNLOCKED_UNOWNS_2
+	engine_flag ENGINE_UNLOCKED_UNOWNS_3
+	engine_flag ENGINE_UNLOCKED_UNOWNS_4
+	engine_flag ENGINE_UNLOCKED_UNOWNS_5
+	engine_flag ENGINE_UNLOCKED_UNOWNS_6
+	engine_flag ENGINE_UNLOCKED_UNOWNS_7
+	engine_flag ENGINE_UNLOCKED_UNOWNS_8
 
-	engine_flag wVisitedSpawns,     0 ; your house
-	engine_flag wVisitedSpawns,     1 ; viridian pokecenter
-	engine_flag wVisitedSpawns,     2 ; pallet
-	engine_flag wVisitedSpawns,     3 ; viridian
-	engine_flag wVisitedSpawns,     4 ; pewter
-	engine_flag wVisitedSpawns,     5 ; cerulean
-	engine_flag wVisitedSpawns,     6 ; rock tunnel ; $38
-	engine_flag wVisitedSpawns,     7 ; vermilion
-	engine_flag wVisitedSpawns + 1, 0 ; lavender
-	engine_flag wVisitedSpawns + 1, 1 ; saffron
-	engine_flag wVisitedSpawns + 1, 2 ; celadon
-	engine_flag wVisitedSpawns + 1, 3 ; fuchsia
-	engine_flag wVisitedSpawns + 1, 4 ; cinnabar
-	engine_flag wVisitedSpawns + 1, 5 ; indigo plateau
-	engine_flag wVisitedSpawns + 1, 6 ; new bark ; $40
-	engine_flag wVisitedSpawns + 1, 7 ; cherrygrove
-	engine_flag wVisitedSpawns + 2, 0 ; violet
-                                      ; union cave
-	engine_flag wVisitedSpawns + 2, 2 ; azalea
-	engine_flag wVisitedSpawns + 2, 3 ; cianwood
-	engine_flag wVisitedSpawns + 2, 4 ; goldenrod
-	engine_flag wVisitedSpawns + 2, 5 ; olivine
-	engine_flag wVisitedSpawns + 2, 6 ; ecruteak
-	engine_flag wVisitedSpawns + 2, 7 ; mahogany  ; $48
-	engine_flag wVisitedSpawns + 3, 0 ; lake of rage
-	engine_flag wVisitedSpawns + 3, 1 ; blackthorn
-	engine_flag wVisitedSpawns + 3, 2 ; silver cave
-                                      ; fast ship
-	engine_flag wVisitedSpawns + 3, 4 ; unused
-	engine_flag wLuckyNumberShowFlag, 0
-	engine_flag wStatusFlags2, 3
+	engine_flag ENGINE_FLYPOINT_KRISS_HOUSE
+	engine_flag ENGINE_FLYPOINT_VIRIDIAN_POKECENTER
+	engine_flag ENGINE_FLYPOINT_PALLET
+	engine_flag ENGINE_FLYPOINT_VIRIDIAN
+	engine_flag ENGINE_FLYPOINT_PEWTER
+	engine_flag ENGINE_FLYPOINT_CERULEAN
+	engine_flag ENGINE_FLYPOINT_ROCK_TUNNEL
+	engine_flag ENGINE_FLYPOINT_VERMILION
+	engine_flag ENGINE_FLYPOINT_LAVENDER
+	engine_flag ENGINE_FLYPOINT_SAFFRON
+	engine_flag ENGINE_FLYPOINT_CELADON
+	engine_flag ENGINE_FLYPOINT_FUCHSIA
+	engine_flag ENGINE_FLYPOINT_CINNABAR
+	engine_flag ENGINE_FLYPOINT_INDIGO_PLATEAU
+	engine_flag ENGINE_FLYPOINT_NEW_BARK
+	engine_flag ENGINE_FLYPOINT_CHERRYGROVE
+	engine_flag ENGINE_FLYPOINT_VIOLET
 
-	engine_flag wDailyFlags, 0 ; kurt making balls
-	engine_flag wDailyFlags, 1 ; did bug catching contest today ; $50
-	engine_flag wDailyFlags, 2 ; special wilddata?
-	engine_flag wDailyFlags, 3 ; time capsule (24h wait)
-	engine_flag wDailyFlags, 4 ; all fruit trees
-	engine_flag wDailyFlags, 5 ; shuckle given
-	engine_flag wDailyFlags, 6 ; goldenrod underground merchant closed
-	engine_flag wDailyFlags, 7 ; fought in trainer hall today
+	engine_flag ENGINE_FLYPOINT_AZALEA
+	engine_flag ENGINE_FLYPOINT_CIANWOOD
+	engine_flag ENGINE_FLYPOINT_GOLDENROD
+	engine_flag ENGINE_FLYPOINT_OLIVINE
+	engine_flag ENGINE_FLYPOINT_ECRUTEAK
+	engine_flag ENGINE_FLYPOINT_MAHOGANY
+	engine_flag ENGINE_FLYPOINT_LAKE_OF_RAGE
+	engine_flag ENGINE_FLYPOINT_BLACKTHORN
+	engine_flag ENGINE_FLYPOINT_SILVER_CAVE
 
-	engine_flag wWeeklyFlags, 0 ; mt moon square clefairy
-	engine_flag wWeeklyFlags, 1 ; union cave lapras  ; $58
-	engine_flag wWeeklyFlags, 2 ; goldenrod underground haircut used
-	engine_flag wWeeklyFlags, 3 ; goldenrod mall happiness event floor05 person07
-	engine_flag wWeeklyFlags, 4 ; tea in blues house
-	engine_flag wWeeklyFlags, 5 ; indigo plateau rival fight
+	engine_flag ENGINE_FLYPOINT_UNUSED
+	engine_flag ENGINE_LUCKY_NUMBER_SHOW
+	engine_flag ENGINE_4E
+
+	engine_flag ENGINE_KURT_MAKING_BALLS
+	engine_flag ENGINE_DAILY_BUG_CONTEST
+	engine_flag ENGINE_SPECIAL_WILDDATA
+	engine_flag ENGINE_TIME_CAPSULE
+	engine_flag ENGINE_ALL_FRUIT_TREES
+	engine_flag ENGINE_SHUCKLE_GIVEN
+	engine_flag ENGINE_GOLDENROD_UNDERGROUND_MERCHANT_CLOSED
+	engine_flag ENGINE_FOUGHT_IN_TRAINER_HALL_TODAY
+
+	engine_flag ENGINE_MT_MOON_SQUARE_CLEFAIRY
+	engine_flag ENGINE_UNION_CAVE_LAPRAS
+	engine_flag ENGINE_GOLDENROD_UNDERGROUND_GOT_HAIRCUT
+	engine_flag ENGINE_GOLDENROD_MALL_5F_HAPPINESS_EVENT
+	engine_flag ENGINE_TEA_IN_BLUES_HOUSE
+	engine_flag ENGINE_INDIGO_PLATEAU_RIVAL_FIGHT

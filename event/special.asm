@@ -34,8 +34,7 @@ Function73e1:
 	call SkipNames
 	ld de, ManiaName
 	call CopyName2
-	ld hl, wDailyFlags
-	set 5, [hl]
+	SetFlag ENGINE_SHUCKLE_GIVEN
 	ld a, $1
 	ld [wScriptVar], a
 	ret

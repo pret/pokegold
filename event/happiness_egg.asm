@@ -143,14 +143,15 @@ StepHappiness::
 	jr nz, .asm_7349
 	ret
 
+MAX_EXP EQU 5242880
+
 DaycareStep::
-	ld a, [wDayCareMan]
-	bit 0, a
+	CheckFlag ENGINE_DAYCARE_MAN_HAS_MON
 	jr z, .daycare_lady
-	ld a, [wdc76]
-	cp 100
+	ld a, [wBreedMon1Level]
+	cp MAX_LEVEL
 	jr nc, .daycare_lady
-	ld hl, wdc61
+	ld hl, wBreedMon1Exp + 2
 	inc [hl]
 	jr nz, .daycare_lady
 	dec hl
@@ -159,18 +160,17 @@ DaycareStep::
 	dec hl
 	inc [hl]
 	ld a, [hl]
-	cp 5242880 / $10000
+	cp MAX_EXP / $10000
 	jr c, .daycare_lady
-	ld a, 5242880 / $10000
+	ld a, MAX_EXP / $10000
 	ld [hl], a
 .daycare_lady
-	ld a, [wDaycareLady]
-	bit 0, a
+	CheckFlag ENGINE_DAYCARE_LADY_HAS_MON
 	jr z, .check_egg
-	ld a, [wdcaf]
-	cp 100
+	ld a, [wBreedMon2Level]
+	cp MAX_LEVEL
 	jr nc, .check_egg
-	ld hl, wdc9a
+	ld hl, wBreedMon2Exp + 2
 	inc [hl]
 	jr nz, .check_egg
 	dec hl
@@ -179,17 +179,18 @@ DaycareStep::
 	dec hl
 	inc [hl]
 	ld a, [hl]
-	cp 5242880 / $10000
+	cp MAX_EXP / $10000
 	jr c, .check_egg
-	ld a, 5242880 / $10000
+	ld a, MAX_EXP / $10000
 	ld [hl], a
 .check_egg
 	ld hl, wDayCareMan
 	bit 5, [hl]
 	ret z
-	ld hl, wdc78
+	ld hl, wStepsToEgg
 	dec [hl]
 	ret nz
+
 	call Random
 	ld [hl], a
 	callab Function171d1
@@ -212,5 +213,5 @@ DaycareStep::
 	ret nc
 	ld hl, wDayCareMan
 	res 5, [hl]
-	set 6, [hl]
+	SetFlagForceReuseHL ENGINE_DAYCARE_MAN_HAS_EGG
 	ret

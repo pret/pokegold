@@ -295,7 +295,7 @@ MapRadio: ; c4af (3:44af)
 Special_UnownPuzzle: ; c4ba (3:44ba)
 	call FadeToMenu
 	callba Functione199d
-	ld a, [wcfe4]
+	ld a, [wFieldMoveSucceeded]
 	ld [wScriptVar], a
 	call ExitAllMenus
 	ret
@@ -403,13 +403,11 @@ Functionc556: ; c556 (3:4556)
 	ld a, e
 	ld [wdd18], a
 .asm_c566
-	ld hl, wDailyFlags
-	set 2, [hl]
+	SetFlag ENGINE_SPECIAL_WILDDATA
 	ret
 
 Functionc56c:
-	ld hl, wDailyFlags
-	bit 2, [hl]
+	CheckFlagHL ENGINE_SPECIAL_WILDDATA
 	jr z, .asm_c578
 	xor a
 	ld [wScriptVar], a
@@ -430,8 +428,7 @@ Functionc588: ; c588 (3:4588)
 
 Functionc591: ; c591 (3:4591)
 	callba Function11917
-	ld hl, wLuckyNumberShowFlag
-	res 0, [hl]
+	ClearFlag ENGINE_LUCKY_NUMBER_SHOW
 	callba LoadOrRegenerateLuckyIDNumber
 	ret
 

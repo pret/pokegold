@@ -2346,41 +2346,39 @@ GetMapHeaderMusic::
 	ld de, $6
 	call GetMapHeaderMember
 	ld a, c
-	cp $64
-	jr z, .asm_2dc1
+	cp MUSIC_MAHOGANY_MART
+	jr z, .mahogany_mart_check
 	bit 7, c
-	jr nz, .asm_2dad
+	jr nz, .radio_tower_check
 	ld e, c
 	ld d, $0
-.asm_2daa
+.load
 	pop bc
 	pop hl
 	ret
 
-.asm_2dad
-	ld a, [wStatusFlags2]
-	bit 0, a
-	jr z, .asm_2db9
-	ld de, $56
-	jr .asm_2daa
+.radio_tower_check
+	CheckFlag ENGINE_ROCKETS_IN_RADIO_TOWER
+	jr z, .no_rockets
+	ld de, MUSIC_ROCKET_OVERTURE
+	jr .load
 
-.asm_2db9
+.no_rockets
 	ld a, c
 	and $7f
 	ld e, a
 	ld d, $0
-	jr .asm_2daa
+	jr .load
 
-.asm_2dc1
-	ld a, [wStatusFlags2]
-	bit 7, a
-	jr z, .asm_2dcd
-	ld de, $48
-	jr .asm_2daa
+.mahogany_mart_check
+	CheckFlag ENGINE_ROCKETS_IN_MAHOGANY
+	jr z, .no_rockets2
+	ld de, MUSIC_ROCKET_HIDEOUT
+	jr .load
 
-.asm_2dcd
-	ld de, $26
-	jr .asm_2daa
+.no_rockets2
+	ld de, MUSIC_CHERRYGROVE_CITY
+	jr .load
 
 GetMapHeaderTimeOfDayNybble:: ; 2dd2 (0:2dd2)
 	call GetPhoneServiceTimeOfDayByte

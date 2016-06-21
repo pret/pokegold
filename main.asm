@@ -361,7 +361,10 @@ CheckItem_::
 GetTMHMNumber::
 	dr $d414, $d434
 CheckTossableItem_::
-	dr $d434, $d892
+	dr $d434, $d62d
+
+AnimateHPBar_:
+	dr $d62d, $d892
 
 TryAddMonToParty::
 	dr $d892, $da73
@@ -417,7 +420,10 @@ CheckItem_::
 GetTMHMNumber::
 	dr $d412, $d432
 CheckTossableItem_::
-	dr $d432, $d890
+	dr $d432, $d62b
+
+AnimateHPBar_:
+	dr $d62b, $d890
 
 TryAddMonToParty::
 	dr $d890, $da71
@@ -528,7 +534,9 @@ Function14a18:: ; 14a18
 Function14a2d:: ; 14a2d
 	dr $14a2d, $14a44
 Function14a44: ; 14a44
-	dr $14a44, $14ef5
+	dr $14a44, $14a73
+CheckCutCollision:
+	dr $14a73, $14ef5
 TryLoadSaveFile: ; 14ef5
 	dr $14ef5, $15484
 RunMapSetupScript::
@@ -903,7 +911,13 @@ Function8c3e9:: ; 8c3e9
 	dr $8c3e9, $8c513
 
 Predef_StartBattle::
-	dr $8c513, $8ce7c
+	dr $8c513, $8ca6b
+
+BlindingFlash:
+	dr $8ca6b, $8cbb8
+
+OWCutAnimation:
+	dr $8cbb8, $8ce7c
 
 Function8ce7c:
 	dr $8ce7c, $8d174
@@ -1279,7 +1293,17 @@ ReceivedMysteryGiftText_::
 NoCoinsText_::
 	dr $190f0b, $190f1f
 NoCoinCaseText_::
-	dr $190f1f, $194000
+	dr $190f1f, $1920ad
+BadgeRequiredText_::
+	dr $1920ad, $1920ce
+CantUseFieldMoveHereText_::
+	dr $1920ce, $1920e3
+Text_UsedCut_::
+	dr $1920e3, $1920f2
+Text_NothingToCut_::
+	dr $1920f2, $19210f
+Text_UsedFlash_::
+	dr $19210f, $194000
 
 SECTION "bank65", ROMX, BANK[$65]
 	dr $194000, $195610

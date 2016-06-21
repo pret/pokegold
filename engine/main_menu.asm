@@ -24,7 +24,7 @@ MainMenu_:
 	jr c, .asm_5a94
 	call ClearTileMap
 	ld a, [wMenuSelection]
-	ld hl, .Jumptable ; $5acd
+	ld hl, .Jumptable
 	rst JumpTable
 	jr .asm_5a60
 
@@ -616,11 +616,10 @@ DisplayContinueDataWithRTCError: ; 5ec7 (1:5ec7)
 Continue_LoadMenuHeader: ; 5ed7 (1:5ed7)
 	xor a
 	ld [hBGMapMode], a
-	ld hl, .MenuDataHeader_Dex ; $5ef1
-	ld a, [wStatusFlags]
-	bit 0, a
+	ld hl, .MenuDataHeader_Dex
+	CheckFlag ENGINE_POKEDEX
 	jr nz, .asm_5ee7
-	ld hl, .MenuDataHeader_NoDex ; $5f15
+	ld hl, .MenuDataHeader_NoDex
 .asm_5ee7
 	call OffsetMenuDataHeader_
 	call MenuBox
@@ -631,7 +630,7 @@ Continue_LoadMenuHeader: ; 5ed7 (1:5ed7)
 	db $40
 	db 00, 00
 	db 09, 15
-	dw .MenuData2_Dex ; 5ef9
+	dw .MenuData2_Dex
 	db 1
 
 .MenuData2_Dex
@@ -646,7 +645,7 @@ Continue_LoadMenuHeader: ; 5ed7 (1:5ed7)
 	db $40
 	db 00, 00
 	db 09, 15
-	dw .MenuData2_NoDex ; 5f1d
+	dw .MenuData2_NoDex
 	db 1
 
 .MenuData2_NoDex
@@ -698,8 +697,7 @@ Continue_DisplayBadgeCount: ; 5f64 (1:5f64)
 	jp PrintNum
 
 Continue_DisplayPokedexNumCaught: ; 5f77 (1:5f77)
-	ld a, [wStatusFlags]
-	bit 0, a
+	CheckFlag ENGINE_POKEDEX
 	ret z
 	push hl
 	ld hl, wPokedexCaught
@@ -725,25 +723,34 @@ Continue_DisplayGameTime: ; 5f90 (1:5f90)
 	jp PrintNum
 
 OakSpeech: ; 5fa5 (1:5fa5)
-	callba InitClock
+	callba InitClock ; What time is it?
+
 	call RotateFourPalettesLeft
 	call ClearTileMap
+
 	ld de, MUSIC_ROUTE_30
 	call PlayMusic
+
 	call RotateFourPalettesRight
 	call RotateThreePalettesRight
+
 	xor a
 	ld [wCurPartySpecies], a
 	ld a, POKEMON_PROF
 	ld [wTrainerClass], a
 	call Intro_PrepTrainerPic
+
 	ld b, SCGB_TRAINER_OR_MON_FRONTPIC_PALS
 	call GetSGBLayout
+
 	call Intro_FadeInFrontpic
+
 	ld hl, OakText1
 	call PrintText
+
 	call RotateThreePalettesRight
 	call ClearTileMap
+
 	ld a, MARILL
 	ld [wce60], a
 	ld [wCurPartySpecies], a
@@ -751,41 +758,57 @@ OakSpeech: ; 5fa5 (1:5fa5)
 	hlcoord 6, 4
 	hlcoord 6, 4 ; TriHard
 	call PrepMonFrontpic
+
 	xor a
 	ld [wTempMonDVs], a
 	ld [wTempMonDVs + 1], a
 	ld b, SCGB_TRAINER_OR_MON_FRONTPIC_PALS
 	call GetSGBLayout
+
 	call Intro_WipeInFrontpic
+
 	ld hl, OakText2
 	call PrintText
+
 	ld hl, OakText4
 	call PrintText
+
 	call RotateThreePalettesRight
 	call ClearTileMap
+
 	xor a
 	ld [wCurPartySpecies], a
 	ld a, POKEMON_PROF
 	ld [wTrainerClass], a
 	call Intro_PrepTrainerPic
+
 	ld b, SCGB_TRAINER_OR_MON_FRONTPIC_PALS
 	call GetSGBLayout
+
 	call Intro_FadeInFrontpic
+
 	ld hl, OakText5
 	call PrintText
+
 	call RotateThreePalettesRight
 	call ClearTileMap
+
 	xor a
 	ld [wCurPartySpecies], a
 	ld a, CAL
 	ld [wTrainerClass], a
 	call Intro_PrepTrainerPic
+
 	ld b, SCGB_TRAINER_OR_MON_FRONTPIC_PALS
 	call GetSGBLayout
+
 	call Intro_FadeInFrontpic
+
 	ld hl, OakText6
 	call PrintText
+
 	call NamePlayer
+
 	ld hl, OakText7
 	call PrintText
 	ret
@@ -966,9 +989,8 @@ MovePlayerPic
 	push de
 	xor a
 	ld [hBGMapMode], a
-	ld bc, $707
-	ld a, $13
-	call Predef
+	lb bc, 7, 7
+	predef PlaceGraphic
 	xor a
 	ld [hBGMapThird], a
 	call WaitBGMap
@@ -1024,9 +1046,8 @@ Intro_PrepTrainerPic: ; 61df, 61e0 (1:61df, 1:61e0)
 	xor a
 	ld [hGraphicStartTile], a
 	hlcoord 6, 4
-	ld bc, $707
-	ld a, $13
-	call Predef
+	lb bc, 7, 7
+	predef PlaceGraphic
 	ret
 
 ShrinkFrame: ; 61f7 (1:61f7)

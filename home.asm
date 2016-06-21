@@ -666,7 +666,7 @@ Function3414::
 	rst Bankswitch
 	ret
 
-Function3423::
+QueueScript::
 	ld a, [hROMBank]
 Function3425::
 	ld [wcfd8], a

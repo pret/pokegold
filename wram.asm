@@ -2361,7 +2361,7 @@ wPredefPointerBuffer:: dw ; cfde
 wFarCallBCBuffer:: dw ; cfe0
 wcfe2:: ds 1 ; cfe2
 wcfe3:: ds 1 ; cfe3
-wcfe4:: ds 1 ; cfe4
+wFieldMoveSucceeded:: ds 1 ; cfe4
 wVramState:: ds 1
 wcfe6:: ds 1 ; cfe6
 wcfe7:: ds 1 ; cfe7
@@ -2532,12 +2532,12 @@ wd0ce:: ds 1 ; d0ce
 wTilesetPalettes:: dw ; d0cf
 wd0d1:: ds 1 ; d0d1
 wd0d2:: ds 1 ; d0d2
-wd0d3:: ds 1 ; d0d3
-wd0d4:: ds 1 ; d0d4
-wd0d5:: ds 1 ; d0d5
-wd0d6:: ds 1 ; d0d6
-wd0d7:: ds 1 ; d0d7
-wd0d8:: ds 1 ; d0d8
+wBuffer1:: ds 1 ; d0d3
+wBuffer2:: ds 1 ; d0d4
+wBuffer3:: ds 1 ; d0d5
+wBuffer4:: ds 1 ; d0d6
+wBuffer5:: ds 1 ; d0d7
+wBuffer6:: ds 1 ; d0d8
 wd0d9:: ds 1 ; d0d9
 wd0da:: ds 1 ; d0da
 wd0db:: ds 1 ; d0db
@@ -3706,40 +3706,11 @@ wdc53:: ds 1 ; dc53
 wdc54:: ds 1 ; dc54
 wdc55:: ds 1 ; dc55
 wdc56:: ds 1 ; dc56
-wdc57:: ds 1 ; dc57
-wdc58:: ds 1 ; dc58
-wdc59:: ds 1 ; dc59
-wdc5a:: ds 1 ; dc5a
-wdc5b:: ds 1 ; dc5b
-wdc5c:: ds 1 ; dc5c
-wdc5d:: ds 1 ; dc5d
-wdc5e:: ds 1 ; dc5e
-wdc5f:: ds 1 ; dc5f
-wdc60:: ds 1 ; dc60
-wdc61:: ds 1 ; dc61
-wdc62:: ds 1 ; dc62
-wdc63:: ds 1 ; dc63
-wdc64:: ds 1 ; dc64
-wdc65:: ds 1 ; dc65
-wdc66:: ds 1 ; dc66
-wdc67:: ds 1 ; dc67
-wdc68:: ds 1 ; dc68
-wdc69:: ds 1 ; dc69
-wdc6a:: ds 1 ; dc6a
-wdc6b:: ds 1 ; dc6b
-wdc6c:: ds 1 ; dc6c
-wdc6d:: ds 1 ; dc6d
-wdc6e:: ds 1 ; dc6e
-wdc6f:: ds 1 ; dc6f
-wdc70:: ds 1 ; dc70
-wdc71:: ds 1 ; dc71
-wdc72:: ds 1 ; dc72
-wdc73:: ds 1 ; dc73
-wdc74:: ds 1 ; dc74
-wdc75:: ds 1 ; dc75
-wdc76:: ds 1 ; dc76
+
+wBreedMon1:: box_struct wBreedMon1 ; dc57
+
 wDaycareLady:: ds 1 ; dc77
-wdc78:: ds 1 ; dc78
+wStepsToEgg:: ds 1 ; dc78
 wdc79:: ds 1 ; dc79
 wdc7a:: ds 1 ; dc7a
 wdc7b:: ds 1 ; dc7b
@@ -3763,38 +3734,9 @@ wdc8c:: ds 1 ; dc8c
 wdc8d:: ds 1 ; dc8d
 wdc8e:: ds 1 ; dc8e
 wdc8f:: ds 1 ; dc8f
-wdc90:: ds 1 ; dc90
-wdc91:: ds 1 ; dc91
-wdc92:: ds 1 ; dc92
-wdc93:: ds 1 ; dc93
-wdc94:: ds 1 ; dc94
-wdc95:: ds 1 ; dc95
-wdc96:: ds 1 ; dc96
-wdc97:: ds 1 ; dc97
-wdc98:: ds 1 ; dc98
-wdc99:: ds 1 ; dc99
-wdc9a:: ds 1 ; dc9a
-wdc9b:: ds 1 ; dc9b
-wdc9c:: ds 1 ; dc9c
-wdc9d:: ds 1 ; dc9d
-wdc9e:: ds 1 ; dc9e
-wdc9f:: ds 1 ; dc9f
-wdca0:: ds 1 ; dca0
-wdca1:: ds 1 ; dca1
-wdca2:: ds 1 ; dca2
-wdca3:: ds 1 ; dca3
-wdca4:: ds 1 ; dca4
-wdca5:: ds 1 ; dca5
-wdca6:: ds 1 ; dca6
-wdca7:: ds 1 ; dca7
-wdca8:: ds 1 ; dca8
-wdca9:: ds 1 ; dca9
-wdcaa:: ds 1 ; dcaa
-wdcab:: ds 1 ; dcab
-wdcac:: ds 1 ; dcac
-wdcad:: ds 1 ; dcad
-wdcae:: ds 1 ; dcae
-wdcaf:: ds 1 ; dcaf
+
+wBreedMon2:: box_struct wBreedMon2 ; dc90
+
 wdcb0:: ds 1 ; dcb0
 wdcb1:: ds 1 ; dcb1
 wdcb2:: ds 1 ; dcb2

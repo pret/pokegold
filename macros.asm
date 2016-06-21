@@ -16,6 +16,7 @@ INCLUDE "macros/mobile.asm"
 INCLUDE "macros/trainer.asm"
 INCLUDE "macros/trade_anim.asm"
 INCLUDE "macros/pals.asm"
+INCLUDE "macros/flag.asm"
 
 dr: macro
 IF DEF(GOLD)

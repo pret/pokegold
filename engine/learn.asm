@@ -124,7 +124,7 @@ LearnMove:
 	call TextBox
 	hlcoord 7, 4
 	ld a, $28
-	ld [wd0d3], a
+	ld [wBuffer1], a
 	predef ListMoves
 	ld a, $4
 	ld [wMenuData2End], a

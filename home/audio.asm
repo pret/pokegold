@@ -337,14 +337,13 @@ RestartMapMusic::
 
 SpecialMapMusic:: ; 3f40 (0:3f40)
 	ld a, [wPlayerBikeSurfState]
-	cp $4
-	jr z, .asm_3f59
-	cp $8
-	jr z, .asm_3f59
-	ld a, [wStatusFlags2]
-	bit 2, a
-	jr nz, .asm_3f5e
-.asm_3f52
+	cp PLAYER_SURF
+	jr z, .surf
+	cp PLAYER_SURF_PIKA
+	jr z, .surf
+	CheckFlag ENGINE_BUG_CONTEST_TIMER
+	jr nz, .contest
+.normal
 	and a
 	ret
 
@@ -353,21 +352,21 @@ SpecialMapMusic:: ; 3f40 (0:3f40)
 	scf
 	ret
 
-.asm_3f59
+.surf
 	ld de, MUSIC_SURF
 	scf
 	ret
 
-.asm_3f5e
+.contest
 	ld a, [wMapGroup]
 	cp GROUP_ROUTE_35_NATIONAL_PARK_GATE
-	jr nz, .asm_3f52
+	jr nz, .normal
 	ld a, [wMapNumber]
 	cp MAP_ROUTE_35_NATIONAL_PARK_GATE
-	jr z, .asm_3f70
+	jr z, .ranking
 	cp MAP_ROUTE_36_NATIONAL_PARK_GATE
-	jr nz, .asm_3f52
-.asm_3f70
+	jr nz, .normal
+.ranking
 	ld de, MUSIC_BUG_CATCHING_CONTEST_RANKING
 	scf
 	ret

@@ -14,14 +14,14 @@ ResetBikeFlags:: ; 2f16 (0:2f16)
 ResetFlashIfOutOfCave:: ; 2f1d (0:2f1d)
 	ld a, [wPermission]
 	cp $2
-	jr z, .asm_2f29
+	jr z, .turn_off_lights
 	cp $1
-	jr z, .asm_2f29
+	jr z, .turn_off_lights
 	ret
 
-.asm_2f29
+.turn_off_lights
 	ld hl, wStatusFlags
-	res 2, [hl]
+	res 2, [hl] ; FLASH
 	ret
 
 EventFlagAction::
