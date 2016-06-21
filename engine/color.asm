@@ -1430,7 +1430,7 @@ Functionb649: ; b649 (2:7649)
 	ld a, [wTimeOfDayPal]
 	and $3
 	ld bc, $40
-	ld hl, Palettes_b8ae
+	ld hl, MapObjectPals
 	call AddNTimes
 	ld de, wTempOBPal0
 	ld bc, $40
@@ -1447,7 +1447,7 @@ Functionb649: ; b649 (2:7649)
 	add hl, hl
 	add hl, hl
 	add hl, hl
-	ld de, Palettes_b9ae
+	ld de, RoofPals
 	add hl, de
 	ld a, [wTimeOfDayPal]
 	and $3
@@ -1498,13 +1498,15 @@ Pointers_b6ce:
 	db $10, $11, $12, $13, $14, $15, $16, $17 ; nite
 	db $18, $19, $1a, $1b, $1c, $1d, $1e, $1f ; dark
 
-	dr $b75e, $b796
-Palettes_b796:
-    dr $b796, $b8ae
-Palettes_b8ae:
-    dr $b8ae, $b9ae
-Palettes_b9ae:
-    dr $b9ae, $ba86
+TilesetBGPalette: ; b75e
+INCLUDE "tilesets/bg.pal"
+
+MapObjectPals:: ; b8ae
+INCLUDE "tilesets/ob.pal"
+
+RoofPals: ; b9ae
+INCLUDE "tilesets/roof.pal"
+
 Palettes_ba86:
 	RGB 27, 31, 27
 	RGB 21, 21, 21

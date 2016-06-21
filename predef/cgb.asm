@@ -111,7 +111,7 @@ Function9399: ; 9399 (2:5399)
 	ld [wColorLayoutPredefID], a
 	call Function9b28
 asm_93e1
-	ld hl, Palettes_b796
+	ld hl, TilesetBGPalette + 7 * 8
 	ld de, wTempBGPal7
 	ld bc, $8
 	call CopyBytes
