@@ -593,11 +593,11 @@ Function230f:: ; 230f (0:230f)
 	ld a, [hli]
 .asm_232b
 	pop bc
-	ld [wd043], a
+	ld [wLastWarpNumber], a
 	ld a, [hli]
-	ld [wd044], a
+	ld [wLastMapGroup], a
 	ld a, [hli]
-	ld [wd045], a
+	ld [wLastMapNumber], a
 	ld a, c
 	ld [wd046], a
 	ld a, [wMapGroup]
@@ -610,11 +610,11 @@ Function230f:: ; 230f (0:230f)
 Function2349::
 	call Function2362
 	call Function239b
-	ld a, [wd043]
+	ld a, [wLastWarpNumber]
 	ld [wd9ff], a
-	ld a, [wd044]
+	ld a, [wLastMapGroup]
 	ld [wMapGroup], a
-	ld a, [wd045]
+	ld a, [wLastMapNumber]
 	ld [wMapNumber], a
 	ret
 
@@ -622,9 +622,9 @@ Function2362:: ; 2362 (0:2362)
 	call GetMapPermission
 	call CheckOutdoorMap
 	ret nz
-	ld a, [wd044]
+	ld a, [wLastMapGroup]
 	ld b, a
-	ld a, [wd045]
+	ld a, [wLastMapNumber]
 	ld c, a
 	call GetAnyMapPermission
 	call CheckIndoorMap
@@ -639,27 +639,27 @@ Function2362:: ; 2362 (0:2362)
 	ret z
 .asm_2388
 	ld a, [wd046]
-	ld [wd9f2], a
+	ld [wDigWarpNumber], a
 	ld a, [wd047]
-	ld [wd9f3], a
+	ld [wDigMapGroup], a
 	ld a, [wd048]
-	ld [wd9f4], a
+	ld [wDigMapNumber], a
 	ret
 
 Function239b:: ; 239b (0:239b)
 	call GetMapPermission
 	call CheckOutdoorMap
 	ret nz
-	ld a, [wd044]
+	ld a, [wLastMapGroup]
 	ld b, a
-	ld a, [wd045]
+	ld a, [wLastMapNumber]
 	ld c, a
 	call GetAnyMapPermission
 	call CheckIndoorMap
 	ret nz
-	ld a, [wd044]
+	ld a, [wLastMapGroup]
 	ld b, a
-	ld a, [wd045]
+	ld a, [wLastMapNumber]
 	ld c, a
 	call GetAnyMapTileset
 	ld a, c

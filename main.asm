@@ -1385,7 +1385,40 @@ Text_CantDoWaterfall_::
 	dr $194064, $194080
 
 Text_AskUseWaterfall_::
-	dr $194080, $195610
+	dr $194080, $19409f
+
+Text_UsedDig_::
+	dr $19409f, $1940ae
+
+Text_UsedEscapeRope_::
+	dr $1940ae, $1940c6
+
+Text_CantUseDigEscapeRopeHere_::
+	dr $1940c6, $1940db
+
+Text_ReturnToLastMonCenter_::
+	dr $1940db, $1940fc
+
+Text_CantUseTeleportHere_::
+	dr $1940fc, $194112
+
+Text_AlreadyUsingStrength_::
+	dr $194112, $194135
+
+Text_UsedStrength_::
+	dr $194135, $194149
+
+Text_AllowedToMoveBoulders_::
+	dr $194149, $194161
+
+Text_AskStrength_::
+	dr $194161, $194199
+
+Text_BouldersMayNowBeMoved_::
+	dr $194199, $1941b5
+
+Text_MonMayBeAbleToMove_::
+	dr $1941b5, $195610
 
 ClockTimeUnknownText_:: ; 195610
 	dr $195610, $195624

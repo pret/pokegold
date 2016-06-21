@@ -2419,9 +2419,8 @@ wLinkMode:: ds 1 ; d042
 ; 0 not in link battle
 ; 1 link battle
 
-wd043:: ds 1 ; d043
-wd044:: ds 1 ; d044
-wd045:: ds 1 ; d045
+	warp_struct wLast ; d043
+
 wd046:: ds 1 ; d046
 wd047:: ds 1 ; d047
 wd048:: ds 1 ; d048
@@ -3573,9 +3572,7 @@ wd9ed:: ds 1 ; d9ed
 wMapData::
 wVisitedSpawns:: ds 4 ; flag_array NUM_SPAWNS ; d9ee
 
-wd9f2:: ds 1 ; d9f2
-wd9f3:: ds 1 ; d9f3
-wd9f4:: ds 1 ; d9f4
+	warp_struct wDig ; d9f2
 wd9f5:: ds 1 ; d9f5
 wd9f6:: ds 1 ; d9f6
 wd9f7:: ds 1 ; d9f7

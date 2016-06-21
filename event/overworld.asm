@@ -288,7 +288,7 @@ WhirlpoolBlockPointers:
 .johto
 	db $07, $36, $00
 	db -1
-	
+
 FlashFunction:
 	call CheckUseFlash
 	and $7f
@@ -712,9 +712,337 @@ Text_AskUseWaterfall:
 	db "@"
 
 EscapeRopeFunction:
+	call FieldMoveBufferReset
+	ld a, $1
+	jr asm_cbaa
+
+DigFunction:
+	call FieldMoveBufferReset
+	ld a, $2
+asm_cbaa
+	ld [wBuffer2], a
+.asm_cbad
+	ld hl, .Jumptable
+	call DoFieldMoveAction
+	jr nc, .asm_cbad
+	and $7f
+	ld [wFieldMoveSucceeded], a
+	ret
+
+.Jumptable:
+	dw TryEscapeFromDungeon
+	dw EscapeFromDungeon
+	dw FailToEscapeFromDungeon
+
+TryEscapeFromDungeon:
+	call GetMapPermission
+	cp CAVE
+	jr z, .asm_cbcf
+	cp DUNGEON
+	jr z, .asm_cbcf
+.asm_cbcc
+	ld a, $2
+	ret
+
+.asm_cbcf
+	ld hl, wDigWarpNumber
+	ld a, [hli]
+	and a
+	jr z, .asm_cbcc
+	ld a, [hli]
+	and a
+	jr z, .asm_cbcc
+	ld a, [hl]
+	and a
+	jr z, .asm_cbcc
+	ld a, $1
+	ret
+
+EscapeFromDungeon:
+	ld hl, wDigWarpNumber
+	ld de, wLastWarpNumber
+	ld bc, $3
+	call CopyBytes
+	call FieldMoveGetPartyNick
+	ld a, [wBuffer2]
+	cp $2
+	jr nz, .asm_cc00
+	ld hl, UsedDigScript
+	call QueueScript
+	ld a, $81
+	ret
+
+.asm_cc00
+	ld hl, UsedEscapeRopeScript
+	call QueueScript
+	ld a, $81
+	ret
+
+FailToEscapeFromDungeon:
+	ld a, [wBuffer2]
+	cp $2
+	jr nz, .asm_cc1c
+	ld hl, Text_CantUseDigEscapeRopeHere ; $4c29
+	call MenuTextBox
+	call WaitPressAorB_BlinkCursor
+	call CloseWindow
+.asm_cc1c
+	ld a, $80
+	ret
+
+Text_UsedDig: ; cc1f
+	text_jump Text_UsedDig_
+	db "@"
+
+Text_UsedEscapeRope:
+	text_jump Text_UsedEscapeRope_
+	db "@"
+
+Text_CantUseDigEscapeRopeHere:
+	text_jump Text_CantUseDigEscapeRopeHere_
+	db "@"
+
+UsedEscapeRopeScript: ; cc2e	reloadmappart
+	reloadmappart
+	special UpdateTimePals
+	writetext Text_UsedEscapeRope ; cc24
+	jump ContinueDigEscapeRopeScript
+
+UsedDigScript:
+	reloadmappart
+	special UpdateTimePals
+	writetext Text_UsedDig
+ContinueDigEscapeRopeScript:
+	waitbutton
+	closetext
+	playsound SFX_WARP_TO
+	applymovement PLAYER, DigOutMovementData
+	farscall AbortBugCatchingContest
+	special WarpToSpawnPoint
+	writecode VAR_MOVEMENT, PLAYER_NORMAL
+	newloadmap MAPSETUP_DOOR
+	playsound SFX_WARP_FROM
+	applymovement PLAYER, DigReturnMovementData
+	end
+
+DigOutMovementData:
+	step_dig 32
+	hide_person
+	step_end
+
+DigReturnMovementData:
+	show_person
+	return_dig 32
+	step_end
+
+	call FieldMoveBufferReset
+.asm_cc67
+	ld hl, .Jumptable
+	call DoFieldMoveAction
+	jr nc, .asm_cc67
+	and $7f
+	ld [wFieldMoveSucceeded], a
+	ret
+
+.Jumptable:
+	dw TryTeleport
+	dw DoTeleport
+	dw FailTeleport
+
+TryTeleport:
+	call GetMapPermission
+	call CheckOutdoorMap
+	jr z, .asm_cc85
+	jr .asm_cc9c
+
+.asm_cc85
+	ld a, [wd9fb]
+	ld d, a
+	ld a, [wd9fc]
+	ld e, a
+	ld a, $5
+	ld hl, $5465
+	rst FarCall
+	jr nc, .asm_cc9c
+	ld a, c
+	ld [wceec], a
+	ld a, $1
+	ret
+
+.asm_cc9c
+	ld a, $2
+	ret
+
+DoTeleport:
+	call FieldMoveGetPartyNick
+	ld hl, TeleportScript
+	call QueueScript
+	ld a, $81
+	ret
+
+FailTeleport:
+	ld hl, Text_CantUseTeleportHere
+	call MenuTextBoxBackup
+	ld a, $80
+	ret
+
+Text_ReturnToLastMonCenter:
+	text_jump Text_ReturnToLastMonCenter_
+	db "@"
+
+Text_CantUseTeleportHere:
+	text_jump Text_CantUseTeleportHere_
+	db "@"
+
+TeleportScript: ; ccbe
+	reloadmappart
+	special UpdateTimePals
+	writetext Text_ReturnToLastMonCenter
+	pause 60
+	reloadmappart
+	closetext
+	playsound SFX_WARP_TO
+	applymovement PLAYER, TeleportFromMovementData
+	farscall AbortBugCatchingContest
+	special WarpToSpawnPoint
+	writecode VAR_MOVEMENT, PLAYER_NORMAL
+	newloadmap MAPSETUP_TELEPORT
+	playsound SFX_WARP_FROM
+	applymovement PLAYER, TeleportToMovementData
+	end
+
+TeleportFromMovementData: ; cce4
+	teleport_from
+	step_end
+
+TeleportToMovementData:
+	teleport_to
+	step_end
+
+StrengthFunction:
+	call Functionccf1
+	and $7f
+	ld [wFieldMoveSucceeded], a
+	ret
+
+Functionccf1: ; ccf1 (3:4cf1)
+	ld de, ENGINE_PLAINBADGE
+	call FieldMoveBadgeCheck
+	jr c, asm_cd09
+	jr asm_cd0c
+
+	ld hl, Text_AlreadyUsingStrength
+	call MenuTextBoxBackup
+	ld a, $80
+	ret
+
+Text_AlreadyUsingStrength:
+	text_jump Text_AlreadyUsingStrength_
+	db "@"
+
+asm_cd09
+	ld a, $80
+	ret
+
+asm_cd0c
+	ld hl, Script_StrengthFromMenu
+	call QueueScript
+	ld a, $81
+	ret
+
+GetStrengthUserSpeciesAndSetFlag:
+	SetFlag ENGINE_STRENGTH_ACTIVE
+	ld a, [wd005]
+	ld e, a
+	ld d, $0
+	ld hl, wPartySpecies
+	add hl, de
+	ld a, [hl]
+	ld [wBuffer6], a
+	call FieldMoveGetPartyNick
+	ret
+
+Script_StrengthFromMenu: ; cd2c
+	reloadmappart
+	special UpdateTimePals
+Script_UsedStrength:
+	callasm GetStrengthUserSpeciesAndSetFlag
+	writetext Text_UsedStrength
+	copybytetovar wBuffer6
+	cry 0
+	pause 3
+	writetext Text_AllowedToMoveBoulders
+	closetext
+	end
+
+Text_UsedStrength: ; cd44
+	text_jump Text_UsedStrength_
+	db "@"
+
+Text_AllowedToMoveBoulders:
+	text_jump Text_AllowedToMoveBoulders_
+	db "@"
+
+AskStrengthScript: ; cd4e
+	callasm TryStrengthOW
+	iffalse .ask
+	if_equal 1, .not_able
+	jump .already_active
+
+.not_able
+	jumptext Text_MonMayBeAbleToMove
+
+.already_active
+	jumptext Text_BouldersMayNowBeMoved
+
+.ask
+	opentext
+	writetext Text_AskStrength
+	yesorno
+	iftrue Script_UsedStrength
+	closetext
+	end
+
+Text_AskStrength:
+	text_jump Text_AskStrength_
+	db "@"
+
+Text_BouldersMayNowBeMoved:
+	text_jump Text_BouldersMayNowBeMoved_
+	db "@"
+
+Text_MonMayBeAbleToMove:
+	text_jump Text_MonMayBeAbleToMove_
+	db "@"
+
+TryStrengthOW:
+	ld d, STRENGTH
+	call FieldMovePartyCheck
+	jr c, .asm_cd95
+	ld de, ENGINE_PLAINBADGE
+	call FieldMoveEngineFlagCheck
+	jr c, .asm_cd95
+	CheckFlagHL ENGINE_STRENGTH_ACTIVE
+	jr z, .asm_cd99
+	ld a, $2
+	jr .asm_cd9c
+
+.asm_cd95
+	ld a, $1
+	jr .asm_cd9c
+
+.asm_cd99
+	xor a
+	jr .asm_cd9c
+
+.asm_cd9c
+	ld [wScriptVar], a
+	ret
+
+WhirlpoolFunction: ; cda0
 IF DEF(GOLD)
-	dr $cb9e, $d1e2
+	dr $cda0, $d1e2
 ENDC
 IF DEF(SILVER)
-	dr $cb9c, $d1e0
+	dr $cd9e, $d1e0
 ENDC
