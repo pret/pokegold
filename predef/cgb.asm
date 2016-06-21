@@ -62,15 +62,15 @@ Predef_LoadSGBLayoutCGB:
 	dw Function9502
 
 Function9376: ; 9376 (2:5376)
-	ld hl, Palettes_a0d6
+	ld hl, PalPacket_a0d5 + 1
 	ld de, wTempBGPals
 	ld c, $4
 	call Function9ab7
-	ld hl, Palettes_a0d6
+	ld hl, PalPacket_a0d5 + 1
 	ld de, wTempBGPal4
 	ld c, $4
 	call Function9ab7
-	ld hl, Palettes_a0d6
+	ld hl, PalPacket_a0d5 + 1
 	ld de, wTempOBPals
 	ld c, $2
 	call Function9ab7
@@ -419,7 +419,7 @@ Function9605: ; 9605 (2:5605)
 	ret
 
 Function968d: ; 968d (2:568d)
-	ld hl, Palettes_a116
+	ld hl, PalPacket_a115 + 1
 	call Function9ab2
 	call Function9b1d
 	ld de, wTempOBPals
@@ -493,7 +493,7 @@ Function96f9:
 	ret
 
 Function9713:
-	ld hl, Palettes_a0a6
+	ld hl, PalPacket_a0a5 + 1
 	call Function9ab2
 	ld de, wTempOBPals
 	ld a, $3a
@@ -517,7 +517,7 @@ Function973e: ; 973e (2:573e)
 	ld de, wTempBGPals
 	ld bc, $80
 	call CopyBytes
-	ld hl, Palettes_a126
+	ld hl, PalPacket_a125 + 1
 	call Function9ab2
 	call Function9b1d
 	call Function9b35
@@ -530,7 +530,7 @@ Function9757: ; 9757 (2:5757)
 	ret
 
 Function9760: ; 9760 (2:5760)
-	ld hl, Palettes_a0c6
+	ld hl, PalPacket_a0c5 + 1
 	call Function9ab2
 	call Function9b9c
 	call Function9b35
@@ -585,14 +585,14 @@ Function97af: ; 97af (2:57af)
 	ret
 
 Function97d4: ; 97d4 (2:57d4)
-	ld hl, Palettes_a126
+	ld hl, PalPacket_a125 + 1
 	call Function9ab2
 	call Function9b1d
 	call Function9b35
 	ret
 
 Function97e1: ; 97e1 (2:57e1)
-	ld hl, Palettes_a036
+	ld hl, PalPacket_a035 + 1
 	call Function9ab2
 	ld de, wTempOBPals
 	ld a, $4c
@@ -705,7 +705,7 @@ Function98be: ; 98be (2:58be)
 	ret
 
 Function98f1: ; 98f1 (2:58f1)
-	ld hl, Palettes_a0b6
+	ld hl, PalPacket_a0b5 + 1
 	call Function9ab2
 	call Function9b1d
 	call Function9b35
@@ -825,7 +825,7 @@ Function999f: ; 999f (2:599f)
 	ret
 
 Function99d9: ; 99d9 (2:59d9)
-	ld hl, Palettes_a016
+	ld hl, PalPacket_a015 + 1
 	call Function9ab2
 	call Function9b1d
 	hlcoord 0, 4, wAttrMap
@@ -881,7 +881,7 @@ Function9a47: ; 9a47 (2:5a47)
 	ret
 
 Function9a5a: ; 9a5a (2:5a5a)
-	ld hl, Palettes_a136
+	ld hl, PalPacket_a135 + 1
 	call Function9ab2
 	ld hl, Palettes_bac6
 	ld de, wTempOBPal0

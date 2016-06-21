@@ -1,0 +1,36 @@
+# generated
+*.tx
+*.o
+
+# precompiled python
+*.pyc
+*$py.class
+
+# no binaries
+*.exe
+
+# roms
+*.gbc
+*.gb
+
+# for any of the poor souls with save game files in their working directory
+*.sgm
+*.sav
+*.rtc
+
+# rgbds extras
+*.map
+*.sym
+
+# compare.sh
+baserom.txt
+pokecrystal.txt
+
+# for vim configuration
+# url: http://www.vim.org/scripts/script.php?script_id=441
+.lvimrc
+# swap files for vim
+.*.swp
+# swap files for gedit
+*~
+

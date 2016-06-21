@@ -697,75 +697,482 @@ Function9be9:
 	ret
 
 Palettes_9c09:
-	dr $9c09, $9c39
+	RGB 31, 31, 31
+	RGB 25, 25, 25
+	RGB 13, 13, 13
+	RGB  0,  0,  0
+
+	RGB 31, 31, 31
+	RGB 31, 31,  7
+	RGB 31, 16,  1
+	RGB  0,  0,  0
+
+	RGB 31, 31, 31
+	RGB 31, 19, 24
+	RGB 30, 10,  6
+	RGB  0,  0,  0
+
+	RGB 31, 31, 31
+	RGB 12, 25,  1
+	RGB  5, 14,  0
+	RGB  0,  0,  0
+
+	RGB 31, 31, 31
+	RGB  8, 12, 31
+	RGB  1,  4, 31
+	RGB  0,  0,  0
+
+	RGB 31, 31, 31
+	RGB 24, 18,  7
+	RGB 20, 15,  3
+	RGB  0,  0,  0
+
 Function9c39:
-	dr $9c39, $9c5b
-Function9c5b:
-	dr $9c5b, $9c66
-Function9c66:
-	dr $9c66, $9c76
-PushSGBPals_:
-	dr $9c76, $9cc0
-InitSGBBorder:
-	dr $9cc0, $9cfd
-InitCGBPals:: ; 9cfd
-	dr $9cfd, $9ee5
+	call CheckCGB
+	ret z
+	ld a, $90
+	ld [rOBPI], a
+	ld a, $1c
+	call Function9ac7
+	call Function9c52
+	ld a, $21
+	call Function9ac7
+	call Function9c52
+	ret
+
+Function9c52: ; 9c52 (2:5c52)
+	ld c, $8
+.asm_9c54
+	ld a, [hli]
+	ld [rOBPD], a
+	dec c
+	jr nz, .asm_9c54
+	ret
+
+Function9c5b: ; 9c5b (2:5c5b)
+	ld l, a
+	ld h, $0
+	add hl, hl
+	add hl, hl
+	add hl, hl
+	ld bc, BlkPacket_ad3d
+	add hl, bc
+	ret
+
+Function9c66: ; 9c66 (2:5c66)
+	push bc
+	call Function9c5b
+	pop bc
+	push hl
+	call CheckShininess
+	pop hl
+	ret nc
+	inc hl
+	inc hl
+	inc hl
+	inc hl
+	ret
+
+PushSGBPals_: ; 9c76 (2:5c76)
+	ld a, [wd8ba]
+	push af
+	set 7, a
+	ld [wd8ba], a
+	call Function9c87
+	pop af
+	ld [wd8ba], a
+	ret
+
+Function9c87: ; 9c87 (2:5c87)
+	ld a, [hl]
+	and $7
+	ret z
+	ld b, a
+.asm_9c8c
+	push bc
+	xor a
+	ld [rJOYP], a
+	ld a, $30
+	ld [rJOYP], a
+	ld b, $10
+.asm_9c96
+	ld e, $8
+	ld a, [hli]
+	ld d, a
+.asm_9c9a
+	bit 0, d
+	ld a, $10
+	jr nz, .asm_9ca2
+	ld a, $20
+.asm_9ca2
+	ld [rJOYP], a
+	ld a, $30
+	ld [rJOYP], a
+	rr d
+	dec e
+	jr nz, .asm_9c9a
+	dec b
+	jr nz, .asm_9c96
+	ld a, $20
+	ld [rJOYP], a
+	ld a, $30
+	ld [rJOYP], a
+	call Function9ed9
+	pop bc
+	dec b
+	jr nz, .asm_9c8c
+	ret
+
+InitSGBBorder: ; 9cc0 (2:5cc0)
+	call CheckCGB
+	ret nz
+	di
+	ld a, [wd8ba]
+	push af
+	set 7, a
+	ld [wd8ba], a
+	xor a
+	ld [rJOYP], a
+	ld [hSGB], a
+	call Function9da9
+	jr nc, .asm_9cf7
+	ld a, $1
+	ld [hSGB], a
+	call Function9d4a
+	call Function9e13
+	call Function9ed9
+	call Function9d9e
+	call Function9d8b
+	call Function9ed9
+	call Function9d9e
+	ld hl, PalPacket_a1d5
+	call Function9c87
+.asm_9cf7
+	pop af
+	ld [wd8ba], a
+	ei
+	ret
+
+InitCGBPals:: ; 9cfd (2:5cfd)
+	call CheckCGB
+	ret z
+	ld a, $1
+	ld [rVBK], a
+	ld hl, $8000
+	ld bc, $2000
+	xor a
+	call ByteFill
+	ld a, $0
+	ld [rVBK], a
+	ld a, $80
+	ld [rBGPI], a
+	ld c, $20
+.asm_9d19
+	ld a, $ff
+	ld [rBGPD], a
+	ld a, $7f
+	ld [rBGPD], a
+	dec c
+	jr nz, .asm_9d19
+	ld a, $80
+	ld [rOBPI], a
+	ld c, $20
+.asm_9d2a
+	ld a, $ff
+	ld [rOBPD], a
+	ld a, $7f
+	ld [rOBPD], a
+	dec c
+	jr nz, .asm_9d2a
+	ld hl, wTempBGPals
+	call Function9d3e
+	ld hl, wBGPals
+Function9d3e: ; 9d3e (2:5d3e)
+	ld c, $40
+.asm_9d40
+	ld a, $ff
+	ld [hli], a
+	ld a, $7f
+	ld [hli], a
+	dec c
+	jr nz, .asm_9d40
+	ret
+
+Function9d4a: ; 9d4a (2:5d4a)
+	ld hl, .Pointers
+	ld c, $9
+.asm_9d4f
+	push bc
+	ld a, [hli]
+	push hl
+	ld h, [hl]
+	ld l, a
+	call Function9c87
+	pop hl
+	inc hl
+	pop bc
+	dec c
+	jr nz, .asm_9d4f
+	ret
+
+.Pointers:
+	dw PalPacket_a1c5
+	dw PalPacket_a1e5
+	dw PalPacket_a1f5
+	dw PalPacket_a205
+	dw PalPacket_a215
+	dw PalPacket_a225
+	dw PalPacket_a235
+	dw PalPacket_a245
+	dw PalPacket_a255
+
+Function9d70:
+	di
+	xor a
+	ld [rJOYP], a
+	ld hl, PalPacket_a1c5
+	call Function9c87
+	call Function9d8b
+	call Function9ed9
+	call Function9d9e
+	ld hl, PalPacket_a1d5
+	call Function9c87
+	ei
+	ret
+
+Function9d8b: ; 9d8b (2:5d8b)
+	call Function9d97
+	push de
+	call Function9e83
+	pop hl
+	call Function9e37
+	ret
+
+Function9d97: ; 9d97 (2:5d97)
+	ld hl, SGBBorder
+	ld de, SGBBorderMap
+	ret
+
+Function9d9e: ; 9d9e (2:5d9e)
+	ld hl, $8000
+	ld bc, $2000
+	xor a
+	call ByteFill
+	ret
+
+Function9da9: ; 9da9 (2:5da9)
+	ld hl, PalPacket_a195
+	call Function9c87
+	call Function9ed9
+	ld a, [rJOYP]
+	and $3
+	cp $3
+	jr nz, .asm_9e05
+	ld a, $20
+	ld [rJOYP], a
+	ld a, [rJOYP]
+	ld a, [rJOYP]
+	call Function9ed9
+	call Function9ed9
+	ld a, $30
+	ld [rJOYP], a
+	call Function9ed9
+	call Function9ed9
+	ld a, $10
+	ld [rJOYP], a
+	ld a, [rJOYP]
+	ld a, [rJOYP]
+	ld a, [rJOYP]
+	ld a, [rJOYP]
+	ld a, [rJOYP]
+	ld a, [rJOYP]
+	call Function9ed9
+	call Function9ed9
+	ld a, $30
+	ld [rJOYP], a
+	ld a, [rJOYP]
+	ld a, [rJOYP]
+	ld a, [rJOYP]
+	call Function9ed9
+	call Function9ed9
+	ld a, [rJOYP]
+	and $3
+	cp $3
+	jr nz, .asm_9e05
+	call Function9e0a
+	and a
+	ret
+
+.asm_9e05
+	call Function9e0a
+	scf
+	ret
+
+Function9e0a: ; 9e0a (2:5e0a)
+	ld hl, PalPacket_a185
+	call Function9c87
+	jp Function9ed9
+
+Function9e13: ; 9e13 (2:5e13)
+	call DisableLCD
+	ld a, $e4
+	ld [rBGP], a
+	ld hl, Palettes_a265
+	ld de, $8800
+	ld bc, $1000
+	call Function9eb1
+	call Function9ec3
+	ld a, $e3
+	ld [rLCDC], a
+	ld hl, PalPacket_a175
+	call Function9c87
+	xor a
+	ld [rBGP], a
+	ret
+
+Function9e37: ; 9e37 (2:5e37)
+	call DisableLCD
+	ld a, $e4
+	ld [rBGP], a
+	ld de, $8800
+	ld bc, $140
+	call Function9eb1
+	ld b, $12
+.asm_9e49
+	push bc
+	ld bc, $c
+	call Function9eb1
+	ld bc, $28
+	call Function9eba
+	ld bc, $c
+	call Function9eb1
+	pop bc
+	dec b
+	jr nz, .asm_9e49
+	ld bc, $140
+	call Function9eb1
+	ld bc, $100
+	call Function9eba
+	ld bc, $80
+	call Function9eb1
+	call Function9ec3
+	ld a, $e3
+	ld [rLCDC], a
+	ld hl, PalPacket_a1b5
+	call Function9c87
+	xor a
+	ld [rBGP], a
+	ret
+
+Function9e83: ; 9e83 (2:5e83)
+	call DisableLCD
+	ld a, $e4
+	ld [rBGP], a
+	ld de, $8800
+	ld b, $80
+.asm_9e8f
+	push bc
+	ld bc, $10
+	call Function9eb1
+	ld bc, $10
+	call Function9eba
+	pop bc
+	dec b
+	jr nz, .asm_9e8f
+	call Function9ec3
+	ld a, $e3
+	ld [rLCDC], a
+	ld hl, PalPacket_a1a5
+	call Function9c87
+	xor a
+	ld [rBGP], a
+	ret
+
+Function9eb1: ; 9eb1 (2:5eb1)
+	ld a, [hli]
+	ld [de], a
+	inc de
+	dec bc
+	ld a, c
+	or b
+	jr nz, Function9eb1
+	ret
+
+Function9eba: ; 9eba (2:5eba)
+	xor a
+	ld [de], a
+	inc de
+	dec bc
+	ld a, c
+	or b
+	jr nz, Function9eba
+	ret
+
+Function9ec3: ; 9ec3 (2:5ec3)
+	ld hl, $9800
+	ld de, $c
+	ld a, $80
+	ld c, $d
+.asm_9ecd
+	ld b, $14
+.asm_9ecf
+	ld [hli], a
+	inc a
+	dec b
+	jr nz, .asm_9ecf
+	add hl, de
+	dec c
+	jr nz, .asm_9ecd
+	ret
+
+Function9ed9: ; 9ed9 (2:5ed9)
+	ld de, 7000
+.asm_9edc
+	nop
+	nop
+	nop
+	dec de
+	ld a, d
+	or e
+	jr nz, .asm_9edc
+	ret
+
 BlkPacket_9ee5:
 	dr $9ee5, $9ef5
-
 BlkPacket_9ef5:
 	dr $9ef5, $9f05
-
 BlkPacket_9f05:
 	dr $9f05, $9f25
-
 BlkPacket_9f25:
 	dr $9f25, $9f35
-
 BlkPacket_9f35:
 	dr $9f35, $9f45
-
 BlkPacket_9f45:
 	dr $9f45, $9f55
-
 BlkPacket_9f55:
 	dr $9f55, $9f65
-
 BlkPacket_9f65:
 	dr $9f65, $9f75
-
 BlkPacket_9f75:
 	dr $9f75, $9f85
-
 BlkPacket_9f85:
 	dr $9f85, $9fa5
 BlkPacket_9fa5:
 	dr $9fa5, $9fd5
-
 BlkPacket_9fd5:
 	dr $9fd5, $9fe5
-
 BlkPacket_9fe5:
 	dr $9fe5, $9ff5
-
 BlkPacket_9ff5:
 	dr $9ff5, $a005
 PalPacket_a005:
 	dr $a005, $a015
-
 PalPacket_a015:
-	db $51
-Palettes_a016:
-	dr $a016, $a025
-
+	dr $a015, $a025
 PalPacket_a025:
 	dr $a025, $a035
-
 PalPacket_a035:
-	db $51
-Palettes_a036:
-	dr $a036, $a045
-
+	dr $a035, $a045
 PalPacket_a045:
 	dr $a045, $a055
 PalPacket_a055:
@@ -776,92 +1183,601 @@ PalPacket_a085:
 	dr $a085, $a095
 PalPacket_a095:
 	dr $a095, $a0a5
-
 PalPacket_a0a5:
-	db $51
-Palettes_a0a6:
-	dr $a0a6, $a0b5
-
+	dr $a0a5, $a0b5
 PalPacket_a0b5:
-	db $51
-Palettes_a0b6:
-	dr $a0b6, $a0c5
-
+	dr $a0b5, $a0c5
 PalPacket_a0c5:
-	db $51
-Palettes_a0c6:
-	dr $a0c6, $a0d5
-
+	dr $a0c5, $a0d5
 PalPacket_a0d5:
-	db $51
-Palettes_a0d6:
-	dr $a0d6, $a0e5
-
+	dr $a0d5, $a0e5
 PalPacket_a0e5:
 	dr $a0e5, $a105
-
 PalPacket_a105:
 	dr $a105, $a115
-
 PalPacket_a115:
-	db $51
-Palettes_a116:
-	dr $a116, $a125
-
+	dr $a115, $a125
 PalPacket_a125:
-	db $51
-Palettes_a126:
-	dr $a126, $a135
-
+	dr $a125, $a135
 PalPacket_a135:
-	db $51
-Palettes_a136:
-	dr $a136, $a145
-
+	dr $a135, $a145
 PalPacket_a145:
 	dr $a145, $a155
 PalPacket_a155:
 	dr $a155, $a165
-
 PalPacket_a165:
-	dr $a165, $a265
+	dr $a165, $a175
+PalPacket_a175:
+	dr $a175, $a185
+PalPacket_a185:
+	dr $a185, $a195
+PalPacket_a195:
+	dr $a195, $a1a5
+PalPacket_a1a5:
+	dr $a1a5, $a1b5
+PalPacket_a1b5:
+	dr $a1b5, $a1c5
+PalPacket_a1c5:
+	dr $a1c5, $a1d5
+PalPacket_a1d5:
+	dr $a1d5, $a1e5
+PalPacket_a1e5:
+	dr $a1e5, $a1f5
+PalPacket_a1f5:
+	dr $a1f5, $a205
+PalPacket_a205:
+	dr $a205, $a215
+PalPacket_a215:
+	dr $a215, $a225
+PalPacket_a225:
+	dr $a225, $a235
+PalPacket_a235:
+	dr $a235, $a245
+PalPacket_a245:
+	dr $a245, $a255
+PalPacket_a255:
+	dr $a255, $a265
 Palettes_a265:
 	dr $a265, $a4dd
 
-SGBBorderMap:
-	dr $a4dd, $a90d
-SGBBorderPalettes:
-	dr $a90d, $a98d
-SGBBorder:
-	dr $a98d, $ad2d
+IF DEF(GOLD)
+SGBBorderMap: INCBIN "gfx/sgb_border/gold.map"
+SGBBorderPalettes: INCLUDE "gfx/sgb_border/pals/gold.pal"
+SGBBorder: INCBIN "gfx/sgb_border/gold.2bpp"
+ENDC
+
+IF DEF(SILVER)
+SGBBorderMap: INCBIN "gfx/sgb_border/silver.map"
+SGBBorderPalettes: INCLUDE "gfx/sgb_border/pals/silver.pal"
+SGBBorder: INCBIN "gfx/sgb_border/silver.2bpp"
+ENDC
 
 Palettes_ad2d:
 	dr $ad2d, $ad39
 Palettes_ad39:
 	dr $ad39, $ad3d
-
 BlkPacket_ad3d:
     dr $ad3d, $b53d
-
 PalPacket_b53d
     dr $b53d, $b649
 
-Functionb649:
-    dr $b649, $b796
-Palettes_b796:
-    dr $b796, $ba86
+Functionb649: ; b649 (2:7649)
+	ld a, [wPermission]
+	and $7
+	ld e, a
+	ld d, $0
+	ld hl, Pointers_b6ce
+	add hl, de
+	add hl, de
+	ld a, [hli]
+	ld h, [hl]
+	ld l, a
+	ld a, [wTimeOfDayPal]
+	and $3
+	add a
+	add a
+	add a
+	ld e, a
+	ld d, $0
+	add hl, de
+	ld e, l
+	ld d, h
+	ld hl, wTempBGPals
+	ld b, $8
+.asm_b66c
+	ld a, [de]
+	push de
+	push hl
+	ld l, a
+	ld h, $0
+	add hl, hl
+	add hl, hl
+	add hl, hl
+	ld de, $775e
+	add hl, de
+	ld e, l
+	ld d, h
+	pop hl
+	ld c, $8
+.asm_b67e
+	ld a, [de]
+	inc de
+	ld [hli], a
+	dec c
+	jr nz, .asm_b67e
+	pop de
+	inc de
+	dec b
+	jr nz, .asm_b66c
+	ld a, [wTimeOfDayPal]
+	and $3
+	ld bc, $40
+	ld hl, Palettes_b8ae
+	call AddNTimes
+	ld de, wTempOBPal0
+	ld bc, $40
+	call CopyBytes
+	ld a, [wPermission]
+	cp $1
+	jr z, .asm_b6aa
+	cp $2
+	ret nz
+.asm_b6aa
+	ld a, [wMapGroup]
+	ld l, a
+	ld h, $0
+	add hl, hl
+	add hl, hl
+	add hl, hl
+	ld de, Palettes_b9ae
+	add hl, de
+	ld a, [wTimeOfDayPal]
+	and $3
+	cp $2
+	jr c, .asm_b6c4
+	inc hl
+	inc hl
+	inc hl
+	inc hl
+.asm_b6c4
+	ld de, wTempBGPal6 + 2
+	ld bc, $4
+	call CopyBytes
+	ret
 
+Pointers_b6ce:
+	dw .OutdoorColors ; unused
+	dw .OutdoorColors ; TOWN
+	dw .OutdoorColors ; ROUTE
+	dw .IndoorColors ; INDOOR
+	dw .DungeonColors ; CAVE
+	dw .Perm5Colors ; PERM_5
+	dw .IndoorColors ; GATE
+	dw .DungeonColors ; DUNGEON
+
+; Valid indices: $00 - $29
+.OutdoorColors:
+	db $00, $01, $02, $28, $04, $05, $06, $07 ; morn
+	db $08, $09, $0a, $28, $0c, $0d, $0e, $0f ; day
+	db $10, $11, $12, $29, $14, $15, $16, $17 ; nite
+	db $18, $19, $1a, $1b, $1c, $1d, $1e, $1f ; dark
+
+.IndoorColors:
+	db $20, $21, $22, $23, $24, $25, $26, $07 ; morn
+	db $20, $21, $22, $23, $24, $25, $26, $07 ; day
+	db $10, $11, $12, $13, $14, $15, $16, $07 ; nite
+	db $18, $19, $1a, $1b, $1c, $1d, $1e, $07 ; dark
+
+.DungeonColors:
+	db $00, $01, $02, $03, $04, $05, $06, $07 ; morn
+	db $08, $09, $0a, $0b, $0c, $0d, $0e, $0f ; day
+	db $10, $11, $12, $13, $14, $15, $16, $17 ; nite
+	db $18, $19, $1a, $1b, $1c, $1d, $1e, $1f ; dark
+
+.Perm5Colors:
+	db $00, $01, $02, $03, $04, $05, $06, $07 ; morn
+	db $08, $09, $0a, $0b, $0c, $0d, $0e, $0f ; day
+	db $10, $11, $12, $13, $14, $15, $16, $17 ; nite
+	db $18, $19, $1a, $1b, $1c, $1d, $1e, $1f ; dark
+
+	dr $b75e, $b796
+Palettes_b796:
+    dr $b796, $b8ae
+Palettes_b8ae:
+    dr $b8ae, $b9ae
+Palettes_b9ae:
+    dr $b9ae, $ba86
 Palettes_ba86:
-    dr $ba86, $bac6
+	RGB 27, 31, 27
+	RGB 21, 21, 21
+	RGB 13, 13, 13
+	RGB 00, 00, 00
+
+	RGB 27, 31, 27
+	RGB 31, 07, 06
+	RGB 20, 02, 03
+	RGB 00, 00, 00
+
+	RGB 27, 31, 27
+	RGB 10, 31, 09
+	RGB 04, 14, 01
+	RGB 00, 00, 00
+
+	RGB 27, 31, 27
+	RGB 08, 12, 31
+	RGB 01, 04, 31
+	RGB 00, 00, 00
+
+	RGB 27, 31, 27
+	RGB 31, 31, 07
+	RGB 31, 16, 01
+	RGB 00, 00, 00
+
+	RGB 27, 31, 27
+	RGB 22, 16, 08
+	RGB 13, 07, 01
+	RGB 00, 00, 00
+
+	RGB 27, 31, 27
+	RGB 15, 31, 31
+	RGB 05, 17, 31
+	RGB 00, 00, 00
+
+	RGB 31, 31, 31
+	RGB 11, 11, 19
+	RGB 07, 07, 12
+	RGB 00, 00, 00
+
 Palettes_bac6:
-    dr $bac6, $bb36
+	RGB 27, 31, 27
+	RGB 31, 19, 10
+	RGB 31, 07, 04
+	RGB 00, 00, 00
+
+	RGB 27, 31, 27
+	RGB 31, 19, 10
+	RGB 10, 14, 20
+	RGB 00, 00, 00
+
+	RGB 27, 31, 27
+	RGB 31, 19, 10
+	RGB 31, 07, 04
+	RGB 00, 00, 00
+
+	RGB 27, 31, 27
+	RGB 31, 19, 10
+	RGB 31, 07, 04
+	RGB 00, 00, 00
+
+	RGB 27, 31, 27
+	RGB 31, 19, 10
+	RGB 31, 07, 04
+	RGB 00, 00, 00
+
+	RGB 27, 31, 27
+	RGB 31, 19, 10
+	RGB 31, 07, 04
+	RGB 00, 00, 00
+
+	RGB 27, 31, 27
+	RGB 31, 19, 10
+	RGB 31, 07, 04
+	RGB 00, 00, 00
+
+	RGB 27, 31, 27
+	RGB 31, 19, 10
+	RGB 31, 07, 04
+	RGB 00, 00, 00
+
+	RGB 31, 31, 31
+	RGB 21, 21, 21
+	RGB 13, 13, 13
+	RGB 07, 07, 07
+
+	RGB 31, 31, 31
+	RGB 31, 31, 07
+	RGB 31, 16, 01
+	RGB 07, 07, 07
+
+	RGB 31, 31, 31
+	RGB 31, 19, 24
+	RGB 30, 10, 06
+	RGB 07, 07, 07
+
+	RGB 31, 31, 31
+	RGB 12, 25, 01
+	RGB 05, 14, 00
+	RGB 07, 07, 07
+
+	RGB 31, 31, 31
+	RGB 08, 12, 31
+	RGB 01, 04, 31
+	RGB 07, 07, 07
+
+	RGB 31, 31, 31
+	RGB 24, 18, 07
+	RGB 20, 15, 03
+	RGB 07, 07, 07
+
 Palettes_bb36:
-    dr $bb36, $bb5e
+IF DEF(GOLD)
+	RGB 31, 31, 31
+	RGB 18, 23, 31
+	RGB 15, 20, 31
+	RGB  0,  0,  0
+
+	RGB 31, 21,  0
+	RGB 12, 14, 12
+	RGB 15, 20, 31
+	RGB  0,  0, 17
+
+	RGB 31, 31, 31
+	RGB 31,  0,  0
+	RGB 15, 20, 31
+	RGB  0,  0,  0
+
+	RGB 31, 31, 31
+	RGB 29, 25,  0
+	RGB 15, 20, 31
+	RGB 17, 10,  1
+
+	RGB 31, 31, 31
+	RGB 23, 26, 31
+	RGB 18, 23, 31
+	RGB  0,  0,  0
+ENDC
+
+IF DEF(SILVER)
+	RGB 31, 31, 31
+	RGB  0, 12, 15
+	RGB  4,  8, 21
+	RGB  0,  0,  0
+
+	RGB 31, 21,  0
+	RGB 15, 17, 15
+	RGB  4,  8, 21
+	RGB  0,  0, 17
+
+	RGB 31, 31, 31
+	RGB 31,  0,  0
+	RGB  4,  8, 21
+	RGB  0,  0,  0
+
+	RGB 31, 31, 31
+	RGB 24, 23, 25
+	RGB  4,  8, 21
+	RGB  8,  8,  9
+
+	RGB 31, 31, 31
+	RGB  5, 10, 11
+	RGB  0, 12, 15
+	RGB  0,  0,  0
+ENDC
+
 Palettes_bb5e:
-    dr $bb5e, $bb6e
+	RGB 31, 31, 31
+	RGB 07, 06, 03
+	RGB 07, 06, 03
+	RGB 07, 06, 03
+
+	RGB 31, 31, 31
+	RGB 31, 31, 00
+	RGB 26, 22, 00
+	RGB 00, 00, 00
+
 Palettes_bb6e:
-    dr $bb6e, $bb9e
+	RGB 28, 31, 20
+	RGB 21, 21, 21
+	RGB 13, 13, 13
+	RGB 00, 00, 00
+
+	RGB 28, 31, 20
+	RGB 00, 31, 00
+	RGB 00, 00, 31
+	RGB 00, 00, 00
+
+	RGB 28, 31, 20
+	RGB 00, 31, 00
+	RGB 15, 07, 00
+	RGB 00, 00, 00
+
+	RGB 28, 31, 20
+	RGB 31, 15, 00
+	RGB 15, 07, 00
+	RGB 00, 00, 00
+
+	RGB 28, 31, 20
+	RGB 00, 31, 00
+	RGB 00, 00, 31
+	RGB 31, 00, 00
+
+	RGB 28, 31, 20
+	RGB 00, 31, 00
+	RGB 15, 07, 00
+	RGB 31, 00, 00
+
 Palettes_bb9e:
-    dr $bb9e, $bbbe
+	RGB 31, 31, 31
+	RGB 30, 22, 24
+	RGB 18, 18, 18
+	RGB 00, 00, 00
+
+	RGB 31, 31, 31
+	RGB 10, 11, 31
+	RGB 18, 18, 18
+	RGB 00, 00, 00
+
+	RGB 31, 31, 31
+	RGB 12, 31, 11
+	RGB 18, 18, 18
+	RGB 00, 00, 00
+
+	RGB 31, 31, 31
+	RGB 29, 26, 05
+	RGB 18, 18, 18
+	RGB 00, 00, 00
+
 Palettes_bbbe:
-    dr $bbbe, $bc3a
+IF DEF(GOLD)
+	RGB 31, 31, 31
+	RGB 24, 25, 28
+	RGB 24, 24, 09
+	RGB 00, 00, 00
+
+	RGB 31, 31, 31
+	RGB 30, 10, 06
+	RGB 24, 24, 09
+	RGB 00, 00, 00
+
+	RGB 31, 31, 31
+	RGB 15, 31, 00
+	RGB 24, 24, 09
+	RGB 00, 00, 00
+
+	RGB 31, 31, 31
+	RGB 31, 15, 31
+	RGB 24, 24, 09
+	RGB 00, 00, 00
+
+	RGB 31, 31, 31
+	RGB 15, 21, 31
+	RGB 24, 24, 09
+	RGB 00, 00, 00
+
+	RGB 31, 31, 11
+	RGB 31, 31, 06
+	RGB 24, 24, 09
+	RGB 00, 00, 00
+
+	RGB 31, 31, 31
+	RGB 16, 19, 29
+	RGB 25, 22, 00
+	RGB 00, 00, 00
+
+	RGB 31, 31, 31
+	RGB 21, 21, 21
+	RGB 13, 13, 13
+	RGB 00, 00, 00
+
+	RGB 31, 31, 31
+	RGB 30, 10, 06
+	RGB 31, 00, 00
+	RGB 00, 00, 00
+
+	RGB 31, 31, 31
+	RGB 12, 25, 01
+	RGB 05, 14, 00
+	RGB 00, 00, 00
+
+	RGB 31, 31, 31
+	RGB 12, 25, 01
+	RGB 30, 10, 06
+	RGB 00, 00, 00
+
+	RGB 31, 31, 31
+	RGB 31, 31, 06
+	RGB 20, 15, 03
+	RGB 00, 00, 00
+
+	RGB 31, 31, 31
+	RGB 31, 31, 06
+	RGB 15, 21, 31
+	RGB 00, 00, 00
+
+	RGB 31, 31, 31
+	RGB 31, 31, 06
+	RGB 20, 15, 03
+	RGB 00, 00, 00
+
+	RGB 31, 31, 31
+	RGB 31, 24, 21
+	RGB 31, 13, 31
+	RGB 00, 00, 00
+
+	RGB 31, 31, 31
+	RGB 31, 31, 31
+	RGB 00, 00, 00
+	RGB 00, 00, 00
+ENDC
+
+IF DEF(SILVER)
+	RGB 31, 31, 31
+	RGB 25, 26, 14
+	RGB 20, 17, 31
+	RGB  0,  0,  0
+
+	RGB 31, 31, 31
+	RGB 30, 10,  6
+	RGB 20, 17, 31
+	RGB  0,  0,  0
+
+	RGB 31, 31, 31
+	RGB 15, 31,  0
+	RGB 20, 17, 31
+	RGB  0,  0,  0
+
+	RGB 31, 31, 31
+	RGB 31, 15, 31
+	RGB 20, 17, 31
+	RGB  0,  0,  0
+
+	RGB 31, 31, 31
+	RGB 15, 21, 31
+	RGB 20, 17, 31
+	RGB  0,  0,  0
+
+	RGB 31, 31, 11
+	RGB 31, 31,  6
+	RGB 20, 17, 31
+	RGB  0,  0,  0
+
+	RGB 31, 31, 31
+	RGB 16, 19, 29
+	RGB 25, 22,  0
+	RGB  0,  0,  0
+
+	RGB 31, 31, 31
+	RGB 21, 21, 21
+	RGB 13, 13, 13
+	RGB  0,  0,  0
+
+	RGB 31, 31, 31
+	RGB 30, 10,  6
+	RGB 31,  0,  0
+	RGB  0,  0,  0
+
+	RGB 31, 31, 31
+	RGB 12, 25,  1
+	RGB  5, 14,  0
+	RGB  0,  0,  0
+
+	RGB 31, 31, 31
+	RGB 12, 25,  1
+	RGB 30, 10,  6
+	RGB  0,  0,  0
+
+	RGB 31, 31, 31
+	RGB 31, 31,  6
+	RGB 20, 15,  3
+	RGB  0,  0,  0
+
+	RGB 31, 31, 31
+	RGB 31, 31,  6
+	RGB 15, 21, 31
+	RGB  0,  0,  0
+
+	RGB 31, 31, 31
+	RGB 31, 31,  6
+	RGB 20, 15,  3
+	RGB  0,  0,  0
+
+	RGB 31, 31, 31
+	RGB 31, 24, 21
+	RGB 31, 13, 31
+	RGB  0,  0,  0
+
+	RGB 31, 31, 31
+	RGB 31, 31, 31
+	RGB  0,  0,  0
+	RGB  0,  0,  0
+ENDC
