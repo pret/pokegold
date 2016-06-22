@@ -966,7 +966,10 @@ Function8c3e9:: ; 8c3e9
 	dr $8c3e9, $8c513
 
 Predef_StartBattle::
-	dr $8c513, $8ca6b
+	dr $8c513, $8ca5e
+
+PlayWhirlpoolSound:
+	dr $8ca5e, $8ca6b
 
 BlindingFlash:
 	dr $8ca6b, $8cbb8
@@ -1418,7 +1421,16 @@ Text_BouldersMayNowBeMoved_::
 	dr $194199, $1941b5
 
 Text_MonMayBeAbleToMove_::
-	dr $1941b5, $195610
+	dr $1941b5, $1941d7
+
+Text_UsedWhirlpool_::
+	dr $1941d7, $1941ec
+
+Text_MightyWhirlpool_::
+	dr $1941ec, $194225
+
+Text_AskWhirlpool_::
+	dr $194225, $195610
 
 ClockTimeUnknownText_:: ; 195610
 	dr $195610, $195624

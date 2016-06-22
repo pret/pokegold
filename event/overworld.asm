@@ -1039,10 +1039,155 @@ TryStrengthOW:
 	ld [wScriptVar], a
 	ret
 
-WhirlpoolFunction: ; cda0
+WhirlpoolFunction:
+	call FieldMoveBufferReset
+.asm_cda3
+	ld hl, .Jumptable
+	call DoFieldMoveAction
+	jr nc, .asm_cda3
+	and $7f
+	ld [wFieldMoveSucceeded], a
+	ret
+
+.Jumptable
+	dw TryWhirlpool
+	dw DoWhirlpool
+	dw FailWhirlpool
+
+TryWhirlpool:
+	ld de, ENGINE_GLACIERBADGE
+	call FieldMoveBadgeCheck
+	jr c, .asm_cdca
+	call TryWhirlpoolMenu
+	jr c, .asm_cdc7
+	ld a, $1
+	ret
+
+.asm_cdc7
+	ld a, $2
+	ret
+
+.asm_cdca
+	ld a, $80
+	ret
+
+DoWhirlpool:
+	ld hl, Script_WhirlpoolFromMenu
+	call QueueScript
+	ld a, $81
+	ret
+
+FailWhirlpool:
+	call FieldMoveFailed
+	ld a, $80
+	ret
+
+Text_UsedWhirlpool:
+	text_jump Text_UsedWhirlpool_
+	db "@"
+
+TryWhirlpoolMenu: ; cde1 (3:4de1)
+	call GetFacingTileCoord
+	ld c, a
+	push de
+	call CheckWhirlpoolTile
+	pop de
+	jr c, .asm_ce0c
+	call GetBlockLocation
+	ld c, [hl]
+	push hl
+	ld hl, WhirlpoolBlockPointers
+	call CheckOverworldTileArrays
+	pop hl
+	jr nc, .asm_ce0c
+	ld a, l
+	ld [wBuffer3], a
+	ld a, h
+	ld [wBuffer4], a
+	ld a, b
+	ld [wBuffer5], a
+	ld a, c
+	ld [wBuffer6], a
+	xor a
+	ret
+
+.asm_ce0c
+	scf
+	ret
+
+Script_WhirlpoolFromMenu: ; 4e0e
+	reloadmappart
+	special UpdateTimePals
+Script_UsedWhirlpool:
+	callasm FieldMoveGetPartyNick
+	writetext Text_UsedWhirlpool
+	reloadmappart
+	callasm DisappearWhirlpool
+	closetext
+	end
+
+DisappearWhirlpool: ; 4e20
+	ld hl, wBuffer3
+	ld a, [hli]
+	ld h, [hl]
+	ld l, a
+	ld a, [wBuffer5]
+	ld [hl], a
+	xor a
+	ld [hBGMapMode], a
+	call OverworldTextModeSwitch
+	ld a, [wBuffer6]
+	ld e, a
+	callba PlayWhirlpoolSound
+	call BufferScreen
+	call GetMovementPermissions
+	ret
+
+TryWhirlpoolOW:
+	ld d, WHIRLPOOL
+	call FieldMovePartyCheck
+	jr c, .asm_ce5f
+	ld de, ENGINE_GLACIERBADGE
+	call FieldMoveEngineFlagCheck
+	jr c, .asm_ce5f
+	call TryWhirlpoolMenu
+	jr c, .asm_ce5f
+	ld a, BANK(Script_AskWhirlpoolOW)
+	ld hl, Script_AskWhirlpoolOW ; $4e71
+	call CallScript
+	scf
+	ret
+
+.asm_ce5f
+	ld a, BANK(Script_MightyWhirlpool)
+	ld hl, Script_MightyWhirlpool ; $4e69
+	call CallScript
+	scf
+	ret
+
+Script_MightyWhirlpool:
+	jumptext Text_MightyWhirlpool
+
+Text_MightyWhirlpool:
+	text_jump Text_MightyWhirlpool_
+	db "@"
+
+Script_AskWhirlpoolOW: ; ce71
+	opentext
+	writetext Text_AskWhirlpool
+	yesorno
+	iftrue Script_UsedWhirlpool
+	closetext
+	end
+
+Text_AskWhirlpool: ; ce7b
+	text_jump Text_AskWhirlpool_
+	db "@"
+
+HeadbuttFunction: ; ce80
 IF DEF(GOLD)
-	dr $cda0, $d1e2
+	dr $ce80, $d1e2
 ENDC
 IF DEF(SILVER)
-	dr $cd9e, $d1e0
+	dr $ce7e, $d1e0
 ENDC
