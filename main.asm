@@ -602,9 +602,9 @@ Text_CaughtBugMon:
 	text_jump Text_CaughtBugMon_
 	db "@"
 
-DoItemEffect_::
+INCLUDE "items/item_effects.asm"
+
 IF DEF(GOLD)
-	dr $e7a6, $f900
 Functionf900:
 	dr $f900, $f933
 GetMaxPPOfMove:
@@ -612,7 +612,6 @@ GetMaxPPOfMove:
 ENDC
 
 IF DEF(SILVER)
-	dr $e7a4, $f8fe
 Functionf900:
 	dr $f8fe, $f931
 GetMaxPPOfMove:
