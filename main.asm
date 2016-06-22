@@ -409,14 +409,10 @@ INCLUDE "engine/items.asm"
 INCLUDE "engine/player_step.asm"
 INCLUDE "engine/anim_hp_bar.asm"
 INCLUDE "engine/move_mon.asm"
-
-BillsPC_: ; e3d8
-IF DEF(GOLD)
-	dr $e3d8, $e513
-CheckCurPartyMonFainted:
-	dr $e513, $e673
+INCLUDE "engine/billspctop.asm"
 
 Functione673:
+IF DEF(GOLD)
 	dr $e673, $e68e
 Functione68e:
 	dr $e68e, $e6a9
@@ -437,11 +433,6 @@ GetMaxPPOfMove:
 ENDC
 
 IF DEF(SILVER)
-	dr $e3d6, $e511
-CheckCurPartyMonFainted:
-	dr $e511, $e671
-
-Functione673:
 	dr $e671, $e68c
 Functione68e:
 	dr $e68c, $e6a7
@@ -533,7 +524,9 @@ Function14a2d:: ; 14a2d
 Function14a44: ; 14a44
 	dr $14a44, $14a73
 CheckCutCollision:
-	dr $14a73, $14ef5
+	dr $14a73, $14bd2
+StartMovePkmnWOMail_SaveGame:
+	dr $14bd2, $14ef5
 TryLoadSaveFile: ; 14ef5
 	dr $14ef5, $15484
 RunMapSetupScript::
@@ -756,7 +749,10 @@ SECTION "bank11", ROMX, BANK[$11]
 PlaceGraphic::
 	dr $44648, $44870
 DeletePartyMonMail:
-	dr $44870, $48000
+	dr $44870, $4488c
+
+IsAnyPokemonHoldingMail:
+	dr $4488c, $48000
 
 SECTION "bank12", ROMX, BANK[$12]
 	dr $48000, $4c000
@@ -1122,7 +1118,19 @@ Functione0909:
 Functione199d:
 	dr $e199d, $e2668
 Functione2668:
-	dr $e2668, $e4000
+	dr $e2668, $e2b9e
+
+DepositPokemon_:
+	dr $e2b9e, $e2d71
+
+WithdrawPokemon_:
+	dr $e2d71, $e2f47
+
+MovePKMNWithoutMail_:
+	dr $e2f47, $e3d25
+
+ChangeBox_:
+	dr $e3d25, $e4000
 
 SECTION "bank39", ROMX, BANK[$39]
 TitleScreenGFX5:
@@ -1449,7 +1457,25 @@ Text_MonCanCutThis_::
 	dr $1943c9, $194953
 
 Text_WasSentToBillsPC_::
-	dr $194953, $195610
+	dr $194953, $19496e
+
+Text_GottaHavePokemon_::
+	dr $19496e, $19498c
+
+Text_BillsPCWhat_::
+	dr $19498c, $194993
+
+Text_PleaseRemoveMailBeforeMovePkmnWOMail_::
+	dr $194993, $1949ca
+
+Text_YouDontHaveASinglePokemon_::
+	dr $1949ca, $1949e8
+
+Text_ItsYourLastPokemon_::
+	dr $1949e8, $194a0a
+
+Text_CantTakeAnyMorePokemon_::
+	dr $194a0a, $195610
 
 ClockTimeUnknownText_:: ; 195610
 	dr $195610, $195624
