@@ -1705,10 +1705,54 @@ Text_GotOffTheBike:
 	text_jump Text_GotOffTheBike_
 	db "@"
 
+
 TryCutOW: ; d193
-IF DEF(GOLD)
-	dr $d193, $d1e2
-ENDC
-IF DEF(SILVER)
-	dr $d191, $d1e0
-ENDC
+	ld d, CUT
+	call FieldMovePartyCheck
+	jr c, .asm_d1ac
+	ld de, ENGINE_HIVEBADGE
+	call FieldMoveEngineFlagCheck
+	jr c, .asm_d1ac
+	ld a, BANK(AskCutScript)
+	ld hl, AskCutScript
+	call CallScript
+	scf
+	ret
+
+.asm_d1ac
+	ld a, BANK(CantCutScript)
+	ld hl, CantCutScript
+	call CallScript
+	scf
+	ret
+
+AskCutScript: ; d1b6
+	opentext
+	writetext Text_AskCut
+	yesorno
+	iffalse .declined
+	callasm CheckMapForSomethingToCut_
+	iftrue Script_Cut
+.declined:
+	closetext
+	end
+
+CheckMapForSomethingToCut_: ; d1c7
+	xor a
+	ld [wScriptVar], a
+	call CheckMapForSomethingToCut
+	ret c
+	ld a, $1
+	ld [wScriptVar], a
+	ret
+
+Text_AskCut:
+	text_jump Text_AskCut_
+	db "@"
+
+CantCutScript: ; d1da
+	jumptext Text_MonCanCutThis
+
+Text_MonCanCutThis:
+	text_jump Text_MonCanCutThis_
+	db "@"

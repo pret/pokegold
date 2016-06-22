@@ -1478,7 +1478,13 @@ Text_GotOnTheBike_::
 	dr $194376, $19438b
 
 Text_GotOffTheBike_::
-	dr $19438b, $195610
+	dr $19438b, $1943a1
+
+Text_AskCut_::
+	dr $1943a1, $1943c9
+
+Text_MonCanCutThis_::
+	dr $1943c9, $195610
 
 ClockTimeUnknownText_:: ; 195610
 	dr $195610, $195624
