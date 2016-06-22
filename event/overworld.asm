@@ -1184,10 +1184,193 @@ Text_AskWhirlpool: ; ce7b
 	text_jump Text_AskWhirlpool_
 	db "@"
 
-HeadbuttFunction: ; ce80
+HeadbuttFunction:
+	call TryHeadbuttFromMenu
+	and $7f
+	ld [wFieldMoveSucceeded], a
+	ret
+
+TryHeadbuttFromMenu: ; ce89 (3:4e89)
+	call GetFacingTileCoord
+	call CheckHeadbuttTreeTile
+	jr nz, .asm_ce9a
+	ld hl, HeadbuttFromMenuScript ; $4eaa
+	call QueueScript
+	ld a, $81
+	ret
+
+.asm_ce9a
+	call FieldMoveFailed
+	ld a, $80
+	ret
+
+; ceaa
+Text_DidAHeadbutt:
+	text_jump Text_DidAHeadbutt_
+	db "@"
+
+Text_NothingFromHeadbutt:
+	text_jump Text_NothingFromHeadbutt_
+	db "@"
+
+HeadbuttFromMenuScript:
+	reloadmappart
+	special UpdateTimePals
+HeadbuttScript:
+	callasm FieldMoveGetPartyNick
+	writetext Text_DidAHeadbutt
+	reloadmappart
+	callasm ShakeHeadbuttTree
+	callasm TreeMonEncounter
+	iffalse .nope_nothing
+	closetext
+	randomwildmon
+	startbattle
+	reloadmapafterbattle
+	end
+
+.nope_nothing:
+	writetext Text_NothingFromHeadbutt
+	waitbutton
+	closetext
+	end
+
+TryHeadbuttOW: ; cecc
+	ld d, HEADBUTT
+	call FieldMovePartyCheck
+	jr c, .asm_cedd
+	ld a, BANK(AskHeadbuttScript)
+	ld hl, AskHeadbuttScript ; $4edf
+	call CallScript
+	scf
+	ret
+
+.asm_cedd
+	xor a
+	ret
+
+AskHeadbuttScript:
+	opentext
+	writetext Text_AskHeadbutt
+	yesorno
+	iftrue HeadbuttScript
+	closetext
+	end
+
+Text_AskHeadbutt: ; cee9
+	text_jump Text_AskHeadbutt_
+	db "@"
+
+	call TryRockSmashFromMenu
+	and $7f
+	ld [wFieldMoveSucceeded], a
+	ret
+
+TryRockSmashFromMenu: ; cef7 (3:4ef7)
+	call GetFacingObject
+	jr c, .asm_cf0a
+	ld a, d
+	cp $18
+	jr nz, .asm_cf0a
+	ld hl, RockSmashFromMenuScript ; $4f31
+	call QueueScript
+	ld a, $81
+	ret
+
+.asm_cf0a
+	call FieldMoveFailed
+	ld a, $80
+	ret
+
+GetFacingObject: ; cf10 (3:4f10)
+	callba CheckFacingObject
+	jr nc, .asm_cf2f
+	ld a, [hObjectStructIndexBuffer]
+	call GetObjectStruct
+	ld hl, $1
+	add hl, bc
+	ld a, [hl]
+	ld [hLastTalked], a
+	call GetMapObject
+	ld hl, $4
+	add hl, bc
+	ld a, [hl]
+	ld d, a
+	and a
+	ret
+
+.asm_cf2f
+	scf
+	ret
+
+RockSmashFromMenuScript: ; cf31
+	reloadmappart
+	special UpdateTimePals
+RockSmashScript:
+	callasm FieldMoveGetPartyNick
+	writetext Text_UsedRockSmash
+	closetext
+	special WaitSFX
+	playsound SFX_STRENGTH
+	earthquake 84
+	applymovement2 RockSmashMovementData
+	disappear -2
+	callasm RockMonEncounter
+	copybytetovar wd117
+	iffalse .skip_battle
+	randomwildmon
+	startbattle
+	reloadmapafterbattle
+.skip_battle
+	end
+
+RockSmashMovementData:
+	rock_smash 10
+	step_end
+
+Text_UsedRockSmash:
+	text_jump Text_UsedRockSmash_
+	db "@"
+; cf60
+AskRockSmashScript:
+	callasm TryRockSmashOW
+	if_equal 1, .fail
+	opentext
+	writetext Text_AskRockSmash
+	yesorno
+	iftrue RockSmashScript
+	closetext
+	end
+.fail
+	jumptext Text_MayBeBreakable
+
+Text_MayBeBreakable:
+	text_jump Text_MayBeBreakable_
+	db "@"
+
+Text_AskRockSmash:
+	text_jump Text_AskRockSmash_
+	db "@"
+
+TryRockSmashOW: ; cf7f
+	ld d, ROCK_SMASH
+	call FieldMovePartyCheck
+	jr nc, .asm_cf8a
+	ld a, $1
+	jr .asm_cf8d
+
+.asm_cf8a
+	xor a
+	jr .asm_cf8d
+
+.asm_cf8d
+	ld [wScriptVar], a
+	ret
+
+FishingRodFunction: ; cf91
 IF DEF(GOLD)
-	dr $ce80, $d1e2
+	dr $cf91, $d1e2
 ENDC
 IF DEF(SILVER)
-	dr $ce7e, $d1e0
+	dr $cf8f, $d1e0
 ENDC

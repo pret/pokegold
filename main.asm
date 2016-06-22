@@ -972,7 +972,10 @@ PlayWhirlpoolSound:
 	dr $8ca5e, $8ca6b
 
 BlindingFlash:
-	dr $8ca6b, $8cbb8
+	dr $8ca6b, $8ca8e
+
+ShakeHeadbuttTree:
+	dr $8ca8e, $8cbb8
 
 OWCutAnimation:
 	dr $8cbb8, $8cd65
@@ -1088,7 +1091,13 @@ SECTION "bank2d", ROMX, BANK[$2d]
 	dr $b4000, $b8000
 
 SECTION "bank2e", ROMX, BANK[$2e]
-	dr $b8000, $bc000
+	dr $b8000, $ba378
+
+TreeMonEncounter:
+	dr $ba378, $ba3a1
+
+RockMonEncounter:
+	dr $ba3a1, $bc000
 
 SECTION "bank2f", ROMX, BANK[$2f]
 	dr $bc000, $c0000
@@ -1430,7 +1439,25 @@ Text_MightyWhirlpool_::
 	dr $1941ec, $194225
 
 Text_AskWhirlpool_::
-	dr $194225, $195610
+	dr $194225, $194258
+
+Text_DidAHeadbutt_::
+	dr $194258, $19426d
+
+Text_NothingFromHeadbutt_::
+	dr $19426d, $19427d
+
+Text_AskHeadbutt_::
+	dr $19427d, $1942b1
+
+Text_UsedRockSmash_::
+	dr $1942b1, $1942c7
+
+Text_MayBeBreakable_::
+	dr $1942c7, $1942e8
+
+Text_AskRockSmash_::
+	dr $1942e8, $195610
 
 ClockTimeUnknownText_:: ; 195610
 	dr $195610, $195624

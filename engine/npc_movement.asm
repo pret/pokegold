@@ -205,7 +205,7 @@ Function7080: ; 7080 (1:7080)
 	scf
 	ret
 
-CheckFacingObject
+CheckFacingObject:
 	call GetFacingTileCoord
 	call CheckCounterTile
 	jr nz, .asm_70d0
