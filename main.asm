@@ -405,18 +405,10 @@ FlagPredef:
 
 INCLUDE "engine/health.asm"
 INCLUDE "event/overworld.asm"
+INCLUDE "engine/items.asm"
 
-ReceiveItem_::
 IF DEF(GOLD)
-	dr $d1e2, $d21a
-TossItem_::
-	dr $d21a, $d251
-CheckItem_::
-	dr $d251, $d414
-GetTMHMNumber::
-	dr $d414, $d434
-CheckTossableItem_::
-	dr $d434, $d62d
+	dr $d4a4, $d62d
 
 AnimateHPBar_:
 	dr $d62d, $d892
@@ -463,15 +455,7 @@ Functionf900:
 ENDC
 
 IF DEF(SILVER)
-	dr $d1e0, $d218
-TossItem_::
-	dr $d218, $d24f
-CheckItem_::
-	dr $d24f, $d412
-GetTMHMNumber::
-	dr $d412, $d432
-CheckTossableItem_::
-	dr $d432, $d62b
+	dr $d4a2, $d62b
 
 AnimateHPBar_:
 	dr $d62b, $d890
