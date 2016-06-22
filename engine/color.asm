@@ -647,7 +647,7 @@ Function9bba: ; 9bba (2:5bba)
 	callba Function3d907
 	ld c, l
 	ld b, h
-	ld a, [wd0ed]
+	ld a, [wTempEnemyMonSpecies]
 	call Function9bd3
 	pop de
 	ret

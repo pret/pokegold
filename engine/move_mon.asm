@@ -62,11 +62,12 @@ TryAddMonToParty:: ; d892 (3:5892)
 	dec a
 	ld bc, PARTYMON_STRUCT_LENGTH
 	call AddNTimes
+GeneratePartyMonStats:
 	ld e, l
 	ld d, h
 	push hl
 	ld a, [wCurPartySpecies]
-	ld [wce60], a
+	ld [wCurSpecies], a
 	call GetBaseData
 	ld a, [wd120]
 	ld [de], a
@@ -723,7 +724,7 @@ Functiondd6a: ; dd6a (3:5d6a)
 	ld de, wdc7a
 .asm_dd8c
 	ld [hli], a
-	ld [wce60], a
+	ld [wCurSpecies], a
 	ld a, $ff
 	ld [hl], a
 	ld hl, wPartyMon1Nickname
@@ -843,7 +844,7 @@ SentPkmnIntoBox: ; de74 (3:5e74)
 	inc a
 	ld [de], a
 	ld a, [wd004]
-	ld [wce60], a
+	ld [wCurSpecies], a
 	ld c, a
 .asm_de8b
 	inc de
@@ -1221,7 +1222,7 @@ ComputeNPCTrademonStats:
 	ld a, MON_SPECIES
 	call GetPartyParamLocation
 	ld a, [hl]
-	ld [wce60], a
+	ld [wCurSpecies], a
 	call GetBaseData
 	ld a, MON_MAXHP
 	call GetPartyParamLocation
@@ -1506,7 +1507,7 @@ GivePoke: ; Give a Pokemon from script
 
 .asm_e2c9
 	ld a, [wCurPartySpecies]
-	ld [wd0ed], a
+	ld [wTempEnemyMonSpecies], a
 	callab LoadEnemyMon
 	call SentPkmnIntoBox
 	jp nc, Functione3af
@@ -1529,7 +1530,7 @@ GivePoke: ; Give a Pokemon from script
 .asm_e2fa
 	ld a, [wd004]
 	ld [wd151], a
-	ld [wd0ed], a
+	ld [wTempEnemyMonSpecies], a
 	call GetPokemonName
 	ld hl, wStringBuffer1
 	ld de, wMonOrItemNameBuffer

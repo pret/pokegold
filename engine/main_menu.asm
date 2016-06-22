@@ -752,7 +752,7 @@ OakSpeech: ; 5fa5 (1:5fa5)
 	call ClearTileMap
 
 	ld a, MARILL
-	ld [wce60], a
+	ld [wCurSpecies], a
 	ld [wCurPartySpecies], a
 	call GetBaseData
 	hlcoord 6, 4

@@ -297,7 +297,7 @@ Function65b4:
 	ld a, [hl]
 	ld [de], a
 	inc de
-	ld [wce60], a
+	ld [wCurSpecies], a
 	call GetBaseData
 	pop bc
 	pop hl

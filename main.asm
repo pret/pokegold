@@ -411,20 +411,199 @@ INCLUDE "engine/anim_hp_bar.asm"
 INCLUDE "engine/move_mon.asm"
 INCLUDE "engine/billspctop.asm"
 
-Functione673:
-IF DEF(GOLD)
-	dr $e673, $e68e
-Functione68e:
-	dr $e68e, $e6a9
-Functione6a9:
-	dr $e6a9, $e6b0
-Functione6b0:
-	dr $e6b0, $e6b7
-Functione6b7:
-	dr $e6b7, $e6bd
-Functione6bd:
-	dr $e6bd, $e7a6
+Functione673: ; e673 (3:6673)
+	ld hl, wBreedMon1Species
+	ld de, wTempMonSpecies
+	ld bc, $20
+	call CopyBytes
+	callab CalcLevel
+	ld a, [wBreedMon1Level]
+	ld b, a
+	ld a, d
+	ld e, a
+	sub b
+	ld d, a
+	ret
+
+Functione68e: ; e68e (3:668e)
+	ld hl, wBreedMon2Species
+	ld de, wTempMon
+	ld bc, $20
+	call CopyBytes
+	callab CalcLevel
+	ld a, [wBreedMon2Level]
+	ld b, a
+	ld a, d
+	ld e, a
+	sub b
+	ld d, a
+	ret
+
+PartySearch_MaximumLevel: ; e6a9 (3:66a9)
+	ld hl, wPartyMon1Level
+	call PartySearch_LessThanValue
+	ret
+
+PartySearch_MinimumHappiness: ; e6b0 (3:66b0)
+	ld hl, wPartyMon1Happiness
+	call PartySearch_GreaterThanOrEqualToValue
+	ret
+
+PartySearch_SameSpecies: ; e6b7 (3:66b7)
+	ld hl, wPartyMons
+	jp PartySearch_GetIndexOfSpeciesInParty
+
+PartySearch_SameSpeciesAndYourID: ; e6bd (3:66bd)
+	ld hl, wPartyMon1
+	call PartySearch_GetIndexOfSpeciesInParty
+	ret z
+	ld a, c
+	ld hl, wPartyMon1ID
+	ld bc, PARTYMON_STRUCT_LENGTH
+	call AddNTimes
+	ld a, [wPlayerID]
+	cp [hl]
+	jr nz, .nope
+	inc hl
+	ld a, [wPlayerID + 1]
+	cp [hl]
+	jr nz, .nope
+	ld a, $1
+	and a
+	ret
+
+.nope
+	xor a
+	ret
+
+PartySearch_GreaterThanOrEqualToValue: ; e6e1 (3:66e1)
+	ld c, $0
+	ld a, [wPartyCount]
+	ld d, a
+.loop
+	ld a, d
+	dec a
+	push hl
+	push bc
+	ld bc, PARTYMON_STRUCT_LENGTH
+	call AddNTimes
+	pop bc
+	ld a, b
+	cp [hl]
+	pop hl
+	jr z, .shift
+	jr nc, .skip
+.shift
+	ld a, c
+	or $1
+	ld c, a
+.skip
+	sla c
+	dec d
+	jr nz, .loop
+	call PartySearch_FilterEggs
+	ld a, c
+	and a
+	ret
+
+PartySearch_LessThanValue: ; e708 (3:6708)
+	ld c, $0
+	ld a, [wPokemonData]
+	ld d, a
+.loop
+	ld a, d
+	dec a
+	push hl
+	push bc
+	ld bc, PARTYMON_STRUCT_LENGTH
+	call AddNTimes
+	pop bc
+	ld a, b
+	cp [hl]
+	pop hl
+	jr c, .skip
+	ld a, c
+	or $1
+	ld c, a
+.skip
+	sla c
+	dec d
+	jr nz, .loop
+	call PartySearch_FilterEggs
+	ld a, c
+	and a
+	ret
+
+PartySearch_GetIndexOfSpeciesInParty: ; e72d (3:672d)
+	ld c, -1
+	ld hl, wPartySpecies
+.loop
+	ld a, [hli]
+	cp $ff
+	ret z
+	inc c
+	cp b
+	jr nz, .loop
+	ld a, $1
+	and a
+	ret
+
+PartySearch_FilterEggs: ; e73e (3:673e)
+	ld e, $FF ^ 1
+	ld hl, wPartySpecies
+.loop
+	ld a, [hli]
+	cp $ff
+	ret z
+	cp EGG
+	jr nz, .not_egg
+	ld a, c
+	and e
+	ld c, a
+.not_egg
+	rlc e
+	jr .loop
+
+BugContest_SetCaughtContestMon:
+	ld a, [wContestMonSpecies]
+	and a
+	jr z, .asm_e76e
+	ld [wd151], a
+	callba DisplayAlreadyCaughtText
+	callba DisplayCaughtContestMonStats
+	lb bc, 14, 7
+	call PlaceYesNoBox
+	ret c
+.asm_e76e
+	call GenerateBugContestMonStats
+	ld a, [wTempEnemyMonSpecies]
+	ld [wd151], a
+	call GetPokemonName
+	ld hl, Text_CaughtBugMon
+	call PrintText
+	ret
+
+GenerateBugContestMonStats: ; e781 (3:6781)
+	ld a, [wTempEnemyMonSpecies]
+	ld [wCurSpecies], a
+	ld [wd004], a
+	call GetBaseData
+	xor a
+	ld bc, PARTYMON_STRUCT_LENGTH
+	ld hl, wContestMon
+	call ByteFill
+	xor a
+	ld [wMonType], a
+	ld hl, wContestMon
+	jp GeneratePartyMonStats
+
+Text_CaughtBugMon:
+	; Caught @ !
+	text_jump Text_CaughtBugMon_
+	db "@"
+
 DoItemEffect_::
+IF DEF(GOLD)
 	dr $e7a6, $f900
 Functionf900:
 	dr $f900, $f933
@@ -433,18 +612,6 @@ GetMaxPPOfMove:
 ENDC
 
 IF DEF(SILVER)
-	dr $e671, $e68c
-Functione68e:
-	dr $e68c, $e6a7
-Functione6a9:
-	dr $e6a7, $e6ae
-Functione6b0:
-	dr $e6ae, $e6b5
-Functione6b7:
-	dr $e6b5, $e6bb
-Functione6bd:
-	dr $e6bb, $e7a4
-DoItemEffect_::
 	dr $e7a4, $f8fe
 Functionf900:
 	dr $f8fe, $f931
@@ -1087,15 +1254,21 @@ LoadPoisonBGPals::
 	dr $cbc76, $cc000
 
 SECTION "bank33", ROMX, BANK[$33]
-BattleAnimCommands::  ; Not actually where it is, I just needed the label for BANK to work
-	dr $cc000, $cc0d6
+DisplayCaughtContestMonStats:
+	dr $cc000, $cc0c8
+
+DisplayAlreadyCaughtText:
+	dr $cc0c8, $cc0d6
 
 Predef38::
 Predef39::
 	ret
 
 PlayBattleAnim::
-	dr $cc0d7, $d0000
+	dr $cc0d7, $cc283
+
+BattleAnimCommands::
+	dr $cc283, $d0000
 
 SECTION "bank34", ROMX, BANK[$34]
 	dr $d0000, $d4000
@@ -1475,7 +1648,10 @@ Text_ItsYourLastPokemon_::
 	dr $1949e8, $194a0a
 
 Text_CantTakeAnyMorePokemon_::
-	dr $194a0a, $195610
+	dr $194a0a, $194a28
+
+Text_CaughtBugMon_::
+	dr $194a28, $195610
 
 ClockTimeUnknownText_:: ; 195610
 	dr $195610, $195624

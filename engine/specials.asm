@@ -153,28 +153,28 @@ SpecialSeenMon: ; c3ac
 Special_FindGreaterThanThatLevel: ; c3b4
 	ld a, [wScriptVar]
 	ld b, a
-	callba Functione6a9 ; same bank
+	callba PartySearch_MaximumLevel ; same bank
 	jr z, asm_c3f2
 	jr asm_c3ec
 
 Special_FindAtLeastThatHappy: ; c3c2
 	ld a, [wScriptVar]
 	ld b, a
-	callba Functione6b0 ; same bank
+	callba PartySearch_MinimumHappiness ; same bank
 	jr z, asm_c3f2
 	jr asm_c3ec
 
 Special_FindThatSpecies: ; c3d0
 	ld a, [wScriptVar]
 	ld b, a
-	callba Functione6b7 ; same bank
+	callba PartySearch_SameSpecies ; same bank
 	jr z, asm_c3f2
 	jr asm_c3ec
 
 Special_FindThatSpeciesYourTrainerID: ; c3de
 	ld a, [wScriptVar]
 	ld b, a
-	callba Functione6bd ; same bank
+	callba PartySearch_SameSpeciesAndYourID ; same bank
 	jr z, asm_c3f2
 	jr asm_c3ec
 

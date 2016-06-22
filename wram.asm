@@ -2038,7 +2038,7 @@ wce5a:: ds 1 ; ce5a
 wLinkTimeoutFrames:: ds 2
 wce5d:: ds 2 ; ce5d
 wMonType:: ds 1 ; ce5f
-wce60:: ds 1 ; ce60
+wCurSpecies:: ds 1 ; ce60
 wce61:: ds 1 ; ce61
 wce62:: ds 1 ; ce62
 wce63:: ds 1 ; ce63
@@ -2571,7 +2571,7 @@ wd0e9:: ds 1 ; d0e9
 wd0ea:: ds 1 ; d0ea
 wd0eb:: ds 1 ; d0eb
 wd0ec:: ds 1 ; d0ec
-wd0ed:: ds 1 ; d0ed
+wTempEnemyMonSpecies:: ds 1 ; d0ed
 wd0ee:: ds 1 ; d0ee
 
 wEnemyMon:: battle_struct wEnemyMon ; d0ef
@@ -3803,54 +3803,9 @@ wdce3:: ds 1 ; dce3
 wdce4:: ds 1 ; dce4
 wdce5:: ds 1 ; dce5
 wdce6:: ds 1 ; dce6
-wdce7:: ds 1 ; dce7
-wdce8:: ds 1 ; dce8
-wdce9:: ds 1 ; dce9
-wdcea:: ds 1 ; dcea
-wdceb:: ds 1 ; dceb
-wdcec:: ds 1 ; dcec
-wdced:: ds 1 ; dced
-wdcee:: ds 1 ; dcee
-wdcef:: ds 1 ; dcef
-wdcf0:: ds 1 ; dcf0
-wdcf1:: ds 1 ; dcf1
-wdcf2:: ds 1 ; dcf2
-wdcf3:: ds 1 ; dcf3
-wdcf4:: ds 1 ; dcf4
-wdcf5:: ds 1 ; dcf5
-wdcf6:: ds 1 ; dcf6
-wdcf7:: ds 1 ; dcf7
-wdcf8:: ds 1 ; dcf8
-wdcf9:: ds 1 ; dcf9
-wdcfa:: ds 1 ; dcfa
-wdcfb:: ds 1 ; dcfb
-wdcfc:: ds 1 ; dcfc
-wdcfd:: ds 1 ; dcfd
-wdcfe:: ds 1 ; dcfe
-wdcff:: ds 1 ; dcff
-wdd00:: ds 1 ; dd00
-wdd01:: ds 1 ; dd01
-wdd02:: ds 1 ; dd02
-wdd03:: ds 1 ; dd03
-wdd04:: ds 1 ; dd04
-wdd05:: ds 1 ; dd05
-wdd06:: ds 1 ; dd06
-wdd07:: ds 1 ; dd07
-wdd08:: ds 1 ; dd08
-wdd09:: ds 1 ; dd09
-wdd0a:: ds 1 ; dd0a
-wdd0b:: ds 1 ; dd0b
-wdd0c:: ds 1 ; dd0c
-wdd0d:: ds 1 ; dd0d
-wdd0e:: ds 1 ; dd0e
-wdd0f:: ds 1 ; dd0f
-wdd10:: ds 1 ; dd10
-wdd11:: ds 1 ; dd11
-wdd12:: ds 1 ; dd12
-wdd13:: ds 1 ; dd13
-wdd14:: ds 1 ; dd14
-wdd15:: ds 1 ; dd15
-wdd16:: ds 1 ; dd16
+
+wContestMon:: party_struct wContestMon ; dce7
+
 wdd17:: ds 1 ; dd17
 wdd18:: ds 1 ; dd18
 wdd19:: ds 1 ; dd19

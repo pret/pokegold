@@ -939,7 +939,7 @@ GetName:: ; 3606
 	ld a, [wce61]
 	cp $1
 	jr nz, .asm_3624
-	ld a, [wce60]
+	ld a, [wCurSpecies]
 	ld [wd151], a
 	call GetPokemonName
 	ld hl, $b
@@ -961,7 +961,7 @@ GetName:: ; 3606
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
-	ld a, [wce60]
+	ld a, [wCurSpecies]
 	dec a
 	call GetNthString
 	ld de, wStringBuffer1
@@ -1046,7 +1046,7 @@ GetItemName::
 	ld a, [wd151]
 	cp TM01
 	jr nc, .TM
-	ld [wce60], a
+	ld [wCurSpecies], a
 	ld a, $4
 	ld [wce61], a
 	call GetName
@@ -1142,7 +1142,7 @@ GetMoveName::
 	ld a, $2
 	ld [wce61], a
 	ld a, [wd151]
-	ld [wce60], a
+	ld [wCurSpecies], a
 	call GetName
 	ld de, wStringBuffer1
 	pop hl
@@ -1666,7 +1666,7 @@ GetBaseData::
 	push af
 	ld a, BANK(BaseData) ; $14
 	rst Bankswitch
-	ld a, [wce60]
+	ld a, [wCurSpecies]
 	cp EGG
 	jr z, .egg
 	dec a
@@ -1694,7 +1694,7 @@ GetBaseData::
 	jr .asm_3ab3
 
 .asm_3ab3
-	ld a, [wce60]
+	ld a, [wCurSpecies]
 	ld [wd120], a
 	pop af
 	rst Bankswitch
