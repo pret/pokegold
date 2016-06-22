@@ -406,11 +406,10 @@ FlagPredef:
 INCLUDE "engine/health.asm"
 INCLUDE "event/overworld.asm"
 INCLUDE "engine/items.asm"
-
-IF DEF(GOLD)
-	dr $d4a4, $d62d
+INCLUDE "engine/player_step.asm"
 
 AnimateHPBar_:
+IF DEF(GOLD)
 	dr $d62d, $d892
 
 TryAddMonToParty::
@@ -455,9 +454,6 @@ Functionf900:
 ENDC
 
 IF DEF(SILVER)
-	dr $d4a2, $d62b
-
-AnimateHPBar_:
 	dr $d62b, $d890
 
 TryAddMonToParty::
