@@ -1566,10 +1566,149 @@ Text_NothingHereToFish:
 	text_jump Text_NothingHereToFish_
 	db "@"
 
-BikeFunction: ; d0c0
+
+	call Functiond0c9
+	and $7f
+	ld [wFieldMoveSucceeded], a
+	ret
+
+Functiond0c9: ; d0c9 (3:50c9)
+	call CheckBikePermission
+	jr c, .cant_bike
+	ld a, [wPlayerBikeSurfState]
+	cp PLAYER_NORMAL
+	jr z, .get_on_bike
+	cp PLAYER_BIKE
+	jr z, .get_off_bike
+	jr .cant_bike
+
+.get_on_bike
+	ld hl, Script_GetOnBike
+	ld de, Script_GetOnBike_Register
+	call ChooseScriptBasedOnWhetherBikeIsRegistered
+	call QueueScript
+	xor a
+	ld [wMusicFade], a
+	ld de, MUSIC_NONE
+	call PlayMusic
+	call DelayFrame
+	call MaxVolume
+	ld de, MUSIC_BICYCLE
+	ld a, e
+	ld [wMapMusic], a
+	call PlayMusic
+	ld a, $1
+	ret
+
+.get_off_bike
+	ld hl, wBikeFlags
+	bit 1, [hl]
+	jr nz, .asm_d118
+	ld hl, Script_GetOffBike
+	ld de, Script_GetOffBike_Register
+	call ChooseScriptBasedOnWhetherBikeIsRegistered
+	ld a, $3
+	jr .queue_off
+
+.asm_d118
+	ld hl, Script_CantGetOffBike
+	jr .queue_off
+
+.cant_bike
+	ld a, $0
+	ret
+
+.queue_off
+	call QueueScript
+	ld a, $1
+	ret
+
+ChooseScriptBasedOnWhetherBikeIsRegistered: ; d126 (3:5126)
+	ld a, [wUsingItemWithSelect]
+	and a
+	ret z
+	ld h, d
+	ld l, e
+	ret
+
+CheckBikePermission: ; d12e (3:512e)
+	call GetMapPermission
+	call CheckOutdoorMap
+	jr z, .asm_d140
+	cp CAVE
+	jr z, .asm_d140
+	cp GATE
+	jr z, .asm_d140
+	jr .asm_d149
+
+.asm_d140
+	call GetPlayerStandingTile
+	and $f
+	jr nz, .asm_d149
+	xor a
+	ret
+
+.asm_d149
+	scf
+	ret
+
+Script_GetOnBike: ; d14b
+	reloadmappart
+	special UpdateTimePals
+	writecode VAR_MOVEMENT, PLAYER_BIKE
+	writetext Text_GotOnTheBike
+	waitbutton
+	closetext
+	special ReplacePlayerSprite
+	end
+
+Script_GetOnBike_Register:
+	writecode VAR_MOVEMENT, PLAYER_BIKE
+	closetext
+	special ReplacePlayerSprite
+	end
+
+	nop
+	ret
+
+Script_GetOffBike:
+	reloadmappart
+	special UpdateTimePals
+	writecode VAR_MOVEMENT, PLAYER_NORMAL
+	writetext Text_GotOffTheBike
+	waitbutton
+FinishGettingOffBike:
+	closetext
+	special ReplacePlayerSprite
+	special PlayMapMusic
+	end
+
+Script_GetOffBike_Register:
+	writecode VAR_MOVEMENT, PLAYER_NORMAL
+	jump FinishGettingOffBike
+
+Script_CantGetOffBike: ; d17e
+	writetext Text_CantGetOffBike
+	waitbutton
+	closetext
+	end
+
+Text_CantGetOffBike:
+	text_jump Text_CantGetOffBike_
+	db "@"
+
+Text_GotOnTheBike:
+	text_jump Text_GotOnTheBike_
+	db "@"
+
+Text_GotOffTheBike:
+	text_jump Text_GotOffTheBike_
+	db "@"
+
+TryCutOW: ; d193
 IF DEF(GOLD)
-	dr $d0c0, $d1e2
+	dr $d193, $d1e2
 ENDC
 IF DEF(SILVER)
-	dr $d0be, $d1e0
+	dr $d191, $d1e0
 ENDC

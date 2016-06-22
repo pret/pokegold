@@ -1469,7 +1469,16 @@ Text_NotEvenANibble_::
 	dr $194329, $19433d
 
 Text_NothingHereToFish_::
-	dr $19433d, $195610
+	dr $19433d, $19435e
+
+Text_CantGetOffBike_::
+	dr $19435e, $194376
+
+Text_GotOnTheBike_::
+	dr $194376, $19438b
+
+Text_GotOffTheBike_::
+	dr $19438b, $195610
 
 ClockTimeUnknownText_:: ; 195610
 	dr $195610, $195624

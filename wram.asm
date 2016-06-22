@@ -2368,7 +2368,7 @@ wcfe7:: ds 1 ; cfe7
 wcfe8:: ds 1 ; cfe8
 wBattleResult:: ds 1 ; cfe9
 wcfea:: ds 1 ; cfea
-wcfeb:: ds 1 ; cfeb
+wUsingItemWithSelect:: ds 1 ; cfeb
 wcfec:: ds 1 ; cfec
 wcfed:: ds 1 ; cfed
 wcfee:: ds 1 ; cfee
