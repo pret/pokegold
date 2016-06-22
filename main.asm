@@ -814,7 +814,10 @@ SECTION "bank13", ROMX, BANK[$13]
 
 SECTION "bank14", ROMX, BANK[$14]
 Function50000:
-	dr $50000, $5087d
+	dr $50000, $5054f
+
+LoadFishingGFX:
+	dr $5054f, $5087d
 
 CopyPkmnToTempMon::
 	dr $5087d, $50940
@@ -1457,7 +1460,16 @@ Text_MayBeBreakable_::
 	dr $1942c7, $1942e8
 
 Text_AskRockSmash_::
-	dr $1942e8, $195610
+	dr $1942e8, $19431c
+
+Text_OhABite_::
+	dr $19431c, $194329
+
+Text_NotEvenANibble_::
+	dr $194329, $19433d
+
+Text_NothingHereToFish_::
+	dr $19433d, $195610
 
 ClockTimeUnknownText_:: ; 195610
 	dr $195610, $195624

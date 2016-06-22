@@ -1368,9 +1368,208 @@ TryRockSmashOW: ; cf7f
 	ret
 
 FishingRodFunction: ; cf91
+	ld a, e
+	push af
+	call FieldMoveBufferReset
+	pop af
+	ld [wBuffer2], a
+.asm_cf9a
+	ld hl, .Jumptable ; $4fa8
+	call DoFieldMoveAction
+	jr nc, .asm_cf9a
+	and $7f
+	ld [wFieldMoveSucceeded], a
+	ret
+
+.Jumptable
+	dw Fish_CheckMap ; 3:4fb2
+	dw Fish_NoBite ; 3:5005
+	dw Fish_GotSomething ; 3:4ff7
+	dw Fish_Failed ; 3:4ff4
+	dw Fish_NoFish ; 3:5013
+
+Fish_CheckMap:
+	ld a, [wPlayerBikeSurfState]
+	cp PLAYER_SURF
+	jr z, .asm_cfc7
+	cp PLAYER_SURF_PIKA
+	jr z, .asm_cfc7
+	call GetFacingTileCoord
+	call GetTileCollision
+	cp $1
+	jr z, .asm_cfca
+.asm_cfc7
+	ld a, $3
+	ret
+
+.asm_cfca
+	call GetFishingGroup
+	and a
+	jr nz, .asm_cfd3
+	ld a, $4
+	ret
+
+.asm_cfd3
+	ld d, a
+	ld a, [wBuffer2]
+	ld e, a
+	ld a, $24
+	ld hl, $697a
+	rst FarCall
+	ld a, d
+	and a
+	jr z, .asm_cff1
+	ld [wd117], a
+	ld a, e
+	ld [wd040], a
+	ld a, $4
+	ld [wBattleType], a
+	ld a, $2
+	ret
+
+.asm_cff1
+	ld a, $1
+	ret
+
+Fish_Failed:
+	ld a, $80
+	ret
+
+Fish_GotSomething:
+	ld a, $1
+	ld [wBuffer6], a
+	ld hl, Script_GotABite
+	call QueueScript
+	ld a, $81
+	ret
+
+Fish_NoBite:
+	ld a, $2
+	ld [wBuffer6], a
+	ld hl, Script_NotEvenANibble
+	call QueueScript
+	ld a, $81
+	ret
+
+Fish_NoFish:
+	ld a, $0
+	ld [wBuffer6], a
+	ld hl, Script_NotEvenANibble2
+	call QueueScript
+	ld a, $81
+	ret
+
+Script_NotEvenANibble: ; d021
+	scall Script_FishCastRod
+	writetext Text_NotEvenANibble
+	jump Script_NotEvenANibble_Continue
+
+Script_NotEvenANibble2:
+	scall Script_FishCastRod
+	writetext Text_NotEvenANibble
+Script_NotEvenANibble_Continue:
+	callasm PutTheRodAway
+	closetext
+	end
+
+Script_GotABite:
+	scall Script_FishCastRod
+	callasm Fish_CheckFacingUp
+	iffalse .not_facing_up
+	applymovement 0, Movement_Fishing_BiteFacingUp
+	jump .continue
+
+.not_facing_up
+	applymovement 0, Movement_Fishing_BiteNotFacingUp
+.continue
+	pause 40
+	applymovement 0, Movement_Fishing_RestoreRod
+	writetext Text_OhABite
+	callasm PutTheRodAway
+	closetext
+	randomwildmon
+	startbattle
+	reloadmapafterbattle
+	end
+
+
+Movement_Fishing_BiteNotFacingUp:
+	fish_got_bite
+	fish_got_bite
+	fish_got_bite
+	fish_got_bite
+	show_emote
+	step_end
+
+Movement_Fishing_BiteFacingUp:
+	fish_got_bite
+	fish_got_bite
+	fish_got_bite
+	fish_got_bite
+	step_sleep 1
+	show_emote
+	step_end
+
+Movement_Fishing_RestoreRod:
+	hide_emote
+	fish_cast_rod
+	step_end
+
+Fish_CheckFacingUp: ; d06d
+	ld a, [wPlayerDirection]
+	and $c
+	cp OW_UP
+	ld a, $1
+	jr z, .asm_d079
+	xor a
+.asm_d079
+	ld [wScriptVar], a
+	ret
+
+Script_FishCastRod: ; d07d
+	reloadmappart
+	loadvar hBGMapMode, 0
+	special UpdateTimePals
+	loademote EMOTE_ROD
+	callasm LoadFishingGFX
+	loademote EMOTE_SHOCK
+	applymovement PLAYER, Movement_CastRod
+	pause 40
+	end
+
+Movement_CastRod:
+	fish_cast_rod
+	step_end
+
+PutTheRodAway: ; d096
+	hlcoord 1, 14
+	lb bc, $3, $12
+	call ClearBox
+	call WaitBGMap
+	xor a
+	ld [hBGMapMode], a
+	ld a, $1
+	ld [wPlayerAction], a
+	call UpdateSprites
+	call ReplacePlayerSprite
+	ret
+
+Text_OhABite:
+	text_jump Text_OhABite_
+	db "@"
+
+Text_NotEvenANibble:
+	text_jump Text_NotEvenANibble_
+	db "@"
+
+Text_NothingHereToFish:
+	text_jump Text_NothingHereToFish_
+	db "@"
+
+BikeFunction: ; d0c0
 IF DEF(GOLD)
-	dr $cf91, $d1e2
+	dr $d0c0, $d1e2
 ENDC
 IF DEF(SILVER)
-	dr $cf8f, $d1e0
+	dr $d0be, $d1e0
 ENDC
