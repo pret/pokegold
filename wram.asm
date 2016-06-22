@@ -2531,6 +2531,20 @@ wd0ce:: ds 1 ; d0ce
 wTilesetPalettes:: dw ; d0cf
 wd0d1:: ds 1 ; d0d1
 wd0d2:: ds 1 ; d0d2
+
+wCurHPAnim::
+wCurHPAnimMaxHP::   dw ; d0d3
+wCurHPAnimOldHP::   dw ; d0d5
+wCurHPAnimNewHP::   dw ; d0d7
+wCurHPAnimPal::     db ; d0d9
+wCurHPBarPixels::   db ; d0da
+wNewHPBarPixels::   db ; d0db
+wCurHPAnimDeltaHP:: dw ; d0dc
+wCurHPAnimLowHP::   db ; d0de
+wCurHPAnimHighHP::  db ; d0df
+wCurHPAnimEnd::
+	ds wCurHPAnim - @
+
 wBuffer1:: ds 1 ; d0d3
 wBuffer2:: ds 1 ; d0d4
 wBuffer3:: ds 1 ; d0d5

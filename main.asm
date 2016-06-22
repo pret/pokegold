@@ -407,12 +407,10 @@ INCLUDE "engine/health.asm"
 INCLUDE "event/overworld.asm"
 INCLUDE "engine/items.asm"
 INCLUDE "engine/player_step.asm"
-
-AnimateHPBar_:
-IF DEF(GOLD)
-	dr $d62d, $d892
+INCLUDE "engine/anim_hp_bar.asm"
 
 TryAddMonToParty::
+IF DEF(GOLD)
 	dr $d892, $da73
 
 FillPP::
@@ -454,9 +452,6 @@ Functionf900:
 ENDC
 
 IF DEF(SILVER)
-	dr $d62b, $d890
-
-TryAddMonToParty::
 	dr $d890, $da71
 
 FillPP::
