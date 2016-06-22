@@ -408,35 +408,18 @@ INCLUDE "event/overworld.asm"
 INCLUDE "engine/items.asm"
 INCLUDE "engine/player_step.asm"
 INCLUDE "engine/anim_hp_bar.asm"
+INCLUDE "engine/move_mon.asm"
 
-TryAddMonToParty::
+BillsPC_: ; e3d8
 IF DEF(GOLD)
-	dr $d892, $da73
-
-FillPP::
-	dr $da73, $da9c
-
-AddTempmonToParty::
-	dr $da9c, $db45
-
-SentGetPkmnIntoFromBox::
-	dr $db45, $de74
-
-SentPkmnIntoBox::
-	dr $de74, $df92
-
-GiveEgg::
-	dr $df92, $e03f
-RemoveMonFromPartyOrBox:
-	dr $e03f, $e16d
-
-CalcPkmnStats::
-	dr $e16d, $e181
-
-CalcPkmnStatC::
-	dr $e181, $e513
+	dr $e3d8, $e513
 CheckCurPartyMonFainted:
-	dr $e513, $e6a9
+	dr $e513, $e673
+
+Functione673:
+	dr $e673, $e68e
+Functione68e:
+	dr $e68e, $e6a9
 Functione6a9:
 	dr $e6a9, $e6b0
 Functione6b0:
@@ -448,36 +431,20 @@ Functione6bd:
 DoItemEffect_::
 	dr $e7a6, $f900
 Functionf900:
-	dr $f900, $fa3e
+	dr $f900, $f933
+GetMaxPPOfMove:
+	dr $f933, $fa3e
 ENDC
 
 IF DEF(SILVER)
-	dr $d890, $da71
-
-FillPP::
-	dr $da71, $da9a
-
-AddTempmonToParty::
-	dr $da9a, $db43
-
-SentGetPkmnIntoFromBox::
-	dr $db43, $de72
-
-SentPkmnIntoBox::
-	dr $de72, $df90
-
-GiveEgg::
-	dr $df90, $e03d
-RemoveMonFromPartyOrBox:
-	dr $e03d, $e16b
-
-CalcPkmnStats::
-	dr $e16b, $e17f
-
-CalcPkmnStatC::
-	dr $e17f, $e511
+	dr $e3d6, $e511
 CheckCurPartyMonFainted:
-	dr $e511, $e6a7
+	dr $e511, $e671
+
+Functione673:
+	dr $e671, $e68c
+Functione68e:
+	dr $e68c, $e6a7
 Functione6a9:
 	dr $e6a7, $e6ae
 Functione6b0:
@@ -488,8 +455,10 @@ Functione6bd:
 	dr $e6bb, $e7a4
 DoItemEffect_::
 	dr $e7a4, $f8fe
-Functionf900
-	dr $f8fe, $fa3c
+Functionf900:
+	dr $f8fe, $f931
+GetMaxPPOfMove:
+	dr $f931, $fa3c
 ENDC
 
 SECTION "bank4", ROMX, BANK[$4]
@@ -640,7 +609,9 @@ InitDecorations: ; 2692d
 Function271be:
 	dr $271be, $27216
 Function27216:
-	dr $27216, $28000
+	dr $27216, $27271
+GetTrainerDVs:
+	dr $27271, $28000
 
 SECTION "banka", ROMX, BANK[$a]
 	dr $28000, $28d88
@@ -741,7 +712,10 @@ UpdatePlayerHUD::
 	dr $3dda9, $3de97
 
 UpdateEnemyHUD::
-	dr $3de97, $3ec11
+	dr $3de97, $3e74b
+
+LoadEnemyMon:
+	dr $3e74b, $3ec11
 BattleRandom_:: ; 3ec11
 	dr $3ec11, $3f196
 
@@ -771,7 +745,10 @@ LearnLevelMoves::
 	dr $42483, $424dd
 
 FillMoves::
-	dr $424dd, $44000
+	dr $424dd, $4278d
+
+GetPreEvolution:
+	dr $4278d, $44000
 
 SECTION "bank11", ROMX, BANK[$11]
 	dr $44000, $44648
@@ -834,7 +811,13 @@ PlaceNonFaintStatus::
 	dr $51437, $51478
 
 ListMoves::
-	dr $51478, $51749
+	dr $51478, $51524
+
+CalcLevel:
+	dr $51524, $51550
+
+CalcExpAtLevel:
+	dr $51550, $51749
 
 GetUnownLetter::
 	dr $51749, $51780
@@ -1093,7 +1076,9 @@ Functionc7a5a:
 Functionc7bad:
 	dr $c7bad, $c7bbf
 Functionc7bbf:
-	dr $c7bbf, $c8000
+	dr $c7bbf, $c7cd0
+Functionc7cd0:
+	dr $c7cd0, $c8000
 
 SECTION "bank32", ROMX, BANK[$32]
 BattleAnimations:: ; Not actually where it is, I just needed the label for BANK to work
@@ -1216,7 +1201,9 @@ ConvertMon_1to2:
 	dr $fb981, $fba12
 
 CheckTypeMatchup::
-	dr $fba12, $fbc3c
+	dr $fba12, $fbb22
+UpdateUnownDex:
+	dr $fbb22, $fbc3c
 Functionfbc3c:
 	dr $fbc3c, $fbdd6
 Functionfbdd6:
@@ -1459,7 +1446,10 @@ Text_AskCut_::
 	dr $1943a1, $1943c9
 
 Text_MonCanCutThis_::
-	dr $1943c9, $195610
+	dr $1943c9, $194953
+
+Text_WasSentToBillsPC_::
+	dr $194953, $195610
 
 ClockTimeUnknownText_:: ; 195610
 	dr $195610, $195624

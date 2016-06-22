@@ -1,10 +1,10 @@
 Function73e1:
 	xor a
-	ld [wce5f], a
+	ld [wMonType], a
 	ld a, SHUCKLE
 	ld [wd004], a
 	ld a, $f
-	ld [wd040], a
+	ld [wCurPartyLevel], a
 	predef TryAddMonToParty
 	jr nc, .asm_743f
 	ld bc, $30

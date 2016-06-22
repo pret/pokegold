@@ -4,7 +4,7 @@ LearnMove:
 	ld hl, wPartyMon1Nickname
 	call GetNick
 	ld hl, wStringBuffer1
-	ld de, wcf48
+	ld de, wMonOrItemNameBuffer
 	ld bc, $b
 	call CopyBytes
 .loop

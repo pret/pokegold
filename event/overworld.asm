@@ -22,7 +22,7 @@ DoFieldMoveAction: ; c73a (3:473a)
 FieldMoveGetPartyNick: ; c74b (3:474b)
 	ld hl, wPartyMon1Nickname
 	ld a, $2
-	ld [wce5f], a
+	ld [wMonType], a
 	ld a, [wd005]
 	call GetNick
 	call Function317b
@@ -1421,7 +1421,7 @@ Fish_CheckMap:
 	jr z, .asm_cff1
 	ld [wd117], a
 	ld a, e
-	ld [wd040], a
+	ld [wCurPartyLevel], a
 	ld a, $4
 	ld [wBattleType], a
 	ld a, $2

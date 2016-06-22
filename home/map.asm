@@ -1239,7 +1239,7 @@ LoadMapStatus::
 	ret
 
 CallScript::
-	ld [wd160], a
+	ld [wScriptBank], a
 	ld a, l
 	ld [wd161], a
 	ld a, h
@@ -1366,7 +1366,7 @@ GetScriptByte::
 	push bc
 	ld a, [hROMBank]
 	push af
-	ld a, [wd160]
+	ld a, [wScriptBank]
 	rst Bankswitch
 	ld hl, wd161
 	ld c, [hl]

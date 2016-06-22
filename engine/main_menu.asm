@@ -337,7 +337,7 @@ Function5c41: ; 5c41 (1:5c41)
 	call InitializeMagikarpHouse
 
 	xor a
-	ld [wce5f], a
+	ld [wMonType], a
 
 	ld [wJohtoBadges], a
 	ld [wKantoBadges], a

@@ -2037,7 +2037,7 @@ wce59:: ds 1 ; ce59
 wce5a:: ds 1 ; ce5a
 wLinkTimeoutFrames:: ds 2
 wce5d:: ds 2 ; ce5d
-wce5f:: ds 1 ; ce5f
+wMonType:: ds 1 ; ce5f
 wce60:: ds 1 ; ce60
 wce61:: ds 1 ; ce61
 wce62:: ds 1 ; ce62
@@ -2290,7 +2290,7 @@ wOBP0:: ds 1
 wOPB1:: ds 1
 wcf46:: ds 1 ; cf46
 wcf47:: ds 1 ; cf47
-wcf48:: ds 1 ; cf48
+wMonOrItemNameBuffer:: ds 1 ; cf48
 wcf49:: ds 1 ; cf49
 wcf4a:: ds 1 ; cf4a
 wcf4b:: ds 1 ; cf4b
@@ -2412,7 +2412,7 @@ wd03c:: ds 1 ; d03c
 wd03d:: ds 1 ; d03d
 wd03e:: ds 1 ; d03e
 wd03f:: ds 1 ; d03f
-wd040:: ds 1 ; d040
+wCurPartyLevel:: ds 1 ; d040
 wd041:: ds 1 ; d041
 
 wLinkMode:: ds 1 ; d042
@@ -2660,7 +2660,7 @@ wd15c:: ds 1 ; d15c
 wd15d:: ds 1 ; d15d
 wd15e:: ds 1 ; d15e
 wd15f:: ds 1 ; d15f
-wd160:: ds 1 ; d160
+wScriptBank:: ds 1 ; d160
 wd161:: ds 1 ; d161
 wd162:: ds 1 ; d162
 wd163:: ds 1 ; d163
