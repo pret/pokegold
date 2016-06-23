@@ -92,11 +92,11 @@ endm
 	add_predef PartyMonItemName
 	add_predef GetFrontpic
 	add_predef GetBackpic
-	add_predef FrontpicPredef
 	add_predef GetTrainerPic
-	add_predef DecompressPredef ; $40
-	add_predef CheckTypeMatchup
+	add_predef DecompressPredef
+	add_predef CheckTypeMatchup ; $40
 	add_predef ConvertMon_1to2
 	add_predef NewPokedexEntry
+	add_predef FrontpicPredef
 	add_predef UpdateTimePredef
     dbw $ff, InexplicablyEmptyFunction

@@ -1802,16 +1802,11 @@ wcc0f:: ds 1 ; cc0f
 wcc10:: ds 1 ; cc10
 wcc11:: ds 1 ; cc11
 wcc12:: ds 1 ; cc12
-wcc13:: ds 1 ; cc13
+wWildMonMoves:: ds 1 ; cc13
 wOverworldMapEnd::
+	ds NUM_MOVES +- 1
+wWildMonPP:: ds NUM_MOVES ; cc17
 
-wcc14:: ds 1 ; cc14
-wcc15:: ds 1 ; cc15
-wcc16:: ds 1 ; cc16
-wcc17:: ds 1 ; cc17
-wcc18:: ds 1 ; cc18
-wcc19:: ds 1 ; cc19
-wcc1a:: ds 1 ; cc1a
 wcc1b:: ds 1 ; cc1b
 wcc1c:: ds 1 ; cc1c
 wcc1d:: ds 1 ; cc1d
@@ -2643,7 +2638,7 @@ wd14b:: ds 1 ; d14b
 wd14c:: ds 1 ; d14c
 wd14d:: ds 1 ; d14d
 wd14e:: ds 1 ; d14e
-wd14f:: ds 1 ; d14f
+wWildMon:: ds 1 ; d14f
 wd150:: ds 1 ; d150
 wd151:: ds 1 ; d151
 wd152:: ds 1 ; d152
@@ -3539,7 +3534,7 @@ wd9bf:: ds 1 ; d9bf
 wd9c0:: ds 1 ; d9c0
 wd9c1:: ds 1 ; d9c1
 wd9c2:: ds 1 ; d9c2
-wd9c3:: ds 1 ; d9c3
+wParkBalls:: ds 1 ; d9c3
 wd9c4:: ds 1 ; d9c4
 wd9c5:: ds 1 ; d9c5
 wd9c6:: ds 1 ; d9c6

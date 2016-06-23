@@ -1053,7 +1053,7 @@ Intro_PrepTrainerPic: ; 61df, 61e0 (1:61df, 1:61e0)
 ShrinkFrame: ; 61f7 (1:61f7)
 	ld de, $9000
 	ld c, $31
-	predef GetTrainerPic
+	predef DecompressPredef
 	xor a
 	ld [hGraphicStartTile], a
 	hlcoord 6, 4

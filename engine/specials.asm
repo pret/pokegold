@@ -140,7 +140,7 @@ Special_GameCornerPrizeMonCheckDex: ; c38a
 	call FadeToMenu
 	ld a, [wScriptVar]
 	ld [wd151], a
-	callba ConvertMon_1to2
+	callba NewPokedexEntry
 	call ExitAllMenus
 	ret
 

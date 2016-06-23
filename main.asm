@@ -770,7 +770,9 @@ Function271be:
 Function27216:
 	dr $27216, $27271
 GetTrainerDVs:
-	dr $27271, $28000
+	dr $27271, $27307
+ReturnToBattle_UseBall_:
+	dr $27307, $28000
 
 SECTION "banka", ROMX, BANK[$a]
 	dr $28000, $28d88
@@ -846,8 +848,11 @@ SECTION "bankc", ROMX, BANK[$c]
 SECTION "bankd", ROMX, BANK[$d]
 	dr $34000, $34923
 
-DecompressPredef::
-	dr $34923, $38000
+CheckTypeMatchup::
+	dr $34923, $37e9b
+
+GetItemHeldEffect:
+	dr $37e9b, $38000
 
 SECTION "banke", ROMX, BANK[$e]
 	dr $38000, $398f2
@@ -856,7 +861,10 @@ Battle_GetTrainerName:: ; 398f2
 	dr $398f2, $3c000
 
 SECTION "bankf", ROMX, BANK[$f]
-	dr $3c000, $3d70a
+	dr $3c000, $3c551
+
+FleeMons::
+	dr $3c551, $3d70a
 
 CheckPlayerPartyForFitPkmn::
 	dr $3d70a, $3d8f5
@@ -907,10 +915,16 @@ FillMoves::
 	dr $424dd, $4278d
 
 GetPreEvolution:
-	dr $4278d, $44000
+	dr $4278d, $427bd
+
+EvosAttacksPointers::
+	dr $427bd, $44000
 
 SECTION "bank11", ROMX, BANK[$11]
-	dr $44000, $44648
+	dr $44000, $44360
+
+PokedexDataPointerTable::
+	dr $44360, $44648
 
 PlaceGraphic::
 	dr $44648, $44870
@@ -987,16 +1001,16 @@ GetUnownLetter::
 GetFrontpic::
 	dr $51780, $51786
 
-NewPokedexEntry::
+FrontpicPredef::
 	dr $51786, $51803
 
 GetBackpic::
 	dr $51803, $518a0
 
-FrontpicPredef::
+GetTrainerPic::
 	dr $518a0, $518fa
 
-GetTrainerPic::
+DecompressPredef::
 	dr $518fa, $51b0b
 BaseData:: ; 51b0b
 	dr $51b0b, $53a83
@@ -1377,10 +1391,10 @@ Functionfb7f7:
 	dr $fb7f7, $fb94b
 Functionfb94b:
 	dr $fb94b, $fb981
-ConvertMon_1to2:
+NewPokedexEntry:
 	dr $fb981, $fba12
 
-CheckTypeMatchup::
+ConvertMon_1to2::
 	dr $fba12, $fbb22
 UpdateUnownDex:
 	dr $fbb22, $fbc3c
@@ -1702,21 +1716,58 @@ Text_1_2_and_Poof_::
 Text_PoofForgot_::
 	dr $1982ce, $1982f2
 Text_CantForgetHM_::
-	dr $1982f2, $19c000
+	dr $1982f2, $1983a1
+
+Text_ThisMonCantBeCaught_::
+	dr $1983a1, $1983d7
+
+Text_YouMissedThePokemon_::
+	dr $1983d7, $1983ed
+
+Text_ThePokemonBrokeFree_::
+	dr $1983ed, $19840a
+
+Text_AppearedToBeCaught_::
+	dr $19840a, $19842a
+
+Text_AarghAlmostHadIt_::
+	dr $19842a, $198441
+
+Text_ShootItWasSoCloseToo_::
+	dr $198441, $19845e
+
+Text_GotchaMonWasCaught_::
+	dr $19845e, $19847c
+
+Text_CaughtMonWaitbutton_::
+	dr $19847c, $19847e
+
+Text_SentToBillsPC_::
+	dr $19847e, $198499
+
+Text_MonNewlyAddedToPokedex_::
+	dr $198499, $1984c4
+
+Text_AskNicknameNewlyCaughtMon_::
+	dr $1984c4, $19c000
 
 SECTION "bank67", ROMX, BANK[$67]
 	dr $19c000, $1a0000
 
 SECTION "bank68", ROMX, BANK[$68]
+PokedexEntries1::
 	dr $1a0000, $1a4000
 
 SECTION "bank69", ROMX, BANK[$69]
+PokedexEntries2::
 	dr $1a4000, $1a8000
 
 SECTION "bank6a", ROMX, BANK[$6a]
+PokedexEntries3::
 	dr $1a8000, $1ac000
 
 SECTION "bank6b", ROMX, BANK[$6b]
+PokedexEntries4::
 	dr $1ac000, $1b0000
 
 SECTION "bank6c", ROMX, BANK[$6c]
