@@ -948,7 +948,28 @@ SECTION "bank13", ROMX, BANK[$13]
 
 SECTION "bank14", ROMX, BANK[$14]
 Function50000:
-	dr $50000, $5054f
+	dr $50000, $5004f
+
+LoadPartyMenuGFX:
+	dr $5004f, $5005f
+
+WritePartyMenuTilemap:
+	dr $5005f, $50355
+
+InitPartyMenuGFX:
+	dr $50355, $5037a
+
+InitPartyMenuWithCancel:
+	dr $5037a, $503cc
+
+PartyMenuSelect:
+	dr $503cc, $5040f
+
+PrintPartyMenuText:
+	dr $5040f, $504db
+
+PrintPartyMenuActionText:
+	dr $504db, $5054f
 
 LoadFishingGFX:
 	dr $5054f, $5087d
@@ -1763,7 +1784,10 @@ Text_AskNicknameNewlyCaughtMon_::
 	dr $1984c4, $1984df
 
 Text_StatRoseFromVitamin_::
-	dr $1984df, $19c000
+	dr $1984df, $1984f1
+
+Text_MilkDrinkCantBeUsed_::
+	dr $1984f1, $19c000
 
 SECTION "bank67", ROMX, BANK[$67]
 	dr $19c000, $1a0000

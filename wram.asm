@@ -2332,7 +2332,7 @@ wStringBuffer5:: ds 19 ; cfb7
 wCurBattleMon:: ds 1 ; cfc6
 wcfc7:: ds 1 ; cfc7
 wcfc8:: ds 1 ; cfc8
-wcfc9:: ds 1 ; cfc9
+wPartyMenuCursor:: ds 1 ; cfc9
 wcfca:: ds 1 ; cfca
 wcfcb:: ds 1 ; cfcb
 wcfcc:: ds 1 ; cfcc

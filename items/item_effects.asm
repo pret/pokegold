@@ -1450,7 +1450,7 @@ FullRestore: ; f17e (3:717e)
 	jp c, Functionf2f4
 	call Functionf363
 	jp z, Functionf2ef
-	call Functionf371
+	call CalculateCurHPAnimRemainingHP
 	jr c, .asm_f194
 	jp Functionf02a
 
@@ -1525,44 +1525,414 @@ asm_f1e8
 .asm_f1fc
 	jp Functionf0f4
 
-Functionf1ff:
-	b3dr $f1ff, $f231
+Functionf1ff: ; f1ff (3:71ff)
+	ld b, PARTYMENUACTION_HEALING_ITEM
+	call Functionf24f
+	ld a, $2
+	ret c
+	call Functionf363
+	ld a, $1
+	ret z
+	call CalculateCurHPAnimRemainingHP
+	ld a, $1
+	ret nc
+	xor a
+	ld [wDanger], a
+	call Functionf3eb
+	call Functionf327
+	call RestoreBattlemonHP
+	call Functionf231
+	ld a, PARTYMENUTEXT_HEAL_HP
+	ld [wd03e], a
+	call Functionf2cf
+	call Functionf7dc
+	ld a, $0
+	ret
 
-Functionf231:
-	b3dr $f231, $f24f
+Functionf231: ; f231 (3:7231)
+	push de
+	ld de, $4
+	call WaitPlaySFX
+	pop de
+	ld a, [wd005]
+	hlcoord 11, 0
+	ld bc, $28
+	call AddNTimes
+	ld a, $2
+	ld [wd007], a
+	predef_jump AnimateHPBar
 
-Functionf24f:
-	b3dr $f24f, $f2a0
+Functionf24f: ; f24f (3:724f)
+	call Functionf261
+	ret c
+	ld a, [wCurPartySpecies]
+	cp EGG
+	jr nz, .asm_f25f
+	call Functionf82f
+	scf
+	ret
 
-Functionf2a0:
-	b3dr $f2a0, $f2cf
+.asm_f25f
+	and a
+	ret
 
-Functionf2cf:
-	b3dr $f2cf, $f2ef
+Functionf261: ; f261 (3:7261)
+	ld a, b
+	ld [wd03e], a
+	push hl
+	push de
+	push bc
+	call ClearBGPalettes
+	call Functionf272
+	pop bc
+	pop de
+	pop hl
+	ret
 
-Functionf2ef:
-	b3dr $f2ef, $f2f4
+Functionf272: ; f272 (3:7272)
+	callba LoadPartyMenuGFX
+	callba InitPartyMenuWithCancel
+	callba InitPartyMenuGFX
+	callba WritePartyMenuTilemap
+	callba PrintPartyMenuText
+	call WaitBGMap
+	call SetPalettes
+	call DelayFrame
+	callba PartyMenuSelect
+	ret
 
-Functionf2f4:
-	b3dr $f2f4, $f2f8
+Functionf2a0: ; f2a0 (3:72a0)
+	ld [wd03e], a
+	ld a, [wCurPartySpecies]
+	push af
+	ld a, [wd005]
+	push af
+	push hl
+	push de
+	push bc
+	callba WritePartyMenuTilemap
+	callba PrintPartyMenuActionText
+	call WaitBGMap
+	call SetPalettes
+	call DelayFrame
+	pop bc
+	pop de
+	pop hl
+	pop af
+	ld [wd005], a
+	pop af
+	ld [wCurPartySpecies], a
+	ret
 
-Functionf2f8:
-	b3dr $f2f8, $f2fc
+Functionf2cf: ; f2cf (3:72cf)
+	xor a
+	ld [hBGMapMode], a
+	hlcoord 0, 0
+	ld bc, SCREEN_HEIGHT * SCREEN_WIDTH
+	ld a, " "
+	call ByteFill
+	ld a, [wd03e]
+	call Functionf2a0
+	ld a, $1
+	ld [hBGMapMode], a
+	ld c, 50
+	call DelayFrames
+	jp WaitPressAorB_BlinkCursor
 
-Functionf2fc:
-	b3dr $f2fc, $f310
+Functionf2ef: ; f2ef (3:72ef)
+	call Functionf839
+	jr Functionf2f8
 
-Functionf310:
-	b3dr $f310, $f319
+Functionf2f4: ; f2f4 (3:72f4)
+	xor a
+	ld [wFieldMoveSucceeded], a
+Functionf2f8: ; f2f8 (3:72f8)
+	call ClearPalettes
+	ret
 
-Functionf319:
-	b3dr $f319, $f363
+Functionf2fc: ; f2fc (3:72fc)
+	ld a, [wBattleMode]
+	and a
+	ret z
+	ld a, [wd005]
+	push hl
+	ld hl, wCurBattleMon
+	cp [hl]
+	pop hl
+	jr nz, .asm_f30e
+	scf
+	ret
 
-Functionf363:
-	b3dr $f363, $f371
+.asm_f30e
+	xor a
+	ret
 
-Functionf371:
-	b3dr $f371, $f4a5
+Functionf310: ; f310 (3:7310)
+	call GetCurHPAnimMaxHP
+	srl d
+	rr e
+	jr asm_f31c
+
+Functionf319: ; f319 (3:7319)
+	call GetCurHPAnimMaxHP
+asm_f31c
+	ld a, MON_HP
+	call GetPartyParamLocation
+	ld [hl], d
+	inc hl
+	ld [hl], e
+	jp CopyCurHPToAnimBufferNewHP
+
+Functionf327: ; f327 (3:7327)
+	ld a, $23
+	call GetPartyParamLocation
+	ld a, [hl]
+	add e
+	ld [hld], a
+	ld a, [hl]
+	adc d
+	ld [hl], a
+	jr c, .asm_f34b
+	call CopyCurHPToAnimBufferNewHP
+	ld a, MON_HP + 1
+	call GetPartyParamLocation
+	ld d, h
+	ld e, l
+	ld a, MON_MAXHP + 1
+	call GetPartyParamLocation
+	ld a, [de]
+	sub [hl]
+	dec de
+	dec hl
+	ld a, [de]
+	sbc [hl]
+	jr c, .asm_f34e
+.asm_f34b
+	call Functionf319
+.asm_f34e
+	ret
+
+Functionf34f: ; f34f (3:734f)
+	ld a, MON_HP + 1
+	call GetPartyParamLocation
+	ld a, [hl]
+	sub e
+	ld [hld], a
+	ld a, [hl]
+	sbc d
+	ld [hl], a
+	jr nc, .asm_f35f
+	xor a
+	ld [hld], a
+	ld [hl], a
+.asm_f35f
+	call CopyCurHPToAnimBufferNewHP
+	ret
+
+Functionf363: ; f363 (3:7363)
+	push de
+	call CopyMaxHPToAnimBufferMaxHP
+	call CopyCurHPToAnimBufferOldHP
+	call GetCurHPAnimOldHP
+	ld a, d
+	or e
+	pop de
+	ret
+
+CalculateCurHPAnimRemainingHP: ; f371 (3:7371)
+	call GetCurHPAnimOldHP
+	ld h, d
+	ld l, e
+	call GetCurHPAnimMaxHP
+	ld a, l
+	sub e
+	ld a, h
+	sbc d
+	ret
+
+CopyCurHPToAnimBufferNewHP: ; f37e (3:737e)
+	ld a, MON_HP
+	call GetPartyParamLocation
+	ld a, [hli]
+	ld [wCurHPAnimNewHP + 1], a
+	ld a, [hl]
+	ld [wCurHPAnimNewHP], a
+	ret
+
+SetCurHPAnimNewHP:
+	ld a, d
+	ld [wCurHPAnimNewHP + 1], a
+	ld a, e
+	ld [wCurHPAnimNewHP], a
+	ret
+
+GetCurHPAnimNewHP:
+	ld a, [wCurHPAnimNewHP + 1]
+	ld d, a
+	ld a, [wCurHPAnimNewHP]
+	ld e, a
+	ret
+
+CopyCurHPToAnimBufferOldHP: ; f39e (3:739e)
+	ld a, MON_HP
+	call GetPartyParamLocation
+	ld a, [hli]
+	ld [wCurHPAnimOldHP + 1], a
+	ld a, [hl]
+	ld [wCurHPAnimOldHP], a
+	ret
+
+GetCurHPAnimOldHP: ; f3ac (3:73ac)
+	ld a, [wCurHPAnimOldHP + 1]
+	ld d, a
+	ld a, [wCurHPAnimOldHP]
+	ld e, a
+	ret
+
+CopyMaxHPToAnimBufferMaxHP: ; f3b5 (3:73b5)
+	push hl
+	ld a, MON_MAXHP
+	call GetPartyParamLocation
+	ld a, [hli]
+	ld [wCurHPAnimMaxHP + 1], a
+	ld a, [hl]
+	ld [wCurHPAnimMaxHP], a
+	pop hl
+	ret
+
+GetCurHPAnimMaxHP: ; f3c5 (3:73c5)
+	ld a, [wCurHPAnimMaxHP + 1]
+	ld d, a
+	ld a, [wCurHPAnimMaxHP]
+	ld e, a
+	ret
+
+GetOneFifthMaxHP: ; f3ce (3:73ce)
+	push bc
+	ld a, MON_MAXHP
+	call GetPartyParamLocation
+	ld a, [hli]
+	ld [hDividend], a
+	ld a, [hl]
+	ld [hPrintNum2], a
+	ld a, $5
+	ld [hMultiplier], a
+	ld b, $2
+	call Divide
+	ld a, [hStringCmpString2]
+	ld d, a
+	ld a, [hPrintNum4]
+	ld e, a
+	pop bc
+	ret
+
+Functionf3eb: ; f3eb (3:73eb)
+	push hl
+	ld a, [wd002]
+	ld hl, HealingItemParameters
+	ld d, a
+.asm_f3f3
+	ld a, [hli]
+	cp -1
+	jr z, .asm_f3ff
+	cp d
+	jr z, .asm_f400
+	inc hl
+	inc hl
+	jr .asm_f3f3
+
+.asm_f3ff
+	scf
+.asm_f400
+	ld e, [hl]
+	inc hl
+	ld d, [hl]
+	pop hl
+	ret
+
+HealingItemParameters:
+	dbw FRESH_WATER,   50
+	dbw SODA_POP,      60
+	dbw LEMONADE,      80
+	dbw HYPER_POTION, 200
+	dbw SUPER_POTION,  50
+	dbw POTION,        20
+	dbw MAX_POTION,   999
+	dbw FULL_RESTORE, 999
+	dbw MOOMOO_MILK,  100
+	dbw BERRY,         10
+	dbw GOLD_BERRY,    30
+	dbw ENERGYPOWDER,  50
+	dbw ENERGY_ROOT,  200
+	dbw RAGECANDYBAR,  20
+	dbw BERRY_JUICE,   20
+	dbw -1,             0
+
+	ld a, [wPartyMenuCursor]
+	dec a
+	ld b, a
+	call Functionf46f
+	jr c, .asm_f469
+	ld a, b
+	ld [wd005], a
+	call Functionf363
+	call GetOneFifthMaxHP
+	call Functionf34f
+	push bc
+	call Functionf231
+	pop bc
+	call GetOneFifthMaxHP
+	ld a, c
+	ld [wd005], a
+	call Functionf363
+	call Functionf327
+.asm_f45d
+	call Functionf231
+	ld a, PARTYMENUTEXT_HEAL_HP
+	call Functionf2a0
+	call JoyWaitAorB
+.asm_f469
+	ld a, b
+	inc a
+	ld [wPartyMenuCursor], a
+	ret
+
+Functionf46f: ; f46f (3:746f)
+	push bc
+	ld a, $1
+	ld [wd03e], a
+	call Functionf272
+	pop bc
+	jr c, .asm_f494
+	ld a, [wPartyMenuCursor]
+	dec a
+	ld c, a
+	ld a, b
+	cp c
+	jr z, .asm_f496
+	ld a, c
+	ld [wd005], a
+	call Functionf363
+	jr z, .asm_f496
+	call CalculateCurHPAnimRemainingHP
+	jr nc, .asm_f496
+	xor a
+	ret
+
+.asm_f494
+	scf
+	ret
+
+.asm_f496
+	push bc
+	ld hl, Text_MilkDrinkCantBeUsed
+	call MenuTextBoxBackup
+	pop bc
+	jr Functionf46f
+
+Text_MilkDrinkCantBeUsed:
+	text_jump Text_MilkDrinkCantBeUsed_
+	db "@"
 
 EscapeRope: ; f4a5
 	b3dr $f4a5, $f4b8
@@ -1747,7 +2117,10 @@ Functionf81d:
 	b3dr $f81d, $f823
 
 FailToUseBall:
-	b3dr $f823, $f839
+	b3dr $f823, $f82f
+
+Functionf82f:
+	b3dr $f82f, $f839
 
 Functionf839:
 	b3dr $f839, $f866

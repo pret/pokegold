@@ -86,7 +86,7 @@ ChangeHappiness: ; 72a1 (1:72a1)
 	ret z
 	ld a, [wd005]
 	ld b, a
-	ld a, [wcfc9]
+	ld a, [wPartyMenuCursor]
 	cp b
 	ret nz
 	ld a, [de]
