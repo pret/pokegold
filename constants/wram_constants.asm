@@ -6,7 +6,7 @@ BOXMON     EQU 2
 TEMPMON   EQU 3
 WILDMON    EQU 4
 
-; Options: ; cfcc
+; wOptions: ; cfcc
 FAST_TEXT      EQU 0
 MED_TEXT       EQU 1
 SLOW_TEXT      EQU 2

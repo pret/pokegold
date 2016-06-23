@@ -2713,8 +2713,7 @@ wd196:: ds 1 ; d196
 wd197:: ds 1 ; d197
 wd198:: ds 1 ; d198
 
-Options::
-wd199:: ds 1 ; d199
+wOptions:: ds 1 ; d199
 wd19a:: ds 1 ; d19a
 wd19b:: ds 1 ; d19b
 wTextBoxFlags:: ds 1 ; d19c

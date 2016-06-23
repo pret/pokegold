@@ -633,8 +633,11 @@ Text_KnowsMove:
 	db "@"
 
 SECTION "bank4", ROMX, BANK[$4]
-Function10000::
-	dr $10000, $117f1
+
+INCLUDE "engine/player_movement.asm"
+
+Function10430:
+	dr $10430, $117f1
 InitializeStartDay_:
 	dr $117f1, $118f8
 Function118f8:
@@ -749,7 +752,7 @@ LoadMapGroupRoof::
 	dr $1c000, $1ffbd
 
 SECTION "bank8", ROMX, BANK[$8]
-	dr $20000, $24000
+	dr $20000, $23e3d
 
 SECTION "bank9", ROMX, BANK[$9]
 StringBufferPointers::
@@ -791,7 +794,7 @@ Function27216:
 GetTrainerDVs:
 	dr $27271, $27307
 ReturnToBattle_UseBall_:
-	dr $27307, $28000
+	dr $27307, $27bd3
 
 SECTION "banka", ROMX, BANK[$a]
 	dr $28000, $28d88

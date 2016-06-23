@@ -222,7 +222,7 @@ UltraBall: ; e926
 	ld a, [wd002]
 	cp PARK_BALL
 	call nz, ReturnToBattle_UseBall
-	ld hl, Options
+	ld hl, wOptions
 	res NO_TEXT_SCROLL, [hl]
 	ld hl, Text_UsedItem ; $7884
 	call PrintText

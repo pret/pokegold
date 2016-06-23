@@ -267,7 +267,7 @@ IsInArray::
 INCLUDE "home/math.asm"
 
 Function31e2:: ; 31e2 (0:31e2)
-	ld a, [wd199]
+	ld a, [wOptions]
 	bit 4, a
 	ret nz
 	ld a, [wTextBoxFlags]
@@ -283,7 +283,7 @@ Function31e2:: ; 31e2 (0:31e2)
 	ld a, [wTextBoxFlags]
 	bit 0, a
 	jr z, .asm_3205
-	ld a, [wd199]
+	ld a, [wOptions]
 	and $7
 	jr .asm_3207
 
@@ -928,7 +928,7 @@ NamesPointers:: ; 35ee (0:35ee)
 	dbw 0, wPartyMonOT
 	dbw 0, $de7d
 	dba TrainerClassNames
-	dba Function10000
+	dba DoPlayerMovement
 
 GetName:: ; 3606
 	ld a, [hROMBank]

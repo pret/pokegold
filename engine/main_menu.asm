@@ -134,13 +134,13 @@ Function5b27: ; 5b27 (1:5b27)
 	xor a
 	ld [hBGMapMode], a
 	call Function5b45
-	ld hl, wd199
+	ld hl, wOptions
 	ld a, [hl]
 	push af
 	set 4, [hl]
 	call Function5b5b
 	pop af
-	ld [wd199], a
+	ld [wOptions], a
 	ld a, $1
 	ld [hBGMapMode], a
 	ret
@@ -267,7 +267,7 @@ Function5c3a: ; 5c3a (1:5c3a)
 
 Function5c41: ; 5c41 (1:5c41)
 	ld hl, wOAMBuffer
-	ld bc, Options - wOAMBuffer
+	ld bc, wOptions - wOAMBuffer
 	xor a
 	call ByteFill
 

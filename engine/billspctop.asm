@@ -23,14 +23,14 @@ BillsPC_LogIn: ; e3f7 (3:63f7)
 	ld [hBGMapMode], a
 	call LoadStandardMenuDataHeader
 	call Functione566
-	ld hl, Options
+	ld hl, wOptions
 	ld a, [hl]
 	push af
 	set 4, [hl]
 	ld hl, Text_BillsPCWhat
 	call PrintText
 	pop af
-	ld [wd199], a
+	ld [wOptions], a
 	call Functionda5
 	ret
 
