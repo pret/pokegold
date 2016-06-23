@@ -10,6 +10,7 @@ PlaceWaitingText:: ; 4000 (1:4000)
 	jr z, .asm_4012
 	call TextBox
 	jr .asm_4017
+
 .asm_4012
 	predef Predef_LinkTextbox
 .asm_4017
@@ -45,6 +46,7 @@ PushOAM:
 	dec a
 	jr nz, .asm_4046
 	ret
+
 PushOAMEnd
 
 INCLUDE "engine/map_objects.asm"
@@ -169,6 +171,7 @@ CheckNickErrors:: ; 677e (1:677e)
 	ld a, "?"
 	ld [de], a
 	jr .loop
+
 .next
 	inc de
 	dec b
@@ -604,19 +607,30 @@ Text_CaughtBugMon:
 
 INCLUDE "items/item_effects.asm"
 
-IF DEF(GOLD)
-Functionf900:
-	dr $f900, $f933
-GetMaxPPOfMove:
-	dr $f933, $fa3e
-ENDC
+KnowsMove:
+	ld a, MON_MOVES
+	call GetPartyParamLocation
+	ld a, [wd14d]
+	ld b, a
+	ld c, $4
+.asm_fa28
+	ld a, [hli]
+	cp b
+	jr z, .asm_fa31
+	dec c
+	jr nz, .asm_fa28
+	and a
+	ret
 
-IF DEF(SILVER)
-Functionf900:
-	dr $f8fe, $f931
-GetMaxPPOfMove:
-	dr $f931, $fa3c
-ENDC
+.asm_fa31
+	ld hl, Text_KnowsMove
+	call PrintText
+	scf
+	ret
+
+Text_KnowsMove:
+	text_jump Text_KnowsMove_
+	db "@"
 
 SECTION "bank4", ROMX, BANK[$4]
 Function10000::
@@ -644,7 +658,10 @@ NamingScreen:
 AbortBugCatchingContest::
 	dr $1269a, $126fd
 Function126fd:
-	dr $126fd, $12e33
+	dr $126fd, $12947
+
+ItemfinderFunction:
+	dr $12947, $12e33
 
 PartyMonItemName::
 	dr $12e33, $1399d
@@ -764,7 +781,9 @@ Function24b8d:
 Function267ca:
 	dr $267ca, $2692d
 InitDecorations: ; 2692d
-	dr $2692d, $271be
+	dr $2692d, $270d5
+ReceiveDecorationC:
+	dr $270d5, $271be
 Function271be:
 	dr $271be, $27216
 Function27216:
@@ -849,7 +868,16 @@ SECTION "bankd", ROMX, BANK[$d]
 	dr $34000, $34923
 
 CheckTypeMatchup::
-	dr $34923, $366f6
+	dr $34923, $36313
+
+CheckIfStatCanBeRaised:
+	dr $36313, $364d7
+
+BattleCommand_StatUpMessage:
+	dr $364d7, $3656b
+
+BattleCommand_StatUpFailText:
+	dr $3656b, $366f6
 
 CalcPlayerStats:
 	dr $366f6, $37e9b
@@ -972,7 +1000,19 @@ PrintPartyMenuActionText:
 	dr $504db, $5054f
 
 LoadFishingGFX:
-	dr $5054f, $5087d
+	dr $5054f, $50763
+
+SquirtbottleFunction:
+	dr $50763, $507ac
+
+CardKeyFunction:
+	dr $507ac, $507e7
+
+BasementKeyFunction:
+	dr $507e7, $50819
+
+SacredAshFunction:
+	dr $50819, $5087d
 
 CopyPkmnToTempMon::
 	dr $5087d, $50940
@@ -1436,6 +1476,7 @@ SECTION "bank3f", ROMX, BANK[$3f]
 	nop
 Predef3A::
 	ret
+
 	dr $fc002, $100000
 
 SECTION "bank40", ROMX, BANK[$40]
@@ -1787,7 +1828,82 @@ Text_StatRoseFromVitamin_::
 	dr $1984df, $1984f1
 
 Text_MilkDrinkCantBeUsed_::
-	dr $1984f1, $19c000
+	dr $1984f1, $198512
+
+Text_RepelsEffectsStillLinger_::
+	dr $198512, $19853e
+
+Text_NowThatsACatchyTune_::
+	dr $19853e, $19856d
+
+Text_AllSleepingMonWokeUp_::
+	dr $19856d, $198589
+
+Text_PlayedThePokeFlute_::
+	dr $198589, $1985a3
+
+Text_CoinCase_::
+	dr $1985a3, $1985b1
+
+Text_RaiseThePPOfWhichMove_::
+	dr $1985b1, $1985ce
+
+Text_RestoreThePPOfWhichMove_::
+	dr $1985ce, $1985ed
+
+Text_PPIsMaxedOut_::
+	dr $1985ed, $198604
+
+Text_PPsIncreased_::
+	dr $198604, $198618
+
+Text_PPWasRestored_::
+	dr $198618, $19862a
+
+Text_TrohpyInside_::
+	dr $19862a, $198665
+
+Text_LooksBitter_::
+	dr $198665, $198677
+
+Text_CantUseOnEgg_::
+	dr $198677, $198695
+
+Text_IsntTheTimeToUseThat_::
+	dr $198695, $1986be
+
+Text_BelongsToSomeoneElse_::
+	dr $1986be, $1986dd
+
+Text_WontHaveAnyEffect_::
+	dr $1986dd, $1986f7
+
+Text_BlockedTheBall_::
+	dr $1986f7, $198716
+
+Text_DontBeAThief_::
+	dr $198716, $198728
+
+Text_CyclingIsntAllowed_::
+	dr $198728, $198744
+
+Text_CantGetOnYourItemNow_::
+	dr $198744, $198761
+
+Text_CantUseBallBoxIsFull_::
+	dr $198761, $19878f
+
+Text_UsedItem_::
+	dr $19878f, $1987a2
+
+Text_GotOnItem_::
+	dr $1987a2, $1987b7
+
+Text_GotOffItem_::
+	dr $1987b7, $1987cf
+
+Text_KnowsMove_::
+	dr $1987cf, $19c000
 
 SECTION "bank67", ROMX, BANK[$67]
 	dr $19c000, $1a0000

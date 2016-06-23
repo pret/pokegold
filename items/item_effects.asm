@@ -1,12 +1,3 @@
-b3dr: macro
-IF DEF(GOLD)
-INCBIN "baserom-gold.gbc", \1, \2 - \1
-ENDC
-IF DEF(SILVER)
-INCBIN "baserom-silver.gbc", \1 - 2, \2 - \1
-ENDC
-endm
-
 DoItemEffect_:: ; e7a6 (3:67a6)
 	ld a, [wd002]
 	ld [wd151], a
@@ -1934,79 +1925,488 @@ Text_MilkDrinkCantBeUsed:
 	text_jump Text_MilkDrinkCantBeUsed_
 	db "@"
 
-EscapeRope: ; f4a5
-	b3dr $f4a5, $f4b8
+EscapeRope: ; f4a5 (3:74a5)
+	xor a
+	ld [wFieldMoveSucceeded], a
+	callba EscapeRopeFunction ; same bank
+	ld a, [wFieldMoveSucceeded]
+	cp $1
+	call z, Functionf7dc
+	ret
 
-SuperRepel: ; f4b8
-	b3dr $f4b8, $f4bc
+SuperRepel: ; f4b8 (3:74b8)
+	ld b, 200
+	jr asm_f4c2
 
-MaxRepel: ; f4bc
-	b3dr $f4bc, $f4c0
+MaxRepel: ; f4bc (3:74bc)
+	ld b, 250
+	jr asm_f4c2
 
-Repel: ; f4c0
-	b3dr $f4c0, $f4d8
+Repel: ; f4c0 (3:74c0)
+	ld b, 100
+asm_f4c2
+	ld a, [wRepelSteps]
+	and a
+	ld hl, Text_RepelsEffectsStillLinger
+	jp nz, PrintText
+	ld a, b
+	ld [wRepelSteps], a
+	jp Functionf7d0
 
-XAccuracy: ; f4d8
-	b3dr $f4d8, $f4e5
+Text_RepelsEffectsStillLinger:
+	text_jump Text_RepelsEffectsStillLinger_
+	db "@"
 
-PokeDoll: ; f4e5
-	b3dr $f4e5, $f4fb
+XAccuracy: ; f4d8 (3:74d8)
+	ld hl, wPlayerSubStatus4
+	bit SUBSTATUS_X_ACCURACY, [hl]
+	jp nz, Functionf811
+	set SUBSTATUS_X_ACCURACY, [hl]
+	jp Functionf7d0
 
-GuardSpec: ; f4fb
-	b3dr $f4fb, $f508
+PokeDoll: ; f4e5 (3:74e5)
+	ld a, [wBattleMode]
+	dec a
+	jr nz, .asm_f4f6
+	inc a
+	ld [wd11c], a
+	inc a
+	ld [wBattleResult], a
+	jp Functionf7d0
 
-DireHit: ; f508
-	b3dr $f508, $f515
+.asm_f4f6
+	xor a
+	ld [wFieldMoveSucceeded], a
+	ret
+
+GuardSpec: ; f4fb (3:74fb)
+	ld hl, wPlayerSubStatus4
+	bit SUBSTATUS_MIST, [hl]
+	jp nz, Functionf811
+	set SUBSTATUS_MIST, [hl]
+	jp Functionf7d0
+
+DireHit: ; f508 (3:7508)
+	ld hl, wPlayerSubStatus4
+	bit SUBSTATUS_FOCUS_ENERGY, [hl]
+	jp nz, Functionf811
+	set SUBSTATUS_FOCUS_ENERGY, [hl]
+	jp Functionf7d0
 
 XAttack: ; f515
 XDefend: ; f515
 XSpecial: ; f515
 XSpeed: ; f515
-	b3dr $f515, $f55c
+	call Functionf7d0
+	ld a, [wd002]
+	ld hl, .x_item_table
+.asm_f51e
+	cp [hl]
+	jr z, .asm_f525
+	inc hl
+	inc hl
+	jr .asm_f51e
 
-PokeFlute: ; f55c
-	b3dr $f55c, $f5e1
+.asm_f525
+	inc hl
+	ld b, [hl]
+	xor a
+	ld [hBattleTurn], a
+	ld [wcb45], a
+	ld [wcbeb], a
+	callba CheckIfStatCanBeRaised
+	call WaitSFX
+	callba BattleCommand_StatUpMessage
+	callba BattleCommand_StatUpFailText
+	ld a, [wCurBattleMon]
+	ld [wd005], a
+	ld c, HAPPINESS_USEDXITEM
+	callba ChangeHappiness
+	ret
 
-CoinCase: ; f5e1
-	b3dr $f5e1, $f5ec
+.x_item_table
+	db X_ATTACK,  ATTACK
+	db X_DEFEND,  DEFENSE
+	db X_SPEED,   SPEED
+	db X_SPECIAL, SP_ATTACK
 
-OldRod: ; f5ec
-	b3dr $f5ec, $f5f0
+PokeFlute: ; f55c (3:755c)
+	ld a, [wBattleMode]
+	and a
+	jr nz, .asm_f562
+.asm_f562
+	xor a
+	ld [wceed], a
+	ld b, $ff ^ SLP
+	ld hl, wPartyMon1End
+	call Functionf5a4
+	ld a, [wBattleMode]
+	cp $1
+	jr z, .asm_f57b
+	ld hl, wOTPartyMon1End
+	call Functionf5a4
+.asm_f57b
+	ld hl, wBattleMonStatus
+	ld a, [hl]
+	and b
+	ld [hl], a
+	ld hl, wEnemyMonStatus
+	ld a, [hl]
+	and b
+	ld [hl], a
+	ld a, [wMovementBufferCount]
+	and a
+	ld hl, Text_NowThatsACatchyTune ; $75bc
+	jp z, PrintText
+	ld hl, Text_PlayedThePokeFlute ; $75c6
+	call PrintText
+	ld a, [wDanger]
+	and $80
+	jr nz, .asm_f59e
+.asm_f59e
+	ld hl, Text_AllSleepingMonWokeUp ; $75c1
+	jp PrintText
 
-GoodRod: ; f5f0
-	b3dr $f5f0, $f5f4
+Functionf5a4: ; f5a4 (3:75a4)
+	ld de, $30
+	ld c, $6
+.asm_f5a9
+	ld a, [hl]
+	push af
+	and $7
+	jr z, .asm_f5b4
+	ld a, $1
+	ld [wceed], a
+.asm_f5b4
+	pop af
+	and b
+	ld [hl], a
+	add hl, de
+	dec c
+	jr nz, .asm_f5a9
+	ret
 
-SuperRod: ; f5f4
-	b3dr $f5f4, $f5ff
+Text_NowThatsACatchyTune:
+	text_jump Text_NowThatsACatchyTune_
+	db "@"
 
-Itemfinder: ; f5ff
-	b3dr $f5ff, $f606
+Text_AllSleepingMonWokeUp:
+	text_jump Text_AllSleepingMonWokeUp_
+	db "@"
+
+Text_PlayedThePokeFlute:
+	text_jump Text_PlayedThePokeFlute_
+	start_asm
+	ld a, [wBattleMode]
+	and a
+	jr nz, .asm_f5dc
+	push de
+	ld de, SFX_POKEFLUTE
+	call WaitPlaySFX
+	call WaitSFX
+	pop de
+.asm_f5dc
+	ld hl, .terminator
+	ret
+
+.terminator db "@"
+
+CoinCase: ; f5e1 (3:75e1)
+	ld hl, Text_CoinCase
+	jp MenuTextBoxWaitButton
+
+Text_CoinCase:
+	text_jump Text_CoinCase_
+	db "@"
+
+OldRod: ; f5ec (3:75ec)
+	ld e, $0
+	jr asm_f5f8
+
+GoodRod: ; f5f0 (3:75f0)
+	ld e, $1
+	jr asm_f5f8
+
+SuperRod: ; f5f4 (3:75f4)
+	ld e, $2
+	jr asm_f5f8
+
+asm_f5f8
+	callba FishingRodFunction ; same bank
+	ret
+
+Itemfinder: ; f5ff (3:75ff)
+	callba ItemfinderFunction
+	ret
 
 Elixer: ; f606
 Ether: ; f606
 MaxElixer: ; f606
 MaxEther: ; f606
 Mysteryberry: ; f606
-PPUp: ; f606
-	b3dr $f606, $f785
+PPUp: ; f606 (3:7606)
+	ld a, [wd002]
+	ld [wMovementBufferCount], a
+.asm_f60c
+	ld b, $1
+	call Functionf24f
+	jp c, Functionf727
+.asm_f614
+	ld a, [wMovementBufferCount]
+	cp MAX_ELIXER
+	jp z, Functionf6f6
+	cp ELIXER
+	jp z, Functionf6f6
+	ld hl, Text_RaiseThePPOfWhichMove
+	ld a, [wMovementBufferCount]
+	cp PP_UP
+	jr z, .asm_f62e
+	ld hl, Text_RestoreThePPOfWhichMove
+.asm_f62e
+	call PrintText
+	ld a, [wcfc7]
+	push af
+	xor a
+	ld [wcfc7], a
+	ld a, $2
+	ld [wd11f], a
+	ld a, $f
+	ld hl, $62f3
+	rst FarCall
+	pop bc
+	ld a, b
+	ld [wcfc7], a
+	jr nz, .asm_f60c
+	ld hl, wPartyMon1Moves
+	ld bc, $30
+	call Functionf9aa
+	push hl
+	ld a, [hl]
+	ld [wd151], a
+	call GetMoveName
+	call Function317b
+	pop hl
+	ld a, [wceed]
+	cp PP_UP
+	jp nz, Functionf6ee
+	ld a, [hl]
+	cp $a6
+	jr z, .asm_f676
+	ld bc, $15
+	add hl, bc
+	ld a, [hl]
+	cp $c0
+	jr c, .asm_f67e
+.asm_f676
+	ld hl, Text_PPIsMaxedOut ; $7776
+	call PrintText
+	jr .asm_f614
 
-Squirtbottle: ; f785
-	b3dr $f785, $f78c
+.asm_f67e
+	ld a, [hl]
+	add $40
+	ld [hl], a
+	ld a, $1
+	ld [wd151], a
+	call Functionf893
+	call Functionf7c7
+	ld hl, Text_PPsIncreased ; $777b
+	call PrintText
+asm_f693
+	call ClearPalettes
+	jp Functionf7dc
 
-CardKey: ; f78c
-	b3dr $f78c, $f793
+asm_f699
+	ld a, [wBattleMode]
+	and a
+	jr z, .asm_f6b3
+	ld a, [wd005]
+	ld b, a
+	ld a, [wCurBattleMon]
+	cp b
+	jr nz, .asm_f6b3
+	ld a, [wPlayerSubStatus5]
+	bit SUBSTATUS_TRANSFORMED, a
+	jr nz, .asm_f6b3
+	call Functionf6be
+.asm_f6b3
+	call Functionf7c7
+	ld hl, Text_PPWasRestored
+	call PrintText
+	jr asm_f693
 
-BasementKey: ; f793
-	b3dr $f793, $f79a
+Functionf6be: ; f6be (3:76be)
+	ld a, [wd005]
+	ld hl, wPartyMon1Moves
+	ld bc, $30
+	call AddNTimes
+	ld de, wBattleMonMoves
+	ld b, $4
+.asm_f6cf
+	ld a, [de]
+	and a
+	jr z, .asm_f6ed
+	cp [hl]
+	jr nz, .asm_f6e8
+	push hl
+	push de
+	push bc
+	inc de
+	inc de
+	inc de
+	inc de
+	inc de
+	inc de
+	ld bc, $15
+	add hl, bc
+	ld a, [hl]
+	ld [de], a
+	pop bc
+	pop de
+	pop hl
+.asm_f6e8
+	inc hl
+	inc de
+	dec b
+	jr nz, .asm_f6cf
+.asm_f6ed
+	ret
 
-SacredAsh: ; f79a
-	b3dr $f79a, $f7aa
+Functionf6ee: ; f6ee (3:76ee)
+	call Functionf72f
+	jr nz, asm_f699
+	jp Functionf724
 
-NormalBox: ; f7aa
-	b3dr $f7aa, $f7ae
+Functionf6f6: ; f6f6 (3:76f6)
+	xor a
+	ld hl, wMenuCursorY
+	ld [hli], a
+	ld [hl], a
+	ld b, $4
+.asm_f6fe
+	push bc
+	ld hl, wPartyMon1Moves
+	ld bc, $30
+	call Functionf9aa
+	ld a, [hl]
+	and a
+	jr z, .asm_f715
+	call Functionf72f
+	jr z, .asm_f715
+	ld hl, wcee1
+	inc [hl]
+.asm_f715
+	ld hl, wMenuCursorY
+	inc [hl]
+	pop bc
+	dec b
+	jr nz, .asm_f6fe
+	ld a, [wcee1]
+	and a
+	jp nz, asm_f699
+Functionf724: ; f724 (3:7724)
+	call Functionf839
+Functionf727: ; f727 (3:7727)
+	call ClearPalettes
+	xor a
+	ld [wFieldMoveSucceeded], a
+	ret
 
-GorgeousBox: ; f7ae
-	b3dr $f7ae, $f7c4
+Functionf72f: ; f72f (3:772f)
+	xor a
+	ld [wMonType], a
+	call GetMaxPPOfMove
+	ld hl, wPartyMon1PP
+	ld bc, $30
+	call Functionf9aa
+	ld a, [wd151]
+	ld b, a
+	ld a, [hl]
+	and $3f
+	cp b
+	jr nc, .asm_f76a
+	ld a, [wceed]
+	cp MAX_ELIXER
+	jr z, .asm_f764
+	cp $40
+	jr z, .asm_f764
+	ld c, $5
+	cp $96
+	jr z, .asm_f75c
+	ld c, $a
+.asm_f75c
+	ld a, [hl]
+	and $3f
+	add c
+	cp b
+	jr nc, .asm_f764
+	ld b, a
+.asm_f764
+	ld a, [hl]
+	and $c0
+	or b
+	ld [hl], a
+	ret
+
+.asm_f76a
+	xor a
+	ret
+
+Text_RaiseThePPOfWhichMove:
+	text_jump Text_RaiseThePPOfWhichMove_
+	db "@"
+
+Text_RestoreThePPOfWhichMove:
+	text_jump Text_RestoreThePPOfWhichMove_
+	db "@"
+
+Text_PPIsMaxedOut:
+	text_jump Text_PPIsMaxedOut_
+	db "@"
+
+Text_PPsIncreased:
+	text_jump Text_PPsIncreased_
+	db "@"
+
+Text_PPWasRestored:
+	text_jump Text_PPWasRestored_
+	db "@"
+
+Squirtbottle: ; f785 (3:7785)
+	callba SquirtbottleFunction ; 14:4763
+	ret
+
+CardKey: ; f78c (3:778c)
+	callba CardKeyFunction ; 14:47ac
+	ret
+
+BasementKey: ; f793 (3:7793)
+	callba BasementKeyFunction ; 14:47e7
+	ret
+
+SacredAsh: ; f79a (3:779a)
+	callba SacredAshFunction ; 14:4819
+	ld a, [wFieldMoveSucceeded]
+	cp $1
+	ret nz
+	call Functionf7dc
+	ret
+
+NormalBox: ; f7aa (3:77aa)
+	ld c, DECOFLAG_SILVER_TROPHY_DOLL
+	jr asm_f7b0
+
+GorgeousBox: ; f7ae (3:77ae)
+	ld c, DECOFLAG_GOLD_TROPHY_DOLL
+asm_f7b0
+	callba ReceiveDecorationC ; 9:70d5
+	ld hl, Text_TrohpyInside ; $77bf
+	call PrintText
+	jp Functionf7dc
+
+Text_TrohpyInside:
+	text_jump Text_TrohpyInside_
+	db "@"
 
 AmuletCoin: ; f7c4
 BerserkGene: ; f7c4
@@ -2099,34 +2499,384 @@ Twistedspoon: ; f7c4
 UpGrade: ; f7c4
 WhtApricorn: ; f7c4
 YlwApricorn: ; f7c4
-	b3dr $f7c4, $f7c7
+	jp Functionf834
 
-Functionf7c7:
-	b3dr $f7c7, $f7d0
+Functionf7c7: ; f7c7 (3:77c7)
+	push de
+	ld de, SFX_FULL_HEAL
+	call WaitPlaySFX
+	pop de
+	ret
 
-Functionf7d0:
-	b3dr $f7d0, $f7dc
+Functionf7d0: ; f7d0 (3:77d0)
+	ld hl, Text_UsedItem
+	call PrintText
+	call Functionf7c7
+	call WaitPressAorB_BlinkCursor
+Functionf7dc: ; f7dc (3:77dc)
+	ld hl, wTMsHMsEnd
+	ld a, $1
+	ld [wd009], a
+	jp TossItem
 
-Functionf7dc:
-	b3dr $f7dc, $f7e7
+Functionf7e7: ; f7e7 (3:77e7)
+	call ReturnToBattle_UseBall
+	ld de, Start
+	ld a, e
+	ld [wcf3e], a
+	ld a, d
+	ld [wcf3f], a
+	xor a
+	ld [wcb67], a
+	ld [hBattleTurn], a
+	ld [wcf46], a
+	predef PlayBattleAnim
+	ld hl, Text_BlockedTheBall
+	call PrintText
+	ld hl, Text_DontBeAThief
+	call PrintText
+	jr Functionf7dc
 
-Functionf7e7:
-	b3dr $f7e7, $f81d
+Functionf811: ; f811 (3:7811)
+	ld hl, Text_WontHaveAnyEffect
+	call PrintText
+	ld a, $2
+	ld [wFieldMoveSucceeded], a
+	ret
 
-Functionf81d:
-	b3dr $f81d, $f823
+Functionf81d: ; f81d (3:781d)
+	ld hl, Text_LooksBitter
+	jp PrintText
 
-FailToUseBall:
-	b3dr $f823, $f82f
+FailToUseBall: ; f823 (3:7823)
+	ld hl, Text_CantUseBallBoxIsFull
+	call PrintText
+	ld a, $2
+	ld [wFieldMoveSucceeded], a
+	ret
 
-Functionf82f:
-	b3dr $f82f, $f839
+Functionf82f: ; f82f (3:782f)
+	ld hl, Text_CantUseOnEgg
+	jr asm_f84b
 
-Functionf839:
-	b3dr $f839, $f866
+Functionf834: ; f834 (3:7834)
+	ld hl, Text_IsntTheTimeToUseThat
+	jr asm_f84b
+
+Functionf839: ; f839 (3:7839)
+	ld hl, Text_WontHaveAnyEffect
+	jr asm_f84b
+
+Functionf83e:
+	ld hl, Text_BelongsToSomeoneElse
+	jr asm_f84b
+
+Functionf843:
+	ld hl, Text_CyclingIsntAllowed
+	jr asm_f84b
+
+Functionf848:
+	ld hl, Text_CantGetOnYourItemNow
+asm_f84b
+	xor a
+	ld [wFieldMoveSucceeded], a
+	jp PrintText
+
+Text_LooksBitter:
+	text_jump Text_LooksBitter_
+	db "@"
+
+Text_CantUseOnEgg:
+	text_jump Text_CantUseOnEgg_
+	db "@"
+
+Text_IsntTheTimeToUseThat:
+	text_jump Text_IsntTheTimeToUseThat_
+	db "@"
+
+Text_BelongsToSomeoneElse:
+	text_jump Text_BelongsToSomeoneElse_
+	db "@"
 
 Text_WontHaveAnyEffect:
-	b3dr $f866, $f884
+	text_jump Text_WontHaveAnyEffect_
+	db "@"
+
+Text_BlockedTheBall:
+	text_jump Text_BlockedTheBall_
+	db "@"
+
+Text_DontBeAThief:
+	text_jump Text_DontBeAThief_
+	db "@"
+
+Text_CyclingIsntAllowed:
+	text_jump Text_CyclingIsntAllowed_
+	db "@"
+
+Text_CantGetOnYourItemNow:
+	text_jump Text_CantGetOnYourItemNow_
+	db "@"
+
+Text_CantUseBallBoxIsFull:
+	text_jump Text_CantUseBallBoxIsFull_
+	db "@"
 
 Text_UsedItem:
-	b3dr $f884, $f900
+	text_jump Text_UsedItem_
+	db "@"
+
+Text_GotOnItem:
+	text_jump Text_GotOnItem_
+	db "@"
+
+Text_GotOffItem:
+	text_jump Text_GotOffItem_
+	db "@"
+
+Functionf893: ; f893 (3:7893)
+	ld a, $2
+	call GetPartyParamLocation
+	push hl
+	ld de, wBuffer1
+	predef FillPP
+	pop hl
+	ld bc, $15
+	add hl, bc
+	ld de, wCurHPAnimMaxHP
+	ld b, $0
+.asm_f8ab
+	inc b
+	ld a, b
+	cp $5
+	ret z
+	ld a, [wd151]
+	dec a
+	jr nz, .asm_f8bd
+	ld a, [wMenuCursorY]
+	inc a
+	cp b
+	jr nz, .asm_f8c4
+.asm_f8bd
+	ld a, [hl]
+	and $c0
+	ld a, [de]
+	call nz, Functionf8c8
+.asm_f8c4
+	inc hl
+	inc de
+	jr .asm_f8ab
+
+Functionf8c8: ; f8c8 (3:78c8)
+	push bc
+	ld a, [de]
+	ld [hPrintNum4], a
+	xor a
+	ld [hPastLeadingZeroes], a
+	ld [hQuotient], a
+	ld [hPrintNum3], a
+	ld a, $5
+	ld [hRemainder], a
+	ld b, $4
+	call Divide
+	ld a, [hl]
+	ld b, a
+	swap a
+	and $f
+	srl a
+	srl a
+	ld c, a
+	and a
+	jr z, .asm_f8fd
+.asm_f8ea
+	ld a, [hPrintNum4]
+	cp $8
+	jr c, .asm_f8f2
+	ld a, $7
+.asm_f8f2
+	add b
+	ld b, a
+	ld a, [wd151]
+	dec a
+	jr z, .asm_f8fd
+	dec c
+	jr nz, .asm_f8ea
+.asm_f8fd
+	ld [hl], b
+	pop bc
+	ret
+
+Functionf900: ; f900 (3:7900)
+	ld a, $17
+	call GetPartyParamLocation
+	push hl
+	ld a, $2
+	call GetPartyParamLocation
+	pop de
+	xor a
+	ld [wMenuCursorY], a
+	ld [wMonType], a
+	ld c, $4
+.asm_f915
+	ld a, [hli]
+	and a
+	ret z
+	push hl
+	push de
+	push bc
+	call GetMaxPPOfMove
+	pop bc
+	pop de
+	ld a, [de]
+	and $c0
+	ld b, a
+	ld a, [wd151]
+	add b
+	ld [de], a
+	inc de
+	ld hl, wMenuCursorY
+	inc [hl]
+	pop hl
+	dec c
+	jr nz, .asm_f915
+	ret
+
+GetMaxPPOfMove: ; f933 (3:7933)
+	ld a, [wStringBuffer1]
+	push af
+	ld a, [wStringBuffer1 + 1]
+	push af
+	ld a, [wMonType]
+	and a
+	ld hl, wPartyMon1Moves
+	ld bc, $30
+	jr z, .asm_f961
+	ld hl, wOTPartyMon1Moves
+	dec a
+	jr z, .asm_f961
+	ld hl, wTempMonMoves
+	dec a
+	jr z, .asm_f95c
+	ld hl, wTempMonMoves
+	dec a
+	jr z, .asm_f95c
+	ld hl, wBattleMonMoves
+.asm_f95c
+	call Functionf9b0
+	jr .asm_f964
+
+.asm_f961
+	call Functionf9aa
+.asm_f964
+	ld a, [hl]
+	dec a
+	push hl
+	ld hl, Moves + MOVE_PP
+	ld bc, $7
+	call AddNTimes
+	ld a, BANK(Moves)
+	call GetFarByte
+	ld b, a
+	ld de, wStringBuffer1
+	ld [de], a
+	pop hl
+	push bc
+	ld bc, $15
+	ld a, [wMonType]
+	cp $4
+	jr nz, .asm_f989
+	ld bc, $6
+.asm_f989
+	add hl, bc
+	ld a, [hl]
+	and $c0
+	pop bc
+	or b
+	ld hl, wStringBuffer1 + 1
+	ld [hl], a
+	xor a
+	ld [wd151], a
+	ld a, b
+	call Functionf8c8
+	ld a, [hl]
+	and $3f
+	ld [wd151], a
+	pop af
+	ld [wStringBuffer1 + 1], a
+.asm_f9a3
+	pop af
+	ld [wStringBuffer1], a
+	ret
+
+Functionf9aa: ; f9aa (3:79aa)
+	ld a, [wd005]
+	call AddNTimes
+Functionf9b0: ; f9b0 (3:79b0)
+	ld a, [wMenuCursorY]
+	ld c, a
+	ld b, $0
+	add hl, bc
+	ret
+
+GetPokeballWobble:
+	ld a, [wBuffer2]
+	inc a
+	ld [wBuffer2], a
+	cp $4
+	jr z, .asm_f9e3
+	ld a, [wWildMon]
+	and a
+	ld c, $0
+	ret nz
+	ld hl, PokeballWobbleProbabilities
+	ld a, [wCurHPAnimMaxHP]
+	ld b, a
+.asm_f9d1
+	ld a, [hli]
+	cp b
+	jr nc, .asm_f9d8
+	inc hl
+	jr .asm_f9d1
+
+.asm_f9d8
+	ld b, [hl]
+	call Random
+	cp b
+	ld c, $0
+	ret c
+	ld c, $2
+	ret
+
+.asm_f9e3
+	ld a, [wWildMon]
+	and a
+	ld c, $1
+	ret nz
+	ld c, $2
+	ret
+
+PokeballWobbleProbabilities:
+	db   1,  63
+	db   2,  75
+	db   3,  84
+	db   4,  90
+	db   5,  95
+	db   7, 103
+	db  10, 113
+	db  15, 126
+	db  20, 134
+	db  30, 149
+	db  40, 160
+	db  50, 169
+	db  60, 177
+	db  80, 191
+	db 100, 201
+	db 120, 211
+	db 140, 220
+	db 160, 227
+	db 180, 234
+	db 200, 240
+	db 220, 246
+	db 240, 251
+	db 254, 253
+	db 255, 255

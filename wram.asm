@@ -3574,7 +3574,7 @@ wLuckyNumberShowFlag:: ds 1 ; d9e7
 wd9e8:: ds 1 ; d9e8
 wd9e9:: ds 1 ; d9e9
 wd9ea:: ds 1 ; d9ea
-wd9eb:: ds 1 ; d9eb
+wRepelSteps:: ds 1 ; d9eb
 wd9ec:: ds 1 ; d9ec
 wd9ed:: ds 1 ; d9ed
 
