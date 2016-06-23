@@ -1566,7 +1566,7 @@ Text_NothingHereToFish:
 	text_jump Text_NothingHereToFish_
 	db "@"
 
-
+BicycleFunction:
 	call Functiond0c9
 	and $7f
 	ld [wFieldMoveSucceeded], a

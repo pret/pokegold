@@ -1,3 +1,12 @@
+b3dr: macro
+IF DEF(GOLD)
+INCBIN "baserom-gold.gbc", \1, \2 - \1
+ENDC
+IF DEF(SILVER)
+INCBIN "baserom-silver.gbc", \1 - 2, \2 - \1
+ENDC
+endm
+
 DoItemEffect_:: ; e7a6 (3:67a6)
 	ld a, [wd002]
 	ld [wd151], a
@@ -997,12 +1006,13 @@ ReturnToBattle_UseBall: ; ee4e (3:6e4e)
 	callba ReturnToBattle_UseBall_ ; 9:7307
 	ret
 
-IF DEF(GOLD)
-TownMap: ; ee55
-	dr $ee55, $ee5c
+TownMap: ; ee55 (3:6e55)
+	callba TownMap_ ; 24:5a4f
+	ret
 
 Bicycle: ; ee5c
-	dr $ee5c, $ee63
+	callba BicycleFunction ; same bank
+	ret
 
 FireStone: ; ee63
 LeafStone: ; ee63
@@ -1010,20 +1020,144 @@ MoonStone: ; ee63
 SunStone: ; ee63
 Thunderstone: ; ee63
 WaterStone: ; ee63
-	dr $ee63, $ee91
+	ld b, PARTYMENUACTION_EVO_STONE
+	call Functionf24f
+	jp c, .cancel
+	ld a, MON_ITEM
+	call GetPartyParamLocation
+	ld a, [hl]
+	cp EVERSTONE
+	jr z, .failed
+	ld a, $1
+	ld [wd0d2], a
+	callba EvolvePokemon ; 10:61db
+	ld a, [wd154]
+	and a
+	jr z, .failed
+	jp Functionf7dc
+
+.failed
+	call Functionf839
+.cancel
+	xor a
+	ld [wFieldMoveSucceeded], a
+	ret
+
 
 Calcium: ; ee91
 Carbos: ; ee91
 HPUp: ; ee91
 Iron: ; ee91
 Protein: ; ee91
-	dr $ee91, $ef68
+	ld b, PARTYMENUACTION_HEALING_ITEM
+	call Functionf24f
+	jp c, Functioneef3
+	call Functionef49
+	call Functionef2d
+	ld a, MON_STAT_EXP
+	call GetPartyParamLocation
+	add hl, bc
+	ld a, [hl]
+	cp 100
+	jr nc, .asm_eed7
+	add 10
+	ld [hl], a
+	call Functioneee0
+	call Functionef2d
+	ld hl, StatStrings
+	add hl, bc
+	ld a, [hli]
+	ld h, [hl]
+	ld l, a
+	ld de, wStringBuffer2
+	ld bc, ITEM_NAME_LENGTH
+	call CopyBytes
+	call Functionf7c7
+	ld hl, Text_StatRoseFromVitamin ; $6efa
+	call PrintText
+	ld c, HAPPINESS_USEDITEM
+	callba ChangeHappiness
+	jp Functionf7dc
+
+.asm_eed7
+	ld hl, Text_WontHaveAnyEffect ; $7866
+	call PrintText
+	jp ClearPalettes
+
+Functioneee0: ; eee0 (3:6ee0)
+	ld a, MON_MAXHP
+	call GetPartyParamLocation
+	ld d, h
+	ld e, l
+	ld a, MON_STAT_EXP - 1
+	call GetPartyParamLocation
+	ld b, $1
+	predef_jump CalcPkmnStats
+
+Functioneef3: ; eef3 (3:6ef3)
+	xor a
+	ld [wFieldMoveSucceeded], a
+	jp ClearPalettes
+
+Text_StatRoseFromVitamin:
+	text_jump Text_StatRoseFromVitamin_
+	db "@"
+
+StatStrings:
+	dw .health
+	dw .attack
+	dw .defense
+	dw .speed
+	dw .special
+
+.health  db "HEALTH@"
+.attack  db "ATTACK@"
+.defense db "DEFENSE@"
+.speed   db "SPEED@"
+.special db "SPECIAL@"
+
+Functionef2d: ; ef2d (3:6f2d)
+	ld a, [wd002]
+	ld hl, StatOffsets
+.asm_ef33
+	cp [hl]
+	inc hl
+	jr z, .asm_ef3a
+	inc hl
+	jr .asm_ef33
+
+.asm_ef3a
+	ld a, [hl]
+	ld c, a
+	ld b, $0
+	ret
+
+StatOffsets:
+	db HP_UP,    MON_HP_EXP - MON_STAT_EXP
+	db PROTEIN, MON_ATK_EXP - MON_STAT_EXP
+	db IRON,    MON_DEF_EXP - MON_STAT_EXP
+	db CARBOS,  MON_SPD_EXP - MON_STAT_EXP
+	db CALCIUM, MON_SPC_EXP - MON_STAT_EXP
+
+Functionef49: ; ef49 (3:6f49)
+	ld a, [wd004]
+	ld [wCurSpecies], a
+	ld [wd151], a
+	ld a, $1f
+	call GetPartyParamLocation
+	ld a, [hl]
+	ld [wCurPartyLevel], a
+	call GetBaseData
+	ld a, [wd005]
+	ld hl, wPartyMonNicknames
+	call GetNick
+	ret
 
 RareCandy: ; ef68
-	dr $ef68, $f003
+	b3dr $ef68, $f003
 
 HealPowder: ; f003
-	dr $f003, $f022
+	b3dr $f003, $f022
 
 Antidote: ; f022
 Awakening: ; f022
@@ -1037,20 +1171,20 @@ Miracleberry: ; f022
 ParlyzHeal: ; f022
 Przcureberry: ; f022
 Psncureberry: ; f022
-	dr $f022, $f0ff
+	b3dr $f022, $f0ff
 
 RevivalHerb: ; f0ff
-	dr $f0ff, $f11e
+	b3dr $f0ff, $f11e
 
 MaxRevive: ; f11e
 Revive: ; f11e
-	dr $f11e, $f17e
+	b3dr $f11e, $f17e
 
 FullRestore: ; f17e
-	dr $f17e, $f1c0
+	b3dr $f17e, $f1c0
 
 BitterBerry: ; f1c0
-	dr $f1c0, $f1dc
+	b3dr $f1c0, $f1dc
 
 Berry: ; f1dc
 BerryJuice: ; f1dc
@@ -1064,61 +1198,64 @@ Potion: ; f1dc
 Ragecandybar: ; f1dc
 SodaPop: ; f1dc
 SuperPotion: ; f1dc
-	dr $f1dc, $f1e2
+	b3dr $f1dc, $f1e2
 
 Energypowder: ; f1e2
-	dr $f1e2, $f1e6
+	b3dr $f1e2, $f1e6
 
 EnergyRoot: ; f1e6
-	dr $f1e6, $f4a5
+	b3dr $f1e6, $f24f
+
+Functionf24f:
+	b3dr $f24f, $f4a5
 
 EscapeRope: ; f4a5
-	dr $f4a5, $f4b8
+	b3dr $f4a5, $f4b8
 
 SuperRepel: ; f4b8
-	dr $f4b8, $f4bc
+	b3dr $f4b8, $f4bc
 
 MaxRepel: ; f4bc
-	dr $f4bc, $f4c0
+	b3dr $f4bc, $f4c0
 
 Repel: ; f4c0
-	dr $f4c0, $f4d8
+	b3dr $f4c0, $f4d8
 
 XAccuracy: ; f4d8
-	dr $f4d8, $f4e5
+	b3dr $f4d8, $f4e5
 
 PokeDoll: ; f4e5
-	dr $f4e5, $f4fb
+	b3dr $f4e5, $f4fb
 
 GuardSpec: ; f4fb
-	dr $f4fb, $f508
+	b3dr $f4fb, $f508
 
 DireHit: ; f508
-	dr $f508, $f515
+	b3dr $f508, $f515
 
 XAttack: ; f515
 XDefend: ; f515
 XSpecial: ; f515
 XSpeed: ; f515
-	dr $f515, $f55c
+	b3dr $f515, $f55c
 
 PokeFlute: ; f55c
-	dr $f55c, $f5e1
+	b3dr $f55c, $f5e1
 
 CoinCase: ; f5e1
-	dr $f5e1, $f5ec
+	b3dr $f5e1, $f5ec
 
 OldRod: ; f5ec
-	dr $f5ec, $f5f0
+	b3dr $f5ec, $f5f0
 
 GoodRod: ; f5f0
-	dr $f5f0, $f5f4
+	b3dr $f5f0, $f5f4
 
 SuperRod: ; f5f4
-	dr $f5f4, $f5ff
+	b3dr $f5f4, $f5ff
 
 Itemfinder: ; f5ff
-	dr $f5ff, $f606
+	b3dr $f5ff, $f606
 
 Elixer: ; f606
 Ether: ; f606
@@ -1126,25 +1263,25 @@ MaxElixer: ; f606
 MaxEther: ; f606
 Mysteryberry: ; f606
 PPUp: ; f606
-	dr $f606, $f785
+	b3dr $f606, $f785
 
 Squirtbottle: ; f785
-	dr $f785, $f78c
+	b3dr $f785, $f78c
 
 CardKey: ; f78c
-	dr $f78c, $f793
+	b3dr $f78c, $f793
 
 BasementKey: ; f793
-	dr $f793, $f79a
+	b3dr $f793, $f79a
 
 SacredAsh: ; f79a
-	dr $f79a, $f7aa
+	b3dr $f79a, $f7aa
 
 NormalBox: ; f7aa
-	dr $f7aa, $f7ae
+	b3dr $f7aa, $f7ae
 
 GorgeousBox: ; f7ae
-	dr $f7ae, $f7c4
+	b3dr $f7ae, $f7c4
 
 AmuletCoin: ; f7c4
 BerserkGene: ; f7c4
@@ -1237,266 +1374,25 @@ Twistedspoon: ; f7c4
 UpGrade: ; f7c4
 WhtApricorn: ; f7c4
 YlwApricorn: ; f7c4
-	dr $f7c4, $f7e7
+	b3dr $f7c4, $f7c7
+
+Functionf7c7:
+	b3dr $f7c7, $f7dc
+
+Functionf7dc:
+	b3dr $f7dc, $f7e7
 
 Functionf7e7:
-	dr $f7e7, $f823
+	b3dr $f7e7, $f823
 
 FailToUseBall:
-	dr $f823, $f884
+	b3dr $f823, $f839
+
+Functionf839:
+	b3dr $f839, $f866
+
+Text_WontHaveAnyEffect:
+	b3dr $f866, $f884
 
 Text_UsedItem:
-	dr $f884, $f900
-ENDC
-
-IF DEF(SILVER)
-TownMap ; ee53
-	dr $ee53, $ee5a
-
-Bicycle ; ee5a
-	dr $ee5a, $ee61
-
-FireStone ; ee61
-LeafStone ; ee61
-MoonStone ; ee61
-SunStone ; ee61
-Thunderstone ; ee61
-WaterStone ; ee61
-	dr $ee61, $ee8f
-
-Calcium ; ee8f
-Carbos ; ee8f
-HPUp ; ee8f
-Iron ; ee8f
-Protein ; ee8f
-	dr $ee8f, $ef66
-
-RareCandy ; ef66
-	dr $ef66, $f001
-
-HealPowder ; f001
-	dr $f001, $f020
-
-Antidote ; f020
-Awakening ; f020
-BurnHeal ; f020
-BurntBerry ; f020
-FullHeal ; f020
-IceBerry ; f020
-IceHeal ; f020
-MintBerry ; f020
-Miracleberry ; f020
-ParlyzHeal ; f020
-Przcureberry ; f020
-Psncureberry ; f020
-	dr $f020, $f0fd
-
-RevivalHerb ; f0fd
-	dr $f0fd, $f11c
-
-MaxRevive ; f11c
-Revive ; f11c
-	dr $f11c, $f17c
-
-FullRestore ; f17c
-	dr $f17c, $f1be
-
-BitterBerry ; f1be
-	dr $f1be, $f1da
-
-Berry ; f1da
-BerryJuice ; f1da
-FreshWater ; f1da
-GoldBerry ; f1da
-HyperPotion ; f1da
-Lemonade ; f1da
-MaxPotion ; f1da
-MoomooMilk ; f1da
-Potion ; f1da
-Ragecandybar ; f1da
-SodaPop ; f1da
-SuperPotion ; f1da
-	dr $f1da, $f1e0
-
-Energypowder ; f1e0
-	dr $f1e0, $f1e4
-
-EnergyRoot ; f1e4
-	dr $f1e4, $f4a3
-
-EscapeRope ; f4a3
-	dr $f4a3, $f4b6
-
-SuperRepel ; f4b6
-	dr $f4b6, $f4ba
-
-MaxRepel ; f4ba
-	dr $f4ba, $f4be
-
-Repel ; f4be
-	dr $f4be, $f4d6
-
-XAccuracy ; f4d6
-	dr $f4d6, $f4e3
-
-PokeDoll ; f4e3
-	dr $f4e3, $f4f9
-
-GuardSpec ; f4f9
-	dr $f4f9, $f506
-
-DireHit ; f506
-	dr $f506, $f513
-
-XAttack ; f513
-XDefend ; f513
-XSpecial ; f513
-XSpeed ; f513
-	dr $f513, $f55a
-
-PokeFlute ; f55a
-	dr $f55a, $f5df
-
-CoinCase ; f5df
-	dr $f5df, $f5ea
-
-OldRod ; f5ea
-	dr $f5ea, $f5ee
-
-GoodRod ; f5ee
-	dr $f5ee, $f5f2
-
-SuperRod ; f5f2
-	dr $f5f2, $f5fd
-
-Itemfinder ; f5fd
-	dr $f5fd, $f604
-
-Elixer ; f604
-Ether ; f604
-MaxElixer ; f604
-MaxEther ; f604
-Mysteryberry ; f604
-PPUp ; f604
-	dr $f604, $f783
-
-Squirtbottle ; f783
-	dr $f783, $f78a
-
-CardKey ; f78a
-	dr $f78a, $f791
-
-BasementKey ; f791
-	dr $f791, $f798
-
-SacredAsh ; f798
-	dr $f798, $f7a8
-
-NormalBox ; f7a8
-	dr $f7a8, $f7ac
-
-GorgeousBox ; f7ac
-	dr $f7ac, $f7c2
-
-AmuletCoin ; f7c2
-BerserkGene ; f7c2
-BigMushroom ; f7c2
-BigPearl ; f7c2
-Blackbelt ; f7c2
-Blackglasses ; f7c2
-BlkApricorn ; f7c2
-BluApricorn ; f7c2
-Brightpowder ; f7c2
-Charcoal ; f7c2
-CleanseTag ; f7c2
-DragonFang ; f7c2
-DragonScale ; f7c2
-Everstone ; f7c2
-ExpShare ; f7c2
-FlowerMail ; f7c2
-FocusBand ; f7c2
-GoldLeaf ; f7c2
-GrnApricorn ; f7c2
-HardStone ; f7c2
-Item19 ; f7c2
-Item2D ; f7c2
-Item32 ; f7c2
-Item47 ; f7c2
-Item5A ; f7c2
-Item64 ; f7c2
-Item73 ; f7c2
-Item74 ; f7c2
-Item78 ; f7c2
-Item81 ; f7c2
-Item87 ; f7c2
-Item88 ; f7c2
-Item89 ; f7c2
-Item8D ; f7c2
-Item8E ; f7c2
-Item91 ; f7c2
-Item93 ; f7c2
-Item94 ; f7c2
-Item95 ; f7c2
-Item99 ; f7c2
-Item9A ; f7c2
-Item9B ; f7c2
-ItemA2 ; f7c2
-ItemAB ; f7c2
-ItemB0 ; f7c2
-ItemB3 ; f7c2
-KingsRock ; f7c2
-Leftovers ; f7c2
-LightBall ; f7c2
-LostItem ; f7c2
-LuckyEgg ; f7c2
-LuckyPunch ; f7c2
-MachinePart ; f7c2
-Magnet ; f7c2
-MetalCoat ; f7c2
-MetalPowder ; f7c2
-MiracleSeed ; f7c2
-MysteryEgg ; f7c2
-MysticWater ; f7c2
-Nevermeltice ; f7c2
-Nugget ; f7c2
-Pass ; f7c2
-Pearl ; f7c2
-PinkBow ; f7c2
-PnkApricorn ; f7c2
-PoisonBarb ; f7c2
-PolkadotBow ; f7c2
-QuickClaw ; f7c2
-RainbowWing ; f7c2
-RedApricorn ; f7c2
-RedScale ; f7c2
-SSTicket ; f7c2
-ScopeLens ; f7c2
-Secretpotion ; f7c2
-SharpBeak ; f7c2
-SilverLeaf ; f7c2
-SilverWing ; f7c2
-Silverpowder ; f7c2
-Slowpoketail ; f7c2
-SmokeBall ; f7c2
-SoftSand ; f7c2
-SpellTag ; f7c2
-StarPiece ; f7c2
-Stardust ; f7c2
-Stick ; f7c2
-ThickClub ; f7c2
-Tinymushroom ; f7c2
-Twistedspoon ; f7c2
-UpGrade ; f7c2
-WhtApricorn ; f7c2
-YlwApricorn ; f7c2
-	dr $f7c2, $f7e5
-
-Functionf7e7:
-	dr $f7e5, $f821
-
-FailToUseBall:
-	dr $f821, $f882
-
-Text_UsedItem:
-	dr $f882, $f8fe
-ENDC
+	b3dr $f884, $f900

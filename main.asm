@@ -903,7 +903,10 @@ Function3f55d:
 SECTION "bank10", ROMX, BANK[$10]
 	dr $40000, $41afe
 Moves::
-	dr $41afe, $421e9
+	dr $41afe, $421db
+
+EvolvePokemon:
+	dr $421db, $421e9
 
 EvolveAfterBattle::
 	dr $421e9, $42483
@@ -1155,7 +1158,9 @@ PrintHour:
 Function9188a:
 	dr $9188a, $919c1
 Function919c1:
-	dr $919c1, $91c7f
+	dr $919c1, $91a4f
+TownMap_:
+	dr $91a4f, $91c7f
 
 Area_::
 	dr $91c7f, $92c36
@@ -1749,7 +1754,10 @@ Text_MonNewlyAddedToPokedex_::
 	dr $198499, $1984c4
 
 Text_AskNicknameNewlyCaughtMon_::
-	dr $1984c4, $19c000
+	dr $1984c4, $1984df
+
+Text_StatRoseFromVitamin_::
+	dr $1984df, $19c000
 
 SECTION "bank67", ROMX, BANK[$67]
 	dr $19c000, $1a0000
