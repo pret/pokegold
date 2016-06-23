@@ -849,7 +849,10 @@ SECTION "bankd", ROMX, BANK[$d]
 	dr $34000, $34923
 
 CheckTypeMatchup::
-	dr $34923, $37e9b
+	dr $34923, $366f6
+
+CalcPlayerStats:
+	dr $366f6, $37e9b
 
 GetItemHeldEffect:
 	dr $37e9b, $38000
@@ -1416,7 +1419,10 @@ Predef3A::
 
 SECTION "bank40", ROMX, BANK[$40]
 BattleText:: ; Not actually where it is, I just needed the label for BANK to work
-	dr $100000, $104000
+	dr $100000, $101746
+
+Text_ConfusedNoMore::
+	dr $101746, $104000
 
 SECTION "bank41", ROMX, BANK[$41]
 	dr $104000, $108000

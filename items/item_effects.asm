@@ -1059,7 +1059,7 @@ Protein: ; ee91
 	add hl, bc
 	ld a, [hl]
 	cp 100
-	jr nc, .asm_eed7
+	jr nc, Functioneed7
 	add 10
 	ld [hl], a
 	call Functioneee0
@@ -1079,7 +1079,7 @@ Protein: ; ee91
 	callba ChangeHappiness
 	jp Functionf7dc
 
-.asm_eed7
+Functioneed7:
 	ld hl, Text_WontHaveAnyEffect ; $7866
 	call PrintText
 	jp ClearPalettes
@@ -1153,11 +1153,92 @@ Functionef49: ; ef49 (3:6f49)
 	call GetNick
 	ret
 
-RareCandy: ; ef68
-	b3dr $ef68, $f003
+RareCandy: ; ef68 (3:6f68)
+	ld b, PARTYMENUACTION_HEALING_ITEM
+	call Functionf24f
+	jp c, Functioneef3
+	call Functionef49
+	ld a, MON_LEVEL
+	call GetPartyParamLocation
+	ld a, [hl]
+	cp MAX_LEVEL
+	jp nc, Functioneed7
+	inc a
+	ld [hl], a
+	ld [wCurPartyLevel], a
+	push de
+	ld d, a
+	callba CalcExpAtLevel
+	pop de
+	ld a, $8
+	call GetPartyParamLocation
+	ld a, [hQuotient]
+	ld [hli], a
+	ld a, [hPrintNum3]
+	ld [hli], a
+	ld a, [hPrintNum4]
+	ld [hl], a
+	ld a, $24
+	call GetPartyParamLocation
+	ld a, [hli]
+	ld b, a
+	ld c, [hl]
+	push bc
+	call Functioneee0
+	ld a, $25
+	call GetPartyParamLocation
+	pop bc
+	ld a, [hld]
+	sub c
+	ld c, a
+	ld a, [hl]
+	sbc b
+	ld b, a
+	dec hl
+	ld a, [hl]
+	add c
+	ld [hld], a
+	ld a, [hl]
+	adc b
+	ld [hl], a
+	ld c, $1
+	callba ChangeHappiness
+	ld a, PARTYMENUTEXT_LEVEL_UP
+	call Functionf2a0
+	xor a
+	ld [wMonType], a
+	predef CopyPkmnToTempMon
+	hlcoord 9, 0
+	ld b, 10
+	ld c, 9
+	call TextBox
+	hlcoord 11, 1
+	ld bc, $4
+	predef PrintTempMonStats
+	call WaitPressAorB_BlinkCursor
+	xor a
+	ld [wMonType], a
+	ld a, [wd004]
+	ld [wd151], a
+	predef LearnLevelMoves
+	xor a
+	ld [wd0d2], a
+	callba EvolvePokemon
+	jp Functionf7dc
 
-HealPowder: ; f003
-	b3dr $f003, $f022
+HealPowder: ; f003 (3:7003)
+	ld b, $1
+	call Functionf24f
+	jp c, Functionf2f4
+	call Functionf030
+	cp $0
+	jr nz, .asm_f01f
+	ld c, $f
+	callba ChangeHappiness
+	call Functionf81d
+	ld a, $0
+.asm_f01f
+	jp Functionf0f4
 
 Antidote: ; f022
 Awakening: ; f022
@@ -1171,20 +1252,245 @@ Miracleberry: ; f022
 ParlyzHeal: ; f022
 Przcureberry: ; f022
 Psncureberry: ; f022
-	b3dr $f022, $f0ff
+	ld b, $1
+	call Functionf24f
+	jp c, Functionf2f4
+Functionf02a:
+	call Functionf030
+	jp Functionf0f4
+
+Functionf030: ; f030 (3:7030)
+	call Functionf363
+	ld a, $1
+	ret z
+	call Functionf0ae
+	ld a, MON_STATUS
+	call GetPartyParamLocation
+	ld a, [hl]
+	and c
+	jr nz, .asm_f04a
+	call Functionf05f
+	ld a, $1
+	ret nc
+	ld b, PARTYMENUTEXT_HEAL_CONFUSION
+.asm_f04a
+	xor a
+	ld [hl], a
+	ld a, b
+	ld [wd03e], a
+	call Functionf086
+	call Functionf7c7
+	call Functionf2cf
+	call Functionf7dc
+	ld a, $0
+	ret
+
+Functionf05f: ; f05f (3:705f)
+	call Functionf2fc
+	jr nc, .asm_f072
+	ld a, [wPlayerSubStatus3]
+	bit SUBSTATUS_CONFUSED, a
+	jr z, .asm_f072
+	ld a, c
+	cp $ff
+	jr nz, .asm_f072
+	scf
+	ret
+
+.asm_f072
+	and a
+	ret
+
+RestoreBattlemonHP:
+	call Functionf2fc
+	ret nc
+	ld a, $22
+	call GetPartyParamLocation
+	ld a, [hli]
+	ld [wBattleMonHP], a
+	ld a, [hld]
+	ld [wBattleMonHP + 1], a
+	ret
+
+Functionf086: ; f086 (3:7086)
+	call Functionf2fc
+	ret nc
+	xor a
+	ld [wBattleMonStatus], a
+	ld hl, wPlayerSubStatus5
+	res 0, [hl]
+	ld hl, wPlayerSubStatus1
+	res 0, [hl]
+	call Functionf0ae
+	ld a, c
+	cp $ff
+	jr nz, .asm_f0a5
+	ld hl, wPlayerSubStatus3
+	res 7, [hl]
+.asm_f0a5
+	push bc
+	callba CalcPlayerStats ; d:66f6
+	pop bc
+	ret
+
+Functionf0ae: ; f0ae (3:70ae)
+	push hl
+	ld a, [wd002]
+	ld hl, .healingactions ; $70c7
+	ld bc, $3
+.asm_f0b8
+	cp [hl]
+	jr z, .asm_f0be
+	add hl, bc
+	jr .asm_f0b8
+
+.asm_f0be
+	inc hl
+	ld b, [hl]
+	inc hl
+	ld a, [hl]
+	ld c, a
+	cp $ff
+	pop hl
+	ret
+
+.healingactions
+	db ANTIDOTE,     PARTYMENUTEXT_HEAL_PSN, 1 << PSN
+	db BURN_HEAL,    PARTYMENUTEXT_HEAL_BRN, 1 << BRN
+	db ICE_HEAL,     PARTYMENUTEXT_HEAL_FRZ, 1 << FRZ
+	db AWAKENING,    PARTYMENUTEXT_HEAL_SLP, SLP
+	db PARLYZ_HEAL,  PARTYMENUTEXT_HEAL_PAR, 1 << PAR
+	db FULL_HEAL,    PARTYMENUTEXT_HEAL_ALL, %11111111
+	db FULL_RESTORE, PARTYMENUTEXT_HEAL_ALL, %11111111
+	db HEAL_POWDER,  PARTYMENUTEXT_HEAL_ALL, %11111111
+	db PSNCUREBERRY, PARTYMENUTEXT_HEAL_PSN, 1 << PSN
+	db PRZCUREBERRY, PARTYMENUTEXT_HEAL_PAR, 1 << PAR
+	db BURNT_BERRY,  PARTYMENUTEXT_HEAL_FRZ, 1 << FRZ
+	db ICE_BERRY,    PARTYMENUTEXT_HEAL_BRN, 1 << BRN
+	db MINT_BERRY,   PARTYMENUTEXT_HEAL_SLP, SLP
+	db MIRACLEBERRY, PARTYMENUTEXT_HEAL_ALL, %11111111
+	db -1, 0, 0
+
+Functionf0f4: ; f0f4 (3:70f4)
+	ld hl, .Jumptable ; $70f9
+	rst JumpTable
+	ret
+
+.Jumptable:
+	dw Functionf2f8
+	dw Functionf2ef
+	dw Functionf2f4
 
 RevivalHerb: ; f0ff
-	b3dr $f0ff, $f11e
+	ld b, $1
+	call Functionf24f
+	jp c, Functionf2f4
+	call Functionf12c
+	cp $0
+	jr nz, .asm_f11b
+	ld c, $11
+	callba ChangeHappiness
+	call Functionf81d
+	ld a, $0
+.asm_f11b
+	jp Functionf0f4
 
 MaxRevive: ; f11e
 Revive: ; f11e
-	b3dr $f11e, $f17e
+	ld b, $1
+	call Functionf24f
+	jp c, Functionf2f4
+	call Functionf12c
+	jp Functionf0f4
 
-FullRestore: ; f17e
-	b3dr $f17e, $f1c0
+Functionf12c: ; f12c (3:712c)
+	call Functionf363
+	ld a, $1
+	ret nz
+	ld a, [wBattleMode]
+	and a
+	jr z, .asm_f15a
+	ld a, [wd005]
+	ld c, a
+	ld d, $0
+	ld hl, wcbda
+	ld b, CHECK_FLAG
+	predef FlagPredef
+	ld a, c
+	and a
+	jr z, .asm_f15a
+	ld a, [wd005]
+	ld c, a
+	ld hl, wcb42
+	ld b, SET_FLAG
+	predef FlagPredef
+.asm_f15a
+	xor a
+	ld [wDanger], a
+	ld a, [wd002]
+	cp REVIVE
+	jr z, .asm_f16a
+	call Functionf319
+	jr .asm_f16d
+
+.asm_f16a
+	call Functionf310
+.asm_f16d
+	call Functionf231
+	ld a, $f7
+	ld [wd03e], a
+	call Functionf2cf
+	call Functionf7dc
+	ld a, $0
+	ret
+
+FullRestore: ; f17e (3:717e)
+	ld b, $1
+	call Functionf24f
+	jp c, Functionf2f4
+	call Functionf363
+	jp z, Functionf2ef
+	call Functionf371
+	jr c, .asm_f194
+	jp Functionf02a
+
+.asm_f194
+	call Functionf19a
+	jp Functionf0f4
+
+Functionf19a: ; f19a (3:719a)
+	xor a
+	ld [wDanger], a
+	call Functionf319
+	ld a, $20
+	call GetPartyParamLocation
+	xor a
+	ld [hli], a
+	ld [hl], a
+	call Functionf086
+	call RestoreBattlemonHP
+	call Functionf231
+	ld a, $f5
+	ld [wd03e], a
+	call Functionf2cf
+	call Functionf7dc
+	ld a, $0
+	ret
 
 BitterBerry: ; f1c0
-	b3dr $f1c0, $f1dc
+	ld hl, wPlayerSubStatus3
+	bit 7, [hl]
+	ld a, $1
+	jr z, .asm_f1d9
+	res 7, [hl]
+	xor a
+	ld [hBattleTurn], a
+	call Functionf7d0
+	ld hl, Text_ConfusedNoMore ; $5746
+	call StdBattleTextBox
+	ld a, $0
+.asm_f1d9
+	jp Functionf0f4
 
 Berry: ; f1dc
 BerryJuice: ; f1dc
@@ -1198,16 +1504,65 @@ Potion: ; f1dc
 Ragecandybar: ; f1dc
 SodaPop: ; f1dc
 SuperPotion: ; f1dc
-	b3dr $f1dc, $f1e2
+	call Functionf1ff
+	jp Functionf0f4
 
-Energypowder: ; f1e2
-	b3dr $f1e2, $f1e6
+Energypowder: ; f1e2 (3:71e2)
+	ld c, $f
+	jr asm_f1e8
 
-EnergyRoot: ; f1e6
-	b3dr $f1e6, $f24f
+EnergyRoot: ; f1e6 (3:71e6)
+	ld c, $10
+asm_f1e8
+	push bc
+	call Functionf1ff
+	pop bc
+	cp $0
+	jr nz, .asm_f1fc
+	callba ChangeHappiness
+	call Functionf81d
+	ld a, $0
+.asm_f1fc
+	jp Functionf0f4
+
+Functionf1ff:
+	b3dr $f1ff, $f231
+
+Functionf231:
+	b3dr $f231, $f24f
 
 Functionf24f:
-	b3dr $f24f, $f4a5
+	b3dr $f24f, $f2a0
+
+Functionf2a0:
+	b3dr $f2a0, $f2cf
+
+Functionf2cf:
+	b3dr $f2cf, $f2ef
+
+Functionf2ef:
+	b3dr $f2ef, $f2f4
+
+Functionf2f4:
+	b3dr $f2f4, $f2f8
+
+Functionf2f8:
+	b3dr $f2f8, $f2fc
+
+Functionf2fc:
+	b3dr $f2fc, $f310
+
+Functionf310:
+	b3dr $f310, $f319
+
+Functionf319:
+	b3dr $f319, $f363
+
+Functionf363:
+	b3dr $f363, $f371
+
+Functionf371:
+	b3dr $f371, $f4a5
 
 EscapeRope: ; f4a5
 	b3dr $f4a5, $f4b8
@@ -1377,13 +1732,19 @@ YlwApricorn: ; f7c4
 	b3dr $f7c4, $f7c7
 
 Functionf7c7:
-	b3dr $f7c7, $f7dc
+	b3dr $f7c7, $f7d0
+
+Functionf7d0:
+	b3dr $f7d0, $f7dc
 
 Functionf7dc:
 	b3dr $f7dc, $f7e7
 
 Functionf7e7:
-	b3dr $f7e7, $f823
+	b3dr $f7e7, $f81d
+
+Functionf81d:
+	b3dr $f81d, $f823
 
 FailToUseBall:
 	b3dr $f823, $f839
