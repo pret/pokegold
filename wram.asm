@@ -3869,6 +3869,24 @@ wOTPartyCount:: ds 1 ; dd55
 wOTPartySpecies:: ds PARTY_LENGTH ; dd56
 wOTPartySpeciesEnd:: ds 1 ; dd5c
 
+; The tutorial pack uses the OT party space.
+; It's placed here rather than at wOTPartyCount
+; to avoid confusing the game.
+wDudePack::
+wDudeNumItems:: ds 1 ; dd5d
+wDudeItems:: ds 2 * 4 ; dd5e
+wDudeItemsEnd:: ds 1 ; dd66
+
+wDudeNumKeyItems:: ds 1 ; dd67
+wDudeKeyItems:: ds 18 ; dd68
+wDudeKeyItemsEnd:: ds 1 ; dd7a
+
+wDudeNumBalls:: ds 1 ; dd7b
+wDudeBalls:: ds 2 * 4 ; dd7c
+wDudeBallsEnd:: ds 1 ; dd84
+wDudePackEnd::
+	ds wDudePack - @
+
 wOTPartyMons::
 wOTPartyMon1:: party_struct wOTPartyMon1 ; dd5d
 wOTPartyMon2:: party_struct wOTPartyMon2 ; dd8d

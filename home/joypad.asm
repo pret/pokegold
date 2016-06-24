@@ -287,7 +287,7 @@ JoyWaitInput:: ; a77 (0:0a77)
 	ld a, [wInputType]
 	or a
 	jr z, .wait_loop
-	callba _DudeAutoInput_A
+	callba DudeAutoInput_A
 
 .wait_loop
 	call JoyBlinkCursor

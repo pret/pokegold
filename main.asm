@@ -635,9 +635,8 @@ Text_KnowsMove:
 SECTION "bank4", ROMX, BANK[$4]
 
 INCLUDE "engine/player_movement.asm"
+INCLUDE "engine/pack.asm"
 
-Function10430:
-	dr $10430, $117f1
 InitializeStartDay_:
 	dr $117f1, $118f8
 Function118f8:
@@ -667,7 +666,9 @@ ItemfinderFunction:
 	dr $12947, $12e33
 
 PartyMonItemName::
-	dr $12e33, $1399d
+	dr $12e33, $12fa0
+Function12fa0:
+	dr $12fa0, $1399d
 Function1399d:
 	dr $1399d, $13a5f
 Function13a5f:
@@ -768,11 +769,19 @@ PushWindow_::
 ExitMenu_::
 	dr $24307, $24395
 InitVerticalMenuCursor_::
-	dr $24395, $244d7
+	dr $24395, $243eb
+UpdateItemDescription:
+	dr $243eb, $244d7
 InitScrollingMenu::
 	dr $244d7, $244f3
 ScrollingMenu_::
-	dr $244f3, $24a10
+	dr $244f3, $24834
+SwitchItemsInBag:
+	dr $24834, $249dc
+PlaceMenuItemName:
+	dr $249dc, $249eb
+PlaceMenuItemQuantity:
+	dr $249eb, $24a10
 Function24a10:
 	dr $24a10, $24a4d
 Function24a4d:
@@ -780,7 +789,9 @@ Function24a4d:
 Function24a76:
 	dr $24a76, $24b8d
 Function24b8d:
-	dr $24b8d, $267ca
+	dr $24b8d, $24f20
+SelectQuantityToToss:
+	dr $24f20, $267ca
 Function267ca:
 	dr $267ca, $2692d
 InitDecorations: ; 2692d
@@ -859,7 +870,19 @@ Function2aab3:
 SECTION "bankb", ROMX, BANK[$b]
 	dr $2c000, $2c352
 Function2c352:
-	dr $2c352, $2c943
+	dr $2c352, $2c57a
+
+Pack_TMHMPocketMenu_:
+	dr $2c57a, $2c5ca
+
+AskTeachTMHM:
+	dr $2c5ca, $2c606
+
+ChooseMonToLearnTMHM:
+	dr $2c606, $2c672
+
+TeachTMHM:
+	dr $2c672, $2c943
 
 PrintMoveDesc::
 	dr $2c943, $30000
@@ -1716,7 +1739,43 @@ Text_AskCut_::
 	dr $1943a1, $1943c9
 
 Text_MonCanCutThis_::
-	dr $1943c9, $194953
+	dr $1943c9, $194543
+
+Text_AnEggCantHoldAnItem_::
+	dr $194543, $19455e
+
+Text_PackNoItems_::
+	dr $19455e, $194569
+
+Text_ThrowAwayHowMany_::
+	dr $194569, $19457f
+
+Text_ConfirmThrowAway_::
+	dr $19457f, $19459c
+
+Text_ThrewAway_::
+	dr $19459c, $1945b2
+
+Text_ThisIsntTheTime_::
+	dr $1945b2, $1945db
+
+Text_YouDontHaveAPokemon_::
+	dr $1945db, $1945f2
+
+Text_RegisteredTheItem_::
+	dr $1945f2, $194609
+
+Text_CantRegisterThatItem_::
+	dr $194609, $194627
+
+Text_MoveItemWhere_::
+	dr $194627, $194647
+
+Text_PackEmptyString_::
+	dr $194647, $194649
+
+Text_CantUseItInABattle_::
+	dr $194649, $194953
 
 Text_WasSentToBillsPC_::
 	dr $194953, $19496e
@@ -1950,8 +2009,11 @@ SECTION "bank70", ROMX, BANK[$70]
 	dr $1c0000, $1c0a66
 UpdateTimePredef::
 	dr $1c0a66, $1c0de9
-_DudeAutoInput_A::
-	dr $1c0de9, $1c4000
+DudeAutoInput_A::
+	dr $1c0de9, $1c0dee
+
+DudeAutoInput_RightA::
+	dr $1c0dee, $1c4000
 
 SECTION "bank71", ROMX, BANK[$71]
 	dr $1c4000, $1c8000

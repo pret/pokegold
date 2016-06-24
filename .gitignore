@@ -34,3 +34,8 @@ pokecrystal.txt
 # swap files for gedit
 *~
 
+# compiled graphics
+*.2bpp
+*.lz
+*.1bpp
+
