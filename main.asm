@@ -638,11 +638,8 @@ INCLUDE "engine/player_movement.asm"
 INCLUDE "engine/pack.asm"
 INCLUDE "engine/time.asm"
 INCLUDE "engine/learn_tm.asm"
+INCLUDE "engine/namingscreen.asm"
 
-NamingScreen_:
-	dr $11aa3, $11aad
-NamingScreen:
-	dr $11aad, $1269a
 AbortBugCatchingContest::
 	dr $1269a, $126fd
 Function126fd:
@@ -1210,7 +1207,10 @@ Function8ce7c:
 	dr $8ce7c, $8d174
 
 ClearAnimatedObjectBuffer:
-	dr $8d174, $8d18a
+	dr $8d174, $8d183
+
+AnimatedObjects_PlayFrameAndDelay:
+	dr $8d183, $8d18a
 
 AnimatedObjects_PlayFrame:
 	dr $8d18a, $8d1f7
@@ -1219,7 +1219,20 @@ InitAnimatedObjectStruct_:: ; 8d1f7
 	dr $8d1f7, $8d332
 
 ReinitAnimatedObjectFrame_:: ; 8d332
-	dr $8d332, $90000
+
+IF DEF(GOLD)
+	dr $8d332, $8e79f
+
+LoadMenuMonIcon::
+	dr $8e79f, $90000
+ENDC
+
+IF DEF(SILVER)
+	dr $8d332, $8e785
+
+LoadMenuMonIcon::
+	dr $8e785, $90000
+ENDC
 
 SECTION "bank24", ROMX, BANK[$24]
 	dr $90000, $90641
@@ -1325,8 +1338,14 @@ SECTION "bank2f", ROMX, BANK[$2f]
 	dr $bc000, $c0000
 
 SECTION "bank30", ROMX, BANK[$30]
-PlayerIcon:
-	dr $c0000, $c4000
+PlayerSpriteGFX:
+	dr $c0000, $c03c0
+
+SilverSpriteGFX:
+	dr $c03c0, $c0fc0
+
+MomSpriteGFX:
+	dr $c0fc0, $c4000
 
 SECTION "bank31", ROMX, BANK[$31]
 	dr $c4000, $c7a40

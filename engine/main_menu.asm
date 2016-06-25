@@ -1062,8 +1062,8 @@ ShrinkFrame: ; 61f7 (1:61f7)
 	ret
 
 Intro_PlacePlayerSprite: ; 6210 (1:6210)
-	ld de, PlayerIcon
-	lb bc, BANK(PlayerIcon), 12
+	ld de, PlayerSpriteGFX
+	lb bc, BANK(PlayerSpriteGFX), 12
 	ld hl, $8000
 	call Request2bpp
 	ld hl, wOAMBuffer

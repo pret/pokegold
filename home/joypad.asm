@@ -1,5 +1,7 @@
 JoypadInt:: ; 8df (0:08df)
 	reti
+
+ClearJoypad::
 	xor a
 	ld [hJoyPressed], a
 	ld [hJoyDown], a

@@ -258,11 +258,10 @@ wc5cc:: ds 1 ; c5cc
 wc5cd:: ds 1 ; c5cd
 wc5ce:: ds 1 ; c5ce
 wc5cf:: ds 1 ; c5cf
-wc5d0:: ds 1 ; c5d0
-wc5d1:: ds 1 ; c5d1
+wNamingScreenDestinationPointer:: dw ; c5d0
 wc5d2:: ds 1 ; c5d2
 wc5d3:: ds 1 ; c5d3
-wc5d4:: ds 1 ; c5d4
+wNamingScreenType:: ds 1 ; c5d4
 wc5d5:: ds 1 ; c5d5
 wc5d6:: ds 1 ; c5d6
 wc5d7:: ds 1 ; c5d7
