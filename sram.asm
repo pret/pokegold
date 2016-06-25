@@ -1895,8 +1895,7 @@ s0_abf6:: ds 1 ; 0:abf6
 s0_abf7:: ds 1 ; 0:abf7
 s0_abf8:: ds 1 ; 0:abf8
 s0_abf9:: ds 1 ; 0:abf9
-s0_abfa:: ds 1 ; 0:abfa
-s0_abfb:: ds 1 ; 0:abfb
+sMysteryGiftTimer:: ds 2 ; 0:abfa
 s0_abfc:: ds 1 ; 0:abfc
 s0_abfd:: ds 1 ; 0:abfd
 s0_abfe:: ds 1 ; 0:abfe

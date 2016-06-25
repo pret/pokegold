@@ -636,17 +636,7 @@ SECTION "bank4", ROMX, BANK[$4]
 
 INCLUDE "engine/player_movement.asm"
 INCLUDE "engine/pack.asm"
-
-InitializeStartDay_:
-	dr $117f1, $118f8
-Function118f8:
-	dr $118f8, $11917
-Function11917:
-	dr $11917, $1192e
-Function1192e:
-	dr $1192e, $11934
-Function11934:
-	dr $11934, $11a25
+INCLUDE "engine/time.asm"
 
 CanLearnTMHMMove::
 	dr $11a25, $11a56
@@ -672,7 +662,9 @@ Function12fa0:
 Function1399d:
 	dr $1399d, $13a5f
 Function13a5f:
-	dr $13a5f, $13d64
+	dr $13a5f, $13d44
+ApplyPokerusTick:
+	dr $13d44, $13d64
 Function13d64:
 	dr $13d64, $13dce
 Function13dce:
@@ -855,7 +847,9 @@ Function29dff:
 MysteryGift_CopyReceivedDecosToPC:
 	dr $2a4bf, $2a4e7
 Function2a4e7:
-	dr $2a4e7, $2a7d7
+	dr $2a4e7, $2a4f6
+Function2a4f6:
+	dr $2a4f6, $2a7d7
 Function2a7d7:
 	dr $2a7d7, $2a8e0
 JumpRoamMons:

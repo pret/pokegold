@@ -2049,10 +2049,10 @@ wRequested1bpp:: ds 1 ; ce6c
 wRequested1bppSource:: dw ; ce6d
 wRequested1bppDest:: dw ; ce6f
 
-wce71:: ds 1 ; ce71
-wce72:: ds 1 ; ce72
-wce73:: ds 1 ; ce73
-wce74:: ds 1 ; ce74
+wSecsSince:: ds 1 ; ce71
+wMinsSince:: ds 1 ; ce72
+wHoursSince:: ds 1 ; ce73
+wDaysSince:: ds 1 ; ce74
 wce75:: ds 1 ; ce75
 wce76:: ds 1 ; ce76
 wce77:: ds 1 ; ce77
@@ -2698,16 +2698,16 @@ wd187:: ds 1 ; d187
 wd188:: ds 1 ; d188
 wd189:: ds 1 ; d189
 wd18a:: ds 1 ; d18a
-wd18b:: ds 1 ; d18b
-wd18c:: ds 1 ; d18c
-wd18d:: ds 1 ; d18d
+wTimeCyclesSinceLastCall:: ds 1 ; d18b
+wReceiveCallDelay_MinsRemaining:: ds 1 ; d18c
+wReceiveCallDelay_StartTime:: ds 1 ; d18d
 wd18e:: ds 1 ; d18e
 wd18f:: ds 1 ; d18f
 wd190:: ds 1 ; d190
 wd191:: ds 1 ; d191
 wd192:: ds 1 ; d192
 wBugContestMinsRemaining:: ds 1 ; d193
-wd194:: ds 1 ; d194
+wBugContestSecsRemaining:: ds 1 ; d194
 wd195:: ds 1 ; d195
 wd196:: ds 1 ; d196
 wd197:: ds 1 ; d197
@@ -3440,14 +3440,14 @@ wd962:: ds 1 ; d962
 
 wMomItemTriggerBalance:: ds 3 ; d963
 
-wd966:: ds 1 ; d966
+wDailyResetTimer:: ds 1 ; d966
 wd967:: ds 1 ; d967
 wDailyFlags:: ds 1 ; d968
 wWeeklyFlags:: ds 1 ; d969
 wd96a:: ds 1 ; d96a
 wd96b:: ds 1 ; d96b
 wd96c:: ds 1 ; d96c
-wd96d:: ds 1 ; d96d
+wStartDay:: ds 1 ; d96d
 wd96e:: ds 1 ; d96e
 wd96f:: ds 1 ; d96f
 wd970:: ds 1 ; d970
@@ -3457,7 +3457,7 @@ wd973:: ds 1 ; d973
 wd974:: ds 1 ; d974
 wd975:: ds 1 ; d975
 wd976:: ds 1 ; d976
-wd977:: ds 1 ; d977
+wLuckyNumberDayBuffer:: ds 1 ; d977
 wd978:: ds 1 ; d978
 wd979:: ds 1 ; d979
 wd97a:: ds 1 ; d97a
@@ -3465,13 +3465,13 @@ wSpecialPhoneCallID:: ds 1 ; d97b
 wd97c:: ds 1 ; d97c
 wd97d:: ds 1 ; d97d
 wd97e:: ds 1 ; d97e
-wd97f:: ds 1 ; d97f
+wBugContestStartTime:: ds 1 ; d97f
 wd980:: ds 1 ; d980
 wd981:: ds 1 ; d981
 wd982:: ds 1 ; d982
 wUnusedTwoDayTimerOn:: ds 1 ; d983
-wd984:: ds 1 ; d984
-wd985:: ds 1 ; d985
+wUnusedTwoDayTimer:: ds 1 ; d984
+wUnusedTwoDayTimerStartDate:: ds 1 ; d985
 wd986:: ds 1 ; d986
 wd987:: ds 1 ; d987
 wd988:: ds 1 ; d988

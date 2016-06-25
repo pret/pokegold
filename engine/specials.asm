@@ -388,7 +388,7 @@ Functionc53c: ; c53c (3:453c)
 
 Special_CheckUnusedTwoDayTimer: ; c549 (3:4549)
 	callba Function118f8
-	ld a, [wd984]
+	ld a, [wUnusedTwoDayTimer]
 	ld [wScriptVar], a
 	ret
 
