@@ -637,12 +637,8 @@ SECTION "bank4", ROMX, BANK[$4]
 INCLUDE "engine/player_movement.asm"
 INCLUDE "engine/pack.asm"
 INCLUDE "engine/time.asm"
+INCLUDE "engine/learn_tm.asm"
 
-CanLearnTMHMMove::
-	dr $11a25, $11a56
-
-GetTMHMMove::
-	dr $11a56, $11aa3
 NamingScreen_:
 	dr $11aa3, $11aad
 NamingScreen:
