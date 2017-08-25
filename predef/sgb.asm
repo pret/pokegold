@@ -18,7 +18,7 @@ Predef_LoadSGBLayout: ; 8c2d (2:4c2d)
 	ld l, a
 	ld de, FinishSGBPredefFunction
 	push de
-	jp [hl]
+	jp hl
 
 .Jumptable
 	dw Function8c90

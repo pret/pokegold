@@ -31,7 +31,7 @@ StartTitleScreen:
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
-	jp [hl]
+	jp hl
 
 .Jumptable
 	dw MainMenu_
@@ -271,7 +271,7 @@ Function640f: ; 640f (1:640f)
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
-	jp [hl]
+	jp hl
 
 .Jumptable
 	dw Function6426

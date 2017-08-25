@@ -4,12 +4,12 @@ INCLUDE "includes.asm"
 INCLUDE "rst.asm"
 INCLUDE "interrupts.asm"
 
-SECTION "start", HOME[$100]
+SECTION "start", ROM0[$100]
 Start::
 	nop
 	jp _Start
 
-SECTION "bank0", HOME[$150]
+SECTION "bank0", ROM0[$150]
 INCLUDE "home/vblank.asm"
 INCLUDE "home/delay.asm"
 INCLUDE "home/rtc.asm"
@@ -185,7 +185,7 @@ INCLUDE "home/random.asm"
 INCLUDE "home/sram.asm"
 
 jp_hl::
-	jp [hl]
+	jp hl
 
 jp_de::
 	push de

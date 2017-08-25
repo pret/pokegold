@@ -63,7 +63,7 @@ Function5006: ; 5006 (1:5006)
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
-	jp [hl]
+	jp hl
 
 Function500d: ; 500d (1:500d)
 	ld a, $1

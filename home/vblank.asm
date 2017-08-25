@@ -15,7 +15,7 @@ VBlank::
 	ld l, a
 	ld de, .return
 	push de
-	jp [hl]
+	jp hl
 .return
 	call GameTimer
 	pop hl

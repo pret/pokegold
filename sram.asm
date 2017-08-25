@@ -1,10 +1,10 @@
-SECTION "Scratch", SRAM, BANK[0]
+SECTION "Scratch", SRAM[$a000], BANK[0]
 sScratch:: ds $188 ; a000
 
-SECTION "Decompress Buffer", SRAM, BANK[0]
+SECTION "Decompress Buffer", SRAM[$a188], BANK[0]
 sDecompressBuffer:: ds 7 * 7 * $10 ; a188
 
-SECTION "SRAM0", SRAM, BANK[$0]
+SECTION "SRAM0", SRAM[$a498], BANK[$0]
 s0_a498:: ds 1 ; 0:a498
 s0_a499:: ds 1 ; 0:a499
 s0_a49a:: ds 1 ; 0:a49a
@@ -7021,7 +7021,7 @@ s0_bffd:: ds 1 ; 0:bffd
 s0_bffe:: ds 1 ; 0:bffe
 sWindowStackTop:: ds 1 ; 0:bfff
 
-SECTION "SRAM1", SRAM, BANK[$1]
+SECTION "SRAM1", SRAM[$a000], BANK[$1]
 s1_a000:: ds 1 ; 1:a000
 s1_a001:: ds 1 ; 1:a001
 s1_a002:: ds 1 ; 1:a002
@@ -10459,7 +10459,7 @@ s1_ad69:: ds 1 ; 1:ad69
 s1_ad6a:: ds 1 ; 1:ad6a
 s1_ad6b:: ds 1 ; 1:ad6b
 
-SECTION "Active Box", SRAM, BANK[1]
+SECTION "Active Box", SRAM[$ad6c], BANK[1]
 ; 1:ad6c
 	box sBox
 ; 1:b1bc
@@ -14117,7 +14117,7 @@ s1_bffd:: ds 1 ; 1:bffd
 s1_bffe:: ds 1 ; 1:bffe
 s1_bfff:: ds 1 ; 1:bfff
 
-SECTION "SRAM2", SRAM, BANK[$2]
+SECTION "SRAM2", SRAM[$a000], BANK[$2]
 	box sBox1
 	box sBox2
 	box sBox3
@@ -14126,7 +14126,7 @@ SECTION "SRAM2", SRAM, BANK[$2]
 	box sBox6
 	box sBox7
 
-SECTION "SRAM3", SRAM, BANK[$3]
+SECTION "SRAM3", SRAM[$a000], BANK[$3]
 	box sBox8
 	box sBox9
 	box sBox10

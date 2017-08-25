@@ -22,7 +22,7 @@ Function10456: ; 10456 (4:4456)
 	ld a, [wce63]
 	ld hl, .Jumptable ; $4460
 	call Function10c9b
-	jp [hl]
+	jp hl
 
 .Jumptable
 	dw Pack_InitGFX
@@ -141,7 +141,7 @@ Pack_TMHMPocketMenu:
 	ld a, [wMenuCursorY]
 	dec a
 	call Function10c9b
-	jp [hl]
+	jp hl
 
 TMHMPocketSubmenuDataHeader_NoGive:
 	db $40
@@ -294,7 +294,7 @@ Function105f5: ; 105f5 (4:45f5)
 	ld a, [wMenuCursorY]
 	dec a
 	call Function10c9b
-	jp [hl]
+	jp hl
 
 ItemSubmenuDataHeader_UseGiveTossSelQuit:
 	db $40 ; flags
@@ -639,7 +639,7 @@ Function108e9: ; 108e9 (4:48e9)
 	ld a, [wce63]
 	ld hl, .Jumptable
 	call Function10c9b
-	jp [hl]
+	jp hl
 
 .Jumptable
 	dw BattlePack_InitGFX
@@ -793,7 +793,7 @@ Function10a0c: ; 10a0c (4:4a0c)
 	ld a, [wMenuCursorY]
 	dec a
 	call Function10c9b
-	jp [hl]
+	jp hl
 
 BattlePackUseQuitMenuDataHeader:
 	db $40 ; flags
@@ -928,7 +928,7 @@ Function10af7: ; 10af7 (4:4af7)
 	ld a, [wce63]
 	ld hl, .Jumptable
 	call Function10c9b
-	jp [hl]
+	jp hl
 
 .Jumptable
 	dw DepositOrSell_ItemPocket
@@ -1071,7 +1071,7 @@ Function10c07: ; 10c07 (4:4c07)
 	ld a, [wce63]
 	ld hl, $4c11
 	call Function10c9b
-	jp [hl]
+	jp hl
 
 .Jumptable
 	dw TutorialItems

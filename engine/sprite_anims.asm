@@ -9,7 +9,7 @@ DoAnimFrame: ; 8d463
 	ld a, [hli] ; 23:546f
 	ld h, [hl] ; 23:5470
 	ld l, a ; 23:5471
-	jp [hl] ; 23:5472
+	jp hl ; 23:5472
 
 .Jumptable: ; 23:5473
 	dw Function8d4c7
@@ -166,7 +166,7 @@ Function8d54e: ; 8d54e
 
 Function8d55d: ; 8d55d
 	call Function8dbdd ; 23:555d
-	jp [hl] ; 23:5560
+	jp hl ; 23:5560
 	
 ; anonymous jumptable
 	dw Function8d565
@@ -236,7 +236,7 @@ Function8d5bb: ; 8d5bb
 
 Function8d5bf: ; 8d5bf
 	call Function8dbdd ; 23:55bf
-	jp [hl] ; 23:55c2
+	jp hl ; 23:55c2
 
 ; anonymous jumptable
 	dw Function8d5c9
@@ -310,7 +310,7 @@ Function8d60b: ; 8d60b
 
 Function8d623: ; 8d623
 	call Function8dbdd ; 23:5623
-	jp [hl] ; 23:5626
+	jp hl ; 23:5626
 
 ; anonymous jumptable
 	dw Function8d62b
@@ -359,7 +359,7 @@ Function8d667: ; 8d667
 
 Function8d66b: ; 8d66b
 	call Function8dbdd ; 23:566b
-	jp [hl] ; 23:566e
+	jp hl ; 23:566e
 
 ; anonymous jumptable
 	dw Function8d673
@@ -388,7 +388,7 @@ Function8d68c: ; 8d68c
 
 Function8d690: ; 8d690
 	call Function8dbdd ; 23:5690
-	jp [hl] ; 23:5693
+	jp hl ; 23:5693
 
 ; anonymous jumptable
 	dw Function8d69c
@@ -472,7 +472,7 @@ Function8d6fe: ; 8d6fe
 
 Function8d702: ; 8d702
 	call Function8dbdd ; 23:5702
-	jp [hl] ; 23:5705
+	jp hl ; 23:5705
 
 ; anonymous jumptable
 	dw Function8d70c
@@ -545,7 +545,7 @@ Function8d761: ; 8d761
 
 Function8d765: ; 8d765
 	call Function8dbdd ; 23:5765
-	jp [hl] ; 23:5768
+	jp hl ; 23:5768
 
 ; anonymous jumptable
 	dw Function8d76d
@@ -600,7 +600,7 @@ Function8d786: ; 8d786
 
 Function8d7b1: ; 8d7b1
 	call Function8dbdd ; 23:57b1
-	jp [hl] ; 23:57b4
+	jp hl ; 23:57b4
 
 ; anonymous jumptable
 	dw Function8d7b9
@@ -643,7 +643,7 @@ Function8d7c9: ; 8d7c9
 
 Function8d7ef: ; 8d7ef
 	call Function8dbdd ; 23:57ef
-	jp [hl] ; 23:57f2
+	jp hl ; 23:57f2
 
 ; anonymous jumptable
 	dw Function8d7f7
@@ -686,7 +686,7 @@ Function8d807: ; 8d807
 
 Function8d82d: ; 8d82d
 	call Function8dbdd ; 23:582d
-	jp [hl] ; 23:5830
+	jp hl ; 23:5830
 
 ; anonymous jumptable
 	dw Function8d835
@@ -784,7 +784,7 @@ Function8d8b8: ; 8d8b8
 
 Function8d8bf: ; 8d8bf
 	call Function8dbdd ; 23:58bf
-	jp [hl] ; 23:58c2
+	jp hl ; 23:58c2
 
 ; anonymous jumptable
 	dw Function8d8c7
@@ -1038,7 +1038,7 @@ Function8da2a: ; 8da2a
 
 Function8da31: ; 8da31
 	call Function8dbdd ; 23:5a31
-	jp [hl] ; 23:5a34
+	jp hl ; 23:5a34
 	ld b, c ; 23:5a35
 	ld e, d ; 23:5a36
 	add e ; 23:5a37

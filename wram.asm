@@ -1,7 +1,7 @@
 INCLUDE "includes.asm"
 INCLUDE "macros/wram.asm"
 
-SECTION "Audio", WRAM0
+SECTION "Audio", WRAM0[$c000]
 wc000::
 wMusic::
 wMusicPlaying:: ; c000
@@ -123,7 +123,7 @@ wMapMusic:: ; c1c0
 wDontPlayMapMusicOnReload:: ds 1
 wMusicEnd::
 
-SECTION "WRAM", WRAM0
+SECTION "WRAM", WRAM0[$c1c2]
 wLZAddress:: dw ; c1c2
 wLZBank:: ds 1 ; c1c4
 wc1c5:: ds 1 ; c1c5
@@ -185,7 +185,7 @@ wc1fd:: ds 1 ; c1fd
 wc1fe:: ds 1 ; c1fe
 wc1ff:: ds 1 ; c1ff
 
-SECTION "GBC Palettes", WRAM0
+SECTION "GBC Palettes", WRAM0[$c200]
 palbuffer: MACRO
 \1Pal0:: ds 8
 \1Pal1:: ds 8
@@ -202,16 +202,16 @@ wTempOBPals:: palbuffer wTempOB ; c240
 wBGPals::     palbuffer wBG     ; c280
 wOBPals::     palbuffer wOB     ; c2c0
 
-SECTION "OAM Buffer", WRAM0
+SECTION "OAM Buffer", WRAM0[$c300]
 wOAMBuffer:: ; c300
 	ds 4 * 40
 
-SECTION "TileMap", WRAM0
+SECTION "TileMap", WRAM0[$c3a0]
 wTileMap:: ; c3a0
 	ds SCREEN_HEIGHT * SCREEN_WIDTH
 wTileMapEnd:: ; c508
 
-SECTION "Animated Objects", WRAM0
+SECTION "Animated Objects", WRAM0[$c508]
 wMisc:: ; c508
 wTileMapBackup:: ; c508
 	; ds SCREEN_HEIGHT * SCREEN_WIDTH
@@ -1812,7 +1812,7 @@ wcc1d:: ds 1 ; cc1d
 wcc1e:: ds 1 ; cc1e
 wcc1f:: ds 1 ; cc1f
 
-SECTION "Video", WRAM0
+SECTION "Video", WRAM0[$cc20]
 wBGMapBuffer:: ds 1 ; cc20
 wcc21:: ds 1 ; cc21
 wcc22:: ds 1 ; cc22
@@ -2324,14 +2324,17 @@ wStringBuffer1:: ds 19 ; cf6b
 wStringBuffer2:: ds 19 ; cf7e
 wStringBuffer3:: ds 19 ; cf91
 wStringBuffer4:: ds 19 ; cfa4
+
+UNION
 wStringBuffer5:: ds 19 ; cfb7
-
-	ds -4
-
+NEXTU
+	ds 15
 wCurBattleMon:: ds 1 ; cfc6
 wcfc7:: ds 1 ; cfc7
 wcfc8:: ds 1 ; cfc8
 wPartyMenuCursor:: ds 1 ; cfc9
+ENDU
+
 wcfca:: ds 1 ; cfca
 wcfcb:: ds 1 ; cfcb
 wcfcc:: ds 1 ; cfcc
@@ -2384,7 +2387,7 @@ wcffd:: ds 1 ; cffd
 wcffe:: ds 1 ; cffe
 wcfff:: ds 1 ; cfff
 
-SECTION "WRAM1", WRAMX, BANK[$1]
+SECTION "WRAM1", WRAMX[$d000], BANK[$1]
 wd000:: ds 1 ; d000
 wd001:: ds 1 ; d001
 wd002:: ds 1 ; d002
@@ -2526,6 +2529,7 @@ wTilesetPalettes:: dw ; d0cf
 wd0d1:: ds 1 ; d0d1
 wd0d2:: ds 1 ; d0d2
 
+UNION
 wCurHPAnim::
 wCurHPAnimMaxHP::   dw ; d0d3
 wCurHPAnimOldHP::   dw ; d0d5
@@ -2537,7 +2541,7 @@ wCurHPAnimDeltaHP:: dw ; d0dc
 wCurHPAnimLowHP::   db ; d0de
 wCurHPAnimHighHP::  db ; d0df
 wCurHPAnimEnd::
-	ds wCurHPAnim - @
+NEXTU
 
 wBuffer1:: ds 1 ; d0d3
 wBuffer2:: ds 1 ; d0d4
@@ -2552,6 +2556,7 @@ wd0dc:: ds 1 ; d0dc
 wd0dd:: ds 1 ; d0dd
 wd0de:: ds 1 ; d0de
 wd0df:: ds 1 ; d0df
+ENDU
 wd0e0:: ds 1 ; d0e0
 wd0e1:: ds 1 ; d0e1
 wd0e2:: ds 1 ; d0e2
@@ -2643,7 +2648,7 @@ wd151:: ds 1 ; d151
 wd152:: ds 1 ; d152
 wd153:: ds 1 ; d153
 wd154:: ds 1 ; d154
-wROMBankBackup:: ds 1
+wROMBankBackup:: ds 1 ; d155
 wBuffer:: ds 1 ; d156
 wTimeOfDay:: ds 1 ; d157
 wd158:: ds 1 ; d158
@@ -2721,7 +2726,7 @@ wd19e:: ds 1 ; d19e
 wd19f:: ds 1 ; d19f
 wd1a0:: ds 1 ; d1a0
 
-SECTION "Game Data", WRAMX, BANK[1]
+SECTION "Game Data", WRAMX[$d1a1], BANK[1]
 wGameData::
 wPlayerID:: dw ; d1a1
 
@@ -3627,7 +3632,7 @@ wda1f:: ds 1 ; da1f
 wda20:: ds 1 ; da20
 wda21:: ds 1 ; da21
 
-SECTION "Party", WRAMX, BANK[1]
+SECTION "Party", WRAMX[$da22], BANK[1]
 
 wPokemonData::
 wPartyCount:: ds 1 ; da22
@@ -3862,7 +3867,7 @@ wdd52:: ds 1 ; dd52
 wdd53:: ds 1 ; dd53
 wdd54:: ds 1 ; dd54
 
-SECTION "OT Party", WRAMX, BANK[1]
+SECTION "OT Party", WRAMX[$dd55], BANK[1]
 
 wOTPartyCount:: ds 1 ; dd55
 wOTPartySpecies:: ds PARTY_LENGTH ; dd56
@@ -3871,6 +3876,8 @@ wOTPartySpeciesEnd:: ds 1 ; dd5c
 ; The tutorial pack uses the OT party space.
 ; It's placed here rather than at wOTPartyCount
 ; to avoid confusing the game.
+
+UNION
 wDudePack::
 wDudeNumItems:: ds 1 ; dd5d
 wDudeItems:: ds 2 * 4 ; dd5e
@@ -3884,7 +3891,7 @@ wDudeNumBalls:: ds 1 ; dd7b
 wDudeBalls:: ds 2 * 4 ; dd7c
 wDudeBallsEnd:: ds 1 ; dd84
 wDudePackEnd::
-	ds wDudePack - @
+NEXTU
 
 wOTPartyMons::
 wOTPartyMon1:: party_struct wOTPartyMon1 ; dd5d
@@ -3909,6 +3916,7 @@ wOTPartyMon3Nickname:: ds PKMN_NAME_LENGTH ; ded5
 wOTPartyMon4Nickname:: ds PKMN_NAME_LENGTH ; dee0
 wOTPartyMon5Nickname:: ds PKMN_NAME_LENGTH ; deeb
 wOTPartyMon6Nickname:: ds PKMN_NAME_LENGTH ; def6
+ENDU
 
 wGameDataEnd::
 

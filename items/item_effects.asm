@@ -253,7 +253,7 @@ UltraBall: ; e926
 	ld l, a
 	ld de, .skip_or_return_from_ball_fn
 	push de
-	jp [hl]
+	jp hl
 
 .skip_or_return_from_ball_fn
 	ld a, [wd002]

@@ -19,4 +19,4 @@ FarCall_hl:: ; 2e27 (0:2e27)
 	ret
 
 ._hl_
-	jp [hl]
+	jp hl

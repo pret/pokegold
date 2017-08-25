@@ -290,7 +290,7 @@ RunMenuItemPrintingFunction:: ; 1d44 (0:1d44)
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
-	jp [hl]
+	jp hl
 
 InitMenuCursorAndButtonPermissions:: ; 1d69 (0:1d69)
 	call InitVerticalMenuCursor
@@ -405,7 +405,7 @@ MenuJumptable::
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
-	jp [hl]
+	jp hl
 
 GetMenuDataPointerTableEntry:: ; 1e1b (0:1e1b)
 	ld e, a

@@ -22,7 +22,7 @@ Predef_LoadSGBLayoutCGB:
 	ld l, a
 	ld de, .return
 	push de
-	jp [hl]
+	jp hl
 
 .return
 	ret
@@ -444,7 +444,7 @@ Function96b7: ; 96b7 (2:56b7)
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
-	jp [hl]
+	jp hl
 
 .Jumptable:
 	dw Function96c8

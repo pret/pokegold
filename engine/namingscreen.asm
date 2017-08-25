@@ -64,7 +64,7 @@ Function11b09: ; 11b09 (4:5b09)
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
-	jp [hl]
+	jp hl
 
 .Jumptable
 	dw Function11b2a
@@ -338,7 +338,7 @@ Function11d27: ; 11d27 (4:5d27)
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
-	jp [hl]
+	jp hl
 
 .Jumptable:
 	dw Function11d3a
@@ -1046,7 +1046,7 @@ Function123d5: ; 123d5 (4:63d5)
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
-	jp [hl]
+	jp hl
 
 .Jumptable:
 	dw Function123e8

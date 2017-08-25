@@ -732,7 +732,7 @@ Text_TX_SCROLL:: ; 1342 (0:1342)
 	ret
 
 Text_TX_ASM:: ; 1351 (0:1351)
-	jp [hl]
+	jp hl
 
 Text_TX_NUM:: ; 1352 (0:1352)
 	ld a, [hli]
