@@ -4,12 +4,12 @@ INCLUDE "includes.asm"
 INCLUDE "rst.asm"
 INCLUDE "interrupts.asm"
 
-SECTION "start", ROM0[$100]
+SECTION "start", ROM0
 Start::
 	nop
 	jp _Start
 
-SECTION "bank0", ROM0[$150]
+SECTION "bank0", ROM0
 INCLUDE "home/vblank.asm"
 INCLUDE "home/delay.asm"
 INCLUDE "home/rtc.asm"
