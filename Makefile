@@ -1,5 +1,5 @@
 PYTHON := python
-MD5 := md5sum -c --quiet
+MD5 := md5sum -c
 
 .SUFFIXES:
 .PHONY: all clean gold silver pngs compare
