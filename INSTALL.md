@@ -6,9 +6,9 @@ If you run into trouble, ask on irc ([**freenode#pret**](https://kiwiirc.com/cli
 
 # NOTICE
 
-Currently building requires that you provide a base ROM for each version. You can find the md5 for each version in [README.md](README.md) to confirm you have the right one.
+Currently building requires that you provide a base ROM for both versions. You can find the md5 for each version in [README.md](README.md) to confirm you have the right one.
 
-You will need to rename the Gold ROM to **baserom-gold.gbc** and the Silver ROM to **baserom-silver.gbc** in order to build the respective version.
+You will need to rename the Gold ROM to **baserom-gold.gbc** and the Silver ROM to **baserom-silver.gbc** in order to build either version.
 
 
 # Linux
