@@ -4,7 +4,8 @@ MD5 := md5sum -c --quiet
 .SUFFIXES:
 .PHONY: all clean gold silver pngs compare
 .SECONDEXPANSION:
-.PRECIOUS: %.2bpp %.1bpp
+.PRECIOUS:
+.SECONDARY:
 
 gfx       := $(PYTHON) gfx.py
 includes  := $(PYTHON) scan_includes.py
