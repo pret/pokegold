@@ -33,12 +33,16 @@ compare: pokegold.gbc pokesilver.gbc
 
 %.asm: ;
 
-%_gold.o: dep = $(shell $(includes) $(@D)/$*.asm)
-%_gold.o: %.asm $$(dep)
+define DEP
+$1: $$(shell $$(includes) $2)
+endef
+$(foreach obj, $(gold_obj), $(eval $(call DEP,$(obj),$(obj:_gold.o=.asm))))
+$(foreach obj, $(silver_obj), $(eval $(call DEP,$(obj),$(obj:_silver.o=.asm))))
+
+$(gold_obj): %_gold.o: %.asm $$(dep)
 	rgbasm -D GOLD -o $@ $<
 
-%_silver.o: dep = $(shell $(includes) $(@D)/$*.asm)
-%_silver.o: %.asm $$(dep)
+$(silver_obj): %_silver.o: %.asm $$(dep)
 	rgbasm -D SILVER -o $@ $<
 
 pokegold.gbc: $(gold_obj)
