@@ -1,0 +1,450 @@
+ROM0
+	org $0000
+	"rst0"
+	org $0008
+	"rst8"
+	org $0010
+	"rst10"
+	org $0018
+	"rst18"
+	org $0020
+	"rst20"
+	org $0028
+	"rst28"
+	org $0038
+	"rst38"
+	org $0040
+	"vblank"
+	org $0048
+	"lcd"
+	org $0050
+	"timer"
+	org $0058
+	"serial"
+	org $0060
+	"joypad"
+	org $0100
+	"start"
+	org $0150
+	"bank0"
+ROMX $01
+	org $4000
+	"bank1"
+ROMX $02
+	org $4000
+	"bank2"
+ROMX $03
+	org $4000
+	"bank3"
+ROMX $04
+	org $4000
+	"bank4"
+ROMX $05
+	org $4000
+	"bank5"
+ROMX $06
+	org $4000
+	"bank6"
+ROMX $07
+	org $4000
+	"bank7"
+ROMX $08
+	org $4000
+	"bank8"
+ROMX $09
+	org $4000
+	"bank9"
+ROMX $0a
+	org $4000
+	"banka"
+ROMX $0b
+	org $4000
+	"bankb"
+ROMX $0c
+	org $4000
+	"bankc"
+ROMX $0d
+	org $4000
+	"bankd"
+ROMX $0e
+	org $4000
+	"banke"
+ROMX $0f
+	org $4000
+	"bankf"
+ROMX $10
+	org $4000
+	"bank10"
+ROMX $11
+	org $4000
+	"bank11"
+ROMX $12
+	org $4000
+	"bank12"
+ROMX $13
+	org $4000
+	"bank13"
+ROMX $14
+	org $4000
+	"bank14"
+ROMX $15
+	org $4000
+	"bank15"
+ROMX $16
+	org $4000
+	"bank16"
+ROMX $17
+	org $4000
+	"bank17"
+ROMX $18
+	org $4000
+	"bank18"
+ROMX $19
+	org $4000
+	"bank19"
+ROMX $1a
+	org $4000
+	"bank1a"
+ROMX $1b
+	org $4000
+	"bank1b"
+ROMX $1c
+	org $4000
+	"bank1c"
+ROMX $1d
+	org $4000
+	"bank1d"
+ROMX $1e
+	org $4000
+	"bank1e"
+ROMX $1f
+	org $4000
+	"bank1f"
+ROMX $20
+	org $4000
+	"bank20"
+ROMX $21
+	org $4000
+	"bank21"
+ROMX $22
+	org $4000
+	"bank22"
+ROMX $23
+	org $4000
+	"bank23"
+ROMX $24
+	org $4000
+	"bank24"
+ROMX $25
+	org $4000
+	"bank25"
+ROMX $26
+	org $4000
+	"bank26"
+ROMX $27
+	org $4000
+	"bank27"
+ROMX $28
+	org $4000
+	"bank28"
+ROMX $29
+	org $4000
+	"bank29"
+ROMX $2a
+	org $4000
+	"bank2a"
+ROMX $2b
+	org $4000
+	"bank2b"
+ROMX $2c
+	org $4000
+	"bank2c"
+ROMX $2d
+	org $4000
+	"bank2d"
+ROMX $2e
+	org $4000
+	"bank2e"
+ROMX $2f
+	org $4000
+	"bank2f"
+ROMX $30
+	org $4000
+	"bank30"
+ROMX $31
+	org $4000
+	"bank31"
+ROMX $32
+	org $4000
+	"bank32"
+ROMX $33
+	org $4000
+	"bank33"
+ROMX $34
+	org $4000
+	"bank34"
+ROMX $35
+	org $4000
+	"bank35"
+ROMX $36
+	org $4000
+	"bank36"
+ROMX $37
+	org $4000
+	"bank37"
+ROMX $38
+	org $4000
+	"bank38"
+ROMX $39
+	org $4000
+	"bank39"
+ROMX $3a
+	org $4000
+	"bank3a"
+ROMX $3b
+	org $4000
+	"bank3b"
+ROMX $3c
+	org $4000
+	"bank3c"
+ROMX $3d
+	org $4000
+	"bank3d"
+ROMX $3e
+	org $4000
+	"bank3e"
+ROMX $3f
+	org $4000
+	"bank3f"
+ROMX $40
+	org $4000
+	"bank40"
+ROMX $41
+	org $4000
+	"bank41"
+ROMX $42
+	org $4000
+	"bank42"
+ROMX $43
+	org $4000
+	"bank43"
+ROMX $44
+	org $4000
+	"bank44"
+ROMX $45
+	org $4000
+	"bank45"
+ROMX $46
+	org $4000
+	"bank46"
+ROMX $47
+	org $4000
+	"bank47"
+ROMX $48
+	org $4000
+	"bank48"
+ROMX $49
+	org $4000
+	"bank49"
+ROMX $4a
+	org $4000
+	"bank4a"
+ROMX $4b
+	org $4000
+	"bank4b"
+ROMX $4c
+	org $4000
+	"bank4c"
+ROMX $4d
+	org $4000
+	"bank4d"
+ROMX $4e
+	org $4000
+	"bank4e"
+ROMX $4f
+	org $4000
+	"bank4f"
+ROMX $50
+	org $4000
+	"bank50"
+ROMX $51
+	org $4000
+	"bank51"
+ROMX $52
+	org $4000
+	"bank52"
+ROMX $53
+	org $4000
+	"bank53"
+ROMX $54
+	org $4000
+	"bank54"
+ROMX $55
+	org $4000
+	"bank55"
+ROMX $56
+	org $4000
+	"bank56"
+ROMX $57
+	org $4000
+	"bank57"
+ROMX $58
+	org $4000
+	"bank58"
+ROMX $59
+	org $4000
+	"bank59"
+ROMX $5a
+	org $4000
+	"bank5a"
+ROMX $5b
+	org $4000
+	"bank5b"
+ROMX $5c
+	org $4000
+	"bank5c"
+ROMX $5d
+	org $4000
+	"bank5d"
+ROMX $5e
+	org $4000
+	"bank5e"
+ROMX $5f
+	org $4000
+	"bank5f"
+ROMX $60
+	org $4000
+	"bank60"
+ROMX $61
+	org $4000
+	"bank61"
+ROMX $62
+	org $4000
+	"bank62"
+ROMX $63
+	org $4000
+	"bank63"
+ROMX $64
+	org $4000
+	"bank64"
+ROMX $65
+	org $4000
+	"bank65"
+ROMX $66
+	org $4000
+	"bank66"
+ROMX $67
+	org $4000
+	"bank67"
+ROMX $68
+	org $4000
+	"bank68"
+ROMX $69
+	org $4000
+	"bank69"
+ROMX $6a
+	org $4000
+	"bank6a"
+ROMX $6b
+	org $4000
+	"bank6b"
+ROMX $6c
+	org $4000
+	"bank6c"
+ROMX $6d
+	org $4000
+	"bank6d"
+ROMX $6e
+	org $4000
+	"bank6e"
+ROMX $6f
+	org $4000
+	"bank6f"
+ROMX $70
+	org $4000
+	"bank70"
+ROMX $71
+	org $4000
+	"bank71"
+ROMX $72
+	org $4000
+	"bank72"
+ROMX $73
+	org $4000
+	"bank73"
+ROMX $74
+	org $4000
+	"bank74"
+ROMX $75
+	org $4000
+	"bank75"
+ROMX $76
+	org $4000
+	"bank76"
+ROMX $77
+	org $4000
+	"bank77"
+ROMX $78
+	org $4000
+	"bank78"
+ROMX $79
+	org $4000
+	"bank79"
+ROMX $7a
+	org $4000
+	"bank7a"
+ROMX $7b
+	org $4000
+	"bank7b"
+ROMX $7c
+	org $4000
+	"bank7c"
+ROMX $7d
+	org $4000
+	"bank7d"
+ROMX $7e
+	org $4000
+	"bank7e"
+ROMX $7f
+	org $4000
+	"bank7f"
+WRAM0
+	org $c000
+	"Audio"
+	"WRAM"
+	"GBC Palettes"
+	"OAM Buffer"
+	"TileMap"
+	"Animated Objects"
+	"Video"
+WRAMX 1
+	org $d000
+	"WRAM1"
+	"Game Data"
+	"Party"
+	"OT Party"
+	org $dfff
+	"Stack"
+WRAMX 2
+WRAMX 3
+WRAMX 4
+WRAMX 5
+WRAMX 6
+WRAMX 7
+VRAM $00
+VRAM $01
+SRAM $00
+	org $a000
+	"Scratch"
+	"Decompress Buffer"
+	"SRAM0"
+SRAM $01
+	org $a000
+	"SRAM1"
+	"Active Box"
+SRAM $02
+	org $a000
+	"SRAM2"
+SRAM $03
+	org $a000
+	"SRAM3"

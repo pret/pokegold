@@ -41,11 +41,11 @@ compare: pokegold.gbc pokesilver.gbc
 	rgbasm -D SILVER -o $@ $<
 
 pokegold.gbc: $(gold_obj)
-	rgblink -n pokegold.sym -m pokegold.map -l pokegold.ld -o $@ $^
+	rgblink -n pokegold.sym -m pokegold.map -l pokegold.link -o $@ $^
 	rgbfix -cjsv -i AAUE -k 01 -l 0x33 -m 0x10 -p 0 -r 3 -t "POKEMON_GLD" $@
 
 pokesilver.gbc: $(silver_obj)
-	rgblink -n pokesilver.sym -m pokesilver.map -l pokegold.ld -o $@ $^
+	rgblink -n pokesilver.sym -m pokesilver.map -l pokesilver.link -o $@ $^
 	rgbfix -cjsv -i AAXE -k 01 -l 0x33 -m 0x10 -p 0 -r 3 -t "POKEMON_SLV" $@
 
 pngs:
