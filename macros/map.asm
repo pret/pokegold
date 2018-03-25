@@ -93,6 +93,31 @@ map_header_2: MACRO
 	db \4
 ENDM
 
+map_header_2_todo: MACRO
+; BlockData bank, BlockData address, MapScriptHeader bank, MapScriptHeader address, MapEventHeader address, width, height, border block, connections
+	db \8
+	db \7, \6
+	db \1
+	dw \2
+	db \3
+	dw \4
+	dw \5
+	db \9
+ENDM
+
+connection_todo: MACRO
+; north/south/west/east, ...
+	db \2, \3
+	dw \4
+	dw \5
+	db \6
+	db \7
+	db \8
+	db \9
+        shift
+	dw \9
+ENDM
+
 connection: MACRO
 if "\1" == "north"
 ;\2: map id
