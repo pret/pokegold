@@ -137,6 +137,7 @@ ROMX $24
 	"bank24"
 ROMX $25
 	org $4000
+        "Map Headers"
 	"bank25"
 ROMX $26
 	org $4000

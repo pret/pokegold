@@ -14,6 +14,7 @@ includes  := $(PYTHON) scan_includes.py
 rom_obj := \
 wram.o \
 main.o \
+maps.o \
 home.o
 
 gold_obj := $(rom_obj:.o=_gold.o)
