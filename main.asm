@@ -1310,9 +1310,6 @@ SECTION "bank29", ROMX, BANK[$29]
 SECTION "bank2a", ROMX, BANK[$2a]
 	dr $a8000, $ac000
 
-SECTION "bank2b", ROMX, BANK[$2b]
-	dr $ac000, $b0000
-
 SECTION "bank2c", ROMX, BANK[$2c]
 	dr $b0000, $b4000
 
@@ -1562,9 +1559,6 @@ SECTION "bank4f", ROMX, BANK[$4f]
 
 SECTION "bank50", ROMX, BANK[$50]
 	dr $140000, $144000
-
-SECTION "bank51", ROMX, BANK[$51]
-	dr $144000, $148000
 
 SECTION "bank52", ROMX, BANK[$52]
 	dr $148000, $14c000

@@ -31,7 +31,8 @@ MapGroupPointers::
 
 
 MapGroup1:
-	dr $94121, $9419f
+	map_header OlivinePokeCenter1F, TILESET_POKECENTER, INDOOR, OLIVINE_CITY, MUSIC_POKEMON_CENTER, 0, PALETTE_DAY, FISHGROUP_SHORE
+	dr $9412a, $9419f
 
 
 MapGroup2:
@@ -131,4 +132,4 @@ MapGroup25:
 
 
 MapGroup26:
-	dr $94dae, $965f9
+	dr $94dae, $95b6d

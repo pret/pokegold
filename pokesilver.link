@@ -156,7 +156,7 @@ ROMX $2a
 	"bank2a"
 ROMX $2b
 	org $4000
-	"bank2b"
+	"Map Blockdata 2b"
 ROMX $2c
 	org $4000
 	"bank2c"
@@ -270,7 +270,7 @@ ROMX $50
 	"bank50"
 ROMX $51
 	org $4000
-	"bank51"
+	"Map Scripts 51"
 ROMX $52
 	org $4000
 	"bank52"
