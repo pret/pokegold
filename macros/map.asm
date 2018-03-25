@@ -70,6 +70,16 @@ map_header: MACRO
 ENDM
 
 
+map_header_todo: MACRO
+	; SecondMapHeader bank, SecondMapHeader address, tileset, permission, location, music, phone service flag, time of day, fishing group
+	db \1, \3, \4
+	dw \2
+	db \5, \6
+	dn \7, \8
+	db \9
+ENDM
+
+
 map_header_2: MACRO
 ; label, map, border block, connections
 \1_SecondMapHeader::
