@@ -546,7 +546,7 @@
 	map_header_2_todo $2a, $6867, $5f, $4e24, $4f12, $04, $04, $00, 0
 	map_header_2_todo $2a, $6877, $5f, $4f2f, $4fa9, $05, $04, $00, 0
 	map_header_2_todo $37, $50a1, $5f, $4fd0, $517a, $0a, $09, $00, 0
-	map_header_2_todo $2a, $7b55, $60, $4000, $5557, $05, $06, $00, 0
+	map_header_2 ElmsLab, ELMS_LAB, $0, 0
 	map_header_2_todo $2a, $769b, $60, $5640, $5b89, $05, $04, $00, 0
 	map_header_2_todo $37, $495d, $60, $5be6, $5cd1, $04, $03, $00, 0
 	map_header_2_todo $2a, $6867, $60, $5d24, $5e7e, $04, $04, $00, 0
