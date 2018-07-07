@@ -258,10 +258,26 @@ wc5cc:: ds 1 ; c5cc
 wc5cd:: ds 1 ; c5cd
 wc5ce:: ds 1 ; c5ce
 wc5cf:: ds 1 ; c5cf
+
+UNION ; c5d0
+; trade
+wTradeMons::
+wPlayerTrademon:: trademon wPlayerTrademon
+wOTTrademon::     trademon wOTTrademon
+wTrademonsEnd::
+wTradeAnimAddress:: dw
+wLinkPlayer1Name:: ds NAME_LENGTH
+wLinkPlayer2Name:: ds NAME_LENGTH
+wLinkTradeSendmonSpecies:: db
+wLinkTradeGetmonSpecies::  db
+
+NEXTU ; c5d0
+; naming screen
 wNamingScreenDestinationPointer:: dw ; c5d0
 wc5d2:: ds 1 ; c5d2
 wc5d3:: ds 1 ; c5d3
 wNamingScreenType:: ds 1 ; c5d4
+
 wc5d5:: ds 1 ; c5d5
 wc5d6:: ds 1 ; c5d6
 wc5d7:: ds 1 ; c5d7
@@ -826,7 +842,11 @@ wLYOverridesBuffer::
 wc800:: ds 1 ; c800
 wc801:: ds 1 ; c801
 wc802:: ds 1 ; c802
+UNION
 wc803:: ds 1 ; c803
+NEXTU
+wMysteryGiftPartnerName:: ds 1 ; c803
+ENDU
 wc804:: ds 1 ; c804
 wc805:: ds 1 ; c805
 wc806:: ds 1 ; c806
@@ -906,7 +926,11 @@ wc84f:: ds 1 ; c84f
 wc850:: ds 1 ; c850
 wc851:: ds 1 ; c851
 wc852:: ds 1 ; c852
+UNION
 wc853:: ds 1 ; c853
+NEXTU
+wMysteryGiftPlayerName::
+ENDU
 wc854:: ds 1 ; c854
 wc855:: ds 1 ; c855
 wc856:: ds 1 ; c856
@@ -1728,9 +1752,8 @@ wcbc6:: ds 1 ; cbc6
 wcbc7:: ds 1 ; cbc7
 wcbc8:: ds 1 ; cbc8
 wcbc9:: ds 1 ; cbc9
-wcbca:: ds 1 ; cbca
-wcbcb:: ds 1 ; cbcb
-wcbcc:: ds 1 ; cbcc
+wPayDayMoney:: ds 3 ; cbca
+
 wcbcd:: ds 1 ; cbcd
 wcbce:: ds 1 ; cbce
 wcbcf:: ds 1 ; cbcf
@@ -1811,6 +1834,7 @@ wcc1c:: ds 1 ; cc1c
 wcc1d:: ds 1 ; cc1d
 wcc1e:: ds 1 ; cc1e
 wcc1f:: ds 1 ; cc1f
+ENDU ; cc20
 
 SECTION "Video", WRAM0
 wBGMapBuffer:: ds 1 ; cc20
@@ -2192,6 +2216,8 @@ wceed:: ds 1 ; ceed
 wMovementBufferPerson::
 wceee:: ds 1 ; ceee
 
+wTemporaryBuffer::
+wBugContestFirstPlaceScore::
 wceef:: ds 1 ; ceef
 wcef0:: ds 1 ; cef0
 wcef1:: ds 1 ; cef1
@@ -2199,10 +2225,12 @@ wcef1:: ds 1 ; cef1
 wMovementBuffer::
 wcef2:: ds 1 ; cef2
 
+wBugContestSecondPlaceScore::
 wcef3:: ds 1 ; cef3
 wcef4:: ds 1 ; cef4
 wcef5:: ds 1 ; cef5
 wcef6:: ds 1 ; cef6
+wBugContestThirdPlaceScore::
 wcef7:: ds 1 ; cef7
 wcef8:: ds 1 ; cef8
 wcef9:: ds 1 ; cef9
@@ -2213,6 +2241,7 @@ wcefd:: ds 1 ; cefd
 wcefe:: ds 1 ; cefe
 wceff:: ds 1 ; ceff
 wcf00:: ds 1 ; cf00
+wBugContestWinnerName::
 wcf01:: ds 1 ; cf01
 wcf02:: ds 1 ; cf02
 wcf03:: ds 1 ; cf03
@@ -2399,6 +2428,7 @@ wd005:: ds 1 ; d005
 wd006:: ds 1 ; d006
 wd007:: ds 1 ; d007
 wd008:: ds 1 ; d008
+wItemQuantityChangeBuffer::
 wd009:: ds 1 ; d009
 wd00a:: ds 1 ; d00a
 
@@ -2552,7 +2582,7 @@ wBuffer6:: ds 1 ; d0d8
 wd0d9:: ds 1 ; d0d9
 wd0da:: ds 1 ; d0da
 wd0db:: ds 1 ; d0db
-wd0dc:: ds 1 ; d0dc
+wLinkBuffer:: ds 1 ; d0dc
 wd0dd:: ds 1 ; d0dd
 wd0de:: ds 1 ; d0de
 wd0df:: ds 1 ; d0df
@@ -2644,6 +2674,7 @@ wd14d:: ds 1 ; d14d
 wd14e:: ds 1 ; d14e
 wWildMon:: ds 1 ; d14f
 wd150:: ds 1 ; d150
+wTempNumBuffer::
 wd151:: ds 1 ; d151
 wd152:: ds 1 ; d152
 wd153:: ds 1 ; d153
@@ -2730,9 +2761,9 @@ SECTION "Game Data", WRAMX, BANK[1]
 wGameData::
 wPlayerID:: dw ; d1a1
 
-wPlayersName:: ds NAME_LENGTH ; d1a3
+wPlayerName:: ds NAME_LENGTH ; d1a3
 wMomsName:: ds NAME_LENGTH ; d1ae
-wRivalsName:: ds NAME_LENGTH ; d1b9
+wRivalName:: ds NAME_LENGTH ; d1b9
 wRedsName:: ds NAME_LENGTH ; d1c4
 wGreensName:: ds NAME_LENGTH ; d1cf
 
@@ -3721,6 +3752,7 @@ wBreedMon1:: box_struct wBreedMon1 ; dc57
 wDaycareLady:: ds 1 ; dc77
 wStepsToEgg:: ds 1 ; dc78
 wdc79:: ds 1 ; dc79
+wBreedMon2Nick::
 wdc7a:: ds 1 ; dc7a
 wdc7b:: ds 1 ; dc7b
 wdc7c:: ds 1 ; dc7c
@@ -3834,7 +3866,7 @@ wdd31:: ds 1 ; dd31
 wdd32:: ds 1 ; dd32
 wdd33:: ds 1 ; dd33
 wdd34:: ds 1 ; dd34
-wdd35:: ds 1 ; dd35
+wMagikarpRecordHoldersName:: ds 1 ; dd35
 wdd36:: ds 1 ; dd36
 wdd37:: ds 1 ; dd37
 wdd38:: ds 1 ; dd38

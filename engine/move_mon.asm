@@ -33,7 +33,7 @@ TryAddMonToParty:: ; d892 (3:5892)
 	call SkipNames
 	ld d, h
 	ld e, l
-	ld hl, wPlayersName
+	ld hl, wPlayerName
 	ld bc, NAME_LENGTH
 	call CopyBytes
 	ld a, [wMonType]
@@ -857,7 +857,7 @@ SentPkmnIntoBox: ; de74 (3:5e74)
 	jr nz, .asm_de8b
 	call GetBaseData
 	call Functiondf4d
-	ld hl, wPlayersName
+	ld hl, wPlayerName
 	ld de, sBoxMonOT
 	ld bc, NAME_LENGTH
 	call CopyBytes
@@ -1604,7 +1604,7 @@ GivePoke: ; Give a Pokemon from script
 	ld a, b
 	and a
 	ret z
-	ld hl, Text_WasSentToBillsPC
+	ld hl, TextJump_WasSentToBillsPC
 	call PrintText
 	ld a, BANK(sBoxMonNicknames)
 	call OpenSRAM
@@ -1622,8 +1622,8 @@ Functione3af: ; e3af (3:63af)
 	ld b, $2
 	ret
 
-Text_WasSentToBillsPC:
-	text_jump Text_WasSentToBillsPC_
+TextJump_WasSentToBillsPC:
+	text_jump Text_WasSentToBillsPC
 	db "@"
 
 InitNickname: ; e3b9 (3:63b9)

@@ -13,7 +13,13 @@ dex    EQUS "db $e8, $50" ; End a Pokedex entry.
 
 ; TX_RAM EQU $01
 ; TX_FAR EQU $16
-	enum_start 1
+	enum_start
+
+	enum TX_START
+text_start: MACRO ; 00
+	db TX_START
+ENDM
+
 	enum TX_RAM
 text_from_ram: MACRO ; 01
 	db TX_RAM

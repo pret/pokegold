@@ -12,6 +12,8 @@
 	charmap "<SHINY>",  $3f
 	charmap "<MOM>",    $49
 	charmap "<PKMN>",   $4a
+	charmap "<_CONT>",  $4b ; implements "<CONT>"
+	charmap "<SCROLL>", $4c
 	charmap "<NEXT>",   $4e
 	charmap "<LINE>",   $4f
 
@@ -21,7 +23,7 @@
 	charmap "<RIVAL>",  $53
 	charmap "#",        $54
 	charmap "<CONT>",   $55
-	charmap "<......>", $56
+	charmap "<……>",     $56
 	charmap "<DONE>",   $57
 	charmap "<PROMPT>", $58
 	charmap "<TARGET>", $59

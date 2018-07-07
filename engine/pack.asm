@@ -609,7 +609,7 @@ Function108b6: ; 108b6 (4:48b6)
 	ret
 
 Text_AnEggCantHoldAnItem:
-	text_jump Text_AnEggCantHoldAnItem_
+	text_jump Text_AnEGGCantHoldAnItem
 	db "@"
 
 QuitItemSubmenu:
@@ -1545,7 +1545,7 @@ Text_ThisIsntTheTime:
 	db "@"
 
 Text_YouDontHaveAPokemon:
-	text_jump Text_YouDontHaveAPokemon_
+	text_jump Text_YouDontHaveAMon
 	db "@"
 
 Text_RegisteredTheItem:
@@ -1565,7 +1565,7 @@ Text_PackEmptyString:
 	db "@"
 
 Text_CantUseItInABattle:
-	text_jump Text_CantUseItInABattle_
+	text_jump Text_YouCantUseItInABattle
 	db "@"
 
 PackMenuGFX: INCBIN "gfx/misc/pack_menu.2bpp"

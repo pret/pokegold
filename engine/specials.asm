@@ -190,9 +190,9 @@ asm_c3f2
 
 Special_NameRival: ; c3f7
 	ld b, $2
-	ld de, wRivalsName
+	ld de, wRivalName
 	callba NamingScreen_
-	ld hl, wRivalsName
+	ld hl, wRivalName
 	ld de, .DefaultName
 	call InitName
 	ret

@@ -206,7 +206,7 @@ endm
 	dict $23, PlaceKougeki
 	dict "<LNBRK>", HalfLineChar
 	dict "<CONT>", ContText
-	dict "<......>", SixDotsChar
+	dict "<……>", SixDotsChar
 	dict "<DONE>", DoneText
 	dict "<PROMPT>", PromptText
 	dict "<PKMN>", PlacePKMN
@@ -267,8 +267,8 @@ print_name: macro
 endm
 
 PrintMomsName::   print_name wMomsName ; 1066 (0:1066)
-PrintPlayerName:: print_name wPlayersName ; 106d (0:106d)
-PrintRivalName::  print_name wRivalsName ; 1074 (0:1074)
+PrintPlayerName:: print_name wPlayerName ; 106d (0:106d)
+PrintRivalName::  print_name wRivalName ; 1074 (0:1074)
 PrintRedsName::   print_name wRedsName ; 107b (0:107b)
 PrintGreensName:: print_name wGreensName ; 1082 (0:1082)
 
@@ -332,7 +332,7 @@ PlaceEnemysName:: ; 10fb (0:10fb)
 	jr PlaceCommandCharacter
 
 .rival
-	ld de, wRivalsName
+	ld de, wRivalName
 	jr PlaceCommandCharacter
 
 .linkbattle

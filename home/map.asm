@@ -1389,7 +1389,7 @@ ObjectEvent::
 	jumptextfaceplayer ObjectEventText
 
 ObjectEventText::
-	text_jump ObjectEventText_
+	text_jump _ObjectEventText
 	db "@"
 
 BGEvent::

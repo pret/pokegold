@@ -217,7 +217,6 @@ trademon: MACRO
 \1OTName:: ds NAME_LENGTH ; wc6f2 | wc724
 \1DVs:: ds 2 ; wc6fd | wc72f
 \1ID:: ds 2 ; wc6ff | wc731
-\1CaughtData:: ds 1 ; wc701 | wc733
 \1End::
 ENDM
 

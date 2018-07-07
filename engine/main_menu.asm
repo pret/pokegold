@@ -198,7 +198,7 @@ Function5b9c: ; 5b9c (1:5b9c)
 	db "TIME NOT SET@"
 
 .UnusedText
-	text_jump ClockTimeUnknownText_
+	text_jump _ClockTimeUnknownText
 	db "@"
 
 Function5bb8: ; 5bb8 (1:5bb8)
@@ -426,7 +426,7 @@ InitializeMagikarpHouse: ; 5d47 (1:5d47)
 
 Function5d5d: ; 5d5d (1:5d5d)
 	ld hl, .Rival
-	ld de, wRivalsName
+	ld de, wRivalName
 	call .CopyName
 	ld hl, .Mom
 	ld de, wMomsName
@@ -814,11 +814,11 @@ OakSpeech: ; 5fa5 (1:5fa5)
 	ret
 
 OakText1:
-	text_jump OakText1_
+	text_jump _OakText1
 	db "@"
 
 OakText2:
-	text_jump OakText2_
+	text_jump _OakText2
 	start_asm
 	ld a, MARILL
 	call PlayCry
@@ -827,23 +827,23 @@ OakText2:
 	ret
 
 OakText3:
-	text_jump OakText3_
+	text_jump _OakText3
 	db "@"
 
 OakText4:
-	text_jump OakText4_
+	text_jump _OakText4
 	db "@"
 
 OakText5:
-	text_jump OakText5_
+	text_jump _OakText5
 	db "@"
 
 OakText6:
-	text_jump OakText6_
+	text_jump _OakText6
 	db "@"
 
 OakText7:
-	text_jump OakText7_
+	text_jump _OakText7
 	db "@"
 
 NamePlayer: ; 6085 (1:6085)
@@ -853,7 +853,7 @@ NamePlayer: ; 6085 (1:6085)
 	ld a, [wMenuCursorY]
 	dec a
 	jr z, .NewName
-	ld de, wPlayersName
+	ld de, wPlayerName
 	call StorePlayerName
 	callba ApplyMonOrTrainerPals
 	call MovePlayerPicLeft
@@ -861,7 +861,7 @@ NamePlayer: ; 6085 (1:6085)
 
 .NewName
 	ld b, $1
-	ld de, wPlayersName
+	ld de, wPlayerName
 	callba NamingScreen
 	call RotateThreePalettesRight
 	call ClearTileMap
@@ -875,7 +875,7 @@ NamePlayer: ; 6085 (1:6085)
 	ld b, SCGB_TRAINER_OR_MON_FRONTPIC_PALS
 	call GetSGBLayout
 	call RotateThreePalettesLeft
-	ld hl, wPlayersName
+	ld hl, wPlayerName
 	ld de, .GoldSilver
 	call InitName
 	ret

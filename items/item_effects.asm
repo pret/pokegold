@@ -978,7 +978,7 @@ Text_GotchaMonWasCaught:
 	ret
 
 Text_CaughtMonWaitbutton:
-	text_jump Text_CaughtMonWaitbutton_
+	text_jump Text_Waitbutton_2
 	db "@"
 
 Text_SentToBillsPC:
@@ -1954,7 +1954,7 @@ asm_f4c2
 	jp Functionf7d0
 
 Text_RepelsEffectsStillLinger:
-	text_jump Text_RepelsEffectsStillLinger_
+	text_jump Text_RepelUsedEarlierIsStillInEffect
 	db "@"
 
 XAccuracy: ; f4d8 (3:74d8)
@@ -2121,17 +2121,17 @@ Text_CoinCase:
 
 OldRod: ; f5ec (3:75ec)
 	ld e, $0
-	jr asm_f5f8
+	jr UseRod
 
 GoodRod: ; f5f0 (3:75f0)
 	ld e, $1
-	jr asm_f5f8
+	jr UseRod
 
 SuperRod: ; f5f4 (3:75f4)
 	ld e, $2
-	jr asm_f5f8
+	jr UseRod
 
-asm_f5f8
+UseRod:
 	callba FishingRodFunction ; same bank
 	ret
 
@@ -2400,12 +2400,12 @@ GorgeousBox: ; f7ae (3:77ae)
 	ld c, DECOFLAG_GOLD_TROPHY_DOLL
 asm_f7b0
 	callba ReceiveDecorationC ; 9:70d5
-	ld hl, Text_TrohpyInside ; $77bf
+	ld hl, Text_TrophyInside ; $77bf
 	call PrintText
 	jp Functionf7dc
 
-Text_TrohpyInside:
-	text_jump Text_TrohpyInside_
+Text_TrophyInside:
+	text_jump Text_TrophyInside_
 	db "@"
 
 AmuletCoin: ; f7c4
