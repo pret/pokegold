@@ -49,7 +49,7 @@ PushOAM:
 
 PushOAMEnd
 
-INCLUDE "engine/map_objects.asm"
+INCLUDE "engine/overworld/map_objects.asm"
 INCLUDE "engine/main_menu.asm"
 INCLUDE "engine/title.asm"
 
@@ -204,7 +204,7 @@ CheckNickErrors:: ; 677e (1:677e)
 INCLUDE "engine/math.asm"
 ItemAttributes:
 INCLUDE "items/item_attributes.asm"
-INCLUDE "engine/npc_movement.asm"
+INCLUDE "engine/overworld/npc_movement.asm"
 INCLUDE "event/happiness_egg.asm"
 INCLUDE "event/special.asm"
 
@@ -321,7 +321,7 @@ Unknown85d7:
 	db PAL_BG_ROOF
 	endr
 
-INCLUDE "engine/player_object.asm"
+INCLUDE "engine/overworld/player_object.asm"
 INCLUDE "engine/sine.asm"
 INCLUDE "engine/predef.asm"
 INCLUDE "engine/color.asm"
@@ -409,7 +409,7 @@ FlagPredef:
 INCLUDE "engine/health.asm"
 INCLUDE "event/overworld.asm"
 INCLUDE "engine/items.asm"
-INCLUDE "engine/player_step.asm"
+INCLUDE "engine/overworld/player_step.asm"
 INCLUDE "engine/anim_hp_bar.asm"
 INCLUDE "engine/move_mon.asm"
 INCLUDE "engine/billspctop.asm"
@@ -634,9 +634,9 @@ Text_KnowsMove:
 
 SECTION "bank4", ROMX, BANK[$4]
 
-INCLUDE "engine/player_movement.asm"
+INCLUDE "engine/overworld/player_movement.asm"
 INCLUDE "engine/pack.asm"
-INCLUDE "engine/time.asm"
+INCLUDE "engine/overworld/time.asm"
 INCLUDE "engine/learn_tm.asm"
 INCLUDE "engine/namingscreen.asm"
 

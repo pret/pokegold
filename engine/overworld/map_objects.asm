@@ -163,7 +163,7 @@ asm_4449
 	jr asm_444e
 
 asm_444e
-INCLUDE "engine/map_object_action.asm"
+INCLUDE "engine/overworld/map_object_action.asm"
 
 CopyNextCoordsTileToStandingCoordsTile: ; 45d9 (1:45d9)
 	ld hl, $10
@@ -400,7 +400,7 @@ Function4732:
 
 INCLUDE "engine/movement_pattern.asm"
 INCLUDE "engine/step_types.asm"
-INCLUDE "engine/movement.asm"
+INCLUDE "engine/overworld/movement.asm"
 
 Function5429: ; 5429 (1:5429)
 	call InitStep
