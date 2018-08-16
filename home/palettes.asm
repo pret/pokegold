@@ -197,7 +197,7 @@ Functiond2a::
 	jr nz, .asm_d33
 	ret
 
-Functiond42::
+ReloadSpritesNoPalettes::
 	ld a, [hCGB]
 	and a
 	ret z

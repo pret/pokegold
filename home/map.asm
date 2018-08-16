@@ -2098,7 +2098,7 @@ FadeToMenu::
 	xor a
 	ld [hBGMapMode], a
 	call LoadStandardMenuDataHeader
-	callba Function8c3ab
+	callba FadeOutPalettes
 	call ClearSprites
 	call DisableSpriteUpdates
 	ret

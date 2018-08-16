@@ -528,7 +528,7 @@ GetTrainerPathToPlayer: ; 8931 (2:4931)
 	call ComputePathToWalkToPlayer
 	ret
 
-Special_SurfStartStep: ; 8969 (2:4969)
+SurfStartStep: ; 8969 (2:4969)
 	call InitMovementBuffer
 	call GetInitialSurfStep
 	call AppendToMovementBuffer

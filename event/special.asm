@@ -1,4 +1,4 @@
-Function73e1:
+GiveShuckle:
 	xor a
 	ld [wMonType], a
 	ld a, SHUCKLE
@@ -49,7 +49,7 @@ ManiaName:
 ShuckieName:
 	db "SHUCKIE@"
 
-Function7452:
+ReturnShuckle:
 	callba Function50000
 	jr c, .asm_74ba
 	ld a, [wd004]
@@ -113,7 +113,7 @@ Function7452:
 	ld [wScriptVar], a
 	ret
 
-Function74cb:
+BillsGrandfather:
 	callba Function50000
 	jr c, .asm_74e2
 	ld a, [wd004]

@@ -29,95 +29,95 @@ SpecialsPointers:
 	add_special WarpToSpawnPoint
 
 ; Communications
-	add_special Function29b22
-	add_special Function29b4b
-	add_special Function29bcc
-	add_special Function29c71
-	add_special Function29c8d
-	add_special Function29d01
-	add_special Function29cf9
-	add_special Function29ad9
-	add_special Function29b2b
-	add_special Function29b34
-	add_special Function29a47
-	add_special Function29ac7
-	add_special Function29ccf
-	add_special Function29ce4
-	add_special Function29cba
-	add_special Function29d4e
-	add_special Special_CheckMysteryGift
-	add_special Special_GetMysteryGiftItem
-	add_special Function2a4e7
+	add_special SetBitsForLinkTradeRequest
+	add_special WaitForLinkedFriend
+	add_special CheckLinkTimeout
+	add_special TryQuickSave
+	add_special CheckBothSelectedSameRoom
+	add_special FailedLinkToPast
+	add_special CloseLink
+	add_special WaitForOtherPlayerToExit
+	add_special SetBitsForBattleRequest
+	add_special SetBitsForTimeCapsuleRequest
+	add_special CheckTimeCapsuleCompatibility
+	add_special EnterTimeCapsule
+	add_special TradeCenter
+	add_special Colosseum
+	add_special TimeCapsule
+	add_special CableClubCheckWhichChris
+	add_special CheckMysteryGift
+	add_special GetMysteryGiftItem
+	add_special UnlockMysteryGift
 
 ; Map events
 	add_special BugContestJudging
-	add_special Functionc7bbf
-	add_special Function13dce
-	add_special Function13ded
-	add_special Function1399d
-	add_special Functionfbc3c
-	add_special Functionfbdd6
+	add_special CheckPartyFullAfterContest
+	add_special ContestDropOffMons
+	add_special ContestReturnMons
+	add_special GiveParkBalls
+	add_special CheckMagikarpLength
+	add_special MagikarpHouseSign
 	add_special HealParty
-	add_special Function15871
-	add_special Special_PlayerPC
-	add_special Function16935
-	add_special Function16989
-	add_special Function16b8c
-	add_special Function2c352
-	add_special Function1646d
-	add_special Function8ce7c
-	add_special Special_NameRival
-	add_special Function908dc
-	add_special Special_TownMap
-	add_special Special_UnownPrinter
+	add_special PokemonCenterPC
+	add_special PlayersHousePC
+	add_special DayCareMan
+	add_special DayCareLady
+	add_special DayCareManOutside
+	add_special MoveDeletion
+	add_special BankOfMom
+	add_special MagnetTrain
+	add_special NameRival
+	add_special SetDayOfWeek
+	add_special OverworldTownMap
+	add_special UnownPrinter
 	add_special MapRadio
-	add_special Special_UnownPuzzle
-	add_special Special_SlotMachine
-	add_special Special_CardFlip
-	add_special Special_DummyNonfunctionalGameCornerGame
-	add_special Special_ClearBGPalettesBufferScreen
-	add_special Function8c3ab
-	add_special Function8c3c4
+	add_special UnownPuzzle
+	add_special SlotMachine
+	add_special CardFlip
+	add_special DummyNonfunctionalGameCornerGame
+	add_special ClearBGPalettesBufferScreen
+	add_special FadeOutPalettes
+	add_special FadeBlackQuickly
 	add_special FadeInPalettes
-	add_special Function8c3b9
-	add_special Functiond42, $02
+	add_special FadeInQuickly
+	add_special ReloadSpritesNoPalettes, $02
 	add_special ClearBGPalettes
 	add_special UpdateTimePals
 	add_special ClearTileMap
 	add_special UpdateSprites
 	add_special ReplacePlayerSprite
-	add_special Special_GameCornerPrizeMonCheckDex
-	add_special SpecialSeenMon
+	add_special GameCornerPrizeMonCheckDex
+	add_special UnusedSetSeenMon
 	add_special WaitSFX, $03
 	add_special PlayMapMusic
 	add_special RestartMapMusic
-	add_special Function126fd
-	add_special Special_SurfStartStep
-	add_special Special_FindGreaterThanThatLevel
-	add_special Special_FindAtLeastThatHappy
-	add_special Special_FindThatSpecies
-	add_special Special_FindThatSpeciesYourTrainerID
-	add_special Special_CheckUnusedTwoDayTimer
-	add_special Function177a5
-	add_special Function177c4
-	add_special Function13d64
-	add_special Functionc556
-	add_special Function271be
-	add_special Function27216
-	add_special Function73e1
-	add_special Function7452
-	add_special Function74cb
-	add_special Functionc588
-	add_special Function24a4d
-	add_special Function24a76
-	add_special Function24a10
-	add_special Functionc7a5a
-	add_special Functionc5a3
-	add_special Functionc591
-	add_special Functionc7bad
-	add_special Functionc5bb
+	add_special HealMachineAnim
+	add_special SurfStartStep
+	add_special FindGreaterThanThatLevel
+	add_special FindAtLeastThatHappy
+	add_special FindThatSpecies
+	add_special FindThatSpeciesYourTrainerID
+	add_special UnusedCheckUnusedTwoDayTimer
+	add_special DayCareMon1
+	add_special DayCareMon2
+	add_special SelectRandomBugContestContestants
+	add_special ActivateFishingSwarm
+	add_special ToggleMaptileDecorations
+	add_special ToggleDecorationsVisibility
+	add_special GiveShuckle
+	add_special ReturnShuckle
+	add_special BillsGrandfather
+	add_special CheckPokerus
+	add_special DisplayCoinCaseBalance
+	add_special DisplayMoneyAndCoinBalance
+	add_special PlaceMoneyTopRight
+	add_special CheckForLuckyNumberWinners
+	add_special CheckLuckyNumberShowFlag
+	add_special ResetLuckyNumberShowFlag
+	add_special PrintTodaysLuckyNumber
+	add_special SelectApricornForKurt
 	add_special SpecialNameRater
-	add_special Special_DisplayLinkRecord
+	add_special DisplayLinkRecord
 	add_special GetFirstPokemonHappiness
 	add_special CheckFirstMonIsEgg
 	add_special Function2a9f7
@@ -146,7 +146,7 @@ SpecialsPointers:
 SpecialNone: ; c389
 	ret
 
-Special_GameCornerPrizeMonCheckDex: ; c38a
+GameCornerPrizeMonCheckDex: ; c38a
 	ld a, [wScriptVar]
 	dec a
 	call CheckCaughtMon
@@ -161,34 +161,34 @@ Special_GameCornerPrizeMonCheckDex: ; c38a
 	call ExitAllMenus
 	ret
 
-SpecialSeenMon: ; c3ac
+UnusedSetSeenMon: ; c3ac
 	ld a, [wScriptVar]
 	dec a
 	call SetSeenMon
 	ret
 
-Special_FindGreaterThanThatLevel: ; c3b4
+FindGreaterThanThatLevel: ; c3b4
 	ld a, [wScriptVar]
 	ld b, a
 	callba PartySearch_MaximumLevel ; same bank
 	jr z, asm_c3f2
 	jr asm_c3ec
 
-Special_FindAtLeastThatHappy: ; c3c2
+FindAtLeastThatHappy: ; c3c2
 	ld a, [wScriptVar]
 	ld b, a
 	callba PartySearch_MinimumHappiness ; same bank
 	jr z, asm_c3f2
 	jr asm_c3ec
 
-Special_FindThatSpecies: ; c3d0
+FindThatSpecies: ; c3d0
 	ld a, [wScriptVar]
 	ld b, a
 	callba PartySearch_SameSpecies ; same bank
 	jr z, asm_c3f2
 	jr asm_c3ec
 
-Special_FindThatSpeciesYourTrainerID: ; c3de
+FindThatSpeciesYourTrainerID: ; c3de
 	ld a, [wScriptVar]
 	ld b, a
 	callba PartySearch_SameSpeciesAndYourID ; same bank
@@ -205,7 +205,7 @@ asm_c3f2
 	ld [wScriptVar], a
 	ret
 
-Special_NameRival: ; c3f7
+NameRival: ; c3f7
 	ld b, $2
 	ld de, wRivalName
 	callba NamingScreen_
@@ -227,25 +227,25 @@ SpecialNameRater: ; c413 (3:4413)
 	callba Functionfb7f7
 	ret
 
-Special_TownMap: ; c41a (3:441a)
+OverworldTownMap: ; c41a (3:441a)
 	call FadeToMenu
 	callba Function9188a
 	call ExitAllMenus
 	ret
 
-Special_UnownPrinter: ; c427 (3:4427)
+UnownPrinter: ; c427 (3:4427)
 	call FadeToMenu
 	callba Function16e3a
 	call ExitAllMenus
 	ret
 
-Special_DisplayLinkRecord: ; c434 (3:4434)
+DisplayLinkRecord: ; c434 (3:4434)
 	call FadeToMenu
 	callba Function3f55d
 	call ExitAllMenus
 	ret
 
-Special_PlayerPC: ; c441 (3:4441)
+PlayersHousePC: ; c441 (3:4441)
 	xor a
 	ld [wScriptVar], a
 	callba Function159b0
@@ -253,7 +253,7 @@ Special_PlayerPC: ; c441 (3:4441)
 	ld [wScriptVar], a
 	ret
 
-Special_CheckMysteryGift: ; c450 (3:4450)
+CheckMysteryGift: ; c450 (3:4450)
 	ld a, $0
 	call OpenSRAM
 	ld a, [$abe2]
@@ -265,7 +265,7 @@ Special_CheckMysteryGift: ; c450 (3:4450)
 	call CloseSRAM
 	ret
 
-Special_GetMysteryGiftItem: ; c463 (3:4463)
+GetMysteryGiftItem: ; c463 (3:4463)
 	ld a, $0
 	call OpenSRAM
 	ld a, [$abe2]
@@ -309,7 +309,7 @@ MapRadio: ; c4af (3:44af)
 	callba Function919c1
 	ret
 
-Special_UnownPuzzle: ; c4ba (3:44ba)
+UnownPuzzle: ; c4ba (3:44ba)
 	call FadeToMenu
 	callba Functione199d
 	ld a, [wFieldMoveSucceeded]
@@ -317,7 +317,7 @@ Special_UnownPuzzle: ; c4ba (3:44ba)
 	call ExitAllMenus
 	ret
 
-Special_SlotMachine: ; c4cd (3:44cd)
+SlotMachine: ; c4cd (3:44cd)
 	call Functionc508
 	ret c
 	ld a, BANK(Function92c36)
@@ -325,7 +325,7 @@ Special_SlotMachine: ; c4cd (3:44cd)
 	call Functionc4f4
 	ret
 
-Special_CardFlip: ; c4da (3:44da)
+CardFlip: ; c4da (3:44da)
 	call Functionc508
 	ret c
 	ld a, BANK(Functione0909)
@@ -333,7 +333,7 @@ Special_CardFlip: ; c4da (3:44da)
 	call Functionc4f4
 	ret
 
-Special_DummyNonfunctionalGameCornerGame: ; c4e7 (3:44e7)
+DummyNonfunctionalGameCornerGame: ; c4e7 (3:44e7)
 	call Functionc508
 	ret c
 	ld a, BANK(Functione2668)
@@ -387,7 +387,7 @@ Functionc508: ; c508 (3:4508)
 	text_jump NoCoinCaseText_
 	db "@"
 
-Special_ClearBGPalettesBufferScreen: ; c535 (3:4535)
+ClearBGPalettesBufferScreen: ; c535 (3:4535)
 	call ClearBGPalettes
 	call BufferScreen
 	ret
@@ -403,13 +403,13 @@ Functionc53c: ; c53c (3:453c)
 	ld [wScriptVar], a
 	ret
 
-Special_CheckUnusedTwoDayTimer: ; c549 (3:4549)
+UnusedCheckUnusedTwoDayTimer: ; c549 (3:4549)
 	callba Function118f8
 	ld a, [wUnusedTwoDayTimer]
 	ld [wScriptVar], a
 	ret
 
-Functionc556: ; c556 (3:4556)
+ActivateFishingSwarm: ; c556 (3:4556)
 	ld a, [wScriptVar]
 	ld [wdd19], a
 	jr .asm_c566
@@ -439,17 +439,17 @@ Functionc56c:
 	ld [wdd18], a
 	ret
 
-Functionc588: ; c588 (3:4588)
+CheckPokerus: ; c588 (3:4588)
 	callba Functionc7a40
 	jp Functionc53c
 
-Functionc591: ; c591 (3:4591)
+ResetLuckyNumberShowFlag: ; c591 (3:4591)
 	callba Function11917
 	ClearFlag ENGINE_LUCKY_NUMBER_SHOW
 	callba LoadOrRegenerateLuckyIDNumber
 	ret
 
-Functionc5a3: ; c5a3 (3:45a3)
+CheckLuckyNumberShowFlag: ; c5a3 (3:45a3)
 	callba Function1192e
 	jp Functionc53c
 
@@ -466,7 +466,7 @@ CountUnown: ; c5ac (3:45ac)
 	jr c, .asm_c5b1
 	ret
 
-Functionc5bb: ; c5bb (3:45bb)
+SelectApricornForKurt: ; c5bb (3:45bb)
 	callba Function24b8d
 	ld a, c
 	ld [wScriptVar], a

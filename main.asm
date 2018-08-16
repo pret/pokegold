@@ -642,7 +642,7 @@ INCLUDE "engine/namingscreen.asm"
 
 AbortBugCatchingContest::
 	dr $1269a, $126fd
-Function126fd:
+HealMachineAnim:
 	dr $126fd, $12947
 
 ItemfinderFunction:
@@ -652,17 +652,17 @@ PartyMonItemName::
 	dr $12e33, $12fa0
 Function12fa0:
 	dr $12fa0, $1399d
-Function1399d:
+GiveParkBalls:
 	dr $1399d, $13a5f
 Function13a5f:
 	dr $13a5f, $13d44
 ApplyPokerusTick:
 	dr $13d44, $13d64
-Function13d64:
+SelectRandomBugContestContestants:
 	dr $13d64, $13dce
-Function13dce:
+ContestDropOffMons:
 	dr $13dce, $13ded
-Function13ded:
+ContestReturnMons:
 	dr $13ded, $13e03
 
 SECTION "bank5", ROMX, BANK[$5]
@@ -707,17 +707,17 @@ DelayLoadingNewSprites:
 	dr $1560c, $15612
 Function15612:: ; 15612
 	dr $15612, $15871
-Function15871:
+PokemonCenterPC:
 	dr $15871, $159b0
 Function159b0:
 	dr $159b0, $1646d
-Function1646d:
+BankOfMom:
 	dr $1646d, $16935
-Function16935:
+DayCareMan:
 	dr $16935, $16989
-Function16989:
+DayCareLady:
 	dr $16989, $16b8c
-Function16b8c:
+DayCareManOutside:
 	dr $16b8c, $16e3a
 Function16e3a:
 	dr $16e3a, $16ff7
@@ -725,9 +725,9 @@ Function16ff7:
 	dr $16ff7, $171d1
 Function171d1:
 	dr $171d1, $177a5
-Function177a5:
+DayCareMon1:
 	dr $177a5, $177c4
-Function177c4:
+DayCareMon2:
 	dr $177c4, $1783e
 
 SECTION "bank6", ROMX, BANK[$6]
@@ -767,11 +767,11 @@ PlaceMenuItemName:
 	dr $249dc, $249eb
 PlaceMenuItemQuantity:
 	dr $249eb, $24a10
-Function24a10:
+PlaceMoneyTopRight:
 	dr $24a10, $24a4d
-Function24a4d:
+DisplayCoinCaseBalance:
 	dr $24a4d, $24a76
-Function24a76:
+DisplayMoneyAndCoinBalance:
 	dr $24a76, $24b8d
 Function24b8d:
 	dr $24b8d, $24f20
@@ -783,9 +783,9 @@ InitDecorations: ; 2692d
 	dr $2692d, $270d5
 ReceiveDecorationC:
 	dr $270d5, $271be
-Function271be:
+ToggleMaptileDecorations:
 	dr $271be, $27216
-Function27216:
+ToggleDecorationsVisibility:
 	dr $27216, $27271
 GetTrainerDVs:
 	dr $27271, $27307
@@ -803,43 +803,43 @@ TradeAnimation::
 
 TradeAnimationPlayer2::
 	dr $28e22, $29a47
-Function29a47:
+CheckTimeCapsuleCompatibility:
 	dr $29a47, $29ac7
-Function29ac7:
+EnterTimeCapsule:
 	dr $29ac7, $29ad9
-Function29ad9:
+WaitForOtherPlayerToExit:
 	dr $29ad9, $29b22
-Function29b22:
+SetBitsForLinkTradeRequest:
 	dr $29b22, $29b2b
-Function29b2b:
+SetBitsForBattleRequest:
 	dr $29b2b, $29b34
-Function29b34:
+SetBitsForTimeCapsuleRequest:
 	dr $29b34, $29b4b
-Function29b4b:
+WaitForLinkedFriend:
 	dr $29b4b, $29bcc
-Function29bcc:
+CheckLinkTimeout:
 	dr $29bcc, $29c71
-Function29c71:
+TryQuickSave:
 	dr $29c71, $29c8d
-Function29c8d:
+CheckBothSelectedSameRoom:
 	dr $29c8d, $29cba
-Function29cba:
+TimeCapsule:
 	dr $29cba, $29ccf
-Function29ccf:
+TradeCenter:
 	dr $29ccf, $29ce4
-Function29ce4:
+Colosseum:
 	dr $29ce4, $29cf9
-Function29cf9:
+CloseLink:
 	dr $29cf9, $29d01
-Function29d01:
+FailedLinkToPast:
 	dr $29d01, $29d4e
-Function29d4e:
+CableClubCheckWhichChris:
 	dr $29d4e, $29dff
 Function29dff:
 	dr $29dff, $2a4bf
 MysteryGift_CopyReceivedDecosToPC:
 	dr $2a4bf, $2a4e7
-Function2a4e7:
+UnlockMysteryGift:
 	dr $2a4e7, $2a4f6
 Function2a4f6:
 	dr $2a4f6, $2a7d7
@@ -856,7 +856,7 @@ Function2aab3:
 
 SECTION "bankb", ROMX, BANK[$b]
 	dr $2c000, $2c352
-Function2c352:
+MoveDeletion:
 	dr $2c352, $2c57a
 
 Pack_TMHMPocketMenu_:
@@ -1170,13 +1170,13 @@ _UpdateTimePals:: ; 8c397
 FadeInPalettes:: ; 8c3a0
 	dr $8c3a0, $8c3ab
 
-Function8c3ab:: ; 8c3ab
+FadeOutPalettes:: ; 8c3ab
 	dr $8c3ab, $8c3b9
 
-Function8c3b9:
+FadeInQuickly:
 	dr $8c3b9, $8c3c4
 
-Function8c3c4:
+FadeBlackQuickly:
 	dr $8c3c4, $8c3e9
 
 Function8c3e9:: ; 8c3e9
@@ -1203,7 +1203,7 @@ FlyFromAnimation:
 FlyToAnimation:
 	dr $8cdab, $8ce7c
 
-Function8ce7c:
+MagnetTrain:
 	dr $8ce7c, $8d174
 
 ClearAnimatedObjectBuffer:
@@ -1238,7 +1238,7 @@ SECTION "bank24", ROMX, BANK[$24]
 	dr $90000, $90641
 InitClock:
 	dr $90641, $908dc
-Function908dc:
+SetDayOfWeek:
 	dr $908dc, $90a1b
 Function90a1b:
 	dr $90a1b, $90a54
@@ -1351,11 +1351,11 @@ SECTION "bank31", ROMX, BANK[$31]
 	dr $c4000, $c7a40
 Functionc7a40:
 	dr $c7a40, $c7a5a
-Functionc7a5a:
+CheckForLuckyNumberWinners:
 	dr $c7a5a, $c7bad
-Functionc7bad:
+PrintTodaysLuckyNumber:
 	dr $c7bad, $c7bbf
-Functionc7bbf:
+CheckPartyFullAfterContest:
 	dr $c7bbf, $c7cd0
 Functionc7cd0:
 	dr $c7cd0, $c8000
@@ -1502,9 +1502,9 @@ ConvertMon_1to2::
 	dr $fba12, $fbb22
 UpdateUnownDex:
 	dr $fbb22, $fbc3c
-Functionfbc3c:
+CheckMagikarpLength:
 	dr $fbc3c, $fbdd6
-Functionfbdd6:
+MagikarpHouseSign:
 	dr $fbdd6, $fc000
 
 SECTION "bank3f", ROMX, BANK[$3f]

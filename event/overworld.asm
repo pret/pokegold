@@ -417,7 +417,7 @@ UsedSurfScript:
 	writevarcode VAR_MOVEMENT
 	special ReplacePlayerSprite
 	special PlayMapMusic
-	special Special_SurfStartStep
+	special SurfStartStep
 	applymovement 0, wMovementBuffer
 	end
 

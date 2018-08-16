@@ -316,6 +316,3 @@ const_value SET 1
 	const MONMENU_MOVE       ; 19
 	const MONMENU_MAIL       ; 20
 	const MONMENU_ERROR      ; 21
-
-MONMENU_FIELD_MOVE EQU 0
-MONMENU_MENUOPTION EQU 1
