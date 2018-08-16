@@ -1588,7 +1588,9 @@ SECTION "bank56", ROMX, BANK[$56]
 	dr $158000, $15c000
 
 SECTION "bank57", ROMX, BANK[$57]
-	dr $15c000, $160000
+	dr $15c000, $15f180
+
+INCLUDE "maps/DayCare.asm"
 
 SECTION "bank58", ROMX, BANK[$58]
 	dr $160000, $164000

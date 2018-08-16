@@ -92,10 +92,10 @@ EngineFlags:
 	engine_flag ENGINE_EXPN_CARD
 	engine_flag ENGINE_POKEGEAR
 
-	engine_flag ENGINE_DAYCARE_MAN_HAS_EGG
-	engine_flag ENGINE_DAYCARE_MAN_HAS_MON
+	engine_flag ENGINE_DAY_CARE_MAN_HAS_EGG
+	engine_flag ENGINE_DAY_CARE_MAN_HAS_MON
 
-	engine_flag ENGINE_DAYCARE_LADY_HAS_MON
+	engine_flag ENGINE_DAY_CARE_LADY_HAS_MON
 
 	engine_flag ENGINE_MOM_SAVING_MONEY
 	engine_flag ENGINE_DST

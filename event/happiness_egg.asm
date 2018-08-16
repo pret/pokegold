@@ -146,7 +146,7 @@ StepHappiness::
 MAX_EXP EQU 5242880
 
 DaycareStep::
-	CheckFlag ENGINE_DAYCARE_MAN_HAS_MON
+	CheckFlag ENGINE_DAY_CARE_MAN_HAS_MON
 	jr z, .daycare_lady
 	ld a, [wBreedMon1Level]
 	cp MAX_LEVEL
@@ -165,7 +165,7 @@ DaycareStep::
 	ld a, MAX_EXP / $10000
 	ld [hl], a
 .daycare_lady
-	CheckFlag ENGINE_DAYCARE_LADY_HAS_MON
+	CheckFlag ENGINE_DAY_CARE_LADY_HAS_MON
 	jr z, .check_egg
 	ld a, [wBreedMon2Level]
 	cp MAX_LEVEL
@@ -213,5 +213,5 @@ DaycareStep::
 	ret nc
 	ld hl, wDayCareMan
 	res 5, [hl]
-	SetFlagForceReuseHL ENGINE_DAYCARE_MAN_HAS_EGG
+	SetFlagForceReuseHL ENGINE_DAY_CARE_MAN_HAS_EGG
 	ret
