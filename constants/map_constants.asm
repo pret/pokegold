@@ -85,14 +85,6 @@ ENDM
 	map_const RUINS_OF_ALPH_AERODACTYL_CHAMBER,            5,  4 ; 26
 	map_const RUINS_OF_ALPH_INNER_CHAMBER,                14, 10 ; 27
 	map_const RUINS_OF_ALPH_RESEARCH_CENTER,               4,  4 ; 28
-	map_const RUINS_OF_ALPH_HO_OH_ITEM_ROOM,               5,  4 ; 29
-	map_const RUINS_OF_ALPH_KABUTO_ITEM_ROOM,              5,  4 ; 30
-	map_const RUINS_OF_ALPH_OMANYTE_ITEM_ROOM,             5,  4 ; 31
-	map_const RUINS_OF_ALPH_AERODACTYL_ITEM_ROOM,          5,  4 ; 32
-	map_const RUINS_OF_ALPH_HO_OH_WORD_ROOM,              12, 10 ; 33
-	map_const RUINS_OF_ALPH_KABUTO_WORD_ROOM,              7, 10 ; 34
-	map_const RUINS_OF_ALPH_OMANYTE_WORD_ROOM,             8, 10 ; 35
-	map_const RUINS_OF_ALPH_AERODACTYL_WORD_ROOM,          7, 10 ; 36
 	map_const UNION_CAVE_1F,                              18, 10 ; 37
 	map_const UNION_CAVE_B1F,                             18, 10 ; 38
 	map_const UNION_CAVE_B2F,                             18, 10 ; 39
