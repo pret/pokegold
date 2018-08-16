@@ -1025,14 +1025,14 @@ GetPokemonName:: ; 367e (0:367e)
 	ld hl, PokemonNames
 	ld e, a
 	ld d, $0
-rept PKMN_NAME_LENGTH +- 1
+rept MON_NAME_LENGTH +- 1
 	add hl, de
 endr
 	ld de, wStringBuffer1
 	push de
-	ld bc, PKMN_NAME_LENGTH - 1
+	ld bc, MON_NAME_LENGTH - 1
 	call CopyBytes
-	ld hl, wStringBuffer1 + PKMN_NAME_LENGTH - 1
+	ld hl, wStringBuffer1 + MON_NAME_LENGTH - 1
 	ld [hl], "@"
 	pop de
 	pop hl

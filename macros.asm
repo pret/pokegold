@@ -1,19 +1,18 @@
 INCLUDE "macros/enum.asm"
 INCLUDE "macros/basestats.asm"
 
-INCLUDE "macros/event.asm"
+INCLUDE "macros/scripts/maps.asm"
+INCLUDE "macros/scripts/events.asm"
 INCLUDE "macros/sound.asm"
 INCLUDE "macros/text.asm"
 INCLUDE "macros/charmap.asm"
 INCLUDE "macros/move_effect.asm"
 INCLUDE "macros/move_anim.asm"
 INCLUDE "macros/movement.asm"
-INCLUDE "macros/map.asm"
 INCLUDE "macros/pic.asm"
 INCLUDE "macros/predef.asm"
 INCLUDE "macros/rst.asm"
 INCLUDE "macros/mobile.asm"
-INCLUDE "macros/trainer.asm"
 INCLUDE "macros/trade_anim.asm"
 INCLUDE "macros/pals.asm"
 INCLUDE "macros/flag.asm"
@@ -281,6 +280,12 @@ else
 	db (\1 * 8) % $100 + \2, (\3 * 8) % $100 + \4, \5, \6
 endc
 endm
+
+menu_coords: MACRO
+; x1, y1, x2, y2
+	db \2, \1 ; start coords
+	db \4, \3 ; end coords
+ENDM
 
 jumptable: MACRO
 	ld a, [\2]

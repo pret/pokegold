@@ -1534,7 +1534,7 @@ GivePoke: ; Give a Pokemon from script
 	call GetPokemonName
 	ld hl, wStringBuffer1
 	ld de, wMonOrItemNameBuffer
-	ld bc, PKMN_NAME_LENGTH
+	ld bc, MON_NAME_LENGTH
 	call CopyBytes
 	pop af
 	and a
@@ -1546,7 +1546,7 @@ GivePoke: ; Give a Pokemon from script
 	push hl
 	ld a, [wScriptBank]
 	call GetFarHalfword
-	ld bc, PKMN_NAME_LENGTH
+	ld bc, MON_NAME_LENGTH
 	ld a, [wScriptBank]
 	call FarCopyBytes
 	pop hl
@@ -1582,7 +1582,7 @@ GivePoke: ; Give a Pokemon from script
 	ld a, BANK(sBoxMonOT)
 	call OpenSRAM
 	ld de, sBoxMonOT
-	ld bc, PKMN_NAME_LENGTH
+	ld bc, MON_NAME_LENGTH
 	ld a, [wScriptBank]
 	call FarCopyBytes
 	ld hl, sBoxMon1ID
@@ -1610,7 +1610,7 @@ GivePoke: ; Give a Pokemon from script
 	call OpenSRAM
 	ld hl, wMonOrItemNameBuffer
 	ld de, sBoxMonNicknames
-	ld bc, PKMN_NAME_LENGTH
+	ld bc, MON_NAME_LENGTH
 	call CopyBytes
 	call CloseSRAM
 	ld b, $1

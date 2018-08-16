@@ -100,15 +100,15 @@ special: macro
 	dw (\1Special - SpecialsPointers) / 3
 	endm
 
-add_special: MACRO
-; Some ROM0 specials have a nonzero bank.
-\1Special::
-IF _NARG == 1
-	dba \1
-ELSE
-	dbw \2, \1
-ENDC
-ENDM
+;add_special: MACRO
+;; Some ROM0 specials have a nonzero bank.
+;\1Special::
+;IF _NARG == 1
+;	dba \1
+;ELSE
+;	dbw \2, \1
+;ENDC
+;ENDM
 
 	enum ptcallasm_command
 ptcallasm: macro

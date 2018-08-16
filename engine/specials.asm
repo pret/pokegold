@@ -12,8 +12,23 @@ Special:: ; c22b
 	rst FarCall
 	ret
 
+; Special routines can be used with the "special" map script command.
+; They often use wScriptVar for arguments and return values.
+
+add_special: MACRO
+; Some ROM0 specials have a nonzero bank.
+\1Special::
+IF _NARG == 1
+        dba \1
+ELSE
+        dbw \2, \1
+ENDC
+ENDM
+
 SpecialsPointers:
 	add_special WarpToSpawnPoint
+
+; Communications
 	add_special Function29b22
 	add_special Function29b4b
 	add_special Function29bcc
@@ -33,6 +48,8 @@ SpecialsPointers:
 	add_special Special_CheckMysteryGift
 	add_special Special_GetMysteryGiftItem
 	add_special Function2a4e7
+
+; Map events
 	add_special BugContestJudging
 	add_special Functionc7bbf
 	add_special Function13dce

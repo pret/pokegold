@@ -986,7 +986,7 @@ Text_AllowedToMoveBoulders:
 AskStrengthScript: ; cd4e
 	callasm TryStrengthOW
 	iffalse .ask
-	if_equal 1, .not_able
+	ifequal 1, .not_able
 	jump .already_active
 
 .not_able
@@ -1334,7 +1334,7 @@ Text_UsedRockSmash:
 ; cf60
 AskRockSmashScript:
 	callasm TryRockSmashOW
-	if_equal 1, .fail
+	ifequal 1, .fail
 	opentext
 	writetext Text_AskRockSmash
 	yesorno

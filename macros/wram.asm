@@ -109,7 +109,7 @@ box: MACRO
 \1Mon1::            box_struct \1Mon1
 \1Mon2::            ds BOXMON_STRUCT_LENGTH * (MONS_PER_BOX +- 1)
 \1MonOT::           ds NAME_LENGTH * MONS_PER_BOX
-\1MonNicknames::    ds PKMN_NAME_LENGTH * MONS_PER_BOX
+\1MonNicknames::    ds MON_NAME_LENGTH * MONS_PER_BOX
 \1MonNicknamesEnd::
 \1End::             ds 2 ; padding
 ENDM
@@ -178,7 +178,7 @@ hof_mon: MACRO
 \1ID:: ds 2
 \1DVs:: ds 2
 \1Level:: ds 1
-\1Nickname:: ds PKMN_NAME_LENGTH +- 1
+\1Nickname:: ds MON_NAME_LENGTH +- 1
 \1End::
 endm
 
@@ -211,8 +211,8 @@ ENDM
 
 trademon: MACRO
 \1Species:: ds 1 ; wc6d0 | wc702
-\1SpeciesName:: ds PKMN_NAME_LENGTH ; wc6d1 | wc703
-\1Nickname:: ds PKMN_NAME_LENGTH ; wc6dc | wc70e
+\1SpeciesName:: ds MON_NAME_LENGTH ; wc6d1 | wc703
+\1Nickname:: ds MON_NAME_LENGTH ; wc6dc | wc70e
 \1SenderName:: ds NAME_LENGTH ; wc6e7 | wc719
 \1OTName:: ds NAME_LENGTH ; wc6f2 | wc724
 \1DVs:: ds 2 ; wc6fd | wc72f

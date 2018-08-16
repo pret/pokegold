@@ -538,7 +538,7 @@ UltraBall: ; e926
 	dec a
 	ld [wd005], a
 	ld hl, wPartyMon1Nickname
-	ld bc, PKMN_NAME_LENGTH
+	ld bc, MON_NAME_LENGTH
 	call AddNTimes
 	ld d, h
 	ld e, l
@@ -590,7 +590,7 @@ UltraBall: ; e926
 	call OpenSRAM
 	ld hl, wMonOrItemNameBuffer
 	ld de, sBoxMonNicknames
-	ld bc, PKMN_NAME_LENGTH
+	ld bc, MON_NAME_LENGTH
 	call CopyBytes
 	ld hl, sBoxMonNicknames
 	ld de, wStringBuffer1
@@ -601,7 +601,7 @@ UltraBall: ; e926
 	call OpenSRAM
 	ld hl, sBoxMonNicknames
 	ld de, wMonOrItemNameBuffer
-	ld bc, PKMN_NAME_LENGTH
+	ld bc, MON_NAME_LENGTH
 	call CopyBytes
 	call CloseSRAM
 	ld hl, Text_SentToBillsPC ; $6e3f

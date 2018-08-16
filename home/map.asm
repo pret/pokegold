@@ -106,12 +106,12 @@ LoadMetatiles:: ; 1fe6 (0:1fe6)
 	ld a, [wOverworldMapAnchor + 1]
 	ld d, a
 	ld hl, wMisc
-	ld b, WMISC_HEIGHT / 4 ; 5
+	ld b, SURROUNDING_HEIGHT / METATILE_WIDTH ; 5
 
 .row
 	push de
 	push hl
-	ld c, WMISC_WIDTH / 4 ; 6
+	ld c, SURROUNDING_WIDTH / METATILE_WIDTH ; 6
 
 .col
 	push de
@@ -142,20 +142,20 @@ LoadMetatiles:: ; 1fe6 (0:1fe6)
 	ld h, a
 
 	; copy the 4x4 metatile
-rept 3
-rept 4
+rept METATILE_WIDTH + -1
+rept METATILE_WIDTH
 	ld a, [hli]
 	ld [de], a
 	inc de
 endr
 	ld a, e
-	add WMISC_WIDTH - 4
+	add SURROUNDING_WIDTH - METATILE_WIDTH
 	ld e, a
 	jr nc, .next\@
 	inc d
 .next\@
 endr
-rept 4
+rept METATILE_WIDTH
 	ld a, [hli]
 	ld [de], a
 	inc de
@@ -170,7 +170,7 @@ endr
 	jp nz, .col
 	; Next metarow
 	pop hl
-	ld de, WMISC_WIDTH * 4
+	ld de, SURROUNDING_WIDTH * METATILE_WIDTH
 	add hl, de
 	pop de
 	ld a, [wMapWidth]
@@ -692,7 +692,7 @@ CheckDungeonMap::
 	ret z
 	cp GATE
 	ret z
-	cp PERM_5
+	cp ENVIRONMENT_5
 	ret
 
 LoadMapAttributes::

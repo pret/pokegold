@@ -150,7 +150,7 @@ INCLUDE "engine/learn.asm"
 CheckNickErrors:: ; 677e (1:677e)
 	push bc
 	push de
-	ld b, PKMN_NAME_LENGTH
+	ld b, MON_NAME_LENGTH
 .checkchar
 	ld a, [de]
 	cp "@"
@@ -317,7 +317,7 @@ ScrollBGMapPalettes:: ; 804f (2:404f)
 INCLUDE "tilesets/palette_maps.asm"
 
 Unknown85d7:
-	rept NUM_MAP_GROUPS
+	rept 26 ; NUM_MAP_GROUPS
 	db PAL_BG_ROOF
 	endr
 

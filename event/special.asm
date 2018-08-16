@@ -192,5 +192,5 @@ Data_753f:
 Function7542: ; 7542 (1:7542)
 	ld hl, wStringBuffer1
 	ld de, wStringBuffer3
-	ld bc, PKMN_NAME_LENGTH
+	ld bc, MON_NAME_LENGTH
 	jp CopyBytes

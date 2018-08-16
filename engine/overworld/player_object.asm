@@ -37,7 +37,10 @@ SpawnPlayer: ; 861a (2:461a)
 	ret
 
 .PlayerObjectTemplate
-	person_event SPRITE_CHRIS, -4, -4, SPRITEMOVEDATA_PLAYER, 15, 15, -1, -1, 0, PERSONTYPE_SCRIPT, 0, 0, -1
+; A dummy map object used to initialize the player object.
+; Shorter than the actual amount copied by two bytes.
+; Said bytes seem to be unused.
+	object_event -4, -4, SPRITE_CHRIS, SPRITEMOVEDATA_PLAYER, 15, 15, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, 0, -1
 
 CopyDECoordsToMapObject: ; 8653 (2:4653)
 	push de
@@ -117,7 +120,7 @@ SpawnPlayer2:
 	ret
 
 .PlayerObjectTemplate:
-	person_event SPRITE_CHRIS, -4, -4, SPRITEMOVEDATA_12,  15, 15, -1, -1, 0, PERSONTYPE_SCRIPT, 0, 0, -1
+	object_event -4, -4, SPRITE_CHRIS, SPRITEMOVEDATA_12, 15, 15, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, 0, -1
 
 CopyObjectStruct_:: ; 86d7 (2:46d7)
 	call CheckObjectMask

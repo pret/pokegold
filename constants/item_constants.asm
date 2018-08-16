@@ -1,3 +1,9 @@
+; item ids
+; indexes for:
+; - ItemNames (see data/items/names.asm)
+; - ItemDescriptions (see data/items/descriptions.asm)
+; - ItemAttributes (see data/items/attributes.asm)
+; - ItemEffects (see engine/items/item_effects.asm)
 	const_def
 	const NO_ITEM      ; $00
 	const MASTER_BALL  ; $01
@@ -263,109 +269,6 @@ SAFARI_BALL    EQU  8 ; MOON_STONE
 MOON_STONE_RED EQU 10 ; BURN_HEAL
 FULL_HEAL_RED  EQU 52 ; X_SPEED
 MAIL_MAX_LENGTH EQU $20
-
-; pockets
-ITEM     EQU 1
-KEY_ITEM EQU 2
-BALL     EQU 3
-TM_HM    EQU 4
-
-; item actions
-CANT_SELECT EQU 1 << 6
-CANT_TOSS   EQU 1 << 7
-
-
-; held item effects
-	const_def
-
-	const HELD_NONE
-	const HELD_BERRY
-	const HELD_2
-	const HELD_LEFTOVERS
-	const HELD_4
-	const HELD_5
-	const HELD_RESTORE_PP
-	const HELD_7
-	const HELD_CLEANSE_TAG
-
-const_value SET 10
-	const HELD_HEAL_POISON
-	const HELD_HEAL_FREEZE
-	const HELD_HEAL_BURN
-	const HELD_HEAL_SLEEP
-	const HELD_HEAL_PARALYZE
-	const HELD_HEAL_STATUS
-	const HELD_HEAL_CONFUSION
-
-const_value SET 20
-	const HELD_PREVENT_POISON
-	const HELD_PREVENT_BURN
-	const HELD_PREVENT_FREEZE
-	const HELD_PREVENT_SLEEP
-	const HELD_PREVENT_PARALYZE
-	const HELD_PREVENT_CONFUSE
-
-const_value SET 30
-	const HELD_30
-	const HELD_ATTACK_UP
-	const HELD_DEFENSE_UP
-	const HELD_SPEED_UP
-	const HELD_SP_ATTACK_UP
-	const HELD_SP_DEFENSE_UP
-	const HELD_ACCURACY_UP
-	const HELD_EVASION_UP
-	const HELD_38
-
-const_value SET 40
-	const HELD_40
-	const HELD_41
-	const HELD_METAL_POWDER
-
-const_value SET 50
-	const HELD_NORMAL_BOOST
-	const HELD_FIGHTING_BOOST
-	const HELD_FLYING_BOOST
-	const HELD_POISON_BOOST
-	const HELD_GROUND_BOOST
-	const HELD_ROCK_BOOST
-	const HELD_BUG_BOOST
-	const HELD_GHOST_BOOST
-	const HELD_FIRE_BOOST
-	const HELD_WATER_BOOST
-	const HELD_GRASS_BOOST
-	const HELD_ELECTRIC_BOOST
-	const HELD_PSYCHIC_BOOST
-	const HELD_ICE_BOOST
-	const HELD_DRAGON_BOOST
-	const HELD_DARK_BOOST
-	const HELD_STEEL_BOOST
-
-const_value SET 70
-	const HELD_CATCH_CHANCE
-	const HELD_71
-	const HELD_ESCAPE
-	const HELD_CRITICAL_UP
-	const HELD_QUICK_CLAW
-	const HELD_TRADE_EVOLVE
-	const HELD_AMULET_COIN
-	const HELD_BRIGHTPOWDER
-	const HELD_78
-	const HELD_FOCUS_BAND
-
-	const_def
-	const ITEMATTR_PRICE
-	const ITEMATTR_PRICE_HI
-	const ITEMATTR_EFFECT
-	const ITEMATTR_PARAM
-	const ITEMATTR_PERMISSIONS
-	const ITEMATTR_POCKET
-	const ITEMATTR_HELP
-NUM_ITEMATTRS EQU const_value
-
-ITEMMENU_NOUSE              EQU 0
-ITEMMENU_CURRENT            EQU 4
-ITEMMENU_PARTY              EQU 5
-ITEMMENU_CLOSE              EQU 6
 
 	const_def
 	const MARTTYPE_STANDARD

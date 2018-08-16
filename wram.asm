@@ -1597,8 +1597,8 @@ wcae7:: ds 1 ; cae7
 wEnemyMoveStruct:: move_struct wEnemyMoveStruct
 wPlayerMoveStruct:: move_struct wPlayerMoveStruct
 
-wEnemyMonNick:: ds PKMN_NAME_LENGTH ; caf6
-wBattleMonNick:: ds PKMN_NAME_LENGTH ; cb01
+wEnemyMonNick:: ds MON_NAME_LENGTH ; caf6
+wBattleMonNick:: ds MON_NAME_LENGTH ; cb01
 
 wBattleMon:: battle_struct wBattleMon ; cb0c
 
@@ -3687,12 +3687,12 @@ wPartyMon5OT:: ds NAME_LENGTH ; db76
 wPartyMon6OT:: ds NAME_LENGTH ; db81
 
 wPartyMonNicknames::
-wPartyMon1Nickname:: ds PKMN_NAME_LENGTH ; db8c
-wPartyMon2Nickname:: ds PKMN_NAME_LENGTH ; db97
-wPartyMon3Nickname:: ds PKMN_NAME_LENGTH ; dba2
-wPartyMon4Nickname:: ds PKMN_NAME_LENGTH ; dbad
-wPartyMon5Nickname:: ds PKMN_NAME_LENGTH ; dbb8
-wPartyMon6Nickname:: ds PKMN_NAME_LENGTH ; dbc3
+wPartyMon1Nickname:: ds MON_NAME_LENGTH ; db8c
+wPartyMon2Nickname:: ds MON_NAME_LENGTH ; db97
+wPartyMon3Nickname:: ds MON_NAME_LENGTH ; dba2
+wPartyMon4Nickname:: ds MON_NAME_LENGTH ; dbad
+wPartyMon5Nickname:: ds MON_NAME_LENGTH ; dbb8
+wPartyMon6Nickname:: ds MON_NAME_LENGTH ; dbc3
 
 wdbce:: ds 1 ; dbce
 wdbcf:: ds 1 ; dbcf
@@ -3942,12 +3942,12 @@ wOTPartyMon5OT:: ds NAME_LENGTH ; dea9
 wOTPartyMon6OT:: ds NAME_LENGTH ; deb4
 
 wOTPartyMonNicknames::
-wOTPartyMon1Nickname:: ds PKMN_NAME_LENGTH ; debf
-wOTPartyMon2Nickname:: ds PKMN_NAME_LENGTH ; deca
-wOTPartyMon3Nickname:: ds PKMN_NAME_LENGTH ; ded5
-wOTPartyMon4Nickname:: ds PKMN_NAME_LENGTH ; dee0
-wOTPartyMon5Nickname:: ds PKMN_NAME_LENGTH ; deeb
-wOTPartyMon6Nickname:: ds PKMN_NAME_LENGTH ; def6
+wOTPartyMon1Nickname:: ds MON_NAME_LENGTH ; debf
+wOTPartyMon2Nickname:: ds MON_NAME_LENGTH ; deca
+wOTPartyMon3Nickname:: ds MON_NAME_LENGTH ; ded5
+wOTPartyMon4Nickname:: ds MON_NAME_LENGTH ; dee0
+wOTPartyMon5Nickname:: ds MON_NAME_LENGTH ; deeb
+wOTPartyMon6Nickname:: ds MON_NAME_LENGTH ; def6
 ENDU
 
 wGameDataEnd::

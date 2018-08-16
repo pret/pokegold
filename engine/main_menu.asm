@@ -345,8 +345,6 @@ Function5c41: ; 5c41 (1:5c41)
 	ld [wCoins], a
 	ld [wCoins + 1], a
 
-START_MONEY EQU 3000
-
 IF START_MONEY / $10000
 	ld a, START_MONEY / $10000
 ENDC
