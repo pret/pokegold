@@ -1,8 +1,8 @@
 INCLUDE "includes.asm"
 
 ; rst vectors
-INCLUDE "rst.asm"
-INCLUDE "interrupts.asm"
+INCLUDE "home/rst.asm"
+INCLUDE "home/interrupts.asm"
 
 SECTION "start", ROM0
 Start::

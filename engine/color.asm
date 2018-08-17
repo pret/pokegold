@@ -1499,13 +1499,13 @@ Pointers_b6ce:
 	db $18, $19, $1a, $1b, $1c, $1d, $1e, $1f ; dark
 
 TilesetBGPalette: ; b75e
-INCLUDE "tilesets/bg.pal"
+INCLUDE "gfx/tilesets/bg.pal"
 
 MapObjectPals:: ; b8ae
-INCLUDE "tilesets/ob.pal"
+INCLUDE "gfx/tilesets/ob.pal"
 
 RoofPals: ; b9ae
-INCLUDE "tilesets/roof.pal"
+INCLUDE "gfx/tilesets/roof.pal"
 
 Palettes_ba86:
 	RGB 27, 31, 27

@@ -205,8 +205,9 @@ INCLUDE "engine/math.asm"
 ItemAttributes:
 INCLUDE "items/item_attributes.asm"
 INCLUDE "engine/overworld/npc_movement.asm"
-INCLUDE "event/happiness_egg.asm"
-INCLUDE "event/special.asm"
+INCLUDE "engine/events/happiness_egg.asm"
+INCLUDE "engine/events/shuckle.asm"
+INCLUDE "engine/events/haircut.asm"
 
 SECTION "bank2", ROMX, BANK[$2]
 SwapTextboxPalettes::
@@ -314,7 +315,7 @@ ScrollBGMapPalettes:: ; 804f (2:404f)
 	jr nz, .asm_8055
 	ret
 
-INCLUDE "tilesets/palette_maps.asm"
+INCLUDE "gfx/tilesets/palette_maps.asm"
 
 Unknown85d7:
 	rept 26 ; NUM_MAP_GROUPS
@@ -407,7 +408,7 @@ FlagPredef:
 	ret
 
 INCLUDE "engine/health.asm"
-INCLUDE "event/overworld.asm"
+INCLUDE "engine/events/overworld.asm"
 INCLUDE "engine/items.asm"
 INCLUDE "engine/overworld/player_step.asm"
 INCLUDE "engine/anim_hp_bar.asm"

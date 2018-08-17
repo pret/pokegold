@@ -13,12 +13,12 @@ TILESETS_7                EQU $77
 TILESETS_8                EQU $78
 
 
-; data/egg_moves.o
+; data/pokemon/egg_moves.o
 
 EGG_MOVES                 EQU $8
 
 
-; data/evos_attacks.o
+; data/pokemon/evos_attacks.o
 
 EVOS_ATTACKS              EQU $10
 

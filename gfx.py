@@ -28,7 +28,7 @@ base_stats = None
 def get_base_stats():
     global base_stats
     if not base_stats:
-        base_stats = recursive_read('data/base_stats.asm')
+        base_stats = recursive_read('data/pokemon/base_stats.asm')
     return base_stats
 
 def get_pokemon_dimensions(name):
