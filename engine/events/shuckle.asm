@@ -34,7 +34,7 @@ GiveShuckle:
 	ld [hl], LOW(MANIA_OT_ID)
 
 ; Nickname.
-	ld a, [wPokemonData]
+	ld a, [wPartyCount]
 	dec a
 	ld hl, wPartyMonNicknames
 	call SkipNames
@@ -66,7 +66,7 @@ SpecialShuckleNick:
 	db "SHUCKIE@"
 
 ReturnShuckle:
-	callba SelectMonFromParty
+	farcall SelectMonFromParty
 	jr c, .refused
 
 	ld a, [wCurPartySpecies]
@@ -102,7 +102,7 @@ ReturnShuckle:
 	jr .CheckOT
 
 .done
-	callba CheckCurPartyMonFainted
+	farcall CheckCurPartyMonFainted
 	jr c, .fainted
 	ld a, [wCurPartyMon]
 	ld hl, wPartyMon1Happiness
@@ -114,7 +114,7 @@ ReturnShuckle:
 	jr nc, .HappyToStayWithYou
 	xor a ; REMOVE_PARTY
 	ld [wPokemonWithdrawDepositParameter], a
-	callab RemoveMonFromPartyOrBox
+	callfar RemoveMonFromPartyOrBox
 	ld a, SHUCKIE_RETURNED
 .HappyToStayWithYou:
 	ld [wScriptVar], a

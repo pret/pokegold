@@ -8,6 +8,12 @@ farcall: MACRO ; bank, address
 	rst FarCall
 	ENDM
 
+callfar: MACRO ; address, bank
+	ld hl, \1
+	ld a, BANK(\1)
+	rst FarCall
+ENDM
+
 callba EQUS "farcall"
 
 callab: MACRO ; address, bank
