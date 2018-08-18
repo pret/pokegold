@@ -1526,7 +1526,8 @@ SECTION "bank41", ROMX, BANK[$41]
 	dr $104000, $108000
 
 SECTION "bank42", ROMX, BANK[$42]
-	dr $108000, $10c000
+INCLUDE "maps/SproutTower1F.asm"
+	dr $10827e, $10c000
 
 SECTION "bank43", ROMX, BANK[$43]
 	dr $10c000, $110000
