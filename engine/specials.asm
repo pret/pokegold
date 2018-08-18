@@ -126,9 +126,9 @@ SpecialsPointers:
 	add_special Function14226
 	add_special Functionfb94b
 	add_special Functionc5d6
-	add_special Function74e7
-	add_special Function74ec
-	add_special Function74f1
+	add_special YoungerHaircutBrother
+	add_special OlderHaircutBrother
+	add_special DaisysGrooming
 	add_special Functionc60b
 	add_special Function267ca
 	add_special Functionc611

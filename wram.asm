@@ -2424,9 +2424,11 @@ wd003:: ds 1 ; d003
 
 wCurPartySpecies::
 wd004:: ds 1 ; d004
+wCurPartyMon::
 wd005:: ds 1 ; d005
 wd006:: ds 1 ; d006
 wd007:: ds 1 ; d007
+wPokemonWithdrawDepositParameter::
 wd008:: ds 1 ; d008
 wItemQuantityChangeBuffer::
 wd009:: ds 1 ; d009
@@ -2675,6 +2677,7 @@ wd14e:: ds 1 ; d14e
 wWildMon:: ds 1 ; d14f
 wd150:: ds 1 ; d150
 wTempNumBuffer::
+wNamedObjectIndexBuffer::
 wd151:: ds 1 ; d151
 wd152:: ds 1 ; d152
 wd153:: ds 1 ; d153

@@ -1,49 +1,58 @@
 BillsGrandfather:
-	callba Function50000
-	jr c, .asm_74e2
-	ld a, [wd004]
+	callba SelectMonFromParty
+	jr c, .cancel
+	ld a, [wCurPartySpecies]
 	ld [wScriptVar], a
-	ld [wd151], a
+	ld [wNamedObjectIndexBuffer], a
 	call GetPokemonName
-	jp Function7542
+	jp CopyPokemonName_Buffer1_Buffer3
 
-.asm_74e2
+.cancel
 	xor a
 	ld [wScriptVar], a
 	ret
 
-Function74e7:
-	ld hl, Data_752d
-	jr asm_74f4
+YoungerHaircutBrother:
+	ld hl, HappinessData_YoungerHaircutBrother
+	jr HaircutOrGrooming
 
-Function74ec:
-	ld hl, Data_7536
-	jr asm_74f4
+OlderHaircutBrother:
+	ld hl, HappinessData_OlderHaircutBrother
+	jr HaircutOrGrooming
 
-Function74f1:
-	ld hl, Data_753f
-asm_74f4
+DaisysGrooming:
+	ld hl, HappinessData_DaisysGrooming
+	; fallthrough
+
+HaircutOrGrooming:
 	push hl
-	callba Function50000
+	callba SelectMonFromParty
 	pop hl
-	jr c, .asm_7522
+	jr c, .nope
 	ld a, [wCurPartySpecies]
 	cp EGG
-	jr z, .asm_7527
+	jr z, .egg
 	push hl
 	call GetCurNick
-	call Function7542
+	call CopyPokemonName_Buffer1_Buffer3
 	pop hl
 	call Random
-.asm_7510
+.loop
+; Bug: Subtracting $ff from $ff fails to set c.
+; This can result in overflow into the next data array.
+; In the case of getting a grooming from Daisy, we bleed
+; into CopyPokemonName_Buffer1_Buffer3, which passes
+; $d0 to ChangeHappiness and returns $73 to the script.
+; The end result is that there is a 0.4% chance your
+; Pokemon's happiness will not change at all.
 	sub [hl]
-	jr c, .asm_7518
+	jr c, .ok
 	inc hl
 	inc hl
 	inc hl
-	jr .asm_7510
+	jr .loop
 
-.asm_7518
+.ok
 	inc hl
 	ld a, [hli]
 	ld [wScriptVar], a
@@ -51,30 +60,19 @@ asm_74f4
 	call ChangeHappiness
 	ret
 
-.asm_7522
+.nope
 	xor a
 	ld [wScriptVar], a
 	ret
 
-.asm_7527
-	ld a, $1
+.egg
+	ld a, 1
 	ld [wScriptVar], a
 	ret
 
-Data_752d:
-	db $4c, $02, $09
-	db $80, $03, $0a
-	db $ff, $04, $0b
+INCLUDE "data/events/happiness_probabilities.asm"
 
-Data_7536:
-	db $9a, $02, $0c
-	db $4c, $03, $0d
-	db $ff, $04, $0e
-
-Data_753f:
-	db $ff, $02, $12
-
-Function7542: ; 7542 (1:7542)
+CopyPokemonName_Buffer1_Buffer3:
 	ld hl, wStringBuffer1
 	ld de, wStringBuffer3
 	ld bc, MON_NAME_LENGTH

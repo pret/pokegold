@@ -989,7 +989,7 @@ SECTION "bank13", ROMX, BANK[$13]
 	dr $4c000, $50000
 
 SECTION "bank14", ROMX, BANK[$14]
-Function50000:
+SelectMonFromParty:
 	dr $50000, $5004f
 
 LoadPartyMenuGFX:

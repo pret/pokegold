@@ -15,7 +15,7 @@ GetFirstPokemonHappiness:
 	ld a, [hl]
 	ld [wScriptVar], a
 	call GetPokemonName
-	jp Function7542
+	jp CopyPokemonName_Buffer1_Buffer3
 
 CheckFirstMonIsEgg:
 	ld a, [wPartySpecies]
@@ -27,7 +27,7 @@ CheckFirstMonIsEgg:
 .asm_7298
 	ld [wScriptVar], a
 	call GetPokemonName
-	jp Function7542
+	jp CopyPokemonName_Buffer1_Buffer3
 
 ChangeHappiness: ; 72a1 (1:72a1)
 	ld a, [wd005]
