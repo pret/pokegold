@@ -1589,8 +1589,9 @@ SECTION "bank56", ROMX, BANK[$56]
 	dr $158000, $15c000
 
 SECTION "bank57", ROMX, BANK[$57]
-	dr $15c000, $15ef24
+	dr $15c000, $15e7a2
 
+INCLUDE "maps/GoldenrodGameCorner.asm"
 INCLUDE "maps/IlexForestAzaleaGate.asm"
 INCLUDE "maps/Route34IlexForestGate.asm"
 INCLUDE "maps/DayCare.asm"
