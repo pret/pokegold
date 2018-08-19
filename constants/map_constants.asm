@@ -130,11 +130,10 @@ ENDM
 	map_const DARK_CAVE_BLACKTHORN_ENTRANCE,              18, 15 ; 79
 	map_const DRAGONS_DEN_1F,                              9,  5 ; 80
 	map_const DRAGONS_DEN_B1F,                            18, 20 ; 81
-	map_const DRAGON_SHRINE,                               5,  5 ; 82
 	map_const TOHJO_FALLS,                                 9, 15 ; 83
 	map_const DIGLETTS_CAVE,                              18, 10 ; 84
 	map_const MOUNT_MOON,                                  9, 15 ; 85
-	map_const UNDERGROUND,                                14,  3 ; 86
+	map_const UNDERGROUND_PATH,                           14,  3 ; 86
 	map_const ROCK_TUNNEL_1F,                             18, 15 ; 87
 	map_const ROCK_TUNNEL_B1F,                            18, 15 ; 88
 	map_const SAFARI_ZONE_FUCHSIA_GATE_BETA,               4,  5 ; 89

@@ -684,7 +684,7 @@ Function1415c:: ; 1415c
 	dr $1415c, $1416d
 Function1416d:: ; 1416d
 	dr $1416d, $14226
-Function14226:
+LoadUsedSpritesGFX:
 	dr $14226, $14317
 DoesSpriteHaveFacings_:: ; 14317
 	dr $14317, $14334
@@ -848,11 +848,11 @@ InitRoamMons:
 	dr $2a7d7, $2a8e0
 JumpRoamMons:
 	dr $2a8e0, $2a9f7
-Function2a9f7:
+RandomUnseenWildMon:
 	dr $2a9f7, $2aa6b
-Function2aa6b:
+RandomPhoneWildMon:
 	dr $2aa6b, $2aab3
-Function2aab3:
+RandomPhoneMon:
 	dr $2aab3, $2c000
 
 SECTION "bankb", ROMX, BANK[$b]
@@ -1494,7 +1494,7 @@ Shrink2Pic:
 	dr $fb64e, $fb7f7
 Functionfb7f7:
 	dr $fb7f7, $fb94b
-Functionfb94b:
+PlaySlowCry:
 	dr $fb94b, $fb981
 NewPokedexEntry:
 	dr $fb981, $fba12
@@ -1649,7 +1649,19 @@ SECTION "bank60", ROMX, BANK[$60]
 	dr $180000, $184000
 
 SECTION "bank61", ROMX, BANK[$61]
-	dr $184000, $188000
+INCLUDE "maps/FightingDojo.asm"
+INCLUDE "maps/SaffronGym.asm"
+INCLUDE "maps/SaffronMart.asm"
+INCLUDE "maps/SaffronPokecenter1F.asm"
+INCLUDE "maps/SaffronPokecenter2FBeta.asm"
+INCLUDE "maps/MrPsychicsHouse.asm"
+INCLUDE "maps/SaffronMagnetTrainStation.asm"
+INCLUDE "maps/SilphCo1F.asm"
+INCLUDE "maps/CopycatsHouse1F.asm"
+INCLUDE "maps/CopycatsHouse2F.asm"
+INCLUDE "maps/Route5UndergroundPathEntrance.asm"
+INCLUDE "maps/Route5SaffronGate.asm"
+INCLUDE "maps/Route5CleanseTagHouse.asm"
 
 SECTION "bank62", ROMX, BANK[$62]
 	dr $188000, $18c000

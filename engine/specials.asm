@@ -120,12 +120,12 @@ SpecialsPointers:
 	add_special DisplayLinkRecord
 	add_special GetFirstPokemonHappiness
 	add_special CheckFirstMonIsEgg
-	add_special Function2a9f7
-	add_special Function2aa6b
-	add_special Function2aab3
-	add_special Function14226
-	add_special Functionfb94b
-	add_special Functionc5d6
+	add_special RandomUnseenWildMon
+	add_special RandomPhoneWildMon
+	add_special RandomPhoneMon
+	add_special LoadUsedSpritesGFX
+	add_special PlaySlowCry
+	add_special SnorlaxAwake
 	add_special YoungerHaircutBrother
 	add_special OlderHaircutBrother
 	add_special DaisysGrooming
@@ -479,7 +479,7 @@ SelectApricornForKurt: ; c5bb (3:45bb)
 	call TossItem
 	ret
 
-Functionc5d6: ; c5d6 (3:45d6)
+SnorlaxAwake: ; c5d6 (3:45d6)
 	ld a, [wChannelsEnd]
 	cp $40
 	jr nz, .asm_c5fb
