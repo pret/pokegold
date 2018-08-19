@@ -31,9 +31,6 @@
 	enum numberdeclinedm
 	enum phonefullm
 	enum rematchm
-	enum giftm
-	enum packfullm
-	enum rematchgiftm
 	enum asknumber1f
 	enum asknumber2f
 	enum registerednumberf
@@ -41,9 +38,6 @@
 	enum numberdeclinedf
 	enum phonefullf
 	enum rematchf
-	enum giftf
-	enum packfullf
-	enum rematchgiftf
 	enum gymstatue1
 	enum gymstatue2
 	enum receiveitem

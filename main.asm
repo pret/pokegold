@@ -1529,10 +1529,21 @@ SECTION "bank42", ROMX, BANK[$42]
 INCLUDE "maps/SproutTower1F.asm"
 INCLUDE "maps/SproutTower2F.asm"
 INCLUDE "maps/SproutTower3F.asm"
-	dr $108b1b, $109dca
+	dr $108b1b, $108c8c
+	dr $108c8c, $108c9e
+	dr $108c9e, $108cbf
+	dr $108cbf, $108d10
+	dr $108d10, $108d4b
+	dr $108d4b, $108d5d
+	dr $108d5d, $108d8d
+	dr $108d8d, $108de0
+	dr $108de0, $108e2c
+	dr $108e2c, $1093b8
+	dr $1093b8, $109dca
 
 SECTION "bank43", ROMX, BANK[$43]
-	dr $10c000, $110000
+INCLUDE "maps/NationalPark.asm"
+	dr $10c87e, $10f198
 
 SECTION "bank44", ROMX, BANK[$44]
 	dr $110000, $114000
