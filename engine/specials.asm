@@ -135,7 +135,7 @@ SpecialsPointers:
 	add_special Functionc652
 	add_special Function16ff7
 	add_special Function2a7d7
-	add_special Functionc628
+	add_special FadeOutMusic
 	add_special Functionc638
 	add_special Functionc645
 	add_special Function90a1b
@@ -543,7 +543,7 @@ Functionc611: ; c611 (3:4611)
 	ld [wScriptVar], a
 	ret
 
-Functionc628: ; c628 (3:4628)
+FadeOutMusic: ; c628 (3:4628)
 	ld a, $0
 	ld [wMusicFadeID], a
 	ld a, $0
