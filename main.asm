@@ -1543,7 +1543,8 @@ INCLUDE "maps/SproutTower3F.asm"
 
 SECTION "bank43", ROMX, BANK[$43]
 INCLUDE "maps/NationalPark.asm"
-	dr $10c87e, $10f198
+INCLUDE "maps/NationalParkBugContest.asm"
+	dr $10cccf, $10f198
 
 SECTION "bank44", ROMX, BANK[$44]
 	dr $110000, $114000
