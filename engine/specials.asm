@@ -129,12 +129,12 @@ SpecialsPointers:
 	add_special YoungerHaircutBrother
 	add_special OlderHaircutBrother
 	add_special DaisysGrooming
-	add_special Functionc60b
-	add_special Function267ca
-	add_special Functionc611
-	add_special Functionc652
-	add_special Function16ff7
-	add_special Function2a7d7
+	add_special PlayCurMonCry
+	add_special ProfOaksPCBoot
+	add_special GameboyCheck
+	add_special TrainerHouse
+	add_special PhotoStudio
+	add_special InitRoamMons
 	add_special FadeOutMusic
 	add_special Functionc638
 	add_special Functionc645
@@ -519,11 +519,11 @@ Functionc5d6: ; c5d6 (3:45d6)
 	db 36,  9 ; right
 	db -1
 
-Functionc60b: ; c60b (3:460b)
+PlayCurMonCry: ; c60b (3:460b)
 	ld a, [wCurPartySpecies]
 	jp PlayCry
 
-Functionc611: ; c611 (3:4611)
+GameboyCheck: ; c611 (3:4611)
 	ld a, [hCGB]
 	and a
 	jr nz, .asm_c622
@@ -564,7 +564,7 @@ Functionc645: ; c645 (3:4645)
 	call ExitAllMenus
 	ret
 
-Functionc652: ; c652 (3:4652)
+TrainerHouse: ; c652 (3:4652)
 	ld a, $0
 	call OpenSRAM
 	ld a, [$abfd]

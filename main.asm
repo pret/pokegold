@@ -722,7 +722,7 @@ DayCareManOutside:
 	dr $16b8c, $16e3a
 Function16e3a:
 	dr $16e3a, $16ff7
-Function16ff7:
+PhotoStudio:
 	dr $16ff7, $171d1
 Function171d1:
 	dr $171d1, $177a5
@@ -778,7 +778,7 @@ Function24b8d:
 	dr $24b8d, $24f20
 SelectQuantityToToss:
 	dr $24f20, $267ca
-Function267ca:
+ProfOaksPCBoot:
 	dr $267ca, $2692d
 InitDecorations: ; 2692d
 	dr $2692d, $270d5
@@ -844,7 +844,7 @@ UnlockMysteryGift:
 	dr $2a4e7, $2a4f6
 Function2a4f6:
 	dr $2a4f6, $2a7d7
-Function2a7d7:
+InitRoamMons:
 	dr $2a7d7, $2a8e0
 JumpRoamMons:
 	dr $2a8e0, $2a9f7
