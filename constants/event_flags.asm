@@ -2,7 +2,7 @@
 	const_def
 
 ; These first eight flags are reset upon reloading the map.
-	const EVENT_GAVE_KURT_APRICORNS ; 000
+	const EVENT_TEMPORARY_UNTIL_MAP_RELOAD_1 ; 000
 	const EVENT_RECEIVED_BALLS_FROM_KURT
 	const EVENT_DRAGON_SHRINE_QUESTION_2
 	const EVENT_DRAGON_SHRINE_QUESTION_3

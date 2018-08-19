@@ -1595,7 +1595,17 @@ SECTION "bank53", ROMX, BANK[$53]
 	dr $14c000, $150000
 
 SECTION "bank54", ROMX, BANK[$54]
-	dr $150000, $154000
+INCLUDE "maps/CeruleanGymBadgeSpeechHouse.asm"
+INCLUDE "maps/CeruleanPoliceStation.asm"
+INCLUDE "maps/CeruleanTradeSpeechHouse.asm"
+INCLUDE "maps/CeruleanPokecenter1F.asm"
+INCLUDE "maps/CeruleanPokecenter2FBeta.asm"
+INCLUDE "maps/CeruleanGym.asm"
+INCLUDE "maps/CeruleanMart.asm"
+INCLUDE "maps/Route10Pokecenter1F.asm"
+INCLUDE "maps/Route10Pokecenter2FBeta.asm"
+INCLUDE "maps/PowerPlant.asm"
+INCLUDE "maps/BillsHouse.asm"
 
 SECTION "bank55", ROMX, BANK[$55]
 	dr $154000, $158000
