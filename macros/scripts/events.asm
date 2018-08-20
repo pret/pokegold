@@ -531,167 +531,167 @@ jumptextfaceplayer: MACRO
 	dw \1 ; text_pointer
 ENDM
 
-	enum jumptext_command ; $53
+	enum jumptext_command ; $52
 jumptext: MACRO
 	db jumptext_command
 	dw \1 ; text_pointer
 ENDM
 
-	enum waitbutton_command ; $54
+	enum waitbutton_command ; $53
 waitbutton: MACRO
 	db waitbutton_command
 ENDM
 
-	enum buttonsound_command ; $55
+	enum buttonsound_command ; $54
 buttonsound: MACRO
 	db buttonsound_command
 ENDM
 
-	enum pokepic_command ; $56
+	enum pokepic_command ; $55
 pokepic: MACRO
 	db pokepic_command
 	db \1 ; pokemon
 ENDM
 
-	enum closepokepic_command ; $57
+	enum closepokepic_command ; $56
 closepokepic: MACRO
 	db closepokepic_command
 ENDM
 
-	enum _2dmenu_command ; $58
+	enum _2dmenu_command ; $57
 _2dmenu: MACRO
 	db _2dmenu_command
 ENDM
 
-	enum verticalmenu_command ; $59
+	enum verticalmenu_command ; $58
 verticalmenu: MACRO
 	db verticalmenu_command
 ENDM
 
-	enum loadpikachudata_command ; $5a
+	enum loadpikachudata_command ; $59
 loadpikachudata: MACRO
 	db loadpikachudata_command
 ENDM
 
-	enum randomwildmon_command ; $5b
+	enum randomwildmon_command ; $5a
 randomwildmon: MACRO
 	db randomwildmon_command
 ENDM
 
-	enum loadmemtrainer_command ; $5c
+	enum loadmemtrainer_command ; $5b
 loadmemtrainer: MACRO
 	db loadmemtrainer_command
 ENDM
 
-	enum loadwildmon_command ; $5d
+	enum loadwildmon_command ; $5c
 loadwildmon: MACRO
 	db loadwildmon_command
 	db \1 ; pokemon
 	db \2 ; level
 ENDM
 
-	enum loadtrainer_command ; $5e
+	enum loadtrainer_command ; $5d
 loadtrainer: MACRO
 	db loadtrainer_command
 	db \1 ; trainer_group
 	db \2 ; trainer_id
 ENDM
 
-	enum startbattle_command ; $5f
+	enum startbattle_command ; $5e
 startbattle: MACRO
 	db startbattle_command
 ENDM
 
-	enum reloadmapafterbattle_command ; $60
+	enum reloadmapafterbattle_command ; $5f
 reloadmapafterbattle: MACRO
 	db reloadmapafterbattle_command
 ENDM
 
-	enum catchtutorial_command ; $61
+	enum catchtutorial_command ; $60
 catchtutorial: MACRO
 	db catchtutorial_command
 	db \1 ; byte
 ENDM
 
-	enum trainertext_command ; $62
+	enum trainertext_command ; $61
 trainertext: MACRO
 	db trainertext_command
 	db \1 ; which_text
 ENDM
 
-	enum trainerflagaction_command ; $63
+	enum trainerflagaction_command ; $62
 trainerflagaction: MACRO
 	db trainerflagaction_command
 	db \1 ; action
 ENDM
 
-	enum winlosstext_command ; $64
+	enum winlosstext_command ; $63
 winlosstext: MACRO
 	db winlosstext_command
 	dw \1 ; win_text_pointer
 	dw \2 ; loss_text_pointer
 ENDM
 
-	enum scripttalkafter_command ; $65
+	enum scripttalkafter_command ; $64
 scripttalkafter: MACRO
 	db scripttalkafter_command
 ENDM
 
-	enum endifjustbattled_command ; $66
+	enum endifjustbattled_command ; $65
 endifjustbattled: MACRO
 	db endifjustbattled_command
 ENDM
 
-	enum checkjustbattled_command ; $67
+	enum checkjustbattled_command ; $66
 checkjustbattled: MACRO
 	db checkjustbattled_command
 ENDM
 
-	enum setlasttalked_command ; $68
+	enum setlasttalked_command ; $67
 setlasttalked: MACRO
 	db setlasttalked_command
 	db \1 ; object id
 ENDM
 
-	enum applymovement_command ; $69
+	enum applymovement_command ; $68
 applymovement: MACRO
 	db applymovement_command
 	db \1 ; object id
 	dw \2 ; data
 ENDM
 
-	enum applymovement2_command ; $6a
+	enum applymovement2_command ; $69
 applymovement2: MACRO
 	db applymovement2_command
 	dw \1 ; data
 ENDM
 
-	enum faceplayer_command ; $6b
+	enum faceplayer_command ; $6a
 faceplayer: MACRO
 	db faceplayer_command
 ENDM
 
-	enum faceobject_command ; $6c
+	enum faceobject_command ; $6b
 faceobject: MACRO
 	db faceobject_command
 	db \1 ; object1
 	db \2 ; object2
 ENDM
 
-	enum variablesprite_command ; $6d
+	enum variablesprite_command ; $6c
 variablesprite: MACRO
 	db variablesprite_command
 	db \1 - SPRITE_VARS ; byte
 	db \2 ; sprite
 ENDM
 
-	enum disappear_command ; $6e
+	enum disappear_command ; $6d
 disappear: MACRO
 	db disappear_command
 	db \1 ; object id
 ENDM
 
-	enum appear_command ; $6f
+	enum appear_command ; $6e
 appear: MACRO
 	db appear_command
 	db \1 ; object id
@@ -729,7 +729,7 @@ loademote: MACRO
 	db \1 ; bubble
 ENDM
 
-	enum showemote_command ; $75
+	enum showemote_command ; $74
 showemote: MACRO
 	db showemote_command
 	db \1 ; bubble
@@ -737,7 +737,7 @@ showemote: MACRO
 	db \3 ; time
 ENDM
 
-	enum turnobject_command ; $76
+	enum turnobject_command ; $75
 turnobject: MACRO
 	db turnobject_command
 	db \1 ; object id
@@ -788,13 +788,13 @@ writecmdqueue: MACRO
 	dw \1 ; queue_pointer
 ENDM
 
-	enum delcmdqueue_command ; $7e
+	enum delcmdqueue_command ; $7d
 delcmdqueue: MACRO
 	db delcmdqueue_command
 	db \1 ; byte
 ENDM
 
-	enum playmusic_command ; $7f
+	enum playmusic_command ; $7e
 playmusic: MACRO
 	db playmusic_command
 	dw \1 ; music_pointer
@@ -812,29 +812,29 @@ musicfadeout: MACRO
 	db \2 ; fadetime
 ENDM
 
-	enum playmapmusic_command ; $82
+	enum playmapmusic_command ; $81
 playmapmusic: MACRO
 	db playmapmusic_command
 ENDM
 
-	enum dontrestartmapmusic_command ; $83
+	enum dontrestartmapmusic_command ; $82
 dontrestartmapmusic: MACRO
 	db dontrestartmapmusic_command
 ENDM
 
-	enum cry_command ; $84
+	enum cry_command ; $83
 cry: MACRO
 	db cry_command
 	dw \1 ; cry_id
 ENDM
 
-	enum playsound_command ; $85
+	enum playsound_command ; $84
 playsound: MACRO
 	db playsound_command
 	dw \1 ; sound_pointer
 ENDM
 
-	enum waitsfx_command ; $86
+	enum waitsfx_command ; $85
 waitsfx: MACRO
 	db waitsfx_command
 ENDM
@@ -855,31 +855,31 @@ passtoengine: MACRO
 	db \1 ; data_pointer
 ENDM
 
-	enum newloadmap_command ; $8a
+	enum newloadmap_command ; $89
 newloadmap: MACRO
 	db newloadmap_command
 	db \1 ; which_method
 ENDM
 
-	enum pause_command ; $8b
+	enum pause_command ; $8a
 pause: MACRO
 	db pause_command
 	db \1 ; length
 ENDM
 
-	enum deactivatefacing_command ; $8c
+	enum deactivatefacing_command ; $8b
 deactivatefacing: MACRO
 	db deactivatefacing_command
 	db \1 ; time
 ENDM
 
-	enum priorityjump_command ; $8d
+	enum priorityjump_command ; $8c
 priorityjump: MACRO
 	db priorityjump_command
 	dw \1 ; pointer
 ENDM
 
-	enum warpcheck_command ; $8e
+	enum warpcheck_command ; $8d
 warpcheck: MACRO
 	db warpcheck_command
 ENDM

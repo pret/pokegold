@@ -1529,17 +1529,25 @@ SECTION "bank42", ROMX, BANK[$42]
 INCLUDE "maps/SproutTower1F.asm"
 INCLUDE "maps/SproutTower2F.asm"
 INCLUDE "maps/SproutTower3F.asm"
-	dr $108b1b, $108c8c
-	dr $108c8c, $108c9e
-	dr $108c9e, $108cbf
-	dr $108cbf, $108d10
-	dr $108d10, $108d4b
-	dr $108d4b, $108d5d
-	dr $108d5d, $108d8d
-	dr $108d8d, $108de0
-	dr $108de0, $108e2c
-	dr $108e2c, $1093b8
-	dr $1093b8, $109dca
+INCLUDE "maps/TinTower1F.asm"
+INCLUDE "maps/TinTower2F.asm"
+INCLUDE "maps/TinTower3F.asm"
+INCLUDE "maps/TinTower4F.asm"
+INCLUDE "maps/TinTower5F.asm"
+INCLUDE "maps/TinTower6F.asm"
+INCLUDE "maps/TinTower7F.asm"
+INCLUDE "maps/TinTower8F.asm"
+INCLUDE "maps/TinTower9F.asm"
+INCLUDE "maps/BurnedTower1F.asm"
+INCLUDE "maps/BurnedTowerB1F.asm"
+INCLUDE "maps/DiglettsCave.asm"
+INCLUDE "maps/MountMoon.asm"
+INCLUDE "maps/UndergroundPath.asm"
+INCLUDE "maps/RockTunnel1F.asm"
+INCLUDE "maps/RockTunnelB1F.asm"
+INCLUDE "maps/SafariZoneFuchsiaGateBeta.asm"
+INCLUDE "maps/SafariZoneBeta.asm"
+INCLUDE "maps/VictoryRoad.asm"
 
 SECTION "bank43", ROMX, BANK[$43]
 INCLUDE "maps/NationalPark.asm"

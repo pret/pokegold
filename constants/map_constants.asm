@@ -275,7 +275,7 @@ ENDM
 	map_const VERMILION_HOUSE_DIGLETTS_CAVE_SPEECH_HOUSE,  4,  4 ; 10
 	map_const VERMILION_GYM,                               9,  5 ; 11
 	map_const ROUTE_6_SAFFRON_GATE,                        4,  5 ; 12
-	map_const ROUTE_6_UNDERGROUND_ENTRANCE,                4,  4 ; 13
+	map_const ROUTE_6_UNDERGROUND_PATH_ENTRANCE,           4,  4 ; 13
 
 	newgroup                                                    ; 13
 
@@ -457,7 +457,7 @@ ENDM
 	map_const SILPH_CO_1F,                                 4,  8 ; 10
 	map_const COPYCATS_HOUSE_1F,                           4,  4 ; 11
 	map_const COPYCATS_HOUSE_2F,                           3,  5 ; 12
-	map_const ROUTE_5_UNDERGROUND_ENTRANCE,                4,  4 ; 13
+	map_const ROUTE_5_UNDERGROUND_PATH_ENTRANCE,           4,  4 ; 13
 	map_const ROUTE_5_SAFFRON_CITY_GATE,                   4,  5 ; 14
 	map_const ROUTE_5_CLEANSE_TAG_SPEECH_HOUSE,            4,  4 ; 15
 
