@@ -23,7 +23,7 @@ FieldMoveGetPartyNick: ; c74b (3:474b)
 	ld hl, wPartyMon1Nickname
 	ld a, $2
 	ld [wMonType], a
-	ld a, [wd005]
+	ld a, [wCurPartyMon]
 	call GetNick
 	call Function317b
 	ld de, wStringBuffer2
@@ -59,7 +59,7 @@ FieldMoveBadgeCheck: ; c776 (3:4776)
 FieldMovePartyCheck: ; c787 (3:4787)
 	ld e, $0
 	xor a
-	ld [wd005], a
+	ld [wCurPartyMon], a
 .asm_c78d
 	ld c, e
 	ld b, $0
@@ -89,7 +89,7 @@ FieldMovePartyCheck: ; c787 (3:4787)
 
 .asm_c7b6
 	ld a, e
-	ld [wd005], a
+	ld [wCurPartyMon], a
 	xor a
 	ret
 
@@ -434,7 +434,7 @@ AlreadySurfingText:
 	db "@"
 
 GetSurfType: ; c9d7 (3:49d7)
-	ld a, [wd005]
+	ld a, [wCurPartyMon]
 	ld e, a
 	ld d, $0
 	ld hl, wPartySpecies
@@ -760,7 +760,7 @@ TryEscapeFromDungeon:
 
 EscapeFromDungeon:
 	ld hl, wDigWarpNumber
-	ld de, wLastWarpNumber
+	ld de, wNextWarpNumber
 	ld bc, $3
 	call CopyBytes
 	call FieldMoveGetPartyNick
@@ -952,7 +952,7 @@ asm_cd0c
 
 GetStrengthUserSpeciesAndSetFlag:
 	SetFlag ENGINE_STRENGTH_ACTIVE
-	ld a, [wd005]
+	ld a, [wCurPartyMon]
 	ld e, a
 	ld d, $0
 	ld hl, wPartySpecies

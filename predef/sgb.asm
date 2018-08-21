@@ -165,7 +165,7 @@ Function8d46: ; 8d46 (2:4d46)
 	ld [wccae], a
 	ld a, [hl]
 	ld [wccaf], a
-	ld a, [wd004]
+	ld a, [wCurPartySpecies]
 	ld bc, wTempMonDVs
 	call Function9bcb
 	ld a, [hli]
@@ -198,7 +198,7 @@ Function8d95: ; 8d95 (2:4d95)
 	ld [hl], $5a
 	inc hl
 	ld [hl], $19
-	ld a, [wd004]
+	ld a, [wCurPartySpecies]
 	call Function9be4
 	ld a, [hli]
 	ld [wccb2], a
@@ -370,7 +370,7 @@ Function8eb7: ; 8eb7 (2:4eb7)
 .asm_8ed9
 	ld hl, wPartyMon1DVs
 	ld bc, $30
-	ld a, [wd005]
+	ld a, [wCurPartyMon]
 	call AddNTimes
 	ld c, l
 	ld b, h
@@ -433,7 +433,7 @@ Function8f53: ; 8f53 (2:4f53)
 	ld de, wcca9
 	ld bc, $10
 	call CopyBytes
-	ld a, [wd004]
+	ld a, [wCurPartySpecies]
 	ld l, a
 	ld h, $0
 	add hl, hl

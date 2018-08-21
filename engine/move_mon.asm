@@ -17,7 +17,7 @@ TryAddMonToParty:: ; d892 (3:5892)
 	jr nc, .asm_d8ad
 	inc d
 .asm_d8ad
-	ld a, [wd004]
+	ld a, [wCurPartySpecies]
 	ld [de], a
 	inc de
 	ld a, $ff
@@ -39,7 +39,7 @@ TryAddMonToParty:: ; d892 (3:5892)
 	ld a, [wMonType]
 	and a
 	jr nz, .asm_d8f6
-	ld a, [wd004]
+	ld a, [wCurPartySpecies]
 	ld [wd151], a
 	call GetPokemonName
 	ld hl, wPartyMonNicknames
@@ -155,7 +155,7 @@ GeneratePartyMonStats:
 	jr .asm_d9bb
 
 .asm_d998
-	ld a, [wd004]
+	ld a, [wCurPartySpecies]
 	ld [wd151], a
 	dec a
 	push de
@@ -286,7 +286,7 @@ GeneratePartyMonStats:
 	ld a, [wMonType]
 	and $f
 	jr nz, .asm_da71
-	ld a, [wd004]
+	ld a, [wCurPartySpecies]
 	cp $c9
 	jr nz, .asm_da71
 	ld hl, wPartyMon1DVs
@@ -359,7 +359,7 @@ AddTempmonToParty: ; da9c (3:5a9c)
 	ld d, h
 	ld e, l
 	ld hl, wOTPartyMon6StatsEnd
-	ld a, [wd005]
+	ld a, [wCurPartyMon]
 	call SkipNames
 	ld bc, NAME_LENGTH
 	call CopyBytes
@@ -370,13 +370,13 @@ AddTempmonToParty: ; da9c (3:5a9c)
 	ld d, h
 	ld e, l
 	ld hl, wOTPartyMon1Nickname
-	ld a, [wd005]
+	ld a, [wCurPartyMon]
 	call SkipNames
 	ld bc, NAME_LENGTH
 	call CopyBytes
-	ld a, [wd004]
+	ld a, [wCurPartySpecies]
 	ld [wd151], a
-	cp $fd
+	cp EGG
 	jr z, .asm_db18
 	dec a
 	call SetSeenAndCaughtMon
@@ -385,10 +385,10 @@ AddTempmonToParty: ; da9c (3:5a9c)
 	dec a
 	ld bc, PARTYMON_STRUCT_LENGTH
 	call AddNTimes
-	ld [hl], $46
+	ld [hl], 70
 .asm_db18
 	ld a, [wCurPartySpecies]
-	cp $c9
+	cp UNOWN
 	jr nz, .asm_db43
 	ld hl, wPartyMon1DVs
 	ld a, [wPartyCount]
@@ -397,11 +397,11 @@ AddTempmonToParty: ; da9c (3:5a9c)
 	call AddNTimes
 	predef GetUnownLetter
 	callab UpdateUnownDex
-	ld a, [wdc3f]
+	ld a, [wFirstUnownSeen]
 	and a
 	jr nz, .asm_db43
 	ld a, [wd11e]
-	ld [wdc3f], a
+	ld [wFirstUnownSeen], a
 .asm_db43
 	and a
 	ret
@@ -409,13 +409,13 @@ AddTempmonToParty: ; da9c (3:5a9c)
 SentGetPkmnIntoFromBox: ; db45 (3:5b45)
 	ld a, $1
 	call OpenSRAM
-	ld a, [wd008]
+	ld a, [wPokemonWithdrawDepositParameter]
 	and a
 	jr z, .asm_db66
 	cp $2
 	jr z, .asm_db66
 	cp $3
-	ld hl, wBreedMon1
+	ld hl, wBreedMon1Species
 	jr z, .asm_dba1
 	ld hl, sBoxCount
 	ld a, [hl]
@@ -434,15 +434,15 @@ SentGetPkmnIntoFromBox: ; db45 (3:5b45)
 	ld c, a
 	ld b, $0
 	add hl, bc
-	ld a, [wd008]
+	ld a, [wPokemonWithdrawDepositParameter]
 	cp $2
-	ld a, [wBreedMon1]
+	ld a, [wBreedMon1Species]
 	jr z, .asm_db82
-	ld a, [wd004]
+	ld a, [wCurPartySpecies]
 .asm_db82
 	ld [hli], a
 	ld [hl], $ff
-	ld a, [wd008]
+	ld a, [wPokemonWithdrawDepositParameter]
 	dec a
 	ld hl, wPartyMons
 	ld bc, PARTYMON_STRUCT_LENGTH
@@ -458,25 +458,25 @@ SentGetPkmnIntoFromBox: ; db45 (3:5b45)
 	push hl
 	ld e, l
 	ld d, h
-	ld a, [wd008]
+	ld a, [wPokemonWithdrawDepositParameter]
 	and a
 	ld hl, sBoxMon1Species
 	ld bc, BOXMON_STRUCT_LENGTH
 	jr z, .asm_dbbd
 	cp $2
-	ld hl, wBreedMon1
+	ld hl, wBreedMon1Species
 	jr z, .asm_dbc3
 	ld hl, wPartyMon1Species
 	ld bc, PARTYMON_STRUCT_LENGTH
 .asm_dbbd
-	ld a, [wd005]
+	ld a, [wCurPartyMon]
 	call AddNTimes
 .asm_dbc3
 	ld bc, BOXMON_STRUCT_LENGTH
 	call CopyBytes
-	ld a, [wd008]
+	ld a, [wPokemonWithdrawDepositParameter]
 	cp $3
-	ld de, wdc4c
+	ld de, wBreedMon1OT
 	jr z, .asm_dbe8
 	dec a
 	ld hl, wPartyMonOT
@@ -491,22 +491,22 @@ SentGetPkmnIntoFromBox: ; db45 (3:5b45)
 	ld e, l
 .asm_dbe8
 	ld hl, sBoxMonOT
-	ld a, [wd008]
+	ld a, [wPokemonWithdrawDepositParameter]
 	and a
 	jr z, .asm_dbfb
-	ld hl, wdc4c
+	ld hl, wBreedMon1OT
 	cp $2
 	jr z, .asm_dc01
 	ld hl, wPartyMon6StatsEnd
 .asm_dbfb
-	ld a, [wd005]
+	ld a, [wCurPartyMon]
 	call SkipNames
 .asm_dc01
 	ld bc, NAME_LENGTH
 	call CopyBytes
-	ld a, [wd008]
+	ld a, [wPokemonWithdrawDepositParameter]
 	cp $3
-	ld de, wdc41
+	ld de, wBreedMon1Nick
 	jr z, .asm_dc26
 	dec a
 	ld hl, wPartyMon1Nickname
@@ -521,21 +521,21 @@ SentGetPkmnIntoFromBox: ; db45 (3:5b45)
 	ld e, l
 .asm_dc26
 	ld hl, sBoxMonNicknames
-	ld a, [wd008]
+	ld a, [wPokemonWithdrawDepositParameter]
 	and a
 	jr z, .asm_dc39
-	ld hl, wdc41
+	ld hl, wBreedMon1Nick
 	cp $2
 	jr z, .asm_dc3f
 	ld hl, wPartyMon1Nickname
 .asm_dc39
-	ld a, [wd005]
+	ld a, [wCurPartyMon]
 	call SkipNames
 .asm_dc3f
 	ld bc, NAME_LENGTH
 	call CopyBytes
 	pop hl
-	ld a, [wd008]
+	ld a, [wPokemonWithdrawDepositParameter]
 	cp $1
 	jr z, .asm_dcaa
 	cp $3
@@ -564,7 +564,7 @@ SentGetPkmnIntoFromBox: ; db45 (3:5b45)
 	ld b, $1
 	call CalcPkmnStats
 	pop bc
-	ld a, [wd008]
+	ld a, [wPokemonWithdrawDepositParameter]
 	and a
 	jr nz, Functiondcb2
 	ld hl, $20
@@ -575,7 +575,7 @@ SentGetPkmnIntoFromBox: ; db45 (3:5b45)
 	add hl, bc
 	ld d, h
 	ld e, l
-	ld a, [wd004]
+	ld a, [wCurPartySpecies]
 	cp $fd
 	jr z, .asm_dca4
 	inc hl
@@ -683,11 +683,11 @@ RetrievePokemonFromDaycareMan:
 	ld a, e
 	ld [wCurPartyLevel], a
 	xor a
-	ld [wd008], a
+	ld [wPokemonWithdrawDepositParameter], a
 	jp Functiondd6a
 
 RetrievePokemonFromDaycareLady:
-	ld a, [wBreedMon2]
+	ld a, [wBreedMon2Species]
 	ld [wCurPartySpecies], a
 	ld de, SFX_TRANSACTION
 	call PlaySFX
@@ -698,7 +698,7 @@ RetrievePokemonFromDaycareLady:
 	ld a, e
 	ld [wCurPartyLevel], a
 	ld a, $1
-	ld [wd008], a
+	ld [wPokemonWithdrawDepositParameter], a
 	jp Functiondd6a ; super long jump
 
 Functiondd6a: ; dd6a (3:5d6a)
@@ -715,13 +715,13 @@ Functiondd6a: ; dd6a (3:5d6a)
 	ld c, a
 	ld b, $0
 	add hl, bc
-	ld a, [wd008]
+	ld a, [wPokemonWithdrawDepositParameter]
 	and a
-	ld a, [wBreedMon1]
-	ld de, wdc41
+	ld a, [wBreedMon1Species]
+	ld de, wBreedMon1Nick
 	jr z, .asm_dd8c
-	ld a, [wBreedMon2]
-	ld de, wdc7a
+	ld a, [wBreedMon2Species]
+	ld de, wBreedMon2Nick
 .asm_dd8c
 	ld [hli], a
 	ld [wCurSpecies], a
@@ -779,7 +779,7 @@ Functiondd6a: ; dd6a (3:5d6a)
 	predef FillMoves
 	ld a, [wPartyCount]
 	dec a
-	ld [wd005], a
+	ld [wCurPartyMon], a
 	callba Functionc6bc ; same bank
 	ld a, [wCurPartyLevel]
 	ld d, a
@@ -806,28 +806,28 @@ Functionde20: ; de20 (3:5e20)
 	ld e, l
 	ret
 
-	ld de, wdc41
+	ld de, wBreedMon1Nick
 	call Functionde4a
 	xor a
-	ld [wd008], a
+	ld [wPokemonWithdrawDepositParameter], a
 	jp RemoveMonFromPartyOrBox
 
-	ld de, wdc7a
+	ld de, wBreedMon2Nick
 	call Functionde4a
 	xor a
-	ld [wd008], a
+	ld [wPokemonWithdrawDepositParameter], a
 	jp RemoveMonFromPartyOrBox
 
 Functionde4a: ; de4a (3:5e4a)
-	ld a, [wd005]
+	ld a, [wCurPartyMon]
 	ld hl, wPartyMonNicknames
 	call SkipNames
 	call CopyBytes
-	ld a, [wd005]
+	ld a, [wCurPartyMon]
 	ld hl, wPartyMon1OT
 	call SkipNames
 	call CopyBytes
-	ld a, [wd005]
+	ld a, [wCurPartyMon]
 	ld hl, wPartyMon1
 	ld bc, PARTYMON_STRUCT_LENGTH
 	call AddNTimes
@@ -843,7 +843,7 @@ SentPkmnIntoBox: ; de74 (3:5e74)
 	jp nc, Functiondf48
 	inc a
 	ld [de], a
-	ld a, [wd004]
+	ld a, [wCurPartySpecies]
 	ld [wCurSpecies], a
 	ld c, a
 .asm_de8b
@@ -861,7 +861,7 @@ SentPkmnIntoBox: ; de74 (3:5e74)
 	ld de, sBoxMonOT
 	ld bc, NAME_LENGTH
 	call CopyBytes
-	ld a, [wd004]
+	ld a, [wCurPartySpecies]
 	ld [wd151], a
 	call GetPokemonName
 	ld de, sBoxMonNicknames
@@ -920,7 +920,7 @@ SentPkmnIntoBox: ; de74 (3:5e74)
 	inc de
 	ld a, [wCurPartyLevel]
 	ld [de], a
-	ld a, [wd004]
+	ld a, [wCurPartySpecies]
 	dec a
 	call SetSeenAndCaughtMon
 	ld a, [wCurPartySpecies]
@@ -991,7 +991,7 @@ Functiondf65: ; df65 (3:5f65)
 	ret
 
 GiveEgg: ; df92 (3:5f92)
-	ld a, [wd004]
+	ld a, [wCurPartySpecies]
 	push af
 	callab GetPreEvolution
 	callab GetPreEvolution
@@ -1020,7 +1020,7 @@ GiveEgg: ; df92 (3:5f92)
 	ld a, c
 	and a
 	jr nz, .asm_dfdf
-	ld a, [wd004]
+	ld a, [wCurPartySpecies]
 	dec a
 	ld c, a
 	ld d, $0
@@ -1029,13 +1029,13 @@ GiveEgg: ; df92 (3:5f92)
 	predef FlagPredef
 .asm_dfdf
 	pop af
-	ld [wd004], a
+	ld [wCurPartySpecies], a
 	ld a, [wPokemonData]
 	dec a
 	ld bc, PARTYMON_STRUCT_LENGTH
 	ld hl, wPartyMon1Species
 	call AddNTimes
-	ld a, [wd004]
+	ld a, [wCurPartySpecies]
 	ld [hl], a
 	ld hl, wPokemonData
 	ld a, [hl]
@@ -1078,7 +1078,7 @@ String_Egg:
 
 RemoveMonFromPartyOrBox: ; e03f (3:603f)
 	ld hl, wPartyCount
-	ld a, [wd008]
+	ld a, [wPokemonWithdrawDepositParameter]
 	and a
 	jr z, .asm_e050
 	ld a, $1
@@ -1088,7 +1088,7 @@ RemoveMonFromPartyOrBox: ; e03f (3:603f)
 	ld a, [hl]
 	dec a
 	ld [hli], a
-	ld a, [wd005]
+	ld a, [wCurPartyMon]
 	ld c, a
 	ld b, $0
 	add hl, bc
@@ -1103,15 +1103,15 @@ RemoveMonFromPartyOrBox: ; e03f (3:603f)
 	jr nz, .asm_e05d
 	ld hl, wPartyMon6StatsEnd
 	ld d, $5
-	ld a, [wd008]
+	ld a, [wPokemonWithdrawDepositParameter]
 	and a
 	jr z, .asm_e073
 	ld hl, sBoxMonOT
 	ld d, $13
 .asm_e073
-	ld a, [wd005]
+	ld a, [wCurPartyMon]
 	call SkipNames
-	ld a, [wd005]
+	ld a, [wCurPartyMon]
 	cp d
 	jr nz, .asm_e084
 	ld [hl], $ff
@@ -1123,7 +1123,7 @@ RemoveMonFromPartyOrBox: ; e03f (3:603f)
 	ld bc, NAME_LENGTH
 	add hl, bc
 	ld bc, wPartyMonNicknames
-	ld a, [wd008]
+	ld a, [wPokemonWithdrawDepositParameter]
 	and a
 	jr z, .asm_e096
 	ld bc, sBoxMonNicknames
@@ -1131,17 +1131,17 @@ RemoveMonFromPartyOrBox: ; e03f (3:603f)
 	call Function3231
 	ld hl, wPartyMon1
 	ld bc, PARTYMON_STRUCT_LENGTH
-	ld a, [wd008]
+	ld a, [wPokemonWithdrawDepositParameter]
 	and a
 	jr z, .asm_e0ab
 	ld hl, sBoxMon1Species
 	ld bc, BOXMON_STRUCT_LENGTH
 .asm_e0ab
-	ld a, [wd005]
+	ld a, [wCurPartyMon]
 	call AddNTimes
 	ld d, h
 	ld e, l
-	ld a, [wd008]
+	ld a, [wPokemonWithdrawDepositParameter]
 	and a
 	jr z, .asm_e0c2
 	ld bc, BOXMON_STRUCT_LENGTH
@@ -1156,27 +1156,27 @@ RemoveMonFromPartyOrBox: ; e03f (3:603f)
 .asm_e0c9
 	call Function3231
 	ld hl, wPartyMonNicknames
-	ld a, [wd008]
+	ld a, [wPokemonWithdrawDepositParameter]
 	and a
 	jr z, .asm_e0d8
 	ld hl, sBoxMonNicknames
 .asm_e0d8
 	ld bc, NAME_LENGTH
-	ld a, [wd005]
+	ld a, [wCurPartyMon]
 	call AddNTimes
 	ld d, h
 	ld e, l
 	ld bc, NAME_LENGTH
 	add hl, bc
-	ld bc, wdbce
-	ld a, [wd008]
+	ld bc, wPartyMonNicknamesEnd
+	ld a, [wPokemonWithdrawDepositParameter]
 	and a
 	jr z, .asm_e0f3
 	ld bc, sBoxEnd
 .asm_e0f3
 	call Function3231
 .asm_e0f6
-	ld a, [wd008]
+	ld a, [wPokemonWithdrawDepositParameter]
 	and a
 	jp nz, CloseSRAM
 	ld a, [wLinkMode]
@@ -1185,7 +1185,7 @@ RemoveMonFromPartyOrBox: ; e03f (3:603f)
 	ld a, $0
 	call OpenSRAM
 	ld hl, wPokemonData
-	ld a, [wd005]
+	ld a, [wCurPartyMon]
 	cp [hl]
 	jr z, .asm_e137
 	ld hl, s0_a600
@@ -1194,7 +1194,7 @@ RemoveMonFromPartyOrBox: ; e03f (3:603f)
 	push hl
 	add hl, bc
 	pop de
-	ld a, [wd005]
+	ld a, [wCurPartyMon]
 	ld b, a
 .asm_e120
 	push bc
@@ -1484,7 +1484,7 @@ GivePoke: ; Give a Pokemon from script
 	ld hl, wPartyMon1Nickname
 	ld a, [wPokemonData]
 	dec a
-	ld [wd005], a
+	ld [wCurPartyMon], a
 	call SkipNames
 	ld d, h
 	ld e, l
@@ -1497,7 +1497,7 @@ GivePoke: ; Give a Pokemon from script
 	ld a, [wd002]
 	and a
 	jr z, .asm_e2fa
-	ld a, [wd005]
+	ld a, [wCurPartyMon]
 	ld hl, wPartyMon1Item
 	ld bc, PARTYMON_STRUCT_LENGTH
 	call AddNTimes
@@ -1514,7 +1514,7 @@ GivePoke: ; Give a Pokemon from script
 	ld a, BOXMON
 	ld [wMonType], a
 	xor a
-	ld [wd005], a
+	ld [wCurPartyMon], a
 	ld de, wMonOrItemNameBuffer
 	pop bc
 	ld a, b
@@ -1528,7 +1528,7 @@ GivePoke: ; Give a Pokemon from script
 	ld a, [wd002]
 	ld [sBoxMon1Item], a
 .asm_e2fa
-	ld a, [wd004]
+	ld a, [wCurPartySpecies]
 	ld [wd151], a
 	ld [wTempEnemyMonSpecies], a
 	call GetPokemonName
@@ -1561,7 +1561,7 @@ GivePoke: ; Give a Pokemon from script
 	push bc
 	jr nz, .asm_e360
 	push hl
-	ld a, [wd005]
+	ld a, [wCurPartyMon]
 	ld hl, wPartyMon1OT
 	call SkipNames
 	ld d, h
@@ -1569,7 +1569,7 @@ GivePoke: ; Give a Pokemon from script
 	pop hl
 	ld a, [wScriptBank]
 	call FarCopyBytes
-	ld a, [wd005]
+	ld a, [wCurPartyMon]
 	ld hl, wPartyMon1ID
 	ld bc, PARTYMON_STRUCT_LENGTH
 	call AddNTimes

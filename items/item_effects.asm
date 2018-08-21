@@ -478,7 +478,7 @@ UltraBall: ; e926
 .transformed
 	ld a, [wEnemyMonSpecies]
 	ld [wWildMon], a
-	ld [wd004], a
+	ld [wCurPartySpecies], a
 	ld [wd151], a
 	ld a, [wBattleType]
 	cp BATTLETYPE_TUTORIAL
@@ -536,7 +536,7 @@ UltraBall: ; e926
 	jp c, .end_ball_function
 	ld a, [wPartyCount]
 	dec a
-	ld [wd005], a
+	ld [wCurPartyMon], a
 	ld hl, wPartyMon1Nickname
 	ld bc, MON_NAME_LENGTH
 	call AddNTimes
@@ -574,13 +574,13 @@ UltraBall: ; e926
 	call CloseSRAM
 	ld hl, Text_AskNicknameNewlyCaughtMon ; $6e49
 	call PrintText
-	ld a, [wd004]
+	ld a, [wCurPartySpecies]
 	ld [wd151], a
 	call GetPokemonName
 	call YesNoBox
 	jr c, .init_name_in_sram
 	xor a
-	ld [wd005], a
+	ld [wCurPartyMon], a
 	ld a, $2
 	ld [wMonType], a
 	ld de, wMonOrItemNameBuffer
@@ -635,7 +635,7 @@ UltraBall: ; e926
 .toss
 	ld hl, wNumItems
 	inc a
-	ld [wd009], a
+	ld [wItemQuantityChangeBuffer], a
 	jp TossItem
 
 .used_park_ball
@@ -841,7 +841,7 @@ LoveBallMultiplier:
 	xor a
 	ld [wMonType], a
 	ld a, [wCurBattleMon]
-	ld [wd005], a
+	ld [wCurPartyMon], a
 	callba GetGender ; 14:52f1
 	jr c, .asm_edba
 	ld d, $0
@@ -850,7 +850,7 @@ LoveBallMultiplier:
 .asm_ed8d
 	push de
 	ld a, [wTempEnemyMonSpecies]
-	ld [wd004], a
+	ld [wCurPartySpecies], a
 	ld a, $4
 	ld [wMonType], a
 	callba GetGender ; 14:52f1
@@ -1131,7 +1131,7 @@ StatOffsets:
 	db CALCIUM, MON_SPC_EXP - MON_STAT_EXP
 
 Functionef49: ; ef49 (3:6f49)
-	ld a, [wd004]
+	ld a, [wCurPartySpecies]
 	ld [wCurSpecies], a
 	ld [wd151], a
 	ld a, $1f
@@ -1139,7 +1139,7 @@ Functionef49: ; ef49 (3:6f49)
 	ld a, [hl]
 	ld [wCurPartyLevel], a
 	call GetBaseData
-	ld a, [wd005]
+	ld a, [wCurPartyMon]
 	ld hl, wPartyMonNicknames
 	call GetNick
 	ret
@@ -1209,7 +1209,7 @@ RareCandy: ; ef68 (3:6f68)
 	call WaitPressAorB_BlinkCursor
 	xor a
 	ld [wMonType], a
-	ld a, [wd004]
+	ld a, [wCurPartySpecies]
 	ld [wd151], a
 	predef LearnLevelMoves
 	xor a
@@ -1268,7 +1268,7 @@ Functionf030: ; f030 (3:7030)
 	xor a
 	ld [hl], a
 	ld a, b
-	ld [wd03e], a
+	ld [wPartyMenuActionText], a
 	call Functionf086
 	call Functionf7c7
 	call Functionf2cf
@@ -1401,7 +1401,7 @@ Functionf12c: ; f12c (3:712c)
 	ld a, [wBattleMode]
 	and a
 	jr z, .asm_f15a
-	ld a, [wd005]
+	ld a, [wCurPartyMon]
 	ld c, a
 	ld d, $0
 	ld hl, wcbda
@@ -1410,7 +1410,7 @@ Functionf12c: ; f12c (3:712c)
 	ld a, c
 	and a
 	jr z, .asm_f15a
-	ld a, [wd005]
+	ld a, [wCurPartyMon]
 	ld c, a
 	ld hl, wcb42
 	ld b, SET_FLAG
@@ -1429,7 +1429,7 @@ Functionf12c: ; f12c (3:712c)
 .asm_f16d
 	call Functionf231
 	ld a, $f7
-	ld [wd03e], a
+	ld [wPartyMenuActionText], a
 	call Functionf2cf
 	call Functionf7dc
 	ld a, $0
@@ -1462,7 +1462,7 @@ Functionf19a: ; f19a (3:719a)
 	call RestoreBattlemonHP
 	call Functionf231
 	ld a, $f5
-	ld [wd03e], a
+	ld [wPartyMenuActionText], a
 	call Functionf2cf
 	call Functionf7dc
 	ld a, $0
@@ -1534,7 +1534,7 @@ Functionf1ff: ; f1ff (3:71ff)
 	call RestoreBattlemonHP
 	call Functionf231
 	ld a, PARTYMENUTEXT_HEAL_HP
-	ld [wd03e], a
+	ld [wPartyMenuActionText], a
 	call Functionf2cf
 	call Functionf7dc
 	ld a, $0
@@ -1545,12 +1545,12 @@ Functionf231: ; f231 (3:7231)
 	ld de, $4
 	call WaitPlaySFX
 	pop de
-	ld a, [wd005]
+	ld a, [wCurPartyMon]
 	hlcoord 11, 0
 	ld bc, $28
 	call AddNTimes
 	ld a, $2
-	ld [wd007], a
+	ld [wWhichHPBar], a
 	predef_jump AnimateHPBar
 
 Functionf24f: ; f24f (3:724f)
@@ -1569,7 +1569,7 @@ Functionf24f: ; f24f (3:724f)
 
 Functionf261: ; f261 (3:7261)
 	ld a, b
-	ld [wd03e], a
+	ld [wPartyMenuActionText], a
 	push hl
 	push de
 	push bc
@@ -1593,10 +1593,10 @@ Functionf272: ; f272 (3:7272)
 	ret
 
 Functionf2a0: ; f2a0 (3:72a0)
-	ld [wd03e], a
+	ld [wPartyMenuActionText], a
 	ld a, [wCurPartySpecies]
 	push af
-	ld a, [wd005]
+	ld a, [wCurPartyMon]
 	push af
 	push hl
 	push de
@@ -1610,7 +1610,7 @@ Functionf2a0: ; f2a0 (3:72a0)
 	pop de
 	pop hl
 	pop af
-	ld [wd005], a
+	ld [wCurPartyMon], a
 	pop af
 	ld [wCurPartySpecies], a
 	ret
@@ -1622,7 +1622,7 @@ Functionf2cf: ; f2cf (3:72cf)
 	ld bc, SCREEN_HEIGHT * SCREEN_WIDTH
 	ld a, " "
 	call ByteFill
-	ld a, [wd03e]
+	ld a, [wPartyMenuActionText]
 	call Functionf2a0
 	ld a, $1
 	ld [hBGMapMode], a
@@ -1645,7 +1645,7 @@ Functionf2fc: ; f2fc (3:72fc)
 	ld a, [wBattleMode]
 	and a
 	ret z
-	ld a, [wd005]
+	ld a, [wCurPartyMon]
 	push hl
 	ld hl, wCurBattleMon
 	cp [hl]
@@ -1865,7 +1865,7 @@ HealingItemParameters:
 	call Functionf46f
 	jr c, .asm_f469
 	ld a, b
-	ld [wd005], a
+	ld [wCurPartyMon], a
 	call Functionf363
 	call GetOneFifthMaxHP
 	call Functionf34f
@@ -1874,7 +1874,7 @@ HealingItemParameters:
 	pop bc
 	call GetOneFifthMaxHP
 	ld a, c
-	ld [wd005], a
+	ld [wCurPartyMon], a
 	call Functionf363
 	call Functionf327
 .asm_f45d
@@ -1891,7 +1891,7 @@ HealingItemParameters:
 Functionf46f: ; f46f (3:746f)
 	push bc
 	ld a, $1
-	ld [wd03e], a
+	ld [wPartyMenuActionText], a
 	call Functionf272
 	pop bc
 	jr c, .asm_f494
@@ -1902,7 +1902,7 @@ Functionf46f: ; f46f (3:746f)
 	cp c
 	jr z, .asm_f496
 	ld a, c
-	ld [wd005], a
+	ld [wCurPartyMon], a
 	call Functionf363
 	jr z, .asm_f496
 	call CalculateCurHPAnimRemainingHP
@@ -2019,7 +2019,7 @@ XSpeed: ; f515
 	callba BattleCommand_StatUpMessage
 	callba BattleCommand_StatUpFailText
 	ld a, [wCurBattleMon]
-	ld [wd005], a
+	ld [wCurPartyMon], a
 	ld c, HAPPINESS_USEDXITEM
 	callba ChangeHappiness
 	ret
@@ -2220,7 +2220,7 @@ asm_f699
 	ld a, [wBattleMode]
 	and a
 	jr z, .asm_f6b3
-	ld a, [wd005]
+	ld a, [wCurPartyMon]
 	ld b, a
 	ld a, [wCurBattleMon]
 	cp b
@@ -2236,7 +2236,7 @@ asm_f699
 	jr asm_f693
 
 Functionf6be: ; f6be (3:76be)
-	ld a, [wd005]
+	ld a, [wCurPartyMon]
 	ld hl, wPartyMon1Moves
 	ld bc, $30
 	call AddNTimes
@@ -2516,7 +2516,7 @@ Functionf7d0: ; f7d0 (3:77d0)
 Functionf7dc: ; f7dc (3:77dc)
 	ld hl, wTMsHMsEnd
 	ld a, $1
-	ld [wd009], a
+	ld [wItemQuantityChangeBuffer], a
 	jp TossItem
 
 Functionf7e7: ; f7e7 (3:77e7)
@@ -2809,7 +2809,7 @@ GetMaxPPOfMove: ; f933 (3:7933)
 	ret
 
 Functionf9aa: ; f9aa (3:79aa)
-	ld a, [wd005]
+	ld a, [wCurPartyMon]
 	call AddNTimes
 Functionf9b0: ; f9b0 (3:79b0)
 	ld a, [wMenuCursorY]

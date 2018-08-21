@@ -593,28 +593,28 @@ Function230f:: ; 230f (0:230f)
 	ld a, [hli]
 .asm_232b
 	pop bc
-	ld [wLastWarpNumber], a
+	ld [wNextWarpNumber], a
 	ld a, [hli]
-	ld [wLastMapGroup], a
+	ld [wNextMapGroup], a
 	ld a, [hli]
-	ld [wLastMapNumber], a
+	ld [wNextMapNumber], a
 	ld a, c
-	ld [wd046], a
+	ld [wPrevWarpNumber], a
 	ld a, [wMapGroup]
-	ld [wd047], a
+	ld [wPrevMapGroup], a
 	ld a, [wMapNumber]
-	ld [wd048], a
+	ld [wPrevMapNumber], a
 	scf
 	ret
 
 Function2349::
 	call Function2362
 	call Function239b
-	ld a, [wLastWarpNumber]
+	ld a, [wNextWarpNumber]
 	ld [wd9ff], a
-	ld a, [wLastMapGroup]
+	ld a, [wNextMapGroup]
 	ld [wMapGroup], a
-	ld a, [wLastMapNumber]
+	ld a, [wNextMapNumber]
 	ld [wMapNumber], a
 	ret
 
@@ -622,27 +622,27 @@ Function2362:: ; 2362 (0:2362)
 	call GetMapPermission
 	call CheckOutdoorMap
 	ret nz
-	ld a, [wLastMapGroup]
+	ld a, [wNextMapGroup]
 	ld b, a
-	ld a, [wLastMapNumber]
+	ld a, [wNextMapNumber]
 	ld c, a
 	call GetAnyMapPermission
 	call CheckIndoorMap
 	ret nz
-	ld a, [wd047]
+	ld a, [wPrevMapGroup]
 	cp $f
 	jr nz, .asm_2388
-	ld a, [wd048]
+	ld a, [wPrevMapNumber]
 	cp $a
 	ret z
 	cp $c
 	ret z
 .asm_2388
-	ld a, [wd046]
+	ld a, [wPrevWarpNumber]
 	ld [wDigWarpNumber], a
-	ld a, [wd047]
+	ld a, [wPrevMapGroup]
 	ld [wDigMapGroup], a
-	ld a, [wd048]
+	ld a, [wPrevMapNumber]
 	ld [wDigMapNumber], a
 	ret
 
@@ -650,24 +650,24 @@ Function239b:: ; 239b (0:239b)
 	call GetMapPermission
 	call CheckOutdoorMap
 	ret nz
-	ld a, [wLastMapGroup]
+	ld a, [wNextMapGroup]
 	ld b, a
-	ld a, [wLastMapNumber]
+	ld a, [wNextMapNumber]
 	ld c, a
 	call GetAnyMapPermission
 	call CheckIndoorMap
 	ret nz
-	ld a, [wLastMapGroup]
+	ld a, [wNextMapGroup]
 	ld b, a
-	ld a, [wLastMapNumber]
+	ld a, [wNextMapNumber]
 	ld c, a
 	call GetAnyMapTileset
 	ld a, c
 	cp $6
 	ret nz
-	ld a, [wd047]
+	ld a, [wPrevMapGroup]
 	ld [wd9fb], a
-	ld a, [wd048]
+	ld a, [wPrevMapNumber]
 	ld [wd9fc], a
 	ret
 
@@ -975,11 +975,11 @@ RestoreFacingAfterWarp::
 	ret
 
 BackUpWarp:: ; 2596 (0:2596)
-	ld a, [wd046]
+	ld a, [wPrevWarpNumber]
 	ld [wd9f5], a
-	ld a, [wd047]
+	ld a, [wPrevMapGroup]
 	ld [wd9f6], a
-	ld a, [wd048]
+	ld a, [wPrevMapNumber]
 	ld [wd9f7], a
 	ret
 

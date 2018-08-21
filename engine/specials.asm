@@ -271,7 +271,7 @@ GetMysteryGiftItem: ; c463 (3:4463)
 	ld a, [$abe2]
 	ld [wd002], a
 	ld a, $1
-	ld [wd009], a
+	ld [wItemQuantityChangeBuffer], a
 	ld hl, wNumItems
 	call ReceiveItem
 	jr nc, .asm_c497
@@ -411,14 +411,14 @@ UnusedCheckUnusedTwoDayTimer: ; c549 (3:4549)
 
 ActivateFishingSwarm: ; c556 (3:4556)
 	ld a, [wScriptVar]
-	ld [wdd19], a
+	ld [wFishingSwarmFlag], a
 	jr .asm_c566
 
 .asm_c55e
 	ld a, d
-	ld [wdd17], a
+	ld [wDunsparceMapGroup], a
 	ld a, e
-	ld [wdd18], a
+	ld [wDunsparceMapNumber], a
 .asm_c566
 	SetFlag ENGINE_SPECIAL_WILDDATA
 	ret
@@ -434,9 +434,9 @@ Functionc56c:
 	ld a, $1
 	ld [wScriptVar], a
 	xor a
-	ld [wdd19], a
-	ld [wdd17], a
-	ld [wdd18], a
+	ld [wFishingSwarmFlag], a
+	ld [wDunsparceMapGroup], a
+	ld [wDunsparceMapNumber], a
 	ret
 
 CheckPokerus: ; c588 (3:4588)
@@ -474,7 +474,7 @@ SelectApricornForKurt: ; c5bb (3:45bb)
 	ret z
 	ld [wd002], a
 	ld a, $1
-	ld [wd009], a
+	ld [wItemQuantityChangeBuffer], a
 	ld hl, wNumItems
 	call TossItem
 	ret

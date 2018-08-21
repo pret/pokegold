@@ -199,7 +199,7 @@ Functiond6fb: ; d6fb (3:56fb)
 Functiond736: ; d736 (3:5736)
 	call Functiond78a
 	ld d, $6
-	ld a, [wd007]
+	ld a, [wWhichHPBar]
 	and $1
 	ld b, a
 	ld a, [wCurHPBarPixels]
@@ -224,7 +224,7 @@ Functiond74f: ; d74f (3:574f)
 	call ComputeHPBarPixels
 	ld c, e
 	ld d, $6
-	ld a, [wd007]
+	ld a, [wWhichHPBar]
 	and $1
 	ld b, a
 	push de
@@ -234,7 +234,7 @@ Functiond74f: ; d74f (3:574f)
 	ret
 
 Functiond777: ; d777 (3:5777)
-	ld a, [wd007]
+	ld a, [wWhichHPBar]
 	cp $2
 	jr nz, .asm_d786
 	ld a, $28
@@ -248,7 +248,7 @@ Functiond777: ; d777 (3:5777)
 	ret
 
 Functiond78a: ; d78a (3:578a)
-	ld a, [wd007]
+	ld a, [wWhichHPBar]
 	and a
 	ret z
 	cp $1
@@ -298,12 +298,12 @@ Functiond7cf: ; d7cf (3:57cf)
 	ret
 
 .asm_d7db
-	ld a, [wd007]
+	ld a, [wWhichHPBar]
 	and a
 	jr z, .asm_d82f
 	cp $1
 	jr z, .asm_d833
-	ld a, [wd005]
+	ld a, [wCurPartyMon]
 	cp $3
 	jr nc, .asm_d7f0
 	ld c, $0

@@ -12,7 +12,7 @@ HandlePlayerStep_::
 
 .asm_d4b6
 	ld a, $4
-	ld [wd03c], a
+	ld [wHandlePlayerStep], a
 	call Functiond53c
 	jr .asm_d4c5
 
@@ -48,7 +48,7 @@ ScrollScreen::
 	ret
 
 Functiond4f2: ; d4f2 (3:54f2)
-	ld hl, wd03c
+	ld hl, wHandlePlayerStep
 	ld a, [hl]
 	and a
 	ret z

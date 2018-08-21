@@ -590,7 +590,7 @@ BugContest_SetCaughtContestMon:
 GenerateBugContestMonStats: ; e781 (3:6781)
 	ld a, [wTempEnemyMonSpecies]
 	ld [wCurSpecies], a
-	ld [wd004], a
+	ld [wCurPartySpecies], a
 	call GetBaseData
 	xor a
 	ld bc, PARTYMON_STRUCT_LENGTH

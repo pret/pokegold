@@ -1,6 +1,6 @@
 LearnMove:
 	call BackUpTilesToBuffer
-	ld a, [wd005]
+	ld a, [wCurPartyMon]
 	ld hl, wPartyMon1Nickname
 	call GetNick
 	ld hl, wStringBuffer1
@@ -10,7 +10,7 @@ LearnMove:
 .loop
 	ld hl, wPartyMon1Moves
 	ld bc, $30
-	ld a, [wd005]
+	ld a, [wCurPartyMon]
 	call AddNTimes
 	ld d, h
 	ld e, l
@@ -64,7 +64,7 @@ LearnMove:
 	ld a, [wBattleMode]
 	and a
 	jp z, .LearnedMove
-	ld a, [wd005]
+	ld a, [wCurPartyMon]
 	ld b, a
 	ld a, [wCurBattleMon]
 	cp b

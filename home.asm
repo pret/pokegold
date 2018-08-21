@@ -1600,7 +1600,7 @@ PrepMonFrontpic::
 	ld a, $1
 	ld [wcf3b], a
 PrepMonFrontpic_::
-	ld a, [wd004]
+	ld a, [wCurPartySpecies]
 	and a
 	jr z, .not_pokemon
 	cp EGG
@@ -1624,7 +1624,7 @@ PrepMonFrontpic_::
 	xor a
 	ld [wcf3b], a
 	inc a
-	ld [wd004], a
+	ld [wCurPartySpecies], a
 	ret
 
 INCLUDE "home/cry.asm"
@@ -1704,7 +1704,7 @@ GetBaseData::
 	ret
 
 GetCurNick::
-	ld a, [wd005]
+	ld a, [wCurPartyMon]
 	ld hl, wPartyMon1Nickname
 GetNick::
 	push hl
@@ -1790,7 +1790,7 @@ GetPartyParamLocation::
 	ld c, a
 	ld b, $0
 	add hl, bc
-	ld a, [wd005]
+	ld a, [wCurPartyMon]
 	call GetPartyLocation
 	pop bc
 	ret

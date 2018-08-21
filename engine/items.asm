@@ -4,7 +4,7 @@ ReceiveItem_:: ; d1e2 (3:51e2)
 	push hl
 	call CheckItemPocket
 	pop de
-	ld a, [wd03f]
+	ld a, [wItemAttributeParamBuffer]
 	dec a
 	ld hl, .Jumptable
 	rst JumpTable
@@ -44,7 +44,7 @@ TossItem_:: ; d21a (3:521a)
 	push hl
 	call CheckItemPocket
 	pop de
-	ld a, [wd03f]
+	ld a, [wItemAttributeParamBuffer]
 	dec a
 	ld hl, .Jumptable ; $522d
 	rst JumpTable
@@ -85,7 +85,7 @@ CheckItem_:: ; d251 (3:5251)
 	push hl
 	call CheckItemPocket
 	pop de
-	ld a, [wd03f]
+	ld a, [wItemAttributeParamBuffer]
 	dec a
 	ld hl, .Jumptable
 	rst JumpTable
@@ -165,7 +165,7 @@ PutItemInPocketOrPC: ; d2a9 (3:52a9)
 	sub [hl]
 	add b
 	ld b, a
-	ld a, [wd009]
+	ld a, [wItemQuantityChangeBuffer]
 	cp b
 	jr z, .asm_d2d3
 	jr c, .asm_d2d3
@@ -186,8 +186,8 @@ PutItemInPocketOrPC: ; d2a9 (3:52a9)
 	ld l, e
 	ld a, [wd002]
 	ld c, a
-	ld a, [wd009]
-	ld [wd00a], a
+	ld a, [wItemQuantityChangeBuffer]
+	ld [wItemQuantityBuffer], a
 .asm_d2df
 	inc hl
 	ld a, [hli]
@@ -195,7 +195,7 @@ PutItemInPocketOrPC: ; d2a9 (3:52a9)
 	jr z, .asm_d2fc
 	cp c
 	jr nz, .asm_d2df
-	ld a, [wd00a]
+	ld a, [wItemQuantityBuffer]
 	add [hl]
 	cp $64
 	jr nc, .asm_d2f3
@@ -205,14 +205,14 @@ PutItemInPocketOrPC: ; d2a9 (3:52a9)
 .asm_d2f3
 	ld [hl], $63
 	sub $63
-	ld [wd00a], a
+	ld [wItemQuantityBuffer], a
 	jr .asm_d2df
 
 .asm_d2fc
 	dec hl
 	ld a, [wd002]
 	ld [hli], a
-	ld a, [wd00a]
+	ld a, [wItemQuantityBuffer]
 	ld [hli], a
 	ld [hl], $ff
 	ld h, d
@@ -254,13 +254,13 @@ RemoveItemAndQuantity: ; d30c (3:530c)
 	jr .asm_d329
 
 .asm_d334
-	ld a, [wd009]
+	ld a, [wItemQuantityChangeBuffer]
 	ld b, a
 	ld a, [hl]
 	sub b
 	jr c, .asm_d354
 	ld [hl], a
-	ld [wd00a], a
+	ld [wItemQuantityBuffer], a
 	and a
 	jr nz, .asm_d352
 	dec hl
@@ -394,7 +394,7 @@ PutItemInTMPocket: ; d3d1 (3:53d1)
 	ld b, $0
 	ld hl, wTMsHMs
 	add hl, bc
-	ld a, [wd009]
+	ld a, [wItemQuantityChangeBuffer]
 	add [hl]
 	cp $64
 	jr nc, .asm_d3e3
@@ -411,13 +411,13 @@ RemoveTMorHM: ; d3e5 (3:53e5)
 	ld b, $0
 	ld hl, wTMsHMs
 	add hl, bc
-	ld a, [wd009]
+	ld a, [wItemQuantityChangeBuffer]
 	ld b, a
 	ld a, [hl]
 	sub b
 	jr c, .asm_d406
 	ld [hl], a
-	ld [wd00a], a
+	ld [wItemQuantityBuffer], a
 	jr nz, .asm_d404
 	ld a, [wcfd2]
 	and a
@@ -493,14 +493,14 @@ CheckItemPocket: ; d44a (3:544a)
 	ld a, $5
 	call GetItemAttr
 	and $f
-	ld [wd03f], a
+	ld [wItemAttributeParamBuffer], a
 	ret
 
 CheckItemContext:
 	ld a, $6
 	call GetItemAttr
 	and $f
-	ld [wd03f], a
+	ld [wItemAttributeParamBuffer], a
 	ret
 
 CheckItemMenu:
@@ -508,7 +508,7 @@ CheckItemMenu:
 	call GetItemAttr
 	swap a
 	and $f
-	ld [wd03f], a
+	ld [wItemAttributeParamBuffer], a
 	ret
 
 GetItemAttr: ; d46d (3:546d)
@@ -519,7 +519,7 @@ GetItemAttr: ; d46d (3:546d)
 	ld b, $0
 	add hl, bc
 	xor a
-	ld [wd03f], a
+	ld [wItemAttributeParamBuffer], a
 	ld a, [wd002]
 	dec a
 	ld c, a
@@ -533,7 +533,7 @@ GetItemAttr: ; d46d (3:546d)
 
 ItemAttr_ReturnCarry
 	ld a, $1
-	ld [wd03f], a
+	ld [wItemAttributeParamBuffer], a
 	scf
 	ret
 

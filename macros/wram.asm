@@ -286,7 +286,6 @@ object_struct: MACRO
 ENDM
 
 map_object: MACRO
-\1Object::
 \1ObjectStructID::  ds 1
 \1ObjectSprite::    ds 1
 \1ObjectYCoord::    ds 1
@@ -300,7 +299,7 @@ map_object: MACRO
 \1ObjectScript::    ds 2
 \1ObjectEventFlag:: ds 2
 	ds 2
-endm
+ENDM
 
 sprite_anim_struct: MACRO
 \1Index:: ds 1          ; 0

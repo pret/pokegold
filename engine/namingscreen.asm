@@ -77,13 +77,13 @@ Function11b09: ; 11b09 (4:5b09)
 	dw Function11b2a
 
 Function11b2a:
-	ld a, [wd004]
+	ld a, [wCurPartySpecies]
 	ld [wd151], a
 	ld hl, LoadMenuMonIcon
 	ld a, BANK(LoadMenuMonIcon)
 	ld e, $1
 	rst FarCall
-	ld a, [wd004]
+	ld a, [wCurPartySpecies]
 	ld [wd151], a
 	call GetPokemonName
 	hlcoord 5, 2

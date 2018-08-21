@@ -170,7 +170,7 @@ Function945e: ; 945e (2:545e)
 	ld bc, Palettes_ad2d
 	add hl, bc
 	call Function9adb
-	ld a, [wd004]
+	ld a, [wCurPartySpecies]
 	ld bc, wTempMonDVs
 	call Function9bcb
 	call Function9adb
@@ -294,7 +294,7 @@ Function9561: ; 9561 (2:5561)
 	ld a, $1d
 	call Function9ac7
 	call Function9ad2
-	ld a, [wd004]
+	ld a, [wCurPartySpecies]
 	cp $ff
 	jr nz, .asm_957b
 	ld hl, Palettes_95cd
@@ -549,7 +549,7 @@ Function976d: ; 976d (2:576d)
 .asm_977e
 	ld hl, wPartyMon1DVs
 	ld bc, $30
-	ld a, [wd005]
+	ld a, [wCurPartyMon]
 	call AddNTimes
 	ld c, l
 	ld b, h
@@ -873,7 +873,7 @@ Function9a2e: ; 9a2e (2:5a2e)
 
 Function9a47: ; 9a47 (2:5a47)
 	ld de, wTempBGPal0
-	ld a, [wd004]
+	ld a, [wCurPartySpecies]
 	call Function9be4
 	call Function9adb
 	call Function9b1d
@@ -896,7 +896,7 @@ Function9a5a: ; 9a5a (2:5a5a)
 
 Function9a7b: ; 9a7b (2:5a7b)
 	ld de, wTempBGPal0
-	ld a, [wd004]
+	ld a, [wCurPartySpecies]
 	ld bc, wTempMonDVs
 	call Function9bd3
 	call Function9adb

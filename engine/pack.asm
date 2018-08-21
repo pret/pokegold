@@ -121,7 +121,7 @@ Pack_TMHMPocketMenu:
 	call Function10cef
 	ret c
 	callba CheckTossableItem_
-	ld a, [wd03f]
+	ld a, [wItemAttributeParamBuffer]
 	and a
 	jr nz, .asm_1053a
 	ld hl, TMHMPocketSubmenuDataHeader_Give ; $456b
@@ -229,29 +229,29 @@ Pack_BallsPocketMenu:
 
 Function105f5: ; 105f5 (4:45f5)
 	callba CheckTossableItem_
-	ld a, [wd03f]
+	ld a, [wItemAttributeParamBuffer]
 	and a
 	jr nz, .asm_10629
 	callba CheckSelectableItem
-	ld a, [wd03f]
+	ld a, [wItemAttributeParamBuffer]
 	and a
 	jr nz, .asm_1061b
 	callba CheckItemMenu
-	ld a, [wd03f]
+	ld a, [wItemAttributeParamBuffer]
 	and a
 	jr nz, .asm_10637
 	jr .asm_10657
 
 .asm_1061b
 	callba CheckItemMenu
-	ld a, [wd03f]
+	ld a, [wItemAttributeParamBuffer]
 	and a
 	jr nz, .asm_1063f
 	jr .asm_1065f
 
 .asm_10629
 	callba CheckSelectableItem
-	ld a, [wd03f]
+	ld a, [wItemAttributeParamBuffer]
 	and a
 	jr nz, .asm_10647
 	jr .asm_1064f
@@ -418,7 +418,7 @@ ItemSubmenuJumptable_GiveTossQuit:
 
 UseItem:
 	callba CheckItemMenu
-	ld a, [wd03f]
+	ld a, [wItemAttributeParamBuffer]
 	ld hl, .Jumptable
 	rst JumpTable
 	ret
@@ -522,7 +522,7 @@ Function107cd:
 
 RegisterItem:
 	callba CheckSelectableItem
-	ld a, [wd03f]
+	ld a, [wItemAttributeParamBuffer]
 	and a
 	jr nz, .asm_10826
 	ld a, [wce65]
@@ -534,9 +534,9 @@ RegisterItem:
 	inc a
 	and $3f
 	or b
-	ld [wd680], a
+	ld [wWhichRegisteredItem], a
 	ld a, [wd002]
-	ld [wd681], a
+	ld [wRegisteredItem], a
 	call Function10e38
 	ld de, SFX_FULL_HEAL
 	call WaitPlaySFX
@@ -558,7 +558,7 @@ GiveItem:
 	res 4, a
 	ld [wOptions], a
 	ld a, $8
-	ld [wd03e], a
+	ld [wPartyMenuActionText], a
 	call ClearBGPalettes
 	callba LoadPartyMenuGFX
 	callba InitPartyMenuWithCancel
@@ -571,7 +571,7 @@ GiveItem:
 	call DelayFrame
 	callba PartyMenuSelect
 	jr c, .asm_108a5
-	ld a, [wd004]
+	ld a, [wCurPartySpecies]
 	cp EGG
 	jr nz, .asm_10883
 	ld hl, Text_AnEggCantHoldAnItem
@@ -772,7 +772,7 @@ BattlePack_BallsPocketMenu:
 
 Function10a03: ; 10a03 (4:4a03)
 	callba CheckItemContext
-	ld a, [wd03f]
+	ld a, [wItemAttributeParamBuffer]
 Function10a0c: ; 10a0c (4:4a0c)
 	and a
 	jr z, .asm_10a17
@@ -829,7 +829,7 @@ BattlePackQuitJumptable:
 
 BattlePack_UseItem:
 	callba CheckItemContext
-	ld a, [wd03f]
+	ld a, [wItemAttributeParamBuffer]
 	ld hl, $4a67
 	rst JumpTable
 	ret

@@ -1,6 +1,6 @@
 HealParty: ; c69d (3:469d)
 	xor a
-	ld [wd005], a
+	ld [wCurPartyMon], a
 	ld hl, wPartySpecies
 .asm_c6a4
 	ld a, [hli]
@@ -12,9 +12,9 @@ HealParty: ; c69d (3:469d)
 	call Functionc6bc
 	pop hl
 .asm_c6b2
-	ld a, [wd005]
+	ld a, [wCurPartyMon]
 	inc a
-	ld [wd005], a
+	ld [wCurPartyMon], a
 	jr .asm_c6a4
 
 .asm_c6bb

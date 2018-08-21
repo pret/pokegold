@@ -252,7 +252,7 @@ ApplyMonOrTrainerPals: ; 91e5 (2:51e5)
 	ld a, e
 	and a
 	jr z, .asm_91f5
-	ld a, [wd004]
+	ld a, [wCurPartySpecies]
 	call Function9be4
 	jr .asm_91fb
 
@@ -268,7 +268,7 @@ ApplyMonOrTrainerPals: ; 91e5 (2:51e5)
 	ret
 
 ApplyHPBarPals:
-	ld a, [wd007]
+	ld a, [wWhichHPBar]
 	and a
 	jr z, .asm_921a
 	cp $1
@@ -301,7 +301,7 @@ ApplyHPBarPals:
 	inc e
 	hlcoord 11, 1, wAttrMap
 	ld bc, 2 * SCREEN_WIDTH
-	ld a, [wd005]
+	ld a, [wCurPartyMon]
 .asm_9241
 	and a
 	jr z, .asm_9248

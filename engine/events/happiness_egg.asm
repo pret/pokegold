@@ -30,7 +30,7 @@ CheckFirstMonIsEgg:
 	jp CopyPokemonName_Buffer1_Buffer3
 
 ChangeHappiness: ; 72a1 (1:72a1)
-	ld a, [wd005]
+	ld a, [wCurPartyMon]
 	inc a
 	ld e, a
 	ld d, $0
@@ -42,7 +42,7 @@ ChangeHappiness: ; 72a1 (1:72a1)
 	push bc
 	ld hl, wPartyMon1Happiness
 	ld bc, $30
-	ld a, [wd005]
+	ld a, [wCurPartyMon]
 	call AddNTimes
 	pop bc
 	ld d, h
@@ -84,7 +84,7 @@ ChangeHappiness: ; 72a1 (1:72a1)
 	ld a, [wBattleMode]
 	and a
 	ret z
-	ld a, [wd005]
+	ld a, [wCurPartyMon]
 	ld b, a
 	ld a, [wPartyMenuCursor]
 	cp b

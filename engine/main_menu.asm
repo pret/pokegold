@@ -85,7 +85,7 @@ Function5ae4: ; 5ae4 (1:5ae4)
 	nop
 	nop
 	nop
-	ld a, [wd19a]
+	ld a, [wSaveFileExists]
 	and a
 	jr nz, .asm_5af0
 	ld a, $0
@@ -128,7 +128,7 @@ Function5b0a: ; 5b0a (1:5b0a)
 	ret
 
 Function5b27: ; 5b27 (1:5b27)
-	ld a, [wd19a]
+	ld a, [wSaveFileExists]
 	and a
 	ret z
 	xor a
@@ -160,7 +160,7 @@ Function5b45: ; 5b45 (1:5b45)
 	ret
 
 Function5b5b: ; 5b5b (1:5b5b)
-	ld a, [wd19a]
+	ld a, [wSaveFileExists]
 	and a
 	ret z
 	call CheckRTCStatus
@@ -292,7 +292,7 @@ Function5c41: ; 5c41 (1:5c41)
 	call Function5d15
 
 	xor a
-	ld [wd8bc], a
+	ld [wCurBox], a
 	ld [wSavedAtLeastOnce], a
 
 	call Function5d1a
@@ -313,16 +313,16 @@ Function5c41: ; 5c41 (1:5c41)
 	call Function5d15
 
 	xor a
-	ld [wdd1a], a
-	ld [wdd21], a
-	ld [wdd28], a
+	ld [wRoamMon1Species], a
+	ld [wRoamMon2Species], a
+	ld [wRoamMon3Species], a
 	ld a, $ff
-	ld [wdd1c], a
-	ld [wdd23], a
-	ld [wdd2a], a
-	ld [wdd1d], a
-	ld [wdd24], a
-	ld [wdd2b], a
+	ld [wRoamMon1MapGroup], a
+	ld [wRoamMon2MapGroup], a
+	ld [wRoamMon3MapGroup], a
+	ld [wRoamMon1MapNumber], a
+	ld [wRoamMon2MapNumber], a
+	ld [wRoamMon3MapNumber], a
 
 	ld a, BANK(s0_abe2)
 	call OpenSRAM
@@ -381,7 +381,7 @@ Function5d15: ; 5d15 (1:5d15)
 	ret
 
 Function5d1a: ; 5d1a (1:5d1a)
-	ld hl, wd8bf
+	ld hl, wBoxNames
 	ld c, $0
 .asm_5d1f
 	push hl
@@ -411,7 +411,7 @@ Function5d1a: ; 5d1a (1:5d1a)
 .Box db "BOX@"
 
 InitializeMagikarpHouse: ; 5d47 (1:5d47)
-	ld hl, wdd33
+	ld hl, wBestMagikarpLengthFeet
 	ld a, 3
 	ld [hli], a
 	ld a, 6

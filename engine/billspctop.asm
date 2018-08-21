@@ -169,7 +169,7 @@ CheckCurPartyMonFainted: ; e513 (3:6513)
 	ld de, $30
 	ld b, $0
 .asm_e51b
-	ld a, [wd005]
+	ld a, [wCurPartyMon]
 	cp b
 	jr z, .asm_e526
 	ld a, [hli]
@@ -244,7 +244,7 @@ Functione566: ; e566 (3:6566)
 	ret
 
 CopyBoxmonToTempMon
-	ld a, [wd005]
+	ld a, [wCurPartyMon]
 	ld hl, sBoxMon1Species
 	ld bc, $20
 	call AddNTimes
@@ -257,7 +257,7 @@ CopyBoxmonToTempMon
 	ret
 
 Function65b4:
-	ld a, [wd8bc]
+	ld a, [wCurBox]
 	cp b
 	jr z, .asm_e5cc
 	ld a, b
