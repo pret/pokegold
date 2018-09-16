@@ -245,18 +245,18 @@ ENDM
 	map_const GOLDENROD_BILLS_HOUSE,                       4,  4 ;  6
 	map_const GOLDENROD_MAGNET_TRAIN_STATION,              9, 10 ;  7
 	map_const GOLDENROD_FLOWER_SHOP,                       4,  4 ;  8
-	map_const GOLDENROD_PP_SPEECH_HOUSE,                   4,  4 ;  9
-	map_const GOLDENROD_NAME_RATER,                        4,  4 ; 10
-	map_const GOLDENROD_DEPT_STORE_1F,                     4,  8 ; 11
-	map_const GOLDENROD_DEPT_STORE_2F,                     4,  8 ; 12
-	map_const GOLDENROD_DEPT_STORE_3F,                     4,  8 ; 13
-	map_const GOLDENROD_DEPT_STORE_4F,                     4,  8 ; 14
-	map_const GOLDENROD_DEPT_STORE_5F,                     4,  8 ; 15
-	map_const GOLDENROD_DEPT_STORE_6F,                     4,  8 ; 16
-	map_const GOLDENROD_DEPT_STORE_ELEVATOR,               2,  2 ; 17
-	map_const GOLDENROD_DEPT_STORE_ROOF,                   4,  8 ; 18
-	map_const GOLDENROD_GAME_CORNER,                       7, 10 ; 19
-	map_const GOLDENROD_POKECENTER_1F,                     4,  5 ; 20
+	map_const GOLDENROD_POKECENTER_1F,                     4,  5 ;  9
+	map_const GOLDENROD_PP_SPEECH_HOUSE,                   4,  4 ; 10
+	map_const GOLDENROD_NAME_RATER,                        4,  4 ; 11
+	map_const GOLDENROD_DEPT_STORE_1F,                     4,  8 ; 12
+	map_const GOLDENROD_DEPT_STORE_2F,                     4,  8 ; 13
+	map_const GOLDENROD_DEPT_STORE_3F,                     4,  8 ; 14
+	map_const GOLDENROD_DEPT_STORE_4F,                     4,  8 ; 15
+	map_const GOLDENROD_DEPT_STORE_5F,                     4,  8 ; 16
+	map_const GOLDENROD_DEPT_STORE_6F,                     4,  8 ; 17
+	map_const GOLDENROD_DEPT_STORE_ELEVATOR,               2,  2 ; 18
+	map_const GOLDENROD_DEPT_STORE_ROOF,                   4,  8 ; 19
+	map_const GOLDENROD_GAME_CORNER,                       7, 10 ; 20
 	map_const ILEX_FOREST_AZALEA_GATE,                     4,  5 ; 21
 	map_const ROUTE_34_ILEX_FOREST_GATE,                   4,  5 ; 22
 	map_const DAYCARE,                                     4,  5 ; 23
@@ -453,7 +453,7 @@ ENDM
 	map_const SAFFRON_POKECENTER_1F,                       4,  5 ;  6
 	map_const SAFFRON_POKECENTER_2F_BETA,                  4,  8 ;  7
 	map_const MR_PSYCHICS_HOUSE,                           4,  4 ;  8
-	map_const SAFFRON_TRAIN_STATION,                       9, 10 ;  9
+	map_const SAFFRON_MAGNET_TRAIN_STATION,                9, 10 ;  9
 	map_const SILPH_CO_1F,                                 4,  8 ; 10
 	map_const COPYCATS_HOUSE_1F,                           4,  4 ; 11
 	map_const COPYCATS_HOUSE_2F,                           3,  5 ; 12

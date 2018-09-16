@@ -104,7 +104,7 @@
 	engine_flag_def ENGINE_MT_MOON_SQUARE_CLEFAIRY,               wWeeklyFlags, 0 ; mt moon square clefairy
 	engine_flag_def ENGINE_UNION_CAVE_LAPRAS,                     wWeeklyFlags, 1 ; union cave lapras  ; $58
 	engine_flag_def ENGINE_GOLDENROD_UNDERGROUND_GOT_HAIRCUT,     wWeeklyFlags, 2 ; goldenrod underground haircut used
-	engine_flag_def ENGINE_GOLDENROD_MALL_5F_HAPPINESS_EVENT,     wWeeklyFlags, 3 ; goldenrod mall happiness event floor05 person07
-	engine_flag_def ENGINE_TEA_IN_BLUES_HOUSE,                    wWeeklyFlags, 4 ; tea in blues house
+	engine_flag_def ENGINE_GOLDENROD_DEPT_STORE_TM27_RETURN,     wWeeklyFlags, 3 ; goldenrod mall happiness event floor05 person07
+	engine_flag_def ENGINE_DAISYS_GROOMING,                    wWeeklyFlags, 4 ; tea in blues house
 	engine_flag_def ENGINE_INDIGO_PLATEAU_RIVAL_FIGHT,            wWeeklyFlags, 5 ; indigo plateau rival fight
 NUM_ENGINE_FLAGS EQU const_value

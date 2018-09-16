@@ -116,7 +116,7 @@ SpecialsPointers:
 	add_special ResetLuckyNumberShowFlag
 	add_special PrintTodaysLuckyNumber
 	add_special SelectApricornForKurt
-	add_special SpecialNameRater
+	add_special NameRater
 	add_special DisplayLinkRecord
 	add_special GetFirstPokemonHappiness
 	add_special CheckFirstMonIsEgg
@@ -223,8 +223,8 @@ IF DEF(SILVER)
 	db "GOLD@"
 ENDC
 
-SpecialNameRater: ; c413 (3:4413)
-	callba Functionfb7f7
+NameRater:
+	callba _NameRater
 	ret
 
 OverworldTownMap: ; c41a (3:441a)

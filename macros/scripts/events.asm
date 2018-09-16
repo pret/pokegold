@@ -839,17 +839,17 @@ waitsfx: MACRO
 	db waitsfx_command
 ENDM
 
-	enum warpsound_command ; $87
+	enum warpsound_command ; $86
 warpsound: MACRO
 	db warpsound_command
 ENDM
 
-	enum specialsound_command ; $88
+	enum specialsound_command ; $87
 specialsound: MACRO
 	db specialsound_command
 ENDM
 
-	enum passtoengine_command ; $89
+	enum passtoengine_command ; $88
 passtoengine: MACRO
 	db passtoengine_command
 	db \1 ; data_pointer
@@ -884,18 +884,18 @@ warpcheck: MACRO
 	db warpcheck_command
 ENDM
 
-	enum ptpriorityjump_command ; $8f
+	enum ptpriorityjump_command ; $8e
 ptpriorityjump: MACRO
 	db ptpriorityjump_command
 	dw \1 ; pointer
 ENDM
 
-	enum return_command ; $90
+	enum return_command ; $8f
 return: MACRO
 	db return_command
 ENDM
 
-	enum end_command ; $91
+	enum end_command ; $90
 end: MACRO
 	db end_command
 ENDM

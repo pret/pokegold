@@ -1492,7 +1492,7 @@ Shrink1Pic:
 	dr $fb5be, $fb64e
 Shrink2Pic:
 	dr $fb64e, $fb7f7
-Functionfb7f7:
+_NameRater:
 	dr $fb7f7, $fb94b
 PlaySlowCry:
 	dr $fb94b, $fb981
@@ -1622,8 +1622,23 @@ SECTION "bank56", ROMX, BANK[$56]
 	dr $158000, $15c000
 
 SECTION "bank57", ROMX, BANK[$57]
-	dr $15c000, $15e7a2
 
+INCLUDE "maps/GoldenrodGym.asm"
+INCLUDE "maps/GoldenrodBikeShop.asm"
+INCLUDE "maps/GoldenrodHappinessRater.asm"
+INCLUDE "maps/BillsFamilysHouse.asm"
+INCLUDE "maps/GoldenrodMagnetTrainStation.asm"
+INCLUDE "maps/GoldenrodFlowerShop.asm"
+INCLUDE "maps/GoldenrodPokecenter1F.asm"
+INCLUDE "maps/GoldenrodPPSpeechHouse.asm"
+INCLUDE "maps/GoldenrodNameRater.asm"
+INCLUDE "maps/GoldenrodDeptStore1F.asm"
+INCLUDE "maps/GoldenrodDeptStore2F.asm"
+INCLUDE "maps/GoldenrodDeptStore3F.asm"
+INCLUDE "maps/GoldenrodDeptStore4F.asm"
+INCLUDE "maps/GoldenrodDeptStore5F.asm"
+INCLUDE "maps/GoldenrodDeptStore6F.asm"
+INCLUDE "maps/GoldenrodDeptStoreElevator.asm"
 INCLUDE "maps/GoldenrodGameCorner.asm"
 INCLUDE "maps/IlexForestAzaleaGate.asm"
 INCLUDE "maps/Route34IlexForestGate.asm"
