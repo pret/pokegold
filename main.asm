@@ -1552,7 +1552,11 @@ INCLUDE "maps/VictoryRoad.asm"
 SECTION "bank43", ROMX, BANK[$43]
 INCLUDE "maps/NationalPark.asm"
 INCLUDE "maps/NationalParkBugContest.asm"
-	dr $10cccf, $10f198
+INCLUDE "maps/RadioTower1F.asm"
+INCLUDE "maps/RadioTower2F.asm"
+INCLUDE "maps/RadioTower3F.asm"
+INCLUDE "maps/RadioTower4F.asm"
+INCLUDE "maps/RadioTower5F.asm"
 
 SECTION "bank44", ROMX, BANK[$44]
 	dr $110000, $114000
