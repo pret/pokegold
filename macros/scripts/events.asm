@@ -965,12 +965,12 @@ specialphonecall: MACRO
 	dw \1 ; call_id
 ENDM
 
-	enum checkphonecall_command ; $9d
+	enum checkphonecall_command ; $9c
 checkphonecall: MACRO
 	db checkphonecall_command
 ENDM
 
-	enum verbosegiveitem_command ; $9e
+	enum verbosegiveitem_command ; $9d
 verbosegiveitem: MACRO
 if _NARG == 1
 	verbosegiveitem \1, 1
