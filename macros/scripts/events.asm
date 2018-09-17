@@ -924,13 +924,13 @@ elevator: MACRO
 	dw \1 ; floor_list_pointer
 ENDM
 
-	enum trade_command ; $96
+	enum trade_command ; $95
 trade: MACRO
 	db trade_command
 	db \1 ; trade_id
 ENDM
 
-	enum askforphonenumber_command ; $97
+	enum askforphonenumber_command ; $96
 askforphonenumber: MACRO
 	db askforphonenumber_command
 	db \1 ; number

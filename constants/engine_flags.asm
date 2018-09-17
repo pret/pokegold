@@ -51,14 +51,14 @@
 	engine_flag_def ENGINE_VOLCANOBADGE,                          wKantoBadges, 6 ; volcanobadge ; $28
 	engine_flag_def ENGINE_EARTHBADGE,                            wKantoBadges, 7 ; earthbadge
 
-	engine_flag_def ENGINE_UNLOCKED_UNOWNS_1,                     wUnlockedUnowns, 0
-	engine_flag_def ENGINE_UNLOCKED_UNOWNS_2,                     wUnlockedUnowns, 1
-	engine_flag_def ENGINE_UNLOCKED_UNOWNS_3,                     wUnlockedUnowns, 2
-	engine_flag_def ENGINE_UNLOCKED_UNOWNS_4,                     wUnlockedUnowns, 3
-	engine_flag_def ENGINE_UNLOCKED_UNOWNS_5,                     wUnlockedUnowns, 4
-	engine_flag_def ENGINE_UNLOCKED_UNOWNS_6,                     wUnlockedUnowns, 5
-	engine_flag_def ENGINE_UNLOCKED_UNOWNS_7,                     wUnlockedUnowns, 6   ; $30
-	engine_flag_def ENGINE_UNLOCKED_UNOWNS_8,                     wUnlockedUnowns, 7
+	engine_flag_def ENGINE_UNLOCKED_UNOWNS_A_TO_K,                wUnlockedUnowns, 0
+	engine_flag_def ENGINE_UNLOCKED_UNOWNS_L_TO_R,                wUnlockedUnowns, 1
+	engine_flag_def ENGINE_UNLOCKED_UNOWNS_S_TO_W,                wUnlockedUnowns, 2
+	engine_flag_def ENGINE_UNLOCKED_UNOWNS_X_TO_Z,                wUnlockedUnowns, 3
+	engine_flag_def ENGINE_UNLOCKED_UNOWNS_UNUSED_4,              wUnlockedUnowns, 4
+	engine_flag_def ENGINE_UNLOCKED_UNOWNS_UNUSED_5,              wUnlockedUnowns, 5
+	engine_flag_def ENGINE_UNLOCKED_UNOWNS_UNUSED_6,              wUnlockedUnowns, 6   ; $30
+	engine_flag_def ENGINE_UNLOCKED_UNOWNS_UNUSED_7,              wUnlockedUnowns, 7
 
 	engine_flag_def ENGINE_FLYPOINT_KRISS_HOUSE,                  wVisitedSpawns,     0 ; your house
 	engine_flag_def ENGINE_FLYPOINT_VIRIDIAN_POKECENTER,          wVisitedSpawns,     1 ; viridian pokecenter
