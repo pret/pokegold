@@ -697,19 +697,19 @@ appear: MACRO
 	db \1 ; object id
 ENDM
 
-	enum follow_command ; $70
+	enum follow_command ; $6f
 follow: MACRO
 	db follow_command
 	db \1 ; object2
 	db \2 ; object1
 ENDM
 
-	enum stopfollow_command ; $71
+	enum stopfollow_command ; $70
 stopfollow: MACRO
 	db stopfollow_command
 ENDM
 
-	enum moveobject_command ; $72
+	enum moveobject_command ; $71
 moveobject: MACRO
 	db moveobject_command
 	db \1 ; object id
@@ -717,13 +717,13 @@ moveobject: MACRO
 	db \3 ; y
 ENDM
 
-	enum writeobjectxy_command ; $73
+	enum writeobjectxy_command ; $72
 writeobjectxy: MACRO
 	db writeobjectxy_command
 	db \1 ; object id
 ENDM
 
-	enum loademote_command ; $74
+	enum loademote_command ; $73
 loademote: MACRO
 	db loademote_command
 	db \1 ; bubble
@@ -744,27 +744,27 @@ turnobject: MACRO
 	db \2 ; facing
 ENDM
 
-	enum follownotexact_command ; $77
+	enum follownotexact_command ; $76
 follownotexact: MACRO
 	db follownotexact_command
 	db \1 ; object2
 	db \2 ; object1
 ENDM
 
-	enum earthquake_command ; $78
+	enum earthquake_command ; $77
 earthquake: MACRO
 	db earthquake_command
 	db \1 ; param
 ENDM
 
-	enum changemap_command ; $79
+	enum changemap_command ; $78
 changemap: MACRO
 	db changemap_command
 	db \1 ; map_bank
 	dw \2 ; map_data_pointer
 ENDM
 
-	enum changeblock_command ; $7a
+	enum changeblock_command ; $79
 changeblock: MACRO
 	db changeblock_command
 	db \1 ; x
@@ -772,17 +772,17 @@ changeblock: MACRO
 	db \3 ; block
 ENDM
 
-	enum reloadmap_command ; $7b
+	enum reloadmap_command ; $7a
 reloadmap: MACRO
 	db reloadmap_command
 ENDM
 
-	enum reloadmappart_command ; $7c
+	enum reloadmappart_command ; $7b
 reloadmappart: MACRO
 	db reloadmappart_command
 ENDM
 
-	enum writecmdqueue_command ; $7d
+	enum writecmdqueue_command ; $7c
 writecmdqueue: MACRO
 	db writecmdqueue_command
 	dw \1 ; queue_pointer

@@ -1579,7 +1579,11 @@ INCLUDE "maps/OlivineLighthouse5F.asm"
 INCLUDE "maps/OlivineLighthouse6F.asm"
 
 SECTION "bank45", ROMX, BANK[$45]
-	dr $114000, $118000
+INCLUDE "maps/MahoganyMart1F.asm"
+INCLUDE "maps/TeamRocketBaseB1F.asm"
+INCLUDE "maps/TeamRocketBaseB2F.asm"
+INCLUDE "maps/TeamRocketBaseB3F.asm"
+INCLUDE "maps/IlexForest.asm"
 
 SECTION "bank46", ROMX, BANK[$46]
 	dr $118000, $11c000
