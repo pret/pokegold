@@ -1969,22 +1969,6 @@ INCLUDE "maps/Route5SaffronGate.asm"
 INCLUDE "maps/Route5CleanseTagHouse.asm"
 
 SECTION "bank62", ROMX, BANK[$62]
-;INCLUDE "maps/FightingDojo.asm"
-;INCLUDE "maps/SaffronGym.asm"
-;INCLUDE "maps/SaffronMart.asm"
-;INCLUDE "maps/SaffronPokecenter1F.asm"
-;INCLUDE "maps/SaffronPokecenter2FBeta.asm"
-;INCLUDE "maps/MrPsychicsHouse.asm"
-;INCLUDE "maps/SaffronMagnetTrainStation.asm"
-;INCLUDE "maps/SilphCo1F.asm"
-;INCLUDE "maps/CopycatsHouse1F.asm"
-;INCLUDE "maps/CopycatsHouse2F.asm"
-;INCLUDE "maps/Route5UndergroundPathEntrance.asm"
-;INCLUDE "maps/Route5SaffronGate.asm"
-;INCLUDE "maps/Route5CleanseTagHouse.asm"
-	dr $188000, $18c000
-
-SECTION "bank63", ROMX, BANK[$63]
 ;INCLUDE "maps/CherrygroveMart.asm"
 ;INCLUDE "maps/CherrygrovePokecenter1F.asm"
 ;INCLUDE "maps/CherrygroveGymSpeechHouse.asm"
@@ -1993,7 +1977,7 @@ SECTION "bank63", ROMX, BANK[$63]
 ;INCLUDE "maps/Route30BerryHouse.asm"
 ;INCLUDE "maps/MrPokemonsHouse.asm"
 ;INCLUDE "maps/Route31VioletGate.asm"
-	dr $18c000, $190000
+	dr $188000, $18c000
 
 SECTION "bank6c", ROMX, BANK[$6c]
 ItemNames::
