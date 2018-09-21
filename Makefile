@@ -13,6 +13,7 @@ includes  := $(PYTHON) scan_includes.py
 
 rom_obj := \
 data/text/common.o \
+data/pokemon/dex_entries.o \
 wram.o \
 main.o \
 home.o

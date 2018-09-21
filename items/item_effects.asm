@@ -684,7 +684,7 @@ HeavyBallMultiplier:
 	rlca
 	rlca
 	and $3
-	add BANK(PokedexEntries1) ; $68
+	add BANK("Pokedex Entries 001-064")
 	ld d, a
 	ld a, BANK(PokedexDataPointerTable)
 	call GetFarHalfword

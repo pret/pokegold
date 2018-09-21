@@ -1620,39 +1620,144 @@ INCLUDE "maps/DragonsDenB1F.asm"
 INCLUDE "maps/TohjoFalls.asm"
 
 SECTION "bank48", ROMX, BANK[$48]
+;INCLUDE "maps/NewBarkTown.asm"
+;INCLUDE "maps/CherrygroveCity.asm"
+;INCLUDE "maps/VioletCity.asm"
+;INCLUDE "maps/AzaleaTown.asm"
+;INCLUDE "maps/CianwoodCity.asm"
+;INCLUDE "maps/GoldenrodCity.asm"
 	dr $120000, $124000
 
 SECTION "bank49", ROMX, BANK[$49]
+;INCLUDE "maps/OlivineCity.asm"
+;INCLUDE "maps/EcruteakCity.asm"
+;INCLUDE "maps/MahoganyTown.asm"
+;INCLUDE "maps/LakeOfRage.asm"
+;INCLUDE "maps/BlackthornCity.asm"
+;INCLUDE "maps/MountSilver.asm"
 	dr $124000, $128000
 
 SECTION "bank4a", ROMX, BANK[$4a]
+;INCLUDE "maps/Route26.asm"
+;INCLUDE "maps/Route27.asm"
+;INCLUDE "maps/Route28.asm"
+;INCLUDE "maps/Route29.asm"
+;INCLUDE "maps/Route30.asm"
+;INCLUDE "maps/Route31.asm"
 	dr $128000, $12c000
 
 SECTION "bank4b", ROMX, BANK[$4b]
+;INCLUDE "maps/Route32.asm"
+;INCLUDE "maps/Route33.asm"
+;INCLUDE "maps/Route34.asm"
+;INCLUDE "maps/Route35.asm"
+;INCLUDE "maps/Route36.asm"
 	dr $12c000, $130000
 
 SECTION "bank4c", ROMX, BANK[$4c]
+;INCLUDE "maps/Route37.asm"
+;INCLUDE "maps/Route38.asm"
+;INCLUDE "maps/Route39.asm"
+;INCLUDE "maps/Route40.asm"
+;INCLUDE "maps/Route41.asm"
+;INCLUDE "maps/Route42.asm"
 	dr $130000, $134000
 
 SECTION "bank4d", ROMX, BANK[$4d]
+;INCLUDE "maps/Route43.asm"
+;INCLUDE "maps/Route44.asm"
+;INCLUDE "maps/Route45.asm"
+;INCLUDE "maps/Route46.asm"
+;INCLUDE "maps/PewterCity.asm"
+;INCLUDE "maps/Route2.asm"
 	dr $134000, $138000
 
 SECTION "bank4e", ROMX, BANK[$4e]
+;INCLUDE "maps/ViridianCity.asm"
+;INCLUDE "maps/Route1.asm"
+;INCLUDE "maps/PalletTown.asm"
+;INCLUDE "maps/Route21.asm"
+;INCLUDE "maps/CinnabarIsland.asm"
+;INCLUDE "maps/Route20.asm"
+;INCLUDE "maps/Route19.asm"
+;INCLUDE "maps/FuchsiaCity.asm"
+;INCLUDE "maps/Route18.asm"
+;INCLUDE "maps/Route17.asm"
+;INCLUDE "maps/Route16.asm"
+;INCLUDE "maps/CeladonCity.asm"
+;INCLUDE "maps/Route7.asm"
 	dr $138000, $13c000
 
 SECTION "bank4f", ROMX, BANK[$4f]
+;INCLUDE "maps/Route15.asm"
+;INCLUDE "maps/Route14.asm"
+;INCLUDE "maps/Route13.asm"
+;INCLUDE "maps/Route12.asm"
+;INCLUDE "maps/Route11.asm"
+;INCLUDE "maps/LavenderTown.asm"
+;INCLUDE "maps/VermilionCity.asm"
+;INCLUDE "maps/Route6.asm"
+;INCLUDE "maps/SaffronCity.asm"
+;INCLUDE "maps/Route5.asm"
+;INCLUDE "maps/CeruleanCity.asm"
 	dr $13c000, $140000
 
 SECTION "bank50", ROMX, BANK[$50]
+;INCLUDE "maps/Route9.asm"
+;INCLUDE "maps/Route24.asm"
+;INCLUDE "maps/Route25.asm"
+;INCLUDE "maps/Route3.asm"
+;INCLUDE "maps/Route4.asm"
+;INCLUDE "maps/Route8.asm"
+;INCLUDE "maps/Route10.asm"
+;INCLUDE "maps/Route23.asm"
 	dr $140000, $144000
 
 SECTION "bank51", ROMX, BANK[$51]
+;INCLUDE "maps/OlivinePokecenter1F.asm"
+;INCLUDE "maps/OlivineGym.asm"
+;INCLUDE "maps/OlivineTimsHouse.asm"
+;INCLUDE "maps/OlivineHouseBeta.asm"
+;INCLUDE "maps/OlivinePunishmentSpeechHouse.asm"
+;INCLUDE "maps/OlivineGoodRodHouse.asm"
+;INCLUDE "maps/OlivineCafe.asm"
+;INCLUDE "maps/OlivineMart.asm"
+;INCLUDE "maps/Route38EcruteakGate.asm"
+;INCLUDE "maps/Route39Barn.asm"
+;INCLUDE "maps/Route39Farmhouse.asm
+;INCLUDE "maps/MahoganyRedGyaradosSpeechHouse.asm"
+;INCLUDE "maps/MahoganyGym.asm"
+;INCLUDE "maps/MahoganyPokecenter1F.asm"
+;INCLUDE "maps/Route42EcruteakGate.asm"
 	dr $144000, $148000
 
 SECTION "bank52", ROMX, BANK[$52]
+;INCLUDE "maps/EcruteakTinTowerEntrance.asm"
+;INCLUDE "maps/WiseTriosRoom.asm"
+;INCLUDE "maps/EcruteakPokecenter1F.asm"
+;INCLUDE "maps/EcruteakLugiaSpeechHouse.asm"
+;INCLUDE "maps/DanceTheatre.asm"
+;INCLUDE "maps/EcruteakMart.asm"
+;INCLUDE "maps/EcruteakGym.asm"
+;INCLUDE "maps/EcruteakItemfinderHouse.asm"
 	dr $148000, $14c000
 
 SECTION "bank53", ROMX, BANK[$53]
+;INCLUDE "maps/BlackthornGym1F.asm"
+;INCLUDE "maps/BlackthornGym2F.asm"
+;INCLUDE "maps/BlackthornDragonSpeechHouse.asm"
+;INCLUDE "maps/BlackthornEmysHouse.asm"
+;INCLUDE "maps/BlackthornMart.asm"
+;INCLUDE "maps/BlackthornPokecenter1F.asm"
+;INCLUDE "maps/MoveDeletersHouse.asm"
+;INCLUDE "maps/CinnabarPokecenter1F.asm"
+;INCLUDE "maps/CinnabarPokecenter2FBeta.asm"
+;INCLUDE "maps/Route19FuchsiaGate.asm"
+;INCLUDE "maps/SeafoamGym.asm"
+;INCLUDE "maps/LakeOfRageHiddenPowerHouse.asm"
+;INCLUDE "maps/LakeOfRageMagikarpHouse.asm"
+;INCLUDE "maps/Route43MahoganyGate.asm"
+;INCLUDE "maps/Route43Gate.asm"
 	dr $14c000, $150000
 
 SECTION "bank54", ROMX, BANK[$54]
@@ -1669,9 +1774,26 @@ INCLUDE "maps/PowerPlant.asm"
 INCLUDE "maps/BillsHouse.asm"
 
 SECTION "bank55", ROMX, BANK[$55]
+;INCLUDE "maps/AzaleaPokecenter1F.asm"
+;INCLUDE "maps/CharcoalKiln.asm"
+;INCLUDE "maps/AzaleaMart.asm"
+;INCLUDE "maps/KurtsHouse.asm"
+;INCLUDE "maps/AzaleaGym.asm"
 	dr $154000, $158000
 
 SECTION "bank56", ROMX, BANK[$56]
+;INCLUDE "maps/VioletMart.asm"
+;INCLUDE "maps/VioletGym.asm"
+;INCLUDE "maps/EarlsPokemonAcademy.asm"
+;INCLUDE "maps/VioletNicknameSpeechHouse.asm"
+;INCLUDE "maps/VioletPokecenter1F.asm"
+;INCLUDE "maps/VioletKylesHouse.asm"
+;INCLUDE "maps/Route32RuinsOfAlphGate.asm"
+;INCLUDE "maps/Route32Pokecenter1F.asm"
+;INCLUDE "maps/Route35GoldenrodGate.asm"
+;INCLUDE "maps/Route35NationalParkGate.asm"
+;INCLUDE "maps/Route36RuinsOfAlphGate.asm"
+;INCLUDE "maps/Route36NationalParkGate.asm"
 	dr $158000, $15c000
 
 SECTION "bank57", ROMX, BANK[$57]
@@ -1697,31 +1819,138 @@ INCLUDE "maps/IlexForestAzaleaGate.asm"
 INCLUDE "maps/Route34IlexForestGate.asm"
 INCLUDE "maps/DayCare.asm"
 
-SECTION "bank58", ROMX, BANK[$58]
-	dr $160000, $164000
-
 SECTION "bank59", ROMX, BANK[$59]
+;INCLUDE "maps/VermilionFishingSpeechHouse.asm"
+;INCLUDE "maps/VermilionPokecenter1F.asm"
+;INCLUDE "maps/VermilionPokecenter2FBeta.asm"
+;INCLUDE "maps/PokemonFanClub.asm"
+;INCLUDE "maps/VermilionMagnetTrainSpeechHouse.asm"
+;INCLUDE "maps/VermilionMart.asm"
+;INCLUDE "maps/VermilionDiglettsCaveSpeechHouse.asm"
+;INCLUDE "maps/VermilionGym.asm"
+;INCLUDE "maps/Route6SaffronGate.asm"
+;INCLUDE "maps/Route6UndergroundPathEntrance.asm"
+;INCLUDE "maps/RedsHouse1F.asm"
+;INCLUDE "maps/RedsHouse2F.asm"
+;INCLUDE "maps/BluesHouse.asm"
+;INCLUDE "maps/OaksLab.asm"
 	dr $164000, $168000
 
 SECTION "bank5a", ROMX, BANK[$5a]
+;INCLUDE "maps/PewterNidoranSpeechHouse.asm"
+;INCLUDE "maps/PewterGym.asm"
+;INCLUDE "maps/PewterMart.asm"
+;INCLUDE "maps/PewterPokecenter1F.asm"
+;INCLUDE "maps/PewterPokecenter2FBeta.asm"
+;INCLUDE "maps/PewterSnoozeSpeechHouse.asm"
+;INCLUDE "maps/IndigoPlateauPokecenter1F.asm"
+;INCLUDE "maps/WillsRoom.asm"
+;INCLUDE "maps/KogasRoom.asm"
+;INCLUDE "maps/BrunosRoom.asm"
+;INCLUDE "maps/KarensRoom.asm"
+;INCLUDE "maps/LancesRoom.asm"
+;INCLUDE "maps/HallOfFame.asm"
 	dr $168000, $16c000
 
 SECTION "bank5b", ROMX, BANK[$5b]
+;INCLUDE "maps/OlivinePort.asm"
+;INCLUDE "maps/VermilionPort.asm"
+;INCLUDE "maps/FastShip1F.asm"
+;INCLUDE "maps/FastShipCabins_NNW_NNE_NE.asm"
+;INCLUDE "maps/FastShipCabins_SW_SSW_NW.asm"
+;INCLUDE "maps/FastShipCabins_SE_SSE_CaptainsCabin.asm"
+;INCLUDE "maps/FastShipB1F.asm"
+;INCLUDE "maps/OlivinePortPassage.asm"
+;INCLUDE "maps/VermilionPortPassage.asm"
+;INCLUDE "maps/MountMoonSquare.asm"
+;INCLUDE "maps/MountMoonGiftShop.asm"
+;INCLUDE "maps/TinTowerRoof.asm"
 	dr $16c000, $170000
 
 SECTION "bank5c", ROMX, BANK[$5c]
+;INCLUDE "maps/FuchsiaMart.asm"
+;INCLUDE "maps/SafariZoneMainOffice.asm"
+;INCLUDE "maps/FuchsiaGym.asm"
+;INCLUDE "maps/BillsBrothersHouse.asm"
+;INCLUDE "maps/FuchsiaPokecenter1F.asm"
+;INCLUDE "maps/FuchsiaPokecenter2FBeta.asm"
+;INCLUDE "maps/SafariZoneWardensHome.asm"
+;INCLUDE "maps/Route15FuchsiaGate.asm"
+;INCLUDE "maps/SilverCavePokecenter1F.asm"
+;INCLUDE "maps/Route28SteelWingHouse.asm"
+;INCLUDE "maps/Pokecenter2F.asm"
+;INCLUDE "maps/TradeCenter.asm"
+;INCLUDE "maps/Colosseum.asm"
+;INCLUDE "maps/TimeCapsule.asm"
 	dr $170000, $174000
 
 SECTION "bank5d", ROMX, BANK[$5d]
+;INCLUDE "maps/LavenderPokecenter1F.asm"
+;INCLUDE "maps/LavenderPokecenter2FBeta.asm"
+;INCLUDE "maps/MrFujisHouse.asm"
+;INCLUDE "maps/LavenderSpeechHouse.asm"
+;INCLUDE "maps/LavenderNameRater.asm"
+;INCLUDE "maps/LavenderMart.asm"
+;INCLUDE "maps/SoulHouse.asm"
+;INCLUDE "maps/LavRadioTower1F.asm"
+;INCLUDE "maps/Route8SaffronGate.asm"
+;INCLUDE "maps/Route12SuperRodHouse.asm"
+;INCLUDE "maps/ManiasHouse.asm"
+;INCLUDE "maps/CianwoodGym.asm"
+;INCLUDE "maps/CianwoodPokecenter1F.asm"
+;INCLUDE "maps/CianwoodPharmacy.asm"
+;INCLUDE "maps/CianwoodPhotoStudio.asm"
+;INCLUDE "maps/CianwoodLugiaSpeechHouse.asm"
 	dr $174000, $178000
 
 SECTION "bank5e", ROMX, BANK[$5e]
+;INCLUDE "maps/CeladonDeptStore1F.asm"
+;INCLUDE "maps/CeladonDeptStore2F.asm"
+;INCLUDE "maps/CeladonDeptStore3F.asm"
+;INCLUDE "maps/CeladonDeptStore4F.asm"
+;INCLUDE "maps/CeladonDeptStore5F.asm"
+;INCLUDE "maps/CeladonDeptStore6F.asm"
+;INCLUDE "maps/CeladonDeptStoreElevator.asm"
+;INCLUDE "maps/CeladonMansion1F.asm"
+;INCLUDE "maps/CeladonMansion2F.asm"
+;INCLUDE "maps/CeladonMansion3F.asm"
+;INCLUDE "maps/CeladonMansionRoof.asm"
+;INCLUDE "maps/CeladonMansionRoofHouse.asm"
+;INCLUDE "maps/CeladonPokecenter1F.asm"
+;INCLUDE "maps/CeladonPokecenter2FBeta.asm"
+;INCLUDE "maps/CeladonGameCorner.asm"
+;INCLUDE "maps/CeladonGameCornerPrizeRoom.asm"
+;INCLUDE "maps/CeladonGym.asm"
+;INCLUDE "maps/CeladonCafe.asm"
+;INCLUDE "maps/Route16FuchsiaSpeechHouse.asm"
+;INCLUDE "maps/Route16Gate.asm"
+;INCLUDE "maps/Route7SaffronGate.asm"
+;INCLUDE "maps/Route17Route18Gate.asm"
 	dr $178000, $17c000
 
 SECTION "bank5f", ROMX, BANK[$5f]
+;INCLUDE "maps/ViridianGym.asm"
+;INCLUDE "maps/ViridianNicknameSpeechHouse.asm"
+;INCLUDE "maps/TrainerHouse1F.asm"
+;INCLUDE "maps/TrainerHouseB1F.asm"
+;INCLUDE "maps/ViridianMart.asm"
+;INCLUDE "maps/ViridianPokecenter1F.asm"
+;INCLUDE "maps/ViridianPokecenter2FBeta.asm"
+;INCLUDE "maps/Route2NuggetHouse.asm"
+;INCLUDE "maps/Route2Gate.asm"
+;INCLUDE "maps/VictoryRoadGate.asm"
 	dr $17c000, $180000
 
 SECTION "bank60", ROMX, BANK[$60]
+;INCLUDE "maps/ElmsLab.asm"
+;INCLUDE "maps/PlayersHouse1F.asm"
+;INCLUDE "maps/PlayersHouse2F.asm"
+;INCLUDE "maps/PlayersNeighborsHouse.asm"
+;INCLUDE "maps/ElmsHouse.asm"
+;INCLUDE "maps/Route26HealHouse.asm"
+;INCLUDE "maps/DayOfWeekSiblingsHouse.asm"
+;INCLUDE "maps/Route27SandstormHouse.asm"
+;INCLUDE "maps/Route29Route46Gate.asm"
 	dr $180000, $184000
 
 SECTION "bank61", ROMX, BANK[$61]
@@ -1740,29 +1969,31 @@ INCLUDE "maps/Route5SaffronGate.asm"
 INCLUDE "maps/Route5CleanseTagHouse.asm"
 
 SECTION "bank62", ROMX, BANK[$62]
+;INCLUDE "maps/FightingDojo.asm"
+;INCLUDE "maps/SaffronGym.asm"
+;INCLUDE "maps/SaffronMart.asm"
+;INCLUDE "maps/SaffronPokecenter1F.asm"
+;INCLUDE "maps/SaffronPokecenter2FBeta.asm"
+;INCLUDE "maps/MrPsychicsHouse.asm"
+;INCLUDE "maps/SaffronMagnetTrainStation.asm"
+;INCLUDE "maps/SilphCo1F.asm"
+;INCLUDE "maps/CopycatsHouse1F.asm"
+;INCLUDE "maps/CopycatsHouse2F.asm"
+;INCLUDE "maps/Route5UndergroundPathEntrance.asm"
+;INCLUDE "maps/Route5SaffronGate.asm"
+;INCLUDE "maps/Route5CleanseTagHouse.asm"
 	dr $188000, $18c000
 
 SECTION "bank63", ROMX, BANK[$63]
+;INCLUDE "maps/CherrygroveMart.asm"
+;INCLUDE "maps/CherrygrovePokecenter1F.asm"
+;INCLUDE "maps/CherrygroveGymSpeechHouse.asm"
+;INCLUDE "maps/GuideGentsHouse.asm"
+;INCLUDE "maps/CherrygroveEvolutionSpeechHouse.asm"
+;INCLUDE "maps/Route30BerryHouse.asm"
+;INCLUDE "maps/MrPokemonsHouse.asm"
+;INCLUDE "maps/Route31VioletGate.asm"
 	dr $18c000, $190000
-
-SECTION "bank67", ROMX, BANK[$67]
-	dr $19c000, $1a0000
-
-SECTION "bank68", ROMX, BANK[$68]
-PokedexEntries1::
-	dr $1a0000, $1a4000
-
-SECTION "bank69", ROMX, BANK[$69]
-PokedexEntries2::
-	dr $1a4000, $1a8000
-
-SECTION "bank6a", ROMX, BANK[$6a]
-PokedexEntries3::
-	dr $1a8000, $1ac000
-
-SECTION "bank6b", ROMX, BANK[$6b]
-PokedexEntries4::
-	dr $1ac000, $1b0000
 
 SECTION "bank6c", ROMX, BANK[$6c]
 ItemNames::

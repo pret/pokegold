@@ -288,9 +288,6 @@ ROMX $56
 ROMX $57
 	org $4000
 	"bank57"
-ROMX $58
-	org $4000
-	"bank58"
 ROMX $59
 	org $4000
 	"bank59"
@@ -333,21 +330,18 @@ ROMX $65
 ROMX $66
 	org $4000
 	"Text 3"
-ROMX $67
-	org $4000
-	"bank67"
 ROMX $68
 	org $4000
-	"bank68"
+	"Pokedex Entries 001-064"
 ROMX $69
 	org $4000
-	"bank69"
+	"Pokedex Entries 065-128"
 ROMX $6a
 	org $4000
-	"bank6a"
+	"Pokedex Entries 129-192"
 ROMX $6b
 	org $4000
-	"bank6b"
+	"Pokedex Entries 193-251"
 ROMX $6c
 	org $4000
 	"bank6c"
