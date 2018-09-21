@@ -240,9 +240,9 @@ CheckObjectTime::
 	ret
 
 .TimeOfDayValues_17bb:
-	db 1 << MORN ; 1
-	db 1 << DAY  ; 2
-	db 1 << NITE ; 4
+	db MORN
+	db DAY
+	db NITE
 
 .asm_17be
 	ld hl, $6

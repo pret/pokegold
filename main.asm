@@ -340,11 +340,11 @@ CheckTime::
 	ld c, a
 	ret
 
-TimeOfDayTable: ; c012
-	db MORN, 1 << MORN
-	db DAY,  1 << DAY
-	db NITE, 1 << NITE
-	db NITE, 1 << NITE
+TimeOfDayTable:
+	db MORN_F, MORN
+	db DAY_F,  DAY
+	db NITE_F, NITE
+	db NITE_F, NITE
 	db -1
 
 INCLUDE "engine/engine_flags.asm"
@@ -1586,7 +1586,19 @@ INCLUDE "maps/TeamRocketBaseB3F.asm"
 INCLUDE "maps/IlexForest.asm"
 
 SECTION "bank46", ROMX, BANK[$46]
-	dr $118000, $11c000
+INCLUDE "maps/GoldenrodUnderground.asm"
+INCLUDE "maps/GoldenrodUndergroundSwitchRoomEntrances.asm"
+INCLUDE "maps/GoldenrodDeptStoreB1F.asm"
+INCLUDE "maps/GoldenrodUndergroundWarehouse.asm"
+INCLUDE "maps/MountMortar1FOutside.asm"
+INCLUDE "maps/MountMortar1FInside.asm"
+INCLUDE "maps/MountMortar2FInside.asm"
+INCLUDE "maps/MountMortarB1F.asm"
+INCLUDE "maps/IcePath1F.asm"
+INCLUDE "maps/IcePathB1F.asm"
+INCLUDE "maps/IcePathB2FMahoganySide.asm"
+INCLUDE "maps/IcePathB2FBlackthornSide.asm"
+INCLUDE "maps/IcePathB3F.asm"
 
 SECTION "bank47", ROMX, BANK[$47]
 	dr $11c000, $120000

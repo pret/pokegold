@@ -3026,7 +3026,7 @@ wd6a4:: ds 1 ; d6a4
 wd6a5:: ds 1 ; d6a5
 wd6a6:: ds 1 ; d6a6
 wd6a7:: ds 1 ; d6a7
-wd6a8:: ds 1 ; d6a8
+wUndergroundSwitchPositions:: ds 1 ; d6a8
 wd6a9:: ds 1 ; d6a9
 wd6aa:: ds 1 ; d6aa
 wd6ab:: ds 1 ; d6ab

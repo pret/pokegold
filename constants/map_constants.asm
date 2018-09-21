@@ -101,10 +101,10 @@ ENDM
 	map_const TEAM_ROCKET_BASE_B2F,                        9, 15 ; 50
 	map_const TEAM_ROCKET_BASE_B3F,                        9, 15 ; 51
 	map_const ILEX_FOREST,                                27, 15 ; 52
-	map_const WAREHOUSE_ENTRANCE,                         18, 15 ; 53
-	map_const UNDERGROUND_PATH_SWITCH_ROOM_ENTRANCES,     18, 15 ; 54
+	map_const GOLDENROD_UNDERGROUND,                      18, 15 ; 53
+	map_const GOLDENROD_UNDERGROUND_SWITCH_ROOM_ENTRANCES,18, 15 ; 54
 	map_const GOLDENROD_DEPT_STORE_B1F,                    9, 10 ; 55
-	map_const UNDERGROUND_WAREHOUSE,                       9, 10 ; 56
+	map_const GOLDENROD_UNDERGROUND_WAREHOUSE,             9, 10 ; 56
 	map_const MOUNT_MORTAR_1F_OUTSIDE,                    18, 20 ; 57
 	map_const MOUNT_MORTAR_1F_INSIDE,                     27, 20 ; 58
 	map_const MOUNT_MORTAR_2F_INSIDE,                     18, 20 ; 59
