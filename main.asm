@@ -1601,7 +1601,23 @@ INCLUDE "maps/IcePathB2FBlackthornSide.asm"
 INCLUDE "maps/IcePathB3F.asm"
 
 SECTION "bank47", ROMX, BANK[$47]
-	dr $11c000, $120000
+INCLUDE "maps/WhirlIslandNW.asm"
+INCLUDE "maps/WhirlIslandNE.asm"
+INCLUDE "maps/WhirlIslandSW.asm"
+INCLUDE "maps/WhirlIslandCave.asm"
+INCLUDE "maps/WhirlIslandSE.asm"
+INCLUDE "maps/WhirlIslandB1F.asm"
+INCLUDE "maps/WhirlIslandB2F.asm"
+INCLUDE "maps/WhirlIslandLugiaChamber.asm"
+INCLUDE "maps/SilverCaveRoom1.asm"
+INCLUDE "maps/SilverCaveRoom2.asm"
+INCLUDE "maps/SilverCaveRoom3.asm"
+INCLUDE "maps/SilverCaveItemRooms.asm"
+INCLUDE "maps/DarkCaveVioletEntrance.asm"
+INCLUDE "maps/DarkCaveBlackthornEntrance.asm"
+INCLUDE "maps/DragonsDen1F.asm"
+INCLUDE "maps/DragonsDenB1F.asm"
+INCLUDE "maps/TohjoFalls.asm"
 
 SECTION "bank48", ROMX, BANK[$48]
 	dr $120000, $124000

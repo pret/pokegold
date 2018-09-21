@@ -953,13 +953,13 @@ describedecoration: MACRO
 	db \1 ; byte
 ENDM
 
-	enum fruittree_command ; $9b
+	enum fruittree_command ; $9a
 fruittree: MACRO
 	db fruittree_command
 	db \1 ; tree_id
 ENDM
 
-	enum specialphonecall_command ; $9c
+	enum specialphonecall_command ; $9b
 specialphonecall: MACRO
 	db specialphonecall_command
 	dw \1 ; call_id
@@ -981,26 +981,19 @@ else
 endc
 ENDM
 
-	enum verbosegiveitem2_command ; $9f
-verbosegiveitem2: MACRO
-	db verbosegiveitem2_command
-	db \1 ; item
-	db \2 ; var
-ENDM
-
-	enum swarm_command ; $a0
+	enum swarm_command ; $9e
 swarm: MACRO
 	db swarm_command
 	db \1 ; flag
 	map_id \2 ; map
 ENDM
 
-	enum halloffame_command ; $a1
+	enum halloffame_command ; $9f
 halloffame: MACRO
 	db halloffame_command
 ENDM
 
-	enum credits_command ; $a2
+	enum credits_command ; $a0
 credits: MACRO
 	db credits_command
 ENDM
