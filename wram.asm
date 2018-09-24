@@ -3364,8 +3364,7 @@ wd962:: ds 1 ; d962
 
 wMomItemTriggerBalance:: ds 3 ; d963
 
-wDailyResetTimer:: ds 1 ; d966
-wd967:: ds 1 ; d967
+wDailyResetTimer:: dw ; d966
 wDailyFlags:: ds 1 ; d968
 wWeeklyFlags:: ds 1 ; d969
 wd96a:: ds 1 ; d96a

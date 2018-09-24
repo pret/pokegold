@@ -97,7 +97,7 @@
 	engine_flag_def ENGINE_SPECIAL_WILDDATA,                      wDailyFlags, 2 ; special wilddata?
 	engine_flag_def ENGINE_TIME_CAPSULE,                          wDailyFlags, 3 ; time capsule (24h wait)
 	engine_flag_def ENGINE_ALL_FRUIT_TREES,                       wDailyFlags, 4 ; all fruit trees
-	engine_flag_def ENGINE_SHUCKLE_GIVEN,                         wDailyFlags, 5 ; shuckle given
+	engine_flag_def ENGINE_GOT_SHUCKIE_TODAY,                     wDailyFlags, 5 ; shuckle given
 	engine_flag_def ENGINE_GOLDENROD_UNDERGROUND_MERCHANT_CLOSED, wDailyFlags, 6 ; goldenrod underground merchant closed
 	engine_flag_def ENGINE_FOUGHT_IN_TRAINER_HALL_TODAY,          wDailyFlags, 7 ; fought in trainer hall today
 
