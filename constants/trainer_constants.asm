@@ -119,8 +119,6 @@ KRIS EQU __enum__
 	const JIMMY
 	const OWEN
 	const JASON
-	const JOEY4
-	const JOEY5
 
 	trainerclass SCHOOLBOY ; 17
 	const JACK1
@@ -185,8 +183,6 @@ KRIS EQU __enum__
 	const CONNIE3
 	const DANA2
 	const DANA3
-	const DANA4
-	const DANA5
 
 	trainerclass JANINE ; 1a
 	const JANINE1
@@ -211,7 +207,6 @@ KRIS EQU __enum__
 	const KEVIN
 	const STEVE
 	const ALLEN
-	const DARIN
 
 	trainerclass COOLTRAINERF ; 1c
 	const GWEN
@@ -234,7 +229,6 @@ KRIS EQU __enum__
 	const BETH3
 	const REENA2
 	const REENA3
-	const CARA
 
 	trainerclass BEAUTY ; 1d
 	const VICTORIA
@@ -253,7 +247,6 @@ KRIS EQU __enum__
 	const JULIA
 	const THERESA
 	const VALERIE
-	const OLIVIA
 
 	trainerclass POKEMANIAC ; 1e
 	const LARRY
@@ -269,8 +262,6 @@ KRIS EQU __enum__
 	const ISSAC
 	const DONALD
 	const ZACH
-	const BRENT4
-	const MILLER
 
 	trainerclass GRUNTM ; 1f
 	const GRUNTM_1
@@ -339,11 +330,6 @@ KRIS EQU __enum__
 	const DOUG
 	const ARNIE2
 	const ARNIE3
-	const WADE4
-	const WADE5
-	const ARNIE4
-	const ARNIE5
-	const WAYNE
 
 	trainerclass FISHER ; 25
 	const JUSTIN
@@ -352,7 +338,7 @@ KRIS EQU __enum__
 	const KYLE
 	const HENRY
 	const MARVIN
-	const TULLY1
+	const CHRIS1
 	const ANDRE
 	const RAYMOND
 	const WILTON1
@@ -363,14 +349,11 @@ KRIS EQU __enum__
 	const BARNEY
 	const RALPH2
 	const RALPH3
-	const TULLY2
-	const TULLY3
+	const CHRIS2
+	const CHRIS3
 	const WILTON2
 	const SCOTT
 	const WILTON3
-	const RALPH4
-	const RALPH5
-	const TULLY4
 
 	trainerclass SWIMMERM ; 26
 	const HAROLD
@@ -429,7 +412,6 @@ KRIS EQU __enum__
 	const HARRY
 	const HUEY2
 	const HUEY3
-	const HUEY4
 
 	trainerclass SUPER_NERD ; 29
 	const STAN
@@ -444,8 +426,6 @@ KRIS EQU __enum__
 	const TERU
 	const RUSS
 	const NORTON
-	const HUGH
-	const MARKUS
 
 	trainerclass RIVAL2 ; 2a
 	const RIVAL2_1_CHIKORITA
@@ -480,12 +460,10 @@ KRIS EQU __enum__
 	const DANIEL
 	const PARRY2
 	const PARRY3
-	const ANTHONY4
-	const ANTHONY5
 
 	trainerclass BIKER ; 2d
-	const BIKER_BENNY
-	const KAZU
+	const KAZU1
+	const KAZU2
 	const DWAYNE
 	const HARRIS
 	const ZEKE
@@ -518,7 +496,6 @@ KRIS EQU __enum__
 	const HORTON
 	const IRWIN2
 	const IRWIN3
-	const IRWIN4
 
 	trainerclass BLACKBELT_T ; 32
 	const KENJI1
@@ -573,11 +550,6 @@ KRIS EQU __enum__
 	const TANYA
 	const TIFFANY3
 	const ERIN3
-	const LIZ4
-	const LIZ5
-	const GINA4
-	const GINA5
-	const TIFFANY4
 
 	trainerclass CAMPER ; 36
 	const ROLAND
@@ -599,9 +571,6 @@ KRIS EQU __enum__
 	const JOHN
 	const JERRY
 	const SPENCER
-	const TODD4
-	const TODD5
-	const QUENTIN
 
 	trainerclass EXECUTIVEF ; 37
 	const EXECUTIVEF_1
@@ -617,9 +586,6 @@ KRIS EQU __enum__
 	const EDMOND
 	const NEAL
 	const LI
-	const GAKU
-	const MASA
-	const KOJI
 
 	trainerclass MEDIUM ; 39
 	const MARTHA
@@ -648,12 +614,10 @@ KRIS EQU __enum__
 	const DEREK2
 	const DEREK3
 	const ALEX
-	const REX
-	const ALLAN
 
 	trainerclass KIMONO_GIRL ; 3c
-	const NAOKO1
-	const NAOKO2
+	const KYOKO
+	const NAOKO
 	const SAYO
 	const ZUKI
 	const KUNI
@@ -668,8 +632,6 @@ KRIS EQU __enum__
 	const JOANDZOE2
 	const MEGANDPEG1
 	const MEGANDPEG2
-	const LEAANDPIA1
-	const LEAANDPIA2
 
 	trainerclass POKEFANF ; 3e
 	const BEVERLY1
@@ -677,7 +639,6 @@ KRIS EQU __enum__
 	const BEVERLY2
 	const BEVERLY3
 	const GEORGIA
-	const JAIME
 
 	trainerclass RED ; 3f
 	const RED1
@@ -697,33 +658,3 @@ KRIS EQU __enum__
 	const GRUNTF_5
 
 NUM_TRAINER_CLASSES EQU __enum__
-
-	const_def
-	const       NO_AI
-const_value = 0
-	shift_const AI_BASIC
-	shift_const AI_SETUP
-	shift_const AI_TYPES
-	shift_const AI_OFFENSIVE
-	shift_const AI_SMART
-	shift_const AI_OPPORTUNIST
-	shift_const AI_AGGRESSIVE
-	shift_const AI_CAUTIOUS
-	shift_const AI_STATUS
-	shift_const AI_RISKY
-	shift_const AI_10
-	shift_const AI_11
-	shift_const AI_12
-	shift_const AI_13
-	shift_const AI_14
-	shift_const AI_15
-
-	const_def
-	const TRNATTR_ITEM1
-	const TRNATTR_ITEM2
-	const TRNATTR_BASEMONEY
-	const TRNATTR_AI_MOVE_WEIGHTS
-	const TRNATTR_AI2
-	const TRNATTR_AI_ITEM_SWITCH
-	const TRNATTR_AI4
-NUM_TRAINER_ATTRIBUTES EQU const_value

@@ -903,7 +903,9 @@ SECTION "banke", ROMX, BANK[$e]
 	dr $38000, $398f2
 
 Battle_GetTrainerName:: ; 398f2
-	dr $398f2, $3c000
+	dr $398f2, $3993e
+
+INCLUDE "data/trainers/parties.asm"
 
 SECTION "bankf", ROMX, BANK[$f]
 	dr $3c000, $3c551
