@@ -1646,10 +1646,13 @@ wcb5c:: ds 1 ; cb5c
 wcb5d:: ds 1 ; cb5d
 wcb5e:: ds 1 ; cb5e
 wcb5f:: ds 1 ; cb5f
+wPlayerDamageTaken::
 wcb60:: ds 1 ; cb60
 wcb61:: ds 1 ; cb61
+wEnemyDamageTaken::
 wcb62:: ds 1 ; cb62
 wcb63:: ds 1 ; cb63
+wBattleReward::
 wcb64:: ds 1 ; cb64
 wcb65:: ds 1 ; cb65
 wcb66:: ds 1 ; cb66
@@ -2699,6 +2702,7 @@ wWildMon:: ds 1 ; d14f
 wd150:: ds 1 ; d150
 wTempNumBuffer::
 wNamedObjectIndexBuffer::
+wDeciramBuffer::
 wd151:: ds 1 ; d151
 wd152:: ds 1 ; d152
 wd153:: ds 1 ; d153

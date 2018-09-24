@@ -1518,11 +1518,9 @@ Predef3A::
 	dr $fc002, $100000
 
 SECTION "bank40", ROMX, BANK[$40]
-BattleText:: ; Not actually where it is, I just needed the label for BANK to work
-	dr $100000, $101746
+	dr $100000, $10110c
 
-Text_ConfusedNoMore::
-	dr $101746, $104000
+INCLUDE "data/text/battle.asm"
 
 SECTION "bank41", ROMX, BANK[$41]
 	dr $104000, $108000

@@ -1477,7 +1477,7 @@ BitterBerry: ; f1c0
 	xor a
 	ld [hBattleTurn], a
 	call Functionf7d0
-	ld hl, Text_ConfusedNoMore ; $5746
+	ld hl, ConfusedNoMoreText
 	call StdBattleTextBox
 	ld a, $0
 .asm_f1d9
