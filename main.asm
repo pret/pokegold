@@ -1774,12 +1774,11 @@ INCLUDE "maps/PowerPlant.asm"
 INCLUDE "maps/BillsHouse.asm"
 
 SECTION "bank55", ROMX, BANK[$55]
-;INCLUDE "maps/AzaleaPokecenter1F.asm"
-;INCLUDE "maps/CharcoalKiln.asm"
-;INCLUDE "maps/AzaleaMart.asm"
-;INCLUDE "maps/KurtsHouse.asm"
-;INCLUDE "maps/AzaleaGym.asm"
-	dr $154000, $158000
+INCLUDE "maps/AzaleaPokecenter1F.asm"
+INCLUDE "maps/CharcoalKiln.asm"
+INCLUDE "maps/AzaleaMart.asm"
+INCLUDE "maps/KurtsHouse.asm"
+INCLUDE "maps/AzaleaGym.asm"
 
 SECTION "bank56", ROMX, BANK[$56]
 ;INCLUDE "maps/VioletMart.asm"

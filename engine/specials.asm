@@ -552,13 +552,13 @@ FadeOutMusic: ; c628 (3:4628)
 	ld [wMusicFade], a
 	ret
 
-Functionc638: ; c638 (3:4638)
+Diploma: ; c638 (3:4638)
 	call FadeToMenu
 	callba Functione0002
 	call ExitAllMenus
 	ret
 
-Functionc645: ; c645 (3:4645)
+PrintDiploma: ; c645 (3:4645)
 	call FadeToMenu
 	callba Function84684
 	call ExitAllMenus
