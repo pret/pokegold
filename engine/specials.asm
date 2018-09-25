@@ -136,8 +136,8 @@ SpecialsPointers:
 	add_special PhotoStudio
 	add_special InitRoamMons
 	add_special FadeOutMusic
-	add_special Functionc638
-	add_special Functionc645
+	add_special Diploma
+	add_special PrintDiploma
 	add_special Function90a1b
 	add_special Function90a54
 	add_special Function90a8d
