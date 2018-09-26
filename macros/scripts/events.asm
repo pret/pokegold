@@ -998,7 +998,7 @@ credits: MACRO
 	db credits_command
 ENDM
 
-	enum warpfacing_command ; $a3
+	enum warpfacing_command ; $a1
 warpfacing: MACRO
 	db warpfacing_command
 	db \1 ; facing

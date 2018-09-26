@@ -1781,19 +1781,18 @@ INCLUDE "maps/KurtsHouse.asm"
 INCLUDE "maps/AzaleaGym.asm"
 
 SECTION "bank56", ROMX, BANK[$56]
-;INCLUDE "maps/VioletMart.asm"
-;INCLUDE "maps/VioletGym.asm"
-;INCLUDE "maps/EarlsPokemonAcademy.asm"
-;INCLUDE "maps/VioletNicknameSpeechHouse.asm"
-;INCLUDE "maps/VioletPokecenter1F.asm"
-;INCLUDE "maps/VioletKylesHouse.asm"
-;INCLUDE "maps/Route32RuinsOfAlphGate.asm"
-;INCLUDE "maps/Route32Pokecenter1F.asm"
-;INCLUDE "maps/Route35GoldenrodGate.asm"
-;INCLUDE "maps/Route35NationalParkGate.asm"
-;INCLUDE "maps/Route36RuinsOfAlphGate.asm"
-;INCLUDE "maps/Route36NationalParkGate.asm"
-	dr $158000, $15c000
+INCLUDE "maps/VioletMart.asm"
+INCLUDE "maps/VioletGym.asm"
+INCLUDE "maps/EarlsPokemonAcademy.asm"
+INCLUDE "maps/VioletNicknameSpeechHouse.asm"
+INCLUDE "maps/VioletPokecenter1F.asm"
+INCLUDE "maps/VioletKylesHouse.asm"
+INCLUDE "maps/Route32RuinsOfAlphGate.asm"
+INCLUDE "maps/Route32Pokecenter1F.asm"
+INCLUDE "maps/Route35GoldenrodGate.asm"
+INCLUDE "maps/Route35NationalParkGate.asm"
+INCLUDE "maps/Route36RuinsOfAlphGate.asm"
+INCLUDE "maps/Route36NationalParkGate.asm"
 
 SECTION "bank57", ROMX, BANK[$57]
 
