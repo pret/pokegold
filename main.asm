@@ -1962,15 +1962,14 @@ INCLUDE "maps/Route5SaffronGate.asm"
 INCLUDE "maps/Route5CleanseTagHouse.asm"
 
 SECTION "bank62", ROMX, BANK[$62]
-;INCLUDE "maps/CherrygroveMart.asm"
-;INCLUDE "maps/CherrygrovePokecenter1F.asm"
-;INCLUDE "maps/CherrygroveGymSpeechHouse.asm"
-;INCLUDE "maps/GuideGentsHouse.asm"
-;INCLUDE "maps/CherrygroveEvolutionSpeechHouse.asm"
-;INCLUDE "maps/Route30BerryHouse.asm"
-;INCLUDE "maps/MrPokemonsHouse.asm"
-;INCLUDE "maps/Route31VioletGate.asm"
-	dr $188000, $18c000
+INCLUDE "maps/CherrygroveMart.asm"
+INCLUDE "maps/CherrygrovePokecenter1F.asm"
+INCLUDE "maps/CherrygroveGymSpeechHouse.asm"
+INCLUDE "maps/GuideGentsHouse.asm"
+INCLUDE "maps/CherrygroveEvolutionSpeechHouse.asm"
+INCLUDE "maps/Route30BerryHouse.asm"
+INCLUDE "maps/MrPokemonsHouse.asm"
+INCLUDE "maps/Route31VioletGate.asm"
 
 SECTION "bank6c", ROMX, BANK[$6c]
 ItemNames::
