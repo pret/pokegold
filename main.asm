@@ -1743,22 +1743,21 @@ SECTION "bank52", ROMX, BANK[$52]
 	dr $148000, $14c000
 
 SECTION "bank53", ROMX, BANK[$53]
-;INCLUDE "maps/BlackthornGym1F.asm"
-;INCLUDE "maps/BlackthornGym2F.asm"
-;INCLUDE "maps/BlackthornDragonSpeechHouse.asm"
-;INCLUDE "maps/BlackthornEmysHouse.asm"
-;INCLUDE "maps/BlackthornMart.asm"
-;INCLUDE "maps/BlackthornPokecenter1F.asm"
-;INCLUDE "maps/MoveDeletersHouse.asm"
-;INCLUDE "maps/CinnabarPokecenter1F.asm"
-;INCLUDE "maps/CinnabarPokecenter2FBeta.asm"
-;INCLUDE "maps/Route19FuchsiaGate.asm"
-;INCLUDE "maps/SeafoamGym.asm"
-;INCLUDE "maps/LakeOfRageHiddenPowerHouse.asm"
-;INCLUDE "maps/LakeOfRageMagikarpHouse.asm"
-;INCLUDE "maps/Route43MahoganyGate.asm"
-;INCLUDE "maps/Route43Gate.asm"
-	dr $14c000, $150000
+INCLUDE "maps/BlackthornGym1F.asm"
+INCLUDE "maps/BlackthornGym2F.asm"
+INCLUDE "maps/BlackthornDragonSpeechHouse.asm"
+INCLUDE "maps/BlackthornEmysHouse.asm"
+INCLUDE "maps/BlackthornMart.asm"
+INCLUDE "maps/BlackthornPokecenter1F.asm"
+INCLUDE "maps/MoveDeletersHouse.asm"
+INCLUDE "maps/CinnabarPokecenter1F.asm"
+INCLUDE "maps/CinnabarPokecenter2FBeta.asm"
+INCLUDE "maps/Route19FuchsiaGate.asm"
+INCLUDE "maps/SeafoamGym.asm"
+INCLUDE "maps/LakeOfRageHiddenPowerHouse.asm"
+INCLUDE "maps/LakeOfRageMagikarpHouse.asm"
+INCLUDE "maps/Route43MahoganyGate.asm"
+INCLUDE "maps/Route43Gate.asm"
 
 SECTION "bank54", ROMX, BANK[$54]
 INCLUDE "maps/CeruleanGymBadgeSpeechHouse.asm"

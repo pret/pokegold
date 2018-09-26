@@ -93,10 +93,10 @@ SpecialsPointers:
 	add_special RestartMapMusic
 	add_special HealMachineAnim
 	add_special SurfStartStep
-	add_special FindGreaterThanThatLevel
-	add_special FindAtLeastThatHappy
-	add_special FindThatSpecies
-	add_special FindThatSpeciesYourTrainerID
+	add_special FindPartyMonAboveLevel
+	add_special FindPartyMonAtLeastThatHappy
+	add_special FindPartyMonThatSpecies
+	add_special FindPartyMonThatSpeciesYourTrainerID
 	add_special UnusedCheckUnusedTwoDayTimer
 	add_special DayCareMon1
 	add_special DayCareMon2
@@ -167,28 +167,28 @@ UnusedSetSeenMon: ; c3ac
 	call SetSeenMon
 	ret
 
-FindGreaterThanThatLevel: ; c3b4
+FindPartyMonAboveLevel: ; c3b4
 	ld a, [wScriptVar]
 	ld b, a
 	callba PartySearch_MaximumLevel ; same bank
 	jr z, asm_c3f2
 	jr asm_c3ec
 
-FindAtLeastThatHappy: ; c3c2
+FindPartyMonAtLeastThatHappy: ; c3c2
 	ld a, [wScriptVar]
 	ld b, a
 	callba PartySearch_MinimumHappiness ; same bank
 	jr z, asm_c3f2
 	jr asm_c3ec
 
-FindThatSpecies: ; c3d0
+FindPartyMonThatSpecies: ; c3d0
 	ld a, [wScriptVar]
 	ld b, a
 	callba PartySearch_SameSpecies ; same bank
 	jr z, asm_c3f2
 	jr asm_c3ec
 
-FindThatSpeciesYourTrainerID: ; c3de
+FindPartyMonThatSpeciesYourTrainerID: ; c3de
 	ld a, [wScriptVar]
 	ld b, a
 	callba PartySearch_SameSpeciesAndYourID ; same bank
