@@ -3029,7 +3029,7 @@ wd6a3:: ds 1 ; d6a3
 wd6a4:: ds 1 ; d6a4
 wd6a5:: ds 1 ; d6a5
 wd6a6:: ds 1 ; d6a6
-wd6a7:: ds 1 ; d6a7
+wMooMooBerries:: ds 1 ; d6a7
 wUndergroundSwitchPositions:: ds 1 ; d6a8
 wd6a9:: ds 1 ; d6a9
 wd6aa:: ds 1 ; d6aa

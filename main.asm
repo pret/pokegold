@@ -1714,22 +1714,21 @@ SECTION "bank50", ROMX, BANK[$50]
 	dr $140000, $144000
 
 SECTION "bank51", ROMX, BANK[$51]
-;INCLUDE "maps/OlivinePokecenter1F.asm"
-;INCLUDE "maps/OlivineGym.asm"
-;INCLUDE "maps/OlivineTimsHouse.asm"
-;INCLUDE "maps/OlivineHouseBeta.asm"
-;INCLUDE "maps/OlivinePunishmentSpeechHouse.asm"
-;INCLUDE "maps/OlivineGoodRodHouse.asm"
-;INCLUDE "maps/OlivineCafe.asm"
-;INCLUDE "maps/OlivineMart.asm"
-;INCLUDE "maps/Route38EcruteakGate.asm"
-;INCLUDE "maps/Route39Barn.asm"
-;INCLUDE "maps/Route39Farmhouse.asm
-;INCLUDE "maps/MahoganyRedGyaradosSpeechHouse.asm"
-;INCLUDE "maps/MahoganyGym.asm"
-;INCLUDE "maps/MahoganyPokecenter1F.asm"
-;INCLUDE "maps/Route42EcruteakGate.asm"
-	dr $144000, $148000
+INCLUDE "maps/OlivinePokecenter1F.asm"
+INCLUDE "maps/OlivineGym.asm"
+INCLUDE "maps/OlivineTimsHouse.asm"
+INCLUDE "maps/OlivineHouseBeta.asm"
+INCLUDE "maps/OlivinePunishmentSpeechHouse.asm"
+INCLUDE "maps/OlivineGoodRodHouse.asm"
+INCLUDE "maps/OlivineCafe.asm"
+INCLUDE "maps/OlivineMart.asm"
+INCLUDE "maps/Route38EcruteakGate.asm"
+INCLUDE "maps/Route39Barn.asm"
+INCLUDE "maps/Route39Farmhouse.asm"
+INCLUDE "maps/MahoganyRedGyaradosSpeechHouse.asm"
+INCLUDE "maps/MahoganyGym.asm"
+INCLUDE "maps/MahoganyPokecenter1F.asm"
+INCLUDE "maps/Route42EcruteakGate.asm"
 
 SECTION "bank52", ROMX, BANK[$52]
 INCLUDE "maps/EcruteakTinTowerEntrance.asm"
