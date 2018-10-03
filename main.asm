@@ -1664,13 +1664,12 @@ SECTION "bank4c", ROMX, BANK[$4c]
 	dr $130000, $134000
 
 SECTION "bank4d", ROMX, BANK[$4d]
-;INCLUDE "maps/Route43.asm"
-;INCLUDE "maps/Route44.asm"
-;INCLUDE "maps/Route45.asm"
-;INCLUDE "maps/Route46.asm"
-;INCLUDE "maps/PewterCity.asm"
-;INCLUDE "maps/Route2.asm"
-	dr $134000, $138000
+INCLUDE "maps/Route43.asm"
+INCLUDE "maps/Route44.asm"
+INCLUDE "maps/Route45.asm"
+INCLUDE "maps/Route46.asm"
+INCLUDE "maps/PewterCity.asm"
+INCLUDE "maps/Route2.asm"
 
 SECTION "bank4e", ROMX, BANK[$4e]
 INCLUDE "maps/ViridianCity.asm"

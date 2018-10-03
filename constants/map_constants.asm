@@ -422,7 +422,7 @@ ENDM
 	map_const VIRIDIAN_MART,                               4,  6 ;  8
 	map_const VIRIDIAN_POKECENTER_1F,                      4,  5 ;  9
 	map_const VIRIDIAN_POKECENTER_2F_BETA,                 4,  8 ; 10
-	map_const ROUTE_2_NUGGET_SPEECH_HOUSE,                 4,  4 ; 11
+	map_const ROUTE_2_NUGGET_HOUSE,                        4,  4 ; 11
 	map_const ROUTE_2_GATE,                                4,  5 ; 12
 	map_const VICTORY_ROAD_GATE,                           9, 10 ; 13
 
@@ -440,7 +440,7 @@ ENDM
 	map_const ROUTE_26_HEAL_SPEECH_HOUSE,                  4,  4 ; 10
 	map_const ROUTE_26_DAY_OF_WEEK_SIBLINGS_HOUSE,         4,  4 ; 11
 	map_const ROUTE_27_SANDSTORM_HOUSE,                    4,  4 ; 12
-	map_const ROUTE_29_46_GATE,                            4,  5 ; 13
+	map_const ROUTE_29_ROUTE_46_GATE,                      4,  5 ; 13
 
 	newgroup                                                    ; 25
 
