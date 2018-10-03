@@ -1673,20 +1673,20 @@ SECTION "bank4d", ROMX, BANK[$4d]
 	dr $134000, $138000
 
 SECTION "bank4e", ROMX, BANK[$4e]
-;INCLUDE "maps/ViridianCity.asm"
-;INCLUDE "maps/Route1.asm"
-;INCLUDE "maps/PalletTown.asm"
-;INCLUDE "maps/Route21.asm"
-;INCLUDE "maps/CinnabarIsland.asm"
-;INCLUDE "maps/Route20.asm"
-;INCLUDE "maps/Route19.asm"
-;INCLUDE "maps/FuchsiaCity.asm"
-;INCLUDE "maps/Route18.asm"
-;INCLUDE "maps/Route17.asm"
-;INCLUDE "maps/Route16.asm"
-;INCLUDE "maps/CeladonCity.asm"
-;INCLUDE "maps/Route7.asm"
-	dr $138000, $13c000
+INCLUDE "maps/ViridianCity.asm"
+INCLUDE "maps/Route22.asm"
+INCLUDE "maps/Route1.asm"
+INCLUDE "maps/PalletTown.asm"
+INCLUDE "maps/Route21.asm"
+INCLUDE "maps/CinnabarIsland.asm"
+INCLUDE "maps/Route20.asm"
+INCLUDE "maps/Route19.asm"
+INCLUDE "maps/FuchsiaCity.asm"
+INCLUDE "maps/Route18.asm"
+INCLUDE "maps/Route17.asm"
+INCLUDE "maps/Route16.asm"
+INCLUDE "maps/CeladonCity.asm"
+INCLUDE "maps/Route7.asm"
 
 SECTION "bank4f", ROMX, BANK[$4f]
 INCLUDE "maps/Route15.asm"

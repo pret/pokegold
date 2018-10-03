@@ -169,7 +169,7 @@ ENDM
 
 	map_const CINNABAR_POKECENTER_1F,                      4,  5 ;  1
 	map_const CINNABAR_POKECENTER_2F_BETA,                 4,  8 ;  2
-	map_const ROUTE_19___FUCHSIA_GATE,                     4,  5 ;  3
+	map_const ROUTE_19_FUCHSIA_GATE,                       4,  5 ;  3
 	map_const SEAFOAM_GYM,                                 4,  5 ;  4
 	map_const ROUTE_19,                                   18, 10 ;  5
 	map_const ROUTE_20,                                    9, 30 ;  6
@@ -332,7 +332,7 @@ ENDM
 	map_const FUCHSIA_MART,                                4,  6 ;  6
 	map_const SAFARI_ZONE_MAIN_OFFICE,                     4,  4 ;  7
 	map_const FUCHSIA_GYM,                                 9,  5 ;  8
-	map_const FUCHSIA_BILL_SPEECH_HOUSE,                   4,  4 ;  9
+	map_const BILLS_BROTHERS_HOUSE,                        4,  4 ;  9
 	map_const FUCHSIA_POKECENTER_1F,                       4,  5 ; 10
 	map_const FUCHSIA_POKECENTER_2F_BETA,                  4,  8 ; 11
 	map_const SAFARI_ZONE_WARDENS_HOME,                    4,  5 ; 12
@@ -396,7 +396,7 @@ ENDM
 	map_const ROUTE_16_FUCHSIA_SPEECH_HOUSE,               4,  4 ; 23
 	map_const ROUTE_16_GATE,                               4,  5 ; 24
 	map_const ROUTE_7_SAFFRON_GATE,                        4,  5 ; 25
-	map_const ROUTE_17_18_GATE,                            4,  5 ; 26
+	map_const ROUTE_17_ROUTE_18_GATE,                      4,  5 ; 26
 
 	newgroup                                                    ; 22
 
