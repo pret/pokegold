@@ -1732,15 +1732,14 @@ SECTION "bank51", ROMX, BANK[$51]
 	dr $144000, $148000
 
 SECTION "bank52", ROMX, BANK[$52]
-;INCLUDE "maps/EcruteakTinTowerEntrance.asm"
-;INCLUDE "maps/WiseTriosRoom.asm"
-;INCLUDE "maps/EcruteakPokecenter1F.asm"
-;INCLUDE "maps/EcruteakLugiaSpeechHouse.asm"
-;INCLUDE "maps/DanceTheatre.asm"
-;INCLUDE "maps/EcruteakMart.asm"
-;INCLUDE "maps/EcruteakGym.asm"
-;INCLUDE "maps/EcruteakItemfinderHouse.asm"
-	dr $148000, $14c000
+INCLUDE "maps/EcruteakTinTowerEntrance.asm"
+INCLUDE "maps/WiseTriosRoom.asm"
+INCLUDE "maps/EcruteakPokecenter1F.asm"
+INCLUDE "maps/EcruteakLugiaSpeechHouse.asm"
+INCLUDE "maps/DanceTheatre.asm"
+INCLUDE "maps/EcruteakMart.asm"
+INCLUDE "maps/EcruteakGym.asm"
+INCLUDE "maps/EcruteakItemfinderHouse.asm"
 
 SECTION "bank53", ROMX, BANK[$53]
 INCLUDE "maps/BlackthornGym1F.asm"
