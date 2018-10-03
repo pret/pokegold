@@ -265,13 +265,13 @@ ENDM
 	map_const ROUTE_6,                                     9, 10 ;  1
 	map_const ROUTE_11,                                    9, 20 ;  2
 	map_const VERMILION_CITY,                             18, 20 ;  3
-	map_const VERMILION_HOUSE_FISHING_SPEECH_HOUSE,        4,  4 ;  4
+	map_const VERMILION_FISHING_SPEECH_HOUSE,              4,  4 ;  4
 	map_const VERMILION_POKECENTER_1F,                     4,  5 ;  5
 	map_const VERMILION_POKECENTER_2F_BETA,                4,  8 ;  6
 	map_const POKEMON_FAN_CLUB,                            4,  5 ;  7
 	map_const VERMILION_MAGNET_TRAIN_SPEECH_HOUSE,         4,  4 ;  8
 	map_const VERMILION_MART,                              4,  6 ;  9
-	map_const VERMILION_HOUSE_DIGLETTS_CAVE_SPEECH_HOUSE,  4,  4 ; 10
+	map_const VERMILION_DIGLETTS_CAVE_SPEECH_HOUSE,        4,  4 ; 10
 	map_const VERMILION_GYM,                               9,  5 ; 11
 	map_const ROUTE_6_SAFFRON_GATE,                        4,  5 ; 12
 	map_const ROUTE_6_UNDERGROUND_PATH_ENTRANCE,           4,  4 ; 13
@@ -347,7 +347,7 @@ ENDM
 	map_const LAVENDER_POKECENTER_1F,                      4,  5 ;  5
 	map_const LAVENDER_POKECENTER_2F_BETA,                 4,  8 ;  6
 	map_const MR_FUJIS_HOUSE,                              4,  5 ;  7
-	map_const LAVENDER_TOWN_SPEECH_HOUSE,                  4,  4 ;  8
+	map_const LAVENDER_SPEECH_HOUSE,                       4,  4 ;  8
 	map_const LAVENDER_NAME_RATER,                         4,  4 ;  9
 	map_const LAVENDER_MART,                               4,  6 ; 10
 	map_const SOUL_HOUSE,                                  4,  5 ; 11
@@ -457,8 +457,8 @@ ENDM
 	map_const COPYCATS_HOUSE_1F,                           4,  4 ; 11
 	map_const COPYCATS_HOUSE_2F,                           3,  5 ; 12
 	map_const ROUTE_5_UNDERGROUND_PATH_ENTRANCE,           4,  4 ; 13
-	map_const ROUTE_5_SAFFRON_CITY_GATE,                   4,  5 ; 14
-	map_const ROUTE_5_CLEANSE_TAG_SPEECH_HOUSE,            4,  4 ; 15
+	map_const ROUTE_5_SAFFRON_GATE,                        4,  5 ; 14
+	map_const ROUTE_5_CLEANSE_TAG_HOUSE,                   4,  4 ; 15
 
 	newgroup                                                    ; 26
 

@@ -1689,18 +1689,17 @@ SECTION "bank4e", ROMX, BANK[$4e]
 	dr $138000, $13c000
 
 SECTION "bank4f", ROMX, BANK[$4f]
-;INCLUDE "maps/Route15.asm"
-;INCLUDE "maps/Route14.asm"
-;INCLUDE "maps/Route13.asm"
-;INCLUDE "maps/Route12.asm"
-;INCLUDE "maps/Route11.asm"
-;INCLUDE "maps/LavenderTown.asm"
-;INCLUDE "maps/VermilionCity.asm"
-;INCLUDE "maps/Route6.asm"
-;INCLUDE "maps/SaffronCity.asm"
-;INCLUDE "maps/Route5.asm"
-;INCLUDE "maps/CeruleanCity.asm"
-	dr $13c000, $140000
+INCLUDE "maps/Route15.asm"
+INCLUDE "maps/Route14.asm"
+INCLUDE "maps/Route13.asm"
+INCLUDE "maps/Route12.asm"
+INCLUDE "maps/Route11.asm"
+INCLUDE "maps/LavenderTown.asm"
+INCLUDE "maps/VermilionCity.asm"
+INCLUDE "maps/Route6.asm"
+INCLUDE "maps/SaffronCity.asm"
+INCLUDE "maps/Route5.asm"
+INCLUDE "maps/CeruleanCity.asm"
 
 SECTION "bank50", ROMX, BANK[$50]
 INCLUDE "maps/Route9.asm"
