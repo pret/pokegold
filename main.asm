@@ -1703,15 +1703,15 @@ SECTION "bank4f", ROMX, BANK[$4f]
 	dr $13c000, $140000
 
 SECTION "bank50", ROMX, BANK[$50]
-;INCLUDE "maps/Route9.asm"
-;INCLUDE "maps/Route24.asm"
-;INCLUDE "maps/Route25.asm"
-;INCLUDE "maps/Route3.asm"
-;INCLUDE "maps/Route4.asm"
-;INCLUDE "maps/Route8.asm"
-;INCLUDE "maps/Route10.asm"
-;INCLUDE "maps/Route23.asm"
-	dr $140000, $144000
+INCLUDE "maps/Route9.asm"
+INCLUDE "maps/Route24.asm"
+INCLUDE "maps/Route25.asm"
+INCLUDE "maps/Route3.asm"
+INCLUDE "maps/Route4.asm"
+INCLUDE "maps/Route8.asm"
+INCLUDE "maps/Route10North.asm"
+INCLUDE "maps/Route10South.asm"
+INCLUDE "maps/Route23.asm"
 
 SECTION "bank51", ROMX, BANK[$51]
 INCLUDE "maps/OlivinePokecenter1F.asm"
