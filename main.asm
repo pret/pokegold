@@ -1243,9 +1243,9 @@ InitClock:
 	dr $90641, $908dc
 SetDayOfWeek:
 	dr $908dc, $90a1b
-Function90a1b:
+InitialSetDSTFlag:
 	dr $90a1b, $90a54
-Function90a54:
+InitialClearDSTFlag:
 	dr $90a54, $90a8d
 Function90a8d:
 	dr $90a8d, $90b0f
@@ -1935,16 +1935,15 @@ SECTION "bank5f", ROMX, BANK[$5f]
 	dr $17c000, $180000
 
 SECTION "bank60", ROMX, BANK[$60]
-;INCLUDE "maps/ElmsLab.asm"
-;INCLUDE "maps/PlayersHouse1F.asm"
-;INCLUDE "maps/PlayersHouse2F.asm"
-;INCLUDE "maps/PlayersNeighborsHouse.asm"
-;INCLUDE "maps/ElmsHouse.asm"
-;INCLUDE "maps/Route26HealHouse.asm"
-;INCLUDE "maps/DayOfWeekSiblingsHouse.asm"
-;INCLUDE "maps/Route27SandstormHouse.asm"
-;INCLUDE "maps/Route29Route46Gate.asm"
-	dr $180000, $184000
+INCLUDE "maps/ElmsLab.asm"
+INCLUDE "maps/PlayersHouse1F.asm"
+INCLUDE "maps/PlayersHouse2F.asm"
+INCLUDE "maps/PlayersNeighborsHouse.asm"
+INCLUDE "maps/ElmsHouse.asm"
+INCLUDE "maps/Route26HealHouse.asm"
+INCLUDE "maps/DayOfWeekSiblingsHouse.asm"
+INCLUDE "maps/Route27SandstormHouse.asm"
+INCLUDE "maps/Route29Route46Gate.asm"
 
 SECTION "bank61", ROMX, BANK[$61]
 INCLUDE "maps/FightingDojo.asm"

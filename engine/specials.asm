@@ -138,8 +138,8 @@ SpecialsPointers:
 	add_special FadeOutMusic
 	add_special Diploma
 	add_special PrintDiploma
-	add_special Function90a1b
-	add_special Function90a54
+	add_special InitialSetDSTFlag
+	add_special InitialClearDSTFlag
 	add_special Function90a8d
 	add_special SpecialNone
 

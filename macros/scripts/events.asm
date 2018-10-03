@@ -800,12 +800,12 @@ playmusic: MACRO
 	dw \1 ; music_pointer
 ENDM
 
-	enum encountermusic_command ; $80
+	enum encountermusic_command ; $7f
 encountermusic: MACRO
 	db encountermusic_command
 ENDM
 
-	enum musicfadeout_command ; $81
+	enum musicfadeout_command ; $80
 musicfadeout: MACRO
 	db musicfadeout_command
 	dw \1 ; music
@@ -936,18 +936,18 @@ askforphonenumber: MACRO
 	db \1 ; number
 ENDM
 
-	enum phonecall_command ; $98
+	enum phonecall_command ; $97
 phonecall: MACRO
 	db phonecall_command
 	dw \1 ; caller_name
 ENDM
 
-	enum hangup_command ; $99
+	enum hangup_command ; $98
 hangup: MACRO
 	db hangup_command
 ENDM
 
-	enum describedecoration_command ; $9a
+	enum describedecoration_command ; $99
 describedecoration: MACRO
 	db describedecoration_command
 	db \1 ; byte

@@ -60,7 +60,7 @@
 	engine_flag_def ENGINE_UNLOCKED_UNOWNS_UNUSED_6,              wUnlockedUnowns, 6   ; $30
 	engine_flag_def ENGINE_UNLOCKED_UNOWNS_UNUSED_7,              wUnlockedUnowns, 7
 
-	engine_flag_def ENGINE_FLYPOINT_KRISS_HOUSE,                  wVisitedSpawns,     0 ; your house
+	engine_flag_def ENGINE_FLYPOINT_PLAYERS_HOUSE,                wVisitedSpawns,     0 ; your house
 	engine_flag_def ENGINE_FLYPOINT_VIRIDIAN_POKECENTER,          wVisitedSpawns,     1 ; viridian pokecenter
 	engine_flag_def ENGINE_FLYPOINT_PALLET,                       wVisitedSpawns,     2 ; pallet
 	engine_flag_def ENGINE_FLYPOINT_VIRIDIAN,                     wVisitedSpawns,     3 ; viridian
