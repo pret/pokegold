@@ -1863,21 +1863,20 @@ SECTION "bank5b", ROMX, BANK[$5b]
 	dr $16c000, $170000
 
 SECTION "bank5c", ROMX, BANK[$5c]
-;INCLUDE "maps/FuchsiaMart.asm"
-;INCLUDE "maps/SafariZoneMainOffice.asm"
-;INCLUDE "maps/FuchsiaGym.asm"
-;INCLUDE "maps/BillsBrothersHouse.asm"
-;INCLUDE "maps/FuchsiaPokecenter1F.asm"
-;INCLUDE "maps/FuchsiaPokecenter2FBeta.asm"
-;INCLUDE "maps/SafariZoneWardensHome.asm"
-;INCLUDE "maps/Route15FuchsiaGate.asm"
-;INCLUDE "maps/SilverCavePokecenter1F.asm"
-;INCLUDE "maps/Route28SteelWingHouse.asm"
-;INCLUDE "maps/Pokecenter2F.asm"
-;INCLUDE "maps/TradeCenter.asm"
-;INCLUDE "maps/Colosseum.asm"
-;INCLUDE "maps/TimeCapsule.asm"
-	dr $170000, $174000
+INCLUDE "maps/FuchsiaMart.asm"
+INCLUDE "maps/SafariZoneMainOffice.asm"
+INCLUDE "maps/FuchsiaGym.asm"
+INCLUDE "maps/BillsBrothersHouse.asm"
+INCLUDE "maps/FuchsiaPokecenter1F.asm"
+INCLUDE "maps/FuchsiaPokecenter2FBeta.asm"
+INCLUDE "maps/SafariZoneWardensHome.asm"
+INCLUDE "maps/Route15FuchsiaGate.asm"
+INCLUDE "maps/SilverCavePokecenter1F.asm"
+INCLUDE "maps/Route28SteelWingHouse.asm"
+INCLUDE "maps/Pokecenter2F.asm"
+INCLUDE "maps/TradeCenter.asm"
+INCLUDE "maps/Colosseum.asm"
+INCLUDE "maps/TimeCapsule.asm"
 
 SECTION "bank5d", ROMX, BANK[$5d]
 INCLUDE "maps/LavenderPokecenter1F.asm"
