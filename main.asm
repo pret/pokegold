@@ -1922,17 +1922,16 @@ INCLUDE "maps/Route7SaffronGate.asm"
 INCLUDE "maps/Route17Route18Gate.asm"
 
 SECTION "bank5f", ROMX, BANK[$5f]
-;INCLUDE "maps/ViridianGym.asm"
-;INCLUDE "maps/ViridianNicknameSpeechHouse.asm"
-;INCLUDE "maps/TrainerHouse1F.asm"
-;INCLUDE "maps/TrainerHouseB1F.asm"
-;INCLUDE "maps/ViridianMart.asm"
-;INCLUDE "maps/ViridianPokecenter1F.asm"
-;INCLUDE "maps/ViridianPokecenter2FBeta.asm"
-;INCLUDE "maps/Route2NuggetHouse.asm"
-;INCLUDE "maps/Route2Gate.asm"
-;INCLUDE "maps/VictoryRoadGate.asm"
-	dr $17c000, $180000
+INCLUDE "maps/ViridianGym.asm"
+INCLUDE "maps/ViridianNicknameSpeechHouse.asm"
+INCLUDE "maps/TrainerHouse1F.asm"
+INCLUDE "maps/TrainerHouseB1F.asm"
+INCLUDE "maps/ViridianMart.asm"
+INCLUDE "maps/ViridianPokecenter1F.asm"
+INCLUDE "maps/ViridianPokecenter2FBeta.asm"
+INCLUDE "maps/Route2NuggetHouse.asm"
+INCLUDE "maps/Route2Gate.asm"
+INCLUDE "maps/VictoryRoadGate.asm"
 
 SECTION "bank60", ROMX, BANK[$60]
 INCLUDE "maps/ElmsLab.asm"
