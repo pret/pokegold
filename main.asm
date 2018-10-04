@@ -1628,13 +1628,12 @@ INCLUDE "maps/CianwoodCity.asm"
 INCLUDE "maps/GoldenrodCity.asm"
 
 SECTION "bank49", ROMX, BANK[$49]
-;INCLUDE "maps/OlivineCity.asm"
-;INCLUDE "maps/EcruteakCity.asm"
-;INCLUDE "maps/MahoganyTown.asm"
-;INCLUDE "maps/LakeOfRage.asm"
-;INCLUDE "maps/BlackthornCity.asm"
-;INCLUDE "maps/MountSilver.asm"
-	dr $124000, $128000
+INCLUDE "maps/OlivineCity.asm"
+INCLUDE "maps/EcruteakCity.asm"
+INCLUDE "maps/MahoganyTown.asm"
+INCLUDE "maps/LakeOfRage.asm"
+INCLUDE "maps/BlackthornCity.asm"
+INCLUDE "maps/SilverCaveOutside.asm"
 
 SECTION "bank4a", ROMX, BANK[$4a]
 INCLUDE "maps/Route26.asm"
