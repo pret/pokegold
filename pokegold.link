@@ -151,14 +151,9 @@ ROMX $29
 	org $4000
 	"bank29"
 ROMX $2a
-	org $4000
-	"bank2a"
+	"Map Blocks 1"
 ROMX $2b
-	org $4000
-	"bank2b"
-ROMX $2c
-	org $4000
-	"bank2c"
+	"Map Blocks 2"
 ROMX $2d
 	org $4000
 	"bank2d"
@@ -190,8 +185,7 @@ ROMX $36
 	org $4000
 	"bank36"
 ROMX $37
-	org $4000
-	"bank37"
+	"Map Blocks 3"
 ROMX $38
 	org $4000
 	"bank38"

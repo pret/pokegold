@@ -1316,14 +1316,7 @@ SECTION "bank28", ROMX, BANK[$28]
 SECTION "bank29", ROMX, BANK[$29]
 	dr $a4000, $a8000
 
-SECTION "bank2a", ROMX, BANK[$2a]
-	dr $a8000, $ac000
-
-SECTION "bank2b", ROMX, BANK[$2b]
-	dr $ac000, $b0000
-
-SECTION "bank2c", ROMX, BANK[$2c]
-	dr $b0000, $b4000
+INCLUDE "data/maps/blocks.asm"
 
 SECTION "bank2d", ROMX, BANK[$2d]
 	dr $b4000, $b8000
@@ -1398,9 +1391,6 @@ SECTION "bank35", ROMX, BANK[$35]
 
 SECTION "bank36", ROMX, BANK[$36]
 	dr $d8000, $dc000
-
-SECTION "bank37", ROMX, BANK[$37]
-	dr $dc000, $e0000
 
 SECTION "bank38", ROMX, BANK[$38]
 	dr $e0000, $e0002
