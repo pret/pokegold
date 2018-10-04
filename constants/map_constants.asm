@@ -258,7 +258,7 @@ ENDM
 	map_const GOLDENROD_GAME_CORNER,                       7, 10 ; 19
 	map_const ILEX_FOREST_AZALEA_GATE,                     4,  5 ; 20
 	map_const ROUTE_34_ILEX_FOREST_GATE,                   4,  5 ; 21
-	map_const DAYCARE,                                     4,  5 ; 22
+	map_const DAY_CARE,                                    4,  5 ; 22
 
 	newgroup                                                    ; 12
 
