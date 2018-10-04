@@ -1638,13 +1638,12 @@ SECTION "bank49", ROMX, BANK[$49]
 	dr $124000, $128000
 
 SECTION "bank4a", ROMX, BANK[$4a]
-;INCLUDE "maps/Route26.asm"
-;INCLUDE "maps/Route27.asm"
-;INCLUDE "maps/Route28.asm"
-;INCLUDE "maps/Route29.asm"
-;INCLUDE "maps/Route30.asm"
-;INCLUDE "maps/Route31.asm"
-	dr $128000, $12c000
+INCLUDE "maps/Route26.asm"
+INCLUDE "maps/Route27.asm"
+INCLUDE "maps/Route28.asm"
+INCLUDE "maps/Route29.asm"
+INCLUDE "maps/Route30.asm"
+INCLUDE "maps/Route31.asm"
 
 SECTION "bank4b", ROMX, BANK[$4b]
 INCLUDE "maps/Route32.asm"

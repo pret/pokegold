@@ -360,7 +360,7 @@ ENDM
 	map_const ROUTE_28,                                    9, 20 ;  1
 	map_const SILVER_CAVE_OUTSIDE,                        18, 20 ;  2
 	map_const SILVER_CAVE_POKECENTER_1F,                   4,  5 ;  3
-	map_const ROUTE_28_FAMOUS_SPEECH_HOUSE,                4,  4 ;  4
+	map_const ROUTE_28_STEEL_WING_HOUSE,                   4,  4 ;  4
 
 	newgroup                                                    ; 20
 
@@ -437,8 +437,8 @@ ENDM
 	map_const PLAYERS_HOUSE_2F,                            3,  4 ;  7
 	map_const PLAYERS_NEIGHBORS_HOUSE,                     4,  4 ;  8
 	map_const ELMS_HOUSE,                                  4,  4 ;  9
-	map_const ROUTE_26_HEAL_SPEECH_HOUSE,                  4,  4 ; 10
-	map_const ROUTE_26_DAY_OF_WEEK_SIBLINGS_HOUSE,         4,  4 ; 11
+	map_const ROUTE_26_HEAL_HOUSE,                         4,  4 ; 10
+	map_const DAY_OF_WEEK_SIBLINGS_HOUSE,                  4,  4 ; 11
 	map_const ROUTE_27_SANDSTORM_HOUSE,                    4,  4 ; 12
 	map_const ROUTE_29_ROUTE_46_GATE,                      4,  5 ; 13
 
@@ -470,6 +470,6 @@ ENDM
 	map_const CHERRYGROVE_GYM_SPEECH_HOUSE,                4,  4 ;  6
 	map_const GUIDE_GENTS_HOUSE,                           4,  4 ;  7
 	map_const CHERRYGROVE_EVOLUTION_SPEECH_HOUSE,          4,  4 ;  8
-	map_const ROUTE_30_BERRY_SPEECH_HOUSE,                 4,  4 ;  9
+	map_const ROUTE_30_BERRY_HOUSE,                        4,  4 ;  9
 	map_const MR_POKEMONS_HOUSE,                           4,  4 ; 10
 	map_const ROUTE_31_VIOLET_GATE,                        4,  5 ; 11
