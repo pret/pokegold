@@ -227,7 +227,7 @@ ENDM
 	map_const EARLS_POKEMON_ACADEMY,                       8,  4 ;  8
 	map_const VIOLET_NICKNAME_SPEECH_HOUSE,                4,  4 ;  9
 	map_const VIOLET_POKECENTER_1F,                        4,  5 ; 10
-	map_const VIOLET_ONIX_TRADE_HOUSE,                     4,  4 ; 11
+	map_const VIOLET_KYLES_HOUSE,                          4,  4 ; 11
 	map_const ROUTE_32_RUINS_OF_ALPH_GATE,                 4,  5 ; 12
 	map_const ROUTE_32_POKECENTER_1F,                      4,  5 ; 13
 	map_const ROUTE_35_GOLDENROD_GATE,                     4,  5 ; 14
@@ -242,7 +242,7 @@ ENDM
 	map_const GOLDENROD_GYM,                               9, 10 ;  3
 	map_const GOLDENROD_BIKE_SHOP,                         4,  4 ;  4
 	map_const GOLDENROD_HAPPINESS_RATER,                   4,  4 ;  5
-	map_const GOLDENROD_BILLS_HOUSE,                       4,  4 ;  6
+	map_const BILLS_FAMILYS_HOUSE,                         4,  4 ;  6
 	map_const GOLDENROD_MAGNET_TRAIN_STATION,              9, 10 ;  7
 	map_const GOLDENROD_FLOWER_SHOP,                       4,  4 ;  8
 	map_const GOLDENROD_POKECENTER_1F,                     4,  5 ;  9
@@ -407,7 +407,7 @@ ENDM
 	map_const CIANWOOD_GYM,                                9,  5 ;  5
 	map_const CIANWOOD_POKECENTER_1F,                      4,  5 ;  6
 	map_const CIANWOOD_PHARMACY,                           4,  4 ;  7
-	map_const CIANWOOD_CITY_PHOTO_STUDIO,                  4,  4 ;  8
+	map_const CIANWOOD_PHOTO_STUDIO,                       4,  4 ;  8
 	map_const CIANWOOD_LUGIA_SPEECH_HOUSE,                 4,  4 ;  9
 
 	newgroup                                                    ; 23

@@ -1247,7 +1247,7 @@ InitialSetDSTFlag:
 	dr $90a1b, $90a54
 InitialClearDSTFlag:
 	dr $90a54, $90a8d
-Function90a8d:
+MrChrono:
 	dr $90a8d, $90b0f
 PrintHour:
 	dr $90b0f, $9188a
@@ -1620,13 +1620,12 @@ INCLUDE "maps/DragonsDenB1F.asm"
 INCLUDE "maps/TohjoFalls.asm"
 
 SECTION "bank48", ROMX, BANK[$48]
-;INCLUDE "maps/NewBarkTown.asm"
-;INCLUDE "maps/CherrygroveCity.asm"
-;INCLUDE "maps/VioletCity.asm"
-;INCLUDE "maps/AzaleaTown.asm"
-;INCLUDE "maps/CianwoodCity.asm"
-;INCLUDE "maps/GoldenrodCity.asm"
-	dr $120000, $124000
+INCLUDE "maps/NewBarkTown.asm"
+INCLUDE "maps/CherrygroveCity.asm"
+INCLUDE "maps/VioletCity.asm"
+INCLUDE "maps/AzaleaTown.asm"
+INCLUDE "maps/CianwoodCity.asm"
+INCLUDE "maps/GoldenrodCity.asm"
 
 SECTION "bank49", ROMX, BANK[$49]
 ;INCLUDE "maps/OlivineCity.asm"

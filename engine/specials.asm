@@ -140,7 +140,7 @@ SpecialsPointers:
 	add_special PrintDiploma
 	add_special InitialSetDSTFlag
 	add_special InitialClearDSTFlag
-	add_special Function90a8d
+	add_special MrChrono
 	add_special SpecialNone
 
 SpecialNone: ; c389

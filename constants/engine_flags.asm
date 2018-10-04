@@ -26,7 +26,7 @@
 	engine_flag_def ENGINE_ROCKETS_IN_RADIO_TOWER,                wStatusFlags2, 0 ; rockets in radio tower
 	engine_flag_def ENGINE_BIKE_SHOP_CALL_ENABLED,                wStatusFlags2, 4 ; bike shop call enabled (1024 bike steps reqd)
 	engine_flag_def ENGINE_GIVE_POKERUS,                          wStatusFlags2, 5 ; give pokerus
-	engine_flag_def ENGINE_FLORIA,                                wStatusFlags2, 6 ; berry -> berry juice when trading?
+	engine_flag_def ENGINE_REACHED_GOLDENROD,                     wStatusFlags2, 6 ; berry -> berry juice when trading?
 	engine_flag_def ENGINE_ROCKETS_IN_MAHOGANY,                   wStatusFlags2, 7 ; rockets in mahogany
 
 	engine_flag_def ENGINE_STRENGTH_ACTIVE,                       wBikeFlags, 0 ; strength active
