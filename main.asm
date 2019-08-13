@@ -1529,7 +1529,9 @@ MoveNames::
 	dr $1b1574, $1b4000
 
 SECTION "bank6d", ROMX, BANK[$6d]
-	dr $1b4000, $1b8000
+INCLUDE "data/moves/descriptions.asm"
+
+	dr $1b61f3, $1b8000
 
 SECTION "bank6e", ROMX, BANK[$6e]
 	dr $1b8000, $1bc000
