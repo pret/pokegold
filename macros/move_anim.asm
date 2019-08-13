@@ -10,10 +10,10 @@ endc
 	enum anim_obj_command ; d0
 anim_obj: macro
 	db anim_obj_command
-	db \1 ; obj
-	db (\2 << 3) + \3 ; x
-	db (\4 << 3) + \5 ; y
-	db \6 ; param
+	db \1 ; object
+	db \2 ; x
+	db \3 ; y
+	db \4 ; param
 	endm
 
 	enum anim_1gfx_command ; d1
@@ -75,14 +75,14 @@ anim_incbgeffect: macro
 	db \1 ; effect
 	endm
 
-	enum anim_enemyfeetobj_command ; d9
-anim_enemyfeetobj: macro
-	db anim_enemyfeetobj_command
+	enum anim_battlergfx_2row_command ; d9
+anim_battlergfx_2row: macro
+	db anim_battlergfx_2row_command
 	endm
 
-	enum anim_playerheadobj_command ; da
-anim_playerheadobj: macro
-	db anim_playerheadobj_command
+	enum anim_battlergfx_1row_command ; da
+anim_battlergfx_1row: macro
+	db anim_battlergfx_1row_command
 	endm
 
 	enum anim_checkpokeball_command ; db
@@ -223,9 +223,9 @@ anim_obp1: macro
 	db \1 ; colors
 	endm
 
-	enum anim_clearsprites_command ; f4
-anim_clearsprites: macro
-	db anim_clearsprites_command
+	enum anim_keepsprites_command ; f4
+anim_keepsprites: macro
+	db anim_keepsprites_command
 	endm
 
 	enum anim_0xf5_command ; f5

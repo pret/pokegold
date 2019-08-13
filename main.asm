@@ -1357,11 +1357,12 @@ Functionc7cd0:
 	dr $c7cd0, $c8000
 
 SECTION "bank32", ROMX, BANK[$32]
-BattleAnimations:: ; Not actually where it is, I just needed the label for BANK to work
 	dr $c8000, $c80d6
 
 Predef2F::
-	dr $c80d6, $cbc76
+	dr $c80d6, $c900a
+
+INCLUDE "data/moves/animations.asm"
 
 LoadPoisonBGPals::
 	dr $cbc76, $cc000
