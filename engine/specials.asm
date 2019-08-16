@@ -521,7 +521,7 @@ SnorlaxAwake: ; c5d6 (3:45d6)
 
 PlayCurMonCry: ; c60b (3:460b)
 	ld a, [wCurPartySpecies]
-	jp PlayCry
+	jp PlayMonCry
 
 GameboyCheck: ; c611 (3:4611)
 	ld a, [hCGB]

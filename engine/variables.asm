@@ -42,7 +42,7 @@ GetVarAction_::
 	dwb .CountCaughtMons, RETVAR_EXECUTE
 	dwb .CountSeenMons, RETVAR_EXECUTE
 	dwb .CountBadges, RETVAR_EXECUTE
-	dwb wPlayerBikeSurfState, RETVAR_ADDR_DE
+	dwb wPlayerState, RETVAR_ADDR_DE
 	dwb .PlayerFacing, RETVAR_EXECUTE
 	dwb hHours, RETVAR_STRBUF2
 	dwb .DayOfWeek, RETVAR_EXECUTE

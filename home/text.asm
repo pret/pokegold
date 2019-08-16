@@ -796,7 +796,7 @@ Text_TX_CRY
 	ld e, [hl]
 	inc hl
 	ld d, [hl]
-	call PlayCry
+	call PlayMonCry
 	pop de
 	pop hl
 	pop bc

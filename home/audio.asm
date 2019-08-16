@@ -1,14 +1,14 @@
-DisableAudio:: ; 3d4f (0:3d4f)
+MapSetup_Sound_Off:: ; 3d4f (0:3d4f)
 	push hl
 	push de
 	push bc
 	push af
 	ld a, [hROMBank]
 	push af
-	ld a, BANK(DisableAudio_)
+	ld a, BANK(_MapSetup_Sound_Off)
 	ld [hROMBank], a
 	ld [MBC3RomBank], a
-	call DisableAudio_
+	call _MapSetup_Sound_Off
 	pop af
 	ld [hROMBank], a
 	ld [MBC3RomBank], a
@@ -25,10 +25,10 @@ UpdateSound:: ; 3d6b (0:3d6b)
 	push af
 	ld a, [hROMBank]
 	push af
-	ld a, BANK(UpdateSound_)
+	ld a, BANK(_UpdateSound)
 	ld [hROMBank], a
 	ld [MBC3RomBank], a
-	call UpdateSound_
+	call _UpdateSound
 	pop af
 	ld [hROMBank], a
 	ld [MBC3RomBank], a
@@ -38,13 +38,13 @@ UpdateSound:: ; 3d6b (0:3d6b)
 	pop hl
 	ret
 
-LoadMusicByte_::
+_LoadMusicByte::
 	ld [hROMBank], a
 	ld [MBC3RomBank], a
 
 	ld a, [de]
 	ld [wCurMusicByte], a
-	ld a, BANK(UpdateSound_)
+	ld a, BANK(_UpdateSound)
 
 	ld [hROMBank], a
 	ld [MBC3RomBank], a
@@ -57,17 +57,17 @@ PlayMusic:: ; 3d98 (0:3d98)
 	push af
 	ld a, [hROMBank]
 	push af
-	ld a, BANK(PlayMusic_)
+	ld a, BANK(_PlayMusic)
 	ld [hROMBank], a
 	ld [MBC3RomBank], a
 	ld a, e
 	and a
 	jr z, .asm_3daf
-	call PlayMusic_ ; $4b30
+	call _PlayMusic ; $4b30
 	jr .asm_3db2
 
 .asm_3daf
-	call DisableAudio_
+	call _MapSetup_Sound_Off
 .asm_3db2
 	pop af
 	ld [hROMBank], a
@@ -85,15 +85,15 @@ PlayMusic2::
 	push af
 	ld a, [hROMBank]
 	push af
-	ld a, BANK(PlayMusic_)
+	ld a, BANK(_PlayMusic)
 	ld [hROMBank], a
 	ld [MBC3RomBank], a
 	push de
 	ld de, MUSIC_NONE
-	call PlayMusic_
+	call _PlayMusic
 	call DelayFrame
 	pop de
-	call PlayMusic_
+	call _PlayMusic
 	pop af
 	ld [hROMBank], a
 	ld [MBC3RomBank], a
@@ -103,7 +103,7 @@ PlayMusic2::
 	pop hl
 	ret
 
-PlayCryHeader:: ; 3de4 (0:3de4)
+PlayCry:: ; 3de4 (0:3de4)
 	push hl
 	push de
 	push bc
@@ -132,10 +132,10 @@ PlayCryHeader:: ; 3de4 (0:3de4)
 	ld [wCryLength], a
 	ld a, [hl]
 	ld [wCryLength + 1], a
-	ld a, BANK(PlayCryHeader_)
+	ld a, BANK(_PlayCry)
 	ld [hROMBank], a
 	ld [MBC3RomBank], a
-	call PlayCryHeader_
+	call _PlayCry
 	pop af
 	ld [hROMBank], a
 	ld [MBC3RomBank], a
@@ -158,12 +158,12 @@ PlaySFX:: ; 3e24 (0:3e24)
 .asm_3e33
 	ld a, [hROMBank]
 	push af
-	ld a, BANK(PlaySFX_) ; $3a
+	ld a, BANK(_PlaySFX) ; $3a
 	ld [hROMBank], a
 	ld [MBC3RomBank], a
 	ld a, e
 	ld [wCurSFX], a
-	call PlaySFX_ ; $4c04
+	call _PlaySFX ; $4c04
 	pop af
 	ld [hROMBank], a
 	ld [MBC3RomBank], a
@@ -182,16 +182,16 @@ WaitPlaySFX::
 WaitSFX:: ; 3e56 (0:3e56)
 	push hl
 .asm_3e57
-	ld hl, wChannel5Flags
+	ld hl, wChannel5Flags1
 	bit 0, [hl]
 	jr nz, .asm_3e57
-	ld hl, wChannel6Flags
+	ld hl, wChannel6Flags1
 	bit 0, [hl]
 	jr nz, .asm_3e57
-	ld hl, wChannel7Flags
+	ld hl, wChannel7Flags1
 	bit 0, [hl]
 	jr nz, .asm_3e57
-	ld hl, wChannel8Flags
+	ld hl, wChannel8Flags1
 	bit 0, [hl]
 	jr nz, .asm_3e57
 	pop hl
@@ -285,7 +285,7 @@ EnterMapMusic::
 	xor a
 	ld [wDontPlayMapMusicOnReload], a
 	ld de, MUSIC_BICYCLE
-	ld a, [wPlayerBikeSurfState]
+	ld a, [wPlayerState]
 	cp $1
 	jr z, .asm_3ef6
 	call GetMapMusic
@@ -336,7 +336,7 @@ RestartMapMusic::
 	ret
 
 SpecialMapMusic:: ; 3f40 (0:3f40)
-	ld a, [wPlayerBikeSurfState]
+	ld a, [wPlayerState]
 	cp PLAYER_SURF
 	jr z, .surf
 	cp PLAYER_SURF_PIKA
@@ -411,16 +411,16 @@ Function3f7d::
 	ret
 
 CheckSFX:: ; 3fbc (0:3fbc)
-	ld a, [wChannel5Flags]
+	ld a, [wChannel5Flags1]
 	bit 0, a
 	jr nz, .asm_3fda
-	ld a, [wChannel6Flags]
+	ld a, [wChannel6Flags1]
 	bit 0, a
 	jr nz, .asm_3fda
-	ld a, [wChannel7Flags]
+	ld a, [wChannel7Flags1]
 	bit 0, a
 	jr nz, .asm_3fda
-	ld a, [wChannel8Flags]
+	ld a, [wChannel8Flags1]
 	bit 0, a
 	jr nz, .asm_3fda
 	and a
@@ -432,7 +432,7 @@ CheckSFX:: ; 3fbc (0:3fbc)
 
 TerminateExpBarSound::
 	xor a
-	ld [wChannel5Flags], a
+	ld [wChannel5Flags1], a
 	ld [wSoundInput], a
 	ld [rNR10], a
 	ld [rNR11], a

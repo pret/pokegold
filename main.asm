@@ -736,7 +736,9 @@ SECTION "bank6", ROMX, BANK[$6]
 
 SECTION "bank7", ROMX, BANK[$7]
 LoadMapGroupRoof::
-	dr $1c000, $1ffbd
+	dr $1c000, $1f84c
+
+INCLUDE "audio/music/credits.asm"
 
 SECTION "bank8", ROMX, BANK[$8]
 	dr $20000, $23e3d
@@ -1382,7 +1384,9 @@ PlayBattleAnim::
 	dr $cc0d7, $cc283
 
 BattleAnimCommands::
-	dr $cc283, $d0000
+	dr $cc283, $cfce3
+
+INCLUDE "audio/music/postcredits.asm"
 
 SECTION "bank34", ROMX, BANK[$34]
 	dr $d0000, $d4000
@@ -1445,21 +1449,12 @@ GoldSilverIntro:
 ENDC
 
 SECTION "bank3a", ROMX, BANK[$3a]
-DisableAudio_::
-	dr $e8000, $e805c
-
-UpdateSound_::
-	dr $e805c, $e8b30
-
-PlayMusic_::
-	dr $e8b30, $e8b79
-
-PlayCryHeader_::
-	dr $e8b79, $e8c04
-
-PlaySFX_::
-;	dr $e8c04, $ec000
-	dr $e8c04, $e9492
+INCLUDE "audio/engine.asm"
+INCLUDE "data/trainers/encounter_music.asm"
+INCLUDE "audio/music_pointers.asm"
+INCLUDE "audio/music/nothing.asm"
+INCLUDE "audio/cry_pointers.asm"
+INCLUDE "audio/sfx_pointers.asm"
 
 INCLUDE "audio/music/route36.asm"
 INCLUDE "audio/music/rivalbattle.asm"
@@ -1525,7 +1520,43 @@ INCLUDE "data/pokemon/cries.asm"
 INCLUDE "audio/cries.asm"
 
 SECTION "bank3d", ROMX, BANK[$3d]
-	dr $f4000, $f8000
+INCLUDE "audio/music/viridiancity.asm"
+INCLUDE "audio/music/celadoncity.asm"
+INCLUDE "audio/music/wildpokemonvictory.asm"
+INCLUDE "audio/music/successfulcapture.asm"
+INCLUDE "audio/music/gymleadervictory.asm"
+INCLUDE "audio/music/mtmoonsquare.asm"
+INCLUDE "audio/music/gym.asm"
+INCLUDE "audio/music/pallettown.asm"
+INCLUDE "audio/music/profoakspokemontalk.asm"
+INCLUDE "audio/music/profoak.asm"
+INCLUDE "audio/music/lookrival.asm"
+INCLUDE "audio/music/aftertherivalfight.asm"
+INCLUDE "audio/music/surf.asm"
+INCLUDE "audio/music/nationalpark.asm"
+INCLUDE "audio/music/azaleatown.asm"
+INCLUDE "audio/music/cherrygrovecity.asm"
+INCLUDE "audio/music/unioncave.asm"
+INCLUDE "audio/music/johtowildbattle.asm"
+INCLUDE "audio/music/johtowildbattlenight.asm"
+INCLUDE "audio/music/johtotrainerbattle.asm"
+INCLUDE "audio/music/lookyoungster.asm"
+INCLUDE "audio/music/tintower.asm"
+INCLUDE "audio/music/sprouttower.asm"
+INCLUDE "audio/music/burnedtower.asm"
+INCLUDE "audio/music/mom.asm"
+INCLUDE "audio/music/victoryroad.asm"
+INCLUDE "audio/music/pokemonlullaby.asm"
+INCLUDE "audio/music/pokemonmarch.asm"
+INCLUDE "audio/music/goldsilveropening.asm"
+INCLUDE "audio/music/goldsilveropening2.asm"
+INCLUDE "audio/music/lookhiker.asm"
+INCLUDE "audio/music/lookrocket.asm"
+INCLUDE "audio/music/rockettheme.asm"
+INCLUDE "audio/music/mainmenu.asm"
+INCLUDE "audio/music/lookkimonogirl.asm"
+INCLUDE "audio/music/pokeflutechannel.asm"
+INCLUDE "audio/music/bugcatchingcontest.asm"
 
 SECTION "bank3e", ROMX, BANK[$3e]
 Functionf8000::

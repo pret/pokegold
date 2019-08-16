@@ -1417,7 +1417,7 @@ Functionf12c: ; f12c (3:712c)
 	predef FlagPredef
 .asm_f15a
 	xor a
-	ld [wDanger], a
+	ld [wLowHealthAlarm], a
 	ld a, [wd002]
 	cp REVIVE
 	jr z, .asm_f16a
@@ -1451,7 +1451,7 @@ FullRestore: ; f17e (3:717e)
 
 Functionf19a: ; f19a (3:719a)
 	xor a
-	ld [wDanger], a
+	ld [wLowHealthAlarm], a
 	call Functionf319
 	ld a, $20
 	call GetPartyParamLocation
@@ -1528,7 +1528,7 @@ Functionf1ff: ; f1ff (3:71ff)
 	ld a, $1
 	ret nc
 	xor a
-	ld [wDanger], a
+	ld [wLowHealthAlarm], a
 	call Functionf3eb
 	call Functionf327
 	call RestoreBattlemonHP
@@ -2060,7 +2060,7 @@ PokeFlute: ; f55c (3:755c)
 	jp z, PrintText
 	ld hl, Text_PlayedThePokeFlute ; $75c6
 	call PrintText
-	ld a, [wDanger]
+	ld a, [wLowHealthAlarm]
 	and $80
 	jr nz, .asm_f59e
 .asm_f59e

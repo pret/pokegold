@@ -819,7 +819,7 @@ OakText2:
 	text_jump _OakText2
 	start_asm
 	ld a, MARILL
-	call PlayCry
+	call PlayMonCry
 	call WaitSFX
 	ld hl, OakText3 ; $606c
 	ret

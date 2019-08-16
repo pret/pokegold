@@ -73,7 +73,7 @@ wMusicNoiseSampleSet:: ; c1a4
 	ds 1
 wSFXNoiseSampleSet:: ; c1a5
 	ds 1
-wDanger:: ; c1a6
+wLowHealthAlarm:: ; c1a6
 ; bit 7: on/off
 ; bit 4: pitch
 ; bit 0-3: counter
@@ -98,7 +98,7 @@ wCryLength:: ; c1b2
 	ds 2
 wLastVolume:: ; c1b4
 	ds 1
-wc1b5:: ds 1 ; c1b5
+wUnusedMusicF9Flag:: ds 1 ; c1b5
 wSFXPriority:: ; c1b6
 ; if nonzero, turn off music when playing sfx
 	ds 1
@@ -2991,7 +2991,7 @@ wLastDexMode:: ds 1 ; d67e
 wWhichRegisteredItem:: ds 1 ; d680
 wRegisteredItem:: ds 1 ; d681
 
-wPlayerBikeSurfState:: ds 1 ; d682
+wPlayerState:: ds 1 ; d682
 
 wd683:: ds 1 ; d683
 wd684:: ds 1 ; d684

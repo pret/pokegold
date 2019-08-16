@@ -1,5 +1,5 @@
 Reset:: ; 5b0 (0:05b0)
-	call DisableAudio
+	call MapSetup_Sound_Off
 	xor a
 	ld [hMapAnims], a
 	call ClearPalettes
@@ -136,7 +136,7 @@ Init:: ; 5d1 (0:05d1)
 	ld a, $30
 	call Predef
 
-	call DisableAudio
+	call MapSetup_Sound_Off
 	xor a
 	ld [wMapMusic], a
 	jp GameInit

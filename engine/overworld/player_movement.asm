@@ -24,7 +24,7 @@ Function10017: ; 10017 (4:4017)
 	ret
 
 Function1002d: ; 1002d (4:402d)
-	ld a, [wPlayerBikeSurfState]
+	ld a, [wPlayerState]
 	cp PLAYER_NORMAL
 	jr z, .asm_10044
 	cp PLAYER_SURF
@@ -236,7 +236,7 @@ Function10147: ; 10147 (4:4147)
 	ret
 
 Function1016b: ; 1016b (4:416b)
-	ld a, [wPlayerBikeSurfState]
+	ld a, [wPlayerState]
 	cp $4
 	jr z, Function101c0
 	cp $8
@@ -655,7 +655,7 @@ Function103b4: ; 103b4 (4:43b4)
 	ret
 
 Function103ca: ; 103ca (4:43ca)
-	ld a, [wPlayerBikeSurfState]
+	ld a, [wPlayerState]
 	cp $1
 	ret z
 	cp $2
@@ -699,7 +699,7 @@ Function103ee: ; 103ee (4:43ee)
 Function103f9: ; 103f9 (4:43f9)
 	push bc
 	ld a, $0
-	ld [wPlayerBikeSurfState], a
+	ld [wPlayerState], a
 	call ReplacePlayerSprite
 	pop bc
 	ret
@@ -713,7 +713,7 @@ Function10404: ; 10404 (4:4404)
 	ld a, [wPlayerStandingTile]
 	call CheckIceTile
 	jr nc, .asm_1041e
-	ld a, [wPlayerBikeSurfState]
+	ld a, [wPlayerState]
 	cp $2
 	jr nz, .asm_10420
 .asm_1041e

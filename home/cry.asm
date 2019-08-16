@@ -3,15 +3,16 @@ PlayStereoCry:: ; 39f0 (0:39f0)
 	ld a, $1
 	ld [wStereoPanningMask], a
 	pop af
-	jr continue_cry_fn
+	jr _PlayMonCry
 
-PlayCry:: ; 39f9 (0:39f9)
+PlayMonCry:: ; 39f9 (0:39f9)
 	push af
 	xor a
 	ld [wStereoPanningMask], a
 	ld [wCryTracks], a
 	pop af
-continue_cry_fn
+
+_PlayMonCry::
 	push hl
 	push de
 	push bc
@@ -19,7 +20,7 @@ continue_cry_fn
 	jr c, .asm_3a12
 	ld e, c
 	ld d, b
-	call PlayCryHeader
+	call PlayCry
 	call WaitSFX
 .asm_3a12
 	pop bc

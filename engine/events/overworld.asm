@@ -360,7 +360,7 @@ CheckAbleToSurf:
 	jr c, .asm_c980
 	CheckFlagHL ENGINE_ALWAYS_ON_BIKE
 	jr nz, .asm_c986
-	ld a, [wPlayerBikeSurfState]
+	ld a, [wPlayerState]
 	cp PLAYER_SURF
 	jr z, .asm_c983
 	cp PLAYER_SURF_PIKA
@@ -472,7 +472,7 @@ GetSurfDirection: ; c9ea (3:49ea)
 	db FACE_RIGHT
 
 TrySurfOW::
-	ld a, [wPlayerBikeSurfState]
+	ld a, [wPlayerState]
 	cp PLAYER_SURF_PIKA
 	jr z, .quit
 	cp PLAYER_SURF
@@ -1389,7 +1389,7 @@ FishingRodFunction: ; cf91
 	dw Fish_NoFish ; 3:5013
 
 Fish_CheckMap:
-	ld a, [wPlayerBikeSurfState]
+	ld a, [wPlayerState]
 	cp PLAYER_SURF
 	jr z, .asm_cfc7
 	cp PLAYER_SURF_PIKA
@@ -1575,7 +1575,7 @@ BicycleFunction:
 Functiond0c9: ; d0c9 (3:50c9)
 	call CheckBikePermission
 	jr c, .cant_bike
-	ld a, [wPlayerBikeSurfState]
+	ld a, [wPlayerState]
 	cp PLAYER_NORMAL
 	jr z, .get_on_bike
 	cp PLAYER_BIKE
