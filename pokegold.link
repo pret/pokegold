@@ -48,6 +48,7 @@ ROMX $06
 ROMX $07
 	org $4000
 	"bank7"
+	"Extra Songs 1"
 ROMX $08
 	org $4000
 	"bank8"
@@ -175,6 +176,7 @@ ROMX $32
 ROMX $33
 	org $4000
 	"bank33"
+	"Extra Songs 2"
 ROMX $34
 	org $4000
 	"bank34"
@@ -193,17 +195,16 @@ ROMX $39
 	org $4000
 	"bank39"
 ROMX $3a
-	org $4000
-	"bank3a"
+	"Audio"
+	"Songs 1"
 ROMX $3b
-	org $4000
-	"bank3b"
+	"Songs 2"
 ROMX $3c
-	org $4000
-	"bank3c"
+	"Songs 3"
+	"Sound Effects"
+	"Cries"
 ROMX $3d
-	org $4000
-	"bank3d"
+	"Songs 4"
 ROMX $3e
 	org $4000
 	"bank3e"
@@ -356,7 +357,7 @@ ROMX $7f
 	"bank7f"
 WRAM0
 	org $c000
-	"Audio"
+	"Audio RAM"
 	"WRAM"
 	"GBC Palettes"
 	"OAM Buffer"

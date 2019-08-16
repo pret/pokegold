@@ -110,10 +110,10 @@ PlayCry:: ; 3de4 (0:3de4)
 	push af
 	ld a, [hROMBank]
 	push af
-	ld a, BANK(CryHeaders) ; $3c
+	ld a, BANK(PokemonCries)
 	ld [hROMBank], a
 	ld [MBC3RomBank], a
-	ld hl, CryHeaders ; $6747
+	ld hl, PokemonCries
 	add hl, de
 	add hl, de
 	add hl, de

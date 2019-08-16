@@ -1,7 +1,7 @@
 INCLUDE "includes.asm"
 INCLUDE "macros/wram.asm"
 
-SECTION "Audio", WRAM0
+SECTION "Audio RAM", WRAM0
 wc000::
 wMusic::
 wMusicPlaying:: ; c000
