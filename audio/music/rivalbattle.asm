@@ -1,10 +1,9 @@
-Music_RivalBattle: ; e96f8
-	dbw $80, Music_RivalBattle_Ch1
-	dbw $01, Music_RivalBattle_Ch2
-	dbw $02, Music_RivalBattle_Ch3
-; e9701
+Music_RivalBattle:
+	musicheader 3, 1, Music_RivalBattle_Ch1
+	musicheader 1, 2, Music_RivalBattle_Ch2
+	musicheader 1, 3, Music_RivalBattle_Ch3
 
-Music_RivalBattle_Ch1: ; e9701
+Music_RivalBattle_Ch1:
 	tempo 102
 	volume $77
 	dutycycle $3
@@ -23,7 +22,7 @@ Music_RivalBattle_Ch1: ; e9701
 	intensity $b7
 	note C#, 6
 	note E_, 4
-Music_RivalBattle_branch_e9720: ; e9720
+Music_RivalBattle_branch_e9777:
 	intensity $b2
 	octave 2
 	note A#, 6
@@ -32,7 +31,7 @@ Music_RivalBattle_branch_e9720: ; e9720
 	note C#, 6
 	intensity $b2
 	note D#, 4
-	loopchannel 3, Music_RivalBattle_branch_e9720
+	loopchannel 3, Music_RivalBattle_branch_e9777
 	intensity $b2
 	octave 2
 	note A#, 2
@@ -40,7 +39,7 @@ Music_RivalBattle_branch_e9720: ; e9720
 	note C#, 4
 	intensity $b7
 	note C#, 10
-Music_RivalBattle_branch_e9738: ; e9738
+Music_RivalBattle_branch_e978f:
 	intensity $b2
 	octave 3
 	note G#, 6
@@ -49,14 +48,14 @@ Music_RivalBattle_branch_e9738: ; e9738
 	intensity $b2
 	octave 4
 	note C#, 4
-	loopchannel 3, Music_RivalBattle_branch_e9738
+	loopchannel 3, Music_RivalBattle_branch_e978f
 	intensity $b2
 	octave 3
 	note G#, 2
 	note B_, 4
 	intensity $4d
 	note B_, 10
-Music_RivalBattle_branch_e974f: ; e974f
+Music_RivalBattle_branch_e97a6:
 	intensity $b7
 	note A#, 6
 	note F#, 6
@@ -179,7 +178,7 @@ Music_RivalBattle_branch_e974f: ; e974f
 	note E_, 2
 	note D#, 2
 	note C#, 2
-Music_RivalBattle_branch_e97e0: ; e97e0
+Music_RivalBattle_branch_e9837:
 	octave 3
 	note A#, 2
 	note E_, 2
@@ -204,7 +203,7 @@ Music_RivalBattle_branch_e97e0: ; e97e0
 	note A#, 2
 	octave 4
 	note D#, 2
-	loopchannel 2, Music_RivalBattle_branch_e97e0
+	loopchannel 2, Music_RivalBattle_branch_e9837
 	intensity $94
 	octave 3
 	note D#, 8
@@ -284,10 +283,9 @@ Music_RivalBattle_branch_e97e0: ; e97e0
 	note B_, 6
 	octave 3
 	note C#, 10
-	loopchannel 0, Music_RivalBattle_branch_e974f
-; e9858
+	loopchannel 0, Music_RivalBattle_branch_e97a6
 
-Music_RivalBattle_Ch2: ; e9858
+Music_RivalBattle_Ch2:
 	dutycycle $3
 	vibrato $8, $36
 	tone $0001
@@ -337,14 +335,14 @@ Music_RivalBattle_Ch2: ; e9858
 	note F#, 6
 	intensity $c2
 	note G#, 4
-Music_RivalBattle_branch_e9893: ; e9893
+Music_RivalBattle_branch_e98ea:
 	intensity $c2
 	note D#, 6
 	intensity $c7
 	note F#, 6
 	intensity $c2
 	note G#, 4
-	loopchannel 2, Music_RivalBattle_branch_e9893
+	loopchannel 2, Music_RivalBattle_branch_e98ea
 	intensity $c2
 	note D#, 2
 	note F#, 4
@@ -354,14 +352,14 @@ Music_RivalBattle_branch_e9893: ; e9893
 	note B_, 1
 	octave 4
 	note C_, 1
-Music_RivalBattle_branch_e98ac: ; e98ac
+Music_RivalBattle_branch_e9903:
 	intensity $c2
 	note C#, 6
 	intensity $c7
 	note E_, 6
 	intensity $c2
 	note F#, 4
-	loopchannel 3, Music_RivalBattle_branch_e98ac
+	loopchannel 3, Music_RivalBattle_branch_e9903
 	intensity $c2
 	note C#, 2
 	note E_, 4
@@ -369,13 +367,13 @@ Music_RivalBattle_branch_e98ac: ; e98ac
 	note E_, 4
 	intensity $b7
 	note E_, 6
-Music_RivalBattle_branch_e98c3: ; e98c3
-	callchannel Music_RivalBattle_branch_e9989
+Music_RivalBattle_branch_e991a:
+	callchannel Music_RivalBattle_branch_e99e0
 	intensity $b0
 	note G#, 8
 	intensity $b7
 	note G#, 8
-	callchannel Music_RivalBattle_branch_e9989
+	callchannel Music_RivalBattle_branch_e99e0
 	intensity $4e
 	note G#, 8
 	intensity $b7
@@ -474,7 +472,7 @@ Music_RivalBattle_branch_e98c3: ; e98c3
 	note G#, 8
 	intensity $c7
 	note F_, 8
-Music_RivalBattle_branch_e994f: ; e994f
+Music_RivalBattle_branch_e99a6:
 	intensity $c2
 	octave 3
 	note A#, 6
@@ -483,7 +481,7 @@ Music_RivalBattle_branch_e994f: ; e994f
 	note C#, 6
 	intensity $c2
 	note D#, 4
-	loopchannel 3, Music_RivalBattle_branch_e994f
+	loopchannel 3, Music_RivalBattle_branch_e99a6
 	intensity $c2
 	octave 3
 	note A#, 2
@@ -493,7 +491,7 @@ Music_RivalBattle_branch_e994f: ; e994f
 	note C#, 6
 	intensity $9a
 	note C#, 4
-Music_RivalBattle_branch_e996a: ; e996a
+Music_RivalBattle_branch_e99c1:
 	intensity $c2
 	octave 3
 	note G#, 6
@@ -502,7 +500,7 @@ Music_RivalBattle_branch_e996a: ; e996a
 	intensity $c2
 	octave 4
 	note C#, 4
-	loopchannel 3, Music_RivalBattle_branch_e996a
+	loopchannel 3, Music_RivalBattle_branch_e99c1
 	intensity $c2
 	octave 3
 	note G#, 2
@@ -512,10 +510,9 @@ Music_RivalBattle_branch_e996a: ; e996a
 	intensity $6a
 	octave 4
 	note D_, 4
-	loopchannel 0, Music_RivalBattle_branch_e98c3
-; e9989
+	loopchannel 0, Music_RivalBattle_branch_e991a
 
-Music_RivalBattle_branch_e9989: ; e9989
+Music_RivalBattle_branch_e99e0:
 	intensity $c7
 	note D#, 10
 	intensity $c4
@@ -536,9 +533,8 @@ Music_RivalBattle_branch_e9989: ; e9989
 	intensity $b7
 	note F_, 8
 	endchannel
-; e99a4
 
-Music_RivalBattle_Ch3: ; e99a4
+Music_RivalBattle_Ch3:
 	notetype $c, $19
 	octave 3
 	note F#, 2
@@ -554,7 +550,7 @@ Music_RivalBattle_Ch3: ; e99a4
 	octave 3
 	note C#, 2
 	note D_, 2
-Music_RivalBattle_branch_e99b5: ; e99b5
+Music_RivalBattle_branch_e9a0c:
 	note D#, 2
 	note C#, 2
 	note D#, 2
@@ -562,8 +558,8 @@ Music_RivalBattle_branch_e99b5: ; e99b5
 	note E_, 2
 	note D#, 2
 	note C#, 2
-	loopchannel 4, Music_RivalBattle_branch_e99b5
-Music_RivalBattle_branch_e99c0: ; e99c0
+	loopchannel 4, Music_RivalBattle_branch_e9a0c
+Music_RivalBattle_branch_e9a17:
 	octave 3
 	note C#, 2
 	octave 2
@@ -575,7 +571,7 @@ Music_RivalBattle_branch_e99c0: ; e99c0
 	note C#, 2
 	octave 2
 	note B_, 2
-	loopchannel 3, Music_RivalBattle_branch_e99c0
+	loopchannel 3, Music_RivalBattle_branch_e9a17
 	octave 3
 	note C#, 2
 	note E_, 2
@@ -586,8 +582,8 @@ Music_RivalBattle_branch_e99c0: ; e99c0
 	note C_, 2
 	note C#, 2
 	note D_, 2
-Music_RivalBattle_branch_e99d9: ; e99d9
-	callchannel Music_RivalBattle_branch_e9af0
+Music_RivalBattle_branch_e9a30:
+	callchannel Music_RivalBattle_branch_e9b47
 	octave 2
 	note A#, 2
 	octave 4
@@ -604,7 +600,7 @@ Music_RivalBattle_branch_e99d9: ; e99d9
 	note A#, 2
 	octave 3
 	note G#, 2
-	callchannel Music_RivalBattle_branch_e9af9
+	callchannel Music_RivalBattle_branch_e9b50
 	note C#, 2
 	note G#, 2
 	octave 4
@@ -615,7 +611,7 @@ Music_RivalBattle_branch_e99d9: ; e99d9
 	note C_, 2
 	octave 2
 	note B_, 2
-	callchannel Music_RivalBattle_branch_e9af0
+	callchannel Music_RivalBattle_branch_e9b47
 	octave 2
 	note A#, 2
 	octave 3
@@ -632,20 +628,20 @@ Music_RivalBattle_branch_e99d9: ; e99d9
 	note A#, 2
 	octave 3
 	note F_, 2
-	callchannel Music_RivalBattle_branch_e9af9
-Music_RivalBattle_branch_e9a0f: ; e9a0f
+	callchannel Music_RivalBattle_branch_e9b50
+Music_RivalBattle_branch_e9a66:
 	note C#, 2
 	note G#, 2
-	loopchannel 4, Music_RivalBattle_branch_e9a0f
-	callchannel Music_RivalBattle_branch_e9b05
+	loopchannel 4, Music_RivalBattle_branch_e9a66
+	callchannel Music_RivalBattle_branch_e9b5c
 	note G#, 2
 	note F#, 2
-Music_RivalBattle_branch_e9a1a: ; e9a1a
+Music_RivalBattle_branch_e9a71:
 	octave 2
 	note A#, 2
 	octave 3
 	note F_, 2
-	loopchannel 4, Music_RivalBattle_branch_e9a1a
+	loopchannel 4, Music_RivalBattle_branch_e9a71
 	octave 2
 	note A#, 2
 	octave 3
@@ -660,17 +656,17 @@ Music_RivalBattle_branch_e9a1a: ; e9a1a
 	note F#, 2
 	note F_, 2
 	note D#, 2
-	callchannel Music_RivalBattle_branch_e9b05
+	callchannel Music_RivalBattle_branch_e9b5c
 	octave 2
 	note B_, 2
 	octave 3
 	note D_, 2
-	callchannel Music_RivalBattle_branch_e9b0e
+	callchannel Music_RivalBattle_branch_e9b65
 	octave 3
 	note D#, 2
 	octave 4
 	note D#, 2
-	callchannel Music_RivalBattle_branch_e9b0e
+	callchannel Music_RivalBattle_branch_e9b65
 	octave 3
 	note D#, 2
 	note A#, 2
@@ -698,34 +694,34 @@ Music_RivalBattle_branch_e9a1a: ; e9a1a
 	note F#, 2
 	note G_, 2
 	note G#, 2
-Music_RivalBattle_branch_e9a5c: ; e9a5c
+Music_RivalBattle_branch_e9ab3:
 	note D#, 2
 	note A#, 2
-	loopchannel 4, Music_RivalBattle_branch_e9a5c
-Music_RivalBattle_branch_e9a62: ; e9a62
+	loopchannel 4, Music_RivalBattle_branch_e9ab3
+Music_RivalBattle_branch_e9ab9:
 	note D#, 2
 	note A_, 2
-	loopchannel 4, Music_RivalBattle_branch_e9a62
-Music_RivalBattle_branch_e9a68: ; e9a68
+	loopchannel 4, Music_RivalBattle_branch_e9ab9
+Music_RivalBattle_branch_e9abf:
 	note D#, 2
 	note G#, 2
-	loopchannel 4, Music_RivalBattle_branch_e9a68
-Music_RivalBattle_branch_e9a6e: ; e9a6e
+	loopchannel 4, Music_RivalBattle_branch_e9abf
+Music_RivalBattle_branch_e9ac5:
 	note D#, 2
 	note G_, 2
-	loopchannel 12, Music_RivalBattle_branch_e9a6e
-Music_RivalBattle_branch_e9a74: ; e9a74
+	loopchannel 12, Music_RivalBattle_branch_e9ac5
+Music_RivalBattle_branch_e9acb:
 	octave 2
 	note B_, 2
 	octave 3
 	note D#, 2
-	loopchannel 4, Music_RivalBattle_branch_e9a74
-Music_RivalBattle_branch_e9a7c: ; e9a7c
+	loopchannel 4, Music_RivalBattle_branch_e9acb
+Music_RivalBattle_branch_e9ad3:
 	octave 2
 	note B_, 2
 	octave 3
 	note F#, 2
-	loopchannel 4, Music_RivalBattle_branch_e9a7c
+	loopchannel 4, Music_RivalBattle_branch_e9ad3
 	note D#, 2
 	note G_, 2
 	note A#, 2
@@ -779,40 +775,40 @@ Music_RivalBattle_branch_e9a7c: ; e9a7c
 	note C#, 8
 	note D#, 8
 	note F_, 8
-Music_RivalBattle_branch_e9ab9: ; e9ab9
+Music_RivalBattle_branch_e9b10:
 	octave 2
 	note A#, 2
 	octave 3
 	note D#, 2
-	loopchannel 7, Music_RivalBattle_branch_e9ab9
+	loopchannel 7, Music_RivalBattle_branch_e9b10
 	note E_, 2
 	note D#, 2
-Music_RivalBattle_branch_e9ac3: ; e9ac3
+Music_RivalBattle_branch_e9b1a:
 	octave 2
 	note A#, 2
 	octave 3
 	note D#, 2
-	loopchannel 6, Music_RivalBattle_branch_e9ac3
+	loopchannel 6, Music_RivalBattle_branch_e9b1a
 	octave 2
 	note A#, 2
 	octave 3
 	note F#, 2
 	note F_, 2
 	note E_, 2
-Music_RivalBattle_branch_e9ad1: ; e9ad1
+Music_RivalBattle_branch_e9b28:
 	octave 2
 	note G#, 2
 	octave 3
 	note C#, 2
-	loopchannel 7, Music_RivalBattle_branch_e9ad1
+	loopchannel 7, Music_RivalBattle_branch_e9b28
 	note D_, 2
 	note C#, 2
-Music_RivalBattle_branch_e9adb: ; e9adb
+Music_RivalBattle_branch_e9b32:
 	octave 2
 	note G#, 2
 	octave 3
 	note C#, 2
-	loopchannel 4, Music_RivalBattle_branch_e9adb
+	loopchannel 4, Music_RivalBattle_branch_e9b32
 	octave 2
 	note B_, 2
 	note G#, 2
@@ -822,19 +818,17 @@ Music_RivalBattle_branch_e9adb: ; e9adb
 	note E_, 2
 	note D#, 2
 	note D_, 2
-	loopchannel 0, Music_RivalBattle_branch_e99d9
-; e9af0
+	loopchannel 0, Music_RivalBattle_branch_e9a30
 
-Music_RivalBattle_branch_e9af0: ; e9af0
+Music_RivalBattle_branch_e9b47:
 	octave 2
 	note A#, 2
 	octave 3
 	note D#, 2
-	loopchannel 4, Music_RivalBattle_branch_e9af0
+	loopchannel 4, Music_RivalBattle_branch_e9b47
 	endchannel
-; e9af9
 
-Music_RivalBattle_branch_e9af9: ; e9af9
+Music_RivalBattle_branch_e9b50:
 	note C#, 2
 	note G#, 2
 	octave 4
@@ -847,25 +841,20 @@ Music_RivalBattle_branch_e9af9: ; e9af9
 	note C#, 2
 	note G#, 2
 	endchannel
-; e9b05
 
-Music_RivalBattle_branch_e9b05: ; e9b05
+Music_RivalBattle_branch_e9b5c:
 	octave 2
 	note B_, 2
 	octave 3
 	note F#, 2
-	loopchannel 7, Music_RivalBattle_branch_e9b05
+	loopchannel 7, Music_RivalBattle_branch_e9b5c
 	endchannel
-; e9b0e
 
-Music_RivalBattle_branch_e9b0e: ; e9b0e
+Music_RivalBattle_branch_e9b65:
 	octave 3
 	note D#, 2
 	note A#, 2
 	octave 4
 	note D#, 2
-	loopchannel 2, Music_RivalBattle_branch_e9b0e
+	loopchannel 2, Music_RivalBattle_branch_e9b65
 	endchannel
-; e9b18
-
-

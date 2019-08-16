@@ -1458,13 +1458,67 @@ PlayCryHeader_::
 	dr $e8b79, $e8c04
 
 PlaySFX_::
-	dr $e8c04, $ec000
+;	dr $e8c04, $ec000
+	dr $e8c04, $e9492
+
+INCLUDE "audio/music/route36.asm"
+INCLUDE "audio/music/rivalbattle.asm"
+INCLUDE "audio/music/rocketbattle.asm"
+INCLUDE "audio/music/elmslab.asm"
+INCLUDE "audio/music/darkcave.asm"
+INCLUDE "audio/music/johtogymbattle.asm"
+INCLUDE "audio/music/championbattle.asm"
+INCLUDE "audio/music/ssaqua.asm"
+INCLUDE "audio/music/newbarktown.asm"
+INCLUDE "audio/music/goldenrodcity.asm"
+INCLUDE "audio/music/vermilioncity.asm"
+INCLUDE "audio/music/titlescreen.asm"
+INCLUDE "audio/music/ruinsofalphinterior.asm"
+INCLUDE "audio/music/lookpokemaniac.asm"
+INCLUDE "audio/music/trainervictory.asm"
 
 SECTION "bank3b", ROMX, BANK[$3b]
-	dr $ec000, $f0000
+INCLUDE "audio/music/route1.asm"
+INCLUDE "audio/music/route3.asm"
+INCLUDE "audio/music/route12.asm"
+INCLUDE "audio/music/kantogymbattle.asm"
+INCLUDE "audio/music/kantotrainerbattle.asm"
+INCLUDE "audio/music/kantowildbattle.asm"
+INCLUDE "audio/music/pokemoncenter.asm"
+INCLUDE "audio/music/looklass.asm"
+INCLUDE "audio/music/lookofficer.asm"
+INCLUDE "audio/music/route2.asm"
+INCLUDE "audio/music/mtmoon.asm"
+INCLUDE "audio/music/showmearound.asm"
+INCLUDE "audio/music/gamecorner.asm"
+INCLUDE "audio/music/bicycle.asm"
+INCLUDE "audio/music/looksage.asm"
+INCLUDE "audio/music/pokemonchannel.asm"
+INCLUDE "audio/music/lighthouse.asm"
+INCLUDE "audio/music/lakeofrage.asm"
+INCLUDE "audio/music/indigoplateau.asm"
+INCLUDE "audio/music/route37.asm"
+INCLUDE "audio/music/rockethideout.asm"
+INCLUDE "audio/music/dragonsden.asm"
+INCLUDE "audio/music/ruinsofalphradio.asm"
+INCLUDE "audio/music/lookbeauty.asm"
+INCLUDE "audio/music/route26.asm"
+INCLUDE "audio/music/ecruteakcity.asm"
+INCLUDE "audio/music/lakeofragerocketradio.asm"
+INCLUDE "audio/music/magnettrain.asm"
+INCLUDE "audio/music/lavendertown.asm"
+INCLUDE "audio/music/dancinghall.asm"
+INCLUDE "audio/music/contestresults.asm"
+INCLUDE "audio/music/route30.asm"
 
 SECTION "bank3c", ROMX, BANK[$3c]
-	dr $f0000, $f0941
+INCLUDE "audio/music/violetcity.asm"
+INCLUDE "audio/music/route29.asm"
+INCLUDE "audio/music/halloffame.asm"
+INCLUDE "audio/music/healpokemon.asm"
+INCLUDE "audio/music/evolution.asm"
+INCLUDE "audio/music/printer.asm"
+
 INCLUDE "audio/sfx.asm"
 CryHeaders::
 INCLUDE "data/pokemon/cries.asm"

@@ -15,6 +15,7 @@
 	const A_
 	const A#
 	const B_
+	const CC
 
 ; channel
 	const_def

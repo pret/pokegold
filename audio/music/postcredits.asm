@@ -1,20 +1,17 @@
-Music_PostCredits: ; cfce3
-	dbw $40, Music_PostCredits_Ch1
-	dbw $01, Music_PostCredits_Ch2
-; cfce9
+Music_PostCredits:
+	musicheader 2, 1, Music_PostCredits_Ch1
+	musicheader 1, 2, Music_PostCredits_Ch2
 
+	db $2
 
-INCBIN "baserom.gbc", $cfce9, $cfcea - $cfce9
-
-
-Music_PostCredits_Ch1: ; cfcea
+Music_PostCredits_Ch1:
 	tempo 271
 	volume $77
-	forceoctave $3
+	pitchoffset 0, D#
 	dutycycle $2
 	notetype $c, $93
 	note __, 8
-Music_PostCredits_branch_cfcf7: ; cfcf7
+Music_PostCredits_branch_cfdb2:
 	octave 3
 	note C_, 2
 	note E_, 2
@@ -131,11 +128,10 @@ Music_PostCredits_branch_cfcf7: ; cfcf7
 	note D_, 2
 	octave 2
 	note G_, 2
-	loopchannel 0, Music_PostCredits_branch_cfcf7
-; cfd8d
+	loopchannel 0, Music_PostCredits_branch_cfdb2
 
-Music_PostCredits_Ch2: ; cfd8d
-	forceoctave $3
+Music_PostCredits_Ch2:
+	pitchoffset 0, D#
 	dutycycle $2
 	notetype $c, $a3
 	octave 5
@@ -146,7 +142,7 @@ Music_PostCredits_Ch2: ; cfd8d
 	note F_, 2
 	intensity $73
 	note F_, 2
-Music_PostCredits_branch_cfd9f: ; cfd9f
+Music_PostCredits_branch_cfe5a:
 	intensity $a3
 	note G_, 2
 	intensity $73
@@ -265,6 +261,4 @@ Music_PostCredits_branch_cfd9f: ; cfd9f
 	intensity $a3
 	note E_, 2
 	note F_, 2
-	loopchannel 0, Music_PostCredits_branch_cfd9f
-; cfe49
-
+	loopchannel 0, Music_PostCredits_branch_cfe5a

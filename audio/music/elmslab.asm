@@ -1,11 +1,10 @@
-Music_ElmsLab: ; e9fe9
-	dbw $c0, Music_ElmsLab_Ch1
-	dbw $01, Music_ElmsLab_Ch2
-	dbw $02, Music_ElmsLab_Ch3
-	dbw $03, Music_ElmsLab_Ch4
-; e9ff5
+Music_ElmsLab:
+	musicheader 4, 1, Music_ElmsLab_Ch1
+	musicheader 1, 2, Music_ElmsLab_Ch2
+	musicheader 1, 3, Music_ElmsLab_Ch3
+	musicheader 1, 4, Music_ElmsLab_Ch4
 
-Music_ElmsLab_Ch1: ; e9ff5
+Music_ElmsLab_Ch1:
 	tempo 144
 	volume $77
 	dutycycle $3
@@ -34,7 +33,7 @@ Music_ElmsLab_Ch1: ; e9ff5
 	note A_, 4
 	note A_, 4
 	note A_, 2
-Music_ElmsLab_branch_ea01e: ; ea01e
+Music_ElmsLab_branch_ea075:
 	note __, 2
 	note A_, 2
 	note G#, 2
@@ -181,10 +180,9 @@ Music_ElmsLab_branch_ea01e: ; ea01e
 	intensity $b2
 	note F_, 2
 	note F_, 4
-	loopchannel 0, Music_ElmsLab_branch_ea01e
-; ea0d1
+	loopchannel 0, Music_ElmsLab_branch_ea075
 
-Music_ElmsLab_Ch2: ; ea0d1
+Music_ElmsLab_Ch2:
 	dutycycle $3
 	vibrato $10, $26
 	stereopanning $f
@@ -214,7 +212,7 @@ Music_ElmsLab_Ch2: ; ea0d1
 	note C_, 4
 	note C_, 2
 	stereopanning $ff
-Music_ElmsLab_branch_ea0f8: ; ea0f8
+Music_ElmsLab_branch_ea14f:
 	intensity $c6
 	octave 4
 	note F_, 6
@@ -349,10 +347,9 @@ Music_ElmsLab_branch_ea0f8: ; ea0f8
 	intensity $c4
 	octave 3
 	note E_, 2
-	loopchannel 0, Music_ElmsLab_branch_ea0f8
-; ea1a6
+	loopchannel 0, Music_ElmsLab_branch_ea14f
 
-Music_ElmsLab_Ch3: ; ea1a6
+Music_ElmsLab_Ch3:
 	stereopanning $f
 	notetype $c, $25
 	note __, 8
@@ -375,7 +372,7 @@ Music_ElmsLab_Ch3: ; ea1a6
 	note C_, 2
 	note D_, 2
 	note E_, 2
-Music_ElmsLab_branch_ea1bf: ; ea1bf
+Music_ElmsLab_branch_ea216:
 	note F_, 2
 	note A_, 2
 	note C_, 2
@@ -527,18 +524,14 @@ Music_ElmsLab_branch_ea1bf: ; ea1bf
 	note C_, 2
 	note F_, 2
 	note A_, 2
-	loopchannel 0, Music_ElmsLab_branch_ea1bf
-; ea25a
+	loopchannel 0, Music_ElmsLab_branch_ea216
 
-Music_ElmsLab_Ch4: ; ea25a
+Music_ElmsLab_Ch4:
 	stereopanning $f0
 	togglenoise $0
 	notetype $c
 	note __, 16
 	note __, 2
-Music_ElmsLab_branch_ea262: ; ea262
+Music_ElmsLab_branch_ea2b9:
 	note G_, 4
-	loopchannel 0, Music_ElmsLab_branch_ea262
-; ea267
-
-
+	loopchannel 0, Music_ElmsLab_branch_ea2b9

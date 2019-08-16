@@ -1,10 +1,9 @@
-Music_TrainerVictory: ; ebe9f
-	dbw $80, Music_TrainerVictory_Ch1
-	dbw $01, Music_TrainerVictory_Ch2
-	dbw $02, Music_TrainerVictory_Ch3
-; ebea8
+Music_TrainerVictory:
+	musicheader 3, 1, Music_TrainerVictory_Ch1
+	musicheader 1, 2, Music_TrainerVictory_Ch2
+	musicheader 1, 3, Music_TrainerVictory_Ch3
 
-Music_TrainerVictory_Ch1: ; ebea8
+Music_TrainerVictory_Ch1:
 	tempo 120
 	volume $77
 	dutycycle $2
@@ -20,9 +19,9 @@ Music_TrainerVictory_Ch1: ; ebea8
 	intensity $b6
 	note A_, 12
 	stereopanning $f
-Music_TrainerVictory_branch_ebec1: ; ebec1
+Music_TrainerVictory_branch_ebecd:
 	intensity $72
-	callchannel Music_TrainerVictory_branch_ebf05
+	callchannel Music_TrainerVictory_branch_ebf11
 	intensity $51
 	note C#, 2
 	note E_, 2
@@ -38,8 +37,8 @@ Music_TrainerVictory_branch_ebec1: ; ebec1
 	octave 4
 	note C#, 2
 	note E_, 6
-	loopchannel 2, Music_TrainerVictory_branch_ebec1
-	callchannel Music_TrainerVictory_branch_ebf05
+	loopchannel 2, Music_TrainerVictory_branch_ebecd
+	callchannel Music_TrainerVictory_branch_ebf11
 	note A_, 2
 	note __, 2
 	note F_, 2
@@ -48,32 +47,31 @@ Music_TrainerVictory_branch_ebec1: ; ebec1
 	note __, 2
 	note G_, 2
 	note A#, 6
-Music_TrainerVictory_branch_ebee6: ; ebee6
+Music_TrainerVictory_branch_ebef2:
 	intensity $72
 	octave 4
 	note D_, 2
 	note C#, 2
 	octave 3
 	note A_, 2
-	loopchannel 3, Music_TrainerVictory_branch_ebee6
+	loopchannel 3, Music_TrainerVictory_branch_ebef2
 	note F#, 2
 	note A_, 2
 	octave 4
 	note D_, 2
-Music_TrainerVictory_branch_ebef5: ; ebef5
+Music_TrainerVictory_branch_ebf01:
 	octave 4
 	note C#, 2
 	octave 3
 	note B_, 2
 	note A_, 2
-	loopchannel 3, Music_TrainerVictory_branch_ebef5
+	loopchannel 3, Music_TrainerVictory_branch_ebf01
 	note E_, 2
 	note F#, 2
 	note G_, 2
-	loopchannel 0, Music_TrainerVictory_branch_ebec1
-; ebf05
+	loopchannel 0, Music_TrainerVictory_branch_ebecd
 
-Music_TrainerVictory_branch_ebf05: ; ebf05
+Music_TrainerVictory_branch_ebf11:
 	octave 3
 	note F#, 2
 	note __, 2
@@ -84,9 +82,8 @@ Music_TrainerVictory_branch_ebf05: ; ebf05
 	note E_, 2
 	note G_, 6
 	endchannel
-; ebf0f
 
-Music_TrainerVictory_Ch2: ; ebf0f
+Music_TrainerVictory_Ch2:
 	vibrato $12, $34
 	dutycycle $3
 	notetype $8, $d1
@@ -101,9 +98,9 @@ Music_TrainerVictory_Ch2: ; ebf0f
 	intensity $d6
 	note D_, 12
 	stereopanning $f0
-Music_TrainerVictory_branch_ebf24: ; ebf24
+Music_TrainerVictory_branch_ebf30:
 	notetype $8, $82
-	callchannel Music_TrainerVictory_branch_ebf4a
+	callchannel Music_TrainerVictory_branch_ebf56
 	note F#, 2
 	note __, 2
 	note G_, 2
@@ -112,8 +109,8 @@ Music_TrainerVictory_branch_ebf24: ; ebf24
 	note __, 2
 	note F#, 2
 	note G_, 6
-	loopchannel 2, Music_TrainerVictory_branch_ebf24
-	callchannel Music_TrainerVictory_branch_ebf4a
+	loopchannel 2, Music_TrainerVictory_branch_ebf30
+	callchannel Music_TrainerVictory_branch_ebf56
 	note F_, 2
 	note __, 2
 	note C_, 2
@@ -125,10 +122,9 @@ Music_TrainerVictory_branch_ebf24: ; ebf24
 	notetype $c, $88
 	note F#, 16
 	note E_, 16
-	loopchannel 0, Music_TrainerVictory_branch_ebf24
-; ebf4a
+	loopchannel 0, Music_TrainerVictory_branch_ebf30
 
-Music_TrainerVictory_branch_ebf4a: ; ebf4a
+Music_TrainerVictory_branch_ebf56:
 	octave 4
 	note D_, 2
 	note __, 2
@@ -143,9 +139,8 @@ Music_TrainerVictory_branch_ebf4a: ; ebf4a
 	octave 4
 	note E_, 6
 	endchannel
-; ebf58
 
-Music_TrainerVictory_Ch3: ; ebf58
+Music_TrainerVictory_Ch3:
 	notetype $8, $25
 	octave 3
 	note G_, 6
@@ -160,8 +155,8 @@ Music_TrainerVictory_Ch3: ; ebf58
 	note C#, 2
 	octave 2
 	note B_, 2
-Music_TrainerVictory_branch_ebf68: ; ebf68
-	callchannel Music_TrainerVictory_branch_ebfa5
+Music_TrainerVictory_branch_ebf74:
+	callchannel Music_TrainerVictory_branch_ebfb1
 	octave 3
 	note C#, 2
 	note __, 2
@@ -176,8 +171,8 @@ Music_TrainerVictory_branch_ebf68: ; ebf68
 	note A_, 1
 	note __, 1
 	note A_, 6
-	loopchannel 2, Music_TrainerVictory_branch_ebf68
-	callchannel Music_TrainerVictory_branch_ebfa5
+	loopchannel 2, Music_TrainerVictory_branch_ebf74
+	callchannel Music_TrainerVictory_branch_ebfb1
 	octave 3
 	note C_, 2
 	note __, 2
@@ -211,10 +206,9 @@ Music_TrainerVictory_branch_ebf68: ; ebf68
 	note G_, 2
 	note E_, 2
 	note C#, 2
-	loopchannel 0, Music_TrainerVictory_branch_ebf68
-; ebfa5
+	loopchannel 0, Music_TrainerVictory_branch_ebf74
 
-Music_TrainerVictory_branch_ebfa5: ; ebfa5
+Music_TrainerVictory_branch_ebfb1:
 	octave 2
 	note A_, 2
 	note __, 2
@@ -233,5 +227,3 @@ Music_TrainerVictory_branch_ebfa5: ; ebfa5
 	octave 2
 	note B_, 2
 	endchannel
-; ebfb7
-
