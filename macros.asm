@@ -1,9 +1,9 @@
 INCLUDE "macros/enum.asm"
 INCLUDE "macros/basestats.asm"
 
+INCLUDE "macros/scripts/audio.asm"
 INCLUDE "macros/scripts/maps.asm"
 INCLUDE "macros/scripts/events.asm"
-INCLUDE "macros/sound.asm"
 INCLUDE "macros/text.asm"
 INCLUDE "macros/charmap.asm"
 INCLUDE "macros/move_effect.asm"
