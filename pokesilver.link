@@ -360,7 +360,7 @@ WRAM0
 	"Audio RAM"
 	"WRAM"
 	"GBC Palettes"
-	"OAM Buffer"
+	"Sprites"
 	"TileMap"
 	"Animated Objects"
 	"Video"

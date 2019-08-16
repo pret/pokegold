@@ -192,7 +192,7 @@ jp_de::
 	ret
 
 ClearSprites:: ; 30ff (0:30ff)
-	ld hl, wOAMBuffer
+	ld hl, wVirtualOAM
 	ld b, $a0
 	xor a
 .asm_3105
@@ -202,7 +202,7 @@ ClearSprites:: ; 30ff (0:30ff)
 	ret
 
 HideSprites::
-	ld hl, wOAMBuffer
+	ld hl, wVirtualOAM
 	ld de, $4
 	ld b, $28
 	ld a, $a0

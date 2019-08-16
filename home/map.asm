@@ -2165,7 +2165,7 @@ ReloadTilesetAndPalettes:: ; 2c87 (0:2c87)
 	call OverworldTextModeSwitch
 	call LoadTileset
 	ld a, $8
-	call Function3e92
+	call SkipMusic
 	pop af
 	rst Bankswitch
 	call EnableLCD
@@ -2340,7 +2340,7 @@ GetWorldMapLocation::
 	pop hl
 	ret
 
-GetMapHeaderMusic::
+GetMapMusic::
 	push hl
 	push bc
 	ld de, $6

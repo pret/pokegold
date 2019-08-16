@@ -39,7 +39,7 @@ LoadPushOAM:: ; 4032 (1:4032)
 	ret
 
 PushOAM:
-	ld a, wOAMBuffer / $100
+	ld a, wVirtualOAM / $100
 	ld [rDMA], a
 	ld a, $28
 .asm_4046

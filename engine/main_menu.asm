@@ -266,8 +266,8 @@ Function5c3a: ; 5c3a (1:5c3a)
 	ret
 
 Function5c41: ; 5c41 (1:5c41)
-	ld hl, wOAMBuffer
-	ld bc, wOptions - wOAMBuffer
+	ld hl, wVirtualOAM
+	ld bc, wOptions - wVirtualOAM
 	xor a
 	call ByteFill
 
@@ -1064,7 +1064,7 @@ Intro_PlacePlayerSprite: ; 6210 (1:6210)
 	lb bc, BANK(PlayerSpriteGFX), 12
 	ld hl, $8000
 	call Request2bpp
-	ld hl, wOAMBuffer
+	ld hl, wVirtualOAM
 	ld de, .OAMData
 	ld a, [de]
 	inc de

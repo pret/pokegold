@@ -1176,7 +1176,7 @@ Function58b0: ; 58b0 (1:58b0)
 	cp b
 	ret nc
 	ld l, a
-	ld h, wOAMBuffer / $100
+	ld h, wVirtualOAM / $100
 	ld de, $4
 	ld a, b
 	ld c, $a0
