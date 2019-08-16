@@ -1464,7 +1464,8 @@ SECTION "bank3b", ROMX, BANK[$3b]
 	dr $ec000, $f0000
 
 SECTION "bank3c", ROMX, BANK[$3c]
-	dr $f0000, $f2747
+	dr $f0000, $f0941
+INCLUDE "audio/sfx.asm"
 CryHeaders::
 INCLUDE "data/pokemon/cries.asm"
 INCLUDE "audio/cries.asm"
