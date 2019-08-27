@@ -2682,7 +2682,12 @@ wd114:: ds 1 ; d114
 wd115:: ds 1 ; d115
 wBattleMode:: ds 1 ; d116
 wd117:: ds 1 ; d117
-wd118:: ds 1 ; d118
+
+wOtherTrainerClass:: ; d118
+; class (Youngster, Bug Catcher, etc.) of opposing trainer
+; 0 if opponent is a wild Pokémon, not a trainer
+	db
+
 wBattleType:: ds 1 ; d119
 wd11a:: ds 1 ; d11a
 wd11b:: ds 1 ; d11b

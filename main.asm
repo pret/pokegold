@@ -788,8 +788,9 @@ ToggleMaptileDecorations:
 	dr $271be, $27216
 ToggleDecorationsVisibility:
 	dr $27216, $27271
-GetTrainerDVs:
-	dr $27271, $27307
+
+INCLUDE "engine/battle/read_trainer_dvs.asm"
+
 ReturnToBattle_UseBall_:
 	dr $27307, $27bd3
 
