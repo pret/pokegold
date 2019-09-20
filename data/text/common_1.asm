@@ -1311,17 +1311,17 @@ UnknownText_0x1bda90::
 	line "you can."
 	done
 
-UnknownText_0x1bdaa7::
+_DaycareDummyText::
 	text_start
 	done
 
-UnknownText_0x1bdaa9::
+_DayCareManIntroText::
 	text "I'm the DAY-CARE"
 	line "MAN. Want me to"
 	cont "raise a #MON?"
 	done
 
-UnknownText_0x1bdad8::
+_DayCareManOddEggText::
 	text "I'm the DAY-CARE"
 	line "MAN. Do you know"
 	cont "about EGGS?"
@@ -1340,7 +1340,7 @@ UnknownText_0x1bdad8::
 	line "raise a #MON?"
 	done
 
-UnknownText_0x1bdb85::
+_DayCareLadyIntroText::
 	text "I'm the DAY-CARE"
 	line "LADY."
 
@@ -1348,7 +1348,7 @@ UnknownText_0x1bdb85::
 	line "#MON for you?"
 	done
 
-UnknownText_0x1bdbbb::
+_DayCareLadyOddEggText::
 	text "I'm the DAY-CARE"
 	line "LADY. Do you know"
 	cont "about EGGS?"
@@ -1367,45 +1367,45 @@ UnknownText_0x1bdbbb::
 	line "#MON for you?"
 	done
 
-UnknownText_0x1bdc79::
+_WhatShouldIRaiseText::
 	text "What should I"
 	line "raise for you?"
 	prompt
 
-UnknownText_0x1bdc97::
+_OnlyOneMonText::
 	text "Oh? But you have"
 	line "just one #MON."
 	prompt
 
-UnknownText_0x1bdcb8::
+_CantRaiseEggText::
 	text "Sorry, but I can't"
 	line "accept an EGG."
 	prompt
 
-UnknownText_0x1bdcda::
+_RemoveMailText::
 	text "Remove MAIL before"
 	line "you come see me."
 	prompt
 
-UnknownText_0x1bdcff::
+_LastHealthyMonText::
 	text "If you give me"
 	line "that, what will"
 	cont "you battle with?"
 	prompt
 
-UnknownText_0x1bdd30::
+_IllRaiseYourMonText::
 	text "OK. I'll raise"
 	line "your @"
 	text_from_ram wStringBuffer1
 	text "."
 	prompt
 
-UnknownText_0x1bdd4b::
+_ComeBackLaterText::
 	text "Come back for it"
 	line "later."
 	done
 
-UnknownText_0x1bdd64::
+_AreWeGeniusesText::
 	text "Are we geniuses or"
 	line "what? Want to see"
 	cont "your @"
@@ -1413,7 +1413,7 @@ UnknownText_0x1bdd64::
 	text "?"
 	done
 
-UnknownText_0x1bdd96::
+_YourMonHasGrownText::
 	text "Your @"
 	text_from_ram wStringBuffer1
 	text_start
@@ -1431,19 +1431,19 @@ UnknownText_0x1bdd96::
 	text "."
 	done
 
-UnknownText_0x1bde04::
+_PerfectHeresYourMonText::
 	text "Perfect! Here's"
 	line "your #MON."
 	prompt
 
-UnknownText_0x1bde1f::
+_GotBackMonText::
 	text "<PLAYER> got back"
 	line "@"
 	text_from_ram wStringBuffer1
 	text "."
 	prompt
 
-UnknownText_0x1bde32::
+_BackAlreadyText::
 	text "Huh? Back already?"
 	line "Your @"
 	text_from_ram wStringBuffer1
@@ -1456,29 +1456,29 @@ UnknownText_0x1bde32::
 	cont "will cost ¥100."
 	done
 
-UnknownText_0x1bdea2::
+_HaveNoRoomText::
 	text "You have no room"
 	line "for it."
 	prompt
 
-UnknownText_0x1bdebc::
+_DCNotEnoughMoneyText::
 	text "You don't have"
 	line "enough money."
 	prompt
 
-UnknownText_0x1bded9::
+_OhFineThenText::
 	text "Oh, fine then."
 	prompt
 
-UnknownText_0x1bdee9::
+_ComeAgainText::
 	text "Come again."
 	done
 
-UnknownText_0x1bdef6::
+_NotYetText::
 	text "Not yet…"
 	done
 
-UnknownText_0x1bdf00::
+_FoundAnEggText::
 	text "Ah, it's you!"
 
 	para "We were raising"
@@ -1497,22 +1497,22 @@ UnknownText_0x1bdf00::
 	line "it. You want it?"
 	done
 
-UnknownText_0x1bdfa5::
+_ReceivedEggText::
 	text "<PLAYER> received"
 	line "the EGG!"
 	done
 
-UnknownText_0x1bdfba::
+_TakeGoodCareOfEggText::
 	text "Take good care of"
 	line "it."
 	done
 
-UnknownText_0x1bdfd1::
+_RefuseEggText::
 	text "Well then, I'll"
 	line "keep it. Thanks!"
 	done
 
-UnknownText_0x1bdff2::
+_NoRoomForEggText::
 	text "You have no room"
 	line "in your party."
 	cont "Come back later."

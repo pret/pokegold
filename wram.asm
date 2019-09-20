@@ -2696,7 +2696,7 @@ wTrainerClass:: ds 1 ; d11d
 wd11e:: ds 1 ; d11e
 wd11f:: ds 1 ; d11f
 
-wBaseData::
+wBaseData:: ; d120
 wd120:: ds 1 ; d120
 wd121:: ds 1 ; d121
 wd122:: ds 1 ; d122
@@ -2712,7 +2712,7 @@ wd12b:: ds 1 ; d12b
 wd12c:: ds 1 ; d12c
 wd12d:: ds 1 ; d12d
 wd12e:: ds 1 ; d12e
-wd12f:: ds 1 ; d12f
+wBaseEggSteps:: db ; d12f
 wd130:: ds 1 ; d130
 wd131:: ds 1 ; d131
 wd132:: ds 1 ; d132
@@ -2750,6 +2750,7 @@ wd150:: ds 1 ; d150
 wTempNumBuffer::
 wNamedObjectIndexBuffer::
 wDeciramBuffer::
+wBreedingCompatibility::
 wd151:: ds 1 ; d151
 wd152:: ds 1 ; d152
 wd153:: ds 1 ; d153
@@ -3652,7 +3653,7 @@ wBreedMon1OT::    ds NAME_LENGTH ; dc4c
 ; TODO fix incorrect Stats label
 wBreedMon1Stats:: box_struct wBreedMon1 ; dc57
 
-wDaycareLady:: ; dc77
+wDayCareLady:: ; dc77
 ; bit 7: active
 ; bit 0: monster 2 in day-care
 	ds 1

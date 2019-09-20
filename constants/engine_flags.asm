@@ -6,10 +6,10 @@
 	engine_flag_def ENGINE_EXPN_CARD,                             wPokegearFlags, 3 ; expn card
 	engine_flag_def ENGINE_POKEGEAR,                              wPokegearFlags, 7 ; on/off
 
-	engine_flag_def ENGINE_DAY_CARE_MAN_HAS_EGG,                   wDayCareMan, 6 ; egg is ready
-	engine_flag_def ENGINE_DAY_CARE_MAN_HAS_MON,                   wDayCareMan, 0 ; monster 1 in daycare
+	engine_flag_def ENGINE_DAY_CARE_MAN_HAS_EGG,                  wDayCareMan, DAYCAREMAN_HAS_EGG_F
+	engine_flag_def ENGINE_DAY_CARE_MAN_HAS_MON,                  wDayCareMan, DAYCAREMAN_HAS_MON_F
 
-	engine_flag_def ENGINE_DAY_CARE_LADY_HAS_MON,                  wDaycareLady, 0 ; monster 2 in daycare
+	engine_flag_def ENGINE_DAY_CARE_LADY_HAS_MON,                 wDayCareLady, DAYCARELADY_HAS_MON_F
 
 	engine_flag_def ENGINE_MOM_SAVING_MONEY,                      wMomSavingMoney, 0 ; mom saving money ; $8
 	engine_flag_def ENGINE_DST,                                   wMomSavingMoney, 7 ; dst

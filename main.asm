@@ -415,7 +415,7 @@ INCLUDE "engine/anim_hp_bar.asm"
 INCLUDE "engine/move_mon.asm"
 INCLUDE "engine/billspctop.asm"
 
-Functione673: ; e673 (3:6673)
+GetBreedMon1LevelGrowth:
 	ld hl, wBreedMon1Species
 	ld de, wTempMonSpecies
 	ld bc, $20
@@ -429,7 +429,7 @@ Functione673: ; e673 (3:6673)
 	ld d, a
 	ret
 
-Functione68e: ; e68e (3:668e)
+GetBreedMon2LevelGrowth:
 	ld hl, wBreedMon2Species
 	ld de, wTempMon
 	ld bc, $20
@@ -711,21 +711,23 @@ Function15612:: ; 15612
 PokemonCenterPC:
 	dr $15871, $159b0
 Function159b0:
-	dr $159b0, $1646d
+	dr $159b0, $1624f
+TakeMoney:
+	dr $1624f, $16260
+CompareMoney:
+	dr $16260, $1646d
 BankOfMom:
 	dr $1646d, $16935
-DayCareMan:
-	dr $16935, $16989
-DayCareLady:
-	dr $16989, $16b8c
-DayCareManOutside:
-	dr $16b8c, $16e3a
+
+INCLUDE "engine/events/daycare.asm"
 Function16e3a:
 	dr $16e3a, $16ff7
 PhotoStudio:
 	dr $16ff7, $171d1
-Function171d1:
-	dr $171d1, $177a5
+CheckBreedmonCompatibility:
+	dr $171d1, $17467
+InitEggMoves:
+	dr $17467, $177a5
 DayCareMon1:
 	dr $177a5, $177c4
 DayCareMon2:
@@ -993,7 +995,10 @@ SECTION "bank13", ROMX, BANK[$13]
 
 SECTION "bank14", ROMX, BANK[$14]
 SelectMonFromParty:
-	dr $50000, $5004f
+	dr $50000, $5001d
+
+SelectTradeOrDayCareMon:
+	dr $5001d, $5004f
 
 LoadPartyMenuGFX:
 	dr $5004f, $5005f
@@ -1329,7 +1334,10 @@ TreeMonEncounter:
 	dr $ba378, $ba3a1
 
 RockMonEncounter:
-	dr $ba3a1, $bc000
+	dr $ba3a1, $bbaed
+
+ItemIsMail:
+	dr $bbaed, $bc000
 
 SECTION "bank2f", ROMX, BANK[$2f]
 	dr $bc000, $c0000

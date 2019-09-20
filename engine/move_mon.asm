@@ -671,13 +671,13 @@ Functiondcbc: ; dcbc (3:5cbc)
 	ld [wMenuCursorY], a
 	ret
 
-RetrievePokemonFromDaycareMan:
+RetrieveMonFromDayCareMan:
 	ld a, [wBreedMon1Species]
 	ld [wCurPartySpecies], a
 	ld de, SFX_TRANSACTION
 	call PlaySFX
 	call WaitSFX
-	call Functione673
+	call GetBreedMon1LevelGrowth
 	ld a, b
 	ld [wMovementBufferCount], a
 	ld a, e
@@ -686,13 +686,13 @@ RetrievePokemonFromDaycareMan:
 	ld [wPokemonWithdrawDepositParameter], a
 	jp Functiondd6a
 
-RetrievePokemonFromDaycareLady:
+RetrieveMonFromDayCareLady:
 	ld a, [wBreedMon2Species]
 	ld [wCurPartySpecies], a
 	ld de, SFX_TRANSACTION
 	call PlaySFX
 	call WaitSFX
-	call Functione68e
+	call GetBreedMon2LevelGrowth
 	ld a, b
 	ld [wMovementBufferCount], a
 	ld a, e
@@ -806,12 +806,14 @@ Functionde20: ; de20 (3:5e20)
 	ld e, l
 	ret
 
+DepositMonWithDayCareMan:
 	ld de, wBreedMon1Nick
 	call Functionde4a
 	xor a
 	ld [wPokemonWithdrawDepositParameter], a
 	jp RemoveMonFromPartyOrBox
 
+DepositMonWithDayCareLady:
 	ld de, wBreedMon2Nick
 	call Functionde4a
 	xor a
@@ -1059,7 +1061,7 @@ GiveEgg: ; df92 (3:5f92)
 	bit 1, a
 	ld a, $1
 	jr nz, .asm_e028
-	ld a, [wd12f]
+	ld a, [wBaseEggSteps]
 .asm_e028
 	ld [hl], a
 	ld a, [wPartyCount]

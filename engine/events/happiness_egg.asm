@@ -193,7 +193,7 @@ DaycareStep::
 
 	call Random
 	ld [hl], a
-	callab Function171d1
+	callab CheckBreedmonCompatibility
 	ld a, [wd151]
 	cp 230
 	ld b, -1 + 32 percent
