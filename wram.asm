@@ -1,5 +1,6 @@
 INCLUDE "includes.asm"
 INCLUDE "macros/wram.asm"
+INCLUDE "vram.asm"
 
 SECTION "Audio RAM", WRAM0
 wc000::
