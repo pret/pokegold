@@ -425,16 +425,16 @@ ENDC
 Copyright:
 	call ClearTileMap
 	call LoadFontsExtra
-	ld de, TitleScreenGFX5
-	ld hl, $9600
-	lb bc, BANK(TitleScreenGFX5), 30
+	ld de, CopyrightGFX
+	ld hl, vTiles2 tile $60
+	lb bc, BANK(CopyrightGFX), 30
 	call Request2bpp
 	hlcoord 2, 7
 	ld de, CopyrightString
 	jp PlaceString
 
 CopyrightString:
-    db   $60, $61, $62, $63, $7a, $7b, $7c, $7d
+	db   $60, $61, $62, $63, $7a, $7b, $7c, $7d
 	db   $65, $66, $67, $68, $69, $6a
 	next $60, $61, $62, $63, $7a, $7b, $7c, $7d
 	db   $6b, $6c, $6d, $6e, $6f, $70, $71, $72

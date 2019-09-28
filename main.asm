@@ -1426,8 +1426,8 @@ ChangeBox_:
 	dr $e3d25, $e4000
 
 SECTION "bank39", ROMX, BANK[$39]
-TitleScreenGFX5:
-	dr $e4000, $e41e0
+CopyrightGFX:
+	INCBIN "gfx/intro/copyright.2bpp"
 TitleScreenGFX3:
 IF DEF(GOLD)
 	dr $e41e0, $e4260
