@@ -244,11 +244,11 @@ CheckOverworldTileArrays: ; c87c (3:487c)
 	ret
 
 CutTreeBlockPointers:
-	dbw TILESET_JOHTO_1, .johto1
-	dbw TILESET_JOHTO_2, .johto2
+	dbw TILESET_JOHTO, .johto1
+	dbw TILESET_JOHTO_MODERN, .johto2
 	dbw TILESET_KANTO, .kanto
 	dbw TILESET_PARK, .park
-	dbw TILESET_ILEX_FOREST, .ilex
+	dbw TILESET_FOREST, .ilex
 	db -1
 
 .johto1
@@ -282,7 +282,7 @@ CutTreeBlockPointers:
 	db -1
 
 WhirlpoolBlockPointers:
-	dbw TILESET_JOHTO_1, .johto
+	dbw TILESET_JOHTO, .johto
 	db -1
 
 .johto
