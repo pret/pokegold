@@ -621,6 +621,7 @@ wc6fe:: ds 1 ; c6fe
 wc6ff:: ds 1 ; c6ff
 
 wOverworldMap::
+wOverworldMapBlocks::
 wLYOverrides::
 wc700:: ds 1 ; c700
 wc701:: ds 1 ; c701

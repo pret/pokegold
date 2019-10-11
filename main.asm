@@ -1273,8 +1273,8 @@ SECTION "bank25", ROMX, BANK[$25]
 MapTriggers:: ; 94000
 	dr $94000, $940ed
 
-MapGroupPointers::
-	dr $940ed, $965f9
+INCLUDE "data/maps/maps.asm"
+INCLUDE "data/maps/attributes.asm"
 
 OverworldLoop::
 	dr $965f9, $96b89

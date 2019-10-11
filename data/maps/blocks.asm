@@ -481,14 +481,14 @@ RuinsOfAlphOutside_Blocks:
 BetaRuinsOfAlphUnsolvedPuzzleRoom_Blocks:
 	INCBIN "maps/unused/BetaRuinsOfAlphUnsolvedPuzzleRoom.blk"
 
-RuinsOfAlphInnerChamber_Blocks:
-	INCBIN "maps/RuinsOfAlphInnerChamber.blk"
-
 RuinsOfAlphHoOhChamber_Blocks:
 RuinsOfAlphKabutoChamber_Blocks:
 RuinsOfAlphOmanyteChamber_Blocks:
 RuinsOfAlphAerodactylChamber_Blocks:
 	INCBIN "maps/RuinsOfAlphPuzzleChamber.blk"
+
+RuinsOfAlphInnerChamber_Blocks:
+	INCBIN "maps/RuinsOfAlphInnerChamber.blk"
 
 SproutTower1F_Blocks:
 	INCBIN "maps/SproutTower1F.blk"
