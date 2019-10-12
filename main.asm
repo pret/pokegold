@@ -1101,8 +1101,12 @@ GetTrainerPic::
 
 DecompressPredef::
 	dr $518fa, $51b0b
-BaseData:: ; 51b0b
-	dr $51b0b, $53a83
+
+INCLUDE "data/pokemon/base_stats.asm"
+
+Unknown53a6b:
+	dr $53a6b, $53a83
+
 UnknownEggPic:: ; 53a83
 	dr $53a83, $54000
 

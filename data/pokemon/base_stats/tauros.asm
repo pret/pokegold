@@ -3,20 +3,19 @@
 	db  75, 100,  95, 110,  40,  70
 	;   hp  atk  def  spd  sat  sdf
 
-	db NORMAL, NORMAL
+	db NORMAL, NORMAL ; type
 	db 45 ; catch rate
 	db 211 ; base exp
-	db NO_ITEM ; item 1
-	db NO_ITEM ; item 2
-	db 0 ; gender
-	db 100 ; unknown
+	db NO_ITEM, NO_ITEM ; items
+	db GENDER_F0 ; gender ratio
+	db 100 ; unknown 1
 	db 20 ; step cycles to hatch
-	db 5 ; unknown
+	db 5 ; unknown 2
 	dn 7, 7 ; frontpic dimensions
 	db 0, 0, 0, 0 ; padding
 	db GROWTH_SLOW ; growth rate
-	dn EGG_GROUND, FIELD ; egg groups
+	dn EGG_GROUND, EGG_GROUND ; egg groups
 
-	; tmhm
-	tmhm HEADBUTT, CURSE, TOXIC, ZAP_CANNON, ROCK_SMASH, HIDDEN_POWER, SUNNY_DAY, SNORE, BLIZZARD, HYPER_BEAM, ICY_WIND, PROTECT, ENDURE, FRUSTRATION, IRON_TAIL, THUNDER, EARTHQUAKE, RETURN, DOUBLE_TEAM, SWAGGER, SLEEP_TALK, FIRE_BLAST, REST, ATTRACT, SURF, STRENGTH, FLAMETHROWER, THUNDERBOLT, ICE_BEAM
+	; tm/hm learnset
+	tmhm HEADBUTT, CURSE, TOXIC, ZAP_CANNON, ROCK_SMASH, HIDDEN_POWER, SUNNY_DAY, SNORE, BLIZZARD, HYPER_BEAM, ICY_WIND, PROTECT, ENDURE, FRUSTRATION, IRON_TAIL, THUNDER, EARTHQUAKE, RETURN, DOUBLE_TEAM, SWAGGER, SLEEP_TALK, FIRE_BLAST, REST, ATTRACT, SURF, STRENGTH
 	; end

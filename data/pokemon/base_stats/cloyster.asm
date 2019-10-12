@@ -3,20 +3,19 @@
 	db  50,  95, 180,  70,  85,  45
 	;   hp  atk  def  spd  sat  sdf
 
-	db WATER, ICE
+	db WATER, ICE ; type
 	db 60 ; catch rate
 	db 203 ; base exp
-	db PEARL ; item 1
-	db BIG_PEARL ; item 2
-	db 127 ; gender
-	db 100 ; unknown
+	db PEARL, BIG_PEARL ; items
+	db GENDER_F50 ; gender ratio
+	db 100 ; unknown 1
 	db 20 ; step cycles to hatch
-	db 5 ; unknown
+	db 5 ; unknown 2
 	dn 7, 7 ; frontpic dimensions
 	db 0, 0, 0, 0 ; padding
 	db GROWTH_SLOW ; growth rate
 	dn EGG_WATER_3, EGG_WATER_3 ; egg groups
 
-	; tmhm
-	tmhm CURSE, TOXIC, HIDDEN_POWER, SNORE, BLIZZARD, HYPER_BEAM, ICY_WIND, PROTECT, RAIN_DANCE, ENDURE, FRUSTRATION, RETURN, DOUBLE_TEAM, SWAGGER, SLEEP_TALK, SWIFT, REST, ATTRACT, SURF, WHIRLPOOL, ICE_BEAM
+	; tm/hm learnset
+	tmhm CURSE, TOXIC, HIDDEN_POWER, SNORE, BLIZZARD, HYPER_BEAM, ICY_WIND, PROTECT, RAIN_DANCE, ENDURE, FRUSTRATION, RETURN, DOUBLE_TEAM, SWAGGER, SLEEP_TALK, SWIFT, REST, ATTRACT, SURF, WHIRLPOOL
 	; end
