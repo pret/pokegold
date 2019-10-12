@@ -14,7 +14,7 @@
 	db 5 ; unknown
 	dn 6, 6 ; frontpic dimensions
 	db 0, 0, 0, 0 ; padding
-	db MEDIUM_FAST ; growth rate
+	db GROWTH_MEDIUM_FAST ; growth rate
 	dn MONSTER, MONSTER ; egg groups
 
 	; tmhm

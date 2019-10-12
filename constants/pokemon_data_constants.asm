@@ -34,14 +34,15 @@ GENDER_F75     EQU 75 percent
 GENDER_F100    EQU 100 percent - 1
 GENDER_UNKNOWN EQU -1
 
-; growth rate
+; wBaseGrowthRate values
+; GrowthRates indexes (see data/growth_rates.asm)
 	const_def
-	const MEDIUM_FAST
-	const SLIGHTLY_FAST
-	const SLIGHTLY_SLOW
-	const MEDIUM_SLOW
-	const FAST
-	const SLOW
+	const GROWTH_MEDIUM_FAST
+	const GROWTH_SLIGHTLY_FAST
+	const GROWTH_SLIGHTLY_SLOW
+	const GROWTH_MEDIUM_SLOW
+	const GROWTH_FAST
+	const GROWTH_SLOW
 
 ; egg group constants
 const_value SET 1

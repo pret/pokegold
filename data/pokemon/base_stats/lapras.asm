@@ -14,7 +14,7 @@
 	db 5 ; unknown
 	dn 7, 7 ; frontpic dimensions
 	db 0, 0, 0, 0 ; padding
-	db SLOW ; growth rate
+	db GROWTH_SLOW ; growth rate
 	dn MONSTER, AMPHIBIAN ; egg groups
 
 	; tmhm

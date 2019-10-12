@@ -14,7 +14,7 @@
 	db 5 ; unknown
 	dn 6, 6 ; frontpic dimensions
 	db 0, 0, 0, 0 ; padding
-	db SLOW ; growth rate
+	db GROWTH_SLOW ; growth rate
 	dn INVERTEBRATE, INVERTEBRATE ; egg groups
 
 	; tmhm

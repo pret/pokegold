@@ -14,7 +14,7 @@
 	db 5 ; unknown
 	dn 5, 5 ; frontpic dimensions
 	db 0, 0, 0, 0 ; padding
-	db MEDIUM_SLOW ; growth rate
+	db GROWTH_MEDIUM_SLOW ; growth rate
 	dn INSECT, INSECT ; egg groups
 
 	; tmhm
