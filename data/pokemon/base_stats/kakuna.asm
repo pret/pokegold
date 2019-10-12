@@ -15,7 +15,7 @@
 	dn 5, 5 ; frontpic dimensions
 	db 0, 0, 0, 0 ; padding
 	db GROWTH_MEDIUM_FAST ; growth rate
-	dn INSECT, INSECT ; egg groups
+	dn EGG_BUG, EGG_BUG ; egg groups
 
 	; tmhm
 	tmhm

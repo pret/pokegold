@@ -15,7 +15,7 @@
 	dn 6, 6 ; frontpic dimensions
 	db 0, 0, 0, 0 ; padding
 	db GROWTH_SLOW ; growth rate
-	dn FISH, REPTILE ; egg groups
+	dn EGG_WATER_2, EGG_DRAGON ; egg groups
 
 	; tmhm
 	tmhm

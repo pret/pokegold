@@ -15,7 +15,7 @@
 	dn 7, 7 ; frontpic dimensions
 	db 0, 0, 0, 0 ; padding
 	db GROWTH_FAST ; growth rate
-	dn FIELD, FIELD ; egg groups
+	dn EGG_GROUND, FIELD ; egg groups
 
 	; tmhm
 	tmhm

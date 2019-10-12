@@ -15,7 +15,7 @@
 	dn 6, 6 ; frontpic dimensions
 	db 0, 0, 0, 0 ; padding
 	db GROWTH_MEDIUM_FAST ; growth rate
-	dn AMORPHOUS, AMORPHOUS ; egg groups
+	dn EGG_INDETERMINATE, EGG_INDETERMINATE ; egg groups
 
 	; tmhm
 	tmhm

@@ -15,7 +15,7 @@
 	dn 5, 5 ; frontpic dimensions
 	db 0, 0, 0, 0 ; padding
 	db GROWTH_MEDIUM_FAST ; growth rate
-	dn NO_EGGS, NO_EGGS ; egg groups
+	dn EGG_NONE, EGG_NONE ; egg groups
 
 	; tmhm
 	tmhm
