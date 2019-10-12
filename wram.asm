@@ -2106,9 +2106,13 @@ wMonType:: ds 1 ; ce5f
 wCurSpecies:: ds 1 ; ce60
 wce61:: ds 1 ; ce61
 wce62:: ds 1 ; ce62
-wce63:: ds 1 ; ce63
+wce63::
+wJumpTableIndex::
+	db ; ce63
 wce64:: ds 1 ; ce64
-wce65:: ds 1 ; ce65
+wce65::
+wIntroSceneTimer::
+	db ; ce65
 wce66:: ds 1 ; ce66
 
 wRequested2bpp:: ds 1 ; ce67

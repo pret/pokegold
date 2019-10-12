@@ -1426,29 +1426,36 @@ ChangeBox_:
 	dr $e3d25, $e4000
 
 SECTION "bank39", ROMX, BANK[$39]
+
 CopyrightGFX:
 	INCBIN "gfx/intro/copyright.2bpp"
-TitleScreenGFX3:
+
 IF DEF(GOLD)
+TitleScreenGFX3:
 	dr $e41e0, $e4260
 TitleScreenGFX4:
 	dr $e4260, $e4608
 OptionsMenu:
 	dr $e4608, $e49a8
-Copyright_GFPresents:
-	dr $e49a8, $e4cb1
-GoldSilverIntro:
-	dr $e4cb1, $e8000
 ENDC
 
 IF DEF(SILVER)
+TitleScreenGFX3:
 	dr $e41e0, $e4220
 TitleScreenGFX4:
 	dr $e4220, $e4450
 OptionsMenu:
 	dr $e4450, $e47f0
-Copyright_GFPresents:
-	dr $e47f0, $e4af9
+ENDC
+
+INCLUDE "engine/movie/gamefreak_presents.asm"
+
+IF DEF(GOLD)
+GoldSilverIntro:
+	dr $e4cb1, $e8000
+ENDC
+
+IF DEF(SILVER)
 GoldSilverIntro:
 	dr $e4af9, $e8000
 ENDC
