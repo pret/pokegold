@@ -34,33 +34,33 @@ GENDER_F75     EQU 75 percent
 GENDER_F100    EQU 100 percent - 1
 GENDER_UNKNOWN EQU -1
 
-; growth rate
+; wBaseGrowthRate values
+; GrowthRates indexes (see data/growth_rates.asm)
 	const_def
-	const MEDIUM_FAST
-	const SLIGHTLY_FAST
-	const SLIGHTLY_SLOW
-	const MEDIUM_SLOW
-	const FAST
-	const SLOW
+	const GROWTH_MEDIUM_FAST
+	const GROWTH_SLIGHTLY_FAST
+	const GROWTH_SLIGHTLY_SLOW
+	const GROWTH_MEDIUM_SLOW
+	const GROWTH_FAST
+	const GROWTH_SLOW
 
-; egg group constants
-const_value SET 1
-	const MONSTER      ; 1
-	const AMPHIBIAN    ; 2
-	const INSECT       ; 3
-	const AVIAN        ; 4
-	const FIELD        ; 5
-	const FAIRY        ; 6
-	const PLANT        ; 7
-	const HUMANSHAPE   ; 8
-	const INVERTEBRATE ; 9
-	const INANIMATE    ; a
-	const AMORPHOUS    ; b
-	const FISH         ; c
-	const LADIES_MAN   ; d
-	const REPTILE      ; e
-	const NO_EGGS      ; f
-
+; wBaseEggGroups values
+	const_def 1
+	const EGG_MONSTER       ; 1
+	const EGG_WATER_1       ; 2 (Amphibian)
+	const EGG_BUG           ; 3
+	const EGG_FLYING        ; 4
+	const EGG_GROUND        ; 5 (Field)
+	const EGG_FAIRY         ; 6
+	const EGG_PLANT         ; 7 (Grass)
+	const EGG_HUMANSHAPE    ; 8 (Human-Like)
+	const EGG_WATER_3       ; 9 (Invertebrate)
+	const EGG_MINERAL       ; a
+	const EGG_INDETERMINATE ; b (Amorphous)
+	const EGG_WATER_2       ; c (Fish)
+	const EGG_DITTO         ; d
+	const EGG_DRAGON        ; e
+	const EGG_NONE          ; f (Undiscovered)
 
 ; menu sprites
 const_value SET 1
