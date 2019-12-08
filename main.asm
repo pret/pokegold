@@ -640,9 +640,7 @@ INCLUDE "engine/pack.asm"
 INCLUDE "engine/overworld/time.asm"
 INCLUDE "engine/learn_tm.asm"
 INCLUDE "engine/namingscreen.asm"
-
-AbortBugCatchingContest::
-	dr $1269a, $126fd
+INCLUDE "engine/events/misc_scripts.asm"
 HealMachineAnim:
 	dr $126fd, $12947
 

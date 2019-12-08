@@ -588,7 +588,7 @@ FlyScript:
 	callasm HideSprites
 	special UpdateTimePals
 	callasm FlyFromAnimation
-	farscall AbortBugCatchingContest
+	farscall Script_AbortBugContest
 	special WarpToSpawnPoint
 	callasm DelayLoadingNewSprites ; 1560c
 	writecode VAR_MOVEMENT, PLAYER_NORMAL
@@ -817,7 +817,7 @@ ContinueDigEscapeRopeScript:
 	closetext
 	playsound SFX_WARP_TO
 	applymovement PLAYER, DigOutMovementData
-	farscall AbortBugCatchingContest
+	farscall Script_AbortBugContest
 	special WarpToSpawnPoint
 	writecode VAR_MOVEMENT, PLAYER_NORMAL
 	newloadmap MAPSETUP_DOOR
@@ -903,7 +903,7 @@ TeleportScript: ; ccbe
 	closetext
 	playsound SFX_WARP_TO
 	applymovement PLAYER, TeleportFromMovementData
-	farscall AbortBugCatchingContest
+	farscall Script_AbortBugContest
 	special WarpToSpawnPoint
 	writecode VAR_MOVEMENT, PLAYER_NORMAL
 	newloadmap MAPSETUP_TELEPORT
