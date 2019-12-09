@@ -11,7 +11,7 @@ FindItemInBallScript::
 	iffalse .no_room
 	disappear LAST_TALKED
 	opentext
-	writetext .text_found
+	writetext .FoundItemText
 	playsound SFX_ITEM
 	pause 60
 	itemnotify
@@ -20,38 +20,36 @@ FindItemInBallScript::
 
 .no_room
 	opentext
-	writetext .text_found
+	writetext .FoundItemText
 	waitbutton
-	writetext .text_bag_full
+	writetext .CantCarryItemText
 	waitbutton
 	closetext
 	end
 
-.text_found
-	; found @ !
-	text_jump UnknownText_0x1c0a1c
+.FoundItemText:
+	text_jump _FoundItemText
 	db "@"
 
-.text_bag_full
-	; But   can't carry any more items.
-	text_jump UnknownText_0x1c0a2c
+.CantCarryItemText:
+	text_jump _CantCarryItemText
 	db "@"
 
 .TryReceiveItem:
-    xor a
-    ld [wScriptVar], a
-    ld a, [wcf29]
-    ld [wDeciramBuffer], a
-    call GetItemName
-    ld hl, wStringBuffer3
-    call CopyName2
-    ld a, [wcf29]
-    ld [wd002], a
-    ld a, [wcf2a]
-    ld [wItemQuantityChangeBuffer], a
-    ld hl, wNumItems
-    call ReceiveItem
-    ret nc
+	xor a
+	ld [wScriptVar], a
+	ld a, [wcf29]
+	ld [wDeciramBuffer], a
+	call GetItemName
+	ld hl, wStringBuffer3
+	call CopyName2
+	ld a, [wcf29]
+	ld [wd002], a
+	ld a, [wcf2a]
+	ld [wItemQuantityChangeBuffer], a
+	ld hl, wNumItems
+	call ReceiveItem
+	ret nc
 	ld a, $1
 	ld [wScriptVar], a
 	ret

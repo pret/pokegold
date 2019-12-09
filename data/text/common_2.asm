@@ -196,14 +196,14 @@ Text_MonCanCutThis_::
 	line "CUT!"
 	done
 
-UnknownText_0x1c0a1c::
+_FoundItemText::
 	text "<PLAYER> found"
 	line "@"
 	text_from_ram wStringBuffer3
 	text "!"
 	done
 
-UnknownText_0x1c0a2c::
+_CantCarryItemText::
 	text "But <PLAYER> can't"
 	line "carry any more"
 	cont "items!"

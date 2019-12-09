@@ -651,8 +651,9 @@ PartyMonItemName::
 	dr $12e33, $12fa0
 Function12fa0:
 	dr $12fa0, $1399d
-GiveParkBalls:
-	dr $1399d, $13a5f
+INCLUDE "engine/events/bug_contest/contest.asm"
+INCLUDE "engine/events/misc_scripts_2.asm"
+INCLUDE "engine/events/std_collision.asm"
 Function13a5f:
 	dr $13a5f, $13d44
 ApplyPokerusTick:

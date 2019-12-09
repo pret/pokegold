@@ -261,6 +261,7 @@ NUM_TMS = const_value - TM01 - 2
 NUM_HMS = const_value - HM01
 	const HM_08         ; $FA
 
+USE_SCRIPT_VAR EQU $00
 ITEM_FROM_MEM EQU $ff
 
 

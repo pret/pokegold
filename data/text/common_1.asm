@@ -965,30 +965,30 @@ UnknownText_0x1bd2bc::
 	text "Which floor?"
 	done
 
-UnknownText_0x1bd2ca::
+_BugCatchingContestTimeUpText::
 	text "ANNOUNCER: BEEEP!"
 
 	para "Time's up!"
 	done
 
-UnknownText_0x1bd2e7::
+_BugCatchingContestIsOverText::
 	text "ANNOUNCER: The"
 	line "Contest is over!"
 	done
 
-UnknownText_0x1bd308::
+_RepelWoreOffText::
 	text "REPEL's effect"
 	line "wore off."
 	done
 
-UnknownText_0x1bd321::
+_PlayerFoundItemText::
 	text "<PLAYER> found"
 	line "@"
 	text_from_ram wStringBuffer3
 	text "."
 	done
 
-UnknownText_0x1bd331::
+_ButNoSpaceText::
 	text "But <PLAYER> has"
 	line "no space left…"
 	done
