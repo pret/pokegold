@@ -199,10 +199,10 @@ Function2086::
 	call GetCurrentMapTrigger
 	call ResetBikeFlags
 	ld a, $5
-	call RunMapfarcallck
+	call RunMapCallback
 	farcall Function97c2a
 	ld a, $3
-	call RunMapfarcallck
+	call RunMapCallback
 	call GetMapHeaderTimeOfDayNybble
 	ld [wMapTimeOfDay], a
 	ret
@@ -742,7 +742,7 @@ ReadMapScripts:: ; 242e (0:242e)
 	ld h, [hl]
 	ld l, a
 	call ReadMapTriggers
-	call ReadMapfarcallcks
+	call ReadMapCallbacks
 	ret
 
 CopySecondMapHeader:: ; 243b (0:243b)
@@ -811,7 +811,7 @@ ReadMapTriggers:: ; 248b (0:248b)
 	call AddNTimes
 	ret
 
-ReadMapfarcallcks:: ; 24a2 (0:24a2)
+ReadMapCallbacks:: ; 24a2 (0:24a2)
 	ld a, [hli]
 	ld c, a
 	ld [wd954], a
@@ -1035,7 +1035,7 @@ LoadBlockData::
 	call ChangeMap
 	call FillMapConnections
 	ld a, $1
-	call RunMapfarcallck
+	call RunMapCallback
 	ret
 
 ChangeMap:: ; 260d (0:260d)
@@ -1256,24 +1256,24 @@ CallMapScript::
 	call GetMapScriptHeaderBank
 	jr CallScript
 
-RunMapfarcallck:: ; 2764 (0:2764)
+RunMapCallback:: ; 2764 (0:2764)
 	ld b, a
 	ld a, [hROMBank]
 	push af
 	call SwitchToMapScriptHeaderBank
-	call Findfarcallck
+	call FindCallback
 	jr nc, .asm_2779
 	call GetMapScriptHeaderBank
 	ld b, a
 	ld d, h
 	ld e, l
-	call ExecutefarcallckScript
+	call ExecuteCallbackScript
 .asm_2779
 	pop af
 	rst Bankswitch
 	ret
 
-Findfarcallck:: ; 277c (0:277c)
+FindCallback:: ; 277c (0:277c)
 	ld a, [wd954]
 	ld c, a
 	and a
@@ -1303,8 +1303,8 @@ Findfarcallck:: ; 277c (0:277c)
 	scf
 	ret
 
-ExecutefarcallckScript:: ; 279d (0:279d)
-	farcall Callfarcallck
+ExecuteCallbackScript:: ; 279d (0:279d)
+	farcall CallCallback
 	ld a, [wd15e]
 	push af
 	ld hl, wd15b
@@ -1324,10 +1324,10 @@ MapTextbox::
 	push af
 	ld a, b
 	rst Bankswitch
-	call SetUpTextBox
+	call SetUpTextbox
 	ld a, $1
 	ld [hOAMUpdate], a
-	call PrintTextBoxText
+	call PrintTextboxText
 	xor a
 	ld [hOAMUpdate], a
 	pop af
@@ -2134,7 +2134,7 @@ ReturnToMapWithSpeechTextbox::
 	call ReloadTilesetAndPalettes
 	hlcoord 0, 12
 	lb bc, 4, 18
-	call TextBox
+	call Textbox
 	ld hl, wVramState
 	set 0, [hl]
 	call UpdateSprites

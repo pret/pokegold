@@ -195,7 +195,7 @@ MenuBox:: ; 1b4e (0:1b4e)
 	call GetMenuBoxDims
 	dec b
 	dec c
-	jp TextBox
+	jp Textbox
 
 GetMenuTextStartCoord:: ; 1b59 (0:1b59)
 	ld a, [wMenuBorderTopCoord]

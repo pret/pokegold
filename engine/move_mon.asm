@@ -214,7 +214,7 @@ GeneratePartyMonStats:
 	ld a, $1
 	ld c, a
 	ld b, $0
-	call CalcPkmnStatC
+	call CalcMonStatC
 	ld a, [hStringCmpString2]
 	ld [de], a
 	inc de
@@ -281,7 +281,7 @@ GeneratePartyMonStats:
 	ld bc, $a
 	add hl, bc
 	ld b, $0
-	call CalcPkmnStats
+	call CalcMonStats
 .asm_da4b
 	ld a, [wMonType]
 	and $f
@@ -406,7 +406,7 @@ AddTempmonToParty: ; da9c (3:5a9c)
 	and a
 	ret
 
-SentGetPkmnIntoFromBox: ; db45 (3:5b45)
+SendGetMonIntoFromBox: ; db45 (3:5b45)
 	ld a, $1
 	call OpenSRAM
 	ld a, [wPokemonWithdrawDepositParameter]
@@ -544,7 +544,7 @@ SentGetPkmnIntoFromBox: ; db45 (3:5b45)
 	srl a
 	add $2
 	ld [wMonType], a
-	predef CopyPkmnToTempMon
+	predef CopyMonToTempMon
 	callfar CalcLevel
 	ld a, d
 	ld [wCurPartyLevel], a
@@ -562,7 +562,7 @@ SentGetPkmnIntoFromBox: ; db45 (3:5b45)
 	add hl, bc
 	push bc
 	ld b, $1
-	call CalcPkmnStats
+	call CalcMonStats
 	pop bc
 	ld a, [wPokemonWithdrawDepositParameter]
 	and a
@@ -766,7 +766,7 @@ Functiondd6a: ; dd6a (3:5d6a)
 	add hl, bc
 	push bc
 	ld b, $1
-	call CalcPkmnStats
+	call CalcMonStats
 	ld hl, wPartyMon1Moves
 	ld a, [wPokemonData]
 	dec a
@@ -836,7 +836,7 @@ Functionde4a: ; de4a (3:5e4a)
 	ld bc, BOXMON_STRUCT_LENGTH
 	jp CopyBytes
 
-SentPkmnIntoBox: ; de74 (3:5e74)
+SendMonIntoBox: ; de74 (3:5e74)
 	ld a, $1
 	call OpenSRAM
 	ld de, sBoxCount
@@ -1016,7 +1016,7 @@ GiveEgg: ; df92 (3:5f92)
 	ld d, $0
 	ld hl, wPokedexCaught
 	ld b, RESET_FLAG
-	predef FlagPredef
+	predef SmallFarFlagAction
 .asm_dfc9
 	pop bc
 	ld a, c
@@ -1028,7 +1028,7 @@ GiveEgg: ; df92 (3:5f92)
 	ld d, $0
 	ld hl, wPokedexSeen
 	ld b, RESET_FLAG
-	predef FlagPredef
+	predef SmallFarFlagAction
 .asm_dfdf
 	pop af
 	ld [wCurPartySpecies], a
@@ -1234,7 +1234,7 @@ ComputeNPCTrademonStats:
 	ld a, MON_STAT_EXP - 1
 	call GetPartyParamLocation
 	ld b, $1
-	call CalcPkmnStats
+	call CalcMonStats
 	pop de
 	ld a, MON_HP
 	call GetPartyParamLocation
@@ -1245,7 +1245,7 @@ ComputeNPCTrademonStats:
 	ld [hl], a
 	ret
 
-CalcPkmnStats: ; e16d
+CalcMonStats: ; e16d
 ; Calculates all 6 Stats of a Pkmn
 ; b: Take into account stat EXP if TRUE
 ; 'c' counts from 1-6 and points with 'BaseStats' to the base value
@@ -1255,7 +1255,7 @@ CalcPkmnStats: ; e16d
 	ld c, $0
 .loop
 	inc c
-	call CalcPkmnStatC
+	call CalcMonStatC
 	ld a, [hMultiplicand + 1]
 	ld [de], a
 	inc de
@@ -1268,7 +1268,7 @@ CalcPkmnStats: ; e16d
 	ret
 ; e17b
 
-CalcPkmnStatC: ; e181
+CalcMonStatC: ; e181
 ; 'c' is 1-6 and points to the BaseStat
 ; 1: HP
 ; 2: Attack
@@ -1511,7 +1511,7 @@ GivePoke: ; Give a Pokemon from script
 	ld a, [wCurPartySpecies]
 	ld [wTempEnemyMonSpecies], a
 	callfar LoadEnemyMon
-	call SentPkmnIntoBox
+	call SendMonIntoBox
 	jp nc, Functione3af
 	ld a, BOXMON
 	ld [wMonType], a

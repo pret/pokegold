@@ -235,10 +235,10 @@ Functione566: ; e566 (3:6566)
 	call ByteFill
 	hlcoord 0, 0
 	lb bc, 10, 18
-	call TextBox
+	call Textbox
 	hlcoord 0, 12
 	ld bc, IncGradGBPalTable_13
-	call TextBox
+	call Textbox
 	call Function3456
 	call SetPalettes
 	ret

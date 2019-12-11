@@ -35,20 +35,20 @@ FillScreenWithTextboxPal::
 	call ByteFill
 	jr ClearTileMap
 
-TextBox:: ; eef (0:0eef)
+Textbox:: ; eef (0:0eef)
 	push bc
 	push hl
-	call TextBoxBorder
+	call TextboxBorder
 	pop hl
 	pop bc
-	jr TextBoxPalette
+	jr TextboxPalette
 
-TextBoxBorder:: ; ef8 (0:0ef8)
+TextboxBorder:: ; ef8 (0:0ef8)
 	push hl
 	ld a, "┌"
 	ld [hli], a
 	inc a
-	call TextBoxBorder_PlaceTiles
+	call TextboxBorder_PlaceTiles
 	inc a
 	ld [hl], a
 	pop hl
@@ -61,7 +61,7 @@ TextBoxBorder:: ; ef8 (0:0ef8)
 	ld a, "│"
 	ld [hli], a
 	ld a, " "
-	call TextBoxBorder_PlaceTiles
+	call TextboxBorder_PlaceTiles
 	ld [hl], "│"
 	pop hl
 
@@ -74,11 +74,11 @@ TextBoxBorder:: ; ef8 (0:0ef8)
 	ld a, "└"
 	ld [hli], a
 	ld a, "─"
-	call TextBoxBorder_PlaceTiles
+	call TextboxBorder_PlaceTiles
 	ld [hl], "┘"
 	ret
 
-TextBoxBorder_PlaceTiles:: ; f25 (0:0f25)
+TextboxBorder_PlaceTiles:: ; f25 (0:0f25)
 	ld d, c
 .loop
 	ld [hli], a
@@ -86,7 +86,7 @@ TextBoxBorder_PlaceTiles:: ; f25 (0:0f25)
 	jr nz, .loop
 	ret
 
-TextBoxPalette
+TextboxPalette
 	ld de, wAttrMap - wTileMap
 	add hl, de
 	inc b
@@ -109,11 +109,11 @@ TextBoxPalette
 	jr nz, .col
 	ret
 
-SpeechTextBox:: ; f45 (0:0f45)
+SpeechTextbox:: ; f45 (0:0f45)
 	hlcoord TEXTBOX_X, TEXTBOX_Y
 	ld b, TEXTBOX_INNERH
 	ld c, TEXTBOX_INNERW
-	jp TextBox
+	jp Textbox
 
 TestText::
 	text "ゲームフりーク!"
@@ -126,15 +126,15 @@ RadioTerminator:: ; 1052
 .stop	db "@"
 
 PrintText::
-	call SetUpTextBox
-PrintTextBoxText::
+	call SetUpTextbox
+PrintTextboxText::
 	bccoord TEXTBOX_INNERX, TEXTBOX_INNERY
 	call PlaceHLTextAtBC
 	ret
 
-SetUpTextBox:: ; f68 (0:0f68)
+SetUpTextbox:: ; f68 (0:0f68)
 	push hl
-	call SpeechTextBox
+	call SpeechTextbox
 	call UpdateSprites
 	call ApplyTilemap
 	pop hl
@@ -551,15 +551,15 @@ PokeFluteTerminatorCharacter::
 .stop	db "@"
 
 PlaceHLTextAtBC:: ; 1272 (0:1272)
-	ld a, [wTextBoxFlags]
+	ld a, [wTextboxFlags]
 	push af
 	set 1, a
-	ld [wTextBoxFlags], a
+	ld [wTextboxFlags], a
 
 	call DoTextUntilTerminator
 
 	pop af
-	ld [wTextBoxFlags], a
+	ld [wTextboxFlags], a
 	ret
 
 DoTextUntilTerminator:: ; 1283 (0:1283)
@@ -690,7 +690,7 @@ Text_TX_BOX:: ; 1318 (0:1318)
 	push hl
 	ld h, d
 	ld l, e
-	call TextBox
+	call Textbox
 	pop hl
 	ret
 

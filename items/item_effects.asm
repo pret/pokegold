@@ -556,7 +556,7 @@ UltraBall: ; e926
 
 .send_mon_to_pc
 	call ClearSprites
-	predef SentPkmnIntoBox
+	predef SendMonIntoBox
 	ld a, BANK(sBoxCount)
 	call OpenSRAM
 	ld a, [sBoxCount]
@@ -1083,7 +1083,7 @@ Functioneee0: ; eee0 (3:6ee0)
 	ld a, MON_STAT_EXP - 1
 	call GetPartyParamLocation
 	ld b, $1
-	predef_jump CalcPkmnStats
+	predef_jump CalcMonStats
 
 Functioneef3: ; eef3 (3:6ef3)
 	xor a
@@ -1198,11 +1198,11 @@ RareCandy: ; ef68 (3:6f68)
 	call Functionf2a0
 	xor a
 	ld [wMonType], a
-	predef CopyPkmnToTempMon
+	predef CopyMonToTempMon
 	hlcoord 9, 0
 	ld b, 10
 	ld c, 9
-	call TextBox
+	call Textbox
 	hlcoord 11, 1
 	ld bc, $4
 	predef PrintTempMonStats
@@ -1406,7 +1406,7 @@ Functionf12c: ; f12c (3:712c)
 	ld d, $0
 	ld hl, wcbda
 	ld b, CHECK_FLAG
-	predef FlagPredef
+	predef SmallFarFlagAction
 	ld a, c
 	and a
 	jr z, .asm_f15a
@@ -1414,7 +1414,7 @@ Functionf12c: ; f12c (3:712c)
 	ld c, a
 	ld hl, wcb42
 	ld b, SET_FLAG
-	predef FlagPredef
+	predef SmallFarFlagAction
 .asm_f15a
 	xor a
 	ld [wLowHealthAlarm], a

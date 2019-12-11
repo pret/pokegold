@@ -1,29 +1,12 @@
-INCLUDE "includes.asm"
+INCLUDE "contents.asm"
+INCLUDE "constants.asm"
 
-SECTION "bank1", ROMX, BANK[$1]
-PlaceWaitingText:: ; 4000 (1:4000)
-	hlcoord 3, 10
-	ld b, $1
-	ld c, $b
-	ld a, [wBattleMode]
-	and a
-	jr z, .asm_4012
-	call TextBox
-	jr .asm_4017
 
-.asm_4012
-	predef Predef_LinkTextbox
-.asm_4017
-	hlcoord 4, 11
-	ld de, .Waiting
-	call PlaceString
-	ld c, 50
-	jp DelayFrames
+SECTION "bank1", ROMX
 
-.Waiting:
-	db "Waiting...!@"
+INCLUDE "engine/link/place_waiting_text.asm"
 
-Predef1:
+DummyPredef1:
 	ret
 
 LoadPushOAM:: ; 4032 (1:4032)
@@ -353,7 +336,7 @@ INCLUDE "engine/specials.asm"
 
 Functionc660:
 	nop
-FlagPredef:
+SmallFarFlagAction:
 	push hl
 	push bc
 	push bc
@@ -798,7 +781,7 @@ ReturnToBattle_UseBall_:
 SECTION "banka", ROMX, BANK[$a]
 	dr $28000, $28d88
 
-Predef_LinkTextbox::
+LinkTextboxAtHL::
 	dr $28d88, $28dea
 
 TradeAnimation::
@@ -915,7 +898,7 @@ SECTION "bankf", ROMX, BANK[$f]
 FleeMons::
 	dr $3c551, $3d70a
 
-CheckPlayerPartyForFitPkmn::
+CheckPlayerPartyForFitMon::
 	dr $3d70a, $3d8f5
 
 Function3d8f5:
@@ -938,10 +921,10 @@ BattleRandom_:: ; 3ec11
 FillInExpBar::
 	dr $3f196, $3f243
 
-GetMonBackpic::
+GetBattleMonBackpic::
 	dr $3f243, $3f282
 
-GetMonFrontpic::
+GetEnemyMonFrontpic::
 	dr $3f282, $3f2c7
 
 StartBattle::
@@ -1035,7 +1018,7 @@ BasementKeyFunction:
 SacredAshFunction:
 	dr $50819, $5087d
 
-CopyPkmnToTempMon::
+CopyMonToTempMon::
 	dr $5087d, $50940
 
 PrintMonTypes::
@@ -1068,7 +1051,7 @@ GetGender::
 ListMovePP::
 	dr $51364, $513e4
 
-Predef22::
+Unused_PlaceEnemyHPLevel::
 	dr $513e4, $51437
 
 PlaceNonFaintStatus::
@@ -1086,19 +1069,19 @@ CalcExpAtLevel:
 GetUnownLetter::
 	dr $51749, $51780
 
-GetFrontpic::
+GetMonFrontpic::
 	dr $51780, $51786
 
 FrontpicPredef::
 	dr $51786, $51803
 
-GetBackpic::
+GetMonBackpic::
 	dr $51803, $518a0
 
 GetTrainerPic::
 	dr $518a0, $518fa
 
-DecompressPredef::
+DecompressGet2bpp::
 	dr $518fa, $51b0b
 
 INCLUDE "data/pokemon/base_stats.asm"
@@ -1166,8 +1149,8 @@ ResetClock_:
 DeleteSaveData_:
 	dr $8c310, $8c355
 
-Predef35::
-Predef36::
+DummyPredef35::
+DummyPredef36::
 	ret
 
 UpdateTimeOfDayPal:: ; 8c356
@@ -1194,7 +1177,7 @@ FadeBlackQuickly:
 Function8c3e9:: ; 8c3e9
 	dr $8c3e9, $8c513
 
-Predef_StartBattle::
+DoBattleTransition::
 	dr $8c513, $8ca5e
 
 PlayWhirlpoolSound:
@@ -1267,7 +1250,7 @@ Function919c1:
 TownMap_:
 	dr $91a4f, $91c7f
 
-Area_::
+Pokedex_GetArea::
 	dr $91c7f, $92c36
 Function92c36:
 	dr $92c36, $94000
@@ -1371,7 +1354,7 @@ Functionc7cd0:
 SECTION "bank32", ROMX, BANK[$32]
 	dr $c8000, $c80d6
 
-Predef2F::
+DummyPredef2F::
 	dr $c80d6, $c900a
 
 INCLUDE "data/moves/animations.asm"
@@ -1386,8 +1369,8 @@ DisplayCaughtContestMonStats:
 DisplayAlreadyCaughtText:
 	dr $cc0c8, $cc0d6
 
-Predef38::
-Predef39::
+DummyPredef38::
+DummyPredef39::
 	ret
 
 PlayBattleAnim::
@@ -1495,7 +1478,7 @@ MagikarpHouseSign:
 
 SECTION "bank3f", ROMX, BANK[$3f]
 	nop
-Predef3A::
+DummyPredef3A::
 	ret
 
 	dr $fc002, $100000

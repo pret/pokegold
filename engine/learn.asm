@@ -121,7 +121,7 @@ LearnMove:
 	hlcoord 5, 2
 	ld b, $8
 	ld c, $d
-	call TextBox
+	call Textbox
 	hlcoord 7, 4
 	ld a, $28
 	ld [wBuffer1], a

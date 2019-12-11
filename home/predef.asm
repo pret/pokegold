@@ -1,34 +1,52 @@
-Predef:: ; 2e49 (0:2e49)
+Predef::
+; Call predefined function a.
+; Preserves bc, de, hl and f.
+
 	ld [wPredefID], a
-	ld a, [hROMBank]
+	ldh a, [hROMBank]
 	push af
+
 	ld a, BANK(GetPredefPointer)
 	rst Bankswitch
-	call GetPredefPointer
+	call GetPredefPointer ; stores hl in wPredefTemp
+
+; Switch to the new function's bank
 	rst Bankswitch
-	ld hl, .return
+
+; Instead of directly calling stuff,
+; push it to the stack in reverse.
+
+	ld hl, .Return
 	push hl
-	ld a, [wPredefPointerBuffer]
+
+; Call the Predef function
+	ld a, [wPredefAddress]
 	ld h, a
-	ld a, [wPredefPointerBuffer + 1]
+	ld a, [wPredefAddress + 1]
 	ld l, a
 	push hl
-	ld a, [wPredefHLBuffer]
+
+; Get hl back
+	ld a, [wPredefTemp]
 	ld h, a
-	ld a, [wPredefHLBuffer + 1]
+	ld a, [wPredefTemp + 1]
 	ld l, a
 	ret
 
-.return
+.Return:
+; Clean up after the Predef call
+
 	ld a, h
-	ld [wPredefHLBuffer], a
+	ld [wPredefTemp], a
 	ld a, l
-	ld [wPredefHLBuffer + 1], a
+	ld [wPredefTemp + 1], a
+
 	pop hl
 	ld a, h
 	rst Bankswitch
-	ld a, [wPredefHLBuffer]
+
+	ld a, [wPredefTemp]
 	ld h, a
-	ld a, [wPredefHLBuffer + 1]
+	ld a, [wPredefTemp + 1]
 	ld l, a
 	ret

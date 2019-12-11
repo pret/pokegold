@@ -1,4 +1,5 @@
-INCLUDE "includes.asm"
+INCLUDE "contents.asm"
+INCLUDE "constants.asm"
 
 ; rst vectors
 INCLUDE "home/rst.asm"
@@ -160,7 +161,7 @@ Function2ffe:: ; 2ffe (0:2ffe)
 	push de
 	push bc
 	ld d, $0
-	predef FlagPredef
+	predef SmallFarFlagAction
 	pop bc
 	pop de
 .next
@@ -270,7 +271,7 @@ Function31e2:: ; 31e2 (0:31e2)
 	ld a, [wOptions]
 	bit 4, a
 	ret nz
-	ld a, [wTextBoxFlags]
+	ld a, [wTextboxFlags]
 	bit 1, a
 	ret z
 	push hl
@@ -280,7 +281,7 @@ Function31e2:: ; 31e2 (0:31e2)
 	ld a, [hl]
 	push af
 	ld [hl], a
-	ld a, [wTextBoxFlags]
+	ld a, [wTextboxFlags]
 	bit 0, a
 	jr z, .asm_3205
 	ld a, [wOptions]
@@ -873,7 +874,7 @@ GetSGBLayout:: ; 3583 (0:3583)
 	and a
 	ret z
 .asm_358c
-	predef_jump Predef_LoadSGBLayout
+	predef_jump LoadSGBLayout
 
 SetHPPal::
 	call GetHPPal
@@ -1184,7 +1185,7 @@ DrawScrollingMenu::
 	push de
 	call Coord2Tile
 	pop bc
-	jp TextBox
+	jp Textbox
 
 ScrollingMenuJoyTextDelay::
 	call DelayFrame
@@ -1610,7 +1611,7 @@ PrepMonFrontpic_::
 .egg
 	push hl
 	ld de, $9000
-	predef GetFrontpic
+	predef GetMonFrontpic
 	pop hl
 	xor a
 	ld [hGraphicStartTile], a

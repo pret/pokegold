@@ -547,7 +547,7 @@ FadeOutMusic: ; c628 (3:4628)
 	ld a, $0
 	ld [wMusicFadeID], a
 	ld a, $0
-	ld [wMusicFadeIDHi], a
+	ld [wMusicFadeID + 1], a
 	ld a, $2
 	ld [wMusicFade], a
 	ret

@@ -47,7 +47,7 @@ Init:: ; 5d1 (0:05d1)
 	ld [rLCDC], a
 
 ; Clear WRAM
-	ld hl, wc000
+	ld hl, wMusicPlaying
 	ld bc, $2000
 .ByteFill
 	ld [hl], $0

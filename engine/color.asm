@@ -31,7 +31,7 @@ CheckShininess:
 	and a
 	ret
 
-CheckContestMon: ; 9072 (2:5072)
+Unused_CheckShininess: ; 9072 (2:5072)
 	ld a, [hl]
 	cp $a0
 	jr c, .asm_908c

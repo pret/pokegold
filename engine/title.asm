@@ -341,8 +341,8 @@ Function6434:
 	ld hl, wce63
 	inc [hl]
 	xor a
-	ld [wMusicFadeIDLo], a
-	ld [wMusicFadeIDHi], a
+	ld [wMusicFadeID], a
+	ld [wMusicFadeID + 1], a
 	ld hl, wMusicFade
 	ld [hl], $8
 	ld hl, wce65

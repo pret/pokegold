@@ -1335,7 +1335,7 @@ Function10d70: ; 10d70 (4:4d70)
 	call Function10dc0
 	hlcoord 0, 12
 	ld bc, IncGradGBPalTable_13
-	call TextBox
+	call Textbox
 	call EnableLCD
 	call Function10ccd
 	ret

@@ -522,7 +522,7 @@ DayCare_GiveEgg:
 	pop hl
 	push bc
 	ld b, FALSE
-	predef CalcPkmnStats
+	predef CalcMonStats
 	pop bc
 	ld hl, MON_HP
 	add hl, bc

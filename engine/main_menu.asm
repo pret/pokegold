@@ -152,11 +152,11 @@ Function5b45: ; 5b45 (1:5b45)
 	hlcoord 0, 12
 	ld b, $4
 	ld c, $d
-	call TextBox
+	call Textbox
 	ret
 
 .asm_5b57
-	call SpeechTextBox
+	call SpeechTextbox
 	ret
 
 Function5b5b: ; 5b5b (1:5b5b)
@@ -929,7 +929,7 @@ ShrinkPlayer: ; 6123 (1:6123)
 	ld a, e
 	ld [wMusicFadeID], a
 	ld a, d
-	ld [wMusicFadeIDHi], a
+	ld [wMusicFadeID + 1], a
 
 	ld de, SFX_ESCAPE_ROPE
 	call PlaySFX
@@ -1051,7 +1051,7 @@ Intro_PrepTrainerPic: ; 61df, 61e0 (1:61df, 1:61e0)
 ShrinkFrame: ; 61f7 (1:61f7)
 	ld de, $9000
 	ld c, $31
-	predef DecompressPredef
+	predef DecompressGet2bpp
 	xor a
 	ld [hGraphicStartTile], a
 	hlcoord 6, 4
