@@ -1,7 +1,7 @@
 IntroSequence: ; 6241 (1:6241)
-	callab Copyright_GFPresents
+	callfar Copyright_GFPresents
 	jr c, StartTitleScreen
-	callab GoldSilverIntro
+	callfar GoldSilverIntro
 StartTitleScreen:
 	call InitTitleScreen
 	call DelayFrame
@@ -58,7 +58,7 @@ InitTitleScreen: ; 6291 (1:6291)
 	ld bc, $2000
 	xor a
 	call ByteFill
-	callba ClearAnimatedObjectBuffer
+	farcall ClearAnimatedObjectBuffer
 
 	ld hl, TitleScreenGFX1
 	ld de, $9000
@@ -237,7 +237,7 @@ TitleScreenFrame: ; 63da (1:63da)
 	call Function640f
 	ld a, $1
 	ld [hOAMUpdate], a
-	callba AnimatedObjects_PlayFrame
+	farcall AnimatedObjects_PlayFrame
 	xor a
 	ld [hOAMUpdate], a
 	call Function64b1
@@ -369,11 +369,11 @@ Function648b:
 	ret
 
 DeleteSaveData:
-	callba DeleteSaveData_
+	farcall DeleteSaveData_
 	jp Init
 
 ResetClock:
-	callba ResetClock_
+	farcall ResetClock_
 	jp Init
 
 Function64b1: ; 64b1 (1:64b1)

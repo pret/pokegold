@@ -41,7 +41,7 @@ Functionc6bc: ; c6bc (3:46bc)
 	inc bc
 	ld a, [hl]
 	ld [bc], a
-	callba Functionf900
+	farcall Functionf900
 	ret
 
 ComputeHPBarPixels: ; c6de (3:46de)

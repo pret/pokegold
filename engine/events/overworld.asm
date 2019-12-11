@@ -33,7 +33,7 @@ FieldMoveGetPartyNick: ; c74b (3:474b)
 
 FieldMoveEngineFlagCheck: ; c766 (3:4766)
 	ld b, CHECK_FLAG
-	callba EngineFlagAction ; same bank
+	farcall EngineFlagAction ; same bank
 	ld a, c
 	and a
 	jr nz, .asm_c774
@@ -53,7 +53,7 @@ FieldMoveBadgeCheck: ; c776 (3:4776)
 	ret
 
 .BadgeRequiredText:
-	text_jump BadgeRequiredText_
+	text_far BadgeRequiredText_
 	db "@"
 
 FieldMovePartyCheck: ; c787 (3:4787)
@@ -103,7 +103,7 @@ FieldMoveFailed: ; c7be (3:47be)
 	ret
 
 .CantUseHereText:
-	text_jump CantUseFieldMoveHereText_
+	text_far CantUseFieldMoveHereText_
 	db "@"
 
 CutFunction::
@@ -151,18 +151,18 @@ FailToCut:
 	ret
 
 Text_UsedCut:
-	text_jump Text_UsedCut_
+	text_far Text_UsedCut_
 	db "@"
 
 Text_NothingToCut:
-	text_jump Text_NothingToCut_
+	text_far Text_NothingToCut_
 	db "@"
 
 CheckMapForSomethingToCut: ; c813 (3:4813)
 	call GetFacingTileCoord
 	ld c, a
 	push de
-	callba CheckCutCollision
+	farcall CheckCutCollision
 	pop de
 	jr nc, .asm_c841
 	call GetBlockLocation
@@ -212,7 +212,7 @@ CutDownTreeOrGrass:
 	call DelayFrame
 	ld a, [wBuffer6]
 	ld e, a
-	callba OWCutAnimation
+	farcall OWCutAnimation
 	call BufferScreen
 	call GetMovementPermissions
 	ret
@@ -297,7 +297,7 @@ FlashFunction:
 
 CheckUseFlash: ; c8f1 (3:48f1)
 	ld de, ENGINE_ZEPHYRBADGE
-	callba FieldMoveBadgeCheck ; same bank
+	farcall FieldMoveBadgeCheck ; same bank
 	jr c, .asm_c90f
 	ld a, [wd56e]
 	cp $ff
@@ -328,8 +328,8 @@ Script_UseFlash:
 	end
 
 Text_UsedFlash:
-	text_jump Text_UsedFlash_
-	start_asm
+	text_far Text_UsedFlash_
+	text_asm
 	call WaitSFX
 	ld de, SFX_FLASH
 	call PlaySFX
@@ -422,15 +422,15 @@ UsedSurfScript:
 	end
 
 UsedSurfText:
-	text_jump UsedSurfText_
+	text_far UsedSurfText_
 	db "@"
 
 CantSurfText:
-	text_jump CantSurfText_
+	text_far CantSurfText_
 	db "@"
 
 AlreadySurfingText:
-	text_jump AlreadySurfingText_
+	text_far AlreadySurfingText_
 	db "@"
 
 GetSurfType: ; c9d7 (3:49d7)
@@ -513,7 +513,7 @@ AskSurfScript:
 	end
 
 AskSurfText:
-	text_jump AskSurfText_
+	text_far AskSurfText_
 	db "@"
 
 FlyFunction:
@@ -607,7 +607,7 @@ WaterfallFunction: ; caed
 
 TryWaterfall: ; caf6 (3:4af6)
 	ld de, ENGINE_RISINGBADGE
-	callba FieldMoveBadgeCheck ; same bank
+	farcall FieldMoveBadgeCheck ; same bank
 	ld a, $80
 	ret c
 	call CheckMapCanWaterfall
@@ -667,7 +667,7 @@ CheckContinueWaterfall: ;cb49
 	ret
 
 Text_UsedWaterfall:
-	text_jump Text_UsedWaterfall_
+	text_far Text_UsedWaterfall_
 	db "@"
 
 TryWaterfallOW:
@@ -696,7 +696,7 @@ Script_CantDoWaterfall:;cb87
 	jumptext Text_CantDoWaterfall
 
 Text_CantDoWaterfall:
-	text_jump Text_CantDoWaterfall_
+	text_far Text_CantDoWaterfall_
 	db "@"
 
 Script_AskWaterfall:
@@ -708,7 +708,7 @@ Script_AskWaterfall:
 	end
 
 Text_AskUseWaterfall:
-	text_jump Text_AskUseWaterfall_
+	text_far Text_AskUseWaterfall_
 	db "@"
 
 EscapeRopeFunction:
@@ -791,15 +791,15 @@ FailToEscapeFromDungeon:
 	ret
 
 Text_UsedDig: ; cc1f
-	text_jump Text_UsedDig_
+	text_far Text_UsedDig_
 	db "@"
 
 Text_UsedEscapeRope:
-	text_jump Text_UsedEscapeRope_
+	text_far Text_UsedEscapeRope_
 	db "@"
 
 Text_CantUseDigEscapeRopeHere:
-	text_jump Text_CantUseDigEscapeRopeHere_
+	text_far Text_CantUseDigEscapeRopeHere_
 	db "@"
 
 UsedEscapeRopeScript: ; cc2e	reloadmappart
@@ -887,11 +887,11 @@ FailTeleport:
 	ret
 
 Text_ReturnToLastMonCenter:
-	text_jump Text_ReturnToLastMonCenter_
+	text_far Text_ReturnToLastMonCenter_
 	db "@"
 
 Text_CantUseTeleportHere:
-	text_jump Text_CantUseTeleportHere_
+	text_far Text_CantUseTeleportHere_
 	db "@"
 
 TeleportScript: ; ccbe
@@ -937,7 +937,7 @@ Functionccf1: ; ccf1 (3:4cf1)
 	ret
 
 Text_AlreadyUsingStrength:
-	text_jump Text_AlreadyUsingStrength_
+	text_far Text_AlreadyUsingStrength_
 	db "@"
 
 asm_cd09
@@ -976,11 +976,11 @@ Script_UsedStrength:
 	end
 
 Text_UsedStrength: ; cd44
-	text_jump Text_UsedStrength_
+	text_far Text_UsedStrength_
 	db "@"
 
 Text_AllowedToMoveBoulders:
-	text_jump Text_AllowedToMoveBoulders_
+	text_far Text_AllowedToMoveBoulders_
 	db "@"
 
 AskStrengthScript: ; cd4e
@@ -1004,15 +1004,15 @@ AskStrengthScript: ; cd4e
 	end
 
 Text_AskStrength:
-	text_jump Text_AskStrength_
+	text_far Text_AskStrength_
 	db "@"
 
 Text_BouldersMayNowBeMoved:
-	text_jump Text_BouldersMayNowBeMoved_
+	text_far Text_BouldersMayNowBeMoved_
 	db "@"
 
 Text_MonMayBeAbleToMove:
-	text_jump Text_MonMayBeAbleToMove_
+	text_far Text_MonMayBeAbleToMove_
 	db "@"
 
 TryStrengthOW:
@@ -1083,7 +1083,7 @@ FailWhirlpool:
 	ret
 
 Text_UsedWhirlpool:
-	text_jump Text_UsedWhirlpool_
+	text_far Text_UsedWhirlpool_
 	db "@"
 
 TryWhirlpoolMenu: ; cde1 (3:4de1)
@@ -1138,7 +1138,7 @@ DisappearWhirlpool: ; 4e20
 	call OverworldTextModeSwitch
 	ld a, [wBuffer6]
 	ld e, a
-	callba PlayWhirlpoolSound
+	farcall PlayWhirlpoolSound
 	call BufferScreen
 	call GetMovementPermissions
 	ret
@@ -1169,7 +1169,7 @@ Script_MightyWhirlpool:
 	jumptext Text_MightyWhirlpool
 
 Text_MightyWhirlpool:
-	text_jump Text_MightyWhirlpool_
+	text_far Text_MightyWhirlpool_
 	db "@"
 
 Script_AskWhirlpoolOW: ; ce71
@@ -1181,7 +1181,7 @@ Script_AskWhirlpoolOW: ; ce71
 	end
 
 Text_AskWhirlpool: ; ce7b
-	text_jump Text_AskWhirlpool_
+	text_far Text_AskWhirlpool_
 	db "@"
 
 HeadbuttFunction:
@@ -1206,11 +1206,11 @@ TryHeadbuttFromMenu: ; ce89 (3:4e89)
 
 ; ceaa
 Text_DidAHeadbutt:
-	text_jump Text_DidAHeadbutt_
+	text_far Text_DidAHeadbutt_
 	db "@"
 
 Text_NothingFromHeadbutt:
-	text_jump Text_NothingFromHeadbutt_
+	text_far Text_NothingFromHeadbutt_
 	db "@"
 
 HeadbuttFromMenuScript:
@@ -1258,7 +1258,7 @@ AskHeadbuttScript:
 	end
 
 Text_AskHeadbutt: ; cee9
-	text_jump Text_AskHeadbutt_
+	text_far Text_AskHeadbutt_
 	db "@"
 
 	call TryRockSmashFromMenu
@@ -1283,7 +1283,7 @@ TryRockSmashFromMenu: ; cef7 (3:4ef7)
 	ret
 
 GetFacingObject: ; cf10 (3:4f10)
-	callba CheckFacingObject
+	farcall CheckFacingObject
 	jr nc, .asm_cf2f
 	ld a, [hObjectStructIndexBuffer]
 	call GetObjectStruct
@@ -1329,7 +1329,7 @@ RockSmashMovementData:
 	step_end
 
 Text_UsedRockSmash:
-	text_jump Text_UsedRockSmash_
+	text_far Text_UsedRockSmash_
 	db "@"
 ; cf60
 AskRockSmashScript:
@@ -1345,11 +1345,11 @@ AskRockSmashScript:
 	jumptext Text_MayBeBreakable
 
 Text_MayBeBreakable:
-	text_jump Text_MayBeBreakable_
+	text_far Text_MayBeBreakable_
 	db "@"
 
 Text_AskRockSmash:
-	text_jump Text_AskRockSmash_
+	text_far Text_AskRockSmash_
 	db "@"
 
 TryRockSmashOW: ; cf7f
@@ -1555,15 +1555,15 @@ PutTheRodAway: ; d096
 	ret
 
 Text_OhABite:
-	text_jump Text_OhABite_
+	text_far Text_OhABite_
 	db "@"
 
 Text_NotEvenANibble:
-	text_jump Text_NotEvenANibble_
+	text_far Text_NotEvenANibble_
 	db "@"
 
 Text_NothingHereToFish:
-	text_jump Text_NothingHereToFish_
+	text_far Text_NothingHereToFish_
 	db "@"
 
 BicycleFunction:
@@ -1694,15 +1694,15 @@ Script_CantGetOffBike: ; d17e
 	end
 
 Text_CantGetOffBike:
-	text_jump Text_CantGetOffBike_
+	text_far Text_CantGetOffBike_
 	db "@"
 
 Text_GotOnTheBike:
-	text_jump Text_GotOnTheBike_
+	text_far Text_GotOnTheBike_
 	db "@"
 
 Text_GotOffTheBike:
-	text_jump Text_GotOffTheBike_
+	text_far Text_GotOffTheBike_
 	db "@"
 
 
@@ -1747,12 +1747,12 @@ CheckMapForSomethingToCut_: ; d1c7
 	ret
 
 Text_AskCut:
-	text_jump Text_AskCut_
+	text_far Text_AskCut_
 	db "@"
 
 CantCutScript: ; d1da
 	jumptext Text_MonCanCutThis
 
 Text_MonCanCutThis:
-	text_jump Text_MonCanCutThis_
+	text_far Text_MonCanCutThis_
 	db "@"

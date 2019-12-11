@@ -148,7 +148,7 @@ CheckPokerusTick:
 	and a
 	jr z, .asm_118e6
 	ld b, a
-	callba ApplyPokerusTick ; same bank
+	farcall ApplyPokerusTick ; same bank
 .asm_118e6
 	xor a
 	ret
@@ -217,7 +217,7 @@ Function11934: ; 11934 (4:5934)
 	ld hl, wCurHPAnimMaxHP
 	call Function1182e
 	call CloseSRAM
-	callba Function2a4f6
+	farcall Function2a4f6
 .asm_1195e
 	ld a, BANK(sMysteryGiftTimer)
 	call OpenSRAM

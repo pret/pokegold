@@ -101,14 +101,14 @@ Init:: ; 5d1 (0:05d1)
 	ld h, $9c
 	call BlankBGMap
 
-	callab InitCGBPals
+	callfar InitCGBPals
 
 	ld a, $9c
 	ld [hBGMapAddress + 1], a
 	xor a
 	ld [hBGMapAddress], a
 
-	callba StartClock
+	farcall StartClock
 
 	ld a, SRAM_ENABLE
 	ld [MBC3SRamEnable], a

@@ -126,7 +126,7 @@ GeneratePartyMonStats:
 	push de
 	ld a, [wCurPartyLevel]
 	ld d, a
-	callab CalcExpAtLevel ; 14:5550
+	callfar CalcExpAtLevel ; 14:5550
 	pop de
 	ld a, [hPrintNum2]
 	ld [de], a
@@ -150,7 +150,7 @@ GeneratePartyMonStats:
 	and $f
 	jr z, .asm_d998
 	push hl
-	callba GetTrainerDVs ; 9:7271
+	farcall GetTrainerDVs ; 9:7271
 	pop hl
 	jr .asm_d9bb
 
@@ -295,7 +295,7 @@ GeneratePartyMonStats:
 	ld bc, PARTYMON_STRUCT_LENGTH
 	call AddNTimes
 	predef GetUnownLetter
-	callab UpdateUnownDex
+	callfar UpdateUnownDex
 .asm_da71
 	scf
 	ret
@@ -396,7 +396,7 @@ AddTempmonToParty: ; da9c (3:5a9c)
 	ld bc, PARTYMON_STRUCT_LENGTH
 	call AddNTimes
 	predef GetUnownLetter
-	callab UpdateUnownDex
+	callfar UpdateUnownDex
 	ld a, [wFirstUnownSeen]
 	and a
 	jr nz, .asm_db43
@@ -545,7 +545,7 @@ SentGetPkmnIntoFromBox: ; db45 (3:5b45)
 	add $2
 	ld [wMonType], a
 	predef CopyPkmnToTempMon
-	callab CalcLevel
+	callfar CalcLevel
 	ld a, d
 	ld [wCurPartyLevel], a
 	pop hl
@@ -649,7 +649,7 @@ Functiondcbc: ; dcbc (3:5cbc)
 	push bc
 	push hl
 	push de
-	callba GetMaxPPOfMove ; same bank
+	farcall GetMaxPPOfMove ; same bank
 	pop de
 	pop hl
 	ld a, [wd151]
@@ -780,10 +780,10 @@ Functiondd6a: ; dd6a (3:5d6a)
 	ld a, [wPartyCount]
 	dec a
 	ld [wCurPartyMon], a
-	callba Functionc6bc ; same bank
+	farcall Functionc6bc ; same bank
 	ld a, [wCurPartyLevel]
 	ld d, a
-	callab CalcExpAtLevel
+	callfar CalcExpAtLevel
 	pop bc
 	ld hl, $8
 	add hl, bc
@@ -884,7 +884,7 @@ SentPkmnIntoBox: ; de74 (3:5e74)
 	push de
 	ld a, [wCurPartyLevel]
 	ld d, a
-	callab CalcExpAtLevel
+	callfar CalcExpAtLevel
 	pop de
 	ld a, [hQuotient]
 	ld [de], a
@@ -930,7 +930,7 @@ SentPkmnIntoBox: ; de74 (3:5e74)
 	jr nz, .asm_df26
 	ld hl, sBoxMon1DVs
 	predef GetUnownLetter
-	callab UpdateUnownDex
+	callfar UpdateUnownDex
 .asm_df26
 	ld hl, sBoxMon1Moves
 	ld de, wTempMonMoves
@@ -995,8 +995,8 @@ Functiondf65: ; df65 (3:5f65)
 GiveEgg: ; df92 (3:5f92)
 	ld a, [wCurPartySpecies]
 	push af
-	callab GetPreEvolution
-	callab GetPreEvolution
+	callfar GetPreEvolution
+	callfar GetPreEvolution
 	ld a, [wCurPartySpecies]
 	dec a
 	push af
@@ -1510,7 +1510,7 @@ GivePoke: ; Give a Pokemon from script
 .asm_e2c9
 	ld a, [wCurPartySpecies]
 	ld [wTempEnemyMonSpecies], a
-	callab LoadEnemyMon
+	callfar LoadEnemyMon
 	call SentPkmnIntoBox
 	jp nc, Functione3af
 	ld a, BOXMON
@@ -1596,7 +1596,7 @@ GivePoke: ; Give a Pokemon from script
 	jr .asm_e38d
 
 .asm_e381
-	callab Functionc7cd0
+	callfar Functionc7cd0
 	pop de
 	jr c, .asm_e38d
 	call InitNickname
@@ -1625,7 +1625,7 @@ Functione3af: ; e3af (3:63af)
 	ret
 
 TextJump_WasSentToBillsPC:
-	text_jump Text_WasSentToBillsPC
+	text_far Text_WasSentToBillsPC
 	db "@"
 
 InitNickname: ; e3b9 (3:63b9)
@@ -1635,7 +1635,7 @@ InitNickname: ; e3b9 (3:63b9)
 	pop de
 	push de
 	ld b, $0
-	callba NamingScreen
+	farcall NamingScreen
 	pop hl
 	ld de, wStringBuffer1
 	call InitName

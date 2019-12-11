@@ -44,7 +44,7 @@ Multiply::
 	push hl
 	push bc
 
-	callab Multiply_ ; 1:67bd
+	callfar Multiply_ ; 1:67bd
 
 	pop bc
 	pop hl

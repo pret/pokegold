@@ -420,7 +420,7 @@ GetBreedMon1LevelGrowth:
 	ld de, wTempMonSpecies
 	ld bc, $20
 	call CopyBytes
-	callab CalcLevel
+	callfar CalcLevel
 	ld a, [wBreedMon1Level]
 	ld b, a
 	ld a, d
@@ -434,7 +434,7 @@ GetBreedMon2LevelGrowth:
 	ld de, wTempMon
 	ld bc, $20
 	call CopyBytes
-	callab CalcLevel
+	callfar CalcLevel
 	ld a, [wBreedMon2Level]
 	ld b, a
 	ld a, d
@@ -573,8 +573,8 @@ BugContest_SetCaughtContestMon:
 	and a
 	jr z, .asm_e76e
 	ld [wd151], a
-	callba DisplayAlreadyCaughtText
-	callba DisplayCaughtContestMonStats
+	farcall DisplayAlreadyCaughtText
+	farcall DisplayCaughtContestMonStats
 	lb bc, 14, 7
 	call PlaceYesNoBox
 	ret c
@@ -603,7 +603,7 @@ GenerateBugContestMonStats: ; e781 (3:6781)
 
 Text_CaughtBugMon:
 	; Caught @ !
-	text_jump Text_CaughtBugMon_
+	text_far Text_CaughtBugMon_
 	db "@"
 
 INCLUDE "items/item_effects.asm"
@@ -630,7 +630,7 @@ KnowsMove:
 	ret
 
 Text_KnowsMove:
-	text_jump Text_KnowsMove_
+	text_far Text_KnowsMove_
 	db "@"
 
 SECTION "bank4", ROMX, BANK[$4]
@@ -1288,7 +1288,7 @@ EnableScriptMode:: ; 96b89
 ScriptEvents:: ; 96b91
 	dr $96b91, $97365
 
-CallCallback:: ; 97365
+Callfarcallck:: ; 97365
 	dr $97365, $97a59
 
 WarpToSpawnPoint:

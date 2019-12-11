@@ -199,10 +199,10 @@ LakeOfRageMagikarpHouseUnusedRecordText:
 	text "CURRENT RECORD"
 
 	para "@"
-	text_from_ram wStringBuffer3
+	text_ram wStringBuffer3
 	text " caught by"
 	line "@"
-	text_from_ram wStringBuffer4
+	text_ram wStringBuffer4
 	db "@@"
 
 LakeOfRageMagikarpHouse_MapEvents:

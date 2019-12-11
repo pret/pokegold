@@ -1082,7 +1082,7 @@ GetTMHMName:: ; 36cc (0:36cc)
 	push de
 	ld a, [wd151]
 	ld c, a
-	callab GetTMHMNumber
+	callfar GetTMHMNumber
 	pop de
 	pop af
 	ld a, c
@@ -1230,7 +1230,7 @@ StoneQueueWarpAction:: ; 37b9 (0:37b9)
 	call IsThisObjectInTheStoneTable
 	jr nc, .asm_37dc
 	call CallMapScript
-	callba EnableScriptMode
+	farcall EnableScriptMode
 	scf
 	ret
 
@@ -1715,7 +1715,7 @@ GetNick::
 	ld bc, $b
 	call CopyBytes
 	pop de
-	callab CheckNickErrors
+	callfar CheckNickErrors
 	pop bc
 	pop hl
 	ret

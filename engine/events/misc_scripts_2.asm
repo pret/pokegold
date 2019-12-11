@@ -6,12 +6,12 @@ RepelWoreOffScript::
 	end
 
 .RepelWoreOffText:
-	text_jump _RepelWoreOffText
+	text_far _RepelWoreOffText
 	db "@"
 
 HiddenItemScript::
 	opentext
-	copybytetovar $CF2B
+	copybytetovar wcf2b
 	itemtotext MEM_BUFFER_0, USE_SCRIPT_VAR
 	writetext .PlayerFoundItemText
 	giveitem ITEM_FROM_MEM
@@ -31,11 +31,11 @@ HiddenItemScript::
 	end
 
 .PlayerFoundItemText:
-	text_jump _PlayerFoundItemText
+	text_far _PlayerFoundItemText
 	db "@"
 
 .ButNoSpaceText:
-	text_jump _ButNoSpaceText
+	text_far _ButNoSpaceText
 	db "@"
 
 SetMemEvent:

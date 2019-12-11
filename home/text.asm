@@ -315,7 +315,7 @@ PlaceEnemysName:: ; 10fb (0:10fb)
 	call PlaceString
 
 	push bc
-	callab Battle_GetTrainerName
+	callfar Battle_GetTrainerName
 	pop hl
 
 	ld de, wStringBuffer1
@@ -483,7 +483,7 @@ NullChar:: ; 120c (0:120c)
 	ret
 
 .ErrorText
-	deciram hObjectStructIndexBuffer, 1, 2
+	text_decimal hObjectStructIndexBuffer, 1, 2
 	text "エラー"
 	done
 
@@ -525,12 +525,12 @@ Diacritic:: ; 124a (0:124a)
 
 LoadBlinkingCursor:: ; 1255 (0:1255)
 	ld a, "▼"
-	Coorda 18, 17
+	ldcoord_a 18, 17
 	ret
 
 UnloadBlinkingCursor:: ; 125b (0:125b)
 	ld a, "─"
-	Coorda 18, 17
+	ldcoord_a 18, 17
 	ret
 
 FarString::
@@ -802,14 +802,14 @@ Text_TX_CRY
 	pop bc
 	ret
 
-TextSFX:: ; 13ad (0:13ad)
-	dbw TX_SOUND_0B, SFX_DEX_FANFARE_50_79
-	dbw TX_SOUND_12, SFX_FANFARE
-	dbw TX_SOUND_0E, SFX_DEX_FANFARE_20_49
-	dbw TX_SOUND_0F, SFX_ITEM
-	dbw TX_SOUND_10, SFX_CAUGHT_MON
-	dbw TX_SOUND_11, SFX_DEX_FANFARE_80_109
-	dbw TX_SOUND_13, SFX_SLOT_MACHINE_START
+TextSFX::
+	dbw TX_SOUND_DEX_FANFARE_50_79,  SFX_DEX_FANFARE_50_79
+	dbw TX_SOUND_FANFARE,            SFX_FANFARE
+	dbw TX_SOUND_DEX_FANFARE_20_49,  SFX_DEX_FANFARE_20_49
+	dbw TX_SOUND_ITEM,               SFX_ITEM
+	dbw TX_SOUND_CAUGHT_MON,         SFX_CAUGHT_MON
+	dbw TX_SOUND_DEX_FANFARE_80_109, SFX_DEX_FANFARE_80_109
+	dbw TX_SOUND_SLOT_MACHINE_START, SFX_SLOT_MACHINE_START
 	db -1
 
 Text_TX_DOTS:: ; 13c3 (0:13c3)

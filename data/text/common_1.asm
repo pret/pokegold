@@ -6,14 +6,14 @@ _FruitBearingTreeText::
 _HeyItsFruitText::
 	text "Hey! It's"
 	line "@"
-	text_from_ram wStringBuffer3
+	text_ram wStringBuffer3
 	text "!"
 	done
 
 _ObtainedFruitText::
 	text "Obtained"
 	line "@"
-	text_from_ram wStringBuffer3
+	text_ram wStringBuffer3
 	text "!"
 	done
 
@@ -28,67 +28,67 @@ _NothingHereText::
 	done
 
 UnknownText_0x1bc0a2::
-	text_from_ram wStringBuffer1
+	text_ram wStringBuffer1
 	text_start
 	line "recovered @"
-	deciram wLinkBuffer, 2, 3
+	text_decimal wLinkBuffer, 2, 3
 	text "HP!"
 	done
 
 UnknownText_0x1bc0bb::
-	text_from_ram wStringBuffer1
+	text_ram wStringBuffer1
 	text "'s"
 	line "cured of poison."
 	done
 
 UnknownText_0x1bc0d2::
-	text_from_ram wStringBuffer1
+	text_ram wStringBuffer1
 	text "'s"
 	line "rid of paralysis."
 	done
 
 UnknownText_0x1bc0ea::
-	text_from_ram wStringBuffer1
+	text_ram wStringBuffer1
 	text "'s"
 	line "burn was healed."
 	done
 
 UnknownText_0x1bc101::
-	text_from_ram wStringBuffer1
+	text_ram wStringBuffer1
 	text_start
 	line "was defrosted."
 	done
 
 UnknownText_0x1bc115::
-	text_from_ram wStringBuffer1
+	text_ram wStringBuffer1
 	text_start
 	line "woke up."
 	done
 
 UnknownText_0x1bc123::
-	text_from_ram wStringBuffer1
+	text_ram wStringBuffer1
 	text "'s"
 	line "health returned."
 	done
 
 UnknownText_0x1bc13a::
-	text_from_ram wStringBuffer1
+	text_ram wStringBuffer1
 	text_start
 	line "is revitalized."
 	done
 
 UnknownText_0x1bc14f::
-	text_from_ram wStringBuffer1
+	text_ram wStringBuffer1
 	text " grew to"
 	line "level @"
-	deciram wCurPartyLevel, 1, 3
+	text_decimal wCurPartyLevel, 1, 3
 	text "!@"
 	sound_dex_fanfare_50_79
-	text_waitbutton
+	text_promptbutton
 	db "@"
 
 UnknownText_0x1bc16e::
-	text_from_ram wStringBuffer1
+	text_ram wStringBuffer1
 	text " came"
 	line "to its senses."
 	done
@@ -153,17 +153,17 @@ Text_EnemyWithdrew::
 	text "<ENEMY>"
 	line "withdrew"
 	cont "@"
-	text_from_ram wEnemyMonNick
+	text_ram wEnemyMonNick
 	text "!"
 	prompt
 
 Text_EnemyUsedOn::
 	text "<ENEMY>"
 	line "used @"
-	text_from_ram wMonOrItemNameBuffer
+	text_ram wMonOrItemNameBuffer
 	text_start
 	cont "on @"
-	text_from_ram wEnemyMonNick
+	text_ram wEnemyMonNick
 	text "!"
 	prompt
 
@@ -179,7 +179,7 @@ Text_ThatItemCantBePutInThePack::
 
 Text_TheItemWasPutInThePack::
 	text "The @"
-	text_from_ram wStringBuffer1
+	text_ram wStringBuffer1
 	text_start
 	line "was put in the"
 	cont "PACK."
@@ -206,7 +206,7 @@ UnknownText_0x1bd05e::
 UnknownText_0x1bd07f::
 	text "Will you play with"
 	line "@"
-	text_from_ram wStringBuffer2
+	text_ram wStringBuffer2
 	text "?"
 	done
 
@@ -223,7 +223,7 @@ Text_BreedingIsNotPossible::
 UnknownText_0x1bd0d8::
 	text "The compatibility"
 	line "is @"
-	deciram wTempNumBuffer, 1, 3
+	text_decimal wTempNumBuffer, 1, 3
 	text "."
 	cont "Should they breed?"
 	done
@@ -241,7 +241,7 @@ UnknownText_0x1bd11c::
 UnknownText_0x1bd131::
 	text "Test event"
 	line "@"
-	deciram wStringBuffer2, 1, 2
+	text_decimal wStringBuffer2, 1, 2
 	text "?"
 	done
 
@@ -298,7 +298,7 @@ UnknownText_0x1bc4b2::
 UnknownText_0x1bc4d7::
 	text "Put away the"
 	line "@"
-	text_from_ram wStringBuffer3
+	text_ram wStringBuffer3
 	text "."
 	prompt
 
@@ -310,19 +310,19 @@ UnknownText_0x1bc4ec::
 UnknownText_0x1bc509::
 	text "Set up the"
 	line "@"
-	text_from_ram wStringBuffer3
+	text_ram wStringBuffer3
 	text "."
 	prompt
 
 UnknownText_0x1bc51c::
 	text "Put away the"
 	line "@"
-	text_from_ram wStringBuffer3
+	text_ram wStringBuffer3
 	text_start
 
 	para "and set up the"
 	line "@"
-	text_from_ram wStringBuffer4
+	text_ram wStringBuffer4
 	text "."
 	prompt
 
@@ -353,7 +353,7 @@ UnknownText_0x1bc5b3::
 UnknownText_0x1bc5d7::
 	text "It's an adorable"
 	line "@"
-	text_from_ram wStringBuffer3
+	text_ram wStringBuffer3
 	text "."
 	done
 
@@ -394,10 +394,10 @@ UnknownText_0x1bc6c7::
 	done
 
 UnknownText_0x1bc6e9::
-	text_from_ram wPlayerTrademonSpeciesName
+	text_ram wPlayerTrademonSpeciesName
 	text " was"
 	line "sent to @"
-	text_from_ram wOTTrademonSenderName
+	text_ram wOTTrademonSenderName
 	text "."
 	done
 
@@ -406,53 +406,53 @@ UnknownText_0x1bc701::
 	done
 
 UnknownText_0x1bc703::
-	text_from_ram wOTTrademonSenderName
+	text_ram wOTTrademonSenderName
 	text " bids"
 	line "farewell to"
 	done
 
 UnknownText_0x1bc719::
-	text_from_ram wOTTrademonSpeciesName
+	text_ram wOTTrademonSpeciesName
 	text "."
 	done
 
 UnknownText_0x1bc71f::
 	text "Take good care of"
 	line "@"
-	text_from_ram wOTTrademonSpeciesName
+	text_ram wOTTrademonSpeciesName
 	text "."
 	done
 
 UnknownText_0x1bc739::
 	text "For @"
-	text_from_ram wPlayerTrademonSenderName
+	text_ram wPlayerTrademonSenderName
 	text "'s"
 	line "@"
-	text_from_ram wPlayerTrademonSpeciesName
+	text_ram wPlayerTrademonSpeciesName
 	text ","
 	done
 
 UnknownText_0x1bc74c::
-	text_from_ram wOTTrademonSenderName
+	text_ram wOTTrademonSenderName
 	text " sends"
 	line "@"
-	text_from_ram wOTTrademonSpeciesName
+	text_ram wOTTrademonSpeciesName
 	text "."
 	done
 
 UnknownText_0x1bc75e::
-	text_from_ram wOTTrademonSenderName
+	text_ram wOTTrademonSenderName
 	text " will"
 	line "trade @"
-	text_from_ram wOTTrademonSpeciesName
+	text_ram wOTTrademonSpeciesName
 	db "@@"
 
 UnknownText_0x1bc774::
 	text "for @"
-	text_from_ram wPlayerTrademonSenderName
+	text_ram wPlayerTrademonSenderName
 	text "'s"
 	line "@"
-	text_from_ram wPlayerTrademonSpeciesName
+	text_ram wPlayerTrademonSpeciesName
 	text "."
 	done
 
@@ -476,7 +476,7 @@ _OPT_IntroText3::
 _OPT_OakText1::
 	text_start
 	line "OAK: @"
-	text_from_ram wMonOrItemNameBuffer
+	text_ram wMonOrItemNameBuffer
 	db "@@"
 
 _OPT_OakText2::
@@ -487,14 +487,14 @@ _OPT_OakText2::
 _OPT_OakText3::
 	text_start
 	line "@"
-	text_from_ram wStringBuffer1
+	text_ram wStringBuffer1
 	text "."
 	done
 
 _OPT_MaryText1::
 	text_start
 	line "MARY: @"
-	text_from_ram wStringBuffer1
+	text_ram wStringBuffer1
 	text "'s"
 	done
 
@@ -665,7 +665,7 @@ _OPT_PokemonChannelText::
 _PokedexShowText::
 	text_start
 	line "@"
-	text_from_ram wStringBuffer1
+	text_ram wStringBuffer1
 	db "@"
 
 ; Pokémon Music Channel / Pokémusic
@@ -698,7 +698,7 @@ _FernIntroText2::
 _BenFernText1::
 	text_start
 	line "Today's @"
-	current_day
+	text_today
 	text ","
 	done
 
@@ -762,8 +762,8 @@ _LC_Text7::
 _LC_Text8::
 	text_start
 	line "Number is @"
-	interpret_data
-	text_from_ram wStringBuffer1
+	text_pause
+	text_ram wStringBuffer1
 	text "!"
 	done
 
@@ -812,9 +812,9 @@ _PnP_Text3::
 _PnP_Text4::
 	text_start
 	line "@"
-	text_from_ram wStringBuffer2
+	text_ram wStringBuffer2
 	text " @"
-	text_from_ram wStringBuffer1
+	text_ram wStringBuffer1
 	db "@@"
 
 _PnP_cute::
@@ -900,7 +900,7 @@ _PnP_odd::
 _PnP_Text5::
 	text_start
 	line "@"
-	text_from_ram wStringBuffer1
+	text_ram wStringBuffer1
 	db "@@"
 
 _RocketRadioText1::
@@ -936,28 +936,28 @@ _RocketRadioText6::
 _RocketRadioText7::
 	text_start
 	line "GIOVANNI! @"
-	interpret_data
+	text_pause
 	text "Can you"
 	done
 
 _RocketRadioText8::
 	text_start
 	line "hear?@"
-	interpret_data
+	text_pause
 	text " We did it!"
 	done
 
 _RocketRadioText9::
 	text_start
 	line "@"
-	interpret_data
+	text_pause
 	text "Where is our Boss?"
 	done
 
 _RocketRadioText10::
 	text_start
 	line "@"
-	interpret_data
+	text_pause
 	text "Is he listening?"
 	done
 
@@ -984,7 +984,7 @@ _RepelWoreOffText::
 _PlayerFoundItemText::
 	text "<PLAYER> found"
 	line "@"
-	text_from_ram wStringBuffer3
+	text_ram wStringBuffer3
 	text "."
 	done
 
@@ -996,10 +996,10 @@ _ButNoSpaceText::
 UnknownText_0x1bd34b::
 	text "I just saw some"
 	line "rare @"
-	text_from_ram wStringBuffer1
+	text_ram wStringBuffer1
 	text " in"
 	cont "@"
-	text_from_ram wStringBuffer2
+	text_ram wStringBuffer2
 	text "."
 
 	para "I'll call you if I"
@@ -1013,13 +1013,13 @@ UnknownText_0x1bd39e::
 	done
 
 ReceivedMysteryGiftText_::
-	text_from_ram wPlayerName
+	text_ram wPlayerName
 	text " received"
 	line "@"
-	text_from_ram wStringBuffer1
+	text_ram wStringBuffer1
 	text "!@"
 	sound_item
-	text_waitbutton
+	text_promptbutton
 	db "@"
 
 NoCoinsText_::
@@ -1039,27 +1039,27 @@ UnknownText_0x1bd407::
 UnknownText_0x1bd429::
 	text "<PLAYER> traded"
 	line "@"
-	text_from_ram wStringBuffer2
+	text_ram wStringBuffer2
 	text " for"
 	cont "@"
-	text_from_ram wMonOrItemNameBuffer
+	text_ram wMonOrItemNameBuffer
 	text ".@@"
 
 UnknownText_0x1bd445::
 	sound_dex_fanfare_80_109
-	interpret_data
+	text_pause
 	db "@"
 
 UnknownText_0x1bd449::
 	text "I collect #MON."
 	line "Do you have"
 	cont "@"
-	text_from_ram wStringBuffer1
+	text_ram wStringBuffer1
 	text "?"
 
 	para "Want to trade it"
 	line "for my @"
-	text_from_ram wStringBuffer2
+	text_ram wStringBuffer2
 	text "?"
 	done
 
@@ -1071,7 +1071,7 @@ UnknownText_0x1bd48c::
 UnknownText_0x1bd4aa::
 	text "Huh? That's not"
 	line "@"
-	text_from_ram wStringBuffer1
+	text_ram wStringBuffer1
 	text ". "
 	cont "What a letdown…"
 	done
@@ -1079,7 +1079,7 @@ UnknownText_0x1bd4aa::
 UnknownText_0x1bd4d2::
 	text "Yay! I got myself"
 	line "@"
-	text_from_ram wStringBuffer1
+	text_ram wStringBuffer1
 	text "!"
 	cont "Thanks!"
 	done
@@ -1087,7 +1087,7 @@ UnknownText_0x1bd4d2::
 UnknownText_0x1bd4f4::
 	text "Hi, how's my old"
 	line "@"
-	text_from_ram wStringBuffer2
+	text_ram wStringBuffer2
 	text " doing?"
 	done
 
@@ -1097,12 +1097,12 @@ UnknownText_0x1bd512::
 
 	para "If you have"
 	line "@"
-	text_from_ram wStringBuffer1
+	text_ram wStringBuffer1
 	text ", would"
 
 	para "you trade it for"
 	line "my @"
-	text_from_ram wStringBuffer2
+	text_ram wStringBuffer2
 	text "?"
 	done
 
@@ -1117,7 +1117,7 @@ UnknownText_0x1bd565::
 UnknownText_0x1bd5a1::
 	text "You don't have"
 	line "@"
-	text_from_ram wStringBuffer1
+	text_ram wStringBuffer1
 	text "? That's"
 	cont "too bad, then."
 	done
@@ -1127,31 +1127,31 @@ UnknownText_0x1bd5cc::
 
 	para "I finally got"
 	line "@"
-	text_from_ram wStringBuffer1
+	text_ram wStringBuffer1
 	text "."
 	done
 
 UnknownText_0x1bd5f4::
 	text "Hi! The @"
-	text_from_ram wMonOrItemNameBuffer
+	text_ram wMonOrItemNameBuffer
 	text_start
 	line "you traded me is"
 	cont "doing great!"
 	done
 
 UnknownText_0x1bd621::
-	text_from_ram wMonOrItemNameBuffer
+	text_ram wMonOrItemNameBuffer
 	text "'s cute,"
 	line "but I don't have"
 
 	para "it. Do you have"
 	line "@"
-	text_from_ram wStringBuffer1
+	text_ram wStringBuffer1
 	text "?"
 
 	para "Want to trade it"
 	line "for my @"
-	text_from_ram wStringBuffer2
+	text_ram wStringBuffer2
 	text "?"
 	done
 
@@ -1163,7 +1163,7 @@ UnknownText_0x1bd673::
 UnknownText_0x1bd696::
 	text "That's not"
 	line "@"
-	text_from_ram wStringBuffer1
+	text_ram wStringBuffer1
 	text "."
 
 	para "Please trade with"
@@ -1174,19 +1174,19 @@ UnknownText_0x1bd6cd::
 	text "Wow! Thank you!"
 	line "I always wanted"
 	cont "@"
-	text_from_ram wMonOrItemNameBuffer
+	text_ram wMonOrItemNameBuffer
 	text "!"
 	done
 
 UnknownText_0x1bd6f5::
 	text "How is that"
 	line "@"
-	text_from_ram wStringBuffer2
+	text_ram wStringBuffer2
 	text " I"
 	cont "traded you doing?"
 
 	para "Your @"
-	text_from_ram wMonOrItemNameBuffer
+	text_ram wMonOrItemNameBuffer
 	text "'s"
 	line "so cute!"
 	done
@@ -1396,7 +1396,7 @@ _LastHealthyMonText::
 _IllRaiseYourMonText::
 	text "OK. I'll raise"
 	line "your @"
-	text_from_ram wStringBuffer1
+	text_ram wStringBuffer1
 	text "."
 	prompt
 
@@ -1409,25 +1409,25 @@ _AreWeGeniusesText::
 	text "Are we geniuses or"
 	line "what? Want to see"
 	cont "your @"
-	text_from_ram wStringBuffer1
+	text_ram wStringBuffer1
 	text "?"
 	done
 
 _YourMonHasGrownText::
 	text "Your @"
-	text_from_ram wStringBuffer1
+	text_ram wStringBuffer1
 	text_start
 	line "has grown a lot."
 
 	para "By level, it's"
 	line "grown by @"
-	deciram wStringBuffer2 + 1, 1, 3
+	text_decimal wStringBuffer2 + 1, 1, 3
 	text "."
 
 	para "If you want your"
 	line "#MON back, it"
 	cont "will cost ¥@"
-	deciram wStringBuffer2 + 2, 3, 4
+	text_decimal wStringBuffer2 + 2, 3, 4
 	text "."
 	done
 
@@ -1439,14 +1439,14 @@ _PerfectHeresYourMonText::
 _GotBackMonText::
 	text "<PLAYER> got back"
 	line "@"
-	text_from_ram wStringBuffer1
+	text_ram wStringBuffer1
 	text "."
 	prompt
 
 _BackAlreadyText::
 	text "Huh? Back already?"
 	line "Your @"
-	text_from_ram wStringBuffer1
+	text_ram wStringBuffer1
 	text_start
 	para "needs a little"
 	line "more time with us."
@@ -1563,7 +1563,7 @@ UnknownText_0x1c00a0::
 
 UnknownText_0x1c00cd::
 	text "Hm… @"
-	text_from_ram wStringBuffer1
+	text_ram wStringBuffer1
 	text "…"
 	line "That's a fairly"
 	cont "decent name."
@@ -1595,13 +1595,13 @@ UnknownText_0x1c019e::
 	done
 
 	text "Hm… @"
-	text_from_ram wStringBuffer1
+	text_ram wStringBuffer1
 	text "?"
 	line "What a great name!"
 	cont "It's perfect."
 
 	para "Treat @"
-	text_from_ram wStringBuffer1
+	text_ram wStringBuffer1
 	text_start
 	line "with loving care."
 	done
@@ -1625,57 +1625,57 @@ UnknownText_0x1c0272::
 	text "All right. This"
 	line "#MON is now"
 	cont "named @"
-	text_from_ram wStringBuffer1
+	text_ram wStringBuffer1
 	text "."
 	prompt
 
 Text_Gained::
-	text_from_ram wStringBuffer1
+	text_ram wStringBuffer1
 	text " gained@@"
 
 Text_ABoostedStringBuffer2ExpPoints::
 	text_start
 	line "a boosted"
 	cont "@"
-	deciram wStringBuffer2, 2, 4
+	text_decimal wStringBuffer2, 2, 4
 	text " EXP. Points!"
 	prompt
 
 Text_StringBuffer2ExpPoints::
 	text_start
 	line "@"
-	deciram wStringBuffer2, 2, 4
+	text_decimal wStringBuffer2, 2, 4
 	text " EXP. Points!"
 	prompt
 
 Text_GoMon::
 	text "Go! @"
-	text_from_ram wBattleMonNick
+	text_ram wBattleMonNick
 	text "!"
 	done
 
 Text_DoItMon::
 	text "Do it! @"
-	text_from_ram wBattleMonNick
+	text_ram wBattleMonNick
 	text "!"
 	done
 
 Text_GoForItMon::
 	text "Go for it,"
 	line "@"
-	text_from_ram wBattleMonNick
+	text_ram wBattleMonNick
 	text "!"
 	done
 
 Text_YourFoesWeakGetmMon::
 	text "Your foe's weak!"
 	line "Get'm, @"
-	text_from_ram wBattleMonNick
+	text_ram wBattleMonNick
 	text "!"
 	done
 
 Text_ThatsEnoughComeBack::
-	text_from_ram wBattleMonNick
+	text_ram wBattleMonNick
 	text ",@@"
 	text " that's"
 	line "enough! Come back!"
@@ -1699,7 +1699,7 @@ Text_ComeBack::
 BattleText_PlayerPickedUpPayDayMoney:
 	text "<PLAYER> picked up"
 	line "¥@"
-	deciram wPayDayMoney, 3, 6
+	text_decimal wPayDayMoney, 3, 6
 	text "!"
 	prompt
 
@@ -1714,26 +1714,26 @@ UnknownText_0x1c0384::
 UnknownText_0x1c0396::
 	text "It contained"
 	line "@"
-	text_from_ram wStringBuffer2
+	text_ram wStringBuffer2
 	text "."
 
 	para "Teach @"
-	text_from_ram wStringBuffer2
+	text_ram wStringBuffer2
 	text_start
 	line "to a #MON?"
 	done
 
 UnknownText_0x1c03c2::
-	text_from_ram wStringBuffer2
+	text_ram wStringBuffer2
 	text " is"
 	line "not compatible"
 	cont "with @"
-	text_from_ram wStringBuffer1
+	text_ram wStringBuffer1
 	text "."
 
 	para "It can't learn"
 	line "@"
-	text_from_ram wStringBuffer2
+	text_ram wStringBuffer2
 	text "."
 	prompt
 
@@ -1741,14 +1741,14 @@ UnknownText_0x1c03fa::
 	text "You have no room"
 	line "for any more"
 	cont "@"
-	text_from_ram wStringBuffer1
+	text_ram wStringBuffer1
 	text "S."
 	prompt
 
 UnknownText_0x1c0421::
 	text "You received"
 	line "@"
-	text_from_ram wStringBuffer1
+	text_ram wStringBuffer1
 	text "!"
 	prompt
 
@@ -1783,21 +1783,21 @@ UnknownText_0x1c04c6::
 	prompt
 
 UnknownText_0x1c04e9::
-	text_from_ram wMysteryGiftPartnerName
+	text_ram wMysteryGiftPartnerName
 	text " sent"
 	line "@"
-	text_from_ram wStringBuffer1
+	text_ram wStringBuffer1
 	text "."
 	prompt
 
 UnknownText_0x1c04fa::
-	text_from_ram wMysteryGiftPartnerName
+	text_ram wMysteryGiftPartnerName
 	text " sent"
 	line "@"
-	text_from_ram wStringBuffer1
+	text_ram wStringBuffer1
 	text_start
 	cont "to @"
-	text_from_ram wMysteryGiftPlayerName
+	text_ram wMysteryGiftPlayerName
 	text "'s home."
 	prompt
 
@@ -1812,7 +1812,7 @@ CantUseFieldMoveHereText_::
 	prompt
 
 Text_UsedCut_::
-	text_from_ram wStringBuffer2
+	text_ram wStringBuffer2
 	text " used"
 	line "CUT!"
 	prompt
@@ -1825,11 +1825,11 @@ Text_NothingToCut_::
 Text_UsedFlash_::
 	text "A blinding FLASH"
 	line "lights the area!@"
-	text_waitbutton
+	text_promptbutton
 	db "@@"
 
 UsedSurfText_::
-	text_from_ram wStringBuffer2
+	text_ram wStringBuffer2
 	text " used"
 	line "SURF!"
 	done

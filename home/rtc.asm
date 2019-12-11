@@ -14,9 +14,9 @@ RTC:: ; 343
 	ret z
 
 TimeOfDayPals:: ; 352
-	callab _TimeOfDayPals
+	callfar _TimeOfDayPals
 	ret
 
 UpdateTimePals:: ; 359
-	callab _UpdateTimePals
+	callfar _UpdateTimePals
 	ret

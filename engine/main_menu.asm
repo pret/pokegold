@@ -177,7 +177,7 @@ Function5b5b: ; 5b5b (1:5b5b)
 	decoord 4, 16
 	ld a, [hHours]
 	ld c, a
-	callba PrintHour
+	farcall PrintHour
 	ld [hl], $9c
 	inc hl
 	ld de, hMinutes
@@ -198,7 +198,7 @@ Function5b9c: ; 5b9c (1:5b9c)
 	db "TIME NOT SET@"
 
 .UnusedText
-	text_jump _ClockTimeUnknownText
+	text_far _ClockTimeUnknownText
 	db "@"
 
 Function5bb8: ; 5bb8 (1:5bb8)
@@ -238,12 +238,12 @@ Function5bf7: ; 5bf7 (1:5bf7)
 
 MainMenu_MysteryGift:
 	call UpdateTime
-	callba Function11934
-	callba Function29dff
+	farcall Function11934
+	farcall Function29dff
 	ret
 
 MainMenu_Options:
-	callba OptionsMenu
+	farcall OptionsMenu
 	ret
 
 MainMenu_NewGame:
@@ -366,9 +366,9 @@ ENDC
 
 	call Function5d5d
 
-	callba InitDecorations
+	farcall InitDecorations
 
-	callba DeletePartyMonMail
+	farcall DeletePartyMonMail
 
 	call ResetGameTime
 	ret
@@ -446,8 +446,8 @@ Function5d5d: ; 5d5d (1:5d5d)
 
 InitializeWorld: ; 5d97 (1:5d97)
 	call ShrinkPlayer
-	callba SpawnPlayer
-	callba InitializeStartDay_
+	farcall SpawnPlayer
+	farcall InitializeStartDay_
 	ret
 
 LoadOrRegenerateLuckyIDNumber: ; 5da7 (1:5da7)
@@ -476,7 +476,7 @@ LoadOrRegenerateLuckyIDNumber: ; 5da7 (1:5da7)
 	jp CloseSRAM
 
 MainMenu_Continue:
-	callba TryLoadSaveFile
+	farcall TryLoadSaveFile
 	jr c, .asm_5e41
 	call LoadStandardMenuDataHeader
 	call DisplaySaveInfoOnContinue
@@ -507,9 +507,9 @@ MainMenu_Continue:
 	call ClearTileMap
 	ld c, 20
 	call DelayFrames
-	callba JumpRoamMons
-	callba MysteryGift_CopyReceivedDecosToPC
-	callba ClockContinue
+	farcall JumpRoamMons
+	farcall MysteryGift_CopyReceivedDecosToPC
+	farcall ClockContinue
 	ld a, [wd1db]
 	cp $1
 	jr z, .asm_5e42
@@ -572,7 +572,7 @@ FinishContinueFunction: ; 5e84 (1:5e84)
 	ld [wDontPlayMapMusicOnReload], a
 	ld hl, wGameTimerPause
 	set 0, [hl]
-	callba OverworldLoop
+	farcall OverworldLoop
 	ld a, [wd1db]
 	cp $2
 	jr z, .asm_5e9d
@@ -721,7 +721,7 @@ Continue_DisplayGameTime: ; 5f90 (1:5f90)
 	jp PrintNum
 
 OakSpeech: ; 5fa5 (1:5fa5)
-	callba InitClock ; What time is it?
+	farcall InitClock ; What time is it?
 
 	call RotateFourPalettesLeft
 	call ClearTileMap
@@ -812,12 +812,12 @@ OakSpeech: ; 5fa5 (1:5fa5)
 	ret
 
 OakText1:
-	text_jump _OakText1
+	text_far _OakText1
 	db "@"
 
 OakText2:
-	text_jump _OakText2
-	start_asm
+	text_far _OakText2
+	text_asm
 	ld a, MARILL
 	call PlayMonCry
 	call WaitSFX
@@ -825,23 +825,23 @@ OakText2:
 	ret
 
 OakText3:
-	text_jump _OakText3
+	text_far _OakText3
 	db "@"
 
 OakText4:
-	text_jump _OakText4
+	text_far _OakText4
 	db "@"
 
 OakText5:
-	text_jump _OakText5
+	text_far _OakText5
 	db "@"
 
 OakText6:
-	text_jump _OakText6
+	text_far _OakText6
 	db "@"
 
 OakText7:
-	text_jump _OakText7
+	text_far _OakText7
 	db "@"
 
 NamePlayer: ; 6085 (1:6085)
@@ -853,14 +853,14 @@ NamePlayer: ; 6085 (1:6085)
 	jr z, .NewName
 	ld de, wPlayerName
 	call StorePlayerName
-	callba ApplyMonOrTrainerPals
+	farcall ApplyMonOrTrainerPals
 	call MovePlayerPicLeft
 	ret
 
 .NewName
 	ld b, $1
 	ld de, wPlayerName
-	callba NamingScreen
+	farcall NamingScreen
 	call RotateThreePalettesRight
 	call ClearTileMap
 	call LoadFontsExtra

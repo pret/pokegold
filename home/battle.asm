@@ -101,8 +101,8 @@ RefreshBattleHuds::
 	jp WaitBGMap
 
 UpdateBattleHuds:: ; 3bf8 (0:3bf8)
-	callba UpdatePlayerHUD
-	callba UpdateEnemyHUD
+	farcall UpdatePlayerHUD
+	farcall UpdateEnemyHUD
 	ret
 
 GetBattleVar::

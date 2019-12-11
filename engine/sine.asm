@@ -37,4 +37,4 @@ Sine_e:: ; 8ac9 (2:4ac9)
 	ret
 
 .SineWave:
-	sine_wave $100
+	sine_table $100

@@ -345,7 +345,7 @@ UltraBall: ; e926
 	ld d, a
 	push de
 
-	; BUG: callba overwrites a,
+	; BUG: farcall overwrites a,
 	; and GetItemHeldEffect takes b anyway.
 
 	; This is probably the reason
@@ -356,7 +356,7 @@ UltraBall: ; e926
 
 	ld a, [wBattleMonItem]
 	; ld b, a
-	callba GetItemHeldEffect ; d:7e9b
+	farcall GetItemHeldEffect ; d:7e9b
 	ld a, b
 	cp HELD_CATCH_CHANCE
 	pop de
@@ -450,7 +450,7 @@ UltraBall: ; e926
 	ld [wCurPartySpecies], a
 	ld a, [wEnemyMonLevel]
 	ld [wCurPartyLevel], a
-	callba LoadEnemyMon
+	farcall LoadEnemyMon
 	pop af
 	ld [wEnemySubStatus5], a
 	pop hl
@@ -546,7 +546,7 @@ UltraBall: ; e926
 	xor a
 	ld [wMonType], a
 	ld b, $0
-	callba NamingScreen
+	farcall NamingScreen
 	call RotateThreePalettesRight
 	call Functiond9e
 	pop hl
@@ -585,7 +585,7 @@ UltraBall: ; e926
 	ld [wMonType], a
 	ld de, wMonOrItemNameBuffer
 	ld b, $0
-	callba NamingScreen
+	farcall NamingScreen
 	ld a, $1
 	call OpenSRAM
 	ld hl, wMonOrItemNameBuffer
@@ -611,7 +611,7 @@ UltraBall: ; e926
 	jr .end_ball_function
 
 .catch_bug_contest_mon
-	callba BugContest_SetCaughtContestMon ; same bank
+	farcall BugContest_SetCaughtContestMon ; same bank
 	jr .end_ball_function
 
 .finish_tutorial
@@ -842,7 +842,7 @@ LoveBallMultiplier:
 	ld [wMonType], a
 	ld a, [wCurBattleMon]
 	ld [wCurPartyMon], a
-	callba GetGender ; 14:52f1
+	farcall GetGender ; 14:52f1
 	jr c, .asm_edba
 	ld d, $0
 	jr nz, .asm_ed8d
@@ -853,7 +853,7 @@ LoveBallMultiplier:
 	ld [wCurPartySpecies], a
 	ld a, $4
 	ld [wMonType], a
-	callba GetGender ; 14:52f1
+	farcall GetGender ; 14:52f1
 	jr c, .asm_edb9
 	ld d, $0
 	jr nz, .asm_eda6
@@ -940,32 +940,32 @@ LevelBallMultiplier:
 ; They are not used in gen 2, and are dummied out.
 
 Text_ThisMonCantBeCaught:
-	text_jump Text_ThisMonCantBeCaught_
+	text_far Text_ThisMonCantBeCaught_
 	db "@"
 
 Text_YouMissedThePokemon:
-	text_jump Text_YouMissedThePokemon_
+	text_far Text_YouMissedThePokemon_
 	db "@"
 
 Text_ThePokemonBrokeFree:
-	text_jump Text_ThePokemonBrokeFree_
+	text_far Text_ThePokemonBrokeFree_
 	db "@"
 
 Text_AppearedToBeCaught:
-	text_jump Text_AppearedToBeCaught_
+	text_far Text_AppearedToBeCaught_
 	db "@"
 
 Text_AarghAlmostHadIt:
-	text_jump Text_AarghAlmostHadIt_
+	text_far Text_AarghAlmostHadIt_
 	db "@"
 
 Text_ShootItWasSoCloseToo:
-	text_jump Text_ShootItWasSoCloseToo_
+	text_far Text_ShootItWasSoCloseToo_
 	db "@"
 
 Text_GotchaMonWasCaught:
-	text_jump Text_GotchaMonWasCaught_
-	start_asm
+	text_far Text_GotchaMonWasCaught_
+	text_asm
 	call WaitSFX
 	push bc
 	ld de, MUSIC_NONE
@@ -978,31 +978,31 @@ Text_GotchaMonWasCaught:
 	ret
 
 Text_CaughtMonWaitbutton:
-	text_jump Text_Waitbutton_2
+	text_far Text_Promptbutton_2
 	db "@"
 
 Text_SentToBillsPC:
-	text_jump Text_SentToBillsPC_
+	text_far Text_SentToBillsPC_
 	db "@"
 
 Text_MonNewlyAddedToPokedex:
-	text_jump Text_MonNewlyAddedToPokedex_
+	text_far Text_MonNewlyAddedToPokedex_
 	db "@"
 
 Text_AskNicknameNewlyCaughtMon:
-	text_jump Text_AskNicknameNewlyCaughtMon_
+	text_far Text_AskNicknameNewlyCaughtMon_
 	db "@"
 
 ReturnToBattle_UseBall: ; ee4e (3:6e4e)
-	callba ReturnToBattle_UseBall_ ; 9:7307
+	farcall ReturnToBattle_UseBall_ ; 9:7307
 	ret
 
 TownMap: ; ee55 (3:6e55)
-	callba TownMap_ ; 24:5a4f
+	farcall TownMap_ ; 24:5a4f
 	ret
 
 Bicycle: ; ee5c
-	callba BicycleFunction ; same bank
+	farcall BicycleFunction ; same bank
 	ret
 
 FireStone: ; ee63
@@ -1021,7 +1021,7 @@ WaterStone: ; ee63
 	jr z, .failed
 	ld a, $1
 	ld [wd0d2], a
-	callba EvolvePokemon ; 10:61db
+	farcall EvolvePokemon ; 10:61db
 	ld a, [wd154]
 	and a
 	jr z, .failed
@@ -1067,7 +1067,7 @@ Protein: ; ee91
 	ld hl, Text_StatRoseFromVitamin ; $6efa
 	call PrintText
 	ld c, HAPPINESS_USEDITEM
-	callba ChangeHappiness
+	farcall ChangeHappiness
 	jp Functionf7dc
 
 Functioneed7:
@@ -1091,7 +1091,7 @@ Functioneef3: ; eef3 (3:6ef3)
 	jp ClearPalettes
 
 Text_StatRoseFromVitamin:
-	text_jump Text_StatRoseFromVitamin_
+	text_far Text_StatRoseFromVitamin_
 	db "@"
 
 StatStrings:
@@ -1159,7 +1159,7 @@ RareCandy: ; ef68 (3:6f68)
 	ld [wCurPartyLevel], a
 	push de
 	ld d, a
-	callba CalcExpAtLevel
+	farcall CalcExpAtLevel
 	pop de
 	ld a, $8
 	call GetPartyParamLocation
@@ -1193,7 +1193,7 @@ RareCandy: ; ef68 (3:6f68)
 	adc b
 	ld [hl], a
 	ld c, $1
-	callba ChangeHappiness
+	farcall ChangeHappiness
 	ld a, PARTYMENUTEXT_LEVEL_UP
 	call Functionf2a0
 	xor a
@@ -1214,7 +1214,7 @@ RareCandy: ; ef68 (3:6f68)
 	predef LearnLevelMoves
 	xor a
 	ld [wd0d2], a
-	callba EvolvePokemon
+	farcall EvolvePokemon
 	jp Functionf7dc
 
 HealPowder: ; f003 (3:7003)
@@ -1225,7 +1225,7 @@ HealPowder: ; f003 (3:7003)
 	cp $0
 	jr nz, .asm_f01f
 	ld c, $f
-	callba ChangeHappiness
+	farcall ChangeHappiness
 	call Functionf81d
 	ld a, $0
 .asm_f01f
@@ -1320,7 +1320,7 @@ Functionf086: ; f086 (3:7086)
 	res 7, [hl]
 .asm_f0a5
 	push bc
-	callba CalcPlayerStats ; d:66f6
+	farcall CalcPlayerStats ; d:66f6
 	pop bc
 	ret
 
@@ -1380,7 +1380,7 @@ RevivalHerb: ; f0ff
 	cp $0
 	jr nz, .asm_f11b
 	ld c, $11
-	callba ChangeHappiness
+	farcall ChangeHappiness
 	call Functionf81d
 	ld a, $0
 .asm_f11b
@@ -1510,7 +1510,7 @@ asm_f1e8
 	pop bc
 	cp $0
 	jr nz, .asm_f1fc
-	callba ChangeHappiness
+	farcall ChangeHappiness
 	call Functionf81d
 	ld a, $0
 .asm_f1fc
@@ -1581,15 +1581,15 @@ Functionf261: ; f261 (3:7261)
 	ret
 
 Functionf272: ; f272 (3:7272)
-	callba LoadPartyMenuGFX
-	callba InitPartyMenuWithCancel
-	callba InitPartyMenuGFX
-	callba WritePartyMenuTilemap
-	callba PrintPartyMenuText
+	farcall LoadPartyMenuGFX
+	farcall InitPartyMenuWithCancel
+	farcall InitPartyMenuGFX
+	farcall WritePartyMenuTilemap
+	farcall PrintPartyMenuText
 	call WaitBGMap
 	call SetPalettes
 	call DelayFrame
-	callba PartyMenuSelect
+	farcall PartyMenuSelect
 	ret
 
 Functionf2a0: ; f2a0 (3:72a0)
@@ -1601,8 +1601,8 @@ Functionf2a0: ; f2a0 (3:72a0)
 	push hl
 	push de
 	push bc
-	callba WritePartyMenuTilemap
-	callba PrintPartyMenuActionText
+	farcall WritePartyMenuTilemap
+	farcall PrintPartyMenuActionText
 	call WaitBGMap
 	call SetPalettes
 	call DelayFrame
@@ -1922,13 +1922,13 @@ Functionf46f: ; f46f (3:746f)
 	jr Functionf46f
 
 Text_MilkDrinkCantBeUsed:
-	text_jump Text_MilkDrinkCantBeUsed_
+	text_far Text_MilkDrinkCantBeUsed_
 	db "@"
 
 EscapeRope: ; f4a5 (3:74a5)
 	xor a
 	ld [wFieldMoveSucceeded], a
-	callba EscapeRopeFunction ; same bank
+	farcall EscapeRopeFunction ; same bank
 	ld a, [wFieldMoveSucceeded]
 	cp $1
 	call z, Functionf7dc
@@ -1954,7 +1954,7 @@ asm_f4c2
 	jp Functionf7d0
 
 Text_RepelsEffectsStillLinger:
-	text_jump Text_RepelUsedEarlierIsStillInEffect
+	text_far Text_RepelUsedEarlierIsStillInEffect
 	db "@"
 
 XAccuracy: ; f4d8 (3:74d8)
@@ -2014,14 +2014,14 @@ XSpeed: ; f515
 	ld [hBattleTurn], a
 	ld [wcb45], a
 	ld [wcbeb], a
-	callba CheckIfStatCanBeRaised
+	farcall CheckIfStatCanBeRaised
 	call WaitSFX
-	callba BattleCommand_StatUpMessage
-	callba BattleCommand_StatUpFailText
+	farcall BattleCommand_StatUpMessage
+	farcall BattleCommand_StatUpFailText
 	ld a, [wCurBattleMon]
 	ld [wCurPartyMon], a
 	ld c, HAPPINESS_USEDXITEM
-	callba ChangeHappiness
+	farcall ChangeHappiness
 	ret
 
 .x_item_table
@@ -2087,16 +2087,16 @@ Functionf5a4: ; f5a4 (3:75a4)
 	ret
 
 Text_NowThatsACatchyTune:
-	text_jump Text_NowThatsACatchyTune_
+	text_far Text_NowThatsACatchyTune_
 	db "@"
 
 Text_AllSleepingMonWokeUp:
-	text_jump Text_AllSleepingMonWokeUp_
+	text_far Text_AllSleepingMonWokeUp_
 	db "@"
 
 Text_PlayedThePokeFlute:
-	text_jump Text_PlayedThePokeFlute_
-	start_asm
+	text_far Text_PlayedThePokeFlute_
+	text_asm
 	ld a, [wBattleMode]
 	and a
 	jr nz, .asm_f5dc
@@ -2116,7 +2116,7 @@ CoinCase: ; f5e1 (3:75e1)
 	jp MenuTextBoxWaitButton
 
 Text_CoinCase:
-	text_jump Text_CoinCase_
+	text_far Text_CoinCase_
 	db "@"
 
 OldRod: ; f5ec (3:75ec)
@@ -2132,11 +2132,11 @@ SuperRod: ; f5f4 (3:75f4)
 	jr UseRod
 
 UseRod:
-	callba FishingRodFunction ; same bank
+	farcall FishingRodFunction ; same bank
 	ret
 
 Itemfinder: ; f5ff (3:75ff)
-	callba ItemfinderFunction
+	farcall ItemfinderFunction
 	ret
 
 Elixer: ; f606
@@ -2353,39 +2353,39 @@ Functionf72f: ; f72f (3:772f)
 	ret
 
 Text_RaiseThePPOfWhichMove:
-	text_jump Text_RaiseThePPOfWhichMove_
+	text_far Text_RaiseThePPOfWhichMove_
 	db "@"
 
 Text_RestoreThePPOfWhichMove:
-	text_jump Text_RestoreThePPOfWhichMove_
+	text_far Text_RestoreThePPOfWhichMove_
 	db "@"
 
 Text_PPIsMaxedOut:
-	text_jump Text_PPIsMaxedOut_
+	text_far Text_PPIsMaxedOut_
 	db "@"
 
 Text_PPsIncreased:
-	text_jump Text_PPsIncreased_
+	text_far Text_PPsIncreased_
 	db "@"
 
 Text_PPWasRestored:
-	text_jump Text_PPWasRestored_
+	text_far Text_PPWasRestored_
 	db "@"
 
 Squirtbottle: ; f785 (3:7785)
-	callba SquirtbottleFunction ; 14:4763
+	farcall SquirtbottleFunction ; 14:4763
 	ret
 
 CardKey: ; f78c (3:778c)
-	callba CardKeyFunction ; 14:47ac
+	farcall CardKeyFunction ; 14:47ac
 	ret
 
 BasementKey: ; f793 (3:7793)
-	callba BasementKeyFunction ; 14:47e7
+	farcall BasementKeyFunction ; 14:47e7
 	ret
 
 SacredAsh: ; f79a (3:779a)
-	callba SacredAshFunction ; 14:4819
+	farcall SacredAshFunction ; 14:4819
 	ld a, [wFieldMoveSucceeded]
 	cp $1
 	ret nz
@@ -2399,13 +2399,13 @@ NormalBox: ; f7aa (3:77aa)
 GorgeousBox: ; f7ae (3:77ae)
 	ld c, DECOFLAG_GOLD_TROPHY_DOLL
 asm_f7b0
-	callba ReceiveDecorationC ; 9:70d5
+	farcall ReceiveDecorationC ; 9:70d5
 	ld hl, Text_TrophyInside ; $77bf
 	call PrintText
 	jp Functionf7dc
 
 Text_TrophyInside:
-	text_jump Text_TrophyInside_
+	text_far Text_TrophyInside_
 	db "@"
 
 AmuletCoin: ; f7c4
@@ -2583,55 +2583,55 @@ asm_f84b
 	jp PrintText
 
 Text_LooksBitter:
-	text_jump Text_LooksBitter_
+	text_far Text_LooksBitter_
 	db "@"
 
 Text_CantUseOnEgg:
-	text_jump Text_CantUseOnEgg_
+	text_far Text_CantUseOnEgg_
 	db "@"
 
 Text_IsntTheTimeToUseThat:
-	text_jump Text_IsntTheTimeToUseThat_
+	text_far Text_IsntTheTimeToUseThat_
 	db "@"
 
 Text_BelongsToSomeoneElse:
-	text_jump Text_BelongsToSomeoneElse_
+	text_far Text_BelongsToSomeoneElse_
 	db "@"
 
 Text_WontHaveAnyEffect:
-	text_jump Text_WontHaveAnyEffect_
+	text_far Text_WontHaveAnyEffect_
 	db "@"
 
 Text_BlockedTheBall:
-	text_jump Text_BlockedTheBall_
+	text_far Text_BlockedTheBall_
 	db "@"
 
 Text_DontBeAThief:
-	text_jump Text_DontBeAThief_
+	text_far Text_DontBeAThief_
 	db "@"
 
 Text_CyclingIsntAllowed:
-	text_jump Text_CyclingIsntAllowed_
+	text_far Text_CyclingIsntAllowed_
 	db "@"
 
 Text_CantGetOnYourItemNow:
-	text_jump Text_CantGetOnYourItemNow_
+	text_far Text_CantGetOnYourItemNow_
 	db "@"
 
 Text_CantUseBallBoxIsFull:
-	text_jump Text_CantUseBallBoxIsFull_
+	text_far Text_CantUseBallBoxIsFull_
 	db "@"
 
 Text_UsedItem:
-	text_jump Text_UsedItem_
+	text_far Text_UsedItem_
 	db "@"
 
 Text_GotOnItem:
-	text_jump Text_GotOnItem_
+	text_far Text_GotOnItem_
 	db "@"
 
 Text_GotOffItem:
-	text_jump Text_GotOffItem_
+	text_far Text_GotOffItem_
 	db "@"
 
 Functionf893: ; f893 (3:7893)

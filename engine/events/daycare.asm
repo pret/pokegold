@@ -162,7 +162,7 @@ DayCareAskDepositPokemon:
 
 .DummyText:
 	;
-	text_jump _DaycareDummyText
+	text_far _DaycareDummyText
 	db "@"
 
 DayCare_DepositPokemonText:
@@ -291,102 +291,102 @@ PrintDayCareText:
 
 .DayCareManIntro:
 	; I'm the DAY-CARE MAN. Want me to raise a #MON?
-	text_jump _DayCareManIntroText
+	text_far _DayCareManIntroText
 	db "@"
 
 .DayCareManOddEgg:
 	; I'm the DAY-CARE MAN. Do you know about EGGS? I was raising #MON with my wife, you see. We were shocked to find an EGG! How incredible is that? So, want me to raise a #MON?
-	text_jump _DayCareManOddEggText
+	text_far _DayCareManOddEggText
 	db "@"
 
 .DayCareLadyIntro:
 	; I'm the DAY-CARE LADY. Should I raise a #MON for you?
-	text_jump _DayCareLadyIntroText
+	text_far _DayCareLadyIntroText
 	db "@"
 
 .DayCareLadyOddEgg:
 	; I'm the DAY-CARE LADY. Do you know about EGGS? My husband and I were raising some #MON, you see. We were shocked to find an EGG! How incredible could that be? Should I raise a #MON for you?
-	text_jump _DayCareLadyOddEggText
+	text_far _DayCareLadyOddEggText
 	db "@"
 
 .WhichOne:
 	; What should I raise for you?
-	text_jump _WhatShouldIRaiseText
+	text_far _WhatShouldIRaiseText
 	db "@"
 
 .JustOneMon:
 	; Oh? But you have just one #MON.
-	text_jump _OnlyOneMonText
+	text_far _OnlyOneMonText
 	db "@"
 
 .CantAcceptEgg:
 	; Sorry, but I can't accept an EGG.
-	text_jump _CantRaiseEggText
+	text_far _CantRaiseEggText
 	db "@"
 
 .RemoveMail:
 	; Remove MAIL before you come see me.
-	text_jump _RemoveMailText
+	text_far _RemoveMailText
 	db "@"
 
 .LastHealthyMon:
 	; If you give me that, what will you battle with?
-	text_jump _LastHealthyMonText
+	text_far _LastHealthyMonText
 	db "@"
 
 .OkayIllRaiseYourMon:
 	; OK. I'll raise your @ .
-	text_jump _IllRaiseYourMonText
+	text_far _IllRaiseYourMonText
 	db "@"
 
 .ComeBackForItLater:
 	; Come back for it later.
-	text_jump _ComeBackLaterText
+	text_far _ComeBackLaterText
 	db "@"
 
 .AreWeGeniusesOrWhat:
 	; Are we geniuses or what? Want to see your @ ?
-	text_jump _AreWeGeniusesText
+	text_far _AreWeGeniusesText
 	db "@"
 
 .AskRetrieveMon:
 	; Your @ has grown a lot. By level, it's grown by @ . If you want your #MON back, it will cost ¥@ .
-	text_jump _YourMonHasGrownText
+	text_far _YourMonHasGrownText
 	db "@"
 
 .PerfectHeresYourMon:
 	; Perfect! Here's your #MON.
-	text_jump _PerfectHeresYourMonText
+	text_far _PerfectHeresYourMonText
 	db "@"
 
 .GotBackMon:
 	; got back @ .
-	text_jump _GotBackMonText
+	text_far _GotBackMonText
 	db "@"
 
 .ImmediatelyWithdrawMon:
 	; Huh? Back already? Your @ needs a little more time with us. If you want your #MON back, it will cost ¥100.
-	text_jump _BackAlreadyText
+	text_far _BackAlreadyText
 	db "@"
 
 .PartyFull:
 	; You have no room for it.
-	text_jump _HaveNoRoomText
+	text_far _HaveNoRoomText
 	db "@"
 
 .NotEnoughMoney:
 	; You don't have enough money.
-	text_jump _DCNotEnoughMoneyText
+	text_far _DCNotEnoughMoneyText
 	db "@"
 
 .OhFineThen:
 	; Oh, fine then.
-	text_jump _OhFineThenText
+	text_far _OhFineThenText
 	db "@"
 
 .ComeAgain:
 	; Come again.
-	text_jump _ComeAgainText
+	text_far _ComeAgainText
 	db "@"
 
 DayCareManOutside:
@@ -399,7 +399,7 @@ DayCareManOutside:
 
 .NotYet:
 	; Not yet…
-	text_jump _NotYetText
+	text_far _NotYetText
 	db "@"
 
 .AskGiveEgg:
@@ -441,27 +441,27 @@ DayCareManOutside:
 
 .IntroText:
 	; Ah, it's you! We were raising your #MON, and my goodness, were we surprised! Your #MON had an EGG! We don't know how it got there, but your #MON had it. You want it?
-	text_jump _FoundAnEggText
+	text_far _FoundAnEggText
 	db "@"
 
 .GotEggText:
 	; received the EGG!
-	text_jump _ReceivedEggText
+	text_far _ReceivedEggText
 	db "@"
 
 .TakeGoodCareOfItText:
 	; Take good care of it.
-	text_jump _TakeGoodCareOfEggText
+	text_far _TakeGoodCareOfEggText
 	db "@"
 
 .IllKeepItThanksText:
 	; Well then, I'll keep it. Thanks!
-	text_jump _RefuseEggText
+	text_far _RefuseEggText
 	db "@"
 
 .PartyFullText:
 	; You have no room in your party. Come back later.
-	text_jump _NoRoomForEggText
+	text_far _NoRoomForEggText
 	db "@"
 
 DayCare_GiveEgg:

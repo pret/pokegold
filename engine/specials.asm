@@ -157,7 +157,7 @@ GameCornerPrizeMonCheckDex: ; c38a
 	call FadeToMenu
 	ld a, [wScriptVar]
 	ld [wd151], a
-	callba NewPokedexEntry
+	farcall NewPokedexEntry
 	call ExitAllMenus
 	ret
 
@@ -170,28 +170,28 @@ UnusedSetSeenMon: ; c3ac
 FindPartyMonAboveLevel: ; c3b4
 	ld a, [wScriptVar]
 	ld b, a
-	callba PartySearch_MaximumLevel ; same bank
+	farcall PartySearch_MaximumLevel ; same bank
 	jr z, asm_c3f2
 	jr asm_c3ec
 
 FindPartyMonAtLeastThatHappy: ; c3c2
 	ld a, [wScriptVar]
 	ld b, a
-	callba PartySearch_MinimumHappiness ; same bank
+	farcall PartySearch_MinimumHappiness ; same bank
 	jr z, asm_c3f2
 	jr asm_c3ec
 
 FindPartyMonThatSpecies: ; c3d0
 	ld a, [wScriptVar]
 	ld b, a
-	callba PartySearch_SameSpecies ; same bank
+	farcall PartySearch_SameSpecies ; same bank
 	jr z, asm_c3f2
 	jr asm_c3ec
 
 FindPartyMonThatSpeciesYourTrainerID: ; c3de
 	ld a, [wScriptVar]
 	ld b, a
-	callba PartySearch_SameSpeciesAndYourID ; same bank
+	farcall PartySearch_SameSpeciesAndYourID ; same bank
 	jr z, asm_c3f2
 	jr asm_c3ec
 
@@ -208,7 +208,7 @@ asm_c3f2
 NameRival: ; c3f7
 	ld b, $2
 	ld de, wRivalName
-	callba NamingScreen_
+	farcall NamingScreen_
 	ld hl, wRivalName
 	ld de, .DefaultName
 	call InitName
@@ -224,31 +224,31 @@ IF DEF(SILVER)
 ENDC
 
 NameRater:
-	callba _NameRater
+	farcall _NameRater
 	ret
 
 OverworldTownMap: ; c41a (3:441a)
 	call FadeToMenu
-	callba Function9188a
+	farcall Function9188a
 	call ExitAllMenus
 	ret
 
 UnownPrinter: ; c427 (3:4427)
 	call FadeToMenu
-	callba Function16e3a
+	farcall Function16e3a
 	call ExitAllMenus
 	ret
 
 DisplayLinkRecord: ; c434 (3:4434)
 	call FadeToMenu
-	callba Function3f55d
+	farcall Function3f55d
 	call ExitAllMenus
 	ret
 
 PlayersHousePC: ; c441 (3:4441)
 	xor a
 	ld [wScriptVar], a
-	callba Function159b0
+	farcall Function159b0
 	ld a, c
 	ld [wScriptVar], a
 	ret
@@ -294,11 +294,11 @@ GetMysteryGiftItem: ; c463 (3:4463)
 	ret
 
 ReceivedMysteryGiftText:
-	text_jump ReceivedMysteryGiftText_
+	text_far ReceivedMysteryGiftText_
 	db "@"
 
 BugContestJudging: ; c4a4 (3:44a4)
-	callba Function13a5f
+	farcall Function13a5f
 	ld a, b
 	ld [wScriptVar], a
 	ret
@@ -306,12 +306,12 @@ BugContestJudging: ; c4a4 (3:44a4)
 MapRadio: ; c4af (3:44af)
 	ld a, [wScriptVar]
 	ld e, a
-	callba Function919c1
+	farcall Function919c1
 	ret
 
 UnownPuzzle: ; c4ba (3:44ba)
 	call FadeToMenu
-	callba Functione199d
+	farcall Functione199d
 	ld a, [wFieldMoveSucceeded]
 	ld [wScriptVar], a
 	call ExitAllMenus
@@ -380,11 +380,11 @@ Functionc508: ; c508 (3:4508)
 	ret
 
 .NoCoinsText:
-	text_jump NoCoinsText_
+	text_far NoCoinsText_
 	db "@"
 
 .NoCoinCaseText:
-	text_jump NoCoinCaseText_
+	text_far NoCoinCaseText_
 	db "@"
 
 ClearBGPalettesBufferScreen: ; c535 (3:4535)
@@ -404,7 +404,7 @@ Functionc53c: ; c53c (3:453c)
 	ret
 
 UnusedCheckUnusedTwoDayTimer: ; c549 (3:4549)
-	callba Function118f8
+	farcall Function118f8
 	ld a, [wUnusedTwoDayTimer]
 	ld [wScriptVar], a
 	ret
@@ -440,17 +440,17 @@ Functionc56c:
 	ret
 
 CheckPokerus: ; c588 (3:4588)
-	callba Functionc7a40
+	farcall Functionc7a40
 	jp Functionc53c
 
 ResetLuckyNumberShowFlag: ; c591 (3:4591)
-	callba Function11917
+	farcall Function11917
 	ClearFlag ENGINE_LUCKY_NUMBER_SHOW
-	callba LoadOrRegenerateLuckyIDNumber
+	farcall LoadOrRegenerateLuckyIDNumber
 	ret
 
 CheckLuckyNumberShowFlag: ; c5a3 (3:45a3)
-	callba Function1192e
+	farcall Function1192e
 	jp Functionc53c
 
 CountUnown: ; c5ac (3:45ac)
@@ -467,7 +467,7 @@ CountUnown: ; c5ac (3:45ac)
 	ret
 
 SelectApricornForKurt: ; c5bb (3:45bb)
-	callba Function24b8d
+	farcall Function24b8d
 	ld a, c
 	ld [wScriptVar], a
 	and a
@@ -554,13 +554,13 @@ FadeOutMusic: ; c628 (3:4628)
 
 Diploma: ; c638 (3:4638)
 	call FadeToMenu
-	callba Functione0002
+	farcall Functione0002
 	call ExitAllMenus
 	ret
 
 PrintDiploma: ; c645 (3:4645)
 	call FadeToMenu
-	callba Function84684
+	farcall Function84684
 	call ExitAllMenus
 	ret
 

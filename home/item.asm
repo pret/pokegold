@@ -1,12 +1,12 @@
 DoItemEffect::
-	callba DoItemEffect_
+	farcall DoItemEffect_
 	ret
 
 CheckTossableItem::
 	push hl
 	push de
 	push bc
-	callba CheckTossableItem_
+	farcall CheckTossableItem_
 	pop bc
 	pop de
 	pop hl

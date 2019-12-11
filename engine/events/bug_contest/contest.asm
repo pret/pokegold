@@ -12,20 +12,20 @@ BugCatchingContestBattleScript::
 	startbattle
 	reloadmapafterbattle
 	copybytetovar wParkBalls
-	iffalse $79C5
+	iffalse BugCatchingContestOutOfBallsScript
 	end
 
 BugCatchingContestOverScript::
 	playsound SFX_ELEVATOR_END
 	opentext
-	writetext $79D1
+	writetext BugCatchingContestTimeUpText
 	waitbutton
 	jump $79CD
 	
 BugCatchingContestOutOfBallsScript:
 	playsound SFX_ELEVATOR_END
 	opentext
-	writetext $79D6
+	writetext BugCatchingContestIsOverText
 	waitbutton
 	
 BugCatchingContestReturnToGateScript:
@@ -33,9 +33,9 @@ BugCatchingContestReturnToGateScript:
 	jumpstd bugcontestresultswarp
 	
 BugCatchingContestTimeUpText:
-	text_jump _BugCatchingContestTimeUpText
+	text_far _BugCatchingContestTimeUpText
 	db "@"
 
 BugCatchingContestIsOverText:
-	text_jump _BugCatchingContestIsOverText
+	text_far _BugCatchingContestIsOverText
 	db "@"

@@ -1,3 +1,5 @@
+INCLUDE "charmap.asm"
+
 INCLUDE "macros.asm"
 
 INCLUDE "gbhw.asm"
@@ -43,6 +45,7 @@ INCLUDE "constants/map_data_constants.asm"
 INCLUDE "constants/input_constants.asm"
 INCLUDE "constants/sprite_data_constants.asm"
 INCLUDE "constants/serial_constants.asm"
+INCLUDE "constants/mart_constants.asm"
 INCLUDE "constants/menu_constants.asm"
 INCLUDE "constants/scene_constants.asm"
 INCLUDE "constants/npc_trade_constants.asm"

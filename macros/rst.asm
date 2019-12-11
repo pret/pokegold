@@ -6,7 +6,7 @@ farcall: MACRO ; bank, address
 	ld a, BANK(\1)
 	ld hl, \1
 	rst FarCall
-	ENDM
+ENDM
 
 callfar: MACRO ; address, bank
 	ld hl, \1
@@ -14,10 +14,12 @@ callfar: MACRO ; address, bank
 	rst FarCall
 ENDM
 
-callba EQUS "farcall"
-
-callab: MACRO ; address, bank
-	ld hl, \1
+homecall: MACRO
+	ldh a, [hROMBank]
+	push af
 	ld a, BANK(\1)
-	rst FarCall
-	ENDM
+	rst Bankswitch
+	call \1
+	pop af
+	rst Bankswitch
+ENDM

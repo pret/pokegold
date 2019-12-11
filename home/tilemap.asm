@@ -21,12 +21,12 @@ SetMenuAttributes:: ; 1a4e
 	ret
 
 StaticMenuJoypad:: ; 1a66 (0:1a66)
-	callab StaticMenuJoypad_
+	callfar StaticMenuJoypad_
 	call GetMenuJoypad
 	ret
 
 ScrollingMenuJoypad:: ; 1a70 (0:1a70)
-	callab ScrollingMenuJoypad_
+	callfar ScrollingMenuJoypad_
 	call GetMenuJoypad
 	ret
 
@@ -62,17 +62,17 @@ HideCursor::
 	ret
 
 PushWindow:: ; 1a9d (0:1a9d)
-	callab PushWindow_
+	callfar PushWindow_
 	ret
 
 ExitMenu:: ; 1aa4 (0:1aa4)
 	push af
-	callab ExitMenu_
+	callfar ExitMenu_
 	pop af
 	ret
 
 InitVerticalMenuCursor:: ; 1aad (0:1aad)
-	callab InitVerticalMenuCursor_
+	callfar InitVerticalMenuCursor_
 	ret
 
 CloseWindow:: ; 1ab4 (0:1ab4)
