@@ -1271,7 +1271,7 @@ EnableScriptMode:: ; 96b89
 ScriptEvents:: ; 96b91
 	dr $96b91, $97365
 
-Callfarcallck:: ; 97365
+CallCallback:: ; 97365
 	dr $97365, $97a59
 
 WarpToSpawnPoint:
