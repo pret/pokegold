@@ -4,7 +4,6 @@
 	const MARTTYPE_BITTER
 	const MARTTYPE_BARGAIN
 	const MARTTYPE_PHARMACY
-	const MARTTYPE_ROOFTOP
 
 ; Marts indexes (see data/items/marts.asm)
 	const_def

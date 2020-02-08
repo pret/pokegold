@@ -730,7 +730,7 @@ Function3456:: ; 3456 (0:3456)
 	call DelayFrames
 	ret
 
-CheckCGB::
+IsCGB::
 	ld a, [hCGB]
 	and a
 	ret

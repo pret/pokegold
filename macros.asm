@@ -12,7 +12,6 @@ INCLUDE "macros/scripts/events.asm"
 INCLUDE "macros/scripts/text.asm"
 INCLUDE "macros/scripts/movement.asm"
 INCLUDE "macros/scripts/trade_anims.asm"
-INCLUDE "macros/scripts/gfx_anims.asm"
 
 INCLUDE "macros/move_effect.asm"
 INCLUDE "macros/move_anim.asm"

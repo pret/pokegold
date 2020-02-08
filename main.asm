@@ -624,9 +624,9 @@ INCLUDE "engine/overworld/time.asm"
 INCLUDE "engine/learn_tm.asm"
 INCLUDE "engine/namingscreen.asm"
 INCLUDE "engine/events/misc_scripts.asm"
-HealMachineAnim:
-	dr $126fd, $12947
-
+INCLUDE "engine/events/heal_machine_anim.asm"
+INCLUDE "engine/events/whiteout.asm"
+INCLUDE "engine/events/forced_movement.asm"
 ItemfinderFunction:
 	dr $12947, $12e33
 

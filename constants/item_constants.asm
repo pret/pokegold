@@ -75,7 +75,7 @@
 	const SECRETPOTION ; 43
 	const S_S_TICKET   ; 44
 	const MYSTERY_EGG  ; 45
-	const CLEAR_BELL   ; 46
+	const ITEM_46      ; 46
 	const SILVER_WING  ; 47
 	const MOOMOO_MILK  ; 48
 	const QUICK_CLAW   ; 49
@@ -120,8 +120,8 @@
 	const EVERSTONE    ; 70
 	const SPELL_TAG    ; 71
 	const RAGECANDYBAR ; 72
-	const GS_BALL      ; 73
-	const BLUE_CARD    ; 74
+	const ITEM_73      ; 73
+	const ITEM_74      ; 74
 	const MIRACLE_SEED ; 75
 	const THICK_CLUB   ; 76
 	const FOCUS_BAND   ; 77
@@ -134,7 +134,7 @@
 	const LUCKY_EGG    ; 7e
 	const CARD_KEY     ; 7f
 	const MACHINE_PART ; 80
-	const EGG_TICKET   ; 81
+	const ITEM_81      ; 81
 	const LOST_ITEM    ; 82
 	const STARDUST     ; 83
 	const STAR_PIECE   ; 84
@@ -279,17 +279,6 @@ ENDM
 	add_hm WHIRLPOOL    ; f8
 	add_hm WATERFALL    ; f9
 NUM_HMS EQU const_value - HM01
-
-add_mt: MACRO
-	enum \1_TMNUM
-ENDM
-
-	add_mt FLAMETHROWER
-	add_mt THUNDERBOLT
-	add_mt ICE_BEAM
-NUM_TM_HM_TUTOR EQU __enum__ + -1
-
-	const ITEM_FA       ; fa
 
 USE_SCRIPT_VAR EQU $00
 ITEM_FROM_MEM  EQU $ff

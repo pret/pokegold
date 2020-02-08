@@ -2,9 +2,9 @@ INCLUDE "charmap.asm"
 
 INCLUDE "macros.asm"
 
-INCLUDE "gbhw.asm"
 INCLUDE "hram.asm"
 
+INCLUDE "constants/hardware_constants.asm"
 INCLUDE "constants/wram_constants.asm"
 INCLUDE "constants/sram_constants.asm"
 INCLUDE "constants/pokemon_constants.asm"
