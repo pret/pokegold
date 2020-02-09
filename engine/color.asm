@@ -31,7 +31,7 @@ CheckShininess:
 	and a
 	ret
 
-CheckContestMon: ; 9072 (2:5072)
+Unused_CheckShininess: ; 9072 (2:5072)
 	ld a, [hl]
 	cp $a0
 	jr c, .asm_908c
@@ -634,7 +634,7 @@ Function9b9c: ; 9b9c (2:5b9c)
 
 Function9ba9: ; 9ba9 (2:5ba9)
 	push de
-	callba Function3d8f5
+	farcall Function3d8f5
 	ld c, l
 	ld b, h
 	ld a, [wd0ee]
@@ -644,7 +644,7 @@ Function9ba9: ; 9ba9 (2:5ba9)
 
 Function9bba: ; 9bba (2:5bba)
 	push de
-	callba Function3d907
+	farcall Function3d907
 	ld c, l
 	ld b, h
 	ld a, [wTempEnemyMonSpecies]

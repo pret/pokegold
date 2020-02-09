@@ -15,7 +15,7 @@ BillsPC_CheckHavePokemon: ; e3e5 (3:63e5)
 	ret
 
 Text_GottaHavePokemon:
-	text_jump Text_GottaHavePokemon_
+	text_far Text_GottaHavePokemon_
 	db "@"
 
 BillsPC_LogIn: ; e3f7 (3:63f7)
@@ -35,7 +35,7 @@ BillsPC_LogIn: ; e3f7 (3:63f7)
 	ret
 
 Text_BillsPCWhat:
-	text_jump Text_BillsPCWhat_
+	text_far Text_BillsPCWhat_
 	db "@"
 
 BillsPC_LogOut: ; e41a (3:641a)
@@ -105,16 +105,16 @@ BillsPC_SeeYa:
 
 BillsPC_MovePKMNMenu:
 	call LoadStandardMenuDataHeader
-	callba IsAnyPokemonHoldingMail ; 11:488c
+	farcall IsAnyPokemonHoldingMail ; 11:488c
 	jr nc, .asm_e4bb
 	ld hl, Text_PleaseRemoveMailBeforeMovePkmnWOMail
 	call PrintText
 	jr .asm_e4cf
 
 .asm_e4bb
-	callba StartMovePkmnWOMail_SaveGame ; 5:4bd2
+	farcall StartMovePkmnWOMail_SaveGame ; 5:4bd2
 	jr c, .asm_e4cf
-	callba MovePKMNWithoutMail_ ; 38:6f47
+	farcall MovePKMNWithoutMail_ ; 38:6f47
 	call ReturnToMapFromSubmenu
 	call Functione566
 .asm_e4cf
@@ -123,12 +123,12 @@ BillsPC_MovePKMNMenu:
 	ret
 
 Text_PleaseRemoveMailBeforeMovePkmnWOMail:
-	text_jump Text_PleaseRemoveMailBeforeMovePkmnWOMail_
+	text_far Text_PleaseRemoveMailBeforeMovePkmnWOMail_
 	db "@"
 
 BillsPC_DepositMenu:
 	call LoadStandardMenuDataHeader
-	callba DepositPokemon_ ; 38:6b9e
+	farcall DepositPokemon_ ; 38:6b9e
 	call ReturnToMapFromSubmenu
 	call Functione566
 	call CloseWindow
@@ -157,11 +157,11 @@ Functione4ed:
 	ret
 
 Text_YouDontHaveASinglePokemon:
-	text_jump Text_YouDontHaveASinglePokemon_
+	text_far Text_YouDontHaveASinglePokemon_
 	db "@"
 
 Text_ItsYourLastPokemon:
-	text_jump Text_ItsYourLastPokemon_
+	text_far Text_ItsYourLastPokemon_
 	db "@"
 
 CheckCurPartyMonFainted: ; e513 (3:6513)
@@ -194,7 +194,7 @@ CheckCurPartyMonFainted: ; e513 (3:6513)
 
 BillsPC_WithdrawMenu:
 	call LoadStandardMenuDataHeader
-	callba WithdrawPokemon_ ; 38:6d71
+	farcall WithdrawPokemon_ ; 38:6d71
 	call ReturnToMapFromSubmenu
 	call Functione566
 	call CloseWindow
@@ -215,11 +215,11 @@ Functione548:
 	ret
 
 Text_CantTakeAnyMorePokemon:
-	text_jump Text_CantTakeAnyMorePokemon_
+	text_far Text_CantTakeAnyMorePokemon_
 	db "@"
 
 BillsPC_ChangeBoxMenu:
-	callba ChangeBox_ ; 38:7d25
+	farcall ChangeBox_ ; 38:7d25
 	and a
 	ret
 
@@ -235,10 +235,10 @@ Functione566: ; e566 (3:6566)
 	call ByteFill
 	hlcoord 0, 0
 	lb bc, 10, 18
-	call TextBox
+	call Textbox
 	hlcoord 0, 12
 	ld bc, IncGradGBPalTable_13
-	call TextBox
+	call Textbox
 	call Function3456
 	call SetPalettes
 	ret

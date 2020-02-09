@@ -99,7 +99,7 @@ FlagAction:: ; 2f36 (0:2f36)
 CheckReceivedDex::
 	ld de, ENGINE_POKEDEX
 	ld b, CHECK_FLAG
-	callba EngineFlagAction
+	farcall EngineFlagAction
 	ld a, c
 	and a
 	ret

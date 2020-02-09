@@ -187,7 +187,7 @@ endr
 ReturnToMapFromSubmenu::
 	ld a, $fa
 	ld [hMapEntryMethod], a
-	callba RunMapSetupScript
+	farcall RunMapSetupScript
 	xor a
 	ld [hMapEntryMethod], a
 	ret
@@ -200,7 +200,7 @@ Function2086::
 	call ResetBikeFlags
 	ld a, $5
 	call RunMapCallback
-	callba Function97c2a
+	farcall Function97c2a
 	ld a, $3
 	call RunMapCallback
 	call GetMapHeaderTimeOfDayNybble
@@ -210,8 +210,8 @@ Function2086::
 Function20ac::
 	ld a, $1
 	ld [wRTCEnabled], a
-	callba Function8c3e9
-	callba UpdateTimeOfDayPal
+	farcall Function8c3e9
+	farcall UpdateTimeOfDayPal
 	call OverworldTextModeSwitch
 	call Function20c7
 	call Function20e6
@@ -224,7 +224,7 @@ Function20c7:: ; 20c7 (0:20c7)
 	ld [wd05b], a
 	ld [hSCY], a
 	ld [hSCX], a
-	callba ApplyBGMapAnchorToObjects
+	farcall ApplyBGMapAnchorToObjects
 	ld a, $60
 	ld bc, $400
 	ld hl, $9800
@@ -268,7 +268,7 @@ Function2112::
 	ld [hMapAnims], a
 	xor a
 	ld [hTileAnimFrame], a
-	callba Function1416d
+	farcall Function1416d
 	call LoadFontsExtra
 	ret
 
@@ -280,8 +280,8 @@ Function212d::
 	call ClearSprites
 	call ResetBGWindow
 	call GetMovementPermissions
-	callba Function5730
-	callba Function15612
+	farcall Function5730
+	farcall Function15612
 	ld hl, wd182
 	bit 6, [hl]
 	jr nz, .asm_2151
@@ -484,7 +484,7 @@ Function2293::
 	call Function22ad
 	ret nc
 	push bc
-	callba Function14a2d
+	farcall Function14a2d
 	pop bc
 	ret nc
 	call Function2302
@@ -498,7 +498,7 @@ Function22a5::
 	ret
 
 Function22ad:: ; 22ad (0:22ad)
-	callba Function14a18
+	farcall Function14a18
 	ret nc
 	ld a, [hROMBank]
 	push af
@@ -1304,15 +1304,15 @@ FindCallback:: ; 277c (0:277c)
 	ret
 
 ExecuteCallbackScript:: ; 279d (0:279d)
-	callba CallCallback
+	farcall CallCallback
 	ld a, [wd15e]
 	push af
 	ld hl, wd15b
 	ld a, [hl]
 	push af
 	set 1, [hl]
-	callba EnableScriptMode
-	callba ScriptEvents
+	farcall EnableScriptMode
+	farcall ScriptEvents
 	pop af
 	ld [wd15b], a
 	pop af
@@ -1324,10 +1324,10 @@ MapTextbox::
 	push af
 	ld a, b
 	rst Bankswitch
-	call SetUpTextBox
+	call SetUpTextbox
 	ld a, $1
 	ld [hOAMUpdate], a
-	call PrintTextBoxText
+	call PrintTextboxText
 	xor a
 	ld [hOAMUpdate], a
 	pop af
@@ -1389,21 +1389,21 @@ ObjectEvent::
 	jumptextfaceplayer ObjectEventText
 
 ObjectEventText::
-	text_jump _ObjectEventText
+	text_far _ObjectEventText
 	db "@"
 
 BGEvent::
 	jumptext BGEventText
 
 BGEventText::
-	text_jump BGEventText_
+	text_far BGEventText_
 	db "@"
 
 CoordinatesEvent::
 	jumptext CoordinatesEventText
 
 CoordinatesEventText::
-	text_jump CoordinatesEventText_
+	text_far CoordinatesEventText_
 	db "@"
 
 CheckObjectMask::
@@ -1616,7 +1616,7 @@ LoadTileset:: ; 2944 (0:2944)
 	jr .asm_2966
 
 .asm_2960
-	callba LoadMapGroupRoof
+	farcall LoadMapGroupRoof
 .asm_2966
 	xor a
 	ld [hTileAnimFrame], a
@@ -2098,7 +2098,7 @@ FadeToMenu::
 	xor a
 	ld [hBGMapMode], a
 	call LoadStandardMenuDataHeader
-	callba FadeOutPalettes
+	farcall FadeOutPalettes
 	call ClearSprites
 	call DisableSpriteUpdates
 	ret
@@ -2121,7 +2121,7 @@ FinishExitMenu::
 	ld b, $9
 	call GetSGBLayout
 	call Function3456
-	callba FadeInPalettes
+	farcall FadeInPalettes
 	call EnableSpriteUpdates
 	ret
 
@@ -2134,7 +2134,7 @@ ReturnToMapWithSpeechTextbox::
 	call ReloadTilesetAndPalettes
 	hlcoord 0, 12
 	lb bc, 4, 18
-	call TextBox
+	call Textbox
 	ld hl, wVramState
 	set 0, [hl]
 	call UpdateSprites
@@ -2151,7 +2151,7 @@ ReturnToMapWithSpeechTextbox::
 ReloadTilesetAndPalettes:: ; 2c87 (0:2c87)
 	call DisableLCD
 	call ClearSprites
-	callba RefreshSprites
+	farcall RefreshSprites
 	call Functiond9e
 	call LoadFontsExtra
 	ld a, [hROMBank]
@@ -2161,7 +2161,7 @@ ReloadTilesetAndPalettes:: ; 2c87 (0:2c87)
 	ld a, [wMapNumber]
 	ld c, a
 	call SwitchToAnyMapBank
-	callba UpdateTimeOfDayPal
+	farcall UpdateTimeOfDayPal
 	call OverworldTextModeSwitch
 	call LoadTileset
 	ld a, $8

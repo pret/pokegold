@@ -19,10 +19,10 @@ BattleRandom::
 	ld a, BANK(BattleRandom_)
 	rst Bankswitch
 	call BattleRandom_
-	ld [wPredefHLBuffer + 1], a
+	ld [wPredefTemp + 1], a
 	pop af
 	rst Bankswitch
-	ld a, [wPredefHLBuffer + 1]
+	ld a, [wPredefTemp + 1]
 	ret
 
 RandomRange::

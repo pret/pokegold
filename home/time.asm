@@ -12,7 +12,7 @@ UpdateTime:: ; 467 (0:0467)
 	call GetClock
 	call FixDays
 	call FixTime
-	callba Function14032
+	farcall Function14032
 	ret
 
 GetClock:: ; 477 (0:0477)
@@ -136,7 +136,7 @@ SetDayOfWeek::
 	jr InitTime
 
 InitTime::
-	callba Function140ff
+	farcall Function140ff
 	ret
 
 PanicResetClock::

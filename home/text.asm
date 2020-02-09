@@ -35,20 +35,20 @@ FillScreenWithTextboxPal::
 	call ByteFill
 	jr ClearTileMap
 
-TextBox:: ; eef (0:0eef)
+Textbox:: ; eef (0:0eef)
 	push bc
 	push hl
-	call TextBoxBorder
+	call TextboxBorder
 	pop hl
 	pop bc
-	jr TextBoxPalette
+	jr TextboxPalette
 
-TextBoxBorder:: ; ef8 (0:0ef8)
+TextboxBorder:: ; ef8 (0:0ef8)
 	push hl
 	ld a, "┌"
 	ld [hli], a
 	inc a
-	call TextBoxBorder_PlaceTiles
+	call TextboxBorder_PlaceTiles
 	inc a
 	ld [hl], a
 	pop hl
@@ -61,7 +61,7 @@ TextBoxBorder:: ; ef8 (0:0ef8)
 	ld a, "│"
 	ld [hli], a
 	ld a, " "
-	call TextBoxBorder_PlaceTiles
+	call TextboxBorder_PlaceTiles
 	ld [hl], "│"
 	pop hl
 
@@ -74,11 +74,11 @@ TextBoxBorder:: ; ef8 (0:0ef8)
 	ld a, "└"
 	ld [hli], a
 	ld a, "─"
-	call TextBoxBorder_PlaceTiles
+	call TextboxBorder_PlaceTiles
 	ld [hl], "┘"
 	ret
 
-TextBoxBorder_PlaceTiles:: ; f25 (0:0f25)
+TextboxBorder_PlaceTiles:: ; f25 (0:0f25)
 	ld d, c
 .loop
 	ld [hli], a
@@ -86,7 +86,7 @@ TextBoxBorder_PlaceTiles:: ; f25 (0:0f25)
 	jr nz, .loop
 	ret
 
-TextBoxPalette
+TextboxPalette
 	ld de, wAttrMap - wTileMap
 	add hl, de
 	inc b
@@ -109,11 +109,11 @@ TextBoxPalette
 	jr nz, .col
 	ret
 
-SpeechTextBox:: ; f45 (0:0f45)
+SpeechTextbox:: ; f45 (0:0f45)
 	hlcoord TEXTBOX_X, TEXTBOX_Y
 	ld b, TEXTBOX_INNERH
 	ld c, TEXTBOX_INNERW
-	jp TextBox
+	jp Textbox
 
 TestText::
 	text "ゲームフりーク!"
@@ -126,15 +126,15 @@ RadioTerminator:: ; 1052
 .stop	db "@"
 
 PrintText::
-	call SetUpTextBox
-PrintTextBoxText::
+	call SetUpTextbox
+PrintTextboxText::
 	bccoord TEXTBOX_INNERX, TEXTBOX_INNERY
 	call PlaceHLTextAtBC
 	ret
 
-SetUpTextBox:: ; f68 (0:0f68)
+SetUpTextbox:: ; f68 (0:0f68)
 	push hl
-	call SpeechTextBox
+	call SpeechTextbox
 	call UpdateSprites
 	call ApplyTilemap
 	pop hl
@@ -315,7 +315,7 @@ PlaceEnemysName:: ; 10fb (0:10fb)
 	call PlaceString
 
 	push bc
-	callab Battle_GetTrainerName
+	callfar Battle_GetTrainerName
 	pop hl
 
 	ld de, wStringBuffer1
@@ -483,7 +483,7 @@ NullChar:: ; 120c (0:120c)
 	ret
 
 .ErrorText
-	deciram hObjectStructIndexBuffer, 1, 2
+	text_decimal hObjectStructIndexBuffer, 1, 2
 	text "エラー"
 	done
 
@@ -525,12 +525,12 @@ Diacritic:: ; 124a (0:124a)
 
 LoadBlinkingCursor:: ; 1255 (0:1255)
 	ld a, "▼"
-	Coorda 18, 17
+	ldcoord_a 18, 17
 	ret
 
 UnloadBlinkingCursor:: ; 125b (0:125b)
 	ld a, "─"
-	Coorda 18, 17
+	ldcoord_a 18, 17
 	ret
 
 FarString::
@@ -551,15 +551,15 @@ PokeFluteTerminatorCharacter::
 .stop	db "@"
 
 PlaceHLTextAtBC:: ; 1272 (0:1272)
-	ld a, [wTextBoxFlags]
+	ld a, [wTextboxFlags]
 	push af
 	set 1, a
-	ld [wTextBoxFlags], a
+	ld [wTextboxFlags], a
 
 	call DoTextUntilTerminator
 
 	pop af
-	ld [wTextBoxFlags], a
+	ld [wTextboxFlags], a
 	ret
 
 DoTextUntilTerminator:: ; 1283 (0:1283)
@@ -690,7 +690,7 @@ Text_TX_BOX:: ; 1318 (0:1318)
 	push hl
 	ld h, d
 	ld l, e
-	call TextBox
+	call Textbox
 	pop hl
 	ret
 
@@ -802,14 +802,14 @@ Text_TX_CRY
 	pop bc
 	ret
 
-TextSFX:: ; 13ad (0:13ad)
-	dbw TX_SOUND_0B, SFX_DEX_FANFARE_50_79
-	dbw TX_SOUND_12, SFX_FANFARE
-	dbw TX_SOUND_0E, SFX_DEX_FANFARE_20_49
-	dbw TX_SOUND_0F, SFX_ITEM
-	dbw TX_SOUND_10, SFX_CAUGHT_MON
-	dbw TX_SOUND_11, SFX_DEX_FANFARE_80_109
-	dbw TX_SOUND_13, SFX_SLOT_MACHINE_START
+TextSFX::
+	dbw TX_SOUND_DEX_FANFARE_50_79,  SFX_DEX_FANFARE_50_79
+	dbw TX_SOUND_FANFARE,            SFX_FANFARE
+	dbw TX_SOUND_DEX_FANFARE_20_49,  SFX_DEX_FANFARE_20_49
+	dbw TX_SOUND_ITEM,               SFX_ITEM
+	dbw TX_SOUND_CAUGHT_MON,         SFX_CAUGHT_MON
+	dbw TX_SOUND_DEX_FANFARE_80_109, SFX_DEX_FANFARE_80_109
+	dbw TX_SOUND_SLOT_MACHINE_START, SFX_SLOT_MACHINE_START
 	db -1
 
 Text_TX_DOTS:: ; 13c3 (0:13c3)

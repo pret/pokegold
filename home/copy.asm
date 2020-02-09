@@ -25,19 +25,19 @@ Functiond70:: ; d70 (0:0d70)
 	ret
 
 ReplacePlayerSprite::
-	callba Function1413c
+	farcall Function1413c
 	ret
 
 Functiond9e::
-	callba Functionf8000
+	farcall Functionf8000
 	ret
 
 Functionda5::
-	callba Functionf8032
+	farcall Functionf8032
 	ret
 
 LoadFontsExtra::
-	callba Functionf800c
+	farcall Functionf800c
 	ret
 
 DecompressRequest2bpp::

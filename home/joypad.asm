@@ -289,7 +289,7 @@ JoyWaitInput:: ; a77 (0:0a77)
 	ld a, [wInputType]
 	or a
 	jr z, .wait_loop
-	callba DudeAutoInput_A
+	farcall DudeAutoInput_A
 
 .wait_loop
 	call JoyBlinkCursor
@@ -318,7 +318,7 @@ JoyBlinkCursor:: ; aa6 (0:0aa6)
 .cursor_off
 	ld a, "─"
 .load_cursor_state
-	Coorda 18, 17
+	ldcoord_a 18, 17
 	ret
 
 BlinkCursor:: ; ab6 (0:0ab6)

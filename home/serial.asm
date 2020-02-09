@@ -256,13 +256,13 @@ Function7ec:: ; 7ec
 
 Function813:: ; 813
 	call BackUpTilesToBuffer
-	callab PlaceWaitingText
+	callfar PlaceWaitingText
 	call WaitLinkTransfer
 	jp ReloadTilesFromBuffer
 
 Function822:: ; 822
 	call BackUpTilesToBuffer
-	callab PlaceWaitingText
+	callfar PlaceWaitingText
 	jp WaitLinkTransfer
 
 ; One "giant" leap for machinekind

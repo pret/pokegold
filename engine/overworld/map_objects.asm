@@ -605,7 +605,7 @@ Function554b: ; 554b (1:554b)
 	ret nc
 	ld d, h
 	ld e, l
-	callba CopyTempObjectToObjectStruct
+	farcall CopyTempObjectToObjectStruct
 	ret
 
 Function5558: ; 5558 (1:5558)
@@ -717,14 +717,14 @@ Function55ef: ; 55ef (1:55ef)
 	call Function5636
 	jr c, Function5613
 	call Function561b
-	callba Function4441 ; same bank
+	farcall Function4441 ; same bank
 	xor a
 	ret
 
 Function5606: ; 5606 (1:5606)
 	call Function5636
 	jr c, Function5613
-	callba Function4441 ; same bank
+	farcall Function4441 ; same bank
 	xor a
 	ret
 
@@ -748,7 +748,7 @@ Function561b: ; 561b (1:561b)
 	ld hl, $e
 	add hl, bc
 	ld [hl], a
-	callba UpdateGrassPriority ; same bank
+	farcall UpdateGrassPriority ; same bank
 	ret
 
 Function5636: ; 5636 (1:5636)
@@ -931,7 +931,7 @@ Function5730:: ; 5730 (1:5730)
 	ld [wcf39], a
 	ld [wPlayerObjectStepFrame], a
 	call Function574f
-	callba Function14a44
+	farcall Function14a44
 	call c, Function5770
 	call Function5761
 	ret
@@ -974,7 +974,7 @@ StartFollow::
 	ret c
 	ld a, c
 	call Function57a2
-	callba QueueFollowerFirstStep
+	farcall QueueFollowerFirstStep
 	ret
 
 Function578b: ; 578b (1:578b)
@@ -1015,7 +1015,7 @@ Function57bd: ; 57bd (1:57bd)
 	cp $ff
 	ret z
 	call GetObjectStruct
-	callba Function5859 ; same bank
+	farcall Function5859 ; same bank
 	ld a, $ff
 	ld [wObjectFollow_Follower], a
 	ret

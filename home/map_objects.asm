@@ -3,7 +3,7 @@ GetSpritePalette:: ; 169c
 	push de
 	push bc
 	ld c, a
-	callba GetSpritePalette_
+	farcall GetSpritePalette_
 	ld a, c
 	pop bc
 	pop de
@@ -292,7 +292,7 @@ CopyObjectStruct::
 	call UnmaskObject
 	ld a, [hConnectionStripLength]
 	call GetMapObject
-	callba CopyObjectStruct_
+	farcall CopyObjectStruct_
 	ret
 
 ApplyDeletionToMapObject:: ; 1804 (0:1804)
@@ -308,7 +308,7 @@ ApplyDeletionToMapObject:: ; 1804 (0:1804)
 	call DeleteOject_CheckStopFollow
 	pop af
 	call GetObjectStruct
-	callba DeleteMapObject
+	farcall DeleteMapObject
 	ret
 
 DeleteOject_CheckStopFollow:: ; 1822 (0:1822)
@@ -319,7 +319,7 @@ DeleteOject_CheckStopFollow:: ; 1822 (0:1822)
 	cp [hl]
 	ret nz
 .asm_182d
-	callba StopFollow
+	farcall StopFollow
 	ld a, $ff
 	ld [wObjectFollow_Leader], a
 	ld [wObjectFollow_Follower], a
@@ -368,7 +368,7 @@ Function1855::
 .asm_187b
 	ld a, b
 	call GetObjectStruct
-	callba DeleteMapObject
+	farcall DeleteMapObject
 	ret
 
 LoadMovementDataPointer::
@@ -556,8 +556,8 @@ UpdateSprites:: ; 196f (0:196f)
 	ld a, [wVramState]
 	bit 0, a
 	ret z
-	callba Function557f
-	callba UpdateSprites_
+	farcall Function557f
+	farcall UpdateSprites_
 	ret
 
 GetObjectStruct:: ; 1982 (0:1982)

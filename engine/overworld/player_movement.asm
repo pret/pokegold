@@ -576,7 +576,7 @@ Function10341: ; 10341 (4:4341)
 	add e
 	ld e, a
 	ld bc, wPlayerSprite
-	callba Function7120
+	farcall Function7120
 	jr nc, .asm_10369
 	call Function1036f
 	jr c, .asm_1036c
