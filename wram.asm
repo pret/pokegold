@@ -131,7 +131,7 @@ wAutoInputLength::  db ; c2ca
 
 wMonStatusFlags:: ds 1 ; c1cb
 wGameLogicPaused:: ds 1 ; c1cc
-wRTCEnabled:: ds 1
+wSpriteUpdatesEnabled:: db
 wc1ce:: ds 1 ; c1ce
 wMapTimeOfDay:: ds 1 ; c1cf
 	ds 3

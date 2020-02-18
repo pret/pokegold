@@ -37,9 +37,9 @@ INCLUDE "home/map.asm"
 InexplicablyEmptyFunction:: ; 2e16
 ; Inexplicably empty.
 ; Seen in PredefPointers.
-	rept 16
+rept 16
 	nop
-	endr
+endr
 	ret
 
 INCLUDE "home/farcall.asm"
@@ -47,10 +47,12 @@ INCLUDE "home/predef.asm"
 INCLUDE "home/window.asm"
 INCLUDE "home/flag.asm"
 
-Function2f7b::
+Unreferenced_CheckBPressedDebug::
+; Used in debug ROMs to walk through walls and avoid encounters.
 	ld a, [wMonStatusFlags]
 	bit 1, a
 	ret z
+	
 	ld a, [hJoyDown]
 	bit 1, a
 	ret
@@ -64,33 +66,14 @@ xor_a_dec_a::
 	dec a
 	ret
 
-Function2f8b::
+Unreferenced_CheckFieldDebug::
 	push hl
 	ld hl, wMonStatusFlags
 	bit 1, [hl]
 	pop hl
 	ret
-
-DisableSpriteUpdates:: ; 2f93 (0:2f93)
-	xor a
-	ld [hMapAnims], a
-	ld a, [wVramState]
-	res 0, a
-	ld [wVramState], a
-	ld a, $0
-	ld [wRTCEnabled], a
-	ret
-
-EnableSpriteUpdates:: ; 2fa4 (0:2fa4)
-	ld a, $1
-	ld [wRTCEnabled], a
-	ld a, [wVramState]
-	set 0, a
-	ld [wVramState], a
-	ld a, $1
-	ld [hMapAnims], a
-	ret
-
+	
+INCLUDE "home/sprite_updates.asm"
 INCLUDE "home/string.asm"
 
 IsInJohto::
@@ -739,7 +722,7 @@ ApplyTilemap:: ; 3472 (0:3472)
 	ld a, [hCGB]
 	and a
 	jr z, .asm_3484
-	ld a, [wRTCEnabled]
+	ld a, [wSpriteUpdatesEnabled]
 	cp $0
 	jr z, .asm_3484
 	ld a, $1

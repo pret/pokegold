@@ -209,7 +209,7 @@ Function2086::
 
 Function20ac::
 	ld a, $1
-	ld [wRTCEnabled], a
+	ld [wSpriteUpdatesEnabled], a
 	farcall Function8c3e9
 	farcall UpdateTimeOfDayPal
 	call OverworldTextModeSwitch
@@ -2128,7 +2128,7 @@ FinishExitMenu::
 ReturnToMapWithSpeechTextbox::
 	push af
 	ld a, $1
-	ld [wRTCEnabled], a
+	ld [wSpriteUpdatesEnabled], a
 	call ClearBGPalettes
 	call ClearSprites
 	call ReloadTilesetAndPalettes
