@@ -147,7 +147,7 @@ LearnMove:
 	ld [wcede], a
 	call StaticMenuJoypad
 	push af
-	call LoadTempTileMapToTileMap
+	call Call_LoadTempTileMapToTileMap
 	pop af
 	pop hl
 	bit 1, a

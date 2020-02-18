@@ -3,7 +3,7 @@ LoadTileMapToTempTileMap::
 	hlcoord 0, 0
 	decoord 0, 0, wTempTileMap
 	ld bc, wTileMapEnd - wTileMap
-	call CopyBytes
+	jp CopyBytes
 
 Call_LoadTempTileMapToTileMap::
 	xor a
@@ -17,4 +17,4 @@ LoadTempTileMapToTileMap::
 	hlcoord 0, 0, wTempTileMap
 	decoord 0, 0
 	ld bc, wTileMapEnd - wTileMap
-	call CopyBytes
+	jp CopyBytes
