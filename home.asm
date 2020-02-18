@@ -153,26 +153,7 @@ _de_::
 
 INCLUDE "home/clear_sprites.asm"
 INCLUDE "home/copy2.asm"
-
-BackUpTilesToBuffer::
-	hlcoord 0, 0
-	decoord 0, 0, wTileMapBackup
-	ld bc, SCREEN_HEIGHT * SCREEN_WIDTH
-	jp CopyBytes
-
-ReloadTilesFromBuffer::
-	xor a
-	ld [hBGMapMode], a
-	call ReloadTilesFromBuffer_
-	ld a, $1
-	ld [hBGMapMode], a
-	ret
-
-ReloadTilesFromBuffer_::
-	hlcoord 0, 0, wTileMapBackup
-	decoord 0, 0
-	ld bc, SCREEN_HEIGHT * SCREEN_WIDTH
-	jp CopyBytes
+INCLUDE "home/copy_tilemap.asm"
 
 Function317b:: ; 317b (0:317b)
 	ld hl, wStringBuffer2

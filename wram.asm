@@ -251,7 +251,7 @@ wTileMapEnd:: ; c508
 
 SECTION "Animated Objects", WRAM0
 wMisc:: ; c508
-wTileMapBackup:: ; c508
+wTempTileMap:: ; c508
 	; ds SCREEN_HEIGHT * SCREEN_WIDTH
 wAnimatedObjectDynamicVTileOffsets:: ds 10 * 2 ; c508
 wAnimatedObjectStructs:: ; c51c

@@ -255,13 +255,13 @@ Function7ec:: ; 7ec
 	ret
 
 Function813:: ; 813
-	call BackUpTilesToBuffer
+	call LoadTileMapToTempTileMap
 	callfar PlaceWaitingText
 	call WaitLinkTransfer
-	jp ReloadTilesFromBuffer
+	jp Call_LoadTempTileMapToTileMap
 
 Function822:: ; 822
-	call BackUpTilesToBuffer
+	call LoadTileMapToTempTileMap
 	callfar PlaceWaitingText
 	jp WaitLinkTransfer
 
