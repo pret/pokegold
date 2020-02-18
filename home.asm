@@ -75,32 +75,7 @@ Unreferenced_CheckFieldDebug::
 	
 INCLUDE "home/sprite_updates.asm"
 INCLUDE "home/string.asm"
-
-IsInJohto::
-	ld a, [wMapGroup]
-	ld b, a
-	ld a, [wMapNumber]
-	ld c, a
-	call GetWorldMapLocation
-	cp $5e
-	jr z, .asm_2ff9
-	cp $0
-	jr nz, .asm_2ff5
-	ld a, [wd9f6]
-	ld b, a
-	ld a, [wd9f7]
-	ld c, a
-	call GetWorldMapLocation
-.asm_2ff5
-	cp $2e
-	jr nc, .asm_2ffb
-.asm_2ff9
-	xor a
-	ret
-
-.asm_2ffb
-	ld a, $1
-	ret
+INCLUDE "home/region.asm"
 
 Function2ffe:: ; 2ffe (0:2ffe)
 	push hl

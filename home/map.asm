@@ -589,7 +589,7 @@ Function230f:: ; 230f (0:230f)
 	ld a, [hli]
 	cp $ff
 	jr nz, .asm_232b
-	ld hl, wd9f5
+	ld hl, wBackupWarpNumber
 	ld a, [hli]
 .asm_232b
 	pop bc
@@ -976,11 +976,11 @@ RestoreFacingAfterWarp::
 
 BackUpWarp:: ; 2596 (0:2596)
 	ld a, [wPrevWarpNumber]
-	ld [wd9f5], a
+	ld [wBackupWarpNumber], a
 	ld a, [wPrevMapGroup]
-	ld [wd9f6], a
+	ld [wBackupMapGroup], a
 	ld a, [wPrevMapNumber]
-	ld [wd9f7], a
+	ld [wBackupMapNumber], a
 	ret
 
 GetCoordOfUpperLeftCorner:: ; 25a9 (0:25a9)

@@ -3553,9 +3553,11 @@ wMapData::
 wVisitedSpawns:: ds 4 ; flag_array NUM_SPAWNS ; d9ee
 
 	warp_struct wDig ; d9f2
-wd9f5:: ds 1 ; d9f5
-wd9f6:: ds 1 ; d9f6
-wd9f7:: ds 1 ; d9f7
+	
+wBackupWarpNumber:: db ; d9f5
+wBackupMapGroup:: db ; d9f6
+wBackupMapNumber:: db ; d9f7
+
 wd9f8:: ds 1 ; d9f8
 wd9f9:: ds 1 ; d9f9
 wd9fa:: ds 1 ; d9fa
