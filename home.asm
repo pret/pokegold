@@ -143,35 +143,15 @@ INCLUDE "home/item.asm"
 INCLUDE "home/random.asm"
 INCLUDE "home/sram.asm"
 
-jp_hl::
+; Register aliases
+_hl_::
 	jp hl
 
-jp_de::
+_de_::
 	push de
 	ret
 
-ClearSprites:: ; 30ff (0:30ff)
-	ld hl, wVirtualOAM
-	ld b, $a0
-	xor a
-.asm_3105
-	ld [hli], a
-	dec b
-	jr nz, .asm_3105
-	ret
-
-HideSprites::
-	ld hl, wVirtualOAM
-	ld de, $4
-	ld b, $28
-	ld a, $a0
-.asm_3114
-	ld [hl], a
-	add hl, de
-	dec b
-	jr nz, .asm_3114
-	ret
-
+INCLUDE "home/clear_sprites.asm"
 INCLUDE "home/copy2.asm"
 
 BackUpTilesToBuffer::
@@ -619,7 +599,7 @@ Function3414::
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
-	call jp_hl
+	call _hl_
 	pop hl
 	ld a, h
 	rst Bankswitch
