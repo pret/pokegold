@@ -1057,7 +1057,7 @@ GiveEgg: ; df92 (3:5f92)
 	ld hl, wPartyMon1Happiness
 	ld bc, PARTYMON_STRUCT_LENGTH
 	call AddNTimes
-	ld a, [wMonStatusFlags]
+	ld a, [wDebugFlags]
 	bit 1, a
 	ld a, $1
 	jr nz, .asm_e028

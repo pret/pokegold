@@ -49,7 +49,7 @@ INCLUDE "home/flag.asm"
 
 Unreferenced_CheckBPressedDebug::
 ; Used in debug ROMs to walk through walls and avoid encounters.
-	ld a, [wMonStatusFlags]
+	ld a, [wDebugFlags]
 	bit 1, a
 	ret z
 	
@@ -68,8 +68,8 @@ xor_a_dec_a::
 
 Unreferenced_CheckFieldDebug::
 	push hl
-	ld hl, wMonStatusFlags
-	bit 1, [hl]
+	ld hl, wDebugFlags
+	bit DEBUG_FIELD_F, [hl]
 	pop hl
 	ret
 	
@@ -154,33 +154,29 @@ _de_::
 INCLUDE "home/clear_sprites.asm"
 INCLUDE "home/copy2.asm"
 INCLUDE "home/copy_tilemap.asm"
-
-Function317b:: ; 317b (0:317b)
-	ld hl, wStringBuffer2
-CopyName2::
-	ld a, [de]
-	inc de
-	ld [hli], a
-	cp "@"
-	jr nz, CopyName2
-	ret
+INCLUDE "home/copy_name.asm"
 
 IsInArray::
-	ld b, $0
+; Find value a for every de bytes in array hl.
+; Return index in b and carry if found.
+
+	ld b, 0
 	ld c, a
-.asm_3189
+.loop
 	ld a, [hl]
-	cp $ff
-	jr z, .asm_3195
+	cp -1
+	jr z, .NotInArray
 	cp c
-	jr z, .asm_3197
+	jr z, .InArray
 	inc b
 	add hl, de
-	jr .asm_3189
-.asm_3195
+	jr .loop
+
+.NotInArray:
 	and a
 	ret
-.asm_3197
+
+.InArray:
 	scf
 	ret
 

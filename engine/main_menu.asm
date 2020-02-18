@@ -248,7 +248,7 @@ MainMenu_Options:
 
 MainMenu_NewGame:
 	xor a
-	ld [wMonStatusFlags], a
+	ld [wDebugFlags], a
 	call Function5c3a
 	call Function5bf7
 	call OakSpeech

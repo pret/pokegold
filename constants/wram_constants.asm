@@ -1,12 +1,18 @@
 ; InputType: ; c2c7
 AUTO_INPUT EQU $ff
 
-; MonType: ; cf5f
-PARTYMON   EQU 0
-OTPARTYMON EQU 1
-BOXMON     EQU 2
-TEMPMON   EQU 3
-WILDMON    EQU 4
+; wDebugFlags:: ; c2cc
+	const_def
+	const DEBUG_BATTLE_F
+	const DEBUG_FIELD_F
+
+; wMonType:: ; cf5f
+	const_def
+	const PARTYMON   ; 0
+	const OTPARTYMON ; 1
+	const BOXMON     ; 2
+	const TEMPMON    ; 3
+	const WILDMON    ; 4
 
 ; wOptions: ; cfcc
 FAST_TEXT      EQU 0

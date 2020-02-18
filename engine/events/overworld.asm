@@ -25,7 +25,7 @@ FieldMoveGetPartyNick: ; c74b (3:474b)
 	ld [wMonType], a
 	ld a, [wCurPartyMon]
 	call GetNick
-	call Function317b
+	call CopyName1
 	ld de, wStringBuffer2
 	ld hl, wStringBuffer3
 	call CopyName2

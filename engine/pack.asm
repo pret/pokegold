@@ -1404,7 +1404,7 @@ Function10e38: ; 10e38 (4:4e38)
 	ld a, [wd002]
 	ld [wd151], a
 	call GetItemName
-	call Function317b
+	call CopyName1
 	ret
 
 Pack_ClearTilemap:

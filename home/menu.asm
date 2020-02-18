@@ -99,7 +99,7 @@ CopyNameFromMenu::
 	call GetNthString
 	ld d, h
 	ld e, l
-	call Function317b
+	call CopyName1
 	pop bc
 	pop hl
 	ret

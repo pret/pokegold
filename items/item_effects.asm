@@ -2,7 +2,7 @@ DoItemEffect_:: ; e7a6 (3:67a6)
 	ld a, [wd002]
 	ld [wd151], a
 	call GetItemName
-	call Function317b
+	call CopyName1
 	ld a, $1
 	ld [wFieldMoveSucceeded], a
 	ld a, [wd002]
@@ -2184,7 +2184,7 @@ PPUp: ; f606 (3:7606)
 	ld a, [hl]
 	ld [wd151], a
 	call GetMoveName
-	call Function317b
+	call CopyName1
 	pop hl
 	ld a, [wceed]
 	cp PP_UP
