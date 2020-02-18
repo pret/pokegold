@@ -14,18 +14,26 @@ AUTO_INPUT EQU $ff
 	const TEMPMON    ; 3
 	const WILDMON    ; 4
 
-; wOptions: ; cfcc
-FAST_TEXT      EQU 0
-MED_TEXT       EQU 1
-SLOW_TEXT      EQU 2
-NO_TEXT_SCROLL EQU 4
-; bits
-STEREO         EQU 5
-BATTLE_SHIFT   EQU 6
-BATTLE_SCENE   EQU 7
+; wOptions:: ; cfcc
+TEXT_DELAY_MASK EQU %111
+	const_def 4
+	const NO_TEXT_SCROLL ; 4
+	const STEREO         ; 5
+	const BATTLE_SHIFT   ; 6
+	const BATTLE_SCENE   ; 7
 
-; Options2:
-MENU_ACCOUNT EQU 0
+TEXT_DELAY_FAST EQU %001 ; 1
+TEXT_DELAY_MED  EQU %011 ; 3
+TEXT_DELAY_SLOW EQU %101 ; 5
+
+; wOptions2::
+	const_def
+	const MENU_ACCOUNT ; 0
+
+; wTextboxFlags::
+	const_def
+	const FAST_TEXT_DELAY_F ; 0
+	const NO_TEXT_DELAY_F   ; 1
 
 ; GBPrinter:
 PRINT_LIGHTEST EQU $00

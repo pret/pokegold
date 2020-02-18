@@ -8,7 +8,7 @@ MainMenu_:
 	call PlayMusic
 .asm_5a60
 	xor a
-	ld [wc1d6], a
+	ld [wDisableTextAcceleration], a
 	call Function5bf7
 	ld b, $8
 	call GetSGBLayout

@@ -247,7 +247,7 @@ endm
 	call Diacritic
 .place
 	ld [hli], a
-	call Function31e2
+	call PrintLetterDelay
 	jp NextChar
 
 print_name: macro

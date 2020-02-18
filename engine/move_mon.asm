@@ -1130,7 +1130,7 @@ RemoveMonFromPartyOrBox: ; e03f (3:603f)
 	jr z, .asm_e096
 	ld bc, sBoxMonNicknames
 .asm_e096
-	call Function3231
+	call CopyDataUntil
 	ld hl, wPartyMon1
 	ld bc, PARTYMON_STRUCT_LENGTH
 	ld a, [wPokemonWithdrawDepositParameter]
@@ -1156,7 +1156,7 @@ RemoveMonFromPartyOrBox: ; e03f (3:603f)
 	add hl, bc
 	ld bc, wPartyMonOT
 .asm_e0c9
-	call Function3231
+	call CopyDataUntil
 	ld hl, wPartyMonNicknames
 	ld a, [wPokemonWithdrawDepositParameter]
 	and a
@@ -1176,7 +1176,7 @@ RemoveMonFromPartyOrBox: ; e03f (3:603f)
 	jr z, .asm_e0f3
 	ld bc, sBoxEnd
 .asm_e0f3
-	call Function3231
+	call CopyDataUntil
 .asm_e0f6
 	ld a, [wPokemonWithdrawDepositParameter]
 	and a

@@ -138,7 +138,7 @@ wMapTimeOfDay:: ds 1 ; c1cf
 wPrinterConnectionOpen:: ds 1
 wPrinterOpcode:: ds 1 ; c1d4
 wc1d5:: ds 1 ; c1d5
-wc1d6:: ds 1 ; c1d6
+wDisableTextAcceleration:: ds 1 ; c1d6
 wc1d7:: ds 1 ; c1d7
 wc1d8:: ds 1 ; c1d8
 wc1d9:: ds 1 ; c1d9
