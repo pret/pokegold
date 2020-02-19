@@ -2098,7 +2098,7 @@ wLinkTimeoutFrames:: ds 2
 wce5d:: ds 2 ; ce5d
 wMonType:: ds 1 ; ce5f
 wCurSpecies:: ds 1 ; ce60
-wce61:: ds 1 ; ce61
+wNamedObjectTypeBuffer:: ds 1 ; ce61
 wce62:: ds 1 ; ce62
 wce63::
 wJumpTableIndex::
