@@ -2752,6 +2752,7 @@ wTempNumBuffer::
 wNamedObjectIndexBuffer::
 wDeciramBuffer::
 wBreedingCompatibility::
+wNumSetBits::
 wd151:: ds 1 ; d151
 wd152:: ds 1 ; d152
 wd153:: ds 1 ; d153

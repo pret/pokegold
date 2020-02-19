@@ -1,12 +1,12 @@
 DoItemEffect::
-	farcall DoItemEffect_
+	farcall _DoItemEffect
 	ret
 
 CheckTossableItem::
 	push hl
 	push de
 	push bc
-	farcall CheckTossableItem_
+	farcall _CheckTossableItem
 	pop bc
 	pop de
 	pop hl
@@ -18,9 +18,11 @@ TossItem::
 	push bc
 	ldh a, [hROMBank]
 	push af
-	ld a, BANK(TossItem_)
+	ld a, BANK(_TossItem)
 	rst Bankswitch
-	call TossItem_
+
+	call _TossItem
+
 	pop bc
 	ld a, b
 	rst Bankswitch
@@ -33,11 +35,13 @@ ReceiveItem::
 	push bc
 	ldh a, [hROMBank]
 	push af
-	ld a, BANK(ReceiveItem_)
+	ld a, BANK(_ReceiveItem)
 	rst Bankswitch
 	push hl
 	push de
-	call ReceiveItem_
+
+	call _ReceiveItem
+
 	pop de
 	pop hl
 	pop bc
@@ -52,9 +56,11 @@ CheckItem::
 	push bc
 	ldh a, [hROMBank]
 	push af
-	ld a, BANK(CheckItem_)
+	ld a, BANK(_CheckItem)
 	rst Bankswitch
-	call CheckItem_
+
+	call _CheckItem
+
 	pop bc
 	ld a, b
 	rst Bankswitch

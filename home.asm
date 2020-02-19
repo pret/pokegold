@@ -217,40 +217,30 @@ CallPointerAt::
 INCLUDE "home/queue_script.asm"
 INCLUDE "home/compare.asm"
 INCLUDE "home/tilemap.asm"
-
-SetHPPal::
-	call GetHPPal
-	ld [hl], d
-	ret
-
-GetHPPal:: ; 3596 (0:3596)
-	ld d, $0
-	ld a, e
-	cp $18
-	ret nc
-	inc d
-	cp $a
-	ret nc
-	inc d
-	ret
+INCLUDE "home/hp_pals.asm"
 
 CountSetBits::
-	ld c, $0
-.asm_35a4
+; Count the number of set bits in b bytes starting from hl.
+; Return in a, c and [wNumSetBits].
+	ld c, 0
+.next
 	ld a, [hli]
 	ld e, a
-	ld d, $8
-.asm_35a8
+	ld d, 8
+
+.count
 	srl e
-	ld a, $0
+	ld a, 0
 	adc c
 	ld c, a
 	dec d
-	jr nz, .asm_35a8
+	jr nz, .count
+
 	dec b
-	jr nz, .asm_35a4
+	jr nz, .next
+
 	ld a, c
-	ld [wd151], a
+	ld [wNumSetBits], a
 	ret
 
 GetWeekday::

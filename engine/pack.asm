@@ -120,7 +120,7 @@ Pack_TMHMPocketMenu:
 	ld c, $1
 	call Function10cef
 	ret c
-	farcall CheckTossableItem_
+	farcall _CheckTossableItem
 	ld a, [wItemAttributeParamBuffer]
 	and a
 	jr nz, .asm_1053a
@@ -228,7 +228,7 @@ Pack_BallsPocketMenu:
 	ret
 
 Function105f5: ; 105f5 (4:45f5)
-	farcall CheckTossableItem_
+	farcall _CheckTossableItem
 	ld a, [wItemAttributeParamBuffer]
 	and a
 	jr nz, .asm_10629

@@ -1,4 +1,4 @@
-DoItemEffect_:: ; e7a6 (3:67a6)
+_DoItemEffect:: ; e7a6 (3:67a6)
 	ld a, [wd002]
 	ld [wd151], a
 	call GetItemName

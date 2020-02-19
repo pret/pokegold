@@ -1,4 +1,4 @@
-ReceiveItem_:: ; d1e2 (3:51e2)
+_ReceiveItem:: ; d1e2 (3:51e2)
 	call CheckBagOrPC
 	jp nz, PutItemInPocketOrPC
 	push hl
@@ -38,7 +38,7 @@ ReceiveTMHM:
 	call GetTMHMNumber
 	jp PutItemInTMPocket
 
-TossItem_:: ; d21a (3:521a)
+_TossItem:: ; d21a (3:521a)
 	call CheckBagOrPC
 	jr nz, remove_item_from_bag_or_pc
 	push hl
@@ -79,7 +79,7 @@ RemoveNormalItem:
 remove_item_from_bag_or_pc
 	jp RemoveItemAndQuantity
 
-CheckItem_:: ; d251 (3:5251)
+_CheckItem:: ; d251 (3:5251)
 	call CheckBagOrPC
 	jr nz, check_item_in_bag_or_pc
 	push hl
@@ -473,7 +473,7 @@ GetNumberedTM:
 	ld c, a
 	ret
 
-CheckTossableItem_:: ; d434 (3:5434)
+_CheckTossableItem:: ; d434 (3:5434)
 	ld a, $4
 	call GetItemAttr
 	bit 7, a
