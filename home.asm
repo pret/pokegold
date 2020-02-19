@@ -212,35 +212,7 @@ CallPointerAt::
 	ret
 
 INCLUDE "home/queue_script.asm"
-
-Function3431::
-.asm_3431
-	ld a, [de]
-	cp [hl]
-	ret nz
-	inc de
-	inc hl
-	dec c
-	jr nz, .asm_3431
-	ret
-
-Function343a::
-.asm_343a
-	ld a, [de]
-	cp [hl]
-	jr nz, .asm_3447
-	inc de
-	inc hl
-	dec bc
-	ld a, b
-	or c
-	jr nz, .asm_343a
-	scf
-	ret
-
-.asm_3447
-	and a
-	ret
+INCLUDE "home/compare.asm"
 
 ClearBGPalettes::
 	call ClearPalettes
