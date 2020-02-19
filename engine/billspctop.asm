@@ -20,7 +20,7 @@ Text_GottaHavePokemon:
 
 BillsPC_LogIn: ; e3f7 (3:63f7)
 	xor a
-	ld [hBGMapMode], a
+	ldh [hBGMapMode], a
 	call LoadStandardMenuDataHeader
 	call Functione566
 	ld hl, wOptions
@@ -51,7 +51,7 @@ BillsPC_UsePC: ; e41e (3:641e)
 	call SetPalettes
 	xor a
 	ld [wWhichIndexSet], a
-	ld [hBGMapMode], a
+	ldh [hBGMapMode], a
 	call DoNthMenu
 	jr c, .asm_e446
 	ld a, [wMenuCursorBuffer]
@@ -226,7 +226,7 @@ BillsPC_ChangeBoxMenu:
 Functione566: ; e566 (3:6566)
 	call DisableSpriteUpdates
 	xor a
-	ld [hBGMapMode], a
+	ldh [hBGMapMode], a
 	call ClearBGPalettes
 	call ClearSprites
 	hlcoord 0, 0

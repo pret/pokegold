@@ -15,7 +15,7 @@ CopyBytes:: ; 311a (0:311a)
 
 GetFarByte:: ; 3128 (0:3128)
 	ld [wBuffer], a
-	ld a, [hROMBank]
+	ldh a, [hROMBank]
 	push af
 	ld a, [wBuffer]
 	rst Bankswitch
@@ -28,7 +28,7 @@ GetFarByte:: ; 3128 (0:3128)
 
 GetFarHalfword:: ; 313c (0:313c)
 	ld [wBuffer], a
-	ld a, [hROMBank]
+	ldh a, [hROMBank]
 	push af
 	ld a, [wBuffer]
 	rst Bankswitch

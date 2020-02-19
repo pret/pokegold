@@ -57,7 +57,7 @@ Call_ExitMenu::
 
 VerticalMenu:: ; 1bf3 (0:1bf3)
 	xor a
-	ld [hBGMapMode], a
+	ldh [hBGMapMode], a
 	call MenuBox
 	call UpdateSprites
 	call PlaceVerticalMenuItems
@@ -213,17 +213,17 @@ DrawVariableLengthMenuBox:: ; 1ce9 (0:1ce9)
 
 MenuWriteText:: ; 1cf6 (0:1cf6)
 	xor a
-	ld [hBGMapMode], a
+	ldh [hBGMapMode], a
 	call GetMenuIndexSet
 	call RunMenuItemPrintingFunction
 	call SafeUpdateSprites
-	ld a, [hOAMUpdate]
+	ldh a, [hOAMUpdate]
 	push af
 	ld a, $1
-	ld [hOAMUpdate], a
+	ldh [hOAMUpdate], a
 	call ApplyTilemap
 	pop af
-	ld [hOAMUpdate], a
+	ldh [hOAMUpdate], a
 	ret
 
 AutomaticGetMenuBottomCoord:: ; 1d10 (0:1d10)
@@ -474,7 +474,7 @@ MenuTextBoxWaitButton::
 
 Place2DMenuItemName::
 	ld [wBuffer], a
-	ld a, [hROMBank]
+	ldh a, [hROMBank]
 	push af
 	ld a, [wBuffer]
 	rst Bankswitch
@@ -485,7 +485,7 @@ Place2DMenuItemName::
 
 _2DMenu::
 	call CopyMenuData2
-	ld a, [hROMBank]
+	ldh a, [hROMBank]
 	ld [wMenuDataBank], a
 	push af
 	ld a, BANK(_2DMenu_)
@@ -499,8 +499,8 @@ _2DMenu::
 
 ResetBGWindow::
 	xor a
-	ld [hBGMapMode], a
+	ldh [hBGMapMode], a
 	ld a, $90
-	ld [rWY], a
-	ld [hWY], a
+	ldh [rWY], a
+	ldh [hWY], a
 	ret

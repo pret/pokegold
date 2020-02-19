@@ -524,10 +524,10 @@ PlayCurMonCry: ; c60b (3:460b)
 	jp PlayMonCry
 
 GameboyCheck: ; c611 (3:4611)
-	ld a, [hCGB]
+	ldh a, [hCGB]
 	and a
 	jr nz, .asm_c622
-	ld a, [hSGB]
+	ldh a, [hSGB]
 	and a
 	jr nz, .asm_c61e
 	xor a

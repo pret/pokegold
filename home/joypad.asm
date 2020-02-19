@@ -3,8 +3,8 @@ JoypadInt:: ; 8df (0:08df)
 
 ClearJoypad::
 	xor a
-	ld [hJoyPressed], a
-	ld [hJoyDown], a
+	ldh [hJoyPressed], a
+	ldh [hJoyDown], a
 	ret
 
 Joypad:: ; 8e6 (0:08e6)
@@ -15,42 +15,42 @@ Joypad:: ; 8e6 (0:08e6)
 	and a
 	ret nz
 	ld a, $20
-	ld [rJOYP], a
-	ld a, [rJOYP]
-	ld a, [rJOYP]
+	ldh [rJOYP], a
+	ldh a, [rJOYP]
+	ldh a, [rJOYP]
 	cpl
 	and $f
 	swap a
 	ld b, a
 	ld a, $10
-	ld [rJOYP], a
-	ld a, [rJOYP]
-	ld a, [rJOYP]
-	ld a, [rJOYP]
-	ld a, [rJOYP]
-	ld a, [rJOYP]
-	ld a, [rJOYP]
+	ldh [rJOYP], a
+	ldh a, [rJOYP]
+	ldh a, [rJOYP]
+	ldh a, [rJOYP]
+	ldh a, [rJOYP]
+	ldh a, [rJOYP]
+	ldh a, [rJOYP]
 	cpl
 	and $f
 	or b
 	ld b, a
 	ld a, $30
-	ld [rJOYP], a
-	ld a, [hJoypadDown]
+	ldh [rJOYP], a
+	ldh a, [hJoypadDown]
 	ld e, a
 	xor b
 	ld d, a
 	and e
-	ld [hJoypadReleased], a
+	ldh [hJoypadReleased], a
 	ld a, d
 	and b
-	ld [hJoypadPressed], a
+	ldh [hJoypadPressed], a
 	ld c, a
-	ld a, [hJoypadSum]
+	ldh a, [hJoypadSum]
 	or c
-	ld [hJoypadSum], a
+	ldh [hJoypadSum], a
 	ld a, b
-	ld [hJoypadDown], a
+	ldh [hJoypadDown], a
 	and $f
 	cp $f
 	jp z, Reset
@@ -64,20 +64,20 @@ GetJoypad:: ; 935 (0:0935)
 	ld a, [wInputType]
 	cp $ff
 	jr z, .auto
-	ld a, [hJoypadDown]
+	ldh a, [hJoypadDown]
 	ld b, a
-	ld a, [hJoyDown]
+	ldh a, [hJoyDown]
 	ld e, a
 	xor b
 	ld d, a
 	and e
-	ld [hJoyReleased], a
+	ldh [hJoyReleased], a
 	ld a, d
 	and b
-	ld [hJoyPressed], a
+	ldh [hJoyPressed], a
 	ld c, a
 	ld a, b
-	ld [hJoyDown], a
+	ldh [hJoyDown], a
 .quit
 	pop bc
 	pop de
@@ -86,7 +86,7 @@ GetJoypad:: ; 935 (0:0935)
 	ret
 
 .auto
-	ld a, [hROMBank]
+	ldh a, [hROMBank]
 	push af
 	ld a, [wAutoInputBank]
 	rst Bankswitch
@@ -131,8 +131,8 @@ GetJoypad:: ; 935 (0:0935)
 	pop af
 	rst Bankswitch
 	ld a, b
-	ld [hJoyPressed], a
-	ld [hJoyDown], a
+	ldh [hJoyPressed], a
+	ldh [hJoyDown], a
 	jr .quit
 
 StartAutoInput::
@@ -144,9 +144,9 @@ StartAutoInput::
 	xor a
 	ld [wAutoInputLength], a
 	xor a
-	ld [hJoyPressed], a
-	ld [hJoyReleased], a
-	ld [hJoyDown], a
+	ldh [hJoyPressed], a
+	ldh [hJoyReleased], a
+	ldh [hJoyDown], a
 	ld a, $ff
 	ld [wInputType], a
 	ret
@@ -167,11 +167,11 @@ JoyTitleScreenInput::
 	call JoyTextDelay
 	pop bc
 
-	ld a, [hJoyDown]
+	ldh a, [hJoyDown]
 	cp D_UP | SELECT | B_BUTTON
 	jr z, .keycombo
 
-	ld a, [hJoyLast]
+	ldh a, [hJoyLast]
 	and START | A_BUTTON
 	jr nz, .keycombo
 
@@ -188,33 +188,33 @@ JoyTitleScreenInput::
 JoyWaitAorB::
 	call DelayFrame
 	call GetJoypad
-	ld a, [hJoyPressed]
+	ldh a, [hJoyPressed]
 	and A_BUTTON | B_BUTTON
 	ret nz
 	call RTC
 	jr JoyWaitAorB
 
 WaitButton::
-	ld a, [hOAMUpdate]
+	ldh a, [hOAMUpdate]
 	push af
 	ld a, $1
-	ld [hOAMUpdate], a
+	ldh [hOAMUpdate], a
 	call WaitBGMap
 	call JoyWaitAorB
 	pop af
-	ld [hOAMUpdate], a
+	ldh [hOAMUpdate], a
 	ret
 
 JoyTextDelay:: ; a08 (0:0a08)
 	call GetJoypad
-	ld a, [hInMenu]
+	ldh a, [hInMenu]
 	and a
-	ld a, [hJoyPressed]
+	ldh a, [hJoyPressed]
 	jr z, .ok
-	ld a, [hJoyDown]
+	ldh a, [hJoyDown]
 .ok
-	ld [hJoyLast], a
-	ld a, [hJoyPressed]
+	ldh [hJoyLast], a
+	ldh a, [hJoyPressed]
 	and a
 	jr z, .checkframedelay
 	ld a, 15
@@ -226,7 +226,7 @@ JoyTextDelay:: ; a08 (0:0a08)
 	and a
 	jr z, .restartframedelay
 	xor a
-	ld [hJoyLast], a
+	ldh [hJoyLast], a
 	ret
 
 .restartframedelay
@@ -235,33 +235,33 @@ JoyTextDelay:: ; a08 (0:0a08)
 	ret
 
 WaitPressAorB_BlinkCursor::
-	ld a, [hMapObjectIndexBuffer]
+	ldh a, [hMapObjectIndexBuffer]
 	push af
-	ld a, [hObjectStructIndexBuffer]
+	ldh a, [hObjectStructIndexBuffer]
 	push af
 	xor a
-	ld [hMapObjectIndexBuffer], a
+	ldh [hMapObjectIndexBuffer], a
 	ld a, $6
-	ld [hObjectStructIndexBuffer], a
+	ldh [hObjectStructIndexBuffer], a
 .loop
 	push hl
 	hlcoord 18, 17
 	call BlinkCursor
 	pop hl
 	call JoyTextDelay
-	ld a, [hJoyLast]
+	ldh a, [hJoyLast]
 	and A_BUTTON | B_BUTTON
 	jr z, .loop
 	pop af
-	ld [hObjectStructIndexBuffer], a
+	ldh [hObjectStructIndexBuffer], a
 	pop af
-	ld [hMapObjectIndexBuffer], a
+	ldh [hMapObjectIndexBuffer], a
 	ret
 
 SimpleWaitPressAorB::
 .loop
 	call JoyTextDelay
-	ld a, [hJoyLast]
+	ldh a, [hJoyLast]
 	and A_BUTTON | B_BUTTON
 	jr z, .loop
 	ret
@@ -282,10 +282,10 @@ ButtonSound::
 	jp DelayFrames
 
 JoyWaitInput:: ; a77 (0:0a77)
-	ld a, [hOAMUpdate]
+	ldh a, [hOAMUpdate]
 	push af
 	ld a, $1
-	ld [hOAMUpdate], a
+	ldh [hOAMUpdate], a
 	ld a, [wInputType]
 	or a
 	jr z, .wait_loop
@@ -294,22 +294,22 @@ JoyWaitInput:: ; a77 (0:0a77)
 .wait_loop
 	call JoyBlinkCursor
 	call JoyTextDelay
-	ld a, [hJoyPressed]
+	ldh a, [hJoyPressed]
 	and A_BUTTON | B_BUTTON
 	jr nz, .received_input
 	call RTC
 	ld a, $1
-	ld [hBGMapMode], a
+	ldh [hBGMapMode], a
 	call DelayFrame
 	jr .wait_loop
 
 .received_input
 	pop af
-	ld [hOAMUpdate], a
+	ldh [hOAMUpdate], a
 	ret
 
 JoyBlinkCursor:: ; aa6 (0:0aa6)
-	ld a, [hVBlankCounter]
+	ldh a, [hVBlankCounter]
 	and $10
 	jr z, .cursor_off
 	ld a, "▼"
@@ -329,37 +329,37 @@ BlinkCursor:: ; ab6 (0:0ab6)
 	cp b
 	pop bc
 	jr nz, .place_arrow
-	ld a, [hMapObjectIndexBuffer]
+	ldh a, [hMapObjectIndexBuffer]
 	dec a
-	ld [hMapObjectIndexBuffer], a
+	ldh [hMapObjectIndexBuffer], a
 	ret nz
-	ld a, [hObjectStructIndexBuffer]
+	ldh a, [hObjectStructIndexBuffer]
 	dec a
-	ld [hObjectStructIndexBuffer], a
+	ldh [hObjectStructIndexBuffer], a
 	ret nz
 	ld a, "─"
 	ld [hl], a
 	ld a, -1
-	ld [hMapObjectIndexBuffer], a
+	ldh [hMapObjectIndexBuffer], a
 	ld a, 6
-	ld [hObjectStructIndexBuffer], a
+	ldh [hObjectStructIndexBuffer], a
 	ret
 
 .place_arrow
-	ld a, [hMapObjectIndexBuffer]
+	ldh a, [hMapObjectIndexBuffer]
 	and a
 	ret z
 	dec a
-	ld [hMapObjectIndexBuffer], a
+	ldh [hMapObjectIndexBuffer], a
 	ret nz
 	dec a
-	ld [hMapObjectIndexBuffer], a
-	ld a, [hObjectStructIndexBuffer]
+	ldh [hMapObjectIndexBuffer], a
+	ldh a, [hObjectStructIndexBuffer]
 	dec a
-	ld [hObjectStructIndexBuffer], a
+	ldh [hObjectStructIndexBuffer], a
 	ret nz
 	ld a, 6
-	ld [hObjectStructIndexBuffer], a
+	ldh [hObjectStructIndexBuffer], a
 	ld a, "▼"
 	ld [hl], a
 	ret

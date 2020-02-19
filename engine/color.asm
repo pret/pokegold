@@ -130,7 +130,7 @@ Function9102:
 	call CopyBytes
 	call Function9b28
 	ld a, $1
-	ld [hCGBPalUpdate], a
+	ldh [hCGBPalUpdate], a
 	ret
 
 .BGPal:
@@ -148,7 +148,7 @@ Function9102:
 Function9136:
 	call CheckCGB
 	ret nz
-	ld a, [hSGB]
+	ldh a, [hSGB]
 	and a
 	ret z
 	ld hl, BlkPacket_9ee5
@@ -157,7 +157,7 @@ Function9136:
 Function9144:
 	call CheckCGB
 	jr nz, .asm_9153
-	ld a, [hSGB]
+	ldh a, [hSGB]
 	and a
 	ret z
 	ld hl, PalPacket_a095
@@ -172,7 +172,7 @@ Function9144:
 Function915e:
 	call CheckCGB
 	jr nz, .asm_916d
-	ld a, [hSGB]
+	ldh a, [hSGB]
 	and a
 	ret z
 	ld hl, PalPacket_a0a5
@@ -187,7 +187,7 @@ Function915e:
 Function9178:
 	call CheckCGB
 	jr nz, .asm_91a9
-	ld a, [hSGB]
+	ldh a, [hSGB]
 	and a
 	ret z
 	ld a, c
@@ -217,7 +217,7 @@ Function9178:
 	ret
 
 Function91b4:
-	ld a, [hCGB]
+	ldh a, [hCGB]
 	and a
 	jr nz, .asm_91bf
 	ld hl, wc602
@@ -293,7 +293,7 @@ ApplyHPBarPals:
 	ld bc, $4
 	call CopyBytes
 	ld a, $1
-	ld [hCGBPalUpdate], a
+	ldh [hCGBPalUpdate], a
 	ret
 
 .asm_9236
@@ -331,7 +331,7 @@ LoadStatsScreenPals:
 	ld [wTempBGPals + $11], a
 	call Function9b28
 	ld a, $1
-	ld [hCGBPalUpdate], a
+	ldh [hCGBPalUpdate], a
 	ret
 
 LoadMailPalettes:
@@ -557,19 +557,19 @@ Function9b28: ; 9b28 (2:5b28)
 	ret
 
 Function9b35: ; 9b35 (2:5b35)
-	ld a, [rLCDC]
+	ldh a, [rLCDC]
 	bit 7, a
 	jr z, .asm_9b52
-	ld a, [hBGMapMode]
+	ldh a, [hBGMapMode]
 	push af
 	ld a, $2
-	ld [hBGMapMode], a
+	ldh [hBGMapMode], a
 	call DelayFrame
 	call DelayFrame
 	call DelayFrame
 	call DelayFrame
 	pop af
-	ld [hBGMapMode], a
+	ldh [hBGMapMode], a
 	ret
 
 .asm_9b52
@@ -577,7 +577,7 @@ Function9b35: ; 9b35 (2:5b35)
 	ld de, $9800
 	ld b, $12
 	ld a, $1
-	ld [rVBK], a
+	ldh [rVBK], a
 .asm_9b5e
 	ld c, $14
 .asm_9b60
@@ -595,7 +595,7 @@ Function9b35: ; 9b35 (2:5b35)
 	dec b
 	jr nz, .asm_9b5e
 	ld a, $0
-	ld [rVBK], a
+	ldh [rVBK], a
 	ret
 
 Function9b75: ; 9b75 (2:5b75)
@@ -683,11 +683,11 @@ Function9be9:
 	ret z
 	ld hl, Palettes_9c09
 	ld a, $90
-	ld [rOBPI], a
+	ldh [rOBPI], a
 	ld c, $30
 .asm_9bf6
 	ld a, [hli]
-	ld [rOBPD], a
+	ldh [rOBPD], a
 	dec c
 	jr nz, .asm_9bf6
 	ld hl, Palettes_9c09
@@ -731,7 +731,7 @@ Function9c39:
 	call CheckCGB
 	ret z
 	ld a, $90
-	ld [rOBPI], a
+	ldh [rOBPI], a
 	ld a, $1c
 	call Function9ac7
 	call Function9c52
@@ -744,7 +744,7 @@ Function9c52: ; 9c52 (2:5c52)
 	ld c, $8
 .asm_9c54
 	ld a, [hli]
-	ld [rOBPD], a
+	ldh [rOBPD], a
 	dec c
 	jr nz, .asm_9c54
 	ret
@@ -791,9 +791,9 @@ Function9c87: ; 9c87 (2:5c87)
 .asm_9c8c
 	push bc
 	xor a
-	ld [rJOYP], a
+	ldh [rJOYP], a
 	ld a, $30
-	ld [rJOYP], a
+	ldh [rJOYP], a
 	ld b, $10
 .asm_9c96
 	ld e, $8
@@ -805,18 +805,18 @@ Function9c87: ; 9c87 (2:5c87)
 	jr nz, .asm_9ca2
 	ld a, $20
 .asm_9ca2
-	ld [rJOYP], a
+	ldh [rJOYP], a
 	ld a, $30
-	ld [rJOYP], a
+	ldh [rJOYP], a
 	rr d
 	dec e
 	jr nz, .asm_9c9a
 	dec b
 	jr nz, .asm_9c96
 	ld a, $20
-	ld [rJOYP], a
+	ldh [rJOYP], a
 	ld a, $30
-	ld [rJOYP], a
+	ldh [rJOYP], a
 	call Function9ed9
 	pop bc
 	dec b
@@ -832,12 +832,12 @@ InitSGBBorder: ; 9cc0 (2:5cc0)
 	set 7, a
 	ld [wd8ba], a
 	xor a
-	ld [rJOYP], a
-	ld [hSGB], a
+	ldh [rJOYP], a
+	ldh [hSGB], a
 	call Function9da9
 	jr nc, .asm_9cf7
 	ld a, $1
-	ld [hSGB], a
+	ldh [hSGB], a
 	call Function9d4a
 	call Function9e13
 	call Function9ed9
@@ -857,31 +857,31 @@ InitCGBPals:: ; 9cfd (2:5cfd)
 	call CheckCGB
 	ret z
 	ld a, $1
-	ld [rVBK], a
+	ldh [rVBK], a
 	ld hl, $8000
 	ld bc, $2000
 	xor a
 	call ByteFill
 	ld a, $0
-	ld [rVBK], a
+	ldh [rVBK], a
 	ld a, $80
-	ld [rBGPI], a
+	ldh [rBGPI], a
 	ld c, $20
 .asm_9d19
 	ld a, $ff
-	ld [rBGPD], a
+	ldh [rBGPD], a
 	ld a, $7f
-	ld [rBGPD], a
+	ldh [rBGPD], a
 	dec c
 	jr nz, .asm_9d19
 	ld a, $80
-	ld [rOBPI], a
+	ldh [rOBPI], a
 	ld c, $20
 .asm_9d2a
 	ld a, $ff
-	ld [rOBPD], a
+	ldh [rOBPD], a
 	ld a, $7f
-	ld [rOBPD], a
+	ldh [rOBPD], a
 	dec c
 	jr nz, .asm_9d2a
 	ld hl, wTempBGPals
@@ -929,7 +929,7 @@ Function9d4a: ; 9d4a (2:5d4a)
 Function9d70:
 	di
 	xor a
-	ld [rJOYP], a
+	ldh [rJOYP], a
 	ld hl, PalPacket_a1c5
 	call Function9c87
 	call Function9d8b
@@ -964,38 +964,38 @@ Function9da9: ; 9da9 (2:5da9)
 	ld hl, PalPacket_a195
 	call Function9c87
 	call Function9ed9
-	ld a, [rJOYP]
+	ldh a, [rJOYP]
 	and $3
 	cp $3
 	jr nz, .asm_9e05
 	ld a, $20
-	ld [rJOYP], a
-	ld a, [rJOYP]
-	ld a, [rJOYP]
+	ldh [rJOYP], a
+	ldh a, [rJOYP]
+	ldh a, [rJOYP]
 	call Function9ed9
 	call Function9ed9
 	ld a, $30
-	ld [rJOYP], a
+	ldh [rJOYP], a
 	call Function9ed9
 	call Function9ed9
 	ld a, $10
-	ld [rJOYP], a
-	ld a, [rJOYP]
-	ld a, [rJOYP]
-	ld a, [rJOYP]
-	ld a, [rJOYP]
-	ld a, [rJOYP]
-	ld a, [rJOYP]
+	ldh [rJOYP], a
+	ldh a, [rJOYP]
+	ldh a, [rJOYP]
+	ldh a, [rJOYP]
+	ldh a, [rJOYP]
+	ldh a, [rJOYP]
+	ldh a, [rJOYP]
 	call Function9ed9
 	call Function9ed9
 	ld a, $30
-	ld [rJOYP], a
-	ld a, [rJOYP]
-	ld a, [rJOYP]
-	ld a, [rJOYP]
+	ldh [rJOYP], a
+	ldh a, [rJOYP]
+	ldh a, [rJOYP]
+	ldh a, [rJOYP]
 	call Function9ed9
 	call Function9ed9
-	ld a, [rJOYP]
+	ldh a, [rJOYP]
 	and $3
 	cp $3
 	jr nz, .asm_9e05
@@ -1016,24 +1016,24 @@ Function9e0a: ; 9e0a (2:5e0a)
 Function9e13: ; 9e13 (2:5e13)
 	call DisableLCD
 	ld a, $e4
-	ld [rBGP], a
+	ldh [rBGP], a
 	ld hl, Palettes_a265
 	ld de, $8800
 	ld bc, $1000
 	call Function9eb1
 	call Function9ec3
 	ld a, $e3
-	ld [rLCDC], a
+	ldh [rLCDC], a
 	ld hl, PalPacket_a175
 	call Function9c87
 	xor a
-	ld [rBGP], a
+	ldh [rBGP], a
 	ret
 
 Function9e37: ; 9e37 (2:5e37)
 	call DisableLCD
 	ld a, $e4
-	ld [rBGP], a
+	ldh [rBGP], a
 	ld de, $8800
 	ld bc, $140
 	call Function9eb1
@@ -1057,17 +1057,17 @@ Function9e37: ; 9e37 (2:5e37)
 	call Function9eb1
 	call Function9ec3
 	ld a, $e3
-	ld [rLCDC], a
+	ldh [rLCDC], a
 	ld hl, PalPacket_a1b5
 	call Function9c87
 	xor a
-	ld [rBGP], a
+	ldh [rBGP], a
 	ret
 
 Function9e83: ; 9e83 (2:5e83)
 	call DisableLCD
 	ld a, $e4
-	ld [rBGP], a
+	ldh [rBGP], a
 	ld de, $8800
 	ld b, $80
 .asm_9e8f
@@ -1081,11 +1081,11 @@ Function9e83: ; 9e83 (2:5e83)
 	jr nz, .asm_9e8f
 	call Function9ec3
 	ld a, $e3
-	ld [rLCDC], a
+	ldh [rLCDC], a
 	ld hl, PalPacket_a1a5
 	call Function9c87
 	xor a
-	ld [rBGP], a
+	ldh [rBGP], a
 	ret
 
 Function9eb1: ; 9eb1 (2:5eb1)

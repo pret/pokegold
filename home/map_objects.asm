@@ -16,7 +16,7 @@ GetSpriteVTile::
 	ld hl, wUsedSprites + 2
 	ld c, $b
 	ld b, a
-	ld a, [hMapObjectIndexBuffer]
+	ldh a, [hMapObjectIndexBuffer]
 	cp $0
 	jr z, .asm_16c8
 	ld a, b
@@ -48,7 +48,7 @@ DoesSpriteHaveFacings::
 	push de
 	push hl
 	ld b, a
-	ld a, [hROMBank]
+	ldh a, [hROMBank]
 	push af
 	ld a, BANK(DoesSpriteHaveFacings_)
 	rst Bankswitch
@@ -83,7 +83,7 @@ GetTileCollision:: ; 16fa (0:16fa)
 	ld e, a
 	ld d, $0
 	add hl, de
-	ld a, [hROMBank]
+	ldh a, [hROMBank]
 	push af
 	ld a, BANK(TileCollisionTable)
 	rst Bankswitch
@@ -193,14 +193,14 @@ GetMapObject:: ; 176f (0:176f)
 	ret
 
 CheckObjectVisibility:: ; 177b (0:177b)
-	ld [hConnectionStripLength], a
+	ldh [hConnectionStripLength], a
 	call GetMapObject
 	ld hl, 0
 	add hl, bc
 	ld a, [hl]
 	cp $ff
 	jr z, .asm_1790
-	ld [hObjectStructIndexBuffer], a
+	ldh [hObjectStructIndexBuffer], a
 	call GetObjectStruct
 	and a
 	ret
@@ -282,21 +282,21 @@ CheckObjectTime::
 	ret
 
 Function17ea::
-	ld [hMapObjectIndexBuffer], a
+	ldh [hMapObjectIndexBuffer], a
 	call GetMapObject
 	call CopyObjectStruct_
 	ret
 
 CopyObjectStruct::
-	ld [hMapObjectIndexBuffer], a
+	ldh [hMapObjectIndexBuffer], a
 	call UnmaskObject
-	ld a, [hConnectionStripLength]
+	ldh a, [hConnectionStripLength]
 	call GetMapObject
 	farcall CopyObjectStruct_
 	ret
 
 ApplyDeletionToMapObject:: ; 1804 (0:1804)
-	ld [hConnectionStripLength], a
+	ldh [hConnectionStripLength], a
 	call GetMapObject
 	ld hl, 0
 	add hl, bc
@@ -373,7 +373,7 @@ Function1855::
 
 LoadMovementDataPointer::
 	ld [wMovementPerson], a
-	ld a, [hROMBank]
+	ldh a, [hROMBank]
 	ld [wMovementDataPointerBank], a
 	ld a, l
 	ld [wMovementDataPointerAddr], a
@@ -461,7 +461,7 @@ GetInitialFacing::
 
 CopySpriteMovementData::
 	ld l, a
-	ld a, [hROMBank]
+	ldh a, [hROMBank]
 	push af
 	ld a, BANK(SpriteMovementData)
 	rst Bankswitch
@@ -521,7 +521,7 @@ CopySpriteMovementData::
 	ret
 
 GetMovementByte_::
-	ld a, [hROMBank]
+	ldh a, [hROMBank]
 	push af
 	ld a, [hli]
 	rst Bankswitch

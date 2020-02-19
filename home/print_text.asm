@@ -137,7 +137,7 @@ Function33e9:: ; 33e9 (0:33e9)
 
 FarPrintText::
 	ld [wBuffer], a
-	ld a, [hROMBank]
+	ldh a, [hROMBank]
 	push af
 	ld a, [wBuffer]
 	rst Bankswitch

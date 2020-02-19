@@ -10,7 +10,7 @@ DummyPredef1:
 	ret
 
 LoadPushOAM:: ; 4032 (1:4032)
-	ld c, hPushOAM - $ff00
+	ld c, hTransferVirtualOAM - $ff00
 	ld b, PushOAMEnd - PushOAM
 	ld hl, PushOAM
 .asm_4039
@@ -23,7 +23,7 @@ LoadPushOAM:: ; 4032 (1:4032)
 
 PushOAM:
 	ld a, wVirtualOAM / $100
-	ld [rDMA], a
+	ldh [rDMA], a
 	ld a, $28
 .asm_4046
 	dec a
@@ -38,37 +38,37 @@ INCLUDE "engine/title.asm"
 
 ReanchorBGMap_NoOAMUpdate:: ; 6551 (1:6551)
 	call DelayFrame
-	ld a, [hOAMUpdate]
+	ldh a, [hOAMUpdate]
 	push af
 	ld a, $1
-	ld [hOAMUpdate], a
-	ld a, [hBGMapMode]
+	ldh [hOAMUpdate], a
+	ldh a, [hBGMapMode]
 	push af
 	xor a
-	ld [hBGMapMode], a
+	ldh [hBGMapMode], a
 	call Function656b
 	pop af
-	ld [hBGMapMode], a
+	ldh [hBGMapMode], a
 	pop af
-	ld [hOAMUpdate], a
+	ldh [hOAMUpdate], a
 	ret
 
 Function656b: ; 656b (1:656b)
 	xor a
-	ld [hLCDCPointer], a
-	ld [hBGMapMode], a
+	ldh [hLCDCPointer], a
+	ldh [hBGMapMode], a
 	ld hl, wd565
 	set 7, [hl]
 	res 2, [hl]
 	ld a, $90
-	ld [hWY], a
+	ldh [hWY], a
 	call OverworldTextModeSwitch
 	ld a, $9c
 	call .LoadBGMapAddrIntoHRAM
 	call _OpenAndCloseMenu_HDMATransferTileMapAndAttrMap
 	xor a
-	ld [hBGMapMode], a
-	ld [hWY], a
+	ldh [hBGMapMode], a
+	ldh [hWY], a
 	ld a, $98
 	call .LoadBGMapAddrIntoHRAM
 	call .WaitTransfer
@@ -77,53 +77,53 @@ Function656b: ; 656b (1:656b)
 	ld a, $98
 	ld [wd05c], a
 	xor a
-	ld [hSCX], a
-	ld [hSCY], a
+	ldh [hSCX], a
+	ldh [hSCY], a
 	call ApplyBGMapAnchorToObjects
 	ret
 
 .LoadBGMapAddrIntoHRAM: ; 65a5 (1:65a5)
-	ld [hBGMapAddress + 1], a
+	ldh [hBGMapAddress + 1], a
 	xor a
-	ld [hBGMapAddress], a
+	ldh [hBGMapAddress], a
 	ret
 
 .WaitTransfer: ; 65ab (1:65ab)
-	ld a, [hBGMapMode]
+	ldh a, [hBGMapMode]
 	push af
 	xor a
-	ld [hBGMapMode], a
-	ld a, [hOAMUpdate]
+	ldh [hBGMapMode], a
+	ldh a, [hOAMUpdate]
 	push af
 	ld a, $1
-	ld [hOAMUpdate], a
+	ldh [hOAMUpdate], a
 	ld a, $3
-	ld [hFF9E], a
+	ldh [hVBlankCounter + 1], a
 .asm_65bc
 	call DelayFrame
-	ld a, [hFF9E]
+	ldh a, [hVBlankCounter + 1]
 	and a
 	jr nz, .asm_65bc
 	pop af
-	ld [hOAMUpdate], a
+	ldh [hOAMUpdate], a
 	pop af
-	ld [hBGMapMode], a
+	ldh [hBGMapMode], a
 	ret
 
 LoadFonts_NoOAMUpdate:: ; 65cb (1:65cb)
-	ld a, [hOAMUpdate]
+	ldh a, [hOAMUpdate]
 	push af
 	ld a, $1
-	ld [hOAMUpdate], a
+	ldh [hOAMUpdate], a
 	call .LoadGFX
 	pop af
-	ld [hOAMUpdate], a
+	ldh [hOAMUpdate], a
 	ret
 
 .LoadGFX: ; 65d9 (1:65d9)
 	call LoadFontsExtra
 	ld a, $90
-	ld [hWY], a
+	ldh [hWY], a
 	call SafeUpdateSprites
 	call Functiond9e
 	ret

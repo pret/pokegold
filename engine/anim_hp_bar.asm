@@ -277,7 +277,7 @@ Functiond78a: ; d78a (3:578a)
 	ret
 
 Functiond7ba: ; d7ba (3:57ba)
-	ld a, [hCGB]
+	ldh a, [hCGB]
 	and a
 	ret z
 	ld hl, wCurHPAnimPal
@@ -290,7 +290,7 @@ Functiond7ba: ; d7ba (3:57ba)
 	ret
 
 Functiond7cf: ; d7cf (3:57cf)
-	ld a, [hCGB]
+	ldh a, [hCGB]
 	and a
 	jr nz, .asm_d7db
 	call DelayFrame
@@ -318,15 +318,15 @@ Functiond7cf: ; d7cf (3:57cf)
 	cp $5
 	jr z, .asm_d805
 	ld a, $2
-	ld [hBGMapMode], a
+	ldh [hBGMapMode], a
 	ld a, c
-	ld [hBGMapThird], a
+	ldh [hBGMapThird], a
 	call DelayFrame
 .asm_d805
 	ld a, $1
-	ld [hBGMapMode], a
+	ldh [hBGMapMode], a
 	ld a, c
-	ld [hBGMapThird], a
+	ldh [hBGMapThird], a
 	call DelayFrame
 	pop af
 	cp $2
@@ -338,14 +338,14 @@ Functiond7cf: ; d7cf (3:57cf)
 .asm_d819
 	inc c
 	ld a, $2
-	ld [hBGMapMode], a
+	ldh [hBGMapMode], a
 	ld a, c
-	ld [hBGMapThird], a
+	ldh [hBGMapThird], a
 	call DelayFrame
 	ld a, $1
-	ld [hBGMapMode], a
+	ldh [hBGMapMode], a
 	ld a, c
-	ld [hBGMapThird], a
+	ldh [hBGMapThird], a
 	call DelayFrame
 	ret
 
@@ -358,7 +358,7 @@ Functiond7cf: ; d7cf (3:57cf)
 .asm_d835
 	call DelayFrame
 	ld a, c
-	ld [hBGMapThird], a
+	ldh [hBGMapThird], a
 	call DelayFrame
 	ret
 

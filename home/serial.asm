@@ -8,20 +8,20 @@ Serial:: ; 6aa (0:06aa)
 	bit 0, a
 	jr nz, .printer
 
-	ld a, [hLinkPlayerNumber]
+	ldh a, [hLinkPlayerNumber]
 	inc a
 	jr z, .init_player_number
-	ld a, [rSB]
-	ld [hSerialReceive], a
-	ld a, [hSerialSend]
-	ld [rSB], a
-	ld a, [hLinkPlayerNumber]
+	ldh a, [rSB]
+	ldh [hSerialReceive], a
+	ldh a, [hSerialSend]
+	ldh [rSB], a
+	ldh a, [hLinkPlayerNumber]
 	cp $2
 	jr z, .player2
 	ld a, 0 << rSC_ON
-	ld [rSC], a
+	ldh [rSC], a
 	ld a, 1 << rSC_ON
-	ld [rSC], a
+	ldh [rSC], a
 	jr .player2
 
 .printer
@@ -29,43 +29,43 @@ Serial:: ; 6aa (0:06aa)
 	jr .end
 
 .init_player_number
-	ld a, [rSB]
+	ldh a, [rSB]
 	cp $1
 	jr z, .player1
 	cp $2
 	jr nz, .player2
 
 .player1
-	ld [hSerialReceive], a
-	ld [hLinkPlayerNumber], a
+	ldh [hSerialReceive], a
+	ldh [hLinkPlayerNumber], a
 	cp $2
 	jr z, ._player2
 
 	xor a
-	ld [rSB], a
+	ldh [rSB], a
 	ld a, $3
-	ld [rDIV], a
+	ldh [rDIV], a
 
 .wait_bit_7
-	ld a, [rDIV]
+	ldh a, [rDIV]
 	bit 7, a
 	jr nz, .wait_bit_7
 
 	; cycle the serial controller
 	ld a, 0 << rSC_ON
-	ld [rSC], a
+	ldh [rSC], a
 	ld a, 1 << rSC_ON
-	ld [rSC], a
+	ldh [rSC], a
 	jr .player2
 
 ._player2
 	xor a
-	ld [rSB], a
+	ldh [rSB], a
 .player2
 	ld a, $1
-	ld [hFFCC], a
+	ldh [hFFCC], a
 	ld a, SERIAL_NO_DATA_BYTE
-	ld [hSerialSend], a
+	ldh [hSerialSend], a
 
 .end
 	pop hl
@@ -76,10 +76,10 @@ Serial:: ; 6aa (0:06aa)
 
 Function710:: ; 710
 	ld a, $1
-	ld [hFFCE], a
+	ldh [hFFCE], a
 .loop
 	ld a, [hl]
-	ld [hSerialSend], a
+	ldh [hSerialSend], a
 	call Function73b
 	push bc
 	ld b, a
@@ -88,7 +88,7 @@ Function710:: ; 710
 .wait
 	dec a
 	jr nz, .wait
-	ld a, [hFFCE]
+	ldh a, [hFFCE]
 	and a
 	ld a, b
 	pop bc
@@ -97,7 +97,7 @@ Function710:: ; 710
 	cp SERIAL_PREAMBLE_BYTE
 	jr nz, .loop
 	xor a
-	ld [hFFCE], a
+	ldh [hFFCE], a
 	jr .loop
 
 .load
@@ -112,19 +112,19 @@ Function710:: ; 710
 Function73b:: ; 73b (0:073b)
 .loop
 	xor a
-	ld [hFFCC], a
-	ld a, [hLinkPlayerNumber]
+	ldh [hFFCC], a
+	ldh a, [hLinkPlayerNumber]
 	cp $2
 	jr nz, .loop2
 	ld a, (1 << rSC_CLOCK) | (0 << rSC_ON)
-	ld [rSC], a
+	ldh [rSC], a
 	ld a, (1 << rSC_CLOCK) | (1 << rSC_ON)
-	ld [rSC], a
+	ldh [rSC], a
 .loop2
-	ld a, [hFFCC]
+	ldh a, [hFFCC]
 	and a
 	jr nz, .reset_ffcc
-	ld a, [hLinkPlayerNumber]
+	ldh a, [hLinkPlayerNumber]
 	cp $1
 	jr nz, .not_player_1_or_wLinkTimeoutFrames_zero
 	call CheckLinkTimeout
@@ -144,7 +144,7 @@ Function73b:: ; 73b (0:073b)
 	jp SerialDisconnected
 
 .not_player_1_or_wLinkTimeoutFrames_zero
-	ld a, [rIE]
+	ldh a, [rIE]
 	and $f
 	cp $8
 	jr nz, .loop2
@@ -156,7 +156,7 @@ Function73b:: ; 73b (0:073b)
 	dec a
 	ld [wce5d + 1], a
 	jr nz, .loop2
-	ld a, [hLinkPlayerNumber]
+	ldh a, [hLinkPlayerNumber]
 	cp $1
 	jr z, .reset_ffcc
 
@@ -167,8 +167,8 @@ Function73b:: ; 73b (0:073b)
 
 .reset_ffcc
 	xor a
-	ld [hFFCC], a
-	ld a, [rIE]
+	ldh [hFFCC], a
+	ldh a, [rIE]
 	and $f
 	sub $8
 	jr nz, .rIE_not_equal_8
@@ -178,7 +178,7 @@ Function73b:: ; 73b (0:073b)
 	ld [wce5d + 1], a
 
 .rIE_not_equal_8
-	ld a, [hSerialReceive]
+	ldh a, [hSerialReceive]
 	cp SERIAL_NO_DATA_BYTE
 	ret nz
 	call CheckLinkTimeout
@@ -198,13 +198,13 @@ Function73b:: ; 73b (0:073b)
 	jr z, SerialDisconnected
 
 .link_timed_out
-	ld a, [rIE]
+	ldh a, [rIE]
 	and $f
 	cp $8
 	ld a, SERIAL_NO_DATA_BYTE
 	ret z
 	ld a, [hl]
-	ld [hSerialSend], a
+	ldh [hSerialSend], a
 	call DelayFrame
 	jp .loop
 
@@ -234,18 +234,18 @@ Function7ec:: ; 7ec
 	ld de, wOtherPlayerLinkMode
 	ld c, $2
 	ld a, $1
-	ld [hFFCE], a
+	ldh [hFFCE], a
 .asm_7f8
 	call DelayFrame
 	ld a, [hl]
-	ld [hSerialSend], a
+	ldh [hSerialSend], a
 	call Function73b
 	ld b, a
 	inc hl
-	ld a, [hFFCE]
+	ldh a, [hFFCE]
 	and a
 	ld a, $0
-	ld [hFFCE], a
+	ldh [hFFCE], a
 	jr nz, .asm_7f8
 	ld a, b
 	ld [de], a
@@ -329,27 +329,27 @@ LinkTransfer:: ; 872 (0:0872)
 	call LinkTransferReceive
 	ld a, [wPlayerLinkAction]
 	add b
-	ld [hSerialSend], a
-	ld a, [hLinkPlayerNumber]
+	ldh [hSerialSend], a
+	ldh a, [hLinkPlayerNumber]
 	cp $2
 	jr nz, .asm_89f
 	ld a, $1
-	ld [rSC], a
+	ldh [rSC], a
 	ld a, $81
-	ld [rSC], a
+	ldh [rSC], a
 .asm_89f
 	call LinkTransferReceive
 	pop bc
 	ret
 
 LinkTransferReceive:: ; 8a4 (0:08a4)
-	ld a, [hSerialReceive]
+	ldh a, [hSerialReceive]
 	ld [wOtherPlayerLinkMode], a
 	and $f0
 	cp b
 	ret nz
 	xor a
-	ld [hSerialReceive], a
+	ldh [hSerialReceive], a
 	ld a, [wOtherPlayerLinkMode]
 	and $f
 	ld [wOtherPlayerLinkAction], a
@@ -357,14 +357,14 @@ LinkTransferReceive:: ; 8a4 (0:08a4)
 
 LinkDataReceived:: ; 8b9 (0:08b9)
 	xor a
-	ld [hSerialSend], a
-	ld a, [hLinkPlayerNumber]
+	ldh [hSerialSend], a
+	ldh a, [hLinkPlayerNumber]
 	cp $2
 	ret nz
 	ld a, $1
-	ld [rSC], a
+	ldh [rSC], a
 	ld a, $81
-	ld [rSC], a
+	ldh [rSC], a
 	ret
 
 Function8ca:: ; 8ca
@@ -372,11 +372,11 @@ Function8ca:: ; 8ca
 	and a
 	ret nz
 	ld a, $2
-	ld [rSB], a
+	ldh [rSB], a
 	xor a
-	ld [hSerialReceive], a
+	ldh [hSerialReceive], a
 	ld a, $0
-	ld [rSC], a
+	ldh [rSC], a
 	ld a, $80
-	ld [rSC], a
+	ldh [rSC], a
 	ret

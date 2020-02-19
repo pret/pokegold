@@ -1,6 +1,6 @@
 FarCall_hl:: ; 2e27 (0:2e27)
 	ld [wBuffer], a
-	ld a, [hROMBank]
+	ldh a, [hROMBank]
 	push af
 	ld a, [wBuffer]
 	rst Bankswitch

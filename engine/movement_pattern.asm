@@ -137,26 +137,26 @@ Function47fa:
 
 Function47fb: ; 47fb (1:47fb)
 	call Random
-	ld a, [hRandom]
+	ldh a, [hRandom]
 	and $1
 	jp Function4ac9
 
 Function4805: ; 4805 (1:4805)
 	call Random
-	ld a, [hRandom]
+	ldh a, [hRandom]
 	and $1
 	or $2
 	jp Function4ac9
 
 Function4811: ; 4811 (1:4811)
 	call Random
-	ld a, [hRandom]
+	ldh a, [hRandom]
 	and $3
 	jp Function4ac9
 
 Function481b: ; 481b (1:481b)
 	call Random
-	ld a, [hRandom]
+	ldh a, [hRandom]
 	and $c
 	ld hl, $8
 	add hl, bc
@@ -170,7 +170,7 @@ Function482a: ; 482a (1:482a)
 	and $c
 	ld d, a
 	call Random
-	ld a, [hRandom]
+	ldh a, [hRandom]
 	and $c
 	cp d
 	jr nz, .asm_483e
@@ -608,7 +608,7 @@ Function4ac9: ; 4ac9 (1:4ac9)
 	add hl, bc
 	ld [hl], $2
 	ld hl, wCenteredObject
-	ld a, [hConnectionStripLength]
+	ldh a, [hConnectionStripLength]
 	cp [hl]
 	jr z, .asm_4ae9
 	ld hl, $9
@@ -627,13 +627,13 @@ Function4ac9: ; 4ac9 (1:4ac9)
 	call Function4603
 Function4af6: ; 4af6 (1:4af6)
 	call Random
-	ld a, [hRandom]
+	ldh a, [hRandom]
 	and $7f
 	jr asm_4b06
 
 Function4aff: ; 4aff (1:4aff)
 	call Random
-	ld a, [hRandomAdd]
+	ldh a, [hRandomAdd]
 	and $1f
 asm_4b06
 	ld hl, $a

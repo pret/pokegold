@@ -1,7 +1,7 @@
 Reset:: ; 5b0 (0:05b0)
 	call MapSetup_Sound_Off
 	xor a
-	ld [hMapAnims], a
+	ldh [hMapAnims], a
 	call ClearPalettes
 	ei
 	ld hl, wd8ba
@@ -17,34 +17,34 @@ _Start:: ; 5c6 (0:05c6)
 .cgb
 	ld a, $1
 .load
-	ld [hCGB], a
+	ldh [hCGB], a
 Init:: ; 5d1 (0:05d1)
 	di
 	xor a
-	ld [rIF], a
-	ld [rIE], a
-	ld [rRP], a
-	ld [rSCX], a
-	ld [rSCY], a
-	ld [rSB], a
-	ld [rSC], a
-	ld [rWX], a
-	ld [rWY], a
-	ld [rBGP], a
-	ld [rOBP0], a
-	ld [rOBP1], a
-	ld [rTMA], a
-	ld [rTAC], a
+	ldh [rIF], a
+	ldh [rIE], a
+	ldh [rRP], a
+	ldh [rSCX], a
+	ldh [rSCY], a
+	ldh [rSB], a
+	ldh [rSC], a
+	ldh [rWX], a
+	ldh [rWY], a
+	ldh [rBGP], a
+	ldh [rOBP0], a
+	ldh [rOBP1], a
+	ldh [rTMA], a
+	ldh [rTAC], a
 	ld [wceeb], a
 	ld a, $4
-	ld [rTAC], a
+	ldh [rTAC], a
 .wait
-	ld a, [rLY]
+	ldh a, [rLY]
 	cp 145
 	jr nz, .wait
 
 	xor a
-	ld [rLCDC], a
+	ldh [rLCDC], a
 
 ; Clear WRAM
 	ld hl, wMusicPlaying
@@ -60,14 +60,14 @@ Init:: ; 5d1 (0:05d1)
 	ld sp, wStackTop
 
 	call ClearVRAM
-	ld a, [hCGB]
+	ldh a, [hCGB]
 	push af
 	xor a
-	ld hl, HRAM_START
-	ld bc, HRAM_END - HRAM_START
+	ld hl, HRAM_Begin
+	ld bc, HRAM_End - HRAM_Begin
 	call ByteFill
 	pop af
-	ld [hCGB], a
+	ldh [hCGB], a
 
 	call ClearSprites
 
@@ -77,24 +77,24 @@ Init:: ; 5d1 (0:05d1)
 	call LoadPushOAM
 
 	xor a
-	ld [hMapAnims], a
-	ld [hSCX], a
-	ld [hSCY], a
-	ld [rJOYP], a
+	ldh [hMapAnims], a
+	ldh [hSCX], a
+	ldh [hSCY], a
+	ldh [rJOYP], a
 
 	ld a, $8 ; HBlank int enable
-	ld [rSTAT], a
+	ldh [rSTAT], a
 
 	ld a, $90
-	ld [hWY], a
-	ld [rWY], a
+	ldh [hWY], a
+	ldh [rWY], a
 
 	ld a, $7
-	ld [hWX], a
-	ld [rWX], a
+	ldh [hWX], a
+	ldh [rWX], a
 
 	ld a, -1
-	ld [hLinkPlayerNumber], a
+	ldh [hLinkPlayerNumber], a
 
 	ld h, $98
 	call BlankBGMap
@@ -104,9 +104,9 @@ Init:: ; 5d1 (0:05d1)
 	callfar InitCGBPals
 
 	ld a, $9c
-	ld [hBGMapAddress + 1], a
+	ldh [hBGMapAddress + 1], a
 	xor a
-	ld [hBGMapAddress], a
+	ldh [hBGMapAddress], a
 
 	farcall StartClock
 
@@ -125,10 +125,10 @@ Init:: ; 5d1 (0:05d1)
 	; OBJ 8x8
 	; OBJ on
 	; BG on
-	ld [rLCDC], a
+	ldh [rLCDC], a
 
 	ld a, $1f
-	ld [rIE], a
+	ldh [rIE], a
 	ei
 
 	call DelayFrame

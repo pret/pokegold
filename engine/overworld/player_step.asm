@@ -39,12 +39,12 @@ ScrollScreen::
 	ld d, a
 	ld a, [wPlayerStepVectorY]
 	ld e, a
-	ld a, [hSCX]
+	ldh a, [hSCX]
 	add d
-	ld [hSCX], a
-	ld a, [hSCY]
+	ldh [hSCX], a
+	ldh a, [hSCY]
 	add e
-	ld [hSCY], a
+	ldh [hSCY], a
 	ret
 
 Functiond4f2: ; d4f2 (3:54f2)

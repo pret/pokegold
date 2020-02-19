@@ -1,6 +1,6 @@
 Functiond70:: ; d70 (0:0d70)
 	ld b, a
-	ld a, [hROMBank]
+	ldh a, [hROMBank]
 	push af
 	ld a, b
 	rst Bankswitch
@@ -60,7 +60,7 @@ DecompressRequest2bpp::
 
 FarCopyBytes:: ; dcd (0:0dcd)
 	ld [wBuffer], a
-	ld a, [hROMBank]
+	ldh a, [hROMBank]
 	push af
 	ld a, [wBuffer]
 	rst Bankswitch
@@ -71,7 +71,7 @@ FarCopyBytes:: ; dcd (0:0dcd)
 
 FarCopyBytesDouble:: ; ddd (0:0ddd)
 	ld [wBuffer], a
-	ld a, [hROMBank]
+	ldh a, [hROMBank]
 	push af
 	ld a, [wBuffer]
 	rst Bankswitch
@@ -100,11 +100,11 @@ FarCopyBytesDouble:: ; ddd (0:0ddd)
 	ret
 
 Request2bpp:: ; dfe (0:0dfe)
-	ld a, [hBGMapMode]
+	ldh a, [hBGMapMode]
 	push af
 	xor a
-	ld [hBGMapMode], a
-	ld a, [hROMBank]
+	ldh [hBGMapMode], a
+	ldh a, [hROMBank]
 	push af
 	ld a, b
 	rst Bankswitch
@@ -125,7 +125,7 @@ Request2bpp:: ; dfe (0:0dfe)
 	pop af
 	rst Bankswitch
 	pop af
-	ld [hBGMapMode], a
+	ldh [hBGMapMode], a
 	ret
 
 .cycle
@@ -138,11 +138,11 @@ Request2bpp:: ; dfe (0:0dfe)
 	jr .check
 
 Request1bpp:: ; e38 (0:0e38)
-	ld a, [hBGMapMode]
+	ldh a, [hBGMapMode]
 	push af
 	xor a
-	ld [hBGMapMode], a
-	ld a, [hROMBank]
+	ldh [hBGMapMode], a
+	ldh a, [hROMBank]
 	push af
 	ld a, b
 	rst Bankswitch
@@ -163,7 +163,7 @@ Request1bpp:: ; e38 (0:0e38)
 	pop af
 	rst Bankswitch
 	pop af
-	ld [hBGMapMode], a
+	ldh [hBGMapMode], a
 	ret
 
 .cycle
@@ -176,7 +176,7 @@ Request1bpp:: ; e38 (0:0e38)
 	jr .check
 
 Get2bpp::
-	ld a, [rLCDC]
+	ldh a, [rLCDC]
 	bit 7, a
 	jp nz, Request2bpp
 Copy2bpp::
@@ -197,7 +197,7 @@ Copy2bpp::
 	jp FarCopyBytes
 
 Get1bpp::
-	ld a, [rLCDC]
+	ldh a, [rLCDC]
 	bit 7, a
 	jp nz, Request1bpp
 Copy1bpp::
@@ -218,7 +218,7 @@ Copy1bpp::
 	jp FarCopyBytesDouble
 
 Functionea6::
-	ld a, [rLCDC]
+	ldh a, [rLCDC]
 	add a
 	jp c, Request2bpp
 Functioneac::

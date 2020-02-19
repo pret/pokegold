@@ -33,10 +33,10 @@ ScrollingMenuJoypad:: ; 1a70 (0:1a70)
 GetMenuJoypad:: ; 1a7a (0:1a7a)
 	push bc
 	push af
-	ld a, [hJoyLast]
+	ldh a, [hJoyLast]
 	and D_PAD
 	ld b, a
-	ld a, [hJoyPressed]
+	ldh a, [hJoyPressed]
 	and BUTTONS
 	or b
 	ld b, a

@@ -53,7 +53,7 @@ Unreferenced_CheckBPressedDebug::
 	bit 1, a
 	ret z
 	
-	ld a, [hJoyDown]
+	ldh a, [hJoyDown]
 	bit 1, a
 	ret
 
@@ -91,7 +91,7 @@ Function2ffe:: ; 2ffe (0:2ffe)
 	ld h, a
 	or l
 	jr z, .quit
-	ld a, [hROMBank]
+	ldh a, [hROMBank]
 	push af
 	call SwitchToMapScriptHeaderBank
 	ld a, [wPlayerStandingMapX]
@@ -195,7 +195,7 @@ INCLUDE "home/math.asm"
 INCLUDE "home/print_text.asm"
 
 Function3414::
-	ld a, [hROMBank]
+	ldh a, [hROMBank]
 	push af
 	ld a, [hli]
 	rst Bankswitch
@@ -209,7 +209,7 @@ Function3414::
 	ret
 
 QueueScript::
-	ld a, [hROMBank]
+	ldh a, [hROMBank]
 Function3425::
 	ld [wcfd8], a
 	ld a, l
@@ -251,94 +251,94 @@ ClearBGPalettes::
 	call ClearPalettes
 WaitBGMap:: ; 344c (0:344c)
 	ld a, $1
-	ld [hBGMapMode], a
+	ldh [hBGMapMode], a
 	ld c, $4
 	call DelayFrames
 	ret
 
 Function3456:: ; 3456 (0:3456)
-	ld a, [hCGB]
+	ldh a, [hCGB]
 	and a
 	jr z, .asm_3464
 	ld a, $2
-	ld [hBGMapMode], a
+	ldh [hBGMapMode], a
 	ld c, $4
 	call DelayFrames
 .asm_3464
 	ld a, $1
-	ld [hBGMapMode], a
+	ldh [hBGMapMode], a
 	ld c, $4
 	call DelayFrames
 	ret
 
 IsCGB::
-	ld a, [hCGB]
+	ldh a, [hCGB]
 	and a
 	ret
 
 ApplyTilemap:: ; 3472 (0:3472)
-	ld a, [hCGB]
+	ldh a, [hCGB]
 	and a
 	jr z, .asm_3484
 	ld a, [wSpriteUpdatesEnabled]
 	cp $0
 	jr z, .asm_3484
 	ld a, $1
-	ld [hBGMapMode], a
+	ldh [hBGMapMode], a
 	jr LoadEDTile
 
 .asm_3484
 	ld a, $1
-	ld [hBGMapMode], a
+	ldh [hBGMapMode], a
 	ld c, $4
 	call DelayFrames
 	ret
 
 CGBOnly_LoadEDTile:: ; 348e (0:348e)
-	ld a, [hCGB]
+	ldh a, [hCGB]
 	and a
 	jr z, WaitBGMap
 LoadEDTile::
-	ld a, [hBGMapMode]
+	ldh a, [hBGMapMode]
 	push af
 	xor a
-	ld [hBGMapMode], a
-	ld a, [hMapAnims]
+	ldh [hBGMapMode], a
+	ldh a, [hMapAnims]
 	push af
 	xor a
-	ld [hMapAnims], a
+	ldh [hMapAnims], a
 .asm_349f
-	ld a, [rLY]
+	ldh a, [rLY]
 	cp $7f
 	jr c, .asm_349f
 	di
 	ld a, $1
-	ld [rVBK], a
+	ldh [rVBK], a
 	ld hl, wAttrMap
 	call Function34c8
 	ld a, $0
-	ld [rVBK], a
+	ldh [rVBK], a
 	ld hl, wTileMap
 	call Function34c8
 .asm_34ba
-	ld a, [rLY]
+	ldh a, [rLY]
 	cp $7f
 	jr c, .asm_34ba
 	ei
 	pop af
-	ld [hMapAnims], a
+	ldh [hMapAnims], a
 	pop af
-	ld [hBGMapMode], a
+	ldh [hBGMapMode], a
 	ret
 
 Function34c8:: ; 34c8 (0:34c8)
 	ld [hSPBuffer], sp
 	ld sp, hl
-	ld a, [hBGMapAddress + 1]
+	ldh a, [hBGMapAddress + 1]
 	ld h, a
 	ld l, $0
 	ld a, $12
-	ld [hTilesPerCycle], a
+	ldh [hTilesPerCycle], a
 	ld b, $2
 	ld c, rSTAT % $100
 .asm_34d9
@@ -355,26 +355,26 @@ rept 10
 endr
 	ld de, $c
 	add hl, de
-	ld a, [hTilesPerCycle]
+	ldh a, [hTilesPerCycle]
 	dec a
-	ld [hTilesPerCycle], a
+	ldh [hTilesPerCycle], a
 	jr nz, .asm_34d9
-	ld a, [hSPBuffer]
+	ldh a, [hSPBuffer]
 	ld l, a
-	ld a, [hSPBuffer + 1]
+	ldh a, [hSPBuffer + 1]
 	ld h, a
 	ld sp, hl
 	ret
 
 SetPalettes::
-	ld a, [hCGB]
+	ldh a, [hCGB]
 	and a
 	jr nz, .asm_3556
 	ld a, $e4
-	ld [rBGP], a
+	ldh [rBGP], a
 	ld a, $d0
-	ld [rOBP0], a
-	ld [rOBP1], a
+	ldh [rOBP0], a
+	ldh [rOBP1], a
 	ret
 
 .asm_3556
@@ -387,13 +387,13 @@ SetPalettes::
 	ret
 
 ClearPalettes:: ; 3564 (0:3564)
-	ld a, [hCGB]
+	ldh a, [hCGB]
 	and a
 	jr nz, .asm_3571
 	xor a
-	ld [rBGP], a
-	ld [rOBP0], a
-	ld [rOBP1], a
+	ldh [rBGP], a
+	ldh [rOBP0], a
+	ldh [rOBP1], a
 	ret
 
 .asm_3571
@@ -402,16 +402,16 @@ ClearPalettes:: ; 3564 (0:3564)
 	ld a, $ff
 	call ByteFill
 	ld a, $1
-	ld [hCGBPalUpdate], a
+	ldh [hCGBPalUpdate], a
 	ret
 
 GetMemSGBLayout::
 	ld b, $ff
 GetSGBLayout:: ; 3583 (0:3583)
-	ld a, [hCGB]
+	ldh a, [hCGB]
 	and a
 	jr nz, .asm_358c
-	ld a, [hSGB]
+	ldh a, [hSGB]
 	and a
 	ret z
 .asm_358c
@@ -473,7 +473,7 @@ NamesPointers:: ; 35ee (0:35ee)
 	dba DoPlayerMovement
 
 GetName:: ; 3606
-	ld a, [hROMBank]
+	ldh a, [hROMBank]
 	push af
 	push hl
 	push bc
@@ -557,7 +557,7 @@ GetBasePokemonName::
 	ret
 
 GetPokemonName:: ; 367e (0:367e)
-	ld a, [hROMBank]
+	ldh a, [hROMBank]
 	push af
 	push hl
 	ld a, BANK(PokemonNames)
@@ -692,7 +692,7 @@ GetMoveName::
 
 ScrollingMenu::
 	call CopyMenuData2
-	ld a, [hROMBank]
+	ldh a, [hROMBank]
 	push af
 	ld a, BANK(ScrollingMenu_)
 	rst Bankswitch
@@ -730,24 +730,24 @@ DrawScrollingMenu::
 
 ScrollingMenuJoyTextDelay::
 	call DelayFrame
-	ld a, [hInMenu]
+	ldh a, [hInMenu]
 	push af
 	ld a, $1
-	ld [hInMenu], a
+	ldh [hInMenu], a
 	call JoyTextDelay
 	pop af
-	ld [hInMenu], a
-	ld a, [hJoyLast]
+	ldh [hInMenu], a
+	ldh a, [hJoyLast]
 	and $f0
 	ld c, a
-	ld a, [hJoyPressed]
+	ldh a, [hJoyPressed]
 	and $f
 	or c
 	ld c, a
 	ret
 
 HandleStoneQueue::
-	ld a, [hROMBank]
+	ldh a, [hROMBank]
 	push af
 	call SwitchToMapScriptHeaderBank
 	call StoneQueueWarpAction
@@ -875,7 +875,7 @@ IsThisObjectInTheStoneTable:: ; 3823 (0:3823)
 	ret
 
 CheckTrainerBattle2::
-	ld a, [hROMBank]
+	ldh a, [hROMBank]
 	push af
 	call SwitchToMapScriptHeaderBank
 	call CheckTrainerBattle
@@ -947,7 +947,7 @@ CheckTrainerBattle:: ; 3851 (0:3851)
 .asm_38aa
 	pop de
 	pop af
-	ld [hLastTalked], a
+	ldh [hLastTalked], a
 	ld a, b
 	ld [wcf2a], a
 	ld a, c
@@ -962,7 +962,7 @@ TalkToTrainer::
 continue_trainer_function
 	call GetMapScriptHeaderBank
 	ld [wcf29], a
-	ld a, [hLastTalked]
+	ldh a, [hLastTalked]
 	call GetMapObject
 	ld hl, $a
 	add hl, bc
@@ -1155,7 +1155,7 @@ PrepMonFrontpic_::
 	predef GetMonFrontpic
 	pop hl
 	xor a
-	ld [hGraphicStartTile], a
+	ldh [hGraphicStartTile], a
 	lb bc, 7, 7
 	predef PlaceGraphic
 	xor a
@@ -1204,7 +1204,7 @@ GetBaseData::
 	push bc
 	push de
 	push hl
-	ld a, [hROMBank]
+	ldh a, [hROMBank]
 	push af
 	ld a, BANK(BaseData) ; $14
 	rst Bankswitch
@@ -1361,7 +1361,7 @@ Function3b51::
 INCLUDE "home/battle.asm"
 
 PushLYOverrides:: ; 3d0d
-	ld a, [hLCDCPointer]
+	ldh a, [hLCDCPointer]
 	and a
 	ret z
 	ld a, wLYOverridesBuffer % $100
@@ -1378,7 +1378,7 @@ PushLYOverrides:: ; 3d0d
 
 InitAnimatedObjectStruct::
 	ld [wAnimatedObjectStructIDBuffer], a
-	ld a, [hROMBank]
+	ldh a, [hROMBank]
 	push af
 	ld a, BANK(InitAnimatedObjectStruct_) ; $23
 	rst Bankswitch
@@ -1390,7 +1390,7 @@ InitAnimatedObjectStruct::
 
 ReinitAnimatedObjectFrame::
 	ld [wAnimatedObjectStructIDBuffer], a
-	ld a, [hROMBank]
+	ldh a, [hROMBank]
 	push af
 	ld a, BANK(ReinitAnimatedObjectFrame_) ; $23
 	rst Bankswitch

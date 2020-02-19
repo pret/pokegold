@@ -1,42 +1,42 @@
 UpdatePalsIfCGB:: ; bdf (0:0bdf)
-	ld a, [hCGB]
+	ldh a, [hCGB]
 	and a
 	ret z
 UpdateCGBPals:: ; be3 (0:0be3)
-	ld a, [hCGBPalUpdate]
+	ldh a, [hCGBPalUpdate]
 	and a
 	ret z
 ForceUpdateCGBPals::
 	ld hl, wBGPals
 	ld a, $80
-	ld [rBGPI], a
+	ldh [rBGPI], a
 	ld c, 8 / 2
 .bgp
 rept 2 palettes
 	ld a, [hli]
-	ld [rBGPD], a
+	ldh [rBGPD], a
 endr
 	dec c
 	jr nz, .bgp
 	ld a, $80
-	ld [rOBPI], a
+	ldh [rOBPI], a
 	ld c, 8 / 2
 .obp
 rept 2 palettes
 	ld a, [hli]
-	ld [rOBPD], a
+	ldh [rOBPD], a
 endr
 	dec c
 	jr nz, .obp
 	xor a
-	ld [hCGBPalUpdate], a
+	ldh [hCGBPalUpdate], a
 	scf
 	ret
 
 DmgToCgbBGPals:: ; c61 (0:0c61)
-	ld [rBGP], a
+	ldh [rBGP], a
 	push af
-	ld a, [hCGB]
+	ldh a, [hCGB]
 	and a
 	jr z, .end
 	push hl
@@ -44,12 +44,12 @@ DmgToCgbBGPals:: ; c61 (0:0c61)
 	push bc
 	ld hl, wBGPals
 	ld de, wTempBGPals
-	ld a, [rBGP]
+	ldh a, [rBGP]
 	ld b, a
 	ld c, $8
 	call CopyPals
 	ld a, $1
-	ld [hCGBPalUpdate], a
+	ldh [hCGBPalUpdate], a
 	pop bc
 	pop de
 	pop hl
@@ -59,10 +59,10 @@ DmgToCgbBGPals:: ; c61 (0:0c61)
 
 DmgToCgbObjPals:: ; c83 (0:0c83)
 	ld a, e
-	ld [rOBP0], a
+	ldh [rOBP0], a
 	ld a, d
-	ld [rOBP1], a
-	ld a, [hCGB]
+	ldh [rOBP1], a
+	ldh a, [hCGB]
 	and a
 	ret z
 	push hl
@@ -70,21 +70,21 @@ DmgToCgbObjPals:: ; c83 (0:0c83)
 	push bc
 	ld hl, wOBPals
 	ld de, wTempOBPals
-	ld a, [rOBP0]
+	ldh a, [rOBP0]
 	ld b, a
 	ld c, $8
 	call CopyPals
 	ld a, $1
-	ld [hCGBPalUpdate], a
+	ldh [hCGBPalUpdate], a
 	pop bc
 	pop de
 	pop hl
 	ret
 
 DmgToCgbObjPal0::
-	ld [rOBP0], a
+	ldh [rOBP0], a
 	push af
-	ld a, [hCGB]
+	ldh a, [hCGB]
 	and a
 	jr z, .end
 	push hl
@@ -92,12 +92,12 @@ DmgToCgbObjPal0::
 	push bc
 	ld hl, wOBPals
 	ld de, wTempOBPals
-	ld a, [rOBP0]
+	ldh a, [rOBP0]
 	ld b, a
 	ld c, $1
 	call CopyPals
 	ld a, $1
-	ld [hCGBPalUpdate], a
+	ldh [hCGBPalUpdate], a
 	pop bc
 	pop de
 	pop hl
@@ -106,9 +106,9 @@ DmgToCgbObjPal0::
 	ret
 
 DmgToCgbObjPal1::
-	ld [rOBP1], a
+	ldh [rOBP1], a
 	push af
-	ld a, [hCGB]
+	ldh a, [hCGB]
 	and a
 	jr z, .end
 	push hl
@@ -116,12 +116,12 @@ DmgToCgbObjPal1::
 	push bc
 	ld hl, wOBPals + 1 palettes
 	ld de, wTempOBPals + 1 palettes
-	ld a, [rOBP1]
+	ldh a, [rOBP1]
 	ld b, a
 	ld c, $1
 	call CopyPals
 	ld a, $1
-	ld [hCGBPalUpdate], a
+	ldh [hCGBPalUpdate], a
 	pop bc
 	pop de
 	pop hl
@@ -166,17 +166,17 @@ CopyPals:: ; cea (0:0cea)
 	ret
 
 ClearVBank1::
-	ld a, [hCGB]
+	ldh a, [hCGB]
 	and a
 	ret z
 	ld a, $1
-	ld [rVBK], a
+	ldh [rVBK], a
 	ld hl, $8000
 	ld bc, $2000
 	xor a
 	call ByteFill
 	ld a, $0
-	ld [rVBK], a
+	ldh [rVBK], a
 	ret
 
 Functiond2a::
@@ -198,7 +198,7 @@ Functiond2a::
 	ret
 
 ReloadSpritesNoPalettes::
-	ld a, [hCGB]
+	ldh a, [hCGB]
 	and a
 	ret z
 	ld hl, wBGPals
@@ -206,7 +206,7 @@ ReloadSpritesNoPalettes::
 	xor a
 	call ByteFill
 	ld a, $1
-	ld [hCGBPalUpdate], a
+	ldh [hCGBPalUpdate], a
 	call DelayFrame
 	ret
 

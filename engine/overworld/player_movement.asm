@@ -11,7 +11,7 @@ DoPlayerMovement:: ; 10000 (4:4000)
 	ret
 
 Function10017: ; 10017 (4:4017)
-	ld a, [hJoyDown]
+	ldh a, [hJoyDown]
 	ld [wcf29], a
 	CheckFlagHL ENGINE_DOWNHILL
 	ret z
@@ -564,7 +564,7 @@ Function102ec: ; 102ec (4:42ec)
 
 Function10341: ; 10341 (4:4341)
 	ld a, 0
-	ld [hMapObjectIndexBuffer], a
+	ldh [hMapObjectIndexBuffer], a
 	ld a, [wPlayerStandingMapX]
 	ld d, a
 	ld a, [wcf30]

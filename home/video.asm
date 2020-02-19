@@ -1,5 +1,5 @@
 UpdateBGMapBuffer:: ; 1458 (0:1458)
-	ld a, [hBGMapUpdate]
+	ldh a, [hBGMapUpdate]
 	and a
 	ret z
 
@@ -15,7 +15,7 @@ UpdateBGMapBuffer:: ; 1458 (0:1458)
 rept 2
 	pop bc
 	ld a, $1
-	ld [rVBK], a
+	ldh [rVBK], a
 	ld a, [hli]
 	ld [bc], a
 	inc c
@@ -23,7 +23,7 @@ rept 2
 	ld [bc], a
 	dec c
 	ld a, $0
-	ld [rVBK], a
+	ldh [rVBK], a
 	ld a, [de]
 	inc de
 	ld [bc], a
@@ -33,29 +33,29 @@ rept 2
 	ld [bc], a
 endr
 
-	ld a, [hFFDE]
+	ldh a, [hFFDE]
 	dec a
 	dec a
-	ld [hFFDE], a
+	ldh [hFFDE], a
 
 	jr nz, .next
 
-	ld a, [hSPBuffer]
+	ldh a, [hSPBuffer]
 	ld l, a
-	ld a, [hSPBuffer + 1]
+	ldh a, [hSPBuffer + 1]
 	ld h, a
 	ld sp, hl
 
 	xor a
-	ld [hBGMapUpdate], a
+	ldh [hBGMapUpdate], a
 	scf
 	ret
 
 WaitTop::
-	ld a, [hBGMapMode]
+	ldh a, [hBGMapMode]
 	and a
 	ret z
-	ld a, [hBGMapThird]
+	ldh a, [hBGMapThird]
 	and a
 	jr z, .done
 	call DelayFrame
@@ -63,11 +63,11 @@ WaitTop::
 
 .done
 	xor a
-	ld [hBGMapMode], a
+	ldh [hBGMapMode], a
 	ret
 
 UpdateBGMap:: ; 14bb (0:14bb)
-	ld a, [hBGMapMode]
+	ldh a, [hBGMapMode]
 	and a
 	ret z
 
@@ -78,18 +78,18 @@ UpdateBGMap:: ; 14bb (0:14bb)
 
 	dec a
 
-	ld a, [hBGMapAddress]
+	ldh a, [hBGMapAddress]
 	ld l, a
-	ld a, [hBGMapAddress + 1]
+	ldh a, [hBGMapAddress + 1]
 	ld h, a
 	push hl
 
 	xor a
-	ld [hBGMapAddress], a
+	ldh [hBGMapAddress], a
 	ld a, $9c
-	ld [hBGMapAddress + 1], a
+	ldh [hBGMapAddress + 1], a
 
-	ld a, [hBGMapMode]
+	ldh a, [hBGMapMode]
 	push af
 	cp $3
 	call z, .Tiles
@@ -99,19 +99,19 @@ UpdateBGMap:: ; 14bb (0:14bb)
 
 	pop hl
 	ld a, l
-	ld [hBGMapAddress], a
+	ldh [hBGMapAddress], a
 	ld a, h
-	ld [hBGMapAddress + 1], a
+	ldh [hBGMapAddress + 1], a
 	ret
 
 .Attr
 	ld a, $1
-	ld [rVBK], a
+	ldh [rVBK], a
 
 	hlcoord 0, 0, wAttrMap
 	call .update
 	ld a, $0
-	ld [rVBK], a
+	ldh [rVBK], a
 	ret
 
 .Tiles
@@ -119,7 +119,7 @@ UpdateBGMap:: ; 14bb (0:14bb)
 .update
 	ld [hSPBuffer], sp
 
-	ld a, [hBGMapThird]
+	ldh a, [hBGMapThird]
 	and a
 	jr z, .top
 	dec a
@@ -130,9 +130,9 @@ THIRD_HEIGHT EQU SCREEN_HEIGHT / 3
 	add hl, de
 	ld sp, hl
 
-	ld a, [hBGMapAddress + 1]
+	ldh a, [hBGMapAddress + 1]
 	ld h, a
-	ld a, [hBGMapAddress]
+	ldh a, [hBGMapAddress]
 
 	ld l, a
 	ld de, 2 * THIRD_HEIGHT * BG_MAP_WIDTH
@@ -146,9 +146,9 @@ THIRD_HEIGHT EQU SCREEN_HEIGHT / 3
 	add hl, de
 	ld sp, hl
 
-	ld a, [hBGMapAddress + 1]
+	ldh a, [hBGMapAddress + 1]
 	ld h, a
-	ld a, [hBGMapAddress]
+	ldh a, [hBGMapAddress]
 	ld l, a
 
 	ld de, THIRD_HEIGHT * BG_MAP_WIDTH
@@ -160,15 +160,15 @@ THIRD_HEIGHT EQU SCREEN_HEIGHT / 3
 .top
 	ld sp, hl
 
-	ld a, [hBGMapAddress + 1]
+	ldh a, [hBGMapAddress + 1]
 	ld h, a
-	ld a, [hBGMapAddress]
+	ldh a, [hBGMapAddress]
 	ld l, a
 
 	ld a, $1
 
 .start
-	ld [hBGMapThird], a
+	ldh [hBGMapThird], a
 	ld a, SCREEN_HEIGHT / 3
 
 ; Discrepancy between TileMap and BGMap
@@ -191,9 +191,9 @@ endr
 	dec a
 	jr nz, .row
 
-	ld a, [hSPBuffer]
+	ldh a, [hSPBuffer]
 	ld l, a
-	ld a, [hSPBuffer + 1]
+	ldh a, [hSPBuffer + 1]
 	ld h, a
 	ld sp, hl
 	ret
@@ -254,9 +254,9 @@ endr
 
 	ld [wRequested1bppSource], sp
 
-	ld a, [hSPBuffer]
+	ldh a, [hSPBuffer]
 	ld l, a
-	ld a, [hSPBuffer + 1]
+	ldh a, [hSPBuffer + 1]
 	ld h, a
 	ld sp, hl
 	ret
@@ -303,18 +303,18 @@ endr
 
 	ld [wRequested2bppSource], sp
 
-	ld a, [hSPBuffer]
+	ldh a, [hSPBuffer]
 	ld l, a
-	ld a, [hSPBuffer + 1]
+	ldh a, [hSPBuffer + 1]
 	ld h, a
 	ld sp, hl
 	ret
 
 AnimateTileset:: ; 162b (0:162b)
-	ld a, [hMapAnims]
+	ldh a, [hMapAnims]
 	and a
 	ret z
-	ld a, [hROMBank]
+	ldh a, [hROMBank]
 	push af
 	ld a, $3f
 	rst Bankswitch
@@ -329,7 +329,7 @@ AnimateTileset:: ; 162b (0:162b)
 
 Function1642:: ; 1642 (0:1642)
 	nop
-	ld a, [hFF9E]
+	ldh a, [hVBlankCounter + 1]
 	and a
 	ret z
 	dec a
@@ -337,7 +337,7 @@ Function1642:: ; 1642 (0:1642)
 	dec a
 	jr z, .two
 	ld a, $2
-	ld [hFF9E], a
+	ldh [hVBlankCounter + 1], a
 	ld hl, hBGMapAddress
 	ld a, [hli]
 	ld h, [hl]
@@ -364,7 +364,7 @@ endr
 	xor a
 	ld de, $320
 .go
-	ld [hFF9E], a
+	ldh [hVBlankCounter + 1], a
 	ld hl, hBGMapAddress
 	ld a, [hli]
 	ld h, [hl]

@@ -1,5 +1,5 @@
 CheckCGB:
-	ld a, [hCGB]
+	ldh a, [hCGB]
 	and a
 	ret
 
@@ -157,7 +157,7 @@ Function944a: ; 944a (2:544a)
 	call CopyBytes
 	call Function9b28
 	ld a, $1
-	ld [hCGBPalUpdate], a
+	ldh [hCGBPalUpdate], a
 	ret
 
 Function945e: ; 945e (2:545e)
@@ -204,7 +204,7 @@ Function945e: ; 945e (2:545e)
 	call Function9b35
 	call Function9b28
 	ld a, $1
-	ld [hCGBPalUpdate], a
+	ldh [hCGBPalUpdate], a
 	ret
 
 Palettes_94d3:
@@ -274,7 +274,7 @@ Function9537: ; 9537 (2:5537)
 	call Function9b35
 	call Function9b28
 	ld a, $1
-	ld [hCGBPalUpdate], a
+	ldh [hCGBPalUpdate], a
 	ret
 
 Palettes_9551:
@@ -315,7 +315,7 @@ Function9561: ; 9561 (2:5561)
 	call Function9b35
 	call Function9b28
 	ld a, $1
-	ld [hCGBPalUpdate], a
+	ldh [hCGBPalUpdate], a
 	ret
 
 Function95a0:
@@ -337,7 +337,7 @@ asm_95b1
 	call Function9b35
 	call Function9b28
 	ld a, $1
-	ld [hCGBPalUpdate], a
+	ldh [hCGBPalUpdate], a
 	ret
 
 Palettes_95cd:
@@ -363,7 +363,7 @@ Function95d5: ; 95d5 (2:55d5)
 	call Function9b35
 	call Function9b28
 	ld a, $1
-	ld [hCGBPalUpdate], a
+	ldh [hCGBPalUpdate], a
 	ret
 
 Function9605: ; 9605 (2:5605)
@@ -415,7 +415,7 @@ Function9605: ; 9605 (2:5605)
 	call Function9b35
 	call Function9b28
 	ld a, $1
-	ld [hCGBPalUpdate], a
+	ldh [hCGBPalUpdate], a
 	ret
 
 Function968d: ; 968d (2:568d)
@@ -433,7 +433,7 @@ Function968d: ; 968d (2:568d)
 	call Function9b35
 	call Function9b28
 	ld a, $1
-	ld [hCGBPalUpdate], a
+	ldh [hCGBPalUpdate], a
 	ret
 
 Function96b7: ; 96b7 (2:56b7)
@@ -565,7 +565,7 @@ Function976d: ; 976d (2:576d)
 	call Function9b35
 	call Function9b28
 	ld a, $1
-	ld [hCGBPalUpdate], a
+	ldh [hCGBPalUpdate], a
 	ret
 
 Function97af: ; 97af (2:57af)
@@ -581,7 +581,7 @@ Function97af: ; 97af (2:57af)
 	ld [wColorLayoutPredefID], a
 	call Function9b28
 	ld a, $1
-	ld [hCGBPalUpdate], a
+	ldh [hCGBPalUpdate], a
 	ret
 
 Function97d4: ; 97d4 (2:57d4)
@@ -677,7 +677,7 @@ Function9802: ; 9802 (2:5802)
 	call Function9b35
 	call Function9b28
 	ld a, $1
-	ld [hCGBPalUpdate], a
+	ldh [hCGBPalUpdate], a
 	ret
 
 Function98be: ; 98be (2:58be)
@@ -701,7 +701,7 @@ Function98be: ; 98be (2:58be)
 	call Function9b35
 	call Function9b28
 	ld a, $1
-	ld [hCGBPalUpdate], a
+	ldh [hCGBPalUpdate], a
 	ret
 
 Function98f1: ; 98f1 (2:58f1)
@@ -711,7 +711,7 @@ Function98f1: ; 98f1 (2:58f1)
 	call Function9b35
 	call Function9b28
 	ld a, $1
-	ld [hCGBPalUpdate], a
+	ldh [hCGBPalUpdate], a
 	ret
 
 Function9905: ; 9905 (2:5905)
@@ -723,7 +723,7 @@ Function9905: ; 9905 (2:5905)
 	call Function9b35
 	call Function9b28
 	ld a, $1
-	ld [hCGBPalUpdate], a
+	ldh [hCGBPalUpdate], a
 	ret
 
 Function991e: ; 991e (2:591e)
@@ -755,7 +755,7 @@ Function991e: ; 991e (2:591e)
 	call Function9b35
 	call Function9b28
 	ld a, $1
-	ld [hCGBPalUpdate], a
+	ldh [hCGBPalUpdate], a
 	ret
 
 Palettes_996f:
@@ -839,7 +839,7 @@ Function99d9: ; 99d9 (2:59d9)
 	call Function9b35
 	call Function9b28
 	ld a, $1
-	ld [hCGBPalUpdate], a
+	ldh [hCGBPalUpdate], a
 	ret
 
 Function9a03: ; 9a03 (2:5a03)

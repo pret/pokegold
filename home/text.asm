@@ -23,7 +23,7 @@ ClearTileMap::
 	ld a, " "
 	ld bc, SCREEN_WIDTH * SCREEN_HEIGHT
 	call ByteFill
-	ld a, [rLCDC]
+	ldh a, [rLCDC]
 	bit 7, a
 	ret z
 	jp WaitBGMap
@@ -276,12 +276,12 @@ Char36::       print_name Char36Text ; 10cf (0:10cf)
 Char37::       print_name Char37Text ; 10d6 (0:10d6)
 
 PlaceMoveTargetsName:: ; 10dd (0:10dd)
-	ld a, [hBattleTurn]
+	ldh a, [hBattleTurn]
 	xor $1
 	jr PlaceMonsName
 
 PlaceMoveUsersName:: ; 10e3 (0:10e3)
-	ld a, [hBattleTurn]
+	ldh a, [hBattleTurn]
 PlaceMonsName::
 	push de
 	and a
@@ -502,13 +502,13 @@ TextScroll:: ; 121d (0:121d)
 
 Text_WaitBGMap:: ; 123a (0:123a)
 	push bc
-	ld a, [hOAMUpdate]
+	ldh a, [hOAMUpdate]
 	push af
 	ld a, $1
-	ld [hOAMUpdate], a
+	ldh [hOAMUpdate], a
 	call WaitBGMap
 	pop af
-	ld [hOAMUpdate], a
+	ldh [hOAMUpdate], a
 	pop bc
 	ret
 
@@ -535,7 +535,7 @@ UnloadBlinkingCursor:: ; 125b (0:125b)
 
 FarString::
 	ld b, a
-	ld a, [hROMBank]
+	ldh a, [hROMBank]
 	push af
 	ld a, b
 	rst Bankswitch
@@ -634,14 +634,14 @@ Text_TX_RAM:: ; 12d6 (0:12d6)
 	ret
 
 Text_TX_FAR:: ; 12e2 (0:12e2)
-	ld a, [hROMBank]
+	ldh a, [hROMBank]
 	push af
 	ld a, [hli]
 	ld e, a
 	ld a, [hli]
 	ld d, a
 	ld a, [hli]
-	ld [hROMBank], a
+	ldh [hROMBank], a
 	ld [MBC3RomBank], a
 	push hl
 	ld h, d
@@ -649,7 +649,7 @@ Text_TX_FAR:: ; 12e2 (0:12e2)
 	call DoTextUntilTerminator
 	pop hl
 	pop af
-	ld [hROMBank], a
+	ldh [hROMBank], a
 	ld [MBC3RomBank], a
 	ret
 
@@ -751,7 +751,7 @@ Text_TX_EXIT:: ; 136d (0:136d)
 	push hl
 	push bc
 	call GetJoypad
-	ld a, [hJoyDown]
+	ldh a, [hJoyDown]
 	and A_BUTTON | B_BUTTON
 	jr nz, .skip
 	ld c, 30
@@ -823,7 +823,7 @@ Text_TX_DOTS:: ; 13c3 (0:13c3)
 	ld a, "…"
 	ld [hli], a
 	call GetJoypad
-	ld a, [hJoyDown]
+	ldh a, [hJoyDown]
 	and A_BUTTON | B_BUTTON
 	jr nz, .next
 	ld c, 10

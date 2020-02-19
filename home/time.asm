@@ -24,31 +24,31 @@ GetClock:: ; 477 (0:0477)
 	ld [hl], RTC_S
 	ld a, [de]
 	and $3f
-	ld [hRTCSeconds], a
+	ldh [hRTCSeconds], a
 	ld [hl], RTC_M
 	ld a, [de]
 	and $3f
-	ld [hRTCMinutes], a
+	ldh [hRTCMinutes], a
 	ld [hl], RTC_H
 	ld a, [de]
 	and $1f
-	ld [hRTCHours], a
+	ldh [hRTCHours], a
 	ld [hl], RTC_DL
 	ld a, [de]
-	ld [hRTCDayLo], a
+	ldh [hRTCDayLo], a
 	ld [hl], RTC_DH
 	ld a, [de]
-	ld [hRTCDayHi], a
+	ldh [hRTCDayHi], a
 	call CloseSRAM
 	ret
 
 FixDays:: ; 4a8 (0:04a8)
-	ld a, [hRTCDayHi]
+	ldh a, [hRTCDayHi]
 	bit 0, a
 	jr z, .daylo
 	res 0, a
-	ld [hRTCDayHi], a
-	ld a, [hRTCDayLo]
+	ldh [hRTCDayHi], a
+	ldh a, [hRTCDayLo]
 .modh
 	sub 140
 	jr nc, .modh
@@ -56,18 +56,18 @@ FixDays:: ; 4a8 (0:04a8)
 	sub 140
 	jr nc, .modl
 	add 140
-	ld [hRTCDayLo], a
+	ldh [hRTCDayLo], a
 	ld a, $40
 	jr .set
 .daylo
-	ld a, [hRTCDayLo]
+	ldh a, [hRTCDayLo]
 	cp 140
 	jr c, .quit
 .mod
 	sub 140
 	jr nc, .mod
 	add 140
-	ld [hRTCDayLo], a
+	ldh [hRTCDayLo], a
 	ld a, $20
 .set
 	push af
@@ -81,7 +81,7 @@ FixDays:: ; 4a8 (0:04a8)
 	ret
 
 FixTime:: ; 4de (0:04de)
-	ld a, [hRTCSeconds]
+	ldh a, [hRTCSeconds]
 	ld c, a
 	ld a, [wd1df]
 	add c
@@ -89,9 +89,9 @@ FixTime:: ; 4de (0:04de)
 	jr nc, .asm_4eb
 	add 60
 .asm_4eb
-	ld [hSeconds], a
+	ldh [hSeconds], a
 	ccf
-	ld a, [hRTCMinutes]
+	ldh a, [hRTCMinutes]
 	ld c, a
 	ld a, [wd1de]
 	adc c
@@ -99,9 +99,9 @@ FixTime:: ; 4de (0:04de)
 	jr nc, .asm_4fb
 	add 60
 .asm_4fb
-	ld [hMinutes], a
+	ldh [hMinutes], a
 	ccf
-	ld a, [hRTCHours]
+	ldh a, [hRTCHours]
 	ld c, a
 	ld a, [wd1dd]
 	adc c
@@ -109,9 +109,9 @@ FixTime:: ; 4de (0:04de)
 	jr nc, .asm_50b
 	add 24
 .asm_50b
-	ld [hHours], a
+	ldh [hHours], a
 	ccf
-	ld a, [hRTCDayLo]
+	ldh a, [hRTCDayLo]
 	ld c, a
 	ld a, [wd1dc]
 	adc c
@@ -127,11 +127,11 @@ SetTimeOfDay::
 
 SetDayOfWeek::
 	call UpdateTime
-	ld a, [hHours]
+	ldh a, [hHours]
 	ld [wStringBuffer2 + 1], a
-	ld a, [hMinutes]
+	ldh a, [hMinutes]
 	ld [wStringBuffer2 + 2], a
-	ld a, [hSeconds]
+	ldh a, [hSeconds]
 	ld [wStringBuffer2 + 3], a
 	jr InitTime
 
@@ -146,11 +146,11 @@ PanicResetClock::
 
 ClearhRTC:: ; 546 (0:0546)
 	xor a
-	ld [hRTCSeconds], a
-	ld [hRTCMinutes], a
-	ld [hRTCHours], a
-	ld [hRTCDayLo], a
-	ld [hRTCDayHi], a
+	ldh [hRTCSeconds], a
+	ldh [hRTCMinutes], a
+	ldh [hRTCHours], a
+	ldh [hRTCDayLo], a
+	ldh [hRTCDayHi], a
 	ret
 
 SetClock:: ; 552 (0:0552)
@@ -164,19 +164,19 @@ SetClock:: ; 552 (0:0552)
 	bit 6, a
 	ld [de], a
 	ld [hl], RTC_S
-	ld a, [hRTCSeconds]
+	ldh a, [hRTCSeconds]
 	ld [de], a
 	ld [hl], RTC_M
-	ld a, [hRTCMinutes]
+	ldh a, [hRTCMinutes]
 	ld [de], a
 	ld [hl], RTC_H
-	ld a, [hRTCHours]
+	ldh a, [hRTCHours]
 	ld [de], a
 	ld [hl], RTC_DL
-	ld a, [hRTCDayLo]
+	ldh a, [hRTCDayLo]
 	ld [de], a
 	ld [hl], RTC_DH
-	ld a, [hRTCDayHi]
+	ldh a, [hRTCDayHi]
 	res 6, a
 	ld [de], a
 	call CloseSRAM

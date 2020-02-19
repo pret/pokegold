@@ -1,6 +1,6 @@
 Function2e80:: ; 2e80 (0:2e80)
 	call ClearWindowData
-	ld a, [hROMBank]
+	ldh a, [hROMBank]
 	push af
 	ld a, BANK(ReanchorBGMap_NoOAMUpdate) ; and BANK(LoadFonts_NoOAMUpdate)
 	rst Bankswitch
@@ -12,26 +12,26 @@ Function2e80:: ; 2e80 (0:2e80)
 	ret
 
 CloseText
-	ld a, [hOAMUpdate]
+	ldh a, [hOAMUpdate]
 	push af
 	ld a, $1
-	ld [hOAMUpdate], a
+	ldh [hOAMUpdate], a
 	call .CloseText
 	pop af
-	ld [hOAMUpdate], a
+	ldh [hOAMUpdate], a
 	ret
 
 .CloseText:
 	call ClearWindowData
 	xor a
-	ld [hBGMapMode], a
+	ldh [hBGMapMode], a
 	call OverworldTextModeSwitch
 	call _OpenAndCloseMenu_HDMATransferTileMapAndAttrMap
 	xor a
-	ld [hBGMapMode], a
+	ldh [hBGMapMode], a
 	call SafeUpdateSprites
 	ld a, $90
-	ld [hWY], a
+	ldh [hWY], a
 	farcall Function1415c
 	call ReplacePlayerSprite
 	ld hl, wd565
@@ -41,7 +41,7 @@ CloseText
 
 OpenText::
 	call ClearWindowData
-	ld a, [hROMBank]
+	ldh a, [hROMBank]
 	push af
 	ld a, BANK(ReanchorBGMap_NoOAMUpdate) ; and BANK(LoadFonts_NoOAMUpdate)
 	rst Bankswitch
@@ -54,32 +54,32 @@ OpenText::
 	ret
 
 _OpenAndCloseMenu_HDMATransferTileMapAndAttrMap:: ; 2ee3 (0:2ee3)
-	ld a, [hOAMUpdate]
+	ldh a, [hOAMUpdate]
 	push af
 	ld a, $1
-	ld [hOAMUpdate], a
+	ldh [hOAMUpdate], a
 	call CGBOnly_LoadEDTile
 	pop af
-	ld [hOAMUpdate], a
+	ldh [hOAMUpdate], a
 	ret
 
 SafeUpdateSprites:: ; 2ef1 (0:2ef1)
-	ld a, [hOAMUpdate]
+	ldh a, [hOAMUpdate]
 	push af
-	ld a, [hBGMapMode]
+	ldh a, [hBGMapMode]
 	push af
 	xor a
-	ld [hBGMapMode], a
+	ldh [hBGMapMode], a
 	ld a, $1
-	ld [hOAMUpdate], a
+	ldh [hOAMUpdate], a
 	call UpdateSprites
 	xor a
-	ld [hOAMUpdate], a
+	ldh [hOAMUpdate], a
 	call DelayFrame
 	pop af
-	ld [hBGMapMode], a
+	ldh [hBGMapMode], a
 	pop af
-	ld [hOAMUpdate], a
+	ldh [hOAMUpdate], a
 	ret
 
 Function2f0e::

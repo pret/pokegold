@@ -34,6 +34,7 @@ PrintNum::
 	jr z, .byte
 	cp 2
 	jr z, .word
+
 ; maximum 3 bytes
 .long
 	ld a, [de]

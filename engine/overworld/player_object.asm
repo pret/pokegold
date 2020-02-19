@@ -1,7 +1,7 @@
 BlankScreen:
 	call DisableSpriteUpdates
 	xor a
-	ld [hBGMapMode], a
+	ldh [hBGMapMode], a
 	call ClearBGPalettes
 	call ClearSprites
 	ld hl, wTileMap
@@ -26,10 +26,10 @@ SpawnPlayer: ; 861a (2:461a)
 	ld b, $0
 	call PlayerSpawn_ConvertCoords
 	ld a, $0
-	ld [hObjectStructIndexBuffer], a
+	ldh [hObjectStructIndexBuffer], a
 	ld de, wObjectStructs
 	ld a, $0
-	ld [hMapObjectIndexBuffer], a
+	ldh [hMapObjectIndexBuffer], a
 	ld bc, wMapObjects
 	call CopyMapObjectToObjectStruct
 	ld a, $0
@@ -77,7 +77,7 @@ WritePersonXY:
 	ld hl, $11
 	add hl, bc
 	ld e, [hl]
-	ld a, [hConnectionStripLength]
+	ldh a, [hConnectionStripLength]
 	ld b, a
 	call CopyDECoordsToMapObject
 	and a
@@ -130,12 +130,12 @@ CopyObjectStruct_:: ; 86d7 (2:46d7)
 	ld a, $1
 	ld de, $28
 .asm_86e4
-	ld [hObjectStructIndexBuffer], a
+	ldh [hObjectStructIndexBuffer], a
 	ld a, [hl]
 	and a
 	jr z, .asm_86f4
 	add hl, de
-	ld a, [hConnectedMapWidth]
+	ldh a, [hConnectedMapWidth]
 	inc a
 	cp $d
 	jr nz, .asm_86e4
@@ -160,11 +160,11 @@ CopyMapObjectToObjectStruct: ; 8706 (2:4706)
 	ret
 
 CopyMapObjectToTempObject: ; 870d (2:470d)
-	ld a, [hConnectedMapWidth]
+	ldh a, [hConnectedMapWidth]
 	ld hl, $0
 	add hl, bc
 	ld [hl], a
-	ld a, [hMapObjectIndexBuffer]
+	ldh a, [hMapObjectIndexBuffer]
 	ld [wce99], a
 	ld hl, $1
 	add hl, bc
@@ -210,7 +210,7 @@ InitializeVariableSprites:
 	ld bc, wMap2Object
 	ld a, $2
 .asm_876c
-	ld [hConnectionStripLength], a
+	ldh [hConnectionStripLength], a
 	ld hl, $1
 	add hl, bc
 	ld a, [hl]
@@ -250,7 +250,7 @@ InitializeVariableSprites:
 	add hl, bc
 	ld b, h
 	ld c, l
-	ld a, [hMapObjectIndexBuffer]
+	ldh a, [hMapObjectIndexBuffer]
 	inc a
 	cp $10
 	jr nz, .asm_876c
@@ -289,7 +289,7 @@ asm_87da
 	ld bc, wMap2Object
 	ld a, $2
 .asm_87e4
-	ld [hConnectionStripLength], a
+	ldh [hConnectionStripLength], a
 	ld hl, $1
 	add hl, bc
 	ld a, [hl]
@@ -323,7 +323,7 @@ asm_87da
 	add hl, bc
 	ld b, h
 	ld c, l
-	ld a, [hMapObjectIndexBuffer]
+	ldh a, [hMapObjectIndexBuffer]
 	inc a
 	cp $10
 	jr nz, .asm_87e4
@@ -344,7 +344,7 @@ asm_882e
 	ld bc, wMap2Object
 	ld a, $2
 .asm_8838
-	ld [hConnectionStripLength], a
+	ldh [hConnectionStripLength], a
 	ld hl, $1
 	add hl, bc
 	ld a, [hl]
@@ -378,7 +378,7 @@ asm_882e
 	add hl, bc
 	ld b, h
 	ld c, l
-	ld a, [hConnectionStripLength]
+	ldh a, [hConnectionStripLength]
 	inc a
 	cp $10
 	jr nz, .asm_8838
@@ -474,14 +474,14 @@ InitTempObjectRadius: ; 88fd (2:48fd)
 	ret
 
 TrainerWalkToPlayer:
-	ld a, [hLastTalked]
+	ldh a, [hLastTalked]
 	call InitMovementBuffer
 	ld a, movement_step_sleep
 	call AppendToMovementBuffer
 	ld a, [wcf2a]
 	dec a
 	jr z, .asm_892b
-	ld a, [hLastTalked]
+	ldh a, [hLastTalked]
 	ld b, a
 	ld c, PLAYER
 	ld d, $1
@@ -624,7 +624,7 @@ FollowNotExact:
 	ld hl, $18
 	add hl, de
 	ld [hl], a
-	ld a, [hObjectStructIndexBuffer]
+	ldh a, [hObjectStructIndexBuffer]
 	ld hl, $20
 	add hl, de
 	ld [hl], a

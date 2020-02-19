@@ -43,10 +43,10 @@ $(foreach obj, $(gold_obj), $(eval $(call DEP,$(obj),$(obj:_gold.o=.asm))))
 $(foreach obj, $(silver_obj), $(eval $(call DEP,$(obj),$(obj:_silver.o=.asm))))
 
 $(gold_obj): %_gold.o: %.asm $$(dep)
-	rgbasm -D GOLD -o $@ $<
+	rgbasm -D GOLD -L -o $@ $<
 
 $(silver_obj): %_silver.o: %.asm $$(dep)
-	rgbasm -D SILVER -o $@ $<
+	rgbasm -D SILVER -L -o $@ $<
 
 pokegold.gbc: $(gold_obj)
 	rgblink -n pokegold.sym -m pokegold.map -l pokegold.link -o $@ $^

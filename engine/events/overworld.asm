@@ -206,7 +206,7 @@ CutDownTreeOrGrass:
 	ld a, [wBuffer5]
 	ld [hl], a
 	xor a
-	ld [hBGMapMode], a
+	ldh [hBGMapMode], a
 	call OverworldTextModeSwitch
 	call UpdateSprites
 	call DelayFrame
@@ -542,7 +542,7 @@ TryToFly:
 
 .asm_ca83
 	xor a
-	ld [hMapAnims], a
+	ldh [hMapAnims], a
 	call LoadStandardMenuDataHeader
 	call ClearSprites
 	ld a, $24
@@ -1134,7 +1134,7 @@ DisappearWhirlpool: ; 4e20
 	ld a, [wBuffer5]
 	ld [hl], a
 	xor a
-	ld [hBGMapMode], a
+	ldh [hBGMapMode], a
 	call OverworldTextModeSwitch
 	ld a, [wBuffer6]
 	ld e, a
@@ -1285,12 +1285,12 @@ TryRockSmashFromMenu: ; cef7 (3:4ef7)
 GetFacingObject: ; cf10 (3:4f10)
 	farcall CheckFacingObject
 	jr nc, .asm_cf2f
-	ld a, [hObjectStructIndexBuffer]
+	ldh a, [hObjectStructIndexBuffer]
 	call GetObjectStruct
 	ld hl, $1
 	add hl, bc
 	ld a, [hl]
-	ld [hLastTalked], a
+	ldh [hLastTalked], a
 	call GetMapObject
 	ld hl, $4
 	add hl, bc
@@ -1547,7 +1547,7 @@ PutTheRodAway: ; d096
 	call ClearBox
 	call WaitBGMap
 	xor a
-	ld [hBGMapMode], a
+	ldh [hBGMapMode], a
 	ld a, $1
 	ld [wPlayerAction], a
 	call UpdateSprites

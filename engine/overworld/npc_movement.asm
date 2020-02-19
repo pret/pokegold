@@ -224,7 +224,7 @@ CheckFacingObject:
 .asm_70d0
 	ld bc, wObjectStructs
 	ld a, $0
-	ld [hMapObjectIndexBuffer], a
+	ldh [hMapObjectIndexBuffer], a
 	call Function7120
 	ret nc
 	ld hl, $7
@@ -249,7 +249,7 @@ WillPersonBumpIntoSomeoneElse: ; 70e8 (1:70e8)
 	jr Function7120
 
 Function70f4:
-	ld a, [hMapObjectIndexBuffer]
+	ldh a, [hMapObjectIndexBuffer]
 	call GetObjectStruct
 	call Function7100
 	call Function7120
@@ -288,7 +288,7 @@ Function7120: ; 7120 (1:7120)
 	ld bc, wPlayerStruct
 	xor a
 .asm_7124
-	ld [hObjectStructIndexBuffer], a
+	ldh [hObjectStructIndexBuffer], a
 	call DoesObjectHaveASprite
 	jr z, .asm_7172
 	ld hl, $4
@@ -315,9 +315,9 @@ Function7120: ; 7120 (1:7120)
 	cp e
 	jr nz, .asm_715a
 .asm_7152
-	ld a, [hMapObjectIndexBuffer]
+	ldh a, [hMapObjectIndexBuffer]
 	ld l, a
-	ld a, [hConnectedMapWidth]
+	ldh a, [hConnectedMapWidth]
 	cp l
 	jr nz, .asm_7181
 .asm_715a
@@ -331,9 +331,9 @@ Function7120: ; 7120 (1:7120)
 	ld a, [hl]
 	cp e
 	jr nz, .asm_7172
-	ld a, [hConnectionStripLength]
+	ldh a, [hConnectionStripLength]
 	ld l, a
-	ld a, [hObjectStructIndexBuffer]
+	ldh a, [hObjectStructIndexBuffer]
 	cp l
 	jr nz, .asm_7181
 .asm_7172
@@ -341,7 +341,7 @@ Function7120: ; 7120 (1:7120)
 	add hl, bc
 	ld b, h
 	ld c, l
-	ld a, [hConnectedMapWidth]
+	ldh a, [hConnectedMapWidth]
 	inc a
 	cp $d
 	jr nz, .asm_7124
@@ -445,7 +445,7 @@ Function71f2
 	ld bc, wObjectStructs
 	xor a
 .asm_71fe
-	ld [hConnectedMapWidth], a
+	ldh [hConnectedMapWidth], a
 	call DoesObjectHaveASprite
 	jr z, .asm_723f
 	ld hl, $3
@@ -468,7 +468,7 @@ Function71f2
 	ld a, [hl]
 	cp d
 	jr nz, .asm_722d
-	ld a, [hObjectStructIndexBuffer]
+	ldh a, [hObjectStructIndexBuffer]
 	cp $0
 	jr z, .asm_723f
 	jr .asm_724e
@@ -491,7 +491,7 @@ Function71f2
 	add hl, bc
 	ld b, h
 	ld c, l
-	ld a, [hConnectedMapWidth]
+	ldh a, [hConnectedMapWidth]
 	inc a
 	cp $d
 	jr nz, .asm_71fe

@@ -1,6 +1,6 @@
 UserPartyAttr:: ; 3b69
 	push af
-	ld a, [hBattleTurn]
+	ldh a, [hBattleTurn]
 	and a
 	jr nz, .asm_3b72
 	pop af
@@ -12,7 +12,7 @@ UserPartyAttr:: ; 3b69
 
 OpponentPartyAttr::
 	push af
-	ld a, [hBattleTurn]
+	ldh a, [hBattleTurn]
 	and a
 	jr z, .asm_3b7e
 	pop af
@@ -52,21 +52,21 @@ ResetDamage::
 
 SetPlayerTurn::
 	xor a
-	ld [hBattleTurn], a
+	ldh [hBattleTurn], a
 	ret
 
 SetEnemyTurn::
 	ld a, $1
-	ld [hBattleTurn], a
+	ldh [hBattleTurn], a
 	ret
 
 UpdateOpponentInParty::
-	ld a, [hBattleTurn]
+	ldh a, [hBattleTurn]
 	and a
 	jr z, UpdateEnemyMonInParty
 	jr UpdateBattleMonInParty
 
-	ld a, [hBattleTurn]
+	ldh a, [hBattleTurn]
 	and a
 	jr z, UpdateBattleMonInParty
 	jr UpdateEnemyMonInParty
@@ -121,7 +121,7 @@ GetBattleVarAddr:: ; 3c0b (0:3c0b)
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
-	ld a, [hBattleTurn]
+	ldh a, [hBattleTurn]
 	and a
 	jr z, .asm_3c1d
 	inc hl
@@ -186,14 +186,14 @@ GetBattleVarAddr:: ; 3c0b (0:3c0b)
 	db $23 ; ???
 
 FarCopyRadioText::
-	ld a, [hROMBank]
+	ldh a, [hROMBank]
 	push af
 	ld a, [hli]
 	ld e, a
 	ld a, [hli]
 	ld d, a
 	ld a, [hli]
-	ld [hROMBank], a
+	ldh [hROMBank], a
 	ld [MBC3RomBank], a
 	ld a, e
 	ld l, a
@@ -203,13 +203,13 @@ FarCopyRadioText::
 	ld bc, $28
 	call CopyBytes
 	pop af
-	ld [hROMBank], a
+	ldh [hROMBank], a
 	ld [MBC3RomBank], a
 	ret
 
 StdBattleTextBox::
 GLOBAL BattleText
-	ld a, [hROMBank]
+	ldh a, [hROMBank]
 	push af
 	ld a, BANK(BattleText) ; $40
 	rst Bankswitch

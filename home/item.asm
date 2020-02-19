@@ -16,7 +16,7 @@ TossItem::
 	push hl
 	push de
 	push bc
-	ld a, [hROMBank]
+	ldh a, [hROMBank]
 	push af
 	ld a, BANK(TossItem_)
 	rst Bankswitch
@@ -31,7 +31,7 @@ TossItem::
 
 ReceiveItem::
 	push bc
-	ld a, [hROMBank]
+	ldh a, [hROMBank]
 	push af
 	ld a, BANK(ReceiveItem_)
 	rst Bankswitch
@@ -50,7 +50,7 @@ CheckItem::
 	push hl
 	push de
 	push bc
-	ld a, [hROMBank]
+	ldh a, [hROMBank]
 	push af
 	ld a, BANK(CheckItem_)
 	rst Bankswitch

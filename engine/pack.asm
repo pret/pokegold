@@ -39,7 +39,7 @@ Function10456: ; 10456 (4:4456)
 
 Pack_InitGFX:
 	xor a
-	ld [hBGMapMode], a
+	ldh [hBGMapMode], a
 	call Function10d70
 	ld a, [wce64]
 	ld [wce63], a
@@ -109,7 +109,7 @@ Pack_InitTMHMPocket:
 	call Function10e51
 	call Function10dd6
 	xor a
-	ld [hBGMapMode], a
+	ldh [hBGMapMode], a
 	call Function10cca
 	call Function10c96
 	ret
@@ -193,7 +193,7 @@ UseTMorHM:
 	ld [wOptions], a
 .asm_105a9
 	xor a
-	ld [hBGMapMode], a
+	ldh [hBGMapMode], a
 	call Function10d70
 	call Function10cca
 	call Function10e5b
@@ -447,7 +447,7 @@ UseItem:
 	jr z, .no_pokemon
 	call DoItemEffect
 	xor a
-	ld [hBGMapMode], a
+	ldh [hBGMapMode], a
 	call Function10d70
 	call Function10cca
 	call Function10e5b
@@ -597,7 +597,7 @@ GiveItem:
 	pop af
 	ld [wOptions], a
 	xor a
-	ld [hBGMapMode], a
+	ldh [hBGMapMode], a
 	call Function10d70
 	call Function10cca
 	call Function10e5b
@@ -656,7 +656,7 @@ Function108e9: ; 108e9 (4:48e9)
 
 BattlePack_InitGFX:
 	xor a
-	ld [hBGMapMode], a
+	ldh [hBGMapMode], a
 	call Function10d70
 	ld a, [wce64]
 	ld [wce63], a
@@ -725,7 +725,7 @@ BattlePack_InitTMHMPocket:
 	call Function10e51
 	call Function10dd6
 	xor a
-	ld [hBGMapMode], a
+	ldh [hBGMapMode], a
 	call Function10cca
 	ld hl, Text_PackEmptyString
 	call Function10cb9
@@ -860,7 +860,7 @@ Function10a86:
 	and a
 	jr nz, asm_10aae
 	xor a
-	ld [hBGMapMode], a
+	ldh [hBGMapMode], a
 	call Function10d70
 	call Function10cca
 	call Function10e5b
@@ -908,7 +908,7 @@ Function10aba: ; 10aba (4:4aba)
 
 Function10ad5: ; 10ad5 (4:4ad5)
 	xor a
-	ld [hBGMapMode], a
+	ldh [hBGMapMode], a
 	ld [wce63], a
 	ld [wce64], a
 	ld [wce65], a

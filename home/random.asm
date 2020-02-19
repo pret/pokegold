@@ -1,20 +1,20 @@
 Random:: ; 30a2 (0:30a2)
 	push bc
-	ld a, [rDIV]
+	ldh a, [rDIV]
 	ld b, a
-	ld a, [hRandom]
+	ldh a, [hRandom]
 	adc b
-	ld [hRandom], a
-	ld a, [rDIV]
+	ldh [hRandom], a
+	ldh a, [rDIV]
 	ld b, a
-	ld a, [hRandomSub]
+	ldh a, [hRandomSub]
 	sbc b
-	ld [hRandomSub], a
+	ldh [hRandomSub], a
 	pop bc
 	ret
 
 BattleRandom::
-	ld a, [hROMBank]
+	ldh a, [hROMBank]
 	push af
 	ld a, BANK(BattleRandom_)
 	rst Bankswitch
@@ -38,7 +38,7 @@ RandomRange::
 	push bc
 .asm_30d1
 	call Random
-	ld a, [hRandom]
+	ldh a, [hRandom]
 	ld c, a
 	add b
 	jr c, .asm_30d1

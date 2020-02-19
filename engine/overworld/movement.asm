@@ -302,7 +302,7 @@ Function517a: ; 517a (1:517a)
 Function519c: ; 519c (1:519c)
 	call DeleteMapObject
 	ld hl, wObjectFollow_Leader
-	ld a, [hMapObjectIndexBuffer]
+	ldh a, [hMapObjectIndexBuffer]
 	cp [hl]
 	jr nz, .asm_51a9
 	ld [hl], $ff
@@ -719,7 +719,7 @@ Function53b1: ; 53b1 (1:53b1)
 	call Function54f5
 .asm_53cf
 	ld hl, wCenteredObject
-	ld a, [hConnectionStripLength]
+	ldh a, [hConnectionStripLength]
 	cp [hl]
 	jr z, .asm_53de
 	ld hl, $9
@@ -740,7 +740,7 @@ Function53e5: ; 53e5 (1:53e5)
 	add hl, bc
 	ld [hl], $4
 	ld hl, wCenteredObject
-	ld a, [hMapObjectIndexBuffer]
+	ldh a, [hMapObjectIndexBuffer]
 	cp [hl]
 	jr z, .asm_5400
 	ld hl, $9
@@ -761,7 +761,7 @@ Function5407: ; 5407 (1:5407)
 	add hl, bc
 	ld [hl], $1
 	ld hl, wCenteredObject
-	ld a, [hConnectionStripLength]
+	ldh a, [hConnectionStripLength]
 	cp [hl]
 	jr z, .asm_5422
 	ld hl, $9
