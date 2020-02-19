@@ -1,30 +1,37 @@
+; VBlank is the interrupt responsible for updating VRAM.
+
 VBlank::
 	push af
 	push bc
 	push de
 	push hl
+
 	ldh a, [hVBlank]
-	and $7
+	and 7
+
 	ld e, a
-	ld d, $0
-	ld hl, .blanks
+	ld d, 0
+	ld hl, .VBlanks
 	add hl, de
 	add hl, de
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
+
 	ld de, .return
 	push de
 	jp hl
-.return
+
+.return:
 	call GameTimer
+
 	pop hl
 	pop de
 	pop bc
 	pop af
 	reti
 
-.blanks
+.VBlanks:
 	dw VBlank0
 	dw VBlank1
 	dw VBlank2
@@ -33,9 +40,9 @@ VBlank::
 	dw VBlank5
 	dw VBlank0
 	dw VBlank0 ; just in case
-;180
 
-VBlank0:: ; 180
+
+VBlank0::
 ; normal operation
 
 ; rng
@@ -102,9 +109,7 @@ VBlank0:: ; 180
 	call hTransferVirtualOAM
 .done_oam
 
-
 	; vblank-sensitive operations are done
-
 
 	xor a
 	ld [wVBlankOccurred], a
@@ -124,16 +129,19 @@ VBlank0:: ; 180
 .ok2
 
 	call Joypad
+
 	ld a, BANK(_UpdateSound)
 	rst Bankswitch
 	call _UpdateSound
 	ld a, [wROMBankBackup]
 	rst Bankswitch
+
 	ldh a, [hSeconds]
 	ldh [hSecondsBackup], a
+
 	ret
 
-VBlank1:: ; 1f4
+VBlank1::
 ; scx, scy
 ; palettes
 ; bg map
@@ -191,8 +199,9 @@ VBlank1:: ; 1f4
 	ldh [rIE], a
 	ret
 
-UpdatePals:: ; 23e
+UpdatePals::
 ; update pals for either dmg or cgb
+
 	ldh a, [hCGB]
 	and a
 	jp nz, UpdateCGBPals
@@ -204,10 +213,11 @@ UpdatePals:: ; 23e
 	ldh [rOBP0], a
 	ld a, [wOPB1]
 	ldh [rOBP1], a
+
 	and a
 	ret
 
-VBlank4:: ; 255
+VBlank4::
 ; bg map
 ; tiles
 ; oam
@@ -238,7 +248,7 @@ VBlank4:: ; 255
 	rst Bankswitch
 	ret
 
-VBlank5:: ; 278
+VBlank5::
 ; scx
 ; palettes
 ; bg map
@@ -285,7 +295,7 @@ VBlank5:: ; 278
 	ldh [rIE], a
 	ret
 
-VBlank2:: ; 2b0
+VBlank2::
 ; sound only
 
 	ldh a, [hROMBank]
@@ -302,7 +312,7 @@ VBlank2:: ; 2b0
 	ld [wVBlankOccurred], a
 	ret
 
-VBlank3:: ; 2c4
+VBlank3::
 ; scx, scy
 ; palettes
 ; bg map

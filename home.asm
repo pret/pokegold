@@ -1,16 +1,18 @@
-INCLUDE "contents.asm"
 INCLUDE "constants.asm"
 
 ; rst vectors
 INCLUDE "home/rst.asm"
 INCLUDE "home/interrupts.asm"
 
-SECTION "start", ROM0
+SECTION "Header", ROM0
+
 Start::
 	nop
 	jp _Start
 
-SECTION "bank0", ROM0
+
+SECTION "Home", ROM0
+
 INCLUDE "home/vblank.asm"
 INCLUDE "home/delay.asm"
 INCLUDE "home/rtc.asm"

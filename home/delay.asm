@@ -1,16 +1,19 @@
-DelayFrame:: ; 32e
-	ld a, $1
-	ld [$ceea], a
-.asm_333
-	halt
-	ld a, [$ceea]
+DelayFrame::
+; Wait for one frame
+	ld a, 1
+	ld [wVBlankOccurred], a
+
+; Wait for the next VBlank, halting to conserve battery
+.halt
+	halt ; rgbasm adds a nop after this instruction by default
+	ld a, [wVBlankOccurred]
 	and a
-	jr nz, .asm_333
+	jr nz, .halt
 	ret
 
-DelayFrames:: ; 33c
-.loop
+DelayFrames::
+; Wait c frames
 	call DelayFrame
 	dec c
-	jr nz, .loop
+	jr nz, DelayFrames
 	ret
