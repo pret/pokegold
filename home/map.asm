@@ -947,7 +947,7 @@ ClearObjectStructs:: ; 2550 (0:2550)
 	ret
 
 RestoreFacingAfterWarp::
-	call GetMapScriptHeaderBank
+	call GetMapScriptsBank
 	rst Bankswitch
 	ld hl, wd08f
 	ld a, [hli]
@@ -1253,7 +1253,7 @@ CallMapScript::
 	ld a, [wd15f]
 	and a
 	ret nz
-	call GetMapScriptHeaderBank
+	call GetMapScriptsBank
 	jr CallScript
 
 RunMapCallback:: ; 2764 (0:2764)
@@ -1263,7 +1263,7 @@ RunMapCallback:: ; 2764 (0:2764)
 	call SwitchToMapScriptsBank
 	call FindCallback
 	jr nc, .asm_2779
-	call GetMapScriptHeaderBank
+	call GetMapScriptsBank
 	ld b, a
 	ld d, h
 	ld e, l
@@ -2256,7 +2256,7 @@ SwitchToMapScriptsBank:: ; 2d2b (0:2d2b)
 	rst Bankswitch
 	ret
 
-GetMapScriptHeaderBank:: ; 2d30 (0:2d30)
+GetMapScriptsBank:: ; 2d30 (0:2d30)
 	ld a, [wd08c]
 	ret
 

@@ -2328,10 +2328,13 @@ wcf25:: ds 1 ; cf25
 wcf26:: ds 1 ; cf26
 wcf27:: ds 1 ; cf27
 wcf28:: ds 1 ; cf28
+wSeenTrainerBank::
 wcf29:: ds 1 ; cf29
+wSeenTrainerDistance::
 wcf2a:: ds 1 ; cf2a
+wSeenTrainerDirection::
 wcf2b:: ds 1 ; cf2b
-wTempTrainerHeader::
+wTempTrainer::
 wcf2c:: ds 1 ; cf2c
 wcf2d:: ds 1 ; cf2d
 wcf2e:: ds 1 ; cf2e
@@ -2342,8 +2345,9 @@ wWinTextPointer:: dw ; cf32
 wLossTextPointer:: dw ; cf34
 wcf36:: ds 1 ; cf36
 wcf37:: ds 1 ; cf37
+wRunningTrainerBattleScript::
 wcf38:: ds 1 ; cf38
-wTempTrainerHeaderEnd::
+wTempTrainerEnd::
 wcf39:: ds 1 ; cf39
 wcf3a:: ds 1 ; cf3a
 wcf3b:: ds 1 ; cf3b

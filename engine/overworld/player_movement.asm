@@ -87,7 +87,7 @@ Function1002d: ; 1002d (4:402d)
 	ld a, [wcf2e]
 	cp $ff
 	jr z, .asm_100b2
-	ld a, [wTempTrainerHeader]
+	ld a, [wTempTrainer]
 	and a
 	jr nz, .asm_100ad
 	call Function103ee
@@ -367,7 +367,7 @@ Function10226: ; 10226 (4:4226)
 	cp [hl]
 	jr nz, .asm_10259
 	ld a, $1
-	ld [wTempTrainerHeader], a
+	ld [wTempTrainer], a
 	ld a, [wcf2e]
 	cp $ff
 	jr z, .asm_10259
@@ -476,7 +476,7 @@ Function102b3: ; 102b3 (4:42b3)
 
 Function102bf: ; 102bf (4:42bf)
 	ld a, $0
-	ld [wTempTrainerHeaderEnd], a
+	ld [wTempTrainerEnd], a
 	ld a, $50
 	ld [wcf2d], a
 	xor a
@@ -485,7 +485,7 @@ Function102bf: ; 102bf (4:42bf)
 Function102cb: ; 102cb (4:42cb)
 	call Function10404
 	ret nc
-	ld a, [wTempTrainerHeaderEnd]
+	ld a, [wTempTrainerEnd]
 .asm_102d2
 	cp $0
 	ret z
@@ -705,7 +705,7 @@ Function103f9: ; 103f9 (4:43f9)
 	ret
 
 Function10404: ; 10404 (4:4404)
-	ld a, [wTempTrainerHeaderEnd]
+	ld a, [wTempTrainerEnd]
 	cp $0
 	jr z, .asm_10420
 	cp $f0
