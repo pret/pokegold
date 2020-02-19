@@ -121,7 +121,7 @@ SECTION "WRAM", WRAM0
 wLZAddress:: dw ; c2c2
 wLZBank::    db ; c2c4
 
-wBoxAlignment:: db
+wBoxAlignment:: db ; c2c5
 
 wInputType::        db ; c2c6
 wAutoInputAddress:: dw ; c2c7
