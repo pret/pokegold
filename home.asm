@@ -262,27 +262,7 @@ INCLUDE "home/stone_queue.asm"
 INCLUDE "home/trainers.asm"
 INCLUDE "home/mon_stats.asm"
 INCLUDE "home/cry.asm"
-
-PrintLevel:: ; 3a50
-	ld a, [wTempMonLevel]
-	ld [hl], $6e
-	inc hl
-	ld c, $2
-	cp MAX_LEVEL
-	jr c, Print8BitNumRightAlign
-	dec hl
-	inc c
-	jr Print8BitNumRightAlign
-
-PrintLevel_Force3Digits::
-	ld [hl], $6e
-	inc hl
-	ld c, $3
-Print8BitNumRightAlign::
-	ld [wd151], a
-	ld de, wd151
-	ld b, PRINTNUM_RIGHTALIGN | 1
-	jp PrintNum
+INCLUDE "home/print_level.asm"
 
 Function3a70::
 	ld hl, wd149
