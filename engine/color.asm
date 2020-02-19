@@ -243,7 +243,7 @@ Function91b4:
 	ld a, [wc605]
 	and $3
 	call Function9af1
-	call LoadEDTile
+	call CopyTilemapAtOnce
 	ret
 
 ApplyMonOrTrainerPals: ; 91e5 (2:51e5)

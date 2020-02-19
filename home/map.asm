@@ -2097,7 +2097,7 @@ CheckCurrentMapXYTriggers::
 FadeToMenu::
 	xor a
 	ldh [hBGMapMode], a
-	call LoadStandardMenuDataHeader
+	call LoadStandardMenuHeader
 	farcall FadeOutPalettes
 	call ClearSprites
 	call DisableSpriteUpdates
@@ -2120,7 +2120,7 @@ ExitAllMenus::
 FinishExitMenu::
 	ld b, $9
 	call GetSGBLayout
-	call Function3456
+	call WaitBGMap2
 	farcall FadeInPalettes
 	call EnableSpriteUpdates
 	ret
@@ -2138,7 +2138,7 @@ ReturnToMapWithSpeechTextbox::
 	ld hl, wVramState
 	set 0, [hl]
 	call UpdateSprites
-	call Function3456
+	call WaitBGMap2
 	ld b, $9
 	call GetSGBLayout
 	call UpdateTimePals

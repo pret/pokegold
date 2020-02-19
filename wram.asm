@@ -2194,13 +2194,14 @@ wceb6:: ds 1 ; ceb6
 wceb7:: ds 1 ; ceb7
 wWindowDataEnd::
 
-wMenuDataHeader::
+wMenuHeader::
+wMenuFlags::
 wceb8:: ds 1 ; ceb8
 wMenuBorderTopCoord:: ds 1 ; ceb9
 wMenuBorderLeftCoord:: ds 1 ; ceba
 wMenuBorderBottomCoord:: ds 1 ; cebb
 wMenuBorderRightCoord:: ds 1 ; cebc
-wMenuData2Pointer:: dw ; cebd
+wMenuDataPointer:: dw ; cebd
 wMenuCursorBuffer:: ds 1 ; cebf
 wcec0:: ds 1 ; cec0
 wcec1:: ds 1 ; cec1
@@ -2210,15 +2211,15 @@ wcec4:: ds 1 ; cec4
 wcec5:: ds 1 ; cec5
 wcec6:: ds 1 ; cec6
 wcec7:: ds 1 ; cec7
-wMenuDataHeaderEnd::
+wMenuHeaderEnd::
 
-wMenuData2::
-wMenuData2Flags:: ds 1 ; cec8
-wMenuData2Items:: ds 1 ; cec9
-wMenuData2IndicesPointer:: ds 1 ; ceca
+wMenuData::
+wMenuDataFlags:: ds 1 ; cec8
+wMenuDataItems:: ds 1 ; cec9
+wMenuDataIndicesPointer:: ds 1 ; ceca
 wMenuDataBank:: ds 1 ; cecb
-wMenuData2DisplayFunctionPointer:: dw ; cecc
-wMenuData2PointerTableAddr:: ds 1 ; cece
+wMenuDataDisplayFunctionPointer:: dw ; cecc
+wMenuDataPointerTableAddr:: ds 1 ; cece
 wcecf:: ds 1 ; cecf
 wced0:: ds 1 ; ced0
 wced1:: ds 1 ; ced1
@@ -2228,14 +2229,14 @@ wced4:: ds 1 ; ced4
 wced5:: ds 1 ; ced5
 wced6:: ds 1 ; ced6
 wced7:: ds 1 ; ced7
-wMenuData2End::
+wMenuDataEnd::
 
 wMenuData3::
 w2DMenuCursorInitY:: ds 1 ; ced8
 wced9:: ds 1 ; ced9
 wceda:: ds 1 ; ceda
 wcedb:: ds 1 ; cedb
-wcedc:: ds 1 ; cedc
+w2DMenuFlags1:: ds 1 ; cedc
 wcedd:: ds 1 ; cedd
 wcede:: ds 1 ; cede
 wMenuJoypadFilter:: ds 1 ; cedf

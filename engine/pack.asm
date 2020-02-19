@@ -57,7 +57,7 @@ Pack_InitItemsPocket:
 
 Pack_ItemsPocketMenu:
 	ld hl, ItemsPocketMenuDataHeader
-	call CopyMenuDataHeader
+	call CopyMenuHeader
 	ld a, [wcfca]
 	ld [wMenuCursorBuffer], a
 	ld a, [wcfcf]
@@ -86,7 +86,7 @@ Pack_InitKeyItemsPocket:
 
 Pack_KeyItemsPocketMenu:
 	ld hl, KeyItemsPocketMenuDataHeader ; $4e9a
-	call CopyMenuDataHeader
+	call CopyMenuHeader
 	ld a, [wcfcb]
 	ld [wMenuCursorBuffer], a
 	ld a, [wcfd0]
@@ -133,7 +133,7 @@ Pack_TMHMPocketMenu:
 	ld de, TMHMPocketSubmenuJumptable_NoGive ; $4567
 .asm_10540
 	push de
-	call LoadMenuDataHeader
+	call LoadMenuHeader
 	call VerticalMenu
 	call ExitMenu
 	pop hl
@@ -210,7 +210,7 @@ Pack_InitBallsPocket:
 
 Pack_BallsPocketMenu:
 	ld hl, BallsPocketMenuDataHeader ; $4eca
-	call CopyMenuDataHeader
+	call CopyMenuHeader
 	ld a, [wcfcc]
 	ld [wMenuCursorBuffer], a
 	ld a, [wcfd1]
@@ -286,7 +286,7 @@ Function105f5: ; 105f5 (4:45f5)
 	ld de, ItemSubmenuJumptable_GiveTossQuit ; $473b
 .asm_10665
 	push de
-	call LoadMenuDataHeader
+	call LoadMenuHeader
 	call VerticalMenu
 	call ExitMenu
 	pop hl
@@ -477,7 +477,7 @@ TossMenu:
 	jr c, .asm_107cc
 	call Function10e38
 	ld hl, Text_ConfirmThrowAway
-	call MenuTextBox
+	call MenuTextbox
 	call YesNoBox
 	push af
 	call ExitMenu
@@ -674,7 +674,7 @@ BattlePack_InitItemsPocket:
 
 BattlePack_ItemsPocketMenu:
 	ld hl, $4e6a
-	call CopyMenuDataHeader
+	call CopyMenuHeader
 	ld a, [wcfca]
 	ld [wMenuCursorBuffer], a
 	ld a, [wcfcf]
@@ -702,7 +702,7 @@ BattlePack_InitKeyItemsPocket:
 
 BattlePack_KeyItemsPocketMenu:
 	ld hl, $4e9a
-	call CopyMenuDataHeader
+	call CopyMenuHeader
 	ld a, [wcfcb]
 	ld [wMenuCursorBuffer], a
 	ld a, [wcfd0]
@@ -753,7 +753,7 @@ BattlePack_InitBallsPocket:
 
 BattlePack_BallsPocketMenu:
 	ld hl, $4eca
-	call CopyMenuDataHeader
+	call CopyMenuHeader
 	ld a, [wcfcc]
 	ld [wMenuCursorBuffer], a
 	ld a, [wcfd1]
@@ -785,7 +785,7 @@ Function10a0c: ; 10a0c (4:4a0c)
 	ld de, BattlePackQuitJumptable
 .asm_10a1d
 	push de
-	call LoadMenuDataHeader
+	call LoadMenuHeader
 	call VerticalMenu
 	call ExitMenu
 	pop hl
@@ -940,7 +940,7 @@ DepositOrSell_ItemPocket:
 	xor a
 	call Function10b92
 	ld hl, PC_Mart_ItemsPocketMenuDataHeader ; $4e82
-	call CopyMenuDataHeader
+	call CopyMenuHeader
 	ld a, [wcfca]
 	ld [wMenuCursorBuffer], a
 	ld a, [wcfcf]
@@ -956,7 +956,7 @@ DepositOrSell_KeyItemsPocket:
 	ld a, $2
 	call Function10b92
 	ld hl, PC_Mart_KeyItemsPocketMenuDataHeader ; $4eb2
-	call CopyMenuDataHeader
+	call CopyMenuHeader
 	ld a, [wcfcb]
 	ld [wMenuCursorBuffer], a
 	ld a, [wcfd0]
@@ -981,7 +981,7 @@ DepositOrSell_BallsPocket:
 	ld a, $1
 	call Function10b92
 	ld hl, PC_Mart_BallsPocketMenuDataHeader ; $4ee2
-	call CopyMenuDataHeader
+	call CopyMenuHeader
 	ld a, [wcfcc]
 	ld [wMenuCursorBuffer], a
 	ld a, [wcfd1]
@@ -1155,7 +1155,7 @@ asm_10c8a
 	push hl
 	call Function10b92
 	pop hl
-	call CopyMenuDataHeader
+	call CopyMenuHeader
 	call ScrollingMenu
 	ret
 

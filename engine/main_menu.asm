@@ -18,7 +18,7 @@ MainMenu_:
 	ld [wWhichIndexSet], a
 	call Function5b27
 	ld hl, .MenuDataHeader
-	call LoadMenuDataHeader
+	call LoadMenuHeader
 	call Function5b0a
 	call CloseWindow
 	jr c, .asm_5a94
@@ -478,7 +478,7 @@ LoadOrRegenerateLuckyIDNumber: ; 5da7 (1:5da7)
 MainMenu_Continue:
 	farcall TryLoadSaveFile
 	jr c, .asm_5e41
-	call LoadStandardMenuDataHeader
+	call LoadStandardMenuHeader
 	call DisplaySaveInfoOnContinue
 	ld a, $1
 	ldh [hBGMapMode], a
@@ -619,7 +619,7 @@ Continue_LoadMenuHeader: ; 5ed7 (1:5ed7)
 	jr nz, .asm_5ee7
 	ld hl, .MenuDataHeader_NoDex
 .asm_5ee7
-	call OffsetMenuDataHeader_
+	call _OffsetMenuHeader
 	call MenuBox
 	call PlaceVerticalMenuItems
 	ret
@@ -905,7 +905,7 @@ ENDC
 	db 2, "NAME@"
 
 SelectPresetName: ; 6108 (1:6108)
-	call LoadMenuDataHeader
+	call LoadMenuHeader
 	call VerticalMenu
 	ld a, [wMenuCursorY]
 	dec a

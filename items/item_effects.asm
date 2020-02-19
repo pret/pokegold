@@ -1920,7 +1920,7 @@ Functionf46f: ; f46f (3:746f)
 .asm_f496
 	push bc
 	ld hl, Text_MilkDrinkCantBeUsed
-	call MenuTextBoxBackup
+	call MenuTextboxBackup
 	pop bc
 	jr Functionf46f
 
@@ -2116,7 +2116,7 @@ Text_PlayedThePokeFlute:
 
 CoinCase: ; f5e1 (3:75e1)
 	ld hl, Text_CoinCase
-	jp MenuTextBoxWaitButton
+	jp MenuTextboxWaitButton
 
 Text_CoinCase:
 	text_far Text_CoinCase_

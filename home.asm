@@ -28,8 +28,9 @@ INCLUDE "home/video.asm"
 INCLUDE "home/map_objects.asm"
 INCLUDE "home/sine.asm"
 INCLUDE "home/movement.asm"
-INCLUDE "home/tilemap.asm"
 INCLUDE "home/menu.asm"
+INCLUDE "home/menu_window.asm"
+INCLUDE "home/menu2.asm"
 INCLUDE "home/handshake.asm"
 INCLUDE "home/game_time.asm"
 INCLUDE "home/map.asm"
@@ -213,176 +214,7 @@ CallPointerAt::
 
 INCLUDE "home/queue_script.asm"
 INCLUDE "home/compare.asm"
-
-ClearBGPalettes::
-	call ClearPalettes
-WaitBGMap:: ; 344c (0:344c)
-	ld a, $1
-	ldh [hBGMapMode], a
-	ld c, $4
-	call DelayFrames
-	ret
-
-Function3456:: ; 3456 (0:3456)
-	ldh a, [hCGB]
-	and a
-	jr z, .asm_3464
-	ld a, $2
-	ldh [hBGMapMode], a
-	ld c, $4
-	call DelayFrames
-.asm_3464
-	ld a, $1
-	ldh [hBGMapMode], a
-	ld c, $4
-	call DelayFrames
-	ret
-
-IsCGB::
-	ldh a, [hCGB]
-	and a
-	ret
-
-ApplyTilemap:: ; 3472 (0:3472)
-	ldh a, [hCGB]
-	and a
-	jr z, .asm_3484
-	ld a, [wSpriteUpdatesEnabled]
-	cp $0
-	jr z, .asm_3484
-	ld a, $1
-	ldh [hBGMapMode], a
-	jr LoadEDTile
-
-.asm_3484
-	ld a, $1
-	ldh [hBGMapMode], a
-	ld c, $4
-	call DelayFrames
-	ret
-
-CGBOnly_LoadEDTile:: ; 348e (0:348e)
-	ldh a, [hCGB]
-	and a
-	jr z, WaitBGMap
-LoadEDTile::
-	ldh a, [hBGMapMode]
-	push af
-	xor a
-	ldh [hBGMapMode], a
-	ldh a, [hMapAnims]
-	push af
-	xor a
-	ldh [hMapAnims], a
-.asm_349f
-	ldh a, [rLY]
-	cp $7f
-	jr c, .asm_349f
-	di
-	ld a, $1
-	ldh [rVBK], a
-	ld hl, wAttrMap
-	call Function34c8
-	ld a, $0
-	ldh [rVBK], a
-	ld hl, wTileMap
-	call Function34c8
-.asm_34ba
-	ldh a, [rLY]
-	cp $7f
-	jr c, .asm_34ba
-	ei
-	pop af
-	ldh [hMapAnims], a
-	pop af
-	ldh [hBGMapMode], a
-	ret
-
-Function34c8:: ; 34c8 (0:34c8)
-	ld [hSPBuffer], sp
-	ld sp, hl
-	ldh a, [hBGMapAddress + 1]
-	ld h, a
-	ld l, $0
-	ld a, $12
-	ldh [hTilesPerCycle], a
-	ld b, $2
-	ld c, rSTAT % $100
-.asm_34d9
-rept 10
-	pop de
-.loop_\@
-	ld a, [$ff00+c]
-	and b
-	jr nz, .loop_\@
-	ld [hl], e
-	inc l
-	ld [hl], d
-	inc l
-endr
-	ld de, $c
-	add hl, de
-	ldh a, [hTilesPerCycle]
-	dec a
-	ldh [hTilesPerCycle], a
-	jr nz, .asm_34d9
-	ldh a, [hSPBuffer]
-	ld l, a
-	ldh a, [hSPBuffer + 1]
-	ld h, a
-	ld sp, hl
-	ret
-
-SetPalettes::
-	ldh a, [hCGB]
-	and a
-	jr nz, .asm_3556
-	ld a, $e4
-	ldh [rBGP], a
-	ld a, $d0
-	ldh [rOBP0], a
-	ldh [rOBP1], a
-	ret
-
-.asm_3556
-	push de
-	ld a, $e4
-	call DmgToCgbBGPals
-	ld de, $e4e4
-	call DmgToCgbObjPals
-	pop de
-	ret
-
-ClearPalettes:: ; 3564 (0:3564)
-	ldh a, [hCGB]
-	and a
-	jr nz, .asm_3571
-	xor a
-	ldh [rBGP], a
-	ldh [rOBP0], a
-	ldh [rOBP1], a
-	ret
-
-.asm_3571
-	ld hl, wBGPals
-	ld bc, $80
-	ld a, $ff
-	call ByteFill
-	ld a, $1
-	ldh [hCGBPalUpdate], a
-	ret
-
-GetMemSGBLayout::
-	ld b, $ff
-GetSGBLayout:: ; 3583 (0:3583)
-	ldh a, [hCGB]
-	and a
-	jr nz, .asm_358c
-	ldh a, [hSGB]
-	and a
-	ret z
-.asm_358c
-	predef_jump LoadSGBLayout
+INCLUDE "home/tilemap.asm"
 
 SetHPPal::
 	call GetHPPal
@@ -658,7 +490,7 @@ GetMoveName::
 	ret
 
 ScrollingMenu::
-	call CopyMenuData2
+	call CopyMenuData
 	ldh a, [hROMBank]
 	push af
 	ld a, BANK(ScrollingMenu_)

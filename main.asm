@@ -730,15 +730,15 @@ StringBufferPointers::
 	dr $24000, $2400e
 _2DMenu_::
 	dr $2400e, $24136
-StaticMenuJoypad_::
+_StaticMenuJoypad::
 	dr $24136, $24139
-ScrollingMenuJoypad_::
+_ScrollingMenuJoypad::
 	dr $24139, $242a0
-PushWindow_::
+_PushWindow::
 	dr $242a0, $24307
-ExitMenu_::
+_ExitMenu::
 	dr $24307, $24395
-InitVerticalMenuCursor_::
+_InitVerticalMenuCursor::
 	dr $24395, $243eb
 UpdateItemDescription:
 	dr $243eb, $244d7

@@ -48,7 +48,7 @@ FieldMoveBadgeCheck: ; c776 (3:4776)
 	call FieldMoveEngineFlagCheck
 	ret nc
 	ld hl, .BadgeRequiredText
-	call MenuTextBoxBackup
+	call MenuTextboxBackup
 	scf
 	ret
 
@@ -99,7 +99,7 @@ FieldMovePartyCheck: ; c787 (3:4787)
 
 FieldMoveFailed: ; c7be (3:47be)
 	ld hl, .CantUseHereText
-	call MenuTextBoxBackup
+	call MenuTextboxBackup
 	ret
 
 .CantUseHereText:
@@ -146,7 +146,7 @@ CutTreeOrGrass:
 
 FailToCut:
 	ld hl, Text_NothingToCut
-	call MenuTextBoxBackup
+	call MenuTextboxBackup
 	ld a, $80
 	ret
 
@@ -397,13 +397,13 @@ StartSurfing:
 
 CantSurf:
 	ld hl, CantSurfText
-	call MenuTextBoxBackup
+	call MenuTextboxBackup
 	ld a, $80
 	ret
 
 AlreadySurfing:
 	ld hl, AlreadySurfingText
-	call MenuTextBoxBackup
+	call MenuTextboxBackup
 	ld a, $80
 	ret
 
@@ -543,7 +543,7 @@ TryToFly:
 .asm_ca83
 	xor a
 	ldh [hMapAnims], a
-	call LoadStandardMenuDataHeader
+	call LoadStandardMenuHeader
 	call ClearSprites
 	ld a, $24
 	ld hl, $5a61
@@ -783,7 +783,7 @@ FailToEscapeFromDungeon:
 	cp $2
 	jr nz, .asm_cc1c
 	ld hl, Text_CantUseDigEscapeRopeHere ; $4c29
-	call MenuTextBox
+	call MenuTextbox
 	call WaitPressAorB_BlinkCursor
 	call CloseWindow
 .asm_cc1c
@@ -882,7 +882,7 @@ DoTeleport:
 
 FailTeleport:
 	ld hl, Text_CantUseTeleportHere
-	call MenuTextBoxBackup
+	call MenuTextboxBackup
 	ld a, $80
 	ret
 
@@ -932,7 +932,7 @@ Functionccf1: ; ccf1 (3:4cf1)
 	jr asm_cd0c
 
 	ld hl, Text_AlreadyUsingStrength
-	call MenuTextBoxBackup
+	call MenuTextboxBackup
 	ld a, $80
 	ret
 

@@ -12,7 +12,7 @@ BlankScreen:
 	ld bc, SCREEN_HEIGHT * SCREEN_WIDTH
 	ld a, $7
 	call ByteFill
-	call Function3456
+	call WaitBGMap2
 	call SetPalettes
 	ret
 

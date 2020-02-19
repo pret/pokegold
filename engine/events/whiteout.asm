@@ -32,7 +32,7 @@ Script_Whiteout:
 OverworldBGMap:
 	call ClearPalettes
 	call FillScreenWithTextboxPal
-	call Function3456
+	call WaitBGMap2
 	call HideSprites
 	call RotateThreePalettesLeft
 	ret
