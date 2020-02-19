@@ -58,7 +58,7 @@ TrainerLassDana1:
 	askforphonenumber PHONE_LASS_DANA
 	ifequal PHONE_CONTACTS_FULL, .PhoneFull
 	ifequal PHONE_CONTACT_REFUSED, .DeclinedPhoneNumber
-	trainertotext LASS, DANA1, MEM_BUFFER_0
+	trainertotext LASS, DANA1, STRING_BUFFER_3
 	scall .RegisteredPhoneNumber
 	jump .NumberAccepted
 
@@ -141,7 +141,7 @@ TrainerSchoolboyChad1:
 	askforphonenumber PHONE_SCHOOLBOY_CHAD
 	ifequal PHONE_CONTACTS_FULL, .PhoneFull
 	ifequal PHONE_CONTACT_REFUSED, .SaidNo
-	trainertotext SCHOOLBOY, CHAD1, MEM_BUFFER_0
+	trainertotext SCHOOLBOY, CHAD1, STRING_BUFFER_3
 	scall .RegisteredChad
 	jump .HaveChadsNumber
 

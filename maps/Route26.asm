@@ -48,7 +48,7 @@ TrainerCooltrainermGaven3:
 	askforphonenumber PHONE_COOLTRAINERM_GAVEN
 	ifequal PHONE_CONTACTS_FULL, .PhoneFull
 	ifequal PHONE_CONTACT_REFUSED, .NumberDeclined
-	trainertotext COOLTRAINERM, GAVEN3, MEM_BUFFER_0
+	trainertotext COOLTRAINERM, GAVEN3, STRING_BUFFER_3
 	scall .RegisteredNumber
 	jump .NumberAccepted
 
@@ -142,7 +142,7 @@ TrainerCooltrainerfBeth1:
 	askforphonenumber PHONE_COOLTRAINERF_BETH
 	ifequal PHONE_CONTACTS_FULL, .PhoneFull
 	ifequal PHONE_CONTACT_REFUSED, .NumberDeclined
-	trainertotext COOLTRAINERF, BETH1, MEM_BUFFER_0
+	trainertotext COOLTRAINERF, BETH1, STRING_BUFFER_3
 	scall .RegisteredNumber
 	jump .NumberAccepted
 

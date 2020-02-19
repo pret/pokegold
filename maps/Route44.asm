@@ -40,7 +40,7 @@ TrainerBirdKeeperVance1:
 	askforphonenumber PHONE_BIRDKEEPER_VANCE
 	ifequal PHONE_CONTACTS_FULL, Route44PhoneFullM
 	ifequal PHONE_CONTACT_REFUSED, Route44NumberDeclinedM
-	trainertotext BIRD_KEEPER, VANCE1, MEM_BUFFER_0
+	trainertotext BIRD_KEEPER, VANCE1, STRING_BUFFER_3
 	scall Route44RegisteredNumberM
 	jump Route44NumberAcceptedM
 
@@ -134,7 +134,7 @@ TrainerFisherWilton1:
 	askforphonenumber PHONE_FISHER_WILTON
 	ifequal PHONE_CONTACTS_FULL, Route44PhoneFullM
 	ifequal PHONE_CONTACT_REFUSED, Route44NumberDeclinedM
-	trainertotext FISHER, WILTON1, MEM_BUFFER_0
+	trainertotext FISHER, WILTON1, STRING_BUFFER_3
 	scall Route44RegisteredNumberM
 	jump Route44NumberAcceptedM
 

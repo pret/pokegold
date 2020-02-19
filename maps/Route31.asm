@@ -46,7 +46,7 @@ TrainerBugCatcherWade1:
 	askforphonenumber PHONE_BUG_CATCHER_WADE
 	ifequal PHONE_CONTACTS_FULL, .PhoneFullSTD
 	ifequal PHONE_CONTACT_REFUSED, .DeclinedNumberSTD
-	trainertotext BUG_CATCHER, WADE1, MEM_BUFFER_0
+	trainertotext BUG_CATCHER, WADE1, STRING_BUFFER_3
 	scall .RegisterNumberSTD
 	jump .AcceptedNumberSTD
 

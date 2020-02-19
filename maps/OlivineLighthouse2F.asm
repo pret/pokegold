@@ -42,7 +42,7 @@ TrainerSailorHuey:
 	askforphonenumber PHONE_SAILOR_HUEY
 	ifequal PHONE_CONTACTS_FULL, .PhoneFull
 	ifequal PHONE_CONTACT_REFUSED, .NumberDeclined
-	trainertotext SAILOR, HUEY1, MEM_BUFFER_0
+	trainertotext SAILOR, HUEY1, STRING_BUFFER_3
 	scall .RegisteredNumber
 	jump .NumberAccepted
 

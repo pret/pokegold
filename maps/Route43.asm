@@ -70,7 +70,7 @@ TrainerPokemaniacBrent:
 	askforphonenumber PHONE_POKEMANIAC_BRENT
 	ifequal PHONE_CONTACTS_FULL, .PhoneFull
 	ifequal PHONE_CONTACT_REFUSED, .NumberDeclined
-	trainertotext POKEMANIAC, BRENT1, MEM_BUFFER_0
+	trainertotext POKEMANIAC, BRENT1, STRING_BUFFER_3
 	scall .RegisteredNumber
 	jump .NumberAccepted
 
@@ -175,7 +175,7 @@ TrainerPicnickerTiffany:
 	askforphonenumber PHONE_PICNICKER_TIFFANY
 	ifequal PHONE_CONTACTS_FULL, .PhoneFull
 	ifequal PHONE_CONTACT_REFUSED, .NumberDeclined
-	trainertotext PICNICKER, TIFFANY3, MEM_BUFFER_0
+	trainertotext PICNICKER, TIFFANY3, STRING_BUFFER_3
 	scall .RegisteredNumber
 	jump .NumberAccepted
 

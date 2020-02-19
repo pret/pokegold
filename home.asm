@@ -100,7 +100,7 @@ Function2ffe:: ; 2ffe (0:2ffe)
 	jr z, .quit
 	ldh a, [hROMBank]
 	push af
-	call SwitchToMapScriptHeaderBank
+	call SwitchToMapScriptsBank
 	ld a, [wPlayerStandingMapX]
 	add $4
 	ld d, a
@@ -258,139 +258,12 @@ GetWeekday::
 INCLUDE "home/pokedex_flags.asm"
 INCLUDE "home/names.asm"
 INCLUDE "home/scrolling_menu.asm"
-
-HandleStoneQueue::
-	ldh a, [hROMBank]
-	push af
-	call SwitchToMapScriptHeaderBank
-	call StoneQueueWarpAction
-	pop bc
-	ld a, b
-	rst Bankswitch
-	ret
-
-StoneQueueWarpAction:: ; 37b9 (0:37b9)
-	ld hl, $1
-	add hl, de
-	ld a, [hl]
-	cp $ff
-	jr z, .asm_37dc
-	ld l, a
-	push hl
-	call IsAnyMapObjectOnAWarp
-	pop hl
-	jr nc, .asm_37dc
-	ld d, a
-	ld e, l
-	call IsThisObjectInTheStoneTable
-	jr nc, .asm_37dc
-	call CallMapScript
-	farcall EnableScriptMode
-	scf
-	ret
-
-.asm_37dc
-	and a
-	ret
-
-IsAnyMapObjectOnAWarp:: ; 37de (0:37de)
-	push de
-	ld hl, $10
-	add hl, de
-	ld a, [hl]
-	ld hl, $11
-	add hl, de
-	ld e, [hl]
-	sub $4
-	ld d, a
-	ld a, e
-	sub $4
-	ld e, a
-	call IsThisMapObjectOnAWarp
-	pop de
-	ret
-
-IsThisMapObjectOnAWarp:: ; 37f5 (0:37f5)
-	ld hl, wCurrMapWarpHeaderPointer
-	ld a, [hli]
-	ld h, [hl]
-	ld l, a
-	ld a, [wCurrMapWarpCount]
-	and a
-	jr z, .no_warps
-.find_warp_loop
-	push af
-	ld a, [hl]
-	cp e
-	jr nz, .next
-	inc hl
-	ld a, [hld]
-	cp d
-	jr nz, .next
-	jr .yes
-
-.next
-	ld a, $5
-	add l
-	ld l, a
-	jr nc, .asm_3814
-	inc h
-.asm_3814
-	pop af
-	dec a
-	jr nz, .find_warp_loop
-.no_warps
-	and a
-	ret
-
-.yes
-	pop af
-	ld d, a
-	ld a, [wCurrMapWarpCount]
-	sub d
-	inc a
-	scf
-	ret
-
-IsThisObjectInTheStoneTable:: ; 3823 (0:3823)
-	ld hl, $1
-	add hl, bc
-	ld a, [hli]
-	ld h, [hl]
-	ld l, a
-.asm_382a
-	ld a, [hli]
-	cp $ff
-	jr z, .asm_3840
-	cp d
-	jr nz, .asm_383b
-	ld a, [hli]
-	cp e
-	jr nz, .asm_383c
-	ld a, [hli]
-	ld h, [hl]
-	ld l, a
-	jr .asm_3842
-
-.asm_383b
-	inc hl
-.asm_383c
-	inc hl
-	inc hl
-	jr .asm_382a
-
-.asm_3840
-	and a
-	ret
-
-.asm_3842
-	scf
-	ret
+INCLUDE "home/stone_queue.asm"
 
 CheckTrainerBattle2::
 	ldh a, [hROMBank]
 	push af
-	call SwitchToMapScriptHeaderBank
+	call SwitchToMapScriptsBank
 	call CheckTrainerBattle
 	pop bc
 	ld a, b

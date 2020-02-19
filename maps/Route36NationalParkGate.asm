@@ -66,7 +66,7 @@ Route36NationalParkGate_MapScripts:
 	opentext
 	checkcode VAR_CONTESTMINUTES
 	addvar 1
-	vartomem MEM_BUFFER_0
+	vartomem STRING_BUFFER_3
 	writetext UnknownText_0x6b284
 	yesorno
 	iffalse .GoBackToContest

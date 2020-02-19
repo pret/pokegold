@@ -34,7 +34,7 @@ CeladonPrizeRoom_tmcounterloop:
 .doubleteam
 	checkcoins 1500
 	ifequal HAVE_LESS, CeladonPrizeRoom_notenoughcoins
-	itemtotext TM_DOUBLE_TEAM, MEM_BUFFER_0
+	itemtotext TM_DOUBLE_TEAM, STRING_BUFFER_3
 	scall CeladonPrizeRoom_askbuy
 	iffalse CeladonPrizeRoom_cancel
 	giveitem TM_DOUBLE_TEAM
@@ -45,7 +45,7 @@ CeladonPrizeRoom_tmcounterloop:
 .psychic
 	checkcoins 3500
 	ifequal HAVE_LESS, CeladonPrizeRoom_notenoughcoins
-	itemtotext TM_PSYCHIC_M, MEM_BUFFER_0
+	itemtotext TM_PSYCHIC_M, STRING_BUFFER_3
 	scall CeladonPrizeRoom_askbuy
 	iffalse CeladonPrizeRoom_cancel
 	giveitem TM_PSYCHIC_M
@@ -56,7 +56,7 @@ CeladonPrizeRoom_tmcounterloop:
 .hyperbeam
 	checkcoins 7500
 	ifequal HAVE_LESS, CeladonPrizeRoom_notenoughcoins
-	itemtotext TM_HYPER_BEAM, MEM_BUFFER_0
+	itemtotext TM_HYPER_BEAM, STRING_BUFFER_3
 	scall CeladonPrizeRoom_askbuy
 	iffalse CeladonPrizeRoom_cancel
 	giveitem TM_HYPER_BEAM
@@ -137,7 +137,7 @@ CeladonGameCornerPrizeRoomPokemonVendor:
 	ifequal HAVE_LESS, CeladonPrizeRoom_notenoughcoins
 	checkcode VAR_PARTYCOUNT
 	ifequal PARTY_LENGTH, CeladonPrizeRoom_notenoughroom
-	pokenamemem MR__MIME, MEM_BUFFER_0
+	pokenamemem MR__MIME, STRING_BUFFER_3
 	scall CeladonPrizeRoom_askbuy
 	iffalse CeladonPrizeRoom_cancel
 	waitsfx
@@ -155,7 +155,7 @@ CeladonGameCornerPrizeRoomPokemonVendor:
 	ifequal HAVE_LESS, CeladonPrizeRoom_notenoughcoins
 	checkcode VAR_PARTYCOUNT
 	ifequal PARTY_LENGTH, CeladonPrizeRoom_notenoughroom
-	pokenamemem EEVEE, MEM_BUFFER_0
+	pokenamemem EEVEE, STRING_BUFFER_3
 	scall CeladonPrizeRoom_askbuy
 	iffalse CeladonPrizeRoom_cancel
 	waitsfx
@@ -173,7 +173,7 @@ CeladonGameCornerPrizeRoomPokemonVendor:
 	ifequal HAVE_LESS, CeladonPrizeRoom_notenoughcoins
 	checkcode VAR_PARTYCOUNT
 	ifequal PARTY_LENGTH, CeladonPrizeRoom_notenoughroom
-	pokenamemem PORYGON, MEM_BUFFER_0
+	pokenamemem PORYGON, STRING_BUFFER_3
 	scall CeladonPrizeRoom_askbuy
 	iffalse CeladonPrizeRoom_cancel
 	waitsfx

@@ -3382,8 +3382,8 @@ wd940:: ds 1 ; d940
 wCurrentMapTriggerPointer:: dw ; d941
 wd943:: ds 1 ; d943
 wd944:: ds 1 ; d944
-wCurrMapWarpCount:: ds 1 ; d945
-wCurrMapWarpHeaderPointer:: dw ; d946
+wCurMapWarpCount:: ds 1 ; d945
+wCurMapWarpsPointer:: dw ; d946
 wd948:: ds 1 ; d948
 wd949:: ds 1 ; d949
 wd94a:: ds 1 ; d94a

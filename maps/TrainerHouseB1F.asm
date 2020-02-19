@@ -20,11 +20,11 @@ TrainerHouseReceptionistScript:
 	buttonsound
 	special TrainerHouse
 	iffalse .GetCal3Name
-	trainertotext CAL, CAL2, MEM_BUFFER_0
+	trainertotext CAL, CAL2, STRING_BUFFER_3
 	jump .GotName
 
 .GetCal3Name:
-	trainertotext CAL, CAL3, MEM_BUFFER_0
+	trainertotext CAL, CAL3, STRING_BUFFER_3
 .GotName:
 	writetext TrainerHouseB1FYourOpponentIsText
 	buttonsound

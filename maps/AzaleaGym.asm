@@ -144,7 +144,7 @@ AzaleaGymStatue:
 	iftrue .Beaten
 	jumpstd gymstatue1
 .Beaten:
-	trainertotext BUGSY, BUGSY1, MEM_BUFFER_1
+	trainertotext BUGSY, BUGSY1, STRING_BUFFER_4
 	jumpstd gymstatue2
 
 BugsyText_INeverLose:

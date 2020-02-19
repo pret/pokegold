@@ -1,13 +1,13 @@
-; script vars
+; person constants
 PLAYER      EQU  0
 LAST_TALKED EQU -2
 
-; memory constants
+; string buffer constants
 	const_def
-	const MEM_BUFFER_0 ; use wStringBuffer3
-	const MEM_BUFFER_1 ; use wStringBuffer4
-	const MEM_BUFFER_2 ; use wStringBuffer5
-NUM_MEM_BUFFERS EQU const_value
+	const STRING_BUFFER_3 ; use wStringBuffer3
+	const STRING_BUFFER_4 ; use wStringBuffer4
+	const STRING_BUFFER_5 ; use wStringBuffer5
+NUM_STRING_BUFFERS EQU const_value
 
 ; checkmoney/takemoney accounts
 	const_def
@@ -79,6 +79,14 @@ const_value SET -1
 	const PLAYEREVENT_HATCH
 	const PLAYEREVENT_JOYCHANGEFACING
 NUM_PLAYER_EVENTS EQU const_value
+
+; script data sizes (see macros/scripts/maps.asm)
+SCENE_SCRIPT_SIZE EQU 4 ; scene_script
+CALLBACK_SIZE     EQU 3 ; callback
+WARP_EVENT_SIZE   EQU 5 ; warp_event
+COORD_EVENT_SIZE  EQU 8 ; coord_event
+BG_EVENT_SIZE     EQU 5 ; bg_event
+OBJECT_EVENT_SIZE EQU 13 ; object_event
 
 ; bg_event types
 ; TryBGEvent arguments (see engine/overworld/events.asm)

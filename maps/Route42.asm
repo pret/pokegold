@@ -38,7 +38,7 @@ TrainerFisherChris:
 	askforphonenumber PHONE_FISHER_CHRIS
 	ifequal PHONE_CONTACTS_FULL, .PhoneFull
 	ifequal PHONE_CONTACT_REFUSED, .NumberDeclined
-	trainertotext FISHER, CHRIS1, MEM_BUFFER_0
+	trainertotext FISHER, CHRIS1, STRING_BUFFER_3
 	scall .RegisteredNumber
 	jump .NumberAccepted
 

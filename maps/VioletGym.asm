@@ -107,7 +107,7 @@ VioletGymStatue:
 	iftrue .Beaten
 	jumpstd gymstatue1
 .Beaten:
-	trainertotext FALKNER, FALKNER1, MEM_BUFFER_1
+	trainertotext FALKNER, FALKNER1, STRING_BUFFER_4
 	jumpstd gymstatue2
 
 FalknerIntroText:

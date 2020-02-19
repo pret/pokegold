@@ -81,7 +81,7 @@ TrainerBirdKeeperJose2:
 	askforphonenumber PHONE_BIRDKEEPER_JOSE
 	ifequal PHONE_CONTACTS_FULL, .PhoneFull
 	ifequal PHONE_CONTACT_REFUSED, .NumberDeclined
-	trainertotext BIRD_KEEPER, JOSE2, MEM_BUFFER_0
+	trainertotext BIRD_KEEPER, JOSE2, STRING_BUFFER_3
 	scall .RegisteredNumber
 	jump .NumberAccepted
 
@@ -186,7 +186,7 @@ TrainerCooltrainerfReena:
 	askforphonenumber PHONE_COOLTRAINERF_REENA
 	ifequal PHONE_CONTACTS_FULL, .PhoneFull
 	ifequal PHONE_CONTACT_REFUSED, .NumberDeclined
-	trainertotext COOLTRAINERF, REENA1, MEM_BUFFER_0
+	trainertotext COOLTRAINERF, REENA1, STRING_BUFFER_3
 	scall .RegisteredNumber
 	jump .NumberAccepted
 

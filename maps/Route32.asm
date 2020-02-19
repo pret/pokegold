@@ -187,7 +187,7 @@ TrainerFisherRalph1:
 	askforphonenumber PHONE_FISHER_RALPH
 	ifequal PHONE_CONTACTS_FULL, .PhoneFull
 	ifequal PHONE_CONTACT_REFUSED, .NumberDeclined
-	trainertotext FISHER, RALPH1, MEM_BUFFER_0
+	trainertotext FISHER, RALPH1, STRING_BUFFER_3
 	scall .RegisteredNumber
 	jump .NumberAccepted
 
@@ -281,7 +281,7 @@ TrainerPicnickerLiz1:
 	askforphonenumber PHONE_PICNICKER_LIZ
 	ifequal PHONE_CONTACTS_FULL, .PhoneFull
 	ifequal PHONE_CONTACT_REFUSED, .NumberDeclined
-	trainertotext PICNICKER, LIZ1, MEM_BUFFER_0
+	trainertotext PICNICKER, LIZ1, STRING_BUFFER_3
 	scall .RegisteredNumber
 	jump .NumberAccepted
 

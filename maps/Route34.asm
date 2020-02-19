@@ -109,7 +109,7 @@ TrainerCamperTodd1:
 	askforphonenumber PHONE_CAMPER_TODD
 	ifequal PHONE_CONTACTS_FULL, .PhoneFull
 	ifequal PHONE_CONTACT_REFUSED, .NumberDeclined
-	trainertotext CAMPER, TODD1, MEM_BUFFER_0
+	trainertotext CAMPER, TODD1, STRING_BUFFER_3
 	scall .RegisteredNumber
 	jump .NumberAccepted
 
@@ -192,7 +192,7 @@ TrainerPicnickerGina1:
 	askforphonenumber PHONE_PICNICKER_GINA
 	ifequal PHONE_CONTACTS_FULL, .PhoneFull
 	ifequal PHONE_CONTACT_REFUSED, .NumberDeclined
-	trainertotext PICNICKER, GINA1, MEM_BUFFER_0
+	trainertotext PICNICKER, GINA1, STRING_BUFFER_3
 	scall .RegisteredNumber
 	jump .NumberAccepted
 

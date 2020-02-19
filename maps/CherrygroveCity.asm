@@ -67,7 +67,7 @@ CherrygroveCityGuideGent:
 	opentext
 	writetext GuideGentGiftText
 	buttonsound
-	stringtotext .mapcardname, MEM_BUFFER_1
+	stringtotext .mapcardname, STRING_BUFFER_4
 	scall .JumpstdReceiveItem
 	setflag ENGINE_MAP_CARD
 	writetext GotMapCardText

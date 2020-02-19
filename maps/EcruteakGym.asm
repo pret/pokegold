@@ -133,7 +133,7 @@ EcruteakGymStatue:
 	iftrue .Beaten
 	jumpstd gymstatue1
 .Beaten:
-	trainertotext MORTY, MORTY1, MEM_BUFFER_1
+	trainertotext MORTY, MORTY1, STRING_BUFFER_4
 	jumpstd gymstatue2
 
 MortyIntroText:

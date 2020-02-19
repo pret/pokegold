@@ -502,7 +502,7 @@ Function22ad:: ; 22ad (0:22ad)
 	ret nc
 	ldh a, [hROMBank]
 	push af
-	call SwitchToMapScriptHeaderBank
+	call SwitchToMapScriptsBank
 	call Function22c1
 	pop de
 	ld a, d
@@ -516,11 +516,11 @@ Function22c1:: ; 22c1 (0:22c1)
 	ld a, [wPlayerStandingMapX]
 	sub $4
 	ld d, a
-	ld a, [wCurrMapWarpCount]
+	ld a, [wCurMapWarpCount]
 	and a
 	ret z
 	ld c, a
-	ld hl, wCurrMapWarpHeaderPointer
+	ld hl, wCurMapWarpsPointer
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
@@ -551,7 +551,7 @@ Function22c1:: ; 22c1 (0:22c1)
 	pop hl
 	call Function22fe
 	ret nc
-	ld a, [wCurrMapWarpCount]
+	ld a, [wCurMapWarpCount]
 	inc a
 	sub c
 	ld c, a
@@ -567,7 +567,7 @@ Function22fe:: ; 22fe (0:22fe)
 Function2302:: ; 2302 (0:2302)
 	ldh a, [hROMBank]
 	push af
-	call SwitchToMapScriptHeaderBank
+	call SwitchToMapScriptsBank
 	call Function230f
 	pop af
 	rst Bankswitch
@@ -576,7 +576,7 @@ Function2302:: ; 2302 (0:2302)
 
 Function230f:: ; 230f (0:230f)
 	push bc
-	ld hl, wCurrMapWarpHeaderPointer
+	ld hl, wCurMapWarpsPointer
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
@@ -697,7 +697,7 @@ CheckDungeonMap::
 
 LoadMapAttributes::
 	call CopyMapHeaders
-	call SwitchToMapScriptHeaderBank
+	call SwitchToMapScriptsBank
 	call ReadMapScripts
 	xor a
 	call ReadMapEventHeader
@@ -705,7 +705,7 @@ LoadMapAttributes::
 
 LoadMapAttributes_SkipPeople::
 	call CopyMapHeaders
-	call SwitchToMapScriptHeaderBank
+	call SwitchToMapScriptsBank
 	call ReadMapScripts
 	ld a, $1
 	call ReadMapEventHeader
@@ -829,11 +829,11 @@ ReadMapCallbacks:: ; 24a2 (0:24a2)
 ReadWarps:: ; 24b9 (0:24b9)
 	ld a, [hli]
 	ld c, a
-	ld [wCurrMapWarpCount], a
+	ld [wCurMapWarpCount], a
 	ld a, l
-	ld [wCurrMapWarpHeaderPointer], a
+	ld [wCurMapWarpsPointer], a
 	ld a, h
-	ld [wCurrMapWarpHeaderPointer + 1], a
+	ld [wCurMapWarpsPointer + 1], a
 	ld a, c
 	and a
 	ret z
@@ -1260,7 +1260,7 @@ RunMapCallback:: ; 2764 (0:2764)
 	ld b, a
 	ldh a, [hROMBank]
 	push af
-	call SwitchToMapScriptHeaderBank
+	call SwitchToMapScriptsBank
 	call FindCallback
 	jr nc, .asm_2779
 	call GetMapScriptHeaderBank
@@ -1987,7 +1987,7 @@ CheckFacingSign::
 	ld c, a
 	ldh a, [hROMBank]
 	push af
-	call SwitchToMapScriptHeaderBank
+	call SwitchToMapScriptsBank
 	call CheckIfFacingTileCoordIsSign
 	pop hl
 	ld a, h
@@ -2037,7 +2037,7 @@ CheckCurrentMapXYTriggers::
 	ld c, a
 	ldh a, [hROMBank]
 	push af
-	call SwitchToMapScriptHeaderBank
+	call SwitchToMapScriptsBank
 	call .TriggerCheck
 	pop hl
 	ld a, h
@@ -2251,7 +2251,7 @@ PartiallyCopyMapHeader:: ; 2d16 (0:2d16)
 	rst Bankswitch
 	ret
 
-SwitchToMapScriptHeaderBank:: ; 2d2b (0:2d2b)
+SwitchToMapScriptsBank:: ; 2d2b (0:2d2b)
 	ld a, [wd08c]
 	rst Bankswitch
 	ret

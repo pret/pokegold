@@ -37,7 +37,7 @@ DragonsDenB1FDragonFangScript:
 	iffalse .BagFullDragonFang
 	disappear DRAGONSDENB1F_POKE_BALL1
 	opentext
-	itemtotext DRAGON_FANG, MEM_BUFFER_0
+	itemtotext DRAGON_FANG, STRING_BUFFER_3
 	writetext Text_FoundDragonFang
 	playsound SFX_ITEM
 	waitsfx
@@ -79,7 +79,7 @@ DragonsDenB1FDragonFangScript:
 
 .BagFullDragonFang:
 	opentext
-	itemtotext DRAGON_FANG, MEM_BUFFER_0
+	itemtotext DRAGON_FANG, STRING_BUFFER_3
 	writetext Text_FoundDragonFang
 	buttonsound
 	writetext Text_NoRoomForDragonFang

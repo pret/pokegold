@@ -99,7 +99,7 @@ VermilionGymStatue:
 	iftrue .Beaten
 	jumpstd gymstatue1
 .Beaten:
-	trainertotext LT_SURGE, LT_SURGE1, MEM_BUFFER_1
+	trainertotext LT_SURGE, LT_SURGE1, STRING_BUFFER_4
 	jumpstd gymstatue2
 
 LtSurgeIntroText:
