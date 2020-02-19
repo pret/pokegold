@@ -2424,8 +2424,8 @@ wcfd4:: ds 1 ; cfd4
 wcfd5:: ds 1 ; cfd5
 wcfd6:: ds 1 ; cfd6
 wcfd7:: ds 1 ; cfd7
-wcfd8:: ds 1 ; cfd8
-wcfd9:: ds 1 ; cfd9
+wQueuedScriptBank:: ds 1 ; cfd8
+wQueuedScriptAddr:: ds 1 ; cfd9
 wcfda:: ds 1 ; cfda
 wPredefID:: ds 1 ; cfdb
 wPredefTemp:: dw ; cfdc

@@ -194,29 +194,24 @@ SkipNames::
 INCLUDE "home/math.asm"
 INCLUDE "home/print_text.asm"
 
-Function3414::
+CallPointerAt::
 	ldh a, [hROMBank]
 	push af
 	ld a, [hli]
 	rst Bankswitch
+
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
+
 	call _hl_
+
 	pop hl
 	ld a, h
 	rst Bankswitch
 	ret
 
-QueueScript::
-	ldh a, [hROMBank]
-Function3425::
-	ld [wcfd8], a
-	ld a, l
-	ld [wcfd9], a
-	ld a, h
-	ld [wcfda], a
-	ret
+INCLUDE "home/queue_script.asm"
 
 Function3431::
 .asm_3431

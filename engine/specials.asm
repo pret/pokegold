@@ -342,9 +342,9 @@ DummyNonfunctionalGameCornerGame: ; c4e7 (3:44e7)
 	ret
 
 Functionc4f4: ; c4f4 (3:44f4)
-	call Function3425
+	call FarQueueScript
 	call FadeToMenu
-	ld hl, wcfd8
+	ld hl, wQueuedScriptBank
 	ld a, [hli]
 	push af
 	ld a, [hli]
