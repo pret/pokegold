@@ -741,9 +741,9 @@ _InitVerticalMenuCursor::
 	dr $24395, $243eb
 UpdateItemDescription:
 	dr $243eb, $244d7
-InitScrollingMenu::
+_InitScrollingMenu::
 	dr $244d7, $244f3
-ScrollingMenu_::
+_ScrollingMenu::
 	dr $244f3, $24834
 SwitchItemsInBag:
 	dr $24834, $249dc
