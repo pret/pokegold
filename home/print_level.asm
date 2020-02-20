@@ -24,5 +24,5 @@ PrintLevel_Force3Digits::
 Print8BitNumRightAlign::
 	ld [wDeciramBuffer], a
 	ld de, wDeciramBuffer
-	ld b, PRINTNUM_RIGHTALIGN | 1
+	ld b, PRINTNUM_LEFTALIGN | 1
 	jp PrintNum

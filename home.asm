@@ -264,70 +264,7 @@ INCLUDE "home/mon_stats.asm"
 INCLUDE "home/cry.asm"
 INCLUDE "home/print_level.asm"
 INCLUDE "home/mon_data.asm"
-
-PrintBCDNumber:: ; 3ade (0:3ade)
-	ld b, c
-	res 7, c
-	res 6, c
-	res 5, c
-	bit 5, b
-	jr z, .asm_3af0
-	bit 7, b
-	jr nz, .asm_3af0
-	ld [hl], $f0
-	inc hl
-.asm_3af0
-	ld a, [de]
-	swap a
-	call Function3b15
-	ld a, [de]
-	call Function3b15
-	inc de
-	dec c
-	jr nz, .asm_3af0
-	bit 7, b
-	jr z, .asm_3b14
-	bit 6, b
-	jr nz, .asm_3b07
-	dec hl
-.asm_3b07
-	bit 5, b
-	jr z, .asm_3b0e
-	ld [hl], $f0
-	inc hl
-.asm_3b0e
-	ld [hl], $f6
-	call PrintLetterDelay
-	inc hl
-.asm_3b14
-	ret
-
-Function3b15:: ; 3b15 (0:3b15)
-	and $f
-	and a
-	jr z, .asm_3b2f
-	bit 7, b
-	jr z, .asm_3b29
-	bit 5, b
-	jr z, .asm_3b27
-	ld [hl], $f0
-	inc hl
-	res 5, b
-.asm_3b27
-	res 7, b
-.asm_3b29
-	add $f6
-	ld [hli], a
-	jp PrintLetterDelay
-
-.asm_3b2f
-	bit 7, b
-	jr z, .asm_3b29
-	bit 6, b
-	ret nz
-	ld a, $7f
-	ld [hli], a
-	ret
+INCLUDE "home/print_bcd.asm"
 
 GetPartyParamLocation::
 	push bc
