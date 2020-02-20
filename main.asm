@@ -129,7 +129,7 @@ LoadFonts_NoOAMUpdate:: ; 65cb (1:65cb)
 
 INCLUDE "engine/learn.asm"
 
-CheckNickErrors:: ; 677e (1:677e)
+CorrectNickErrors:: ; 677e (1:677e)
 	push bc
 	push de
 	ld b, MON_NAME_LENGTH

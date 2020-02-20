@@ -263,76 +263,7 @@ INCLUDE "home/trainers.asm"
 INCLUDE "home/mon_stats.asm"
 INCLUDE "home/cry.asm"
 INCLUDE "home/print_level.asm"
-
-Function3a70::
-	ld hl, wd149
-	ld c, a
-	ld b, $0
-	add hl, bc
-	ld a, [hl]
-	ret
-
-GetBaseData::
-	push bc
-	push de
-	push hl
-	ldh a, [hROMBank]
-	push af
-	ld a, BANK(BaseData) ; $14
-	rst Bankswitch
-	ld a, [wCurSpecies]
-	cp EGG
-	jr z, .egg
-	dec a
-	ld bc, $20
-	ld hl, BaseData ; $5b0b
-	call AddNTimes
-	ld de, wd120
-	ld bc, $20
-	call CopyBytes
-	jr .asm_3ab3
-
-.egg
-	ld de, UnknownEggPic ; $7a83
-	ln b, 5, 5
-	ld hl, wd131
-	ld [hl], b
-	ld hl, wd132
-	ld [hl], e
-	inc hl
-	ld [hl], d
-	inc hl
-	ld [hl], e
-	inc hl
-	ld [hl], d
-	jr .asm_3ab3
-
-.asm_3ab3
-	ld a, [wCurSpecies]
-	ld [wd120], a
-	pop af
-	rst Bankswitch
-	pop hl
-	pop de
-	pop bc
-	ret
-
-GetCurNick::
-	ld a, [wCurPartyMon]
-	ld hl, wPartyMon1Nickname
-GetNick::
-	push hl
-	push bc
-	call SkipNames
-	ld de, wStringBuffer1
-	push de
-	ld bc, $b
-	call CopyBytes
-	pop de
-	callfar CheckNickErrors
-	pop bc
-	pop hl
-	ret
+INCLUDE "home/mon_data.asm"
 
 PrintBCDNumber:: ; 3ade (0:3ade)
 	ld b, c

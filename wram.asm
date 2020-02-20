@@ -2701,7 +2701,8 @@ wTrainerClass:: ds 1 ; d11d
 wd11e:: ds 1 ; d11e
 wd11f:: ds 1 ; d11f
 
-wBaseData:: ; d120
+wBaseDexNo:: ; d120
+wCurBaseData:: ; d120
 wd120:: ds 1 ; d120
 wd121:: ds 1 ; d121
 wd122:: ds 1 ; d122
@@ -2719,7 +2720,9 @@ wd12d:: ds 1 ; d12d
 wd12e:: ds 1 ; d12e
 wBaseEggSteps:: db ; d12f
 wd130:: ds 1 ; d130
+wBasePicSize::
 wd131:: ds 1 ; d131
+wBaseUnusedFrontpic::
 wd132:: ds 1 ; d132
 wd133:: ds 1 ; d133
 wd134:: ds 1 ; d134
@@ -2734,7 +2737,7 @@ wd13c:: ds 1 ; d13c
 wd13d:: ds 1 ; d13d
 wd13e:: ds 1 ; d13e
 wd13f:: ds 1 ; d13f
-wBaseDataEnd::
+wCurBaseDataEnd::
 
 wd140:: ds 1 ; d140
 wCurDamage:: ds 2 ; d141
