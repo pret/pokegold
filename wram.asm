@@ -876,7 +876,7 @@ wc7fe:: ds 1 ; c7fe
 wc7ff:: ds 1 ; c7ff
 wLYOverridesEnd::
 
-wLYOverridesBuffer::
+wLYOverridesBackup::
 wc800:: ds 1 ; c800
 wc801:: ds 1 ; c801
 wc802:: ds 1 ; c802

@@ -267,45 +267,5 @@ INCLUDE "home/mon_data.asm"
 INCLUDE "home/print_bcd.asm"
 INCLUDE "home/mon_data_2.asm"
 INCLUDE "home/battle.asm"
-
-PushLYOverrides:: ; 3d0d
-	ldh a, [hLCDCPointer]
-	and a
-	ret z
-	ld a, wLYOverridesBuffer % $100
-	ld [wRequested2bppSource], a
-	ld a, wLYOverridesBuffer / $100
-	ld [wRequested2bppSource + 1], a
-	ld a, wLYOverrides % $100
-	ld [wRequested2bppDest], a
-	ld a, wLYOverrides / $100
-	ld [wRequested2bppDest + 1], a
-	ld a, $9
-	ld [wRequested2bpp], a
-	ret
-
-InitAnimatedObjectStruct::
-	ld [wAnimatedObjectStructIDBuffer], a
-	ldh a, [hROMBank]
-	push af
-	ld a, BANK(InitAnimatedObjectStruct_) ; $23
-	rst Bankswitch
-	ld a, [wAnimatedObjectStructIDBuffer]
-	call InitAnimatedObjectStruct_ ; $51f7
-	pop af
-	rst Bankswitch
-	ret
-
-ReinitAnimatedObjectFrame::
-	ld [wAnimatedObjectStructIDBuffer], a
-	ldh a, [hROMBank]
-	push af
-	ld a, BANK(ReinitAnimatedObjectFrame_) ; $23
-	rst Bankswitch
-	ld a, [wAnimatedObjectStructIDBuffer]
-	call ReinitAnimatedObjectFrame_ ; $5332
-	pop af
-	rst Bankswitch
-	ret
-
+INCLUDE "home/sprite_anims.asm"
 INCLUDE "home/audio.asm"
