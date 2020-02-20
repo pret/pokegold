@@ -265,39 +265,7 @@ INCLUDE "home/cry.asm"
 INCLUDE "home/print_level.asm"
 INCLUDE "home/mon_data.asm"
 INCLUDE "home/print_bcd.asm"
-
-GetPartyParamLocation::
-	push bc
-	ld hl, wPartyMons
-	ld c, a
-	ld b, $0
-	add hl, bc
-	ld a, [wCurPartyMon]
-	call GetPartyLocation
-	pop bc
-	ret
-
-GetPartyLocation:: ; 3b4a (0:3b4a)
-	ld bc, $30
-	jp AddNTimes
-
-Function3b51::
-	push hl
-	ld a, b
-	dec a
-	ld b, $0
-	add hl, bc
-	ld hl, BaseData + 0
-	ld bc, $20
-	call AddNTimes
-	pop bc
-	ld a, BANK(BaseData)
-	call GetFarHalfword
-	ld b, l
-	ld c, h
-	pop hl
-	ret
-
+INCLUDE "home/mon_data_2.asm"
 INCLUDE "home/battle.asm"
 
 PushLYOverrides:: ; 3d0d
