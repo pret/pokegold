@@ -2433,7 +2433,11 @@ wPredefAddress:: dw ; cfde
 wFarCallBCBuffer:: dw ; cfe0
 wcfe2:: ds 1 ; cfe2
 wcfe3:: ds 1 ; cfe3
-wFieldMoveSucceeded:: ds 1 ; cfe4
+
+wFieldMoveSucceeded::
+wItemEffectSucceeded::
+	db ; cfe4
+
 wVramState:: ds 1
 wcfe6:: ds 1 ; cfe6
 wcfe7:: ds 1 ; cfe7
@@ -3386,9 +3390,8 @@ wCurrMapWarpHeaderPointer:: dw ; d946
 wd948:: ds 1 ; d948
 wd949:: ds 1 ; d949
 wd94a:: ds 1 ; d94a
-wd94b:: ds 1 ; d94b
-wd94c:: ds 1 ; d94c
-wd94d:: ds 1 ; d94d
+wCurMapBGEventCount:: db ; d94b
+wCurMapBGEventsPointer:: dw ; d94c
 wd94e:: ds 1 ; d94e
 wd94f:: ds 1 ; d94f
 wd950:: ds 1 ; d950

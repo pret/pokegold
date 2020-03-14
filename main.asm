@@ -627,8 +627,9 @@ INCLUDE "engine/events/misc_scripts.asm"
 INCLUDE "engine/events/heal_machine_anim.asm"
 INCLUDE "engine/events/whiteout.asm"
 INCLUDE "engine/events/forced_movement.asm"
-ItemfinderFunction:
-	dr $12947, $12e33
+INCLUDE "engine/events/itemfinder.asm"
+StartMenu:
+	dr $12994, $12e33
 
 PartyMonItemName::
 	dr $12e33, $12fa0
@@ -1314,7 +1315,9 @@ SECTION "bank2d", ROMX, BANK[$2d]
 	dr $b4000, $b8000
 
 SECTION "bank2e", ROMX, BANK[$2e]
-	dr $b8000, $ba378
+	dr $b8000, $ba300
+
+INCLUDE "engine/events/checkforhiddenitems.asm"
 
 TreeMonEncounter:
 	dr $ba378, $ba3a1

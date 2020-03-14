@@ -859,11 +859,11 @@ ReadCoordEvents:: ; 24d0 (0:24d0)
 ReadSignposts:: ; 24e7 (0:24e7)
 	ld a, [hli]
 	ld c, a
-	ld [wd94b], a
+	ld [wCurMapBGEventCount], a
 	ld a, l
-	ld [wd94c], a
+	ld [wCurMapBGEventsPointer], a
 	ld a, h
-	ld [wd94d], a
+	ld [wCurMapBGEventsPointer + 1], a
 	ld a, c
 	and a
 	ret z
@@ -947,7 +947,7 @@ ClearObjectStructs:: ; 2550 (0:2550)
 	ret
 
 RestoreFacingAfterWarp::
-	call GetMapScriptHeaderBank
+	call GetMapScriptsBank
 	rst Bankswitch
 	ld hl, wd08f
 	ld a, [hli]
@@ -1253,7 +1253,7 @@ CallMapScript::
 	ld a, [wd15f]
 	and a
 	ret nz
-	call GetMapScriptHeaderBank
+	call GetMapScriptsBank
 	jr CallScript
 
 RunMapCallback:: ; 2764 (0:2764)
@@ -1263,7 +1263,7 @@ RunMapCallback:: ; 2764 (0:2764)
 	call SwitchToMapScriptHeaderBank
 	call FindCallback
 	jr nc, .asm_2779
-	call GetMapScriptHeaderBank
+	call GetMapScriptsBank
 	ld b, a
 	ld d, h
 	ld e, l
@@ -1981,7 +1981,7 @@ CheckFacingSign::
 	ld a, e
 	sub $4
 	ld e, a
-	ld a, [wd94b]
+	ld a, [wCurMapBGEventCount]
 	and a
 	ret z
 	ld c, a
@@ -1995,7 +1995,7 @@ CheckFacingSign::
 	ret
 
 CheckIfFacingTileCoordIsSign:: ; 2b8f (0:2b8f)
-	ld hl, wd94c
+	ld hl, wCurMapBGEventsPointer
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
@@ -2256,7 +2256,7 @@ SwitchToMapScriptHeaderBank:: ; 2d2b (0:2d2b)
 	rst Bankswitch
 	ret
 
-GetMapScriptHeaderBank:: ; 2d30 (0:2d30)
+GetMapScriptsBank:: ; 2d30 (0:2d30)
 	ld a, [wd08c]
 	ret
 

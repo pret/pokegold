@@ -1419,7 +1419,7 @@ TalkToTrainer::
 	ld a, $ff
 	ld [wcf2b], a
 continue_trainer_function
-	call GetMapScriptHeaderBank
+	call GetMapScriptsBank
 	ld [wcf29], a
 	ld a, [hLastTalked]
 	call GetMapObject
@@ -1512,7 +1512,7 @@ CheckTrainerFlag::
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
-	call GetMapScriptHeaderBank
+	call GetMapScriptsBank
 	call GetFarHalfword
 	ld d, h
 	ld e, l
@@ -1544,7 +1544,7 @@ continue_battle_end_text
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
-	call GetMapScriptHeaderBank
+	call GetMapScriptsBank
 	call FarPrintText
 	call WaitBGMap
 	call WaitPressAorB_BlinkCursor
