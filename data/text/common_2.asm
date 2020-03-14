@@ -217,13 +217,13 @@ UnknownText_0x1c0a4e::
 	line "out!"
 	done
 
-UnknownText_0x1c0a77::
+_ItemfinderItemNearbyText::
 	text "Yes! ITEMFINDER"
 	line "indicates there's"
 	cont "an item nearby."
 	prompt
 
-UnknownText_0x1c0aa9::
+_ItemfinderNopeText::
 	text "Nope! ITEMFINDER"
 	line "isn't responding."
 	prompt

@@ -859,11 +859,11 @@ ReadCoordEvents:: ; 24d0 (0:24d0)
 ReadSignposts:: ; 24e7 (0:24e7)
 	ld a, [hli]
 	ld c, a
-	ld [wd94b], a
+	ld [wCurMapBGEventCount], a
 	ld a, l
-	ld [wd94c], a
+	ld [wCurMapBGEventsPointer], a
 	ld a, h
-	ld [wd94d], a
+	ld [wCurMapBGEventsPointer + 1], a
 	ld a, c
 	and a
 	ret z
@@ -1981,7 +1981,7 @@ CheckFacingSign::
 	ld a, e
 	sub $4
 	ld e, a
-	ld a, [wd94b]
+	ld a, [wCurMapBGEventCount]
 	and a
 	ret z
 	ld c, a
@@ -1995,7 +1995,7 @@ CheckFacingSign::
 	ret
 
 CheckIfFacingTileCoordIsSign:: ; 2b8f (0:2b8f)
-	ld hl, wd94c
+	ld hl, wCurMapBGEventsPointer
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a

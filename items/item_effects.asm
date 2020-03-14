@@ -66,7 +66,7 @@ _DoItemEffect:: ; e7a6 (3:67a6)
 	dw XSpeed
 	dw XSpecial
 	dw CoinCase
-	dw Itemfinder
+	dw ItemfinderEffect
 	dw PokeFlute
 	dw ExpShare
 	dw OldRod
@@ -2138,8 +2138,8 @@ UseRod:
 	farcall FishingRodFunction ; same bank
 	ret
 
-Itemfinder: ; f5ff (3:75ff)
-	farcall ItemfinderFunction
+ItemfinderEffect: ; f5ff (3:75ff)
+	farcall ItemFinder
 	ret
 
 Elixer: ; f606

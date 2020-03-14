@@ -35,6 +35,10 @@ pokesilver.txt
 .*.swp
 # swap files for gedit
 *~
+# for vscode
+.vscode
+# osx files
+.DS_STORE
 
 # compiled graphics
 *.2bpp
