@@ -128,7 +128,7 @@ VBlank0::
 	ld [wTextDelayFrames], a
 .ok2
 
-	call Joypad
+	call UpdateJoypad
 
 	ld a, BANK(_UpdateSound)
 	rst Bankswitch
@@ -233,7 +233,7 @@ VBlank4::
 
 	call hTransferVirtualOAM
 
-	call Joypad
+	call UpdateJoypad
 
 	xor a
 	ld [wVBlankOccurred], a
@@ -271,7 +271,7 @@ VBlank5::
 	xor a
 	ld [wVBlankOccurred], a
 
-	call Joypad
+	call UpdateJoypad
 
 	xor a
 	ldh [rIF], a
@@ -336,7 +336,7 @@ VBlank3::
 	sbc b
 	ldh [hRandomSub], a
 
-	call Joypad
+	call UpdateJoypad
 
 	ldh a, [hROMBank]
 	ld [wROMBankBackup], a

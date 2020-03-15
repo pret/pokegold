@@ -1,4 +1,4 @@
-JoypadInt:: ; 8df (0:08df)
+Joypad:: ; 8df (0:08df)
 	reti
 
 ClearJoypad::
@@ -7,7 +7,7 @@ ClearJoypad::
 	ldh [hJoyDown], a
 	ret
 
-Joypad:: ; 8e6 (0:08e6)
+UpdateJoypad:: ; 8e6 (0:08e6)
 	ld a, [wd8ba]
 	and $d0
 	ret nz

@@ -13,4 +13,4 @@ SECTION "serial",ROM0
 	jp Serial
 
 SECTION "joypad",ROM0
-	jp JoypadInt
+	jp Joypad
