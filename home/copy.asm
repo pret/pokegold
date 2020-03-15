@@ -1,238 +1,53 @@
-Functiond70:: ; d70 (0:0d70)
-	ld b, a
+CopyBytes:: ; 311a (0:311a)
+	inc b
+	inc c
+	jr .asm_3121
+.asm_311e
+	ld a, [hli]
+	ld [de], a
+	inc de
+.asm_3121
+	dec c
+	jr nz, .asm_311e
+	dec b
+	jr nz, .asm_311e
+	ret
+
+GetFarByte:: ; 3128 (0:3128)
+	ld [wBuffer], a
 	ldh a, [hROMBank]
 	push af
-	ld a, b
+	ld a, [wBuffer]
 	rst Bankswitch
+	ld a, [hl]
+	ld [wBuffer], a
+	pop af
+	rst Bankswitch
+	ld a, [wBuffer]
+	ret
 
-	ld a, BANK(sDecompressBuffer)
-	call OpenSRAM
-	ld hl, sDecompressBuffer
-	ld bc, 7 * 7 * $10
-	xor a
-	call ByteFill
-
-	ld hl, wcf3c
+GetFarHalfword:: ; 313c (0:313c)
+	ld [wBuffer], a
+	ldh a, [hROMBank]
+	push af
+	ld a, [wBuffer]
+	rst Bankswitch
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
-	ld de, sDecompressBuffer
-	call Decompress
-
-	call CloseSRAM
 	pop af
 	rst Bankswitch
 	ret
 
-ReplacePlayerSprite::
-	farcall Function1413c
-	ret
-
-Functiond9e::
-	farcall Functionf8000
-	ret
-
-Functionda5::
-	farcall Functionf8032
-	ret
-
-LoadFontsExtra::
-	farcall Functionf800c
-	ret
-
-DecompressRequest2bpp::
-	push de
-	ld a, BANK(sScratch)
-	call OpenSRAM
-	push bc
-
-	ld de, sScratch
-	ld a, b
-	call FarDecompress
-
-	pop bc
-	pop hl
-
-	ld de, sScratch
-	call Request2bpp
-	call CloseSRAM
-	ret
-
-FarCopyBytes:: ; dcd (0:0dcd)
-	ld [wBuffer], a
-	ldh a, [hROMBank]
-	push af
-	ld a, [wBuffer]
-	rst Bankswitch
-	call CopyBytes
-	pop af
-	rst Bankswitch
-	ret
-
-FarCopyBytesDouble:: ; ddd (0:0ddd)
-	ld [wBuffer], a
-	ldh a, [hROMBank]
-	push af
-	ld a, [wBuffer]
-	rst Bankswitch
-	ld a, h
-	ld h, d
-	ld d, a
-	ld a, l
-	ld l, e
-	ld e, a
+ByteFill:: ; 314c (0:314c)
 	inc b
 	inc c
-	jr .enter_loop
-
-.copy
-	ld a, [de]
-	inc de
+	jr .asm_3151
+.asm_3150
 	ld [hli], a
-	ld [hli], a
-.enter_loop
+.asm_3151
 	dec c
-	jr nz, .copy
+	jr nz, .asm_3150
 	dec b
-	jr nz, .copy
-	pop af
-	rst Bankswitch
+	jr nz, .asm_3150
 	ret
-
-Request2bpp:: ; dfe (0:0dfe)
-	ldh a, [hBGMapMode]
-	push af
-	xor a
-	ldh [hBGMapMode], a
-	ldh a, [hROMBank]
-	push af
-	ld a, b
-	rst Bankswitch
-	ld a, e
-	ld [wRequested2bppSource], a
-	ld a, d
-	ld [wRequested2bppSource + 1], a
-	ld a, l
-	ld [wRequested2bppDest], a
-	ld a, h
-	ld [wRequested2bppDest + 1], a
-.check
-	ld a, c
-	cp $8 ; TilesPerCycle
-	jr nc, .cycle
-	ld [wRequested2bpp], a
-	call DelayFrame
-	pop af
-	rst Bankswitch
-	pop af
-	ldh [hBGMapMode], a
-	ret
-
-.cycle
-	ld a, $8 ; TilesPerCycle
-	ld [wRequested2bpp], a
-	call DelayFrame
-	ld a, c
-	sub $8 ; TilesPerCycle
-	ld c, a
-	jr .check
-
-Request1bpp:: ; e38 (0:0e38)
-	ldh a, [hBGMapMode]
-	push af
-	xor a
-	ldh [hBGMapMode], a
-	ldh a, [hROMBank]
-	push af
-	ld a, b
-	rst Bankswitch
-	ld a, e
-	ld [wRequested1bppSource], a
-	ld a, d
-	ld [wRequested1bppSource + 1], a
-	ld a, l
-	ld [wRequested1bppDest], a
-	ld a, h
-	ld [wRequested1bppDest + 1], a
-.check
-	ld a, c
-	cp $8 ; TilesPerCycle
-	jr nc, .cycle
-	ld [wRequested1bpp], a
-	call DelayFrame
-	pop af
-	rst Bankswitch
-	pop af
-	ldh [hBGMapMode], a
-	ret
-
-.cycle
-	ld a, $8 ; TilesPerCycle
-	ld [wRequested1bpp], a
-	call DelayFrame
-	ld a, c
-	sub $8 ; TilesPerCycle
-	ld c, a
-	jr .check
-
-Get2bpp::
-	ldh a, [rLCDC]
-	bit 7, a
-	jp nz, Request2bpp
-Copy2bpp::
-	push hl
-	ld h, d
-	ld l, e
-	pop de
-	ld a, b
-	push af
-	swap c
-	ld a, $f
-	and c
-	ld b, a
-	ld a, $f0
-	and c
-	ld c, a
-	pop af
-	jp FarCopyBytes
-
-Get1bpp::
-	ldh a, [rLCDC]
-	bit 7, a
-	jp nz, Request1bpp
-Copy1bpp::
-	push de
-	ld d, h
-	ld e, l
-	ld a, b
-	push af
-	ld h, $0
-	ld l, c
-	add hl, hl
-	add hl, hl
-	add hl, hl
-	ld b, h
-	ld c, l
-	pop af
-	pop hl
-	jp FarCopyBytesDouble
-
-Functionea6::
-	ldh a, [rLCDC]
-	add a
-	jp c, Request2bpp
-Functioneac::
-	push de
-	push hl
-	ld a, b
-	ld h, $0
-	ld l, c
-	add hl, hl
-	add hl, hl
-	add hl, hl
-	add hl, hl
-	ld b, h
-	ld c, l
-	pop de
-	pop hl
-	jp FarCopyBytes

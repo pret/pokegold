@@ -30,3 +30,65 @@ IsInJohto::
 .Kanto:
 	ld a, 1
 	ret
+
+Function2ffe:: ; 2ffe (0:2ffe)
+	push hl
+	xor a
+	ld hl, wd17c
+	ld [hli], a
+	ld [hli], a
+	ld [hli], a
+	ld [hl], a
+	ld a, [wd17a]
+	ld l, a
+	ld a, [wd17b]
+	ld h, a
+	or l
+	jr z, .quit
+	ldh a, [hROMBank]
+	push af
+	call SwitchToMapScriptsBank
+	ld a, [wPlayerStandingMapX]
+	add $4
+	ld d, a
+	ld a, [wPlayerStandingMapY]
+	ld a, $4 ; add $4
+	ld e, a
+	push bc
+	ld c, $0
+.loop
+	ld a, [hl]
+	cp $ff
+	jr z, .done
+	push hl
+	ld a, d
+	cp [hl]
+	jr nz, .next
+	inc hl
+	ld a, e
+	cp [hl]
+	jr nz, .next
+	ld hl, wd17c
+	ld b, SET_FLAG
+	push de
+	push bc
+	ld d, $0
+	predef SmallFarFlagAction
+	pop bc
+	pop de
+.next
+	pop hl
+	inc hl
+	inc hl
+	inc hl
+	inc c
+	ld a, c
+	cp $20
+	jr c, .loop
+.done
+	pop bc
+	pop af
+	rst Bankswitch
+.quit
+	pop hl
+	ret

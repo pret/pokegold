@@ -2427,3 +2427,11 @@ LoadTilesetHeader:: ; 2dfa (0:2dfa)
 	pop bc
 	pop hl
 	ret
+	
+InexplicablyEmptyFunction:: ; 2e16
+; Inexplicably empty.
+; Seen in PredefPointers.
+rept 16
+	nop
+endr
+	ret
