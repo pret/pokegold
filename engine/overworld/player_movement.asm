@@ -1,18 +1,18 @@
 DoPlayerMovement:: ; 10000 (4:4000)
 	call Function10017
 	ld a, movement_step_sleep
-	ld [wcf2d], a
+	ld [wMovementAnimation], a
 	xor a
-	ld [wcf2c], a
+	ld [wWalkingIntoEdgeWarp], a
 	call Function1002d
 	ld c, a
-	ld a, [wcf2d]
+	ld a, [wMovementAnimation]
 	ld [wce87], a
 	ret
 
 Function10017: ; 10017 (4:4017)
 	ldh a, [hJoyDown]
-	ld [wcf29], a
+	ld [wCurInput], a
 	CheckFlagHL ENGINE_DOWNHILL
 	ret z
 	ld c, a
@@ -20,7 +20,7 @@ Function10017: ; 10017 (4:4017)
 	ret nz
 	ld a, c
 	or $80
-	ld [wcf29], a
+	ld [wCurInput], a
 	ret
 
 Function1002d: ; 1002d (4:402d)
@@ -74,7 +74,7 @@ Function1002d: ; 1002d (4:402d)
 	ret c
 	call Function10226
 	ret c
-	ld a, [wcf2e]
+	ld a, [wWalkingDirection]
 	cp $ff
 	jr z, .asm_10098
 	call Function103ee
@@ -84,10 +84,10 @@ Function1002d: ; 1002d (4:402d)
 	ret
 
 .asm_1009d
-	ld a, [wcf2e]
+	ld a, [wWalkingDirection]
 	cp $ff
 	jr z, .asm_100b2
-	ld a, [wTempTrainer]
+	ld a, [wWalkingIntoEdgeWarp]
 	and a
 	jr nz, .asm_100ad
 	call Function103ee
@@ -130,7 +130,7 @@ Function100b7: ; 100b7 (4:40b7)
 	ld hl, .water_table
 	add hl, bc
 	ld a, [hl]
-	ld [wcf2e], a
+	ld [wWalkingDirection], a
 	jr .asm_1013e
 
 .water_table
@@ -149,7 +149,7 @@ Function100b7: ; 100b7 (4:40b7)
 	ld a, [hl]
 	cp $ff
 	jr z, .asm_1013c
-	ld [wcf2e], a
+	ld [wWalkingDirection], a
 	jr .asm_1013e
 
 .land1_table
@@ -172,7 +172,7 @@ Function100b7: ; 100b7 (4:40b7)
 	ld a, [hl]
 	cp $ff
 	jr z, .asm_1013c
-	ld [wcf2e], a
+	ld [wWalkingDirection], a
 	jr .asm_1013e
 
 .land2_table
@@ -197,7 +197,7 @@ Function100b7: ; 100b7 (4:40b7)
 	jr nz, .asm_1013c
 .asm_10135
 	ld a, $0
-	ld [wcf2e], a
+	ld [wWalkingDirection], a
 	jr .asm_1013e
 
 .asm_1013c
@@ -212,10 +212,10 @@ Function100b7: ; 100b7 (4:40b7)
 	ret
 
 Function10147: ; 10147 (4:4147)
-	ld a, [wcf39]
+	ld a, [wPlayerTurningDirection]
 	cp $0
 	jr nz, .asm_10169
-	ld a, [wcf2e]
+	ld a, [wWalkingDirection]
 	cp $ff
 	jr z, .asm_10169
 	ld e, a
@@ -256,7 +256,7 @@ Function1016b: ; 1016b (4:416b)
 	ld hl, wBikeFlags
 	bit 2, [hl]
 	jr z, .asm_101a7
-	ld a, [wcf2e]
+	ld a, [wWalkingDirection]
 	cp $0
 	jr z, .asm_101a7
 	ld a, $1
@@ -291,15 +291,15 @@ Function1016b: ; 1016b (4:416b)
 
 Function101c0: ; 101c0 (4:41c0)
 	call Function103b4
-	ld [wcf2b], a
+	ld [wWalkingIntoLand], a
 	jr c, .asm_101f1
 	call Function10341
-	ld [wcf2a], a
+	ld [wWalkingIntoNPC], a
 	and a
 	jr z, .asm_101f1
 	cp $2
 	jr z, .asm_101f1
-	ld a, [wcf2b]
+	ld a, [wWalkingIntoLand]
 	and a
 	jr nz, .asm_101e2
 	ld a, $1
@@ -332,7 +332,7 @@ Function101f3: ; 101f3 (4:41f3)
 	ld d, $0
 	ld hl, .data_1021e
 	add hl, de
-	ld a, [wcf2f]
+	ld a, [wFacingDirection]
 	and [hl]
 	jr z, .asm_1021c
 	ld de, $16
@@ -358,7 +358,7 @@ Function101f3: ; 101f3 (4:41f3)
 	db FACE_UP | FACE_LEFT
 
 Function10226: ; 10226 (4:4226)
-	ld a, [wcf2e]
+	ld a, [wWalkingDirection]
 	ld e, a
 	ld d, $0
 	ld hl, .edge_warps
@@ -367,8 +367,8 @@ Function10226: ; 10226 (4:4226)
 	cp [hl]
 	jr nz, .asm_10259
 	ld a, $1
-	ld [wTempTrainer], a
-	ld a, [wcf2e]
+	ld [wWalkingIntoEdgeWarp], a
+	ld a, [wWalkingDirection]
 	cp $ff
 	jr z, .asm_10259
 	ld e, a
@@ -401,17 +401,17 @@ Function1025f: ; 1025f (4:425f)
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
-	ld a, [wcf2e]
+	ld a, [wWalkingDirection]
 	ld e, a
 	cp $ff
 	jp z, Function102b3
 	add hl, de
 	ld a, [hl]
-	ld [wcf2d], a
+	ld [wMovementAnimation], a
 	ld hl, $42af
 	add hl, de
 	ld a, [hl]
-	ld [wcf39], a
+	ld [wPlayerTurningDirection], a
 	ld a, $4
 	ret
 
@@ -468,24 +468,24 @@ Function1025f: ; 1025f (4:425f)
 
 Function102b3: ; 102b3 (4:42b3)
 	ld a, $0
-	ld [wcf39], a
+	ld [wPlayerTurningDirection], a
 	ld a, $3e
-	ld [wcf2d], a
+	ld [wMovementAnimation], a
 	xor a
 	ret
 
 Function102bf: ; 102bf (4:42bf)
 	ld a, $0
-	ld [wTempTrainerEnd], a
+	ld [wPlayerTurningDirection], a
 	ld a, $50
-	ld [wcf2d], a
+	ld [wMovementAnimation], a
 	xor a
 	ret
 
 Function102cb: ; 102cb (4:42cb)
 	call Function10404
 	ret nc
-	ld a, [wTempTrainerEnd]
+	ld a, [wPlayerTurningDirection]
 .asm_102d2
 	cp $0
 	ret z
@@ -494,10 +494,10 @@ Function102cb: ; 102cb (4:42cb)
 	ld d, $0
 	ld hl, .forced_dpad
 	add hl, de
-	ld a, [wcf29]
+	ld a, [wCurInput]
 	and $f
 	or [hl]
-	ld [wcf29], a
+	ld [wCurInput], a
 	ret
 
 .forced_dpad
@@ -506,7 +506,7 @@ Function102cb: ; 102cb (4:42cb)
 Function102ec: ; 102ec (4:42ec)
 	ld hl, .table
 	ld de, .table2 - .table1
-	ld a, [wcf29]
+	ld a, [wCurInput]
 	bit 7, a
 	jr nz, .asm_10307
 	bit 6, a
@@ -528,13 +528,13 @@ Function102ec: ; 102ec (4:42ec)
 	add hl, de
 .asm_1030b
 	ld a, [hli]
-	ld [wcf2e], a
+	ld [wWalkingDirection], a
 	ld a, [hli]
-	ld [wcf2f], a
+	ld [wFacingDirection], a
 	ld a, [hli]
-	ld [wcf30], a
+	ld [wWalkingX], a
 	ld a, [hli]
-	ld [wcf31], a
+	ld [wWalkingY], a
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
@@ -567,12 +567,12 @@ Function10341: ; 10341 (4:4341)
 	ldh [hMapObjectIndexBuffer], a
 	ld a, [wPlayerStandingMapX]
 	ld d, a
-	ld a, [wcf30]
+	ld a, [wWalkingX]
 	add d
 	ld d, a
 	ld a, [wPlayerStandingMapY]
 	ld e, a
-	ld a, [wcf31]
+	ld a, [wWalkingY]
 	add e
 	ld e, a
 	ld bc, wPlayerSprite
@@ -607,7 +607,7 @@ Function1036f: ; 1036f (4:436f)
 	ld hl, $5
 	add hl, bc
 	set 2, [hl]
-	ld a, [wcf2e]
+	ld a, [wWalkingDirection]
 	ld d, a
 	ld hl, $20
 	add hl, bc
@@ -625,7 +625,7 @@ Function1036f: ; 1036f (4:436f)
 Function1039e: ; 1039e (4:439e)
 	ld a, [wTilePermissions]
 	ld d, a
-	ld a, [wcf2f]
+	ld a, [wFacingDirection]
 	and d
 	jr nz, .asm_103b2
 	ld a, [wWinTextPointer]
@@ -641,7 +641,7 @@ Function1039e: ; 1039e (4:439e)
 Function103b4: ; 103b4 (4:43b4)
 	ld a, [wTilePermissions]
 	ld d, a
-	ld a, [wcf2f]
+	ld a, [wFacingDirection]
 	and d
 	jr nz, .asm_103c8
 	ld a, [wWinTextPointer]
@@ -705,7 +705,7 @@ Function103f9: ; 103f9 (4:43f9)
 	ret
 
 Function10404: ; 10404 (4:4404)
-	ld a, [wTempTrainerEnd]
+	ld a, [wPlayerTurningDirection]
 	cp $0
 	jr z, .asm_10420
 	cp $f0
@@ -731,5 +731,5 @@ StopPlayerForEvent::
 	ret z
 	ld [hl], a
 	ld a, $0
-	ld [wcf39], a
+	ld [wPlayerTurningDirection], a
 	ret

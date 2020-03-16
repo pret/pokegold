@@ -593,7 +593,7 @@ INCLUDE "items/item_effects.asm"
 KnowsMove:
 	ld a, MON_MOVES
 	call GetPartyParamLocation
-	ld a, [wd14d]
+	ld a, [wPutativeTMHMMove]
 	ld b, a
 	ld c, $4
 .asm_fa28
@@ -627,13 +627,10 @@ INCLUDE "engine/events/heal_machine_anim.asm"
 INCLUDE "engine/events/whiteout.asm"
 INCLUDE "engine/events/forced_movement.asm"
 INCLUDE "engine/events/itemfinder.asm"
-StartMenu:
-	dr $12994, $12e33
-
-PartyMonItemName::
-	dr $12e33, $12fa0
-Function12fa0:
-	dr $12fa0, $1399d
+INCLUDE "engine/menus/start_menu.asm"
+INCLUDE "engine/pokemon/mon_menu.asm"
+INCLUDE "engine/overworld/select_menu.asm"
+INCLUDE "engine/events/elevator.asm"
 INCLUDE "engine/events/bug_contest/contest.asm"
 INCLUDE "engine/events/misc_scripts_2.asm"
 INCLUDE "engine/events/std_collision.asm"
@@ -679,7 +676,9 @@ Function14a2d:: ; 14a2d
 Function14a44: ; 14a44
 	dr $14a44, $14a73
 CheckCutCollision:
-	dr $14a73, $14bd2
+	dr $14a73, $14abe
+SaveMenu:
+	dr $14abe, $14bd2
 StartMovePkmnWOMail_SaveGame:
 	dr $14bd2, $14ef5
 TryLoadSaveFile: ; 14ef5
@@ -757,11 +756,19 @@ PlaceMoneyTopRight:
 DisplayCoinCaseBalance:
 	dr $24a4d, $24a76
 DisplayMoneyAndCoinBalance:
-	dr $24a76, $24b8d
+	dr $24a76, $24b05
+StartMenu_DrawBugContestStatusBox:
+	dr $24b05, $24b10
+StartMenu_PrintBugContestStatus:
+	dr $24b10, $24b8d
 Function24b8d:
-	dr $24b8d, $24f20
+	dr $24b8d, $24c89
+MonSubmenu:
+	dr $24c89, $24f20
 SelectQuantityToToss:
-	dr $24f20, $267ca
+	dr $24f20, $25061
+TrainerCard:
+	dr $25061, $267ca
 ProfOaksPCBoot:
 	dr $267ca, $2692d
 InitDecorations: ; 2692d
@@ -933,6 +940,7 @@ Function3f55d:
 	dr $3f55d, $40000
 
 SECTION "bank10", ROMX, BANK[$10]
+Pokedex::
 	dr $40000, $41afe
 Moves::
 	dr $41afe, $421db
@@ -962,7 +970,9 @@ PokedexDataPointerTable::
 	dr $44360, $44648
 
 PlaceGraphic::
-	dr $44648, $44870
+	dr $44648, $44679
+SendMailToPC::
+	dr $44679, $44870
 DeletePartyMonMail:
 	dr $44870, $4488c
 
@@ -992,7 +1002,10 @@ InitPartyMenuGFX:
 	dr $50355, $5037a
 
 InitPartyMenuWithCancel:
-	dr $5037a, $503cc
+	dr $5037a, $503a2
+
+InitPartyMenuNoCancel:
+	dr $503a2, $503cc
 
 PartyMenuSelect:
 	dr $503cc, $5040f
@@ -1004,7 +1017,11 @@ PrintPartyMenuActionText:
 	dr $504db, $5054f
 
 LoadFishingGFX:
-	dr $5054f, $50763
+	dr $5054f, $506f2
+
+; INCLUDE "engine/events/sweet_scent.asm"
+SweetScentFromMenu:
+	dr $506f2, $50763
 
 SquirtbottleFunction:
 	dr $50763, $507ac
@@ -1064,7 +1081,10 @@ CalcLevel:
 	dr $51524, $51550
 
 CalcExpAtLevel:
-	dr $51550, $51749
+	dr $51550, $5161b
+
+_SwitchPartyMons:
+	dr $5161b, $51749
 
 GetUnownLetter::
 	dr $51749, $51780
@@ -1216,17 +1236,29 @@ _InitSpriteAnimStruct:: ; 8d1f7
 _ReinitSpriteAnimFrame:: ; 8d332
 
 IF DEF(GOLD)
-	dr $8d332, $8e79f
+	dr $8d332, $8e774
 
+ClearSpriteAnims2::
+	dr $8e774, $8e79f
 LoadMenuMonIcon::
-	dr $8e79f, $90000
+	dr $8e79f, $8e922
+UnfreezeMonIcons::
+	dr $8e922, $8e93d
+HoldSwitchmonIcon::
+	dr $8e93d, $90000
 ENDC
 
 IF DEF(SILVER)
-	dr $8d332, $8e785
+	dr $8d332, $8e75a
 
+ClearSpriteAnims2::
+	dr $8e75a, $8e785
 LoadMenuMonIcon::
-	dr $8e785, $90000
+	dr $8e785, $8e908
+UnfreezeMonIcons::
+	dr $8e908, $8e923
+HoldSwitchmonIcon::
+	dr $8e923, $90000
 ENDC
 
 SECTION "bank24", ROMX, BANK[$24]
@@ -1242,7 +1274,9 @@ InitialClearDSTFlag:
 MrChrono:
 	dr $90a8d, $90b0f
 PrintHour:
-	dr $90b0f, $9188a
+	dr $90b0f, $90b5e
+PokeGear:
+	dr $90b5e, $9188a
 Function9188a:
 	dr $9188a, $919c1
 Function919c1:
@@ -1322,8 +1356,9 @@ TreeMonEncounter:
 	dr $ba378, $ba3a1
 
 RockMonEncounter:
-	dr $ba3a1, $bbaed
-
+	dr $ba3a1, $baeca
+ReadPartyMonMail:
+	dr $baeca, $bbaed
 ItemIsMail:
 	dr $bbaed, $bc000
 
@@ -1453,8 +1488,10 @@ Functionf8000::
 	dr $f8000, $f800c
 Functionf800c::
 	dr $f800c, $f8032
-Functionf8032::
-	dr $f8032, $fb4be
+_LoadFontsBattleExtra::
+	dr $f8032, $f80d9
+LoadStatsScreenPageTilesGFX::
+	dr $f80d9, $fb4be
 
 TileCollisionTable::
 	dr $fb4be, $fb5be

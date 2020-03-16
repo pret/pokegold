@@ -204,7 +204,7 @@ Print8BitNumLeftAlign::
 	jp PrintNum
 
 Unreferenced_GetNthMove::
-	ld hl, wd149
+	ld hl, wListMoves_MoveIndicesBuffer
 	ld c, a
 	ld b, 0
 	add hl, bc

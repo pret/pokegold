@@ -33,7 +33,7 @@ ReceiveBall:
 ReceiveTMHM:
 	ld h, d
 	ld l, e
-	ld a, [wd002]
+	ld a, [wCurItem]
 	ld c, a
 	call GetTMHMNumber
 	jp PutItemInTMPocket
@@ -63,7 +63,7 @@ RemoveBall:
 RemoveTMHM:
 	ld h, d
 	ld l, e
-	ld a, [wd002]
+	ld a, [wCurItem]
 	ld c, a
 	call GetTMHMNumber
 	jp RemoveTMorHM
@@ -104,7 +104,7 @@ CheckBall:
 CheckTMHM:
 	ld h, d
 	ld l, e
-	ld a, [wd002]
+	ld a, [wCurItem]
 	ld c, a
 	call GetTMHMNumber
 	jp CheckTMorHM
@@ -152,7 +152,7 @@ PutItemInPocketOrPC: ; d2a9 (3:52a9)
 	ld d, h
 	ld e, l
 	inc hl
-	ld a, [wd002]
+	ld a, [wCurItem]
 	ld c, a
 	ld b, $0
 .asm_d2b2
@@ -184,7 +184,7 @@ PutItemInPocketOrPC: ; d2a9 (3:52a9)
 .asm_d2d3
 	ld h, d
 	ld l, e
-	ld a, [wd002]
+	ld a, [wCurItem]
 	ld c, a
 	ld a, [wItemQuantityChangeBuffer]
 	ld [wItemQuantityBuffer], a
@@ -210,7 +210,7 @@ PutItemInPocketOrPC: ; d2a9 (3:52a9)
 
 .asm_d2fc
 	dec hl
-	ld a, [wd002]
+	ld a, [wCurItem]
 	ld [hli], a
 	ld a, [wItemQuantityBuffer]
 	ld [hli], a
@@ -227,14 +227,14 @@ RemoveItemAndQuantity: ; d30c (3:530c)
 	ld e, l
 	ld a, [hli]
 	ld c, a
-	ld a, [wd003]
+	ld a, [wCurItemQuantity]
 	cp c
 	jr nc, .asm_d325
 	ld c, a
 	ld b, $0
 	add hl, bc
 	add hl, bc
-	ld a, [wd002]
+	ld a, [wCurItem]
 	cp [hl]
 	inc hl
 	jr z, .asm_d334
@@ -242,7 +242,7 @@ RemoveItemAndQuantity: ; d30c (3:530c)
 	ld l, e
 	inc hl
 .asm_d325
-	ld a, [wd002]
+	ld a, [wCurItem]
 	ld b, a
 .asm_d329
 	ld a, [hli]
@@ -286,7 +286,7 @@ RemoveItemAndQuantity: ; d30c (3:530c)
 	ret
 
 CheckItemWithQuantity: ; d356 (3:5356)
-	ld a, [wd002]
+	ld a, [wCurItem]
 	ld c, a
 .asm_d35a
 	inc hl
@@ -310,7 +310,7 @@ PutItemInKeyItemPocket: ; d367 (3:5367)
 	ld c, a
 	ld b, $0
 	add hl, bc
-	ld a, [wd002]
+	ld a, [wCurItem]
 	ld [hli], a
 	ld [hl], $ff
 	ld hl, wNumKeyItems
@@ -323,7 +323,7 @@ PutItemInKeyItemPocket: ; d367 (3:5367)
 	ret
 
 RemoveItemWithoutQuantity: ; d381 (3:5381)
-	ld a, [wd003]
+	ld a, [wCurItemQuantity]
 	ld e, a
 	ld d, $0
 	ld hl, wItemsEnd
@@ -353,7 +353,7 @@ RemoveItemWithoutQuantity: ; d381 (3:5381)
 
 FindAndTossKeyItem: ; d3a3 (3:53a3)
 	ld hl, wItemsEnd
-	ld a, [wd002]
+	ld a, [wCurItem]
 	ld c, a
 .asm_d3aa
 	inc hl
@@ -373,7 +373,7 @@ FindAndTossKeyItem: ; d3a3 (3:53a3)
 	ret
 
 CheckItemWithoutQuantity: ; d3be (3:53be)
-	ld a, [wd002]
+	ld a, [wCurItem]
 	ld c, a
 	ld hl, wKeyItems
 .asm_d3c5
@@ -520,7 +520,7 @@ GetItemAttr: ; d46d (3:546d)
 	add hl, bc
 	xor a
 	ld [wItemAttributeParamBuffer], a
-	ld a, [wd002]
+	ld a, [wCurItem]
 	dec a
 	ld c, a
 	ld a, $7

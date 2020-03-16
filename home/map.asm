@@ -2024,8 +2024,8 @@ CheckIfFacingTileCoordIsSign:: ; 2b8f (0:2b8f)
 
 .asm_2bad
 	pop hl
-	ld de, wcf29
-	ld bc, $5
+	ld de, wCurBGEvent
+	ld bc, BG_EVENT_SIZE
 	call CopyBytes
 	scf
 	ret
@@ -2088,8 +2088,8 @@ CheckCurrentMapXYTriggers::
 
 .asm_2c02
 	pop hl
-	ld de, wcf29
-	ld bc, $8
+	ld de, wCurCoordEvent
+	ld bc, COORD_EVENT_SIZE
 	call CopyBytes
 	scf
 	ret

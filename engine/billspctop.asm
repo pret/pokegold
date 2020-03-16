@@ -31,7 +31,7 @@ BillsPC_LogIn: ; e3f7 (3:63f7)
 	call PrintText
 	pop af
 	ld [wOptions], a
-	call Functionda5
+	call LoadFontsBattleExtra
 	ret
 
 Text_BillsPCWhat:

@@ -269,7 +269,7 @@ GetMysteryGiftItem: ; c463 (3:4463)
 	ld a, $0
 	call OpenSRAM
 	ld a, [$abe2]
-	ld [wd002], a
+	ld [wCurItem], a
 	ld a, $1
 	ld [wItemQuantityChangeBuffer], a
 	ld hl, wNumItems
@@ -278,7 +278,7 @@ GetMysteryGiftItem: ; c463 (3:4463)
 	xor a
 	ld [$abe2], a
 	call CloseSRAM
-	ld a, [wd002]
+	ld a, [wCurItem]
 	ld [wd151], a
 	call GetItemName
 	ld hl, ReceivedMysteryGiftText ; $449f
@@ -361,7 +361,7 @@ Functionc508: ; c508 (3:4508)
 	or [hl]
 	jr z, .asm_c51e
 	ld a, COIN_CASE
-	ld [wd002], a
+	ld [wCurItem], a
 	ld hl, wNumItems
 	call CheckItem
 	jr nc, .asm_c523
@@ -472,7 +472,7 @@ SelectApricornForKurt: ; c5bb (3:45bb)
 	ld [wScriptVar], a
 	and a
 	ret z
-	ld [wd002], a
+	ld [wCurItem], a
 	ld a, $1
 	ld [wItemQuantityChangeBuffer], a
 	ld hl, wNumItems

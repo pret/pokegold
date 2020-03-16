@@ -1,4 +1,4 @@
-Function10430:
+Pack:
 	ld hl, wOptions
 	set NO_TEXT_SCROLL, [hl]
 	call Function10aba
@@ -61,9 +61,9 @@ Pack_ItemsPocketMenu:
 	ld a, [wcfca]
 	ld [wMenuCursorBuffer], a
 	ld a, [wcfcf]
-	ld [wcfd4], a
+	ld [wMenuScrollPosition], a
 	call ScrollingMenu
-	ld a, [wcfd4]
+	ld a, [wMenuScrollPosition]
 	ld [wcfcf], a
 	ld a, [wMenuCursorY]
 	ld [wcfca], a
@@ -90,9 +90,9 @@ Pack_KeyItemsPocketMenu:
 	ld a, [wcfcb]
 	ld [wMenuCursorBuffer], a
 	ld a, [wcfd0]
-	ld [wcfd4], a
+	ld [wMenuScrollPosition], a
 	call ScrollingMenu
-	ld a, [wcfd4]
+	ld a, [wMenuScrollPosition]
 	ld [wcfd0], a
 	ld a, [wMenuCursorY]
 	ld [wcfcb], a
@@ -214,9 +214,9 @@ Pack_BallsPocketMenu:
 	ld a, [wcfcc]
 	ld [wMenuCursorBuffer], a
 	ld a, [wcfd1]
-	ld [wcfd4], a
+	ld [wMenuScrollPosition], a
 	call ScrollingMenu
-	ld a, [wcfd4]
+	ld a, [wMenuScrollPosition]
 	ld [wcfd1], a
 	ld a, [wMenuCursorY]
 	ld [wcfcc], a
@@ -484,7 +484,7 @@ TossMenu:
 	pop af
 	jr c, .asm_107cc
 	ld hl, wTMsHMsEnd
-	ld a, [wd003]
+	ld a, [wCurItemQuantity]
 	call TossItem
 	call Function10e38
 	ld hl, Text_ThrewAway
@@ -530,12 +530,12 @@ RegisterItem:
 	rrca
 	and $c0
 	ld b, a
-	ld a, [wd003]
+	ld a, [wCurItemQuantity]
 	inc a
 	and $3f
 	or b
 	ld [wWhichRegisteredItem], a
-	ld a, [wd002]
+	ld a, [wCurItem]
 	ld [wRegisteredItem], a
 	call Function10e38
 	ld de, SFX_FULL_HEAL
@@ -588,7 +588,7 @@ GiveItem:
 	ld de, wMonOrItemNameBuffer
 	ld bc, $b
 	call CopyBytes
-	call Function12fa0
+	call TryGiveItemToPartymon
 	pop af
 	ld [wce64], a
 	pop af
@@ -678,9 +678,9 @@ BattlePack_ItemsPocketMenu:
 	ld a, [wcfca]
 	ld [wMenuCursorBuffer], a
 	ld a, [wcfcf]
-	ld [wcfd4], a
+	ld [wMenuScrollPosition], a
 	call ScrollingMenu
-	ld a, [wcfd4]
+	ld a, [wMenuScrollPosition]
 	ld [wcfcf], a
 	ld a, [wMenuCursorY]
 	ld [wcfca], a
@@ -706,9 +706,9 @@ BattlePack_KeyItemsPocketMenu:
 	ld a, [wcfcb]
 	ld [wMenuCursorBuffer], a
 	ld a, [wcfd0]
-	ld [wcfd4], a
+	ld [wMenuScrollPosition], a
 	call ScrollingMenu
-	ld a, [wcfd4]
+	ld a, [wMenuScrollPosition]
 	ld [wcfd0], a
 	ld a, [wMenuCursorY]
 	ld [wcfcb], a
@@ -757,9 +757,9 @@ BattlePack_BallsPocketMenu:
 	ld a, [wcfcc]
 	ld [wMenuCursorBuffer], a
 	ld a, [wcfd1]
-	ld [wcfd4], a
+	ld [wMenuScrollPosition], a
 	call ScrollingMenu
-	ld a, [wcfd4]
+	ld a, [wMenuScrollPosition]
 	ld [wcfd1], a
 	ld a, [wMenuCursorY]
 	ld [wcfcc], a
@@ -895,33 +895,34 @@ Function10aba: ; 10aba (4:4aba)
 	ld [wce63], a
 	ld a, [wcfc8]
 	and $3
-	ld [wce65], a
+	ld [wCurPocket], a
 	inc a
 	add a
 	dec a
 	ld [wce64], a
 	xor a
-	ld [wce66], a
+	ld [wPackUsedItem], a
 	xor a
-	ld [wcfd3], a
+	ld [wSwitchItem], a
 	ret
 
-Function10ad5: ; 10ad5 (4:4ad5)
+DepositSellInitPackBuffers: ; 10ad5 (4:4ad5)
 	xor a
 	ldh [hBGMapMode], a
 	ld [wce63], a
 	ld [wce64], a
-	ld [wce65], a
-	ld [wce66], a
-	ld [wcfd3], a
+	ld [wCurPocket], a
+	ld [wPackUsedItem], a
+	ld [wSwitchItem], a
 	call Function10d70
 	call Function10e5b
 	ret
 
-.asm_10aee
+DepositSellPack
+.loop
 	call Function10af7
 	call Function10b9f
-	jr c, .asm_10aee
+	jr c, .loop
 	ret
 
 Function10af7: ; 10af7 (4:4af7)
@@ -944,9 +945,9 @@ DepositOrSell_ItemPocket:
 	ld a, [wcfca]
 	ld [wMenuCursorBuffer], a
 	ld a, [wcfcf]
-	ld [wcfd4], a
+	ld [wMenuScrollPosition], a
 	call ScrollingMenu
-	ld a, [wcfd4]
+	ld a, [wMenuScrollPosition]
 	ld [wcfcf], a
 	ld a, [wMenuCursorY]
 	ld [wcfca], a
@@ -960,9 +961,9 @@ DepositOrSell_KeyItemsPocket:
 	ld a, [wcfcb]
 	ld [wMenuCursorBuffer], a
 	ld a, [wcfd0]
-	ld [wcfd4], a
+	ld [wMenuScrollPosition], a
 	call ScrollingMenu
-	ld a, [wcfd4]
+	ld a, [wMenuScrollPosition]
 	ld [wcfd0], a
 	ld a, [wMenuCursorY]
 	ld [wcfcb], a
@@ -973,8 +974,8 @@ DepositOrSell_TMHMPocket:
 	call Function10b92
 	call Function10cca
 	farcall Pack_TMHMPocketMenu_ ; b:457a
-	ld a, [wd002]
-	ld [wd002], a
+	ld a, [wCurItem]
+	ld [wCurItem], a
 	ret
 
 DepositOrSell_BallsPocket:
@@ -985,9 +986,9 @@ DepositOrSell_BallsPocket:
 	ld a, [wcfcc]
 	ld [wMenuCursorBuffer], a
 	ld a, [wcfd1]
-	ld [wcfd4], a
+	ld [wMenuScrollPosition], a
 	call ScrollingMenu
-	ld a, [wcfd4]
+	ld a, [wMenuScrollPosition]
 	ld [wcfd1], a
 	ld a, [wMenuCursorY]
 	ld [wcfcc], a
@@ -1054,7 +1055,7 @@ Function10b9f: ; 10b9f (4:4b9f)
 	ret
 
 TutorialPack:
-	call Function10ad5
+	call DepositSellInitPackBuffers
 	ld a, [wInputType]
 	or a
 	jr z, .asm_10bfa
@@ -1126,8 +1127,8 @@ TutorialTMHM:
 	call Function10b92
 	call Function10cca
 	farcall Pack_TMHMPocketMenu_
-	ld a, [wd002]
-	ld [wd002], a
+	ld a, [wCurItem]
+	ld [wCurItem], a
 	ret
 
 TutorialBalls:
@@ -1224,7 +1225,7 @@ PackGFXPointers:
 
 Function10cef: ; 10cef (4:4cef)
 	ld hl, wMenuJoypad
-	ld a, [wcfd3]
+	ld a, [wSwitchItem]
 	and a
 	jr nz, .asm_10d4c
 	ld a, [hl]
@@ -1302,7 +1303,7 @@ Function10cef: ; 10cef (4:4cef)
 	call WaitPlaySFX
 .asm_10d6a
 	xor a
-	ld [wcfd3], a
+	ld [wSwitchItem], a
 	scf
 	ret
 
@@ -1401,7 +1402,7 @@ Function10dd6: ; 10dd6 (4:4dd6)
 	db $02, $05, $05, $05, $03 ; bottom border
 
 Function10e38: ; 10e38 (4:4e38)
-	ld a, [wd002]
+	ld a, [wCurItem]
 	ld [wd151], a
 	call GetItemName
 	call CopyName1

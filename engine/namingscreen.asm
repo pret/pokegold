@@ -892,7 +892,7 @@ NamingScreenGFX_ED: INCBIN "gfx/namingscreen/ed.1bpp" ; leftover from gen 1
 NamingScreenGFX_MiddleLine: INCBIN "gfx/namingscreen/middleline.1bpp"
 NamingScreenGFX_UnderLine: INCBIN "gfx/namingscreen/underline.1bpp"
 
-ComposeMailMessage:
+_ComposeMailMessage:
 	ld hl, wNamingScreenDestinationPointer
 	ld [hl], e
 	inc hl

@@ -1196,7 +1196,7 @@ RemoveMonFromPartyOrBox: ; e03f (3:603f)
 	ld a, [wCurPartyMon]
 	cp [hl]
 	jr z, .asm_e137
-	ld hl, s0_a600
+	ld hl, sPartyMail
 	ld bc, MAIL_STRUCT_LENGTH
 	call AddNTimes
 	push hl
@@ -1502,14 +1502,14 @@ GivePoke: ; Give a Pokemon from script
 	push bc
 	push de
 	push af
-	ld a, [wd002]
+	ld a, [wCurItem]
 	and a
 	jr z, .asm_e2fa
 	ld a, [wCurPartyMon]
 	ld hl, wPartyMon1Item
 	ld bc, PARTYMON_STRUCT_LENGTH
 	call AddNTimes
-	ld a, [wd002]
+	ld a, [wCurItem]
 	ld [hl], a
 	jr .asm_e2fa
 
@@ -1530,10 +1530,10 @@ GivePoke: ; Give a Pokemon from script
 	push bc
 	push de
 	push af
-	ld a, [wd002]
+	ld a, [wCurItem]
 	and a
 	jr z, .asm_e2fa
-	ld a, [wd002]
+	ld a, [wCurItem]
 	ld [sBoxMon1Item], a
 .asm_e2fa
 	ld a, [wCurPartySpecies]

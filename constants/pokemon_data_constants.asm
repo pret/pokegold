@@ -62,8 +62,9 @@ GENDER_UNKNOWN EQU -1
 	const EGG_DRAGON        ; e
 	const EGG_NONE          ; f (Undiscovered)
 
-; menu sprites
-const_value SET 1
+; IconPointers indexes (see data/icon_pointers.asm)
+	const_def
+	const ICON_NULL
 	const ICON_POLIWAG
 	const ICON_JIGGLYPUFF
 	const ICON_DIGLETT
@@ -102,6 +103,16 @@ const_value SET 1
 	const ICON_SLOWPOKE
 	const ICON_SUDOWOODO
 	const ICON_BIGMON
+
+; LoadMenuMonIcon.Jumptable indexes (see engine/gfx/mon_icons.asm)
+	const_def
+	const MONICON_PARTYMENU
+	const MONICON_NAMINGSCREEN
+	const MONICON_MOVES
+	const MONICON_TRADE
+	const MONICON_MOBILE1
+	const MONICON_MOBILE2
+	const MONICON_UNUSED
 
 ; maximum number of party pokemon
 PARTY_LENGTH EQU 6

@@ -11,7 +11,7 @@ RepelWoreOffScript::
 
 HiddenItemScript::
 	opentext
-	copybytetovar wcf2b
+	copybytetovar wHiddenItemID
 	itemtotext STRING_BUFFER_3, USE_SCRIPT_VAR
 	writetext .PlayerFoundItemText
 	giveitem ITEM_FROM_MEM
@@ -39,7 +39,7 @@ HiddenItemScript::
 	db "@"
 
 SetMemEvent:
-	ld hl, wcf29
+	ld hl, wHiddenItemEvent
 	ld a, [hli]
 	ld d, [hl]
 	ld e, a

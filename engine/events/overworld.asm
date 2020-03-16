@@ -477,7 +477,7 @@ TrySurfOW::
 	jr z, .quit
 	cp PLAYER_SURF
 	jr z, .quit
-	ld a, [wcf29]
+	ld a, [wFacingTileID]
 	call GetTileCollision
 	cp $1
 	jr nz, .quit
@@ -835,6 +835,7 @@ DigReturnMovementData:
 	return_dig 32
 	step_end
 
+TeleportFunction:
 	call FieldMoveBufferReset
 .asm_cc67
 	ld hl, .Jumptable
@@ -1261,6 +1262,7 @@ Text_AskHeadbutt: ; cee9
 	text_far Text_AskHeadbutt_
 	db "@"
 
+RockSmashFunction:
 	call TryRockSmashFromMenu
 	and $7f
 	ld [wFieldMoveSucceeded], a

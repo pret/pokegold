@@ -928,7 +928,7 @@ Function5730:: ; 5730 (1:5730)
 	ld [wce87], a
 	ld [wce88], a
 	xor a
-	ld [wcf39], a
+	ld [wPlayerTurningDirection], a
 	ld [wPlayerObjectStepFrame], a
 	call Function574f
 	farcall Function14a44

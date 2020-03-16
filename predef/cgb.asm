@@ -92,7 +92,7 @@ Function9399: ; 9399 (2:5399)
 	ld bc, Palettes_ad2d
 	add hl, bc
 	call Function9adb
-	ld a, [wcc99]
+	ld a, [wPlayerHPPal]
 	ld l, a
 	ld h, $0
 	add hl, hl
@@ -553,7 +553,7 @@ Function976d: ; 976d (2:576d)
 	call AddNTimes
 	ld c, l
 	ld b, h
-	ld a, [wcc99]
+	ld a, [wPlayerHPPal]
 	call Function9bcb
 	call Function9adb
 	ld hl, Palettes_9c09
@@ -685,7 +685,7 @@ Function98be: ; 98be (2:58be)
 	ld a, $10
 	call Function9ac7
 	call Function9ad2
-	ld a, [wcc99]
+	ld a, [wPlayerHPPal]
 	ld l, a
 	ld h, $0
 	add hl, hl

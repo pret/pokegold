@@ -1999,7 +1999,7 @@ wcc95:: ds 1 ; cc95
 wcc96:: ds 1 ; cc96
 wcc97:: ds 1 ; cc97
 wColorLayoutPredefID:: ds 1 ; cc98
-wcc99:: ds 1 ; cc99
+wPlayerHPPal:: db ; cc99
 wcc9a:: ds 1 ; cc9a
 wcc9b:: ds 1 ; cc9b
 wcc9c:: ds 1 ; cc9c
@@ -2106,8 +2106,12 @@ wJumpTableIndex::
 wce64:: ds 1 ; ce64
 wce65::
 wIntroSceneTimer::
+wCurPocket::
 	db ; ce65
-wce66:: ds 1 ; ce66
+
+wPackUsedItem::
+wce66:: 
+	db ; ce66
 
 wRequested2bpp:: ds 1 ; ce67
 wRequested2bppSource:: dw ; ce68
@@ -2181,7 +2185,7 @@ wMenuJoypad:: ds 1 ; ceaa
 wMenuSelection:: ds 1 ; ceab
 wceac:: ds 1 ; ceac
 wWhichIndexSet:: ds 1 ; cead
-wceae:: ds 1 ; ceae
+wScrollingMenuCursorPosition:: db ; ceae
 wceaf:: ds 1 ; ceaf
 wceb0:: ds 1 ; ceb0
 wceb1:: ds 1 ; ceb1
@@ -2194,8 +2198,7 @@ wceb7:: ds 1 ; ceb7
 wWindowDataEnd::
 
 wMenuHeader::
-wMenuFlags::
-wceb8:: ds 1 ; ceb8
+wMenuFlags:: ds 1 ; ceb8
 wMenuBorderTopCoord:: ds 1 ; ceb9
 wMenuBorderLeftCoord:: ds 1 ; ceba
 wMenuBorderBottomCoord:: ds 1 ; cebb
@@ -2230,15 +2233,25 @@ wced6:: ds 1 ; ced6
 wced7:: ds 1 ; ced7
 wMenuDataEnd::
 
-wMenuData3::
-w2DMenuCursorInitY:: ds 1 ; ced8
-wced9:: ds 1 ; ced9
-wceda:: ds 1 ; ceda
-wcedb:: ds 1 ; cedb
-w2DMenuFlags1:: ds 1 ; cedc
-wcedd:: ds 1 ; cedd
-wcede:: ds 1 ; cede
-wMenuJoypadFilter:: ds 1 ; cedf
+w2DMenuData::
+w2DMenuCursorInitY:: db ; ced8
+w2DMenuCursorInitX:: db ; ced9
+w2DMenuNumRows:: db ; ceda
+w2DMenuNumCols:: db ; cedb
+w2DMenuFlags1:: ; cedc
+; bit 7: Disable checking of wMenuJoypadFilter
+; bit 6: Enable sprite animations
+; bit 5: Wrap around vertically
+; bit 4: Wrap around horizontally
+; bit 3: Set bit 7 in w2DMenuFlags2 and exit the loop if bit 5 is disabled and we tried to go too far down
+; bit 2: Set bit 7 in w2DMenuFlags2 and exit the loop if bit 5 is disabled and we tried to go too far up
+; bit 1: Set bit 7 in w2DMenuFlags2 and exit the loop if bit 4 is disabled and we tried to go too far left
+; bit 0: Set bit 7 in w2DMenuFlags2 and exit the loop if bit 4 is disabled and we tried to go too far right
+	db
+w2DMenuFlags2:: db ; cedd
+w2DMenuCursorOffsets:: db ; cede
+wMenuJoypadFilter:: db ; cedf
+w2DMenuDataEnd::
 wMenuCursorY:: ds 1 ; cee0
 wcee1:: ds 1 ; cee1
 wcee2:: ds 1 ; cee2
@@ -2256,27 +2269,41 @@ wVBlankOccurred:: ds 1 ; ceea
 wceeb:: ds 1 ; ceeb
 wceec:: ds 1 ; ceec
 
-wMovementBufferCount:: ; ceed
+UNION ; ceed
+; mail temp storage
+wTempMail:: mailmsg wTempMail
+
+NEXTU ; ceed
+; bug-catching contest
+wBugContestResults::
+	bugcontestwinner wBugContestFirstPlace
+	bugcontestwinner wBugContestSecondPlace
+	bugcontestwinner wBugContestThirdPlace
+wBugContestWinnersEnd::
+	bugcontestwinner wBugContestTemp
+	ds 4
+wBugContestWinnerName:: ds NAME_LENGTH
+
+NEXTU ; ceed
+; movement buffer data
+wMovementBufferCount:: db
+wMovementBufferObject:: db
+wUnusedMovementBufferBank:: db
+wUnusedMovementBufferPointer:: dw
+wMovementBuffer:: ds 55
+
+NEXTU ; ceed
+; unidentified
 wceed:: ds 1 ; ceed
-
-wMovementBufferObject::
 wceee:: ds 1 ; ceee
-
-wTemporaryBuffer::
-wBugContestFirstPlaceScore::
 wceef:: ds 1 ; ceef
 wcef0:: ds 1 ; cef0
 wcef1:: ds 1 ; cef1
-
-wMovementBuffer::
 wcef2:: ds 1 ; cef2
-
-wBugContestSecondPlaceScore::
 wcef3:: ds 1 ; cef3
 wcef4:: ds 1 ; cef4
 wcef5:: ds 1 ; cef5
 wcef6:: ds 1 ; cef6
-wBugContestThirdPlaceScore::
 wcef7:: ds 1 ; cef7
 wcef8:: ds 1 ; cef8
 wcef9:: ds 1 ; cef9
@@ -2287,7 +2314,6 @@ wcefd:: ds 1 ; cefd
 wcefe:: ds 1 ; cefe
 wceff:: ds 1 ; ceff
 wcf00:: ds 1 ; cf00
-wBugContestWinnerName::
 wcf01:: ds 1 ; cf01
 wcf02:: ds 1 ; cf02
 wcf03:: ds 1 ; cf03
@@ -2328,33 +2354,97 @@ wcf25:: ds 1 ; cf25
 wcf26:: ds 1 ; cf26
 wcf27:: ds 1 ; cf27
 wcf28:: ds 1 ; cf28
-wSeenTrainerBank::
-wcf29:: ds 1 ; cf29
-wSeenTrainerDistance::
-wcf2a:: ds 1 ; cf2a
-wSeenTrainerDirection::
-wcf2b:: ds 1 ; cf2b
+
+UNION ; cf29
+; trainer data
+wSeenTrainerBank:: db
+wSeenTrainerDistance:: db
+wSeenTrainerDirection:: db
 wTempTrainer::
-wcf2c:: ds 1 ; cf2c
-wcf2d:: ds 1 ; cf2d
-wcf2e:: ds 1 ; cf2e
-wcf2f:: ds 1 ; cf2f
-wcf30:: ds 1 ; cf30
-wcf31:: ds 1 ; cf31
-wWinTextPointer:: dw ; cf32
-wLossTextPointer:: dw ; cf34
-wcf36:: ds 1 ; cf36
-wcf37:: ds 1 ; cf37
-wRunningTrainerBattleScript::
-wcf38:: ds 1 ; cf38
+wTempTrainerEventFlag:: dw
+wTempTrainerClass:: db
+wTempTrainerID:: db
+wSeenTextPointer:: dw
+wWinTextPointer:: dw
+wLossTextPointer:: dw
+wScriptAfterPointer:: dw
+wRunningTrainerBattleScript:: db
 wTempTrainerEnd::
-wcf39:: ds 1 ; cf39
-wcf3a:: ds 1 ; cf3a
-wcf3b:: ds 1 ; cf3b
-wcf3c:: ds 1 ; cf3c
-wcf3d:: ds 1 ; cf3d
-wcf3e:: ds 1 ; cf3e
-wcf3f:: ds 1 ; cf3f
+
+NEXTU ; cf29
+; menu items list
+wMenuItemsList:: ds 16
+wMenuItemsListEnd::
+
+NEXTU ; cf29
+; item ball data
+wItemBallData::
+wItemBallItemID:: db
+wItemBallQuantity:: db
+wItemBallDataEnd::
+
+NEXTU ; cf29
+; hidden item data
+wHiddenItemData::
+wHiddenItemEvent:: dw
+wHiddenItemID:: db
+wHiddenItemDataEnd::
+
+NEXTU ; cf29
+; elevator data
+wElevatorData::
+wElevatorPointerBank:: db
+wElevatorPointer:: dw
+wElevatorOriginFloor:: db
+wElevatorDataEnd::
+
+NEXTU ; cf29
+; coord event data
+wCurCoordEvent::
+wCurCoordEventSceneID:: db
+wCurCoordEventMapY:: db
+wCurCoordEventMapX:: db
+	ds 1
+wCurCoordEventScriptAddr:: dw
+
+NEXTU ; cf29
+; BG event data
+wCurBGEvent::
+wCurBGEventYCoord:: db
+wCurBGEventXCoord:: db
+wCurBGEventType:: db
+wCurBGEventScriptAddr:: dw
+
+NEXTU ; cf29
+; player movement data
+wCurInput::
+wFacingTileID:: db
+wWalkingIntoNPC:: db
+wWalkingIntoLand:: db
+wWalkingIntoEdgeWarp:: db
+wMovementAnimation:: db
+wWalkingDirection:: db
+wFacingDirection:: db
+wWalkingX:: db
+wWalkingY:: db
+wWalkingTile:: db
+	ds 6
+wPlayerTurningDirection:: db
+
+NEXTU ; cf29
+; std script buffer
+	ds 1
+wJumpStdScriptBuffer:: ds 3
+ENDU
+
+wcf3a:: ds 1
+wcf3b:: ds 1
+wcf3c:: ds 1
+wcf3d:: ds 1
+wcf3e:: ds 1
+wcf3f:: ds 1
+ENDU 
+
 wcf40:: ds 1 ; cf40
 wcf41:: ds 1 ; cf41
 wcf42:: ds 1 ; cf42
@@ -2407,7 +2497,8 @@ wStringBuffer4:: ds 19 ; cfa4
 UNION
 wStringBuffer5:: ds 19 ; cfb7
 NEXTU
-	ds 15
+	ds 13
+wBattleMenuCursorBuffer:: dw ; cfc4
 wCurBattleMon:: ds 1 ; cfc6
 wcfc7:: ds 1 ; cfc7
 wcfc8:: ds 1 ; cfc8
@@ -2423,20 +2514,25 @@ wcfcf:: ds 1 ; cfcf
 wcfd0:: ds 1 ; cfd0
 wcfd1:: ds 1 ; cfd1
 wcfd2:: ds 1 ; cfd2
-wcfd3:: ds 1 ; cfd3
-wcfd4:: ds 1 ; cfd4
+
+wSwitchMon::
+wSwitchItem::
+wMoveSwapBuffer::
+wcfd3:: 
+	db ; cfd3
+
+wMenuScrollPosition:: ds 1 ; cfd4
 wcfd5:: ds 1 ; cfd5
 wcfd6:: ds 1 ; cfd6
 wcfd7:: ds 1 ; cfd7
-wQueuedScriptBank:: ds 1 ; cfd8
-wQueuedScriptAddr:: ds 1 ; cfd9
-wcfda:: ds 1 ; cfda
+wQueuedScriptBank:: db ; cfd8
+wQueuedScriptAddr:: dw ; cfd9
 wPredefID:: ds 1 ; cfdb
 wPredefTemp:: dw ; cfdc
 wPredefAddress:: dw ; cfde
 wFarCallBCBuffer:: dw ; cfe0
 wcfe2:: ds 1 ; cfe2
-wcfe3:: ds 1 ; cfe3
+wNumMoves:: ds 1 ; cfe3
 
 wFieldMoveSucceeded::
 wItemEffectSucceeded::
@@ -2449,8 +2545,8 @@ wcfe8:: ds 1 ; cfe8
 wBattleResult:: ds 1 ; cfe9
 wcfea:: ds 1 ; cfea
 wUsingItemWithSelect:: ds 1 ; cfeb
-wcfec:: ds 1 ; cfec
-wcfed:: ds 1 ; cfed
+wCurElevator:: db ; cfec
+wCurElevatorFloors:: ds 1 ; cfed
 wcfee:: ds 1 ; cfee
 wcfef:: ds 1 ; cfef
 wcff0:: ds 1 ; cff0
@@ -2473,8 +2569,8 @@ wcfff:: ds 1 ; cfff
 SECTION "WRAM1", WRAMX, BANK[$1]
 wd000:: ds 1 ; d000
 wd001:: ds 1 ; d001
-wd002:: ds 1 ; d002
-wd003:: ds 1 ; d003
+wCurItem:: db ; d002
+wCurItemQuantity:: db ; d003
 
 wCurPartySpecies:: ; d004
 	ds 1
@@ -2751,20 +2847,32 @@ wd145:: ds 1 ; d145
 wd146:: ds 1 ; d146
 wd147:: ds 1 ; d147
 wd148:: ds 1 ; d148
-wd149:: ds 1 ; d149
-wd14a:: ds 1 ; d14a
-wd14b:: ds 1 ; d14b
-wd14c:: ds 1 ; d14c
-wd14d:: ds 1 ; d14d
+wListMoves_MoveIndicesBuffer:: ds NUM_MOVES
+wPutativeTMHMMove:: db ; d14d
 wd14e:: ds 1 ; d14e
 wWildMon:: ds 1 ; d14f
 wd150:: ds 1 ; d150
-wTempNumBuffer::
+
+; d265 has many different short-term uses
 wNamedObjectIndexBuffer::
 wDeciramBuffer::
-wBreedingCompatibility::
+wTempByteValue::
 wNumSetBits::
-wd151:: ds 1 ; d151
+wTypeMatchup::
+wCurType::
+wTempSpecies::
+wTempIconSpecies::
+wTempTMHM::
+wTempPP::
+wNextBoxOrPartyIndex::
+wChosenCableClubRoom::
+wBreedingCompatibility::
+wMoveGrammar::
+wApplyStatLevelMultipliersToEnemy::
+wUsePPUp::
+wd151::
+	db ; d151
+
 wd152:: ds 1 ; d152
 wd153:: ds 1 ; d153
 wd154:: ds 1 ; d154
