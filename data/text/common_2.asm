@@ -981,19 +981,19 @@ UnknownText_0x1c1a65::
 	text "Darn…"
 	done
 
-UnknownText_0x1c1a6c::
+_StartMenuContestEndText::
 	text "Would you like to"
 	line "end the Contest?"
 	done
 
-UnknownText_0x1c1a90::
+_ItemsTossOutHowManyText::
 	text "Toss out how many"
 	line "@"
 	text_ram wStringBuffer2
 	text "(S)?"
 	done
 
-UnknownText_0x1c1aad::
+_ItemsThrowAwayText::
 	text "Throw away @"
 	text_decimal wItemQuantityChangeBuffer, 1, 2
 	text_start
@@ -1002,25 +1002,25 @@ UnknownText_0x1c1aad::
 	text "(S)?"
 	done
 
-UnknownText_0x1c1aca::
+_ItemsDiscardedText::
 	text "Discarded"
 	line "@"
 	text_ram wStringBuffer1
 	text "(S)."
 	prompt
 
-UnknownText_0x1c1adf::
+_ItemsTooImportantText::
 	text "That's too impor-"
 	line "tant to toss out!"
 	prompt
 
-UnknownText_0x1c1b03::
+_ItemsOakWarningText::
 	text "OAK: <PLAYER>!"
 	line "This isn't the"
 	cont "time to use that!"
 	done
 
-UnknownText_0x1c1b2c::
+_PokemonSwapItemText::
 	text "Took @"
 	text_ram wMonOrItemNameBuffer
 	text "'s"
@@ -1034,7 +1034,7 @@ UnknownText_0x1c1b2c::
 	text "."
 	prompt
 
-UnknownText_0x1c1b57::
+_PokemonHoldItemText::
 	text "Made @"
 	text_ram wMonOrItemNameBuffer
 	text_start
@@ -1043,23 +1043,23 @@ UnknownText_0x1c1b57::
 	text "."
 	prompt
 
-UnknownText_0x1c1b6f::
+_PokemonRemoveMailText::
 	text "Please remove the"
 	line "MAIL first."
 	prompt
 
-UnknownText_0x1c1b8e::
+_PokemonNotHoldingText::
 	text_ram wMonOrItemNameBuffer
 	text " isn't"
 	line "holding anything."
 	prompt
 
-UnknownText_0x1c1baa::
+_ItemStorageFullText::
 	text "Item storage space"
 	line "full."
 	prompt
 
-UnknownText_0x1c1bc4::
+_PokemonTookItemText::
 	text "Took @"
 	text_ram wStringBuffer1
 	text_start
@@ -1068,7 +1068,7 @@ UnknownText_0x1c1bc4::
 	text "."
 	prompt
 
-UnknownText_0x1c1bdc::
+_PokemonAskSwapItemText::
 	text_ram wMonOrItemNameBuffer
 	text " is"
 	line "already holding"
@@ -1079,48 +1079,48 @@ UnknownText_0x1c1bdc::
 	line "Switch items?"
 	done
 
-UnknownText_0x1c1c09::
+_ItemCantHeldText::
 	text "This item can't be"
 	line "held."
 	prompt
 
-UnknownText_0x1c1c22::
+_MailLoseMessageText::
 	text "The MAIL will lose"
 	line "its message. OK?"
 	done
 
-UnknownText_0x1c1c47::
+_MailDetachedText::
 	text "MAIL detached from"
 	line "@"
 	text_ram wStringBuffer1
 	text "."
 	prompt
 
-UnknownText_0x1c1c62::
+_MailNoSpaceText::
 	text "There's no space"
 	line "for removing MAIL."
 	prompt
 
-UnknownText_0x1c1c86::
+_MailAskSendToPCText::
 	text "Send the removed"
 	line "MAIL to your PC?"
 	done
 
-UnknownText_0x1c1ca9::
+_MailboxFullText::
 	text "Your PC's MAILBOX"
 	line "is full."
 	prompt
 
-UnknownText_0x1c1cc4::
+_MailSentToPCText::
 	text "The MAIL was sent"
 	line "to your PC."
 	prompt
 
-UnknownText_0x1c1ce3::
+_PokemonNotEnoughHPText::
 	text "Not enough HP!"
 	prompt
 
-UnknownText_0x1c1cf3::
+_MayRegisterItemText::
 	text "An item in your"
 	line "PACK may be"
 
@@ -1254,7 +1254,7 @@ UnknownText_0x1c41e6::
 
 UnknownText_0x1c4212::
 	text "Trade @"
-	text_ram wTemporaryBuffer
+	text_ram wceef
 	text_start
 	line "for @"
 	text_ram wStringBuffer1

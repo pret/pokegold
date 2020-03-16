@@ -223,7 +223,7 @@ Text_BreedingIsNotPossible::
 UnknownText_0x1bd0d8::
 	text "The compatibility"
 	line "is @"
-	text_decimal wTempNumBuffer, 1, 3
+	text_decimal wBreedingCompatibility, 1, 3
 	text "."
 	cont "Should they breed?"
 	done
@@ -961,7 +961,7 @@ _RocketRadioText10::
 	text "Is he listening?"
 	done
 
-UnknownText_0x1bd2bc::
+_AskFloorElevatorText::
 	text "Which floor?"
 	done
 

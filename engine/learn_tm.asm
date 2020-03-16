@@ -4,7 +4,7 @@ CanLearnTMHMMove: ; 11a25 (4:5a25)
 	call GetBaseData
 	ld hl, wd138
 	push hl
-	ld a, [wd14d]
+	ld a, [wPutativeTMHMMove]
 	ld b, a
 	ld c, $0
 	ld hl, TMMovesList

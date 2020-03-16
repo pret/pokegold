@@ -6,7 +6,7 @@ CheckTossableItem::
 	push hl
 	push de
 	push bc
-	farcall CheckTossableItem_
+	farcall _CheckTossableItem
 	pop bc
 	pop de
 	pop hl

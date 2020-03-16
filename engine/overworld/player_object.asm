@@ -478,7 +478,7 @@ TrainerWalkToPlayer:
 	call InitMovementBuffer
 	ld a, movement_step_sleep
 	call AppendToMovementBuffer
-	ld a, [wcf2a]
+	ld a, [wWalkingIntoNPC]
 	dec a
 	jr z, .asm_892b
 	ld a, [hLastTalked]

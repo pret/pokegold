@@ -106,8 +106,8 @@ RestoreTileBackup::
 	ret
 
 PopWindow::
-	ld b, wMenuDataHeaderEnd - wMenuDataHeader
-	ld de, wMenuDataHeader
+	ld b, wMenuHeaderEnd - wMenuHeader
+	ld de, wMenuHeader
 .asm_1adf
 	ld a, [hld]
 	ld [de], a
@@ -134,12 +134,12 @@ CopyMenuData2:: ; 1af9 (0:1af9)
 	push de
 	push bc
 	push af
-	ld hl, wMenuData2Pointer
+	ld hl, wMenuDataPointer
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
-	ld de, wMenuData2
-	ld bc, wMenuData2End - wMenuData2
+	ld de, wMenuData
+	ld bc, wMenuDataEnd - wMenuData
 	call CopyBytes
 	pop af
 	pop bc
@@ -160,7 +160,7 @@ GetWindowStackTop::
 
 PlaceVerticalMenuItems:: ; 1b1c (0:1b1c)
 	call CopyMenuData2
-	ld hl, wMenuData2Pointer
+	ld hl, wMenuDataPointer
 	ld e, [hl]
 	inc hl
 	ld d, [hl]
@@ -179,7 +179,7 @@ PlaceVerticalMenuItems:: ; 1b1c (0:1b1c)
 	pop bc
 	dec b
 	jr nz, .asm_1b2f
-	ld a, [wMenuData2Flags]
+	ld a, [wMenuDataFlags]
 	bit 4, a
 	ret z
 	call MenuBoxCoord2Tile
@@ -204,12 +204,12 @@ GetMenuTextStartCoord:: ; 1b59 (0:1b59)
 	ld a, [wMenuBorderLeftCoord]
 	ld c, a
 	inc c
-	ld a, [wMenuData2Flags]
+	ld a, [wMenuDataFlags]
 	bit 6, a
 	jr nz, .asm_1b6b
 	inc b
 .asm_1b6b
-	ld a, [wMenuData2Flags]
+	ld a, [wMenuDataFlags]
 	bit 7, a
 	jr z, .asm_1b73
 	inc c

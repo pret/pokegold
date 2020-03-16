@@ -7,12 +7,12 @@ CheckFacingTileForStdScript::
 	jr nc, .notintable
 
 	ld a, jumpstd_command
-	ld [wcf2a], a
+	ld [wJumpStdScriptBuffer], a
 	inc hl
 	ld a, [hli]
-	ld [wcf2b], a
+	ld [wJumpStdScriptBuffer + 1], a
 	ld a, [hli]
-	ld [wTempTrainerHeader], a
+	ld [wJumpStdScriptBuffer + 2], a
 	ld a, BANK(Script_JumpStdFromRAM)
 	ld hl, Script_JumpStdFromRAM
 	call CallScript
@@ -26,4 +26,4 @@ CheckFacingTileForStdScript::
 INCLUDE "data/events/collision_stdscripts.asm"
 
 Script_JumpStdFromRAM:
-	jump wcf2a
+	jump wJumpStdScriptBuffer

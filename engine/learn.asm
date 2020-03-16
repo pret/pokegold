@@ -46,7 +46,7 @@ LearnMove:
 	pop de
 	pop hl
 .asm_6643
-	ld a, [wd14d]
+	ld a, [wPutativeTMHMMove]
 	ld [hl], a
 	ld bc, $15
 	add hl, bc
@@ -110,7 +110,7 @@ LearnMove:
 	ld bc, -4
 	add hl, bc
 	push hl
-	ld de, wd149
+	ld de, wListMoves_MoveIndicesBuffer
 	ld bc, $4
 	call CopyBytes
 	pop hl
@@ -127,24 +127,24 @@ LearnMove:
 	ld [wBuffer1], a
 	predef ListMoves
 	ld a, $4
-	ld [wMenuData2End], a
+	ld [w2DMenuCursorInitY], a
 	ld a, $6
-	ld [wced9], a
-	ld a, [wcfe3]
+	ld [w2DMenuCursorInitX], a
+	ld a, [wNumMoves]
 	inc a
-	ld [wceda], a
+	ld [w2DMenuNumRows], a
 	ld a, $1
-	ld [wcedb], a
+	ld [w2DMenuNumCols], a
 	ld [wMenuCursorY], a
 	ld [wcee1], a
 	ld a, $3
 	ld [wMenuJoypadFilter], a
 	ld a, $20
-	ld [wcedc], a
+	ld [w2DMenuFlags1], a
 	xor a
-	ld [wcedd], a
+	ld [w2DMenuFlags2], a
 	ld a, $20
-	ld [wcede], a
+	ld [w2DMenuCursorOffsets], a
 	call StaticMenuJoypad
 	push af
 	call ReloadTilesFromBuffer

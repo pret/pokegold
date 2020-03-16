@@ -66,7 +66,7 @@ Function8c97: ; 8c97 (2:4c97)
 	ld de, wcca9
 	ld bc, $10
 	call CopyBytes
-	ld a, [wcc99]
+	ld a, [wPlayerHPPal]
 	ld l, a
 	ld h, $0
 	add hl, hl
@@ -133,7 +133,7 @@ Function8d1f: ; 8d1f (2:4d1f)
 	ld [hl], $10
 	inc hl
 	inc hl
-	ld a, [wcc99]
+	ld a, [wPlayerHPPal]
 	add $2f
 	ld [hl], a
 	ld hl, wcca9
@@ -374,7 +374,7 @@ Function8eb7: ; 8eb7 (2:4eb7)
 	call AddNTimes
 	ld c, l
 	ld b, h
-	ld a, [wcc99]
+	ld a, [wPlayerHPPal]
 	call Function9bcb
 	ld a, [hli]
 	ld [wccac], a

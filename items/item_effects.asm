@@ -1,11 +1,11 @@
 DoItemEffect_:: ; e7a6 (3:67a6)
-	ld a, [wd002]
+	ld a, [wCurItem]
 	ld [wd151], a
 	call GetItemName
-	call Function317b
+	call CopyName1
 	ld a, $1
 	ld [wFieldMoveSucceeded], a
-	ld a, [wd002]
+	ld a, [wCurItem]
 	dec a
 	ld hl, .ItemEffects
 	rst JumpTable
@@ -219,7 +219,7 @@ UltraBall: ; e926
 .room_in_party_or_pc
 	xor a
 	ld [wWildMon], a
-	ld a, [wd002]
+	ld a, [wCurItem]
 	cp PARK_BALL
 	call nz, ReturnToBattle_UseBall
 	ld hl, wOptions
@@ -231,10 +231,10 @@ UltraBall: ; e926
 	ld a, [wBattleType]
 	cp BATTLETYPE_TUTORIAL
 	jp z, .catch_without_fail
-	ld a, [wd002]
+	ld a, [wCurItem]
 	cp MASTER_BALL
 	jp z, .catch_without_fail
-	ld a, [wd002]
+	ld a, [wCurItem]
 	ld c, a
 	ld hl, BallMultiplierFunctionTable ; $6c73
 .get_multiplier_loop
@@ -256,7 +256,7 @@ UltraBall: ; e926
 	jp hl
 
 .skip_or_return_from_ball_fn
-	ld a, [wd002]
+	ld a, [wCurItem]
 	cp LEVEL_BALL
 	ld a, b
 	jp z, .skip_hp_calc
@@ -379,7 +379,7 @@ UltraBall: ; e926
 	ld [wWildMon], a
 	ld c, 20
 	call DelayFrames
-	ld a, [wd002]
+	ld a, [wCurItem]
 	cp POKE_BALL + 1
 	jr c, .asm_ea34
 	ld a, $5
@@ -516,7 +516,7 @@ UltraBall: ; e926
 	ld [wMonType], a
 	call ClearSprites
 	predef TryAddMonToParty
-	ld a, [wd002]
+	ld a, [wCurItem]
 	cp FRIEND_BALL
 	jr nz, .skip_party_mon_friend_ball
 	ld a, [wPartyCount]
@@ -565,7 +565,7 @@ UltraBall: ; e926
 	ld hl, wBattleResult
 	set 7, [hl]
 .not_full_yet
-	ld a, [wd002]
+	ld a, [wCurItem]
 	cp FRIEND_BALL
 	jr nz, .skip_box_mon_friend_ball
 	ld a, FRIEND_BALL_HAPPINESS
@@ -631,7 +631,7 @@ UltraBall: ; e926
 	and a
 	jr z, .toss
 	call ClearBGPalettes
-	call ClearTileMap
+	call ClearTilemap
 .toss
 	ld hl, wNumItems
 	inc a
@@ -1108,7 +1108,7 @@ StatStrings:
 .special db "SPECIAL@"
 
 Functionef2d: ; ef2d (3:6f2d)
-	ld a, [wd002]
+	ld a, [wCurItem]
 	ld hl, StatOffsets
 .asm_ef33
 	cp [hl]
@@ -1326,7 +1326,7 @@ Functionf086: ; f086 (3:7086)
 
 Functionf0ae: ; f0ae (3:70ae)
 	push hl
-	ld a, [wd002]
+	ld a, [wCurItem]
 	ld hl, .healingactions ; $70c7
 	ld bc, $3
 .asm_f0b8
@@ -1418,7 +1418,7 @@ Functionf12c: ; f12c (3:712c)
 .asm_f15a
 	xor a
 	ld [wLowHealthAlarm], a
-	ld a, [wd002]
+	ld a, [wCurItem]
 	cp REVIVE
 	jr z, .asm_f16a
 	call Functionf319
@@ -1819,7 +1819,7 @@ GetOneFifthMaxHP: ; f3ce (3:73ce)
 
 Functionf3eb: ; f3eb (3:73eb)
 	push hl
-	ld a, [wd002]
+	ld a, [wCurItem]
 	ld hl, HealingItemParameters
 	ld d, a
 .asm_f3f3
@@ -1859,6 +1859,7 @@ HealingItemParameters:
 	dbw BERRY_JUICE,   20
 	dbw -1,             0
 
+Softboiled_MilkDrinkFunction:
 	ld a, [wPartyMenuCursor]
 	dec a
 	ld b, a
@@ -1917,7 +1918,7 @@ Functionf46f: ; f46f (3:746f)
 .asm_f496
 	push bc
 	ld hl, Text_MilkDrinkCantBeUsed
-	call MenuTextBoxBackup
+	call MenuTextboxBackup
 	pop bc
 	jr Functionf46f
 
@@ -1998,7 +1999,7 @@ XDefend: ; f515
 XSpecial: ; f515
 XSpeed: ; f515
 	call Functionf7d0
-	ld a, [wd002]
+	ld a, [wCurItem]
 	ld hl, .x_item_table
 .asm_f51e
 	cp [hl]
@@ -2113,7 +2114,7 @@ Text_PlayedThePokeFlute:
 
 CoinCase: ; f5e1 (3:75e1)
 	ld hl, Text_CoinCase
-	jp MenuTextBoxWaitButton
+	jp MenuTextboxWaitButton
 
 Text_CoinCase:
 	text_far Text_CoinCase_
@@ -2145,7 +2146,7 @@ MaxElixer: ; f606
 MaxEther: ; f606
 Mysteryberry: ; f606
 PPUp: ; f606 (3:7606)
-	ld a, [wd002]
+	ld a, [wCurItem]
 	ld [wMovementBufferCount], a
 .asm_f60c
 	ld b, $1
@@ -2184,7 +2185,7 @@ PPUp: ; f606 (3:7606)
 	ld a, [hl]
 	ld [wd151], a
 	call GetMoveName
-	call Function317b
+	call CopyName1
 	pop hl
 	ld a, [wceed]
 	cp PP_UP

@@ -1,6 +1,9 @@
 INCLUDE "contents.asm"
 INCLUDE "constants.asm"
 
+SECTION "NULL", ROM0
+NULL::
+
 ; rst vectors
 INCLUDE "home/rst.asm"
 INCLUDE "home/interrupts.asm"
@@ -103,9 +106,9 @@ IsInJohto::
 	jr z, .asm_2ff9
 	cp $0
 	jr nz, .asm_2ff5
-	ld a, [wd9f6]
+	ld a, [wBackupMapGroup]
 	ld b, a
-	ld a, [wd9f7]
+	ld a, [wBackupMapNumber]
 	ld c, a
 	call GetWorldMapLocation
 .asm_2ff5
@@ -236,7 +239,7 @@ ReloadTilesFromBuffer_::
 	ld bc, SCREEN_HEIGHT * SCREEN_WIDTH
 	jp CopyBytes
 
-Function317b:: ; 317b (0:317b)
+CopyName1:: ; 317b (0:317b)
 	ld hl, wStringBuffer2
 CopyName2::
 	ld a, [de]
@@ -669,12 +672,12 @@ Function3414::
 
 QueueScript::
 	ld a, [hROMBank]
-Function3425::
-	ld [wcfd8], a
+FarQueueScript::
+	ld [wQueuedScriptBank], a
 	ld a, l
-	ld [wcfd9], a
+	ld [wQueuedScriptAddr], a
 	ld a, h
-	ld [wcfda], a
+	ld [wQueuedScriptAddr + 1], a
 	ret
 
 Function3431::
@@ -1408,31 +1411,31 @@ CheckTrainerBattle:: ; 3851 (0:3851)
 	pop af
 	ld [hLastTalked], a
 	ld a, b
-	ld [wcf2a], a
+	ld [wSeenTrainerDistance], a
 	ld a, c
-	ld [wcf2b], a
+	ld [wSeenTrainerDirection], a
 	jr continue_trainer_function
 
 TalkToTrainer::
 	ld a, $1
-	ld [wcf2a], a
+	ld [wSeenTrainerDistance], a
 	ld a, $ff
-	ld [wcf2b], a
+	ld [wSeenTrainerDirection], a
 continue_trainer_function
 	call GetMapScriptsBank
-	ld [wcf29], a
+	ld [wSeenTrainerBank], a
 	ld a, [hLastTalked]
 	call GetMapObject
 	ld hl, $a
 	add hl, bc
-	ld a, [wcf29]
+	ld a, [wSeenTrainerBank]
 	call GetFarHalfword
-	ld de, wcf2c
-	ld bc, $d
-	ld a, [wcf29]
+	ld de, wTempTrainer
+	ld bc, wTempTrainerEnd - wTempTrainer
+	ld a, [wSeenTrainerBank]
 	call FarCopyBytes
 	xor a
-	ld [wcf38], a
+	ld [wRunningTrainerBattleScript], a
 	scf
 	ret
 
@@ -1652,7 +1655,7 @@ Print8BitNumRightAlign::
 	jp PrintNum
 
 Function3a70::
-	ld hl, wd149
+	ld hl, wListMoves_MoveIndicesBuffer
 	ld c, a
 	ld b, $0
 	add hl, bc

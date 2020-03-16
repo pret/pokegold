@@ -32,8 +32,8 @@ Functiond9e::
 	farcall Functionf8000
 	ret
 
-Functionda5::
-	farcall Functionf8032
+LoadFontsBattleExtra::
+	farcall _LoadFontsBattleExtra
 	ret
 
 LoadFontsExtra::

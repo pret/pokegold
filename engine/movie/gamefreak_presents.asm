@@ -3,7 +3,7 @@ Copyright_GFPresents: ; e49a8 (39:49a8)
 ; Return carry if user cancels animation by pressing a button.
 
 	call ClearBGPalettes
-	call ClearTileMap
+	call ClearTilemap
 
 	ld a, HIGH(vBGMap0)
 	ld [hBGMapAddress + 1], a
@@ -34,7 +34,7 @@ Copyright_GFPresents: ; e49a8 (39:49a8)
 	ld c, 100
 	call DelayFrames
 
-	call ClearTileMap
+	call ClearTilemap
 	call GFPresents_Init
 
 .loop
@@ -124,7 +124,7 @@ GFPresents_PlayFrame: ; e4a37 (39:4a37)
 
 .finish
 	callfar ClearAnimatedObjectBuffer
-	call ClearTileMap
+	call ClearTilemap
 	call ClearSprites
 
 	ld c, 16

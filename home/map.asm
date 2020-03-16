@@ -589,7 +589,7 @@ Function230f:: ; 230f (0:230f)
 	ld a, [hli]
 	cp $ff
 	jr nz, .asm_232b
-	ld hl, wd9f5
+	ld hl, wBackupWarpNumber
 	ld a, [hli]
 .asm_232b
 	pop bc
@@ -976,11 +976,11 @@ RestoreFacingAfterWarp::
 
 BackUpWarp:: ; 2596 (0:2596)
 	ld a, [wPrevWarpNumber]
-	ld [wd9f5], a
+	ld [wBackupWarpNumber], a
 	ld a, [wPrevMapGroup]
-	ld [wd9f6], a
+	ld [wBackupMapGroup], a
 	ld a, [wPrevMapNumber]
-	ld [wd9f7], a
+	ld [wBackupMapNumber], a
 	ret
 
 GetCoordOfUpperLeftCorner:: ; 25a9 (0:25a9)
@@ -2024,8 +2024,8 @@ CheckIfFacingTileCoordIsSign:: ; 2b8f (0:2b8f)
 
 .asm_2bad
 	pop hl
-	ld de, wcf29
-	ld bc, $5
+	ld de, wCurBGEvent
+	ld bc, BG_EVENT_SIZE
 	call CopyBytes
 	scf
 	ret
@@ -2088,8 +2088,8 @@ CheckCurrentMapXYTriggers::
 
 .asm_2c02
 	pop hl
-	ld de, wcf29
-	ld bc, $8
+	ld de, wCurCoordEvent
+	ld bc, COORD_EVENT_SIZE
 	call CopyBytes
 	scf
 	ret
@@ -2097,7 +2097,7 @@ CheckCurrentMapXYTriggers::
 FadeToMenu::
 	xor a
 	ld [hBGMapMode], a
-	call LoadStandardMenuDataHeader
+	call LoadStandardMenuHeader
 	farcall FadeOutPalettes
 	call ClearSprites
 	call DisableSpriteUpdates

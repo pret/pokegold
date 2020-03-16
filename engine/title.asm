@@ -12,7 +12,7 @@ StartTitleScreen:
 	call ClearBGPalettes
 	ld hl, rLCDC
 	res 2, [hl]
-	call ClearTileMap
+	call ClearTilemap
 	xor a
 	ld [hLCDCPointer], a
 	ld b, $8
@@ -46,7 +46,7 @@ InitTitleScreen: ; 6291 (1:6291)
 	ld [wTimeOfDayPal], a
 	ld de, MUSIC_NONE
 	call PlayMusic
-	call ClearTileMap
+	call ClearTilemap
 	call DisableLCD
 	call ClearSprites
 	xor a
@@ -423,7 +423,7 @@ IF DEF(GOLD)
 ENDC
 
 Copyright:
-	call ClearTileMap
+	call ClearTilemap
 	call LoadFontsExtra
 	ld de, CopyrightGFX
 	ld hl, vTiles2 tile $60

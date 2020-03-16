@@ -1,11 +1,11 @@
-LoadMenuDataHeader:: ; 1bac (0:1bac)
-	call CopyMenuDataHeader
+LoadMenuHeader:: ; 1bac (0:1bac)
+	call CopyMenuHeader
 	call PushWindow
 	ret
 
-CopyMenuDataHeader:: ; 1bb3 (0:1bb3)
-	ld de, wMenuDataHeader
-	ld bc, wMenuDataHeaderEnd - wMenuDataHeader
+CopyMenuHeader:: ; 1bb3 (0:1bb3)
+	ld de, wMenuHeader
+	ld bc, wMenuHeaderEnd - wMenuHeader
 	call CopyBytes
 	ret
 
@@ -13,9 +13,9 @@ StoreTo_wMenuCursorBuffer
 	ld [wMenuCursorBuffer], a
 	ret
 
-MenuTextBox:: ; 1bc1 (0:1bc1)
+MenuTextbox:: ; 1bc1 (0:1bc1)
 	push hl
-	call LoadMenuTextBox
+	call LoadMenuTextbox
 	pop hl
 	jp PrintText
 
@@ -23,9 +23,9 @@ MenuTextBox:: ; 1bc1 (0:1bc1)
 ret_1bc9
 	ret
 
-LoadMenuTextBox:: ; 1bca (0:1bca)
+LoadMenuTextbox:: ; 1bca (0:1bca)
 	ld hl, .MenuDataHeader
-	call LoadMenuDataHeader
+	call LoadMenuHeader
 	ret
 .MenuDataHeader:
 	db $40 ; tile backup
@@ -34,14 +34,14 @@ LoadMenuTextBox:: ; 1bca (0:1bca)
 	dw $8000
 	db 0 ; default option
 
-MenuTextBoxBackup::
-	call MenuTextBox
+MenuTextboxBackup::
+	call MenuTextbox
 	call CloseWindow
 	ret
 
-LoadStandardMenuDataHeader::
+LoadStandardMenuHeader::
 	ld hl, .MenuDataHeader
-	call LoadMenuDataHeader
+	call LoadMenuHeader
 	ret
 
 .MenuDataHeader: ; 1d75
@@ -63,7 +63,7 @@ VerticalMenu:: ; 1bf3 (0:1bf3)
 	call PlaceVerticalMenuItems
 	call ApplyTilemap
 	call CopyMenuData2
-	ld a, [wMenuData2Flags]
+	ld a, [wMenuDataFlags]
 	bit 7, a
 	jr z, .asm_1c19
 	call InitVerticalMenuCursor
@@ -79,7 +79,7 @@ VerticalMenu:: ; 1bf3 (0:1bf3)
 	ret
 
 GetMenu2::
-	call LoadMenuDataHeader
+	call LoadMenuHeader
 	call VerticalMenu
 	call CloseWindow
 	ld a, [wMenuCursorY]
@@ -89,7 +89,7 @@ CopyNameFromMenu::
 	push hl
 	push bc
 	push af
-	ld hl, wMenuData2Pointer
+	ld hl, wMenuDataPointer
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
@@ -99,7 +99,7 @@ CopyNameFromMenu::
 	call GetNthString
 	ld d, h
 	ld e, l
-	call Function317b
+	call CopyName1
 	pop bc
 	pop hl
 	ret
@@ -110,13 +110,13 @@ PlaceYesNoBox::
 	jr _YesNoBox
 
 PlaceGenericTwoOptionBox::
-	call LoadMenuDataHeader
+	call LoadMenuHeader
 	jr InterpretTwoOptionMenu
 
 _YesNoBox::
 	push bc
 	ld hl, YesNoMenuDataHeader
-	call CopyMenuDataHeader
+	call CopyMenuHeader
 	pop bc
 	ld a, b
 	ld [wMenuBorderLeftCoord], a
@@ -165,7 +165,7 @@ OffsetMenuDataHeader::
 
 OffsetMenuDataHeader_:: ; 1c9f (0:1c9f)
 	push de
-	call CopyMenuDataHeader
+	call CopyMenuHeader
 	pop de
 	ld a, [wMenuBorderLeftCoord]
 	ld h, a
@@ -200,7 +200,7 @@ SetUpMenu::
 	call DrawVariableLengthMenuBox
 	call MenuWriteText
 	call InitMenuCursorAndButtonPermissions
-	ld hl, wcedc
+	ld hl, w2DMenuFlags1
 	set 7, [hl]
 	ret
 
@@ -232,7 +232,7 @@ AutomaticGetMenuBottomCoord:: ; 1d10 (0:1d10)
 	ld a, [wMenuBorderRightCoord]
 	sub c
 	ld c, a
-	ld a, [wMenuData2Items]
+	ld a, [wMenuDataItems]
 	add a
 	inc a
 	ld b, a
@@ -242,7 +242,7 @@ AutomaticGetMenuBottomCoord:: ; 1d10 (0:1d10)
 	ret
 
 GetMenuIndexSet:: ; 1d27 (0:1d27)
-	ld hl, wMenuData2IndicesPointer
+	ld hl, wMenuDataIndicesPointer
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
@@ -261,7 +261,7 @@ GetMenuIndexSet:: ; 1d27 (0:1d27)
 	ld d, h
 	ld e, l
 	ld a, [hl]
-	ld [wMenuData2Items], a
+	ld [wMenuDataItems], a
 	ret
 
 RunMenuItemPrintingFunction:: ; 1d44 (0:1d44)
@@ -278,7 +278,7 @@ RunMenuItemPrintingFunction:: ; 1d44 (0:1d44)
 	push hl
 	ld d, h
 	ld e, l
-	ld hl, wMenuData2DisplayFunctionPointer
+	ld hl, wMenuDataDisplayFunctionPointer
 	call ._hl_
 	pop hl
 	ld de, $28
@@ -295,12 +295,12 @@ RunMenuItemPrintingFunction:: ; 1d44 (0:1d44)
 InitMenuCursorAndButtonPermissions:: ; 1d69 (0:1d69)
 	call InitVerticalMenuCursor
 	ld hl, wMenuJoypadFilter
-	ld a, [wMenuData2Flags]
+	ld a, [wMenuDataFlags]
 	bit 3, a
 	jr z, .asm_1d78
 	set 3, [hl]
 .asm_1d78
-	ld a, [wMenuData2Flags]
+	ld a, [wMenuDataFlags]
 	bit 2, a
 	jr z, .asm_1d83
 	set 5, [hl]
@@ -365,7 +365,7 @@ ContinueGettingMenuJoypad::
 
 PlaceMenuStrings::
 	push de
-	ld hl, wMenuData2PointerTableAddr
+	ld hl, wMenuDataPointerTableAddr
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
@@ -410,7 +410,7 @@ MenuJumptable::
 GetMenuDataPointerTableEntry:: ; 1e1b (0:1e1b)
 	ld e, a
 	ld d, $0
-	ld hl, wMenuData2PointerTableAddr
+	ld hl, wMenuDataPointerTableAddr
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
@@ -421,13 +421,13 @@ GetMenuDataPointerTableEntry:: ; 1e1b (0:1e1b)
 	ret
 
 ClearWindowData::
-	ld hl, wWindowData
+	ld hl, wWindowStackPointer
 	call .bytefill
-	ld hl, wMenuDataHeader
+	ld hl, wMenuHeader
 	call .bytefill
-	ld hl, wMenuData2
+	ld hl, wMenuDataFlags
 	call .bytefill
-	ld hl, wMenuData3
+	ld hl, w2DMenuCursorInitY
 	call .bytefill
 	xor a
 	call OpenSRAM
@@ -452,7 +452,7 @@ MenuClickSound:: ; 1e5f (0:1e5f)
 	push af
 	and $3
 	jr z, .asm_1e6e
-	ld hl, wMenuDataHeader
+	ld hl, wMenuHeader
 	bit 3, a
 	jr nz, .asm_1e6e
 	call PlayClickSFX
@@ -466,8 +466,8 @@ PlayClickSFX:: ; 1e70 (0:1e70)
 	pop de
 	ret
 
-MenuTextBoxWaitButton::
-	call MenuTextBox
+MenuTextboxWaitButton::
+	call MenuTextbox
 	call WaitButton
 	call ExitMenu
 	ret

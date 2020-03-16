@@ -18,7 +18,7 @@ FillBoxWithByte::
 	jr nz, .row
 	ret
 
-ClearTileMap::
+ClearTilemap::
 	ld hl, wTileMap
 	ld a, " "
 	ld bc, SCREEN_WIDTH * SCREEN_HEIGHT
@@ -33,7 +33,7 @@ FillScreenWithTextboxPal::
 	hlcoord 0, 0, wAttrMap
 	ld bc, SCREEN_WIDTH * SCREEN_HEIGHT
 	call ByteFill
-	jr ClearTileMap
+	jr ClearTilemap
 
 Textbox:: ; eef (0:0eef)
 	push bc
@@ -86,7 +86,7 @@ TextboxBorder_PlaceTiles:: ; f25 (0:0f25)
 	jr nz, .loop
 	ret
 
-TextboxPalette
+TextboxPalette::
 	ld de, wAttrMap - wTileMap
 	add hl, de
 	inc b

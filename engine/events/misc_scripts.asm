@@ -38,14 +38,14 @@ FindItemInBallScript::
 .TryReceiveItem:
 	xor a
 	ld [wScriptVar], a
-	ld a, [wcf29]
+	ld a, [wItemBallItemID]
 	ld [wDeciramBuffer], a
 	call GetItemName
 	ld hl, wStringBuffer3
 	call CopyName2
-	ld a, [wcf29]
-	ld [wd002], a
-	ld a, [wcf2a]
+	ld a, [wItemBallItemID]
+	ld [wCurItem], a
+	ld a, [wItemBallQuantity]
 	ld [wItemQuantityChangeBuffer], a
 	ld hl, wNumItems
 	call ReceiveItem
