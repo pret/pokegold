@@ -1,6 +1,6 @@
 GetMovementByte:
-	ld hl, wMovementDataPointerBank
-	call GetMovementByte_
+	ld hl, wMovementDataBank
+	call _GetMovementByte
 	ret
 
 Function4fbd:
@@ -9,7 +9,7 @@ Function4fbd:
 	ld e, [hl]
 	inc [hl]
 	ld d, $0
-	ld hl, wMovementPerson
+	ld hl, wMovementObject
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
@@ -36,7 +36,7 @@ Function4fdf: ; 4fdf (1:4fdf)
 	jp Function4fe9
 
 GetMovementPerson
-	ld a, [wMovementPerson]
+	ld a, [wMovementObject]
 	ret
 
 Function4fe9: ; 4fe9 (1:4fe9)

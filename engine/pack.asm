@@ -1308,7 +1308,7 @@ Function10cef: ; 10cef (4:4cef)
 
 Function10d70: ; 10d70 (4:4d70)
 	call ClearBGPalettes
-	call ClearTileMap
+	call ClearTilemap
 	call ClearSprites
 	call DisableLCD
 	ld hl, PackMenuGFX

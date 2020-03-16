@@ -673,7 +673,7 @@ Function55a1
 	jr z, .asm_55b8
 	call Function55bc
 .asm_55b8
-	call UpdateSprites_
+	call _UpdateSprites
 	ret
 
 Function55bc: ; 55bc (1:55bc)
@@ -1154,7 +1154,7 @@ Function5879: ; 5879 (1:5879)
 
 .data db 6,7,8,9
 
-UpdateSprites_:: ; 5896 (1:5896)
+_UpdateSprites:: ; 5896 (1:5896)
 	ld a, [wVramState]
 	bit 0, a
 	ret z

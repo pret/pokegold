@@ -8,7 +8,7 @@ INCLUDE "engine/link/place_waiting_text.asm"
 DummyPredef1:
 	ret
 
-LoadPushOAM:: ; 4032 (1:4032)
+WriteOAMDMACodeToHRAM:: ; 4032 (1:4032)
 	ld c, hTransferVirtualOAM - $ff00
 	ld b, PushOAMEnd - PushOAM
 	ld hl, PushOAM
@@ -64,7 +64,7 @@ Function656b: ; 656b (1:656b)
 	call OverworldTextModeSwitch
 	ld a, $9c
 	call .LoadBGMapAddrIntoHRAM
-	call _OpenAndCloseMenu_HDMATransferTileMapAndAttrMap
+	call _OpenAndCloseMenu_HDMATransferTilemapAndAttrmap
 	xor a
 	ldh [hBGMapMode], a
 	ldh [hWY], a
@@ -192,9 +192,9 @@ INCLUDE "engine/events/shuckle.asm"
 INCLUDE "engine/events/haircut.asm"
 
 SECTION "bank2", ROMX, BANK[$2]
-SwapTextboxPalettes::
-	ld hl, wTileMap
-	ld de, wAttrMap
+_SwapTextboxPalettes::
+	ld hl, wTilemap
+	ld de, wAttrmap
 	ld b, $12
 .asm_8008
 	ld c, $14
@@ -247,7 +247,7 @@ SwapTextboxPalettes::
 	jr nz, .asm_8008
 	ret
 
-ScrollBGMapPalettes:: ; 804f (2:404f)
+_ScrollBGMapPalettes:: ; 804f (2:404f)
 	ld hl, wBGMapBuffer
 	ld de, wBGMapPalBuffer
 .asm_8055
@@ -667,9 +667,9 @@ Function1416d:: ; 1416d
 	dr $1416d, $14226
 LoadUsedSpritesGFX:
 	dr $14226, $14317
-DoesSpriteHaveFacings_:: ; 14317
+_DoesSpriteHaveFacings:: ; 14317
 	dr $14317, $14334
-GetSpritePalette_:: ; 14334
+_GetSpritePalette:: ; 14334
 	dr $14334, $14a18
 Function14a18:: ; 14a18
 	dr $14a18, $14a2d
@@ -914,7 +914,7 @@ UpdateEnemyHUD::
 
 LoadEnemyMon:
 	dr $3e74b, $3ec11
-BattleRandom_:: ; 3ec11
+_BattleRandom:: ; 3ec11
 	dr $3ec11, $3f196
 
 FillInExpBar::
@@ -1130,7 +1130,7 @@ SECTION "bank20", ROMX, BANK[$20]
 SECTION "bank21", ROMX, BANK[$21]
 	dr $84000, $842db
 
-PrinterReceive_:: ; 842db
+_PrinterReceive:: ; 842db
 	dr $842db, $84684
 
 Function84684:
@@ -1209,10 +1209,10 @@ AnimatedObjects_PlayFrameAndDelay:
 AnimatedObjects_PlayFrame:
 	dr $8d18a, $8d1f7
 
-InitAnimatedObjectStruct_:: ; 8d1f7
+_InitSpriteAnimStruct:: ; 8d1f7
 	dr $8d1f7, $8d332
 
-ReinitAnimatedObjectFrame_:: ; 8d332
+_ReinitSpriteAnimFrame:: ; 8d332
 
 IF DEF(GOLD)
 	dr $8d332, $8e79f
@@ -1375,7 +1375,7 @@ DummyPredef39::
 PlayBattleAnim::
 	dr $cc0d7, $cc283
 
-BattleAnimCommands::
+ClearBattleAnims::
 	dr $cc283, $cfce3
 
 SECTION "bank34", ROMX, BANK[$34]
@@ -1517,7 +1517,7 @@ SECTION "bank70", ROMX, BANK[$70]
 	dr $1c0000, $1c0a66
 UpdateTimePredef::
 	dr $1c0a66, $1c0de9
-DudeAutoInput_A::
+_DudeAutoInput_A::
 	dr $1c0de9, $1c0dee
 
 DudeAutoInput_RightA::

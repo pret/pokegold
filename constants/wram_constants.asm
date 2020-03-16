@@ -14,6 +14,10 @@ AUTO_INPUT EQU $ff
 	const TEMPMON    ; 3
 	const WILDMON    ; 4
 
+; wGameTimerPause:: ; cfbc
+GAMETIMERPAUSE_TIMER_PAUSED_F EQU 0
+GAMETIMERPAUSE_MOBILE_7_F     EQU 7
+
 ; wOptions:: ; cfcc
 TEXT_DELAY_MASK EQU %111
 	const_def 4
@@ -43,11 +47,18 @@ PRINT_DARKER   EQU $60
 PRINT_DARKEST  EQU $7f
 
 ; WalkingDirection: ; d043
-STANDING EQU -1
-DOWN     EQU 0
-UP       EQU 1
-LEFT     EQU 2
-RIGHT    EQU 3
+	const_def -1
+	const STANDING ; -1
+	const DOWN     ; 0
+	const UP       ; 1
+	const LEFT     ; 2
+	const RIGHT    ; 3
+NUM_DIRECTIONS EQU const_value
+
+DOWN_MASK  EQU 1 << DOWN
+UP_MASK    EQU 1 << UP
+LEFT_MASK  EQU 1 << LEFT
+RIGHT_MASK EQU 1 << RIGHT
 
 ; FacingDirection: ; d044
 FACE_CURRENT EQU 0

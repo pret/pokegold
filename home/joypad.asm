@@ -1,83 +1,159 @@
-Joypad:: ; 8df (0:08df)
+Joypad::
+; Replaced by Joypad, called from VBlank instead of the useless
+; joypad interrupt.
+
+; This is a placeholder in case the interrupt is somehow enabled.
 	reti
 
 ClearJoypad::
 	xor a
+; Pressed this frame (delta)
 	ldh [hJoyPressed], a
+; Currently pressed
 	ldh [hJoyDown], a
 	ret
 
-UpdateJoypad:: ; 8e6 (0:08e6)
+UpdateJoypad::
+; This is called automatically every frame in VBlank.
+; Read the joypad register and translate it to something more
+; workable for use in-game. There are 8 buttons, so we can use
+; one byte to contain all player input.
+
+; Updates:
+
+; hJoypadReleased: released this frame (delta)
+; hJoypadPressed: pressed this frame (delta)
+; hJoypadDown: currently pressed
+; hJoypadSum: pressed so far
+
+; Any of these three bits can be used to disable input.
 	ld a, [wd8ba]
-	and $d0
+	and %11010000
 	ret nz
+
+; If we're saving, input is disabled.
 	ld a, [wGameLogicPaused]
 	and a
 	ret nz
-	ld a, $20
+
+; We can only get four inputs at a time.
+; We take d-pad first for no particular reason.
+	ld a, R_DPAD
 	ldh [rJOYP], a
+; Read twice to give the request time to take.
 	ldh a, [rJOYP]
 	ldh a, [rJOYP]
+
+; The Joypad register output is in the lo nybble (inversed).
+; We make the hi nybble of our new container d-pad input.
 	cpl
 	and $f
 	swap a
+
+; We'll keep this in b for now.
 	ld b, a
-	ld a, $10
+
+; Buttons make 8 total inputs (A, B, Select, Start).
+; We can fit this into one byte.
+	ld a, R_BUTTONS
 	ldh [rJOYP], a
+; Wait for input to stabilize.
+rept 6
 	ldh a, [rJOYP]
-	ldh a, [rJOYP]
-	ldh a, [rJOYP]
-	ldh a, [rJOYP]
-	ldh a, [rJOYP]
-	ldh a, [rJOYP]
+endr
+; Buttons take the lo nybble.
 	cpl
 	and $f
 	or b
 	ld b, a
+
+; Reset the joypad register since we're done with it.
 	ld a, $30
 	ldh [rJOYP], a
-	ldh a, [hJoypadDown]
+
+; To get the delta we xor the last frame's input with the new one.
+	ldh a, [hJoypadDown] ; last frame
 	ld e, a
 	xor b
 	ld d, a
+; Released this frame:
 	and e
 	ldh [hJoypadReleased], a
+; Pressed this frame:
 	ld a, d
 	and b
 	ldh [hJoypadPressed], a
+
+; Add any new presses to the list of collective presses:
 	ld c, a
 	ldh a, [hJoypadSum]
 	or c
 	ldh [hJoypadSum], a
+
+; Currently pressed:
 	ld a, b
 	ldh [hJoypadDown], a
-	and $f
-	cp $f
+
+; Now that we have the input, we can do stuff with it.
+
+; For example, soft reset:
+	and A_BUTTON | B_BUTTON | SELECT | START
+	cp  A_BUTTON | B_BUTTON | SELECT | START
 	jp z, Reset
+
 	ret
 
-GetJoypad:: ; 935 (0:0935)
+GetJoypad::
+; Update mirror joypad input from hJoypadDown (real input)
+
+; hJoyReleased: released this frame (delta)
+; hJoyPressed: pressed this frame (delta)
+; hJoyDown: currently pressed
+
+; bit 0 A
+;     1 B
+;     2 SELECT
+;     3 START
+;     4 RIGHT
+;     5 LEFT
+;     6 UP
+;     7 DOWN
+
 	push af
 	push hl
 	push de
 	push bc
+
+; The player input can be automated using an input stream.
+; See more below.
 	ld a, [wInputType]
-	cp $ff
+	cp AUTO_INPUT
 	jr z, .auto
-	ldh a, [hJoypadDown]
+
+; To get deltas, take this and last frame's input.
+	ldh a, [hJoypadDown] ; real input
 	ld b, a
-	ldh a, [hJoyDown]
+	ldh a, [hJoyDown] ; last frame mirror
 	ld e, a
+
+; Released this frame:
 	xor b
 	ld d, a
 	and e
 	ldh [hJoyReleased], a
+
+; Pressed this frame:
 	ld a, d
 	and b
 	ldh [hJoyPressed], a
+
+; It looks like the collective presses got commented out here.
 	ld c, a
+
+; Currently pressed:
 	ld a, b
-	ldh [hJoyDown], a
+	ldh [hJoyDown], a ; frame input
+
 .quit
 	pop bc
 	pop de
@@ -86,17 +162,28 @@ GetJoypad:: ; 935 (0:0935)
 	ret
 
 .auto
+; Use a predetermined input stream (used in the catching tutorial).
+
+; Stream format: [input][duration]
+; A value of $ff will immediately end the stream.
+
+; Read from the input stream.
 	ldh a, [hROMBank]
 	push af
 	ld a, [wAutoInputBank]
 	rst Bankswitch
+
 	ld hl, wAutoInputAddress
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
+
+; We only update when the input duration has expired.
 	ld a, [wAutoInputLength]
 	and a
 	jr z, .updateauto
+
+; Until then, don't change anything.
 	dec a
 	ld [wAutoInputLength], a
 	pop af
@@ -104,20 +191,26 @@ GetJoypad:: ; 935 (0:0935)
 	jr .quit
 
 .updateauto
+; An input of $ff will end the stream.
 	ld a, [hli]
-	cp $ff
+	cp -1
 	jr z, .stopauto
 	ld b, a
+
+; A duration of $ff will end the stream indefinitely.
 	ld a, [hli]
 	ld [wAutoInputLength], a
-	cp $ff
+	cp -1
 	jr nz, .next
+
+; The current input is overwritten.
 	dec hl
 	dec hl
-	ld b, $0
+	ld b, NO_INPUT
 	jr .finishauto
 
 .next
+; On to the next input...
 	ld a, l
 	ld [wAutoInputAddress], a
 	ld a, h
@@ -126,43 +219,53 @@ GetJoypad:: ; 935 (0:0935)
 
 .stopauto
 	call StopAutoInput
-	ld b, $0
+	ld b, NO_INPUT
+
 .finishauto
 	pop af
 	rst Bankswitch
 	ld a, b
-	ldh [hJoyPressed], a
-	ldh [hJoyDown], a
+	ldh [hJoyPressed], a ; pressed
+	ldh [hJoyDown], a ; input
 	jr .quit
 
 StartAutoInput::
+; Start reading automated input stream at a:hl.
+
 	ld [wAutoInputBank], a
 	ld a, l
 	ld [wAutoInputAddress], a
 	ld a, h
 	ld [wAutoInputAddress + 1], a
+; Start reading the stream immediately.
 	xor a
 	ld [wAutoInputLength], a
+; Reset input mirrors.
 	xor a
-	ldh [hJoyPressed], a
-	ldh [hJoyReleased], a
-	ldh [hJoyDown], a
-	ld a, $ff
+	ldh [hJoyPressed], a ; pressed this frame
+	ldh [hJoyReleased], a ; released this frame
+	ldh [hJoyDown], a ; currently pressed
+
+	ld a, AUTO_INPUT
 	ld [wInputType], a
 	ret
 
-StopAutoInput:: ; 9bb (0:09bb)
+StopAutoInput::
+; Clear variables related to automated input.
 	xor a
 	ld [wAutoInputBank], a
 	ld [wAutoInputAddress], a
 	ld [wAutoInputAddress + 1], a
 	ld [wAutoInputLength], a
+; Back to normal input.
 	ld [wInputType], a
 	ret
 
 JoyTitleScreenInput::
 .loop
+
 	call DelayFrame
+
 	push bc
 	call JoyTextDelay
 	pop bc
@@ -186,18 +289,19 @@ JoyTitleScreenInput::
 	ret
 
 JoyWaitAorB::
+.loop
 	call DelayFrame
 	call GetJoypad
 	ldh a, [hJoyPressed]
 	and A_BUTTON | B_BUTTON
 	ret nz
-	call RTC
-	jr JoyWaitAorB
+	call UpdateTimeAndPals
+	jr .loop
 
 WaitButton::
 	ldh a, [hOAMUpdate]
 	push af
-	ld a, $1
+	ld a, 1
 	ldh [hOAMUpdate], a
 	call WaitBGMap
 	call JoyWaitAorB
@@ -205,7 +309,7 @@ WaitButton::
 	ldh [hOAMUpdate], a
 	ret
 
-JoyTextDelay:: ; a08 (0:0a08)
+JoyTextDelay::
 	call GetJoypad
 	ldh a, [hInMenu]
 	and a
@@ -235,23 +339,32 @@ JoyTextDelay:: ; a08 (0:0a08)
 	ret
 
 WaitPressAorB_BlinkCursor::
+; Show a blinking cursor in the lower right-hand
+; corner of a textbox and wait until A or B is
+; pressed.
+;
+; NOTE: The cursor has to be shown before calling
+; this function or no cursor will be shown at all.
 	ldh a, [hMapObjectIndexBuffer]
 	push af
 	ldh a, [hObjectStructIndexBuffer]
 	push af
 	xor a
 	ldh [hMapObjectIndexBuffer], a
-	ld a, $6
+	ld a, 6
 	ldh [hObjectStructIndexBuffer], a
+
 .loop
 	push hl
 	hlcoord 18, 17
 	call BlinkCursor
 	pop hl
+
 	call JoyTextDelay
 	ldh a, [hJoyLast]
 	and A_BUTTON | B_BUTTON
 	jr z, .loop
+
 	pop af
 	ldh [hObjectStructIndexBuffer], a
 	pop af
@@ -266,62 +379,66 @@ SimpleWaitPressAorB::
 	jr z, .loop
 	ret
 
-ButtonSound::
+PromptButton::
+; Show a blinking cursor in the lower right-hand
+; corner of a textbox and wait until A or B is
+; pressed, afterwards, play a sound.
 	ld a, [wLinkMode]
 	and a
-	jr nz, .link_delay
-	call JoyWaitInput
+	jr nz, .link
+	call .wait_input
 	push de
 	ld de, SFX_READ_TEXT_2
 	call PlaySFX
 	pop de
 	ret
 
-.link_delay
+.link
 	ld c, 65
 	jp DelayFrames
 
-JoyWaitInput:: ; a77 (0:0a77)
+.wait_input
 	ldh a, [hOAMUpdate]
 	push af
 	ld a, $1
 	ldh [hOAMUpdate], a
 	ld a, [wInputType]
 	or a
-	jr z, .wait_loop
-	farcall DudeAutoInput_A
+	jr z, .input_wait_loop
+	farcall _DudeAutoInput_A
 
-.wait_loop
-	call JoyBlinkCursor
+.input_wait_loop
+	call .blink_cursor
 	call JoyTextDelay
 	ldh a, [hJoyPressed]
 	and A_BUTTON | B_BUTTON
 	jr nz, .received_input
-	call RTC
+	call UpdateTimeAndPals
 	ld a, $1
 	ldh [hBGMapMode], a
 	call DelayFrame
-	jr .wait_loop
+	jr .input_wait_loop
 
 .received_input
 	pop af
 	ldh [hOAMUpdate], a
 	ret
 
-JoyBlinkCursor:: ; aa6 (0:0aa6)
+.blink_cursor
 	ldh a, [hVBlankCounter]
-	and $10
+	and %00010000 ; bit 4, a
 	jr z, .cursor_off
 	ld a, "▼"
 	jr .load_cursor_state
 
 .cursor_off
 	ld a, "─"
+
 .load_cursor_state
 	ldcoord_a 18, 17
 	ret
 
-BlinkCursor:: ; ab6 (0:0ab6)
+BlinkCursor::
 	push bc
 	ld a, [hl]
 	ld b, a

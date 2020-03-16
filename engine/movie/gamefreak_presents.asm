@@ -3,7 +3,7 @@ Copyright_GFPresents: ; e49a8 (39:49a8)
 ; Return carry if user cancels animation by pressing a button.
 
 	call ClearBGPalettes
-	call ClearTileMap
+	call ClearTilemap
 
 	ld a, HIGH(vBGMap0)
 	ldh [hBGMapAddress + 1], a
@@ -34,7 +34,7 @@ Copyright_GFPresents: ; e49a8 (39:49a8)
 	ld c, 100
 	call DelayFrames
 
-	call ClearTileMap
+	call ClearTilemap
 	call GFPresents_Init
 
 .loop
@@ -124,7 +124,7 @@ GFPresents_PlayFrame: ; e4a37 (39:4a37)
 
 .finish
 	callfar ClearAnimatedObjectBuffer
-	call ClearTileMap
+	call ClearTilemap
 	call ClearSprites
 
 	ld c, 16
@@ -175,7 +175,7 @@ GFPresents_Star: ; e4a96 (39:4a96)
 
 	depixel 10, 11, 4, 0
 	ld a, $16
-	call InitAnimatedObjectStruct
+	call InitSpriteAnimStruct
 
 	; TODO set some flag in the struct?
 	ld hl, $c
@@ -199,7 +199,7 @@ GFPresents_PlaceLogo: ; e4ab2 (39:4ab2)
 
 	depixel 10, 11, 4, 0
 	ld a, $15
-	call InitAnimatedObjectStruct
+	call InitSpriteAnimStruct
 
 	call GFPresents_NextScene
 
@@ -315,7 +315,7 @@ GFPresents_Sparkle: ; e4b33 (39:4b33)
 	push af
 	depixel 11, 11
 	ld a, $17
-	call InitAnimatedObjectStruct
+	call InitSpriteAnimStruct
 	pop af
 
 	; take the bottom 4 bits of a as an index into

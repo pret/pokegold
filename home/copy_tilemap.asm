@@ -1,20 +1,21 @@
-LoadTileMapToTempTileMap::
-; Load wTileMap into wTempTileMap
+LoadTilemapToTempTilemap::
+; Load wTilemap into wTempTileMap
 	hlcoord 0, 0
 	decoord 0, 0, wTempTileMap
-	ld bc, wTileMapEnd - wTileMap
+	ld bc, wTilemapEnd - wTilemap
 	jp CopyBytes
 
-Call_LoadTempTileMapToTileMap::
+SafeLoadTempTilemapToTilemap::
 	xor a
 	ldh [hBGMapMode], a
-	call LoadTempTileMapToTileMap
+	call LoadTempTilemapToTilemap
 	ld a, 1
 	ldh [hBGMapMode], a
 	ret
 
-LoadTempTileMapToTileMap::
+LoadTempTilemapToTilemap::
+; Load wTempTilemap into wTilemap
 	hlcoord 0, 0, wTempTileMap
 	decoord 0, 0
-	ld bc, wTileMapEnd - wTileMap
+	ld bc, wTilemapEnd - wTilemap
 	jp CopyBytes

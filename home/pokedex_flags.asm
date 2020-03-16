@@ -37,6 +37,8 @@ SetSeenAndCaughtMon::
 	ld b, SET_FLAG
 	call PokedexFlagAction
 	pop af
+	; fallthrough
+
 SetSeenMon::
 	ld c, a
 	ld hl, wPokedexSeen
@@ -53,10 +55,11 @@ CheckSeenMon::
 	ld c, a
 	ld hl, wPokedexSeen
 	ld b, CHECK_FLAG
-PokedexFlagAction:: ; 35e4 (0:35e4)
+	; fallthrough
+
+PokedexFlagAction::
 	ld d, 0
 	predef SmallFarFlagAction
 	ld a, c
 	and a
 	ret
-

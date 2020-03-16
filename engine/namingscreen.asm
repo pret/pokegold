@@ -158,7 +158,7 @@ Function11bda:
 	ld [hl], a
 	lb de, $24, $20
 	ld a, $1c
-	call InitAnimatedObjectStruct
+	call InitSpriteAnimStruct
 	ld hl, $1
 	add hl, bc
 	ld [hl], $0
@@ -190,7 +190,7 @@ Function11c11: ; 11c11 (4:5c11)
 	ld [hl], a
 	lb de, $24, $20
 	ld a, $1c
-	call InitAnimatedObjectStruct
+	call InitSpriteAnimStruct
 	ret
 
 Function11c3a: ; 11c3a (4:5c3a)
@@ -351,7 +351,7 @@ Function11d3a:
 	ld d, $40
 .asm_11d44
 	ld a, $14
-	call InitAnimatedObjectStruct
+	call InitSpriteAnimStruct
 	ld a, c
 	ld [wc5d5], a
 	ld a, b
@@ -926,12 +926,12 @@ Function12267: ; 12267 (4:6267)
 	ld a, BANK(MailIcon)
 	call FarCopyBytes
 	xor a
-	ld hl, wTileMapEnd
+	ld hl, wTilemapEnd
 	ld [hli], a
 	ld [hl], a
 	lb de, $18, $10
 	ld a, $0
-	call InitAnimatedObjectStruct
+	call InitSpriteAnimStruct
 	ld hl, $2
 	add hl, bc
 	ld [hl], $0
@@ -1055,7 +1055,7 @@ Function123d5: ; 123d5 (4:63d5)
 Function123e8:
 	lb de, $48, $10
 	ld a, $1b
-	call InitAnimatedObjectStruct
+	call InitSpriteAnimStruct
 	ld a, c
 	ld [wc5d5], a
 	ld a, b

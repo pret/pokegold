@@ -102,13 +102,12 @@ VBlank0::
 	call Function1642
 
 .done
-
 	ldh a, [hOAMUpdate]
 	and a
 	jr nz, .done_oam
 	call hTransferVirtualOAM
-.done_oam
 
+.done_oam
 	; vblank-sensitive operations are done
 
 	xor a
@@ -119,15 +118,15 @@ VBlank0::
 	jr z, .ok
 	dec a
 	ld [wOverworldDelay], a
-.ok
 
+.ok
 	ld a, [wTextDelayFrames]
 	and a
 	jr z, .ok2
 	dec a
 	ld [wTextDelayFrames], a
-.ok2
 
+.ok2
 	call UpdateJoypad
 
 	ld a, BANK(_UpdateSound)
@@ -161,6 +160,7 @@ VBlank1::
 	call Serve2bppRequest
 
 	call hTransferVirtualOAM
+
 .done
 	ldh a, [hLCDCPointer]
 	or a
@@ -168,6 +168,7 @@ VBlank1::
 	ld c, a
 	ld a, [wc700]
 	ld [$ff00+c], a
+
 .skip_lcd
 	xor a
 	ld [wVBlankOccurred], a
@@ -266,8 +267,8 @@ VBlank5::
 
 	call UpdateBGMap
 	call Serve2bppRequest
-.done
 
+.done
 	xor a
 	ld [wVBlankOccurred], a
 
@@ -355,10 +356,8 @@ VBlank3::
 	call UpdateBGMapBuffer
 
 	call Serve2bppRequest
-
 	call Serve1bppRequest
 	call AnimateTileset
-
 	call hTransferVirtualOAM
 
 	xor a
@@ -369,8 +368,8 @@ VBlank3::
 	jr z, .okay
 	dec a
 	ld [wTextDelayFrames], a
-.okay
 
+.okay
 	xor a
 	ldh [rIF], a
 	ld a, %10 ; lcd stat

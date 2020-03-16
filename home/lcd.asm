@@ -1,19 +1,24 @@
-LCD:: ; 41b (0:041b)
+; LCD handling
+
+LCD::
 	push af
 	ldh a, [hLCDCPointer]
 	and a
 	jr z, .done
+
+; At this point it's assumed we're in WRAM bank 5!
 	push hl
 	ldh a, [rLY]
 	ld l, a
-	ld h, wLYOverrides >> 8
+	ld h, HIGH(wLYOverrides)
 	ld h, [hl]
 	ldh a, [hLCDCPointer]
 	ld l, a
 	ld a, h
-	ld h, rSCY >> 8
+	ld h, HIGH(rSCY)
 	ld [hl], a
 	pop hl
+
 .done
 	pop af
 	reti
@@ -23,7 +28,7 @@ DisableLCD::
 
 ; Don't need to do anything if the LCD is already off
 	ldh a, [rLCDC]
-	bit 7, a
+	bit rLCDC_ENABLE, a
 	ret z
 
 	xor a
@@ -32,17 +37,17 @@ DisableLCD::
 	ld b, a
 
 ; Disable VBlank
-	res 0, a
+	res VBLANK, a
 	ldh [rIE], a
 
 .wait
 ; Wait until VBlank would normally happen
 	ldh a, [rLY]
-	cp 145
+	cp LY_VBLANK + 1
 	jr nz, .wait
 
 	ldh a, [rLCDC]
-	and %01111111
+	and $ff ^ (1 << rLCDC_ENABLE)
 	ldh [rLCDC], a
 
 	xor a
@@ -53,6 +58,6 @@ DisableLCD::
 
 EnableLCD::
 	ldh a, [rLCDC]
-	set 7, a
+	set rLCDC_ENABLE, a
 	ldh [rLCDC], a
 	ret

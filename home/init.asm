@@ -1,25 +1,33 @@
-Reset:: ; 5b0 (0:05b0)
-	call MapSetup_Sound_Off
+Reset::
+	call InitSound
 	xor a
 	ldh [hMapAnims], a
 	call ClearPalettes
 	ei
+
 	ld hl, wd8ba
 	set 7, [hl]
+
 	ld c, 32
 	call DelayFrames
+
 	jr Init
-_Start:: ; 5c6 (0:05c6)
+
+_Start::
 	cp $11
 	jr z, .cgb
 	xor a
 	jr .load
+
 .cgb
 	ld a, $1
+
 .load
 	ldh [hCGB], a
-Init:: ; 5d1 (0:05d1)
+
+Init::
 	di
+
 	xor a
 	ldh [rIF], a
 	ldh [rIE], a
@@ -36,21 +44,23 @@ Init:: ; 5d1 (0:05d1)
 	ldh [rTMA], a
 	ldh [rTAC], a
 	ld [wceeb], a
-	ld a, $4
+
+	ld a, %100 ; Start timer at 4096Hz
 	ldh [rTAC], a
+
 .wait
 	ldh a, [rLY]
-	cp 145
+	cp LY_VBLANK + 1
 	jr nz, .wait
 
 	xor a
 	ldh [rLCDC], a
 
-; Clear WRAM
-	ld hl, wMusicPlaying
+; Clear WRAM bank 0
+	ld hl, WRAM0_Begin
 	ld bc, $2000
-.ByteFill
-	ld [hl], $0
+.ByteFill:
+	ld [hl], 0
 	inc hl
 	dec bc
 	ld a, b
@@ -71,10 +81,10 @@ Init:: ; 5d1 (0:05d1)
 
 	call ClearSprites
 
-	ld a, BANK(LoadPushOAM)
+	ld a, BANK(WriteOAMDMACodeToHRAM)
 	rst Bankswitch
 
-	call LoadPushOAM
+	call WriteOAMDMACodeToHRAM
 
 	xor a
 	ldh [hMapAnims], a
@@ -89,11 +99,11 @@ Init:: ; 5d1 (0:05d1)
 	ldh [hWY], a
 	ldh [rWY], a
 
-	ld a, $7
+	ld a, 7
 	ldh [hWX], a
 	ldh [rWX], a
 
-	ld a, -1
+	ld a, CONNECTION_NOT_ESTABLISHED
 	ldh [hLinkPlayerNumber], a
 
 	ld h, $98
@@ -103,9 +113,9 @@ Init:: ; 5d1 (0:05d1)
 
 	callfar InitCGBPals
 
-	ld a, $9c
+	ld a, HIGH(vBGMap1)
 	ldh [hBGMapAddress + 1], a
-	xor a
+	xor a ; LOW(vBGMap1)
 	ldh [hBGMapAddress], a
 
 	farcall StartClock
@@ -116,7 +126,7 @@ Init:: ; 5d1 (0:05d1)
 	ld [MBC3LatchClock], a
 	ld [MBC3SRamEnable], a
 
-	ld a, %11100011
+	ld a, LCDC_DEFAULT ; %11100011
 	; LCD on
 	; Win tilemap 1
 	; Win on
@@ -133,26 +143,25 @@ Init:: ; 5d1 (0:05d1)
 
 	call DelayFrame
 
-	ld a, $30
-	call Predef
+	predef InitSGBBorder ; SGB init
 
-	call MapSetup_Sound_Off
+	call InitSound
 	xor a
 	ld [wMapMusic], a
 	jp GameInit
 
-ClearVRAM:: ; 68e (0:068e)
-	ld hl, $8000
-	ld bc, $2000
+ClearVRAM::
+	ld hl, VRAM_Begin
+	ld bc, VRAM_End - VRAM_Begin
 	xor a
 	call ByteFill
 	ret
 
-BlankBGMap:: ; 699 (0:0699)
+BlankBGMap::
 	ld a, $7f
 	jr asm_69e
 
-FillBGMap:: ; 69d
+FillBGMap::
 	ld a, l
 asm_69e
 	ld de, $400

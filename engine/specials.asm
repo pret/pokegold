@@ -83,7 +83,7 @@ SpecialsPointers:
 	add_special ReloadSpritesNoPalettes, $02
 	add_special ClearBGPalettes
 	add_special UpdateTimePals
-	add_special ClearTileMap
+	add_special ClearTilemap
 	add_special UpdateSprites
 	add_special ReplacePlayerSprite
 	add_special GameCornerPrizeMonCheckDex

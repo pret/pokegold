@@ -22,7 +22,7 @@ MainMenu_:
 	call Function5b0a
 	call CloseWindow
 	jr c, .asm_5a94
-	call ClearTileMap
+	call ClearTilemap
 	ld a, [wMenuSelection]
 	ld hl, .Jumptable
 	rst JumpTable
@@ -230,7 +230,7 @@ Function5bb8: ; 5bb8 (1:5bb8)
 Function5bf7: ; 5bf7 (1:5bf7)
 	xor a
 	ldh [hMapAnims], a
-	call ClearTileMap
+	call ClearTilemap
 	call LoadFontsExtra
 	call Functiond9e
 	call ClearWindowData
@@ -504,7 +504,7 @@ MainMenu_Continue:
 	ld [wMusicFadeID + 1], a
 	call ClearBGPalettes
 	call CloseWindow
-	call ClearTileMap
+	call ClearTilemap
 	ld c, 20
 	call DelayFrames
 	farcall JumpRoamMons
@@ -724,7 +724,7 @@ OakSpeech: ; 5fa5 (1:5fa5)
 	farcall InitClock ; What time is it?
 
 	call RotateFourPalettesLeft
-	call ClearTileMap
+	call ClearTilemap
 
 	ld de, MUSIC_ROUTE_30
 	call PlayMusic
@@ -747,7 +747,7 @@ OakSpeech: ; 5fa5 (1:5fa5)
 	call PrintText
 
 	call RotateThreePalettesRight
-	call ClearTileMap
+	call ClearTilemap
 
 	ld a, MARILL
 	ld [wCurSpecies], a
@@ -772,7 +772,7 @@ OakSpeech: ; 5fa5 (1:5fa5)
 	call PrintText
 
 	call RotateThreePalettesRight
-	call ClearTileMap
+	call ClearTilemap
 
 	xor a
 	ld [wCurPartySpecies], a
@@ -789,7 +789,7 @@ OakSpeech: ; 5fa5 (1:5fa5)
 	call PrintText
 
 	call RotateThreePalettesRight
-	call ClearTileMap
+	call ClearTilemap
 
 	xor a
 	ld [wCurPartySpecies], a
@@ -862,7 +862,7 @@ NamePlayer: ; 6085 (1:6085)
 	ld de, wPlayerName
 	farcall NamingScreen
 	call RotateThreePalettesRight
-	call ClearTileMap
+	call ClearTilemap
 	call LoadFontsExtra
 	call WaitBGMap
 	xor a
@@ -968,7 +968,7 @@ ShrinkPlayer: ; 6123 (1:6123)
 	call DelayFrames
 
 	call RotateThreePalettesRight
-	call ClearTileMap
+	call ClearTilemap
 	ret
 
 MovePlayerPicRight: ; 617e (1:617e)

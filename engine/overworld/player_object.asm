@@ -4,11 +4,11 @@ BlankScreen:
 	ldh [hBGMapMode], a
 	call ClearBGPalettes
 	call ClearSprites
-	ld hl, wTileMap
+	ld hl, wTilemap
 	ld bc, SCREEN_HEIGHT * SCREEN_WIDTH
 	ld a, " "
 	call ByteFill
-	ld hl, wAttrMap
+	ld hl, wAttrmap
 	ld bc, SCREEN_HEIGHT * SCREEN_WIDTH
 	ld a, $7
 	call ByteFill
@@ -122,7 +122,7 @@ SpawnPlayer2:
 .PlayerObjectTemplate:
 	object_event -4, -4, SPRITE_CHRIS, SPRITEMOVEDATA_12, 15, 15, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, 0, -1
 
-CopyObjectStruct_:: ; 86d7 (2:46d7)
+CopyObjectStruct:: ; 86d7 (2:46d7)
 	call CheckObjectMask
 	and a
 	ret nz
@@ -242,7 +242,7 @@ InitializeVariableSprites:
 	cp $b
 	jr nc, .asm_87ab
 	push bc
-	call CopyObjectStruct_
+	call CopyObjectStruct
 	pop bc
 	jp c, Function87b9
 .asm_87ab
@@ -315,7 +315,7 @@ asm_87da
 	jr nc, .asm_8814
 	push de
 	push bc
-	call CopyObjectStruct_
+	call CopyObjectStruct
 	pop bc
 	pop de
 .asm_8814
@@ -370,7 +370,7 @@ asm_882e
 	jr nc, .asm_8868
 	push de
 	push bc
-	call CopyObjectStruct_
+	call CopyObjectStruct
 	pop bc
 	pop de
 .asm_8868

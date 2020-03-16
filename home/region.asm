@@ -31,7 +31,7 @@ IsInJohto::
 	ld a, 1
 	ret
 
-Function2ffe:: ; 2ffe (0:2ffe)
+Function2ffe::
 	push hl
 	xor a
 	ld hl, wd17c

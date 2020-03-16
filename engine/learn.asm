@@ -1,5 +1,5 @@
 LearnMove:
-	call LoadTileMapToTempTileMap
+	call LoadTilemapToTempTilemap
 	ld a, [wCurPartyMon]
 	ld hl, wPartyMon1Nickname
 	call GetNick
@@ -147,7 +147,7 @@ LearnMove:
 	ld [wcede], a
 	call StaticMenuJoypad
 	push af
-	call Call_LoadTempTileMapToTileMap
+	call SafeLoadTempTilemapToTilemap
 	pop af
 	pop hl
 	bit 1, a

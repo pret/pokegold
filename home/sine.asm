@@ -1,6 +1,9 @@
-Cosine:: ; 19ac (0:19ac)
-	add $10
+Cosine::
+; a = d * cos(a * pi/32)
+	add %010000 ; cos(x) = sin(x + pi/2)
+	; fallthrough
 Sine::
+; a = d * sin(a * pi/32)
 	ld e, a
-	homecall Sine_e
+	homecall _Sine
 	ret

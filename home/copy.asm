@@ -1,53 +1,70 @@
-CopyBytes:: ; 311a (0:311a)
-	inc b
-	inc c
-	jr .asm_3121
-.asm_311e
+CopyBytes::
+; copy bc bytes from hl to de
+	inc b ; we bail the moment b hits 0, so include the last run
+	inc c ; same thing; include last byte
+	jr .HandleLoop
+.CopyByte:
 	ld a, [hli]
 	ld [de], a
 	inc de
-.asm_3121
+.HandleLoop:
 	dec c
-	jr nz, .asm_311e
+	jr nz, .CopyByte
 	dec b
-	jr nz, .asm_311e
+	jr nz, .CopyByte
 	ret
 
-GetFarByte:: ; 3128 (0:3128)
+GetFarByte::
+; retrieve a single byte from a:hl, and return it in a.
+	; bankswitch to new bank
 	ld [wBuffer], a
 	ldh a, [hROMBank]
 	push af
 	ld a, [wBuffer]
 	rst Bankswitch
+
+	; get byte from new bank
 	ld a, [hl]
 	ld [wBuffer], a
+
+	; bankswitch to previous bank
 	pop af
 	rst Bankswitch
+
+	; return retrieved value in a
 	ld a, [wBuffer]
 	ret
 
-GetFarHalfword:: ; 313c (0:313c)
+GetFarHalfword::
+; retrieve a halfword from a:hl, and return it in hl.
+	; bankswitch to new bank
 	ld [wBuffer], a
 	ldh a, [hROMBank]
 	push af
 	ld a, [wBuffer]
 	rst Bankswitch
+
+	; get halfword from new bank, put it in hl
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
+
+	; bankswitch to previous bank and return
 	pop af
 	rst Bankswitch
 	ret
 
-ByteFill:: ; 314c (0:314c)
-	inc b
-	inc c
-	jr .asm_3151
-.asm_3150
+
+ByteFill::
+; fill bc bytes with the value of a, starting at hl
+	inc b ; we bail the moment b hits 0, so include the last run
+	inc c ; same thing; include last byte
+	jr .HandleLoop
+.PutByte:
 	ld [hli], a
-.asm_3151
+.HandleLoop:
 	dec c
-	jr nz, .asm_3150
+	jr nz, .PutByte
 	dec b
-	jr nz, .asm_3150
+	jr nz, .PutByte
 	ret

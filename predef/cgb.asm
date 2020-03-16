@@ -115,31 +115,31 @@ asm_93e1
 	ld de, wTempBGPal7
 	ld bc, $8
 	call CopyBytes
-	hlcoord 0, 0, wAttrMap
+	hlcoord 0, 0, wAttrmap
 	ld bc, SCREEN_HEIGHT * SCREEN_WIDTH
 	ld a, $2
 	call ByteFill
-	hlcoord 0, 4, wAttrMap
+	hlcoord 0, 4, wAttrmap
 	lb bc, $8, $a
 	ld a, $0
 	call Function9af1
-	hlcoord 10, 0, wAttrMap
+	hlcoord 10, 0, wAttrmap
 	lb bc, $7, $a
 	ld a, $1
 	call Function9af1
-	hlcoord 0, 0, wAttrMap
+	hlcoord 0, 0, wAttrmap
 	lb bc, $4, $a
 	ld a, $2
 	call Function9af1
-	hlcoord 10, 7, wAttrMap
+	hlcoord 10, 7, wAttrmap
 	lb bc, $5, $a
 	ld a, $3
 	call Function9af1
-	hlcoord 10, 11, wAttrMap
+	hlcoord 10, 11, wAttrmap
 	lb bc, $1, $9
 	ld a, $4
 	call Function9af1
-	hlcoord 0, 12, wAttrMap
+	hlcoord 0, 12, wAttrmap
 	ld bc, $78
 	ld a, $7
 	call ByteFill
@@ -181,23 +181,23 @@ Function945e: ; 945e (2:545e)
 	ld bc, $18
 	call CopyBytes
 	call Function9b1d
-	hlcoord 0, 0, wAttrMap
+	hlcoord 0, 0, wAttrmap
 	lb bc, $8, $14
 	ld a, $1
 	call Function9af1
-	hlcoord 10, 16, wAttrMap
+	hlcoord 10, 16, wAttrmap
 	ld bc, $a
 	ld a, $2
 	call ByteFill
-	hlcoord 13, 5, wAttrMap
+	hlcoord 13, 5, wAttrmap
 	lb bc, $2, $2
 	ld a, $3
 	call Function9af1
-	hlcoord 15, 5, wAttrMap
+	hlcoord 15, 5, wAttrmap
 	lb bc, $2, $2
 	ld a, $4
 	call Function9af1
-	hlcoord 17, 5, wAttrMap
+	hlcoord 17, 5, wAttrmap
 	lb bc, $2, $2
 	ld a, $5
 	call Function9af1
@@ -232,7 +232,7 @@ StatsScreenPals:
 
 Function94f1: ; 94f1 (2:54f1)
 	call Function9513
-	hlcoord 1, 1, wAttrMap
+	hlcoord 1, 1, wAttrmap
 	lb bc, 7, 7
 	ld a, $1
 	call Function9af1
@@ -240,7 +240,7 @@ Function94f1: ; 94f1 (2:54f1)
 
 Function9502: ; 9502 (2:5502)
 	call Function9513
-	hlcoord 1, 1, wAttrMap
+	hlcoord 1, 1, wAttrmap
 	lb bc, 5, 5
 	ld a, $1
 	call Function9af1
@@ -307,7 +307,7 @@ Function9561: ; 9561 (2:5561)
 	call Function9adb
 .asm_9584
 	call Function9b1d
-	hlcoord 1, 4, wAttrMap
+	hlcoord 1, 4, wAttrmap
 	lb bc, 7, 7
 	ld a, $1
 	call Function9af1
@@ -329,7 +329,7 @@ Function95a8:
 	call Function9adb
 asm_95b1
 	call Function9b1d
-	hlcoord 1, 1, wAttrMap
+	hlcoord 1, 1, wAttrmap
 	lb bc, 7, 7
 	ld a, $1
 	call Function9af1
@@ -355,7 +355,7 @@ Function95d5: ; 95d5 (2:55d5)
 	call Function9be4
 	call Function9adb
 	call Function9b1d
-	hlcoord 7, 5, wAttrMap
+	hlcoord 7, 5, wAttrmap
 	lb bc, 7, 7
 	ld a, $1
 	call Function9af1
@@ -372,43 +372,43 @@ Function9605: ; 9605 (2:5605)
 	ld bc, $80
 	call CopyBytes
 	call Function9b1d
-	hlcoord 0, 2, wAttrMap
+	hlcoord 0, 2, wAttrmap
 	lb bc, $a, $3
 	ld a, $2
 	call Function9af1
-	hlcoord 17, 2, wAttrMap
+	hlcoord 17, 2, wAttrmap
 	lb bc, $a, $3
 	ld a, $2
 	call Function9af1
-	hlcoord 0, 4, wAttrMap
+	hlcoord 0, 4, wAttrmap
 	lb bc, $6, $3
 	ld a, $3
 	call Function9af1
-	hlcoord 17, 4, wAttrMap
+	hlcoord 17, 4, wAttrmap
 	lb bc, $6, $3
 	ld a, $3
 	call Function9af1
-	hlcoord 0, 6, wAttrMap
+	hlcoord 0, 6, wAttrmap
 	lb bc, $2, $3
 	ld a, $4
 	call Function9af1
-	hlcoord 17, 6, wAttrMap
+	hlcoord 17, 6, wAttrmap
 	lb bc, $2, $3
 	ld a, $4
 	call Function9af1
-	hlcoord 4, 2, wAttrMap
+	hlcoord 4, 2, wAttrmap
 	lb bc, $2, $c
 	ld a, $1
 	call Function9af1
-	hlcoord 3, 2, wAttrMap
+	hlcoord 3, 2, wAttrmap
 	lb bc, $a, $1
 	ld a, $1
 	call Function9af1
-	hlcoord 16, 2, wAttrMap
+	hlcoord 16, 2, wAttrmap
 	lb bc, $a, $1
 	ld a, $1
 	call Function9af1
-	hlcoord 0, 12, wAttrMap
+	hlcoord 0, 12, wAttrmap
 	ld bc, $78
 	ld a, $7
 	call ByteFill
@@ -426,7 +426,7 @@ Function968d: ; 968d (2:568d)
 	ld a, $3c
 	call Function9ac7
 	call Function9ad2
-	hlcoord 0, 6, wAttrMap
+	hlcoord 0, 6, wAttrmap
 	lb bc, $c, $14
 	ld a, $1
 	call Function9af1
@@ -636,41 +636,41 @@ Function9802: ; 9802 (2:5802)
 	ld a, $24
 	call Function9ac7
 	call Function9ad2
-	hlcoord 0, 0, wAttrMap
+	hlcoord 0, 0, wAttrmap
 	ld bc, $168
 	ld a, $1
 	call ByteFill
-	hlcoord 14, 1, wAttrMap
+	hlcoord 14, 1, wAttrmap
 	lb bc, $7, $5
 	xor a
 	call Function9af1
-	hlcoord 18, 1, wAttrMap
+	hlcoord 18, 1, wAttrmap
 	ld [hl], $1
-	hlcoord 2, 11, wAttrMap
+	hlcoord 2, 11, wAttrmap
 	lb bc, $2, $4
 	ld a, $1
 	call Function9af1
-	hlcoord 6, 11, wAttrMap
+	hlcoord 6, 11, wAttrmap
 	lb bc, $2, $4
 	ld a, $2
 	call Function9af1
-	hlcoord 10, 11, wAttrMap
+	hlcoord 10, 11, wAttrmap
 	lb bc, $2, $4
 	ld a, $3
 	call Function9af1
-	hlcoord 14, 11, wAttrMap
+	hlcoord 14, 11, wAttrmap
 	lb bc, $2, $4
 	ld a, $4
 	call Function9af1
-	hlcoord 2, 14, wAttrMap
+	hlcoord 2, 14, wAttrmap
 	lb bc, $2, $4
 	ld a, $5
 	call Function9af1
-	hlcoord 6, 14, wAttrMap
+	hlcoord 6, 14, wAttrmap
 	lb bc, $2, $4
 	ld a, $6
 	call Function9af1
-	hlcoord 10, 14, wAttrMap
+	hlcoord 10, 14, wAttrmap
 	lb bc, $2, $4
 	ld a, $7
 	call Function9af1
@@ -694,7 +694,7 @@ Function98be: ; 98be (2:58be)
 	add hl, bc
 	call Function9adb
 	call Function9b1d
-	hlcoord 11, 1, wAttrMap
+	hlcoord 11, 1, wAttrmap
 	lb bc, $2, $9
 	ld a, $1
 	call Function9af1
@@ -732,23 +732,23 @@ Function991e: ; 991e (2:591e)
 	ld bc, $40
 	call CopyBytes
 	call Function9b1d
-	hlcoord 0, 0, wAttrMap
+	hlcoord 0, 0, wAttrmap
 	lb bc, $1, $a
 	ld a, $1
 	call Function9af1
-	hlcoord 10, 0, wAttrMap
+	hlcoord 10, 0, wAttrmap
 	lb bc, $1, $a
 	ld a, $2
 	call Function9af1
-	hlcoord 7, 2, wAttrMap
+	hlcoord 7, 2, wAttrmap
 	lb bc, $9, $1
 	ld a, $3
 	call Function9af1
-	hlcoord 0, 7, wAttrMap
+	hlcoord 0, 7, wAttrmap
 	lb bc, $3, $5
 	ld a, $4
 	call Function9af1
-	hlcoord 0, 3, wAttrMap
+	hlcoord 0, 3, wAttrmap
 	lb bc, $3, $5
 	ld a, $5
 	call Function9af1
@@ -791,9 +791,9 @@ Palettes_996f:
 
 Function999f: ; 999f (2:599f)
 	call Function9757
-	call FarCallSwapTextboxPalettes
+	call SwapTextboxPalettes
 	ld de, $14
-	hlcoord 0, 0, wAttrMap
+	hlcoord 0, 0, wAttrmap
 	ld a, [wMenuBorderTopCoord]
 .asm_99ae
 	and a
@@ -828,11 +828,11 @@ Function99d9: ; 99d9 (2:59d9)
 	ld hl, PalPacket_a015 + 1
 	call Function9ab2
 	call Function9b1d
-	hlcoord 0, 4, wAttrMap
+	hlcoord 0, 4, wAttrmap
 	lb bc, $a, $14
 	ld a, $2
 	call Function9af1
-	hlcoord 0, 6, wAttrMap
+	hlcoord 0, 6, wAttrmap
 	lb bc, $6, $14
 	ld a, $1
 	call Function9af1

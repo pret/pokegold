@@ -1,4 +1,4 @@
-FarDecompress:: ; b40
+FarDecompress::
 ; Decompress graphics data from a:hl to de.
 
 	ld [wLZBank], a
@@ -12,10 +12,8 @@ FarDecompress:: ; b40
 	pop af
 	rst Bankswitch
 	ret
-; b50
 
-
-Decompress:: ; b50
+Decompress::
 ; Pokemon Gold and Silver use an lz variant for compression.
 ; This is mainly (but not necessarily) used for graphics.
 
@@ -34,12 +32,10 @@ LZ_LEN EQU %00011111 ; length n   (bits 0-4)
 
 
 ; Commands:
-
 LZ_LITERAL   EQU 0 << 5 ; Read literal data for n bytes.
 LZ_ITERATE   EQU 1 << 5 ; Write the same byte for n bytes.
 LZ_ALTERNATE EQU 2 << 5 ; Alternate two bytes for n bytes.
 LZ_ZERO      EQU 3 << 5 ; Write 0 for n bytes.
-
 
 ; Another class of commands reuses data from the decompressed output.
 LZ_RW        EQU 2 + 5 ; bit
@@ -125,7 +121,6 @@ LZ_LONG_HI   EQU %00000011
 	; read at least 1 byte
 	inc c
 
-
 .command
 	; Increment loop counts.
 	; We bail the moment they hit 0.
@@ -144,7 +139,6 @@ LZ_LONG_HI   EQU %00000011
 	cp LZ_ZERO
 	jr z, .Zero
 
-
 .Literal
 ; Read literal data for bc bytes.
 .lloop
@@ -159,8 +153,7 @@ LZ_LONG_HI   EQU %00000011
 	inc de
 	jr .lloop
 
-
-.Iter
+.Iter:
 ; Write the same byte for bc bytes.
 	ld a, [hli]
 
@@ -175,8 +168,7 @@ LZ_LONG_HI   EQU %00000011
 	inc de
 	jr .iloop
 
-
-.Alt
+.Alt:
 ; Alternate two bytes for bc bytes.
 	dec c
 	jr nz, .anext1
@@ -205,8 +197,7 @@ LZ_LONG_HI   EQU %00000011
 	inc hl
 	jr .Main
 
-
-.Zero
+.Zero:
 ; Write 0 for bc bytes.
 	xor a
 
@@ -220,7 +211,6 @@ LZ_LONG_HI   EQU %00000011
 	ld [de], a
 	inc de
 	jr .zloop
-
 
 .rewrite
 ; Repeat decompressed data from output.
@@ -275,8 +265,7 @@ LZ_LONG_HI   EQU %00000011
 ; More practically, LZ_LONG is not recursive.
 ; For now, it defaults to LZ_REPEAT.
 
-
-.Repeat
+.Repeat:
 ; Copy decompressed data for bc bytes.
 	dec c
 	jr nz, .rnext
@@ -289,8 +278,7 @@ LZ_LONG_HI   EQU %00000011
 	inc de
 	jr .Repeat
 
-
-.Flip
+.Flip:
 ; Copy bitflipped decompressed data for bc bytes.
 	dec c
 	jr nz, .fnext
@@ -315,8 +303,7 @@ LZ_LONG_HI   EQU %00000011
 	inc de
 	jr .Flip
 
-
-.Reverse
+.Reverse:
 ; Copy reversed decompressed data for bc bytes.
 	dec c
 	jr nz, .rvnext
@@ -330,7 +317,6 @@ LZ_LONG_HI   EQU %00000011
 	inc de
 	jr .Reverse
 
-
 .donerw
 	pop hl
 
@@ -340,4 +326,3 @@ LZ_LONG_HI   EQU %00000011
 .next
 	inc hl
 	jp .Main
-; c2f

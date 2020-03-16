@@ -634,7 +634,7 @@ UltraBall: ; e926
 	and a
 	jr z, .toss
 	call ClearBGPalettes
-	call ClearTileMap
+	call ClearTilemap
 .toss
 	ld hl, wNumItems
 	inc a
@@ -1481,7 +1481,7 @@ BitterBerry: ; f1c0
 	ldh [hBattleTurn], a
 	call Functionf7d0
 	ld hl, ConfusedNoMoreText
-	call StdBattleTextBox
+	call StdBattleTextbox
 	ld a, $0
 .asm_f1d9
 	jp Functionf0f4

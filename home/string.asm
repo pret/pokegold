@@ -1,31 +1,35 @@
 InitString::
+; Init a string of length c.
 	push hl
-	jr InitString_
+	jr _InitString
 
 InitName::
+; Intended for names, so this function is limited to ten characters.
 	push hl
-	ld c, $a
-InitString_::
+	ld c, NAME_LENGTH - 1
+_InitString::
+; if the string pointed to by hl is empty (defined as "zero or more spaces
+; followed by a null"), then initialize it to the string pointed to by de.
 	push bc
-.asm_2fbd
+.loop
 	ld a, [hli]
-	cp $50
-	jr z, .asm_2fc9
-	cp $7f
-	jr nz, .asm_2fd4
+	cp "@"
+	jr z, .blank
+	cp " "
+	jr nz, .notblank
 	dec c
-	jr nz, .asm_2fbd
-.asm_2fc9
+	jr nz, .loop
+.blank
 	pop bc
 	ld l, e
 	ld h, d
 	pop de
-	ld b, $0
+	ld b, 0
 	inc c
 	call CopyBytes
 	ret
 
-.asm_2fd4
+.notblank
 	pop bc
 	pop hl
 	ret

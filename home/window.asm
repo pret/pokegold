@@ -1,22 +1,26 @@
-Function2e80:: ; 2e80 (0:2e80)
+RefreshScreen::
 	call ClearWindowData
 	ldh a, [hROMBank]
 	push af
-	ld a, BANK(ReanchorBGMap_NoOAMUpdate) ; and BANK(LoadFonts_NoOAMUpdate)
+	ld a, BANK(ReanchorBGMap_NoOAMUpdate) ; aka BANK(LoadFonts_NoOAMUpdate)
 	rst Bankswitch
+
 	call ReanchorBGMap_NoOAMUpdate
-	call _OpenAndCloseMenu_HDMATransferTileMapAndAttrMap
+	call _OpenAndCloseMenu_HDMATransferTilemapAndAttrmap
 	call LoadFonts_NoOAMUpdate
+
 	pop af
 	rst Bankswitch
 	ret
 
-CloseText
+CloseText::
 	ldh a, [hOAMUpdate]
 	push af
 	ld a, $1
 	ldh [hOAMUpdate], a
+
 	call .CloseText
+
 	pop af
 	ldh [hOAMUpdate], a
 	ret
@@ -26,7 +30,7 @@ CloseText
 	xor a
 	ldh [hBGMapMode], a
 	call OverworldTextModeSwitch
-	call _OpenAndCloseMenu_HDMATransferTileMapAndAttrMap
+	call _OpenAndCloseMenu_HDMATransferTilemapAndAttrmap
 	xor a
 	ldh [hBGMapMode], a
 	call SafeUpdateSprites
@@ -43,27 +47,31 @@ OpenText::
 	call ClearWindowData
 	ldh a, [hROMBank]
 	push af
-	ld a, BANK(ReanchorBGMap_NoOAMUpdate) ; and BANK(LoadFonts_NoOAMUpdate)
+	ld a, BANK(ReanchorBGMap_NoOAMUpdate) ; aka BANK(LoadFonts_NoOAMUpdate)
 	rst Bankswitch
-	call ReanchorBGMap_NoOAMUpdate
+
+	call ReanchorBGMap_NoOAMUpdate ; clear bgmap
 	call SpeechTextbox
-	call _OpenAndCloseMenu_HDMATransferTileMapAndAttrMap
-	call LoadFonts_NoOAMUpdate
+	call _OpenAndCloseMenu_HDMATransferTilemapAndAttrmap ; anchor bgmap
+	call LoadFonts_NoOAMUpdate ; load font
 	pop af
 	rst Bankswitch
+
 	ret
 
-_OpenAndCloseMenu_HDMATransferTileMapAndAttrMap:: ; 2ee3 (0:2ee3)
+_OpenAndCloseMenu_HDMATransferTilemapAndAttrmap::
 	ldh a, [hOAMUpdate]
 	push af
-	ld a, $1
+	ld a, 1
 	ldh [hOAMUpdate], a
+
 	call CGBOnly_CopyTilemapAtOnce
+
 	pop af
 	ldh [hOAMUpdate], a
 	ret
 
-SafeUpdateSprites:: ; 2ef1 (0:2ef1)
+SafeUpdateSprites::
 	ldh a, [hOAMUpdate]
 	push af
 	ldh a, [hBGMapMode]
@@ -72,7 +80,9 @@ SafeUpdateSprites:: ; 2ef1 (0:2ef1)
 	ldh [hBGMapMode], a
 	ld a, $1
 	ldh [hOAMUpdate], a
+
 	call UpdateSprites
+
 	xor a
 	ldh [hOAMUpdate], a
 	call DelayFrame
@@ -82,7 +92,6 @@ SafeUpdateSprites:: ; 2ef1 (0:2ef1)
 	ldh [hOAMUpdate], a
 	ret
 
-Function2f0e::
+; unused
 	scf
 	ret
-

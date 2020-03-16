@@ -34,7 +34,7 @@
 	const OBJECT_1F                  ; 1f
 	const OBJECT_RANGE               ; 20
 	; 21-27 are not used
-OBJECT_STRUCT_LENGTH EQU 40
+OBJECT_LENGTH EQU 40
 NUM_OBJECT_STRUCTS EQU 13 ; see wObjectStructs
 
 ; object_struct OBJECT_FACING values

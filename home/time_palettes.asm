@@ -1,4 +1,4 @@
-RTC:: ; 343
+UpdateTimeAndPals::
 ; update time and time-sensitive palettes
 
 ; rtc enabled?
@@ -10,13 +10,13 @@ RTC:: ; 343
 
 ; obj update on?
 	ld a, [wVramState]
-	bit 0, a
+	bit 0, a ; obj update
 	ret z
 
-TimeOfDayPals:: ; 352
+TimeOfDayPals::
 	callfar _TimeOfDayPals
 	ret
 
-UpdateTimePals:: ; 359
+UpdateTimePals::
 	callfar _UpdateTimePals
 	ret

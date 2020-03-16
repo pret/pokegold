@@ -244,9 +244,9 @@ wVirtualOAMEnd::
 
 
 SECTION "TileMap", WRAM0
-wTileMap:: ; c3a0
+wTilemap:: ; c3a0
 	ds SCREEN_HEIGHT * SCREEN_WIDTH
-wTileMapEnd:: ; c508
+wTilemapEnd:: ; c508
 
 SECTION "Animated Objects", WRAM0
 wMisc:: ; c508
@@ -2064,9 +2064,9 @@ wccd6:: ds 1 ; ccd6
 wccd7:: ds 1 ; ccd7
 wccd8:: ds 1 ; ccd8
 
-wAttrMap:: ; ccd9
+wAttrmap:: ; ccd9
 	ds SCREEN_HEIGHT * SCREEN_WIDTH
-wAttrMapEnd:: ; ce41
+wAttrmapEnd:: ; ce41
 
 wce41:: ds 1 ; ce41
 wce42:: ds 1 ; ce42
@@ -2145,9 +2145,9 @@ wce87:: ds 1 ; ce87
 wce88:: ds 1 ; ce88
 wce89:: ds 1 ; ce89
 wce8a:: ds 1 ; ce8a
-wMovementPerson:: ds 1 ; ce8b
-wMovementDataPointerBank:: ds 1 ; ce8c
-wMovementDataPointerAddr:: dw ; ce8d
+wMovementObject:: ds 1 ; ce8b
+wMovementDataBank:: ds 1 ; ce8c
+wMovementDataAddress:: dw ; ce8d
 wce8f:: ds 1 ; ce8f
 wce90:: ds 1 ; ce90
 wce91:: ds 1 ; ce91
@@ -2259,7 +2259,7 @@ wceec:: ds 1 ; ceec
 wMovementBufferCount:: ; ceed
 wceed:: ds 1 ; ceed
 
-wMovementBufferPerson::
+wMovementBufferObject::
 wceee:: ds 1 ; ceee
 
 wTemporaryBuffer::

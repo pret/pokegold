@@ -227,7 +227,7 @@ Function91b4:
 	ld a, [wc606]
 	ld c, a
 	ld a, [wc607]
-	ld hl, wAttrMap
+	ld hl, wAttrmap
 	ld de, $14
 .asm_91cc
 	and a
@@ -299,7 +299,7 @@ ApplyHPBarPals:
 .asm_9236
 	ld e, c
 	inc e
-	hlcoord 11, 1, wAttrMap
+	hlcoord 11, 1, wAttrmap
 	ld bc, 2 * SCREEN_WIDTH
 	ld a, [wCurPartyMon]
 .asm_9241
@@ -543,7 +543,7 @@ Function9b01: ; 9b01 (2:5b01)
 	ret
 
 Function9b1d: ; 9b1d (2:5b1d)
-	hlcoord 0, 0, wAttrMap
+	hlcoord 0, 0, wAttrmap
 	ld bc, SCREEN_HEIGHT * SCREEN_WIDTH
 	xor a
 	call ByteFill
@@ -573,7 +573,7 @@ Function9b35: ; 9b35 (2:5b35)
 	ret
 
 .asm_9b52
-	hlcoord 0, 0, wAttrMap
+	hlcoord 0, 0, wAttrmap
 	ld de, $9800
 	ld b, $12
 	ld a, $1
@@ -609,7 +609,7 @@ Function9b75: ; 9b75 (2:5b75)
 	ld a, [de]
 	inc a
 	ld e, a
-	hlcoord 11, 2, wAttrMap
+	hlcoord 11, 2, wAttrmap
 	ld bc, $28
 	ld a, [wcca9]
 .asm_9b8d

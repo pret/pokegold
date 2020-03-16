@@ -79,7 +79,7 @@ GetMapTrigger:: ; 1f95 (0:1f95)
 
 OverworldTextModeSwitch:: ; 1fc1 (0:1fc1)
 	call LoadMapPart
-	call FarCallSwapTextboxPalettes
+	call SwapTextboxPalettes
 	ret
 
 LoadMapPart:: ; 1fc8 (0:1fc8)
@@ -89,7 +89,7 @@ LoadMapPart:: ; 1fc8 (0:1fc8)
 	rst Bankswitch
 	call LoadMetatiles
 	ld a, $60
-	ld hl, wTileMap
+	ld hl, wTilemap
 	ld bc, $168
 	call ByteFill
 	ld a, $5
@@ -237,7 +237,7 @@ Function20e6:: ; 20e6 (0:20e6)
 	ldh a, [hCGB]
 	and a
 	ret z
-	decoord 0, 0, wAttrMap
+	decoord 0, 0, wAttrmap
 	ld a, $1
 	ldh [rVBK], a
 Function20f7:: ; 20f7 (0:20f7)
@@ -1441,7 +1441,7 @@ ScrollMapDown::
 	ld de, wBGMapBuffer
 	call BackupBGMapRow
 	ld c, $28
-	call FarCallScrollBGMapPalettes
+	call ScrollBGMapPalettes
 	ld a, [wd05b]
 	ld e, a
 	ld a, [wd05c]
@@ -1456,7 +1456,7 @@ ScrollMapUp::
 	ld de, wBGMapBuffer
 	call BackupBGMapRow
 	ld c, $28
-	call FarCallScrollBGMapPalettes
+	call ScrollBGMapPalettes
 	ld a, [wd05b]
 	ld l, a
 	ld a, [wd05c]
@@ -1474,11 +1474,11 @@ ScrollMapUp::
 	ret
 
 ScrollMapRight::
-	ld hl, wTileMap
+	ld hl, wTilemap
 	ld de, wBGMapBuffer
 	call BackupBGMapColumn
 	ld c, $24
-	call FarCallScrollBGMapPalettes
+	call ScrollBGMapPalettes
 	ld a, [wd05b]
 	ld e, a
 	ld a, [wd05c]
@@ -1493,7 +1493,7 @@ ScrollMapLeft::
 	ld de, wBGMapBuffer
 	call BackupBGMapColumn
 	ld c, $24
-	call FarCallScrollBGMapPalettes
+	call ScrollBGMapPalettes
 	ld a, [wd05b]
 	ld e, a
 	and $e0

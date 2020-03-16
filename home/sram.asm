@@ -1,16 +1,23 @@
-OpenSRAM:: ; 30e1 (0:30e1)
+OpenSRAM::
+; switch to sram bank a
 	push af
-	ld a, $1
+; latch clock data
+	ld a, 1
 	ld [MBC3LatchClock], a
-	ld a, $a
+; enable sram/clock write
+	ld a, SRAM_ENABLE
 	ld [MBC3SRamEnable], a
+; select sram bank
 	pop af
 	ld [MBC3SRamBank], a
 	ret
-CloseSRAM:: ; 30f1 (0:30f1)
+
+CloseSRAM::
 	push af
-	ld a, $0
+	ld a, SRAM_DISABLE
+; reset clock latch for next time
 	ld [MBC3LatchClock], a
+; disable sram/clock write
 	ld [MBC3SRamEnable], a
 	pop af
 	ret

@@ -7,7 +7,7 @@ NamesPointers::
 	dbw 0, wPartyMonOT      ; PARTY_OT_NAME
 	dbw 0, wOTPartyMonOT    ; ENEMY_OT_NAME
 	dba TrainerClassNames   ; TRAINER_NAME
-	dbw 4, MoveDescriptions   ; MOVE_DESC_NAME_BROKEN (wrong bank)
+	dbw 4, MoveDescriptions ; MOVE_DESC_NAME_BROKEN (wrong bank)
 
 GetName::
 ; Return name wCurSpecies from name list wNamedObjectTypeBuffer in wStringBuffer1.
