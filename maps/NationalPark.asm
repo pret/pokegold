@@ -31,7 +31,7 @@ NationalParkTeacher1Script:
 	checkevent EVENT_GOT_QUICK_CLAW
 	iftrue .GotQuickClaw
 	writetext NationalParkTeacher1Text
-	buttonsound
+	promptbutton
 	verbosegiveitem QUICK_CLAW
 	iffalse .NoRoom
 	setevent EVENT_GOT_QUICK_CLAW
@@ -82,7 +82,7 @@ TrainerSchoolboyJack1:
 	checkevent EVENT_JACK_ASKED_FOR_PHONE_NUMBER
 	iftrue .AskAgain
 	writetext UnknownText_0x5c4f3
-	buttonsound
+	promptbutton
 	setevent EVENT_JACK_ASKED_FOR_PHONE_NUMBER
 	scall .AskNumber1
 	jump .RequestNumber
@@ -176,7 +176,7 @@ TrainerPokefanfBeverly1:
 	checkevent EVENT_BEVERLY_ASKED_FOR_PHONE_NUMBER
 	iftrue .AskAgain
 	writetext UnknownText_0x5c68a
-	buttonsound
+	promptbutton
 	setevent EVENT_BEVERLY_ASKED_FOR_PHONE_NUMBER
 	scall .AskNumber1
 	jump .RequestNumber

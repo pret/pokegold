@@ -98,7 +98,7 @@ TrainerCamperTodd1:
 	checkevent EVENT_TODD_ASKED_FOR_PHONE_NUMBER
 	iftrue .AskAgain
 	writetext CamperTodd1AfterText
-	buttonsound
+	promptbutton
 	setevent EVENT_TODD_ASKED_FOR_PHONE_NUMBER
 	scall .AskNumber
 	jump .FinishAsk
@@ -181,7 +181,7 @@ TrainerPicnickerGina1:
 	checkevent EVENT_GINA_ASKED_FOR_PHONE_NUMBER
 	iftrue .AskAgain
 	writetext PicnickerGina1AfterText
-	buttonsound
+	promptbutton
 	setevent EVENT_GINA_ASKED_FOR_PHONE_NUMBER
 	scall .AskNumber1
 	jump .FinishAsk
@@ -362,7 +362,7 @@ TrainerCooltrainerfKate:
 	checkevent EVENT_GOT_SOFT_SAND_FROM_KATE
 	iftrue .GotSoftSand
 	writetext CooltrainerfKateOfferSoftSandText
-	buttonsound
+	promptbutton
 	verbosegiveitem SOFT_SAND
 	iffalse .BagFull
 	setevent EVENT_GOT_SOFT_SAND_FROM_KATE

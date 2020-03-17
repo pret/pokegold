@@ -160,7 +160,7 @@ Route36OfficerScriptContest:
 	setflag ENGINE_BUG_CONTEST_TIMER
 	special PlayMapMusic
 	writetext UnknownText_0x6ae87
-	buttonsound
+	promptbutton
 	waitsfx
 	writetext UnknownText_0x6aeb1
 	playsound SFX_ITEM
@@ -193,11 +193,11 @@ Route36OfficerScriptContest:
 	iftrue .FirstMonIsFainted
 	setevent EVENT_LEFT_MONS_WITH_CONTEST_OFFICER
 	writetext UnknownText_0x6b021
-	buttonsound
+	promptbutton
 	writetext UnknownText_0x6b055
 	playsound SFX_GOT_SAFARI_BALLS
 	waitsfx
-	buttonsound
+	promptbutton
 	jump .ResumeStartingContest
 
 .DecidedNotToJoinContest:
@@ -246,7 +246,7 @@ Route36Officer_ContestHasConcluded:
 
 .Sunstone:
 	writetext UnknownText_0x6b97f
-	buttonsound
+	promptbutton
 	verbosegiveitem SUN_STONE
 	iffalse .BagFull
 	clearevent EVENT_CONTEST_OFFICER_HAS_SUN_STONE
@@ -255,7 +255,7 @@ Route36Officer_ContestHasConcluded:
 
 .Everstone:
 	writetext UnknownText_0x6b97f
-	buttonsound
+	promptbutton
 	verbosegiveitem EVERSTONE
 	iffalse .BagFull
 	clearevent EVENT_CONTEST_OFFICER_HAS_EVERSTONE
@@ -264,7 +264,7 @@ Route36Officer_ContestHasConcluded:
 
 .GoldBerry:
 	writetext UnknownText_0x6b97f
-	buttonsound
+	promptbutton
 	verbosegiveitem GOLD_BERRY
 	iffalse .BagFull
 	clearevent EVENT_CONTEST_OFFICER_HAS_GOLD_BERRY
@@ -273,7 +273,7 @@ Route36Officer_ContestHasConcluded:
 
 .Berry:
 	writetext UnknownText_0x6b97f
-	buttonsound
+	promptbutton
 	verbosegiveitem BERRY
 	iffalse .BagFull
 	clearevent EVENT_CONTEST_OFFICER_HAS_BERRY

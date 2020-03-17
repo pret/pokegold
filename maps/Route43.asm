@@ -59,7 +59,7 @@ TrainerPokemaniacBrent:
 	checkevent EVENT_BRENT_ASKED_FOR_PHONE_NUMBER
 	iftrue .AskedAlready
 	writetext PokemaniacBrentAfterBattleText
-	buttonsound
+	promptbutton
 	setevent EVENT_BRENT_ASKED_FOR_PHONE_NUMBER
 	scall .AskNumber1
 	jump .AskForNumber
@@ -164,7 +164,7 @@ TrainerPicnickerTiffany:
 	checkevent EVENT_TIFFANY_ASKED_FOR_PHONE_NUMBER
 	iftrue .AskedAlready
 	writetext PicnickerTiffanyWantsPicnicText
-	buttonsound
+	promptbutton
 	setevent EVENT_TIFFANY_ASKED_FOR_PHONE_NUMBER
 	scall .AskNumber1
 	jump .AskForNumber

@@ -47,7 +47,7 @@ TrainerLassDana1:
 	checkevent EVENT_DANA_ASKED_FOR_PHONE_NUMBER
 	iftrue .SecondTimeAsking
 	writetext UnknownText_0x1a20ec
-	buttonsound
+	promptbutton
 	setevent EVENT_DANA_ASKED_FOR_PHONE_NUMBER
 	scall .AskNumber1F
 	jump .AskForPhoneNumber
@@ -130,7 +130,7 @@ TrainerSchoolboyChad1:
 	checkevent EVENT_CHAD_ASKED_FOR_PHONE_NUMBER
 	iftrue .SecondTimeAsking
 	writetext UnknownText_0x1a200e
-	buttonsound
+	promptbutton
 	setevent EVENT_CHAD_ASKED_FOR_PHONE_NUMBER
 	scall .AskPhoneNumber1
 	jump .AskToRegisterNumber

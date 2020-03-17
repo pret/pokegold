@@ -1390,21 +1390,21 @@ ObjectEvent::
 
 ObjectEventText::
 	text_far _ObjectEventText
-	db "@"
+	text_end
 
 BGEvent::
 	jumptext BGEventText
 
 BGEventText::
-	text_far BGEventText_
-	db "@"
+	text_far _BGEventText
+	text_end
 
 CoordinatesEvent::
 	jumptext CoordinatesEventText
 
 CoordinatesEventText::
-	text_far CoordinatesEventText_
-	db "@"
+	text_far _CoordinatesEventText
+	text_end
 
 CheckObjectMask::
 	ldh a, [hMapObjectIndexBuffer]

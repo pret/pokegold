@@ -409,16 +409,18 @@ AlreadySurfing:
 
 SurfFromMenuScript:
 	special UpdateTimePals
+
 UsedSurfScript:
-	writetext UsedSurfText
+	writetext UsedSurfText ; "used SURF!"
 	waitbutton
 	closetext
-	copybytetovar wBuffer2
-	writevarcode VAR_MOVEMENT
+	readmem wBuffer2
+	writevar VAR_MOVEMENT
 	special ReplacePlayerSprite
 	special PlayMapMusic
+; step into the water (slow_step DIR, step_end)
 	special SurfStartStep
-	applymovement 0, wMovementBuffer
+	applymovement PLAYER, wMovementBuffer
 	end
 
 UsedSurfText:
@@ -591,7 +593,7 @@ FlyScript:
 	farscall Script_AbortBugContest
 	special WarpToSpawnPoint
 	callasm DelayLoadingNewSprites ; 1560c
-	writecode VAR_MOVEMENT, PLAYER_NORMAL
+	loadvar VAR_MOVEMENT, PLAYER_NORMAL
 	newloadmap MAPSETUP_TELEPORT
 	callasm FlyToAnimation
 	special WaitSFX
@@ -806,7 +808,7 @@ UsedEscapeRopeScript: ; cc2e	reloadmappart
 	reloadmappart
 	special UpdateTimePals
 	writetext Text_UsedEscapeRope ; cc24
-	jump ContinueDigEscapeRopeScript
+	sjump ContinueDigEscapeRopeScript
 
 UsedDigScript:
 	reloadmappart
@@ -819,7 +821,7 @@ ContinueDigEscapeRopeScript:
 	applymovement PLAYER, DigOutMovementData
 	farscall Script_AbortBugContest
 	special WarpToSpawnPoint
-	writecode VAR_MOVEMENT, PLAYER_NORMAL
+	loadvar VAR_MOVEMENT, PLAYER_NORMAL
 	newloadmap MAPSETUP_DOOR
 	playsound SFX_WARP_FROM
 	applymovement PLAYER, DigReturnMovementData
@@ -906,7 +908,7 @@ TeleportScript: ; ccbe
 	applymovement PLAYER, TeleportFromMovementData
 	farscall Script_AbortBugContest
 	special WarpToSpawnPoint
-	writecode VAR_MOVEMENT, PLAYER_NORMAL
+	loadvar VAR_MOVEMENT, PLAYER_NORMAL
 	newloadmap MAPSETUP_TELEPORT
 	playsound SFX_WARP_FROM
 	applymovement PLAYER, TeleportToMovementData
@@ -969,7 +971,7 @@ Script_StrengthFromMenu: ; cd2c
 Script_UsedStrength:
 	callasm GetStrengthUserSpeciesAndSetFlag
 	writetext Text_UsedStrength
-	copybytetovar wBuffer6
+	readmem wBuffer6
 	cry 0
 	pause 3
 	writetext Text_AllowedToMoveBoulders
@@ -988,7 +990,7 @@ AskStrengthScript: ; cd4e
 	callasm TryStrengthOW
 	iffalse .ask
 	ifequal 1, .not_able
-	jump .already_active
+	sjump .already_active
 
 .not_able
 	jumptext Text_MonMayBeAbleToMove
@@ -1315,10 +1317,11 @@ RockSmashScript:
 	special WaitSFX
 	playsound SFX_STRENGTH
 	earthquake 84
-	applymovement2 RockSmashMovementData
+	applymovementlasttalked RockSmashMovementData
 	disappear -2
+
 	callasm RockMonEncounter
-	copybytetovar wd117
+	readmem wTempWildMonSpecies
 	iffalse .skip_battle
 	randomwildmon
 	startbattle
@@ -1421,7 +1424,7 @@ Fish_CheckMap:
 	ld a, d
 	and a
 	jr z, .asm_cff1
-	ld [wd117], a
+	ld [wTempWildMonSpecies], a
 	ld a, e
 	ld [wCurPartyLevel], a
 	ld a, $4
@@ -1464,7 +1467,7 @@ Fish_NoFish:
 Script_NotEvenANibble: ; d021
 	scall Script_FishCastRod
 	writetext Text_NotEvenANibble
-	jump Script_NotEvenANibble_Continue
+	sjump Script_NotEvenANibble_Continue
 
 Script_NotEvenANibble2:
 	scall Script_FishCastRod
@@ -1479,7 +1482,7 @@ Script_GotABite:
 	callasm Fish_CheckFacingUp
 	iffalse .not_facing_up
 	applymovement 0, Movement_Fishing_BiteFacingUp
-	jump .continue
+	sjump .continue
 
 .not_facing_up
 	applymovement 0, Movement_Fishing_BiteNotFacingUp
@@ -1530,7 +1533,7 @@ Fish_CheckFacingUp: ; d06d
 
 Script_FishCastRod: ; d07d
 	reloadmappart
-	loadvar hBGMapMode, 0
+	loadmem hBGMapMode, $0
 	special UpdateTimePals
 	loademote EMOTE_ROD
 	callasm LoadFishingGFX
@@ -1657,15 +1660,15 @@ CheckBikePermission: ; d12e (3:512e)
 Script_GetOnBike: ; d14b
 	reloadmappart
 	special UpdateTimePals
-	writecode VAR_MOVEMENT, PLAYER_BIKE
-	writetext Text_GotOnTheBike
+	loadvar VAR_MOVEMENT, PLAYER_BIKE
+	writetext GotOnBikeText
 	waitbutton
 	closetext
 	special ReplacePlayerSprite
 	end
 
 Script_GetOnBike_Register:
-	writecode VAR_MOVEMENT, PLAYER_BIKE
+	loadvar VAR_MOVEMENT, PLAYER_BIKE
 	closetext
 	special ReplacePlayerSprite
 	end
@@ -1676,8 +1679,8 @@ Script_GetOnBike_Register:
 Script_GetOffBike:
 	reloadmappart
 	special UpdateTimePals
-	writecode VAR_MOVEMENT, PLAYER_NORMAL
-	writetext Text_GotOffTheBike
+	loadvar VAR_MOVEMENT, PLAYER_NORMAL
+	writetext GotOffBikeText
 	waitbutton
 FinishGettingOffBike:
 	closetext
@@ -1686,26 +1689,26 @@ FinishGettingOffBike:
 	end
 
 Script_GetOffBike_Register:
-	writecode VAR_MOVEMENT, PLAYER_NORMAL
-	jump FinishGettingOffBike
+	loadvar VAR_MOVEMENT, PLAYER_NORMAL
+	sjump FinishGettingOffBike
 
-Script_CantGetOffBike: ; d17e
-	writetext Text_CantGetOffBike
+Script_CantGetOffBike:
+	writetext .CantGetOffBikeText
 	waitbutton
 	closetext
 	end
 
-Text_CantGetOffBike:
-	text_far Text_CantGetOffBike_
-	db "@"
+.CantGetOffBikeText:
+	text_far _CantGetOffBikeText
+	text_end
 
-Text_GotOnTheBike:
-	text_far Text_GotOnTheBike_
-	db "@"
+GotOnBikeText:
+	text_far _GotOnBikeText
+	text_end
 
-Text_GotOffTheBike:
-	text_far Text_GotOffTheBike_
-	db "@"
+GotOffBikeText:
+	text_far _GotOffBikeText
+	text_end
 
 
 TryCutOW: ; d193

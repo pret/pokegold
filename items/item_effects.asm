@@ -642,7 +642,7 @@ UltraBall: ; e926
 	jp TossItem
 
 .used_park_ball
-	ld hl, wParkBalls
+	ld hl, wParkBallsRemaining
 	dec [hl]
 	ret
 

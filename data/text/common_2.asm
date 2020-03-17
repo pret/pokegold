@@ -165,19 +165,19 @@ Text_NothingHereToFish_::
 	line "nothing here."
 	prompt
 
-Text_CantGetOffBike_::
+_CantGetOffBikeText::
 	text "You can't get off"
 	line "here!"
 	done
 
-Text_GotOnTheBike_::
+_GotOnBikeText::
 	text "<PLAYER> got on the"
 	line "@"
 	text_ram wStringBuffer2
 	text "."
 	done
 
-Text_GotOffTheBike_::
+_GotOffBikeText::
 	text "<PLAYER> got off"
 	line "the @"
 	text_ram wStringBuffer2
@@ -209,7 +209,7 @@ _CantCarryItemText::
 	cont "items!"
 	done
 
-UnknownText_0x1c0a4e::
+_WhitedOutText::
 	text "<PLAYER> is out of"
 	line "useable #MON!"
 
@@ -1323,11 +1323,11 @@ _ObjectEventText::
 	text "Object event."
 	done
 
-BGEventText_::
+_BGEventText::
 	text "BG event"
 	done
 
-CoordinatesEventText_::
+_CoordinatesEventText::
 	text "Coordinates event"
 	done
 

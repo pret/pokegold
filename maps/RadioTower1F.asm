@@ -31,7 +31,7 @@ RadioTower1FLuckyNumberManScript:
 	faceplayer
 	opentext
 	writetext UnknownText_0x5ceba
-	buttonsound
+	promptbutton
 	special CheckLuckyNumberShowFlag
 	iffalse .skip
 	special ResetLuckyNumberShowFlag
@@ -40,17 +40,17 @@ RadioTower1FLuckyNumberManScript:
 	checkflag ENGINE_LUCKY_NUMBER_SHOW
 	iftrue .GameOver
 	writetext UnknownText_0x5cf3a
-	buttonsound
+	promptbutton
 	closetext
 	applymovement RADIOTOWER1F_GENTLEMAN, MovementData_0x5ce71
 	opentext
 	writetext UnknownText_0x5cf5a
-	buttonsound
+	promptbutton
 	waitsfx
 	writetext UnknownText_0x5cf79
 	playsound SFX_DEX_FANFARE_20_49
 	waitsfx
-	buttonsound
+	promptbutton
 	special CheckForLuckyNumberWinners
 	closetext
 	applymovement RADIOTOWER1F_GENTLEMAN, MovementData_0x5ce74
@@ -70,7 +70,7 @@ RadioTower1FLuckyNumberManScript:
 	writetext UnknownText_0x5cfb5
 	playsound SFX_1ST_PLACE
 	waitsfx
-	buttonsound
+	promptbutton
 	giveitem MASTER_BALL
 	iffalse .BagFull
 	itemnotify
@@ -81,7 +81,7 @@ RadioTower1FLuckyNumberManScript:
 	writetext UnknownText_0x5d023
 	playsound SFX_2ND_PLACE
 	waitsfx
-	buttonsound
+	promptbutton
 	giveitem EXP_SHARE
 	iffalse .BagFull
 	itemnotify
@@ -92,7 +92,7 @@ RadioTower1FLuckyNumberManScript:
 	writetext UnknownText_0x5d076
 	playsound SFX_3RD_PLACE
 	waitsfx
-	buttonsound
+	promptbutton
 	giveitem PP_UP
 	iffalse .BagFull
 	itemnotify
@@ -145,11 +145,11 @@ RadioTower1FRadioCardWomanScript:
 	playsound SFX_ELEVATOR_END
 	waitsfx
 	writetext UnknownText_0x5d37b
-	buttonsound
+	promptbutton
 	stringtotext .RadioCardText, STRING_BUFFER_4
 	scall .ReceiveItem
 	writetext UnknownText_0x5d3c0
-	buttonsound
+	promptbutton
 	setflag ENGINE_RADIO_CARD
 .GotCard:
 	writetext UnknownText_0x5d3e5

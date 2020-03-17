@@ -88,7 +88,7 @@ VermilionGymBadgeGuy:
 
 .AllBadges:
 	writetext UnknownText_0x1aacf3
-	buttonsound
+	promptbutton
 	verbosegiveitem HP_UP
 	iffalse .Done
 	setevent EVENT_GOT_HP_UP_FROM_VERMILION_GUY

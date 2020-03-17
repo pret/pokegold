@@ -29,7 +29,7 @@ PewterCityGrampsScript:
 	checkevent EVENT_GOT_SILVER_WING
 	iftrue .GotSilverWing
 	writetext PewterCityGrampsText
-	buttonsound
+	promptbutton
 	verbosegiveitem SILVER_WING
 	setevent EVENT_GOT_SILVER_WING
 	closetext
@@ -45,7 +45,7 @@ PewterCityGrampsScript:
 	checkevent EVENT_GOT_RAINBOW_WING
 	iftrue .GotSilverWing
 	writetext PewterCityGrampsText
-	buttonsound
+	promptbutton
 	verbosegiveitem RAINBOW_WING
 	setevent EVENT_GOT_RAINBOW_WING
 	setevent EVENT_TEAM_ROCKET_DISBANDED

@@ -65,14 +65,14 @@ GoldenrodDeptStore5FReceptionistScript:
 	iftrue .EventIsOver
 	special GetFirstPokemonHappiness
 	writetext UnknownText_0x56143
-	buttonsound
+	promptbutton
 	ifgreater 150 - 1, .VeryHappy
 	ifgreater 50 - 1, .SomewhatHappy
 	jump .NotVeryHappy
 
 .VeryHappy:
 	writetext UnknownText_0x5615a
-	buttonsound
+	promptbutton
 	verbosegiveitem TM_RETURN
 	iffalse .Done
 	setflag ENGINE_GOLDENROD_DEPT_STORE_TM27_RETURN
@@ -87,7 +87,7 @@ GoldenrodDeptStore5FReceptionistScript:
 
 .NotVeryHappy:
 	writetext UnknownText_0x561d8
-	buttonsound
+	promptbutton
 	verbosegiveitem TM_FRUSTRATION
 	iffalse .Done
 	setflag ENGINE_GOLDENROD_DEPT_STORE_TM27_RETURN

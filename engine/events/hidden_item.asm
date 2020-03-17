@@ -1,28 +1,17 @@
-RepelWoreOffScript::
-	opentext
-	writetext .RepelWoreOffText
-	waitbutton
-	closetext
-	end
-
-.RepelWoreOffText:
-	text_far _RepelWoreOffText
-	db "@"
-
 HiddenItemScript::
 	opentext
-	copybytetovar wHiddenItemID
-	itemtotext STRING_BUFFER_3, USE_SCRIPT_VAR
+	readmem wHiddenItemID
+	getitemname STRING_BUFFER_3, USE_SCRIPT_VAR
 	writetext .PlayerFoundItemText
 	giveitem ITEM_FROM_MEM
 	iffalse .bag_full
 	callasm SetMemEvent
 	specialsound
 	itemnotify
-	jump .finish
+	sjump .finish
 
 .bag_full
-	buttonsound
+	promptbutton
 	writetext .ButNoSpaceText
 	waitbutton
 
@@ -32,11 +21,11 @@ HiddenItemScript::
 
 .PlayerFoundItemText:
 	text_far _PlayerFoundItemText
-	db "@"
+	text_end
 
 .ButNoSpaceText:
 	text_far _ButNoSpaceText
-	db "@"
+	text_end
 
 SetMemEvent:
 	ld hl, wHiddenItemEvent

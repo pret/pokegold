@@ -20,7 +20,7 @@ Oak:
 	checkevent EVENT_TALKED_TO_OAK_IN_KANTO
 	iftrue .CheckBadges
 	writetext OakWelcomeKantoText
-	buttonsound
+	promptbutton
 	setevent EVENT_TALKED_TO_OAK_IN_KANTO
 .CheckBadges:
 	checkcode VAR_BADGES
@@ -39,18 +39,18 @@ Oak:
 
 .OpenMtSilver:
 	writetext OakOpenMtSilverText
-	buttonsound
+	promptbutton
 	setevent EVENT_OPENED_MT_SILVER
 	jump .CheckPokedex
 
 .Complain:
 	writetext OakNoKantoBadgesText
-	buttonsound
+	promptbutton
 	jump .CheckPokedex
 
 .AhGood:
 	writetext OakYesKantoBadgesText
-	buttonsound
+	promptbutton
 	jump .CheckPokedex
 
 OaksAssistant1Script:

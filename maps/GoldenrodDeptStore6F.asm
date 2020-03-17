@@ -52,7 +52,7 @@ GoldenrodVendingMachine:
 	pause 10
 	playsound SFX_ENTER_DOOR
 	writetext GoldenrodClangText
-	buttonsound
+	promptbutton
 	itemnotify
 	jump .Start
 

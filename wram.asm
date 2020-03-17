@@ -26,7 +26,7 @@ wChannel8:: channel_struct wChannel8 ; c25f
 	ds 1 ; c291
 
 wCurTrackDuty:: db
-wCurTrackIntensity:: db
+wCurTrackVolumeEnvelope:: db
 wCurTrackFrequency:: dw
 wUnusedBCDNumber:: db ; BCD value, dummied out
 wCurNoteDuration:: db ; used in MusicE0 and LoadNote
@@ -46,13 +46,12 @@ wSoundOutput:: ; c29b
 ; bit 4-7: ch1-4 so2 on/off
 ; bit 0-3: ch1-4 so1 on/off
 	db
-wSoundInput:: ; c29c
-; corresponds to rNR52
-; bit 7: global on/off
-; bit 0: ch1 on/off
-; bit 1: ch2 on/off
-; bit 2: ch3 on/off
-; bit 3: ch4 on/off
+wPitchSweep:: ; c29c
+; corresponds to rNR10
+; bit 7:   unused
+; bit 4-6: sweep time
+; bit 3:   sweep direction
+; but 0-2: sweep shift
 	db
 
 wMusicID:: dw ; c29d
@@ -2770,7 +2769,7 @@ wd113:: ds 1 ; d113
 wd114:: ds 1 ; d114
 wd115:: ds 1 ; d115
 wBattleMode:: ds 1 ; d116
-wd117:: ds 1 ; d117
+wTempWildMonSpecies:: db ; d117
 
 wOtherTrainerClass:: ; d118
 ; class (Youngster, Bug Catcher, etc.) of opposing trainer
@@ -3010,20 +3009,20 @@ wFollowerMovementQueueLength:: ds 1 ; d1f7
 wFollowMovementQueue:: ds 5 ; d1f8
 
 wObjectStructs:: ; d1fd
-	object_struct wPlayer ; d1fd
-	object_struct wObject1 ; d225
-	object_struct wObject2 ; d24d
-	object_struct wObject3 ; d275
-	object_struct wObject4 ; d29d
-	object_struct wObject5 ; d2c5
-	object_struct wObject6 ; d2ed
-	object_struct wObject7 ; d315
-	object_struct wObject8 ; d33d
-	object_struct wObject9 ; d365
-	object_struct wObject10 ; d38d
-	object_struct wObject11 ; d3b5
-	object_struct wObject12 ; d3dd
-wObjectStructsEnd:: ; d405
+wPlayerStruct::   object_struct wPlayer
+wObject1Struct::  object_struct wObject1
+wObject2Struct::  object_struct wObject2
+wObject3Struct::  object_struct wObject3
+wObject4Struct::  object_struct wObject4
+wObject5Struct::  object_struct wObject5
+wObject6Struct::  object_struct wObject6
+wObject7Struct::  object_struct wObject7
+wObject8Struct::  object_struct wObject8
+wObject9Struct::  object_struct wObject9
+wObject10Struct:: object_struct wObject10
+wObject11Struct:: object_struct wObject11
+wObject12Struct:: object_struct wObject12
+wObjectStructsEnd::
 
 wCmdQueue:: ds CMDQUEUE_CAPACITY * CMDQUEUE_ENTRY_SIZE ; d405
 ; d41d
@@ -3608,7 +3607,7 @@ wd9bf:: ds 1 ; d9bf
 wd9c0:: ds 1 ; d9c0
 wd9c1:: ds 1 ; d9c1
 wd9c2:: ds 1 ; d9c2
-wParkBalls:: ds 1 ; d9c3
+wParkBallsRemaining:: db ; d9c3
 wd9c4:: ds 1 ; d9c4
 wd9c5:: ds 1 ; d9c5
 wd9c6:: ds 1 ; d9c6

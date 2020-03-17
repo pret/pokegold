@@ -197,7 +197,7 @@ OlderHaircutBrotherScript:
 	checkmoney YOUR_MONEY, 500
 	ifequal HAVE_LESS, .NotEnoughMoney
 	writetext UnknownText_0x7c69a
-	buttonsound
+	promptbutton
 	special YoungerHaircutBrother
 	ifequal $0, .Refused
 	ifequal $1, .Refused
@@ -280,7 +280,7 @@ YoungerHaircutBrotherScript:
 	checkmoney YOUR_MONEY, 300
 	ifequal HAVE_LESS, .NotEnoughMoney
 	writetext UnknownText_0x7c7f1
-	buttonsound
+	promptbutton
 	special OlderHaircutBrother
 	ifequal $0, .Refused
 	ifequal $1, .Refused

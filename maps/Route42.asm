@@ -27,7 +27,7 @@ TrainerFisherChris:
 	checkevent EVENT_CHRIS_ASKED_FOR_PHONE_NUMBER
 	iftrue .AskedAlready
 	writetext FisherChrisAfterBattleText
-	buttonsound
+	promptbutton
 	setevent EVENT_CHRIS_ASKED_FOR_PHONE_NUMBER
 	scall .AskNumber1
 	jump .AskForNumber

@@ -20,7 +20,7 @@ INCLUDE "macros/mobile.asm"
 INCLUDE "macros/pals.asm"
 INCLUDE "macros/flag.asm"
 
-;INCLUDE "macros/legacy.asm"
+INCLUDE "macros/legacy.asm"
 
 dr: macro
 IF DEF(GOLD)

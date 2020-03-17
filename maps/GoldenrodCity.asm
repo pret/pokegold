@@ -75,7 +75,7 @@ GoldenrodCityGrampsScript:
 GoldenrodCityRocketScoutScript:
 	opentext
 	writetext GoldenrodCityRocketScoutText1
-	buttonsound
+	promptbutton
 	faceplayer
 	writetext GoldenrodCityRocketScoutText2
 	waitbutton

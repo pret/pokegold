@@ -73,7 +73,7 @@ BlackthornGymClairScript:
 	checkevent EVENT_GOT_TM24_DRAGONBREATH
 	iftrue .GotTM24
 	writetext BlackthornGymClairText_YouKeptMeWaiting
-	buttonsound
+	promptbutton
 	verbosegiveitem TM_DRAGONBREATH
 	iffalse .BagFull
 	setevent EVENT_GOT_TM24_DRAGONBREATH

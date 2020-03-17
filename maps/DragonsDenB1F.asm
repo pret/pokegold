@@ -54,7 +54,7 @@ DragonsDenB1FDragonFangScript:
 	turnobject PLAYER, DOWN
 	opentext
 	writetext ClairText_GiveDragonbreathDragonDen
-	buttonsound
+	promptbutton
 	waitsfx
 	writetext DragonShrinePlayerReceivedRisingBadgeText
 	playsound SFX_GET_BADGE
@@ -62,12 +62,12 @@ DragonsDenB1FDragonFangScript:
 	setflag ENGINE_RISINGBADGE
 	specialphonecall SPECIALCALL_MASTERBALL
 	writetext DragonShrineRisingBadgeExplanationText
-	buttonsound
+	promptbutton
 	verbosegiveitem TM_DRAGONBREATH, 1
 	iffalse .ClairLastText
 	setevent EVENT_GOT_TM24_DRAGONBREATH
 	writetext ClairText_DescribeDragonbreathDragonDen
-	buttonsound
+	promptbutton
 	jump .ClairLastText
 .ClairLastText
 	writetext ClairText_WhatsTheMatterDragonDen
@@ -81,7 +81,7 @@ DragonsDenB1FDragonFangScript:
 	opentext
 	itemtotext DRAGON_FANG, STRING_BUFFER_3
 	writetext Text_FoundDragonFang
-	buttonsound
+	promptbutton
 	writetext Text_NoRoomForDragonFang
 	waitbutton
 	closetext

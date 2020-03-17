@@ -58,7 +58,7 @@ CeladonDeptStore6FVendingMachine:
 	pause 10
 	playsound SFX_ENTER_DOOR
 	writetext CeladonClangText
-	buttonsound
+	promptbutton
 	itemnotify
 	jump .Start
 

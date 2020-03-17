@@ -31,7 +31,7 @@ TrainerSailorHuey:
 	checkevent EVENT_HUEY_ASKED_FOR_PHONE_NUMBER
 	iftrue .AskedBefore
 	writetext SailorHueyAfterBattleText
-	buttonsound
+	promptbutton
 	setevent EVENT_HUEY_ASKED_FOR_PHONE_NUMBER
 	scall .AskNumber1
 	jump .AskForNumber

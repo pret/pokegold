@@ -30,7 +30,7 @@ MountMortarB1FKiyoScript:
 	opentext
 .BeatKiyo:
 	writetext UnknownText_0x7e2c0
-	buttonsound
+	promptbutton
 	waitsfx
 	checkcode VAR_PARTYCOUNT
 	ifequal PARTY_LENGTH, .NoRoom

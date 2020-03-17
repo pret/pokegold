@@ -93,7 +93,7 @@ OlivinePortWalkUpToShipScript:
 	yesorno
 	iffalse OlivinePortNotRidingMoveAwayScript
 	writetext UnknownText_0x74ada
-	buttonsound
+	promptbutton
 	checkitem S_S_TICKET
 	iffalse .NoTicket
 	writetext UnknownText_0x74b11
@@ -158,7 +158,7 @@ OlivinePortSailorAfterHOFScript:
 	yesorno
 	iffalse OlivinePortNotRidingScript
 	writetext UnknownText_0x74ada
-	buttonsound
+	promptbutton
 	checkitem S_S_TICKET
 	iffalse .NoTicket
 	writetext UnknownText_0x74b11

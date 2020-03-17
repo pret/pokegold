@@ -35,7 +35,7 @@ TrainerPicnickerErin1:
 	checkevent EVENT_ERIN_ASKED_FOR_PHONE_NUMBER
 	iftrue .AskedAlready
 	writetext PicnickerErinAfterBattleText
-	buttonsound
+	promptbutton
 	setevent EVENT_ERIN_ASKED_FOR_PHONE_NUMBER
 	scall Route46AskNumber1F
 	jump .AskForNumber

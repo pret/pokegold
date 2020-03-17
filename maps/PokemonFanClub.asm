@@ -22,10 +22,10 @@ PokemonFanClubPresidentScript:
 	yesorno
 	iffalse .NotListening
 	writetext UnknownText_0x191911
-	buttonsound
+	promptbutton
 .HeardSpeechButBagFull:
 	writetext UnknownText_0x191a3d
-	buttonsound
+	promptbutton
 	verbosegiveitem RARE_CANDY
 	iffalse .BagFull
 	setevent EVENT_LISTENED_TO_FAN_CLUB_PRESIDENT
@@ -71,9 +71,9 @@ PokemonFanClubClefairyGuyScript:
 	end
 
 .MetCopycat:
-	buttonsound
+	promptbutton
 	writetext UnknownText_0x191c5a
-	buttonsound
+	promptbutton
 	waitsfx
 	giveitem LOST_ITEM
 	iffalse .NoRoom

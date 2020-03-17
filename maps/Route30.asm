@@ -49,7 +49,7 @@ TrainerYoungsterJoey:
 	checkevent EVENT_JOEY_ASKED_FOR_PHONE_NUMBER
 	iftrue .AskAgain
 	writetext YoungsterJoey1AfterText
-	buttonsound
+	promptbutton
 	setevent EVENT_JOEY_ASKED_FOR_PHONE_NUMBER
 	scall .AskNumber1
 	jump .RequestNumber

@@ -283,7 +283,7 @@ RocketBaseElectrodeScript:
 	turnobject PLAYER, RIGHT
 	opentext
 	writetext UnknownText_0x6d809
-	buttonsound
+	promptbutton
 	verbosegiveitem HM_WHIRLPOOL
 	setevent EVENT_GOT_HM06_WHIRLPOOL
 	writetext UnknownText_0x6d8f8

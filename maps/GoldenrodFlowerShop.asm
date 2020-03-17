@@ -15,7 +15,7 @@ FlowerShopTeacherScript:
 	faceplayer
 	opentext
 	writetext UnknownText_0x554c2
-	buttonsound
+	promptbutton
 	verbosegiveitem SQUIRTBOTTLE
 	setevent EVENT_GOT_SQUIRTBOTTLE
 	closetext

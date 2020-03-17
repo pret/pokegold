@@ -66,11 +66,11 @@ SunnyScript:
 	checkevent EVENT_MET_SUNNY_OF_SUNDAY
 	iftrue .MetSunny
 	writetext MeetSunnyText
-	buttonsound
+	promptbutton
 	setevent EVENT_MET_SUNNY_OF_SUNDAY
 .MetSunny:
 	writetext SunnyGivesGiftText1
-	buttonsound
+	promptbutton
 	verbosegiveitem MAGNET
 	iffalse SunnyDoneScript
 	setevent EVENT_GOT_MAGNET_FROM_SUNNY
