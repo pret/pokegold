@@ -634,16 +634,9 @@ INCLUDE "engine/events/elevator.asm"
 INCLUDE "engine/events/bug_contest/contest.asm"
 INCLUDE "engine/events/misc_scripts_2.asm"
 INCLUDE "engine/events/std_collision.asm"
-Function13a5f:
-	dr $13a5f, $13d44
-ApplyPokerusTick:
-	dr $13d44, $13d64
-SelectRandomBugContestContestants:
-	dr $13d64, $13dce
-ContestDropOffMons:
-	dr $13dce, $13ded
-ContestReturnMons:
-	dr $13ded, $13e03
+INCLUDE "engine/events/bug_contest/judging.asm"
+INCLUDE "engine/events/pokerus/apply_pokerus_tick.asm"
+INCLUDE "engine/events/bug_contest/contest_2.asm"
 
 SECTION "bank5", ROMX, BANK[$5]
 	dr $14000, $14032
@@ -892,10 +885,14 @@ GetItemHeldEffect:
 	dr $37e9b, $38000
 
 SECTION "banke", ROMX, BANK[$e]
-	dr $38000, $398f2
+	dr $38000, $394f3
 
-Battle_GetTrainerName:: ; 398f2
-	dr $398f2, $3993e
+GetTrainerClassName::
+	dr $394f3, $398f2
+Battle_GetTrainerName::
+	dr $398f2, $398fa
+GetTrainerName::
+	dr $398fa, $3993e
 
 INCLUDE "data/trainers/parties.asm"
 

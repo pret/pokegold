@@ -189,11 +189,11 @@ roam_struct: MACRO
 \1DVs::       ds 2
 ENDM
 
-bugcontestwinner: macro
-\1PersonID:: ds 1
-\1Mon:: ds 1
-\1Score:: ds 2
-endm
+bugcontestwinner: MACRO
+\1WinnerID:: db
+\1Mon::      db
+\1Score::    dw
+ENDM
 
 hall_of_fame: MACRO
 \1::
