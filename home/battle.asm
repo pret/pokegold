@@ -199,7 +199,7 @@ FarCopyRadioText::
 	ld l, a
 	ld a, d
 	ld h, a
-	ld de, wcef7
+	ld de, wRadioText
 	ld bc, $28
 	call CopyBytes
 	pop af

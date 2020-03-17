@@ -3,11 +3,11 @@ InitMovementBuffer::
 	xor a
 	ld [wMovementBufferCount], a
 	ld a, $0
-	ld [wceef], a
+	ld [wUnusedMovementBufferBank], a
 	ld a, wMovementBuffer % $100
-	ld [wcef0], a
+	ld [wUnusedMovementBufferPointer], a
 	ld a, wMovementBuffer / $100
-	ld [wcef1], a
+	ld [wUnusedMovementBufferPointer + 1], a
 	ret
 
 DecrementMovementBufferCount::
