@@ -1,5 +1,6 @@
-INCLUDE "engine/facings.asm"
-SpriteMovementData:: INCLUDE "data/map_objects.asm"
+INCLUDE "data/sprites/facings.asm"
+
+INCLUDE "data/sprites/map_objects.asm"
 
 DeleteMapObject:: ; 4358 (1:4358)
 	push bc
@@ -1370,7 +1371,7 @@ Function597a: ; 597a (1:597a)
 	ld l, a
 	ld h, $0
 	add hl, hl
-	ld bc, PushOAMEnd
+	ld bc, Facings
 	add hl, bc
 	ld a, [hli]
 	ld h, [hl]

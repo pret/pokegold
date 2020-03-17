@@ -5,6 +5,7 @@ item_attribute: MACRO
 	dn \6, \7
 ENDM
 
+ItemAttributes:
 Item1Attributes:
 
 ; MASTER BALL
