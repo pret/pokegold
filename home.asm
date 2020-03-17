@@ -680,32 +680,39 @@ FarQueueScript::
 	ld [wQueuedScriptAddr + 1], a
 	ret
 
-Function3431::
-.asm_3431
+CompareBytes::
+; Compare c bytes at de and hl.
+; Return z if they all match.
+.loop
 	ld a, [de]
 	cp [hl]
 	ret nz
 	inc de
 	inc hl
 	dec c
-	jr nz, .asm_3431
+	jr nz, .loop
 	ret
 
-Function343a::
-.asm_343a
+CompareBytesLong::
+; Compare bc bytes at de and hl.
+; Return carry if they all match.
+.loop
 	ld a, [de]
 	cp [hl]
-	jr nz, .asm_3447
+	jr nz, .diff
+
 	inc de
 	inc hl
 	dec bc
+
 	ld a, b
 	or c
-	jr nz, .asm_343a
+	jr nz, .loop
+
 	scf
 	ret
 
-.asm_3447
+.diff:
 	and a
 	ret
 

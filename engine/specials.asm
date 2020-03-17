@@ -298,7 +298,7 @@ ReceivedMysteryGiftText:
 	db "@"
 
 BugContestJudging: ; c4a4 (3:44a4)
-	farcall Function13a5f
+	farcall _BugContestJudging
 	ld a, b
 	ld [wScriptVar], a
 	ret

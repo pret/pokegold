@@ -597,7 +597,7 @@ UnknownText_0x1c10dd::
 	text "."
 	prompt
 
-ContestJudging_FirstPlaceText::
+_ContestJudging_FirstPlaceText::
 	text "This Bug-Catching"
 	line "Contest winner is@"
 	text_pause
@@ -611,7 +611,7 @@ ContestJudging_FirstPlaceText::
 	text_ram wStringBuffer1
 	text "!@@"
 
-ContestJudging_FirstPlaceScoreText::
+_ContestJudging_FirstPlaceScoreText::
 	text_start
 
 	para "The winning score"
@@ -620,7 +620,7 @@ ContestJudging_FirstPlaceScoreText::
 	text " points!"
 	prompt
 
-ContestJudging_SecondPlaceText::
+_ContestJudging_SecondPlaceText::
 	text "Placing second was"
 	line "@"
 	text_ram wBugContestWinnerName
@@ -631,7 +631,7 @@ ContestJudging_SecondPlaceText::
 	text_ram wStringBuffer1
 	text "!@@"
 
-ContestJudging_SecondPlaceScoreText::
+_ContestJudging_SecondPlaceScoreText::
 	text_start
 
 	para "The score was"
@@ -640,7 +640,7 @@ ContestJudging_SecondPlaceScoreText::
 	text " points!"
 	prompt
 
-ContestJudging_ThirdPlaceText::
+_ContestJudging_ThirdPlaceText::
 	text "Placing third was"
 	line "@"
 	text_ram wBugContestWinnerName
@@ -651,7 +651,7 @@ ContestJudging_ThirdPlaceText::
 	text_ram wStringBuffer1
 	text "!@@"
 
-ContestJudging_ThirdPlaceScoreText::
+_ContestJudging_ThirdPlaceScoreText::
 	text_start
 
 	para "The score was"
