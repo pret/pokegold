@@ -30,16 +30,12 @@ ROM0
 	org $0150
 	"Home"
 ROMX $01
-	org $4000
 	"bank1"
 ROMX $02
-	org $4000
 	"bank2"
 ROMX $03
-	org $4000
 	"bank3"
 ROMX $04
-	org $4000
 	"bank4"
 ROMX $05
 	org $4000

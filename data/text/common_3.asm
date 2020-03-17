@@ -445,7 +445,7 @@ Text_GotOffItem_::
 	text "."
 	prompt
 
-Text_KnowsMove_::
+_KnowsMoveText::
 	text_ram wStringBuffer1
 	text " knows"
 	line "@"

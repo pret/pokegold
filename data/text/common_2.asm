@@ -580,7 +580,7 @@ Text_CantTakeAnyMorePokemon_::
 	line "more #MON."
 	prompt
 
-Text_CaughtBugMon_::
+_ContestCaughtMonText::
 	text "Caught @"
 	text_ram wStringBuffer1
 	text "!"

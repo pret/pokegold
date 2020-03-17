@@ -167,40 +167,40 @@ UnusedSetSeenMon: ; c3ac
 	call SetSeenMon
 	ret
 
-FindPartyMonAboveLevel: ; c3b4
+FindPartyMonAboveLevel:
 	ld a, [wScriptVar]
 	ld b, a
-	farcall PartySearch_MaximumLevel ; same bank
-	jr z, asm_c3f2
-	jr asm_c3ec
+	farcall _FindPartyMonAboveLevel ; same bank
+	jr z, FoundNone
+	jr FoundOne
 
-FindPartyMonAtLeastThatHappy: ; c3c2
+FindPartyMonAtLeastThatHappy:
 	ld a, [wScriptVar]
 	ld b, a
-	farcall PartySearch_MinimumHappiness ; same bank
-	jr z, asm_c3f2
-	jr asm_c3ec
+	farcall _FindPartyMonAtLeastThatHappy ; same bank
+	jr z, FoundNone
+	jr FoundOne
 
-FindPartyMonThatSpecies: ; c3d0
+FindPartyMonThatSpecies:
 	ld a, [wScriptVar]
 	ld b, a
-	farcall PartySearch_SameSpecies ; same bank
-	jr z, asm_c3f2
-	jr asm_c3ec
+	farcall _FindPartyMonThatSpecies ; same bank
+	jr z, FoundNone
+	jr FoundOne
 
-FindPartyMonThatSpeciesYourTrainerID: ; c3de
+FindPartyMonThatSpeciesYourTrainerID:
 	ld a, [wScriptVar]
 	ld b, a
-	farcall PartySearch_SameSpeciesAndYourID ; same bank
-	jr z, asm_c3f2
-	jr asm_c3ec
+	farcall _FindPartyMonThatSpeciesYourTrainerID ; same bank
+	jr z, FoundNone
+	jr FoundOne
 
-asm_c3ec
-	ld a, $1
+FoundOne:
+	ld a, TRUE
 	ld [wScriptVar], a
 	ret
 
-asm_c3f2
+FoundNone:
 	xor a
 	ld [wScriptVar], a
 	ret
