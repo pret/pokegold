@@ -2037,19 +2037,24 @@ XSpeed: ; f515
 PokeFlute: ; f55c (3:755c)
 	ld a, [wBattleMode]
 	and a
-	jr nz, .asm_f562
-.asm_f562
+	jr nz, .dummy
+.dummy
+
 	xor a
 	ld [wceed], a
+
 	ld b, $ff ^ SLP
-	ld hl, wPartyMon1End
-	call Functionf5a4
+
+	ld hl, wPartyMon1Status
+	call .CureSleep
+
 	ld a, [wBattleMode]
 	cp $1
-	jr z, .asm_f57b
-	ld hl, wOTPartyMon1End
-	call Functionf5a4
-.asm_f57b
+	jr z, .skip_otrainer
+	ld hl, wOTPartyMon1Status
+	call .CureSleep
+.skip_otrainer
+
 	ld hl, wBattleMonStatus
 	ld a, [hl]
 	and b
@@ -2058,36 +2063,39 @@ PokeFlute: ; f55c (3:755c)
 	ld a, [hl]
 	and b
 	ld [hl], a
-	ld a, [wMovementBufferCount]
+
+	ld a, [wceed]
 	and a
 	ld hl, Text_NowThatsACatchyTune ; $75bc
 	jp z, PrintText
 	ld hl, Text_PlayedThePokeFlute ; $75c6
 	call PrintText
+
 	ld a, [wLowHealthAlarm]
 	and $80
-	jr nz, .asm_f59e
-.asm_f59e
+	jr nz, .dummy2
+.dummy2
 	ld hl, Text_AllSleepingMonWokeUp ; $75c1
 	jp PrintText
 
-Functionf5a4: ; f5a4 (3:75a4)
-	ld de, $30
-	ld c, $6
-.asm_f5a9
+.CureSleep: ; f5a4 (3:75a4)
+	ld de, PARTYMON_STRUCT_LENGTH
+	ld c, PARTY_LENGTH
+
+.loop
 	ld a, [hl]
 	push af
-	and $7
-	jr z, .asm_f5b4
-	ld a, $1
+	and SLP
+	jr z, .not_asleep
+	ld a, 1
 	ld [wceed], a
-.asm_f5b4
+.not_asleep
 	pop af
 	and b
 	ld [hl], a
 	add hl, de
 	dec c
-	jr nz, .asm_f5a9
+	jr nz, .loop
 	ret
 
 Text_NowThatsACatchyTune:

@@ -169,7 +169,7 @@ FarCopyRadioText::
 	ld l, a
 	ld a, d
 	ld h, a
-	ld de, wcef7
+	ld de, wRadioText
 	ld bc, 2 * SCREEN_WIDTH
 	call CopyBytes
 	pop af

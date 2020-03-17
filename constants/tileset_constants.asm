@@ -29,12 +29,14 @@ const_value SET 1
 	const TILESET_DARK_CAVE            ; 1b
 	const TILESET_FOREST               ; 1c
 
+; bg palette values (see gfx/tilesets/*_palette_map.asm)
+; TilesetBGPalette indexes (see gfx/tilesets/bg_tiles.pal)
 	const_def
-	const PAL_BG_GRAY
-	const PAL_BG_RED
-	const PAL_BG_GREEN
-	const PAL_BG_WATER
-	const PAL_BG_YELLOW
-	const PAL_BG_BROWN
-	const PAL_BG_ROOF
-	const PAL_BG_TEXT
+	const PAL_BG_GRAY   ; 0
+	const PAL_BG_RED    ; 1
+	const PAL_BG_GREEN  ; 2
+	const PAL_BG_WATER  ; 3
+	const PAL_BG_YELLOW ; 4
+	const PAL_BG_BROWN  ; 5
+	const PAL_BG_ROOF   ; 6
+	const PAL_BG_TEXT   ; 7

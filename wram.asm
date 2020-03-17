@@ -2285,6 +2285,17 @@ wBugContestWinnersEnd::
 wBugContestWinnerName:: ds NAME_LENGTH
 
 NEXTU ; ceed
+; radio data
+wCurRadioLine:: db
+wNextRadioLine:: db
+wRadioTextDelay:: db
+wNumRadioLinesPrinted:: db
+wOaksPKMNTalkSegmentCounter:: db
+	ds 5
+wRadioText:: ds 2 * SCREEN_WIDTH
+wRadioTextEnd::
+
+NEXTU ; ceed
 ; movement buffer data
 wMovementBufferCount:: db
 wMovementBufferObject:: db
@@ -2294,49 +2305,29 @@ wMovementBuffer:: ds 55
 
 NEXTU ; ceed
 ; unidentified
-wceed:: ds 1 ; ceed
-wceee:: ds 1 ; ceee
-wceef:: ds 1 ; ceef
-wcef0:: ds 1 ; cef0
-wcef1:: ds 1 ; cef1
-wcef2:: ds 1 ; cef2
-wcef3:: ds 1 ; cef3
-wcef4:: ds 1 ; cef4
-wcef5:: ds 1 ; cef5
-wcef6:: ds 1 ; cef6
+wceed:: db ; ceed
+wceee:: db ; ceee
+wceef:: db ; ceef
+
+; mobile?
+	ds 1
+wcef1:: ds 2 ; cef1
+wcef3:: ds 2 ; cef3
+	ds 2
 wcef7:: ds 1 ; cef7
 wcef8:: ds 1 ; cef8
-wcef9:: ds 1 ; cef9
+	ds 1
 wcefa:: ds 1 ; cefa
 wcefb:: ds 1 ; cefb
 wcefc:: ds 1 ; cefc
 wcefd:: ds 1 ; cefd
 wcefe:: ds 1 ; cefe
-wceff:: ds 1 ; ceff
-wcf00:: ds 1 ; cf00
-wcf01:: ds 1 ; cf01
+wceff:: ds 2 ; ceff
+	ds 1
 wcf02:: ds 1 ; cf02
 wcf03:: ds 1 ; cf03
 wcf04:: ds 1 ; cf04
-wcf05:: ds 1 ; cf05
-wcf06:: ds 1 ; cf06
-wcf07:: ds 1 ; cf07
-wcf08:: ds 1 ; cf08
-wcf09:: ds 1 ; cf09
-wcf0a:: ds 1 ; cf0a
-wcf0b:: ds 1 ; cf0b
-wcf0c:: ds 1 ; cf0c
-wcf0d:: ds 1 ; cf0d
-wcf0e:: ds 1 ; cf0e
-wcf0f:: ds 1 ; cf0f
-wcf10:: ds 1 ; cf10
-wcf11:: ds 1 ; cf11
-wcf12:: ds 1 ; cf12
-wcf13:: ds 1 ; cf13
-wcf14:: ds 1 ; cf14
-wcf15:: ds 1 ; cf15
-wcf16:: ds 1 ; cf16
-wcf17:: ds 1 ; cf17
+	ds 19
 wcf18:: ds 1 ; cf18
 wcf19:: ds 1 ; cf19
 wcf1a:: ds 1 ; cf1a
@@ -2344,16 +2335,9 @@ wcf1b:: ds 1 ; cf1b
 wcf1c:: ds 1 ; cf1c
 wcf1d:: ds 1 ; cf1d
 wcf1e:: ds 1 ; cf1e
-wcf1f:: ds 1 ; cf1f
-wcf20:: ds 1 ; cf20
-wcf21:: ds 1 ; cf21
-wcf22:: ds 1 ; cf22
-wcf23:: ds 1 ; cf23
-wcf24:: ds 1 ; cf24
-wcf25:: ds 1 ; cf25
-wcf26:: ds 1 ; cf26
-wcf27:: ds 1 ; cf27
-wcf28:: ds 1 ; cf28
+wcf1f:: ds 2 ; cf1f
+wcf21:: ds 2 ; cf21
+	ds 6
 
 UNION ; cf29
 ; trainer data

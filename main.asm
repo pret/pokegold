@@ -1016,7 +1016,6 @@ PrintPartyMenuActionText:
 LoadFishingGFX:
 	dr $5054f, $506f2
 
-; INCLUDE "engine/events/sweet_scent.asm"
 SweetScentFromMenu:
 	dr $506f2, $50763
 
