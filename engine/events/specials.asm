@@ -215,11 +215,11 @@ NameRival: ; c3f7
 	ret
 
 .DefaultName:
-IF DEF(GOLD)
+IF DEF(_GOLD)
 	db "SILVER@"
 ENDC
 
-IF DEF(SILVER)
+IF DEF(_SILVER)
 	db "GOLD@"
 ENDC
 

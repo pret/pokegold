@@ -663,7 +663,7 @@ _InitSpriteAnimStruct:: ; 8d1f7
 
 _ReinitSpriteAnimFrame:: ; 8d332
 
-IF DEF(GOLD)
+IF DEF(_GOLD)
 	dr $8d332, $8e774
 
 ClearSpriteAnims2::
@@ -676,7 +676,7 @@ HoldSwitchmonIcon::
 	dr $8e93d, $90000
 ENDC
 
-IF DEF(SILVER)
+IF DEF(_SILVER)
 	dr $8d332, $8e75a
 
 ClearSpriteAnims2::
@@ -743,7 +743,7 @@ Function97c2a:: ; 97c2a
 	dr $97c2a, $98000
 
 SECTION "bank26", ROMX, BANK[$26]
-IF DEF(GOLD)
+IF DEF(_GOLD)
 TitleScreenGFX1:
 	dr $98000, $98476
 TitleScreenGFX2:
@@ -752,7 +752,7 @@ GSIntroTilemap:
 	dr $98616, $9c000
 ENDC
 
-IF DEF(SILVER)
+IF DEF(_SILVER)
 TitleScreenGFX1:
 	dr $98000, $98498
 TitleScreenGFX2:
@@ -881,7 +881,7 @@ SECTION "bank39", ROMX, BANK[$39]
 CopyrightGFX:
 	INCBIN "gfx/intro/copyright.2bpp"
 
-IF DEF(GOLD)
+IF DEF(_GOLD)
 TitleScreenGFX3:
 	dr $e41e0, $e4260
 TitleScreenGFX4:
@@ -890,7 +890,7 @@ OptionsMenu:
 	dr $e4608, $e49a8
 ENDC
 
-IF DEF(SILVER)
+IF DEF(_SILVER)
 TitleScreenGFX3:
 	dr $e41e0, $e4220
 TitleScreenGFX4:
@@ -901,12 +901,12 @@ ENDC
 
 INCLUDE "engine/movie/gamefreak_presents.asm"
 
-IF DEF(GOLD)
+IF DEF(_GOLD)
 GoldSilverIntro:
 	dr $e4cb1, $e8000
 ENDC
 
-IF DEF(SILVER)
+IF DEF(_SILVER)
 GoldSilverIntro:
 	dr $e4af9, $e8000
 ENDC

@@ -1343,20 +1343,20 @@ PalPacket_a235: db $79, $26, $08, $00, $0b, $39, $cd, $48, $0c, $d0, $34, $a5, $
 PalPacket_a245: db $79, $1b, $08, $00, $0b, $ea, $ea, $ea, $ea, $ea, $a9, $01, $cd, $4f, $0c, $d0
 PalPacket_a255: db $79, $10, $08, $00, $0b, $4c, $20, $08, $ea, $ea, $ea, $ea, $ea, $60, $ea, $ea
 
-IF DEF(GOLD)
+IF DEF(_GOLD)
 Palettes_a265: INCLUDE "gfx/pals/gold_a265.pal"
 ENDC
-IF DEF(SILVER)
+IF DEF(_SILVER)
 Palettes_a265: INCLUDE "gfx/pals/silver_a265.pal"
 ENDC
 
-IF DEF(GOLD)
+IF DEF(_GOLD)
 SGBBorderMap: INCBIN "gfx/sgb_border/gold.map"
 SGBBorderPalettes: INCLUDE "gfx/sgb_border/pals/gold.pal"
 SGBBorder: INCBIN "gfx/sgb_border/gold.2bpp"
 ENDC
 
-IF DEF(SILVER)
+IF DEF(_SILVER)
 SGBBorderMap: INCBIN "gfx/sgb_border/silver.map"
 SGBBorderPalettes: INCLUDE "gfx/sgb_border/pals/silver.pal"
 SGBBorder: INCBIN "gfx/sgb_border/silver.2bpp"
@@ -1620,7 +1620,7 @@ Palettes_bac6:
 	RGB 07, 07, 07
 
 Palettes_bb36:
-IF DEF(GOLD)
+IF DEF(_GOLD)
 	RGB 31, 31, 31
 	RGB 18, 23, 31
 	RGB 15, 20, 31
@@ -1647,7 +1647,7 @@ IF DEF(GOLD)
 	RGB  0,  0,  0
 ENDC
 
-IF DEF(SILVER)
+IF DEF(_SILVER)
 	RGB 31, 31, 31
 	RGB  0, 12, 15
 	RGB  4,  8, 21
@@ -1738,7 +1738,7 @@ Palettes_bb9e:
 	RGB 00, 00, 00
 
 Palettes_bbbe:
-IF DEF(GOLD)
+IF DEF(_GOLD)
 	RGB 31, 31, 31
 	RGB 24, 25, 28
 	RGB 24, 24, 09
@@ -1820,7 +1820,7 @@ IF DEF(GOLD)
 	RGB 00, 00, 00
 ENDC
 
-IF DEF(SILVER)
+IF DEF(_SILVER)
 	RGB 31, 31, 31
 	RGB 25, 26, 14
 	RGB 20, 17, 31

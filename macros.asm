@@ -23,10 +23,10 @@ INCLUDE "macros/flag.asm"
 INCLUDE "macros/legacy.asm"
 
 dr: macro
-IF DEF(GOLD)
+IF DEF(_GOLD)
 INCBIN "baserom-gold.gbc", \1, \2 +- \1
 ELSE
-IF DEF(SILVER)
+IF DEF(_SILVER)
 INCBIN "baserom-silver.gbc", \1, \2 +- \1
 ENDC
 ENDC

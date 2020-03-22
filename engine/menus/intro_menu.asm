@@ -890,13 +890,13 @@ NamePlayer: ; 6085 (1:6085)
 	db 5
 	db "NEW NAME@"
 .GoldSilver:
-IF DEF(GOLD)
+IF DEF(_GOLD)
 	db "GOLD@"
 	db "HIRO@"
 	db "TAYLOR@"
 	db "KARL@"
 ENDC
-IF DEF(SILVER)
+IF DEF(_SILVER)
 	db "SILVER@"
 	db "KAMON@"
 	db "OSCAR@"
@@ -1221,12 +1221,12 @@ Function6341: ; 6341 (1:6341)
 	jr nz, .asm_6358
 	ld a, $d8
 	ldh [rBGP], a
-IF DEF(GOLD)
+IF DEF(_GOLD)
 	ld a, $ff
 	ldh [rOBP0], a
 	ld a, $f8
 ENDC
-IF DEF(SILVER)
+IF DEF(_SILVER)
 	ld a, $f0
 	ldh [rOBP0], a
 	ld a, $f0
@@ -1237,12 +1237,12 @@ ENDC
 .asm_6358
 	ld a, $e4
 	ldh [rBGP], a
-IF DEF(GOLD)
+IF DEF(_GOLD)
 	ld a, $ff
 	ldh [rOBP0], a
 	ld a, $e4
 ENDC
-IF DEF(SILVER)
+IF DEF(_SILVER)
 	ld a, $f0
 	ldh [rOBP0], a
 	ld a, $e0
@@ -1253,7 +1253,7 @@ ENDC
 .asm_6365
 	ld a, $e4
 	call DmgToCgbBGPals
-IF DEF(SILVER)
+IF DEF(_SILVER)
 	ld a, $e0
 ENDC
 	call DmgToCgbObjPal0
@@ -1344,7 +1344,7 @@ TitleScreenFrame: ; 63da (1:63da)
 	ret
 
 Function63fe: ; 63fe (1:63fe)
-IF DEF(GOLD)
+IF DEF(_GOLD)
 	ldh a, [hVBlankCounter]
 	and $7
 	ret nz
@@ -1381,10 +1381,10 @@ Function6426:
 	ld hl, wce63
 	inc [hl]
 	ld hl, wce65
-IF DEF(GOLD)
+IF DEF(_GOLD)
 	ld de, $13c0
 ENDC
-IF DEF(SILVER)
+IF DEF(_SILVER)
 	ld de, $1140
 ENDC
 	ld [hl], e
@@ -1474,7 +1474,7 @@ Function64b1: ; 64b1 (1:64b1)
 	ld a, [wce65]
 	and $3
 	ret nz
-IF DEF(GOLD)
+IF DEF(_GOLD)
 	ld bc, wAnimatedObjectStruct10Index
 	ld hl, $a
 	add hl, bc
@@ -1499,14 +1499,14 @@ IF DEF(GOLD)
 	ld d, [hl]
 ENDC
 
-IF DEF(SILVER)
+IF DEF(_SILVER)
 	ld de, $7c58
 ENDC
 	ld a, $f
 	call InitSpriteAnimStruct
 	ret
 
-IF DEF(GOLD)
+IF DEF(_GOLD)
 .Data_64e0:
 	db $5c, $50, $00, $00
 	db $5c, $68, $5c, $58
