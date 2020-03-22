@@ -33,7 +33,7 @@ Function1002d: ; 1002d (4:402d)
 	jr z, .asm_10060
 	cp PLAYER_BIKE
 	jr z, .asm_10044
-	cp PLAYER_SLIP
+	cp PLAYER_SKATE
 	jr z, .asm_10074
 .asm_10044
 	call Function102cb

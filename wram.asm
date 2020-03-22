@@ -9,21 +9,21 @@ SECTION "Audio RAM", WRAM0
 wMusic::
 
 ; nonzero if playing
-wMusicPlaying:: db ; c100
+wMusicPlaying:: db ; c000
 
 wChannels::
-wChannel1:: channel_struct wChannel1 ; c101
-wChannel2:: channel_struct wChannel2 ; c133
-wChannel3:: channel_struct wChannel3 ; c165
-wChannel4:: channel_struct wChannel4 ; c197
+wChannel1:: channel_struct wChannel1 ; c001
+wChannel2:: channel_struct wChannel2 ; c033
+wChannel3:: channel_struct wChannel3 ; c065
+wChannel4:: channel_struct wChannel4 ; c097
 
 wSFXChannels::
-wChannel5:: channel_struct wChannel5 ; c1c9
-wChannel6:: channel_struct wChannel6 ; c1fb
-wChannel7:: channel_struct wChannel7 ; c22d
-wChannel8:: channel_struct wChannel8 ; c25f
+wChannel5:: channel_struct wChannel5 ; c0c9
+wChannel6:: channel_struct wChannel6 ; c0fb
+wChannel7:: channel_struct wChannel7 ; c12d
+wChannel8:: channel_struct wChannel8 ; c15f
 
-	ds 1 ; c291
+	ds 1 ; c191
 
 wCurTrackDuty:: db
 wCurTrackVolumeEnvelope:: db
@@ -31,9 +31,9 @@ wCurTrackFrequency:: dw
 wUnusedBCDNumber:: db ; BCD value, dummied out
 wCurNoteDuration:: db ; used in MusicE0 and LoadNote
 
-wCurMusicByte:: db ; c298
-wCurChannel:: db ; c299
-wVolume:: ; c29a
+wCurMusicByte:: db ; c198
+wCurChannel:: db ; c199
+wVolume:: ; c19a
 ; corresponds to rNR50
 ; Channel control / ON-OFF / Volume (R/W)
 ;   bit 7 - Vin->SO2 ON/OFF
@@ -41,12 +41,12 @@ wVolume:: ; c29a
 ;   bit 3 - Vin->SO1 ON/OFF
 ;   bit 2-0 - SO1 output level (volume) (# 0-7)
 	db
-wSoundOutput:: ; c29b
+wSoundOutput:: ; c19b
 ; corresponds to rNR51
 ; bit 4-7: ch1-4 so2 on/off
 ; bit 0-3: ch1-4 so1 on/off
 	db
-wPitchSweep:: ; c29c
+wPitchSweep:: ; c19c
 ; corresponds to rNR10
 ; bit 7:   unused
 ; bit 4-6: sweep time
@@ -54,38 +54,38 @@ wPitchSweep:: ; c29c
 ; but 0-2: sweep shift
 	db
 
-wMusicID:: dw ; c29d
-wMusicBank:: db ; c29f
-wNoiseSampleAddress:: dw ; c2a0
-wNoiseSampleDelay:: db ; c2a2
-	ds 1 ; c2a3
-wMusicNoiseSampleSet:: db ; c2a4
-wSFXNoiseSampleSet:: db ; c2a5
+wMusicID:: dw ; c19d
+wMusicBank:: db ; c19f
+wNoiseSampleAddress:: dw ; c1a0
+wNoiseSampleDelay:: db ; c1a2
+	ds 1 ; c1a3
+wMusicNoiseSampleSet:: db ; c1a4
+wSFXNoiseSampleSet:: db ; c1a5
 
-wLowHealthAlarm:: ; c2a6
+wLowHealthAlarm:: ; c1a6
 ; bit 7: on/off
 ; bit 4: pitch
 ; bit 0-3: counter
 	db
 
-wMusicFade:: ; c2a7
+wMusicFade:: ; c1a7
 ; fades volume over x frames
 ; bit 7: fade in/out
 ; bit 0-5: number of frames for each volume level
 ; $00 = none (default)
 	db
-wMusicFadeCount:: db ; c2a8
-wMusicFadeID:: dw ; c2a9
+wMusicFadeCount:: db ; c1a8
+wMusicFadeID:: dw ; c1a9
 
 	ds 5
 
-wCryPitch:: dw ; c2b0
-wCryLength:: dw ; c2b2
+wCryPitch:: dw ; c1b0
+wCryLength:: dw ; c1b2
 
-wLastVolume:: db ; c2b4
-wUnusedMusicF9Flag:: db ; c2b5
+wLastVolume:: db ; c1b4
+wUnusedMusicF9Flag:: db ; c1b5
 
-wSFXPriority:: ; c2b6
+wSFXPriority:: ; c1b6
 ; if nonzero, turn off music when playing sfx
 	db
 
@@ -96,20 +96,20 @@ wChannel2JumpCondition:: db
 wChannel3JumpCondition:: db
 wChannel4JumpCondition:: db
 
-wStereoPanningMask:: db ; c2bc
+wStereoPanningMask:: db ; c1bc
 
-wCryTracks:: ; c2bd
+wCryTracks:: ; c1bd
 ; plays only in left or right track depending on what side the monster is on
 ; both tracks active outside of battle
 	db
 
 wSFXDuration:: db
-wCurSFX:: ; c2bf
+wCurSFX:: ; c1bf
 ; id of sfx currently playing
 	db
 wChannelsEnd::
 
-wMapMusic:: db ; c2c0
+wMapMusic:: db ; c1c0
 
 wDontPlayMapMusicOnReload:: db
 wMusicEnd::
@@ -117,15 +117,15 @@ wMusicEnd::
 
 SECTION "WRAM", WRAM0
 
-wLZAddress:: dw ; c2c2
-wLZBank::    db ; c2c4
+wLZAddress:: dw ; c1c2
+wLZBank::    db ; c1c4
 
-wBoxAlignment:: db ; c2c5
+wBoxAlignment:: db ; c1c5
 
-wInputType::        db ; c2c6
-wAutoInputAddress:: dw ; c2c7
-wAutoInputBank::    db ; c2c9
-wAutoInputLength::  db ; c2ca
+wInputType::        db ; c1c6
+wAutoInputAddress:: dw ; c1c7
+wAutoInputBank::    db ; c1c9
+wAutoInputLength::  db ; c1ca
 
 wDebugFlags:: ds 1 ; c1cb
 wGameLogicPaused:: ds 1 ; c1cc
@@ -2836,7 +2836,7 @@ wd14e:: ds 1 ; d14e
 wWildMon:: ds 1 ; d14f
 wd150:: ds 1 ; d150
 
-; d265 has many different short-term uses
+; d151 has many different short-term uses
 wNamedObjectIndexBuffer::
 wDeciramBuffer::
 wTempByteValue::
@@ -2947,7 +2947,7 @@ wTextboxFlags:: ; d19c
 ; bit 0: 1-frame text delay
 ; bit 1: when unset, no text delay
 	ds 1
-wGBPrinter:: ; d19d
+wGBPrinterBrightness:: ; d19d
 ; bit 0-6: brightness
 ;   lightest: $00
 ;   lighter:  $20
