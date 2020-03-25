@@ -104,7 +104,7 @@ Init::
 	ldh [rWX], a
 
 	ld a, CONNECTION_NOT_ESTABLISHED
-	ldh [hLinkPlayerNumber], a
+	ldh [hSerialConnectionStatus], a
 
 	ld h, $98
 	call BlankBGMap

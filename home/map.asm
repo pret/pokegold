@@ -1566,7 +1566,7 @@ UpdateBGMapRow:: ; 28f6 (0:28f6)
 	dec c
 	jr nz, .asm_2904
 	ld a, $14
-	ldh [hFFDE], a
+	ldh [hBGMapTileCount], a
 	ret
 
 UpdateBGMapColumn:: ; 291b (0:291b)
@@ -1590,7 +1590,7 @@ UpdateBGMapColumn:: ; 291b (0:291b)
 	dec c
 	jr nz, .asm_2920
 	ld a, $12
-	ldh [hFFDE], a
+	ldh [hBGMapTileCount], a
 	ret
 
 Function2939::
@@ -2427,7 +2427,7 @@ LoadTilesetHeader:: ; 2dfa (0:2dfa)
 	pop bc
 	pop hl
 	ret
-	
+
 InexplicablyEmptyFunction:: ; 2e16
 ; Inexplicably empty.
 ; Seen in PredefPointers.

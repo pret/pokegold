@@ -80,10 +80,10 @@ ComputeHPBarPixels:
 	ldh [hDividend + 2], a
 .asm_c711
 	ld a, e
-	ldh [hPrintNum5], a
+	ldh [hDivisor], a
 	ld b, $4
 	call Divide
-	ldh a, [hPrintNum4]
+	ldh a, [hQuotient + 3]
 	ld e, a
 	pop hl
 	and a

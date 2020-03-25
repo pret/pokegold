@@ -53,10 +53,10 @@ rept 2
 endr
 
 ; We've done 2 16x8 blocks
-	ldh a, [hFFDE]
+	ldh a, [hBGMapTileCount]
 	dec a
 	dec a
-	ldh [hFFDE], a
+	ldh [hBGMapTileCount], a
 
 	jr nz, .next
 

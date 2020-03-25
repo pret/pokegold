@@ -43,23 +43,23 @@ GetUnownLetter:
 	call Divide
 
 ; Increment to get 1-26
-	ldh a, [hQuotient + 2]
+	ldh a, [hQuotient + 3]
 	inc a
 	ld [wUnownLetter], a
 	ret
 
 GetMonFrontpic:
-	call _GetFrontpic
+	call GetFrontpic
 	jp Load2bppToSRAM
 
 UnusedFrontpicPredef:
-	call _GetFrontpic
+	call GetFrontpic
 	push hl
 	farcall StubbedGetFrontpic
 	pop hl
 	jp Load2bppToSRAM
 
-_GetFrontpic:
+GetFrontpic:
 	ld a, [wCurPartySpecies]
 	ld [wCurSpecies], a
 	and a
@@ -69,7 +69,7 @@ _GetFrontpic:
 	cp EGG + 1
 	ret nc
 
-.is_a_pokemon:
+.is_a_pokemon
 	push de
 	call GetBaseData
 	ld a, [wBasePicSize]
@@ -78,24 +78,22 @@ _GetFrontpic:
 	push bc
 	ld a, BANK(sDecompressBuffer)
 	call OpenSRAM
-	ld hl, PokemonPicPointers
+	ld hl, PokemonPicPointers ; UnownPicPointers
 	ld a, [wCurPartySpecies]
 	ld d, BANK(PokemonPicPointers)
 	cp UNOWN
 	jr z, .unown
-
 	cp EGG
 	jr nz, .not_egg
-
 	ld hl, EggPic
 	ld a, BANK(EggPic)
 	jr .ok
 
-.unown:
+.unown
 	ld a, [wUnownLetter]
 	ld d, BANK(UnownPicPointers)
 
-.not_egg:
+.not_egg
 	dec a
 	ld bc, 6
 	call AddNTimes
@@ -108,7 +106,7 @@ _GetFrontpic:
 	call GetFarHalfword
 	pop af
 
-.ok:
+.ok
 	ld de, sDecompressBuffer
 	call FarDecompress
 	pop bc
@@ -135,11 +133,13 @@ GetMonBackpic:
 	cp EGG + 1
 	ret nc
 
-.is_a_pokemon:
+.is_a_pokemon
 	push de
 	ld a, BANK(sDecompressBuffer)
 	call OpenSRAM
-	ld hl, PokemonPicPointers
+
+	; These are assumed to be at the same address in their respective banks.
+	ld hl, PokemonPicPointers ; UnownPicPointers
 	ld a, [wCurPartySpecies]
 	ld d, BANK(PokemonPicPointers)
 	cp UNOWN
@@ -147,7 +147,7 @@ GetMonBackpic:
 	ld a, [wUnownLetter]
 	ld d, BANK(UnownPicPointers)
 
-.ok:
+.ok
 	dec a
 	ld bc, 6
 	call AddNTimes
@@ -195,20 +195,17 @@ FixPicBank:
 	push bc
 	ld b, a
 	ld hl, .FixPicBankTable
-
-.loop:
+.loop
 	ld a, [hli]
 	cp -1
 	jr z, .done
-
 	inc hl
 	cp b
 	jr nz, .loop
-
 	dec hl
 	ld b, [hl]
 
-.done:
+.done
 	ld a, b
 	pop bc
 	pop hl
@@ -223,7 +220,7 @@ FixPicBank:
 Function150ff:
 	ld a, c
 	push de
-	ld hl, PokemonPicPointers ; UnownPicPointers
+	ld hl, PokemonPicPointers
 	dec a
 	ld bc, 6
 	call AddNTimes
@@ -389,7 +386,7 @@ PadFrontpic:
 rept 4
 	srl c
 endr
-.loop:
+.loop
 rept 16
 	ld [hli], a
 endr
@@ -404,7 +401,7 @@ LoadOrientedFrontpic:
 rept 4
 	srl c
 endr
-.left_loop:
+.left_loop
 rept 16
 	ld a, [de]
 	inc de
@@ -414,9 +411,9 @@ endr
 	jr nz, .left_loop
 	ret
 
-.x_flip:
+.x_flip
 	push bc
-.right_loop:
+.right_loop
 	ld a, [de]
 	inc de
 	ld b, a

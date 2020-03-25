@@ -793,11 +793,11 @@ Functiondd6a: ; dd6a (3:5d6a)
 	pop bc
 	ld hl, $8
 	add hl, bc
-	ldh a, [hQuotient]
+	ldh a, [hMultiplicand]
 	ld [hli], a
-	ldh a, [hPrintNum3]
+	ldh a, [hMultiplicand + 1]
 	ld [hli], a
-	ldh a, [hPrintNum4]
+	ldh a, [hMultiplicand + 2]
 	ld [hl], a
 	and a
 	ret
@@ -892,13 +892,13 @@ SendMonIntoBox: ; de74 (3:5e74)
 	ld d, a
 	callfar CalcExpAtLevel
 	pop de
-	ldh a, [hQuotient]
+	ldh a, [hProduct + 1]
 	ld [de], a
 	inc de
-	ldh a, [hPrintNum3]
+	ldh a, [hProduct + 2]
 	ld [de], a
 	inc de
-	ldh a, [hPrintNum4]
+	ldh a, [hProduct + 3]
 	ld [de], a
 	inc de
 	xor a
@@ -1439,11 +1439,11 @@ CalcMonStatC: ; e181
 	jr nz, .not_hp
 	ld a, [wCurPartyLevel]
 	ld b, a
-	ldh a, [hQuotient + 2]
+	ldh a, [hQuotient + 3]
 	add b
 	ldh [hMultiplicand + 2], a
 	jr nc, .no_overflow_3
-	ldh a, [hQuotient + 1]
+	ldh a, [hQuotient + 2]
 	inc a
 	ldh [hMultiplicand + 1], a
 
@@ -1452,21 +1452,21 @@ CalcMonStatC: ; e181
 
 .not_hp
 	ld b, a
-	ldh a, [hQuotient + 2]
+	ldh a, [hQuotient + 3]
 	add b
 	ldh [hMultiplicand + 2], a
 	jr nc, .no_overflow_4
-	ldh a, [hQuotient + 1]
+	ldh a, [hQuotient + 2]
 	inc a
 	ldh [hMultiplicand + 1], a
 
 .no_overflow_4
-	ldh a, [hQuotient + 1]
+	ldh a, [hQuotient + 2]
 	cp (1000 / $100) + 1
 	jr nc, .max_stat
 	cp 1000 / $100
 	jr c, .stat_value_okay
-	ldh a, [hQuotient + 2]
+	ldh a, [hQuotient + 3]
 	cp 1000 % $100
 	jr c, .stat_value_okay
 

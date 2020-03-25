@@ -261,7 +261,7 @@ UltraBall: ; e926
 	ld a, b
 	jp z, .skip_hp_calc
 	ld a, b
-	ldh [hPrintNum4], a
+	ldh [hMultiplicand + 2], a
 	ld hl, wEnemyMonHP
 	ld b, [hl]
 	inc hl
@@ -319,7 +319,7 @@ UltraBall: ; e926
 	ld b, $4
 	call Divide
 
-	ldh a, [hQuotient + 2]
+	ldh a, [hQuotient + 3]
 	and a
 	jr nz, .statuscheck
 	ld a, 1
@@ -1166,12 +1166,14 @@ RareCandy: ; ef68 (3:6f68)
 	pop de
 	ld a, $8
 	call GetPartyParamLocation
-	ldh a, [hQuotient]
+
+	ldh a, [hMultiplicand + 0]
 	ld [hli], a
-	ldh a, [hPrintNum3]
+	ldh a, [hMultiplicand + 1]
 	ld [hli], a
-	ldh a, [hPrintNum4]
+	ldh a, [hMultiplicand + 2]
 	ld [hl], a
+
 	ld a, $24
 	call GetPartyParamLocation
 	ld a, [hli]
@@ -1813,9 +1815,9 @@ GetOneFifthMaxHP: ; f3ce (3:73ce)
 	ldh [hDivisor], a
 	ld b, 2
 	call Divide
-	ldh a, [hQuotient + 1]
-	ld d, a
 	ldh a, [hQuotient + 2]
+	ld d, a
+	ldh a, [hQuotient + 3]
 	ld e, a
 	pop bc
 	ret
@@ -2704,7 +2706,7 @@ Functionf8c8: ; f8c8 (3:78c8)
 	and a
 	jr z, .asm_f8fd
 .asm_f8ea
-	ldh a, [hPrintNum4]
+	ldh a, [hQuotient + 3]
 	cp $8
 	jr c, .asm_f8f2
 	ld a, $7
