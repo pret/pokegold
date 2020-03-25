@@ -55,7 +55,7 @@ GetVarAction_::
 	dwb wXCoord, RETVAR_STRBUF2
 	dwb wYCoord, RETVAR_STRBUF2
 	dwb wSpecialPhoneCallID, RETVAR_STRBUF2
-    dwb     0, 0
+	dwb NULL, RETVAR_STRBUF2
 
 .CountCaughtMons: ; 41cf
 ; Caught mons.

@@ -42,18 +42,18 @@ LoadFontsExtra::
 
 DecompressRequest2bpp::
 	push de
-	ld a, BANK(sScratch)
+	ld a, BANK(sDecompressScratch)
 	call OpenSRAM
 	push bc
 
-	ld de, sScratch
+	ld de, sDecompressScratch
 	ld a, b
 	call FarDecompress
 
 	pop bc
 	pop hl
 
-	ld de, sScratch
+	ld de, sDecompressScratch
 	call Request2bpp
 	call CloseSRAM
 	ret
@@ -267,7 +267,7 @@ Function_ea6::
 Function_eac::
 	push de
 	push hl
-	
+
 ; bank
 	ld a, b
 

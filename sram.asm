@@ -1,5 +1,5 @@
 SECTION "Scratch", SRAM, BANK[0]
-sScratch:: ds $188 ; a000
+sDecompressScratch:: ds $188 ; a000
 
 SECTION "Decompress Buffer", SRAM, BANK[0]
 sDecompressBuffer:: ds 7 * 7 * $10 ; a188

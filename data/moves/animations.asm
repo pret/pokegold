@@ -2350,7 +2350,7 @@ BattleAnim_Transform:
 	anim_call BattleAnim_TargetObj_2Row
 	anim_sound 0, 0, SFX_PSYBEAM
 	anim_bgeffect ANIM_BG_WAVE_DEFORM_USER, $0, $1, $0
-    anim_wait 48
+	anim_wait 48
 	anim_transform
 	anim_incbgeffect ANIM_BG_WAVE_DEFORM_USER
 	anim_wait 48
@@ -2592,7 +2592,7 @@ BattleAnim_Minimize:
 	anim_1gfx ANIM_GFX_HIT
 	anim_call BattleAnim_TargetObj_2Row
 	anim_bgeffect ANIM_BG_WAVE_DEFORM_USER, $0, $1, $0
-    anim_wait 48
+	anim_wait 48
 	anim_minimizeopp
 	anim_incbgeffect ANIM_BG_WAVE_DEFORM_USER
 	anim_wait 48

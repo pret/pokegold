@@ -74,6 +74,6 @@ PredefPointers::
 	add_predef CheckTypeMatchup ; $40
 	add_predef ConvertMon_1to2
 	add_predef NewPokedexEntry
-	add_predef FrontpicPredef
+	add_predef UnusedFrontpicPredef
 	add_predef UpdateTimePredef
 	dbw -1, InexplicablyEmptyFunction ; ???

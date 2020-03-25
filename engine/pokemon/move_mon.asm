@@ -406,7 +406,7 @@ AddTempmonToParty: ; da9c (3:5a9c)
 	ld a, [wFirstUnownSeen]
 	and a
 	jr nz, .asm_db43
-	ld a, [wd11e]
+	ld a, [wUnownLetter]
 	ld [wFirstUnownSeen], a
 .asm_db43
 	and a
@@ -604,7 +604,7 @@ SendGetMonIntoFromBox: ; db45 (3:5b45)
 	ld a, [sBoxCount]
 	dec a
 	ld b, a
-	call Functiondcbc
+	call RestorePPOfDepositedPokemon
 Functiondcb2: ; dcb2 (3:5cb2)
 	call CloseSRAM
 	and a
@@ -615,7 +615,7 @@ Functiondcb7: ; dcb7 (3:5cb7)
 	scf
 	ret
 
-Functiondcbc: ; dcbc (3:5cbc)
+RestorePPOfDepositedPokemon:
 	ld a, b
 	ld hl, sBoxMon1Species
 	ld bc, BOXMON_STRUCT_LENGTH
@@ -947,7 +947,7 @@ SendMonIntoBox: ; de74 (3:5e74)
 	ld bc, $4
 	call CopyBytes
 	ld b, $0
-	call Functiondcbc
+	call RestorePPOfDepositedPokemon
 	call CloseSRAM
 	scf
 	ret

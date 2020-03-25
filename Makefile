@@ -45,7 +45,7 @@ silver: pokesilver.gbc
 
 clean:
 	rm -f $(roms) $(gold_obj) $(silver_obj) $(roms:.gbc=.map) $(roms:.gbc=.sym)
-	find gfx/pics gfx/trainers -name "*.png" -delete
+	find gfx/pics gfx/trainers \( -name "*.png" -o -name "*.2bpp" \) -delete
 	$(MAKE) clean -C tools/
 
 compare: $(roms)

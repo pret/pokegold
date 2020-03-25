@@ -120,7 +120,7 @@ SECTION "WRAM", WRAM0
 wLZAddress:: dw ; c1c2
 wLZBank::    db ; c1c4
 
-wBoxAlignment:: db ; c1c5
+wc1c5:: db ; c1c5
 
 wInputType::        db ; c1c6
 wAutoInputAddress:: dw ; c1c7
@@ -2109,7 +2109,7 @@ wCurPocket::
 	db ; ce65
 
 wPackUsedItem::
-wce66:: 
+wce66::
 	db ; ce66
 
 wRequested2bpp:: ds 1 ; ce67
@@ -2273,6 +2273,13 @@ UNION ; ceed
 wTempMail:: mailmsg wTempMail
 
 NEXTU ; ceed
+; mon buffer
+wBufferMonNick:: ds MON_NAME_LENGTH ; ceed
+wBufferMonOT:: ds NAME_LENGTH ; cef8
+wBufferMon:: party_struct wBufferMon ; cf03
+	ds 8
+
+NEXTU ; ceed
 ; bug-catching contest
 wBugContestResults::
 	bugcontestwinner wBugContestFirstPlace
@@ -2421,12 +2428,12 @@ wJumpStdScriptBuffer:: ds 3
 ENDU
 
 wcf3a:: ds 1
-wcf3b:: ds 1
+wBoxAlignment:: db
 wcf3c:: ds 1
 wcf3d:: ds 1
 wcf3e:: ds 1
 wcf3f:: ds 1
-ENDU 
+ENDU
 
 wcf40:: ds 1 ; cf40
 wcf41:: ds 1 ; cf41
@@ -2501,7 +2508,7 @@ wcfd2:: ds 1 ; cfd2
 wSwitchMon::
 wSwitchItem::
 wMoveSwapBuffer::
-wcfd3:: 
+wcfd3::
 	db ; cfd3
 
 wMenuScrollPosition:: ds 1 ; cfd4
@@ -2781,7 +2788,7 @@ wd11a:: ds 1 ; d11a
 wd11b:: ds 1 ; d11b
 wd11c:: ds 1 ; d11c
 wTrainerClass:: ds 1 ; d11d
-wd11e:: ds 1 ; d11e
+wUnownLetter:: ds 1 ; d11e
 wd11f:: ds 1 ; d11f
 
 wBaseDexNo:: ; d120
@@ -2803,10 +2810,8 @@ wd12d:: ds 1 ; d12d
 wd12e:: ds 1 ; d12e
 wBaseEggSteps:: db ; d12f
 wd130:: ds 1 ; d130
-wBasePicSize::
-wd131:: ds 1 ; d131
-wBaseUnusedFrontpic::
-wd132:: ds 1 ; d132
+wBasePicSize:: db ; d131
+wBaseUnusedFrontpic:: db ; d132
 wd133:: ds 1 ; d133
 wd134:: ds 1 ; d134
 wd135:: ds 1 ; d135
@@ -2937,7 +2942,7 @@ wOptions:: ; d199
 ; bit 6: battle style shift/set
 ; bit 7: battle scene off/on
 	ds 1
-	
+
 wSaveFileExists:: ds 1 ; d19a
 wTextboxFrame:: ; d19b
 ; bits 0-2: textbox frame 0-7
@@ -3137,7 +3142,7 @@ wPokegearFlags:: ; d67c
 
 wRadioTuningKnob:: ds 1 ; d67d
 wLastDexMode:: ds 1 ; d67e
-	
+
 	ds 1
 
 wWhichRegisteredItem:: ds 1 ; d680
@@ -3655,7 +3660,7 @@ wMapData::
 wVisitedSpawns:: ds 4 ; flag_array NUM_SPAWNS ; d9ee
 
 	warp_struct wDig ; d9f2
-	
+
 wBackupWarpNumber:: db ; d9f5
 wBackupMapGroup:: db ; d9f6
 wBackupMapNumber:: db ; d9f7
@@ -3771,7 +3776,7 @@ wBreedMotherOrNonDitto:: ; dc79
 ; nz: no
 	ds 1
 
-wBreedMon2::	
+wBreedMon2::
 wBreedMon2Nick::  ds MON_NAME_LENGTH ; dc7a
 wBreedMon2OT::    ds NAME_LENGTH ; dc85
 wBreedMon2Stats:: box_struct wBreedMon2 ; dc90

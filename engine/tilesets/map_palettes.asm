@@ -17,7 +17,7 @@ _SwapTextboxPalettes::
 	ld h, a
 	ld a, [hl]
 	and $f
-    bit 3, a
+	bit 3, a
 	jr z, .next
 	jr .asm_8038
 
@@ -31,8 +31,8 @@ _SwapTextboxPalettes::
 	ld a, [hl]
 	swap a
 	and $f
-    bit 3, a
-    jr z, .next
+	bit 3, a
+	jr z, .next
 
 .asm_8038
 	ld a, [wMapGroup]
@@ -73,7 +73,7 @@ _ScrollBGMapPalettes::
 	ld h, a
 	ld a, [hl]
 	and $f
-    bit 3, a
+	bit 3, a
 	jr z, .next
 	jr .asm_8083
 

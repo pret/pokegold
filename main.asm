@@ -409,6 +409,7 @@ IsAnyPokemonHoldingMail:
 	dr $4488c, $48000
 
 SECTION "bank12", ROMX, BANK[$12]
+PokemonPicPointers:
 	dr $48000, $4c000
 
 SECTION "bank13", ROMX, BANK[$13]
@@ -514,30 +515,14 @@ CalcExpAtLevel:
 _SwitchPartyMons:
 	dr $5161b, $51749
 
-GetUnownLetter::
-	dr $51749, $51780
-
-GetMonFrontpic::
-	dr $51780, $51786
-
-FrontpicPredef::
-	dr $51786, $51803
-
-GetMonBackpic::
-	dr $51803, $518a0
-
-GetTrainerPic::
-	dr $518a0, $518fa
-
-DecompressGet2bpp::
-	dr $518fa, $51b0b
-
+INCLUDE "engine/gfx/load_pics.asm"
+INCLUDE "engine/pokemon/move_mon_wo_mail.asm"
 INCLUDE "data/pokemon/base_stats.asm"
 
 Unknown53a6b:
 	dr $53a6b, $53a83
 
-UnknownEggPic:: ; 53a83
+EggPic::
 	dr $53a83, $54000
 
 SECTION "bank15", ROMX, BANK[$15]
@@ -571,9 +556,11 @@ SECTION "bank1e", ROMX, BANK[$1e]
 	dr $78000, $7c000
 
 SECTION "bank1f", ROMX, BANK[$1f]
+UnownPicPointers:
 	dr $7c000, $80000
 
 SECTION "bank20", ROMX, BANK[$20]
+TrainerPicPointers:
 	dr $80000, $84000
 
 SECTION "bank21", ROMX, BANK[$21]
@@ -984,7 +971,11 @@ SECTION "bank6f", ROMX, BANK[$6f]
 SECTION "bank70", ROMX, BANK[$70]
 	dr $1c0000, $1c0a66
 UpdateTimePredef::
-	dr $1c0a66, $1c0de9
+	dr $1c0a66, $1c0a7a
+StubbedGetFrontpic::
+	ret
+Function1c0a7b::
+	dr $1c0a7b, $1c0de9
 _DudeAutoInput_A::
 	dr $1c0de9, $1c0dee
 
