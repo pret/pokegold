@@ -81,8 +81,19 @@ rept _NARG
 endr
 ENDM
 
+; Reverses FixPicBank in engine/gfx/load_pics.asm
+;
+; Takes the actual bank of the pic in the ROM and returns the "defined" bank
+;     $1f -> $13
+;     $20 -> $14
+;     $2e -> $1f
+;
+; Otherwise, the ROM bank will match the defined bank.
 dba_pic: MACRO ; dbw bank, address
-	db BANK(\1) - PICS_FIX
+	db (BANK(\1) == $1f) * ($13 - $1f) \
+	 + (BANK(\1) == $20) * ($14 - $20) \
+	 + (BANK(\1) == $2e) * ($1f - $2e) \
+	 + (BANK(\1))
 	dw \1
 ENDM
 

@@ -79,49 +79,40 @@ ROMX $11
 	"bank11"
 ROMX $12
 	org $4000
-	"bank12"
+	"Pic Pointers"
+	"Pics 1"
 ROMX $13
 	org $4000
 	"bank13"
 ROMX $14
-	org $4000
 	"bank14"
 ROMX $15
-	org $4000
-	"bank15"
+	"Pics 2"
 ROMX $16
-	org $4000
-	"bank16"
+	"Pics 3"
 ROMX $17
-	org $4000
-	"bank17"
+	"Pics 4"
 ROMX $18
-	org $4000
-	"bank18"
+	"Pics 5"
 ROMX $19
-	org $4000
-	"bank19"
+	"Pics 6"
 ROMX $1a
-	org $4000
-	"bank1a"
+	"Pics 7"
 ROMX $1b
-	org $4000
-	"bank1b"
+	"Pics 8"
 ROMX $1c
-	org $4000
-	"bank1c"
+	"Pics 9"
 ROMX $1d
-	org $4000
-	"bank1d"
+	"Pics 10"
 ROMX $1e
-	org $4000
-	"bank1e"
+	"Pics 11"
 ROMX $1f
 	org $4000
-	"bank1f"
+	"Unown Pic Pointers"
+	"Pics 12"
 ROMX $20
-	org $4000
-	"bank20"
+	"Trainer Pic Pointers"
+	"Pics 13"
 ROMX $21
 	org $4000
 	"bank21"
@@ -157,7 +148,7 @@ ROMX $2d
 	org $4000
 	"bank2d"
 ROMX $2e
-	org $4000
+	"Pics 14"
 	"bank2e"
 ROMX $2f
 	org $4000

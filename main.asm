@@ -408,10 +408,6 @@ DeletePartyMonMail:
 IsAnyPokemonHoldingMail:
 	dr $4488c, $48000
 
-SECTION "bank12", ROMX, BANK[$12]
-PokemonPicPointers:
-	dr $48000, $4c000
-
 SECTION "bank13", ROMX, BANK[$13]
 	dr $4c000, $50000
 
@@ -524,44 +520,6 @@ Unknown53a6b:
 
 EggPic::
 	dr $53a83, $54000
-
-SECTION "bank15", ROMX, BANK[$15]
-	dr $54000, $58000
-
-SECTION "bank16", ROMX, BANK[$16]
-	dr $58000, $5c000
-
-SECTION "bank17", ROMX, BANK[$17]
-	dr $5c000, $60000
-
-SECTION "bank18", ROMX, BANK[$18]
-	dr $60000, $64000
-
-SECTION "bank19", ROMX, BANK[$19]
-	dr $64000, $68000
-
-SECTION "bank1a", ROMX, BANK[$1a]
-	dr $68000, $6c000
-
-SECTION "bank1b", ROMX, BANK[$1b]
-	dr $6c000, $70000
-
-SECTION "bank1c", ROMX, BANK[$1c]
-	dr $70000, $74000
-
-SECTION "bank1d", ROMX, BANK[$1d]
-	dr $74000, $78000
-
-SECTION "bank1e", ROMX, BANK[$1e]
-	dr $78000, $7c000
-
-SECTION "bank1f", ROMX, BANK[$1f]
-UnownPicPointers:
-	dr $7c000, $80000
-
-SECTION "bank20", ROMX, BANK[$20]
-TrainerPicPointers:
-	dr $80000, $84000
 
 SECTION "bank21", ROMX, BANK[$21]
 	dr $84000, $842db
@@ -762,8 +720,7 @@ INCLUDE "data/maps/blocks.asm"
 SECTION "bank2d", ROMX, BANK[$2d]
 	dr $b4000, $b8000
 
-SECTION "bank2e", ROMX, BANK[$2e]
-	dr $b8000, $ba300
+SECTION "bank2e", ROMX
 
 INCLUDE "engine/events/checkforhiddenitems.asm"
 

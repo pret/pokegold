@@ -69,7 +69,7 @@ void scan_file(char* filename) {
 				} else if ((strncmp(buffer, "INCLUDE", 7) == 0) || (strncmp(buffer, "include", 7) == 0)) {
 					is_include = true;
 				}
-				if (is_incbin || is_include) {
+				if (is_include) {
 					buffer = strchr(buffer, '"');
 					if (!buffer) {
 						break;

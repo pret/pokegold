@@ -7,7 +7,7 @@ main.o \
 wram.o \
 data/text/common.o \
 data/pokemon/dex_entries.o \
-
+gfx/pics.o
 
 gold_obj := $(rom_obj:.o=_gold.o)
 silver_obj := $(rom_obj:.o=_silver.o)
@@ -45,7 +45,7 @@ silver: pokesilver.gbc
 
 clean:
 	rm -f $(roms) $(gold_obj) $(silver_obj) $(roms:.gbc=.map) $(roms:.gbc=.sym)
-	find gfx/pics gfx/trainers \( -name "*.png" -o -name "*.2bpp" \) -delete
+	find gfx/pokemon gfx/trainers \( -name "*.png" -o -name "*.2bpp" \) -delete
 	$(MAKE) clean -C tools/
 
 compare: $(roms)

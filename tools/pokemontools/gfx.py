@@ -89,7 +89,7 @@ def interleave(tiles, width):
 
 def deinterleave(tiles, width):
     """
-      00 02 04 06 08 0a     00 01 02 03 04 05 
+      00 02 04 06 08 0a     00 01 02 03 04 05
       01 03 05 07 09 0b     06 07 08 09 0a 0b
       0c 0e 10 12 14 16 --> 0c 0d 0e 0f 10 11
       0d 0f 11 13 15 17     12 13 14 15 16 17
@@ -240,9 +240,9 @@ def flatten(planar):
     Flatten planar 2bpp image data into a quaternary pixel map.
     """
     strips = []
-    for bottom, top in split(planar, 2):
-        bottom = bottom
-        top = top
+    for bottom_top in split(planar, 2):
+        bottom = bottom_top[0]
+        top = bottom_top[1]
         strip = []
         for i in range(7,-1,-1):
             color = (

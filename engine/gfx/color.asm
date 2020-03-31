@@ -1376,8 +1376,8 @@ Palettes_ad39:
 	RGB 30, 26, 15
 	RGB 04, 17, 31
 
-INCLUDE "gfx/pics/palette_pointers.asm"
-INCLUDE "gfx/trainers/palette_pointers.asm"
+INCLUDE "data/pokemon/palettes.asm"
+INCLUDE "data/trainers/palettes.asm"
 
 Functionb649: ; b649 (2:7649)
 	ld a, [wPermission]

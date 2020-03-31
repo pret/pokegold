@@ -391,7 +391,7 @@ _YesNoBox::
 	ld hl, YesNoMenuHeader
 	call CopyMenuHeader
 	pop bc
-	
+
 	ld a, b
 	ld [wMenuBorderLeftCoord], a
 	add 5

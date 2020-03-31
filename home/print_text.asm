@@ -97,7 +97,7 @@ CopyDataUntil::
 	cp c
 	jr nz, CopyDataUntil
 	ret
-	
+
 INCLUDE "home/print_num.asm"
 
 Function33ce::
@@ -141,9 +141,9 @@ FarPrintText::
 	push af
 	ld a, [wBuffer]
 	rst Bankswitch
-	
+
 	call PrintText
-	
+
 	pop af
 	rst Bankswitch
 	ret

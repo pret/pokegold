@@ -12,8 +12,6 @@ ENDM
 ; - TrainerEncounterMusic (see data/trainers/encounter_music.asm)
 ; - TrainerPicPointers (see data/trainers/pic_pointers.asm)
 ; - TrainerPalettes (see data/trainers/palettes.asm)
-; - BTTrainerClassSprites (see data/trainers/sprites.asm)
-; - BTTrainerClassGenders (see data/trainers/genders.asm)
 ; trainer constants are Trainers indexes, for the sub-tables of TrainerGroups (see data/trainers/parties.asm)
 	enum_start
 CHRIS EQU __enum__
@@ -23,7 +21,6 @@ CHRIS EQU __enum__
 	const PHONECONTACT_BILL
 	const PHONECONTACT_ELM
 
-KRIS EQU __enum__
 	trainerclass FALKNER ; 1
 	const FALKNER1
 
