@@ -148,8 +148,10 @@ ROMX $2d
 	org $4000
 	"bank2d"
 ROMX $2e
+	org $4000
 	"Pics 14"
-	"bank2e"
+	org $6300
+	"bank2e_2"
 ROMX $2f
 	org $4000
 	"bank2f"

@@ -545,9 +545,8 @@ s0_ac64:: ds 1 ; 0:ac64
 s0_ac65:: ds 1 ; 0:ac65
 s0_ac66:: ds 1 ; 0:ac66
 s0_ac67:: ds 1 ; 0:ac67
-s0_ac68:: ds 1 ; 0:ac68
-s0_ac69:: ds 1 ; 0:ac69
-s0_ac6a:: ds 1 ; 0:ac6a
+sLuckyNumberDay:: db ; 0:ac68
+sLuckyIDNumber:: dw ; 0:ac69
 s0_ac6b:: ds 1 ; 0:ac6b
 s0_ac6c:: ds 1 ; 0:ac6c
 s0_ac6d:: ds 1 ; 0:ac6d

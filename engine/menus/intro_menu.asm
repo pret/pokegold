@@ -451,28 +451,28 @@ InitializeWorld: ; 5d97 (1:5d97)
 	ret
 
 LoadOrRegenerateLuckyIDNumber: ; 5da7 (1:5da7)
-	ld a, $0
+	ld a, 0
 	call OpenSRAM
 	ld a, [wCurDay]
 	inc a
 	ld b, a
-	ld a, [s0_ac68]
+	ld a, [sLuckyNumberDay]
 	cp b
-	ld a, [s0_ac6a]
+	ld a, [sLuckyIDNumber + 1]
 	ld c, a
-	ld a, [s0_ac69]
+	ld a, [sLuckyIDNumber]
 	jr z, .asm_5dc9
 	ld a, b
-	ld [s0_ac68], a
+	ld [sLuckyNumberDay], a
 	call Random
 	ld c, a
 	call Random
 .asm_5dc9
-	ld [wd9e9], a
-	ld [s0_ac69], a
+	ld [wLuckyIDNumber], a
+	ld [sLuckyIDNumber], a
 	ld a, c
-	ld [wd9ea], a
-	ld [s0_ac6a], a
+	ld [wLuckyIDNumber + 1], a
+	ld [sLuckyIDNumber + 1], a
 	jp CloseSRAM
 
 MainMenu_Continue:

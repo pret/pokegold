@@ -498,162 +498,162 @@ _OPT_MaryText1::
 	text "'s"
 	done
 
-OPT_SweetAdorably::
+_OPT_SweetAdorablyText::
 	text_start
 	line "sweet and adorably"
 	done
 
-OPT_WigglySlickly::
+_OPT_WigglySlicklyText::
 	text_start
 	line "wiggly and slickly"
 	done
 
-OPT_AptlyNamed::
+_OPT_AptlyNamedText::
 	text_start
 	line "aptly named and"
 	done
 
-OPT_UndeniablyKindOf::
+_OPT_UndeniablyKindOfText::
 	text_start
 	line "undeniably kind of"
 	done
 
-OPT_Unbearably::
+_OPT_UnbearablyText::
 	text_start
 	line "so, so unbearably"
 	done
 
-OPT_WowImpressively::
+_OPT_WowImpressivelyText::
 	text_start
 	line "wow, impressively"
 	done
 
-OPT_AlmostPoisonously::
+_OPT_AlmostPoisonouslyText::
 	text_start
 	line "almost poisonously"
 	done
 
-OPT_Sensually::
+_OPT_SensuallyText::
 	text_start
 	line "ooh, so sensually"
 	done
 
-OPT_Mischievously::
+_OPT_MischievouslyText::
 	text_start
 	line "so mischievously"
 	done
 
-OPT_Topically::
+_OPT_TopicallyText::
 	text_start
 	line "so very topically"
 	done
 
-OPT_Addictively::
+_OPT_AddictivelyText::
 	text_start
 	line "sure addictively"
 	done
 
-OPT_LooksInWater::
+_OPT_LooksInWaterText::
 	text_start
 	line "looks in water is"
 	done
 
-OPT_EvolutionMustBe::
+_OPT_EvolutionMustBeText::
 	text_start
 	line "evolution must be"
 	done
 
-OPT_Provocatively::
+_OPT_ProvocativelyText::
 	text_start
 	line "provocatively"
 	done
 
-OPT_FlippedOut::
+_OPT_FlippedOutText::
 	text_start
 	line "so flipped out and"
 	done
 
-OPT_HeartMeltingly::
+_OPT_HeartMeltinglyText::
 	text_start
 	line "heart-meltingly"
 	done
 
-OPT_Cute::
+_OPT_CuteText::
 	text_start
 	line "cute."
 	done
 
-OPT_Weird::
+_OPT_WeirdText::
 	text_start
 	line "weird."
 	done
 
-OPT_Pleasant::
+_OPT_PleasantText::
 	text_start
 	line "pleasant."
 	done
 
-OPT_BoldSortOf::
+_OPT_BoldSortOfText::
 	text_start
 	line "bold, sort of."
 	done
 
-OPT_Frightening::
+_OPT_FrighteningText::
 	text_start
 	line "frightening."
 	done
 
-OPT_SuaveDebonair::
+_OPT_SuaveDebonairText::
 	text_start
 	line "suave & debonair!"
 	done
 
-OPT_Powerful::
+_OPT_PowerfulText::
 	text_start
 	line "powerful."
 	done
 
-OPT_Exciting::
+_OPT_ExcitingText::
 	text_start
 	line "exciting."
 	done
 
-OPT_Groovy::
+_OPT_GroovyText::
 	text_start
 	line "now!"
 	done
 
-OPT_Inspiring::
+_OPT_InspiringText::
 	text_start
 	line "inspiring."
 	done
 
-OPT_Friendly::
+_OPT_FriendlyText::
 	text_start
 	line "friendly."
 	done
 
-OPT_HotHotHot::
+_OPT_HotHotHotText::
 	text_start
 	line "hot, hot, hot!"
 	done
 
-OPT_Stimulating::
+_OPT_StimulatingText::
 	text_start
 	line "stimulating."
 	done
 
-OPT_Guarded::
+_OPT_GuardedText::
 	text_start
 	line "guarded."
 	done
 
-OPT_Lovely::
+_OPT_LovelyText::
 	text_start
 	line "lovely."
 	done
 
-OPT_Speedy::
+_OPT_SpeedyText::
 	text_start
 	line "speedy."
 	done
@@ -817,82 +817,82 @@ _PnP_Text4::
 	text_ram wStringBuffer1
 	db "@@"
 
-_PnP_cute::
+_PnP_CuteText::
 	text_start
 	line "is cute."
 	done
 
-_PnP_lazy::
+_PnP_LazyText::
 	text_start
 	line "is sort of lazy."
 	done
 
-_PnP_happy::
+_PnP_HappyText::
 	text_start
 	line "is always happy."
 	done
 
-_PnP_noisy::
+_PnP_NoisyText::
 	text_start
 	line "is quite noisy."
 	done
 
-_PnP_precocious::
+_PnP_PrecociousText::
 	text_start
 	line "is precocious."
 	done
 
-_PnP_bold::
+_PnP_BoldText::
 	text_start
 	line "is somewhat bold."
 	done
 
-_PnP_picky::
+_PnP_PickyText::
 	text_start
 	line "is too picky!"
 	done
 
-_PnP_sortofok::
+_PnP_SortOfOKText::
 	text_start
 	line "is sort of OK."
 	done
 
-_PnP_soso::
+_PnP_SoSoText::
 	text_start
 	line "is just so-so."
 	done
 
-_PnP_great::
+_PnP_GreatText::
 	text_start
 	line "is actually great."
 	done
 
-_PnP_mytype::
+_PnP_MyTypeText::
 	text_start
 	line "is just my type."
 	done
 
-_PnP_cool::
+_PnP_CoolText::
 	text_start
 	line "is so cool, no?"
 	done
 
-_PnP_inspiring::
+_PnP_InspiringText::
 	text_start
 	line "is inspiring!"
 	done
 
-_PnP_weird::
+_PnP_WeirdText::
 	text_start
 	line "is kind of weird."
 	done
 
-_PnP_rightforme::
+_PnP_RightForMeText::
 	text_start
 	line "is right for me?"
 	done
 
-_PnP_odd::
+_PnP_OddText::
 	text_start
 	line "is definitely odd!"
 	done

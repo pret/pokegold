@@ -270,7 +270,9 @@ RandomUnseenWildMon:
 RandomPhoneWildMon:
 	dr $2aa6b, $2aab3
 RandomPhoneMon:
-	dr $2aab3, $2c000
+	dr $2aab3, $2ab35
+JohtoGrassWildMons:
+	dr $2ab35, $2c000
 
 SECTION "bankb", ROMX, BANK[$b]
 	dr $2c000, $2c352
@@ -649,7 +651,11 @@ MrChrono:
 PrintHour:
 	dr $90b0f, $90b5e
 PokeGear:
-	dr $90b5e, $9188a
+	dr $90b5e, $917ca
+RadioMusicRestartDE:
+	dr $917ca, $917de
+RadioMusicRestartPokemonChannel:
+	dr $917de, $9188a
 Function9188a:
 	dr $9188a, $919c1
 Function919c1:
@@ -658,7 +664,9 @@ TownMap_:
 	dr $91a4f, $91c7f
 
 Pokedex_GetArea::
-	dr $91c7f, $92c36
+	dr $91c7f, $92364
+GetLandmarkName:
+	dr $92364, $92c36
 Function92c36:
 	dr $92c36, $94000
 
@@ -720,15 +728,12 @@ INCLUDE "data/maps/blocks.asm"
 SECTION "bank2d", ROMX, BANK[$2d]
 	dr $b4000, $b8000
 
-SECTION "bank2e", ROMX
+SECTION "bank2e_2", ROMX
 
 INCLUDE "engine/events/checkforhiddenitems.asm"
+INCLUDE "engine/events/treemons.asm"
+INCLUDE "engine/pokegear/radio.asm"
 
-TreeMonEncounter:
-	dr $ba378, $ba3a1
-
-RockMonEncounter:
-	dr $ba3a1, $baeca
 ReadPartyMonMail:
 	dr $baeca, $bbaed
 ItemIsMail:

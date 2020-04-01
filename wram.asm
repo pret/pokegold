@@ -3650,8 +3650,7 @@ wd9e5:: ds 1 ; d9e5
 wd9e6:: ds 1 ; d9e6
 wLuckyNumberShowFlag:: ds 1 ; d9e7
 wd9e8:: ds 1 ; d9e8
-wd9e9:: ds 1 ; d9e9
-wd9ea:: ds 1 ; d9ea
+wLuckyIDNumber:: dw ; d9e9
 wRepelSteps:: ds 1 ; d9eb
 wd9ec:: ds 1 ; d9ec
 wd9ed:: ds 1 ; d9ed
@@ -3806,9 +3805,8 @@ wBestMagikarpLengthFeet:: ds 1 ; dd33
 wBestMagikarpLengthInches:: ds 1 ; dd34
 wMagikarpRecordHoldersName:: ds NAME_LENGTH ; dd35
 
-wdd40:: ds 1 ; dd40
-wdd41:: ds 1 ; dd41
-wdd42:: ds 1 ; dd42
+wPokedexShowPointerAddr:: dw ; dd40
+wPokedexShowPointerBank:: db ; dd42
 wdd43:: ds 1 ; dd43
 wdd44:: ds 1 ; dd44
 wdd45:: ds 1 ; dd45

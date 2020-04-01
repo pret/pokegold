@@ -102,6 +102,24 @@ NUM_WATERMON EQU 3
 GRASS_WILDDATA_LENGTH EQU (NUM_GRASSMON * 2 + 1) * 3 + 2
 WATER_WILDDATA_LENGTH EQU (NUM_WATERMON * 2 + 1) * 1 + 2
 
+; treemon sets
+; TreeMons indexes (see data/wild/treemons.asm)
+	const_def
+	const TREEMON_SET_NONE
+	const TREEMON_SET_FOREST
+	const TREEMON_SET_CANYON
+	const TREEMON_SET_ROCK
+NUM_TREEMON_SETS EQU const_value
+; last 2 are unused/ignored
+	const TREEMON_SET_UNUSED
+	const TREEMON_SET_CITY
+
+; treemon scores
+	const_def
+	const TREEMON_SCORE_BAD  ; 0
+	const TREEMON_SCORE_GOOD ; 1
+	const TREEMON_SCORE_RARE ; 2
+
 ; ChangeHappiness arguments (see data/happiness_changes.asm)
 const_value = 1
 	const HAPPINESS_GAINLEVEL         ; 01

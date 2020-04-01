@@ -675,9 +675,7 @@ UnownIFrontpic:      INCBIN "gfx/pokemon/unown_i/front.2bpp.lz"
 UnownRBackpic:       INCBIN "gfx/pokemon/unown_r/back.2bpp.lz"
 UnownRFrontpic:      INCBIN "gfx/pokemon/unown_r/front.2bpp.lz"
 
-	dr $b99f2, $ba300
-
-ELSE ; IF DEF(_SILVER)
+ELIF DEF(_SILVER)
 
 SECTION "Pic Pointers", ROMX
 
@@ -1351,5 +1349,4 @@ UnownIFrontpic:      INCBIN "gfx/pokemon/unown_i/front.2bpp.lz"
 UnownRBackpic:       INCBIN "gfx/pokemon/unown_r/back.2bpp.lz"
 UnownRFrontpic:      INCBIN "gfx/pokemon/unown_r/front.2bpp.lz"
 
-	dr $b9a43, $ba300
 ENDC
