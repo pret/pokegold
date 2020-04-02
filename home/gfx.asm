@@ -28,7 +28,7 @@ ReplacePlayerSprite::
 	farcall Function1413c
 	ret
 
-Functiond9e::
+LoadStandardFont::
 	farcall Functionf8000
 	ret
 

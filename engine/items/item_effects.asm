@@ -551,7 +551,7 @@ UltraBall: ; e926
 	ld b, $0
 	farcall NamingScreen
 	call RotateThreePalettesRight
-	call Functiond9e
+	call LoadStandardFont
 	pop hl
 	ld de, wStringBuffer1
 	call InitName
@@ -610,7 +610,7 @@ UltraBall: ; e926
 	ld hl, Text_SentToBillsPC ; $6e3f
 	call PrintText
 	call RotateThreePalettesRight
-	call Functiond9e
+	call LoadStandardFont
 	jr .end_ball_function
 
 .catch_bug_contest_mon

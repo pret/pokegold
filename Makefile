@@ -6,11 +6,15 @@ home.o \
 main.o \
 wram.o \
 data/text/common.o \
-data/pokemon/dex_entries.o \
-gfx/pics.o
+data/pokemon/dex_entries.o
 
-gold_obj := $(rom_obj:.o=_gold.o)
-silver_obj := $(rom_obj:.o=_silver.o)
+# Distinguish asm files which are game-exclusive for building (*_[gold|silver].asm)
+gs_excl_asm := gfx/pics
+gold_excl_obj := $(addsuffix _gold.o,$(gs_excl_asm))
+silver_excl_obj := $(addsuffix _silver.o,$(gs_excl_asm))
+
+gold_obj := $(rom_obj:.o=_gold.o) $(gold_excl_obj)
+silver_obj := $(rom_obj:.o=_silver.o) $(silver_excl_obj)
 
 
 ### Build tools
@@ -45,7 +49,8 @@ silver: pokesilver.gbc
 
 clean:
 	rm -f $(roms) $(gold_obj) $(silver_obj) $(roms:.gbc=.map) $(roms:.gbc=.sym)
-	find gfx/pokemon gfx/trainers \( -name "*.png" -o -name "*.2bpp" \) -delete
+	find gfx -name "*.png" -delete
+	find gfx/pokemon gfx/trainers -name "*.2bpp" -delete
 	$(MAKE) clean -C tools/
 
 compare: $(roms)
@@ -72,8 +77,14 @@ ifeq (,$(filter clean tools,$(MAKECMDGOALS)))
 
 $(info $(shell $(MAKE) -C tools))
 
-$(foreach obj, $(gold_obj), $(eval $(call DEP,$(obj),$(obj:_gold.o=.asm))))
-$(foreach obj, $(silver_obj), $(eval $(call DEP,$(obj),$(obj:_silver.o=.asm))))
+# Dependencies for shared objects (drop _gold and _silver from asm file basenames)
+$(foreach obj, $(filter-out $(gold_excl_obj), $(gold_obj)), \
+	$(eval $(call DEP,$(obj),$(obj:_gold.o=.asm))))
+$(foreach obj, $(filter-out $(silver_excl_obj), $(silver_obj)), \
+	$(eval $(call DEP,$(obj),$(obj:_silver.o=.asm))))
+
+# Dependencies for game-exclusive objects (keep _gold and _silver in asm file basenames)
+$(foreach obj, $(gold_excl_obj) $(silver_excl_obj), $(eval $(call DEP,$(obj),$(obj:.o=.asm))))
 
 endif
 
@@ -93,14 +104,3 @@ pngs:
 	find . -iname "*.[12]bpp" -exec $(gfx) png  {} +
 	find . -iname "*.[12]bpp" -exec touch {} +
 	find . -iname "*.lz"      -exec touch {} +
-
-%.png: ;
-%.2bpp: %.png ; $(gfx) 2bpp $<
-%.1bpp: %.png ; $(gfx) 1bpp $<
-%.lz: % ; $(gfx) lz $<
-
-%.pal: %.2bpp ;
-gfx/pics/%/normal.pal gfx/pics/%/bitmask.asm gfx/pics/%/frames.asm: gfx/pics/%/front.2bpp ;
-%.bin: ;
-%.blk: ;
-%.tilemap: ;

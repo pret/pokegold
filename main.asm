@@ -521,13 +521,16 @@ Unknown53a6b:
 	dr $53a6b, $53a83
 
 EggPic::
-	dr $53a83, $54000
+INCBIN "gfx/pokemon/egg/front.2bpp.lz"
 
 SECTION "bank21", ROMX, BANK[$21]
 	dr $84000, $842db
 
-_PrinterReceive:: ; 842db
-	dr $842db, $84684
+_PrinterReceive::
+	dr $842db, $845d4
+
+PrintMailAndExit:
+	dr $845d4, $84684
 
 Function84684:
 	dr $84684, $88000
@@ -733,11 +736,7 @@ SECTION "bank2e_2", ROMX
 INCLUDE "engine/events/checkforhiddenitems.asm"
 INCLUDE "engine/events/treemons.asm"
 INCLUDE "engine/pokegear/radio.asm"
-
-ReadPartyMonMail:
-	dr $baeca, $bbaed
-ItemIsMail:
-	dr $bbaed, $bc000
+INCLUDE "engine/pokemon/mail_2.asm"
 
 SECTION "bank2f", ROMX, BANK[$2f]
 	dr $bc000, $c0000

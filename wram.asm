@@ -2100,7 +2100,7 @@ wCurSpecies:: ds 1 ; ce60
 wNamedObjectTypeBuffer:: ds 1 ; ce61
 wce62:: ds 1 ; ce62
 wce63::
-wJumpTableIndex::
+wJumptableIndex::
 	db ; ce63
 wce64:: ds 1 ; ce64
 wce65::

@@ -2152,7 +2152,7 @@ ReloadTilesetAndPalettes:: ; 2c87 (0:2c87)
 	call DisableLCD
 	call ClearSprites
 	farcall RefreshSprites
-	call Functiond9e
+	call LoadStandardFont
 	call LoadFontsExtra
 	ldh a, [hROMBank]
 	push af

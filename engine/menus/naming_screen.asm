@@ -818,7 +818,7 @@ Function11fde: ; 11fde (4:5fde)
 Function1201e: ; 1201e (4:601e)
 	call ClearSprites
 	callfar ClearAnimatedObjectBuffer
-	call Functiond9e
+	call LoadStandardFont
 	call LoadFontsExtra
 	ld de, NamingScreenGFX_MiddleLine ; $6232
 	ld hl, $8eb0
@@ -855,8 +855,8 @@ Function1201e: ; 1201e (4:601e)
 	ldh [hWX], a
 	ret
 
-NamingScreenGFX_Border: INCBIN "gfx/namingscreen/border.2bpp"
-NamingScreenGFX_Cursor: INCBIN "gfx/namingscreen/cursor.2bpp"
+NamingScreenGFX_Border: INCBIN "gfx/naming_screen/border.2bpp"
+NamingScreenGFX_Cursor: INCBIN "gfx/naming_screen/cursor.2bpp"
 
 NameInputLower:
 	db "a b c d e f g h i"
@@ -888,9 +888,9 @@ BoxNameInputUpper:
 	db "- ? ! ♂ ♀ / . , &"
 	db "lower  DEL   END "
 
-NamingScreenGFX_ED: INCBIN "gfx/namingscreen/ed.1bpp" ; leftover from gen 1
-NamingScreenGFX_MiddleLine: INCBIN "gfx/namingscreen/middleline.1bpp"
-NamingScreenGFX_UnderLine: INCBIN "gfx/namingscreen/underline.1bpp"
+NamingScreenGFX_ED: INCBIN "gfx/naming_screen/ed.1bpp" ; leftover from gen 1
+NamingScreenGFX_MiddleLine: INCBIN "gfx/naming_screen/middleline.1bpp"
+NamingScreenGFX_UnderLine: INCBIN "gfx/naming_screen/underline.1bpp"
 
 _ComposeMailMessage:
 	ld hl, wNamingScreenDestinationPointer
@@ -957,7 +957,7 @@ Function12267: ; 12267 (4:6267)
 	ld [hl], $4e
 	ret
 
-MailIcon: INCBIN "gfx/namingscreen/mail_icon.2bpp"
+MailIcon: INCBIN "gfx/naming_screen/mail_icon.2bpp"
 
 Function12341: ; 12341 (4:6341)
 	ld a, $21

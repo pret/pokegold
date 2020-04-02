@@ -232,7 +232,7 @@ Function5bf7: ; 5bf7 (1:5bf7)
 	ldh [hMapAnims], a
 	call ClearTilemap
 	call LoadFontsExtra
-	call Functiond9e
+	call LoadStandardFont
 	call ClearWindowData
 	ret
 

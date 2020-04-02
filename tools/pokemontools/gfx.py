@@ -2,6 +2,7 @@
 
 import os
 import sys
+import io
 from . import png
 from math import sqrt, floor, ceil
 import argparse
@@ -170,16 +171,16 @@ def test_condense_tiles_to_map():
 
 def to_file(filename, data):
     """
-    Apparently open(filename, 'wb').write(bytearray(data)) won't work.
+    Apparently io.open(filename, 'wb').write(bytearray(data)) won't work.
     """
-    file = open(filename, 'wb')
+    file = io.open(filename, 'wb')
     for byte in data:
         file.write('%c' % byte)
     file.close()
 
 
 def decompress_file(filein, fileout=None):
-    image = bytearray(open(filein).read())
+    image = bytearray(io.open(filein).read())
     de = Decompressed(image)
 
     if fileout == None:
@@ -188,7 +189,7 @@ def decompress_file(filein, fileout=None):
 
 
 def compress_file(filein, fileout=None):
-    image = bytearray(open(filein).read())
+    image = bytearray(io.open(filein).read())
     lz = Compressed(image)
 
     if fileout == None:
@@ -205,7 +206,7 @@ def bin_to_rgb(word):
     return (red, green, blue)
 
 def convert_binary_pal_to_text_by_filename(filename):
-    pal = bytearray(open(filename).read())
+    pal = bytearray(io.open(filename).read())
     return convert_binary_pal_to_text(pal)
 
 def convert_binary_pal_to_text(pal):
@@ -231,7 +232,7 @@ def read_rgb_macros(lines):
 def rewrite_binary_pals_to_text(filenames):
     for filename in filenames:
         pal_text = convert_binary_pal_to_text_by_filename(filename)
-        with open(filename, 'w') as out:
+        with io.open(filename, 'w') as out:
             out.write(pal_text)
 
 
@@ -240,9 +241,7 @@ def flatten(planar):
     Flatten planar 2bpp image data into a quaternary pixel map.
     """
     strips = []
-    for bottom_top in split(planar, 2):
-        bottom = bottom_top[0]
-        top = bottom_top[1]
+    for bottom, top in split(planar, 2):
         strip = []
         for i in range(7,-1,-1):
             color = (
@@ -306,7 +305,7 @@ def pal_to_png(filename):
     """
     Interpret a .pal file as a png palette.
     """
-    with open(filename) as rgbs:
+    with io.open(filename) as rgbs:
         colors = read_rgb_macros(rgbs.readlines())
     a = 255
     palette = []
@@ -380,7 +379,7 @@ def export_2bpp_to_png(filein, fileout=None, pal_file=None, height=0, width=0, t
     if fileout == None:
         fileout = os.path.splitext(filein)[0] + '.png'
 
-    image = open(filein, 'rb').read()
+    image = io.open(filein, 'rb').read()
 
     arguments = {
         'width': width,
@@ -406,7 +405,7 @@ def export_2bpp_to_png(filein, fileout=None, pal_file=None, height=0, width=0, t
         greyscale=greyscale,
         bitdepth=bitdepth
     )
-    with open(fileout, 'wb') as f:
+    with io.open(fileout, 'wb') as f:
         w.write(f, px_map)
 
 
@@ -486,7 +485,7 @@ def convert_2bpp_to_png(image, **kwargs):
         if len(matches):
             width, height = sorted(matches, key= lambda w_h: (w_h[1] % 8 != 0, w_h[1] + w_h[0]))[0] # favor height
         else:
-            raise Exception('Image can\'t be divided into tiles (%d px)!' % (px_length(image)))
+            raise Exception('Image can\'t be divided into tiles ({} px)!'.format(px_length(image)))
 
     # convert tiles to lines
     lines = to_lines(flatten(image), width)
@@ -569,7 +568,7 @@ def export_png_to_2bpp(filein, fileout=None, palout=None, **kwargs):
         frame_text, bitmask_text = get_pic_animation(tmap, *arguments['pic_dimensions'])
 
         frames_path = os.path.join(os.path.split(fileout)[0], 'frames.asm')
-        with open(frames_path, 'w') as out:
+        with io.open(frames_path, 'w') as out:
             out.write(frame_text)
 
         bitmask_path = os.path.join(os.path.split(fileout)[0], 'bitmask.asm')
@@ -581,7 +580,7 @@ def export_png_to_2bpp(filein, fileout=None, palout=None, **kwargs):
                 bitmasks[-1] = bitmasks[-1].replace('1', '0')
                 bitmask_text = ';'.join(bitmasks)
 
-        with open(bitmask_path, 'w') as out:
+        with io.open(bitmask_path, 'w') as out:
             out.write(bitmask_text)
 
     elif tmap != None and arguments.get('tilemap', False):
@@ -631,9 +630,9 @@ def png_to_2bpp(filein, **kwargs):
     arguments.update(kwargs)
 
     if type(filein) is str:
-        filein = open(filein)
+        filein = io.open(filein)
 
-    assert type(filein) is file
+    assert hasattr(filein, 'read')
 
     width, height, rgba, info = png.Reader(filein).asRGBA8()
 
@@ -770,7 +769,7 @@ def export_palette(palette, filename):
     if os.path.exists(filename):
 
         # Pic palettes are 2 colors (black/white are added later).
-        with open(filename) as rgbs:
+        with io.open(filename) as rgbs:
             colors = read_rgb_macros(rgbs.readlines())
 
         if len(colors) == 2:
@@ -786,7 +785,7 @@ def png_to_lz(filein):
     name = os.path.splitext(filein)[0]
 
     export_png_to_2bpp(filein)
-    image = open(name+'.2bpp', 'rb').read()
+    image = io.open(name+'.2bpp', 'rb').read()
     to_file(name+'.2bpp'+'.lz', Compressed(image).output)
 
 
@@ -808,13 +807,13 @@ def convert_1bpp_to_2bpp(data):
 
 def export_2bpp_to_1bpp(filename):
     name, extension = os.path.splitext(filename)
-    image = open(filename, 'rb').read()
+    image = io.open(filename, 'rb').read()
     image = convert_2bpp_to_1bpp(image)
     to_file(name + '.1bpp', image)
 
 def export_1bpp_to_2bpp(filename):
     name, extension = os.path.splitext(filename)
-    image = open(filename, 'rb').read()
+    image = io.open(filename, 'rb').read()
     image = convert_1bpp_to_2bpp(image)
     to_file(name + '.2bpp', image)
 
@@ -826,14 +825,14 @@ def export_1bpp_to_png(filename, fileout=None):
 
     arguments = read_filename_arguments(filename)
 
-    image = open(filename, 'rb').read()
+    image = io.open(filename, 'rb').read()
     image = convert_1bpp_to_2bpp(image)
 
     result = convert_2bpp_to_png(image, **arguments)
     width, height, palette, greyscale, bitdepth, px_map = result
 
     w = png.Writer(width, height, palette=palette, compression=9, greyscale=greyscale, bitdepth=bitdepth)
-    with open(fileout, 'wb') as f:
+    with io.open(fileout, 'wb') as f:
         w.write(f, px_map)
 
 
@@ -890,14 +889,14 @@ def convert_to_png(filenames=[]):
 
 def compress(filenames=[]):
     for filename in filenames:
-        data = open(filename, 'rb').read()
+        data = io.open(filename, 'rb').read()
         lz_data = Compressed(data).output
         to_file(filename + '.lz', lz_data)
 
 def decompress(filenames=[]):
     for filename in filenames:
         name, extension = os.path.splitext(filename)
-        lz_data = open(filename, 'rb').read()
+        lz_data = io.open(filename, 'rb').read()
         data = Decompressed(lz_data).output
         to_file(name, data)
 

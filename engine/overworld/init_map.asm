@@ -87,5 +87,5 @@ LoadFonts_NoOAMUpdate:: ; 65cb (1:65cb)
 	ld a, $90
 	ldh [hWY], a
 	call SafeUpdateSprites
-	call Functiond9e
+	call LoadStandardFont
 	ret

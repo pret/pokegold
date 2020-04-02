@@ -5,7 +5,7 @@ TreeMons:
 	dw TreeMonSet_Canyon
 	dw TreeMonSet_Rock
 	dw TreeMonSet_Unused
-	dw TreeMonSet_None
+	dw TreeMonSet_City
 
 ; Two tables each (common, rare).
 ; Structure:
@@ -13,6 +13,7 @@ TreeMons:
 
 TreeMonSet_None:
 TreeMonSet_Unused:
+TreeMonSet_City:
 ; common
 	db 50, VENONAT,    15
 	db 30, VENONAT,    15
