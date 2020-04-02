@@ -49,8 +49,7 @@ silver: pokesilver.gbc
 
 clean:
 	rm -f $(roms) $(gold_obj) $(silver_obj) $(roms:.gbc=.map) $(roms:.gbc=.sym)
-	find gfx -name "*.png" -delete
-	find gfx/pokemon gfx/trainers -name "*.2bpp" -delete
+	find gfx/pokemon gfx/trainers -iname "*.[1,2]bpp" -delete
 	$(MAKE) clean -C tools/
 
 compare: $(roms)
@@ -100,7 +99,7 @@ pokesilver.gbc: $(silver_obj) pokesilver.link
 	tools/sort_symfile.sh pokesilver.sym
 
 pngs:
-	find . -iname "*.lz"      -exec $(gfx) unlz {} +
-	find . -iname "*.[12]bpp" -exec $(gfx) png  {} +
-	find . -iname "*.[12]bpp" -exec touch {} +
-	find . -iname "*.lz"      -exec touch {} +
+	find gfx/pokemon gfx/trainers -iname "*.lz"      -exec $(gfx) unlz {} +
+	find gfx/pokemon gfx/trainers -iname "*.[12]bpp" -exec $(gfx) png  {} +
+	find gfx/pokemon gfx/trainers -iname "*.[12]bpp" -exec touch {} +
+	find gfx/pokemon gfx/trainers -iname "*.lz"      -exec touch {} +

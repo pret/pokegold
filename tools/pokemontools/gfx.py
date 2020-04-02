@@ -242,6 +242,8 @@ def flatten(planar):
     """
     strips = []
     for bottom, top in split(planar, 2):
+        bottom = bottom
+        top = top
         strip = []
         for i in range(7,-1,-1):
             color = (

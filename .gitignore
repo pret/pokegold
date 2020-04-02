@@ -41,6 +41,6 @@ pokesilver.txt
 .DS_STORE
 
 # compiled graphics
-*.png
+*.lz
 *.2bpp
 *.1bpp

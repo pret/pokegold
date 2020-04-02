@@ -40,7 +40,8 @@ def get_pokemon_dimensions(name):
         if name.startswith('unown_'):
             name = 'unown'
         base_stats = get_base_stats()
-        start = base_stats.find('\tdb ' + name.upper())
+        # TODO: extra space at end = hack for pidgeot/mew (caught by pidgeotto/mewtwo)
+        start = base_stats.find('\tdb ' + name.upper() + ' ')
         start = base_stats.find('\tdn ', start)
         end = base_stats.find('\n', start)
         line = base_stats[start:end].replace(',', ' ')
@@ -69,11 +70,14 @@ def filepath_rules(filepath):
             index = filedir.find(pokemon_name)
             if index != -1:
                 filedir = filedir[:index + len('unown')] + filedir[index + len('unown_a'):]
-        if name == 'front':
+        # startswith to handle front_gold / front_silver
+        if name.startswith('front'):
             args['pal_file'] = os.path.join(filedir, 'normal.pal')
             args['pic'] = True
-            args['animate'] = True
-        elif name == 'back':
+            # TODO: way to handle Crystal and Gold/Silver simultaneously?
+            # args['animate'] = True
+        # startswith to handle back_gold / back_silver
+        elif name.startswith('back'):
             args['pal_file'] = os.path.join(filedir, 'shiny.pal')
             args['pic'] = True
 
@@ -98,10 +102,12 @@ def filepath_rules(filepath):
             w = min(w/8, h/8)
             args['pic_dimensions'] = w, w
         elif ext == '.2bpp':
-            if pokemon_name and name == 'front':
+            # startswith to handle front_gold / front_silver
+            if pokemon_name and name.startswith('front'):
                 w, h = get_pokemon_dimensions(pokemon_name)
                 args['pic_dimensions'] = w, w
-            elif pokemon_name and name == 'back':
+            # startswith to handle back_gold / back_silver
+            elif pokemon_name and name.startswith('back'):
                 args['pic_dimensions'] = 6, 6
             else:
                 args['pic_dimensions'] = 7, 7
@@ -146,6 +152,8 @@ def compress(filename, **kwargs):
 def decompress(filename, **kwargs):
     lz_data = open(filename, 'rb').read()
     data = lz.Decompressed(lz_data).output
+    # hack to work for Alakazam's silver backsprite; needs to be multiple of 8 anyway
+    data = data[:len(data)//8*8]
     name, ext = os.path.splitext(filename)
     open(name, 'wb').write(bytearray(data))
 
