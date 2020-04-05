@@ -426,6 +426,8 @@ def convert_2bpp_to_png(image, **kwargs):
     pic_dimensions = kwargs.get('pic_dimensions', None)
     pal_file       = kwargs.get('pal_file', None)
     interleave     = kwargs.get('interleave', False)
+    rows           = kwargs.get('rows', None)
+    whitespace     = kwargs.get('whitespace', None)
 
     # Width must be specified to interleave.
     if interleave and width:
@@ -454,12 +456,38 @@ def convert_2bpp_to_png(image, **kwargs):
     def px_length(img):
         return len(img) * 4
     def tile_length(img):
-        return len(img) * 4 / (8*8)
+        return len(img) * 4 // (8*8)
 
     if width and height:
-        tile_width = width / 8
+        tile_width = width // 8
         more_tile_padding = (tile_width - (tile_length(image) % tile_width or tile_width))
         image += pad_color * 0x10 * more_tile_padding
+
+    elif width and rows:
+        newimage = bytearray([])
+        padding = bytearray([0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0])
+        height = len(rows) * 8
+        cur_index = 0
+        for offset, tile_width in rows:
+            for x in range(0, offset):
+                newimage += padding
+            next_index = min(len(image),cur_index+ 0x10*tile_width)
+            newimage += image[cur_index:next_index]
+            cur_index = next_index
+            row_padding = max(0, width//8 - offset - tile_width)
+            for x in range(0, row_padding):
+                newimage += padding
+        image = newimage
+
+    elif width and whitespace:
+        padding = bytearray([0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0])
+        cur_offset = 0
+        cur_idx = 0
+        for idx in whitespace:
+            next_offset = cur_offset + 0x10*(idx-cur_idx)
+            image = image[cur_offset:next_offset] + padding + image[next_offset:]
+            cur_offset = next_offset + 0x10
+            cur_idx = idx
 
     elif width and not height:
         tile_width = width // 8
@@ -468,7 +496,7 @@ def convert_2bpp_to_png(image, **kwargs):
         height = px_length(image) / width
 
     elif height and not width:
-        tile_height = height / 8
+        tile_height = height // 8
         more_tile_padding = (tile_height - (tile_length(image) % tile_height or tile_height))
         image += pad_color * 0x10 * more_tile_padding
         width = px_length(image) / height
@@ -820,12 +848,13 @@ def export_1bpp_to_2bpp(filename):
     to_file(name + '.2bpp', image)
 
 
-def export_1bpp_to_png(filename, fileout=None):
+def export_1bpp_to_png(filename, fileout=None, **arguments):
 
     if fileout == None:
         fileout = os.path.splitext(filename)[0] + '.png'
 
-    arguments = read_filename_arguments(filename)
+    if arguments is None :
+        arguments = read_filename_arguments(filename)
 
     image = io.open(filename, 'rb').read()
     image = convert_1bpp_to_2bpp(image)

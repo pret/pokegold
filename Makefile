@@ -99,7 +99,7 @@ pokesilver.gbc: $(silver_obj) pokesilver.link
 	tools/sort_symfile.sh pokesilver.sym
 
 pngs:
-	find gfx/pokemon gfx/trainers -iname "*.lz"      -exec $(gfx) unlz {} +
-	find gfx/pokemon gfx/trainers -iname "*.[12]bpp" -exec $(gfx) png  {} +
-	find gfx/pokemon gfx/trainers -iname "*.[12]bpp" -exec touch {} +
-	find gfx/pokemon gfx/trainers -iname "*.lz"      -exec touch {} +
+	find gfx/pokemon gfx/trainers gfx/mail -iname "*.lz"      -exec $(gfx) unlz {} +
+	find gfx/pokemon gfx/trainers gfx/mail -iname "*.[12]bpp" -exec $(gfx) png  {} +
+	find gfx/pokemon gfx/trainers gfx/mail -iname "*.[12]bpp" -exec touch {} +
+	find gfx/pokemon gfx/trainers gfx/mail -iname "*.lz"      -exec touch {} +

@@ -1,6 +1,6 @@
 """Supplementary scripts for graphics conversion."""
 
-import os
+import os, re
 import argparse
 
 from pokemontools import gfx, lz
@@ -40,8 +40,9 @@ def get_pokemon_dimensions(name):
         if name.startswith('unown_'):
             name = 'unown'
         base_stats = get_base_stats()
-        # TODO: extra space at end = hack for pidgeot/mew (caught by pidgeotto/mewtwo)
-        start = base_stats.find('\tdb ' + name.upper() + ' ')
+        # hack for pidgeot/mew (previously caught by being substrings of pidgeotto/mewtwo)
+        pattern = re.compile('\s+db {0}\s+'.format(name.upper()))
+        start = pattern.search(base_stats).start()
         start = base_stats.find('\tdn ', start)
         end = base_stats.find('\n', start)
         line = base_stats[start:end].replace(',', ' ')
@@ -82,7 +83,38 @@ def filepath_rules(filepath):
             args['pic'] = True
 
     elif 'gfx/trainers' in filedir:
+        trainer_name = filedir.split('/')[-1]
+        args['pal_file'] = os.path.join(filedir, trainer_name + '.pal')
         args['pic'] = True
+
+    elif 'gfx/mail' in filedir:
+        px8 =  ['eon_mail_border_2', 'grass', 'lovely_mail_border', 'lovely_mail_underline',
+                'morph_mail_border', 'morph_mail_divider', 'portrail_mail_border',
+                'portraitmail_border', 'portraitmail_underline', 'small_heart', 'small_note',
+                'small_pokeball', 'small_triangle', 'wave']
+        px16 = ['eon_mail_border_1', 'flower_1', 'flower_2', 'large_circle', 'large_heart',
+                'large_pokeball', 'large_triangle', 'morph_mail_corner',
+                'music_mail_border', 'oddish', 'sentret', 'unused_grass']
+        px24 = ['cloud', 'ditto', 'dratini', 'eevee', 'lapras',
+                'mew', 'natu', 'poliwag']
+        if name in px8:
+            args['width'] = 8
+        elif name in px16:
+            args['width'] = 16
+        elif name in px24:
+            args['width'] = 24
+
+        elif name == 'dragonite':
+            args['width'] = 56
+            args['rows'] = [(0, 6), (1, 6), (2, 6)]
+
+        elif name == 'large_note':
+            args['width'] = 16
+            args['rows'] = [(1, 1), (0, 2)]
+
+        elif name in ['surf_mail_border', 'flower_mail_border', 'litebluemail_border']:
+            args['width'] = 24
+            args['whitespace'] = [4]
 
     elif os.path.join(filedir, name) in pics:
         args['pic'] = True
