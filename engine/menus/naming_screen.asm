@@ -888,8 +888,8 @@ BoxNameInputUpper:
 	db "- ? ! ♂ ♀ / . , &"
 	db "lower  DEL   END "
 
-NamingScreenGFX_ED: INCBIN "gfx/naming_screen/ed.1bpp" ; leftover from gen 1
-NamingScreenGFX_MiddleLine: INCBIN "gfx/naming_screen/middleline.1bpp"
+NamingScreenGFX_ED: INCBIN "gfx/naming_screen/end.1bpp" ; leftover from gen 1
+NamingScreenGFX_MiddleLine: INCBIN "gfx/naming_screen/middle_line.1bpp"
 NamingScreenGFX_UnderLine: INCBIN "gfx/naming_screen/underline.1bpp"
 
 _ComposeMailMessage:
@@ -957,7 +957,7 @@ Function12267: ; 12267 (4:6267)
 	ld [hl], $4e
 	ret
 
-MailIcon: INCBIN "gfx/naming_screen/mail_icon.2bpp"
+MailIcon: INCBIN "gfx/icons/mail_big.2bpp"
 
 Function12341: ; 12341 (4:6341)
 	ld a, $21

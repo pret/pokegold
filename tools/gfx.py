@@ -116,6 +116,42 @@ def filepath_rules(filepath):
             args['width'] = 24
             args['whitespace'] = [4]
 
+    elif 'gfx/pack' in filedir:
+        if name == 'pack':
+            args['width'] = 40
+
+        elif name == 'pack_menu':
+            args['width'] = 128
+
+    elif 'gfx/intro' in filedir:
+        if name == 'copyright':
+            args['width'] = 240
+
+        elif name == 'gamefreak_presents':
+            args['width'] = 104
+
+        elif name in ['gamefreak_logo', 'logo_sparkle']:
+            args['width'] = 24
+
+        elif name == 'logo_star':
+            args['width'] = 8
+
+    elif 'gfx/naming_screen' in filedir:
+        args['width'] = 8
+
+    elif 'gfx/icons' in filedir:
+        if name == 'mail_big':
+            args['width'] = 16
+
+    elif 'gfx/overworld' in filedir:
+        if name == 'heal_machine':
+            args['width'] = 8
+            args['pal_file'] = os.path.join(filedir, name + '.pal')
+
+    elif 'gfx/sgb_border' in filedir:
+        args['width'] = 128
+        args['pal_file'] = os.path.join(filedir, name + '.pal')
+
     elif os.path.join(filedir, name) in pics:
         args['pic'] = True
 

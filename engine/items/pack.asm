@@ -1569,5 +1569,5 @@ Text_CantUseItInABattle:
 	text_far Text_YouCantUseItInABattle
 	db "@"
 
-PackMenuGFX: INCBIN "gfx/misc/pack_menu.2bpp"
-PackGFX: INCBIN "gfx/misc/pack.2bpp"
+PackMenuGFX: INCBIN "gfx/pack/pack_menu.2bpp"
+PackGFX: INCBIN "gfx/pack/pack.2bpp"

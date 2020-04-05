@@ -40,7 +40,7 @@ pokesilver.txt
 # osx files
 .DS_STORE
 
-# compiled graphics
-*.lz
-*.2bpp
-*.1bpp
+# compiled graphics (include for now)
+#*.lz
+#*.2bpp
+#*.1bpp

@@ -38,7 +38,7 @@ gfx := $(PYTHON) tools/gfx.py
 ### Build targets
 
 .SUFFIXES:
-.PHONY: all gold silver clean pngs compare tools
+.PHONY: all gold silver clean tidy pngs compare tools
 .SECONDEXPANSION:
 .PRECIOUS:
 .SECONDARY:
@@ -47,9 +47,13 @@ all: $(roms)
 gold: pokegold.gbc
 silver: pokesilver.gbc
 
+tidy:
+	rm -f $(roms) $(gold_obj) $(silver_obj) $(roms:.gbc=.map) $(roms:.gbc=.sym)
+	$(MAKE) clean -C tools/
+
 clean:
 	rm -f $(roms) $(gold_obj) $(silver_obj) $(roms:.gbc=.map) $(roms:.gbc=.sym)
-	find gfx/pokemon gfx/trainers -iname "*.[1,2]bpp" -delete
+	find gfx -iname "*.png" -delete
 	$(MAKE) clean -C tools/
 
 compare: $(roms)
@@ -99,7 +103,8 @@ pokesilver.gbc: $(silver_obj) pokesilver.link
 	tools/sort_symfile.sh pokesilver.sym
 
 pngs:
-	find gfx/pokemon gfx/trainers gfx/mail -iname "*.lz"      -exec $(gfx) unlz {} +
-	find gfx/pokemon gfx/trainers gfx/mail -iname "*.[12]bpp" -exec $(gfx) png  {} +
-	find gfx/pokemon gfx/trainers gfx/mail -iname "*.[12]bpp" -exec touch {} +
-	find gfx/pokemon gfx/trainers gfx/mail -iname "*.lz"      -exec touch {} +
+	find gfx -iname "*.lz"      -exec $(gfx) unlz {} +
+	find gfx -iname "*.[12]bpp" -exec $(gfx) png  {} +
+	find gfx -iname "*.[12]bpp" -exec touch {} +
+	find gfx -iname "*.lz"      -exec touch {} +
+	find gfx/pokemon gfx/trainers -iname "*.[1,2]bpp" -delete

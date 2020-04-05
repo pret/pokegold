@@ -1304,13 +1304,13 @@ ENDC
 
 IF DEF(_GOLD)
 SGBBorderMap: INCBIN "gfx/sgb_border/gold.map"
-SGBBorderPalettes: INCLUDE "gfx/sgb_border/pals/gold.pal"
+SGBBorderPalettes: INCLUDE "gfx/sgb_border/gold.pal"
 SGBBorder: INCBIN "gfx/sgb_border/gold.2bpp"
 ENDC
 
 IF DEF(_SILVER)
 SGBBorderMap: INCBIN "gfx/sgb_border/silver.map"
-SGBBorderPalettes: INCLUDE "gfx/sgb_border/pals/silver.pal"
+SGBBorderPalettes: INCLUDE "gfx/sgb_border/silver.pal"
 SGBBorder: INCBIN "gfx/sgb_border/silver.2bpp"
 ENDC
 

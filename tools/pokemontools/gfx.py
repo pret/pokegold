@@ -389,6 +389,8 @@ def export_2bpp_to_png(filein, fileout=None, pal_file=None, height=0, width=0, t
         'pal_file': pal_file,
         'tile_padding': tile_padding,
         'pic_dimensions': pic_dimensions,
+        'rows': kwargs.get('rows', None),
+        'whitespace': kwargs.get('whitespace', None)
     }
     arguments.update(read_filename_arguments(filein))
 
