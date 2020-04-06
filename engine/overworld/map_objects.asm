@@ -152,18 +152,18 @@ Function437c:
 	bit 5, [hl]
 	jr nz, asm_4449
 	ld de, Pointers4460
-	jr asm_444e
+	jr _HandleObjectAction
 
 Function4441:
 	ld hl, $4
 	add hl, bc
 	bit 0, [hl]
 	jr nz, Function44a0
-asm_4449
+asm_4449:
 	ld de, Pointers4460 + 2
-	jr asm_444e
+	jr _HandleObjectAction
 
-asm_444e
+_HandleObjectAction:
 INCLUDE "engine/overworld/map_object_action.asm"
 
 CopyNextCoordsTileToStandingCoordsTile: ; 45d9 (1:45d9)
@@ -662,7 +662,7 @@ Function557f:: ; 557f (1:557f)
 	jr nz, .asm_5589
 	ret
 
-Function55a1
+Function55a1:
 	call Function55d8
 	ld a, $0
 	call Function55bc
@@ -962,7 +962,7 @@ Function5761: ; 5761 (1:5761)
 
 Function5770: ; 5770 (1:5770)
 	ld a, $0
-asm_5772
+asm_5772:
 	ld bc, wObjectStructs
 	call SetSpriteDirection
 	ret

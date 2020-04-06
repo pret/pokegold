@@ -30,7 +30,7 @@ Pointers4460:
 	dw Function45b3, Function44a0
 	dw Function45c6, Function44a0
 
-Function44a0
+Function44a0:
 	ld hl, $d
 	add hl, bc
 	ld [hl], $ff

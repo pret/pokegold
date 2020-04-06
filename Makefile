@@ -63,15 +63,16 @@ tools:
 	$(MAKE) -C tools/
 
 
-$(gold_obj): RGBASMFLAGS = -D _GOLD
-$(silver_obj): RGBASMFLAGS = -D _SILVER
+RGBASMFLAGS = -L -Weverything
+$(gold_obj):   RGBASMFLAGS += -D _GOLD
+$(silver_obj): RGBASMFLAGS += -D _SILVER
 
 # The dep rules have to be explicit or else missing files won't be reported.
 # As a side effect, they're evaluated immediately instead of when the rule is invoked.
 # It doesn't look like $(shell) can be deferred so there might not be a better way.
 define DEP
 $1: $2 $$(shell tools/scan_includes $2)
-	$$(RGBASM) $$(RGBASMFLAGS) -L -o $$@ $$<
+	$$(RGBASM) $$(RGBASMFLAGS) -o $$@ $$<
 endef
 
 # Build tools when building the rom.
@@ -95,12 +96,10 @@ endif
 pokegold.gbc: $(gold_obj) pokegold.link
 	$(RGBLINK) -n pokegold.sym -m pokegold.map -l pokegold.link -o $@ $(gold_obj)
 	$(RGBFIX) -cjsv -i AAUE -k 01 -l 0x33 -m 0x10 -p 0 -r 3 -t "POKEMON_GLD" $@
-	tools/sort_symfile.sh pokegold.sym
 
 pokesilver.gbc: $(silver_obj) pokesilver.link
 	$(RGBLINK) -n pokesilver.sym -m pokesilver.map -l pokesilver.link -o $@ $(silver_obj)
 	$(RGBFIX) -cjsv -i AAXE -k 01 -l 0x33 -m 0x10 -p 0 -r 3 -t "POKEMON_SLV" $@
-	tools/sort_symfile.sh pokesilver.sym
 
 pngs:
 	find gfx -iname "*.lz"      -exec $(gfx) unlz {} +

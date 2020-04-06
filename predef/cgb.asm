@@ -110,7 +110,7 @@ Function9399: ; 9399 (2:5399)
 	ld a, $1
 	ld [wColorLayoutPredefID], a
 	call Function9b28
-asm_93e1
+asm_93e1:
 	ld hl, TilesetBGPalette + 7 * 8
 	ld de, wTempBGPal7
 	ld bc, $8
@@ -327,7 +327,7 @@ Function95a8:
 	ld bc, wTempMonDVs
 	call Function9bcb
 	call Function9adb
-asm_95b1
+asm_95b1:
 	call Function9b1d
 	hlcoord 1, 1, wAttrmap
 	lb bc, 7, 7

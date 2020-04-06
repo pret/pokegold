@@ -282,7 +282,7 @@ Function87ce:
 Function87d5:
 	ld a, [wYCoord]
 	add $9
-asm_87da
+asm_87da:
 	ld d, a
 	ld a, [wXCoord]
 	ld e, a
@@ -337,7 +337,7 @@ Function8822:
 Function8829:
 	ld a, [wXCoord]
 	add $a
-asm_882e
+asm_882e:
 	ld e, a
 	ld a, [wYCoord]
 	ld d, a

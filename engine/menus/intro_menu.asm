@@ -979,7 +979,7 @@ MovePlayerPicRight: ; 617e (1:617e)
 MovePlayerPicLeft: ; 6186 (1:6186)
 	hlcoord 13, 4
 	ld de, -1
-MovePlayerPic
+MovePlayerPic:
 	ld c, $8
 .asm_618e
 	push bc

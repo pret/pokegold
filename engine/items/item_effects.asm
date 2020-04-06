@@ -1509,7 +1509,7 @@ Energypowder: ; f1e2 (3:71e2)
 
 EnergyRoot: ; f1e6 (3:71e6)
 	ld c, $10
-asm_f1e8
+asm_f1e8:
 	push bc
 	call Functionf1ff
 	pop bc
@@ -1671,7 +1671,7 @@ Functionf310: ; f310 (3:7310)
 
 Functionf319: ; f319 (3:7319)
 	call GetCurHPAnimMaxHP
-asm_f31c
+asm_f31c:
 	ld a, MON_HP
 	call GetPartyParamLocation
 	ld [hl], d
@@ -1950,7 +1950,7 @@ MaxRepel: ; f4bc (3:74bc)
 
 Repel: ; f4c0 (3:74c0)
 	ld b, 100
-asm_f4c2
+asm_f4c2:
 	ld a, [wRepelSteps]
 	and a
 	ld hl, Text_RepelsEffectsStillLinger
@@ -2226,11 +2226,11 @@ PPUp: ; f606 (3:7606)
 	call Functionf7c7
 	ld hl, Text_PPsIncreased ; $777b
 	call PrintText
-asm_f693
+asm_f693:
 	call ClearPalettes
 	jp Functionf7dc
 
-asm_f699
+asm_f699:
 	ld a, [wBattleMode]
 	and a
 	jr z, .asm_f6b3
@@ -2412,7 +2412,7 @@ NormalBox: ; f7aa (3:77aa)
 
 GorgeousBox: ; f7ae (3:77ae)
 	ld c, DECOFLAG_GOLD_TROPHY_DOLL
-asm_f7b0
+asm_f7b0:
 	farcall ReceiveDecorationC ; 9:70d5
 	ld hl, Text_TrophyInside ; $77bf
 	call PrintText
@@ -2591,7 +2591,7 @@ Functionf843:
 
 Functionf848:
 	ld hl, Text_CantGetOnYourItemNow
-asm_f84b
+asm_f84b:
 	xor a
 	ld [wFieldMoveSucceeded], a
 	jp PrintText

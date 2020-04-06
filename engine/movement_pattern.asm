@@ -635,7 +635,7 @@ Function4aff: ; 4aff (1:4aff)
 	call Random
 	ldh a, [hRandomAdd]
 	and $1f
-asm_4b06
+asm_4b06:
 	ld hl, $a
 	add hl, bc
 	ld [hl], a

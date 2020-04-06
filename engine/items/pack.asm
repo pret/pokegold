@@ -866,23 +866,23 @@ Function10a86:
 	call Function10e5b
 	ret
 
-asm_10a9c
+asm_10a9c:
 	call ClearBGPalettes
 	jr asm_10aae
 
-Function10aa1
+Function10aa1:
 	call DoItemEffect
 	ld a, [wFieldMoveSucceeded]
 	and a
 	jr z, Function10a75
 	cp $2
 	jr z, asm_10ab4
-asm_10aae
+asm_10aae:
 	ld a, $a
 	ld [wce63], a
 	ret
 
-asm_10ab4
+asm_10ab4:
 	xor a
 	ld [wFieldMoveSucceeded], a
 	ret
@@ -918,7 +918,7 @@ DepositSellInitPackBuffers: ; 10ad5 (4:4ad5)
 	call Function10e5b
 	ret
 
-DepositSellPack
+DepositSellPack:
 .loop
 	call Function10af7
 	call Function10b9f
@@ -1152,7 +1152,7 @@ TutorialBallsMenuDataHeader:
 	dba PlaceMenuItemQuantity
 	dba UpdateItemDescription
 
-asm_10c8a
+asm_10c8a:
 	push hl
 	call Function10b92
 	pop hl

@@ -35,7 +35,7 @@ Function4fdf: ; 4fdf (1:4fdf)
 	ld hl, GetMovementPerson
 	jp Function4fe9
 
-GetMovementPerson
+GetMovementPerson:
 	ld a, [wMovementObject]
 	ret
 
@@ -358,7 +358,7 @@ Function51e1: ; 51e1 (1:51e1)
 	call Function5006
 	jr asm_51e6
 
-asm_51e6
+asm_51e6:
 	ld hl, $a
 	add hl, bc
 	ld [hl], a
@@ -470,7 +470,7 @@ Function5289: ; 5289 (1:5289)
 	ld a, $c
 	jr asm_528d
 
-asm_528d
+asm_528d:
 	ld hl, $8
 	add hl, bc
 	ld [hl], a
@@ -690,7 +690,7 @@ Function539b: ; 539b (1:539b)
 	ld a, $c
 	jr asm_539f
 
-asm_539f
+asm_539f:
 	ld hl, $1d
 	add hl, bc
 	ld [hl], a

@@ -78,7 +78,7 @@ Function11857: ; 11857 (4:5857)
 	call Function11972
 	ret
 
-asm_11867
+asm_11867:
 	ld hl, wDailyResetTimer
 	jp Function1182e
 
@@ -282,7 +282,7 @@ Function119b4: ; 119b4 (4:59b4)
 	ld a, [wDaysSince]
 	ret
 
-asm_119b8
+asm_119b8:
 	ld a, $ff
 	ret
 
@@ -314,7 +314,7 @@ CalcSecsMinsHoursDaysSince: ; 119c7 (4:59c7)
 	ld [hl], c
 	dec hl
 	ld [wSecsSince], a
-CalcMinsHoursDaysSince_
+CalcMinsHoursDaysSince_:
 	ldh a, [hMinutes]
 	ld c, a
 	sbc [hl]
@@ -324,7 +324,7 @@ CalcMinsHoursDaysSince_
 	ld [hl], c
 	dec hl
 	ld [wMinsSince], a
-CalcHoursDaysSince_
+CalcHoursDaysSince_:
 	ldh a, [hHours]
 	ld c, a
 	sbc [hl]

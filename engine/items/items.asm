@@ -76,7 +76,7 @@ RemoveKeyItem:
 RemoveNormalItem:
 	ld h, d
 	ld l, e
-remove_item_from_bag_or_pc
+remove_item_from_bag_or_pc:
 	jp RemoveItemAndQuantity
 
 _CheckItem:: ; d251 (3:5251)
@@ -117,7 +117,7 @@ CheckKeyItem:
 CheckNormalItem:
 	ld h, d
 	ld l, e
-check_item_in_bag_or_pc
+check_item_in_bag_or_pc:
 	jp CheckItemWithQuantity
 
 CheckBagOrPC: ; d288 (3:5288)
@@ -531,7 +531,7 @@ GetItemAttr: ; d46d (3:546d)
 	pop hl
 	ret
 
-ItemAttr_ReturnCarry
+ItemAttr_ReturnCarry:
 	ld a, $1
 	ld [wItemAttributeParamBuffer], a
 	scf

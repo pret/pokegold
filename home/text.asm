@@ -812,7 +812,7 @@ Text_TX_SFX:: ; 1380 (0:1380)
 	pop bc
 	ret
 
-Text_TX_CRY
+Text_TX_CRY::
 	push de
 	ld e, [hl]
 	inc hl

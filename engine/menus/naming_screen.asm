@@ -208,7 +208,7 @@ Function11c48: ; 11c48 (4:5c48)
 	hlcoord 5, 4
 	jr asm_11c4f
 
-asm_11c4f
+asm_11c4f:
 	ld [wc5d3], a
 	ld a, l
 	ld [wc5d8], a
@@ -648,10 +648,10 @@ Function11ee4: ; 11ee4 (4:5ee4)
 	cp c
 	ret nc
 	ld a, [wc5d7]
-asm_11ef0
+asm_11ef0:
 	call Function11f9d
 	ld [hl], a
-asm_11ef4
+asm_11ef4:
 	ld hl, wc5d2
 	inc [hl]
 	call Function11f9d
@@ -666,7 +666,7 @@ asm_11ef4
 	scf
 	ret
 
-asm_11f06
+asm_11f06:
 	ld a, [wc5d2]
 	and a
 	ret z

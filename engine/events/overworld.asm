@@ -721,7 +721,7 @@ EscapeRopeFunction:
 DigFunction:
 	call FieldMoveBufferReset
 	ld a, $2
-asm_cbaa
+asm_cbaa:
 	ld [wBuffer2], a
 .asm_cbad
 	ld hl, .Jumptable
@@ -943,11 +943,11 @@ Text_AlreadyUsingStrength:
 	text_far Text_AlreadyUsingStrength_
 	db "@"
 
-asm_cd09
+asm_cd09:
 	ld a, $80
 	ret
 
-asm_cd0c
+asm_cd0c:
 	ld hl, Script_StrengthFromMenu
 	call QueueScript
 	ld a, $81

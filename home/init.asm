@@ -163,7 +163,7 @@ BlankBGMap::
 
 FillBGMap::
 	ld a, l
-asm_69e
+asm_69e:
 	ld de, $400
 	ld l, e
 .loop

@@ -243,7 +243,7 @@ Functione566: ; e566 (3:6566)
 	call SetPalettes
 	ret
 
-CopyBoxmonToTempMon
+CopyBoxmonToTempMon:
 	ld a, [wCurPartyMon]
 	ld hl, sBoxMon1Species
 	ld bc, $20

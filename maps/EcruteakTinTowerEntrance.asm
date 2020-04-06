@@ -40,7 +40,7 @@ EcruteakTinTowerEntrance_CoordEvent2:
 EcruteakTinTowerEntrance_CoordEventEmpty:
 	end
 
-EcruteakTinTowerEntranceSageScript
+EcruteakTinTowerEntranceSageScript:
 	faceplayer
 	opentext
 	checkflag ENGINE_FOGBADGE

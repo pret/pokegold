@@ -84,7 +84,7 @@ Function700b: ; 700b (1:700b)
 	scf
 	ret
 
-Function701d
+Function701d:
 	ld hl, $e
 	add hl, bc
 	ld a, [hl]
@@ -437,7 +437,7 @@ IsPersonMovingOffEdgeOfScreen: ; 71cc (1:71cc)
 	scf
 	ret
 
-Function71f2
+Function71f2:
 	ld a, [wPlayerStandingMapX]
 	ld d, a
 	ld a, [wPlayerStandingMapY]
