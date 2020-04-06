@@ -51,6 +51,16 @@ def get_pokemon_dimensions(name):
     except:
         return 7, 7
 
+mail_px8 =  ['eon_mail_border_2', 'grass', 'lovely_mail_border', 'lovely_mail_underline',
+             'morph_mail_border', 'morph_mail_divider', 'portrail_mail_border',
+             'portraitmail_border', 'portraitmail_underline', 'small_heart', 'small_note',
+             'small_pokeball', 'small_triangle', 'wave']
+mail_px16 = ['eon_mail_border_1', 'flower_1', 'flower_2', 'large_circle', 'large_heart',
+             'large_pokeball', 'large_triangle', 'morph_mail_corner','music_mail_border', 'oddish',
+             'sentret', 'unused_grass']
+mail_px24 = ['cloud', 'ditto', 'dratini', 'eevee', 'lapras', 'mew', 'natu', 'poliwag']
+mail_border_stretch = ['surf_mail_border', 'flower_mail_border', 'litebluemail_border']
+
 def filepath_rules(filepath):
     """Infer attributes of certain graphics by their location in the filesystem."""
     args = {}
@@ -88,53 +98,37 @@ def filepath_rules(filepath):
         args['pic'] = True
 
     elif 'gfx/mail' in filedir:
-        px8 =  ['eon_mail_border_2', 'grass', 'lovely_mail_border', 'lovely_mail_underline',
-                'morph_mail_border', 'morph_mail_divider', 'portrail_mail_border',
-                'portraitmail_border', 'portraitmail_underline', 'small_heart', 'small_note',
-                'small_pokeball', 'small_triangle', 'wave']
-        px16 = ['eon_mail_border_1', 'flower_1', 'flower_2', 'large_circle', 'large_heart',
-                'large_pokeball', 'large_triangle', 'morph_mail_corner',
-                'music_mail_border', 'oddish', 'sentret', 'unused_grass']
-        px24 = ['cloud', 'ditto', 'dratini', 'eevee', 'lapras',
-                'mew', 'natu', 'poliwag']
-        if name in px8:
+        if name in mail_px8:
             args['width'] = 8
-        elif name in px16:
+        elif name in mail_px16:
             args['width'] = 16
-        elif name in px24:
+        elif name in mail_px24:
             args['width'] = 24
-
+        elif name in mail_border_stretch:
+            args['width'] = 24
+            args['pad_indices'] = [4]
+        elif name == 'large_note':
+            args['width'] = 16
+            args['rows'] = [(1, 1), (0, 2)]
         elif name == 'dragonite':
             args['width'] = 56
             args['rows'] = [(0, 6), (1, 6), (2, 6)]
 
-        elif name == 'large_note':
-            args['width'] = 16
-            args['rows'] = [(1, 1), (0, 2)]
-
-        elif name in ['surf_mail_border', 'flower_mail_border', 'litebluemail_border']:
-            args['width'] = 24
-            args['whitespace'] = [4]
-
     elif 'gfx/pack' in filedir:
         if name == 'pack':
             args['width'] = 40
-
         elif name == 'pack_menu':
             args['width'] = 128
 
     elif 'gfx/intro' in filedir:
-        if name == 'copyright':
-            args['width'] = 240
-
-        elif name == 'gamefreak_presents':
-            args['width'] = 104
-
+        if name == 'logo_star':
+            args['width'] = 8
         elif name in ['gamefreak_logo', 'logo_sparkle']:
             args['width'] = 24
-
-        elif name == 'logo_star':
-            args['width'] = 8
+        elif name == 'gamefreak_presents':
+            args['width'] = 104
+        elif name == 'copyright':
+            args['width'] = 240
 
     elif 'gfx/naming_screen' in filedir:
         args['width'] = 8
@@ -206,7 +200,12 @@ def to_2bpp(filename, **kwargs):
 def to_png(filename, **kwargs):
     name, ext = os.path.splitext(filename)
     if   ext == '.1bpp': gfx.export_1bpp_to_png(filename, **kwargs)
-    elif ext == '.2bpp': gfx.export_2bpp_to_png(filename, **kwargs)
+    elif ext == '.2bpp':
+        basedir, basename = os.path.split(filename)
+        name, ext = os.path.splitext(basename)
+        if name in ['back_gold', 'back_silver']:
+            kwargs['fileout'] = os.path.join(basedir, 'back.png')
+        gfx.export_2bpp_to_png(filename, **kwargs)
     elif ext == '.png':  pass
     elif ext == '.lz':
         decompress(filename, **kwargs)

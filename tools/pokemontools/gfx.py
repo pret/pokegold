@@ -389,8 +389,8 @@ def export_2bpp_to_png(filein, fileout=None, pal_file=None, height=0, width=0, t
         'pal_file': pal_file,
         'tile_padding': tile_padding,
         'pic_dimensions': pic_dimensions,
-        'rows': kwargs.get('rows', None),
-        'whitespace': kwargs.get('whitespace', None)
+        'pad_indices': kwargs.get('pad_indices', None),
+        'rows': kwargs.get('rows', None)
     }
     arguments.update(read_filename_arguments(filein))
 
@@ -428,8 +428,8 @@ def convert_2bpp_to_png(image, **kwargs):
     pic_dimensions = kwargs.get('pic_dimensions', None)
     pal_file       = kwargs.get('pal_file', None)
     interleave     = kwargs.get('interleave', False)
+    pad_indices    = kwargs.get('pad_indices', None)
     rows           = kwargs.get('rows', None)
-    whitespace     = kwargs.get('whitespace', None)
 
     # Width must be specified to interleave.
     if interleave and width:
@@ -465,43 +465,49 @@ def convert_2bpp_to_png(image, **kwargs):
         more_tile_padding = (tile_width - (tile_length(image) % tile_width or tile_width))
         image += pad_color * 0x10 * more_tile_padding
 
-    elif width and rows:
-        newimage = bytearray([])
-        padding = bytearray([0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0])
-        height = len(rows) * 8
-        cur_index = 0
-        for offset, tile_width in rows:
-            for x in range(0, offset):
-                newimage += padding
-            next_index = min(len(image),cur_index+ 0x10*tile_width)
-            newimage += image[cur_index:next_index]
-            cur_index = next_index
-            row_padding = max(0, width//8 - offset - tile_width)
-            for x in range(0, row_padding):
-                newimage += padding
-        image = newimage
-
-    elif width and whitespace:
-        padding = bytearray([0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0])
+    # Manually define at which tile indices padding tiles should be inserted
+    elif width and pad_indices:
+        padding = pad_color * 0x10
         cur_offset = 0
         cur_idx = 0
-        for idx in whitespace:
-            next_offset = cur_offset + 0x10*(idx-cur_idx)
+        for idx in pad_indices:
+            next_offset = cur_offset + 0x10 * (idx - cur_idx)
             image = image[cur_offset:next_offset] + padding + image[next_offset:]
             cur_offset = next_offset + 0x10
             cur_idx = idx
+
+    # Define width in pixels, and an array of (left_offset, tile_width) pairs
+    elif width and rows:
+        newimage = bytearray([])
+        padding = pad_color * 0x10
+        height = len(rows) * 8
+        cur_index = 0
+        for left_offset, tile_width in rows:
+            # add padding if the row is offset from the leftmost tile
+            newimage += padding * left_offset
+
+            # add number of tiles to place horizontally, from base image
+            next_index = min(len(image), cur_index + 0x10 * tile_width)
+            newimage += image[cur_index:next_index]
+            cur_index = next_index
+
+            # add padding if there are more tiles in the row
+            right_offset = max(0, width//8 - left_offset - tile_width)
+            newimage += padding * right_offset
+
+        image = newimage
 
     elif width and not height:
         tile_width = width // 8
         more_tile_padding = (tile_width - (tile_length(image) % tile_width or tile_width))
         image += pad_color * 0x10 * more_tile_padding
-        height = px_length(image) / width
+        height = px_length(image) // width
 
     elif height and not width:
         tile_height = height // 8
         more_tile_padding = (tile_height - (tile_length(image) % tile_height or tile_height))
         image += pad_color * 0x10 * more_tile_padding
-        width = px_length(image) / height
+        width = px_length(image) // height
 
     # at least one dimension should be given
     if width * height != px_length(image):
@@ -510,12 +516,12 @@ def convert_2bpp_to_png(image, **kwargs):
         # Height need not be divisible by 8, but width must.
         # See pokered gfx/minimize_pic.1bpp.
         for w in range(8, px_length(image) // 2 + 1, 8):
-            h = px_length(image) / w
+            h = px_length(image) // w
             if w * h == px_length(image):
                 matches += [(w, h)]
         # go for the most square image
         if len(matches):
-            width, height = sorted(matches, key= lambda w_h: (w_h[1] % 8 != 0, w_h[1] + w_h[0]))[0] # favor height
+            width, height = sorted(matches, key=lambda w_h: (w_h[1] % 8 != 0, w_h[1] + w_h[0]))[0] # favor height
         else:
             raise Exception('Image can\'t be divided into tiles ({} px)!'.format(px_length(image)))
 
