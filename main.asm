@@ -208,7 +208,9 @@ ToggleDecorationsVisibility:
 INCLUDE "engine/battle/read_trainer_dvs.asm"
 
 ReturnToBattle_UseBall_:
-	dr $27307, $27bd3
+	dr $27307, $2739f
+
+INCLUDE "data/moves/effects.asm"
 
 SECTION "banka", ROMX, BANK[$a]
 	dr $28000, $28d88
@@ -319,6 +321,7 @@ GetItemHeldEffect:
 SECTION "banke", ROMX
 
 INCLUDE "engine/battle/ai/items.asm"
+;INCLUDE "engine/battle/ai/scoring.asm"
 	dr $38583, $39217
 
 AICheckEnemyMaxHP::
