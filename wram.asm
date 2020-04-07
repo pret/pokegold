@@ -1641,8 +1641,8 @@ wBattleMon:: battle_struct wBattleMon ; cb0c
 
 wcb2c:: ds 1 ; cb2c
 wcb2d:: ds 1 ; cb2d
-wcb2e:: ds 1 ; cb2e
-wcb2f:: ds 1 ; cb2f
+wEnemyTrainerItem1:: db ; cb2e
+wEnemyTrainerItem2:: db ; cb2f
 wcb30:: ds 1 ; cb30
 wcb31:: ds 1 ; cb31
 wcb32:: ds 1 ; cb32
@@ -1676,13 +1676,13 @@ wcb55:: ds 1 ; cb55
 wcb56:: ds 1 ; cb56
 wcb57:: ds 1 ; cb57
 wcb58:: ds 1 ; cb58
-wcb59:: ds 1 ; cb59
-wcb5a:: ds 1 ; cb5a
+wEnemyConfuseCount:: db ; cb59
+wEnemyToxicCount:: db ; cb5a
 wcb5b:: ds 1 ; cb5b
 wcb5c:: ds 1 ; cb5c
 wcb5d:: ds 1 ; cb5d
-wcb5e:: ds 1 ; cb5e
-wcb5f:: ds 1 ; cb5f
+wEnemyFuryCutterCount:: db ; cb5e
+wEnemyProtectCount:: db ; cb5f
 wPlayerDamageTaken::
 wcb60:: ds 1 ; cb60
 wcb61:: ds 1 ; cb61
@@ -1776,7 +1776,7 @@ wcbb6:: ds 1 ; cbb6
 wcbb7:: ds 1 ; cbb7
 wcbb8:: ds 1 ; cbb8
 wcbb9:: ds 1 ; cbb9
-wcbba:: ds 1 ; cbba
+wEnemyTurnsTaken:: db ; cbba
 wcbbb:: ds 1 ; cbbb
 wcbbc:: ds 1 ; cbbc
 wcbbd:: ds 1 ; cbbd
@@ -1786,7 +1786,7 @@ wcbc0:: ds 1 ; cbc0
 wCurPlayerMove:: ds 1 ; cbc1
 wCurEnemyMove:: ds 1 ; cbc2
 wcbc3:: ds 1 ; cbc3
-wcbc4:: ds 1 ; cbc4
+wEnemyItemState:: db ; cbc4
 wcbc5:: ds 1 ; cbc5
 wcbc6:: ds 1 ; cbc6
 wcbc7:: ds 1 ; cbc7
@@ -1826,16 +1826,16 @@ wcbe9:: ds 1 ; cbe9
 wcbea:: ds 1 ; cbea
 wcbeb:: ds 1 ; cbeb
 wcbec:: ds 1 ; cbec
-wcbed:: ds 1 ; cbed
+wEnemyGoesFirst:: db ; cbed
 wcbee:: ds 1 ; cbee
-wcbef:: ds 1 ; cbef
+wEnemyIsSwitching:: db ; cbef
 wcbf0:: ds 1 ; cbf0
 wcbf1:: ds 1 ; cbf1
 wcbf2:: ds 1 ; cbf2
 wcbf3:: ds 1 ; cbf3
 wcbf4:: ds 1 ; cbf4
-wcbf5:: ds 1 ; cbf5
-wcbf6:: ds 1 ; cbf6
+wEnemySwitchMonParam:: db ; cbf5
+wEnemySwitchMonIndex:: db ; cbf6
 wcbf7:: ds 1 ; cbf7
 wcbf8:: ds 1 ; cbf8
 wLastPlayerMove:: ds 1 ; cbf9
@@ -1855,12 +1855,12 @@ wcc06:: ds 1 ; cc06
 wcc07:: ds 1 ; cc07
 wcc08:: ds 1 ; cc08
 wcc09:: ds 1 ; cc09
-wcc0a:: ds 1 ; cc0a
+wEnemyRageCounter:: db ; cc0a
 wcc0b:: ds 1 ; cc0b
 wcc0c:: ds 1 ; cc0c
 wcc0d:: ds 1 ; cc0d
 wcc0e:: ds 1 ; cc0e
-wcc0f:: ds 1 ; cc0f
+wEnemyWrapCount:: db ; cc0f
 wcc10:: ds 1 ; cc10
 wcc11:: ds 1 ; cc11
 wcc12:: ds 1 ; cc12
@@ -2722,8 +2722,17 @@ wTilesetPalettes:: dw ; d0cf
 wd0d1:: ds 1 ; d0d1
 wd0d2:: ds 1 ; d0d2
 
-UNION
-wCurHPAnim::
+UNION ; d0d3
+; general-purpose buffers
+wBuffer1:: db ; d0d3
+wBuffer2:: db ; d0d4
+wBuffer3:: db ; d0d5
+wBuffer4:: db ; d0d6
+wBuffer5:: db ; d0d7
+wBuffer6:: db ; d0d8
+
+NEXTU ; d0d3
+; HP bar animations
 wCurHPAnimMaxHP::   dw ; d0d3
 wCurHPAnimOldHP::   dw ; d0d5
 wCurHPAnimNewHP::   dw ; d0d7
@@ -2733,23 +2742,16 @@ wNewHPBarPixels::   db ; d0db
 wCurHPAnimDeltaHP:: dw ; d0dc
 wCurHPAnimLowHP::   db ; d0de
 wCurHPAnimHighHP::  db ; d0df
-wCurHPAnimEnd::
-NEXTU
 
-wBuffer1:: ds 1 ; d0d3
-wBuffer2:: ds 1 ; d0d4
-wBuffer3:: ds 1 ; d0d5
-wBuffer4:: ds 1 ; d0d6
-wBuffer5:: ds 1 ; d0d7
-wBuffer6:: ds 1 ; d0d8
-wd0d9:: ds 1 ; d0d9
-wd0da:: ds 1 ; d0da
-wd0db:: ds 1 ; d0db
-wLinkBuffer:: ds 1 ; d0dc
-wd0dd:: ds 1 ; d0dd
-wd0de:: ds 1 ; d0de
-wd0df:: ds 1 ; d0df
-ENDU
+NEXTU ; d0d3
+; miscellaneous
+wMagikarpLength:: dw
+wSelectedDecoration:: db
+wOtherDecoration::    db
+	ds 3
+wCurEnemyItem:: db
+ENDU ; d0e0
+
 wd0e0:: ds 1 ; d0e0
 wd0e1:: ds 1 ; d0e1
 wd0e2:: ds 1 ; d0e2
@@ -2839,7 +2841,7 @@ wListMoves_MoveIndicesBuffer:: ds NUM_MOVES
 wPutativeTMHMMove:: db ; d14d
 wd14e:: ds 1 ; d14e
 wWildMon:: ds 1 ; d14f
-wd150:: ds 1 ; d150
+wBattleHasJustStarted:: db ; d150
 
 ; d151 has many different short-term uses
 wNamedObjectIndexBuffer::

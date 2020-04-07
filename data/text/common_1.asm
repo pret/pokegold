@@ -31,7 +31,7 @@ UnknownText_0x1bc0a2::
 	text_ram wStringBuffer1
 	text_start
 	line "recovered @"
-	text_decimal wLinkBuffer, 2, 3
+	text_decimal wCurHPAnimDeltaHP, 2, 3
 	text "HP!"
 	done
 
@@ -149,7 +149,7 @@ UnknownText_0x1bc37a::
 	text ", is it?"
 	done
 
-Text_EnemyWithdrew::
+_EnemyWithdrewText::
 	text "<ENEMY>"
 	line "withdrew"
 	cont "@"
@@ -157,7 +157,7 @@ Text_EnemyWithdrew::
 	text "!"
 	prompt
 
-Text_EnemyUsedOn::
+_EnemyUsedOnText::
 	text "<ENEMY>"
 	line "used @"
 	text_ram wMonOrItemNameBuffer

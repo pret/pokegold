@@ -297,32 +297,40 @@ PrintMoveDesc::
 SECTION "bankc", ROMX, BANK[$c]
 	dr $30000, $34000
 
-SECTION "bankd", ROMX, BANK[$d]
+SECTION "bankd", ROMX
 	dr $34000, $34923
-
 CheckTypeMatchup::
-	dr $34923, $36313
+	dr $34923, $34a91
+CheckAbleToSwitch::
+	dr $34a91, $36313
 
-CheckIfStatCanBeRaised:
+RaiseStat:
 	dr $36313, $364d7
-
 BattleCommand_StatUpMessage:
 	dr $364d7, $3656b
-
 BattleCommand_StatUpFailText:
 	dr $3656b, $366f6
-
 CalcPlayerStats:
 	dr $366f6, $37e9b
 
 GetItemHeldEffect:
 	dr $37e9b, $38000
 
-SECTION "banke", ROMX, BANK[$e]
-	dr $38000, $394f3
+SECTION "banke", ROMX
 
+INCLUDE "engine/battle/ai/items.asm"
+	dr $38583, $39217
+
+AICheckEnemyMaxHP::
+	dr $39217, $39247
+AICheckEnemyHalfHP::
+	dr $39247, $3925e
+AICheckEnemyQuarterHP::
+	dr $3925e, $394f3
 GetTrainerClassName::
-	dr $394f3, $398f2
+	dr $394f3, $39562
+TrainerClassAttributes::
+	dr $39562, $398f2
 Battle_GetTrainerName::
 	dr $398f2, $398fa
 GetTrainerName::
@@ -330,27 +338,34 @@ GetTrainerName::
 
 INCLUDE "data/trainers/parties.asm"
 
-SECTION "bankf", ROMX, BANK[$f]
+SECTION "bankf", ROMX
 	dr $3c000, $3c551
-
 FleeMons::
-	dr $3c551, $3d70a
+	dr $3c551, $3d39f
 
+EnemySwitch:
+	dr $3d39f, $3d438
+ResetBattleParticipants:
+	dr $3d438, $3d6cb
+NewEnemyMonStatus:
+	dr $3d6cb, $3d6fe
+ResetEnemyStatLevels:
+	dr $3d6fe, $3d70a
 CheckPlayerPartyForFitMon::
 	dr $3d70a, $3d8f5
-
 Function3d8f5:
 	dr $3d8f5, $3d907
-
 Function3d907:
-	dr $3d907, $3dda9
-
+	dr $3d907, $3dabc
+PursuitSwitch:
+	dr $3dabc, $3dda9
 UpdatePlayerHUD::
 	dr $3dda9, $3de97
-
 UpdateEnemyHUD::
-	dr $3de97, $3e74b
+	dr $3de97, $3e6e8
 
+CheckEnemyLockedIn::
+	dr $3e6e8, $3e74b
 LoadEnemyMon:
 	dr $3e74b, $3ec11
 _BattleRandom:: ; 3ec11
@@ -358,13 +373,10 @@ _BattleRandom:: ; 3ec11
 
 FillInExpBar::
 	dr $3f196, $3f243
-
 GetBattleMonBackpic::
 	dr $3f243, $3f282
-
 GetEnemyMonFrontpic::
 	dr $3f282, $3f2c7
-
 StartBattle::
 	dr $3f2c7, $3f55d
 Function3f55d:

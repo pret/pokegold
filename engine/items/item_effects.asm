@@ -2020,7 +2020,7 @@ XSpeed: ; f515
 	ldh [hBattleTurn], a
 	ld [wcb45], a
 	ld [wcbeb], a
-	farcall CheckIfStatCanBeRaised
+	farcall RaiseStat
 	call WaitSFX
 	farcall BattleCommand_StatUpMessage
 	farcall BattleCommand_StatUpFailText

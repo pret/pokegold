@@ -781,7 +781,7 @@ Functiondd6a: ; dd6a (3:5d6a)
 	ld d, h
 	ld e, l
 	ld a, $1
-	ld [wCurHPAnim], a
+	ld [wBuffer1], a
 	predef FillMoves
 	ld a, [wPartyCount]
 	dec a
