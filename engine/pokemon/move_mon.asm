@@ -375,7 +375,7 @@ AddTempmonToParty: ; da9c (3:5a9c)
 	call SkipNames
 	ld d, h
 	ld e, l
-	ld hl, wOTPartyMon1Nickname
+	ld hl, wOTPartyMonNicknames
 	ld a, [wCurPartyMon]
 	call SkipNames
 	ld bc, NAME_LENGTH

@@ -324,9 +324,9 @@ Function5c41: ; 5c41 (1:5c41)
 	ld [wRoamMon2MapNumber], a
 	ld [wRoamMon3MapNumber], a
 
-	ld a, BANK(s0_abe2)
+	ld a, BANK(sMysteryGiftItem)
 	call OpenSRAM
-	ld hl, s0_abe2
+	ld hl, sMysteryGiftItem
 	xor a
 	ld [hli], a
 	dec a

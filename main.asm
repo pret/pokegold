@@ -276,25 +276,20 @@ RandomPhoneMon:
 JohtoGrassWildMons:
 	dr $2ab35, $2c000
 
-SECTION "bankb", ROMX, BANK[$b]
+SECTION "bankb", ROMX
 	dr $2c000, $2c225
 AI_Redundant:
 	dr $2c225, $2c352
 MoveDeletion:
 	dr $2c352, $2c57a
-
 Pack_TMHMPocketMenu_:
 	dr $2c57a, $2c5ca
-
 AskTeachTMHM:
 	dr $2c5ca, $2c606
-
 ChooseMonToLearnTMHM:
 	dr $2c606, $2c672
-
 TeachTMHM:
 	dr $2c672, $2c943
-
 PrintMoveDesc::
 	dr $2c943, $30000
 
@@ -339,17 +334,8 @@ SECTION "banke", ROMX
 
 INCLUDE "engine/battle/ai/items.asm"
 INCLUDE "engine/battle/ai/scoring.asm"
-
-GetTrainerClassName::
-	dr $394f3, $39562
-TrainerClassAttributes::
-	dr $39562, $398f2
-Battle_GetTrainerName::
-	dr $398f2, $398fa
-GetTrainerName::
-	dr $398fa, $3993e
-
-INCLUDE "data/trainers/parties.asm"
+INCLUDE "engine/battle/read_trainer_attributes.asm"
+INCLUDE "engine/battle/read_trainer_party.asm"
 
 SECTION "bankf", ROMX
 	dr $3c000, $3c551
@@ -884,7 +870,7 @@ GoldSilverIntro:
 	dr $e4af9, $e8000
 ENDC
 
-SECTION "bank3e", ROMX, BANK[$3e]
+SECTION "bank3e", ROMX
 Functionf8000::
 	dr $f8000, $f800c
 Functionf800c::
@@ -906,7 +892,6 @@ PlaySlowCry:
 	dr $fb94b, $fb981
 NewPokedexEntry:
 	dr $fb981, $fba12
-
 ConvertMon_1to2::
 	dr $fba12, $fbb22
 UpdateUnownDex:

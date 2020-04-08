@@ -254,18 +254,18 @@ ClearRTCStatus::
 ; clear sRTCStatusFlags
 	xor a
 	push af
-	ld a, BANK(s0_ac60)
+	ld a, BANK(sRTCStatusFlags)
 	call OpenSRAM
 	pop af
-	ld [s0_ac60], a
+	ld [sRTCStatusFlags], a
 	call CloseSRAM
 	ret
 
 RecordRTCStatus::
 ; append flags to sRTCStatusFlags
-	ld hl, s0_ac60
+	ld hl, sRTCStatusFlags
 	push af
-	ld a, BANK(s0_ac60)
+	ld a, BANK(sRTCStatusFlags)
 	call OpenSRAM
 	pop af
 	or [hl]
@@ -275,8 +275,8 @@ RecordRTCStatus::
 
 CheckRTCStatus::
 ; check sRTCStatusFlags
-	ld a, BANK(s0_ac60)
+	ld a, BANK(sRTCStatusFlags)
 	call OpenSRAM
-	ld a, [s0_ac60]
+	ld a, [sRTCStatusFlags]
 	call CloseSRAM
 	ret

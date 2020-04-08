@@ -412,141 +412,28 @@ sMailbox8Backup::  mailmsg sMailbox8Backup
 sMailbox9Backup::  mailmsg sMailbox9Backup
 sMailbox10Backup:: mailmsg sMailbox10Backup
 
-s0_abe2:: ds 1 ; 0:abe2
-s0_abe3:: ds 1 ; 0:abe3
-s0_abe4:: ds 1 ; 0:abe4
-s0_abe5:: ds 1 ; 0:abe5
-s0_abe6:: ds 1 ; 0:abe6
-s0_abe7:: ds 1 ; 0:abe7
-s0_abe8:: ds 1 ; 0:abe8
-s0_abe9:: ds 1 ; 0:abe9
-s0_abea:: ds 1 ; 0:abea
-s0_abeb:: ds 1 ; 0:abeb
-s0_abec:: ds 1 ; 0:abec
-s0_abed:: ds 1 ; 0:abed
-s0_abee:: ds 1 ; 0:abee
-s0_abef:: ds 1 ; 0:abef
-s0_abf0:: ds 1 ; 0:abf0
-s0_abf1:: ds 1 ; 0:abf1
-s0_abf2:: ds 1 ; 0:abf2
-s0_abf3:: ds 1 ; 0:abf3
-s0_abf4:: ds 1 ; 0:abf4
-s0_abf5:: ds 1 ; 0:abf5
-s0_abf6:: ds 1 ; 0:abf6
-s0_abf7:: ds 1 ; 0:abf7
-s0_abf8:: ds 1 ; 0:abf8
-s0_abf9:: ds 1 ; 0:abf9
-sMysteryGiftTimer:: ds 2 ; 0:abfa
-s0_abfc:: ds 1 ; 0:abfc
-s0_abfd:: ds 1 ; 0:abfd
-s0_abfe:: ds 1 ; 0:abfe
-s0_abff:: ds 1 ; 0:abff
-s0_ac00:: ds 1 ; 0:ac00
-s0_ac01:: ds 1 ; 0:ac01
-s0_ac02:: ds 1 ; 0:ac02
-s0_ac03:: ds 1 ; 0:ac03
-s0_ac04:: ds 1 ; 0:ac04
-s0_ac05:: ds 1 ; 0:ac05
-s0_ac06:: ds 1 ; 0:ac06
-s0_ac07:: ds 1 ; 0:ac07
-s0_ac08:: ds 1 ; 0:ac08
-s0_ac09:: ds 1 ; 0:ac09
-s0_ac0a:: ds 1 ; 0:ac0a
-s0_ac0b:: ds 1 ; 0:ac0b
-s0_ac0c:: ds 1 ; 0:ac0c
-s0_ac0d:: ds 1 ; 0:ac0d
-s0_ac0e:: ds 1 ; 0:ac0e
-s0_ac0f:: ds 1 ; 0:ac0f
-s0_ac10:: ds 1 ; 0:ac10
-s0_ac11:: ds 1 ; 0:ac11
-s0_ac12:: ds 1 ; 0:ac12
-s0_ac13:: ds 1 ; 0:ac13
-s0_ac14:: ds 1 ; 0:ac14
-s0_ac15:: ds 1 ; 0:ac15
-s0_ac16:: ds 1 ; 0:ac16
-s0_ac17:: ds 1 ; 0:ac17
-s0_ac18:: ds 1 ; 0:ac18
-s0_ac19:: ds 1 ; 0:ac19
-s0_ac1a:: ds 1 ; 0:ac1a
-s0_ac1b:: ds 1 ; 0:ac1b
-s0_ac1c:: ds 1 ; 0:ac1c
-s0_ac1d:: ds 1 ; 0:ac1d
-s0_ac1e:: ds 1 ; 0:ac1e
-s0_ac1f:: ds 1 ; 0:ac1f
-s0_ac20:: ds 1 ; 0:ac20
-s0_ac21:: ds 1 ; 0:ac21
-s0_ac22:: ds 1 ; 0:ac22
-s0_ac23:: ds 1 ; 0:ac23
-s0_ac24:: ds 1 ; 0:ac24
-s0_ac25:: ds 1 ; 0:ac25
-s0_ac26:: ds 1 ; 0:ac26
-s0_ac27:: ds 1 ; 0:ac27
-s0_ac28:: ds 1 ; 0:ac28
-s0_ac29:: ds 1 ; 0:ac29
-s0_ac2a:: ds 1 ; 0:ac2a
-s0_ac2b:: ds 1 ; 0:ac2b
-s0_ac2c:: ds 1 ; 0:ac2c
-s0_ac2d:: ds 1 ; 0:ac2d
-s0_ac2e:: ds 1 ; 0:ac2e
-s0_ac2f:: ds 1 ; 0:ac2f
-s0_ac30:: ds 1 ; 0:ac30
-s0_ac31:: ds 1 ; 0:ac31
-s0_ac32:: ds 1 ; 0:ac32
-s0_ac33:: ds 1 ; 0:ac33
-s0_ac34:: ds 1 ; 0:ac34
-s0_ac35:: ds 1 ; 0:ac35
-s0_ac36:: ds 1 ; 0:ac36
-s0_ac37:: ds 1 ; 0:ac37
-s0_ac38:: ds 1 ; 0:ac38
-s0_ac39:: ds 1 ; 0:ac39
-s0_ac3a:: ds 1 ; 0:ac3a
-s0_ac3b:: ds 1 ; 0:ac3b
-s0_ac3c:: ds 1 ; 0:ac3c
-s0_ac3d:: ds 1 ; 0:ac3d
-s0_ac3e:: ds 1 ; 0:ac3e
-s0_ac3f:: ds 1 ; 0:ac3f
-s0_ac40:: ds 1 ; 0:ac40
-s0_ac41:: ds 1 ; 0:ac41
-s0_ac42:: ds 1 ; 0:ac42
-s0_ac43:: ds 1 ; 0:ac43
-s0_ac44:: ds 1 ; 0:ac44
-s0_ac45:: ds 1 ; 0:ac45
-s0_ac46:: ds 1 ; 0:ac46
-s0_ac47:: ds 1 ; 0:ac47
-s0_ac48:: ds 1 ; 0:ac48
-s0_ac49:: ds 1 ; 0:ac49
-s0_ac4a:: ds 1 ; 0:ac4a
-s0_ac4b:: ds 1 ; 0:ac4b
-s0_ac4c:: ds 1 ; 0:ac4c
-s0_ac4d:: ds 1 ; 0:ac4d
-s0_ac4e:: ds 1 ; 0:ac4e
-s0_ac4f:: ds 1 ; 0:ac4f
-s0_ac50:: ds 1 ; 0:ac50
-s0_ac51:: ds 1 ; 0:ac51
-s0_ac52:: ds 1 ; 0:ac52
-s0_ac53:: ds 1 ; 0:ac53
-s0_ac54:: ds 1 ; 0:ac54
-s0_ac55:: ds 1 ; 0:ac55
-s0_ac56:: ds 1 ; 0:ac56
-s0_ac57:: ds 1 ; 0:ac57
-s0_ac58:: ds 1 ; 0:ac58
-s0_ac59:: ds 1 ; 0:ac59
-s0_ac5a:: ds 1 ; 0:ac5a
-s0_ac5b:: ds 1 ; 0:ac5b
-s0_ac5c:: ds 1 ; 0:ac5c
-s0_ac5d:: ds 1 ; 0:ac5d
-s0_ac5e:: ds 1 ; 0:ac5e
-s0_ac5f:: ds 1 ; 0:ac5f
-s0_ac60:: ds 1 ; 0:ac60
-s0_ac61:: ds 1 ; 0:ac61
-s0_ac62:: ds 1 ; 0:ac62
-s0_ac63:: ds 1 ; 0:ac63
-s0_ac64:: ds 1 ; 0:ac64
-s0_ac65:: ds 1 ; 0:ac65
-s0_ac66:: ds 1 ; 0:ac66
-s0_ac67:: ds 1 ; 0:ac67
-sLuckyNumberDay:: db ; 0:ac68
-sLuckyIDNumber:: dw ; 0:ac69
+; abe2
+sMysteryGiftItem:: db
+sMysteryGiftUnlocked:: db
+sBackupMysteryGiftItem:: db
+sNumDailyMysteryGiftPartnerIDs:: db
+sDailyMysteryGiftPartnerIDs:: ds 5 * 2 ; maximum 5 per day, 2 bytes per ID
+sMysteryGiftDecorationsReceived:: flag_array NUM_NON_TROPHY_DECOS
+	ds 4
+sMysteryGiftTimer:: db
+sMysteryGiftTimerStartDay:: db
+	ds 1
+sMysteryGiftTrainerHouseFlag:: db
+sMysteryGiftPartnerName:: ds NAME_LENGTH
+s0_ac09:: ds 1
+sMysteryGiftTrainer:: ds (1 + 1 + NUM_MOVES) * PARTY_LENGTH + 2 ; ac0a
+sBackupMysteryGiftItemEnd::
+
+	ds $30
+
+sRTCStatusFlags:: ds 8
+sLuckyNumberDay:: db
+sLuckyIDNumber::  dw
 s0_ac6b:: ds 1 ; 0:ac6b
 s0_ac6c:: ds 1 ; 0:ac6c
 s0_ac6d:: ds 1 ; 0:ac6d

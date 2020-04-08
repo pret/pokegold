@@ -1643,7 +1643,7 @@ wcb2c:: ds 1 ; cb2c
 wcb2d:: ds 1 ; cb2d
 wEnemyTrainerItem1:: db ; cb2e
 wEnemyTrainerItem2:: db ; cb2f
-wcb30:: ds 1 ; cb30
+wEnemyTrainerBaseReward:: db ; cb30
 wcb31:: ds 1 ; cb31
 wcb32:: ds 1 ; cb32
 wcb33:: ds 1 ; cb33
@@ -2791,7 +2791,7 @@ wOtherTrainerClass:: ; d118
 
 wBattleType:: ds 1 ; d119
 wd11a:: ds 1 ; d11a
-wd11b:: ds 1 ; d11b
+wOtherTrainerID:: db ; d11b
 wd11c:: ds 1 ; d11c
 wTrainerClass:: ds 1 ; d11d
 wUnownLetter:: ds 1 ; d11e
@@ -3811,53 +3811,39 @@ wBestMagikarpLengthFeet:: ds 1 ; dd33
 wBestMagikarpLengthInches:: ds 1 ; dd34
 wMagikarpRecordHoldersName:: ds NAME_LENGTH ; dd35
 
-wPokedexShowPointerAddr:: dw ; dd40
-wPokedexShowPointerBank:: db ; dd42
-wdd43:: ds 1 ; dd43
-wdd44:: ds 1 ; dd44
-wdd45:: ds 1 ; dd45
-wdd46:: ds 1 ; dd46
-wdd47:: ds 1 ; dd47
-wdd48:: ds 1 ; dd48
-wdd49:: ds 1 ; dd49
-wdd4a:: ds 1 ; dd4a
-wdd4b:: ds 1 ; dd4b
-wdd4c:: ds 1 ; dd4c
-wdd4d:: ds 1 ; dd4d
-wdd4e:: ds 1 ; dd4e
-wdd4f:: ds 1 ; dd4f
-wdd50:: ds 1 ; dd50
-wdd51:: ds 1 ; dd51
-wdd52:: ds 1 ; dd52
-wdd53:: ds 1 ; dd53
-wdd54:: ds 1 ; dd54
+UNION ; dd40
+wPokedexShowPointerAddr:: dw
+wPokedexShowPointerBank:: db
+	ds 3
 
-SECTION "OT Party", WRAMX, BANK[1]
-
-wOTPartyCount:: ds 1 ; dd55
+NEXTU ; dd40
+; enemy party
+wOTPlayerName:: ds NAME_LENGTH ; dd40
+wOTPlayerID:: dw ; dd4b
+	ds 8
+wOTPartyCount::   db ; dd55
 wOTPartySpecies:: ds PARTY_LENGTH ; dd56
-wOTPartySpeciesEnd:: ds 1 ; dd5c
+wOTPartyEnd::     db ; older code doesn't check PartyCount
+ENDU ; dd5d
 
-; The tutorial pack uses the OT party space.
-; It's placed here rather than at wOTPartyCount
-; to avoid confusing the game.
+UNION ; dd5d
+; catch tutorial dude pack
+wDudeBag::
+wDudeNumItems:: db
+wDudeItems:: ds 2 * 4
+wDudeItemsEnd:: db
 
-UNION
-wDudePack::
-wDudeNumItems:: ds 1 ; dd5d
-wDudeItems:: ds 2 * 4 ; dd5e
-wDudeItemsEnd:: ds 1 ; dd66
+wDudeNumKeyItems:: db ; dd67
+wDudeKeyItems:: ds 18
+wDudeKeyItemsEnd:: db
 
-wDudeNumKeyItems:: ds 1 ; dd67
-wDudeKeyItems:: ds 18 ; dd68
-wDudeKeyItemsEnd:: ds 1 ; dd7a
-
-wDudeNumBalls:: ds 1 ; dd7b
+wDudeNumBalls:: db ; dd7b
 wDudeBalls:: ds 2 * 4 ; dd7c
-wDudeBallsEnd:: ds 1 ; dd84
-wDudePackEnd::
-NEXTU
+wDudeBallsEnd:: db ; dd84
+wDudeBagEnd::
 
+NEXTU ; dd5d
+; ot party mons
 wOTPartyMons::
 wOTPartyMon1:: party_struct wOTPartyMon1 ; dd5d
 wOTPartyMon2:: party_struct wOTPartyMon2 ; dd8d
@@ -3865,23 +3851,12 @@ wOTPartyMon3:: party_struct wOTPartyMon3 ; ddbd
 wOTPartyMon4:: party_struct wOTPartyMon4 ; dded
 wOTPartyMon5:: party_struct wOTPartyMon5 ; de1d
 wOTPartyMon6:: party_struct wOTPartyMon6 ; de4d
+wOTPartyMonsEnd::
 
-wOTPartyMonOT::
-wOTPartyMon1OT:: ds NAME_LENGTH ; de7d
-wOTPartyMon2OT:: ds NAME_LENGTH ; de88
-wOTPartyMon3OT:: ds NAME_LENGTH ; de93
-wOTPartyMon4OT:: ds NAME_LENGTH ; de9e
-wOTPartyMon5OT:: ds NAME_LENGTH ; dea9
-wOTPartyMon6OT:: ds NAME_LENGTH ; deb4
-
-wOTPartyMonNicknames::
-wOTPartyMon1Nickname:: ds MON_NAME_LENGTH ; debf
-wOTPartyMon2Nickname:: ds MON_NAME_LENGTH ; deca
-wOTPartyMon3Nickname:: ds MON_NAME_LENGTH ; ded5
-wOTPartyMon4Nickname:: ds MON_NAME_LENGTH ; dee0
-wOTPartyMon5Nickname:: ds MON_NAME_LENGTH ; deeb
-wOTPartyMon6Nickname:: ds MON_NAME_LENGTH ; def6
-ENDU
+wOTPartyMonOT:: ds NAME_LENGTH * PARTY_LENGTH ; de7d
+wOTPartyMonNicknames:: ds MON_NAME_LENGTH * PARTY_LENGTH ; debf
+wOTPartyDataEnd::
+ENDU ; df01
 
 wGameDataEnd::
 

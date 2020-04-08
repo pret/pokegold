@@ -360,7 +360,6 @@ WRAMX 1
 	"WRAM1"
 	"Game Data"
 	"Party"
-	"OT Party"
 	org $dfff
 	"Stack"
 WRAMX 2
