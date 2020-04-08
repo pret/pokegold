@@ -278,8 +278,7 @@ JohtoGrassWildMons:
 
 SECTION "bankb", ROMX
 	dr $2c000, $2c225
-AI_Redundant:
-	dr $2c225, $2c352
+INCLUDE "engine/battle/ai/redundant.asm"
 MoveDeletion:
 	dr $2c352, $2c57a
 Pack_TMHMPocketMenu_:
@@ -304,12 +303,8 @@ BattleCheckTypeMatchup::
 	dr $34918, $34923
 CheckTypeMatchup::
 	dr $34923, $3499e
-CheckPlayerMoveTypeMatchups::
-	dr $3499e, $34a91
-CheckAbleToSwitch::
-	dr $34a91, $34b44
-FindAliveEnemyMons::
-	dr $34b44, $3553d
+INCLUDE "engine/battle/ai/switch.asm"
+	dr $34d01, $3553d
 
 EnemyAttackDamage::
 	dr $3553d, $35753
@@ -325,10 +320,16 @@ BattleCommand_StatUpMessage:
 BattleCommand_StatUpFailText:
 	dr $3656b, $366f6
 CalcPlayerStats:
-	dr $366f6, $37e9b
+	dr $366f6, $378f4
 
+CheckOppositeGender:
+	dr $378f4, $37e9b
 GetItemHeldEffect:
-	dr $37e9b, $38000
+	dr $37e9b, $37f6c
+GetMoveAttr:
+	dr $37f6c, $37f86
+GetMoveByte:
+	dr $37f86, $37fa0
 
 SECTION "banke", ROMX
 
@@ -406,20 +407,19 @@ EvosAttacksPointers::
 	dr $427bd, $44000
 
 SECTION "bank11", ROMX, BANK[$11]
-	dr $44000, $44360
-
+	dr $44000, $440c8
+INCLUDE "engine/battle/ai/move.asm"
+	dr $441c2, $44360
 PokedexDataPointerTable::
 	dr $44360, $44648
-
 PlaceGraphic::
 	dr $44648, $44679
 SendMailToPC::
 	dr $44679, $44870
 DeletePartyMonMail:
 	dr $44870, $4488c
-
 IsAnyPokemonHoldingMail:
-	dr $4488c, $48000
+	dr $4488c, $44aa2
 
 SECTION "bank13", ROMX, BANK[$13]
 	dr $4c000, $50000

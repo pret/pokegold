@@ -33,12 +33,12 @@ LearnMove:
 	ld a, [wBattleMode]
 	and a
 	jr z, .asm_6638
-	ld a, [wcbd3]
+	ld a, [wDisabledMove]
 	cp b
 	jr nz, .asm_6638
 	xor a
-	ld [wcbd3], a
-	ld [wcb53], a
+	ld [wDisabledMove], a
+	ld [wPlayerDisableCount], a
 .asm_6638
 	call GetMoveName
 	ld hl, Text_1_2_and_Poof

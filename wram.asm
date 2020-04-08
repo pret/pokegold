@@ -1670,7 +1670,7 @@ wEnemySubStatus5:: ds 1 ; cb4f
 wPlayerRolloutCount:: db ; cb50
 wcb51:: ds 1 ; cb51
 wcb52:: ds 1 ; cb52
-wcb53:: ds 1 ; cb53
+wPlayerDisableCount:: db ; cb53
 wcb54:: ds 1 ; cb54
 wcb55:: ds 1 ; cb55
 wPlayerFuryCutterCount:: db ; cb56
@@ -1789,7 +1789,7 @@ wcbc3:: ds 1 ; cbc3
 wEnemyItemState:: db ; cbc4
 wcbc5:: ds 1 ; cbc5
 wcbc6:: ds 1 ; cbc6
-wcbc7:: ds 1 ; cbc7
+wCurEnemyMoveNum:: db ; cbc7
 wcbc8:: ds 1 ; cbc8
 wcbc9:: ds 1 ; cbc9
 wPayDayMoney:: ds 3 ; cbca
@@ -1800,8 +1800,8 @@ wcbcf:: ds 1 ; cbcf
 wcbd0:: ds 1 ; cbd0
 wcbd1:: ds 1 ; cbd1
 wcbd2:: ds 1 ; cbd2
-wcbd3:: ds 1 ; cbd3
-wcbd4:: ds 1 ; cbd4
+wDisabledMove:: db ; cbd3
+wEnemyDisabledMove:: db ; cbd4
 wcbd5:: ds 1 ; cbd5
 
 ; exists so you can't counter on switch
@@ -2806,7 +2806,7 @@ wd123:: ds 1 ; d123
 wd124:: ds 1 ; d124
 wd125:: ds 1 ; d125
 wd126:: ds 1 ; d126
-wd127:: ds 1 ; d127
+wBaseType:: db ; d127
 wd128:: ds 1 ; d128
 wd129:: ds 1 ; d129
 wd12a:: ds 1 ; d12a
