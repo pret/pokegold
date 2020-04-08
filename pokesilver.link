@@ -81,9 +81,6 @@ ROMX $12
 	org $4000
 	"Pic Pointers"
 	"Pics 1"
-ROMX $13
-	org $4000
-	"bank13"
 ROMX $14
 	"bank14"
 ROMX $15
@@ -116,9 +113,6 @@ ROMX $20
 ROMX $21
 	org $4000
 	"bank21"
-ROMX $22
-	org $4000
-	"bank22"
 ROMX $23
 	org $4000
 	"bank23"
@@ -131,30 +125,15 @@ ROMX $25
 ROMX $26
 	org $4000
 	"bank26"
-ROMX $27
-	org $4000
-	"bank27"
-ROMX $28
-	org $4000
-	"bank28"
-ROMX $29
-	org $4000
-	"bank29"
 ROMX $2a
 	"Map Blocks 1"
 ROMX $2b
 	"Map Blocks 2"
-ROMX $2d
-	org $4000
-	"bank2d"
 ROMX $2e
 	org $4000
 	"Pics 14"
 	org $6300
 	"bank2e_2"
-ROMX $2f
-	org $4000
-	"bank2f"
 ROMX $30
 	org $4000
 	"bank30"
@@ -168,12 +147,6 @@ ROMX $33
 	org $4000
 	"bank33"
 	"Extra Songs 2"
-ROMX $34
-	org $4000
-	"bank34"
-ROMX $35
-	org $4000
-	"bank35"
 ROMX $36
 	org $4000
 	"bank36"
@@ -295,56 +268,11 @@ ROMX $6d
 ROMX $6e
 	org $4000
 	"bank6e"
-ROMX $6f
-	org $4000
-	"bank6f"
 ROMX $70
 	org $4000
 	"bank70"
-ROMX $71
-	org $4000
-	"bank71"
-ROMX $72
-	org $4000
-	"bank72"
-ROMX $73
-	org $4000
-	"bank73"
-ROMX $74
-	org $4000
-	"bank74"
-ROMX $75
-	org $4000
-	"bank75"
-ROMX $76
-	org $4000
-	"bank76"
-ROMX $77
-	org $4000
-	"bank77"
-ROMX $78
-	org $4000
-	"bank78"
-ROMX $79
-	org $4000
-	"bank79"
-ROMX $7a
-	org $4000
-	"bank7a"
-ROMX $7b
-	org $4000
-	"bank7b"
-ROMX $7c
-	org $4000
-	"bank7c"
-ROMX $7d
-	org $4000
-	"bank7d"
-ROMX $7e
-	org $4000
-	"bank7e"
 ROMX $7f
-	org $4000
+	org $7df8
 	"bank7f"
 WRAM0
 	org $c000
