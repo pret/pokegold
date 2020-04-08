@@ -277,7 +277,9 @@ JohtoGrassWildMons:
 	dr $2ab35, $2c000
 
 SECTION "bankb", ROMX, BANK[$b]
-	dr $2c000, $2c352
+	dr $2c000, $2c225
+AI_Redundant:
+	dr $2c225, $2c352
 MoveDeletion:
 	dr $2c352, $2c57a
 
@@ -300,11 +302,26 @@ SECTION "bankc", ROMX, BANK[$c]
 	dr $30000, $34000
 
 SECTION "bankd", ROMX
-	dr $34000, $34923
+	dr $34000, $34822
+BattleCommand_Stab:
+	dr $34822, $34918
+BattleCheckTypeMatchup::
+	dr $34918, $34923
 CheckTypeMatchup::
-	dr $34923, $34a91
+	dr $34923, $3499e
+CheckPlayerMoveTypeMatchups::
+	dr $3499e, $34a91
 CheckAbleToSwitch::
-	dr $34a91, $36313
+	dr $34a91, $34b44
+FindAliveEnemyMons::
+	dr $34b44, $3553d
+
+EnemyAttackDamage::
+	dr $3553d, $35753
+BattleCommand_DamageCalc::
+	dr $35753, $35868
+BattleCommand_ConstantDamage::
+	dr $35868, $36313
 
 RaiseStat:
 	dr $36313, $364d7
@@ -321,15 +338,8 @@ GetItemHeldEffect:
 SECTION "banke", ROMX
 
 INCLUDE "engine/battle/ai/items.asm"
-;INCLUDE "engine/battle/ai/scoring.asm"
-	dr $38583, $39217
+INCLUDE "engine/battle/ai/scoring.asm"
 
-AICheckEnemyMaxHP::
-	dr $39217, $39247
-AICheckEnemyHalfHP::
-	dr $39247, $3925e
-AICheckEnemyQuarterHP::
-	dr $3925e, $394f3
 GetTrainerClassName::
 	dr $394f3, $39562
 TrainerClassAttributes::
@@ -904,7 +914,9 @@ UpdateUnownDex:
 CheckMagikarpLength:
 	dr $fbc3c, $fbdd6
 MagikarpHouseSign:
-	dr $fbdd6, $fc000
+	dr $fbdd6, $fbdf1
+HiddenPowerDamage:
+	dr $fbdf1, $fc000
 
 SECTION "bank3f", ROMX, BANK[$3f]
 	nop

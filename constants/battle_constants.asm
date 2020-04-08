@@ -1,12 +1,30 @@
+; significant level values
 MAX_LEVEL EQU 100
 MIN_LEVEL EQU 2
 EGG_LEVEL EQU 5
+
+; maximum moves known per mon
 NUM_MOVES EQU 4
 
-REST_TURNS EQU 2
-MAX_STAT_LEVEL EQU 13
+; significant stat values
 BASE_STAT_LEVEL EQU 7
+MAX_STAT_LEVEL EQU 13
 
+; minimum damage before type effectiveness
+MIN_NEUTRAL_DAMAGE EQU 2
+
+; turns that sleep lasts
+REST_SLEEP_TURNS EQU 2
+
+; type effectiveness factors, scaled by 10
+SUPER_EFFECTIVE    EQU 20
+MORE_EFFECTIVE     EQU 15
+EFFECTIVE          EQU 10
+NOT_VERY_EFFECTIVE EQU 05
+NO_EFFECT          EQU 00
+
+; wPlayerStatLevels and wEnemyStatLevels indexes (see wram.asm)
+; GetStatName arguments (see data/battle/stat_names.asm)
 	const_def
 	const ATTACK
 	const DEFENSE
@@ -18,7 +36,7 @@ BASE_STAT_LEVEL EQU 7
 	const ABILITY
 NUM_LEVEL_STATS EQU const_value
 
-; move struct
+; move struct members (see data/moves/moves.asm)
 	const_def
 	const MOVE_ANIM
 	const MOVE_EFFECT
@@ -30,14 +48,21 @@ NUM_LEVEL_STATS EQU const_value
 	const MOVE_LENGTH
 
 ; stat constants
-const_value SET 1
+; indexes for:
+; - wPlayerStats and wEnemyStats (see wram.asm)
+; - party_struct and battle_struct members (see macros/wram.asm)
+	const_def 1
 	const STAT_HP
 	const STAT_ATK
 	const STAT_DEF
 	const STAT_SPD
 	const STAT_SATK
+NUM_EXP_STATS EQU const_value - 1
 	const STAT_SDEF
-NUM_STATS EQU const_value
+NUM_STATS EQU const_value - 1
+NUM_BATTLE_STATS EQU NUM_STATS - 1 ; don't count HP
+
+; stat formula constants
 STAT_MIN_NORMAL EQU 5
 STAT_MIN_HP EQU 10
 

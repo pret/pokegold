@@ -107,5 +107,5 @@ BattleVarLocations:
 	dw wPlayerMoveStructPower,       wEnemyMoveStructPower
 	dw wPlayerMoveStructType,        wEnemyMoveStructType
 	dw wCurPlayerMove,               wCurEnemyMove
-	dw wLastEnemyCounterMove,        wLastPlayerCounterMove
+	dw wLastPlayerCounterMove,       wLastEnemyCounterMove
 	dw wLastPlayerMove,              wLastEnemyMove

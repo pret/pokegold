@@ -1667,20 +1667,20 @@ wEnemySubStatus2:: ds 1 ; cb4c
 wEnemySubStatus3:: ds 1 ; cb4d
 wEnemySubStatus4:: ds 1 ; cb4e
 wEnemySubStatus5:: ds 1 ; cb4f
-wcb50:: ds 1 ; cb50
+wPlayerRolloutCount:: db ; cb50
 wcb51:: ds 1 ; cb51
 wcb52:: ds 1 ; cb52
 wcb53:: ds 1 ; cb53
 wcb54:: ds 1 ; cb54
 wcb55:: ds 1 ; cb55
-wcb56:: ds 1 ; cb56
+wPlayerFuryCutterCount:: db ; cb56
 wcb57:: ds 1 ; cb57
 wcb58:: ds 1 ; cb58
 wEnemyConfuseCount:: db ; cb59
 wEnemyToxicCount:: db ; cb5a
 wcb5b:: ds 1 ; cb5b
 wcb5c:: ds 1 ; cb5c
-wcb5d:: ds 1 ; cb5d
+wEnemyPerishCount:: db ; cb5d
 wEnemyFuryCutterCount:: db ; cb5e
 wEnemyProtectCount:: db ; cb5f
 wPlayerDamageTaken::
@@ -1760,24 +1760,24 @@ wcba6:: ds 1 ; cba6
 wcba7:: ds 1 ; cba7
 wcba8:: ds 1 ; cba8
 wcba9:: ds 1 ; cba9
-wcbaa:: ds 1 ; cbaa
-wcbab:: ds 1 ; cbab
-wcbac:: ds 1 ; cbac
-wcbad:: ds 1 ; cbad
-wcbae:: ds 1 ; cbae
-wcbaf:: ds 1 ; cbaf
-wcbb0:: ds 1 ; cbb0
-wcbb1:: ds 1 ; cbb1
-wcbb2:: ds 1 ; cbb2
-wcbb3:: ds 1 ; cbb3
-wcbb4:: ds 1 ; cbb4
-wcbb5:: ds 1 ; cbb5
-wcbb6:: ds 1 ; cbb6
-wcbb7:: ds 1 ; cbb7
-wcbb8:: ds 1 ; cbb8
-wcbb9:: ds 1 ; cbb9
+wPlayerAtkLevel:: db ; cbaa
+wPlayerDefLevel:: db ; cbab
+wPlayerSpdLevel:: db ; cbac
+wPlayerSAtkLevel:: db ; cbad
+wPlayerSDefLevel:: db ; cbae
+wPlayerAccLevel:: db ; cbaf
+wPlayerEvaLevel:: db ; cbb0
+	ds 1
+wEnemyAtkLevel:: db ; cbb2
+wEnemyDefLevel:: db ; cbb3
+wEnemySpdLevel:: db ; cbb4
+wEnemySAtkLevel:: db ; cbb5
+wEnemySDefLevel:: db ; cbb6
+wEnemyAccLevel:: db ; cbb7
+wEnemyEvaLevel:: db ; cbb8
+	ds 1
 wEnemyTurnsTaken:: db ; cbba
-wcbbb:: ds 1 ; cbbb
+wPlayerTurnsTaken:: db ; cbbb
 wcbbc:: ds 1 ; cbbc
 wcbbd:: ds 1 ; cbbd
 wcbbe:: ds 1 ; cbbe
@@ -1803,15 +1803,18 @@ wcbd2:: ds 1 ; cbd2
 wcbd3:: ds 1 ; cbd3
 wcbd4:: ds 1 ; cbd4
 wcbd5:: ds 1 ; cbd5
-wLastEnemyCounterMove:: ds 1 ; cbd6
-wLastPlayerCounterMove:: ds 1 ; cbd7
+
+; exists so you can't counter on switch
+wLastPlayerCounterMove:: db ; cbd6
+wLastEnemyCounterMove:: db ; cbd7
+
 wcbd8:: ds 1 ; cbd8
 wcbd9:: ds 1 ; cbd9
 wcbda:: ds 1 ; cbda
 wcbdb:: ds 1 ; cbdb
-wcbdc:: ds 1 ; cbdc
-wcbdd:: ds 1 ; cbdd
-wcbde:: ds 1 ; cbde
+wPlayerMinimized:: db ; cbdc
+wPlayerScreens:: db ; cbdd
+wEnemyScreens:: db ; cbde
 wcbdf:: ds 1 ; cbdf
 wcbe0:: ds 1 ; cbe0
 wcbe1:: ds 1 ; cbe1
@@ -1821,7 +1824,7 @@ wcbe4:: ds 1 ; cbe4
 wcbe5:: ds 1 ; cbe5
 wcbe6:: ds 1 ; cbe6
 wcbe7:: ds 1 ; cbe7
-wcbe8:: ds 1 ; cbe8
+wBattleWeather:: db ; cbe8
 wcbe9:: ds 1 ; cbe9
 wcbea:: ds 1 ; cbea
 wcbeb:: ds 1 ; cbeb
@@ -1829,11 +1832,12 @@ wcbec:: ds 1 ; cbec
 wEnemyGoesFirst:: db ; cbed
 wcbee:: ds 1 ; cbee
 wEnemyIsSwitching:: db ; cbef
-wcbf0:: ds 1 ; cbf0
-wcbf1:: ds 1 ; cbf1
-wcbf2:: ds 1 ; cbf2
-wcbf3:: ds 1 ; cbf3
-wcbf4:: ds 1 ; cbf4
+wPlayerUsedMoves:: ; cbf0
+; add a move that has been used once by the player
+; added in order of use
+	ds NUM_MOVES
+
+wEnemyAISwitchScore:: db ; cbf4
 wEnemySwitchMonParam:: db ; cbf5
 wEnemySwitchMonIndex:: db ; cbf6
 wcbf7:: ds 1 ; cbf7
@@ -1859,7 +1863,7 @@ wEnemyRageCounter:: db ; cc0a
 wcc0b:: ds 1 ; cc0b
 wcc0c:: ds 1 ; cc0c
 wcc0d:: ds 1 ; cc0d
-wcc0e:: ds 1 ; cc0e
+wPlayerWrapCount:: db ; cc0e
 wEnemyWrapCount:: db ; cc0f
 wcc10:: ds 1 ; cc10
 wcc11:: ds 1 ; cc11
