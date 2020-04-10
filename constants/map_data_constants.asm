@@ -100,5 +100,5 @@ const_value = -1
 NUM_SPAWNS EQU const_value
 
 ; outdoor sprite limits (see engine/overworld/overworld.asm)
-MAX_OUTDOOR_SPRITES EQU 23
-SPRITE_GFX_LIST_CAPACITY EQU $20
+MAX_OUTDOOR_SPRITES EQU 11
+SPRITE_GFX_LIST_CAPACITY EQU 12

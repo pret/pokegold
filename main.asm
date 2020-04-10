@@ -71,29 +71,9 @@ INCLUDE "engine/events/pokerus/apply_pokerus_tick.asm"
 INCLUDE "engine/events/bug_contest/contest_2.asm"
 
 SECTION "bank5", ROMX
-	dr $14000, $14032
-Function14032::
-	dr $14032, $14089
-StartClock::
-	dr $14089, $140dc
-ClockContinue:
-	dr $140dc, $140ff
-Function140ff::
-	dr $140ff, $1413c
-Function1413c::
-	dr $1413c, $1414b
-RefreshSprites::
-	dr $1414b, $1415c
-Function1415c::
-	dr $1415c, $1416d
-Function1416d::
-	dr $1416d, $14226
-LoadUsedSpritesGFX:
-	dr $14226, $14317
-_DoesSpriteHaveFacings::
-	dr $14317, $14334
-_GetSpritePalette::
-	dr $14334, $14a18
+
+INCLUDE "engine/rtc/rtc.asm"
+INCLUDE "engine/overworld/overworld.asm"
 Function14a18::
 	dr $14a18, $14a2d
 Function14a2d::
@@ -565,7 +545,9 @@ IF DEF(_GOLD)
 	dr $8d332, $8e774
 
 ClearSpriteAnims2::
-	dr $8e774, $8e79f
+	dr $8e774, $8e78b
+LoadOverworldMonIcon::
+	dr $8e78b, $8e79f
 LoadMenuMonIcon::
 	dr $8e79f, $8e922
 UnfreezeMonIcons::
@@ -577,7 +559,9 @@ ELIF DEF(_SILVER)
 	dr $8d332, $8e75a
 
 ClearSpriteAnims2::
-	dr $8e75a, $8e785
+	dr $8e75a, $8e771
+LoadOverworldMonIcon::
+	dr $8e771, $8e785
 LoadMenuMonIcon::
 	dr $8e785, $8e908
 UnfreezeMonIcons::
@@ -670,18 +654,7 @@ INCLUDE "engine/events/treemons.asm"
 INCLUDE "engine/pokegear/radio.asm"
 INCLUDE "engine/pokemon/mail_2.asm"
 
-SECTION "bank30", ROMX
-
-PlayerSpriteGFX:
-	dr $c0000, $c03c0
-SilverSpriteGFX:
-	dr $c03c0, $c0fc0
-MomSpriteGFX:
-	dr $c0fc0, $c3fc0
-
-SECTION "bank31", ROMX
-	dr $c4000, $c7a40
-
+SECTION "bank31_2", ROMX
 Functionc7a40:
 	dr $c7a40, $c7a5a
 CheckForLuckyNumberWinners:

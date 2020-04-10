@@ -85,7 +85,7 @@ SpecialsPointers:
 	add_special UpdateTimePals
 	add_special ClearTilemap
 	add_special UpdateSprites
-	add_special ReplacePlayerSprite
+	add_special ReplaceChrisSprite
 	add_special GameCornerPrizeMonCheckDex
 	add_special UnusedSetSeenMon
 	add_special WaitSFX, $03

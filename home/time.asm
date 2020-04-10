@@ -15,7 +15,7 @@ UpdateTime::
 	call GetClock
 	call FixDays
 	call FixTime
-	farcall Function14032
+	farcall GetTimeOfDay
 	ret
 
 GetClock::
@@ -127,7 +127,7 @@ FixTime::
 ; second
 	ldh a, [hRTCSeconds]
 	ld c, a
-	ld a, [wd1df]
+	ld a, [wStartSecond]
 	add c
 	sub 60
 	jr nc, .updatesec
@@ -139,7 +139,7 @@ FixTime::
 	ccf ; carry is set, so turn it off
 	ldh a, [hRTCMinutes]
 	ld c, a
-	ld a, [wd1de]
+	ld a, [wStartMinute]
 	adc c
 	sub 60
 	jr nc, .updatemin
@@ -151,7 +151,7 @@ FixTime::
 	ccf ; carry is set, so turn it off
 	ldh a, [hRTCHours]
 	ld c, a
-	ld a, [wd1dd]
+	ld a, [wStartHour]
 	adc c
 	sub 24
 	jr nc, .updatehr
@@ -163,7 +163,7 @@ FixTime::
 	ccf ; carry is set, so turn it off
 	ldh a, [hRTCDayLo]
 	ld c, a
-	ld a, [wd1dc]
+	ld a, [wStartDay]
 	adc c
 	ld [wCurDay], a
 	ret
@@ -186,7 +186,7 @@ InitDayOfWeek::
 	jr InitTime ; useless
 
 InitTime::
-	farcall Function140ff
+	farcall _InitTime
 	ret
 
 PanicResetClock::

@@ -700,7 +700,7 @@ Function103f9: ; 103f9 (4:43f9)
 	push bc
 	ld a, $0
 	ld [wPlayerState], a
-	call ReplacePlayerSprite
+	call ReplaceChrisSprite
 	pop bc
 	ret
 

@@ -961,7 +961,7 @@ ShrinkPlayer: ; 6123 (1:6123)
 	ld c, 3
 	call DelayFrames
 
-	call Intro_PlacePlayerSprite
+	call Intro_PlaceChrisSprite
 	call LoadFontsExtra
 
 	ld c, 50
@@ -1059,9 +1059,9 @@ ShrinkFrame: ; 61f7 (1:61f7)
 	predef PlaceGraphic
 	ret
 
-Intro_PlacePlayerSprite: ; 6210 (1:6210)
-	ld de, PlayerSpriteGFX
-	lb bc, BANK(PlayerSpriteGFX), 12
+Intro_PlaceChrisSprite: ; 6210 (1:6210)
+	ld de, ChrisSpriteGFX
+	lb bc, BANK(ChrisSpriteGFX), 12
 	ld hl, $8000
 	call Request2bpp
 	ld hl, wVirtualOAM

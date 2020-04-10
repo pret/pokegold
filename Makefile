@@ -6,7 +6,8 @@ home.o \
 main.o \
 wram.o \
 data/text/common.o \
-data/pokemon/dex_entries.o
+data/pokemon/dex_entries.o \
+gfx/sprites.o
 
 # Distinguish asm files which are game-exclusive for building (*_[gold|silver].asm)
 gs_excl_asm := gfx/pics

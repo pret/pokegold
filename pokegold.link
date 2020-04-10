@@ -135,11 +135,11 @@ ROMX $2e
 	org $6300
 	"bank2e_2"
 ROMX $30
-	org $4000
-	"bank30"
+	"Sprites 1"
 ROMX $31
-	org $4000
-	"bank31"
+	"Sprites 2"
+	org $7a40
+	"bank31_2"
 ROMX $32
 	org $4000
 	"bank32"

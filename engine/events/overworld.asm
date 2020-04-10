@@ -416,7 +416,7 @@ UsedSurfScript:
 	closetext
 	readmem wBuffer2
 	writevar VAR_MOVEMENT
-	special ReplacePlayerSprite
+	special ReplaceChrisSprite
 	special PlayMapMusic
 ; step into the water (slow_step DIR, step_end)
 	special SurfStartStep
@@ -537,7 +537,7 @@ TryToFly:
 	ld de, ENGINE_STORMBADGE
 	call FieldMoveBadgeCheck
 	jr c, .asm_caa4
-	call GetMapPermission
+	call GetMapEnvironment
 	call CheckOutdoorMap
 	jr z, .asm_ca83
 	jr .asm_caa7
@@ -597,7 +597,7 @@ FlyScript:
 	newloadmap MAPSETUP_TELEPORT
 	callasm FlyToAnimation
 	special WaitSFX
-	special ReplacePlayerSprite
+	special ReplaceChrisSprite
 	callasm Function1415c
 	end
 
@@ -737,7 +737,7 @@ asm_cbaa:
 	dw FailToEscapeFromDungeon
 
 TryEscapeFromDungeon:
-	call GetMapPermission
+	call GetMapEnvironment
 	cp CAVE
 	jr z, .asm_cbcf
 	cp DUNGEON
@@ -853,7 +853,7 @@ TeleportFunction:
 	dw FailTeleport
 
 TryTeleport:
-	call GetMapPermission
+	call GetMapEnvironment
 	call CheckOutdoorMap
 	jr z, .asm_cc85
 	jr .asm_cc9c
@@ -1556,7 +1556,7 @@ PutTheRodAway: ; d096
 	ld a, $1
 	ld [wPlayerAction], a
 	call UpdateSprites
-	call ReplacePlayerSprite
+	call ReplaceChrisSprite
 	ret
 
 Text_OhABite:
@@ -1637,7 +1637,7 @@ ChooseScriptBasedOnWhetherBikeIsRegistered: ; d126 (3:5126)
 	ret
 
 CheckBikePermission: ; d12e (3:512e)
-	call GetMapPermission
+	call GetMapEnvironment
 	call CheckOutdoorMap
 	jr z, .asm_d140
 	cp CAVE
@@ -1664,13 +1664,13 @@ Script_GetOnBike: ; d14b
 	writetext GotOnBikeText
 	waitbutton
 	closetext
-	special ReplacePlayerSprite
+	special ReplaceChrisSprite
 	end
 
 Script_GetOnBike_Register:
 	loadvar VAR_MOVEMENT, PLAYER_BIKE
 	closetext
-	special ReplacePlayerSprite
+	special ReplaceChrisSprite
 	end
 
 	nop
@@ -1684,7 +1684,7 @@ Script_GetOffBike:
 	waitbutton
 FinishGettingOffBike:
 	closetext
-	special ReplacePlayerSprite
+	special ReplaceChrisSprite
 	special PlayMapMusic
 	end
 

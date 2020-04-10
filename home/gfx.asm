@@ -24,8 +24,8 @@ Functiond70:: ; d70 (0:0d70)
 	rst Bankswitch
 	ret
 
-ReplacePlayerSprite::
-	farcall Function1413c
+ReplaceChrisSprite::
+	farcall _ReplaceChrisSprite
 	ret
 
 LoadStandardFont::

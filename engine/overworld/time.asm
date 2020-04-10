@@ -137,12 +137,12 @@ CheckBugContestTimer:
 
 Function118c9: ; 118c9 (4:58c9)
 	call UpdateTime
-	ld hl, wStartDay
+	ld hl, wTimerEventStartDay
 	call CopyDayToHL
 	ret
 
 CheckPokerusTick:
-	ld hl, wStartDay
+	ld hl, wTimerEventStartDay
 	call CalcDaysSince
 	call Function119b4
 	and a

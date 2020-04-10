@@ -2639,8 +2639,9 @@ wd05a:: ds 1 ; d05a
 wd05b:: ds 1 ; d05b
 wd05c:: ds 1 ; d05c
 
-wUsedSprites:: ds SPRITE_GFX_LIST_CAPACITY ; d05d
-
+wUsedSprites:: ds SPRITE_GFX_LIST_CAPACITY * 2
+wUsedSpritesEnd::
+	ds 8
 wOverworldMapAnchor:: dw ; d07d
 
 wd07f:: ds 1 ; d07f
@@ -2986,14 +2987,12 @@ wGreensName:: ds NAME_LENGTH ; d1cf
 
 wSavedAtLeastOnce:: ds 1 ; d1da
 wd1db:: ds 1 ; d1db
-wd1dc:: ds 1 ; d1dc
-wd1dd:: ds 1 ; d1dd
-wd1de:: ds 1 ; d1de
-wd1df:: ds 1 ; d1df
-wd1e0:: ds 1 ; d1e0
-wd1e1:: ds 1 ; d1e1
-wd1e2:: ds 1 ; d1e2
-wd1e3:: ds 1 ; d1e3
+wStartDay:: db ; d1dc
+wStartHour:: db ; d1dd
+wStartMinute:: db ; d1de
+wStartSecond:: db ; d1df
+wRTC:: ds 4 ; d1e0
+
 wd1e4:: ds 1 ; d1e4
 wd1e5:: ds 1 ; d1e5
 wd1e6:: ds 1 ; d1e6
@@ -3076,22 +3075,7 @@ wd551:: ds 1 ; d551
 wd552:: ds 1 ; d552
 wd553:: ds 1 ; d553
 wd554:: ds 1 ; d554
-wd555:: ds 1 ; d555
-wd556:: ds 1 ; d556
-wd557:: ds 1 ; d557
-wd558:: ds 1 ; d558
-wd559:: ds 1 ; d559
-wd55a:: ds 1 ; d55a
-wd55b:: ds 1 ; d55b
-wd55c:: ds 1 ; d55c
-wd55d:: ds 1 ; d55d
-wd55e:: ds 1 ; d55e
-wd55f:: ds 1 ; d55f
-wd560:: ds 1 ; d560
-wd561:: ds 1 ; d561
-wd562:: ds 1 ; d562
-wd563:: ds 1 ; d563
-wd564:: ds 1 ; d564
+wVariableSprites:: ds $100 - SPRITE_VARS ; d555
 wd565:: ds 1 ; d565
 wd566:: ds 1 ; d566
 wd567:: ds 1 ; d567
@@ -3532,7 +3516,7 @@ wWeeklyFlags:: ds 1 ; d969
 wd96a:: ds 1 ; d96a
 wd96b:: ds 1 ; d96b
 wd96c:: ds 1 ; d96c
-wStartDay:: ds 1 ; d96d
+wTimerEventStartDay:: db ; d96d
 wd96e:: ds 1 ; d96e
 wd96f:: ds 1 ; d96f
 wd970:: ds 1 ; d970

@@ -268,7 +268,7 @@ Function2112::
 	ldh [hMapAnims], a
 	xor a
 	ldh [hTileAnimFrame], a
-	farcall Function1416d
+	farcall RefreshSprites
 	call LoadFontsExtra
 	ret
 
@@ -619,7 +619,7 @@ Function2349::
 	ret
 
 Function2362:: ; 2362 (0:2362)
-	call GetMapPermission
+	call GetMapEnvironment
 	call CheckOutdoorMap
 	ret nz
 	ld a, [wNextMapGroup]
@@ -647,7 +647,7 @@ Function2362:: ; 2362 (0:2362)
 	ret
 
 Function239b:: ; 239b (0:239b)
-	call GetMapPermission
+	call GetMapEnvironment
 	call CheckOutdoorMap
 	ret nz
 	ld a, [wNextMapGroup]
@@ -2151,7 +2151,7 @@ ReturnToMapWithSpeechTextbox::
 ReloadTilesetAndPalettes:: ; 2c87 (0:2c87)
 	call DisableLCD
 	call ClearSprites
-	farcall RefreshSprites
+	farcall Function1414b
 	call LoadStandardFont
 	call LoadFontsExtra
 	ldh a, [hROMBank]
@@ -2295,7 +2295,7 @@ GetSecondaryMapHeaderPointer:: ; 2d56 (0:2d56)
 	pop bc
 	ret
 
-GetMapPermission:: ; 2d63 (0:2d63)
+GetMapEnvironment:: ; 2d63 (0:2d63)
 	push hl
 	push de
 	push bc

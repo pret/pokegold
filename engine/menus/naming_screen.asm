@@ -112,7 +112,7 @@ Function11b2a:
 	db "NICKNAME?@"
 
 Function11b79:
-	ld de, PlayerSpriteGFX ; $4000
+	ld de, ChrisSpriteGFX ; $4000
 	call Function11c11
 	hlcoord 5, 2
 	ld de, .String
@@ -174,7 +174,7 @@ Function11bda:
 Function11c11: ; 11c11 (4:5c11)
 	push de
 	ld hl, $8000
-	lb bc, BANK(PlayerSpriteGFX), 4
+	lb bc, BANK(ChrisSpriteGFX), 4
 	call Request2bpp
 	pop de
 	ld hl, $c0
@@ -182,7 +182,7 @@ Function11c11: ; 11c11 (4:5c11)
 	ld e, l
 	ld d, h
 	ld hl, $8040
-	lb bc, BANK(PlayerSpriteGFX), 4
+	lb bc, BANK(ChrisSpriteGFX), 4
 	call Request2bpp
 	xor a
 	ld hl, wMisc

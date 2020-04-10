@@ -216,7 +216,7 @@ Function4597:
 	ret
 
 Function459e:
-	ld a, [wd558]
+	ld a, [wVariableSprites + SPRITE_BIG_DOLL - SPRITE_VARS]
 	ld d, $17
 	cp $33
 	jr z, .asm_45ad

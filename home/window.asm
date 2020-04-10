@@ -37,7 +37,7 @@ CloseText::
 	ld a, $90
 	ldh [hWY], a
 	farcall Function1415c
-	call ReplacePlayerSprite
+	call ReplaceChrisSprite
 	ld hl, wd565
 	res 7, [hl]
 	call ResetBGWindow
