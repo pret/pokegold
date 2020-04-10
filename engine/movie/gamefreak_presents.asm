@@ -70,7 +70,7 @@ GFPresents_Init: ; e49f3 (39:49f3)
 
 	farcall ClearAnimatedObjectBuffer
 
-	ld hl, wAnimatedObjectDynamicVTileOffsets
+	ld hl, wSpriteAnimDict
 	ld a, 6
 	ld [hli], a
 	ld a, $8d

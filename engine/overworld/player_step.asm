@@ -153,7 +153,7 @@ Functiond577: ; d577 (3:5577)
 	or $98
 	ld [wd05c], a
 .asm_d58c
-	ld hl, wd07f
+	ld hl, wMetatileStandingY
 	inc [hl]
 	ld a, [hl]
 	cp $2
@@ -184,7 +184,7 @@ Functiond5a8: ; d5a8 (3:55a8)
 	or $98
 	ld [wd05c], a
 .asm_d5bd
-	ld hl, wd07f
+	ld hl, wMetatileStandingY
 	dec [hl]
 	ld a, [hl]
 	cp $ff
@@ -216,7 +216,7 @@ Functiond5db: ; d5db (3:55db)
 	and $1f
 	or d
 	ld [wd05b], a
-	ld hl, wd080
+	ld hl, wMetatileStandingX
 	dec [hl]
 	ld a, [hl]
 	cp $ff
@@ -245,7 +245,7 @@ Functiond604: ; d604 (3:5604)
 	and $1f
 	or d
 	ld [wd05b], a
-	ld hl, wd080
+	ld hl, wMetatileStandingX
 	inc [hl]
 	ld a, [hl]
 	cp $2

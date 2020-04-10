@@ -189,7 +189,7 @@ InitTime::
 	farcall _InitTime
 	ret
 
-PanicResetClock::
+ClearClock::
 	call .ClearhRTC
 	call SetClock
 	ret

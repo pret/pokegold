@@ -105,7 +105,7 @@ LoadMetatiles:: ; 1fe6 (0:1fe6)
 	ld e, a
 	ld a, [wOverworldMapAnchor + 1]
 	ld d, a
-	ld hl, wMisc
+	ld hl, wSurroundingTiles
 	ld b, SURROUNDING_HEIGHT / METATILE_WIDTH ; 5
 
 .row
@@ -124,7 +124,7 @@ LoadMetatiles:: ; 1fe6 (0:1fe6)
 	ld a, [wMapBorderBlock]
 
 .ok
-	; Load the current wMisc address into de.
+	; Load the current wSurroundingTiles address into de.
 	ld e, l
 	ld d, h
 	; Set hl to the address of the current metatile data ([TilesetBlocksAddress] + (a) tiles).
@@ -484,7 +484,7 @@ Function2293::
 	call Function22ad
 	ret nc
 	push bc
-	farcall Function14a2d
+	farcall CheckDirectionalWarp
 	pop bc
 	ret nc
 	call Function2302
@@ -498,7 +498,7 @@ Function22a5::
 	ret
 
 Function22ad:: ; 22ad (0:22ad)
-	farcall Function14a18
+	farcall CheckWarpCollision
 	ret nc
 	ldh a, [hROMBank]
 	push af
@@ -1021,10 +1021,10 @@ GetCoordOfUpperLeftCorner:: ; 25a9 (0:25a9)
 	ld [wOverworldMapAnchor + 1], a
 	ld a, [wYCoord]
 	and $1
-	ld [wd07f], a
+	ld [wMetatileStandingY], a
 	ld a, [wXCoord]
 	and $1
-	ld [wd080], a
+	ld [wMetatileStandingX], a
 	ret
 
 LoadBlockData::

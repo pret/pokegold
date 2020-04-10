@@ -112,7 +112,7 @@ BillsPC_MovePKMNMenu:
 	jr .asm_e4cf
 
 .asm_e4bb
-	farcall StartMovePkmnWOMail_SaveGame ; 5:4bd2
+	farcall StartMoveMonWOMail_SaveGame
 	jr c, .asm_e4cf
 	farcall MovePKMNWithoutMail_ ; 38:6f47
 	call ReturnToMapFromSubmenu
@@ -282,7 +282,7 @@ Function65b4:
 	add hl, bc
 	ld b, a
 	ld c, $0
-	ld de, wMisc
+	ld de, wBoxPartialData
 	ld a, b
 	and a
 	jr z, .asm_e645

@@ -932,7 +932,7 @@ Function5730:: ; 5730 (1:5730)
 	ld [wPlayerTurningDirection], a
 	ld [wPlayerObjectStepFrame], a
 	call Function574f
-	farcall Function14a44
+	farcall CheckWarpFacingDown
 	call c, Function5770
 	call Function5761
 	ret

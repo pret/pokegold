@@ -101,7 +101,7 @@ battle_struct: MACRO
 \1StructEnd::
 ENDM
 
-box: MACRO
+curbox: MACRO
 \1Count::           db
 \1Species::         ds MONS_PER_BOX + 1
 \1Mons::
@@ -110,7 +110,12 @@ box: MACRO
 \1MonOT::           ds NAME_LENGTH * MONS_PER_BOX
 \1MonNicknames::    ds MON_NAME_LENGTH * MONS_PER_BOX
 \1MonNicknamesEnd::
-\1End::             ds 2 ; padding
+\1End::
+ENDM
+
+box: MACRO
+	curbox \1
+	ds 2 ; padding
 ENDM
 
 channel_struct: MACRO
@@ -202,6 +207,14 @@ hall_of_fame: MACRO
 \1Mon5:: hof_mon \1Mon5
 \1Mon6:: hof_mon \1Mon6
 \1End:: db
+ENDM
+
+link_battle_record: MACRO
+\1Name::   ds NAME_LENGTH - 1
+\1ID::     dw
+\1Wins::   dw
+\1Losses:: dw
+\1Draws::  dw
 ENDM
 
 trademon: MACRO

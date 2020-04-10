@@ -153,7 +153,7 @@ Function11bda:
 	lb bc, $31, 4
 	call Request2bpp
 	xor a
-	ld hl, wMisc
+	ld hl, wSpriteAnimDict
 	ld [hli], a
 	ld [hl], a
 	lb de, $24, $20
@@ -185,7 +185,7 @@ Function11c11: ; 11c11 (4:5c11)
 	lb bc, BANK(ChrisSpriteGFX), 4
 	call Request2bpp
 	xor a
-	ld hl, wMisc
+	ld hl, wSpriteAnimDict
 	ld [hli], a
 	ld [hl], a
 	lb de, $24, $20
@@ -839,7 +839,7 @@ Function1201e: ; 1201e (4:601e)
 	ld a, BANK(NamingScreenGFX_Cursor)
 	call FarCopyBytes
 	ld a, $5
-	ld hl, wAnimatedObjectDynamicVTileOffsets + 9 * 2
+	ld hl, wSpriteAnimDict + 9 * 2
 	ld [hli], a
 	ld [hl], $7e
 	xor a

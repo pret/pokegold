@@ -73,7 +73,7 @@ StageRTCTimeForSave:
 	ld [hli], a
 	ret
 
-UnreferencedSaveRTC:
+SaveRTC:
 	ld a, $a
 	ld [MBC3SRamEnable], a
 	call LatchClock
@@ -89,7 +89,7 @@ UnreferencedSaveRTC:
 	ret
 
 StartClock::
-	call SaveRTC
+	call Function140b1
 	call GetClock
 	call Function1409e
 	call FixDays
@@ -117,7 +117,7 @@ Function1409e:
 	call RecordRTCStatus ; set bit 7 on sRTCStatusFlags
 	ret
 
-SaveRTC:
+Function140b1:
 	ld a, $a
 	ld [MBC3SRamEnable], a
 	call LatchClock

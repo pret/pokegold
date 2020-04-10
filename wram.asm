@@ -248,24 +248,44 @@ wTilemap:: ; c3a0
 wTilemapEnd:: ; c508
 
 SECTION "Animated Objects", WRAM0
-wMisc:: ; c508
-wTempTileMap:: ; c508
-	; ds SCREEN_HEIGHT * SCREEN_WIDTH
-wAnimatedObjectDynamicVTileOffsets:: ds 10 * 2 ; c508
-wAnimatedObjectStructs:: ; c51c
-; Field  0: Index
-; Fields 1-3: Loaded from AnimatedObjectStructSeqData
-wAnimatedObjectStruct1::  sprite_anim_struct wAnimatedObjectStruct1  ; c51c
-wAnimatedObjectStruct2::  sprite_anim_struct wAnimatedObjectStruct2  ; c52c
-wAnimatedObjectStruct3::  sprite_anim_struct wAnimatedObjectStruct3  ; c53c
-wAnimatedObjectStruct4::  sprite_anim_struct wAnimatedObjectStruct4  ; c54c
-wAnimatedObjectStruct5::  sprite_anim_struct wAnimatedObjectStruct5  ; c55c
-wAnimatedObjectStruct6::  sprite_anim_struct wAnimatedObjectStruct6  ; c56c
-wAnimatedObjectStruct7::  sprite_anim_struct wAnimatedObjectStruct7  ; c57c
-wAnimatedObjectStruct8::  sprite_anim_struct wAnimatedObjectStruct8  ; c58c
-wAnimatedObjectStruct9::  sprite_anim_struct wAnimatedObjectStruct9  ; c59c
-wAnimatedObjectStruct10:: sprite_anim_struct wAnimatedObjectStruct10 ; c5ac
-wAnimatedObjectStructsEnd::
+
+UNION
+; surrounding tiles
+; This buffer determines the size for the rest of the union;
+; it uses exactly 480 bytes.
+wSurroundingTiles:: ds SURROUNDING_WIDTH * SURROUNDING_HEIGHT
+
+NEXTU ; c508
+; box save buffer
+; SaveBoxAddress uses this buffer in three steps because it
+; needs more space than the buffer can hold.
+wBoxPartialData:: ds 480
+wBoxPartialDataEnd::
+
+NEXTU ; c508
+wTempTileMap::
+	ds SCREEN_HEIGHT * SCREEN_WIDTH
+
+NEXTU
+; wSpriteAnimDict is a 10x2 dictionary
+; keys: taken from third column of SpriteAnimSeqData
+; values: vTiles
+wSpriteAnimDict:: ds 10 * 2
+
+wSpriteAnimationStructs::
+; field  0:   index
+; fields 1-3: loaded from SpriteAnimSeqData
+wSpriteAnim1::  sprite_anim_struct wSpriteAnim1
+wSpriteAnim2::  sprite_anim_struct wSpriteAnim2
+wSpriteAnim3::  sprite_anim_struct wSpriteAnim3
+wSpriteAnim4::  sprite_anim_struct wSpriteAnim4
+wSpriteAnim5::  sprite_anim_struct wSpriteAnim5
+wSpriteAnim6::  sprite_anim_struct wSpriteAnim6
+wSpriteAnim7::  sprite_anim_struct wSpriteAnim7
+wSpriteAnim8::  sprite_anim_struct wSpriteAnim8
+wSpriteAnim9::  sprite_anim_struct wSpriteAnim9
+wSpriteAnim10:: sprite_anim_struct wSpriteAnim10
+wSpriteAnimationStructsEnd::
 
 wAnimatedObjectStructCount:: ds 1 ; c5bc
 wCurrSpriteOAMAddr:: ds 1 ; c5bd
@@ -590,6 +610,7 @@ wc6e5:: ds 1 ; c6e5
 wc6e6:: ds 1 ; c6e6
 wc6e7:: ds 1 ; c6e7
 wc6e8:: ds 1 ; c6e8
+ENDU
 wc6e9:: ds 1 ; c6e9
 wc6ea:: ds 1 ; c6ea
 wc6eb:: ds 1 ; c6eb
@@ -617,6 +638,7 @@ wc6ff:: ds 1 ; c6ff
 wOverworldMap::
 wOverworldMapBlocks::
 wLYOverrides::
+wHallOfFamePokemonList::
 wc700:: ds 1 ; c700
 wc701:: ds 1 ; c701
 wc702:: ds 1 ; c702
@@ -714,6 +736,7 @@ wc75d:: ds 1 ; c75d
 wc75e:: ds 1 ; c75e
 wc75f:: ds 1 ; c75f
 wc760:: ds 1 ; c760
+wHallOfFamePokemonListEnd::
 wc761:: ds 1 ; c761
 wc762:: ds 1 ; c762
 wc763:: ds 1 ; c763
@@ -2644,8 +2667,8 @@ wUsedSpritesEnd::
 	ds 8
 wOverworldMapAnchor:: dw ; d07d
 
-wd07f:: ds 1 ; d07f
-wd080:: ds 1 ; d080
+wMetatileStandingY:: db ; d07f
+wMetatileStandingX:: db ; d080
 wd081:: ds 1 ; d081
 wd082:: ds 1 ; d082
 wPermission:: ds 1 ; d083
@@ -2977,6 +3000,8 @@ wOptionsEnd::
 
 SECTION "Game Data", WRAMX, BANK[1]
 wGameData::
+wPlayerData::
+wPlayerData1::
 wPlayerID:: dw ; d1a1
 
 wPlayerName:: ds NAME_LENGTH ; d1a3
@@ -3030,9 +3055,16 @@ wObject7Struct::  object_struct wObject7
 wObject8Struct::  object_struct wObject8
 wObject9Struct::  object_struct wObject9
 wObject10Struct:: object_struct wObject10
+UNION
+	ds 18
+wPlayerData1End::
+wPlayerData2::
+	ds 1
+NEXTU
 wObject11Struct:: object_struct wObject11
 wObject12Struct:: object_struct wObject12
 wObjectStructsEnd::
+ENDU
 
 wCmdQueue:: ds CMDQUEUE_CAPACITY * CMDQUEUE_ENTRY_SIZE ; d405
 ; d41d
@@ -3088,6 +3120,8 @@ wd56d:: ds 1 ; d56d
 wd56e:: ds 1 ; d56e
 wd56f:: ds 1 ; d56f
 wd570:: ds 1 ; d570
+wPlayerData2End::
+wPlayerData3::
 wStatusFlags:: ds 1 ; d571
 wStatusFlags2:: ds 1 ; d572
 wMoney:: ds 3 ; d573
@@ -3644,8 +3678,10 @@ wLuckyIDNumber:: dw ; d9e9
 wRepelSteps:: ds 1 ; d9eb
 wd9ec:: ds 1 ; d9ec
 wd9ed:: ds 1 ; d9ed
+wPlayerData3End::
+wPlayerDataEnd::
 
-wMapData::
+wCurMapData::
 wVisitedSpawns:: ds 4 ; flag_array NUM_SPAWNS ; d9ee
 
 	warp_struct wDig ; d9f2
@@ -3697,6 +3733,7 @@ wda1e:: ds 1 ; da1e
 wda1f:: ds 1 ; da1f
 wda20:: ds 1 ; da20
 wda21:: ds 1 ; da21
+wCurMapDataEnd::
 
 SECTION "Party", WRAMX, BANK[1]
 
@@ -3842,9 +3879,10 @@ wOTPartyMonNicknames:: ds MON_NAME_LENGTH * PARTY_LENGTH ; debf
 wOTPartyDataEnd::
 ENDU ; df01
 
+wPokemonDataEnd::
 wGameDataEnd::
 
-SECTION "Stack", WRAMX, BANK[1]
+SECTION "Stack", WRAMX
 
 wStackTop::
 	ds 1

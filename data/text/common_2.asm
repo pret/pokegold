@@ -1261,45 +1261,45 @@ UnknownText_0x1c4212::
 	text "?"
 	done
 
-UnknownText_0x1c454b::
+_WouldYouLikeToSaveTheGameText::
 	text "Would you like to"
 	line "save the game?"
 	done
 
-UnknownText_0x1c456d::
+_SavingDontTurnOffThePowerText::
 	text "SAVING… DON'T TURN"
 	line "OFF THE POWER."
 	done
 
-UnknownText_0x1c4590::
+_SavedTheGameText::
 	text "<PLAYER> saved"
 	line "the game."
 	done
 
-UnknownText_0x1c45a3::
+_AlreadyASaveFileText::
 	text "There is already a"
 	line "save file. Is it"
 	cont "OK to overwrite?"
 	done
 
-UnknownText_0x1c45d9::
+_AnotherSaveFileText::
 	text "There is another"
 	line "save file. Is it"
 	cont "OK to overwrite?"
 	done
 
-UnknownText_0x1c460d::
+_SaveFileCorruptedText::
 	text "The save file is"
 	line "corrupted!"
 	prompt
 
-UnknownText_0x1c462a::
+_ChangeBoxSaveText::
 	text "When you change a"
 	line "#MON BOX, data"
 	cont "will be saved. OK?"
 	done
 
-UnknownText_0x1c465f::
+_MoveMonWOMailSaveText::
 	text "Each time you move"
 	line "a #MON, data"
 	cont "will be saved. OK?"

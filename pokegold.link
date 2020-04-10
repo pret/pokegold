@@ -299,17 +299,22 @@ WRAMX 7
 VRAM $00
 VRAM $01
 SRAM $00
-	org $a000
 	"Scratch"
 	"Decompress Buffer"
-	"SRAM0"
+	org $a600
+	"SRAM Bank 0"
+	"Backup Save 1"
+	"SRAM Stack"
+	org $bfff
+	"SRAM Window Stack"
 SRAM $01
-	org $a000
-	"SRAM1"
+	"Save"
 	"Active Box"
+	"Link Battle Data"
+	"SRAM Hall of Fame"
+	"Backup Save 2"
 SRAM $02
-	org $a000
-	"SRAM2"
+	"Boxes 1-7"
 SRAM $03
-	org $a000
-	"SRAM3"
+	"Boxes 8-14"
+	"Backup Save 3"

@@ -74,21 +74,12 @@ SECTION "bank5", ROMX
 
 INCLUDE "engine/rtc/rtc.asm"
 INCLUDE "engine/overworld/overworld.asm"
-Function14a18::
-	dr $14a18, $14a2d
-Function14a2d::
-	dr $14a2d, $14a44
-Function14a44:
-	dr $14a44, $14a73
-CheckCutCollision:
-	dr $14a73, $14abe
-SaveMenu:
-	dr $14abe, $14bd2
-StartMovePkmnWOMail_SaveGame:
-	dr $14bd2, $14ef5
-TryLoadSaveFile:
-	dr $14ef5, $15484
-
+INCLUDE "engine/overworld/tile_events.asm"
+INCLUDE "engine/menus/empty_sram.asm"
+INCLUDE "engine/menus/save.asm"
+INCLUDE "data/maps/spawn_points.asm"
+INCLUDE "engine/overworld/load_map_part.asm"
+	dr $153ba, $15484
 RunMapSetupScript::
 	dr $15484, $1560c
 DelayLoadingNewSprites:
@@ -245,7 +236,11 @@ MysteryGift_CopyReceivedDecosToPC:
 UnlockMysteryGift:
 	dr $2a4e7, $2a4f6
 Function2a4f6:
-	dr $2a4f6, $2a7d7
+	dr $2a4f6, $2a507
+BackupMysteryGift:
+	dr $2a507, $2a518
+RestoreMysteryGift:
+	dr $2a518, $2a7d7
 InitRoamMons:
 	dr $2a7d7, $2a8e0
 JumpRoamMons:
@@ -395,7 +390,11 @@ PokedexDataPointerTable::
 PlaceGraphic::
 	dr $44648, $44679
 SendMailToPC::
-	dr $44679, $44870
+	dr $44679, $44830
+BackupPartyMonMail:
+	dr $44830, $44850
+RestorePartyMonMail:
+	dr $44850, $44870
 DeletePartyMonMail:
 	dr $44870, $4488c
 IsAnyPokemonHoldingMail:
@@ -490,6 +489,7 @@ Function84684:
 	dr $84684, $87bfd
 
 SECTION "bank23", ROMX
+SaveMenu_CopyTilemapAtOnce:
 	dr $8c000, $8c17a
 ResetClock_:
 	dr $8c17a, $8c310

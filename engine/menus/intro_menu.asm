@@ -1177,7 +1177,7 @@ InitTitleScreen: ; 6291 (1:6291)
 
 	call Function636e
 	call Function63b6
-	ld hl, wAnimatedObjectDynamicVTileOffsets
+	ld hl, wSpriteAnimDict
 	xor a
 	ld [hli], a
 	ld [hl], a
@@ -1193,11 +1193,11 @@ InitTitleScreen: ; 6291 (1:6291)
 	ld de, $6058
 	ld a, $2c ; HO-OH
 	call InitSpriteAnimStruct
-	ld hl, wAnimatedObjectStruct1
-	ld de, wAnimatedObjectStruct10
+	ld hl, wSpriteAnim1
+	ld de, wSpriteAnim10
 	ld bc, $a
 	call CopyBytes
-	ld hl, wAnimatedObjectStruct1
+	ld hl, wSpriteAnim1
 	ld [hl], $0
 	ld hl, wc700
 	ld bc, $90
@@ -1475,7 +1475,7 @@ Function64b1: ; 64b1 (1:64b1)
 	and $3
 	ret nz
 IF DEF(_GOLD)
-	ld bc, wAnimatedObjectStruct10Index
+	ld bc, wSpriteAnim10Index
 	ld hl, $a
 	add hl, bc
 	ld l, [hl]
