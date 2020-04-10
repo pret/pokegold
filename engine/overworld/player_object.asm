@@ -206,7 +206,7 @@ CopyMapObjectToTempObject: ; 870d (2:470d)
 	ld [wcea1], a
 	ret
 
-InitializeVariableSprites:
+InitializeVisibleSprites:
 	ld bc, wMap2Object
 	ld a, $2
 .asm_876c

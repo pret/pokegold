@@ -71,5 +71,5 @@ GetWhiteoutSpawn:
 	xor a ; SPAWN_HOME
 
 .yes
-	ld [wceec], a
+	ld [wDefaultSpawnpoint], a
 	ret

@@ -2293,7 +2293,7 @@ wTextDelayFrames:: ds 1 ; cee9
 wVBlankOccurred:: ds 1 ; ceea
 
 wceeb:: ds 1 ; ceeb
-wceec:: ds 1 ; ceec
+wDefaultSpawnpoint:: db
 
 UNION ; ceed
 ; mail temp storage
@@ -2939,7 +2939,7 @@ wd17e:: ds 1 ; d17e
 wd17f:: ds 1 ; d17f
 wd180:: ds 1 ; d180
 wd181:: ds 1 ; d181
-wd182:: ds 1 ; d182
+wPlayerSpriteSetupFlags:: db ; d182
 wd183:: ds 1 ; d183
 wd184:: ds 1 ; d184
 wd185:: ds 1 ; d185

@@ -79,13 +79,10 @@ INCLUDE "engine/menus/empty_sram.asm"
 INCLUDE "engine/menus/save.asm"
 INCLUDE "data/maps/spawn_points.asm"
 INCLUDE "engine/overworld/load_map_part.asm"
-	dr $153ba, $15484
-RunMapSetupScript::
-	dr $15484, $1560c
-DelayLoadingNewSprites:
-	dr $1560c, $15612
-Function15612::
-	dr $15612, $15871
+	dr $153ba, $15440 ; random slots stuff?
+INCLUDE "engine/overworld/spawn_points.asm"
+INCLUDE "engine/overworld/map_setup.asm"
+	dr $156be, $15871
 PokemonCenterPC:
 	dr $15871, $159b0
 Function159b0:
@@ -140,7 +137,9 @@ _ExitMenu::
 _InitVerticalMenuCursor::
 	dr $24395, $243eb
 UpdateItemDescription:
-	dr $243eb, $244d7
+	dr $243eb, $24477
+LoadObjectMasks:
+	dr $24477, $244d7
 _InitScrollingMenu::
 	dr $244d7, $244f3
 _ScrollingMenu::
@@ -240,9 +239,13 @@ Function2a4f6:
 BackupMysteryGift:
 	dr $2a507, $2a518
 RestoreMysteryGift:
-	dr $2a518, $2a7d7
+	dr $2a518, $2a539
+LoadWildMonData:
+	dr $2a539, $2a7d7
 InitRoamMons:
-	dr $2a7d7, $2a8e0
+	dr $2a7d7, $2a859
+UpdateRoamMons:
+	dr $2a859, $2a8e0
 JumpRoamMons:
 	dr $2a8e0, $2a9f7
 RandomUnseenWildMon:

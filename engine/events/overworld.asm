@@ -555,7 +555,7 @@ TryToFly:
 	jr z, .asm_caaa
 	cp $1c
 	jr nc, .asm_caaa
-	ld [wceec], a
+	ld [wDefaultSpawnpoint], a
 	call CloseWindow
 	ld a, $1
 	ret
@@ -592,7 +592,7 @@ FlyScript:
 	callasm FlyFromAnimation
 	farscall Script_AbortBugContest
 	special WarpToSpawnPoint
-	callasm DelayLoadingNewSprites ; 1560c
+	callasm SkipUpdateMapSprites
 	loadvar VAR_MOVEMENT, PLAYER_NORMAL
 	newloadmap MAPSETUP_TELEPORT
 	callasm FlyToAnimation
@@ -868,7 +868,7 @@ TryTeleport:
 	rst FarCall
 	jr nc, .asm_cc9c
 	ld a, c
-	ld [wceec], a
+	ld [wDefaultSpawnpoint], a
 	ld a, $1
 	ret
 

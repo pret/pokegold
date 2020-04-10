@@ -192,7 +192,7 @@ ReturnToMapFromSubmenu::
 	ldh [hMapEntryMethod], a
 	ret
 
-Function2086::
+HandleNewMap::
 	call Clear_wc6e8
 	call ResetMapBufferEventFlags
 	call ResetFlashIfOutOfCave
@@ -200,6 +200,7 @@ Function2086::
 	call ResetBikeFlags
 	ld a, $5
 	call RunMapCallback
+HandleContinueMap::
 	farcall Function97c2a
 	ld a, $3
 	call RunMapCallback
@@ -207,7 +208,7 @@ Function2086::
 	ld [wMapTimeOfDay], a
 	ret
 
-Function20ac::
+LoadMapTimeOfDay::
 	ld a, $1
 	ld [wSpriteUpdatesEnabled], a
 	farcall Function8c3e9
@@ -261,8 +262,8 @@ Function20f7:: ; 20f7 (0:20f7)
 	ldh [rVBK], a
 	ret
 
-Function2112::
-	call LoadTilesetHeader
+LoadMapGraphics::
+	call LoadMapTileset
 	call LoadTileset
 	xor a
 	ldh [hMapAnims], a
@@ -272,17 +273,17 @@ Function2112::
 	call LoadFontsExtra
 	ret
 
-Function2128::
+LoadMapPalettes::
 	ld b, $9
 	jp GetSGBLayout
 
-Function212d::
+RefreshMapSprites::
 	call ClearSprites
 	call ResetBGWindow
 	call GetMovementPermissions
 	farcall Function5730
-	farcall Function15612
-	ld hl, wd182
+	farcall CheckReplaceChrisSprite
+	ld hl, wPlayerSpriteSetupFlags
 	bit 6, [hl]
 	jr nz, .asm_2151
 	ld hl, wVramState
@@ -290,7 +291,7 @@ Function212d::
 	call SafeUpdateSprites
 .asm_2151
 	xor a
-	ld [wd182], a
+	ld [wPlayerSpriteSetupFlags], a
 	ret
 
 Function2156::
@@ -350,7 +351,7 @@ Function2156::
 	scf
 	ret
 
-Function21a3::
+EnterMapConnection::
 	ld a, [wPlayerStepDirection]
 	and a
 	jp z, Function2263
@@ -607,7 +608,7 @@ Function230f:: ; 230f (0:230f)
 	scf
 	ret
 
-Function2349::
+EnterMapWarp::
 	call Function2362
 	call Function239b
 	ld a, [wNextWarpNumber]
@@ -703,7 +704,7 @@ LoadMapAttributes::
 	call ReadMapEventHeader
 	ret
 
-LoadMapAttributes_SkipPeople::
+LoadMapAttributes_SkipObjects::
 	call CopyMapHeaders
 	call SwitchToMapScriptsBank
 	call ReadMapScripts
@@ -946,7 +947,7 @@ ClearObjectStructs:: ; 2550 (0:2550)
 	jr nz, .asm_2563
 	ret
 
-RestoreFacingAfterWarp::
+GetWarpDestCoords::
 	call GetMapScriptsBank
 	rst Bankswitch
 	ld hl, wd08f
@@ -971,7 +972,7 @@ RestoreFacingAfterWarp::
 	jr nz, .asm_2592
 	call BackUpWarp
 .asm_2592
-	call GetCoordOfUpperLeftCorner
+	call GetMapScreenCoords
 	ret
 
 BackUpWarp:: ; 2596 (0:2596)
@@ -983,7 +984,7 @@ BackUpWarp:: ; 2596 (0:2596)
 	ld [wBackupMapNumber], a
 	ret
 
-GetCoordOfUpperLeftCorner:: ; 25a9 (0:25a9)
+GetMapScreenCoords::
 	ld hl, wc700
 	ld a, [wXCoord]
 	bit 0, a
@@ -1697,7 +1698,7 @@ SaveScreen::
 	ld c, $5
 	jr SaveScreen_LoadNeighbor
 
-LoadNeighboringBlockData::
+LoadConnectionBlockData::
 	ld hl, wOverworldMapAnchor
 	ld a, [hli]
 	ld h, [hl]
@@ -2413,7 +2414,7 @@ GetFishingGroup::
 	pop de
 	ret
 
-LoadTilesetHeader:: ; 2dfa (0:2dfa)
+LoadMapTileset::
 	push hl
 	push bc
 	ld hl, $56be

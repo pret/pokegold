@@ -254,7 +254,7 @@ MainMenu_NewGame:
 	call OakSpeech
 	call InitializeWorld
 	ld a, $0
-	ld [wceec], a
+	ld [wDefaultSpawnpoint], a
 	ld a, $f1
 	ldh [hMapEntryMethod], a
 	jp FinishContinueFunction
@@ -522,13 +522,13 @@ MainMenu_Continue:
 
 .asm_5e42
 	ld a, $e
-	ld [wceec], a
+	ld [wDefaultSpawnpoint], a
 	call PostCreditsSpawn
 	jp FinishContinueFunction
 
 SpawnAfterRed: ; 5e4d (1:5e4d)
 	ld a, $1a
-	ld [wceec], a
+	ld [wDefaultSpawnpoint], a
 PostCreditsSpawn: ; 5e52 (1:5e52)
 	xor a
 	ld [wd1db], a

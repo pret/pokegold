@@ -254,7 +254,7 @@ LowVolume::
 	ld [wVolume], a
 	ret
 
-VolumeOff::
+MinVolume::
 	xor a
 	ld [wVolume], a
 	ret
@@ -332,7 +332,7 @@ PlayMapMusic::
 	pop hl
 	ret
 
-EnterMapMusic::
+PlayMapMusicBike::
 	push hl
 	push de
 	push bc

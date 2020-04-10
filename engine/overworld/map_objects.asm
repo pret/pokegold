@@ -933,12 +933,12 @@ Function5730:: ; 5730 (1:5730)
 	ld [wPlayerObjectStepFrame], a
 	call Function574f
 	farcall CheckWarpFacingDown
-	call c, Function5770
+	call c, SpawnInFacingDown
 	call Function5761
 	ret
 
 Function574f: ; 574f (1:574f)
-	ld hl, wd182
+	ld hl, wPlayerSpriteSetupFlags
 	bit 7, [hl]
 	jr nz, .asm_575b
 	bit 6, [hl]
@@ -951,16 +951,16 @@ Function574f: ; 574f (1:574f)
 	ret
 
 Function5761: ; 5761 (1:5761)
-	ld hl, wd182
+	ld hl, wPlayerSpriteSetupFlags
 	bit 5, [hl]
 	ret z
-	ld a, [wd182]
+	ld a, [wPlayerSpriteSetupFlags]
 	and $3
 	add a
 	add a
 	jr asm_5772
 
-Function5770: ; 5770 (1:5770)
+SpawnInFacingDown:
 	ld a, $0
 asm_5772:
 	ld bc, wObjectStructs
