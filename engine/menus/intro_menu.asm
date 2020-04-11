@@ -289,7 +289,7 @@ Function5c41: ; 5c41 (1:5c41)
 	ld [wPlayerID + 1], a
 
 	ld hl, wPartyCount
-	call Function5d15
+	call .InitList
 
 	xor a
 	ld [wCurBox], a
@@ -300,17 +300,17 @@ Function5c41: ; 5c41 (1:5c41)
 	ld a, BANK(sBoxCount)
 	call OpenSRAM
 	ld hl, sBoxCount
-	call Function5d15
+	call .InitList
 	call CloseSRAM
 
 	ld hl, wNumItems
-	call Function5d15
+	call .InitList
 	ld hl, wNumKeyItems
-	call Function5d15
+	call .InitList
 	ld hl, wNumBalls
-	call Function5d15
-	ld hl, wPCItems
-	call Function5d15
+	call .InitList
+	ld hl, wNumPCItems
+	call .InitList
 
 	xor a
 	ld [wRoamMon1Species], a
@@ -373,7 +373,7 @@ ENDC
 	call ResetGameTime
 	ret
 
-Function5d15: ; 5d15 (1:5d15)
+.InitList:
 	xor a
 	ld [hli], a
 	dec a

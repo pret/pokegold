@@ -82,16 +82,22 @@ INCLUDE "engine/overworld/load_map_part.asm"
 	dr $153ba, $15440 ; random slots stuff?
 INCLUDE "engine/overworld/spawn_points.asm"
 INCLUDE "engine/overworld/map_setup.asm"
-	dr $156be, $15871
-PokemonCenterPC:
-	dr $15871, $159b0
-Function159b0:
-	dr $159b0, $1624f
+	dr $156be, $15871 ; ?
+INCLUDE "engine/events/pokemon_pc.asm"
+INCLUDE "engine/items/mart.asm"
 
+GiveMoney:
+	dr $1622c, $1624f
 TakeMoney:
 	dr $1624f, $16260
 CompareMoney:
-	dr $16260, $1646d
+	dr $16260, $162fe
+Marts:
+	dr $162fe, $16342
+.End:
+	dr $16342, $16469
+DefaultMart:
+	dr $16469, $1646d
 BankOfMom:
 	dr $1646d, $16935
 INCLUDE "engine/events/daycare.asm"
@@ -143,7 +149,9 @@ LoadObjectMasks:
 _InitScrollingMenu::
 	dr $244d7, $244f3
 _ScrollingMenu::
-	dr $244f3, $24834
+	dr $244f3, $2462e
+ScrollingMenu_ClearLeftColumn:
+	dr $2462e, $24834
 SwitchItemsInBag:
 	dr $24834, $249dc
 PlaceMenuItemName:
@@ -151,7 +159,11 @@ PlaceMenuItemName:
 PlaceMenuItemQuantity:
 	dr $249eb, $24a10
 PlaceMoneyTopRight:
-	dr $24a10, $24a4d
+	dr $24a10, $24a18
+PlaceMoneyBottomLeft:
+	dr $24a18, $24a20
+PlaceMoneyAtTopLeftOfTextbox:
+	dr $24a20, $24a4d
 DisplayCoinCaseBalance:
 	dr $24a4d, $24a76
 DisplayMoneyAndCoinBalance:
@@ -165,15 +177,23 @@ Function24b8d:
 MonSubmenu:
 	dr $24c89, $24f20
 SelectQuantityToToss:
-	dr $24f20, $25061
+	dr $24f20, $24f2a
+SelectQuantityToBuy:
+	dr $24f2a, $24f42
+SelectQuantityToSell:
+	dr $24f42, $25061
 
 TrainerCard:
-	dr $25061, $267ca
+	dr $25061, $267af
 
+ProfOaksPC:
+	dr $267af, $267ca
 ProfOaksPCBoot:
 	dr $267ca, $2692d
 InitDecorations:
-	dr $2692d, $270d5
+	dr $2692d, $26938
+_PlayerDecorationMenu:
+	dr $26938, $270d5
 
 ReceiveDecorationC:
 	dr $270d5, $271be
@@ -401,7 +421,9 @@ RestorePartyMonMail:
 DeletePartyMonMail:
 	dr $44870, $4488c
 IsAnyPokemonHoldingMail:
-	dr $4488c, $44aa2
+	dr $4488c, $448ab
+_PlayerMailBoxMenu:
+	dr $448ab, $44aa2
 
 SECTION "bank14", ROMX
 
@@ -489,7 +511,10 @@ _PrinterReceive::
 PrintMailAndExit:
 	dr $845d4, $84684
 Function84684:
-	dr $84684, $87bfd
+	dr $84684, $86632
+
+_HallOfFamePC:
+	dr $86632, $87bfd
 
 SECTION "bank23", ROMX
 SaveMenu_CopyTilemapAtOnce:

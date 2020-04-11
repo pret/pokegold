@@ -248,7 +248,7 @@ DisplayLinkRecord: ; c434 (3:4434)
 PlayersHousePC: ; c441 (3:4441)
 	xor a
 	ld [wScriptVar], a
-	farcall Function159b0
+	farcall _PlayersHousePC
 	ld a, c
 	ld [wScriptVar], a
 	ret

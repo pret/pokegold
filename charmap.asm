@@ -170,20 +170,19 @@
 	charmap "8",        $fe
 	charmap "9",        $ff
 
-; Japanese, for those bits of text that
-; were not translated to English.
+; Japanese kana, for those bits of text that were not translated to English
 
-	charmap "ガ", $5
-	charmap "ギ", $6
-	charmap "グ", $7
-	charmap "ゲ", $8
-	charmap "ゴ", $9
-	charmap "ザ", $a
-	charmap "ジ", $b
-	charmap "ズ", $c
-	charmap "ゼ", $d
-	charmap "ゾ", $e
-	charmap "ダ", $f
+	charmap "ガ", $05
+	charmap "ギ", $06
+	charmap "グ", $07
+	charmap "ゲ", $08
+	charmap "ゴ", $09
+	charmap "ザ", $0a
+	charmap "ジ", $0b
+	charmap "ズ", $0c
+	charmap "ゼ", $0d
+	charmap "ゾ", $0e
+	charmap "ダ", $0f
 	charmap "ヂ", $10
 	charmap "ヅ", $11
 	charmap "デ", $12
@@ -193,7 +192,6 @@
 	charmap "ビ", $1a
 	charmap "ブ", $1b
 	charmap "ボ", $1c
-;	charmap "ベ", $1d
 
 	charmap "が", $26
 	charmap "ぎ", $27
@@ -227,11 +225,18 @@
 	charmap "ぺ", $47
 	charmap "ぽ", $48
 
+	charmap "「", $70
+	charmap "」", $71
+	charmap "』", $73
+	charmap "⋯", $75
+
+	charmap "　", $7f
+
 	charmap "ア", $80
 	charmap "イ", $81
 	charmap "ウ", $82
 	charmap "エ", $83
-	charmap "ォ", $84
+	charmap "オ", $84
 	charmap "カ", $85
 	charmap "キ", $86
 	charmap "ク", $87
@@ -282,7 +287,6 @@
 	charmap "う", $b3
 	charmap "え", $b4
 	charmap "お", $b5
-
 	charmap "か", $b6
 	charmap "き", $b7
 	charmap "く", $b8
@@ -308,7 +312,6 @@
 	charmap "ふ", $cc
 	charmap "へ", $cd
 	charmap "ほ", $ce
-
 	charmap "ま", $cf
 	charmap "み", $d0
 	charmap "む", $d1
@@ -331,8 +334,31 @@
 	charmap "ょ", $e2
 
 	charmap "ー", $e3
-
 	charmap "ﾟ", $e4
 	charmap "ﾞ", $e5
 
+	charmap "？", $e6
+	charmap "！", $e7
+	charmap "。", $e8
+
 	charmap "ァ", $e9
+	charmap "ゥ", $ea
+	charmap "ェ", $eb
+
+	charmap "円", $f0
+
+	charmap "．", $f2
+	charmap "／", $f3
+
+	charmap "ォ", $f4
+
+	charmap "０", $f6
+	charmap "１", $f7
+	charmap "２", $f8
+	charmap "３", $f9
+	charmap "４", $fa
+	charmap "５", $fb
+	charmap "６", $fc
+	charmap "７", $fd
+	charmap "８", $fe
+	charmap "９", $ff

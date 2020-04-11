@@ -137,8 +137,8 @@ wPrinterConnectionOpen:: ds 1
 wPrinterOpcode:: ds 1 ; c1d4
 wc1d5:: ds 1 ; c1d5
 wDisableTextAcceleration:: ds 1 ; c1d6
-wc1d7:: ds 1 ; c1d7
-wc1d8:: ds 1 ; c1d8
+wPCItemsCursor:: db ; c1d7
+wPCItemsScrollPosition:: db ; c1d8
 wc1d9:: ds 1 ; c1d9
 wc1da:: ds 1 ; c1da
 wc1db:: ds 1 ; c1db
@@ -2318,6 +2318,19 @@ wBugContestWinnersEnd::
 wBugContestWinnerName:: ds NAME_LENGTH
 
 NEXTU ; ceed
+; mart items
+wMartItem1BCD:: ds 3
+wMartItem2BCD:: ds 3
+wMartItem3BCD:: ds 3
+wMartItem4BCD:: ds 3
+wMartItem5BCD:: ds 3
+wMartItem6BCD:: ds 3
+wMartItem7BCD:: ds 3
+wMartItem8BCD:: ds 3
+wMartItem9BCD:: ds 3
+wMartItem10BCD:: ds 3
+
+NEXTU ; ceed
 ; radio data
 wCurRadioLine:: db
 wNextRadioLine:: db
@@ -2433,6 +2446,14 @@ wCurBGEventType:: db
 wCurBGEventScriptAddr:: dw
 
 NEXTU ; cf29
+; mart data
+wMartType:: db
+wMartPointerBank:: db
+wMartPointer:: dw
+wMartJumptableIndex:: db
+wBargainShopFlags:: db
+
+NEXTU ; cf29
 ; player movement data
 wCurInput::
 wFacingTileID:: db
@@ -2452,6 +2473,12 @@ NEXTU ; cf29
 ; std script buffer
 	ds 1
 wJumpStdScriptBuffer:: ds 3
+
+NEXTU ; cf29
+; backup menu data
+	ds 7
+wMenuCursorBufferBackup:: db
+wMenuScrollPositionBackup:: db
 ENDU
 
 wcf3a:: ds 1
@@ -2562,22 +2589,26 @@ wcfe8:: ds 1 ; cfe8
 wBattleResult:: ds 1 ; cfe9
 wcfea:: ds 1 ; cfea
 wUsingItemWithSelect:: ds 1 ; cfeb
-wCurElevator:: db ; cfec
-wCurElevatorFloors:: ds 1 ; cfed
-wcfee:: ds 1 ; cfee
-wcfef:: ds 1 ; cfef
-wcff0:: ds 1 ; cff0
-wcff1:: ds 1 ; cff1
-wcff2:: ds 1 ; cff2
-wcff3:: ds 1 ; cff3
-wcff4:: ds 1 ; cff4
-wcff5:: ds 1 ; cff5
-wcff6:: ds 1 ; cff6
-wcff7:: ds 1 ; cff7
-wcff8:: ds 1 ; cff8
-wcff9:: ds 1 ; cff9
-wcffa:: ds 1 ; cffa
-wcffb:: ds 1 ; cffb
+
+UNION ; cfec
+; mart data
+wCurMart:: ds 16
+wCurMartEnd::
+
+NEXTU ; cfec
+; elevator data
+wCurElevator:: db
+wCurElevatorFloors:: db
+
+NEXTU ; cfec
+; mailbox data
+wCurMessageScrollPosition:: db
+wCurMessageIndex:: db
+wMailboxCount:: db
+wMailboxItems:: ds MAILBOX_CAPACITY
+wMailboxEnd:: ; d0fe
+ENDU ; cffc
+
 wcffc:: ds 1 ; cffc
 wcffd:: ds 1 ; cffd
 wcffe:: ds 1 ; cffe
@@ -2587,7 +2618,9 @@ SECTION "WRAM1", WRAMX, BANK[$1]
 wd000:: ds 1 ; d000
 wd001:: ds 1 ; d001
 wCurItem:: db ; d002
-wCurItemQuantity:: db ; d003
+wCurItemQuantity:: ; d003
+wMartItemID::
+	db
 
 wCurPartySpecies:: ; d004
 	ds 1
@@ -3151,10 +3184,9 @@ wNumBalls:: ds 1 ; d5fc
 wBalls:: ds MAX_BALLS * 2 + 1 ; d5fd
 wBallsEnd::
 
+wNumPCItems:: ds 1
 wPCItems:: ds MAX_PC_ITEMS * 2 + 1 ; d616
 wPCItemsEnd::
-
-	ds 1
 
 wPokegearFlags:: ; d67c
 ; bit 0: map
@@ -3174,7 +3206,7 @@ wRegisteredItem:: ds 1 ; d681
 
 wPlayerState:: ds 1 ; d682
 
-wd683:: ds 1 ; d683
+wHallOfFameCount:: db ; d683
 wd684:: ds 1 ; d684
 wd685:: ds 1 ; d685
 wd686:: ds 1 ; d686
@@ -3545,8 +3577,8 @@ wd962:: ds 1 ; d962
 wMomItemTriggerBalance:: ds 3 ; d963
 
 wDailyResetTimer:: dw ; d966
-wDailyFlags:: ds 1 ; d968
-wWeeklyFlags:: ds 1 ; d969
+wDailyFlags1:: db ; d968
+wDailyFlags2:: db ; d969
 wd96a:: ds 1 ; d96a
 wd96b:: ds 1 ; d96b
 wd96c:: ds 1 ; d96c

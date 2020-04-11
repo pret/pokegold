@@ -139,10 +139,10 @@ GetPocketCapacity: ; d290 (3:5290)
 .asm_d29b
 	ld c, MAX_PC_ITEMS
 	ld a, e
-	cp wPCItems % $100
+	cp LOW(wNumPCItems)
 	jr nz, .asm_d2a6
 	ld a, d
-	cp wPCItems / $100
+	cp HIGH(wNumPCItems)
 	ret z
 .asm_d2a6
 	ld c, MAX_BALLS

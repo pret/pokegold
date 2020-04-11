@@ -1,4 +1,4 @@
-BillsPC_:
+_BillsPC:
 	call BillsPC_CheckHavePokemon
 	ret c
 	call BillsPC_LogIn
@@ -22,7 +22,7 @@ BillsPC_LogIn: ; e3f7 (3:63f7)
 	xor a
 	ldh [hBGMapMode], a
 	call LoadStandardMenuHeader
-	call Functione566
+	call ClearPCItemScreen
 	ld hl, wOptions
 	ld a, [hl]
 	push af
@@ -116,7 +116,7 @@ BillsPC_MovePKMNMenu:
 	jr c, .asm_e4cf
 	farcall MovePKMNWithoutMail_ ; 38:6f47
 	call ReturnToMapFromSubmenu
-	call Functione566
+	call ClearPCItemScreen
 .asm_e4cf
 	call CloseWindow
 	and a
@@ -130,7 +130,7 @@ BillsPC_DepositMenu:
 	call LoadStandardMenuHeader
 	farcall DepositPokemon_ ; 38:6b9e
 	call ReturnToMapFromSubmenu
-	call Functione566
+	call ClearPCItemScreen
 	call CloseWindow
 	and a
 	ret
@@ -196,7 +196,7 @@ BillsPC_WithdrawMenu:
 	call LoadStandardMenuHeader
 	farcall WithdrawPokemon_ ; 38:6d71
 	call ReturnToMapFromSubmenu
-	call Functione566
+	call ClearPCItemScreen
 	call CloseWindow
 	and a
 	ret
@@ -219,11 +219,11 @@ Text_CantTakeAnyMorePokemon:
 	db "@"
 
 BillsPC_ChangeBoxMenu:
-	farcall ChangeBox_ ; 38:7d25
+	farcall ChangeBox_
 	and a
 	ret
 
-Functione566: ; e566 (3:6566)
+ClearPCItemScreen:
 	call DisableSpriteUpdates
 	xor a
 	ldh [hBGMapMode], a

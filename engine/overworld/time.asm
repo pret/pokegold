@@ -87,7 +87,7 @@ CheckDailyResetTimer:
 	call Function1183b
 	ret nc
 	xor a
-	ld hl, wDailyFlags
+	ld hl, wDailyFlags1
 	ld [hli], a
 	ld [hl], a
 	jr asm_11867
@@ -170,12 +170,12 @@ Function118f8: ; 118f8 (4:58f8)
 	call Function11972
 	ret
 
-	ld hl, wDailyFlags
+	ld hl, wDailyFlags1
 	set 2, [hl]
 	ret
 
 	and a
-	ld hl, wDailyFlags
+	ld hl, wDailyFlags1
 	bit 2, [hl]
 	ret nz
 	scf

@@ -92,19 +92,19 @@
 	engine_flag_def ENGINE_LUCKY_NUMBER_SHOW,                     wLuckyNumberShowFlag, 0
 	engine_flag_def ENGINE_4E,                                    wStatusFlags2, 3
 
-	engine_flag_def ENGINE_KURT_MAKING_BALLS,                     wDailyFlags, 0 ; kurt making balls
-	engine_flag_def ENGINE_DAILY_BUG_CONTEST,                     wDailyFlags, 1 ; did bug catching contest today ; $50
-	engine_flag_def ENGINE_SPECIAL_WILDDATA,                      wDailyFlags, 2 ; special wilddata?
-	engine_flag_def ENGINE_TIME_CAPSULE,                          wDailyFlags, 3 ; time capsule (24h wait)
-	engine_flag_def ENGINE_ALL_FRUIT_TREES,                       wDailyFlags, 4 ; all fruit trees
-	engine_flag_def ENGINE_GOT_SHUCKIE_TODAY,                     wDailyFlags, 5 ; shuckle given
-	engine_flag_def ENGINE_GOLDENROD_UNDERGROUND_MERCHANT_CLOSED, wDailyFlags, 6 ; goldenrod underground merchant closed
-	engine_flag_def ENGINE_FOUGHT_IN_TRAINER_HALL_TODAY,          wDailyFlags, 7 ; fought in trainer hall today
+	engine_flag_def ENGINE_KURT_MAKING_BALLS,                     wDailyFlags1, 0 ; kurt making balls
+	engine_flag_def ENGINE_DAILY_BUG_CONTEST,                     wDailyFlags1, 1 ; did bug catching contest today ; $50
+	engine_flag_def ENGINE_SPECIAL_WILDDATA,                      wDailyFlags1, 2 ; special wilddata?
+	engine_flag_def ENGINE_TIME_CAPSULE,                          wDailyFlags1, 3 ; time capsule (24h wait)
+	engine_flag_def ENGINE_ALL_FRUIT_TREES,                       wDailyFlags1, 4 ; all fruit trees
+	engine_flag_def ENGINE_GOT_SHUCKIE_TODAY,                     wDailyFlags1, 5 ; shuckle given
+	engine_flag_def ENGINE_GOLDENROD_UNDERGROUND_MERCHANT_CLOSED, wDailyFlags1, 6 ; goldenrod underground merchant closed
+	engine_flag_def ENGINE_FOUGHT_IN_TRAINER_HALL_TODAY,          wDailyFlags1, 7 ; fought in trainer hall today
 
-	engine_flag_def ENGINE_MT_MOON_SQUARE_CLEFAIRY,               wWeeklyFlags, 0 ; mt moon square clefairy
-	engine_flag_def ENGINE_UNION_CAVE_LAPRAS,                     wWeeklyFlags, 1 ; union cave lapras  ; $58
-	engine_flag_def ENGINE_GOLDENROD_UNDERGROUND_GOT_HAIRCUT,     wWeeklyFlags, 2 ; goldenrod underground haircut used
-	engine_flag_def ENGINE_GOLDENROD_DEPT_STORE_TM27_RETURN,     wWeeklyFlags, 3 ; goldenrod mall happiness event floor05 person07
-	engine_flag_def ENGINE_DAISYS_GROOMING,                    wWeeklyFlags, 4 ; tea in blues house
-	engine_flag_def ENGINE_INDIGO_PLATEAU_RIVAL_FIGHT,            wWeeklyFlags, 5 ; indigo plateau rival fight
+	engine_flag_def ENGINE_MT_MOON_SQUARE_CLEFAIRY,               wDailyFlags2, 0 ; mt moon square clefairy
+	engine_flag_def ENGINE_UNION_CAVE_LAPRAS,                     wDailyFlags2, 1 ; union cave lapras  ; $58
+	engine_flag_def ENGINE_GOLDENROD_UNDERGROUND_GOT_HAIRCUT,     wDailyFlags2, 2 ; goldenrod underground haircut used
+	engine_flag_def ENGINE_GOLDENROD_DEPT_STORE_TM27_RETURN,      wDailyFlags2, 3 ; goldenrod mall happiness event floor05 person07
+	engine_flag_def ENGINE_DAISYS_GROOMING,                       wDailyFlags2, 4 ; tea in blues house
+	engine_flag_def ENGINE_INDIGO_PLATEAU_RIVAL_FIGHT,            wDailyFlags2, 5 ; indigo plateau rival fight
 NUM_ENGINE_FLAGS EQU const_value
