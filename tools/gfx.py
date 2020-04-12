@@ -61,6 +61,10 @@ mail_px16 = ['eon_mail_border_1', 'flower_1', 'flower_2', 'large_circle', 'large
 mail_px24 = ['cloud', 'ditto', 'dratini', 'eevee', 'lapras', 'mew', 'natu', 'poliwag']
 mail_border_stretch = ['surf_mail_border', 'flower_mail_border', 'litebluemail_border']
 
+overworld_px8 =  ['boulder_dust', 'fishing_rod', 'grass_rustle', 'heal_machine', 'shadow',
+                  'trainer_battle_pokeball_tiles']
+overworld_px16 = ['chris_fish', 'cut_grass', 'cut_tree', 'headbutt_tree']
+
 def filepath_rules(filepath):
     """Infer attributes of certain graphics by their location in the filesystem."""
     args = {}
@@ -141,10 +145,28 @@ def filepath_rules(filepath):
         if name == 'heal_machine':
             args['width'] = 8
             args['pal_file'] = os.path.join(filedir, name + '.pal')
+        elif name in overworld_px8:
+            args['width'] = 8
+        elif name in overworld_px16:
+            args['width'] = 16
 
     elif 'gfx/sgb_border' in filedir:
         args['width'] = 128
         args['pal_file'] = os.path.join(filedir, name + '.pal')
+
+    elif 'gfx/sprites' in filedir:
+        # TODO: this is incomplete
+        if name == 'big_onix':
+            args['width'] = 32
+            args['rows'] = [(0, 4), (0, 4), (1, 2), (1, 2)]
+        else:
+            args['width'] = 16
+
+    elif 'gfx/unknown' in filedir:
+        if name == 'gfx_170f1':
+            args['width'] = 128
+        elif name == 'gfx_17079':
+            args['width'] = 16
 
     elif os.path.join(filedir, name) in pics:
         args['pic'] = True
@@ -203,6 +225,9 @@ def to_png(filename, **kwargs):
     elif ext == '.2bpp':
         basedir, basename = os.path.split(filename)
         name, ext = os.path.splitext(basename)
+        # TODO: how to actually make big_onix.png (reusing one from pokecrystal for now)
+        if name == 'big_onix':
+            return
         if name in ['back_gold', 'back_silver']:
             kwargs['fileout'] = os.path.join(basedir, 'back.png')
         gfx.export_2bpp_to_png(filename, **kwargs)

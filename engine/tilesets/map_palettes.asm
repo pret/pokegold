@@ -1,5 +1,5 @@
 _SwapTextboxPalettes::
-	ld hl, wTilemap
+	hlcoord 0, 0
 	ld de, wAttrmap
 	ld b, SCREEN_HEIGHT
 .loop

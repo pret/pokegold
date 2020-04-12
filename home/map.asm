@@ -89,7 +89,7 @@ LoadMapPart:: ; 1fc8 (0:1fc8)
 	rst Bankswitch
 	call LoadMetatiles
 	ld a, $60
-	ld hl, wTilemap
+	hlcoord 0, 0
 	ld bc, $168
 	call ByteFill
 	ld a, $5
@@ -1475,7 +1475,7 @@ ScrollMapUp::
 	ret
 
 ScrollMapRight::
-	ld hl, wTilemap
+	hlcoord 0, 0
 	ld de, wBGMapBuffer
 	call BackupBGMapColumn
 	ld c, $24

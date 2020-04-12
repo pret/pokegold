@@ -79,10 +79,8 @@ INCLUDE "engine/menus/empty_sram.asm"
 INCLUDE "engine/menus/save.asm"
 INCLUDE "data/maps/spawn_points.asm"
 INCLUDE "engine/overworld/load_map_part.asm"
-	dr $153ba, $15440 ; random slots stuff?
 INCLUDE "engine/overworld/spawn_points.asm"
 INCLUDE "engine/overworld/map_setup.asm"
-	dr $156be, $15871 ; ?
 INCLUDE "engine/events/pokemon_pc.asm"
 INCLUDE "engine/items/mart.asm"
 INCLUDE "engine/events/money.asm"
@@ -91,7 +89,7 @@ INCLUDE "engine/events/mom.asm"
 INCLUDE "engine/events/daycare.asm"
 INCLUDE "engine/events/print_unown.asm"
 INCLUDE "engine/events/print_photo.asm"
-	dr $1704d, $171d1 ; ?
+INCLUDE "unknown/bank05_704d.asm"
 INCLUDE "engine/pokemon/breeding.asm"
 
 SECTION "bank6", ROMX

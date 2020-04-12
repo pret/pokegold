@@ -4,7 +4,7 @@ BlankScreen:
 	ldh [hBGMapMode], a
 	call ClearBGPalettes
 	call ClearSprites
-	ld hl, wTilemap
+	hlcoord 0, 0
 	ld bc, SCREEN_HEIGHT * SCREEN_WIDTH
 	ld a, " "
 	call ByteFill

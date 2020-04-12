@@ -926,7 +926,7 @@ Function12267: ; 12267 (4:6267)
 	ld a, BANK(MailIcon)
 	call FarCopyBytes
 	xor a
-	ld hl, wTilemapEnd
+	ld hl, wSpriteAnimDict
 	ld [hli], a
 	ld [hl], a
 	lb de, $18, $10

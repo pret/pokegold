@@ -258,7 +258,7 @@ ClearVBank1::
 	ret
 
 Functiond2a::
-	ld hl, wTilemap
+	hlcoord 0, 0
 	ld de, wAttrmap
 	ld bc, SCREEN_WIDTH * SCREEN_HEIGHT
 .asm_d33
