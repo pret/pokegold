@@ -500,39 +500,39 @@ UnknownText_0x1c5fd1::
 	text "Which #MON?"
 	prompt
 
-Text_DSTIsThatOK::
+_DSTIsThatOKText::
 	text " DST,"
 	line "is that OK?"
 	done
 
-UnknownText_0x1c5ff1::
+_TimeAskOkayText::
 	text ","
 	line "is that OK?"
 	done
 
-UnknownText_0x1c6000::
+_TimesetAskDSTText::
 	text "Do you want to"
 	line "switch to Daylight"
 	cont "Saving Time?"
 	done
 
-UnknownText_0x1c6030::
+_TimesetDSTText::
 	text "I set the clock"
 	line "forward by one"
 	cont "hour."
 	prompt
 
-UnknownText_0x1c6056::
+_TimesetAskNotDSTText::
 	text "Is Daylight Saving"
 	line "Time over?"
 	done
 
-UnknownText_0x1c6075::
+_TimesetNotDSTText::
 	text "I put the clock"
 	line "back one hour."
 	prompt
 
-UnknownText_0x1c6095::
+_TimesetAskAdjustDSTText::
 	text "Do you want to"
 	line "adjust your clock"
 
@@ -540,7 +540,7 @@ UnknownText_0x1c6095::
 	line "Saving Time?"
 	done
 
-UnknownText_0x1c60d1::
+_MomLostGearBookletText::
 	text "I lost the in-"
 	line "struction booklet"
 	cont "for the #GEAR."

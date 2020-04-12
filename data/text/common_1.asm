@@ -1191,7 +1191,7 @@ UnknownText_0x1bd6f5::
 	line "so cute!"
 	done
 
-UnknownText_0x1bd77f::
+_MomLeavingText1::
 	text "Wow, that's a cute"
 	line "#MON."
 
@@ -1219,14 +1219,14 @@ UnknownText_0x1bd77f::
 	line "save your money?"
 	done
 
-UnknownText_0x1bd868::
+_MomLeavingText2::
 	text "OK, I'll take care"
 	line "of your money."
 
 	para "<……><……><……>"
 	prompt
 
-UnknownText_0x1bd88e::
+_MomLeavingText3::
 	text "Be careful."
 
 	para "#MON are your"
@@ -1236,7 +1236,7 @@ UnknownText_0x1bd88e::
 	para "Now, go on!"
 	done
 
-UnknownText_0x1bd8da::
+_MomIsThisAboutYourMoneyText::
 	text "Hi! Welcome home!"
 	line "You're trying very"
 	cont "hard, I see."
@@ -1248,47 +1248,47 @@ UnknownText_0x1bd8da::
 	line "your money?"
 	done
 
-UnknownText_0x1bd942::
+_MomBankWhatDoYouWantToDoText::
 	text "What do you want"
 	line "to do?"
 	done
 
-UnknownText_0x1bd95b::
+_MomStoreMoneyText::
 	text "How much do you"
 	line "want to save?"
 	done
 
-UnknownText_0x1bd97a::
+_MomTakeMoneyText::
 	text "How much do you"
 	line "want to take?"
 	done
 
-UnknownText_0x1bd999::
+_MomSaveMoneyText::
 	text "Do you want to"
 	line "save some money?"
 	done
 
-UnknownText_0x1bd9ba::
+_MomHaventSavedThatMuchText::
 	text "You haven't saved"
 	line "that much."
 	prompt
 
-UnknownText_0x1bd9d7::
+_MomNotEnoughRoomInWalletText::
 	text "You can't take"
 	line "that much."
 	prompt
 
-UnknownText_0x1bd9f1::
+_MomInsufficientFundsInWalletText::
 	text "You don't have"
 	line "that much."
 	prompt
 
-UnknownText_0x1bda0b::
+_MomNotEnoughRoomInBankText::
 	text "You can't save"
 	line "that much."
 	prompt
 
-UnknownText_0x1bda25::
+_MomStartSavingMoneyText::
 	text "OK, I'll save your"
 	line "money. Trust me!"
 
@@ -1296,17 +1296,17 @@ UnknownText_0x1bda25::
 	line "with it!"
 	done
 
-UnknownText_0x1bda5b::
+_MomStoredMoneyText::
 	text "Your money's safe"
 	line "here! Get going!"
 	done
 
-UnknownText_0x1bda7e::
+_MomTakenMoneyText::
 	text "<PLAYER>, don't"
 	line "give up!"
 	done
 
-UnknownText_0x1bda90::
+_MomJustDoWhatYouCanText::
 	text "Just do what"
 	line "you can."
 	done

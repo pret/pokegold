@@ -85,21 +85,9 @@ INCLUDE "engine/overworld/map_setup.asm"
 	dr $156be, $15871 ; ?
 INCLUDE "engine/events/pokemon_pc.asm"
 INCLUDE "engine/items/mart.asm"
-
-GiveMoney:
-	dr $1622c, $1624f
-TakeMoney:
-	dr $1624f, $16260
-CompareMoney:
-	dr $16260, $162fe
-Marts:
-	dr $162fe, $16342
-.End:
-	dr $16342, $16469
-DefaultMart:
-	dr $16469, $1646d
-BankOfMom:
-	dr $1646d, $16935
+INCLUDE "engine/events/money.asm"
+INCLUDE "data/items/marts.asm"
+INCLUDE "engine/events/mom.asm"
 INCLUDE "engine/events/daycare.asm"
 Function16e3a:
 	dr $16e3a, $16ff7

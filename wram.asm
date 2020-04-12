@@ -2128,16 +2128,17 @@ wNamedObjectTypeBuffer:: ds 1 ; ce61
 wce62:: ds 1 ; ce62
 wce63::
 wJumptableIndex::
-	db ; ce63
-wce64:: ds 1 ; ce64
+	db
+wce64::
+wMomBankDigitCursorPosition::
+	db
 wce65::
 wIntroSceneTimer::
 wCurPocket::
-	db ; ce65
-
-wPackUsedItem::
+	db
 wce66::
-	db ; ce66
+wPackUsedItem::
+	db
 
 wRequested2bpp:: ds 1 ; ce67
 wRequested2bppSource:: dw ; ce68
@@ -3055,7 +3056,7 @@ wd1e4:: ds 1 ; d1e4
 wd1e5:: ds 1 ; d1e5
 wd1e6:: ds 1 ; d1e6
 wd1e7:: ds 1 ; d1e7
-wd1e8:: ds 1 ; d1e8
+wDST:: db ; d1e8
 wd1e9:: ds 1 ; d1e9
 
 wGameTimeCap::     ds 1 ; d1ea
@@ -3158,9 +3159,7 @@ wPlayerData3::
 wStatusFlags:: ds 1 ; d571
 wStatusFlags2:: ds 1 ; d572
 wMoney:: ds 3 ; d573
-wd576:: ds 1 ; d576
-wd577:: ds 1 ; d577
-wd578:: ds 1 ; d578
+wMomsMoney:: ds 3 ; d576
 wMomSavingMoney:: ds 1 ; d579
 
 wCoins:: dw ; d57a
