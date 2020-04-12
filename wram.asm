@@ -2130,6 +2130,7 @@ wce63::
 wJumptableIndex::
 	db
 wce64::
+wFrameCounter::
 wMomBankDigitCursorPosition::
 	db
 wce65::
@@ -2880,7 +2881,7 @@ wd133:: ds 1 ; d133
 wd134:: ds 1 ; d134
 wd135:: ds 1 ; d135
 wd136:: ds 1 ; d136
-wd137:: ds 1 ; d137
+wBaseEggGroups:: db
 wd138:: ds 1 ; d138
 wd139:: ds 1 ; d139
 wd13a:: ds 1 ; d13a
@@ -3867,6 +3868,9 @@ UNION ; dd40
 wPokedexShowPointerAddr:: dw
 wPokedexShowPointerBank:: db
 	ds 3
+
+NEXTU ; dd40
+wUnusedEggHatchFlag:: db
 
 NEXTU ; dd40
 ; enemy party

@@ -435,16 +435,16 @@ UnknownText_0x1c0d6c::
 	line "dug a hole!"
 	prompt
 
-UnknownText_0x1c0db0::
+Text_BreedHuh::
 	text "Huh?"
 
 	para "@@"
 
-UnknownText_0x1c0db8::
+_BreedClearboxText::
 	text_start
 	done
 
-UnknownText_0x1c0dba::
+_BreedEggHatchText::
 	text_ram wStringBuffer1
 	text " came"
 	line "out of its EGG!@"
@@ -452,14 +452,14 @@ UnknownText_0x1c0dba::
 	text_promptbutton
 	db "@"
 
-UnknownText_0x1c0dd8::
+_BreedAskNicknameText::
 	text "Give a nickname to"
 	line "@"
 	text_ram wStringBuffer1
 	text "?"
 	done
 
-UnknownText_0x1c0df3::
+_LeftWithDayCareLadyText::
 	text "It's @"
 	text_ram wBreedMon2Nick
 	text_start
@@ -467,7 +467,7 @@ UnknownText_0x1c0df3::
 	cont "the DAY-CARE LADY."
 	done
 
-UnknownText_0x1c0e24::
+_LeftWithDayCareManText::
 	text "It's @"
 	text_ram wDayCareMan + 1
 	text_start
@@ -475,33 +475,33 @@ UnknownText_0x1c0e24::
 	cont "the DAY-CARE MAN."
 	done
 
-UnknownText_0x1c0e54::
+_BreedBrimmingWithEnergyText::
 	text "It's brimming with"
 	line "energy."
 	prompt
 
-UnknownText_0x1c0e6f::
+_BreedNoInterestText::
 	text "It has no interest"
 	line "in @"
 	text_ram wStringBuffer1
 	text "."
 	prompt
 
-UnknownText_0x1c0e8d::
+_BreedAppearsToCareForText::
 	text "It appears to care"
 	line "for @"
 	text_ram wStringBuffer1
 	text "."
 	prompt
 
-UnknownText_0x1c0eac::
+_BreedFriendlyText::
 	text "It's friendly with"
 	line "@"
 	text_ram wStringBuffer1
 	text "."
 	prompt
 
-UnknownText_0x1c0ec6::
+_BreedShowsInterestText::
 	text "It shows interest"
 	line "in @"
 	text_ram wStringBuffer1

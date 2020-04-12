@@ -7,7 +7,7 @@ CanLearnTMHMMove: ; 11a25 (4:5a25)
 	ld a, [wPutativeTMHMMove]
 	ld b, a
 	ld c, $0
-	ld hl, TMMovesList
+	ld hl, TMHMMoves
 .asm_11a3b
 	ld a, [hli]
 	and a
@@ -34,7 +34,7 @@ CanLearnTMHMMove: ; 11a25 (4:5a25)
 GetTMHMMove: ; 11a56 (4:5a56)
 	ld a, [wd151]
 	dec a
-	ld hl, TMMovesList
+	ld hl, TMHMMoves
 	ld b, $0
 	ld c, a
 	add hl, bc
@@ -42,7 +42,7 @@ GetTMHMMove: ; 11a56 (4:5a56)
 	ld [wd151], a
 	ret
 
-TMMovesList:
+TMHMMoves:
 	db DYNAMICPUNCH
 	db HEADBUTT
 	db CURSE

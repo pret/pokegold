@@ -235,7 +235,7 @@ OverworldTownMap: ; c41a (3:441a)
 
 UnownPrinter: ; c427 (3:4427)
 	call FadeToMenu
-	farcall Function16e3a
+	farcall _UnownPrinter
 	call ExitAllMenus
 	ret
 

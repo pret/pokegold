@@ -68,7 +68,7 @@ GFPresents_Init: ; e49f3 (39:49f3)
 	lb bc, BANK(GFPresentsGFX2), 5
 	call Request2bpp
 
-	farcall ClearAnimatedObjectBuffer
+	farcall ClearSpriteAnims
 
 	ld hl, wSpriteAnimDict
 	ld a, 6
@@ -108,7 +108,7 @@ GFPresents_PlayFrame: ; e4a37 (39:4a37)
 	bit 7, a
 	jr nz, .finish
 
-	farcall AnimatedObjects_PlayFrame
+	farcall PlaySpriteAnimations
 
 	call GFPresents_HandleFrame
 	call DelayFrame
@@ -123,7 +123,7 @@ GFPresents_PlayFrame: ; e4a37 (39:4a37)
 	set 6, [hl]
 
 .finish
-	callfar ClearAnimatedObjectBuffer
+	callfar ClearSpriteAnims
 	call ClearTilemap
 	call ClearSprites
 

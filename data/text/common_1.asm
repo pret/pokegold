@@ -1518,28 +1518,28 @@ _NoRoomForEggText::
 	cont "Come back later."
 	done
 
-UnknownText_0x1be024::
+_WhichMonPhotoText::
 	text "Which #MON"
 	line "should I photo-"
 	cont "graph?"
 	prompt
 
-UnknownText_0x1be047::
+_HoldStillText::
 	text "All righty. Hold"
 	line "still for a bit."
 	prompt
 
-UnknownText_0x1be06a::
+_PrestoAllDoneText::
 	text "Presto! All done."
 	line "Come again, OK?"
 	done
 
-UnknownText_0x1c0000::
+_NoPhotoText::
 	text "Oh, no picture?"
 	line "Come again, OK?"
 	done
 
-UnknownText_0x1c0021::
+_EggPhotoText::
 	text "An EGG? My talent"
 	line "is worth more…"
 	done

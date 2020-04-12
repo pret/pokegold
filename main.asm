@@ -89,19 +89,10 @@ INCLUDE "engine/events/money.asm"
 INCLUDE "data/items/marts.asm"
 INCLUDE "engine/events/mom.asm"
 INCLUDE "engine/events/daycare.asm"
-Function16e3a:
-	dr $16e3a, $16ff7
-PhotoStudio:
-	dr $16ff7, $171d1
-
-CheckBreedmonCompatibility:
-	dr $171d1, $17467
-InitEggMoves:
-	dr $17467, $177a5
-DayCareMon1:
-	dr $177a5, $177c4
-DayCareMon2:
-	dr $177c4, $1783e
+INCLUDE "engine/events/print_unown.asm"
+INCLUDE "engine/events/print_photo.asm"
+	dr $1704d, $171d1 ; ?
+INCLUDE "engine/pokemon/breeding.asm"
 
 SECTION "bank6", ROMX
 	dr $18000, $1bdbc
@@ -112,7 +103,9 @@ LoadMapGroupRoof::
 	dr $1c000, $1f84c
 
 SECTION "bank8", ROMX
-	dr $20000, $23e3d
+	dr $20000, $239fe
+EggMovePointers:
+	dr $239fe, $23e3d
 
 SECTION "bank9", ROMX
 
@@ -495,9 +488,13 @@ INCBIN "gfx/pokemon/egg/front.2bpp.lz"
 SECTION "bank21", ROMX
 	dr $84000, $842db
 _PrinterReceive::
-	dr $842db, $845d4
+	dr $842db, $84560
+PrintUnownStamp:
+	dr $84560, $845d4
 PrintMailAndExit:
-	dr $845d4, $84684
+	dr $845d4, $84616
+PrintPartymon:
+	dr $84616, $84684
 Function84684:
 	dr $84684, $86632
 
@@ -505,6 +502,7 @@ _HallOfFamePC:
 	dr $86632, $87bfd
 
 SECTION "bank23", ROMX
+
 SaveMenu_CopyTilemapAtOnce:
 	dr $8c000, $8c17a
 ResetClock_:
@@ -547,11 +545,11 @@ FlyToAnimation:
 MagnetTrain:
 	dr $8ce7c, $8d174
 
-ClearAnimatedObjectBuffer:
+ClearSpriteAnims:
 	dr $8d174, $8d183
-AnimatedObjects_PlayFrameAndDelay:
+PlaySpriteAnimationsAndDelay:
 	dr $8d183, $8d18a
-AnimatedObjects_PlayFrame:
+PlaySpriteAnimations:
 	dr $8d18a, $8d1f7
 _InitSpriteAnimStruct::
 	dr $8d1f7, $8d332
@@ -559,7 +557,6 @@ _ReinitSpriteAnimFrame::
 
 IF DEF(_GOLD)
 	dr $8d332, $8e774
-
 ClearSpriteAnims2::
 	dr $8e774, $8e78b
 LoadOverworldMonIcon::
@@ -570,10 +567,8 @@ UnfreezeMonIcons::
 	dr $8e922, $8e93d
 HoldSwitchmonIcon::
 	dr $8e93d, $8fe43
-
 ELIF DEF(_SILVER)
 	dr $8d332, $8e75a
-
 ClearSpriteAnims2::
 	dr $8e75a, $8e771
 LoadOverworldMonIcon::
@@ -690,7 +685,7 @@ DummyPredef2F::
 INCLUDE "data/moves/animations.asm"
 
 LoadPoisonBGPals::
-	dr $cbc76, $cc000
+	dr $cbc76, $cbdba
 
 SECTION "bank33", ROMX
 
@@ -712,7 +707,9 @@ SECTION "bank36", ROMX
 SECTION "bank38", ROMX
 	dr $e0000, $e0002
 Functione0002:
-	dr $e0002, $e0909
+	dr $e0002, $e081b
+RotateUnownFrontpic:
+	dr $e081b, $e0909
 Functione0909:
 	dr $e0909, $e199d
 
@@ -729,7 +726,7 @@ MovePKMNWithoutMail_:
 	dr $e2f47, $e3d25
 
 ChangeBox_:
-	dr $e3d25, $e4000
+	dr $e3d25, $e3f74
 
 SECTION "bank39", ROMX
 

@@ -290,14 +290,14 @@ Function11cd4: ; 11cd4 (4:5cd4)
 	bit 7, a
 	jr nz, .asm_11cef
 	call Function11d27
-	farcall AnimatedObjects_PlayFrameAndDelay
+	farcall PlaySpriteAnimationsAndDelay
 	call Function11cff
 	call DelayFrame
 	and a
 	ret
 
 .asm_11cef
-	callfar ClearAnimatedObjectBuffer
+	callfar ClearSpriteAnims
 	call ClearSprites
 	xor a
 	ldh [hSCX], a
@@ -817,7 +817,7 @@ Function11fde: ; 11fde (4:5fde)
 
 Function1201e: ; 1201e (4:601e)
 	call ClearSprites
-	callfar ClearAnimatedObjectBuffer
+	callfar ClearSpriteAnims
 	call LoadStandardFont
 	call LoadFontsExtra
 	ld de, NamingScreenGFX_MiddleLine ; $6232
@@ -1005,14 +1005,14 @@ Function1238d: ; 1238d (4:638d)
 	bit 7, a
 	jr nz, .asm_123a8
 	call Function123d5
-	farcall AnimatedObjects_PlayFrameAndDelay
+	farcall PlaySpriteAnimationsAndDelay
 	call Function123b8
 	call DelayFrame
 	and a
 	ret
 
 .asm_123a8
-	callfar ClearAnimatedObjectBuffer
+	callfar ClearSpriteAnims
 	call ClearSprites
 	xor a
 	ldh [hSCX], a

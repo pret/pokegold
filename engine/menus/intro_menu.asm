@@ -1152,7 +1152,7 @@ InitTitleScreen: ; 6291 (1:6291)
 	ld bc, $2000
 	xor a
 	call ByteFill
-	farcall ClearAnimatedObjectBuffer
+	farcall ClearSpriteAnims
 
 	ld hl, TitleScreenGFX1
 	ld de, $9000
@@ -1331,7 +1331,7 @@ TitleScreenFrame: ; 63da (1:63da)
 	call Function640f
 	ld a, $1
 	ldh [hOAMUpdate], a
-	farcall AnimatedObjects_PlayFrame
+	farcall PlaySpriteAnimations
 	xor a
 	ldh [hOAMUpdate], a
 	call Function64b1
