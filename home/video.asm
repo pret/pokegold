@@ -399,7 +399,7 @@ AnimateTileset::
 
 Function1642::
 	nop
-	ldh a, [hVBlankCounter + 1]
+	ldh a, [hFF9E]
 	and a
 	ret z
 
@@ -409,7 +409,7 @@ Function1642::
 	jr z, .two
 
 	ld a, 2
-	ldh [hVBlankCounter + 1], a
+	ldh [hFF9E], a
 	ld hl, hBGMapAddress
 	ld a, [hli]
 	ld h, [hl]
@@ -437,7 +437,7 @@ endr
 	ld de, $320
 
 .go
-	ldh [hVBlankCounter + 1], a
+	ldh [hFF9E], a
 	ld hl, hBGMapAddress
 	ld a, [hli]
 	ld h, [hl]

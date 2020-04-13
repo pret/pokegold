@@ -1,5 +1,5 @@
 PALPACKET_LENGTH EQU $10
-INCLUDE "predef/sgb.asm"
+INCLUDE "engine/gfx/sgb_layouts.asm"
 
 SHINY_ATK_BIT EQU 5
 SHINY_DEF_VAL EQU 10
@@ -378,7 +378,7 @@ LoadMailPalettes:
 .MailPals:
 INCLUDE "gfx/mail/mail.pal"
 
-INCLUDE "predef/cgb.asm"
+INCLUDE "engine/gfx/cgb_layouts.asm"
 
 Function9a94: ; 9a94 (2:5a94)
 	ld hl, Palettes_9aaa

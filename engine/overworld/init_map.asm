@@ -60,10 +60,10 @@ Function656b: ; 656b (1:656b)
 	ld a, $1
 	ldh [hOAMUpdate], a
 	ld a, $3
-	ldh [hVBlankCounter + 1], a
+	ldh [hFF9E], a
 .asm_65bc
 	call DelayFrame
-	ldh a, [hVBlankCounter + 1]
+	ldh a, [hFF9E]
 	and a
 	jr nz, .asm_65bc
 	pop af

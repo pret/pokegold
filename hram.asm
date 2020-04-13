@@ -1,10 +1,8 @@
 SECTION "HRAM", HRAM
 
-hTransferVirtualOAM:: ds 12 ; ff80
+hTransferVirtualOAM:: ds 10 ; ff80
 
-hROMBankBackup:: db ; ff8c
-hBuffer:: db ; ff8d
-hSRAMBank:: db ; ff8e
+	ds 5
 
 hRTCDayHi::   db ; ff8f
 hRTCDayLo::   db ; ff90
@@ -23,13 +21,15 @@ hSeconds::  db ; ff9a
 	ds 1
 
 hVBlankCounter:: db ; ff9d
-	ds 1
+
+hFF9E:: db ; ff9e
 
 hROMBank::  db ; ff9f
-hVBlank ::  db ; ffa0
+hVBlank::   db ; ffa0
 hMapEntryMethod:: db ; ffa1
 hMenuReturn:: db ; ffa2
-	ds 1
+
+hFFA3:: db ; ffa3
 
 hJoypadReleased:: db ; ffa4
 hJoypadPressed::  db ; ffa5
@@ -110,7 +110,8 @@ hLCDCPointer::      db ; ffc8
 hLYOverrideStart::  db ; ffc9
 hLYOverrideEnd::    db ; ffca
 
-hMobileReceive::             db ; ffcb
+	ds 1
+
 hSerialReceivedNewData::     db ; ffcc
 hSerialConnectionStatus::    db ; ffcd
 hSerialIgnoringInitialData:: db ; ffce
@@ -144,7 +145,7 @@ hRandom::
 hRandomAdd:: db ; ffe3
 hRandomSub:: db ; ffe4
 
-hSecondsBackup:: db ; ffe5
+hUnusedBackup:: db ; ffe5
 
 hBattleTurn:: ; ffe6
 ; Which trainer's turn is it? 0: player, 1: opponent trainer
@@ -153,8 +154,3 @@ hBattleTurn:: ; ffe6
 hCGBPalUpdate:: db ; ffe7
 hCGB::          db ; ffe8
 hSGB::          db ; ffe9
-
-hDMATransfer:: db ; ffea
-hMobile:: db ; ffeb
-hSystemBooted:: db ; ffec
-hClockResetTrigger:: db ; ffed

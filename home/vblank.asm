@@ -136,7 +136,7 @@ VBlank0::
 	rst Bankswitch
 
 	ldh a, [hSeconds]
-	ldh [hSecondsBackup], a
+	ldh [hUnusedBackup], a
 
 	ret
 
@@ -387,7 +387,7 @@ VBlank3::
 
 	xor a
 	ldh [rIF], a
-	; enable ints 
+	; enable ints
 	ld a, %11111
 	ldh [rIE], a
 	ret
