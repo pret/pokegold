@@ -390,9 +390,9 @@ UltraBall: ; e926
 	ld [wBattleAnimParam], a
 	ld de, ANIM_THROW_POKE_BALL
 	ld a, e
-	ld [wcf3e], a
+	ld [wFXAnimID], a
 	ld a, d
-	ld [wcf3f], a
+	ld [wFXAnimID + 1], a
 	xor a
 	ldh [hBattleTurn], a
 	ld [wBuffer2], a
@@ -2537,9 +2537,9 @@ Functionf7e7: ; f7e7 (3:77e7)
 	call ReturnToBattle_UseBall
 	ld de, Start
 	ld a, e
-	ld [wcf3e], a
+	ld [wFXAnimID], a
 	ld a, d
-	ld [wcf3f], a
+	ld [wFXAnimID + 1], a
 	xor a
 	ld [wBattleAnimParam], a
 	ldh [hBattleTurn], a

@@ -279,67 +279,83 @@ SECTION "bankc", ROMX
 SECTION "Effect Commands", ROMX
 
 INCLUDE "engine/battle/effect_commands.asm"
-BattleCommand_Stab:
-	dr $34822, $34918
-BattleCheckTypeMatchup::
-	dr $34918, $34923
-CheckTypeMatchup::
-	dr $34923, $3499e
-INCLUDE "engine/battle/ai/switch.asm"
-	dr $34d01, $3503e
 
-BattleCommand_LowerSub:
-	dr $3503e, $3514e
-BattleCommand_SwitchTurn:
-	dr $3514e, $35155
-BattleCommand_RaiseSub:
-	dr $35155, $353f5
-EndMoveEffect:
-	dr $353f5, $3553d
-EnemyAttackDamage::
-	dr $3553d, $3571e
-HitSelfInConfusion:
-	dr $3571e, $35753
-BattleCommand_DamageCalc::
-	dr $35753, $35868
-BattleCommand_ConstantDamage::
-	dr $35868, $35e3c
-FarPlayBattleAnimation:
-	dr $35e3c, $35e44
-PlayFXAnimID:
-	dr $35e44, $35e58
-DoEnemyDamage:
-	dr $35e58, $35eba
-DoPlayerDamage:
-	dr $35eba, $35f7c
 UpdateMoveData:
-	dr $35f7c, $36313
+	dr $35f7c, $36201
 
+Defrost:
+	dr $36201, $36308
+BattleCommand_StatUp:
+	dr $36308, $36313
 RaiseStat:
 	dr $36313, $364d7
 BattleCommand_StatUpMessage:
 	dr $364d7, $3656b
 BattleCommand_StatUpFailText:
-	dr $3656b, $366f6
+	dr $3656b, $366ce
+BattleCommand_RaiseSubNoAnim:
+	dr $366ce, $366e2
+BattleCommand_LowerSubNoAnim:
+	dr $366e2, $366f6
 CalcPlayerStats:
-	dr $366f6, $378bd
+	dr $366f6, $3671c
+CalcEnemyStats:
+	dr $3671c, $36bcd
+CheckOpponentWentFirst:
+	dr $36bcd, $373dc
 
+ClearLastMove:
+	dr $373dc, $37441
+PrintDoesntAffect:
+	dr $37441, $37447
+PrintNothingHappened:
+	dr $37447, $3744d
+TryPrintButItFailed:
+	dr $3744d, $37452
+PrintButItFailed:
+	dr $37452, $37458
+FailMove:
+	dr $37458, $37464
+PrintDidntAffect:
+	dr $37464, $3746a
+PrintDidntAffect2:
+	dr $3746a, $3747c
+CheckSubstituteOpp:
+	dr $3747c, $3757a
+ResetTurn:
+	dr $3757a, $378bd
 ResetFuryCutterCount:
 	dr $378bd, $378f4
 CheckOppositeGender:
 	dr $378f4, $37e7d
 GetUserItem:
-	dr $37e7d, $37e9b
+	dr $37e7d, $37e8c
+GetOpponentItem:
+	dr $37e8c, $37e9b
 GetItemHeldEffect:
-	dr $37e9b, $37f3e
+	dr $37e9b, $37ecc
+AnimateCurrentMove:
+	dr $37ecc, $37f01
+LoadMoveAnim:
+	dr $37f01, $37f0f
+LoadAnim:
+	dr $37f0f, $37f3e
 CallBattleCore:
-	dr $37f3e, $37f4b
+	dr $37f3e, $37f42
+AnimateFailedMove:
+	dr $37f42, $37f4b
 BattleCommand_MoveDelay:
-	dr $37f4b, $37f6c
+	dr $37f4b, $37f57
+SkipToBattleCommand:
+	dr $37f57, $37f6c
 GetMoveAttr:
-	dr $37f6c, $37f86
+	dr $37f6c, $37f78
+GetMoveData:
+	dr $37f78, $37f86
 GetMoveByte:
-	dr $37f86, $37f99
+	dr $37f86, $37f92
+AppearUserLowerSub:
+	dr $37f92, $37f99
 AppearUserRaiseSub:
 	dr $37f99, $37fa0
 
@@ -355,7 +371,9 @@ INCLUDE "engine/battle/read_trainer_party.asm"
 SECTION "Battle Core", ROMX
 	dr $3c000, $3c551
 FleeMons::
-	dr $3c551, $3d39f
+	dr $3c551, $3c5a4
+GetMoveEffect:
+	dr $3c5a4, $3d39f
 
 EnemySwitch:
 	dr $3d39f, $3d438
@@ -825,7 +843,11 @@ CheckMagikarpLength:
 MagikarpHouseSign:
 	dr $fbdd6, $fbdf1
 HiddenPowerDamage:
-	dr $fbdf1, $fbf93
+	dr $fbdf1, $fbeaa
+DoWeatherModifiers:
+	dr $fbeaa, $fbf2b
+DoBadgeTypeBoosts:
+	dr $fbf2b, $fbf93
 
 SECTION "bank3f", ROMX
 	nop

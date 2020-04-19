@@ -1698,11 +1698,11 @@ wPlayerEncoreCount:: db ; cb54
 wcb55:: ds 1 ; cb55
 wPlayerFuryCutterCount:: db ; cb56
 wcb57:: ds 1 ; cb57
-wcb58:: ds 1 ; cb58
+wEnemyRolloutCount:: db ; cb58
 wEnemyConfuseCount:: db ; cb59
 wEnemyToxicCount:: db ; cb5a
 wEnemyDisableCount:: db ; cb5b
-wcb5c:: ds 1 ; cb5c
+wEnemyEncoreCount:: db ; cb5c
 wEnemyPerishCount:: db ; cb5d
 wEnemyFuryCutterCount:: db ; cb5e
 wEnemyProtectCount:: db ; cb5f
@@ -1761,29 +1761,25 @@ wcb8e:: ds 1 ; cb8e
 wcb8f:: ds 1 ; cb8f
 wBattleScriptBufferAddress:: dw ; cb90
 wTurnEnded:: db ; cb92
-wcb93:: ds 1 ; cb93
-wcb94:: ds 1 ; cb94
-wcb95:: ds 1 ; cb95
-wcb96:: ds 1 ; cb96
-wcb97:: ds 1 ; cb97
-wcb98:: ds 1 ; cb98
-wcb99:: ds 1 ; cb99
-wcb9a:: ds 1 ; cb9a
-wcb9b:: ds 1 ; cb9b
-wcb9c:: ds 1 ; cb9c
-wcb9d:: ds 1 ; cb9d
-wcb9e:: ds 1 ; cb9e
-wcb9f:: ds 1 ; cb9f
-wcba0:: ds 1 ; cba0
-wcba1:: ds 1 ; cba1
-wcba2:: ds 1 ; cba2
-wcba3:: ds 1 ; cba3
-wcba4:: ds 1 ; cba4
-wcba5:: ds 1 ; cba5
-wcba6:: ds 1 ; cba6
-wcba7:: ds 1 ; cba7
-wcba8:: ds 1 ; cba8
-wcba9:: ds 1 ; cba9
+
+	ds 1
+
+wPlayerStats:: ; cb94
+wPlayerAttack:: dw
+wPlayerDefense:: dw
+wPlayerSpeed:: dw
+wPlayerSpAtk:: dw
+wPlayerSpDef:: dw
+	ds 1
+
+wEnemyStats:: ; cb9f
+wEnemyAttack:: dw
+wEnemyDefense:: dw
+wEnemySpeed:: dw
+wEnemySpAtk:: dw
+wEnemySpDef:: dw
+	ds 1
+
 wPlayerAtkLevel:: db ; cbaa
 wPlayerDefLevel:: db ; cbab
 wPlayerSpdLevel:: db ; cbac
@@ -1803,8 +1799,8 @@ wEnemyEvaLevel:: db ; cbb8
 wEnemyTurnsTaken:: db ; cbba
 wPlayerTurnsTaken:: db ; cbbb
 wcbbc:: ds 1 ; cbbc
-wcbbd:: ds 1 ; cbbd
-wcbbe:: ds 1 ; cbbe
+wPlayerSubstituteHP:: db ; cbbd
+wEnemySubstituteHP:: db ; cbbe
 wcbbf:: ds 1 ; cbbf
 wcbc0:: ds 1 ; cbc0
 wCurPlayerMove:: ds 1 ; cbc1
@@ -1882,9 +1878,9 @@ wcc05:: ds 1 ; cc05
 wcc06:: ds 1 ; cc06
 wcc07:: ds 1 ; cc07
 wcc08:: ds 1 ; cc08
-wcc09:: ds 1 ; cc09
+wPlayerRageCounter:: db ; cc09
 wEnemyRageCounter:: db ; cc0a
-wcc0b:: ds 1 ; cc0b
+wBeatUpHitAtLeastOnce:: db ; cc0b
 wcc0c:: ds 1 ; cc0c
 wcc0d:: ds 1 ; cc0d
 wPlayerWrapCount:: db ; cc0e
@@ -2490,8 +2486,7 @@ wcf3a:: ds 1
 wBoxAlignment:: db
 wcf3c:: ds 1
 wcf3d:: ds 1
-wcf3e:: ds 1
-wcf3f:: ds 1
+wFXAnimID:: dw
 ENDU
 
 wcf40:: ds 1 ; cf40
@@ -2864,8 +2859,8 @@ wBaseDexNo:: ; d120
 wCurBaseData:: ; d120
 wd120:: ds 1 ; d120
 wd121:: ds 1 ; d121
-wd122:: ds 1 ; d122
-wd123:: ds 1 ; d123
+wBaseAttack:: db ; d122
+wBaseDefense:: db ; d123
 wd124:: ds 1 ; d124
 wd125:: ds 1 ; d125
 wd126:: ds 1 ; d126
