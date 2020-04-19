@@ -1692,12 +1692,12 @@ wEnemySubStatus4:: ds 1 ; cb4e
 wEnemySubStatus5:: ds 1 ; cb4f
 wPlayerRolloutCount:: db ; cb50
 wPlayerConfuseCount:: db ; cb51
-wcb52:: ds 1 ; cb52
+wPlayerToxicCount:: db ; cb52
 wPlayerDisableCount:: db ; cb53
 wPlayerEncoreCount:: db ; cb54
-wcb55:: ds 1 ; cb55
+wPlayerPerishCount:: db ; cb55
 wPlayerFuryCutterCount:: db ; cb56
-wcb57:: ds 1 ; cb57
+wPlayerProtectCount:: db ; cb57
 wEnemyRolloutCount:: db ; cb58
 wEnemyConfuseCount:: db ; cb59
 wEnemyToxicCount:: db ; cb5a
@@ -1716,9 +1716,10 @@ wBattleReward::
 wcb64:: ds 1 ; cb64
 wcb65:: ds 1 ; cb65
 wcb66:: ds 1 ; cb66
-wKickCounter:: ; cb67
 wBattleAnimParam::
-	db
+wKickCounter::
+wPresentPower::
+	db ; cb67
 wBattleScriptBuffer:: db ; cb68
 wcb69:: ds 1 ; cb69
 wcb6a:: ds 1 ; cb6a
@@ -1780,6 +1781,8 @@ wEnemySpAtk:: dw
 wEnemySpDef:: dw
 	ds 1
 
+wPlayerStatLevels:: ; cbaa
+; 07 neutral
 wPlayerAtkLevel:: db ; cbaa
 wPlayerDefLevel:: db ; cbab
 wPlayerSpdLevel:: db ; cbac
@@ -1788,6 +1791,10 @@ wPlayerSDefLevel:: db ; cbae
 wPlayerAccLevel:: db ; cbaf
 wPlayerEvaLevel:: db ; cbb0
 	ds 1
+wPlayerStatLevelsEnd::
+
+wEnemyStatLevels:: ; cbb2
+; 07 neutral
 wEnemyAtkLevel:: db ; cbb2
 wEnemyDefLevel:: db ; cbb3
 wEnemySpdLevel:: db ; cbb4
@@ -1796,6 +1803,8 @@ wEnemySDefLevel:: db ; cbb6
 wEnemyAccLevel:: db ; cbb7
 wEnemyEvaLevel:: db ; cbb8
 	ds 1
+wEnemyStatLevelsEnd::
+
 wEnemyTurnsTaken:: db ; cbba
 wPlayerTurnsTaken:: db ; cbbb
 wcbbc:: ds 1 ; cbbc
@@ -1817,8 +1826,7 @@ wPayDayMoney:: ds 3 ; cbca
 wcbcd:: ds 1 ; cbcd
 wcbce:: ds 1 ; cbce
 wcbcf:: ds 1 ; cbcf
-wcbd0:: ds 1 ; cbd0
-wcbd1:: ds 1 ; cbd1
+wEnemyBackupDVs:: dw
 wAlreadyDisobeyed:: db ; cbd2
 wDisabledMove:: db ; cbd3
 wEnemyDisabledMove:: db ; cbd4
@@ -1828,29 +1836,29 @@ wcbd5:: ds 1 ; cbd5
 wLastPlayerCounterMove:: db ; cbd6
 wLastEnemyCounterMove:: db ; cbd7
 
-wcbd8:: ds 1 ; cbd8
+wEnemyMinimized:: db ; cbd8
 wAlreadyFailed:: db ; cbd9
 wcbda:: ds 1 ; cbda
 wcbdb:: ds 1 ; cbdb
 wPlayerMinimized:: db ; cbdc
 wPlayerScreens:: db ; cbdd
 wEnemyScreens:: db ; cbde
-wcbdf:: ds 1 ; cbdf
-wcbe0:: ds 1 ; cbe0
+wPlayerSafeguardCount:: db ; cbdf
+wPlayerLightScreenCount:: db ; cbe0
 wcbe1:: ds 1 ; cbe1
 wcbe2:: ds 1 ; cbe2
-wcbe3:: ds 1 ; cbe3
-wcbe4:: ds 1 ; cbe4
+wEnemySafeguardCount:: db ; cbe3
+wEnemyLightScreenCount:: db ; cbe4
 wcbe5:: ds 1 ; cbe5
 wcbe6:: ds 1 ; cbe6
 wcbe7:: ds 1 ; cbe7
 wBattleWeather:: db ; cbe8
-wcbe9:: ds 1 ; cbe9
-wcbea:: ds 1 ; cbea
+wWeatherCount:: db ; cbe9
+wLoweredStat:: db ; cbea
 wEffectFailed:: db ; cbeb
-wcbec:: ds 1 ; cbec
+wFailedMessage:: db ; cbec
 wEnemyGoesFirst:: db ; cbed
-wcbee:: ds 1 ; cbee
+wPlayerIsSwitching:: db ; cbee
 wEnemyIsSwitching:: db ; cbef
 wPlayerUsedMoves:: ; cbf0
 ; add a move that has been used once by the player
@@ -1864,8 +1872,8 @@ wcbf7:: ds 1 ; cbf7
 wcbf8:: ds 1 ; cbf8
 wLastPlayerMove:: ds 1 ; cbf9
 wLastEnemyMove:: ds 1 ; cbfa
-wcbfb:: ds 1 ; cbfb
-wcbfc:: ds 1 ; cbfc
+wPlayerFutureSightCount:: db ; cbfb
+wEnemyFutureSightCount:: db ; cbfc
 wcbfd:: ds 1 ; cbfd
 wcbfe:: ds 1 ; cbfe
 wcbff:: ds 1 ; cbff
@@ -1874,15 +1882,13 @@ wcc01:: ds 1 ; cc01
 wcc02:: ds 1 ; cc02
 wcc03:: ds 1 ; cc03
 wcc04:: ds 1 ; cc04
-wcc05:: ds 1 ; cc05
-wcc06:: ds 1 ; cc06
-wcc07:: ds 1 ; cc07
-wcc08:: ds 1 ; cc08
+wPlayerFutureSightDamage:: dw ; cc05
+wEnemyFutureSightDamage:: dw ; cc07
 wPlayerRageCounter:: db ; cc09
 wEnemyRageCounter:: db ; cc0a
 wBeatUpHitAtLeastOnce:: db ; cc0b
-wcc0c:: ds 1 ; cc0c
-wcc0d:: ds 1 ; cc0d
+wPlayerTrappingMove:: db ; cc0c
+wEnemyTrappingMove:: db ; cc0d
 wPlayerWrapCount:: db ; cc0e
 wEnemyWrapCount:: db ; cc0f
 wPlayerCharging:: db ; cc10
@@ -1895,8 +1901,8 @@ wWildMonPP:: ds NUM_MOVES ; cc17
 
 wcc1b:: ds 1 ; cc1b
 wSomeoneIsRampaging:: db ; cc1c
-wcc1d:: ds 1 ; cc1d
-wcc1e:: ds 1 ; cc1e
+wPlayerJustGotFrozen:: db ; cc1d
+wEnemyJustGotFrozen:: db ; cc1e
 wcc1f:: ds 1 ; cc1f
 ENDU ; cc20
 
@@ -2847,12 +2853,12 @@ wOtherTrainerClass:: ; d118
 ; 0 if opponent is a wild Pokémon, not a trainer
 	db
 
-wBattleType:: ds 1 ; d119
+wBattleType:: db ; d119
 wd11a:: ds 1 ; d11a
 wOtherTrainerID:: db ; d11b
-wd11c:: ds 1 ; d11c
-wTrainerClass:: ds 1 ; d11d
-wUnownLetter:: ds 1 ; d11e
+wForcedSwitch:: db ; d11c
+wTrainerClass:: db ; d11d
+wUnownLetter:: db ; d11e
 wd11f:: ds 1 ; d11f
 
 wBaseDexNo:: ; d120

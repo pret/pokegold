@@ -372,65 +372,65 @@ _EndUsedMove5Text::
 	text "!"
 	done
 
-UnknownText_0x1c0cc6::
+Text_BattleEffectActivate::
 	text "<USER>'s"
 	line "@"
 	text_ram wStringBuffer2
 	db "@@"
 
-UnknownText_0x1c0cd0::
+_BattleStatWentWayUpText::
 	text_pause
 	text "<SCROLL>went way up!"
 	prompt
 
-UnknownText_0x1c0ce0::
+_BattleStatWentUpText::
 	text " went up!"
 	prompt
 
-UnknownText_0x1c0ceb::
+Text_BattleFoeEffectActivate::
 	text "<TARGET>'s"
 	line "@"
 	text_ram wStringBuffer2
 	db "@@"
 
-UnknownText_0x1c0cf5::
+_BattleStatSharplyFellText::
 	text_pause
 	text "<SCROLL>sharply fell!"
 	prompt
 
-UnknownText_0x1c0d06::
+_BattleStatFellText::
 	text " fell!"
 	prompt
 
-UnknownText_0x1c0d0e::
+Text_BattleUser::
 	text "<USER>@@"
 
-UnknownText_0x1c0d12::
+_BattleMadeWhirlwindText::
 	text_start
 	line "made a whirlwind!"
 	prompt
 
-UnknownText_0x1c0d26::
+_BattleTookSunlightText::
 	text_start
 	line "took in sunlight!"
 	prompt
 
-UnknownText_0x1c0d3a::
+_BattleLoweredHeadText::
 	text_start
 	line "lowered its head!"
 	prompt
 
-UnknownText_0x1c0d4e::
+_BattleGlowingText::
 	text_start
 	line "is glowing!"
 	prompt
 
-UnknownText_0x1c0d5c::
+_BattleFlewText::
 	text_start
 	line "flew up high!"
 	prompt
 
-UnknownText_0x1c0d6c::
+_BattleDugText::
 	text_start
 	line "dug a hole!"
 	prompt

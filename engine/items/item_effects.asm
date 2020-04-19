@@ -443,7 +443,7 @@ UltraBall: ; e926
 
 .not_ditto
 	set SUBSTATUS_TRANSFORMED, [hl]
-	ld hl, wcbd0
+	ld hl, wEnemyBackupDVs
 	ld a, [wEnemyMonDVs]
 	ld [hli], a
 	ld a, [wEnemyMonMovesEnd + 1]
@@ -1975,7 +1975,7 @@ PokeDoll: ; f4e5 (3:74e5)
 	dec a
 	jr nz, .asm_f4f6
 	inc a
-	ld [wd11c], a
+	ld [wForcedSwitch], a
 	inc a
 	ld [wBattleResult], a
 	jp Functionf7d0

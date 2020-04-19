@@ -280,85 +280,6 @@ SECTION "Effect Commands", ROMX
 
 INCLUDE "engine/battle/effect_commands.asm"
 
-UpdateMoveData:
-	dr $35f7c, $36201
-
-Defrost:
-	dr $36201, $36308
-BattleCommand_StatUp:
-	dr $36308, $36313
-RaiseStat:
-	dr $36313, $364d7
-BattleCommand_StatUpMessage:
-	dr $364d7, $3656b
-BattleCommand_StatUpFailText:
-	dr $3656b, $366ce
-BattleCommand_RaiseSubNoAnim:
-	dr $366ce, $366e2
-BattleCommand_LowerSubNoAnim:
-	dr $366e2, $366f6
-CalcPlayerStats:
-	dr $366f6, $3671c
-CalcEnemyStats:
-	dr $3671c, $36bcd
-CheckOpponentWentFirst:
-	dr $36bcd, $373dc
-
-ClearLastMove:
-	dr $373dc, $37441
-PrintDoesntAffect:
-	dr $37441, $37447
-PrintNothingHappened:
-	dr $37447, $3744d
-TryPrintButItFailed:
-	dr $3744d, $37452
-PrintButItFailed:
-	dr $37452, $37458
-FailMove:
-	dr $37458, $37464
-PrintDidntAffect:
-	dr $37464, $3746a
-PrintDidntAffect2:
-	dr $3746a, $3747c
-CheckSubstituteOpp:
-	dr $3747c, $3757a
-ResetTurn:
-	dr $3757a, $378bd
-ResetFuryCutterCount:
-	dr $378bd, $378f4
-CheckOppositeGender:
-	dr $378f4, $37e7d
-GetUserItem:
-	dr $37e7d, $37e8c
-GetOpponentItem:
-	dr $37e8c, $37e9b
-GetItemHeldEffect:
-	dr $37e9b, $37ecc
-AnimateCurrentMove:
-	dr $37ecc, $37f01
-LoadMoveAnim:
-	dr $37f01, $37f0f
-LoadAnim:
-	dr $37f0f, $37f3e
-CallBattleCore:
-	dr $37f3e, $37f42
-AnimateFailedMove:
-	dr $37f42, $37f4b
-BattleCommand_MoveDelay:
-	dr $37f4b, $37f57
-SkipToBattleCommand:
-	dr $37f57, $37f6c
-GetMoveAttr:
-	dr $37f6c, $37f78
-GetMoveData:
-	dr $37f78, $37f86
-GetMoveByte:
-	dr $37f86, $37f92
-AppearUserLowerSub:
-	dr $37f92, $37f99
-AppearUserRaiseSub:
-	dr $37f99, $37fa0
-
 
 SECTION "Enemy Trainers", ROMX
 
@@ -373,10 +294,32 @@ SECTION "Battle Core", ROMX
 FleeMons::
 	dr $3c551, $3c5a4
 GetMoveEffect:
-	dr $3c5a4, $3d39f
+	dr $3c5a4, $3cbe7
+SubtractHPFromUser:
+	dr $3cbe7, $3cc2b
+GetEighthMaxHP:
+	dr $3cc2b, $3cc36
+GetQuarterMaxHP:
+	dr $3cc36, $3cc47
+GetHalfMaxHP:
+	dr $3cc47, $3cc54
+GetMaxHP:
+	dr $3cc54, $3cc86
+CheckUserHasEnoughHP:
+	dr $3cc86, $3cc97
+RestoreHP:
+	dr $3cc97, $3d224
 
+SetUpBattlePartyMenu_NoLoop:
+	dr $3d224, $3d28f
+ForcePickSwitchMonInBattle:
+	dr $3d28f, $3d381
+ForceEnemySwitch:
+	dr $3d381, $3d39f
 EnemySwitch:
-	dr $3d39f, $3d438
+	dr $3d39f, $3d3d5
+EnemySwitch_SetMode:
+	dr $3d3d5, $3d438
 ResetBattleParticipants:
 	dr $3d438, $3d6cb
 NewEnemyMonStatus:
@@ -388,27 +331,57 @@ CheckPlayerPartyForFitMon::
 Function3d8f5:
 	dr $3d8f5, $3d907
 Function3d907:
-	dr $3d907, $3dabc
+	dr $3d907, $3d9a2
+SwitchPlayerMon:
+	dr $3d9a2, $3da84
+SpikesDamage:
+	dr $3da84, $3dabc
 PursuitSwitch:
-	dr $3dabc, $3dda9
+	dr $3dabc, $3dc4a
+UseHeldStatusHealingItem:
+	dr $3dc4a, $3dcb2
+UseConfusionHealingItem:
+	dr $3dcb2, $3dda9
 UpdatePlayerHUD::
-	dr $3dda9, $3de97
+	dr $3dda9, $3ddb9
+DrawPlayerHUD:
+	dr $3ddb9, $3de97
 UpdateEnemyHUD::
-	dr $3de97, $3e6e8
+	dr $3de97, $3dea4
+DrawEnemyHUD:
+	dr $3dea4, $3e290
 
+PassedBattleMonEntrance:
+	dr $3e290, $3e6e8
 CheckEnemyLockedIn::
-	dr $3e6e8, $3e74b
+	dr $3e6e8, $3e6fb
+LinkBattleSendReceiveAction:
+	dr $3e6fb, $3e74b
 LoadEnemyMon:
-	dr $3e74b, $3ec11
+	dr $3e74b, $3ea77
+ApplyPrzEffectOnSpeed:
+	dr $3ea77, $3eab4
+ApplyBrnEffectOnAttack:
+	dr $3eab4, $3eae9
+ApplyStatLevelMultiplierOnAllStats:
+	dr $3eae9, $3eb83
+BadgeStatBoosts:
+	dr $3eb83, $3ebd8
+_LoadBattleFontsHPBar:
+	dr $3ebd8, $3ec11
 _BattleRandom::
 	dr $3ec11, $3f196
 
 FillInExpBar::
 	dr $3f196, $3f243
 GetBattleMonBackpic::
-	dr $3f243, $3f282
+	dr $3f243, $3f24d
+DropPlayerSub:
+	dr $3f24d, $3f282
 GetEnemyMonFrontpic::
-	dr $3f282, $3f2c7
+	dr $3f282, $3f28c
+DropEnemySub:
+	dr $3f28c, $3f2c7
 StartBattle::
 	dr $3f2c7, $3f55d
 Function3f55d:
@@ -843,7 +816,13 @@ CheckMagikarpLength:
 MagikarpHouseSign:
 	dr $fbdd6, $fbdf1
 HiddenPowerDamage:
-	dr $fbdf1, $fbeaa
+	dr $fbdf1, $fbe5a
+_DisappearUser:
+	dr $fbe5a, $fbe6f
+_AppearUserRaiseSub:
+	dr $fbe6f, $fbe77
+_AppearUserLowerSub:
+	dr $fbe77, $fbeaa
 DoWeatherModifiers:
 	dr $fbeaa, $fbf2b
 DoBadgeTypeBoosts:
