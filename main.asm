@@ -275,8 +275,10 @@ PrintMoveDesc::
 SECTION "bankc", ROMX
 	dr $30000, $33d81
 
-SECTION "bankd", ROMX
-	dr $34000, $34822
+
+SECTION "Effect Commands", ROMX
+
+INCLUDE "engine/battle/effect_commands.asm"
 BattleCommand_Stab:
 	dr $34822, $34918
 BattleCheckTypeMatchup::
@@ -284,14 +286,34 @@ BattleCheckTypeMatchup::
 CheckTypeMatchup::
 	dr $34923, $3499e
 INCLUDE "engine/battle/ai/switch.asm"
-	dr $34d01, $3553d
+	dr $34d01, $3503e
 
+BattleCommand_LowerSub:
+	dr $3503e, $3514e
+BattleCommand_SwitchTurn:
+	dr $3514e, $35155
+BattleCommand_RaiseSub:
+	dr $35155, $353f5
+EndMoveEffect:
+	dr $353f5, $3553d
 EnemyAttackDamage::
-	dr $3553d, $35753
+	dr $3553d, $3571e
+HitSelfInConfusion:
+	dr $3571e, $35753
 BattleCommand_DamageCalc::
 	dr $35753, $35868
 BattleCommand_ConstantDamage::
-	dr $35868, $36313
+	dr $35868, $35e3c
+FarPlayBattleAnimation:
+	dr $35e3c, $35e44
+PlayFXAnimID:
+	dr $35e44, $35e58
+DoEnemyDamage:
+	dr $35e58, $35eba
+DoPlayerDamage:
+	dr $35eba, $35f7c
+UpdateMoveData:
+	dr $35f7c, $36313
 
 RaiseStat:
 	dr $36313, $364d7
@@ -300,25 +322,37 @@ BattleCommand_StatUpMessage:
 BattleCommand_StatUpFailText:
 	dr $3656b, $366f6
 CalcPlayerStats:
-	dr $366f6, $378f4
+	dr $366f6, $378bd
 
+ResetFuryCutterCount:
+	dr $378bd, $378f4
 CheckOppositeGender:
-	dr $378f4, $37e9b
+	dr $378f4, $37e7d
+GetUserItem:
+	dr $37e7d, $37e9b
 GetItemHeldEffect:
-	dr $37e9b, $37f6c
+	dr $37e9b, $37f3e
+CallBattleCore:
+	dr $37f3e, $37f4b
+BattleCommand_MoveDelay:
+	dr $37f4b, $37f6c
 GetMoveAttr:
 	dr $37f6c, $37f86
 GetMoveByte:
-	dr $37f86, $37fa0
+	dr $37f86, $37f99
+AppearUserRaiseSub:
+	dr $37f99, $37fa0
 
-SECTION "banke", ROMX
+
+SECTION "Enemy Trainers", ROMX
 
 INCLUDE "engine/battle/ai/items.asm"
 INCLUDE "engine/battle/ai/scoring.asm"
 INCLUDE "engine/battle/read_trainer_attributes.asm"
 INCLUDE "engine/battle/read_trainer_party.asm"
 
-SECTION "bankf", ROMX
+
+SECTION "Battle Core", ROMX
 	dr $3c000, $3c551
 FleeMons::
 	dr $3c551, $3d39f
@@ -360,7 +394,9 @@ GetEnemyMonFrontpic::
 StartBattle::
 	dr $3f2c7, $3f55d
 Function3f55d:
-	dr $3f55d, $3fe9b
+	dr $3f55d, $3fd3d
+BattleCommandPointers:
+	dr $3fd3d, $3fe9b
 
 SECTION "bank10", ROMX
 

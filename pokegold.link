@@ -63,14 +63,11 @@ ROMX $0c
 	org $4000
 	"bankc"
 ROMX $0d
-	org $4000
-	"bankd"
+	"Effect Commands"
 ROMX $0e
-	org $4000
-	"banke"
+	"Enemy Trainers"
 ROMX $0f
-	org $4000
-	"bankf"
+	"Battle Core"
 ROMX $10
 	org $4000
 	"bank10"

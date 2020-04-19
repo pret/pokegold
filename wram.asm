@@ -1677,9 +1677,9 @@ wcb3f:: ds 1 ; cb3f
 wcb40:: ds 1 ; cb40
 wCurOTMon:: ds 1 ; cb41
 wcb42:: ds 1 ; cb42
-wcb43:: ds 1 ; cb43
-wcb44:: ds 1 ; cb44
-wcb45:: ds 1 ; cb45
+wTypeModifier:: db ; cb43
+wCriticalHit:: db ; cb44
+wAttackMissed:: db ; cb45
 wPlayerSubStatus1:: ds 1 ; cb46
 wPlayerSubStatus2:: ds 1 ; cb47
 wPlayerSubStatus3:: ds 1 ; cb48
@@ -1691,17 +1691,17 @@ wEnemySubStatus3:: ds 1 ; cb4d
 wEnemySubStatus4:: ds 1 ; cb4e
 wEnemySubStatus5:: ds 1 ; cb4f
 wPlayerRolloutCount:: db ; cb50
-wcb51:: ds 1 ; cb51
+wPlayerConfuseCount:: db ; cb51
 wcb52:: ds 1 ; cb52
 wPlayerDisableCount:: db ; cb53
-wcb54:: ds 1 ; cb54
+wPlayerEncoreCount:: db ; cb54
 wcb55:: ds 1 ; cb55
 wPlayerFuryCutterCount:: db ; cb56
 wcb57:: ds 1 ; cb57
 wcb58:: ds 1 ; cb58
 wEnemyConfuseCount:: db ; cb59
 wEnemyToxicCount:: db ; cb5a
-wcb5b:: ds 1 ; cb5b
+wEnemyDisableCount:: db ; cb5b
 wcb5c:: ds 1 ; cb5c
 wEnemyPerishCount:: db ; cb5d
 wEnemyFuryCutterCount:: db ; cb5e
@@ -1716,8 +1716,10 @@ wBattleReward::
 wcb64:: ds 1 ; cb64
 wcb65:: ds 1 ; cb65
 wcb66:: ds 1 ; cb66
-wcb67:: ds 1 ; cb67
-wcb68:: ds 1 ; cb68
+wKickCounter:: ; cb67
+wBattleAnimParam::
+	db
+wBattleScriptBuffer:: db ; cb68
 wcb69:: ds 1 ; cb69
 wcb6a:: ds 1 ; cb6a
 wcb6b:: ds 1 ; cb6b
@@ -1757,9 +1759,8 @@ wcb8c:: ds 1 ; cb8c
 wcb8d:: ds 1 ; cb8d
 wcb8e:: ds 1 ; cb8e
 wcb8f:: ds 1 ; cb8f
-wcb90:: ds 1 ; cb90
-wcb91:: ds 1 ; cb91
-wcb92:: ds 1 ; cb92
+wBattleScriptBufferAddress:: dw ; cb90
+wTurnEnded:: db ; cb92
 wcb93:: ds 1 ; cb93
 wcb94:: ds 1 ; cb94
 wcb95:: ds 1 ; cb95
@@ -1822,7 +1823,7 @@ wcbce:: ds 1 ; cbce
 wcbcf:: ds 1 ; cbcf
 wcbd0:: ds 1 ; cbd0
 wcbd1:: ds 1 ; cbd1
-wcbd2:: ds 1 ; cbd2
+wAlreadyDisobeyed:: db ; cbd2
 wDisabledMove:: db ; cbd3
 wEnemyDisabledMove:: db ; cbd4
 wcbd5:: ds 1 ; cbd5
@@ -1832,7 +1833,7 @@ wLastPlayerCounterMove:: db ; cbd6
 wLastEnemyCounterMove:: db ; cbd7
 
 wcbd8:: ds 1 ; cbd8
-wcbd9:: ds 1 ; cbd9
+wAlreadyFailed:: db ; cbd9
 wcbda:: ds 1 ; cbda
 wcbdb:: ds 1 ; cbdb
 wPlayerMinimized:: db ; cbdc
@@ -1850,7 +1851,7 @@ wcbe7:: ds 1 ; cbe7
 wBattleWeather:: db ; cbe8
 wcbe9:: ds 1 ; cbe9
 wcbea:: ds 1 ; cbea
-wcbeb:: ds 1 ; cbeb
+wEffectFailed:: db ; cbeb
 wcbec:: ds 1 ; cbec
 wEnemyGoesFirst:: db ; cbed
 wcbee:: ds 1 ; cbee
@@ -1888,8 +1889,8 @@ wcc0c:: ds 1 ; cc0c
 wcc0d:: ds 1 ; cc0d
 wPlayerWrapCount:: db ; cc0e
 wEnemyWrapCount:: db ; cc0f
-wcc10:: ds 1 ; cc10
-wcc11:: ds 1 ; cc11
+wPlayerCharging:: db ; cc10
+wEnemyCharging:: db ; cc11
 wcc12:: ds 1 ; cc12
 wWildMonMoves:: ds 1 ; cc13
 wOverworldMapEnd::
@@ -1897,7 +1898,7 @@ wOverworldMapEnd::
 wWildMonPP:: ds NUM_MOVES ; cc17
 
 wcc1b:: ds 1 ; cc1b
-wcc1c:: ds 1 ; cc1c
+wSomeoneIsRampaging:: db ; cc1c
 wcc1d:: ds 1 ; cc1d
 wcc1e:: ds 1 ; cc1e
 wcc1f:: ds 1 ; cc1f
@@ -2110,8 +2111,10 @@ wce4d:: ds 1 ; ce4d
 wce4e:: ds 1 ; ce4e
 wce4f:: ds 1 ; ce4f
 wce50:: ds 1 ; ce50
-wOtherPlayerLinkMode:: ds 1 ; ce51
-wOtherPlayerLinkAction:: ds 1 ; ce52
+wOtherPlayerLinkMode:: db ; ce51
+wOtherPlayerLinkAction:: ; ce52
+wBattleAction::
+	db
 wce53:: ds 1 ; ce53
 wce54:: ds 1 ; ce54
 wce55:: ds 1 ; ce55
@@ -2497,7 +2500,7 @@ wcf42:: ds 1 ; cf42
 wBGP:: ds 1
 wOBP0:: ds 1
 wOPB1:: ds 1
-wcf46:: ds 1 ; cf46
+wNumHits:: db ; cf46
 wcf47:: ds 1 ; cf47
 wMonOrItemNameBuffer:: ds 1 ; cf48
 wcf49:: ds 1 ; cf49
@@ -2545,8 +2548,8 @@ wStringBuffer5:: ds 19 ; cfb7
 NEXTU
 	ds 13
 wBattleMenuCursorBuffer:: dw ; cfc4
-wCurBattleMon:: ds 1 ; cfc6
-wcfc7:: ds 1 ; cfc7
+wCurBattleMon:: db ; cfc6
+wCurMoveNum:: db; cfc7
 wcfc8:: ds 1 ; cfc8
 wPartyMenuCursor:: ds 1 ; cfc9
 ENDU
@@ -2582,6 +2585,7 @@ wNumMoves:: ds 1 ; cfe3
 
 wFieldMoveSucceeded::
 wItemEffectSucceeded::
+wBattlePlayerAction::
 	db ; cfe4
 
 wVramState:: ds 1

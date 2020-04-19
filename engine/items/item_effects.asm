@@ -387,7 +387,7 @@ UltraBall: ; e926
 	jr c, .asm_ea34
 	ld a, $5
 .asm_ea34
-	ld [wcb67], a
+	ld [wBattleAnimParam], a
 	ld de, ANIM_THROW_POKE_BALL
 	ld a, e
 	ld [wcf3e], a
@@ -396,7 +396,7 @@ UltraBall: ; e926
 	xor a
 	ldh [hBattleTurn], a
 	ld [wBuffer2], a
-	ld [wcf46], a
+	ld [wNumHits], a
 	predef PlayBattleAnim
 	ld a, [wWildMon]
 	and a
@@ -2018,8 +2018,8 @@ XSpeed: ; f515
 	ld b, [hl]
 	xor a
 	ldh [hBattleTurn], a
-	ld [wcb45], a
-	ld [wcbeb], a
+	ld [wAttackMissed], a
+	ld [wEffectFailed], a
 	farcall RaiseStat
 	call WaitSFX
 	farcall BattleCommand_StatUpMessage
@@ -2178,10 +2178,10 @@ PPUp: ; f606 (3:7606)
 	ld hl, Text_RestoreThePPOfWhichMove
 .asm_f62e
 	call PrintText
-	ld a, [wcfc7]
+	ld a, [wCurMoveNum]
 	push af
 	xor a
-	ld [wcfc7], a
+	ld [wCurMoveNum], a
 	ld a, $2
 	ld [wd11f], a
 	ld a, $f
@@ -2189,7 +2189,7 @@ PPUp: ; f606 (3:7606)
 	rst FarCall
 	pop bc
 	ld a, b
-	ld [wcfc7], a
+	ld [wCurMoveNum], a
 	jr nz, .asm_f60c
 	ld hl, wPartyMon1Moves
 	ld bc, $30
@@ -2541,9 +2541,9 @@ Functionf7e7: ; f7e7 (3:77e7)
 	ld a, d
 	ld [wcf3f], a
 	xor a
-	ld [wcb67], a
+	ld [wBattleAnimParam], a
 	ldh [hBattleTurn], a
-	ld [wcf46], a
+	ld [wNumHits], a
 	predef PlayBattleAnim
 	ld hl, Text_BlockedTheBall
 	call PrintText
