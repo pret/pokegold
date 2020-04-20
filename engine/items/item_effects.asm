@@ -226,7 +226,7 @@ UltraBall: ; e926
 	res NO_TEXT_SCROLL, [hl]
 	ld hl, Text_UsedItem ; $7884
 	call PrintText
-	ld a, [wd114]
+	ld a, [wEnemyMonCatchRate]
 	ld b, a
 	ld a, [wBattleType]
 	cp BATTLETYPE_TUTORIAL
@@ -835,11 +835,11 @@ LoveBallMultiplier:
 ; Reality: multiply catch rate by 8 if mons are of same species, same sex
 	ld a, [wTempEnemyMonSpecies]
 	ld c, a
-	ld a, [wd0ee]
+	ld a, [wTempBattleMonSpecies]
 	cp c
 	ret nz
 	push bc
-	ld a, [wd0ee]
+	ld a, [wTempBattleMonSpecies]
 	ld [wCurPartySpecies], a
 	xor a
 	ld [wMonType], a
@@ -1409,7 +1409,7 @@ Functionf12c: ; f12c (3:712c)
 	ld a, [wCurPartyMon]
 	ld c, a
 	ld d, $0
-	ld hl, wcbda
+	ld hl, wBattleParticipantsIncludingFainted
 	ld b, CHECK_FLAG
 	predef SmallFarFlagAction
 	ld a, c
@@ -1417,7 +1417,7 @@ Functionf12c: ; f12c (3:712c)
 	jr z, .asm_f15a
 	ld a, [wCurPartyMon]
 	ld c, a
-	ld hl, wcb42
+	ld hl, wBattleParticipantsNotFainted
 	ld b, SET_FLAG
 	predef SmallFarFlagAction
 .asm_f15a
@@ -2183,7 +2183,7 @@ PPUp: ; f606 (3:7606)
 	xor a
 	ld [wCurMoveNum], a
 	ld a, $2
-	ld [wd11f], a
+	ld [wMoveSelectionMenuType], a
 	ld a, $f
 	ld hl, $62f3
 	rst FarCall

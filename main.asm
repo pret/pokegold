@@ -182,7 +182,9 @@ ToggleDecorationsVisibility:
 	dr $27216, $27271
 INCLUDE "engine/battle/read_trainer_dvs.asm"
 ReturnToBattle_UseBall_:
-	dr $27307, $2739f
+	dr $27307, $2733d
+ConsumeHeldItem:
+	dr $2733d, $2739f
 INCLUDE "data/moves/effects.asm"
 
 SECTION "banka", ROMX
@@ -257,7 +259,13 @@ JohtoGrassWildMons:
 	dr $2ab35, $2bee3
 
 SECTION "bankb", ROMX
-	dr $2c000, $2c225
+	dr $2c000, $2c045
+EnemySwitch_TrainerHud:
+	dr $2c045, $2c0c8
+DrawPlayerHUDBorder:
+	dr $2c0c8, $2c0f8
+DrawEnemyHUDBorder:
+	dr $2c0f8, $2c225
 INCLUDE "engine/battle/ai/redundant.asm"
 MoveDeletion:
 	dr $2c352, $2c57a
@@ -290,75 +298,34 @@ INCLUDE "engine/battle/read_trainer_party.asm"
 
 
 SECTION "Battle Core", ROMX
-	dr $3c000, $3c551
-FleeMons::
-	dr $3c551, $3c5a4
-GetMoveEffect:
-	dr $3c5a4, $3cbe7
-SubtractHPFromUser:
-	dr $3cbe7, $3cc2b
-GetEighthMaxHP:
-	dr $3cc2b, $3cc36
-GetQuarterMaxHP:
-	dr $3cc36, $3cc47
-GetHalfMaxHP:
-	dr $3cc47, $3cc54
-GetMaxHP:
-	dr $3cc54, $3cc86
-CheckUserHasEnoughHP:
-	dr $3cc86, $3cc97
-RestoreHP:
-	dr $3cc97, $3d224
 
-SetUpBattlePartyMenu_NoLoop:
-	dr $3d224, $3d28f
-ForcePickSwitchMonInBattle:
-	dr $3d28f, $3d381
-ForceEnemySwitch:
-	dr $3d381, $3d39f
-EnemySwitch:
-	dr $3d39f, $3d3d5
-EnemySwitch_SetMode:
-	dr $3d3d5, $3d438
-ResetBattleParticipants:
-	dr $3d438, $3d6cb
-NewEnemyMonStatus:
-	dr $3d6cb, $3d6fe
-ResetEnemyStatLevels:
-	dr $3d6fe, $3d70a
-CheckPlayerPartyForFitMon::
-	dr $3d70a, $3d8f5
-Function3d8f5:
-	dr $3d8f5, $3d907
-Function3d907:
-	dr $3d907, $3d9a2
-SwitchPlayerMon:
-	dr $3d9a2, $3da84
-SpikesDamage:
-	dr $3da84, $3dabc
-PursuitSwitch:
-	dr $3dabc, $3dc4a
-UseHeldStatusHealingItem:
-	dr $3dc4a, $3dcb2
-UseConfusionHealingItem:
-	dr $3dcb2, $3dda9
-UpdatePlayerHUD::
-	dr $3dda9, $3ddb9
-DrawPlayerHUD:
-	dr $3ddb9, $3de97
-UpdateEnemyHUD::
-	dr $3de97, $3dea4
-DrawEnemyHUD:
-	dr $3dea4, $3e290
+INCLUDE "engine/battle/core.asm"
 
+BattleMenu:
+	dr $3df9a, $3e1e4
+
+PlayerSwitch:
+	dr $3e1e4, $3e290
 PassedBattleMonEntrance:
-	dr $3e290, $3e6e8
+	dr $3e290, $3e2df
+CheckAmuletCoin:
+	dr $3e2df, $3e2f3
+MoveSelectionScreen:
+	dr $3e2f3, $3e5d8
+ParseEnemyAction:
+	dr $3e5d8, $3e6e8
 CheckEnemyLockedIn::
 	dr $3e6e8, $3e6fb
 LinkBattleSendReceiveAction:
 	dr $3e6fb, $3e74b
 LoadEnemyMon:
-	dr $3e74b, $3ea77
+	dr $3e74b, $3ea16
+BattleWinSlideInEnemyTrainerFrontpic:
+	dr $3ea16, $3ea6a
+ApplyStatusEffectOnPlayerStats:
+	dr $3ea6a, $3ea6e
+ApplyStatusEffectOnEnemyStats:
+	dr $3ea6e, $3ea77
 ApplyPrzEffectOnSpeed:
 	dr $3ea77, $3eab4
 ApplyBrnEffectOnAttack:
@@ -368,10 +335,24 @@ ApplyStatLevelMultiplierOnAllStats:
 BadgeStatBoosts:
 	dr $3eb83, $3ebd8
 _LoadBattleFontsHPBar:
-	dr $3ebd8, $3ec11
+	dr $3ebd8, $3ebdf
+_LoadHPBar:
+	dr $3ebdf, $3ec0a
+EmptyBattleTextbox:
+	dr $3ec0a, $3ec11
 _BattleRandom::
-	dr $3ec11, $3f196
+	dr $3ec11, $3ec48
+Call_PlayBattleAnim_OnlyIfVisible:
+	dr $3ec48, $3ec50
+Call_PlayBattleAnim:
+	dr $3ec50, $3ec60
+FinishBattleAnim:
+	dr $3ec60, $3ec74
+GiveExperiencePoints:
+	dr $3ec74, $3f086
 
+SendOutMonText:
+	dr $3f086, $3f196
 FillInExpBar::
 	dr $3f196, $3f243
 GetBattleMonBackpic::

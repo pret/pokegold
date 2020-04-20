@@ -69,7 +69,7 @@ GeneratePartyMonStats:
 	ld a, [wCurPartySpecies]
 	ld [wCurSpecies], a
 	call GetBaseData
-	ld a, [wd120]
+	ld a, [wBaseDexNo]
 	ld [de], a
 	inc de
 	ld a, [wBattleMode]
@@ -1288,7 +1288,7 @@ CalcMonStatC: ; e181
 	ld a, b
 	ld d, a
 	push hl
-	ld hl, wd121
+	ld hl, wBaseStats
 	dec hl ; has to be decreased, because 'c' begins with 1
 	ld b, $0
 	add hl, bc

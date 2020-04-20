@@ -635,7 +635,6 @@ wc6fd:: ds 1 ; c6fd
 wc6fe:: ds 1 ; c6fe
 wc6ff:: ds 1 ; c6ff
 
-wOverworldMap::
 wOverworldMapBlocks::
 wLYOverrides::
 wHallOfFamePokemonList::
@@ -1676,7 +1675,7 @@ wOTClassName:: ds NAME_LENGTH ; cb34
 wcb3f:: ds 1 ; cb3f
 wcb40:: ds 1 ; cb40
 wCurOTMon:: ds 1 ; cb41
-wcb42:: ds 1 ; cb42
+wBattleParticipantsNotFainted:: db ; cb42
 wTypeModifier:: db ; cb43
 wCriticalHit:: db ; cb44
 wAttackMissed:: db ; cb45
@@ -1819,8 +1818,7 @@ wEnemyItemState:: db ; cbc4
 wcbc5:: ds 1 ; cbc5
 wcbc6:: ds 1 ; cbc6
 wCurEnemyMoveNum:: db ; cbc7
-wcbc8:: ds 1 ; cbc8
-wcbc9:: ds 1 ; cbc9
+wEnemyHPAtTimeOfPlayerSwitch:: dw ; cbc8
 wPayDayMoney:: ds 3 ; cbca
 
 wcbcd:: ds 1 ; cbcd
@@ -1830,7 +1828,7 @@ wEnemyBackupDVs:: dw
 wAlreadyDisobeyed:: db ; cbd2
 wDisabledMove:: db ; cbd3
 wEnemyDisabledMove:: db ; cbd4
-wcbd5:: ds 1 ; cbd5
+wWhichMonFaintedFirst:: db ; cbd5
 
 ; exists so you can't counter on switch
 wLastPlayerCounterMove:: db ; cbd6
@@ -1838,8 +1836,8 @@ wLastEnemyCounterMove:: db ; cbd7
 
 wEnemyMinimized:: db ; cbd8
 wAlreadyFailed:: db ; cbd9
-wcbda:: ds 1 ; cbda
-wcbdb:: ds 1 ; cbdb
+wBattleParticipantsIncludingFainted:: db ; cbda
+wBattleLowHealthAlarm:: db ; cbdb
 wPlayerMinimized:: db ; cbdc
 wPlayerScreens:: db ; cbdd
 wEnemyScreens:: db ; cbde
@@ -1869,17 +1867,13 @@ wEnemyAISwitchScore:: db ; cbf4
 wEnemySwitchMonParam:: db ; cbf5
 wEnemySwitchMonIndex:: db ; cbf6
 wcbf7:: ds 1 ; cbf7
-wcbf8:: ds 1 ; cbf8
-wLastPlayerMove:: ds 1 ; cbf9
-wLastEnemyMove:: ds 1 ; cbfa
+wLastPlayerMon:: db ; cbf8
+wLastPlayerMove:: db ; cbf9
+wLastEnemyMove:: db ; cbfa
 wPlayerFutureSightCount:: db ; cbfb
 wEnemyFutureSightCount:: db ; cbfc
-wcbfd:: ds 1 ; cbfd
-wcbfe:: ds 1 ; cbfe
-wcbff:: ds 1 ; cbff
-wcc00:: ds 1 ; cc00
-wcc01:: ds 1 ; cc01
-wcc02:: ds 1 ; cc02
+wGivingExperienceToExpShareHolders:: db ; cbfd
+wBackupEnemyMonBaseStats:: ds 5 ; cbfe
 wcc03:: ds 1 ; cc03
 wcc04:: ds 1 ; cc04
 wPlayerFutureSightDamage:: dw ; cc05
@@ -1893,17 +1887,25 @@ wPlayerWrapCount:: db ; cc0e
 wEnemyWrapCount:: db ; cc0f
 wPlayerCharging:: db ; cc10
 wEnemyCharging:: db ; cc11
-wcc12:: ds 1 ; cc12
-wWildMonMoves:: ds 1 ; cc13
-wOverworldMapEnd::
-	ds NUM_MOVES +- 1
+wBattleEnded:: db ; cc12
+
+UNION
+wWildMonMoves:: ; cc13
+	ds NUM_MOVES
+NEXTU
+	ds 1
+wOverworldMapBlocksEnd::
+	ds NUM_MOVES - 1
+ENDU
+
 wWildMonPP:: ds NUM_MOVES ; cc17
 
-wcc1b:: ds 1 ; cc1b
+wAmuletCoin:: db ; cc1b
 wSomeoneIsRampaging:: db ; cc1c
 wPlayerJustGotFrozen:: db ; cc1d
 wEnemyJustGotFrozen:: db ; cc1e
-wcc1f:: ds 1 ; cc1f
+	ds 1
+
 ENDU ; cc20
 
 SECTION "Video", WRAM0
@@ -2029,7 +2031,7 @@ wcc96:: ds 1 ; cc96
 wcc97:: ds 1 ; cc97
 wColorLayoutPredefID:: ds 1 ; cc98
 wPlayerHPPal:: db ; cc99
-wcc9a:: ds 1 ; cc9a
+wEnemyHPPal:: db ; cc9a
 wcc9b:: ds 1 ; cc9b
 wcc9c:: ds 1 ; cc9c
 wcc9d:: ds 1 ; cc9d
@@ -2833,18 +2835,14 @@ wd0e9:: ds 1 ; d0e9
 wd0ea:: ds 1 ; d0ea
 wd0eb:: ds 1 ; d0eb
 wd0ec:: ds 1 ; d0ec
-wTempEnemyMonSpecies:: ds 1 ; d0ed
-wd0ee:: ds 1 ; d0ee
+wTempEnemyMonSpecies:: db ; d0ed
+wTempBattleMonSpecies:: db ; d0ee
 
 wEnemyMon:: battle_struct wEnemyMon ; d0ef
-
-wd10f:: ds 1 ; d10f
-wd110:: ds 1 ; d110
-wd111:: ds 1 ; d111
-wd112:: ds 1 ; d112
-wd113:: ds 1 ; d113
-wd114:: ds 1 ; d114
-wd115:: ds 1 ; d115
+wEnemyMonBaseStats:: ds 5 ; d10f
+wEnemyMonCatchRate:: db ; d114
+wEnemyMonBaseExp::   db ; d115
+wEnemyMonEnd::
 wBattleMode:: ds 1 ; d116
 wTempWildMonSpecies:: db ; d117
 
@@ -2859,34 +2857,34 @@ wOtherTrainerID:: db ; d11b
 wForcedSwitch:: db ; d11c
 wTrainerClass:: db ; d11d
 wUnownLetter:: db ; d11e
-wd11f:: ds 1 ; d11f
+wMoveSelectionMenuType:: db ; d11f
 
-wBaseDexNo:: ; d120
 wCurBaseData:: ; d120
-wd120:: ds 1 ; d120
-wd121:: ds 1 ; d121
+wBaseDexNo:: db ; d120
+wBaseStats:: ; d121
+wBaseHP:: db ; d121
 wBaseAttack:: db ; d122
 wBaseDefense:: db ; d123
-wd124:: ds 1 ; d124
-wd125:: ds 1 ; d125
-wd126:: ds 1 ; d126
-wBaseType:: db ; d127
-wd128:: ds 1 ; d128
-wd129:: ds 1 ; d129
-wd12a:: ds 1 ; d12a
-wd12b:: ds 1 ; d12b
-wd12c:: ds 1 ; d12c
-wd12d:: ds 1 ; d12d
-wd12e:: ds 1 ; d12e
+wBaseSpeed:: db ; d124
+wBaseSpecialAttack:: db ; d125
+wBaseSpecialDefense:: db ; d126
+wBaseType:: ; d127
+wBaseType1:: db ; d127
+wBaseType2:: db ; d128
+wBaseCatchRate:: db ; d129
+wBaseExp:: db ; d12a
+wBaseItems:: ; d12b
+wBaseItem1:: db ; d12b
+wBaseItem2:: db ; d12c
+wBaseGender:: db ; d12d
+wBaseUnknown1:: db ; d12e
 wBaseEggSteps:: db ; d12f
-wd130:: ds 1 ; d130
+wBaseUnknown2:: db ; d130
 wBasePicSize:: db ; d131
-wBaseUnusedFrontpic:: db ; d132
-wd133:: ds 1 ; d133
-wd134:: ds 1 ; d134
-wd135:: ds 1 ; d135
-wd136:: ds 1 ; d136
-wBaseEggGroups:: db
+wBaseUnusedFrontpic:: dw ; d132
+wBaseUnusedBackpic:: dw ; d134
+wBaseGrowthRate:: db ; d136
+wBaseEggGroups:: db ; d137
 wd138:: ds 1 ; d138
 wd139:: ds 1 ; d139
 wd13a:: ds 1 ; d13a
@@ -2931,8 +2929,8 @@ wUsePPUp::
 wd151::
 	db ; d151
 
-wd152:: ds 1 ; d152
-wd153:: ds 1 ; d153
+wFailedToFlee:: db ; d152
+wNumFleeAttempts:: db ; d153
 wd154:: ds 1 ; d154
 wROMBankBackup:: ds 1 ; d155
 wBuffer:: ds 1 ; d156
@@ -3534,7 +3532,12 @@ wd8b6:: ds 1 ; d8b6
 wd8b7:: ds 1 ; d8b7
 wGameTimerPause:: ds 1 ; d8b8
 wd8b9:: ds 1 ; d8b9
-wd8ba:: ds 1 ; d8ba
+wd8ba:: ; d8ba
+; bits 4, 6, or 7 can be used to disable joypad input
+; bit 4
+; bit 6: mon fainted?
+; bit 7: SGB flag?
+	db
 wd8bb:: ds 1 ; d8bb
 wCurBox:: ds 1 ; d8bc
 

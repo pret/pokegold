@@ -16,6 +16,9 @@ MIN_NEUTRAL_DAMAGE EQU 2
 ; turns that sleep lasts
 REST_SLEEP_TURNS EQU 2
 
+; default move priority
+BASE_PRIORITY EQU 1
+
 ; type effectiveness factors, scaled by 10
 SUPER_EFFECTIVE    EQU 20
 MORE_EFFECTIVE     EQU 15

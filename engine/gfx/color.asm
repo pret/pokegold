@@ -586,17 +586,17 @@ Function9b9c: ; 9b9c (2:5b9c)
 
 Function9ba9: ; 9ba9 (2:5ba9)
 	push de
-	farcall Function3d8f5
+	farcall GetPartyMonDVs
 	ld c, l
 	ld b, h
-	ld a, [wd0ee]
+	ld a, [wTempBattleMonSpecies]
 	call Function9bcb
 	pop de
 	ret
 
 Function9bba: ; 9bba (2:5bba)
 	push de
-	farcall Function3d907
+	farcall GetEnemyMonDVs
 	ld c, l
 	ld b, h
 	ld a, [wTempEnemyMonSpecies]

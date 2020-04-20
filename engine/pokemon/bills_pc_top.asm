@@ -337,7 +337,7 @@ Function65b4:
 	swap a
 	or b
 	ld b, a
-	ld a, [wd12d]
+	ld a, [wBaseGender]
 	cp b
 	ld a, $1
 	jr c, .asm_e63d

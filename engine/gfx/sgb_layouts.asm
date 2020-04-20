@@ -81,7 +81,7 @@ Function8c97: ; 8c97 (2:4c97)
 	ld [wccae], a
 	ld a, [hl]
 	ld [wccaf], a
-	ld a, [wcc9a]
+	ld a, [wEnemyHPPal]
 	ld l, a
 	ld h, $0
 	add hl, hl

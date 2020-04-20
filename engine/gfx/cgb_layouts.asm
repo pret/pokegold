@@ -84,7 +84,7 @@ Function9399: ; 9399 (2:5399)
 	call Function9bba
 	push hl
 	call Function9adb
-	ld a, [wcc9a]
+	ld a, [wEnemyHPPal]
 	ld l, a
 	ld h, $0
 	add hl, hl

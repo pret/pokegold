@@ -1029,8 +1029,8 @@ GetMapScreenCoords::
 	ret
 
 LoadBlockData::
-	ld hl, wOverworldMap
-	ld bc, wOverworldMapEnd - wOverworldMap
+	ld hl, wOverworldMapBlocks
+	ld bc, wOverworldMapBlocksEnd - wOverworldMapBlocks
 	ld a, $0
 	call ByteFill
 	call ChangeMap
