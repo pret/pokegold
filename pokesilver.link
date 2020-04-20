@@ -141,8 +141,7 @@ ROMX $32
 	org $4000
 	"bank32"
 ROMX $33
-	org $4000
-	"bank33"
+	"Move Animations"
 	"Extra Songs 2"
 ROMX $36
 	org $4000
@@ -297,7 +296,6 @@ VRAM $00
 VRAM $01
 SRAM $00
 	"Scratch"
-	"Decompress Buffer"
 	org $a600
 	"SRAM Bank 0"
 	"Backup Save 1"

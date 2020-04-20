@@ -13,7 +13,7 @@ Pack:
 
 .asm_1044a
 	ld a, [wce65]
-	ld [wcfc8], a
+	ld [wLastPocket], a
 	ld hl, wOptions
 	res NO_TEXT_SCROLL, [hl]
 	ret
@@ -58,15 +58,15 @@ Pack_InitItemsPocket:
 Pack_ItemsPocketMenu:
 	ld hl, ItemsPocketMenuDataHeader
 	call CopyMenuHeader
-	ld a, [wcfca]
+	ld a, [wItemsPocketCursor]
 	ld [wMenuCursorBuffer], a
-	ld a, [wcfcf]
+	ld a, [wItemsPocketScrollPosition]
 	ld [wMenuScrollPosition], a
 	call ScrollingMenu
 	ld a, [wMenuScrollPosition]
-	ld [wcfcf], a
+	ld [wItemsPocketScrollPosition], a
 	ld a, [wMenuCursorY]
-	ld [wcfca], a
+	ld [wItemsPocketCursor], a
 .asm_104b7
 	ld b, $7
 	ld c, $3
@@ -87,15 +87,15 @@ Pack_InitKeyItemsPocket:
 Pack_KeyItemsPocketMenu:
 	ld hl, KeyItemsPocketMenuDataHeader ; $4e9a
 	call CopyMenuHeader
-	ld a, [wcfcb]
+	ld a, [wKeyItemsPocketCursor]
 	ld [wMenuCursorBuffer], a
-	ld a, [wcfd0]
+	ld a, [wKeyItemsPocketScrollPosition]
 	ld [wMenuScrollPosition], a
 	call ScrollingMenu
 	ld a, [wMenuScrollPosition]
-	ld [wcfd0], a
+	ld [wKeyItemsPocketScrollPosition], a
 	ld a, [wMenuCursorY]
-	ld [wcfcb], a
+	ld [wKeyItemsPocketCursor], a
 	ld b, $3
 	ld c, $7
 	call Function10cef
@@ -211,15 +211,15 @@ Pack_InitBallsPocket:
 Pack_BallsPocketMenu:
 	ld hl, BallsPocketMenuDataHeader ; $4eca
 	call CopyMenuHeader
-	ld a, [wcfcc]
+	ld a, [wBallsPocketCursor]
 	ld [wMenuCursorBuffer], a
-	ld a, [wcfd1]
+	ld a, [wBallsPocketScrollPosition]
 	ld [wMenuScrollPosition], a
 	call ScrollingMenu
 	ld a, [wMenuScrollPosition]
-	ld [wcfd1], a
+	ld [wBallsPocketScrollPosition], a
 	ld a, [wMenuCursorY]
-	ld [wcfcc], a
+	ld [wBallsPocketCursor], a
 	ld b, $1
 	ld c, $5
 	call Function10cef
@@ -504,20 +504,20 @@ Function107cd:
 
 .asm_107da
 	xor a
-	ld [wcfcc], a
-	ld [wcfd1], a
+	ld [wBallsPocketCursor], a
+	ld [wBallsPocketScrollPosition], a
 	ret
 
 .asm_107e2
 	xor a
-	ld [wcfca], a
-	ld [wcfcf], a
+	ld [wItemsPocketCursor], a
+	ld [wItemsPocketScrollPosition], a
 	ret
 
 .asm_107ea
 	xor a
-	ld [wcfcb], a
-	ld [wcfd0], a
+	ld [wKeyItemsPocketCursor], a
+	ld [wKeyItemsPocketScrollPosition], a
 	ret
 
 RegisterItem:
@@ -630,7 +630,7 @@ BattlePack:
 
 .asm_108dd
 	ld a, [wce65]
-	ld [wcfc8], a
+	ld [wLastPocket], a
 	ld hl, wOptions
 	res 4, [hl]
 	ret
@@ -675,15 +675,15 @@ BattlePack_InitItemsPocket:
 BattlePack_ItemsPocketMenu:
 	ld hl, $4e6a
 	call CopyMenuHeader
-	ld a, [wcfca]
+	ld a, [wItemsPocketCursor]
 	ld [wMenuCursorBuffer], a
-	ld a, [wcfcf]
+	ld a, [wItemsPocketScrollPosition]
 	ld [wMenuScrollPosition], a
 	call ScrollingMenu
 	ld a, [wMenuScrollPosition]
-	ld [wcfcf], a
+	ld [wItemsPocketScrollPosition], a
 	ld a, [wMenuCursorY]
-	ld [wcfca], a
+	ld [wItemsPocketCursor], a
 	ld b, $7
 	ld c, $3
 	call Function10cef
@@ -703,15 +703,15 @@ BattlePack_InitKeyItemsPocket:
 BattlePack_KeyItemsPocketMenu:
 	ld hl, $4e9a
 	call CopyMenuHeader
-	ld a, [wcfcb]
+	ld a, [wKeyItemsPocketCursor]
 	ld [wMenuCursorBuffer], a
-	ld a, [wcfd0]
+	ld a, [wKeyItemsPocketScrollPosition]
 	ld [wMenuScrollPosition], a
 	call ScrollingMenu
 	ld a, [wMenuScrollPosition]
-	ld [wcfd0], a
+	ld [wKeyItemsPocketScrollPosition], a
 	ld a, [wMenuCursorY]
-	ld [wcfcb], a
+	ld [wKeyItemsPocketCursor], a
 	ld b, $3
 	ld c, $7
 	call Function10cef
@@ -754,15 +754,15 @@ BattlePack_InitBallsPocket:
 BattlePack_BallsPocketMenu:
 	ld hl, $4eca
 	call CopyMenuHeader
-	ld a, [wcfcc]
+	ld a, [wBallsPocketCursor]
 	ld [wMenuCursorBuffer], a
-	ld a, [wcfd1]
+	ld a, [wBallsPocketScrollPosition]
 	ld [wMenuScrollPosition], a
 	call ScrollingMenu
 	ld a, [wMenuScrollPosition]
-	ld [wcfd1], a
+	ld [wBallsPocketScrollPosition], a
 	ld a, [wMenuCursorY]
-	ld [wcfcc], a
+	ld [wBallsPocketCursor], a
 	ld b, $1
 	ld c, $5
 	call Function10cef
@@ -893,7 +893,7 @@ BattlePack_QuitSubmenu:
 Function10aba: ; 10aba (4:4aba)
 	xor a
 	ld [wce63], a
-	ld a, [wcfc8]
+	ld a, [wLastPocket]
 	and $3
 	ld [wCurPocket], a
 	inc a
@@ -942,15 +942,15 @@ DepositOrSell_ItemPocket:
 	call Function10b92
 	ld hl, PC_Mart_ItemsPocketMenuDataHeader ; $4e82
 	call CopyMenuHeader
-	ld a, [wcfca]
+	ld a, [wItemsPocketCursor]
 	ld [wMenuCursorBuffer], a
-	ld a, [wcfcf]
+	ld a, [wItemsPocketScrollPosition]
 	ld [wMenuScrollPosition], a
 	call ScrollingMenu
 	ld a, [wMenuScrollPosition]
-	ld [wcfcf], a
+	ld [wItemsPocketScrollPosition], a
 	ld a, [wMenuCursorY]
-	ld [wcfca], a
+	ld [wItemsPocketCursor], a
 	ret
 
 DepositOrSell_KeyItemsPocket:
@@ -958,15 +958,15 @@ DepositOrSell_KeyItemsPocket:
 	call Function10b92
 	ld hl, PC_Mart_KeyItemsPocketMenuDataHeader ; $4eb2
 	call CopyMenuHeader
-	ld a, [wcfcb]
+	ld a, [wKeyItemsPocketCursor]
 	ld [wMenuCursorBuffer], a
-	ld a, [wcfd0]
+	ld a, [wKeyItemsPocketScrollPosition]
 	ld [wMenuScrollPosition], a
 	call ScrollingMenu
 	ld a, [wMenuScrollPosition]
-	ld [wcfd0], a
+	ld [wKeyItemsPocketScrollPosition], a
 	ld a, [wMenuCursorY]
-	ld [wcfcb], a
+	ld [wKeyItemsPocketCursor], a
 	ret
 
 DepositOrSell_TMHMPocket:
@@ -983,15 +983,15 @@ DepositOrSell_BallsPocket:
 	call Function10b92
 	ld hl, PC_Mart_BallsPocketMenuDataHeader ; $4ee2
 	call CopyMenuHeader
-	ld a, [wcfcc]
+	ld a, [wBallsPocketCursor]
 	ld [wMenuCursorBuffer], a
-	ld a, [wcfd1]
+	ld a, [wBallsPocketScrollPosition]
 	ld [wMenuScrollPosition], a
 	call ScrollingMenu
 	ld a, [wMenuScrollPosition]
-	ld [wcfd1], a
+	ld [wBallsPocketScrollPosition], a
 	ld a, [wMenuCursorY]
-	ld [wcfcc], a
+	ld [wBallsPocketCursor], a
 	ret
 
 Function10b92: ; 10b92 (4:4b92)
@@ -1059,7 +1059,7 @@ TutorialPack:
 	ld a, [wInputType]
 	or a
 	jr z, .asm_10bfa
-	farcall DudeAutoInput_RightA ; 70:4dee
+	farcall _DudeAutoInput_RightA ; 70:4dee
 .asm_10bfa
 	call Function10c07
 	call Function10b9f

@@ -15,6 +15,7 @@ MIN_NEUTRAL_DAMAGE EQU 2
 
 ; turns that sleep lasts
 REST_SLEEP_TURNS EQU 2
+TREEMON_SLEEP_TURNS EQU 7
 
 ; default move priority
 BASE_PRIORITY EQU 1

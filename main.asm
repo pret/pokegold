@@ -154,7 +154,13 @@ StartMenu_PrintBugContestStatus:
 Function24b8d:
 	dr $24b8d, $24c89
 MonSubmenu:
-	dr $24c89, $24f20
+	dr $24c89, $24e09
+GetMenu::
+	dr $24e09, $24e62
+LoadBattleMenu::
+	dr $24e62, $24e72
+ContestBattleMenu::
+	dr $24e72, $24f20
 SelectQuantityToToss:
 	dr $24f20, $24f2a
 SelectQuantityToBuy:
@@ -259,13 +265,17 @@ JohtoGrassWildMons:
 	dr $2ab35, $2bee3
 
 SECTION "bankb", ROMX
-	dr $2c000, $2c045
+	dr $2c000, $2c033
+BattleStart_TrainerHuds:
+	dr $2c033, $2c045
 EnemySwitch_TrainerHud:
 	dr $2c045, $2c0c8
 DrawPlayerHUDBorder:
 	dr $2c0c8, $2c0f8
 DrawEnemyHUDBorder:
-	dr $2c0f8, $2c225
+	dr $2c0f8, $2c1e4
+_ShowLinkBattleParticipants:
+	dr $2c1e4, $2c225
 INCLUDE "engine/battle/ai/redundant.asm"
 MoveDeletion:
 	dr $2c352, $2c57a
@@ -278,7 +288,9 @@ ChooseMonToLearnTMHM:
 TeachTMHM:
 	dr $2c672, $2c943
 PrintMoveDesc::
-	dr $2c943, $2ca31
+	dr $2c943, $2c95d
+GivePokerusAndConvertBerries::
+	dr $2c95d, $2ca31
 
 SECTION "bankc", ROMX
 	dr $30000, $33d81
@@ -300,75 +312,8 @@ INCLUDE "engine/battle/read_trainer_party.asm"
 SECTION "Battle Core", ROMX
 
 INCLUDE "engine/battle/core.asm"
+INCLUDE "data/battle/effect_command_pointers.asm"
 
-BattleMenu:
-	dr $3df9a, $3e1e4
-
-PlayerSwitch:
-	dr $3e1e4, $3e290
-PassedBattleMonEntrance:
-	dr $3e290, $3e2df
-CheckAmuletCoin:
-	dr $3e2df, $3e2f3
-MoveSelectionScreen:
-	dr $3e2f3, $3e5d8
-ParseEnemyAction:
-	dr $3e5d8, $3e6e8
-CheckEnemyLockedIn::
-	dr $3e6e8, $3e6fb
-LinkBattleSendReceiveAction:
-	dr $3e6fb, $3e74b
-LoadEnemyMon:
-	dr $3e74b, $3ea16
-BattleWinSlideInEnemyTrainerFrontpic:
-	dr $3ea16, $3ea6a
-ApplyStatusEffectOnPlayerStats:
-	dr $3ea6a, $3ea6e
-ApplyStatusEffectOnEnemyStats:
-	dr $3ea6e, $3ea77
-ApplyPrzEffectOnSpeed:
-	dr $3ea77, $3eab4
-ApplyBrnEffectOnAttack:
-	dr $3eab4, $3eae9
-ApplyStatLevelMultiplierOnAllStats:
-	dr $3eae9, $3eb83
-BadgeStatBoosts:
-	dr $3eb83, $3ebd8
-_LoadBattleFontsHPBar:
-	dr $3ebd8, $3ebdf
-_LoadHPBar:
-	dr $3ebdf, $3ec0a
-EmptyBattleTextbox:
-	dr $3ec0a, $3ec11
-_BattleRandom::
-	dr $3ec11, $3ec48
-Call_PlayBattleAnim_OnlyIfVisible:
-	dr $3ec48, $3ec50
-Call_PlayBattleAnim:
-	dr $3ec50, $3ec60
-FinishBattleAnim:
-	dr $3ec60, $3ec74
-GiveExperiencePoints:
-	dr $3ec74, $3f086
-
-SendOutMonText:
-	dr $3f086, $3f196
-FillInExpBar::
-	dr $3f196, $3f243
-GetBattleMonBackpic::
-	dr $3f243, $3f24d
-DropPlayerSub:
-	dr $3f24d, $3f282
-GetEnemyMonFrontpic::
-	dr $3f282, $3f28c
-DropEnemySub:
-	dr $3f28c, $3f2c7
-StartBattle::
-	dr $3f2c7, $3f55d
-Function3f55d:
-	dr $3f55d, $3fd3d
-BattleCommandPointers:
-	dr $3fd3d, $3fe9b
 
 SECTION "bank10", ROMX
 
@@ -396,7 +341,11 @@ SECTION "bank11", ROMX
 INCLUDE "engine/battle/ai/move.asm"
 	dr $441c2, $44360
 PokedexDataPointerTable::
-	dr $44360, $44648
+	dr $44360, $44556
+PlayBattleMusic::
+	dr $44556, $445f2
+ClearBattleRAM::
+	dr $445f2, $44648
 PlaceGraphic::
 	dr $44648, $44679
 SendMailToPC::
@@ -559,28 +508,37 @@ PlaySpriteAnimations:
 	dr $8d18a, $8d1f7
 _InitSpriteAnimStruct::
 	dr $8d1f7, $8d332
-_ReinitSpriteAnimFrame::
 
 IF DEF(_GOLD)
-	dr $8d332, $8e774
+_ReinitSpriteAnimFrame::
+	dr $8d332, $8e6fd
+AnimateEndOfExpBar::
+	dr $8e6fd, $8e774
 ClearSpriteAnims2::
 	dr $8e774, $8e78b
 LoadOverworldMonIcon::
 	dr $8e78b, $8e79f
 LoadMenuMonIcon::
-	dr $8e79f, $8e922
+	dr $8e79f, $8e8fb
+FreezeMonIcons::
+	dr $8e8fb, $8e922
 UnfreezeMonIcons::
 	dr $8e922, $8e93d
 HoldSwitchmonIcon::
 	dr $8e93d, $8fe43
 ELIF DEF(_SILVER)
-	dr $8d332, $8e75a
+_ReinitSpriteAnimFrame::
+	dr $8d332, $8e6e3
+AnimateEndOfExpBar::
+	dr $8e6e3, $8e75a
 ClearSpriteAnims2::
 	dr $8e75a, $8e771
 LoadOverworldMonIcon::
 	dr $8e771, $8e785
 LoadMenuMonIcon::
-	dr $8e785, $8e908
+	dr $8e785, $8e8e1
+FreezeMonIcons::
+	dr $8e8e1, $8e908
 UnfreezeMonIcons::
 	dr $8e908, $8e923
 HoldSwitchmonIcon::
@@ -693,7 +651,7 @@ INCLUDE "data/moves/animations.asm"
 LoadPoisonBGPals::
 	dr $cbc76, $cbdba
 
-SECTION "bank33", ROMX
+SECTION "Move Animations", ROMX
 
 DisplayCaughtContestMonStats:
 	dr $cc000, $cc0c8
@@ -705,7 +663,11 @@ DummyPredef39::
 PlayBattleAnim::
 	dr $cc0d7, $cc283
 ClearBattleAnims::
-	dr $cc283, $cfce3
+	dr $cc283, $cc5f7
+BattleAnimCmd_RaiseSub::
+	dr $cc5f7, $cc67c
+BattleAnimCmd_MinimizeOpp::
+	dr $cc67c, $cfce3
 
 SECTION "bank36", ROMX
 	dr $d8000, $d8400
@@ -772,9 +734,19 @@ Functionf8000::
 Functionf800c::
 	dr $f800c, $f8032
 _LoadFontsBattleExtra::
-	dr $f8032, $f80d9
+	dr $f8032, $f8066
+LoadBattleFontsHPBar::
+	dr $f8066, $f8081
+LoadHPBar::
+	dr $f8081, $f80d9
 LoadStatsScreenPageTilesGFX::
-	dr $f80d9, $fb4be
+	dr $f80d9, $f8bb2
+EnemyHPBarBorderGFX::
+	dr $f8bb2, $f8bd2
+HPExpBarBorderGFX::
+	dr $f8bd2, $f8c02
+ExpBarGFX::
+	dr $f8c02, $fb4be
 
 TileCollisionTable::
 	dr $fb4be, $fb5be
@@ -793,7 +765,9 @@ ConvertMon_1to2::
 UpdateUnownDex:
 	dr $fbb22, $fbc3c
 CheckMagikarpLength:
-	dr $fbc3c, $fbdd6
+	dr $fbc3c, $fbd00
+CalcMagikarpLength::
+	dr $fbd00, $fbdd6
 MagikarpHouseSign:
 	dr $fbdd6, $fbdf1
 HiddenPowerDamage:
@@ -853,14 +827,15 @@ Function1c0a7b::
 	dr $1c0a7b, $1c0de9
 _DudeAutoInput_A::
 	dr $1c0de9, $1c0dee
+_DudeAutoInput_RightA::
+	dr $1c0dee, $1c0df3
+_DudeAutoInput_DownA::
+	dr $1c0df3, $1c168b
 
-IF DEF(_GOLD)
-DudeAutoInput_RightA::
-	dr $1c0dee, $1c168b
-ELIF DEF(_SILVER)
-DudeAutoInput_RightA::
-	dr $1c0dee, $1c168c
+IF DEF(_SILVER)
+	dr $1c168b, $1c168c
 ENDC
+
 
 SECTION "bank7f", ROMX
 	dr $1ffdf8, $200000

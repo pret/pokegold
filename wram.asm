@@ -1809,11 +1809,11 @@ wPlayerTurnsTaken:: db ; cbbb
 wcbbc:: ds 1 ; cbbc
 wPlayerSubstituteHP:: db ; cbbd
 wEnemySubstituteHP:: db ; cbbe
-wcbbf:: ds 1 ; cbbf
+wUnusedPlayerLockedMove:: db ; cbbf
 wcbc0:: ds 1 ; cbc0
-wCurPlayerMove:: ds 1 ; cbc1
-wCurEnemyMove:: ds 1 ; cbc2
-wcbc3:: ds 1 ; cbc3
+wCurPlayerMove:: db ; cbc1
+wCurEnemyMove:: db ; cbc2
+wLinkBattleRNCount:: db ; cbc3
 wEnemyItemState:: db ; cbc4
 wcbc5:: ds 1 ; cbc5
 wcbc6:: ds 1 ; cbc6
@@ -1822,7 +1822,7 @@ wEnemyHPAtTimeOfPlayerSwitch:: dw ; cbc8
 wPayDayMoney:: ds 3 ; cbca
 
 wcbcd:: ds 1 ; cbcd
-wcbce:: ds 1 ; cbce
+wSafariMonEating:: db ; cbce
 wcbcf:: ds 1 ; cbcf
 wEnemyBackupDVs:: dw
 wAlreadyDisobeyed:: db ; cbd2
@@ -1866,7 +1866,7 @@ wPlayerUsedMoves:: ; cbf0
 wEnemyAISwitchScore:: db ; cbf4
 wEnemySwitchMonParam:: db ; cbf5
 wEnemySwitchMonIndex:: db ; cbf6
-wcbf7:: ds 1 ; cbf7
+wTempLevel:: db ; cbf7
 wLastPlayerMon:: db ; cbf8
 wLastPlayerMove:: db ; cbf9
 wLastEnemyMove:: db ; cbfa
@@ -2287,8 +2287,8 @@ w2DMenuFlags2:: db ; cedd
 w2DMenuCursorOffsets:: db ; cede
 wMenuJoypadFilter:: db ; cedf
 w2DMenuDataEnd::
-wMenuCursorY:: ds 1 ; cee0
-wcee1:: ds 1 ; cee1
+wMenuCursorY:: db ; cee0
+wMenuCursorX:: db ; cee1
 wcee2:: ds 1 ; cee2
 wCursorCurrentTile:: ds 1 ; cee3
 wcee4:: ds 1 ; cee4
@@ -2553,18 +2553,18 @@ NEXTU
 wBattleMenuCursorBuffer:: dw ; cfc4
 wCurBattleMon:: db ; cfc6
 wCurMoveNum:: db; cfc7
-wcfc8:: ds 1 ; cfc8
+wLastPocket:: db ; cfc8
 wPartyMenuCursor:: ds 1 ; cfc9
 ENDU
 
-wcfca:: ds 1 ; cfca
-wcfcb:: ds 1 ; cfcb
-wcfcc:: ds 1 ; cfcc
+wItemsPocketCursor:: db ; cfca
+wKeyItemsPocketCursor:: db ; cfcb
+wBallsPocketCursor:: db ; cfcc
 wcfcd:: ds 1 ; cfcd
 wcfce:: ds 1 ; cfce
-wcfcf:: ds 1 ; cfcf
-wcfd0:: ds 1 ; cfd0
-wcfd1:: ds 1 ; cfd1
+wItemsPocketScrollPosition:: db ; cfcf
+wKeyItemsPocketScrollPosition:: db; cfd0
+wBallsPocketScrollPosition:: db ; cfd1
 wcfd2:: ds 1 ; cfd2
 
 wSwitchMon::
@@ -2789,8 +2789,8 @@ wd0cc:: ds 1 ; d0cc
 wd0cd:: ds 1 ; d0cd
 wd0ce:: ds 1 ; d0ce
 wTilesetPalettes:: dw ; d0cf
-wd0d1:: ds 1 ; d0d1
-wd0d2:: ds 1 ; d0d2
+wEvolvableFlags:: db ; d0d1
+wForceEvolution:: db ; d0d2
 
 UNION ; d0d3
 ; general-purpose buffers
@@ -2814,6 +2814,13 @@ wCurHPAnimLowHP::   db ; d0de
 wCurHPAnimHighHP::  db ; d0df
 
 NEXTU ; d0d3
+; evolution data
+wEvolutionOldSpecies:: db ; d0d3
+wEvolutionNewSpecies:: db ; d0d4
+wEvolutionPicOffset:: db ; d0d5
+wEvolutionCanceled:: db ; d0d6
+
+NEXTU ; d0d3
 ; miscellaneous
 wMagikarpLength:: dw
 wSelectedDecoration:: db
@@ -2822,19 +2829,10 @@ wOtherDecoration::    db
 wCurEnemyItem:: db
 ENDU ; d0e0
 
-wd0e0:: ds 1 ; d0e0
-wd0e1:: ds 1 ; d0e1
-wd0e2:: ds 1 ; d0e2
-wd0e3:: ds 1 ; d0e3
-wd0e4:: ds 1 ; d0e4
-wd0e5:: ds 1 ; d0e5
-wd0e6:: ds 1 ; d0e6
-wd0e7:: ds 1 ; d0e7
-wd0e8:: ds 1 ; d0e8
-wd0e9:: ds 1 ; d0e9
-wd0ea:: ds 1 ; d0ea
-wd0eb:: ds 1 ; d0eb
-wd0ec:: ds 1 ; d0ec
+	ds 3
+
+wLinkBattleRNs:: ds 10 ; d0e3
+
 wTempEnemyMonSpecies:: db ; d0ed
 wTempBattleMonSpecies:: db ; d0ee
 

@@ -1,9 +1,12 @@
-; Control characters
-	charmap "<START>",  $00
+; $00-$16 are TX_* constants (see macros/scripts/text.asm)
+
+; Control characters (see home/text.asm)
+	charmap "<NULL>",   $00
 	charmap "<PLAY_G>", $14 ; <PLAYER> + gender
-	charmap "<DAY>",    $15
+	charmap "<MOBILE>", $15
+	charmap "<CR>",     $16
 	charmap "¯",        $1f
-	charmap "<LNBRK>",  $22
+	charmap "<LF>",     $22
 	charmap "<POKE>",   $24
 	charmap "%",        $25
 	charmap "<RED>",    $38

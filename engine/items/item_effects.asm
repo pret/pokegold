@@ -1023,7 +1023,7 @@ WaterStone: ; ee63
 	cp EVERSTONE
 	jr z, .failed
 	ld a, $1
-	ld [wd0d2], a
+	ld [wForceEvolution], a
 	farcall EvolvePokemon ; 10:61db
 	ld a, [wd154]
 	and a
@@ -1218,7 +1218,7 @@ RareCandy: ; ef68 (3:6f68)
 	ld [wd151], a
 	predef LearnLevelMoves
 	xor a
-	ld [wd0d2], a
+	ld [wForceEvolution], a
 	farcall EvolvePokemon
 	jp Functionf7dc
 
@@ -2307,7 +2307,7 @@ Functionf6f6: ; f6f6 (3:76f6)
 	jr z, .asm_f715
 	call Functionf72f
 	jr z, .asm_f715
-	ld hl, wcee1
+	ld hl, wMenuCursorX
 	inc [hl]
 .asm_f715
 	ld hl, wMenuCursorY
@@ -2315,7 +2315,7 @@ Functionf6f6: ; f6f6 (3:76f6)
 	pop bc
 	dec b
 	jr nz, .asm_f6fe
-	ld a, [wcee1]
+	ld a, [wMenuCursorX]
 	and a
 	jp nz, asm_f699
 Functionf724: ; f724 (3:7724)

@@ -136,7 +136,7 @@ LearnMove:
 	ld a, $1
 	ld [w2DMenuNumCols], a
 	ld [wMenuCursorY], a
-	ld [wcee1], a
+	ld [wMenuCursorX], a
 	ld a, $3
 	ld [wMenuJoypadFilter], a
 	ld a, $20

@@ -213,7 +213,7 @@ ENDM
 	dict "<TM>", TMChar
 	dict "<TRNER>", TrainerChar
 	dict $23, PlaceKougeki
-	dict "<LNBRK>", HalfLineChar
+	dict "<LF>", HalfLineChar
 	dict "<CONT>", ContText
 	dict "<……>", SixDotsChar
 	dict "<DONE>", DoneText

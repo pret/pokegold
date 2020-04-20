@@ -43,7 +43,7 @@ CorrectNickErrors:: ; 677e (1:677e)
 ; table defining which characters are actually text commands
 ; format:
 	;      ≥           <
-	db "<START>",  $04       + 1
+	db "<NULL>",   $04       + 1
 	db "<PLAY_G>", $18       + 1
 	db $1d,        "%"       + 1
 	db $35,        "<GREEN>" + 1

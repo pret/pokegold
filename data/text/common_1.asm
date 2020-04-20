@@ -1633,7 +1633,7 @@ Text_Gained::
 	text_ram wStringBuffer1
 	text " gained@@"
 
-Text_ABoostedStringBuffer2ExpPoints::
+_BoostedExpPointsText::
 	text_start
 	line "a boosted"
 	cont "@"
@@ -1641,7 +1641,7 @@ Text_ABoostedStringBuffer2ExpPoints::
 	text " EXP. Points!"
 	prompt
 
-Text_StringBuffer2ExpPoints::
+_ExpPointsText::
 	text_start
 	line "@"
 	text_decimal wStringBuffer2, 2, 4
@@ -1674,29 +1674,31 @@ Text_YourFoesWeakGetmMon::
 	text "!"
 	done
 
-Text_ThatsEnoughComeBack::
+Text_BattleMonNickComma::
 	text_ram wBattleMonNick
 	text ",@@"
+
+_ThatsEnoughComeBackText::
 	text " that's"
 	line "enough! Come back!"
 	done
 
-Text_OKComeBack::
+_OKComeBackText::
 	text " OK!"
 	line "Come back!"
 	done
 
-Text_GoodComeBack::
+_GoodComeBackText::
 	text " good!"
 	line "Come back!"
 	done
 
-Text_ComeBack::
+_ComeBackText::
 	text " come"
 	line "back!"
 	done
 
-BattleText_PlayerPickedUpPayDayMoney:
+_PlayerPickedUpPayDayMoney::
 	text "<PLAYER> picked up"
 	line "¥@"
 	text_decimal wPayDayMoney, 3, 6

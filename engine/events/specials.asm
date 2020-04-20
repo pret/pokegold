@@ -241,7 +241,7 @@ UnownPrinter: ; c427 (3:4427)
 
 DisplayLinkRecord: ; c434 (3:4434)
 	call FadeToMenu
-	farcall Function3f55d
+	farcall _DisplayLinkRecord
 	call ExitAllMenus
 	ret
 

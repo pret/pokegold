@@ -1,11 +1,13 @@
 SECTION "Scratch", SRAM
 
-sDecompressScratch:: ds $188 ; a000
+UNION ; a000
+sScratchTilemap:: ds BG_MAP_WIDTH * BG_MAP_HEIGHT
+sScratchAttrmap:: ds $200
 
-
-SECTION "Decompress Buffer", SRAM
-
-sDecompressBuffer:: ds 7 * 7 * $10 ; a188
+NEXTU ; a000
+sDecompressScratch:: ds $188
+sDecompressBuffer:: ds 7 * 7 tiles ; a188
+ENDU
 
 
 SECTION "SRAM Bank 0", SRAM
@@ -82,15 +84,17 @@ sLuckyIDNumber::  dw
 
 SECTION "Backup Save 1", SRAM
 
+; ac6b
 sBackupPlayerData3:: ds wPlayerDataEnd - wPlayerData3
+; b0e8
 sBackupPokemonData:: ds wPokemonDataEnd - wPokemonData
+; b5c7
 sBackupPlayerData1:: ds wPlayerData1End - wPlayerData
 
 
 SECTION "SRAM Stack", SRAM
 
 sStackTop:: dw
-
 s0_b7ef:: db
 s0_b7f0:: db
 
@@ -122,15 +126,15 @@ sCheckValue2:: db ; loaded with SAVE_CHECK_VALUE_2, used to check save corruptio
 
 SECTION "Active Box", SRAM
 
-sBox:: curbox sBox
+sBox:: curbox sBox ; ad6c
 
 
 SECTION "Link Battle Data", SRAM
 
 sLinkBattleStats::
-sLinkBattleWins::   dw
-sLinkBattleLosses:: dw
-sLinkBattleDraws::  dw
+sLinkBattleWins::   dw ; b1ba
+sLinkBattleLosses:: dw ; b1bc
+sLinkBattleDraws::  dw ; b1be
 
 sLinkBattleRecord::
 sLinkBattleRecord1:: link_battle_record sLinkBattleRecord1
@@ -143,7 +147,7 @@ sLinkBattleStatsEnd::
 
 SECTION "SRAM Hall of Fame", SRAM
 
-sHallOfFame::
+sHallOfFame:: ; b21a
 sHallOfFame01:: hall_of_fame sHallOfFame01
 sHallOfFame02:: hall_of_fame sHallOfFame02
 sHallOfFame03:: hall_of_fame sHallOfFame03
@@ -179,6 +183,7 @@ sHallOfFameEnd::
 
 SECTION "Backup Save 2", SRAM
 
+; bd96
 sBackupPlayerData2:: ds wPlayerData2End - wPlayerData2
 
 
@@ -206,12 +211,10 @@ sBox14:: box sBox14
 
 SECTION "Backup Save 3", SRAM
 
+; be30
 sBackupOptions:: ds wOptionsEnd - wOptions
-
 sBackupCheckValue1:: db ; loaded with SAVE_CHECK_VALUE_1, used to check save corruption
-
-sBackupCurMapData::  ds wCurMapDataEnd - wCurMapData
-
+; be39
+sBackupCurMapData:: ds wCurMapDataEnd - wCurMapData
 sBackupChecksum:: dw
-
 sBackupCheckValue2:: db ; loaded with SAVE_CHECK_VALUE_2, used to check save corruption
