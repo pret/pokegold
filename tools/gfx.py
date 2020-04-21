@@ -168,6 +168,14 @@ def filepath_rules(filepath):
         elif name == 'gfx_17079':
             args['width'] = 16
 
+    elif 'gfx/player' in filedir:
+        if name == 'chris_back':
+            args['pic_dimensions'] = 6, 6
+
+    elif 'gfx/battle' in filedir:
+        if name == 'dude':
+            args['pic_dimensions'] = 6, 6
+
     elif os.path.join(filedir, name) in pics:
         args['pic'] = True
 

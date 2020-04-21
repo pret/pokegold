@@ -433,7 +433,7 @@ def convert_2bpp_to_png(image, **kwargs):
 
     # Width must be specified to interleave.
     if interleave and width:
-        image = interleave_tiles(image, width / 8)
+        image = interleave_tiles(image, width // 8)
 
     # Pad the image by a given number of tiles if asked.
     image += pad_color * 0x10 * tile_padding
@@ -766,11 +766,11 @@ def png_to_2bpp(filein, **kwargs):
 
         tiles = get_tiles(image)
         pic_length = w * h
-        tile_width = width / 8
+        tile_width = width // 8
         trailing = len(tiles) % pic_length
         new_image = []
-        for block in range(len(tiles) / pic_length):
-            offset = (h * tile_width) * ((block * w) / tile_width) + ((block * w) % tile_width)
+        for block in range(len(tiles) // pic_length):
+            offset = (h * tile_width) * ((block * w) // tile_width) + ((block * w) % tile_width)
             pic = []
             for row in range(h):
                 index = offset + (row * tile_width)

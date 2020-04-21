@@ -4791,7 +4791,7 @@ BattleMenuPKMN_Loop:
 	jr c, .Cancel
 .loop
 	callfar FreezeMonIcons
-	callfar GetMenu
+	callfar BattleMonMenu
 	jr c, BattleMenuPKMN_Loop
 	call PlaceHollowCursor
 	ld a, [wMenuCursorY]

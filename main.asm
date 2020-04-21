@@ -17,6 +17,7 @@ INCLUDE "engine/events/happiness_egg.asm"
 INCLUDE "engine/events/shuckle.asm"
 INCLUDE "engine/events/haircut.asm"
 
+
 SECTION "bank2", ROMX
 
 INCLUDE "engine/tilesets/map_palettes.asm"
@@ -25,6 +26,7 @@ INCLUDE "engine/overworld/player_object.asm"
 INCLUDE "engine/math/sine.asm"
 INCLUDE "engine/predef.asm"
 INCLUDE "engine/gfx/color.asm"
+
 
 SECTION "bank3", ROMX
 
@@ -45,6 +47,7 @@ INCLUDE "engine/pokemon/search2.asm"
 INCLUDE "engine/events/bug_contest/caught_mon.asm"
 INCLUDE "engine/items/item_effects.asm"
 INCLUDE "engine/pokemon/knows_move.asm"
+
 
 SECTION "bank4", ROMX
 
@@ -70,6 +73,7 @@ INCLUDE "engine/events/bug_contest/judging.asm"
 INCLUDE "engine/events/pokerus/apply_pokerus_tick.asm"
 INCLUDE "engine/events/bug_contest/contest_2.asm"
 
+
 SECTION "bank5", ROMX
 
 INCLUDE "engine/rtc/rtc.asm"
@@ -92,18 +96,24 @@ INCLUDE "engine/events/print_photo.asm"
 INCLUDE "unknown/bank05_704d.asm"
 INCLUDE "engine/pokemon/breeding.asm"
 
+
 SECTION "bank6", ROMX
+
 	dr $18000, $1bdbc
+
 
 SECTION "bank7", ROMX
 
 LoadMapGroupRoof::
 	dr $1c000, $1f84c
 
+
 SECTION "bank8", ROMX
+
 	dr $20000, $239fe
-EggMovePointers:
+EggMovePointers::
 	dr $239fe, $23e3d
+
 
 SECTION "bank9", ROMX
 
@@ -121,79 +131,81 @@ _ExitMenu::
 	dr $24307, $24395
 _InitVerticalMenuCursor::
 	dr $24395, $243eb
-UpdateItemDescription:
+UpdateItemDescription::
 	dr $243eb, $24477
-LoadObjectMasks:
+LoadObjectMasks::
 	dr $24477, $244d7
 _InitScrollingMenu::
 	dr $244d7, $244f3
 _ScrollingMenu::
 	dr $244f3, $2462e
-ScrollingMenu_ClearLeftColumn:
+ScrollingMenu_ClearLeftColumn::
 	dr $2462e, $24834
-SwitchItemsInBag:
+SwitchItemsInBag::
 	dr $24834, $249dc
-PlaceMenuItemName:
+PlaceMenuItemName::
 	dr $249dc, $249eb
-PlaceMenuItemQuantity:
+PlaceMenuItemQuantity::
 	dr $249eb, $24a10
-PlaceMoneyTopRight:
+PlaceMoneyTopRight::
 	dr $24a10, $24a18
-PlaceMoneyBottomLeft:
+PlaceMoneyBottomLeft::
 	dr $24a18, $24a20
-PlaceMoneyAtTopLeftOfTextbox:
+PlaceMoneyAtTopLeftOfTextbox::
 	dr $24a20, $24a4d
-DisplayCoinCaseBalance:
+DisplayCoinCaseBalance::
 	dr $24a4d, $24a76
-DisplayMoneyAndCoinBalance:
+DisplayMoneyAndCoinBalance::
 	dr $24a76, $24b05
-StartMenu_DrawBugContestStatusBox:
+StartMenu_DrawBugContestStatusBox::
 	dr $24b05, $24b10
-StartMenu_PrintBugContestStatus:
+StartMenu_PrintBugContestStatus::
 	dr $24b10, $24b8d
-Function24b8d:
+Function24b8d::
 	dr $24b8d, $24c89
-MonSubmenu:
+MonSubmenu::
 	dr $24c89, $24e09
-GetMenu::
+BattleMonMenu::
 	dr $24e09, $24e62
 LoadBattleMenu::
 	dr $24e62, $24e72
 ContestBattleMenu::
 	dr $24e72, $24f20
-SelectQuantityToToss:
+SelectQuantityToToss::
 	dr $24f20, $24f2a
-SelectQuantityToBuy:
+SelectQuantityToBuy::
 	dr $24f2a, $24f42
-SelectQuantityToSell:
+SelectQuantityToSell::
 	dr $24f42, $25061
 
-TrainerCard:
+TrainerCard::
 	dr $25061, $267af
 
-ProfOaksPC:
+ProfOaksPC::
 	dr $267af, $267ca
-ProfOaksPCBoot:
+ProfOaksPCBoot::
 	dr $267ca, $2692d
-InitDecorations:
+InitDecorations::
 	dr $2692d, $26938
-_PlayerDecorationMenu:
+_PlayerDecorationMenu::
 	dr $26938, $270d5
 
-ReceiveDecorationC:
+ReceiveDecorationC::
 	dr $270d5, $271be
-ToggleMaptileDecorations:
+ToggleMaptileDecorations::
 	dr $271be, $27216
-ToggleDecorationsVisibility:
+ToggleDecorationsVisibility::
 	dr $27216, $27271
 INCLUDE "engine/battle/read_trainer_dvs.asm"
-ReturnToBattle_UseBall_:
+ReturnToBattle_UseBall_::
 	dr $27307, $2733d
-ConsumeHeldItem:
+ConsumeHeldItem::
 	dr $2733d, $2739f
 INCLUDE "data/moves/effects.asm"
 
+
 SECTION "banka", ROMX
+
 	dr $28000, $28d88
 LinkTextboxAtHL::
 	dr $28d88, $28dea
@@ -202,97 +214,101 @@ TradeAnimation::
 TradeAnimationPlayer2::
 	dr $28e22, $29a47
 
-CheckTimeCapsuleCompatibility:
+CheckTimeCapsuleCompatibility::
 	dr $29a47, $29ac7
-EnterTimeCapsule:
+EnterTimeCapsule::
 	dr $29ac7, $29ad9
-WaitForOtherPlayerToExit:
+WaitForOtherPlayerToExit::
 	dr $29ad9, $29b22
-SetBitsForLinkTradeRequest:
+SetBitsForLinkTradeRequest::
 	dr $29b22, $29b2b
-SetBitsForBattleRequest:
+SetBitsForBattleRequest::
 	dr $29b2b, $29b34
-SetBitsForTimeCapsuleRequest:
+SetBitsForTimeCapsuleRequest::
 	dr $29b34, $29b4b
-WaitForLinkedFriend:
+WaitForLinkedFriend::
 	dr $29b4b, $29bcc
-CheckLinkTimeout:
+CheckLinkTimeout::
 	dr $29bcc, $29c71
-TryQuickSave:
+TryQuickSave::
 	dr $29c71, $29c8d
-CheckBothSelectedSameRoom:
+CheckBothSelectedSameRoom::
 	dr $29c8d, $29cba
-TimeCapsule:
+TimeCapsule::
 	dr $29cba, $29ccf
-TradeCenter:
+TradeCenter::
 	dr $29ccf, $29ce4
-Colosseum:
+Colosseum::
 	dr $29ce4, $29cf9
-CloseLink:
+CloseLink::
 	dr $29cf9, $29d01
-FailedLinkToPast:
+FailedLinkToPast::
 	dr $29d01, $29d4e
-CableClubCheckWhichChris:
+CableClubCheckWhichChris::
 	dr $29d4e, $29dff
-Function29dff:
+Function29dff::
 	dr $29dff, $2a4bf
 
-MysteryGift_CopyReceivedDecosToPC:
+MysteryGift_CopyReceivedDecosToPC::
 	dr $2a4bf, $2a4e7
-UnlockMysteryGift:
+UnlockMysteryGift::
 	dr $2a4e7, $2a4f6
-Function2a4f6:
+Function2a4f6::
 	dr $2a4f6, $2a507
-BackupMysteryGift:
+BackupMysteryGift::
 	dr $2a507, $2a518
-RestoreMysteryGift:
+RestoreMysteryGift::
 	dr $2a518, $2a539
-LoadWildMonData:
+LoadWildMonData::
 	dr $2a539, $2a7d7
-InitRoamMons:
+InitRoamMons::
 	dr $2a7d7, $2a859
-UpdateRoamMons:
+UpdateRoamMons::
 	dr $2a859, $2a8e0
-JumpRoamMons:
+JumpRoamMons::
 	dr $2a8e0, $2a9f7
-RandomUnseenWildMon:
+RandomUnseenWildMon::
 	dr $2a9f7, $2aa6b
-RandomPhoneWildMon:
+RandomPhoneWildMon::
 	dr $2aa6b, $2aab3
-RandomPhoneMon:
+RandomPhoneMon::
 	dr $2aab3, $2ab35
-JohtoGrassWildMons:
+JohtoGrassWildMons::
 	dr $2ab35, $2bee3
 
+
 SECTION "bankb", ROMX
+
 	dr $2c000, $2c033
-BattleStart_TrainerHuds:
+BattleStart_TrainerHuds::
 	dr $2c033, $2c045
-EnemySwitch_TrainerHud:
+EnemySwitch_TrainerHud::
 	dr $2c045, $2c0c8
-DrawPlayerHUDBorder:
+DrawPlayerHUDBorder::
 	dr $2c0c8, $2c0f8
-DrawEnemyHUDBorder:
+DrawEnemyHUDBorder::
 	dr $2c0f8, $2c1e4
-_ShowLinkBattleParticipants:
+_ShowLinkBattleParticipants::
 	dr $2c1e4, $2c225
 INCLUDE "engine/battle/ai/redundant.asm"
-MoveDeletion:
+MoveDeletion::
 	dr $2c352, $2c57a
-Pack_TMHMPocketMenu_:
+Pack_TMHMPocketMenu_::
 	dr $2c57a, $2c5ca
-AskTeachTMHM:
+AskTeachTMHM::
 	dr $2c5ca, $2c606
-ChooseMonToLearnTMHM:
+ChooseMonToLearnTMHM::
 	dr $2c606, $2c672
-TeachTMHM:
+TeachTMHM::
 	dr $2c672, $2c943
 PrintMoveDesc::
 	dr $2c943, $2c95d
 GivePokerusAndConvertBerries::
 	dr $2c95d, $2ca31
 
+
 SECTION "bankc", ROMX
+
 	dr $30000, $33d81
 
 
@@ -323,7 +339,7 @@ Pokedex::
 Moves::
 	dr $41afe, $421db
 
-EvolvePokemon:
+EvolvePokemon::
 	dr $421db, $421e9
 EvolveAfterBattle::
 	dr $421e9, $42483
@@ -331,12 +347,14 @@ LearnLevelMoves::
 	dr $42483, $424dd
 FillMoves::
 	dr $424dd, $4278d
-GetPreEvolution:
+GetPreEvolution::
 	dr $4278d, $427bd
 EvosAttacksPointers::
 	dr $427bd, $43e57
 
+
 SECTION "bank11", ROMX
+
 	dr $44000, $440c8
 INCLUDE "engine/battle/ai/move.asm"
 	dr $441c2, $44360
@@ -350,50 +368,51 @@ PlaceGraphic::
 	dr $44648, $44679
 SendMailToPC::
 	dr $44679, $44830
-BackupPartyMonMail:
+BackupPartyMonMail::
 	dr $44830, $44850
-RestorePartyMonMail:
+RestorePartyMonMail::
 	dr $44850, $44870
-DeletePartyMonMail:
+DeletePartyMonMail::
 	dr $44870, $4488c
-IsAnyPokemonHoldingMail:
+IsAnyPokemonHoldingMail::
 	dr $4488c, $448ab
-_PlayerMailBoxMenu:
+_PlayerMailBoxMenu::
 	dr $448ab, $44aa2
+
 
 SECTION "bank14", ROMX
 
-SelectMonFromParty:
+SelectMonFromParty::
 	dr $50000, $5001d
-SelectTradeOrDayCareMon:
+SelectTradeOrDayCareMon::
 	dr $5001d, $5004f
-LoadPartyMenuGFX:
+LoadPartyMenuGFX::
 	dr $5004f, $5005f
-WritePartyMenuTilemap:
+WritePartyMenuTilemap::
 	dr $5005f, $50355
-InitPartyMenuGFX:
+InitPartyMenuGFX::
 	dr $50355, $5037a
-InitPartyMenuWithCancel:
+InitPartyMenuWithCancel::
 	dr $5037a, $503a2
-InitPartyMenuNoCancel:
+InitPartyMenuNoCancel::
 	dr $503a2, $503cc
-PartyMenuSelect:
+PartyMenuSelect::
 	dr $503cc, $5040f
-PrintPartyMenuText:
+PrintPartyMenuText::
 	dr $5040f, $504db
-PrintPartyMenuActionText:
+PrintPartyMenuActionText::
 	dr $504db, $5054f
-LoadFishingGFX:
+LoadFishingGFX::
 	dr $5054f, $506f2
-SweetScentFromMenu:
+SweetScentFromMenu::
 	dr $506f2, $50763
-SquirtbottleFunction:
+SquirtbottleFunction::
 	dr $50763, $507ac
-CardKeyFunction:
+CardKeyFunction::
 	dr $507ac, $507e7
-BasementKeyFunction:
+BasementKeyFunction::
 	dr $507e7, $50819
-SacredAshFunction:
+SacredAshFunction::
 	dr $50819, $5087d
 CopyMonToTempMon::
 	dr $5087d, $50940
@@ -424,45 +443,47 @@ PlaceNonFaintStatus::
 	dr $51437, $51478
 ListMoves::
 	dr $51478, $51524
-CalcLevel:
+CalcLevel::
 	dr $51524, $51550
-CalcExpAtLevel:
+CalcExpAtLevel::
 	dr $51550, $5161b
-_SwitchPartyMons:
+_SwitchPartyMons::
 	dr $5161b, $51749
-
 INCLUDE "engine/gfx/load_pics.asm"
 INCLUDE "engine/pokemon/move_mon_wo_mail.asm"
 INCLUDE "data/pokemon/base_stats.asm"
 
-Unknown53a6b:
+Unknown53a6b::
 	dr $53a6b, $53a83
 EggPic::
 INCBIN "gfx/pokemon/egg/front.2bpp.lz"
 
+
 SECTION "bank21", ROMX
+
 	dr $84000, $842db
 _PrinterReceive::
 	dr $842db, $84560
-PrintUnownStamp:
+PrintUnownStamp::
 	dr $84560, $845d4
-PrintMailAndExit:
+PrintMailAndExit::
 	dr $845d4, $84616
-PrintPartymon:
+PrintPartymon::
 	dr $84616, $84684
-Function84684:
+Function84684::
 	dr $84684, $86632
 
-_HallOfFamePC:
+_HallOfFamePC::
 	dr $86632, $87bfd
+
 
 SECTION "bank23", ROMX
 
-SaveMenu_CopyTilemapAtOnce:
+SaveMenu_CopyTilemapAtOnce::
 	dr $8c000, $8c17a
-ResetClock_:
+ResetClock_::
 	dr $8c17a, $8c310
-DeleteSaveData_:
+DeleteSaveData_::
 	dr $8c310, $8c355
 DummyPredef35::
 DummyPredef36::
@@ -477,34 +498,34 @@ FadeInPalettes::
 	dr $8c3a0, $8c3ab
 FadeOutPalettes::
 	dr $8c3ab, $8c3b9
-FadeInQuickly:
+FadeInQuickly::
 	dr $8c3b9, $8c3c4
-FadeBlackQuickly:
+FadeBlackQuickly::
 	dr $8c3c4, $8c3e9
 Function8c3e9::
 	dr $8c3e9, $8c513
 DoBattleTransition::
 	dr $8c513, $8ca5e
-PlayWhirlpoolSound:
+PlayWhirlpoolSound::
 	dr $8ca5e, $8ca6b
-BlindingFlash:
+BlindingFlash::
 	dr $8ca6b, $8ca8e
-ShakeHeadbuttTree:
+ShakeHeadbuttTree::
 	dr $8ca8e, $8cbb8
-OWCutAnimation:
+OWCutAnimation::
 	dr $8cbb8, $8cd65
-FlyFromAnimation:
+FlyFromAnimation::
 	dr $8cd65, $8cdab
-FlyToAnimation:
+FlyToAnimation::
 	dr $8cdab, $8ce7c
-MagnetTrain:
+MagnetTrain::
 	dr $8ce7c, $8d174
 
-ClearSpriteAnims:
+ClearSpriteAnims::
 	dr $8d174, $8d183
-PlaySpriteAnimationsAndDelay:
+PlaySpriteAnimationsAndDelay::
 	dr $8d183, $8d18a
-PlaySpriteAnimations:
+PlaySpriteAnimations::
 	dr $8d18a, $8d1f7
 _InitSpriteAnimStruct::
 	dr $8d1f7, $8d332
@@ -526,6 +547,7 @@ UnfreezeMonIcons::
 	dr $8e922, $8e93d
 HoldSwitchmonIcon::
 	dr $8e93d, $8fe43
+
 ELIF DEF(_SILVER)
 _ReinitSpriteAnimFrame::
 	dr $8d332, $8e6e3
@@ -545,46 +567,48 @@ HoldSwitchmonIcon::
 	dr $8e923, $8fe29
 ENDC
 
+
 SECTION "bank24", ROMX
+
 	dr $90000, $90641
-InitClock:
+InitClock::
 	dr $90641, $908dc
-SetDayOfWeek:
+SetDayOfWeek::
 	dr $908dc, $90a1b
-InitialSetDSTFlag:
+InitialSetDSTFlag::
 	dr $90a1b, $90a54
-InitialClearDSTFlag:
+InitialClearDSTFlag::
 	dr $90a54, $90a8d
-MrChrono:
+MrChrono::
 	dr $90a8d, $90b0f
-PrintHour:
+PrintHour::
 	dr $90b0f, $90b5e
-PokeGear:
+PokeGear::
 	dr $90b5e, $917ca
 
-RadioMusicRestartDE:
+RadioMusicRestartDE::
 	dr $917ca, $917de
-RadioMusicRestartPokemonChannel:
+RadioMusicRestartPokemonChannel::
 	dr $917de, $9188a
-Function9188a:
+Function9188a::
 	dr $9188a, $919c1
-Function919c1:
+Function919c1::
 	dr $919c1, $91a4f
-TownMap_:
+TownMap_::
 	dr $91a4f, $91c7f
 Pokedex_GetArea::
 	dr $91c7f, $92364
 
-GetLandmarkName:
+GetLandmarkName::
 	dr $92364, $92c36
-Function92c36:
+Function92c36::
 	dr $92c36, $93f86
+
 
 SECTION "bank25", ROMX
 
 MapTriggers::
 	dr $94000, $940ed
-
 INCLUDE "data/maps/maps.asm"
 INCLUDE "data/maps/attributes.asm"
 
@@ -597,30 +621,33 @@ ScriptEvents::
 
 CallCallback::
 	dr $97365, $97a59
-WarpToSpawnPoint:
+WarpToSpawnPoint::
 	dr $97a59, $97c2a
 Function97c2a::
 	dr $97c2a, $97d96
 
+
 SECTION "bank26", ROMX
 
 IF DEF(_GOLD)
-TitleScreenGFX1:
+TitleScreenGFX1::
 	dr $98000, $98476
-TitleScreenGFX2:
+TitleScreenGFX2::
 	dr $98476, $98616
-GSIntroTilemap:
+GSIntroTilemap::
 	dr $98616, $98857
+
 ELIF DEF(_SILVER)
-TitleScreenGFX1:
+TitleScreenGFX1::
 	dr $98000, $98498
-TitleScreenGFX2:
+TitleScreenGFX2::
 	dr $98498, $9862a
-GSIntroTilemap:
+GSIntroTilemap::
 	dr $9862a, $9886b
 ENDC
 
 INCLUDE "data/maps/blocks.asm"
+
 
 SECTION "bank2e_2", ROMX
 
@@ -629,33 +656,37 @@ INCLUDE "engine/events/treemons.asm"
 INCLUDE "engine/pokegear/radio.asm"
 INCLUDE "engine/pokemon/mail_2.asm"
 
+
 SECTION "bank31_2", ROMX
-Functionc7a40:
+
+Functionc7a40::
 	dr $c7a40, $c7a5a
-CheckForLuckyNumberWinners:
+CheckForLuckyNumberWinners::
 	dr $c7a5a, $c7bad
-PrintTodaysLuckyNumber:
+PrintTodaysLuckyNumber::
 	dr $c7bad, $c7bbf
-CheckPartyFullAfterContest:
+CheckPartyFullAfterContest::
 	dr $c7bbf, $c7cd0
-Functionc7cd0:
+Functionc7cd0::
 	dr $c7cd0, $c7cde
 
+
 SECTION "bank32", ROMX
+
 	dr $c8000, $c80d6
 DummyPredef2F::
 	dr $c80d6, $c900a
-
 INCLUDE "data/moves/animations.asm"
 
 LoadPoisonBGPals::
 	dr $cbc76, $cbdba
 
+
 SECTION "Move Animations", ROMX
 
-DisplayCaughtContestMonStats:
+DisplayCaughtContestMonStats::
 	dr $cc000, $cc0c8
-DisplayAlreadyCaughtText:
+DisplayAlreadyCaughtText::
 	dr $cc0c8, $cc0d6
 DummyPredef38::
 DummyPredef39::
@@ -669,63 +700,71 @@ BattleAnimCmd_RaiseSub::
 BattleAnimCmd_MinimizeOpp::
 	dr $cc67c, $cfce3
 
+
 SECTION "bank36", ROMX
+
 	dr $d8000, $d8400
 
+
 SECTION "bank38", ROMX
+
 	dr $e0000, $e0002
-Functione0002:
+Functione0002::
 	dr $e0002, $e081b
-RotateUnownFrontpic:
+RotateUnownFrontpic::
 	dr $e081b, $e0909
-Functione0909:
+Functione0909::
 	dr $e0909, $e199d
 
-Functione199d:
+Functione199d::
 	dr $e199d, $e2668
 
-Functione2668:
+Functione2668::
 	dr $e2668, $e2b9e
-DepositPokemon_:
+DepositPokemon_::
 	dr $e2b9e, $e2d71
-WithdrawPokemon_:
+WithdrawPokemon_::
 	dr $e2d71, $e2f47
-MovePKMNWithoutMail_:
+MovePKMNWithoutMail_::
 	dr $e2f47, $e3d25
 
-ChangeBox_:
+ChangeBox_::
 	dr $e3d25, $e3f74
+
 
 SECTION "bank39", ROMX
 
-CopyrightGFX:
+CopyrightGFX::
 INCBIN "gfx/intro/copyright.2bpp"
 
 IF DEF(_GOLD)
-TitleScreenGFX3:
+TitleScreenGFX3::
 	dr $e41e0, $e4260
-TitleScreenGFX4:
+TitleScreenGFX4::
 	dr $e4260, $e4608
-OptionsMenu:
+OptionsMenu::
 	dr $e4608, $e49a8
+
 ELIF DEF(_SILVER)
-TitleScreenGFX3:
+TitleScreenGFX3::
 	dr $e41e0, $e4220
-TitleScreenGFX4:
+TitleScreenGFX4::
 	dr $e4220, $e4450
-OptionsMenu:
+OptionsMenu::
 	dr $e4450, $e47f0
 ENDC
 
 INCLUDE "engine/movie/gamefreak_presents.asm"
 
 IF DEF(_GOLD)
-GoldSilverIntro:
+GoldSilverIntro::
 	dr $e4cb1, $e7678
+
 ELIF DEF(_SILVER)
-GoldSilverIntro:
+GoldSilverIntro::
 	dr $e4af9, $e74c0
 ENDC
+
 
 SECTION "bank3e", ROMX
 
@@ -750,54 +789,59 @@ ExpBarGFX::
 
 TileCollisionTable::
 	dr $fb4be, $fb5be
-Shrink1Pic:
+Shrink1Pic::
 	dr $fb5be, $fb64e
-Shrink2Pic:
+Shrink2Pic::
 	dr $fb64e, $fb7f7
-_NameRater:
+_NameRater::
 	dr $fb7f7, $fb94b
-PlaySlowCry:
+PlaySlowCry::
 	dr $fb94b, $fb981
-NewPokedexEntry:
+NewPokedexEntry::
 	dr $fb981, $fba12
 ConvertMon_1to2::
 	dr $fba12, $fbb22
-UpdateUnownDex:
+UpdateUnownDex::
 	dr $fbb22, $fbc3c
-CheckMagikarpLength:
+CheckMagikarpLength::
 	dr $fbc3c, $fbd00
 CalcMagikarpLength::
 	dr $fbd00, $fbdd6
-MagikarpHouseSign:
+MagikarpHouseSign::
 	dr $fbdd6, $fbdf1
-HiddenPowerDamage:
+HiddenPowerDamage::
 	dr $fbdf1, $fbe5a
-_DisappearUser:
+_DisappearUser::
 	dr $fbe5a, $fbe6f
-_AppearUserRaiseSub:
+_AppearUserRaiseSub::
 	dr $fbe6f, $fbe77
-_AppearUserLowerSub:
+_AppearUserLowerSub::
 	dr $fbe77, $fbeaa
-DoWeatherModifiers:
+DoWeatherModifiers::
 	dr $fbeaa, $fbf2b
-DoBadgeTypeBoosts:
+DoBadgeTypeBoosts::
 	dr $fbf2b, $fbf93
 
+
 SECTION "bank3f", ROMX
+
 	nop
 DummyPredef3A::
 	ret
 	dr $fc002, $fde20
 
-SECTION "bank40", ROMX
-	dr $100000, $10110c
 
+SECTION "bank40", ROMX
+
+	dr $100000, $10110c
 INCLUDE "data/text/battle.asm"
 
-SECTION "bank41", ROMX
-	dr $104000, $10614d
 
+SECTION "bank41", ROMX
+
+	dr $104000, $10614d
 INCLUDE "data/maps/scripts.asm"
+
 
 SECTION "bank6c", ROMX
 
@@ -810,14 +854,19 @@ PokemonNames::
 MoveNames::
 	dr $1b1574, $1b1ee1
 
+
 SECTION "bank6d", ROMX
 
 INCLUDE "data/moves/descriptions.asm"
 
+
 SECTION "bank6e", ROMX
+
 	dr $1b8000, $1b9544
 
+
 SECTION "bank70", ROMX
+
 	dr $1c0000, $1c0a66
 UpdateTimePredef::
 	dr $1c0a66, $1c0a7a
@@ -838,4 +887,5 @@ ENDC
 
 
 SECTION "bank7f", ROMX
+
 	dr $1ffdf8, $200000
