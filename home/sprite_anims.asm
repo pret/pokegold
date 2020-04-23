@@ -1,11 +1,11 @@
 InitSpriteAnimStruct::
-	ld [wAnimatedObjectStructIDBuffer], a
+	ld [wSpriteAnimIDBuffer], a
 	ldh a, [hROMBank]
 	push af
 
 	ld a, BANK(_InitSpriteAnimStruct)
 	rst Bankswitch
-	ld a, [wAnimatedObjectStructIDBuffer]
+	ld a, [wSpriteAnimIDBuffer]
 
 	call _InitSpriteAnimStruct
 
@@ -15,13 +15,13 @@ InitSpriteAnimStruct::
 	ret
 
 ReinitSpriteAnimFrame::
-	ld [wAnimatedObjectStructIDBuffer], a
+	ld [wSpriteAnimIDBuffer], a
 	ldh a, [hROMBank]
 	push af
 
 	ld a, BANK(_ReinitSpriteAnimFrame)
 	rst Bankswitch
-	ld a, [wAnimatedObjectStructIDBuffer]
+	ld a, [wSpriteAnimIDBuffer]
 
 	call _ReinitSpriteAnimFrame
 

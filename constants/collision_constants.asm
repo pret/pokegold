@@ -1,6 +1,6 @@
 ; collision permissions (see data/collision_permissions.asm)
 LANDTILE             EQU $00
-WATERTILE            EQU $01
+WATER_TILE           EQU $01
 WALLTILE             EQU $0f
 TALK                 EQU $10
 

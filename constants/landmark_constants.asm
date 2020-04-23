@@ -99,3 +99,9 @@ KANTO_LANDMARK EQU const_value
 	const TOHJO_FALLS       ; 5c
 	const ROUTE_28          ; 5d
 	const FAST_SHIP         ; 5e
+
+; Regions
+	const_def
+	const JOHTO_REGION ; 0
+	const KANTO_REGION ; 1
+NUM_REGIONS EQU const_value

@@ -994,5 +994,3 @@ DragonsDenB1F_Blocks:
 
 TohjoFalls_Blocks:
 	INCBIN "maps/TohjoFalls.blk"
-
-	dr $dd773, $dfe92 ; XXX Probably not blockdata?

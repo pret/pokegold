@@ -24,11 +24,11 @@ IsInJohto::
 	jr nc, .Kanto
 
 .Johto:
-	xor a
+	xor a ; JOHTO_REGION
 	ret
 
 .Kanto:
-	ld a, 1
+	ld a, KANTO_REGION
 	ret
 
 Function2ffe::

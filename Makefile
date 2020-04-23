@@ -63,7 +63,6 @@ compare: $(roms)
 tools:
 	$(MAKE) -C tools/
 
-
 RGBASMFLAGS = -L -Weverything
 $(gold_obj):   RGBASMFLAGS += -D _GOLD
 $(silver_obj): RGBASMFLAGS += -D _SILVER
@@ -94,12 +93,12 @@ $(foreach obj, $(gold_excl_obj) $(silver_excl_obj), $(eval $(call DEP,$(obj),$(o
 endif
 
 
-pokegold.gbc: $(gold_obj) pokegold.link
-	$(RGBLINK) -n pokegold.sym -m pokegold.map -l pokegold.link -o $@ $(gold_obj)
+pokegold.gbc: $(gold_obj) layout.link
+	$(RGBLINK) -n pokegold.sym -m pokegold.map -l layout.link -o $@ $(gold_obj)
 	$(RGBFIX) -cjsv -i AAUE -k 01 -l 0x33 -m 0x10 -p 0 -r 3 -t "POKEMON_GLD" $@
 
-pokesilver.gbc: $(silver_obj) pokesilver.link
-	$(RGBLINK) -n pokesilver.sym -m pokesilver.map -l pokesilver.link -o $@ $(silver_obj)
+pokesilver.gbc: $(silver_obj) layout.link
+	$(RGBLINK) -n pokesilver.sym -m pokesilver.map -l layout.link -o $@ $(silver_obj)
 	$(RGBFIX) -cjsv -i AAXE -k 01 -l 0x33 -m 0x10 -p 0 -r 3 -t "POKEMON_SLV" $@
 
 pngs:

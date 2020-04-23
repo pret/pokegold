@@ -18,7 +18,7 @@ GetSpriteVTile::
 	push hl
 	push bc
 	ld hl, wUsedSprites + 2
-	ld c, $b
+	ld c, SPRITE_GFX_LIST_CAPACITY - 1
 	ld b, a
 	ldh a, [hMapObjectIndexBuffer]
 	cp 0
@@ -80,7 +80,7 @@ GetPlayerStandingTile::
 CheckOnWater::
 	ld a, [wPlayerStandingTile]
 	call GetTileCollision
-	sub WATERTILE
+	sub WATER_TILE
 	ret z
 	and a
 	ret

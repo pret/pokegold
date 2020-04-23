@@ -518,7 +518,7 @@ Function8ff6: ; 8ff6 (2:4ff6)
 	ret
 
 .asm_9000
-	ld a, [wPermission]
+	ld a, [wEnvironment]
 	cp $2
 	jr z, .asm_9023
 	cp $4

@@ -1,5 +1,3 @@
-INCLUDE "data/events/unused_pokemonpc_menudata.asm"
-
 PokemonCenterPC:
 	call PC_CheckPartyForPokemon
 	ret c

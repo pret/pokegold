@@ -8036,7 +8036,7 @@ ShowLinkBattleParticipantsAfterEnd:
 	ld a, BANK(sLinkBattleStats)
 	call OpenSRAM
 
-	call AddLastMobileBattleToLinkRecord
+	call AddLastBattleToLinkRecord
 	call ReadAndPrintLinkBattleRecord
 
 	call CloseSRAM
@@ -8300,7 +8300,7 @@ GetRoamMonSpecies:
 	ld hl, wRoamMon3Species
 	ret
 
-AddLastMobileBattleToLinkRecord:
+AddLastBattleToLinkRecord:
 	ld hl, wOTPlayerID
 	ld de, wStringBuffer1
 	ld bc, 2

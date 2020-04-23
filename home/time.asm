@@ -36,7 +36,6 @@ GetClock::
 	maskbits 60
 	ldh [hRTCSeconds], a
 
-
 	ld [hl], RTC_M
 	ld a, [de]
 	maskbits 60

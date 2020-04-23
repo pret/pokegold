@@ -49,7 +49,7 @@ GetVarAction_::
 	dwb wMapGroup, RETVAR_STRBUF2
 	dwb wMapNumber, RETVAR_STRBUF2
 	dwb .UnownCaught, RETVAR_EXECUTE
-	dwb wPermission, RETVAR_STRBUF2
+	dwb wEnvironment, RETVAR_STRBUF2
 	dwb .BoxFreeSpace, RETVAR_EXECUTE
 	dwb wBugContestMinsRemaining, RETVAR_STRBUF2
 	dwb wXCoord, RETVAR_STRBUF2

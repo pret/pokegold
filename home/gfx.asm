@@ -1,4 +1,4 @@
-Functiond70:: ; d70 (0:0d70)
+FarCopyBytesDouble_DoubleBankSwitch::
 	ld b, a
 	ldh a, [hROMBank]
 	push af
@@ -12,7 +12,7 @@ Functiond70:: ; d70 (0:0d70)
 	xor a
 	call ByteFill
 
-	ld hl, wcf3c
+	ld hl, wUnusedBufferCF3C
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
@@ -29,7 +29,7 @@ ReplaceChrisSprite::
 	ret
 
 LoadStandardFont::
-	farcall Functionf8000
+	farcall _LoadStandardFont
 	ret
 
 LoadFontsBattleExtra::
@@ -37,23 +37,23 @@ LoadFontsBattleExtra::
 	ret
 
 LoadFontsExtra::
-	farcall Functionf800c
+	farcall _LoadFontsExtra
 	ret
 
 DecompressRequest2bpp::
 	push de
-	ld a, BANK(sDecompressScratch)
+	ld a, BANK(sScratch)
 	call OpenSRAM
 	push bc
 
-	ld de, sDecompressScratch
+	ld de, sScratch
 	ld a, b
 	call FarDecompress
 
 	pop bc
 	pop hl
 
-	ld de, sDecompressScratch
+	ld de, sScratch
 	call Request2bpp
 	call CloseSRAM
 	ret
@@ -72,7 +72,6 @@ FarCopyBytes::
 	pop af
 	rst Bankswitch
 	ret
-
 
 FarCopyBytesDouble::
 ; Copy bc bytes from a:hl to bc*2 bytes at de,
@@ -259,12 +258,12 @@ Copy1bpp::
 	pop hl
 	jp FarCopyBytesDouble
 
-Function_ea6::
+UnusedGet2bpp::
 	ldh a, [rLCDC]
 	add a
 	jp c, Request2bpp
 
-Function_eac::
+UnusedCopy2bpp::
 	push de
 	push hl
 

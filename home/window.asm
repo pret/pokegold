@@ -38,7 +38,7 @@ CloseText::
 	ldh [hWY], a
 	farcall Function1415c
 	call ReplaceChrisSprite
-	ld hl, wd565
+	ld hl, wEnteredMapFromContinue
 	res 7, [hl]
 	call ResetBGWindow
 	ret
@@ -65,7 +65,7 @@ _OpenAndCloseMenu_HDMATransferTilemapAndAttrmap::
 	ld a, 1
 	ldh [hOAMUpdate], a
 
-	call CGBOnly_CopyTilemapAtOnce
+	call OpenAndCloseMenu_HDMATransferTilemapAndAttrmap
 
 	pop af
 	ldh [hOAMUpdate], a

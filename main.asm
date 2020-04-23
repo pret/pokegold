@@ -85,6 +85,7 @@ INCLUDE "data/maps/spawn_points.asm"
 INCLUDE "engine/overworld/load_map_part.asm"
 INCLUDE "engine/overworld/spawn_points.asm"
 INCLUDE "engine/overworld/map_setup.asm"
+INCLUDE "data/tilesets.asm"
 INCLUDE "engine/events/pokemon_pc.asm"
 INCLUDE "engine/items/mart.asm"
 INCLUDE "engine/events/money.asm"
@@ -99,18 +100,127 @@ INCLUDE "engine/pokemon/breeding.asm"
 
 SECTION "bank6", ROMX
 
-	dr $18000, $1bdbc
+TilesetKantoMeta::
+	dr $18000, $18800
+TilesetKantoColl::
+	dr $18800, $18a00
+Tileset0GFX::
+TilesetJohtoGFX::
+	dr $18a00, $19006
+
+Tileset0Meta::
+TilesetJohtoMeta::
+	dr $19006, $19806
+Tileset0Coll::
+TilesetJohtoColl::
+	dr $19806, $19a06
+TilesetJohtoModernGFX::
+	dr $19a06, $1a00c
+
+TilesetJohtoModernMeta::
+	dr $1a00c, $1a80c
+TilesetJohtoModernColl::
+	dr $1a80c, $1b40c
+
+TilesetTraditionalHouseGFX::
+	dr $1b40c, $1b8bc
+TilesetTraditionalHouseMeta::
+	dr $1b8bc, $1bcbc
+TilesetTraditionalHouseColl::
+	dr $1bcbc, $1bdbc
 
 
 SECTION "bank7", ROMX
 
 LoadMapGroupRoof::
-	dr $1c000, $1f84c
+	dr $1c000, $1c30c
+TilesetGateGFX::
+	dr $1c30c, $1c70c
+TilesetGateMeta::
+	dr $1c70c, $1cb0c
+TilesetGateColl::
+	dr $1cb0c, $1cc0c
+TilesetPokecenterGFX::
+	dr $1cc0c, $1d03c
+
+TilesetPokecenterMeta::
+	dr $1d03c, $1d43c
+TilesetPokecenterColl::
+	dr $1d43c, $1d53c
+TilesetPortGFX::
+	dr $1d53c, $1d94c
+TilesetPortMeta::
+	dr $1d94c, $1dd4c
+TilesetPortColl::
+	dr $1dd4c, $1de4c
+TilesetPlayersHouseGFX::
+	dr $1de4c, $1e22c
+
+TilesetPlayersHouseMeta::
+	dr $1e22c, $1e62c
+TilesetPlayersHouseColl::
+	dr $1e62c, $1e72c
+TilesetMansionGFX::
+	dr $1e72c, $1eabc
+TilesetMansionMeta::
+	dr $1eabc, $1eebc
+TilesetMansionColl::
+	dr $1eebc, $1efbc
+TilesetCaveGFX::
+	dr $1efbc, $1f34c
+
+TilesetCaveMeta::
+TilesetDarkCaveMeta::
+	dr $1f34c, $1f74c
+TilesetCaveColl::
+TilesetDarkCaveColl::
+	dr $1f74c, $1f84c
 
 
 SECTION "bank8", ROMX
 
-	dr $20000, $239fe
+	dr $20000, $20181
+TilesetTowerGFX::
+	dr $20181, $205b1
+TilesetTowerMeta::
+	dr $205b1, $209b1
+TilesetTowerColl::
+	dr $209b1, $20ab1
+TilesetLabGFX::
+	dr $20ab1, $20e81
+TilesetLabMeta::
+	dr $20e81, $21281
+
+TilesetLabColl::
+	dr $21281, $21381
+TilesetFacilityGFX::
+	dr $21381, $217a1
+TilesetFacilityMeta::
+	dr $217a1, $21ba1
+TilesetFacilityColl::
+	dr $21ba1, $21ca1
+TilesetMartGFX::
+	dr $21ca1, $22051
+
+TilesetMartMeta::
+	dr $22051, $22451
+TilesetMartColl::
+	dr $22451, $22551
+TilesetGameCornerGFX::
+	dr $22551, $22951
+TilesetGameCornerMeta::
+	dr $22951, $22d51
+TilesetGameCornerColl::
+	dr $22d51, $22e51
+TilesetTrainStationGFX::
+	dr $22e51, $231f1
+
+TilesetTrainStationMeta::
+	dr $231f1, $235f1
+TilesetTrainStationColl::
+	dr $235f1, $236f1
+TilesetForestMeta::
+	dr $236f1, $239fe
 EggMovePointers::
 	dr $239fe, $23e3d
 
@@ -309,7 +419,47 @@ GivePokerusAndConvertBerries::
 
 SECTION "bankc", ROMX
 
-	dr $30000, $33d81
+TilesetEliteFourRoomGFX::
+	dr $30000, $304e0
+TilesetEliteFourRoomMeta::
+	dr $304e0, $308e0
+TilesetEliteFourRoomColl::
+	dr $308e0, $309e0
+TilesetParkGFX::
+	dr $309e0, $30e40
+TilesetParkMeta::
+	dr $30e40, $31240
+TilesetParkColl::
+	dr $31240, $31340
+TilesetRuinsOfAlphGFX::
+	dr $31340, $31670
+TilesetRuinsOfAlphMeta::
+	dr $31670, $31a70
+TilesetRuinsOfAlphColl::
+	dr $31a70, $31b70
+TilesetRadioTowerGFX::
+	dr $31b70, $31fc0
+TilesetRadioTowerMeta::
+	dr $31fc0, $323c0
+
+TilesetRadioTowerColl::
+	dr $323c0, $324c0
+TilesetUndergroundGFX::
+	dr $324c0, $32890
+TilesetUndergroundMeta::
+	dr $32890, $32c90
+TilesetUndergroundColl::
+	dr $32c90, $32d90
+TilesetIcePathGFX::
+	dr $32d90, $331d0
+TilesetIcePathMeta::
+	dr $331d0, $335d0
+TilesetIcePathColl::
+	dr $335d0, $336d0
+TilesetDarkCaveGFX::
+	dr $336d0, $33a10
+TilesetForestGFX::
+	dr $33a10, $33d81
 
 
 SECTION "Effect Commands", ROMX
@@ -502,7 +652,7 @@ FadeInQuickly::
 	dr $8c3b9, $8c3c4
 FadeBlackQuickly::
 	dr $8c3c4, $8c3e9
-Function8c3e9::
+ReplaceTimeOfDayPals::
 	dr $8c3e9, $8c513
 DoBattleTransition::
 	dr $8c513, $8ca5e
@@ -530,8 +680,8 @@ PlaySpriteAnimations::
 _InitSpriteAnimStruct::
 	dr $8d1f7, $8d332
 
-IF DEF(_GOLD)
 _ReinitSpriteAnimFrame::
+IF DEF(_GOLD)
 	dr $8d332, $8e6fd
 AnimateEndOfExpBar::
 	dr $8e6fd, $8e774
@@ -549,7 +699,6 @@ HoldSwitchmonIcon::
 	dr $8e93d, $8fe43
 
 ELIF DEF(_SILVER)
-_ReinitSpriteAnimFrame::
 	dr $8d332, $8e6e3
 AnimateEndOfExpBar::
 	dr $8e6e3, $8e75a
@@ -607,7 +756,7 @@ Function92c36::
 
 SECTION "bank25", ROMX
 
-MapTriggers::
+MapScenes::
 	dr $94000, $940ed
 INCLUDE "data/maps/maps.asm"
 INCLUDE "data/maps/attributes.asm"
@@ -623,7 +772,7 @@ CallCallback::
 	dr $97365, $97a59
 WarpToSpawnPoint::
 	dr $97a59, $97c2a
-Function97c2a::
+ClearCmdQueue::
 	dr $97c2a, $97d96
 
 
@@ -706,6 +855,36 @@ SECTION "bank36", ROMX
 	dr $d8000, $d8400
 
 
+SECTION "bank37_2", ROMX
+
+TilesetChampionsRoomGFX::
+	dr $dd773, $ddc33
+TilesetChampionsRoomMeta::
+	dr $ddc33, $de033
+TilesetChampionsRoomColl::
+	dr $de033, $de133
+TilesetHouseGFX::
+	dr $de133, $de5d3
+TilesetHouseMeta::
+	dr $de5d3, $de9d3
+TilesetHouseColl::
+	dr $de9d3, $dead3
+TilesetLighthouseGFX::
+	dr $dead3, $deed3
+TilesetLighthouseMeta::
+	dr $deed3, $df2d3
+TilesetLighthouseColl::
+	dr $df2d3, $df3d3
+TilesetPlayersRoomGFX::
+	dr $df3d3, $df893
+TilesetPlayersRoomMeta::
+	dr $df893, $dfc93
+TilesetPlayersRoomColl::
+	dr $dfc93, $dfd93
+TilesetForestColl::
+	dr $dfd93, $dfe93
+
+
 SECTION "bank38", ROMX
 
 	dr $e0000, $e0002
@@ -768,9 +947,9 @@ ENDC
 
 SECTION "bank3e", ROMX
 
-Functionf8000::
+_LoadStandardFont::
 	dr $f8000, $f800c
-Functionf800c::
+_LoadFontsExtra::
 	dr $f800c, $f8032
 _LoadFontsBattleExtra::
 	dr $f8032, $f8066
@@ -828,7 +1007,46 @@ SECTION "bank3f", ROMX
 	nop
 DummyPredef3A::
 	ret
-	dr $fc002, $fde20
+	ret
+_AnimateTileset::
+	dr $fc003, $fc01e
+Tileset0Anim::
+TilesetJohtoModernAnim::
+TilesetKantoAnim::
+TilesetParkAnim::
+TilesetForestAnim::
+	dr $fc01e, $fc04a
+TilesetJohtoAnim::
+	dr $fc04a, $fc0d6
+TilesetPortAnim::
+	dr $fc0d6, $fc106
+TilesetEliteFourRoomAnim::
+	dr $fc106, $fc18e
+TilesetCaveAnim::
+TilesetDarkCaveAnim::
+	dr $fc18e, $fc1da
+TilesetIcePathAnim::
+	dr $fc1da, $fc226
+TilesetTowerAnim::
+	dr $fc226, $fc28e
+TilesetHouseAnim::
+TilesetPlayersHouseAnim::
+TilesetPokecenterAnim::
+TilesetGateAnim::
+TilesetLabAnim::
+TilesetFacilityAnim::
+TilesetMartAnim::
+TilesetMansionAnim::
+TilesetGameCornerAnim::
+TilesetTraditionalHouseAnim::
+TilesetTrainStationAnim::
+TilesetChampionsRoomAnim::
+TilesetLighthouseAnim::
+TilesetPlayersRoomAnim::
+TilesetRuinsOfAlphAnim::
+TilesetRadioTowerAnim::
+TilesetUndergroundAnim::
+	dr $fc28e, $fde20
 
 
 SECTION "bank40", ROMX
@@ -867,7 +1085,9 @@ SECTION "bank6e", ROMX
 
 SECTION "bank70", ROMX
 
-	dr $1c0000, $1c0a66
+	dr $1c0000, $1c0407
+TilesetKantoGFX::
+	dr $1c0407, $1c0a66
 UpdateTimePredef::
 	dr $1c0a66, $1c0a7a
 StubbedGetFrontpic::

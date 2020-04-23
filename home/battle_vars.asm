@@ -96,16 +96,16 @@ BattleVarPairs:
 
 BattleVarLocations:
 ; entries correspond to PLAYER_* and ENEMY_* constants
-	dw wPlayerSubStatus1,            wEnemySubStatus1
-	dw wPlayerSubStatus2,            wEnemySubStatus2
-	dw wPlayerSubStatus3,            wEnemySubStatus3
-	dw wPlayerSubStatus4,            wEnemySubStatus4
-	dw wPlayerSubStatus5,            wEnemySubStatus5
-	dw wBattleMonStatus,             wEnemyMonStatus
-	dw wPlayerMoveStructAnimation,   wEnemyMoveStructAnimation
-	dw wPlayerMoveStructEffect,      wEnemyMoveStructEffect
-	dw wPlayerMoveStructPower,       wEnemyMoveStructPower
-	dw wPlayerMoveStructType,        wEnemyMoveStructType
-	dw wCurPlayerMove,               wCurEnemyMove
-	dw wLastPlayerCounterMove,       wLastEnemyCounterMove
-	dw wLastPlayerMove,              wLastEnemyMove
+	dw wPlayerSubStatus1,          wEnemySubStatus1
+	dw wPlayerSubStatus2,          wEnemySubStatus2
+	dw wPlayerSubStatus3,          wEnemySubStatus3
+	dw wPlayerSubStatus4,          wEnemySubStatus4
+	dw wPlayerSubStatus5,          wEnemySubStatus5
+	dw wBattleMonStatus,           wEnemyMonStatus
+	dw wPlayerMoveStructAnimation, wEnemyMoveStructAnimation
+	dw wPlayerMoveStructEffect,    wEnemyMoveStructEffect
+	dw wPlayerMoveStructPower,     wEnemyMoveStructPower
+	dw wPlayerMoveStructType,      wEnemyMoveStructType
+	dw wCurPlayerMove,             wCurEnemyMove
+	dw wLastPlayerCounterMove,     wLastEnemyCounterMove
+	dw wLastPlayerMove,            wLastEnemyMove

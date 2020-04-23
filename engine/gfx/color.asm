@@ -121,11 +121,11 @@ Function9102:
 	call CheckCGB
 	ret z
 	ld hl, .BGPal
-	ld de, wTempBGPals
+	ld de, wBGPals1
 	ld bc, $8
 	call CopyBytes
 	ld hl, .OBPal
-	ld de, wTempOBPals
+	ld de, wOBPals1
 	ld bc, $8
 	call CopyBytes
 	call Function9b28
@@ -164,7 +164,7 @@ Function9144:
 	jp PushSGBPals_
 
 .asm_9153
-	ld de, wTempOBPals
+	ld de, wOBPals1
 	ld a, $3b
 	call Function9ac7
 	jp Function9ad2
@@ -179,7 +179,7 @@ Function915e:
 	jp PushSGBPals_
 
 .asm_916d
-	ld de, wTempOBPals
+	ld de, wOBPals1
 	ld a, $3c
 	call Function9ac7
 	jp Function9ad2
@@ -210,7 +210,7 @@ Function9178:
 	jp PushSGBPals_
 
 .asm_91a9
-	ld de, wTempOBPals
+	ld de, wOBPals1
 	ld a, c
 	call Function9be4
 	call Function9adb
@@ -242,7 +242,7 @@ Function91b4:
 	lb bc, 6, 4
 	ld a, [wc605]
 	and $3
-	call Function9af1
+	call FillBoxCGB
 	call CopyTilemapAtOnce
 	ret
 
@@ -260,7 +260,7 @@ ApplyMonOrTrainerPals: ; 91e5 (2:51e5)
 	ld a, [wTrainerClass]
 	call Function9bda
 .asm_91fb
-	ld de, wTempBGPals
+	ld de, wBGPals1
 	call Function9adb
 	call Function9b1d
 	call Function9b35
@@ -312,7 +312,7 @@ ApplyHPBarPals:
 .asm_9248
 	lb bc, 2, 8
 	ld a, e
-	call Function9af1
+	call FillBoxCGB
 	ret
 
 LoadStatsScreenPals:
@@ -324,11 +324,11 @@ LoadStatsScreenPals:
 	add hl, bc
 	add hl, bc
 	ld a, [hli]
-	ld [wTempBGPals], a
-	ld [wTempBGPals + $10], a
+	ld [wBGPals1], a
+	ld [wBGPals1 + $10], a
 	ld a, [hl]
-	ld [wTempBGPals + 1], a
-	ld [wTempBGPals + $11], a
+	ld [wBGPals1 + 1], a
+	ld [wBGPals1 + $11], a
 	call Function9b28
 	ld a, $1
 	ldh [hCGBPalUpdate], a
@@ -367,7 +367,7 @@ LoadMailPalettes:
 	ret
 
 .asm_92ae
-	ld de, wTempBGPals
+	ld de, wBGPals1
 	ld bc, $8
 	call CopyBytes
 	call Function9b28
@@ -382,7 +382,7 @@ INCLUDE "engine/gfx/cgb_layouts.asm"
 
 Function9a94: ; 9a94 (2:5a94)
 	ld hl, Palettes_9aaa
-	ld de, wTempBGPals
+	ld de, wBGPals1
 	ld bc, $8
 	call CopyBytes
 	call Function9b28
@@ -397,7 +397,7 @@ Palettes_9aaa:
 	RGB  0,  3, 19
 
 Function9ab2: ; 9ab2 (2:5ab2)
-	ld de, wTempBGPals
+	ld de, wBGPals1
 	ld c, $4
 Function9ab7: ; 9ab7 (2:5ab7)
 	push bc
@@ -453,7 +453,7 @@ Function9adb: ; 9adb (2:5adb)
 	inc de
 	ret
 
-Function9af1: ; 9af1 (2:5af1)
+FillBoxCGB: ; 9af1 (2:5af1)
 	push bc
 	push hl
 .asm_9af3
@@ -465,7 +465,7 @@ Function9af1: ; 9af1 (2:5af1)
 	add hl, bc
 	pop bc
 	dec b
-	jr nz, Function9af1
+	jr nz, FillBoxCGB
 	ret
 
 Function9b01: ; 9b01 (2:5b01)
@@ -473,7 +473,7 @@ Function9b01: ; 9b01 (2:5b01)
 	push bc
 	push de
 	push hl
-	ld hl, wTempBGPals
+	ld hl, wBGPals1
 	ld c, $8
 .asm_9b0a
 	ld a, $ff
@@ -502,8 +502,8 @@ Function9b1d: ; 9b1d (2:5b1d)
 	ret
 
 Function9b28: ; 9b28 (2:5b28)
-	ld hl, wTempBGPals
-	ld de, wBGPals
+	ld hl, wBGPals1
+	ld de, wBGPals2
 	ld bc, $80
 	call CopyBytes
 	ret
@@ -574,7 +574,7 @@ Function9b75: ; 9b75 (2:5b75)
 .asm_9b94
 	lb bc, 2, 8
 	ld a, e
-	call Function9af1
+	call FillBoxCGB
 	ret
 
 Function9b9c: ; 9b9c (2:5b9c)
@@ -836,9 +836,9 @@ InitCGBPals:: ; 9cfd (2:5cfd)
 	ldh [rOBPD], a
 	dec c
 	jr nz, .asm_9d2a
-	ld hl, wTempBGPals
+	ld hl, wBGPals1
 	call Function9d3e
-	ld hl, wBGPals
+	ld hl, wBGPals2
 Function9d3e: ; 9d3e (2:5d3e)
 	ld c, $40
 .asm_9d40
@@ -1332,7 +1332,7 @@ INCLUDE "data/pokemon/palettes.asm"
 INCLUDE "data/trainers/palettes.asm"
 
 Functionb649: ; b649 (2:7649)
-	ld a, [wPermission]
+	ld a, [wEnvironment]
 	and $7
 	ld e, a
 	ld d, $0
@@ -1352,7 +1352,7 @@ Functionb649: ; b649 (2:7649)
 	add hl, de
 	ld e, l
 	ld d, h
-	ld hl, wTempBGPals
+	ld hl, wBGPals1
 	ld b, $8
 .asm_b66c
 	ld a, [de]
@@ -1387,7 +1387,7 @@ Functionb649: ; b649 (2:7649)
 	ld de, wTempOBPal0
 	ld bc, $40
 	call CopyBytes
-	ld a, [wPermission]
+	ld a, [wEnvironment]
 	cp $1
 	jr z, .asm_b6aa
 	cp $2

@@ -19,7 +19,7 @@ Function656b: ; 656b (1:656b)
 	xor a
 	ldh [hLCDCPointer], a
 	ldh [hBGMapMode], a
-	ld hl, wd565
+	ld hl, wEnteredMapFromContinue
 	set 7, [hl]
 	res 2, [hl]
 	ld a, $90
@@ -35,9 +35,9 @@ Function656b: ; 656b (1:656b)
 	call .LoadBGMapAddrIntoHRAM
 	call .WaitTransfer
 	xor a
-	ld [wd05b], a
+	ld [wBGMapAnchor], a
 	ld a, $98
-	ld [wd05c], a
+	ld [wBGMapAnchor + 1], a
 	xor a
 	ldh [hSCX], a
 	ldh [hSCY], a

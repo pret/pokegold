@@ -118,6 +118,18 @@ box: MACRO
 	ds 2 ; padding
 ENDM
 
+map_connection_struct: MACRO
+\1ConnectedMapGroup::       db
+\1ConnectedMapNumber::      db
+\1ConnectionStripPointer::  dw
+\1ConnectionStripLocation:: dw
+\1ConnectionStripLength::   db
+\1ConnectedMapWidth::       db
+\1ConnectionStripYOffset::  db
+\1ConnectionStripXOffset::  db
+\1ConnectionWindow::        dw
+ENDM
+
 channel_struct: MACRO
 ; Addreses are wChannel1 (c101).
 \1MusicID::           dw

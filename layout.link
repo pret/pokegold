@@ -38,7 +38,6 @@ ROMX $03
 ROMX $04
 	"bank4"
 ROMX $05
-	org $4000
 	"bank5"
 ROMX $06
 	org $4000
@@ -127,7 +126,6 @@ ROMX $2a
 ROMX $2b
 	"Map Blocks 2"
 ROMX $2e
-	org $4000
 	"Pics 14"
 	org $6300
 	"bank2e_2"
@@ -148,6 +146,7 @@ ROMX $36
 	"bank36"
 ROMX $37
 	"Map Blocks 3"
+	"bank37_2"
 ROMX $38
 	org $4000
 	"bank38"
@@ -286,12 +285,6 @@ WRAMX 1
 	"Party"
 	org $dfff
 	"Stack"
-WRAMX 2
-WRAMX 3
-WRAMX 4
-WRAMX 5
-WRAMX 6
-WRAMX 7
 VRAM $00
 VRAM $01
 SRAM $00

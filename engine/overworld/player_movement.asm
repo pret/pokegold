@@ -378,7 +378,7 @@ Function10226: ; 10226 (4:4226)
 	and $3
 	cp e
 	jr nz, .asm_10259
-	call Function22a5
+	call WarpCheck
 	jr nc, .asm_10259
 	call Function102b3
 	scf

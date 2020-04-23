@@ -198,9 +198,9 @@ GetBattleAnimPointer::
 	rst Bankswitch
 
 	ld a, [hli]
-	ld [wca10], a
+	ld [wBattleAnimAddress], a
 	ld a, [hl]
-	ld [wca11], a
+	ld [wBattleAnimAddress + 1], a
 
 	; ClearBattleAnims is the only function that calls this...
 	ld a, BANK(ClearBattleAnims)
@@ -212,7 +212,7 @@ GetBattleAnimByte::
 	push hl
 	push de
 
-	ld hl, wca10
+	ld hl, wBattleAnimAddress
 	ld e, [hl]
 	inc hl
 	ld d, [hl]
@@ -221,10 +221,10 @@ GetBattleAnimByte::
 	rst Bankswitch
 
 	ld a, [de]
-	ld [wca17], a
+	ld [wBattleAnimByte], a
 	inc de
 
-	ld a, BANK(ClearBattleAnims)
+	ld a, BANK("Move Animations")
 	rst Bankswitch
 
 	ld [hl], d
@@ -234,7 +234,7 @@ GetBattleAnimByte::
 	pop de
 	pop hl
 
-	ld a, [wca17]
+	ld a, [wBattleAnimByte]
 	ret
 
 PushLYOverrides::
@@ -252,6 +252,6 @@ PushLYOverrides::
 	ld a, HIGH(wLYOverrides)
 	ld [wRequested2bppDest + 1], a
 
-	ld a, (wLYOverridesEnd - wLYOverrides) / 28
+	ld a, (wLYOverridesEnd - wLYOverrides) / 16
 	ld [wRequested2bpp], a
 	ret

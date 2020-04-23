@@ -219,7 +219,7 @@ CutDownTreeOrGrass:
 
 CheckOverworldTileArrays: ; c87c (3:487c)
 	push bc
-	ld a, [wd082]
+	ld a, [wMapTileset]
 	ld de, $3
 	call IsInArray
 	pop bc
@@ -762,7 +762,7 @@ TryEscapeFromDungeon:
 
 EscapeFromDungeon:
 	ld hl, wDigWarpNumber
-	ld de, wNextWarpNumber
+	ld de, wNextWarp
 	ld bc, $3
 	call CopyBytes
 	call FieldMoveGetPartyNick
@@ -859,9 +859,9 @@ TryTeleport:
 	jr .asm_cc9c
 
 .asm_cc85
-	ld a, [wd9fb]
+	ld a, [wLastSpawnMapGroup]
 	ld d, a
-	ld a, [wd9fc]
+	ld a, [wLastSpawnMapNumber]
 	ld e, a
 	ld a, $5
 	ld hl, $5465

@@ -63,7 +63,7 @@ Predef_LoadSGBLayoutCGB:
 
 Function9376: ; 9376 (2:5376)
 	ld hl, PalPacket_a0d5 + 1
-	ld de, wTempBGPals
+	ld de, wBGPals1
 	ld c, $4
 	call Function9ab7
 	ld hl, PalPacket_a0d5 + 1
@@ -71,7 +71,7 @@ Function9376: ; 9376 (2:5376)
 	ld c, $4
 	call Function9ab7
 	ld hl, PalPacket_a0d5 + 1
-	ld de, wTempOBPals
+	ld de, wOBPals1
 	ld c, $2
 	call Function9ab7
 	jr asm_93e1
@@ -102,7 +102,7 @@ Function9399: ; 9399 (2:5399)
 	call Function9adb
 	ld hl, Palettes_ad39
 	call Function9adb
-	ld de, wTempOBPals
+	ld de, wOBPals1
 	pop hl
 	call Function9adb
 	pop hl
@@ -122,23 +122,23 @@ asm_93e1:
 	hlcoord 0, 4, wAttrmap
 	lb bc, $8, $a
 	ld a, $0
-	call Function9af1
+	call FillBoxCGB
 	hlcoord 10, 0, wAttrmap
 	lb bc, $7, $a
 	ld a, $1
-	call Function9af1
+	call FillBoxCGB
 	hlcoord 0, 0, wAttrmap
 	lb bc, $4, $a
 	ld a, $2
-	call Function9af1
+	call FillBoxCGB
 	hlcoord 10, 7, wAttrmap
 	lb bc, $5, $a
 	ld a, $3
-	call Function9af1
+	call FillBoxCGB
 	hlcoord 10, 11, wAttrmap
 	lb bc, $1, $9
 	ld a, $4
-	call Function9af1
+	call FillBoxCGB
 	hlcoord 0, 12, wAttrmap
 	ld bc, $78
 	ld a, $7
@@ -184,7 +184,7 @@ Function945e: ; 945e (2:545e)
 	hlcoord 0, 0, wAttrmap
 	lb bc, $8, $14
 	ld a, $1
-	call Function9af1
+	call FillBoxCGB
 	hlcoord 10, 16, wAttrmap
 	ld bc, $a
 	ld a, $2
@@ -192,15 +192,15 @@ Function945e: ; 945e (2:545e)
 	hlcoord 13, 5, wAttrmap
 	lb bc, $2, $2
 	ld a, $3
-	call Function9af1
+	call FillBoxCGB
 	hlcoord 15, 5, wAttrmap
 	lb bc, $2, $2
 	ld a, $4
-	call Function9af1
+	call FillBoxCGB
 	hlcoord 17, 5, wAttrmap
 	lb bc, $2, $2
 	ld a, $5
-	call Function9af1
+	call FillBoxCGB
 	call Function9b35
 	call Function9b28
 	ld a, $1
@@ -235,7 +235,7 @@ Function94f1: ; 94f1 (2:54f1)
 	hlcoord 1, 1, wAttrmap
 	lb bc, 7, 7
 	ld a, $1
-	call Function9af1
+	call FillBoxCGB
 	jp Function9537
 
 Function9502: ; 9502 (2:5502)
@@ -243,7 +243,7 @@ Function9502: ; 9502 (2:5502)
 	hlcoord 1, 1, wAttrmap
 	lb bc, 5, 5
 	ld a, $1
-	call Function9af1
+	call FillBoxCGB
 	jp Function9537
 
 Function9513: ; 9513 (2:5513)
@@ -310,7 +310,7 @@ Function9561: ; 9561 (2:5561)
 	hlcoord 1, 4, wAttrmap
 	lb bc, 7, 7
 	ld a, $1
-	call Function9af1
+	call FillBoxCGB
 	call Function9b9c
 	call Function9b35
 	call Function9b28
@@ -332,7 +332,7 @@ asm_95b1:
 	hlcoord 1, 1, wAttrmap
 	lb bc, 7, 7
 	ld a, $1
-	call Function9af1
+	call FillBoxCGB
 	call Function9b9c
 	call Function9b35
 	call Function9b28
@@ -347,7 +347,7 @@ Palettes_95cd:
 	RGB  0,  0,  0
 
 Function95d5: ; 95d5 (2:55d5)
-	ld de, wTempBGPals
+	ld de, wBGPals1
 	ld a, $1d
 	call Function9ac7
 	call Function9ad2
@@ -358,7 +358,7 @@ Function95d5: ; 95d5 (2:55d5)
 	hlcoord 7, 5, wAttrmap
 	lb bc, 7, 7
 	ld a, $1
-	call Function9af1
+	call FillBoxCGB
 	call Function9b9c
 	call Function9b35
 	call Function9b28
@@ -368,46 +368,46 @@ Function95d5: ; 95d5 (2:55d5)
 
 Function9605: ; 9605 (2:5605)
 	ld hl, Palettes_bbbe
-	ld de, wTempBGPals
+	ld de, wBGPals1
 	ld bc, $80
 	call CopyBytes
 	call Function9b1d
 	hlcoord 0, 2, wAttrmap
 	lb bc, $a, $3
 	ld a, $2
-	call Function9af1
+	call FillBoxCGB
 	hlcoord 17, 2, wAttrmap
 	lb bc, $a, $3
 	ld a, $2
-	call Function9af1
+	call FillBoxCGB
 	hlcoord 0, 4, wAttrmap
 	lb bc, $6, $3
 	ld a, $3
-	call Function9af1
+	call FillBoxCGB
 	hlcoord 17, 4, wAttrmap
 	lb bc, $6, $3
 	ld a, $3
-	call Function9af1
+	call FillBoxCGB
 	hlcoord 0, 6, wAttrmap
 	lb bc, $2, $3
 	ld a, $4
-	call Function9af1
+	call FillBoxCGB
 	hlcoord 17, 6, wAttrmap
 	lb bc, $2, $3
 	ld a, $4
-	call Function9af1
+	call FillBoxCGB
 	hlcoord 4, 2, wAttrmap
 	lb bc, $2, $c
 	ld a, $1
-	call Function9af1
+	call FillBoxCGB
 	hlcoord 3, 2, wAttrmap
 	lb bc, $a, $1
 	ld a, $1
-	call Function9af1
+	call FillBoxCGB
 	hlcoord 16, 2, wAttrmap
 	lb bc, $a, $1
 	ld a, $1
-	call Function9af1
+	call FillBoxCGB
 	hlcoord 0, 12, wAttrmap
 	ld bc, $78
 	ld a, $7
@@ -422,14 +422,14 @@ Function968d: ; 968d (2:568d)
 	ld hl, PalPacket_a115 + 1
 	call Function9ab2
 	call Function9b1d
-	ld de, wTempOBPals
+	ld de, wOBPals1
 	ld a, $3c
 	call Function9ac7
 	call Function9ad2
 	hlcoord 0, 6, wAttrmap
 	lb bc, $c, $14
 	ld a, $1
-	call Function9af1
+	call FillBoxCGB
 	call Function9b35
 	call Function9b28
 	ld a, $1
@@ -484,7 +484,7 @@ Function96f9:
 	ld a, $38
 	call Function9ac7
 	call Function9ad2
-	ld de, wTempOBPals
+	ld de, wOBPals1
 	ld a, $39
 	call Function9ac7
 .asm_970b
@@ -495,7 +495,7 @@ Function96f9:
 Function9713:
 	ld hl, PalPacket_a0a5 + 1
 	call Function9ab2
-	ld de, wTempOBPals
+	ld de, wOBPals1
 	ld a, $3a
 	call Function9ac7
 	call Function9ad2
@@ -504,7 +504,7 @@ Function9713:
 
 Function9728: ; 9728 (2:5728)
 	ld hl, Palettes_bb9e
-	ld de, wTempBGPals
+	ld de, wBGPals1
 	ld bc, $28
 	call CopyBytes
 	call Function9b28
@@ -514,7 +514,7 @@ Function9728: ; 9728 (2:5728)
 
 Function973e: ; 973e (2:573e)
 	ld hl, Palettes_ba86
-	ld de, wTempBGPals
+	ld de, wBGPals1
 	ld bc, $80
 	call CopyBytes
 	ld hl, PalPacket_a125 + 1
@@ -574,7 +574,7 @@ Function97af: ; 97af (2:57af)
 	ld bc, $28
 	call CopyBytes
 	ld hl, Palettes_bb5e
-	ld de, wTempOBPals
+	ld de, wOBPals1
 	ld bc, $10
 	call CopyBytes
 	ld a, $8
@@ -594,7 +594,7 @@ Function97d4: ; 97d4 (2:57d4)
 Function97e1: ; 97e1 (2:57e1)
 	ld hl, PalPacket_a035 + 1
 	call Function9ab2
-	ld de, wTempOBPals
+	ld de, wOBPals1
 	ld a, $4c
 	call Function9ac7
 	call Function9ad2
@@ -643,37 +643,37 @@ Function9802: ; 9802 (2:5802)
 	hlcoord 14, 1, wAttrmap
 	lb bc, $7, $5
 	xor a
-	call Function9af1
+	call FillBoxCGB
 	hlcoord 18, 1, wAttrmap
 	ld [hl], $1
 	hlcoord 2, 11, wAttrmap
 	lb bc, $2, $4
 	ld a, $1
-	call Function9af1
+	call FillBoxCGB
 	hlcoord 6, 11, wAttrmap
 	lb bc, $2, $4
 	ld a, $2
-	call Function9af1
+	call FillBoxCGB
 	hlcoord 10, 11, wAttrmap
 	lb bc, $2, $4
 	ld a, $3
-	call Function9af1
+	call FillBoxCGB
 	hlcoord 14, 11, wAttrmap
 	lb bc, $2, $4
 	ld a, $4
-	call Function9af1
+	call FillBoxCGB
 	hlcoord 2, 14, wAttrmap
 	lb bc, $2, $4
 	ld a, $5
-	call Function9af1
+	call FillBoxCGB
 	hlcoord 6, 14, wAttrmap
 	lb bc, $2, $4
 	ld a, $6
-	call Function9af1
+	call FillBoxCGB
 	hlcoord 10, 14, wAttrmap
 	lb bc, $2, $4
 	ld a, $7
-	call Function9af1
+	call FillBoxCGB
 	call Function9b35
 	call Function9b28
 	ld a, $1
@@ -681,7 +681,7 @@ Function9802: ; 9802 (2:5802)
 	ret
 
 Function98be: ; 98be (2:58be)
-	ld de, wTempBGPals
+	ld de, wBGPals1
 	ld a, $10
 	call Function9ac7
 	call Function9ad2
@@ -697,7 +697,7 @@ Function98be: ; 98be (2:58be)
 	hlcoord 11, 1, wAttrmap
 	lb bc, $2, $9
 	ld a, $1
-	call Function9af1
+	call FillBoxCGB
 	call Function9b35
 	call Function9b28
 	ld a, $1
@@ -715,7 +715,7 @@ Function98f1: ; 98f1 (2:58f1)
 	ret
 
 Function9905: ; 9905 (2:5905)
-	ld de, wTempBGPals
+	ld de, wBGPals1
 	ld a, $1d
 	call Function9ac7
 	call Function9ad2
@@ -727,7 +727,7 @@ Function9905: ; 9905 (2:5905)
 	ret
 
 Function991e: ; 991e (2:591e)
-	ld de, wTempBGPals
+	ld de, wBGPals1
 	ld hl, Palettes_996f
 	ld bc, $40
 	call CopyBytes
@@ -735,23 +735,23 @@ Function991e: ; 991e (2:591e)
 	hlcoord 0, 0, wAttrmap
 	lb bc, $1, $a
 	ld a, $1
-	call Function9af1
+	call FillBoxCGB
 	hlcoord 10, 0, wAttrmap
 	lb bc, $1, $a
 	ld a, $2
-	call Function9af1
+	call FillBoxCGB
 	hlcoord 7, 2, wAttrmap
 	lb bc, $9, $1
 	ld a, $3
-	call Function9af1
+	call FillBoxCGB
 	hlcoord 0, 7, wAttrmap
 	lb bc, $3, $5
 	ld a, $4
-	call Function9af1
+	call FillBoxCGB
 	hlcoord 0, 3, wAttrmap
 	lb bc, $3, $5
 	ld a, $5
-	call Function9af1
+	call FillBoxCGB
 	call Function9b35
 	call Function9b28
 	ld a, $1
@@ -820,7 +820,7 @@ Function999f: ; 999f (2:599f)
 	inc a
 	ld c, a
 	ld a, $0
-	call Function9af1
+	call FillBoxCGB
 	call Function9b35
 	ret
 
@@ -831,11 +831,11 @@ Function99d9: ; 99d9 (2:59d9)
 	hlcoord 0, 4, wAttrmap
 	lb bc, $a, $14
 	ld a, $2
-	call Function9af1
+	call FillBoxCGB
 	hlcoord 0, 6, wAttrmap
 	lb bc, $6, $14
 	ld a, $1
-	call Function9af1
+	call FillBoxCGB
 	call Function9b35
 	call Function9b28
 	ld a, $1

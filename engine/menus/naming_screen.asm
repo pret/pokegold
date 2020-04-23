@@ -209,11 +209,11 @@ Function11c48: ; 11c48 (4:5c48)
 	jr asm_11c4f
 
 asm_11c4f:
-	ld [wc5d3], a
+	ld [wNamingScreenMaxNameLength], a
 	ld a, l
-	ld [wc5d8], a
+	ld [wNamingScreenStringEntryCoord], a
 	ld a, h
-	ld [wc5d9], a
+	ld [wNamingScreenStringEntryCoord + 1], a
 	ret
 
 Function11c5b: ; 11c5b (4:5c5b)
@@ -319,7 +319,7 @@ Function11cff: ; 11cff (4:5cff)
 	ld e, [hl]
 	inc hl
 	ld d, [hl]
-	ld hl, wc5d8
+	ld hl, wNamingScreenStringEntryCoord
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
@@ -353,9 +353,9 @@ Function11d3a:
 	ld a, $14
 	call InitSpriteAnimStruct
 	ld a, c
-	ld [wc5d5], a
+	ld [wNamingScreenCursorObjectPointer], a
 	ld a, b
-	ld [wc5d6], a
+	ld [wNamingScreenCursorObjectPointer + 1], a
 	ld hl, $1
 	add hl, bc
 	ld a, [hl]
@@ -394,7 +394,7 @@ Function11d60:
 	call Function11ed3
 	ret nc
 .asm_11d8e
-	ld hl, wc5d5
+	ld hl, wNamingScreenCursorObjectPointer
 	ld c, [hl]
 	inc hl
 	ld b, [hl]
@@ -435,7 +435,7 @@ Function11d60:
 	ret
 
 Function11dca: ; 11dca (4:5dca)
-	ld hl, wc5d5
+	ld hl, wNamingScreenCursorObjectPointer
 	ld c, [hl]
 	inc hl
 	ld b, [hl]
@@ -634,7 +634,7 @@ Function11e4a: ; 11e4a (4:5e4a)
 	ret
 
 Function11ed3: ; 11ed3 (4:5ed3)
-	ld a, [wc5d7]
+	ld a, [wNamingScreenLastCharacter]
 	ld hl, Dakutens
 	cp $e5
 	jr z, asm_11f06
@@ -642,17 +642,17 @@ Function11ed3: ; 11ed3 (4:5ed3)
 	cp $e4
 	jr z, asm_11f06
 Function11ee4: ; 11ee4 (4:5ee4)
-	ld a, [wc5d3]
+	ld a, [wNamingScreenMaxNameLength]
 	ld c, a
-	ld a, [wc5d2]
+	ld a, [wNamingScreenCurNameLength]
 	cp c
 	ret nc
-	ld a, [wc5d7]
+	ld a, [wNamingScreenLastCharacter]
 asm_11ef0:
 	call Function11f9d
 	ld [hl], a
 asm_11ef4:
-	ld hl, wc5d2
+	ld hl, wNamingScreenCurNameLength
 	inc [hl]
 	call Function11f9d
 	ld a, [hl]
@@ -667,11 +667,11 @@ asm_11ef4:
 	ret
 
 asm_11f06:
-	ld a, [wc5d2]
+	ld a, [wNamingScreenCurNameLength]
 	and a
 	ret z
 	push hl
-	ld hl, wc5d2
+	ld hl, wNamingScreenCurNameLength
 	dec [hl]
 	call Function11f9d
 	ld c, [hl]
@@ -706,7 +706,7 @@ Handakutens: ; Dummied out
 	db $ff
 
 Function11f89: ; 11f89 (4:5f89)
-	ld hl, wc5d2
+	ld hl, wNamingScreenCurNameLength
 	ld a, [hl]
 	and a
 	ret z
@@ -726,7 +726,7 @@ Function11f9d: ; 11f9d (4:5f9d)
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
-	ld a, [wc5d2]
+	ld a, [wNamingScreenCurNameLength]
 	ld e, a
 	ld d, $0
 	add hl, de
@@ -740,7 +740,7 @@ Function11fad: ; 11fad (4:5fad)
 	ld l, a
 	ld [hl], $f2
 	inc hl
-	ld a, [wc5d3]
+	ld a, [wNamingScreenMaxNameLength]
 	dec a
 	ld c, a
 	ld a, $eb
@@ -756,7 +756,7 @@ Function11fc4: ; 11fc4 (4:5fc4)
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
-	ld a, [wc5d3]
+	ld a, [wNamingScreenMaxNameLength]
 	ld c, a
 .asm_11fce
 	ld a, [hl]
@@ -773,7 +773,7 @@ Function11fc4: ; 11fc4 (4:5fc4)
 	ret
 
 Function11fde: ; 11fde (4:5fde)
-	ld hl, wc5d5
+	ld hl, wNamingScreenCursorObjectPointer
 	ld c, [hl]
 	inc hl
 	ld b, [hl]
@@ -812,7 +812,7 @@ Function11fde: ; 11fde (4:5fde)
 .asm_12018
 	add hl, de
 	ld a, [hl]
-	ld [wc5d7], a
+	ld [wNamingScreenLastCharacter], a
 	ret
 
 Function1201e: ; 1201e (4:601e)
@@ -850,7 +850,7 @@ Function1201e: ; 1201e (4:601e)
 	ld [wce63], a
 	ld [wce64], a
 	ldh [hBGMapMode], a
-	ld [wc5d2], a
+	ld [wNamingScreenCurNameLength], a
 	ld a, $7
 	ldh [hWX], a
 	ret
@@ -961,7 +961,7 @@ MailIcon: INCBIN "gfx/icons/mail_big.2bpp"
 
 Function12341: ; 12341 (4:6341)
 	ld a, $21
-	ld [wc5d3], a
+	ld [wNamingScreenMaxNameLength], a
 	ret
 
 	db "メールを かいてね@"
@@ -1057,9 +1057,9 @@ Function123e8:
 	ld a, $1b
 	call InitSpriteAnimStruct
 	ld a, c
-	ld [wc5d5], a
+	ld [wNamingScreenCursorObjectPointer], a
 	ld a, b
-	ld [wc5d6], a
+	ld [wNamingScreenCursorObjectPointer + 1], a
 	ld hl, $1
 	add hl, bc
 	ld a, [hl]
@@ -1097,7 +1097,7 @@ Function12407:
 	call Function11fde
 	call Function12579
 	jr c, .asm_12447
-	ld hl, wc5d2
+	ld hl, wNamingScreenCurNameLength
 	ld a, [hl]
 	cp $10
 	ret nz
@@ -1109,7 +1109,7 @@ Function12407:
 	ret
 
 .asm_12447
-	ld hl, wc5d5
+	ld hl, wNamingScreenCursorObjectPointer
 	ld c, [hl]
 	inc hl
 	ld b, [hl]
@@ -1123,7 +1123,7 @@ Function12407:
 
 .asm_1245a
 	call Function11f89
-	ld hl, wc5d2
+	ld hl, wNamingScreenCurNameLength
 	ld a, [hl]
 	cp $10
 	ret nz
@@ -1301,7 +1301,7 @@ Function124d9: ; 124d9 (4:64d9)
 	ret
 
 Function12552: ; 12552 (4:6552)
-	ld hl, wc5d5
+	ld hl, wNamingScreenCursorObjectPointer
 	ld c, [hl]
 	inc hl
 	ld b, [hl]
@@ -1334,7 +1334,7 @@ Function12558: ; 12558 (4:6558)
 	ret
 
 Function12579: ; 12579 (4:6579)
-	ld a, [wc5d7]
+	ld a, [wNamingScreenLastCharacter]
 	ld hl, $5f23
 	cp $e5
 	jr z, .asm_1258b
@@ -1342,20 +1342,20 @@ Function12579: ; 12579 (4:6579)
 	cp $e4
 	jp nz, Function11ee4
 .asm_1258b
-	ld a, [wc5d2]
+	ld a, [wNamingScreenCurNameLength]
 	and a
 	ret z
 	cp $11
 	jr nz, .asm_1259c
 	push hl
-	ld hl, wc5d2
+	ld hl, wNamingScreenCurNameLength
 	dec [hl]
 	dec [hl]
 	jr .asm_125a1
 
 .asm_1259c
 	push hl
-	ld hl, wc5d2
+	ld hl, wNamingScreenCurNameLength
 	dec [hl]
 .asm_125a1
 	call Function11f9d

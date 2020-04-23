@@ -18,7 +18,7 @@ UpdateCGBPals::
 	ret z
 
 ForceUpdateCGBPals::
-	ld hl, wBGPals
+	ld hl, wBGPals2
 
 ; copy 8 pals to bgpd
 	ld a, 1 << rBGPI_AUTO_INCREMENT
@@ -73,8 +73,8 @@ DmgToCgbBGPals::
 	push bc
 
 ; copy & reorder bg pal buffer
-	ld hl, wBGPals ; to
-	ld de, wTempBGPals ; from
+	ld hl, wBGPals2 ; to
+	ld de, wBGPals1 ; from
 ; order
 	ldh a, [rBGP]
 	ld b, a
@@ -112,8 +112,8 @@ DmgToCgbObjPals::
 	push bc
 
 ; copy & reorder obj pal buffer
-	ld hl, wOBPals ; to
-	ld de, wTempOBPals ; from
+	ld hl, wOBPals2 ; to
+	ld de, wOBPals1 ; from
 ; order
 	ldh a, [rOBP0]
 	ld b, a
@@ -142,8 +142,8 @@ DmgToCgbObjPal0::
 	push de
 	push bc
 
-	ld hl, wOBPals palette 0
-	ld de, wTempOBPals palette 0
+	ld hl, wOBPals2 palette 0
+	ld de, wOBPals1 palette 0
 	ldh a, [rOBP0]
 	ld b, a
 	ld c, 1
@@ -171,8 +171,8 @@ DmgToCgbObjPal1::
 	push de
 	push bc
 
-	ld hl, wOBPals palette 1
-	ld de, wTempOBPals palette 1
+	ld hl, wOBPals2 palette 1
+	ld de, wOBPals1 palette 1
 	ldh a, [rOBP1]
 	ld b, a
 	ld c, 1
@@ -279,7 +279,7 @@ ReloadSpritesNoPalettes::
 	ldh a, [hCGB]
 	and a
 	ret z
-	ld hl, wBGPals
+	ld hl, wBGPals2
 	ld bc, (8 palettes) + (2 palettes)
 	xor a
 	call ByteFill

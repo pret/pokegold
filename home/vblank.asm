@@ -41,7 +41,6 @@ VBlank::
 	dw VBlank0
 	dw VBlank0 ; just in case
 
-
 VBlank0::
 ; normal operation
 
@@ -102,12 +101,13 @@ VBlank0::
 	call Function1642
 
 .done
+
 	ldh a, [hOAMUpdate]
 	and a
 	jr nz, .done_oam
 	call hTransferVirtualOAM
-
 .done_oam
+
 	; vblank-sensitive operations are done
 
 	xor a
@@ -118,15 +118,15 @@ VBlank0::
 	jr z, .ok
 	dec a
 	ld [wOverworldDelay], a
-
 .ok
+
 	ld a, [wTextDelayFrames]
 	and a
 	jr z, .ok2
 	dec a
 	ld [wTextDelayFrames], a
-
 .ok2
+
 	call UpdateJoypad
 
 	ld a, BANK(_UpdateSound)
@@ -147,6 +147,7 @@ VBlank1::
 ; tiles
 ; oam
 ; sound / lcd stat
+
 	ldh a, [hROMBank]
 	ld [wROMBankBackup], a
 	ldh a, [hSCX]
@@ -180,13 +181,13 @@ VBlank1::
 	xor a
 	ldh [rIF], a
 	; enable lcd stat
-	ld a, %10 ; lcd stat
+	ld a, 1 << LCD_STAT
 	ldh [rIE], a
 	; rerequest serial int if applicable (still disabled)
 	; request lcd stat
 	ld a, b
-	and %1000 ; serial
-	or %10 ; lcd stat
+	and 1 << SERIAL
+	or 1 << LCD_STAT
 	ldh [rIF], a
 
 	ei
@@ -196,7 +197,7 @@ VBlank1::
 	ld a, [wROMBankBackup]
 	rst Bankswitch
 	; enable ints
-	ld a, %11111
+	ld a, IE_DEFAULT
 	ldh [rIE], a
 	ret
 
@@ -212,7 +213,7 @@ UpdatePals::
 	ldh [rBGP], a
 	ld a, [wOBP0]
 	ldh [rOBP0], a
-	ld a, [wOPB1]
+	ld a, [wOBP1]
 	ldh [rOBP1], a
 
 	and a
@@ -255,6 +256,7 @@ VBlank5::
 ; bg map
 ; tiles
 ; joypad
+;
 
 	ldh a, [hROMBank]
 	ld [wROMBankBackup], a
@@ -267,8 +269,8 @@ VBlank5::
 
 	call UpdateBGMap
 	call Serve2bppRequest
-
 .done
+
 	xor a
 	ld [wVBlankOccurred], a
 
@@ -276,7 +278,7 @@ VBlank5::
 
 	xor a
 	ldh [rIF], a
-	ld a, %10 ; lcd stat
+	ld a, 1 << LCD_STAT
 	ldh [rIE], a
 	; request lcd stat
 	ldh [rIF], a
@@ -388,6 +390,6 @@ VBlank3::
 	xor a
 	ldh [rIF], a
 	; enable ints
-	ld a, %11111
+	ld a, IE_DEFAULT
 	ldh [rIE], a
 	ret

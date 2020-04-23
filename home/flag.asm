@@ -12,7 +12,7 @@ ResetBikeFlags::
 	ret
 
 ResetFlashIfOutOfCave::
-	ld a, [wPermission]
+	ld a, [wEnvironment]
 	cp ROUTE
 	jr z, .outdoors
 	cp TOWN

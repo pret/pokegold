@@ -23,7 +23,6 @@ UpdateBGMapBuffer::
 .next
 ; Copy a pair of 16x8 blocks (one 16x16 block)
 
-
 rept 2
 ; Get our BG Map address
 	pop bc
@@ -382,10 +381,10 @@ AnimateTileset::
 
 	ldh a, [hROMBank]
 	push af
-	ld a, $3f
+	ld a, BANK(_AnimateTileset)
 	rst Bankswitch
 
-	call $4003 ; ???
+	call _AnimateTileset
 
 	pop af
 	rst Bankswitch

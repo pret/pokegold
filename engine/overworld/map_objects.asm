@@ -924,7 +924,7 @@ Function5714: ; 5714 (1:5714)
 	jr nz, .asm_5718
 	ret
 
-Function5730:: ; 5730 (1:5730)
+RefreshPlayerSprite:: ; 5730 (1:5730)
 	ld a, $3e
 	ld [wce87], a
 	ld [wce88], a
