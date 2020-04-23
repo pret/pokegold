@@ -2320,7 +2320,7 @@ ReturnToMapWithSpeechTextbox::
 ReloadTilesetAndPalettes::
 	call DisableLCD
 	call ClearSprites
-	farcall Function1414b
+	farcall _ClearSprites
 	call LoadStandardFont
 	call LoadFontsExtra
 	ldh a, [hROMBank]

@@ -185,7 +185,7 @@ _PlayersHousePC:
 	ld b, $1
 	call _PlayersPC
 	and a
-	jr nz, .asm_156f9
+	jr nz, .asm_159d0
 	call OverworldTextModeSwitch
 	call ApplyTilemap
 	call UpdateSprites
@@ -193,7 +193,7 @@ _PlayersHousePC:
 	ld c, $0
 	ret
 
-.asm_156f9
+.asm_159d0
 	call ClearBGPalettes
 	ld c, $1
 	ret
@@ -207,28 +207,28 @@ _PlayersPC:
 	ld [wWhichIndexSet], a
 	ld hl, PlayersPCAskWhatDoText
 	call PC_DisplayTextWaitMenu
-	call Function15715
+	call Function159ec
 	call ExitMenu
 	ret
 
-Function15715:
+Function159ec:
 	xor a
 	ld [wPCItemsCursor], a
 	ld [wPCItemsScrollPosition], a
 	ld hl, PlayersPCMenuData
 	call LoadMenuHeader
-.asm_15722
+.asm_159f9
 	call UpdateTimePals
 	call DoNthMenu
-	jr c, .asm_15731
+	jr c, .asm_15a08
 	call MenuJumptable
-	jr nc, .asm_15722
-	jr .asm_15732
+	jr nc, .asm_159f9
+	jr .asm_15a09
 
-.asm_15731
+.asm_15a08
 	xor a
 
-.asm_15732
+.asm_15a09
 	call ExitMenu
 	ret
 

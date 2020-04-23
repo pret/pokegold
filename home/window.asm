@@ -36,7 +36,7 @@ CloseText::
 	call SafeUpdateSprites
 	ld a, $90
 	ldh [hWY], a
-	farcall Function1415c
+	farcall _RefreshSprites
 	call ReplaceChrisSprite
 	ld hl, wEnteredMapFromContinue
 	res 7, [hl]

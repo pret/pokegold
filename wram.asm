@@ -2295,7 +2295,7 @@ wd056:: ds 1 ; d056
 wd057:: ds 1 ; d057
 wd058:: ds 1 ; d058
 wd059:: ds 1 ; d059
-wd05a:: ds 1 ; d05a
+wUnusedD05A:: db ; unused
 
 wBGMapAnchor:: dw ; d05b
 

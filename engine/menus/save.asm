@@ -635,7 +635,7 @@ CheckPrimarySaveFile:
 	ld bc, wOptionsEnd - wOptions
 	call CopyBytes
 	call CloseSRAM
-	call Function15011
+	call CheckTextDelay
 	ld a, TRUE
 	ld [wSaveFileExists], a
 
@@ -656,7 +656,7 @@ CheckBackupSaveFile:
 	ld de, wOptions
 	ld bc, wOptionsEnd - wOptions
 	call CopyBytes
-	call Function15011
+	call CheckTextDelay
 	ld a, $2
 	ld [wSaveFileExists], a
 
@@ -664,23 +664,21 @@ CheckBackupSaveFile:
 	call CloseSRAM
 	ret
 
-Function15011:
+CheckTextDelay:
+; Fix options if text delay is invalid
 	ld hl, wTextboxFlags
-	res 1, [hl]
+	res NO_TEXT_DELAY_F, [hl]
 	ld a, [wOptions]
-	and 7
-	cp 1
+	and TEXT_DELAY_MASK
+	cp TEXT_DELAY_FAST
 	ret z
-
-	cp 3
+	cp TEXT_DELAY_MED
 	ret z
-
-	cp 5
+	cp TEXT_DELAY_SLOW
 	ret z
-
 	ld a, [wOptions]
-	and $f8
-	or 3
+	and $ff ^ TEXT_DELAY_MASK
+	or (1 << FAST_TEXT_DELAY_F) | (1 << NO_TEXT_DELAY_F)
 	ld [wOptions], a
 	ret
 

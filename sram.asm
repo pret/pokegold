@@ -96,8 +96,8 @@ sBackupPlayerData1:: ds wPlayerData1End - wPlayerData
 SECTION "SRAM Stack", SRAM
 
 sStackTop:: dw
-s0_b7ef:: db
-s0_b7f0:: db
+sUnusedRTCMinutes:: db
+sUnusedRTCHours:: db
 
 
 SECTION "SRAM Window Stack", SRAM

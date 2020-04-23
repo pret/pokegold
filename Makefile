@@ -63,6 +63,7 @@ compare: $(roms)
 tools:
 	$(MAKE) -C tools/
 
+
 RGBASMFLAGS = -L -Weverything
 $(gold_obj):   RGBASMFLAGS += -D _GOLD
 $(silver_obj): RGBASMFLAGS += -D _SILVER

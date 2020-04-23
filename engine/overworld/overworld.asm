@@ -7,7 +7,7 @@ _ReplaceChrisSprite::
 	call GetUsedSprite
 	ret
 
-Function1414b::
+_ClearSprites::
 	ld hl, wSpriteFlags
 	ld a, [hl]
 	push af
@@ -18,7 +18,7 @@ Function1414b::
 	ld [wSpriteFlags], a
 	ret
 
-Function1415c::
+_RefreshSprites::
 	ld hl, wSpriteFlags
 	ld a, [hl]
 	push af
@@ -119,55 +119,45 @@ AddOutdoorSprites:
 	dec c
 	jr nz, .loop
 
-	ld a, [wd05a]
+	ld a, [wUnusedD05A]
 	ld c, a
 	ret
 
 AddSpriteGFX:
 	and a
 	ret z
-
 	ld c, a
 	call _DoesSpriteHaveFacings
 	jr nc, .nope
-
 	ld de, wUsedSprites + (SPRITE_GFX_LIST_CAPACITY - 2) * 2
 	ld b, 2
-	call Function14212
+	call .Loop
 	jr nc, .ok
-
-.nope:
+.nope
 	ld de, wUsedSprites + 2
 	ld b, SPRITE_GFX_LIST_CAPACITY - 3
-	call Function14212
+	call .Loop
 	jr .ok
-
 .ok:
 	ret
 
-Function14212:
-.loop
+.Loop:
 	ld a, [de]
 	and a
 	jr z, .new
-
 	cp c
 	jr z, .exists
-
 	inc de
 	inc de
 	dec b
-	jr nz, .loop
-
+	jr nz, .Loop
 	scf
 	ret
-
 .new:
 	ld a, c
 	ld [de], a
 	xor a
 	ret
-
 .exists:
 	xor a
 	ret
@@ -178,7 +168,7 @@ LoadUsedSpritesGFX:
 	call GetUsedSprites
 	ret c
 
-	call Function14265
+	call _LoadMiscTiles
 	call LoadMiscTiles
 	ret
 
@@ -186,7 +176,7 @@ GetUsedSprites:
 	xor a
 	ldh [hUsedSpriteTile], a
 	ld hl, wUsedSprites
-	ld a, $a
+	ld a, SPRITE_GFX_LIST_CAPACITY - 2
 
 .loop
 	push af
@@ -223,7 +213,7 @@ GetUsedSprites:
 	scf
 	ret
 
-Function14265:
+_LoadMiscTiles:
 	ld a, [wUsedSprites + (SPRITE_GFX_LIST_CAPACITY - 2) * 2]
 	and a
 	jr z, .asm_14274
@@ -443,7 +433,7 @@ endr
 .done:
 	ret
 
-Function1438a:
+Unreferenced_Function1438a:
 	ld a, c
 	jr GetUsedSprite
 
@@ -452,7 +442,7 @@ Function1438a:
 	jr GetUsedSprite
 
 	ld a, c
-	ld b, 12
+	ld b, SPRITE_GFX_LIST_CAPACITY
 	jr GetUsedSprite
 
 GetUsedSprite:

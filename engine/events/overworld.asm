@@ -598,7 +598,7 @@ FlyScript:
 	callasm FlyToAnimation
 	special WaitSFX
 	special ReplaceChrisSprite
-	callasm Function1415c
+	callasm _RefreshSprites
 	end
 
 WaterfallFunction: ; caed

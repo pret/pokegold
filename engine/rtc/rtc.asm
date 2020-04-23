@@ -74,11 +74,11 @@ StageRTCTimeForSave:
 	ret
 
 SaveRTC:
-	ld a, $a
+	ld a, SRAM_ENABLE
 	ld [MBC3SRamEnable], a
 	call LatchClock
 	ld hl, MBC3RTC
-	ld a, $c
+	ld a, RTC_DH
 	ld [MBC3SRamBank], a
 	res 7, [hl]
 	ld a, BANK(sRTCStatusFlags)
@@ -89,9 +89,9 @@ SaveRTC:
 	ret
 
 StartClock::
-	call Function140b1
+	call _GetClock
 	call GetClock
-	call Function1409e
+	call _FixDays
 	call FixDays
 	jr nc, .skip_set
 	; bit 5: Day count exceeds 139
@@ -102,7 +102,7 @@ StartClock::
 	call StartRTC
 	ret
 
-Function1409e:
+_FixDays:
 	ld hl, hRTCDayHi
 	bit 7, [hl]
 	jr nz, .set_bit_7
@@ -117,25 +117,25 @@ Function1409e:
 	call RecordRTCStatus ; set bit 7 on sRTCStatusFlags
 	ret
 
-Function140b1:
-	ld a, $a
+_GetClock:
+	ld a, SRAM_ENABLE
 	ld [MBC3SRamEnable], a
 	call LatchClock
-	ld a, $c
+	ld a, RTC_DH
 	ld [MBC3SRamBank], a
 	ld a, [MBC3RTC]
 	push af
 	call CloseSRAM
 	pop af
-	bit 6, a
+	bit 6, a ; halt
 	ret z
 
 	ld a, BANK(sRTCStatusFlags)
 	call OpenSRAM
 	ld a, $34
-	ld [s0_b7ef], a
+	ld [sUnusedRTCMinutes], a
 	ld a, $12
-	ld [s0_b7f0], a
+	ld [sUnusedRTCHours], a
 	call CloseSRAM
 	ret
 
