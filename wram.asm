@@ -328,6 +328,16 @@ wLinkTradeSendmonSpecies:: db
 wLinkTradeGetmonSpecies::  db
 
 NEXTU ; c5d0
+; engine/gfx/color.asm ?
+	ds 50
+wc602:: ds 1 ; c602
+wc603:: ds 1 ; c603
+wc604:: ds 1 ; c604
+wc605:: ds 1 ; c605
+wc606:: ds 1 ; c606
+wc607:: ds 1 ; c607
+
+NEXTU ; c5d0
 ; naming screen
 wNamingScreenDestinationPointer:: dw ; c5d0
 wNamingScreenCurNameLength:: db ; c5d2
@@ -336,19 +346,40 @@ wNamingScreenType:: db ; c5d4
 wNamingScreenCursorObjectPointer:: dw ; c5d5
 wNamingScreenLastCharacter:: db ; c5d7
 wNamingScreenStringEntryCoord:: dw ; c5d8
-
-	ds 40
-
-; engine/gfx/color.asm ?
-wc602:: ds 1 ; c602
-wc603:: ds 1 ; c603
-wc604:: ds 1 ; c604
-wc605:: ds 1 ; c605
-wc606:: ds 1 ; c606
-wc607:: ds 1 ; c607
 ENDU
 
-	ds 156
+	ds 126
+
+wc6ca:: ds 1 ; c6ca
+wc6cb:: ds 1 ; c6cb
+wc6cc:: ds 1 ; c6cc
+wc6cd:: ds 1 ; c6cd
+wc6ce:: ds 1 ; c6ce
+wc6cf:: ds 1 ; c6cf
+wc6d0:: ds 1 ; c6d0
+wc6d1:: ds 1 ; c6d1
+wc6d2:: ds 1 ; c6d2
+wc6d3:: ds 1 ; c6d3
+wc6d4:: ds 1 ; c6d4
+wc6d5:: ds 1 ; c6d5
+wc6d6:: ds 1 ; c6d6
+wc6d7:: ds 1 ; c6d7
+wc6d8:: ds 1 ; c6d8
+wc6d9:: ds 1 ; c6d9
+wc6da:: ds 1 ; c6da
+wc6db:: ds 1 ; c6db
+wc6dc:: ds 1 ; c6dc
+wc6dd:: ds 1 ; c6dd
+wc6de:: ds 1 ; c6de
+wc6df:: ds 1 ; c6df
+wc6e0:: ds 1 ; c6e0
+wc6e1:: ds 1 ; c6e1
+wc6e2:: ds 1 ; c6e2
+wc6e3:: ds 1 ; c6e3
+wc6e4:: ds 1 ; c6e4
+wc6e5:: ds 1 ; c6e5
+wc6e6:: ds 1 ; c6e6
+wc6e7:: ds 1 ; c6e7
 
 ; This was a buffer for map-related pointers in the 1997 G/S prototype.
 ; See wMapBuffer in pokegold-spaceworld's wram.asm.
@@ -2295,7 +2326,7 @@ wd056:: ds 1 ; d056
 wd057:: ds 1 ; d057
 wd058:: ds 1 ; d058
 wd059:: ds 1 ; d059
-wUnusedD05A:: db ; unused
+wUnusedD05A:: db
 
 wBGMapAnchor:: dw ; d05b
 

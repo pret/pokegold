@@ -1,4 +1,4 @@
-CorrectNickErrors:: ; 677e (1:677e)
+CorrectNickErrors::
 	push bc
 	push de
 	ld b, MON_NAME_LENGTH
@@ -43,11 +43,11 @@ CorrectNickErrors:: ; 677e (1:677e)
 ; table defining which characters are actually text commands
 ; format:
 	;      ≥           <
-	db "<NULL>",   $04       + 1
-	db "<PLAY_G>", $18       + 1
-	db $1d,        "%"       + 1
-	db $35,        "<GREEN>" + 1
+	db "<NULL>",   "ガ"
+	db "<PLAY_G>", "<JP_18>" + 1
+	db "<NI>",     "<NO>"    + 1
+	db "<ROUTE>",  "<GREEN>" + 1
 	db "<ENEMY>",  "<ENEMY>" + 1
-	db $49,        "<TM>"    + 1
+	db "<MOM>",    "<TM>"    + 1
 	db "<ROCKET>", "┘"       + 1
 	db -1 ; end

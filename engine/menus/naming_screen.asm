@@ -1,10 +1,10 @@
-NamingScreen_: ; 11aa3 (4:5aa3)
+NamingScreen_:
 	call DisableSpriteUpdates
 	call NamingScreen
 	call ReturnToMapWithSpeechTextbox
 	ret
 
-NamingScreen: ; 11aad (4:5aad)
+NamingScreen:
 	ld hl, wNamingScreenDestinationPointer
 	ld [hl], e
 	inc hl
@@ -37,7 +37,7 @@ NamingScreen: ; 11aad (4:5aad)
 	call ClearJoypad
 	ret
 
-Function11ae4: ; 11ae4 (4:5ae4)
+Function11ae4:
 	call ClearBGPalettes
 	ld b, $8
 	call GetSGBLayout
@@ -53,7 +53,7 @@ Function11ae4: ; 11ae4 (4:5ae4)
 	call Function11fad
 	ret
 
-Function11b09: ; 11b09 (4:5b09)
+Function11b09:
 	ld a, [wNamingScreenType]
 	and $7
 	ld e, a
@@ -112,7 +112,7 @@ Function11b2a:
 	db "NICKNAME?@"
 
 Function11b79:
-	ld de, ChrisSpriteGFX ; $4000
+	ld de, ChrisSpriteGFX
 	call Function11c11
 	hlcoord 5, 2
 	ld de, .String
@@ -124,7 +124,7 @@ Function11b79:
 	db "YOUR NAME?@"
 
 Function11b97:
-	ld de, SilverSpriteGFX ; $43c0
+	ld de, SilverSpriteGFX
 	call Function11c11
 	hlcoord 5, 2
 	ld de, .String
@@ -136,7 +136,7 @@ Function11b97:
 	db "RIVAL'S NAME?@"
 
 Function11bb8:
-	ld de, MomSpriteGFX ; $4fc0
+	ld de, MomSpriteGFX
 	call Function11c11
 	hlcoord 5, 2
 	ld de, .String
@@ -171,7 +171,7 @@ Function11bda:
 .String:
 	db "BOX NAME?@"
 
-Function11c11: ; 11c11 (4:5c11)
+Function11c11:
 	push de
 	ld hl, $8000
 	lb bc, BANK(ChrisSpriteGFX), 4
@@ -193,17 +193,17 @@ Function11c11: ; 11c11 (4:5c11)
 	call InitSpriteAnimStruct
 	ret
 
-Function11c3a: ; 11c3a (4:5c3a)
+Function11c3a:
 	ld a, $a
 	hlcoord 5, 6
 	jr asm_11c4f
 
-Function11c41: ; 11c41 (4:5c41)
+Function11c41:
 	ld a, $7
 	hlcoord 5, 6
 	jr asm_11c4f
 
-Function11c48: ; 11c48 (4:5c48)
+Function11c48:
 	ld a, $8
 	hlcoord 5, 4
 	jr asm_11c4f
@@ -216,7 +216,7 @@ asm_11c4f:
 	ld [wNamingScreenStringEntryCoord + 1], a
 	ret
 
-Function11c5b: ; 11c5b (4:5c5b)
+Function11c5b:
 	push bc
 	push af
 	ld a, [wNamingScreenType]
@@ -227,7 +227,7 @@ Function11c5b: ; 11c5b (4:5c5b)
 	pop bc
 	ret
 
-Function11c67: ; 11c67 (4:5c67)
+Function11c67:
 	call WaitTop
 	hlcoord 0, 0
 	ld bc, SCREEN_HEIGHT * SCREEN_WIDTH
@@ -240,8 +240,8 @@ Function11c67: ; 11c67 (4:5c67)
 	lb bc, $4, $12
 .asm_11c83
 	call ClearBox
-	ld de, NameInputUpper ; $616f
-Function11c89: ; 11c89 (4:5c89)
+	ld de, NameInputUpper
+Function11c89:
 	call Function11c5b
 	jr nz, .asm_11c94
 	ld hl, $55
@@ -284,7 +284,7 @@ Function11c89: ; 11c89 (4:5c89)
 	jr nz, .asm_11cc2
 	ret
 
-Function11cd4: ; 11cd4 (4:5cd4)
+Function11cd4:
 	call JoyTextDelay
 	ld a, [wce63]
 	bit 7, a
@@ -305,7 +305,7 @@ Function11cd4: ; 11cd4 (4:5cd4)
 	scf
 	ret
 
-Function11cff: ; 11cff (4:5cff)
+Function11cff:
 	xor a
 	ldh [hBGMapMode], a
 	hlcoord 1, 5
@@ -328,7 +328,7 @@ Function11cff: ; 11cff (4:5cff)
 	ldh [hBGMapMode], a
 	ret
 
-Function11d27: ; 11d27 (4:5d27)
+Function11d27:
 	ld a, [wce63]
 	ld e, a
 	ld d, $0
@@ -434,12 +434,12 @@ Function11d60:
 	call Function11c89
 	ret
 
-Function11dca: ; 11dca (4:5dca)
+Function11dca:
 	ld hl, wNamingScreenCursorObjectPointer
 	ld c, [hl]
 	inc hl
 	ld b, [hl]
-Function11dd0: ; 11dd0 (4:5dd0)
+Function11dd0:
 	ld hl, $d
 	add hl, bc
 	ld a, [hl]
@@ -519,7 +519,7 @@ Function11dfa:
 .CaseDelEnd:
 	db $00, $00, $00, $30, $30, $30, $60, $60, $60
 
-Function11e4a: ; 11e4a (4:5e4a)
+Function11e4a:
 	ld hl, hJoyLast
 	ld a, [hl]
 	and $40
@@ -633,7 +633,7 @@ Function11e4a: ; 11e4a (4:5e4a)
 	inc [hl]
 	ret
 
-Function11ed3: ; 11ed3 (4:5ed3)
+Function11ed3:
 	ld a, [wNamingScreenLastCharacter]
 	ld hl, Dakutens
 	cp $e5
@@ -641,7 +641,7 @@ Function11ed3: ; 11ed3 (4:5ed3)
 	ld hl, Handakutens
 	cp $e4
 	jr z, asm_11f06
-Function11ee4: ; 11ee4 (4:5ee4)
+Function11ee4:
 	ld a, [wNamingScreenMaxNameLength]
 	ld c, a
 	ld a, [wNamingScreenCurNameLength]
@@ -689,23 +689,9 @@ asm_11f06:
 	ld a, [hl]
 	jr asm_11ef0
 
-Dakutens: ; Dummied out
-	db "かが", "きぎ", "くぐ", "けげ", "こご"
-	db "さざ", "しじ", "すず", "せぜ", "そぞ"
-	db "ただ", "ちぢ", "つづ", "てで", "とど"
-	db "はば", "ひび", "ふぶ", "へべ", "ほぼ"
-	db "カガ", "キギ", "クグ", "ケゲ", "コゴ"
-	db "サザ", "シジ", "スズ", "セゼ", "ソゾ"
-	db "タダ", "チヂ", "ツヅ", "テデ", "トド"
-	db "ハバ", "ヒビ", "フブ", "へべ", "ホボ"
-	db $ff
+INCLUDE "data/text/dakutens.asm"
 
-Handakutens: ; Dummied out
-	db "はぱ", "ひぴ", "ふぷ", "へぺ", "ほぽ"
-	db "ハパ", "ヒピ", "フプ", "へぺ", "ホポ"
-	db $ff
-
-Function11f89: ; 11f89 (4:5f89)
+Function11f89:
 	ld hl, wNamingScreenCurNameLength
 	ld a, [hl]
 	and a
@@ -720,7 +706,7 @@ Function11f89: ; 11f89 (4:5f89)
 	ld [hl], $eb
 	ret
 
-Function11f9d: ; 11f9d (4:5f9d)
+Function11f9d:
 	push af
 	ld hl, wNamingScreenDestinationPointer
 	ld a, [hli]
@@ -733,7 +719,7 @@ Function11f9d: ; 11f9d (4:5f9d)
 	pop af
 	ret
 
-Function11fad: ; 11fad (4:5fad)
+Function11fad:
 	ld hl, wNamingScreenDestinationPointer
 	ld a, [hli]
 	ld h, [hl]
@@ -751,7 +737,7 @@ Function11fad: ; 11fad (4:5fad)
 	ld [hl], $50
 	ret
 
-Function11fc4: ; 11fc4 (4:5fc4)
+Function11fc4:
 	ld hl, wNamingScreenDestinationPointer
 	ld a, [hli]
 	ld h, [hl]
@@ -772,7 +758,7 @@ Function11fc4: ; 11fc4 (4:5fc4)
 	jr nz, .asm_11fce
 	ret
 
-Function11fde: ; 11fde (4:5fde)
+Function11fde:
 	ld hl, wNamingScreenCursorObjectPointer
 	ld c, [hl]
 	inc hl
@@ -815,16 +801,16 @@ Function11fde: ; 11fde (4:5fde)
 	ld [wNamingScreenLastCharacter], a
 	ret
 
-Function1201e: ; 1201e (4:601e)
+Function1201e:
 	call ClearSprites
 	callfar ClearSpriteAnims
 	call LoadStandardFont
 	call LoadFontsExtra
-	ld de, NamingScreenGFX_MiddleLine ; $6232
+	ld de, NamingScreenGFX_MiddleLine
 	ld hl, $8eb0
 	lb bc, BANK(NamingScreenGFX_MiddleLine), 1
 	call Get1bpp
-	ld de, NamingScreenGFX_UnderLine ; $623a
+	ld de, NamingScreenGFX_UnderLine
 	ld hl, $8f20
 	lb bc, BANK(NamingScreenGFX_UnderLine), 1
 	call Get1bpp
@@ -858,35 +844,7 @@ Function1201e: ; 1201e (4:601e)
 NamingScreenGFX_Border: INCBIN "gfx/naming_screen/border.2bpp"
 NamingScreenGFX_Cursor: INCBIN "gfx/naming_screen/cursor.2bpp"
 
-NameInputLower:
-	db "a b c d e f g h i"
-	db "j k l m n o p q r"
-	db "s t u v w x y z  "
-	db "× ( ) : ; [ ] <PK> <MN>"
-	db "UPPER  DEL   END "
-
-BoxNameInputLower:
-	db "a b c d e f g h i"
-	db "j k l m n o p q r"
-	db "s t u v w x y z  "
-	db "é 'd 'l 'm 'r 's 't 'v 0"
-	db "1 2 3 4 5 6 7 8 9"
-	db "UPPER  DEL   END "
-
-NameInputUpper:
-	db "A B C D E F G H I"
-	db "J K L M N O P Q R"
-	db "S T U V W X Y Z  "
-	db "- ? ! / . ,      "
-	db "lower  DEL   END "
-
-BoxNameInputUpper:
-	db "A B C D E F G H I"
-	db "J K L M N O P Q R"
-	db "S T U V W X Y Z  "
-	db "× ( ) : ; [ ] <PK> <MN>"
-	db "- ? ! ♂ ♀ / . , &"
-	db "lower  DEL   END "
+INCLUDE "data/text/name_input_chars.asm"
 
 NamingScreenGFX_ED: INCBIN "gfx/naming_screen/end.1bpp" ; leftover from gen 1
 NamingScreenGFX_MiddleLine: INCBIN "gfx/naming_screen/middle_line.1bpp"
@@ -916,12 +874,12 @@ _ComposeMailMessage:
 	ldh [hMapAnims], a
 	ret
 
-Function12267: ; 12267 (4:6267)
+Function12267:
 	call ClearBGPalettes
 	call DisableLCD
 	call Function1201e
 	ld de, $8000
-	ld hl, MailIcon ; $62c1
+	ld hl, MailIcon
 	ld bc, $80
 	ld a, BANK(MailIcon)
 	call FarCopyBytes
@@ -959,14 +917,14 @@ Function12267: ; 12267 (4:6267)
 
 MailIcon: INCBIN "gfx/icons/mail_big.2bpp"
 
-Function12341: ; 12341 (4:6341)
+Function12341:
 	ld a, $21
 	ld [wNamingScreenMaxNameLength], a
 	ret
 
 	db "メールを かいてね@"
 
-Function12351: ; 12351 (4:6351)
+Function12351:
 	call WaitTop
 	hlcoord 0, 0
 	ld bc, $78
@@ -980,7 +938,7 @@ Function12351: ; 12351 (4:6351)
 	ld bc, IncGradGBPalTable_13
 	call ClearBox
 	ld de, MailEntry_Uppercase
-Function12376: ; 12376 (4:6376)
+Function12376:
 	hlcoord 1, 7
 	ld b, $6
 .asm_1237b
@@ -999,7 +957,7 @@ Function12376: ; 12376 (4:6376)
 	jr nz, .asm_1237b
 	ret
 
-Function1238d: ; 1238d (4:638d)
+Function1238d:
 	call JoyTextDelay
 	ld a, [wce63]
 	bit 7, a
@@ -1020,7 +978,7 @@ Function1238d: ; 1238d (4:638d)
 	scf
 	ret
 
-Function123b8: ; 123b8 (4:63b8)
+Function123b8:
 	xor a
 	ldh [hBGMapMode], a
 	hlcoord 1, 1
@@ -1036,11 +994,11 @@ Function123b8: ; 123b8 (4:63b8)
 	ldh [hBGMapMode], a
 	ret
 
-Function123d5: ; 123d5 (4:63d5)
+Function123d5:
 	ld a, [wce63]
 	ld e, a
 	ld d, $0
-	ld hl, .Jumptable ; $63e4
+	ld hl, .Jumptable
 	add hl, de
 	add hl, de
 	ld a, [hli]
@@ -1146,12 +1104,12 @@ Function12407:
 	xor $1
 	ld [hl], a
 	jr nz, .asm_12487
-	ld de, MailEntry_Uppercase ; $65b6
+	ld de, MailEntry_Uppercase
 	call Function12376
 	ret
 
 .asm_12487
-	ld de, MailEntry_Lowercase ; $6628
+	ld de, MailEntry_Lowercase
 	call Function12376
 	ret
 
@@ -1195,7 +1153,7 @@ Function1248e:
 .CaseDelEnd:
 	db $00, $00, $00, $30, $30, $30, $60, $60, $60, $60
 
-Function124d9: ; 124d9 (4:64d9)
+Function124d9:
 	ld hl, hJoyLast
 	ld a, [hl]
 	and $40
@@ -1300,12 +1258,12 @@ Function124d9: ; 124d9 (4:64d9)
 	ld [hl], $5
 	ret
 
-Function12552: ; 12552 (4:6552)
+Function12552:
 	ld hl, wNamingScreenCursorObjectPointer
 	ld c, [hl]
 	inc hl
 	ld b, [hl]
-Function12558: ; 12558 (4:6558)
+Function12558:
 	ld hl, $d
 	add hl, bc
 	ld a, [hl]
@@ -1333,7 +1291,7 @@ Function12558: ; 12558 (4:6558)
 	xor a
 	ret
 
-Function12579: ; 12579 (4:6579)
+Function12579:
 	ld a, [wNamingScreenLastCharacter]
 	ld hl, $5f23
 	cp $e5
@@ -1374,18 +1332,4 @@ Function12579: ; 12579 (4:6579)
 	ld a, [hl]
 	jp asm_11ef0
 
-MailEntry_Uppercase:
-	db "A B C D E F G H I J"
-	db "K L M N O P Q R S T"
-	db "U V W X Y Z   , ? !"
-	db "1 2 3 4 5 6 7 8 9 0"
-	db "<PK> <MN> <PO> <KE> é ♂ ♀ ¥ … ×"
-	db "lower  DEL   END   "
-
-MailEntry_Lowercase:
-	db "a b c d e f g h i j"
-	db "k l m n o p q r s t"
-	db "u v w x y z   . - /"
-	db "'d 'l 'm 'r 's 't 'v & ( )"
-	db "<``> <''> [ ] ' : ;      "
-	db "UPPER  DEL   END   "
+INCLUDE "data/text/mail_input_chars.asm"

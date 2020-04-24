@@ -1,55 +1,67 @@
 ; $00-$16 are TX_* constants (see macros/scripts/text.asm)
 
 ; Control characters (see home/text.asm)
+
 	charmap "<NULL>",    $00
-	charmap "<PLAY_G>",  $14 ; <PLAYER> + gender
+	charmap "<PLAY_G>",  $14 ; "<PLAYER>くん" or "<PLAYER>ちゃん"; same as "<PLAYER>" in English
 	charmap "<CR>",      $16
-	charmap "¯",         $1f
+	charmap "¯",         $1f ; soft linebreak
 	charmap "<LF>",      $22
-	charmap "<POKE>",    $24
-	charmap "%",         $25
-	charmap "<RED>",     $38
-	charmap "<GREEN>",   $39
+	charmap "<POKE>",    $24 ; "<PO><KE>"
+	charmap "%",         $25 ; soft linebreak in landmark names
+	charmap "<RED>",     $38 ; wRedsName
+	charmap "<GREEN>",   $39 ; wGreensName
 	charmap "<ENEMY>",   $3f
-	charmap "<MOM>",     $49
-	charmap "<PKMN>",    $4a
+	charmap "<MOM>",     $49 ; wMomsName
+	charmap "<PKMN>",    $4a ; "<PK><MN>"
 	charmap "<_CONT>",   $4b ; implements "<CONT>"
 	charmap "<SCROLL>",  $4c
 	charmap "<NEXT>",    $4e
 	charmap "<LINE>",    $4f
-	charmap "@",         $50
+	charmap "@",         $50 ; string terminator
 	charmap "<PARA>",    $51
-	charmap "<PLAYER>",  $52
-	charmap "<RIVAL>",   $53
-	charmap "#",         $54
+	charmap "<PLAYER>",  $52 ; wPlayerName
+	charmap "<RIVAL>",   $53 ; wRivalName
+	charmap "#",         $54 ; "POKé"
 	charmap "<CONT>",    $55
-	charmap "<……>",      $56
+	charmap "<……>",      $56 ; "……"
 	charmap "<DONE>",    $57
 	charmap "<PROMPT>",  $58
 	charmap "<TARGET>",  $59
 	charmap "<USER>",    $5a
-	charmap "<PC>",      $5b
-	charmap "<TM>",      $5c
+	charmap "<PC>",      $5b ; "PC"
+	charmap "<TM>",      $5c ; "TM"
 	charmap "<TRAINER>", $5d ; "TRAINER"
-	charmap "<ROCKET>",  $5e
+	charmap "<ROCKET>",  $5e ; "ROCKET"
 	charmap "<DEXEND>",  $5f
 
-; Actual characters
-	charmap "▲",         $61
-	charmap "_",         $62
-	charmap "<COLON>",   $6d ; necessary because ":" is already used
-	charmap "′",         $6e
-	charmap "<LV>",      $6e
-	charmap "″",         $6f
+; Actual characters (from gfx/font/font_extra.png)
 
+	charmap "<BOLD_A>",  $60 ; unused
+	charmap "<BOLD_B>",  $61 ; unused
+	charmap "<BOLD_C>",  $62 ; unused
+	charmap "<BOLD_D>",  $63 ; unused
+	charmap "<BOLD_E>",  $64 ; unused
+	charmap "<BOLD_F>",  $65 ; unused
+	charmap "<BOLD_G>",  $66 ; unused
+	charmap "<BOLD_H>",  $67 ; unused
+	charmap "<BOLD_I>",  $68 ; unused
+	charmap "<BOLD_V>",  $69
+	charmap "<BOLD_S>",  $6a
+	charmap "<BOLD_L>",  $6b ; unused
+	charmap "<BOLD_M>",  $6c ; unused
+	charmap "<COLON>",   $6d ; colon with tinier dots than ":"
+	charmap "ぃ",         $6e ; hiragana small i, unused
+	charmap "ぅ",         $6f ; hiragana small u, unused
 	charmap "<PO>",      $70
 	charmap "<KE>",      $71
-	charmap "◀",         $71
-	charmap "<``>",      $72
-	charmap "<''>",      $73
-	charmap "<ID>",      $73
-	charmap "№",         $74
-	charmap "…",         $75
+	charmap "“",         $72 ; opening quote
+	charmap "”",         $73 ; closing quote
+	charmap "·",         $74 ; middle dot, unused
+	charmap "…",         $75 ; ellipsis
+	charmap "ぁ",         $76 ; hiragana small a, unused
+	charmap "ぇ",         $77 ; hiragana small e, unused
+	charmap "ぉ",         $78 ; hiragana small o, unused
 
 	charmap "┌",         $79
 	charmap "─",         $7a
