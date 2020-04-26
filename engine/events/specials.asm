@@ -25,7 +25,7 @@ ELSE
 ENDC
 ENDM
 
-SpecialsPointers:
+SpecialsPointers::
 	add_special WarpToSpawnPoint
 
 ; Communications
@@ -409,21 +409,22 @@ UnusedCheckUnusedTwoDayTimer: ; c549 (3:4549)
 	ld [wScriptVar], a
 	ret
 
-ActivateFishingSwarm: ; c556 (3:4556)
+ActivateFishingSwarm:
 	ld a, [wScriptVar]
 	ld [wFishingSwarmFlag], a
-	jr .asm_c566
+	jr SetSwarmFlag
 
-.asm_c55e
+StoreSwarmMapIndices::
 	ld a, d
 	ld [wDunsparceMapGroup], a
 	ld a, e
 	ld [wDunsparceMapNumber], a
-.asm_c566
+	; fallthrough
+SetSwarmFlag:
 	SetFlag ENGINE_SPECIAL_WILDDATA
 	ret
 
-Functionc56c:
+CheckSwarmFlag::
 	CheckFlagHL ENGINE_SPECIAL_WILDDATA
 	jr z, .asm_c578
 	xor a

@@ -1331,14 +1331,14 @@ _CoordinatesEventText::
 	text "Coordinates event"
 	done
 
-UnknownText_0x1c4719::
+_ReceivedItemText::
 	text "<PLAYER> received"
 	line "@"
 	text_ram wStringBuffer4
 	text "."
 	done
 
-UnknownText_0x1c472c::
+_PutItemInPocketText::
 	text "<PLAYER> put the"
 	line "@"
 	text_ram wStringBuffer1
@@ -1348,7 +1348,7 @@ UnknownText_0x1c472c::
 	text "."
 	prompt
 
-UnknownText_0x1c474b::
+_PocketIsFullText::
 	text "The @"
 	text_ram wStringBuffer3
 	text_start

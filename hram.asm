@@ -29,7 +29,7 @@ hVBlank::   db ; ffa0
 hMapEntryMethod:: db ; ffa1
 hMenuReturn:: db ; ffa2
 
-hFFA3:: db ; ffa3
+hUnusedFFA3:: db ; ffa3
 
 hJoypadReleased:: db ; ffa4
 hJoypadPressed::  db ; ffa5

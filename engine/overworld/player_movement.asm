@@ -483,7 +483,7 @@ Function102bf: ; 102bf (4:42bf)
 	ret
 
 Function102cb: ; 102cb (4:42cb)
-	call Function10404
+	call CheckStandingOnIce
 	ret nc
 	ld a, [wPlayerTurningDirection]
 .asm_102d2
@@ -704,7 +704,7 @@ Function103f9: ; 103f9 (4:43f9)
 	pop bc
 	ret
 
-Function10404: ; 10404 (4:4404)
+CheckStandingOnIce::
 	ld a, [wPlayerTurningDirection]
 	cp $0
 	jr z, .asm_10420

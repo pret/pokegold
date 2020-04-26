@@ -42,7 +42,7 @@ SpawnPlayer: ; 861a (2:461a)
 ; Said bytes seem to be unused.
 	object_event -4, -4, SPRITE_CHRIS, SPRITEMOVEDATA_PLAYER, 15, 15, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, 0, -1
 
-CopyDECoordsToMapObject: ; 8653 (2:4653)
+CopyDECoordsToMapObject::
 	push de
 	ld a, b
 	call GetMapObject
@@ -55,7 +55,7 @@ CopyDECoordsToMapObject: ; 8653 (2:4653)
 	ld [hl], e
 	ret
 
-PlayerSpawn_ConvertCoords: ; 8664 (2:4664)
+PlayerSpawn_ConvertCoords:
 	push bc
 	ld a, [wXCoord]
 	add $4
@@ -67,7 +67,7 @@ PlayerSpawn_ConvertCoords: ; 8664 (2:4664)
 	call CopyDECoordsToMapObject
 	ret
 
-WritePersonXY:
+WriteObjectXY::
 	ld a, b
 	call CheckObjectVisibility
 	ret c
@@ -259,7 +259,7 @@ InitializeVisibleSprites:
 Function87b9: ; 87b9 (2:47b9)
 	ret
 
-CheckObjectEnteringVisibleRange:
+CheckObjectEnteringVisibleRange::
 	nop
 	ld a, [wPlayerStepDirection]
 	cp $ff
@@ -473,7 +473,7 @@ InitTempObjectRadius: ; 88fd (2:48fd)
 	ld [hl], a
 	ret
 
-TrainerWalkToPlayer:
+TrainerWalkToPlayer::
 	ldh a, [hLastTalked]
 	call InitMovementBuffer
 	ld a, movement_step_sleep
@@ -554,7 +554,7 @@ GetInitialSurfStep: ; 8978 (2:4978)
 	slow_step LEFT
 	slow_step RIGHT
 
-FollowNotExact:
+FollowNotExact::
 	push bc
 	ld a, c
 	call CheckObjectVisibility
@@ -636,7 +636,7 @@ FollowNotExact:
 	ld [hl], $0
 	ret
 
-GetRelativeFacing:
+GetRelativeFacing::
 	ld a, d
 	call GetMapObject
 	ld hl, $0

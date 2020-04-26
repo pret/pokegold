@@ -666,7 +666,7 @@ Function55a1:
 	call Function55d8
 	ld a, $0
 	call Function55bc
-	ld a, [wd180]
+	ld a, [wBattleScriptFlags]
 	bit 7, a
 	jr z, .asm_55b8
 	ldh a, [hLastTalked]
@@ -1021,7 +1021,7 @@ Function57bd: ; 57bd (1:57bd)
 	ld [wObjectFollow_Follower], a
 	ret
 
-Function57d2:
+SetFlagsForMovement_1::
 	ld a, c
 	call CheckObjectVisibility
 	ret c
@@ -1064,7 +1064,7 @@ Function57f0: ; 57f0 (1:57f0)
 	jr nz, .asm_57f4
 	ret
 
-Function580d:
+_SetFlagsForMovement_2::
 	ld a, [wObjectFollow_Leader]
 	cp $ff
 	ret z
@@ -1085,7 +1085,7 @@ Function580d:
 	res 5, [hl]
 	ret
 
-Function582f:
+Function582f::
 	push bc
 	ld bc, wPlayerSprite
 	xor a

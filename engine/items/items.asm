@@ -489,7 +489,7 @@ CheckSelectableItem:
 	and a
 	ret
 
-CheckItemPocket: ; d44a (3:544a)
+CheckItemPocket::
 	ld a, $5
 	call GetItemAttr
 	and $f

@@ -9,10 +9,10 @@ ClearDailyTimers:
 	ld [wDailyResetTimer], a
 	ret
 
-InitCallReceiveDelay:
+InitCallReceiveDelay::
 	xor a
 	ld [wTimeCyclesSinceLastCall], a
-Function11804: ; 11804 (4:5804)
+Function11804:
 	ld a, [wTimeCyclesSinceLastCall]
 	cp $3
 	jr c, .asm_1180d
@@ -82,7 +82,7 @@ asm_11867:
 	ld hl, wDailyResetTimer
 	jp Function1182e
 
-CheckDailyResetTimer:
+CheckDailyResetTimer::
 	ld hl, wDailyResetTimer
 	call Function1183b
 	ret nc
@@ -102,7 +102,7 @@ StartBugContestTimer:
 	call CopyDayHourMinSecToHL
 	ret
 
-CheckBugContestTimer:
+CheckBugContestTimer::
 	ld hl, wBugContestStartTime
 	call CalcSecsMinsHoursDaysSince
 	ld a, [wDaysSince]
@@ -141,7 +141,7 @@ Function118c9: ; 118c9 (4:58c9)
 	call CopyDayToHL
 	ret
 
-CheckPokerusTick:
+CheckPokerusTick::
 	ld hl, wTimerEventStartDay
 	call CalcDaysSince
 	call Function119b4

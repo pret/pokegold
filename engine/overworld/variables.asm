@@ -1,4 +1,4 @@
-GetVarAction_::
+_GetVarAction::
 	ld a, c
 	cp NUM_VARS
 	jr c, .valid

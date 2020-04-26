@@ -34,6 +34,12 @@ NUM_STRING_BUFFERS EQU const_value
 	const PHONE_CONTACTS_FULL   ; 1
 	const PHONE_CONTACT_REFUSED ; 2
 
+; trainertext arguments
+	const_def
+	const TRAINERTEXT_SEEN
+	const TRAINERTEXT_WIN
+	const TRAINERTEXT_LOSS
+
 ; writecode/checkcode arguments
 ; _GetVarAction.VarActionTable indexes (see engine/overworld/variables.asm)
 	const_def
@@ -115,6 +121,7 @@ OBJECT_EVENT_SIZE EQU 13 ; object_event
 ; command queue members
 CMDQUEUE_TYPE  EQU 0
 CMDQUEUE_ADDR  EQU 1
+CMDQUEUE_02    EQU 2
 CMDQUEUE_03    EQU 3
 CMDQUEUE_04    EQU 4
 CMDQUEUE_05    EQU 5
@@ -165,7 +172,7 @@ NUM_CMDQUEUE_TYPES EQU const_value
 	const EMOTE_ROD ; 9
 	const EMOTE_BOULDER_DUST ; 10
 	const EMOTE_GRASS_RUSTLE ; 11
-EMOTE_MEM EQU -1
+EMOTE_FROM_MEM EQU -1
 
 ; fruittree arguments
 ; FruitTreeItems indexes (see data/items/fruit_trees.asm)
@@ -265,17 +272,3 @@ NUM_FRUIT_TREES EQU const_value + -1
 	const UNOWNPUZZLE_AERODACTYL ; 2
 	const UNOWNPUZZLE_HO_OH      ; 3
 NUM_UNOWN_PUZZLES EQU const_value
-
-; DisplayUnownWords writebyte arguments
-; UnownWalls and MenuHeaders_UnownWalls indexes (see data/events/unown_walls.asm)
-	const_def
-	const UNOWNWORDS_ESCAPE ; 0
-	const UNOWNWORDS_LIGHT  ; 1
-	const UNOWNWORDS_WATER  ; 2
-	const UNOWNWORDS_HO_OH  ; 3
-
-; MoveTutor writebyte arguments
-	const_def 1
-	const MOVETUTOR_FLAMETHROWER ; 1
-	const MOVETUTOR_THUNDERBOLT  ; 2
-	const MOVETUTOR_ICE_BEAM     ; 3

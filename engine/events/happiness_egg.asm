@@ -145,7 +145,7 @@ StepHappiness::
 
 MAX_EXP EQU 5242880
 
-DaycareStep::
+DayCareStep::
 	CheckFlag ENGINE_DAY_CARE_MAN_HAS_MON
 	jr z, .daycare_lady
 	ld a, [wBreedMon1Level]

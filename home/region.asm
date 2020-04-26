@@ -39,9 +39,9 @@ Function2ffe::
 	ld [hli], a
 	ld [hli], a
 	ld [hl], a
-	ld a, [wd17a]
+	ld a, [wXYComparePointer]
 	ld l, a
-	ld a, [wd17b]
+	ld a, [wXYComparePointer + 1]
 	ld h, a
 	or l
 	jr z, .quit

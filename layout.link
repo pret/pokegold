@@ -116,8 +116,8 @@ ROMX $24
 	org $4000
 	"bank24"
 ROMX $25
-	org $4000
-	"bank25"
+	"Maps"
+	"Events"
 ROMX $26
 	org $4000
 	"bank26"
@@ -174,7 +174,6 @@ ROMX $40
 	org $4000
 	"bank40"
 ROMX $41
-	org $4000
 	"bank41"
 ROMX $42
 	"Map Scripts 1"

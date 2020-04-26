@@ -220,7 +220,9 @@ TilesetTrainStationMeta::
 TilesetTrainStationColl::
 	dr $235f1, $236f1
 TilesetForestMeta::
-	dr $236f1, $239fe
+	dr $236f1, $23971
+CatchTutorial::
+	dr $23971, $239fe
 EggMovePointers::
 	dr $239fe, $23e3d
 
@@ -242,7 +244,11 @@ _ExitMenu::
 _InitVerticalMenuCursor::
 	dr $24395, $243eb
 UpdateItemDescription::
-	dr $243eb, $24477
+	dr $243eb, $2440b
+Pokepic::
+	dr $2440b, $24450
+ClosePokepic::
+	dr $24450, $24477
 LoadObjectMasks::
 	dr $24477, $244d7
 _InitScrollingMenu::
@@ -301,7 +307,9 @@ _PlayerDecorationMenu::
 	dr $26938, $270d5
 
 ReceiveDecorationC::
-	dr $270d5, $271be
+	dr $270d5, $2712c
+DescribeDecoration::
+	dr $2712c, $271be
 ToggleMaptileDecorations::
 	dr $271be, $27216
 ToggleDecorationsVisibility::
@@ -370,7 +378,15 @@ BackupMysteryGift::
 RestoreMysteryGift::
 	dr $2a518, $2a539
 LoadWildMonData::
-	dr $2a539, $2a7d7
+	dr $2a539, $2a643
+TryWildEncounter::
+	dr $2a643, $2a680
+ApplyMusicEffectOnEncounterRate::
+	dr $2a680, $2a694
+ApplyCleanseTagEffectOnEncounterRate::
+	dr $2a694, $2a73b
+CheckRepelEffect::
+	dr $2a73b, $2a7d7
 InitRoamMons::
 	dr $2a7d7, $2a859
 UpdateRoamMons::
@@ -505,6 +521,7 @@ EvosAttacksPointers::
 
 SECTION "bank11", ROMX
 
+FruitTreeScript::
 	dr $44000, $440c8
 INCLUDE "engine/battle/ai/move.asm"
 	dr $441c2, $44360
@@ -517,7 +534,11 @@ ClearBattleRAM::
 PlaceGraphic::
 	dr $44648, $44679
 SendMailToPC::
-	dr $44679, $44830
+	dr $44679, $4475f
+CheckPokeMail::
+	dr $4475f, $447d7
+GivePokeMail::
+	dr $447d7, $44830
 BackupPartyMonMail::
 	dr $44830, $44850
 RestorePartyMonMail::
@@ -553,7 +574,9 @@ PrintPartyMenuText::
 PrintPartyMenuActionText::
 	dr $504db, $5054f
 LoadFishingGFX::
-	dr $5054f, $506f2
+	dr $5054f, $50610
+DoPoisonStep::
+	dr $50610, $506f2
 SweetScentFromMenu::
 	dr $506f2, $50763
 SquirtbottleFunction::
@@ -621,8 +644,12 @@ PrintMailAndExit::
 PrintPartymon::
 	dr $84616, $84684
 Function84684::
-	dr $84684, $86632
+	dr $84684, $8640a
 
+HallOfFame::
+	dr $8640a, $86446
+RedCredits::
+	dr $86446, $86632
 _HallOfFamePC::
 	dr $86632, $87bfd
 
@@ -719,7 +746,22 @@ ENDC
 
 SECTION "bank24", ROMX
 
-	dr $90000, $90641
+AddPhoneNumber::
+	dr $90000, $9000f
+DelCellNum::
+	dr $9000f, $90019
+CheckCellNum::
+	dr $90019, $90074
+CheckPhoneCall::
+	dr $90074, $9013e
+CheckSpecialPhoneCall::
+	dr $9013e, $9025d
+Script_SpecialBillCall::
+	dr $9025d, $90298
+PhoneCall::
+	dr $90298, $902df
+HangUp::
+	dr $902df, $90641
 InitClock::
 	dr $90641, $908dc
 SetDayOfWeek::
@@ -754,28 +796,6 @@ Function92c36::
 	dr $92c36, $93f86
 
 
-SECTION "bank25", ROMX
-
-MapScenes::
-	dr $94000, $940ed
-INCLUDE "data/maps/maps.asm"
-INCLUDE "data/maps/attributes.asm"
-
-OverworldLoop::
-	dr $965f9, $96b89
-EnableScriptMode::
-	dr $96b89, $96b91
-ScriptEvents::
-	dr $96b91, $97365
-
-CallCallback::
-	dr $97365, $97a59
-WarpToSpawnPoint::
-	dr $97a59, $97c2a
-ClearCmdQueue::
-	dr $97c2a, $97d96
-
-
 SECTION "bank26", ROMX
 
 IF DEF(_GOLD)
@@ -794,8 +814,6 @@ TitleScreenGFX2::
 GSIntroTilemap::
 	dr $9862a, $9886b
 ENDC
-
-INCLUDE "data/maps/blocks.asm"
 
 
 SECTION "bank2e_2", ROMX
@@ -1046,11 +1064,16 @@ TilesetPlayersRoomAnim::
 TilesetRuinsOfAlphAnim::
 TilesetRadioTowerAnim::
 TilesetUndergroundAnim::
-	dr $fc28e, $fde20
+	dr $fc28e, $fc9ae
+NPCTrade::
+	dr $fc9ae, $fcd87
+MomTriesToBuySomething::
+	dr $fcd87, $fde20
 
 
 SECTION "bank40", ROMX
 
+StdScripts::
 	dr $100000, $10110c
 INCLUDE "data/text/battle.asm"
 
@@ -1058,7 +1081,6 @@ INCLUDE "data/text/battle.asm"
 SECTION "bank41", ROMX
 
 	dr $104000, $10614d
-INCLUDE "data/maps/scripts.asm"
 
 
 SECTION "bank6c", ROMX

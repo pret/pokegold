@@ -998,7 +998,7 @@ Functiondf65: ; df65 (3:5f65)
 	jr nz, .asm_df89
 	ret
 
-GiveEgg: ; df92 (3:5f92)
+GiveEgg::
 	ld a, [wCurPartySpecies]
 	push af
 	callfar GetPreEvolution
@@ -1482,7 +1482,7 @@ CalcMonStatC: ; e181
 	pop hl
 	ret
 
-GivePoke: ; Give a Pokemon from script
+GivePoke::
 	push de
 	push bc
 	xor a

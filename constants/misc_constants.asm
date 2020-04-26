@@ -12,7 +12,11 @@ SET_FLAG   EQU 1
 CHECK_FLAG EQU 2
 
 ; G/S version ID: 0 = Gold, 1 = Silver (used by checkver)
+IF DEF(_GOLD)
 GS_VERSION EQU 0
+ELIF DEF(_SILVER)
+GS_VERSION EQU 1
+ENDC
 
 ; save file corruption check values
 SAVE_CHECK_VALUE_1 EQU 99

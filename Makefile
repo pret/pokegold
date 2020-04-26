@@ -6,7 +6,9 @@ home.o \
 main.o \
 wram.o \
 data/text/common.o \
+data/maps/map_data.o \
 data/pokemon/dex_entries.o \
+engine/overworld/events.o \
 gfx/sprites.o
 
 # Distinguish asm files which are game-exclusive for building (*_[gold|silver].asm)

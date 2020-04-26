@@ -988,8 +988,7 @@ ENDM
 	enum swarm_command ; $9e
 swarm: MACRO
 	db swarm_command
-	db \1 ; flag
-	map_id \2 ; map
+	map_id \1 ; map
 ENDM
 
 	enum halloffame_command ; $9f
@@ -1009,43 +1008,4 @@ warpfacing: MACRO
 	map_id \2 ; map
 	db \3 ; x
 	db \4 ; y
-ENDM
-
-	enum battletowertext_command ; $a2
-battletowertext: MACRO
-	db battletowertext_command
-	db \1 ; bttext_id
-ENDM
-
-	enum getlandmarkname_command ; $a3
-getlandmarkname: MACRO
-	db getlandmarkname_command
-	db \2 ; landmark_id
-	db \1 ; string_buffer
-ENDM
-
-	enum gettrainerclassname_command ; $a4
-gettrainerclassname: MACRO
-	db gettrainerclassname_command
-	db \2 ; trainer_group
-	db \1 ; string_buffer
-ENDM
-
-	enum getname_command ; $a5
-getname: MACRO
-	db getname_command
-	db \2 ; type
-	db \3 ; id
-	db \1 ; memory
-ENDM
-
-	enum wait_command ; $a6
-wait: MACRO
-	db wait_command
-	db \1 ; duration
-ENDM
-
-	enum checksave_command ; $a7
-checksave: MACRO
-	db checksave_command
 ENDM

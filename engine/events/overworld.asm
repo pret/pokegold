@@ -672,7 +672,7 @@ Text_UsedWaterfall:
 	text_far Text_UsedWaterfall_
 	db "@"
 
-TryWaterfallOW:
+TryWaterfallOW::
 	ld d, WATERFALL
 	call FieldMovePartyCheck
 	jr c, .asm_cb7d
@@ -1146,7 +1146,7 @@ DisappearWhirlpool: ; 4e20
 	call GetMovementPermissions
 	ret
 
-TryWhirlpoolOW:
+TryWhirlpoolOW::
 	ld d, WHIRLPOOL
 	call FieldMovePartyCheck
 	jr c, .asm_ce5f
@@ -1238,7 +1238,7 @@ HeadbuttScript:
 	closetext
 	end
 
-TryHeadbuttOW: ; cecc
+TryHeadbuttOW::
 	ld d, HEADBUTT
 	call FieldMovePartyCheck
 	jr c, .asm_cedd
@@ -1711,7 +1711,7 @@ GotOffBikeText:
 	text_end
 
 
-TryCutOW: ; d193
+TryCutOW::
 	ld d, CUT
 	call FieldMovePartyCheck
 	jr c, .asm_d1ac

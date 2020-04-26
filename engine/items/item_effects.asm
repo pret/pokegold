@@ -1951,12 +1951,12 @@ MaxRepel: ; f4bc (3:74bc)
 Repel: ; f4c0 (3:74c0)
 	ld b, 100
 asm_f4c2:
-	ld a, [wRepelSteps]
+	ld a, [wRepelEffect]
 	and a
 	ld hl, Text_RepelsEffectsStillLinger
 	jp nz, PrintText
 	ld a, b
-	ld [wRepelSteps], a
+	ld [wRepelEffect], a
 	jp Functionf7d0
 
 Text_RepelsEffectsStillLinger:

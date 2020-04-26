@@ -1,4 +1,4 @@
-HandlePlayerStep_::
+_HandlePlayerStep::
 	ld a, [wPlayerStepFlags]
 	and a
 	ret z
