@@ -17,31 +17,31 @@ CopyBytes::
 GetFarByte::
 ; retrieve a single byte from a:hl, and return it in a.
 	; bankswitch to new bank
-	ld [wBuffer], a
+	ld [wTempBank], a
 	ldh a, [hROMBank]
 	push af
-	ld a, [wBuffer]
+	ld a, [wTempBank]
 	rst Bankswitch
 
 	; get byte from new bank
 	ld a, [hl]
-	ld [wBuffer], a
+	ld [wFarByte], a
 
 	; bankswitch to previous bank
 	pop af
 	rst Bankswitch
 
 	; return retrieved value in a
-	ld a, [wBuffer]
+	ld a, [wFarByte]
 	ret
 
 GetFarHalfword::
 ; retrieve a halfword from a:hl, and return it in hl.
 	; bankswitch to new bank
-	ld [wBuffer], a
+	ld [wTempBank], a
 	ldh a, [hROMBank]
 	push af
-	ld a, [wBuffer]
+	ld a, [wTempBank]
 	rst Bankswitch
 
 	; get halfword from new bank, put it in hl

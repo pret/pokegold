@@ -109,6 +109,7 @@ hMoneyTemp:: ds 3 ; ffc5
 NEXTU ; ffc5
 hMGJoypadPressed::  db ; ffc5
 hMGJoypadReleased:: db ; ffc6
+hMGPrevTIMA::       db ; ffc7
 ENDU ; ffc8
 
 hLCDCPointer::      db ; ffc8

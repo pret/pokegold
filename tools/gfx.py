@@ -150,7 +150,7 @@ def filepath_rules(filepath):
         elif name in overworld_px16:
             args['width'] = 16
 
-    elif 'gfx/sgb_border' in filedir:
+    elif 'gfx/sgb' in filedir:
         args['width'] = 128
         args['pal_file'] = os.path.join(filedir, name + '.pal')
 

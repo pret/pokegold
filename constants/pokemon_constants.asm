@@ -252,7 +252,7 @@ const_value set 1
 	const LUGIA
 	const HO_OH
 	const CELEBI
-NUM_POKEMON EQU const_value + -1
+NUM_POKEMON EQU const_value - 1
 	const MON_FC
 	const EGG
 	const MON_FE
@@ -292,7 +292,7 @@ NUM_POKEMON EQU const_value + -1
 	const UNOWN_X ; 24
 	const UNOWN_Y ; 25
 	const UNOWN_Z ; 26
-NUM_UNOWN EQU const_value + -1 ; 26
+NUM_UNOWN EQU const_value - 1 ; 26
 
 ; pokemon structure in RAM
 MON_SPECIES              EQUS "(wPartyMon1Species - wPartyMon1)"

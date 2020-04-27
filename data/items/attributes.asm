@@ -301,7 +301,7 @@ Item2Attributes:
 ; WHT APRICORN
 	item_attribute   200, 0,                 0,             CANT_SELECT, ITEM,     ITEMMENU_NOUSE,   ITEMMENU_NOUSE
 
-; BLACKBELT
+; BLACKBELT_I
 	item_attribute   100, HELD_FIGHTING_BOOST, 10,             CANT_SELECT, ITEM,     ITEMMENU_NOUSE,   ITEMMENU_NOUSE
 
 ; BLK APRICORN

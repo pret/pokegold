@@ -253,7 +253,7 @@
 	const WHIRLPOOL    ; $fa
 	const BEAT_UP      ; $fb
 
-const_value SET const_value + -1
+const_value SET const_value - 1
 
 	const NUM_ATTACKS  ; $fb
 

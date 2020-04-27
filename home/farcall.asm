@@ -2,10 +2,10 @@ FarCall_hl::
 ; Call a:hl.
 ; Preserves other registers.
 
-	ld [wBuffer], a
+	ld [wTempBank], a
 	ldh a, [hROMBank]
 	push af
-	ld a, [wBuffer]
+	ld a, [wTempBank]
 	rst Bankswitch
 	call FarCall_JumpToHL
 

@@ -2527,7 +2527,8 @@ wFailedToFlee:: db ; d152
 wNumFleeAttempts:: db ; d153
 wd154:: ds 1 ; d154
 wROMBankBackup:: ds 1 ; d155
-wBuffer:: ds 1 ; d156
+wFarByte::
+wTempBank:: db ; d156
 wTimeOfDay:: ds 1 ; d157
 wd158:: ds 1 ; d158
 

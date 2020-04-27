@@ -1303,15 +1303,15 @@ Palettes_a265: INCLUDE "gfx/pals/silver_a265.pal"
 ENDC
 
 IF DEF(_GOLD)
-SGBBorderMap: INCBIN "gfx/sgb_border/gold.map"
-SGBBorderPalettes: INCLUDE "gfx/sgb_border/gold.pal"
-SGBBorder: INCBIN "gfx/sgb_border/gold.2bpp"
+SGBBorderMap: INCBIN "gfx/sgb/gold_border.sgb.tilemap"
+SGBBorderPalettes: INCLUDE "gfx/sgb/gold_border.pal"
+SGBBorder: INCBIN "gfx/sgb/gold_border.2bpp"
 ENDC
 
 IF DEF(_SILVER)
-SGBBorderMap: INCBIN "gfx/sgb_border/silver.map"
-SGBBorderPalettes: INCLUDE "gfx/sgb_border/silver.pal"
-SGBBorder: INCBIN "gfx/sgb_border/silver.2bpp"
+SGBBorderMap: INCBIN "gfx/sgb/silver_border.sgb.tilemap"
+SGBBorderPalettes: INCLUDE "gfx/sgb/silver_border.pal"
+SGBBorder: INCBIN "gfx/sgb/silver_border.2bpp"
 ENDC
 
 Palettes_ad2d:

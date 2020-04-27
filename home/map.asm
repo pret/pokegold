@@ -1452,10 +1452,10 @@ MapTextbox::
 Call_a_de::
 ; Call a:de.
 
-	ld [wBuffer], a
+	ld [wTempBank], a
 	ldh a, [hROMBank]
 	push af
-	ld a, [wBuffer]
+	ld a, [wTempBank]
 	rst Bankswitch
 
 	call .de

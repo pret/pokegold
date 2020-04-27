@@ -106,7 +106,7 @@ curbox: MACRO
 \1Species::         ds MONS_PER_BOX + 1
 \1Mons::
 \1Mon1::            box_struct \1Mon1
-\1Mon2::            ds BOXMON_STRUCT_LENGTH * (MONS_PER_BOX + -1)
+\1Mon2::            ds BOXMON_STRUCT_LENGTH * (MONS_PER_BOX - 1)
 \1MonOT::           ds NAME_LENGTH * MONS_PER_BOX
 \1MonNicknames::    ds MON_NAME_LENGTH * MONS_PER_BOX
 \1MonNicknamesEnd::
@@ -206,7 +206,7 @@ hof_mon: MACRO
 \1ID::       dw
 \1DVs::      dw
 \1Level::    db
-\1Nickname:: ds MON_NAME_LENGTH + -1
+\1Nickname:: ds MON_NAME_LENGTH - 1
 \1End::
 ENDM
 
@@ -227,6 +227,7 @@ link_battle_record: MACRO
 \1Wins::   dw
 \1Losses:: dw
 \1Draws::  dw
+\1End::
 ENDM
 
 trademon: MACRO

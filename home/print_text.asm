@@ -136,10 +136,10 @@ Function33e9::
 .digits db "0123456789ABCDEF"
 
 FarPrintText::
-	ld [wBuffer], a
+	ld [wTempBank], a
 	ldh a, [hROMBank]
 	push af
-	ld a, [wBuffer]
+	ld a, [wTempBank]
 	rst Bankswitch
 
 	call PrintText

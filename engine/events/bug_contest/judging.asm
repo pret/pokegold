@@ -125,7 +125,7 @@ INCLUDE "data/events/bug_contest_winners.asm"
 
 BugContest_GetPlayersResult:
 	ld hl, wBugContestThirdPlaceWinnerID
-	ld de, - BUG_CONTESTANT_SIZE
+	ld de, -BUG_CONTESTANT_SIZE
 	ld b, 3 ; 3rd, 2nd, or 1st
 .loop
 	ld a, [hl]
@@ -210,7 +210,7 @@ DetermineContestWinners:
 CopyTempContestant:
 ; Could've just called CopyBytes.
 	ld de, wBugContestTempWinnerID
-rept BUG_CONTESTANT_SIZE + -1
+rept BUG_CONTESTANT_SIZE - 1
 	ld a, [de]
 	inc de
 	ld [hli], a

@@ -944,7 +944,7 @@ Sfx_RegisterPhoneNumber_Ch5:
 	note __, 8
 	endchannel
 
-	togglesfx
+	togglesfx ; unused
 
 Sfx_RegisterPhoneNumber_Ch6:
 	togglesfx
@@ -968,7 +968,7 @@ Sfx_RegisterPhoneNumber_Ch6:
 	note __, 8
 	endchannel
 
-	togglesfx
+	togglesfx ; unused
 
 Sfx_RegisterPhoneNumber_Ch7:
 	togglesfx
@@ -989,7 +989,7 @@ Sfx_RegisterPhoneNumber_Ch7:
 	note __, 8
 	endchannel
 
-	togglesfx
+	togglesfx ; unused
 
 Sfx_RegisterPhoneNumber_Ch8:
 	togglesfx
@@ -1000,7 +1000,7 @@ Sfx_RegisterPhoneNumber_Ch8:
 	note __, 16
 	endchannel
 
-	togglesfx
+	togglesfx ; unused
 
 Sfx_3RdPlace:
 	musicheader 3, 5, Sfx_3RdPlace_Ch5
@@ -1024,7 +1024,7 @@ Sfx_3RdPlace_Ch5:
 	note D_, 6
 	endchannel
 
-	togglesfx
+	togglesfx ; unused
 
 Sfx_3RdPlace_Ch6:
 	togglesfx
@@ -1041,7 +1041,7 @@ Sfx_3RdPlace_Ch6:
 	note G_, 6
 	endchannel
 
-	togglesfx
+	togglesfx ; unused
 
 Sfx_3RdPlace_Ch7:
 	togglesfx
@@ -1058,7 +1058,7 @@ Sfx_3RdPlace_Ch7:
 	note B_, 6
 	endchannel
 
-	togglesfx
+	togglesfx ; unused
 
 Sfx_GetEgg:
 	musicheader 4, 5, Sfx_GetEgg_Ch5
@@ -1096,7 +1096,7 @@ Sfx_GetEgg_Ch5:
 	note __, 9
 	endchannel
 
-	togglesfx
+	togglesfx ; unused
 
 Sfx_GetEgg_Ch6:
 	togglesfx
@@ -1125,7 +1125,7 @@ Sfx_GetEgg_Ch6:
 	note __, 9
 	endchannel
 
-	togglesfx
+	togglesfx ; unused
 
 Sfx_GetEgg_Ch7:
 	togglesfx
@@ -1144,7 +1144,7 @@ Sfx_GetEgg_Ch7:
 	note __, 9
 	endchannel
 
-	togglesfx
+	togglesfx ; unused
 
 Sfx_GetEgg_Ch8:
 	togglesfx
@@ -1156,7 +1156,7 @@ Sfx_GetEgg_Ch8:
 	note __, 12
 	endchannel
 
-	togglesfx
+	togglesfx ; unused
 
 Sfx_MoveDeleted:
 	musicheader 4, 5, Sfx_MoveDeleted_Ch5
@@ -1192,7 +1192,7 @@ Sfx_MoveDeleted_Ch5:
 	note __, 6
 	endchannel
 
-	togglesfx
+	togglesfx ; unused
 
 Sfx_MoveDeleted_Ch6:
 	togglesfx
@@ -1228,7 +1228,7 @@ Sfx_MoveDeleted_Ch6:
 	note __, 6
 	endchannel
 
-	togglesfx
+	togglesfx ; unused
 
 Sfx_MoveDeleted_Ch7:
 	togglesfx
@@ -1255,7 +1255,7 @@ Sfx_MoveDeleted_Ch7:
 	note __, 6
 	endchannel
 
-	togglesfx
+	togglesfx ; unused
 
 Sfx_MoveDeleted_Ch8:
 	togglesfx
@@ -1267,7 +1267,7 @@ Sfx_MoveDeleted_Ch8:
 	note __, 6
 	endchannel
 
-	togglesfx
+	togglesfx ; unused
 
 Sfx_2ndPlace:
 	musicheader 4, 5, Sfx_2ndPlace_Ch5
@@ -1307,7 +1307,7 @@ Sfx_2ndPlace_Ch5:
 	note __, 6
 	endchannel
 
-	togglesfx
+	togglesfx ; unused
 
 Sfx_2ndPlace_Ch6:
 	togglesfx
@@ -1331,7 +1331,7 @@ Sfx_2ndPlace_Ch6:
 	note __, 6
 	endchannel
 
-	togglesfx
+	togglesfx ; unused
 
 Sfx_2ndPlace_Ch7:
 	togglesfx
@@ -1369,7 +1369,7 @@ Sfx_2ndPlace_Ch7:
 	note __, 6
 	endchannel
 
-	togglesfx
+	togglesfx ; unused
 
 Sfx_2ndPlace_Ch8:
 	togglesfx
@@ -1384,7 +1384,7 @@ Sfx_2ndPlace_Ch8:
 	note __, 6
 	endchannel
 
-	togglesfx
+	togglesfx ; unused
 
 Sfx_1stPlace:
 	musicheader 4, 5, Sfx_1stPlace_Ch5
@@ -1431,7 +1431,7 @@ Sfx_1stPlace_Ch5:
 	note __, 6
 	endchannel
 
-	togglesfx
+	togglesfx ; unused
 
 Sfx_1stPlace_Ch6:
 	togglesfx
@@ -1455,7 +1455,7 @@ Sfx_1stPlace_Ch6:
 	note __, 6
 	endchannel
 
-	togglesfx
+	togglesfx ; unused
 
 Sfx_1stPlace_Ch7:
 	togglesfx
@@ -1479,7 +1479,7 @@ Sfx_1stPlace_Ch7:
 	note __, 6
 	endchannel
 
-	togglesfx
+	togglesfx ; unused
 
 Sfx_1stPlace_Ch8:
 	togglesfx
@@ -1500,7 +1500,7 @@ Sfx_1stPlace_Ch8:
 	note __, 6
 	endchannel
 
-	togglesfx
+	togglesfx ; unused
 
 Sfx_ChooseACard:
 	musicheader 4, 5, Sfx_ChooseACard_Ch5
@@ -1552,7 +1552,7 @@ Sfx_ChooseACard_Ch5:
 	note __, 12
 	endchannel
 
-	togglesfx
+	togglesfx ; unused
 
 Sfx_ChooseACard_Ch6:
 	togglesfx
@@ -1584,7 +1584,7 @@ Sfx_ChooseACard_Ch6:
 	note __, 12
 	endchannel
 
-	togglesfx
+	togglesfx ; unused
 
 Sfx_ChooseACard_Ch7:
 	togglesfx
@@ -1620,7 +1620,7 @@ Sfx_ChooseACard_Ch7:
 	note __, 12
 	endchannel
 
-	togglesfx
+	togglesfx ; unused
 
 Sfx_ChooseACard_Ch8:
 	togglesfx
@@ -1645,7 +1645,7 @@ Sfx_ChooseACard_Ch8:
 	note B_, 16
 	endchannel
 
-	togglesfx
+	togglesfx ; unused
 
 Sfx_GetTm:
 	musicheader 4, 5, Sfx_GetTm_Ch5
@@ -1677,7 +1677,7 @@ Sfx_GetTm_Ch5:
 	note __, 6
 	endchannel
 
-	togglesfx
+	togglesfx ; unused
 
 Sfx_GetTm_Ch6:
 	togglesfx
@@ -1700,7 +1700,7 @@ Sfx_GetTm_Ch6:
 	note __, 6
 	endchannel
 
-	togglesfx
+	togglesfx ; unused
 
 Sfx_GetTm_Ch7:
 	togglesfx
@@ -1731,7 +1731,7 @@ Sfx_GetTm_Ch7:
 	note __, 6
 	endchannel
 
-	togglesfx
+	togglesfx ; unused
 
 Sfx_GetTm_Ch8:
 	togglesfx
@@ -1751,7 +1751,7 @@ Sfx_GetTm_Ch8:
 	note __, 6
 	endchannel
 
-	togglesfx
+	togglesfx ; unused
 
 Sfx_GetBadge:
 	musicheader 4, 5, Sfx_GetBadge_Ch5
@@ -1778,7 +1778,7 @@ Sfx_GetBadge_Ch5:
 	note __, 6
 	endchannel
 
-	togglesfx
+	togglesfx ; unused
 
 Sfx_GetBadge_branch_f11aa:
 	note __, 5
@@ -1849,7 +1849,7 @@ Sfx_GetBadge_Ch6:
 	note __, 6
 	endchannel
 
-	togglesfx
+	togglesfx ; unused
 
 Sfx_GetBadge_Ch7:
 	togglesfx
@@ -1888,7 +1888,7 @@ Sfx_GetBadge_Ch7:
 	note __, 6
 	endchannel
 
-	togglesfx
+	togglesfx ; unused
 
 Sfx_GetBadge_Ch8:
 	togglesfx
@@ -1914,7 +1914,7 @@ Sfx_GetBadge_Ch8:
 	note __, 6
 	endchannel
 
-	togglesfx
+	togglesfx ; unused
 
 Sfx_QuitSlots:
 	musicheader 4, 5, Sfx_QuitSlots_Ch5
@@ -1952,7 +1952,7 @@ Sfx_QuitSlots_Ch5:
 	note __, 6
 	endchannel
 
-	togglesfx
+	togglesfx ; unused
 
 Sfx_QuitSlots_Ch6:
 	togglesfx
@@ -1979,7 +1979,7 @@ Sfx_QuitSlots_Ch6:
 	note __, 6
 	endchannel
 
-	togglesfx
+	togglesfx ; unused
 
 Sfx_QuitSlots_Ch7:
 	togglesfx
@@ -2010,7 +2010,7 @@ Sfx_QuitSlots_Ch7:
 	note __, 6
 	endchannel
 
-	togglesfx
+	togglesfx ; unused
 
 Sfx_QuitSlots_Ch8:
 	togglesfx
@@ -2030,7 +2030,7 @@ Sfx_QuitSlots_Ch8:
 	note __, 6
 	endchannel
 
-	togglesfx
+	togglesfx ; unused
 
 Sfx_Protect:
 	musicheader 2, 5, Sfx_Protect_Ch5
@@ -2873,7 +2873,7 @@ Sfx_DexFanfareLessThan20_Ch5:
 	note D_, 6
 	endchannel
 
-	togglesfx
+	togglesfx ; unused
 
 Sfx_DexFanfareLessThan20_Ch6:
 	togglesfx
@@ -2892,7 +2892,7 @@ Sfx_DexFanfareLessThan20_Ch6:
 	note F#, 6
 	endchannel
 
-	togglesfx
+	togglesfx ; unused
 
 Sfx_DexFanfareLessThan20_Ch7:
 	togglesfx
@@ -2920,7 +2920,7 @@ Sfx_DexFanfareLessThan20_Ch7:
 	note __, 6
 	endchannel
 
-	togglesfx
+	togglesfx ; unused
 
 Sfx_DexFanfareLessThan20_Ch8:
 	togglesfx
@@ -2931,7 +2931,7 @@ Sfx_DexFanfareLessThan20_Ch8:
 	note __, 12
 	endchannel
 
-	togglesfx
+	togglesfx ; unused
 
 Sfx_DexFanfare140169:
 	musicheader 4, 5, Sfx_DexFanfare140169_Ch5
@@ -2966,7 +2966,7 @@ Sfx_DexFanfare140169_Ch5:
 	note __, 8
 	endchannel
 
-	togglesfx
+	togglesfx ; unused
 
 Sfx_DexFanfare140169_Ch6:
 	togglesfx
@@ -2992,7 +2992,7 @@ Sfx_DexFanfare140169_Ch6:
 	note __, 8
 	endchannel
 
-	togglesfx
+	togglesfx ; unused
 
 Sfx_DexFanfare140169_Ch7:
 	togglesfx
@@ -3026,7 +3026,7 @@ Sfx_DexFanfare140169_Ch7:
 	note __, 4
 	endchannel
 
-	togglesfx
+	togglesfx ; unused
 
 Sfx_DexFanfare140169_Ch8:
 	togglesfx
@@ -3043,7 +3043,7 @@ Sfx_DexFanfare140169_Ch8:
 	note D_, 8
 	endchannel
 
-	togglesfx
+	togglesfx ; unused
 
 Sfx_DexFanfare170199:
 	musicheader 4, 5, Sfx_DexFanfare170199_Ch5
@@ -3078,7 +3078,7 @@ Sfx_DexFanfare170199_Ch5:
 	note __, 4
 	endchannel
 
-	togglesfx
+	togglesfx ; unused
 
 Sfx_DexFanfare170199_Ch6:
 	togglesfx
@@ -3106,7 +3106,7 @@ Sfx_DexFanfare170199_Ch6:
 	note __, 4
 	endchannel
 
-	togglesfx
+	togglesfx ; unused
 
 Sfx_DexFanfare170199_Ch7:
 	togglesfx
@@ -3134,7 +3134,7 @@ Sfx_DexFanfare170199_Ch7:
 	note __, 4
 	endchannel
 
-	togglesfx
+	togglesfx ; unused
 
 Sfx_DexFanfare170199_Ch8:
 	togglesfx
@@ -3189,7 +3189,7 @@ Sfx_DexFanfare200229_Ch5:
 	note __, 4
 	endchannel
 
-	togglesfx
+	togglesfx ; unused
 
 Sfx_DexFanfare200229_Ch6:
 	togglesfx
@@ -3212,7 +3212,7 @@ Sfx_DexFanfare200229_Ch6:
 	note __, 4
 	endchannel
 
-	togglesfx
+	togglesfx ; unused
 
 Sfx_DexFanfare200229_Ch7:
 	togglesfx
@@ -3256,7 +3256,7 @@ Sfx_DexFanfare200229_Ch7:
 	note __, 6
 	endchannel
 
-	togglesfx
+	togglesfx ; unused
 
 Sfx_DexFanfare200229_Ch8:
 	togglesfx
@@ -3285,7 +3285,7 @@ Sfx_DexFanfare200229_Ch8:
 	note B_, 12
 	endchannel
 
-	togglesfx
+	togglesfx ; unused
 
 Sfx_DexFanfare230Plus:
 	musicheader 4, 5, Sfx_DexFanfare230Plus_Ch5
@@ -3339,7 +3339,7 @@ Sfx_DexFanfare230Plus_Ch5:
 	note __, 2
 	endchannel
 
-	togglesfx
+	togglesfx ; unused
 
 Sfx_DexFanfare230Plus_Ch6:
 	togglesfx
@@ -3374,7 +3374,7 @@ Sfx_DexFanfare230Plus_Ch6:
 	note __, 2
 	endchannel
 
-	togglesfx
+	togglesfx ; unused
 
 Sfx_DexFanfare230Plus_Ch7:
 	togglesfx
@@ -3423,7 +3423,7 @@ Sfx_DexFanfare230Plus_Ch7:
 	note __, 2
 	endchannel
 
-	togglesfx
+	togglesfx ; unused
 
 Sfx_DexFanfare230Plus_Ch8:
 	togglesfx
@@ -3459,7 +3459,7 @@ Sfx_DexFanfare230Plus_Ch8:
 	note D_, 6
 	endchannel
 
-	togglesfx
+	togglesfx ; unused
 
 Sfx_NotVeryEffective:
 	musicheader 1, 8, Sfx_NotVeryEffective_Ch8

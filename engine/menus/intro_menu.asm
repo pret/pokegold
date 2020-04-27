@@ -1436,7 +1436,7 @@ Function6434:
 .asm_646b
 	ld hl, wce63
 	inc [hl]
-	xor a
+	xor a ; MUSIC_NONE
 	ld [wMusicFadeID], a
 	ld [wMusicFadeID + 1], a
 	ld hl, wMusicFade

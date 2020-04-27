@@ -22,10 +22,10 @@ INCLUDE "macros/legacy.asm"
 
 dr: macro
 IF DEF(_GOLD)
-INCBIN "baserom-gold.gbc", \1, \2 +- \1
+INCBIN "baserom-gold.gbc", \1, \2 - \1
 ELSE
 IF DEF(_SILVER)
-INCBIN "baserom-silver.gbc", \1, \2 +- \1
+INCBIN "baserom-silver.gbc", \1, \2 - \1
 ENDC
 ENDC
 ENDM

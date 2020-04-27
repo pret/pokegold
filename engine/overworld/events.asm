@@ -371,7 +371,7 @@ SetUpFiveStepWildEncounterCooldown:
 	ld [wWildEncounterCooldown], a
 	ret
 
-ret_968d7:
+ret_96804:
 	ret
 
 SetMinTwoStepWildEncounterCooldown:
@@ -763,7 +763,7 @@ PlayerMovement:
 	ret
 
 .jump:
-	call ret_968d7 ; mobile
+	call ret_96804
 	xor a
 	ld c, a
 	ret
@@ -963,7 +963,7 @@ DoPlayerEvent:
 
 PlayerEventScriptPointers:
 ; entries correspond to PLAYEREVENT_* constants
-	dba Invalid_0x96c2d          ; PLAYEREVENT_NONE
+	dba Invalid_0x96b60          ; PLAYEREVENT_NONE
 	dba SeenByTrainerScript      ; PLAYEREVENT_SEENBYTRAINER
 	dba TalkToTrainerScript      ; PLAYEREVENT_TALKTOTRAINER
 	dba FindItemInBallScript     ; PLAYEREVENT_ITEMBALL
@@ -973,9 +973,9 @@ PlayerEventScriptPointers:
 	dba Script_OverworldWhiteout ; PLAYEREVENT_WHITEOUT
 	dba HatchEggScript           ; PLAYEREVENT_HATCH
 	dba ChangeDirectionScript    ; PLAYEREVENT_JOYCHANGEFACING
-	dba Invalid_0x96c2d          ; (NUM_PLAYER_EVENTS)
+	dba Invalid_0x96b60          ; (NUM_PLAYER_EVENTS)
 
-Invalid_0x96c2d:
+Invalid_0x96b60:
 	end
 
 ; unused

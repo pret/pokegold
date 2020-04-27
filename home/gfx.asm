@@ -61,10 +61,10 @@ DecompressRequest2bpp::
 FarCopyBytes::
 ; copy bc bytes from a:hl to de
 
-	ld [wBuffer], a
+	ld [wTempBank], a
 	ldh a, [hROMBank]
 	push af
-	ld a, [wBuffer]
+	ld a, [wTempBank]
 	rst Bankswitch
 
 	call CopyBytes
@@ -77,10 +77,10 @@ FarCopyBytesDouble::
 ; Copy bc bytes from a:hl to bc*2 bytes at de,
 ; doubling each byte in the process.
 
-	ld [wBuffer], a
+	ld [wTempBank], a
 	ldh a, [hROMBank]
 	push af
-	ld a, [wBuffer]
+	ld a, [wTempBank]
 	rst Bankswitch
 
 ; switcheroo, de <> hl
