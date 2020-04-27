@@ -615,7 +615,8 @@ Continue_LoadMenuHeader: ; 5ed7 (1:5ed7)
 	xor a
 	ldh [hBGMapMode], a
 	ld hl, .MenuDataHeader_Dex
-	CheckFlag ENGINE_POKEDEX
+	ld a, [wStatusFlags]
+	bit STATUSFLAGS_POKEDEX_F, a
 	jr nz, .asm_5ee7
 	ld hl, .MenuDataHeader_NoDex
 .asm_5ee7
@@ -695,7 +696,8 @@ Continue_DisplayBadgeCount: ; 5f64 (1:5f64)
 	jp PrintNum
 
 Continue_DisplayPokedexNumCaught: ; 5f77 (1:5f77)
-	CheckFlag ENGINE_POKEDEX
+	ld a, [wStatusFlags]
+	bit STATUSFLAGS_POKEDEX_F, a
 	ret z
 	push hl
 	ld hl, wPokedexCaught

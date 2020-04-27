@@ -421,11 +421,13 @@ StoreSwarmMapIndices::
 	ld [wDunsparceMapNumber], a
 	; fallthrough
 SetSwarmFlag:
-	SetFlag ENGINE_SPECIAL_WILDDATA
+	ld hl, wDailyFlags1
+	set DAILYFLAGS1_FISH_SWARM_F, [hl]
 	ret
 
 CheckSwarmFlag::
-	CheckFlagHL ENGINE_SPECIAL_WILDDATA
+	ld hl, wDailyFlags1
+	bit DAILYFLAGS1_FISH_SWARM_F, [hl]
 	jr z, .asm_c578
 	xor a
 	ld [wScriptVar], a
@@ -446,7 +448,8 @@ CheckPokerus: ; c588 (3:4588)
 
 ResetLuckyNumberShowFlag: ; c591 (3:4591)
 	farcall RestartLuckyNumberCountdown
-	ClearFlag ENGINE_LUCKY_NUMBER_SHOW
+	ld hl, wLuckyNumberShowFlag
+	res LUCKYNUMBERSHOW_GAME_OVER_F, [hl]
 	farcall LoadOrRegenerateLuckyIDNumber
 	ret
 

@@ -17,7 +17,6 @@ INCLUDE "macros/scripts/trade_anims.asm"
 INCLUDE "macros/move_anim.asm"
 INCLUDE "macros/pic.asm"
 INCLUDE "macros/pals.asm"
-INCLUDE "macros/flag.asm"
 
 INCLUDE "macros/legacy.asm"
 

@@ -140,7 +140,8 @@ StepHappiness::
 	ret
 
 DayCareStep::
-	CheckFlag ENGINE_DAY_CARE_MAN_HAS_MON
+	ld a, [wDayCareMan]
+	bit DAYCAREMAN_HAS_MON_F, a
 	jr z, .day_care_lady
 
 	ld a, [wBreedMon1Level]
@@ -161,7 +162,8 @@ DayCareStep::
 	ld [hl], a
 
 .day_care_lady
-	CheckFlag ENGINE_DAY_CARE_LADY_HAS_MON
+	ld a, [wDayCareLady]
+	bit DAYCARELADY_HAS_MON_F, a
 	jr z, .check_egg
 
 	ld a, [wBreedMon2Level] ; level
@@ -212,5 +214,5 @@ DayCareStep::
 	ret nc
 	ld hl, wDayCareMan
 	res DAYCAREMAN_MONS_COMPATIBLE_F, [hl]
-	SetFlagForceReuseHL ENGINE_DAY_CARE_MAN_HAS_EGG
+	set DAYCAREMAN_HAS_EGG_F, [hl]
 	ret
