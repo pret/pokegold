@@ -2407,9 +2407,9 @@ RefreshPlayerSprite::
 
 .TryResetPlayerAction:
 	ld hl, wPlayerSpriteSetupFlags
-	bit 7, [hl]
+	bit PLAYERSPRITESETUP_RESET_ACTION_F, [hl]
 	jr nz, .ok
-	bit 6, [hl]
+	bit PLAYERSPRITESETUP_SKIP_RELOAD_GFX_F, [hl]
 	jr nz, .ok
 	ret
 

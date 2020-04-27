@@ -404,7 +404,7 @@ Functionc53c: ; c53c (3:453c)
 	ret
 
 UnusedCheckUnusedTwoDayTimer: ; c549 (3:4549)
-	farcall Function118f8
+	farcall CheckUnusedTwoDayTimer
 	ld a, [wUnusedTwoDayTimer]
 	ld [wScriptVar], a
 	ret
@@ -445,13 +445,13 @@ CheckPokerus: ; c588 (3:4588)
 	jp Functionc53c
 
 ResetLuckyNumberShowFlag: ; c591 (3:4591)
-	farcall Function11917
+	farcall RestartLuckyNumberCountdown
 	ClearFlag ENGINE_LUCKY_NUMBER_SHOW
 	farcall LoadOrRegenerateLuckyIDNumber
 	ret
 
 CheckLuckyNumberShowFlag: ; c5a3 (3:45a3)
-	farcall Function1192e
+	farcall _CheckLuckyNumberShowFlag
 	jp Functionc53c
 
 CountUnown: ; c5ac (3:45ac)

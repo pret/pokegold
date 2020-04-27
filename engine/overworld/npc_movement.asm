@@ -1,102 +1,110 @@
-CanObjectMoveInDirection: ; 6fa0 (1:6fa0)
-	ld hl, $6
+CanObjectMoveInDirection:
+	ld hl, OBJECT_PALETTE
 	add hl, bc
-	bit 5, [hl]
-	jr z, .asm_6fb8
-	ld hl, $4
-	add hl, bc
-	bit 4, [hl]
-	push hl
-	push bc
-	call Function700b
-	pop bc
-	pop hl
-	ret c
-	jr .asm_6fc8
+	bit SWIMMING_F, [hl]
+	jr z, .not_swimming
 
-.asm_6fb8
-	ld hl, $4
+	ld hl, OBJECT_FLAGS1
 	add hl, bc
-	bit 4, [hl]
-	jr nz, .asm_6fc8
+	bit NOCLIP_TILES_F, [hl] ; lost, uncomment next line to fix
+	; jr nz, .noclip_tiles
 	push hl
 	push bc
-	call Function6fe6
+	call WillObjectBumpIntoLand
 	pop bc
 	pop hl
 	ret c
-.asm_6fc8
-	bit 6, [hl]
-	jr nz, .asm_6fd4
+	jr .continue
+
+.not_swimming
+	ld hl, OBJECT_FLAGS1
+	add hl, bc
+	bit NOCLIP_TILES_F, [hl]
+	jr nz, .noclip_tiles
 	push hl
 	push bc
-	call WillPersonBumpIntoSomeoneElse
+	call WillObjectBumpIntoWater
 	pop bc
 	pop hl
 	ret c
-.asm_6fd4
-	bit 5, [hl]
-	jr nz, .asm_6fe4
+
+.noclip_tiles
+.continue
+	bit NOCLIP_OBJS_F, [hl]
+	jr nz, .noclip_objs
+
 	push hl
-	call HasPersonReachedMovementLimit
+	push bc
+	call WillObjectBumpIntoSomeoneElse
+	pop bc
 	pop hl
 	ret c
+
+.noclip_objs
+	bit MOVE_ANYWHERE_F, [hl]
+	jr nz, .move_anywhere
 	push hl
-	call IsPersonMovingOffEdgeOfScreen
+	call HasObjectReachedMovementLimit
 	pop hl
 	ret c
-.asm_6fe4
+
+	push hl
+	call IsObjectMovingOffEdgeOfScreen
+	pop hl
+	ret c
+
+.move_anywhere
 	and a
 	ret
 
-Function6fe6: ; 6fe6 (1:6fe6)
+WillObjectBumpIntoWater:
 	call Function703e
 	ret c
-	ld hl, $10
+	ld hl, OBJECT_NEXT_MAP_X
 	add hl, bc
 	ld d, [hl]
-	ld hl, $11
+	ld hl, OBJECT_NEXT_MAP_Y
 	add hl, bc
 	ld e, [hl]
-	ld hl, $6
+	ld hl, OBJECT_PALETTE
 	add hl, bc
-	bit 7, [hl]
+	bit OAM_PRIORITY, [hl]
 	jp nz, Function7080
-	ld hl, $e
+	ld hl, OBJECT_NEXT_TILE
 	add hl, bc
 	ld a, [hl]
 	ld d, a
 	call GetTileCollision
-	and a
-	jr z, Function701d
+	and a ; LAND_TILE
+	jr z, WillObjectBumpIntoTile
 	scf
 	ret
 
-Function700b: ; 700b (1:700b)
+WillObjectBumpIntoLand:
 	call Function703e
 	ret c
-	ld hl, $e
+	ld hl, OBJECT_NEXT_TILE
 	add hl, bc
 	ld a, [hl]
 	call GetTileCollision
-	cp $1
-	jr z, Function701d
+	cp WATER_TILE
+	jr z, WillObjectBumpIntoTile
 	scf
 	ret
 
-Function701d:
-	ld hl, $e
+WillObjectBumpIntoTile:
+	ld hl, OBJECT_NEXT_TILE
 	add hl, bc
 	ld a, [hl]
 	call Function705e
 	ret nc
 	push af
-	ld hl, $7
+	ld hl, OBJECT_DIRECTION_WALKING
 	add hl, bc
 	ld a, [hl]
-	and $3
+	maskbits NUM_DIRECTIONS
 	ld e, a
-	ld d, $0
+	ld d, 0
 	ld hl, .data_703a
 	add hl, de
 	pop af
@@ -106,20 +114,23 @@ Function701d:
 	ret
 
 .data_703a
-	db 1 << DOWN, 1 << UP, 1 << RIGHT, 1 << LEFT
+	db DOWN_MASK  ; DOWN
+	db UP_MASK    ; UP
+	db RIGHT_MASK ; LEFT
+	db LEFT_MASK  ; RIGHT
 
-Function703e: ; 703e (1:703e)
-	ld hl, $f
+Function703e:
+	ld hl, OBJECT_STANDING_TILE
 	add hl, bc
 	ld a, [hl]
 	call Function705e
 	ret nc
 	push af
-	ld hl, $7
+	ld hl, OBJECT_DIRECTION_WALKING
 	add hl, bc
-	and $3
+	maskbits NUM_DIRECTIONS
 	ld e, a
-	ld d, $0
+	ld d, 0
 	ld hl, .data_705a
 	add hl, de
 	pop af
@@ -129,23 +140,26 @@ Function703e: ; 703e (1:703e)
 	ret
 
 .data_705a
-	db 1 << UP, 1 << DOWN, 1 << LEFT, 1 << RIGHT
+	db UP_MASK    ; DOWN
+	db DOWN_MASK  ; UP
+	db LEFT_MASK  ; LEFT
+	db RIGHT_MASK ; RIGHT
 
-Function705e: ; 705e (1:705e)
+Function705e:
 	ld d, a
 	and $f0
-	cp $b0
-	jr z, .asm_706b
-	cp $c0
-	jr z, .asm_706b
+	cp HI_NYBBLE_SIDE_WALLS
+	jr z, .continue
+	cp HI_NYBBLE_SIDE_BUOYS
+	jr z, .continue
 	xor a
 	ret
 
-.asm_706b
+.continue
 	ld a, d
-	and $7
+	and 7
 	ld e, a
-	ld d, $0
+	ld d, 0
 	ld hl, .data_7078
 	add hl, de
 	ld a, [hl]
@@ -153,216 +167,234 @@ Function705e: ; 705e (1:705e)
 	ret
 
 .data_7078
-	db  8, 4, 1, 2
-	db 10, 6, 9, 5
+	db RIGHT_MASK             ; COLL_RIGHT_WALL/BUOY
+	db LEFT_MASK              ; COLL_LEFT_WALL/BUOY
+	db DOWN_MASK              ; COLL_UP_WALL/BUOY
+	db UP_MASK                ; COLL_DOWN_WALL/BUOY
+	db UP_MASK | RIGHT_MASK   ; COLL_DOWN_RIGHT_WALL/BUOY
+	db UP_MASK | LEFT_MASK    ; COLL_DOWN_LEFT_WALL/BUOY
+	db DOWN_MASK | RIGHT_MASK ; COLL_UP_RIGHT_WALL/BUOY
+	db DOWN_MASK | LEFT_MASK  ; COLL_UP_LEFT_WALL/BUOY
 
-Function7080: ; 7080 (1:7080)
-	ld hl, $7
+Function7080:
+	ld hl, OBJECT_DIRECTION_WALKING
 	add hl, bc
 	ld a, [hl]
-	and $3
-	jr z, .asm_7091
+	maskbits NUM_DIRECTIONS
+	jr z, .down
 	dec a
-	jr z, .asm_7096
+	jr z, .up
 	dec a
-	jr z, .asm_709a
-	jr .asm_709e
+	jr z, .left
+	jr .right
 
-.asm_7091
+.down
 	inc e
 	push de
 	inc d
-	jr .asm_70a1
+	jr .continue
 
-.asm_7096
+.up
 	push de
 	inc d
-	jr .asm_70a1
+	jr .continue
 
-.asm_709a
+.left
 	push de
 	inc e
-	jr .asm_70a1
+	jr .continue
 
-.asm_709e
+.right
 	inc d
 	push de
 	inc e
-.asm_70a1
+
+.continue
 	call GetCoordTile
 	call GetTileCollision
 	pop de
-	and a
-	jr nz, .asm_70b6
+	and a ; LAND_TILE
+	jr nz, .not_land
 	call GetCoordTile
 	call GetTileCollision
-	and a
-	jr nz, .asm_70b6
+	and a ; LAND_TILE
+	jr nz, .not_land
 	xor a
 	ret
 
-.asm_70b6
+.not_land
 	scf
 	ret
 
 CheckFacingObject::
 	call GetFacingTileCoord
+
+; Double the distance for counter tiles.
 	call CheckCounterTile
 	jr nz, .asm_70d0
+
 	ld a, [wPlayerStandingMapX]
 	sub d
 	cpl
 	inc a
 	add d
 	ld d, a
+
 	ld a, [wPlayerStandingMapY]
 	sub e
 	cpl
 	inc a
 	add e
 	ld e, a
+
 .asm_70d0
-	ld bc, wObjectStructs
-	ld a, $0
+	ld bc, wObjectStructs ; redundant
+	ld a, 0
 	ldh [hMapObjectIndexBuffer], a
-	call Function7120
+	call IsNPCAtCoord
 	ret nc
-	ld hl, $7
+	ld hl, OBJECT_DIRECTION_WALKING
 	add hl, bc
 	ld a, [hl]
-	cp $ff
-	jr z, .asm_70e6
+	cp STANDING
+	jr z, .standing
 	xor a
 	ret
 
-.asm_70e6
+.standing
 	scf
 	ret
 
-WillPersonBumpIntoSomeoneElse: ; 70e8 (1:70e8)
-	ld hl, $10
+WillObjectBumpIntoSomeoneElse:
+	ld hl, OBJECT_NEXT_MAP_X
 	add hl, bc
 	ld d, [hl]
-	ld hl, $11
+	ld hl, OBJECT_NEXT_MAP_Y
 	add hl, bc
 	ld e, [hl]
-	jr Function7120
+	jr IsNPCAtCoord
 
 Function70f4:
 	ldh a, [hMapObjectIndexBuffer]
 	call GetObjectStruct
-	call Function7100
-	call Function7120
+	call .CheckWillBeFacingNPC
+	call IsNPCAtCoord
 	ret
 
-Function7100: ; 7100 (1:7100)
-	ld hl, $10
+.CheckWillBeFacingNPC:
+	ld hl, OBJECT_NEXT_MAP_X
 	add hl, bc
 	ld d, [hl]
-	ld hl, $11
+	ld hl, OBJECT_NEXT_MAP_Y
 	add hl, bc
 	ld e, [hl]
 	call GetSpriteDirection
 	and a
-	jr z, .asm_711a
-	cp $4
-	jr z, .asm_711c
-	cp $8
-	jr z, .asm_711e
+	jr z, .down
+	cp OW_UP
+	jr z, .up
+	cp OW_LEFT
+	jr z, .left
 	inc d
 	ret
 
-.asm_711a
+.down
 	inc e
 	ret
 
-.asm_711c
+.up
 	dec e
 	ret
 
-.asm_711e
+.left
 	dec d
 	ret
 
-Function7120: ; 7120 (1:7120)
-	ld bc, wPlayerStruct
+IsNPCAtCoord:
+	ld bc, wObjectStructs
 	xor a
-.asm_7124
+.loop
 	ldh [hObjectStructIndexBuffer], a
 	call DoesObjectHaveASprite
-	jr z, .asm_7172
-	ld hl, $4
-	add hl, bc
-	bit 7, [hl]
-	jr nz, .asm_7172
-	ld hl, $6
-	add hl, bc
-	bit 7, [hl]
-	jr z, .asm_7142
-	call Function7250
-	jr nc, .asm_715a
-	jr .asm_7152
+	jr z, .next
 
-.asm_7142
-	ld hl, $10
+	ld hl, OBJECT_FLAGS1
+	add hl, bc
+	bit 7, [hl]
+	jr nz, .next
+
+	ld hl, OBJECT_PALETTE
+	add hl, bc
+	bit BIG_OBJECT_F, [hl]
+	jr z, .got
+
+	call Function7250
+	jr nc, .ok
+	jr .ok2
+
+.got
+	ld hl, OBJECT_NEXT_MAP_X
 	add hl, bc
 	ld a, [hl]
 	cp d
-	jr nz, .asm_715a
-	ld hl, $11
+	jr nz, .ok
+	ld hl, OBJECT_NEXT_MAP_Y
 	add hl, bc
 	ld a, [hl]
 	cp e
-	jr nz, .asm_715a
-.asm_7152
+	jr nz, .ok
+
+.ok2
 	ldh a, [hMapObjectIndexBuffer]
-	ld l, a
-	ldh a, [hConnectedMapWidth]
-	cp l
-	jr nz, .asm_7181
-.asm_715a
-	ld hl, $12
-	add hl, bc
-	ld a, [hl]
-	cp d
-	jr nz, .asm_7172
-	ld hl, $13
-	add hl, bc
-	ld a, [hl]
-	cp e
-	jr nz, .asm_7172
-	ldh a, [hConnectionStripLength]
 	ld l, a
 	ldh a, [hObjectStructIndexBuffer]
 	cp l
-	jr nz, .asm_7181
-.asm_7172
-	ld hl, $28
+	jr nz, .setcarry
+
+.ok
+	ld hl, OBJECT_MAP_X
+	add hl, bc
+	ld a, [hl]
+	cp d
+	jr nz, .next
+	ld hl, OBJECT_MAP_Y
+	add hl, bc
+	ld a, [hl]
+	cp e
+	jr nz, .next
+	ldh a, [hMapObjectIndexBuffer]
+	ld l, a
+	ldh a, [hObjectStructIndexBuffer]
+	cp l
+	jr nz, .setcarry
+
+.next
+	ld hl, OBJECT_LENGTH
 	add hl, bc
 	ld b, h
 	ld c, l
-	ldh a, [hConnectedMapWidth]
+	ldh a, [hObjectStructIndexBuffer]
 	inc a
-	cp $d
-	jr nz, .asm_7124
+	cp NUM_OBJECT_STRUCTS
+	jr nz, .loop
 	and a
 	ret
 
-.asm_7181
+.setcarry
 	scf
 	ret
 
-HasPersonReachedMovementLimit: ; 7183 (1:7183)
-	ld hl, $16
+HasObjectReachedMovementLimit:
+	ld hl, OBJECT_RADIUS
 	add hl, bc
 	ld a, [hl]
 	and a
-	jr z, .asm_71c8
+	jr z, .nope
 	and $f
-	jr z, .asm_71a6
+	jr z, .check_y
 	ld e, a
 	ld d, a
-	ld hl, $14
+	ld hl, OBJECT_INIT_X
 	add hl, bc
 	ld a, [hl]
 	sub d
@@ -370,23 +402,24 @@ HasPersonReachedMovementLimit: ; 7183 (1:7183)
 	ld a, [hl]
 	add e
 	ld e, a
-	ld hl, $10
+	ld hl, OBJECT_NEXT_MAP_X
 	add hl, bc
 	ld a, [hl]
 	cp d
-	jr z, .asm_71ca
+	jr z, .yes
 	cp e
-	jr z, .asm_71ca
-.asm_71a6
-	ld hl, $16
+	jr z, .yes
+
+.check_y
+	ld hl, OBJECT_RADIUS
 	add hl, bc
 	ld a, [hl]
 	swap a
 	and $f
-	jr z, .asm_71c8
+	jr z, .nope
 	ld e, a
 	ld d, a
-	ld hl, $15
+	ld hl, OBJECT_INIT_Y
 	add hl, bc
 	ld a, [hl]
 	sub d
@@ -394,46 +427,49 @@ HasPersonReachedMovementLimit: ; 7183 (1:7183)
 	ld a, [hl]
 	add e
 	ld e, a
-	ld hl, $11
+	ld hl, OBJECT_NEXT_MAP_Y
 	add hl, bc
 	ld a, [hl]
 	cp d
-	jr z, .asm_71ca
+	jr z, .yes
 	cp e
-	jr z, .asm_71ca
-.asm_71c8
+	jr z, .yes
+
+.nope
 	xor a
 	ret
 
-.asm_71ca
+.yes
 	scf
 	ret
 
-IsPersonMovingOffEdgeOfScreen: ; 71cc (1:71cc)
-	ld hl, $10
+IsObjectMovingOffEdgeOfScreen:
+	ld hl, OBJECT_NEXT_MAP_X
 	add hl, bc
 	ld a, [wXCoord]
 	cp [hl]
-	jr z, .asm_71dd
-	jr nc, .asm_71f0
+	jr z, .check_y
+	jr nc, .yes
 	add $9
 	cp [hl]
-	jr c, .asm_71f0
-.asm_71dd
-	ld hl, $11
+	jr c, .yes
+
+.check_y
+	ld hl, OBJECT_NEXT_MAP_Y
 	add hl, bc
 	ld a, [wYCoord]
 	cp [hl]
-	jr z, .asm_71ee
-	jr nc, .asm_71f0
+	jr z, .nope
+	jr nc, .yes
 	add $8
 	cp [hl]
-	jr c, .asm_71f0
-.asm_71ee
+	jr c, .yes
+
+.nope
 	and a
 	ret
 
-.asm_71f0
+.yes
 	scf
 	ret
 
@@ -444,82 +480,82 @@ Function71f2:
 	ld e, a
 	ld bc, wObjectStructs
 	xor a
-.asm_71fe
-	ldh [hConnectedMapWidth], a
+.loop
+	ldh [hObjectStructIndexBuffer], a
 	call DoesObjectHaveASprite
-	jr z, .asm_723f
-	ld hl, $3
+	jr z, .next
+	ld hl, OBJECT_MOVEMENTTYPE
 	add hl, bc
 	ld a, [hl]
-	cp $15
-	jr nz, .asm_7215
+	cp SPRITEMOVEDATA_BIGDOLLSYM
+	jr nz, .not_snorlax
 	call Function7250
-	jr c, .asm_724e
-	jr .asm_723f
+	jr c, .yes
+	jr .next
 
-.asm_7215
-	ld hl, $11
+.not_snorlax
+	ld hl, OBJECT_NEXT_MAP_Y
 	add hl, bc
 	ld a, [hl]
 	cp e
-	jr nz, .asm_722d
-	ld hl, $10
+	jr nz, .check_current_coords
+	ld hl, OBJECT_NEXT_MAP_X
 	add hl, bc
 	ld a, [hl]
 	cp d
-	jr nz, .asm_722d
+	jr nz, .check_current_coords
 	ldh a, [hObjectStructIndexBuffer]
-	cp $0
-	jr z, .asm_723f
-	jr .asm_724e
+	cp PLAYER_OBJECT
+	jr z, .next
+	jr .yes
 
-.asm_722d
-	ld hl, $13
+.check_current_coords
+	ld hl, OBJECT_MAP_Y
 	add hl, bc
 	ld a, [hl]
 	cp e
-	jr nz, .asm_723f
-	ld hl, $12
+	jr nz, .next
+	ld hl, OBJECT_MAP_X
 	add hl, bc
 	ld a, [hl]
 	cp d
-	jr nz, .asm_723f
-	jr .asm_724e
+	jr nz, .next
+	jr .yes
 
-.asm_723f
-	ld hl, $28
+.next
+	ld hl, OBJECT_LENGTH
 	add hl, bc
 	ld b, h
 	ld c, l
-	ldh a, [hConnectedMapWidth]
+	ldh a, [hObjectStructIndexBuffer]
 	inc a
-	cp $d
-	jr nz, .asm_71fe
+	cp NUM_OBJECT_STRUCTS
+	jr nz, .loop
 	xor a
 	ret
 
-.asm_724e
+.yes
 	scf
 	ret
 
-Function7250: ; 7250 (1:7250)
-	ld hl, $10
+Function7250:
+	ld hl, OBJECT_NEXT_MAP_X
 	add hl, bc
 	ld a, d
 	sub [hl]
-	jr c, .asm_726a
+	jr c, .nope
 	cp $2
-	jr nc, .asm_726a
-	ld hl, $11
+	jr nc, .nope
+	ld hl, OBJECT_NEXT_MAP_Y
 	add hl, bc
 	ld a, e
 	sub [hl]
-	jr c, .asm_726a
+	jr c, .nope
 	cp $2
-	jr nc, .asm_726a
+	jr nc, .nope
 	scf
 	ret
 
-.asm_726a
+.nope
 	and a
 	ret

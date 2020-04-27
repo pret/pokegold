@@ -238,7 +238,7 @@ Function5bf7: ; 5bf7 (1:5bf7)
 
 MainMenu_MysteryGift:
 	call UpdateTime
-	farcall Function11934
+	farcall DoMysteryGiftIfDayHasPassed
 	farcall Function29dff
 	ret
 
@@ -447,7 +447,7 @@ Function5d5d: ; 5d5d (1:5d5d)
 InitializeWorld: ; 5d97 (1:5d97)
 	call ShrinkPlayer
 	farcall SpawnPlayer
-	farcall InitializeStartDay_
+	farcall _InitializeStartDay
 	ret
 
 LoadOrRegenerateLuckyIDNumber: ; 5da7 (1:5da7)

@@ -2,26 +2,26 @@ _HandlePlayerStep::
 	ld a, [wPlayerStepFlags]
 	and a
 	ret z
-	bit 7, a
-	jr nz, .asm_d4b6
-	bit 6, a
-	jr nz, .asm_d4c0
-	bit 5, a
-	jr nz, .asm_d4c5
+	bit PLAYERSTEP_START_F, a
+	jr nz, .update_overworld_map
+	bit PLAYERSTEP_STOP_F, a
+	jr nz, .update_player_coords
+	bit PLAYERSTEP_CONTINUE_F, a
+	jr nz, .finish
 	ret
 
-.asm_d4b6
-	ld a, $4
+.update_overworld_map
+	ld a, 4
 	ld [wHandlePlayerStep], a
 	call UpdateOverworldMap
-	jr .asm_d4c5
+	jr .finish
 
-.asm_d4c0
-	call Functiond517
-	jr .asm_d4c5
+.update_player_coords
+	call UpdatePlayerCoords
+	jr .finish
 
-.asm_d4c5
-	call Functiond4f2
+.finish
+	call HandlePlayerStep
 	ld a, [wPlayerStepVectorX]
 	ld d, a
 	ld a, [wPlayerStepVectorY]
@@ -47,7 +47,7 @@ ScrollScreen::
 	ldh [hSCY], a
 	ret
 
-Functiond4f2: ; d4f2 (3:54f2)
+HandlePlayerStep:
 	ld hl, wHandlePlayerStep
 	ld a, [hl]
 	and a
@@ -58,49 +58,50 @@ Functiond4f2: ; d4f2 (3:54f2)
 	rst JumpTable
 	ret
 
-.Jumptable
+.Jumptable:
 	dw GetMovementPermissions
 	dw BufferScreen
-	dw Functiond515
-	dw Functiond516
-	dw Functiond515
-	dw Functiond515
-	dw Functiond515
-	dw Functiond515
-	dw Functiond515
-	dw Functiond515
-	dw Functiond515
+	dw .fail1
+	dw .fail2
+; The rest are never used.  Ever.
+	dw .fail1
+	dw .fail1
+	dw .fail1
+	dw .fail1
+	dw .fail1
+	dw .fail1
+	dw .fail1
 
-Functiond515:
+.fail1
 	ret
 
-Functiond516:
+.fail2
 	ret
 
-Functiond517: ; d517 (3:5517)
+UpdatePlayerCoords:
 	ld a, [wPlayerStepDirection]
 	and a
-	jr nz, .asm_d522
+	jr nz, .check_step_down
 	ld hl, wYCoord
 	inc [hl]
 	ret
 
-.asm_d522
-	cp $1
-	jr nz, .asm_d52b
+.check_step_down
+	cp UP
+	jr nz, .check_step_left
 	ld hl, wYCoord
 	dec [hl]
 	ret
 
-.asm_d52b
-	cp $2
-	jr nz, .asm_d534
+.check_step_left
+	cp LEFT
+	jr nz, .check_step_right
 	ld hl, wXCoord
 	dec [hl]
 	ret
 
-.asm_d534
-	cp $3
+.check_step_right
+	cp RIGHT
 	ret nz
 	ld hl, wXCoord
 	inc [hl]

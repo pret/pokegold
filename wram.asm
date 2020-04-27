@@ -1786,10 +1786,10 @@ wRequested1bpp:: ds 1 ; ce6c
 wRequested1bppSource:: dw ; ce6d
 wRequested1bppDest:: dw ; ce6f
 
-wSecsSince:: ds 1 ; ce71
-wMinsSince:: ds 1 ; ce72
-wHoursSince:: ds 1 ; ce73
-wDaysSince:: ds 1 ; ce74
+wSecondsSince:: db ; ce71
+wMinutesSince:: db ; ce72
+wHoursSince:: db ; ce73
+wDaysSince:: db ; ce74
 wce75:: ds 1 ; ce75
 wce76:: ds 1 ; ce76
 wce77:: ds 1 ; ce77
@@ -1827,15 +1827,16 @@ wMovementPointer:: dw ; ce94
 	ds 3
 
 wTempObjectCopyMapObjectIndex:: db ; ce99
-wce9a:: ds 1 ; ce9a
-wce9b:: ds 1 ; ce9b
-wce9c:: ds 1 ; ce9c
-wce9d:: ds 1 ; ce9d
+wTempObjectCopySprite:: db ; ce9a
+wTempObjectCopySpriteVTile:: db ; ce9b
+wTempObjectCopyPalette:: db ; ce9c
+wTempObjectCopyMovement:: db ; ce9d
 wTempObjectCopyRange:: db ; ce9e
-wce9f:: ds 1 ; ce9f
-wcea0:: ds 1 ; cea0
-wcea1:: ds 1 ; cea1
-wcea2:: ds 1 ; cea2
+wTempObjectCopyX:: db ; ce9f
+wTempObjectCopyY:: db ; cea0
+wTempObjectCopyRadius:: db ; cea1
+
+	ds 1
 
 wTileDown:: ds 1 ; cea3
 wTileUp:: ds 1 ; cea4
@@ -2704,7 +2705,6 @@ wCmdQueue:: ds CMDQUEUE_CAPACITY * CMDQUEUE_ENTRY_SIZE ; d405
 
 	ds 40
 
-; TODO these should be wMapObject1 etc.
 wMapObjects:: ; d445
 wPlayerObject:: map_object wPlayer  ; d445
 wMap1Object::   map_object wMap1    ; d455
@@ -2750,7 +2750,7 @@ wd56a:: ds 1 ; d56a
 wd56b:: ds 1 ; d56b
 wd56c:: ds 1 ; d56c
 wd56d:: ds 1 ; d56d
-wTimeOfDayPalset:: ds 1 ; d56e
+wTimeOfDayPalset:: db ; d56e
 wd56f:: ds 1 ; d56f
 wd570:: ds 1 ; d570
 wPlayerData2End::
@@ -3373,7 +3373,10 @@ wPartyMonNicknamesEnd::
 	ds 22 ; equivalent to NAME_LENGTH + MON_NAME_LENGTH, possibly a reference to 7 pokemon?
 
 wPokedexCaught:: flag_array NUM_POKEMON ; dbe4
+wEndPokedexCaught::
+
 wPokedexSeen::   flag_array NUM_POKEMON ; dc04
+wEndPokedexSeen::
 
 wUnownDex:: ds NUM_UNOWN ; dc24
 wUnlockedUnowns:: ds 1 ; dc3e

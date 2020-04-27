@@ -1,21 +1,24 @@
-ReanchorBGMap_NoOAMUpdate:: ; 6551 (1:6551)
+ReanchorBGMap_NoOAMUpdate::
 	call DelayFrame
 	ldh a, [hOAMUpdate]
 	push af
+
 	ld a, $1
 	ldh [hOAMUpdate], a
 	ldh a, [hBGMapMode]
 	push af
 	xor a
 	ldh [hBGMapMode], a
-	call Function656b
+
+	call .ReanchorBGMap
+
 	pop af
 	ldh [hBGMapMode], a
 	pop af
 	ldh [hOAMUpdate], a
 	ret
 
-Function656b: ; 656b (1:656b)
+.ReanchorBGMap:
 	xor a
 	ldh [hLCDCPointer], a
 	ldh [hBGMapMode], a
@@ -25,18 +28,18 @@ Function656b: ; 656b (1:656b)
 	ld a, $90
 	ldh [hWY], a
 	call OverworldTextModeSwitch
-	ld a, $9c
+	ld a, HIGH(vBGMap1)
 	call .LoadBGMapAddrIntoHRAM
 	call _OpenAndCloseMenu_HDMATransferTilemapAndAttrmap
 	xor a
 	ldh [hBGMapMode], a
 	ldh [hWY], a
-	ld a, $98
+	ld a, HIGH(vBGMap0)
 	call .LoadBGMapAddrIntoHRAM
 	call .WaitTransfer
-	xor a
+	xor a ; LOW(vBGMap0)
 	ld [wBGMapAnchor], a
-	ld a, $98
+	ld a, HIGH(vBGMap0)
 	ld [wBGMapAnchor + 1], a
 	xor a
 	ldh [hSCX], a
@@ -44,22 +47,22 @@ Function656b: ; 656b (1:656b)
 	call ApplyBGMapAnchorToObjects
 	ret
 
-.LoadBGMapAddrIntoHRAM: ; 65a5 (1:65a5)
+.LoadBGMapAddrIntoHRAM:
 	ldh [hBGMapAddress + 1], a
 	xor a
 	ldh [hBGMapAddress], a
 	ret
 
-.WaitTransfer: ; 65ab (1:65ab)
+.WaitTransfer:
 	ldh a, [hBGMapMode]
 	push af
 	xor a
 	ldh [hBGMapMode], a
 	ldh a, [hOAMUpdate]
 	push af
-	ld a, $1
+	ld a, 1
 	ldh [hOAMUpdate], a
-	ld a, $3
+	ld a, 3
 	ldh [hFF9E], a
 .asm_65bc
 	call DelayFrame
@@ -72,17 +75,19 @@ Function656b: ; 656b (1:656b)
 	ldh [hBGMapMode], a
 	ret
 
-LoadFonts_NoOAMUpdate:: ; 65cb (1:65cb)
+LoadFonts_NoOAMUpdate::
 	ldh a, [hOAMUpdate]
 	push af
 	ld a, $1
 	ldh [hOAMUpdate], a
+
 	call .LoadGFX
+
 	pop af
 	ldh [hOAMUpdate], a
 	ret
 
-.LoadGFX: ; 65d9 (1:65d9)
+.LoadGFX:
 	call LoadFontsExtra
 	ld a, $90
 	ldh [hWY], a

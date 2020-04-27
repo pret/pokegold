@@ -1,421 +1,475 @@
-DoPlayerMovement:: ; 10000 (4:4000)
-	call Function10017
+DoPlayerMovement::
+
+	call .GetDPad
 	ld a, movement_step_sleep
 	ld [wMovementAnimation], a
 	xor a
 	ld [wWalkingIntoEdgeWarp], a
-	call Function1002d
+	call .TranslateIntoMovement
 	ld c, a
 	ld a, [wMovementAnimation]
 	ld [wPlayerNextMovement], a
 	ret
 
-Function10017: ; 10017 (4:4017)
+.GetDPad:
+
 	ldh a, [hJoyDown]
 	ld [wCurInput], a
-	CheckFlagHL ENGINE_DOWNHILL
+
+; Standing downhill instead moves down.
+
+	ld hl, wBikeFlags
+	bit BIKEFLAGS_DOWNHILL_F, [hl]
 	ret z
+
 	ld c, a
-	and $f0
+	and D_PAD
 	ret nz
+
 	ld a, c
-	or $80
+	or D_DOWN
 	ld [wCurInput], a
 	ret
 
-Function1002d: ; 1002d (4:402d)
+.TranslateIntoMovement:
 	ld a, [wPlayerState]
 	cp PLAYER_NORMAL
-	jr z, .asm_10044
+	jr z, .Normal
 	cp PLAYER_SURF
-	jr z, .asm_10060
+	jr z, .Surf
 	cp PLAYER_SURF_PIKA
-	jr z, .asm_10060
+	jr z, .Surf
 	cp PLAYER_BIKE
-	jr z, .asm_10044
+	jr z, .Normal
 	cp PLAYER_SKATE
-	jr z, .asm_10074
-.asm_10044
-	call Function102cb
-	call Function102ec
-	call Function100b7
-	ret c
-	call Function10147
-	ret c
-	call Function1016b
-	ret c
-	call Function101f3
-	ret c
-	call Function10226
-	ret c
-	jr .asm_1009d
+	jr z, .Ice
 
-.asm_10060
-	call Function102cb
-	call Function102ec
-	call Function100b7
+.Normal:
+	call .CheckForced
+	call .GetAction
+	call .CheckTile
 	ret c
-	call Function10147
+	call .CheckTurning
 	ret c
-	call Function101c0
+	call .TryStep
 	ret c
-	jr .asm_1009d
+	call .TryJump
+	ret c
+	call .CheckWarp
+	ret c
+	jr .NotMoving
 
-.asm_10074
-	call Function102cb
-	call Function102ec
-	call Function100b7
+.Surf:
+	call .CheckForced
+	call .GetAction
+	call .CheckTile
 	ret c
-	call Function10147
+	call .CheckTurning
 	ret c
-	call Function1016b
+	call .TrySurf
 	ret c
-	call Function101f3
+	jr .NotMoving
+
+.Ice:
+	call .CheckForced
+	call .GetAction
+	call .CheckTile
 	ret c
-	call Function10226
+	call .CheckTurning
+	ret c
+	call .TryStep
+	ret c
+	call .TryJump
+	ret c
+	call .CheckWarp
 	ret c
 	ld a, [wWalkingDirection]
-	cp $ff
-	jr z, .asm_10098
-	call Function103ee
-.asm_10098
-	call Function102b3
+	cp STANDING
+	jr z, .HitWall
+	call .BumpSound
+.HitWall:
+	call .StandInPlace
 	xor a
 	ret
 
-.asm_1009d
+.NotMoving:
 	ld a, [wWalkingDirection]
-	cp $ff
-	jr z, .asm_100b2
+	cp STANDING
+	jr z, .Standing
+
+; Walking into an edge warp won't bump.
 	ld a, [wWalkingIntoEdgeWarp]
 	and a
-	jr nz, .asm_100ad
-	call Function103ee
-.asm_100ad
-	call Function102bf
+	jr nz, .CantMove
+	call .BumpSound
+.CantMove:
+	call ._WalkInPlace
 	xor a
 	ret
 
-.asm_100b2
-	call Function102b3
+.Standing:
+	call .StandInPlace
 	xor a
 	ret
 
-Function100b7: ; 100b7 (4:40b7)
+.CheckTile:
+; Tiles such as waterfalls and warps move the player
+; in a given direction, overriding input.
+
 	ld a, [wPlayerStandingTile]
 	ld c, a
 	call CheckWhirlpoolTile
-	jr c, .asm_100c4
-	ld a, $3
+	jr c, .not_whirlpool
+	ld a, PLAYERMOVEMENT_FORCE_TURN
 	scf
 	ret
 
-.asm_100c4
+.not_whirlpool
 	and $f0
-	cp $30
-	jr z, .asm_100d8
-	cp $40
-	jr z, .asm_100ec
-	cp $50
-	jr z, .asm_10108
-	cp $70
-	jr z, .asm_10124
-	jr .asm_1013c
+	cp HI_NYBBLE_CURRENT
+	jr z, .water
+	cp HI_NYBBLE_WALK
+	jr z, .land1
+	cp HI_NYBBLE_WALK_ALT
+	jr z, .land2
+	cp HI_NYBBLE_WARPS
+	jr z, .warps
+	jr .no_walk
 
-.asm_100d8
+.water
 	ld a, c
-	and $3
+	maskbits NUM_DIRECTIONS
 	ld c, a
-	ld b, $0
+	ld b, 0
 	ld hl, .water_table
 	add hl, bc
 	ld a, [hl]
 	ld [wWalkingDirection], a
-	jr .asm_1013e
+	jr .continue_walk
 
 .water_table
-	db RIGHT
-	db LEFT
-	db UP
-	db DOWN
+	db RIGHT ; COLL_WATERFALL_RIGHT
+	db LEFT  ; COLL_WATERFALL_LEFT
+	db UP    ; COLL_WATERFALL_UP
+	db DOWN  ; COLL_WATERFALL
 
-.asm_100ec
+.land1
 	ld a, c
-	and $7
+	and 7
 	ld c, a
-	ld b, $0
+	ld b, 0
 	ld hl, .land1_table
 	add hl, bc
 	ld a, [hl]
-	cp $ff
-	jr z, .asm_1013c
+	cp STANDING
+	jr z, .no_walk
 	ld [wWalkingDirection], a
-	jr .asm_1013e
+	jr .continue_walk
 
 .land1_table
-	db STANDING
-	db RIGHT
-	db LEFT
-	db UP
-	db DOWN
-	db STANDING
-	db STANDING
-	db STANDING
+	db STANDING ; COLL_BRAKE
+	db RIGHT    ; COLL_WALK_RIGHT
+	db LEFT     ; COLL_WALK_LEFT
+	db UP       ; COLL_WALK_UP
+	db DOWN     ; COLL_WALK_DOWN
+	db STANDING ; COLL_BRAKE_45
+	db STANDING ; COLL_BRAKE_46
+	db STANDING ; COLL_BRAKE_47
 
-.asm_10108
+.land2
 	ld a, c
-	and $7
+	and 7
 	ld c, a
-	ld b, $0
+	ld b, 0
 	ld hl, .land2_table
 	add hl, bc
 	ld a, [hl]
-	cp $ff
-	jr z, .asm_1013c
+	cp STANDING
+	jr z, .no_walk
 	ld [wWalkingDirection], a
-	jr .asm_1013e
+	jr .continue_walk
 
 .land2_table
-	db RIGHT
-	db LEFT
-	db UP
-	db DOWN
-	db STANDING
-	db STANDING
-	db STANDING
-	db STANDING
+	db RIGHT    ; COLL_WALK_RIGHT_ALT
+	db LEFT     ; COLL_WALK_LEFT_ALT
+	db UP       ; COLL_WALK_UP_ALT
+	db DOWN     ; COLL_WALK_DOWN_ALT
+	db STANDING ; COLL_BRAKE_ALT
+	db STANDING ; COLL_BRAKE_55
+	db STANDING ; COLL_BRAKE_56
+	db STANDING ; COLL_BRAKE_57
 
-.asm_10124
+.warps
 	ld a, c
-	cp $71
-	jr z, .asm_10135
-	cp $79
-	jr z, .asm_10135
-	cp $7a
-	jr z, .asm_10135
-	cp $7b
-	jr nz, .asm_1013c
-.asm_10135
-	ld a, $0
-	ld [wWalkingDirection], a
-	jr .asm_1013e
+	cp COLL_DOOR
+	jr z, .down
+	cp COLL_DOOR_79
+	jr z, .down
+	cp COLL_STAIRCASE
+	jr z, .down
+	cp COLL_CAVE
+	jr nz, .no_walk
 
-.asm_1013c
+.down
+	ld a, DOWN
+	ld [wWalkingDirection], a
+	jr .continue_walk
+
+.no_walk
 	xor a
 	ret
 
-.asm_1013e
-	ld a, $1
-	call Function1025f
-	ld a, $5
+.continue_walk
+	ld a, STEP_WALK
+	call .DoStep
+	ld a, PLAYERMOVEMENT_CONTINUE
 	scf
 	ret
 
-Function10147: ; 10147 (4:4147)
+.CheckTurning:
+; If the player is turning, change direction first. This also lets
+; the player change facing without moving by tapping a direction.
+
 	ld a, [wPlayerTurningDirection]
-	cp $0
-	jr nz, .asm_10169
+	cp 0
+	jr nz, .not_turning
 	ld a, [wWalkingDirection]
-	cp $ff
-	jr z, .asm_10169
+	cp STANDING
+	jr z, .not_turning
+
 	ld e, a
 	ld a, [wPlayerDirection]
 	rrca
 	rrca
-	and $3
+	maskbits NUM_DIRECTIONS
 	cp e
-	jr z, .asm_10169
-	ld a, $5
-	call Function1025f
-	ld a, $2
+	jr z, .not_turning
+
+	ld a, STEP_TURN
+	call .DoStep
+	ld a, PLAYERMOVEMENT_TURN
 	scf
 	ret
 
-.asm_10169
+.not_turning
 	xor a
 	ret
 
-Function1016b: ; 1016b (4:416b)
+.TryStep:
+; Surfing actually calls .TrySurf directly instead of passing through here.
 	ld a, [wPlayerState]
-	cp $4
-	jr z, Function101c0
-	cp $8
-	jr z, Function101c0
-	call Function1039e
-	jr c, .asm_101be
-	call Function10341
+	cp PLAYER_SURF
+	jr z, .TrySurf
+	cp PLAYER_SURF_PIKA
+	jr z, .TrySurf
+
+	call .CheckLandPerms
+	jr c, .bump
+
+	call .CheckNPC
 	and a
-	jr z, .asm_101be
-	cp $2
-	jr z, .asm_101be
+	jr z, .bump
+	cp 2
+	jr z, .bump
+
 	ld a, [wPlayerStandingTile]
 	call CheckIceTile
-	jr nc, .asm_101b5
-	call Function103ca
-	jr nz, .asm_101ae
+	jr nc, .ice
+
+; Downhill riding is slower when not moving down.
+	call .BikeCheck
+	jr nz, .walk
+
 	ld hl, wBikeFlags
-	bit 2, [hl]
-	jr z, .asm_101a7
+	bit BIKEFLAGS_DOWNHILL_F, [hl]
+	jr z, .fast
+
 	ld a, [wWalkingDirection]
-	cp $0
-	jr z, .asm_101a7
-	ld a, $1
-	call Function1025f
+	cp DOWN
+	jr z, .fast
+
+	ld a, STEP_WALK
+	call .DoStep
 	scf
 	ret
 
-.asm_101a7
-	ld a, $2
-	call Function1025f
+.fast
+	ld a, STEP_BIKE
+	call .DoStep
 	scf
 	ret
 
-.asm_101ae
-	ld a, $1
-	call Function1025f
+.walk
+	ld a, STEP_WALK
+	call .DoStep
 	scf
 	ret
 
-.asm_101b5
-	ld a, $4
-	call Function1025f
+.ice
+	ld a, STEP_ICE
+	call .DoStep
 	scf
 	ret
 
+; unused
 	xor a
 	ret
 
-.asm_101be
+.bump
 	xor a
 	ret
 
-Function101c0: ; 101c0 (4:41c0)
-	call Function103b4
+.TrySurf:
+	call .CheckSurfPerms
 	ld [wWalkingIntoLand], a
-	jr c, .asm_101f1
-	call Function10341
+	jr c, .surf_bump
+
+	call .CheckNPC
 	ld [wWalkingIntoNPC], a
 	and a
-	jr z, .asm_101f1
-	cp $2
-	jr z, .asm_101f1
+	jr z, .surf_bump
+	cp 2
+	jr z, .surf_bump
+
 	ld a, [wWalkingIntoLand]
 	and a
-	jr nz, .asm_101e2
-	ld a, $1
-	call Function1025f
+	jr nz, .ExitWater
+
+	ld a, STEP_WALK
+	call .DoStep
 	scf
 	ret
 
-.asm_101e2
-	call Function103f9
+.ExitWater:
+	call .GetOutOfWater
 	call PlayMapMusic
-	ld a, $1
-	call Function1025f
-	ld a, $6
+	ld a, STEP_WALK
+	call .DoStep
+	ld a, PLAYERMOVEMENT_EXIT_WATER
 	scf
 	ret
 
-.asm_101f1
+.surf_bump
 	xor a
 	ret
 
-Function101f3: ; 101f3 (4:41f3)
+.TryJump:
 	ld a, [wPlayerStandingTile]
 	ld e, a
 	and $f0
-	cp $a0
-	jr nz, .asm_1021c
+	cp HI_NYBBLE_LEDGES
+	jr nz, .DontJump
+
 	ld a, e
-	and $7
+	and 7
 	ld e, a
-	ld d, $0
+	ld d, 0
 	ld hl, .data_1021e
 	add hl, de
 	ld a, [wFacingDirection]
 	and [hl]
-	jr z, .asm_1021c
-	ld de, $16
+	jr z, .DontJump
+
+	ld de, SFX_JUMP_OVER_LEDGE
 	call PlaySFX
-	ld a, $3
-	call Function1025f
-	ld a, $7
+	ld a, STEP_LEDGE
+	call .DoStep
+	ld a, PLAYERMOVEMENT_JUMP
 	scf
 	ret
 
-.asm_1021c
+.DontJump:
 	xor a
 	ret
 
 .data_1021e
-	db FACE_RIGHT
-	db FACE_LEFT
-	db FACE_UP
-	db FACE_DOWN
-	db FACE_RIGHT | FACE_DOWN
-	db FACE_DOWN | FACE_LEFT
-	db FACE_UP | FACE_RIGHT
-	db FACE_UP | FACE_LEFT
+	db FACE_RIGHT             ; COLL_HOP_RIGHT
+	db FACE_LEFT              ; COLL_HOP_LEFT
+	db FACE_UP                ; COLL_HOP_UP
+	db FACE_DOWN              ; COLL_HOP_DOWN
+	db FACE_RIGHT | FACE_DOWN ; COLL_HOP_DOWN_RIGHT
+	db FACE_DOWN | FACE_LEFT  ; COLL_HOP_DOWN_LEFT
+	db FACE_UP | FACE_RIGHT   ; COLL_HOP_UP_RIGHT
+	db FACE_UP | FACE_LEFT    ; COLL_HOP_UP_LEFT
 
-Function10226: ; 10226 (4:4226)
+.CheckWarp:
+; Bug: Since no case is made for STANDING here, it will check
+; [.edgewarps + $ff]. This resolves to $3e at $8035a.
+; This causes wWalkingIntoEdgeWarp to be nonzero when standing on tile $3e,
+; making bumps silent.
+
 	ld a, [wWalkingDirection]
+	; cp STANDING
+	; jr z, .not_warp
 	ld e, a
-	ld d, $0
-	ld hl, .edge_warps
+	ld d, 0
+	ld hl, .EdgeWarps
 	add hl, de
 	ld a, [wPlayerStandingTile]
 	cp [hl]
-	jr nz, .asm_10259
-	ld a, $1
+	jr nz, .not_warp
+
+	ld a, TRUE
 	ld [wWalkingIntoEdgeWarp], a
 	ld a, [wWalkingDirection]
-	cp $ff
-	jr z, .asm_10259
+	; This is in the wrong place.
+	cp STANDING
+	jr z, .not_warp
+
 	ld e, a
 	ld a, [wPlayerDirection]
 	rrca
 	rrca
-	and $3
+	maskbits NUM_DIRECTIONS
 	cp e
-	jr nz, .asm_10259
+	jr nz, .not_warp
 	call WarpCheck
-	jr nc, .asm_10259
-	call Function102b3
+	jr nc, .not_warp
+
+	call .StandInPlace
 	scf
-	ld a, $1
+	ld a, PLAYERMOVEMENT_WARP
 	ret
 
-.asm_10259
-	xor a
+.not_warp
+	xor a ; PLAYERMOVEMENT_NORMAL
 	ret
 
-.edge_warps
-	db $70, $78, $76, $7e
+.EdgeWarps:
+	db COLL_WARP_CARPET_DOWN
+	db COLL_WARP_CARPET_UP
+	db COLL_WARP_CARPET_LEFT
+	db COLL_WARP_CARPET_RIGHT
 
-Function1025f: ; 1025f (4:425f)
+.DoStep:
 	ld e, a
-	ld d, $0
+	ld d, 0
 	ld hl, .Steps
 	add hl, de
 	add hl, de
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
+
 	ld a, [wWalkingDirection]
 	ld e, a
-	cp $ff
-	jp z, Function102b3
+	cp STANDING
+	jp z, .StandInPlace
+
 	add hl, de
 	ld a, [hl]
 	ld [wMovementAnimation], a
-	ld hl, $42af
+
+	ld hl, .FinishFacing
 	add hl, de
 	ld a, [hl]
 	ld [wPlayerTurningDirection], a
-	ld a, $4
+
+	ld a, PLAYERMOVEMENT_FINISH
 	ret
 
 .Steps:
+; entries correspond to STEP_* constants
 	dw .SlowStep
 	dw .NormalStep
 	dw .FastStep
@@ -461,41 +515,44 @@ Function1025f: ; 1025f (4:425f)
 	turn_step LEFT
 	turn_step RIGHT
 .FinishFacing:
-	db $80 + DOWN
-	db $80 + UP
-	db $80 + LEFT
-	db $80 + RIGHT
+	db $80 | DOWN
+	db $80 | UP
+	db $80 | LEFT
+	db $80 | RIGHT
 
-Function102b3: ; 102b3 (4:42b3)
-	ld a, $0
+.StandInPlace:
+	ld a, 0
 	ld [wPlayerTurningDirection], a
-	ld a, $3e
+	ld a, movement_step_sleep
 	ld [wMovementAnimation], a
 	xor a
 	ret
 
-Function102bf: ; 102bf (4:42bf)
-	ld a, $0
+._WalkInPlace:
+	ld a, 0
 	ld [wPlayerTurningDirection], a
-	ld a, $50
+	ld a, movement_step_bump
 	ld [wMovementAnimation], a
 	xor a
 	ret
 
-Function102cb: ; 102cb (4:42cb)
+.CheckForced:
+; When sliding on ice, input is forced to remain in the same direction.
+
 	call CheckStandingOnIce
 	ret nc
+
 	ld a, [wPlayerTurningDirection]
-.asm_102d2
-	cp $0
+	cp 0
 	ret z
-	and $3
+
+	maskbits NUM_DIRECTIONS
 	ld e, a
-	ld d, $0
+	ld d, 0
 	ld hl, .forced_dpad
 	add hl, de
 	ld a, [wCurInput]
-	and $f
+	and BUTTONS
 	or [hl]
 	ld [wCurInput], a
 	ret
@@ -503,30 +560,29 @@ Function102cb: ; 102cb (4:42cb)
 .forced_dpad
 	db D_DOWN, D_UP, D_LEFT, D_RIGHT
 
-Function102ec: ; 102ec (4:42ec)
-	ld hl, .table
-	ld de, .table2 - .table1
-	ld a, [wCurInput]
-	bit 7, a
-	jr nz, .asm_10307
-	bit 6, a
-	jr nz, .asm_10308
-.asm_102fc
-	bit 5, a
-	jr nz, .asm_10309
-	bit 4, a
-	jr nz, .asm_1030a
-	jr .asm_1030b
+.GetAction:
+; Poll player input and update movement info.
 
-.asm_10307
-	add hl, de
-.asm_10308
-	add hl, de
-.asm_10309
-	add hl, de
-.asm_1030a
-	add hl, de
-.asm_1030b
+	ld hl, .action_table
+	ld de, .action_table_1_end - .action_table_1
+	ld a, [wCurInput]
+	bit D_DOWN_F, a
+	jr nz, .d_down
+	bit D_UP_F, a
+	jr nz, .d_up
+	bit D_LEFT_F, a
+	jr nz, .d_left
+	bit D_RIGHT_F, a
+	jr nz, .d_right
+; Standing
+	jr .update
+
+.d_down 	add hl, de
+.d_up   	add hl, de
+.d_left 	add hl, de
+.d_right	add hl, de
+
+.update
 	ld a, [hli]
 	ld [wWalkingDirection], a
 	ld a, [hli]
@@ -539,197 +595,224 @@ Function102ec: ; 102ec (4:42ec)
 	ld h, [hl]
 	ld l, a
 	ld a, [hl]
-	ld [wWinTextPointer], a
+	ld [wWalkingTile], a
 	ret
 
-.table
-; struct:
-;	walk direction
-;	facing
-;	x movement
-;	y movement
-;	tile collision pointer
-.table1
-	db STANDING, FACE_CURRENT, 0, 0
-	dw wPlayerStandingTile
-.table2
-	db RIGHT, FACE_RIGHT,  1,  0
-	dw wTileRight
-	db LEFT,  FACE_LEFT,  -1,  0
-	dw wTileLeft
-	db UP,    FACE_UP,     0, -1
-	dw wTileUp
-	db DOWN,  FACE_DOWN,   0,  1
-	dw wTileDown
+player_action: MACRO
+; walk direction, facing, x movement, y movement, tile collision pointer
+	db \1, \2, \3, \4
+	dw \5
+ENDM
 
-Function10341: ; 10341 (4:4341)
+.action_table:
+.action_table_1
+	player_action STANDING, FACE_CURRENT, 0,  0, wPlayerStandingTile
+.action_table_1_end
+	player_action RIGHT,    FACE_RIGHT,   1,  0, wTileRight
+	player_action LEFT,     FACE_LEFT,   -1,  0, wTileLeft
+	player_action UP,       FACE_UP,      0, -1, wTileUp
+	player_action DOWN,     FACE_DOWN,    0,  1, wTileDown
+
+.CheckNPC:
+; Returns 0 if there is an NPC in front that you can't move
+; Returns 1 if there is no NPC in front
+; Returns 2 if there is a movable NPC in front
 	ld a, 0
 	ldh [hMapObjectIndexBuffer], a
+; Load the next X coordinate into d
 	ld a, [wPlayerStandingMapX]
 	ld d, a
 	ld a, [wWalkingX]
 	add d
 	ld d, a
+; Load the next Y coordinate into e
 	ld a, [wPlayerStandingMapY]
 	ld e, a
 	ld a, [wWalkingY]
 	add e
 	ld e, a
-	ld bc, wPlayerSprite
-	farcall Function7120
-	jr nc, .asm_10369
-	call Function1036f
-	jr c, .asm_1036c
+; Find an object struct with coordinates equal to d,e
+	ld bc, wObjectStructs ; redundant
+	farcall IsNPCAtCoord
+	jr nc, .is_npc
+	call .CheckStrengthBoulder
+	jr c, .no_bump
+
 	xor a
 	ret
 
-.asm_10369
-	ld a, $1
+.is_npc
+	ld a, 1
 	ret
 
-.asm_1036c
-	ld a, $2
+.no_bump
+	ld a, 2
 	ret
 
-Function1036f: ; 1036f (4:436f)
+.CheckStrengthBoulder:
 	ld hl, wBikeFlags
-	bit 0, [hl]
-	jr z, .asm_1039c
-	ld hl, $7
+	bit BIKEFLAGS_STRENGTH_ACTIVE_F, [hl]
+	jr z, .not_boulder
+
+	ld hl, OBJECT_DIRECTION_WALKING
 	add hl, bc
 	ld a, [hl]
-	cp $ff
-	jr nz, .asm_1039c
-	ld hl, $6
+	cp STANDING
+	jr nz, .not_boulder
+
+	ld hl, OBJECT_PALETTE
 	add hl, bc
-	bit 6, [hl]
-	jr z, .asm_1039c
-	ld hl, $5
+	bit STRENGTH_BOULDER_F, [hl]
+	jr z, .not_boulder
+
+	ld hl, OBJECT_FLAGS2
 	add hl, bc
 	set 2, [hl]
+
 	ld a, [wWalkingDirection]
 	ld d, a
-	ld hl, $20
+	ld hl, OBJECT_RANGE
 	add hl, bc
 	ld a, [hl]
-	and $fc
+	and %11111100
 	or d
 	ld [hl], a
+
 	scf
 	ret
 
-.asm_1039c
+.not_boulder
 	xor a
 	ret
 
-Function1039e: ; 1039e (4:439e)
+.CheckLandPerms:
+; Return 0 if walking onto land and tile permissions allow it.
+; Otherwise, return carry.
+
 	ld a, [wTilePermissions]
 	ld d, a
 	ld a, [wFacingDirection]
 	and d
-	jr nz, .asm_103b2
-	ld a, [wWinTextPointer]
-	call Function103d3
-	jr c, .asm_103b2
+	jr nz, .NotWalkable
+
+	ld a, [wWalkingTile]
+	call .CheckWalkable
+	jr c, .NotWalkable
+
 	xor a
 	ret
 
-.asm_103b2
+.NotWalkable:
 	scf
 	ret
 
-Function103b4: ; 103b4 (4:43b4)
+.CheckSurfPerms:
+; Return 0 if moving in water, or 1 if moving onto land.
+; Otherwise, return carry.
+
 	ld a, [wTilePermissions]
 	ld d, a
 	ld a, [wFacingDirection]
 	and d
-	jr nz, .asm_103c8
-	ld a, [wWinTextPointer]
-	call Function103da
-	jr c, .asm_103c8
+	jr nz, .NotSurfable
+
+	ld a, [wWalkingTile]
+	call .CheckSurfable
+	jr c, .NotSurfable
+
 	and a
 	ret
 
-.asm_103c8
+.NotSurfable:
 	scf
 	ret
 
-Function103ca: ; 103ca (4:43ca)
+.BikeCheck:
 	ld a, [wPlayerState]
-	cp $1
+	cp PLAYER_BIKE
 	ret z
-	cp $2
+	cp PLAYER_SKATE
 	ret
 
-Function103d3: ; 103d3 (4:43d3)
+.CheckWalkable:
+; Return 0 if tile a is land. Otherwise, return carry.
+
 	call GetTileCollision
-	and a
+	and a ; LAND_TILE
 	ret z
 	scf
 	ret
 
-Function103da: ; 103da (4:43da)
-	call GetTileCollision
-	cp $1
-	jr z, .asm_103e6
-	and a
-	jr z, .asm_103e8
-	jr .asm_103ec
+.CheckSurfable:
+; Return 0 if tile a is water, or 1 if land.
+; Otherwise, return carry.
 
-.asm_103e6
+	call GetTileCollision
+	cp WATER_TILE
+	jr z, .Water
+
+; Can walk back onto land from water.
+	and a ; LAND_TILE
+	jr z, .Land
+
+	jr .Neither
+
+.Water:
 	xor a
 	ret
 
-.asm_103e8
-	ld a, $1
+.Land:
+	ld a, 1
 	and a
 	ret
 
-.asm_103ec
+.Neither:
 	scf
 	ret
 
-Function103ee: ; 103ee (4:43ee)
+.BumpSound:
 	call CheckSFX
 	ret c
-	ld de, $24
+	ld de, SFX_BUMP
 	call PlaySFX
 	ret
 
-Function103f9: ; 103f9 (4:43f9)
+.GetOutOfWater:
 	push bc
-	ld a, $0
+	ld a, PLAYER_NORMAL
 	ld [wPlayerState], a
-	call ReplaceChrisSprite
+	call ReplaceChrisSprite ; UpdateSprites
 	pop bc
 	ret
 
 CheckStandingOnIce::
 	ld a, [wPlayerTurningDirection]
-	cp $0
-	jr z, .asm_10420
+	cp 0
+	jr z, .not_ice
 	cp $f0
-	jr z, .asm_10420
+	jr z, .not_ice
 	ld a, [wPlayerStandingTile]
 	call CheckIceTile
-	jr nc, .asm_1041e
+	jr nc, .yep
 	ld a, [wPlayerState]
-	cp $2
-	jr nz, .asm_10420
-.asm_1041e
+	cp PLAYER_SKATE
+	jr nz, .not_ice
+
+.yep
 	scf
 	ret
 
-.asm_10420
+.not_ice
 	and a
 	ret
 
 StopPlayerForEvent::
 	ld hl, wPlayerNextMovement
-	ld a, $3e
+	ld a, movement_step_sleep
 	cp [hl]
 	ret z
+
 	ld [hl], a
-	ld a, $0
+	ld a, 0
 	ld [wPlayerTurningDirection], a
 	ret
