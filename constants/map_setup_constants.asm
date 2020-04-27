@@ -12,7 +12,6 @@
 	const MAPSETUP_TRAIN      ; f9
 	const MAPSETUP_SUBMENU    ; fa
 	const MAPSETUP_BADWARP    ; fb
-	const MAPSETUP_FLY        ; fc
 
 ; MapSetupCommands indexes (see engine/overworld/map_setup.asm)
 	const_def

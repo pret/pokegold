@@ -1,4 +1,4 @@
-CheckNPCMovementPermissions: ; 6fa0 (1:6fa0)
+CanObjectMoveInDirection: ; 6fa0 (1:6fa0)
 	ld hl, $6
 	add hl, bc
 	bit 5, [hl]

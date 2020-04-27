@@ -1802,16 +1802,16 @@ wce7d:: ds 1 ; ce7d
 wce7e:: ds 1 ; ce7e
 wce7f:: ds 1 ; ce7f
 wce80:: ds 1 ; ce80
-wce81:: ds 1 ; ce81
-wce82:: ds 1 ; ce82
+wPlayerBGMapOffsetX:: db ; ce81
+wPlayerBGMapOffsetY:: db ; ce82
 
 wPlayerStepVectorX:: ds 1 ; ce83
 wPlayerStepVectorY:: ds 1 ; ce84
 wPlayerStepFlags:: ds 1 ; ce85
 wPlayerStepDirection:: ds 1 ; ce86
 
-wce87:: ds 1 ; ce87
-wce88:: ds 1 ; ce88
+wPlayerNextMovement:: db ; ce87
+wPlayerMovement:: db ; ce88
 wce89:: ds 1 ; ce89
 wce8a:: ds 1 ; ce8a
 wMovementObject:: ds 1 ; ce8b
@@ -1821,18 +1821,17 @@ wce8f:: ds 1 ; ce8f
 wce90:: ds 1 ; ce90
 wce91:: ds 1 ; ce91
 wce92:: ds 1 ; ce92
-wce93:: ds 1 ; ce93
-wce94:: ds 1 ; ce94
-wce95:: ds 1 ; ce95
-wce96:: ds 1 ; ce96
-wce97:: ds 1 ; ce97
-wce98:: ds 1 ; ce98
-wce99:: ds 1 ; ce99
+wMovementByteWasControlSwitch:: db ; ce93
+wMovementPointer:: dw ; ce94
+
+	ds 3
+
+wTempObjectCopyMapObjectIndex:: db ; ce99
 wce9a:: ds 1 ; ce9a
 wce9b:: ds 1 ; ce9b
 wce9c:: ds 1 ; ce9c
 wce9d:: ds 1 ; ce9d
-wce9e:: ds 1 ; ce9e
+wTempObjectCopyRange:: db ; ce9e
 wce9f:: ds 1 ; ce9f
 wcea0:: ds 1 ; cea0
 wcea1:: ds 1 ; cea1
@@ -2751,7 +2750,7 @@ wd56a:: ds 1 ; d56a
 wd56b:: ds 1 ; d56b
 wd56c:: ds 1 ; d56c
 wd56d:: ds 1 ; d56d
-wd56e:: ds 1 ; d56e
+wTimeOfDayPalset:: ds 1 ; d56e
 wd56f:: ds 1 ; d56f
 wd570:: ds 1 ; d570
 wPlayerData2End::
@@ -3265,10 +3264,9 @@ wd9bb:: ds 1 ; d9bb
 wd9bc:: ds 1 ; d9bc
 wStepCount:: db ; d9bd
 wPoisonStepCount:: db ; d9be
-wd9bf:: ds 1 ; d9bf
-wd9c0:: ds 1 ; d9c0
-wd9c1:: ds 1 ; d9c1
-wd9c2:: ds 1 ; d9c2
+	ds 2
+wHappinessStepCount:: db ; d9c1
+	ds 1
 wParkBallsRemaining:: db ; d9c3
 wd9c4:: ds 1 ; d9c4
 wd9c5:: ds 1 ; d9c5

@@ -165,7 +165,7 @@ CopyMapObjectToTempObject: ; 870d (2:470d)
 	add hl, bc
 	ld [hl], a
 	ldh a, [hMapObjectIndexBuffer]
-	ld [wce99], a
+	ld [wTempObjectCopyMapObjectIndex], a
 	ld hl, $1
 	add hl, bc
 	ld a, [hl]
@@ -191,7 +191,7 @@ CopyMapObjectToTempObject: ; 870d (2:470d)
 	ld hl, $9
 	add hl, bc
 	ld a, [hl]
-	ld [wce9e], a
+	ld [wTempObjectCopyRange], a
 	ld hl, $3
 	add hl, bc
 	ld a, [hl]
@@ -385,7 +385,7 @@ asm_882e:
 	ret
 
 CopyTempObjectToObjectStruct: ; 8876 (2:4876)
-	ld a, [wce99]
+	ld a, [wTempObjectCopyMapObjectIndex]
 	ld hl, $1
 	add hl, de
 	ld [hl], a
@@ -416,7 +416,7 @@ CopyTempObjectToObjectStruct: ; 8876 (2:4876)
 	ld [hl], $ff
 	ld a, [wcea1]
 	call InitTempObjectRadius
-	ld a, [wce9e]
+	ld a, [wTempObjectCopyRange]
 	ld hl, $20
 	add hl, de
 	ld [hl], a
@@ -434,7 +434,7 @@ InitTempObjectYCoord: ; 88c5 (2:48c5)
 	sub [hl]
 	and $f
 	swap a
-	ld hl, wce82
+	ld hl, wPlayerBGMapOffsetY
 	sub [hl]
 	ld hl, $18
 	add hl, de
@@ -452,7 +452,7 @@ InitTempObjectXCoord: ; 88e1 (2:48e1)
 	sub [hl]
 	and $f
 	swap a
-	ld hl, wce81
+	ld hl, wPlayerBGMapOffsetX
 	sub [hl]
 	ld hl, $17
 	add hl, de
@@ -606,7 +606,7 @@ FollowNotExact::
 	sub [hl]
 	and $f
 	swap a
-	ld hl, wce81
+	ld hl, wPlayerBGMapOffsetX
 	sub [hl]
 	ld hl, $17
 	add hl, de
@@ -619,7 +619,7 @@ FollowNotExact::
 	sub [hl]
 	and $f
 	swap a
-	ld hl, wce82
+	ld hl, wPlayerBGMapOffsetY
 	sub [hl]
 	ld hl, $18
 	add hl, de

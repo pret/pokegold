@@ -1,407 +1,390 @@
-FieldMoveBufferReset: ; c72f (3:472f)
+FieldMoveJumptableReset:
 	xor a
 	ld hl, wBuffer1
-	ld bc, $7
+	ld bc, 7
 	call ByteFill
 	ret
 
-DoFieldMoveAction: ; c73a (3:473a)
+FieldMoveJumptable:
 	ld a, [wBuffer1]
 	rst JumpTable
 	ld [wBuffer1], a
 	bit 7, a
-	jr nz, .asm_c747
+	jr nz, .okay
 	and a
 	ret
 
-.asm_c747
+.okay
 	and $7f
 	scf
 	ret
 
-FieldMoveGetPartyNick: ; c74b (3:474b)
-	ld hl, wPartyMon1Nickname
-	ld a, $2
+GetPartyNick:
+; write wCurPartyMon nickname to wStringBuffer1-3
+	ld hl, wPartyMonNicknames
+	ld a, BOXMON
 	ld [wMonType], a
 	ld a, [wCurPartyMon]
 	call GetNick
 	call CopyName1
+; copy text from wStringBuffer2 to wStringBuffer3
 	ld de, wStringBuffer2
 	ld hl, wStringBuffer3
 	call CopyName2
 	ret
 
-FieldMoveEngineFlagCheck: ; c766 (3:4766)
+CheckEngineFlag:
+; Check engine flag de
+; Return carry if flag is not set
 	ld b, CHECK_FLAG
-	farcall EngineFlagAction ; same bank
+	farcall EngineFlagAction
 	ld a, c
 	and a
-	jr nz, .asm_c774
+	jr nz, .isset
 	scf
 	ret
-
-.asm_c774
+.isset
 	xor a
 	ret
 
-FieldMoveBadgeCheck: ; c776 (3:4776)
-	call FieldMoveEngineFlagCheck
+CheckBadge:
+; Check engine flag a (ENGINE_ZEPHYRBADGE thru ENGINE_EARTHBADGE)
+; Display "Badge required" text and return carry if the badge is not owned
+	call CheckEngineFlag
 	ret nc
 	ld hl, .BadgeRequiredText
-	call MenuTextboxBackup
+	call MenuTextboxBackup ; push text to queue
 	scf
 	ret
 
 .BadgeRequiredText:
-	text_far BadgeRequiredText_
-	db "@"
+	text_far _BadgeRequiredText
+	text_end
 
-FieldMovePartyCheck: ; c787 (3:4787)
-	ld e, $0
+CheckPartyMove:
+; Check if a monster in your party has move d.
+
+	ld e, 0
 	xor a
 	ld [wCurPartyMon], a
-.asm_c78d
+.loop
 	ld c, e
-	ld b, $0
+	ld b, 0
 	ld hl, wPartySpecies
 	add hl, bc
 	ld a, [hl]
 	and a
-	jr z, .asm_c7bc
+	jr z, .no
 	cp -1
-	jr z, .asm_c7bc
+	jr z, .no
 	cp EGG
-	jr z, .asm_c7b3
+	jr z, .next
+
 	ld bc, PARTYMON_STRUCT_LENGTH
 	ld hl, wPartyMon1Moves
 	ld a, e
 	call AddNTimes
 	ld b, NUM_MOVES
-.asm_c7ac
+.check
 	ld a, [hli]
 	cp d
-	jr z, .asm_c7b6
+	jr z, .yes
 	dec b
-	jr nz, .asm_c7ac
-.asm_c7b3
-	inc e
-	jr .asm_c78d
+	jr nz, .check
 
-.asm_c7b6
+.next
+	inc e
+	jr .loop
+
+.yes
 	ld a, e
-	ld [wCurPartyMon], a
+	ld [wCurPartyMon], a ; which mon has the move
 	xor a
 	ret
-
-.asm_c7bc
+.no
 	scf
 	ret
 
-FieldMoveFailed: ; c7be (3:47be)
-	ld hl, .CantUseHereText
+FieldMoveFailed:
+	ld hl, .CantUseItemText
 	call MenuTextboxBackup
 	ret
 
-.CantUseHereText:
-	text_far CantUseFieldMoveHereText_
-	db "@"
+.CantUseItemText:
+	text_far _CantUseItemText
+	text_end
 
-CutFunction::
-	call FieldMoveBufferReset
-.asm_c7cd
+CutFunction:
+	call FieldMoveJumptableReset
+.loop
 	ld hl, .Jumptable
-	call DoFieldMoveAction
-	jr nc, .asm_c7cd
+	call FieldMoveJumptable
+	jr nc, .loop
 	and $7f
 	ld [wFieldMoveSucceeded], a
 	ret
 
 .Jumptable:
-	dw CheckAbleToCut
-	dw CutTreeOrGrass
-	dw FailToCut
+	dw .CheckAble
+	dw .DoCut
+	dw .FailCut
 
-CheckAbleToCut:
+.CheckAble:
 	ld de, ENGINE_HIVEBADGE
-	call FieldMoveBadgeCheck
-	jr c, .asm_c7f1
+	call CheckBadge
+	jr c, .nohivebadge
 	call CheckMapForSomethingToCut
-	jr c, .asm_c7f4
+	jr c, .nothingtocut
 	ld a, $1
 	ret
 
-.asm_c7f1
+.nohivebadge
 	ld a, $80
 	ret
 
-.asm_c7f4
+.nothingtocut
 	ld a, $2
 	ret
 
-CutTreeOrGrass:
+.DoCut:
 	ld hl, Script_CutFromMenu
 	call QueueScript
 	ld a, $81
 	ret
 
-FailToCut:
-	ld hl, Text_NothingToCut
+.FailCut:
+	ld hl, CutNothingText
 	call MenuTextboxBackup
 	ld a, $80
 	ret
 
-Text_UsedCut:
-	text_far Text_UsedCut_
-	db "@"
+UseCutText:
+	text_far _UseCutText
+	text_end
 
-Text_NothingToCut:
-	text_far Text_NothingToCut_
-	db "@"
+CutNothingText:
+	text_far _CutNothingText
+	text_end
 
-CheckMapForSomethingToCut: ; c813 (3:4813)
+CheckMapForSomethingToCut:
+	; Does the collision data of the facing tile permit cutting?
 	call GetFacingTileCoord
 	ld c, a
 	push de
 	farcall CheckCutCollision
 	pop de
-	jr nc, .asm_c841
+	jr nc, .fail
+	; Get the location of the current block in wOverworldMapBlocks.
 	call GetBlockLocation
 	ld c, [hl]
+	; See if that block contains something that can be cut.
 	push hl
 	ld hl, CutTreeBlockPointers
 	call CheckOverworldTileArrays
 	pop hl
-	jr nc, .asm_c841
+	jr nc, .fail
+	; Back up the wOverworldMapBlocks address to wBuffer3
 	ld a, l
 	ld [wBuffer3], a
 	ld a, h
 	ld [wBuffer4], a
+	; Back up the replacement tile to wBuffer5
 	ld a, b
 	ld [wBuffer5], a
+	; Back up the animation index to wBuffer6
 	ld a, c
 	ld [wBuffer6], a
 	xor a
 	ret
 
-.asm_c841
+.fail
 	scf
 	ret
 
 Script_CutFromMenu:
 	reloadmappart
 	special UpdateTimePals
+
 Script_Cut:
-	callasm FieldMoveGetPartyNick
-	writetext Text_UsedCut
+	callasm GetPartyNick
+	writetext UseCutText
 	reloadmappart
 	callasm CutDownTreeOrGrass
 	closetext
 	end
 
 CutDownTreeOrGrass:
-	ld hl, wBuffer3
+	ld hl, wBuffer3 ; OverworldMapTile
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
-	ld a, [wBuffer5]
+	ld a, [wBuffer5] ; ReplacementTile
 	ld [hl], a
 	xor a
 	ldh [hBGMapMode], a
 	call OverworldTextModeSwitch
 	call UpdateSprites
 	call DelayFrame
-	ld a, [wBuffer6]
+	ld a, [wBuffer6] ; Animation type
 	ld e, a
 	farcall OWCutAnimation
 	call BufferScreen
 	call GetMovementPermissions
 	ret
 
-CheckOverworldTileArrays: ; c87c (3:487c)
+CheckOverworldTileArrays:
+	; Input: c contains the tile you're facing
+	; Output: Replacement tile in b and effect on wild encounters in c, plus carry set.
+	;         Carry is not set if the facing tile cannot be replaced, or if the tileset
+	;         does not contain a tile you can replace.
+
+	; Dictionary lookup for pointer to tile replacement table
 	push bc
 	ld a, [wMapTileset]
-	ld de, $3
+	ld de, 3
 	call IsInArray
 	pop bc
-	jr nc, .asm_c89c
+	jr nc, .nope
+	; Load the pointer
 	inc hl
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
-	ld de, $3
+	; Look up the tile you're facing
+	ld de, 3
 	ld a, c
 	call IsInArray
-	jr nc, .asm_c89c
+	jr nc, .nope
+	; Load the replacement to b
 	inc hl
 	ld b, [hl]
+	; Load the animation type parameter to c
 	inc hl
 	ld c, [hl]
 	scf
 	ret
 
-.asm_c89c
+.nope
 	xor a
 	ret
 
-CutTreeBlockPointers:
-	dbw TILESET_JOHTO, .johto1
-	dbw TILESET_JOHTO_MODERN, .johto2
-	dbw TILESET_KANTO, .kanto
-	dbw TILESET_PARK, .park
-	dbw TILESET_FOREST, .ilex
-	db -1
-
-.johto1
-	db $03, $02, $01 ; grass
-	db $5b, $3c, $00 ; tree
-	db $5f, $3d, $00 ; tree
-	db $63, $3f, $00 ; tree
-	db $67, $3e, $00 ; tree
-	db -1
-
-.johto2
-	db $03, $02, $01 ; grass
-	db -1
-
-.kanto
-	db $0b, $0a, $01 ; grass
-	db $32, $6d, $00 ; tree
-	db $33, $6c, $00 ; tree
-	db $34, $6f, $00 ; tree
-	db $35, $4c, $00 ; tree
-	db $60, $6e, $00 ; tree
-	db -1
-
-.park
-	db $13, $03, $01 ; grass
-	db $03, $04, $01 ; grass
-	db -1
-
-.ilex
-	db $0f, $17, $00
-	db -1
-
-WhirlpoolBlockPointers:
-	dbw TILESET_JOHTO, .johto
-	db -1
-
-.johto
-	db $07, $36, $00
-	db -1
+INCLUDE "data/events/field_move_blocks.asm"
 
 FlashFunction:
-	call CheckUseFlash
+	call .CheckUseFlash
 	and $7f
 	ld [wFieldMoveSucceeded], a
 	ret
 
-CheckUseFlash: ; c8f1 (3:48f1)
+.CheckUseFlash:
+; Flash
 	ld de, ENGINE_ZEPHYRBADGE
-	farcall FieldMoveBadgeCheck ; same bank
-	jr c, .asm_c90f
-	ld a, [wd56e]
-	cp $ff
-	jr nz, .asm_c909
+	farcall CheckBadge
+	jr c, .nozephyrbadge
+	ld a, [wTimeOfDayPalset]
+	cp %11111111 ; 3, 3, 3, 3
+	jr nz, .notadarkcave
+.useflash
 	call UseFlash
 	ld a, $81
 	ret
 
-.asm_c909
+.notadarkcave
 	call FieldMoveFailed
 	ld a, $80
 	ret
 
-.asm_c90f
+.nozephyrbadge
 	ld a, $80
 	ret
 
-UseFlash: ; c912 (3:4912)
+UseFlash:
 	ld hl, Script_UseFlash
 	jp QueueScript
 
 Script_UseFlash:
 	reloadmappart
 	special UpdateTimePals
-	writetext Text_UsedFlash
+	writetext UseFlashTextScript
 	callasm BlindingFlash
 	closetext
 	end
 
-Text_UsedFlash:
-	text_far Text_UsedFlash_
+UseFlashTextScript:
+	text_far _BlindingFlashText
 	text_asm
 	call WaitSFX
 	ld de, SFX_FLASH
 	call PlaySFX
 	call WaitSFX
-	ld hl, .end
+	ld hl, .BlankText
 	ret
-.end db "@"
+
+.BlankText:
+	text_end
 
 SurfFunction:
-	call FieldMoveBufferReset
-.asm_c93e
+	call FieldMoveJumptableReset
+.loop
 	ld hl, .Jumptable
-	call DoFieldMoveAction
-	jr nc, .asm_c93e
+	call FieldMoveJumptable
+	jr nc, .loop
 	and $7f
 	ld [wFieldMoveSucceeded], a
 	ret
 
 .Jumptable:
-	dw CheckAbleToSurf
-	dw StartSurfing
-	dw CantSurf
-	dw AlreadySurfing
+	dw .TrySurf
+	dw .DoSurf
+	dw .FailSurf
+	dw .AlreadySurfing
 
-CheckAbleToSurf:
+.TrySurf:
 	ld de, ENGINE_FOGBADGE
-	call FieldMoveBadgeCheck
+	call CheckBadge
 	jr c, .asm_c980
-	CheckFlagHL ENGINE_ALWAYS_ON_BIKE
-	jr nz, .asm_c986
+	ld hl, wBikeFlags
+	bit BIKEFLAGS_ALWAYS_ON_BIKE_F, [hl]
+	jr nz, .cannotsurf
 	ld a, [wPlayerState]
 	cp PLAYER_SURF
-	jr z, .asm_c983
+	jr z, .alreadyfail
 	cp PLAYER_SURF_PIKA
-	jr z, .asm_c983
+	jr z, .alreadyfail
 	call GetFacingTileCoord
 	call GetTileCollision
-	cp $1
-	jr nz, .asm_c986
-	call GetSurfDirection
-	jr c, .asm_c986
+	cp WATER_TILE
+	jr nz, .cannotsurf
+	call CheckDirection
+	jr c, .cannotsurf
 	ld a, $1
 	ret
-
 .asm_c980
 	ld a, $80
 	ret
-
-.asm_c983
+.alreadyfail
 	ld a, $3
 	ret
-
-.asm_c986
+.cannotsurf
 	ld a, $2
 	ret
 
-StartSurfing:
+.DoSurf:
 	call GetSurfType
 	ld [wBuffer2], a
-	call FieldMoveGetPartyNick
+	call GetPartyNick
 	ld hl, SurfFromMenuScript
 	call QueueScript
 	ld a, $81
 	ret
 
-CantSurf:
+.FailSurf:
 	ld hl, CantSurfText
 	call MenuTextboxBackup
 	ld a, $80
 	ret
 
-AlreadySurfing:
+.AlreadySurfing:
 	ld hl, AlreadySurfingText
 	call MenuTextboxBackup
 	ld a, $80
@@ -414,8 +397,10 @@ UsedSurfScript:
 	writetext UsedSurfText ; "used SURF!"
 	waitbutton
 	closetext
+
 	readmem wBuffer2
 	writevar VAR_MOVEMENT
+
 	special ReplaceChrisSprite
 	special PlayMapMusic
 ; step into the water (slow_step DIR, step_end)
@@ -424,23 +409,27 @@ UsedSurfScript:
 	end
 
 UsedSurfText:
-	text_far UsedSurfText_
-	db "@"
+	text_far _UsedSurfText
+	text_end
 
 CantSurfText:
-	text_far CantSurfText_
-	db "@"
+	text_far _CantSurfText
+	text_end
 
 AlreadySurfingText:
-	text_far AlreadySurfingText_
-	db "@"
+	text_far _AlreadySurfingText
+	text_end
 
-GetSurfType: ; c9d7 (3:49d7)
+GetSurfType:
+; Surfing on Pikachu uses an alternate sprite.
+; This is done by using a separate movement type.
+
 	ld a, [wCurPartyMon]
 	ld e, a
-	ld d, $0
+	ld d, 0
 	ld hl, wPartySpecies
 	add hl, de
+
 	ld a, [hl]
 	cp PIKACHU
 	ld a, PLAYER_SURF_PIKA
@@ -448,22 +437,28 @@ GetSurfType: ; c9d7 (3:49d7)
 	ld a, PLAYER_SURF
 	ret
 
-GetSurfDirection: ; c9ea (3:49ea)
+CheckDirection:
+; Return carry if a tile permission prevents you
+; from moving in the direction you're facing.
+
+; Get player direction
 	ld a, [wPlayerDirection]
-	and $c
+	and %00001100 ; bits 2 and 3 contain direction
 	rrca
 	rrca
 	ld e, a
-	ld d, $0
+	ld d, 0
 	ld hl, .Directions
 	add hl, de
+
+; Can you walk in this direction?
 	ld a, [wTilePermissions]
 	and [hl]
-	jr nz, .asm_ca00
+	jr nz, .quit
 	xor a
 	ret
 
-.asm_ca00
+.quit
 	scf
 	ret
 
@@ -474,31 +469,46 @@ GetSurfDirection: ; c9ea (3:49ea)
 	db FACE_RIGHT
 
 TrySurfOW::
+; Checking a tile in the overworld.
+; Return carry if fail is allowed.
+
+; Don't ask to surf if already fail.
 	ld a, [wPlayerState]
 	cp PLAYER_SURF_PIKA
 	jr z, .quit
 	cp PLAYER_SURF
 	jr z, .quit
+
+; Must be facing water.
 	ld a, [wFacingTileID]
 	call GetTileCollision
-	cp $1
+	cp WATER_TILE
 	jr nz, .quit
-	call GetSurfDirection
+
+; Check tile permissions.
+	call CheckDirection
 	jr c, .quit
+
 	ld de, ENGINE_FOGBADGE
-	call FieldMoveEngineFlagCheck
+	call CheckEngineFlag
 	jr c, .quit
+
 	ld d, SURF
-	call FieldMovePartyCheck
+	call CheckPartyMove
 	jr c, .quit
-	CheckFlagHL ENGINE_ALWAYS_ON_BIKE
+
+	ld hl, wBikeFlags
+	bit BIKEFLAGS_ALWAYS_ON_BIKE_F, [hl]
 	jr nz, .quit
+
 	call GetSurfType
 	ld [wBuffer2], a
-	call FieldMoveGetPartyNick
+	call GetPartyNick
+
 	ld a, BANK(AskSurfScript)
 	ld hl, AskSurfScript
 	call CallScript
+
 	scf
 	ret
 
@@ -515,150 +525,152 @@ AskSurfScript:
 	end
 
 AskSurfText:
-	text_far AskSurfText_
-	db "@"
+	text_far _AskSurfText
+	text_end
 
 FlyFunction:
-	call FieldMoveBufferReset
-.asm_ca5d
+	call FieldMoveJumptableReset
+.loop
 	ld hl, .Jumptable
-	call DoFieldMoveAction
-	jr nc, .asm_ca5d
+	call FieldMoveJumptable
+	jr nc, .loop
 	and $7f
 	ld [wFieldMoveSucceeded], a
 	ret
 
-.Jumptable
-	dw TryToFly
-	dw RunFlyScript
-	dw FailToFly
+.Jumptable:
+ 	dw .TryFly
+ 	dw .DoFly
+ 	dw .FailFly
 
-TryToFly:
+.TryFly:
+; Fly
 	ld de, ENGINE_STORMBADGE
-	call FieldMoveBadgeCheck
-	jr c, .asm_caa4
+	call CheckBadge
+	jr c, .nostormbadge
 	call GetMapEnvironment
 	call CheckOutdoorMap
-	jr z, .asm_ca83
-	jr .asm_caa7
+	jr z, .outdoors
+	jr .indoors
 
-.asm_ca83
+.outdoors
 	xor a
 	ldh [hMapAnims], a
 	call LoadStandardMenuHeader
 	call ClearSprites
-	ld a, $24
-	ld hl, $5a61
-	rst FarCall
+	farcall _FlyMap
 	ld a, e
-	cp $ff
-	jr z, .asm_caaa
-	cp $1c
-	jr nc, .asm_caaa
+	cp -1
+	jr z, .illegal
+	cp NUM_SPAWNS
+	jr nc, .illegal
+
 	ld [wDefaultSpawnpoint], a
 	call CloseWindow
 	ld a, $1
 	ret
 
-.asm_caa4
+.nostormbadge
 	ld a, $82
 	ret
 
-.asm_caa7
+.indoors
 	ld a, $2
 	ret
 
-.asm_caaa
+.illegal
 	call CloseWindow
 	call WaitBGMap
 	ld a, $80
 	ret
 
-RunFlyScript:
-	ld hl, FlyScript
+.DoFly:
+	ld hl, .FlyScript
 	call QueueScript
 	ld a, $81
 	ret
 
-FailToFly:
+.FailFly:
 	call FieldMoveFailed
 	ld a, $82
 	ret
 
-FlyScript:
+.FlyScript:
 	reloadmappart
 	callasm HideSprites
 	special UpdateTimePals
-	callasm FlyFromAnimation
+	callasm FlyFromAnim
 	farscall Script_AbortBugContest
 	special WarpToSpawnPoint
 	callasm SkipUpdateMapSprites
 	loadvar VAR_MOVEMENT, PLAYER_NORMAL
 	newloadmap MAPSETUP_TELEPORT
-	callasm FlyToAnimation
+	callasm FlyToAnim
 	special WaitSFX
 	special ReplaceChrisSprite
 	callasm _RefreshSprites
 	end
 
-WaterfallFunction: ; caed
-	call TryWaterfall
+WaterfallFunction:
+	call .TryWaterfall
 	and $7f
 	ld [wFieldMoveSucceeded], a
 	ret
 
-TryWaterfall: ; caf6 (3:4af6)
+.TryWaterfall:
+; Waterfall
 	ld de, ENGINE_RISINGBADGE
-	farcall FieldMoveBadgeCheck ; same bank
+	farcall CheckBadge
 	ld a, $80
 	ret c
 	call CheckMapCanWaterfall
-	jr c, .asm_cb10
+	jr c, .failed
 	ld hl, Script_WaterfallFromMenu
 	call QueueScript
 	ld a, $81
 	ret
 
-.asm_cb10
+.failed
 	call FieldMoveFailed
 	ld a, $80
 	ret
 
-CheckMapCanWaterfall: ; cb16 (3:4b16)
+CheckMapCanWaterfall:
 	ld a, [wPlayerDirection]
 	and $c
 	cp FACE_UP
-	jr nz, .asm_cb29
+	jr nz, .failed
 	ld a, [wTileUp]
 	call CheckWaterfallTile
-	jr nz, .asm_cb29
+	jr nz, .failed
 	xor a
 	ret
 
-.asm_cb29
+.failed
 	scf
 	ret
 
-Script_WaterfallFromMenu: ;cb2b
+Script_WaterfallFromMenu:
 	reloadmappart
 	special UpdateTimePals
+
 Script_UsedWaterfall:
-	callasm FieldMoveGetPartyNick
-	writetext Text_UsedWaterfall
+	callasm GetPartyNick
+	writetext .UseWaterfallText
 	waitbutton
 	closetext
 	playsound SFX_BUBBLEBEAM
 .loop
-	applymovement 0, WaterfallStep
-	callasm CheckContinueWaterfall
+	applymovement PLAYER, .WaterfallStep
+	callasm .CheckContinueWaterfall
 	iffalse .loop
 	end
 
-WaterfallStep:
+.WaterfallStep:
 	turn_waterfall UP
 	step_end
 
-CheckContinueWaterfall: ;cb49
+.CheckContinueWaterfall:
 	xor a
 	ld [wScriptVar], a
 	ld a, [wPlayerStandingTile]
@@ -668,441 +680,450 @@ CheckContinueWaterfall: ;cb49
 	ld [wScriptVar], a
 	ret
 
-Text_UsedWaterfall:
-	text_far Text_UsedWaterfall_
-	db "@"
+.UseWaterfallText:
+	text_far _UseWaterfallText
+	text_end
 
 TryWaterfallOW::
 	ld d, WATERFALL
-	call FieldMovePartyCheck
-	jr c, .asm_cb7d
+	call CheckPartyMove
+	jr c, .failed
 	ld de, ENGINE_RISINGBADGE
-	call FieldMoveEngineFlagCheck
-	jr c, .asm_cb7d
+	call CheckEngineFlag
+	jr c, .failed
 	call CheckMapCanWaterfall
-	jr c, .asm_cb7d
+	jr c, .failed
 	ld a, BANK(Script_AskWaterfall)
 	ld hl, Script_AskWaterfall
 	call CallScript
 	scf
 	ret
 
-.asm_cb7d
+.failed
 	ld a, BANK(Script_CantDoWaterfall)
 	ld hl, Script_CantDoWaterfall
 	call CallScript
 	scf
 	ret
 
-Script_CantDoWaterfall:;cb87
-	jumptext Text_CantDoWaterfall
+Script_CantDoWaterfall:
+	jumptext .HugeWaterfallText
 
-Text_CantDoWaterfall:
-	text_far Text_CantDoWaterfall_
-	db "@"
+.HugeWaterfallText:
+	text_far _HugeWaterfallText
+	text_end
 
 Script_AskWaterfall:
 	opentext
-	writetext Text_AskUseWaterfall
+	writetext .AskWaterfallText
 	yesorno
 	iftrue Script_UsedWaterfall
 	closetext
 	end
 
-Text_AskUseWaterfall:
-	text_far Text_AskUseWaterfall_
-	db "@"
+.AskWaterfallText:
+	text_far _AskWaterfallText
+	text_end
 
 EscapeRopeFunction:
-	call FieldMoveBufferReset
+	call FieldMoveJumptableReset
 	ld a, $1
-	jr asm_cbaa
+	jr EscapeRopeOrDig
 
 DigFunction:
-	call FieldMoveBufferReset
+	call FieldMoveJumptableReset
 	ld a, $2
-asm_cbaa:
+
+EscapeRopeOrDig:
 	ld [wBuffer2], a
-.asm_cbad
-	ld hl, .Jumptable
-	call DoFieldMoveAction
-	jr nc, .asm_cbad
+.loop
+	ld hl, .DigTable
+	call FieldMoveJumptable
+	jr nc, .loop
 	and $7f
 	ld [wFieldMoveSucceeded], a
 	ret
 
-.Jumptable:
-	dw TryEscapeFromDungeon
-	dw EscapeFromDungeon
-	dw FailToEscapeFromDungeon
+.DigTable:
+	dw .CheckCanDig
+	dw .DoDig
+	dw .FailDig
 
-TryEscapeFromDungeon:
+.CheckCanDig:
 	call GetMapEnvironment
 	cp CAVE
-	jr z, .asm_cbcf
+	jr z, .incave
 	cp DUNGEON
-	jr z, .asm_cbcf
-.asm_cbcc
+	jr z, .incave
+.fail
 	ld a, $2
 	ret
 
-.asm_cbcf
+.incave
 	ld hl, wDigWarpNumber
 	ld a, [hli]
 	and a
-	jr z, .asm_cbcc
+	jr z, .fail
 	ld a, [hli]
 	and a
-	jr z, .asm_cbcc
+	jr z, .fail
 	ld a, [hl]
 	and a
-	jr z, .asm_cbcc
+	jr z, .fail
 	ld a, $1
 	ret
 
-EscapeFromDungeon:
+.DoDig:
 	ld hl, wDigWarpNumber
 	ld de, wNextWarp
-	ld bc, $3
+	ld bc, 3
 	call CopyBytes
-	call FieldMoveGetPartyNick
+	call GetPartyNick
 	ld a, [wBuffer2]
 	cp $2
-	jr nz, .asm_cc00
-	ld hl, UsedDigScript
+	jr nz, .escaperope
+	ld hl, .UsedDigScript
 	call QueueScript
 	ld a, $81
 	ret
 
-.asm_cc00
-	ld hl, UsedEscapeRopeScript
+.escaperope
+	ld hl, .UsedEscapeRopeScript
 	call QueueScript
 	ld a, $81
 	ret
 
-FailToEscapeFromDungeon:
+.FailDig:
 	ld a, [wBuffer2]
 	cp $2
-	jr nz, .asm_cc1c
-	ld hl, Text_CantUseDigEscapeRopeHere ; $4c29
+	jr nz, .failescaperope
+	ld hl, .CantUseDigText
 	call MenuTextbox
 	call WaitPressAorB_BlinkCursor
 	call CloseWindow
-.asm_cc1c
+
+.failescaperope
 	ld a, $80
 	ret
 
-Text_UsedDig: ; cc1f
-	text_far Text_UsedDig_
-	db "@"
+.UseDigText:
+	text_far _UseDigText
+	text_end
 
-Text_UsedEscapeRope:
-	text_far Text_UsedEscapeRope_
-	db "@"
+.UseEscapeRopeText:
+	text_far _UseEscapeRopeText
+	text_end
 
-Text_CantUseDigEscapeRopeHere:
-	text_far Text_CantUseDigEscapeRopeHere_
-	db "@"
+.CantUseDigText:
+	text_far _CantUseDigText
+	text_end
 
-UsedEscapeRopeScript: ; cc2e	reloadmappart
+.UsedEscapeRopeScript:
 	reloadmappart
 	special UpdateTimePals
-	writetext Text_UsedEscapeRope ; cc24
-	sjump ContinueDigEscapeRopeScript
+	writetext .UseEscapeRopeText
+	sjump .UsedDigOrEscapeRopeScript
 
-UsedDigScript:
+.UsedDigScript:
 	reloadmappart
 	special UpdateTimePals
-	writetext Text_UsedDig
-ContinueDigEscapeRopeScript:
+	writetext .UseDigText
+
+.UsedDigOrEscapeRopeScript:
 	waitbutton
 	closetext
 	playsound SFX_WARP_TO
-	applymovement PLAYER, DigOutMovementData
+	applymovement PLAYER, .DigOut
 	farscall Script_AbortBugContest
 	special WarpToSpawnPoint
 	loadvar VAR_MOVEMENT, PLAYER_NORMAL
 	newloadmap MAPSETUP_DOOR
 	playsound SFX_WARP_FROM
-	applymovement PLAYER, DigReturnMovementData
+	applymovement PLAYER, .DigReturn
 	end
 
-DigOutMovementData:
+.DigOut:
 	step_dig 32
-	hide_person
+	hide_object
 	step_end
 
-DigReturnMovementData:
-	show_person
+.DigReturn:
+	show_object
 	return_dig 32
 	step_end
 
 TeleportFunction:
-	call FieldMoveBufferReset
-.asm_cc67
+	call FieldMoveJumptableReset
+.loop
 	ld hl, .Jumptable
-	call DoFieldMoveAction
-	jr nc, .asm_cc67
+	call FieldMoveJumptable
+	jr nc, .loop
 	and $7f
 	ld [wFieldMoveSucceeded], a
 	ret
 
 .Jumptable:
-	dw TryTeleport
-	dw DoTeleport
-	dw FailTeleport
+	dw .TryTeleport
+	dw .DoTeleport
+	dw .FailTeleport
 
-TryTeleport:
+.TryTeleport:
 	call GetMapEnvironment
 	call CheckOutdoorMap
-	jr z, .asm_cc85
-	jr .asm_cc9c
+	jr z, .CheckIfSpawnPoint
+	jr .nope
 
-.asm_cc85
+.CheckIfSpawnPoint:
 	ld a, [wLastSpawnMapGroup]
 	ld d, a
 	ld a, [wLastSpawnMapNumber]
 	ld e, a
-	ld a, $5
-	ld hl, $5465
-	rst FarCall
-	jr nc, .asm_cc9c
+	farcall IsSpawnPoint
+	jr nc, .nope
 	ld a, c
 	ld [wDefaultSpawnpoint], a
 	ld a, $1
 	ret
 
-.asm_cc9c
+.nope
 	ld a, $2
 	ret
 
-DoTeleport:
-	call FieldMoveGetPartyNick
-	ld hl, TeleportScript
+.DoTeleport:
+	call GetPartyNick
+	ld hl, .TeleportScript
 	call QueueScript
 	ld a, $81
 	ret
 
-FailTeleport:
-	ld hl, Text_CantUseTeleportHere
+.FailTeleport:
+	ld hl, .CantUseTeleportText
 	call MenuTextboxBackup
 	ld a, $80
 	ret
 
-Text_ReturnToLastMonCenter:
-	text_far Text_ReturnToLastMonCenter_
-	db "@"
+.TeleportReturnText:
+	text_far _TeleportReturnText
+	text_end
 
-Text_CantUseTeleportHere:
-	text_far Text_CantUseTeleportHere_
-	db "@"
+.CantUseTeleportText:
+	text_far _CantUseTeleportText
+	text_end
 
-TeleportScript: ; ccbe
+.TeleportScript:
 	reloadmappart
 	special UpdateTimePals
-	writetext Text_ReturnToLastMonCenter
+	writetext .TeleportReturnText
 	pause 60
 	reloadmappart
 	closetext
 	playsound SFX_WARP_TO
-	applymovement PLAYER, TeleportFromMovementData
+	applymovement PLAYER, .TeleportFrom
 	farscall Script_AbortBugContest
 	special WarpToSpawnPoint
 	loadvar VAR_MOVEMENT, PLAYER_NORMAL
 	newloadmap MAPSETUP_TELEPORT
 	playsound SFX_WARP_FROM
-	applymovement PLAYER, TeleportToMovementData
+	applymovement PLAYER, .TeleportTo
 	end
 
-TeleportFromMovementData: ; cce4
+.TeleportFrom:
 	teleport_from
 	step_end
 
-TeleportToMovementData:
+.TeleportTo:
 	teleport_to
 	step_end
 
 StrengthFunction:
-	call Functionccf1
+	call .TryStrength
 	and $7f
 	ld [wFieldMoveSucceeded], a
 	ret
 
-Functionccf1: ; ccf1 (3:4cf1)
+.TryStrength:
+; Strength
 	ld de, ENGINE_PLAINBADGE
-	call FieldMoveBadgeCheck
-	jr c, asm_cd09
-	jr asm_cd0c
+	call CheckBadge
+	jr c, .Failed
+	jr .UseStrength
 
-	ld hl, Text_AlreadyUsingStrength
+.Unreferenced_AlreadyUsing:
+	ld hl, .AlreadyUsingStrengthText
 	call MenuTextboxBackup
 	ld a, $80
 	ret
 
-Text_AlreadyUsingStrength:
-	text_far Text_AlreadyUsingStrength_
-	db "@"
+.AlreadyUsingStrengthText:
+	text_far _AlreadyUsingStrengthText
+	text_end
 
-asm_cd09:
+.Failed:
 	ld a, $80
 	ret
 
-asm_cd0c:
+.UseStrength:
 	ld hl, Script_StrengthFromMenu
 	call QueueScript
 	ld a, $81
 	ret
 
-GetStrengthUserSpeciesAndSetFlag:
-	SetFlag ENGINE_STRENGTH_ACTIVE
+SetStrengthFlag:
+	ld hl, wBikeFlags
+	set BIKEFLAGS_STRENGTH_ACTIVE_F, [hl]
 	ld a, [wCurPartyMon]
 	ld e, a
-	ld d, $0
+	ld d, 0
 	ld hl, wPartySpecies
 	add hl, de
 	ld a, [hl]
 	ld [wBuffer6], a
-	call FieldMoveGetPartyNick
+	call GetPartyNick
 	ret
 
-Script_StrengthFromMenu: ; cd2c
+Script_StrengthFromMenu:
 	reloadmappart
 	special UpdateTimePals
+
 Script_UsedStrength:
-	callasm GetStrengthUserSpeciesAndSetFlag
-	writetext Text_UsedStrength
+	callasm SetStrengthFlag
+	writetext .UseStrengthText
 	readmem wBuffer6
 	cry 0
 	pause 3
-	writetext Text_AllowedToMoveBoulders
+	writetext .MoveBoulderText
 	closetext
 	end
 
-Text_UsedStrength: ; cd44
-	text_far Text_UsedStrength_
-	db "@"
+.UseStrengthText:
+	text_far _UseStrengthText
+	text_end
 
-Text_AllowedToMoveBoulders:
-	text_far Text_AllowedToMoveBoulders_
-	db "@"
+.MoveBoulderText:
+	text_far _MoveBoulderText
+	text_end
 
-AskStrengthScript: ; cd4e
+AskStrengthScript:
 	callasm TryStrengthOW
-	iffalse .ask
-	ifequal 1, .not_able
-	sjump .already_active
+	iffalse .AskStrength
+	ifequal $1, .DontMeetRequirements
+	sjump .AlreadyUsedStrength
 
-.not_able
-	jumptext Text_MonMayBeAbleToMove
+.DontMeetRequirements:
+	jumptext BouldersMayMoveText
 
-.already_active
-	jumptext Text_BouldersMayNowBeMoved
+.AlreadyUsedStrength:
+	jumptext BouldersMoveText
 
-.ask
+.AskStrength:
 	opentext
-	writetext Text_AskStrength
+	writetext AskStrengthText
 	yesorno
 	iftrue Script_UsedStrength
 	closetext
 	end
 
-Text_AskStrength:
-	text_far Text_AskStrength_
-	db "@"
+AskStrengthText:
+	text_far _AskStrengthText
+	text_end
 
-Text_BouldersMayNowBeMoved:
-	text_far Text_BouldersMayNowBeMoved_
-	db "@"
+BouldersMoveText:
+	text_far _BouldersMoveText
+	text_end
 
-Text_MonMayBeAbleToMove:
-	text_far Text_MonMayBeAbleToMove_
-	db "@"
+BouldersMayMoveText:
+	text_far _BouldersMayMoveText
+	text_end
 
 TryStrengthOW:
 	ld d, STRENGTH
-	call FieldMovePartyCheck
-	jr c, .asm_cd95
+	call CheckPartyMove
+	jr c, .nope
+
 	ld de, ENGINE_PLAINBADGE
-	call FieldMoveEngineFlagCheck
-	jr c, .asm_cd95
-	CheckFlagHL ENGINE_STRENGTH_ACTIVE
-	jr z, .asm_cd99
-	ld a, $2
-	jr .asm_cd9c
+	call CheckEngineFlag
+	jr c, .nope
 
-.asm_cd95
-	ld a, $1
-	jr .asm_cd9c
+	ld hl, wBikeFlags
+	bit BIKEFLAGS_STRENGTH_ACTIVE_F, [hl]
+	jr z, .already_using
 
-.asm_cd99
+	ld a, 2
+	jr .done
+
+.nope
+	ld a, 1
+	jr .done
+
+.already_using
 	xor a
-	jr .asm_cd9c
+	jr .done
 
-.asm_cd9c
+.done
 	ld [wScriptVar], a
 	ret
 
 WhirlpoolFunction:
-	call FieldMoveBufferReset
-.asm_cda3
-	ld hl, .Jumptable
-	call DoFieldMoveAction
-	jr nc, .asm_cda3
+	call FieldMoveJumptableReset
+.loop
+	ld hl, Jumptable_cdae
+	call FieldMoveJumptable
+	jr nc, .loop
 	and $7f
 	ld [wFieldMoveSucceeded], a
 	ret
 
-.Jumptable
-	dw TryWhirlpool
-	dw DoWhirlpool
-	dw FailWhirlpool
+Jumptable_cdae:
+	dw .TryWhirlpool
+	dw .DoWhirlpool
+	dw .FailWhirlpool
 
-TryWhirlpool:
+.TryWhirlpool:
 	ld de, ENGINE_GLACIERBADGE
-	call FieldMoveBadgeCheck
-	jr c, .asm_cdca
+	call CheckBadge
+	jr c, .noglacierbadge
 	call TryWhirlpoolMenu
-	jr c, .asm_cdc7
+	jr c, .failed
 	ld a, $1
 	ret
 
-.asm_cdc7
+.failed
 	ld a, $2
 	ret
 
-.asm_cdca
+.noglacierbadge
 	ld a, $80
 	ret
 
-DoWhirlpool:
+.DoWhirlpool:
 	ld hl, Script_WhirlpoolFromMenu
 	call QueueScript
 	ld a, $81
 	ret
 
-FailWhirlpool:
+.FailWhirlpool:
 	call FieldMoveFailed
 	ld a, $80
 	ret
 
-Text_UsedWhirlpool:
-	text_far Text_UsedWhirlpool_
-	db "@"
+UseWhirlpoolText:
+	text_far _UseWhirlpoolText
+	text_end
 
-TryWhirlpoolMenu: ; cde1 (3:4de1)
+TryWhirlpoolMenu:
 	call GetFacingTileCoord
 	ld c, a
 	push de
 	call CheckWhirlpoolTile
 	pop de
-	jr c, .asm_ce0c
+	jr c, .failed
 	call GetBlockLocation
 	ld c, [hl]
 	push hl
 	ld hl, WhirlpoolBlockPointers
 	call CheckOverworldTileArrays
 	pop hl
-	jr nc, .asm_ce0c
+	jr nc, .failed
 	ld a, l
 	ld [wBuffer3], a
 	ld a, h
@@ -1114,22 +1135,23 @@ TryWhirlpoolMenu: ; cde1 (3:4de1)
 	xor a
 	ret
 
-.asm_ce0c
+.failed
 	scf
 	ret
 
-Script_WhirlpoolFromMenu: ; 4e0e
+Script_WhirlpoolFromMenu:
 	reloadmappart
 	special UpdateTimePals
+
 Script_UsedWhirlpool:
-	callasm FieldMoveGetPartyNick
-	writetext Text_UsedWhirlpool
+	callasm GetPartyNick
+	writetext UseWhirlpoolText
 	reloadmappart
 	callasm DisappearWhirlpool
 	closetext
 	end
 
-DisappearWhirlpool: ; 4e20
+DisappearWhirlpool:
 	ld hl, wBuffer3
 	ld a, [hli]
 	ld h, [hl]
@@ -1148,44 +1170,44 @@ DisappearWhirlpool: ; 4e20
 
 TryWhirlpoolOW::
 	ld d, WHIRLPOOL
-	call FieldMovePartyCheck
-	jr c, .asm_ce5f
+	call CheckPartyMove
+	jr c, .failed
 	ld de, ENGINE_GLACIERBADGE
-	call FieldMoveEngineFlagCheck
-	jr c, .asm_ce5f
+	call CheckEngineFlag
+	jr c, .failed
 	call TryWhirlpoolMenu
-	jr c, .asm_ce5f
+	jr c, .failed
 	ld a, BANK(Script_AskWhirlpoolOW)
-	ld hl, Script_AskWhirlpoolOW ; $4e71
+	ld hl, Script_AskWhirlpoolOW
 	call CallScript
 	scf
 	ret
 
-.asm_ce5f
+.failed
 	ld a, BANK(Script_MightyWhirlpool)
-	ld hl, Script_MightyWhirlpool ; $4e69
+	ld hl, Script_MightyWhirlpool
 	call CallScript
 	scf
 	ret
 
 Script_MightyWhirlpool:
-	jumptext Text_MightyWhirlpool
+	jumptext .MayPassWhirlpoolText
 
-Text_MightyWhirlpool:
-	text_far Text_MightyWhirlpool_
-	db "@"
+.MayPassWhirlpoolText:
+	text_far _MayPassWhirlpoolText
+	text_end
 
-Script_AskWhirlpoolOW: ; ce71
+Script_AskWhirlpoolOW:
 	opentext
-	writetext Text_AskWhirlpool
+	writetext AskWhirlpoolText
 	yesorno
 	iftrue Script_UsedWhirlpool
 	closetext
 	end
 
-Text_AskWhirlpool: ; ce7b
-	text_far Text_AskWhirlpool_
-	db "@"
+AskWhirlpoolText:
+	text_far _AskWhirlpoolText
+	text_end
 
 HeadbuttFunction:
 	call TryHeadbuttFromMenu
@@ -1193,76 +1215,80 @@ HeadbuttFunction:
 	ld [wFieldMoveSucceeded], a
 	ret
 
-TryHeadbuttFromMenu: ; ce89 (3:4e89)
+TryHeadbuttFromMenu:
 	call GetFacingTileCoord
 	call CheckHeadbuttTreeTile
-	jr nz, .asm_ce9a
-	ld hl, HeadbuttFromMenuScript ; $4eaa
+	jr nz, .no_tree
+
+	ld hl, HeadbuttFromMenuScript
 	call QueueScript
 	ld a, $81
 	ret
 
-.asm_ce9a
+.no_tree
 	call FieldMoveFailed
 	ld a, $80
 	ret
 
-; ceaa
-Text_DidAHeadbutt:
-	text_far Text_DidAHeadbutt_
-	db "@"
+UseHeadbuttText:
+	text_far _UseHeadbuttText
+	text_end
 
-Text_NothingFromHeadbutt:
-	text_far Text_NothingFromHeadbutt_
-	db "@"
+HeadbuttNothingText:
+	text_far _HeadbuttNothingText
+	text_end
 
 HeadbuttFromMenuScript:
 	reloadmappart
 	special UpdateTimePals
+
 HeadbuttScript:
-	callasm FieldMoveGetPartyNick
-	writetext Text_DidAHeadbutt
+	callasm GetPartyNick
+	writetext UseHeadbuttText
+
 	reloadmappart
 	callasm ShakeHeadbuttTree
+
 	callasm TreeMonEncounter
-	iffalse .nope_nothing
+	iffalse .no_battle
 	closetext
 	randomwildmon
 	startbattle
 	reloadmapafterbattle
 	end
 
-.nope_nothing:
-	writetext Text_NothingFromHeadbutt
+.no_battle
+	writetext HeadbuttNothingText
 	waitbutton
 	closetext
 	end
 
 TryHeadbuttOW::
 	ld d, HEADBUTT
-	call FieldMovePartyCheck
-	jr c, .asm_cedd
+	call CheckPartyMove
+	jr c, .no
+
 	ld a, BANK(AskHeadbuttScript)
-	ld hl, AskHeadbuttScript ; $4edf
+	ld hl, AskHeadbuttScript
 	call CallScript
 	scf
 	ret
 
-.asm_cedd
+.no
 	xor a
 	ret
 
 AskHeadbuttScript:
 	opentext
-	writetext Text_AskHeadbutt
+	writetext AskHeadbuttText
 	yesorno
 	iftrue HeadbuttScript
 	closetext
 	end
 
-Text_AskHeadbutt: ; cee9
-	text_far Text_AskHeadbutt_
-	db "@"
+AskHeadbuttText:
+	text_far _AskHeadbuttText
+	text_end
 
 RockSmashFunction:
 	call TryRockSmashFromMenu
@@ -1270,177 +1296,178 @@ RockSmashFunction:
 	ld [wFieldMoveSucceeded], a
 	ret
 
-TryRockSmashFromMenu: ; cef7 (3:4ef7)
+TryRockSmashFromMenu:
 	call GetFacingObject
-	jr c, .asm_cf0a
+	jr c, .no_rock
 	ld a, d
 	cp $18
-	jr nz, .asm_cf0a
-	ld hl, RockSmashFromMenuScript ; $4f31
+	jr nz, .no_rock
+
+	ld hl, RockSmashFromMenuScript
 	call QueueScript
 	ld a, $81
 	ret
 
-.asm_cf0a
+.no_rock
 	call FieldMoveFailed
 	ld a, $80
 	ret
 
-GetFacingObject: ; cf10 (3:4f10)
+GetFacingObject:
 	farcall CheckFacingObject
-	jr nc, .asm_cf2f
+	jr nc, .fail
+
 	ldh a, [hObjectStructIndexBuffer]
 	call GetObjectStruct
-	ld hl, $1
+	ld hl, OBJECT_MAP_OBJECT_INDEX
 	add hl, bc
 	ld a, [hl]
 	ldh [hLastTalked], a
 	call GetMapObject
-	ld hl, $4
+	ld hl, MAPOBJECT_MOVEMENT
 	add hl, bc
 	ld a, [hl]
 	ld d, a
 	and a
 	ret
 
-.asm_cf2f
+.fail
 	scf
 	ret
 
-RockSmashFromMenuScript: ; cf31
+RockSmashFromMenuScript:
 	reloadmappart
 	special UpdateTimePals
+
 RockSmashScript:
-	callasm FieldMoveGetPartyNick
-	writetext Text_UsedRockSmash
+	callasm GetPartyNick
+	writetext UseRockSmashText
 	closetext
 	special WaitSFX
 	playsound SFX_STRENGTH
 	earthquake 84
-	applymovementlasttalked RockSmashMovementData
+	applymovementlasttalked MovementData_RockSmash
 	disappear -2
 
 	callasm RockMonEncounter
 	readmem wTempWildMonSpecies
-	iffalse .skip_battle
+	iffalse .done
 	randomwildmon
 	startbattle
 	reloadmapafterbattle
-.skip_battle
+.done
 	end
 
-RockSmashMovementData:
+MovementData_RockSmash:
 	rock_smash 10
 	step_end
 
-Text_UsedRockSmash:
-	text_far Text_UsedRockSmash_
-	db "@"
-; cf60
+UseRockSmashText:
+	text_far _UseRockSmashText
+	text_end
+
 AskRockSmashScript:
-	callasm TryRockSmashOW
-	ifequal 1, .fail
+	callasm HasRockSmash
+	ifequal 1, .no
+
 	opentext
-	writetext Text_AskRockSmash
+	writetext AskRockSmashText
 	yesorno
 	iftrue RockSmashScript
 	closetext
 	end
-.fail
-	jumptext Text_MayBeBreakable
+.no
+	jumptext MaySmashText
 
-Text_MayBeBreakable:
-	text_far Text_MayBeBreakable_
-	db "@"
+MaySmashText:
+	text_far _MaySmashText
+	text_end
 
-Text_AskRockSmash:
-	text_far Text_AskRockSmash_
-	db "@"
+AskRockSmashText:
+	text_far _AskRockSmashText
+	text_end
 
-TryRockSmashOW: ; cf7f
+HasRockSmash:
 	ld d, ROCK_SMASH
-	call FieldMovePartyCheck
-	jr nc, .asm_cf8a
-	ld a, $1
-	jr .asm_cf8d
-
-.asm_cf8a
+	call CheckPartyMove
+	jr nc, .yes
+.no
+	ld a, 1
+	jr .done
+.yes
 	xor a
-	jr .asm_cf8d
-
-.asm_cf8d
+	jr .done
+.done
 	ld [wScriptVar], a
 	ret
 
-FishingRodFunction: ; cf91
+FishFunction:
 	ld a, e
 	push af
-	call FieldMoveBufferReset
+	call FieldMoveJumptableReset
 	pop af
 	ld [wBuffer2], a
-.asm_cf9a
-	ld hl, .Jumptable ; $4fa8
-	call DoFieldMoveAction
-	jr nc, .asm_cf9a
+.loop
+	ld hl, .FishTable
+	call FieldMoveJumptable
+	jr nc, .loop
 	and $7f
 	ld [wFieldMoveSucceeded], a
 	ret
 
-.Jumptable
-	dw Fish_CheckMap ; 3:4fb2
-	dw Fish_NoBite ; 3:5005
-	dw Fish_GotSomething ; 3:4ff7
-	dw Fish_Failed ; 3:4ff4
-	dw Fish_NoFish ; 3:5013
+.FishTable:
+	dw .TryFish
+	dw .FishNoBite
+	dw .FishGotSomething
+	dw .FailFish
+	dw .FishNoFish
 
-Fish_CheckMap:
+.TryFish:
 	ld a, [wPlayerState]
 	cp PLAYER_SURF
-	jr z, .asm_cfc7
+	jr z, .fail
 	cp PLAYER_SURF_PIKA
-	jr z, .asm_cfc7
+	jr z, .fail
 	call GetFacingTileCoord
 	call GetTileCollision
-	cp $1
-	jr z, .asm_cfca
-.asm_cfc7
+	cp WATER_TILE
+	jr z, .facingwater
+.fail
 	ld a, $3
 	ret
 
-.asm_cfca
+.facingwater
 	call GetFishingGroup
 	and a
-	jr nz, .asm_cfd3
+	jr nz, .goodtofish
 	ld a, $4
 	ret
 
-.asm_cfd3
+.goodtofish
 	ld d, a
 	ld a, [wBuffer2]
 	ld e, a
-	ld a, $24
-	ld hl, $697a
-	rst FarCall
+	farcall Fish
 	ld a, d
 	and a
-	jr z, .asm_cff1
+	jr z, .nonibble
 	ld [wTempWildMonSpecies], a
 	ld a, e
 	ld [wCurPartyLevel], a
-	ld a, $4
+	ld a, BATTLETYPE_FISH
 	ld [wBattleType], a
 	ld a, $2
 	ret
 
-.asm_cff1
+.nonibble
 	ld a, $1
 	ret
 
-Fish_Failed:
+.FailFish:
 	ld a, $80
 	ret
 
-Fish_GotSomething:
+.FishGotSomething:
 	ld a, $1
 	ld [wBuffer6], a
 	ld hl, Script_GotABite
@@ -1448,7 +1475,7 @@ Fish_GotSomething:
 	ld a, $81
 	ret
 
-Fish_NoBite:
+.FishNoBite:
 	ld a, $2
 	ld [wBuffer6], a
 	ld hl, Script_NotEvenANibble
@@ -1456,7 +1483,7 @@ Fish_NoBite:
 	ld a, $81
 	ret
 
-Fish_NoFish:
+.FishNoFish:
 	ld a, $0
 	ld [wBuffer6], a
 	ld hl, Script_NotEvenANibble2
@@ -1464,32 +1491,34 @@ Fish_NoFish:
 	ld a, $81
 	ret
 
-Script_NotEvenANibble: ; d021
+Script_NotEvenANibble:
 	scall Script_FishCastRod
-	writetext Text_NotEvenANibble
-	sjump Script_NotEvenANibble_Continue
+	writetext RodNothingText
+	sjump Script_NotEvenANibble_FallThrough
 
 Script_NotEvenANibble2:
 	scall Script_FishCastRod
-	writetext Text_NotEvenANibble
-Script_NotEvenANibble_Continue:
+	writetext RodNothingText
+
+Script_NotEvenANibble_FallThrough:
 	callasm PutTheRodAway
 	closetext
 	end
 
 Script_GotABite:
 	scall Script_FishCastRod
-	callasm Fish_CheckFacingUp
-	iffalse .not_facing_up
-	applymovement 0, Movement_Fishing_BiteFacingUp
-	sjump .continue
+	callasm Fishing_CheckFacingUp
+	iffalse .NotFacingUp
+	applymovement PLAYER, .Movement_FacingUp
+	sjump .FightTheHookedPokemon
 
-.not_facing_up
-	applymovement 0, Movement_Fishing_BiteNotFacingUp
-.continue
+.NotFacingUp:
+	applymovement PLAYER, .Movement_NotFacingUp
+
+.FightTheHookedPokemon:
 	pause 40
-	applymovement 0, Movement_Fishing_RestoreRod
-	writetext Text_OhABite
+	applymovement PLAYER, .Movement_RestoreRod
+	writetext RodBiteText
 	callasm PutTheRodAway
 	closetext
 	randomwildmon
@@ -1497,8 +1526,7 @@ Script_GotABite:
 	reloadmapafterbattle
 	end
 
-
-Movement_Fishing_BiteNotFacingUp:
+.Movement_NotFacingUp:
 	fish_got_bite
 	fish_got_bite
 	fish_got_bite
@@ -1506,7 +1534,7 @@ Movement_Fishing_BiteNotFacingUp:
 	show_emote
 	step_end
 
-Movement_Fishing_BiteFacingUp:
+.Movement_FacingUp:
 	fish_got_bite
 	fish_got_bite
 	fish_got_bite
@@ -1515,38 +1543,39 @@ Movement_Fishing_BiteFacingUp:
 	show_emote
 	step_end
 
-Movement_Fishing_RestoreRod:
+.Movement_RestoreRod:
 	hide_emote
 	fish_cast_rod
 	step_end
 
-Fish_CheckFacingUp: ; d06d
+Fishing_CheckFacingUp:
 	ld a, [wPlayerDirection]
 	and $c
 	cp OW_UP
 	ld a, $1
-	jr z, .asm_d079
+	jr z, .up
 	xor a
-.asm_d079
+
+.up
 	ld [wScriptVar], a
 	ret
 
-Script_FishCastRod: ; d07d
+Script_FishCastRod:
 	reloadmappart
 	loadmem hBGMapMode, $0
 	special UpdateTimePals
 	loademote EMOTE_ROD
 	callasm LoadFishingGFX
 	loademote EMOTE_SHOCK
-	applymovement PLAYER, Movement_CastRod
+	applymovement PLAYER, MovementData_CastRod
 	pause 40
 	end
 
-Movement_CastRod:
+MovementData_CastRod:
 	fish_cast_rod
 	step_end
 
-PutTheRodAway: ; d096
+PutTheRodAway:
 	hlcoord 1, 14
 	lb bc, $3, $12
 	call ClearBox
@@ -1559,38 +1588,38 @@ PutTheRodAway: ; d096
 	call ReplaceChrisSprite
 	ret
 
-Text_OhABite:
-	text_far Text_OhABite_
-	db "@"
+RodBiteText:
+	text_far _RodBiteText
+	text_end
 
-Text_NotEvenANibble:
-	text_far Text_NotEvenANibble_
-	db "@"
+RodNothingText:
+	text_far _RodNothingText
+	text_end
 
-Text_NothingHereToFish:
-	text_far Text_NothingHereToFish_
-	db "@"
+UnusedNothingHereText: ; unused
+	text_far _UnusedNothingHereText
+	text_end
 
-BicycleFunction:
-	call Functiond0c9
+BikeFunction:
+	call .TryBike
 	and $7f
 	ld [wFieldMoveSucceeded], a
 	ret
 
-Functiond0c9: ; d0c9 (3:50c9)
-	call CheckBikePermission
-	jr c, .cant_bike
+.TryBike:
+	call .CheckEnvironment
+	jr c, .CannotUseBike
 	ld a, [wPlayerState]
 	cp PLAYER_NORMAL
-	jr z, .get_on_bike
+	jr z, .GetOnBike
 	cp PLAYER_BIKE
-	jr z, .get_off_bike
-	jr .cant_bike
+	jr z, .GetOffBike
+	jr .CannotUseBike
 
-.get_on_bike
+.GetOnBike:
 	ld hl, Script_GetOnBike
 	ld de, Script_GetOnBike_Register
-	call ChooseScriptBasedOnWhetherBikeIsRegistered
+	call .CheckIfRegistered
 	call QueueScript
 	xor a
 	ld [wMusicFade], a
@@ -1605,30 +1634,30 @@ Functiond0c9: ; d0c9 (3:50c9)
 	ld a, $1
 	ret
 
-.get_off_bike
+.GetOffBike:
 	ld hl, wBikeFlags
-	bit 1, [hl]
-	jr nz, .asm_d118
+	bit BIKEFLAGS_ALWAYS_ON_BIKE_F, [hl]
+	jr nz, .CantGetOffBike
 	ld hl, Script_GetOffBike
 	ld de, Script_GetOffBike_Register
-	call ChooseScriptBasedOnWhetherBikeIsRegistered
-	ld a, $3
-	jr .queue_off
+	call .CheckIfRegistered
+	ld a, BANK(Script_GetOffBike)
+	jr .done
 
-.asm_d118
+.CantGetOffBike:
 	ld hl, Script_CantGetOffBike
-	jr .queue_off
+	jr .done
 
-.cant_bike
+.CannotUseBike:
 	ld a, $0
 	ret
 
-.queue_off
+.done
 	call QueueScript
 	ld a, $1
 	ret
 
-ChooseScriptBasedOnWhetherBikeIsRegistered: ; d126 (3:5126)
+.CheckIfRegistered:
 	ld a, [wUsingItemWithSelect]
 	and a
 	ret z
@@ -1636,28 +1665,28 @@ ChooseScriptBasedOnWhetherBikeIsRegistered: ; d126 (3:5126)
 	ld l, e
 	ret
 
-CheckBikePermission: ; d12e (3:512e)
+.CheckEnvironment:
 	call GetMapEnvironment
 	call CheckOutdoorMap
-	jr z, .asm_d140
+	jr z, .ok
 	cp CAVE
-	jr z, .asm_d140
+	jr z, .ok
 	cp GATE
-	jr z, .asm_d140
-	jr .asm_d149
+	jr z, .ok
+	jr .nope
 
-.asm_d140
+.ok
 	call GetPlayerStandingTile
-	and $f
-	jr nz, .asm_d149
+	and $f ; lo nybble only
+	jr nz, .nope ; not FLOOR_TILE
 	xor a
 	ret
 
-.asm_d149
+.nope
 	scf
 	ret
 
-Script_GetOnBike: ; d14b
+Script_GetOnBike:
 	reloadmappart
 	special UpdateTimePals
 	loadvar VAR_MOVEMENT, PLAYER_BIKE
@@ -1673,6 +1702,7 @@ Script_GetOnBike_Register:
 	special ReplaceChrisSprite
 	end
 
+; unused
 	nop
 	ret
 
@@ -1682,6 +1712,7 @@ Script_GetOffBike:
 	loadvar VAR_MOVEMENT, PLAYER_NORMAL
 	writetext GotOffBikeText
 	waitbutton
+
 FinishGettingOffBike:
 	closetext
 	special ReplaceChrisSprite
@@ -1710,54 +1741,55 @@ GotOffBikeText:
 	text_far _GotOffBikeText
 	text_end
 
-
 TryCutOW::
 	ld d, CUT
-	call FieldMovePartyCheck
-	jr c, .asm_d1ac
+	call CheckPartyMove
+	jr c, .cant_cut
+
 	ld de, ENGINE_HIVEBADGE
-	call FieldMoveEngineFlagCheck
-	jr c, .asm_d1ac
+	call CheckEngineFlag
+	jr c, .cant_cut
+
 	ld a, BANK(AskCutScript)
 	ld hl, AskCutScript
 	call CallScript
 	scf
 	ret
 
-.asm_d1ac
+.cant_cut
 	ld a, BANK(CantCutScript)
 	ld hl, CantCutScript
 	call CallScript
 	scf
 	ret
 
-AskCutScript: ; d1b6
+AskCutScript:
 	opentext
-	writetext Text_AskCut
+	writetext AskCutText
 	yesorno
 	iffalse .declined
-	callasm CheckMapForSomethingToCut_
+	callasm .CheckMap
 	iftrue Script_Cut
-.declined:
+.declined
 	closetext
 	end
 
-CheckMapForSomethingToCut_: ; d1c7
+.CheckMap:
 	xor a
 	ld [wScriptVar], a
 	call CheckMapForSomethingToCut
 	ret c
-	ld a, $1
+	ld a, TRUE
 	ld [wScriptVar], a
 	ret
 
-Text_AskCut:
-	text_far Text_AskCut_
-	db "@"
+AskCutText:
+	text_far _AskCutText
+	text_end
 
-CantCutScript: ; d1da
-	jumptext Text_MonCanCutThis
+CantCutScript:
+	jumptext CanCutText
 
-Text_MonCanCutThis:
-	text_far Text_MonCanCutThis_
-	db "@"
+CanCutText:
+	text_far _CanCutText
+	text_end

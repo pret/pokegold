@@ -7,7 +7,7 @@ DoPlayerMovement:: ; 10000 (4:4000)
 	call Function1002d
 	ld c, a
 	ld a, [wMovementAnimation]
-	ld [wce87], a
+	ld [wPlayerNextMovement], a
 	ret
 
 Function10017: ; 10017 (4:4017)
@@ -725,7 +725,7 @@ CheckStandingOnIce::
 	ret
 
 StopPlayerForEvent::
-	ld hl, wce87
+	ld hl, wPlayerNextMovement
 	ld a, $3e
 	cp [hl]
 	ret z

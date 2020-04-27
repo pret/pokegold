@@ -1,80 +1,80 @@
-CantSurfText_::
+_CantSurfText::
 	text "You can't SURF"
 	line "here."
 	prompt
 
-AlreadySurfingText_::
+_AlreadySurfingText::
 	text "You're already"
 	line "SURFING."
 	prompt
 
-AskSurfText_::
+_AskSurfText::
 	text "The water is calm."
 	line "Want to SURF?"
 	done
 
-Text_UsedWaterfall_::
+_UseWaterfallText::
 	text_ram wStringBuffer2
 	text " used"
 	line "WATERFALL!"
 	done
 
-Text_CantDoWaterfall_::
+_HugeWaterfallText::
 	text "Wow, it's a huge"
 	line "waterfall."
 	done
 
-Text_AskUseWaterfall_::
+_AskWaterfallText::
 	text "Do you want to use"
 	line "WATERFALL?"
 	done
 
-Text_UsedDig_::
+_UseDigText::
 	text_ram wStringBuffer2
 	text " used"
 	line "DIG!"
 	done
 
-Text_UsedEscapeRope_::
+_UseEscapeRopeText::
 	text "<PLAYER> used an"
 	line "ESCAPE ROPE."
 	done
 
-Text_CantUseDigEscapeRopeHere_::
+_CantUseDigText::
 	text "Can't use that"
 	line "here."
 	done
 
-Text_ReturnToLastMonCenter_::
+_TeleportReturnText::
 	text "Return to the last"
 	line "#MON CENTER."
 	done
 
-Text_CantUseTeleportHere_::
+_CantUseTeleportText::
 	text "Can't use that"
 	line "here."
 
 	para ""
 	done
 
-Text_AlreadyUsingStrength_::
+_AlreadyUsingStrengthText::
 	text "A #MON is using"
 	line "STRENGTH already."
 	prompt
 
-Text_UsedStrength_::
+_UseStrengthText::
 	text_ram wStringBuffer2
 	text " used"
 	line "STRENGTH!"
 	done
 
-Text_AllowedToMoveBoulders_::
+_MoveBoulderText::
 	text_ram wStringBuffer1
 	text " can"
 	line "move boulders."
 	prompt
 
-Text_AskStrength_::
+_AskStrengthText::
 	text "A #MON may be"
 	line "able to move this."
 
@@ -82,23 +82,23 @@ Text_AskStrength_::
 	line "STRENGTH?"
 	done
 
-Text_BouldersMayNowBeMoved_::
+_BouldersMoveText::
 	text "Boulders may now"
 	line "be moved!"
 	done
 
-Text_MonMayBeAbleToMove_::
+_BouldersMayMoveText::
 	text "A #MON may be"
 	line "able to move this."
 	done
 
-Text_UsedWhirlpool_::
+_UseWhirlpoolText::
 	text_ram wStringBuffer2
 	text " used"
 	line "WHIRLPOOL!"
 	prompt
 
-Text_MightyWhirlpool_::
+_MayPassWhirlpoolText::
 	text "It's a vicious"
 	line "whirlpool!"
 
@@ -106,7 +106,7 @@ Text_MightyWhirlpool_::
 	line "able to pass it."
 	done
 
-Text_AskWhirlpool_::
+_AskWhirlpoolText::
 	text "A whirlpool is in"
 	line "the way."
 
@@ -114,17 +114,17 @@ Text_AskWhirlpool_::
 	line "WHIRLPOOL?"
 	done
 
-Text_DidAHeadbutt_::
+_UseHeadbuttText::
 	text_ram wStringBuffer2
 	text " did a"
 	line "HEADBUTT!"
 	prompt
 
-Text_NothingFromHeadbutt_::
+_HeadbuttNothingText::
 	text "Nope. Nothing…"
 	done
 
-Text_AskHeadbutt_::
+_AskHeadbuttText::
 	text "A #MON could be"
 	line "in this tree."
 
@@ -132,18 +132,18 @@ Text_AskHeadbutt_::
 	line "it?"
 	done
 
-Text_UsedRockSmash_::
+_UseRockSmashText::
 	text_ram wStringBuffer2
 	text " used"
 	line "ROCK SMASH!"
 	prompt
 
-Text_MayBeBreakable_::
+_MaySmashText::
 	text "A #MON may be"
 	line "able to break it."
 	done
 
-Text_AskRockSmash_::
+_AskRockSmashText::
 	text "This rock looks"
 	line "breakable."
 
@@ -151,16 +151,16 @@ Text_AskRockSmash_::
 	line "SMASH?"
 	done
 
-Text_OhABite_::
+_RodBiteText::
 	text "Oh!"
 	line "A bite!"
 	prompt
 
-Text_NotEvenANibble_::
+_RodNothingText::
 	text "Not even a nibble!"
 	prompt
 
-Text_NothingHereToFish_::
+_UnusedNothingHereText::
 	text "Looks like there's"
 	line "nothing here."
 	prompt
@@ -184,14 +184,14 @@ _GotOffBikeText::
 	text "."
 	done
 
-Text_AskCut_::
+_AskCutText::
 	text "This tree can be"
 	line "CUT!"
 
 	para "Want to use CUT?"
 	done
 
-Text_MonCanCutThis_::
+_CanCutText::
 	text "This tree can be"
 	line "CUT!"
 	done

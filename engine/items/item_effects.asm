@@ -1005,7 +1005,7 @@ TownMap: ; ee55 (3:6e55)
 	ret
 
 Bicycle: ; ee5c
-	farcall BicycleFunction ; same bank
+	farcall BikeFunction ; same bank
 	ret
 
 FireStone: ; ee63
@@ -2146,7 +2146,7 @@ SuperRod: ; f5f4 (3:75f4)
 	jr UseRod
 
 UseRod:
-	farcall FishingRodFunction ; same bank
+	farcall FishFunction
 	ret
 
 ItemfinderEffect: ; f5ff (3:75ff)

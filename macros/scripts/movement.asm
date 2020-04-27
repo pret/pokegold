@@ -213,8 +213,3 @@ return_dig: MACRO
 	db movement_return_dig
 	db \1 ; length
 ENDM
-
-	enum movement_skyfall_top ; $59
-skyfall_top: MACRO
-	db movement_skyfall_top
-ENDM

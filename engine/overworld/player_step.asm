@@ -26,12 +26,12 @@ _HandlePlayerStep::
 	ld d, a
 	ld a, [wPlayerStepVectorY]
 	ld e, a
-	ld a, [wce81]
+	ld a, [wPlayerBGMapOffsetX]
 	sub d
-	ld [wce81], a
-	ld a, [wce82]
+	ld [wPlayerBGMapOffsetX], a
+	ld a, [wPlayerBGMapOffsetY]
 	sub e
-	ld [wce82], a
+	ld [wPlayerBGMapOffsetY], a
 	ret
 
 ScrollScreen::

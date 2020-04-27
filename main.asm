@@ -691,9 +691,9 @@ ShakeHeadbuttTree::
 	dr $8ca8e, $8cbb8
 OWCutAnimation::
 	dr $8cbb8, $8cd65
-FlyFromAnimation::
+FlyFromAnim::
 	dr $8cd65, $8cdab
-FlyToAnimation::
+FlyToAnim::
 	dr $8cdab, $8ce7c
 MagnetTrain::
 	dr $8ce7c, $8d174
@@ -786,12 +786,16 @@ Function9188a::
 Function919c1::
 	dr $919c1, $91a4f
 TownMap_::
-	dr $91a4f, $91c7f
+	dr $91a4f, $91a61
+_FlyMap::
+	dr $91a61, $91c7f
 Pokedex_GetArea::
 	dr $91c7f, $92364
 
 GetLandmarkName::
-	dr $92364, $92c36
+	dr $92364, $9297a
+Fish::
+	dr $9297a, $92c36
 Function92c36::
 	dr $92c36, $93f86
 

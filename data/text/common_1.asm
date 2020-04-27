@@ -1803,34 +1803,34 @@ UnknownText_0x1c04fa::
 	text "'s home."
 	prompt
 
-BadgeRequiredText_::
+_BadgeRequiredText::
 	text "Sorry! A new BADGE"
 	line "is required."
 	prompt
 
-CantUseFieldMoveHereText_::
+_CantUseItemText::
 	text "Can't use that"
 	line "here."
 	prompt
 
-Text_UsedCut_::
+_UseCutText::
 	text_ram wStringBuffer2
 	text " used"
 	line "CUT!"
 	prompt
 
-Text_NothingToCut_::
+_CutNothingText::
 	text "There's nothing to"
 	line "CUT here."
 	prompt
 
-Text_UsedFlash_::
+_BlindingFlashText::
 	text "A blinding FLASH"
 	line "lights the area!@"
 	text_promptbutton
 	db "@@"
 
-UsedSurfText_::
+_UsedSurfText::
 	text_ram wStringBuffer2
 	text " used"
 	line "SURF!"
