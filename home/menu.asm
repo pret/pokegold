@@ -777,7 +777,7 @@ Place2DMenuItemName::
 _2DMenu::
 	call CopyMenuData
 	ldh a, [hROMBank]
-	ld [wMenuDataBank], a
+	ld [wMenuData_2DMenuItemStringsBank], a
 	push af
 	ld a, BANK(_2DMenu_)
 	rst Bankswitch

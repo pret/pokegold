@@ -290,7 +290,7 @@ Function11cd4:
 	bit 7, a
 	jr nz, .asm_11cef
 	call Function11d27
-	farcall PlaySpriteAnimationsAndDelay
+	farcall PlaySpriteAnimationsAndDelayFrame
 	call Function11cff
 	call DelayFrame
 	and a
@@ -963,7 +963,7 @@ Function1238d:
 	bit 7, a
 	jr nz, .asm_123a8
 	call Function123d5
-	farcall PlaySpriteAnimationsAndDelay
+	farcall PlaySpriteAnimationsAndDelayFrame
 	call Function123b8
 	call DelayFrame
 	and a

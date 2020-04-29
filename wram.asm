@@ -1846,12 +1846,12 @@ wTilePermissions:: ds 1 ; cea7
 
 wWindowData::
 wWindowStackPointer:: dw ; cea8
-wMenuJoypad:: ds 1 ; ceaa
-wMenuSelection:: ds 1 ; ceab
-wceac:: ds 1 ; ceac
-wWhichIndexSet:: ds 1 ; cead
+wMenuJoypad:: db ; ceaa
+wMenuSelection:: db ; ceab
+wMenuSelectionQuantity:: db ; ceac
+wWhichIndexSet:: db ; cead
 wScrollingMenuCursorPosition:: db ; ceae
-wceaf:: ds 1 ; ceaf
+wWindowStackSize:: db ; ceaf
 wceb0:: ds 1 ; ceb0
 wceb1:: ds 1 ; ceb1
 wceb2:: ds 1 ; ceb2
@@ -1882,20 +1882,34 @@ wMenuHeaderEnd::
 
 wMenuData::
 wMenuDataFlags:: ds 1 ; cec8
-wMenuDataItems:: ds 1 ; cec9
-wMenuDataIndicesPointer:: ds 1 ; ceca
-wMenuDataBank:: ds 1 ; cecb
+
+UNION ; cec9
+; Vertical Menu/DoNthMenu/SetUpMenu
+wMenuDataItems:: db ; cec9
+wMenuDataIndicesPointer:: dw ; ceca
 wMenuDataDisplayFunctionPointer:: dw ; cecc
-wMenuDataPointerTableAddr:: ds 1 ; cece
-wcecf:: ds 1 ; cecf
-wced0:: ds 1 ; ced0
-wced1:: ds 1 ; ced1
-wced2:: ds 1 ; ced2
-wced3:: ds 1 ; ced3
-wced4:: ds 1 ; ced4
-wced5:: ds 1 ; ced5
-wced6:: ds 1 ; ced6
-wced7:: ds 1 ; ced7
+wMenuDataPointerTableAddr:: dw ; cece
+
+NEXTU ; cec9
+; 2D Menu
+wMenuData_2DMenuDimensions:: db ; cec9
+wMenuData_2DMenuSpacing:: db ; ceca
+wMenuData_2DMenuItemStringsBank:: db ; cecb
+wMenuData_2DMenuItemStringsAddr:: dw ; cecc
+wMenuData_2DMenuFunctionBank:: db ; cece
+wMenuData_2DMenuFunctionAddr:: dw ; cecf
+
+NEXTU ; cec9
+; Scrolling Menu
+wMenuData_ScrollingMenuHeight:: db ; cec9
+wMenuData_ScrollingMenuWidth:: db ; ceca
+wMenuData_ScrollingMenuItemFormat:: db ; cecb
+wMenuData_ItemsPointerBank:: db ; cecc
+wMenuData_ItemsPointerAddr:: dw ; cecd
+wMenuData_ScrollingMenuFunction1:: ds 3 ; cecf
+wMenuData_ScrollingMenuFunction2:: ds 3 ; ced2
+wMenuData_ScrollingMenuFunction3:: ds 3 ; ced5
+ENDU ; ced8
 wMenuDataEnd::
 
 w2DMenuData::
@@ -1919,13 +1933,10 @@ wMenuJoypadFilter:: db ; cedf
 w2DMenuDataEnd::
 wMenuCursorY:: db ; cee0
 wMenuCursorX:: db ; cee1
-wcee2:: ds 1 ; cee2
-wCursorCurrentTile:: ds 1 ; cee3
-wcee4:: ds 1 ; cee4
-wcee5:: ds 1 ; cee5
-wcee6:: ds 1 ; cee6
-wcee7:: ds 1 ; cee7
-wMenuData3End::
+wCursorOffCharacter:: db ; cee2
+wCursorCurrentTile:: dw ; cee3
+
+	ds 3
 
 wOverworldDelay:: ds 1 ; cee8
 wTextDelayFrames:: ds 1 ; cee9
@@ -3268,9 +3279,9 @@ wPoisonStepCount:: db ; d9be
 	ds 2
 wHappinessStepCount:: db ; d9c1
 	ds 1
-wParkBallsRemaining:: db ; d9c3
-wd9c4:: ds 1 ; d9c4
-wd9c5:: ds 1 ; d9c5
+wParkBallsRemaining::
+wSafariBallsRemaining:: db ; d9c3
+wSafariTimeRemaining:: dw ; d9c4
 wd9c6:: ds 1 ; d9c6
 wd9c7:: ds 1 ; d9c7
 wd9c8:: ds 1 ; d9c8

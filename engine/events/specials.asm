@@ -470,8 +470,8 @@ CountUnown: ; c5ac (3:45ac)
 	jr c, .asm_c5b1
 	ret
 
-SelectApricornForKurt: ; c5bb (3:45bb)
-	farcall Function24b8d
+SelectApricornForKurt:
+	farcall Kurt_SelectApricorn
 	ld a, c
 	ld [wScriptVar], a
 	and a

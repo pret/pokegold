@@ -229,70 +229,17 @@ EggMovePointers::
 
 SECTION "bank9", ROMX
 
-StringBufferPointers::
-	dr $24000, $2400e
-_2DMenu_::
-	dr $2400e, $24136
-_StaticMenuJoypad::
-	dr $24136, $24139
-_ScrollingMenuJoypad::
-	dr $24139, $242a0
-_PushWindow::
-	dr $242a0, $24307
-_ExitMenu::
-	dr $24307, $24395
-_InitVerticalMenuCursor::
-	dr $24395, $243eb
-UpdateItemDescription::
-	dr $243eb, $2440b
-Pokepic::
-	dr $2440b, $24450
-ClosePokepic::
-	dr $24450, $24477
-LoadObjectMasks::
-	dr $24477, $244d7
-_InitScrollingMenu::
-	dr $244d7, $244f3
-_ScrollingMenu::
-	dr $244f3, $2462e
-ScrollingMenu_ClearLeftColumn::
-	dr $2462e, $24834
-SwitchItemsInBag::
-	dr $24834, $249dc
-PlaceMenuItemName::
-	dr $249dc, $249eb
-PlaceMenuItemQuantity::
-	dr $249eb, $24a10
-PlaceMoneyTopRight::
-	dr $24a10, $24a18
-PlaceMoneyBottomLeft::
-	dr $24a18, $24a20
-PlaceMoneyAtTopLeftOfTextbox::
-	dr $24a20, $24a4d
-DisplayCoinCaseBalance::
-	dr $24a4d, $24a76
-DisplayMoneyAndCoinBalance::
-	dr $24a76, $24b05
-StartMenu_DrawBugContestStatusBox::
-	dr $24b05, $24b10
-StartMenu_PrintBugContestStatus::
-	dr $24b10, $24b8d
-Function24b8d::
-	dr $24b8d, $24c89
-MonSubmenu::
-	dr $24c89, $24e09
-BattleMonMenu::
-	dr $24e09, $24e62
-LoadBattleMenu::
-	dr $24e62, $24e72
-ContestBattleMenu::
-	dr $24e72, $24f20
-SelectQuantityToToss::
-	dr $24f20, $24f2a
-SelectQuantityToBuy::
-	dr $24f2a, $24f42
-SelectQuantityToSell::
-	dr $24f42, $25061
+INCLUDE "data/text_buffers.asm"
+INCLUDE "engine/menus/menu.asm"
+INCLUDE "engine/items/update_item_description.asm"
+INCLUDE "engine/events/pokepic.asm"
+INCLUDE "engine/overworld/map_objects_2.asm"
+INCLUDE "engine/menus/scrolling_menu.asm"
+INCLUDE "engine/items/switch_items.asm"
+INCLUDE "engine/menus/menu_2.asm"
+INCLUDE "engine/pokemon/mon_submenu.asm"
+INCLUDE "engine/battle/menu.asm"
+INCLUDE "engine/items/buy_sell_toss.asm"
 
 TrainerCard::
 	dr $25061, $267af
@@ -405,6 +352,7 @@ JohtoGrassWildMons::
 
 SECTION "bankb", ROMX
 
+PrintItemDescription::
 	dr $2c000, $2c033
 BattleStart_TrainerHuds::
 	dr $2c033, $2c045
@@ -445,6 +393,7 @@ TilesetParkGFX::
 	dr $309e0, $30e40
 TilesetParkMeta::
 	dr $30e40, $31240
+
 TilesetParkColl::
 	dr $31240, $31340
 TilesetRuinsOfAlphGFX::
@@ -468,6 +417,7 @@ TilesetUndergroundColl::
 	dr $32c90, $32d90
 TilesetIcePathGFX::
 	dr $32d90, $331d0
+
 TilesetIcePathMeta::
 	dr $331d0, $335d0
 TilesetIcePathColl::
@@ -700,7 +650,7 @@ MagnetTrain::
 
 ClearSpriteAnims::
 	dr $8d174, $8d183
-PlaySpriteAnimationsAndDelay::
+PlaySpriteAnimationsAndDelayFrame::
 	dr $8d183, $8d18a
 PlaySpriteAnimations::
 	dr $8d18a, $8d1f7

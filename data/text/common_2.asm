@@ -1310,7 +1310,7 @@ UnknownText_0x1c4693::
 	line "area was exceeded."
 	done
 
-UnknownText_0x1c46b7::
+_WindowPoppingErrorText::
 	text "No windows avail-"
 	line "able for popping."
 	done
