@@ -1766,17 +1766,40 @@ wce62:: ds 1 ; ce62
 wce63::
 wJumptableIndex::
 	db
-wce64::
+
+UNION ; ce64
+; unidentified
+wce64:: db
+wce65:: db
+wce66:: db
+
+NEXTU ; ce64
+; intro and title data
+wIntroSceneFrameCounter:: db
+UNION ; ce65
+wIntroSceneTimer:: db
+NEXTU ; ce65
+wTitleScreenTimer:: dw
+ENDU
+
+NEXTU ; ce64
+; pack
+wPackJumptableIndex:: db
+wCurPocket:: db
+wPackUsedItem:: db
+
+NEXTU ; ce64
+; trainer card badges
+wTrainerCardBadgeFrameCounter:: db
+wTrainerCardBadgeTileID:: db
+wTrainerCardBadgeAttributes:: db
+
+NEXTU ; ce64
+; miscellaneous
 wFrameCounter::
 wMomBankDigitCursorPosition::
 	db
-wce65::
-wIntroSceneTimer::
-wCurPocket::
-	db
-wce66::
-wPackUsedItem::
-	db
+ENDU ; ce67
 
 wRequested2bpp:: ds 1 ; ce67
 wRequested2bppSource:: dw ; ce68

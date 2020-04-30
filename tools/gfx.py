@@ -101,6 +101,24 @@ def filepath_rules(filepath):
         args['pal_file'] = os.path.join(filedir, trainer_name + '.pal')
         args['pic'] = True
 
+    elif 'gfx/battle' in filedir:
+        if name == 'dude':
+            args['pic_dimensions'] = 6, 6
+
+    elif 'gfx/icons' in filedir:
+        if name == 'mail_big':
+            args['width'] = 16
+
+    elif 'gfx/intro' in filedir:
+        if name == 'logo_star':
+            args['width'] = 8
+        elif name in ['gamefreak_logo', 'logo_sparkle']:
+            args['width'] = 24
+        elif name == 'gamefreak_presents':
+            args['width'] = 104
+        elif name == 'copyright':
+            args['width'] = 240
+
     elif 'gfx/mail' in filedir:
         if name in mail_px8:
             args['width'] = 8
@@ -118,28 +136,8 @@ def filepath_rules(filepath):
             args['width'] = 56
             args['rows'] = [(0, 6), (1, 6), (2, 6)]
 
-    elif 'gfx/pack' in filedir:
-        if name == 'pack':
-            args['width'] = 40
-        elif name == 'pack_menu':
-            args['width'] = 128
-
-    elif 'gfx/intro' in filedir:
-        if name == 'logo_star':
-            args['width'] = 8
-        elif name in ['gamefreak_logo', 'logo_sparkle']:
-            args['width'] = 24
-        elif name == 'gamefreak_presents':
-            args['width'] = 104
-        elif name == 'copyright':
-            args['width'] = 240
-
     elif 'gfx/naming_screen' in filedir:
         args['width'] = 8
-
-    elif 'gfx/icons' in filedir:
-        if name == 'mail_big':
-            args['width'] = 16
 
     elif 'gfx/overworld' in filedir:
         if name == 'heal_machine':
@@ -149,6 +147,16 @@ def filepath_rules(filepath):
             args['width'] = 8
         elif name in overworld_px16:
             args['width'] = 16
+
+    elif 'gfx/pack' in filedir:
+        if name == 'pack':
+            args['width'] = 40
+        elif name == 'pack_menu':
+            args['width'] = 128
+
+    elif 'gfx/player' in filedir:
+        if name == 'chris_back':
+            args['pic_dimensions'] = 6, 6
 
     elif 'gfx/sgb' in filedir:
         args['width'] = 128
@@ -162,19 +170,21 @@ def filepath_rules(filepath):
         else:
             args['width'] = 16
 
+    elif 'gfx/trainer_card' in filedir:
+        if name in ['badges', 'trainer_card']:
+            args['width'] = 16
+        elif name == 'card_status':
+            args['width'] = 48
+        elif name == 'chris_card':
+            args['width'] = 40
+        elif name == 'leaders':
+            args['width'] = 80
+
     elif 'gfx/unknown' in filedir:
         if name == 'gfx_170f1':
             args['width'] = 128
         elif name == 'gfx_17079':
             args['width'] = 16
-
-    elif 'gfx/player' in filedir:
-        if name == 'chris_back':
-            args['pic_dimensions'] = 6, 6
-
-    elif 'gfx/battle' in filedir:
-        if name == 'dude':
-            args['pic_dimensions'] = 6, 6
 
     elif os.path.join(filedir, name) in pics:
         args['pic'] = True

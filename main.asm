@@ -240,9 +240,7 @@ INCLUDE "engine/menus/menu_2.asm"
 INCLUDE "engine/pokemon/mon_submenu.asm"
 INCLUDE "engine/battle/menu.asm"
 INCLUDE "engine/items/buy_sell_toss.asm"
-
-TrainerCard::
-	dr $25061, $267af
+INCLUDE "engine/menus/trainer_card.asm"
 
 ProfOaksPC::
 	dr $267af, $267ca
