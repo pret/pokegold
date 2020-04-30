@@ -3196,19 +3196,20 @@ wCurMapSceneScriptsPointer:: dw ; d952
 wCurMapCallbackCount:: db ; d954
 wCurMapCallbacksPointer:: dw ; d955
 
-wd957:: ds 1 ; d957
-wd958:: ds 1 ; d958
-wd959:: ds 1 ; d959
-wd95a:: ds 1 ; d95a
-wd95b:: ds 1 ; d95b
-wd95c:: ds 1 ; d95c
-wd95d:: ds 1 ; d95d
-wd95e:: ds 1 ; d95e
-wd95f:: ds 1 ; d95f
-wd960:: ds 1 ; d960
+	ds 2
+
+; Sprite id of each decoration
+wDecoBed::           db ; d959
+wDecoCarpet::        db ; d95a
+wDecoPlant::         db ; d95b
+wDecoPoster::        db ; d95c
+wDecoConsole::       db ; d95d
+wDecoLeftOrnament::  db ; d95e
+wDecoRightOrnament:: db ; d95f
+wDecoBigDoll::       db ; d960
+
 wd961:: ds 1 ; d961
 wd962:: ds 1 ; d962
-
 wMomItemTriggerBalance:: ds 3 ; d963
 
 wDailyResetTimer:: dw ; d966

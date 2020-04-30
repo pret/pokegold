@@ -241,29 +241,11 @@ INCLUDE "engine/pokemon/mon_submenu.asm"
 INCLUDE "engine/battle/menu.asm"
 INCLUDE "engine/items/buy_sell_toss.asm"
 INCLUDE "engine/menus/trainer_card.asm"
-
-ProfOaksPC::
-	dr $267af, $267ca
-ProfOaksPCBoot::
-	dr $267ca, $2692d
-InitDecorations::
-	dr $2692d, $26938
-_PlayerDecorationMenu::
-	dr $26938, $270d5
-
-ReceiveDecorationC::
-	dr $270d5, $2712c
-DescribeDecoration::
-	dr $2712c, $271be
-ToggleMaptileDecorations::
-	dr $271be, $27216
-ToggleDecorationsVisibility::
-	dr $27216, $27271
+INCLUDE "engine/events/prof_oaks_pc.asm"
+INCLUDE "engine/overworld/decorations.asm"
 INCLUDE "engine/battle/read_trainer_dvs.asm"
-ReturnToBattle_UseBall_::
-	dr $27307, $2733d
-ConsumeHeldItem::
-	dr $2733d, $2739f
+INCLUDE "engine/battle/returntobattle_useball.asm"
+INCLUDE "engine/battle/consume_held_item.asm"
 INCLUDE "data/moves/effects.asm"
 
 

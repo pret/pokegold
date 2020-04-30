@@ -996,8 +996,8 @@ Text_AskNicknameNewlyCaughtMon:
 	text_far Text_AskNicknameNewlyCaughtMon_
 	db "@"
 
-ReturnToBattle_UseBall: ; ee4e (3:6e4e)
-	farcall ReturnToBattle_UseBall_ ; 9:7307
+ReturnToBattle_UseBall:
+	farcall _ReturnToBattle_UseBall
 	ret
 
 TownMap: ; ee55 (3:6e55)
@@ -2413,7 +2413,7 @@ NormalBox: ; f7aa (3:77aa)
 GorgeousBox: ; f7ae (3:77ae)
 	ld c, DECOFLAG_GOLD_TROPHY_DOLL
 asm_f7b0:
-	farcall ReceiveDecorationC ; 9:70d5
+	farcall SetSpecificDecorationFlag
 	ld hl, Text_TrophyInside ; $77bf
 	call PrintText
 	jp Functionf7dc

@@ -280,41 +280,41 @@ UnknownText_0x1bc45e::
 	line "amount."
 	done
 
-UnknownText_0x1bc471::
+_NothingToChooseText::
 	text "There's nothing to"
 	line "choose."
 	prompt
 
-UnknownText_0x1bc48c::
+_WhichSidePutOnText::
 	text "Which side do you"
 	line "want to put it on?"
 	done
 
-UnknownText_0x1bc4b2::
+_WhichSidePutAwayText::
 	text "Which side do you"
 	line "want to put away?"
 	done
 
-UnknownText_0x1bc4d7::
+_PutAwayTheDecoText::
 	text "Put away the"
 	line "@"
 	text_ram wStringBuffer3
 	text "."
 	prompt
 
-UnknownText_0x1bc4ec::
+_NothingToPutAwayText::
 	text "There's nothing to"
 	line "put away."
 	prompt
 
-UnknownText_0x1bc509::
+_SetUpTheDecoText::
 	text "Set up the"
 	line "@"
 	text_ram wStringBuffer3
 	text "."
 	prompt
 
-UnknownText_0x1bc51c::
+_PutAwayAndSetUpText::
 	text "Put away the"
 	line "@"
 	text_ram wStringBuffer3
@@ -326,38 +326,38 @@ UnknownText_0x1bc51c::
 	text "."
 	prompt
 
-UnknownText_0x1bc546::
+_AlreadySetUpText::
 	text "That's already set"
 	line "up."
 	prompt
 
-UnknownText_0x1bc55d::
+_LookTownMapText::
 	text "It's the TOWN MAP."
 	done
 
-UnknownText_0x1bc570::
+_LookPikachuPosterText::
 	text "It's a poster of a"
 	line "cute PIKACHU."
 	done
 
-UnknownText_0x1bc591::
+_LookClefairyPosterText::
 	text "It's a poster of a"
 	line "cute CLEFAIRY."
 	done
 
-UnknownText_0x1bc5b3::
+_LookJigglypuffPosterText::
 	text "It's a poster of a"
 	line "cute JIGGLYPUFF."
 	done
 
-UnknownText_0x1bc5d7::
+_LookAdorableDecoText::
 	text "It's an adorable"
 	line "@"
 	text_ram wStringBuffer3
 	text "."
 	done
 
-UnknownText_0x1bc5ef::
+_LookGiantDecoText::
 	text "A giant doll! It's"
 	line "fluffy and cuddly."
 	done
