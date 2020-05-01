@@ -33,7 +33,11 @@ JohtoWaterWildMons:
 	db 10, SLOWPOKE
 
 	map_id SLOWPOKE_WELL_B2F
+	IF DEF(_GOLD)
+	db 4 percent ; encounter rate
+	ELIF DEF(_SILVER)
 	db 2 percent ; encounter rate
+	ENDC
 	db 15, SLOWPOKE
 	db 20, SLOWPOKE
 	db 20, SLOWBRO
@@ -46,20 +50,20 @@ JohtoWaterWildMons:
 
 	map_id MOUNT_MORTAR_1F_OUTSIDE
 	db 4 percent ; encounter rate
+	db 20, GOLDEEN
 	db 15, GOLDEEN
-	db 20, MARILL
 	db 20, SEAKING
 
 	map_id MOUNT_MORTAR_2F_INSIDE
 	db 2 percent ; encounter rate
 	db 20, GOLDEEN
-	db 25, MARILL
+	db 25, GOLDEEN
 	db 25, SEAKING
 
 	map_id MOUNT_MORTAR_B1F
 	db 2 percent ; encounter rate
+	db 20, GOLDEEN
 	db 15, GOLDEEN
-	db 20, MARILL
 	db 20, SEAKING
 
 	map_id WHIRL_ISLAND_SW
@@ -83,7 +87,7 @@ JohtoWaterWildMons:
 	map_id SILVER_CAVE_ROOM_2
 	db 2 percent ; encounter rate
 	db 35, SEAKING
-	db 35, GOLDUCK
+	db 40, SEAKING
 	db 35, GOLDEEN
 
 	map_id DARK_CAVE_VIOLET_ENTRANCE
@@ -103,12 +107,6 @@ JohtoWaterWildMons:
 	db 15, MAGIKARP
 	db 10, MAGIKARP
 	db 10, DRATINI
-
-	map_id OLIVINE_PORT
-	db 2 percent ; encounter rate
-	db 20, TENTACOOL
-	db 15, TENTACOOL
-	db 20, TENTACRUEL
 
 	map_id ROUTE_30
 	db 2 percent ; encounter rate
@@ -148,9 +146,17 @@ JohtoWaterWildMons:
 
 	map_id ROUTE_41
 	db 6 percent ; encounter rate
+
+	IF DEF(_GOLD)
 	db 20, TENTACOOL
 	db 20, TENTACRUEL
 	db 20, MANTINE
+
+	ELIF DEF(_SILVER)
+	db 20, TENTACOOL
+	db 20, TENTACRUEL
+	db 15, TENTACOOL
+	ENDC
 
 	map_id ROUTE_42
 	db 4 percent ; encounter rate
@@ -213,7 +219,11 @@ JohtoWaterWildMons:
 	db 20, POLIWHIRL
 
 	map_id LAKE_OF_RAGE
+	IF DEF(_GOLD)
+	db 4 percent ; encounter rate
+	ELIF DEF(_SILVER)
 	db 6 percent ; encounter rate
+	ENDC
 	db 15, MAGIKARP
 	db 10, MAGIKARP
 	db 15, GYARADOS
@@ -229,5 +239,11 @@ JohtoWaterWildMons:
 	db 35, POLIWHIRL
 	db 40, POLIWHIRL
 	db 35, POLIWAG
+
+	map_id OLIVINE_PORT
+	db 2 percent ; encounter rate
+	db 20, TENTACOOL
+	db 15, TENTACOOL
+	db 20, TENTACRUEL
 
 	db -1 ; end

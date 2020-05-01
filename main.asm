@@ -255,18 +255,6 @@ INCLUDE "engine/link/link.asm"
 INCLUDE "engine/link/mystery_gift.asm"
 INCLUDE "engine/overworld/wildmons.asm"
 
-JohtoGrassWildMons::
-	dr $2ab35, $2b669
-JohtoWaterWildMons::
-	dr $2b669, $2b7c0
-KantoGrassWildMons::
-	dr $2b7c0, $2bd43
-KantoWaterWildMons::
-	dr $2bd43, $2be1c
-SwarmGrassWildMons::
-	dr $2be1c, $2bed9
-SwarmWaterWildMons::
-	dr $2bed9, $2bee3
 
 SECTION "bankB", ROMX
 

@@ -963,9 +963,9 @@ RandomPhoneMon:
 	ld bc, MON_NAME_LENGTH
 	jp CopyBytes
 
-;INCLUDE "data/wild/johto_grass.asm"
-;INCLUDE "data/wild/johto_water.asm"
-;INCLUDE "data/wild/kanto_grass.asm"
-;INCLUDE "data/wild/kanto_water.asm"
-;INCLUDE "data/wild/swarm_grass.asm"
-;INCLUDE "data/wild/swarm_water.asm"
+INCLUDE "data/wild/johto_grass.asm"
+INCLUDE "data/wild/johto_water.asm"
+INCLUDE "data/wild/kanto_grass.asm"
+INCLUDE "data/wild/kanto_water.asm"
+INCLUDE "data/wild/swarm_grass.asm"
+INCLUDE "data/wild/swarm_water.asm"

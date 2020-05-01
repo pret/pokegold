@@ -1708,9 +1708,9 @@ wd140:: ds 1 ; d140
 wCurDamage:: ds 2 ; d141
 wd143:: ds 1 ; d143
 wd144:: ds 1 ; d144
-wMornEncounterRate:: db ; d145
-wd146:: ds 1 ; d146
-wd147:: ds 1 ; d147
+wMornEncounterRate::  db ; d145
+wDayEncounterRate::   db ; d146
+wNiteEncounterRate::  db ; d147
 wWaterEncounterRate:: db ; d148
 wListMoves_MoveIndicesBuffer:: ds NUM_MOVES
 wPutativeTMHMMove:: db ; d14d
