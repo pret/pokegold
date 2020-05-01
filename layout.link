@@ -274,12 +274,12 @@ WRAM0
 	"WRAM"
 	"GBC Palettes"
 	"Sprites"
-	"TileMap"
+	"Tilemap"
 	"Animated Objects"
 	"Video"
 WRAMX 1
 	org $d000
-	"WRAM1"
+	"WRAM 1"
 	"Game Data"
 	"Party"
 	org $dfff

@@ -1207,7 +1207,7 @@ _OakText7::
 	line "later!"
 	done
 
-UnknownText_0x1c40e6::
+_ClockTimeMayBeWrongText::
 	text "The clock's time"
 	line "may be wrong."
 
@@ -1215,7 +1215,7 @@ UnknownText_0x1c40e6::
 	line "time."
 	prompt
 
-UnknownText_0x1c411c::
+_ClockSetWithControlPadText::
 	text "Set with the"
 	line "Control Pad."
 
@@ -1223,28 +1223,28 @@ UnknownText_0x1c411c::
 	line "Cancel:  B Button"
 	done
 
-UnknownText_0x1c415b::
+_ClockIsThisOKText::
 	text "Is this OK?"
 	done
 
-UnknownText_0x1c4168::
+_ClockHasResetText::
 	text "The clock has been"
 	line "reset."
 	done
 
-UnknownText_0x1c4183::
+_LinkTimeoutText::
 	text "Too much time has"
 	line "elapsed. Please"
 	cont "try again."
 	prompt
 
-UnknownText_0x1c41b1::
+_LinkTradeCantBattleText::
 	text "If you trade that"
 	line "#MON, you won't"
 	cont "be able to battle."
 	prompt
 
-UnknownText_0x1c41e6::
+_LinkAbnormalMonText::
 	text "Your friend's"
 	line "@"
 	text_ram wStringBuffer1
@@ -1252,7 +1252,7 @@ UnknownText_0x1c41e6::
 	cont "to be abnormal!"
 	prompt
 
-UnknownText_0x1c4212::
+_LinkAskTradeForText::
 	text "Trade @"
 	text_ram wceef
 	text_start

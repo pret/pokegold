@@ -251,59 +251,9 @@ INCLUDE "data/moves/effects.asm"
 
 SECTION "banka", ROMX
 
-	dr $28000, $28d88
-LinkTextboxAtHL::
-	dr $28d88, $28dea
-TradeAnimation::
-	dr $28dea, $28e22
-TradeAnimationPlayer2::
-	dr $28e22, $29a47
+INCLUDE "engine/link/link.asm"
+INCLUDE "engine/link/mystery_gift.asm"
 
-CheckTimeCapsuleCompatibility::
-	dr $29a47, $29ac7
-EnterTimeCapsule::
-	dr $29ac7, $29ad9
-WaitForOtherPlayerToExit::
-	dr $29ad9, $29b22
-SetBitsForLinkTradeRequest::
-	dr $29b22, $29b2b
-SetBitsForBattleRequest::
-	dr $29b2b, $29b34
-SetBitsForTimeCapsuleRequest::
-	dr $29b34, $29b4b
-WaitForLinkedFriend::
-	dr $29b4b, $29bcc
-CheckLinkTimeout::
-	dr $29bcc, $29c71
-TryQuickSave::
-	dr $29c71, $29c8d
-CheckBothSelectedSameRoom::
-	dr $29c8d, $29cba
-TimeCapsule::
-	dr $29cba, $29ccf
-TradeCenter::
-	dr $29ccf, $29ce4
-Colosseum::
-	dr $29ce4, $29cf9
-CloseLink::
-	dr $29cf9, $29d01
-FailedLinkToPast::
-	dr $29d01, $29d4e
-CableClubCheckWhichChris::
-	dr $29d4e, $29dff
-Function29dff::
-	dr $29dff, $2a4bf
-
-MysteryGift_CopyReceivedDecosToPC::
-	dr $2a4bf, $2a4e7
-UnlockMysteryGift::
-	dr $2a4e7, $2a4f6
-Function2a4f6::
-	dr $2a4f6, $2a507
-BackupMysteryGift::
-	dr $2a507, $2a518
-RestoreMysteryGift::
-	dr $2a518, $2a539
 LoadWildMonData::
 	dr $2a539, $2a643
 TryWildEncounter::
@@ -346,7 +296,13 @@ _ShowLinkBattleParticipants::
 	dr $2c1e4, $2c225
 INCLUDE "engine/battle/ai/redundant.asm"
 MoveDeletion::
-	dr $2c352, $2c57a
+	dr $2c352, $2c44d
+PrepMysteryGiftDataToSend::
+	dr $2c44d, $2c513
+MysteryGiftGetItemHeldEffect::
+	dr $2c513, $2c520
+MysteryGiftGetDecoration::
+	dr $2c520, $2c57a
 Pack_TMHMPocketMenu_::
 	dr $2c57a, $2c5ca
 AskTeachTMHM::
@@ -545,7 +501,9 @@ Unused_PlaceEnemyHPLevel::
 PlaceNonFaintStatus::
 	dr $51437, $51478
 ListMoves::
-	dr $51478, $51524
+	dr $51478, $514c2
+InitList::
+	dr $514c2, $51524
 CalcLevel::
 	dr $51524, $51550
 CalcExpAtLevel::
@@ -923,13 +881,23 @@ TileCollisionTable::
 Shrink1Pic::
 	dr $fb5be, $fb64e
 Shrink2Pic::
-	dr $fb64e, $fb7f7
+	dr $fb64e, $fb68e
+ValidateOTTrademon::
+	dr $fb68e, $fb6ed
+Functionfb6ed::
+	dr $fb6ed, $fb71d
+PlaceTradePartnerNamesAndParty::
+	dr $fb71d, $fb760
+KantoMonSpecials::
+	dr $fb760, $fb7f7
 _NameRater::
 	dr $fb7f7, $fb94b
 PlaySlowCry::
 	dr $fb94b, $fb981
 NewPokedexEntry::
-	dr $fb981, $fba12
+	dr $fb981, $fb9fb
+ConvertMon_2to1::
+	dr $fb9fb, $fba12
 ConvertMon_1to2::
 	dr $fba12, $fbb22
 UpdateUnownDex::
@@ -1002,7 +970,11 @@ TilesetUndergroundAnim::
 NPCTrade::
 	dr $fc9ae, $fcd87
 MomTriesToBuySomething::
-	dr $fcd87, $fde20
+	dr $fcd87, $fcf6a
+StagePartyDataForMysteryGift::
+	dr $fcf6a, $fcfb2
+InitMysteryGiftLayout::
+	dr $fcfb2, $fde20
 
 
 SECTION "bank40", ROMX

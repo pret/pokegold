@@ -56,9 +56,9 @@ GetName::
 
 .done
 	ld a, e
-	ld [wcffe], a
+	ld [wUnusedCFFE], a
 	ld a, d
-	ld [wcffe + 1], a
+	ld [wUnusedCFFE + 1], a
 
 	pop de
 	pop bc

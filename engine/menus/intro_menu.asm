@@ -239,7 +239,7 @@ Function5bf7: ; 5bf7 (1:5bf7)
 MainMenu_MysteryGift:
 	call UpdateTime
 	farcall DoMysteryGiftIfDayHasPassed
-	farcall Function29dff
+	farcall DoMysteryGift
 	ret
 
 MainMenu_Options:
@@ -1201,7 +1201,7 @@ InitTitleScreen: ; 6291 (1:6291)
 	call CopyBytes
 	ld hl, wSpriteAnim1
 	ld [hl], $0
-	ld hl, wc700
+	ld hl, wLYOverrides
 	ld bc, $90
 	xor a
 	call ByteFill

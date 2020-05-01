@@ -20,38 +20,13 @@ SPRITEANIMSTRUCT_LENGTH EQU const_value
 NUM_SPRITE_ANIM_STRUCTS EQU 10 ; see wSpriteAnimationStructs
 
 ; SpriteAnimSeqData indexes (see data/sprite_anims/sequences.asm)
+SPRITE_ANIM_INDEX_TRADE_POKE_BALL EQU $20
+SPRITE_ANIM_INDEX_TRADE_POOF EQU $21
+SPRITE_ANIM_INDEX_TRADE_TUBE_BULGE EQU $22
+SPRITE_ANIM_INDEX_TRADEMON_ICON EQU $23
+SPRITE_ANIM_INDEX_TRADEMON_BUBBLE EQU $24
 SPRITE_ANIM_INDEX_EGG_CRACK EQU $2b
 SPRITE_ANIM_INDEX_EGG_HATCH EQU $2e
-
-; DoAnimFrame.Jumptable indexes (see engine/gfx/sprite_anims.asm)
-	const_def
-	const SPRITE_ANIM_SEQ_NULL                    ; 00
-	const SPRITE_ANIM_SEQ_PARTY_MON               ; 01
-	const SPRITE_ANIM_SEQ_PARTY_MON_SWITCH        ; 02
-	const SPRITE_ANIM_SEQ_PARTY_MON_SELECTED      ; 03
-	const SPRITE_ANIM_SEQ_GS_TITLE_TRAIL          ; 04
-	const SPRITE_ANIM_SEQ_NAMING_SCREEN_CURSOR    ; 05
-	const SPRITE_ANIM_SEQ_GAMEFREAK_LOGO          ; 06
-	const SPRITE_ANIM_SEQ_GS_INTRO_STAR           ; 07
-	const SPRITE_ANIM_SEQ_GS_INTRO_SPARKLE        ; 08
-	const SPRITE_ANIM_SEQ_SLOTS_GOLEM             ; 09
-	const SPRITE_ANIM_SEQ_SLOTS_CHANSEY           ; 0a
-	const SPRITE_ANIM_SEQ_SLOTS_EGG               ; 0b
-	const SPRITE_ANIM_SEQ_MAIL_CURSOR             ; 0c
-	const SPRITE_ANIM_SEQ_UNUSED_CURSOR           ; 0d
-	const SPRITE_ANIM_SEQ_DUMMY_GAME_CURSOR       ; 0e
-	const SPRITE_ANIM_SEQ_POKEGEAR_ARROW          ; 0f
-	const SPRITE_ANIM_SEQ_TRADE_POKE_BALL         ; 10
-	const SPRITE_ANIM_SEQ_TRADE_TUBE_BULGE        ; 11
-	const SPRITE_ANIM_SEQ_TRADEMON_IN_TUBE        ; 12
-	const SPRITE_ANIM_SEQ_REVEAL_NEW_MON          ; 13
-	const SPRITE_ANIM_SEQ_RADIO_TUNING_KNOB       ; 14
-	const SPRITE_ANIM_SEQ_CUT_LEAVES              ; 15
-	const SPRITE_ANIM_SEQ_FLY_FROM                ; 16
-	const SPRITE_ANIM_SEQ_FLY_LEAF                ; 17
-	const SPRITE_ANIM_SEQ_FLY_TO                  ; 18
-	const SPRITE_ANIM_SEQ_GS_INTRO_HO_OH          ; 19
-	const SPRITE_ANIM_SEQ_EZCHAT_CURSOR           ; 1a
 
 ; SpriteAnimFrameData indexes (see data/sprite_anims/framesets.asm)
 	const_def

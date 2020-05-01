@@ -362,38 +362,38 @@ _LookGiantDecoText::
 	line "fluffy and cuddly."
 	done
 
-UnknownText_0x1bc615::
+_MomHiHowAreYouText::
 	text "Hi, <PLAYER>!"
 	line "How are you?"
 	prompt
 
-UnknownText_0x1bc62a::
+_MomFoundAnItemText::
 	text "I found a useful"
 	line "item shopping, so"
 	prompt
 
-UnknownText_0x1bc64e::
+_MomBoughtWithYourMoneyText::
 	text "I bought it with"
 	line "your money. Sorry!"
 	prompt
 
-UnknownText_0x1bc673::
+_MomItsInPCText::
 	text "It's in your PC."
 	line "You'll like it!"
 	done
 
-UnknownText_0x1bc693::
+_MomFoundADollText::
 	text "While shopping"
 	line "today, I saw this"
 	cont "adorable doll, so"
 	prompt
 
-UnknownText_0x1bc6c7::
+_MomItsInYourRoomText::
 	text "It's in your room."
 	line "You'll love it!"
 	done
 
-UnknownText_0x1bc6e9::
+_MonWasSentToText::
 	text_ram wPlayerTrademonSpeciesName
 	text " was"
 	line "sent to @"
@@ -401,29 +401,29 @@ UnknownText_0x1bc6e9::
 	text "."
 	done
 
-UnknownText_0x1bc701::
+_MonNameSentToText::
 	text_start
 	done
 
-UnknownText_0x1bc703::
+_BidsFarewellToMonText::
 	text_ram wOTTrademonSenderName
 	text " bids"
 	line "farewell to"
 	done
 
-UnknownText_0x1bc719::
+_MonNameBidsFarewellText::
 	text_ram wOTTrademonSpeciesName
 	text "."
 	done
 
-UnknownText_0x1bc71f::
+_TakeGoodCareOfMonText::
 	text "Take good care of"
 	line "@"
 	text_ram wOTTrademonSpeciesName
 	text "."
 	done
 
-UnknownText_0x1bc739::
+_ForYourMonSendsText::
 	text "For @"
 	text_ram wPlayerTrademonSenderName
 	text "'s"
@@ -432,7 +432,7 @@ UnknownText_0x1bc739::
 	text ","
 	done
 
-UnknownText_0x1bc74c::
+_OTSendsText::
 	text_ram wOTTrademonSenderName
 	text " sends"
 	line "@"
@@ -440,14 +440,14 @@ UnknownText_0x1bc74c::
 	text "."
 	done
 
-UnknownText_0x1bc75e::
+_WillTradeText::
 	text_ram wOTTrademonSenderName
 	text " will"
 	line "trade @"
 	text_ram wOTTrademonSpeciesName
 	db "@@"
 
-UnknownText_0x1bc774::
+_ForYourMonWillTradeText::
 	text "for @"
 	text_ram wPlayerTrademonSenderName
 	text "'s"
@@ -1705,15 +1705,15 @@ _PlayerPickedUpPayDayMoney::
 	text "!"
 	prompt
 
-UnknownText_0x1c0373::
+_BootedTMText::
 	text "Booted up a TM."
 	prompt
 
-UnknownText_0x1c0384::
+_BootedHMText::
 	text "Booted up an HM."
 	prompt
 
-UnknownText_0x1c0396::
+_ContainedMoveText::
 	text "It contained"
 	line "@"
 	text_ram wStringBuffer2
@@ -1725,7 +1725,7 @@ UnknownText_0x1c0396::
 	line "to a #MON?"
 	done
 
-UnknownText_0x1c03c2::
+_TMHMNotCompatibleText::
 	text_ram wStringBuffer2
 	text " is"
 	line "not compatible"
@@ -1739,7 +1739,7 @@ UnknownText_0x1c03c2::
 	text "."
 	prompt
 
-UnknownText_0x1c03fa::
+_NoRoomTMHMText::
 	text "You have no room"
 	line "for any more"
 	cont "@"
@@ -1747,44 +1747,44 @@ UnknownText_0x1c03fa::
 	text "S."
 	prompt
 
-UnknownText_0x1c0421::
+_ReceivedTMHMText::
 	text "You received"
 	line "@"
 	text_ram wStringBuffer1
 	text "!"
 	prompt
 
-UnknownText_0x1c0436::
+_MysteryGiftCanceledText::
 	text "The link has been"
 	line "cancelled."
 	prompt
 
-UnknownText_0x1c0454::
+_MysteryGiftCommErrorText::
 	text "Communication"
 	line "error."
 	prompt
 
-UnknownText_0x1c046a::
+_RetrieveMysteryGiftText::
 	text "Must retrieve GIFT"
 	line "at #MON CENTER."
 	prompt
 
-UnknownText_0x1c048e::
+_YourFriendIsNotReadyText::
 	text "Your friend isn't"
 	line "ready."
 	prompt
 
-UnknownText_0x1c04a7::
+_MysteryGiftFiveADayText::
 	text "Sorry--only five"
 	line "GIFTS a day."
 	prompt
 
-UnknownText_0x1c04c6::
+_MysteryGiftOneADayText::
 	text "Sorry. One GIFT"
 	line "a day per person."
 	prompt
 
-UnknownText_0x1c04e9::
+_MysteryGiftSentText::
 	text_ram wMysteryGiftPartnerName
 	text " sent"
 	line "@"
@@ -1792,7 +1792,7 @@ UnknownText_0x1c04e9::
 	text "."
 	prompt
 
-UnknownText_0x1c04fa::
+_MysteryGiftSentHomeText::
 	text_ram wMysteryGiftPartnerName
 	text " sent"
 	line "@"

@@ -97,69 +97,42 @@ tradeanim_wait_80: macro
 	db tradeanim_wait_80_command ; 21
 endm
 
-	enum tradeanim_wait_40_command
-tradeanim_wait_40: macro
-	db tradeanim_wait_40_command ; 22
-endm
-
 	enum tradeanim_rocking_ball_command
 tradeanim_rocking_ball: macro
-	db tradeanim_rocking_ball_command ; 23
+	db tradeanim_rocking_ball_command ; 22
 endm
 
 	enum tradeanim_drop_ball_command
 tradeanim_drop_ball: macro
-	db tradeanim_drop_ball_command ; 24
+	db tradeanim_drop_ball_command ; 23
 endm
 
 	enum tradeanim_wait_anim_command
 tradeanim_wait_anim: macro
-	db tradeanim_wait_anim_command ; 25
+	db tradeanim_wait_anim_command ; 24
 endm
-
-__enum__ set $27
 
 	enum tradeanim_poof_command
 tradeanim_poof: macro
-	db tradeanim_poof_command ; 27
+	db tradeanim_poof_command ; 25
 endm
 
 	enum tradeanim_bulge_through_tube_command
 tradeanim_bulge_through_tube: macro
-	db tradeanim_bulge_through_tube_command ; 28
+	db tradeanim_bulge_through_tube_command ; 26
 endm
 
 	enum tradeanim_give_trademon_sfx_command
 tradeanim_give_trademon_sfx: macro
-	db tradeanim_give_trademon_sfx_command ; 29
+	db tradeanim_give_trademon_sfx_command ; 27
 endm
 
 	enum tradeanim_get_trademon_sfx_command
 tradeanim_get_trademon_sfx: macro
-	db tradeanim_get_trademon_sfx_command ; 2a
+	db tradeanim_get_trademon_sfx_command ; 28
 endm
 
 	enum tradeanim_end_command
 tradeanim_end: macro
-	db tradeanim_end_command ; 2b
-endm
-
-	enum tradeanim_animate_frontpic_command
-tradeanim_animate_frontpic: macro
-	db tradeanim_animate_frontpic_command ; 2c
-endm
-
-	enum tradeanim_wait_96_command
-tradeanim_wait_96: macro
-	db tradeanim_wait_96_command ; 2d
-endm
-
-	enum tradeanim_wait_80_if_ot_egg_command
-tradeanim_wait_80_if_ot_egg: macro
-	db tradeanim_wait_80_if_ot_egg_command ; 2e
-endm
-
-	enum tradeanim_wait_180_if_ot_egg_command
-tradeanim_wait_180_if_ot_egg: macro
-	db tradeanim_wait_180_if_ot_egg_command ; 2f
+	db tradeanim_end_command ; 29
 endm

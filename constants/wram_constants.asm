@@ -98,6 +98,13 @@ DAY_CARE_DEPOSIT  EQU 3
 	const PLAYERSTEP_STOP_F     ; 6
 	const PLAYERSTEP_START_F    ; 7
 
+; wInitListType:: ; d14e
+INIT_ENEMYOT_LIST    EQU 1
+INIT_BAG_ITEM_LIST   EQU 2
+INIT_OTHER_ITEM_LIST EQU 3
+INIT_PLAYEROT_LIST   EQU 4
+INIT_MON_LIST        EQU 5
+
 ; wTimeOfDay:: ; d157
 	const_def
 	const MORN_F     ; 0

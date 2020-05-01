@@ -242,7 +242,8 @@ wVirtualOAMSprite39:: sprite_oam_struct wVirtualOAMSprite39
 wVirtualOAMEnd::
 
 
-SECTION "TileMap", WRAM0
+SECTION "Tilemap", WRAM0
+
 wTilemap:: ; c3a0
 	ds SCREEN_HEIGHT * SCREEN_WIDTH
 wTilemapEnd:: ; c508
@@ -256,6 +257,21 @@ UNION ; c508
 wSurroundingTiles:: ds SURROUNDING_WIDTH * SURROUNDING_HEIGHT
 
 NEXTU ; c508
+; trade
+wc508:: ds 10
+wc512:: ds 190
+
+wTrademons::
+wPlayerTrademon:: trademon wPlayerTrademon
+wOTTrademon::     trademon wOTTrademon
+wTrademonsEnd::
+wTradeAnimAddress:: dw
+wLinkPlayer1Name:: ds NAME_LENGTH
+wLinkPlayer2Name:: ds NAME_LENGTH
+wLinkTradeSendmonSpecies:: db
+wLinkTradeGetmonSpecies::  db
+
+NEXTU ; c508
 ; box save buffer
 ; SaveBoxAddress uses this buffer in three steps because it
 ; needs more space than the buffer can hold.
@@ -263,10 +279,11 @@ wBoxPartialData:: ds 480
 wBoxPartialDataEnd::
 
 NEXTU ; c508
+; 20x18 grid of 8x8 tiles
 wTempTilemap::
-	ds SCREEN_HEIGHT * SCREEN_WIDTH
+	ds SCREEN_WIDTH * SCREEN_HEIGHT ; $168 = 360
 
-NEXTU
+NEXTU ; c508
 ; wSpriteAnimDict is a 10x2 dictionary
 ; keys: taken from third column of SpriteAnimSeqData
 ; values: vTiles
@@ -315,29 +332,6 @@ wc5cd:: ds 1 ; c5cd
 wc5ce:: ds 1 ; c5ce
 wc5cf:: ds 1 ; c5cf
 
-UNION ; c5d0
-; trade
-wTradeMons::
-wPlayerTrademon:: trademon wPlayerTrademon
-wOTTrademon::     trademon wOTTrademon
-wTrademonsEnd::
-wTradeAnimAddress:: dw
-wLinkPlayer1Name:: ds NAME_LENGTH
-wLinkPlayer2Name:: ds NAME_LENGTH
-wLinkTradeSendmonSpecies:: db
-wLinkTradeGetmonSpecies::  db
-
-NEXTU ; c5d0
-; engine/gfx/color.asm ?
-	ds 50
-wc602:: ds 1 ; c602
-wc603:: ds 1 ; c603
-wc604:: ds 1 ; c604
-wc605:: ds 1 ; c605
-wc606:: ds 1 ; c606
-wc607:: ds 1 ; c607
-
-NEXTU ; c5d0
 ; naming screen
 wNamingScreenDestinationPointer:: dw ; c5d0
 wNamingScreenCurNameLength:: db ; c5d2
@@ -346,10 +340,20 @@ wNamingScreenType:: db ; c5d4
 wNamingScreenCursorObjectPointer:: dw ; c5d5
 wNamingScreenLastCharacter:: db ; c5d7
 wNamingScreenStringEntryCoord:: dw ; c5d8
-ENDU
 
-	ds 126
+	ds 40
 
+; engine/gfx/color.asm ?
+wc602:: ds 1 ; c602
+wc603:: ds 1 ; c603
+wc604:: ds 1 ; c604
+wc605:: ds 1 ; c605
+wc606:: ds 1 ; c606
+wc607:: ds 1 ; c607
+
+	ds 192
+
+; unidentifed
 wc6ca:: ds 1 ; c6ca
 wc6cb:: ds 1 ; c6cb
 wc6cc:: ds 1 ; c6cc
@@ -380,1021 +384,194 @@ wc6e4:: ds 1 ; c6e4
 wc6e5:: ds 1 ; c6e5
 wc6e6:: ds 1 ; c6e6
 wc6e7:: ds 1 ; c6e7
+ENDU ; c6e8
 
 ; This was a buffer for map-related pointers in the 1997 G/S prototype.
 ; See wMapBuffer in pokegold-spaceworld's wram.asm.
 wUnusedMapBuffer:: ds 24
 wUnusedMapBufferEnd::
 
-wOverworldMapBlocks::
-wLYOverrides::
-wHallOfFamePokemonList::
-wc700:: ds 1 ; c700
-wc701:: ds 1 ; c701
-wc702:: ds 1 ; c702
-wc703:: ds 1 ; c703
-wc704:: ds 1 ; c704
-wc705:: ds 1 ; c705
-wc706:: ds 1 ; c706
-wc707:: ds 1 ; c707
-wc708:: ds 1 ; c708
-wc709:: ds 1 ; c709
-wc70a:: ds 1 ; c70a
-wc70b:: ds 1 ; c70b
-wc70c:: ds 1 ; c70c
-wc70d:: ds 1 ; c70d
-wc70e:: ds 1 ; c70e
-wc70f:: ds 1 ; c70f
-wc710:: ds 1 ; c710
-wc711:: ds 1 ; c711
-wc712:: ds 1 ; c712
-wc713:: ds 1 ; c713
-wc714:: ds 1 ; c714
-wc715:: ds 1 ; c715
-wc716:: ds 1 ; c716
-wc717:: ds 1 ; c717
-wc718:: ds 1 ; c718
-wc719:: ds 1 ; c719
-wc71a:: ds 1 ; c71a
-wc71b:: ds 1 ; c71b
-wc71c:: ds 1 ; c71c
-wc71d:: ds 1 ; c71d
-wc71e:: ds 1 ; c71e
-wc71f:: ds 1 ; c71f
-wc720:: ds 1 ; c720
-wc721:: ds 1 ; c721
-wc722:: ds 1 ; c722
-wc723:: ds 1 ; c723
-wc724:: ds 1 ; c724
-wc725:: ds 1 ; c725
-wc726:: ds 1 ; c726
-wc727:: ds 1 ; c727
-wc728:: ds 1 ; c728
-wc729:: ds 1 ; c729
-wc72a:: ds 1 ; c72a
-wc72b:: ds 1 ; c72b
-wc72c:: ds 1 ; c72c
-wc72d:: ds 1 ; c72d
-wc72e:: ds 1 ; c72e
-wc72f:: ds 1 ; c72f
-wc730:: ds 1 ; c730
-wc731:: ds 1 ; c731
-wc732:: ds 1 ; c732
-wc733:: ds 1 ; c733
-wc734:: ds 1 ; c734
-wc735:: ds 1 ; c735
-wc736:: ds 1 ; c736
-wc737:: ds 1 ; c737
-wc738:: ds 1 ; c738
-wc739:: ds 1 ; c739
-wc73a:: ds 1 ; c73a
-wc73b:: ds 1 ; c73b
-wc73c:: ds 1 ; c73c
-wc73d:: ds 1 ; c73d
-wc73e:: ds 1 ; c73e
-wc73f:: ds 1 ; c73f
-wc740:: ds 1 ; c740
-wc741:: ds 1 ; c741
-wc742:: ds 1 ; c742
-wc743:: ds 1 ; c743
-wc744:: ds 1 ; c744
-wc745:: ds 1 ; c745
-wc746:: ds 1 ; c746
-wc747:: ds 1 ; c747
-wc748:: ds 1 ; c748
-wc749:: ds 1 ; c749
-wc74a:: ds 1 ; c74a
-wc74b:: ds 1 ; c74b
-wc74c:: ds 1 ; c74c
-wc74d:: ds 1 ; c74d
-wc74e:: ds 1 ; c74e
-wc74f:: ds 1 ; c74f
-wc750:: ds 1 ; c750
-wc751:: ds 1 ; c751
-wc752:: ds 1 ; c752
-wc753:: ds 1 ; c753
-wc754:: ds 1 ; c754
-wc755:: ds 1 ; c755
-wc756:: ds 1 ; c756
-wc757:: ds 1 ; c757
-wc758:: ds 1 ; c758
-wc759:: ds 1 ; c759
-wc75a:: ds 1 ; c75a
-wc75b:: ds 1 ; c75b
-wc75c:: ds 1 ; c75c
-wc75d:: ds 1 ; c75d
-wc75e:: ds 1 ; c75e
-wc75f:: ds 1 ; c75f
-wc760:: ds 1 ; c760
-wHallOfFamePokemonListEnd::
-wc761:: ds 1 ; c761
-wc762:: ds 1 ; c762
-wc763:: ds 1 ; c763
-wc764:: ds 1 ; c764
-wc765:: ds 1 ; c765
-wc766:: ds 1 ; c766
-wc767:: ds 1 ; c767
-wc768:: ds 1 ; c768
-wc769:: ds 1 ; c769
-wc76a:: ds 1 ; c76a
-wc76b:: ds 1 ; c76b
-wc76c:: ds 1 ; c76c
-wc76d:: ds 1 ; c76d
-wc76e:: ds 1 ; c76e
-wc76f:: ds 1 ; c76f
-wc770:: ds 1 ; c770
-wc771:: ds 1 ; c771
-wc772:: ds 1 ; c772
-wc773:: ds 1 ; c773
-wc774:: ds 1 ; c774
-wc775:: ds 1 ; c775
-wc776:: ds 1 ; c776
-wc777:: ds 1 ; c777
-wc778:: ds 1 ; c778
-wc779:: ds 1 ; c779
-wc77a:: ds 1 ; c77a
-wc77b:: ds 1 ; c77b
-wc77c:: ds 1 ; c77c
-wc77d:: ds 1 ; c77d
-wc77e:: ds 1 ; c77e
-wc77f:: ds 1 ; c77f
-wc780:: ds 1 ; c780
-wc781:: ds 1 ; c781
-wc782:: ds 1 ; c782
-wc783:: ds 1 ; c783
-wc784:: ds 1 ; c784
-wc785:: ds 1 ; c785
-wc786:: ds 1 ; c786
-wc787:: ds 1 ; c787
-wc788:: ds 1 ; c788
-wc789:: ds 1 ; c789
-wc78a:: ds 1 ; c78a
-wc78b:: ds 1 ; c78b
-wc78c:: ds 1 ; c78c
-wc78d:: ds 1 ; c78d
-wc78e:: ds 1 ; c78e
-wc78f:: ds 1 ; c78f
-wLYOverridesEnd::
-wc790:: ds 1 ; c790
-wc791:: ds 1 ; c791
-wc792:: ds 1 ; c792
-wc793:: ds 1 ; c793
-wc794:: ds 1 ; c794
-wc795:: ds 1 ; c795
-wc796:: ds 1 ; c796
-wc797:: ds 1 ; c797
-wc798:: ds 1 ; c798
-wc799:: ds 1 ; c799
-wc79a:: ds 1 ; c79a
-wc79b:: ds 1 ; c79b
-wc79c:: ds 1 ; c79c
-wc79d:: ds 1 ; c79d
-wc79e:: ds 1 ; c79e
-wc79f:: ds 1 ; c79f
-wc7a0:: ds 1 ; c7a0
-wc7a1:: ds 1 ; c7a1
-wc7a2:: ds 1 ; c7a2
-wc7a3:: ds 1 ; c7a3
-wc7a4:: ds 1 ; c7a4
-wc7a5:: ds 1 ; c7a5
-wc7a6:: ds 1 ; c7a6
-wc7a7:: ds 1 ; c7a7
-wc7a8:: ds 1 ; c7a8
-wc7a9:: ds 1 ; c7a9
-wc7aa:: ds 1 ; c7aa
-wc7ab:: ds 1 ; c7ab
-wc7ac:: ds 1 ; c7ac
-wc7ad:: ds 1 ; c7ad
-wc7ae:: ds 1 ; c7ae
-wc7af:: ds 1 ; c7af
-wc7b0:: ds 1 ; c7b0
-wc7b1:: ds 1 ; c7b1
-wc7b2:: ds 1 ; c7b2
-wc7b3:: ds 1 ; c7b3
-wc7b4:: ds 1 ; c7b4
-wc7b5:: ds 1 ; c7b5
-wc7b6:: ds 1 ; c7b6
-wc7b7:: ds 1 ; c7b7
-wc7b8:: ds 1 ; c7b8
-wc7b9:: ds 1 ; c7b9
-wc7ba:: ds 1 ; c7ba
-wc7bb:: ds 1 ; c7bb
-wc7bc:: ds 1 ; c7bc
-wc7bd:: ds 1 ; c7bd
-wc7be:: ds 1 ; c7be
-wc7bf:: ds 1 ; c7bf
-wc7c0:: ds 1 ; c7c0
-wc7c1:: ds 1 ; c7c1
-wc7c2:: ds 1 ; c7c2
-wc7c3:: ds 1 ; c7c3
-wc7c4:: ds 1 ; c7c4
-wc7c5:: ds 1 ; c7c5
-wc7c6:: ds 1 ; c7c6
-wc7c7:: ds 1 ; c7c7
-wc7c8:: ds 1 ; c7c8
-wc7c9:: ds 1 ; c7c9
-wc7ca:: ds 1 ; c7ca
-wc7cb:: ds 1 ; c7cb
-wc7cc:: ds 1 ; c7cc
-wc7cd:: ds 1 ; c7cd
-wc7ce:: ds 1 ; c7ce
-wc7cf:: ds 1 ; c7cf
-wc7d0:: ds 1 ; c7d0
-wc7d1:: ds 1 ; c7d1
-wc7d2:: ds 1 ; c7d2
-wc7d3:: ds 1 ; c7d3
-wc7d4:: ds 1 ; c7d4
-wc7d5:: ds 1 ; c7d5
-wc7d6:: ds 1 ; c7d6
-wc7d7:: ds 1 ; c7d7
-wc7d8:: ds 1 ; c7d8
-wc7d9:: ds 1 ; c7d9
-wc7da:: ds 1 ; c7da
-wc7db:: ds 1 ; c7db
-wc7dc:: ds 1 ; c7dc
-wc7dd:: ds 1 ; c7dd
-wc7de:: ds 1 ; c7de
-wc7df:: ds 1 ; c7df
-wc7e0:: ds 1 ; c7e0
-wc7e1:: ds 1 ; c7e1
-wc7e2:: ds 1 ; c7e2
-wc7e3:: ds 1 ; c7e3
-wc7e4:: ds 1 ; c7e4
-wc7e5:: ds 1 ; c7e5
-wc7e6:: ds 1 ; c7e6
-wc7e7:: ds 1 ; c7e7
-wc7e8:: ds 1 ; c7e8
-wc7e9:: ds 1 ; c7e9
-wc7ea:: ds 1 ; c7ea
-wc7eb:: ds 1 ; c7eb
-wc7ec:: ds 1 ; c7ec
-wc7ed:: ds 1 ; c7ed
-wc7ee:: ds 1 ; c7ee
-wc7ef:: ds 1 ; c7ef
-wc7f0:: ds 1 ; c7f0
-wc7f1:: ds 1 ; c7f1
-wc7f2:: ds 1 ; c7f2
-wc7f3:: ds 1 ; c7f3
-wc7f4:: ds 1 ; c7f4
-wc7f5:: ds 1 ; c7f5
-wc7f6:: ds 1 ; c7f6
-wc7f7:: ds 1 ; c7f7
-wc7f8:: ds 1 ; c7f8
-wc7f9:: ds 1 ; c7f9
-wc7fa:: ds 1 ; c7fa
-wc7fb:: ds 1 ; c7fb
-wc7fc:: ds 1 ; c7fc
-wc7fd:: ds 1 ; c7fd
-wc7fe:: ds 1 ; c7fe
-wc7ff:: ds 1 ; c7ff
+UNION ; c700
+; overworld map blocks
+wOverworldMapBlocks:: ds 1300 ; c700
+wOverworldMapBlocksEnd::
 
-wLYOverridesBackup::
-wc800:: ds 1 ; c800
-wc801:: ds 1 ; c801
-wc802:: ds 1 ; c802
-wMysteryGiftPartnerName::
-wc803:: ds 1 ; c803
-wc804:: ds 1 ; c804
-wc805:: ds 1 ; c805
-wc806:: ds 1 ; c806
-wc807:: ds 1 ; c807
-wc808:: ds 1 ; c808
-wc809:: ds 1 ; c809
-wc80a:: ds 1 ; c80a
-wc80b:: ds 1 ; c80b
-wc80c:: ds 1 ; c80c
-wc80d:: ds 1 ; c80d
-wc80e:: ds 1 ; c80e
-wc80f:: ds 1 ; c80f
-wc810:: ds 1 ; c810
-wc811:: ds 1 ; c811
-wc812:: ds 1 ; c812
-wc813:: ds 1 ; c813
-wc814:: ds 1 ; c814
-wc815:: ds 1 ; c815
-wc816:: ds 1 ; c816
-wc817:: ds 1 ; c817
-wc818:: ds 1 ; c818
-wc819:: ds 1 ; c819
-wc81a:: ds 1 ; c81a
-wc81b:: ds 1 ; c81b
-wc81c:: ds 1 ; c81c
-wc81d:: ds 1 ; c81d
-wc81e:: ds 1 ; c81e
-wc81f:: ds 1 ; c81f
-wc820:: ds 1 ; c820
-wc821:: ds 1 ; c821
-wc822:: ds 1 ; c822
-wc823:: ds 1 ; c823
-wc824:: ds 1 ; c824
-wc825:: ds 1 ; c825
-wc826:: ds 1 ; c826
-wc827:: ds 1 ; c827
-wc828:: ds 1 ; c828
-wc829:: ds 1 ; c829
-wc82a:: ds 1 ; c82a
-wc82b:: ds 1 ; c82b
-wc82c:: ds 1 ; c82c
-wc82d:: ds 1 ; c82d
-wc82e:: ds 1 ; c82e
-wc82f:: ds 1 ; c82f
-wc830:: ds 1 ; c830
-wc831:: ds 1 ; c831
-wc832:: ds 1 ; c832
-wc833:: ds 1 ; c833
-wc834:: ds 1 ; c834
-wc835:: ds 1 ; c835
-wc836:: ds 1 ; c836
-wc837:: ds 1 ; c837
-wc838:: ds 1 ; c838
-wc839:: ds 1 ; c839
-wc83a:: ds 1 ; c83a
-wc83b:: ds 1 ; c83b
-wc83c:: ds 1 ; c83c
-wc83d:: ds 1 ; c83d
-wc83e:: ds 1 ; c83e
-wc83f:: ds 1 ; c83f
-wc840:: ds 1 ; c840
-wc841:: ds 1 ; c841
-wc842:: ds 1 ; c842
-wc843:: ds 1 ; c843
-wc844:: ds 1 ; c844
-wc845:: ds 1 ; c845
-wc846:: ds 1 ; c846
-wc847:: ds 1 ; c847
-wc848:: ds 1 ; c848
-wc849:: ds 1 ; c849
-wc84a:: ds 1 ; c84a
-wc84b:: ds 1 ; c84b
-wc84c:: ds 1 ; c84c
-wc84d:: ds 1 ; c84d
-wc84e:: ds 1 ; c84e
-wc84f:: ds 1 ; c84f
-wc850:: ds 1 ; c850
-wc851:: ds 1 ; c851
-wc852:: ds 1 ; c852
-wMysteryGiftPlayerName::
-wc853:: ds 1 ; c853
-wc854:: ds 1 ; c854
-wc855:: ds 1 ; c855
-wc856:: ds 1 ; c856
-wc857:: ds 1 ; c857
-wc858:: ds 1 ; c858
-wc859:: ds 1 ; c859
-wc85a:: ds 1 ; c85a
-wc85b:: ds 1 ; c85b
-wc85c:: ds 1 ; c85c
-wc85d:: ds 1 ; c85d
-wc85e:: ds 1 ; c85e
-wc85f:: ds 1 ; c85f
-wc860:: ds 1 ; c860
-wc861:: ds 1 ; c861
-wc862:: ds 1 ; c862
-wc863:: ds 1 ; c863
-wc864:: ds 1 ; c864
-wc865:: ds 1 ; c865
-wc866:: ds 1 ; c866
-wc867:: ds 1 ; c867
-wc868:: ds 1 ; c868
-wc869:: ds 1 ; c869
-wc86a:: ds 1 ; c86a
-wc86b:: ds 1 ; c86b
-wc86c:: ds 1 ; c86c
-wc86d:: ds 1 ; c86d
-wc86e:: ds 1 ; c86e
-wc86f:: ds 1 ; c86f
-wc870:: ds 1 ; c870
-wc871:: ds 1 ; c871
-wc872:: ds 1 ; c872
-wc873:: ds 1 ; c873
-wc874:: ds 1 ; c874
-wc875:: ds 1 ; c875
-wc876:: ds 1 ; c876
-wc877:: ds 1 ; c877
-wc878:: ds 1 ; c878
-wc879:: ds 1 ; c879
-wc87a:: ds 1 ; c87a
-wc87b:: ds 1 ; c87b
-wc87c:: ds 1 ; c87c
-wc87d:: ds 1 ; c87d
-wc87e:: ds 1 ; c87e
-wc87f:: ds 1 ; c87f
-wc880:: ds 1 ; c880
-wc881:: ds 1 ; c881
-wc882:: ds 1 ; c882
-wc883:: ds 1 ; c883
-wc884:: ds 1 ; c884
-wc885:: ds 1 ; c885
-wc886:: ds 1 ; c886
-wc887:: ds 1 ; c887
-wc888:: ds 1 ; c888
-wc889:: ds 1 ; c889
-wc88a:: ds 1 ; c88a
-wc88b:: ds 1 ; c88b
-wc88c:: ds 1 ; c88c
-wc88d:: ds 1 ; c88d
-wc88e:: ds 1 ; c88e
-wc88f:: ds 1 ; c88f
+NEXTU ; c700
+; GB Printer data
+wGameboyPrinter2bppSource:: ds 40 tiles
+wGameboyPrinter2bppSourceEnd::
+wc980:: db
+wPrinterRowIndex:: db
+
+; Printer data
+wPrinterData:: ds 4
+wPrinterChecksum:: dw ; c986
+wPrinterHandshake:: db
+wPrinterStatusFlags::
+; bit 7: set if error 1 (battery low)
+; bit 6: set if error 4 (too hot or cold)
+; bit 5: set if error 3 (paper jammed or empty)
+; if this and the previous byte are both $ff: error 2 (connection error)
+	db
+
+wHandshakeFrameDelay:: db
+wPrinterSerialFrameDelay:: db
+wPrinterSendByteOffset:: dw
+wPrinterSendByteCounter:: dw
+
+; tilemap backup?
+wPrinterTilemapBuffer:: ds SCREEN_HEIGHT * SCREEN_WIDTH ; c990
+wPrinterTilemapBufferEnd::
+wPrinterStatus:: db ; caf8
+	ds 1
+; High nibble is for margin before the image, low nibble is for after.
+wPrinterMargins:: db ; cafa
+wPrinterExposureTime:: db ; cafb
+	ds 16
+wGameboyPrinterRAMEnd::
+
+NEXTU ; c700
+; Hall of Fame data
+wHallOfFamePokemonList:: hall_of_fame wHallOfFamePokemonList
+
+NEXTU ; c700
+; raw link data
+wLinkData:: ds $514
+wLinkDataEnd::
+
+NEXTU ; c700
+; link data members
+wLinkPlayerName:: ds NAME_LENGTH
+wLinkPartyCount:: db
+wLinkPartySpecies:: ds PARTY_LENGTH
+wLinkPartyEnd:: db ; older code doesn't check PartyCount
+
+UNION ; c713
+; time capsule party data
+wTimeCapsulePlayerData::
+wTimeCapsulePartyMon1:: red_party_struct wTimeCapsulePartyMon1
+wTimeCapsulePartyMon2:: red_party_struct wTimeCapsulePartyMon2
+wTimeCapsulePartyMon3:: red_party_struct wTimeCapsulePartyMon3
+wTimeCapsulePartyMon4:: red_party_struct wTimeCapsulePartyMon4
+wTimeCapsulePartyMon5:: red_party_struct wTimeCapsulePartyMon5
+wTimeCapsulePartyMon6:: red_party_struct wTimeCapsulePartyMon6
+wTimeCapsulePartyMonOTNames:: ds PARTY_LENGTH * NAME_LENGTH
+wTimeCapsulePartyMonNicks:: ds PARTY_LENGTH * MON_NAME_LENGTH
+wTimeCapsulePlayerDataEnd::
+
+NEXTU ; c713
+; link player data
+wLinkPlayerData::
+wLinkPlayerPartyMon1:: party_struct wLinkPlayerPartyMon1
+wLinkPlayerPartyMon2:: party_struct wLinkPlayerPartyMon2
+wLinkPlayerPartyMon3:: party_struct wLinkPlayerPartyMon3
+wLinkPlayerPartyMon4:: party_struct wLinkPlayerPartyMon4
+wLinkPlayerPartyMon5:: party_struct wLinkPlayerPartyMon5
+wLinkPlayerPartyMon6:: party_struct wLinkPlayerPartyMon6
+wLinkPlayerPartyMonOTNames:: ds PARTY_LENGTH * NAME_LENGTH
+wLinkPlayerPartyMonNicks:: ds PARTY_LENGTH * MON_NAME_LENGTH
+wLinkPlayerDataEnd::
+ENDU
+
+NEXTU ; c700
+
+	ds 80
+
+wMysteryGiftTrainerData:: ds (1 + 1 + NUM_MOVES) * PARTY_LENGTH + 2
+wMysteryGiftTrainerDataEnd::
+
+	ds 138
+
+wMysteryGiftPartnerData::
+wc800:: db
+wMysteryGiftPartnerID:: dw
+wMysteryGiftPartnerName:: ds NAME_LENGTH
+wMysteryGiftPartnerDexCaught:: db
+wc80f::
+wMysteryGiftPartnerSentDeco:: db
+wMysteryGiftPartnerWhichItem:: db
+wMysteryGiftPartnerWhichDeco:: db
+wMysteryGiftPartnerBackupItem:: db
+	ds 1
+wMysteryGiftPartnerDataEnd::
+
+	ds 60
+
+wMysteryGiftPlayerData::
+	ds 1
+wMysteryGiftPlayerID:: dw
+wMysteryGiftPlayerName:: ds NAME_LENGTH
+wMysteryGiftPlayerDexCaught:: db
+wMysteryGiftPlayerSentDeco:: db
+wMysteryGiftPlayerWhichItem:: db
+wMysteryGiftPlayerWhichDeco:: db
+wMysteryGiftPlayerBackupItem:: db
+	ds 1
+wMysteryGiftPlayerDataEnd::
+
+	ds 144
+
+wc8f4:: ds 5
+wc8f9:: ds 7
+
+wc900:: db
+wc901:: db
+wc902:: db
+
+NEXTU ; c700
+wLYOverrides:: ds 144
+wLYOverridesEnd:: ds 112
+
+wLYOverridesBackup:: ds 144
 wLYOverridesBackupEnd::
-wc890:: ds 1 ; c890
-wc891:: ds 1 ; c891
-wc892:: ds 1 ; c892
-wc893:: ds 1 ; c893
-wc894:: ds 1 ; c894
-wc895:: ds 1 ; c895
-wc896:: ds 1 ; c896
-wc897:: ds 1 ; c897
-wc898:: ds 1 ; c898
-wc899:: ds 1 ; c899
-wc89a:: ds 1 ; c89a
-wc89b:: ds 1 ; c89b
-wc89c:: ds 1 ; c89c
-wc89d:: ds 1 ; c89d
-wc89e:: ds 1 ; c89e
-wc89f:: ds 1 ; c89f
-wc8a0:: ds 1 ; c8a0
-wc8a1:: ds 1 ; c8a1
-wc8a2:: ds 1 ; c8a2
-wc8a3:: ds 1 ; c8a3
-wc8a4:: ds 1 ; c8a4
-wc8a5:: ds 1 ; c8a5
-wc8a6:: ds 1 ; c8a6
-wc8a7:: ds 1 ; c8a7
-wc8a8:: ds 1 ; c8a8
-wc8a9:: ds 1 ; c8a9
-wc8aa:: ds 1 ; c8aa
-wc8ab:: ds 1 ; c8ab
-wc8ac:: ds 1 ; c8ac
-wc8ad:: ds 1 ; c8ad
-wc8ae:: ds 1 ; c8ae
-wc8af:: ds 1 ; c8af
-wc8b0:: ds 1 ; c8b0
-wc8b1:: ds 1 ; c8b1
-wc8b2:: ds 1 ; c8b2
-wc8b3:: ds 1 ; c8b3
-wc8b4:: ds 1 ; c8b4
-wc8b5:: ds 1 ; c8b5
-wc8b6:: ds 1 ; c8b6
-wc8b7:: ds 1 ; c8b7
-wc8b8:: ds 1 ; c8b8
-wc8b9:: ds 1 ; c8b9
-wc8ba:: ds 1 ; c8ba
-wc8bb:: ds 1 ; c8bb
-wc8bc:: ds 1 ; c8bc
-wc8bd:: ds 1 ; c8bd
-wc8be:: ds 1 ; c8be
-wc8bf:: ds 1 ; c8bf
-wc8c0:: ds 1 ; c8c0
-wc8c1:: ds 1 ; c8c1
-wc8c2:: ds 1 ; c8c2
-wc8c3:: ds 1 ; c8c3
-wc8c4:: ds 1 ; c8c4
-wc8c5:: ds 1 ; c8c5
-wc8c6:: ds 1 ; c8c6
-wc8c7:: ds 1 ; c8c7
-wc8c8:: ds 1 ; c8c8
-wc8c9:: ds 1 ; c8c9
-wc8ca:: ds 1 ; c8ca
-wc8cb:: ds 1 ; c8cb
-wc8cc:: ds 1 ; c8cc
-wc8cd:: ds 1 ; c8cd
-wc8ce:: ds 1 ; c8ce
-wc8cf:: ds 1 ; c8cf
-wc8d0:: ds 1 ; c8d0
-wc8d1:: ds 1 ; c8d1
-wc8d2:: ds 1 ; c8d2
-wc8d3:: ds 1 ; c8d3
-wc8d4:: ds 1 ; c8d4
-wc8d5:: ds 1 ; c8d5
-wc8d6:: ds 1 ; c8d6
-wc8d7:: ds 1 ; c8d7
-wc8d8:: ds 1 ; c8d8
-wc8d9:: ds 1 ; c8d9
-wc8da:: ds 1 ; c8da
-wc8db:: ds 1 ; c8db
-wc8dc:: ds 1 ; c8dc
-wc8dd:: ds 1 ; c8dd
-wc8de:: ds 1 ; c8de
-wc8df:: ds 1 ; c8df
-wc8e0:: ds 1 ; c8e0
-wc8e1:: ds 1 ; c8e1
-wc8e2:: ds 1 ; c8e2
-wc8e3:: ds 1 ; c8e3
-wc8e4:: ds 1 ; c8e4
-wc8e5:: ds 1 ; c8e5
-wc8e6:: ds 1 ; c8e6
-wc8e7:: ds 1 ; c8e7
-wc8e8:: ds 1 ; c8e8
-wc8e9:: ds 1 ; c8e9
-wc8ea:: ds 1 ; c8ea
-wc8eb:: ds 1 ; c8eb
-wc8ec:: ds 1 ; c8ec
-wc8ed:: ds 1 ; c8ed
-wc8ee:: ds 1 ; c8ee
-wc8ef:: ds 1 ; c8ef
-wc8f0:: ds 1 ; c8f0
-wc8f1:: ds 1 ; c8f1
-wc8f2:: ds 1 ; c8f2
-wc8f3:: ds 1 ; c8f3
-wc8f4:: ds 1 ; c8f4
-wc8f5:: ds 1 ; c8f5
-wc8f6:: ds 1 ; c8f6
-wc8f7:: ds 1 ; c8f7
-wc8f8:: ds 1 ; c8f8
-wc8f9:: ds 1 ; c8f9
-wc8fa:: ds 1 ; c8fa
-wc8fb:: ds 1 ; c8fb
-wc8fc:: ds 1 ; c8fc
-wc8fd:: ds 1 ; c8fd
-wc8fe:: ds 1 ; c8fe
-wc8ff:: ds 1 ; c8ff
-wc900:: ds 1 ; c900
-wc901:: ds 1 ; c901
-wc902:: ds 1 ; c902
-wc903:: ds 1 ; c903
-wc904:: ds 1 ; c904
-wc905:: ds 1 ; c905
-wc906:: ds 1 ; c906
-wc907:: ds 1 ; c907
-wc908:: ds 1 ; c908
-wc909:: ds 1 ; c909
-wc90a:: ds 1 ; c90a
-wc90b:: ds 1 ; c90b
-wc90c:: ds 1 ; c90c
-wc90d:: ds 1 ; c90d
-wc90e:: ds 1 ; c90e
-wc90f:: ds 1 ; c90f
-wc910:: ds 1 ; c910
-wc911:: ds 1 ; c911
-wc912:: ds 1 ; c912
-wc913:: ds 1 ; c913
-wc914:: ds 1 ; c914
-wc915:: ds 1 ; c915
-wc916:: ds 1 ; c916
-wc917:: ds 1 ; c917
-wc918:: ds 1 ; c918
-wc919:: ds 1 ; c919
-wc91a:: ds 1 ; c91a
-wc91b:: ds 1 ; c91b
-wc91c:: ds 1 ; c91c
-wc91d:: ds 1 ; c91d
-wc91e:: ds 1 ; c91e
-wc91f:: ds 1 ; c91f
-wc920:: ds 1 ; c920
-wc921:: ds 1 ; c921
-wc922:: ds 1 ; c922
-wc923:: ds 1 ; c923
-wc924:: ds 1 ; c924
-wc925:: ds 1 ; c925
-wc926:: ds 1 ; c926
-wc927:: ds 1 ; c927
-wc928:: ds 1 ; c928
-wc929:: ds 1 ; c929
-wc92a:: ds 1 ; c92a
-wc92b:: ds 1 ; c92b
-wc92c:: ds 1 ; c92c
-wc92d:: ds 1 ; c92d
-wc92e:: ds 1 ; c92e
-wc92f:: ds 1 ; c92f
-wc930:: ds 1 ; c930
-wc931:: ds 1 ; c931
-wc932:: ds 1 ; c932
-wc933:: ds 1 ; c933
-wc934:: ds 1 ; c934
-wc935:: ds 1 ; c935
-wc936:: ds 1 ; c936
-wc937:: ds 1 ; c937
-wc938:: ds 1 ; c938
-wc939:: ds 1 ; c939
-wc93a:: ds 1 ; c93a
-wc93b:: ds 1 ; c93b
-wc93c:: ds 1 ; c93c
-wc93d:: ds 1 ; c93d
-wc93e:: ds 1 ; c93e
-wc93f:: ds 1 ; c93f
-wc940:: ds 1 ; c940
-wc941:: ds 1 ; c941
-wc942:: ds 1 ; c942
-wc943:: ds 1 ; c943
-wc944:: ds 1 ; c944
-wc945:: ds 1 ; c945
-wc946:: ds 1 ; c946
-wc947:: ds 1 ; c947
-wc948:: ds 1 ; c948
-wc949:: ds 1 ; c949
-wc94a:: ds 1 ; c94a
-wc94b:: ds 1 ; c94b
-wc94c:: ds 1 ; c94c
-wc94d:: ds 1 ; c94d
-wc94e:: ds 1 ; c94e
-wc94f:: ds 1 ; c94f
-wc950:: ds 1 ; c950
-wc951:: ds 1 ; c951
-wc952:: ds 1 ; c952
-wc953:: ds 1 ; c953
-wc954:: ds 1 ; c954
-wc955:: ds 1 ; c955
-wc956:: ds 1 ; c956
-wc957:: ds 1 ; c957
-wc958:: ds 1 ; c958
-wc959:: ds 1 ; c959
-wc95a:: ds 1 ; c95a
-wc95b:: ds 1 ; c95b
-wc95c:: ds 1 ; c95c
-wc95d:: ds 1 ; c95d
-wc95e:: ds 1 ; c95e
-wc95f:: ds 1 ; c95f
-wc960:: ds 1 ; c960
-wc961:: ds 1 ; c961
-wc962:: ds 1 ; c962
-wc963:: ds 1 ; c963
-wc964:: ds 1 ; c964
-wc965:: ds 1 ; c965
-wc966:: ds 1 ; c966
-wc967:: ds 1 ; c967
-wc968:: ds 1 ; c968
-wc969:: ds 1 ; c969
-wc96a:: ds 1 ; c96a
-wc96b:: ds 1 ; c96b
-wc96c:: ds 1 ; c96c
-wc96d:: ds 1 ; c96d
-wc96e:: ds 1 ; c96e
-wc96f:: ds 1 ; c96f
-wc970:: ds 1 ; c970
-wc971:: ds 1 ; c971
-wc972:: ds 1 ; c972
-wc973:: ds 1 ; c973
-wc974:: ds 1 ; c974
-wc975:: ds 1 ; c975
-wc976:: ds 1 ; c976
-wc977:: ds 1 ; c977
-wc978:: ds 1 ; c978
-wc979:: ds 1 ; c979
-wc97a:: ds 1 ; c97a
-wc97b:: ds 1 ; c97b
-wc97c:: ds 1 ; c97c
-wc97d:: ds 1 ; c97d
-wc97e:: ds 1 ; c97e
-wc97f:: ds 1 ; c97f
-wc980:: ds 1 ; c980
-wc981:: ds 1 ; c981
-wc982:: ds 1 ; c982
-wc983:: ds 1 ; c983
-wc984:: ds 1 ; c984
-wc985:: ds 1 ; c985
-wc986:: ds 1 ; c986
-wc987:: ds 1 ; c987
-wc988:: ds 1 ; c988
-wc989:: ds 1 ; c989
-wHandshakeFrameDelay:: ds 1 ; c98a
-wc98b:: ds 1 ; c98b
-wc98c:: ds 1 ; c98c
-wc98d:: ds 1 ; c98d
-wc98e:: ds 1 ; c98e
-wc98f:: ds 1 ; c98f
-wc990:: ds 1 ; c990
-wc991:: ds 1 ; c991
-wc992:: ds 1 ; c992
-wc993:: ds 1 ; c993
-wc994:: ds 1 ; c994
-wc995:: ds 1 ; c995
-wc996:: ds 1 ; c996
-wc997:: ds 1 ; c997
-wc998:: ds 1 ; c998
-wc999:: ds 1 ; c999
-wc99a:: ds 1 ; c99a
-wc99b:: ds 1 ; c99b
-wc99c:: ds 1 ; c99c
-wc99d:: ds 1 ; c99d
-wc99e:: ds 1 ; c99e
-wc99f:: ds 1 ; c99f
-wc9a0:: ds 1 ; c9a0
-wc9a1:: ds 1 ; c9a1
-wc9a2:: ds 1 ; c9a2
-wc9a3:: ds 1 ; c9a3
-wc9a4:: ds 1 ; c9a4
-wc9a5:: ds 1 ; c9a5
-wc9a6:: ds 1 ; c9a6
-wc9a7:: ds 1 ; c9a7
-wc9a8:: ds 1 ; c9a8
-wc9a9:: ds 1 ; c9a9
-wc9aa:: ds 1 ; c9aa
-wc9ab:: ds 1 ; c9ab
-wc9ac:: ds 1 ; c9ac
-wc9ad:: ds 1 ; c9ad
-wc9ae:: ds 1 ; c9ae
-wc9af:: ds 1 ; c9af
-wc9b0:: ds 1 ; c9b0
-wc9b1:: ds 1 ; c9b1
-wc9b2:: ds 1 ; c9b2
-wc9b3:: ds 1 ; c9b3
-wc9b4:: ds 1 ; c9b4
-wc9b5:: ds 1 ; c9b5
-wc9b6:: ds 1 ; c9b6
-wc9b7:: ds 1 ; c9b7
-wc9b8:: ds 1 ; c9b8
-wc9b9:: ds 1 ; c9b9
-wc9ba:: ds 1 ; c9ba
-wc9bb:: ds 1 ; c9bb
-wc9bc:: ds 1 ; c9bc
-wc9bd:: ds 1 ; c9bd
-wc9be:: ds 1 ; c9be
-wc9bf:: ds 1 ; c9bf
-wc9c0:: ds 1 ; c9c0
-wc9c1:: ds 1 ; c9c1
-wc9c2:: ds 1 ; c9c2
-wc9c3:: ds 1 ; c9c3
-wc9c4:: ds 1 ; c9c4
-wc9c5:: ds 1 ; c9c5
-wc9c6:: ds 1 ; c9c6
-wc9c7:: ds 1 ; c9c7
-wc9c8:: ds 1 ; c9c8
-wc9c9:: ds 1 ; c9c9
-wc9ca:: ds 1 ; c9ca
-wc9cb:: ds 1 ; c9cb
-wc9cc:: ds 1 ; c9cc
-wc9cd:: ds 1 ; c9cd
-wc9ce:: ds 1 ; c9ce
-wc9cf:: ds 1 ; c9cf
-wc9d0:: ds 1 ; c9d0
-wc9d1:: ds 1 ; c9d1
-wc9d2:: ds 1 ; c9d2
-wc9d3:: ds 1 ; c9d3
-wc9d4:: ds 1 ; c9d4
-wc9d5:: ds 1 ; c9d5
-wc9d6:: ds 1 ; c9d6
-wc9d7:: ds 1 ; c9d7
-wc9d8:: ds 1 ; c9d8
-wc9d9:: ds 1 ; c9d9
-wc9da:: ds 1 ; c9da
-wc9db:: ds 1 ; c9db
-wc9dc:: ds 1 ; c9dc
-wc9dd:: ds 1 ; c9dd
-wc9de:: ds 1 ; c9de
-wc9df:: ds 1 ; c9df
-wc9e0:: ds 1 ; c9e0
-wc9e1:: ds 1 ; c9e1
-wc9e2:: ds 1 ; c9e2
-wc9e3:: ds 1 ; c9e3
-wc9e4:: ds 1 ; c9e4
-wc9e5:: ds 1 ; c9e5
-wc9e6:: ds 1 ; c9e6
-wc9e7:: ds 1 ; c9e7
-wc9e8:: ds 1 ; c9e8
-wc9e9:: ds 1 ; c9e9
-wc9ea:: ds 1 ; c9ea
-wc9eb:: ds 1 ; c9eb
-wc9ec:: ds 1 ; c9ec
-wc9ed:: ds 1 ; c9ed
-wc9ee:: ds 1 ; c9ee
-wc9ef:: ds 1 ; c9ef
-wc9f0:: ds 1 ; c9f0
-wc9f1:: ds 1 ; c9f1
-wc9f2:: ds 1 ; c9f2
-wc9f3:: ds 1 ; c9f3
-wc9f4:: ds 1 ; c9f4
-wc9f5:: ds 1 ; c9f5
-wc9f6:: ds 1 ; c9f6
-wc9f7:: ds 1 ; c9f7
-wc9f8:: ds 1 ; c9f8
-wc9f9:: ds 1 ; c9f9
-wc9fa:: ds 1 ; c9fa
-wc9fb:: ds 1 ; c9fb
-wc9fc:: ds 1 ; c9fc
-wc9fd:: ds 1 ; c9fd
-wc9fe:: ds 1 ; c9fe
-wc9ff:: ds 1 ; c9ff
-wca00:: ds 1 ; ca00
-wca01:: ds 1 ; ca01
-wca02:: ds 1 ; ca02
-wca03:: ds 1 ; ca03
-wca04:: ds 1 ; ca04
-wca05:: ds 1 ; ca05
-wca06:: ds 1 ; ca06
-wca07:: ds 1 ; ca07
-wca08:: ds 1 ; ca08
-wca09:: ds 1 ; ca09
-wca0a:: ds 1 ; ca0a
-wca0b:: ds 1 ; ca0b
-wca0c:: ds 1 ; ca0c
-wca0d:: ds 1 ; ca0d
-wca0e:: ds 1 ; ca0e
-wca0f:: ds 1 ; ca0f
+
+NEXTU ; c700
+
+	ds $5f
+
+wc75f:: db
+
+	ds $25f
+
+UNION ; c9bf
+; link
+wc9bf:: ds 79
+wca0e:: ds 5
+wca13:: ds 50
+wca45:: ds 20
+wca59:: ds 20
+wca6d:: ds 1
+wca6e:: ds 22
+wca84:: ds 100
+wcae8:: dw
+wLinkOTPartyMonTypes:: ds 2 * PARTY_LENGTH
+	ds 84
+wcb4a:: ds 22
+
+wcb60:: ds 1
+wcb61:: ds 1
+wcb62:: ds 2
+wcb64:: ds 1
+wcb65:: ds 57
+wcb9e:: ds 22
+wcbb4:: ds 1
+wcbb5:: ds 3
+wcbb8:: ds 1
+wcbb9:: ds 1
+wcbba:: ds 102
+
+NEXTU ; c9bf
+; battle
+	ds 81
 wBattleAnimAddress:: dw ; ca10
-wca12:: ds 1 ; ca12
-wca13:: ds 1 ; ca13
-wca14:: ds 1 ; ca14
-wca15:: ds 1 ; ca15
-wca16:: ds 1 ; ca16
+wBattleAnimDelay:: db ; ca12
+wBattleAnimParent:: dw ; ca13
+wBattleAnimLoops:: db ; ca15
+wBattleAnimVar:: db ; ca16
 wBattleAnimByte:: db ; ca17
-wca18:: ds 1 ; ca18
-wca19:: ds 1 ; ca19
-wca1a:: ds 1 ; ca1a
-wca1b:: ds 1 ; ca1b
-wca1c:: ds 1 ; ca1c
-wca1d:: ds 1 ; ca1d
-wca1e:: ds 1 ; ca1e
-wca1f:: ds 1 ; ca1f
-wca20:: ds 1 ; ca20
-wca21:: ds 1 ; ca21
-wca22:: ds 1 ; ca22
-wca23:: ds 1 ; ca23
-wca24:: ds 1 ; ca24
-wca25:: ds 1 ; ca25
-wca26:: ds 1 ; ca26
-wca27:: ds 1 ; ca27
-wca28:: ds 1 ; ca28
-wca29:: ds 1 ; ca29
-wca2a:: ds 1 ; ca2a
-wca2b:: ds 1 ; ca2b
-wca2c:: ds 1 ; ca2c
-wca2d:: ds 1 ; ca2d
-wca2e:: ds 1 ; ca2e
-wca2f:: ds 1 ; ca2f
-wca30:: ds 1 ; ca30
-wca31:: ds 1 ; ca31
-wca32:: ds 1 ; ca32
-wca33:: ds 1 ; ca33
-wca34:: ds 1 ; ca34
-wca35:: ds 1 ; ca35
-wca36:: ds 1 ; ca36
-wca37:: ds 1 ; ca37
-wca38:: ds 1 ; ca38
-wca39:: ds 1 ; ca39
-wca3a:: ds 1 ; ca3a
-wca3b:: ds 1 ; ca3b
-wca3c:: ds 1 ; ca3c
-wca3d:: ds 1 ; ca3d
-wca3e:: ds 1 ; ca3e
-wca3f:: ds 1 ; ca3f
-wca40:: ds 1 ; ca40
-wca41:: ds 1 ; ca41
-wca42:: ds 1 ; ca42
-wca43:: ds 1 ; ca43
-wca44:: ds 1 ; ca44
-wca45:: ds 1 ; ca45
-wca46:: ds 1 ; ca46
-wca47:: ds 1 ; ca47
-wca48:: ds 1 ; ca48
-wca49:: ds 1 ; ca49
-wca4a:: ds 1 ; ca4a
-wca4b:: ds 1 ; ca4b
-wca4c:: ds 1 ; ca4c
-wca4d:: ds 1 ; ca4d
-wca4e:: ds 1 ; ca4e
-wca4f:: ds 1 ; ca4f
-wca50:: ds 1 ; ca50
-wca51:: ds 1 ; ca51
-wca52:: ds 1 ; ca52
-wca53:: ds 1 ; ca53
-wca54:: ds 1 ; ca54
-wca55:: ds 1 ; ca55
-wca56:: ds 1 ; ca56
-wca57:: ds 1 ; ca57
-wca58:: ds 1 ; ca58
-wca59:: ds 1 ; ca59
-wca5a:: ds 1 ; ca5a
-wca5b:: ds 1 ; ca5b
-wca5c:: ds 1 ; ca5c
-wca5d:: ds 1 ; ca5d
-wca5e:: ds 1 ; ca5e
-wca5f:: ds 1 ; ca5f
-wca60:: ds 1 ; ca60
-wca61:: ds 1 ; ca61
-wca62:: ds 1 ; ca62
-wca63:: ds 1 ; ca63
-wca64:: ds 1 ; ca64
-wca65:: ds 1 ; ca65
-wca66:: ds 1 ; ca66
-wca67:: ds 1 ; ca67
-wca68:: ds 1 ; ca68
-wca69:: ds 1 ; ca69
-wca6a:: ds 1 ; ca6a
-wca6b:: ds 1 ; ca6b
-wca6c:: ds 1 ; ca6c
-wca6d:: ds 1 ; ca6d
-wca6e:: ds 1 ; ca6e
-wca6f:: ds 1 ; ca6f
-wca70:: ds 1 ; ca70
-wca71:: ds 1 ; ca71
-wca72:: ds 1 ; ca72
-wca73:: ds 1 ; ca73
-wca74:: ds 1 ; ca74
-wca75:: ds 1 ; ca75
-wca76:: ds 1 ; ca76
-wca77:: ds 1 ; ca77
-wca78:: ds 1 ; ca78
-wca79:: ds 1 ; ca79
-wca7a:: ds 1 ; ca7a
-wca7b:: ds 1 ; ca7b
-wca7c:: ds 1 ; ca7c
-wca7d:: ds 1 ; ca7d
-wca7e:: ds 1 ; ca7e
-wca7f:: ds 1 ; ca7f
-wca80:: ds 1 ; ca80
-wca81:: ds 1 ; ca81
-wca82:: ds 1 ; ca82
-wca83:: ds 1 ; ca83
-wca84:: ds 1 ; ca84
-wca85:: ds 1 ; ca85
-wca86:: ds 1 ; ca86
-wca87:: ds 1 ; ca87
-wca88:: ds 1 ; ca88
-wca89:: ds 1 ; ca89
-wca8a:: ds 1 ; ca8a
-wca8b:: ds 1 ; ca8b
-wca8c:: ds 1 ; ca8c
-wca8d:: ds 1 ; ca8d
-wca8e:: ds 1 ; ca8e
-wca8f:: ds 1 ; ca8f
-wca90:: ds 1 ; ca90
-wca91:: ds 1 ; ca91
-wca92:: ds 1 ; ca92
-wca93:: ds 1 ; ca93
-wca94:: ds 1 ; ca94
-wca95:: ds 1 ; ca95
-wca96:: ds 1 ; ca96
-wca97:: ds 1 ; ca97
-wca98:: ds 1 ; ca98
-wca99:: ds 1 ; ca99
-wca9a:: ds 1 ; ca9a
-wca9b:: ds 1 ; ca9b
-wca9c:: ds 1 ; ca9c
-wca9d:: ds 1 ; ca9d
-wca9e:: ds 1 ; ca9e
-wca9f:: ds 1 ; ca9f
-wcaa0:: ds 1 ; caa0
-wcaa1:: ds 1 ; caa1
-wcaa2:: ds 1 ; caa2
-wcaa3:: ds 1 ; caa3
-wcaa4:: ds 1 ; caa4
-wcaa5:: ds 1 ; caa5
-wcaa6:: ds 1 ; caa6
-wcaa7:: ds 1 ; caa7
-wcaa8:: ds 1 ; caa8
-wcaa9:: ds 1 ; caa9
-wcaaa:: ds 1 ; caaa
-wcaab:: ds 1 ; caab
-wcaac:: ds 1 ; caac
-wcaad:: ds 1 ; caad
-wcaae:: ds 1 ; caae
-wcaaf:: ds 1 ; caaf
-wcab0:: ds 1 ; cab0
-wcab1:: ds 1 ; cab1
-wcab2:: ds 1 ; cab2
-wcab3:: ds 1 ; cab3
-wcab4:: ds 1 ; cab4
-wcab5:: ds 1 ; cab5
-wcab6:: ds 1 ; cab6
-wcab7:: ds 1 ; cab7
-wcab8:: ds 1 ; cab8
-wcab9:: ds 1 ; cab9
-wcaba:: ds 1 ; caba
-wcabb:: ds 1 ; cabb
-wcabc:: ds 1 ; cabc
-wcabd:: ds 1 ; cabd
-wcabe:: ds 1 ; cabe
-wcabf:: ds 1 ; cabf
-wcac0:: ds 1 ; cac0
-wcac1:: ds 1 ; cac1
-wcac2:: ds 1 ; cac2
-wcac3:: ds 1 ; cac3
-wcac4:: ds 1 ; cac4
-wcac5:: ds 1 ; cac5
-wcac6:: ds 1 ; cac6
-wcac7:: ds 1 ; cac7
-wcac8:: ds 1 ; cac8
-wcac9:: ds 1 ; cac9
-wcaca:: ds 1 ; caca
-wcacb:: ds 1 ; cacb
-wcacc:: ds 1 ; cacc
-wcacd:: ds 1 ; cacd
-wcace:: ds 1 ; cace
-wcacf:: ds 1 ; cacf
-wcad0:: ds 1 ; cad0
-wcad1:: ds 1 ; cad1
-wcad2:: ds 1 ; cad2
-wcad3:: ds 1 ; cad3
-wcad4:: ds 1 ; cad4
-wcad5:: ds 1 ; cad5
-wcad6:: ds 1 ; cad6
-wcad7:: ds 1 ; cad7
-wcad8:: ds 1 ; cad8
-wcad9:: ds 1 ; cad9
-wcada:: ds 1 ; cada
-wcadb:: ds 1 ; cadb
-wcadc:: ds 1 ; cadc
-wcadd:: ds 1 ; cadd
-wcade:: ds 1 ; cade
-wcadf:: ds 1 ; cadf
-wcae0:: ds 1 ; cae0
-wcae1:: ds 1 ; cae1
-wcae2:: ds 1 ; cae2
-wcae3:: ds 1 ; cae3
-wcae4:: ds 1 ; cae4
-wcae5:: ds 1 ; cae5
-wcae6:: ds 1 ; cae6
-wcae7:: ds 1 ; cae7
+wBattleAnimOAMPointerLo:: db ; ca18
+
+	ds 207
 
 wEnemyMoveStruct:: move_struct wEnemyMoveStruct
 wPlayerMoveStruct:: move_struct wPlayerMoveStruct
@@ -1432,6 +609,7 @@ wEnemySubStatus2:: ds 1 ; cb4c
 wEnemySubStatus3:: ds 1 ; cb4d
 wEnemySubStatus4:: ds 1 ; cb4e
 wEnemySubStatus5:: ds 1 ; cb4f
+
 wPlayerRolloutCount:: db ; cb50
 wPlayerConfuseCount:: db ; cb51
 wPlayerToxicCount:: db ; cb52
@@ -1440,6 +618,7 @@ wPlayerEncoreCount:: db ; cb54
 wPlayerPerishCount:: db ; cb55
 wPlayerFuryCutterCount:: db ; cb56
 wPlayerProtectCount:: db ; cb57
+
 wEnemyRolloutCount:: db ; cb58
 wEnemyConfuseCount:: db ; cb59
 wEnemyToxicCount:: db ; cb5a
@@ -1448,16 +627,11 @@ wEnemyEncoreCount:: db ; cb5c
 wEnemyPerishCount:: db ; cb5d
 wEnemyFuryCutterCount:: db ; cb5e
 wEnemyProtectCount:: db ; cb5f
-wPlayerDamageTaken::
-wcb60:: ds 1 ; cb60
-wcb61:: ds 1 ; cb61
-wEnemyDamageTaken::
-wcb62:: ds 1 ; cb62
-wcb63:: ds 1 ; cb63
-wBattleReward::
-wcb64:: ds 1 ; cb64
-wcb65:: ds 1 ; cb65
-wcb66:: ds 1 ; cb66
+
+wPlayerDamageTaken:: dw ; cb60
+wEnemyDamageTaken:: dw ; cb62
+
+wBattleReward:: ds 3 ; cb64
 wBattleAnimParam::
 wKickCounter::
 wPresentPower::
@@ -1632,14 +806,8 @@ wPlayerCharging:: db ; cc10
 wEnemyCharging:: db ; cc11
 wBattleEnded:: db ; cc12
 
-UNION
 wWildMonMoves:: ; cc13
 	ds NUM_MOVES
-NEXTU
-	ds 1
-wOverworldMapBlocksEnd::
-	ds NUM_MOVES - 1
-ENDU
 
 wWildMonPP:: ds NUM_MOVES ; cc17
 
@@ -1647,16 +815,16 @@ wAmuletCoin:: db ; cc1b
 wSomeoneIsRampaging:: db ; cc1c
 wPlayerJustGotFrozen:: db ; cc1d
 wEnemyJustGotFrozen:: db ; cc1e
-	ds 1
+ENDU
 
 ENDU ; cc20
 
 SECTION "Video", WRAM0
 
 ; wBGMapBuffer
-wBGMapBuffer::     ds 40 ; cd20
-wBGMapPalBuffer::  ds 40 ; cd48
-wBGMapBufferPtrs:: ds 40 ; cd70 ; 20 bg map addresses (16x8 tiles)
+wBGMapBuffer::     ds 40 ; cc20
+wBGMapPalBuffer::  ds 40 ; cc48
+wBGMapBufferPtrs:: ds 40 ; cc70 ; 20 bg map addresses (16x8 tiles)
 wBGMapBufferEnd::
 
 wColorLayoutPredefID:: ds 1 ; cc98
@@ -2289,10 +1457,10 @@ ENDU ; cffc
 
 wcffc:: ds 1 ; cffc
 wcffd:: ds 1 ; cffd
-wcffe:: ds 1 ; cffe
-wcfff:: ds 1 ; cfff
+wUnusedCFFE:: dw ; cffe
 
-SECTION "WRAM1", WRAMX, BANK[$1]
+SECTION "WRAM 1", WRAMX
+
 wd000:: ds 1 ; d000
 wd001:: ds 1 ; d001
 wCurItem:: db ; d002
@@ -2450,6 +1618,19 @@ wEvolutionNewSpecies:: db ; d0d4
 wEvolutionPicOffset:: db ; d0d5
 wEvolutionCanceled:: db ; d0d6
 
+NEXTU
+
+wd0d3:: ds 1
+wd0d4:: ds 1
+wd0d5:: ds 1
+wd0d6:: ds 1
+wd0d7:: ds 1
+wd0d8:: ds 1
+wd0d9:: ds 1
+wd0da:: ds 1
+wd0db:: ds 1
+wd0dc:: ds 1
+
 NEXTU ; d0d3
 ; miscellaneous
 wMagikarpLength:: dw
@@ -2533,8 +1714,8 @@ wd147:: ds 1 ; d147
 wd148:: ds 1 ; d148
 wListMoves_MoveIndicesBuffer:: ds NUM_MOVES
 wPutativeTMHMMove:: db ; d14d
-wd14e:: ds 1 ; d14e
-wWildMon:: ds 1 ; d14f
+wInitListType:: db ; d14e
+wWildMon:: db ; d14f
 wBattleHasJustStarted:: db ; d150
 
 ; d151 has many different short-term uses
@@ -2667,7 +1848,7 @@ wOptions2:: ; d19e
 
 wOptionsEnd::
 
-SECTION "Game Data", WRAMX, BANK[1]
+SECTION "Game Data", WRAMX
 wGameData::
 wPlayerData::
 wPlayerData1::
@@ -3374,7 +2555,7 @@ wScreenSave:: ds SCREEN_META_WIDTH * SCREEN_META_HEIGHT
 
 wCurMapDataEnd::
 
-SECTION "Party", WRAMX, BANK[1]
+SECTION "Party", WRAMX
 
 wPokemonData::
 wPartyCount:: ds 1 ; da22

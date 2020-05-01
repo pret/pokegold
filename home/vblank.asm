@@ -167,7 +167,7 @@ VBlank1::
 	or a
 	jr z, .skip_lcd
 	ld c, a
-	ld a, [wc700]
+	ld a, [wLYOverrides]
 	ld [$ff00+c], a
 
 .skip_lcd
