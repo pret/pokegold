@@ -993,7 +993,7 @@ _ButNoSpaceText::
 	line "no space left…"
 	done
 
-UnknownText_0x1bd34b::
+_JustSawSomeRareMonText::
 	text "I just saw some"
 	line "rare @"
 	text_ram wStringBuffer1
@@ -1007,7 +1007,7 @@ UnknownText_0x1bd34b::
 	cont "#MON, OK?"
 	prompt
 
-UnknownText_0x1bd39e::
+_SavingRecordText::
 	text "SAVING RECORD…"
 	line "DON'T TURN OFF!"
 	done

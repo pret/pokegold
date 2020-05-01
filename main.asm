@@ -249,38 +249,26 @@ INCLUDE "engine/battle/consume_held_item.asm"
 INCLUDE "data/moves/effects.asm"
 
 
-SECTION "banka", ROMX
+SECTION "bankA", ROMX
 
 INCLUDE "engine/link/link.asm"
 INCLUDE "engine/link/mystery_gift.asm"
+INCLUDE "engine/overworld/wildmons.asm"
 
-LoadWildMonData::
-	dr $2a539, $2a643
-TryWildEncounter::
-	dr $2a643, $2a680
-ApplyMusicEffectOnEncounterRate::
-	dr $2a680, $2a694
-ApplyCleanseTagEffectOnEncounterRate::
-	dr $2a694, $2a73b
-CheckRepelEffect::
-	dr $2a73b, $2a7d7
-InitRoamMons::
-	dr $2a7d7, $2a859
-UpdateRoamMons::
-	dr $2a859, $2a8e0
-JumpRoamMons::
-	dr $2a8e0, $2a9f7
-RandomUnseenWildMon::
-	dr $2a9f7, $2aa6b
-RandomPhoneWildMon::
-	dr $2aa6b, $2aab3
-RandomPhoneMon::
-	dr $2aab3, $2ab35
 JohtoGrassWildMons::
-	dr $2ab35, $2bee3
+	dr $2ab35, $2b669
+JohtoWaterWildMons::
+	dr $2b669, $2b7c0
+KantoGrassWildMons::
+	dr $2b7c0, $2bd43
+KantoWaterWildMons::
+	dr $2bd43, $2be1c
+SwarmGrassWildMons::
+	dr $2be1c, $2bed9
+SwarmWaterWildMons::
+	dr $2bed9, $2bee3
 
-
-SECTION "bankb", ROMX
+SECTION "bankB", ROMX
 
 PrintItemDescription::
 	dr $2c000, $2c033
@@ -649,7 +637,9 @@ Script_SpecialBillCall::
 PhoneCall::
 	dr $90298, $902df
 HangUp::
-	dr $902df, $90641
+	dr $902df, $90414
+GetCallerLocation::
+	dr $90414, $90641
 InitClock::
 	dr $90641, $908dc
 SetDayOfWeek::

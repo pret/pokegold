@@ -1708,10 +1708,10 @@ wd140:: ds 1 ; d140
 wCurDamage:: ds 2 ; d141
 wd143:: ds 1 ; d143
 wd144:: ds 1 ; d144
-wd145:: ds 1 ; d145
+wMornEncounterRate:: db ; d145
 wd146:: ds 1 ; d146
 wd147:: ds 1 ; d147
-wd148:: ds 1 ; d148
+wWaterEncounterRate:: db ; d148
 wListMoves_MoveIndicesBuffer:: ds NUM_MOVES
 wPutativeTMHMMove:: db ; d14d
 wInitListType:: db ; d14e
@@ -2646,10 +2646,10 @@ wRoamMon1:: roam_struct wRoamMon1 ; dd1a
 wRoamMon2:: roam_struct wRoamMon2 ; dd21
 wRoamMon3:: roam_struct wRoamMon3 ; dd28
 
-wRoamMons_CurrentMapNumber:: ds 1 ; dd2f
-wRoamMons_CurrentMapGroup:: ds 1 ; dd30
-wRoamMons_LastMapNumber:: ds 1 ; dd31
-wRoamMons_LastMapGroup:: ds 1 ; dd32
+wRoamMons_CurMapNumber:: db ; dd2f
+wRoamMons_CurMapGroup:: db ; dd30
+wRoamMons_LastMapNumber:: db ; dd31
+wRoamMons_LastMapGroup:: db ; dd32
 
 wBestMagikarpLengthFeet:: ds 1 ; dd33
 wBestMagikarpLengthInches:: ds 1 ; dd34

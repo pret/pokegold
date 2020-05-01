@@ -50,14 +50,11 @@ ROMX $08
 	org $4000
 	"bank8"
 ROMX $09
-	org $4000
 	"bank9"
 ROMX $0a
-	org $4000
-	"banka"
+	"bankA"
 ROMX $0b
-	org $4000
-	"bankb"
+	"bankB"
 ROMX $0c
 	org $4000
 	"bankc"
