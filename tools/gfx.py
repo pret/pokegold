@@ -104,6 +104,8 @@ def filepath_rules(filepath):
     elif 'gfx/battle' in filedir:
         if name == 'dude':
             args['pic_dimensions'] = 6, 6
+        elif name == 'balls':
+            args['width'] = 32
 
     elif 'gfx/icons' in filedir:
         if name == 'mail_big':
@@ -179,6 +181,19 @@ def filepath_rules(filepath):
             args['width'] = 40
         elif name == 'leaders':
             args['width'] = 80
+
+    elif 'gfx/trade' in filedir:
+        if name in ['arrow_left', 'arrow_right', 'cable']:
+            args['width'] = 8
+        elif name in ['bubble', 'poof']:
+            args['width'] = 16
+        elif name == 'ball':
+            args['width'] = 16
+            args['rows'] = [(0, 1), (0, 1), (0, 2), (0, 2)]
+        elif name == 'border_tiles':
+            args['width'] = 24
+        elif name == 'game_boy':
+            args['width'] = 56
 
     elif 'gfx/unknown' in filedir:
         if name == 'gfx_170f1':

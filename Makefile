@@ -113,4 +113,4 @@ pngs:
 	find gfx -iname "*.[12]bpp" -exec touch {} +
 	find gfx -iname "*.lz"      -exec touch {} +
 	find gfx/pokemon gfx/trainers -iname "*.[1,2]bpp" -delete
-	rm gfx/battle/dude.2bpp gfx/player/chris_back.2bpp
+	rm gfx/battle/dude.2bpp gfx/player/chris_back.2bpp gfx/trade/game_boy.2bpp
