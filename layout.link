@@ -56,8 +56,7 @@ ROMX $0a
 ROMX $0b
 	"bankB"
 ROMX $0c
-	org $4000
-	"bankc"
+	"bankC"
 ROMX $0d
 	"Effect Commands"
 ROMX $0e

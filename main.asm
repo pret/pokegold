@@ -258,42 +258,17 @@ INCLUDE "engine/overworld/wildmons.asm"
 
 SECTION "bankB", ROMX
 
-PrintItemDescription::
-	dr $2c000, $2c033
-BattleStart_TrainerHuds::
-	dr $2c033, $2c045
-EnemySwitch_TrainerHud::
-	dr $2c045, $2c0c8
-DrawPlayerHUDBorder::
-	dr $2c0c8, $2c0f8
-DrawEnemyHUDBorder::
-	dr $2c0f8, $2c1e4
-_ShowLinkBattleParticipants::
-	dr $2c1e4, $2c225
+INCLUDE "engine/items/print_item_description.asm"
+INCLUDE "engine/battle/trainer_huds.asm"
 INCLUDE "engine/battle/ai/redundant.asm"
-MoveDeletion::
-	dr $2c352, $2c44d
-PrepMysteryGiftDataToSend::
-	dr $2c44d, $2c513
-MysteryGiftGetItemHeldEffect::
-	dr $2c513, $2c520
-MysteryGiftGetDecoration::
-	dr $2c520, $2c57a
-Pack_TMHMPocketMenu_::
-	dr $2c57a, $2c5ca
-AskTeachTMHM::
-	dr $2c5ca, $2c606
-ChooseMonToLearnTMHM::
-	dr $2c606, $2c672
-TeachTMHM::
-	dr $2c672, $2c943
-PrintMoveDesc::
-	dr $2c943, $2c95d
-GivePokerusAndConvertBerries::
-	dr $2c95d, $2ca31
+INCLUDE "engine/events/move_deleter.asm"
+INCLUDE "engine/link/mystery_gift_2.asm"
+INCLUDE "engine/items/tmhm.asm"
+INCLUDE "engine/pokemon/print_move_description.asm"
+INCLUDE "engine/events/pokerus/pokerus.asm"
 
 
-SECTION "bankc", ROMX
+SECTION "bankC", ROMX
 
 TilesetEliteFourRoomGFX::
 	dr $30000, $304e0
@@ -986,6 +961,7 @@ INCLUDE "data/moves/descriptions.asm"
 
 SECTION "bank6e", ROMX
 
+ItemDescriptions::
 	dr $1b8000, $1b9544
 
 

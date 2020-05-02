@@ -473,9 +473,11 @@ wLinkPlayerPartyMonNicks:: ds PARTY_LENGTH * MON_NAME_LENGTH
 wLinkPlayerDataEnd::
 ENDU
 
-NEXTU ; c700
-
-	ds 80
+NEXTU ; c800
+; mystery gift data
+wMysteryGiftPartyTemp:: ; ds PARTY_LENGTH * (1 + 1 + NUM_MOVES)
+wMysteryGiftStaging::
+wc700:: ds 80
 
 wMysteryGiftTrainerData:: ds (1 + 1 + NUM_MOVES) * PARTY_LENGTH + 2
 wMysteryGiftTrainerDataEnd::
@@ -1190,6 +1192,12 @@ wUnusedMovementBufferBank:: db
 wUnusedMovementBufferPointer:: dw
 wMovementBuffer:: ds 55
 
+NEXTU ; ceed
+; trainer HUD data
+	ds 1
+wPlaceBallsDirection:: db
+wTrainerHUDTiles:: ds 4
+
 NEXTU
 ; earthquake data buffer
 wEarthquakeMovementDataBuffer:: ds 5
@@ -1336,8 +1344,8 @@ wUnusedBufferCF3C:: dw
 wFXAnimID:: dw
 ENDU
 
-wcf40:: ds 1 ; cf40
-wcf41:: ds 1 ; cf41
+wPlaceBallsX:: db ; cf40
+wPlaceBallsY:: db ; cf41
 wcf42:: ds 1 ; cf42
 wBGP:: ds 1
 wOBP0:: ds 1
@@ -1366,19 +1374,7 @@ wcf5a:: ds 1 ; cf5a
 wcf5b:: ds 1 ; cf5b
 wcf5c:: ds 1 ; cf5c
 wcf5d:: ds 1 ; cf5d
-wcf5e:: ds 1 ; cf5e
-wcf5f:: ds 1 ; cf5f
-wcf60:: ds 1 ; cf60
-wcf61:: ds 1 ; cf61
-wcf62:: ds 1 ; cf62
-wcf63:: ds 1 ; cf63
-wcf64:: ds 1 ; cf64
-wcf65:: ds 1 ; cf65
-wcf66:: ds 1 ; cf66
-wcf67:: ds 1 ; cf67
-wcf68:: ds 1 ; cf68
-wcf69:: ds 1 ; cf69
-wcf6a:: ds 1 ; cf6a
+wTMHMMoveNameBackup::  ds MOVE_NAME_LENGTH ; d066
 
 wStringBuffer1:: ds 19 ; cf6b
 wStringBuffer2:: ds 19 ; cf7e
@@ -1399,12 +1395,12 @@ ENDU
 wItemsPocketCursor:: db ; cfca
 wKeyItemsPocketCursor:: db ; cfcb
 wBallsPocketCursor:: db ; cfcc
-wcfcd:: ds 1 ; cfcd
+wTMHMPocketCursor:: db ; cfcd
 wcfce:: ds 1 ; cfce
 wItemsPocketScrollPosition:: db ; cfcf
 wKeyItemsPocketScrollPosition:: db; cfd0
 wBallsPocketScrollPosition:: db ; cfd1
-wcfd2:: ds 1 ; cfd2
+wTMHMPocketScrollPosition:: db ; cfd2
 
 wSwitchMon::
 wSwitchItem::

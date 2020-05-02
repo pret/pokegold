@@ -115,7 +115,7 @@ Pack_InitTMHMPocket:
 	ret
 
 Pack_TMHMPocketMenu:
-	farcall Pack_TMHMPocketMenu_
+	farcall TMHMPocket
 	ld b, $5
 	ld c, $1
 	call Function10cef
@@ -733,7 +733,7 @@ BattlePack_InitTMHMPocket:
 	ret
 
 BattlePack_TMHMPocketMenu:
-	farcall Pack_TMHMPocketMenu_ ; b:457a
+	farcall TMHMPocket ; b:457a
 	ld b, $5
 	ld c, $1
 	call Function10cef
@@ -973,7 +973,7 @@ DepositOrSell_TMHMPocket:
 	ld a, $3
 	call Function10b92
 	call Function10cca
-	farcall Pack_TMHMPocketMenu_ ; b:457a
+	farcall TMHMPocket ; b:457a
 	ld a, [wCurItem]
 	ld [wCurItem], a
 	ret
@@ -1126,7 +1126,7 @@ TutorialTMHM:
 	ld a, $3
 	call Function10b92
 	call Function10cca
-	farcall Pack_TMHMPocketMenu_
+	farcall TMHMPocket
 	ld a, [wCurItem]
 	ld [wCurItem], a
 	ret

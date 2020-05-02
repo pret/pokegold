@@ -453,39 +453,39 @@ _KnowsMoveText::
 	text "."
 	prompt
 
-UnknownText_0x1c5eba::
+_MoveKnowsOneText::
 	text "That #MON knows"
 	line "only one move."
 	done
 
-UnknownText_0x1c5eda::
+_AskDeleteMoveText::
 	text "Oh, make it forget"
 	line "@"
 	text_ram wStringBuffer1
 	text "?"
 	done
 
-UnknownText_0x1c5ef5::
+_DeleterForgotMoveText::
 	text "Done! Your #MON"
 	line "forgot the move."
 	done
 
-UnknownText_0x1c5f17::
+_DeleterEggText::
 	text "An EGG doesn't"
 	line "know any moves!"
 	done
 
-UnknownText_0x1c5f36::
+_DeleterNoComeAgainText::
 	text "No? Come visit me"
 	line "again."
 	done
 
-UnknownText_0x1c5f50::
+_DeleterAskWhichMoveText::
 	text "Which move should"
 	line "it forget, then?"
 	prompt
 
-UnknownText_0x1c5f74::
+_DeleterIntroText::
 	text "Um… Oh, yes, I'm"
 	line "the MOVE DELETER."
 
@@ -496,7 +496,7 @@ UnknownText_0x1c5f74::
 	line "#MON forget?"
 	done
 
-UnknownText_0x1c5fd1::
+_DeleterAskWhichMonText::
 	text "Which #MON?"
 	prompt
 

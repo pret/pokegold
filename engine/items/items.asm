@@ -35,7 +35,7 @@ ReceiveTMHM:
 	ld l, e
 	ld a, [wCurItem]
 	ld c, a
-	call GetTMHMNumber
+	call GetNumberedTMHM
 	jp PutItemInTMPocket
 
 _TossItem:: ; d21a (3:521a)
@@ -65,7 +65,7 @@ RemoveTMHM:
 	ld l, e
 	ld a, [wCurItem]
 	ld c, a
-	call GetTMHMNumber
+	call GetNumberedTMHM
 	jp RemoveTMorHM
 
 RemoveKeyItem:
@@ -106,7 +106,7 @@ CheckTMHM:
 	ld l, e
 	ld a, [wCurItem]
 	ld c, a
-	call GetTMHMNumber
+	call GetNumberedTMHM
 	jp CheckTMorHM
 
 CheckKeyItem:
@@ -419,11 +419,11 @@ RemoveTMorHM: ; d3e5 (3:53e5)
 	ld [hl], a
 	ld [wItemQuantityBuffer], a
 	jr nz, .asm_d404
-	ld a, [wcfd2]
+	ld a, [wTMHMPocketScrollPosition]
 	and a
 	jr z, .asm_d404
 	dec a
-	ld [wcfd2], a
+	ld [wTMHMPocketScrollPosition], a
 .asm_d404
 	scf
 	ret
@@ -443,7 +443,7 @@ CheckTMorHM: ; d408 (3:5408)
 	scf
 	ret
 
-GetTMHMNumber:: ; d414 (3:5414)
+GetNumberedTMHM:: ; d414 (3:5414)
 	ld a, c
 	cp ITEM_C3
 	jr c, .asm_d41f
