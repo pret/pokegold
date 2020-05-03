@@ -54,7 +54,7 @@ TimesOfDay:
 	db MAX_HOUR,  NITE_F
 	db -1, MORN_F
 
-Unreferenced_14044:
+Unreferenced_1404e:
 	db 20, NITE_F
 	db 40, MORN_F
 	db 60, DAY_F

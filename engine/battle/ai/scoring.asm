@@ -278,7 +278,7 @@ AI_Smart:
 	call AIGetEnemyMove
 
 	ld a, [wEnemyMoveStruct + MOVE_EFFECT]
-	ld hl, .table_386f2
+	ld hl, .table_386e4
 	ld de, 3
 	call IsInArray
 
@@ -305,7 +305,7 @@ AI_Smart:
 	inc hl
 	jr .checkmove
 
-.table_386f2
+.table_386e4
 	dbw EFFECT_SLEEP,            AI_Smart_Sleep
 	dbw EFFECT_LEECH_HIT,        AI_Smart_LeechHit
 	dbw EFFECT_SELFDESTRUCT,     AI_Smart_Selfdestruct

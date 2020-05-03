@@ -1910,14 +1910,14 @@ RestoreHP:
 	ld b, a
 	ld a, [hl]
 	sbc b
-	jr c, .asm_3cd2d
+	jr c, .asm_3ccd5
 	ld a, b
 	ld [hli], a
 	ld [wBuffer6], a
 	ld a, c
 	ld [hl], a
 	ld [wBuffer5], a
-.asm_3cd2d
+.asm_3ccd5
 
 	call SwitchTurnCore
 	call UpdateHPBarBattleHuds
@@ -5133,7 +5133,7 @@ MoveSelectionScreen:
 	dec a
 	jr nz, .interpret_joypad
 	hlcoord 11, 14
-	ld de, .string_3e61c
+	ld de, .string_3e448
 	call PlaceString
 	jr .interpret_joypad
 
@@ -5229,7 +5229,7 @@ MoveSelectionScreen:
 	call SafeLoadTempTilemapToTilemap
 	jp MoveSelectionScreen
 
-.string_3e61c
+.string_3e448
 	db "@"
 
 .pressed_up

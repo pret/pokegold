@@ -98,7 +98,7 @@ BankOfMom:
 	ld hl, MomBankWhatDoYouWantToDoText
 	call PrintText
 	call LoadStandardMenuHeader
-	ld hl, MenuHeader_0x166b5
+	ld hl, MenuHeader_0x16914
 	call CopyMenuHeader
 	call VerticalMenu
 	call CloseWindow
@@ -661,13 +661,13 @@ Mom_DepositString:
 Mom_HeldString:
 	db "HELD@"
 
-MenuHeader_0x166b5:
+MenuHeader_0x16914:
 	db MENU_BACKUP_TILES ; flags
 	menu_coords 0, 0, 10, 10
-	dw MenuData_0x166bd
+	dw MenuData_0x1691c
 	db 1 ; default option
 
-MenuData_0x166bd:
+MenuData_0x1691c:
 	db STATICMENU_CURSOR ; flags
 	db 4 ; items
 	db "GET@"

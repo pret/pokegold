@@ -99,9 +99,9 @@ Gen2ToGen1LinkComms:
 	ld a, [hl]
 	pop hl
 	and a
-	jp z, Function28b22
+	jp z, Function28a04
 	cp $7
-	jp nc, Function28b22
+	jp nc, Function28a04
 	ld de, wLinkData
 	ld bc, $1a2
 	call Link_CopyOTData
@@ -161,7 +161,7 @@ Gen2ToGen1LinkComms:
 .done_party
 	ld [de], a
 	ld hl, wTimeCapsulePartyMon1Species
-	call Function2868a
+	call Function285db
 	ld a, LOW(wOTPartyMonOT)
 	ld [wUnusedCFFE], a
 	ld a, HIGH(wOTPartyMonOT)
@@ -180,7 +180,7 @@ Gen2ToGen2LinkComms:
 	call ClearLinkData
 	call Link_PrepPartyData_Gen2
 	call FixDataForLinkTransfer
-	call Function29dba
+	call Function29bf4
 	ld a, [wScriptVar]
 	and a
 	jp z, LinkTimeout
@@ -418,7 +418,7 @@ Gen2ToGen2LinkComms:
 	pop af
 	ld [wOptions], a
 	farcall LoadPokemonData
-	jp Function28b22
+	jp Function28a04
 
 .ready_to_trade
 	ld de, MUSIC_ROUTE_30
@@ -772,7 +772,7 @@ Link_PrepPartyData_Gen2:
 ; Fill 5 bytes at wc8f4 with $20
 	ld de, wc8f4
 	ld a, $20
-	call Function28682
+	call Function285d3
 
 ; Copy all the mail messages to wc9f9
 	ld a, BANK(sPartyMail)
@@ -838,7 +838,7 @@ Link_PrepPartyData_Gen2:
 	ld [de], a
 	ret
 
-Function28682:
+Function285d3:
 	ld c, 5
 .loop
 	ld [de], a
@@ -847,7 +847,7 @@ Function28682:
 	jr nz, .loop
 	ret
 
-Function2868a:
+Function285db:
 	push hl
 	ld d, h
 	ld e, l
@@ -1144,7 +1144,7 @@ LinkTradeOTPartymonMenuLoop:
 .not_d_up
 	bit D_DOWN_F, a
 	jp z, LinkTradePartiesMenuMasterLoop
-	jp Function28ac9
+	jp Function289c2
 
 LinkTrade_PlayerPartyMenu:
 	xor a
@@ -1177,7 +1177,7 @@ LinkTradePartymonMenuLoop:
 .check_joypad
 	bit A_BUTTON_F, a
 	jr z, .not_a_button
-	jp Function28926
+	jp Function2884a
 
 .not_a_button
 	bit D_DOWN_F, a
@@ -1211,7 +1211,7 @@ LinkTradePartiesMenuMasterLoop:
 	jp z, LinkTradePartymonMenuLoop ; PARTYMON
 	jp LinkTradeOTPartymonMenuLoop  ; OTPARTYMON
 
-Function28926:
+Function2884a:
 	call HideCursor
 	call LoadTilemapToTempTilemap
 	call PlaceHollowCursor
@@ -1372,12 +1372,12 @@ Function28926:
 	text_far _LinkAbnormalMonText
 	text_end
 
-Function28ac9:
+Function289c2:
 	ld a, [wMenuCursorY]
 	cp 1
 	jp nz, LinkTradePartiesMenuMasterLoop
 	call HideCursor
-Function28ade:
+Function289cd:
 .loop1
 	ld a, "▶"
 	ldcoord_a 1, 16
@@ -1405,7 +1405,7 @@ Function28ade:
 	ld a, [wOtherPlayerLinkMode]
 	cp $f
 	jr nz, .loop1
-Function28b22:
+Function28a04:
 	xor a
 	ld [wd8b7], a
 	xor a
@@ -1495,7 +1495,7 @@ LinkTrade:
 	ld b, 3
 	ld c, 7
 	call LinkTextboxAtHL
-	ld de, String28eab
+	ld de, String28d44
 	hlcoord 12, 8
 	call PlaceString
 	ld a, 8
@@ -1521,12 +1521,12 @@ LinkTrade:
 	call SafeLoadTempTilemapToTilemap
 	pop af
 	bit 1, a
-	jr nz, .asm_28c33
+	jr nz, .asm_28b16
 	ld a, [wMenuCursorY]
 	dec a
-	jr z, .asm_28c54
+	jr z, .asm_28b34
 
-.asm_28c33
+.asm_28b16
 	ld a, $1
 	ld [wPlayerLinkAction], a
 	hlcoord 0, 12
@@ -1537,15 +1537,15 @@ LinkTrade:
 	ld de, String_TooBadTheTradeWasCanceled
 	call PlaceString
 	call Serial_PrintWaitingTextAndSyncAndExchangeNybble
-	jp Function28ea3
+	jp Function28d3c
 
-.asm_28c54
+.asm_28b34
 	ld a, $2
 	ld [wPlayerLinkAction], a
 	call Serial_PrintWaitingTextAndSyncAndExchangeNybble
 	ld a, [wOtherPlayerLinkMode]
 	dec a
-	jr nz, .asm_28c7b
+	jr nz, .asm_28b58
 	hlcoord 0, 12
 	ld b, 4
 	ld c, 18
@@ -1553,9 +1553,9 @@ LinkTrade:
 	hlcoord 1, 14
 	ld de, String_TooBadTheTradeWasCanceled
 	call PlaceString
-	jp Function28ea3
+	jp Function28d3c
 
-.asm_28c7b
+.asm_28b58
 	ld hl, sPartyMail
 	ld a, [wceed]
 	ld bc, MAIL_STRUCT_LENGTH
@@ -1568,18 +1568,18 @@ LinkTrade:
 	add hl, bc
 	ld a, [wceed]
 	ld c, a
-.asm_28c96
+.asm_28b73
 	inc c
 	ld a, c
 	cp PARTY_LENGTH
-	jr z, .asm_28ca6
+	jr z, .asm_28b83
 	push bc
 	ld bc, MAIL_STRUCT_LENGTH
 	call CopyBytes
 	pop bc
-	jr .asm_28c96
+	jr .asm_28b73
 
-.asm_28ca6
+.asm_28b83
 	ld hl, sPartyMail
 	ld a, [wPartyCount]
 	dec a
@@ -1761,7 +1761,7 @@ LinkTrade:
 	ld c, 18
 	call LinkTextboxAtHL
 	hlcoord 1, 14
-	ld de, String28ebd
+	ld de, String28d56
 	call PlaceString
 	ld c, 50
 	call DelayFrames
@@ -1770,12 +1770,12 @@ LinkTrade:
 	jp z, Gen2ToGen1LinkComms
 	jp Gen2ToGen2LinkComms
 
-Function28ea3:
+Function28d3c:
 	ld c, 100
 	call DelayFrames
 	jp InitTradeMenuDisplay
 
-String28eab:
+String28d44:
 	db   "TRADE"
 	next "CANCEL@"
 
@@ -1783,7 +1783,7 @@ LinkAskTradeForText:
 	text_far _LinkAskTradeForText
 	text_end
 
-String28ebd:
+String28d56:
 	db   "Trade completed!@"
 
 String_TooBadTheTradeWasCanceled:
@@ -1923,19 +1923,19 @@ CheckTimeCapsuleCompatibility:
 	call GetMoveName
 	call CopyName1
 	pop bc
-	call Function29c67
+	call Function29ab3
 	ld a, $2
 	jr .done
 
 .mon_has_mail
-	call Function29c67
+	call Function29ab3
 	ld a, $3
 
 .done
 	ld [wScriptVar], a
 	ret
 
-Function29c67:
+Function29ab3:
 	ld a, [wPartyCount]
 	sub b
 	ld c, a
@@ -2116,7 +2116,7 @@ CheckLinkTimeout:
 	ret nz
 	jp Link_ResetSerialRegistersAfterLinkClosure
 
-Function29dba:
+Function29bf4:
 	ld a, $5
 	ld [wPlayerLinkAction], a
 	ld hl, wLinkTimeoutFrames

@@ -93,20 +93,20 @@ Function248cf:
 	call ItemSwitch_GetNthItem
 	ld a, [de]
 	cp [hl]
-	jr nz, .asm_249cd
+	jr nz, .asm_248f5
 	ld a, [wScrollingMenuCursorPosition]
 	call Function249bf
 	cp 99
-	jr z, .asm_249cd
+	jr z, .asm_248f5
 	ld a, [wSwitchItem]
 	call Function249bf
 	cp 99
-	jr nz, .asm_249cf
-.asm_249cd
+	jr nz, .asm_248f7
+.asm_248f5
 	and a
 	ret
 
-.asm_249cf
+.asm_248f7
 	scf
 	ret
 
@@ -122,7 +122,7 @@ Function248f9:
 	pop hl
 	add [hl]
 	cp 100
-	jr c, .asm_24a01
+	jr c, .asm_24929
 	sub 99
 	push af
 	ld a, [wScrollingMenuCursorPosition]
@@ -138,7 +138,7 @@ Function248f9:
 	ld [wSwitchItem], a
 	ret
 
-.asm_24a01
+.asm_24929
 	push af
 	ld a, [wScrollingMenuCursorPosition]
 	call ItemSwitch_GetNthItem
@@ -151,7 +151,7 @@ Function248f9:
 	ld l, a
 	ld a, [wSwitchItem]
 	cp [hl]
-	jr nz, .asm_24a25
+	jr nz, .asm_2494d
 	dec [hl]
 	ld a, [wSwitchItem]
 	call ItemSwitch_GetNthItem
@@ -160,7 +160,7 @@ Function248f9:
 	ld [wSwitchItem], a
 	ret
 
-.asm_24a25
+.asm_2494d
 	dec [hl]
 	call ItemSwitch_ConvertItemFormatToDW
 	push bc
@@ -170,12 +170,12 @@ Function248f9:
 	push hl
 	add hl, bc
 	pop de
-.asm_24a34
+.asm_2495c
 	ld a, [hli]
 	ld [de], a
 	inc de
 	cp $ff
-	jr nz, .asm_24a34
+	jr nz, .asm_2495c
 	xor a
 	ld [wSwitchItem], a
 	ret

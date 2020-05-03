@@ -217,7 +217,7 @@ FixPicBank:
 	db $1f, $2e
 	db -1
 
-Function150ff:
+Function1587f:
 	ld a, c
 	push de
 	ld hl, PokemonPicPointers
