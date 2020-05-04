@@ -803,7 +803,7 @@ RetrieveMonFromDayCareLady:
 	jp RetrieveBreedmon
 
 RetrieveBreedmon:
-	ld hl, wPokemonData
+	ld hl, wPartyCount
 	ld a, [hl]
 	cp PARTY_LENGTH
 	jr nz, .room_in_party
@@ -1693,7 +1693,7 @@ GivePoke::
 	call CopyBytes
 	pop af
 	and a
-	jr z, .set_caught_data
+	jr z, .wildmon
 	pop de
 	pop bc
 	pop hl
@@ -1750,8 +1750,8 @@ GivePoke::
 	call CloseSRAM
 	jr .skip_nickname
 
-.set_caught_data
-	callfar Functionc7cd0
+.wildmon
+	callfar GiveANickname_YesNo
 	pop de
 	jr c, .skip_nickname
 	call InitNickname

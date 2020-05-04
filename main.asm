@@ -46,6 +46,7 @@ INCLUDE "engine/pokemon/breedmon_level_growth.asm"
 INCLUDE "engine/pokemon/search2.asm"
 INCLUDE "engine/events/bug_contest/caught_mon.asm"
 INCLUDE "engine/items/item_effects.asm"
+INCLUDE "engine/battle_anims/pokeball_wobble.asm"
 INCLUDE "engine/pokemon/knows_move.asm"
 
 
@@ -416,13 +417,13 @@ DoPoisonStep::
 	dr $50610, $506f2
 SweetScentFromMenu::
 	dr $506f2, $50763
-SquirtbottleFunction::
+_Squirtbottle::
 	dr $50763, $507ac
-CardKeyFunction::
+_CardKey::
 	dr $507ac, $507e7
-BasementKeyFunction::
+_BasementKey::
 	dr $507e7, $50819
-SacredAshFunction::
+_SacredAsh::
 	dr $50819, $5087d
 CopyMonToTempMon::
 	dr $5087d, $50940
@@ -626,7 +627,7 @@ _TownMap::
 	dr $9188a, $919c1
 PlayRadio::
 	dr $919c1, $91a4f
-TownMap_::
+PokegearMap::
 	dr $91a4f, $91a61
 _FlyMap::
 	dr $91a61, $91c7f
@@ -679,7 +680,7 @@ PrintTodaysLuckyNumber::
 	dr $c7bad, $c7bbf
 CheckPartyFullAfterContest::
 	dr $c7bbf, $c7cd0
-Functionc7cd0::
+GiveANickname_YesNo::
 	dr $c7cd0, $c7cde
 
 

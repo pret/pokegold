@@ -23,7 +23,7 @@ TMHMPocket:
 .ConvertItemToTMHMNumber:
 	ld a, [wCurItem]
 	ld c, a
-	callfar GetNumberedTM
+	callfar GetNumberedTMHM
 	ld a, c
 	ld [wCurItem], a
 	ret
@@ -31,7 +31,7 @@ TMHMPocket:
 ConvertCurItemIntoCurTMHM:
 	ld a, [wCurItem]
 	ld c, a
-	callfar GetNumberedTMHM
+	callfar GetTMHMNumber
 	ld a, c
 	ld [wTempTMHM], a
 	ret

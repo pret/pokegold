@@ -1740,11 +1740,11 @@ wd151::
 
 wFailedToFlee:: db ; d152
 wNumFleeAttempts:: db ; d153
-wd154:: ds 1 ; d154
-wROMBankBackup:: ds 1 ; d155
+wMonTriedToEvolve:: db ; d154
+wROMBankBackup:: db ; d155
 wFarByte::
 wTempBank:: db ; d156
-wTimeOfDay:: ds 1 ; d157
+wTimeOfDay:: db ; d157
 wd158:: ds 1 ; d158
 
 wMapStatus:: db ; d159

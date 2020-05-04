@@ -12,198 +12,188 @@ _DoItemEffect::
 	ret
 
 ItemEffects:
-	dw MasterBall
-	dw UltraBall
-	dw Brightpowder
-	dw GreatBall
-	dw PokeBall
-	dw TownMap
-	dw Bicycle
-	dw MoonStone
-	dw Antidote
-	dw BurnHeal
-	dw IceHeal
-	dw Awakening
-	dw ParlyzHeal
-	dw FullRestore
-	dw MaxPotion
-	dw HyperPotion
-	dw SuperPotion
-	dw Potion
-	dw EscapeRope
-	dw Repel
-	dw MaxElixer
-	dw FireStone
-	dw Thunderstone
-	dw WaterStone
-	dw Item19
-	dw HPUp
-	dw Protein
-	dw Iron
-	dw Carbos
-	dw LuckyPunch
-	dw Calcium
-	dw RareCandy
-	dw XAccuracy
-	dw LeafStone
-	dw MetalPowder
-	dw Nugget
-	dw PokeDoll
-	dw FullHeal
-	dw Revive
-	dw MaxRevive
-	dw GuardSpec
-	dw SuperRepel
-	dw MaxRepel
-	dw DireHit
-	dw Item2D
-	dw FreshWater
-	dw SodaPop
-	dw Lemonade
-	dw XAttack
-	dw Item32
-	dw XDefend
-	dw XSpeed
-	dw XSpecial
-	dw CoinCase
-	dw ItemfinderEffect
-	dw PokeFlute
-	dw ExpShare
-	dw OldRod
-	dw GoodRod
-	dw SilverLeaf
-	dw SuperRod
-	dw PPUp
-	dw Ether
-	dw MaxEther
-	dw Elixer
-	dw RedScale
-	dw Secretpotion
-	dw SSTicket
-	dw MysteryEgg
-	dw Item47
-	dw SilverWing
-	dw MoomooMilk
-	dw QuickClaw
-	dw Psncureberry
-	dw GoldLeaf
-	dw SoftSand
-	dw SharpBeak
-	dw Przcureberry
-	dw BurntBerry
-	dw IceBerry
-	dw PoisonBarb
-	dw KingsRock
-	dw BitterBerry
-	dw MintBerry
-	dw RedApricorn
-	dw Tinymushroom
-	dw BigMushroom
-	dw Silverpowder
-	dw BluApricorn
-	dw Item5A
-	dw AmuletCoin
-	dw YlwApricorn
-	dw GrnApricorn
-	dw CleanseTag
-	dw MysticWater
-	dw Twistedspoon
-	dw WhtApricorn
-	dw Blackbelt
-	dw BlkApricorn
-	dw Item64
-	dw PnkApricorn
-	dw Blackglasses
-	dw Slowpoketail
-	dw PinkBow
-	dw Stick
-	dw SmokeBall
-	dw Nevermeltice
-	dw Magnet
-	dw Miracleberry
-	dw Pearl
-	dw BigPearl
-	dw Everstone
-	dw SpellTag
-	dw Ragecandybar
-	dw Item73
-	dw Item74
-	dw MiracleSeed
-	dw ThickClub
-	dw FocusBand
-	dw Item78
-	dw Energypowder
-	dw EnergyRoot
-	dw HealPowder
-	dw RevivalHerb
-	dw HardStone
-	dw LuckyEgg
-	dw CardKey
-	dw MachinePart
-	dw Item81
-	dw LostItem
-	dw Stardust
-	dw StarPiece
-	dw BasementKey
-	dw Pass
-	dw Item87
-	dw Item88
-	dw Item89
-	dw Charcoal
-	dw BerryJuice
-	dw ScopeLens
-	dw Item8D
-	dw Item8E
-	dw MetalCoat
-	dw DragonFang
-	dw Item91
-	dw Leftovers
-	dw Item93
-	dw Item94
-	dw Item95
-	dw Mysteryberry
-	dw DragonScale
-	dw BerserkGene
-	dw Item99
-	dw Item9A
-	dw Item9B
-	dw SacredAsh
-	dw HeavyBall
-	dw FlowerMail
-	dw LevelBall
-	dw LureBall
-	dw FastBall
-	dw ItemA2
-	dw LightBall
-	dw FriendBall
-	dw MoonBall
-	dw LoveBall
-	dw NormalBox
-	dw GorgeousBox
-	dw SunStone
-	dw PolkadotBow
-	dw ItemAB
-	dw UpGrade
-	dw Berry
-	dw GoldBerry
-	dw Squirtbottle
-	dw ItemB0
-	dw ParkBall
-	dw RainbowWing
-	dw ItemB3
+; entries correspond to item ids
+	dw PokeBallEffect      ; MASTER_BALL
+	dw PokeBallEffect      ; ULTRA_BALL
+	dw NoEffect            ; BRIGHTPOWDER
+	dw PokeBallEffect      ; GREAT_BALL
+	dw PokeBallEffect      ; POKE_BALL
+	dw TownMapEffect       ; TOWN_MAP
+	dw BicycleEffect       ; BICYCLE
+	dw EvoStoneEffect      ; MOON_STONE
+	dw StatusHealingEffect ; ANTIDOTE
+	dw StatusHealingEffect ; BURN_HEAL
+	dw StatusHealingEffect ; ICE_HEAL
+	dw StatusHealingEffect ; AWAKENING
+	dw StatusHealingEffect ; PARLYZ_HEAL
+	dw FullRestoreEffect   ; FULL_RESTORE
+	dw RestoreHPEffect     ; MAX_POTION
+	dw RestoreHPEffect     ; HYPER_POTION
+	dw RestoreHPEffect     ; SUPER_POTION
+	dw RestoreHPEffect     ; POTION
+	dw EscapeRopeEffect    ; ESCAPE_ROPE
+	dw RepelEffect         ; REPEL
+	dw RestorePPEffect     ; MAX_ELIXER
+	dw EvoStoneEffect      ; FIRE_STONE
+	dw EvoStoneEffect      ; THUNDERSTONE
+	dw EvoStoneEffect      ; WATER_STONE
+	dw NoEffect            ; ITEM_19
+	dw VitaminEffect       ; HP_UP
+	dw VitaminEffect       ; PROTEIN
+	dw VitaminEffect       ; IRON
+	dw VitaminEffect       ; CARBOS
+	dw NoEffect            ; LUCKY_PUNCH
+	dw VitaminEffect       ; CALCIUM
+	dw RareCandyEffect     ; RARE_CANDY
+	dw XAccuracyEffect     ; X_ACCURACY
+	dw EvoStoneEffect      ; LEAF_STONE
+	dw NoEffect            ; METAL_POWDER
+	dw NoEffect            ; NUGGET
+	dw PokeDollEffect      ; POKE_DOLL
+	dw StatusHealingEffect ; FULL_HEAL
+	dw ReviveEffect        ; REVIVE
+	dw ReviveEffect        ; MAX_REVIVE
+	dw GuardSpecEffect     ; GUARD_SPEC
+	dw SuperRepelEffect    ; SUPER_REPEL
+	dw MaxRepelEffect      ; MAX_REPEL
+	dw DireHitEffect       ; DIRE_HIT
+	dw NoEffect            ; ITEM_2D
+	dw RestoreHPEffect     ; FRESH_WATER
+	dw RestoreHPEffect     ; SODA_POP
+	dw RestoreHPEffect     ; LEMONADE
+	dw XItemEffect         ; X_ATTACK
+	dw NoEffect            ; ITEM_32
+	dw XItemEffect         ; X_DEFEND
+	dw XItemEffect         ; X_SPEED
+	dw XItemEffect         ; X_SPECIAL
+	dw CoinCaseEffect      ; COIN_CASE
+	dw ItemfinderEffect    ; ITEMFINDER
+	dw PokeFluteEffect     ; POKE_FLUTE
+	dw NoEffect            ; EXP_SHARE
+	dw OldRodEffect        ; OLD_ROD
+	dw GoodRodEffect       ; GOOD_ROD
+	dw NoEffect            ; SILVER_LEAF
+	dw SuperRodEffect      ; SUPER_ROD
+	dw RestorePPEffect     ; PP_UP
+	dw RestorePPEffect     ; ETHER
+	dw RestorePPEffect     ; MAX_ETHER
+	dw RestorePPEffect     ; ELIXER
+	dw NoEffect            ; RED_SCALE
+	dw NoEffect            ; SECRETPOTION
+	dw NoEffect            ; S_S_TICKET
+	dw NoEffect            ; MYSTERY_EGG
+	dw NoEffect            ; ITEM_46
+	dw NoEffect            ; SILVER_WING
+	dw RestoreHPEffect     ; MOOMOO_MILK
+	dw NoEffect            ; QUICK_CLAW
+	dw StatusHealingEffect ; PSNCUREBERRY
+	dw NoEffect            ; GOLD_LEAF
+	dw NoEffect            ; SOFT_SAND
+	dw NoEffect            ; SHARP_BEAK
+	dw StatusHealingEffect ; PRZCUREBERRY
+	dw StatusHealingEffect ; BURNT_BERRY
+	dw StatusHealingEffect ; ICE_BERRY
+	dw NoEffect            ; POISON_BARB
+	dw NoEffect            ; KINGS_ROCK
+	dw BitterBerryEffect   ; BITTER_BERRY
+	dw StatusHealingEffect ; MINT_BERRY
+	dw NoEffect            ; RED_APRICORN
+	dw NoEffect            ; TINYMUSHROOM
+	dw NoEffect            ; BIG_MUSHROOM
+	dw NoEffect            ; SILVERPOWDER
+	dw NoEffect            ; BLU_APRICORN
+	dw NoEffect            ; ITEM_5A
+	dw NoEffect            ; AMULET_COIN
+	dw NoEffect            ; YLW_APRICORN
+	dw NoEffect            ; GRN_APRICORN
+	dw NoEffect            ; CLEANSE_TAG
+	dw NoEffect            ; MYSTIC_WATER
+	dw NoEffect            ; TWISTEDSPOON
+	dw NoEffect            ; WHT_APRICORN
+	dw NoEffect            ; BLACKBELT_I
+	dw NoEffect            ; BLK_APRICORN
+	dw NoEffect            ; ITEM_64
+	dw NoEffect            ; PNK_APRICORN
+	dw NoEffect            ; BLACKGLASSES
+	dw NoEffect            ; SLOWPOKETAIL
+	dw NoEffect            ; PINK_BOW
+	dw NoEffect            ; STICK
+	dw NoEffect            ; SMOKE_BALL
+	dw NoEffect            ; NEVERMELTICE
+	dw NoEffect            ; MAGNET
+	dw StatusHealingEffect ; MIRACLEBERRY
+	dw NoEffect            ; PEARL
+	dw NoEffect            ; BIG_PEARL
+	dw NoEffect            ; EVERSTONE
+	dw NoEffect            ; SPELL_TAG
+	dw RestoreHPEffect     ; RAGECANDYBAR
+	dw NoEffect            ; ITEM_73
+	dw NoEffect            ; ITEM_74
+	dw NoEffect            ; MIRACLE_SEED
+	dw NoEffect            ; THICK_CLUB
+	dw NoEffect            ; FOCUS_BAND
+	dw NoEffect            ; ITEM_78
+	dw EnergypowderEffect  ; ENERGYPOWDER
+	dw EnergyRootEffect    ; ENERGY_ROOT
+	dw HealPowderEffect    ; HEAL_POWDER
+	dw RevivalHerbEffect   ; REVIVAL_HERB
+	dw NoEffect            ; HARD_STONE
+	dw NoEffect            ; LUCKY_EGG
+	dw CardKeyEffect       ; CARD_KEY
+	dw NoEffect            ; MACHINE_PART
+	dw NoEffect            ; ITEM_81
+	dw NoEffect            ; LOST_ITEM
+	dw NoEffect            ; STARDUST
+	dw NoEffect            ; STAR_PIECE
+	dw BasementKeyEffect   ; BASEMENT_KEY
+	dw NoEffect            ; PASS
+	dw NoEffect            ; ITEM_87
+	dw NoEffect            ; ITEM_88
+	dw NoEffect            ; ITEM_89
+	dw NoEffect            ; CHARCOAL
+	dw RestoreHPEffect     ; BERRY_JUICE
+	dw NoEffect            ; SCOPE_LENS
+	dw NoEffect            ; ITEM_8D
+	dw NoEffect            ; ITEM_8E
+	dw NoEffect            ; METAL_COAT
+	dw NoEffect            ; DRAGON_FANG
+	dw NoEffect            ; ITEM_91
+	dw NoEffect            ; LEFTOVERS
+	dw NoEffect            ; ITEM_93
+	dw NoEffect            ; ITEM_94
+	dw NoEffect            ; ITEM_95
+	dw RestorePPEffect     ; MYSTERYBERRY
+	dw NoEffect            ; DRAGON_SCALE
+	dw NoEffect            ; BERSERK_GENE
+	dw NoEffect            ; ITEM_99
+	dw NoEffect            ; ITEM_9A
+	dw NoEffect            ; ITEM_9B
+	dw SacredAshEffect     ; SACRED_ASH
+	dw PokeBallEffect      ; HEAVY_BALL
+	dw NoEffect            ; FLOWER_MAIL
+	dw PokeBallEffect      ; LEVEL_BALL
+	dw PokeBallEffect      ; LURE_BALL
+	dw PokeBallEffect      ; FAST_BALL
+	dw NoEffect            ; ITEM_A2
+	dw NoEffect            ; LIGHT_BALL
+	dw PokeBallEffect      ; FRIEND_BALL
+	dw PokeBallEffect      ; MOON_BALL
+	dw PokeBallEffect      ; LOVE_BALL
+	dw NormalBoxEffect     ; NORMAL_BOX
+	dw GorgeousBoxEffect   ; GORGEOUS_BOX
+	dw EvoStoneEffect      ; SUN_STONE
+	dw NoEffect            ; POLKADOT_BOW
+	dw NoEffect            ; ITEM_AB
+	dw NoEffect            ; UP_GRADE
+	dw RestoreHPEffect     ; BERRY
+	dw RestoreHPEffect     ; GOLD_BERRY
+	dw SquirtbottleEffect  ; SQUIRTBOTTLE
+	dw NoEffect            ; ITEM_B0
+	dw PokeBallEffect      ; PARK_BALL
+	dw NoEffect            ; RAINBOW_WING
+	dw NoEffect            ; ITEM_B3
 
-FastBall: ; e926
-FriendBall: ; e926
-GreatBall: ; e926
-HeavyBall: ; e926
-LevelBall: ; e926
-LoveBall: ; e926
-LureBall: ; e926
-MasterBall: ; e926
-MoonBall: ; e926
-ParkBall: ; e926
-PokeBall: ; e926
-UltraBall: ; e926
+PokeBallEffect:
 	ld a, [wBattleMode]
 	dec a
 	jp nz, UseBallInTrainerBattle
@@ -640,6 +630,7 @@ UltraBall: ; e926
 
 	ld a, BANK(sBoxMonNicknames)
 	call OpenSRAM
+
 	ld hl, wMonOrItemNameBuffer
 	ld de, sBoxMonNicknames
 	ld bc, MON_NAME_LENGTH
@@ -654,6 +645,7 @@ UltraBall: ; e926
 .SkipBoxMonNickname:
 	ld a, BANK(sBoxMonNicknames)
 	call OpenSRAM
+
 	ld hl, sBoxMonNicknames
 	ld de, wMonOrItemNameBuffer
 	ld bc, MON_NAME_LENGTH
@@ -728,8 +720,8 @@ UltraBallMultiplier:
 	ld b, $ff
 	ret
 
-GreatBallMultiplier:
 SafariBallMultiplier:
+GreatBallMultiplier:
 ParkBallMultiplier:
 ; multiply catch rate by 1.5
 	ld a, b
@@ -755,17 +747,19 @@ HeavyBallMultiplier:
 	add hl, de
 	rlca
 	rlca
-	and $3
+	and %11
 	add BANK("Pokedex Entries 001-064")
 	ld d, a
 	ld a, BANK(PokedexDataPointerTable)
 	call GetFarHalfword
-.loop
+
+.SkipText:
 	ld a, d
 	call GetFarByte
 	inc hl
 	cp "@"
-	jr nz, .loop
+	jr nz, .SkipText
+
 	ld a, d
 	push bc
 	inc hl
@@ -851,12 +845,13 @@ LureBallMultiplier:
 
 	ld a, b
 	add a
-	jr c, .asm_ed2d
+	jr c, .max
+
 	add b
-	jr nc, .asm_ed2f
-.asm_ed2d
+	jr nc, .done
+.max
 	ld a, $ff
-.asm_ed2f
+.done
 	ld b, a
 	ret
 
@@ -869,15 +864,15 @@ MoonBallMultiplier:
 	dec a
 	ld c, a
 	ld b, 0
-	ld hl, EvosAttacksPointers ; $67bd
+	ld hl, EvosAttacksPointers
 	add hl, bc
 	add hl, bc
-	ld a, BANK(EvosAttacksPointers) ; $10
+	ld a, BANK(EvosAttacksPointers)
 	call GetFarHalfword
 	pop bc
 
 	push bc
-	ld a, BANK(EvosAttacksPointers) ; $10
+	ld a, BANK(EvosAttacksPointers)
 	call GetFarByte
 	cp EVOLVE_ITEM
 	pop bc
@@ -891,7 +886,7 @@ MoonBallMultiplier:
 ; No Pokémon evolve with Burn Heal,
 ; so Moon Balls always have a catch rate of 1×.
 	push bc
-	ld a, BANK(EvosAttacksPointers) ; $10
+	ld a, BANK(EvosAttacksPointers)
 	call GetFarByte
 	cp MOON_STONE_RED ; BURN_HEAL
 	pop bc
@@ -922,45 +917,52 @@ LoveBallMultiplier:
 	push bc
 	ld a, [wTempBattleMonSpecies]
 	ld [wCurPartySpecies], a
-	xor a
+	xor a ; PARTYMON
 	ld [wMonType], a
 	ld a, [wCurBattleMon]
 	ld [wCurPartyMon], a
-	farcall GetGender ; 14:52f1
-	jr c, .asm_edba
-	ld d, $0
-	jr nz, .asm_ed8d
-	inc d
-.asm_ed8d
+	farcall GetGender
+	jr c, .done1 ; no effect on genderless
+
+	ld d, 0 ; male
+	jr nz, .playermale
+	inc d   ; female
+.playermale
+
+	; check wild mon species
 	push de
 	ld a, [wTempEnemyMonSpecies]
 	ld [wCurPartySpecies], a
-	ld a, $4
+	ld a, WILDMON
 	ld [wMonType], a
-	farcall GetGender ; 14:52f1
-	jr c, .asm_edb9
-	ld d, $0
-	jr nz, .asm_eda6
-	inc d
-.asm_eda6
+	farcall GetGender
+	jr c, .done2 ; no effect on genderless
+
+	ld d, 0 ; male
+	jr nz, .wildmale
+	inc d   ; female
+.wildmale
+
 	ld a, d
 	pop de
 	cp d
 	pop bc
-	ret nz ; for the intended effect, this should be “ret z”
+	ret nz ; for the intended effect, this should be "ret z"
+
 	sla b
-	jr c, .asm_edb6
+	jr c, .max
 	sla b
-	jr c, .asm_edb6
+	jr c, .max
 	sla b
 	ret nc
-.asm_edb6
+.max
 	ld b, $ff
 	ret
 
-.asm_edb9
+.done2
 	pop de
-.asm_edba
+
+.done1
 	pop bc
 	ret
 
@@ -973,27 +975,30 @@ FastBallMultiplier:
 	ld a, [wTempEnemyMonSpecies]
 	ld c, a
 	ld hl, FleeMons
-	ld d, $3
-.asm_edc5
+	ld d, 3
+
+.loop
 	ld a, BANK(FleeMons)
 	call GetFarByte
 
 	inc hl
-	cp $ff
-	jr z, .asm_eddc
+	cp -1
+	jr z, .next
 	cp c
-	jr nz, .asm_eddc ; for the intended effect, this should be “jr nz, .loop”
+	jr nz, .next ; for the intended effect, this should be "jr nz, .loop"
 	sla b
-	jr c, .asm_edd9
+	jr c, .max
+
 	sla b
 	ret nc
-.asm_edd9
+
+.max
 	ld b, $ff
 	ret
 
-.asm_eddc
+.next
 	dec d
-	jr nz, .asm_edc5
+	jr nz, .loop
 	ret
 
 LevelBallMultiplier:
@@ -1004,20 +1009,23 @@ LevelBallMultiplier:
 	ld c, a
 	ld a, [wEnemyMonLevel]
 	cp c
-	ret nc
+	ret nc ; if player is lower level, we're done here
 	sla b
-	jr c, .asm_edfc
+	jr c, .max
+
 	srl c
 	cp c
-	ret nc
+	ret nc ; if player/2 is lower level, we're done here
 	sla b
-	jr c, .asm_edfc
+	jr c, .max
+
 	srl c
 	cp c
-	ret nc
+	ret nc ; if player/4 is lower level, we're done here
 	sla b
 	ret nc
-.asm_edfc
+
+.max
 	ld b, $ff
 	ret
 
@@ -1083,65 +1091,69 @@ ReturnToBattle_UseBall:
 	farcall _ReturnToBattle_UseBall
 	ret
 
-TownMap: ; ee55 (3:6e55)
-	farcall TownMap_ ; 24:5a4f
+TownMapEffect:
+	farcall PokegearMap
 	ret
 
-Bicycle: ; ee5c
-	farcall BikeFunction ; same bank
+BicycleEffect:
+	farcall BikeFunction
 	ret
 
-FireStone: ; ee63
-LeafStone: ; ee63
-MoonStone: ; ee63
-SunStone: ; ee63
-Thunderstone: ; ee63
-WaterStone: ; ee63
+EvoStoneEffect:
 	ld b, PARTYMENUACTION_EVO_STONE
-	call Functionf24f
-	jp c, .cancel
+	call UseItem_SelectMon
+
+	jp c, .DecidedNotToUse
+
 	ld a, MON_ITEM
 	call GetPartyParamLocation
+
 	ld a, [hl]
 	cp EVERSTONE
-	jr z, .failed
+	jr z, .NoEffect
+
 	ld a, $1
 	ld [wForceEvolution], a
-	farcall EvolvePokemon ; 10:61db
-	ld a, [wd154]
+	farcall EvolvePokemon
+
+	ld a, [wMonTriedToEvolve]
 	and a
-	jr z, .failed
+	jr z, .NoEffect
+
 	jp UseDisposableItem
 
-.failed
+.NoEffect:
 	call WontHaveAnyEffectMessage
-.cancel
+
+.DecidedNotToUse:
 	xor a
 	ld [wItemEffectSucceeded], a
 	ret
 
-
-Calcium: ; ee91
-Carbos: ; ee91
-HPUp: ; ee91
-Iron: ; ee91
-Protein: ; ee91
+VitaminEffect:
 	ld b, PARTYMENUACTION_HEALING_ITEM
-	call Functionf24f
-	jp c, Functioneef3
-	call Functionef49
-	call Functionef2d
+	call UseItem_SelectMon
+
+	jp c, RareCandy_StatBooster_ExitMenu
+
+	call RareCandy_StatBooster_GetParameters
+
+	call GetStatExpRelativePointer
+
 	ld a, MON_STAT_EXP
 	call GetPartyParamLocation
 
 	add hl, bc
 	ld a, [hl]
 	cp 100
-	jr nc, Functioneed7
+	jr nc, NoEffectMessage
+
 	add 10
 	ld [hl], a
-	call Functioneee0
-	call Functionef2d
+	call UpdateStatsAfterItem
+
+	call GetStatExpRelativePointer
+
 	ld hl, StatStrings
 	add hl, bc
 	ld a, [hli]
@@ -1161,12 +1173,12 @@ Protein: ; ee91
 
 	jp UseDisposableItem
 
-Functioneed7:
+NoEffectMessage:
 	ld hl, ItemWontHaveEffectText
 	call PrintText
 	jp ClearPalettes
 
-Functioneee0: ; eee0 (3:6ee0)
+UpdateStatsAfterItem:
 	ld a, MON_MAXHP
 	call GetPartyParamLocation
 	ld d, h
@@ -1176,7 +1188,7 @@ Functioneee0: ; eee0 (3:6ee0)
 	ld b, TRUE
 	predef_jump CalcMonStats
 
-Functioneef3: ; eef3 (3:6ef3)
+RareCandy_StatBooster_ExitMenu:
 	xor a
 	ld [wItemEffectSucceeded], a
 	jp ClearPalettes
@@ -1198,34 +1210,34 @@ StatStrings:
 .speed   db "SPEED@"
 .special db "SPECIAL@"
 
-Functionef2d: ; ef2d (3:6f2d)
+GetStatExpRelativePointer:
 	ld a, [wCurItem]
-	ld hl, StatOffsets
-.asm_ef33
+	ld hl, Table_eeeb
+.next
 	cp [hl]
 	inc hl
-	jr z, .asm_ef3a
+	jr z, .got_it
 	inc hl
-	jr .asm_ef33
+	jr .next
 
-.asm_ef3a
+.got_it
 	ld a, [hl]
 	ld c, a
-	ld b, $0
+	ld b, 0
 	ret
 
-StatOffsets:
+Table_eeeb:
 	db HP_UP,    MON_HP_EXP - MON_STAT_EXP
 	db PROTEIN, MON_ATK_EXP - MON_STAT_EXP
 	db IRON,    MON_DEF_EXP - MON_STAT_EXP
 	db CARBOS,  MON_SPD_EXP - MON_STAT_EXP
 	db CALCIUM, MON_SPC_EXP - MON_STAT_EXP
 
-Functionef49: ; ef49 (3:6f49)
+RareCandy_StatBooster_GetParameters:
 	ld a, [wCurPartySpecies]
 	ld [wCurSpecies], a
-	ld [wd151], a
-	ld a, $1f
+	ld [wTempSpecies], a
+	ld a, MON_LEVEL
 	call GetPartyParamLocation
 	ld a, [hl]
 	ld [wCurPartyLevel], a
@@ -1235,24 +1247,30 @@ Functionef49: ; ef49 (3:6f49)
 	call GetNick
 	ret
 
-RareCandy: ; ef68 (3:6f68)
+RareCandyEffect:
 	ld b, PARTYMENUACTION_HEALING_ITEM
-	call Functionf24f
-	jp c, Functioneef3
-	call Functionef49
+	call UseItem_SelectMon
+
+	jp c, RareCandy_StatBooster_ExitMenu
+
+	call RareCandy_StatBooster_GetParameters
+
 	ld a, MON_LEVEL
 	call GetPartyParamLocation
+
 	ld a, [hl]
 	cp MAX_LEVEL
-	jp nc, Functioneed7
+	jp nc, NoEffectMessage
+
 	inc a
 	ld [hl], a
 	ld [wCurPartyLevel], a
 	push de
 	ld d, a
 	farcall CalcExpAtLevel
+
 	pop de
-	ld a, $8
+	ld a, MON_EXP
 	call GetPartyParamLocation
 
 	ldh a, [hMultiplicand + 0]
@@ -1262,15 +1280,17 @@ RareCandy: ; ef68 (3:6f68)
 	ldh a, [hMultiplicand + 2]
 	ld [hl], a
 
-	ld a, $24
+	ld a, MON_MAXHP
 	call GetPartyParamLocation
 	ld a, [hli]
 	ld b, a
 	ld c, [hl]
 	push bc
-	call Functioneee0
-	ld a, $25
+	call UpdateStatsAfterItem
+
+	ld a, MON_MAXHP + 1
 	call GetPartyParamLocation
+
 	pop bc
 	ld a, [hld]
 	sub c
@@ -1285,110 +1305,114 @@ RareCandy: ; ef68 (3:6f68)
 	ld a, [hl]
 	adc b
 	ld [hl], a
-	ld c, $1
+	ld c, 1
 	farcall ChangeHappiness
+
 	ld a, PARTYMENUTEXT_LEVEL_UP
-	call Functionf2a0
-	xor a
+	call ItemActionText
+
+	xor a ; PARTYMON
 	ld [wMonType], a
 	predef CopyMonToTempMon
+
 	hlcoord 9, 0
 	ld b, 10
 	ld c, 9
 	call Textbox
+
 	hlcoord 11, 1
-	ld bc, $4
+	ld bc, 4
 	predef PrintTempMonStats
+
 	call WaitPressAorB_BlinkCursor
-	xor a
+
+	xor a ; PARTYMON
 	ld [wMonType], a
 	ld a, [wCurPartySpecies]
-	ld [wd151], a
+	ld [wTempSpecies], a
 	predef LearnLevelMoves
+
 	xor a
 	ld [wForceEvolution], a
 	farcall EvolvePokemon
+
 	jp UseDisposableItem
 
-HealPowder: ; f003 (3:7003)
-	ld b, $1
-	call Functionf24f
-	jp c, Functionf2f4
-	call Functionf030
+HealPowderEffect:
+	ld b, PARTYMENUACTION_HEALING_ITEM
+	call UseItem_SelectMon
+
+	jp c, StatusHealer_ExitMenu
+
+	call UseStatusHealer
+
 	cp $0
-	jr nz, .asm_f01f
-	ld c, $f
+	jr nz, .asm_efc9
+	ld c, HAPPINESS_BITTERPOWDER
 	farcall ChangeHappiness
+
 	call LooksBitterMessage
+
 	ld a, $0
-.asm_f01f
-	jp Functionf0f4
 
-Antidote: ; f022
-Awakening: ; f022
-BurnHeal: ; f022
-BurntBerry: ; f022
-FullHeal: ; f022
-IceBerry: ; f022
-IceHeal: ; f022
-MintBerry: ; f022
-Miracleberry: ; f022
-ParlyzHeal: ; f022
-Przcureberry: ; f022
-Psncureberry: ; f022
-	ld b, $1
-	call Functionf24f
-	jp c, Functionf2f4
-Functionf02a:
-	call Functionf030
-	jp Functionf0f4
+.asm_efc9
+	jp StatusHealer_Jumptable
 
-Functionf030: ; f030 (3:7030)
-	call Functionf363
+StatusHealingEffect:
+	ld b, PARTYMENUACTION_HEALING_ITEM
+	call UseItem_SelectMon
+	jp c, StatusHealer_ExitMenu
+
+FullyHealStatus:
+	call UseStatusHealer
+	jp StatusHealer_Jumptable
+
+UseStatusHealer:
+	call IsMonFainted
 	ld a, $1
 	ret z
-	call Functionf0ae
+	call GetItemHealingAction
 	ld a, MON_STATUS
 	call GetPartyParamLocation
 	ld a, [hl]
 	and c
-	jr nz, .asm_f04a
-	call Functionf05f
+	jr nz, .good
+	call IsItemUsedOnConfusedMon
 	ld a, $1
 	ret nc
 	ld b, PARTYMENUTEXT_HEAL_CONFUSION
-.asm_f04a
+.good
 	xor a
 	ld [hl], a
 	ld a, b
 	ld [wPartyMenuActionText], a
-	call Functionf086
+	call HealStatus
 	call Play_SFX_FULL_HEAL
-	call Functionf2cf
+	call ItemActionTextWaitButton
 	call UseDisposableItem
 	ld a, $0
 	ret
 
-Functionf05f: ; f05f (3:705f)
-	call Functionf2fc
-	jr nc, .asm_f072
+IsItemUsedOnConfusedMon:
+	call IsItemUsedOnBattleMon
+	jr nc, .nope
 	ld a, [wPlayerSubStatus3]
 	bit SUBSTATUS_CONFUSED, a
-	jr z, .asm_f072
+	jr z, .nope
 	ld a, c
 	cp $ff
-	jr nz, .asm_f072
+	jr nz, .nope
 	scf
 	ret
 
-.asm_f072
+.nope
 	and a
 	ret
 
-RestoreBattlemonHP:
-	call Functionf2fc
+BattlemonRestoreHealth:
+	call IsItemUsedOnBattleMon
 	ret nc
-	ld a, $22
+	ld a, MON_HP
 	call GetPartyParamLocation
 	ld a, [hli]
 	ld [wBattleMonHP], a
@@ -1396,284 +1420,281 @@ RestoreBattlemonHP:
 	ld [wBattleMonHP + 1], a
 	ret
 
-Functionf086: ; f086 (3:7086)
-	call Functionf2fc
+HealStatus:
+	call IsItemUsedOnBattleMon
 	ret nc
 	xor a
 	ld [wBattleMonStatus], a
 	ld hl, wPlayerSubStatus5
-	res 0, [hl]
+	res SUBSTATUS_TOXIC, [hl]
 	ld hl, wPlayerSubStatus1
-	res 0, [hl]
-	call Functionf0ae
+	res SUBSTATUS_NIGHTMARE, [hl]
+	call GetItemHealingAction
 	ld a, c
-	cp $ff
-	jr nz, .asm_f0a5
+	cp %11111111
+	jr nz, .not_full_heal
 	ld hl, wPlayerSubStatus3
-	res 7, [hl]
-.asm_f0a5
+	res SUBSTATUS_CONFUSED, [hl]
+.not_full_heal
 	push bc
-	farcall CalcPlayerStats ; d:66f6
+	farcall CalcPlayerStats
 	pop bc
 	ret
 
-Functionf0ae: ; f0ae (3:70ae)
+GetItemHealingAction:
 	push hl
 	ld a, [wCurItem]
-	ld hl, .healingactions ; $70c7
-	ld bc, $3
-.asm_f0b8
+	ld hl, StatusHealingActions
+	ld bc, 3
+.next
 	cp [hl]
-	jr z, .asm_f0be
+	jr z, .found_it
 	add hl, bc
-	jr .asm_f0b8
+	jr .next
 
-.asm_f0be
+.found_it
 	inc hl
 	ld b, [hl]
 	inc hl
 	ld a, [hl]
 	ld c, a
-	cp $ff
+	cp %11111111
 	pop hl
 	ret
 
-.healingactions
-	db ANTIDOTE,     PARTYMENUTEXT_HEAL_PSN, 1 << PSN
-	db BURN_HEAL,    PARTYMENUTEXT_HEAL_BRN, 1 << BRN
-	db ICE_HEAL,     PARTYMENUTEXT_HEAL_FRZ, 1 << FRZ
-	db AWAKENING,    PARTYMENUTEXT_HEAL_SLP, SLP
-	db PARLYZ_HEAL,  PARTYMENUTEXT_HEAL_PAR, 1 << PAR
-	db FULL_HEAL,    PARTYMENUTEXT_HEAL_ALL, %11111111
-	db FULL_RESTORE, PARTYMENUTEXT_HEAL_ALL, %11111111
-	db HEAL_POWDER,  PARTYMENUTEXT_HEAL_ALL, %11111111
-	db PSNCUREBERRY, PARTYMENUTEXT_HEAL_PSN, 1 << PSN
-	db PRZCUREBERRY, PARTYMENUTEXT_HEAL_PAR, 1 << PAR
-	db BURNT_BERRY,  PARTYMENUTEXT_HEAL_FRZ, 1 << FRZ
-	db ICE_BERRY,    PARTYMENUTEXT_HEAL_BRN, 1 << BRN
-	db MINT_BERRY,   PARTYMENUTEXT_HEAL_SLP, SLP
-	db MIRACLEBERRY, PARTYMENUTEXT_HEAL_ALL, %11111111
-	db -1, 0, 0
+INCLUDE "data/items/heal_status.asm"
 
-Functionf0f4: ; f0f4 (3:70f4)
-	ld hl, .Jumptable ; $70f9
+StatusHealer_Jumptable:
+	ld hl, .dw
 	rst JumpTable
 	ret
 
-.Jumptable:
-	dw Functionf2f8
-	dw Functionf2ef
-	dw Functionf2f4
+.dw
+	dw StatusHealer_ClearPalettes
+	dw StatusHealer_NoEffect
+	dw StatusHealer_ExitMenu
 
-RevivalHerb: ; f0ff
-	ld b, $1
-	call Functionf24f
-	jp c, Functionf2f4
-	call Functionf12c
-	cp $0
-	jr nz, .asm_f11b
-	ld c, $11
+RevivalHerbEffect:
+	ld b, PARTYMENUACTION_HEALING_ITEM
+	call UseItem_SelectMon
+	jp c, StatusHealer_ExitMenu
+
+	call RevivePokemon
+	cp 0
+	jr nz, .asm_f0c5
+
+	ld c, HAPPINESS_REVIVALHERB
 	farcall ChangeHappiness
 	call LooksBitterMessage
-	ld a, $0
-.asm_f11b
-	jp Functionf0f4
+	ld a, 0
 
-MaxRevive: ; f11e
-Revive: ; f11e
-	ld b, $1
-	call Functionf24f
-	jp c, Functionf2f4
-	call Functionf12c
-	jp Functionf0f4
+.asm_f0c5
+	jp StatusHealer_Jumptable
 
-Functionf12c: ; f12c (3:712c)
-	call Functionf363
-	ld a, $1
+ReviveEffect:
+	ld b, PARTYMENUACTION_HEALING_ITEM
+	call UseItem_SelectMon
+	jp c, StatusHealer_ExitMenu
+
+	call RevivePokemon
+	jp StatusHealer_Jumptable
+
+RevivePokemon:
+	call IsMonFainted
+	ld a, 1
 	ret nz
 	ld a, [wBattleMode]
 	and a
-	jr z, .asm_f15a
+	jr z, .skip_to_revive
+
 	ld a, [wCurPartyMon]
 	ld c, a
-	ld d, $0
+	ld d, 0
 	ld hl, wBattleParticipantsIncludingFainted
 	ld b, CHECK_FLAG
 	predef SmallFarFlagAction
 	ld a, c
 	and a
-	jr z, .asm_f15a
+	jr z, .skip_to_revive
+
 	ld a, [wCurPartyMon]
 	ld c, a
 	ld hl, wBattleParticipantsNotFainted
 	ld b, SET_FLAG
 	predef SmallFarFlagAction
-.asm_f15a
+
+.skip_to_revive
 	xor a
 	ld [wLowHealthAlarm], a
 	ld a, [wCurItem]
 	cp REVIVE
-	jr z, .asm_f16a
-	call Functionf319
-	jr .asm_f16d
+	jr z, .revive_half_hp
 
-.asm_f16a
-	call Functionf310
-.asm_f16d
-	call Functionf231
-	ld a, $f7
+	call ReviveFullHP
+	jr .finish_revive
+
+.revive_half_hp
+	call ReviveHalfHP
+
+.finish_revive
+	call HealHP_SFX_GFX
+	ld a, PARTYMENUTEXT_REVIVE
 	ld [wPartyMenuActionText], a
-	call Functionf2cf
+	call ItemActionTextWaitButton
 	call UseDisposableItem
-	ld a, $0
+	ld a, 0
 	ret
 
-FullRestore: ; f17e (3:717e)
-	ld b, $1
-	call Functionf24f
-	jp c, Functionf2f4
-	call Functionf363
-	jp z, Functionf2ef
-	call CalculateCurHPAnimRemainingHP
-	jr c, .asm_f194
-	jp Functionf02a
+FullRestoreEffect:
+	ld b, PARTYMENUACTION_HEALING_ITEM
+	call UseItem_SelectMon
+	jp c, StatusHealer_ExitMenu
 
-.asm_f194
-	call Functionf19a
-	jp Functionf0f4
+	call IsMonFainted
+	jp z, StatusHealer_NoEffect
 
-Functionf19a: ; f19a (3:719a)
+	call IsMonAtFullHealth
+	jr c, .NotAtFullHealth
+
+	jp FullyHealStatus
+
+.NotAtFullHealth:
+	call .FullRestore
+	jp StatusHealer_Jumptable
+
+.FullRestore:
 	xor a
 	ld [wLowHealthAlarm], a
-	call Functionf319
-	ld a, $20
+	call ReviveFullHP
+	ld a, MON_STATUS
 	call GetPartyParamLocation
 	xor a
 	ld [hli], a
 	ld [hl], a
-	call Functionf086
-	call RestoreBattlemonHP
-	call Functionf231
-	ld a, $f5
+	call HealStatus
+	call BattlemonRestoreHealth
+	call HealHP_SFX_GFX
+	ld a, PARTYMENUTEXT_HEAL_HP
 	ld [wPartyMenuActionText], a
-	call Functionf2cf
+	call ItemActionTextWaitButton
 	call UseDisposableItem
-	ld a, $0
+	ld a, 0
 	ret
 
-BitterBerry: ; f1c0
+BitterBerryEffect:
 	ld hl, wPlayerSubStatus3
-	bit 7, [hl]
-	ld a, $1
-	jr z, .asm_f1d9
-	res 7, [hl]
+	bit SUBSTATUS_CONFUSED, [hl]
+	ld a, 1
+	jr z, .done
+
+	res SUBSTATUS_CONFUSED, [hl]
 	xor a
 	ldh [hBattleTurn], a
 	call UseItemText
+
 	ld hl, ConfusedNoMoreText
 	call StdBattleTextbox
-	ld a, $0
-.asm_f1d9
-	jp Functionf0f4
 
-Berry: ; f1dc
-BerryJuice: ; f1dc
-FreshWater: ; f1dc
-GoldBerry: ; f1dc
-HyperPotion: ; f1dc
-Lemonade: ; f1dc
-MaxPotion: ; f1dc
-MoomooMilk: ; f1dc
-Potion: ; f1dc
-Ragecandybar: ; f1dc
-SodaPop: ; f1dc
-SuperPotion: ; f1dc
-	call Functionf1ff
-	jp Functionf0f4
+	ld a, 0
 
-Energypowder: ; f1e2 (3:71e2)
-	ld c, $f
-	jr asm_f1e8
+.done
+	jp StatusHealer_Jumptable
 
-EnergyRoot: ; f1e6 (3:71e6)
-	ld c, $10
-asm_f1e8:
+RestoreHPEffect:
+	call ItemRestoreHP
+	jp StatusHealer_Jumptable
+
+EnergypowderEffect:
+	ld c, HAPPINESS_BITTERPOWDER
+	jr EnergypowderEnergyRootCommon
+
+EnergyRootEffect:
+	ld c, HAPPINESS_ENERGYROOT
+
+EnergypowderEnergyRootCommon:
 	push bc
-	call Functionf1ff
+	call ItemRestoreHP
 	pop bc
-	cp $0
-	jr nz, .asm_f1fc
+	cp 0
+	jr nz, .skip_happiness
+
 	farcall ChangeHappiness
 	call LooksBitterMessage
-	ld a, $0
-.asm_f1fc
-	jp Functionf0f4
+	ld a, 0
 
-Functionf1ff: ; f1ff (3:71ff)
+.skip_happiness
+	jp StatusHealer_Jumptable
+
+ItemRestoreHP:
 	ld b, PARTYMENUACTION_HEALING_ITEM
-	call Functionf24f
-	ld a, $2
+	call UseItem_SelectMon
+	ld a, 2
 	ret c
-	call Functionf363
-	ld a, $1
+
+	call IsMonFainted
+	ld a, 1
 	ret z
-	call CalculateCurHPAnimRemainingHP
-	ld a, $1
+
+	call IsMonAtFullHealth
+	ld a, 1
 	ret nc
+
 	xor a
 	ld [wLowHealthAlarm], a
-	call Functionf3eb
-	call Functionf327
-	call RestoreBattlemonHP
-	call Functionf231
+	call GetHealingItemAmount
+	call RestoreHealth
+	call BattlemonRestoreHealth
+	call HealHP_SFX_GFX
 	ld a, PARTYMENUTEXT_HEAL_HP
 	ld [wPartyMenuActionText], a
-	call Functionf2cf
+	call ItemActionTextWaitButton
 	call UseDisposableItem
-	ld a, $0
+	ld a, 0
 	ret
 
-Functionf231: ; f231 (3:7231)
+HealHP_SFX_GFX:
 	push de
-	ld de, $4
+	ld de, SFX_POTION
 	call WaitPlaySFX
 	pop de
 	ld a, [wCurPartyMon]
 	hlcoord 11, 0
-	ld bc, $28
+	ld bc, SCREEN_WIDTH * 2
 	call AddNTimes
 	ld a, $2
 	ld [wWhichHPBar], a
 	predef_jump AnimateHPBar
 
-Functionf24f: ; f24f (3:724f)
-	call Functionf261
+UseItem_SelectMon:
+	call .SelectMon
 	ret c
+
 	ld a, [wCurPartySpecies]
 	cp EGG
-	jr nz, .asm_f25f
+	jr nz, .not_egg
+
 	call CantUseOnEggMessage
 	scf
 	ret
 
-.asm_f25f
+.not_egg
 	and a
 	ret
 
-Functionf261: ; f261 (3:7261)
+.SelectMon:
 	ld a, b
 	ld [wPartyMenuActionText], a
 	push hl
 	push de
 	push bc
 	call ClearBGPalettes
-	call Functionf272
+	call ChooseMonToUseItemOn
 	pop bc
 	pop de
 	pop hl
 	ret
 
-Functionf272: ; f272 (3:7272)
+ChooseMonToUseItemOn:
 	farcall LoadPartyMenuGFX
 	farcall InitPartyMenuWithCancel
 	farcall InitPartyMenuGFX
@@ -1685,7 +1706,7 @@ Functionf272: ; f272 (3:7272)
 	farcall PartyMenuSelect
 	ret
 
-Functionf2a0: ; f2a0 (3:72a0)
+ItemActionText:
 	ld [wPartyMenuActionText], a
 	ld a, [wCurPartySpecies]
 	push af
@@ -1708,33 +1729,33 @@ Functionf2a0: ; f2a0 (3:72a0)
 	ld [wCurPartySpecies], a
 	ret
 
-Functionf2cf: ; f2cf (3:72cf)
+ItemActionTextWaitButton:
 	xor a
 	ldh [hBGMapMode], a
 	hlcoord 0, 0
-	ld bc, SCREEN_HEIGHT * SCREEN_WIDTH
+	ld bc, wTilemapEnd - wTilemap
 	ld a, " "
 	call ByteFill
 	ld a, [wPartyMenuActionText]
-	call Functionf2a0
+	call ItemActionText
 	ld a, $1
 	ldh [hBGMapMode], a
 	ld c, 50
 	call DelayFrames
 	jp WaitPressAorB_BlinkCursor
 
-Functionf2ef: ; f2ef (3:72ef)
+StatusHealer_NoEffect:
 	call WontHaveAnyEffectMessage
-	jr Functionf2f8
+	jr StatusHealer_ClearPalettes
 
-Functionf2f4: ; f2f4 (3:72f4)
+StatusHealer_ExitMenu:
 	xor a
-	ld [wFieldMoveSucceeded], a
-Functionf2f8: ; f2f8 (3:72f8)
+	ld [wItemEffectSucceeded], a
+StatusHealer_ClearPalettes:
 	call ClearPalettes
 	ret
 
-Functionf2fc: ; f2fc (3:72fc)
+IsItemUsedOnBattleMon:
 	ld a, [wBattleMode]
 	and a
 	ret z
@@ -1743,32 +1764,32 @@ Functionf2fc: ; f2fc (3:72fc)
 	ld hl, wCurBattleMon
 	cp [hl]
 	pop hl
-	jr nz, .asm_f30e
+	jr nz, .nope
 	scf
 	ret
 
-.asm_f30e
+.nope
 	xor a
 	ret
 
-Functionf310: ; f310 (3:7310)
-	call GetCurHPAnimMaxHP
+ReviveHalfHP:
+	call LoadHPFromBuffer1
 	srl d
 	rr e
-	jr asm_f31c
+	jr ContinueRevive
 
-Functionf319: ; f319 (3:7319)
-	call GetCurHPAnimMaxHP
-asm_f31c:
+ReviveFullHP:
+	call LoadHPFromBuffer1
+ContinueRevive:
 	ld a, MON_HP
 	call GetPartyParamLocation
 	ld [hl], d
 	inc hl
 	ld [hl], e
-	jp CopyCurHPToAnimBufferNewHP
+	jp LoadCurHPIntoBuffer5
 
-Functionf327: ; f327 (3:7327)
-	ld a, $23
+RestoreHealth:
+	ld a, MON_HP + 1
 	call GetPartyParamLocation
 	ld a, [hl]
 	add e
@@ -1776,8 +1797,8 @@ Functionf327: ; f327 (3:7327)
 	ld a, [hl]
 	adc d
 	ld [hl], a
-	jr c, .asm_f34b
-	call CopyCurHPToAnimBufferNewHP
+	jr c, .full_hp
+	call LoadCurHPIntoBuffer5
 	ld a, MON_HP + 1
 	call GetPartyParamLocation
 	ld d, h
@@ -1790,13 +1811,13 @@ Functionf327: ; f327 (3:7327)
 	dec hl
 	ld a, [de]
 	sbc [hl]
-	jr c, .asm_f34e
-.asm_f34b
-	call Functionf319
-.asm_f34e
+	jr c, .finish
+.full_hp
+	call ReviveFullHP
+.finish
 	ret
 
-Functionf34f: ; f34f (3:734f)
+RemoveHP:
 	ld a, MON_HP + 1
 	call GetPartyParamLocation
 	ld a, [hl]
@@ -1805,93 +1826,93 @@ Functionf34f: ; f34f (3:734f)
 	ld a, [hl]
 	sbc d
 	ld [hl], a
-	jr nc, .asm_f35f
+	jr nc, .okay
 	xor a
 	ld [hld], a
 	ld [hl], a
-.asm_f35f
-	call CopyCurHPToAnimBufferNewHP
+.okay
+	call LoadCurHPIntoBuffer5
 	ret
 
-Functionf363: ; f363 (3:7363)
+IsMonFainted:
 	push de
-	call CopyMaxHPToAnimBufferMaxHP
-	call CopyCurHPToAnimBufferOldHP
-	call GetCurHPAnimOldHP
+	call LoadMaxHPToBuffer1
+	call LoadCurHPToBuffer3
+	call LoadHPFromBuffer3
 	ld a, d
 	or e
 	pop de
 	ret
 
-CalculateCurHPAnimRemainingHP: ; f371 (3:7371)
-	call GetCurHPAnimOldHP
+IsMonAtFullHealth:
+	call LoadHPFromBuffer3
 	ld h, d
 	ld l, e
-	call GetCurHPAnimMaxHP
+	call LoadHPFromBuffer1
 	ld a, l
 	sub e
 	ld a, h
 	sbc d
 	ret
 
-CopyCurHPToAnimBufferNewHP: ; f37e (3:737e)
+LoadCurHPIntoBuffer5:
 	ld a, MON_HP
 	call GetPartyParamLocation
 	ld a, [hli]
-	ld [wCurHPAnimNewHP + 1], a
+	ld [wBuffer6], a
 	ld a, [hl]
-	ld [wCurHPAnimNewHP], a
+	ld [wBuffer5], a
 	ret
 
-SetCurHPAnimNewHP:
+LoadHPIntoBuffer5:
 	ld a, d
-	ld [wCurHPAnimNewHP + 1], a
+	ld [wBuffer6], a
 	ld a, e
-	ld [wCurHPAnimNewHP], a
+	ld [wBuffer5], a
 	ret
 
-GetCurHPAnimNewHP:
-	ld a, [wCurHPAnimNewHP + 1]
+LoadHPFromBuffer5:
+	ld a, [wBuffer6]
 	ld d, a
-	ld a, [wCurHPAnimNewHP]
+	ld a, [wBuffer5]
 	ld e, a
 	ret
 
-CopyCurHPToAnimBufferOldHP: ; f39e (3:739e)
+LoadCurHPToBuffer3:
 	ld a, MON_HP
 	call GetPartyParamLocation
 	ld a, [hli]
-	ld [wCurHPAnimOldHP + 1], a
+	ld [wBuffer4], a
 	ld a, [hl]
-	ld [wCurHPAnimOldHP], a
+	ld [wBuffer3], a
 	ret
 
-GetCurHPAnimOldHP: ; f3ac (3:73ac)
-	ld a, [wCurHPAnimOldHP + 1]
+LoadHPFromBuffer3:
+	ld a, [wBuffer4]
 	ld d, a
-	ld a, [wCurHPAnimOldHP]
+	ld a, [wBuffer3]
 	ld e, a
 	ret
 
-CopyMaxHPToAnimBufferMaxHP: ; f3b5 (3:73b5)
+LoadMaxHPToBuffer1:
 	push hl
 	ld a, MON_MAXHP
 	call GetPartyParamLocation
 	ld a, [hli]
-	ld [wCurHPAnimMaxHP + 1], a
+	ld [wBuffer2], a
 	ld a, [hl]
-	ld [wCurHPAnimMaxHP], a
+	ld [wBuffer1], a
 	pop hl
 	ret
 
-GetCurHPAnimMaxHP: ; f3c5 (3:73c5)
-	ld a, [wCurHPAnimMaxHP + 1]
+LoadHPFromBuffer1:
+	ld a, [wBuffer2]
 	ld d, a
-	ld a, [wCurHPAnimMaxHP]
+	ld a, [wBuffer1]
 	ld e, a
 	ret
 
-GetOneFifthMaxHP: ; f3ce (3:73ce)
+GetOneFifthMaxHP:
 	push bc
 	ld a, MON_MAXHP
 	call GetPartyParamLocation
@@ -1910,135 +1931,122 @@ GetOneFifthMaxHP: ; f3ce (3:73ce)
 	pop bc
 	ret
 
-Functionf3eb: ; f3eb (3:73eb)
+GetHealingItemAmount:
 	push hl
 	ld a, [wCurItem]
-	ld hl, HealingItemParameters
+	ld hl, HealingHPAmounts
 	ld d, a
-.asm_f3f3
+.next
 	ld a, [hli]
 	cp -1
-	jr z, .asm_f3ff
+	jr z, .NotFound
 	cp d
-	jr z, .asm_f400
+	jr z, .done
 	inc hl
 	inc hl
-	jr .asm_f3f3
+	jr .next
 
-.asm_f3ff
+.NotFound:
 	scf
-.asm_f400
+.done
 	ld e, [hl]
 	inc hl
 	ld d, [hl]
 	pop hl
 	ret
 
-HealingItemParameters:
-	dbw FRESH_WATER,   50
-	dbw SODA_POP,      60
-	dbw LEMONADE,      80
-	dbw HYPER_POTION, 200
-	dbw SUPER_POTION,  50
-	dbw POTION,        20
-	dbw MAX_POTION,   999
-	dbw FULL_RESTORE, 999
-	dbw MOOMOO_MILK,  100
-	dbw BERRY,         10
-	dbw GOLD_BERRY,    30
-	dbw ENERGYPOWDER,  50
-	dbw ENERGY_ROOT,  200
-	dbw RAGECANDYBAR,  20
-	dbw BERRY_JUICE,   20
-	dbw -1,             0
+INCLUDE "data/items/heal_hp.asm"
 
 Softboiled_MilkDrinkFunction:
+; Softboiled/Milk Drink in the field
 	ld a, [wPartyMenuCursor]
 	dec a
 	ld b, a
-	call Functionf46f
-	jr c, .asm_f469
+	call .SelectMilkDrinkRecipient ; select pokemon
+	jr c, .skip
 	ld a, b
 	ld [wCurPartyMon], a
-	call Functionf363
+	call IsMonFainted
 	call GetOneFifthMaxHP
-	call Functionf34f
+	call RemoveHP
 	push bc
-	call Functionf231
+	call HealHP_SFX_GFX
 	pop bc
 	call GetOneFifthMaxHP
 	ld a, c
 	ld [wCurPartyMon], a
-	call Functionf363
-	call Functionf327
-.asm_f45d
-	call Functionf231
+	call IsMonFainted
+	call RestoreHealth
+	call HealHP_SFX_GFX
 	ld a, PARTYMENUTEXT_HEAL_HP
-	call Functionf2a0
+	call ItemActionText
 	call JoyWaitAorB
-.asm_f469
+.skip
 	ld a, b
 	inc a
 	ld [wPartyMenuCursor], a
 	ret
 
-Functionf46f: ; f46f (3:746f)
+.SelectMilkDrinkRecipient:
+.loop
 	push bc
-	ld a, $1
+	ld a, PARTYMENUACTION_HEALING_ITEM
 	ld [wPartyMenuActionText], a
-	call Functionf272
+	call ChooseMonToUseItemOn
 	pop bc
-	jr c, .asm_f494
+	jr c, .set_carry
 	ld a, [wPartyMenuCursor]
 	dec a
 	ld c, a
 	ld a, b
 	cp c
-	jr z, .asm_f496
+	jr z, .cant_use ; chose the same mon as user
 	ld a, c
 	ld [wCurPartyMon], a
-	call Functionf363
-	jr z, .asm_f496
-	call CalculateCurHPAnimRemainingHP
-	jr nc, .asm_f496
+	call IsMonFainted
+	jr z, .cant_use
+	call IsMonAtFullHealth
+	jr nc, .cant_use
 	xor a
 	ret
 
-.asm_f494
+.set_carry
 	scf
 	ret
 
-.asm_f496
+.cant_use
 	push bc
 	ld hl, .ItemCantUseOnMonText
 	call MenuTextboxBackup
 	pop bc
-	jr Functionf46f
+	jr .loop
 
 .ItemCantUseOnMonText:
 	text_far _ItemCantUseOnMonText
 	text_end
 
-EscapeRope: ; f4a5 (3:74a5)
+EscapeRopeEffect:
 	xor a
-	ld [wFieldMoveSucceeded], a
-	farcall EscapeRopeFunction ; same bank
-	ld a, [wFieldMoveSucceeded]
-	cp $1
+	ld [wItemEffectSucceeded], a
+	farcall EscapeRopeFunction
+
+	ld a, [wItemEffectSucceeded]
+	cp 1
 	call z, UseDisposableItem
 	ret
 
-SuperRepel: ; f4b8 (3:74b8)
+SuperRepelEffect:
 	ld b, 200
-	jr asm_f4c2
+	jr UseRepel
 
-MaxRepel: ; f4bc (3:74bc)
+MaxRepelEffect:
 	ld b, 250
-	jr asm_f4c2
+	jr UseRepel
 
-Repel: ; f4c0 (3:74c0)
+RepelEffect:
 	ld b, 100
-asm_f4c2:
+
+UseRepel:
 	ld a, [wRepelEffect]
 	and a
 	ld hl, RepelUsedEarlierIsStillInEffectText
@@ -2052,57 +2060,57 @@ RepelUsedEarlierIsStillInEffectText:
 	text_far _RepelUsedEarlierIsStillInEffectText
 	text_end
 
-XAccuracy: ; f4d8 (3:74d8)
+XAccuracyEffect:
 	ld hl, wPlayerSubStatus4
 	bit SUBSTATUS_X_ACCURACY, [hl]
 	jp nz, WontHaveAnyEffect_NotUsedMessage
 	set SUBSTATUS_X_ACCURACY, [hl]
 	jp UseItemText
 
-PokeDoll: ; f4e5 (3:74e5)
+PokeDollEffect:
 	ld a, [wBattleMode]
 	dec a
 	jr nz, .asm_f4f6
 	inc a
 	ld [wForcedSwitch], a
+	; set battle draw
 	inc a
 	ld [wBattleResult], a
 	jp UseItemText
 
 .asm_f4f6
 	xor a
-	ld [wFieldMoveSucceeded], a
+	ld [wItemEffectSucceeded], a
 	ret
 
-GuardSpec: ; f4fb (3:74fb)
+GuardSpecEffect:
 	ld hl, wPlayerSubStatus4
 	bit SUBSTATUS_MIST, [hl]
 	jp nz, WontHaveAnyEffect_NotUsedMessage
 	set SUBSTATUS_MIST, [hl]
 	jp UseItemText
 
-DireHit: ; f508 (3:7508)
+DireHitEffect:
 	ld hl, wPlayerSubStatus4
 	bit SUBSTATUS_FOCUS_ENERGY, [hl]
 	jp nz, WontHaveAnyEffect_NotUsedMessage
 	set SUBSTATUS_FOCUS_ENERGY, [hl]
 	jp UseItemText
 
-XAttack: ; f515
-XDefend: ; f515
-XSpecial: ; f515
-XSpeed: ; f515
+XItemEffect:
 	call UseItemText
-	ld a, [wCurItem]
-	ld hl, .x_item_table
-.asm_f51e
-	cp [hl]
-	jr z, .asm_f525
-	inc hl
-	inc hl
-	jr .asm_f51e
 
-.asm_f525
+	ld a, [wCurItem]
+	ld hl, XItemStats
+
+.loop
+	cp [hl]
+	jr z, .got_it
+	inc hl
+	inc hl
+	jr .loop
+
+.got_it
 	inc hl
 	ld b, [hl]
 	xor a
@@ -2121,13 +2129,9 @@ XSpeed: ; f515
 	farcall ChangeHappiness
 	ret
 
-.x_item_table
-	db X_ATTACK,  ATTACK
-	db X_DEFEND,  DEFENSE
-	db X_SPEED,   SPEED
-	db X_SPECIAL, SP_ATTACK
+INCLUDE "data/items/x_stats.asm"
 
-PokeFlute:
+PokeFluteEffect:
 	ld a, [wBattleMode]
 	and a
 	jr nz, .dummy
@@ -2205,19 +2209,22 @@ PokeFlute:
 	text_asm
 	ld a, [wBattleMode]
 	and a
-	jr nz, .asm_f5dc
+	jr nz, .battle
+
 	push de
 	ld de, SFX_POKEFLUTE
 	call WaitPlaySFX
 	call WaitSFX
 	pop de
-.asm_f5dc
+
+.battle
 	ld hl, .terminator
 	ret
 
-.terminator db "@"
+.terminator
+	db "@"
 
-CoinCase:
+CoinCaseEffect:
 	ld hl, .CoinCaseCountText
 	jp MenuTextboxWaitButton
 
@@ -2225,15 +2232,15 @@ CoinCase:
 	text_far _CoinCaseCountText
 	text_end
 
-OldRod: ; f5ec (3:75ec)
+OldRodEffect:
 	ld e, $0
 	jr UseRod
 
-GoodRod: ; f5f0 (3:75f0)
+GoodRodEffect:
 	ld e, $1
 	jr UseRod
 
-SuperRod: ; f5f4 (3:75f4)
+SuperRodEffect:
 	ld e, $2
 	jr UseRod
 
@@ -2241,34 +2248,34 @@ UseRod:
 	farcall FishFunction
 	ret
 
-ItemfinderEffect: ; f5ff (3:75ff)
+ItemfinderEffect:
 	farcall ItemFinder
 	ret
 
-Elixer: ; f606
-Ether: ; f606
-MaxElixer: ; f606
-MaxEther: ; f606
-Mysteryberry: ; f606
-PPUp: ; f606 (3:7606)
+RestorePPEffect:
 	ld a, [wCurItem]
-	ld [wMovementBufferCount], a
-.asm_f60c
-	ld b, $1
-	call Functionf24f
-	jp c, Functionf727
-.asm_f614
-	ld a, [wMovementBufferCount]
+	ld [wceed], a
+
+.loop
+	; Party Screen opens to choose on which mon to use the Item
+	ld b, PARTYMENUACTION_HEALING_ITEM
+	call UseItem_SelectMon
+	jp c, PPRestoreItem_Cancel
+
+.loop2
+	ld a, [wceed]
 	cp MAX_ELIXER
-	jp z, Functionf6f6
+	jp z, Elixer_RestorePPofAllMoves
 	cp ELIXER
-	jp z, Functionf6f6
+	jp z, Elixer_RestorePPofAllMoves
+
 	ld hl, RaiseThePPOfWhichMoveText
-	ld a, [wMovementBufferCount]
+	ld a, [wceed]
 	cp PP_UP
-	jr z, .asm_f62e
+	jr z, .ppup
 	ld hl, RestoreThePPOfWhichMoveText
-.asm_f62e
+
+.ppup
 	call PrintText
 
 	ld a, [wCurMoveNum]
@@ -2277,187 +2284,201 @@ PPUp: ; f606 (3:7606)
 	ld [wCurMoveNum], a
 	ld a, $2
 	ld [wMoveSelectionMenuType], a
-	ld a, $f
-	ld hl, $62f3
-	rst FarCall
+	farcall MoveSelectionScreen
 	pop bc
 
 	ld a, b
 	ld [wCurMoveNum], a
-	jr nz, .asm_f60c
+	jr nz, .loop
 	ld hl, wPartyMon1Moves
-	ld bc, $30
-	call Functionf9aa
+	ld bc, PARTYMON_STRUCT_LENGTH
+	call GetMthMoveOfNthPartymon
+
 	push hl
 	ld a, [hl]
-	ld [wd151], a
+	ld [wNamedObjectIndexBuffer], a
 	call GetMoveName
 	call CopyName1
 	pop hl
+
 	ld a, [wceed]
 	cp PP_UP
-	jp nz, Functionf6ee
+	jp nz, Not_PP_Up
+
 	ld a, [hl]
-	cp $a6
-	jr z, .asm_f676
-	ld bc, $15
+	cp SKETCH
+	jr z, .CantUsePPUpOnSketch
+
+	ld bc, MON_PP - MON_MOVES
 	add hl, bc
 	ld a, [hl]
-	cp $c0
-	jr c, .asm_f67e
-.asm_f676
+	cp PP_UP_MASK
+	jr c, .do_ppup
+
+.CantUsePPUpOnSketch:
+.pp_is_maxed_out
 	ld hl, PPIsMaxedOutText
 	call PrintText
-	jr .asm_f614
+	jr .loop2
 
-.asm_f67e
+.do_ppup
 	ld a, [hl]
-	add $40
+	add PP_UP_ONE
 	ld [hl], a
-	ld a, $1
-	ld [wd151], a
-	call Functionf893
+	ld a, TRUE
+	ld [wUsePPUp], a
+	call ApplyPPUp
 	call Play_SFX_FULL_HEAL
 
 	ld hl, PPsIncreasedText
 	call PrintText
-asm_f693:
+
+FinishPPRestore:
 	call ClearPalettes
 	jp UseDisposableItem
 
-asm_f699:
+BattleRestorePP:
 	ld a, [wBattleMode]
 	and a
-	jr z, .asm_f6b3
+	jr z, .not_in_battle
 	ld a, [wCurPartyMon]
 	ld b, a
 	ld a, [wCurBattleMon]
 	cp b
-	jr nz, .asm_f6b3
+	jr nz, .not_in_battle
 	ld a, [wPlayerSubStatus5]
 	bit SUBSTATUS_TRANSFORMED, a
-	jr nz, .asm_f6b3
-	call Functionf6be
-.asm_f6b3
+	jr nz, .not_in_battle
+	call .UpdateBattleMonPP
+
+.not_in_battle
 	call Play_SFX_FULL_HEAL
 	ld hl, PPRestoredText
 	call PrintText
-	jr asm_f693
+	jr FinishPPRestore
 
-Functionf6be: ; f6be (3:76be)
+.UpdateBattleMonPP:
 	ld a, [wCurPartyMon]
 	ld hl, wPartyMon1Moves
-	ld bc, $30
+	ld bc, PARTYMON_STRUCT_LENGTH
 	call AddNTimes
 	ld de, wBattleMonMoves
-	ld b, $4
-.asm_f6cf
+	ld b, NUM_MOVES
+.loop
 	ld a, [de]
 	and a
-	jr z, .asm_f6ed
+	jr z, .done
 	cp [hl]
-	jr nz, .asm_f6e8
+	jr nz, .next
 	push hl
 	push de
 	push bc
+rept NUM_MOVES + 2 ; wBattleMonPP - wBattleMonMoves
 	inc de
-	inc de
-	inc de
-	inc de
-	inc de
-	inc de
-	ld bc, $15
+endr
+	ld bc, MON_PP - MON_MOVES
 	add hl, bc
 	ld a, [hl]
 	ld [de], a
 	pop bc
 	pop de
 	pop hl
-.asm_f6e8
+
+.next
 	inc hl
 	inc de
 	dec b
-	jr nz, .asm_f6cf
-.asm_f6ed
+	jr nz, .loop
+
+.done
 	ret
 
-Functionf6ee: ; f6ee (3:76ee)
-	call Functionf72f
-	jr nz, asm_f699
-	jp Functionf724
+Not_PP_Up:
+	call RestorePP
+	jr nz, BattleRestorePP
+	jp PPRestoreItem_NoEffect
 
-Functionf6f6: ; f6f6 (3:76f6)
+Elixer_RestorePPofAllMoves:
 	xor a
 	ld hl, wMenuCursorY
 	ld [hli], a
 	ld [hl], a
-	ld b, $4
-.asm_f6fe
+	ld b, NUM_MOVES
+.moveLoop
 	push bc
 	ld hl, wPartyMon1Moves
-	ld bc, $30
-	call Functionf9aa
+	ld bc, PARTYMON_STRUCT_LENGTH
+	call GetMthMoveOfNthPartymon
 	ld a, [hl]
 	and a
-	jr z, .asm_f715
-	call Functionf72f
-	jr z, .asm_f715
+	jr z, .next
+
+	call RestorePP
+	jr z, .next
 	ld hl, wMenuCursorX
 	inc [hl]
-.asm_f715
+
+.next
 	ld hl, wMenuCursorY
 	inc [hl]
 	pop bc
 	dec b
-	jr nz, .asm_f6fe
+	jr nz, .moveLoop
 	ld a, [wMenuCursorX]
 	and a
-	jp nz, asm_f699
-Functionf724: ; f724 (3:7724)
+	jp nz, BattleRestorePP
+
+PPRestoreItem_NoEffect:
 	call WontHaveAnyEffectMessage
-Functionf727: ; f727 (3:7727)
+
+PPRestoreItem_Cancel:
 	call ClearPalettes
 	xor a
-	ld [wFieldMoveSucceeded], a
+	ld [wItemEffectSucceeded], a
 	ret
 
-Functionf72f: ; f72f (3:772f)
-	xor a
+RestorePP:
+	xor a ; PARTYMON
 	ld [wMonType], a
 	call GetMaxPPOfMove
 	ld hl, wPartyMon1PP
-	ld bc, $30
-	call Functionf9aa
-	ld a, [wd151]
+	ld bc, PARTYMON_STRUCT_LENGTH
+	call GetMthMoveOfNthPartymon
+	ld a, [wTempPP]
 	ld b, a
 	ld a, [hl]
-	and $3f
+	and PP_MASK
 	cp b
-	jr nc, .asm_f76a
+	jr nc, .dont_restore
+
 	ld a, [wceed]
 	cp MAX_ELIXER
-	jr z, .asm_f764
-	cp $40
-	jr z, .asm_f764
-	ld c, $5
-	cp $96
-	jr z, .asm_f75c
-	ld c, $a
-.asm_f75c
+	jr z, .restore_all
+	cp MAX_ETHER
+	jr z, .restore_all
+
+	ld c, 5
+	cp MYSTERYBERRY
+	jr z, .restore_some
+
+	ld c, 10
+
+.restore_some
 	ld a, [hl]
-	and $3f
+	and PP_MASK
 	add c
 	cp b
-	jr nc, .asm_f764
+	jr nc, .restore_all
 	ld b, a
-.asm_f764
+
+.restore_all
 	ld a, [hl]
-	and $c0
+	and PP_UP_MASK
 	or b
 	ld [hl], a
 	ret
 
-.asm_f76a
+.dont_restore
 	xor a
 	ret
 
@@ -2481,33 +2502,33 @@ PPRestoredText:
 	text_far _PPRestoredText
 	text_end
 
-Squirtbottle: ; f785 (3:7785)
-	farcall SquirtbottleFunction ; 14:4763
+SquirtbottleEffect:
+	farcall _Squirtbottle
 	ret
 
-CardKey: ; f78c (3:778c)
-	farcall CardKeyFunction ; 14:47ac
+CardKeyEffect:
+	farcall _CardKey
 	ret
 
-BasementKey: ; f793 (3:7793)
-	farcall BasementKeyFunction ; 14:47e7
+BasementKeyEffect:
+	farcall _BasementKey
 	ret
 
-SacredAsh: ; f79a (3:779a)
-	farcall SacredAshFunction ; 14:4819
-	ld a, [wFieldMoveSucceeded]
+SacredAshEffect:
+	farcall _SacredAsh
+	ld a, [wItemEffectSucceeded]
 	cp $1
 	ret nz
 	call UseDisposableItem
 	ret
 
-NormalBox: ; f7aa (3:77aa)
+NormalBoxEffect:
 	ld c, DECOFLAG_SILVER_TROPHY_DOLL
-	jr asm_f7b0
+	jr OpenBox
 
-GorgeousBox: ; f7ae (3:77ae)
+GorgeousBoxEffect:
 	ld c, DECOFLAG_GOLD_TROPHY_DOLL
-asm_f7b0:
+OpenBox:
 	farcall SetSpecificDecorationFlag
 
 	ld hl, .SentTrophyHomeText
@@ -2519,97 +2540,7 @@ asm_f7b0:
 	text_far _SentTrophyHomeText
 	text_end
 
-AmuletCoin: ; f7c4
-BerserkGene: ; f7c4
-BigMushroom: ; f7c4
-BigPearl: ; f7c4
-Blackbelt: ; f7c4
-Blackglasses: ; f7c4
-BlkApricorn: ; f7c4
-BluApricorn: ; f7c4
-Brightpowder: ; f7c4
-Charcoal: ; f7c4
-CleanseTag: ; f7c4
-DragonFang: ; f7c4
-DragonScale: ; f7c4
-Everstone: ; f7c4
-ExpShare: ; f7c4
-FlowerMail: ; f7c4
-FocusBand: ; f7c4
-GoldLeaf: ; f7c4
-GrnApricorn: ; f7c4
-HardStone: ; f7c4
-Item19: ; f7c4
-Item2D: ; f7c4
-Item32: ; f7c4
-Item47: ; f7c4
-Item5A: ; f7c4
-Item64: ; f7c4
-Item73: ; f7c4
-Item74: ; f7c4
-Item78: ; f7c4
-Item81: ; f7c4
-Item87: ; f7c4
-Item88: ; f7c4
-Item89: ; f7c4
-Item8D: ; f7c4
-Item8E: ; f7c4
-Item91: ; f7c4
-Item93: ; f7c4
-Item94: ; f7c4
-Item95: ; f7c4
-Item99: ; f7c4
-Item9A: ; f7c4
-Item9B: ; f7c4
-ItemA2: ; f7c4
-ItemAB: ; f7c4
-ItemB0: ; f7c4
-ItemB3: ; f7c4
-KingsRock: ; f7c4
-Leftovers: ; f7c4
-LightBall: ; f7c4
-LostItem: ; f7c4
-LuckyEgg: ; f7c4
-LuckyPunch: ; f7c4
-MachinePart: ; f7c4
-Magnet: ; f7c4
-MetalCoat: ; f7c4
-MetalPowder: ; f7c4
-MiracleSeed: ; f7c4
-MysteryEgg: ; f7c4
-MysticWater: ; f7c4
-Nevermeltice: ; f7c4
-Nugget: ; f7c4
-Pass: ; f7c4
-Pearl: ; f7c4
-PinkBow: ; f7c4
-PnkApricorn: ; f7c4
-PoisonBarb: ; f7c4
-PolkadotBow: ; f7c4
-QuickClaw: ; f7c4
-RainbowWing: ; f7c4
-RedApricorn: ; f7c4
-RedScale: ; f7c4
-SSTicket: ; f7c4
-ScopeLens: ; f7c4
-Secretpotion: ; f7c4
-SharpBeak: ; f7c4
-SilverLeaf: ; f7c4
-SilverWing: ; f7c4
-Silverpowder: ; f7c4
-Slowpoketail: ; f7c4
-SmokeBall: ; f7c4
-SoftSand: ; f7c4
-SpellTag: ; f7c4
-StarPiece: ; f7c4
-Stardust: ; f7c4
-Stick: ; f7c4
-ThickClub: ; f7c4
-Tinymushroom: ; f7c4
-Twistedspoon: ; f7c4
-UpGrade: ; f7c4
-WhtApricorn: ; f7c4
-YlwApricorn: ; f7c4
+NoEffect:
 	jp IsntTheTimeMessage
 
 Play_SFX_FULL_HEAL:
@@ -2751,40 +2682,42 @@ ItemGotOffText:
 	text_far _ItemGotOffText
 	text_end
 
-Functionf893: ; f893 (3:7893)
-	ld a, $2
+ApplyPPUp:
+	ld a, MON_MOVES
 	call GetPartyParamLocation
 	push hl
 	ld de, wBuffer1
 	predef FillPP
 	pop hl
-	ld bc, $15
+	ld bc, MON_PP - MON_MOVES
 	add hl, bc
-	ld de, wCurHPAnimMaxHP
-	ld b, $0
-.asm_f8ab
+	ld de, wBuffer1
+	ld b, 0
+.loop
 	inc b
 	ld a, b
-	cp $5
+	cp NUM_MOVES + 1
 	ret z
-	ld a, [wd151]
-	dec a
-	jr nz, .asm_f8bd
+	ld a, [wUsePPUp]
+	dec a ; FALSE?
+	jr nz, .use
 	ld a, [wMenuCursorY]
 	inc a
 	cp b
-	jr nz, .asm_f8c4
-.asm_f8bd
+	jr nz, .skip
+
+.use
 	ld a, [hl]
-	and $c0
-	ld a, [de]
-	call nz, Functionf8c8
-.asm_f8c4
+	and PP_UP_MASK
+	ld a, [de] ; wasted cycle
+	call nz, ComputeMaxPP
+
+.skip
 	inc hl
 	inc de
-	jr .asm_f8ab
+	jr .loop
 
-Functionf8c8: ; f8c8 (3:78c8)
+ComputeMaxPP:
 	push bc
 	; Divide the base PP by 5.
 	ld a, [de]
@@ -2807,37 +2740,44 @@ Functionf8c8: ; f8c8 (3:78c8)
 	ld c, a
 	; If this value is 0, we are done
 	and a
-	jr z, .asm_f8fd
-.asm_f8ea
+	jr z, .NoPPUp
+
+.loop
+	; Normally, a move with 40 PP would have 64 PP with three PP Ups.
+	; Since this would overflow into bit 6, we prevent that from happening
+	; by decreasing the extra amount of PP each PP Up provides, resulting
+	; in a maximum of 61.
 	ldh a, [hQuotient + 3]
 	cp $8
-	jr c, .asm_f8f2
+	jr c, .okay
 	ld a, $7
-.asm_f8f2
+
+.okay
 	add b
 	ld b, a
-	ld a, [wd151]
+	ld a, [wTempPP]
 	dec a
-	jr z, .asm_f8fd
+	jr z, .NoPPUp
 	dec c
-	jr nz, .asm_f8ea
-.asm_f8fd
+	jr nz, .loop
+
+.NoPPUp:
 	ld [hl], b
 	pop bc
 	ret
 
-Functionf900: ; f900 (3:7900)
-	ld a, $17
+RestoreAllPP:
+	ld a, MON_PP
 	call GetPartyParamLocation
 	push hl
-	ld a, $2
+	ld a, MON_MOVES
 	call GetPartyParamLocation
 	pop de
-	xor a
+	xor a ; PARTYMON
 	ld [wMenuCursorY], a
 	ld [wMonType], a
-	ld c, $4
-.asm_f915
+	ld c, NUM_MOVES
+.loop
 	ld a, [hli]
 	and a
 	ret z
@@ -2848,9 +2788,9 @@ Functionf900: ; f900 (3:7900)
 	pop bc
 	pop de
 	ld a, [de]
-	and $c0
+	and PP_UP_MASK
 	ld b, a
-	ld a, [wd151]
+	ld a, [wTempPP]
 	add b
 	ld [de], a
 	inc de
@@ -2858,41 +2798,50 @@ Functionf900: ; f900 (3:7900)
 	inc [hl]
 	pop hl
 	dec c
-	jr nz, .asm_f915
+	jr nz, .loop
 	ret
 
-GetMaxPPOfMove: ; f933 (3:7933)
-	ld a, [wStringBuffer1]
+GetMaxPPOfMove:
+	ld a, [wStringBuffer1 + 0]
 	push af
 	ld a, [wStringBuffer1 + 1]
 	push af
+
 	ld a, [wMonType]
 	and a
+
 	ld hl, wPartyMon1Moves
-	ld bc, $30
-	jr z, .asm_f961
+	ld bc, PARTYMON_STRUCT_LENGTH
+	jr z, .got_partymon ; PARTYMON
+
 	ld hl, wOTPartyMon1Moves
 	dec a
-	jr z, .asm_f961
-	ld hl, wTempMonMoves
-	dec a
-	jr z, .asm_f95c
-	ld hl, wTempMonMoves
-	dec a
-	jr z, .asm_f95c
-	ld hl, wBattleMonMoves
-.asm_f95c
-	call Functionf9b0
-	jr .asm_f964
+	jr z, .got_partymon ; OTPARTYMON
 
-.asm_f961
-	call Functionf9aa
-.asm_f964
+	ld hl, wTempMonMoves
+	dec a
+	jr z, .got_nonpartymon ; BOXMON
+
+	ld hl, wTempMonMoves ; Wasted cycles
+	dec a
+	jr z, .got_nonpartymon ; TEMPMON
+
+	ld hl, wBattleMonMoves ; WILDMON
+
+.got_nonpartymon ; BOXMON, TEMPMON, WILDMON
+	call GetMthMoveOfCurrentMon
+	jr .gotdatmove
+
+.got_partymon ; PARTYMON, OTPARTYMON
+	call GetMthMoveOfNthPartymon
+
+.gotdatmove
 	ld a, [hl]
 	dec a
+
 	push hl
 	ld hl, Moves + MOVE_PP
-	ld bc, $7
+	ld bc, MOVE_LENGTH
 	call AddNTimes
 	ld a, BANK(Moves)
 	call GetFarByte
@@ -2900,103 +2849,43 @@ GetMaxPPOfMove: ; f933 (3:7933)
 	ld de, wStringBuffer1
 	ld [de], a
 	pop hl
+
 	push bc
-	ld bc, $15
+	ld bc, MON_PP - MON_MOVES
 	ld a, [wMonType]
-	cp $4
-	jr nz, .asm_f989
-	ld bc, $6
-.asm_f989
+	cp WILDMON
+	jr nz, .notwild
+	ld bc, wEnemyMonPP - wEnemyMonMoves
+.notwild
 	add hl, bc
 	ld a, [hl]
-	and $c0
+	and PP_UP_MASK
 	pop bc
+
 	or b
 	ld hl, wStringBuffer1 + 1
 	ld [hl], a
 	xor a
-	ld [wd151], a
-	ld a, b
-	call Functionf8c8
+	ld [wTempPP], a
+	ld a, b ; this gets lost anyway
+	call ComputeMaxPP
 	ld a, [hl]
-	and $3f
-	ld [wd151], a
+	and PP_MASK
+	ld [wTempPP], a
+
 	pop af
 	ld [wStringBuffer1 + 1], a
-.asm_f9a3
 	pop af
-	ld [wStringBuffer1], a
+	ld [wStringBuffer1 + 0], a
 	ret
 
-Functionf9aa: ; f9aa (3:79aa)
+GetMthMoveOfNthPartymon:
 	ld a, [wCurPartyMon]
 	call AddNTimes
-Functionf9b0: ; f9b0 (3:79b0)
+
+GetMthMoveOfCurrentMon:
 	ld a, [wMenuCursorY]
 	ld c, a
-	ld b, $0
+	ld b, 0
 	add hl, bc
 	ret
-
-GetPokeballWobble:
-	ld a, [wBuffer2]
-	inc a
-	ld [wBuffer2], a
-	cp $4
-	jr z, .asm_f9e3
-	ld a, [wWildMon]
-	and a
-	ld c, $0
-	ret nz
-	ld hl, PokeballWobbleProbabilities
-	ld a, [wCurHPAnimMaxHP]
-	ld b, a
-.asm_f9d1
-	ld a, [hli]
-	cp b
-	jr nc, .asm_f9d8
-	inc hl
-	jr .asm_f9d1
-
-.asm_f9d8
-	ld b, [hl]
-	call Random
-	cp b
-	ld c, $0
-	ret c
-	ld c, $2
-	ret
-
-.asm_f9e3
-	ld a, [wWildMon]
-	and a
-	ld c, $1
-	ret nz
-	ld c, $2
-	ret
-
-PokeballWobbleProbabilities:
-	db   1,  63
-	db   2,  75
-	db   3,  84
-	db   4,  90
-	db   5,  95
-	db   7, 103
-	db  10, 113
-	db  15, 126
-	db  20, 134
-	db  30, 149
-	db  40, 160
-	db  50, 169
-	db  60, 177
-	db  80, 191
-	db 100, 201
-	db 120, 211
-	db 140, 220
-	db 160, 227
-	db 180, 234
-	db 200, 240
-	db 220, 246
-	db 240, 251
-	db 254, 253
-	db 255, 255

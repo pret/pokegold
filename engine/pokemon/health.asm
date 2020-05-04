@@ -1,54 +1,62 @@
-HealParty: ; c69d (3:469d)
+HealParty:
 	xor a
 	ld [wCurPartyMon], a
 	ld hl, wPartySpecies
-.asm_c6a4
+.loop
 	ld a, [hli]
 	cp -1
-	jr z, .asm_c6bb
+	jr z, .done
 	cp EGG
-	jr z, .asm_c6b2
+	jr z, .next
+
 	push hl
 	call HealPartyMon
 	pop hl
-.asm_c6b2
+
+.next
 	ld a, [wCurPartyMon]
 	inc a
 	ld [wCurPartyMon], a
-	jr .asm_c6a4
+	jr .loop
 
-.asm_c6bb
+.done
 	ret
 
 HealPartyMon:
-	ld a, $0
+	ld a, MON_SPECIES
 	call GetPartyParamLocation
 	ld d, h
 	ld e, l
-	ld hl, $20
+
+	ld hl, MON_STATUS
 	add hl, de
 	xor a
 	ld [hli], a
 	ld [hl], a
-	ld hl, $24
+
+	ld hl, MON_MAXHP
 	add hl, de
+
+	; bc = MON_HP
 	ld b, h
 	ld c, l
 	dec bc
 	dec bc
+
 	ld a, [hli]
 	ld [bc], a
 	inc bc
 	ld a, [hl]
 	ld [bc], a
-	farcall Functionf900
+
+	farcall RestoreAllPP
 	ret
 
 ComputeHPBarPixels:
 ; e = bc * (6 * 8) / de
 	ld a, b
 	or c
-	jr z, .asm_c722
+	jr z, .zero
 	push hl
 	xor a
 	ldh [hMultiplicand + 0], a
@@ -62,7 +70,7 @@ ComputeHPBarPixels:
 	; We need de to be under 256 because hDivisor is only 1 byte.
 	ld a, d
 	and a
-	jr z, .asm_c711
+	jr z, .divide
 	; divide de and hProduct by 4
 	srl d
 	rr e
@@ -78,25 +86,25 @@ ComputeHPBarPixels:
 	ldh [hDividend + 3], a
 	ld a, b
 	ldh [hDividend + 2], a
-.asm_c711
+.divide
 	ld a, e
 	ldh [hDivisor], a
-	ld b, $4
+	ld b, 4
 	call Divide
 	ldh a, [hQuotient + 3]
 	ld e, a
 	pop hl
 	and a
 	ret nz
-	ld e, $1
+	ld e, 1
 	ret
 
-.asm_c722
-	ld e, $0
+.zero
+	ld e, 0
 	ret
 
-AnimateHPBar: ; c725 (3:4725)
+AnimateHPBar:
 	call WaitBGMap
-	call AnimateHPBar_
+	call _AnimateHPBar
 	call WaitBGMap
 	ret

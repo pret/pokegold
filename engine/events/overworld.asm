@@ -1577,7 +1577,7 @@ MovementData_CastRod:
 
 PutTheRodAway:
 	hlcoord 1, 14
-	lb bc, $3, $12
+	lb bc, 3, 18
 	call ClearBox
 	call WaitBGMap
 	xor a

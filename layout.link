@@ -64,7 +64,6 @@ ROMX $0e
 ROMX $0f
 	"Battle Core"
 ROMX $10
-	org $4000
 	"bank10"
 ROMX $11
 	org $4000

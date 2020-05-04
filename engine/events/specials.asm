@@ -90,9 +90,7 @@ NameRival:
 .default
 IF DEF(_GOLD)
 	db "SILVER@"
-ENDC
-
-IF DEF(_SILVER)
+ELIF DEF(_SILVER)
 	db "GOLD@"
 ENDC
 
@@ -317,6 +315,7 @@ CheckSwarmFlag::
 	ret
 
 CheckPokerus:
+; Check if a monster in your party has Pokerus
 	farcall _CheckPokerus
 	jp ScriptReturnCarry
 
