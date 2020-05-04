@@ -450,7 +450,7 @@ OaksPKMNTalk9:
 	dw .OPT_SuaveDebonairText
 	dw .OPT_PowerfulText
 	dw .OPT_ExcitingText
-	dw .OPT_GroovyText
+	dw .OPT_NowText
 	dw .OPT_InspiringText
 	dw .OPT_FriendlyText
 	dw .OPT_HotHotHotText
@@ -491,8 +491,8 @@ OaksPKMNTalk9:
 	text_far _OPT_ExcitingText
 	text_end
 
-.OPT_GroovyText:
-	text_far _OPT_GroovyText
+.OPT_NowText:
+	text_far _OPT_NowText
 	text_end
 
 .OPT_InspiringText:

@@ -321,7 +321,7 @@ PrintDayCareText:
 
 .CantAcceptEgg:
 	; Sorry, but I can't accept an EGG.
-	text_far _CantRaiseEggText
+	text_far _CantAcceptEggText
 	db "@"
 
 .RemoveMail:
@@ -376,7 +376,7 @@ PrintDayCareText:
 
 .NotEnoughMoney:
 	; You don't have enough money.
-	text_far _DCNotEnoughMoneyText
+	text_far _NotEnoughMoneyText
 	db "@"
 
 .OhFineThen:
@@ -456,7 +456,7 @@ DayCareManOutside:
 
 .IllKeepItThanksText:
 	; Well then, I'll keep it. Thanks!
-	text_far _RefuseEggText
+	text_far _IllKeepItThanksText
 	db "@"
 
 .PartyFullText:

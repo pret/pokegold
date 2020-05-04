@@ -4,12 +4,12 @@ HealParty: ; c69d (3:469d)
 	ld hl, wPartySpecies
 .asm_c6a4
 	ld a, [hli]
-	cp $ff
+	cp -1
 	jr z, .asm_c6bb
-	cp $fd
+	cp EGG
 	jr z, .asm_c6b2
 	push hl
-	call Functionc6bc
+	call HealPartyMon
 	pop hl
 .asm_c6b2
 	ld a, [wCurPartyMon]
@@ -20,7 +20,7 @@ HealParty: ; c69d (3:469d)
 .asm_c6bb
 	ret
 
-Functionc6bc: ; c6bc (3:46bc)
+HealPartyMon:
 	ld a, $0
 	call GetPartyParamLocation
 	ld d, h

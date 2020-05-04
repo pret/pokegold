@@ -27,7 +27,7 @@ _NothingHereText::
 	line "here…"
 	done
 
-UnknownText_0x1bc0a2::
+_RecoveredSomeHPText::
 	text_ram wStringBuffer1
 	text_start
 	line "recovered @"
@@ -35,65 +35,65 @@ UnknownText_0x1bc0a2::
 	text "HP!"
 	done
 
-UnknownText_0x1bc0bb::
+_CuredOfPoisonText::
 	text_ram wStringBuffer1
 	text "'s"
 	line "cured of poison."
 	done
 
-UnknownText_0x1bc0d2::
+_RidOfParalysisText::
 	text_ram wStringBuffer1
 	text "'s"
 	line "rid of paralysis."
 	done
 
-UnknownText_0x1bc0ea::
+_BurnWasHealedText::
 	text_ram wStringBuffer1
 	text "'s"
 	line "burn was healed."
 	done
 
-UnknownText_0x1bc101::
+_WasDefrostedText::
 	text_ram wStringBuffer1
 	text_start
 	line "was defrosted."
 	done
 
-UnknownText_0x1bc115::
+_WokeUpText::
 	text_ram wStringBuffer1
 	text_start
 	line "woke up."
 	done
 
-UnknownText_0x1bc123::
+_HealthReturnedText::
 	text_ram wStringBuffer1
 	text "'s"
 	line "health returned."
 	done
 
-UnknownText_0x1bc13a::
+_RevitalizedText::
 	text_ram wStringBuffer1
 	text_start
 	line "is revitalized."
 	done
 
-UnknownText_0x1bc14f::
+_GrewToLevelText::
 	text_ram wStringBuffer1
 	text " grew to"
 	line "level @"
 	text_decimal wCurPartyLevel, 1, 3
 	text "!@"
-	sound_dex_fanfare_50_79
+	sound_dex_fanfare_50_79 ; plays SFX_DEX_FANFARE_50_79, identical to SFX_LEVEL_UP
 	text_promptbutton
-	db "@"
+	text_end
 
-UnknownText_0x1bc16e::
+_CameToItsSensesText::
 	text_ram wStringBuffer1
 	text " came"
 	line "to its senses."
 	done
 
-UnknownText_0x1bc29c::
+_OakTimeWokeUpText::
 	text "<……><……><……><……><……><……>"
 	line "<……><……><……><……><……><……>"
 
@@ -104,48 +104,52 @@ UnknownText_0x1bc29c::
 	line "clock for me?"
 	prompt
 
-UnknownText_0x1bc2eb::
+_OakTimeWhatTimeIsItText::
 	text "What time is it?"
 	done
 
-UnknownText_0x1bc2fd::
-	text "What?@@"
+_OakTimeWhatHoursText::
+	text "What?@"
+	text_end
+
+_OakTimeHoursQuestionMarkText::
 	text "?"
 	done
 
-UnknownText_0x1bc308::
+_OakTimeHowManyMinutesText::
 	text "How many minutes?"
 	done
 
-UnknownText_0x1bc31b::
-	text "Whoa!@@"
+_OakTimeWhoaMinutesText::
+	text "Whoa!@"
+	text_end
 
-UnknownText_0x1bc323::
+_OakTimeMinutesQuestionMarkText::
 	text "?"
 	done
 
-UnknownText_0x1bc326::
+_OakTimeOversleptText::
 	text "!"
 	line "I overslept!"
 	done
 
-UnknownText_0x1bc336::
+_OakTimeYikesText::
 	text "!"
 	line "Yikes! I over-"
 	cont "slept!"
 	done
 
-UnknownText_0x1bc34f::
+_OakTimeSoDarkText::
 	text "!"
 	line "No wonder it's so"
 	cont "dark!"
 	done
 
-UnknownText_0x1bc369::
+_OakTimeWhatDayIsItText::
 	text "What day is it?"
 	done
 
-UnknownText_0x1bc37a::
+_OakTimeIsItText::
 	text ", is it?"
 	done
 
@@ -445,7 +449,9 @@ _WillTradeText::
 	text " will"
 	line "trade @"
 	text_ram wOTTrademonSpeciesName
-	db "@@"
+	text_end
+
+	text_end ; unused
 
 _ForYourMonWillTradeText::
 	text "for @"
@@ -477,7 +483,9 @@ _OPT_OakText1::
 	text_start
 	line "OAK: @"
 	text_ram wMonOrItemNameBuffer
-	db "@@"
+	text_end
+
+	text_end ; unused
 
 _OPT_OakText2::
 	text_start
@@ -618,7 +626,7 @@ _OPT_ExcitingText::
 	line "exciting."
 	done
 
-_OPT_GroovyText::
+_OPT_NowText::
 	text_start
 	line "now!"
 	done
@@ -666,7 +674,7 @@ _PokedexShowText::
 	text_start
 	line "@"
 	text_ram wStringBuffer1
-	db "@"
+	text_end
 
 ; Pokémon Music Channel / Pokémusic
 
@@ -815,7 +823,9 @@ _PnP_Text4::
 	text_ram wStringBuffer2
 	text " @"
 	text_ram wStringBuffer1
-	db "@@"
+	text_end
+
+	text_end ; unused
 
 _PnP_CuteText::
 	text_start
@@ -901,7 +911,9 @@ _PnP_Text5::
 	text_start
 	line "@"
 	text_ram wStringBuffer1
-	db "@@"
+	text_end
+
+	text_end ; unused
 
 _RocketRadioText1::
 	text_start
@@ -1020,7 +1032,7 @@ _ReceiveItemText::
 	text "!@"
 	sound_item
 	text_promptbutton
-	db "@"
+	text_end
 
 _NoCoinsText::
 	text "You have no coins."
@@ -1031,26 +1043,27 @@ _NoCoinCaseText::
 	line "COIN CASE."
 	prompt
 
-UnknownText_0x1bd407::
+_NPCTradeCableText::
 	text "OK, connect the"
 	line "Game Link Cable."
 	prompt
 
-UnknownText_0x1bd429::
+Text_NPCTraded::
 	text "<PLAYER> traded"
 	line "@"
 	text_ram wStringBuffer2
 	text " for"
 	cont "@"
 	text_ram wMonOrItemNameBuffer
-	text ".@@"
+	text ".@"
+	text_end
 
-UnknownText_0x1bd445::
+_NPCTradeFanfareText::
 	sound_dex_fanfare_80_109
 	text_pause
-	db "@"
+	text_end
 
-UnknownText_0x1bd449::
+_NPCTradeIntroText1::
 	text "I collect #MON."
 	line "Do you have"
 	cont "@"
@@ -1063,12 +1076,12 @@ UnknownText_0x1bd449::
 	text "?"
 	done
 
-UnknownText_0x1bd48c::
+_NPCTradeCancelText1::
 	text "You don't want to"
 	line "trade? Aww…"
 	done
 
-UnknownText_0x1bd4aa::
+_NPCTradeWrongText1::
 	text "Huh? That's not"
 	line "@"
 	text_ram wStringBuffer1
@@ -1076,7 +1089,7 @@ UnknownText_0x1bd4aa::
 	cont "What a letdown…"
 	done
 
-UnknownText_0x1bd4d2::
+_NPCTradeCompleteText1::
 	text "Yay! I got myself"
 	line "@"
 	text_ram wStringBuffer1
@@ -1084,14 +1097,14 @@ UnknownText_0x1bd4d2::
 	cont "Thanks!"
 	done
 
-UnknownText_0x1bd4f4::
+_NPCTradeAfterText1::
 	text "Hi, how's my old"
 	line "@"
 	text_ram wStringBuffer2
 	text " doing?"
 	done
 
-UnknownText_0x1bd512::
+_NPCTradeIntroText2::
 	text "Hi, I'm looking"
 	line "for this #MON."
 
@@ -1106,7 +1119,7 @@ UnknownText_0x1bd512::
 	text "?"
 	done
 
-UnknownText_0x1bd565::
+_NPCTradeCancelText2::
 	text "You don't have"
 	line "one either?"
 
@@ -1114,7 +1127,7 @@ UnknownText_0x1bd565::
 	line "disappointing…"
 	done
 
-UnknownText_0x1bd5a1::
+_NPCTradeWrongText2::
 	text "You don't have"
 	line "@"
 	text_ram wStringBuffer1
@@ -1122,7 +1135,7 @@ UnknownText_0x1bd5a1::
 	cont "too bad, then."
 	done
 
-UnknownText_0x1bd5cc::
+_NPCTradeCompleteText2::
 	text "Great! Thank you!"
 
 	para "I finally got"
@@ -1131,7 +1144,7 @@ UnknownText_0x1bd5cc::
 	text "."
 	done
 
-UnknownText_0x1bd5f4::
+_NPCTradeAfterText2::
 	text "Hi! The @"
 	text_ram wMonOrItemNameBuffer
 	text_start
@@ -1139,7 +1152,7 @@ UnknownText_0x1bd5f4::
 	cont "doing great!"
 	done
 
-UnknownText_0x1bd621::
+_NPCTradeIntroText3::
 	text_ram wMonOrItemNameBuffer
 	text "'s cute,"
 	line "but I don't have"
@@ -1155,12 +1168,12 @@ UnknownText_0x1bd621::
 	text "?"
 	done
 
-UnknownText_0x1bd673::
+_NPCTradeCancelText3::
 	text "You don't want to"
 	line "trade? Oh, darn…"
 	done
 
-UnknownText_0x1bd696::
+_NPCTradeWrongText3::
 	text "That's not"
 	line "@"
 	text_ram wStringBuffer1
@@ -1170,7 +1183,7 @@ UnknownText_0x1bd696::
 	line "me if you get one."
 	done
 
-UnknownText_0x1bd6cd::
+_NPCTradeCompleteText3::
 	text "Wow! Thank you!"
 	line "I always wanted"
 	cont "@"
@@ -1178,7 +1191,7 @@ UnknownText_0x1bd6cd::
 	text "!"
 	done
 
-UnknownText_0x1bd6f5::
+_NPCTradeAfterText3::
 	text "How is that"
 	line "@"
 	text_ram wStringBuffer2
@@ -1377,7 +1390,7 @@ _OnlyOneMonText::
 	line "just one #MON."
 	prompt
 
-_CantRaiseEggText::
+_CantAcceptEggText::
 	text "Sorry, but I can't"
 	line "accept an EGG."
 	prompt
@@ -1461,7 +1474,7 @@ _HaveNoRoomText::
 	line "for it."
 	prompt
 
-_DCNotEnoughMoneyText::
+_NotEnoughMoneyText::
 	text "You don't have"
 	line "enough money."
 	prompt
@@ -1507,7 +1520,7 @@ _TakeGoodCareOfEggText::
 	line "it."
 	done
 
-_RefuseEggText::
+_IllKeepItThanksText::
 	text "Well then, I'll"
 	line "keep it. Thanks!"
 	done

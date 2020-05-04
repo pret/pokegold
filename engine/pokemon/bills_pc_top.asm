@@ -1,24 +1,24 @@
 _BillsPC:
-	call BillsPC_CheckHavePokemon
+	call .CheckCanUsePC
 	ret c
-	call BillsPC_LogIn
-	call BillsPC_UsePC
-	jp BillsPC_LogOut
+	call .LogIn
+	call .UseBillsPC
+	jp .LogOut
 
-BillsPC_CheckHavePokemon: ; e3e5 (3:63e5)
-	ld a, [wPokemonData]
+.CheckCanUsePC:
+	ld a, [wPartyCount]
 	and a
 	ret nz
-	ld hl, Text_GottaHavePokemon
+	ld hl, .PCGottaHavePokemonText
 	call MenuTextboxBackup
 	scf
 	ret
 
-Text_GottaHavePokemon:
-	text_far Text_GottaHavePokemon_
-	db "@"
+.PCGottaHavePokemonText:
+	text_far _PCGottaHavePokemonText
+	text_end
 
-BillsPC_LogIn: ; e3f7 (3:63f7)
+.LogIn:
 	xor a
 	ldh [hBGMapMode], a
 	call LoadStandardMenuHeader
@@ -26,57 +26,56 @@ BillsPC_LogIn: ; e3f7 (3:63f7)
 	ld hl, wOptions
 	ld a, [hl]
 	push af
-	set 4, [hl]
-	ld hl, Text_BillsPCWhat
+	set NO_TEXT_SCROLL, [hl]
+	ld hl, .PCWhatText
 	call PrintText
 	pop af
 	ld [wOptions], a
 	call LoadFontsBattleExtra
 	ret
 
-Text_BillsPCWhat:
-	text_far Text_BillsPCWhat_
-	db "@"
+.PCWhatText:
+	text_far _PCWhatText
+	text_end
 
-BillsPC_LogOut: ; e41a (3:641a)
+.LogOut:
 	call CloseSubmenu
 	ret
 
-BillsPC_UsePC: ; e41e (3:641e)
-	ld hl, BillsPC_TopMenuDataHeader
+.UseBillsPC:
+	ld hl, .MenuHeader
 	call LoadMenuHeader
 	ld a, $1
-.asm_e426
+.loop
 	ld [wMenuCursorBuffer], a
 	call SetPalettes
 	xor a
 	ld [wWhichIndexSet], a
 	ldh [hBGMapMode], a
 	call DoNthMenu
-	jr c, .asm_e446
+	jr c, .cancel
 	ld a, [wMenuCursorBuffer]
 	push af
 	ld a, [wMenuSelection]
-	ld hl, BillsPC_TopMenuJumptable
+	ld hl, .Jumptable
 	rst JumpTable
 	pop bc
 	ld a, b
-	jr nc, .asm_e426
-.asm_e446
+	jr nc, .loop
+.cancel
 	call CloseWindow
 	ret
 
-BillsPC_TopMenuDataHeader:
-	db $40
-	db 00, 00
-	db 17, 19
-	dw .MenuData2
-	db 1
+.MenuHeader:
+	db MENU_BACKUP_TILES ; flags
+	menu_coords 0, 0, SCREEN_WIDTH - 1, SCREEN_HEIGHT - 1
+	dw .MenuData
+	db 1 ; default option
 
-.MenuData2:
-	db $80
-	db 0
-	dw BillsPC_TopMenuItems
+.MenuData:
+	db STATICMENU_CURSOR ; flags
+	db 0 ; items
+	dw .items
 	dw PlaceMenuStrings
 	dw .strings
 
@@ -87,16 +86,20 @@ BillsPC_TopMenuDataHeader:
 	db "MOVE <PK><MN> W/O MAIL@"
 	db "SEE YA!@"
 
-BillsPC_TopMenuJumptable:
+.Jumptable:
 	dw BillsPC_WithdrawMenu
 	dw BillsPC_DepositMenu
 	dw BillsPC_ChangeBoxMenu
 	dw BillsPC_MovePKMNMenu
 	dw BillsPC_SeeYa
 
-BillsPC_TopMenuItems:
-	db 5
-	db 0, 1, 2, 3, 4
+.items
+	db 5 ; # items
+	db 0 ; WITHDRAW
+	db 1 ; DEPOSIT
+	db 2 ; CHANGE BOX
+	db 3 ; MOVE PKMN
+	db 4 ; SEE YA!
 	db -1
 
 BillsPC_SeeYa:
@@ -105,121 +108,123 @@ BillsPC_SeeYa:
 
 BillsPC_MovePKMNMenu:
 	call LoadStandardMenuHeader
-	farcall IsAnyPokemonHoldingMail ; 11:488c
-	jr nc, .asm_e4bb
-	ld hl, Text_PleaseRemoveMailBeforeMovePkmnWOMail
+	farcall IsAnyMonHoldingMail
+	jr nc, .no_mail
+	ld hl, .PCMonHoldingMailText
 	call PrintText
-	jr .asm_e4cf
+	jr .quit
 
-.asm_e4bb
+.no_mail
 	farcall StartMoveMonWOMail_SaveGame
-	jr c, .asm_e4cf
-	farcall MovePKMNWithoutMail_ ; 38:6f47
+	jr c, .quit
+	farcall _MovePKMNWithoutMail
 	call ReturnToMapFromSubmenu
 	call ClearPCItemScreen
-.asm_e4cf
+
+.quit
 	call CloseWindow
 	and a
 	ret
 
-Text_PleaseRemoveMailBeforeMovePkmnWOMail:
-	text_far Text_PleaseRemoveMailBeforeMovePkmnWOMail_
-	db "@"
+.PCMonHoldingMailText:
+	text_far _PCMonHoldingMailText
+	text_end
 
 BillsPC_DepositMenu:
 	call LoadStandardMenuHeader
-	farcall DepositPokemon_ ; 38:6b9e
+	farcall _DepositPKMN
 	call ReturnToMapFromSubmenu
 	call ClearPCItemScreen
 	call CloseWindow
 	and a
 	ret
 
-Functione4ed:
+Unreferenced_Functione4ed:
 	ld a, [wPartyCount]
 	and a
-	jr z, .asm_e4f9
-	cp $2
-	jr c, .asm_e501
+	jr z, .no_mon
+	cp 2
+	jr c, .only_one_mon
 	and a
 	ret
 
-.asm_e4f9
-	ld hl, Text_YouDontHaveASinglePokemon
+.no_mon
+	ld hl, .PCNoSingleMonText
 	call MenuTextboxBackup
 	scf
 	ret
 
-.asm_e501
-	ld hl, Text_ItsYourLastPokemon
+.only_one_mon
+	ld hl, .PCCantDepositLastMonText
 	call MenuTextboxBackup
 	scf
 	ret
 
-Text_YouDontHaveASinglePokemon:
-	text_far Text_YouDontHaveASinglePokemon_
-	db "@"
+.PCNoSingleMonText:
+	text_far _PCNoSingleMonText
+	text_end
 
-Text_ItsYourLastPokemon:
-	text_far Text_ItsYourLastPokemon_
-	db "@"
+.PCCantDepositLastMonText:
+	text_far _PCCantDepositLastMonText
+	text_end
 
-CheckCurPartyMonFainted: ; e513 (3:6513)
+CheckCurPartyMonFainted:
 	ld hl, wPartyMon1HP
-	ld de, $30
+	ld de, PARTYMON_STRUCT_LENGTH
 	ld b, $0
-.asm_e51b
+.loop
 	ld a, [wCurPartyMon]
 	cp b
-	jr z, .asm_e526
+	jr z, .skip
 	ld a, [hli]
 	or [hl]
-	jr nz, .asm_e532
+	jr nz, .notfainted
 	dec hl
-.asm_e526
+
+.skip
 	inc b
 	ld a, [wPartyCount]
 	cp b
-	jr z, .asm_e530
+	jr z, .done
 	add hl, de
-	jr .asm_e51b
+	jr .loop
 
-.asm_e530
+.done
 	scf
 	ret
 
-.asm_e532
+.notfainted
 	and a
 	ret
 
 BillsPC_WithdrawMenu:
 	call LoadStandardMenuHeader
-	farcall WithdrawPokemon_ ; 38:6d71
+	farcall _WithdrawPKMN
 	call ReturnToMapFromSubmenu
 	call ClearPCItemScreen
 	call CloseWindow
 	and a
 	ret
 
-Functione548:
+Unreferenced_Functione548:
 	ld a, [wPartyCount]
-	cp $6
+	cp PARTY_LENGTH
 	jr nc, .asm_e551
 	and a
 	ret
 
 .asm_e551
-	ld hl, Text_CantTakeAnyMorePokemon
+	ld hl, PCCantTakeText
 	call MenuTextboxBackup
 	scf
 	ret
 
-Text_CantTakeAnyMorePokemon:
-	text_far Text_CantTakeAnyMorePokemon_
-	db "@"
+PCCantTakeText:
+	text_far _PCCantTakeText
+	text_end
 
 BillsPC_ChangeBoxMenu:
-	farcall ChangeBox_
+	farcall _ChangeBox
 	and a
 	ret
 
@@ -237,32 +242,32 @@ ClearPCItemScreen:
 	lb bc, 10, 18
 	call Textbox
 	hlcoord 0, 12
-	ld bc, IncGradGBPalTable_13
+	lb bc, 4, 18
 	call Textbox
 	call WaitBGMap2
-	call SetPalettes
+	call SetPalettes ; load regular palettes?
 	ret
 
 CopyBoxmonToTempMon:
 	ld a, [wCurPartyMon]
 	ld hl, sBoxMon1Species
-	ld bc, $20
+	ld bc, BOXMON_STRUCT_LENGTH
 	call AddNTimes
 	ld de, wTempMonSpecies
-	ld bc, $20
+	ld bc, BOXMON_STRUCT_LENGTH
 	ld a, BANK(sBoxMon1Species)
 	call OpenSRAM
 	call CopyBytes
 	call CloseSRAM
 	ret
 
-Function65b4:
+Unreferenced_LoadBoxMonListing:
 	ld a, [wCurBox]
 	cp b
-	jr z, .asm_e5cc
+	jr z, .same_box
 	ld a, b
-	ld hl, Bank3BoxAddrs
-	ld bc, $3
+	ld hl, .BoxAddrs
+	ld bc, 3
 	call AddNTimes
 	ld a, [hli]
 	push af
@@ -270,29 +275,30 @@ Function65b4:
 	ld h, [hl]
 	ld l, a
 	pop af
-	jr .asm_e5d1
+	jr .okay
 
-.asm_e5cc
+.same_box
 	ld a, BANK(sBoxCount)
 	ld hl, sBoxCount
-.asm_e5d1
+
+.okay
 	call OpenSRAM
 	ld a, [hl]
-	ld bc, sBoxMon1 - sBox
+	ld bc, sBoxMons - sBox
 	add hl, bc
 	ld b, a
 	ld c, $0
 	ld de, wBoxPartialData
 	ld a, b
 	and a
-	jr z, .asm_e645
-.asm_e5e3
+	jr z, .empty_box
+.loop
 	push hl
 	push bc
 	ld a, c
-	ld bc, $0
+	ld bc, sBoxMon1Species - sBoxMons
 	add hl, bc
-	ld bc, $20
+	ld bc, BOXMON_STRUCT_LENGTH
 	call AddNTimes
 	ld a, [hl]
 	ld [de], a
@@ -301,6 +307,7 @@ Function65b4:
 	call GetBaseData
 	pop bc
 	pop hl
+
 	push hl
 	push bc
 	ld a, c
@@ -310,24 +317,26 @@ Function65b4:
 	call CopyBytes
 	pop bc
 	pop hl
+
 	push hl
 	push bc
 	ld a, c
-	ld bc, $1f
+	ld bc, MON_LEVEL
 	add hl, bc
-	ld bc, $20
+	ld bc, BOXMON_STRUCT_LENGTH
 	call AddNTimes
 	ld a, [hl]
 	ld [de], a
 	inc de
 	pop bc
 	pop hl
+
 	push hl
 	push bc
 	ld a, c
-	ld bc, $15
+	ld bc, MON_DVS
 	add hl, bc
-	ld bc, $20
+	ld bc, BOXMON_STRUCT_LENGTH
 	call AddNTimes
 	ld a, [hli]
 	and $f0
@@ -340,21 +349,22 @@ Function65b4:
 	ld a, [wBaseGender]
 	cp b
 	ld a, $1
-	jr c, .asm_e63d
+	jr c, .okay2
 	xor a
-.asm_e63d
+.okay2
 	ld [de], a
 	inc de
 	pop bc
 	pop hl
+
 	inc c
 	dec b
-	jr nz, .asm_e5e3
-.asm_e645
+	jr nz, .loop
+.empty_box
 	call CloseSRAM
 	ret
 
-Bank3BoxAddrs:
+.BoxAddrs:
 	dba sBox1
 	dba sBox2
 	dba sBox3

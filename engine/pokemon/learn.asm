@@ -1,131 +1,150 @@
 LearnMove:
 	call LoadTilemapToTempTilemap
 	ld a, [wCurPartyMon]
-	ld hl, wPartyMon1Nickname
+	ld hl, wPartyMonNicknames
 	call GetNick
 	ld hl, wStringBuffer1
 	ld de, wMonOrItemNameBuffer
-	ld bc, $b
+	ld bc, MON_NAME_LENGTH
 	call CopyBytes
+
 .loop
 	ld hl, wPartyMon1Moves
-	ld bc, $30
+	ld bc, PARTYMON_STRUCT_LENGTH
 	ld a, [wCurPartyMon]
 	call AddNTimes
 	ld d, h
 	ld e, l
-	ld b, $4
-.asm_660f
+	ld b, NUM_MOVES
+; Get the first empty move slot.  This routine also serves to
+; determine whether the Pokemon learning the moves already has
+; all four slots occupied, in which case one would need to be
+; deleted.
+.next
 	ld a, [hl]
 	and a
-	jr z, .asm_6643
+	jr z, .learn
 	inc hl
 	dec b
-	jr nz, .asm_660f
+	jr nz, .next
+; If we're here, we enter the routine for forgetting a move
+; to make room for the new move we're trying to learn.
 	push de
-	call .AlreadyHaveFourMoves
+	call ForgetMove
 	pop de
-	jp c, .ConfirmStopLearning
+	jp c, .cancel
+
 	push hl
 	push de
-	ld [wd151], a
+	ld [wNamedObjectIndexBuffer], a
+
 	ld b, a
 	ld a, [wBattleMode]
 	and a
-	jr z, .asm_6638
+	jr z, .not_disabled
 	ld a, [wDisabledMove]
 	cp b
-	jr nz, .asm_6638
+	jr nz, .not_disabled
 	xor a
 	ld [wDisabledMove], a
 	ld [wPlayerDisableCount], a
-.asm_6638
+.not_disabled
+
 	call GetMoveName
-	ld hl, Text_1_2_and_Poof
+	ld hl, Text_1_2_and_Poof ; 1, 2 and…
 	call PrintText
 	pop de
 	pop hl
-.asm_6643
+
+.learn
 	ld a, [wPutativeTMHMMove]
 	ld [hl], a
-	ld bc, $15
+	ld bc, MON_PP - MON_MOVES
 	add hl, bc
+
 	push hl
 	push de
 	dec a
-	ld hl, Moves + MOVE_PP ; $5b03
-	ld bc, $7
+	ld hl, Moves + MOVE_PP
+	ld bc, MOVE_LENGTH
 	call AddNTimes
 	ld a, BANK(Moves)
 	call GetFarByte
 	pop de
 	pop hl
+
 	ld [hl], a
+
 	ld a, [wBattleMode]
 	and a
-	jp z, .LearnedMove
+	jp z, .learned
+
 	ld a, [wCurPartyMon]
 	ld b, a
 	ld a, [wCurBattleMon]
 	cp b
-	jp nz, .LearnedMove
+	jp nz, .learned
+
 	ld a, [wPlayerSubStatus5]
-	bit 3, a
-	jp nz, .LearnedMove
+	bit SUBSTATUS_TRANSFORMED, a
+	jp nz, .learned
+
 	ld h, d
 	ld l, e
 	ld de, wBattleMonMoves
-	ld bc, $4
+	ld bc, NUM_MOVES
 	call CopyBytes
-	ld bc, $11
+	ld bc, wPartyMon1PP - (wPartyMon1Moves + NUM_MOVES)
 	add hl, bc
 	ld de, wBattleMonPP
-	ld bc, $4
+	ld bc, NUM_MOVES
 	call CopyBytes
-	jp .LearnedMove
+	jp .learned
 
-.ConfirmStopLearning: ; 6694 (1:6694)
-	ld hl, Text_StopLearning
+.cancel
+	ld hl, StopLearningMoveText
 	call PrintText
 	call YesNoBox
 	jp c, .loop
-	ld hl, Text_DidNotLearn
+
+	ld hl, DidNotLearnMoveText
 	call PrintText
-	ld b, $0
+	ld b, 0
 	ret
 
-.LearnedMove: ; 66a9 (1:66a9)
-	ld hl, Text_LearnedMove
+.learned
+	ld hl, LearnedMoveText
 	call PrintText
-	ld b, $1
+	ld b, 1
 	ret
 
-.AlreadyHaveFourMoves: ; 66b2 (1:66b2)
+ForgetMove:
 	push hl
-	ld hl, Text_TryingToLearn
+	ld hl, AskForgetMoveText
 	call PrintText
 	call YesNoBox
 	pop hl
 	ret c
-	ld bc, -4
+	ld bc, -NUM_MOVES
 	add hl, bc
 	push hl
 	ld de, wListMoves_MoveIndicesBuffer
-	ld bc, $4
+	ld bc, NUM_MOVES
 	call CopyBytes
 	pop hl
-.asm_66cd
+.loop
 	push hl
-	ld hl, Text_ForgetWhich
+	ld hl, MoveAskForgetText
 	call PrintText
 	hlcoord 5, 2
-	ld b, $8
-	ld c, $d
+	ld b, NUM_MOVES * 2
+	ld c, MOVE_NAME_LENGTH
 	call Textbox
-	hlcoord 7, 4
-	ld a, $28
+	hlcoord 5 + 2, 2 + 2
+	ld a, SCREEN_WIDTH * 2
 	ld [wBuffer1], a
 	predef ListMoves
+	; w2DMenuData
 	ld a, $4
 	ld [w2DMenuCursorInitY], a
 	ld a, $6
@@ -151,12 +170,12 @@ LearnMove:
 	pop af
 	pop hl
 	bit 1, a
-	jr nz, .asm_6748
+	jr nz, .cancel
 	push hl
 	ld a, [wMenuCursorY]
 	dec a
 	ld c, a
-	ld b, $0
+	ld b, 0
 	add hl, bc
 	ld a, [hl]
 	push af
@@ -165,56 +184,56 @@ LearnMove:
 	pop bc
 	pop de
 	ld a, d
-	jr c, .asm_673f
+	jr c, .hmmove
 	pop hl
 	add hl, bc
 	and a
 	ret
 
-.asm_673f
-	ld hl, Text_CantForgetHM
+.hmmove
+	ld hl, MoveCantForgetHMText
 	call PrintText
 	pop hl
-	jr .asm_66cd
+	jr .loop
 
-.asm_6748
+.cancel
 	scf
 	ret
 
-Text_LearnedMove:
-	text_far Text_LearnedMove_
-	db "@"
+LearnedMoveText:
+	text_far _LearnedMoveText
+	text_end
 
-Text_ForgetWhich:
-	text_far Text_ForgetWhich_
-	db "@"
+MoveAskForgetText:
+	text_far _MoveAskForgetText
+	text_end
 
-Text_StopLearning:
-	text_far Text_StopLearning_
-	db "@"
+StopLearningMoveText:
+	text_far _StopLearningMoveText
+	text_end
 
-Text_DidNotLearn:
-	text_far Text_DidNotLearn_
-	db "@"
+DidNotLearnMoveText:
+	text_far _DidNotLearnMoveText
+	text_end
 
-Text_TryingToLearn:
-	text_far Text_TryingToLearn_
-	db "@"
+AskForgetMoveText:
+	text_far _AskForgetMoveText
+	text_end
 
 Text_1_2_and_Poof:
-	text_far Text_1_2_and_Poof_
+	text_far Text_MoveForgetCount ; 1, 2 and…
 	text_asm
 	push de
 	ld de, SFX_SWITCH_POKEMON
 	call PlaySFX
 	pop de
-	ld hl, .PoofForgot
+	ld hl, .MoveForgotText
 	ret
 
-.PoofForgot:
-	text_far Text_PoofForgot_
-	db "@"
+.MoveForgotText:
+	text_far _MoveForgotText
+	text_end
 
-Text_CantForgetHM:
-	text_far Text_CantForgetHM_
-	db "@"
+MoveCantForgetHMText:
+	text_far _MoveCantForgetHMText
+	text_end

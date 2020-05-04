@@ -382,7 +382,7 @@ RestorePartyMonMail::
 	dr $44850, $44870
 DeletePartyMonMail::
 	dr $44870, $4488c
-IsAnyPokemonHoldingMail::
+IsAnyMonHoldingMail::
 	dr $4488c, $448ab
 _PlayerMailBoxMenu::
 	dr $448ab, $44aa2
@@ -763,14 +763,14 @@ _UnownPuzzle::
 
 _DummyGame::
 	dr $e2668, $e2b9e
-DepositPokemon_::
+_DepositPKMN::
 	dr $e2b9e, $e2d71
-WithdrawPokemon_::
+_WithdrawPKMN::
 	dr $e2d71, $e2f47
-MovePKMNWithoutMail_::
+_MovePKMNWithoutMail::
 	dr $e2f47, $e3d25
 
-ChangeBox_::
+_ChangeBox::
 	dr $e3d25, $e3f74
 
 
