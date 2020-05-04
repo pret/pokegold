@@ -1012,7 +1012,7 @@ _SavingRecordText::
 	line "DON'T TURN OFF!"
 	done
 
-ReceivedMysteryGiftText_::
+_ReceiveItemText::
 	text_ram wPlayerName
 	text " received"
 	line "@"
@@ -1022,11 +1022,11 @@ ReceivedMysteryGiftText_::
 	text_promptbutton
 	db "@"
 
-NoCoinsText_::
+_NoCoinsText::
 	text "You have no coins."
 	prompt
 
-NoCoinCaseText_::
+_NoCoinCaseText::
 	text "You don't have a"
 	line "COIN CASE."
 	prompt

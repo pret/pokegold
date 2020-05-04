@@ -1,0 +1,130 @@
+; Special routines can be used with the "special" map script command.
+; They often use wScriptVar for arguments and return values.
+
+add_special: MACRO
+; Some ROM0 specials have a nonzero bank.
+\1Special::
+IF _NARG == 1
+	dba \1
+ELSE
+	dbw \2, \1
+ENDC
+ENDM
+
+SpecialsPointers::
+	add_special WarpToSpawnPoint ; $0
+
+; Communications
+	add_special SetBitsForLinkTradeRequest
+	add_special WaitForLinkedFriend
+	add_special CheckLinkTimeout
+	add_special TryQuickSave
+	add_special CheckBothSelectedSameRoom
+	add_special FailedLinkToPast
+	add_special CloseLink
+	add_special WaitForOtherPlayerToExit ; $8
+	add_special SetBitsForBattleRequest
+	add_special SetBitsForTimeCapsuleRequest
+	add_special CheckTimeCapsuleCompatibility
+	add_special EnterTimeCapsule
+	add_special TradeCenter
+	add_special Colosseum
+	add_special TimeCapsule
+	add_special CableClubCheckWhichChris ; $10
+	add_special CheckMysteryGift
+	add_special GetMysteryGiftItem
+	add_special UnlockMysteryGift
+
+; Map events
+	add_special BugContestJudging
+	add_special CheckPartyFullAfterContest
+	add_special ContestDropOffMons
+	add_special ContestReturnMons
+	add_special GiveParkBalls ; $18
+	add_special CheckMagikarpLength
+	add_special MagikarpHouseSign
+	add_special HealParty ; this is both a special and a predef
+	add_special PokemonCenterPC
+	add_special PlayersHousePC
+	add_special DayCareMan
+	add_special DayCareLady
+	add_special DayCareManOutside ; $20
+	add_special MoveDeletion
+	add_special BankOfMom
+	add_special MagnetTrain
+	add_special NameRival
+	add_special SetDayOfWeek
+	add_special OverworldTownMap
+	add_special UnownPrinter
+	add_special MapRadio ; $28
+	add_special UnownPuzzle
+	add_special SlotMachine
+	add_special CardFlip
+	add_special DummyNonfunctionalGameCornerGame
+	add_special ClearBGPalettesBufferScreen
+	add_special FadeOutPalettes
+	add_special FadeBlackQuickly
+	add_special FadeInPalettes ; $30
+	add_special FadeInQuickly
+	add_special ReloadSpritesNoPalettes, 2
+	add_special ClearBGPalettes
+	add_special UpdateTimePals
+	add_special ClearTilemap
+	add_special UpdateSprites
+	add_special ReplaceChrisSprite
+	add_special GameCornerPrizeMonCheckDex ; $38
+	add_special UnusedSetSeenMon
+	add_special WaitSFX, 3
+	add_special PlayMapMusic
+	add_special RestartMapMusic
+	add_special HealMachineAnim
+	add_special SurfStartStep
+	add_special FindPartyMonAboveLevel
+	add_special FindPartyMonAtLeastThatHappy ; $40
+	add_special FindPartyMonThatSpecies
+	add_special FindPartyMonThatSpeciesYourTrainerID
+	add_special UnusedCheckUnusedTwoDayTimer
+	add_special DayCareMon1
+	add_special DayCareMon2
+	add_special SelectRandomBugContestContestants
+	add_special ActivateFishingSwarm
+	add_special ToggleMaptileDecorations ; $48
+	add_special ToggleDecorationsVisibility
+	add_special GiveShuckle
+	add_special ReturnShuckle
+	add_special BillsGrandfather
+	add_special CheckPokerus
+	add_special DisplayCoinCaseBalance
+	add_special DisplayMoneyAndCoinBalance
+	add_special PlaceMoneyTopRight ; $50
+	add_special CheckForLuckyNumberWinners
+	add_special CheckLuckyNumberShowFlag
+	add_special ResetLuckyNumberShowFlag
+	add_special PrintTodaysLuckyNumber
+	add_special SelectApricornForKurt
+	add_special NameRater
+	add_special DisplayLinkRecord
+	add_special GetFirstPokemonHappiness ; $58
+	add_special CheckFirstMonIsEgg
+	add_special RandomUnseenWildMon
+	add_special RandomPhoneWildMon
+	add_special RandomPhoneMon
+	add_special LoadUsedSpritesGFX
+	add_special PlaySlowCry
+	add_special SnorlaxAwake
+	add_special OlderHaircutBrother ; $60
+	add_special YoungerHaircutBrother
+	add_special DaisysGrooming
+	add_special PlayCurMonCry
+	add_special ProfOaksPCBoot
+	add_special GameboyCheck
+	add_special TrainerHouse
+	add_special PhotoStudio
+	add_special InitRoamMons ; $68
+	add_special FadeOutMusic
+	add_special Diploma
+	add_special PrintDiploma
+	add_special InitialSetDSTFlag
+	add_special InitialClearDSTFlag
+	add_special MrChrono
+	add_special DummySpecial_c389

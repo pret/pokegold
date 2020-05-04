@@ -482,7 +482,7 @@ PrintMailAndExit::
 	dr $845d4, $84616
 PrintPartymon::
 	dr $84616, $84684
-Function84684::
+_PrintDiploma::
 	dr $84684, $8640a
 
 HallOfFame::
@@ -622,9 +622,9 @@ RadioMusicRestartDE::
 	dr $917ca, $917de
 RadioMusicRestartPokemonChannel::
 	dr $917de, $9188a
-Function9188a::
+_TownMap::
 	dr $9188a, $919c1
-Function919c1::
+PlayRadio::
 	dr $919c1, $91a4f
 TownMap_::
 	dr $91a4f, $91a61
@@ -637,7 +637,7 @@ GetLandmarkName::
 	dr $92364, $9297a
 Fish::
 	dr $9297a, $92c36
-Function92c36::
+_SlotMachine::
 	dr $92c36, $93f86
 
 
@@ -671,7 +671,7 @@ INCLUDE "engine/pokemon/mail_2.asm"
 
 SECTION "bank31_2", ROMX
 
-Functionc7a40::
+_CheckPokerus::
 	dr $c7a40, $c7a5a
 CheckForLuckyNumberWinners::
 	dr $c7a5a, $c7bad
@@ -751,17 +751,17 @@ TilesetForestColl::
 SECTION "bank38", ROMX
 
 	dr $e0000, $e0002
-Functione0002::
+_Diploma::
 	dr $e0002, $e081b
 RotateUnownFrontpic::
 	dr $e081b, $e0909
-Functione0909::
+_CardFlip::
 	dr $e0909, $e199d
 
-Functione199d::
+_UnownPuzzle::
 	dr $e199d, $e2668
 
-Functione2668::
+_DummyGame::
 	dr $e2668, $e2b9e
 DepositPokemon_::
 	dr $e2b9e, $e2d71

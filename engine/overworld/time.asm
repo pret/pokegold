@@ -177,13 +177,13 @@ CheckUnusedTwoDayTimer:
 
 ; unused
 	ld hl, wDailyFlags1
-	set DAILYFLAGS1_FISH_SWARM_F, [hl]
+	set DAILYFLAGS1_SWARM_F, [hl]
 	ret
 
 ; unused
 	and a
 	ld hl, wDailyFlags1
-	bit DAILYFLAGS1_FISH_SWARM_F, [hl]
+	bit DAILYFLAGS1_SWARM_F, [hl]
 	ret nz
 	scf
 	ret

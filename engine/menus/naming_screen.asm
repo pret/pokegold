@@ -1,4 +1,4 @@
-NamingScreen_:
+_NamingScreen:
 	call DisableSpriteUpdates
 	call NamingScreen
 	call ReturnToMapWithSpeechTextbox

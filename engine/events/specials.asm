@@ -1,5 +1,6 @@
-Special:: ; c22b
-	ld hl, SpecialsPointers ; $4239
+Special::
+; Run script special de.
+	ld hl, SpecialsPointers
 	add hl, de
 	add hl, de
 	add hl, de
@@ -12,141 +13,12 @@ Special:: ; c22b
 	rst FarCall
 	ret
 
-; Special routines can be used with the "special" map script command.
-; They often use wScriptVar for arguments and return values.
+INCLUDE "data/special_pointers.asm"
 
-add_special: MACRO
-; Some ROM0 specials have a nonzero bank.
-\1Special::
-IF _NARG == 1
-	dba \1
-ELSE
-	dbw \2, \1
-ENDC
-ENDM
-
-SpecialsPointers::
-	add_special WarpToSpawnPoint
-
-; Communications
-	add_special SetBitsForLinkTradeRequest
-	add_special WaitForLinkedFriend
-	add_special CheckLinkTimeout
-	add_special TryQuickSave
-	add_special CheckBothSelectedSameRoom
-	add_special FailedLinkToPast
-	add_special CloseLink
-	add_special WaitForOtherPlayerToExit
-	add_special SetBitsForBattleRequest
-	add_special SetBitsForTimeCapsuleRequest
-	add_special CheckTimeCapsuleCompatibility
-	add_special EnterTimeCapsule
-	add_special TradeCenter
-	add_special Colosseum
-	add_special TimeCapsule
-	add_special CableClubCheckWhichChris
-	add_special CheckMysteryGift
-	add_special GetMysteryGiftItem
-	add_special UnlockMysteryGift
-
-; Map events
-	add_special BugContestJudging
-	add_special CheckPartyFullAfterContest
-	add_special ContestDropOffMons
-	add_special ContestReturnMons
-	add_special GiveParkBalls
-	add_special CheckMagikarpLength
-	add_special MagikarpHouseSign
-	add_special HealParty
-	add_special PokemonCenterPC
-	add_special PlayersHousePC
-	add_special DayCareMan
-	add_special DayCareLady
-	add_special DayCareManOutside
-	add_special MoveDeletion
-	add_special BankOfMom
-	add_special MagnetTrain
-	add_special NameRival
-	add_special SetDayOfWeek
-	add_special OverworldTownMap
-	add_special UnownPrinter
-	add_special MapRadio
-	add_special UnownPuzzle
-	add_special SlotMachine
-	add_special CardFlip
-	add_special DummyNonfunctionalGameCornerGame
-	add_special ClearBGPalettesBufferScreen
-	add_special FadeOutPalettes
-	add_special FadeBlackQuickly
-	add_special FadeInPalettes
-	add_special FadeInQuickly
-	add_special ReloadSpritesNoPalettes, $02
-	add_special ClearBGPalettes
-	add_special UpdateTimePals
-	add_special ClearTilemap
-	add_special UpdateSprites
-	add_special ReplaceChrisSprite
-	add_special GameCornerPrizeMonCheckDex
-	add_special UnusedSetSeenMon
-	add_special WaitSFX, $03
-	add_special PlayMapMusic
-	add_special RestartMapMusic
-	add_special HealMachineAnim
-	add_special SurfStartStep
-	add_special FindPartyMonAboveLevel
-	add_special FindPartyMonAtLeastThatHappy
-	add_special FindPartyMonThatSpecies
-	add_special FindPartyMonThatSpeciesYourTrainerID
-	add_special UnusedCheckUnusedTwoDayTimer
-	add_special DayCareMon1
-	add_special DayCareMon2
-	add_special SelectRandomBugContestContestants
-	add_special ActivateFishingSwarm
-	add_special ToggleMaptileDecorations
-	add_special ToggleDecorationsVisibility
-	add_special GiveShuckle
-	add_special ReturnShuckle
-	add_special BillsGrandfather
-	add_special CheckPokerus
-	add_special DisplayCoinCaseBalance
-	add_special DisplayMoneyAndCoinBalance
-	add_special PlaceMoneyTopRight
-	add_special CheckForLuckyNumberWinners
-	add_special CheckLuckyNumberShowFlag
-	add_special ResetLuckyNumberShowFlag
-	add_special PrintTodaysLuckyNumber
-	add_special SelectApricornForKurt
-	add_special NameRater
-	add_special DisplayLinkRecord
-	add_special GetFirstPokemonHappiness
-	add_special CheckFirstMonIsEgg
-	add_special RandomUnseenWildMon
-	add_special RandomPhoneWildMon
-	add_special RandomPhoneMon
-	add_special LoadUsedSpritesGFX
-	add_special PlaySlowCry
-	add_special SnorlaxAwake
-	add_special YoungerHaircutBrother
-	add_special OlderHaircutBrother
-	add_special DaisysGrooming
-	add_special PlayCurMonCry
-	add_special ProfOaksPCBoot
-	add_special GameboyCheck
-	add_special TrainerHouse
-	add_special PhotoStudio
-	add_special InitRoamMons
-	add_special FadeOutMusic
-	add_special Diploma
-	add_special PrintDiploma
-	add_special InitialSetDSTFlag
-	add_special InitialClearDSTFlag
-	add_special MrChrono
-	add_special SpecialNone
-
-SpecialNone: ; c389
+DummySpecial_c389:
 	ret
 
-GameCornerPrizeMonCheckDex: ; c38a
+GameCornerPrizeMonCheckDex:
 	ld a, [wScriptVar]
 	dec a
 	call CheckCaughtMon
@@ -156,12 +28,12 @@ GameCornerPrizeMonCheckDex: ; c38a
 	call SetSeenAndCaughtMon
 	call FadeToMenu
 	ld a, [wScriptVar]
-	ld [wd151], a
+	ld [wNamedObjectIndexBuffer], a
 	farcall NewPokedexEntry
 	call ExitAllMenus
 	ret
 
-UnusedSetSeenMon: ; c3ac
+UnusedSetSeenMon:
 	ld a, [wScriptVar]
 	dec a
 	call SetSeenMon
@@ -170,28 +42,28 @@ UnusedSetSeenMon: ; c3ac
 FindPartyMonAboveLevel:
 	ld a, [wScriptVar]
 	ld b, a
-	farcall _FindPartyMonAboveLevel ; same bank
+	farcall _FindPartyMonAboveLevel
 	jr z, FoundNone
 	jr FoundOne
 
 FindPartyMonAtLeastThatHappy:
 	ld a, [wScriptVar]
 	ld b, a
-	farcall _FindPartyMonAtLeastThatHappy ; same bank
+	farcall _FindPartyMonAtLeastThatHappy
 	jr z, FoundNone
 	jr FoundOne
 
 FindPartyMonThatSpecies:
 	ld a, [wScriptVar]
 	ld b, a
-	farcall _FindPartyMonThatSpecies ; same bank
+	farcall _FindPartyMonThatSpecies
 	jr z, FoundNone
 	jr FoundOne
 
 FindPartyMonThatSpeciesYourTrainerID:
 	ld a, [wScriptVar]
 	ld b, a
-	farcall _FindPartyMonThatSpeciesYourTrainerID ; same bank
+	farcall _FindPartyMonThatSpeciesYourTrainerID
 	jr z, FoundNone
 	jr FoundOne
 
@@ -205,16 +77,17 @@ FoundNone:
 	ld [wScriptVar], a
 	ret
 
-NameRival: ; c3f7
-	ld b, $2
+NameRival:
+	ld b, NAME_RIVAL
 	ld de, wRivalName
-	farcall NamingScreen_
+	farcall _NamingScreen
+	; default to "SILVER"
 	ld hl, wRivalName
-	ld de, .DefaultName
+	ld de, .default
 	call InitName
 	ret
 
-.DefaultName:
+.default
 IF DEF(_GOLD)
 	db "SILVER@"
 ENDC
@@ -227,25 +100,25 @@ NameRater:
 	farcall _NameRater
 	ret
 
-OverworldTownMap: ; c41a (3:441a)
+OverworldTownMap:
 	call FadeToMenu
-	farcall Function9188a
+	farcall _TownMap
 	call ExitAllMenus
 	ret
 
-UnownPrinter: ; c427 (3:4427)
+UnownPrinter:
 	call FadeToMenu
 	farcall _UnownPrinter
 	call ExitAllMenus
 	ret
 
-DisplayLinkRecord: ; c434 (3:4434)
+DisplayLinkRecord:
 	call FadeToMenu
 	farcall _DisplayLinkRecord
 	call ExitAllMenus
 	ret
 
-PlayersHousePC: ; c441 (3:4441)
+PlayersHousePC:
 	xor a
 	ld [wScriptVar], a
 	farcall _PlayersHousePC
@@ -253,95 +126,96 @@ PlayersHousePC: ; c441 (3:4441)
 	ld [wScriptVar], a
 	ret
 
-CheckMysteryGift: ; c450 (3:4450)
-	ld a, $0
+CheckMysteryGift:
+	ld a, BANK(sMysteryGiftItem)
 	call OpenSRAM
-	ld a, [$abe2]
+	ld a, [sMysteryGiftItem]
 	and a
-	jr z, .asm_c45c
+	jr z, .no
 	inc a
-.asm_c45c
+
+.no
 	ld [wScriptVar], a
 	call CloseSRAM
 	ret
 
-GetMysteryGiftItem: ; c463 (3:4463)
-	ld a, $0
+GetMysteryGiftItem:
+	ld a, BANK(sMysteryGiftItem)
 	call OpenSRAM
-	ld a, [$abe2]
+	ld a, [sMysteryGiftItem]
 	ld [wCurItem], a
-	ld a, $1
+	ld a, 1
 	ld [wItemQuantityChangeBuffer], a
 	ld hl, wNumItems
 	call ReceiveItem
-	jr nc, .asm_c497
+	jr nc, .no_room
 	xor a
-	ld [$abe2], a
+	ld [sMysteryGiftItem], a
 	call CloseSRAM
 	ld a, [wCurItem]
-	ld [wd151], a
+	ld [wNamedObjectIndexBuffer], a
 	call GetItemName
-	ld hl, ReceivedMysteryGiftText ; $449f
+	ld hl, .ReceiveItemText
 	call PrintText
-	ld a, $1
+	ld a, TRUE
 	ld [wScriptVar], a
 	ret
 
-.asm_c497
+.no_room
 	call CloseSRAM
 	xor a
 	ld [wScriptVar], a
 	ret
 
-ReceivedMysteryGiftText:
-	text_far ReceivedMysteryGiftText_
-	db "@"
+.ReceiveItemText:
+	text_far _ReceiveItemText
+	text_end
 
-BugContestJudging: ; c4a4 (3:44a4)
+BugContestJudging:
 	farcall _BugContestJudging
 	ld a, b
 	ld [wScriptVar], a
 	ret
 
-MapRadio: ; c4af (3:44af)
+MapRadio:
 	ld a, [wScriptVar]
 	ld e, a
-	farcall Function919c1
+	farcall PlayRadio
 	ret
 
-UnownPuzzle: ; c4ba (3:44ba)
+UnownPuzzle:
 	call FadeToMenu
-	farcall Functione199d
-	ld a, [wFieldMoveSucceeded]
+	farcall _UnownPuzzle
+	ld a, [wSolvedUnownPuzzle]
 	ld [wScriptVar], a
 	call ExitAllMenus
 	ret
 
-SlotMachine: ; c4cd (3:44cd)
-	call Functionc508
+SlotMachine:
+	call CheckCoinsAndCoinCase
 	ret c
-	ld a, BANK(Function92c36)
-	ld hl, Function92c36
-	call Functionc4f4
+	ld a, BANK(_SlotMachine)
+	ld hl, _SlotMachine
+	call StartGameCornerGame
 	ret
 
-CardFlip: ; c4da (3:44da)
-	call Functionc508
+CardFlip:
+	call CheckCoinsAndCoinCase
 	ret c
-	ld a, BANK(Functione0909)
-	ld hl, Functione0909
-	call Functionc4f4
+	ld a, BANK(_CardFlip)
+	ld hl, _CardFlip
+	call StartGameCornerGame
 	ret
 
-DummyNonfunctionalGameCornerGame: ; c4e7 (3:44e7)
-	call Functionc508
+DummyNonfunctionalGameCornerGame:
+	call CheckCoinsAndCoinCase
 	ret c
-	ld a, BANK(Functione2668)
-	ld hl, Functione2668
-	call Functionc4f4
+	ld a, BANK(_DummyGame)
+	ld hl, _DummyGame
+	call StartGameCornerGame
 	ret
 
-Functionc4f4: ; c4f4 (3:44f4)
+StartGameCornerGame:
 	call FarQueueScript
 	call FadeToMenu
 	ld hl, wQueuedScriptBank
@@ -355,55 +229,55 @@ Functionc4f4: ; c4f4 (3:44f4)
 	call ExitAllMenus
 	ret
 
-Functionc508: ; c508 (3:4508)
+CheckCoinsAndCoinCase:
 	ld hl, wCoins
 	ld a, [hli]
 	or [hl]
-	jr z, .asm_c51e
+	jr z, .no_coins
 	ld a, COIN_CASE
 	ld [wCurItem], a
 	ld hl, wNumItems
 	call CheckItem
-	jr nc, .asm_c523
+	jr nc, .no_coin_case
 	and a
 	ret
 
-.asm_c51e
+.no_coins
 	ld hl, .NoCoinsText
-	jr .asm_c526
+	jr .print
 
-.asm_c523
+.no_coin_case
 	ld hl, .NoCoinCaseText
-.asm_c526
+
+.print
 	call PrintText
 	scf
 	ret
 
 .NoCoinsText:
-	text_far NoCoinsText_
-	db "@"
+	text_far _NoCoinsText
+	text_end
 
 .NoCoinCaseText:
-	text_far NoCoinCaseText_
-	db "@"
+	text_far _NoCoinCaseText
+	text_end
 
-ClearBGPalettesBufferScreen: ; c535 (3:4535)
+ClearBGPalettesBufferScreen:
 	call ClearBGPalettes
 	call BufferScreen
 	ret
 
-Functionc53c: ; c53c (3:453c)
-	jr c, .asm_c543
+ScriptReturnCarry:
+	jr c, .carry
 	xor a
 	ld [wScriptVar], a
 	ret
-
-.asm_c543
-	ld a, $1
+.carry
+	ld a, 1
 	ld [wScriptVar], a
 	ret
 
-UnusedCheckUnusedTwoDayTimer: ; c549 (3:4549)
+UnusedCheckUnusedTwoDayTimer:
 	farcall CheckUnusedTwoDayTimer
 	ld a, [wUnusedTwoDayTimer]
 	ld [wScriptVar], a
@@ -416,58 +290,58 @@ ActivateFishingSwarm:
 
 StoreSwarmMapIndices::
 	ld a, d
-	ld [wDunsparceMapGroup], a
+	ld [wSwarmMapGroup], a
 	ld a, e
-	ld [wDunsparceMapNumber], a
+	ld [wSwarmMapNumber], a
 	; fallthrough
 SetSwarmFlag:
 	ld hl, wDailyFlags1
-	set DAILYFLAGS1_FISH_SWARM_F, [hl]
+	set DAILYFLAGS1_SWARM_F, [hl]
 	ret
 
 CheckSwarmFlag::
 	ld hl, wDailyFlags1
-	bit DAILYFLAGS1_FISH_SWARM_F, [hl]
-	jr z, .asm_c578
+	bit DAILYFLAGS1_SWARM_F, [hl]
+	jr z, .clear_swarm
 	xor a
 	ld [wScriptVar], a
 	ret
 
-.asm_c578
-	ld a, $1
+.clear_swarm
+	ld a, 1
 	ld [wScriptVar], a
 	xor a
 	ld [wFishingSwarmFlag], a
-	ld [wDunsparceMapGroup], a
-	ld [wDunsparceMapNumber], a
+	ld [wSwarmMapGroup], a
+	ld [wSwarmMapNumber], a
 	ret
 
-CheckPokerus: ; c588 (3:4588)
-	farcall Functionc7a40
-	jp Functionc53c
+CheckPokerus:
+	farcall _CheckPokerus
+	jp ScriptReturnCarry
 
-ResetLuckyNumberShowFlag: ; c591 (3:4591)
+ResetLuckyNumberShowFlag:
 	farcall RestartLuckyNumberCountdown
 	ld hl, wLuckyNumberShowFlag
 	res LUCKYNUMBERSHOW_GAME_OVER_F, [hl]
 	farcall LoadOrRegenerateLuckyIDNumber
 	ret
 
-CheckLuckyNumberShowFlag: ; c5a3 (3:45a3)
+CheckLuckyNumberShowFlag:
 	farcall _CheckLuckyNumberShowFlag
-	jp Functionc53c
+	jp ScriptReturnCarry
 
-CountUnown: ; c5ac (3:45ac)
+CountUnown:
 	ld hl, wUnownDex
 	ld b, $0
-.asm_c5b1
+.loop
 	ld a, [hli]
 	and a
 	ret z
 	inc b
 	ld a, b
-	cp $1a
-	jr c, .asm_c5b1
+	cp NUM_UNOWN
+	jr c, .loop
 	ret
 
 SelectApricornForKurt:
@@ -483,34 +357,44 @@ SelectApricornForKurt:
 	call TossItem
 	ret
 
-SnorlaxAwake: ; c5d6 (3:45d6)
-	ld a, [wChannelsEnd]
-	cp $40
-	jr nz, .asm_c5fb
+SnorlaxAwake:
+; Check if the Poké Flute channel is playing, and if the player is standing
+; next to Snorlax.
+
+; outputs:
+; wScriptVar is 1 if the conditions are met, otherwise 0.
+
+; check background music
+	ld a, [wMapMusic]
+	cp MUSIC_POKE_FLUTE_CHANNEL
+	jr nz, .nope
+
 	ld a, [wXCoord]
 	ld b, a
 	ld a, [wYCoord]
 	ld c, a
+
 	ld hl, .ProximityCoords
-.asm_c5e8
+.loop
 	ld a, [hli]
-	cp $ff
-	jr z, .asm_c5fb
+	cp -1
+	jr z, .nope
 	cp b
-	jr nz, .asm_c5f8
+	jr nz, .nextcoord
 	ld a, [hli]
 	cp c
-	jr nz, .asm_c5e8
-	ld a, $1
-	jr .asm_c5fc
+	jr nz, .loop
 
-.asm_c5f8
+	ld a, TRUE
+	jr .done
+
+.nextcoord
 	inc hl
-	jr .asm_c5e8
+	jr .loop
 
-.asm_c5fb
+.nope
 	xor a
-.asm_c5fc
+.done
 	ld [wScriptVar], a
 	ret
 
@@ -523,54 +407,55 @@ SnorlaxAwake: ; c5d6 (3:45d6)
 	db 36,  9 ; right
 	db -1
 
-PlayCurMonCry: ; c60b (3:460b)
+PlayCurMonCry:
 	ld a, [wCurPartySpecies]
 	jp PlayMonCry
 
-GameboyCheck: ; c611 (3:4611)
+GameboyCheck:
 	ldh a, [hCGB]
 	and a
-	jr nz, .asm_c622
+	jr nz, .cgb
+
 	ldh a, [hSGB]
 	and a
-	jr nz, .asm_c61e
-	xor a
-	jr .asm_c624
+	jr nz, .sgb
 
-.asm_c61e
-	ld a, $1
-	jr .asm_c624
-
-.asm_c622
-	ld a, $2
-.asm_c624
+.gb
+	xor a ; GBCHECK_GB
+	jr .done
+.sgb
+	ld a, GBCHECK_SGB
+	jr .done
+.cgb
+	ld a, GBCHECK_CGB
+.done
 	ld [wScriptVar], a
 	ret
 
-FadeOutMusic: ; c628 (3:4628)
-	ld a, $0
+FadeOutMusic:
+	ld a, LOW(MUSIC_NONE)
 	ld [wMusicFadeID], a
-	ld a, $0
+	ld a, HIGH(MUSIC_NONE)
 	ld [wMusicFadeID + 1], a
 	ld a, $2
 	ld [wMusicFade], a
 	ret
 
-Diploma: ; c638 (3:4638)
+Diploma:
 	call FadeToMenu
-	farcall Functione0002
+	farcall _Diploma
 	call ExitAllMenus
 	ret
 
-PrintDiploma: ; c645 (3:4645)
+PrintDiploma:
 	call FadeToMenu
-	farcall Function84684
+	farcall _PrintDiploma
 	call ExitAllMenus
 	ret
 
-TrainerHouse: ; c652 (3:4652)
-	ld a, $0
+TrainerHouse:
+	ld a, BANK(sMysteryGiftTrainerHouseFlag)
 	call OpenSRAM
-	ld a, [$abfd]
+	ld a, [sMysteryGiftTrainerHouseFlag]
 	ld [wScriptVar], a
 	jp CloseSRAM

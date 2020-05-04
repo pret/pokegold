@@ -1422,6 +1422,10 @@ wNumMoves:: ds 1 ; cfe3
 wFieldMoveSucceeded::
 wItemEffectSucceeded::
 wBattlePlayerAction::
+; 0 - use move
+; 1 - use item
+; 2 - switch
+wSolvedUnownPuzzle::
 	db ; cfe4
 
 wVramState:: ds 1
@@ -2634,8 +2638,8 @@ wBugContestSecondPartySpecies:: db ; dce6
 
 wContestMon:: party_struct wContestMon ; dce7
 
-wDunsparceMapGroup:: ds 1 ; dd17
-wDunsparceMapNumber:: ds 1 ; dd18
+wSwarmMapGroup:: ds 1 ; dd17
+wSwarmMapNumber:: ds 1 ; dd18
 wFishingSwarmFlag:: ds 1 ; dd19
 
 wRoamMon1:: roam_struct wRoamMon1 ; dd1a

@@ -430,10 +430,10 @@ _JohtoWildmonCheck:
 
 _SwarmWildmonCheck:
 	call CopyCurrMapDE
-	ld a, [wDunsparceMapGroup]
+	ld a, [wSwarmMapGroup]
 	cp d
 	jr nz, _NoSwarmWildmon
-	ld a, [wDunsparceMapNumber]
+	ld a, [wSwarmMapNumber]
 	cp e
 	jr nz, _NoSwarmWildmon
 	call LookUpWildmonsForMapDE

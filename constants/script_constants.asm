@@ -229,18 +229,6 @@ NUM_FRUIT_TREES EQU const_value - 1
 	const DECODESC_BIG_DOLL   ; 3
 	const DECODESC_CONSOLE    ; 4
 
-; swarm arguments
-; StoreSwarmMapIndices arguments
-	const_def
-	const SWARM_DUNSPARCE ; 0
-	const SWARM_YANMA     ; 1
-
-; ActivateFishingSwarm writebyte arguments
-	const_def
-	const FISHSWARM_NONE     ; 0
-	const FISHSWARM_QWILFISH ; 1
-	const FISHSWARM_REMORAID ; 2
-
 ; SpecialGameboyCheck return values
 	const_def
 	const GBCHECK_GB  ; 0
