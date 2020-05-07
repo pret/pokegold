@@ -351,7 +351,7 @@ wc605:: ds 1 ; c605
 wc606:: ds 1 ; c606
 wc607:: ds 1 ; c607
 
-	ds 192
+	ds 194
 
 ; unidentifed
 wc6ca:: ds 1 ; c6ca
@@ -371,7 +371,7 @@ wc6d7:: ds 1 ; c6d7
 wc6d8:: ds 1 ; c6d8
 wc6d9:: ds 1 ; c6d9
 wc6da:: ds 1 ; c6da
-wc6db:: ds 1 ; c6db
+wDexSearchSlowpokeFrame:: db ; c6db
 wc6dc:: ds 1 ; c6dc
 wc6dd:: ds 1 ; c6dd
 wc6de:: ds 1 ; c6de
@@ -951,6 +951,12 @@ wIntroSceneTimer:: db
 NEXTU ; ce65
 wTitleScreenTimer:: dw
 ENDU
+
+NEXTU ; ce64
+; pokedex
+wPrevDexEntryJumptableIndex:: db
+wPrevDexEntryBackup::
+wPokedexStatus:: db
 
 NEXTU ; ce64
 ; pack

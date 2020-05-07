@@ -653,8 +653,8 @@ PokedexShow2:
 	add hl, bc
 	rlca
 	rlca
-	and 3
-	add $68
+	and %11
+	add BANK("Pokedex Entries 001-064")
 	push af
 	ld a, BANK(PokedexDataPointerTable)
 	call GetFarHalfword

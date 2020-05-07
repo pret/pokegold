@@ -1,5 +1,6 @@
-; Every Pokemon sorted alphabetically by name.
+; Every Pokémon sorted alphabetically by name.
 
+AlphabeticalPokedexOrder:
 	db ABRA
 	db AERODACTYL
 	db AIPOM

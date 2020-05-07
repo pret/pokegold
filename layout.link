@@ -49,6 +49,7 @@ ROMX $07
 ROMX $08
 	org $4000
 	"bank8"
+	"Egg Moves"
 ROMX $09
 	"bank9"
 ROMX $0a
@@ -65,6 +66,7 @@ ROMX $0f
 	"Battle Core"
 ROMX $10
 	"bank10"
+	"Evolutions and Attacks"
 ROMX $11
 	org $4000
 	"bank11"

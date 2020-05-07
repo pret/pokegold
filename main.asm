@@ -224,8 +224,6 @@ TilesetForestMeta::
 	dr $236f1, $23971
 CatchTutorial::
 	dr $23971, $239fe
-EggMovePointers::
-	dr $239fe, $23e3d
 
 
 SECTION "bank9", ROMX
@@ -338,7 +336,11 @@ INCLUDE "data/battle/effect_command_pointers.asm"
 SECTION "bank10", ROMX
 
 Pokedex::
-	dr $40000, $41afe
+	dr $40000, $40c65
+INCLUDE "data/pokemon/dex_order_alpha.asm"
+INCLUDE "data/pokemon/dex_order_new.asm"
+Pokedex_DisplayModeDescription::
+	dr $40e5b, $41afe
 
 Moves::
 	dr $41afe, $421db
@@ -353,8 +355,6 @@ FillMoves::
 	dr $424dd, $4278d
 GetPreEvolution::
 	dr $4278d, $427bd
-EvosAttacksPointers::
-	dr $427bd, $43e57
 
 
 SECTION "bank11", ROMX
@@ -362,9 +362,7 @@ SECTION "bank11", ROMX
 FruitTreeScript::
 	dr $44000, $440c8
 INCLUDE "engine/battle/ai/move.asm"
-	dr $441c2, $44360
-PokedexDataPointerTable::
-	dr $44360, $44556
+INCLUDE "engine/pokedex/pokedex_2.asm"
 PlayBattleMusic::
 	dr $44556, $445f2
 ClearBattleRAM::
@@ -949,8 +947,7 @@ ItemNames::
 	dr $1b0000, $1b0955
 TrainerClassNames::
 	dr $1b0955, $1b0b74
-PokemonNames::
-	dr $1b0b74, $1b1574
+INCLUDE "data/pokemon/names.asm"
 MoveNames::
 	dr $1b1574, $1b1ee1
 

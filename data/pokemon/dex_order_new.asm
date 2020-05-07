@@ -1,5 +1,6 @@
-; Every Pokemon sorted in New Pokedex Order.
+; Every Pokémon sorted in New Pokédex Order.
 
+NewPokedexOrder:
 	db CHIKORITA
 	db BAYLEEF
 	db MEGANIUM
