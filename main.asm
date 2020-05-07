@@ -989,6 +989,10 @@ IF DEF(_SILVER)
 ENDC
 
 
-SECTION "bank7f", ROMX
+SECTION "Stadium Data", ROMX
 
-	dr $1ffdf8, $200000
+IF DEF(_GOLD)
+INCBIN "data/stadium/stadium_gold.bin"
+ELIF DEF(_SILVER)
+INCBIN "data/stadium/stadium_silver.bin"
+ENDC

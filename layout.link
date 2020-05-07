@@ -262,7 +262,7 @@ ROMX $70
 	"bank70"
 ROMX $7f
 	org $7df8
-	"bank7f"
+	"Stadium Data"
 WRAM0
 	org $c000
 	"Audio RAM"
