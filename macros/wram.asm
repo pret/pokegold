@@ -387,9 +387,3 @@ battle_bg_effect: MACRO
 \1_02:: ds 1
 \1_03:: ds 1
 endm
-
-warp_struct: MACRO
-\1WarpNumber:: ds 1
-\1MapGroup:: ds 1
-\1MapNumber:: ds 1
-ENDM

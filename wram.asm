@@ -4,6 +4,7 @@ INCLUDE "macros/wram.asm"
 
 INCLUDE "vram.asm"
 
+
 SECTION "Audio RAM", WRAM0
 
 wMusic::
@@ -183,6 +184,7 @@ wc1fd:: ds 1 ; c1fd
 wc1fe:: ds 1 ; c1fe
 wc1ff:: ds 1 ; c1ff
 
+
 SECTION "GBC Palettes", WRAM0
 
 ; eight 4-color palettes each
@@ -190,6 +192,7 @@ wBGPals1:: ds 8 palettes ; c200
 wOBPals1:: ds 8 palettes ; c240
 wBGPals2:: ds 8 palettes ; c280
 wOBPals2:: ds 8 palettes ; c2c0
+
 
 SECTION "Sprites", WRAM0
 
@@ -899,6 +902,7 @@ ENDU
 
 ENDU ; cc20
 
+
 SECTION "Video", WRAM0
 
 ; wBGMapBuffer
@@ -1258,6 +1262,11 @@ wMartItem9BCD:: ds 3
 wMartItem10BCD:: ds 3
 
 NEXTU ; ceed
+; phone call data
+wPhoneScriptBank:: db
+wPhoneCaller:: dw
+
+NEXTU ; ceed
 ; radio data
 wCurRadioLine:: db
 wNextRadioLine:: db
@@ -1416,6 +1425,18 @@ NEXTU ; cf29
 wJumpStdScriptBuffer:: ds 3
 
 NEXTU ; cf29
+; phone script data
+wCheckedTime:: db
+wPhoneListIndex:: db
+wNumAvailableCallers:: db
+wAvailableCallers:: ds CONTACT_LIST_SIZE
+
+NEXTU ; cf29
+; phone caller contact
+	ds 1
+wCallerContact:: ds PHONE_CONTACT_SIZE
+
+NEXTU ; cf29
 ; backup menu data
 	ds 7
 wMenuCursorBufferBackup:: db
@@ -1542,6 +1563,7 @@ ENDU ; cffc
 wcffc:: ds 1 ; cffc
 wcffd:: ds 1 ; cffd
 wUnusedCFFE:: dw ; cffe
+
 
 SECTION "WRAM 1", WRAMX
 
@@ -1932,7 +1954,9 @@ wOptions2:: ; d19e
 
 wOptionsEnd::
 
+
 SECTION "Game Data", WRAMX
+
 wGameData::
 wPlayerData::
 wPlayerData1::
@@ -2564,49 +2588,23 @@ wd9b9:: ds 1 ; d9b9
 wd9ba:: ds 1 ; d9ba
 wd9bb:: ds 1 ; d9bb
 wd9bc:: ds 1 ; d9bc
+
 wStepCount:: db ; d9bd
 wPoisonStepCount:: db ; d9be
 	ds 2
 wHappinessStepCount:: db ; d9c1
 	ds 1
+
 wParkBallsRemaining::
 wSafariBallsRemaining:: db ; d9c3
 wSafariTimeRemaining:: dw ; d9c4
-wd9c6:: ds 1 ; d9c6
-wd9c7:: ds 1 ; d9c7
-wd9c8:: ds 1 ; d9c8
-wd9c9:: ds 1 ; d9c9
-wd9ca:: ds 1 ; d9ca
-wd9cb:: ds 1 ; d9cb
-wd9cc:: ds 1 ; d9cc
-wd9cd:: ds 1 ; d9cd
-wd9ce:: ds 1 ; d9ce
-wd9cf:: ds 1 ; d9cf
-wd9d0:: ds 1 ; d9d0
-wd9d1:: ds 1 ; d9d1
-wd9d2:: ds 1 ; d9d2
-wd9d3:: ds 1 ; d9d3
-wd9d4:: ds 1 ; d9d4
-wd9d5:: ds 1 ; d9d5
-wd9d6:: ds 1 ; d9d6
-wd9d7:: ds 1 ; d9d7
-wd9d8:: ds 1 ; d9d8
-wd9d9:: ds 1 ; d9d9
-wd9da:: ds 1 ; d9da
-wd9db:: ds 1 ; d9db
-wd9dc:: ds 1 ; d9dc
-wd9dd:: ds 1 ; d9dd
-wd9de:: ds 1 ; d9de
-wd9df:: ds 1 ; d9df
-wd9e0:: ds 1 ; d9e0
-wd9e1:: ds 1 ; d9e1
-wd9e2:: ds 1 ; d9e2
-wd9e3:: ds 1 ; d9e3
-wd9e4:: ds 1 ; d9e4
-wd9e5:: ds 1 ; d9e5
-wd9e6:: ds 1 ; d9e6
+
+wPhoneList:: ds CONTACT_LIST_SIZE ; d9c6
+; d9d0
+	ds 23
+
 wLuckyNumberShowFlag:: ds 1 ; d9e7
-wd9e8:: ds 1 ; d9e8
+	ds 1
 wLuckyIDNumber:: dw ; d9e9
 
 wRepelEffect:: db ; If a Repel is in use, it contains the nr of steps it's still active
@@ -2614,31 +2612,35 @@ wBikeStep:: dw
 
 wPlayerData3End::
 wPlayerDataEnd::
-
 wCurMapData::
 wVisitedSpawns:: ds 4 ; flag_array NUM_SPAWNS ; d9ee
 
-	warp_struct wDig ; d9f2
+wDigWarpNumber:: db ; d9f2
+wDigMapGroup::   db ; d9f3
+wDigMapNumber::  db ; d9f4
 
+; used on maps like second floor pokécenter, which are reused, so we know which
+; map to return to
 wBackupWarpNumber:: db ; d9f5
 wBackupMapGroup:: db ; d9f6
 wBackupMapNumber:: db ; d9f7
 
-wd9f8:: ds 1 ; d9f8
-wd9f9:: ds 1 ; d9f9
-wd9fa:: ds 1 ; d9fa
+	ds 3
+
 wLastSpawnMapGroup:: db
 wLastSpawnMapNumber:: db
+
 wd9fd:: ds 1 ; d9fd
 wd9fe:: ds 1 ; d9fe
-wWarpNumber:: ds 1 ; d9ff
-wMapGroup:: ds 1 ; da00
-wMapNumber:: ds 1 ; da01
-wYCoord:: ds 1 ; da02
-wXCoord:: ds 1 ; da03
+wWarpNumber:: db ; d9ff
+wMapGroup:: db ; da00
+wMapNumber:: db ; da01
+wYCoord:: db ; da02
+wXCoord:: db ; da03
 wScreenSave:: ds SCREEN_META_WIDTH * SCREEN_META_HEIGHT
 
 wCurMapDataEnd::
+
 
 SECTION "Party", WRAMX
 
@@ -2792,6 +2794,7 @@ ENDU ; df01
 
 wPokemonDataEnd::
 wGameDataEnd::
+
 
 SECTION "Stack", WRAMX
 
