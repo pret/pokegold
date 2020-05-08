@@ -67,7 +67,7 @@ Function9376: ; 9376 (2:5376)
 	ld c, $4
 	call Function9ab7
 	ld hl, PalPacket_a0d5 + 1
-	ld de, wTempBGPal4
+	ld de, wBGPals1 palette 4
 	ld c, $4
 	call Function9ab7
 	ld hl, PalPacket_a0d5 + 1
@@ -77,7 +77,7 @@ Function9376: ; 9376 (2:5376)
 	jr asm_93e1
 
 Function9399: ; 9399 (2:5399)
-	ld de, wTempBGPal0
+	ld de, wBGPals1
 	call Function9ba9
 	push hl
 	call Function9adb
@@ -112,7 +112,7 @@ Function9399: ; 9399 (2:5399)
 	call Function9b28
 asm_93e1:
 	ld hl, TilesetBGPalette + 7 * 8
-	ld de, wTempBGPal7
+	ld de, wBGPals1 palette 7
 	ld bc, $8
 	call CopyBytes
 	hlcoord 0, 0, wAttrmap
@@ -144,7 +144,7 @@ asm_93e1:
 	ld a, $7
 	call ByteFill
 	ld hl, Palettes_9c09
-	ld de, wTempOBPal2
+	ld de, wOBPals1 palette 2
 	ld bc, $30
 	call CopyBytes
 	call Function9b35
@@ -152,7 +152,7 @@ asm_93e1:
 
 Function944a: ; 944a (2:544a)
 	ld hl, Palettes_bb6e
-	ld de, wTempBGPal0
+	ld de, wBGPals1
 	ld bc, $30
 	call CopyBytes
 	call Function9b28
@@ -161,7 +161,7 @@ Function944a: ; 944a (2:544a)
 	ret
 
 Function945e: ; 945e (2:545e)
-	ld de, wTempBGPal0
+	ld de, wBGPals1
 	ld a, [wcca1]
 	ld l, a
 	ld h, $0
@@ -177,7 +177,7 @@ Function945e: ; 945e (2:545e)
 	ld hl, Palettes_ad39
 	call Function9adb
 	ld hl, Palettes_94d3
-	ld de, wTempBGPal3
+	ld de, wBGPals1 palette 3
 	ld bc, $18
 	call CopyBytes
 	call Function9b1d
@@ -247,7 +247,7 @@ Function9502: ; 9502 (2:5502)
 	jp Function9537
 
 Function9513: ; 9513 (2:5513)
-	ld de, wTempBGPal0
+	ld de, wBGPals1
 	ld a, $1d
 	call Function9ac7
 	call Function9ad2
@@ -268,7 +268,7 @@ Function9513: ; 9513 (2:5513)
 Function9537: ; 9537 (2:5537)
 	call Function9b9c
 	ld hl, Palettes_9551
-	ld de, wTempOBPal7
+	ld de, wOBPals1 palette 7
 	ld bc, $8
 	call CopyBytes
 	call Function9b35
@@ -290,7 +290,7 @@ Palettes_9559:
 	RGB  5, 12,  1
 
 Function9561: ; 9561 (2:5561)
-	ld de, wTempBGPal0
+	ld de, wBGPals1
 	ld a, $1d
 	call Function9ac7
 	call Function9ad2
@@ -453,10 +453,10 @@ Function96b7: ; 96b7 (2:56b7)
 
 Function96c8:
 	ld hl, Palettes_96e1
-	ld de, wTempBGPal0
+	ld de, wBGPals1
 	call Function9ad2
 	ld hl, Palettes_96e9
-	ld de, wTempOBPal0
+	ld de, wOBPals1
 	ld bc, $10
 	call CopyBytes
 	call Function9b1d
@@ -480,7 +480,7 @@ Palettes_96e9:
 	RGB  3,  4,  6
 
 Function96f9:
-	ld de, wTempBGPal0
+	ld de, wBGPals1
 	ld a, $38
 	call Function9ac7
 	call Function9ad2
@@ -537,7 +537,7 @@ Function9760: ; 9760 (2:5760)
 	ret
 
 Function976d: ; 976d (2:576d)
-	ld de, wTempBGPal0
+	ld de, wBGPals1
 	ld a, c
 	and a
 	jr z, .asm_977e
@@ -557,7 +557,7 @@ Function976d: ; 976d (2:576d)
 	call Function9bcb
 	call Function9adb
 	ld hl, Palettes_9c09
-	ld de, wTempOBPal2
+	ld de, wOBPals1 palette 2
 	ld bc, $30
 	call CopyBytes
 .asm_97a1
@@ -570,7 +570,7 @@ Function976d: ; 976d (2:576d)
 
 Function97af: ; 97af (2:57af)
 	ld hl, Palettes_bb36
-	ld de, wTempBGPal0
+	ld de, wBGPals1
 	ld bc, $28
 	call CopyBytes
 	ld hl, Palettes_bb5e
@@ -598,7 +598,7 @@ Function97e1: ; 97e1 (2:57e1)
 	ld a, $4c
 	call Function9ac7
 	call Function9ad2
-	ld hl, wTempOBPal0
+	ld hl, wOBPals1
 	ld a, $1f
 	ld [hli], a
 	ld a, $0
@@ -608,7 +608,7 @@ Function97e1: ; 97e1 (2:57e1)
 	ret
 
 Function9802: ; 9802 (2:5802)
-	ld de, wTempBGPal0
+	ld de, wBGPals1
 	xor a
 	call Function9bda
 	call Function9adb
@@ -843,15 +843,15 @@ Function99d9: ; 99d9 (2:59d9)
 	ret
 
 Function9a03: ; 9a03 (2:5a03)
-	ld de, wTempBGPal0
+	ld de, wBGPals1
 	ld a, $4e
 	call Function9ac7
 	call Function9ad2
-	ld de, wTempOBPal0
+	ld de, wOBPals1
 	ld a, $4d
 	call Function9ac7
 	call Function9ad2
-	ld de, wTempOBPal1
+	ld de, wOBPals1 palette 1
 	ld a, $4d
 	call Function9ac7
 	call Function9ad2
@@ -861,7 +861,7 @@ Function9a03: ; 9a03 (2:5a03)
 	ret
 
 Function9a2e: ; 9a2e (2:5a2e)
-	ld de, wTempBGPal0
+	ld de, wBGPals1
 	ld a, [wCurPartySpecies]
 	ld bc, wTempMonDVs
 	call Function9bcb
@@ -872,7 +872,7 @@ Function9a2e: ; 9a2e (2:5a2e)
 	ret
 
 Function9a47: ; 9a47 (2:5a47)
-	ld de, wTempBGPal0
+	ld de, wBGPals1
 	ld a, [wCurPartySpecies]
 	call Function9be4
 	call Function9adb
@@ -884,10 +884,10 @@ Function9a5a: ; 9a5a (2:5a5a)
 	ld hl, PalPacket_a135 + 1
 	call Function9ab2
 	ld hl, Palettes_bac6
-	ld de, wTempOBPal0
+	ld de, wOBPals1
 	ld bc, $8
 	call CopyBytes
-	ld de, wTempOBPal7
+	ld de, wOBPals1 palette 7
 	ld a, $1c
 	call Function9ac7
 	call Function9ad2
@@ -895,7 +895,7 @@ Function9a5a: ; 9a5a (2:5a5a)
 	ret
 
 Function9a7b: ; 9a7b (2:5a7b)
-	ld de, wTempBGPal0
+	ld de, wBGPals1
 	ld a, [wCurPartySpecies]
 	ld bc, wTempMonDVs
 	call Function9bd3

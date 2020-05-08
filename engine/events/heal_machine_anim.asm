@@ -163,7 +163,7 @@ INCBIN "gfx/overworld/heal_machine.2bpp"
 
 .cgb
 	ld hl, .palettes
-	ld de, wOBPal6
+	ld de, wOBPals2 palette PAL_OW_TREE
 	ld bc, 1 palettes
 	call CopyBytes
 	ld a, $1
@@ -194,7 +194,7 @@ INCLUDE "gfx/overworld/heal_machine.pal"
 	ret
 
 .go
-	ld hl, wOBPal6
+	ld hl, wOBPals2 palette PAL_OW_TREE
 	ld a, [hli]
 	ld e, a
 	ld a, [hli]

@@ -266,13 +266,13 @@ ROMX $7f
 	org $7df8
 	"Stadium Data"
 WRAM0
-	org $c000
 	"Audio RAM"
 	"WRAM"
 	"GBC Palettes"
 	"Sprites"
 	"Tilemap"
-	"Animated Objects"
+	"Miscellaneous"
+	"Overworld Map"
 	"Video"
 WRAMX 1
 	org $d000

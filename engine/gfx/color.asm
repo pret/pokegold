@@ -579,7 +579,7 @@ Function9b75: ; 9b75 (2:5b75)
 
 Function9b9c: ; 9b9c (2:5b9c)
 	ld hl, Palettes_bac6
-	ld de, wTempOBPal0
+	ld de, wOBPals1
 	ld bc, $10
 	call CopyBytes
 	ret
@@ -643,7 +643,7 @@ Function9be9:
 	dec c
 	jr nz, .asm_9bf6
 	ld hl, Palettes_9c09
-	ld de, wTempOBPal2
+	ld de, wOBPals1 palette 2
 	ld bc, $10
 	call CopyBytes
 	ret
@@ -1384,7 +1384,7 @@ Functionb649: ; b649 (2:7649)
 	ld bc, $40
 	ld hl, MapObjectPals
 	call AddNTimes
-	ld de, wTempOBPal0
+	ld de, wOBPals1
 	ld bc, $40
 	call CopyBytes
 	ld a, [wEnvironment]
@@ -1410,7 +1410,7 @@ Functionb649: ; b649 (2:7649)
 	inc hl
 	inc hl
 .asm_b6c4
-	ld de, wTempBGPal6 + 2
+	ld de, wBGPals1 palette PAL_BG_ROOF color 1
 	ld bc, $4
 	call CopyBytes
 	ret

@@ -120,25 +120,29 @@ SECTION "WRAM", WRAM0
 wLZAddress:: dw ; c1c2
 wLZBank::    db ; c1c4
 
-wc1c5:: db ; c1c5
+	ds 1
 
 wInputType::        db ; c1c6
 wAutoInputAddress:: dw ; c1c7
 wAutoInputBank::    db ; c1c9
 wAutoInputLength::  db ; c1ca
 
-wDebugFlags:: ds 1 ; c1cb
-wGameLogicPaused:: ds 1 ; c1cc
+wDebugFlags:: db
+wGameLogicPaused:: db ; c1cc
 wSpriteUpdatesEnabled:: db
-wUnusedScriptByteBuffer:: db ; c1ce
-wMapTimeOfDay:: ds 1 ; c1cf
+
+wUnusedScriptByteBuffer:: db
+
+wMapTimeOfDay:: db
+
 	ds 3
-wPrinterConnectionOpen:: ds 1
-wPrinterOpcode:: ds 1 ; c1d4
-wc1d5:: ds 1 ; c1d5
-wDisableTextAcceleration:: ds 1 ; c1d6
-wPCItemsCursor:: db ; c1d7
-wPCItemsScrollPosition:: db ; c1d8
+
+wPrinterConnectionOpen:: db
+wPrinterOpcode:: db
+wPrevDexEntry:: db
+wDisableTextAcceleration:: db
+wPCItemsCursor:: db
+wPCItemsScrollPosition:: db
 wc1d9:: ds 1 ; c1d9
 wc1da:: ds 1 ; c1da
 wc1db:: ds 1 ; c1db
@@ -180,21 +184,12 @@ wc1fe:: ds 1 ; c1fe
 wc1ff:: ds 1 ; c1ff
 
 SECTION "GBC Palettes", WRAM0
-palbuffer: MACRO
-\1Pal0:: ds 8
-\1Pal1:: ds 8
-\1Pal2:: ds 8
-\1Pal3:: ds 8
-\1Pal4:: ds 8
-\1Pal5:: ds 8
-\1Pal6:: ds 8
-\1Pal7:: ds 8
-ENDM
 
-wBGPals1:: palbuffer wTempBG ; c200
-wOBPals1:: palbuffer wTempOB ; c240
-wBGPals2::     palbuffer wBG     ; c280
-wOBPals2::     palbuffer wOB     ; c2c0
+; eight 4-color palettes each
+wBGPals1:: ds 8 palettes ; c200
+wOBPals1:: ds 8 palettes ; c240
+wBGPals2:: ds 8 palettes ; c280
+wOBPals2:: ds 8 palettes ; c2c0
 
 SECTION "Sprites", WRAM0
 
@@ -245,11 +240,14 @@ wVirtualOAMEnd::
 SECTION "Tilemap", WRAM0
 
 wTilemap:: ; c3a0
-	ds SCREEN_HEIGHT * SCREEN_WIDTH
-wTilemapEnd:: ; c508
+; 20x18 grid of 8x8 tiles
+	ds SCREEN_WIDTH * SCREEN_HEIGHT
+wTilemapEnd::
 
-SECTION "Animated Objects", WRAM0
 
+SECTION "Miscellaneous", WRAM0
+
+; This union spans 480 bytes from c508 to c6e8.
 UNION ; c508
 ; surrounding tiles
 ; This buffer determines the size for the rest of the union;
@@ -391,6 +389,9 @@ ENDU ; c6e8
 wUnusedMapBuffer:: ds 24
 wUnusedMapBufferEnd::
 
+
+SECTION "Overworld Map", WRAM0
+
 UNION ; c700
 ; overworld map blocks
 wOverworldMapBlocks:: ds 1300 ; c700
@@ -521,19 +522,13 @@ wc901:: db
 wc902:: db
 
 NEXTU ; c700
-wLYOverrides:: ds 144
+; LCD expects wLYOverrides to have an alignment of $100
+wLYOverrides:: ds SCREEN_HEIGHT_PX
 wLYOverridesEnd:: ds 112
 
-wLYOverridesBackup:: ds 144
-wLYOverridesBackupEnd::
-
-NEXTU ; c700
-
-	ds $5f
-
-wc75f:: db
-
-	ds $25f
+wLYOverridesBackup:: ds SCREEN_HEIGHT_PX
+wLYOverridesBackupEnd:: ds 112
+	ds 191
 
 UNION ; c9bf
 ; link
@@ -548,19 +543,10 @@ wca84:: ds 100
 wcae8:: dw
 wLinkOTPartyMonTypes:: ds 2 * PARTY_LENGTH
 	ds 84
-wcb4a:: ds 22
+wcb4a:: ds 71
 
-wcb60:: ds 1
-wcb61:: ds 1
-wcb62:: ds 2
-wcb64:: ds 1
-wcb65:: ds 57
-wcb9e:: ds 22
-wcbb4:: ds 1
-wcbb5:: ds 3
-wcbb8:: ds 1
-wcbb9:: ds 1
-wcbba:: ds 102
+wcb91:: ds 13
+wcb9e:: ds 130
 
 NEXTU ; c9bf
 ; battle
@@ -575,6 +561,7 @@ wBattleAnimOAMPointerLo:: db ; ca18
 
 	ds 207
 
+wBattle:
 wEnemyMoveStruct:: move_struct wEnemyMoveStruct
 wPlayerMoveStruct:: move_struct wPlayerMoveStruct
 
@@ -592,25 +579,106 @@ wcb31:: ds 1 ; cb31
 wcb32:: ds 1 ; cb32
 wcb33:: ds 1 ; cb33
 
-wOTClassName:: ds NAME_LENGTH ; cb34
+wOTClassName:: ds TRAINER_CLASS_NAME_LENGTH ; cb34
 
-wcb3f:: ds 1 ; cb3f
-wcb40:: ds 1 ; cb40
 wCurOTMon:: ds 1 ; cb41
-wBattleParticipantsNotFainted:: db ; cb42
-wTypeModifier:: db ; cb43
-wCriticalHit:: db ; cb44
-wAttackMissed:: db ; cb45
-wPlayerSubStatus1:: ds 1 ; cb46
-wPlayerSubStatus2:: ds 1 ; cb47
-wPlayerSubStatus3:: ds 1 ; cb48
-wPlayerSubStatus4:: ds 1 ; cb49
-wPlayerSubStatus5:: ds 1 ; cb4a
-wEnemySubStatus1:: ds 1 ; cb4b
-wEnemySubStatus2:: ds 1 ; cb4c
-wEnemySubStatus3:: ds 1 ; cb4d
-wEnemySubStatus4:: ds 1 ; cb4e
-wEnemySubStatus5:: ds 1 ; cb4f
+
+wBattleParticipantsNotFainted::
+; Bit array.  Bits 0 - 5 correspond to party members 1 - 6.
+; Bit set if the mon appears in battle.
+; Bit cleared if the mon faints.
+; Backed up if the enemy switches.
+; All bits cleared if the enemy faints.
+	db
+
+wTypeModifier:: ; cb43
+; >10: super-effective
+;  10: normal
+; <10: not very effective
+; bit 7: stab
+	db
+
+wCriticalHit:: ; cb44
+; 0 if not critical
+; 1 for a critical hit
+; 2 for a OHKO
+	db
+
+wAttackMissed:: ; cb45
+; nonzero for a miss
+	db
+
+wPlayerSubStatus1:: ; cb46
+; bit
+; 7 in love
+; 6 rollout
+; 5 endure
+; 4 perish song
+; 3 identified
+; 2 protect
+; 1 curse
+; 0 nightmare
+	db
+wPlayerSubStatus2:: ; cb47
+; bit
+; 7
+; 6
+; 5
+; 4
+; 3
+; 2
+; 1
+; 0 curled
+	db
+wPlayerSubStatus3:: ; cb48
+; bit
+; 7 confused
+; 6 flying
+; 5 underground
+; 4 charged
+; 3 flinched
+; 2 in loop
+; 1 rampage
+; 0 bide
+	db
+wPlayerSubStatus4:: ; cb49
+; bit
+; 7 leech seed
+; 6 rage
+; 5 recharge
+; 4 substitute
+; 3
+; 2 focus energy
+; 1 mist
+; 0 x accuracy
+	db
+wPlayerSubStatus5:: ; cb4a
+; bit
+; 7 can't run
+; 6 destiny bond
+; 5 lock-on
+; 4 encored
+; 3 transformed
+; 2
+; 1
+; 0 toxic
+	db
+
+wEnemySubStatus1:: ; cb4b
+; see wPlayerSubStatus1
+	db
+wEnemySubStatus2:: ; cb4c
+; see wPlayerSubStatus2
+	db
+wEnemySubStatus3:: ; cb4d
+; see wPlayerSubStatus3
+	db
+wEnemySubStatus4:: ; cb4e
+; see wPlayerSubStatus4
+	db
+wEnemySubStatus5:: ; cb4f
+; see wPlayerSubStatus5
+	db
 
 wPlayerRolloutCount:: db ; cb50
 wPlayerConfuseCount:: db ; cb51
@@ -638,46 +706,8 @@ wBattleAnimParam::
 wKickCounter::
 wPresentPower::
 	db ; cb67
-wBattleScriptBuffer:: db ; cb68
-wcb69:: ds 1 ; cb69
-wcb6a:: ds 1 ; cb6a
-wcb6b:: ds 1 ; cb6b
-wcb6c:: ds 1 ; cb6c
-wcb6d:: ds 1 ; cb6d
-wcb6e:: ds 1 ; cb6e
-wcb6f:: ds 1 ; cb6f
-wcb70:: ds 1 ; cb70
-wcb71:: ds 1 ; cb71
-wcb72:: ds 1 ; cb72
-wcb73:: ds 1 ; cb73
-wcb74:: ds 1 ; cb74
-wcb75:: ds 1 ; cb75
-wcb76:: ds 1 ; cb76
-wcb77:: ds 1 ; cb77
-wcb78:: ds 1 ; cb78
-wcb79:: ds 1 ; cb79
-wcb7a:: ds 1 ; cb7a
-wcb7b:: ds 1 ; cb7b
-wcb7c:: ds 1 ; cb7c
-wcb7d:: ds 1 ; cb7d
-wcb7e:: ds 1 ; cb7e
-wcb7f:: ds 1 ; cb7f
-wcb80:: ds 1 ; cb80
-wcb81:: ds 1 ; cb81
-wcb82:: ds 1 ; cb82
-wcb83:: ds 1 ; cb83
-wcb84:: ds 1 ; cb84
-wcb85:: ds 1 ; cb85
-wcb86:: ds 1 ; cb86
-wcb87:: ds 1 ; cb87
-wcb88:: ds 1 ; cb88
-wcb89:: ds 1 ; cb89
-wcb8a:: ds 1 ; cb8a
-wcb8b:: ds 1 ; cb8b
-wcb8c:: ds 1 ; cb8c
-wcb8d:: ds 1 ; cb8d
-wcb8e:: ds 1 ; cb8e
-wcb8f:: ds 1 ; cb8f
+wBattleScriptBuffer:: ds 40 ; cb68
+
 wBattleScriptBufferAddress:: dw ; cb90
 wTurnEnded:: db ; cb92
 
@@ -721,30 +751,37 @@ wEnemySDefLevel:: db ; cbb6
 wEnemyAccLevel:: db ; cbb7
 wEnemyEvaLevel:: db ; cbb8
 	ds 1
-wEnemyStatLevelsEnd::
 
 wEnemyTurnsTaken:: db ; cbba
 wPlayerTurnsTaken:: db ; cbbb
-wcbbc:: ds 1 ; cbbc
+	ds 1
+
 wPlayerSubstituteHP:: db ; cbbd
 wEnemySubstituteHP:: db ; cbbe
+
 wUnusedPlayerLockedMove:: db ; cbbf
-wcbc0:: ds 1 ; cbc0
+	ds 1
+
 wCurPlayerMove:: db ; cbc1
 wCurEnemyMove:: db ; cbc2
-wLinkBattleRNCount:: db ; cbc3
+
+wLinkBattleRNCount:: ; cbc3
+; how far through the prng stream
+	db
+
 wEnemyItemState:: db ; cbc4
-wcbc5:: ds 1 ; cbc5
-wcbc6:: ds 1 ; cbc6
+	ds 2
 wCurEnemyMoveNum:: db ; cbc7
+
 wEnemyHPAtTimeOfPlayerSwitch:: dw ; cbc8
 wPayDayMoney:: ds 3 ; cbca
 
-wcbcd:: ds 1 ; cbcd
+wSafariMonAngerCount:: db ; cbcd
 wSafariMonEating:: db ; cbce
-wcbcf:: ds 1 ; cbcf
-wEnemyBackupDVs:: dw
+	ds 1
+wEnemyBackupDVs:: dw ; cbd0
 wAlreadyDisobeyed:: db ; cbd2
+
 wDisabledMove:: db ; cbd3
 wEnemyDisabledMove:: db ; cbd4
 wWhichMonFaintedFirst:: db ; cbd5
@@ -754,29 +791,60 @@ wLastPlayerCounterMove:: db ; cbd6
 wLastEnemyCounterMove:: db ; cbd7
 
 wEnemyMinimized:: db ; cbd8
+
 wAlreadyFailed:: db ; cbd9
+
 wBattleParticipantsIncludingFainted:: db ; cbda
 wBattleLowHealthAlarm:: db ; cbdb
 wPlayerMinimized:: db ; cbdc
-wPlayerScreens:: db ; cbdd
-wEnemyScreens:: db ; cbde
+wPlayerScreens:: ; cbdd
+; bit
+; 7
+; 6
+; 5
+; 4 reflect
+; 3 light screen
+; 2 safeguard
+; 1
+; 0 spikes
+	db
+
+wEnemyScreens:: ; cbde
+; see wPlayerScreens
+	db
+
 wPlayerSafeguardCount:: db ; cbdf
 wPlayerLightScreenCount:: db ; cbe0
-wcbe1:: ds 1 ; cbe1
-wcbe2:: ds 1 ; cbe2
+wPlayerReflectCount:: db ; cbe1
+	ds 1
+
 wEnemySafeguardCount:: db ; cbe3
 wEnemyLightScreenCount:: db ; cbe4
-wcbe5:: ds 1 ; cbe5
-wcbe6:: ds 1 ; cbe6
-wcbe7:: ds 1 ; cbe7
-wBattleWeather:: db ; cbe8
-wWeatherCount:: db ; cbe9
+wEnemyReflectCount:: db ; cbe5
+	ds 2
+
+wBattleWeather:: ; cbe8
+; 00 normal
+; 01 rain
+; 02 sun
+; 03 sandstorm
+; 04 rain stopped
+; 05 sunliight faded
+; 06 sandstorm subsided
+	db
+
+wWeatherCount:: ; cbe9
+; # turns remaining
+	db
+
 wLoweredStat:: db ; cbea
 wEffectFailed:: db ; cbeb
 wFailedMessage:: db ; cbec
 wEnemyGoesFirst:: db ; cbed
+
 wPlayerIsSwitching:: db ; cbee
 wEnemyIsSwitching:: db ; cbef
+
 wPlayerUsedMoves:: ; cbf0
 ; add a move that has been used once by the player
 ; added in order of use
@@ -789,34 +857,44 @@ wTempLevel:: db ; cbf7
 wLastPlayerMon:: db ; cbf8
 wLastPlayerMove:: db ; cbf9
 wLastEnemyMove:: db ; cbfa
+
 wPlayerFutureSightCount:: db ; cbfb
 wEnemyFutureSightCount:: db ; cbfc
+
 wGivingExperienceToExpShareHolders:: db ; cbfd
+
 wBackupEnemyMonBaseStats:: ds 5 ; cbfe
-wcc03:: ds 1 ; cc03
-wcc04:: ds 1 ; cc04
+wBackupEnemyMonCatchRate:: db ; cc03
+wBackupEnemyMonBaseExp:: db ; cc04
+
 wPlayerFutureSightDamage:: dw ; cc05
 wEnemyFutureSightDamage:: dw ; cc07
 wPlayerRageCounter:: db ; cc09
 wEnemyRageCounter:: db ; cc0a
+
 wBeatUpHitAtLeastOnce:: db ; cc0b
+
 wPlayerTrappingMove:: db ; cc0c
 wEnemyTrappingMove:: db ; cc0d
 wPlayerWrapCount:: db ; cc0e
 wEnemyWrapCount:: db ; cc0f
 wPlayerCharging:: db ; cc10
 wEnemyCharging:: db ; cc11
+
 wBattleEnded:: db ; cc12
 
-wWildMonMoves:: ; cc13
-	ds NUM_MOVES
-
+wWildMonMoves:: ds NUM_MOVES ; cc13
 wWildMonPP:: ds NUM_MOVES ; cc17
 
 wAmuletCoin:: db ; cc1b
+
 wSomeoneIsRampaging:: db ; cc1c
+
 wPlayerJustGotFrozen:: db ; cc1d
 wEnemyJustGotFrozen:: db ; cc1e
+wBattleEnd::
+	ds 1
+
 ENDU
 
 ENDU ; cc20
@@ -1458,7 +1536,7 @@ wCurMessageScrollPosition:: db
 wCurMessageIndex:: db
 wMailboxCount:: db
 wMailboxItems:: ds MAILBOX_CAPACITY
-wMailboxEnd:: ; d0fe
+wMailboxEnd::
 ENDU ; cffc
 
 wcffc:: ds 1 ; cffc
@@ -1977,8 +2055,9 @@ wd56f:: ds 1 ; d56f
 wd570:: ds 1 ; d570
 wPlayerData2End::
 wPlayerData3::
-wStatusFlags:: ds 1 ; d571
-wStatusFlags2:: ds 1 ; d572
+wStatusFlags::
+	db ; d571
+wStatusFlags2:: db ; d572
 wMoney:: ds 3 ; d573
 wMomsMoney:: ds 3 ; d576
 wMomSavingMoney:: ds 1 ; d579

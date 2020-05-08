@@ -1351,7 +1351,7 @@ IF DEF(_GOLD)
 	and $7
 	ret nz
 ENDC
-	ld hl, wc75f
+	ld hl, wLYOverrides + $5f
 	ld a, [hl]
 	dec a
 	ld bc, $28
