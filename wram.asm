@@ -280,6 +280,16 @@ wBoxPartialData:: ds 480
 wBoxPartialDataEnd::
 
 NEXTU ; c508
+; timeset temp storage
+wTimeSetBuffer::
+	ds 20
+wInitHourBuffer:: db ; c51c
+	ds 9
+wInitMinuteBuffer:: db ; c526
+	ds 19
+wTimeSetBufferEnd::
+
+NEXTU ; c508
 ; 20x18 grid of 8x8 tiles
 wTempTilemap::
 	ds SCREEN_WIDTH * SCREEN_HEIGHT ; $168 = 360
@@ -1291,9 +1301,13 @@ NEXTU ; ceed
 wPlaceBallsDirection:: db
 wTrainerHUDTiles:: ds 4
 
-NEXTU
+NEXTU ; ceed
 ; earthquake data buffer
 wEarthquakeMovementDataBuffer:: ds 5
+
+NEXTU ; ceed
+; miscellaneous
+wTempDayOfWeek:: db
 
 NEXTU ; ceed
 ; unidentified

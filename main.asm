@@ -587,18 +587,7 @@ ENDC
 SECTION "bank24", ROMX
 
 INCLUDE "engine/phone/phone.asm"
-InitClock::
-	dr $90641, $908dc
-SetDayOfWeek::
-	dr $908dc, $90a1b
-InitialSetDSTFlag::
-	dr $90a1b, $90a54
-InitialClearDSTFlag::
-	dr $90a54, $90a8d
-MrChrono::
-	dr $90a8d, $90b0f
-PrintHour::
-	dr $90b0f, $90b5e
+INCLUDE "engine/rtc/timeset.asm"
 PokeGear::
 	dr $90b5e, $917ca
 
@@ -1079,7 +1068,9 @@ SECTION "bank70", ROMX
 
 	dr $1c0000, $1c0407
 TilesetKantoGFX::
-	dr $1c0407, $1c0a66
+	dr $1c0407, $1c0a1f
+PrintHoursMins::
+	dr $1c0a1f, $1c0a66
 UpdateTimePredef::
 	dr $1c0a66, $1c0a7a
 StubbedGetFrontpic::
