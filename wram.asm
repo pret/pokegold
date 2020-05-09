@@ -315,7 +315,7 @@ wSpriteAnim9::  sprite_anim_struct wSpriteAnim9
 wSpriteAnim10:: sprite_anim_struct wSpriteAnim10
 wSpriteAnimationStructsEnd::
 
-wAnimatedObjectStructCount:: ds 1 ; c5bc
+wSpriteAnimCount:: ds 1 ; c5bc
 wCurrSpriteOAMAddr:: ds 1 ; c5bd
 
 wCurIcon:: ; c5be
@@ -343,6 +343,7 @@ wc5cd:: ds 1 ; c5cd
 wc5ce:: ds 1 ; c5ce
 wc5cf:: ds 1 ; c5cf
 
+UNION ; c5d0
 ; naming screen
 wNamingScreenDestinationPointer:: dw ; c5d0
 wNamingScreenCurNameLength:: db ; c5d2
@@ -352,7 +353,23 @@ wNamingScreenCursorObjectPointer:: dw ; c5d5
 wNamingScreenLastCharacter:: db ; c5d7
 wNamingScreenStringEntryCoord:: dw ; c5d8
 
-	ds 40
+NEXTU ; c5d0
+; pokegear
+wPokegearPhoneLoadNameBuffer:: db ; c5d0
+wPokegearPhoneCursorPosition:: db ; c5d1
+wPokegearPhoneScrollPosition:: db ; c5d2
+wPokegearPhoneSelectedPerson:: db ; cd3
+wPokegearPhoneSubmenuCursor:: db ; c5d4
+wPokegearMapCursorObjectPointer:: dw ; c5d5
+wPokegearMapCursorLandmark:: db ; c5d7
+wPokegearMapPlayerIconLandmark:: db ; c5d8
+wPokegearRadioChannelBank:: db ; c5d9
+wPokegearRadioChannelAddr:: dw ; c5da
+wPokegearRadioMusicPlaying:: db ; c5dc
+
+ENDU ; c5dc
+
+	ds 37
 
 ; engine/gfx/color.asm ?
 wc602:: ds 1 ; c602
@@ -1051,6 +1068,12 @@ wPrevDexEntryBackup::
 wPokedexStatus:: db
 
 NEXTU ; ce64
+; pokegear
+wPokegearCard:: db
+wPokegearMapRegion:: db
+wPokegearCE66:: db
+
+NEXTU ; ce64
 ; pack
 wPackJumptableIndex:: db
 wCurPocket:: db
@@ -1272,6 +1295,16 @@ wMartItem9BCD:: ds 3
 wMartItem10BCD:: ds 3
 
 NEXTU ; ceed
+; town map data
+wTownMapPlayerIconLandmark:: db
+UNION
+wTownMapCursorLandmark:: db
+wTownMapCursorObjectPointer:: dw
+NEXTU
+wTownMapCursorCoordinates:: dw
+ENDU
+
+NEXTU ; ceed
 ; phone call data
 wPhoneScriptBank:: db
 wPhoneCaller:: dw
@@ -1308,6 +1341,9 @@ wEarthquakeMovementDataBuffer:: ds 5
 NEXTU ; ceed
 ; miscellaneous
 wTempDayOfWeek:: db
+	ds 2
+wStartFlypoint:: db
+wEndFlypoint:: db
 
 NEXTU ; ceed
 ; unidentified

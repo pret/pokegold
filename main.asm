@@ -557,7 +557,9 @@ ClearSpriteAnims2::
 LoadOverworldMonIcon::
 	dr $8e78b, $8e79f
 LoadMenuMonIcon::
-	dr $8e79f, $8e8fb
+	dr $8e79f, $8e88f
+GetSpeciesIcon::
+	dr $8e88f, $8e8fb
 FreezeMonIcons::
 	dr $8e8fb, $8e922
 UnfreezeMonIcons::
@@ -574,7 +576,9 @@ ClearSpriteAnims2::
 LoadOverworldMonIcon::
 	dr $8e771, $8e785
 LoadMenuMonIcon::
-	dr $8e785, $8e8e1
+	dr $8e785, $8e875
+GetSpeciesIcon::
+	dr $8e875, $8e8e1
 FreezeMonIcons::
 	dr $8e8e1, $8e908
 UnfreezeMonIcons::
@@ -588,24 +592,10 @@ SECTION "bank24", ROMX
 
 INCLUDE "engine/phone/phone.asm"
 INCLUDE "engine/rtc/timeset.asm"
-PokeGear::
-	dr $90b5e, $917ca
+INCLUDE "engine/pokegear/pokegear.asm"
 
-RadioMusicRestartDE::
-	dr $917ca, $917de
-RadioMusicRestartPokemonChannel::
-	dr $917de, $9188a
-_TownMap::
-	dr $9188a, $919c1
-PlayRadio::
-	dr $919c1, $91a4f
-PokegearMap::
-	dr $91a4f, $91a61
-_FlyMap::
-	dr $91a61, $91c7f
-Pokedex_GetArea::
-	dr $91c7f, $92364
-
+GetLandmarkCoords::
+	dr $92355, $92364
 GetLandmarkName::
 	dr $92364, $9297a
 Fish::
@@ -800,7 +790,9 @@ EnemyHPBarBorderGFX::
 HPExpBarBorderGFX::
 	dr $f8bd2, $f8c02
 ExpBarGFX::
-	dr $f8c02, $fb4be
+	dr $f8c02, $f8c92
+TownMapGFX::
+	dr $f8c92, $fb4be
 
 TileCollisionTable::
 	dr $fb4be, $fb5be
@@ -1082,7 +1074,11 @@ _DudeAutoInput_A::
 _DudeAutoInput_RightA::
 	dr $1c0dee, $1c0df3
 _DudeAutoInput_DownA::
-	dr $1c0df3, $1c168b
+	dr $1c0df3, $1c0e24
+TownMap_ConvertLineBreakCharacters::
+	dr $1c0e24, $1c0e43
+PokegearGFX::
+	dr $1c0e43, $1c168b
 
 IF DEF(_SILVER)
 	dr $1c168b, $1c168c
