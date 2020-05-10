@@ -900,7 +900,7 @@ PokegearPhone_MakePhoneCall:
 	call WaitSFX
 	ld a, [wPokegearPhoneSelectedPerson]
 	ld b, a
-	call Function90199
+	call Function901a1
 	ld c, 10
 	call DelayFrames
 	ld hl, wOptions
@@ -1045,7 +1045,7 @@ PokegearPhone_UpdateDisplayList:
 	ld e, l
 	pop af
 	ld b, a
-	call Function90380
+	call Function90374
 	pop hl
 	ld a, [wPokegearPhoneLoadNameBuffer]
 	inc a
@@ -2001,7 +2001,7 @@ _FlyMap:
 	lb bc, BANK(FlyMapLabelBorderGFX), 6
 	call Request1bpp
 	call FlyMap
-	call ret_91c8f
+	call ret_91bfd
 	ld b, SCGB_POKEGEAR_PALS
 	call GetSGBLayout
 	call SetPalettes
@@ -2206,7 +2206,7 @@ HasVisitedSpawn:
 
 INCLUDE "data/maps/flypoints.asm"
 
-ret_91c8f:
+ret_91bfd:
 	ret
 
 FlyMap:
@@ -2748,7 +2748,7 @@ INCBIN "gfx/pokegear/dexmap_nest_icon.2bpp"
 FlyMapLabelBorderGFX:
 INCBIN "gfx/pokegear/flymap_label_border.1bpp"
 
-Unreferenced_Function92311:
+Unreferenced_Function92264:
 	xor a
 	ld [wTownMapPlayerIconLandmark], a
 	call ClearBGPalettes

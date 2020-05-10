@@ -184,7 +184,7 @@ SlotsLoop:
 	ld [wCurSpriteOAMAddr], a
 	callfar DoNextFrameForFirst16Sprites
 	call .PrintCoinsAndPayout
-	call .Stubbed_Function927d3
+	call .Stubbed_Function92d3c
 	call DelayFrame
 	and a
 	ret
@@ -193,7 +193,7 @@ SlotsLoop:
 	scf
 	ret
 
-.Stubbed_Function927d3:
+.Stubbed_Function92d3c:
 ; dummied out
 	ret
 	ld a, [wReel1ReelAction]
@@ -229,7 +229,7 @@ SlotsLoop:
 	call PrintNum
 	ret
 
-Unreferenced_Function92811:
+Unreferenced_Function92d7a:
 ; debug function?
 	ld a, [wSlotBias]
 	add 0
@@ -247,7 +247,7 @@ Unreferenced_Function92811:
 	ld [hl], a
 	ret
 
-Unreferenced_Function9282c:
+Unreferenced_Function92d95:
 ; animate OAM tiles?
 	ld hl, wSlotsCE66
 	ld a, [hl]
@@ -844,20 +844,20 @@ Slots_UpdateReelPositionAndOAM:
 	jr nz, .loop
 	ret
 
-Unreferenced_Function92bbe:
+Unreferenced_Function93127:
 	push hl
 	srl a
 	srl a
-	add LOW(.Unknown_92bce)
+	add LOW(.Unknown_93137)
 	ld l, a
 	ld a, 0
-	adc HIGH(.Unknown_92bce)
+	adc HIGH(.Unknown_93137)
 	ld h, a
 	ld a, [hl]
 	pop hl
 	ret
 
-.Unknown_92bce:
+.Unknown_93137:
 	db 0, 1, 2, 3, 4, 5
 
 ReelActionJumptable:
@@ -1089,11 +1089,11 @@ ReelAction_WaitReel2SkipTo7:
 	add hl, bc
 	ld a, [hl]
 	and a
-	jr z, .asm_92d02
+	jr z, .asm_9326b
 	dec [hl]
 	ret
 
-.asm_92d02
+.asm_9326b
 	ld a, SFX_THROW_BALL
 	call Slots_PlaySFX
 	ld hl, REEL_ACTION

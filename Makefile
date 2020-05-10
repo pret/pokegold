@@ -58,7 +58,7 @@ tidy:
 
 clean:
 	rm -f $(roms) $(gold_obj) $(silver_obj) $(roms:.gbc=.map) $(roms:.gbc=.sym) rgbdscheck.o
-	find gfx \( -iname "*.png" -not -iname "big_onix.png" \) -delete
+	find gfx \( -iname "*.png" -not -iname "big_onix.png" -not -iname "slots_3.png" \) -delete
 	$(MAKE) clean -C tools/
 
 compare: $(roms)
@@ -120,4 +120,9 @@ pngs:
 	find gfx -iname "*.[12]bpp" -exec touch {} +
 	find gfx -iname "*.lz"      -exec touch {} +
 	find gfx/pokemon gfx/trainers -iname "*.[1,2]bpp" -delete
-	rm gfx/battle/dude.2bpp gfx/player/chris_back.2bpp gfx/trade/game_boy.2bpp
+	rm \
+		gfx/battle/dude.2bpp \
+		gfx/player/chris_back.2bpp \
+		gfx/trade/game_boy.2bpp \
+		gfx/pokegear/pokegear_sprites.2bpp \
+		gfx/slots/slots_*.2bpp

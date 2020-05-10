@@ -160,9 +160,23 @@ def filepath_rules(filepath):
         if name == 'chris_back':
             args['pic_dimensions'] = 6, 6
 
+    elif 'gfx/pokegear' in filedir:
+        if name == 'pokegear_sprites':
+            args['width'] = 16
+
     elif 'gfx/sgb' in filedir:
         args['width'] = 128
         args['pal_file'] = os.path.join(filedir, name + '.pal')
+
+    elif 'gfx/slots' in filedir:
+        if name == 'slots_1':
+            args['width'] = 16
+        elif name == 'slots_2':
+            args['width'] = 16
+            args['pic_dimensions'] = 2, 2
+        # TODO: this is incomplete
+        elif name == 'slots_3':
+            args['width'] = 24
 
     elif 'gfx/sprites' in filedir:
         # TODO: this is incomplete
@@ -259,7 +273,7 @@ def to_png(filename, **kwargs):
         basedir, basename = os.path.split(filename)
         name, ext = os.path.splitext(basename)
         # TODO: how to actually make big_onix.png (reusing one from pokecrystal for now)
-        if name == 'big_onix':
+        if name in ['big_onix', 'slots_3']:
             return
         if name in ['back_gold', 'back_silver']:
             kwargs['fileout'] = os.path.join(basedir, 'back.png')

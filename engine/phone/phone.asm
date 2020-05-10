@@ -318,7 +318,7 @@ SpecialCallWhereverYouAre:
 	scf
 	ret
 
-Function90199:
+Function901a1:
 	; Don't do the call if you're in a link communication
 	ld a, [wLinkMode]
 	and a
@@ -469,7 +469,7 @@ RingTwice_StartCall:
 Phone_CallerTextboxWithName:
 	ld a, [wCurCaller]
 	ld b, a
-	call Function90363
+	call Function90357
 	ret
 
 PhoneCall::
@@ -529,7 +529,7 @@ Phone_CallEnd:
 	call HangUp_Wait20Frames
 	ret
 
-Function90316:
+Function9030a:
 	ld de, SFX_SHUT_DOWN_PC
 	call PlaySFX
 	ret
@@ -576,7 +576,7 @@ Phone_Wait20Frames:
 	farcall PhoneRing_CopyTilemapAtOnce
 	ret
 
-Function90363:
+Function90357:
 	push bc
 	call Phone_CallerTextbox
 	hlcoord 1, 1
@@ -586,7 +586,7 @@ Function90363:
 	ld d, h
 	ld e, l
 	pop bc
-	call Function90380
+	call Function90374
 	ret
 
 Phone_CallerTextbox:
@@ -596,7 +596,7 @@ Phone_CallerTextbox:
 	call Textbox
 	ret
 
-Function90380:
+Function90374:
 	ld h, d
 	ld l, e
 	ld a, b
