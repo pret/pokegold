@@ -593,13 +593,9 @@ SECTION "bank24", ROMX
 INCLUDE "engine/phone/phone.asm"
 INCLUDE "engine/rtc/timeset.asm"
 INCLUDE "engine/pokegear/pokegear.asm"
+INCLUDE "engine/overworld/landmarks.asm"
+INCLUDE "engine/events/fish.asm"
 
-GetLandmarkCoords::
-	dr $92355, $92364
-GetLandmarkName::
-	dr $92364, $9297a
-Fish::
-	dr $9297a, $92c36
 _SlotMachine::
 	dr $92c36, $93f86
 

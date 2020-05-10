@@ -229,6 +229,12 @@ NUM_FRUIT_TREES EQU const_value - 1
 	const DECODESC_BIG_DOLL   ; 3
 	const DECODESC_CONSOLE    ; 4
 
+; ActivateFishingSwarm setval arguments
+	const_def
+	const FISHSWARM_NONE     ; 0
+	const FISHSWARM_QWILFISH ; 1
+	const FISHSWARM_REMORAID ; 2
+
 ; SpecialGameboyCheck return values
 	const_def
 	const GBCHECK_GB  ; 0
