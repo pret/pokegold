@@ -1051,8 +1051,7 @@ INCLUDE "data/moves/descriptions.asm"
 
 SECTION "bank6e", ROMX
 
-ItemDescriptions::
-	dr $1b8000, $1b9544
+INCLUDE "data/items/descriptions.asm"
 
 
 SECTION "bank70", ROMX
