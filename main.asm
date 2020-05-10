@@ -87,7 +87,7 @@ INCLUDE "engine/overworld/load_map_part.asm"
 INCLUDE "engine/overworld/spawn_points.asm"
 INCLUDE "engine/overworld/map_setup.asm"
 INCLUDE "data/tilesets.asm"
-INCLUDE "engine/events/pokemon_pc.asm"
+INCLUDE "engine/events/pokecenter_pc.asm"
 INCLUDE "engine/items/mart.asm"
 INCLUDE "engine/events/money.asm"
 INCLUDE "data/items/marts.asm"
@@ -1033,23 +1033,20 @@ BikeShopPhoneCallerScript::
 	dr $104a80, $10614d
 
 
-SECTION "bank6c", ROMX
+SECTION "Names", ROMX
 
-ItemNames::
-	dr $1b0000, $1b0955
-TrainerClassNames::
-	dr $1b0955, $1b0b74
+INCLUDE "data/items/names.asm"
+INCLUDE "data/trainers/class_names.asm"
 INCLUDE "data/pokemon/names.asm"
-MoveNames::
-	dr $1b1574, $1b1ee1
+INCLUDE "data/moves/names.asm"
 
 
-SECTION "bank6d", ROMX
+SECTION "Move Descriptions", ROMX
 
 INCLUDE "data/moves/descriptions.asm"
 
 
-SECTION "bank6e", ROMX
+SECTION "Item Descriptions", ROMX
 
 INCLUDE "data/items/descriptions.asm"
 

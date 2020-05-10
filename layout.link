@@ -110,7 +110,6 @@ ROMX $23
 	org $4000
 	"bank23"
 ROMX $24
-	org $4000
 	"bank24"
 ROMX $25
 	"Maps"
@@ -251,14 +250,11 @@ ROMX $6a
 ROMX $6b
 	"Pokedex Entries 193-251"
 ROMX $6c
-	org $4000
-	"bank6c"
+	"Names"
 ROMX $6d
-	org $4000
-	"bank6d"
+	"Move Descriptions"
 ROMX $6e
-	org $4000
-	"bank6e"
+	"Item Descriptions"
 ROMX $70
 	org $4000
 	"bank70"
