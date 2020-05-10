@@ -315,25 +315,24 @@ wSpriteAnim9::  sprite_anim_struct wSpriteAnim9
 wSpriteAnim10:: sprite_anim_struct wSpriteAnim10
 wSpriteAnimationStructsEnd::
 
-wSpriteAnimCount:: ds 1 ; c5bc
-wCurrSpriteOAMAddr:: ds 1 ; c5bd
+wSpriteAnimCount:: db
+wCurSpriteOAMAddr:: db
 
-wCurIcon:: ; c5be
-	ds 1
+wCurIcon:: db ; c5be
 
-wCurIconTile:: ds 1 ; c5bf
+wCurIconTile:: db
 wSpriteAnimAddrBackup::
 wSpriteAnimIDBuffer::
-wCurSpriteOAMFlags:: ; c5c0
+wCurSpriteOAMFlags::
 	dw
-wCurAnimVTile:: ds 1 ; c5c2
-wCurAnimXCoord:: ds 1 ; c5c3
-wCurAnimYCoord:: ds 1 ; c5c4
-wCurAnimXOffset:: ds 1 ; c5c5
-wCurAnimYOffset:: ds 1 ; c5c6
-wGlobalAnimYOffset:: ds 1 ; c5c7
-wGlobalAnimXOffset:: ds 1 ; c5c8
-wSpriteAnimsEnd:: ; c5c9
+wCurAnimVTile:: db
+wCurAnimXCoord:: db
+wCurAnimYCoord:: db
+wCurAnimXOffset:: db
+wCurAnimYOffset:: db
+wGlobalAnimYOffset:: db
+wGlobalAnimXOffset:: db
+wSpriteAnimsEnd::
 
 wc5c9:: ds 1 ; c5c9
 wc5ca:: ds 1 ; c5ca
@@ -354,6 +353,31 @@ wNamingScreenLastCharacter:: db ; c5d7
 wNamingScreenStringEntryCoord:: dw ; c5d8
 
 NEXTU ; c5d0
+; slot machine
+wSlots:: ; c5d0
+wReel1:: slot_reel wReel1
+wReel2:: slot_reel wReel2
+wReel3:: slot_reel wReel3
+; c600
+wReel1Stopped:: ds 3
+wReel2Stopped:: ds 3
+wReel3Stopped:: ds 3
+wSlotBias:: db
+wSlotBet:: db
+wFirstTwoReelsMatching:: db
+wFirstTwoReelsMatchingSevens:: db
+wSlotMatched:: db
+wCurReelStopped:: ds 3
+wPayout:: dw
+wCurReelXCoord:: db
+wCurReelYCoord:: db
+	ds 2
+wSlotBuildingMatch:: db
+wSlotsDataEnd::
+	ds 28
+wSlotsEnd::
+
+NEXTU ; c5d0
 ; pokegear
 wPokegearPhoneLoadNameBuffer:: db ; c5d0
 wPokegearPhoneCursorPosition:: db ; c5d1
@@ -367,11 +391,10 @@ wPokegearRadioChannelBank:: db ; c5d9
 wPokegearRadioChannelAddr:: dw ; c5da
 wPokegearRadioMusicPlaying:: db ; c5dc
 
-ENDU ; c5dc
-
-	ds 37
-
+NEXTU ; c5d0
 ; engine/gfx/color.asm ?
+	ds 50
+
 wc602:: ds 1 ; c602
 wc603:: ds 1 ; c603
 wc604:: ds 1 ; c604
@@ -379,7 +402,9 @@ wc605:: ds 1 ; c605
 wc606:: ds 1 ; c606
 wc607:: ds 1 ; c607
 
-	ds 194
+ENDU ; c634
+
+	ds 150
 
 ; unidentifed
 wc6ca:: ds 1 ; c6ca
@@ -1089,6 +1114,10 @@ NEXTU ; ce64
 ; miscellaneous
 wFrameCounter::
 wMomBankDigitCursorPosition::
+wSlotsDelay::
+	db
+	ds 1
+wSlotsCE66::
 	db
 ENDU ; ce67
 
@@ -1340,7 +1369,9 @@ wEarthquakeMovementDataBuffer:: ds 5
 
 NEXTU ; ceed
 ; miscellaneous
-wTempDayOfWeek:: db
+wTempDayOfWeek::
+wKeepSevenBiasChance::
+	db
 	ds 2
 wStartFlypoint:: db
 wEndFlypoint:: db

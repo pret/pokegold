@@ -259,14 +259,14 @@ slot_reel: MACRO
 \1SpinRate::     db
 \1OAMAddr::      dw
 \1XCoord::       db
-\1Slot09::       ds 1
-\1Slot0a::       ds 1
-\1Slot0b::       ds 1
-\1Slot0c::       ds 1
-\1Slot0d::       ds 1
-\1Slot0e::       ds 1
-\1Slot0f::       ds 1
-endm
+\1ManipCounter:: db
+\1ManipDelay::   db
+\1Field0b::      ds 1
+\1Field0c::      ds 1
+\1Field0d::      ds 1
+\1Field0e::      ds 1
+\1StopDelay::    db
+ENDM
 
 object_struct: MACRO
 \1Sprite::            db

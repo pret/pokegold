@@ -543,7 +543,9 @@ ClearSpriteAnims::
 PlaySpriteAnimationsAndDelayFrame::
 	dr $8d183, $8d18a
 PlaySpriteAnimations::
-	dr $8d18a, $8d1f7
+	dr $8d18a, $8d1c9
+DoNextFrameForFirst16Sprites::
+	dr $8d1c9, $8d1f7
 _InitSpriteAnimStruct::
 	dr $8d1f7, $8d332
 
@@ -595,9 +597,7 @@ INCLUDE "engine/rtc/timeset.asm"
 INCLUDE "engine/pokegear/pokegear.asm"
 INCLUDE "engine/overworld/landmarks.asm"
 INCLUDE "engine/events/fish.asm"
-
-_SlotMachine::
-	dr $92c36, $93f86
+INCLUDE "engine/games/slot_machine.asm"
 
 
 SECTION "bank26", ROMX
@@ -669,7 +669,10 @@ ClearBattleAnims::
 BattleAnimCmd_RaiseSub::
 	dr $cc5f7, $cc67c
 BattleAnimCmd_MinimizeOpp::
-	dr $cc67c, $cfce3
+	dr $cc67c, $ce6aa
+
+BattleAnim_Sine_e::
+	dr $ce6aa, $cfce3
 
 
 SECTION "bank36", ROMX

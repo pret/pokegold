@@ -1602,7 +1602,7 @@ _MartBoughtText::
 	text "(S)."
 	done
 
-UnknownText_0x1c5049::
+_SlotsBetHowManyCoinsText::
 	text "Bet how many"
 	line "coins?"
 	done
