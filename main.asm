@@ -6,6 +6,7 @@ SECTION "bank1", ROMX
 INCLUDE "engine/link/place_waiting_text.asm"
 INCLUDE "engine/gfx/load_push_oam.asm"
 INCLUDE "engine/overworld/map_objects.asm"
+INCLUDE "engine/menus/main_menu.asm"
 INCLUDE "engine/menus/intro_menu.asm"
 INCLUDE "engine/overworld/init_map.asm"
 INCLUDE "engine/pokemon/learn.asm"
@@ -180,7 +181,10 @@ TilesetDarkCaveColl::
 
 SECTION "bank8", ROMX
 
-	dr $20000, $20181
+RestartClock_GetWraparoundTime::
+	dr $20000, $20021
+RestartClock::
+	dr $20021, $20181
 TilesetTowerGFX::
 	dr $20181, $205b1
 TilesetTowerMeta::
@@ -498,9 +502,9 @@ SaveMenu_CopyTilemapAtOnce::
 	dr $8c000, $8c0b9
 PhoneRing_CopyTilemapAtOnce::
 	dr $8c0b9, $8c17a
-ResetClock_::
+_ResetClock::
 	dr $8c17a, $8c310
-DeleteSaveData_::
+_DeleteSaveData::
 	dr $8c310, $8c355
 DummyPredef35::
 DummyPredef36::

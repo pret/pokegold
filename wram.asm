@@ -1892,7 +1892,7 @@ wd13f:: ds 1 ; d13f
 wCurBaseDataEnd::
 
 wd140:: ds 1 ; d140
-wCurDamage:: ds 2 ; d141
+wCurDamage:: dw ; d141
 wd143:: ds 1 ; d143
 wd144:: ds 1 ; d144
 wMornEncounterRate::  db ; d145
@@ -2050,7 +2050,7 @@ wRedsName:: ds NAME_LENGTH ; d1c4
 wGreensName:: ds NAME_LENGTH ; d1cf
 
 wSavedAtLeastOnce:: ds 1 ; d1da
-wd1db:: ds 1 ; d1db
+wSpawnAfterChampion:: ds 1 ; d1db
 wStartDay:: db ; d1dc
 wStartHour:: db ; d1dd
 wStartMinute:: db ; d1de
@@ -2098,7 +2098,6 @@ UNION
 	ds 18
 wPlayerData1End::
 wPlayerData2::
-	ds 1
 NEXTU
 wObject11Struct:: object_struct wObject11
 wObject12Struct:: object_struct wObject12
@@ -2579,7 +2578,7 @@ wDecoLeftOrnament::  db ; d95e
 wDecoRightOrnament:: db ; d95f
 wDecoBigDoll::       db ; d960
 
-wd961:: ds 1 ; d961
+wWhichMomItem:: ds 1 ; d961
 wd962:: ds 1 ; d962
 wMomItemTriggerBalance:: ds 3 ; d963
 

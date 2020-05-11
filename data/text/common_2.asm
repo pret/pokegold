@@ -1138,7 +1138,7 @@ _MayRegisterItemText::
 	line "on SELECT Button."
 	done
 
-_ClockTimeUnknownText::
+_MainMenuTimeUnknownText::
 	text "Clock time unknown"
 	done
 

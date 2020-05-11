@@ -402,7 +402,7 @@ UpdatePlayerStep:
 	set PLAYERSTEP_CONTINUE_F, [hl]
 	ret
 
-Function4732:
+Unreferenced_Function4732:
 	push bc
 	ld e, a
 	ld d, 0
@@ -1518,14 +1518,14 @@ StepType05:
 	ld [hl], a
 	call IncrementObjectStructField1c
 StepType04:
-	call Stubbed_Function4fb2
+	call Stubbed_Function4f5a
 	ld hl, OBJECT_DIRECTION_WALKING
 	add hl, bc
 	ld [hl], STANDING
 	ret
 
 NPCStep:
-	call Stubbed_Function4fb2
+	call Stubbed_Function4f5a
 	call AddStepVector
 	ld hl, OBJECT_STEP_DURATION
 	add hl, bc
@@ -1747,7 +1747,7 @@ StepType17:
 	dw .null
 .null
 
-Stubbed_Function4fb2:
+Stubbed_Function4f5a:
 	ret
 	ld hl, OBJECT_1D
 	add hl, bc
