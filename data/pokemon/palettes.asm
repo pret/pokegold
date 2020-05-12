@@ -1,8 +1,17 @@
 PokemonPalettes:
+; entries correspond to Pokémon species, two apiece
+
+; Each front.gbcpal is generated from the corresponding .png, and
+; only the middle two colors are included, not black or white.
+; Shiny palettes are defined directly, not generated.
+
+; 000
 	RGB 30, 22, 17
 	RGB 16, 14, 19
+; 000 shiny
 	RGB 30, 22, 17
 	RGB 16, 14, 19
+
 BulbasaurPalette: INCLUDE "gfx/pokemon/bulbasaur/normal.pal"
 BulbasaurShinyPalette: INCLUDE "gfx/pokemon/bulbasaur/shiny.pal"
 IvysaurPalette: INCLUDE "gfx/pokemon/ivysaur/normal.pal"
@@ -505,19 +514,31 @@ Ho_ohPalette: INCLUDE "gfx/pokemon/ho_oh/normal.pal"
 Ho_ohShinyPalette: INCLUDE "gfx/pokemon/ho_oh/shiny.pal"
 CelebiPalette: INCLUDE "gfx/pokemon/celebi/normal.pal"
 CelebiShinyPalette: INCLUDE "gfx/pokemon/celebi/shiny.pal"
+
+; 252
 	RGB 30, 26, 11
-	RGB 23, 16,  0
+	RGB 23, 16, 00
+; 252 shiny
 	RGB 30, 26, 11
-	RGB 23, 16,  0
+	RGB 23, 16, 00
+
+; egg
 	RGB 30, 26, 11
-	RGB 23, 16,  0
+	RGB 23, 16, 00
+; egg shiny
 	RGB 30, 26, 11
-	RGB 23, 16,  0
+	RGB 23, 16, 00
+
+; 254
 	RGB 30, 26, 11
-	RGB 23, 16,  0
+	RGB 23, 16, 00
+; 254 shiny
 	RGB 30, 26, 11
-	RGB 23, 16,  0
+	RGB 23, 16, 00
+
+; 255
 	RGB 23, 23, 23
 	RGB 17, 17, 17
+; 255 shiny
 	RGB 23, 23, 23
 	RGB 17, 17, 17

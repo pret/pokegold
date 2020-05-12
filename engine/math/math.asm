@@ -1,11 +1,10 @@
-_Multiply:: ; 67bd
-
+_Multiply::
 ; hMultiplier is one byte.
 	ld a, 8
 	ld b, a
 
 	xor a
-	ldh [hProduct], a
+	ldh [hMultiplicand - 1], a
 	ldh [hMathBuffer + 1], a
 	ldh [hMathBuffer + 2], a
 	ldh [hMathBuffer + 3], a
@@ -37,7 +36,7 @@ _Multiply:: ; 67bd
 
 	ldh a, [hMathBuffer + 1]
 	ld c, a
-	ldh a, [hProduct]
+	ldh a, [hMultiplicand - 1]
 	adc c
 	ldh [hMathBuffer + 1], a
 
@@ -59,9 +58,9 @@ _Multiply:: ; 67bd
 	rla
 	ldh [hMultiplicand + 0], a
 
-	ldh a, [hProduct]
+	ldh a, [hMultiplicand - 1]
 	rla
-	ldh [hProduct], a
+	ldh [hMultiplicand - 1], a
 
 	jr .loop
 
@@ -80,7 +79,7 @@ _Multiply:: ; 67bd
 
 	ret
 
-_Divide:: ; 681d
+_Divide::
 	xor a
 	ldh [hMathBuffer + 0], a
 	ldh [hMathBuffer + 1], a
@@ -173,18 +172,18 @@ _Divide:: ; 681d
 
 .done
 	ldh a, [hDividend + 1]
-	ldh [hDivisor], a
+	ldh [hRemainder], a
 
 	ldh a, [hMathBuffer + 4]
-	ldh [hDividend + 3], a
+	ldh [hQuotient + 3], a
 
 	ldh a, [hMathBuffer + 3]
-	ldh [hDividend + 2], a
+	ldh [hQuotient + 2], a
 
 	ldh a, [hMathBuffer + 2]
-	ldh [hDividend + 1], a
+	ldh [hQuotient + 1], a
 
 	ldh a, [hMathBuffer + 1]
-	ldh [hDividend + 0], a
+	ldh [hQuotient + 0], a
 
 	ret

@@ -2,7 +2,7 @@ MANIA_OT_ID EQU 00518
 
 GiveShuckle:
 ; Adding to the party.
-	xor a
+	xor a ; PARTYMON
 	ld [wMonType], a
 
 ; Level 15 Shuckle.
@@ -63,6 +63,7 @@ GiveShuckle:
 
 SpecialShuckleOT:
 	db "MANIA@"
+
 SpecialShuckleNick:
 	db "SHUCKIE@"
 

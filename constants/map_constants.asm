@@ -24,8 +24,6 @@ ENDM
 ; - attributes (see data/maps/attributes.asm)
 ; - blocks (see data/maps/blocks.asm)
 ; - scripts and events (see data/maps/scripts.asm)
-
-; map group ids
 	const_def
 
 	newgroup                                                      ;  1

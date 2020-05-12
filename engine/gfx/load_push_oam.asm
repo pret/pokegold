@@ -1,6 +1,3 @@
-DummyPredef1:
-	ret
-
 WriteOAMDMACodeToHRAM::
 	ld c, LOW(hTransferVirtualOAM)
 	ld b, .PushOAMEnd - .PushOAM

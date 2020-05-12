@@ -3,10 +3,6 @@ INCLUDE "constants.asm"
 
 SECTION "Evolutions and Attacks", ROMX
 
-INCLUDE "data/pokemon/evos_attacks_pointers.asm"
-
-EvosAttacks::
-
 ; Evos+attacks data structure:
 ; - Evolution methods:
 ;    * db EVOLVE_LEVEL, level, species
@@ -18,6 +14,8 @@ EvosAttacks::
 ; - Learnset (in increasing level order):
 ;    * db level, move
 ; - db 0 ; no more level-up moves
+
+INCLUDE "data/pokemon/evos_attacks_pointers.asm"
 
 BulbasaurEvosAttacks:
 	db EVOLVE_LEVEL, 16, IVYSAUR
@@ -838,7 +836,7 @@ AbraEvosAttacks:
 	db 0 ; no more level-up moves
 
 KadabraEvosAttacks:
-	db EVOLVE_TRADE, $ff, ALAKAZAM
+	db EVOLVE_TRADE, -1, ALAKAZAM
 	db 0 ; no more evolutions
 	db 1, TELEPORT
 	db 1, KINESIS
@@ -882,7 +880,7 @@ MachopEvosAttacks:
 	db 0 ; no more level-up moves
 
 MachokeEvosAttacks:
-	db EVOLVE_TRADE, $ff, MACHAMP
+	db EVOLVE_TRADE, -1, MACHAMP
 	db 0 ; no more evolutions
 	db 1, LOW_KICK
 	db 1, LEER
@@ -996,7 +994,7 @@ GeodudeEvosAttacks:
 	db 0 ; no more level-up moves
 
 GravelerEvosAttacks:
-	db EVOLVE_TRADE, $ff, GOLEM
+	db EVOLVE_TRADE, -1, GOLEM
 	db 0 ; no more evolutions
 	db 1, TACKLE
 	db 1, DEFENSE_CURL
@@ -1199,6 +1197,7 @@ GrimerEvosAttacks:
 
 MukEvosAttacks:
 	db 0 ; no more evolutions
+	; moves are not sorted by level
 	db 1, POISON_GAS
 	db 1, POUND
 	db 1, HARDEN
@@ -1248,7 +1247,7 @@ GastlyEvosAttacks:
 	db 0 ; no more level-up moves
 
 HaunterEvosAttacks:
-	db EVOLVE_TRADE, $ff, GENGAR
+	db EVOLVE_TRADE, -1, GENGAR
 	db 0 ; no more evolutions
 	db 1, HYPNOSIS
 	db 1, LICK

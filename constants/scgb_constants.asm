@@ -1,3 +1,4 @@
+; GetSGBLayout arguments (see engine/gfx/cgb_layouts.asm and engine/gfx/sgb_layouts.asm)
 	const_def
 	const SCGB_BATTLE_GRAYSCALE
 	const SCGB_BATTLE_COLORS
@@ -5,20 +6,20 @@
 	const SCGB_STATS_SCREEN_HP_PALS
 	const SCGB_POKEDEX
 	const SCGB_SLOT_MACHINE
-	const SCGB_06
-	const SCGB_07
+	const SCGB_BETA_TITLE_SCREEN
+	const SCGB_GS_INTRO
 	const SCGB_DIPLOMA
 	const SCGB_MAPPALS
 	const SCGB_PARTY_MENU
 	const SCGB_EVOLUTION
-	const SCGB_0C
+	const SCGB_GS_TITLE_SCREEN
 	const SCGB_0D
 	const SCGB_MOVE_LIST
-	const SCGB_0F
+	const SCGB_BETA_PIKACHU_MINIGAME
 	const SCGB_POKEDEX_SEARCH_OPTION
-	const SCGB_11
+	const SCGB_BETA_POKER
 	const SCGB_POKEPIC
-	const SCGB_13
+	const SCGB_MAGNET_TRAIN
 	const SCGB_PACKPALS
 	const SCGB_TRAINER_CARD
 	const SCGB_POKEDEX_UNOWN_MODE
@@ -30,6 +31,10 @@
 	const SCGB_TRAINER_OR_MON_FRONTPIC_PALS
 	const SCGB_MYSTERY_GIFT
 	const SCGB_1E
+	const SCGB_1F
+
+SCGB_PARTY_MENU_HP_PALS  EQU -4
+SCGB_RAM EQU -1
 
 ; PredefPals indexes (see gfx/sgb/predef.pal)
 ; GetPredefPal arguments (see engine/gfx/color.asm)
@@ -143,6 +148,4 @@
 	const SGB_MASK_EN
 	const SGB_OBJ_TRN
 
-SCGB_PARTY_MENU_HP_PALS  EQU -4
-SCGB_RAM EQU -1
 PALPACKET_LENGTH EQU $10

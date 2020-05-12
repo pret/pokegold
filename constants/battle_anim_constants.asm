@@ -11,7 +11,7 @@
 	const BATTLEANIMSTRUCT_YCOORD
 	const BATTLEANIMSTRUCT_XOFFSET
 	const BATTLEANIMSTRUCT_YOFFSET
-	const BATTLEANIMSTRUCT_0B
+	const BATTLEANIMSTRUCT_PARAM
 	const BATTLEANIMSTRUCT_DURATION
 	const BATTLEANIMSTRUCT_FRAME
 	const BATTLEANIMSTRUCT_ANON_JT_INDEX
@@ -708,7 +708,7 @@ BATTLEANIMSTRUCT_LENGTH EQU const_value
 	const BATTLEANIMOAMSET_D7
 
 ; BattleBGEffects indexes (see engine/battle_anims/bg_effects.asm)
-const_value SET 1
+	const_def 1
 	const ANIM_BG_FLASH_INVERTED
 	const ANIM_BG_FLASH_WHITE
 	const ANIM_BG_WHITE_HUES
@@ -763,7 +763,7 @@ const_value SET 1
 	const ANIM_BG_34
 
 ; AnimObjGFX indexes (see data/battle_anims/object_gfx.asm)
-const_value SET 1
+	const_def 1
 	const ANIM_GFX_HIT
 	const ANIM_GFX_CUT
 	const ANIM_GFX_FIRE

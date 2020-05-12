@@ -72,7 +72,7 @@ TitleScreen:
 ; Let LCD Stat know we're messing around with SCX
 	ld a, LOW(rSCX)
 	ldh [hLCDCPointer], a
-	ld b, SCGB_0C
+	ld b, SCGB_GS_TITLE_SCREEN
 	call GetSGBLayout
 	call Function6341
 	ld de, MUSIC_TITLE

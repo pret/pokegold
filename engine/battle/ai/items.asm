@@ -692,7 +692,6 @@ AI_Switch:
 	ld a, [wLinkMode]
 	cp LINK_COLOSSEUM
 	ret z
-
 	scf
 	ret
 

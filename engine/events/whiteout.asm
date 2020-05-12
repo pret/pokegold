@@ -61,11 +61,7 @@ GetWhiteoutSpawn:
 	ld d, a
 	ld a, [wLastSpawnMapNumber]
 	ld e, a
-
-	ld a, $05
-	ld hl, $5465
-	rst $08
-
+	farcall IsSpawnPoint
 	ld a, c
 	jr c, .yes
 	xor a ; SPAWN_HOME

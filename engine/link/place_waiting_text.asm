@@ -22,3 +22,6 @@ PlaceWaitingText::
 
 .Waiting:
 	db "Waiting...!@"
+
+DummyPredef1:
+	ret

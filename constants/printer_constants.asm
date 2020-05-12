@@ -1,5 +1,5 @@
-const_value SET 1
-
+; wPrinterStatus
+	const_def 1
 	const PRINTER_STATUS_CHECKING
 	const PRINTER_STATUS_TRANSMITTING
 	const PRINTER_STATUS_PRINTING

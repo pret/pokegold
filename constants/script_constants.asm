@@ -40,7 +40,7 @@ NUM_STRING_BUFFERS EQU const_value
 	const TRAINERTEXT_WIN
 	const TRAINERTEXT_LOSS
 
-; writecode/checkcode arguments
+; readvar/writevar/loadvar arguments
 ; _GetVarAction.VarActionTable indexes (see engine/overworld/variables.asm)
 	const_def
 	const VAR_STRINGBUFFER2    ; 00
@@ -72,7 +72,7 @@ RETVAR_ADDR_DE EQU (1 << 6)
 RETVAR_EXECUTE EQU (2 << 6)
 
 ; PlayerEventScriptPointers indexes (see engine/overworld/events.asm)
-const_value SET -1
+	const_def -1
 	const PLAYEREVENT_MAPSCRIPT
 	const PLAYEREVENT_NONE
 	const PLAYEREVENT_SEENBYTRAINER
@@ -262,14 +262,14 @@ NUM_FRUIT_TREES EQU const_value - 1
 	const BUGCONTEST_BOXED_MON  ; 1
 	const BUGCONTEST_NO_CATCH   ; 2
 
-; HealMachineAnim writebyte arguments
+; HealMachineAnim setval arguments
 ; HealMachineAnim.Pointers indexes (see engine/events/heal_machine_anim.asm)
 	const_def
 	const HEALMACHINE_POKECENTER   ; 0
 	const HEALMACHINE_ELMS_LAB     ; 1
 	const HEALMACHINE_HALL_OF_FAME ; 2
 
-; UnownPuzzle writebyte arguments
+; UnownPuzzle setval arguments
 ; LoadUnownPuzzlePiecesGFX.LZPointers indexes (see engine/games/unown_puzzle.asm)
 	const_def
 	const UNOWNPUZZLE_KABUTO     ; 0

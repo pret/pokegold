@@ -1828,7 +1828,7 @@ wBaseUnusedFrontpic:: dw ; d132
 wBaseUnusedBackpic:: dw ; d134
 wBaseGrowthRate:: db ; d136
 wBaseEggGroups:: db ; d137
-wd138:: ds 1 ; d138
+wBaseTMHM:: ds 1 ; d138
 wd139:: ds 1 ; d139
 wd13a:: ds 1 ; d13a
 wd13b:: ds 1 ; d13b

@@ -129,6 +129,4 @@ KANTO_FLYPOINT EQU const_value
 	const FLY_CINNABAR
 	const FLY_INDIGO
 
-; outdoor sprite limits (see engine/overworld/overworld.asm)
-MAX_OUTDOOR_SPRITES EQU 11
-SPRITE_GFX_LIST_CAPACITY EQU 12
+MAX_OUTDOOR_SPRITES EQU 11 ; see engine/overworld/overworld.asm

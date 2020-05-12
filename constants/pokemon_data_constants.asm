@@ -27,11 +27,11 @@ BASE_TMHM        EQUS "(wBaseTMHM - wCurBaseData)"
 BASE_DATA_SIZE   EQUS "(wCurBaseDataEnd - wCurBaseData)"
 
 ; gender ratio constants
-GENDER_F0      EQU 0 percent
-GENDER_F12_5   EQU 12 percent + 1
-GENDER_F25     EQU 25 percent
-GENDER_F50     EQU 50 percent
-GENDER_F75     EQU 75 percent
+GENDER_F0      EQU   0 percent
+GENDER_F12_5   EQU  12 percent + 1
+GENDER_F25     EQU  25 percent
+GENDER_F50     EQU  50 percent
+GENDER_F75     EQU  75 percent
 GENDER_F100    EQU 100 percent - 1
 GENDER_UNKNOWN EQU -1
 
@@ -62,6 +62,45 @@ GENDER_UNKNOWN EQU -1
 	const EGG_DITTO         ; d
 	const EGG_DRAGON        ; e
 	const EGG_NONE          ; f (Undiscovered)
+
+; pokedex entries (see data/pokemon/dex_entries.asm)
+NUM_DEX_ENTRY_BANKS EQU 4
+
+; party_struct members (see macros/wram.asm)
+MON_SPECIES            EQUS "(wPartyMon1Species - wPartyMon1)"
+MON_ITEM               EQUS "(wPartyMon1Item - wPartyMon1)"
+MON_MOVES              EQUS "(wPartyMon1Moves - wPartyMon1)"
+MON_ID                 EQUS "(wPartyMon1ID - wPartyMon1)"
+MON_EXP                EQUS "(wPartyMon1Exp - wPartyMon1)"
+MON_STAT_EXP           EQUS "(wPartyMon1StatExp - wPartyMon1)"
+MON_HP_EXP             EQUS "(wPartyMon1HPExp - wPartyMon1)"
+MON_ATK_EXP            EQUS "(wPartyMon1AtkExp - wPartyMon1)"
+MON_DEF_EXP            EQUS "(wPartyMon1DefExp - wPartyMon1)"
+MON_SPD_EXP            EQUS "(wPartyMon1SpdExp - wPartyMon1)"
+MON_SPC_EXP            EQUS "(wPartyMon1SpcExp - wPartyMon1)"
+MON_DVS                EQUS "(wPartyMon1DVs - wPartyMon1)"
+MON_PP                 EQUS "(wPartyMon1PP - wPartyMon1)"
+MON_HAPPINESS          EQUS "(wPartyMon1Happiness - wPartyMon1)"
+MON_PKRUS              EQUS "(wPartyMon1PokerusStatus - wPartyMon1)"
+MON_CAUGHTDATA         EQUS "(wPartyMon1CaughtData - wPartyMon1)"
+MON_CAUGHTLEVEL        EQUS "(wPartyMon1CaughtLevel - wPartyMon1)"
+MON_CAUGHTTIME         EQUS "(wPartyMon1CaughtTime - wPartyMon1)"
+MON_CAUGHTGENDER       EQUS "(wPartyMon1CaughtGender - wPartyMon1)"
+MON_CAUGHTLOCATION     EQUS "(wPartyMon1CaughtLocation - wPartyMon1)"
+MON_LEVEL              EQUS "(wPartyMon1Level - wPartyMon1)"
+MON_STATUS             EQUS "(wPartyMon1Status - wPartyMon1)"
+MON_HP                 EQUS "(wPartyMon1HP - wPartyMon1)"
+MON_MAXHP              EQUS "(wPartyMon1MaxHP - wPartyMon1)"
+MON_ATK                EQUS "(wPartyMon1Attack - wPartyMon1)"
+MON_DEF                EQUS "(wPartyMon1Defense - wPartyMon1)"
+MON_SPD                EQUS "(wPartyMon1Speed - wPartyMon1)"
+MON_SAT                EQUS "(wPartyMon1SpclAtk - wPartyMon1)"
+MON_SDF                EQUS "(wPartyMon1SpclDef - wPartyMon1)"
+BOXMON_STRUCT_LENGTH   EQUS "(wPartyMon1End - wPartyMon1)"
+PARTYMON_STRUCT_LENGTH EQUS "(wPartyMon1StatsEnd - wPartyMon1)"
+
+NICKNAMED_MON_STRUCT_LENGTH EQUS "(PARTYMON_STRUCT_LENGTH + MON_NAME_LENGTH)"
+REDMON_STRUCT_LENGTH EQU 44
 
 ; maximum number of party pokemon
 PARTY_LENGTH EQU 6

@@ -80,14 +80,16 @@ RIGHT_MASK EQU 1 << RIGHT
 
 ; wFacingDirection:: ; cf2f
 FACE_CURRENT EQU 0
-FACE_DOWN  EQU 8
-FACE_UP    EQU 4
-FACE_LEFT  EQU 2
-FACE_RIGHT EQU 1
+FACE_DOWN    EQU 8
+FACE_UP      EQU 4
+FACE_LEFT    EQU 2
+FACE_RIGHT   EQU 1
 
 ; wPokemonWithdrawDepositParameter:: ; d008
-PC_WITHDRAW EQU 0
-PC_DEPOSIT EQU 1
+PC_WITHDRAW       EQU 0
+PC_DEPOSIT        EQU 1
+REMOVE_PARTY      EQU 0
+REMOVE_BOX        EQU 1
 DAY_CARE_WITHDRAW EQU 2
 DAY_CARE_DEPOSIT  EQU 3
 
@@ -151,7 +153,7 @@ SCRIPT_RUNNING EQU 2
 
 ; wSpawnAfterChampion::
 SPAWN_LANCE EQU 1
-SPAWN_RED EQU 2
+SPAWN_RED   EQU 2
 
 ; wCurDay:: ; d1f2
 	const_def
@@ -278,5 +280,5 @@ DAYCAREMAN_HAS_EGG_F         EQU 6
 ; wDayCareLady:: ; dc77
 DAYCARELADY_HAS_MON_F        EQU 0
 
-; used with both wDayCareMan and wDayCareLady
+; shared flag between wDayCareMan and wDayCareLady
 DAYCARE_INTRO_SEEN_F         EQU 7

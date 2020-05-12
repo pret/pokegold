@@ -140,11 +140,13 @@ StepHappiness::
 	ret
 
 DayCareStep::
+; Raise the experience of Day-Care Pokémon every step cycle.
+
 	ld a, [wDayCareMan]
 	bit DAYCAREMAN_HAS_MON_F, a
 	jr z, .day_care_lady
 
-	ld a, [wBreedMon1Level]
+	ld a, [wBreedMon1Level] ; level
 	cp MAX_LEVEL
 	jr nc, .day_care_lady
 	ld hl, wBreedMon1Exp + 2 ; exp
@@ -196,7 +198,7 @@ DayCareStep::
 	callfar CheckBreedmonCompatibility
 	ld a, [wBreedingCompatibility]
 	cp 230
-	ld b, 32 percent - 1
+	ld b, 31 percent + 1
 	jr nc, .okay
 	ld a, [wBreedingCompatibility]
 	cp 170

@@ -1456,7 +1456,7 @@ CalcMonStatC:
 	add hl, bc
 .sqrt_loop
 	xor a
-	ldh [hMultiplicand], a
+	ldh [hMultiplicand + 0], a
 	ldh [hMultiplicand + 1], a
 	inc b
 	ld a, b

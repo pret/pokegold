@@ -1,4 +1,7 @@
+; Pics are defined in gfx/pics_gold.asm and gfx/pics_silver.asm
+
 PokemonPicPointers::
+; entries correspond to Pokémon species, two apiece
 	dba_pic BulbasaurFrontpic
 	dba_pic BulbasaurBackpic
 	dba_pic IvysaurFrontpic

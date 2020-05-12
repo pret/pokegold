@@ -8,6 +8,7 @@ NameMenuHeader:
 	db STATICMENU_CURSOR | STATICMENU_PLACE_TITLE | STATICMENU_DISABLE_B ; flags
 	db 5 ; items
 	db "NEW NAME@"
+
 PlayerNameArray:
 IF DEF(_GOLD)
 	db "GOLD@"

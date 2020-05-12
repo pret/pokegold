@@ -92,8 +92,8 @@ CheckDailyResetTimer::
 	ret nc
 	xor a
 	ld hl, wDailyFlags1
-	ld [hli], a
-	ld [hl], a
+	ld [hli], a ; wDailyFlags1
+	ld [hl], a  ; wDailyFlags2
 	jr RestartDailyResetTimer
 
 StartBugContestTimer:

@@ -107,8 +107,9 @@ RefreshPlayerCoords:
 	ld hl, wPlayerLastMapY
 	ld [hl], e
 	ld e, a
+; the next three lines are useless
 	ld a, [wObjectFollow_Leader]
-	cp $0
+	cp PLAYER
 	ret nz
 	ret
 
@@ -509,7 +510,7 @@ CopyTempObjectToObjectStruct:
 	ld [hl], a
 	ret
 
-TrainerWalkToPlayer::
+TrainerWalkToPlayer:
 	ldh a, [hLastTalked]
 	call InitMovementBuffer
 	ld a, movement_step_sleep

@@ -462,18 +462,18 @@ GetEggMove:
 	ld a, BANK(EvosAttacksPointers)
 	call GetFarHalfword
 .loop3
-	ld a, BANK(EvosAttacksPointers)
+	ld a, BANK("Evolutions and Attacks")
 	call GetFarByte
 	inc hl
 	and a
 	jr nz, .loop3
 .loop4
-	ld a, BANK(EvosAttacksPointers)
+	ld a, BANK("Evolutions and Attacks")
 	call GetFarByte
 	and a
 	jr z, .inherit_tmhm
 	inc hl
-	ld a, BANK(EvosAttacksPointers)
+	ld a, BANK("Evolutions and Attacks")
 	call GetFarByte
 	ld b, a
 	ld a, [de]

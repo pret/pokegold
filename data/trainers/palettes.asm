@@ -1,12 +1,11 @@
-
 TrainerPalettes:
+; entries correspond to trainer classes
 
-PlayerPalette:
-; The player's palette
-;	RGB 25, 18, 12
-;	RGB 22, 09, 05
-	INCLUDE "gfx/trainers/cal.pal"
+; Each .gbcpal is generated from the corresponding .png, and
+; only the middle two colors are included, not black or white.
 
+PlayerPalette: ; Chris uses the same colors as Cal
+INCLUDE "gfx/trainers/cal.pal"
 FalknerPalette:      INCLUDE "gfx/trainers/falkner.pal"
 WhitneyPalette:      INCLUDE "gfx/trainers/whitney.pal"
 BugsyPalette:        INCLUDE "gfx/trainers/bugsy.pal"
