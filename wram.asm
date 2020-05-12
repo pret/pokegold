@@ -392,15 +392,15 @@ wPokegearRadioChannelAddr:: dw ; c5da
 wPokegearRadioMusicPlaying:: db ; c5dc
 
 NEXTU ; c5d0
-; engine/gfx/color.asm ?
+; unused (engine/gfx/color.asm)
 	ds 50
 
-wc602:: ds 1 ; c602
-wc603:: ds 1 ; c603
-wc604:: ds 1 ; c604
-wc605:: ds 1 ; c605
-wc606:: ds 1 ; c606
-wc607:: ds 1 ; c607
+wc602:: db ; c602
+	ds 2
+
+wc605:: db ; c605
+wc606:: db ; c606
+wc607:: db ; c607
 
 ENDU ; c634
 
@@ -963,16 +963,11 @@ wBGMapPalBuffer::  ds 40 ; cc48
 wBGMapBufferPtrs:: ds 40 ; cc70 ; 20 bg map addresses (16x8 tiles)
 wBGMapBufferEnd::
 
-wColorLayoutPredefID:: ds 1 ; cc98
+wSGBPredef:: db ; cc98
 wPlayerHPPal:: db ; cc99
 wEnemyHPPal:: db ; cc9a
-wcc9b:: ds 1 ; cc9b
-wcc9c:: ds 1 ; cc9c
-wcc9d:: ds 1 ; cc9d
-wcc9e:: ds 1 ; cc9e
-wcc9f:: ds 1 ; cc9f
-wcca0:: ds 1 ; cca0
-wcca1:: ds 1 ; cca1
+wHPPals:: ds PARTY_LENGTH ; cc9b
+wCurHPPal:: db ; cca1
 wcca2:: ds 1 ; cca2
 wcca3:: ds 1 ; cca3
 wcca4:: ds 1 ; cca4
@@ -980,54 +975,7 @@ wcca5:: ds 1 ; cca5
 wcca6:: ds 1 ; cca6
 wcca7:: ds 1 ; cca7
 wcca8:: ds 1 ; cca8
-wcca9:: ds 1 ; cca9
-wccaa:: ds 1 ; ccaa
-wccab:: ds 1 ; ccab
-wccac:: ds 1 ; ccac
-wccad:: ds 1 ; ccad
-wccae:: ds 1 ; ccae
-wccaf:: ds 1 ; ccaf
-wccb0:: ds 1 ; ccb0
-wccb1:: ds 1 ; ccb1
-wccb2:: ds 1 ; ccb2
-wccb3:: ds 1 ; ccb3
-wccb4:: ds 1 ; ccb4
-wccb5:: ds 1 ; ccb5
-wccb6:: ds 1 ; ccb6
-wccb7:: ds 1 ; ccb7
-wccb8:: ds 1 ; ccb8
-wccb9:: ds 1 ; ccb9
-wccba:: ds 1 ; ccba
-wccbb:: ds 1 ; ccbb
-wccbc:: ds 1 ; ccbc
-wccbd:: ds 1 ; ccbd
-wccbe:: ds 1 ; ccbe
-wccbf:: ds 1 ; ccbf
-wccc0:: ds 1 ; ccc0
-wccc1:: ds 1 ; ccc1
-wccc2:: ds 1 ; ccc2
-wccc3:: ds 1 ; ccc3
-wccc4:: ds 1 ; ccc4
-wccc5:: ds 1 ; ccc5
-wccc6:: ds 1 ; ccc6
-wccc7:: ds 1 ; ccc7
-wccc8:: ds 1 ; ccc8
-wccc9:: ds 1 ; ccc9
-wccca:: ds 1 ; ccca
-wcccb:: ds 1 ; cccb
-wcccc:: ds 1 ; cccc
-wcccd:: ds 1 ; cccd
-wccce:: ds 1 ; ccce
-wcccf:: ds 1 ; cccf
-wccd0:: ds 1 ; ccd0
-wccd1:: ds 1 ; ccd1
-wccd2:: ds 1 ; ccd2
-wccd3:: ds 1 ; ccd3
-wccd4:: ds 1 ; ccd4
-wccd5:: ds 1 ; ccd5
-wccd6:: ds 1 ; ccd6
-wccd7:: ds 1 ; ccd7
-wccd8:: ds 1 ; ccd8
+wSGBPals:: ds 48 ; cca9
 
 wAttrmap:: ; ccd9
 	ds SCREEN_HEIGHT * SCREEN_WIDTH
@@ -1067,7 +1015,6 @@ wMonType:: ds 1 ; ce5f
 wCurSpecies:: ds 1 ; ce60
 wNamedObjectTypeBuffer:: ds 1 ; ce61
 wce62:: ds 1 ; ce62
-wce63::
 wJumptableIndex::
 	db
 

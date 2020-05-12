@@ -13,7 +13,7 @@ TitleScreen:
 	ldh [hSCY], a
 	ldh [hSCX], a
 
-	ld hl, $8000
+	ld hl, vTiles0
 	ld bc, $2000
 	xor a
 	call ByteFill
@@ -50,13 +50,13 @@ TitleScreen:
 	set 2, [hl]
 	call EnableLCD
 	xor a
-	ld hl, wce63
+	ld hl, wJumptableIndex
 	ld [hli], a
 	ld [hli], a
 	ld [hli], a
 	ld [hl], a
 	ld de, $6058
-	ld a, $2c ; HO-OH
+	ld a, SPRITE_ANIM_INDEX_GS_INTRO_HO_OH
 	call InitSpriteAnimStruct
 	ld hl, wSpriteAnim1
 	ld de, wSpriteAnim10
@@ -65,14 +65,14 @@ TitleScreen:
 	ld hl, wSpriteAnim1
 	ld [hl], $0
 	ld hl, wLYOverrides
-	ld bc, $90
+	ld bc, wLYOverridesEnd - wLYOverrides
 	xor a
 	call ByteFill
 
 ; Let LCD Stat know we're messing around with SCX
 	ld a, LOW(rSCX)
 	ldh [hLCDCPointer], a
-	ld b, $c
+	ld b, SCGB_0C
 	call GetSGBLayout
 	call Function6341
 	ld de, MUSIC_TITLE

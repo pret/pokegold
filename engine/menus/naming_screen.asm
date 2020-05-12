@@ -286,7 +286,7 @@ Function11c89:
 
 Function11cd4:
 	call JoyTextDelay
-	ld a, [wce63]
+	ld a, [wJumptableIndex]
 	bit 7, a
 	jr nz, .asm_11cef
 	call Function11d27
@@ -329,7 +329,7 @@ Function11cff:
 	ret
 
 Function11d27:
-	ld a, [wce63]
+	ld a, [wJumptableIndex]
 	ld e, a
 	ld d, $0
 	ld hl, $5d36
@@ -362,7 +362,7 @@ Function11d3a:
 	ld hl, $e
 	add hl, bc
 	ld [hl], a
-	ld hl, wce63
+	ld hl, wJumptableIndex
 	inc [hl]
 	ret
 
@@ -415,7 +415,7 @@ Function11d60:
 
 .asm_11daa
 	call Function11fc4
-	ld hl, wce63
+	ld hl, wJumptableIndex
 	set 7, [hl]
 	ret
 
@@ -833,7 +833,7 @@ Function1201e:
 	ld [wGlobalAnimYOffset], a
 	ldh [hSCX], a
 	ld [wGlobalAnimXOffset], a
-	ld [wce63], a
+	ld [wJumptableIndex], a
 	ld [wce64], a
 	ldh [hBGMapMode], a
 	ld [wNamingScreenCurNameLength], a
@@ -959,7 +959,7 @@ Function12376:
 
 Function1238d:
 	call JoyTextDelay
-	ld a, [wce63]
+	ld a, [wJumptableIndex]
 	bit 7, a
 	jr nz, .asm_123a8
 	call Function123d5
@@ -995,7 +995,7 @@ Function123b8:
 	ret
 
 Function123d5:
-	ld a, [wce63]
+	ld a, [wJumptableIndex]
 	ld e, a
 	ld d, $0
 	ld hl, .Jumptable
@@ -1024,7 +1024,7 @@ Function123e8:
 	ld hl, $e
 	add hl, bc
 	ld [hl], a
-	ld hl, wce63
+	ld hl, wJumptableIndex
 	inc [hl]
 	ret
 
@@ -1094,7 +1094,7 @@ Function12407:
 
 .asm_1246e
 	call Function11fc4
-	ld hl, wce63
+	ld hl, wJumptableIndex
 	set 7, [hl]
 	ret
 
