@@ -146,7 +146,6 @@ GetMonBackpic:
 	jr nz, .ok
 	ld a, [wUnownLetter]
 	ld d, BANK(UnownPicPointers)
-
 .ok
 	dec a
 	ld bc, 6

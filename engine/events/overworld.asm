@@ -608,7 +608,7 @@ FlyFunction:
 	callasm FlyToAnim
 	special WaitSFX
 	special ReplaceChrisSprite
-	callasm _RefreshSprites
+	callasm _ClearSprites
 	end
 
 WaterfallFunction:

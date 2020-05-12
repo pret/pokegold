@@ -7,7 +7,7 @@ _ReplaceChrisSprite::
 	call GetUsedSprite
 	ret
 
-_ClearSprites::
+_RefreshSprites::
 	ld hl, wSpriteFlags
 	ld a, [hl]
 	push af
@@ -18,7 +18,7 @@ _ClearSprites::
 	ld [wSpriteFlags], a
 	ret
 
-_RefreshSprites::
+_ClearSprites::
 	ld hl, wSpriteFlags
 	ld a, [hl]
 	push af

@@ -409,7 +409,7 @@ INCLUDE "gfx/mail/mail.pal"
 
 INCLUDE "engine/gfx/cgb_layouts.asm"
 
-Function9a94:
+_CGB_MysteryGift:
 	ld hl, .Palette
 	ld de, wBGPals1
 	ld bc, 1 palettes

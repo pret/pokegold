@@ -64,6 +64,7 @@ PrepMonFrontpic::
 
 _PrepMonFrontpic::
 	ld a, [wCurPartySpecies]
+; is a pokemon?
 	and a
 	jr z, .not_pokemon
 	cp EGG

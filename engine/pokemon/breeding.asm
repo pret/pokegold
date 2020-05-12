@@ -428,7 +428,7 @@ GetEggMove:
 	ld a, BANK(EggMovePointers)
 	call GetFarHalfword
 .loop
-	ld a, BANK(EggMovePointers)
+	ld a, BANK("Egg Moves")
 	call GetFarByte
 	cp -1
 	jr z, .reached_end
@@ -617,7 +617,7 @@ GetBreedmonMovePointer:
 	ld hl, wBreedMon2Moves
 	ret
 
-GetHatchlingFrontpic:
+GetEggFrontpic:
 	push de
 	ld [wCurPartySpecies], a
 	ld [wCurSpecies], a
@@ -677,10 +677,10 @@ EggHatch_AnimationSequence:
 	farcall ClearSpriteAnims
 	ld de, vTiles2 tile $00
 	ld a, [wJumptableIndex]
-	call GetHatchlingFrontpic
+	call GetEggFrontpic
 	ld de, vTiles2 tile $31
 	ld a, EGG
-	call GetHatchlingFrontpic
+	call GetEggFrontpic
 	ld de, MUSIC_EVOLUTION
 	call PlayMusic
 	call EnableLCD

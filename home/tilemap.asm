@@ -52,11 +52,11 @@ ApplyTilemap::
 	call DelayFrames
 	ret
 
-OpenAndCloseMenu_HDMATransferTilemapAndAttrmap::
+CGBOnly_CopyTilemapAtOnce::
 	ldh a, [hCGB]
 	and a
 	jr z, WaitBGMap
-
+; fall through
 CopyTilemapAtOnce::
 	ldh a, [hBGMapMode]
 	push af

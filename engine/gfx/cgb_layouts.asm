@@ -59,7 +59,7 @@ LoadSGBLayoutCGB:
 	dw _CGB_PlayerOrMonFrontpicPals
 	dw _CGB_TradeTube
 	dw _CGB_TrainerOrMonFrontpicPals
-	dw Function9a94
+	dw _CGB_MysteryGift
 	dw _CGB1e
 	dw _CGB_Pokedex_5_5
 

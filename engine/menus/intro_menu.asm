@@ -1,4 +1,5 @@
 MainMenu_NewGame:
+NewGame:
 	xor a
 	ld [wDebugFlags], a
 	call ResetWRAM
@@ -242,6 +243,7 @@ LoadOrRegenerateLuckyIDNumber:
 	jp CloseSRAM
 
 MainMenu_Continue:
+Continue:
 	farcall TryLoadSaveFile
 	jr c, .FailToLoad
 	call LoadStandardMenuHeader

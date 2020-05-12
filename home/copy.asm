@@ -54,7 +54,6 @@ GetFarHalfword::
 	rst Bankswitch
 	ret
 
-
 ByteFill::
 ; fill bc bytes with the value of a, starting at hl
 	inc b ; we bail the moment b hits 0, so include the last run

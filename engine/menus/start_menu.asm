@@ -151,7 +151,7 @@ StartMenu::
 	call DrawVariableLengthMenuBox
 	call .DrawBugContestStatus
 	call UpdateSprites
-	call Functiond2a
+	call ReloadPalettes
 	call FinishExitMenu
 	ret
 
@@ -444,7 +444,7 @@ StartMenu_Option:
 ; Game options.
 
 	call FadeToMenu
-	farcall MainMenu_Options
+	farcall OptionsMenu
 	ld a, 6
 	ret
 

@@ -750,7 +750,7 @@ TitleScreenGFX3::
 	dr $e41e0, $e4260
 TitleScreenGFX4::
 	dr $e4260, $e4608
-OptionsMenu::
+_OptionsMenu::
 	dr $e4608, $e49a8
 
 ELIF DEF(_SILVER)
@@ -758,7 +758,7 @@ TitleScreenGFX3::
 	dr $e41e0, $e4220
 TitleScreenGFX4::
 	dr $e4220, $e4450
-OptionsMenu::
+_OptionsMenu::
 	dr $e4450, $e47f0
 ENDC
 

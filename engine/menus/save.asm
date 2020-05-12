@@ -19,7 +19,7 @@ SaveMenu:
 
 .refused
 	call ExitMenu
-	call Functiond2a
+	call ReloadPalettes
 	farcall SaveMenu_CopyTilemapAtOnce
 	scf
 	ret
@@ -204,7 +204,7 @@ SaveTheGame_yesorno:
 	dec a
 	call CloseWindow
 	push af
-	call Functiond2a
+	call ReloadPalettes
 	pop af
 	and a
 	ret

@@ -559,8 +559,7 @@ _ExitMenu::
 	ld a, [wSpriteUpdatesEnabled]
 	cp 0
 	ret z
-
-	call Functiond2a
+	call ReloadPalettes
 	ret
 
 Function2434b:

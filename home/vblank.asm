@@ -38,7 +38,7 @@ VBlank::
 	dw VBlank3
 	dw VBlank4
 	dw VBlank5
-	dw VBlank0
+	dw VBlank0 ; just in case
 	dw VBlank0 ; just in case
 
 VBlank0::

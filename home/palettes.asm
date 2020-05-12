@@ -257,22 +257,22 @@ ClearVBank1::
 	ldh [rVBK], a
 	ret
 
-Functiond2a::
+ReloadPalettes::
 	hlcoord 0, 0
-	ld de, wAttrmap
+	decoord 0, 0, wAttrmap
 	ld bc, SCREEN_WIDTH * SCREEN_HEIGHT
-.asm_d33
+.loop
 	ld a, [hli]
 	cp $60
-	jr c, .asm_d3b
-	ld a, $7
+	jr c, .pal_map
+	ld a, 7
 	ld [de], a
-.asm_d3b
+.pal_map
 	inc de
 	dec bc
 	ld a, b
 	or c
-	jr nz, .asm_d33
+	jr nz, .loop
 	ret
 
 ReloadSpritesNoPalettes::

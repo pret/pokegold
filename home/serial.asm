@@ -57,7 +57,6 @@ Serial::
 	bit 7, a
 	jr nz, .wait_bit_7
 
-	; Cycle the serial controller
 	ld a, (0 << rSC_ON) | (0 << rSC_CLOCK)
 	ldh [rSC], a
 	ld a, (1 << rSC_ON) | (0 << rSC_CLOCK)
@@ -82,7 +81,7 @@ Serial::
 	reti
 
 Serial_ExchangeBytes::
-	ld a, 1
+	ld a, $1
 	ldh [hSerialIgnoringInitialData], a
 .loop
 	ld a, [hl]
@@ -121,20 +120,19 @@ Serial_ExchangeByte::
 	xor a
 	ldh [hSerialReceivedNewData], a
 	ldh a, [hSerialConnectionStatus]
-	cp 2
+	cp USING_INTERNAL_CLOCK
 	jr nz, .not_player_2
 	ld a, (0 << rSC_ON) | (1 << rSC_CLOCK)
 	ldh [rSC], a
 	ld a, (1 << rSC_ON) | (1 << rSC_CLOCK)
 	ldh [rSC], a
-
 .not_player_2
 .loop2
 	ldh a, [hSerialReceivedNewData]
 	and a
 	jr nz, .reset_ffcc
 	ldh a, [hSerialConnectionStatus]
-	cp 1
+	cp USING_EXTERNAL_CLOCK
 	jr nz, .not_player_1_or_wLinkTimeoutFrames_zero
 	call CheckwLinkTimeoutFramesNonzero
 	jr z, .not_player_1_or_wLinkTimeoutFrames_zero
@@ -166,7 +164,7 @@ Serial_ExchangeByte::
 	ld [wce5d + 1], a
 	jr nz, .loop2
 	ldh a, [hSerialConnectionStatus]
-	cp 1
+	cp USING_EXTERNAL_CLOCK
 	jr z, .reset_ffcc
 
 	ld a, 255
@@ -256,7 +254,7 @@ Serial_ExchangeLinkMenuSelection::
 	inc hl
 	ldh a, [hSerialIgnoringInitialData]
 	and a
-	ld a, 0
+	ld a, FALSE
 	ldh [hSerialIgnoringInitialData], a
 	jr nz, .asm_7f8
 	ld a, b

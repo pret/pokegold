@@ -333,6 +333,7 @@ PlayMapMusic::
 	ret
 
 PlayMapMusicBike::
+; If the player's on a bike, play the bike music instead of the map music
 	push hl
 	push de
 	push bc

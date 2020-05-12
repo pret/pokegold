@@ -108,9 +108,9 @@ Init::
 	ld a, CONNECTION_NOT_ESTABLISHED
 	ldh [hSerialConnectionStatus], a
 
-	ld h, $98
+	ld h, HIGH(vBGMap0)
 	call BlankBGMap
-	ld h, $9c
+	ld h, HIGH(vBGMap1)
 	call BlankBGMap
 
 	callfar InitCGBPals

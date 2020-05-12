@@ -166,7 +166,8 @@ PlaceNextChar::
 	ld c, l
 	pop hl
 	ret
-	pop de
+
+	pop de ; unused
 
 NextChar::
 	inc de
@@ -399,10 +400,12 @@ LineChar::
 
 Paragraph::
 	push de
+
 	ld a, [wLinkMode]
 	cp LINK_COLOSSEUM
 	jr z, .linkbattle
 	call LoadBlinkingCursor
+
 .linkbattle
 	call Text_WaitBGMap
 	call PromptButton

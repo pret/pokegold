@@ -36,7 +36,7 @@ CloseText::
 	call SafeUpdateSprites
 	ld a, $90
 	ldh [hWY], a
-	farcall _RefreshSprites
+	farcall _ClearSprites
 	call ReplaceChrisSprite
 	ld hl, wEnteredMapFromContinue
 	res 7, [hl]
@@ -62,10 +62,10 @@ OpenText::
 _OpenAndCloseMenu_HDMATransferTilemapAndAttrmap::
 	ldh a, [hOAMUpdate]
 	push af
-	ld a, 1
+	ld a, $1
 	ldh [hOAMUpdate], a
 
-	call OpenAndCloseMenu_HDMATransferTilemapAndAttrmap
+	call CGBOnly_CopyTilemapAtOnce
 
 	pop af
 	ldh [hOAMUpdate], a

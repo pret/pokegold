@@ -53,7 +53,7 @@ LoadSGBLayout:
 	dw .SGB_TrainerOrMonFrontpicPals
 	dw .SGB_MysteryGift
 	dw .SGB1e
-	dw .SGB1f
+	dw .SGB_Pokedex_5_5
 
 .SGB_BattleGrayscale:
 	ld hl, PalPacket_BattleGrayscale
@@ -224,7 +224,7 @@ LoadSGBLayout:
 	ld de, BlkPacket_Pokedex_PC
 	ret
 
-.SGB1f:
+.SGB_Pokedex_5_5:
 	call .SGB_Pokedex
 	ld de, BlkPacket_9f65
 	ret

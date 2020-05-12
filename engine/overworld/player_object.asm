@@ -510,7 +510,7 @@ CopyTempObjectToObjectStruct:
 	ld [hl], a
 	ret
 
-TrainerWalkToPlayer:
+TrainerWalkToPlayer::
 	ldh a, [hLastTalked]
 	call InitMovementBuffer
 	ld a, movement_step_sleep

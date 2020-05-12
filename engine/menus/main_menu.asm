@@ -171,7 +171,7 @@ MainMenu_PrintCurrentTimeAndDay:
 	jp nz, .PrintTimeNotSet
 	call UpdateTime
 	hlcoord 1, 13
-	ld bc, IncGradGBPalTable_11 + 1
+	lb bc, 4, 13
 	call ClearBox
 	call GetWeekday
 	ld b, a
@@ -241,11 +241,13 @@ ClearTilemapEtc:
 	ret
 
 MainMenu_MysteryGift:
+MysteryGift:
 	call UpdateTime
 	farcall DoMysteryGiftIfDayHasPassed
 	farcall DoMysteryGift
 	ret
 
 MainMenu_Options:
-	farcall OptionsMenu
+OptionsMenu:
+	farcall _OptionsMenu
 	ret
