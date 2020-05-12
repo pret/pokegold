@@ -11,11 +11,11 @@ hRTCMinutes:: db ; ff92
 hRTCSeconds:: db ; ff93
 	ds 2
 
-hHours::    db ; ff96
+hHours:: db ; ff96
 	ds 1
-hMinutes::  db ; ff98
+hMinutes:: db ; ff98
 	ds 1
-hSeconds::  db ; ff9a
+hSeconds:: db ; ff9a
 	ds 1
 
 	ds 1
@@ -24,8 +24,8 @@ hVBlankCounter:: db ; ff9d
 
 hFF9E:: db ; ff9e
 
-hROMBank::  db ; ff9f
-hVBlank::   db ; ffa0
+hROMBank:: db ; ff9f
+hVBlank:: db ; ffa0
 hMapEntryMethod:: db ; ffa1
 hMenuReturn:: db ; ffa2
 
@@ -44,9 +44,9 @@ hInMenu:: db ; ffac
 
 	ds 1
 
-hPrinter::          db ; ffae
+hPrinter:: db ; ffae
 hGraphicStartTile:: db ; ffaf
-hMoveMon::          db ; ffb0
+hMoveMon:: db ; ffb0
 
 UNION ; ffb1
 hMapObjectIndexBuffer:: db ; ffb1
@@ -112,9 +112,9 @@ hMGJoypadReleased:: db ; ffc6
 hMGPrevTIMA::       db ; ffc7
 ENDU ; ffc8
 
-hLCDCPointer::      db ; ffc8
-hLYOverrideStart::  db ; ffc9
-hLYOverrideEnd::    db ; ffca
+hLCDCPointer::     db ; ffc8
+hLYOverrideStart:: db ; ffc9
+hLYOverrideEnd::   db ; ffca
 
 	ds 1
 

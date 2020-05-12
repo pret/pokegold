@@ -125,11 +125,9 @@ ENDM
 
 sine_table: MACRO
 ; \1: amplitude
-
 x = 0
-	rept $20
-	; Round up.
-	dw (sin(x) + (sin(x) & $ff)) >> 8
+rept 32
+	dw (sin(x) + (sin(x) & $ff)) >> 8 ; round up
 x = x + (\1) * $40000
-	endr
+endr
 ENDM

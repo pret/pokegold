@@ -231,13 +231,13 @@ link_battle_record: MACRO
 ENDM
 
 trademon: MACRO
-\1Species::     db ; wc6d0 | wc702
-\1SpeciesName:: ds MON_NAME_LENGTH ; wc6d1 | wc703
-\1Nickname::    ds MON_NAME_LENGTH ; wc6dc | wc70e
-\1SenderName::  ds NAME_LENGTH ; wc6e7 | wc719
-\1OTName::      ds NAME_LENGTH ; wc6f2 | wc724
-\1DVs::         dw ; wc6fd | wc72f
-\1ID::          dw ; wc6ff | wc731
+\1Species::     db
+\1SpeciesName:: ds MON_NAME_LENGTH
+\1Nickname::    ds MON_NAME_LENGTH
+\1SenderName::  ds NAME_LENGTH
+\1OTName::      ds NAME_LENGTH
+\1DVs::         dw
+\1ID::          dw
 \1End::
 ENDM
 
@@ -335,55 +335,55 @@ sprite_oam_struct: MACRO
 ENDM
 
 sprite_anim_struct: MACRO
-\1Index:: ds 1          ; 0
-\1FramesetID:: ds 1     ; 1
-\1AnimSeqID:: ds 1      ; 2
-\1TileID:: ds 1         ; 3
-\1XCoord:: ds 1         ; 4
-\1YCoord:: ds 1         ; 5
-\1XOffset:: ds 1        ; 6
-\1YOffset:: ds 1        ; 7
-\1Duration:: ds 1       ; 8
-\1DurationOffset:: ds 1 ; 9
-\1FrameIndex:: ds 1     ; a
-\1Sprite0b:: ds 1
-\1Sprite0c:: ds 1
-\1Sprite0d:: ds 1
-\1Sprite0e:: ds 1
-\1Sprite0f:: ds 1
+\1Index::          db
+\1FramesetID::     db
+\1AnimSeqID::      db
+\1TileID::         db
+\1XCoord::         db
+\1YCoord::         db
+\1XOffset::        db
+\1YOffset::        db
+\1Duration::       db
+\1DurationOffset:: db
+\1FrameIndex::     db
+\1JumptableIndex:: db
+\1Field0c::        ds 1
+\1Field0d::        ds 1
+\1Field0e::        ds 1
+\1Field0f::        ds 1
 ENDM
 
 battle_anim_struct: MACRO
 ; Placeholder until we can figure out what it all means
-\1_Index::  ds 1
-\1_Anim01:: ds 1
-\1_Anim02:: ds 1
-\1_FramesetIndex:: ds 1
-\1_FunctionIndex:: ds 1
-\1_Anim05:: ds 1
-\1_TileID:: ds 1
-\1_XCoord:: ds 1
-\1_YCoord:: ds 1
-\1_XOffset:: ds 1
-\1_YOffset:: ds 1
-\1_Anim0b:: ds 1
-\1_Anim0c:: ds 1
-\1_Anim0d:: ds 1
-\1_AnonJumptableIndex:: ds 1
-\1_Anim0f:: ds 1
-\1_Anim10:: ds 1
-\1_Anim11:: ds 1
-\1_Anim12:: ds 1
-\1_Anim13:: ds 1
-\1_Anim14:: ds 1
-\1_Anim15:: ds 1
-\1_Anim16:: ds 1
-\1_Anim17:: ds 1
-endm
+\1Index::              db
+\1Field01::            ds 1
+\1Field02::            ds 1
+\1FramesetID::         db
+\1Function::           db
+\1Palette::            db
+\1TileID::             db
+\1XCoord::             db
+\1YCoord::             db
+\1XOffset::            db
+\1YOffset::            db
+\1Field0b::            ds 1
+\1Duration::           db
+\1Frame::              db
+\1AnonJumptableIndex:: db
+\1Field0f::            ds 1
+\1Field10::            ds 1
+\1Field11::            ds 1
+\1Field12::            ds 1
+\1Field13::            ds 1
+\1Field14::            ds 1
+\1Field15::            ds 1
+\1Field16::            ds 1
+\1Field17::            ds 1
+ENDM
 
 battle_bg_effect: MACRO
-\1_Function:: ds 1
-\1_01:: ds 1
-\1_02:: ds 1
-\1_03:: ds 1
-endm
+\1Function:: db
+\1Field01::  ds 1
+\1Field02::  ds 1
+\1Field03::  ds 1
+ENDM
