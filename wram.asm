@@ -1061,6 +1061,7 @@ NEXTU ; ce64
 ; miscellaneous
 wFrameCounter::
 wMomBankDigitCursorPosition::
+wNamingScreenLetterCase::
 wSlotsDelay::
 	db
 	ds 1
