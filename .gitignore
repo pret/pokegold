@@ -43,7 +43,16 @@ used_space.png
 # osx files
 .DS_STORE
 
-# compiled graphics (include for now)
+# compiled graphics (include for now ...
 #*.lz
 #*.2bpp
 #*.1bpp
+
+# ... except for specific 2bpp files generated from lz's)
+gfx/pokemon/**/*.2bpp
+gfx/trainers/*.2bpp
+gfx/battle/dude.2bpp
+gfx/player/chris_back.2bpp
+gfx/trade/game_boy.2bpp
+gfx/pokegear/pokegear_sprites.2bpp
+gfx/slots/slots_*.2bpp

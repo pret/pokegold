@@ -12,6 +12,6 @@ for asm in $toplevel; do
 	python tools/scan_includes.py "$asm"
 	echo
 done | tr ' ' '\n' | sort -u > includes.txt
-git ls-files | grep -E '\.(asm|pal|lz|[1,2]bpp|blk|bin|rle|tilemap)$' | sort -u > sources.txt
+git ls-files | grep -E '\.(asm|gbcpal|pal|lz|[1,2]bpp|blk|bin|rle|attrmap|tilemap|dimensions)$' | sort -u > sources.txt
 comm -23 sources.txt includes.txt
 rm sources.txt includes.txt
