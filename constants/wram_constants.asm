@@ -6,7 +6,7 @@ AUTO_INPUT EQU $ff
 	const DEBUG_BATTLE_F
 	const DEBUG_FIELD_F
 
-; wCurDexMode::
+; wCurDexMode:: ; c6d4
 	const_def
 	const DEXMODE_NEW
 	const DEXMODE_OLD
@@ -93,7 +93,7 @@ REMOVE_BOX        EQU 1
 DAY_CARE_WITHDRAW EQU 2
 DAY_CARE_DEPOSIT  EQU 3
 
-; wPlayerStepFlags::
+; wPlayerStepFlags:: ; ce85
 	const_def 4
 	const PLAYERSTEP_MIDAIR_F   ; 4
 	const PLAYERSTEP_CONTINUE_F ; 5
@@ -122,36 +122,43 @@ DARKNESS EQU 1 << DARKNESS_F
 
 ANYTIME EQU MORN | DAY | NITE
 
-; wPlayerSpriteSetupFlags::
+; wBattleAnimFlags:: ; ca0f
+	const_def
+	const BATTLEANIM_STOP_F          ; 0
+	const BATTLEANIM_IN_SUBROUTINE_F ; 1
+	const BATTLEANIM_IN_LOOP_F       ; 2
+	const BATTLEANIM_KEEPSPRITES_F   ; 3
+
+; wPlayerSpriteSetupFlags:: ; d182
 PLAYERSPRITESETUP_FACING_MASK       EQU %11
 PLAYERSPRITESETUP_FEMALE_TO_MALE_F  EQU 2
 PLAYERSPRITESETUP_CUSTOM_FACING_F   EQU 5
 PLAYERSPRITESETUP_SKIP_RELOAD_GFX_F EQU 6
 PLAYERSPRITESETUP_RESET_ACTION_F    EQU 7
 
-; wMapStatus::
+; wMapStatus:: ; d159
 	const_def
 	const MAPSTATUS_START  ; 0
 	const MAPSTATUS_ENTER  ; 1
 	const MAPSTATUS_HANDLE ; 2
 	const MAPSTATUS_DONE   ; 3
 
-; wMapEventStatus::
+; wMapEventStatus:: ; d15a
 	const_def
 	const MAPEVENTS_ON  ; 0
 	const MAPEVENTS_OFF ; 1
 
-; wScriptFlags::
+; wScriptFlags:: ; d15b
 SCRIPT_RUNNING EQU 2
 
-; wScriptMode::
+; wScriptMode:: ; d15e
 	const_def
 	const SCRIPT_OFF
 	const SCRIPT_READ
 	const SCRIPT_WAIT_MOVEMENT
 	const SCRIPT_WAIT
 
-; wSpawnAfterChampion::
+; wSpawnAfterChampion:: ; d1db
 SPAWN_LANCE EQU 1
 SPAWN_RED   EQU 2
 
@@ -190,7 +197,7 @@ NUM_OBJECTS   EQU 16
 	const STATUSFLAGS2_REACHED_GOLDENROD_F      ; 6
 	const STATUSFLAGS2_ROCKETS_IN_MAHOGANY_F    ; 7
 
-; wMomSavingMoney::
+; wMomSavingMoney:: ; d579
 MOM_SAVING_SOME_MONEY_F EQU 0
 MOM_SAVING_HALF_MONEY_F EQU 1
 MOM_SAVING_ALL_MONEY_F  EQU 2
@@ -210,7 +217,7 @@ MOM_SAVING_MONEY_MASK EQU (1 << MOM_SAVING_SOME_MONEY_F) | (1 << MOM_SAVING_HALF
 	const RISINGBADGE
 NUM_JOHTO_BADGES EQU const_value
 
-; wKantoBadges:: ds 1 ; d57d
+; wKantoBadges:: ; d57d
 	const_def
 	const BOULDERBADGE
 	const CASCADEBADGE
@@ -223,7 +230,7 @@ NUM_JOHTO_BADGES EQU const_value
 NUM_KANTO_BADGES EQU const_value
 NUM_BADGES EQU NUM_JOHTO_BADGES + NUM_KANTO_BADGES
 
-; wPokegearFlags::
+; wPokegearFlags:: ; d67c
 	const_def
 	const POKEGEAR_MAP_CARD_F   ; 0
 	const POKEGEAR_RADIO_CARD_F ; 1
@@ -243,13 +250,13 @@ PLAYER_SKATE     EQU 2
 PLAYER_SURF      EQU 4
 PLAYER_SURF_PIKA EQU 8
 
-; wBikeFlags::
+; wBikeFlags:: ; d93f
 	const_def
 	const BIKEFLAGS_STRENGTH_ACTIVE_F ; 0
 	const BIKEFLAGS_ALWAYS_ON_BIKE_F  ; 1
 	const BIKEFLAGS_DOWNHILL_F        ; 2
 
-; wDailyFlags1::
+; wDailyFlags1:: ; d968
 	const_def
 	const DAILYFLAGS1_KURT_MAKING_BALLS_F             ; 0
 	const DAILYFLAGS1_BUG_CONTEST_F                   ; 1
@@ -260,7 +267,7 @@ PLAYER_SURF_PIKA EQU 8
 	const DAILYFLAGS1_GOLDENROD_UNDERGROUND_BARGAIN_F ; 6
 	const DAILYFLAGS1_TRAINER_HOUSE_F                 ; 7
 
-; wDailyFlags2::
+; wDailyFlags2:: ; d969
 	const_def
 	const DAILYFLAGS2_MT_MOON_SQUARE_CLEFAIRY_F           ; 0
 	const DAILYFLAGS2_UNION_CAVE_LAPRAS_F                 ; 1
@@ -269,7 +276,7 @@ PLAYER_SURF_PIKA EQU 8
 	const DAILYFLAGS2_DAISYS_GROOMING_F                   ; 4
 	const DAILYFLAGS2_INDIGO_PLATEAU_RIVAL_FIGHT_F        ; 5
 
-; wLuckyNumberShowFlag::
+; wLuckyNumberShowFlag:: ; d9e7
 LUCKYNUMBERSHOW_GAME_OVER_F EQU 0
 
 ; wDayCareMan:: ; dc40

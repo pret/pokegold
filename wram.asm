@@ -417,7 +417,7 @@ wc6d0:: ds 1 ; c6d0
 wc6d1:: ds 1 ; c6d1
 wc6d2:: ds 1 ; c6d2
 wc6d3:: ds 1 ; c6d3
-wc6d4:: ds 1 ; c6d4
+wCurDexMode:: db ; c6d4
 wc6d5:: ds 1 ; c6d5
 wc6d6:: ds 1 ; c6d6
 wc6d7:: ds 1 ; c6d7
@@ -529,7 +529,7 @@ wLinkPlayerPartyMonNicks:: ds PARTY_LENGTH * MON_NAME_LENGTH
 wLinkPlayerDataEnd::
 ENDU
 
-NEXTU ; c800
+NEXTU ; c700
 ; mystery gift data
 wMysteryGiftPartyTemp:: ; ds PARTY_LENGTH * (1 + 1 + NUM_MOVES)
 wMysteryGiftStaging::
@@ -572,10 +572,6 @@ wMysteryGiftPlayerDataEnd::
 wc8f4:: ds 5
 wc8f9:: ds 7
 
-wc900:: db
-wc901:: db
-wc902:: db
-
 NEXTU ; c700
 ; LCD expects wLYOverrides to have an alignment of $100
 wLYOverrides:: ds SCREEN_HEIGHT_PX
@@ -583,29 +579,54 @@ wLYOverridesEnd:: ds 112
 
 wLYOverridesBackup:: ds SCREEN_HEIGHT_PX
 wLYOverridesBackupEnd:: ds 112
-	ds 191
 
-UNION ; c9bf
+UNION ; c900
+; mystery gift data
+wc900:: db
+wc901:: db
+wc902:: db
+
+NEXTU ; c900
 ; link
+	ds 191
 wc9bf:: ds 79
 wca0e:: ds 5
-wca13:: ds 50
-wca45:: ds 20
-wca59:: ds 20
-wca6d:: ds 1
-wca6e:: ds 22
+wca13:: ds 113
 wca84:: ds 100
 wcae8:: dw
-wLinkOTPartyMonTypes:: ds 2 * PARTY_LENGTH
+wLinkOTPartyMonTypes:: ds 2 * PARTY_LENGTH ; caea
 	ds 84
-wcb4a:: ds 71
-
-wcb91:: ds 13
+wcb4a:: ds 84
 wcb9e:: ds 130
 
-NEXTU ; c9bf
+NEXTU ; c900
 ; battle
-	ds 81
+wBattleAnimTileDict:: ds 10
+
+wActiveAnimObjects:: ; c90a
+wAnimObject01:: battle_anim_struct wAnimObject01
+wAnimObject02:: battle_anim_struct wAnimObject02
+wAnimObject03:: battle_anim_struct wAnimObject03
+wAnimObject04:: battle_anim_struct wAnimObject04
+wAnimObject05:: battle_anim_struct wAnimObject05
+wAnimObject06:: battle_anim_struct wAnimObject06
+wAnimObject07:: battle_anim_struct wAnimObject07
+wAnimObject08:: battle_anim_struct wAnimObject08
+wAnimObject09:: battle_anim_struct wAnimObject09
+wAnimObject10:: battle_anim_struct wAnimObject10
+wActiveAnimObjectsEnd::
+
+wActiveBGEffects:: ; c9fa
+wBGEffect1:: battle_bg_effect wBGEffect1
+wBGEffect2:: battle_bg_effect wBGEffect2
+wBGEffect3:: battle_bg_effect wBGEffect3
+wBGEffect4:: battle_bg_effect wBGEffect4
+wBGEffect5:: battle_bg_effect wBGEffect5
+wActiveBGEffectsEnd::
+
+wLastAnimObjectIndex:: db ; ca0e
+
+wBattleAnimFlags:: db ; ca0f
 wBattleAnimAddress:: dw ; ca10
 wBattleAnimDelay:: db ; ca12
 wBattleAnimParent:: dw ; ca13
@@ -616,7 +637,7 @@ wBattleAnimOAMPointerLo:: db ; ca18
 
 	ds 207
 
-wBattle:
+wBattle: ; cae8
 wEnemyMoveStruct:: move_struct wEnemyMoveStruct
 wPlayerMoveStruct:: move_struct wPlayerMoveStruct
 
@@ -948,6 +969,7 @@ wSomeoneIsRampaging:: db ; cc1c
 wPlayerJustGotFrozen:: db ; cc1d
 wEnemyJustGotFrozen:: db ; cc1e
 wBattleEnd::
+
 	ds 1
 
 ENDU

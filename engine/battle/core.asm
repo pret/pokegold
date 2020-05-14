@@ -7674,7 +7674,7 @@ GetBattleMonBackpic_DoAnim:
 	push af
 	xor a
 	ldh [hBattleTurn], a
-	ld a, BANK("Move Animations")
+	ld a, BANK(BattleAnimCommands)
 	rst FarCall
 	pop af
 	ldh [hBattleTurn], a

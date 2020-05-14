@@ -670,12 +670,14 @@ DummyPredef39::
 	ret
 PlayBattleAnim::
 	dr $cc0d7, $cc283
-ClearBattleAnims::
+BattleAnimCommands::
 	dr $cc283, $cc5f7
 BattleAnimCmd_RaiseSub::
 	dr $cc5f7, $cc67c
 BattleAnimCmd_MinimizeOpp::
-	dr $cc67c, $ce6aa
+	dr $cc67c, $cc836
+ClearBattleAnims::
+	dr $cc836, $ce6aa
 
 BattleAnim_Sine_e::
 	dr $ce6aa, $cfce3

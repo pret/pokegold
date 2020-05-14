@@ -224,7 +224,7 @@ GetBattleAnimByte::
 	ld [wBattleAnimByte], a
 	inc de
 
-	ld a, BANK("Move Animations")
+	ld a, BANK(BattleAnimCommands)
 	rst Bankswitch
 
 	ld [hl], d

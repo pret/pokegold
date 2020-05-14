@@ -1084,7 +1084,7 @@ IF DEF(_GOLD)
 	ld e, a
 	ld d, [hl]
 ELIF DEF(_SILVER)
-	ld de, $7c58
+	depixel 15, 11, 4, 0
 ENDC
 	ld a, SPRITE_ANIM_INDEX_GS_TITLE_TRAIL
 	call InitSpriteAnimStruct
