@@ -40,14 +40,11 @@ ROMX $04
 ROMX $05
 	"bank5"
 ROMX $06
-	org $4000
 	"bank6"
 ROMX $07
-	org $4000
 	"bank7"
 	"Extra Songs 1"
 ROMX $08
-	org $4000
 	"bank8"
 	"Egg Moves"
 ROMX $09
@@ -68,7 +65,6 @@ ROMX $10
 	"bank10"
 	"Evolutions and Attacks"
 ROMX $11
-	org $4000
 	"bank11"
 ROMX $12
 	org $4000
@@ -104,10 +100,8 @@ ROMX $20
 	"Trainer Pic Pointers"
 	"Pics 13"
 ROMX $21
-	org $4000
 	"bank21"
 ROMX $23
-	org $4000
 	"bank23"
 ROMX $24
 	"bank24"
@@ -115,7 +109,6 @@ ROMX $25
 	"Maps"
 	"Events"
 ROMX $26
-	org $4000
 	"bank26"
 ROMX $2a
 	"Map Blocks 1"
@@ -132,22 +125,18 @@ ROMX $31
 	org $7a40
 	"bank31_2"
 ROMX $32
-	org $4000
 	"bank32"
 ROMX $33
 	"Move Animations"
 	"Extra Songs 2"
 ROMX $36
-	org $4000
-	"bank36"
+	"Font Inversed"
 ROMX $37
 	"Map Blocks 3"
 	"bank37_2"
 ROMX $38
-	org $4000
 	"bank38"
 ROMX $39
-	org $4000
 	"bank39"
 ROMX $3a
 	"Audio"
@@ -161,13 +150,10 @@ ROMX $3c
 ROMX $3d
 	"Songs 4"
 ROMX $3e
-	org $4000
 	"bank3e"
 ROMX $3f
-	org $4000
 	"bank3f"
 ROMX $40
-	org $4000
 	"bank40"
 ROMX $41
 	"bank41"
@@ -256,7 +242,6 @@ ROMX $6d
 ROMX $6e
 	"Item Descriptions"
 ROMX $70
-	org $4000
 	"bank70"
 ROMX $7f
 	org $7df8

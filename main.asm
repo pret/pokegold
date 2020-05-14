@@ -476,6 +476,7 @@ INCBIN "gfx/pokemon/egg/front.2bpp.lz"
 
 SECTION "bank21", ROMX
 
+Printer_StartTransmission::
 	dr $84000, $842db
 _PrinterReceive::
 	dr $842db, $84560
@@ -648,6 +649,7 @@ GiveANickname_YesNo::
 
 SECTION "bank32", ROMX
 
+ExecuteBGEffects::
 	dr $c8000, $c80d6
 DummyPredef2F::
 	dr $c80d6, $c900a
@@ -679,9 +681,10 @@ BattleAnim_Sine_e::
 	dr $ce6aa, $cfce3
 
 
-SECTION "bank36", ROMX
+SECTION "Font Inversed", ROMX
 
-	dr $d8000, $d8400
+FontInversed:
+INCBIN "gfx/font/font_inversed.1bpp"
 
 
 SECTION "bank37_2", ROMX
@@ -716,7 +719,8 @@ TilesetForestColl::
 
 SECTION "bank38", ROMX
 
-	dr $e0000, $e0002
+	ret
+	ret
 _Diploma::
 	dr $e0002, $e081b
 RotateUnownFrontpic::
@@ -907,6 +911,7 @@ INCLUDE "data/text/battle.asm"
 
 SECTION "bank41", ROMX
 
+; Phone scripts and text
 UnusedPhoneScript::
 	dr $104000, $104004
 MomPhoneCalleeScript::
@@ -1057,6 +1062,7 @@ INCLUDE "data/items/descriptions.asm"
 
 SECTION "bank70", ROMX
 
+PrintPage1::
 	dr $1c0000, $1c0407
 TilesetKantoGFX::
 	dr $1c0407, $1c0a1f
@@ -1077,11 +1083,9 @@ _DudeAutoInput_DownA::
 TownMap_ConvertLineBreakCharacters::
 	dr $1c0e24, $1c0e43
 PokegearGFX::
-	dr $1c0e43, $1c168b
-
-IF DEF(_SILVER)
-	dr $1c168b, $1c168c
-ENDC
+	dr $1c0e43, $1c1127
+CreditsStrings::
+	dr $1c1127, $1c168c
 
 
 SECTION "Stadium Data", ROMX

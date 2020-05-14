@@ -107,6 +107,10 @@ def filepath_rules(filepath):
         elif name == 'balls':
             args['width'] = 32
 
+    elif 'gfx/font' in filedir:
+        if name == 'font_inversed':
+            args['width'] = 128
+
     elif 'gfx/icons' in filedir:
         if name == 'mail_big':
             args['width'] = 16

@@ -1237,7 +1237,11 @@ PartyMenuOBPals:
 INCLUDE "gfx/stats/party_menu_ob.pal"
 
 GSTitleBGPals:
-INCLUDE "gfx/title/title_bg.pal"
+IF DEF(_GOLD)
+INCLUDE "gfx/title/title_bg_gold.pal"
+ELIF DEF(_SILVER)
+INCLUDE "gfx/title/title_bg_silver.pal"
+ENDC
 
 GSTitleOBPals:
 INCLUDE "gfx/title/title_fg.pal"
@@ -1249,4 +1253,8 @@ BetaPokerPals:
 INCLUDE "gfx/beta_poker/beta_poker.pal"
 
 SlotMachinePals:
-INCLUDE "gfx/slots/slots.pal"
+IF DEF(_GOLD)
+INCLUDE "gfx/slots/slots_gold.pal"
+ELIF DEF(_SILVER)
+INCLUDE "gfx/slots/slots_silver.pal"
+ENDC
