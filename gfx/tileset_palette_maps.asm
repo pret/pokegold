@@ -10,4 +10,4 @@ endm
 INCLUDE "gfx/tilesets/palette_maps.asm"
 
 Unknown85d7:
-	ds 26, $06 ; unused
+	ds 26, $06

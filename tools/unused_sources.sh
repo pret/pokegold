@@ -1,5 +1,5 @@
 #!/bin/sh
-# Finds asm sources that aren't included in the build
+# Finds files that aren't included in the build
 
 # top-level sources listed in Makefile
 toplevel='audio.asm data/text/common.asm data/pokemon/dex_entries.asm wram.asm
@@ -12,6 +12,6 @@ for asm in $toplevel; do
 	python tools/scan_includes.py "$asm"
 	echo
 done | tr ' ' '\n' | sort -u > includes.txt
-git ls-files | grep '\.asm$' | sort -u > sources.txt
+git ls-files | grep -E '\.(asm|pal|lz|[1,2]bpp|blk|bin|rle|tilemap)$' | sort -u > sources.txt
 comm -23 sources.txt includes.txt
 rm sources.txt includes.txt

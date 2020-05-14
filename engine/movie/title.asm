@@ -14,7 +14,7 @@ TitleScreen:
 	ldh [hSCX], a
 
 	ld hl, vTiles0
-	ld bc, $2000
+	ld bc, $200 tiles
 	xor a
 	call ByteFill
 	farcall ClearSpriteAnims
@@ -40,27 +40,27 @@ TitleScreen:
 	ld a, BANK(TitleScreenGFX3)
 	call FarCopyBytes
 
-	call Function636e
+	call FillTitleScreenPals
 	call Function63b6
 	ld hl, wSpriteAnimDict
 	xor a
 	ld [hli], a
 	ld [hl], a
 	ld hl, rLCDC
-	set 2, [hl]
+	set rLCDC_SPRITE_SIZE, [hl]
 	call EnableLCD
 	xor a
 	ld hl, wJumptableIndex
-	ld [hli], a
-	ld [hli], a
-	ld [hli], a
-	ld [hl], a
+	ld [hli], a ; wJumptableIndex
+	ld [hli], a ; wIntroSceneFrameCounter
+	ld [hli], a ; wTitleScreenTimer
+	ld [hl], a  ; wTitleScreenTimer + 1
 	ld de, $6058
 	ld a, SPRITE_ANIM_INDEX_GS_INTRO_HO_OH
 	call InitSpriteAnimStruct
 	ld hl, wSpriteAnim1
 	ld de, wSpriteAnim10
-	ld bc, $a
+	ld bc, NUM_SPRITE_ANIM_STRUCTS
 	call CopyBytes
 	ld hl, wSpriteAnim1
 	ld [hl], $0
@@ -74,104 +74,107 @@ TitleScreen:
 	ldh [hLCDCPointer], a
 	ld b, SCGB_GS_TITLE_SCREEN
 	call GetSGBLayout
-	call Function6341
+	call LoadTitleScreenPals
 	ld de, MUSIC_TITLE
 	call PlayMusic
 	ret
 
-Function6341:
+LoadTitleScreenPals:
 	ldh a, [hCGB]
 	and a
-	jr nz, .asm_6365
+	jr nz, .cgb
 	ldh a, [hSGB]
 	and a
-	jr nz, .asm_6358
-	ld a, $d8
+	jr nz, .sgb
+	ld a, %11011000
 	ldh [rBGP], a
 IF DEF(_GOLD)
-	ld a, $ff
+	ld a, %11111111
 	ldh [rOBP0], a
-	ld a, $f8
-ELIF DEF(_SILVER)
-	ld a, $f0
-	ldh [rOBP0], a
-	ld a, $f0
-ENDC
+	ld a, %11111000
 	ldh [rOBP1], a
+ELIF DEF(_SILVER)
+	ld a, %11110000
+	ldh [rOBP0], a
+	ld a, %11110000
+	ldh [rOBP1], a
+ENDC
 	ret
 
-.asm_6358
-	ld a, $e4
+.sgb
+	ld a, %11100100
 	ldh [rBGP], a
 IF DEF(_GOLD)
-	ld a, $ff
+	ld a, %11111111
 	ldh [rOBP0], a
-	ld a, $e4
-ELIF DEF(_SILVER)
-	ld a, $f0
-	ldh [rOBP0], a
-	ld a, $e0
-ENDC
+	ld a, %11100100
 	ldh [rOBP1], a
+ELIF DEF(_SILVER)
+	ld a, %11110000
+	ldh [rOBP0], a
+	ld a, %11100000
+	ldh [rOBP1], a
+ENDC
 	ret
 
-.asm_6365
-	ld a, $e4
+.cgb
+	ld a, %11100100
 	call DmgToCgbBGPals
 IF DEF(_SILVER)
-	ld a, $e0
+	ld a, %11100000
 ENDC
 	call DmgToCgbObjPal0
 	ret
 
-Function636e:
+FillTitleScreenPals:
 	ldh a, [hCGB]
 	and a
 	ret z
-	ld a, $1
+	ld a, 1
 	ldh [rVBK], a
-	ld hl, $9800
-	ld bc, $240
+	hlbgcoord 0, 0
+	ld bc, 18 * BG_MAP_WIDTH
 	xor a
 	call ByteFill
-	ld hl, $9800
-	ld bc, $714
-	ld a, $1
-	call Function63a6
-	ld hl, $98c5
-	ld bc, $10a
-	ld a, $3
-	call Function63a6
-	ld hl, $9980
-	ld bc, $a0
-	ld a, $4
+	ld hl, vBGMap2
+	lb bc, 7, SCREEN_WIDTH
+	ld a, 1
+	call DrawTitleGraphic
+	hlbgcoord 5, 6, vBGMap2
+	lb bc, 1, 10
+	ld a, 3
+	call DrawTitleGraphic
+	hlbgcoord 0, 12, vBGMap2
+	ld bc, 5 * BG_MAP_WIDTH
+	ld a, 4
 	call ByteFill
-	ld a, $0
+	ld a, 0
 	ldh [rVBK], a
 	ret
 
-Function63a6:
+DrawTitleGraphic:
+.bgrows
 	push bc
 	push hl
-.asm_63a8
+.col
 	ld [hli], a
 	dec c
-	jr nz, .asm_63a8
+	jr nz, .col
 	pop hl
-	ld bc, $20
+	ld bc, BG_MAP_WIDTH
 	add hl, bc
 	pop bc
 	dec b
-	jr nz, Function63a6
+	jr nz, .bgrows
 	ret
 
 Function63b6:
-	ld hl, GSIntroTilemap ; $4616
-	ld de, $9800
+	ld hl, GSIntroTilemap
+	debgcoord 0, 0
 .asm_63bc
-	ld a, BANK(GSIntroTilemap) ; $26
+	ld a, BANK(GSIntroTilemap)
 	call GetFarByte
-	cp $ff
+	cp -1
 	jr z, .asm_63ca
 	inc hl
 	ld [de], a
@@ -182,8 +185,8 @@ Function63b6:
 	ldh a, [hCGB]
 	and a
 	ret nz
-	ld hl, $9960
-	ld bc, $20
-	ld a, $50
+	hlbgcoord 0, 11
+	ld bc, BG_MAP_WIDTH
+	ld a, "@"
 	call ByteFill
 	ret
