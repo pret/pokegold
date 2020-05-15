@@ -1,7 +1,8 @@
-TEXTBOX_PAL EQU 7
-
-ClearBox:: ; ebd (0:0ebd)
+ClearBox::
+; Fill a c*b box at hl with blank tiles.
 	ld a, " "
+	; fallthrough
+
 FillBoxWithByte::
 	ld de, SCREEN_WIDTH
 .row
@@ -18,24 +19,31 @@ FillBoxWithByte::
 	jr nz, .row
 	ret
 
-ClearTileMap::
-	ld hl, wTileMap
+ClearTilemap::
+; Fill wTilemap with blank tiles.
+
+	hlcoord 0, 0
 	ld a, " "
-	ld bc, SCREEN_WIDTH * SCREEN_HEIGHT
+	ld bc, wTilemapEnd - wTilemap
 	call ByteFill
-	ld a, [rLCDC]
-	bit 7, a
+
+	; Update the BG Map.
+	ldh a, [rLCDC]
+	bit rLCDC_ENABLE, a
 	ret z
 	jp WaitBGMap
 
-FillScreenWithTextboxPal::
-	ld a, TEXTBOX_PAL
-	hlcoord 0, 0, wAttrMap
+ClearScreen::
+	ld a, PAL_BG_TEXT
+	hlcoord 0, 0, wAttrmap
 	ld bc, SCREEN_WIDTH * SCREEN_HEIGHT
 	call ByteFill
-	jr ClearTileMap
+	jr ClearTilemap
 
-Textbox:: ; eef (0:0eef)
+Textbox::
+; Draw a text box at hl with room for b lines of c characters each.
+; Places a border around the textbox, then switches the palette to the
+; text black-and-white scheme.
 	push bc
 	push hl
 	call TextboxBorder
@@ -43,13 +51,14 @@ Textbox:: ; eef (0:0eef)
 	pop bc
 	jr TextboxPalette
 
-TextboxBorder:: ; ef8 (0:0ef8)
+TextboxBorder::
+	; Top
 	push hl
 	ld a, "┌"
 	ld [hli], a
-	inc a
-	call TextboxBorder_PlaceTiles
-	inc a
+	inc a ; "─"
+	call .PlaceChars
+	inc a ; "┐"
 	ld [hl], a
 	pop hl
 
@@ -61,7 +70,7 @@ TextboxBorder:: ; ef8 (0:0ef8)
 	ld a, "│"
 	ld [hli], a
 	ld a, " "
-	call TextboxBorder_PlaceTiles
+	call .PlaceChars
 	ld [hl], "│"
 	pop hl
 
@@ -74,11 +83,13 @@ TextboxBorder:: ; ef8 (0:0ef8)
 	ld a, "└"
 	ld [hli], a
 	ld a, "─"
-	call TextboxBorder_PlaceTiles
+	call .PlaceChars
 	ld [hl], "┘"
+
 	ret
 
-TextboxBorder_PlaceTiles:: ; f25 (0:0f25)
+.PlaceChars:
+; Place char a c times.
 	ld d, c
 .loop
 	ld [hli], a
@@ -86,14 +97,15 @@ TextboxBorder_PlaceTiles:: ; f25 (0:0f25)
 	jr nz, .loop
 	ret
 
-TextboxPalette
-	ld de, wAttrMap - wTileMap
+TextboxPalette::
+; Fill text box width c height b at hl with pal 7
+	ld de, wAttrmap - wTilemap
 	add hl, de
 	inc b
 	inc b
 	inc c
 	inc c
-	ld a, TEXTBOX_PAL
+	ld a, PAL_BG_TEXT
 .col
 	push bc
 	push hl
@@ -109,7 +121,8 @@ TextboxPalette
 	jr nz, .col
 	ret
 
-SpeechTextbox:: ; f45 (0:0f45)
+SpeechTextbox::
+; Standard textbox.
 	hlcoord TEXTBOX_X, TEXTBOX_Y
 	ld b, TEXTBOX_INNERH
 	ld c, TEXTBOX_INNERW
@@ -119,20 +132,22 @@ TestText::
 	text "ゲームフりーク!"
 	done
 
-RadioTerminator:: ; 1052
+RadioTerminator::
 	ld hl, .stop
 	ret
 
-.stop	db "@"
+.stop:
+	text_end
 
 PrintText::
 	call SetUpTextbox
+
 PrintTextboxText::
 	bccoord TEXTBOX_INNERX, TEXTBOX_INNERY
 	call PlaceHLTextAtBC
 	ret
 
-SetUpTextbox:: ; f68 (0:0f68)
+SetUpTextbox::
 	push hl
 	call SpeechTextbox
 	call UpdateSprites
@@ -140,10 +155,10 @@ SetUpTextbox:: ; f68 (0:0f68)
 	pop hl
 	ret
 
-PlaceString:: ; f74 (0:0f74)
+PlaceString::
 	push hl
 
-PlaceNextChar:: ; f75 (0:0f75)
+PlaceNextChar::
 	ld a, [de]
 	cp "@"
 	jr nz, CheckDict
@@ -151,32 +166,36 @@ PlaceNextChar:: ; f75 (0:0f75)
 	ld c, l
 	pop hl
 	ret
-
 	pop de
-NextChar:: ; f7f (0:0f7f)
+
+NextChar::
 	inc de
 	jp PlaceNextChar
 
-CheckDict
-dict: macro
-if \1 == 0
+CheckDict::
+dict: MACRO
+if \1 == "<NULL>"
 	and a
 else
 	cp \1
 endc
-	jp z, \2
-endm
 
-dict2: macro
-	cp \1
+if STRSUB("\2", 1, 1) == "\""
+; Replace a character with another one
 	jr nz, ._\@
 	ld a, \2
 ._\@:
-endm
+elif STRSUB("\2", 1, 1) == "."
+; Locals can use a short jump
+	jr z, \2
+else
+	jp z, \2
+endc
+ENDM
 
 	dict "<LINE>", LineChar
 	dict "<NEXT>", NextLineChar
-	dict $00, NullChar
+	dict "<NULL>", NullChar
 	dict $4c, Char4C
 	dict $4b, Char4B
 	dict "<PARA>", Paragraph
@@ -201,60 +220,62 @@ endm
 	dict "<PROMPT>", PromptText
 	dict "<PKMN>", PlacePKMN
 	dict "<POKE>", PlacePOKE
-	dict $25, NextChar
-	dict2 $1f, " "
+	dict "%", NextChar
+	dict "¯", " "
 	dict "<DEXEND>", PlaceDexEnd
 	dict "<TARGET>", PlaceMoveTargetsName
 	dict "<USER>", PlaceMoveUsersName
 	dict "<ENEMY>", PlaceEnemysName
-
 	cp $e4
 	jr z, .diacritic
 	cp $e5
 	jr nz, .not_diacritic
+
 .diacritic
 	ld b, a
 	call Diacritic
 	jp NextChar
 
 .not_diacritic
-	cp $60
+	cp FIRST_REGULAR_TEXT_CHAR
 	jr nc, .place
-	cp $40
-	jr nc, .handakuten
-	cp $20
-	jr nc, .daku1
-	add $80
-	jr .daku2
 
-.daku1
-	add $90
-.daku2
-	ld b, $e5
+	cp "パ"
+	jr nc, .handakuten
+
+.dakuten
+	cp FIRST_HIRAGANA_DAKUTEN_CHAR
+	jr nc, .hiragana_dakuten
+	add "カ" - "ガ"
+	jr .katakana_dakuten
+.hiragana_dakuten
+	add "か" - "が"
+.katakana_dakuten
+	ld b, "ﾞ" ; dakuten
 	call Diacritic
 	jr .place
 
 .handakuten
-	cp $44
-	jr nc, .han1
-	add $59
-	jr .han2
-
-.han1
-	add $86
-.han2
-	ld b, $e4
+	cp "ぱ"
+	jr nc, .hiragana_handakuten
+	add "ハ" - "パ"
+	jr .katakana_handakuten
+.hiragana_handakuten
+	add "は" - "ぱ"
+.katakana_handakuten
+	ld b, "ﾟ" ; handakuten
 	call Diacritic
+
 .place
 	ld [hli], a
-	call Function31e2
+	call PrintLetterDelay
 	jp NextChar
 
-print_name: macro
+print_name: MACRO
 	push de
 	ld de, \1
 	jp PlaceCommandCharacter
-endm
+ENDM
 
 PrintMomsName::   print_name wMomsName ; 1066 (0:1066)
 PrintPlayerName:: print_name wPlayerName ; 106d (0:106d)
@@ -276,12 +297,12 @@ Char36::       print_name Char36Text ; 10cf (0:10cf)
 Char37::       print_name Char37Text ; 10d6 (0:10d6)
 
 PlaceMoveTargetsName:: ; 10dd (0:10dd)
-	ld a, [hBattleTurn]
+	ldh a, [hBattleTurn]
 	xor $1
 	jr PlaceMonsName
 
 PlaceMoveUsersName:: ; 10e3 (0:10e3)
-	ld a, [hBattleTurn]
+	ldh a, [hBattleTurn]
 PlaceMonsName::
 	push de
 	and a
@@ -402,7 +423,7 @@ Paragraph:: ; 1187 (0:1187)
 	call LoadBlinkingCursor
 .asm_1192
 	call Text_WaitBGMap
-	call ButtonSound
+	call PromptButton
 	hlcoord TEXTBOX_INNERX, TEXTBOX_INNERY
 	lb bc, TEXTBOX_INNERH - 1, TEXTBOX_INNERW
 	call ClearBox
@@ -421,7 +442,7 @@ Char4B:: ; 11b0 (0:11b0)
 .link_battle
 	call Text_WaitBGMap
 	push de
-	call ButtonSound
+	call PromptButton
 	pop de
 	ld a, [wLinkMode]
 	or a
@@ -460,7 +481,7 @@ PromptText:: ; 11eb (0:11eb)
 
 .ok
 	call Text_WaitBGMap
-	call ButtonSound
+	call PromptButton
 	ld a, [wLinkMode]
 	cp $3
 	jr z, DoneText
@@ -502,13 +523,13 @@ TextScroll:: ; 121d (0:121d)
 
 Text_WaitBGMap:: ; 123a (0:123a)
 	push bc
-	ld a, [hOAMUpdate]
+	ldh a, [hOAMUpdate]
 	push af
 	ld a, $1
-	ld [hOAMUpdate], a
+	ldh [hOAMUpdate], a
 	call WaitBGMap
 	pop af
-	ld [hOAMUpdate], a
+	ldh [hOAMUpdate], a
 	pop bc
 	ret
 
@@ -535,7 +556,7 @@ UnloadBlinkingCursor:: ; 125b (0:125b)
 
 FarString::
 	ld b, a
-	ld a, [hROMBank]
+	ldh a, [hROMBank]
 	push af
 	ld a, b
 	rst Bankswitch
@@ -634,14 +655,14 @@ Text_TX_RAM:: ; 12d6 (0:12d6)
 	ret
 
 Text_TX_FAR:: ; 12e2 (0:12e2)
-	ld a, [hROMBank]
+	ldh a, [hROMBank]
 	push af
 	ld a, [hli]
 	ld e, a
 	ld a, [hli]
 	ld d, a
 	ld a, [hli]
-	ld [hROMBank], a
+	ldh [hROMBank], a
 	ld [MBC3RomBank], a
 	push hl
 	ld h, d
@@ -649,7 +670,7 @@ Text_TX_FAR:: ; 12e2 (0:12e2)
 	call DoTextUntilTerminator
 	pop hl
 	pop af
-	ld [hROMBank], a
+	ldh [hROMBank], a
 	ld [MBC3RomBank], a
 	ret
 
@@ -706,7 +727,7 @@ Text_WAIT_BUTTON:: ; 132c (0:132c)
 	push hl
 	call LoadBlinkingCursor
 	push bc
-	call ButtonSound
+	call PromptButton
 	pop bc
 	call UnloadBlinkingCursor
 	pop hl
@@ -751,7 +772,7 @@ Text_TX_EXIT:: ; 136d (0:136d)
 	push hl
 	push bc
 	call GetJoypad
-	ld a, [hJoyDown]
+	ldh a, [hJoyDown]
 	and A_BUTTON | B_BUTTON
 	jr nz, .skip
 	ld c, 30
@@ -823,7 +844,7 @@ Text_TX_DOTS:: ; 13c3 (0:13c3)
 	ld a, "…"
 	ld [hli], a
 	call GetJoypad
-	ld a, [hJoyDown]
+	ldh a, [hJoyDown]
 	and A_BUTTON | B_BUTTON
 	jr nz, .next
 	ld c, 10
@@ -840,7 +861,7 @@ Text_TX_DOTS:: ; 13c3 (0:13c3)
 Text_TX_0D:: ; 13e2 (0:13e2)
 	push hl
 	push bc
-	call ButtonSound
+	call PromptButton
 	pop bc
 	pop hl
 	ret

@@ -1,25 +1,43 @@
 ; InputType: ; c2c7
 AUTO_INPUT EQU $ff
 
-; MonType: ; cf5f
-PARTYMON   EQU 0
-OTPARTYMON EQU 1
-BOXMON     EQU 2
-TEMPMON   EQU 3
-WILDMON    EQU 4
+; wDebugFlags:: ; c2cc
+	const_def
+	const DEBUG_BATTLE_F
+	const DEBUG_FIELD_F
 
-; wOptions: ; cfcc
-FAST_TEXT      EQU 0
-MED_TEXT       EQU 1
-SLOW_TEXT      EQU 2
-NO_TEXT_SCROLL EQU 4
-; bits
-STEREO         EQU 5
-BATTLE_SHIFT   EQU 6
-BATTLE_SCENE   EQU 7
+; wMonType:: ; cf5f
+	const_def
+	const PARTYMON   ; 0
+	const OTPARTYMON ; 1
+	const BOXMON     ; 2
+	const TEMPMON    ; 3
+	const WILDMON    ; 4
 
-; Options2:
-MENU_ACCOUNT EQU 0
+; wGameTimerPause:: ; cfbc
+GAMETIMERPAUSE_TIMER_PAUSED_F EQU 0
+GAMETIMERPAUSE_MOBILE_7_F     EQU 7
+
+; wOptions:: ; cfcc
+TEXT_DELAY_MASK EQU %111
+	const_def 4
+	const NO_TEXT_SCROLL ; 4
+	const STEREO         ; 5
+	const BATTLE_SHIFT   ; 6
+	const BATTLE_SCENE   ; 7
+
+TEXT_DELAY_FAST EQU %001 ; 1
+TEXT_DELAY_MED  EQU %011 ; 3
+TEXT_DELAY_SLOW EQU %101 ; 5
+
+; wOptions2::
+	const_def
+	const MENU_ACCOUNT ; 0
+
+; wTextboxFlags::
+	const_def
+	const FAST_TEXT_DELAY_F ; 0
+	const NO_TEXT_DELAY_F   ; 1
 
 ; GBPrinter:
 PRINT_LIGHTEST EQU $00
@@ -29,11 +47,18 @@ PRINT_DARKER   EQU $60
 PRINT_DARKEST  EQU $7f
 
 ; WalkingDirection: ; d043
-STANDING EQU -1
-DOWN     EQU 0
-UP       EQU 1
-LEFT     EQU 2
-RIGHT    EQU 3
+	const_def -1
+	const STANDING ; -1
+	const DOWN     ; 0
+	const UP       ; 1
+	const LEFT     ; 2
+	const RIGHT    ; 3
+NUM_DIRECTIONS EQU const_value
+
+DOWN_MASK  EQU 1 << DOWN
+UP_MASK    EQU 1 << UP
+LEFT_MASK  EQU 1 << LEFT
+RIGHT_MASK EQU 1 << RIGHT
 
 ; FacingDirection: ; d044
 FACE_CURRENT EQU 0

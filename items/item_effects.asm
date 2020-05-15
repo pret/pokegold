@@ -1,8 +1,8 @@
-DoItemEffect_:: ; e7a6 (3:67a6)
+_DoItemEffect:: ; e7a6 (3:67a6)
 	ld a, [wd002]
 	ld [wd151], a
 	call GetItemName
-	call Function317b
+	call CopyName1
 	ld a, $1
 	ld [wFieldMoveSucceeded], a
 	ld a, [wd002]
@@ -261,7 +261,7 @@ UltraBall: ; e926
 	ld a, b
 	jp z, .skip_hp_calc
 	ld a, b
-	ld [hPrintNum4], a
+	ldh [hPrintNum4], a
 	ld hl, wEnemyMonHP
 	ld b, [hl]
 	inc hl
@@ -302,24 +302,27 @@ UltraBall: ; e926
 	ld c, $1
 .okay_hp_div
 	ld b, e
+
 	push bc
 	ld a, b
 	sub c
-	ld [hRemainder], a
+	ldh [hMultiplier], a
 	xor a
-	ld [hDividend], a
-	ld [hQuotient], a
-	ld [hStringCmpString2], a
+	ldh [hDividend + 0], a
+	ldh [hMultiplicand + 0], a
+	ldh [hMultiplicand + 1], a
 	call Multiply
 	pop bc
+
 	ld a, b
-	ld [hRemainder], a
+	ldh [hDivisor], a
 	ld b, $4
 	call Divide
-	ld a, [hPrintNum4]
+
+	ldh a, [hQuotient + 2]
 	and a
 	jr nz, .statuscheck
-	ld a, $1
+	ld a, 1
 .statuscheck
 ; This routine is buggy. It was intended that SLP and FRZ provide a higher
 ; catch rate than BRN/PSN/PAR, which in turn provide a higher catch rate than
@@ -391,7 +394,7 @@ UltraBall: ; e926
 	ld a, d
 	ld [wcf3f], a
 	xor a
-	ld [hBattleTurn], a
+	ldh [hBattleTurn], a
 	ld [wBuffer2], a
 	ld [wcf46], a
 	predef PlayBattleAnim
@@ -631,7 +634,7 @@ UltraBall: ; e926
 	and a
 	jr z, .toss
 	call ClearBGPalettes
-	call ClearTileMap
+	call ClearTilemap
 .toss
 	ld hl, wNumItems
 	inc a
@@ -1163,11 +1166,11 @@ RareCandy: ; ef68 (3:6f68)
 	pop de
 	ld a, $8
 	call GetPartyParamLocation
-	ld a, [hQuotient]
+	ldh a, [hQuotient]
 	ld [hli], a
-	ld a, [hPrintNum3]
+	ldh a, [hPrintNum3]
 	ld [hli], a
-	ld a, [hPrintNum4]
+	ldh a, [hPrintNum4]
 	ld [hl], a
 	ld a, $24
 	call GetPartyParamLocation
@@ -1475,10 +1478,10 @@ BitterBerry: ; f1c0
 	jr z, .asm_f1d9
 	res 7, [hl]
 	xor a
-	ld [hBattleTurn], a
+	ldh [hBattleTurn], a
 	call Functionf7d0
 	ld hl, ConfusedNoMoreText
-	call StdBattleTextBox
+	call StdBattleTextbox
 	ld a, $0
 .asm_f1d9
 	jp Functionf0f4
@@ -1617,7 +1620,7 @@ Functionf2a0: ; f2a0 (3:72a0)
 
 Functionf2cf: ; f2cf (3:72cf)
 	xor a
-	ld [hBGMapMode], a
+	ldh [hBGMapMode], a
 	hlcoord 0, 0
 	ld bc, SCREEN_HEIGHT * SCREEN_WIDTH
 	ld a, " "
@@ -1625,7 +1628,7 @@ Functionf2cf: ; f2cf (3:72cf)
 	ld a, [wPartyMenuActionText]
 	call Functionf2a0
 	ld a, $1
-	ld [hBGMapMode], a
+	ldh [hBGMapMode], a
 	ld c, 50
 	call DelayFrames
 	jp WaitPressAorB_BlinkCursor
@@ -1803,16 +1806,16 @@ GetOneFifthMaxHP: ; f3ce (3:73ce)
 	ld a, MON_MAXHP
 	call GetPartyParamLocation
 	ld a, [hli]
-	ld [hDividend], a
+	ldh [hDividend + 0], a
 	ld a, [hl]
-	ld [hPrintNum2], a
-	ld a, $5
-	ld [hMultiplier], a
-	ld b, $2
+	ldh [hDividend + 1], a
+	ld a, 5
+	ldh [hDivisor], a
+	ld b, 2
 	call Divide
-	ld a, [hStringCmpString2]
+	ldh a, [hQuotient + 1]
 	ld d, a
-	ld a, [hPrintNum4]
+	ldh a, [hQuotient + 2]
 	ld e, a
 	pop bc
 	ret
@@ -1917,7 +1920,7 @@ Functionf46f: ; f46f (3:746f)
 .asm_f496
 	push bc
 	ld hl, Text_MilkDrinkCantBeUsed
-	call MenuTextBoxBackup
+	call MenuTextboxBackup
 	pop bc
 	jr Functionf46f
 
@@ -2011,7 +2014,7 @@ XSpeed: ; f515
 	inc hl
 	ld b, [hl]
 	xor a
-	ld [hBattleTurn], a
+	ldh [hBattleTurn], a
 	ld [wcb45], a
 	ld [wcbeb], a
 	farcall CheckIfStatCanBeRaised
@@ -2113,7 +2116,7 @@ Text_PlayedThePokeFlute:
 
 CoinCase: ; f5e1 (3:75e1)
 	ld hl, Text_CoinCase
-	jp MenuTextBoxWaitButton
+	jp MenuTextboxWaitButton
 
 Text_CoinCase:
 	text_far Text_CoinCase_
@@ -2184,7 +2187,7 @@ PPUp: ; f606 (3:7606)
 	ld a, [hl]
 	ld [wd151], a
 	call GetMoveName
-	call Function317b
+	call CopyName1
 	pop hl
 	ld a, [wceed]
 	cp PP_UP
@@ -2528,7 +2531,7 @@ Functionf7e7: ; f7e7 (3:77e7)
 	ld [wcf3f], a
 	xor a
 	ld [wcb67], a
-	ld [hBattleTurn], a
+	ldh [hBattleTurn], a
 	ld [wcf46], a
 	predef PlayBattleAnim
 	ld hl, Text_BlockedTheBall
@@ -2669,16 +2672,18 @@ Functionf893: ; f893 (3:7893)
 
 Functionf8c8: ; f8c8 (3:78c8)
 	push bc
+	; Divide the base PP by 5.
 	ld a, [de]
-	ld [hPrintNum4], a
+	ldh [hDividend + 3], a
 	xor a
-	ld [hPastLeadingZeroes], a
-	ld [hQuotient], a
-	ld [hPrintNum3], a
-	ld a, $5
-	ld [hRemainder], a
-	ld b, $4
+	ldh [hDividend], a
+	ldh [hDividend + 1], a
+	ldh [hDividend + 2], a
+	ld a, 5
+	ldh [hDivisor], a
+	ld b, 4
 	call Divide
+	; Get the number of PP, which are bits 6 and 7 of the PP value stored in RAM.
 	ld a, [hl]
 	ld b, a
 	swap a
@@ -2686,10 +2691,11 @@ Functionf8c8: ; f8c8 (3:78c8)
 	srl a
 	srl a
 	ld c, a
+	; If this value is 0, we are done
 	and a
 	jr z, .asm_f8fd
 .asm_f8ea
-	ld a, [hPrintNum4]
+	ldh a, [hPrintNum4]
 	cp $8
 	jr c, .asm_f8f2
 	ld a, $7

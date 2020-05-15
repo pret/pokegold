@@ -1,6 +1,6 @@
 ; Audio interfaces.
 
-MapSetup_Sound_Off::
+InitSound::
 	push hl
 	push de
 	push bc
@@ -439,7 +439,7 @@ GetMapMusic_MaybeSpecial::
 	call GetMapMusic
 	ret
 
-Unreferenced_Function3d9f::
+Unreferenced_Function3f7d::
 ; Places a BCD number at the
 ; upper center of the screen.
 	ld a, 4 * TILE_WIDTH

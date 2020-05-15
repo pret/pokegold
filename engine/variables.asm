@@ -25,7 +25,7 @@ GetVarAction_::
 	jr .loadstringbuffer2
 
 .call
-	call jp_de
+	call _de_
 	ret
 
 .loadstringbuffer2

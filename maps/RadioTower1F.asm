@@ -146,7 +146,7 @@ RadioTower1FRadioCardWomanScript:
 	waitsfx
 	writetext UnknownText_0x5d37b
 	buttonsound
-	stringtotext .RadioCardText, MEM_BUFFER_1
+	stringtotext .RadioCardText, STRING_BUFFER_4
 	scall .ReceiveItem
 	writetext UnknownText_0x5d3c0
 	buttonsound

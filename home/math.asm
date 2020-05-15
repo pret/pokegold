@@ -1,71 +1,58 @@
-SkipNames::
-	ld bc, $b
-	and a
-	ret z
-.asm_319e
-	add hl, bc
-	dec a
-	jr nz, .asm_319e
-	ret
-
-AddNTimes:: ; 31a3 (0:31a3)
-	and a
-	ret z
-.asm_31a5
-	add hl, bc
-	dec a
-	jr nz, .asm_31a5
-	ret
-
 SimpleMultiply::
+; Return a * c.
 	and a
 	ret z
+
 	push bc
 	ld b, a
 	xor a
-.asm_31af
+.loop
 	add c
 	dec b
-	jr nz, .asm_31af
+	jr nz, .loop
 	pop bc
 	ret
-
-SimpleDivide:: ; 31b5 (0:31b5)
-	ld b, $0
-.asm_31b7
+	
+SimpleDivide::
+; Divide a by c. Return quotient b and remainder a.
+	ld b, 0
+.loop
 	inc b
 	sub c
-	jr nc, .asm_31b7
+	jr nc, .loop
 	dec b
 	add c
 	ret
 
 Multiply::
+; Multiply hMultiplicand (3 bytes) by hMultiplier. Result in hProduct.
+; All values are big endian.
 	push hl
 	push bc
 
-	callfar Multiply_ ; 1:67bd
+	callfar _Multiply
 
 	pop bc
 	pop hl
 	ret
 
 Divide::
+; Divide hDividend length b (max 4 bytes) by hDivisor. Result in hQuotient.
+; All values are big endian.
 	push hl
 	push de
 	push bc
-
-	homecall Divide_ ; 1:681d
-
+	homecall _Divide
 	pop bc
 	pop de
 	pop hl
 	ret
 
 SubtractSigned::
+; Return a - b, sign in carry.
 	sub b
 	ret nc
 	cpl
-	add $1
+	add 1
 	scf
 	ret

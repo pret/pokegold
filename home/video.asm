@@ -1,5 +1,12 @@
-UpdateBGMapBuffer:: ; 1458 (0:1458)
-	ld a, [hBGMapUpdate]
+UpdateBGMapBuffer::
+; Copy [hBGMapTileCount] 16x8 tiles from wBGMapBuffer
+; to bg map addresses in wBGMapBufferPtrs.
+
+; [hBGMapTileCount] must be even since this is done in pairs.
+
+; Return carry on success.
+
+	ldh a, [hBGMapUpdate]
 	and a
 	ret z
 
@@ -8,22 +15,34 @@ UpdateBGMapBuffer:: ; 1458 (0:1458)
 	ld hl, wBGMapBufferPtrs
 	ld sp, hl
 
+; We can now pop the addresses of affected spots on the BG Map
+
 	ld hl, wBGMapPalBuffer
 	ld de, wBGMapBuffer
 
 .next
+; Copy a pair of 16x8 blocks (one 16x16 block)
+
+
 rept 2
+; Get our BG Map address
 	pop bc
-	ld a, $1
-	ld [rVBK], a
+
+; Palettes
+	ld a, 1
+	ldh [rVBK], a
+
 	ld a, [hli]
 	ld [bc], a
 	inc c
 	ld a, [hli]
 	ld [bc], a
 	dec c
-	ld a, $0
-	ld [rVBK], a
+
+; Tiles
+	ld a, 0
+	ldh [rVBK], a
+
 	ld a, [de]
 	inc de
 	ld [bc], a
@@ -33,111 +52,127 @@ rept 2
 	ld [bc], a
 endr
 
-	ld a, [hFFDE]
+; We've done 2 16x8 blocks
+	ldh a, [hFFDE]
 	dec a
 	dec a
-	ld [hFFDE], a
+	ldh [hFFDE], a
 
 	jr nz, .next
 
-	ld a, [hSPBuffer]
+	ldh a, [hSPBuffer]
 	ld l, a
-	ld a, [hSPBuffer + 1]
+	ldh a, [hSPBuffer + 1]
 	ld h, a
 	ld sp, hl
 
 	xor a
-	ld [hBGMapUpdate], a
+	ldh [hBGMapUpdate], a
 	scf
 	ret
 
 WaitTop::
-	ld a, [hBGMapMode]
+; Wait until the top third of the BG Map is being updated.
+
+	ldh a, [hBGMapMode]
 	and a
 	ret z
-	ld a, [hBGMapThird]
+
+	ldh a, [hBGMapThird]
 	and a
 	jr z, .done
+
 	call DelayFrame
 	jr WaitTop
 
 .done
 	xor a
-	ld [hBGMapMode], a
+	ldh [hBGMapMode], a
 	ret
 
-UpdateBGMap:: ; 14bb (0:14bb)
-	ld a, [hBGMapMode]
+UpdateBGMap::
+; Update the BG Map, in thirds, from wTilemap and wAttrmap.
+
+	ldh a, [hBGMapMode]
 	and a
 	ret z
 
-	dec a
+; BG Map 0
+	dec a ; 1
 	jr z, .Tiles
-	dec a
+	dec a ; 2
 	jr z, .Attr
 
+; BG Map 1
 	dec a
 
-	ld a, [hBGMapAddress]
+	ldh a, [hBGMapAddress]
 	ld l, a
-	ld a, [hBGMapAddress + 1]
+	ldh a, [hBGMapAddress + 1]
 	ld h, a
 	push hl
 
-	xor a
-	ld [hBGMapAddress], a
-	ld a, $9c
-	ld [hBGMapAddress + 1], a
+	xor a ; LOW(vBGMap1)
+	ldh [hBGMapAddress], a
+	ld a, HIGH(vBGMap1)
+	ldh [hBGMapAddress + 1], a
 
-	ld a, [hBGMapMode]
+	ldh a, [hBGMapMode]
 	push af
-	cp $3
+	cp 3
 	call z, .Tiles
 	pop af
-	cp $4
+	cp 4
 	call z, .Attr
 
 	pop hl
 	ld a, l
-	ld [hBGMapAddress], a
+	ldh [hBGMapAddress], a
 	ld a, h
-	ld [hBGMapAddress + 1], a
+	ldh [hBGMapAddress + 1], a
 	ret
 
-.Attr
-	ld a, $1
-	ld [rVBK], a
+.Attr:
+	ld a, 1
+	ldh [rVBK], a
 
-	hlcoord 0, 0, wAttrMap
+	hlcoord 0, 0, wAttrmap
 	call .update
-	ld a, $0
-	ld [rVBK], a
+
+	ld a, 0
+	ldh [rVBK], a
 	ret
 
-.Tiles
+.Tiles:
 	hlcoord 0, 0
+
 .update
 	ld [hSPBuffer], sp
 
-	ld a, [hBGMapThird]
-	and a
+; Which third?
+	ldh a, [hBGMapThird]
+	and a ; 0
 	jr z, .top
-	dec a
+	dec a ; 1
 	jr z, .middle
+	; 2
 
 THIRD_HEIGHT EQU SCREEN_HEIGHT / 3
+
+.bottom
 	ld de, 2 * THIRD_HEIGHT * SCREEN_WIDTH
 	add hl, de
 	ld sp, hl
 
-	ld a, [hBGMapAddress + 1]
+	ldh a, [hBGMapAddress + 1]
 	ld h, a
-	ld a, [hBGMapAddress]
-
+	ldh a, [hBGMapAddress]
 	ld l, a
+
 	ld de, 2 * THIRD_HEIGHT * BG_MAP_WIDTH
 	add hl, de
 
+; Next time: top third
 	xor a
 	jr .start
 
@@ -146,35 +181,41 @@ THIRD_HEIGHT EQU SCREEN_HEIGHT / 3
 	add hl, de
 	ld sp, hl
 
-	ld a, [hBGMapAddress + 1]
+	ldh a, [hBGMapAddress + 1]
 	ld h, a
-	ld a, [hBGMapAddress]
+	ldh a, [hBGMapAddress]
 	ld l, a
 
 	ld de, THIRD_HEIGHT * BG_MAP_WIDTH
 	add hl, de
 
-	ld a, $2
+; Next time: bottom third
+	ld a, 2
 	jr .start
 
 .top
 	ld sp, hl
 
-	ld a, [hBGMapAddress + 1]
+	ldh a, [hBGMapAddress + 1]
 	ld h, a
-	ld a, [hBGMapAddress]
+	ldh a, [hBGMapAddress]
 	ld l, a
 
-	ld a, $1
+; Next time: middle third
+	ld a, 1
 
 .start
-	ld [hBGMapThird], a
+; Which third to update next time
+	ldh [hBGMapThird], a
+
+; Rows of tiles in a third
 	ld a, SCREEN_HEIGHT / 3
 
-; Discrepancy between TileMap and BGMap
+; Discrepancy between wTilemap and BGMap
 	ld bc, BG_MAP_WIDTH - (SCREEN_WIDTH - 1)
-	
+
 .row
+; Copy a row of 20 tiles
 rept SCREEN_WIDTH / 2 - 1
 	pop de
 	ld [hl], e
@@ -191,31 +232,38 @@ endr
 	dec a
 	jr nz, .row
 
-	ld a, [hSPBuffer]
+	ldh a, [hSPBuffer]
 	ld l, a
-	ld a, [hSPBuffer + 1]
+	ldh a, [hSPBuffer + 1]
 	ld h, a
 	ld sp, hl
 	ret
 
-Serve1bppRequest:: ; 1579 (0:1579)
+Serve1bppRequest::
+; Only call during the first fifth of VBlank
+
 	ld a, [wRequested1bpp]
 	and a
 	ret z
 
+; Copy [wRequested1bpp] 1bpp tiles from [wRequested1bppSource] to [wRequested1bppDest]
+
 	ld [hSPBuffer], sp
 
+; Source
 	ld hl, wRequested1bppSource
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
 	ld sp, hl
 
+; Destination
 	ld hl, wRequested1bppDest
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
 
+; # tiles to copy
 	ld a, [wRequested1bpp]
 	ld b, a
 
@@ -223,6 +271,7 @@ Serve1bppRequest:: ; 1579 (0:1579)
 	ld [wRequested1bpp], a
 
 .next
+
 rept 3
 	pop de
 	ld [hl], e
@@ -254,32 +303,46 @@ endr
 
 	ld [wRequested1bppSource], sp
 
-	ld a, [hSPBuffer]
+	ldh a, [hSPBuffer]
 	ld l, a
-	ld a, [hSPBuffer + 1]
+	ldh a, [hSPBuffer + 1]
 	ld h, a
 	ld sp, hl
 	ret
 
-Serve2bppRequest:: ; 15d0 (0:15d0)
+Serve2bppRequest::
+; Only call during the first fifth of VBlank
+
 	ld a, [wRequested2bpp]
 	and a
 	ret z
+
+; Copy [wRequested2bpp] 2bpp tiles from [wRequested2bppSource] to [wRequested2bppDest]
+
 	ld [hSPBuffer], sp
+
+; Source
 	ld hl, wRequested2bppSource
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
 	ld sp, hl
+
+; Destination
 	ld hl, wRequested2bppDest
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
+
+; # tiles to copy
 	ld a, [wRequested2bpp]
 	ld b, a
+
 	xor a
 	ld [wRequested2bpp], a
+
 .next
+
 rept 7
 	pop de
 	ld [hl], e
@@ -303,41 +366,50 @@ endr
 
 	ld [wRequested2bppSource], sp
 
-	ld a, [hSPBuffer]
+	ldh a, [hSPBuffer]
 	ld l, a
-	ld a, [hSPBuffer + 1]
+	ldh a, [hSPBuffer + 1]
 	ld h, a
 	ld sp, hl
 	ret
 
-AnimateTileset:: ; 162b (0:162b)
-	ld a, [hMapAnims]
+AnimateTileset::
+; Only call during the first fifth of VBlank
+
+	ldh a, [hMapAnims]
 	and a
 	ret z
-	ld a, [hROMBank]
+
+	ldh a, [hROMBank]
 	push af
 	ld a, $3f
 	rst Bankswitch
-	call $4003
+
+	call $4003 ; ???
+
 	pop af
 	rst Bankswitch
 	ret
+
 	ret
+
 	ld hl, rLCDC
 	set 1, [hl]
 	ret
 
-Function1642:: ; 1642 (0:1642)
+Function1642::
 	nop
-	ld a, [hFF9E]
+	ldh a, [hVBlankCounter + 1]
 	and a
 	ret z
+
 	dec a
 	jr z, .one
 	dec a
 	jr z, .two
-	ld a, $2
-	ld [hFF9E], a
+
+	ld a, 2
+	ldh [hVBlankCounter + 1], a
 	ld hl, hBGMapAddress
 	ld a, [hli]
 	ld h, [hl]
@@ -356,15 +428,16 @@ endr
 	ret
 
 .two
-	ld a, $1
+	ld a, 1
 	ld de, $240
 	jr .go
 
 .one
 	xor a
 	ld de, $320
+
 .go
-	ld [hFF9E], a
+	ldh [hVBlankCounter + 1], a
 	ld hl, hBGMapAddress
 	ld a, [hli]
 	ld h, [hl]

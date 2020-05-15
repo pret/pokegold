@@ -1,4 +1,3 @@
-INCLUDE "contents.asm"
 INCLUDE "constants.asm"
 
 SECTION "Egg Moves", ROMX, BANK[EGG_MOVES]

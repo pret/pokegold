@@ -12,7 +12,7 @@ CheckFacingTileForStdScript::
 	ld a, [hli]
 	ld [wcf2b], a
 	ld a, [hli]
-	ld [wTempTrainerHeader], a
+	ld [wTempTrainer], a
 	ld a, BANK(Script_JumpStdFromRAM)
 	ld hl, Script_JumpStdFromRAM
 	call CallScript

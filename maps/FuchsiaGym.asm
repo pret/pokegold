@@ -214,7 +214,7 @@ FuchsiaGymStatue:
 	iftrue .Beaten
 	jumpstd gymstatue1
 .Beaten:
-	trainertotext JANINE, JANINE1, MEM_BUFFER_1
+	trainertotext JANINE, JANINE1, STRING_BUFFER_4
 	jumpstd gymstatue2
 
 Movement_NinjaSpin:

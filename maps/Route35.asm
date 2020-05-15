@@ -51,7 +51,7 @@ TrainerJugglerIrwin:
 	askforphonenumber PHONE_JUGGLER_IRWIN
 	ifequal PHONE_CONTACTS_FULL, Route35PhoneFullM
 	ifequal PHONE_CONTACT_REFUSED, Route35NumberDeclinedM
-	trainertotext JUGGLER, IRWIN1, MEM_BUFFER_0
+	trainertotext JUGGLER, IRWIN1, STRING_BUFFER_3
 	scall Route35RegisteredNumberM
 	jump Route35NumberAcceptedM
 
@@ -178,7 +178,7 @@ TrainerBugCatcherArnie:
 	askforphonenumber PHONE_BUG_CATCHER_ARNIE
 	ifequal PHONE_CONTACTS_FULL, Route35PhoneFullM
 	ifequal PHONE_CONTACT_REFUSED, Route35NumberDeclinedM
-	trainertotext BUG_CATCHER, ARNIE1, MEM_BUFFER_0
+	trainertotext BUG_CATCHER, ARNIE1, STRING_BUFFER_3
 	scall Route35RegisteredNumberM
 	jump Route35NumberAcceptedM
 

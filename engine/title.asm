@@ -12,9 +12,9 @@ StartTitleScreen:
 	call ClearBGPalettes
 	ld hl, rLCDC
 	res 2, [hl]
-	call ClearTileMap
+	call ClearTilemap
 	xor a
-	ld [hLCDCPointer], a
+	ldh [hLCDCPointer], a
 	ld b, $8
 	call GetSGBLayout
 	call UpdateTimePals
@@ -46,14 +46,14 @@ InitTitleScreen: ; 6291 (1:6291)
 	ld [wTimeOfDayPal], a
 	ld de, MUSIC_NONE
 	call PlayMusic
-	call ClearTileMap
+	call ClearTilemap
 	call DisableLCD
 	call ClearSprites
 	xor a
-	ld [hBGMapMode], a
-	ld [hMapAnims], a
-	ld [hSCY], a
-	ld [hSCX], a
+	ldh [hBGMapMode], a
+	ldh [hMapAnims], a
+	ldh [hSCY], a
+	ldh [hSCX], a
 	ld hl, $8000
 	ld bc, $2000
 	xor a
@@ -98,7 +98,7 @@ InitTitleScreen: ; 6291 (1:6291)
 	ld [hl], a
 	ld de, $6058
 	ld a, $2c ; HO-OH
-	call InitAnimatedObjectStruct
+	call InitSpriteAnimStruct
 	ld hl, wAnimatedObjectStruct1
 	ld de, wAnimatedObjectStruct10
 	ld bc, $a
@@ -110,7 +110,7 @@ InitTitleScreen: ; 6291 (1:6291)
 	xor a
 	call ByteFill
 	ld a, $43
-	ld [hLCDCPointer], a
+	ldh [hLCDCPointer], a
 	ld b, $c
 	call GetSGBLayout
 	call Function6341
@@ -119,41 +119,41 @@ InitTitleScreen: ; 6291 (1:6291)
 	ret
 
 Function6341: ; 6341 (1:6341)
-	ld a, [hCGB]
+	ldh a, [hCGB]
 	and a
 	jr nz, .asm_6365
-	ld a, [hSGB]
+	ldh a, [hSGB]
 	and a
 	jr nz, .asm_6358
 	ld a, $d8
-	ld [rBGP], a
+	ldh [rBGP], a
 IF DEF(GOLD)
 	ld a, $ff
-	ld [rOBP0], a
+	ldh [rOBP0], a
 	ld a, $f8
 ENDC
 IF DEF(SILVER)
 	ld a, $f0
-	ld [rOBP0], a
+	ldh [rOBP0], a
 	ld a, $f0
 ENDC
-	ld [rOBP1], a
+	ldh [rOBP1], a
 	ret
 
 .asm_6358
 	ld a, $e4
-	ld [rBGP], a
+	ldh [rBGP], a
 IF DEF(GOLD)
 	ld a, $ff
-	ld [rOBP0], a
+	ldh [rOBP0], a
 	ld a, $e4
 ENDC
 IF DEF(SILVER)
 	ld a, $f0
-	ld [rOBP0], a
+	ldh [rOBP0], a
 	ld a, $e0
 ENDC
-	ld [rOBP1], a
+	ldh [rOBP1], a
 	ret
 
 .asm_6365
@@ -166,11 +166,11 @@ ENDC
 	ret
 
 Function636e: ; 636e (1:636e)
-	ld a, [hCGB]
+	ldh a, [hCGB]
 	and a
 	ret z
 	ld a, $1
-	ld [rVBK], a
+	ldh [rVBK], a
 	ld hl, $9800
 	ld bc, $240
 	xor a
@@ -188,7 +188,7 @@ Function636e: ; 636e (1:636e)
 	ld a, $4
 	call ByteFill
 	ld a, $0
-	ld [rVBK], a
+	ldh [rVBK], a
 	ret
 
 Function63a6: ; 63a6 (1:63a6)
@@ -220,7 +220,7 @@ Function63b6: ; 63b6 (1:63b6)
 	jr .asm_63bc
 
 .asm_63ca
-	ld a, [hCGB]
+	ldh a, [hCGB]
 	and a
 	ret nz
 	ld hl, $9960
@@ -236,10 +236,10 @@ TitleScreenFrame: ; 63da (1:63da)
 	jr nz, .asm_63fc
 	call Function640f
 	ld a, $1
-	ld [hOAMUpdate], a
+	ldh [hOAMUpdate], a
 	farcall AnimatedObjects_PlayFrame
 	xor a
-	ld [hOAMUpdate], a
+	ldh [hOAMUpdate], a
 	call Function64b1
 	call DelayFrame
 	and a
@@ -251,7 +251,7 @@ TitleScreenFrame: ; 63da (1:63da)
 
 Function63fe: ; 63fe (1:63fe)
 IF DEF(GOLD)
-	ld a, [hVBlankCounter]
+	ldh a, [hVBlankCounter]
 	and $7
 	ret nz
 ENDC
@@ -409,7 +409,7 @@ IF DEF(SILVER)
 	ld de, $7c58
 ENDC
 	ld a, $f
-	call InitAnimatedObjectStruct
+	call InitSpriteAnimStruct
 	ret
 
 IF DEF(GOLD)
@@ -423,7 +423,7 @@ IF DEF(GOLD)
 ENDC
 
 Copyright:
-	call ClearTileMap
+	call ClearTilemap
 	call LoadFontsExtra
 	ld de, CopyrightGFX
 	ld hl, vTiles2 tile $60

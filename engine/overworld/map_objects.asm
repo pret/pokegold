@@ -415,7 +415,7 @@ Function5429: ; 5429 (1:5429)
 	ld [hl], $2
 	call Function54c8
 	ld hl, wCenteredObject
-	ld a, [hMapObjectIndexBuffer]
+	ldh a, [hMapObjectIndexBuffer]
 	cp [hl]
 	jr z, .asm_5450
 	ld hl, $9
@@ -435,7 +435,7 @@ Function5457: ; 5457 (1:5457)
 	ret z
 	ld a, [wObjectFollow_Leader]
 	ld d, a
-	ld a, [hMapObjectIndexBuffer]
+	ldh a, [hMapObjectIndexBuffer]
 	cp d
 	ret nz
 	ld a, e
@@ -565,7 +565,7 @@ Function5504: ; 5504 (1:5504)
 
 Function5518: ; 5518 (1:5518)
 	push bc
-	ld a, [hMapObjectIndexBuffer]
+	ldh a, [hMapObjectIndexBuffer]
 	ld c, a
 	call Function5521
 	pop bc
@@ -622,7 +622,7 @@ Function5558: ; 5558 (1:5558)
 	ld [hli], a
 	ld a, [de]
 	ld [hli], a
-	ld a, [hMapObjectIndexBuffer]
+	ldh a, [hMapObjectIndexBuffer]
 	ld [hli], a
 	push hl
 	ld hl, $10
@@ -646,7 +646,7 @@ Function557f:: ; 557f (1:557f)
 	ld bc, wPlayerStruct
 	xor a
 .asm_5589
-	ld [hConnectionStripLength], a
+	ldh [hConnectionStripLength], a
 	call DoesObjectHaveASprite
 	jr z, .asm_5593
 	call Function55ef
@@ -655,7 +655,7 @@ Function557f:: ; 557f (1:557f)
 	add hl, bc
 	ld b, h
 	ld c, l
-	ld a, [hMapObjectIndexBuffer]
+	ldh a, [hMapObjectIndexBuffer]
 	inc a
 	cp $d
 	jr nz, .asm_5589
@@ -668,12 +668,12 @@ Function55a1
 	ld a, [wd180]
 	bit 7, a
 	jr z, .asm_55b8
-	ld a, [hLastTalked]
+	ldh a, [hLastTalked]
 	and a
 	jr z, .asm_55b8
 	call Function55bc
 .asm_55b8
-	call UpdateSprites_
+	call _UpdateSprites
 	ret
 
 Function55bc: ; 55bc (1:55bc)
@@ -697,13 +697,13 @@ Function55d8: ; 55d8 (1:55d8)
 	xor a
 	ld bc, wPlayerStruct
 .asm_55dc
-	ld [hMapObjectIndexBuffer], a
+	ldh [hMapObjectIndexBuffer], a
 	call Function5613
 	ld hl, $28
 	add hl, bc
 	ld b, h
 	ld c, l
-	ld a, [hConnectionStripLength]
+	ldh a, [hConnectionStripLength]
 	inc a
 	cp $d
 	jr nz, .asm_55dc
@@ -812,7 +812,7 @@ Function5660: ; 5660 (1:5660)
 	jr c, .asm_568f
 	sub $20
 .asm_568f
-	ld [hUsedSpriteIndex], a
+	ldh [hUsedSpriteIndex], a
 	ld a, [wce82]
 	ld e, a
 	ld hl, $1a
@@ -841,7 +841,7 @@ Function5660: ; 5660 (1:5660)
 	jr c, .asm_56bf
 	sub $20
 .asm_56bf
-	ld [hUsedSpriteTile], a
+	ldh [hUsedSpriteTile], a
 	ld hl, $6
 	add hl, bc
 	bit 7, [hl]
@@ -854,18 +854,18 @@ Function5660: ; 5660 (1:5660)
 	ld e, a
 .asm_56d1
 	ld a, d
-	ld [hFFC1], a
+	ldh [hFFC1], a
 .asm_56d4
-	ld a, [hFFC1]
+	ldh a, [hFFC1]
 	ld d, a
-	ld a, [hUsedSpriteTile]
+	ldh a, [hUsedSpriteTile]
 	add e
 	dec a
 	cp $12
 	jr nc, .asm_56f6
 	ld b, a
 .asm_56e0
-	ld a, [hUsedSpriteIndex]
+	ldh a, [hUsedSpriteIndex]
 	add d
 	dec a
 	cp $14
@@ -908,7 +908,7 @@ Function5714: ; 5714 (1:5714)
 	ld bc, wPlayerSprite
 	xor a
 .asm_5718
-	ld [hMapObjectIndexBuffer], a
+	ldh [hMapObjectIndexBuffer], a
 	call DoesObjectHaveASprite
 	jr z, .asm_5722
 	call Function437c
@@ -917,7 +917,7 @@ Function5714: ; 5714 (1:5714)
 	add hl, bc
 	ld b, h
 	ld c, l
-	ld a, [hConnectionStripLength]
+	ldh a, [hConnectionStripLength]
 	inc a
 	cp $d
 	jr nz, .asm_5718
@@ -980,7 +980,7 @@ StartFollow::
 Function578b: ; 578b (1:578b)
 	call CheckObjectVisibility
 	ret c
-	ld a, [hObjectStructIndexBuffer]
+	ldh a, [hObjectStructIndexBuffer]
 	ld [wObjectFollow_Leader], a
 	ret
 
@@ -1006,7 +1006,7 @@ Function57a2: ; 57a2 (1:57a2)
 	ld hl, $9
 	add hl, bc
 	ld [hl], $0
-	ld a, [hConnectedMapWidth]
+	ldh a, [hConnectedMapWidth]
 	ld [wObjectFollow_Follower], a
 	ret
 
@@ -1154,25 +1154,25 @@ Function5879: ; 5879 (1:5879)
 
 .data db 6,7,8,9
 
-UpdateSprites_:: ; 5896 (1:5896)
+_UpdateSprites:: ; 5896 (1:5896)
 	ld a, [wVramState]
 	bit 0, a
 	ret z
 	xor a
-	ld [hUsedSpriteIndex], a
-	ld a, [hOAMUpdate]
+	ldh [hUsedSpriteIndex], a
+	ldh a, [hOAMUpdate]
 	push af
 	ld a, $1
-	ld [hOAMUpdate], a
+	ldh [hOAMUpdate], a
 	call Function58fe
 	call Function58b0
 	pop af
-	ld [hOAMUpdate], a
+	ldh [hOAMUpdate], a
 	ret
 
 Function58b0: ; 58b0 (1:58b0)
 	ld b, $a0
-	ld a, [hUsedSpriteIndex]
+	ldh a, [hUsedSpriteIndex]
 	cp b
 	ret nc
 	ld l, a
@@ -1333,11 +1333,11 @@ Function597a: ; 597a (1:597a)
 	jr z, .asm_599d
 	or $80
 .asm_599d
-	ld [hFFC4], a
+	ldh [hFFC4], a
 	ld hl, $2
 	add hl, bc
 	ld a, [hl]
-	ld [hFFC3], a
+	ldh [hFFC3], a
 	ld hl, $17
 	add hl, bc
 	ld a, [hl]
@@ -1348,7 +1348,7 @@ Function597a: ; 597a (1:597a)
 	ld e, a
 	ld a, [wce81]
 	add e
-	ld [hFFC1], a
+	ldh [hFFC1], a
 	ld hl, $18
 	add hl, bc
 	ld a, [hl]
@@ -1359,7 +1359,7 @@ Function597a: ; 597a (1:597a)
 	ld e, a
 	ld a, [wce82]
 	add e
-	ld [hFFC2], a
+	ldh [hFFC2], a
 	ld hl, $d
 	add hl, bc
 	ld a, [hl]
@@ -1375,28 +1375,28 @@ Function597a: ; 597a (1:597a)
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
-	ld a, [hUsedSpriteIndex]
+	ldh a, [hUsedSpriteIndex]
 	ld c, a
 	ld b, $c3
 	ld a, [hli]
-	ld [hUsedSpriteTile], a
+	ldh [hUsedSpriteTile], a
 	add c
 	cp $a0
 	jr nc, .asm_5a25
 .asm_59f3
-	ld a, [hFFC2]
+	ldh a, [hFFC2]
 	add [hl]
 	inc hl
 	ld [bc], a
 	inc c
-	ld a, [hFFC1]
+	ldh a, [hFFC1]
 	add [hl]
 	inc hl
 	ld [bc], a
 	inc c
 	ld e, [hl]
 	inc hl
-	ld a, [hFFC3]
+	ldh a, [hFFC3]
 	bit 2, e
 	jr z, .asm_5a08
 	xor a
@@ -1408,19 +1408,19 @@ Function597a: ; 597a (1:597a)
 	ld a, e
 	bit 1, a
 	jr z, .asm_5a14
-	ld a, [hFFC4]
+	ldh a, [hFFC4]
 	or e
 .asm_5a14
 	and $f0
 	or d
 	ld [bc], a
 	inc c
-	ld a, [hUsedSpriteTile]
+	ldh a, [hUsedSpriteTile]
 	dec a
-	ld [hUsedSpriteTile], a
+	ldh [hUsedSpriteTile], a
 	jr nz, .asm_59f3
 	ld a, c
-	ld [hUsedSpriteIndex], a
+	ldh [hUsedSpriteIndex], a
 .asm_5a23
 	xor a
 	ret

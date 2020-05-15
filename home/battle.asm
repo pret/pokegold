@@ -1,32 +1,67 @@
-UserPartyAttr:: ; 3b69
+GetPartyParamLocation::
+; Get the location of parameter a from wCurPartyMon in hl
+	push bc
+	ld hl, wPartyMons
+	ld c, a
+	ld b, 0
+	add hl, bc
+	ld a, [wCurPartyMon]
+	call GetPartyLocation
+	pop bc
+	ret
+
+GetPartyLocation::
+; Add the length of a PartyMon struct to hl a times.
+	ld bc, PARTYMON_STRUCT_LENGTH
+	jp AddNTimes
+
+Unreferenced_GetDexNumber::
+; Probably used in gen 1 to convert index number to dex number
+; Not required in gen 2 because index number == dex number
+	push hl
+	ld a, b
+	dec a
+	ld b, 0
+	add hl, bc
+	ld hl, BaseData + BASE_DEX_NO
+	ld bc, BASE_DATA_SIZE
+	call AddNTimes
+	pop bc
+	ld a, BANK(BaseData)
+	call GetFarHalfword
+	ld b, l
+	ld c, h
+	pop hl
+	ret
+
+UserPartyAttr::
 	push af
-	ld a, [hBattleTurn]
+	ldh a, [hBattleTurn]
 	and a
-	jr nz, .asm_3b72
+	jr nz, .ot
 	pop af
 	jr BattlePartyAttr
-
-.asm_3b72
+.ot
 	pop af
 	jr OTPartyAttr
 
 OpponentPartyAttr::
 	push af
-	ld a, [hBattleTurn]
+	ldh a, [hBattleTurn]
 	and a
-	jr z, .asm_3b7e
+	jr z, .ot
 	pop af
 	jr BattlePartyAttr
-
-.asm_3b7e
+.ot
 	pop af
 	jr OTPartyAttr
 
 BattlePartyAttr::
+; Get attribute a from the party struct of the active battle mon.
 	push bc
 	ld c, a
-	ld b, $0
-	ld hl, wPartyMon1Species
+	ld b, 0
+	ld hl, wPartyMons
 	add hl, bc
 	ld a, [wCurBattleMon]
 	call GetPartyLocation
@@ -34,9 +69,10 @@ BattlePartyAttr::
 	ret
 
 OTPartyAttr::
+; Get attribute a from the party struct of the active enemy mon.
 	push bc
 	ld c, a
-	ld b, $0
+	ld b, 0
 	ld hl, wOTPartyMon1Species
 	add hl, bc
 	ld a, [wCurOTMon]
@@ -52,209 +88,170 @@ ResetDamage::
 
 SetPlayerTurn::
 	xor a
-	ld [hBattleTurn], a
+	ldh [hBattleTurn], a
 	ret
 
 SetEnemyTurn::
-	ld a, $1
-	ld [hBattleTurn], a
+	ld a, 1
+	ldh [hBattleTurn], a
 	ret
 
 UpdateOpponentInParty::
-	ld a, [hBattleTurn]
+	ldh a, [hBattleTurn]
 	and a
 	jr z, UpdateEnemyMonInParty
 	jr UpdateBattleMonInParty
 
-	ld a, [hBattleTurn]
+UpdateUserInParty::
+	ldh a, [hBattleTurn]
 	and a
 	jr z, UpdateBattleMonInParty
 	jr UpdateEnemyMonInParty
 
 UpdateBattleMonInParty::
+; Update level, status, current HP
+
 	ld a, [wCurBattleMon]
+
+UpdateBattleMon::
 	ld hl, wPartyMon1Level
 	call GetPartyLocation
+
 	ld d, h
 	ld e, l
 	ld hl, wBattleMonLevel
-	ld bc, 5
+	ld bc, wBattleMonMaxHP - wBattleMonLevel
 	jp CopyBytes
 
 UpdateEnemyMonInParty::
+; Update level, status, current HP
+
+; No wildmons.
 	ld a, [wBattleMode]
 	dec a
 	ret z
+
 	ld a, [wCurOTMon]
 	ld hl, wOTPartyMon1Level
 	call GetPartyLocation
+
 	ld d, h
 	ld e, l
 	ld hl, wEnemyMonLevel
-	ld bc, 5
+	ld bc, wEnemyMonMaxHP - wEnemyMonLevel
 	jp CopyBytes
 
 RefreshBattleHuds::
 	call UpdateBattleHuds
-	ld c, $3
+	ld c, 3
 	call DelayFrames
 	jp WaitBGMap
 
-UpdateBattleHuds:: ; 3bf8 (0:3bf8)
+UpdateBattleHuds::
 	farcall UpdatePlayerHUD
 	farcall UpdateEnemyHUD
 	ret
 
-GetBattleVar::
-	push hl
-	call GetBattleVarAddr
-	pop hl
-	ret
-
-GetBattleVarAddr:: ; 3c0b (0:3c0b)
-	push bc
-	ld hl, .battlevarpairs ; $3c2c
-	ld c, a
-	ld b, $0
-	add hl, bc
-	add hl, bc
-	ld a, [hli]
-	ld h, [hl]
-	ld l, a
-	ld a, [hBattleTurn]
-	and a
-	jr z, .asm_3c1d
-	inc hl
-.asm_3c1d
-	ld a, [hl]
-	ld c, a
-	ld b, $0
-	ld hl, .vars
-	add hl, bc
-	add hl, bc
-	ld a, [hli]
-	ld h, [hl]
-	ld l, a
-	ld a, [hl]
-	pop bc
-	ret
-
-.battlevarpairs
-	dw .substatus1, .substatus2, .substatus3, .substatus4, .substatus5
-	dw .substatus1opp, .substatus2opp, .substatus3opp, .substatus4opp, .substatus5opp
-	dw .status, .statusopp, .animation, .effect, .power, .type
-	dw .curmove, .lastcounter, .lastcounteropp, .lastmove, .lastmoveopp
-
-;                       player                     enemy
-.substatus1     db PLAYER_SUBSTATUS_1,    ENEMY_SUBSTATUS_1
-.substatus1opp  db ENEMY_SUBSTATUS_1,     PLAYER_SUBSTATUS_1
-.substatus2     db PLAYER_SUBSTATUS_2,    ENEMY_SUBSTATUS_2
-.substatus2opp  db ENEMY_SUBSTATUS_2,     PLAYER_SUBSTATUS_2
-.substatus3     db PLAYER_SUBSTATUS_3,    ENEMY_SUBSTATUS_3
-.substatus3opp  db ENEMY_SUBSTATUS_3,     PLAYER_SUBSTATUS_3
-.substatus4     db PLAYER_SUBSTATUS_4,    ENEMY_SUBSTATUS_4
-.substatus4opp  db ENEMY_SUBSTATUS_4,     PLAYER_SUBSTATUS_4
-.substatus5     db PLAYER_SUBSTATUS_5,    ENEMY_SUBSTATUS_5
-.substatus5opp  db ENEMY_SUBSTATUS_5,     PLAYER_SUBSTATUS_5
-.status         db PLAYER_STATUS,         ENEMY_STATUS
-.statusopp      db ENEMY_STATUS,          PLAYER_STATUS
-.animation      db PLAYER_MOVE_ANIMATION, ENEMY_MOVE_ANIMATION
-.effect         db PLAYER_MOVE_EFFECT,    ENEMY_MOVE_EFFECT
-.power          db PLAYER_MOVE_POWER,     ENEMY_MOVE_POWER
-.type           db PLAYER_MOVE_TYPE,      ENEMY_MOVE_TYPE
-.curmove        db PLAYER_CUR_MOVE,       ENEMY_CUR_MOVE
-.lastcounter    db PLAYER_COUNTER_MOVE,   ENEMY_COUNTER_MOVE
-.lastcounteropp db ENEMY_COUNTER_MOVE,    PLAYER_COUNTER_MOVE
-.lastmove       db PLAYER_LAST_MOVE,      ENEMY_LAST_MOVE
-.lastmoveopp    db ENEMY_LAST_MOVE,       PLAYER_LAST_MOVE
-
-.vars
-	dw wPlayerSubStatus1,            wEnemySubStatus1
-	dw wPlayerSubStatus2,            wEnemySubStatus2
-	dw wPlayerSubStatus3,            wEnemySubStatus3
-	dw wPlayerSubStatus4,            wEnemySubStatus4
-	dw wPlayerSubStatus5,            wEnemySubStatus5
-	dw wBattleMonStatus,             wEnemyMonStatus
-	dw wPlayerMoveStructAnimation,   wEnemyMoveStructAnimation
-	dw wPlayerMoveStructEffect,      wEnemyMoveStructEffect
-	dw wPlayerMoveStructPower,       wEnemyMoveStructPower
-	dw wPlayerMoveStructType,        wEnemyMoveStructType
-	dw wCurPlayerMove,               wCurEnemyMove
-	dw wLastEnemyCounterMove,        wLastPlayerCounterMove
-	dw wLastPlayerMove,              wLastEnemyMove
-
-	db $23 ; ???
+INCLUDE "home/battle_vars.asm"
 
 FarCopyRadioText::
-	ld a, [hROMBank]
+	inc hl
+	ldh a, [hROMBank]
 	push af
 	ld a, [hli]
 	ld e, a
 	ld a, [hli]
 	ld d, a
 	ld a, [hli]
-	ld [hROMBank], a
+	ldh [hROMBank], a
 	ld [MBC3RomBank], a
 	ld a, e
 	ld l, a
 	ld a, d
 	ld h, a
 	ld de, wcef7
-	ld bc, $28
+	ld bc, 2 * SCREEN_WIDTH
 	call CopyBytes
 	pop af
-	ld [hROMBank], a
+	ldh [hROMBank], a
 	ld [MBC3RomBank], a
 	ret
 
-StdBattleTextBox::
-GLOBAL BattleText
-	ld a, [hROMBank]
+
+StdBattleTextbox::
+; Open a textbox and print battle text at 20:hl.
+
+	ldh a, [hROMBank]
 	push af
-	ld a, BANK(BattleText) ; $40
+
+	ld a, BANK(BattleText)
 	rst Bankswitch
+
 	call PrintText
+
 	pop af
 	rst Bankswitch
 	ret
 
 GetBattleAnimPointer::
-
-GLOBAL BattleAnimations
-GLOBAL BattleAnimCommands
-
-	ld a, BANK(BattleAnimations) ; $32
+	ld a, BANK(BattleAnimations)
 	rst Bankswitch
+
 	ld a, [hli]
 	ld [wca10], a
 	ld a, [hl]
 	ld [wca11], a
-	ld a, BANK(BattleAnimCommands) ; $33
+
+	; ClearBattleAnims is the only function that calls this...
+	ld a, BANK(ClearBattleAnims)
 	rst Bankswitch
+
 	ret
 
 GetBattleAnimByte::
 	push hl
 	push de
+
 	ld hl, wca10
 	ld e, [hl]
 	inc hl
 	ld d, [hl]
 
-	ld a, BANK(BattleAnimations) ; $32
+	ld a, BANK(BattleAnimations)
 	rst Bankswitch
 
 	ld a, [de]
 	ld [wca17], a
 	inc de
 
-	ld a, BANK(BattleAnimCommands) ; $33
+	ld a, BANK(ClearBattleAnims)
 	rst Bankswitch
 
 	ld [hl], d
 	dec hl
 	ld [hl], e
+
 	pop de
 	pop hl
+
 	ld a, [wca17]
+	ret
+
+PushLYOverrides::
+	ldh a, [hLCDCPointer]
+	and a
+	ret z
+
+	ld a, LOW(wLYOverridesBackup)
+	ld [wRequested2bppSource], a
+	ld a, HIGH(wLYOverridesBackup)
+	ld [wRequested2bppSource + 1], a
+
+	ld a, LOW(wLYOverrides)
+	ld [wRequested2bppDest], a
+	ld a, HIGH(wLYOverrides)
+	ld [wRequested2bppDest + 1], a
+
+	ld a, (wLYOverridesEnd - wLYOverrides) / 28
+	ld [wRequested2bpp], a
 	ret

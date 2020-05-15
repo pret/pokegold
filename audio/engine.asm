@@ -2797,7 +2797,7 @@ ChannelPointers:
 
 ClearChannels::
 ; runs ClearChannel for all 4 channels
-; doesn't seem to be used, but functionally identical to MapSetup_Sound_Off
+; doesn't seem to be used, but functionally identical to InitSound
 	ld hl, rNR50
 	xor a
 	ld [hli], a

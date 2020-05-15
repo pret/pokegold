@@ -44,43 +44,46 @@ Functionc6bc: ; c6bc (3:46bc)
 	farcall Functionf900
 	ret
 
-ComputeHPBarPixels: ; c6de (3:46de)
+ComputeHPBarPixels:
+; e = bc * (6 * 8) / de
 	ld a, b
 	or c
 	jr z, .asm_c722
 	push hl
 	xor a
-	ld [hPrintNum2], a
+	ldh [hMultiplicand + 0], a
 	ld a, b
-	ld [hPrintNum3], a
+	ldh [hMultiplicand + 1], a
 	ld a, c
-	ld [hPrintNum4], a
-	ld a, $30
-	ld [hPrintNum5], a
+	ldh [hMultiplicand + 2], a
+	ld a, 6 * 8
+	ldh [hMultiplier], a
 	call Multiply
+	; We need de to be under 256 because hDivisor is only 1 byte.
 	ld a, d
 	and a
 	jr z, .asm_c711
+	; divide de and hProduct by 4
 	srl d
 	rr e
 	srl d
 	rr e
-	ld a, [hStringCmpString2]
+	ldh a, [hProduct + 2]
 	ld b, a
-	ld a, [hPrintNum4]
+	ldh a, [hProduct + 3]
 	srl b
 	rr a
 	srl b
 	rr a
-	ld [hPrintNum4], a
+	ldh [hDividend + 3], a
 	ld a, b
-	ld [hPrintNum3], a
+	ldh [hDividend + 2], a
 .asm_c711
 	ld a, e
-	ld [hPrintNum5], a
+	ldh [hPrintNum5], a
 	ld b, $4
 	call Divide
-	ld a, [hPrintNum4]
+	ldh a, [hPrintNum4]
 	ld e, a
 	pop hl
 	and a

@@ -15,23 +15,23 @@ NamingScreen: ; 11aad (4:5aad)
 	ld a, [hl]
 	push af
 	set NO_TEXT_SCROLL, [hl]
-	ld a, [hMapAnims]
+	ldh a, [hMapAnims]
 	push af
 	xor a
-	ld [hMapAnims], a
-	ld a, [hInMenu]
+	ldh [hMapAnims], a
+	ldh a, [hInMenu]
 	push af
 	ld a, $1
-	ld [hInMenu], a
+	ldh [hInMenu], a
 	call Function11ae4
 	call DelayFrame
 .asm_11ad1
 	call Function11cd4
 	jr nc, .asm_11ad1
 	pop af
-	ld [hInMenu], a
+	ldh [hInMenu], a
 	pop af
-	ld [hMapAnims], a
+	ldh [hMapAnims], a
 	pop af
 	ld [wOptions], a
 	call ClearJoypad
@@ -45,7 +45,7 @@ Function11ae4: ; 11ae4 (4:5ae4)
 	call Function1201e
 	call Function11c67
 	ld a, $e3
-	ld [rLCDC], a
+	ldh [rLCDC], a
 	call Function11b09
 	call WaitBGMap
 	call WaitTop
@@ -158,7 +158,7 @@ Function11bda:
 	ld [hl], a
 	lb de, $24, $20
 	ld a, $1c
-	call InitAnimatedObjectStruct
+	call InitSpriteAnimStruct
 	ld hl, $1
 	add hl, bc
 	ld [hl], $0
@@ -190,7 +190,7 @@ Function11c11: ; 11c11 (4:5c11)
 	ld [hl], a
 	lb de, $24, $20
 	ld a, $1c
-	call InitAnimatedObjectStruct
+	call InitSpriteAnimStruct
 	ret
 
 Function11c3a: ; 11c3a (4:5c3a)
@@ -300,14 +300,14 @@ Function11cd4: ; 11cd4 (4:5cd4)
 	callfar ClearAnimatedObjectBuffer
 	call ClearSprites
 	xor a
-	ld [hSCX], a
-	ld [hSCY], a
+	ldh [hSCX], a
+	ldh [hSCY], a
 	scf
 	ret
 
 Function11cff: ; 11cff (4:5cff)
 	xor a
-	ld [hBGMapMode], a
+	ldh [hBGMapMode], a
 	hlcoord 1, 5
 	call Function11c5b
 	jr nz, .asm_11d0d
@@ -325,7 +325,7 @@ Function11cff: ; 11cff (4:5cff)
 	ld l, a
 	call PlaceString
 	ld a, $1
-	ld [hBGMapMode], a
+	ldh [hBGMapMode], a
 	ret
 
 Function11d27: ; 11d27 (4:5d27)
@@ -351,7 +351,7 @@ Function11d3a:
 	ld d, $40
 .asm_11d44
 	ld a, $14
-	call InitAnimatedObjectStruct
+	call InitSpriteAnimStruct
 	ld a, c
 	ld [wc5d5], a
 	ld a, b
@@ -843,16 +843,16 @@ Function1201e: ; 1201e (4:601e)
 	ld [hli], a
 	ld [hl], $7e
 	xor a
-	ld [hSCY], a
+	ldh [hSCY], a
 	ld [wGlobalAnimYOffset], a
-	ld [hSCX], a
+	ldh [hSCX], a
 	ld [wGlobalAnimXOffset], a
 	ld [wce63], a
 	ld [wce64], a
-	ld [hBGMapMode], a
+	ldh [hBGMapMode], a
 	ld [wc5d2], a
 	ld a, $7
-	ld [hWX], a
+	ldh [hWX], a
 	ret
 
 NamingScreenGFX_Border: INCBIN "gfx/namingscreen/border.2bpp"
@@ -897,23 +897,23 @@ ComposeMailMessage:
 	ld [hl], e
 	inc hl
 	ld [hl], d
-	ld a, [hMapAnims]
+	ldh a, [hMapAnims]
 	push af
 	xor a
-	ld [hMapAnims], a
-	ld a, [hInMenu]
+	ldh [hMapAnims], a
+	ldh a, [hInMenu]
 	push af
 	ld a, $1
-	ld [hInMenu], a
+	ldh [hInMenu], a
 	call Function12267
 	call DelayFrame
 .asm_1225b
 	call Function1238d
 	jr nc, .asm_1225b
 	pop af
-	ld [hInMenu], a
+	ldh [hInMenu], a
 	pop af
-	ld [hMapAnims], a
+	ldh [hMapAnims], a
 	ret
 
 Function12267: ; 12267 (4:6267)
@@ -926,18 +926,18 @@ Function12267: ; 12267 (4:6267)
 	ld a, BANK(MailIcon)
 	call FarCopyBytes
 	xor a
-	ld hl, wTileMapEnd
+	ld hl, wTilemapEnd
 	ld [hli], a
 	ld [hl], a
 	lb de, $18, $10
 	ld a, $0
-	call InitAnimatedObjectStruct
+	call InitSpriteAnimStruct
 	ld hl, $2
 	add hl, bc
 	ld [hl], $0
 	call Function12351
 	ld a, $e3
-	ld [rLCDC], a
+	ldh [rLCDC], a
 	call Function12341
 	ld b, $8
 	call GetSGBLayout
@@ -1015,14 +1015,14 @@ Function1238d: ; 1238d (4:638d)
 	callfar ClearAnimatedObjectBuffer
 	call ClearSprites
 	xor a
-	ld [hSCX], a
-	ld [hSCY], a
+	ldh [hSCX], a
+	ldh [hSCY], a
 	scf
 	ret
 
 Function123b8: ; 123b8 (4:63b8)
 	xor a
-	ld [hBGMapMode], a
+	ldh [hBGMapMode], a
 	hlcoord 1, 1
 	lb bc, 4, 18
 	call ClearBox
@@ -1033,7 +1033,7 @@ Function123b8: ; 123b8 (4:63b8)
 	hlcoord 2, 2
 	call PlaceString
 	ld a, $1
-	ld [hBGMapMode], a
+	ldh [hBGMapMode], a
 	ret
 
 Function123d5: ; 123d5 (4:63d5)
@@ -1055,7 +1055,7 @@ Function123d5: ; 123d5 (4:63d5)
 Function123e8:
 	lb de, $48, $10
 	ld a, $1b
-	call InitAnimatedObjectStruct
+	call InitSpriteAnimStruct
 	ld a, c
 	ld [wc5d5], a
 	ld a, b

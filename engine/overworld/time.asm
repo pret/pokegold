@@ -305,7 +305,7 @@ CalcSecsMinsHoursDaysSince: ; 119c7 (4:59c7)
 	inc hl
 	inc hl
 	inc hl
-	ld a, [hSeconds]
+	ldh a, [hSeconds]
 	ld c, a
 	sub [hl]
 	jr nc, .asm_119d2
@@ -315,7 +315,7 @@ CalcSecsMinsHoursDaysSince: ; 119c7 (4:59c7)
 	dec hl
 	ld [wSecsSince], a
 CalcMinsHoursDaysSince_
-	ld a, [hMinutes]
+	ldh a, [hMinutes]
 	ld c, a
 	sbc [hl]
 	jr nc, .asm_119df
@@ -325,7 +325,7 @@ CalcMinsHoursDaysSince_
 	dec hl
 	ld [wMinsSince], a
 CalcHoursDaysSince_
-	ld a, [hHours]
+	ldh a, [hHours]
 	ld c, a
 	sbc [hl]
 	jr nc, .asm_119ec
@@ -348,11 +348,11 @@ CalcDaysSince_:
 CopyDayHourMinSecToHL: ; 119ff (4:59ff)
 	ld a, [wCurDay]
 	ld [hli], a
-	ld a, [hHours]
+	ldh a, [hHours]
 	ld [hli], a
-	ld a, [hMinutes]
+	ldh a, [hMinutes]
 	ld [hli], a
-	ld a, [hSeconds]
+	ldh a, [hSeconds]
 	ld [hli], a
 	ret
 
@@ -364,15 +364,15 @@ CopyDayToHL: ; 11a0d (4:5a0d)
 CopyDayHourToHL:
 	ld a, [wCurDay]
 	ld [hli], a
-	ld a, [hHours]
+	ldh a, [hHours]
 	ld [hli], a
 	ret
 
 CopyDayHourMinToHL: ; 11a1a (4:5a1a)
 	ld a, [wCurDay]
 	ld [hli], a
-	ld a, [hHours]
+	ldh a, [hHours]
 	ld [hli], a
-	ld a, [hMinutes]
+	ldh a, [hMinutes]
 	ld [hli], a
 	ret

@@ -42,7 +42,7 @@ TrainerBlackbeltKenji:
 	askforphonenumber PHONE_BLACKBELT_KENJI
 	ifequal PHONE_CONTACTS_FULL, Route45PhoneFullM
 	ifequal PHONE_CONTACT_REFUSED, Route45NumberDeclinedM
-	trainertotext BLACKBELT_T, KENJI3, MEM_BUFFER_0
+	trainertotext BLACKBELT_T, KENJI3, STRING_BUFFER_3
 	scall Route45RegisteredNumberM
 	jump Route45NumberAcceptedM
 
@@ -147,7 +147,7 @@ TrainerHikerParry:
 	askforphonenumber PHONE_HIKER_PARRY
 	ifequal PHONE_CONTACTS_FULL, Route45PhoneFullM
 	ifequal PHONE_CONTACT_REFUSED, Route45NumberDeclinedM
-	trainertotext HIKER, PARRY1, MEM_BUFFER_0
+	trainertotext HIKER, PARRY1, STRING_BUFFER_3
 	scall Route45RegisteredNumberM
 	jump Route45NumberAcceptedM
 

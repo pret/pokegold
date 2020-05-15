@@ -46,7 +46,7 @@ TrainerPicnickerErin1:
 	askforphonenumber PHONE_PICNICKER_ERIN
 	ifequal PHONE_CONTACTS_FULL, Route46PhoneFullF
 	ifequal PHONE_CONTACT_REFUSED, Route46NumberDeclinedF
-	trainertotext PICNICKER, ERIN1, MEM_BUFFER_0
+	trainertotext PICNICKER, ERIN1, STRING_BUFFER_3
 	scall Route46RegisteredNumberF
 	jump Route46NumberAcceptedF
 

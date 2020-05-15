@@ -8,7 +8,7 @@ MainMenu_:
 	call PlayMusic
 .asm_5a60
 	xor a
-	ld [wc1d6], a
+	ld [wDisableTextAcceleration], a
 	call Function5bf7
 	ld b, $8
 	call GetSGBLayout
@@ -18,11 +18,11 @@ MainMenu_:
 	ld [wWhichIndexSet], a
 	call Function5b27
 	ld hl, .MenuDataHeader
-	call LoadMenuDataHeader
+	call LoadMenuHeader
 	call Function5b0a
 	call CloseWindow
 	jr c, .asm_5a94
-	call ClearTileMap
+	call ClearTilemap
 	ld a, [wMenuSelection]
 	ld hl, .Jumptable
 	rst JumpTable
@@ -92,7 +92,7 @@ Function5ae4: ; 5ae4 (1:5ae4)
 	ret
 
 .asm_5af0
-	ld a, [hCGB]
+	ldh a, [hCGB]
 	cp $1
 	ld a, $1
 	ret nz
@@ -132,7 +132,7 @@ Function5b27: ; 5b27 (1:5b27)
 	and a
 	ret z
 	xor a
-	ld [hBGMapMode], a
+	ldh [hBGMapMode], a
 	call Function5b45
 	ld hl, wOptions
 	ld a, [hl]
@@ -142,7 +142,7 @@ Function5b27: ; 5b27 (1:5b27)
 	pop af
 	ld [wOptions], a
 	ld a, $1
-	ld [hBGMapMode], a
+	ldh [hBGMapMode], a
 	ret
 
 Function5b45: ; 5b45 (1:5b45)
@@ -175,7 +175,7 @@ Function5b5b: ; 5b5b (1:5b5b)
 	decoord 1, 14
 	call Function5bb8
 	decoord 4, 16
-	ld a, [hHours]
+	ldh a, [hHours]
 	ld c, a
 	farcall PrintHour
 	ld [hl], $9c
@@ -229,8 +229,8 @@ Function5bb8: ; 5bb8 (1:5bb8)
 
 Function5bf7: ; 5bf7 (1:5bf7)
 	xor a
-	ld [hMapAnims], a
-	call ClearTileMap
+	ldh [hMapAnims], a
+	call ClearTilemap
 	call LoadFontsExtra
 	call Functiond9e
 	call ClearWindowData
@@ -248,7 +248,7 @@ MainMenu_Options:
 
 MainMenu_NewGame:
 	xor a
-	ld [wMonStatusFlags], a
+	ld [wDebugFlags], a
 	call Function5c3a
 	call Function5bf7
 	call OakSpeech
@@ -256,12 +256,12 @@ MainMenu_NewGame:
 	ld a, $0
 	ld [wceec], a
 	ld a, $f1
-	ld [hMapEntryMethod], a
+	ldh [hMapEntryMethod], a
 	jp FinishContinueFunction
 
 Function5c3a: ; 5c3a (1:5c3a)
 	xor a
-	ld [hBGMapMode], a
+	ldh [hBGMapMode], a
 	call Function5c41
 	ret
 
@@ -276,16 +276,16 @@ Function5c41: ; 5c41 (1:5c41)
 	xor a
 	call ByteFill
 
-	ld a, [rLY]
-	ld [hSecondsBackup], a
+	ldh a, [rLY]
+	ldh [hSecondsBackup], a
 	call DelayFrame
-	ld a, [hRandomSub]
+	ldh a, [hRandomSub]
 	ld [wPlayerID], a
 
-	ld a, [rLY]
-	ld [hSecondsBackup], a
+	ldh a, [rLY]
+	ldh [hSecondsBackup], a
 	call DelayFrame
-	ld a, [hRandomAdd]
+	ldh a, [hRandomAdd]
 	ld [wPlayerID + 1], a
 
 	ld hl, wPartyCount
@@ -478,10 +478,10 @@ LoadOrRegenerateLuckyIDNumber: ; 5da7 (1:5da7)
 MainMenu_Continue:
 	farcall TryLoadSaveFile
 	jr c, .asm_5e41
-	call LoadStandardMenuDataHeader
+	call LoadStandardMenuHeader
 	call DisplaySaveInfoOnContinue
 	ld a, $1
-	ld [hBGMapMode], a
+	ldh [hBGMapMode], a
 	ld c, 20
 	call DelayFrames
 	call ConfirmContinue
@@ -504,7 +504,7 @@ MainMenu_Continue:
 	ld [wMusicFadeID + 1], a
 	call ClearBGPalettes
 	call CloseWindow
-	call ClearTileMap
+	call ClearTilemap
 	ld c, 20
 	call DelayFrames
 	farcall JumpRoamMons
@@ -514,7 +514,7 @@ MainMenu_Continue:
 	cp $1
 	jr z, .asm_5e42
 	ld a, $f2
-	ld [hMapEntryMethod], a
+	ldh [hMapEntryMethod], a
 	jp FinishContinueFunction
 
 .asm_5e41
@@ -533,7 +533,7 @@ PostCreditsSpawn: ; 5e52 (1:5e52)
 	xor a
 	ld [wd1db], a
 	ld a, $f1
-	ld [hMapEntryMethod], a
+	ldh [hMapEntryMethod], a
 	ret
 
 ConfirmContinue: ; 5e5b (1:5e5b)
@@ -613,13 +613,13 @@ DisplayContinueDataWithRTCError: ; 5ec7 (1:5ec7)
 
 Continue_LoadMenuHeader: ; 5ed7 (1:5ed7)
 	xor a
-	ld [hBGMapMode], a
+	ldh [hBGMapMode], a
 	ld hl, .MenuDataHeader_Dex
 	CheckFlag ENGINE_POKEDEX
 	jr nz, .asm_5ee7
 	ld hl, .MenuDataHeader_NoDex
 .asm_5ee7
-	call OffsetMenuDataHeader_
+	call _OffsetMenuHeader
 	call MenuBox
 	call PlaceVerticalMenuItems
 	ret
@@ -724,7 +724,7 @@ OakSpeech: ; 5fa5 (1:5fa5)
 	farcall InitClock ; What time is it?
 
 	call RotateFourPalettesLeft
-	call ClearTileMap
+	call ClearTilemap
 
 	ld de, MUSIC_ROUTE_30
 	call PlayMusic
@@ -747,7 +747,7 @@ OakSpeech: ; 5fa5 (1:5fa5)
 	call PrintText
 
 	call RotateThreePalettesRight
-	call ClearTileMap
+	call ClearTilemap
 
 	ld a, MARILL
 	ld [wCurSpecies], a
@@ -772,7 +772,7 @@ OakSpeech: ; 5fa5 (1:5fa5)
 	call PrintText
 
 	call RotateThreePalettesRight
-	call ClearTileMap
+	call ClearTilemap
 
 	xor a
 	ld [wCurPartySpecies], a
@@ -789,7 +789,7 @@ OakSpeech: ; 5fa5 (1:5fa5)
 	call PrintText
 
 	call RotateThreePalettesRight
-	call ClearTileMap
+	call ClearTilemap
 
 	xor a
 	ld [wCurPartySpecies], a
@@ -862,7 +862,7 @@ NamePlayer: ; 6085 (1:6085)
 	ld de, wPlayerName
 	farcall NamingScreen
 	call RotateThreePalettesRight
-	call ClearTileMap
+	call ClearTilemap
 	call LoadFontsExtra
 	call WaitBGMap
 	xor a
@@ -905,7 +905,7 @@ ENDC
 	db 2, "NAME@"
 
 SelectPresetName: ; 6108 (1:6108)
-	call LoadMenuDataHeader
+	call LoadMenuHeader
 	call VerticalMenu
 	ld a, [wMenuCursorY]
 	dec a
@@ -920,7 +920,7 @@ StorePlayerName: ; 6119 (1:6119)
 	ret
 
 ShrinkPlayer: ; 6123 (1:6123)
-	ld a, [hROMBank]
+	ldh a, [hROMBank]
 	push af
 
 	ld a, 0 << 7 | 32 ; fade out
@@ -968,7 +968,7 @@ ShrinkPlayer: ; 6123 (1:6123)
 	call DelayFrames
 
 	call RotateThreePalettesRight
-	call ClearTileMap
+	call ClearTilemap
 	ret
 
 MovePlayerPicRight: ; 617e (1:617e)
@@ -986,11 +986,11 @@ MovePlayerPic
 	push hl
 	push de
 	xor a
-	ld [hBGMapMode], a
+	ldh [hBGMapMode], a
 	lb bc, 7, 7
 	predef PlaceGraphic
 	xor a
-	ld [hBGMapThird], a
+	ldh [hBGMapThird], a
 	call WaitBGMap
 	call DelayFrame
 	pop de
@@ -1023,17 +1023,17 @@ IntroFadePalettes:
 
 Intro_WipeInFrontpic: ; 61c5 (1:61c5)
 	ld a, $77
-	ld [hWX], a
+	ldh [hWX], a
 	call DelayFrame
 	ld a, $e4
 	call DmgToCgbBGPals
 .asm_61d1
 	call DelayFrame
-	ld a, [hWX]
+	ldh a, [hWX]
 	sub $8
 	cp $ff
 	ret z
-	ld [hWX], a
+	ldh [hWX], a
 	jr .asm_61d1
 
 Intro_PrepTrainerPic: ; 61df, 61e0 (1:61df, 1:61e0)
@@ -1042,7 +1042,7 @@ Intro_PrepTrainerPic: ; 61df, 61e0 (1:61df, 1:61e0)
 	ld hl, $58a0
 	rst FarCall
 	xor a
-	ld [hGraphicStartTile], a
+	ldh [hGraphicStartTile], a
 	hlcoord 6, 4
 	lb bc, 7, 7
 	predef PlaceGraphic
@@ -1053,7 +1053,7 @@ ShrinkFrame: ; 61f7 (1:61f7)
 	ld c, $31
 	predef DecompressGet2bpp
 	xor a
-	ld [hGraphicStartTile], a
+	ldh [hGraphicStartTile], a
 	hlcoord 6, 4
 	lb bc, 7, 7
 	predef PlaceGraphic

@@ -1,238 +1,70 @@
-Functiond70:: ; d70 (0:0d70)
-	ld b, a
-	ld a, [hROMBank]
+CopyBytes::
+; copy bc bytes from hl to de
+	inc b ; we bail the moment b hits 0, so include the last run
+	inc c ; same thing; include last byte
+	jr .HandleLoop
+.CopyByte:
+	ld a, [hli]
+	ld [de], a
+	inc de
+.HandleLoop:
+	dec c
+	jr nz, .CopyByte
+	dec b
+	jr nz, .CopyByte
+	ret
+
+GetFarByte::
+; retrieve a single byte from a:hl, and return it in a.
+	; bankswitch to new bank
+	ld [wBuffer], a
+	ldh a, [hROMBank]
 	push af
-	ld a, b
+	ld a, [wBuffer]
 	rst Bankswitch
 
-	ld a, BANK(sDecompressBuffer)
-	call OpenSRAM
-	ld hl, sDecompressBuffer
-	ld bc, 7 * 7 * $10
-	xor a
-	call ByteFill
+	; get byte from new bank
+	ld a, [hl]
+	ld [wBuffer], a
 
-	ld hl, wcf3c
+	; bankswitch to previous bank
+	pop af
+	rst Bankswitch
+
+	; return retrieved value in a
+	ld a, [wBuffer]
+	ret
+
+GetFarHalfword::
+; retrieve a halfword from a:hl, and return it in hl.
+	; bankswitch to new bank
+	ld [wBuffer], a
+	ldh a, [hROMBank]
+	push af
+	ld a, [wBuffer]
+	rst Bankswitch
+
+	; get halfword from new bank, put it in hl
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
-	ld de, sDecompressBuffer
-	call Decompress
 
-	call CloseSRAM
+	; bankswitch to previous bank and return
 	pop af
 	rst Bankswitch
 	ret
 
-ReplacePlayerSprite::
-	farcall Function1413c
-	ret
 
-Functiond9e::
-	farcall Functionf8000
-	ret
-
-Functionda5::
-	farcall Functionf8032
-	ret
-
-LoadFontsExtra::
-	farcall Functionf800c
-	ret
-
-DecompressRequest2bpp::
-	push de
-	ld a, BANK(sScratch)
-	call OpenSRAM
-	push bc
-
-	ld de, sScratch
-	ld a, b
-	call FarDecompress
-
-	pop bc
-	pop hl
-
-	ld de, sScratch
-	call Request2bpp
-	call CloseSRAM
-	ret
-
-FarCopyBytes:: ; dcd (0:0dcd)
-	ld [wBuffer], a
-	ld a, [hROMBank]
-	push af
-	ld a, [wBuffer]
-	rst Bankswitch
-	call CopyBytes
-	pop af
-	rst Bankswitch
-	ret
-
-FarCopyBytesDouble:: ; ddd (0:0ddd)
-	ld [wBuffer], a
-	ld a, [hROMBank]
-	push af
-	ld a, [wBuffer]
-	rst Bankswitch
-	ld a, h
-	ld h, d
-	ld d, a
-	ld a, l
-	ld l, e
-	ld e, a
-	inc b
-	inc c
-	jr .enter_loop
-
-.copy
-	ld a, [de]
-	inc de
+ByteFill::
+; fill bc bytes with the value of a, starting at hl
+	inc b ; we bail the moment b hits 0, so include the last run
+	inc c ; same thing; include last byte
+	jr .HandleLoop
+.PutByte:
 	ld [hli], a
-	ld [hli], a
-.enter_loop
+.HandleLoop:
 	dec c
-	jr nz, .copy
+	jr nz, .PutByte
 	dec b
-	jr nz, .copy
-	pop af
-	rst Bankswitch
+	jr nz, .PutByte
 	ret
-
-Request2bpp:: ; dfe (0:0dfe)
-	ld a, [hBGMapMode]
-	push af
-	xor a
-	ld [hBGMapMode], a
-	ld a, [hROMBank]
-	push af
-	ld a, b
-	rst Bankswitch
-	ld a, e
-	ld [wRequested2bppSource], a
-	ld a, d
-	ld [wRequested2bppSource + 1], a
-	ld a, l
-	ld [wRequested2bppDest], a
-	ld a, h
-	ld [wRequested2bppDest + 1], a
-.check
-	ld a, c
-	cp $8 ; TilesPerCycle
-	jr nc, .cycle
-	ld [wRequested2bpp], a
-	call DelayFrame
-	pop af
-	rst Bankswitch
-	pop af
-	ld [hBGMapMode], a
-	ret
-
-.cycle
-	ld a, $8 ; TilesPerCycle
-	ld [wRequested2bpp], a
-	call DelayFrame
-	ld a, c
-	sub $8 ; TilesPerCycle
-	ld c, a
-	jr .check
-
-Request1bpp:: ; e38 (0:0e38)
-	ld a, [hBGMapMode]
-	push af
-	xor a
-	ld [hBGMapMode], a
-	ld a, [hROMBank]
-	push af
-	ld a, b
-	rst Bankswitch
-	ld a, e
-	ld [wRequested1bppSource], a
-	ld a, d
-	ld [wRequested1bppSource + 1], a
-	ld a, l
-	ld [wRequested1bppDest], a
-	ld a, h
-	ld [wRequested1bppDest + 1], a
-.check
-	ld a, c
-	cp $8 ; TilesPerCycle
-	jr nc, .cycle
-	ld [wRequested1bpp], a
-	call DelayFrame
-	pop af
-	rst Bankswitch
-	pop af
-	ld [hBGMapMode], a
-	ret
-
-.cycle
-	ld a, $8 ; TilesPerCycle
-	ld [wRequested1bpp], a
-	call DelayFrame
-	ld a, c
-	sub $8 ; TilesPerCycle
-	ld c, a
-	jr .check
-
-Get2bpp::
-	ld a, [rLCDC]
-	bit 7, a
-	jp nz, Request2bpp
-Copy2bpp::
-	push hl
-	ld h, d
-	ld l, e
-	pop de
-	ld a, b
-	push af
-	swap c
-	ld a, $f
-	and c
-	ld b, a
-	ld a, $f0
-	and c
-	ld c, a
-	pop af
-	jp FarCopyBytes
-
-Get1bpp::
-	ld a, [rLCDC]
-	bit 7, a
-	jp nz, Request1bpp
-Copy1bpp::
-	push de
-	ld d, h
-	ld e, l
-	ld a, b
-	push af
-	ld h, $0
-	ld l, c
-	add hl, hl
-	add hl, hl
-	add hl, hl
-	ld b, h
-	ld c, l
-	pop af
-	pop hl
-	jp FarCopyBytesDouble
-
-Functionea6::
-	ld a, [rLCDC]
-	add a
-	jp c, Request2bpp
-Functioneac::
-	push de
-	push hl
-	ld a, b
-	ld h, $0
-	ld l, c
-	add hl, hl
-	add hl, hl
-	add hl, hl
-	add hl, hl
-	ld b, h
-	ld c, l
-	pop de
-	pop hl
-	jp FarCopyBytes

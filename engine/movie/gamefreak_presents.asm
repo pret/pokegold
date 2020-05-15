@@ -3,19 +3,19 @@ Copyright_GFPresents: ; e49a8 (39:49a8)
 ; Return carry if user cancels animation by pressing a button.
 
 	call ClearBGPalettes
-	call ClearTileMap
+	call ClearTilemap
 
 	ld a, HIGH(vBGMap0)
-	ld [hBGMapAddress + 1], a
+	ldh [hBGMapAddress + 1], a
 	xor a ; LOW(vBGMap0)
-	ld [hBGMapAddress], a
+	ldh [hBGMapAddress], a
 
-	ld [hJoyDown], a
-	ld [hSCX], a
-	ld [hSCY], a
+	ldh [hJoyDown], a
+	ldh [hSCX], a
+	ldh [hSCY], a
 
 	ld a, SCREEN_HEIGHT_PX
-	ld [hWY], a
+	ldh [hWY], a
 
 	call WaitBGMap
 
@@ -34,7 +34,7 @@ Copyright_GFPresents: ; e49a8 (39:49a8)
 	ld c, 100
 	call DelayFrames
 
-	call ClearTileMap
+	call ClearTilemap
 	call GFPresents_Init
 
 .loop
@@ -80,14 +80,14 @@ GFPresents_Init: ; e49f3 (39:49f3)
 	ld [wJumpTableIndex], a
 	ld [$ce64], a
 	ld [wIntroSceneTimer], a
-	ld [hSCX], a
-	ld [hSCY], a
+	ldh [hSCX], a
+	ldh [hSCY], a
 
 	ld a, 1
-	ld [hBGMapMode], a
+	ldh [hBGMapMode], a
 
 	ld a, SCREEN_HEIGHT_PX
-	ld [hWY], a
+	ldh [hWY], a
 
 	lb de, %00100100, %11111000
 	call DmgToCgbObjPals
@@ -98,7 +98,7 @@ GFPresents_PlayFrame: ; e4a37 (39:4a37)
 ; Return carry when the sequence completes or is canceled.
 
 	call JoyTextDelay
-	ld a, [hJoyLast]
+	ldh a, [hJoyLast]
 	and BUTTONS
 	jr nz, .pressed_button
 
@@ -124,7 +124,7 @@ GFPresents_PlayFrame: ; e4a37 (39:4a37)
 
 .finish
 	callfar ClearAnimatedObjectBuffer
-	call ClearTileMap
+	call ClearTilemap
 	call ClearSprites
 
 	ld c, 16
@@ -175,7 +175,7 @@ GFPresents_Star: ; e4a96 (39:4a96)
 
 	depixel 10, 11, 4, 0
 	ld a, $16
-	call InitAnimatedObjectStruct
+	call InitSpriteAnimStruct
 
 	; TODO set some flag in the struct?
 	ld hl, $c
@@ -199,7 +199,7 @@ GFPresents_PlaceLogo: ; e4ab2 (39:4ab2)
 
 	depixel 10, 11, 4, 0
 	ld a, $15
-	call InitAnimatedObjectStruct
+	call InitSpriteAnimStruct
 
 	call GFPresents_NextScene
 
@@ -279,7 +279,7 @@ GFPresents_UpdateLogoPal: ; e4b20 (39:4b20)
 ; OBP1 was initialized at end of GFPresents_Init
 
 	; once we reached the final state, leave it alone
-	ld a, [rOBP1]
+	ldh a, [rOBP1]
 	cp %10010000
 	ret z
 
@@ -291,7 +291,7 @@ GFPresents_UpdateLogoPal: ; e4b20 (39:4b20)
 	; rotate OBP1 by one color slot (2 bits)
 	; DMG: logo is white, then light gray, then dark gray
 	; CGB: logo is white, then yellow
-	ld a, [rOBP1]
+	ldh a, [rOBP1]
 	rrca
 	rrca
 	call DmgToCgbObjPal1
@@ -315,7 +315,7 @@ GFPresents_Sparkle: ; e4b33 (39:4b33)
 	push af
 	depixel 11, 11
 	ld a, $17
-	call InitAnimatedObjectStruct
+	call InitSpriteAnimStruct
 	pop af
 
 	; take the bottom 4 bits of a as an index into

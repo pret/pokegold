@@ -1,4 +1,3 @@
-INCLUDE "contents.asm"
 INCLUDE "constants.asm"
 
 SECTION "Evolutions and Attacks", ROMX, BANK[EVOS_ATTACKS]

@@ -1,4 +1,3 @@
-INCLUDE "contents.asm"
 INCLUDE "constants.asm"
 
 INCLUDE "macros/wram.asm"
@@ -122,23 +121,23 @@ SECTION "WRAM", WRAM0
 wLZAddress:: dw ; c2c2
 wLZBank::    db ; c2c4
 
-wBoxAlignment:: db
+wBoxAlignment:: db ; c2c5
 
 wInputType::        db ; c2c6
 wAutoInputAddress:: dw ; c2c7
 wAutoInputBank::    db ; c2c9
 wAutoInputLength::  db ; c2ca
 
-wMonStatusFlags:: ds 1 ; c1cb
+wDebugFlags:: ds 1 ; c1cb
 wGameLogicPaused:: ds 1 ; c1cc
-wRTCEnabled:: ds 1
+wSpriteUpdatesEnabled:: db
 wc1ce:: ds 1 ; c1ce
 wMapTimeOfDay:: ds 1 ; c1cf
 	ds 3
 wPrinterConnectionOpen:: ds 1
 wPrinterOpcode:: ds 1 ; c1d4
 wc1d5:: ds 1 ; c1d5
-wc1d6:: ds 1 ; c1d6
+wDisableTextAcceleration:: ds 1 ; c1d6
 wc1d7:: ds 1 ; c1d7
 wc1d8:: ds 1 ; c1d8
 wc1d9:: ds 1 ; c1d9
@@ -245,13 +244,13 @@ wVirtualOAMEnd::
 
 
 SECTION "TileMap", WRAM0
-wTileMap:: ; c3a0
+wTilemap:: ; c3a0
 	ds SCREEN_HEIGHT * SCREEN_WIDTH
-wTileMapEnd:: ; c508
+wTilemapEnd:: ; c508
 
 SECTION "Animated Objects", WRAM0
 wMisc:: ; c508
-wTileMapBackup:: ; c508
+wTempTileMap:: ; c508
 	; ds SCREEN_HEIGHT * SCREEN_WIDTH
 wAnimatedObjectDynamicVTileOffsets:: ds 10 * 2 ; c508
 wAnimatedObjectStructs:: ; c51c
@@ -877,7 +876,7 @@ wc7fe:: ds 1 ; c7fe
 wc7ff:: ds 1 ; c7ff
 wLYOverridesEnd::
 
-wLYOverridesBuffer::
+wLYOverridesBackup::
 wc800:: ds 1 ; c800
 wc801:: ds 1 ; c801
 wc802:: ds 1 ; c802
@@ -2065,9 +2064,9 @@ wccd6:: ds 1 ; ccd6
 wccd7:: ds 1 ; ccd7
 wccd8:: ds 1 ; ccd8
 
-wAttrMap:: ; ccd9
+wAttrmap:: ; ccd9
 	ds SCREEN_HEIGHT * SCREEN_WIDTH
-wAttrMapEnd:: ; ce41
+wAttrmapEnd:: ; ce41
 
 wce41:: ds 1 ; ce41
 wce42:: ds 1 ; ce42
@@ -2099,7 +2098,7 @@ wLinkTimeoutFrames:: ds 2
 wce5d:: ds 2 ; ce5d
 wMonType:: ds 1 ; ce5f
 wCurSpecies:: ds 1 ; ce60
-wce61:: ds 1 ; ce61
+wNamedObjectTypeBuffer:: ds 1 ; ce61
 wce62:: ds 1 ; ce62
 wce63::
 wJumpTableIndex::
@@ -2146,9 +2145,9 @@ wce87:: ds 1 ; ce87
 wce88:: ds 1 ; ce88
 wce89:: ds 1 ; ce89
 wce8a:: ds 1 ; ce8a
-wMovementPerson:: ds 1 ; ce8b
-wMovementDataPointerBank:: ds 1 ; ce8c
-wMovementDataPointerAddr:: dw ; ce8d
+wMovementObject:: ds 1 ; ce8b
+wMovementDataBank:: ds 1 ; ce8c
+wMovementDataAddress:: dw ; ce8d
 wce8f:: ds 1 ; ce8f
 wce90:: ds 1 ; ce90
 wce91:: ds 1 ; ce91
@@ -2194,13 +2193,14 @@ wceb6:: ds 1 ; ceb6
 wceb7:: ds 1 ; ceb7
 wWindowDataEnd::
 
-wMenuDataHeader::
+wMenuHeader::
+wMenuFlags::
 wceb8:: ds 1 ; ceb8
 wMenuBorderTopCoord:: ds 1 ; ceb9
 wMenuBorderLeftCoord:: ds 1 ; ceba
 wMenuBorderBottomCoord:: ds 1 ; cebb
 wMenuBorderRightCoord:: ds 1 ; cebc
-wMenuData2Pointer:: dw ; cebd
+wMenuDataPointer:: dw ; cebd
 wMenuCursorBuffer:: ds 1 ; cebf
 wcec0:: ds 1 ; cec0
 wcec1:: ds 1 ; cec1
@@ -2210,15 +2210,15 @@ wcec4:: ds 1 ; cec4
 wcec5:: ds 1 ; cec5
 wcec6:: ds 1 ; cec6
 wcec7:: ds 1 ; cec7
-wMenuDataHeaderEnd::
+wMenuHeaderEnd::
 
-wMenuData2::
-wMenuData2Flags:: ds 1 ; cec8
-wMenuData2Items:: ds 1 ; cec9
-wMenuData2IndicesPointer:: ds 1 ; ceca
+wMenuData::
+wMenuDataFlags:: ds 1 ; cec8
+wMenuDataItems:: ds 1 ; cec9
+wMenuDataIndicesPointer:: ds 1 ; ceca
 wMenuDataBank:: ds 1 ; cecb
-wMenuData2DisplayFunctionPointer:: dw ; cecc
-wMenuData2PointerTableAddr:: ds 1 ; cece
+wMenuDataDisplayFunctionPointer:: dw ; cecc
+wMenuDataPointerTableAddr:: ds 1 ; cece
 wcecf:: ds 1 ; cecf
 wced0:: ds 1 ; ced0
 wced1:: ds 1 ; ced1
@@ -2228,14 +2228,14 @@ wced4:: ds 1 ; ced4
 wced5:: ds 1 ; ced5
 wced6:: ds 1 ; ced6
 wced7:: ds 1 ; ced7
-wMenuData2End::
+wMenuDataEnd::
 
 wMenuData3::
 w2DMenuCursorInitY:: ds 1 ; ced8
 wced9:: ds 1 ; ced9
 wceda:: ds 1 ; ceda
 wcedb:: ds 1 ; cedb
-wcedc:: ds 1 ; cedc
+w2DMenuFlags1:: ds 1 ; cedc
 wcedd:: ds 1 ; cedd
 wcede:: ds 1 ; cede
 wMenuJoypadFilter:: ds 1 ; cedf
@@ -2259,7 +2259,7 @@ wceec:: ds 1 ; ceec
 wMovementBufferCount:: ; ceed
 wceed:: ds 1 ; ceed
 
-wMovementBufferPerson::
+wMovementBufferObject::
 wceee:: ds 1 ; ceee
 
 wTemporaryBuffer::
@@ -2328,10 +2328,13 @@ wcf25:: ds 1 ; cf25
 wcf26:: ds 1 ; cf26
 wcf27:: ds 1 ; cf27
 wcf28:: ds 1 ; cf28
+wSeenTrainerBank::
 wcf29:: ds 1 ; cf29
+wSeenTrainerDistance::
 wcf2a:: ds 1 ; cf2a
+wSeenTrainerDirection::
 wcf2b:: ds 1 ; cf2b
-wTempTrainerHeader::
+wTempTrainer::
 wcf2c:: ds 1 ; cf2c
 wcf2d:: ds 1 ; cf2d
 wcf2e:: ds 1 ; cf2e
@@ -2342,8 +2345,9 @@ wWinTextPointer:: dw ; cf32
 wLossTextPointer:: dw ; cf34
 wcf36:: ds 1 ; cf36
 wcf37:: ds 1 ; cf37
+wRunningTrainerBattleScript::
 wcf38:: ds 1 ; cf38
-wTempTrainerHeaderEnd::
+wTempTrainerEnd::
 wcf39:: ds 1 ; cf39
 wcf3a:: ds 1 ; cf3a
 wcf3b:: ds 1 ; cf3b
@@ -2424,8 +2428,8 @@ wcfd4:: ds 1 ; cfd4
 wcfd5:: ds 1 ; cfd5
 wcfd6:: ds 1 ; cfd6
 wcfd7:: ds 1 ; cfd7
-wcfd8:: ds 1 ; cfd8
-wcfd9:: ds 1 ; cfd9
+wQueuedScriptBank:: ds 1 ; cfd8
+wQueuedScriptAddr:: ds 1 ; cfd9
 wcfda:: ds 1 ; cfda
 wPredefID:: ds 1 ; cfdb
 wPredefTemp:: dw ; cfdc
@@ -2697,7 +2701,8 @@ wTrainerClass:: ds 1 ; d11d
 wd11e:: ds 1 ; d11e
 wd11f:: ds 1 ; d11f
 
-wBaseData:: ; d120
+wBaseDexNo:: ; d120
+wCurBaseData:: ; d120
 wd120:: ds 1 ; d120
 wd121:: ds 1 ; d121
 wd122:: ds 1 ; d122
@@ -2715,7 +2720,9 @@ wd12d:: ds 1 ; d12d
 wd12e:: ds 1 ; d12e
 wBaseEggSteps:: db ; d12f
 wd130:: ds 1 ; d130
+wBasePicSize::
 wd131:: ds 1 ; d131
+wBaseUnusedFrontpic::
 wd132:: ds 1 ; d132
 wd133:: ds 1 ; d133
 wd134:: ds 1 ; d134
@@ -2730,7 +2737,7 @@ wd13c:: ds 1 ; d13c
 wd13d:: ds 1 ; d13d
 wd13e:: ds 1 ; d13e
 wd13f:: ds 1 ; d13f
-wBaseDataEnd::
+wCurBaseDataEnd::
 
 wd140:: ds 1 ; d140
 wCurDamage:: ds 2 ; d141
@@ -2752,6 +2759,7 @@ wTempNumBuffer::
 wNamedObjectIndexBuffer::
 wDeciramBuffer::
 wBreedingCompatibility::
+wNumSetBits::
 wd151:: ds 1 ; d151
 wd152:: ds 1 ; d152
 wd153:: ds 1 ; d153
@@ -3381,8 +3389,8 @@ wd940:: ds 1 ; d940
 wCurrentMapTriggerPointer:: dw ; d941
 wd943:: ds 1 ; d943
 wd944:: ds 1 ; d944
-wCurrMapWarpCount:: ds 1 ; d945
-wCurrMapWarpHeaderPointer:: dw ; d946
+wCurMapWarpCount:: ds 1 ; d945
+wCurMapWarpsPointer:: dw ; d946
 wd948:: ds 1 ; d948
 wd949:: ds 1 ; d949
 wd94a:: ds 1 ; d94a
@@ -3553,9 +3561,11 @@ wMapData::
 wVisitedSpawns:: ds 4 ; flag_array NUM_SPAWNS ; d9ee
 
 	warp_struct wDig ; d9f2
-wd9f5:: ds 1 ; d9f5
-wd9f6:: ds 1 ; d9f6
-wd9f7:: ds 1 ; d9f7
+	
+wBackupWarpNumber:: db ; d9f5
+wBackupMapGroup:: db ; d9f6
+wBackupMapNumber:: db ; d9f7
+
 wd9f8:: ds 1 ; d9f8
 wd9f9:: ds 1 ; d9f9
 wd9fa:: ds 1 ; d9fa
@@ -3778,3 +3788,5 @@ wStackTop::
 	ds 1
 
 INCLUDE "sram.asm"
+
+INCLUDE "hram.asm"

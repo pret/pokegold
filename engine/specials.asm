@@ -83,7 +83,7 @@ SpecialsPointers:
 	add_special ReloadSpritesNoPalettes, $02
 	add_special ClearBGPalettes
 	add_special UpdateTimePals
-	add_special ClearTileMap
+	add_special ClearTilemap
 	add_special UpdateSprites
 	add_special ReplacePlayerSprite
 	add_special GameCornerPrizeMonCheckDex
@@ -342,9 +342,9 @@ DummyNonfunctionalGameCornerGame: ; c4e7 (3:44e7)
 	ret
 
 Functionc4f4: ; c4f4 (3:44f4)
-	call Function3425
+	call FarQueueScript
 	call FadeToMenu
-	ld hl, wcfd8
+	ld hl, wQueuedScriptBank
 	ld a, [hli]
 	push af
 	ld a, [hli]
@@ -524,10 +524,10 @@ PlayCurMonCry: ; c60b (3:460b)
 	jp PlayMonCry
 
 GameboyCheck: ; c611 (3:4611)
-	ld a, [hCGB]
+	ldh a, [hCGB]
 	and a
 	jr nz, .asm_c622
-	ld a, [hSGB]
+	ldh a, [hSGB]
 	and a
 	jr nz, .asm_c61e
 	xor a

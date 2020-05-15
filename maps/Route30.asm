@@ -60,7 +60,7 @@ TrainerYoungsterJoey:
 	askforphonenumber PHONE_YOUNGSTER_JOEY
 	ifequal PHONE_CONTACTS_FULL, .PhoneFull
 	ifequal PHONE_CONTACT_REFUSED, .NumberDeclined
-	trainertotext YOUNGSTER, JOEY1, MEM_BUFFER_0
+	trainertotext YOUNGSTER, JOEY1, STRING_BUFFER_3
 	scall .RegisteredNumber
 	jump .NumberAccepted
 

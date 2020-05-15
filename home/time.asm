@@ -1,54 +1,79 @@
-AskTimer:: ; 45b (0:045b)
+; Functions relating to the timer interrupt and the real-time-clock.
+
+Unreferenced_Timer::
 	reti
 
-LatchClock:: ; 45c (0:045c)
-	ld a, $0
+LatchClock::
+; latch clock counter data
+	ld a, 0
 	ld [MBC3LatchClock], a
-	ld a, $1
+	ld a, 1
 	ld [MBC3LatchClock], a
 	ret
 
-UpdateTime:: ; 467 (0:0467)
+UpdateTime::
 	call GetClock
 	call FixDays
 	call FixTime
 	farcall Function14032
 	ret
 
-GetClock:: ; 477 (0:0477)
+GetClock::
+; store clock data in hRTCDayHi-hRTCSeconds
+
+; enable clock r/w
 	ld a, SRAM_ENABLE
 	ld [MBC3SRamEnable], a
+
+; clock data is 'backwards' in hram
+
 	call LatchClock
 	ld hl, MBC3SRamBank
 	ld de, MBC3RTC
+
 	ld [hl], RTC_S
 	ld a, [de]
-	and $3f
-	ld [hRTCSeconds], a
+	maskbits 60
+	ldh [hRTCSeconds], a
+
+
 	ld [hl], RTC_M
 	ld a, [de]
-	and $3f
-	ld [hRTCMinutes], a
+	maskbits 60
+	ldh [hRTCMinutes], a
+
 	ld [hl], RTC_H
 	ld a, [de]
-	and $1f
-	ld [hRTCHours], a
+	maskbits 24
+	ldh [hRTCHours], a
+
 	ld [hl], RTC_DL
 	ld a, [de]
-	ld [hRTCDayLo], a
+	ldh [hRTCDayLo], a
+
 	ld [hl], RTC_DH
 	ld a, [de]
-	ld [hRTCDayHi], a
+	ldh [hRTCDayHi], a
+
+; unlatch clock / disable clock r/w
 	call CloseSRAM
 	ret
 
-FixDays:: ; 4a8 (0:04a8)
-	ld a, [hRTCDayHi]
+FixDays::
+; fix day count
+; mod by 140
+
+; check if day count > 255 (bit 8 set)
+	ldh a, [hRTCDayHi] ; DH
 	bit 0, a
 	jr z, .daylo
+; reset dh (bit 8)
 	res 0, a
-	ld [hRTCDayHi], a
-	ld a, [hRTCDayLo]
+	ldh [hRTCDayHi], a
+
+; mod 140
+; mod twice since bit 8 (DH) was set
+	ldh a, [hRTCDayLo]
 .modh
 	sub 140
 	jr nc, .modh
@@ -56,133 +81,177 @@ FixDays:: ; 4a8 (0:04a8)
 	sub 140
 	jr nc, .modl
 	add 140
-	ld [hRTCDayLo], a
-	ld a, $40
+
+; update dl
+	ldh [hRTCDayLo], a
+
+; flag for sRTCStatusFlags
+	ld a, %01000000
 	jr .set
+
 .daylo
-	ld a, [hRTCDayLo]
+; quit if fewer than 140 days have passed
+	ldh a, [hRTCDayLo]
 	cp 140
 	jr c, .quit
+
+; mod 140
 .mod
 	sub 140
 	jr nc, .mod
 	add 140
-	ld [hRTCDayLo], a
-	ld a, $20
+
+; update dl
+	ldh [hRTCDayLo], a
+
+; flag for sRTCStatusFlags
+	ld a, %00100000
+
 .set
+; update clock with modded day value
 	push af
 	call SetClock
 	pop af
 	scf
 	ret
+
 .quit
 	ccf
 	xor a
 	ret
 
-FixTime:: ; 4de (0:04de)
-	ld a, [hRTCSeconds]
+FixTime::
+; add ingame time (set at newgame) to current time
+; store time in wCurDay, hHours, hMinutes, hSeconds
+
+; second
+	ldh a, [hRTCSeconds]
 	ld c, a
 	ld a, [wd1df]
 	add c
 	sub 60
-	jr nc, .asm_4eb
+	jr nc, .updatesec
 	add 60
-.asm_4eb
-	ld [hSeconds], a
-	ccf
-	ld a, [hRTCMinutes]
+.updatesec
+	ldh [hSeconds], a
+
+; minute
+	ccf ; carry is set, so turn it off
+	ldh a, [hRTCMinutes]
 	ld c, a
 	ld a, [wd1de]
 	adc c
 	sub 60
-	jr nc, .asm_4fb
+	jr nc, .updatemin
 	add 60
-.asm_4fb
-	ld [hMinutes], a
-	ccf
-	ld a, [hRTCHours]
+.updatemin
+	ldh [hMinutes], a
+
+; hour
+	ccf ; carry is set, so turn it off
+	ldh a, [hRTCHours]
 	ld c, a
 	ld a, [wd1dd]
 	adc c
 	sub 24
-	jr nc, .asm_50b
+	jr nc, .updatehr
 	add 24
-.asm_50b
-	ld [hHours], a
-	ccf
-	ld a, [hRTCDayLo]
+.updatehr
+	ldh [hHours], a
+
+; day
+	ccf ; carry is set, so turn it off
+	ldh a, [hRTCDayLo]
 	ld c, a
 	ld a, [wd1dc]
 	adc c
 	ld [wCurDay], a
 	ret
 
-SetTimeOfDay::
+InitTimeOfDay::
 	xor a
 	ld [wStringBuffer2], a
-	ld a, $0
+	ld a, 0 ; useless
 	ld [wStringBuffer2 + 3], a
 	jr InitTime
 
-SetDayOfWeek::
+InitDayOfWeek::
 	call UpdateTime
-	ld a, [hHours]
+	ldh a, [hHours]
 	ld [wStringBuffer2 + 1], a
-	ld a, [hMinutes]
+	ldh a, [hMinutes]
 	ld [wStringBuffer2 + 2], a
-	ld a, [hSeconds]
+	ldh a, [hSeconds]
 	ld [wStringBuffer2 + 3], a
-	jr InitTime
+	jr InitTime ; useless
 
 InitTime::
 	farcall Function140ff
 	ret
 
 PanicResetClock::
-	call ClearhRTC
+	call .ClearhRTC
 	call SetClock
 	ret
 
-ClearhRTC:: ; 546 (0:0546)
+.ClearhRTC:
 	xor a
-	ld [hRTCSeconds], a
-	ld [hRTCMinutes], a
-	ld [hRTCHours], a
-	ld [hRTCDayLo], a
-	ld [hRTCDayHi], a
+	ldh [hRTCSeconds], a
+	ldh [hRTCMinutes], a
+	ldh [hRTCHours], a
+	ldh [hRTCDayLo], a
+	ldh [hRTCDayHi], a
 	ret
 
-SetClock:: ; 552 (0:0552)
+SetClock::
+; set clock data from hram
+
+; enable clock r/w
 	ld a, SRAM_ENABLE
 	ld [MBC3SRamEnable], a
+
+; set clock data
+; stored 'backwards' in hram
+
 	call LatchClock
 	ld hl, MBC3SRamBank
 	ld de, MBC3RTC
+
+; seems to be a halt check that got partially commented out
+; this block is totally pointless
 	ld [hl], RTC_DH
 	ld a, [de]
-	bit 6, a
+	bit 6, a ; halt
 	ld [de], a
+
+; seconds
 	ld [hl], RTC_S
-	ld a, [hRTCSeconds]
+	ldh a, [hRTCSeconds]
 	ld [de], a
+; minutes
 	ld [hl], RTC_M
-	ld a, [hRTCMinutes]
+	ldh a, [hRTCMinutes]
 	ld [de], a
+; hours
 	ld [hl], RTC_H
-	ld a, [hRTCHours]
+	ldh a, [hRTCHours]
 	ld [de], a
+; day lo
 	ld [hl], RTC_DL
-	ld a, [hRTCDayLo]
+	ldh a, [hRTCDayLo]
 	ld [de], a
+; day hi
 	ld [hl], RTC_DH
-	ld a, [hRTCDayHi]
-	res 6, a
+	ldh a, [hRTCDayHi]
+	res 6, a ; make sure timer is active
 	ld [de], a
-	call CloseSRAM
+
+; cleanup
+	call CloseSRAM ; unlatch clock, disable clock r/w
 	ret
 
 ClearRTCStatus::
+; clear sRTCStatusFlags
 	xor a
 	push af
 	ld a, BANK(s0_ac60)
@@ -193,6 +262,7 @@ ClearRTCStatus::
 	ret
 
 RecordRTCStatus::
+; append flags to sRTCStatusFlags
 	ld hl, s0_ac60
 	push af
 	ld a, BANK(s0_ac60)
@@ -204,6 +274,7 @@ RecordRTCStatus::
 	ret
 
 CheckRTCStatus::
+; check sRTCStatusFlags
 	ld a, BANK(s0_ac60)
 	call OpenSRAM
 	ld a, [s0_ac60]

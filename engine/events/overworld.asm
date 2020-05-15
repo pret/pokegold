@@ -25,7 +25,7 @@ FieldMoveGetPartyNick: ; c74b (3:474b)
 	ld [wMonType], a
 	ld a, [wCurPartyMon]
 	call GetNick
-	call Function317b
+	call CopyName1
 	ld de, wStringBuffer2
 	ld hl, wStringBuffer3
 	call CopyName2
@@ -48,7 +48,7 @@ FieldMoveBadgeCheck: ; c776 (3:4776)
 	call FieldMoveEngineFlagCheck
 	ret nc
 	ld hl, .BadgeRequiredText
-	call MenuTextBoxBackup
+	call MenuTextboxBackup
 	scf
 	ret
 
@@ -99,7 +99,7 @@ FieldMovePartyCheck: ; c787 (3:4787)
 
 FieldMoveFailed: ; c7be (3:47be)
 	ld hl, .CantUseHereText
-	call MenuTextBoxBackup
+	call MenuTextboxBackup
 	ret
 
 .CantUseHereText:
@@ -146,7 +146,7 @@ CutTreeOrGrass:
 
 FailToCut:
 	ld hl, Text_NothingToCut
-	call MenuTextBoxBackup
+	call MenuTextboxBackup
 	ld a, $80
 	ret
 
@@ -206,7 +206,7 @@ CutDownTreeOrGrass:
 	ld a, [wBuffer5]
 	ld [hl], a
 	xor a
-	ld [hBGMapMode], a
+	ldh [hBGMapMode], a
 	call OverworldTextModeSwitch
 	call UpdateSprites
 	call DelayFrame
@@ -397,13 +397,13 @@ StartSurfing:
 
 CantSurf:
 	ld hl, CantSurfText
-	call MenuTextBoxBackup
+	call MenuTextboxBackup
 	ld a, $80
 	ret
 
 AlreadySurfing:
 	ld hl, AlreadySurfingText
-	call MenuTextBoxBackup
+	call MenuTextboxBackup
 	ld a, $80
 	ret
 
@@ -542,8 +542,8 @@ TryToFly:
 
 .asm_ca83
 	xor a
-	ld [hMapAnims], a
-	call LoadStandardMenuDataHeader
+	ldh [hMapAnims], a
+	call LoadStandardMenuHeader
 	call ClearSprites
 	ld a, $24
 	ld hl, $5a61
@@ -783,7 +783,7 @@ FailToEscapeFromDungeon:
 	cp $2
 	jr nz, .asm_cc1c
 	ld hl, Text_CantUseDigEscapeRopeHere ; $4c29
-	call MenuTextBox
+	call MenuTextbox
 	call WaitPressAorB_BlinkCursor
 	call CloseWindow
 .asm_cc1c
@@ -882,7 +882,7 @@ DoTeleport:
 
 FailTeleport:
 	ld hl, Text_CantUseTeleportHere
-	call MenuTextBoxBackup
+	call MenuTextboxBackup
 	ld a, $80
 	ret
 
@@ -932,7 +932,7 @@ Functionccf1: ; ccf1 (3:4cf1)
 	jr asm_cd0c
 
 	ld hl, Text_AlreadyUsingStrength
-	call MenuTextBoxBackup
+	call MenuTextboxBackup
 	ld a, $80
 	ret
 
@@ -1134,7 +1134,7 @@ DisappearWhirlpool: ; 4e20
 	ld a, [wBuffer5]
 	ld [hl], a
 	xor a
-	ld [hBGMapMode], a
+	ldh [hBGMapMode], a
 	call OverworldTextModeSwitch
 	ld a, [wBuffer6]
 	ld e, a
@@ -1285,12 +1285,12 @@ TryRockSmashFromMenu: ; cef7 (3:4ef7)
 GetFacingObject: ; cf10 (3:4f10)
 	farcall CheckFacingObject
 	jr nc, .asm_cf2f
-	ld a, [hObjectStructIndexBuffer]
+	ldh a, [hObjectStructIndexBuffer]
 	call GetObjectStruct
 	ld hl, $1
 	add hl, bc
 	ld a, [hl]
-	ld [hLastTalked], a
+	ldh [hLastTalked], a
 	call GetMapObject
 	ld hl, $4
 	add hl, bc
@@ -1547,7 +1547,7 @@ PutTheRodAway: ; d096
 	call ClearBox
 	call WaitBGMap
 	xor a
-	ld [hBGMapMode], a
+	ldh [hBGMapMode], a
 	ld a, $1
 	ld [wPlayerAction], a
 	call UpdateSprites

@@ -1,56 +1,66 @@
-Reset:: ; 5b0 (0:05b0)
-	call MapSetup_Sound_Off
+Reset::
+	call InitSound
 	xor a
-	ld [hMapAnims], a
+	ldh [hMapAnims], a
 	call ClearPalettes
 	ei
+
 	ld hl, wd8ba
 	set 7, [hl]
+
 	ld c, 32
 	call DelayFrames
+
 	jr Init
-_Start:: ; 5c6 (0:05c6)
+
+_Start::
 	cp $11
 	jr z, .cgb
 	xor a
 	jr .load
+
 .cgb
 	ld a, $1
+
 .load
-	ld [hCGB], a
-Init:: ; 5d1 (0:05d1)
+	ldh [hCGB], a
+
+Init::
 	di
+
 	xor a
-	ld [rIF], a
-	ld [rIE], a
-	ld [rRP], a
-	ld [rSCX], a
-	ld [rSCY], a
-	ld [rSB], a
-	ld [rSC], a
-	ld [rWX], a
-	ld [rWY], a
-	ld [rBGP], a
-	ld [rOBP0], a
-	ld [rOBP1], a
-	ld [rTMA], a
-	ld [rTAC], a
+	ldh [rIF], a
+	ldh [rIE], a
+	ldh [rRP], a
+	ldh [rSCX], a
+	ldh [rSCY], a
+	ldh [rSB], a
+	ldh [rSC], a
+	ldh [rWX], a
+	ldh [rWY], a
+	ldh [rBGP], a
+	ldh [rOBP0], a
+	ldh [rOBP1], a
+	ldh [rTMA], a
+	ldh [rTAC], a
 	ld [wceeb], a
-	ld a, $4
-	ld [rTAC], a
+
+	ld a, %100 ; Start timer at 4096Hz
+	ldh [rTAC], a
+
 .wait
-	ld a, [rLY]
-	cp 145
+	ldh a, [rLY]
+	cp LY_VBLANK + 1
 	jr nz, .wait
 
 	xor a
-	ld [rLCDC], a
+	ldh [rLCDC], a
 
-; Clear WRAM
-	ld hl, wMusicPlaying
+; Clear WRAM bank 0
+	ld hl, WRAM0_Begin
 	ld bc, $2000
-.ByteFill
-	ld [hl], $0
+.ByteFill:
+	ld [hl], 0
 	inc hl
 	dec bc
 	ld a, b
@@ -60,41 +70,41 @@ Init:: ; 5d1 (0:05d1)
 	ld sp, wStackTop
 
 	call ClearVRAM
-	ld a, [hCGB]
+	ldh a, [hCGB]
 	push af
 	xor a
-	ld hl, HRAM_START
-	ld bc, HRAM_END - HRAM_START
+	ld hl, HRAM_Begin
+	ld bc, HRAM_End - HRAM_Begin
 	call ByteFill
 	pop af
-	ld [hCGB], a
+	ldh [hCGB], a
 
 	call ClearSprites
 
-	ld a, BANK(LoadPushOAM)
+	ld a, BANK(WriteOAMDMACodeToHRAM)
 	rst Bankswitch
 
-	call LoadPushOAM
+	call WriteOAMDMACodeToHRAM
 
 	xor a
-	ld [hMapAnims], a
-	ld [hSCX], a
-	ld [hSCY], a
-	ld [rJOYP], a
+	ldh [hMapAnims], a
+	ldh [hSCX], a
+	ldh [hSCY], a
+	ldh [rJOYP], a
 
 	ld a, $8 ; HBlank int enable
-	ld [rSTAT], a
+	ldh [rSTAT], a
 
 	ld a, $90
-	ld [hWY], a
-	ld [rWY], a
+	ldh [hWY], a
+	ldh [rWY], a
 
-	ld a, $7
-	ld [hWX], a
-	ld [rWX], a
+	ld a, 7
+	ldh [hWX], a
+	ldh [rWX], a
 
-	ld a, -1
-	ld [hLinkPlayerNumber], a
+	ld a, CONNECTION_NOT_ESTABLISHED
+	ldh [hLinkPlayerNumber], a
 
 	ld h, $98
 	call BlankBGMap
@@ -103,10 +113,10 @@ Init:: ; 5d1 (0:05d1)
 
 	callfar InitCGBPals
 
-	ld a, $9c
-	ld [hBGMapAddress + 1], a
-	xor a
-	ld [hBGMapAddress], a
+	ld a, HIGH(vBGMap1)
+	ldh [hBGMapAddress + 1], a
+	xor a ; LOW(vBGMap1)
+	ldh [hBGMapAddress], a
 
 	farcall StartClock
 
@@ -116,7 +126,7 @@ Init:: ; 5d1 (0:05d1)
 	ld [MBC3LatchClock], a
 	ld [MBC3SRamEnable], a
 
-	ld a, %11100011
+	ld a, LCDC_DEFAULT ; %11100011
 	; LCD on
 	; Win tilemap 1
 	; Win on
@@ -125,34 +135,33 @@ Init:: ; 5d1 (0:05d1)
 	; OBJ 8x8
 	; OBJ on
 	; BG on
-	ld [rLCDC], a
+	ldh [rLCDC], a
 
 	ld a, $1f
-	ld [rIE], a
+	ldh [rIE], a
 	ei
 
 	call DelayFrame
 
-	ld a, $30
-	call Predef
+	predef InitSGBBorder ; SGB init
 
-	call MapSetup_Sound_Off
+	call InitSound
 	xor a
 	ld [wMapMusic], a
 	jp GameInit
 
-ClearVRAM:: ; 68e (0:068e)
-	ld hl, $8000
-	ld bc, $2000
+ClearVRAM::
+	ld hl, VRAM_Begin
+	ld bc, VRAM_End - VRAM_Begin
 	xor a
 	call ByteFill
 	ret
 
-BlankBGMap:: ; 699 (0:0699)
+BlankBGMap::
 	ld a, $7f
 	jr asm_69e
 
-FillBGMap:: ; 69d
+FillBGMap::
 	ld a, l
 asm_69e
 	ld de, $400

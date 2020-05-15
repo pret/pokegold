@@ -1,5 +1,5 @@
 LearnMove:
-	call BackUpTilesToBuffer
+	call LoadTilemapToTempTilemap
 	ld a, [wCurPartyMon]
 	ld hl, wPartyMon1Nickname
 	call GetNick
@@ -127,7 +127,7 @@ LearnMove:
 	ld [wBuffer1], a
 	predef ListMoves
 	ld a, $4
-	ld [wMenuData2End], a
+	ld [wMenuDataEnd], a
 	ld a, $6
 	ld [wced9], a
 	ld a, [wcfe3]
@@ -140,14 +140,14 @@ LearnMove:
 	ld a, $3
 	ld [wMenuJoypadFilter], a
 	ld a, $20
-	ld [wcedc], a
+	ld [w2DMenuFlags1], a
 	xor a
 	ld [wcedd], a
 	ld a, $20
 	ld [wcede], a
 	call StaticMenuJoypad
 	push af
-	call ReloadTilesFromBuffer
+	call SafeLoadTempTilemapToTilemap
 	pop af
 	pop hl
 	bit 1, a

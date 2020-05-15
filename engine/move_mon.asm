@@ -11,7 +11,7 @@ TryAddMonToParty:: ; d892 (3:5892)
 	ret nc
 	ld [de], a
 	ld a, [de]
-	ld [hMoveMon], a
+	ldh [hMoveMon], a
 	add e
 	ld e, a
 	jr nc, .asm_d8ad
@@ -28,7 +28,7 @@ TryAddMonToParty:: ; d892 (3:5892)
 	jr z, .asm_d8c2
 	ld hl, wOTPartyMonOT
 .asm_d8c2
-	ld a, [hMoveMon]
+	ldh a, [hMoveMon]
 	dec a
 	call SkipNames
 	ld d, h
@@ -43,7 +43,7 @@ TryAddMonToParty:: ; d892 (3:5892)
 	ld [wd151], a
 	call GetPokemonName
 	ld hl, wPartyMonNicknames
-	ld a, [hMoveMon]
+	ldh a, [hMoveMon]
 	dec a
 	call SkipNames
 	ld d, h
@@ -58,7 +58,7 @@ TryAddMonToParty:: ; d892 (3:5892)
 	jr z, .asm_d903
 	ld hl, wOTPartyMon1
 .asm_d903
-	ld a, [hMoveMon]
+	ldh a, [hMoveMon]
 	dec a
 	ld bc, PARTYMON_STRUCT_LENGTH
 	call AddNTimes
@@ -117,28 +117,34 @@ GeneratePartyMonStats:
 	inc de
 	inc de
 	inc de
+
+	; Initialize ID.
 	ld a, [wPlayerID]
 	ld [de], a
 	inc de
 	ld a, [wPlayerID + 1]
 	ld [de], a
 	inc de
+
+	; Initialize Exp.
 	push de
 	ld a, [wCurPartyLevel]
 	ld d, a
-	callfar CalcExpAtLevel ; 14:5550
+	callfar CalcExpAtLevel
 	pop de
-	ld a, [hPrintNum2]
+	ldh a, [hProduct + 1]
 	ld [de], a
 	inc de
-	ld a, [hStringCmpString2]
+	ldh a, [hProduct + 2]
 	ld [de], a
 	inc de
-	ld a, [hPrintNum4]
+	ldh a, [hProduct + 3]
 	ld [de], a
 	inc de
+
+	; Initialize stat experience.
 	xor a
-	ld b, $a
+	ld b, MON_DVS - MON_STAT_EXP
 .asm_d980
 	ld [de], a
 	inc de
@@ -215,10 +221,10 @@ GeneratePartyMonStats:
 	ld c, a
 	ld b, $0
 	call CalcMonStatC
-	ld a, [hStringCmpString2]
+	ldh a, [hProduct + 2]
 	ld [de], a
 	inc de
-	ld a, [hPrintNum4]
+	ldh a, [hProduct + 3]
 	ld [de], a
 	inc de
 	jr .asm_da2f
@@ -787,11 +793,11 @@ Functiondd6a: ; dd6a (3:5d6a)
 	pop bc
 	ld hl, $8
 	add hl, bc
-	ld a, [hQuotient]
+	ldh a, [hQuotient]
 	ld [hli], a
-	ld a, [hPrintNum3]
+	ldh a, [hPrintNum3]
 	ld [hli], a
-	ld a, [hPrintNum4]
+	ldh a, [hPrintNum4]
 	ld [hl], a
 	and a
 	ret
@@ -886,13 +892,13 @@ SendMonIntoBox: ; de74 (3:5e74)
 	ld d, a
 	callfar CalcExpAtLevel
 	pop de
-	ld a, [hQuotient]
+	ldh a, [hQuotient]
 	ld [de], a
 	inc de
-	ld a, [hPrintNum3]
+	ldh a, [hPrintNum3]
 	ld [de], a
 	inc de
-	ld a, [hPrintNum4]
+	ldh a, [hPrintNum4]
 	ld [de], a
 	inc de
 	xor a
@@ -1057,7 +1063,7 @@ GiveEgg: ; df92 (3:5f92)
 	ld hl, wPartyMon1Happiness
 	ld bc, PARTYMON_STRUCT_LENGTH
 	call AddNTimes
-	ld a, [wMonStatusFlags]
+	ld a, [wDebugFlags]
 	bit 1, a
 	ld a, $1
 	jr nz, .asm_e028
@@ -1130,7 +1136,7 @@ RemoveMonFromPartyOrBox: ; e03f (3:603f)
 	jr z, .asm_e096
 	ld bc, sBoxMonNicknames
 .asm_e096
-	call Function3231
+	call CopyDataUntil
 	ld hl, wPartyMon1
 	ld bc, PARTYMON_STRUCT_LENGTH
 	ld a, [wPokemonWithdrawDepositParameter]
@@ -1156,7 +1162,7 @@ RemoveMonFromPartyOrBox: ; e03f (3:603f)
 	add hl, bc
 	ld bc, wPartyMonOT
 .asm_e0c9
-	call Function3231
+	call CopyDataUntil
 	ld hl, wPartyMonNicknames
 	ld a, [wPokemonWithdrawDepositParameter]
 	and a
@@ -1176,7 +1182,7 @@ RemoveMonFromPartyOrBox: ; e03f (3:603f)
 	jr z, .asm_e0f3
 	ld bc, sBoxEnd
 .asm_e0f3
-	call Function3231
+	call CopyDataUntil
 .asm_e0f6
 	ld a, [wPokemonWithdrawDepositParameter]
 	and a
@@ -1256,10 +1262,10 @@ CalcMonStats: ; e16d
 .loop
 	inc c
 	call CalcMonStatC
-	ld a, [hMultiplicand + 1]
+	ldh a, [hMultiplicand + 1]
 	ld [de], a
 	inc de
-	ld a, [hMultiplicand + 2]
+	ldh a, [hMultiplicand + 2]
 	ld [de], a
 	inc de
 	ld a, c
@@ -1304,22 +1310,22 @@ CalcMonStatC: ; e181
 	add hl, bc
 .sqrt_loop
 	xor a
-	ld [hMultiplicand], a
-	ld [hMultiplicand + 1], a
+	ldh [hMultiplicand], a
+	ldh [hMultiplicand + 1], a
 	inc b
 	ld a, b
 	cp $ff
 	jr z, .no_stat_exp
-	ld [hMultiplicand + 2], a
-	ld [hMultiplier], a
+	ldh [hMultiplicand + 2], a
+	ldh [hMultiplier], a
 	call Multiply
 	ld a, [hld]
 	ld d, a
-	ld a, [hProduct + 3]
+	ldh a, [hProduct + 3]
 	sub d
 	ld a, [hli]
 	ld d, a
-	ld a, [hProduct + 2]
+	ldh a, [hProduct + 2]
 	sbc d
 	jr c, .sqrt_loop
 .no_stat_exp
@@ -1408,22 +1414,22 @@ CalcMonStatC: ; e181
 	inc d
 
 .no_overflow_2
-	ld [hMultiplicand + 2], a
+	ldh [hMultiplicand + 2], a
 	ld a, d
-	ld [hMultiplicand + 1], a
+	ldh [hMultiplicand + 1], a
 	xor a
-	ld [hMultiplicand + 0], a
+	ldh [hMultiplicand + 0], a
 	ld a, [wCurPartyLevel]
-	ld [hMultiplier], a
+	ldh [hMultiplier], a
 	call Multiply
-	ld a, [hProduct + 1]
-	ld [hDividend + 0], a
-	ld a, [hProduct + 2]
-	ld [hDividend + 1], a
-	ld a, [hProduct + 3]
-	ld [hDividend + 2], a
+	ldh a, [hProduct + 1]
+	ldh [hDividend + 0], a
+	ldh a, [hProduct + 2]
+	ldh [hDividend + 1], a
+	ldh a, [hProduct + 3]
+	ldh [hDividend + 2], a
 	ld a, 100
-	ld [hDivisor], a
+	ldh [hDivisor], a
 	ld a, 3
 	ld b, a
 	call Divide
@@ -1433,42 +1439,42 @@ CalcMonStatC: ; e181
 	jr nz, .not_hp
 	ld a, [wCurPartyLevel]
 	ld b, a
-	ld a, [hQuotient + 2]
+	ldh a, [hQuotient + 2]
 	add b
-	ld [hMultiplicand + 2], a
+	ldh [hMultiplicand + 2], a
 	jr nc, .no_overflow_3
-	ld a, [hQuotient + 1]
+	ldh a, [hQuotient + 1]
 	inc a
-	ld [hMultiplicand + 1], a
+	ldh [hMultiplicand + 1], a
 
 .no_overflow_3
 	ld a, 10
 
 .not_hp
 	ld b, a
-	ld a, [hQuotient + 2]
+	ldh a, [hQuotient + 2]
 	add b
-	ld [hMultiplicand + 2], a
+	ldh [hMultiplicand + 2], a
 	jr nc, .no_overflow_4
-	ld a, [hQuotient + 1]
+	ldh a, [hQuotient + 1]
 	inc a
-	ld [hMultiplicand + 1], a
+	ldh [hMultiplicand + 1], a
 
 .no_overflow_4
-	ld a, [hQuotient + 1]
+	ldh a, [hQuotient + 1]
 	cp (1000 / $100) + 1
 	jr nc, .max_stat
 	cp 1000 / $100
 	jr c, .stat_value_okay
-	ld a, [hQuotient + 2]
+	ldh a, [hQuotient + 2]
 	cp 1000 % $100
 	jr c, .stat_value_okay
 
 .max_stat
 	ld a, 999 / $100
-	ld [hMultiplicand + 1], a
+	ldh [hMultiplicand + 1], a
 	ld a, 999 % $100
-	ld [hMultiplicand + 2], a
+	ldh [hMultiplicand + 2], a
 
 .stat_value_okay
 	pop bc
@@ -1630,7 +1636,7 @@ TextJump_WasSentToBillsPC:
 
 InitNickname: ; e3b9 (3:63b9)
 	push de
-	call LoadStandardMenuDataHeader
+	call LoadStandardMenuHeader
 	call DisableSpriteUpdates
 	pop de
 	push de

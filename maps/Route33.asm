@@ -32,7 +32,7 @@ TrainerHikerAnthony:
 	askforphonenumber PHONE_HIKER_ANTHONY
 	ifequal PHONE_CONTACTS_FULL, .PhoneFull
 	ifequal PHONE_CONTACT_REFUSED, .NumberDeclined
-	trainertotext HIKER, ANTHONY2, MEM_BUFFER_0
+	trainertotext HIKER, ANTHONY2, STRING_BUFFER_3
 	scall .RegisteredNumber
 	jump .NumberAccepted
 

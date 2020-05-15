@@ -1,3 +1,35 @@
+CountSetBits::
+; Count the number of set bits in b bytes starting from hl.
+; Return in a, c and [wNumSetBits].
+	ld c, 0
+.next
+	ld a, [hli]
+	ld e, a
+	ld d, 8
+
+.count
+	srl e
+	ld a, 0
+	adc c
+	ld c, a
+	dec d
+	jr nz, .count
+
+	dec b
+	jr nz, .next
+
+	ld a, c
+	ld [wNumSetBits], a
+	ret
+
+GetWeekday::
+	ld a, [wCurDay]
+.mod
+	sub 7
+	jr nc, .mod
+	add 7
+	ret
+
 SetSeenAndCaughtMon::
 	push af
 	ld c, a
@@ -5,6 +37,8 @@ SetSeenAndCaughtMon::
 	ld b, SET_FLAG
 	call PokedexFlagAction
 	pop af
+	; fallthrough
+
 SetSeenMon::
 	ld c, a
 	ld hl, wPokedexSeen
@@ -21,10 +55,11 @@ CheckSeenMon::
 	ld c, a
 	ld hl, wPokedexSeen
 	ld b, CHECK_FLAG
-PokedexFlagAction:: ; 35e4 (0:35e4)
+	; fallthrough
+
+PokedexFlagAction::
 	ld d, 0
 	predef SmallFarFlagAction
 	ld a, c
 	and a
 	ret
-

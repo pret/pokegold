@@ -9,7 +9,7 @@
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
-	call jp_hl
+	call _hl_
 	ret
 
 Pointers4460:

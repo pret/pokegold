@@ -1,5 +1,6 @@
 ROM0
 	org $0000
+	"NULL"
 	"rst0"
 	org $0008
 	"rst8"
@@ -24,9 +25,9 @@ ROM0
 	org $0060
 	"joypad"
 	org $0100
-	"start"
+	"Header"
 	org $0150
-	"bank0"
+	"Home"
 ROMX $01
 	org $4000
 	"bank1"

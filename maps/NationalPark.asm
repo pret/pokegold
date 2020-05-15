@@ -93,7 +93,7 @@ TrainerSchoolboyJack1:
 	askforphonenumber PHONE_SCHOOLBOY_JACK
 	ifequal PHONE_CONTACTS_FULL, .PhoneFull
 	ifequal PHONE_CONTACT_REFUSED, .NumberDeclined
-	trainertotext SCHOOLBOY, JACK1, MEM_BUFFER_0
+	trainertotext SCHOOLBOY, JACK1, STRING_BUFFER_3
 	scall .RegisteredNumber
 	jump .NumberAccepted
 
@@ -187,7 +187,7 @@ TrainerPokefanfBeverly1:
 	askforphonenumber PHONE_POKEFAN_BEVERLY
 	ifequal PHONE_CONTACTS_FULL, .PhoneFull
 	ifequal PHONE_CONTACT_REFUSED, .NumberDeclined
-	trainertotext POKEFANF, BEVERLY1, MEM_BUFFER_0
+	trainertotext POKEFANF, BEVERLY1, STRING_BUFFER_3
 	scall .RegisteredNumber
 	jump .NumberAccepted
 

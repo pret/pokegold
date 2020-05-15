@@ -1,4 +1,3 @@
-INCLUDE "contents.asm"
 INCLUDE "constants.asm"
 
 
@@ -9,8 +8,8 @@ INCLUDE "engine/link/place_waiting_text.asm"
 DummyPredef1:
 	ret
 
-LoadPushOAM:: ; 4032 (1:4032)
-	ld c, hPushOAM - $ff00
+WriteOAMDMACodeToHRAM:: ; 4032 (1:4032)
+	ld c, hTransferVirtualOAM - $ff00
 	ld b, PushOAMEnd - PushOAM
 	ld hl, PushOAM
 .asm_4039
@@ -23,7 +22,7 @@ LoadPushOAM:: ; 4032 (1:4032)
 
 PushOAM:
 	ld a, wVirtualOAM / $100
-	ld [rDMA], a
+	ldh [rDMA], a
 	ld a, $28
 .asm_4046
 	dec a
@@ -38,37 +37,37 @@ INCLUDE "engine/title.asm"
 
 ReanchorBGMap_NoOAMUpdate:: ; 6551 (1:6551)
 	call DelayFrame
-	ld a, [hOAMUpdate]
+	ldh a, [hOAMUpdate]
 	push af
 	ld a, $1
-	ld [hOAMUpdate], a
-	ld a, [hBGMapMode]
+	ldh [hOAMUpdate], a
+	ldh a, [hBGMapMode]
 	push af
 	xor a
-	ld [hBGMapMode], a
+	ldh [hBGMapMode], a
 	call Function656b
 	pop af
-	ld [hBGMapMode], a
+	ldh [hBGMapMode], a
 	pop af
-	ld [hOAMUpdate], a
+	ldh [hOAMUpdate], a
 	ret
 
 Function656b: ; 656b (1:656b)
 	xor a
-	ld [hLCDCPointer], a
-	ld [hBGMapMode], a
+	ldh [hLCDCPointer], a
+	ldh [hBGMapMode], a
 	ld hl, wd565
 	set 7, [hl]
 	res 2, [hl]
 	ld a, $90
-	ld [hWY], a
+	ldh [hWY], a
 	call OverworldTextModeSwitch
 	ld a, $9c
 	call .LoadBGMapAddrIntoHRAM
-	call _OpenAndCloseMenu_HDMATransferTileMapAndAttrMap
+	call _OpenAndCloseMenu_HDMATransferTilemapAndAttrmap
 	xor a
-	ld [hBGMapMode], a
-	ld [hWY], a
+	ldh [hBGMapMode], a
+	ldh [hWY], a
 	ld a, $98
 	call .LoadBGMapAddrIntoHRAM
 	call .WaitTransfer
@@ -77,60 +76,60 @@ Function656b: ; 656b (1:656b)
 	ld a, $98
 	ld [wd05c], a
 	xor a
-	ld [hSCX], a
-	ld [hSCY], a
+	ldh [hSCX], a
+	ldh [hSCY], a
 	call ApplyBGMapAnchorToObjects
 	ret
 
 .LoadBGMapAddrIntoHRAM: ; 65a5 (1:65a5)
-	ld [hBGMapAddress + 1], a
+	ldh [hBGMapAddress + 1], a
 	xor a
-	ld [hBGMapAddress], a
+	ldh [hBGMapAddress], a
 	ret
 
 .WaitTransfer: ; 65ab (1:65ab)
-	ld a, [hBGMapMode]
+	ldh a, [hBGMapMode]
 	push af
 	xor a
-	ld [hBGMapMode], a
-	ld a, [hOAMUpdate]
+	ldh [hBGMapMode], a
+	ldh a, [hOAMUpdate]
 	push af
 	ld a, $1
-	ld [hOAMUpdate], a
+	ldh [hOAMUpdate], a
 	ld a, $3
-	ld [hFF9E], a
+	ldh [hVBlankCounter + 1], a
 .asm_65bc
 	call DelayFrame
-	ld a, [hFF9E]
+	ldh a, [hVBlankCounter + 1]
 	and a
 	jr nz, .asm_65bc
 	pop af
-	ld [hOAMUpdate], a
+	ldh [hOAMUpdate], a
 	pop af
-	ld [hBGMapMode], a
+	ldh [hBGMapMode], a
 	ret
 
 LoadFonts_NoOAMUpdate:: ; 65cb (1:65cb)
-	ld a, [hOAMUpdate]
+	ldh a, [hOAMUpdate]
 	push af
 	ld a, $1
-	ld [hOAMUpdate], a
+	ldh [hOAMUpdate], a
 	call .LoadGFX
 	pop af
-	ld [hOAMUpdate], a
+	ldh [hOAMUpdate], a
 	ret
 
 .LoadGFX: ; 65d9 (1:65d9)
 	call LoadFontsExtra
 	ld a, $90
-	ld [hWY], a
+	ldh [hWY], a
 	call SafeUpdateSprites
 	call Functiond9e
 	ret
 
 INCLUDE "engine/learn.asm"
 
-CheckNickErrors:: ; 677e (1:677e)
+CorrectNickErrors:: ; 677e (1:677e)
 	push bc
 	push de
 	ld b, MON_NAME_LENGTH
@@ -193,9 +192,9 @@ INCLUDE "engine/events/shuckle.asm"
 INCLUDE "engine/events/haircut.asm"
 
 SECTION "bank2", ROMX, BANK[$2]
-SwapTextboxPalettes::
-	ld hl, wTileMap
-	ld de, wAttrMap
+_SwapTextboxPalettes::
+	ld hl, wTilemap
+	ld de, wAttrmap
 	ld b, $12
 .asm_8008
 	ld c, $14
@@ -248,7 +247,7 @@ SwapTextboxPalettes::
 	jr nz, .asm_8008
 	ret
 
-ScrollBGMapPalettes:: ; 804f (2:404f)
+_ScrollBGMapPalettes:: ; 804f (2:404f)
 	ld hl, wBGMapBuffer
 	ld de, wBGMapPalBuffer
 .asm_8055
@@ -668,9 +667,9 @@ Function1416d:: ; 1416d
 	dr $1416d, $14226
 LoadUsedSpritesGFX:
 	dr $14226, $14317
-DoesSpriteHaveFacings_:: ; 14317
+_DoesSpriteHaveFacings:: ; 14317
 	dr $14317, $14334
-GetSpritePalette_:: ; 14334
+_GetSpritePalette:: ; 14334
 	dr $14334, $14a18
 Function14a18:: ; 14a18
 	dr $14a18, $14a2d
@@ -730,21 +729,21 @@ StringBufferPointers::
 	dr $24000, $2400e
 _2DMenu_::
 	dr $2400e, $24136
-StaticMenuJoypad_::
+_StaticMenuJoypad::
 	dr $24136, $24139
-ScrollingMenuJoypad_::
+_ScrollingMenuJoypad::
 	dr $24139, $242a0
-PushWindow_::
+_PushWindow::
 	dr $242a0, $24307
-ExitMenu_::
+_ExitMenu::
 	dr $24307, $24395
-InitVerticalMenuCursor_::
+_InitVerticalMenuCursor::
 	dr $24395, $243eb
 UpdateItemDescription:
 	dr $243eb, $244d7
-InitScrollingMenu::
+_InitScrollingMenu::
 	dr $244d7, $244f3
-ScrollingMenu_::
+_ScrollingMenu::
 	dr $244f3, $24834
 SwitchItemsInBag:
 	dr $24834, $249dc
@@ -915,7 +914,7 @@ UpdateEnemyHUD::
 
 LoadEnemyMon:
 	dr $3e74b, $3ec11
-BattleRandom_:: ; 3ec11
+_BattleRandom:: ; 3ec11
 	dr $3ec11, $3f196
 
 FillInExpBar::
@@ -1131,7 +1130,7 @@ SECTION "bank20", ROMX, BANK[$20]
 SECTION "bank21", ROMX, BANK[$21]
 	dr $84000, $842db
 
-PrinterReceive_:: ; 842db
+_PrinterReceive:: ; 842db
 	dr $842db, $84684
 
 Function84684:
@@ -1210,10 +1209,10 @@ AnimatedObjects_PlayFrameAndDelay:
 AnimatedObjects_PlayFrame:
 	dr $8d18a, $8d1f7
 
-InitAnimatedObjectStruct_:: ; 8d1f7
+_InitSpriteAnimStruct:: ; 8d1f7
 	dr $8d1f7, $8d332
 
-ReinitAnimatedObjectFrame_:: ; 8d332
+_ReinitSpriteAnimFrame:: ; 8d332
 
 IF DEF(GOLD)
 	dr $8d332, $8e79f
@@ -1376,7 +1375,7 @@ DummyPredef39::
 PlayBattleAnim::
 	dr $cc0d7, $cc283
 
-BattleAnimCommands::
+ClearBattleAnims::
 	dr $cc283, $cfce3
 
 SECTION "bank34", ROMX, BANK[$34]
@@ -1518,7 +1517,7 @@ SECTION "bank70", ROMX, BANK[$70]
 	dr $1c0000, $1c0a66
 UpdateTimePredef::
 	dr $1c0a66, $1c0de9
-DudeAutoInput_A::
+_DudeAutoInput_A::
 	dr $1c0de9, $1c0dee
 
 DudeAutoInput_RightA::

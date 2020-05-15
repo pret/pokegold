@@ -143,7 +143,7 @@ BlackthornGymStatue:
 	iftrue .Beaten
 	jumpstd gymstatue1
 .Beaten:
-	trainertotext CLAIR, CLAIR1, MEM_BUFFER_1
+	trainertotext CLAIR, CLAIR1, STRING_BUFFER_4
 	jumpstd gymstatue2
 
 ClairIntroText:

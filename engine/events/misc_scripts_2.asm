@@ -12,7 +12,7 @@ RepelWoreOffScript::
 HiddenItemScript::
 	opentext
 	copybytetovar wcf2b
-	itemtotext MEM_BUFFER_0, USE_SCRIPT_VAR
+	itemtotext STRING_BUFFER_3, USE_SCRIPT_VAR
 	writetext .PlayerFoundItemText
 	giveitem ITEM_FROM_MEM
 	iffalse .bag_full

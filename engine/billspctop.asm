@@ -10,7 +10,7 @@ BillsPC_CheckHavePokemon: ; e3e5 (3:63e5)
 	and a
 	ret nz
 	ld hl, Text_GottaHavePokemon
-	call MenuTextBoxBackup
+	call MenuTextboxBackup
 	scf
 	ret
 
@@ -20,8 +20,8 @@ Text_GottaHavePokemon:
 
 BillsPC_LogIn: ; e3f7 (3:63f7)
 	xor a
-	ld [hBGMapMode], a
-	call LoadStandardMenuDataHeader
+	ldh [hBGMapMode], a
+	call LoadStandardMenuHeader
 	call Functione566
 	ld hl, wOptions
 	ld a, [hl]
@@ -44,14 +44,14 @@ BillsPC_LogOut: ; e41a (3:641a)
 
 BillsPC_UsePC: ; e41e (3:641e)
 	ld hl, BillsPC_TopMenuDataHeader
-	call LoadMenuDataHeader
+	call LoadMenuHeader
 	ld a, $1
 .asm_e426
 	ld [wMenuCursorBuffer], a
 	call SetPalettes
 	xor a
 	ld [wWhichIndexSet], a
-	ld [hBGMapMode], a
+	ldh [hBGMapMode], a
 	call DoNthMenu
 	jr c, .asm_e446
 	ld a, [wMenuCursorBuffer]
@@ -104,7 +104,7 @@ BillsPC_SeeYa:
 	ret
 
 BillsPC_MovePKMNMenu:
-	call LoadStandardMenuDataHeader
+	call LoadStandardMenuHeader
 	farcall IsAnyPokemonHoldingMail ; 11:488c
 	jr nc, .asm_e4bb
 	ld hl, Text_PleaseRemoveMailBeforeMovePkmnWOMail
@@ -127,7 +127,7 @@ Text_PleaseRemoveMailBeforeMovePkmnWOMail:
 	db "@"
 
 BillsPC_DepositMenu:
-	call LoadStandardMenuDataHeader
+	call LoadStandardMenuHeader
 	farcall DepositPokemon_ ; 38:6b9e
 	call ReturnToMapFromSubmenu
 	call Functione566
@@ -146,13 +146,13 @@ Functione4ed:
 
 .asm_e4f9
 	ld hl, Text_YouDontHaveASinglePokemon
-	call MenuTextBoxBackup
+	call MenuTextboxBackup
 	scf
 	ret
 
 .asm_e501
 	ld hl, Text_ItsYourLastPokemon
-	call MenuTextBoxBackup
+	call MenuTextboxBackup
 	scf
 	ret
 
@@ -193,7 +193,7 @@ CheckCurPartyMonFainted: ; e513 (3:6513)
 	ret
 
 BillsPC_WithdrawMenu:
-	call LoadStandardMenuDataHeader
+	call LoadStandardMenuHeader
 	farcall WithdrawPokemon_ ; 38:6d71
 	call ReturnToMapFromSubmenu
 	call Functione566
@@ -210,7 +210,7 @@ Functione548:
 
 .asm_e551
 	ld hl, Text_CantTakeAnyMorePokemon
-	call MenuTextBoxBackup
+	call MenuTextboxBackup
 	scf
 	ret
 
@@ -226,7 +226,7 @@ BillsPC_ChangeBoxMenu:
 Functione566: ; e566 (3:6566)
 	call DisableSpriteUpdates
 	xor a
-	ld [hBGMapMode], a
+	ldh [hBGMapMode], a
 	call ClearBGPalettes
 	call ClearSprites
 	hlcoord 0, 0
@@ -239,7 +239,7 @@ Functione566: ; e566 (3:6566)
 	hlcoord 0, 12
 	ld bc, IncGradGBPalTable_13
 	call Textbox
-	call Function3456
+	call WaitBGMap2
 	call SetPalettes
 	ret
 

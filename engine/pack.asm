@@ -39,7 +39,7 @@ Function10456: ; 10456 (4:4456)
 
 Pack_InitGFX:
 	xor a
-	ld [hBGMapMode], a
+	ldh [hBGMapMode], a
 	call Function10d70
 	ld a, [wce64]
 	ld [wce63], a
@@ -57,7 +57,7 @@ Pack_InitItemsPocket:
 
 Pack_ItemsPocketMenu:
 	ld hl, ItemsPocketMenuDataHeader
-	call CopyMenuDataHeader
+	call CopyMenuHeader
 	ld a, [wcfca]
 	ld [wMenuCursorBuffer], a
 	ld a, [wcfcf]
@@ -86,7 +86,7 @@ Pack_InitKeyItemsPocket:
 
 Pack_KeyItemsPocketMenu:
 	ld hl, KeyItemsPocketMenuDataHeader ; $4e9a
-	call CopyMenuDataHeader
+	call CopyMenuHeader
 	ld a, [wcfcb]
 	ld [wMenuCursorBuffer], a
 	ld a, [wcfd0]
@@ -109,7 +109,7 @@ Pack_InitTMHMPocket:
 	call Function10e51
 	call Function10dd6
 	xor a
-	ld [hBGMapMode], a
+	ldh [hBGMapMode], a
 	call Function10cca
 	call Function10c96
 	ret
@@ -120,7 +120,7 @@ Pack_TMHMPocketMenu:
 	ld c, $1
 	call Function10cef
 	ret c
-	farcall CheckTossableItem_
+	farcall _CheckTossableItem
 	ld a, [wItemAttributeParamBuffer]
 	and a
 	jr nz, .asm_1053a
@@ -133,7 +133,7 @@ Pack_TMHMPocketMenu:
 	ld de, TMHMPocketSubmenuJumptable_NoGive ; $4567
 .asm_10540
 	push de
-	call LoadMenuDataHeader
+	call LoadMenuHeader
 	call VerticalMenu
 	call ExitMenu
 	pop hl
@@ -193,7 +193,7 @@ UseTMorHM:
 	ld [wOptions], a
 .asm_105a9
 	xor a
-	ld [hBGMapMode], a
+	ldh [hBGMapMode], a
 	call Function10d70
 	call Function10cca
 	call Function10e5b
@@ -210,7 +210,7 @@ Pack_InitBallsPocket:
 
 Pack_BallsPocketMenu:
 	ld hl, BallsPocketMenuDataHeader ; $4eca
-	call CopyMenuDataHeader
+	call CopyMenuHeader
 	ld a, [wcfcc]
 	ld [wMenuCursorBuffer], a
 	ld a, [wcfd1]
@@ -228,7 +228,7 @@ Pack_BallsPocketMenu:
 	ret
 
 Function105f5: ; 105f5 (4:45f5)
-	farcall CheckTossableItem_
+	farcall _CheckTossableItem
 	ld a, [wItemAttributeParamBuffer]
 	and a
 	jr nz, .asm_10629
@@ -286,7 +286,7 @@ Function105f5: ; 105f5 (4:45f5)
 	ld de, ItemSubmenuJumptable_GiveTossQuit ; $473b
 .asm_10665
 	push de
-	call LoadMenuDataHeader
+	call LoadMenuHeader
 	call VerticalMenu
 	call ExitMenu
 	pop hl
@@ -447,7 +447,7 @@ UseItem:
 	jr z, .no_pokemon
 	call DoItemEffect
 	xor a
-	ld [hBGMapMode], a
+	ldh [hBGMapMode], a
 	call Function10d70
 	call Function10cca
 	call Function10e5b
@@ -477,7 +477,7 @@ TossMenu:
 	jr c, .asm_107cc
 	call Function10e38
 	ld hl, Text_ConfirmThrowAway
-	call MenuTextBox
+	call MenuTextbox
 	call YesNoBox
 	push af
 	call ExitMenu
@@ -597,7 +597,7 @@ GiveItem:
 	pop af
 	ld [wOptions], a
 	xor a
-	ld [hBGMapMode], a
+	ldh [hBGMapMode], a
 	call Function10d70
 	call Function10cca
 	call Function10e5b
@@ -656,7 +656,7 @@ Function108e9: ; 108e9 (4:48e9)
 
 BattlePack_InitGFX:
 	xor a
-	ld [hBGMapMode], a
+	ldh [hBGMapMode], a
 	call Function10d70
 	ld a, [wce64]
 	ld [wce63], a
@@ -674,7 +674,7 @@ BattlePack_InitItemsPocket:
 
 BattlePack_ItemsPocketMenu:
 	ld hl, $4e6a
-	call CopyMenuDataHeader
+	call CopyMenuHeader
 	ld a, [wcfca]
 	ld [wMenuCursorBuffer], a
 	ld a, [wcfcf]
@@ -702,7 +702,7 @@ BattlePack_InitKeyItemsPocket:
 
 BattlePack_KeyItemsPocketMenu:
 	ld hl, $4e9a
-	call CopyMenuDataHeader
+	call CopyMenuHeader
 	ld a, [wcfcb]
 	ld [wMenuCursorBuffer], a
 	ld a, [wcfd0]
@@ -725,7 +725,7 @@ BattlePack_InitTMHMPocket:
 	call Function10e51
 	call Function10dd6
 	xor a
-	ld [hBGMapMode], a
+	ldh [hBGMapMode], a
 	call Function10cca
 	ld hl, Text_PackEmptyString
 	call Function10cb9
@@ -753,7 +753,7 @@ BattlePack_InitBallsPocket:
 
 BattlePack_BallsPocketMenu:
 	ld hl, $4eca
-	call CopyMenuDataHeader
+	call CopyMenuHeader
 	ld a, [wcfcc]
 	ld [wMenuCursorBuffer], a
 	ld a, [wcfd1]
@@ -785,7 +785,7 @@ Function10a0c: ; 10a0c (4:4a0c)
 	ld de, BattlePackQuitJumptable
 .asm_10a1d
 	push de
-	call LoadMenuDataHeader
+	call LoadMenuHeader
 	call VerticalMenu
 	call ExitMenu
 	pop hl
@@ -860,7 +860,7 @@ Function10a86:
 	and a
 	jr nz, asm_10aae
 	xor a
-	ld [hBGMapMode], a
+	ldh [hBGMapMode], a
 	call Function10d70
 	call Function10cca
 	call Function10e5b
@@ -908,7 +908,7 @@ Function10aba: ; 10aba (4:4aba)
 
 Function10ad5: ; 10ad5 (4:4ad5)
 	xor a
-	ld [hBGMapMode], a
+	ldh [hBGMapMode], a
 	ld [wce63], a
 	ld [wce64], a
 	ld [wce65], a
@@ -940,7 +940,7 @@ DepositOrSell_ItemPocket:
 	xor a
 	call Function10b92
 	ld hl, PC_Mart_ItemsPocketMenuDataHeader ; $4e82
-	call CopyMenuDataHeader
+	call CopyMenuHeader
 	ld a, [wcfca]
 	ld [wMenuCursorBuffer], a
 	ld a, [wcfcf]
@@ -956,7 +956,7 @@ DepositOrSell_KeyItemsPocket:
 	ld a, $2
 	call Function10b92
 	ld hl, PC_Mart_KeyItemsPocketMenuDataHeader ; $4eb2
-	call CopyMenuDataHeader
+	call CopyMenuHeader
 	ld a, [wcfcb]
 	ld [wMenuCursorBuffer], a
 	ld a, [wcfd0]
@@ -981,7 +981,7 @@ DepositOrSell_BallsPocket:
 	ld a, $1
 	call Function10b92
 	ld hl, PC_Mart_BallsPocketMenuDataHeader ; $4ee2
-	call CopyMenuDataHeader
+	call CopyMenuHeader
 	ld a, [wcfcc]
 	ld [wMenuCursorBuffer], a
 	ld a, [wcfd1]
@@ -1155,7 +1155,7 @@ asm_10c8a
 	push hl
 	call Function10b92
 	pop hl
-	call CopyMenuDataHeader
+	call CopyMenuHeader
 	call ScrollingMenu
 	ret
 
@@ -1308,7 +1308,7 @@ Function10cef: ; 10cef (4:4cef)
 
 Function10d70: ; 10d70 (4:4d70)
 	call ClearBGPalettes
-	call ClearTileMap
+	call ClearTilemap
 	call ClearSprites
 	call DisableLCD
 	ld hl, PackMenuGFX
@@ -1404,7 +1404,7 @@ Function10e38: ; 10e38 (4:4e38)
 	ld a, [wd002]
 	ld [wd151], a
 	call GetItemName
-	call Function317b
+	call CopyName1
 	ret
 
 Pack_ClearTilemap:

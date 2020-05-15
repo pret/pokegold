@@ -1,8 +1,8 @@
-PrinterReceive:: ; 1eb3 (0:1eb3)
-	homecall PrinterReceive_
+PrinterReceive::
+	homecall _PrinterReceive
 	ret
 
-AskSerial:: ; 1ebf (0:1ebf)
+AskSerial::
 ; send out a handshake while serial int is off
 	ld a, [wPrinterConnectionOpen]
 	bit 0, a
@@ -28,14 +28,14 @@ AskSerial:: ; 1ebf (0:1ebf)
 
 ; handshake
 	ld a, $88
-	ld [rSB], a
+	ldh [rSB], a
 
 ; switch to internal clock
-	ld a, %00000001
-	ld [rSC], a
+	ld a, (0 << rSC_ON) | (1 << rSC_CLOCK)
+	ldh [rSC], a
 
 ; start transfer
-	ld a, %10000001
-	ld [rSC], a
+	ld a, (1 << rSC_ON) | (1 << rSC_CLOCK)
+	ldh [rSC], a
 
 	ret

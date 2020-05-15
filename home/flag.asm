@@ -1,27 +1,27 @@
-ResetMapBufferEventFlags:: ; 2f10 (0:2f10)
+ResetMapBufferEventFlags::
 	xor a
 	ld hl, wEventFlags
 	ld [hli], a
 	ret
 
-ResetBikeFlags:: ; 2f16 (0:2f16)
+ResetBikeFlags::
 	xor a
 	ld hl, wBikeFlags
 	ld [hli], a
 	ld [hl], a
 	ret
 
-ResetFlashIfOutOfCave:: ; 2f1d (0:2f1d)
+ResetFlashIfOutOfCave::
 	ld a, [wPermission]
-	cp $2
-	jr z, .turn_off_lights
-	cp $1
-	jr z, .turn_off_lights
+	cp ROUTE
+	jr z, .outdoors
+	cp TOWN
+	jr z, .outdoors
 	ret
 
-.turn_off_lights
+.outdoors
 	ld hl, wStatusFlags
-	res 2, [hl] ; FLASH
+	res STATUSFLAGS_FLASH_F, [hl]
 	ret
 
 EventFlagAction::
@@ -29,28 +29,26 @@ EventFlagAction::
 	call FlagAction
 	ret
 
-FlagAction:: ; 2f36 (0:2f36)
+FlagAction::
 ; Perform action b on bit de in flag array hl.
 
 ; inputs:
 ; b: function
-;    0 clear bit
-;    1 set bit
-;    2 check bit
+;    0  RESET_FLAG  clear bit
+;    1  SET_FLAG    set bit
+;    2  CHECK_FLAG  check bit
 ; de: bit number
-; hl: index within bit table
+; hl: pointer to the flag array
 
 	; get index within the byte
 	ld a, e
 	and 7
 
 	; shift de right by three bits (get the index within memory)
+rept 3
 	srl d
 	rr e
-	srl d
-	rr e
-	srl d
-	rr e
+endr
 	add hl, de
 
 	; implement a decoder
@@ -71,9 +69,9 @@ FlagAction:: ; 2f36 (0:2f36)
 
 	; check b's value: 0, 1, 2
 	ld a, b
-	cp 1
-	jr c, .clearbit ; 0
-	jr z, .setbit ; 1
+	cp SET_FLAG
+	jr c, .clearbit ; RESET_FLAG
+	jr z, .setbit ; SET_FLAG
 
 	; check bit
 	ld a, [hl]
@@ -102,4 +100,31 @@ CheckReceivedDex::
 	farcall EngineFlagAction
 	ld a, c
 	and a
+	ret
+
+Unreferenced_CheckBPressedDebug::
+; Used in debug ROMs to walk through walls and avoid encounters.
+
+	ld a, [wDebugFlags]
+	bit DEBUG_FIELD_F, a
+	ret z
+
+	ldh a, [hJoyDown]
+	bit B_BUTTON_F, a
+	ret
+
+xor_a::
+	xor a
+	ret
+
+xor_a_dec_a::
+	xor a
+	dec a
+	ret
+
+Unreferenced_CheckFieldDebug::
+	push hl
+	ld hl, wDebugFlags
+	bit DEBUG_FIELD_F, [hl]
+	pop hl
 	ret

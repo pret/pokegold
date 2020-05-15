@@ -1,260 +1,219 @@
-SetMenuAttributes:: ; 1a4e
-	push hl
-	push bc
-	ld hl, w2DMenuCursorInitY
-	ld b, $8
-.asm_1a55
-	ld a, [de]
-	inc de
-	ld [hli], a
-	dec b
-	jr nz, .asm_1a55
-	ld a, $1
-	ld [hli], a
-	ld [hli], a
+ClearBGPalettes::
+	call ClearPalettes
+WaitBGMap::
+; Tell VBlank to update BG Map
+	ld a, 1 ; BG Map 0 tiles
+	ldh [hBGMapMode], a
+; Wait for it to do its magic
+	ld c, 4
+	call DelayFrames
+	ret
+
+WaitBGMap2::
+	ldh a, [hCGB]
+	and a
+	jr z, .bg0
+
+	ld a, 2
+	ldh [hBGMapMode], a
+	ld c, 4
+	call DelayFrames
+
+.bg0
+	ld a, 1
+	ldh [hBGMapMode], a
+	ld c, 4
+	call DelayFrames
+	ret
+
+IsCGB::
+	ldh a, [hCGB]
+	and a
+	ret
+
+ApplyTilemap::
+	ldh a, [hCGB]
+	and a
+	jr z, .dmg
+
+	ld a, [wSpriteUpdatesEnabled]
+	cp 0
+	jr z, .dmg
+
+	ld a, 1
+	ldh [hBGMapMode], a
+	jr CopyTilemapAtOnce
+
+.dmg
+; WaitBGMap
+	ld a, 1
+	ldh [hBGMapMode], a
+	ld c, 4
+	call DelayFrames
+	ret
+
+CGBOnly_CopyTilemapAtOnce::
+	ldh a, [hCGB]
+	and a
+	jr z, WaitBGMap
+
+CopyTilemapAtOnce::
+	ldh a, [hBGMapMode]
+	push af
 	xor a
-	ld [hli], a
-	ld [hli], a
-	ld [hli], a
-	pop bc
-	pop hl
-	ret
+	ldh [hBGMapMode], a
 
-StaticMenuJoypad:: ; 1a66 (0:1a66)
-	callfar StaticMenuJoypad_
-	call GetMenuJoypad
-	ret
-
-ScrollingMenuJoypad:: ; 1a70 (0:1a70)
-	callfar ScrollingMenuJoypad_
-	call GetMenuJoypad
-	ret
-
-GetMenuJoypad:: ; 1a7a (0:1a7a)
-	push bc
+	ldh a, [hMapAnims]
 	push af
-	ld a, [hJoyLast]
-	and D_PAD
-	ld b, a
-	ld a, [hJoyPressed]
-	and BUTTONS
-	or b
-	ld b, a
-	pop af
-	ld a, b
-	pop bc
-	ret
-
-PlaceHollowCursor::
-	ld hl, wCursorCurrentTile
-	ld a, [hli]
-	ld h, [hl]
-	ld l, a
-	ld [hl], "▷"
-	ret
-
-HideCursor::
-	ld hl, wCursorCurrentTile
-	ld a, [hli]
-	ld h, [hl]
-	ld l, a
-	ld [hl], " "
-	ret
-
-PushWindow:: ; 1a9d (0:1a9d)
-	callfar PushWindow_
-	ret
-
-ExitMenu:: ; 1aa4 (0:1aa4)
-	push af
-	callfar ExitMenu_
-	pop af
-	ret
-
-InitVerticalMenuCursor:: ; 1aad (0:1aad)
-	callfar InitVerticalMenuCursor_
-	ret
-
-CloseWindow:: ; 1ab4 (0:1ab4)
-	push af
-	call ExitMenu
-	call ApplyTilemap
-	call UpdateSprites
-	pop af
-	ret
-
-RestoreTileBackup::
-	call MenuBoxCoord2Tile
-	call GetMenuBoxDims
-	inc b
-	inc c
-.asm_1ac8
-	push bc
-	push hl
-.asm_1aca
-	ld a, [de]
-	ld [hli], a
-	dec de
-	dec c
-	jr nz, .asm_1aca
-	pop hl
-	ld bc, $14
-	add hl, bc
-	pop bc
-	dec b
-	jr nz, .asm_1ac8
-	ret
-
-PopWindow::
-	ld b, wMenuDataHeaderEnd - wMenuDataHeader
-	ld de, wMenuDataHeader
-.asm_1adf
-	ld a, [hld]
-	ld [de], a
-	inc de
-	dec b
-	jr nz, .asm_1adf
-	ret
-
-GetMenuBoxDims:: ; 1ae6 (0:1ae6)
-	ld a, [wMenuBorderTopCoord]
-	ld b, a
-	ld a, [wMenuBorderBottomCoord]
-	sub b
-	ld b, a
-	ld a, [wMenuBorderLeftCoord]
-	ld c, a
-	ld a, [wMenuBorderRightCoord]
-	sub c
-	ld c, a
-	ret
-
-CopyMenuData2:: ; 1af9 (0:1af9)
-	push hl
-	push de
-	push bc
-	push af
-	ld hl, wMenuData2Pointer
-	ld a, [hli]
-	ld h, [hl]
-	ld l, a
-	ld de, wMenuData2
-	ld bc, wMenuData2End - wMenuData2
-	call CopyBytes
-	pop af
-	pop bc
-	pop de
-	pop hl
-	ret
-
-GetWindowStackTop::
-	ld hl, wWindowStackPointer
-	ld a, [hli]
-	ld h, [hl]
-	ld l, a
-	inc hl
-	ld a, [hli]
-	ld h, [hl]
-	ld l, a
-	ret
-
-PlaceVerticalMenuItems:: ; 1b1c (0:1b1c)
-	call CopyMenuData2
-	ld hl, wMenuData2Pointer
-	ld e, [hl]
-	inc hl
-	ld d, [hl]
-	call GetMenuTextStartCoord
-	call Coord2Tile
-	inc de
-	ld a, [de]
-	inc de
-	ld b, a
-.asm_1b2f
-	push bc
-	call PlaceString
-	inc de
-	ld bc, 2 * SCREEN_WIDTH
-	add hl, bc
-	pop bc
-	dec b
-	jr nz, .asm_1b2f
-	ld a, [wMenuData2Flags]
-	bit 4, a
-	ret z
-	call MenuBoxCoord2Tile
-	ld a, [de]
-	ld c, a
-	inc de
-	ld b, $0
-	add hl, bc
-	jp PlaceString
-
-MenuBox:: ; 1b4e (0:1b4e)
-	call MenuBoxCoord2Tile
-	call GetMenuBoxDims
-	dec b
-	dec c
-	jp Textbox
-
-GetMenuTextStartCoord:: ; 1b59 (0:1b59)
-	ld a, [wMenuBorderTopCoord]
-	ld b, a
-	inc b
-	ld a, [wMenuBorderLeftCoord]
-	ld c, a
-	inc c
-	ld a, [wMenuData2Flags]
-	bit 6, a
-	jr nz, .asm_1b6b
-	inc b
-.asm_1b6b
-	ld a, [wMenuData2Flags]
-	bit 7, a
-	jr z, .asm_1b73
-	inc c
-.asm_1b73
-	ret
-
-ClearMenuBoxInterior::
-	call MenuBoxCoord2Tile
-	ld bc, SCREEN_WIDTH + 1
-	add hl, bc
-	call GetMenuBoxDims
-	dec b
-	dec c
-	call ClearBox
-	ret
-
-ClearWholeMenuBox::
-	call MenuBoxCoord2Tile
-	call GetMenuBoxDims
-	inc c
-	inc b
-	call ClearBox
-	ret
-
-MenuBoxCoord2Tile:: ; 1b90 (0:1b90)
-	ld a, [wMenuBorderLeftCoord]
-	ld c, a
-	ld a, [wMenuBorderTopCoord]
-	ld b, a
-Coord2Tile:: ; 1b98 (0:1b98)
 	xor a
+	ldh [hMapAnims], a
+
+.wait
+	ldh a, [rLY]
+	cp $7f
+	jr c, .wait
+
+	di
+	ld a, BANK(vTiles3)
+	ldh [rVBK], a
+	hlcoord 0, 0, wAttrmap
+	call .StackPointerMagic
+	ld a, BANK(vTiles0)
+	ldh [rVBK], a
+	hlcoord 0, 0
+	call .StackPointerMagic
+
+.wait2
+	ldh a, [rLY]
+	cp $7f
+	jr c, .wait2
+	ei
+
+	pop af
+	ldh [hMapAnims], a
+	pop af
+	ldh [hBGMapMode], a
+	ret
+
+.StackPointerMagic:
+; Copy all tiles to vBGMap
+	ld [hSPBuffer], sp
+	ld sp, hl
+	ldh a, [hBGMapAddress + 1]
 	ld h, a
-	ld l, b
-	ld a, c
-	ld b, h
-	ld c, l
-	add hl, hl
-	add hl, hl
-	add hl, bc
-	add hl, hl
-	add hl, hl
-	ld c, a
+	ld l, 0
+	ld a, SCREEN_HEIGHT
+	ldh [hTilesPerCycle], a
+	ld b, 1 << 1 ; not in v/hblank
+	ld c, LOW(rSTAT)
+
+.loop
+rept SCREEN_WIDTH / 2
+	pop de
+; if in v/hblank, wait until not in v/hblank
+.loop\@
+	ldh a, [c]
+	and b
+	jr nz, .loop\@
+; load BGMap0
+	ld [hl], e
+	inc l
+	ld [hl], d
+	inc l
+endr
+
+	ld de, BG_MAP_WIDTH - SCREEN_WIDTH
+	add hl, de
+	ldh a, [hTilesPerCycle]
+	dec a
+	ldh [hTilesPerCycle], a
+	jr nz, .loop
+
+	ldh a, [hSPBuffer]
+	ld l, a
+	ldh a, [hSPBuffer + 1]
+	ld h, a
+	ld sp, hl
+	ret
+
+SetPalettes::
+; Inits the Palettes
+; depending on the system the monochromes palettes or color palettes
+	ldh a, [hCGB]
+	and a
+	jr nz, .SetPalettesForGameBoyColor
+	ld a, %11100100
+	ldh [rBGP], a
+	ld a, %11010000
+	ldh [rOBP0], a
+	ldh [rOBP1], a
+	ret
+
+.SetPalettesForGameBoyColor:
+	push de
+	ld a, %11100100
+	call DmgToCgbBGPals
+	lb de, %11100100, %11100100
+	call DmgToCgbObjPals
+	pop de
+	ret
+
+ClearPalettes::
+; Make all palettes white
+
+; CGB: make all the palette colors white
+	ldh a, [hCGB]
+	and a
+	jr nz, .cgb
+
+; DMG: just change palettes to 0 (white)
 	xor a
-	ld b, a
-	add hl, bc
-	ld bc, wTileMap
-	add hl, bc
+	ldh [rBGP], a
+	ldh [rOBP0], a
+	ldh [rOBP1], a
+	ret
+
+.cgb
+; Fill wBGPals and wOBPals with $ffff (white)
+	ld hl, wBGPals
+	ld bc, 16 palettes
+	ld a, $ff
+	call ByteFill
+; Request palette update
+	ld a, 1
+	ldh [hCGBPalUpdate], a
+	ret
+
+GetMemSGBLayout::
+	ld b, SCGB_RAM
+GetSGBLayout::
+; load sgb packets unless dmg
+
+	ldh a, [hCGB]
+	and a
+	jr nz, .sgb
+
+	ldh a, [hSGB]
+	and a
+	ret z
+
+.sgb
+	predef_jump LoadSGBLayout
+
+SetHPPal::
+; Set palette for hp bar pixel length e at hl.
+	call GetHPPal
+	ld [hl], d
+	ret
+
+GetHPPal::
+; Get palette for hp bar pixel length e in d.
+	ld d, HP_GREEN
+	ld a, e
+	cp (HP_BAR_LENGTH_PX * 50 / 100) ; 24
+	ret nc
+	inc d ; HP_YELLOW
+	cp (HP_BAR_LENGTH_PX * 21 / 100) ; 10
+	ret nc
+	inc d ; HP_RED
 	ret

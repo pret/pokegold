@@ -101,7 +101,7 @@ DoNextFrameForFirst16Sprites: ; 8d1c9
 .cancel
 	ret ; 23:51f6
 
-InitAnimatedObjectStruct_:: ; 8d1f7
+_InitSpriteAnimStruct:: ; 8d1f7
 	push de ; 23:51f7
 	push af ; 23:51f8
 	ld hl, $c51c ; 23:51f9
