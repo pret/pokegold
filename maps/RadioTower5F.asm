@@ -129,7 +129,7 @@ RadioTower5FRocketBossScene:
 	setscene SCENE_RADIOTOWER5F_NOTHING
 	setevent EVENT_GOT_RAINBOW_WING
 	setevent EVENT_TEAM_ROCKET_DISBANDED
-	jump .UselessJump
+	sjump .UselessJump
 .SilverWing
 	verbosegiveitem SILVER_WING
 	writetext RadioTower5FDirectorDescribeSilverWingText

@@ -61,7 +61,7 @@ Copycat:
 	takeitem LOST_ITEM
 	setevent EVENT_RETURNED_LOST_ITEM_TO_COPYCAT
 	clearevent EVENT_COPYCATS_HOUSE_2F_DOLL
-	jump .GivePass
+	sjump .GivePass
 
 .TryGivePassAgain:
 	opentext

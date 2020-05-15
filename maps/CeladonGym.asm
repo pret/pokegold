@@ -107,7 +107,7 @@ CeladonGymStatue:
 	iftrue .Beaten
 	jumpstd gymstatue1
 .Beaten:
-	trainertotext ERIKA, ERIKA1, STRING_BUFFER_4
+	gettrainername STRING_BUFFER_4, ERIKA, ERIKA1
 	jumpstd gymstatue2
 
 ErikaBeforeBattleText:

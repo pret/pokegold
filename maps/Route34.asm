@@ -24,22 +24,22 @@ Route34_MapScripts:
 	iftrue .PutDayCareManOutside
 	clearevent EVENT_DAY_CARE_MAN_IN_DAY_CARE
 	setevent EVENT_DAY_CARE_MAN_ON_ROUTE_34
-	jump .CheckMon1
+	sjump .CheckMon1
 
 .PutDayCareManOutside:
 	setevent EVENT_DAY_CARE_MAN_IN_DAY_CARE
 	clearevent EVENT_DAY_CARE_MAN_ON_ROUTE_34
-	jump .CheckMon1
+	sjump .CheckMon1
 
 .CheckMon1:
 	checkflag ENGINE_DAY_CARE_MAN_HAS_MON
 	iffalse .HideMon1
 	clearevent EVENT_DAY_CARE_MON_1
-	jump .CheckMon2
+	sjump .CheckMon2
 
 .HideMon1:
 	setevent EVENT_DAY_CARE_MON_1
-	jump .CheckMon2
+	sjump .CheckMon2
 
 .CheckMon2:
 	checkflag ENGINE_DAY_CARE_LADY_HAS_MON
@@ -59,7 +59,7 @@ DayCareManScript_Outside:
 	closetext
 	ifequal TRUE, .end_fail
 	clearflag ENGINE_DAY_CARE_MAN_HAS_EGG
-	checkcode VAR_FACING
+	readvar VAR_FACING
 	ifequal RIGHT, .walk_around_player
 	applymovement ROUTE34_GRAMPS, Route34MovementData_DayCareManWalksBackInside
 	playsound SFX_ENTER_DOOR
@@ -101,7 +101,7 @@ TrainerCamperTodd1:
 	promptbutton
 	setevent EVENT_TODD_ASKED_FOR_PHONE_NUMBER
 	scall .AskNumber
-	jump .FinishAsk
+	sjump .FinishAsk
 
 .AskAgain:
 	scall .AskNumber2
@@ -109,9 +109,9 @@ TrainerCamperTodd1:
 	askforphonenumber PHONE_CAMPER_TODD
 	ifequal PHONE_CONTACTS_FULL, .PhoneFull
 	ifequal PHONE_CONTACT_REFUSED, .NumberDeclined
-	trainertotext CAMPER, TODD1, STRING_BUFFER_3
+	gettrainername STRING_BUFFER_3, CAMPER, TODD1
 	scall .RegisteredNumber
-	jump .NumberAccepted
+	sjump .NumberAccepted
 
 .Rematch:
 	scall .RematchStd
@@ -184,7 +184,7 @@ TrainerPicnickerGina1:
 	promptbutton
 	setevent EVENT_GINA_ASKED_FOR_PHONE_NUMBER
 	scall .AskNumber1
-	jump .FinishAsk
+	sjump .FinishAsk
 
 .AskAgain:
 	scall .AskNumber2
@@ -192,9 +192,9 @@ TrainerPicnickerGina1:
 	askforphonenumber PHONE_PICNICKER_GINA
 	ifequal PHONE_CONTACTS_FULL, .PhoneFull
 	ifequal PHONE_CONTACT_REFUSED, .NumberDeclined
-	trainertotext PICNICKER, GINA1, STRING_BUFFER_3
+	gettrainername STRING_BUFFER_3, PICNICKER, GINA1
 	scall .RegisteredNumber
-	jump .NumberAccepted
+	sjump .NumberAccepted
 
 .Rematch:
 	scall .RematchStd

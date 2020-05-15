@@ -20,11 +20,11 @@ TrainerHouseReceptionistScript:
 	promptbutton
 	special TrainerHouse
 	iffalse .GetCal3Name
-	trainertotext CAL, CAL2, STRING_BUFFER_3
-	jump .GotName
+	gettrainername STRING_BUFFER_3, CAL, CAL2
+	sjump .GotName
 
 .GetCal3Name:
-	trainertotext CAL, CAL3, STRING_BUFFER_3
+	gettrainername STRING_BUFFER_3, CAL, CAL3
 .GotName:
 	writetext TrainerHouseB1FYourOpponentIsText
 	promptbutton

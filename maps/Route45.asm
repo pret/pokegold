@@ -34,7 +34,7 @@ TrainerBlackbeltKenji:
 	waitbutton
 	setevent EVENT_KENJI_ASKED_FOR_PHONE_NUMBER
 	scall Route45AskNumber1M
-	jump .AskForNumber
+	sjump .AskForNumber
 
 .AskedAlready:
 	scall Route45AskNumber2M
@@ -42,9 +42,9 @@ TrainerBlackbeltKenji:
 	askforphonenumber PHONE_BLACKBELT_KENJI
 	ifequal PHONE_CONTACTS_FULL, Route45PhoneFullM
 	ifequal PHONE_CONTACT_REFUSED, Route45NumberDeclinedM
-	trainertotext BLACKBELT_T, KENJI3, STRING_BUFFER_3
+	gettrainername STRING_BUFFER_3, BLACKBELT_T, KENJI3
 	scall Route45RegisteredNumberM
-	jump Route45NumberAcceptedM
+	sjump Route45NumberAcceptedM
 
 .WantsBattle:
 	scall Route45RematchM
@@ -139,7 +139,7 @@ TrainerHikerParry:
 	promptbutton
 	setevent EVENT_PARRY_ASKED_FOR_PHONE_NUMBER
 	scall Route45AskNumber1M
-	jump .AskForNumber
+	sjump .AskForNumber
 
 .AskedAlready:
 	scall Route45AskNumber2M
@@ -147,9 +147,9 @@ TrainerHikerParry:
 	askforphonenumber PHONE_HIKER_PARRY
 	ifequal PHONE_CONTACTS_FULL, Route45PhoneFullM
 	ifequal PHONE_CONTACT_REFUSED, Route45NumberDeclinedM
-	trainertotext HIKER, PARRY1, STRING_BUFFER_3
+	gettrainername STRING_BUFFER_3, HIKER, PARRY1
 	scall Route45RegisteredNumberM
-	jump Route45NumberAcceptedM
+	sjump Route45NumberAcceptedM
 
 .WantsBattle:
 	scall Route45RematchM

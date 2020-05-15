@@ -14,7 +14,7 @@ Route36_MapScripts:
 	callback MAPCALLBACK_OBJECTS, .ArthurCallback
 
 .ArthurCallback:
-	checkcode VAR_WEEKDAY
+	readvar VAR_WEEKDAY
 	ifequal THURSDAY, .ArthurAppears
 	disappear ROUTE36_ARTHUR
 	return
@@ -128,7 +128,7 @@ TrainerSchoolboyAlan1:
 	promptbutton
 	setevent EVENT_ALAN_ASKED_FOR_PHONE_NUMBER
 	scall .AskNumber1
-	jump .ContinueAskForPhoneNumber
+	sjump .ContinueAskForPhoneNumber
 
 .AskAgainForPhoneNumber:
 	scall .AskNumber2
@@ -136,9 +136,9 @@ TrainerSchoolboyAlan1:
 	askforphonenumber PHONE_SCHOOLBOY_ALAN
 	ifequal PHONE_CONTACTS_FULL, .PhoneFull
 	ifequal PHONE_CONTACT_REFUSED, .NumberDeclined
-	trainertotext SCHOOLBOY, ALAN1, STRING_BUFFER_3
+	gettrainername STRING_BUFFER_3, SCHOOLBOY, ALAN1
 	scall .RegisteredNumber
-	jump .NumberAccepted
+	sjump .NumberAccepted
 
 .ChooseRematch:
 	scall .Rematch
@@ -211,7 +211,7 @@ ArthurScript:
 	opentext
 	checkevent EVENT_GOT_HARD_STONE_FROM_ARTHUR
 	iftrue .AlreadyGotStone
-	checkcode VAR_WEEKDAY
+	readvar VAR_WEEKDAY
 	ifnotequal THURSDAY, ArthurNotThursdayScript
 	checkevent EVENT_MET_ARTHUR_OF_THURSDAY
 	iftrue .MetArthur

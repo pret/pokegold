@@ -39,7 +39,7 @@ FuchsiaGymJanineScript:
 	playsound SFX_GET_BADGE
 	waitsfx
 	setflag ENGINE_SOULBADGE
-	jump .AfterBattle
+	sjump .AfterBattle
 .FightDone:
 	faceplayer
 	opentext
@@ -214,7 +214,7 @@ FuchsiaGymStatue:
 	iftrue .Beaten
 	jumpstd gymstatue1
 .Beaten:
-	trainertotext JANINE, JANINE1, STRING_BUFFER_4
+	gettrainername STRING_BUFFER_4, JANINE, JANINE1
 	jumpstd gymstatue2
 
 Movement_NinjaSpin:

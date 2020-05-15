@@ -29,7 +29,7 @@ CherrygroveCityGuideGent:
 	writetext GuideGentIntroText
 	yesorno
 	iffalse .No
-	jump .Yes
+	sjump .Yes
 .Yes:
 	writetext GuideGentTourText1
 	waitbutton
@@ -67,7 +67,7 @@ CherrygroveCityGuideGent:
 	opentext
 	writetext GuideGentGiftText
 	promptbutton
-	stringtotext .mapcardname, STRING_BUFFER_4
+	getstring STRING_BUFFER_4, .mapcardname
 	scall .JumpstdReceiveItem
 	setflag ENGINE_MAP_CARD
 	writetext GotMapCardText
@@ -120,34 +120,34 @@ CherrygroveSilverSceneNorth:
 	winlosstext SilverCherrygroveWinText, SilverCherrygroveLossText
 	setlasttalked CHERRYGROVECITY_SILVER
 	loadtrainer RIVAL1, RIVAL1_1_TOTODILE
-	writecode VAR_BATTLETYPE, BATTLETYPE_CANLOSE
+	loadvar VAR_BATTLETYPE, BATTLETYPE_CANLOSE
 	startbattle
 	dontrestartmapmusic
 	reloadmap
 	iftrue .AfterVictorious
-	jump .AfterYourDefeat
+	sjump .AfterYourDefeat
 
 .Totodile:
 	winlosstext SilverCherrygroveWinText, SilverCherrygroveLossText
 	setlasttalked CHERRYGROVECITY_SILVER
 	loadtrainer RIVAL1, RIVAL1_1_CHIKORITA
-	writecode VAR_BATTLETYPE, BATTLETYPE_CANLOSE
+	loadvar VAR_BATTLETYPE, BATTLETYPE_CANLOSE
 	startbattle
 	dontrestartmapmusic
 	reloadmap
 	iftrue .AfterVictorious
-	jump .AfterYourDefeat
+	sjump .AfterYourDefeat
 
 .Chikorita:
 	winlosstext SilverCherrygroveWinText, SilverCherrygroveLossText
 	setlasttalked CHERRYGROVECITY_SILVER
 	loadtrainer RIVAL1, RIVAL1_1_CYNDAQUIL
-	writecode VAR_BATTLETYPE, BATTLETYPE_CANLOSE
+	loadvar VAR_BATTLETYPE, BATTLETYPE_CANLOSE
 	startbattle
 	dontrestartmapmusic
 	reloadmap
 	iftrue .AfterVictorious
-	jump .AfterYourDefeat
+	sjump .AfterYourDefeat
 
 .AfterVictorious:
 	playmusic MUSIC_RIVAL_AFTER
@@ -155,7 +155,7 @@ CherrygroveSilverSceneNorth:
 	writetext CherrygroveRivalText_YouWon
 	waitbutton
 	closetext
-	jump .FinishRival
+	sjump .FinishRival
 
 .AfterYourDefeat:
 	playmusic MUSIC_RIVAL_AFTER

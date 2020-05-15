@@ -38,7 +38,7 @@ TrainerPicnickerErin1:
 	promptbutton
 	setevent EVENT_ERIN_ASKED_FOR_PHONE_NUMBER
 	scall Route46AskNumber1F
-	jump .AskForNumber
+	sjump .AskForNumber
 
 .AskedAlready:
 	scall Route46AskNumber2F
@@ -46,9 +46,9 @@ TrainerPicnickerErin1:
 	askforphonenumber PHONE_PICNICKER_ERIN
 	ifequal PHONE_CONTACTS_FULL, Route46PhoneFullF
 	ifequal PHONE_CONTACT_REFUSED, Route46NumberDeclinedF
-	trainertotext PICNICKER, ERIN1, STRING_BUFFER_3
+	gettrainername STRING_BUFFER_3, PICNICKER, ERIN1
 	scall Route46RegisteredNumberF
-	jump Route46NumberAcceptedF
+	sjump Route46NumberAcceptedF
 
 .WantsBattle:
 	scall Route46RematchF

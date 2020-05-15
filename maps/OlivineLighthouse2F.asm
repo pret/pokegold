@@ -34,7 +34,7 @@ TrainerSailorHuey:
 	promptbutton
 	setevent EVENT_HUEY_ASKED_FOR_PHONE_NUMBER
 	scall .AskNumber1
-	jump .AskForNumber
+	sjump .AskForNumber
 
 .AskedBefore:
 	scall .AskNumber2
@@ -42,9 +42,9 @@ TrainerSailorHuey:
 	askforphonenumber PHONE_SAILOR_HUEY
 	ifequal PHONE_CONTACTS_FULL, .PhoneFull
 	ifequal PHONE_CONTACT_REFUSED, .NumberDeclined
-	trainertotext SAILOR, HUEY1, STRING_BUFFER_3
+	gettrainername STRING_BUFFER_3, SAILOR, HUEY1
 	scall .RegisteredNumber
-	jump .NumberAccepted
+	sjump .NumberAccepted
 
 .WantsBattle:
 	scall .Rematch

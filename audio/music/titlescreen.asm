@@ -8,7 +8,7 @@ Music_TitleScreen:
 Music_TitleScreen_Ch1:
 	tempo 256
 	volume 7, 7
-	dutycycle 3
+	duty_cycle 3
 	pitch_offset 2
 	vibrato 16, 1, 2
 	stereo_panning TRUE, FALSE

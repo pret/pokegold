@@ -19,21 +19,21 @@ Pokecenter2F_MapScripts:
 	clearevent EVENT_MYSTERY_GIFT_DELIVERY_GUY
 	checkevent EVENT_TEMPORARY_UNTIL_MAP_RELOAD_2
 	iftrue .Scene0Done
-	priorityjump Pokecenter2F_AppearMysteryGiftDeliveryGuy
+	prioritysjump Pokecenter2F_AppearMysteryGiftDeliveryGuy
 
 .Scene0Done:
 	end
 
 .Scene1:
-	priorityjump Script_LeftCableTradeCenter
+	prioritysjump Script_LeftCableTradeCenter
 	end
 
 .Scene2:
-	priorityjump Script_LeftCableColosseum
+	prioritysjump Script_LeftCableColosseum
 	end
 
 .Scene3:
-	priorityjump Script_LeftTimeCapsule
+	prioritysjump Script_LeftTimeCapsule
 	end
 
 Pokecenter2F_AppearMysteryGiftDeliveryGuy:
@@ -76,14 +76,14 @@ LinkReceptionistScript_Trade:
 	writetext Text_PleaseWait
 	special CheckLinkTimeout
 	iffalse .LinkTimedOut
-	copybytetovar wOtherPlayerLinkMode
+	readmem wOtherPlayerLinkMode
 	iffalse .LinkedToFirstGen
 	special CheckBothSelectedSameRoom
 	iffalse .IncompatibleRooms
 	writetext Text_PleaseComeIn2
 	waitbutton
 	closetext
-	applymovement2 Pokecenter2FMovementData_ReceptionistWalksUpAndLeft_LookRight
+	applymovementlasttalked Pokecenter2FMovementData_ReceptionistWalksUpAndLeft_LookRight
 	applymovement PLAYER, Pokecenter2FMovementData_PlayerTakesThreeStepsUp
 	warpcheck
 	end
@@ -109,7 +109,7 @@ LinkReceptionistScript_Trade:
 
 .LinkTimedOut:
 	writetext Text_LinkTimedOut
-	jump .AbortLink
+	sjump .AbortLink
 
 .DidNotSave:
 	writetext Text_PleaseComeAgain
@@ -137,14 +137,14 @@ LinkReceptionistScript_Battle:
 	writetext Text_PleaseWait
 	special CheckLinkTimeout
 	iffalse .LinkTimedOut
-	copybytetovar wOtherPlayerLinkMode
+	readmem wOtherPlayerLinkMode
 	iffalse .LinkedToFirstGen
 	special CheckBothSelectedSameRoom
 	iffalse .IncompatibleRooms
 	writetext Text_PleaseComeIn2
 	waitbutton
 	closetext
-	applymovement2 Pokecenter2FMovementData_ReceptionistWalksUpAndLeft_LookRight
+	applymovementlasttalked Pokecenter2FMovementData_ReceptionistWalksUpAndLeft_LookRight
 	applymovement PLAYER, Pokecenter2FMovementData_PlayerTakesThreeStepsUp
 	warpcheck
 	end
@@ -170,7 +170,7 @@ LinkReceptionistScript_Battle:
 
 .LinkTimedOut:
 	writetext Text_LinkTimedOut
-	jump .AbortLink
+	sjump .AbortLink
 
 .DidNotSave:
 	writetext Text_PleaseComeAgain
@@ -213,7 +213,7 @@ LinkReceptionistScript_TimeCapsule:
 	writetext Text_PleaseWait
 	special CheckLinkTimeout
 	iffalse .LinkTimedOut
-	copybytetovar wOtherPlayerLinkMode
+	readmem wOtherPlayerLinkMode
 	iffalse .OK
 	special CheckBothSelectedSameRoom
 	writetext Text_IncompatibleRooms
@@ -226,10 +226,10 @@ LinkReceptionistScript_TimeCapsule:
 	writetext Text_PleaseComeIn2
 	waitbutton
 	closetext
-	checkcode VAR_FACING
+	readvar VAR_FACING
 	ifequal LEFT, .MaleFacingLeft
 	ifequal RIGHT, .MaleFacingRight
-	applymovement2 Pokecenter2FMovementData_ReceptionistWalksLeft_LookRight
+	applymovementlasttalked Pokecenter2FMovementData_ReceptionistWalksLeft_LookRight
 	applymovement PLAYER, Pokecenter2FMovementData_PlayerTakesTwoStepsUp
 	warpcheck
 	end
@@ -242,7 +242,7 @@ LinkReceptionistScript_TimeCapsule:
 
 .LinkTimedOut:
 	writetext Text_LinkTimedOut
-	jump .Cancel
+	sjump .Cancel
 
 .DidNotSave:
 	writetext Text_PleaseComeAgain
@@ -267,13 +267,13 @@ LinkReceptionistScript_TimeCapsule:
 	end
 
 .MaleFacingLeft:
-	applymovement2 Pokecenter2FMovementData_ReceptionistWalksLeft_LookRight
+	applymovementlasttalked Pokecenter2FMovementData_ReceptionistWalksLeft_LookRight
 	applymovement PLAYER, Pokecenter2FMovementData_PlayerTakesStepsLeftUp
 	warpcheck
 	end
 
 .MaleFacingRight:
-	applymovement2 Pokecenter2FMovementData_ReceptionistStepsRightLooksDown
+	applymovementlasttalked Pokecenter2FMovementData_ReceptionistStepsRightLooksDown
 	applymovement PLAYER, Pokecenter2FMovementData_PlayerTakesStepsRightUp
 	warpcheck
 	end

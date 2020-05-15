@@ -18,7 +18,7 @@ OlivinePort_MapScripts:
 	end
 
 .LeaveFastShip:
-	priorityjump .LeaveFastShipScript
+	prioritysjump .LeaveFastShipScript
 	end
 
 .LeaveFastShipScript:
@@ -82,7 +82,7 @@ OlivinePortWalkUpToShipScript:
 	opentext
 	checkevent EVENT_FAST_SHIP_FIRST_TIME
 	iffalse .FirstTime
-	checkcode VAR_WEEKDAY
+	readvar VAR_WEEKDAY
 	ifequal SUNDAY, .NextShipMonday
 	ifequal SATURDAY, .NextShipMonday
 	ifequal TUESDAY, .NextShipFriday
@@ -101,7 +101,7 @@ OlivinePortWalkUpToShipScript:
 	closetext
 	setevent EVENT_TEMPORARY_UNTIL_MAP_RELOAD_2
 	applymovement PLAYER, MovementData_0x74a37
-	jump OlivinePortSailorAtGangwayScript
+	sjump OlivinePortSailorAtGangwayScript
 
 .NoTicket:
 	writetext UnknownText_0x74b41
@@ -147,7 +147,7 @@ OlivinePortSailorAfterHOFScript:
 	iftrue OlivinePortAlreadyRodeScript
 	checkevent EVENT_FAST_SHIP_FIRST_TIME
 	iffalse .FirstTime
-	checkcode VAR_WEEKDAY
+	readvar VAR_WEEKDAY
 	ifequal SUNDAY, .NextShipMonday
 	ifequal SATURDAY, .NextShipMonday
 	ifequal TUESDAY, .NextShipFriday
@@ -165,14 +165,14 @@ OlivinePortSailorAfterHOFScript:
 	waitbutton
 	closetext
 	setevent EVENT_TEMPORARY_UNTIL_MAP_RELOAD_2
-	checkcode VAR_FACING
+	readvar VAR_FACING
 	ifequal RIGHT, .Right
 	applymovement PLAYER, MovementData_0x74a3f
-	jump OlivinePortSailorAtGangwayScript
+	sjump OlivinePortSailorAtGangwayScript
 
 .Right:
 	applymovement PLAYER, MovementData_0x74a49
-	jump OlivinePortSailorAtGangwayScript
+	sjump OlivinePortSailorAtGangwayScript
 
 .NoTicket:
 	writetext UnknownText_0x74b41

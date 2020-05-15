@@ -18,7 +18,7 @@ VictoryRoadGate_MapScripts:
 
 VictoryRoadGateBadgeCheckScene:
 	turnobject PLAYER, LEFT
-	jump VictoryRoadGateBadgeCheckScript
+	sjump VictoryRoadGateBadgeCheckScript
 
 VictoryRoadGateOfficerScript:
 	faceplayer
@@ -26,7 +26,7 @@ VictoryRoadGateBadgeCheckScript:
 	opentext
 	writetext VictoryRoadGateOfficerText
 	promptbutton
-	checkcode VAR_BADGES
+	readvar VAR_BADGES
 	ifgreater NUM_JOHTO_BADGES - 1, .AllEightBadges
 	writetext VictoryRoadGateNotEnoughBadgesText
 	waitbutton

@@ -58,7 +58,7 @@ RadioTower1FLuckyNumberManScript:
 	ifequal 1, .FirstPlace
 	ifequal 2, .SecondPlace
 	ifequal 3, .ThirdPlace
-	jump .NoPrize
+	sjump .NoPrize
 
 .GameOver:
 	writetext UnknownText_0x5cf7e
@@ -75,7 +75,7 @@ RadioTower1FLuckyNumberManScript:
 	iffalse .BagFull
 	itemnotify
 	setflag ENGINE_LUCKY_NUMBER_SHOW
-	jump .GameOver
+	sjump .GameOver
 
 .SecondPlace:
 	writetext UnknownText_0x5d023
@@ -86,7 +86,7 @@ RadioTower1FLuckyNumberManScript:
 	iffalse .BagFull
 	itemnotify
 	setflag ENGINE_LUCKY_NUMBER_SHOW
-	jump .GameOver
+	sjump .GameOver
 
 .ThirdPlace:
 	writetext UnknownText_0x5d076
@@ -97,7 +97,7 @@ RadioTower1FLuckyNumberManScript:
 	iffalse .BagFull
 	itemnotify
 	setflag ENGINE_LUCKY_NUMBER_SHOW
-	jump .GameOver
+	sjump .GameOver
 
 .NoPrize:
 	writetext UnknownText_0x5d0c0
@@ -146,7 +146,7 @@ RadioTower1FRadioCardWomanScript:
 	waitsfx
 	writetext UnknownText_0x5d37b
 	promptbutton
-	stringtotext .RadioCardText, STRING_BUFFER_4
+	getstring STRING_BUFFER_4, .RadioCardText
 	scall .ReceiveItem
 	writetext UnknownText_0x5d3c0
 	promptbutton

@@ -17,7 +17,7 @@ BurnedTower1F_MapScripts:
 	db 0 ; callbacks
 
 .RivalScene:
-	priorityjump .Rival
+	prioritysjump .Rival
 	end
 
 .DummyScene1:
@@ -53,7 +53,7 @@ BurnedTower1F_MapScripts:
 	startbattle
 	dontrestartmapmusic
 	reloadmapafterbattle
-	jump .returnfrombattle
+	sjump .returnfrombattle
 
 .totodile
 	winlosstext BurnedTowerSilver_WinText, BurnedTowerSilver_LossText
@@ -62,7 +62,7 @@ BurnedTower1F_MapScripts:
 	startbattle
 	dontrestartmapmusic
 	reloadmapafterbattle
-	jump .returnfrombattle
+	sjump .returnfrombattle
 
 .chikorita
 	winlosstext BurnedTowerSilver_WinText, BurnedTowerSilver_LossText
@@ -71,7 +71,7 @@ BurnedTower1F_MapScripts:
 	startbattle
 	dontrestartmapmusic
 	reloadmapafterbattle
-	jump .returnfrombattle
+	sjump .returnfrombattle
 
 .returnfrombattle
 	playmusic MUSIC_RIVAL_AFTER

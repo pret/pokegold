@@ -23,7 +23,7 @@ RuinsOfAlphKabutoChamberHiddenDoors:
 
 RuinsOfAlphKabutoChamberPuzzle:
 	refreshscreen
-	writebyte UNOWNPUZZLE_KABUTO
+	setval UNOWNPUZZLE_KABUTO
 	special UnownPuzzle
 	closetext
 	iftrue .PuzzleComplete

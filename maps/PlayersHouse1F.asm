@@ -12,7 +12,7 @@ PlayersHouse1F_MapScripts:
 	db 0 ; callbacks
 
 .DummyScene0:
-	priorityjump MeetMomScript
+	prioritysjump MeetMomScript
 	end
 
 .DummyScene1:
@@ -27,7 +27,7 @@ MeetMomScript:
 	opentext
 	writetext ElmsLookingForYouText
 	promptbutton
-	stringtotext GearName, STRING_BUFFER_4
+	getstring STRING_BUFFER_4, GearName
 	scall PlayersHouse1FReceiveItemStd
 	setflag ENGINE_POKEGEAR
 	setflag ENGINE_PHONE_CARD
@@ -45,7 +45,7 @@ MeetMomScript:
 	special InitialSetDSTFlag
 	yesorno
 	iffalse .SetDayOfWeek
-	jump .DayOfWeekDone
+	sjump .DayOfWeekDone
 
 .WrongDay:
 	special InitialClearDSTFlag
@@ -55,17 +55,17 @@ MeetMomScript:
 	writetext ComeHomeForDSTText
 	yesorno
 	iffalse .ExplainPhone
-	jump .KnowPhone
+	sjump .KnowPhone
 
 .KnowPhone:
 	writetext KnowTheInstructionsText
 	promptbutton
-	jump .FinishPhone
+	sjump .FinishPhone
 
 .ExplainPhone:
 	writetext DontKnowTheInstructionsText
 	promptbutton
-	jump .FinishPhone
+	sjump .FinishPhone
 
 .FinishPhone:
 	writetext InstructionsNextText

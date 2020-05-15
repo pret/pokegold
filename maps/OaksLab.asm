@@ -23,10 +23,10 @@ Oak:
 	promptbutton
 	setevent EVENT_TALKED_TO_OAK_IN_KANTO
 .CheckBadges:
-	checkcode VAR_BADGES
+	readvar VAR_BADGES
 	ifequal NUM_BADGES, .OpenMtSilver
 	ifequal NUM_JOHTO_BADGES, .Complain
-	jump .AhGood
+	sjump .AhGood
 
 .CheckPokedex:
 	writetext OakLabDexCheckText
@@ -41,17 +41,17 @@ Oak:
 	writetext OakOpenMtSilverText
 	promptbutton
 	setevent EVENT_OPENED_MT_SILVER
-	jump .CheckPokedex
+	sjump .CheckPokedex
 
 .Complain:
 	writetext OakNoKantoBadgesText
 	promptbutton
-	jump .CheckPokedex
+	sjump .CheckPokedex
 
 .AhGood:
 	writetext OakYesKantoBadgesText
 	promptbutton
-	jump .CheckPokedex
+	sjump .CheckPokedex
 
 OaksAssistant1Script:
 	jumptextfaceplayer OaksAssistant1Text

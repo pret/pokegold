@@ -38,7 +38,7 @@ TrainerBugCatcherWade1:
 	waitbutton
 	setevent EVENT_WADE_ASKED_FOR_PHONE_NUMBER
 	scall .AskPhoneNumberSTD
-	jump .Continue
+	sjump .Continue
 
 .AskAgain:
 	scall .AskAgainSTD
@@ -46,9 +46,9 @@ TrainerBugCatcherWade1:
 	askforphonenumber PHONE_BUG_CATCHER_WADE
 	ifequal PHONE_CONTACTS_FULL, .PhoneFullSTD
 	ifequal PHONE_CONTACT_REFUSED, .DeclinedNumberSTD
-	trainertotext BUG_CATCHER, WADE1, STRING_BUFFER_3
+	gettrainername STRING_BUFFER_3, BUG_CATCHER, WADE1
 	scall .RegisterNumberSTD
-	jump .AcceptedNumberSTD
+	sjump .AcceptedNumberSTD
 
 .WadeRematch:
 	scall .RematchSTD

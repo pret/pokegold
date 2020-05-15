@@ -16,7 +16,7 @@ RuinsOfAlphOmanyteChamber_MapScripts:
 
 RuinsOfAlphOmanyteChamberPuzzle:
 	refreshscreen
-	writebyte UNOWNPUZZLE_OMANYTE
+	setval UNOWNPUZZLE_OMANYTE
 	special UnownPuzzle
 	closetext
 	iftrue .PuzzleComplete

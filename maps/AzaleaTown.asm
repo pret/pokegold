@@ -38,7 +38,7 @@ AzaleaTownRivalBattleScene1:
 	appear AZALEATOWN_SILVER
 	applymovement AZALEATOWN_SILVER, AzaleaTownRivalBattleApproachMovement1
 	turnobject PLAYER, DOWN
-	jump AzaleaTownRivalBattleScript
+	sjump AzaleaTownRivalBattleScript
 
 AzaleaTownRivalBattleScene2:
 	turnobject PLAYER, RIGHT
@@ -65,7 +65,7 @@ AzaleaTownRivalBattleScript:
 	startbattle
 	dontrestartmapmusic
 	reloadmapafterbattle
-	jump .AfterBattle
+	sjump .AfterBattle
 
 .Totodile:
 	winlosstext AzaleaTownRivalWinText, AzaleaTownRivalLossText
@@ -74,7 +74,7 @@ AzaleaTownRivalBattleScript:
 	startbattle
 	dontrestartmapmusic
 	reloadmapafterbattle
-	jump .AfterBattle
+	sjump .AfterBattle
 
 .Chikorita:
 	winlosstext AzaleaTownRivalWinText, AzaleaTownRivalLossText
@@ -83,7 +83,7 @@ AzaleaTownRivalBattleScript:
 	startbattle
 	dontrestartmapmusic
 	reloadmapafterbattle
-	jump .AfterBattle
+	sjump .AfterBattle
 
 .AfterBattle:
 	playmusic MUSIC_RIVAL_AFTER

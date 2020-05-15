@@ -243,7 +243,7 @@ FarfetchdCryAndCheckFacing:
 	cry FARFETCH_D
 	waitbutton
 	closetext
-	checkcode VAR_FACING
+	readvar VAR_FACING
 	end
 
 IlexForestCharcoalMasterScript:

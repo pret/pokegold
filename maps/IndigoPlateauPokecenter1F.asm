@@ -46,7 +46,7 @@ PlateauRivalBattle1:
 	iffalse PlateauRivalScriptDone
 	checkflag ENGINE_INDIGO_PLATEAU_RIVAL_FIGHT
 	iftrue PlateauRivalScriptDone
-	checkcode VAR_WEEKDAY
+	readvar VAR_WEEKDAY
 	ifequal SUNDAY, PlateauRivalScriptDone
 	ifequal TUESDAY, PlateauRivalScriptDone
 	ifequal THURSDAY, PlateauRivalScriptDone
@@ -61,14 +61,14 @@ PlateauRivalBattle1:
 	applymovement INDIGOPLATEAUPOKECENTER1F_SILVER, PlateauRivalMovement1
 	playmusic MUSIC_RIVAL_ENCOUNTER
 	turnobject PLAYER, RIGHT
-	jump PlateauRivalBattleCommon
+	sjump PlateauRivalBattleCommon
 
 PlateauRivalBattle2:
 	checkevent EVENT_BEAT_RIVAL_IN_MT_MOON
 	iffalse PlateauRivalScriptDone
 	checkflag ENGINE_INDIGO_PLATEAU_RIVAL_FIGHT
 	iftrue PlateauRivalScriptDone
-	checkcode VAR_WEEKDAY
+	readvar VAR_WEEKDAY
 	ifequal SUNDAY, PlateauRivalScriptDone
 	ifequal TUESDAY, PlateauRivalScriptDone
 	ifequal THURSDAY, PlateauRivalScriptDone
@@ -99,7 +99,7 @@ PlateauRivalBattleCommon:
 	startbattle
 	dontrestartmapmusic
 	reloadmapafterbattle
-	jump PlateauRivalPostBattle
+	sjump PlateauRivalPostBattle
 
 .Totodile:
 	winlosstext PlateauRivalWinText, PlateauRivalLoseText
@@ -108,7 +108,7 @@ PlateauRivalBattleCommon:
 	startbattle
 	dontrestartmapmusic
 	reloadmapafterbattle
-	jump PlateauRivalPostBattle
+	sjump PlateauRivalPostBattle
 
 .Chikorita:
 	winlosstext PlateauRivalWinText, PlateauRivalLoseText
@@ -117,7 +117,7 @@ PlateauRivalBattleCommon:
 	startbattle
 	dontrestartmapmusic
 	reloadmapafterbattle
-	jump PlateauRivalPostBattle
+	sjump PlateauRivalPostBattle
 
 PlateauRivalPostBattle:
 	playmusic MUSIC_RIVAL_AFTER
