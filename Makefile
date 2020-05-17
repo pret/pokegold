@@ -52,13 +52,8 @@ all: $(roms)
 gold: pokegold.gbc
 silver: pokesilver.gbc
 
-tidy:
-	rm -f $(roms) $(gold_obj) $(silver_obj) $(roms:.gbc=.map) $(roms:.gbc=.sym) rgbdscheck.o
-	$(MAKE) clean -C tools/
-
 clean:
 	rm -f $(roms) $(gold_obj) $(silver_obj) $(roms:.gbc=.map) $(roms:.gbc=.sym) rgbdscheck.o
-	find gfx \( -iname "*.png" -not -iname "big_onix.png" -not -iname "slots_3.png" \) -delete
 	$(MAKE) clean -C tools/
 
 compare: $(roms)

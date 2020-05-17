@@ -649,10 +649,10 @@ NamingScreen_AnimateCursor:
 NamingScreen_TryAddCharacter:
 	ld a, [wNamingScreenLastCharacter]
 	ld hl, Dakutens
-	cp $e5
+	cp "ﾞ" ; $e5
 	jr z, asm_11f06
 	ld hl, Handakutens
-	cp $e4
+	cp "ﾟ" ; $e4
 	jr z, asm_11f06
 
 MailComposition_TryAddCharacter:
@@ -1334,10 +1334,10 @@ ComposeMail_GetCursorPosition:
 MailComposition_TryAddLastCharacter:
 	ld a, [wNamingScreenLastCharacter]
 	ld hl, Dakutens
-	cp $e5
+	cp "ﾞ" ; $e5
 	jr z, .asm_1258b
 	ld hl, Handakutens
-	cp $e4
+	cp "ﾟ" ; $e4
 	jp nz, MailComposition_TryAddCharacter
 
 .asm_1258b
