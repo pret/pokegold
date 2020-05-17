@@ -19,18 +19,19 @@ BASE_UNKNOWN_1   EQUS "(wBaseUnknown1 - wCurBaseData)"
 BASE_EGG_STEPS   EQUS "(wBaseEggSteps - wCurBaseData)"
 BASE_UNKNOWN_2   EQUS "(wBaseUnknown2 - wCurBaseData)"
 BASE_PIC_SIZE    EQUS "(wBasePicSize - wCurBaseData)"
-BASE_PADDING     EQUS "(wBasePadding - wCurBaseData)"
+BASE_FRONTPIC    EQUS "(wBaseUnusedFrontpic - wCurBaseData)"
+BASE_BACKPIC     EQUS "(wBaseUnusedBackpic - wCurBaseData)"
 BASE_GROWTH_RATE EQUS "(wBaseGrowthRate - wCurBaseData)"
 BASE_EGG_GROUPS  EQUS "(wBaseEggGroups - wCurBaseData)"
 BASE_TMHM        EQUS "(wBaseTMHM - wCurBaseData)"
 BASE_DATA_SIZE   EQUS "(wCurBaseDataEnd - wCurBaseData)"
 
 ; gender ratio constants
-GENDER_F0      EQU 0 percent
-GENDER_F12_5   EQU 12 percent + 1
-GENDER_F25     EQU 25 percent
-GENDER_F50     EQU 50 percent
-GENDER_F75     EQU 75 percent
+GENDER_F0      EQU   0 percent
+GENDER_F12_5   EQU  12 percent + 1
+GENDER_F25     EQU  25 percent
+GENDER_F50     EQU  50 percent
+GENDER_F75     EQU  75 percent
 GENDER_F100    EQU 100 percent - 1
 GENDER_UNKNOWN EQU -1
 
@@ -62,46 +63,44 @@ GENDER_UNKNOWN EQU -1
 	const EGG_DRAGON        ; e
 	const EGG_NONE          ; f (Undiscovered)
 
-; menu sprites
-const_value SET 1
-	const ICON_POLIWAG
-	const ICON_JIGGLYPUFF
-	const ICON_DIGLETT
-	const ICON_PIKACHU
-	const ICON_STARYU
-	const ICON_FISH
-	const ICON_BIRD
-	const ICON_MONSTER
-	const ICON_CLEFAIRY
-	const ICON_ODDISH
-	const ICON_BUG
-	const ICON_GHOST
-	const ICON_LAPRAS
-	const ICON_HUMANSHAPE
-	const ICON_FOX
-	const ICON_EQUINE
-	const ICON_SHELL
-	const ICON_BLOB
-	const ICON_SERPENT
-	const ICON_VOLTORB
-	const ICON_SQUIRTLE
-	const ICON_BULBASAUR
-	const ICON_CHARMANDER
-	const ICON_CATERPILLAR
-	const ICON_UNOWN
-	const ICON_GEODUDE
-	const ICON_FIGHTER
-	const ICON_EGG
-	const ICON_JELLYFISH
-	const ICON_MOTH
-	const ICON_BAT
-	const ICON_SNORLAX
-	const ICON_HO_OH
-	const ICON_LUGIA
-	const ICON_GYARADOS
-	const ICON_SLOWPOKE
-	const ICON_SUDOWOODO
-	const ICON_BIGMON
+; pokedex entries (see data/pokemon/dex_entries.asm)
+NUM_DEX_ENTRY_BANKS EQU 4
+
+; party_struct members (see macros/wram.asm)
+MON_SPECIES            EQUS "(wPartyMon1Species - wPartyMon1)"
+MON_ITEM               EQUS "(wPartyMon1Item - wPartyMon1)"
+MON_MOVES              EQUS "(wPartyMon1Moves - wPartyMon1)"
+MON_ID                 EQUS "(wPartyMon1ID - wPartyMon1)"
+MON_EXP                EQUS "(wPartyMon1Exp - wPartyMon1)"
+MON_STAT_EXP           EQUS "(wPartyMon1StatExp - wPartyMon1)"
+MON_HP_EXP             EQUS "(wPartyMon1HPExp - wPartyMon1)"
+MON_ATK_EXP            EQUS "(wPartyMon1AtkExp - wPartyMon1)"
+MON_DEF_EXP            EQUS "(wPartyMon1DefExp - wPartyMon1)"
+MON_SPD_EXP            EQUS "(wPartyMon1SpdExp - wPartyMon1)"
+MON_SPC_EXP            EQUS "(wPartyMon1SpcExp - wPartyMon1)"
+MON_DVS                EQUS "(wPartyMon1DVs - wPartyMon1)"
+MON_PP                 EQUS "(wPartyMon1PP - wPartyMon1)"
+MON_HAPPINESS          EQUS "(wPartyMon1Happiness - wPartyMon1)"
+MON_PKRUS              EQUS "(wPartyMon1PokerusStatus - wPartyMon1)"
+MON_CAUGHTDATA         EQUS "(wPartyMon1CaughtData - wPartyMon1)"
+MON_CAUGHTLEVEL        EQUS "(wPartyMon1CaughtLevel - wPartyMon1)"
+MON_CAUGHTTIME         EQUS "(wPartyMon1CaughtTime - wPartyMon1)"
+MON_CAUGHTGENDER       EQUS "(wPartyMon1CaughtGender - wPartyMon1)"
+MON_CAUGHTLOCATION     EQUS "(wPartyMon1CaughtLocation - wPartyMon1)"
+MON_LEVEL              EQUS "(wPartyMon1Level - wPartyMon1)"
+MON_STATUS             EQUS "(wPartyMon1Status - wPartyMon1)"
+MON_HP                 EQUS "(wPartyMon1HP - wPartyMon1)"
+MON_MAXHP              EQUS "(wPartyMon1MaxHP - wPartyMon1)"
+MON_ATK                EQUS "(wPartyMon1Attack - wPartyMon1)"
+MON_DEF                EQUS "(wPartyMon1Defense - wPartyMon1)"
+MON_SPD                EQUS "(wPartyMon1Speed - wPartyMon1)"
+MON_SAT                EQUS "(wPartyMon1SpclAtk - wPartyMon1)"
+MON_SDF                EQUS "(wPartyMon1SpclDef - wPartyMon1)"
+BOXMON_STRUCT_LENGTH   EQUS "(wPartyMon1End - wPartyMon1)"
+PARTYMON_STRUCT_LENGTH EQUS "(wPartyMon1StatsEnd - wPartyMon1)"
+
+NICKNAMED_MON_STRUCT_LENGTH EQUS "(PARTYMON_STRUCT_LENGTH + MON_NAME_LENGTH)"
+REDMON_STRUCT_LENGTH EQU 44
 
 ; maximum number of party pokemon
 PARTY_LENGTH EQU 6
@@ -111,37 +110,58 @@ MONS_PER_BOX EQU 20
 NUM_BOXES    EQU 14
 
 ; hall of fame
-HOF_MON_LENGTH = 1 + 2 + 2 + 1 + (MON_NAME_LENGTH + -1) ; species, id, dvs, level, nick
-HOF_LENGTH = 1 + HOF_MON_LENGTH * PARTY_LENGTH + 1 ; win count, party, terminator
-NUM_HOF_TEAMS = 30
+HOF_MON_LENGTH EQU 1 + 2 + 2 + 1 + (MON_NAME_LENGTH - 1) ; species, id, dvs, level, nick
+HOF_LENGTH EQU 1 + HOF_MON_LENGTH * PARTY_LENGTH + 1 ; win count, party, terminator
+NUM_HOF_TEAMS EQU 30
 
-; evolution types
-const_value SET 1
+; evolution types (used in data/pokemon/evos_attacks.asm)
+	const_def 1
 	const EVOLVE_LEVEL
 	const EVOLVE_ITEM
 	const EVOLVE_TRADE
 	const EVOLVE_HAPPINESS
 	const EVOLVE_STAT
 
-
-; happiness evolution triggers
-const_value SET 1
+; EVOLVE_HAPPINESS triggers
+	const_def 1
 	const TR_ANYTIME
 	const TR_MORNDAY
 	const TR_NITE
 
-
-; stat evolution triggers
-const_value SET 1
+; EVOLVE_STAT triggers
+	const_def 1
 	const ATK_GT_DEF
 	const ATK_LT_DEF
 	const ATK_EQ_DEF
 
-NUM_GRASSMON EQU 7
-NUM_WATERMON EQU 3
+; wild data
 
-GRASS_WILDDATA_LENGTH EQU (NUM_GRASSMON * 2 + 1) * 3 + 2
-WATER_WILDDATA_LENGTH EQU (NUM_WATERMON * 2 + 1) * 1 + 2
+NUM_GRASSMON EQU 7 ; data/wild/*_grass.asm table size
+NUM_WATERMON EQU 3 ; data/wild/*_water.asm table size
+
+GRASS_WILDDATA_LENGTH EQU 2 + (1 + NUM_GRASSMON * 2) * 3
+WATER_WILDDATA_LENGTH EQU 2 + (1 + NUM_WATERMON * 2) * 1
+FISHGROUP_DATA_LENGTH EQU 1 + 2 * 3
+
+NUM_ROAMMON_MAPS EQU 16 ; RoamMaps table size (see data/wild/roammon_maps.asm)
+
+; treemon sets
+; TreeMons indexes (see data/wild/treemons.asm)
+	const_def
+	const TREEMON_SET_NONE
+	const TREEMON_SET_FOREST
+	const TREEMON_SET_CANYON
+	const TREEMON_SET_ROCK
+NUM_TREEMON_SETS EQU const_value
+; last 2 are unused/ignored
+	const TREEMON_SET_UNUSED
+	const TREEMON_SET_CITY
+
+; treemon scores
+	const_def
+	const TREEMON_SCORE_BAD  ; 0
+	const TREEMON_SCORE_GOOD ; 1
+	const TREEMON_SCORE_RARE ; 2
 
 ; ChangeHappiness arguments (see data/happiness_changes.asm)
 const_value = 1
@@ -153,12 +173,12 @@ const_value = 1
 	const HAPPINESS_FAINTED           ; 06
 	const HAPPINESS_POISONFAINT       ; 07
 	const HAPPINESS_BEATENBYSTRONGFOE ; 08
-	const HAPPINESS_YOUNGCUT1         ; 09
-	const HAPPINESS_YOUNGCUT2         ; 0a
-	const HAPPINESS_YOUNGCUT3         ; 0b
-	const HAPPINESS_OLDERCUT1         ; 0c
-	const HAPPINESS_OLDERCUT2         ; 0d
-	const HAPPINESS_OLDERCUT3         ; 0e
+	const HAPPINESS_OLDERCUT1         ; 09
+	const HAPPINESS_OLDERCUT2         ; 0a
+	const HAPPINESS_OLDERCUT3         ; 0b
+	const HAPPINESS_YOUNGCUT1         ; 0c
+	const HAPPINESS_YOUNGCUT2         ; 0d
+	const HAPPINESS_YOUNGCUT3         ; 0e
 	const HAPPINESS_BITTERPOWDER      ; 0f
 	const HAPPINESS_ENERGYROOT        ; 10
 	const HAPPINESS_REVIVALHERB       ; 11

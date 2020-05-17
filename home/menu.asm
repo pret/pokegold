@@ -110,8 +110,8 @@ RestoreTileBackup::
 	ret
 
 PopWindow::
-	ld b, $10
-	ld de, wMenuFlags
+	ld b, wMenuHeaderEnd - wMenuHeader
+	ld de, wMenuHeader
 .loop
 	ld a, [hld]
 	ld [de], a
@@ -142,8 +142,8 @@ CopyMenuData::
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
-	ld de, wMenuDataFlags
-	ld bc, wMenuDataEnd - wMenuDataFlags
+	ld de, wMenuData
+	ld bc, wMenuDataEnd - wMenuData
 	call CopyBytes
 	pop af
 	pop bc
@@ -391,7 +391,7 @@ _YesNoBox::
 	ld hl, YesNoMenuHeader
 	call CopyMenuHeader
 	pop bc
-	
+
 	ld a, b
 	ld [wMenuBorderLeftCoord], a
 	add 5
@@ -473,9 +473,9 @@ DoNthMenu::
 	ret
 
 SetUpMenu::
-	call DrawVariableLengthMenuBox ; ???
+	call DrawVariableLengthMenuBox
 	call MenuWriteText
-	call InitMenuCursorAndButtonPermissions ; set up selection pointer
+	call InitMenuCursorAndButtonPermissions
 	ld hl, w2DMenuFlags1
 	set 7, [hl]
 	ret
@@ -762,10 +762,10 @@ MenuTextboxWaitButton::
 	ret
 
 Place2DMenuItemName::
-	ld [wBuffer], a
+	ld [wTempBank], a
 	ldh a, [hROMBank]
 	push af
-	ld a, [wBuffer]
+	ld a, [wTempBank]
 	rst Bankswitch
 
 	call PlaceString
@@ -777,7 +777,7 @@ Place2DMenuItemName::
 _2DMenu::
 	call CopyMenuData
 	ldh a, [hROMBank]
-	ld [wMenuDataBank], a
+	ld [wMenuData_2DMenuItemStringsBank], a
 	push af
 	ld a, BANK(_2DMenu_)
 	rst Bankswitch

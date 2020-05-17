@@ -12,7 +12,7 @@ WhirlIslandLugiaChamber_MapScripts:
 	iftrue .NoAppear
 	checkitem SILVER_WING
 	iftrue .Appear
-	jump .NoAppear
+	sjump .NoAppear
 
 .Appear:
 	appear WHIRLISLANDLUGIACHAMBER_LUGIA
@@ -33,7 +33,7 @@ Lugia:
 	checkver
 	iftrue .Silver
 
-	writecode VAR_BATTLETYPE, BATTLETYPE_FORCEITEM
+	loadvar VAR_BATTLETYPE, BATTLETYPE_FORCEITEM
 	loadwildmon LUGIA, 70
 	startbattle
 	disappear WHIRLISLANDLUGIACHAMBER_LUGIA
@@ -41,7 +41,7 @@ Lugia:
 	end
 
 .Silver:
-	writecode VAR_BATTLETYPE, BATTLETYPE_FORCEITEM
+	loadvar VAR_BATTLETYPE, BATTLETYPE_FORCEITEM
 	loadwildmon LUGIA, 40
 	startbattle
 	disappear WHIRLISLANDLUGIACHAMBER_LUGIA

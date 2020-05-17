@@ -4,36 +4,37 @@ INCLUDE "macros/wram.asm"
 
 INCLUDE "vram.asm"
 
+
 SECTION "Audio RAM", WRAM0
 
 wMusic::
 
 ; nonzero if playing
-wMusicPlaying:: db ; c100
+wMusicPlaying:: db ; c000
 
 wChannels::
-wChannel1:: channel_struct wChannel1 ; c101
-wChannel2:: channel_struct wChannel2 ; c133
-wChannel3:: channel_struct wChannel3 ; c165
-wChannel4:: channel_struct wChannel4 ; c197
+wChannel1:: channel_struct wChannel1 ; c001
+wChannel2:: channel_struct wChannel2 ; c033
+wChannel3:: channel_struct wChannel3 ; c065
+wChannel4:: channel_struct wChannel4 ; c097
 
 wSFXChannels::
-wChannel5:: channel_struct wChannel5 ; c1c9
-wChannel6:: channel_struct wChannel6 ; c1fb
-wChannel7:: channel_struct wChannel7 ; c22d
-wChannel8:: channel_struct wChannel8 ; c25f
+wChannel5:: channel_struct wChannel5 ; c0c9
+wChannel6:: channel_struct wChannel6 ; c0fb
+wChannel7:: channel_struct wChannel7 ; c12d
+wChannel8:: channel_struct wChannel8 ; c15f
 
-	ds 1 ; c291
+	ds 1 ; c191
 
 wCurTrackDuty:: db
-wCurTrackIntensity:: db
+wCurTrackVolumeEnvelope:: db
 wCurTrackFrequency:: dw
 wUnusedBCDNumber:: db ; BCD value, dummied out
 wCurNoteDuration:: db ; used in MusicE0 and LoadNote
 
-wCurMusicByte:: db ; c298
-wCurChannel:: db ; c299
-wVolume:: ; c29a
+wCurMusicByte:: db ; c198
+wCurChannel:: db ; c199
+wVolume:: ; c19a
 ; corresponds to rNR50
 ; Channel control / ON-OFF / Volume (R/W)
 ;   bit 7 - Vin->SO2 ON/OFF
@@ -41,52 +42,51 @@ wVolume:: ; c29a
 ;   bit 3 - Vin->SO1 ON/OFF
 ;   bit 2-0 - SO1 output level (volume) (# 0-7)
 	db
-wSoundOutput:: ; c29b
+wSoundOutput:: ; c19b
 ; corresponds to rNR51
 ; bit 4-7: ch1-4 so2 on/off
 ; bit 0-3: ch1-4 so1 on/off
 	db
-wSoundInput:: ; c29c
-; corresponds to rNR52
-; bit 7: global on/off
-; bit 0: ch1 on/off
-; bit 1: ch2 on/off
-; bit 2: ch3 on/off
-; bit 3: ch4 on/off
+wPitchSweep:: ; c19c
+; corresponds to rNR10
+; bit 7:   unused
+; bit 4-6: sweep time
+; bit 3:   sweep direction
+; but 0-2: sweep shift
 	db
 
-wMusicID:: dw ; c29d
-wMusicBank:: db ; c29f
-wNoiseSampleAddress:: dw ; c2a0
-wNoiseSampleDelay:: db ; c2a2
-	ds 1 ; c2a3
-wMusicNoiseSampleSet:: db ; c2a4
-wSFXNoiseSampleSet:: db ; c2a5
+wMusicID:: dw ; c19d
+wMusicBank:: db ; c19f
+wNoiseSampleAddress:: dw ; c1a0
+wNoiseSampleDelay:: db ; c1a2
+	ds 1 ; c1a3
+wMusicNoiseSampleSet:: db ; c1a4
+wSFXNoiseSampleSet:: db ; c1a5
 
-wLowHealthAlarm:: ; c2a6
+wLowHealthAlarm:: ; c1a6
 ; bit 7: on/off
 ; bit 4: pitch
 ; bit 0-3: counter
 	db
 
-wMusicFade:: ; c2a7
+wMusicFade:: ; c1a7
 ; fades volume over x frames
 ; bit 7: fade in/out
 ; bit 0-5: number of frames for each volume level
 ; $00 = none (default)
 	db
-wMusicFadeCount:: db ; c2a8
-wMusicFadeID:: dw ; c2a9
+wMusicFadeCount:: db ; c1a8
+wMusicFadeID:: dw ; c1a9
 
 	ds 5
 
-wCryPitch:: dw ; c2b0
-wCryLength:: dw ; c2b2
+wCryPitch:: dw ; c1b0
+wCryLength:: dw ; c1b2
 
-wLastVolume:: db ; c2b4
-wUnusedMusicF9Flag:: db ; c2b5
+wLastVolume:: db ; c1b4
+wUnusedMusicF9Flag:: db ; c1b5
 
-wSFXPriority:: ; c2b6
+wSFXPriority:: ; c1b6
 ; if nonzero, turn off music when playing sfx
 	db
 
@@ -97,20 +97,20 @@ wChannel2JumpCondition:: db
 wChannel3JumpCondition:: db
 wChannel4JumpCondition:: db
 
-wStereoPanningMask:: db ; c2bc
+wStereoPanningMask:: db ; c1bc
 
-wCryTracks:: ; c2bd
+wCryTracks:: ; c1bd
 ; plays only in left or right track depending on what side the monster is on
 ; both tracks active outside of battle
 	db
 
 wSFXDuration:: db
-wCurSFX:: ; c2bf
+wCurSFX:: ; c1bf
 ; id of sfx currently playing
 	db
 wChannelsEnd::
 
-wMapMusic:: db ; c2c0
+wMapMusic:: db ; c1c0
 
 wDontPlayMapMusicOnReload:: db
 wMusicEnd::
@@ -118,84 +118,44 @@ wMusicEnd::
 
 SECTION "WRAM", WRAM0
 
-wLZAddress:: dw ; c2c2
-wLZBank::    db ; c2c4
+wLZAddress:: dw ; c1c2
+wLZBank::    db ; c1c4
 
-wBoxAlignment:: db ; c2c5
+	ds 1
 
-wInputType::        db ; c2c6
-wAutoInputAddress:: dw ; c2c7
-wAutoInputBank::    db ; c2c9
-wAutoInputLength::  db ; c2ca
+wInputType::        db ; c1c6
+wAutoInputAddress:: dw ; c1c7
+wAutoInputBank::    db ; c1c9
+wAutoInputLength::  db ; c1ca
 
-wDebugFlags:: ds 1 ; c1cb
-wGameLogicPaused:: ds 1 ; c1cc
+wDebugFlags:: db
+wGameLogicPaused:: db ; c1cc
 wSpriteUpdatesEnabled:: db
-wc1ce:: ds 1 ; c1ce
-wMapTimeOfDay:: ds 1 ; c1cf
+
+wUnusedScriptByteBuffer:: db
+
+wMapTimeOfDay:: db
+
 	ds 3
-wPrinterConnectionOpen:: ds 1
-wPrinterOpcode:: ds 1 ; c1d4
-wc1d5:: ds 1 ; c1d5
-wDisableTextAcceleration:: ds 1 ; c1d6
-wc1d7:: ds 1 ; c1d7
-wc1d8:: ds 1 ; c1d8
-wc1d9:: ds 1 ; c1d9
-wc1da:: ds 1 ; c1da
-wc1db:: ds 1 ; c1db
-wc1dc:: ds 1 ; c1dc
-wc1dd:: ds 1 ; c1dd
-wc1de:: ds 1 ; c1de
-wc1df:: ds 1 ; c1df
-wc1e0:: ds 1 ; c1e0
-wc1e1:: ds 1 ; c1e1
-wc1e2:: ds 1 ; c1e2
-wc1e3:: ds 1 ; c1e3
-wc1e4:: ds 1 ; c1e4
-wc1e5:: ds 1 ; c1e5
-wc1e6:: ds 1 ; c1e6
-wc1e7:: ds 1 ; c1e7
-wc1e8:: ds 1 ; c1e8
-wc1e9:: ds 1 ; c1e9
-wc1ea:: ds 1 ; c1ea
-wc1eb:: ds 1 ; c1eb
-wc1ec:: ds 1 ; c1ec
-wc1ed:: ds 1 ; c1ed
-wc1ee:: ds 1 ; c1ee
-wc1ef:: ds 1 ; c1ef
-wc1f0:: ds 1 ; c1f0
-wc1f1:: ds 1 ; c1f1
-wc1f2:: ds 1 ; c1f2
-wc1f3:: ds 1 ; c1f3
-wc1f4:: ds 1 ; c1f4
-wc1f5:: ds 1 ; c1f5
-wc1f6:: ds 1 ; c1f6
-wc1f7:: ds 1 ; c1f7
-wc1f8:: ds 1 ; c1f8
-wc1f9:: ds 1 ; c1f9
-wc1fa:: ds 1 ; c1fa
-wc1fb:: ds 1 ; c1fb
-wc1fc:: ds 1 ; c1fc
-wc1fd:: ds 1 ; c1fd
-wc1fe:: ds 1 ; c1fe
-wc1ff:: ds 1 ; c1ff
+
+wPrinterConnectionOpen:: db
+wPrinterOpcode:: db
+wPrevDexEntry:: db
+wDisableTextAcceleration:: db
+wPCItemsCursor:: db
+wPCItemsScrollPosition:: db
+
+	ds 39
+
 
 SECTION "GBC Palettes", WRAM0
-palbuffer: MACRO
-\1Pal0:: ds 8
-\1Pal1:: ds 8
-\1Pal2:: ds 8
-\1Pal3:: ds 8
-\1Pal4:: ds 8
-\1Pal5:: ds 8
-\1Pal6:: ds 8
-\1Pal7:: ds 8
-ENDM
 
-wTempBGPals:: palbuffer wTempBG ; c200
-wTempOBPals:: palbuffer wTempOB ; c240
-wBGPals::     palbuffer wBG     ; c280
-wOBPals::     palbuffer wOB     ; c2c0
+; eight 4-color palettes each
+wBGPals1:: ds 8 palettes ; c200
+wOBPals1:: ds 8 palettes ; c240
+wBGPals2:: ds 8 palettes ; c280
+wOBPals2:: ds 8 palettes ; c2c0
+
 
 SECTION "Sprites", WRAM0
 
@@ -243,50 +203,99 @@ wVirtualOAMSprite39:: sprite_oam_struct wVirtualOAMSprite39
 wVirtualOAMEnd::
 
 
-SECTION "TileMap", WRAM0
+SECTION "Tilemap", WRAM0
+
 wTilemap:: ; c3a0
-	ds SCREEN_HEIGHT * SCREEN_WIDTH
-wTilemapEnd:: ; c508
+; 20x18 grid of 8x8 tiles
+	ds SCREEN_WIDTH * SCREEN_HEIGHT
+wTilemapEnd::
 
-SECTION "Animated Objects", WRAM0
-wMisc:: ; c508
-wTempTileMap:: ; c508
-	; ds SCREEN_HEIGHT * SCREEN_WIDTH
-wAnimatedObjectDynamicVTileOffsets:: ds 10 * 2 ; c508
-wAnimatedObjectStructs:: ; c51c
-; Field  0: Index
-; Fields 1-3: Loaded from AnimatedObjectStructSeqData
-wAnimatedObjectStruct1::  sprite_anim_struct wAnimatedObjectStruct1  ; c51c
-wAnimatedObjectStruct2::  sprite_anim_struct wAnimatedObjectStruct2  ; c52c
-wAnimatedObjectStruct3::  sprite_anim_struct wAnimatedObjectStruct3  ; c53c
-wAnimatedObjectStruct4::  sprite_anim_struct wAnimatedObjectStruct4  ; c54c
-wAnimatedObjectStruct5::  sprite_anim_struct wAnimatedObjectStruct5  ; c55c
-wAnimatedObjectStruct6::  sprite_anim_struct wAnimatedObjectStruct6  ; c56c
-wAnimatedObjectStruct7::  sprite_anim_struct wAnimatedObjectStruct7  ; c57c
-wAnimatedObjectStruct8::  sprite_anim_struct wAnimatedObjectStruct8  ; c58c
-wAnimatedObjectStruct9::  sprite_anim_struct wAnimatedObjectStruct9  ; c59c
-wAnimatedObjectStruct10:: sprite_anim_struct wAnimatedObjectStruct10 ; c5ac
-wAnimatedObjectStructsEnd::
 
-wAnimatedObjectStructCount:: ds 1 ; c5bc
-wCurrSpriteOAMAddr:: ds 1 ; c5bd
+SECTION "Miscellaneous", WRAM0
 
-wCurIcon:: ; c5be
-	ds 1
+; This union spans 480 bytes from c508 to c6e8.
+UNION ; c508
+; surrounding tiles
+; This buffer determines the size for the rest of the union;
+; it uses exactly 480 bytes.
+wSurroundingTiles:: ds SURROUNDING_WIDTH * SURROUNDING_HEIGHT
 
-wCurIconTile:: ds 1 ; c5bf
-wAnimatedObjectStructAddrBackup::
-wAnimatedObjectStructIDBuffer::
-wCurrSpriteAddSubFlags:: ; c5c0
-	ds 2
-wCurrAnimVTile:: ds 1 ; c5c2
-wCurrAnimXCoord:: ds 1 ; c5c3
-wCurrAnimYCoord:: ds 1 ; c5c4
-wCurrAnimXOffset:: ds 1 ; c5c5
-wCurrAnimYOffset:: ds 1 ; c5c6
-wGlobalAnimYOffset:: ds 1 ; c5c7
-wGlobalAnimXOffset:: ds 1 ; c5c8
-wAnimatedObjectsEnd:: ; c5c9
+NEXTU ; c508
+; trade
+wc508:: ds 10
+wc512:: ds 190
+
+wTrademons::
+wPlayerTrademon:: trademon wPlayerTrademon
+wOTTrademon::     trademon wOTTrademon
+wTrademonsEnd::
+wTradeAnimAddress:: dw
+wLinkPlayer1Name:: ds NAME_LENGTH
+wLinkPlayer2Name:: ds NAME_LENGTH
+wLinkTradeSendmonSpecies:: db
+wLinkTradeGetmonSpecies::  db
+
+NEXTU ; c508
+; box save buffer
+; SaveBoxAddress uses this buffer in three steps because it
+; needs more space than the buffer can hold.
+wBoxPartialData:: ds 480
+wBoxPartialDataEnd::
+
+NEXTU ; c508
+; timeset temp storage
+wTimeSetBuffer::
+	ds 20
+wInitHourBuffer:: db ; c51c
+	ds 9
+wInitMinuteBuffer:: db ; c526
+	ds 19
+wTimeSetBufferEnd::
+
+NEXTU ; c508
+; 20x18 grid of 8x8 tiles
+wTempTilemap::
+	ds SCREEN_WIDTH * SCREEN_HEIGHT ; $168 = 360
+
+NEXTU ; c508
+; wSpriteAnimDict is a 10x2 dictionary
+; keys: taken from third column of SpriteAnimSeqData
+; values: vTiles
+wSpriteAnimDict:: ds 10 * 2
+
+wSpriteAnimationStructs::
+; field  0:   index
+; fields 1-3: loaded from SpriteAnimSeqData
+wSpriteAnim1::  sprite_anim_struct wSpriteAnim1
+wSpriteAnim2::  sprite_anim_struct wSpriteAnim2
+wSpriteAnim3::  sprite_anim_struct wSpriteAnim3
+wSpriteAnim4::  sprite_anim_struct wSpriteAnim4
+wSpriteAnim5::  sprite_anim_struct wSpriteAnim5
+wSpriteAnim6::  sprite_anim_struct wSpriteAnim6
+wSpriteAnim7::  sprite_anim_struct wSpriteAnim7
+wSpriteAnim8::  sprite_anim_struct wSpriteAnim8
+wSpriteAnim9::  sprite_anim_struct wSpriteAnim9
+wSpriteAnim10:: sprite_anim_struct wSpriteAnim10
+wSpriteAnimationStructsEnd::
+
+wSpriteAnimCount:: db
+wCurSpriteOAMAddr:: db
+
+wCurIcon:: db ; c5be
+
+wCurIconTile:: db
+wSpriteAnimAddrBackup::
+wSpriteAnimIDBuffer::
+wCurSpriteOAMFlags::
+	dw
+wCurAnimVTile:: db
+wCurAnimXCoord:: db
+wCurAnimYCoord:: db
+wCurAnimXOffset:: db
+wCurAnimYOffset:: db
+wGlobalAnimYOffset:: db
+wGlobalAnimXOffset:: db
+wSpriteAnimsEnd::
 
 wc5c9:: ds 1 ; c5c9
 wc5ca:: ds 1 ; c5ca
@@ -297,269 +306,70 @@ wc5ce:: ds 1 ; c5ce
 wc5cf:: ds 1 ; c5cf
 
 UNION ; c5d0
-; trade
-wTradeMons::
-wPlayerTrademon:: trademon wPlayerTrademon
-wOTTrademon::     trademon wOTTrademon
-wTrademonsEnd::
-wTradeAnimAddress:: dw
-wLinkPlayer1Name:: ds NAME_LENGTH
-wLinkPlayer2Name:: ds NAME_LENGTH
-wLinkTradeSendmonSpecies:: db
-wLinkTradeGetmonSpecies::  db
-
-NEXTU ; c5d0
 ; naming screen
 wNamingScreenDestinationPointer:: dw ; c5d0
-wc5d2:: ds 1 ; c5d2
-wc5d3:: ds 1 ; c5d3
-wNamingScreenType:: ds 1 ; c5d4
+wNamingScreenCurNameLength:: db ; c5d2
+wNamingScreenMaxNameLength:: db ; c5d3
+wNamingScreenType:: db ; c5d4
+wNamingScreenCursorObjectPointer:: dw ; c5d5
+wNamingScreenLastCharacter:: db ; c5d7
+wNamingScreenStringEntryCoord:: dw ; c5d8
 
-wc5d5:: ds 1 ; c5d5
-wc5d6:: ds 1 ; c5d6
-wc5d7:: ds 1 ; c5d7
-wc5d8:: ds 1 ; c5d8
-wc5d9:: ds 1 ; c5d9
-wc5da:: ds 1 ; c5da
-wc5db:: ds 1 ; c5db
-wc5dc:: ds 1 ; c5dc
-wc5dd:: ds 1 ; c5dd
-wc5de:: ds 1 ; c5de
-wc5df:: ds 1 ; c5df
-wc5e0:: ds 1 ; c5e0
-wc5e1:: ds 1 ; c5e1
-wc5e2:: ds 1 ; c5e2
-wc5e3:: ds 1 ; c5e3
-wc5e4:: ds 1 ; c5e4
-wc5e5:: ds 1 ; c5e5
-wc5e6:: ds 1 ; c5e6
-wc5e7:: ds 1 ; c5e7
-wc5e8:: ds 1 ; c5e8
-wc5e9:: ds 1 ; c5e9
-wc5ea:: ds 1 ; c5ea
-wc5eb:: ds 1 ; c5eb
-wc5ec:: ds 1 ; c5ec
-wc5ed:: ds 1 ; c5ed
-wc5ee:: ds 1 ; c5ee
-wc5ef:: ds 1 ; c5ef
-wc5f0:: ds 1 ; c5f0
-wc5f1:: ds 1 ; c5f1
-wc5f2:: ds 1 ; c5f2
-wc5f3:: ds 1 ; c5f3
-wc5f4:: ds 1 ; c5f4
-wc5f5:: ds 1 ; c5f5
-wc5f6:: ds 1 ; c5f6
-wc5f7:: ds 1 ; c5f7
-wc5f8:: ds 1 ; c5f8
-wc5f9:: ds 1 ; c5f9
-wc5fa:: ds 1 ; c5fa
-wc5fb:: ds 1 ; c5fb
-wc5fc:: ds 1 ; c5fc
-wc5fd:: ds 1 ; c5fd
-wc5fe:: ds 1 ; c5fe
-wc5ff:: ds 1 ; c5ff
-wc600:: ds 1 ; c600
-wc601:: ds 1 ; c601
-wc602:: ds 1 ; c602
-wc603:: ds 1 ; c603
-wc604:: ds 1 ; c604
-wc605:: ds 1 ; c605
-wc606:: ds 1 ; c606
-wc607:: ds 1 ; c607
-wc608:: ds 1 ; c608
-wc609:: ds 1 ; c609
-wc60a:: ds 1 ; c60a
-wc60b:: ds 1 ; c60b
-wc60c:: ds 1 ; c60c
-wc60d:: ds 1 ; c60d
-wc60e:: ds 1 ; c60e
-wc60f:: ds 1 ; c60f
-wc610:: ds 1 ; c610
-wc611:: ds 1 ; c611
-wc612:: ds 1 ; c612
-wc613:: ds 1 ; c613
-wc614:: ds 1 ; c614
-wc615:: ds 1 ; c615
-wc616:: ds 1 ; c616
-wc617:: ds 1 ; c617
-wc618:: ds 1 ; c618
-wc619:: ds 1 ; c619
-wc61a:: ds 1 ; c61a
-wc61b:: ds 1 ; c61b
-wc61c:: ds 1 ; c61c
-wc61d:: ds 1 ; c61d
-wc61e:: ds 1 ; c61e
-wc61f:: ds 1 ; c61f
-wc620:: ds 1 ; c620
-wc621:: ds 1 ; c621
-wc622:: ds 1 ; c622
-wc623:: ds 1 ; c623
-wc624:: ds 1 ; c624
-wc625:: ds 1 ; c625
-wc626:: ds 1 ; c626
-wc627:: ds 1 ; c627
-wc628:: ds 1 ; c628
-wc629:: ds 1 ; c629
-wc62a:: ds 1 ; c62a
-wc62b:: ds 1 ; c62b
-wc62c:: ds 1 ; c62c
-wc62d:: ds 1 ; c62d
-wc62e:: ds 1 ; c62e
-wc62f:: ds 1 ; c62f
-wc630:: ds 1 ; c630
-wc631:: ds 1 ; c631
-wc632:: ds 1 ; c632
-wc633:: ds 1 ; c633
-wc634:: ds 1 ; c634
-wc635:: ds 1 ; c635
-wc636:: ds 1 ; c636
-wc637:: ds 1 ; c637
-wc638:: ds 1 ; c638
-wc639:: ds 1 ; c639
-wc63a:: ds 1 ; c63a
-wc63b:: ds 1 ; c63b
-wc63c:: ds 1 ; c63c
-wc63d:: ds 1 ; c63d
-wc63e:: ds 1 ; c63e
-wc63f:: ds 1 ; c63f
-wc640:: ds 1 ; c640
-wc641:: ds 1 ; c641
-wc642:: ds 1 ; c642
-wc643:: ds 1 ; c643
-wc644:: ds 1 ; c644
-wc645:: ds 1 ; c645
-wc646:: ds 1 ; c646
-wc647:: ds 1 ; c647
-wc648:: ds 1 ; c648
-wc649:: ds 1 ; c649
-wc64a:: ds 1 ; c64a
-wc64b:: ds 1 ; c64b
-wc64c:: ds 1 ; c64c
-wc64d:: ds 1 ; c64d
-wc64e:: ds 1 ; c64e
-wc64f:: ds 1 ; c64f
-wc650:: ds 1 ; c650
-wc651:: ds 1 ; c651
-wc652:: ds 1 ; c652
-wc653:: ds 1 ; c653
-wc654:: ds 1 ; c654
-wc655:: ds 1 ; c655
-wc656:: ds 1 ; c656
-wc657:: ds 1 ; c657
-wc658:: ds 1 ; c658
-wc659:: ds 1 ; c659
-wc65a:: ds 1 ; c65a
-wc65b:: ds 1 ; c65b
-wc65c:: ds 1 ; c65c
-wc65d:: ds 1 ; c65d
-wc65e:: ds 1 ; c65e
-wc65f:: ds 1 ; c65f
-wc660:: ds 1 ; c660
-wc661:: ds 1 ; c661
-wc662:: ds 1 ; c662
-wc663:: ds 1 ; c663
-wc664:: ds 1 ; c664
-wc665:: ds 1 ; c665
-wc666:: ds 1 ; c666
-wc667:: ds 1 ; c667
-wc668:: ds 1 ; c668
-wc669:: ds 1 ; c669
-wc66a:: ds 1 ; c66a
-wc66b:: ds 1 ; c66b
-wc66c:: ds 1 ; c66c
-wc66d:: ds 1 ; c66d
-wc66e:: ds 1 ; c66e
-wc66f:: ds 1 ; c66f
-wc670:: ds 1 ; c670
-wc671:: ds 1 ; c671
-wc672:: ds 1 ; c672
-wc673:: ds 1 ; c673
-wc674:: ds 1 ; c674
-wc675:: ds 1 ; c675
-wc676:: ds 1 ; c676
-wc677:: ds 1 ; c677
-wc678:: ds 1 ; c678
-wc679:: ds 1 ; c679
-wc67a:: ds 1 ; c67a
-wc67b:: ds 1 ; c67b
-wc67c:: ds 1 ; c67c
-wc67d:: ds 1 ; c67d
-wc67e:: ds 1 ; c67e
-wc67f:: ds 1 ; c67f
-wc680:: ds 1 ; c680
-wc681:: ds 1 ; c681
-wc682:: ds 1 ; c682
-wc683:: ds 1 ; c683
-wc684:: ds 1 ; c684
-wc685:: ds 1 ; c685
-wc686:: ds 1 ; c686
-wc687:: ds 1 ; c687
-wc688:: ds 1 ; c688
-wc689:: ds 1 ; c689
-wc68a:: ds 1 ; c68a
-wc68b:: ds 1 ; c68b
-wc68c:: ds 1 ; c68c
-wc68d:: ds 1 ; c68d
-wc68e:: ds 1 ; c68e
-wc68f:: ds 1 ; c68f
-wc690:: ds 1 ; c690
-wc691:: ds 1 ; c691
-wc692:: ds 1 ; c692
-wc693:: ds 1 ; c693
-wc694:: ds 1 ; c694
-wc695:: ds 1 ; c695
-wc696:: ds 1 ; c696
-wc697:: ds 1 ; c697
-wc698:: ds 1 ; c698
-wc699:: ds 1 ; c699
-wc69a:: ds 1 ; c69a
-wc69b:: ds 1 ; c69b
-wc69c:: ds 1 ; c69c
-wc69d:: ds 1 ; c69d
-wc69e:: ds 1 ; c69e
-wc69f:: ds 1 ; c69f
-wc6a0:: ds 1 ; c6a0
-wc6a1:: ds 1 ; c6a1
-wc6a2:: ds 1 ; c6a2
-wc6a3:: ds 1 ; c6a3
-wc6a4:: ds 1 ; c6a4
-wc6a5:: ds 1 ; c6a5
-wc6a6:: ds 1 ; c6a6
-wc6a7:: ds 1 ; c6a7
-wc6a8:: ds 1 ; c6a8
-wc6a9:: ds 1 ; c6a9
-wc6aa:: ds 1 ; c6aa
-wc6ab:: ds 1 ; c6ab
-wc6ac:: ds 1 ; c6ac
-wc6ad:: ds 1 ; c6ad
-wc6ae:: ds 1 ; c6ae
-wc6af:: ds 1 ; c6af
-wc6b0:: ds 1 ; c6b0
-wc6b1:: ds 1 ; c6b1
-wc6b2:: ds 1 ; c6b2
-wc6b3:: ds 1 ; c6b3
-wc6b4:: ds 1 ; c6b4
-wc6b5:: ds 1 ; c6b5
-wc6b6:: ds 1 ; c6b6
-wc6b7:: ds 1 ; c6b7
-wc6b8:: ds 1 ; c6b8
-wc6b9:: ds 1 ; c6b9
-wc6ba:: ds 1 ; c6ba
-wc6bb:: ds 1 ; c6bb
-wc6bc:: ds 1 ; c6bc
-wc6bd:: ds 1 ; c6bd
-wc6be:: ds 1 ; c6be
-wc6bf:: ds 1 ; c6bf
-wc6c0:: ds 1 ; c6c0
-wc6c1:: ds 1 ; c6c1
-wc6c2:: ds 1 ; c6c2
-wc6c3:: ds 1 ; c6c3
-wc6c4:: ds 1 ; c6c4
-wc6c5:: ds 1 ; c6c5
-wc6c6:: ds 1 ; c6c6
-wc6c7:: ds 1 ; c6c7
-wc6c8:: ds 1 ; c6c8
-wc6c9:: ds 1 ; c6c9
+NEXTU ; c5d0
+; slot machine
+wSlots:: ; c5d0
+wReel1:: slot_reel wReel1
+wReel2:: slot_reel wReel2
+wReel3:: slot_reel wReel3
+; c600
+wReel1Stopped:: ds 3
+wReel2Stopped:: ds 3
+wReel3Stopped:: ds 3
+wSlotBias:: db
+wSlotBet:: db
+wFirstTwoReelsMatching:: db
+wFirstTwoReelsMatchingSevens:: db
+wSlotMatched:: db
+wCurReelStopped:: ds 3
+wPayout:: dw
+wCurReelXCoord:: db
+wCurReelYCoord:: db
+	ds 2
+wSlotBuildingMatch:: db
+wSlotsDataEnd::
+	ds 28
+wSlotsEnd::
+
+NEXTU ; c5d0
+; pokegear
+wPokegearPhoneLoadNameBuffer:: db ; c5d0
+wPokegearPhoneCursorPosition:: db ; c5d1
+wPokegearPhoneScrollPosition:: db ; c5d2
+wPokegearPhoneSelectedPerson:: db ; cd3
+wPokegearPhoneSubmenuCursor:: db ; c5d4
+wPokegearMapCursorObjectPointer:: dw ; c5d5
+wPokegearMapCursorLandmark:: db ; c5d7
+wPokegearMapPlayerIconLandmark:: db ; c5d8
+wPokegearRadioChannelBank:: db ; c5d9
+wPokegearRadioChannelAddr:: dw ; c5da
+wPokegearRadioMusicPlaying:: db ; c5dc
+
+NEXTU ; c5d0
+; unused (engine/gfx/color.asm)
+	ds 50
+
+wc602:: db ; c602
+	ds 2
+
+wc605:: db ; c605
+wc606:: db ; c606
+wc607:: db ; c607
+
+ENDU ; c634
+
+	ds 150
+
+; unidentifed
 wc6ca:: ds 1 ; c6ca
 wc6cb:: ds 1 ; c6cb
 wc6cc:: ds 1 ; c6cc
@@ -570,14 +380,14 @@ wc6d0:: ds 1 ; c6d0
 wc6d1:: ds 1 ; c6d1
 wc6d2:: ds 1 ; c6d2
 wc6d3:: ds 1 ; c6d3
-wc6d4:: ds 1 ; c6d4
+wCurDexMode:: db ; c6d4
 wc6d5:: ds 1 ; c6d5
 wc6d6:: ds 1 ; c6d6
 wc6d7:: ds 1 ; c6d7
 wc6d8:: ds 1 ; c6d8
 wc6d9:: ds 1 ; c6d9
 wc6da:: ds 1 ; c6da
-wc6db:: ds 1 ; c6db
+wDexSearchSlowpokeFrame:: db ; c6db
 wc6dc:: ds 1 ; c6dc
 wc6dd:: ds 1 ; c6dd
 wc6de:: ds 1 ; c6de
@@ -590,1048 +400,207 @@ wc6e4:: ds 1 ; c6e4
 wc6e5:: ds 1 ; c6e5
 wc6e6:: ds 1 ; c6e6
 wc6e7:: ds 1 ; c6e7
-wc6e8:: ds 1 ; c6e8
-wc6e9:: ds 1 ; c6e9
-wc6ea:: ds 1 ; c6ea
-wc6eb:: ds 1 ; c6eb
-wc6ec:: ds 1 ; c6ec
-wc6ed:: ds 1 ; c6ed
-wc6ee:: ds 1 ; c6ee
-wc6ef:: ds 1 ; c6ef
-wc6f0:: ds 1 ; c6f0
-wc6f1:: ds 1 ; c6f1
-wc6f2:: ds 1 ; c6f2
-wc6f3:: ds 1 ; c6f3
-wc6f4:: ds 1 ; c6f4
-wc6f5:: ds 1 ; c6f5
-wc6f6:: ds 1 ; c6f6
-wc6f7:: ds 1 ; c6f7
-wc6f8:: ds 1 ; c6f8
-wc6f9:: ds 1 ; c6f9
-wc6fa:: ds 1 ; c6fa
-wc6fb:: ds 1 ; c6fb
-wc6fc:: ds 1 ; c6fc
-wc6fd:: ds 1 ; c6fd
-wc6fe:: ds 1 ; c6fe
-wc6ff:: ds 1 ; c6ff
+ENDU ; c6e8
 
-wOverworldMap::
-wOverworldMapBlocks::
-wLYOverrides::
-wc700:: ds 1 ; c700
-wc701:: ds 1 ; c701
-wc702:: ds 1 ; c702
-wc703:: ds 1 ; c703
-wc704:: ds 1 ; c704
-wc705:: ds 1 ; c705
-wc706:: ds 1 ; c706
-wc707:: ds 1 ; c707
-wc708:: ds 1 ; c708
-wc709:: ds 1 ; c709
-wc70a:: ds 1 ; c70a
-wc70b:: ds 1 ; c70b
-wc70c:: ds 1 ; c70c
-wc70d:: ds 1 ; c70d
-wc70e:: ds 1 ; c70e
-wc70f:: ds 1 ; c70f
-wc710:: ds 1 ; c710
-wc711:: ds 1 ; c711
-wc712:: ds 1 ; c712
-wc713:: ds 1 ; c713
-wc714:: ds 1 ; c714
-wc715:: ds 1 ; c715
-wc716:: ds 1 ; c716
-wc717:: ds 1 ; c717
-wc718:: ds 1 ; c718
-wc719:: ds 1 ; c719
-wc71a:: ds 1 ; c71a
-wc71b:: ds 1 ; c71b
-wc71c:: ds 1 ; c71c
-wc71d:: ds 1 ; c71d
-wc71e:: ds 1 ; c71e
-wc71f:: ds 1 ; c71f
-wc720:: ds 1 ; c720
-wc721:: ds 1 ; c721
-wc722:: ds 1 ; c722
-wc723:: ds 1 ; c723
-wc724:: ds 1 ; c724
-wc725:: ds 1 ; c725
-wc726:: ds 1 ; c726
-wc727:: ds 1 ; c727
-wc728:: ds 1 ; c728
-wc729:: ds 1 ; c729
-wc72a:: ds 1 ; c72a
-wc72b:: ds 1 ; c72b
-wc72c:: ds 1 ; c72c
-wc72d:: ds 1 ; c72d
-wc72e:: ds 1 ; c72e
-wc72f:: ds 1 ; c72f
-wc730:: ds 1 ; c730
-wc731:: ds 1 ; c731
-wc732:: ds 1 ; c732
-wc733:: ds 1 ; c733
-wc734:: ds 1 ; c734
-wc735:: ds 1 ; c735
-wc736:: ds 1 ; c736
-wc737:: ds 1 ; c737
-wc738:: ds 1 ; c738
-wc739:: ds 1 ; c739
-wc73a:: ds 1 ; c73a
-wc73b:: ds 1 ; c73b
-wc73c:: ds 1 ; c73c
-wc73d:: ds 1 ; c73d
-wc73e:: ds 1 ; c73e
-wc73f:: ds 1 ; c73f
-wc740:: ds 1 ; c740
-wc741:: ds 1 ; c741
-wc742:: ds 1 ; c742
-wc743:: ds 1 ; c743
-wc744:: ds 1 ; c744
-wc745:: ds 1 ; c745
-wc746:: ds 1 ; c746
-wc747:: ds 1 ; c747
-wc748:: ds 1 ; c748
-wc749:: ds 1 ; c749
-wc74a:: ds 1 ; c74a
-wc74b:: ds 1 ; c74b
-wc74c:: ds 1 ; c74c
-wc74d:: ds 1 ; c74d
-wc74e:: ds 1 ; c74e
-wc74f:: ds 1 ; c74f
-wc750:: ds 1 ; c750
-wc751:: ds 1 ; c751
-wc752:: ds 1 ; c752
-wc753:: ds 1 ; c753
-wc754:: ds 1 ; c754
-wc755:: ds 1 ; c755
-wc756:: ds 1 ; c756
-wc757:: ds 1 ; c757
-wc758:: ds 1 ; c758
-wc759:: ds 1 ; c759
-wc75a:: ds 1 ; c75a
-wc75b:: ds 1 ; c75b
-wc75c:: ds 1 ; c75c
-wc75d:: ds 1 ; c75d
-wc75e:: ds 1 ; c75e
-wc75f:: ds 1 ; c75f
-wc760:: ds 1 ; c760
-wc761:: ds 1 ; c761
-wc762:: ds 1 ; c762
-wc763:: ds 1 ; c763
-wc764:: ds 1 ; c764
-wc765:: ds 1 ; c765
-wc766:: ds 1 ; c766
-wc767:: ds 1 ; c767
-wc768:: ds 1 ; c768
-wc769:: ds 1 ; c769
-wc76a:: ds 1 ; c76a
-wc76b:: ds 1 ; c76b
-wc76c:: ds 1 ; c76c
-wc76d:: ds 1 ; c76d
-wc76e:: ds 1 ; c76e
-wc76f:: ds 1 ; c76f
-wc770:: ds 1 ; c770
-wc771:: ds 1 ; c771
-wc772:: ds 1 ; c772
-wc773:: ds 1 ; c773
-wc774:: ds 1 ; c774
-wc775:: ds 1 ; c775
-wc776:: ds 1 ; c776
-wc777:: ds 1 ; c777
-wc778:: ds 1 ; c778
-wc779:: ds 1 ; c779
-wc77a:: ds 1 ; c77a
-wc77b:: ds 1 ; c77b
-wc77c:: ds 1 ; c77c
-wc77d:: ds 1 ; c77d
-wc77e:: ds 1 ; c77e
-wc77f:: ds 1 ; c77f
-wc780:: ds 1 ; c780
-wc781:: ds 1 ; c781
-wc782:: ds 1 ; c782
-wc783:: ds 1 ; c783
-wc784:: ds 1 ; c784
-wc785:: ds 1 ; c785
-wc786:: ds 1 ; c786
-wc787:: ds 1 ; c787
-wc788:: ds 1 ; c788
-wc789:: ds 1 ; c789
-wc78a:: ds 1 ; c78a
-wc78b:: ds 1 ; c78b
-wc78c:: ds 1 ; c78c
-wc78d:: ds 1 ; c78d
-wc78e:: ds 1 ; c78e
-wc78f:: ds 1 ; c78f
-wc790:: ds 1 ; c790
-wc791:: ds 1 ; c791
-wc792:: ds 1 ; c792
-wc793:: ds 1 ; c793
-wc794:: ds 1 ; c794
-wc795:: ds 1 ; c795
-wc796:: ds 1 ; c796
-wc797:: ds 1 ; c797
-wc798:: ds 1 ; c798
-wc799:: ds 1 ; c799
-wc79a:: ds 1 ; c79a
-wc79b:: ds 1 ; c79b
-wc79c:: ds 1 ; c79c
-wc79d:: ds 1 ; c79d
-wc79e:: ds 1 ; c79e
-wc79f:: ds 1 ; c79f
-wc7a0:: ds 1 ; c7a0
-wc7a1:: ds 1 ; c7a1
-wc7a2:: ds 1 ; c7a2
-wc7a3:: ds 1 ; c7a3
-wc7a4:: ds 1 ; c7a4
-wc7a5:: ds 1 ; c7a5
-wc7a6:: ds 1 ; c7a6
-wc7a7:: ds 1 ; c7a7
-wc7a8:: ds 1 ; c7a8
-wc7a9:: ds 1 ; c7a9
-wc7aa:: ds 1 ; c7aa
-wc7ab:: ds 1 ; c7ab
-wc7ac:: ds 1 ; c7ac
-wc7ad:: ds 1 ; c7ad
-wc7ae:: ds 1 ; c7ae
-wc7af:: ds 1 ; c7af
-wc7b0:: ds 1 ; c7b0
-wc7b1:: ds 1 ; c7b1
-wc7b2:: ds 1 ; c7b2
-wc7b3:: ds 1 ; c7b3
-wc7b4:: ds 1 ; c7b4
-wc7b5:: ds 1 ; c7b5
-wc7b6:: ds 1 ; c7b6
-wc7b7:: ds 1 ; c7b7
-wc7b8:: ds 1 ; c7b8
-wc7b9:: ds 1 ; c7b9
-wc7ba:: ds 1 ; c7ba
-wc7bb:: ds 1 ; c7bb
-wc7bc:: ds 1 ; c7bc
-wc7bd:: ds 1 ; c7bd
-wc7be:: ds 1 ; c7be
-wc7bf:: ds 1 ; c7bf
-wc7c0:: ds 1 ; c7c0
-wc7c1:: ds 1 ; c7c1
-wc7c2:: ds 1 ; c7c2
-wc7c3:: ds 1 ; c7c3
-wc7c4:: ds 1 ; c7c4
-wc7c5:: ds 1 ; c7c5
-wc7c6:: ds 1 ; c7c6
-wc7c7:: ds 1 ; c7c7
-wc7c8:: ds 1 ; c7c8
-wc7c9:: ds 1 ; c7c9
-wc7ca:: ds 1 ; c7ca
-wc7cb:: ds 1 ; c7cb
-wc7cc:: ds 1 ; c7cc
-wc7cd:: ds 1 ; c7cd
-wc7ce:: ds 1 ; c7ce
-wc7cf:: ds 1 ; c7cf
-wc7d0:: ds 1 ; c7d0
-wc7d1:: ds 1 ; c7d1
-wc7d2:: ds 1 ; c7d2
-wc7d3:: ds 1 ; c7d3
-wc7d4:: ds 1 ; c7d4
-wc7d5:: ds 1 ; c7d5
-wc7d6:: ds 1 ; c7d6
-wc7d7:: ds 1 ; c7d7
-wc7d8:: ds 1 ; c7d8
-wc7d9:: ds 1 ; c7d9
-wc7da:: ds 1 ; c7da
-wc7db:: ds 1 ; c7db
-wc7dc:: ds 1 ; c7dc
-wc7dd:: ds 1 ; c7dd
-wc7de:: ds 1 ; c7de
-wc7df:: ds 1 ; c7df
-wc7e0:: ds 1 ; c7e0
-wc7e1:: ds 1 ; c7e1
-wc7e2:: ds 1 ; c7e2
-wc7e3:: ds 1 ; c7e3
-wc7e4:: ds 1 ; c7e4
-wc7e5:: ds 1 ; c7e5
-wc7e6:: ds 1 ; c7e6
-wc7e7:: ds 1 ; c7e7
-wc7e8:: ds 1 ; c7e8
-wc7e9:: ds 1 ; c7e9
-wc7ea:: ds 1 ; c7ea
-wc7eb:: ds 1 ; c7eb
-wc7ec:: ds 1 ; c7ec
-wc7ed:: ds 1 ; c7ed
-wc7ee:: ds 1 ; c7ee
-wc7ef:: ds 1 ; c7ef
-wc7f0:: ds 1 ; c7f0
-wc7f1:: ds 1 ; c7f1
-wc7f2:: ds 1 ; c7f2
-wc7f3:: ds 1 ; c7f3
-wc7f4:: ds 1 ; c7f4
-wc7f5:: ds 1 ; c7f5
-wc7f6:: ds 1 ; c7f6
-wc7f7:: ds 1 ; c7f7
-wc7f8:: ds 1 ; c7f8
-wc7f9:: ds 1 ; c7f9
-wc7fa:: ds 1 ; c7fa
-wc7fb:: ds 1 ; c7fb
-wc7fc:: ds 1 ; c7fc
-wc7fd:: ds 1 ; c7fd
-wc7fe:: ds 1 ; c7fe
-wc7ff:: ds 1 ; c7ff
-wLYOverridesEnd::
+; This was a buffer for map-related pointers in the 1997 G/S prototype.
+; See wMapBuffer in pokegold-spaceworld's wram.asm.
+wUnusedMapBuffer:: ds 24
+wUnusedMapBufferEnd::
 
-wLYOverridesBackup::
-wc800:: ds 1 ; c800
-wc801:: ds 1 ; c801
-wc802:: ds 1 ; c802
-UNION
-wc803:: ds 1 ; c803
-NEXTU
-wMysteryGiftPartnerName:: ds 1 ; c803
+
+SECTION "Overworld Map", WRAM0
+
+UNION ; c700
+; overworld map blocks
+wOverworldMapBlocks:: ds 1300 ; c700
+wOverworldMapBlocksEnd::
+
+NEXTU ; c700
+; GB Printer data
+wGameboyPrinter2bppSource:: ds 40 tiles
+wGameboyPrinter2bppSourceEnd::
+wc980:: db
+wPrinterRowIndex:: db
+
+; Printer data
+wPrinterData:: ds 4
+wPrinterChecksum:: dw ; c986
+wPrinterHandshake:: db
+wPrinterStatusFlags::
+; bit 7: set if error 1 (battery low)
+; bit 6: set if error 4 (too hot or cold)
+; bit 5: set if error 3 (paper jammed or empty)
+; if this and the previous byte are both $ff: error 2 (connection error)
+	db
+
+wHandshakeFrameDelay:: db
+wPrinterSerialFrameDelay:: db
+wPrinterSendByteOffset:: dw
+wPrinterSendByteCounter:: dw
+
+; tilemap backup?
+wPrinterTilemapBuffer:: ds SCREEN_HEIGHT * SCREEN_WIDTH ; c990
+wPrinterTilemapBufferEnd::
+wPrinterStatus:: db ; caf8
+	ds 1
+; High nibble is for margin before the image, low nibble is for after.
+wPrinterMargins:: db ; cafa
+wPrinterExposureTime:: db ; cafb
+	ds 16
+wGameboyPrinterRAMEnd::
+
+NEXTU ; c700
+; Hall of Fame data
+wHallOfFamePokemonList:: hall_of_fame wHallOfFamePokemonList
+
+NEXTU ; c700
+; raw link data
+wLinkData:: ds $514
+wLinkDataEnd::
+
+NEXTU ; c700
+; link data members
+wLinkPlayerName:: ds NAME_LENGTH
+wLinkPartyCount:: db
+wLinkPartySpecies:: ds PARTY_LENGTH
+wLinkPartyEnd:: db ; older code doesn't check PartyCount
+
+UNION ; c713
+; time capsule party data
+wTimeCapsulePlayerData::
+wTimeCapsulePartyMon1:: red_party_struct wTimeCapsulePartyMon1
+wTimeCapsulePartyMon2:: red_party_struct wTimeCapsulePartyMon2
+wTimeCapsulePartyMon3:: red_party_struct wTimeCapsulePartyMon3
+wTimeCapsulePartyMon4:: red_party_struct wTimeCapsulePartyMon4
+wTimeCapsulePartyMon5:: red_party_struct wTimeCapsulePartyMon5
+wTimeCapsulePartyMon6:: red_party_struct wTimeCapsulePartyMon6
+wTimeCapsulePartyMonOTNames:: ds PARTY_LENGTH * NAME_LENGTH
+wTimeCapsulePartyMonNicks:: ds PARTY_LENGTH * MON_NAME_LENGTH
+wTimeCapsulePlayerDataEnd::
+
+NEXTU ; c713
+; link player data
+wLinkPlayerData::
+wLinkPlayerPartyMon1:: party_struct wLinkPlayerPartyMon1
+wLinkPlayerPartyMon2:: party_struct wLinkPlayerPartyMon2
+wLinkPlayerPartyMon3:: party_struct wLinkPlayerPartyMon3
+wLinkPlayerPartyMon4:: party_struct wLinkPlayerPartyMon4
+wLinkPlayerPartyMon5:: party_struct wLinkPlayerPartyMon5
+wLinkPlayerPartyMon6:: party_struct wLinkPlayerPartyMon6
+wLinkPlayerPartyMonOTNames:: ds PARTY_LENGTH * NAME_LENGTH
+wLinkPlayerPartyMonNicks:: ds PARTY_LENGTH * MON_NAME_LENGTH
+wLinkPlayerDataEnd::
 ENDU
-wc804:: ds 1 ; c804
-wc805:: ds 1 ; c805
-wc806:: ds 1 ; c806
-wc807:: ds 1 ; c807
-wc808:: ds 1 ; c808
-wc809:: ds 1 ; c809
-wc80a:: ds 1 ; c80a
-wc80b:: ds 1 ; c80b
-wc80c:: ds 1 ; c80c
-wc80d:: ds 1 ; c80d
-wc80e:: ds 1 ; c80e
-wc80f:: ds 1 ; c80f
-wc810:: ds 1 ; c810
-wc811:: ds 1 ; c811
-wc812:: ds 1 ; c812
-wc813:: ds 1 ; c813
-wc814:: ds 1 ; c814
-wc815:: ds 1 ; c815
-wc816:: ds 1 ; c816
-wc817:: ds 1 ; c817
-wc818:: ds 1 ; c818
-wc819:: ds 1 ; c819
-wc81a:: ds 1 ; c81a
-wc81b:: ds 1 ; c81b
-wc81c:: ds 1 ; c81c
-wc81d:: ds 1 ; c81d
-wc81e:: ds 1 ; c81e
-wc81f:: ds 1 ; c81f
-wc820:: ds 1 ; c820
-wc821:: ds 1 ; c821
-wc822:: ds 1 ; c822
-wc823:: ds 1 ; c823
-wc824:: ds 1 ; c824
-wc825:: ds 1 ; c825
-wc826:: ds 1 ; c826
-wc827:: ds 1 ; c827
-wc828:: ds 1 ; c828
-wc829:: ds 1 ; c829
-wc82a:: ds 1 ; c82a
-wc82b:: ds 1 ; c82b
-wc82c:: ds 1 ; c82c
-wc82d:: ds 1 ; c82d
-wc82e:: ds 1 ; c82e
-wc82f:: ds 1 ; c82f
-wc830:: ds 1 ; c830
-wc831:: ds 1 ; c831
-wc832:: ds 1 ; c832
-wc833:: ds 1 ; c833
-wc834:: ds 1 ; c834
-wc835:: ds 1 ; c835
-wc836:: ds 1 ; c836
-wc837:: ds 1 ; c837
-wc838:: ds 1 ; c838
-wc839:: ds 1 ; c839
-wc83a:: ds 1 ; c83a
-wc83b:: ds 1 ; c83b
-wc83c:: ds 1 ; c83c
-wc83d:: ds 1 ; c83d
-wc83e:: ds 1 ; c83e
-wc83f:: ds 1 ; c83f
-wc840:: ds 1 ; c840
-wc841:: ds 1 ; c841
-wc842:: ds 1 ; c842
-wc843:: ds 1 ; c843
-wc844:: ds 1 ; c844
-wc845:: ds 1 ; c845
-wc846:: ds 1 ; c846
-wc847:: ds 1 ; c847
-wc848:: ds 1 ; c848
-wc849:: ds 1 ; c849
-wc84a:: ds 1 ; c84a
-wc84b:: ds 1 ; c84b
-wc84c:: ds 1 ; c84c
-wc84d:: ds 1 ; c84d
-wc84e:: ds 1 ; c84e
-wc84f:: ds 1 ; c84f
-wc850:: ds 1 ; c850
-wc851:: ds 1 ; c851
-wc852:: ds 1 ; c852
-UNION
-wc853:: ds 1 ; c853
-NEXTU
-wMysteryGiftPlayerName::
-ENDU
-wc854:: ds 1 ; c854
-wc855:: ds 1 ; c855
-wc856:: ds 1 ; c856
-wc857:: ds 1 ; c857
-wc858:: ds 1 ; c858
-wc859:: ds 1 ; c859
-wc85a:: ds 1 ; c85a
-wc85b:: ds 1 ; c85b
-wc85c:: ds 1 ; c85c
-wc85d:: ds 1 ; c85d
-wc85e:: ds 1 ; c85e
-wc85f:: ds 1 ; c85f
-wc860:: ds 1 ; c860
-wc861:: ds 1 ; c861
-wc862:: ds 1 ; c862
-wc863:: ds 1 ; c863
-wc864:: ds 1 ; c864
-wc865:: ds 1 ; c865
-wc866:: ds 1 ; c866
-wc867:: ds 1 ; c867
-wc868:: ds 1 ; c868
-wc869:: ds 1 ; c869
-wc86a:: ds 1 ; c86a
-wc86b:: ds 1 ; c86b
-wc86c:: ds 1 ; c86c
-wc86d:: ds 1 ; c86d
-wc86e:: ds 1 ; c86e
-wc86f:: ds 1 ; c86f
-wc870:: ds 1 ; c870
-wc871:: ds 1 ; c871
-wc872:: ds 1 ; c872
-wc873:: ds 1 ; c873
-wc874:: ds 1 ; c874
-wc875:: ds 1 ; c875
-wc876:: ds 1 ; c876
-wc877:: ds 1 ; c877
-wc878:: ds 1 ; c878
-wc879:: ds 1 ; c879
-wc87a:: ds 1 ; c87a
-wc87b:: ds 1 ; c87b
-wc87c:: ds 1 ; c87c
-wc87d:: ds 1 ; c87d
-wc87e:: ds 1 ; c87e
-wc87f:: ds 1 ; c87f
-wc880:: ds 1 ; c880
-wc881:: ds 1 ; c881
-wc882:: ds 1 ; c882
-wc883:: ds 1 ; c883
-wc884:: ds 1 ; c884
-wc885:: ds 1 ; c885
-wc886:: ds 1 ; c886
-wc887:: ds 1 ; c887
-wc888:: ds 1 ; c888
-wc889:: ds 1 ; c889
-wc88a:: ds 1 ; c88a
-wc88b:: ds 1 ; c88b
-wc88c:: ds 1 ; c88c
-wc88d:: ds 1 ; c88d
-wc88e:: ds 1 ; c88e
-wc88f:: ds 1 ; c88f
-wc890:: ds 1 ; c890
-wc891:: ds 1 ; c891
-wc892:: ds 1 ; c892
-wc893:: ds 1 ; c893
-wc894:: ds 1 ; c894
-wc895:: ds 1 ; c895
-wc896:: ds 1 ; c896
-wc897:: ds 1 ; c897
-wc898:: ds 1 ; c898
-wc899:: ds 1 ; c899
-wc89a:: ds 1 ; c89a
-wc89b:: ds 1 ; c89b
-wc89c:: ds 1 ; c89c
-wc89d:: ds 1 ; c89d
-wc89e:: ds 1 ; c89e
-wc89f:: ds 1 ; c89f
-wc8a0:: ds 1 ; c8a0
-wc8a1:: ds 1 ; c8a1
-wc8a2:: ds 1 ; c8a2
-wc8a3:: ds 1 ; c8a3
-wc8a4:: ds 1 ; c8a4
-wc8a5:: ds 1 ; c8a5
-wc8a6:: ds 1 ; c8a6
-wc8a7:: ds 1 ; c8a7
-wc8a8:: ds 1 ; c8a8
-wc8a9:: ds 1 ; c8a9
-wc8aa:: ds 1 ; c8aa
-wc8ab:: ds 1 ; c8ab
-wc8ac:: ds 1 ; c8ac
-wc8ad:: ds 1 ; c8ad
-wc8ae:: ds 1 ; c8ae
-wc8af:: ds 1 ; c8af
-wc8b0:: ds 1 ; c8b0
-wc8b1:: ds 1 ; c8b1
-wc8b2:: ds 1 ; c8b2
-wc8b3:: ds 1 ; c8b3
-wc8b4:: ds 1 ; c8b4
-wc8b5:: ds 1 ; c8b5
-wc8b6:: ds 1 ; c8b6
-wc8b7:: ds 1 ; c8b7
-wc8b8:: ds 1 ; c8b8
-wc8b9:: ds 1 ; c8b9
-wc8ba:: ds 1 ; c8ba
-wc8bb:: ds 1 ; c8bb
-wc8bc:: ds 1 ; c8bc
-wc8bd:: ds 1 ; c8bd
-wc8be:: ds 1 ; c8be
-wc8bf:: ds 1 ; c8bf
-wc8c0:: ds 1 ; c8c0
-wc8c1:: ds 1 ; c8c1
-wc8c2:: ds 1 ; c8c2
-wc8c3:: ds 1 ; c8c3
-wc8c4:: ds 1 ; c8c4
-wc8c5:: ds 1 ; c8c5
-wc8c6:: ds 1 ; c8c6
-wc8c7:: ds 1 ; c8c7
-wc8c8:: ds 1 ; c8c8
-wc8c9:: ds 1 ; c8c9
-wc8ca:: ds 1 ; c8ca
-wc8cb:: ds 1 ; c8cb
-wc8cc:: ds 1 ; c8cc
-wc8cd:: ds 1 ; c8cd
-wc8ce:: ds 1 ; c8ce
-wc8cf:: ds 1 ; c8cf
-wc8d0:: ds 1 ; c8d0
-wc8d1:: ds 1 ; c8d1
-wc8d2:: ds 1 ; c8d2
-wc8d3:: ds 1 ; c8d3
-wc8d4:: ds 1 ; c8d4
-wc8d5:: ds 1 ; c8d5
-wc8d6:: ds 1 ; c8d6
-wc8d7:: ds 1 ; c8d7
-wc8d8:: ds 1 ; c8d8
-wc8d9:: ds 1 ; c8d9
-wc8da:: ds 1 ; c8da
-wc8db:: ds 1 ; c8db
-wc8dc:: ds 1 ; c8dc
-wc8dd:: ds 1 ; c8dd
-wc8de:: ds 1 ; c8de
-wc8df:: ds 1 ; c8df
-wc8e0:: ds 1 ; c8e0
-wc8e1:: ds 1 ; c8e1
-wc8e2:: ds 1 ; c8e2
-wc8e3:: ds 1 ; c8e3
-wc8e4:: ds 1 ; c8e4
-wc8e5:: ds 1 ; c8e5
-wc8e6:: ds 1 ; c8e6
-wc8e7:: ds 1 ; c8e7
-wc8e8:: ds 1 ; c8e8
-wc8e9:: ds 1 ; c8e9
-wc8ea:: ds 1 ; c8ea
-wc8eb:: ds 1 ; c8eb
-wc8ec:: ds 1 ; c8ec
-wc8ed:: ds 1 ; c8ed
-wc8ee:: ds 1 ; c8ee
-wc8ef:: ds 1 ; c8ef
-wc8f0:: ds 1 ; c8f0
-wc8f1:: ds 1 ; c8f1
-wc8f2:: ds 1 ; c8f2
-wc8f3:: ds 1 ; c8f3
-wc8f4:: ds 1 ; c8f4
-wc8f5:: ds 1 ; c8f5
-wc8f6:: ds 1 ; c8f6
-wc8f7:: ds 1 ; c8f7
-wc8f8:: ds 1 ; c8f8
-wc8f9:: ds 1 ; c8f9
-wc8fa:: ds 1 ; c8fa
-wc8fb:: ds 1 ; c8fb
-wc8fc:: ds 1 ; c8fc
-wc8fd:: ds 1 ; c8fd
-wc8fe:: ds 1 ; c8fe
-wc8ff:: ds 1 ; c8ff
-wLYOverridesBufferEnd::
 
-wc900:: ds 1 ; c900
-wc901:: ds 1 ; c901
-wc902:: ds 1 ; c902
-wc903:: ds 1 ; c903
-wc904:: ds 1 ; c904
-wc905:: ds 1 ; c905
-wc906:: ds 1 ; c906
-wc907:: ds 1 ; c907
-wc908:: ds 1 ; c908
-wc909:: ds 1 ; c909
-wc90a:: ds 1 ; c90a
-wc90b:: ds 1 ; c90b
-wc90c:: ds 1 ; c90c
-wc90d:: ds 1 ; c90d
-wc90e:: ds 1 ; c90e
-wc90f:: ds 1 ; c90f
-wc910:: ds 1 ; c910
-wc911:: ds 1 ; c911
-wc912:: ds 1 ; c912
-wc913:: ds 1 ; c913
-wc914:: ds 1 ; c914
-wc915:: ds 1 ; c915
-wc916:: ds 1 ; c916
-wc917:: ds 1 ; c917
-wc918:: ds 1 ; c918
-wc919:: ds 1 ; c919
-wc91a:: ds 1 ; c91a
-wc91b:: ds 1 ; c91b
-wc91c:: ds 1 ; c91c
-wc91d:: ds 1 ; c91d
-wc91e:: ds 1 ; c91e
-wc91f:: ds 1 ; c91f
-wc920:: ds 1 ; c920
-wc921:: ds 1 ; c921
-wc922:: ds 1 ; c922
-wc923:: ds 1 ; c923
-wc924:: ds 1 ; c924
-wc925:: ds 1 ; c925
-wc926:: ds 1 ; c926
-wc927:: ds 1 ; c927
-wc928:: ds 1 ; c928
-wc929:: ds 1 ; c929
-wc92a:: ds 1 ; c92a
-wc92b:: ds 1 ; c92b
-wc92c:: ds 1 ; c92c
-wc92d:: ds 1 ; c92d
-wc92e:: ds 1 ; c92e
-wc92f:: ds 1 ; c92f
-wc930:: ds 1 ; c930
-wc931:: ds 1 ; c931
-wc932:: ds 1 ; c932
-wc933:: ds 1 ; c933
-wc934:: ds 1 ; c934
-wc935:: ds 1 ; c935
-wc936:: ds 1 ; c936
-wc937:: ds 1 ; c937
-wc938:: ds 1 ; c938
-wc939:: ds 1 ; c939
-wc93a:: ds 1 ; c93a
-wc93b:: ds 1 ; c93b
-wc93c:: ds 1 ; c93c
-wc93d:: ds 1 ; c93d
-wc93e:: ds 1 ; c93e
-wc93f:: ds 1 ; c93f
-wc940:: ds 1 ; c940
-wc941:: ds 1 ; c941
-wc942:: ds 1 ; c942
-wc943:: ds 1 ; c943
-wc944:: ds 1 ; c944
-wc945:: ds 1 ; c945
-wc946:: ds 1 ; c946
-wc947:: ds 1 ; c947
-wc948:: ds 1 ; c948
-wc949:: ds 1 ; c949
-wc94a:: ds 1 ; c94a
-wc94b:: ds 1 ; c94b
-wc94c:: ds 1 ; c94c
-wc94d:: ds 1 ; c94d
-wc94e:: ds 1 ; c94e
-wc94f:: ds 1 ; c94f
-wc950:: ds 1 ; c950
-wc951:: ds 1 ; c951
-wc952:: ds 1 ; c952
-wc953:: ds 1 ; c953
-wc954:: ds 1 ; c954
-wc955:: ds 1 ; c955
-wc956:: ds 1 ; c956
-wc957:: ds 1 ; c957
-wc958:: ds 1 ; c958
-wc959:: ds 1 ; c959
-wc95a:: ds 1 ; c95a
-wc95b:: ds 1 ; c95b
-wc95c:: ds 1 ; c95c
-wc95d:: ds 1 ; c95d
-wc95e:: ds 1 ; c95e
-wc95f:: ds 1 ; c95f
-wc960:: ds 1 ; c960
-wc961:: ds 1 ; c961
-wc962:: ds 1 ; c962
-wc963:: ds 1 ; c963
-wc964:: ds 1 ; c964
-wc965:: ds 1 ; c965
-wc966:: ds 1 ; c966
-wc967:: ds 1 ; c967
-wc968:: ds 1 ; c968
-wc969:: ds 1 ; c969
-wc96a:: ds 1 ; c96a
-wc96b:: ds 1 ; c96b
-wc96c:: ds 1 ; c96c
-wc96d:: ds 1 ; c96d
-wc96e:: ds 1 ; c96e
-wc96f:: ds 1 ; c96f
-wc970:: ds 1 ; c970
-wc971:: ds 1 ; c971
-wc972:: ds 1 ; c972
-wc973:: ds 1 ; c973
-wc974:: ds 1 ; c974
-wc975:: ds 1 ; c975
-wc976:: ds 1 ; c976
-wc977:: ds 1 ; c977
-wc978:: ds 1 ; c978
-wc979:: ds 1 ; c979
-wc97a:: ds 1 ; c97a
-wc97b:: ds 1 ; c97b
-wc97c:: ds 1 ; c97c
-wc97d:: ds 1 ; c97d
-wc97e:: ds 1 ; c97e
-wc97f:: ds 1 ; c97f
-wc980:: ds 1 ; c980
-wc981:: ds 1 ; c981
-wc982:: ds 1 ; c982
-wc983:: ds 1 ; c983
-wc984:: ds 1 ; c984
-wc985:: ds 1 ; c985
-wc986:: ds 1 ; c986
-wc987:: ds 1 ; c987
-wc988:: ds 1 ; c988
-wc989:: ds 1 ; c989
-wHandshakeFrameDelay:: ds 1 ; c98a
-wc98b:: ds 1 ; c98b
-wc98c:: ds 1 ; c98c
-wc98d:: ds 1 ; c98d
-wc98e:: ds 1 ; c98e
-wc98f:: ds 1 ; c98f
-wc990:: ds 1 ; c990
-wc991:: ds 1 ; c991
-wc992:: ds 1 ; c992
-wc993:: ds 1 ; c993
-wc994:: ds 1 ; c994
-wc995:: ds 1 ; c995
-wc996:: ds 1 ; c996
-wc997:: ds 1 ; c997
-wc998:: ds 1 ; c998
-wc999:: ds 1 ; c999
-wc99a:: ds 1 ; c99a
-wc99b:: ds 1 ; c99b
-wc99c:: ds 1 ; c99c
-wc99d:: ds 1 ; c99d
-wc99e:: ds 1 ; c99e
-wc99f:: ds 1 ; c99f
-wc9a0:: ds 1 ; c9a0
-wc9a1:: ds 1 ; c9a1
-wc9a2:: ds 1 ; c9a2
-wc9a3:: ds 1 ; c9a3
-wc9a4:: ds 1 ; c9a4
-wc9a5:: ds 1 ; c9a5
-wc9a6:: ds 1 ; c9a6
-wc9a7:: ds 1 ; c9a7
-wc9a8:: ds 1 ; c9a8
-wc9a9:: ds 1 ; c9a9
-wc9aa:: ds 1 ; c9aa
-wc9ab:: ds 1 ; c9ab
-wc9ac:: ds 1 ; c9ac
-wc9ad:: ds 1 ; c9ad
-wc9ae:: ds 1 ; c9ae
-wc9af:: ds 1 ; c9af
-wc9b0:: ds 1 ; c9b0
-wc9b1:: ds 1 ; c9b1
-wc9b2:: ds 1 ; c9b2
-wc9b3:: ds 1 ; c9b3
-wc9b4:: ds 1 ; c9b4
-wc9b5:: ds 1 ; c9b5
-wc9b6:: ds 1 ; c9b6
-wc9b7:: ds 1 ; c9b7
-wc9b8:: ds 1 ; c9b8
-wc9b9:: ds 1 ; c9b9
-wc9ba:: ds 1 ; c9ba
-wc9bb:: ds 1 ; c9bb
-wc9bc:: ds 1 ; c9bc
-wc9bd:: ds 1 ; c9bd
-wc9be:: ds 1 ; c9be
-wc9bf:: ds 1 ; c9bf
-wc9c0:: ds 1 ; c9c0
-wc9c1:: ds 1 ; c9c1
-wc9c2:: ds 1 ; c9c2
-wc9c3:: ds 1 ; c9c3
-wc9c4:: ds 1 ; c9c4
-wc9c5:: ds 1 ; c9c5
-wc9c6:: ds 1 ; c9c6
-wc9c7:: ds 1 ; c9c7
-wc9c8:: ds 1 ; c9c8
-wc9c9:: ds 1 ; c9c9
-wc9ca:: ds 1 ; c9ca
-wc9cb:: ds 1 ; c9cb
-wc9cc:: ds 1 ; c9cc
-wc9cd:: ds 1 ; c9cd
-wc9ce:: ds 1 ; c9ce
-wc9cf:: ds 1 ; c9cf
-wc9d0:: ds 1 ; c9d0
-wc9d1:: ds 1 ; c9d1
-wc9d2:: ds 1 ; c9d2
-wc9d3:: ds 1 ; c9d3
-wc9d4:: ds 1 ; c9d4
-wc9d5:: ds 1 ; c9d5
-wc9d6:: ds 1 ; c9d6
-wc9d7:: ds 1 ; c9d7
-wc9d8:: ds 1 ; c9d8
-wc9d9:: ds 1 ; c9d9
-wc9da:: ds 1 ; c9da
-wc9db:: ds 1 ; c9db
-wc9dc:: ds 1 ; c9dc
-wc9dd:: ds 1 ; c9dd
-wc9de:: ds 1 ; c9de
-wc9df:: ds 1 ; c9df
-wc9e0:: ds 1 ; c9e0
-wc9e1:: ds 1 ; c9e1
-wc9e2:: ds 1 ; c9e2
-wc9e3:: ds 1 ; c9e3
-wc9e4:: ds 1 ; c9e4
-wc9e5:: ds 1 ; c9e5
-wc9e6:: ds 1 ; c9e6
-wc9e7:: ds 1 ; c9e7
-wc9e8:: ds 1 ; c9e8
-wc9e9:: ds 1 ; c9e9
-wc9ea:: ds 1 ; c9ea
-wc9eb:: ds 1 ; c9eb
-wc9ec:: ds 1 ; c9ec
-wc9ed:: ds 1 ; c9ed
-wc9ee:: ds 1 ; c9ee
-wc9ef:: ds 1 ; c9ef
-wc9f0:: ds 1 ; c9f0
-wc9f1:: ds 1 ; c9f1
-wc9f2:: ds 1 ; c9f2
-wc9f3:: ds 1 ; c9f3
-wc9f4:: ds 1 ; c9f4
-wc9f5:: ds 1 ; c9f5
-wc9f6:: ds 1 ; c9f6
-wc9f7:: ds 1 ; c9f7
-wc9f8:: ds 1 ; c9f8
-wc9f9:: ds 1 ; c9f9
-wc9fa:: ds 1 ; c9fa
-wc9fb:: ds 1 ; c9fb
-wc9fc:: ds 1 ; c9fc
-wc9fd:: ds 1 ; c9fd
-wc9fe:: ds 1 ; c9fe
-wc9ff:: ds 1 ; c9ff
-wca00:: ds 1 ; ca00
-wca01:: ds 1 ; ca01
-wca02:: ds 1 ; ca02
-wca03:: ds 1 ; ca03
-wca04:: ds 1 ; ca04
-wca05:: ds 1 ; ca05
-wca06:: ds 1 ; ca06
-wca07:: ds 1 ; ca07
-wca08:: ds 1 ; ca08
-wca09:: ds 1 ; ca09
-wca0a:: ds 1 ; ca0a
-wca0b:: ds 1 ; ca0b
-wca0c:: ds 1 ; ca0c
-wca0d:: ds 1 ; ca0d
-wca0e:: ds 1 ; ca0e
-wca0f:: ds 1 ; ca0f
-wca10:: ds 1 ; ca10
-wca11:: ds 1 ; ca11
-wca12:: ds 1 ; ca12
-wca13:: ds 1 ; ca13
-wca14:: ds 1 ; ca14
-wca15:: ds 1 ; ca15
-wca16:: ds 1 ; ca16
-wca17:: ds 1 ; ca17
-wca18:: ds 1 ; ca18
-wca19:: ds 1 ; ca19
-wca1a:: ds 1 ; ca1a
-wca1b:: ds 1 ; ca1b
-wca1c:: ds 1 ; ca1c
-wca1d:: ds 1 ; ca1d
-wca1e:: ds 1 ; ca1e
-wca1f:: ds 1 ; ca1f
-wca20:: ds 1 ; ca20
-wca21:: ds 1 ; ca21
-wca22:: ds 1 ; ca22
-wca23:: ds 1 ; ca23
-wca24:: ds 1 ; ca24
-wca25:: ds 1 ; ca25
-wca26:: ds 1 ; ca26
-wca27:: ds 1 ; ca27
-wca28:: ds 1 ; ca28
-wca29:: ds 1 ; ca29
-wca2a:: ds 1 ; ca2a
-wca2b:: ds 1 ; ca2b
-wca2c:: ds 1 ; ca2c
-wca2d:: ds 1 ; ca2d
-wca2e:: ds 1 ; ca2e
-wca2f:: ds 1 ; ca2f
-wca30:: ds 1 ; ca30
-wca31:: ds 1 ; ca31
-wca32:: ds 1 ; ca32
-wca33:: ds 1 ; ca33
-wca34:: ds 1 ; ca34
-wca35:: ds 1 ; ca35
-wca36:: ds 1 ; ca36
-wca37:: ds 1 ; ca37
-wca38:: ds 1 ; ca38
-wca39:: ds 1 ; ca39
-wca3a:: ds 1 ; ca3a
-wca3b:: ds 1 ; ca3b
-wca3c:: ds 1 ; ca3c
-wca3d:: ds 1 ; ca3d
-wca3e:: ds 1 ; ca3e
-wca3f:: ds 1 ; ca3f
-wca40:: ds 1 ; ca40
-wca41:: ds 1 ; ca41
-wca42:: ds 1 ; ca42
-wca43:: ds 1 ; ca43
-wca44:: ds 1 ; ca44
-wca45:: ds 1 ; ca45
-wca46:: ds 1 ; ca46
-wca47:: ds 1 ; ca47
-wca48:: ds 1 ; ca48
-wca49:: ds 1 ; ca49
-wca4a:: ds 1 ; ca4a
-wca4b:: ds 1 ; ca4b
-wca4c:: ds 1 ; ca4c
-wca4d:: ds 1 ; ca4d
-wca4e:: ds 1 ; ca4e
-wca4f:: ds 1 ; ca4f
-wca50:: ds 1 ; ca50
-wca51:: ds 1 ; ca51
-wca52:: ds 1 ; ca52
-wca53:: ds 1 ; ca53
-wca54:: ds 1 ; ca54
-wca55:: ds 1 ; ca55
-wca56:: ds 1 ; ca56
-wca57:: ds 1 ; ca57
-wca58:: ds 1 ; ca58
-wca59:: ds 1 ; ca59
-wca5a:: ds 1 ; ca5a
-wca5b:: ds 1 ; ca5b
-wca5c:: ds 1 ; ca5c
-wca5d:: ds 1 ; ca5d
-wca5e:: ds 1 ; ca5e
-wca5f:: ds 1 ; ca5f
-wca60:: ds 1 ; ca60
-wca61:: ds 1 ; ca61
-wca62:: ds 1 ; ca62
-wca63:: ds 1 ; ca63
-wca64:: ds 1 ; ca64
-wca65:: ds 1 ; ca65
-wca66:: ds 1 ; ca66
-wca67:: ds 1 ; ca67
-wca68:: ds 1 ; ca68
-wca69:: ds 1 ; ca69
-wca6a:: ds 1 ; ca6a
-wca6b:: ds 1 ; ca6b
-wca6c:: ds 1 ; ca6c
-wca6d:: ds 1 ; ca6d
-wca6e:: ds 1 ; ca6e
-wca6f:: ds 1 ; ca6f
-wca70:: ds 1 ; ca70
-wca71:: ds 1 ; ca71
-wca72:: ds 1 ; ca72
-wca73:: ds 1 ; ca73
-wca74:: ds 1 ; ca74
-wca75:: ds 1 ; ca75
-wca76:: ds 1 ; ca76
-wca77:: ds 1 ; ca77
-wca78:: ds 1 ; ca78
-wca79:: ds 1 ; ca79
-wca7a:: ds 1 ; ca7a
-wca7b:: ds 1 ; ca7b
-wca7c:: ds 1 ; ca7c
-wca7d:: ds 1 ; ca7d
-wca7e:: ds 1 ; ca7e
-wca7f:: ds 1 ; ca7f
-wca80:: ds 1 ; ca80
-wca81:: ds 1 ; ca81
-wca82:: ds 1 ; ca82
-wca83:: ds 1 ; ca83
-wca84:: ds 1 ; ca84
-wca85:: ds 1 ; ca85
-wca86:: ds 1 ; ca86
-wca87:: ds 1 ; ca87
-wca88:: ds 1 ; ca88
-wca89:: ds 1 ; ca89
-wca8a:: ds 1 ; ca8a
-wca8b:: ds 1 ; ca8b
-wca8c:: ds 1 ; ca8c
-wca8d:: ds 1 ; ca8d
-wca8e:: ds 1 ; ca8e
-wca8f:: ds 1 ; ca8f
-wca90:: ds 1 ; ca90
-wca91:: ds 1 ; ca91
-wca92:: ds 1 ; ca92
-wca93:: ds 1 ; ca93
-wca94:: ds 1 ; ca94
-wca95:: ds 1 ; ca95
-wca96:: ds 1 ; ca96
-wca97:: ds 1 ; ca97
-wca98:: ds 1 ; ca98
-wca99:: ds 1 ; ca99
-wca9a:: ds 1 ; ca9a
-wca9b:: ds 1 ; ca9b
-wca9c:: ds 1 ; ca9c
-wca9d:: ds 1 ; ca9d
-wca9e:: ds 1 ; ca9e
-wca9f:: ds 1 ; ca9f
-wcaa0:: ds 1 ; caa0
-wcaa1:: ds 1 ; caa1
-wcaa2:: ds 1 ; caa2
-wcaa3:: ds 1 ; caa3
-wcaa4:: ds 1 ; caa4
-wcaa5:: ds 1 ; caa5
-wcaa6:: ds 1 ; caa6
-wcaa7:: ds 1 ; caa7
-wcaa8:: ds 1 ; caa8
-wcaa9:: ds 1 ; caa9
-wcaaa:: ds 1 ; caaa
-wcaab:: ds 1 ; caab
-wcaac:: ds 1 ; caac
-wcaad:: ds 1 ; caad
-wcaae:: ds 1 ; caae
-wcaaf:: ds 1 ; caaf
-wcab0:: ds 1 ; cab0
-wcab1:: ds 1 ; cab1
-wcab2:: ds 1 ; cab2
-wcab3:: ds 1 ; cab3
-wcab4:: ds 1 ; cab4
-wcab5:: ds 1 ; cab5
-wcab6:: ds 1 ; cab6
-wcab7:: ds 1 ; cab7
-wcab8:: ds 1 ; cab8
-wcab9:: ds 1 ; cab9
-wcaba:: ds 1 ; caba
-wcabb:: ds 1 ; cabb
-wcabc:: ds 1 ; cabc
-wcabd:: ds 1 ; cabd
-wcabe:: ds 1 ; cabe
-wcabf:: ds 1 ; cabf
-wcac0:: ds 1 ; cac0
-wcac1:: ds 1 ; cac1
-wcac2:: ds 1 ; cac2
-wcac3:: ds 1 ; cac3
-wcac4:: ds 1 ; cac4
-wcac5:: ds 1 ; cac5
-wcac6:: ds 1 ; cac6
-wcac7:: ds 1 ; cac7
-wcac8:: ds 1 ; cac8
-wcac9:: ds 1 ; cac9
-wcaca:: ds 1 ; caca
-wcacb:: ds 1 ; cacb
-wcacc:: ds 1 ; cacc
-wcacd:: ds 1 ; cacd
-wcace:: ds 1 ; cace
-wcacf:: ds 1 ; cacf
-wcad0:: ds 1 ; cad0
-wcad1:: ds 1 ; cad1
-wcad2:: ds 1 ; cad2
-wcad3:: ds 1 ; cad3
-wcad4:: ds 1 ; cad4
-wcad5:: ds 1 ; cad5
-wcad6:: ds 1 ; cad6
-wcad7:: ds 1 ; cad7
-wcad8:: ds 1 ; cad8
-wcad9:: ds 1 ; cad9
-wcada:: ds 1 ; cada
-wcadb:: ds 1 ; cadb
-wcadc:: ds 1 ; cadc
-wcadd:: ds 1 ; cadd
-wcade:: ds 1 ; cade
-wcadf:: ds 1 ; cadf
-wcae0:: ds 1 ; cae0
-wcae1:: ds 1 ; cae1
-wcae2:: ds 1 ; cae2
-wcae3:: ds 1 ; cae3
-wcae4:: ds 1 ; cae4
-wcae5:: ds 1 ; cae5
-wcae6:: ds 1 ; cae6
-wcae7:: ds 1 ; cae7
+NEXTU ; c700
+; mystery gift data
+wMysteryGiftPartyTemp:: ; ds PARTY_LENGTH * (1 + 1 + NUM_MOVES)
+wMysteryGiftStaging::
+wc700:: ds 80
 
+wMysteryGiftTrainerData:: ds (1 + 1 + NUM_MOVES) * PARTY_LENGTH + 2
+wMysteryGiftTrainerDataEnd::
+
+	ds 138
+
+wMysteryGiftPartnerData::
+wc800:: db
+wMysteryGiftPartnerID:: dw
+wMysteryGiftPartnerName:: ds NAME_LENGTH
+wMysteryGiftPartnerDexCaught:: db
+wc80f::
+wMysteryGiftPartnerSentDeco:: db
+wMysteryGiftPartnerWhichItem:: db
+wMysteryGiftPartnerWhichDeco:: db
+wMysteryGiftPartnerBackupItem:: db
+	ds 1
+wMysteryGiftPartnerDataEnd::
+
+	ds 60
+
+wMysteryGiftPlayerData::
+	ds 1
+wMysteryGiftPlayerID:: dw
+wMysteryGiftPlayerName:: ds NAME_LENGTH
+wMysteryGiftPlayerDexCaught:: db
+wMysteryGiftPlayerSentDeco:: db
+wMysteryGiftPlayerWhichItem:: db
+wMysteryGiftPlayerWhichDeco:: db
+wMysteryGiftPlayerBackupItem:: db
+	ds 1
+wMysteryGiftPlayerDataEnd::
+
+	ds 144
+
+wc8f4:: ds 5
+wc8f9:: ds 7
+
+NEXTU ; c700
+; LCD expects wLYOverrides to have an alignment of $100
+wLYOverrides:: ds SCREEN_HEIGHT_PX
+wLYOverridesEnd:: ds 112
+
+wLYOverridesBackup:: ds SCREEN_HEIGHT_PX
+wLYOverridesBackupEnd:: ds 112
+
+UNION ; c900
+; mystery gift data
+wc900:: db
+wc901:: db
+wc902:: db
+
+NEXTU ; c900
+; link
+	ds 191
+wc9bf:: ds 79
+wca0e:: ds 5
+wca13:: ds 113
+wca84:: ds 100
+wcae8:: dw
+wLinkOTPartyMonTypes:: ds 2 * PARTY_LENGTH ; caea
+	ds 84
+wcb4a:: ds 84
+wcb9e:: ds 130
+
+NEXTU ; c900
+; battle
+wBattleAnimTileDict:: ds 10
+
+wActiveAnimObjects:: ; c90a
+wAnimObject01:: battle_anim_struct wAnimObject01
+wAnimObject02:: battle_anim_struct wAnimObject02
+wAnimObject03:: battle_anim_struct wAnimObject03
+wAnimObject04:: battle_anim_struct wAnimObject04
+wAnimObject05:: battle_anim_struct wAnimObject05
+wAnimObject06:: battle_anim_struct wAnimObject06
+wAnimObject07:: battle_anim_struct wAnimObject07
+wAnimObject08:: battle_anim_struct wAnimObject08
+wAnimObject09:: battle_anim_struct wAnimObject09
+wAnimObject10:: battle_anim_struct wAnimObject10
+wActiveAnimObjectsEnd::
+
+wActiveBGEffects:: ; c9fa
+wBGEffect1:: battle_bg_effect wBGEffect1
+wBGEffect2:: battle_bg_effect wBGEffect2
+wBGEffect3:: battle_bg_effect wBGEffect3
+wBGEffect4:: battle_bg_effect wBGEffect4
+wBGEffect5:: battle_bg_effect wBGEffect5
+wActiveBGEffectsEnd::
+
+wLastAnimObjectIndex:: db ; ca0e
+
+wBattleAnimFlags:: db ; ca0f
+wBattleAnimAddress:: dw ; ca10
+wBattleAnimDelay:: db ; ca12
+wBattleAnimParent:: dw ; ca13
+wBattleAnimLoops:: db ; ca15
+wBattleAnimVar:: db ; ca16
+wBattleAnimByte:: db ; ca17
+wBattleAnimOAMPointerLo:: db ; ca18
+
+	ds 207
+
+wBattle: ; cae8
 wEnemyMoveStruct:: move_struct wEnemyMoveStruct
 wPlayerMoveStruct:: move_struct wPlayerMoveStruct
 
@@ -1642,431 +611,366 @@ wBattleMon:: battle_struct wBattleMon ; cb0c
 
 wcb2c:: ds 1 ; cb2c
 wcb2d:: ds 1 ; cb2d
-wcb2e:: ds 1 ; cb2e
-wcb2f:: ds 1 ; cb2f
-wcb30:: ds 1 ; cb30
+wEnemyTrainerItem1:: db ; cb2e
+wEnemyTrainerItem2:: db ; cb2f
+wEnemyTrainerBaseReward:: db ; cb30
 wcb31:: ds 1 ; cb31
 wcb32:: ds 1 ; cb32
 wcb33:: ds 1 ; cb33
 
-wOTClassName:: ds NAME_LENGTH ; cb34
+wOTClassName:: ds TRAINER_CLASS_NAME_LENGTH ; cb34
 
-wcb3f:: ds 1 ; cb3f
-wcb40:: ds 1 ; cb40
-wCurOTMon:: ds 1 ; cb41
-wcb42:: ds 1 ; cb42
-wcb43:: ds 1 ; cb43
-wcb44:: ds 1 ; cb44
-wcb45:: ds 1 ; cb45
-wPlayerSubStatus1:: ds 1 ; cb46
-wPlayerSubStatus2:: ds 1 ; cb47
-wPlayerSubStatus3:: ds 1 ; cb48
-wPlayerSubStatus4:: ds 1 ; cb49
-wPlayerSubStatus5:: ds 1 ; cb4a
-wEnemySubStatus1:: ds 1 ; cb4b
-wEnemySubStatus2:: ds 1 ; cb4c
-wEnemySubStatus3:: ds 1 ; cb4d
-wEnemySubStatus4:: ds 1 ; cb4e
-wEnemySubStatus5:: ds 1 ; cb4f
-wcb50:: ds 1 ; cb50
-wcb51:: ds 1 ; cb51
-wcb52:: ds 1 ; cb52
-wcb53:: ds 1 ; cb53
-wcb54:: ds 1 ; cb54
-wcb55:: ds 1 ; cb55
-wcb56:: ds 1 ; cb56
-wcb57:: ds 1 ; cb57
-wcb58:: ds 1 ; cb58
-wcb59:: ds 1 ; cb59
-wcb5a:: ds 1 ; cb5a
-wcb5b:: ds 1 ; cb5b
-wcb5c:: ds 1 ; cb5c
-wcb5d:: ds 1 ; cb5d
-wcb5e:: ds 1 ; cb5e
-wcb5f:: ds 1 ; cb5f
-wPlayerDamageTaken::
-wcb60:: ds 1 ; cb60
-wcb61:: ds 1 ; cb61
-wEnemyDamageTaken::
-wcb62:: ds 1 ; cb62
-wcb63:: ds 1 ; cb63
-wBattleReward::
-wcb64:: ds 1 ; cb64
-wcb65:: ds 1 ; cb65
-wcb66:: ds 1 ; cb66
-wcb67:: ds 1 ; cb67
-wcb68:: ds 1 ; cb68
-wcb69:: ds 1 ; cb69
-wcb6a:: ds 1 ; cb6a
-wcb6b:: ds 1 ; cb6b
-wcb6c:: ds 1 ; cb6c
-wcb6d:: ds 1 ; cb6d
-wcb6e:: ds 1 ; cb6e
-wcb6f:: ds 1 ; cb6f
-wcb70:: ds 1 ; cb70
-wcb71:: ds 1 ; cb71
-wcb72:: ds 1 ; cb72
-wcb73:: ds 1 ; cb73
-wcb74:: ds 1 ; cb74
-wcb75:: ds 1 ; cb75
-wcb76:: ds 1 ; cb76
-wcb77:: ds 1 ; cb77
-wcb78:: ds 1 ; cb78
-wcb79:: ds 1 ; cb79
-wcb7a:: ds 1 ; cb7a
-wcb7b:: ds 1 ; cb7b
-wcb7c:: ds 1 ; cb7c
-wcb7d:: ds 1 ; cb7d
-wcb7e:: ds 1 ; cb7e
-wcb7f:: ds 1 ; cb7f
-wcb80:: ds 1 ; cb80
-wcb81:: ds 1 ; cb81
-wcb82:: ds 1 ; cb82
-wcb83:: ds 1 ; cb83
-wcb84:: ds 1 ; cb84
-wcb85:: ds 1 ; cb85
-wcb86:: ds 1 ; cb86
-wcb87:: ds 1 ; cb87
-wcb88:: ds 1 ; cb88
-wcb89:: ds 1 ; cb89
-wcb8a:: ds 1 ; cb8a
-wcb8b:: ds 1 ; cb8b
-wcb8c:: ds 1 ; cb8c
-wcb8d:: ds 1 ; cb8d
-wcb8e:: ds 1 ; cb8e
-wcb8f:: ds 1 ; cb8f
-wcb90:: ds 1 ; cb90
-wcb91:: ds 1 ; cb91
-wcb92:: ds 1 ; cb92
-wcb93:: ds 1 ; cb93
-wcb94:: ds 1 ; cb94
-wcb95:: ds 1 ; cb95
-wcb96:: ds 1 ; cb96
-wcb97:: ds 1 ; cb97
-wcb98:: ds 1 ; cb98
-wcb99:: ds 1 ; cb99
-wcb9a:: ds 1 ; cb9a
-wcb9b:: ds 1 ; cb9b
-wcb9c:: ds 1 ; cb9c
-wcb9d:: ds 1 ; cb9d
-wcb9e:: ds 1 ; cb9e
-wcb9f:: ds 1 ; cb9f
-wcba0:: ds 1 ; cba0
-wcba1:: ds 1 ; cba1
-wcba2:: ds 1 ; cba2
-wcba3:: ds 1 ; cba3
-wcba4:: ds 1 ; cba4
-wcba5:: ds 1 ; cba5
-wcba6:: ds 1 ; cba6
-wcba7:: ds 1 ; cba7
-wcba8:: ds 1 ; cba8
-wcba9:: ds 1 ; cba9
-wcbaa:: ds 1 ; cbaa
-wcbab:: ds 1 ; cbab
-wcbac:: ds 1 ; cbac
-wcbad:: ds 1 ; cbad
-wcbae:: ds 1 ; cbae
-wcbaf:: ds 1 ; cbaf
-wcbb0:: ds 1 ; cbb0
-wcbb1:: ds 1 ; cbb1
-wcbb2:: ds 1 ; cbb2
-wcbb3:: ds 1 ; cbb3
-wcbb4:: ds 1 ; cbb4
-wcbb5:: ds 1 ; cbb5
-wcbb6:: ds 1 ; cbb6
-wcbb7:: ds 1 ; cbb7
-wcbb8:: ds 1 ; cbb8
-wcbb9:: ds 1 ; cbb9
-wcbba:: ds 1 ; cbba
-wcbbb:: ds 1 ; cbbb
-wcbbc:: ds 1 ; cbbc
-wcbbd:: ds 1 ; cbbd
-wcbbe:: ds 1 ; cbbe
-wcbbf:: ds 1 ; cbbf
-wcbc0:: ds 1 ; cbc0
-wCurPlayerMove:: ds 1 ; cbc1
-wCurEnemyMove:: ds 1 ; cbc2
-wcbc3:: ds 1 ; cbc3
-wcbc4:: ds 1 ; cbc4
-wcbc5:: ds 1 ; cbc5
-wcbc6:: ds 1 ; cbc6
-wcbc7:: ds 1 ; cbc7
-wcbc8:: ds 1 ; cbc8
-wcbc9:: ds 1 ; cbc9
+wCurOTMon:: db ; cb41
+
+wBattleParticipantsNotFainted::
+; Bit array.  Bits 0 - 5 correspond to party members 1 - 6.
+; Bit set if the mon appears in battle.
+; Bit cleared if the mon faints.
+; Backed up if the enemy switches.
+; All bits cleared if the enemy faints.
+	db
+
+wTypeModifier:: ; cb43
+; >10: super-effective
+;  10: normal
+; <10: not very effective
+; bit 7: stab
+	db
+
+wCriticalHit:: ; cb44
+; 0 if not critical
+; 1 for a critical hit
+; 2 for a OHKO
+	db
+
+wAttackMissed:: ; cb45
+; nonzero for a miss
+	db
+
+wPlayerSubStatus1:: ; cb46
+; bit
+; 7 in love
+; 6 rollout
+; 5 endure
+; 4 perish song
+; 3 identified
+; 2 protect
+; 1 curse
+; 0 nightmare
+	db
+wPlayerSubStatus2:: ; cb47
+; bit
+; 7
+; 6
+; 5
+; 4
+; 3
+; 2
+; 1
+; 0 curled
+	db
+wPlayerSubStatus3:: ; cb48
+; bit
+; 7 confused
+; 6 flying
+; 5 underground
+; 4 charged
+; 3 flinched
+; 2 in loop
+; 1 rampage
+; 0 bide
+	db
+wPlayerSubStatus4:: ; cb49
+; bit
+; 7 leech seed
+; 6 rage
+; 5 recharge
+; 4 substitute
+; 3
+; 2 focus energy
+; 1 mist
+; 0 x accuracy
+	db
+wPlayerSubStatus5:: ; cb4a
+; bit
+; 7 can't run
+; 6 destiny bond
+; 5 lock-on
+; 4 encored
+; 3 transformed
+; 2
+; 1
+; 0 toxic
+	db
+
+wEnemySubStatus1:: ; cb4b
+; see wPlayerSubStatus1
+	db
+wEnemySubStatus2:: ; cb4c
+; see wPlayerSubStatus2
+	db
+wEnemySubStatus3:: ; cb4d
+; see wPlayerSubStatus3
+	db
+wEnemySubStatus4:: ; cb4e
+; see wPlayerSubStatus4
+	db
+wEnemySubStatus5:: ; cb4f
+; see wPlayerSubStatus5
+	db
+
+wPlayerRolloutCount:: db ; cb50
+wPlayerConfuseCount:: db ; cb51
+wPlayerToxicCount:: db ; cb52
+wPlayerDisableCount:: db ; cb53
+wPlayerEncoreCount:: db ; cb54
+wPlayerPerishCount:: db ; cb55
+wPlayerFuryCutterCount:: db ; cb56
+wPlayerProtectCount:: db ; cb57
+
+wEnemyRolloutCount:: db ; cb58
+wEnemyConfuseCount:: db ; cb59
+wEnemyToxicCount:: db ; cb5a
+wEnemyDisableCount:: db ; cb5b
+wEnemyEncoreCount:: db ; cb5c
+wEnemyPerishCount:: db ; cb5d
+wEnemyFuryCutterCount:: db ; cb5e
+wEnemyProtectCount:: db ; cb5f
+
+wPlayerDamageTaken:: dw ; cb60
+wEnemyDamageTaken:: dw ; cb62
+
+wBattleReward:: ds 3 ; cb64
+wBattleAnimParam::
+wKickCounter::
+wPresentPower::
+	db ; cb67
+wBattleScriptBuffer:: ds 40 ; cb68
+
+wBattleScriptBufferAddress:: dw ; cb90
+wTurnEnded:: db ; cb92
+
+	ds 1
+
+wPlayerStats:: ; cb94
+wPlayerAttack:: dw
+wPlayerDefense:: dw
+wPlayerSpeed:: dw
+wPlayerSpAtk:: dw
+wPlayerSpDef:: dw
+	ds 1
+
+wEnemyStats:: ; cb9f
+wEnemyAttack:: dw
+wEnemyDefense:: dw
+wEnemySpeed:: dw
+wEnemySpAtk:: dw
+wEnemySpDef:: dw
+	ds 1
+
+wPlayerStatLevels:: ; cbaa
+; 07 neutral
+wPlayerAtkLevel:: db ; cbaa
+wPlayerDefLevel:: db ; cbab
+wPlayerSpdLevel:: db ; cbac
+wPlayerSAtkLevel:: db ; cbad
+wPlayerSDefLevel:: db ; cbae
+wPlayerAccLevel:: db ; cbaf
+wPlayerEvaLevel:: db ; cbb0
+	ds 1
+wPlayerStatLevelsEnd::
+
+wEnemyStatLevels:: ; cbb2
+; 07 neutral
+wEnemyAtkLevel:: db ; cbb2
+wEnemyDefLevel:: db ; cbb3
+wEnemySpdLevel:: db ; cbb4
+wEnemySAtkLevel:: db ; cbb5
+wEnemySDefLevel:: db ; cbb6
+wEnemyAccLevel:: db ; cbb7
+wEnemyEvaLevel:: db ; cbb8
+	ds 1
+
+wEnemyTurnsTaken:: db ; cbba
+wPlayerTurnsTaken:: db ; cbbb
+	ds 1
+
+wPlayerSubstituteHP:: db ; cbbd
+wEnemySubstituteHP:: db ; cbbe
+
+wUnusedPlayerLockedMove:: db ; cbbf
+	ds 1
+
+wCurPlayerMove:: db ; cbc1
+wCurEnemyMove:: db ; cbc2
+
+wLinkBattleRNCount:: ; cbc3
+; how far through the prng stream
+	db
+
+wEnemyItemState:: db ; cbc4
+	ds 2
+wCurEnemyMoveNum:: db ; cbc7
+
+wEnemyHPAtTimeOfPlayerSwitch:: dw ; cbc8
 wPayDayMoney:: ds 3 ; cbca
 
-wcbcd:: ds 1 ; cbcd
-wcbce:: ds 1 ; cbce
-wcbcf:: ds 1 ; cbcf
-wcbd0:: ds 1 ; cbd0
-wcbd1:: ds 1 ; cbd1
-wcbd2:: ds 1 ; cbd2
-wcbd3:: ds 1 ; cbd3
-wcbd4:: ds 1 ; cbd4
-wcbd5:: ds 1 ; cbd5
-wLastEnemyCounterMove:: ds 1 ; cbd6
-wLastPlayerCounterMove:: ds 1 ; cbd7
-wcbd8:: ds 1 ; cbd8
-wcbd9:: ds 1 ; cbd9
-wcbda:: ds 1 ; cbda
-wcbdb:: ds 1 ; cbdb
-wcbdc:: ds 1 ; cbdc
-wcbdd:: ds 1 ; cbdd
-wcbde:: ds 1 ; cbde
-wcbdf:: ds 1 ; cbdf
-wcbe0:: ds 1 ; cbe0
-wcbe1:: ds 1 ; cbe1
-wcbe2:: ds 1 ; cbe2
-wcbe3:: ds 1 ; cbe3
-wcbe4:: ds 1 ; cbe4
-wcbe5:: ds 1 ; cbe5
-wcbe6:: ds 1 ; cbe6
-wcbe7:: ds 1 ; cbe7
-wcbe8:: ds 1 ; cbe8
-wcbe9:: ds 1 ; cbe9
-wcbea:: ds 1 ; cbea
-wcbeb:: ds 1 ; cbeb
-wcbec:: ds 1 ; cbec
-wcbed:: ds 1 ; cbed
-wcbee:: ds 1 ; cbee
-wcbef:: ds 1 ; cbef
-wcbf0:: ds 1 ; cbf0
-wcbf1:: ds 1 ; cbf1
-wcbf2:: ds 1 ; cbf2
-wcbf3:: ds 1 ; cbf3
-wcbf4:: ds 1 ; cbf4
-wcbf5:: ds 1 ; cbf5
-wcbf6:: ds 1 ; cbf6
-wcbf7:: ds 1 ; cbf7
-wcbf8:: ds 1 ; cbf8
-wLastPlayerMove:: ds 1 ; cbf9
-wLastEnemyMove:: ds 1 ; cbfa
-wcbfb:: ds 1 ; cbfb
-wcbfc:: ds 1 ; cbfc
-wcbfd:: ds 1 ; cbfd
-wcbfe:: ds 1 ; cbfe
-wcbff:: ds 1 ; cbff
-wcc00:: ds 1 ; cc00
-wcc01:: ds 1 ; cc01
-wcc02:: ds 1 ; cc02
-wcc03:: ds 1 ; cc03
-wcc04:: ds 1 ; cc04
-wcc05:: ds 1 ; cc05
-wcc06:: ds 1 ; cc06
-wcc07:: ds 1 ; cc07
-wcc08:: ds 1 ; cc08
-wcc09:: ds 1 ; cc09
-wcc0a:: ds 1 ; cc0a
-wcc0b:: ds 1 ; cc0b
-wcc0c:: ds 1 ; cc0c
-wcc0d:: ds 1 ; cc0d
-wcc0e:: ds 1 ; cc0e
-wcc0f:: ds 1 ; cc0f
-wcc10:: ds 1 ; cc10
-wcc11:: ds 1 ; cc11
-wcc12:: ds 1 ; cc12
-wWildMonMoves:: ds 1 ; cc13
-wOverworldMapEnd::
-	ds NUM_MOVES +- 1
+wSafariMonAngerCount:: db ; cbcd
+wSafariMonEating:: db ; cbce
+	ds 1
+wEnemyBackupDVs:: dw ; cbd0 ; used when enemy is transformed
+wAlreadyDisobeyed:: db ; cbd2
+
+wDisabledMove:: db ; cbd3
+wEnemyDisabledMove:: db ; cbd4
+wWhichMonFaintedFirst:: db ; cbd5
+
+; exists so you can't counter on switch
+wLastPlayerCounterMove:: db ; cbd6
+wLastEnemyCounterMove:: db ; cbd7
+
+wEnemyMinimized:: db ; cbd8
+
+wAlreadyFailed:: db ; cbd9
+
+wBattleParticipantsIncludingFainted:: db ; cbda
+wBattleLowHealthAlarm:: db ; cbdb
+wPlayerMinimized:: db ; cbdc
+wPlayerScreens:: ; cbdd
+; bit
+; 7
+; 6
+; 5
+; 4 reflect
+; 3 light screen
+; 2 safeguard
+; 1
+; 0 spikes
+	db
+
+wEnemyScreens:: ; cbde
+; see wPlayerScreens
+	db
+
+wPlayerSafeguardCount:: db ; cbdf
+wPlayerLightScreenCount:: db ; cbe0
+wPlayerReflectCount:: db ; cbe1
+	ds 1
+
+wEnemySafeguardCount:: db ; cbe3
+wEnemyLightScreenCount:: db ; cbe4
+wEnemyReflectCount:: db ; cbe5
+	ds 2
+
+wBattleWeather:: ; cbe8
+; 00 normal
+; 01 rain
+; 02 sun
+; 03 sandstorm
+; 04 rain stopped
+; 05 sunliight faded
+; 06 sandstorm subsided
+	db
+
+wWeatherCount:: ; cbe9
+; # turns remaining
+	db
+
+wLoweredStat:: db ; cbea
+wEffectFailed:: db ; cbeb
+wFailedMessage:: db ; cbec
+wEnemyGoesFirst:: db ; cbed
+
+wPlayerIsSwitching:: db ; cbee
+wEnemyIsSwitching:: db ; cbef
+
+wPlayerUsedMoves:: ; cbf0
+; add a move that has been used once by the player
+; added in order of use
+	ds NUM_MOVES
+
+wEnemyAISwitchScore:: db ; cbf4
+wEnemySwitchMonParam:: db ; cbf5
+wEnemySwitchMonIndex:: db ; cbf6
+wTempLevel:: db ; cbf7
+wLastPlayerMon:: db ; cbf8
+wLastPlayerMove:: db ; cbf9
+wLastEnemyMove:: db ; cbfa
+
+wPlayerFutureSightCount:: db ; cbfb
+wEnemyFutureSightCount:: db ; cbfc
+
+wGivingExperienceToExpShareHolders:: db ; cbfd
+
+wBackupEnemyMonBaseStats:: ds 5 ; cbfe
+wBackupEnemyMonCatchRate:: db ; cc03
+wBackupEnemyMonBaseExp:: db ; cc04
+
+wPlayerFutureSightDamage:: dw ; cc05
+wEnemyFutureSightDamage:: dw ; cc07
+wPlayerRageCounter:: db ; cc09
+wEnemyRageCounter:: db ; cc0a
+
+wBeatUpHitAtLeastOnce:: db ; cc0b
+
+wPlayerTrappingMove:: db ; cc0c
+wEnemyTrappingMove:: db ; cc0d
+wPlayerWrapCount:: db ; cc0e
+wEnemyWrapCount:: db ; cc0f
+wPlayerCharging:: db ; cc10
+wEnemyCharging:: db ; cc11
+
+wBattleEnded:: db ; cc12
+
+wWildMonMoves:: ds NUM_MOVES ; cc13
 wWildMonPP:: ds NUM_MOVES ; cc17
 
-wcc1b:: ds 1 ; cc1b
-wcc1c:: ds 1 ; cc1c
-wcc1d:: ds 1 ; cc1d
-wcc1e:: ds 1 ; cc1e
-wcc1f:: ds 1 ; cc1f
+wAmuletCoin:: db ; cc1b
+
+wSomeoneIsRampaging:: db ; cc1c
+
+wPlayerJustGotFrozen:: db ; cc1d
+wEnemyJustGotFrozen:: db ; cc1e
+wBattleEnd::
+
+	ds 1
+
+ENDU
+
 ENDU ; cc20
 
+
 SECTION "Video", WRAM0
-wBGMapBuffer:: ds 1 ; cc20
-wcc21:: ds 1 ; cc21
-wcc22:: ds 1 ; cc22
-wcc23:: ds 1 ; cc23
-wcc24:: ds 1 ; cc24
-wcc25:: ds 1 ; cc25
-wcc26:: ds 1 ; cc26
-wcc27:: ds 1 ; cc27
-wcc28:: ds 1 ; cc28
-wcc29:: ds 1 ; cc29
-wcc2a:: ds 1 ; cc2a
-wcc2b:: ds 1 ; cc2b
-wcc2c:: ds 1 ; cc2c
-wcc2d:: ds 1 ; cc2d
-wcc2e:: ds 1 ; cc2e
-wcc2f:: ds 1 ; cc2f
-wcc30:: ds 1 ; cc30
-wcc31:: ds 1 ; cc31
-wcc32:: ds 1 ; cc32
-wcc33:: ds 1 ; cc33
-wcc34:: ds 1 ; cc34
-wcc35:: ds 1 ; cc35
-wcc36:: ds 1 ; cc36
-wcc37:: ds 1 ; cc37
-wcc38:: ds 1 ; cc38
-wcc39:: ds 1 ; cc39
-wcc3a:: ds 1 ; cc3a
-wcc3b:: ds 1 ; cc3b
-wcc3c:: ds 1 ; cc3c
-wcc3d:: ds 1 ; cc3d
-wcc3e:: ds 1 ; cc3e
-wcc3f:: ds 1 ; cc3f
-wcc40:: ds 1 ; cc40
-wcc41:: ds 1 ; cc41
-wcc42:: ds 1 ; cc42
-wcc43:: ds 1 ; cc43
-wcc44:: ds 1 ; cc44
-wcc45:: ds 1 ; cc45
-wcc46:: ds 1 ; cc46
-wcc47:: ds 1 ; cc47
-wBGMapPalBuffer:: ds 1 ; cc48
-wcc49:: ds 1 ; cc49
-wcc4a:: ds 1 ; cc4a
-wcc4b:: ds 1 ; cc4b
-wcc4c:: ds 1 ; cc4c
-wcc4d:: ds 1 ; cc4d
-wcc4e:: ds 1 ; cc4e
-wcc4f:: ds 1 ; cc4f
-wcc50:: ds 1 ; cc50
-wcc51:: ds 1 ; cc51
-wcc52:: ds 1 ; cc52
-wcc53:: ds 1 ; cc53
-wcc54:: ds 1 ; cc54
-wcc55:: ds 1 ; cc55
-wcc56:: ds 1 ; cc56
-wcc57:: ds 1 ; cc57
-wcc58:: ds 1 ; cc58
-wcc59:: ds 1 ; cc59
-wcc5a:: ds 1 ; cc5a
-wcc5b:: ds 1 ; cc5b
-wcc5c:: ds 1 ; cc5c
-wcc5d:: ds 1 ; cc5d
-wcc5e:: ds 1 ; cc5e
-wcc5f:: ds 1 ; cc5f
-wcc60:: ds 1 ; cc60
-wcc61:: ds 1 ; cc61
-wcc62:: ds 1 ; cc62
-wcc63:: ds 1 ; cc63
-wcc64:: ds 1 ; cc64
-wcc65:: ds 1 ; cc65
-wcc66:: ds 1 ; cc66
-wcc67:: ds 1 ; cc67
-wcc68:: ds 1 ; cc68
-wcc69:: ds 1 ; cc69
-wcc6a:: ds 1 ; cc6a
-wcc6b:: ds 1 ; cc6b
-wcc6c:: ds 1 ; cc6c
-wcc6d:: ds 1 ; cc6d
-wcc6e:: ds 1 ; cc6e
-wcc6f:: ds 1 ; cc6f
-wBGMapBufferPtrs:: ds 1 ; cc70
-wcc71:: ds 1 ; cc71
-wcc72:: ds 1 ; cc72
-wcc73:: ds 1 ; cc73
-wcc74:: ds 1 ; cc74
-wcc75:: ds 1 ; cc75
-wcc76:: ds 1 ; cc76
-wcc77:: ds 1 ; cc77
-wcc78:: ds 1 ; cc78
-wcc79:: ds 1 ; cc79
-wcc7a:: ds 1 ; cc7a
-wcc7b:: ds 1 ; cc7b
-wcc7c:: ds 1 ; cc7c
-wcc7d:: ds 1 ; cc7d
-wcc7e:: ds 1 ; cc7e
-wcc7f:: ds 1 ; cc7f
-wcc80:: ds 1 ; cc80
-wcc81:: ds 1 ; cc81
-wcc82:: ds 1 ; cc82
-wcc83:: ds 1 ; cc83
-wcc84:: ds 1 ; cc84
-wcc85:: ds 1 ; cc85
-wcc86:: ds 1 ; cc86
-wcc87:: ds 1 ; cc87
-wcc88:: ds 1 ; cc88
-wcc89:: ds 1 ; cc89
-wcc8a:: ds 1 ; cc8a
-wcc8b:: ds 1 ; cc8b
-wcc8c:: ds 1 ; cc8c
-wcc8d:: ds 1 ; cc8d
-wcc8e:: ds 1 ; cc8e
-wcc8f:: ds 1 ; cc8f
-wcc90:: ds 1 ; cc90
-wcc91:: ds 1 ; cc91
-wcc92:: ds 1 ; cc92
-wcc93:: ds 1 ; cc93
-wcc94:: ds 1 ; cc94
-wcc95:: ds 1 ; cc95
-wcc96:: ds 1 ; cc96
-wcc97:: ds 1 ; cc97
-wColorLayoutPredefID:: ds 1 ; cc98
-wcc99:: ds 1 ; cc99
-wcc9a:: ds 1 ; cc9a
-wcc9b:: ds 1 ; cc9b
-wcc9c:: ds 1 ; cc9c
-wcc9d:: ds 1 ; cc9d
-wcc9e:: ds 1 ; cc9e
-wcc9f:: ds 1 ; cc9f
-wcca0:: ds 1 ; cca0
-wcca1:: ds 1 ; cca1
-wcca2:: ds 1 ; cca2
-wcca3:: ds 1 ; cca3
-wcca4:: ds 1 ; cca4
-wcca5:: ds 1 ; cca5
-wcca6:: ds 1 ; cca6
-wcca7:: ds 1 ; cca7
-wcca8:: ds 1 ; cca8
-wcca9:: ds 1 ; cca9
-wccaa:: ds 1 ; ccaa
-wccab:: ds 1 ; ccab
-wccac:: ds 1 ; ccac
-wccad:: ds 1 ; ccad
-wccae:: ds 1 ; ccae
-wccaf:: ds 1 ; ccaf
-wccb0:: ds 1 ; ccb0
-wccb1:: ds 1 ; ccb1
-wccb2:: ds 1 ; ccb2
-wccb3:: ds 1 ; ccb3
-wccb4:: ds 1 ; ccb4
-wccb5:: ds 1 ; ccb5
-wccb6:: ds 1 ; ccb6
-wccb7:: ds 1 ; ccb7
-wccb8:: ds 1 ; ccb8
-wccb9:: ds 1 ; ccb9
-wccba:: ds 1 ; ccba
-wccbb:: ds 1 ; ccbb
-wccbc:: ds 1 ; ccbc
-wccbd:: ds 1 ; ccbd
-wccbe:: ds 1 ; ccbe
-wccbf:: ds 1 ; ccbf
-wccc0:: ds 1 ; ccc0
-wccc1:: ds 1 ; ccc1
-wccc2:: ds 1 ; ccc2
-wccc3:: ds 1 ; ccc3
-wccc4:: ds 1 ; ccc4
-wccc5:: ds 1 ; ccc5
-wccc6:: ds 1 ; ccc6
-wccc7:: ds 1 ; ccc7
-wccc8:: ds 1 ; ccc8
-wccc9:: ds 1 ; ccc9
-wccca:: ds 1 ; ccca
-wcccb:: ds 1 ; cccb
-wcccc:: ds 1 ; cccc
-wcccd:: ds 1 ; cccd
-wccce:: ds 1 ; ccce
-wcccf:: ds 1 ; cccf
-wccd0:: ds 1 ; ccd0
-wccd1:: ds 1 ; ccd1
-wccd2:: ds 1 ; ccd2
-wccd3:: ds 1 ; ccd3
-wccd4:: ds 1 ; ccd4
-wccd5:: ds 1 ; ccd5
-wccd6:: ds 1 ; ccd6
-wccd7:: ds 1 ; ccd7
-wccd8:: ds 1 ; ccd8
+
+; wBGMapBuffer
+wBGMapBuffer::     ds 40 ; cc20
+wBGMapPalBuffer::  ds 40 ; cc48
+wBGMapBufferPtrs:: ds 40 ; cc70 ; 20 bg map addresses (16x8 tiles)
+wBGMapBufferEnd::
+
+wSGBPredef:: db ; cc98
+
+wPlayerHPPal:: db ; cc99
+wEnemyHPPal:: db ; cc9a
+
+wHPPals:: ds PARTY_LENGTH
+wCurHPPal:: db
+
+	ds 7
+
+wSGBPals:: ds 48 ; cca9
 
 wAttrmap:: ; ccd9
-	ds SCREEN_HEIGHT * SCREEN_WIDTH
-wAttrmapEnd:: ; ce41
+; 20x18 grid of bg tile attributes for 8x8 tiles
+; read horizontally from the top row
+;		bit 7: priority
+;		bit 6: y flip
+;		bit 5: x flip
+;		bit 4: pal # (non-cgb)
+;		bit 3: vram bank (cgb only)
+;		bit 2-0: pal # (cgb only)
+	ds SCREEN_WIDTH * SCREEN_HEIGHT
+wAttrmapEnd::
 
 wce41:: ds 1 ; ce41
 wce42:: ds 1 ; ce42
@@ -2084,43 +988,92 @@ wce4d:: ds 1 ; ce4d
 wce4e:: ds 1 ; ce4e
 wce4f:: ds 1 ; ce4f
 wce50:: ds 1 ; ce50
-wOtherPlayerLinkMode:: ds 1 ; ce51
-wOtherPlayerLinkAction:: ds 1 ; ce52
-wce53:: ds 1 ; ce53
-wce54:: ds 1 ; ce54
-wce55:: ds 1 ; ce55
-wPlayerLinkAction:: ds 1 ; ce56
-wce57:: ds 1 ; ce57
-wce58:: ds 1 ; ce58
-wce59:: ds 1 ; ce59
-wce5a:: ds 1 ; ce5a
-wLinkTimeoutFrames:: ds 2
-wce5d:: ds 2 ; ce5d
-wMonType:: ds 1 ; ce5f
-wCurSpecies:: ds 1 ; ce60
-wNamedObjectTypeBuffer:: ds 1 ; ce61
-wce62:: ds 1 ; ce62
-wce63::
-wJumpTableIndex::
-	db ; ce63
-wce64:: ds 1 ; ce64
-wce65::
-wIntroSceneTimer::
-	db ; ce65
-wce66:: ds 1 ; ce66
 
-wRequested2bpp:: ds 1 ; ce67
+wOtherPlayerLinkMode:: db ; ce51
+wOtherPlayerLinkAction:: ; ce52
+wBattleAction:: db
+	ds 3
+wPlayerLinkAction:: db ; ce56
+wce57:: db
+	ds 3
+wLinkTimeoutFrames:: dw ; ce5b
+wce5d:: dw
+
+wMonType:: db ; ce5f
+
+wCurSpecies:: db ; ce60
+
+wNamedObjectTypeBuffer:: db
+
+	ds 1
+
+wJumptableIndex:: db
+
+UNION ; ce64
+; unidentified
+wce64:: db
+wce65:: db
+wce66:: db
+
+NEXTU ; ce64
+; intro and title data
+wIntroSceneFrameCounter:: db
+UNION ; ce65
+wIntroSceneTimer:: db
+NEXTU ; ce65
+wTitleScreenTimer:: dw
+ENDU
+
+NEXTU ; ce64
+; pokedex
+wPrevDexEntryJumptableIndex:: db
+wPrevDexEntryBackup::
+wPokedexStatus:: db
+
+NEXTU ; ce64
+; pokegear
+wPokegearCard:: db
+wPokegearMapRegion:: db
+wPokegearCE66:: db
+
+NEXTU ; ce64
+; pack
+wPackJumptableIndex:: db
+wCurPocket:: db
+wPackUsedItem:: db
+
+NEXTU ; ce64
+; trainer card badges
+wTrainerCardBadgeFrameCounter:: db
+wTrainerCardBadgeTileID:: db
+wTrainerCardBadgeAttributes:: db
+
+NEXTU ; ce64
+; miscellaneous
+wFrameCounter::
+wMomBankDigitCursorPosition::
+wNamingScreenLetterCase::
+wSlotsDelay::
+	db
+wPrinterQueueLength:: db
+wSlotsCE66:: db
+ENDU ; ce67
+
+wRequested2bpp::
+wRequested2bppSize:: db ; ce67
 wRequested2bppSource:: dw ; ce68
 wRequested2bppDest:: dw ; ce6a
 
-wRequested1bpp:: ds 1 ; ce6c
+wRequested1bpp::
+wRequested1bppSize:: db ; ce6c
 wRequested1bppSource:: dw ; ce6d
 wRequested1bppDest:: dw ; ce6f
 
-wSecsSince:: ds 1 ; ce71
-wMinsSince:: ds 1 ; ce72
-wHoursSince:: ds 1 ; ce73
-wDaysSince:: ds 1 ; ce74
+wSecondsSince:: db ; ce71
+wMinutesSince:: db ; ce72
+wHoursSince:: db ; ce73
+wDaysSince:: db ; ce74
+
 wce75:: ds 1 ; ce75
 wce76:: ds 1 ; ce76
 wce77:: ds 1 ; ce77
@@ -2133,353 +1086,523 @@ wce7d:: ds 1 ; ce7d
 wce7e:: ds 1 ; ce7e
 wce7f:: ds 1 ; ce7f
 wce80:: ds 1 ; ce80
-wce81:: ds 1 ; ce81
-wce82:: ds 1 ; ce82
 
-wPlayerStepVectorX:: ds 1 ; ce83
-wPlayerStepVectorY:: ds 1 ; ce84
-wPlayerStepFlags:: ds 1 ; ce85
-wPlayerStepDirection:: ds 1 ; ce86
+wPlayerBGMapOffsetX:: db ; used in FollowNotExact; unit is pixels
+wPlayerBGMapOffsetY:: db ; used in FollowNotExact; unit is pixels
 
-wce87:: ds 1 ; ce87
-wce88:: ds 1 ; ce88
+wPlayerStepVectorX:: db ; ce83
+wPlayerStepVectorY:: db ; ce84
+wPlayerStepFlags:: db ; ce85
+wPlayerStepDirection:: db ; ce86
+
+wPlayerNextMovement:: db ; ce87
+wPlayerMovement:: db ; ce88
 wce89:: ds 1 ; ce89
 wce8a:: ds 1 ; ce8a
-wMovementObject:: ds 1 ; ce8b
-wMovementDataBank:: ds 1 ; ce8c
+wMovementObject:: db ; ce8b
+wMovementDataBank:: db ; ce8c
 wMovementDataAddress:: dw ; ce8d
 wce8f:: ds 1 ; ce8f
 wce90:: ds 1 ; ce90
 wce91:: ds 1 ; ce91
 wce92:: ds 1 ; ce92
-wce93:: ds 1 ; ce93
-wce94:: ds 1 ; ce94
-wce95:: ds 1 ; ce95
-wce96:: ds 1 ; ce96
-wce97:: ds 1 ; ce97
-wce98:: ds 1 ; ce98
-wce99:: ds 1 ; ce99
-wce9a:: ds 1 ; ce9a
-wce9b:: ds 1 ; ce9b
-wce9c:: ds 1 ; ce9c
-wce9d:: ds 1 ; ce9d
-wce9e:: ds 1 ; ce9e
-wce9f:: ds 1 ; ce9f
-wcea0:: ds 1 ; cea0
-wcea1:: ds 1 ; cea1
-wcea2:: ds 1 ; cea2
+wMovementByteWasControlSwitch:: db ; ce93
+wMovementPointer:: dw ; ce94
 
-wTileDown:: ds 1 ; cea3
-wTileUp:: ds 1 ; cea4
-wTileLeft:: ds 1 ; cea5
-wTileRight:: ds 1 ; cea6
-wTilePermissions:: ds 1 ; cea7
+	ds 3
 
-wWindowData::
+wTempObjectCopyMapObjectIndex:: db ; ce99
+wTempObjectCopySprite:: db ; ce9a
+wTempObjectCopySpriteVTile:: db ; ce9b
+wTempObjectCopyPalette:: db ; ce9c
+wTempObjectCopyMovement:: db ; ce9d
+wTempObjectCopyRange:: db ; ce9e
+wTempObjectCopyX:: db ; ce9f
+wTempObjectCopyY:: db ; cea0
+wTempObjectCopyRadius:: db ; cea1
+
+	ds 1
+
+wTileDown::  db ; cea3
+wTileUp::    db ; cea4
+wTileLeft::  db ; cea5
+wTileRight:: db ; cea6
+
+wTilePermissions:: db ; cea7
+
 wWindowStackPointer:: dw ; cea8
-wMenuJoypad:: ds 1 ; ceaa
-wMenuSelection:: ds 1 ; ceab
-wceac:: ds 1 ; ceac
-wWhichIndexSet:: ds 1 ; cead
-wceae:: ds 1 ; ceae
-wceaf:: ds 1 ; ceaf
-wceb0:: ds 1 ; ceb0
-wceb1:: ds 1 ; ceb1
-wceb2:: ds 1 ; ceb2
-wceb3:: ds 1 ; ceb3
-wceb4:: ds 1 ; ceb4
-wceb5:: ds 1 ; ceb5
-wceb6:: ds 1 ; ceb6
-wceb7:: ds 1 ; ceb7
-wWindowDataEnd::
+wMenuJoypad:: db ; ceaa
+wMenuSelection:: db ; ceab
+wMenuSelectionQuantity:: db ; ceac
+wWhichIndexSet:: db ; cead
+wScrollingMenuCursorPosition:: db ; ceae
+wWindowStackSize:: db ; ceaf
 
-wMenuHeader::
-wMenuFlags::
-wceb8:: ds 1 ; ceb8
-wMenuBorderTopCoord:: ds 1 ; ceb9
-wMenuBorderLeftCoord:: ds 1 ; ceba
-wMenuBorderBottomCoord:: ds 1 ; cebb
-wMenuBorderRightCoord:: ds 1 ; cebc
-wMenuDataPointer:: dw ; cebd
-wMenuCursorBuffer:: ds 1 ; cebf
-wcec0:: ds 1 ; cec0
-wcec1:: ds 1 ; cec1
-wcec2:: ds 1 ; cec2
-wcec3:: ds 1 ; cec3
-wcec4:: ds 1 ; cec4
-wcec5:: ds 1 ; cec5
-wcec6:: ds 1 ; cec6
-wcec7:: ds 1 ; cec7
+	ds 8
+
+; menu header
+wMenuHeader:: ; ceb8
+wMenuFlags:: db
+wMenuBorderTopCoord:: db
+wMenuBorderLeftCoord:: db
+wMenuBorderBottomCoord:: db
+wMenuBorderRightCoord:: db
+wMenuDataPointer:: dw
+wMenuCursorBuffer:: dw
+	ds 7
 wMenuHeaderEnd::
 
 wMenuData::
-wMenuDataFlags:: ds 1 ; cec8
-wMenuDataItems:: ds 1 ; cec9
-wMenuDataIndicesPointer:: ds 1 ; ceca
-wMenuDataBank:: ds 1 ; cecb
+wMenuDataFlags:: db ; cec8
+
+UNION ; cec9
+; Vertical Menu/DoNthMenu/SetUpMenu
+wMenuDataItems:: db ; cec9
+wMenuDataIndicesPointer:: dw ; ceca
 wMenuDataDisplayFunctionPointer:: dw ; cecc
-wMenuDataPointerTableAddr:: ds 1 ; cece
-wcecf:: ds 1 ; cecf
-wced0:: ds 1 ; ced0
-wced1:: ds 1 ; ced1
-wced2:: ds 1 ; ced2
-wced3:: ds 1 ; ced3
-wced4:: ds 1 ; ced4
-wced5:: ds 1 ; ced5
-wced6:: ds 1 ; ced6
-wced7:: ds 1 ; ced7
+wMenuDataPointerTableAddr:: dw ; cece
+
+NEXTU ; cec9
+; 2D Menu
+wMenuData_2DMenuDimensions:: db ; cec9
+wMenuData_2DMenuSpacing:: db ; ceca
+wMenuData_2DMenuItemStringsBank:: db ; cecb
+wMenuData_2DMenuItemStringsAddr:: dw ; cecc
+wMenuData_2DMenuFunctionBank:: db ; cece
+wMenuData_2DMenuFunctionAddr:: dw ; cecf
+
+NEXTU ; cec9
+; Scrolling Menu
+wMenuData_ScrollingMenuHeight:: db ; cec9
+wMenuData_ScrollingMenuWidth:: db ; ceca
+wMenuData_ScrollingMenuItemFormat:: db ; cecb
+wMenuData_ItemsPointerBank:: db ; cecc
+wMenuData_ItemsPointerAddr:: dw ; cecd
+wMenuData_ScrollingMenuFunction1:: ds 3 ; cecf
+wMenuData_ScrollingMenuFunction2:: ds 3 ; ced2
+wMenuData_ScrollingMenuFunction3:: ds 3 ; ced5
+ENDU ; ced8
 wMenuDataEnd::
 
-wMenuData3::
-w2DMenuCursorInitY:: ds 1 ; ced8
-wced9:: ds 1 ; ced9
-wceda:: ds 1 ; ceda
-wcedb:: ds 1 ; cedb
-w2DMenuFlags1:: ds 1 ; cedc
-wcedd:: ds 1 ; cedd
-wcede:: ds 1 ; cede
-wMenuJoypadFilter:: ds 1 ; cedf
-wMenuCursorY:: ds 1 ; cee0
-wcee1:: ds 1 ; cee1
-wcee2:: ds 1 ; cee2
-wCursorCurrentTile:: ds 1 ; cee3
-wcee4:: ds 1 ; cee4
-wcee5:: ds 1 ; cee5
-wcee6:: ds 1 ; cee6
-wcee7:: ds 1 ; cee7
-wMenuData3End::
+w2DMenuData::
+w2DMenuCursorInitY:: db ; ced8
+w2DMenuCursorInitX:: db ; ced9
+w2DMenuNumRows:: db ; ceda
+w2DMenuNumCols:: db ; cedb
+w2DMenuFlags1:: ; cedc
+; bit 7: Disable checking of wMenuJoypadFilter
+; bit 6: Enable sprite animations
+; bit 5: Wrap around vertically
+; bit 4: Wrap around horizontally
+; bit 3: Set bit 7 in w2DMenuFlags2 and exit the loop if bit 5 is disabled and we tried to go too far down
+; bit 2: Set bit 7 in w2DMenuFlags2 and exit the loop if bit 5 is disabled and we tried to go too far up
+; bit 1: Set bit 7 in w2DMenuFlags2 and exit the loop if bit 4 is disabled and we tried to go too far left
+; bit 0: Set bit 7 in w2DMenuFlags2 and exit the loop if bit 4 is disabled and we tried to go too far right
+	db
+w2DMenuFlags2:: db ; cedd
+w2DMenuCursorOffsets:: db ; cede
+wMenuJoypadFilter:: db ; cedf
+w2DMenuDataEnd::
+wMenuCursorY:: db ; cee0
+wMenuCursorX:: db ; cee1
+wCursorOffCharacter:: db ; cee2
+wCursorCurrentTile:: dw ; cee3
 
-wOverworldDelay:: ds 1 ; cee8
-wTextDelayFrames:: ds 1 ; cee9
-wVBlankOccurred:: ds 1 ; ceea
+	ds 3
 
-wceeb:: ds 1 ; ceeb
-wceec:: ds 1 ; ceec
+wOverworldDelay:: db ; cee8
+wTextDelayFrames:: db ; cee9
+wVBlankOccurred:: db ; ceea
 
-wMovementBufferCount:: ; ceed
-wceed:: ds 1 ; ceed
+wceeb:: db
+wDefaultSpawnpoint:: db
 
-wMovementBufferObject::
-wceee:: ds 1 ; ceee
+UNION ; ceed
+; mail temp storage
+wTempMail:: mailmsg wTempMail
 
-wTemporaryBuffer::
-wBugContestFirstPlaceScore::
-wceef:: ds 1 ; ceef
-wcef0:: ds 1 ; cef0
-wcef1:: ds 1 ; cef1
+NEXTU ; ceed
+; mon buffer
+wBufferMonNick:: ds MON_NAME_LENGTH ; ceed
+wBufferMonOT:: ds NAME_LENGTH ; cef8
+wBufferMon:: party_struct wBufferMon ; cf03
+	ds 8
 
-wMovementBuffer::
-wcef2:: ds 1 ; cef2
+NEXTU ; ceed
+; bug-catching contest
+wBugContestResults::
+	bugcontestwinner wBugContestFirstPlace
+	bugcontestwinner wBugContestSecondPlace
+	bugcontestwinner wBugContestThirdPlace
+wBugContestWinnersEnd::
+	bugcontestwinner wBugContestTemp
+	ds 4
+wBugContestWinnerName:: ds NAME_LENGTH
 
-wBugContestSecondPlaceScore::
-wcef3:: ds 1 ; cef3
-wcef4:: ds 1 ; cef4
-wcef5:: ds 1 ; cef5
-wcef6:: ds 1 ; cef6
-wBugContestThirdPlaceScore::
-wcef7:: ds 1 ; cef7
-wcef8:: ds 1 ; cef8
-wcef9:: ds 1 ; cef9
-wcefa:: ds 1 ; cefa
-wcefb:: ds 1 ; cefb
-wcefc:: ds 1 ; cefc
-wcefd:: ds 1 ; cefd
-wcefe:: ds 1 ; cefe
-wceff:: ds 1 ; ceff
-wcf00:: ds 1 ; cf00
-wBugContestWinnerName::
-wcf01:: ds 1 ; cf01
-wcf02:: ds 1 ; cf02
-wcf03:: ds 1 ; cf03
-wcf04:: ds 1 ; cf04
-wcf05:: ds 1 ; cf05
-wcf06:: ds 1 ; cf06
-wcf07:: ds 1 ; cf07
-wcf08:: ds 1 ; cf08
-wcf09:: ds 1 ; cf09
-wcf0a:: ds 1 ; cf0a
-wcf0b:: ds 1 ; cf0b
-wcf0c:: ds 1 ; cf0c
-wcf0d:: ds 1 ; cf0d
-wcf0e:: ds 1 ; cf0e
-wcf0f:: ds 1 ; cf0f
-wcf10:: ds 1 ; cf10
-wcf11:: ds 1 ; cf11
-wcf12:: ds 1 ; cf12
-wcf13:: ds 1 ; cf13
-wcf14:: ds 1 ; cf14
-wcf15:: ds 1 ; cf15
-wcf16:: ds 1 ; cf16
-wcf17:: ds 1 ; cf17
-wcf18:: ds 1 ; cf18
-wcf19:: ds 1 ; cf19
-wcf1a:: ds 1 ; cf1a
-wcf1b:: ds 1 ; cf1b
-wcf1c:: ds 1 ; cf1c
-wcf1d:: ds 1 ; cf1d
-wcf1e:: ds 1 ; cf1e
-wcf1f:: ds 1 ; cf1f
-wcf20:: ds 1 ; cf20
-wcf21:: ds 1 ; cf21
-wcf22:: ds 1 ; cf22
-wcf23:: ds 1 ; cf23
-wcf24:: ds 1 ; cf24
-wcf25:: ds 1 ; cf25
-wcf26:: ds 1 ; cf26
-wcf27:: ds 1 ; cf27
-wcf28:: ds 1 ; cf28
-wSeenTrainerBank::
-wcf29:: ds 1 ; cf29
-wSeenTrainerDistance::
-wcf2a:: ds 1 ; cf2a
-wSeenTrainerDirection::
-wcf2b:: ds 1 ; cf2b
+NEXTU ; ceed
+; mart items
+wMartItem1BCD:: ds 3
+wMartItem2BCD:: ds 3
+wMartItem3BCD:: ds 3
+wMartItem4BCD:: ds 3
+wMartItem5BCD:: ds 3
+wMartItem6BCD:: ds 3
+wMartItem7BCD:: ds 3
+wMartItem8BCD:: ds 3
+wMartItem9BCD:: ds 3
+wMartItem10BCD:: ds 3
+
+NEXTU ; ceed
+; town map data
+wTownMapPlayerIconLandmark:: db
+UNION
+wTownMapCursorLandmark:: db
+wTownMapCursorObjectPointer:: dw
+NEXTU
+wTownMapCursorCoordinates:: dw
+ENDU
+
+NEXTU ; ceed
+; phone call data
+wPhoneScriptBank:: db
+wPhoneCaller:: dw
+
+NEXTU ; ceed
+; radio data
+wCurRadioLine:: db
+wNextRadioLine:: db
+wRadioTextDelay:: db
+wNumRadioLinesPrinted:: db
+wOaksPKMNTalkSegmentCounter:: db
+	ds 5
+wRadioText:: ds 2 * SCREEN_WIDTH
+wRadioTextEnd::
+
+NEXTU ; ceed
+; lucky number show
+wLuckyNumberDigitsBuffer:: ds 5
+
+NEXTU ; ceed
+; movement buffer data
+wMovementBufferCount:: db
+wMovementBufferObject:: db
+wUnusedMovementBufferBank:: db
+wUnusedMovementBufferPointer:: dw
+wMovementBuffer:: ds 55
+
+NEXTU ; ceed
+; box printing
+wWhichBoxMonToPrint:: db
+wFinishedPrintingBox:: db
+wAddrOfBoxToPrint:: dw
+wBankOfBoxToPrint:: db
+wWhichBoxToPrint:: db
+
+NEXTU ; ceed
+; trainer HUD data
+	ds 1
+wPlaceBallsDirection:: db
+wTrainerHUDTiles:: ds 4
+
+NEXTU ; ceed
+; earthquake data buffer
+wEarthquakeMovementDataBuffer:: ds 5
+
+NEXTU ; ceed
+; miscellaneous
+wTempDayOfWeek::
+wKeepSevenBiasChance:: ; used in the slots to handle the favoring of 7 symbol streaks
+	db
+	ds 2
+wStartFlypoint:: db
+wEndFlypoint:: db
+
+NEXTU ; ceed
+; unidentified
+wceed:: db
+wceee:: db
+wceef:: db
+
+	ds 1
+wcef1:: ds 2
+wcef3:: ds 2
+	ds 2
+wcef7:: ds 1
+wcef8:: ds 1
+	ds 1
+wcefa:: ds 1
+wcefb:: ds 1
+wcefc:: ds 1
+wcefd:: ds 1
+wcefe:: ds 1
+wceff:: ds 2
+	ds 1
+wcf02:: ds 1
+wcf03:: ds 1
+wcf04:: ds 1
+	ds 19
+wcf18:: ds 1
+wcf19:: ds 1
+wcf1a:: ds 1
+wcf1b:: ds 1
+wcf1c:: ds 1
+wcf1d:: ds 1
+wcf1e:: ds 1
+wcf1f:: ds 2
+wcf21:: ds 2
+	ds 6
+
+UNION ; cf29
+; trainer data
+wSeenTrainerBank:: db
+wSeenTrainerDistance:: db
+wSeenTrainerDirection:: db
 wTempTrainer::
-wcf2c:: ds 1 ; cf2c
-wcf2d:: ds 1 ; cf2d
-wcf2e:: ds 1 ; cf2e
-wcf2f:: ds 1 ; cf2f
-wcf30:: ds 1 ; cf30
-wcf31:: ds 1 ; cf31
-wWinTextPointer:: dw ; cf32
-wLossTextPointer:: dw ; cf34
-wcf36:: ds 1 ; cf36
-wcf37:: ds 1 ; cf37
-wRunningTrainerBattleScript::
-wcf38:: ds 1 ; cf38
+wTempTrainerEventFlag:: dw
+wTempTrainerClass:: db
+wTempTrainerID:: db
+wSeenTextPointer:: dw
+wWinTextPointer:: dw
+wLossTextPointer:: dw
+wScriptAfterPointer:: dw
+wRunningTrainerBattleScript:: db
 wTempTrainerEnd::
-wcf39:: ds 1 ; cf39
-wcf3a:: ds 1 ; cf3a
-wcf3b:: ds 1 ; cf3b
-wcf3c:: ds 1 ; cf3c
-wcf3d:: ds 1 ; cf3d
-wcf3e:: ds 1 ; cf3e
-wcf3f:: ds 1 ; cf3f
-wcf40:: ds 1 ; cf40
-wcf41:: ds 1 ; cf41
+
+NEXTU ; cf29
+; menu items list
+wMenuItemsList:: ds 16
+wMenuItemsListEnd::
+
+NEXTU ; cf29
+; fruit tree data
+wCurFruitTree:: db
+wCurFruit:: db
+
+NEXTU ; cf29
+; item ball data
+wItemBallData::
+wItemBallItemID:: db
+wItemBallQuantity:: db
+wItemBallDataEnd::
+
+NEXTU ; cf29
+; hidden item data
+wHiddenItemData::
+wHiddenItemEvent:: dw
+wHiddenItemID:: db
+wHiddenItemDataEnd::
+
+NEXTU ; cf29
+; elevator data
+wElevatorData::
+wElevatorPointerBank:: db
+wElevatorPointer:: dw
+wElevatorOriginFloor:: db
+wElevatorDataEnd::
+
+NEXTU ; cf29
+; coord event data
+wCurCoordEvent::
+wCurCoordEventSceneID:: db
+wCurCoordEventMapY:: db
+wCurCoordEventMapX:: db
+	ds 1
+wCurCoordEventScriptAddr:: dw
+
+NEXTU ; cf29
+; BG event data
+wCurBGEvent::
+wCurBGEventYCoord:: db
+wCurBGEventXCoord:: db
+wCurBGEventType:: db
+wCurBGEventScriptAddr:: dw
+
+NEXTU ; cf29
+; mart data
+wMartType:: db
+wMartPointerBank:: db
+wMartPointer:: dw
+wMartJumptableIndex:: db
+wBargainShopFlags:: db
+
+NEXTU ; cf29
+; player movement data
+wCurInput::
+wFacingTileID:: db
+wWalkingIntoNPC:: db
+wWalkingIntoLand:: db
+wWalkingIntoEdgeWarp:: db
+wMovementAnimation:: db
+wWalkingDirection:: db
+wFacingDirection:: db
+wWalkingX:: db
+wWalkingY:: db
+wWalkingTile:: db
+	ds 6
+wPlayerTurningDirection:: db
+
+NEXTU ; cf29
+; std script buffer
+	ds 1
+wJumpStdScriptBuffer:: ds 3
+
+NEXTU ; cf29
+; phone script data
+wCheckedTime:: db
+wPhoneListIndex:: db
+wNumAvailableCallers:: db
+wAvailableCallers:: ds CONTACT_LIST_SIZE
+
+NEXTU ; cf29
+; phone caller contact
+	ds 1
+wCallerContact:: ds PHONE_CONTACT_SIZE
+
+NEXTU ; cf29
+; backup menu data
+	ds 7
+wMenuCursorBufferBackup:: db
+wMenuScrollPositionBackup:: db
+
+NEXTU ; cf29
+; poison step data
+wPoisonStepData::
+wPoisonStepFlagSum:: db
+wPoisonStepPartyFlags:: ds PARTY_LENGTH
+wPoisonStepDataEnd::
+ENDU ; cf3a
+
+	ds 1
+
+wBoxAlignment:: db
+wUnusedBufferCF3C:: dw
+wFXAnimID:: dw
+ENDU ; cf40
+
+wPlaceBallsX:: db ; cf40
+wPlaceBallsY:: db ; cf41
 wcf42:: ds 1 ; cf42
-wBGP:: ds 1
-wOBP0:: ds 1
-wOPB1:: ds 1
-wcf46:: ds 1 ; cf46
-wcf47:: ds 1 ; cf47
-wMonOrItemNameBuffer:: ds 1 ; cf48
-wcf49:: ds 1 ; cf49
-wcf4a:: ds 1 ; cf4a
-wcf4b:: ds 1 ; cf4b
-wcf4c:: ds 1 ; cf4c
-wcf4d:: ds 1 ; cf4d
-wcf4e:: ds 1 ; cf4e
-wcf4f:: ds 1 ; cf4f
-wcf50:: ds 1 ; cf50
-wcf51:: ds 1 ; cf51
-wcf52:: ds 1 ; cf52
-wcf53:: ds 1 ; cf53
-wcf54:: ds 1 ; cf54
-wcf55:: ds 1 ; cf55
-wcf56:: ds 1 ; cf56
-wcf57:: ds 1 ; cf57
-wcf58:: ds 1 ; cf58
-wcf59:: ds 1 ; cf59
-wcf5a:: ds 1 ; cf5a
-wcf5b:: ds 1 ; cf5b
-wcf5c:: ds 1 ; cf5c
-wcf5d:: ds 1 ; cf5d
-wcf5e:: ds 1 ; cf5e
-wcf5f:: ds 1 ; cf5f
-wcf60:: ds 1 ; cf60
-wcf61:: ds 1 ; cf61
-wcf62:: ds 1 ; cf62
-wcf63:: ds 1 ; cf63
-wcf64:: ds 1 ; cf64
-wcf65:: ds 1 ; cf65
-wcf66:: ds 1 ; cf66
-wcf67:: ds 1 ; cf67
-wcf68:: ds 1 ; cf68
-wcf69:: ds 1 ; cf69
-wcf6a:: ds 1 ; cf6a
+
+; palette backups?
+wBGP:: db
+wOBP0:: db
+wOBP1:: db
+
+wNumHits:: db ; cf46
+
+	ds 1
+
+wMonOrItemNameBuffer:: ds 22 ; cf48
+wTMHMMoveNameBackup:: ds MOVE_NAME_LENGTH ; cf5e
 
 wStringBuffer1:: ds 19 ; cf6b
 wStringBuffer2:: ds 19 ; cf7e
 wStringBuffer3:: ds 19 ; cf91
 wStringBuffer4:: ds 19 ; cfa4
+wStringBuffer5:: ds 13 ; cfb7
 
-UNION
-wStringBuffer5:: ds 19 ; cfb7
-NEXTU
-	ds 15
-wCurBattleMon:: ds 1 ; cfc6
-wcfc7:: ds 1 ; cfc7
-wcfc8:: ds 1 ; cfc8
-wPartyMenuCursor:: ds 1 ; cfc9
-ENDU
+wBattleMenuCursorBuffer:: dw ; cfc4
+wCurBattleMon:: db ; cfc6
+wCurMoveNum:: db; cfc7
+wLastPocket:: db ; cfc8
 
-wcfca:: ds 1 ; cfca
-wcfcb:: ds 1 ; cfcb
-wcfcc:: ds 1 ; cfcc
-wcfcd:: ds 1 ; cfcd
-wcfce:: ds 1 ; cfce
-wcfcf:: ds 1 ; cfcf
-wcfd0:: ds 1 ; cfd0
-wcfd1:: ds 1 ; cfd1
-wcfd2:: ds 1 ; cfd2
-wcfd3:: ds 1 ; cfd3
-wcfd4:: ds 1 ; cfd4
-wcfd5:: ds 1 ; cfd5
-wcfd6:: ds 1 ; cfd6
-wcfd7:: ds 1 ; cfd7
-wQueuedScriptBank:: ds 1 ; cfd8
-wQueuedScriptAddr:: ds 1 ; cfd9
-wcfda:: ds 1 ; cfda
-wPredefID:: ds 1 ; cfdb
+wPartyMenuCursor:: db ; cfc9
+wItemsPocketCursor:: db ; cfca
+wKeyItemsPocketCursor:: db ; cfcb
+wBallsPocketCursor:: db ; cfcc
+wTMHMPocketCursor:: db ; cfcd
+
+	ds 1
+
+wItemsPocketScrollPosition:: db ; cfcf
+wKeyItemsPocketScrollPosition:: db; cfd0
+wBallsPocketScrollPosition:: db ; cfd1
+wTMHMPocketScrollPosition:: db ; cfd2
+
+wSwitchMon::
+wSwitchItem::
+wMoveSwapBuffer::
+wcfd3::
+	db
+
+wMenuScrollPosition:: ds 4
+
+wQueuedScriptBank:: db
+wQueuedScriptAddr:: dw
+
+wPredefID:: db ; cfdb
 wPredefTemp:: dw ; cfdc
 wPredefAddress:: dw ; cfde
 wFarCallBCBuffer:: dw ; cfe0
-wcfe2:: ds 1 ; cfe2
-wcfe3:: ds 1 ; cfe3
-wFieldMoveSucceeded:: ds 1 ; cfe4
-wVramState:: ds 1
-wcfe6:: ds 1 ; cfe6
-wcfe7:: ds 1 ; cfe7
-wcfe8:: ds 1 ; cfe8
-wBattleResult:: ds 1 ; cfe9
+	ds 1
+
+wNumMoves:: db
+
+wFieldMoveSucceeded::
+wItemEffectSucceeded::
+wBattlePlayerAction::
+; 0 - use move
+; 1 - use item
+; 2 - switch
+wSolvedUnownPuzzle::
+	db ; cfe4
+
+wVramState:: ; cfe5
+; bit 0: overworld sprite updating on/off
+; bit 6: something to do with text
+; bit 7: on when surf initiates
+;        flickers when climbing waterfall
+	db
+
+	ds 3
+
+wBattleResult:: ; cfe9
+; WIN, LOSE, or DRAW
+; bit 7: box full
+	db
 wcfea:: ds 1 ; cfea
-wUsingItemWithSelect:: ds 1 ; cfeb
-wcfec:: ds 1 ; cfec
-wcfed:: ds 1 ; cfed
-wcfee:: ds 1 ; cfee
-wcfef:: ds 1 ; cfef
-wcff0:: ds 1 ; cff0
-wcff1:: ds 1 ; cff1
-wcff2:: ds 1 ; cff2
-wcff3:: ds 1 ; cff3
-wcff4:: ds 1 ; cff4
-wcff5:: ds 1 ; cff5
-wcff6:: ds 1 ; cff6
-wcff7:: ds 1 ; cff7
-wcff8:: ds 1 ; cff8
-wcff9:: ds 1 ; cff9
-wcffa:: ds 1 ; cffa
-wcffb:: ds 1 ; cffb
+wUsingItemWithSelect:: db ; cfeb
+
+UNION ; cfec
+; mart data
+wCurMart:: ds 16
+wCurMartEnd::
+
+NEXTU ; cfec
+; elevator data
+wCurElevator:: db
+wCurElevatorFloors:: db
+
+NEXTU ; cfec
+; mailbox data
+wCurMessageScrollPosition:: db
+wCurMessageIndex:: db
+wMailboxCount:: db
+wMailboxItems:: ds MAILBOX_CAPACITY
+wMailboxEnd::
+ENDU ; cffc
+
 wcffc:: ds 1 ; cffc
 wcffd:: ds 1 ; cffd
-wcffe:: ds 1 ; cffe
-wcfff:: ds 1 ; cfff
+wUnusedCFFE:: dw ; cffe
 
-SECTION "WRAM1", WRAMX, BANK[$1]
+
+SECTION "WRAM 1", WRAMX
+
 wd000:: ds 1 ; d000
 wd001:: ds 1 ; d001
-wd002:: ds 1 ; d002
-wd003:: ds 1 ; d003
+wCurItem:: db ; d002
+wCurItemQuantity:: ; d003
+wMartItemID::
+	db
 
-wCurPartySpecies:: ; d004
-	ds 1
+wCurPartySpecies:: db ; d004
 
 wCurPartyMon:: ; d005
 ; contains which monster in a party
 ; is being dealt with at the moment
 ; 0-5
-	ds 1
+	db
 
 wd006:: ds 1 ; d006
 
@@ -2487,42 +1610,44 @@ wWhichHPBar:: ; d007
 ; 0: Enemy
 ; 1: Player
 ; 2: Party Menu
-	ds 1
+	db
 
 wPokemonWithdrawDepositParameter:: ; d008
 ; 0: Take from PC
 ; 1: Put into PC
 ; 2: Take from Day-Care
 ; 3: Put into Day-Care
-	ds 1
+	db
 
-wItemQuantityChangeBuffer:: ds 1 ; d009
-wItemQuantityBuffer:: ds 1 ; d00a
+wItemQuantityChangeBuffer:: db ; d009
+wItemQuantityBuffer:: db ; d00a
 
 wTempMon:: party_struct wTempMon ; d00b
 
-wSpriteFlags:: ds 1 ; d03b
+wSpriteFlags:: db ; d03b
 
-wHandlePlayerStep:: ds 2 ; d03c
+wHandlePlayerStep:: db ; d03c
 
-wPartyMenuActionText:: ds 1 ; d03e
+	ds 1
 
-wItemAttributeParamBuffer:: ds 1 ; d03f
+wPartyMenuActionText:: db ; d03e
 
-wCurPartyLevel:: ds 1 ; d040
-wScrollingMenuListSize:: ds 1 ; d041
+wItemAttributeParamBuffer:: db ; d03f
 
-wLinkMode:: ds 1 ; d042
+wCurPartyLevel:: db ; d040
+wScrollingMenuListSize:: db ; d041
+
+wLinkMode:: db ; d042
 ; 0 not in link battle
 ; 1 link battle
 
 ; used when following a map warp
-wNextWarpNumber:: ds 1 ; d043
-wNextMapGroup:: ds 1 ; d044
-wNextMapNumber:: ds 1 ; d045
-wPrevWarpNumber:: ds 1 ; d046
-wPrevMapGroup:: ds 1 ; d047
-wPrevMapNumber:: ds 1 ; d048
+wNextWarp:: db ; d043
+wNextMapGroup:: db ; d044
+wNextMapNumber:: db ; d045
+wPrevWarp:: db ; d046
+wPrevMapGroup:: db ; d047
+wPrevMapNumber:: db ; d048
 
 wd049:: ds 1 ; d049
 wd04a:: ds 1 ; d04a
@@ -2541,99 +1666,71 @@ wd056:: ds 1 ; d056
 wd057:: ds 1 ; d057
 wd058:: ds 1 ; d058
 wd059:: ds 1 ; d059
-wd05a:: ds 1 ; d05a
-wd05b:: ds 1 ; d05b
-wd05c:: ds 1 ; d05c
+wUnusedD05A:: db
 
-wUsedSprites:: ds SPRITE_GFX_LIST_CAPACITY ; d05d
+wBGMapAnchor:: dw ; d05b
+
+wUsedSprites:: ds SPRITE_GFX_LIST_CAPACITY * 2
+wUsedSpritesEnd::
+	ds 8
 
 wOverworldMapAnchor:: dw ; d07d
+wMetatileStandingY:: db ; d07f
+wMetatileStandingX:: db ; d080
 
-wd07f:: ds 1 ; d07f
-wd080:: ds 1 ; d080
-wd081:: ds 1 ; d081
-wd082:: ds 1 ; d082
-wPermission:: ds 1 ; d083
-wd084:: ds 1 ; d084
-wd085:: ds 1 ; d085
-wMapBorderBlock:: ds 1 ; d086
-wd087:: ds 1 ; d087
-wMapWidth:: ds 1 ; d088
-wd089:: ds 1 ; d089
-wd08a:: ds 1 ; d08a
-wd08b:: ds 1 ; d08b
-wd08c:: ds 1 ; d08c
-wd08d:: ds 1 ; d08d
-wd08e:: ds 1 ; d08e
-wd08f:: ds 1 ; d08f
-wd090:: ds 1 ; d090
-wd091:: ds 1 ; d091
-wd092:: ds 1 ; d092
-wd093:: ds 1 ; d093
-wd094:: ds 1 ; d094
-wd095:: ds 1 ; d095
-wd096:: ds 1 ; d096
-wd097:: ds 1 ; d097
-wd098:: ds 1 ; d098
-wd099:: ds 1 ; d099
-wd09a:: ds 1 ; d09a
-wd09b:: ds 1 ; d09b
-wd09c:: ds 1 ; d09c
-wd09d:: ds 1 ; d09d
-wd09e:: ds 1 ; d09e
-wd09f:: ds 1 ; d09f
-wd0a0:: ds 1 ; d0a0
-wd0a1:: ds 1 ; d0a1
-wd0a2:: ds 1 ; d0a2
-wd0a3:: ds 1 ; d0a3
-wd0a4:: ds 1 ; d0a4
-wd0a5:: ds 1 ; d0a5
-wd0a6:: ds 1 ; d0a6
-wd0a7:: ds 1 ; d0a7
-wd0a8:: ds 1 ; d0a8
-wd0a9:: ds 1 ; d0a9
-wd0aa:: ds 1 ; d0aa
-wd0ab:: ds 1 ; d0ab
-wd0ac:: ds 1 ; d0ac
-wd0ad:: ds 1 ; d0ad
-wd0ae:: ds 1 ; d0ae
-wd0af:: ds 1 ; d0af
-wd0b0:: ds 1 ; d0b0
-wd0b1:: ds 1 ; d0b1
-wd0b2:: ds 1 ; d0b2
-wd0b3:: ds 1 ; d0b3
-wd0b4:: ds 1 ; d0b4
-wd0b5:: ds 1 ; d0b5
-wd0b6:: ds 1 ; d0b6
-wd0b7:: ds 1 ; d0b7
-wd0b8:: ds 1 ; d0b8
-wd0b9:: ds 1 ; d0b9
-wd0ba:: ds 1 ; d0ba
-wd0bb:: ds 1 ; d0bb
-wd0bc:: ds 1 ; d0bc
-wd0bd:: ds 1 ; d0bd
-wd0be:: ds 1 ; d0be
-wd0bf:: ds 1 ; d0bf
-wd0c0:: ds 1 ; d0c0
-wd0c1:: ds 1 ; d0c1
-wd0c2:: ds 1 ; d0c2
-wd0c3:: ds 1 ; d0c3
-wd0c4:: ds 1 ; d0c4
-wTilesetBlocksBank:: ds 1 ; d0c5
+wMapPartial::
+wMapAttributesBank:: db ; d081
+wMapTileset:: db ; d082
+wEnvironment:: db ; d083
+wMapAttributesPointer:: dw ; d084
+wMapPartialEnd::
+
+wMapAttributes:: ; d086
+wMapBorderBlock:: db ; d086
+; width/height are in blocks (2x2 walkable tiles, 4x4 graphics tiles)
+wMapHeight:: db ; d087
+wMapWidth:: db ; d088
+wMapBlocksBank:: db; d089
+wMapBlocksPointer:: dw ; d08a
+wMapScriptsBank:: db ; d08c
+wMapScriptsPointer:: dw ; d08d
+wMapEventsPointer:: dw ; d08f
+; bit set
+wMapConnections:: db ; d091
+wMapAttributesEnd::
+
+wNorthMapConnection:: map_connection_struct wNorth ; d092
+wSouthMapConnection:: map_connection_struct wSouth ; d09e
+wWestMapConnection::  map_connection_struct wWest ; d0aa
+wEastMapConnection::  map_connection_struct wEast ; d0b6
+
+wTileset::
+wTilesetBank:: db ; d0c2
+wTilesetAddress:: dw ; d0c3
+wTilesetBlocksBank:: db ; d0c5
 wTilesetBlocksAddress:: dw ; d0c6
-wd0c8:: ds 1 ; d0c8
-wd0c9:: ds 1 ; d0c9
-wd0ca:: ds 1 ; d0ca
-wd0cb:: ds 1 ; d0cb
-wd0cc:: ds 1 ; d0cc
-wd0cd:: ds 1 ; d0cd
-wd0ce:: ds 1 ; d0ce
-wTilesetPalettes:: dw ; d0cf
-wd0d1:: ds 1 ; d0d1
-wd0d2:: ds 1 ; d0d2
+wTilesetCollisionBank:: db ; d0c8
+wTilesetCollisionAddress:: dw ; d0c9
+wTilesetAnim:: dw ; bank 3f ; d0cb
+	ds 2 ; unused ; d0cd
+wTilesetPalettes:: dw ; bank 3f ; d0cf
+wTilesetEnd::
 
-UNION
-wCurHPAnim::
+wEvolvableFlags:: flag_array PARTY_LENGTH ; d0d1
+
+wForceEvolution:: db ; d0d2
+
+UNION ; d0d3
+; general-purpose buffers
+wBuffer1:: db ; d0d3
+wBuffer2:: db ; d0d4
+wBuffer3:: db ; d0d5
+wBuffer4:: db ; d0d6
+wBuffer5:: db ; d0d7
+wBuffer6:: db ; d0d8
+
+NEXTU ; d0d3
+; HP bar animations
 wCurHPAnimMaxHP::   dw ; d0d3
 wCurHPAnimOldHP::   dw ; d0d5
 wCurHPAnimNewHP::   dw ; d0d7
@@ -2643,193 +1740,214 @@ wNewHPBarPixels::   db ; d0db
 wCurHPAnimDeltaHP:: dw ; d0dc
 wCurHPAnimLowHP::   db ; d0de
 wCurHPAnimHighHP::  db ; d0df
-wCurHPAnimEnd::
+
+NEXTU ; d0d3
+; evolution data
+wEvolutionOldSpecies:: db ; d0d3
+wEvolutionNewSpecies:: db ; d0d4
+wEvolutionPicOffset:: db ; d0d5
+wEvolutionCanceled:: db ; d0d6
+
 NEXTU
 
-wBuffer1:: ds 1 ; d0d3
-wBuffer2:: ds 1 ; d0d4
-wBuffer3:: ds 1 ; d0d5
-wBuffer4:: ds 1 ; d0d6
-wBuffer5:: ds 1 ; d0d7
-wBuffer6:: ds 1 ; d0d8
-wd0d9:: ds 1 ; d0d9
-wd0da:: ds 1 ; d0da
-wd0db:: ds 1 ; d0db
-wLinkBuffer:: ds 1 ; d0dc
-wd0dd:: ds 1 ; d0dd
-wd0de:: ds 1 ; d0de
-wd0df:: ds 1 ; d0df
-ENDU
-wd0e0:: ds 1 ; d0e0
-wd0e1:: ds 1 ; d0e1
-wd0e2:: ds 1 ; d0e2
-wd0e3:: ds 1 ; d0e3
-wd0e4:: ds 1 ; d0e4
-wd0e5:: ds 1 ; d0e5
-wd0e6:: ds 1 ; d0e6
-wd0e7:: ds 1 ; d0e7
-wd0e8:: ds 1 ; d0e8
-wd0e9:: ds 1 ; d0e9
-wd0ea:: ds 1 ; d0ea
-wd0eb:: ds 1 ; d0eb
-wd0ec:: ds 1 ; d0ec
-wTempEnemyMonSpecies:: ds 1 ; d0ed
-wd0ee:: ds 1 ; d0ee
+wd0d3:: ds 1
+wd0d4:: ds 1
+wd0d5:: ds 1
+wd0d6:: ds 1
+wd0d7:: ds 1
+wd0d8:: ds 1
+wd0d9:: ds 1
+wd0da:: ds 1
+wd0db:: ds 1
+wd0dc:: ds 1
+
+NEXTU ; d0d3
+; miscellaneous
+wMagikarpLength:: dw
+wSelectedDecoration:: db
+wOtherDecoration::    db
+	ds 3
+wCurEnemyItem:: db
+ENDU ; d0e0
+
+	ds 3
+
+wLinkBattleRNs:: ds 10 ; d0e3
+
+wTempEnemyMonSpecies:: db ; d0ed
+wTempBattleMonSpecies:: db ; d0ee
 
 wEnemyMon:: battle_struct wEnemyMon ; d0ef
+wEnemyMonBaseStats:: ds 5 ; d10f
+wEnemyMonCatchRate:: db ; d114
+wEnemyMonBaseExp::   db ; d115
+wEnemyMonEnd::
 
-wd10f:: ds 1 ; d10f
-wd110:: ds 1 ; d110
-wd111:: ds 1 ; d111
-wd112:: ds 1 ; d112
-wd113:: ds 1 ; d113
-wd114:: ds 1 ; d114
-wd115:: ds 1 ; d115
-wBattleMode:: ds 1 ; d116
-wd117:: ds 1 ; d117
+wBattleMode:: ; d116
+; 0: overworld
+; 1: wild battle
+; 2: trainer battle
+	db
+
+wTempWildMonSpecies:: db
 
 wOtherTrainerClass:: ; d118
 ; class (Youngster, Bug Catcher, etc.) of opposing trainer
 ; 0 if opponent is a wild Pokémon, not a trainer
 	db
 
-wBattleType:: ds 1 ; d119
+; BATTLETYPE_* values
+wBattleType:: db ; d119
 wd11a:: ds 1 ; d11a
-wd11b:: ds 1 ; d11b
-wd11c:: ds 1 ; d11c
-wTrainerClass:: ds 1 ; d11d
-wd11e:: ds 1 ; d11e
-wd11f:: ds 1 ; d11f
 
-wBaseDexNo:: ; d120
+wOtherTrainerID:: ; d11b
+; which trainer of the class that you're fighting
+; (Joey, Mikey, Albert, etc.)
+	db
+
+wForcedSwitch:: db
+
+wTrainerClass:: db ; d11d
+
+wUnownLetter:: db ; d11e
+
+wMoveSelectionMenuType:: db ; d11f
+
+; corresponds to the data/pokemon/base_stats/*.asm contents
 wCurBaseData:: ; d120
-wd120:: ds 1 ; d120
-wd121:: ds 1 ; d121
-wd122:: ds 1 ; d122
-wd123:: ds 1 ; d123
-wd124:: ds 1 ; d124
-wd125:: ds 1 ; d125
-wd126:: ds 1 ; d126
-wd127:: ds 1 ; d127
-wd128:: ds 1 ; d128
-wd129:: ds 1 ; d129
-wd12a:: ds 1 ; d12a
-wd12b:: ds 1 ; d12b
-wd12c:: ds 1 ; d12c
-wd12d:: ds 1 ; d12d
-wd12e:: ds 1 ; d12e
+wBaseDexNo:: db ; d120
+wBaseStats:: ; d121
+wBaseHP:: db ; d121
+wBaseAttack:: db ; d122
+wBaseDefense:: db ; d123
+wBaseSpeed:: db ; d124
+wBaseSpecialAttack:: db ; d125
+wBaseSpecialDefense:: db ; d126
+wBaseType:: ; d127
+wBaseType1:: db ; d127
+wBaseType2:: db ; d128
+wBaseCatchRate:: db ; d129
+wBaseExp:: db ; d12a
+wBaseItems:: ; d12b
+wBaseItem1:: db ; d12b
+wBaseItem2:: db ; d12c
+wBaseGender:: db ; d12d
+wBaseUnknown1:: db ; d12e
 wBaseEggSteps:: db ; d12f
-wd130:: ds 1 ; d130
-wBasePicSize::
-wd131:: ds 1 ; d131
-wBaseUnusedFrontpic::
-wd132:: ds 1 ; d132
-wd133:: ds 1 ; d133
-wd134:: ds 1 ; d134
-wd135:: ds 1 ; d135
-wd136:: ds 1 ; d136
-wd137:: ds 1 ; d137
-wd138:: ds 1 ; d138
-wd139:: ds 1 ; d139
-wd13a:: ds 1 ; d13a
-wd13b:: ds 1 ; d13b
-wd13c:: ds 1 ; d13c
-wd13d:: ds 1 ; d13d
-wd13e:: ds 1 ; d13e
-wd13f:: ds 1 ; d13f
+wBaseUnknown2:: db ; d130
+wBasePicSize:: db ; d131
+wBaseUnusedFrontpic:: dw ; d132
+wBaseUnusedBackpic:: dw ; d134
+wBaseGrowthRate:: db ; d136
+wBaseEggGroups:: db ; d137
+wBaseTMHM:: flag_array NUM_TMS + NUM_HMS ; d138
 wCurBaseDataEnd::
 
 wd140:: ds 1 ; d140
-wCurDamage:: ds 2 ; d141
+wCurDamage:: dw ; d141
 wd143:: ds 1 ; d143
 wd144:: ds 1 ; d144
-wd145:: ds 1 ; d145
-wd146:: ds 1 ; d146
-wd147:: ds 1 ; d147
-wd148:: ds 1 ; d148
-wd149:: ds 1 ; d149
-wd14a:: ds 1 ; d14a
-wd14b:: ds 1 ; d14b
-wd14c:: ds 1 ; d14c
-wd14d:: ds 1 ; d14d
-wd14e:: ds 1 ; d14e
-wWildMon:: ds 1 ; d14f
-wd150:: ds 1 ; d150
-wTempNumBuffer::
+wMornEncounterRate::  db ; d145
+wDayEncounterRate::   db ; d146
+wNiteEncounterRate::  db ; d147
+wWaterEncounterRate:: db ; d148
+wListMoves_MoveIndicesBuffer:: ds NUM_MOVES
+wPutativeTMHMMove:: db ; d14d
+wInitListType:: db ; d14e
+wWildMon:: db ; d14f
+wBattleHasJustStarted:: db ; d150
+
+; d151 has many different short-term uses
 wNamedObjectIndexBuffer::
 wDeciramBuffer::
-wBreedingCompatibility::
+wTempByteValue::
 wNumSetBits::
-wd151:: ds 1 ; d151
-wd152:: ds 1 ; d152
-wd153:: ds 1 ; d153
-wd154:: ds 1 ; d154
-wROMBankBackup:: ds 1 ; d155
-wBuffer:: ds 1 ; d156
-wTimeOfDay:: ds 1 ; d157
+wTypeMatchup::
+wCurType::
+wTempSpecies::
+wTempIconSpecies::
+wTempTMHM::
+wTempPP::
+wNextBoxOrPartyIndex::
+wChosenCableClubRoom::
+wBreedingCompatibility::
+wMoveGrammar::
+wApplyStatLevelMultipliersToEnemy::
+wUsePPUp::
+wd151::
+	db ; d151
+
+wFailedToFlee:: db ; d152
+wNumFleeAttempts:: db ; d153
+wMonTriedToEvolve:: db ; d154
+
+wROMBankBackup:: db ; d155
+wFarByte::
+wTempBank:: db ; d156
+
+wTimeOfDay:: db ; d157
 wd158:: ds 1 ; d158
-wd159:: ds 1 ; d159
-wd15a:: ds 1 ; d15a
-wd15b:: ds 1 ; d15b
-wd15c:: ds 1 ; d15c
-wd15d:: ds 1 ; d15d
-wd15e:: ds 1 ; d15e
-wd15f:: ds 1 ; d15f
-wScriptBank:: ds 1 ; d160
-wd161:: ds 1 ; d161
-wd162:: ds 1 ; d162
-wd163:: ds 1 ; d163
-wd164:: ds 1 ; d164
-wd165:: ds 1 ; d165
-wd166:: ds 1 ; d166
-wd167:: ds 1 ; d167
-wd168:: ds 1 ; d168
-wd169:: ds 1 ; d169
-wd16a:: ds 1 ; d16a
-wd16b:: ds 1 ; d16b
-wd16c:: ds 1 ; d16c
-wd16d:: ds 1 ; d16d
-wd16e:: ds 1 ; d16e
-wd16f:: ds 1 ; d16f
-wd170:: ds 1 ; d170
-wd171:: ds 1 ; d171
-wd172:: ds 1 ; d172
-wScriptVar:: ds 1 ; d173
-wd174:: ds 1 ; d174
-wd175:: ds 1 ; d175
-wd176:: ds 1 ; d176
-wd177:: ds 1 ; d177
+
+wMapStatus:: db ; d159
+wMapEventStatus:: db ; d15a
+
+wScriptFlags:: ; d15b
+; bit 3: priority jump
+	db
+wScriptFlags2:: ; d15c
+	db
+wScriptFlags3:: ; d15d
+; bit 0: count steps
+; bit 1: coord events
+; bit 2: warps and connections
+; bit 4: wild encounters
+; bit 5: unknown
+	db
+
+wScriptMode:: db ; d15e
+wScriptRunning:: db ; d15f
+wScriptBank:: db ; d160
+wScriptPos:: dw ; d161
+
+wScriptStackSize:: db
+wScriptStack:: ds 3 * 5
+wScriptVar:: db ; d173
+wScriptDelay:: db ; d174
+
+wPriorityScriptBank::
+wScriptTextBank::
+	db ; d175
+wPriorityScriptAddr::
+wScriptTextAddr::
+	dw ; d176
 wd178:: ds 1 ; d178
-wd179:: ds 1 ; d179
-wd17a:: ds 1 ; d17a
-wd17b:: ds 1 ; d17b
+wWildEncounterCooldown:: db ; d179
+wXYComparePointer:: dw ; d17a
 wd17c:: ds 1 ; d17c
 wd17d:: ds 1 ; d17d
 wd17e:: ds 1 ; d17e
 wd17f:: ds 1 ; d17f
-wd180:: ds 1 ; d180
-wd181:: ds 1 ; d181
-wd182:: ds 1 ; d182
-wd183:: ds 1 ; d183
-wd184:: ds 1 ; d184
-wd185:: ds 1 ; d185
-wd186:: ds 1 ; d186
+wBattleScriptFlags:: dw ; d180
+wPlayerSpriteSetupFlags:: ; d182
+	db
+wMapReentryScriptQueueFlag:: db ; d183
+wMapReentryScriptBank:: db
+wMapReentryScriptAddress:: dw ; d185
 wd187:: ds 1 ; d187
 wd188:: ds 1 ; d188
 wd189:: ds 1 ; d189
 wd18a:: ds 1 ; d18a
-wTimeCyclesSinceLastCall:: ds 1 ; d18b
-wReceiveCallDelay_MinsRemaining:: ds 1 ; d18c
-wReceiveCallDelay_StartTime:: ds 1 ; d18d
-wd18e:: ds 1 ; d18e
-wd18f:: ds 1 ; d18f
+wTimeCyclesSinceLastCall:: db ; d18b
+wReceiveCallDelay_MinsRemaining:: db ; d18c
+wReceiveCallDelay_StartTime:: ds 3 ; d18d
 wd190:: ds 1 ; d190
 wd191:: ds 1 ; d191
 wd192:: ds 1 ; d192
-wBugContestMinsRemaining:: ds 1 ; d193
-wBugContestSecsRemaining:: ds 1 ; d194
+wBugContestMinsRemaining:: db ; d193
+wBugContestSecsRemaining:: db ; d194
 wd195:: ds 1 ; d195
 wd196:: ds 1 ; d196
+wMapStatusEnd::
 wd197:: ds 1 ; d197
 wd198:: ds 1 ; d198
 
@@ -2841,18 +1959,18 @@ wOptions:: ; d199
 ; bit 5: stereo off/on
 ; bit 6: battle style shift/set
 ; bit 7: battle scene off/on
-	ds 1
-	
-wSaveFileExists:: ds 1 ; d19a
+	db
+
+wSaveFileExists:: db ; d19a
 wTextboxFrame:: ; d19b
 ; bits 0-2: textbox frame 0-7
-	ds 1
+	db
 
 wTextboxFlags:: ; d19c
 ; bit 0: 1-frame text delay
 ; bit 1: when unset, no text delay
-	ds 1
-wGBPrinter:: ; d19d
+	db
+wGBPrinterBrightness:: ; d19d
 ; bit 0-6: brightness
 ;   lightest: $00
 ;   lighter:  $20
@@ -2862,14 +1980,18 @@ wGBPrinter:: ; d19d
 	db
 wOptions2:: ; d19e
 ; bit 0: menu account off/on
-	ds 1
+	db
 
 	ds 2
 
 wOptionsEnd::
 
-SECTION "Game Data", WRAMX, BANK[1]
+
+SECTION "Game Data", WRAMX
+
 wGameData::
+wPlayerData::
+wPlayerData1::
 wPlayerID:: dw ; d1a1
 
 wPlayerName:: ds NAME_LENGTH ; d1a3
@@ -2878,63 +2000,69 @@ wRivalName:: ds NAME_LENGTH ; d1b9
 wRedsName:: ds NAME_LENGTH ; d1c4
 wGreensName:: ds NAME_LENGTH ; d1cf
 
-wSavedAtLeastOnce:: ds 1 ; d1da
-wd1db:: ds 1 ; d1db
-wd1dc:: ds 1 ; d1dc
-wd1dd:: ds 1 ; d1dd
-wd1de:: ds 1 ; d1de
-wd1df:: ds 1 ; d1df
-wd1e0:: ds 1 ; d1e0
-wd1e1:: ds 1 ; d1e1
-wd1e2:: ds 1 ; d1e2
-wd1e3:: ds 1 ; d1e3
+wSavedAtLeastOnce:: db ; d1da
+wSpawnAfterChampion:: db ; d1db
+wStartDay:: db ; d1dc
+wStartHour:: db ; d1dd
+wStartMinute:: db ; d1de
+wStartSecond:: db ; d1df
+wRTC:: ds 4 ; d1e0
+
 wd1e4:: ds 1 ; d1e4
 wd1e5:: ds 1 ; d1e5
 wd1e6:: ds 1 ; d1e6
 wd1e7:: ds 1 ; d1e7
-wd1e8:: ds 1 ; d1e8
+wDST:: ; d1e8
+; bit 7: dst
+	db
+
 wd1e9:: ds 1 ; d1e9
 
-wGameTimeCap::     ds 1 ; d1ea
-wGameTimeHours::   ds 2 ; d1eb
-wGameTimeMinutes:: ds 1 ; d1ed
-wGameTimeSeconds:: ds 1 ; d1ee
-wGameTimeFrames::  ds 1 ; d1ef
+wGameTimeCap::     db ; d1ea
+wGameTimeHours::   dw ; d1eb
+wGameTimeMinutes:: db ; d1ed
+wGameTimeSeconds:: db ; d1ee
+wGameTimeFrames::  db ; d1ef
 
 	ds 2
 
-wCurDay:: ds 1 ; d1f2
+wCurDay:: db ; d1f2
 
 	ds 1
 
-wObjectFollow_Leader:: ds 1 ; d1f4
-wObjectFollow_Follower:: ds 1 ; d1f5
-wCenteredObject:: ds 1 ; d1f6
-wFollowerMovementQueueLength:: ds 1 ; d1f7
+wObjectFollow_Leader:: db ; d1f4
+wObjectFollow_Follower:: db ; d1f5
+wCenteredObject:: db ; d1f6
+wFollowerMovementQueueLength:: db ; d1f7
 wFollowMovementQueue:: ds 5 ; d1f8
 
 wObjectStructs:: ; d1fd
-	object_struct wPlayer ; d1fd
-	object_struct wObject1 ; d225
-	object_struct wObject2 ; d24d
-	object_struct wObject3 ; d275
-	object_struct wObject4 ; d29d
-	object_struct wObject5 ; d2c5
-	object_struct wObject6 ; d2ed
-	object_struct wObject7 ; d315
-	object_struct wObject8 ; d33d
-	object_struct wObject9 ; d365
-	object_struct wObject10 ; d38d
-	object_struct wObject11 ; d3b5
-	object_struct wObject12 ; d3dd
-wObjectStructsEnd:: ; d405
+wPlayerStruct::   object_struct wPlayer
+wObject1Struct::  object_struct wObject1
+wObject2Struct::  object_struct wObject2
+wObject3Struct::  object_struct wObject3
+wObject4Struct::  object_struct wObject4
+wObject5Struct::  object_struct wObject5
+wObject6Struct::  object_struct wObject6
+wObject7Struct::  object_struct wObject7
+wObject8Struct::  object_struct wObject8
+wObject9Struct::  object_struct wObject9
+wObject10Struct:: object_struct wObject10
+UNION
+	ds 18
+wPlayerData1End::
+wPlayerData2::
+NEXTU
+wObject11Struct:: object_struct wObject11
+wObject12Struct:: object_struct wObject12
+wObjectStructsEnd::
+ENDU
 
 wCmdQueue:: ds CMDQUEUE_CAPACITY * CMDQUEUE_ENTRY_SIZE ; d405
 ; d41d
 
 	ds 40
 
-; TODO these should be wMapObject1 etc.
 wMapObjects:: ; d445
 wPlayerObject:: map_object wPlayer  ; d445
 wMap1Object::   map_object wMap1    ; d455
@@ -2954,104 +2082,79 @@ wMap14Object::  map_object wMap14   ; d525
 wMap15Object::  map_object wMap15   ; d535
 wMapObjectsEnd:: ; d545
 
-wd545:: ds 1 ; d545
-wd546:: ds 1 ; d546
-wd547:: ds 1 ; d547
-wd548:: ds 1 ; d548
-wd549:: ds 1 ; d549
-wd54a:: ds 1 ; d54a
-wd54b:: ds 1 ; d54b
-wd54c:: ds 1 ; d54c
-wd54d:: ds 1 ; d54d
-wd54e:: ds 1 ; d54e
-wd54f:: ds 1 ; d54f
-wd550:: ds 1 ; d550
-wd551:: ds 1 ; d551
-wd552:: ds 1 ; d552
-wd553:: ds 1 ; d553
-wd554:: ds 1 ; d554
-wd555:: ds 1 ; d555
-wd556:: ds 1 ; d556
-wd557:: ds 1 ; d557
-wd558:: ds 1 ; d558
-wd559:: ds 1 ; d559
-wd55a:: ds 1 ; d55a
-wd55b:: ds 1 ; d55b
-wd55c:: ds 1 ; d55c
-wd55d:: ds 1 ; d55d
-wd55e:: ds 1 ; d55e
-wd55f:: ds 1 ; d55f
-wd560:: ds 1 ; d560
-wd561:: ds 1 ; d561
-wd562:: ds 1 ; d562
-wd563:: ds 1 ; d563
-wd564:: ds 1 ; d564
-wd565:: ds 1 ; d565
+wObjectMasks:: ds NUM_OBJECTS ; d545
+
+wVariableSprites:: ds $100 - SPRITE_VARS ; d555
+
+wEnteredMapFromContinue:: db ; d565
 wd566:: ds 1 ; d566
 wd567:: ds 1 ; d567
-wTimeOfDayPal:: ds 1
+wTimeOfDayPal:: db
 wd569:: ds 1 ; d569
 wd56a:: ds 1 ; d56a
 wd56b:: ds 1 ; d56b
 wd56c:: ds 1 ; d56c
 wd56d:: ds 1 ; d56d
-wd56e:: ds 1 ; d56e
+wTimeOfDayPalset:: db ; d56e
 wd56f:: ds 1 ; d56f
 wd570:: ds 1 ; d570
-wStatusFlags:: ds 1 ; d571
-wStatusFlags2:: ds 1 ; d572
+wPlayerData2End::
+wPlayerData3::
+wStatusFlags::
+	db ; d571
+wStatusFlags2:: db ; d572
+
 wMoney:: ds 3 ; d573
-wd576:: ds 1 ; d576
-wd577:: ds 1 ; d577
-wd578:: ds 1 ; d578
-wMomSavingMoney:: ds 1 ; d579
+wMomsMoney:: ds 3 ; d576
+
+wMomSavingMoney:: ; d579
+; bit 0: saving some money
+; bit 1: saving half money (unused)
+; bit 2: saving all money (unused)
+; bit 7: active
+	db
 
 wCoins:: dw ; d57a
 
 wBadges::
-wJohtoBadges:: ds 1 ; d57c
-wKantoBadges:: ds 1 ; d57d
+wJohtoBadges:: flag_array NUM_JOHTO_BADGES ; d57c
+wKantoBadges:: flag_array NUM_KANTO_BADGES ; d57d
 
 wTMsHMs:: ds NUM_TMS + NUM_HMS ; d57e
 wTMsHMsEnd::
 
-wNumItems:: ds 1 ; d5b7
+wNumItems:: db ; d5b7
 wItems:: ds MAX_ITEMS * 2 + 1 ; d5b8
 wItemsEnd::
 
-wNumKeyItems:: ds 1 ; d5e1
+wNumKeyItems:: db ; d5e1
 wKeyItems:: ds MAX_KEY_ITEMS + 1 ; d5e2
 wKeyItemsEnd::
 
-wNumBalls:: ds 1 ; d5fc
+wNumBalls:: db ; d5fc
 wBalls:: ds MAX_BALLS * 2 + 1 ; d5fd
 wBallsEnd::
 
+wNumPCItems:: db
 wPCItems:: ds MAX_PC_ITEMS * 2 + 1 ; d616
 wPCItemsEnd::
 
-	ds 1
-
-wPokegearFlags:: ; d67c
+wPokegearFlags::
 ; bit 0: map
 ; bit 1: radio
 ; bit 2: phone
 ; bit 3: expn
 ; bit 7: on/off
+	db
+wRadioTuningKnob:: db ; d67d
+wLastDexMode:: db ; d67e
 	ds 1
+wWhichRegisteredItem:: db ; d680
+wRegisteredItem:: db ; d681
 
-wRadioTuningKnob:: ds 1 ; d67d
-wLastDexMode:: ds 1 ; d67e
-	
-	ds 1
+wPlayerState:: db ; d682
 
-wWhichRegisteredItem:: ds 1 ; d680
-wRegisteredItem:: ds 1 ; d681
-
-wPlayerState:: ds 1 ; d682
-
-wd683:: ds 1 ; d683
-wd684:: ds 1 ; d684
+wHallOfFameCount:: dw
 wd685:: ds 1 ; d685
 wd686:: ds 1 ; d686
 wd687:: ds 1 ; d687
@@ -3086,8 +2189,8 @@ wd6a3:: ds 1 ; d6a3
 wd6a4:: ds 1 ; d6a4
 wd6a5:: ds 1 ; d6a5
 wd6a6:: ds 1 ; d6a6
-wMooMooBerries:: ds 1 ; d6a7
-wUndergroundSwitchPositions:: ds 1 ; d6a8
+wMooMooBerries:: db ; d6a7
+wUndergroundSwitchPositions:: db ; d6a8
 wd6a9:: ds 1 ; d6a9
 wd6aa:: ds 1 ; d6aa
 wd6ab:: ds 1 ; d6ab
@@ -3103,67 +2206,66 @@ wd6b4:: ds 1 ; d6b4
 wd6b5:: ds 1 ; d6b5
 wd6b6:: ds 1 ; d6b6
 
-; some of these are probably wrong
-; TODO rename to SceneID
-wPokecenter2FTrigger::                       ds 1 ; d6b7
-wTradeCenterTrigger::                        ds 1 ; d6b8
-wColosseumTrigger::                          ds 1 ; d6b9
-wTimeCapsuleTrigger::                        ds 1 ; d6ba
-wPowerPlantTrigger::                         ds 1 ; d6bb
-wCeruleanGymTrigger::                        ds 1 ; d6bc
-wRoute25Trigger::                            ds 1 ; d6bd
-wTrainerHouseB1FTrigger::                    ds 1 ; d6be
-wVictoryRoadGateTrigger::                    ds 1 ; d6bf
-wSaffronTrainStationTrigger::                ds 1 ; d6c0
-wRoute16GateTrigger::                        ds 1 ; d6c1
-wRoute1718GateTrigger::                      ds 1 ; d6c2
-wIndigoPlateauPokecenter1FTrigger::          ds 1 ; d6c3
-wWillsRoomTrigger::                          ds 1 ; d6c4
-wKogasRoomTrigger::                          ds 1 ; d6c5
-wBrunosRoomTrigger::                         ds 1 ; d6c6
-wKarensRoomTrigger::                         ds 1 ; d6c7
-wLancesRoomTrigger::                         ds 1 ; d6c8
-wHallOfFameTrigger::                         ds 1 ; d6c9
-wRoute27Trigger::                            ds 1 ; d6ca
-wNewBarkTownTrigger::                        ds 1 ; d6cb
-wElmsLabTrigger::                            ds 1 ; d6cc
-wKrissHouse1FTrigger::                       ds 1 ; d6cd
-wRoute29Trigger::                            ds 1 ; d6ce
-wCherrygroveCityTrigger::                    ds 1 ; d6cf
-wMrPokemonsHouseTrigger::                    ds 1 ; d6d0
-wRoute32Trigger::                            ds 1 ; d6d1
-wRoute35NationalParkGateTrigger::            ds 1 ; d6d2
-wRoute36NationalParkGateTrigger::            ds 1 ; d6d3
-wAzaleaTownTrigger::                         ds 1 ; d6d4
-wGoldenrodGymTrigger::                       ds 1 ; d6d5
-wGoldenrodMagnetTrainStationTrigger::        ds 1 ; d6d6
-wOlivineCityTrigger::                        ds 1 ; d6d7
-wRoute34Trigger::                            ds 1 ; d6d8
-wEcruteakHouseTrigger::                      ds 1 ; d6d9
-wEcruteakPokecenter1FTrigger::               ds 1 ; d6da
-wMahoganyTownTrigger::                       ds 1 ; d6db
-wRoute43GateTrigger::                        ds 1 ; d6dc
-wMountMoonTrigger::                          ds 1 ; d6dd
-wSproutTower3FTrigger::                      ds 1 ; d6de
-wBurnedTower1FTrigger::                      ds 1 ; d6df
-wBurnedTowerB1FTrigger::                     ds 1 ; d6e0
-wd6e1:: ds 1 ; d6e1
-wd6e2:: ds 1 ; d6e2
-wd6e3:: ds 1 ; d6e3
-wd6e4:: ds 1 ; d6e4
-wd6e5:: ds 1 ; d6e5
-wd6e6:: ds 1 ; d6e6
-wd6e7:: ds 1 ; d6e7
-wd6e8:: ds 1 ; d6e8
-wd6e9:: ds 1 ; d6e9
-wd6ea:: ds 1 ; d6ea
-wd6eb:: ds 1 ; d6eb
-wd6ec:: ds 1 ; d6ec
-wd6ed:: ds 1 ; d6ed
-wd6ee:: ds 1 ; d6ee
-wd6ef:: ds 1 ; d6ef
-wd6f0:: ds 1 ; d6f0
-wd6f1:: ds 1 ; d6f1
+wPokecenter2FSceneID::                            db ; d6b7
+wTradeCenterSceneID::                             db ; d6b8
+wColosseumSceneID::                               db ; d6b9
+wTimeCapsuleSceneID::                             db ; d6ba
+wPowerPlantSceneID::                              db ; d6bb
+wCeruleanGymSceneID::                             db ; d6bc
+wRoute25SceneID::                                 db ; d6bd
+wTrainerHouseB1FSceneID::                         db ; d6be
+wVictoryRoadGateSceneID::                         db ; d6bf
+wSaffronMagnetTrainStationSceneID::               db ; d6c0
+wRoute16GateSceneID::                             db ; d6c1
+wRoute17Route18GateSceneID::                      db ; d6c2
+wIndigoPlateauPokecenter1FSceneID::               db ; d6c3
+wWillsRoomSceneID::                               db ; d6c4
+wKogasRoomSceneID::                               db ; d6c5
+wBrunosRoomSceneID::                              db ; d6c6
+wKarensRoomSceneID::                              db ; d6c7
+wLancesRoomSceneID::                              db ; d6c8
+wHallOfFameSceneID::                              db ; d6c9
+wRoute27SceneID::                                 db ; d6ca
+wNewBarkTownSceneID::                             db ; d6cb
+wElmsLabSceneID::                                 db ; d6cc
+wPlayersHouse1FSceneID::                          db ; d6cd
+wRoute29SceneID::                                 db ; d6ce
+wCherrygroveCitySceneID::                         db ; d6cf
+wMrPokemonsHouseSceneID::                         db ; d6d0
+wRoute32SceneID::                                 db ; d6d1
+wRoute35NationalParkGateSceneID::                 db ; d6d2
+wRoute36NationalParkGateSceneID::                 db ; d6d3
+wAzaleaTownSceneID::                              db ; d6d4
+wGoldenrodGymSceneID::                            db ; d6d5
+wGoldenrodMagnetTrainStationSceneID::             db ; d6d6
+wOlivineCitySceneID::                             db ; d6d7
+wRoute34SceneID::                                 db ; d6d8
+wEcruteakTinTowerEntranceSceneID::                db ; d6d9
+wEcruteakPokecenter1FSceneID::                    db ; d6da
+wMahoganyTownSceneID::                            db ; d6db
+wRoute43GateSceneID::                             db ; d6dc
+wMountMoonSceneID::                               db ; d6dd
+wSproutTower3FSceneID::                           db ; d6de
+wBurnedTower1FSceneID::                           db ; d6df
+wBurnedTowerB1FSceneID::                          db ; d6e0
+wRadioTower5FSceneID::                            db ; d6e1
+wRuinsOfAlphOutsideSceneID::                      db ; d6e2
+wRuinsOfAlphResearchCenterSceneID::               db ; d6e3
+wRuinsOfAlphInnerChamberSceneID::                 db ; d6e4
+wMahoganyMart1FSceneID::                          db ; d6e5
+wTeamRocketBaseB1FSceneID::                       db ; d6e6
+wTeamRocketBaseB2FSceneID::                       db ; d6e7
+wTeamRocketBaseB3FSceneID::                       db ; d6e8
+wGoldenrodUndergroundSwitchRoomEntrancesSceneID:: db ; d6e9
+wSilverCaveRoom3SceneID::                         db ; d6ea
+wVictoryRoadSceneID::                             db ; d6eb
+wDragonsDenB1FSceneID::                           db ; d6ec
+wOlivinePortSceneID::                             db ; d6ed
+wVermilionPortSceneID::                           db ; d6ee
+wFastShip1FSceneID::                              db ; d6ef
+wFastShipB1FSceneID::                             db ; d6f0
+wMountMoonSquareSceneID::                         db ; d6f1
+
 wd6f2:: ds 1 ; d6f2
 wd6f3:: ds 1 ; d6f3
 wd6f4:: ds 1 ; d6f4
@@ -3371,11 +2473,16 @@ wd8b4:: ds 1 ; d8b4
 wd8b5:: ds 1 ; d8b5
 wd8b6:: ds 1 ; d8b6
 wd8b7:: ds 1 ; d8b7
-wGameTimerPause:: ds 1 ; d8b8
+wGameTimerPause:: db ; d8b8
 wd8b9:: ds 1 ; d8b9
-wd8ba:: ds 1 ; d8ba
+wd8ba:: ; d8ba
+; bits 4, 6, or 7 can be used to disable joypad input
+; bit 4
+; bit 6: mon fainted?
+; bit 7: SGB flag?
+	db
 wd8bb:: ds 1 ; d8bb
-wCurBox:: ds 1 ; d8bc
+wCurBox:: db ; d8bc
 
 	ds 2
 
@@ -3384,50 +2491,49 @@ wBoxNames:: ds BOX_NAME_LENGTH * NUM_BOXES ; d8bf
 
 wd93d:: ds 1 ; d93d
 wd93e:: ds 1 ; d93e
-wBikeFlags:: ds 1 ; d93f
+wBikeFlags:: db ; d93f
 wd940:: ds 1 ; d940
-wCurrentMapTriggerPointer:: dw ; d941
-wd943:: ds 1 ; d943
-wd944:: ds 1 ; d944
-wCurMapWarpCount:: ds 1 ; d945
-wCurMapWarpsPointer:: dw ; d946
-wd948:: ds 1 ; d948
-wd949:: ds 1 ; d949
-wd94a:: ds 1 ; d94a
-wd94b:: ds 1 ; d94b
-wd94c:: ds 1 ; d94c
-wd94d:: ds 1 ; d94d
-wd94e:: ds 1 ; d94e
-wd94f:: ds 1 ; d94f
-wd950:: ds 1 ; d950
-wd951:: ds 1 ; d951
-wd952:: ds 1 ; d952
-wd953:: ds 1 ; d953
-wd954:: ds 1 ; d954
-wd955:: ds 1 ; d955
-wd956:: ds 1 ; d956
-wd957:: ds 1 ; d957
-wd958:: ds 1 ; d958
-wd959:: ds 1 ; d959
-wd95a:: ds 1 ; d95a
-wd95b:: ds 1 ; d95b
-wd95c:: ds 1 ; d95c
-wd95d:: ds 1 ; d95d
-wd95e:: ds 1 ; d95e
-wd95f:: ds 1 ; d95f
-wd960:: ds 1 ; d960
-wd961:: ds 1 ; d961
-wd962:: ds 1 ; d962
 
+wCurMapSceneScriptPointer:: dw ; d941
+
+wCurCaller:: dw ; d943
+wCurMapWarpCount:: db ; d945
+wCurMapWarpsPointer:: dw ; d946
+wCurMapCoordEventCount:: db ; d948
+wCurMapCoordEventsPointer:: dw ; d949
+wCurMapBGEventCount:: db ; d94b
+wCurMapBGEventsPointer:: dw ; d94c
+wCurMapObjectEventCount:: db ; d94e
+wCurMapObjectEventsPointer:: dw ; d94f
+wCurMapSceneScriptCount:: db ; d951
+wCurMapSceneScriptsPointer:: dw ; d952
+wCurMapCallbackCount:: db ; d954
+wCurMapCallbacksPointer:: dw ; d955
+
+	ds 2
+
+; Sprite id of each decoration
+wDecoBed::           db ; d959
+wDecoCarpet::        db ; d95a
+wDecoPlant::         db ; d95b
+wDecoPoster::        db ; d95c
+wDecoConsole::       db ; d95d
+wDecoLeftOrnament::  db ; d95e
+wDecoRightOrnament:: db ; d95f
+wDecoBigDoll::       db ; d960
+
+; Items bought from Mom
+wWhichMomItem:: db ; d961
+wd962:: ds 1 ; d962
 wMomItemTriggerBalance:: ds 3 ; d963
 
 wDailyResetTimer:: dw ; d966
-wDailyFlags:: ds 1 ; d968
-wWeeklyFlags:: ds 1 ; d969
+wDailyFlags1:: db ; d968
+wDailyFlags2:: db ; d969
 wd96a:: ds 1 ; d96a
 wd96b:: ds 1 ; d96b
 wd96c:: ds 1 ; d96c
-wStartDay:: ds 1 ; d96d
+wTimerEventStartDay:: db ; d96d
 wd96e:: ds 1 ; d96e
 wd96f:: ds 1 ; d96f
 wd970:: ds 1 ; d970
@@ -3437,21 +2543,18 @@ wd973:: ds 1 ; d973
 wd974:: ds 1 ; d974
 wd975:: ds 1 ; d975
 wd976:: ds 1 ; d976
-wLuckyNumberDayBuffer:: ds 1 ; d977
-wd978:: ds 1 ; d978
+
+wLuckyNumberDayBuffer:: dw ; d977
 wd979:: ds 1 ; d979
 wd97a:: ds 1 ; d97a
-wSpecialPhoneCallID:: ds 1 ; d97b
+wSpecialPhoneCallID:: db ; d97b
 wd97c:: ds 1 ; d97c
 wd97d:: ds 1 ; d97d
 wd97e:: ds 1 ; d97e
-wBugContestStartTime:: ds 1 ; d97f
-wd980:: ds 1 ; d980
-wd981:: ds 1 ; d981
-wd982:: ds 1 ; d982
-wUnusedTwoDayTimerOn:: ds 1 ; d983
-wUnusedTwoDayTimer:: ds 1 ; d984
-wUnusedTwoDayTimerStartDate:: ds 1 ; d985
+wBugContestStartTime:: ds 4 ; day, hour, min, sec ; d97f
+wUnusedTwoDayTimerOn:: db ; d983
+wUnusedTwoDayTimer:: db
+wUnusedTwoDayTimerStartDate:: db
 wd986:: ds 1 ; d986
 wd987:: ds 1 ; d987
 wd988:: ds 1 ; d988
@@ -3507,115 +2610,68 @@ wd9b9:: ds 1 ; d9b9
 wd9ba:: ds 1 ; d9ba
 wd9bb:: ds 1 ; d9bb
 wd9bc:: ds 1 ; d9bc
-wd9bd:: ds 1 ; d9bd
-wd9be:: ds 1 ; d9be
-wd9bf:: ds 1 ; d9bf
-wd9c0:: ds 1 ; d9c0
-wd9c1:: ds 1 ; d9c1
-wd9c2:: ds 1 ; d9c2
-wParkBalls:: ds 1 ; d9c3
-wd9c4:: ds 1 ; d9c4
-wd9c5:: ds 1 ; d9c5
-wd9c6:: ds 1 ; d9c6
-wd9c7:: ds 1 ; d9c7
-wd9c8:: ds 1 ; d9c8
-wd9c9:: ds 1 ; d9c9
-wd9ca:: ds 1 ; d9ca
-wd9cb:: ds 1 ; d9cb
-wd9cc:: ds 1 ; d9cc
-wd9cd:: ds 1 ; d9cd
-wd9ce:: ds 1 ; d9ce
-wd9cf:: ds 1 ; d9cf
-wd9d0:: ds 1 ; d9d0
-wd9d1:: ds 1 ; d9d1
-wd9d2:: ds 1 ; d9d2
-wd9d3:: ds 1 ; d9d3
-wd9d4:: ds 1 ; d9d4
-wd9d5:: ds 1 ; d9d5
-wd9d6:: ds 1 ; d9d6
-wd9d7:: ds 1 ; d9d7
-wd9d8:: ds 1 ; d9d8
-wd9d9:: ds 1 ; d9d9
-wd9da:: ds 1 ; d9da
-wd9db:: ds 1 ; d9db
-wd9dc:: ds 1 ; d9dc
-wd9dd:: ds 1 ; d9dd
-wd9de:: ds 1 ; d9de
-wd9df:: ds 1 ; d9df
-wd9e0:: ds 1 ; d9e0
-wd9e1:: ds 1 ; d9e1
-wd9e2:: ds 1 ; d9e2
-wd9e3:: ds 1 ; d9e3
-wd9e4:: ds 1 ; d9e4
-wd9e5:: ds 1 ; d9e5
-wd9e6:: ds 1 ; d9e6
-wLuckyNumberShowFlag:: ds 1 ; d9e7
-wd9e8:: ds 1 ; d9e8
-wd9e9:: ds 1 ; d9e9
-wd9ea:: ds 1 ; d9ea
-wRepelSteps:: ds 1 ; d9eb
-wd9ec:: ds 1 ; d9ec
-wd9ed:: ds 1 ; d9ed
 
-wMapData::
-wVisitedSpawns:: ds 4 ; flag_array NUM_SPAWNS ; d9ee
+wStepCount:: db ; d9bd
+wPoisonStepCount:: db ; d9be
+	ds 2
+wHappinessStepCount:: db
+	ds 1
 
-	warp_struct wDig ; d9f2
-	
+wParkBallsRemaining::
+wSafariBallsRemaining:: db ; d9c3
+wSafariTimeRemaining:: dw ; d9c4
+
+wPhoneList:: ds CONTACT_LIST_SIZE ; d9c6
+; d9d0
+	ds 23
+
+wLuckyNumberShowFlag:: db ; d9e7
+	ds 1
+wLuckyIDNumber:: dw ; d9e9
+
+wRepelEffect:: db ; If a Repel is in use, it contains the nr of steps it's still active
+wBikeStep:: dw
+
+wPlayerData3End::
+wPlayerDataEnd::
+
+wCurMapData::
+
+wVisitedSpawns:: flag_array NUM_SPAWNS ; d9ee
+
+wDigWarpNumber:: db ; d9f2
+wDigMapGroup::   db ; d9f3
+wDigMapNumber::  db ; d9f4
+
+; used on maps like second floor pokécenter, which are reused, so we know which
+; map to return to
 wBackupWarpNumber:: db ; d9f5
-wBackupMapGroup:: db ; d9f6
-wBackupMapNumber:: db ; d9f7
+wBackupMapGroup::   db ; d9f6
+wBackupMapNumber::  db ; d9f7
 
-wd9f8:: ds 1 ; d9f8
-wd9f9:: ds 1 ; d9f9
-wd9fa:: ds 1 ; d9fa
-wd9fb:: ds 1 ; d9fb
-wd9fc:: ds 1 ; d9fc
+	ds 3
+
+wLastSpawnMapGroup:: db
+wLastSpawnMapNumber:: db
+
 wd9fd:: ds 1 ; d9fd
 wd9fe:: ds 1 ; d9fe
-wd9ff:: ds 1 ; d9ff
+wWarpNumber:: db ; d9ff
+wMapGroup:: db ; da00
+wMapNumber:: db ; da01
+wYCoord:: db ; da02
+wXCoord:: db ; da03
+wScreenSave:: ds SCREEN_META_WIDTH * SCREEN_META_HEIGHT
 
-wMapGroup:: ds 1 ; da00
-wMapNumber:: ds 1 ; da01
-wYCoord:: ds 1 ; da02
-wXCoord:: ds 1 ; da03
-wda04:: ds 1 ; da04
-wda05:: ds 1 ; da05
-wda06:: ds 1 ; da06
-wda07:: ds 1 ; da07
-wda08:: ds 1 ; da08
-wda09:: ds 1 ; da09
-wda0a:: ds 1 ; da0a
-wda0b:: ds 1 ; da0b
-wda0c:: ds 1 ; da0c
-wda0d:: ds 1 ; da0d
-wda0e:: ds 1 ; da0e
-wda0f:: ds 1 ; da0f
-wda10:: ds 1 ; da10
-wda11:: ds 1 ; da11
-wda12:: ds 1 ; da12
-wda13:: ds 1 ; da13
-wda14:: ds 1 ; da14
-wda15:: ds 1 ; da15
-wda16:: ds 1 ; da16
-wda17:: ds 1 ; da17
-wda18:: ds 1 ; da18
-wda19:: ds 1 ; da19
-wda1a:: ds 1 ; da1a
-wda1b:: ds 1 ; da1b
-wda1c:: ds 1 ; da1c
-wda1d:: ds 1 ; da1d
-wda1e:: ds 1 ; da1e
-wda1f:: ds 1 ; da1f
-wda20:: ds 1 ; da20
-wda21:: ds 1 ; da21
+wCurMapDataEnd::
 
-SECTION "Party", WRAMX, BANK[1]
+
+SECTION "Party", WRAMX
 
 wPokemonData::
-wPartyCount:: ds 1 ; da22
+wPartyCount::   db ; da22
 wPartySpecies:: ds PARTY_LENGTH ; da23
-wPartySpeciesEnd:: ds 1 ; da29
+wPartyEnd::     db ; da29 ; older code doesn't check wPartyCount
 
 wPartyMons::
 wPartyMon1:: party_struct wPartyMon1 ; da2a
@@ -3625,59 +2681,48 @@ wPartyMon4:: party_struct wPartyMon4 ; daba
 wPartyMon5:: party_struct wPartyMon5 ; daea
 wPartyMon6:: party_struct wPartyMon6 ; db1a
 
-wPartyMonOT::
-wPartyMon1OT:: ds NAME_LENGTH ; db4a
-wPartyMon2OT:: ds NAME_LENGTH ; db55
-wPartyMon3OT:: ds NAME_LENGTH ; db60
-wPartyMon4OT:: ds NAME_LENGTH ; db6b
-wPartyMon5OT:: ds NAME_LENGTH ; db76
-wPartyMon6OT:: ds NAME_LENGTH ; db81
+wPartyMonOT:: ds NAME_LENGTH * PARTY_LENGTH ; db4a
 
-wPartyMonNicknames::
-wPartyMon1Nickname:: ds MON_NAME_LENGTH ; db8c
-wPartyMon2Nickname:: ds MON_NAME_LENGTH ; db97
-wPartyMon3Nickname:: ds MON_NAME_LENGTH ; dba2
-wPartyMon4Nickname:: ds MON_NAME_LENGTH ; dbad
-wPartyMon5Nickname:: ds MON_NAME_LENGTH ; dbb8
-wPartyMon6Nickname:: ds MON_NAME_LENGTH ; dbc3
+wPartyMonNicknames:: ds MON_NAME_LENGTH * PARTY_LENGTH ; db8c
 wPartyMonNicknamesEnd::
 
 	ds 22 ; equivalent to NAME_LENGTH + MON_NAME_LENGTH, possibly a reference to 7 pokemon?
 
 wPokedexCaught:: flag_array NUM_POKEMON ; dbe4
-wPokedexSeen::   flag_array NUM_POKEMON ; dc04
+wEndPokedexCaught::
+
+wPokedexSeen:: flag_array NUM_POKEMON ; dc04
+wEndPokedexSeen::
 
 wUnownDex:: ds NUM_UNOWN ; dc24
-wUnlockedUnowns:: ds 1 ; dc3e
-wFirstUnownSeen:: ds 1 ; dc3f
+wUnlockedUnowns:: db ; dc3e
+wFirstUnownSeen:: db ; dc3f
 
 wDayCareMan:: ; dc40
 ; bit 7: active
 ; bit 6: egg ready
 ; bit 5: monsters are compatible
 ; bit 0: monster 1 in day-care
-	ds 1
+	db
 
 wBreedMon1::
 wBreedMon1Nick::  ds MON_NAME_LENGTH ; dc41
 wBreedMon1OT::    ds NAME_LENGTH ; dc4c
-; TODO fix incorrect Stats label
 wBreedMon1Stats:: box_struct wBreedMon1 ; dc57
 
 wDayCareLady:: ; dc77
 ; bit 7: active
 ; bit 0: monster 2 in day-care
-	ds 1
+	db
 
 wStepsToEgg:: ; dc78
-	ds 1
-
+	db
 wBreedMotherOrNonDitto:: ; dc79
 ;  z: yes
 ; nz: no
-	ds 1
+	db
 
-wBreedMon2::	
+wBreedMon2::
 wBreedMon2Nick::  ds MON_NAME_LENGTH ; dc7a
 wBreedMon2OT::    ds NAME_LENGTH ; dc85
 wBreedMon2Stats:: box_struct wBreedMon2 ; dc90
@@ -3687,74 +2732,61 @@ wEggOT::   ds NAME_LENGTH ; dcbb
 wEggMon::  box_struct wEggMon ; dcc6
 
 wBugContestSecondPartySpecies:: db ; dce6
-
 wContestMon:: party_struct wContestMon ; dce7
 
-wDunsparceMapGroup:: ds 1 ; dd17
-wDunsparceMapNumber:: ds 1 ; dd18
-wFishingSwarmFlag:: ds 1 ; dd19
+wSwarmMapGroup:: db ; dd17
+wSwarmMapNumber:: db ; dd18
+wFishingSwarmFlag:: db ; dd19
 
 wRoamMon1:: roam_struct wRoamMon1 ; dd1a
 wRoamMon2:: roam_struct wRoamMon2 ; dd21
 wRoamMon3:: roam_struct wRoamMon3 ; dd28
 
-wRoamMons_CurrentMapNumber:: ds 1 ; dd2f
-wRoamMons_CurrentMapGroup:: ds 1 ; dd30
-wRoamMons_LastMapNumber:: ds 1 ; dd31
-wRoamMons_LastMapGroup:: ds 1 ; dd32
+wRoamMons_CurMapNumber:: db
+wRoamMons_CurMapGroup:: db
+wRoamMons_LastMapNumber:: db
+wRoamMons_LastMapGroup:: db
 
-wBestMagikarpLengthFeet:: ds 1 ; dd33
-wBestMagikarpLengthInches:: ds 1 ; dd34
-wMagikarpRecordHoldersName:: ds NAME_LENGTH ; dd35
+wBestMagikarpLengthFeet:: db
+wBestMagikarpLengthInches:: db
+wMagikarpRecordHoldersName:: ds NAME_LENGTH
 
-wdd40:: ds 1 ; dd40
-wdd41:: ds 1 ; dd41
-wdd42:: ds 1 ; dd42
-wdd43:: ds 1 ; dd43
-wdd44:: ds 1 ; dd44
-wdd45:: ds 1 ; dd45
-wdd46:: ds 1 ; dd46
-wdd47:: ds 1 ; dd47
-wdd48:: ds 1 ; dd48
-wdd49:: ds 1 ; dd49
-wdd4a:: ds 1 ; dd4a
-wdd4b:: ds 1 ; dd4b
-wdd4c:: ds 1 ; dd4c
-wdd4d:: ds 1 ; dd4d
-wdd4e:: ds 1 ; dd4e
-wdd4f:: ds 1 ; dd4f
-wdd50:: ds 1 ; dd50
-wdd51:: ds 1 ; dd51
-wdd52:: ds 1 ; dd52
-wdd53:: ds 1 ; dd53
-wdd54:: ds 1 ; dd54
+UNION ; dd40
+wPokedexShowPointerAddr:: dw
+wPokedexShowPointerBank:: db
+	ds 3
 
-SECTION "OT Party", WRAMX, BANK[1]
+NEXTU ; dd40
+wUnusedEggHatchFlag:: db
 
-wOTPartyCount:: ds 1 ; dd55
+NEXTU ; dd40
+; enemy party
+wOTPlayerName:: ds NAME_LENGTH ; dd40
+wOTPlayerID:: dw ; dd4b
+	ds 8
+wOTPartyCount::   db ; dd55
 wOTPartySpecies:: ds PARTY_LENGTH ; dd56
-wOTPartySpeciesEnd:: ds 1 ; dd5c
+wOTPartyEnd::     db ; older code doesn't check PartyCount
+ENDU ; dd5d
 
-; The tutorial pack uses the OT party space.
-; It's placed here rather than at wOTPartyCount
-; to avoid confusing the game.
+UNION ; dd5d
+; catch tutorial dude pack
+wDudeBag::
+wDudeNumItems:: db
+wDudeItems:: ds 2 * 4
+wDudeItemsEnd:: db
 
-UNION
-wDudePack::
-wDudeNumItems:: ds 1 ; dd5d
-wDudeItems:: ds 2 * 4 ; dd5e
-wDudeItemsEnd:: ds 1 ; dd66
+wDudeNumKeyItems:: db ; dd67
+wDudeKeyItems:: ds 18
+wDudeKeyItemsEnd:: db
 
-wDudeNumKeyItems:: ds 1 ; dd67
-wDudeKeyItems:: ds 18 ; dd68
-wDudeKeyItemsEnd:: ds 1 ; dd7a
-
-wDudeNumBalls:: ds 1 ; dd7b
+wDudeNumBalls:: db ; dd7b
 wDudeBalls:: ds 2 * 4 ; dd7c
-wDudeBallsEnd:: ds 1 ; dd84
-wDudePackEnd::
-NEXTU
+wDudeBallsEnd:: db ; dd84
+wDudeBagEnd::
 
+NEXTU ; dd5d
+; ot party mons
 wOTPartyMons::
 wOTPartyMon1:: party_struct wOTPartyMon1 ; dd5d
 wOTPartyMon2:: party_struct wOTPartyMon2 ; dd8d
@@ -3762,30 +2794,21 @@ wOTPartyMon3:: party_struct wOTPartyMon3 ; ddbd
 wOTPartyMon4:: party_struct wOTPartyMon4 ; dded
 wOTPartyMon5:: party_struct wOTPartyMon5 ; de1d
 wOTPartyMon6:: party_struct wOTPartyMon6 ; de4d
+wOTPartyMonsEnd::
 
-wOTPartyMonOT::
-wOTPartyMon1OT:: ds NAME_LENGTH ; de7d
-wOTPartyMon2OT:: ds NAME_LENGTH ; de88
-wOTPartyMon3OT:: ds NAME_LENGTH ; de93
-wOTPartyMon4OT:: ds NAME_LENGTH ; de9e
-wOTPartyMon5OT:: ds NAME_LENGTH ; dea9
-wOTPartyMon6OT:: ds NAME_LENGTH ; deb4
+wOTPartyMonOT:: ds NAME_LENGTH * PARTY_LENGTH ; de7d
+wOTPartyMonNicknames:: ds MON_NAME_LENGTH * PARTY_LENGTH ; debf
+wOTPartyDataEnd::
+ENDU ; df01
 
-wOTPartyMonNicknames::
-wOTPartyMon1Nickname:: ds MON_NAME_LENGTH ; debf
-wOTPartyMon2Nickname:: ds MON_NAME_LENGTH ; deca
-wOTPartyMon3Nickname:: ds MON_NAME_LENGTH ; ded5
-wOTPartyMon4Nickname:: ds MON_NAME_LENGTH ; dee0
-wOTPartyMon5Nickname:: ds MON_NAME_LENGTH ; deeb
-wOTPartyMon6Nickname:: ds MON_NAME_LENGTH ; def6
-ENDU
-
+wPokemonDataEnd::
 wGameDataEnd::
 
-SECTION "Stack", WRAMX, BANK[1]
+
+SECTION "Stack", WRAMX
 
 wStackTop::
-	ds 1
+
 
 INCLUDE "sram.asm"
 

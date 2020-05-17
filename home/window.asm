@@ -36,9 +36,9 @@ CloseText::
 	call SafeUpdateSprites
 	ld a, $90
 	ldh [hWY], a
-	farcall Function1415c
-	call ReplacePlayerSprite
-	ld hl, wd565
+	farcall _ClearSprites
+	call ReplaceChrisSprite
+	ld hl, wEnteredMapFromContinue
 	res 7, [hl]
 	call ResetBGWindow
 	ret
@@ -62,7 +62,7 @@ OpenText::
 _OpenAndCloseMenu_HDMATransferTilemapAndAttrmap::
 	ldh a, [hOAMUpdate]
 	push af
-	ld a, 1
+	ld a, $1
 	ldh [hOAMUpdate], a
 
 	call CGBOnly_CopyTilemapAtOnce

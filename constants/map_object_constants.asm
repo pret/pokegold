@@ -70,6 +70,9 @@ EMOTE_OBJECT  EQU 1 << EMOTE_OBJECT_F
 	const OBJ_FLAGS2_2    ; 2
 	const OVERHEAD_F      ; 3
 	const USE_OBP1_F      ; 4
+	const OBJ_FLAGS2_5    ; 5
+	const OBJ_FLAGS2_6    ; 6
+	const OBJ_FLAGS2_7    ; 7
 
 LOW_PRIORITY  EQU 1 << LOW_PRIORITY_F
 HIGH_PRIORITY EQU 1 << HIGH_PRIORITY_F
@@ -225,7 +228,6 @@ NUM_SPRITEMOVEDATA EQU const_value
 	const STEP_TYPE_16              ; 16
 	const STEP_TYPE_17              ; 17
 	const STEP_TYPE_18              ; 18
-	const STEP_TYPE_SKYFALL_TOP     ; 19
 
 ; ObjectActionPairPointers indexes (see engine/overworld/map_object_action.asm)
 	const_def
@@ -245,7 +247,6 @@ NUM_SPRITEMOVEDATA EQU const_value
 	const OBJECT_ACTION_BIG_DOLL      ; 0d
 	const OBJECT_ACTION_BOULDER_DUST  ; 0e
 	const OBJECT_ACTION_GRASS_SHAKE   ; 0f
-	const OBJECT_ACTION_SKYFALL       ; 10
 
 ; Facings indexes (see data/sprites/facings.asm)
 	const_def

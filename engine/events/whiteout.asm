@@ -1,6 +1,6 @@
 Script_BattleWhiteout::
 	callasm BattleBGMap
-	jump Script_Whiteout
+	sjump Script_Whiteout
 
 Script_OverworldWhiteout::
 	refreshscreen
@@ -25,9 +25,8 @@ Script_Whiteout:
 	jumpstd bugcontestresultswarp
 
 .WhitedOutText:
-	; is out of useable #MON!  whited out!
-	text_far UnknownText_0x1c0a4e
-	db "@"
+	text_far _WhitedOutText
+	text_end
 
 OverworldBGMap:
 	call ClearPalettes
@@ -58,19 +57,15 @@ HalveMoney:
 	ret
 
 GetWhiteoutSpawn:
-	ld a, [wd9fb]
+	ld a, [wLastSpawnMapGroup]
 	ld d, a
-	ld a, [wd9fc]
+	ld a, [wLastSpawnMapNumber]
 	ld e, a
-
-	ld a, $05
-	ld hl, $5465
-	rst $08
-
+	farcall IsSpawnPoint
 	ld a, c
 	jr c, .yes
 	xor a ; SPAWN_HOME
 
 .yes
-	ld [wceec], a
+	ld [wDefaultSpawnpoint], a
 	ret

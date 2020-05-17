@@ -16,7 +16,7 @@ RuinsOfAlphHoOhChamber_MapScripts:
 
 RuinsOfAlphHoOhChamberPuzzle:
 	refreshscreen
-	writebyte UNOWNPUZZLE_HO_OH
+	setval UNOWNPUZZLE_HO_OH
 	special UnownPuzzle
 	closetext
 	iftrue .PuzzleComplete

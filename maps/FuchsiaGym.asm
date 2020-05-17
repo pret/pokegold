@@ -39,7 +39,7 @@ FuchsiaGymJanineScript:
 	playsound SFX_GET_BADGE
 	waitsfx
 	setflag ENGINE_SOULBADGE
-	jump .AfterBattle
+	sjump .AfterBattle
 .FightDone:
 	faceplayer
 	opentext
@@ -47,7 +47,7 @@ FuchsiaGymJanineScript:
 	checkevent EVENT_GOT_TM06_TOXIC
 	iftrue .AfterTM
 	writetext JanineText_ToxicSpeech
-	buttonsound
+	promptbutton
 	verbosegiveitem TM_TOXIC
 	iffalse .AfterTM
 	setevent EVENT_GOT_TM06_TOXIC
@@ -214,7 +214,7 @@ FuchsiaGymStatue:
 	iftrue .Beaten
 	jumpstd gymstatue1
 .Beaten:
-	trainertotext JANINE, JANINE1, STRING_BUFFER_4
+	gettrainername STRING_BUFFER_4, JANINE, JANINE1
 	jumpstd gymstatue2
 
 Movement_NinjaSpin:

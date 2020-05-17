@@ -22,7 +22,7 @@ DragonsDenB1F_MapScripts:
 	return
 
 .CheckDay:
-	checkcode VAR_WEEKDAY
+	readvar VAR_WEEKDAY
 	ifequal TUESDAY, .AppearSilver
 	ifequal THURSDAY, .AppearSilver
 	disappear DRAGONSDENB1F_SILVER
@@ -37,15 +37,15 @@ DragonsDenB1FDragonFangScript:
 	iffalse .BagFullDragonFang
 	disappear DRAGONSDENB1F_POKE_BALL1
 	opentext
-	itemtotext DRAGON_FANG, STRING_BUFFER_3
+	getitemname STRING_BUFFER_3, DRAGON_FANG
 	writetext Text_FoundDragonFang
 	playsound SFX_ITEM
 	waitsfx
 	itemnotify
 	closetext
-	checkcode VAR_FACING
+	readvar VAR_FACING
 	ifequal RIGHT, .next
-	jump .next2
+	sjump .next2
 .next
 	moveobject DRAGONSDENB1F_CLAIR, 34, 21
 .next2
@@ -54,7 +54,7 @@ DragonsDenB1FDragonFangScript:
 	turnobject PLAYER, DOWN
 	opentext
 	writetext ClairText_GiveDragonbreathDragonDen
-	buttonsound
+	promptbutton
 	waitsfx
 	writetext DragonShrinePlayerReceivedRisingBadgeText
 	playsound SFX_GET_BADGE
@@ -62,13 +62,13 @@ DragonsDenB1FDragonFangScript:
 	setflag ENGINE_RISINGBADGE
 	specialphonecall SPECIALCALL_MASTERBALL
 	writetext DragonShrineRisingBadgeExplanationText
-	buttonsound
+	promptbutton
 	verbosegiveitem TM_DRAGONBREATH, 1
 	iffalse .ClairLastText
 	setevent EVENT_GOT_TM24_DRAGONBREATH
 	writetext ClairText_DescribeDragonbreathDragonDen
-	buttonsound
-	jump .ClairLastText
+	promptbutton
+	sjump .ClairLastText
 .ClairLastText
 	writetext ClairText_WhatsTheMatterDragonDen
 	waitbutton
@@ -79,9 +79,9 @@ DragonsDenB1FDragonFangScript:
 
 .BagFullDragonFang:
 	opentext
-	itemtotext DRAGON_FANG, STRING_BUFFER_3
+	getitemname STRING_BUFFER_3, DRAGON_FANG
 	writetext Text_FoundDragonFang
-	buttonsound
+	promptbutton
 	writetext Text_NoRoomForDragonFang
 	waitbutton
 	closetext

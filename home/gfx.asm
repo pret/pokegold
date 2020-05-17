@@ -1,4 +1,4 @@
-Functiond70:: ; d70 (0:0d70)
+FarCopyBytesDouble_DoubleBankSwitch::
 	ld b, a
 	ldh a, [hROMBank]
 	push af
@@ -12,7 +12,7 @@ Functiond70:: ; d70 (0:0d70)
 	xor a
 	call ByteFill
 
-	ld hl, wcf3c
+	ld hl, wUnusedBufferCF3C
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
@@ -24,20 +24,20 @@ Functiond70:: ; d70 (0:0d70)
 	rst Bankswitch
 	ret
 
-ReplacePlayerSprite::
-	farcall Function1413c
+ReplaceChrisSprite::
+	farcall _ReplaceChrisSprite
 	ret
 
-Functiond9e::
-	farcall Functionf8000
+LoadStandardFont::
+	farcall _LoadStandardFont
 	ret
 
-Functionda5::
-	farcall Functionf8032
+LoadFontsBattleExtra::
+	farcall _LoadFontsBattleExtra
 	ret
 
 LoadFontsExtra::
-	farcall Functionf800c
+	farcall _LoadFontsExtra
 	ret
 
 DecompressRequest2bpp::
@@ -61,10 +61,10 @@ DecompressRequest2bpp::
 FarCopyBytes::
 ; copy bc bytes from a:hl to de
 
-	ld [wBuffer], a
+	ld [wTempBank], a
 	ldh a, [hROMBank]
 	push af
-	ld a, [wBuffer]
+	ld a, [wTempBank]
 	rst Bankswitch
 
 	call CopyBytes
@@ -73,15 +73,14 @@ FarCopyBytes::
 	rst Bankswitch
 	ret
 
-
-FarCopyBytesDouble:
+FarCopyBytesDouble::
 ; Copy bc bytes from a:hl to bc*2 bytes at de,
 ; doubling each byte in the process.
 
-	ld [wBuffer], a
+	ld [wTempBank], a
 	ldh a, [hROMBank]
 	push af
-	ld a, [wBuffer]
+	ld a, [wTempBank]
 	rst Bankswitch
 
 ; switcheroo, de <> hl
@@ -259,15 +258,15 @@ Copy1bpp::
 	pop hl
 	jp FarCopyBytesDouble
 
-Function_ea6::
+UnusedGet2bpp::
 	ldh a, [rLCDC]
 	add a
 	jp c, Request2bpp
 
-Function_eac::
+UnusedCopy2bpp::
 	push de
 	push hl
-	
+
 ; bank
 	ld a, b
 

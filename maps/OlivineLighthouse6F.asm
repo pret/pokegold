@@ -16,7 +16,7 @@ OlivineLighthouseJasmine:
 	checkevent EVENT_JASMINE_EXPLAINED_AMPHYS_SICKNESS
 	iftrue .ExplainedSickness
 	writetext JasmineCianwoodPharmacyText
-	buttonsound
+	promptbutton
 	setevent EVENT_JASMINE_EXPLAINED_AMPHYS_SICKNESS
 .ExplainedSickness:
 	writetext JasmineGetSomeMedicineText
@@ -29,7 +29,7 @@ OlivineLighthouseJasmine:
 	yesorno
 	iffalse .no
 	writetext PlayerHandedSecretpotionText
-	buttonsound
+	promptbutton
 	takeitem SECRETPOTION
 	writetext JasmineDontBeOffendedText
 	waitbutton
@@ -41,7 +41,7 @@ OlivineLighthouseJasmine:
 	playmusic MUSIC_HEAL
 	writetext JasmineAmphyHowAreYouFeelingText
 	pause 60
-	buttonsound
+	promptbutton
 	closetext
 	special RestartMapMusic
 	cry AMPHAROS
@@ -67,7 +67,7 @@ OlivineLighthouseJasmine:
 	closetext
 	setevent EVENT_JASMINE_RETURNED_TO_GYM
 	clearevent EVENT_OLIVINE_GYM_JASMINE
-	checkcode VAR_FACING
+	readvar VAR_FACING
 	ifequal DOWN, .FacingDown
 	ifequal RIGHT, .FacingRight
 	applymovement OLIVINELIGHTHOUSE6F_JASMINE, MovementData_0x60c68
@@ -107,9 +107,9 @@ OlivineLighthouseAmphy:
 	checkevent EVENT_JASMINE_RETURNED_TO_GYM
 	iftrue .HealthyNow
 	writetext AmphyPalPalooText
-	writebyte AMPHAROS
+	setval AMPHAROS
 	special PlaySlowCry
-	buttonsound
+	promptbutton
 	writetext AmphyBreathingLaboredText
 	waitbutton
 	closetext

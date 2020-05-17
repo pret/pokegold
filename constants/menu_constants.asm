@@ -32,8 +32,13 @@
 	shift_const SCROLLINGMENU_ENABLE_START
 	shift_const SCROLLINGMENU_ENABLE_SELECT
 
+; ScrollingMenu items structure format
+	const_def 1
+	const SCROLLINGMENU_ITEMS_NORMAL
+	const SCROLLINGMENU_ITEMS_QUANTITY
+
 ; MonMenuOptions indexes (see data/mon_menu.asm)
-; used by PokemonActionSubmenu (see engine/menus/start_menu.asm)
+; used by PokemonActionSubmenu (see engine/pokemon/mon_menu.asm)
 	const_def 1
 	; moves
 	const MONMENUITEM_CUT        ; 1
@@ -80,7 +85,6 @@ HMENURETURN_ASM    EQU %11111111
 	const PARTYMENUACTION_GIVE_MON
 	const PARTYMENUACTION_GIVE_MON_FEMALE ; unused
 	const PARTYMENUACTION_GIVE_ITEM
-	const PARTYMENUACTION_MOBILE ; mobile
 ; PrintPartyMenuActionText arguments (see engine/pokemon/party_menu.asm)
 	const_def $f0
 	const PARTYMENUTEXT_HEAL_PSN
@@ -93,3 +97,15 @@ HMENURETURN_ASM    EQU %11111111
 	const PARTYMENUTEXT_REVIVE
 	const PARTYMENUTEXT_LEVEL_UP
 	const PARTYMENUTEXT_HEAL_CONFUSION
+
+; Naming types (see engine/menus/naming_screen.asm)
+	const_def
+	const NAME_MON
+	const NAME_PLAYER
+	const NAME_RIVAL
+	const NAME_MOM
+	const NAME_BOX
+	const NAME_FRIEND
+	const NAME_6 ; duplicate of NAME_MON
+	const NAME_7 ; duplicate of NAME_MON
+NUM_NAME_TYPES EQU const_value

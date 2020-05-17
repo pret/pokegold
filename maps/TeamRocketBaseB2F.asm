@@ -47,7 +47,7 @@ TeamRocketBaseB2F_MapScripts:
 
 RocketBaseBossFLeft:
 	moveobject TEAMROCKETBASEB2F_LANCE, 9, 13
-	jump RocketBaseBossFScript
+	sjump RocketBaseBossFScript
 
 RocketBaseBossFRight:
 	moveobject TEAMROCKETBASEB2F_ROCKET_GIRL, 21, 16
@@ -154,7 +154,7 @@ RocketBaseLancesSideScript:
 
 LanceHealsScript1:
 	turnobject PLAYER, UP
-	jump LanceHealsCommon
+	sjump LanceHealsCommon
 
 LanceHealsScript2:
 	turnobject PLAYER, RIGHT
@@ -174,7 +174,7 @@ LanceHealsCommon:
 	closetext
 	setscene SCENE_TEAMROCKETBASEB2F_ROCKET_BOSS
 	setevent EVENT_LANCE_HEALED_YOU_IN_TEAM_ROCKET_BASE
-	checkcode VAR_FACING
+	readvar VAR_FACING
 	ifequal RIGHT, .FacingRight
 	applymovement TEAMROCKETBASEB2F_LANCE, MovementData_0x6d212
 	disappear TEAMROCKETBASEB2F_LANCE
@@ -234,7 +234,7 @@ RocketElectrode1:
 	reloadmapafterbattle
 	special PlayMapMusic
 	applymovement PLAYER, MovementData_0x6d28c
-	jump RocketBaseElectrodeScript
+	sjump RocketBaseElectrodeScript
 
 RocketElectrode2:
 	cry ELECTRODE
@@ -252,7 +252,7 @@ RocketElectrode2:
 	reloadmapafterbattle
 	special PlayMapMusic
 	applymovement PLAYER, MovementData_0x6d299
-	jump RocketBaseElectrodeScript
+	sjump RocketBaseElectrodeScript
 
 RocketElectrode3:
 	cry ELECTRODE
@@ -270,7 +270,7 @@ RocketElectrode3:
 	reloadmapafterbattle
 	special PlayMapMusic
 	applymovement PLAYER, MovementData_0x6d2a4
-	jump RocketBaseElectrodeScript
+	sjump RocketBaseElectrodeScript
 
 TeamRocketBaseB2FReloadMap:
 	reloadmapafterbattle
@@ -283,7 +283,7 @@ RocketBaseElectrodeScript:
 	turnobject PLAYER, RIGHT
 	opentext
 	writetext UnknownText_0x6d809
-	buttonsound
+	promptbutton
 	verbosegiveitem HM_WHIRLPOOL
 	setevent EVENT_GOT_HM06_WHIRLPOOL
 	writetext UnknownText_0x6d8f8

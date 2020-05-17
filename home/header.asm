@@ -4,10 +4,12 @@ SECTION "rst0", ROM0[$0000]
 	di
 	jp Start
 
-SECTION "rst8", ROM0[$0008] ; rst FarCall
+SECTION "rst8", ROM0[$0008]
+FarCall::
 	jp FarCall_hl
 
-SECTION "rst10", ROM0[$0010] ; rst Bankswitch
+SECTION "rst10", ROM0[$0010]
+Bankswitch::
 	ldh [hROMBank], a
 	ld [MBC3RomBank], a
 	ret
@@ -18,7 +20,8 @@ SECTION "rst18", ROM0[$0018]
 SECTION "rst20", ROM0[$0020]
 	rst $38
 
-SECTION "rst28", ROM0[$0028] ; rst JumpTable
+SECTION "rst28", ROM0[$0028]
+JumpTable::
 	push de
 	ld e, a
 	ld d, 0
@@ -53,14 +56,15 @@ SECTION "joypad", ROM0[$0060]
 	jp Joypad
 
 
-; Game Boy cartridge header
-
 SECTION "Header", ROM0[$0100]
 
 Start::
+; Nintendo requires all Game Boy ROMs to begin with a nop ($00) and a jp ($C3)
+; to the starting address.
 	nop
 	jp _Start
 
-; The cartridge header data is filled in by rgbfix.
-; This makes sure it doesn't get used.
-	ds $0150 - @
+; The Game Boy cartridge header data is patched over by rgbfix.
+; This makes sure it doesn't get used for anything else.
+
+	ds $0150 - @, $00

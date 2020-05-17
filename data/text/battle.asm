@@ -405,9 +405,8 @@ BecameConfusedText:
 	text "<TARGET>"
 	line "became confused!"
 	prompt
-; ItemHealedConfusion
 
-BattleText_ItemHealedConfusion: ; ItemHealedConfusion
+BattleText_ItemHealedConfusion:
 	text "A @"
 	text_ram wStringBuffer1
 	text " rid"
@@ -442,7 +441,7 @@ UsedBindText:
 	cont "<TARGET>!"
 	prompt
 
-WhirlpoolTrapText:
+WasTrappedText:
 	text "<TARGET>"
 	line "was trapped!"
 	prompt
@@ -806,7 +805,7 @@ SubFadedText:
 	line "SUBSTITUTE faded!"
 	prompt
 
-LearnedMoveText:
+MimicLearnedMoveText:
 	text "<USER>"
 	line "learned"
 	cont "@"
@@ -1072,7 +1071,7 @@ BeatUpAttackText:
 	line "attack!"
 	done
 
-CanReceiveGiftText:
+CantReceiveGiftText:
 	text "<TARGET> can't"
 	line "receive the gift!"
 	prompt

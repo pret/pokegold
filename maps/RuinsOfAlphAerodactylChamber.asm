@@ -16,7 +16,7 @@ RuinsOfAlphAerodactylChamber_MapScripts:
 
 RuinsOfAlphAerodactylChamberPuzzle:
 	refreshscreen
-	writebyte UNOWNPUZZLE_AERODACTYL
+	setval UNOWNPUZZLE_AERODACTYL
 	special UnownPuzzle
 	closetext
 	iftrue .PuzzleComplete

@@ -1,17 +1,17 @@
 GetFirstPokemonHappiness:
 	ld hl, wPartyMon1Happiness
-	ld bc, $30
+	ld bc, PARTYMON_STRUCT_LENGTH
 	ld de, wPartySpecies
-.asm_7275
+.loop
 	ld a, [de]
 	cp EGG
-	jr nz, .asm_727e
+	jr nz, .done
 	inc de
 	add hl, bc
-	jr .asm_7275
+	jr .loop
 
-.asm_727e
-	ld [wd151], a
+.done
+	ld [wNamedObjectIndexBuffer], a
 	ld a, [hl]
 	ld [wScriptVar], a
 	call GetPokemonName
@@ -19,67 +19,76 @@ GetFirstPokemonHappiness:
 
 CheckFirstMonIsEgg:
 	ld a, [wPartySpecies]
-	ld [wd151], a
+	ld [wNamedObjectIndexBuffer], a
 	cp EGG
-	ld a, $1
-	jr z, .asm_7298
+	ld a, TRUE
+	jr z, .egg
 	xor a
-.asm_7298
+
+.egg
 	ld [wScriptVar], a
 	call GetPokemonName
 	jp CopyPokemonName_Buffer1_Buffer3
 
-ChangeHappiness: ; 72a1 (1:72a1)
+ChangeHappiness:
+; Perform happiness action c on wCurPartyMon
+
 	ld a, [wCurPartyMon]
 	inc a
 	ld e, a
-	ld d, $0
-	ld hl, wPartyCount
+	ld d, 0
+	ld hl, wPartySpecies - 1
 	add hl, de
 	ld a, [hl]
-	cp $fd
+	cp EGG
 	ret z
+
 	push bc
 	ld hl, wPartyMon1Happiness
-	ld bc, $30
+	ld bc, PARTYMON_STRUCT_LENGTH
 	ld a, [wCurPartyMon]
 	call AddNTimes
 	pop bc
+
 	ld d, h
 	ld e, l
+
 	push de
 	ld a, [de]
-	cp $64
-	ld e, $0
-	jr c, .asm_72ce
+	cp HAPPINESS_THRESHOLD_1
+	ld e, 0
+	jr c, .ok
 	inc e
-	cp $c8
-	jr c, .asm_72ce
+	cp HAPPINESS_THRESHOLD_2
+	jr c, .ok
 	inc e
-.asm_72ce
+
+.ok
 	dec c
-	ld b, $0
-	ld hl, .Actions
+	ld b, 0
+	ld hl, HappinessChanges
 	add hl, bc
 	add hl, bc
 	add hl, bc
-	ld d, $0
+	ld d, 0
 	add hl, de
 	ld a, [hl]
-	cp $64
+	cp $64 ; why not $80?
 	pop de
-	ld a, [de]
-	jr nc, .asm_72e8
-	add [hl]
-	jr nc, .asm_72ec
-	ld a, $ff
-	jr .asm_72ec
 
-.asm_72e8
+	ld a, [de]
+	jr nc, .negative
 	add [hl]
-	jr c, .asm_72ec
+	jr nc, .done
+	ld a, -1
+	jr .done
+
+.negative
+	add [hl]
+	jr c, .done
 	xor a
-.asm_72ec
+
+.done
 	ld [de], a
 	ld a, [wBattleMode]
 	and a
@@ -93,84 +102,76 @@ ChangeHappiness: ; 72a1 (1:72a1)
 	ld [wBattleMonHappiness], a
 	ret
 
-.Actions:
-	db  +5,  +3,  +2 ; Gained a level
-	db  +5,  +3,  +2 ; Vitamin
-	db  +1,  +1,  +0 ; X Item
-	db  +3,  +2,  +1 ; Battled a Gym Leader
-	db  +1,  +1,  +0 ; Learned a move
-	db  -1,  -1,  -1 ; Lost to an enemy
-	db  -5,  -5, -10 ; Fainted due to poison
-	db  -5,  -5, -10 ; Lost to a much stronger enemy
-	db  +1,  +1,  +1 ; Haircut (Y1)
-	db  +3,  +3,  +1 ; Haircut (Y2)
-	db  +5,  +5,  +2 ; Haircut (Y3)
-	db  +1,  +1,  +1 ; Haircut (O1)
-	db  +3,  +3,  +1 ; Haircut (O2)
-	db +10, +10,  +4 ; Haircut (O3)
-	db  -5,  -5, -10 ; Used Heal Powder or Energypowder (bitter)
-	db -10, -10, -15 ; Used Energy Root (bitter)
-	db -15, -15, -20 ; Used Revival Herb (bitter)
-	db  +3,  +3,  +1 ; Grooming
+INCLUDE "data/events/happiness_changes.asm"
 
 StepHappiness::
-	ld hl, wd9c1
+; Raise the party's happiness by 1 point every other step cycle.
+
+	ld hl, wHappinessStepCount
 	ld a, [hl]
 	inc a
-	and $1
+	and 1
 	ld [hl], a
 	ret nz
+
 	ld de, wPartyCount
 	ld a, [de]
 	and a
 	ret z
+
 	ld c, a
 	ld hl, wPartyMon1Happiness
-.asm_7349
+.loop
 	inc de
 	ld a, [de]
 	cp EGG
-	jr z, .asm_7354
+	jr z, .next
 	inc [hl]
-	jr nz, .asm_7354
+	jr nz, .next
 	ld [hl], $ff
-.asm_7354
+
+.next
 	push de
-	ld de, $30
+	ld de, PARTYMON_STRUCT_LENGTH
 	add hl, de
 	pop de
 	dec c
-	jr nz, .asm_7349
+	jr nz, .loop
 	ret
 
-MAX_EXP EQU 5242880
+DayCareStep::
+; Raise the experience of Day-Care Pokémon every step cycle.
 
-DaycareStep::
-	CheckFlag ENGINE_DAY_CARE_MAN_HAS_MON
-	jr z, .daycare_lady
-	ld a, [wBreedMon1Level]
+	ld a, [wDayCareMan]
+	bit DAYCAREMAN_HAS_MON_F, a
+	jr z, .day_care_lady
+
+	ld a, [wBreedMon1Level] ; level
 	cp MAX_LEVEL
-	jr nc, .daycare_lady
-	ld hl, wBreedMon1Exp + 2
+	jr nc, .day_care_lady
+	ld hl, wBreedMon1Exp + 2 ; exp
 	inc [hl]
-	jr nz, .daycare_lady
+	jr nz, .day_care_lady
 	dec hl
 	inc [hl]
-	jr nz, .daycare_lady
+	jr nz, .day_care_lady
 	dec hl
 	inc [hl]
 	ld a, [hl]
-	cp MAX_EXP / $10000
-	jr c, .daycare_lady
-	ld a, MAX_EXP / $10000
+	cp HIGH(MAX_DAY_CARE_EXP >> 8)
+	jr c, .day_care_lady
+	ld a, HIGH(MAX_DAY_CARE_EXP >> 8)
 	ld [hl], a
-.daycare_lady
-	CheckFlag ENGINE_DAY_CARE_LADY_HAS_MON
+
+.day_care_lady
+	ld a, [wDayCareLady]
+	bit DAYCARELADY_HAS_MON_F, a
 	jr z, .check_egg
-	ld a, [wBreedMon2Level]
+
+	ld a, [wBreedMon2Level] ; level
 	cp MAX_LEVEL
 	jr nc, .check_egg
-	ld hl, wBreedMon2Exp + 2
+	ld hl, wBreedMon2Exp + 2 ; exp
 	inc [hl]
 	jr nz, .check_egg
 	dec hl
@@ -179,13 +180,14 @@ DaycareStep::
 	dec hl
 	inc [hl]
 	ld a, [hl]
-	cp MAX_EXP / $10000
+	cp HIGH(MAX_DAY_CARE_EXP >> 8)
 	jr c, .check_egg
-	ld a, MAX_EXP / $10000
+	ld a, HIGH(MAX_DAY_CARE_EXP >> 8)
 	ld [hl], a
+
 .check_egg
 	ld hl, wDayCareMan
-	bit 5, [hl]
+	bit DAYCAREMAN_MONS_COMPATIBLE_F, [hl]
 	ret z
 	ld hl, wStepsToEgg
 	dec [hl]
@@ -194,24 +196,25 @@ DaycareStep::
 	call Random
 	ld [hl], a
 	callfar CheckBreedmonCompatibility
-	ld a, [wd151]
+	ld a, [wBreedingCompatibility]
 	cp 230
-	ld b, -1 + 32 percent
+	ld b, 31 percent + 1
 	jr nc, .okay
-	ld a, [wd151]
+	ld a, [wBreedingCompatibility]
 	cp 170
 	ld b, 16 percent
 	jr nc, .okay
-	ld a, [wd151]
+	ld a, [wBreedingCompatibility]
 	cp 110
 	ld b, 12 percent
 	jr nc, .okay
 	ld b, 4 percent
+
 .okay
 	call Random
 	cp b
 	ret nc
 	ld hl, wDayCareMan
-	res 5, [hl]
-	SetFlagForceReuseHL ENGINE_DAY_CARE_MAN_HAS_EGG
+	res DAYCAREMAN_MONS_COMPATIBLE_F, [hl]
+	set DAYCAREMAN_HAS_EGG_F, [hl]
 	ret

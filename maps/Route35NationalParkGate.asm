@@ -20,7 +20,7 @@ Route35NationalParkGate_MapScripts:
 	end
 
 .LeaveContestEarly:
-	priorityjump .LeavingContestEarly
+	prioritysjump .LeavingContestEarly
 	end
 
 .CheckIfContestRunning:
@@ -34,7 +34,7 @@ Route35NationalParkGate_MapScripts:
 	return
 
 .CheckIfContestAvailable:
-	checkcode VAR_WEEKDAY
+	readvar VAR_WEEKDAY
 	ifequal TUESDAY, .SetContestOfficer
 	ifequal THURSDAY, .SetContestOfficer
 	ifequal SATURDAY, .SetContestOfficer
@@ -55,9 +55,9 @@ Route35NationalParkGate_MapScripts:
 	applymovement PLAYER, MovementData_0x6a2e2
 	turnobject ROUTE35NATIONALPARKGATE_OFFICER1, RIGHT
 	opentext
-	checkcode VAR_CONTESTMINUTES
-	addvar 1
-	vartomem STRING_BUFFER_3
+	readvar VAR_CONTESTMINUTES
+	addval 1
+	getnum STRING_BUFFER_3
 	writetext UnknownText_0x6a79a
 	yesorno
 	iffalse .GoBackToContest
@@ -78,7 +78,7 @@ Route35NationalParkGate_MapScripts:
 	end
 
 Route35OfficerScriptContest:
-	checkcode VAR_WEEKDAY
+	readvar VAR_WEEKDAY
 	ifequal SUNDAY, Route35NationalParkGate_NoContestToday
 	ifequal MONDAY, Route35NationalParkGate_NoContestToday
 	ifequal WEDNESDAY, Route35NationalParkGate_NoContestToday
@@ -91,7 +91,7 @@ Route35OfficerScriptContest:
 	writetext UnknownText_0x6a2eb
 	yesorno
 	iffalse Route35NationalParkGate_DeclinedToParticipate
-	checkcode VAR_PARTYCOUNT
+	readvar VAR_PARTYCOUNT
 	ifgreater 1, Route35NationalParkGate_LeaveTheRestBehind
 	special ContestDropOffMons
 	clearevent EVENT_LEFT_MONS_WITH_CONTEST_OFFICER
@@ -99,7 +99,7 @@ Route35NationalParkGate_OkayToProceed:
 	setflag ENGINE_BUG_CONTEST_TIMER
 	special PlayMapMusic
 	writetext UnknownText_0x6a39d
-	buttonsound
+	promptbutton
 	writetext UnknownText_0x6a3c7
 	playsound SFX_ITEM
 	waitsfx
@@ -116,7 +116,7 @@ Route35NationalParkGate_OkayToProceed:
 	end
 
 Route35NationalParkGate_EnterContest:
-	checkcode VAR_FACING
+	readvar VAR_FACING
 	ifequal LEFT, Route35NationalParkGate_FacingLeft
 	applymovement PLAYER, MovementData_0x6a2e5
 	end
@@ -126,9 +126,9 @@ Route35NationalParkGate_FacingLeft:
 	end
 
 Route35NationalParkGate_LeaveTheRestBehind:
-	checkcode VAR_PARTYCOUNT
+	readvar VAR_PARTYCOUNT
 	ifless PARTY_LENGTH, Route35NationalParkGate_LessThanFullParty
-	checkcode VAR_BOXSPACE
+	readvar VAR_BOXSPACE
 	ifequal 0, Route35NationalParkGate_NoRoomInBox
 
 Route35NationalParkGate_LessThanFullParty:
@@ -141,12 +141,12 @@ Route35NationalParkGate_LessThanFullParty:
 	iftrue Route35NationalParkGate_FirstMonIsFainted
 	setevent EVENT_LEFT_MONS_WITH_CONTEST_OFFICER
 	writetext UnknownText_0x6a537
-	buttonsound
+	promptbutton
 	writetext UnknownText_0x6a56b
 	playsound SFX_GOT_SAFARI_BALLS
 	waitsfx
-	buttonsound
-	jump Route35NationalParkGate_OkayToProceed
+	promptbutton
+	sjump Route35NationalParkGate_OkayToProceed
 
 Route35NationalParkGate_DeclinedToParticipate:
 	writetext UnknownText_0x6a5dc

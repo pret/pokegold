@@ -1,40 +1,44 @@
 ; Kanto Pokémon in grass
 
-	map DIGLETTS_CAVE
+KantoGrassWildMons:
+
+	map_id DIGLETTS_CAVE
 	db 4 percent, 2 percent, 8 percent ; encounter rates: morn/day/nite
 	; morn
-	db 3, DIGLETT
-	db 6, DIGLETT
-	db 12, DIGLETT
-	db 24, DIGLETT
+	db 15, DIGLETT
+	db 17, DIGLETT
+	db 19, DIGLETT
+	db 13, DIGLETT
+	db 19, DUGTRIO
 	db 24, DUGTRIO
-	db 24, DUGTRIO
-	db 24, DUGTRIO
+	db 29, DUGTRIO
 	; day
-	db 2, DIGLETT
-	db 4, DIGLETT
-	db 8, DIGLETT
-	db 16, DIGLETT
-	db 16, DUGTRIO
-	db 16, DUGTRIO
-	db 16, DUGTRIO
+	db 15, DIGLETT
+	db 17, DIGLETT
+	db 19, DIGLETT
+	db 13, DIGLETT
+	db 19, DUGTRIO
+	db 24, DUGTRIO
+	db 29, DUGTRIO
 	; nite
-	db 4, DIGLETT
-	db 8, DIGLETT
-	db 16, DIGLETT
-	db 32, DIGLETT
-	db 32, DUGTRIO
-	db 32, DUGTRIO
-	db 32, DUGTRIO
+	db 15, DIGLETT
+	db 17, DIGLETT
+	db 19, DIGLETT
+	db 13, DIGLETT
+	db 19, DUGTRIO
+	db 24, DUGTRIO
+	db 29, DUGTRIO
 
-	map MOUNT_MOON
+	map_id MOUNT_MOON
 	db 6 percent, 6 percent, 6 percent ; encounter rates: morn/day/nite
+
+	IF DEF(_GOLD)
 	; morn
 	db 6, ZUBAT
 	db 8, GEODUDE
 	db 8, SANDSHREW
 	db 12, PARAS
-	db 10, GEODUDE
+	db 10, SANDSLASH
 	db 8, CLEFAIRY
 	db 8, CLEFAIRY
 	; day
@@ -42,105 +46,165 @@
 	db 8, GEODUDE
 	db 8, SANDSHREW
 	db 12, PARAS
+	db 10, SANDSLASH
+	db 8, CLEFAIRY
+	db 8, CLEFAIRY
+	; nite
+	db 6, ZUBAT
+	db 8, GEODUDE
+	db 8, SANDSHREW
+	db 12, PARAS
+	db 10, SANDSLASH
+	db 8, CLEFAIRY
+	db 8, CLEFAIRY
+
+	ELIF DEF(_SILVER)
+	; morn
+	db 6, ZUBAT
+	db 8, GEODUDE
+	db 8, ZUBAT
+	db 12, PARAS
+	db 10, GEODUDE
+	db 8, CLEFAIRY
+	db 8, CLEFAIRY
+	; day
+	db 6, ZUBAT
+	db 8, GEODUDE
+	db 8, ZUBAT
+	db 12, PARAS
 	db 10, GEODUDE
 	db 8, CLEFAIRY
 	db 8, CLEFAIRY
 	; nite
 	db 6, ZUBAT
 	db 8, GEODUDE
-	db 8, CLEFAIRY
+	db 8, ZUBAT
 	db 12, PARAS
 	db 10, GEODUDE
-	db 12, CLEFAIRY
-	db 12, CLEFAIRY
+	db 8, CLEFAIRY
+	db 8, CLEFAIRY
+	ENDC
 
-	map ROCK_TUNNEL_1F
+	map_id ROCK_TUNNEL_1F
 	db 6 percent, 6 percent, 6 percent ; encounter rates: morn/day/nite
 	; morn
 	db 10, CUBONE
-	db 11, GEODUDE
+	db 10, GEODUDE
 	db 12, MACHOP
-	db 12, ZUBAT
-	db 15, MACHOKE
-	db 12, MAROWAK
-	db 12, MAROWAK
+	db 8, ZUBAT
+	db 14, MACHOKE
+	db 13, CUBONE
+	db 13, CUBONE
 	; day
 	db 10, CUBONE
-	db 11, GEODUDE
+	db 10, GEODUDE
 	db 12, MACHOP
-	db 12, ZUBAT
-	db 15, MACHOKE
-	db 12, MAROWAK
-	db 12, MAROWAK
+	db 8, ZUBAT
+	db 14, MACHOKE
+	db 13, CUBONE
+	db 13, CUBONE
 	; nite
-	db 12, ZUBAT
-	db 11, GEODUDE
+	db 10, CUBONE
+	db 10, GEODUDE
+	db 12, MACHOP
+	db 8, ZUBAT
+	db 14, MACHOKE
+	db 13, CUBONE
+	db 13, CUBONE
+
+	map_id ROCK_TUNNEL_B1F
+	db 6 percent, 6 percent, 6 percent ; encounter rates: morn/day/nite
+	; morn
+	db 12, CUBONE
 	db 12, GEODUDE
-	db 17, HAUNTER
-	db 15, ZUBAT
-	db 15, ZUBAT
-	db 15, ZUBAT
-
-	map ROCK_TUNNEL_B1F
-	db 6 percent, 6 percent, 6 percent ; encounter rates: morn/day/nite
-	; morn
-	db 12, CUBONE
-	db 14, GEODUDE
 	db 16, ONIX
-	db 12, ZUBAT
-	db 15, MAROWAK
-	db 15, KANGASKHAN
-	db 15, KANGASKHAN
+	db 10, ZUBAT
+	db 14, MAROWAK
+	db 14, KANGASKHAN
+	db 14, KANGASKHAN
 	; day
 	db 12, CUBONE
-	db 14, GEODUDE
+	db 12, GEODUDE
 	db 16, ONIX
-	db 12, ZUBAT
-	db 15, MAROWAK
-	db 15, KANGASKHAN
-	db 15, KANGASKHAN
+	db 10, ZUBAT
+	db 14, MAROWAK
+	db 14, KANGASKHAN
+	db 14, KANGASKHAN
 	; nite
-	db 12, ZUBAT
-	db 14, GEODUDE
+	db 12, CUBONE
+	db 12, GEODUDE
 	db 16, ONIX
-	db 15, ZUBAT
-	db 15, HAUNTER
-	db 15, GOLBAT
-	db 15, GOLBAT
+	db 10, ZUBAT
+	db 14, MAROWAK
+	db 14, KANGASKHAN
+	db 14, KANGASKHAN
 
-	map VICTORY_ROAD
+	map_id VICTORY_ROAD
 	db 6 percent, 6 percent, 6 percent ; encounter rates: morn/day/nite
-	; morn
-	db 34, GRAVELER
-	db 32, RHYHORN
-	db 33, ONIX
-	db 34, GOLBAT
-	db 35, SANDSLASH
-	db 35, RHYDON
-	db 35, RHYDON
-	; day
-	db 34, GRAVELER
-	db 32, RHYHORN
-	db 33, ONIX
-	db 34, GOLBAT
-	db 35, SANDSLASH
-	db 35, RHYDON
-	db 35, RHYDON
-	; nite
-	db 34, GOLBAT
-	db 34, GRAVELER
-	db 32, ONIX
-	db 36, GRAVELER
-	db 38, GRAVELER
-	db 40, GRAVELER
-	db 40, GRAVELER
 
-	map TOHJO_FALLS
+	IF DEF(_GOLD)
+	; morn
+	db 32, GRAVELER
+	db 32, GOLBAT
+	db 33, URSARING
+	db 34, ONIX
+	db 36, ONIX
+	db 35, RHYHORN
+	db 35, RHYHORN
+	; day
+	db 32, GRAVELER
+	db 32, GOLBAT
+	db 33, URSARING
+	db 34, ONIX
+	db 36, ONIX
+	db 35, RHYHORN
+	db 35, RHYHORN
+	; nite
+	db 32, GRAVELER
+	db 32, GOLBAT
+	db 33, URSARING
+	db 34, ONIX
+	db 36, ONIX
+	db 35, RHYHORN
+	db 35, RHYHORN
+
+	ELIF DEF(_SILVER)
+	; morn
+	db 32, GRAVELER
+	db 32, GOLBAT
+	db 33, DONPHAN
+	db 34, ONIX
+	db 36, ONIX
+	db 35, RHYHORN
+	db 35, RHYHORN
+	; day
+	db 32, GRAVELER
+	db 32, GOLBAT
+	db 33, DONPHAN
+	db 34, ONIX
+	db 36, ONIX
+	db 35, RHYHORN
+	db 35, RHYHORN
+	; nite
+	db 32, GRAVELER
+	db 32, GOLBAT
+	db 33, DONPHAN
+	db 34, ONIX
+	db 36, ONIX
+	db 35, RHYHORN
+	db 35, RHYHORN
+	ENDC
+
+	map_id TOHJO_FALLS
+	IF DEF(_GOLD)
+	db 4 percent, 4 percent, 4 percent ; encounter rates: morn/day/nite
+	ELIF DEF(_SILVER)
 	db 6 percent, 6 percent, 6 percent ; encounter rates: morn/day/nite
+	ENDC
 	; morn
 	db 22, ZUBAT
 	db 22, RATICATE
-	db 24, GOLBAT
+	db 22, GOLBAT
 	db 21, SLOWPOKE
 	db 20, RATTATA
 	db 23, SLOWPOKE
@@ -148,7 +212,7 @@
 	; day
 	db 22, ZUBAT
 	db 22, RATICATE
-	db 24, GOLBAT
+	db 22, GOLBAT
 	db 21, SLOWPOKE
 	db 20, RATTATA
 	db 23, SLOWPOKE
@@ -156,13 +220,13 @@
 	; nite
 	db 22, ZUBAT
 	db 22, RATICATE
-	db 24, GOLBAT
+	db 22, GOLBAT
 	db 21, SLOWPOKE
 	db 20, RATTATA
 	db 23, SLOWPOKE
 	db 23, SLOWPOKE
 
-	map ROUTE_1
+	map_id ROUTE_1
 	db 10 percent, 10 percent, 10 percent ; encounter rates: morn/day/nite
 	; morn
 	db 2, PIDGEY
@@ -185,25 +249,27 @@
 	db 2, RATTATA
 	db 3, RATTATA
 	db 3, HOOTHOOT
-	db 6, RATICATE
+	db 6, RATTATA
 	db 4, HOOTHOOT
 	db 4, HOOTHOOT
 
-	map ROUTE_2
+	map_id ROUTE_2
 	db 10 percent, 10 percent, 10 percent ; encounter rates: morn/day/nite
+
+	IF DEF(_GOLD)
 	; morn
 	db 3, CATERPIE
-	db 3, LEDYBA
-	db 5, PIDGEY
+	db 3, PIDGEY
+	db 5, METAPOD
 	db 7, BUTTERFREE
-	db 7, LEDIAN
+	db 7, PIDGEOTTO
 	db 4, PIKACHU
 	db 4, PIKACHU
 	; day
 	db 3, CATERPIE
 	db 3, PIDGEY
-	db 5, PIDGEY
-	db 7, BUTTERFREE
+	db 5, METAPOD
+	db 7, PIDGEY
 	db 7, PIDGEOTTO
 	db 4, PIKACHU
 	db 4, PIKACHU
@@ -213,341 +279,659 @@
 	db 5, HOOTHOOT
 	db 7, NOCTOWL
 	db 7, ARIADOS
-	db 4, NOCTOWL
-	db 4, NOCTOWL
+	db 4, PIKACHU
+	db 4, PIKACHU
 
-	map ROUTE_3
+	ELIF DEF(_SILVER)
+	; morn
+	db 3, WEEDLE
+	db 3, LEDYBA
+	db 5, KAKUNA
+	db 7, BEEDRILL
+	db 7, LEDIAN
+	db 4, PIKACHU
+	db 4, PIKACHU
+	; day
+	db 3, WEEDLE
+	db 3, PIDGEY
+	db 5, KAKUNA
+	db 7, PIDGEY
+	db 7, PIDGEOTTO
+	db 4, PIKACHU
+	db 4, PIKACHU
+	; nite
+	db 3, HOOTHOOT
+	db 3, HOOTHOOT
+	db 5, HOOTHOOT
+	db 7, NOCTOWL
+	db 7, NOCTOWL
+	db 4, PIKACHU
+	db 4, PIKACHU
+	ENDC
+
+	map_id ROUTE_3
 	db 10 percent, 10 percent, 10 percent ; encounter rates: morn/day/nite
+
+	IF DEF(_GOLD)
+	; morn
+	db 5, SPEAROW
+	db 5, RATTATA
+	db 8, SPEAROW
+	db 6, JIGGLYPUFF
+	db 10, RATTATA
+	db 8, SPEAROW
+	db 8, SPEAROW
+	; day
+	db 5, SPEAROW
+	db 5, RATTATA
+	db 8, SPEAROW
+	db 6, JIGGLYPUFF
+	db 10, RATTATA
+	db 8, SPEAROW
+	db 8, SPEAROW
+	; nite
+	db 5, RATTATA
+	db 5, ZUBAT
+	db 8, RATTATA
+	db 6, JIGGLYPUFF
+	db 10, RATTATA
+	db 8, RATTATA
+	db 8, RATTATA
+
+	ELIF DEF(_SILVER)
 	; morn
 	db 5, SPEAROW
 	db 5, RATTATA
 	db 8, EKANS
-	db 10, RATICATE
+	db 6, JIGGLYPUFF
 	db 10, ARBOK
-	db 10, SANDSHREW
-	db 10, SANDSHREW
+	db 8, SPEAROW
+	db 8, SPEAROW
 	; day
 	db 5, SPEAROW
 	db 5, RATTATA
 	db 8, EKANS
-	db 10, RATICATE
+	db 6, JIGGLYPUFF
 	db 10, ARBOK
-	db 10, SANDSHREW
-	db 10, SANDSHREW
+	db 8, SPEAROW
+	db 8, SPEAROW
 	; nite
 	db 5, RATTATA
-	db 10, RATTATA
-	db 10, RATICATE
-	db 6, ZUBAT
-	db 5, RATTATA
-	db 6, CLEFAIRY
-	db 6, CLEFAIRY
+	db 5, ZUBAT
+	db 8, EKANS
+	db 6, JIGGLYPUFF
+	db 10, ARBOK
+	db 8, RATTATA
+	db 8, RATTATA
+	ENDC
 
-	map ROUTE_4
+	map_id ROUTE_4
 	db 10 percent, 10 percent, 10 percent ; encounter rates: morn/day/nite
+	; morn
+
+	IF DEF(_GOLD)
+	; morn
+	db 5, SPEAROW
+	db 5, RATTATA
+	db 8, SPEAROW
+	db 6, JIGGLYPUFF
+	db 10, RATTATA
+	db 8, SPEAROW
+	db 8, SPEAROW
+	; day
+	db 5, SPEAROW
+	db 5, RATTATA
+	db 8, SPEAROW
+	db 6, JIGGLYPUFF
+	db 10, RATTATA
+	db 8, SPEAROW
+	db 8, SPEAROW
+	; nite
+	db 5, SPEAROW
+	db 5, ZUBAT
+	db 8, RATTATA
+	db 6, JIGGLYPUFF
+	db 10, RATTATA
+	db 8, RATTATA
+	db 8, RATTATA
+
+	ELIF DEF(_SILVER)
 	; morn
 	db 5, SPEAROW
 	db 5, RATTATA
 	db 8, EKANS
-	db 10, RATICATE
+	db 6, JIGGLYPUFF
 	db 10, ARBOK
-	db 10, SANDSHREW
-	db 10, SANDSHREW
+	db 8, SPEAROW
+	db 8, SPEAROW
 	; day
 	db 5, SPEAROW
 	db 5, RATTATA
 	db 8, EKANS
-	db 10, RATICATE
+	db 6, JIGGLYPUFF
 	db 10, ARBOK
-	db 10, SANDSHREW
-	db 10, SANDSHREW
+	db 8, SPEAROW
+	db 8, SPEAROW
 	; nite
 	db 5, RATTATA
-	db 10, RATTATA
-	db 10, RATICATE
-	db 6, ZUBAT
-	db 5, RATTATA
-	db 6, CLEFAIRY
-	db 6, CLEFAIRY
+	db 5, ZUBAT
+	db 8, EKANS
+	db 6, JIGGLYPUFF
+	db 10, ARBOK
+	db 8, RATTATA
+	db 8, RATTATA
+	ENDC
 
-	map ROUTE_5
+	map_id ROUTE_5
 	db 10 percent, 10 percent, 10 percent ; encounter rates: morn/day/nite
+
+	IF DEF(_GOLD)
 	; morn
 	db 13, PIDGEY
-	db 13, SNUBBULL
-	db 15, PIDGEOTTO
+	db 13, BELLSPROUT
+	db 14, PIDGEY
+	db 15, PIDGEY
 	db 12, ABRA
-	db 14, JIGGLYPUFF
 	db 14, ABRA
 	db 14, ABRA
 	; day
 	db 13, PIDGEY
-	db 13, SNUBBULL
-	db 15, PIDGEOTTO
+	db 13, BELLSPROUT
+	db 14, PIDGEY
+	db 15, PIDGEY
 	db 12, ABRA
-	db 14, JIGGLYPUFF
 	db 14, ABRA
 	db 14, ABRA
 	; nite
-	db 13, HOOTHOOT
-	db 13, MEOWTH
-	db 15, NOCTOWL
+	db 13, ODDISH
+	db 14, ODDISH
+	db 13, BELLSPROUT
+	db 15, GLOOM
 	db 12, ABRA
-	db 14, JIGGLYPUFF
 	db 14, ABRA
 	db 14, ABRA
 
-	map ROUTE_6
-	db 10 percent, 10 percent, 10 percent ; encounter rates: morn/day/nite
+	ELIF DEF(_SILVER)
 	; morn
-	db 13, RATTATA
-	db 13, SNUBBULL
-	db 14, MAGNEMITE
-	db 15, RATICATE
-	db 12, JIGGLYPUFF
-	db 15, GRANBULL
-	db 15, GRANBULL
+	db 13, PIDGEY
+	db 13, BELLSPROUT
+	db 14, MEOWTH
+	db 15, PIDGEY
+	db 12, ABRA
+	db 14, ABRA
+	db 14, ABRA
 	; day
-	db 13, RATTATA
-	db 13, SNUBBULL
-	db 14, MAGNEMITE
-	db 15, RATICATE
-	db 12, JIGGLYPUFF
-	db 15, GRANBULL
-	db 15, GRANBULL
+	db 13, PIDGEY
+	db 13, BELLSPROUT
+	db 14, MEOWTH
+	db 15, PIDGEY
+	db 12, ABRA
+	db 14, ABRA
+	db 14, ABRA
 	; nite
-	db 13, MEOWTH
-	db 13, DROWZEE
-	db 14, MAGNEMITE
-	db 15, PSYDUCK
-	db 12, JIGGLYPUFF
-	db 15, RATICATE
-	db 15, RATICATE
+	db 13, ODDISH
+	db 14, MEOWTH
+	db 13, BELLSPROUT
+	db 15, GLOOM
+	db 12, ABRA
+	db 14, ABRA
+	db 14, ABRA
+	ENDC
 
-	map ROUTE_7
+	map_id ROUTE_6
 	db 10 percent, 10 percent, 10 percent ; encounter rates: morn/day/nite
+
+	IF DEF(_GOLD)
+	; morn
+	db 13, PIDGEY
+	db 13, BELLSPROUT
+	db 14, PIDGEY
+	db 15, MAGNEMITE
+	db 12, ABRA
+	db 14, ABRA
+	db 14, ABRA
+	; day
+	db 13, PIDGEY
+	db 13, BELLSPROUT
+	db 14, PIDGEY
+	db 15, MAGNEMITE
+	db 12, ABRA
+	db 14, ABRA
+	db 14, ABRA
+	; nite
+	db 13, ODDISH
+	db 14, ODDISH
+	db 13, BELLSPROUT
+	db 15, MAGNEMITE
+	db 12, ABRA
+	db 14, ABRA
+	db 14, ABRA
+
+	ELIF DEF(_SILVER)
+	; morn
+	db 13, PIDGEY
+	db 13, BELLSPROUT
+	db 14, MEOWTH
+	db 15, MAGNEMITE
+	db 12, ABRA
+	db 14, ABRA
+	db 14, ABRA
+	; day
+	db 13, PIDGEY
+	db 13, BELLSPROUT
+	db 14, MEOWTH
+	db 15, MAGNEMITE
+	db 12, ABRA
+	db 14, ABRA
+	db 14, ABRA
+	; nite
+	db 13, ODDISH
+	db 14, MEOWTH
+	db 13, BELLSPROUT
+	db 15, MAGNEMITE
+	db 12, ABRA
+	db 14, ABRA
+	db 14, ABRA
+	ENDC
+
+	map_id ROUTE_7
+	db 10 percent, 10 percent, 10 percent ; encounter rates: morn/day/nite
+
+	IF DEF(_GOLD)
 	; morn
 	db 17, RATTATA
 	db 17, SPEAROW
-	db 18, SNUBBULL
-	db 18, RATICATE
-	db 18, JIGGLYPUFF
-	db 16, ABRA
-	db 16, ABRA
+	db 18, GROWLITHE
+	db 19, RATICATE
+	db 19, RATTATA
+	db 15, RATTATA
+	db 15, RATTATA
 	; day
 	db 17, RATTATA
 	db 17, SPEAROW
-	db 18, SNUBBULL
-	db 18, RATICATE
-	db 18, JIGGLYPUFF
-	db 16, ABRA
-	db 16, ABRA
+	db 18, GROWLITHE
+	db 19, RATICATE
+	db 19, RATTATA
+	db 15, GROWLITHE
+	db 15, GROWLITHE
+	; nite
+	db 17, RATTATA
+	db 17, MURKROW
+	db 18, GROWLITHE
+	db 19, RATICATE
+	db 19, MURKROW
+	db 15, HOUNDOUR
+	db 15, HOUNDOUR
+
+	ELIF DEF(_SILVER)
+	; morn
+	db 17, MEOWTH
+	db 17, SPEAROW
+	db 18, VULPIX
+	db 19, RATICATE
+	db 19, PERSIAN
+	db 15, RATTATA
+	db 15, RATTATA
+	; day
+	db 17, MEOWTH
+	db 17, SPEAROW
+	db 18, VULPIX
+	db 19, RATICATE
+	db 19, PERSIAN
+	db 15, VULPIX
+	db 15, VULPIX
 	; nite
 	db 17, MEOWTH
 	db 17, MURKROW
-	db 18, HOUNDOUR
-	db 18, PERSIAN
-	db 18, JIGGLYPUFF
-	db 16, ABRA
-	db 16, ABRA
+	db 18, VULPIX
+	db 19, RATICATE
+	db 19, PERSIAN
+	db 15, HOUNDOUR
+	db 15, HOUNDOUR
+	ENDC
 
-	map ROUTE_8
+	map_id ROUTE_8
 	db 10 percent, 10 percent, 10 percent ; encounter rates: morn/day/nite
+
+	IF DEF(_GOLD)
 	; morn
-	db 17, SNUBBULL
+	db 17, PIDGEOTTO
 	db 19, PIDGEOTTO
-	db 16, ABRA
-	db 17, GROWLITHE
-	db 16, JIGGLYPUFF
-	db 18, KADABRA
-	db 18, KADABRA
+	db 15, ABRA
+	db 18, GROWLITHE
+	db 17, PIDGEOTTO
+	db 15, KADABRA
+	db 15, KADABRA
 	; day
-	db 17, SNUBBULL
+	db 17, PIDGEOTTO
 	db 19, PIDGEOTTO
-	db 16, ABRA
-	db 17, GROWLITHE
-	db 16, JIGGLYPUFF
-	db 18, KADABRA
-	db 18, KADABRA
+	db 15, ABRA
+	db 18, GROWLITHE
+	db 17, PIDGEOTTO
+	db 15, KADABRA
+	db 15, KADABRA
+	; nite
+	db 17, NOCTOWL
+	db 20, HAUNTER
+	db 15, ABRA
+	db 19, NOCTOWL
+	db 18, GROWLITHE
+	db 15, KADABRA
+	db 15, KADABRA
+
+	ELIF DEF(_SILVER)
+	; morn
+	db 17, MEOWTH
+	db 19, PIDGEOTTO
+	db 15, ABRA
+	db 18, VULPIX
+	db 17, PIDGEOTTO
+	db 15, KADABRA
+	db 15, KADABRA
+	; day
+	db 17, MEOWTH
+	db 19, PIDGEOTTO
+	db 15, ABRA
+	db 18, VULPIX
+	db 17, PIDGEOTTO
+	db 15, KADABRA
+	db 15, KADABRA
 	; nite
 	db 17, MEOWTH
-	db 20, NOCTOWL
-	db 16, ABRA
-	db 17, HAUNTER
-	db 16, JIGGLYPUFF
-	db 18, KADABRA
-	db 18, KADABRA
+	db 20, HAUNTER
+	db 15, ABRA
+	db 19, NOCTOWL
+	db 18, VULPIX
+	db 15, KADABRA
+	db 15, KADABRA
+	ENDC
 
-	map ROUTE_9
+	map_id ROUTE_9
 	db 10 percent, 10 percent, 10 percent ; encounter rates: morn/day/nite
+
+	IF DEF(_GOLD)
 	; morn
+	db 13, MANKEY
 	db 15, RATTATA
-	db 15, SPEAROW
+	db 13, SPEAROW
 	db 15, RATICATE
 	db 15, FEAROW
-	db 15, FEAROW
-	db 18, MAROWAK
-	db 18, MAROWAK
+	db 15, PRIMEAPE
+	db 15, PRIMEAPE
 	; day
+	db 13, MANKEY
 	db 15, RATTATA
-	db 15, SPEAROW
+	db 13, SPEAROW
 	db 15, RATICATE
 	db 15, FEAROW
-	db 15, FEAROW
-	db 18, MAROWAK
-	db 18, MAROWAK
+	db 15, PRIMEAPE
+	db 15, PRIMEAPE
 	; nite
+	db 13, MANKEY
 	db 15, RATTATA
-	db 15, VENONAT
 	db 15, RATICATE
-	db 15, VENOMOTH
-	db 15, ZUBAT
-	db 18, RATICATE
-	db 18, RATICATE
+	db 13, RATTATA
+	db 15, RATICATE
+	db 15, PRIMEAPE
+	db 15, PRIMEAPE
 
-	map ROUTE_10_NORTH
-	db 10 percent, 10 percent, 10 percent ; encounter rates: morn/day/nite
+	ELIF DEF(_SILVER)
 	; morn
+	db 13, RATTATA
 	db 15, SPEAROW
-	db 17, VOLTORB
+	db 13, SPEAROW
 	db 15, RATICATE
 	db 15, FEAROW
-	db 15, MAROWAK
-	db 16, ELECTABUZZ
-	db 16, ELECTABUZZ
+	db 15, RATICATE
+	db 15, RATICATE
 	; day
+	db 13, RATTATA
 	db 15, SPEAROW
-	db 17, VOLTORB
+	db 13, SPEAROW
 	db 15, RATICATE
 	db 15, FEAROW
-	db 15, MAROWAK
-	db 18, ELECTABUZZ
-	db 18, ELECTABUZZ
+	db 15, RATICATE
+	db 15, RATICATE
 	; nite
-	db 15, VENONAT
-	db 17, VOLTORB
+	db 13, RATTATA
+	db 15, RATTATA
 	db 15, RATICATE
-	db 15, VENOMOTH
-	db 15, ZUBAT
-	db 16, ELECTABUZZ
-	db 16, ELECTABUZZ
+	db 13, RATTATA
+	db 15, RATICATE
+	db 15, RATICATE
+	db 15, RATICATE
+	ENDC
 
-	map ROUTE_11
+	map_id ROUTE_10_NORTH
 	db 10 percent, 10 percent, 10 percent ; encounter rates: morn/day/nite
 	; morn
-	db 14, HOPPIP
-	db 13, RATICATE
-	db 15, MAGNEMITE
-	db 16, PIDGEOTTO
-	db 16, RATTATA
-	db 16, HOPPIP
-	db 16, HOPPIP
+	db 16, SPEAROW
+	db 17, VOLTORB
+	db 16, RATICATE
+	db 18, FEAROW
+	db 16, QUAGSIRE
+	db 15, ELECTABUZZ
+	db 15, ELECTABUZZ
 	; day
-	db 14, HOPPIP
-	db 13, RATICATE
+	db 16, SPEAROW
+	db 17, VOLTORB
+	db 17, RATICATE
+	db 18, FEAROW
+	db 15, ELECTABUZZ
+	db 17, ELECTABUZZ
+	db 17, ELECTABUZZ
+	; nite
+	db 16, QUAGSIRE
+	db 17, VOLTORB
+	db 16, RATICATE
+	db 17, QUAGSIRE
+	db 18, RATICATE
+	db 15, ELECTABUZZ
+	db 15, ELECTABUZZ
+
+	map_id ROUTE_11
+	db 10 percent, 10 percent, 10 percent ; encounter rates: morn/day/nite
+	; morn
+	db 14, DROWZEE
+	db 15, RATTATA
 	db 15, MAGNEMITE
-	db 16, PIDGEOTTO
-	db 16, RATTATA
-	db 16, HOPPIP
-	db 16, HOPPIP
+	db 16, DROWZEE
+	db 16, HYPNO
+	db 16, HYPNO
+	db 16, HYPNO
+	; day
+	db 14, DROWZEE
+	db 15, RATTATA
+	db 15, MAGNEMITE
+	db 16, DROWZEE
+	db 16, HYPNO
+	db 16, HYPNO
+	db 16, HYPNO
 	; nite
 	db 14, DROWZEE
-	db 13, MEOWTH
+	db 15, RATTATA
 	db 15, MAGNEMITE
-	db 16, NOCTOWL
-	db 16, RATICATE
+	db 16, DROWZEE
 	db 16, HYPNO
 	db 16, HYPNO
+	db 16, HYPNO
 
-	map ROUTE_13
+	map_id ROUTE_13
 	db 10 percent, 10 percent, 10 percent ; encounter rates: morn/day/nite
+
+	IF DEF(_GOLD)
 	; morn
-	db 23, NIDORINO
 	db 23, NIDORINA
+	db 23, NIDORINO
 	db 25, PIDGEOTTO
-	db 25, HOPPIP
-	db 27, HOPPIP
-	db 27, HOPPIP
+	db 22, HOPPIP
+	db 24, HOPPIP
+	db 22, QUAGSIRE
 	db 25, CHANSEY
 	; day
-	db 23, NIDORINO
 	db 23, NIDORINA
+	db 23, NIDORINO
 	db 25, PIDGEOTTO
-	db 25, HOPPIP
-	db 27, HOPPIP
-	db 27, HOPPIP
+	db 22, HOPPIP
+	db 24, HOPPIP
+	db 24, HOPPIP
 	db 25, CHANSEY
 	; nite
-	db 23, VENONAT
-	db 23, QUAGSIRE
+	db 23, NIDORINA
+	db 23, NIDORINO
 	db 25, NOCTOWL
-	db 25, VENOMOTH
-	db 25, QUAGSIRE
-	db 25, QUAGSIRE
+	db 22, QUAGSIRE
+	db 24, QUAGSIRE
+	db 24, QUAGSIRE
 	db 25, CHANSEY
 
-	map ROUTE_14
-	db 10 percent, 10 percent, 10 percent ; encounter rates: morn/day/nite
-	; morn
-	db 26, NIDORINO
-	db 26, NIDORINA
-	db 28, PIDGEOTTO
-	db 28, HOPPIP
-	db 30, SKIPLOOM
-	db 30, SKIPLOOM
-	db 28, CHANSEY
-	; day
-	db 26, NIDORINO
-	db 26, NIDORINA
-	db 28, PIDGEOTTO
-	db 28, HOPPIP
-	db 30, SKIPLOOM
-	db 30, SKIPLOOM
-	db 28, CHANSEY
-	; nite
-	db 26, VENONAT
-	db 26, QUAGSIRE
-	db 28, NOCTOWL
-	db 28, VENOMOTH
-	db 28, QUAGSIRE
-	db 28, QUAGSIRE
-	db 28, CHANSEY
-
-	map ROUTE_15
-	db 10 percent, 10 percent, 10 percent ; encounter rates: morn/day/nite
+	ELIF DEF(_SILVER)
 	; morn
 	db 23, NIDORINO
 	db 23, NIDORINA
 	db 25, PIDGEOTTO
-	db 25, HOPPIP
-	db 27, HOPPIP
-	db 27, HOPPIP
+	db 22, HOPPIP
+	db 24, HOPPIP
+	db 22, QUAGSIRE
 	db 25, CHANSEY
 	; day
 	db 23, NIDORINO
 	db 23, NIDORINA
 	db 25, PIDGEOTTO
-	db 25, HOPPIP
-	db 27, HOPPIP
-	db 27, HOPPIP
+	db 22, HOPPIP
+	db 24, HOPPIP
+	db 24, HOPPIP
 	db 25, CHANSEY
 	; nite
-	db 23, VENONAT
-	db 23, QUAGSIRE
+	db 23, NIDORINO
+	db 23, NIDORINA
 	db 25, NOCTOWL
-	db 25, VENOMOTH
-	db 25, QUAGSIRE
-	db 25, QUAGSIRE
+	db 22, QUAGSIRE
+	db 24, QUAGSIRE
+	db 24, QUAGSIRE
+	db 25, CHANSEY
+	ENDC
+
+	map_id ROUTE_14
+	db 10 percent, 10 percent, 10 percent ; encounter rates: morn/day/nite
+
+	IF DEF(_GOLD)
+	; morn
+	db 23, NIDORINA
+	db 23, NIDORINO
+	db 25, PIDGEOTTO
+	db 24, HOPPIP
+	db 26, SKIPLOOM
+	db 22, QUAGSIRE
+	db 25, CHANSEY
+	; day
+	db 23, NIDORINA
+	db 23, NIDORINO
+	db 25, PIDGEOTTO
+	db 24, HOPPIP
+	db 26, SKIPLOOM
+	db 26, SKIPLOOM
+	db 25, CHANSEY
+	; nite
+	db 23, NIDORINA
+	db 23, NIDORINO
+	db 25, NOCTOWL
+	db 22, QUAGSIRE
+	db 24, QUAGSIRE
+	db 24, QUAGSIRE
 	db 25, CHANSEY
 
-	map ROUTE_16
+	ELIF DEF(_SILVER)
+	; morn
+	db 23, NIDORINO
+	db 23, NIDORINA
+	db 25, PIDGEOTTO
+	db 24, HOPPIP
+	db 26, SKIPLOOM
+	db 22, QUAGSIRE
+	db 25, CHANSEY
+	; day
+	db 23, NIDORINO
+	db 23, NIDORINA
+	db 25, PIDGEOTTO
+	db 24, HOPPIP
+	db 26, SKIPLOOM
+	db 26, SKIPLOOM
+	db 25, CHANSEY
+	; nite
+	db 23, NIDORINO
+	db 23, NIDORINA
+	db 25, NOCTOWL
+	db 22, QUAGSIRE
+	db 24, QUAGSIRE
+	db 24, QUAGSIRE
+	db 25, CHANSEY
+	ENDC
+
+	map_id ROUTE_15
+	db 10 percent, 10 percent, 10 percent ; encounter rates: morn/day/nite
+
+	IF DEF(_GOLD)
+	; morn
+	db 23, NIDORINA
+	db 23, NIDORINO
+	db 25, PIDGEOTTO
+	db 22, HOPPIP
+	db 24, HOPPIP
+	db 22, QUAGSIRE
+	db 25, CHANSEY
+	; day
+	db 23, NIDORINA
+	db 23, NIDORINO
+	db 25, PIDGEOTTO
+	db 22, HOPPIP
+	db 24, HOPPIP
+	db 24, HOPPIP
+	db 25, CHANSEY
+	; nite
+	db 23, NIDORINA
+	db 23, NIDORINO
+	db 25, NOCTOWL
+	db 22, QUAGSIRE
+	db 24, QUAGSIRE
+	db 24, QUAGSIRE
+	db 25, CHANSEY
+
+	ELIF DEF(_SILVER)
+	; morn
+	db 23, NIDORINO
+	db 23, NIDORINA
+	db 25, PIDGEOTTO
+	db 22, HOPPIP
+	db 24, HOPPIP
+	db 22, QUAGSIRE
+	db 25, CHANSEY
+	; day
+	db 23, NIDORINO
+	db 23, NIDORINA
+	db 25, PIDGEOTTO
+	db 22, HOPPIP
+	db 24, HOPPIP
+	db 24, HOPPIP
+	db 25, CHANSEY
+	; nite
+	db 23, NIDORINO
+	db 23, NIDORINA
+	db 25, NOCTOWL
+	db 22, QUAGSIRE
+	db 24, QUAGSIRE
+	db 24, QUAGSIRE
+	db 25, CHANSEY
+	ENDC
+
+	map_id ROUTE_16
 	db 10 percent, 10 percent, 10 percent ; encounter rates: morn/day/nite
 	; morn
 	db 26, GRIMER
 	db 27, FEAROW
 	db 28, GRIMER
 	db 29, FEAROW
-	db 29, FEAROW
+	db 27, SLUGMA
 	db 30, MUK
 	db 30, MUK
 	; day
@@ -555,53 +939,53 @@
 	db 27, FEAROW
 	db 28, GRIMER
 	db 29, FEAROW
-	db 29, SLUGMA
+	db 27, SLUGMA
 	db 30, MUK
 	db 30, MUK
 	; nite
 	db 26, GRIMER
 	db 27, GRIMER
 	db 28, GRIMER
-	db 29, MURKROW
-	db 29, MURKROW
+	db 28, MURKROW
+	db 27, SLUGMA
 	db 30, MUK
 	db 30, MUK
 
-	map ROUTE_17
+	map_id ROUTE_17
 	db 10 percent, 10 percent, 10 percent ; encounter rates: morn/day/nite
 	; morn
-	db 30, FEAROW
+	db 28, FEAROW
+	db 27, GRIMER
 	db 29, GRIMER
-	db 31, GRIMER
-	db 32, FEAROW
-	db 33, GRIMER
-	db 33, MUK
-	db 33, MUK
-	; day
 	db 30, FEAROW
 	db 29, SLUGMA
+	db 32, MUK
+	db 32, MUK
+	; day
+	db 28, FEAROW
+	db 27, SLUGMA
 	db 29, GRIMER
-	db 32, FEAROW
-	db 32, SLUGMA
-	db 33, MUK
-	db 33, MUK
+	db 30, FEAROW
+	db 25, SLUGMA
+	db 32, MUK
+	db 32, MUK
 	; nite
-	db 30, GRIMER
+	db 28, GRIMER
+	db 27, GRIMER
 	db 29, GRIMER
-	db 31, GRIMER
-	db 32, GRIMER
-	db 33, GRIMER
-	db 33, MUK
-	db 33, MUK
+	db 30, MUK
+	db 29, SLUGMA
+	db 32, MUK
+	db 32, MUK
 
-	map ROUTE_18
+	map_id ROUTE_18
 	db 10 percent, 10 percent, 10 percent ; encounter rates: morn/day/nite
 	; morn
 	db 26, GRIMER
 	db 27, FEAROW
 	db 28, GRIMER
 	db 29, FEAROW
-	db 29, FEAROW
+	db 27, SLUGMA
 	db 30, MUK
 	db 30, MUK
 	; day
@@ -609,46 +993,46 @@
 	db 27, FEAROW
 	db 28, GRIMER
 	db 29, FEAROW
-	db 29, SLUGMA
+	db 27, SLUGMA
 	db 30, MUK
 	db 30, MUK
 	; nite
 	db 26, GRIMER
 	db 27, GRIMER
 	db 28, GRIMER
-	db 29, GRIMER
-	db 29, GRIMER
+	db 28, MUK
+	db 27, SLUGMA
 	db 30, MUK
 	db 30, MUK
 
-	map ROUTE_21
+	map_id ROUTE_21
 	db 6 percent, 6 percent, 6 percent ; encounter rates: morn/day/nite
 	; morn
 	db 30, TANGELA
-	db 25, RATTATA
+	db 25, TANGELA
 	db 35, TANGELA
-	db 20, RATICATE
-	db 30, MR__MIME
+	db 20, TANGELA
+	db 30, TANGELA
 	db 28, MR__MIME
 	db 28, MR__MIME
 	; day
 	db 30, TANGELA
-	db 25, RATTATA
+	db 25, TANGELA
 	db 35, TANGELA
-	db 20, RATICATE
+	db 20, TANGELA
 	db 28, MR__MIME
 	db 30, MR__MIME
 	db 30, MR__MIME
 	; nite
 	db 30, TANGELA
-	db 25, RATTATA
+	db 25, TANGELA
 	db 35, TANGELA
-	db 20, RATICATE
+	db 20, TANGELA
 	db 30, TANGELA
-	db 28, TANGELA
-	db 28, TANGELA
+	db 28, MR__MIME
+	db 28, MR__MIME
 
-	map ROUTE_22
+	map_id ROUTE_22
 	db 10 percent, 10 percent, 10 percent ; encounter rates: morn/day/nite
 	; morn
 	db 3, RATTATA
@@ -668,146 +1052,233 @@
 	db 7, FEAROW
 	; nite
 	db 3, RATTATA
-	db 3, POLIWAG
+	db 3, RATTATA
 	db 5, RATTATA
-	db 4, POLIWAG
-	db 6, RATTATA
+	db 4, RATTATA
+	db 6, PONYTA
 	db 7, RATTATA
 	db 7, RATTATA
 
-	map ROUTE_24
+	map_id ROUTE_24
 	db 10 percent, 10 percent, 10 percent ; encounter rates: morn/day/nite
 	; morn
-	db 8, CATERPIE
-	db 10, CATERPIE
-	db 12, METAPOD
-	db 12, ABRA
+	db 8, BELLSPROUT
 	db 10, BELLSPROUT
-	db 14, BUTTERFREE
-	db 14, BUTTERFREE
+	db 9, ABRA
+	db 12, WEEPINBELL
+	db 8, VENONAT
+	db 14, WEEPINBELL
+	db 14, WEEPINBELL
 	; day
-	db 8, CATERPIE
-	db 12, SUNKERN
-	db 10, CATERPIE
-	db 12, ABRA
+	db 8, BELLSPROUT
+	db 10, SUNKERN
+	db 9, ABRA
+	db 12, WEEPINBELL
 	db 10, BELLSPROUT
-	db 14, BUTTERFREE
-	db 14, BUTTERFREE
+	db 14, WEEPINBELL
+	db 14, WEEPINBELL
 	; nite
-	db 10, VENONAT
+	db 8, VENONAT
 	db 10, ODDISH
-	db 12, ODDISH
-	db 12, ABRA
+	db 9, ABRA
+	db 13, WEEPINBELL
 	db 10, BELLSPROUT
-	db 14, GLOOM
-	db 14, GLOOM
+	db 10, VENOMOTH
+	db 10, VENOMOTH
 
-	map ROUTE_25
+	map_id ROUTE_25
 	db 10 percent, 10 percent, 10 percent ; encounter rates: morn/day/nite
 	; morn
-	db 10, CATERPIE
-	db 10, PIDGEY
-	db 12, PIDGEOTTO
-	db 12, METAPOD
+	db 8, PIDGEY
 	db 10, BELLSPROUT
-	db 14, BUTTERFREE
-	db 14, BUTTERFREE
+	db 8, VENONAT
+	db 9, ABRA
+	db 10, PIDGEOTTO
+	db 14, WEEPINBELL
+	db 14, WEEPINBELL
 	; day
-	db 10, CATERPIE
+	db 8, PIDGEY
+	db 10, BELLSPROUT
 	db 10, PIDGEY
+	db 9, ABRA
 	db 12, PIDGEOTTO
-	db 12, METAPOD
-	db 10, BELLSPROUT
-	db 14, BUTTERFREE
-	db 14, BUTTERFREE
+	db 14, WEEPINBELL
+	db 14, WEEPINBELL
 	; nite
+	db 8, VENONAT
 	db 10, ODDISH
-	db 10, HOOTHOOT
-	db 10, VENONAT
-	db 12, NOCTOWL
+	db 10, VENOMOTH
+	db 9, ABRA
+	db 14, WEEPINBELL
 	db 10, BELLSPROUT
-	db 14, NOCTOWL
-	db 14, NOCTOWL
+	db 10, BELLSPROUT
 
-	map ROUTE_26
+	map_id ROUTE_26
 	db 10 percent, 10 percent, 10 percent ; encounter rates: morn/day/nite
+
+	IF DEF(_GOLD)
 	; morn
 	db 28, DODUO
 	db 28, SANDSLASH
 	db 32, PONYTA
-	db 30, RATICATE
 	db 30, DODUO
-	db 30, ARBOK
-	db 30, ARBOK
+	db 30, DODRIO
+	db 30, RATICATE
+	db 30, QUAGSIRE
 	; day
 	db 28, DODUO
 	db 28, SANDSLASH
 	db 32, PONYTA
-	db 30, RATICATE
 	db 30, DODUO
-	db 30, ARBOK
-	db 30, ARBOK
+	db 30, RATICATE
+	db 30, DODRIO
+	db 30, DODRIO
 	; nite
-	db 28, NOCTOWL
 	db 28, RATICATE
-	db 32, NOCTOWL
+	db 28, SANDSLASH
+	db 32, PONYTA
 	db 30, RATICATE
 	db 30, QUAGSIRE
-	db 30, QUAGSIRE
-	db 30, QUAGSIRE
+	db 32, QUAGSIRE
+	db 32, QUAGSIRE
 
-	map ROUTE_27
+	ELIF DEF(_SILVER)
+	; morn
+	db 28, DODUO
+	db 28, RATICATE
+	db 32, PONYTA
+	db 30, DODUO
+	db 30, ARBOK
+	db 30, RATICATE
+	db 30, QUAGSIRE
+	; day
+	db 28, DODUO
+	db 28, RATICATE
+	db 32, PONYTA
+	db 30, DODUO
+	db 30, RATICATE
+	db 30, ARBOK
+	db 30, ARBOK
+	; nite
+	db 28, RATICATE
+	db 28, RATICATE
+	db 32, PONYTA
+	db 30, RATICATE
+	db 30, QUAGSIRE
+	db 30, ARBOK
+	db 30, ARBOK
+	ENDC
+
+	map_id ROUTE_27
 	db 10 percent, 10 percent, 10 percent ; encounter rates: morn/day/nite
+
+	IF DEF(_GOLD)
+	; morn
+	db 28, DODUO
+	db 28, RATICATE
+	db 30, DODUO
+	db 28, QUAGSIRE
+	db 32, PONYTA
+	db 30, SANDSLASH
+	db 30, SANDSLASH
+	; day
+	db 28, DODUO
+	db 28, RATICATE
+	db 30, DODUO
+	db 30, RATICATE
+	db 32, PONYTA
+	db 30, SANDSLASH
+	db 30, SANDSLASH
+	; nite
+	db 28, QUAGSIRE
+	db 28, RATICATE
+	db 30, QUAGSIRE
+	db 30, RATICATE
+	db 32, PONYTA
+	db 30, SANDSLASH
+	db 30, SANDSLASH
+
+	ELIF DEF(_SILVER)
 	; morn
 	db 28, DODUO
 	db 28, ARBOK
-	db 30, RATICATE
 	db 30, DODUO
+	db 28, QUAGSIRE
 	db 32, PONYTA
 	db 30, DODRIO
 	db 30, DODRIO
 	; day
 	db 28, DODUO
 	db 28, ARBOK
-	db 30, RATICATE
 	db 30, DODUO
+	db 30, RATICATE
 	db 32, PONYTA
 	db 30, DODRIO
 	db 30, DODRIO
 	; nite
 	db 28, QUAGSIRE
-	db 28, NOCTOWL
-	db 30, RATICATE
+	db 28, ARBOK
 	db 30, QUAGSIRE
-	db 32, NOCTOWL
-	db 32, NOCTOWL
-	db 32, NOCTOWL
+	db 30, RATICATE
+	db 32, PONYTA
+	db 32, QUAGSIRE
+	db 32, QUAGSIRE
+	ENDC
 
-	map ROUTE_28
+	map_id ROUTE_28
 	db 10 percent, 10 percent, 10 percent ; encounter rates: morn/day/nite
+
+	IF DEF(_GOLD)
 	; morn
 	db 39, TANGELA
 	db 40, PONYTA
-	db 40, RAPIDASH
-	db 42, ARBOK
+	db 40, URSARING
+	db 42, RAPIDASH
 	db 41, DODUO
 	db 43, DODRIO
 	db 43, DODRIO
 	; day
 	db 39, TANGELA
 	db 40, PONYTA
-	db 40, RAPIDASH
-	db 42, ARBOK
+	db 40, URSARING
+	db 42, RAPIDASH
 	db 41, DODUO
 	db 43, DODRIO
 	db 43, DODRIO
 	; nite
 	db 39, TANGELA
-	db 40, POLIWHIRL
-	db 40, GOLBAT
-	db 40, POLIWHIRL
-	db 42, GOLBAT
-	db 42, GOLBAT
-	db 42, GOLBAT
+	db 40, PONYTA
+	db 40, URSARING
+	db 40, SNEASEL
+	db 42, RAPIDASH
+	db 42, RAPIDASH
+	db 42, RAPIDASH
+
+	ELIF DEF(_SILVER)
+	; morn
+	db 39, TANGELA
+	db 40, PONYTA
+	db 40, DONPHAN
+	db 42, RAPIDASH
+	db 41, DODUO
+	db 43, DODRIO
+	db 43, DODRIO
+	; day
+	db 39, TANGELA
+	db 40, PONYTA
+	db 40, DONPHAN
+	db 42, RAPIDASH
+	db 41, DODUO
+	db 43, DODRIO
+	db 43, DODRIO
+	; nite
+	db 39, TANGELA
+	db 40, PONYTA
+	db 40, DONPHAN
+	db 40, SNEASEL
+	db 42, RAPIDASH
+	db 42, RAPIDASH
+	db 42, RAPIDASH
+	ENDC
 
 	db -1 ; end

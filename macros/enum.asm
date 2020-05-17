@@ -9,7 +9,7 @@ endc
 if _NARG >= 2
 __enumdir__ = \2
 else
-__enumdir__ = +1
+__enumdir__ = 1
 endc
 ENDM
 
@@ -40,12 +40,4 @@ ENDM
 shift_const: MACRO
 \1 EQU (1 << const_value)
 const_value = const_value + 1
-ENDM
-
-; Enumerate strings
-
-define: MACRO
-if !DEF(\1)
-\1 EQUS \2
-endc
 ENDM

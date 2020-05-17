@@ -37,7 +37,7 @@ CeladonGymErikaScript:
 	checkevent EVENT_GOT_TM19_GIGA_DRAIN
 	iftrue .GotGigaDrain
 	writetext ErikaExplainTMText
-	buttonsound
+	promptbutton
 	verbosegiveitem TM_GIGA_DRAIN
 	iffalse .GotGigaDrain
 	setevent EVENT_GOT_TM19_GIGA_DRAIN
@@ -107,7 +107,7 @@ CeladonGymStatue:
 	iftrue .Beaten
 	jumpstd gymstatue1
 .Beaten:
-	trainertotext ERIKA, ERIKA1, STRING_BUFFER_4
+	gettrainername STRING_BUFFER_4, ERIKA, ERIKA1
 	jumpstd gymstatue2
 
 ErikaBeforeBattleText:

@@ -1,0 +1,285 @@
+ROM0
+	org $0000
+	"NULL"
+	org $0000
+	"rst0"
+	org $0008
+	"rst8"
+	org $0010
+	"rst10"
+	org $0018
+	"rst18"
+	org $0020
+	"rst20"
+	org $0028
+	"rst28"
+	org $0038
+	"rst38"
+	org $0040
+	"vblank"
+	org $0048
+	"lcd"
+	org $0050
+	"timer"
+	org $0058
+	"serial"
+	org $0060
+	"joypad"
+	org $0100
+	"Header"
+	org $0150
+	"Home"
+ROMX $01
+	"bank1"
+ROMX $02
+	"bank2"
+ROMX $03
+	"bank3"
+ROMX $04
+	"bank4"
+ROMX $05
+	"bank5"
+ROMX $06
+	"bank6"
+ROMX $07
+	"bank7"
+	"Extra Songs 1"
+ROMX $08
+	"bank8"
+	"Egg Moves"
+ROMX $09
+	"bank9"
+ROMX $0a
+	"bankA"
+ROMX $0b
+	"bankB"
+ROMX $0c
+	"bankC"
+ROMX $0d
+	"Effect Commands"
+ROMX $0e
+	"Enemy Trainers"
+ROMX $0f
+	"Battle Core"
+ROMX $10
+	"bank10"
+	"Evolutions and Attacks"
+ROMX $11
+	"bank11"
+ROMX $12
+	org $4000
+	"Pic Pointers"
+	"Pics 1"
+ROMX $14
+	"bank14"
+ROMX $15
+	"Pics 2"
+ROMX $16
+	"Pics 3"
+ROMX $17
+	"Pics 4"
+ROMX $18
+	"Pics 5"
+ROMX $19
+	"Pics 6"
+ROMX $1a
+	"Pics 7"
+ROMX $1b
+	"Pics 8"
+ROMX $1c
+	"Pics 9"
+ROMX $1d
+	"Pics 10"
+ROMX $1e
+	"Pics 11"
+ROMX $1f
+	org $4000
+	"Unown Pic Pointers"
+	"Pics 12"
+ROMX $20
+	"Trainer Pic Pointers"
+	"Pics 13"
+ROMX $21
+	"bank21"
+ROMX $23
+	"bank23"
+ROMX $24
+	"bank24"
+ROMX $25
+	"Maps"
+	"Events"
+ROMX $26
+	"bank26"
+ROMX $2a
+	"Map Blocks 1"
+ROMX $2b
+	"Map Blocks 2"
+ROMX $2e
+	"Pics 14"
+	org $6300
+	"bank2e_2"
+ROMX $30
+	"Sprites 1"
+ROMX $31
+	"Sprites 2"
+	org $7a40
+	"bank31_2"
+ROMX $32
+	"bank32"
+ROMX $33
+	"Move Animations"
+	"Extra Songs 2"
+ROMX $36
+	"Font Inversed"
+ROMX $37
+	"Map Blocks 3"
+	"bank37_2"
+ROMX $38
+	"bank38"
+ROMX $39
+	"bank39"
+ROMX $3a
+	"Audio"
+	"Songs 1"
+ROMX $3b
+	"Songs 2"
+ROMX $3c
+	"Songs 3"
+	"Sound Effects"
+	"Cries"
+ROMX $3d
+	"Songs 4"
+ROMX $3e
+	"bank3e"
+ROMX $3f
+	"bank3f"
+ROMX $40
+	"bank40"
+ROMX $41
+	"bank41"
+ROMX $42
+	"Map Scripts 1"
+ROMX $43
+	"Map Scripts 2"
+ROMX $44
+	"Map Scripts 3"
+ROMX $45
+	"Map Scripts 4"
+ROMX $46
+	"Map Scripts 5"
+ROMX $47
+	"Map Scripts 6"
+ROMX $48
+	"Map Scripts 7"
+ROMX $49
+	"Map Scripts 8"
+ROMX $4a
+	"Map Scripts 9"
+ROMX $4b
+	"Map Scripts 10"
+ROMX $4c
+	"Map Scripts 11"
+ROMX $4d
+	"Map Scripts 12"
+ROMX $4e
+	"Map Scripts 13"
+ROMX $4f
+	"Map Scripts 14"
+ROMX $50
+	"Map Scripts 15"
+ROMX $51
+	"Map Scripts 16"
+ROMX $52
+	"Map Scripts 17"
+ROMX $53
+	"Map Scripts 18"
+ROMX $54
+	"Map Scripts 19"
+ROMX $55
+	"Map Scripts 20"
+ROMX $56
+	"Map Scripts 21"
+ROMX $57
+	"Map Scripts 22"
+ROMX $59
+	"Map Scripts 23"
+ROMX $5a
+	"Map Scripts 24"
+ROMX $5b
+	"Map Scripts 25"
+ROMX $5c
+	"Map Scripts 26"
+ROMX $5d
+	"Map Scripts 27"
+ROMX $5e
+	"Map Scripts 28"
+ROMX $5f
+	"Map Scripts 29"
+ROMX $60
+	"Map Scripts 30"
+ROMX $61
+	"Map Scripts 31"
+ROMX $62
+	"Map Scripts 32"
+ROMX $64
+	"Text 1"
+ROMX $65
+	"Text 2"
+ROMX $66
+	"Text 3"
+ROMX $68
+	"Pokedex Entries 001-064"
+ROMX $69
+	"Pokedex Entries 065-128"
+ROMX $6a
+	"Pokedex Entries 129-192"
+ROMX $6b
+	"Pokedex Entries 193-251"
+ROMX $6c
+	"Names"
+ROMX $6d
+	"Move Descriptions"
+ROMX $6e
+	"Item Descriptions"
+ROMX $70
+	"bank70"
+ROMX $7f
+	org $7df8
+	"Stadium Data"
+WRAM0
+	"Audio RAM"
+	"WRAM"
+	"GBC Palettes"
+	"Sprites"
+	"Tilemap"
+	"Miscellaneous"
+	"Overworld Map"
+	"Video"
+WRAMX 1
+	org $d000
+	"WRAM 1"
+	"Game Data"
+	"Party"
+	org $dfff
+	"Stack"
+VRAM $00
+VRAM $01
+SRAM $00
+	"Scratch"
+	org $a600
+	"SRAM Bank 0"
+	"Backup Save 1"
+	"SRAM Stack"
+	org $bfff
+	"SRAM Window Stack"
+SRAM $01
+	"Save"
+	"Active Box"
+	"Link Battle Data"
+	"SRAM Hall of Fame"
+	"Backup Save 2"
+SRAM $02
+	"Boxes 1-7"
+SRAM $03
+	"Boxes 8-14"
+	"Backup Save 3"

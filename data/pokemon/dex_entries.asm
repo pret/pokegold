@@ -1,6 +1,6 @@
 INCLUDE "constants.asm"
 
-IF DEF(GOLD)
+IF DEF(_GOLD)
 SECTION "Pokedex Entries 001-064", ROMX
 
 BulbasaurPokedexEntry::  INCLUDE "data/pokemon/dex_entries/gold/bulbasaur.asm"
@@ -268,7 +268,7 @@ HoOhPokedexEntry::       INCLUDE "data/pokemon/dex_entries/gold/ho_oh.asm"
 CelebiPokedexEntry::     INCLUDE "data/pokemon/dex_entries/gold/celebi.asm"
 ENDC
 
-IF DEF(SILVER)
+IF DEF(_SILVER)
 SECTION "Pokedex Entries 001-064", ROMX
 
 BulbasaurPokedexEntry::  INCLUDE "data/pokemon/dex_entries/silver/bulbasaur.asm"

@@ -1,260 +1,264 @@
-	ld hl, $b
+ObjectActionPairPointers:
+; entries correspond to OBJECT_ACTION_* constants
+	dw SetFacingStanding,              SetFacingStanding
+	dw SetFacingStandAction,           SetFacingCurrent
+	dw SetFacingStepAction,            SetFacingCurrent
+	dw SetFacingBumpAction,            SetFacingCurrent
+	dw SetFacingCounterclockwiseSpin,  SetFacingCurrent
+	dw SetFacingCounterclockwiseSpin2, SetFacingStanding
+	dw SetFacingFish,                  SetFacingFish
+	dw SetFacingShadow,                SetFacingStanding
+	dw SetFacingEmote,                 SetFacingEmote
+	dw SetFacingBigDollSym,            SetFacingBigDollSym
+	dw SetFacingBounce,                SetFacingFreezeBounce
+	dw SetFacingWeirdTree,             SetFacingCurrent
+	dw SetFacingBigDollAsym,           SetFacingBigDollAsym
+	dw SetFacingBigDoll,               SetFacingBigDoll
+	dw SetFacingBoulderDust,           SetFacingStanding
+	dw SetFacingGrassShake,            SetFacingStanding
+
+SetFacingStanding:
+	ld hl, OBJECT_FACING_STEP
 	add hl, bc
-	ld a, [hl]
-	ld l, a
-	ld h, $0
-	add hl, hl
-	add hl, hl
-	add hl, de
-	ld a, [hli]
-	ld h, [hl]
-	ld l, a
-	call _hl_
+	ld [hl], STANDING
 	ret
 
-Pointers4460:
-	dw Function44a0, Function44a0
-	dw Function44b2, Function44a7
-	dw Function44be, Function44a7
-	dw Function44e1, Function44a7
-	dw Function4502, Function44a7
-	dw Function4512, Function44a0
-	dw Function4547, Function4547
-	dw Function4554, Function44a0
-	dw Function455b, Function455b
-	dw Function4562, Function4562
-	dw Function4569, Function457d
-	dw Function4584, Function44a7
-	dw Function4597, Function4597
-	dw Function459e, Function459e
-	dw Function45b3, Function44a0
-	dw Function45c6, Function44a0
-
-Function44a0
-	ld hl, $d
-	add hl, bc
-	ld [hl], $ff
-	ret
-
-Function44a7: ; 44a7 (1:44a7)
+SetFacingCurrent:
 	call GetSpriteDirection
-	or $0
-	ld hl, $d
+	or FACING_STEP_DOWN_0 ; useless
+	ld hl, OBJECT_FACING_STEP
 	add hl, bc
 	ld [hl], a
 	ret
 
-Function44b2:
-	ld hl, $d
+SetFacingStandAction:
+	ld hl, OBJECT_FACING_STEP
 	add hl, bc
 	ld a, [hl]
-	and $1
-	jr nz, Function44be
-	jp Function44a7
+	and 1
+	jr nz, SetFacingStepAction
+	jp SetFacingCurrent
 
-Function44be:
-	ld hl, $4
+SetFacingStepAction:
+	ld hl, OBJECT_FLAGS1
 	add hl, bc
-	bit 3, [hl]
-	jp nz, Function44a7
-	ld hl, $c
+	bit SLIDING_F, [hl]
+	jp nz, SetFacingCurrent
+
+	ld hl, OBJECT_STEP_FRAME
 	add hl, bc
 	ld a, [hl]
 	inc a
-	and $f
+	and %00001111
 	ld [hl], a
+
 	rrca
 	rrca
-	and $3
+	maskbits NUM_DIRECTIONS
 	ld d, a
+
 	call GetSpriteDirection
-	or $0
+	or FACING_STEP_DOWN_0 ; useless
 	or d
-	ld hl, $d
+	ld hl, OBJECT_FACING_STEP
 	add hl, bc
 	ld [hl], a
 	ret
 
-Function44e1:
-	ld hl, $4
+SetFacingBumpAction:
+	ld hl, OBJECT_FLAGS1
 	add hl, bc
-	bit 3, [hl]
-	jp nz, Function44a7
-	ld hl, $c
+	bit SLIDING_F, [hl]
+	jp nz, SetFacingCurrent
+
+	ld hl, OBJECT_STEP_FRAME
 	add hl, bc
 	inc [hl]
+
 	ld a, [hl]
 	rrca
 	rrca
 	rrca
-	and $3
+	maskbits NUM_DIRECTIONS
 	ld d, a
+
 	call GetSpriteDirection
-	or $0
+	or FACING_STEP_DOWN_0 ; useless
 	or d
-	ld hl, $d
+	ld hl, OBJECT_FACING_STEP
 	add hl, bc
 	ld [hl], a
 	ret
 
-Function4502:
-	call Function4518
-	ld hl, $8
+SetFacingCounterclockwiseSpin:
+	call CounterclockwiseSpinAction
+	ld hl, OBJECT_FACING
 	add hl, bc
 	ld a, [hl]
-	or $0
-	ld hl, $d
+	or FACING_STEP_DOWN_0 ; useless
+	ld hl, OBJECT_FACING_STEP
 	add hl, bc
 	ld [hl], a
 	ret
 
-Function4512:
-	call Function4518
-	jp Function44a0
+SetFacingCounterclockwiseSpin2:
+	call CounterclockwiseSpinAction
+	jp SetFacingStanding
 
-Function4518: ; 4518 (1:4518)
-	ld hl, $c
+CounterclockwiseSpinAction:
+; Here, OBJECT_STEP_FRAME consists of two 2-bit components,
+; using only bits 0,1 and 4,5.
+; bits 0,1 is a timer (4 overworld frames)
+; bits 4,5 determines the facing - the direction is counterclockwise.
+	ld hl, OBJECT_STEP_FRAME
 	add hl, bc
 	ld a, [hl]
-	and $f0
+	and %11110000
 	ld e, a
+
 	ld a, [hl]
 	inc a
-	and $f
+	and %00001111
 	ld d, a
-	cp $4
-	jr c, .asm_4531
-	ld d, $0
+	cp 4
+	jr c, .ok
+
+	ld d, 0
 	ld a, e
 	add $10
-	and $30
+	and %00110000
 	ld e, a
-.asm_4531
+
+.ok
 	ld a, d
 	or e
 	ld [hl], a
+
 	swap e
-	ld d, $0
-	ld hl, .directions
+	ld d, 0
+	ld hl, .Directions
 	add hl, de
 	ld a, [hl]
-	ld hl, $8
+	ld hl, OBJECT_FACING
 	add hl, bc
 	ld [hl], a
 	ret
 
-.directions
+.Directions:
 	db OW_DOWN, OW_RIGHT, OW_UP, OW_LEFT
 
-Function4547:
+SetFacingFish:
 	call GetSpriteDirection
 	rrca
 	rrca
-	add $10
-	ld hl, $d
+	add FACING_FISH_DOWN
+	ld hl, OBJECT_FACING_STEP
 	add hl, bc
 	ld [hl], a
 	ret
 
-Function4554:
-	ld hl, $d
+SetFacingShadow:
+	ld hl, OBJECT_FACING_STEP
 	add hl, bc
-	ld [hl], $15
+	ld [hl], FACING_SHADOW
 	ret
 
-Function455b:
-	ld hl, $d
+SetFacingEmote:
+	ld hl, OBJECT_FACING_STEP
 	add hl, bc
-	ld [hl], $14
+	ld [hl], FACING_EMOTE
 	ret
 
-Function4562:
-	ld hl, $d
+SetFacingBigDollSym:
+	ld hl, OBJECT_FACING_STEP
 	add hl, bc
-	ld [hl], $17
+	ld [hl], FACING_BIG_DOLL_SYM
 	ret
 
-Function4569:
-	ld hl, $c
+SetFacingBounce:
+	ld hl, OBJECT_STEP_FRAME
 	add hl, bc
 	ld a, [hl]
 	inc a
-	and $f
+	and %00001111
 	ld [hl], a
-	and $8
-	jr z, Function457d
-	ld hl, $d
+	and %00001000
+	jr z, SetFacingFreezeBounce
+	ld hl, OBJECT_FACING_STEP
 	add hl, bc
-	ld [hl], $4
+	ld [hl], FACING_STEP_UP_0
 	ret
 
-Function457d:
-	ld hl, $d
+SetFacingFreezeBounce:
+	ld hl, OBJECT_FACING_STEP
 	add hl, bc
-	ld [hl], $0
+	ld [hl], FACING_STEP_DOWN_0
 	ret
 
-Function4584:
-	ld hl, $c
+SetFacingWeirdTree:
+	ld hl, OBJECT_STEP_FRAME
 	add hl, bc
 	ld a, [hl]
 	inc a
 	ld [hl], a
-	and $c
+	maskbits NUM_DIRECTIONS, 2
 	rrca
 	rrca
-	add $18
-	ld hl, $d
+	add FACING_WEIRD_TREE_0
+	ld hl, OBJECT_FACING_STEP
 	add hl, bc
 	ld [hl], a
 	ret
 
-Function4597:
-	ld hl, $d
+SetFacingBigDollAsym:
+	ld hl, OBJECT_FACING_STEP
 	add hl, bc
-	ld [hl], $16
+	ld [hl], FACING_BIG_DOLL_ASYM
 	ret
 
-Function459e:
-	ld a, [wd558]
-	ld d, $17
-	cp $33
-	jr z, .asm_45ad
-	cp $47
-	jr z, .asm_45ad
-	ld d, $16
-.asm_45ad
-	ld hl, $d
+SetFacingBigDoll:
+	ld a, [wVariableSprites + SPRITE_BIG_DOLL - SPRITE_VARS]
+	ld d, FACING_BIG_DOLL_SYM ; symmetric
+	cp SPRITE_BIG_SNORLAX
+	jr z, .ok
+	cp SPRITE_BIG_LAPRAS
+	jr z, .ok
+	ld d, FACING_BIG_DOLL_ASYM ; asymmetric
+
+.ok
+	ld hl, OBJECT_FACING_STEP
 	add hl, bc
 	ld [hl], d
 	ret
 
-Function45b3:
-	ld hl, $c
+SetFacingBoulderDust:
+	ld hl, OBJECT_STEP_FRAME
 	add hl, bc
 	inc [hl]
 	ld a, [hl]
-	ld hl, $d
+
+	ld hl, OBJECT_FACING_STEP
 	add hl, bc
-	and $2
-	ld a, $1c
-	jr z, .asm_45c4
-	inc a
-.asm_45c4
+	and 2
+	ld a, FACING_BOULDER_DUST_1
+	jr z, .ok
+	inc a ; FACING_BOULDER_DUST_2
+.ok
 	ld [hl], a
 	ret
 
-Function45c6:
-	ld hl, $c
+SetFacingGrassShake:
+	ld hl, OBJECT_STEP_FRAME
 	add hl, bc
 	inc [hl]
 	ld a, [hl]
-	ld hl, $d
+	ld hl, OBJECT_FACING_STEP
 	add hl, bc
-	and $4
-	ld a, $1e
-	jr z, .asm_45d7
-	inc a
-.asm_45d7
+	and 4
+	ld a, FACING_GRASS_1
+	jr z, .ok
+	inc a ; FACING_GRASS_2
+
+.ok
 	ld [hl], a
 	ret

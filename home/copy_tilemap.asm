@@ -1,7 +1,7 @@
 LoadTilemapToTempTilemap::
-; Load wTilemap into wTempTileMap
+; Load wTilemap into wTempTilemap
 	hlcoord 0, 0
-	decoord 0, 0, wTempTileMap
+	decoord 0, 0, wTempTilemap
 	ld bc, wTilemapEnd - wTilemap
 	jp CopyBytes
 
@@ -15,7 +15,7 @@ SafeLoadTempTilemapToTilemap::
 
 LoadTempTilemapToTilemap::
 ; Load wTempTilemap into wTilemap
-	hlcoord 0, 0, wTempTileMap
+	hlcoord 0, 0, wTempTilemap
 	decoord 0, 0
 	ld bc, wTilemapEnd - wTilemap
 	jp CopyBytes

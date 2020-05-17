@@ -27,10 +27,10 @@ TrainerFisherChris:
 	checkevent EVENT_CHRIS_ASKED_FOR_PHONE_NUMBER
 	iftrue .AskedAlready
 	writetext FisherChrisAfterBattleText
-	buttonsound
+	promptbutton
 	setevent EVENT_CHRIS_ASKED_FOR_PHONE_NUMBER
 	scall .AskNumber1
-	jump .AskForNumber
+	sjump .AskForNumber
 
 .AskedAlready:
 	scall .AskNumber2
@@ -38,9 +38,9 @@ TrainerFisherChris:
 	askforphonenumber PHONE_FISHER_CHRIS
 	ifequal PHONE_CONTACTS_FULL, .PhoneFull
 	ifequal PHONE_CONTACT_REFUSED, .NumberDeclined
-	trainertotext FISHER, CHRIS1, STRING_BUFFER_3
+	gettrainername STRING_BUFFER_3, FISHER, CHRIS1
 	scall .RegisteredNumber
-	jump .NumberAccepted
+	sjump .NumberAccepted
 
 .WantsBattle:
 	scall .Rematch

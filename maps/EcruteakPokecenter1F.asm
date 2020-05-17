@@ -13,7 +13,7 @@ EcruteakPokecenter1F_MapScripts:
 	db 0 ; callbacks
 
 .MeetBill:
-	priorityjump .BillActivatesTimeCapsule
+	prioritysjump .BillActivatesTimeCapsule
 	end
 
 .DummyScene:
@@ -38,8 +38,8 @@ EcruteakPokecenter1F_MapScripts:
 	pause 10
 	opentext
 	writetext EcruteakPokecenter1F_BillText1
-	buttonsound
-	jump .PointlessJump
+	promptbutton
+	sjump .PointlessJump
 
 .PointlessJump:
 	writetext EcruteakPokecenter1F_BillText2

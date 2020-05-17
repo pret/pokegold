@@ -47,7 +47,7 @@ CianwoodGymChuckScript:
 	playsound SFX_GET_BADGE
 	waitsfx
 	setflag ENGINE_STORMBADGE
-	checkcode VAR_BADGES
+	readvar VAR_BADGES
 	scall CianwoodGymActivateRockets
 .FightDone:
 	checkevent EVENT_GOT_TM01_DYNAMICPUNCH
@@ -57,7 +57,7 @@ CianwoodGymChuckScript:
 	setevent EVENT_BEAT_BLACKBELT_NOB
 	setevent EVENT_BEAT_BLACKBELT_LUNG
 	writetext ChuckExplainBadgeText
-	buttonsound
+	promptbutton
 	verbosegiveitem TM_DYNAMICPUNCH
 	iffalse .BagFull
 	setevent EVENT_GOT_TM01_DYNAMICPUNCH
@@ -136,7 +136,7 @@ CianwoodGymStatue:
 	iftrue .Beaten
 	jumpstd gymstatue1
 .Beaten:
-	trainertotext CHUCK, CHUCK1, STRING_BUFFER_4
+	gettrainername STRING_BUFFER_4, CHUCK, CHUCK1
 	jumpstd gymstatue2
 
 CianwoodGymMovement_ChuckChucksBoulder:

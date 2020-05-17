@@ -2,25 +2,28 @@
 
 This is a disassembly of Pokémon Gold and Pokémon Silver.
 
-It builds the following roms:
+It builds the following ROMs:
 
-* Pokemon - Gold Version (USA, Europe).gbc `md5:a6924ce1f9ad2228e1c6580779b23878`
-* Pokemon - Silver Version (USA, Europe).gbc `md5:2ac166169354e84d0e2d7cf4cb40b312`
+- Pokemon - Gold Version (UE) [C][!].gbc `sha1: d8b8a3600a465308c9953dfa04f0081c05bdcb94`
+- Pokemon - Silver Version (UE) [C][!].gbc `sha1: 49b163f7e57702bc939d642a18f591de55d92dae`
 
-To set up the repository, see [**INSTALL.md**](INSTALL.md).
+To set up the repository, see [INSTALL.md](INSTALL.md).
 
 ## See also
 
-* Disassembly of [**Pokémon Red/Blue**][pokered]
-* Disassembly of [**Pokémon Yellow**][pokeyellow]
-* Disassembly of [**Pokémon Crystal**][pokecrystal]
-* Disassembly of [**Pokémon Pinball**][pokepinball]
-* Disassembly of [**Pokémon TCG**][poketcg]
-* Disassembly of [**Pokémon Ruby**][pokeruby]
-* Disassembly of [**Pokémon Fire Red**][pokefirered]
-* Disassembly of [**Pokémon Emerald**][pokeemerald]
-* Discord: [**pret**][Discord]
-* irc: **irc.freenode.net** [**#pret**][irc]
+- **Discord:** [pret][discord]
+- **IRC:** [freenode#pret][irc]
+
+Other disassembly projects:
+
+- [**Pokémon Red/Blue**][pokered]
+- [**Pokémon Yellow**][pokeyellow]
+- [**Pokémon Crystal**][pokecrystal]
+- [**Pokémon Pinball**][pokepinball]
+- [**Pokémon TCG**][poketcg]
+- [**Pokémon Ruby**][pokeruby]
+- [**Pokémon Fire Red**][pokefirered]
+- [**Pokémon Emerald**][pokeemerald]
 
 [pokered]: https://github.com/pret/pokered
 [pokeyellow]: https://github.com/pret/pokeyellow
@@ -30,5 +33,5 @@ To set up the repository, see [**INSTALL.md**](INSTALL.md).
 [pokeruby]: https://github.com/pret/pokeruby
 [pokefirered]: https://github.com/pret/pokefirered
 [pokeemerald]: https://github.com/pret/pokeemerald
-[Discord]: https://discord.gg/d5dubZ3
+[discord]: https://discord.gg/d5dubZ3
 [irc]: https://kiwiirc.com/client/irc.freenode.net/?#pret

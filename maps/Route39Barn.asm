@@ -49,9 +49,9 @@ MoomooScript:
 	checkevent EVENT_HEALED_MOOMOO
 	iftrue .HappyCow
 	writetext MoomooWeakMooText
-	writebyte MILTANK
+	setval MILTANK
 	special PlaySlowCry
-	buttonsound
+	promptbutton
 	writetext Route39BarnItsCryIsWeakText
 	checkevent EVENT_TALKED_TO_FARMER_ABOUT_MOOMOO
 	iftrue .GiveBerry
@@ -60,16 +60,16 @@ MoomooScript:
 	end
 
 .GiveBerry:
-	buttonsound
+	promptbutton
 	writetext Route39BarnAskGiveBerryText
 	yesorno
 	iffalse .Refused
 	checkitem BERRY
 	iffalse .NoBerriesInBag
 	takeitem BERRY
-	copybytetovar wMooMooBerries
-	addvar 1
-	copyvartobyte wMooMooBerries
+	readmem wMooMooBerries
+	addval 1
+	writemem wMooMooBerries
 	ifequal 3, .ThreeBerries
 	ifequal 5, .FiveBerries
 	ifequal 7, .SevenBerries
@@ -80,7 +80,7 @@ MoomooScript:
 
 .ThreeBerries:
 	writetext Route39BarnGaveBerryText
-	buttonsound
+	promptbutton
 	writetext Route39BarnLittleHealthierText
 	waitbutton
 	closetext
@@ -88,7 +88,7 @@ MoomooScript:
 
 .FiveBerries:
 	writetext Route39BarnGaveBerryText
-	buttonsound
+	promptbutton
 	writetext Route39BarnQuiteHealthyText
 	waitbutton
 	closetext
@@ -98,7 +98,7 @@ MoomooScript:
 	playmusic MUSIC_HEAL
 	writetext Route39BarnGaveBerryText
 	pause 60
-	buttonsound
+	promptbutton
 	special RestartMapMusic
 	writetext Route39BarnTotallyHealthyText
 	waitbutton

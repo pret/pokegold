@@ -17,9 +17,9 @@ BillScript:
 	yesorno
 	iffalse .Refused
 	writetext BillImCountingOnYouText
-	buttonsound
+	promptbutton
 	waitsfx
-	checkcode VAR_PARTYCOUNT
+	readvar VAR_PARTYCOUNT
 	ifequal PARTY_LENGTH, .NoRoom
 	writetext ReceivedEeveeText
 	playsound SFX_CAUGHT_MON
@@ -79,7 +79,7 @@ BillsSisterScript:
 	writetext RecordedBillsNumberText
 	playsound SFX_REGISTER_PHONE_NUMBER
 	waitsfx
-	buttonsound
+	promptbutton
 .GotBillsNumber:
 	writetext BillsSisterStorageSystemText
 	waitbutton
@@ -94,8 +94,8 @@ BillsSisterScript:
 
 .NoRoom:
 	writetext BillsSisterPhoneFullText
-	buttonsound
-	jump .Refused
+	promptbutton
+	sjump .Refused
 
 BillsHouseBookshelf1:
 	jumpstd picturebookshelf

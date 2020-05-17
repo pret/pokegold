@@ -6,7 +6,6 @@ LCD::
 	and a
 	jr z, .done
 
-; At this point it's assumed we're in WRAM bank 5!
 	push hl
 	ldh a, [rLY]
 	ld l, a

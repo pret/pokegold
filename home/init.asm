@@ -56,9 +56,9 @@ Init::
 	xor a
 	ldh [rLCDC], a
 
-; Clear WRAM bank 0
+; Clear WRAM
 	ld hl, WRAM0_Begin
-	ld bc, $2000
+	ld bc, WRAM1_End - WRAM0_Begin
 .ByteFill:
 	ld [hl], 0
 	inc hl
@@ -70,6 +70,8 @@ Init::
 	ld sp, wStackTop
 
 	call ClearVRAM
+
+; Clear HRAM
 	ldh a, [hCGB]
 	push af
 	xor a
@@ -104,11 +106,11 @@ Init::
 	ldh [rWX], a
 
 	ld a, CONNECTION_NOT_ESTABLISHED
-	ldh [hLinkPlayerNumber], a
+	ldh [hSerialConnectionStatus], a
 
-	ld h, $98
+	ld h, HIGH(vBGMap0)
 	call BlankBGMap
-	ld h, $9c
+	ld h, HIGH(vBGMap1)
 	call BlankBGMap
 
 	callfar InitCGBPals
@@ -137,7 +139,7 @@ Init::
 	; BG on
 	ldh [rLCDC], a
 
-	ld a, $1f
+	ld a, IE_DEFAULT
 	ldh [rIE], a
 	ei
 
@@ -158,13 +160,13 @@ ClearVRAM::
 	ret
 
 BlankBGMap::
-	ld a, $7f
-	jr asm_69e
-
-FillBGMap::
+	ld a, " "
+	jr .fill
+; unused; would fill BG Map with value in l
 	ld a, l
-asm_69e
-	ld de, $400
+
+.fill
+	ld de, vBGMap1 - vBGMap0
 	ld l, e
 .loop
 	ld [hli], a

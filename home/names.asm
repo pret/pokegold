@@ -56,9 +56,9 @@ GetName::
 
 .done
 	ld a, e
-	ld [wcffe], a
+	ld [wUnusedCFFE], a
 	ld a, d
-	ld [wcffe + 1], a
+	ld [wUnusedCFFE + 1], a
 
 	pop de
 	pop bc
@@ -123,7 +123,7 @@ GetPokemonName::
 	dec a
 	ld hl, PokemonNames
 	ld e, a
-	ld d, $0
+	ld d, 0
 
 rept MON_NAME_LENGTH - 1
 	add hl, de
@@ -188,7 +188,7 @@ GetTMHMName::
 	ld hl, .TMText
 	ld bc, .TMTextEnd - .TMText
 
-.copy:
+.copy
 	ld de, wStringBuffer1
 	call CopyBytes
 
@@ -204,20 +204,18 @@ GetTMHMName::
 	ld a, c
 	jr c, .not_hm
 	sub NUM_TMS
+.not_hm
 
-.not_hm:
 ; Divide and mod by 10 to get the top and bottom digits respectively
 	ld b, "0"
-
-.mod10:
+.mod10
 	sub 10
 	jr c, .done_mod
 	inc b
 	jr .mod10
 
-.done_mod:
+.done_mod
 	add 10
-
 	push af
 	ld a, b
 	ld [de], a

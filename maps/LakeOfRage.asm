@@ -32,7 +32,7 @@ LakeOfRage_MapScripts:
 	return
 
 .Wesley:
-	checkcode VAR_WEEKDAY
+	readvar VAR_WEEKDAY
 	ifequal WEDNESDAY, .WesleyAppears
 	disappear LAKEOFRAGE_WESLEY
 	return
@@ -46,7 +46,7 @@ LakeOfRageLanceScript:
 	iftrue .AskAgainForHelp
 	opentext
 	writetext UnknownText_0x70157
-	buttonsound
+	promptbutton
 	faceplayer
 	writetext UnknownText_0x701b4
 	yesorno
@@ -76,7 +76,7 @@ LakeOfRageLanceScript:
 	writetext UnknownText_0x703a5
 	yesorno
 	iffalse .RefusedToHelp
-	jump .AgreedToHelp
+	sjump .AgreedToHelp
 
 RedGyarados:
 	opentext
@@ -85,7 +85,7 @@ RedGyarados:
 	cry GYARADOS
 	closetext
 	loadwildmon GYARADOS, 30
-	writecode VAR_BATTLETYPE, BATTLETYPE_SHINY
+	loadvar VAR_BATTLETYPE, BATTLETYPE_SHINY
 	startbattle
 	ifequal $1, .NotBeaten
 	disappear LAKEOFRAGE_GYARADOS
@@ -138,7 +138,7 @@ MagikarpHouseSignScript:
 	end
 
 .MagikarpLengthRecord:
-	buttonsound
+	promptbutton
 	special MagikarpHouseSign
 	closetext
 	end
@@ -192,17 +192,17 @@ WesleyScript:
 	opentext
 	checkevent EVENT_GOT_BLACKBELT_FROM_WESLEY
 	iftrue WesleyWednesdayScript
-	checkcode VAR_WEEKDAY
+	readvar VAR_WEEKDAY
 	ifnotequal WEDNESDAY, WesleyNotWednesdayScript
 	checkevent EVENT_MET_WESLEY_OF_WEDNESDAY
 	iftrue .MetWesley
 	writetext MeetWesleyText
-	buttonsound
+	promptbutton
 	setevent EVENT_MET_WESLEY_OF_WEDNESDAY
 .MetWesley:
 	writetext WesleyGivesGiftText
-	buttonsound
-	verbosegiveitem BLACKBELT
+	promptbutton
+	verbosegiveitem BLACKBELT_I
 	iffalse WesleyDoneScript
 	setevent EVENT_GOT_BLACKBELT_FROM_WESLEY
 	writetext WesleyGaveGiftText

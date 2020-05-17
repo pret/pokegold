@@ -1,74 +1,116 @@
-PYTHON := python
-MD5 := md5sum -c
-
-.SUFFIXES:
-.PHONY: all clean gold silver pngs compare
-.SECONDEXPANSION:
-.PRECIOUS:
-.SECONDARY:
-
-gfx       := $(PYTHON) gfx.py
-includes  := $(PYTHON) scan_includes.py
-
+roms := pokegold.gbc pokesilver.gbc
 
 rom_obj := \
 audio.o \
-data/text/common.o \
-data/pokemon/dex_entries.o \
-wram.o \
+home.o \
 main.o \
-home.o
+wram.o \
+data/text/common.o \
+data/maps/map_data.o \
+data/pokemon/dex_entries.o \
+data/pokemon/egg_moves.o \
+data/pokemon/evos_attacks.o \
+engine/overworld/events.o \
+gfx/sprites.o
 
-gold_obj := $(rom_obj:.o=_gold.o)
-silver_obj := $(rom_obj:.o=_silver.o)
+# Distinguish asm files which are game-exclusive for building (*_[gold|silver].asm)
+gs_excl_asm := gfx/pics
+gold_excl_obj := $(addsuffix _gold.o,$(gs_excl_asm))
+silver_excl_obj := $(addsuffix _silver.o,$(gs_excl_asm))
 
-roms := pokegold.gbc pokesilver.gbc
+gold_obj := $(rom_obj:.o=_gold.o) $(gold_excl_obj)
+silver_obj := $(rom_obj:.o=_silver.o) $(silver_excl_obj)
+
+
+### Build tools
+
+ifeq (,$(shell which sha1sum))
+SHA1 := shasum
+else
+SHA1 := sha1sum
+endif
+
+RGBDS ?=
+RGBASM  ?= $(RGBDS)rgbasm
+RGBFIX  ?= $(RGBDS)rgbfix
+RGBGFX  ?= $(RGBDS)rgbgfx
+RGBLINK ?= $(RGBDS)rgblink
+
+PYTHON := python
+gfx := $(PYTHON) tools/gfx.py
+
+
+### Build targets
+
+.SUFFIXES:
+.PHONY: all gold silver clean tidy pngs compare tools
+.SECONDEXPANSION:
+.PRECIOUS:
+.SECONDARY:
 
 all: $(roms)
 gold: pokegold.gbc
 silver: pokesilver.gbc
 
 clean:
-	rm -f $(roms) $(gold_obj) $(silver_obj) $(roms:.gbc=.map) $(roms:.gbc=.sym)
+	rm -f $(roms) $(gold_obj) $(silver_obj) $(roms:.gbc=.map) $(roms:.gbc=.sym) rgbdscheck.o
+	$(MAKE) clean -C tools/
 
-compare: pokegold.gbc pokesilver.gbc
-	@$(MD5) roms.md5
+compare: $(roms)
+	@$(SHA1) -c roms.sha1
 
-%.asm: ;
+tools:
+	$(MAKE) -C tools/
 
+
+RGBASMFLAGS = -L -Weverything
+# Create a sym/map for debug purposes if `make` run with `DEBUG=1`
+ifeq ($(DEBUG),1)
+RGBASMFLAGS += -E
+endif
+
+$(gold_obj):   RGBASMFLAGS += -D _GOLD
+$(silver_obj): RGBASMFLAGS += -D _SILVER
+
+rgbdscheck.o: rgbdscheck.asm
+	$(RGBASM) -o $@ $<
+
+# The dep rules have to be explicit or else missing files won't be reported.
+# As a side effect, they're evaluated immediately instead of when the rule is invoked.
+# It doesn't look like $(shell) can be deferred so there might not be a better way.
 define DEP
-$1: $$(shell $$(includes) $2)
+$1: $2 $$(shell tools/scan_includes $2) | rgbdscheck.o
+	$$(RGBASM) $$(RGBASMFLAGS) -o $$@ $$<
 endef
-$(foreach obj, $(gold_obj), $(eval $(call DEP,$(obj),$(obj:_gold.o=.asm))))
-$(foreach obj, $(silver_obj), $(eval $(call DEP,$(obj),$(obj:_silver.o=.asm))))
 
-$(gold_obj): %_gold.o: %.asm $$(dep)
-	rgbasm -D GOLD -L -o $@ $<
+# Build tools when building the rom.
+# This has to happen before the rules are processed, since that's when scan_includes is run.
+ifeq (,$(filter clean tools,$(MAKECMDGOALS)))
 
-$(silver_obj): %_silver.o: %.asm $$(dep)
-	rgbasm -D SILVER -L -o $@ $<
+$(info $(shell $(MAKE) -C tools))
 
-pokegold.gbc: $(gold_obj)
-	rgblink -n pokegold.sym -m pokegold.map -l pokegold.link -o $@ $^
-	rgbfix -cjsv -i AAUE -k 01 -l 0x33 -m 0x10 -p 0 -r 3 -t "POKEMON_GLD" $@
+# Dependencies for shared objects (drop _gold and _silver from asm file basenames)
+$(foreach obj, $(filter-out $(gold_excl_obj), $(gold_obj)), \
+	$(eval $(call DEP,$(obj),$(obj:_gold.o=.asm))))
+$(foreach obj, $(filter-out $(silver_excl_obj), $(silver_obj)), \
+	$(eval $(call DEP,$(obj),$(obj:_silver.o=.asm))))
 
-pokesilver.gbc: $(silver_obj)
-	rgblink -n pokesilver.sym -m pokesilver.map -l pokesilver.link -o $@ $^
-	rgbfix -cjsv -i AAXE -k 01 -l 0x33 -m 0x10 -p 0 -r 3 -t "POKEMON_SLV" $@
+# Dependencies for game-exclusive objects (keep _gold and _silver in asm file basenames)
+$(foreach obj, $(gold_excl_obj) $(silver_excl_obj), $(eval $(call DEP,$(obj),$(obj:.o=.asm))))
+
+endif
+
+
+pokegold.gbc: $(gold_obj) layout.link
+	$(RGBLINK) -n pokegold.sym -m pokegold.map -l layout.link -o $@ $(gold_obj)
+	$(RGBFIX) -cjsv -i AAUE -k 01 -l 0x33 -m 0x10 -p 0 -r 3 -t "POKEMON_GLD" $@
+
+pokesilver.gbc: $(silver_obj) layout.link
+	$(RGBLINK) -n pokesilver.sym -m pokesilver.map -l layout.link -o $@ $(silver_obj)
+	$(RGBFIX) -cjsv -i AAXE -k 01 -l 0x33 -m 0x10 -p 0 -r 3 -t "POKEMON_SLV" $@
 
 pngs:
-	find . -iname "*.lz"      -exec $(gfx) unlz {} +
-	find . -iname "*.[12]bpp" -exec $(gfx) png  {} +
-	find . -iname "*.[12]bpp" -exec touch {} +
-	find . -iname "*.lz"      -exec touch {} +
-
-%.png: ;
-%.2bpp: %.png ; $(gfx) 2bpp $<
-%.1bpp: %.png ; $(gfx) 1bpp $<
-%.lz: % ; $(gfx) lz $<
-
-%.pal: %.2bpp ;
-gfx/pics/%/normal.pal gfx/pics/%/bitmask.asm gfx/pics/%/frames.asm: gfx/pics/%/front.2bpp ;
-%.bin: ;
-%.blk: ;
-%.tilemap: ;
+	find gfx -iname "*.lz"      -exec $(gfx) unlz {} +
+	find gfx -iname "*.[12]bpp" -exec $(gfx) png  {} +
+	find gfx -iname "*.[12]bpp" -exec touch {} +
+	find gfx -iname "*.lz"      -exec touch {} +

@@ -1,37 +1,37 @@
-HandlePlayerStep_::
+_HandlePlayerStep::
 	ld a, [wPlayerStepFlags]
 	and a
 	ret z
-	bit 7, a
-	jr nz, .asm_d4b6
-	bit 6, a
-	jr nz, .asm_d4c0
-	bit 5, a
-	jr nz, .asm_d4c5
+	bit PLAYERSTEP_START_F, a
+	jr nz, .update_overworld_map
+	bit PLAYERSTEP_STOP_F, a
+	jr nz, .update_player_coords
+	bit PLAYERSTEP_CONTINUE_F, a
+	jr nz, .finish
 	ret
 
-.asm_d4b6
-	ld a, $4
+.update_overworld_map
+	ld a, 4
 	ld [wHandlePlayerStep], a
-	call Functiond53c
-	jr .asm_d4c5
+	call UpdateOverworldMap
+	jr .finish
 
-.asm_d4c0
-	call Functiond517
-	jr .asm_d4c5
+.update_player_coords
+	call UpdatePlayerCoords
+	jr .finish
 
-.asm_d4c5
-	call Functiond4f2
+.finish
+	call HandlePlayerStep
 	ld a, [wPlayerStepVectorX]
 	ld d, a
 	ld a, [wPlayerStepVectorY]
 	ld e, a
-	ld a, [wce81]
+	ld a, [wPlayerBGMapOffsetX]
 	sub d
-	ld [wce81], a
-	ld a, [wce82]
+	ld [wPlayerBGMapOffsetX], a
+	ld a, [wPlayerBGMapOffsetY]
 	sub e
-	ld [wce82], a
+	ld [wPlayerBGMapOffsetY], a
 	ret
 
 ScrollScreen::
@@ -47,7 +47,7 @@ ScrollScreen::
 	ldh [hSCY], a
 	ret
 
-Functiond4f2: ; d4f2 (3:54f2)
+HandlePlayerStep:
 	ld hl, wHandlePlayerStep
 	ld a, [hl]
 	and a
@@ -58,146 +58,147 @@ Functiond4f2: ; d4f2 (3:54f2)
 	rst JumpTable
 	ret
 
-.Jumptable
+.Jumptable:
 	dw GetMovementPermissions
 	dw BufferScreen
-	dw Functiond515
-	dw Functiond516
-	dw Functiond515
-	dw Functiond515
-	dw Functiond515
-	dw Functiond515
-	dw Functiond515
-	dw Functiond515
-	dw Functiond515
+	dw .fail1
+	dw .fail2
+; The rest are never used.  Ever.
+	dw .fail1
+	dw .fail1
+	dw .fail1
+	dw .fail1
+	dw .fail1
+	dw .fail1
+	dw .fail1
 
-Functiond515:
+.fail1
 	ret
 
-Functiond516:
+.fail2
 	ret
 
-Functiond517: ; d517 (3:5517)
+UpdatePlayerCoords:
 	ld a, [wPlayerStepDirection]
 	and a
-	jr nz, .asm_d522
+	jr nz, .check_step_down
 	ld hl, wYCoord
 	inc [hl]
 	ret
 
-.asm_d522
-	cp $1
-	jr nz, .asm_d52b
+.check_step_down
+	cp UP
+	jr nz, .check_step_left
 	ld hl, wYCoord
 	dec [hl]
 	ret
 
-.asm_d52b
-	cp $2
-	jr nz, .asm_d534
+.check_step_left
+	cp LEFT
+	jr nz, .check_step_right
 	ld hl, wXCoord
 	dec [hl]
 	ret
 
-.asm_d534
-	cp $3
+.check_step_right
+	cp RIGHT
 	ret nz
 	ld hl, wXCoord
 	inc [hl]
 	ret
 
-Functiond53c: ; d53c (3:553c)
+UpdateOverworldMap:
 	ld a, [wPlayerStepDirection]
 	and a
-	jr z, .asm_d54f
-	cp $1
-	jr z, .asm_d559
-	cp $2
-	jr z, .asm_d563
-	cp $3
-	jr z, .asm_d56d
+	jr z, .step_down
+	cp UP
+	jr z, .step_up
+	cp LEFT
+	jr z, .step_left
+	cp RIGHT
+	jr z, .step_right
 	ret
 
-.asm_d54f
-	call Functiond577
-	call LoadMapPart
-	call ScrollMapUp
-	ret
-
-.asm_d559
-	call Functiond5a8
+.step_down
+	call .ScrollOverworldMapDown
 	call LoadMapPart
 	call ScrollMapDown
 	ret
 
-.asm_d563
-	call Functiond5db
+.step_up
+	call .ScrollOverworldMapUp
 	call LoadMapPart
-	call ScrollMapRight
+	call ScrollMapUp
 	ret
 
-.asm_d56d
-	call Functiond604
+.step_left
+	call .ScrollOverworldMapLeft
 	call LoadMapPart
 	call ScrollMapLeft
 	ret
 
-Functiond577: ; d577 (3:5577)
-	ld a, [wd05b]
-	add $40
-	ld [wd05b], a
-	jr nc, .asm_d58c
-	ld a, [wd05c]
-	inc a
-	and $3
-	or $98
-	ld [wd05c], a
-.asm_d58c
-	ld hl, wd07f
-	inc [hl]
-	ld a, [hl]
-	cp $2
-	jr nz, .asm_d59a
-	ld [hl], $0
-	call Functiond59b
-.asm_d59a
+.step_right
+	call .ScrollOverworldMapRight
+	call LoadMapPart
+	call ScrollMapRight
 	ret
 
-Functiond59b: ; d59b (3:559b)
+.ScrollOverworldMapDown:
+	ld a, [wBGMapAnchor]
+	add 2 * BG_MAP_WIDTH
+	ld [wBGMapAnchor], a
+	jr nc, .not_overflowed
+	ld a, [wBGMapAnchor + 1]
+	inc a
+	and %11
+	or HIGH(vBGMap0)
+	ld [wBGMapAnchor + 1], a
+.not_overflowed
+	ld hl, wMetatileStandingY
+	inc [hl]
+	ld a, [hl]
+	cp 2 ; was 1
+	jr nz, .done_down
+	ld [hl], 0
+	call .ScrollMapDataDown
+.done_down
+	ret
+
+.ScrollMapDataDown:
 	ld hl, wOverworldMapAnchor
 	ld a, [wMapWidth]
-	add $6
+	add 3 * 2 ; surrounding tiles
 	add [hl]
 	ld [hli], a
 	ret nc
 	inc [hl]
 	ret
 
-Functiond5a8: ; d5a8 (3:55a8)
-	ld a, [wd05b]
-	sub $40
-	ld [wd05b], a
-	jr nc, .asm_d5bd
-	ld a, [wd05c]
+.ScrollOverworldMapUp:
+	ld a, [wBGMapAnchor]
+	sub 2 * BG_MAP_WIDTH
+	ld [wBGMapAnchor], a
+	jr nc, .not_underflowed
+	ld a, [wBGMapAnchor + 1]
 	dec a
-	and $3
-	or $98
-	ld [wd05c], a
-.asm_d5bd
-	ld hl, wd07f
+	and %11
+	or HIGH(vBGMap0)
+	ld [wBGMapAnchor + 1], a
+.not_underflowed
+	ld hl, wMetatileStandingY
 	dec [hl]
 	ld a, [hl]
-	cp $ff
-	jr nz, .asm_d5cb
+	cp -1 ; was 0
+	jr nz, .done_up
 	ld [hl], $1
-	call Functiond5cc
-.asm_d5cb
+	call .ScrollMapDataUp
+.done_up
 	ret
 
-Functiond5cc: ; d5cc (3:55cc)
+.ScrollMapDataUp:
 	ld hl, wOverworldMapAnchor
 	ld a, [wMapWidth]
-	add $6
+	add 3 * 2 ; surrounding tiles
 	ld b, a
 	ld a, [hl]
 	sub b
@@ -206,8 +207,8 @@ Functiond5cc: ; d5cc (3:55cc)
 	dec [hl]
 	ret
 
-Functiond5db: ; d5db (3:55db)
-	ld a, [wd05b]
+.ScrollOverworldMapLeft:
+	ld a, [wBGMapAnchor]
 	ld e, a
 	and $e0
 	ld d, a
@@ -215,28 +216,28 @@ Functiond5db: ; d5db (3:55db)
 	sub $2
 	and $1f
 	or d
-	ld [wd05b], a
-	ld hl, wd080
+	ld [wBGMapAnchor], a
+	ld hl, wMetatileStandingX
 	dec [hl]
 	ld a, [hl]
-	cp $ff
-	jr nz, .asm_d5f9
-	ld [hl], $1
-	call Functiond5fa
-.asm_d5f9
+	cp -1
+	jr nz, .done_left
+	ld [hl], 1
+	call .ScrollMapDataLeft
+.done_left
 	ret
 
-Functiond5fa: ; d5fa (3:55fa)
+.ScrollMapDataLeft:
 	ld hl, wOverworldMapAnchor
 	ld a, [hl]
-	sub $1
+	sub 1
 	ld [hli], a
 	ret nc
 	dec [hl]
 	ret
 
-Functiond604: ; d604 (3:5604)
-	ld a, [wd05b]
+.ScrollOverworldMapRight:
+	ld a, [wBGMapAnchor]
 	ld e, a
 	and $e0
 	ld d, a
@@ -244,21 +245,21 @@ Functiond604: ; d604 (3:5604)
 	add $2
 	and $1f
 	or d
-	ld [wd05b], a
-	ld hl, wd080
+	ld [wBGMapAnchor], a
+	ld hl, wMetatileStandingX
 	inc [hl]
 	ld a, [hl]
-	cp $2
-	jr nz, .asm_d622
-	ld [hl], $0
-	call Functiond623
-.asm_d622
+	cp 2
+	jr nz, .done_right
+	ld [hl], 0
+	call .ScrollMapDataRight
+.done_right
 	ret
 
-Functiond623: ; d623 (3:5623)
+.ScrollMapDataRight:
 	ld hl, wOverworldMapAnchor
 	ld a, [hl]
-	add $1
+	add 1
 	ld [hli], a
 	ret nc
 	inc [hl]

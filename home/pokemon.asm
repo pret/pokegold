@@ -60,10 +60,11 @@ DrawBattleHPBar::
 
 PrepMonFrontpic::
 	ld a, $1
-	ld [wcf3b], a
+	ld [wBoxAlignment], a
 
 _PrepMonFrontpic::
 	ld a, [wCurPartySpecies]
+; is a pokemon?
 	and a
 	jr z, .not_pokemon
 	cp EGG
@@ -80,12 +81,12 @@ _PrepMonFrontpic::
 	lb bc, 7, 7
 	predef PlaceGraphic
 	xor a
-	ld [wcf3b], a
+	ld [wBoxAlignment], a
 	ret
 
 .not_pokemon
 	xor a
-	ld [wcf3b], a
+	ld [wBoxAlignment], a
 	inc a
 	ld [wCurPartySpecies], a
 	ret
@@ -204,7 +205,7 @@ Print8BitNumLeftAlign::
 	jp PrintNum
 
 Unreferenced_GetNthMove::
-	ld hl, wd149
+	ld hl, wListMoves_MoveIndicesBuffer
 	ld c, a
 	ld b, 0
 	add hl, bc
@@ -236,7 +237,7 @@ GetBaseData::
 	jr .end
 
 .egg
-	ld de, UnknownEggPic
+	ld de, EggPic
 
 ; Sprite dimensions
 	ld b, $55 ; 5x5

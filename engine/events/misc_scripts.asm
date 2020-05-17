@@ -29,23 +29,23 @@ FindItemInBallScript::
 
 .FoundItemText:
 	text_far _FoundItemText
-	db "@"
+	text_end
 
 .CantCarryItemText:
 	text_far _CantCarryItemText
-	db "@"
+	text_end
 
 .TryReceiveItem:
 	xor a
 	ld [wScriptVar], a
-	ld a, [wcf29]
-	ld [wDeciramBuffer], a
+	ld a, [wItemBallItemID]
+	ld [wNamedObjectIndexBuffer], a
 	call GetItemName
 	ld hl, wStringBuffer3
 	call CopyName2
-	ld a, [wcf29]
-	ld [wd002], a
-	ld a, [wcf2a]
+	ld a, [wItemBallItemID]
+	ld [wCurItem], a
+	ld a, [wItemBallQuantity]
 	ld [wItemQuantityChangeBuffer], a
 	ld hl, wNumItems
 	call ReceiveItem

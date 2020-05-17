@@ -15,7 +15,7 @@ UpdateTime::
 	call GetClock
 	call FixDays
 	call FixTime
-	farcall Function14032
+	farcall GetTimeOfDay
 	ret
 
 GetClock::
@@ -35,7 +35,6 @@ GetClock::
 	ld a, [de]
 	maskbits 60
 	ldh [hRTCSeconds], a
-
 
 	ld [hl], RTC_M
 	ld a, [de]
@@ -127,7 +126,7 @@ FixTime::
 ; second
 	ldh a, [hRTCSeconds]
 	ld c, a
-	ld a, [wd1df]
+	ld a, [wStartSecond]
 	add c
 	sub 60
 	jr nc, .updatesec
@@ -139,7 +138,7 @@ FixTime::
 	ccf ; carry is set, so turn it off
 	ldh a, [hRTCMinutes]
 	ld c, a
-	ld a, [wd1de]
+	ld a, [wStartMinute]
 	adc c
 	sub 60
 	jr nc, .updatemin
@@ -151,7 +150,7 @@ FixTime::
 	ccf ; carry is set, so turn it off
 	ldh a, [hRTCHours]
 	ld c, a
-	ld a, [wd1dd]
+	ld a, [wStartHour]
 	adc c
 	sub 24
 	jr nc, .updatehr
@@ -163,7 +162,7 @@ FixTime::
 	ccf ; carry is set, so turn it off
 	ldh a, [hRTCDayLo]
 	ld c, a
-	ld a, [wd1dc]
+	ld a, [wStartDay]
 	adc c
 	ld [wCurDay], a
 	ret
@@ -186,10 +185,10 @@ InitDayOfWeek::
 	jr InitTime ; useless
 
 InitTime::
-	farcall Function140ff
+	farcall _InitTime
 	ret
 
-PanicResetClock::
+ClearClock::
 	call .ClearhRTC
 	call SetClock
 	ret
@@ -254,18 +253,18 @@ ClearRTCStatus::
 ; clear sRTCStatusFlags
 	xor a
 	push af
-	ld a, BANK(s0_ac60)
+	ld a, BANK(sRTCStatusFlags)
 	call OpenSRAM
 	pop af
-	ld [s0_ac60], a
+	ld [sRTCStatusFlags], a
 	call CloseSRAM
 	ret
 
 RecordRTCStatus::
 ; append flags to sRTCStatusFlags
-	ld hl, s0_ac60
+	ld hl, sRTCStatusFlags
 	push af
-	ld a, BANK(s0_ac60)
+	ld a, BANK(sRTCStatusFlags)
 	call OpenSRAM
 	pop af
 	or [hl]
@@ -275,8 +274,8 @@ RecordRTCStatus::
 
 CheckRTCStatus::
 ; check sRTCStatusFlags
-	ld a, BANK(s0_ac60)
+	ld a, BANK(sRTCStatusFlags)
 	call OpenSRAM
-	ld a, [s0_ac60]
+	ld a, [sRTCStatusFlags]
 	call CloseSRAM
 	ret

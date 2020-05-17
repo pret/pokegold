@@ -33,8 +33,8 @@ CeladonDeptStore6FVendingMachine:
 	giveitem FRESH_WATER
 	iffalse .NotEnoughSpace
 	takemoney YOUR_MONEY, 200
-	itemtotext FRESH_WATER, STRING_BUFFER_3
-	jump .VendItem
+	getitemname STRING_BUFFER_3, FRESH_WATER
+	sjump .VendItem
 
 .SodaPop:
 	checkmoney YOUR_MONEY, 300
@@ -42,8 +42,8 @@ CeladonDeptStore6FVendingMachine:
 	giveitem SODA_POP
 	iffalse .NotEnoughSpace
 	takemoney YOUR_MONEY, 300
-	itemtotext SODA_POP, STRING_BUFFER_3
-	jump .VendItem
+	getitemname STRING_BUFFER_3, SODA_POP
+	sjump .VendItem
 
 .Lemonade:
 	checkmoney YOUR_MONEY, 350
@@ -51,26 +51,26 @@ CeladonDeptStore6FVendingMachine:
 	giveitem LEMONADE
 	iffalse .NotEnoughSpace
 	takemoney YOUR_MONEY, 350
-	itemtotext LEMONADE, STRING_BUFFER_3
-	jump .VendItem
+	getitemname STRING_BUFFER_3, LEMONADE
+	sjump .VendItem
 
 .VendItem:
 	pause 10
 	playsound SFX_ENTER_DOOR
 	writetext CeladonClangText
-	buttonsound
+	promptbutton
 	itemnotify
-	jump .Start
+	sjump .Start
 
 .NotEnoughMoney:
 	writetext CeladonVendingNoMoneyText
 	waitbutton
-	jump .Start
+	sjump .Start
 
 .NotEnoughSpace:
 	writetext CeladonVendingNoSpaceText
 	waitbutton
-	jump .Start
+	sjump .Start
 
 .MenuHeader:
 	db MENU_BACKUP_TILES ; flags

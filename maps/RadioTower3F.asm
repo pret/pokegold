@@ -64,7 +64,7 @@ RadioTower3FCooltrainerFScript:
 
 .NoRockets:
 	writetext UnknownText_0x5e7e2
-	buttonsound
+	promptbutton
 	verbosegiveitem TM_SUNNY_DAY
 	iffalse .NoRoom
 	writetext UnknownText_0x5e821

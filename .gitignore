@@ -28,6 +28,9 @@ baserom-silver.txt
 pokegold.txt
 pokesilver.txt
 
+# used_space.py
+used_space.png
+
 # for vim configuration
 # url: http://www.vim.org/scripts/script.php?script_id=441
 .lvimrc
@@ -35,9 +38,21 @@ pokesilver.txt
 .*.swp
 # swap files for gedit
 *~
+# for vscode
+.vscode
+# osx files
+.DS_STORE
 
-# compiled graphics
-*.2bpp
-*.lz
-*.1bpp
+# compiled graphics (include for now ...
+#*.lz
+#*.2bpp
+#*.1bpp
 
+# ... except for specific 2bpp files generated from lz's)
+gfx/pokemon/**/*.2bpp
+gfx/trainers/*.2bpp
+gfx/battle/dude.2bpp
+gfx/player/chris_back.2bpp
+gfx/trade/game_boy.2bpp
+gfx/pokegear/pokegear_sprites.2bpp
+gfx/slots/slots_*.2bpp

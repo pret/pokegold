@@ -21,9 +21,9 @@ RandyScript:
 	yesorno
 	iffalse .refused
 	writetext UnknownText_0x69e48
-	buttonsound
+	promptbutton
 	waitsfx
-	checkcode VAR_PARTYCOUNT
+	readvar VAR_PARTYCOUNT
 	ifequal PARTY_LENGTH, .partyfull
 	writetext UnknownText_0x69eb8
 	playsound SFX_KEY_ITEM
@@ -51,7 +51,7 @@ RandyScript:
 
 .questcomplete
 	writetext UnknownText_0x69f8b
-	buttonsound
+	promptbutton
 	verbosegiveitem HP_UP
 	iffalse .bagfull
 	setevent EVENT_GOT_HP_UP_FROM_RANDY

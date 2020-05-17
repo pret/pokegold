@@ -25,13 +25,13 @@ OlivineGymJasmineScript:
 	playsound SFX_GET_BADGE
 	waitsfx
 	setflag ENGINE_MINERALBADGE
-	checkcode VAR_BADGES
+	readvar VAR_BADGES
 	scall OlivineGymActivateRockets
 .FightDone:
 	checkevent EVENT_GOT_TM23_IRON_TAIL
 	iftrue .GotIronTail
 	writetext Jasmine_BadgeSpeech
-	buttonsound
+	promptbutton
 	verbosegiveitem TM_IRON_TAIL
 	iffalse .NoRoomForIronTail
 	setevent EVENT_GOT_TM23_IRON_TAIL
@@ -89,7 +89,7 @@ OlivineGymStatue:
 	iftrue .Beaten
 	jumpstd gymstatue1
 .Beaten:
-	trainertotext JASMINE, JASMINE1, STRING_BUFFER_4
+	gettrainername STRING_BUFFER_4, JASMINE, JASMINE1
 	jumpstd gymstatue2
 
 Jasmine_SteelTypeIntro:

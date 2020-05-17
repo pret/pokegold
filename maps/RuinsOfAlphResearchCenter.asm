@@ -15,7 +15,7 @@ RuinsOfAlphResearchCenter_MapScripts:
 	end
 
 .GetUnownDex:
-	priorityjump .GetUnownDexScript
+	prioritysjump .GetUnownDexScript
 	end
 
 .ScientistCallback:
@@ -60,7 +60,7 @@ RuinsOfAlphResearchCenter_MapScripts:
 RuinsOfAlphResearchCenterScientist3Script:
 	faceplayer
 	opentext
-	checkcode VAR_UNOWNCOUNT
+	readvar VAR_UNOWNCOUNT
 	ifequal NUM_UNOWN, .PrinterAvailable
 	writetext RuinsOfAlphResearchCenterScientist3Text
 	waitbutton
@@ -117,7 +117,7 @@ RuinsOfAlphResearchCenterComputer:
 	opentext
 	checkevent EVENT_RUINS_OF_ALPH_RESEARCH_CENTER_SCIENTIST
 	iftrue .SkipChecking
-	checkcode VAR_UNOWNCOUNT
+	readvar VAR_UNOWNCOUNT
 	ifequal NUM_UNOWN, .FullUnownDex
 .SkipChecking:
 	writetext RuinsOfAlphResearchCenterComputerText
@@ -134,7 +134,7 @@ RuinsOfAlphResearchCenterPrinter:
 	opentext
 	checkevent EVENT_RUINS_OF_ALPH_RESEARCH_CENTER_SCIENTIST
 	iftrue .SkipChecking
-	checkcode VAR_UNOWNCOUNT
+	readvar VAR_UNOWNCOUNT
 	ifequal NUM_UNOWN, .PrinterAvailable
 .SkipChecking:
 	writetext RuinsOfAlphResearchCenterPrinterText_DoesntWork

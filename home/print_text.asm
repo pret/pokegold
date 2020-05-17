@@ -97,7 +97,7 @@ CopyDataUntil::
 	cp c
 	jr nz, CopyDataUntil
 	ret
-	
+
 INCLUDE "home/print_num.asm"
 
 Function33ce::
@@ -110,7 +110,7 @@ Function33ce::
 	jr nz, .asm_33ce
 	ret
 
-Function33d7:: ; 33d7 (0:33d7)
+Function33d7::
 	ld a, [de]
 	swap a
 	and $f
@@ -123,7 +123,7 @@ Function33d7:: ; 33d7 (0:33d7)
 	inc de
 	ret
 
-Function33e9:: ; 33e9 (0:33e9)
+Function33e9::
 	ld bc, .digits
 	add c
 	ld c, a
@@ -136,14 +136,14 @@ Function33e9:: ; 33e9 (0:33e9)
 .digits db "0123456789ABCDEF"
 
 FarPrintText::
-	ld [wBuffer], a
+	ld [wTempBank], a
 	ldh a, [hROMBank]
 	push af
-	ld a, [wBuffer]
+	ld a, [wTempBank]
 	rst Bankswitch
-	
+
 	call PrintText
-	
+
 	pop af
 	rst Bankswitch
 	ret

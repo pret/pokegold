@@ -13,19 +13,19 @@ GameFreakGameDesignerScript:
 	faceplayer
 	opentext
 	writetext GameFreakGameDesignerText
-	checkcode VAR_DEXCAUGHT
+	readvar VAR_DEXCAUGHT
 	ifgreater NUM_POKEMON - 2 - 1, .CompletedPokedex ; ignore Mew and Celebi
 	waitbutton
 	closetext
 	end
 
 .CompletedPokedex:
-	buttonsound
+	promptbutton
 	writetext GameFreakGameDesignerCompletedPokedexText
 	playsound SFX_DEX_FANFARE_230_PLUS
 	waitsfx
 	writetext GameFreakGameDesignerPauseForDiplomaText
-	buttonsound
+	promptbutton
 	special Diploma
 	writetext GameFreakGameDesignerAfterDiplomaText
 	waitbutton

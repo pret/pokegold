@@ -73,7 +73,7 @@ BlackthornGymClairScript:
 	checkevent EVENT_GOT_TM24_DRAGONBREATH
 	iftrue .GotTM24
 	writetext BlackthornGymClairText_YouKeptMeWaiting
-	buttonsound
+	promptbutton
 	verbosegiveitem TM_DRAGONBREATH
 	iffalse .BagFull
 	setevent EVENT_GOT_TM24_DRAGONBREATH
@@ -143,7 +143,7 @@ BlackthornGymStatue:
 	iftrue .Beaten
 	jumpstd gymstatue1
 .Beaten:
-	trainertotext CLAIR, CLAIR1, STRING_BUFFER_4
+	gettrainername STRING_BUFFER_4, CLAIR, CLAIR1
 	jumpstd gymstatue2
 
 ClairIntroText:

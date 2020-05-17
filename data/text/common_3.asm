@@ -1,116 +1,117 @@
-UnknownText_0x1c505e::
+_SlotsStartText::
 	text "Start!"
 	done
 
-UnknownText_0x1c5066::
+_SlotsNotEnoughCoinsText::
 	text "Not enough"
 	line "coins."
 	prompt
 
-UnknownText_0x1c5079::
+_SlotsRanOutOfCoinsText::
 	text "Darn… Ran out of"
 	line "coins…"
 	done
 
-UnknownText_0x1c5092::
+_SlotsPlayAgainText::
 	text "Play again?"
 	done
 
-UnknownText_0x1c509f::
+_SlotsLinedUpText::
 	text "lined up!"
 	line "Won @"
 	text_ram wStringBuffer2
 	text " coins!"
 	done
 
-UnknownText_0x1c50bb::
+_SlotsDarnText::
 	text "Darn!"
 	done
 
-UnknownText_0x1c5821::
+_GearTodayText::
 	text_today
-	db "@"
+	text_end
 
-UnknownText_0x1c5824::
+_GearEllipseText::
 	text "<……>"
 	done
 
-UnknownText_0x1c5827::
+_GearOutOfServiceText::
 	text "You're out of the"
 	line "service area."
 	prompt
 
-UnknownText_0x1c5847::
+_PokegearAskWhoCallText::
 	text "Whom do you want"
 	line "to call?"
 	done
 
-UnknownText_0x1c5862::
+_PokegearPressButtonText::
 	text "Press any button"
 	line "to exit."
 	done
 
-UnknownText_0x1c587d::
+_PokegearAskDeleteText::
 	text "Delete this stored"
 	line "phone number?"
 	done
 
-UnknownText_0x1c5565::
+_PhoneWrongNumberText::
 	text "Huh? Sorry, wrong"
 	line "number!"
 	done
 
-UnknownText_0x1c5580::
+_PhoneClickText::
 	text "Click!"
 	done
 
-UnknownText_0x1c5588::
+_PhoneEllipseText::
 	text "<……>"
 	done
 
-UnknownText_0x1c558b::
+_PhoneOutOfAreaText::
 	text "That number is out"
 	line "of the area."
 	done
 
-UnknownText_0x1c55ac::
+_PhoneJustTalkToThemText::
 	text "Just go talk to"
 	line "that person!"
 	done
 
-UnknownText_0x1c55ca::
+_PhoneThankYouText::
 	text "Thank you!"
 	done
 
+; unused
 UnknownText_0x1c55d6::
 	text "  :"
 	done
 
-UnknownText_0x1c55db::
+_PasswordAskResetText::
 	text "Password OK."
 	line "Select CONTINUE &"
 	cont "reset settings."
 	prompt
 
-UnknownText_0x1c560b::
+_PasswordWrongText::
 	text "Wrong password!"
 	prompt
 
-UnknownText_0x1c561c::
+_PasswordAskResetClockText::
 	text "Reset the clock?"
 	done
 
-UnknownText_0x1c562e::
+_PasswordAskEnterText::
 	text "Please enter the"
 	line "password."
 	done
 
-UnknownText_0x1c564a::
+_ClearAllSaveDataText::
 	text "Clear all save"
 	line "data area?"
 	done
 
-Text_LearnedMove_::
+_LearnedMoveText::
 	text_ram wMonOrItemNameBuffer
 	text " learned"
 	line "@"
@@ -118,21 +119,21 @@ Text_LearnedMove_::
 	text "!@"
 	sound_dex_fanfare_50_79
 	text_promptbutton
-	db "@"
+	text_end
 
-Text_ForgetWhich_::
+_MoveAskForgetText::
 	text "Which move should"
 	next "be forgotten?"
 	done
 
-Text_StopLearning_::
+_StopLearningMoveText::
 	text "Stop learning"
 	line "@"
 	text_ram wStringBuffer2
 	text "?"
 	done
 
-Text_DidNotLearn_::
+_DidNotLearnMoveText::
 	text_ram wMonOrItemNameBuffer
 	text_start
 	line "did not learn"
@@ -141,7 +142,7 @@ Text_DidNotLearn_::
 	text "."
 	prompt
 
-Text_TryingToLearn_::
+_AskForgetMoveText::
 	text_ram wMonOrItemNameBuffer
 	text " is"
 	line "trying to learn"
@@ -162,12 +163,14 @@ Text_TryingToLearn_::
 	text "?"
 	done
 
-Text_1_2_and_Poof_::
+Text_MoveForgetCount::
 	text "1, 2 and…@"
 	text_pause
-	db "@@"
+	text_end
 
-Text_PoofForgot_::
+	text_end ; unused
+
+_MoveForgotText::
 	text " Poof!@"
 	text_pause
 	text_start
@@ -182,47 +185,47 @@ Text_PoofForgot_::
 	para "And…"
 	prompt
 
-Text_CantForgetHM_::
+_MoveCantForgetHMText::
 	text "HM moves can't be"
 	line "forgotten now."
 	prompt
 
-UnknownText_0x1c5793::
+_CardFlipPlayWithThreeCoinsText::
 	text "Play with three"
 	line "coins?"
 	done
 
-UnknownText_0x1c57ab::
+_CardFlipNotEnoughCoinsText::
 	text "Not enough coins…"
 	prompt
 
-UnknownText_0x1c57be::
+_CardFlipChooseACardText::
 	text "Choose a card."
 	done
 
-UnknownText_0x1c57ce::
+_CardFlipPlaceYourBetText::
 	text "Place your bet."
 	done
 
-UnknownText_0x1c57df::
+_CardFlipPlayAgainText::
 	text "Want to play"
 	line "again?"
 	done
 
-UnknownText_0x1c57f4::
+_CardFlipShuffledText::
 	text "The cards have"
 	line "been shuffled."
 	prompt
 
-UnknownText_0x1c5813::
+_CardFlipYeahText::
 	text "Yeah!"
 	done
 
-UnknownText_0x1c581a::
+_CardFlipDarnText::
 	text "Darn…"
 	done
 
-Text_ThisMonCantBeCaught_::
+_BallDodgedText::
 	text "It dodged the"
 	line "thrown BALL!"
 
@@ -230,66 +233,68 @@ Text_ThisMonCantBeCaught_::
 	line "can't be caught!"
 	prompt
 
-Text_YouMissedThePokemon_::
+_BallMissedText::
 	text "You missed the"
 	line "#MON!"
 	prompt
 
-Text_ThePokemonBrokeFree_::
+_BallBrokeFreeText::
 	text "Oh no! The #MON"
 	line "broke free!"
 	prompt
 
-Text_AppearedToBeCaught_::
+_BallAppearedCaughtText::
 	text "Aww! It appeared"
 	line "to be caught!"
 	prompt
 
-Text_AarghAlmostHadIt_::
+_BallAlmostHadItText::
 	text "Aargh!"
 	line "Almost had it!"
 	prompt
 
-Text_ShootItWasSoCloseToo_::
+_BallSoCloseText::
 	text "Shoot! It was so"
 	line "close too!"
 	prompt
 
-Text_GotchaMonWasCaught_::
+Text_BallCaught::
 	text "Gotcha! @"
 	text_ram wEnemyMonNick
 	text_start
 	line "was caught!@"
 	sound_caught_mon
-	db "@@"
+	text_end
 
-Text_Promptbutton_2::
+	text_end ; unused
+
+_WaitButtonText::
 	text_promptbutton
-	db "@"
+	text_end
 
-Text_SentToBillsPC_::
+_BallSentToPCText::
 	text_ram wMonOrItemNameBuffer
 	text " was"
 	line "sent to BILL's PC."
 	prompt
 
-Text_MonNewlyAddedToPokedex_::
+_NewDexDataText::
 	text_ram wEnemyMonNick
 	text "'s data"
 	line "was newly added to"
 	cont "the #DEX.@"
 	sound_slot_machine_start
 	text_promptbutton
-	db "@"
+	text_end
 
-Text_AskNicknameNewlyCaughtMon_::
+_AskGiveNicknameText::
 	text "Give a nickname to"
 	line "@"
 	text_ram wStringBuffer1
 	text "?"
 	done
 
-Text_StatRoseFromVitamin_::
+_ItemStatRoseText::
 	text_ram wStringBuffer1
 	text "'s"
 	line "@"
@@ -297,18 +302,18 @@ Text_StatRoseFromVitamin_::
 	text " rose."
 	prompt
 
-Text_MilkDrinkCantBeUsed_::
+_ItemCantUseOnMonText::
 	text "That can't be used"
 	line "on this #MON."
 	prompt
 
-Text_RepelUsedEarlierIsStillInEffect::
+_RepelUsedEarlierIsStillInEffectText::
 	text "The REPEL used"
 	line "earlier is still"
 	cont "in effect."
 	prompt
 
-Text_NowThatsACatchyTune_::
+_PlayedFluteText::
 	text "Played the #"
 	line "FLUTE."
 
@@ -316,50 +321,53 @@ Text_NowThatsACatchyTune_::
 	line "catchy tune!"
 	prompt
 
-Text_AllSleepingMonWokeUp_::
+_FluteWakeUpText::
 	text "All sleeping"
 	line "#MON woke up."
 	prompt
 
-Text_PlayedThePokeFlute_::
+Text_PlayedPokeFlute::
 	text "<PLAYER> played the"
 	line "# FLUTE.@"
 	text_promptbutton
-	db "@@"
+	text_end
 
-Text_CoinCase_::
+	text_end ; unused
+
+; BUG: "done" is not a valid terminator here, needs to change to "text_end"
+_CoinCaseCountText::
 	text "Coins:"
 	line "@"
 	text_decimal wCoins, 2, 4
 	done
 
-Text_RaiseThePPOfWhichMove_::
+_RaiseThePPOfWhichMoveText::
 	text "Raise the PP of"
 	line "which move?"
 	done
 
-Text_RestoreThePPOfWhichMove_::
+_RestoreThePPOfWhichMoveText::
 	text "Restore the PP of"
 	line "which move?"
 	done
 
-Text_PPIsMaxedOut_::
+_PPIsMaxedOutText::
 	text_ram wStringBuffer2
 	text "'s PP"
 	line "is maxed out."
 	prompt
 
-Text_PPsIncreased_::
+_PPsIncreasedText::
 	text_ram wStringBuffer2
 	text "'s PP"
 	line "increased."
 	prompt
 
-Text_PPWasRestored_::
+_PPRestoredText::
 	text "PP was restored."
 	prompt
 
-Text_TrophyInside_::
+_SentTrophyHomeText::
 	text "There was a trophy"
 	line "inside!@"
 	sound_dex_fanfare_50_79
@@ -371,73 +379,73 @@ Text_TrophyInside_::
 	line "trophy home."
 	prompt
 
-Text_LooksBitter_::
+_ItemLooksBitterText::
 	text "It looks bitter…"
 	prompt
 
-Text_CantUseOnEgg_::
+_ItemCantUseOnEggText::
 	text "That can't be used"
 	line "on an EGG."
 	prompt
 
-Text_IsntTheTimeToUseThat_::
+_ItemOakWarningText::
 	text "OAK: <PLAYER>!"
 	line "This isn't the"
 	cont "time to use that!"
 	prompt
 
-Text_BelongsToSomeoneElse_::
+_ItemBelongsToSomeoneElseText::
 	text "That belongs to"
 	line "someone else!"
 	prompt
 
-Text_WontHaveAnyEffect_::
+_ItemWontHaveEffectText::
 	text "It won't have any"
 	line "effect."
 	prompt
 
-Text_BlockedTheBall_::
+_BallBlockedText::
 	text "The trainer"
 	line "blocked the BALL!"
 	prompt
 
-Text_DontBeAThief_::
+_BallDontBeAThiefText::
 	text "Don't be a thief!"
 	prompt
 
-Text_CyclingIsntAllowed_::
+_NoCyclingText::
 	text "Cycling isn't"
 	line "allowed here."
 	prompt
 
-Text_CantGetOnYourItemNow_::
+_ItemCantGetOnText::
 	text "Can't get on your"
 	line "@"
 	text_ram wStringBuffer1
 	text " now."
 	prompt
 
-Text_CantUseBallBoxIsFull_::
+_BallBoxFullText::
 	text "The #MON BOX"
 	line "is full. That"
 	cont "can't be used now."
 	prompt
 
-Text_UsedItem_::
+_ItemUsedText::
 	text "<PLAYER> used the"
 	line "@"
 	text_ram wStringBuffer2
 	text "."
 	done
 
-Text_GotOnItem_::
+_ItemGotOnText::
 	text "<PLAYER> got on the@"
 	text_low
 	text_ram wStringBuffer2
 	text "."
 	prompt
 
-Text_GotOffItem_::
+_ItemGotOffText::
 	text "<PLAYER> got off@"
 	text_low
 	text "the @"
@@ -445,7 +453,7 @@ Text_GotOffItem_::
 	text "."
 	prompt
 
-Text_KnowsMove_::
+_KnowsMoveText::
 	text_ram wStringBuffer1
 	text " knows"
 	line "@"
@@ -453,39 +461,39 @@ Text_KnowsMove_::
 	text "."
 	prompt
 
-UnknownText_0x1c5eba::
+_MoveKnowsOneText::
 	text "That #MON knows"
 	line "only one move."
 	done
 
-UnknownText_0x1c5eda::
+_AskDeleteMoveText::
 	text "Oh, make it forget"
 	line "@"
 	text_ram wStringBuffer1
 	text "?"
 	done
 
-UnknownText_0x1c5ef5::
+_DeleterForgotMoveText::
 	text "Done! Your #MON"
 	line "forgot the move."
 	done
 
-UnknownText_0x1c5f17::
+_DeleterEggText::
 	text "An EGG doesn't"
 	line "know any moves!"
 	done
 
-UnknownText_0x1c5f36::
+_DeleterNoComeAgainText::
 	text "No? Come visit me"
 	line "again."
 	done
 
-UnknownText_0x1c5f50::
+_DeleterAskWhichMoveText::
 	text "Which move should"
 	line "it forget, then?"
 	prompt
 
-UnknownText_0x1c5f74::
+_DeleterIntroText::
 	text "Um… Oh, yes, I'm"
 	line "the MOVE DELETER."
 
@@ -496,43 +504,43 @@ UnknownText_0x1c5f74::
 	line "#MON forget?"
 	done
 
-UnknownText_0x1c5fd1::
+_DeleterAskWhichMonText::
 	text "Which #MON?"
 	prompt
 
-Text_DSTIsThatOK::
+_DSTIsThatOKText::
 	text " DST,"
 	line "is that OK?"
 	done
 
-UnknownText_0x1c5ff1::
+_TimeAskOkayText::
 	text ","
 	line "is that OK?"
 	done
 
-UnknownText_0x1c6000::
+_TimesetAskDSTText::
 	text "Do you want to"
 	line "switch to Daylight"
 	cont "Saving Time?"
 	done
 
-UnknownText_0x1c6030::
+_TimesetDSTText::
 	text "I set the clock"
 	line "forward by one"
 	cont "hour."
 	prompt
 
-UnknownText_0x1c6056::
+_TimesetAskNotDSTText::
 	text "Is Daylight Saving"
 	line "Time over?"
 	done
 
-UnknownText_0x1c6075::
+_TimesetNotDSTText::
 	text "I put the clock"
 	line "back one hour."
 	prompt
 
-UnknownText_0x1c6095::
+_TimesetAskAdjustDSTText::
 	text "Do you want to"
 	line "adjust your clock"
 
@@ -540,7 +548,7 @@ UnknownText_0x1c6095::
 	line "Saving Time?"
 	done
 
-UnknownText_0x1c60d1::
+_MomLostGearBookletText::
 	text "I lost the in-"
 	line "struction booklet"
 	cont "for the #GEAR."

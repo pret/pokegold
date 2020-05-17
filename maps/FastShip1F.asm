@@ -16,7 +16,7 @@ FastShip1F_MapScripts:
 	end
 
 .EnterFastShip:
-	priorityjump .EnterFastShipScript
+	prioritysjump .EnterFastShipScript
 	end
 
 .DummyScene2:
@@ -87,7 +87,7 @@ FastShip1FSailor1Script:
 	end
 
 .LetThePlayerOut:
-	checkcode VAR_FACING
+	readvar VAR_FACING
 	ifequal RIGHT, .YouAreFacingRight
 	applymovement FASTSHIP1F_SAILOR1, MovementData_0x7520e
 	applymovement PLAYER, MovementData_0x75235

@@ -17,17 +17,17 @@ TrainerHouseReceptionistScript:
 	checkflag ENGINE_FOUGHT_IN_TRAINER_HALL_TODAY
 	iftrue .FoughtTooManyTimes
 	writetext TrainerHouseB1FIntroText
-	buttonsound
+	promptbutton
 	special TrainerHouse
 	iffalse .GetCal3Name
-	trainertotext CAL, CAL2, STRING_BUFFER_3
-	jump .GotName
+	gettrainername STRING_BUFFER_3, CAL, CAL2
+	sjump .GotName
 
 .GetCal3Name:
-	trainertotext CAL, CAL3, STRING_BUFFER_3
+	gettrainername STRING_BUFFER_3, CAL, CAL3
 .GotName:
 	writetext TrainerHouseB1FYourOpponentIsText
-	buttonsound
+	promptbutton
 	writetext TrainerHouseB1FAskWantToBattleText
 	yesorno
 	iffalse .Declined

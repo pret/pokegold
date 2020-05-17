@@ -1,3 +1,4 @@
+; SFX indexes (see audio/sfx_pointers.asm)
 	const_def
 
 	const SFX_DEX_FANFARE_50_79           ; 00
@@ -188,5 +189,3 @@
 	const SFX_TRAIN_ARRIVED               ; b9
 	const SFX_STOP_SLOT                   ; ba
 	const SFX_2_BOOPS                     ; bb
-	const SFX_GLASS_TING                  ; bc
-	const SFX_GLASS_TING_2                ; bd

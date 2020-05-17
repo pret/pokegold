@@ -41,9 +41,9 @@ Copyright_GFPresents: ; e49a8 (39:49a8)
 	call GFPresents_PlayFrame
 	jr nc, .loop
 
-	; high bits of wJumpTableIndex are recycled for some flags
+	; high bits of wJumptableIndex are recycled for some flags
 	; this was set if user canceled by pressing a button
-	ld a, [wJumpTableIndex]
+	ld a, [wJumptableIndex]
 	bit 6, a
 	jr nz, .canceled
 
@@ -68,16 +68,16 @@ GFPresents_Init: ; e49f3 (39:49f3)
 	lb bc, BANK(GFPresentsGFX2), 5
 	call Request2bpp
 
-	farcall ClearAnimatedObjectBuffer
+	farcall ClearSpriteAnims
 
-	ld hl, wAnimatedObjectDynamicVTileOffsets
+	ld hl, wSpriteAnimDict
 	ld a, 6
 	ld [hli], a
 	ld a, $8d
 	ld [hl], a
 
 	xor a
-	ld [wJumpTableIndex], a
+	ld [wJumptableIndex], a
 	ld [$ce64], a
 	ld [wIntroSceneTimer], a
 	ldh [hSCX], a
@@ -102,13 +102,13 @@ GFPresents_PlayFrame: ; e4a37 (39:4a37)
 	and BUTTONS
 	jr nz, .pressed_button
 
-	; high bits of wJumpTableIndex are recycled for some flags
+	; high bits of wJumptableIndex are recycled for some flags
 	; this is set when the sequence finished
-	ld a, [wJumpTableIndex]
+	ld a, [wJumptableIndex]
 	bit 7, a
 	jr nz, .finish
 
-	farcall AnimatedObjects_PlayFrame
+	farcall PlaySpriteAnimations
 
 	call GFPresents_HandleFrame
 	call DelayFrame
@@ -118,12 +118,12 @@ GFPresents_PlayFrame: ; e4a37 (39:4a37)
 	ret
 
 .pressed_button
-	; high bits of wJumpTableIndex are recycled for some flags
-	ld hl, wJumpTableIndex
+	; high bits of wJumptableIndex are recycled for some flags
+	ld hl, wJumptableIndex
 	set 6, [hl]
 
 .finish
-	callfar ClearAnimatedObjectBuffer
+	callfar ClearSpriteAnims
 	call ClearTilemap
 	call ClearSprites
 
@@ -136,7 +136,7 @@ GFPresents_PlayFrame: ; e4a37 (39:4a37)
 GFPresents_HandleFrame: ; e4a6d (39:4a6d)
 ; Dispatch to the current scene handler
 
-	ld a, [wJumpTableIndex]
+	ld a, [wJumptableIndex]
 	ld e, a
 	ld d, 0
 	ld hl, .scenes
@@ -156,7 +156,7 @@ GFPresents_HandleFrame: ; e4a6d (39:4a6d)
 	dw GFPresents_SetDoneFlag
 
 GFPresents_NextScene: ; e4a88 (39:4a88)
-	ld hl, wJumpTableIndex
+	ld hl, wJumptableIndex
 	inc [hl]
 	ret
 
@@ -257,7 +257,7 @@ GFPresents_PlacePresents: ; e4af4 (39:4af4)
 GFPresents_SetDoneFlag: ; e4b0d (39:4b0d)
 ; Tell GFPresents_PlayFrame and TitleScreenFrame (01:63da) that we're finished.
 
-	ld hl, wJumpTableIndex
+	ld hl, wJumptableIndex
 	set 7, [hl]
 	ret
 

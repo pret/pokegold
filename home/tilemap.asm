@@ -56,7 +56,7 @@ CGBOnly_CopyTilemapAtOnce::
 	ldh a, [hCGB]
 	and a
 	jr z, WaitBGMap
-
+; fall through
 CopyTilemapAtOnce::
 	ldh a, [hBGMapMode]
 	push af
@@ -174,8 +174,8 @@ ClearPalettes::
 	ret
 
 .cgb
-; Fill wBGPals and wOBPals with $ffff (white)
-	ld hl, wBGPals
+; Fill wBGPals2 and wOBPals2 with $ffff (white)
+	ld hl, wBGPals2
 	ld bc, 16 palettes
 	ld a, $ff
 	call ByteFill

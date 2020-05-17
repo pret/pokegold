@@ -1,8 +1,8 @@
 ; collision permissions (see data/collision_permissions.asm)
-LANDTILE             EQU $00
-WATERTILE            EQU $01
-WALLTILE             EQU $0f
-TALK                 EQU $10
+LAND_TILE  EQU $00
+WATER_TILE EQU $01
+WALL_TILE  EQU $0f
+TALK       EQU $10
 
 ; collision data types (see data/tilesets/*_collision.asm)
 ; TileCollisionTable indexes (see data/collision_permissions.asm)
@@ -20,7 +20,7 @@ COLL_TALL_GRASS        EQU $18
 COLL_CUT_TREE_1A       EQU $1a ; unused
 COLL_LONG_GRASS_1C     EQU $1c ; unused
 COLL_HEADBUTT_TREE_1D  EQU $1d ; unused
-COLL_WATER_21          EQU $21 ; ???
+COLL_WATER_21          EQU $21 ; unused
 COLL_ICE               EQU $23
 COLL_WHIRLPOOL         EQU $24
 COLL_BUOY              EQU $27

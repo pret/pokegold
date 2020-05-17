@@ -1,12 +1,34 @@
+; significant level values
 MAX_LEVEL EQU 100
 MIN_LEVEL EQU 2
 EGG_LEVEL EQU 5
+
+; maximum moves known per mon
 NUM_MOVES EQU 4
 
-REST_TURNS EQU 2
-MAX_STAT_LEVEL EQU 13
+; significant stat values
 BASE_STAT_LEVEL EQU 7
+MAX_STAT_LEVEL EQU 13
 
+; minimum damage before type effectiveness
+MIN_NEUTRAL_DAMAGE EQU 2
+
+; turns that sleep lasts
+REST_SLEEP_TURNS EQU 2
+TREEMON_SLEEP_TURNS EQU 7
+
+; default move priority
+BASE_PRIORITY EQU 1
+
+; type effectiveness factors, scaled by 10
+SUPER_EFFECTIVE    EQU 20
+MORE_EFFECTIVE     EQU 15
+EFFECTIVE          EQU 10
+NOT_VERY_EFFECTIVE EQU 05
+NO_EFFECT          EQU 00
+
+; wPlayerStatLevels and wEnemyStatLevels indexes (see wram.asm)
+; GetStatName arguments (see data/battle/stat_names.asm)
 	const_def
 	const ATTACK
 	const DEFENSE
@@ -15,42 +37,51 @@ BASE_STAT_LEVEL EQU 7
 	const SP_DEFENSE
 	const ACCURACY
 	const EVASION
-	const ABILITY
+	const ABILITY ; used for BattleCommand_Curse
 NUM_LEVEL_STATS EQU const_value
 
-; move struct
+; move struct members (see data/moves/moves.asm)
 	const_def
-	const MOVE_ANIM
-	const MOVE_EFFECT
-	const MOVE_POWER
-	const MOVE_TYPE
-	const MOVE_ACC
-	const MOVE_PP
-	const MOVE_CHANCE
-	const MOVE_LENGTH
+	const MOVE_ANIM   ; 0
+	const MOVE_EFFECT ; 1
+	const MOVE_POWER  ; 2
+	const MOVE_TYPE   ; 3
+	const MOVE_ACC    ; 4
+	const MOVE_PP     ; 5
+	const MOVE_CHANCE ; 6
+MOVE_LENGTH EQU const_value
 
 ; stat constants
-const_value SET 1
+; indexes for:
+; - wPlayerStats and wEnemyStats (see wram.asm)
+; - party_struct and battle_struct members (see macros/wram.asm)
+	const_def 1
 	const STAT_HP
 	const STAT_ATK
 	const STAT_DEF
 	const STAT_SPD
 	const STAT_SATK
+NUM_EXP_STATS EQU const_value - 1
 	const STAT_SDEF
-NUM_STATS EQU const_value
+NUM_STATS EQU const_value - 1
+NUM_BATTLE_STATS EQU NUM_STATS - 1 ; don't count HP
+
+; stat formula constants
 STAT_MIN_NORMAL EQU 5
 STAT_MIN_HP EQU 10
+
+MAX_STAT_VALUE EQU 999
 
 ; shiny dvs
 ATKDEFDV_SHINY EQU $EA
 SPDSPCDV_SHINY EQU $AA
 
-; battle classes
-const_value SET 1
+; battle classes (wBattleMode values)
+	const_def 1
 	const WILD_BATTLE
 	const TRAINER_BATTLE
 
-; battle types
+; battle types (wBattleType values)
 	const_def
 	const BATTLETYPE_NORMAL
 	const BATTLETYPE_CANLOSE
@@ -63,10 +94,8 @@ const_value SET 1
 	const BATTLETYPE_TREE
 	const BATTLETYPE_TRAP
 	const BATTLETYPE_FORCEITEM
-	const BATTLETYPE_CELEBI
-	const BATTLETYPE_SUICUNE
 
-; battle variables
+; BattleVarPairs indexes (see home/battle.asm)
 	const_def
 	const BATTLE_VARS_SUBSTATUS1
 	const BATTLE_VARS_SUBSTATUS2
@@ -90,239 +119,7 @@ const_value SET 1
 	const BATTLE_VARS_LAST_MOVE
 	const BATTLE_VARS_LAST_MOVE_OPP
 
-; status
-const_value SET 3
-	const PSN
-	const BRN
-	const FRZ
-	const PAR
-	const SLP ; 7 turns
-
-ALL_STATUS EQU (1 << PSN) + (1 << BRN) + (1 << FRZ) + (1 << PAR) + SLP
-
-; substatus
-	enum_start 7, -1
-	enum SUBSTATUS_IN_LOVE
-	enum SUBSTATUS_ROLLOUT
-	enum SUBSTATUS_ENDURE
-	enum SUBSTATUS_PERISH
-	enum SUBSTATUS_IDENTIFIED
-	enum SUBSTATUS_PROTECT
-	enum SUBSTATUS_CURSE
-	enum SUBSTATUS_NIGHTMARE
-
-SUBSTATUS_CURLED       EQU 0
-
-	enum_start 7, -1
-	enum SUBSTATUS_CONFUSED
-	enum SUBSTATUS_FLYING
-	enum SUBSTATUS_UNDERGROUND
-	enum SUBSTATUS_CHARGED
-	enum SUBSTATUS_FLINCHED
-	enum SUBSTATUS_IN_LOOP
-	enum SUBSTATUS_RAMPAGE
-	enum SUBSTATUS_BIDE
-
-	enum_start 7, -1
-	enum SUBSTATUS_LEECH_SEED
-	enum SUBSTATUS_RAGE
-	enum SUBSTATUS_RECHARGE
-	enum SUBSTATUS_SUBSTITUTE
-	enum SUBSTATUS_UNKNOWN_1
-	enum SUBSTATUS_FOCUS_ENERGY
-	enum SUBSTATUS_MIST
-	enum SUBSTATUS_X_ACCURACY
-
-	enum_start 7, -1
-	enum SUBSTATUS_CANT_RUN
-	enum SUBSTATUS_DESTINY_BOND
-	enum SUBSTATUS_LOCK_ON
-	enum SUBSTATUS_ENCORED
-	enum SUBSTATUS_TRANSFORMED
-	enum SUBSTATUS_UNKNOWN_2
-	enum SUBSTATUS_UNKNOWN_3
-	enum SUBSTATUS_TOXIC
-
-; environmental
-	enum_start 4, -1
-	enum SCREENS_REFLECT
-	enum SCREENS_LIGHT_SCREEN
-	enum SCREENS_SAFEGUARD
-	enum SCREENS_UNUSED
-	enum SCREENS_SPIKES
-
-; weather
-	const_def
-	const WEATHER_NONE
-	const WEATHER_RAIN
-	const WEATHER_SUN
-	const WEATHER_SANDSTORM
-	const WEATHER_RAIN_END
-	const WEATHER_SUN_END
-	const WEATHER_SANDSTORM_END
-
-
-; move effects
-	const_def
-	const EFFECT_NORMAL_HIT
-	const EFFECT_SLEEP
-	const EFFECT_POISON_HIT
-	const EFFECT_LEECH_HIT
-	const EFFECT_BURN_HIT
-	const EFFECT_FREEZE_HIT
-	const EFFECT_PARALYZE_HIT
-	const EFFECT_EXPLOSION
-	const EFFECT_DREAM_EATER
-	const EFFECT_MIRROR_MOVE
-	const EFFECT_ATTACK_UP
-	const EFFECT_DEFENSE_UP
-	const EFFECT_SPEED_UP
-	const EFFECT_SP_ATK_UP
-	const EFFECT_SP_DEF_UP
-	const EFFECT_ACCURACY_UP
-	const EFFECT_EVASION_UP
-	const EFFECT_ALWAYS_HIT
-	const EFFECT_ATTACK_DOWN
-	const EFFECT_DEFENSE_DOWN
-	const EFFECT_SPEED_DOWN
-	const EFFECT_SP_ATK_DOWN
-	const EFFECT_SP_DEF_DOWN
-	const EFFECT_ACCURACY_DOWN
-	const EFFECT_EVASION_DOWN
-	const EFFECT_HAZE
-	const EFFECT_BIDE
-	const EFFECT_RAMPAGE
-	const EFFECT_WHIRLWIND
-	const EFFECT_MULTI_HIT
-	const EFFECT_CONVERSION
-	const EFFECT_FLINCH_HIT
-	const EFFECT_HEAL
-	const EFFECT_TOXIC
-	const EFFECT_PAY_DAY
-	const EFFECT_LIGHT_SCREEN
-	const EFFECT_TRI_ATTACK
-	const EFFECT_UNUSED_25
-	const EFFECT_OHKO
-	const EFFECT_RAZOR_WIND
-	const EFFECT_SUPER_FANG
-	const EFFECT_STATIC_DAMAGE
-	const EFFECT_BIND
-	const EFFECT_UNUSED_2B
-	const EFFECT_DOUBLE_HIT
-	const EFFECT_JUMP_KICK
-	const EFFECT_MIST
-	const EFFECT_FOCUS_ENERGY
-	const EFFECT_RECOIL_HIT
-	const EFFECT_CONFUSE
-	const EFFECT_ATTACK_UP_2
-	const EFFECT_DEFENSE_UP_2
-	const EFFECT_SPEED_UP_2
-	const EFFECT_SP_ATK_UP_2
-	const EFFECT_SP_DEF_UP_2
-	const EFFECT_ACCURACY_UP_2
-	const EFFECT_EVASION_UP_2
-	const EFFECT_TRANSFORM
-	const EFFECT_ATTACK_DOWN_2
-	const EFFECT_DEFENSE_DOWN_2
-	const EFFECT_SPEED_DOWN_2
-	const EFFECT_SP_ATK_DOWN_2
-	const EFFECT_SP_DEF_DOWN_2
-	const EFFECT_ACCURACY_DOWN_2
-	const EFFECT_EVASION_DOWN_2
-	const EFFECT_REFLECT
-	const EFFECT_POISON
-	const EFFECT_PARALYZE
-	const EFFECT_ATTACK_DOWN_HIT
-	const EFFECT_DEFENSE_DOWN_HIT
-	const EFFECT_SPEED_DOWN_HIT
-	const EFFECT_SP_ATK_DOWN_HIT
-	const EFFECT_SP_DEF_DOWN_HIT
-	const EFFECT_ACCURACY_DOWN_HIT
-	const EFFECT_EVASION_DOWN_HIT
-	const EFFECT_SKY_ATTACK
-	const EFFECT_CONFUSE_HIT
-	const EFFECT_TWINEEDLE
-	const EFFECT_UNUSED_4E
-	const EFFECT_SUBSTITUTE
-	const EFFECT_HYPER_BEAM
-	const EFFECT_RAGE
-	const EFFECT_MIMIC
-	const EFFECT_METRONOME
-	const EFFECT_LEECH_SEED
-	const EFFECT_SPLASH
-	const EFFECT_DISABLE
-	const EFFECT_LEVEL_DAMAGE
-	const EFFECT_PSYWAVE
-	const EFFECT_COUNTER
-	const EFFECT_ENCORE
-	const EFFECT_PAIN_SPLIT
-	const EFFECT_SNORE
-	const EFFECT_CONVERSION2
-	const EFFECT_LOCK_ON
-	const EFFECT_SKETCH
-	const EFFECT_DEFROST_OPPONENT
-	const EFFECT_SLEEP_TALK
-	const EFFECT_DESTINY_BOND
-	const EFFECT_REVERSAL
-	const EFFECT_SPITE
-	const EFFECT_FALSE_SWIPE
-	const EFFECT_HEAL_BELL
-	const EFFECT_PRIORITY_HIT
-	const EFFECT_TRIPLE_KICK
-	const EFFECT_THIEF
-	const EFFECT_MEAN_LOOK
-	const EFFECT_NIGHTMARE
-	const EFFECT_FLAME_WHEEL
-	const EFFECT_CURSE
-	const EFFECT_UNUSED_6E
-	const EFFECT_PROTECT
-	const EFFECT_SPIKES
-	const EFFECT_FORESIGHT
-	const EFFECT_PERISH_SONG
-	const EFFECT_SANDSTORM
-	const EFFECT_ENDURE
-	const EFFECT_ROLLOUT
-	const EFFECT_SWAGGER
-	const EFFECT_FURY_CUTTER
-	const EFFECT_ATTRACT
-	const EFFECT_RETURN
-	const EFFECT_PRESENT
-	const EFFECT_FRUSTRATION
-	const EFFECT_SAFEGUARD
-	const EFFECT_SACRED_FIRE
-	const EFFECT_MAGNITUDE
-	const EFFECT_BATON_PASS
-	const EFFECT_PURSUIT
-	const EFFECT_RAPID_SPIN
-	const EFFECT_UNUSED_82
-	const EFFECT_UNUSED_83
-	const EFFECT_MORNING_SUN
-	const EFFECT_SYNTHESIS
-	const EFFECT_MOONLIGHT
-	const EFFECT_HIDDEN_POWER
-	const EFFECT_RAIN_DANCE
-	const EFFECT_SUNNY_DAY
-	const EFFECT_STEEL_WING
-	const EFFECT_METAL_CLAW
-	const EFFECT_ANCIENTPOWER
-	const EFFECT_FAKE_OUT
-	const EFFECT_BELLY_DRUM
-	const EFFECT_PSYCH_UP
-	const EFFECT_MIRROR_COAT
-	const EFFECT_SKULL_BASH
-	const EFFECT_TWISTER
-	const EFFECT_EARTHQUAKE
-	const EFFECT_FUTURE_SIGHT
-	const EFFECT_GUST
-	const EFFECT_STOMP
-	const EFFECT_SOLARBEAM
-	const EFFECT_THUNDER
-	const EFFECT_TELEPORT
-	const EFFECT_BEAT_UP
-	const EFFECT_FLY
-	const EFFECT_DEFENSE_CURL
-
-; Battle vars used in home/battle.asm
+; BattleVarLocations indexes (see home/battle.asm)
 	const_def
 	const PLAYER_SUBSTATUS_1
 	const ENEMY_SUBSTATUS_1
@@ -351,6 +148,81 @@ SUBSTATUS_CURLED       EQU 0
 	const PLAYER_LAST_MOVE
 	const ENEMY_LAST_MOVE
 
+; status condition bit flags
+SLP EQU %111 ; 0-7 turns
+	const_def 3
+	const PSN
+	const BRN
+	const FRZ
+	const PAR
+
+ALL_STATUS EQU (1 << PSN) | (1 << BRN) | (1 << FRZ) | (1 << PAR) | SLP
+
+; wPlayerSubStatus1 or wEnemySubStatus1 bit flags
+	enum_start 7, -1
+	enum SUBSTATUS_IN_LOVE
+	enum SUBSTATUS_ROLLOUT
+	enum SUBSTATUS_ENDURE
+	enum SUBSTATUS_PERISH
+	enum SUBSTATUS_IDENTIFIED
+	enum SUBSTATUS_PROTECT
+	enum SUBSTATUS_CURSE
+	enum SUBSTATUS_NIGHTMARE
+
+; wPlayerSubStatus2 or wEnemySubStatus2 bit flags
+SUBSTATUS_CURLED EQU 0
+
+; wPlayerSubStatus3 or wEnemySubStatus3 bit flags
+	enum_start 7, -1
+	enum SUBSTATUS_CONFUSED
+	enum SUBSTATUS_FLYING
+	enum SUBSTATUS_UNDERGROUND
+	enum SUBSTATUS_CHARGED
+	enum SUBSTATUS_FLINCHED
+	enum SUBSTATUS_IN_LOOP
+	enum SUBSTATUS_RAMPAGE
+	enum SUBSTATUS_BIDE
+
+; wPlayerSubStatus4 or wEnemySubStatus4 bit flags
+	enum_start 7, -1
+	enum SUBSTATUS_LEECH_SEED
+	enum SUBSTATUS_RAGE
+	enum SUBSTATUS_RECHARGE
+	enum SUBSTATUS_SUBSTITUTE
+	enum SUBSTATUS_UNKNOWN_1
+	enum SUBSTATUS_FOCUS_ENERGY
+	enum SUBSTATUS_MIST
+	enum SUBSTATUS_X_ACCURACY
+
+; wPlayerSubStatus5 or wEnemySubStatus5 bit flags
+	enum_start 7, -1
+	enum SUBSTATUS_CANT_RUN
+	enum SUBSTATUS_DESTINY_BOND
+	enum SUBSTATUS_LOCK_ON
+	enum SUBSTATUS_ENCORED
+	enum SUBSTATUS_TRANSFORMED
+	enum SUBSTATUS_UNKNOWN_2
+	enum SUBSTATUS_UNKNOWN_3
+	enum SUBSTATUS_TOXIC
+
+; wPlayerScreens or wEnemyScreens bit flags
+	enum_start 4, -1
+	enum SCREENS_REFLECT
+	enum SCREENS_LIGHT_SCREEN
+	enum SCREENS_SAFEGUARD
+	enum SCREENS_UNUSED
+	enum SCREENS_SPIKES
+
+; values in wBattleWeather
+	const_def
+	const WEATHER_NONE
+	const WEATHER_RAIN
+	const WEATHER_SUN
+	const WEATHER_SANDSTORM
+	const WEATHER_RAIN_END
+	const WEATHER_SUN_END
+	const WEATHER_SANDSTORM_END
+
 ; wBattleAction
 	const_def
 	const BATTLEACTION_MOVE1
@@ -366,11 +238,21 @@ SUBSTATUS_CURLED       EQU 0
 	const BATTLEACTION_A
 	const BATTLEACTION_B
 	const BATTLEACTION_C
-	const BATTLEACTION_D
-	const BATTLEACTION_E
+	const BATTLEACTION_SKIPTURN
+	const BATTLEACTION_STRUGGLE
 	const BATTLEACTION_FORFEIT
 
+; wBattlePlayerAction
+	const_def
+	const BATTLEPLAYERACTION_USEMOVE
+	const BATTLEPLAYERACTION_USEITEM
+	const BATTLEPLAYERACTION_SWITCH
+
+; wBattleResult
 	const_def
 	const WIN
 	const LOSE
 	const DRAW
+
+BATTLERESULT_BOX_FULL EQU 7
+BATTLERESULT_BITMASK EQU (1 << BATTLERESULT_BOX_FULL)

@@ -16,7 +16,7 @@ BillsGrandpa:
 	checkevent EVENT_MET_BILLS_GRANDPA
 	iftrue .MetGrandpa
 	writetext BillsGrandpaIntroText
-	buttonsound
+	promptbutton
 	setevent EVENT_MET_BILLS_GRANDPA
 .MetGrandpa:
 	checkevent EVENT_SHOWED_PICHU_TO_BILLS_GRANDPA
@@ -30,7 +30,7 @@ BillsGrandpa:
 	checkevent EVENT_SHOWED_LICKITUNG_TO_BILLS_GRANDPA
 	iftrue .ShowedLickitung
 	writetext BillsGrandpaLickitungText
-	buttonsound
+	promptbutton
 	writetext BillsGrandpaAskToSeeMonText
 	yesorno
 	iffalse .SaidNo
@@ -40,11 +40,11 @@ BillsGrandpa:
 	ifnotequal LICKITUNG, .WrongPokemon
 	scall .CorrectPokemon
 	setevent EVENT_SHOWED_LICKITUNG_TO_BILLS_GRANDPA
-	jump .ShowedLickitung
+	sjump .ShowedLickitung
 
 .GotEverstone:
 	writetext BillsGrandpaOddishText
-	buttonsound
+	promptbutton
 	writetext BillsGrandpaAskToSeeMonText
 	yesorno
 	iffalse .SaidNo
@@ -54,11 +54,11 @@ BillsGrandpa:
 	ifnotequal ODDISH, .WrongPokemon
 	scall .CorrectPokemon
 	setevent EVENT_SHOWED_ODDISH_TO_BILLS_GRANDPA
-	jump .ShowedOddish
+	sjump .ShowedOddish
 
 .GotLeafStone:
 	writetext BillsGrandpaStaryuText
-	buttonsound
+	promptbutton
 	writetext BillsGrandpaAskToSeeMonText
 	yesorno
 	iffalse .SaidNo
@@ -68,13 +68,13 @@ BillsGrandpa:
 	ifnotequal STARYU, .WrongPokemon
 	scall .CorrectPokemon
 	setevent EVENT_SHOWED_STARYU_TO_BILLS_GRANDPA
-	jump .ShowedStaryu
+	sjump .ShowedStaryu
 
 .GotWaterStone:
 	checkver
 	iftrue .AskVulpix
 	writetext BillsGrandpaGrowlitheText
-	buttonsound
+	promptbutton
 	writetext BillsGrandpaAskToSeeMonText
 	yesorno
 	iffalse .SaidNo
@@ -84,11 +84,11 @@ BillsGrandpa:
 	ifnotequal GROWLITHE, .WrongPokemon
 	scall .CorrectPokemon
 	setevent EVENT_SHOWED_GROWLITHE_VULPIX_TO_BILLS_GRANDPA
-	jump .ShowedGrowlitheVulpix
+	sjump .ShowedGrowlitheVulpix
 
 .AskVulpix:
 	writetext BillsGrandpaVulpixText
-	buttonsound
+	promptbutton
 	writetext BillsGrandpaAskToSeeMonText
 	yesorno
 	iffalse .SaidNo
@@ -98,11 +98,11 @@ BillsGrandpa:
 	ifnotequal VULPIX, .WrongPokemon
 	scall .CorrectPokemon
 	setevent EVENT_SHOWED_GROWLITHE_VULPIX_TO_BILLS_GRANDPA
-	jump .ShowedGrowlitheVulpix
+	sjump .ShowedGrowlitheVulpix
 
 .GotFireStone:
 	writetext BillsGrandpaPichuText
-	buttonsound
+	promptbutton
 	writetext BillsGrandpaAskToSeeMonText
 	yesorno
 	iffalse .SaidNo
@@ -112,7 +112,7 @@ BillsGrandpa:
 	ifnotequal PICHU, .WrongPokemon
 	scall .CorrectPokemon
 	setevent EVENT_SHOWED_PICHU_TO_BILLS_GRANDPA
-	jump .ShowedPichu
+	sjump .ShowedPichu
 
 .ShowedLickitung:
 	checkevent EVENT_GOT_EVERSTONE_FROM_BILLS_GRANDPA
@@ -168,7 +168,7 @@ BillsGrandpa:
 
 .ExcitedToSee:
 	writetext BillsGrandpaExcitedToSeeText
-	buttonsound
+	promptbutton
 	end
 
 .SaidNo:
@@ -179,12 +179,12 @@ BillsGrandpa:
 
 .CorrectPokemon:
 	writetext BillsGrandpaShownPokemonText
-	buttonsound
+	promptbutton
 	end
 
 .ReceiveItem:
 	writetext BillsGrandpaTokenOfAppreciationText
-	buttonsound
+	promptbutton
 	end
 
 .JustShowedSomething:

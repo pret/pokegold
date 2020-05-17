@@ -1,4 +1,4 @@
-	const_def 2 ; object constants
+	object_const_def ; object constants
 	const BURNEDTOWERB1F_BOULDER
 	const BURNEDTOWERB1F_RAIKOU1
 	const BURNEDTOWERB1F_ENTEI1
@@ -6,8 +6,8 @@
 	const BURNEDTOWERB1F_RAIKOU2
 	const BURNEDTOWERB1F_ENTEI2
 	const BURNEDTOWERB1F_SUICUNE2
-	const BURNEDTOWERB1F_POKE_BALL
-	const BURNEDTOWERB1F_EUSINE
+	const BURNEDTOWERB1F_POKE_BALL1
+	const BURNEDTOWERB1F_POKE_BALL2
 
 BurnedTowerB1F_MapScripts:
 	db 2 ; scene scripts
@@ -65,8 +65,9 @@ ReleaseTheBeasts:
 	special InitRoamMons
 	end
 
+UnusedEnteiScript:
 	opentext
-	writetext BurnedTowerB1FEusineText
+	writetext UnusedEnteiText
 	cry ENTEI
 	waitbutton
 	closetext
@@ -120,7 +121,7 @@ BurnedTowerSuicuneMovement:
 	remove_sliding
 	step_end
 
-BurnedTowerB1FEusineText:
+UnusedEnteiText:
 	text "ENTEI: Bufuu!"
 	done
 

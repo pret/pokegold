@@ -17,7 +17,7 @@ CeruleanGym_MapScripts:
 	end
 
 .GruntRunsOut:
-	priorityjump .GruntRunsOutScript
+	prioritysjump .GruntRunsOutScript
 	end
 
 .GruntRunsOutScript:
@@ -158,7 +158,7 @@ CeruleanGymStatue:
 	iftrue .Beaten
 	jumpstd gymstatue1
 .Beaten:
-	trainertotext MISTY, MISTY1, STRING_BUFFER_4
+	gettrainername STRING_BUFFER_4, MISTY, MISTY1
 	jumpstd gymstatue2
 
 CeruleanGymGruntRunsDownMovement:

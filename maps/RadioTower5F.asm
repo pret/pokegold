@@ -42,7 +42,7 @@ FakeDirectorScript:
 	reloadmapafterbattle
 	opentext
 	writetext FakeDirectorTextAfter
-	buttonsound
+	promptbutton
 	verbosegiveitem BASEMENT_KEY
 	closetext
 	setscene SCENE_RADIOTOWER5F_ROCKET_BOSS
@@ -119,7 +119,7 @@ RadioTower5FRocketBossScene:
 	turnobject PLAYER, RIGHT
 	opentext
 	writetext RadioTower5FDirectorThankYouText
-	buttonsound
+	promptbutton
 	checkver
 	iftrue .SilverWing
 	verbosegiveitem RAINBOW_WING
@@ -129,7 +129,7 @@ RadioTower5FRocketBossScene:
 	setscene SCENE_RADIOTOWER5F_NOTHING
 	setevent EVENT_GOT_RAINBOW_WING
 	setevent EVENT_TEAM_ROCKET_DISBANDED
-	jump .UselessJump
+	sjump .UselessJump
 .SilverWing
 	verbosegiveitem SILVER_WING
 	writetext RadioTower5FDirectorDescribeSilverWingText

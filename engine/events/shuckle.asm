@@ -2,7 +2,7 @@ MANIA_OT_ID EQU 00518
 
 GiveShuckle:
 ; Adding to the party.
-	xor a
+	xor a ; PARTYMON
 	ld [wMonType], a
 
 ; Level 15 Shuckle.
@@ -50,7 +50,8 @@ GiveShuckle:
 	call CopyName2
 
 ; Engine flag for this event.
-	SetFlag ENGINE_GOT_SHUCKIE_TODAY
+	ld hl, wDailyFlags1
+	set DAILYFLAGS1_GOT_SHUCKIE_TODAY_F, [hl]
 	ld a, 1
 	ld [wScriptVar], a
 	ret
@@ -62,6 +63,7 @@ GiveShuckle:
 
 SpecialShuckleOT:
 	db "MANIA@"
+
 SpecialShuckleNick:
 	db "SHUCKIE@"
 

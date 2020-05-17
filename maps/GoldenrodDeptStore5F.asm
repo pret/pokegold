@@ -13,7 +13,7 @@ GoldenrodDeptStore5F_MapScripts:
 	callback MAPCALLBACK_OBJECTS, .CheckIfSunday
 
 .CheckIfSunday:
-	checkcode VAR_WEEKDAY
+	readvar VAR_WEEKDAY
 	ifequal SUNDAY, .yes
 	disappear GOLDENRODDEPTSTORE5F_RECEPTIONIST
 	return
@@ -29,12 +29,12 @@ GoldenrodDeptStore5FClerkScript:
 	iftrue .headbutt
 	checkevent EVENT_GOT_TM08_ROCK_SMASH
 	iftrue .onlyrocksmash
-	jump .neither
+	sjump .neither
 
 .headbutt
 	checkevent EVENT_GOT_TM08_ROCK_SMASH
 	iftrue .both
-	jump .onlyheadbutt
+	sjump .onlyheadbutt
 
 .neither
 	pokemart MARTTYPE_STANDARD, MART_GOLDENROD_5F_1
@@ -59,20 +59,20 @@ GoldenrodDeptStore5FClerkScript:
 GoldenrodDeptStore5FReceptionistScript:
 	faceplayer
 	opentext
-	checkcode VAR_WEEKDAY
+	readvar VAR_WEEKDAY
 	ifnotequal SUNDAY, .EventIsOver
 	checkflag ENGINE_GOLDENROD_DEPT_STORE_TM27_RETURN
 	iftrue .EventIsOver
 	special GetFirstPokemonHappiness
 	writetext UnknownText_0x56143
-	buttonsound
+	promptbutton
 	ifgreater 150 - 1, .VeryHappy
 	ifgreater 50 - 1, .SomewhatHappy
-	jump .NotVeryHappy
+	sjump .NotVeryHappy
 
 .VeryHappy:
 	writetext UnknownText_0x5615a
-	buttonsound
+	promptbutton
 	verbosegiveitem TM_RETURN
 	iffalse .Done
 	setflag ENGINE_GOLDENROD_DEPT_STORE_TM27_RETURN
@@ -87,7 +87,7 @@ GoldenrodDeptStore5FReceptionistScript:
 
 .NotVeryHappy:
 	writetext UnknownText_0x561d8
-	buttonsound
+	promptbutton
 	verbosegiveitem TM_FRUSTRATION
 	iffalse .Done
 	setflag ENGINE_GOLDENROD_DEPT_STORE_TM27_RETURN
