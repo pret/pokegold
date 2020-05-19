@@ -1366,13 +1366,15 @@ _PocketIsFullText::
 	line "is full…"
 	prompt
 
-UnknownText_0x1c4b92::
+_CongratulationsYourPokemonText::
 	text "Congratulations!"
 	line "Your @"
 	text_ram wStringBuffer2
-	db "@@"
+	text_end
 
-UnknownText_0x1c4baf::
+	text_end ; unused
+
+_EvolvedIntoText::
 	text_start
 
 	para "evolved into"
@@ -1381,14 +1383,14 @@ UnknownText_0x1c4baf::
 	text "!"
 	done
 
-UnknownText_0x1c4bc5::
+_StoppedEvolvingText::
 	text "Huh? @"
 	text_ram wStringBuffer2
 	text_start
 	line "stopped evolving!"
 	prompt
 
-UnknownText_0x1c4be3::
+_EvolvingText::
 	text "What? @"
 	text_ram wStringBuffer2
 	text_start

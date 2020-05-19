@@ -340,19 +340,8 @@ INCLUDE "data/battle/effect_command_pointers.asm"
 SECTION "bank10", ROMX
 
 INCLUDE "engine/pokedex/pokedex.asm"
-
-Moves::
-	dr $41afe, $421db
-EvolvePokemon::
-	dr $421db, $421e9
-EvolveAfterBattle::
-	dr $421e9, $42483
-LearnLevelMoves::
-	dr $42483, $424dd
-FillMoves::
-	dr $424dd, $4278d
-GetPreEvolution::
-	dr $4278d, $427bd
+INCLUDE "data/moves/moves.asm"
+INCLUDE "engine/pokemon/evolve.asm"
 
 
 SECTION "bank11", ROMX
