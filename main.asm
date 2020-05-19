@@ -339,26 +339,9 @@ INCLUDE "data/battle/effect_command_pointers.asm"
 
 SECTION "bank10", ROMX
 
-Pokedex::
-	dr $40000, $40c65
-INCLUDE "data/pokemon/dex_order_alpha.asm"
-INCLUDE "data/pokemon/dex_order_new.asm"
-Pokedex_DisplayModeDescription::
-	dr $40e5b, $41afe
-
-Moves::
-	dr $41afe, $421db
-
-EvolvePokemon::
-	dr $421db, $421e9
-EvolveAfterBattle::
-	dr $421e9, $42483
-LearnLevelMoves::
-	dr $42483, $424dd
-FillMoves::
-	dr $424dd, $4278d
-GetPreEvolution::
-	dr $4278d, $427bd
+INCLUDE "engine/pokedex/pokedex.asm"
+INCLUDE "data/moves/moves.asm"
+INCLUDE "engine/pokemon/evolve.asm"
 
 
 SECTION "bank11", ROMX
@@ -479,7 +462,9 @@ SECTION "bank21", ROMX
 Printer_StartTransmission::
 	dr $84000, $842db
 _PrinterReceive::
-	dr $842db, $84560
+	dr $842db, $8442c
+PrintDexEntry::
+	dr $8442c, $84560
 PrintUnownStamp::
 	dr $84560, $845d4
 PrintMailAndExit::
@@ -801,8 +786,13 @@ HPExpBarBorderGFX::
 ExpBarGFX::
 	dr $f8c02, $f8c92
 TownMapGFX::
-	dr $f8c92, $fb4be
+	dr $f8c92, $f930e
 
+Footprints::
+	dr $f930e, $fb30e
+
+UnownFont::
+	dr $fb30e, $fb4be
 TileCollisionTable::
 	dr $fb4be, $fb5be
 Shrink1Pic::
@@ -828,7 +818,9 @@ ConvertMon_2to1::
 ConvertMon_1to2::
 	dr $fba12, $fbb22
 UpdateUnownDex::
-	dr $fbb22, $fbc3c
+	dr $fbb22, $fbb38
+PrintUnownWord::
+	dr $fbb38, $fbc3c
 CheckMagikarpLength::
 	dr $fbc3c, $fbd00
 CalcMagikarpLength::
@@ -1074,8 +1066,18 @@ UpdateTimePredef::
 	dr $1c0a66, $1c0a7a
 StubbedGetFrontpic::
 	ret
-Function1c0a7b::
-	dr $1c0a7b, $1c0de9
+LoadSGBPokedexGFX::
+	dr $1c0a7b, $1c0a85
+LoadSGBPokedexGFX2::
+	dr $1c0a85, $1c0c36
+LoadQuestionMarkPic::
+	dr $1c0c36, $1c0cd0
+DrawPokedexListWindow::
+	dr $1c0cd0, $1c0d30
+DrawPokedexSearchResultsWindow::
+	dr $1c0d30, $1c0da6
+DrawDexEntryScreenRightEdge::
+	dr $1c0da6, $1c0de9
 _DudeAutoInput_A::
 	dr $1c0de9, $1c0dee
 _DudeAutoInput_RightA::

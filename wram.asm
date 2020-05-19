@@ -221,21 +221,6 @@ UNION ; c508
 wSurroundingTiles:: ds SURROUNDING_WIDTH * SURROUNDING_HEIGHT
 
 NEXTU ; c508
-; trade
-wc508:: ds 10
-wc512:: ds 190
-
-wTrademons::
-wPlayerTrademon:: trademon wPlayerTrademon
-wOTTrademon::     trademon wOTTrademon
-wTrademonsEnd::
-wTradeAnimAddress:: dw
-wLinkPlayer1Name:: ds NAME_LENGTH
-wLinkPlayer2Name:: ds NAME_LENGTH
-wLinkTradeSendmonSpecies:: db
-wLinkTradeGetmonSpecies::  db
-
-NEXTU ; c508
 ; box save buffer
 ; SaveBoxAddress uses this buffer in three steps because it
 ; needs more space than the buffer can hold.
@@ -243,21 +228,14 @@ wBoxPartialData:: ds 480
 wBoxPartialDataEnd::
 
 NEXTU ; c508
-; timeset temp storage
-wTimeSetBuffer::
-	ds 20
-wInitHourBuffer:: db ; c51c
-	ds 9
-wInitMinuteBuffer:: db ; c526
-	ds 19
-wTimeSetBufferEnd::
-
-NEXTU ; c508
 ; 20x18 grid of 8x8 tiles
 wTempTilemap::
 	ds SCREEN_WIDTH * SCREEN_HEIGHT ; $168 = 360
 
 NEXTU ; c508
+
+; This union spans 200 bytes from c508 to c5d0.
+UNION ; c508
 ; wSpriteAnimDict is a 10x2 dictionary
 ; keys: taken from third column of SpriteAnimSeqData
 ; values: vTiles
@@ -296,16 +274,85 @@ wCurAnimYOffset:: db
 wGlobalAnimYOffset:: db
 wGlobalAnimXOffset:: db
 wSpriteAnimsEnd::
+	ds 7
 
-wc5c9:: ds 1 ; c5c9
-wc5ca:: ds 1 ; c5ca
-wc5cb:: ds 1 ; c5cb
-wc5cc:: ds 1 ; c5cc
-wc5cd:: ds 1 ; c5cd
-wc5ce:: ds 1 ; c5ce
-wc5cf:: ds 1 ; c5cf
+NEXTU ; c508
+; timeset temp storage
+wTimeSetBuffer::
+	ds 20
+wInitHourBuffer:: db ; c51c
+	ds 9
+wInitMinuteBuffer:: db ; c526
+	ds 19
+wTimeSetBufferEnd::
 
+NEXTU ; c508
+; link engine data
+wLink_c508:: ds 10
+wc512:: ds 10
+
+NEXTU ; c508
+; unused (engine/menus/debug.asm)
+wc508:: ds 13
+ENDU ; c5d0
+
+; This union spans 280 bytes from c5d0 to c6e8.
 UNION ; c5d0
+; pokedex
+wPokedexDataStart:: ; c5d0
+wPokedexOrder:: ds $100 ; >= NUM_POKEMON
+wPokedexOrderEnd::
+wDexListingScrollOffset:: db ; offset of the first displayed entry from the start
+wDexListingCursor:: db ; Dex cursor
+wDexListingEnd:: db ; Last mon to display
+wDexListingHeight:: db ; number of entries displayed at once in the dex listing
+wCurDexMode:: db ; Pokedex Mode
+wDexSearchMonType1:: db ; first type to search
+wDexSearchMonType2:: db ; second type to search
+wDexSearchResultCount:: db
+wDexArrowCursorPosIndex:: db
+wDexArrowCursorDelayCounter:: db
+wDexArrowCursorBlinkCounter:: db
+wDexSearchSlowpokeFrame:: db
+wUnlockedUnownMode:: db
+wDexCurUnownIndex:: db
+wDexUnownCount:: db
+wDexConvertedMonType:: db ; mon type converted from dex search mon type
+wDexListingScrollOffsetBackup:: db
+wDexListingCursorBackup:: db
+wBackupDexListingCursor:: db
+wBackupDexListingPage:: db
+wDexCurLocation:: db
+wPokedexDataEnd::
+	ds 3
+
+NEXTU ; c5d0
+; pokegear
+wPokegearPhoneLoadNameBuffer:: db ; c5d0
+wPokegearPhoneCursorPosition:: db ; c5d1
+wPokegearPhoneScrollPosition:: db ; c5d2
+wPokegearPhoneSelectedPerson:: db ; cd3
+wPokegearPhoneSubmenuCursor:: db ; c5d4
+wPokegearMapCursorObjectPointer:: dw ; c5d5
+wPokegearMapCursorLandmark:: db ; c5d7
+wPokegearMapPlayerIconLandmark:: db ; c5d8
+wPokegearRadioChannelBank:: db ; c5d9
+wPokegearRadioChannelAddr:: dw ; c5da
+wPokegearRadioMusicPlaying:: db ; c5dc
+
+NEXTU ; c5d0
+; trade
+wTrademons:: ; c5d0
+wPlayerTrademon:: trademon wPlayerTrademon
+wOTTrademon::     trademon wOTTrademon
+wTrademonsEnd::
+wTradeAnimAddress:: dw
+wLinkPlayer1Name:: ds NAME_LENGTH
+wLinkPlayer2Name:: ds NAME_LENGTH
+wLinkTradeSendmonSpecies:: db
+wLinkTradeGetmonSpecies::  db
+
+NEXTU
 ; naming screen
 wNamingScreenDestinationPointer:: dw ; c5d0
 wNamingScreenCurNameLength:: db ; c5d2
@@ -341,20 +388,6 @@ wSlotsDataEnd::
 wSlotsEnd::
 
 NEXTU ; c5d0
-; pokegear
-wPokegearPhoneLoadNameBuffer:: db ; c5d0
-wPokegearPhoneCursorPosition:: db ; c5d1
-wPokegearPhoneScrollPosition:: db ; c5d2
-wPokegearPhoneSelectedPerson:: db ; cd3
-wPokegearPhoneSubmenuCursor:: db ; c5d4
-wPokegearMapCursorObjectPointer:: dw ; c5d5
-wPokegearMapCursorLandmark:: db ; c5d7
-wPokegearMapPlayerIconLandmark:: db ; c5d8
-wPokegearRadioChannelBank:: db ; c5d9
-wPokegearRadioChannelAddr:: dw ; c5da
-wPokegearRadioMusicPlaying:: db ; c5dc
-
-NEXTU ; c5d0
 ; unused (engine/gfx/color.asm)
 	ds 50
 
@@ -364,42 +397,8 @@ wc602:: db ; c602
 wc605:: db ; c605
 wc606:: db ; c606
 wc607:: db ; c607
+ENDU ; c6e8
 
-ENDU ; c634
-
-	ds 150
-
-; unidentifed
-wc6ca:: ds 1 ; c6ca
-wc6cb:: ds 1 ; c6cb
-wc6cc:: ds 1 ; c6cc
-wc6cd:: ds 1 ; c6cd
-wc6ce:: ds 1 ; c6ce
-wc6cf:: ds 1 ; c6cf
-wc6d0:: ds 1 ; c6d0
-wc6d1:: ds 1 ; c6d1
-wc6d2:: ds 1 ; c6d2
-wc6d3:: ds 1 ; c6d3
-wCurDexMode:: db ; c6d4
-wc6d5:: ds 1 ; c6d5
-wc6d6:: ds 1 ; c6d6
-wc6d7:: ds 1 ; c6d7
-wc6d8:: ds 1 ; c6d8
-wc6d9:: ds 1 ; c6d9
-wc6da:: ds 1 ; c6da
-wDexSearchSlowpokeFrame:: db ; c6db
-wc6dc:: ds 1 ; c6dc
-wc6dd:: ds 1 ; c6dd
-wc6de:: ds 1 ; c6de
-wc6df:: ds 1 ; c6df
-wc6e0:: ds 1 ; c6e0
-wc6e1:: ds 1 ; c6e1
-wc6e2:: ds 1 ; c6e2
-wc6e3:: ds 1 ; c6e3
-wc6e4:: ds 1 ; c6e4
-wc6e5:: ds 1 ; c6e5
-wc6e6:: ds 1 ; c6e6
-wc6e7:: ds 1 ; c6e7
 ENDU ; c6e8
 
 ; This was a buffer for map-related pointers in the 1997 G/S prototype.
@@ -1056,7 +1055,9 @@ wNamingScreenLetterCase::
 wSlotsDelay::
 	db
 wPrinterQueueLength:: db
-wSlotsCE66:: db
+wSlotsCE66::
+wPokedexCE66::
+	db
 ENDU ; ce67
 
 wRequested2bpp::

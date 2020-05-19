@@ -82,9 +82,9 @@ Gen2ToGen1LinkComms:
 	call Serial_ExchangeBytes
 	ld a, SERIAL_NO_DATA_BYTE
 	ld [de], a
-	ld hl, wc508
+	ld hl, wLink_c508
 	ld de, wTrademons
-	ld bc, wTrademons - wc508
+	ld bc, wTrademons - wLink_c508
 	call Serial_ExchangeBytes
 	xor a
 	ldh [rIF], a
@@ -226,9 +226,9 @@ Gen2ToGen2LinkComms:
 	call Serial_ExchangeBytes
 	ld a, SERIAL_NO_DATA_BYTE
 	ld [de], a
-	ld hl, wc508
+	ld hl, wLink_c508
 	ld de, wTrademons
-	ld bc, wTrademons - wc508
+	ld bc, wTrademons - wLink_c508
 	call Serial_ExchangeBytes
 	ld a, [wLinkMode]
 	cp LINK_TRADECENTER
@@ -514,7 +514,7 @@ FixDataForLinkTransfer:
 	ld [hli], a
 	dec b
 	jr nz, .loop2
-	ld hl, wc508
+	ld hl, wLink_c508
 	ld a, SERIAL_PREAMBLE_BYTE
 	ld [hli], a
 	ld [hli], a
