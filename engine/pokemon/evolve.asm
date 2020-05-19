@@ -881,7 +881,8 @@ endr
 	ret
 
 .GFX:
-	dr $4273d, $4278d
+INCBIN "gfx/evo/bubble_large.2bpp"
+INCBIN "gfx/evo/bubble.2bpp"
 
 GetPreEvolution:
 ; Find the first mon to evolve into wCurPartySpecies.

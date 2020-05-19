@@ -2368,7 +2368,7 @@ Pokedex_LoadSelectedMonTiles:
 	ret
 
 .QuestionMark:
-	ld a, 0
+	ld a, BANK(sScratch)
 	call OpenSRAM
 	farcall LoadQuestionMarkPic
 	ld hl, vTiles2

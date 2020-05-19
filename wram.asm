@@ -1055,7 +1055,9 @@ wNamingScreenLetterCase::
 wSlotsDelay::
 	db
 wPrinterQueueLength:: db
-wSlotsCE66:: db
+wSlotsCE66::
+wPokedexCE66::
+	db
 ENDU ; ce67
 
 wRequested2bpp::
