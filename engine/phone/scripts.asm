@@ -1,912 +1,681 @@
-UnusedPhoneScript:
-	writetext UnusedPhoneText
-	end
-
-MomPhoneCalleeScript:
-	checkevent EVENT_TALKED_TO_MOM_AFTER_MYSTERY_EGG_QUEST
-	iftrue .script_10401f
-	checkevent EVENT_DUDE_TALKED_TO_YOU
-	iftrue MomPhoneLectureScript
-	checkevent EVENT_GAVE_MYSTERY_EGG_TO_ELM
-	iftrue MomPhoneNoGymQuestScript
-	checkevent EVENT_GOT_A_POKEMON_FROM_ELM
-	iftrue MomPhoneNoPokedexScript
-	sjump MomPhoneNoPokemonScript
-
-.script_10401f
-	checkevent EVENT_TEMPORARY_UNTIL_MAP_RELOAD_8
-	iftrue MomPhoneHangUpScript
-	writetext MomPhoneGreetingText
-	promptbutton
-	getcurlandmarkname STRING_BUFFER_3
-	readvar VAR_ROOFPALETTE
-	ifequal 1, MomPhonePalette1
-	ifequal 2, MomPhonePalette2
-	sjump MomPhoneOther
-
-MomPhoneLandmark:
-	writetext MomPhoneLandmarkText
-	promptbutton
-	sjump MomSavingMoney
-
-MomPhonePalette1:
-	readvar VAR_MAPGROUP
-	ifequal GROUP_NEW_BARK_TOWN, .newbark
-	ifequal GROUP_CHERRYGROVE_CITY, .cherrygrove
-	ifequal GROUP_VIOLET_CITY, .violet
-	ifequal GROUP_AZALEA_TOWN, .azalea
-	ifequal GROUP_GOLDENROD_CITY, .goldenrod
-	writetext MomPhoneGenericAreaText
-	promptbutton
-	sjump MomSavingMoney
-
-.newbark
-	writetext MomPhoneNewBarkText
-	promptbutton
-	sjump MomSavingMoney
-
-.cherrygrove
-	writetext MomPhoneCherrygroveText
-	promptbutton
-	sjump MomSavingMoney
-
-.violet
-	getstring STRING_BUFFER_4, .text_sprout_tower
-	sjump MomPhoneLandmark
-.text_sprout_tower
-	db "SPROUT TOWER@"
-
-.azalea
-	getstring STRING_BUFFER_4, .text_slowpoke_well
-	sjump MomPhoneLandmark
-.text_slowpoke_well
-	db "SLOWPOKE WELL@"
-
-.goldenrod
-	getstring STRING_BUFFER_4, .text_radio_tower
-	sjump MomPhoneLandmark
-.text_radio_tower
-	db "RADIO TOWER@"
-
-MomPhonePalette2:
-	writetext MomOtherAreaText
-	promptbutton
-	sjump MomSavingMoney
-
-MomPhoneOther:
-	writetext MomDeterminedText
-	promptbutton
-	sjump MomSavingMoney
-
-MomSavingMoney:
-	checkflag ENGINE_MOM_SAVING_MONEY
-	iffalse .NotSaving
-	checkmoney MOMS_MONEY, 0
-	ifequal HAVE_MORE, .SavingHasMoney
-	sjump .SavingNoMoney
-
-.NotSaving:
-	checkmoney MOMS_MONEY, 0
-	ifequal HAVE_MORE, .HasMoney
-	sjump .NoMoney
-
-.SavingHasMoney:
-	getmoney STRING_BUFFER_3, MOMS_MONEY
-	writetext MomCheckBalanceText
-	yesorno
-	iftrue MomPhoneSaveMoneyScript
-	sjump MomPhoneWontSaveMoneyScript
-
-.SavingNoMoney:
-	writetext MomImportantToSaveText
-	yesorno
-	iftrue MomPhoneSaveMoneyScript
-	sjump MomPhoneWontSaveMoneyScript
-
-.NoMoney:
-	writetext MomYoureNotSavingText
-	yesorno
-	iftrue MomPhoneSaveMoneyScript
-	sjump MomPhoneWontSaveMoneyScript
-
-.HasMoney:
-	getmoney STRING_BUFFER_3, MOMS_MONEY
-	writetext MomYouveSavedText
-	yesorno
-	iftrue MomPhoneSaveMoneyScript
-	sjump MomPhoneWontSaveMoneyScript
-
-MomPhoneSaveMoneyScript:
-	setflag ENGINE_MOM_SAVING_MONEY
-	writetext MomOKIllSaveText
-	promptbutton
-	sjump MomPhoneHangUpScript
-
-MomPhoneWontSaveMoneyScript:
-	clearflag ENGINE_MOM_SAVING_MONEY
-	writetext MomPhoneWontSaveMoneyText
-	promptbutton
-	sjump MomPhoneHangUpScript
-
-MomPhoneHangUpScript:
-	writetext MomPhoneHangUpText
-	end
-
-MomPhoneNoPokemonScript:
-	writetext MomPhoneNoPokemonText
-	end
-
-MomPhoneNoPokedexScript:
-	writetext MomPhoneNoPokedexText
-	end
-
-MomPhoneNoGymQuestScript:
-	writetext MomPhoneNoGymQuestText
-	end
-
-MomPhoneLectureScript:
-	setevent EVENT_TALKED_TO_MOM_AFTER_MYSTERY_EGG_QUEST
-	setflag ENGINE_MOM_ACTIVE
-	specialphonecall SPECIALCALL_NONE
-	writetext MomPhoneLectureText
-	yesorno
-	iftrue MomPhoneSaveMoneyScript
-	sjump MomPhoneWontSaveMoneyScript
-
-BillPhoneCalleeScript:
-	checktime DAY
-	iftrue Script_104148
-	checktime NITE
-	iftrue Script_10414f
-	writetext Text_104ec4
-	promptbutton
-	sjump Script_104156
-Script_104148:
-	writetext Text_104f0d
-	promptbutton
-	sjump Script_104156
-Script_10414f:
-	writetext Text_104f52
-	promptbutton
-	sjump Script_104156
-Script_104156:
-	writetext Text_104f9b
-	promptbutton
-	readvar $10
-	getnum STRING_BUFFER_3
-	ifequal $00, Script_10416e
-	ifless $06, Script_10416a
-	writetext Text_104fc7
-	end
-Script_10416a:
-	writetext Text_105024
-	end
-Script_10416e:
-	writetext Text_10508a
-	end
-
-BillPhoneCallerScript:
-	writetext Text_1050ef
-	waitbutton
-	end
-
-ElmPhoneCalleeScript:
-	readvar $14
-	ifequal $01, Script_1041da
-	checkevent $0055
-	iftrue Script_1041cc
-	checkevent $002d
-	iffalse Script_10418f
-	checkevent $0054
-	iftrue Script_1041c5
-Script_10418f:
-	checkevent $002d
-	iftrue Script_1041c1
-	checkevent $0701
-	iftrue Script_1041bd
-	checkevent $001f
-	iftrue Script_1041b9
-	checkevent $0043
-	iftrue Script_1041b5
-	checkevent $001e
-	iftrue Script_1041b1
-	writetext Text_105199
-	end
-Script_1041b1:
-	writetext Text_1051e6
-	end
-Script_1041b5:
-	writetext Text_105221
-	end
-Script_1041b9:
-	writetext Text_105272
-	end
-Script_1041bd:
-	writetext Text_1052b9
-	end
-Script_1041c1:
-	writetext Text_105305
-	end
-Script_1041c5:
-	writetext Text_105358
-	setevent $0077
-	end
-Script_1041cc:
-	random 2
-	ifequal $00, Script_1041d6
-	writetext Text_1053bc
-	end
-Script_1041d6:
-	writetext Text_10541f
-	end
-Script_1041da:
-	writetext Text_105484
-	specialphonecall SPECIALCALL_NONE
-	end
-
-ElmPhoneCallerScript:
-	readvar $14
-	ifequal $02, Script_1041fe
-	ifequal $03, Script_104208
-	ifequal $04, Script_104215
-	ifequal $05, Script_10421c
-	ifequal $08, Script_10421c
-	writetext Text_105484
-	specialphonecall SPECIALCALL_NONE
-	end
-Script_1041fe:
-	writetext Text_1055b4
-	specialphonecall SPECIALCALL_NONE
-	setevent $0043
-	end
-Script_104208:
-	writetext Text_105624
-	specialphonecall SPECIALCALL_NONE
-	clearevent $0700
-	setevent $0701
-	end
-Script_104215:
-	writetext Text_1056a3
-	specialphonecall SPECIALCALL_NONE
-	end
-Script_10421c:
-	writetext Text_1057a6
-	specialphonecall SPECIALCALL_NONE
-	end
-Script_104223:
-	writetext Text_1057fa
-	specialphonecall SPECIALCALL_NONE
-	end
+INCLUDE "engine/phone/scripts/unused.asm"
+INCLUDE "engine/phone/scripts/mom.asm"
+INCLUDE "engine/phone/scripts/bill.asm"
+INCLUDE "engine/phone/scripts/elm.asm"
 
 JackPhoneCalleeScript:
-	gettrainername STRING_BUFFER_3, $17, $01
-	scall Script_10485c
-	sjump Script_1048f0
+	gettrainername STRING_BUFFER_3, SCHOOLBOY, JACK1
+	scall PhoneScript_AnswerPhone_Male
+	sjump Phone_GenericCall_Male
 
 JackPhoneCallerScript:
-	gettrainername STRING_BUFFER_3, $17, $01
-	scall Script_10488e
+	gettrainername STRING_BUFFER_3, SCHOOLBOY, JACK1
+	scall PhoneScript_GreetPhone_Male
 	scall PhoneScript_Random2
-	ifequal $00, Script_10424c
+	ifequal 0, .WantsBattle
 	scall PhoneScript_Random2
-	ifequal $00, Script_104998
-	sjump Script_1048f0
-Script_10424c:
-	getstring STRING_BUFFER_5, Text_1049ae
-	setevent $0260
-	sjump Script_104950
+	ifequal 0, Phone_CheckIfUnseenRare_Male
+	sjump Phone_GenericCall_Male
+
+.WantsBattle:
+	getstring STRING_BUFFER_5, PhoneNationalParkText
+	setevent EVENT_JACK_READY_FOR_REMATCH
+	sjump PhoneScript_WantsToBattle_Male
 
 BeverlyPhoneCalleeScript:
-	gettrainername STRING_BUFFER_3, $3e, $01
-	scall Script_104875
-	sjump Script_104901
+	gettrainername STRING_BUFFER_3, POKEFANF, BEVERLY1
+	scall PhoneScript_AnswerPhone_Female
+	sjump Phone_GenericCall_Female
 
 BeverlyPhoneCallerScript:
-	gettrainername STRING_BUFFER_3, $3e, $01
-	scall Script_1048a7
+	gettrainername STRING_BUFFER_3, POKEFANF, BEVERLY1
+	scall PhoneScript_GreetPhone_Female
 	scall PhoneScript_Random2
-	ifequal $00, Script_104278
+	ifequal 0, .WantsBattle
 	scall PhoneScript_Random2
-	ifequal $00, Script_1049a1
-	sjump Script_104901
-Script_104278:
-	getstring STRING_BUFFER_5, Text_1049ae
-	setevent $0262
-	sjump Script_104957
+	ifequal 0, Phone_CheckIfUnseenRare_Female
+	sjump Phone_GenericCall_Female
+
+.WantsBattle:
+	getstring STRING_BUFFER_5, PhoneNationalParkText
+	setevent EVENT_BEVERLY_READY_FOR_REMATCH
+	sjump PhoneScript_WantsToBattle_Female
 
 HueyPhoneCalleeScript:
-	gettrainername STRING_BUFFER_3, $28, $02
-	scall Script_10485c
-	sjump Script_1048c0
+	gettrainername STRING_BUFFER_3, SAILOR, HUEY1
+	scall PhoneScript_AnswerPhone_Male
+	sjump Phone_GenericCall_Huey
 
 HueyPhoneCallerScript:
-	gettrainername STRING_BUFFER_3, $28, $02
-	scall Script_10488e
+	gettrainername STRING_BUFFER_3, SAILOR, HUEY1
+	scall PhoneScript_GreetPhone_Male
 	scall PhoneScript_Random2
-	ifequal $00, Script_10429d
-	sjump Script_1048c0
-Script_10429d:
-	getstring STRING_BUFFER_5, Text_1049bc
-	setevent $0264
-	sjump Script_104950
+	ifequal 0, .WantsBattle
+	sjump Phone_GenericCall_Huey
+
+.WantsBattle:
+	getstring STRING_BUFFER_5, PhoneLighthouseText
+	setevent EVENT_HUEY_READY_FOR_REMATCH
+	sjump PhoneScript_WantsToBattle_Male
 
 GavenPhoneCalleeScript:
-	gettrainername STRING_BUFFER_3, $1b, $0a
-	scall Script_10485c
-	sjump Script_1048f0
+	gettrainername STRING_BUFFER_3, COOLTRAINERM, GAVEN3
+	scall PhoneScript_AnswerPhone_Male
+	sjump Phone_GenericCall_Male
 
 GavenPhoneCallerScript:
-	gettrainername STRING_BUFFER_3, $1b, $0a
-	scall Script_10488e
+	gettrainername STRING_BUFFER_3, COOLTRAINERM, GAVEN3
+	scall PhoneScript_GreetPhone_Male
 	scall PhoneScript_Random2
-	ifequal $00, Script_1042c9
+	ifequal 0, .WantsBattle
 	scall PhoneScript_Random2
-	ifequal $00, Script_104998
-	sjump Script_1048f0
-Script_1042c9:
-	getstring STRING_BUFFER_5, Text_1049e7
-	setevent $026c
-	sjump Script_104950
+	ifequal 0, Phone_CheckIfUnseenRare_Male
+	sjump Phone_GenericCall_Male
+
+.WantsBattle:
+	getstring STRING_BUFFER_5, PhoneRoute26Text
+	setevent EVENT_GAVEN_READY_FOR_REMATCH
+	sjump PhoneScript_WantsToBattle_Male
 
 BethPhoneCalleeScript:
-	gettrainername STRING_BUFFER_3, $1c, $09
-	scall Script_104875
-	sjump Script_104901
+	gettrainername STRING_BUFFER_3, COOLTRAINERF, BETH1
+	scall PhoneScript_AnswerPhone_Female
+	sjump Phone_GenericCall_Female
 
 BethPhoneCallerScript:
-	gettrainername STRING_BUFFER_3, $1c, $09
-	scall Script_1048a7
+	gettrainername STRING_BUFFER_3, COOLTRAINERF, BETH1
+	scall PhoneScript_GreetPhone_Female
 	scall PhoneScript_Random2
-	ifequal $00, Script_1042f5
+	ifequal 0, .WantsBattle
 	scall PhoneScript_Random2
-	ifequal $00, Script_1049a1
-	sjump Script_104901
-Script_1042f5:
-	getstring STRING_BUFFER_5, Text_1049e7
-	setevent $026e
-	sjump Script_104957
+	ifequal 0, Phone_CheckIfUnseenRare_Female
+	sjump Phone_GenericCall_Female
+
+.WantsBattle:
+	getstring STRING_BUFFER_5, PhoneRoute26Text
+	setevent EVENT_BETH_READY_FOR_REMATCH
+	sjump PhoneScript_WantsToBattle_Female
 
 JosePhoneCalleeScript:
-	gettrainername STRING_BUFFER_3, $18, $0e
-	scall Script_10485c
-	sjump Script_1048f0
+	gettrainername STRING_BUFFER_3, BIRD_KEEPER, JOSE2
+	scall PhoneScript_AnswerPhone_Male
+	sjump Phone_GenericCall_Male
 
 JosePhoneCallerScript:
-	gettrainername STRING_BUFFER_3, $18, $0e
+	gettrainername STRING_BUFFER_3, BIRD_KEEPER, JOSE2
 	scall PhoneScript_Random4
-	ifequal $00, Script_10495e
-	scall Script_10488e
+	ifequal 0, Phone_WrongNumber_JoseBrent
+	scall PhoneScript_GreetPhone_Male
 	scall PhoneScript_Random2
-	ifequal $00, Script_104328
+	ifequal 0, .WantsBattle
 	scall PhoneScript_Random2
-	ifequal $00, Script_104998
-	sjump Script_1048f0
-Script_104328:
-	getstring STRING_BUFFER_5, Text_1049f0
-	setevent $0270
-	sjump Script_104950
+	ifequal 0, Phone_CheckIfUnseenRare_Male
+	sjump Phone_GenericCall_Male
+
+.WantsBattle:
+	getstring STRING_BUFFER_5, PhoneRoute27Text
+	setevent EVENT_JOSE_READY_FOR_REMATCH
+	sjump PhoneScript_WantsToBattle_Male
 
 ReenaPhoneCalleeScript:
-	gettrainername STRING_BUFFER_3, $1c, $0a
-	scall Script_104875
-	sjump Script_104901
+	gettrainername STRING_BUFFER_3, COOLTRAINERF, REENA1
+	scall PhoneScript_AnswerPhone_Female
+	sjump Phone_GenericCall_Female
 
 ReenaPhoneCallerScript:
-	gettrainername STRING_BUFFER_3, $1c, $0a
-	scall Script_1048a7
+	gettrainername STRING_BUFFER_3, COOLTRAINERF, REENA1
+	scall PhoneScript_GreetPhone_Female
 	scall PhoneScript_Random2
-	ifequal $00, Script_104354
+	ifequal 0, .WantsBattle
 	scall PhoneScript_Random2
-	ifequal $00, Script_1049a1
-	sjump Script_104901
-Script_104354:
-	getstring STRING_BUFFER_5, Text_1049f0
-	setevent $0272
-	sjump Script_104957
+	ifequal 0, Phone_CheckIfUnseenRare_Female
+	sjump Phone_GenericCall_Female
+
+.WantsBattle:
+	getstring STRING_BUFFER_5, PhoneRoute27Text
+	setevent EVENT_REENA_READY_FOR_REMATCH
+	sjump PhoneScript_WantsToBattle_Female
 
 JoeyPhoneCalleeScript:
-	gettrainername STRING_BUFFER_3, $16, $01
-	scall Script_10485c
-	sjump Script_1048f0
+	gettrainername STRING_BUFFER_3, YOUNGSTER, JOEY1
+	scall PhoneScript_AnswerPhone_Male
+	sjump Phone_GenericCall_Male
 
 JoeyPhoneCallerScript:
-	gettrainername STRING_BUFFER_3, $16, $01
-	scall Script_10488e
-	checkflag $0045
-	iffalse Script_10437c
+	gettrainername STRING_BUFFER_3, YOUNGSTER, JOEY1
+	scall PhoneScript_GreetPhone_Male
+	checkflag ENGINE_FLYPOINT_GOLDENROD
+	iffalse .NoBattle
 	scall PhoneScript_Random2
-	ifequal $00, Script_104386
-Script_10437c:
+	ifequal 0, .WantsBattle
+
+.NoBattle:
 	scall PhoneScript_Random2
-	ifequal $00, Script_104998
-	sjump Script_1048f0
-Script_104386:
-	getstring STRING_BUFFER_5, Text_1049f9
-	setevent $0274
-	sjump Script_104950
+	ifequal 0, Phone_CheckIfUnseenRare_Male
+	sjump Phone_GenericCall_Male
+
+.WantsBattle:
+	getstring STRING_BUFFER_5, PhoneRoute30Text
+	setevent EVENT_JOEY_READY_FOR_REMATCH
+	sjump PhoneScript_WantsToBattle_Male
 
 WadePhoneCalleeScript:
-	gettrainername STRING_BUFFER_3, $24, $04
-	scall Script_10485c
+	gettrainername STRING_BUFFER_3, BUG_CATCHER, WADE1
+	scall PhoneScript_AnswerPhone_Male
 	scall PhoneScript_Random2
-	ifequal $00, Script_1043b2
-	checkflag $0050
-	iftrue Script_1043b2
-	readvar $0b
-	ifequal $02, Script_104983
-	ifequal $04, Script_104983
-	ifequal $06, Script_104983
-Script_1043b2:
-	sjump Script_1048f0
+	ifequal 0, .Generic
+	checkflag ENGINE_DAILY_BUG_CONTEST
+	iftrue .Generic
+	readvar VAR_WEEKDAY
+	ifequal TUESDAY, PhoneScript_BugCatchingContest
+	ifequal THURSDAY, PhoneScript_BugCatchingContest
+	ifequal SATURDAY, PhoneScript_BugCatchingContest
+
+.Generic:
+	sjump Phone_GenericCall_Male
 
 WadePhoneCallerScript:
-	gettrainername STRING_BUFFER_3, $24, $04
-	scall Script_10488e
+	gettrainername STRING_BUFFER_3, BUG_CATCHER, WADE1
+	scall PhoneScript_GreetPhone_Male
 	scall PhoneScript_Random2
-	ifequal $00, Script_1043d7
-	checkflag $0050
-	iftrue Script_1043d7
-	readvar $0b
-	ifequal $02, Script_104983
-	ifequal $04, Script_104983
-	ifequal $06, Script_104983
-Script_1043d7:
-	checkflag $0045
-	iffalse Script_1043e4
+	ifequal 0, .NoContest
+	checkflag ENGINE_DAILY_BUG_CONTEST
+	iftrue .NoContest
+	readvar VAR_WEEKDAY
+	ifequal TUESDAY, PhoneScript_BugCatchingContest
+	ifequal THURSDAY, PhoneScript_BugCatchingContest
+	ifequal SATURDAY, PhoneScript_BugCatchingContest
+
+.NoContest:
+	checkflag ENGINE_FLYPOINT_GOLDENROD
+	iffalse .NoBattle
 	scall PhoneScript_Random2
-	ifequal $00, Script_1043ee
-Script_1043e4:
+	ifequal 0, .WantsBattle
+
+.NoBattle:
 	scall PhoneScript_Random2
-	ifequal $00, Script_104998
-	sjump Script_1048f0
-Script_1043ee:
-	getstring STRING_BUFFER_5, Text_104a02
-	setevent $0276
-	sjump Script_104950
+	ifequal 0, Phone_CheckIfUnseenRare_Male
+	sjump Phone_GenericCall_Male
+
+.WantsBattle:
+	getstring STRING_BUFFER_5, PhoneRoute31Text
+	setevent EVENT_WADE_READY_FOR_REMATCH
+	sjump PhoneScript_WantsToBattle_Male
 
 RalphPhoneCalleeScript:
-	gettrainername STRING_BUFFER_3, $25, $02
-	scall Script_10485c
-	sjump Script_1048f0
+	gettrainername STRING_BUFFER_3, FISHER, RALPH1
+	scall PhoneScript_AnswerPhone_Male
+	sjump Phone_GenericCall_Male
 
 RalphPhoneCallerScript:
-	gettrainername STRING_BUFFER_3, $25, $02
-	scall Script_10488e
-	checkflag $0045
-	iffalse Script_104416
+	gettrainername STRING_BUFFER_3, FISHER, RALPH1
+	scall PhoneScript_GreetPhone_Male
+	checkflag ENGINE_FLYPOINT_GOLDENROD
+	iffalse .NoBattle
 	scall PhoneScript_Random2
-	ifequal $00, Script_104427
-Script_104416:
+	ifequal 0, .WantsBattle
+
+.NoBattle:
 	scall PhoneScript_Random2
-	ifequal $00, Script_104431
+	ifequal 0, .QwilfishSwarm
 	scall PhoneScript_Random2
-	ifequal $00, Script_104998
-	sjump Script_1048f0
-Script_104427:
-	getstring STRING_BUFFER_5, Text_104a0b
-	setevent $0278
-	sjump Script_104950
-Script_104431:
+	ifequal 0, Phone_CheckIfUnseenRare_Male
+	sjump Phone_GenericCall_Male
+
+.WantsBattle:
+	getstring STRING_BUFFER_5, PhoneRoute32Text
+	setevent EVENT_RALPH_READY_FOR_REMATCH
+	sjump PhoneScript_WantsToBattle_Male
+
+.QwilfishSwarm:
 	checkflag ENGINE_SWARM
-	iftrue Script_1048f0
+	iftrue Phone_GenericCall_Male
 	getmonname STRING_BUFFER_4, QWILFISH
-	getstring STRING_BUFFER_5, Text_104a0b
+	getstring STRING_BUFFER_5, PhoneRoute32Text
 	setval FISHSWARM_QWILFISH
 	special ActivateFishingSwarm
-	sjump Script_104975
+	sjump PhoneScript_SwarmFish
 
 LizPhoneCalleeScript:
-	gettrainername STRING_BUFFER_3, $35, $01
-	scall Script_104875
-	sjump Script_104901
+	gettrainername STRING_BUFFER_3, PICNICKER, LIZ1
+	scall PhoneScript_AnswerPhone_Female
+	sjump Phone_GenericCall_Female
 
 LizPhoneCallerScript:
-	gettrainername STRING_BUFFER_3, $35, $01
-	scall Script_1048a7
-	checkflag $0045
-	iffalse Script_104464
+	gettrainername STRING_BUFFER_3, PICNICKER, LIZ1
+	scall PhoneScript_GreetPhone_Female
+	checkflag ENGINE_FLYPOINT_GOLDENROD
+	iffalse .NoBattle
 	scall PhoneScript_Random2
-	ifequal $00, Script_10446e
-Script_104464:
+	ifequal 0, .WantsBattle
+
+.NoBattle:
 	scall PhoneScript_Random2
-	ifequal $00, Script_1049a1
-	sjump Script_104901
-Script_10446e:
-	getstring STRING_BUFFER_5, Text_104a0b
-	setevent $027a
-	sjump Script_104957
+	ifequal 0, Phone_CheckIfUnseenRare_Female
+	sjump Phone_GenericCall_Female
+
+.WantsBattle:
+	getstring STRING_BUFFER_5, PhoneRoute32Text
+	setevent EVENT_LIZ_READY_FOR_REMATCH
+	sjump PhoneScript_WantsToBattle_Female
 
 AnthonyPhoneCalleeScript:
-	gettrainername STRING_BUFFER_3, $2c, $05
-	scall Script_10485c
-	sjump Script_1048f0
+	gettrainername STRING_BUFFER_3, HIKER, ANTHONY2
+	scall PhoneScript_AnswerPhone_Male
+	sjump Phone_GenericCall_Male
 
 AnthonyPhoneCallerScript:
-	gettrainername STRING_BUFFER_3, $2c, $05
-	scall Script_10488e
-	checkflag $0045
-	iffalse Script_104496
+	gettrainername STRING_BUFFER_3, HIKER, ANTHONY2
+	scall PhoneScript_GreetPhone_Male
+	checkflag ENGINE_FLYPOINT_GOLDENROD
+	iffalse .NoBattle
 	scall PhoneScript_Random2
-	ifequal $00, Script_1044a7
-Script_104496:
+	ifequal 0, .WantsBattle
+
+.NoBattle:
 	scall PhoneScript_Random2
-	ifequal $00, Script_1044b1
+	ifequal 0, .DunsparceSwarm
 	scall PhoneScript_Random2
-	ifequal $00, Script_104998
-	sjump Script_1048f0
-Script_1044a7:
-	getstring STRING_BUFFER_5, Text_104a14
-	setevent $027c
-	sjump Script_104950
-Script_1044b1:
+	ifequal 0, Phone_CheckIfUnseenRare_Male
+	sjump Phone_GenericCall_Male
+
+.WantsBattle:
+	getstring STRING_BUFFER_5, PhoneRoute33Text
+	setevent EVENT_ANTHONY_READY_FOR_REMATCH
+	sjump PhoneScript_WantsToBattle_Male
+
+.DunsparceSwarm:
 	checkflag ENGINE_SWARM
-	iftrue Script_1048f0
+	iftrue Phone_GenericCall_Male
 	getmonname STRING_BUFFER_4, DUNSPARCE
-	getstring STRING_BUFFER_5, Text_1049d3
+	getstring STRING_BUFFER_5, PhoneDarkCaveText
 	swarm DARK_CAVE_VIOLET_ENTRANCE
-	sjump Script_10497c
+	sjump PhoneScript_SwarmCave
 
 ToddPhoneCalleeScript:
-	gettrainername STRING_BUFFER_3, $36, $02
-	scall Script_10485c
-	sjump Script_1048f0
+	gettrainername STRING_BUFFER_3, CAMPER, TODD1
+	scall PhoneScript_AnswerPhone_Male
+	sjump Phone_GenericCall_Male
 
 ToddPhoneCallerScript:
-	gettrainername STRING_BUFFER_3, $36, $02
-	scall Script_10488e
-	checkflag $0045
-	iffalse Script_1044e2
+	gettrainername STRING_BUFFER_3, CAMPER, TODD1
+	scall PhoneScript_GreetPhone_Male
+	checkflag ENGINE_FLYPOINT_GOLDENROD
+	iffalse .NoBattle
 	scall PhoneScript_Random2
-	ifequal $00, Script_1044ec
-Script_1044e2:
+	ifequal 0, .WantsBattle
+
+.NoBattle:
 	scall PhoneScript_Random2
-	ifequal $00, Script_104998
-	sjump Script_1048f0
-Script_1044ec:
-	getstring STRING_BUFFER_5, Text_104a1d
-	setevent $027e
-	sjump Script_104950
+	ifequal 0, Phone_CheckIfUnseenRare_Male
+	sjump Phone_GenericCall_Male
+
+.WantsBattle:
+	getstring STRING_BUFFER_5, PhoneRoute34Text
+	setevent EVENT_TODD_READY_FOR_REMATCH
+	sjump PhoneScript_WantsToBattle_Male
 
 GinaPhoneCalleeScript:
-	gettrainername STRING_BUFFER_3, $35, $02
-	scall Script_104875
-	checkflag $0012
-	iftrue Script_104991
-	sjump Script_104901
+	gettrainername STRING_BUFFER_3, PICNICKER, GINA1
+	scall PhoneScript_AnswerPhone_Female
+	checkflag ENGINE_ROCKETS_IN_RADIO_TOWER
+	iftrue GinaRocketRumorScript
+	sjump Phone_GenericCall_Female
 
 GinaPhoneCallerScript:
-	gettrainername STRING_BUFFER_3, $35, $02
-	scall Script_1048a7
-	checkflag $0012
-	iftrue Script_104991
-	checkflag $0045
-	iffalse Script_104520
+	gettrainername STRING_BUFFER_3, PICNICKER, GINA1
+	scall PhoneScript_GreetPhone_Female
+	checkflag ENGINE_ROCKETS_IN_RADIO_TOWER
+	iftrue GinaRocketRumorScript
+	checkflag ENGINE_FLYPOINT_GOLDENROD
+	iffalse .NoBattle
 	scall PhoneScript_Random2
-	ifequal $00, Script_10452a
-Script_104520:
+	ifequal 0, .WantsBattle
+
+.NoBattle:
 	scall PhoneScript_Random2
-	ifequal $00, Script_1049a1
-	sjump Script_104901
-Script_10452a:
-	getstring STRING_BUFFER_5, Text_104a1d
-	setevent $0280
-	sjump Script_104957
+	ifequal 0, Phone_CheckIfUnseenRare_Female
+	sjump Phone_GenericCall_Female
+
+.WantsBattle:
+	getstring STRING_BUFFER_5, PhoneRoute34Text
+	setevent EVENT_GINA_READY_FOR_REMATCH
+	sjump PhoneScript_WantsToBattle_Female
 
 IrwinPhoneCalleeScript:
-	gettrainername STRING_BUFFER_3, $31, $01
-	scall Script_10485c
-	checkflag $0012
-	iftrue Script_10498a
-	sjump Script_1048f0
+	gettrainername STRING_BUFFER_3, JUGGLER, IRWIN1
+	scall PhoneScript_AnswerPhone_Male
+	checkflag ENGINE_ROCKETS_IN_RADIO_TOWER
+	iftrue IrwinRocketRumorScript
+	sjump Phone_GenericCall_Male
 
 IrwinPhoneCallerScript:
-	gettrainername STRING_BUFFER_3, $31, $01
-	scall Script_10488e
-	checkflag $0012
-	iftrue Script_10498a
+	gettrainername STRING_BUFFER_3, JUGGLER, IRWIN1
+	scall PhoneScript_GreetPhone_Male
+	checkflag ENGINE_ROCKETS_IN_RADIO_TOWER
+	iftrue IrwinRocketRumorScript
 	scall PhoneScript_Random2
-	ifequal $00, Script_104562
+	ifequal 0, .WantsBattle
 	scall PhoneScript_Random2
-	ifequal $00, Script_104998
-	sjump Script_1048f0
-Script_104562:
-	getstring STRING_BUFFER_5, Text_104a26
-	setevent $0282
-	sjump Script_104950
+	ifequal 0, Phone_CheckIfUnseenRare_Male
+	sjump Phone_GenericCall_Male
+
+.WantsBattle:
+	getstring STRING_BUFFER_5, PhoneRoute35Text
+	setevent EVENT_IRWIN_READY_FOR_REMATCH
+	sjump PhoneScript_WantsToBattle_Male
 
 ArniePhoneCalleeScript:
-	gettrainername STRING_BUFFER_3, $24, $08
-	scall Script_10485c
-	sjump Script_1048f0
+	gettrainername STRING_BUFFER_3, BUG_CATCHER, ARNIE1
+	scall PhoneScript_AnswerPhone_Male
+	sjump Phone_GenericCall_Male
 
 ArniePhoneCallerScript:
-	gettrainername STRING_BUFFER_3, $24, $08
-	scall Script_10488e
+	gettrainername STRING_BUFFER_3, BUG_CATCHER, ARNIE1
+	scall PhoneScript_GreetPhone_Male
 	scall PhoneScript_Random2
-	ifequal $00, Script_104595
+	ifequal 0, .WantsBattle
 	scall PhoneScript_Random2
-	ifequal $00, Script_10459f
+	ifequal 0, .YanmaSwarm
 	scall PhoneScript_Random2
-	ifequal $00, Script_104998
-	sjump Script_1048f0
-Script_104595:
-	getstring STRING_BUFFER_5, Text_104a26
-	setevent $0284
-	sjump Script_104950
-Script_10459f:
+	ifequal 0, Phone_CheckIfUnseenRare_Male
+	sjump Phone_GenericCall_Male
+
+.WantsBattle:
+	getstring STRING_BUFFER_5, PhoneRoute35Text
+	setevent EVENT_ARNIE_READY_FOR_REMATCH
+	sjump PhoneScript_WantsToBattle_Male
+
+.YanmaSwarm:
 	checkflag ENGINE_SWARM
-	iftrue Script_1048f0
+	iftrue Phone_GenericCall_Male
 	getmonname STRING_BUFFER_4, YANMA
-	getstring STRING_BUFFER_5, Text_104a26
+	getstring STRING_BUFFER_5, PhoneRoute35Text
 	swarm ROUTE_35
-	sjump Script_10496e
+	sjump PhoneScript_SwarmGrass
 
 AlanPhoneCalleeScript:
-	gettrainername STRING_BUFFER_3, $17, $03
-	scall Script_10485c
-	sjump Script_1048f0
+	gettrainername STRING_BUFFER_3, SCHOOLBOY, ALAN1
+	scall PhoneScript_AnswerPhone_Male
+	sjump Phone_GenericCall_Male
 
 AlanPhoneCallerScript:
-	gettrainername STRING_BUFFER_3, $17, $03
-	scall Script_10488e
+	gettrainername STRING_BUFFER_3, SCHOOLBOY, ALAN1
+	scall PhoneScript_GreetPhone_Male
 	scall PhoneScript_Random2
-	ifequal $00, Script_1045d4
+	ifequal 0, .WantsBattle
 	scall PhoneScript_Random2
-	ifequal $00, Script_104998
-	sjump Script_1048f0
-Script_1045d4:
-	getstring STRING_BUFFER_5, Text_104a2f
-	setevent $0286
-	sjump Script_104950
+	ifequal 0, Phone_CheckIfUnseenRare_Male
+	sjump Phone_GenericCall_Male
+
+.WantsBattle:
+	getstring STRING_BUFFER_5, PhoneRoute36Text
+	setevent EVENT_ALAN_READY_FOR_REMATCH
+	sjump PhoneScript_WantsToBattle_Male
 
 DanaPhoneCalleeScript:
-	gettrainername STRING_BUFFER_3, $19, $0a
-	scall Script_104875
-	sjump Script_104901
+	gettrainername STRING_BUFFER_3, LASS, DANA1
+	scall PhoneScript_AnswerPhone_Female
+	sjump Phone_GenericCall_Female
 
 DanaPhoneCallerScript:
-	gettrainername STRING_BUFFER_3, $19, $0a
-	scall Script_1048a7
+	gettrainername STRING_BUFFER_3, LASS, DANA1
+	scall PhoneScript_GreetPhone_Female
 	scall PhoneScript_Random2
-	ifequal $00, Script_104600
+	ifequal 0, .WantsBattle
 	scall PhoneScript_Random2
-	ifequal $00, Script_1049a1
-	sjump Script_104901
-Script_104600:
-	getstring STRING_BUFFER_5, Text_104a41
-	setevent $028a
-	sjump Script_104957
+	ifequal 0, Phone_CheckIfUnseenRare_Female
+	sjump Phone_GenericCall_Female
+
+.WantsBattle:
+	getstring STRING_BUFFER_5, PhoneRoute38Text
+	setevent EVENT_DANA_READY_FOR_REMATCH
+	sjump PhoneScript_WantsToBattle_Female
 
 ChadPhoneCalleeScript:
-	gettrainername STRING_BUFFER_3, $17, $0a
-	scall Script_10485c
-	sjump Script_1048f0
+	gettrainername STRING_BUFFER_3, SCHOOLBOY, CHAD1
+	scall PhoneScript_AnswerPhone_Male
+	sjump Phone_GenericCall_Male
 
 ChadPhoneCallerScript:
-	gettrainername STRING_BUFFER_3, $17, $0a
-	scall Script_10488e
+	gettrainername STRING_BUFFER_3, SCHOOLBOY, CHAD1
+	scall PhoneScript_GreetPhone_Male
 	scall PhoneScript_Random2
-	ifequal $00, Script_104633
+	ifequal 0, .SnubbullSwarm
 	scall PhoneScript_Random2
-	ifequal $00, Script_104646
+	ifequal 0, .WantsBattle
 	scall PhoneScript_Random2
-	ifequal $00, Script_104998
-	sjump Script_1048f0
-Script_104633:
+	ifequal 0, Phone_CheckIfUnseenRare_Male
+	sjump Phone_GenericCall_Male
+
+.SnubbullSwarm:
 	checkflag ENGINE_SWARM
-	iftrue Script_1048f0
+	iftrue Phone_GenericCall_Male
 	getmonname STRING_BUFFER_4, SNUBBULL
-	getstring STRING_BUFFER_5, Text_104a41
+	getstring STRING_BUFFER_5, PhoneRoute38Text
 	swarm ROUTE_38
-	sjump Script_10496e
-Script_104646:
-	getstring STRING_BUFFER_5, Text_104a41
-	setevent $028c
-	sjump Script_104950
+	sjump PhoneScript_SwarmGrass
+
+.WantsBattle:
+	getstring STRING_BUFFER_5, PhoneRoute38Text
+	setevent EVENT_CHAD_READY_FOR_REMATCH
+	sjump PhoneScript_WantsToBattle_Male
 
 DerekPhoneCalleeScript:
-	gettrainername STRING_BUFFER_3, $3b, $02
-	scall Script_10485c
+	gettrainername STRING_BUFFER_3, POKEFANM, DEREK1
+	scall PhoneScript_AnswerPhone_Male
 	scall PhoneScript_Random2
-	ifequal $00, Script_104672
-	checkflag $0050
-	iftrue Script_104672
-	readvar $0b
-	ifequal $02, Script_104983
-	ifequal $04, Script_104983
-	ifequal $06, Script_104983
-Script_104672:
-	sjump Script_1048f0
+	ifequal 0, .Generic
+	checkflag ENGINE_DAILY_BUG_CONTEST
+	iftrue .Generic
+	readvar VAR_WEEKDAY
+	ifequal TUESDAY, PhoneScript_BugCatchingContest
+	ifequal THURSDAY, PhoneScript_BugCatchingContest
+	ifequal SATURDAY, PhoneScript_BugCatchingContest
+
+.Generic:
+	sjump Phone_GenericCall_Male
 
 DerekPhoneCallerScript:
-	gettrainername STRING_BUFFER_3, $3b, $02
-	scall Script_10488e
+	gettrainername STRING_BUFFER_3, POKEFANM, DEREK1
+	scall PhoneScript_GreetPhone_Male
 	scall PhoneScript_Random2
-	ifequal $00, Script_104697
-	checkflag $0050
-	iftrue Script_104697
-	readvar $0b
-	ifequal $02, Script_104983
-	ifequal $04, Script_104983
-	ifequal $06, Script_104983
-Script_104697:
+	ifequal 0, .NoContest
+	checkflag ENGINE_DAILY_BUG_CONTEST
+	iftrue .NoContest
+	readvar VAR_WEEKDAY
+	ifequal TUESDAY, PhoneScript_BugCatchingContest
+	ifequal THURSDAY, PhoneScript_BugCatchingContest
+	ifequal SATURDAY, PhoneScript_BugCatchingContest
+
+.NoContest:
 	scall PhoneScript_Random2
-	ifequal $00, Script_1046a8
+	ifequal 0, .WantsBattle
 	scall PhoneScript_Random2
-	ifequal $00, Script_104998
-	sjump Script_1048f0
-Script_1046a8:
-	getstring STRING_BUFFER_5, Text_104a4a
-	setevent $028e
-	sjump Script_104950
+	ifequal 0, Phone_CheckIfUnseenRare_Male
+	sjump Phone_GenericCall_Male
+
+.WantsBattle:
+	getstring STRING_BUFFER_5, PhoneRoute39Text
+	setevent EVENT_DEREK_READY_FOR_REMATCH
+	sjump PhoneScript_WantsToBattle_Male
 
 ChrisPhoneCalleeScript:
-	gettrainername STRING_BUFFER_3, $25, $07
-	scall Script_10485c
-	sjump Script_1048f0
+	gettrainername STRING_BUFFER_3, FISHER, CHRIS1
+	scall PhoneScript_AnswerPhone_Male
+	sjump Phone_GenericCall_Male
 
 ChrisPhoneCallerScript:
-	gettrainername STRING_BUFFER_3, $25, $07
-	scall Script_10488e
+	gettrainername STRING_BUFFER_3, FISHER, CHRIS1
+	scall PhoneScript_GreetPhone_Male
 	scall PhoneScript_Random2
-	ifequal $00, Script_1046d4
+	ifequal 0, .WantsBattle
 	scall PhoneScript_Random2
-	ifequal $00, Script_104998
-	sjump Script_1048f0
-Script_1046d4:
-	getstring STRING_BUFFER_5, Text_104a53
-	setevent $0290
-	sjump Script_104950
+	ifequal 0, Phone_CheckIfUnseenRare_Male
+	sjump Phone_GenericCall_Male
+
+.WantsBattle:
+	getstring STRING_BUFFER_5, PhoneRoute42Text
+	setevent EVENT_CHRIS_READY_FOR_REMATCH
+	sjump PhoneScript_WantsToBattle_Male
 
 BrentPhoneCalleeScript:
-	gettrainername STRING_BUFFER_3, $1e, $06
-	scall Script_10485c
-	sjump Script_1048f0
+	gettrainername STRING_BUFFER_3, POKEMANIAC, BRENT1
+	scall PhoneScript_AnswerPhone_Male
+	sjump Phone_GenericCall_Male
 
 BrentPhoneCallerScript:
-	gettrainername STRING_BUFFER_3, $1e, $06
+	gettrainername STRING_BUFFER_3, POKEMANIAC, BRENT1
 	scall PhoneScript_Random4
-	ifequal $00, Script_10495e
-	scall Script_10488e
+	ifequal 0, Phone_WrongNumber_JoseBrent
+	scall PhoneScript_GreetPhone_Male
 	scall PhoneScript_Random2
-	ifequal $00, Script_104707
+	ifequal 0, .WantsBattle
 	scall PhoneScript_Random2
-	ifequal $00, Script_104998
-	sjump Script_1048f0
-Script_104707:
-	getstring STRING_BUFFER_5, Text_104a5c
-	setevent $0292
-	sjump Script_104950
+	ifequal 0, Phone_CheckIfUnseenRare_Male
+	sjump Phone_GenericCall_Male
+
+.WantsBattle:
+	getstring STRING_BUFFER_5, PhoneRoute43Text
+	setevent EVENT_BRENT_READY_FOR_REMATCH
+	sjump PhoneScript_WantsToBattle_Male
 
 TiffanyPhoneCalleeScript:
-	gettrainername STRING_BUFFER_3, $35, $14
-	scall Script_104875
-	sjump Script_104901
+	gettrainername STRING_BUFFER_3, PICNICKER, TIFFANY3
+	scall PhoneScript_AnswerPhone_Female
+	sjump Phone_GenericCall_Female
 
 TiffanyPhoneCallerScript:
-	gettrainername STRING_BUFFER_3, $35, $14
+	gettrainername STRING_BUFFER_3, PICNICKER, TIFFANY3
 	scall PhoneScript_Random4
-	ifequal $00, Script_104962
-	scall Script_1048a7
+	ifequal 0, Phone_WrongNumber_Tiffany
+	scall PhoneScript_GreetPhone_Female
 	scall PhoneScript_Random2
-	ifequal $00, Script_10473a
+	ifequal 0, .WantsBattle
 	scall PhoneScript_Random2
-	ifequal $00, Script_1049a1
-	sjump Script_104901
-Script_10473a:
-	getstring STRING_BUFFER_5, Text_104a5c
-	setevent $0294
-	sjump Script_104957
+	ifequal 0, Phone_CheckIfUnseenRare_Female
+	sjump Phone_GenericCall_Female
+
+.WantsBattle:
+	getstring STRING_BUFFER_5, PhoneRoute43Text
+	setevent EVENT_TIFFANY_READY_FOR_REMATCH
+	sjump PhoneScript_WantsToBattle_Female
 
 VancePhoneCalleeScript:
-	gettrainername STRING_BUFFER_3, $18, $07
-	scall Script_10485c
-	sjump Script_1048f0
+	gettrainername STRING_BUFFER_3, BIRD_KEEPER, VANCE1
+	scall PhoneScript_AnswerPhone_Male
+	sjump Phone_GenericCall_Male
 
 VancePhoneCallerScript:
-	gettrainername STRING_BUFFER_3, $18, $07
-	scall Script_10488e
+	gettrainername STRING_BUFFER_3, BIRD_KEEPER, VANCE1
+	scall PhoneScript_GreetPhone_Male
 	scall PhoneScript_Random2
-	ifequal $00, Script_104766
+	ifequal 0, .WantsBattle
 	scall PhoneScript_Random2
-	ifequal $00, Script_104998
-	sjump Script_1048f0
-Script_104766:
-	getstring STRING_BUFFER_5, Text_104a65
-	setevent $0296
-	sjump Script_104950
+	ifequal 0, Phone_CheckIfUnseenRare_Male
+	sjump Phone_GenericCall_Male
+
+.WantsBattle:
+	getstring STRING_BUFFER_5, PhoneRoute44Text
+	setevent EVENT_VANCE_READY_FOR_REMATCH
+	sjump PhoneScript_WantsToBattle_Male
 
 WiltonPhoneCalleeScript:
-	gettrainername STRING_BUFFER_3, $25, $0a
-	scall Script_10485c
-	sjump Script_1048f0
+	gettrainername STRING_BUFFER_3, FISHER, WILTON1
+	scall PhoneScript_AnswerPhone_Male
+	sjump Phone_GenericCall_Male
 
 WiltonPhoneCallerScript:
-	gettrainername STRING_BUFFER_3, $25, $0a
-	scall Script_10488e
+	gettrainername STRING_BUFFER_3, FISHER, WILTON1
+	scall PhoneScript_GreetPhone_Male
 	scall PhoneScript_Random2
-	ifequal $00, Script_104799
+	ifequal 0, .RemoraidSwarm
 	scall PhoneScript_Random2
-	ifequal $00, Script_1047ae
+	ifequal 0, .WantsBattle
 	scall PhoneScript_Random2
-	ifequal $00, Script_104998
-	sjump Script_1048f0
-Script_104799:
+	ifequal 0, Phone_CheckIfUnseenRare_Male
+	sjump Phone_GenericCall_Male
+
+.RemoraidSwarm:
 	checkflag ENGINE_SWARM
-	iftrue Script_1048f0
-	getmonname STRING_BUFFER_4, $df
-	getstring STRING_BUFFER_5, Text_104a65
+	iftrue Phone_GenericCall_Male
+	getmonname STRING_BUFFER_4, REMORAID
+	getstring STRING_BUFFER_5, PhoneRoute44Text
 	setval FISHSWARM_REMORAID
 	special ActivateFishingSwarm
-	sjump Script_104975
-Script_1047ae:
-	getstring STRING_BUFFER_5, Text_104a65
-	setevent $0298
-	sjump Script_104950
+	sjump PhoneScript_SwarmFish
+
+.WantsBattle:
+	getstring STRING_BUFFER_5, PhoneRoute44Text
+	setevent EVENT_WILTON_READY_FOR_REMATCH
+	sjump PhoneScript_WantsToBattle_Male
 
 KenjiPhoneCalleeScript:
-	gettrainername STRING_BUFFER_3, $32, $08
-	scall Script_10485c
-	sjump Script_1048f0
+	gettrainername STRING_BUFFER_3, BLACKBELT_T, KENJI3
+	scall PhoneScript_AnswerPhone_Male
+	sjump Phone_GenericCall_Male
 
 KenjiPhoneCallerScript:
-	gettrainername STRING_BUFFER_3, $32, $08
-	scall Script_10488e
+	gettrainername STRING_BUFFER_3, BLACKBELT_T, KENJI3
+	scall PhoneScript_GreetPhone_Male
 	scall PhoneScript_Random2
-	ifequal $00, Script_1047da
+	ifequal 0, .WantsBattle
 	scall PhoneScript_Random2
-	ifequal $00, Script_104998
-	sjump Script_1048f0
-Script_1047da:
-	getstring STRING_BUFFER_5, Text_104a6e
-	setevent $029a
-	sjump Script_104950
+	ifequal 0, Phone_CheckIfUnseenRare_Male
+	sjump Phone_GenericCall_Male
+
+.WantsBattle:
+	getstring STRING_BUFFER_5, PhoneRoute45Text
+	setevent EVENT_KENJI_READY_FOR_REMATCH
+	sjump PhoneScript_WantsToBattle_Male
 
 ParryPhoneCalleeScript:
-	gettrainername STRING_BUFFER_3, $2c, $09
-	scall Script_10485c
-	sjump Script_1048f0
+	gettrainername STRING_BUFFER_3, HIKER, PARRY1
+	scall PhoneScript_AnswerPhone_Male
+	sjump Phone_GenericCall_Male
 
 ParryPhoneCallerScript:
-	gettrainername STRING_BUFFER_3, $2c, $09
-	scall Script_10488e
+	gettrainername STRING_BUFFER_3, HIKER, PARRY1
+	scall PhoneScript_GreetPhone_Male
 	scall PhoneScript_Random2
-	ifequal $00, Script_10480d
+	ifequal 0, .MarillSwarm
 	scall PhoneScript_Random2
-	ifequal $00, Script_104820
+	ifequal 0, .WantsBattle
 	scall PhoneScript_Random2
-	ifequal $00, Script_104998
-	sjump Script_1048f0
-Script_10480d:
-	checkflag ENGINE_SWARM
-	iftrue Script_1048f0
-	getmonname STRING_BUFFER_4, MARILL
-	getstring STRING_BUFFER_5, Text_1049dd
-	swarm MOUNT_MORTAR_1F_OUTSIDE
-	sjump Script_10497c
+	ifequal 0, Phone_CheckIfUnseenRare_Male
+	sjump Phone_GenericCall_Male
 
-Script_104820:
-	getstring STRING_BUFFER_5, Text_104a6e
-	setevent $029c
-	sjump Script_104950
+.MarillSwarm:
+	checkflag ENGINE_SWARM
+	iftrue Phone_GenericCall_Male
+	getmonname STRING_BUFFER_4, MARILL
+	getstring STRING_BUFFER_5, PhoneMtMortarText
+	swarm MOUNT_MORTAR_1F_OUTSIDE
+	sjump PhoneScript_SwarmCave
+
+.WantsBattle:
+	getstring STRING_BUFFER_5, PhoneRoute45Text
+	setevent EVENT_PARRY_READY_FOR_REMATCH
+	sjump PhoneScript_WantsToBattle_Male
 
 ErinPhoneCalleeScript:
-	gettrainername STRING_BUFFER_3, $35, $0a
-	scall Script_104875
-	sjump Script_104901
+	gettrainername STRING_BUFFER_3, PICNICKER, ERIN1
+	scall PhoneScript_AnswerPhone_Female
+	sjump Phone_GenericCall_Female
 
 ErinPhoneCallerScript:
-	gettrainername STRING_BUFFER_3, $35, $0a
-	scall Script_1048a7
+	gettrainername STRING_BUFFER_3, PICNICKER, ERIN1
+	scall PhoneScript_GreetPhone_Female
 	scall PhoneScript_Random2
-	ifequal $00, Script_10484c
+	ifequal 0, .WantsBattle
 	scall PhoneScript_Random2
-	ifequal $00, Script_1049a1
-	sjump Script_104901
-Script_10484c:
-	getstring STRING_BUFFER_5, Text_104a77
-	setevent $029e
-	sjump Script_104957
+	ifequal 0, Phone_CheckIfUnseenRare_Female
+	sjump Phone_GenericCall_Female
+
+.WantsBattle:
+	getstring STRING_BUFFER_5, PhoneRoute46Text
+	setevent EVENT_ERIN_READY_FOR_REMATCH
+	sjump PhoneScript_WantsToBattle_Female
 
 PhoneScript_Random2:
 	random 2
@@ -916,301 +685,301 @@ PhoneScript_Random4:
 	random 4
 	end
 
-Script_10485c:
+PhoneScript_AnswerPhone_Male:
 	checktime DAY
-	iftrue Script_10486b
+	iftrue .day
 	checktime NITE
-	iftrue Script_104870
-	writetext Text_105862
+	iftrue .nite
+	writetext PhoneMaleAnswerMornText
 	promptbutton
 	end
 
-Script_10486b:
-	writetext Text_10588a
+.day
+	writetext PhoneMaleAnswerDayText
 	promptbutton
 	end
 
-Script_104870:
-	writetext Text_1058b3
+.nite
+	writetext PhoneMaleAnswerNiteText
 	promptbutton
 	end
 
-Script_104875:
+PhoneScript_AnswerPhone_Female:
 	checktime DAY
-	iftrue Script_104884
+	iftrue .day
 	checktime NITE
-	iftrue Script_104889
-	writetext Text_1058db
+	iftrue .nite
+	writetext PhoneFemaleAnswerMornText
 	promptbutton
 	end
 
-Script_104884:
-	writetext Text_105904
+.day
+	writetext PhoneFemaleAnswerDayText
 	promptbutton
 	end
 
-Script_104889:
-	writetext Text_10592c
+.nite
+	writetext PhoneFemaleAnswerNiteText
 	promptbutton
 	end
 
-Script_10488e:
+PhoneScript_GreetPhone_Male:
 	checktime DAY
-	iftrue Script_10489d
+	iftrue .day
 	checktime NITE
-	iftrue Script_1048a2
-	writetext Text_105955
+	iftrue .nite
+	writetext PhoneMaleGreetMornText
 	promptbutton
 	end
 
-Script_10489d:
-	writetext Text_105989
+.day
+	writetext PhoneMaleGreetDayText
 	promptbutton
 	end
 
-Script_1048a2:
-	writetext Text_1059b5
+.nite
+	writetext PhoneMaleGreetNiteText
 	promptbutton
 	end
 
-Script_1048a7:
+PhoneScript_GreetPhone_Female:
 	checktime DAY
-	iftrue Script_1048b6
+	iftrue .day
 	checktime NITE
-	iftrue Script_1048bb
-	writetext Text_1059e4
+	iftrue .nite
+	writetext PhoneFemaleGreetMornText
 	promptbutton
 	end
 
-Script_1048b6:
-	writetext Text_105a15
+.day
+	writetext PhoneFemaleGreetDayText
 	promptbutton
 	end
 
-Script_1048bb:
-	writetext Text_105a3f
+.nite
+	writetext PhoneFemaleGreetNiteText
 	promptbutton
 	end
 
-Script_1048c0:
+Phone_GenericCall_Huey:
 	special RandomPhoneMon
 	scall PhoneScript_Random2
-	ifequal $00, Script_1048e2
-	writetext Text_105a70
+	ifequal 0, Phone_LookingAwesome_Huey
+	writetext PhoneMaleReallyEnergeticText
 	promptbutton
-	sjump Script_104966
+	sjump PhoneScript_SeeYouLater
 
-Script_1048d1:
+UnusedPhone_GenericCall_Female:
 	special RandomPhoneMon
 	scall PhoneScript_Random2
-	ifequal $00, Script_1048e9
-	writetext Text_105ab5
+	ifequal 0, UnusedPhone_DressedUp_Female
+	writetext PhoneFemaleTopShapeText
 	promptbutton
-	sjump Script_10496a
+	sjump PhoneScript_ByeBye
 
-Script_1048e2:
-	writetext Text_105b0d
+Phone_LookingAwesome_Huey:
+	writetext PhoneMaleLookingAwesomeText
 	promptbutton
-	sjump Script_10496a
+	sjump PhoneScript_ByeBye
 
-Script_1048e9:
-	writetext Text_105b42
+UnusedPhone_DressedUp_Female:
+	writetext PhoneFemaleDressedUpText
 	promptbutton
-	sjump Script_10496a
+	sjump PhoneScript_ByeBye
 
-Script_1048f0:
+Phone_GenericCall_Male:
 	special RandomPhoneMon
 	scall PhoneScript_Random2
-	ifequal $00, Script_104912
-	writetext Text_105a70
+	ifequal 0, Phone_LookingAwesome_Male
+	writetext PhoneMaleReallyEnergeticText
 	promptbutton
-	sjump Script_104920
+	sjump Phone_FoundAMon_Male
 
-Script_104901:
+Phone_GenericCall_Female:
 	special RandomPhoneMon
 	scall PhoneScript_Random2
-	ifequal $00, Script_104919
-	writetext Text_105ab5
+	ifequal 0, Phone_DressedUp_Female
+	writetext PhoneFemaleTopShapeText
 	promptbutton
-	sjump Script_104931
+	sjump Phone_FoundAMon_Female
 
-Script_104912:
-	writetext Text_105b0d
+Phone_LookingAwesome_Male:
+	writetext PhoneMaleLookingAwesomeText
 	promptbutton
-	sjump Script_104920
+	sjump Phone_FoundAMon_Male
 
-Script_104919:
-	writetext Text_105b42
+Phone_DressedUp_Female:
+	writetext PhoneFemaleDressedUpText
 	promptbutton
-	sjump Script_104931
+	sjump Phone_FoundAMon_Female
 
-Script_104920:
+Phone_FoundAMon_Male:
 	special RandomPhoneWildMon
 	scall PhoneScript_Random2
-	ifequal $00, Script_104942
-	writetext Text_105b7b
+	ifequal 0, PhoneScript_AlmostCaught_Male
+	writetext PhoneMaleManagedToBeatText
 	promptbutton
-	sjump Script_104966
+	sjump PhoneScript_SeeYouLater
 
-Script_104931:
+Phone_FoundAMon_Female:
 	special RandomPhoneWildMon
 	scall PhoneScript_Random2
-	ifequal $00, Script_104949
-	writetext Text_105bcb
+	ifequal 0, PhoneScript_MissedCatching_Female
+	writetext PhoneFemaleTypeAdvantageText
 	promptbutton
-	sjump Script_10496a
+	sjump PhoneScript_ByeBye
 
-Script_104942:
-	writetext Text_105c27
+PhoneScript_AlmostCaught_Male:
+	writetext PhoneMaleAlmostCaughtText
 	promptbutton
-	sjump Script_104966
+	sjump PhoneScript_SeeYouLater
 
-Script_104949:
-	writetext Text_105c76
+PhoneScript_MissedCatching_Female:
+	writetext PhoneFemaleMissedCatchingText
 	promptbutton
-	sjump Script_10496a
+	sjump PhoneScript_ByeBye
 
-Script_104950:
-	writetext Text_105cdb
+PhoneScript_WantsToBattle_Male:
+	writetext PhoneMaleWantsToBattleText
 	promptbutton
-	sjump Script_104966
+	sjump PhoneScript_SeeYouLater
 
-Script_104957:
-	writetext Text_105d37
+PhoneScript_WantsToBattle_Female:
+	writetext PhoneFemaleWantsToBattleText
 	promptbutton
-	sjump Script_10496a
+	sjump PhoneScript_ByeBye
 
-Script_10495e:
-	writetext Text_105da0
+Phone_WrongNumber_JoseBrent:
+	writetext PhoneWrongNumberKazText
 	end
 
-Script_104962:
-	writetext Text_105de2
+Phone_WrongNumber_Tiffany:
+	writetext PhoneWrongNumberAudreyText
 	end
 
-Script_104966:
-	writetext Text_105e2e
+PhoneScript_SeeYouLater:
+	writetext PhoneSeeYouLaterText
 	end
 
-Script_10496a:
-	writetext Text_105e3e
+PhoneScript_ByeBye:
+	writetext PhoneByeByeText
 	end
 
-Script_10496e:
-	writetext Text_105e48
+PhoneScript_SwarmGrass:
+	writetext PhoneSwarmGrassText
 	promptbutton
-	sjump Script_104966
+	sjump PhoneScript_SeeYouLater
 
-Script_104975:
-	writetext Text_105e9c
+PhoneScript_SwarmFish:
+	writetext PhoneSwarmFishText
 	promptbutton
-	sjump Script_104966
+	sjump PhoneScript_SeeYouLater
 
-Script_10497c:
-	writetext Text_105efa
+PhoneScript_SwarmCave:
+	writetext PhoneSwarmCaveText
 	promptbutton
-	sjump Script_104966
+	sjump PhoneScript_SeeYouLater
 
-Script_104983:
-	writetext Text_105f50
+PhoneScript_BugCatchingContest:
+	writetext PhoneBugCatchingContestText
 	promptbutton
-	sjump Script_104966
+	sjump PhoneScript_SeeYouLater
 
-Script_10498a:
-	writetext Text_105fa4
+IrwinRocketRumorScript:
+	writetext IrwinRocketTakeoverRumorText
 	promptbutton
-	sjump Script_104966
+	sjump PhoneScript_SeeYouLater
 
-Script_104991:
-	writetext Text_106014
+GinaRocketRumorScript:
+	writetext GinaRocketTakeoverRumorText
 	promptbutton
-	sjump Script_10496a
+	sjump PhoneScript_ByeBye
 
-Script_104998:
-	scall Script_1049aa
-	iffalse Script_104966
-	sjump Script_1048f0
+Phone_CheckIfUnseenRare_Male:
+	scall PhoneScriptRareWildMon
+	iffalse PhoneScript_SeeYouLater
+	sjump Phone_GenericCall_Male
 
-Script_1049a1:
-	scall Script_1049aa
-	iffalse Script_10496a
-	sjump Script_104901
+Phone_CheckIfUnseenRare_Female:
+	scall PhoneScriptRareWildMon
+	iffalse PhoneScript_ByeBye
+	sjump Phone_GenericCall_Female
 
-Script_1049aa:
+PhoneScriptRareWildMon:
 	special RandomUnseenWildMon
 	end
 
-Text_1049ae:
+PhoneNationalParkText:
 	db "NATIONAL PARK@"
 
-Text_1049bc:
+PhoneLighthouseText:
 	db "LIGHTHOUSE@"
 
 ; unreferenced
-Text_1049c7:
+PhoneUndergroundText:
 	db "UNDERGROUND@"
 
-Text_1049d3:
+PhoneDarkCaveText:
 	db "DARK CAVE@"
 
-Text_1049dd:
+PhoneMtMortarText:
 	db "MT.MORTAR@"
 
-Text_1049e7:
+PhoneRoute26Text:
 	db "ROUTE 26@"
 
-Text_1049f0:
+PhoneRoute27Text:
 	db "ROUTE 27@"
 
-Text_1049f9:
+PhoneRoute30Text:
 	db "ROUTE 30@"
 
-Text_104a02:
+PhoneRoute31Text:
 	db "ROUTE 31@"
 
-Text_104a0b:
+PhoneRoute32Text:
 	db "ROUTE 32@"
 
-Text_104a14:
+PhoneRoute33Text:
 	db "ROUTE 33@"
 
-Text_104a1d:
+PhoneRoute34Text:
 	db "ROUTE 34@"
 
-Text_104a26:
+PhoneRoute35Text:
 	db "ROUTE 35@"
 
-Text_104a2f:
+PhoneRoute36Text:
 	db "ROUTE 36@"
 
 ; unreferenced
-Text_104a38:
+PhoneRoute37Text:
 	db "ROUTE 37@"
 
-Text_104a41:
+PhoneRoute38Text:
 	db "ROUTE 38@"
 
-Text_104a4a:
+PhoneRoute39Text:
 	db "ROUTE 39@"
 
-Text_104a53:
+PhoneRoute42Text:
 	db "ROUTE 42@"
 
-Text_104a5c:
+PhoneRoute43Text:
 	db "ROUTE 43@"
 
-Text_104a65:
+PhoneRoute44Text:
 	db "ROUTE 44@"
 
-Text_104a6e:
+PhoneRoute45Text:
 	db "ROUTE 45@"
 
-Text_104a77:
+PhoneRoute46Text:
 	db "ROUTE 46@"
 
 BikeShopPhoneCallerScript:
-	writetext Text_10608d
-	clearflag $0013
+	writetext BikeShopPhoneCallerText
+	clearflag ENGINE_BIKE_SHOP_CALL_ENABLED
 	specialphonecall SPECIALCALL_NONE
 	end
 
@@ -1385,7 +1154,7 @@ MomPhoneLectureText:
 	line "Should I save it?"
 	done
 
-Text_104ec4:
+BillPhoneMornGreetingText:
 	text "Good morning!"
 
 	para "This is the #-"
@@ -1395,7 +1164,7 @@ Text_104ec4:
 	line "SERVICE."
 	done
 
-Text_104f0d:
+BillPhoneDayGreetingText:
 	text "Good day!"
 
 	para "This is the #-"
@@ -1405,7 +1174,7 @@ Text_104f0d:
 	line "SERVICE."
 	done
 
-Text_104f52:
+BillPhoneNiteGreetingText:
 	text "Good evening!"
 
 	para "This is the #-"
@@ -1415,7 +1184,7 @@ Text_104f52:
 	line "SERVICE."
 	done
 
-Text_104f9b:
+BillPhoneGenericText:
 	text "Who's calling?"
 
 	para "<PLAYER>, is it?"
@@ -1425,7 +1194,7 @@ Text_104f9b:
 	line "<……>"
 	done
 
-Text_104fc7:
+BillPhoneNotFullText:
 	text "Thanks for"
 	line "waiting!"
 
@@ -1439,7 +1208,7 @@ Text_104fc7:
 	line "fill it up!"
 	done
 
-Text_105024:
+BillPhoneNearlyFullText:
 	text "Thanks for"
 	line "waiting!"
 
@@ -1453,7 +1222,7 @@ Text_105024:
 	line "switch your BOX."
 	done
 
-Text_10508a:
+BillPhoneFullText:
 	text "Thanks for"
 	line "waiting!"
 
@@ -1467,7 +1236,7 @@ Text_10508a:
 	line "more #MON."
 	done
 
-Text_1050ef:
+BillPhoneNewlyFullText:
 	text "Hi, <PLAYER>?"
 	line "It's me, BILL!"
 
@@ -1487,7 +1256,7 @@ Text_1050ef:
 	para "Bye now!"
 	done
 
-Text_105199:
+ElmPhoneHealYourMonText:
 	text "Hello, <PLAYER>?"
 
 	para "Try not to overdo"
@@ -1498,7 +1267,7 @@ Text_105199:
 	cont "they are hurt."
 	done
 
-Text_1051e6:
+ElmPhoneSawMrPokemonText:
 	text "Hello, <PLAYER>?"
 
 	para "Did you meet MR."
@@ -1506,7 +1275,7 @@ Text_1051e6:
 	cont "Come back safely!"
 	done
 
-Text_105221:
+ElmPhonePokemonStolenText:
 	text "<PLAYER>? I'm very"
 	line "upset now."
 
@@ -1517,7 +1286,7 @@ Text_105221:
 	line "do that?"
 	done
 
-Text_105272:
+ElmPhoneCheckingTheEggText:
 	text "Hello, <PLAYER>?"
 
 	para "We're checking the"
@@ -1527,7 +1296,7 @@ Text_105272:
 	line "#MON EGG."
 	done
 
-Text_1052b9:
+ElmPhoneAssistantText:
 	text "Hello, <PLAYER>?"
 
 	para "Did you see my"
@@ -1537,7 +1306,7 @@ Text_1052b9:
 	line "in VIOLET CITY."
 	done
 
-Text_105305:
+ElmPhoneHowIsTheEggText:
 	text "Hello, <PLAYER>?"
 
 	para "How's the EGG? Has"
@@ -1547,7 +1316,7 @@ Text_105305:
 	line "pens, please call."
 	done
 
-Text_105358:
+ElmPhoneEggHatchedText:
 	text "Hello, <PLAYER>?"
 	line "How is the EGG?"
 
@@ -1559,7 +1328,7 @@ Text_105358:
 	line "me now!"
 	done
 
-Text_1053bc:
+ElmPhoneDiscoveredHatchTimeText:
 	text "Hello, <PLAYER>?"
 
 	para "I just made a new"
@@ -1572,7 +1341,7 @@ Text_1053bc:
 	line "the #MON."
 	done
 
-Text_10541f:
+ElmPhoneInvestigatingEggMovesText:
 	text "Hello, <PLAYER>?"
 
 	para "It's still a"
@@ -1585,7 +1354,7 @@ Text_10541f:
 	line "ing that now."
 	done
 
-Text_105484:
+ElmPhoneDiscoveredPokerusText:
 	text "Hello, <PLAYER>?"
 
 	para "I discovered an"
@@ -1618,7 +1387,7 @@ Text_105484:
 	cont "about. Bye!"
 	done
 
-Text_1055b4:
+ElmPhoneDisasterText:
 	text "H-hello? <PLAYER>?"
 	line "It's a disaster!"
 
@@ -1632,7 +1401,7 @@ Text_1055b4:
 	line "here now!"
 	done
 
-Text_105624:
+ElmPhoneEggAssistantText:
 	text "Hello, <PLAYER>? We"
 	line "discovered some-"
 
@@ -1647,7 +1416,7 @@ Text_105624:
 	cont "him?"
 	done
 
-Text_1056a3:
+ElmPhoneRadioTowerRocketTakeoverText:
 	text "<PLAYER>, how are"
 	line "things going?"
 
@@ -1674,7 +1443,7 @@ Text_1056a3:
 	line "Take care!"
 	done
 
-Text_1057a6:
+ElmPhoneGiftText:
 	text "Hello, <PLAYER>?"
 
 	para "I have something"
@@ -1686,7 +1455,7 @@ Text_1057a6:
 	para "See you later!"
 	done
 
-Text_1057fa:
+ElmPhoneGotAholdOfSomethingNeatText:
 	text "Hello, <PLAYER>?"
 	line "How's it going?"
 
@@ -1699,7 +1468,7 @@ Text_1057fa:
 	para "See you later!"
 	done
 
-Text_105862:
+PhoneMaleAnswerMornText:
 	text "Hello. This is"
 	line "@"
 	text_ram wStringBuffer3
@@ -1709,7 +1478,7 @@ Text_105862:
 	line "<PLAYER>!"
 	done
 
-Text_10588a:
+PhoneMaleAnswerDayText:
 	text "Hello. This is"
 	line "@"
 	text_ram wStringBuffer3
@@ -1719,7 +1488,7 @@ Text_10588a:
 	line "<PLAYER>?"
 	done
 
-Text_1058b3:
+PhoneMaleAnswerNiteText:
 	text "Hello. This is"
 	line "@"
 	text_ram wStringBuffer3
@@ -1729,7 +1498,7 @@ Text_1058b3:
 	line "<PLAYER>!"
 	done
 
-Text_1058db:
+PhoneFemaleAnswerMornText:
 	text "Hi. This is"
 	line "@"
 	text_ram wStringBuffer3
@@ -1739,7 +1508,7 @@ Text_1058db:
 	line "Good morning."
 	done
 
-Text_105904:
+PhoneFemaleAnswerDayText:
 	text "Hi. This is"
 	line "@"
 	text_ram wStringBuffer3
@@ -1749,7 +1518,7 @@ Text_105904:
 	line "How are you?"
 	done
 
-Text_10592c:
+PhoneFemaleAnswerNiteText:
 	text "Hi. This is"
 	line "@"
 	text_ram wStringBuffer3
@@ -1759,7 +1528,7 @@ Text_10592c:
 	line "Good evening."
 	done
 
-Text_105955:
+PhoneMaleGreetMornText:
 	text "<PLAYER>, good"
 	line "morning!"
 
@@ -1769,7 +1538,7 @@ Text_105955:
 	line "How are you doing?"
 	done
 
-Text_105989:
+PhoneMaleGreetDayText:
 	text "<PLAYER>, howdy!"
 
 	para "It's me, @"
@@ -1778,7 +1547,7 @@ Text_105989:
 	line "Isn't it nice out?"
 	done
 
-Text_1059b5:
+PhoneMaleGreetNiteText:
 	text "<PLAYER>, good"
 	line "evening!"
 
@@ -1788,7 +1557,7 @@ Text_1059b5:
 	line "Got a minute?"
 	done
 
-Text_1059e4:
+PhoneFemaleGreetMornText:
 	text "Good morning,"
 	line "<PLAYER>."
 
@@ -1798,7 +1567,7 @@ Text_1059e4:
 	line "Did I wake you?"
 	done
 
-Text_105a15:
+PhoneFemaleGreetDayText:
 	text "Hello, <PLAYER>."
 
 	para "This is @"
@@ -1807,7 +1576,7 @@ Text_105a15:
 	line "How are things?"
 	done
 
-Text_105a3f:
+PhoneFemaleGreetNiteText:
 	text "Good evening,"
 	line "<PLAYER>."
 
@@ -1817,7 +1586,7 @@ Text_105a3f:
 	line "Were you awake?"
 	done
 
-Text_105a70:
+PhoneMaleReallyEnergeticText:
 	text "How are your"
 	line "#MON doing?"
 
@@ -1828,7 +1597,7 @@ Text_105a70:
 	cont "It's a handful!"
 	done
 
-Text_105ab5:
+PhoneFemaleTopShapeText:
 	text "How are your"
 	line "#MON doing?"
 
@@ -1841,7 +1610,7 @@ Text_105ab5:
 	line "#MON CENTERS."
 	done
 
-Text_105b0d:
+PhoneMaleLookingAwesomeText:
 	text "My @"
 	text_ram wStringBuffer4
 	text "'s"
@@ -1851,7 +1620,7 @@ Text_105b0d:
 	line "show you."
 	done
 
-Text_105b42:
+PhoneFemaleDressedUpText:
 	text "I dressed up my"
 	line "@"
 	text_ram wStringBuffer4
@@ -1861,7 +1630,7 @@ Text_105b42:
 	line "cuter than before."
 	done
 
-Text_105b7b:
+PhoneMaleManagedToBeatText:
 	text "Oh, yeah, I man-"
 	line "aged to beat a"
 	cont "tough @"
@@ -1872,7 +1641,7 @@ Text_105b7b:
 	line "party stronger."
 	done
 
-Text_105bcb:
+PhoneFemaleTypeAdvantageText:
 	text "You have to hear"
 	line "this! I battled"
 
@@ -1885,7 +1654,7 @@ Text_105bcb:
 	line "a type advantage."
 	done
 
-Text_105c27:
+PhoneMaleAlmostCaughtText:
 	text "Hey, listen!"
 	line "I almost caught"
 
@@ -1898,7 +1667,7 @@ Text_105c27:
 	line "close too!"
 	done
 
-Text_105c76:
+PhoneFemaleMissedCatchingText:
 	text "Guess what happen-"
 	line "ed the other day."
 
@@ -1911,7 +1680,7 @@ Text_105c76:
 	line "good at this…"
 	done
 
-Text_105cdb:
+PhoneMaleWantsToBattleText:
 	text "Want to battle?"
 	line "It's not going to"
 
@@ -1924,7 +1693,7 @@ Text_105cdb:
 	text "."
 	done
 
-Text_105d37:
+PhoneFemaleWantsToBattleText:
 	text "Do you want to"
 	line "battle? I'm going"
 	cont "to win this time!"
@@ -1938,7 +1707,7 @@ Text_105d37:
 	line "Look for me, OK?"
 	done
 
-Text_105da0:
+PhoneWrongNumberKazText:
 	text "Hello? This is"
 	line "@"
 	text_ram wStringBuffer3
@@ -1949,7 +1718,7 @@ Text_105da0:
 	cont "number."
 	done
 
-Text_105de2:
+PhoneWrongNumberAudreyText:
 	text "Hello, this is"
 	line "@"
 	text_ram wStringBuffer3
@@ -1960,15 +1729,15 @@ Text_105de2:
 	line "Oops! My mistake!"
 	done
 
-Text_105e2e:
+PhoneSeeYouLaterText:
 	text "See you later!"
 	done
 
-Text_105e3e:
+PhoneByeByeText:
 	text "Bye-bye!"
 	done
 
-Text_105e48:
+PhoneSwarmGrassText:
 	text "You have to see"
 	line "this! It's wild!"
 
@@ -1983,7 +1752,7 @@ Text_105e48:
 	text "!"
 	done
 
-Text_105e9c:
+PhoneSwarmFishText:
 	text "It's amazing!"
 
 	para "On @"
@@ -2000,7 +1769,7 @@ Text_105e9c:
 	line "your ROD, buddy!"
 	done
 
-Text_105efa:
+PhoneSwarmCaveText:
 	text "A friend just told"
 	line "me this."
 
@@ -2016,7 +1785,7 @@ Text_105efa:
 	line "to go look."
 	done
 
-Text_105f50:
+PhoneBugCatchingContestText:
 	text "They're holding"
 	line "the Bug-Catching"
 
@@ -2027,7 +1796,7 @@ Text_105f50:
 	line "going to go?"
 	done
 
-Text_105fa4:
+IrwinRocketTakeoverRumorText:
 	text "<PLAYER>, did you"
 	line "know?"
 
@@ -2041,7 +1810,7 @@ Text_105fa4:
 	line "is TEAM ROCKET?"
 	done
 
-Text_106014:
+GinaRocketTakeoverRumorText:
 	text "<PLAYER>, did you"
 	line "hear the news?"
 
@@ -2055,7 +1824,7 @@ Text_106014:
 	line "workers are OK…"
 	done
 
-Text_10608d:
+BikeShopPhoneCallerText:
 	text "Hi, <PLAYER>!"
 	line "Our BICYCLE sales"
 
@@ -2074,4 +1843,3 @@ Text_10608d:
 	para "keep that BICYCLE."
 	line "Thanks again!"
 	done
-

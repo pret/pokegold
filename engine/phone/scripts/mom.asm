@@ -1,0 +1,150 @@
+MomPhoneCalleeScript:
+	checkevent EVENT_TALKED_TO_MOM_AFTER_MYSTERY_EGG_QUEST
+	iftrue .script_10401f
+	checkevent EVENT_DUDE_TALKED_TO_YOU
+	iftrue MomPhoneLectureScript
+	checkevent EVENT_GAVE_MYSTERY_EGG_TO_ELM
+	iftrue MomPhoneNoGymQuestScript
+	checkevent EVENT_GOT_A_POKEMON_FROM_ELM
+	iftrue MomPhoneNoPokedexScript
+	sjump MomPhoneNoPokemonScript
+
+.script_10401f
+	checkevent EVENT_TEMPORARY_UNTIL_MAP_RELOAD_8
+	iftrue MomPhoneHangUpScript
+	writetext MomPhoneGreetingText
+	promptbutton
+	getcurlandmarkname STRING_BUFFER_3
+	readvar VAR_ROOFPALETTE
+	ifequal 1, MomPhonePalette1
+	ifequal 2, MomPhonePalette2
+	sjump MomPhoneOther
+
+MomPhoneLandmark:
+	writetext MomPhoneLandmarkText
+	promptbutton
+	sjump MomSavingMoney
+
+MomPhonePalette1:
+	readvar VAR_MAPGROUP
+	ifequal GROUP_NEW_BARK_TOWN, .newbark
+	ifequal GROUP_CHERRYGROVE_CITY, .cherrygrove
+	ifequal GROUP_VIOLET_CITY, .violet
+	ifequal GROUP_AZALEA_TOWN, .azalea
+	ifequal GROUP_GOLDENROD_CITY, .goldenrod
+	writetext MomPhoneGenericAreaText
+	promptbutton
+	sjump MomSavingMoney
+
+.newbark
+	writetext MomPhoneNewBarkText
+	promptbutton
+	sjump MomSavingMoney
+
+.cherrygrove
+	writetext MomPhoneCherrygroveText
+	promptbutton
+	sjump MomSavingMoney
+
+.violet
+	getstring STRING_BUFFER_4, .text_sprout_tower
+	sjump MomPhoneLandmark
+.text_sprout_tower
+	db "SPROUT TOWER@"
+
+.azalea
+	getstring STRING_BUFFER_4, .text_slowpoke_well
+	sjump MomPhoneLandmark
+.text_slowpoke_well
+	db "SLOWPOKE WELL@"
+
+.goldenrod
+	getstring STRING_BUFFER_4, .text_radio_tower
+	sjump MomPhoneLandmark
+.text_radio_tower
+	db "RADIO TOWER@"
+
+MomPhonePalette2:
+	writetext MomOtherAreaText
+	promptbutton
+	sjump MomSavingMoney
+
+MomPhoneOther:
+	writetext MomDeterminedText
+	promptbutton
+	sjump MomSavingMoney
+
+MomSavingMoney:
+	checkflag ENGINE_MOM_SAVING_MONEY
+	iffalse .NotSaving
+	checkmoney MOMS_MONEY, 0
+	ifequal HAVE_MORE, .SavingHasMoney
+	sjump .SavingNoMoney
+
+.NotSaving:
+	checkmoney MOMS_MONEY, 0
+	ifequal HAVE_MORE, .HasMoney
+	sjump .NoMoney
+
+.SavingHasMoney:
+	getmoney STRING_BUFFER_3, MOMS_MONEY
+	writetext MomCheckBalanceText
+	yesorno
+	iftrue MomPhoneSaveMoneyScript
+	sjump MomPhoneWontSaveMoneyScript
+
+.SavingNoMoney:
+	writetext MomImportantToSaveText
+	yesorno
+	iftrue MomPhoneSaveMoneyScript
+	sjump MomPhoneWontSaveMoneyScript
+
+.NoMoney:
+	writetext MomYoureNotSavingText
+	yesorno
+	iftrue MomPhoneSaveMoneyScript
+	sjump MomPhoneWontSaveMoneyScript
+
+.HasMoney:
+	getmoney STRING_BUFFER_3, MOMS_MONEY
+	writetext MomYouveSavedText
+	yesorno
+	iftrue MomPhoneSaveMoneyScript
+	sjump MomPhoneWontSaveMoneyScript
+
+MomPhoneSaveMoneyScript:
+	setflag ENGINE_MOM_SAVING_MONEY
+	writetext MomOKIllSaveText
+	promptbutton
+	sjump MomPhoneHangUpScript
+
+MomPhoneWontSaveMoneyScript:
+	clearflag ENGINE_MOM_SAVING_MONEY
+	writetext MomPhoneWontSaveMoneyText
+	promptbutton
+	sjump MomPhoneHangUpScript
+
+MomPhoneHangUpScript:
+	writetext MomPhoneHangUpText
+	end
+
+MomPhoneNoPokemonScript:
+	writetext MomPhoneNoPokemonText
+	end
+
+MomPhoneNoPokedexScript:
+	writetext MomPhoneNoPokedexText
+	end
+
+MomPhoneNoGymQuestScript:
+	writetext MomPhoneNoGymQuestText
+	end
+
+MomPhoneLectureScript:
+	setevent EVENT_TALKED_TO_MOM_AFTER_MYSTERY_EGG_QUEST
+	setflag ENGINE_MOM_ACTIVE
+	specialphonecall SPECIALCALL_NONE
+	writetext MomPhoneLectureText
+	yesorno
+	iftrue MomPhoneSaveMoneyScript
+	sjump MomPhoneWontSaveMoneyScript
