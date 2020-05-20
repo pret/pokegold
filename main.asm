@@ -346,16 +346,17 @@ INCLUDE "engine/pokemon/evolve.asm"
 
 SECTION "bank11", ROMX
 
-FruitTreeScript::
-	dr $44000, $440c8
+INCLUDE "engine/events/fruit_trees.asm"
 INCLUDE "engine/battle/ai/move.asm"
 INCLUDE "engine/pokedex/pokedex_2.asm"
+
 PlayBattleMusic::
 	dr $44556, $445f2
 ClearBattleRAM::
 	dr $445f2, $44648
 PlaceGraphic::
 	dr $44648, $44679
+
 SendMailToPC::
 	dr $44679, $4475f
 CheckPokeMail::
