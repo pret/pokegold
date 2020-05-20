@@ -91,26 +91,26 @@ MomSavingMoney:
 	writetext MomCheckBalanceText
 	yesorno
 	iftrue MomPhoneSaveMoneyScript
-	sjump MomPhoneWontSaveMoneyScript
+	sjump MomPhoneStopSavingMoneyScript
 
 .SavingNoMoney:
 	writetext MomImportantToSaveText
 	yesorno
 	iftrue MomPhoneSaveMoneyScript
-	sjump MomPhoneWontSaveMoneyScript
+	sjump MomPhoneStopSavingMoneyScript
 
 .NoMoney:
 	writetext MomYoureNotSavingText
 	yesorno
 	iftrue MomPhoneSaveMoneyScript
-	sjump MomPhoneWontSaveMoneyScript
+	sjump MomPhoneStopSavingMoneyScript
 
 .HasMoney:
 	getmoney STRING_BUFFER_3, MOMS_MONEY
 	writetext MomYouveSavedText
 	yesorno
 	iftrue MomPhoneSaveMoneyScript
-	sjump MomPhoneWontSaveMoneyScript
+	sjump MomPhoneStopSavingMoneyScript
 
 MomPhoneSaveMoneyScript:
 	setflag ENGINE_MOM_SAVING_MONEY
@@ -118,9 +118,9 @@ MomPhoneSaveMoneyScript:
 	promptbutton
 	sjump MomPhoneHangUpScript
 
-MomPhoneWontSaveMoneyScript:
+MomPhoneStopSavingMoneyScript:
 	clearflag ENGINE_MOM_SAVING_MONEY
-	writetext MomPhoneWontSaveMoneyText
+	writetext MomPhoneStopSavingMoneyText
 	promptbutton
 	sjump MomPhoneHangUpScript
 
@@ -147,4 +147,4 @@ MomPhoneLectureScript:
 	writetext MomPhoneLectureText
 	yesorno
 	iftrue MomPhoneSaveMoneyScript
-	sjump MomPhoneWontSaveMoneyScript
+	sjump MomPhoneStopSavingMoneyScript

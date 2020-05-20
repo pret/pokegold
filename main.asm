@@ -903,9 +903,20 @@ StdScripts::
 INCLUDE "data/text/battle.asm"
 
 
-SECTION "bank41", ROMX
+SECTION "Phone Scripts", ROMX
 
-INCLUDE "engine/phone/scripts.asm"
+INCLUDE "engine/phone/scripts/unused.asm"
+INCLUDE "engine/phone/scripts/mom.asm"
+INCLUDE "engine/phone/scripts/bill.asm"
+INCLUDE "engine/phone/scripts/elm.asm"
+INCLUDE "engine/phone/scripts/trainers.asm"
+INCLUDE "engine/phone/scripts/bike_shop.asm"
+INCLUDE "data/phone/text/unused.asm"
+INCLUDE "data/phone/text/mom.asm"
+INCLUDE "data/phone/text/bill.asm"
+INCLUDE "data/phone/text/elm.asm"
+INCLUDE "data/phone/text/trainers.asm"
+INCLUDE "data/phone/text/bike_shop.asm"
 
 
 SECTION "Names", ROMX
