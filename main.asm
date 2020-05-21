@@ -108,7 +108,7 @@ TilesetKantoColl::
 	dr $18800, $18a00
 Tileset0GFX::
 TilesetJohtoGFX::
-	dr $18a00, $19006
+INCBIN "gfx/tilesets/johto.2bpp.lz"
 
 Tileset0Meta::
 TilesetJohtoMeta::
@@ -117,7 +117,7 @@ Tileset0Coll::
 TilesetJohtoColl::
 	dr $19806, $19a06
 TilesetJohtoModernGFX::
-	dr $19a06, $1a00c
+INCBIN "gfx/tilesets/johto_modern.2bpp.lz"
 
 TilesetJohtoModernMeta::
 INCBIN "data/tilesets/johto_modern_metatiles.bin"
@@ -125,7 +125,7 @@ TilesetJohtoModernColl::
 	dr $1a80c, $1b40c
 
 TilesetTraditionalHouseGFX::
-	dr $1b40c, $1b8bc
+INCBIN "gfx/tilesets/traditional_house.2bpp.lz"
 TilesetTraditionalHouseMeta::
 INCBIN "data/tilesets/traditional_house_metatiles.bin"
 TilesetTraditionalHouseColl::
@@ -137,26 +137,26 @@ SECTION "bank7", ROMX
 LoadMapGroupRoof::
 	dr $1c000, $1c30c
 TilesetGateGFX::
-	dr $1c30c, $1c70c
+INCBIN "gfx/tilesets/gate.2bpp.lz"
 TilesetGateMeta::
 INCBIN "data/tilesets/gate_metatiles.bin"
 TilesetGateColl::
 	dr $1cb0c, $1cc0c
 TilesetPokecenterGFX::
-	dr $1cc0c, $1d03c
+INCBIN "gfx/tilesets/pokecenter.2bpp.lz"
 
 TilesetPokecenterMeta::
 INCBIN "data/tilesets/pokecenter_metatiles.bin"
 TilesetPokecenterColl::
 	dr $1d43c, $1d53c
 TilesetPortGFX::
-	dr $1d53c, $1d94c
+INCBIN "gfx/tilesets/port.2bpp.lz"
 TilesetPortMeta::
 INCBIN "data/tilesets/port_metatiles.bin"
 TilesetPortColl::
 	dr $1dd4c, $1de4c
 TilesetPlayersHouseGFX::
-	dr $1de4c, $1e22c
+INCBIN "gfx/tilesets/players_house.2bpp.lz"
 
 TilesetPlayersHouseMeta::
 INCBIN "data/tilesets/players_house_metatiles.bin"
@@ -169,7 +169,7 @@ INCBIN "data/tilesets/mansion_metatiles.bin"
 TilesetMansionColl::
 	dr $1eebc, $1efbc
 TilesetCaveGFX::
-	dr $1efbc, $1f34c
+INCBIN "gfx/tilesets/cave.2bpp.lz"
 
 TilesetCaveMeta::
 TilesetDarkCaveMeta::
@@ -185,40 +185,41 @@ RestartClock_GetWraparoundTime::
 	dr $20000, $20021
 RestartClock::
 	dr $20021, $20181
+
 TilesetTowerGFX::
-	dr $20181, $205b1
+INCBIN "gfx/tilesets/tower.2bpp.lz"
 TilesetTowerMeta::
 INCBIN "data/tilesets/tower_metatiles.bin"
 TilesetTowerColl::
 	dr $209b1, $20ab1
 TilesetLabGFX::
-	dr $20ab1, $20e81
+INCBIN "gfx/tilesets/lab.2bpp.lz"
 TilesetLabMeta::
 INCBIN "data/tilesets/lab_metatiles.bin"
 
 TilesetLabColl::
 	dr $21281, $21381
 TilesetFacilityGFX::
-	dr $21381, $217a1
+INCBIN "gfx/tilesets/facility.2bpp.lz"
 TilesetFacilityMeta::
 INCBIN "data/tilesets/facility_metatiles.bin"
 TilesetFacilityColl::
 	dr $21ba1, $21ca1
 TilesetMartGFX::
-	dr $21ca1, $22051
+INCBIN "gfx/tilesets/mart.2bpp.lz"
 
 TilesetMartMeta::
 INCBIN "data/tilesets/mart_metatiles.bin"
 TilesetMartColl::
 	dr $22451, $22551
 TilesetGameCornerGFX::
-	dr $22551, $22951
+INCBIN "gfx/tilesets/game_corner.2bpp.lz"
 TilesetGameCornerMeta::
 INCBIN "data/tilesets/game_corner_metatiles.bin"
 TilesetGameCornerColl::
 	dr $22d51, $22e51
 TilesetTrainStationGFX::
-	dr $22e51, $231f1
+INCBIN "gfx/tilesets/train_station.2bpp.lz"
 
 TilesetTrainStationMeta::
 INCBIN "data/tilesets/train_station_metatiles.bin"
@@ -226,6 +227,7 @@ TilesetTrainStationColl::
 	dr $235f1, $236f1
 TilesetForestMeta::
 INCBIN "data/tilesets/forest_metatiles.bin"
+
 CatchTutorial::
 	dr $23971, $239fe
 
@@ -274,48 +276,48 @@ INCLUDE "engine/events/pokerus/pokerus.asm"
 SECTION "bankC", ROMX
 
 TilesetEliteFourRoomGFX::
-	dr $30000, $304e0
+INCBIN "gfx/tilesets/elite_four_room.2bpp.lz"
 TilesetEliteFourRoomMeta::
 INCBIN "data/tilesets/elite_four_room_metatiles.bin"
 TilesetEliteFourRoomColl::
 	dr $308e0, $309e0
 TilesetParkGFX::
-	dr $309e0, $30e40
+INCBIN "gfx/tilesets/park.2bpp.lz"
 TilesetParkMeta::
 INCBIN "data/tilesets/park_metatiles.bin"
 
 TilesetParkColl::
 	dr $31240, $31340
 TilesetRuinsOfAlphGFX::
-	dr $31340, $31670
+INCBIN "gfx/tilesets/ruins_of_alph.2bpp.lz"
 TilesetRuinsOfAlphMeta::
 INCBIN "data/tilesets/ruins_of_alph_metatiles.bin"
 TilesetRuinsOfAlphColl::
 	dr $31a70, $31b70
 TilesetRadioTowerGFX::
-	dr $31b70, $31fc0
+INCBIN "gfx/tilesets/radio_tower.2bpp.lz"
 TilesetRadioTowerMeta::
 INCBIN "data/tilesets/radio_tower_metatiles.bin"
 
 TilesetRadioTowerColl::
 	dr $323c0, $324c0
 TilesetUndergroundGFX::
-	dr $324c0, $32890
+INCBIN "gfx/tilesets/underground.2bpp.lz"
 TilesetUndergroundMeta::
 INCBIN "data/tilesets/underground_metatiles.bin"
 TilesetUndergroundColl::
 	dr $32c90, $32d90
 TilesetIcePathGFX::
-	dr $32d90, $331d0
+INCBIN "gfx/tilesets/ice_path.2bpp.lz"
 
 TilesetIcePathMeta::
 INCBIN "data/tilesets/ice_path_metatiles.bin"
 TilesetIcePathColl::
 	dr $335d0, $336d0
 TilesetDarkCaveGFX::
-	dr $336d0, $33a10
+INCBIN "gfx/tilesets/dark_cave.2bpp.lz"
 TilesetForestGFX::
-	dr $33a10, $33d81
+INCBIN "gfx/tilesets/forest.2bpp.lz"
 
 
 SECTION "Effect Commands", ROMX
@@ -657,25 +659,25 @@ INCBIN "gfx/font/font_inversed.1bpp"
 SECTION "bank37_2", ROMX
 
 TilesetChampionsRoomGFX::
-	dr $dd773, $ddc33
+INCBIN "gfx/tilesets/champions_room.2bpp.lz"
 TilesetChampionsRoomMeta::
 INCBIN "data/tilesets/champions_room_metatiles.bin"
 TilesetChampionsRoomColl::
 	dr $de033, $de133
 TilesetHouseGFX::
-	dr $de133, $de5d3
+INCBIN "gfx/tilesets/house.2bpp.lz"
 TilesetHouseMeta::
 INCBIN "data/tilesets/house_metatiles.bin"
 TilesetHouseColl::
 	dr $de9d3, $dead3
 TilesetLighthouseGFX::
-	dr $dead3, $deed3
+INCBIN "gfx/tilesets/lighthouse.2bpp.lz"
 TilesetLighthouseMeta::
 INCBIN "data/tilesets/lighthouse_metatiles.bin"
 TilesetLighthouseColl::
 	dr $df2d3, $df3d3
 TilesetPlayersRoomGFX::
-	dr $df3d3, $df893
+INCBIN "gfx/tilesets/players_room.2bpp.lz"
 TilesetPlayersRoomMeta::
 INCBIN "data/tilesets/players_room_metatiles.bin"
 TilesetPlayersRoomColl::
@@ -1039,7 +1041,9 @@ SECTION "bank70", ROMX
 PrintPage1::
 	dr $1c0000, $1c0407
 TilesetKantoGFX::
-	dr $1c0407, $1c0a1f
+INCBIN "gfx/tilesets/kanto.2bpp.lz"
+Unreferenced_Function1c0a0d:
+	dr $1c0a0d, $1c0a1f
 PrintHoursMins::
 	dr $1c0a1f, $1c0a66
 UpdateTimePredef::
