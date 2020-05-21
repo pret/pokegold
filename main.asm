@@ -365,9 +365,8 @@ INCLUDE "engine/events/squirtbottle.asm"
 INCLUDE "engine/events/card_key.asm"
 INCLUDE "engine/events/basement_key.asm"
 INCLUDE "engine/events/sacred_ash.asm"
+INCLUDE "engine/pokemon/tempmon.asm"
 
-CopyMonToTempMon::
-	dr $5087d, $50940
 PrintMonTypes::
 	dr $50940, $5096d
 PrintMoveType::
@@ -376,6 +375,7 @@ PrintType::
 	dr $50986, $50997
 GetTypeName::
 	dr $50997, $50b3d
+
 DrawPlayerHP::
 	dr $50b3d, $50b41
 DrawEnemyHP::
