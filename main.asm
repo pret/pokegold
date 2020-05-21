@@ -356,26 +356,9 @@ INCLUDE "engine/pokemon/mail.asm"
 
 SECTION "bank14", ROMX
 
-SelectMonFromParty::
-	dr $50000, $5001d
-SelectTradeOrDayCareMon::
-	dr $5001d, $5004f
-LoadPartyMenuGFX::
-	dr $5004f, $5005f
-WritePartyMenuTilemap::
-	dr $5005f, $50355
-InitPartyMenuGFX::
-	dr $50355, $5037a
-InitPartyMenuWithCancel::
-	dr $5037a, $503a2
-InitPartyMenuNoCancel::
-	dr $503a2, $503cc
-PartyMenuSelect::
-	dr $503cc, $5040f
-PrintPartyMenuText::
-	dr $5040f, $504db
-PrintPartyMenuActionText::
-	dr $504db, $5054f
+
+INCLUDE "engine/pokemon/party_menu.asm"
+
 LoadFishingGFX::
 	dr $5054f, $50610
 DoPoisonStep::
@@ -414,7 +397,9 @@ GetGender::
 ListMovePP::
 	dr $51364, $513e4
 Unused_PlaceEnemyHPLevel::
-	dr $513e4, $51437
+	dr $513e4, $51413
+PlaceStatusString::
+	dr $51413, $51437
 PlaceNonFaintStatus::
 	dr $51437, $51478
 ListMoves::
