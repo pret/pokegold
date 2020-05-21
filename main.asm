@@ -367,9 +367,7 @@ INCLUDE "engine/events/basement_key.asm"
 INCLUDE "engine/events/sacred_ash.asm"
 INCLUDE "engine/pokemon/tempmon.asm"
 INCLUDE "engine/pokemon/types.asm"
-
-unk_014_4a5b:
-	dr $50a5b, $50b3d
+INCLUDE "engine/battle/unreferenced_getgen1trainerclassname.asm"
 
 DrawPlayerHP::
 	dr $50b3d, $50b41
