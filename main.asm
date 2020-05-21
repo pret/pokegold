@@ -357,22 +357,7 @@ ClearBattleRAM::
 PlaceGraphic::
 	dr $44648, $44679
 
-SendMailToPC::
-	dr $44679, $4475f
-CheckPokeMail::
-	dr $4475f, $447d7
-GivePokeMail::
-	dr $447d7, $44830
-BackupPartyMonMail::
-	dr $44830, $44850
-RestorePartyMonMail::
-	dr $44850, $44870
-DeletePartyMonMail::
-	dr $44870, $4488c
-IsAnyMonHoldingMail::
-	dr $4488c, $448ab
-_PlayerMailBoxMenu::
-	dr $448ab, $44aa2
+INCLUDE "engine/pokemon/mail.asm"
 
 
 SECTION "bank14", ROMX
