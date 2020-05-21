@@ -362,13 +362,12 @@ INCLUDE "engine/events/fishing_gfx.asm"
 INCLUDE "engine/events/poisonstep.asm"
 INCLUDE "engine/events/sweet_scent.asm"
 INCLUDE "engine/events/squirtbottle.asm"
+INCLUDE "engine/events/card_key.asm"
+INCLUDE "engine/events/basement_key.asm"
 
-_CardKey::
-	dr $507ac, $507e7
-_BasementKey::
-	dr $507e7, $50819
 _SacredAsh::
 	dr $50819, $5087d
+
 CopyMonToTempMon::
 	dr $5087d, $50940
 PrintMonTypes::
@@ -408,6 +407,7 @@ CalcExpAtLevel::
 	dr $51550, $5161b
 _SwitchPartyMons::
 	dr $5161b, $51749
+
 INCLUDE "engine/gfx/load_pics.asm"
 INCLUDE "engine/pokemon/move_mon_wo_mail.asm"
 INCLUDE "data/pokemon/base_stats.asm"
