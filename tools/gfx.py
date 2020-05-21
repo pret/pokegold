@@ -194,6 +194,9 @@ def filepath_rules(filepath):
         else:
             args['width'] = 16
 
+    elif 'gfx/tilesets' in filedir:
+        args['width'] = 128
+
     elif 'gfx/trainer_card' in filedir:
         if name in ['badges', 'trainer_card']:
             args['width'] = 16

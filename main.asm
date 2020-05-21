@@ -136,6 +136,7 @@ SECTION "bank7", ROMX
 
 LoadMapGroupRoof::
 	dr $1c000, $1c30c
+
 TilesetGateGFX::
 INCBIN "gfx/tilesets/gate.2bpp.lz"
 TilesetGateMeta::
@@ -163,7 +164,7 @@ INCBIN "data/tilesets/players_house_metatiles.bin"
 TilesetPlayersHouseColl::
 	dr $1e62c, $1e72c
 TilesetMansionGFX::
-	dr $1e72c, $1eabc
+INCBIN "gfx/tilesets/mansion.2bpp.lz"
 TilesetMansionMeta::
 INCBIN "data/tilesets/mansion_metatiles.bin"
 TilesetMansionColl::
