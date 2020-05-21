@@ -361,9 +361,8 @@ INCLUDE "engine/pokemon/party_menu.asm"
 INCLUDE "engine/events/fishing_gfx.asm"
 INCLUDE "engine/events/poisonstep.asm"
 INCLUDE "engine/events/sweet_scent.asm"
+INCLUDE "engine/events/squirtbottle.asm"
 
-_Squirtbottle::
-	dr $50763, $507ac
 _CardKey::
 	dr $507ac, $507e7
 _BasementKey::
