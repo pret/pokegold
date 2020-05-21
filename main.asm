@@ -354,9 +354,8 @@ PlayBattleMusic::
 	dr $44556, $445f2
 ClearBattleRAM::
 	dr $445f2, $44648
-PlaceGraphic::
-	dr $44648, $44679
 
+INCLUDE "engine/gfx/place_graphic.asm"
 INCLUDE "engine/pokemon/mail.asm"
 
 
