@@ -358,10 +358,7 @@ SECTION "bank14", ROMX
 
 
 INCLUDE "engine/pokemon/party_menu.asm"
-
-LoadFishingGFX::
-	dr $5054f, $50610
-
+INCLUDE "engine/events/fishing_gfx.asm"
 INCLUDE "engine/events/poisonstep.asm"
 
 SweetScentFromMenu::
