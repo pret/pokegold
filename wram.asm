@@ -599,7 +599,7 @@ wBattleAnimOAMPointerLo:: db ; ca18
 
 	ds 207
 
-wBattle: ; cae8
+wBattle:: ; cae8
 wEnemyMoveStruct:: move_struct wEnemyMoveStruct
 wPlayerMoveStruct:: move_struct wPlayerMoveStruct
 
@@ -2531,19 +2531,13 @@ wMomItemTriggerBalance:: ds 3 ; d963
 wDailyResetTimer:: dw ; d966
 wDailyFlags1:: db ; d968
 wDailyFlags2:: db ; d969
-wd96a:: ds 1 ; d96a
-wd96b:: ds 1 ; d96b
-wd96c:: ds 1 ; d96c
-wTimerEventStartDay:: db ; d96d
-wd96e:: ds 1 ; d96e
-wd96f:: ds 1 ; d96f
-wd970:: ds 1 ; d970
-wd971:: ds 1 ; d971
-wd972:: ds 1 ; d972
-wd973:: ds 1 ; d973
-wd974:: ds 1 ; d974
-wd975:: ds 1 ; d975
-wd976:: ds 1 ; d976
+	ds 3
+wTimerEventStartDay:: db
+	ds 3
+
+wFruitTreeFlags:: flag_array NUM_FRUIT_TREES ; d971
+
+	ds 2
 
 wLuckyNumberDayBuffer:: dw ; d977
 wd979:: ds 1 ; d979
