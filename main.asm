@@ -361,8 +361,9 @@ INCLUDE "engine/pokemon/party_menu.asm"
 
 LoadFishingGFX::
 	dr $5054f, $50610
-DoPoisonStep::
-	dr $50610, $506f2
+
+INCLUDE "engine/events/poisonstep.asm"
+
 SweetScentFromMenu::
 	dr $506f2, $50763
 _Squirtbottle::
