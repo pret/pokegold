@@ -876,10 +876,10 @@ InitMysteryGiftLayout::
 	dr $fcfb2, $fde20
 
 
-SECTION "bank40", ROMX
+SECTION "Standard Scripts", ROMX
 
-StdScripts::
-	dr $100000, $10110c
+INCLUDE "engine/events/std_scripts.asm"
+INCLUDE "data/text/std_text.asm"
 INCLUDE "data/text/battle.asm"
 
 

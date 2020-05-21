@@ -154,7 +154,7 @@ ROMX $3e
 ROMX $3f
 	"bank3f"
 ROMX $40
-	"bank40"
+	"Standard Scripts"
 ROMX $41
 	"bank41"
 ROMX $42
