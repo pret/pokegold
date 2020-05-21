@@ -360,9 +360,8 @@ SECTION "bank14", ROMX
 INCLUDE "engine/pokemon/party_menu.asm"
 INCLUDE "engine/events/fishing_gfx.asm"
 INCLUDE "engine/events/poisonstep.asm"
+INCLUDE "engine/events/sweet_scent.asm"
 
-SweetScentFromMenu::
-	dr $506f2, $50763
 _Squirtbottle::
 	dr $50763, $507ac
 _CardKey::
