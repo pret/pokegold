@@ -462,7 +462,8 @@ HallOfFame::
 RedCredits::
 	dr $86446, $86632
 _HallOfFamePC::
-	dr $86632, $87bfd
+	dr $86632, $87b65
+INCLUDE "data/credits_strings_pointers.asm"
 
 
 SECTION "bank23", ROMX
