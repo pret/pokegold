@@ -366,15 +366,10 @@ INCLUDE "engine/events/card_key.asm"
 INCLUDE "engine/events/basement_key.asm"
 INCLUDE "engine/events/sacred_ash.asm"
 INCLUDE "engine/pokemon/tempmon.asm"
+INCLUDE "engine/pokemon/types.asm"
 
-PrintMonTypes::
-	dr $50940, $5096d
-PrintMoveType::
-	dr $5096d, $50986
-PrintType::
-	dr $50986, $50997
-GetTypeName::
-	dr $50997, $50b3d
+unk_014_4a5b:
+	dr $50a5b, $50b3d
 
 DrawPlayerHP::
 	dr $50b3d, $50b41
