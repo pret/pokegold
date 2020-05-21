@@ -364,9 +364,7 @@ INCLUDE "engine/events/sweet_scent.asm"
 INCLUDE "engine/events/squirtbottle.asm"
 INCLUDE "engine/events/card_key.asm"
 INCLUDE "engine/events/basement_key.asm"
-
-_SacredAsh::
-	dr $50819, $5087d
+INCLUDE "engine/events/sacred_ash.asm"
 
 CopyMonToTempMon::
 	dr $5087d, $50940
