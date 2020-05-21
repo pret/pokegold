@@ -1068,8 +1068,7 @@ TownMap_ConvertLineBreakCharacters::
 	dr $1c0e24, $1c0e43
 PokegearGFX::
 	dr $1c0e43, $1c1127
-CreditsStrings::
-	dr $1c1127, $1c168c
+INCLUDE "data/credits_strings.asm"
 
 
 SECTION "Stadium Data", ROMX
