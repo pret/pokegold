@@ -103,7 +103,7 @@ INCLUDE "engine/pokemon/breeding.asm"
 SECTION "bank6", ROMX
 
 TilesetKantoMeta::
-	dr $18000, $18800
+INCBIN "data/tilesets/kanto_metatiles.bin"
 TilesetKantoColl::
 	dr $18800, $18a00
 Tileset0GFX::
@@ -112,7 +112,7 @@ TilesetJohtoGFX::
 
 Tileset0Meta::
 TilesetJohtoMeta::
-	dr $19006, $19806
+INCBIN "data/tilesets/johto_metatiles.bin"
 Tileset0Coll::
 TilesetJohtoColl::
 	dr $19806, $19a06
@@ -120,14 +120,14 @@ TilesetJohtoModernGFX::
 	dr $19a06, $1a00c
 
 TilesetJohtoModernMeta::
-	dr $1a00c, $1a80c
+INCBIN "data/tilesets/johto_modern_metatiles.bin"
 TilesetJohtoModernColl::
 	dr $1a80c, $1b40c
 
 TilesetTraditionalHouseGFX::
 	dr $1b40c, $1b8bc
 TilesetTraditionalHouseMeta::
-	dr $1b8bc, $1bcbc
+INCBIN "data/tilesets/traditional_house_metatiles.bin"
 TilesetTraditionalHouseColl::
 	dr $1bcbc, $1bdbc
 
@@ -139,33 +139,33 @@ LoadMapGroupRoof::
 TilesetGateGFX::
 	dr $1c30c, $1c70c
 TilesetGateMeta::
-	dr $1c70c, $1cb0c
+INCBIN "data/tilesets/gate_metatiles.bin"
 TilesetGateColl::
 	dr $1cb0c, $1cc0c
 TilesetPokecenterGFX::
 	dr $1cc0c, $1d03c
 
 TilesetPokecenterMeta::
-	dr $1d03c, $1d43c
+INCBIN "data/tilesets/pokecenter_metatiles.bin"
 TilesetPokecenterColl::
 	dr $1d43c, $1d53c
 TilesetPortGFX::
 	dr $1d53c, $1d94c
 TilesetPortMeta::
-	dr $1d94c, $1dd4c
+INCBIN "data/tilesets/port_metatiles.bin"
 TilesetPortColl::
 	dr $1dd4c, $1de4c
 TilesetPlayersHouseGFX::
 	dr $1de4c, $1e22c
 
 TilesetPlayersHouseMeta::
-	dr $1e22c, $1e62c
+INCBIN "data/tilesets/players_house_metatiles.bin"
 TilesetPlayersHouseColl::
 	dr $1e62c, $1e72c
 TilesetMansionGFX::
 	dr $1e72c, $1eabc
 TilesetMansionMeta::
-	dr $1eabc, $1eebc
+INCBIN "data/tilesets/mansion_metatiles.bin"
 TilesetMansionColl::
 	dr $1eebc, $1efbc
 TilesetCaveGFX::
@@ -173,7 +173,7 @@ TilesetCaveGFX::
 
 TilesetCaveMeta::
 TilesetDarkCaveMeta::
-	dr $1f34c, $1f74c
+INCBIN "data/tilesets/cave_metatiles.bin"
 TilesetCaveColl::
 TilesetDarkCaveColl::
 	dr $1f74c, $1f84c
@@ -188,44 +188,44 @@ RestartClock::
 TilesetTowerGFX::
 	dr $20181, $205b1
 TilesetTowerMeta::
-	dr $205b1, $209b1
+INCBIN "data/tilesets/tower_metatiles.bin"
 TilesetTowerColl::
 	dr $209b1, $20ab1
 TilesetLabGFX::
 	dr $20ab1, $20e81
 TilesetLabMeta::
-	dr $20e81, $21281
+INCBIN "data/tilesets/lab_metatiles.bin"
 
 TilesetLabColl::
 	dr $21281, $21381
 TilesetFacilityGFX::
 	dr $21381, $217a1
 TilesetFacilityMeta::
-	dr $217a1, $21ba1
+INCBIN "data/tilesets/facility_metatiles.bin"
 TilesetFacilityColl::
 	dr $21ba1, $21ca1
 TilesetMartGFX::
 	dr $21ca1, $22051
 
 TilesetMartMeta::
-	dr $22051, $22451
+INCBIN "data/tilesets/mart_metatiles.bin"
 TilesetMartColl::
 	dr $22451, $22551
 TilesetGameCornerGFX::
 	dr $22551, $22951
 TilesetGameCornerMeta::
-	dr $22951, $22d51
+INCBIN "data/tilesets/game_corner_metatiles.bin"
 TilesetGameCornerColl::
 	dr $22d51, $22e51
 TilesetTrainStationGFX::
 	dr $22e51, $231f1
 
 TilesetTrainStationMeta::
-	dr $231f1, $235f1
+INCBIN "data/tilesets/train_station_metatiles.bin"
 TilesetTrainStationColl::
 	dr $235f1, $236f1
 TilesetForestMeta::
-	dr $236f1, $23971
+INCBIN "data/tilesets/forest_metatiles.bin"
 CatchTutorial::
 	dr $23971, $239fe
 
@@ -276,40 +276,40 @@ SECTION "bankC", ROMX
 TilesetEliteFourRoomGFX::
 	dr $30000, $304e0
 TilesetEliteFourRoomMeta::
-	dr $304e0, $308e0
+INCBIN "data/tilesets/elite_four_room_metatiles.bin"
 TilesetEliteFourRoomColl::
 	dr $308e0, $309e0
 TilesetParkGFX::
 	dr $309e0, $30e40
 TilesetParkMeta::
-	dr $30e40, $31240
+INCBIN "data/tilesets/park_metatiles.bin"
 
 TilesetParkColl::
 	dr $31240, $31340
 TilesetRuinsOfAlphGFX::
 	dr $31340, $31670
 TilesetRuinsOfAlphMeta::
-	dr $31670, $31a70
+INCBIN "data/tilesets/ruins_of_alph_metatiles.bin"
 TilesetRuinsOfAlphColl::
 	dr $31a70, $31b70
 TilesetRadioTowerGFX::
 	dr $31b70, $31fc0
 TilesetRadioTowerMeta::
-	dr $31fc0, $323c0
+INCBIN "data/tilesets/radio_tower_metatiles.bin"
 
 TilesetRadioTowerColl::
 	dr $323c0, $324c0
 TilesetUndergroundGFX::
 	dr $324c0, $32890
 TilesetUndergroundMeta::
-	dr $32890, $32c90
+INCBIN "data/tilesets/underground_metatiles.bin"
 TilesetUndergroundColl::
 	dr $32c90, $32d90
 TilesetIcePathGFX::
 	dr $32d90, $331d0
 
 TilesetIcePathMeta::
-	dr $331d0, $335d0
+INCBIN "data/tilesets/ice_path_metatiles.bin"
 TilesetIcePathColl::
 	dr $335d0, $336d0
 TilesetDarkCaveGFX::
@@ -659,25 +659,25 @@ SECTION "bank37_2", ROMX
 TilesetChampionsRoomGFX::
 	dr $dd773, $ddc33
 TilesetChampionsRoomMeta::
-	dr $ddc33, $de033
+INCBIN "data/tilesets/champions_room_metatiles.bin"
 TilesetChampionsRoomColl::
 	dr $de033, $de133
 TilesetHouseGFX::
 	dr $de133, $de5d3
 TilesetHouseMeta::
-	dr $de5d3, $de9d3
+INCBIN "data/tilesets/house_metatiles.bin"
 TilesetHouseColl::
 	dr $de9d3, $dead3
 TilesetLighthouseGFX::
 	dr $dead3, $deed3
 TilesetLighthouseMeta::
-	dr $deed3, $df2d3
+INCBIN "data/tilesets/lighthouse_metatiles.bin"
 TilesetLighthouseColl::
 	dr $df2d3, $df3d3
 TilesetPlayersRoomGFX::
 	dr $df3d3, $df893
 TilesetPlayersRoomMeta::
-	dr $df893, $dfc93
+INCBIN "data/tilesets/players_room_metatiles.bin"
 TilesetPlayersRoomColl::
 	dr $dfc93, $dfd93
 TilesetForestColl::
