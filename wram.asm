@@ -599,7 +599,7 @@ wBattleAnimOAMPointerLo:: db ; ca18
 
 	ds 207
 
-wBattle: ; cae8
+wBattle:: ; cae8
 wEnemyMoveStruct:: move_struct wEnemyMoveStruct
 wPlayerMoveStruct:: move_struct wPlayerMoveStruct
 

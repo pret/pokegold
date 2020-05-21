@@ -349,12 +349,7 @@ SECTION "bank11", ROMX
 INCLUDE "engine/events/fruit_trees.asm"
 INCLUDE "engine/battle/ai/move.asm"
 INCLUDE "engine/pokedex/pokedex_2.asm"
-
-PlayBattleMusic::
-	dr $44556, $445f2
-ClearBattleRAM::
-	dr $445f2, $44648
-
+INCLUDE "engine/battle/start_battle.asm"
 INCLUDE "engine/gfx/place_graphic.asm"
 INCLUDE "engine/pokemon/mail.asm"
 
