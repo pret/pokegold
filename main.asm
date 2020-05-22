@@ -762,7 +762,9 @@ LoadBattleFontsHPBar::
 LoadHPBar::
 	dr $f8081, $f80d9
 LoadStatsScreenPageTilesGFX::
-	dr $f80d9, $f8bb2
+	dr $f80d9, $f8aa2
+StatsScreenPageTilesGFX::
+	dr $f8aa2, $f8bb2
 EnemyHPBarBorderGFX::
 	dr $f8bb2, $f8bd2
 HPExpBarBorderGFX::
@@ -1040,40 +1042,19 @@ INCLUDE "data/items/descriptions.asm"
 
 SECTION "bank70", ROMX
 
-PrintPage1::
-	dr $1c0000, $1c0407
+INCLUDE "engine/printer/print_party.asm"
+
 TilesetKantoGFX::
 INCBIN "gfx/tilesets/kanto.2bpp.lz"
-Unreferenced_Function1c0a0d:
-	dr $1c0a0d, $1c0a1f
-PrintHoursMins::
-	dr $1c0a1f, $1c0a66
-UpdateTimePredef::
-	dr $1c0a66, $1c0a7a
-StubbedGetFrontpic::
-	ret
-LoadSGBPokedexGFX::
-	dr $1c0a7b, $1c0a85
-LoadSGBPokedexGFX2::
-	dr $1c0a85, $1c0c36
-LoadQuestionMarkPic::
-	dr $1c0c36, $1c0cd0
-DrawPokedexListWindow::
-	dr $1c0cd0, $1c0d30
-DrawPokedexSearchResultsWindow::
-	dr $1c0d30, $1c0da6
-DrawDexEntryScreenRightEdge::
-	dr $1c0da6, $1c0de9
-_DudeAutoInput_A::
-	dr $1c0de9, $1c0dee
-_DudeAutoInput_RightA::
-	dr $1c0dee, $1c0df3
-_DudeAutoInput_DownA::
-	dr $1c0df3, $1c0e24
-TownMap_ConvertLineBreakCharacters::
-	dr $1c0e24, $1c0e43
+
+INCLUDE "engine/rtc/print_hours_mins.asm"
+INCLUDE "engine/pokedex/pokedex_3.asm"
+INCLUDE "engine/events/catch_tutorial_input.asm"
+INCLUDE "engine/pokegear/townmap_convertlinebreakcharacters.asm"
+
 PokegearGFX::
-	dr $1c0e43, $1c1127
+INCBIN "gfx/pokegear/pokegear.2bpp.lz"
+
 INCLUDE "data/credits_strings.asm"
 
 

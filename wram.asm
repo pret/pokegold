@@ -2009,15 +2009,16 @@ wStartMinute:: db ; d1de
 wStartSecond:: db ; d1df
 wRTC:: ds 4 ; d1e0
 
-wd1e4:: ds 1 ; d1e4
-wd1e5:: ds 1 ; d1e5
-wd1e6:: ds 1 ; d1e6
-wd1e7:: ds 1 ; d1e7
+wDSTBackupDay:: db ; d1e4
+wDSTBackupHours:: db ; d1e5
+wDSTBackupMinutes:: db ; d1e6
+wDSTBackupSeconds:: db ; d1e7
+
 wDST:: ; d1e8
 ; bit 7: dst
 	db
 
-wd1e9:: ds 1 ; d1e9
+	ds 1
 
 wGameTimeCap::     db ; d1ea
 wGameTimeHours::   dw ; d1eb
