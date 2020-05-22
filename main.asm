@@ -883,137 +883,20 @@ INCLUDE "data/text/std_text.asm"
 INCLUDE "data/text/battle.asm"
 
 
-SECTION "bank41", ROMX
+SECTION "Phone Scripts", ROMX
 
-; Phone scripts and text
-UnusedPhoneScript::
-	dr $104000, $104004
-MomPhoneCalleeScript::
-	dr $104004, $104124
-MomPhoneLectureScript::
-	dr $104124, $104137
-BillPhoneCalleeScript::
-	dr $104137, $104172
-BillPhoneCallerScript::
-	dr $104172, $104177
-ElmPhoneCalleeScript::
-	dr $104177, $1041e1
-ElmPhoneCallerScript::
-	dr $1041e1, $10422a
-JackPhoneCalleeScript::
-	dr $10422a, $104234
-JackPhoneCallerScript::
-	dr $104234, $104256
-BeverlyPhoneCalleeScript::
-	dr $104256, $104260
-BeverlyPhoneCallerScript::
-	dr $104260, $104282
-HueyPhoneCalleeScript::
-	dr $104282, $10428c
-HueyPhoneCallerScript::
-	dr $10428c, $1042a7
-GavenPhoneCalleeScript::
-	dr $1042a7, $1042b1
-GavenPhoneCallerScript::
-	dr $1042b1, $1042d3
-BethPhoneCalleeScript::
-	dr $1042d3, $1042dd
-BethPhoneCallerScript::
-	dr $1042dd, $1042ff
-JosePhoneCalleeScript::
-	dr $1042ff, $104309
-JosePhoneCallerScript::
-	dr $104309, $104332
-ReenaPhoneCalleeScript::
-	dr $104332, $10433c
-ReenaPhoneCallerScript::
-	dr $10433c, $10435e
-JoeyPhoneCalleeScript::
-	dr $10435e, $104368
-JoeyPhoneCallerScript::
-	dr $104368, $104390
-WadePhoneCalleeScript::
-	dr $104390, $1043b5
-WadePhoneCallerScript::
-	dr $1043b5, $1043f8
-RalphPhoneCalleeScript::
-	dr $1043f8, $104402
-RalphPhoneCallerScript::
-	dr $104402, $104446
-LizPhoneCalleeScript::
-	dr $104446, $104450
-LizPhoneCallerScript::
-	dr $104450, $104478
-AnthonyPhoneCalleeScript::
-	dr $104478, $104482
-AnthonyPhoneCallerScript::
-	dr $104482, $1044c4
-ToddPhoneCalleeScript::
-	dr $1044c4, $1044ce
-ToddPhoneCallerScript::
-	dr $1044ce, $1044f6
-GinaPhoneCalleeScript::
-	dr $1044f6, $104506
-GinaPhoneCallerScript::
-	dr $104506, $104534
-IrwinPhoneCalleeScript::
-	dr $104534, $104544
-IrwinPhoneCallerScript::
-	dr $104544, $10456c
-ArniePhoneCalleeScript::
-	dr $10456c, $104576
-ArniePhoneCallerScript::
-	dr $104576, $1045b2
-AlanPhoneCalleeScript::
-	dr $1045b2, $1045bc
-AlanPhoneCallerScript::
-	dr $1045bc, $1045de
-DanaPhoneCalleeScript::
-	dr $1045de, $1045e8
-DanaPhoneCallerScript::
-	dr $1045e8, $10460a
-ChadPhoneCalleeScript::
-	dr $10460a, $104614
-ChadPhoneCallerScript::
-	dr $104614, $104650
-DerekPhoneCalleeScript::
-	dr $104650, $104675
-DerekPhoneCallerScript::
-	dr $104675, $1046b2
-ChrisPhoneCalleeScript::
-	dr $1046b2, $1046bc
-ChrisPhoneCallerScript::
-	dr $1046bc, $1046de
-BrentPhoneCalleeScript::
-	dr $1046de, $1046e8
-BrentPhoneCallerScript::
-	dr $1046e8, $104711
-TiffanyPhoneCalleeScript::
-	dr $104711, $10471b
-TiffanyPhoneCallerScript::
-	dr $10471b, $104744
-VancePhoneCalleeScript::
-	dr $104744, $10474e
-VancePhoneCallerScript::
-	dr $10474e, $104770
-WiltonPhoneCalleeScript::
-	dr $104770, $10477a
-WiltonPhoneCallerScript::
-	dr $10477a, $1047b8
-KenjiPhoneCalleeScript::
-	dr $1047b8, $1047c2
-KenjiPhoneCallerScript::
-	dr $1047c2, $1047e4
-ParryPhoneCalleeScript::
-	dr $1047e4, $1047ee
-ParryPhoneCallerScript::
-	dr $1047ee, $10482a
-ErinPhoneCalleeScript::
-	dr $10482a, $104834
-ErinPhoneCallerScript::
-	dr $104834, $104a80
-BikeShopPhoneCallerScript::
-	dr $104a80, $10614d
+INCLUDE "engine/phone/scripts/unused.asm"
+INCLUDE "engine/phone/scripts/mom.asm"
+INCLUDE "engine/phone/scripts/bill.asm"
+INCLUDE "engine/phone/scripts/elm.asm"
+INCLUDE "engine/phone/scripts/trainers.asm"
+INCLUDE "engine/phone/scripts/bike_shop.asm"
+INCLUDE "data/phone/text/unused.asm"
+INCLUDE "data/phone/text/mom.asm"
+INCLUDE "data/phone/text/bill.asm"
+INCLUDE "data/phone/text/elm.asm"
+INCLUDE "data/phone/text/trainers.asm"
+INCLUDE "data/phone/text/bike_shop.asm"
 
 
 SECTION "Names", ROMX
