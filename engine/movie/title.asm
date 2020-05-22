@@ -55,7 +55,7 @@ TitleScreen:
 	ld [hli], a ; wIntroSceneFrameCounter
 	ld [hli], a ; wTitleScreenTimer
 	ld [hl], a  ; wTitleScreenTimer + 1
-	ld de, $6058
+	depixel 12, 11
 	ld a, SPRITE_ANIM_INDEX_GS_INTRO_HO_OH
 	call InitSpriteAnimStruct
 	ld hl, wSpriteAnim1

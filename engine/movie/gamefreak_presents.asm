@@ -1,41 +1,30 @@
-Copyright_GFPresents: ; e49a8 (39:49a8)
+Copyright_GFPresents:
 ; Play the copyright screen and GameFreak Presents sequence.
 ; Return carry if user cancels animation by pressing a button.
 
 	call ClearBGPalettes
 	call ClearTilemap
-
 	ld a, HIGH(vBGMap0)
 	ldh [hBGMapAddress + 1], a
 	xor a ; LOW(vBGMap0)
 	ldh [hBGMapAddress], a
-
 	ldh [hJoyDown], a
 	ldh [hSCX], a
 	ldh [hSCY], a
-
 	ld a, SCREEN_HEIGHT_PX
 	ldh [hWY], a
-
 	call WaitBGMap
-
 	ld b, SCGB_GAMEFREAK_LOGO
 	call GetSGBLayout
-
 	call SetPalettes
-
 	ld c, 10
 	call DelayFrames
-
 	callfar Copyright
-
 	call WaitBGMap
-
 	ld c, 100
 	call DelayFrames
-
 	call ClearTilemap
-	call GFPresents_Init
+	call .GetGFLogoGFX
 
 .loop
 	call GFPresents_PlayFrame
@@ -55,7 +44,7 @@ Copyright_GFPresents: ; e49a8 (39:49a8)
 	scf
 	ret
 
-GFPresents_Init: ; e49f3 (39:49f3)
+.GetGFLogoGFX:
 ; Load gfx and initialize variables
 
 	ld de, GFPresentsGFX1
@@ -75,25 +64,21 @@ GFPresents_Init: ; e49f3 (39:49f3)
 	ld [hli], a
 	ld a, $8d
 	ld [hl], a
-
 	xor a
 	ld [wJumptableIndex], a
-	ld [$ce64], a
+	ld [wIntroSceneFrameCounter], a
 	ld [wIntroSceneTimer], a
 	ldh [hSCX], a
 	ldh [hSCY], a
-
 	ld a, 1
 	ldh [hBGMapMode], a
-
 	ld a, SCREEN_HEIGHT_PX
 	ldh [hWY], a
-
 	lb de, %00100100, %11111000
 	call DmgToCgbObjPals
 	ret
 
-GFPresents_PlayFrame: ; e4a37 (39:4a37)
+GFPresents_PlayFrame:
 ; Play one frame of GFPresents sequence.
 ; Return carry when the sequence completes or is canceled.
 
@@ -133,7 +118,7 @@ GFPresents_PlayFrame: ; e4a37 (39:4a37)
 	scf
 	ret
 
-GFPresents_HandleFrame: ; e4a6d (39:4a6d)
+GFPresents_HandleFrame:
 ; Dispatch to the current scene handler
 
 	ld a, [wJumptableIndex]
@@ -155,26 +140,26 @@ GFPresents_HandleFrame: ; e4a6d (39:4a6d)
 	dw GFPresents_WaitForTimer
 	dw GFPresents_SetDoneFlag
 
-GFPresents_NextScene: ; e4a88 (39:4a88)
+GFPresents_NextScene:
 	ld hl, wJumptableIndex
 	inc [hl]
 	ret
 
 ; unused?
-Func_e4a8d: ; e4a8d (39:4a8d)
+Functione4a8d:
 	ld c, 64
 	call DelayFrames
 	call GFPresents_NextScene
 	ret
 
-GFPresents_Star: ; e4a96 (39:4a96)
+GFPresents_Star:
 
 	; tell GFPresents_PlaceLogo we haven't finished yet
 	xor a
-	ld [$ce64], a
+	ld [wIntroSceneFrameCounter], a
 
 	depixel 10, 11, 4, 0
-	ld a, $16
+	ld a, SPRITE_ANIM_INDEX_GS_INTRO_STAR
 	call InitSpriteAnimStruct
 
 	; TODO set some flag in the struct?
@@ -188,17 +173,17 @@ GFPresents_Star: ; e4a96 (39:4a96)
 	call GFPresents_NextScene
 	ret
 
-GFPresents_PlaceLogo: ; e4ab2 (39:4ab2)
+GFPresents_PlaceLogo:
 ; Draw the Game Freak logo (may be initially invisible due to palette)
 
 	; wait until the star animation completed
 	; TODO this is cleared above, but when is it set?
-	ld a, [$ce64]
+	ld a, [wIntroSceneFrameCounter]
 	and a
 	ret z
 
 	depixel 10, 11, 4, 0
-	ld a, $15
+	ld a, SPRITE_ANIM_INDEX_GAMEFREAK_LOGO
 	call InitSpriteAnimStruct
 
 	call GFPresents_NextScene
@@ -208,7 +193,7 @@ GFPresents_PlaceLogo: ; e4ab2 (39:4ab2)
 	ld [wIntroSceneTimer], a
 	ret
 
-GFPresents_LogoSparkles: ; e4ac8 (39:4ac8)
+GFPresents_LogoSparkles:
 
 	ld hl, wIntroSceneTimer
 	ld a, [hl]
@@ -230,16 +215,18 @@ GFPresents_LogoSparkles: ; e4ac8 (39:4ac8)
 	call GFPresents_NextScene
 	ret
 
-GFPresents_PlaceGameFreak: ; e4adf (39:4adf)
+GFPresents_PlaceGameFreak:
 	hlcoord 5, 12
 	ld de, .game_freak
 	call PlaceString
 	ret
 
 .game_freak
-	db $80, $81, $82, $83, $8d, $84, $85, $83, $81, $86, "@"
+	db $80, $81, $82, $83, $8d, $84, $85, $83, $81, $86
+.end
+	db "@"
 
-GFPresents_PlacePresents: ; e4af4 (39:4af4)
+GFPresents_PlacePresents:
 	hlcoord 7, 13
 	ld de, .presents
 	call PlaceString
@@ -252,18 +239,18 @@ GFPresents_PlacePresents: ; e4af4 (39:4af4)
 	ret
 
 .presents
-	db $87, $88, $89, $8a, $8b, $8c, "@"
+	db $87, $88, $89, $8a, $8b, $8c
+.end
+	db "@"
 
-GFPresents_SetDoneFlag: ; e4b0d (39:4b0d)
-; Tell GFPresents_PlayFrame and TitleScreenFrame (01:63da) that we're finished.
+GFPresents_SetDoneFlag:
+; Tell GFPresents_PlayFrame and TitleScreenFrame that we're finished.
 
 	ld hl, wJumptableIndex
 	set 7, [hl]
 	ret
 
-GFPresents_WaitForTimer: ; e4b13 (39:4b13)
-; Wait for the timer to elapse
-
+GFPresents_WaitForTimer:
 	ld hl, wIntroSceneTimer
 	ld a, [hl]
 	and a
@@ -274,8 +261,8 @@ GFPresents_WaitForTimer: ; e4b13 (39:4b13)
 	call GFPresents_NextScene
 	ret
 
-GFPresents_UpdateLogoPal: ; e4b20 (39:4b20)
-; called from 29:5928
+GFPresents_UpdateLogoPal:
+; called from 23:5928
 ; OBP1 was initialized at end of GFPresents_Init
 
 	; once we reached the final state, leave it alone
@@ -297,7 +284,7 @@ GFPresents_UpdateLogoPal: ; e4b20 (39:4b20)
 	call DmgToCgbObjPal1
 	ret
 
-GFPresents_Sparkle: ; e4b33 (39:4b33)
+GFPresents_Sparkle:
 ; Initialize and configure a sparkle sprite.
 ; TODO unclear how this relates to the actual screen display,
 ; seems to be called more times than there are visible sparkles?
@@ -314,7 +301,7 @@ GFPresents_Sparkle: ; e4b33 (39:4b33)
 	; set up a new sparkle sprite
 	push af
 	depixel 11, 11
-	ld a, $17
+	ld a, SPRITE_ANIM_INDEX_GS_INTRO_SPARKLE
 	call InitSpriteAnimStruct
 	pop af
 
