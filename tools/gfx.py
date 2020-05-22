@@ -165,12 +165,19 @@ def filepath_rules(filepath):
             args['pic_dimensions'] = 6, 6
 
     elif 'gfx/pokedex' in filedir:
-        if name in ['slowpoke', 'pokedex']:
+        if name in ['slowpoke', 'pokedex', 'pokedex_sgb']:
             args['width'] = 128
+
+        elif name == 'question_mark':
+            args['width'] = 56
+            args['pic_dimensions'] = 7, 7
 
     elif 'gfx/pokegear' in filedir:
         if name == 'pokegear_sprites':
             args['width'] = 16
+
+        elif name == 'pokegear':
+            args['width'] = 128
 
     elif 'gfx/sgb' in filedir:
         args['width'] = 128

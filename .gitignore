@@ -55,7 +55,10 @@ gfx/battle/dude.2bpp
 gfx/player/chris_back.2bpp
 gfx/trade/game_boy.2bpp
 gfx/pokegear/pokegear_sprites.2bpp
+gfx/pokegear/pokegear.2bpp
 gfx/slots/slots_*.2bpp
 gfx/pokedex/pokedex.2bpp
 gfx/pokedex/slowpoke.2bpp
+gfx/pokedex/pokedex_sgb.2bpp
+gfx/pokedex/question_mark.2bpp
 gfx/tilesets/*.2bpp
