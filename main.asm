@@ -368,28 +368,8 @@ INCLUDE "engine/events/sacred_ash.asm"
 INCLUDE "engine/pokemon/tempmon.asm"
 INCLUDE "engine/pokemon/types.asm"
 INCLUDE "engine/battle/unreferenced_getgen1trainerclassname.asm"
+INCLUDE "engine/pokemon/mon_stats.asm"
 
-DrawPlayerHP::
-	dr $50b3d, $50b41
-DrawEnemyHP::
-	dr $50b41, $50bae
-StatsScreenInit::
-	dr $50bae, $5128f
-
-PrintTempMonStats::
-	dr $5128f, $512f1
-GetGender::
-	dr $512f1, $51364
-ListMovePP::
-	dr $51364, $513e4
-Unused_PlaceEnemyHPLevel::
-	dr $513e4, $51413
-PlaceStatusString::
-	dr $51413, $51437
-PlaceNonFaintStatus::
-	dr $51437, $51478
-ListMoves::
-	dr $51478, $514c2
 InitList::
 	dr $514c2, $51524
 CalcLevel::
