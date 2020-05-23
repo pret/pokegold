@@ -107,6 +107,10 @@ def filepath_rules(filepath):
         elif name == 'balls':
             args['width'] = 32
 
+    elif 'gfx/debug' in filedir:
+        if name == 'color_test':
+            args['width'] = 176
+
     elif 'gfx/font' in filedir:
         if name == 'font_inversed':
             args['width'] = 128
@@ -179,6 +183,11 @@ def filepath_rules(filepath):
         elif name == 'pokegear':
             args['width'] = 128
 
+    elif 'gfx/mystery_gift' in filedir:
+        if name == 'mystery_gift':
+            args['width'] = 128
+            args['rows'] = [(0, 15), (0, 15), (0, 2)]
+
     elif 'gfx/sgb' in filedir:
         args['width'] = 128
         args['pal_file'] = os.path.join(filedir, name + '.pal')
@@ -201,8 +210,13 @@ def filepath_rules(filepath):
         else:
             args['width'] = 16
 
+
     elif 'gfx/tilesets' in filedir:
-        args['width'] = 128
+        if filedir in ['gfx/tilesets/flower', 'gfx/tilesets/lava', 'gfx/tilesets/tower-pillar', 'gfx/tilesets/water', 'gfx/tilesets/whirlpool']:
+            args['width'] = 8
+        else:
+            args['width'] = 128
+            args['tileset'] = True
 
     elif 'gfx/trainer_card' in filedir:
         if name in ['badges', 'trainer_card']:
@@ -235,9 +249,6 @@ def filepath_rules(filepath):
 
     elif os.path.join(filedir, name) in pics:
         args['pic'] = True
-
-    elif filedir == 'gfx/tilesets':
-        args['tileset'] = True
 
     if args.get('pal_file'):
         if os.path.exists(args['pal_file']):
