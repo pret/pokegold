@@ -187,6 +187,11 @@ def filepath_rules(filepath):
         if name == 'mystery_gift':
             args['width'] = 128
             args['rows'] = [(0, 15), (0, 15), (0, 2)]
+        elif name == 'mystery_gift_2':
+            args['width'] = 128
+        # TODO: this is incomplete
+        elif name == 'border':
+            args['width'] = 16
 
     elif 'gfx/sgb' in filedir:
         args['width'] = 128
@@ -210,9 +215,8 @@ def filepath_rules(filepath):
         else:
             args['width'] = 16
 
-
     elif 'gfx/tilesets' in filedir:
-        if filedir in ['gfx/tilesets/flower', 'gfx/tilesets/lava', 'gfx/tilesets/tower-pillar', 'gfx/tilesets/water', 'gfx/tilesets/whirlpool']:
+        if filedir != 'gfx/tilesets':
             args['width'] = 8
         else:
             args['width'] = 128
@@ -240,12 +244,6 @@ def filepath_rules(filepath):
             args['width'] = 24
         elif name == 'game_boy':
             args['width'] = 56
-
-    elif 'gfx/unknown' in filedir:
-        if name == 'gfx_170f1':
-            args['width'] = 128
-        elif name == 'gfx_17079':
-            args['width'] = 16
 
     elif os.path.join(filedir, name) in pics:
         args['pic'] = True

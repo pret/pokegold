@@ -1,7 +1,7 @@
-Function1704d:
-	ld hl, UnknownGFX17079
+LoadMysteryGiftBorderGFX:
+	ld hl, MysteryGiftBorderGFX
 	ld de, vTiles2 tile $20
-	ld a, BANK(UnknownGFX17079)
+	ld a, BANK(MysteryGiftBorderGFX)
 	ld bc, wBGMapBufferEnd - wBGMapBuffer
 	call FarCopyBytesDouble
 	ld hl, vTiles2 tile $20
@@ -16,15 +16,15 @@ Function1704d:
 	jr nz, .loop
 	ret
 
-Function1706b:
-	ld hl, UnknownGFX170f1
+LoadMysteryGiftGFX2:
+	ld hl, MysteryGiftGFX2
 	ld de, vTiles2 tile $2f
-	ld a, BANK(UnknownGFX170f1)
+	ld a, BANK(MysteryGiftGFX2)
 	ld bc, 14 tiles
 	jp FarCopyBytes
 
-UnknownGFX17079:
-INCBIN "gfx/unknown/gfx_17079.2bpp"
+MysteryGiftBorderGFX:
+INCBIN "gfx/mystery_gift/border.2bpp"
 
-UnknownGFX170f1:
-INCBIN "gfx/unknown/gfx_170f1.2bpp"
+MysteryGiftGFX2:
+INCBIN "gfx/mystery_gift/mystery_gift_2.2bpp"

@@ -96,7 +96,7 @@ INCLUDE "engine/events/mom.asm"
 INCLUDE "engine/events/daycare.asm"
 INCLUDE "engine/events/print_unown.asm"
 INCLUDE "engine/events/print_photo.asm"
-INCLUDE "unknown/bank05_704d.asm"
+INCLUDE "engine/link/mystery_gift_gfx.asm"
 INCLUDE "engine/pokemon/breeding.asm"
 
 
