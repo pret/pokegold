@@ -56,6 +56,11 @@ silver: pokesilver.gbc
 
 clean:
 	rm -f $(roms) $(gold_obj) $(silver_obj) $(roms:.gbc=.map) $(roms:.gbc=.sym) rgbdscheck.o
+	find gfx \( -name "*.lz" \) -delete
+	$(MAKE) clean -C tools/
+
+tidy:
+	rm -f $(roms) $(gold_obj) $(silver_obj) $(roms:.gbc=.map) $(roms:.gbc=.sym) rgbdscheck.o
 	$(MAKE) clean -C tools/
 
 compare: $(roms)
@@ -110,6 +115,14 @@ pokegold.gbc: $(gold_obj) layout.link
 pokesilver.gbc: $(silver_obj) layout.link
 	$(RGBLINK) -n pokesilver.sym -m pokesilver.map -l layout.link -o $@ $(silver_obj)
 	$(RGBFIX) -cjsv -i AAXE -k 01 -l 0x33 -m 0x10 -p 0 -r 3 -t "POKEMON_SLV" $@
+
+### LZ compression rules
+
+# Delete this line if you don't care about matching and just want optimal compression.
+include gfx/lz.mk
+
+%.lz: %
+	tools/lzcomp $(LZFLAGS) -- $< $@
 
 pngs:
 	find gfx -iname "*.lz"      -exec $(gfx) unlz {} +
