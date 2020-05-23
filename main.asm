@@ -830,9 +830,7 @@ DoBadgeTypeBoosts::
 SECTION "bank3f", ROMX
 
 INCLUDE "engine/tilesets/tileset_anims.asm"
-	ret
-NPCTrade::
-	dr $fc9ae, $fcd87
+INCLUDE "engine/events/npc_trade.asm"
 MomTriesToBuySomething::
 	dr $fcd87, $fcf6a
 StagePartyDataForMysteryGift::

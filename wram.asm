@@ -2142,7 +2142,7 @@ wRegisteredItem:: db ; d681
 wPlayerState:: db ; d682
 
 wHallOfFameCount:: dw
-wd685:: ds 1 ; d685
+wTradeFlags:: flag_array NUM_NPC_TRADES ; d685
 wd686:: ds 1 ; d686
 wd687:: ds 1 ; d687
 wd688:: ds 1 ; d688
