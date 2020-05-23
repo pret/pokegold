@@ -829,49 +829,8 @@ DoBadgeTypeBoosts::
 
 SECTION "bank3f", ROMX
 
-	nop
-DummyPredef3A::
+INCLUDE "engine/tilesets/tileset_anims.asm"
 	ret
-	ret
-_AnimateTileset::
-	dr $fc003, $fc01e
-Tileset0Anim::
-TilesetJohtoModernAnim::
-TilesetKantoAnim::
-TilesetParkAnim::
-TilesetForestAnim::
-	dr $fc01e, $fc04a
-TilesetJohtoAnim::
-	dr $fc04a, $fc0d6
-TilesetPortAnim::
-	dr $fc0d6, $fc106
-TilesetEliteFourRoomAnim::
-	dr $fc106, $fc18e
-TilesetCaveAnim::
-TilesetDarkCaveAnim::
-	dr $fc18e, $fc1da
-TilesetIcePathAnim::
-	dr $fc1da, $fc226
-TilesetTowerAnim::
-	dr $fc226, $fc28e
-TilesetHouseAnim::
-TilesetPlayersHouseAnim::
-TilesetPokecenterAnim::
-TilesetGateAnim::
-TilesetLabAnim::
-TilesetFacilityAnim::
-TilesetMartAnim::
-TilesetMansionAnim::
-TilesetGameCornerAnim::
-TilesetTraditionalHouseAnim::
-TilesetTrainStationAnim::
-TilesetChampionsRoomAnim::
-TilesetLighthouseAnim::
-TilesetPlayersRoomAnim::
-TilesetRuinsOfAlphAnim::
-TilesetRadioTowerAnim::
-TilesetUndergroundAnim::
-	dr $fc28e, $fc9ae
 NPCTrade::
 	dr $fc9ae, $fcd87
 MomTriesToBuySomething::

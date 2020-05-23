@@ -971,22 +971,7 @@ wAttrmap:: ; ccd9
 	ds SCREEN_WIDTH * SCREEN_HEIGHT
 wAttrmapEnd::
 
-wce41:: ds 1 ; ce41
-wce42:: ds 1 ; ce42
-wce43:: ds 1 ; ce43
-wce44:: ds 1 ; ce44
-wce45:: ds 1 ; ce45
-wce46:: ds 1 ; ce46
-wce47:: ds 1 ; ce47
-wce48:: ds 1 ; ce48
-wce49:: ds 1 ; ce49
-wce4a:: ds 1 ; ce4a
-wce4b:: ds 1 ; ce4b
-wce4c:: ds 1 ; ce4c
-wce4d:: ds 1 ; ce4d
-wce4e:: ds 1 ; ce4e
-wce4f:: ds 1 ; ce4f
-wce50:: ds 1 ; ce50
+wTileAnimBuffer:: ds 1 tiles ; ce41
 
 wOtherPlayerLinkMode:: db ; ce51
 wOtherPlayerLinkAction:: ; ce52
@@ -1482,7 +1467,7 @@ ENDU ; cf40
 
 wPlaceBallsX:: db ; cf40
 wPlaceBallsY:: db ; cf41
-wcf42:: ds 1 ; cf42
+wTileAnimationTimer:: db ; cf42
 
 ; palette backups?
 wBGP:: db
