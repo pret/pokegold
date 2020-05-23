@@ -2511,7 +2511,7 @@ wDecoBigDoll::       db ; d960
 
 ; Items bought from Mom
 wWhichMomItem:: db ; d961
-wd962:: ds 1 ; d962
+wWhichMomItemSet:: db ; d962
 wMomItemTriggerBalance:: ds 3 ; d963
 
 wDailyResetTimer:: dw ; d966

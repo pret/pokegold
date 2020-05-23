@@ -831,12 +831,11 @@ SECTION "bank3f", ROMX
 
 INCLUDE "engine/tilesets/tileset_anims.asm"
 INCLUDE "engine/events/npc_trade.asm"
-MomTriesToBuySomething::
-	dr $fcd87, $fcf6a
-StagePartyDataForMysteryGift::
-	dr $fcf6a, $fcfb2
-InitMysteryGiftLayout::
-	dr $fcfb2, $fde20
+INCLUDE "engine/events/mom_phone.asm"
+INCLUDE "engine/link/mystery_gift_3.asm"
+ColorTest::
+	dr $fd2c9, $fde20
+
 
 
 SECTION "Standard Scripts", ROMX
