@@ -369,13 +369,13 @@ INCLUDE "engine/pokemon/tempmon.asm"
 INCLUDE "engine/pokemon/types.asm"
 INCLUDE "engine/battle/unreferenced_getgen1trainerclassname.asm"
 INCLUDE "engine/pokemon/mon_stats.asm"
+INCLUDE "engine/link/init_list.asm"
 
-InitList::
-	dr $514c2, $51524
 CalcLevel::
 	dr $51524, $51550
 CalcExpAtLevel::
 	dr $51550, $5161b
+
 _SwitchPartyMons::
 	dr $5161b, $51749
 
