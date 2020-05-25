@@ -649,8 +649,10 @@ _DepositPKMN::
 _WithdrawPKMN::
 	dr $e2d71, $e2f47
 _MovePKMNWithoutMail::
-	dr $e2f47, $e3d25
+	dr $e2f47, $e3773
 
+StatsScreenDPad::
+	dr $e3773, $e3d25
 _ChangeBox::
 	dr $e3d25, $e3f74
 
@@ -700,7 +702,9 @@ _LoadFontsBattleExtra::
 LoadBattleFontsHPBar::
 	dr $f8066, $f8081
 LoadHPBar::
-	dr $f8081, $f80d9
+	dr $f8081, $f80a6
+StatsScreen_LoadFont::
+	dr $f80a6, $f80d9
 LoadStatsScreenPageTilesGFX::
 	dr $f80d9, $f8bb2
 EnemyHPBarBorderGFX::
