@@ -40,12 +40,15 @@ ROMX $04
 ROMX $05
 	"bank5"
 ROMX $06
-	"bank6"
+	"Tileset Data 1"
 ROMX $07
-	"bank7"
+	"Roofs"
+	"Tileset Data 2"
 	"Extra Songs 1"
 ROMX $08
-	"bank8"
+	"Clock Reset"
+	"Tileset Data 3"
+	"Catch Tutorial"
 	"Egg Moves"
 ROMX $09
 	"bank9"
@@ -54,7 +57,7 @@ ROMX $0a
 ROMX $0b
 	"bankB"
 ROMX $0c
-	"bankC"
+	"Tileset Data 4"
 ROMX $0d
 	"Effect Commands"
 ROMX $0e
@@ -152,7 +155,7 @@ ROMX $3d
 ROMX $3e
 	"bank3e"
 ROMX $3f
-	"bank3f"
+	"bank3F"
 ROMX $40
 	"Standard Scripts"
 ROMX $41
@@ -243,6 +246,8 @@ ROMX $6e
 	"Item Descriptions"
 ROMX $70
 	"bank70"
+	"Tileset Data 5"
+	"bank70_2"
 ROMX $7f
 	org $7df8
 	"Stadium Data"

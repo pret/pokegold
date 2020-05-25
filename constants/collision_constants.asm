@@ -32,6 +32,7 @@ COLL_WATERFALL_RIGHT   EQU $30 ; unused
 COLL_WATERFALL_LEFT    EQU $31 ; unused
 COLL_WATERFALL_UP      EQU $32 ; unused
 COLL_WATERFALL         EQU $33
+COLL_36                EQU $36 ; ?
 COLL_CURRENT_RIGHT     EQU $38 ; unused
 COLL_CURRENT_LEFT      EQU $39 ; unused
 COLL_CURRENT_UP        EQU $3a ; unused
@@ -60,6 +61,7 @@ COLL_BRAKE_57          EQU $57 ; unused
 COLL_5B                EQU $5b ; garbage
 COLL_PIT               EQU $60
 COLL_VIRTUAL_BOY       EQU $61 ; garbage
+COLL_63                EQU $63 ; ?
 COLL_64                EQU $64 ; garbage
 COLL_65                EQU $65 ; garbage
 COLL_PIT_68            EQU $68 ; unused

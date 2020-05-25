@@ -100,134 +100,21 @@ INCLUDE "engine/link/mystery_gift_gfx.asm"
 INCLUDE "engine/pokemon/breeding.asm"
 
 
-SECTION "bank6", ROMX
-
-TilesetKantoMeta::
-INCBIN "data/tilesets/kanto_metatiles.bin"
-TilesetKantoColl::
-	dr $18800, $18a00
-Tileset0GFX::
-TilesetJohtoGFX::
-INCBIN "gfx/tilesets/johto.2bpp.lz"
-
-Tileset0Meta::
-TilesetJohtoMeta::
-INCBIN "data/tilesets/johto_metatiles.bin"
-Tileset0Coll::
-TilesetJohtoColl::
-	dr $19806, $19a06
-TilesetJohtoModernGFX::
-INCBIN "gfx/tilesets/johto_modern.2bpp.lz"
-
-TilesetJohtoModernMeta::
-INCBIN "data/tilesets/johto_modern_metatiles.bin"
-TilesetJohtoModernColl::
-	dr $1a80c, $1b40c
-
-TilesetTraditionalHouseGFX::
-INCBIN "gfx/tilesets/traditional_house.2bpp.lz"
-TilesetTraditionalHouseMeta::
-INCBIN "data/tilesets/traditional_house_metatiles.bin"
-TilesetTraditionalHouseColl::
-	dr $1bcbc, $1bdbc
-
-
-SECTION "bank7", ROMX
+SECTION "Roofs", ROMX
 
 LoadMapGroupRoof::
 	dr $1c000, $1c30c
 
-TilesetGateGFX::
-INCBIN "gfx/tilesets/gate.2bpp.lz"
-TilesetGateMeta::
-INCBIN "data/tilesets/gate_metatiles.bin"
-TilesetGateColl::
-	dr $1cb0c, $1cc0c
-TilesetPokecenterGFX::
-INCBIN "gfx/tilesets/pokecenter.2bpp.lz"
 
-TilesetPokecenterMeta::
-INCBIN "data/tilesets/pokecenter_metatiles.bin"
-TilesetPokecenterColl::
-	dr $1d43c, $1d53c
-TilesetPortGFX::
-INCBIN "gfx/tilesets/port.2bpp.lz"
-TilesetPortMeta::
-INCBIN "data/tilesets/port_metatiles.bin"
-TilesetPortColl::
-	dr $1dd4c, $1de4c
-TilesetPlayersHouseGFX::
-INCBIN "gfx/tilesets/players_house.2bpp.lz"
-
-TilesetPlayersHouseMeta::
-INCBIN "data/tilesets/players_house_metatiles.bin"
-TilesetPlayersHouseColl::
-	dr $1e62c, $1e72c
-TilesetMansionGFX::
-INCBIN "gfx/tilesets/mansion.2bpp.lz"
-TilesetMansionMeta::
-INCBIN "data/tilesets/mansion_metatiles.bin"
-TilesetMansionColl::
-	dr $1eebc, $1efbc
-TilesetCaveGFX::
-INCBIN "gfx/tilesets/cave.2bpp.lz"
-
-TilesetCaveMeta::
-TilesetDarkCaveMeta::
-INCBIN "data/tilesets/cave_metatiles.bin"
-TilesetCaveColl::
-TilesetDarkCaveColl::
-	dr $1f74c, $1f84c
-
-
-SECTION "bank8", ROMX
+SECTION "Clock Reset", ROMX
 
 RestartClock_GetWraparoundTime::
 	dr $20000, $20021
 RestartClock::
 	dr $20021, $20181
 
-TilesetTowerGFX::
-INCBIN "gfx/tilesets/tower.2bpp.lz"
-TilesetTowerMeta::
-INCBIN "data/tilesets/tower_metatiles.bin"
-TilesetTowerColl::
-	dr $209b1, $20ab1
-TilesetLabGFX::
-INCBIN "gfx/tilesets/lab.2bpp.lz"
-TilesetLabMeta::
-INCBIN "data/tilesets/lab_metatiles.bin"
 
-TilesetLabColl::
-	dr $21281, $21381
-TilesetFacilityGFX::
-INCBIN "gfx/tilesets/facility.2bpp.lz"
-TilesetFacilityMeta::
-INCBIN "data/tilesets/facility_metatiles.bin"
-TilesetFacilityColl::
-	dr $21ba1, $21ca1
-TilesetMartGFX::
-INCBIN "gfx/tilesets/mart.2bpp.lz"
-
-TilesetMartMeta::
-INCBIN "data/tilesets/mart_metatiles.bin"
-TilesetMartColl::
-	dr $22451, $22551
-TilesetGameCornerGFX::
-INCBIN "gfx/tilesets/game_corner.2bpp.lz"
-TilesetGameCornerMeta::
-INCBIN "data/tilesets/game_corner_metatiles.bin"
-TilesetGameCornerColl::
-	dr $22d51, $22e51
-TilesetTrainStationGFX::
-INCBIN "gfx/tilesets/train_station.2bpp.lz"
-
-TilesetTrainStationMeta::
-INCBIN "data/tilesets/train_station_metatiles.bin"
-TilesetTrainStationColl::
-	dr $235f1, $236f1
-TilesetForestMeta::
-INCBIN "data/tilesets/forest_metatiles.bin"
+SECTION "Catch Tutorial", ROMX
 
 CatchTutorial::
 	dr $23971, $239fe
@@ -272,53 +159,6 @@ INCLUDE "engine/link/mystery_gift_2.asm"
 INCLUDE "engine/items/tmhm.asm"
 INCLUDE "engine/pokemon/print_move_description.asm"
 INCLUDE "engine/events/pokerus/pokerus.asm"
-
-
-SECTION "bankC", ROMX
-
-TilesetEliteFourRoomGFX::
-INCBIN "gfx/tilesets/elite_four_room.2bpp.lz"
-TilesetEliteFourRoomMeta::
-INCBIN "data/tilesets/elite_four_room_metatiles.bin"
-TilesetEliteFourRoomColl::
-	dr $308e0, $309e0
-TilesetParkGFX::
-INCBIN "gfx/tilesets/park.2bpp.lz"
-TilesetParkMeta::
-INCBIN "data/tilesets/park_metatiles.bin"
-
-TilesetParkColl::
-	dr $31240, $31340
-TilesetRuinsOfAlphGFX::
-INCBIN "gfx/tilesets/ruins_of_alph.2bpp.lz"
-TilesetRuinsOfAlphMeta::
-INCBIN "data/tilesets/ruins_of_alph_metatiles.bin"
-TilesetRuinsOfAlphColl::
-	dr $31a70, $31b70
-TilesetRadioTowerGFX::
-INCBIN "gfx/tilesets/radio_tower.2bpp.lz"
-TilesetRadioTowerMeta::
-INCBIN "data/tilesets/radio_tower_metatiles.bin"
-
-TilesetRadioTowerColl::
-	dr $323c0, $324c0
-TilesetUndergroundGFX::
-INCBIN "gfx/tilesets/underground.2bpp.lz"
-TilesetUndergroundMeta::
-INCBIN "data/tilesets/underground_metatiles.bin"
-TilesetUndergroundColl::
-	dr $32c90, $32d90
-TilesetIcePathGFX::
-INCBIN "gfx/tilesets/ice_path.2bpp.lz"
-
-TilesetIcePathMeta::
-INCBIN "data/tilesets/ice_path_metatiles.bin"
-TilesetIcePathColl::
-	dr $335d0, $336d0
-TilesetDarkCaveGFX::
-INCBIN "gfx/tilesets/dark_cave.2bpp.lz"
-TilesetForestGFX::
-INCBIN "gfx/tilesets/forest.2bpp.lz"
 
 
 SECTION "Effect Commands", ROMX
@@ -827,7 +667,7 @@ DoBadgeTypeBoosts::
 	dr $fbf2b, $fbf93
 
 
-SECTION "bank3f", ROMX
+SECTION "bank3F", ROMX
 
 INCLUDE "engine/tilesets/tileset_anims.asm"
 INCLUDE "engine/events/npc_trade.asm"
@@ -998,8 +838,8 @@ SECTION "bank70", ROMX
 
 INCLUDE "engine/printer/print_party.asm"
 
-TilesetKantoGFX:
-INCBIN "gfx/tilesets/kanto.2bpp.lz"
+
+SECTION "bank70_2", ROMX
 
 INCLUDE "engine/rtc/print_hours_mins.asm"
 INCLUDE "engine/pokedex/pokedex_3.asm"
