@@ -93,12 +93,12 @@ def filepath_rules(filepath):
             # args['animate'] = True
         # startswith to handle back_gold / back_silver
         elif name.startswith('back'):
-            args['pal_file'] = os.path.join(filedir, 'shiny.pal')
+            args['pal_file'] = os.path.join(filedir, 'normal.pal')
             args['pic'] = True
 
     elif 'gfx/trainers' in filedir:
         trainer_name = filedir.split('/')[-1]
-        args['pal_file'] = os.path.join(filedir, trainer_name + '.pal')
+        args['pal_file'] = os.path.join(filedir, name + '.pal')
         args['pic'] = True
 
     elif 'gfx/battle' in filedir:
@@ -152,7 +152,6 @@ def filepath_rules(filepath):
     elif 'gfx/overworld' in filedir:
         if name == 'heal_machine':
             args['width'] = 8
-            args['pal_file'] = os.path.join(filedir, name + '.pal')
         elif name in overworld_px8:
             args['width'] = 8
         elif name in overworld_px16:
@@ -190,12 +189,15 @@ def filepath_rules(filepath):
         elif name == 'mystery_gift_2':
             args['width'] = 128
         # TODO: this is incomplete
+        elif name == 'question_mark':
+            args['width'] = 40
+            args['rows'] = [(1, 4), (0, 0), (0, 0), (2, 3), (2, 1)]
         elif name == 'border':
-            args['width'] = 16
+            args['width'] = 56
 
     elif 'gfx/sgb' in filedir:
         args['width'] = 128
-        args['pal_file'] = os.path.join(filedir, name + '.pal')
+        #args['pal_file'] = os.path.join(filedir, name + '.pal')
 
     elif 'gfx/slots' in filedir:
         if name == 'slots_1':

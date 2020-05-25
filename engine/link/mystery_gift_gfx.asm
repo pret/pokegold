@@ -1,7 +1,7 @@
-LoadMysteryGiftBorderGFX:
-	ld hl, MysteryGiftBorderGFX
+LoadMysteryGiftBackgroundGFX:
+	ld hl, MysteryGiftBackgroundGFX
 	ld de, vTiles2 tile $20
-	ld a, BANK(MysteryGiftBorderGFX)
+	ld a, BANK(MysteryGiftBackgroundGFX)
 	ld bc, wBGMapBufferEnd - wBGMapBuffer
 	call FarCopyBytesDouble
 	ld hl, vTiles2 tile $20
@@ -23,8 +23,9 @@ LoadMysteryGiftGFX2:
 	ld bc, 14 tiles
 	jp FarCopyBytes
 
-MysteryGiftBorderGFX:
-INCBIN "gfx/mystery_gift/border.2bpp"
+MysteryGiftBackgroundGFX:
+INCBIN "gfx/mystery_gift/question_mark.1bpp"
+INCBIN "gfx/mystery_gift/border.1bpp"
 
 MysteryGiftGFX2:
 INCBIN "gfx/mystery_gift/mystery_gift_2.2bpp"

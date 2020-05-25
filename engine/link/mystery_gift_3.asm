@@ -57,7 +57,7 @@ InitMysteryGiftLayout:
 	ld a, BANK(MysteryGiftGFX)
 	ld bc, $20 tiles
 	call FarCopyBytes
-	farcall LoadMysteryGiftBorderGFX
+	farcall LoadMysteryGiftBackgroundGFX
 	farcall LoadMysteryGiftGFX2
 	ld hl, vTiles2 tile $3d
 	ld a, $ff
