@@ -584,8 +584,7 @@ Footprints::
 
 UnownFont::
 	dr $fb30e, $fb4be
-TileCollisionTable::
-	dr $fb4be, $fb5be
+INCLUDE "data/collision_permissions.asm"
 Shrink1Pic::
 	dr $fb5be, $fb64e
 Shrink2Pic::
