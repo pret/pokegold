@@ -102,22 +102,17 @@ INCLUDE "engine/pokemon/breeding.asm"
 
 SECTION "Roofs", ROMX
 
-LoadMapGroupRoof::
-	dr $1c000, $1c30c
+INCLUDE "engine/tilesets/mapgroup_roofs.asm"
 
 
 SECTION "Clock Reset", ROMX
 
-RestartClock_GetWraparoundTime::
-	dr $20000, $20021
-RestartClock::
-	dr $20021, $20181
+INCLUDE "engine/rtc/restart_clock.asm"
 
 
 SECTION "Catch Tutorial", ROMX
 
-CatchTutorial::
-	dr $23971, $239fe
+INCLUDE "engine/events/catch_tutorial.asm"
 
 
 SECTION "bank9", ROMX
