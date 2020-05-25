@@ -235,5 +235,47 @@ INCBIN "gfx/tilesets/forest.2bpp.lz"
 
 SECTION "Tileset Data 5", ROMX
 
+TilesetChampionsRoomGFX::
+INCBIN "gfx/tilesets/champions_room.2bpp.lz"
+
+TilesetChampionsRoomMeta::
+INCBIN "data/tilesets/champions_room_metatiles.bin"
+
+TilesetChampionsRoomColl::
+INCLUDE "data/tilesets/champions_room_collision.asm"
+
+TilesetHouseGFX::
+INCBIN "gfx/tilesets/house.2bpp.lz"
+
+TilesetHouseMeta::
+INCBIN "data/tilesets/house_metatiles.bin"
+
+TilesetHouseColl::
+INCLUDE "data/tilesets/house_collision.asm"
+
+TilesetLighthouseGFX::
+INCBIN "gfx/tilesets/lighthouse.2bpp.lz"
+
+TilesetLighthouseMeta::
+INCBIN "data/tilesets/lighthouse_metatiles.bin"
+
+TilesetLighthouseColl::
+INCLUDE "data/tilesets/lighthouse_collision.asm"
+
+TilesetPlayersRoomGFX::
+INCBIN "gfx/tilesets/players_room.2bpp.lz"
+
+TilesetPlayersRoomMeta::
+INCBIN "data/tilesets/players_room_metatiles.bin"
+
+TilesetPlayersRoomColl::
+INCLUDE "data/tilesets/players_room_collision.asm"
+
+TilesetForestColl::
+INCLUDE "data/tilesets/forest_collision.asm"
+
+
+SECTION "Tileset Data 6", ROMX
+
 TilesetKantoGFX::
 INCBIN "gfx/tilesets/kanto.2bpp.lz"

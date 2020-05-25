@@ -136,7 +136,7 @@ ROMX $36
 	"Font Inversed"
 ROMX $37
 	"Map Blocks 3"
-	"bank37_2"
+	"Tileset Data 5"
 ROMX $38
 	"bank38"
 ROMX $39
@@ -246,7 +246,7 @@ ROMX $6e
 	"Item Descriptions"
 ROMX $70
 	"bank70"
-	"Tileset Data 5"
+	"Tileset Data 6"
 	"bank70_2"
 ROMX $7f
 	org $7df8

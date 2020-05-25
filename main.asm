@@ -498,36 +498,6 @@ FontInversed:
 INCBIN "gfx/font/font_inversed.1bpp"
 
 
-SECTION "bank37_2", ROMX
-
-TilesetChampionsRoomGFX::
-INCBIN "gfx/tilesets/champions_room.2bpp.lz"
-TilesetChampionsRoomMeta::
-INCBIN "data/tilesets/champions_room_metatiles.bin"
-TilesetChampionsRoomColl::
-	dr $de033, $de133
-TilesetHouseGFX::
-INCBIN "gfx/tilesets/house.2bpp.lz"
-TilesetHouseMeta::
-INCBIN "data/tilesets/house_metatiles.bin"
-TilesetHouseColl::
-	dr $de9d3, $dead3
-TilesetLighthouseGFX::
-INCBIN "gfx/tilesets/lighthouse.2bpp.lz"
-TilesetLighthouseMeta::
-INCBIN "data/tilesets/lighthouse_metatiles.bin"
-TilesetLighthouseColl::
-	dr $df2d3, $df3d3
-TilesetPlayersRoomGFX::
-INCBIN "gfx/tilesets/players_room.2bpp.lz"
-TilesetPlayersRoomMeta::
-INCBIN "data/tilesets/players_room_metatiles.bin"
-TilesetPlayersRoomColl::
-	dr $dfc93, $dfd93
-TilesetForestColl::
-	dr $dfd93, $dfe93
-
-
 SECTION "bank38", ROMX
 
 	ret
