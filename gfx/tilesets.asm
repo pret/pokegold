@@ -33,7 +33,13 @@ TilesetJohtoModernMeta::
 INCBIN "data/tilesets/johto_modern_metatiles.bin"
 
 TilesetJohtoModernColl::
-	dr $1a80c, $1b40c
+INCLUDE "data/tilesets/johto_modern_collision.asm"
+
+UnusedTilesetJohtoMeta::
+INCBIN "data/tilesets/unused_johto_metatiles.bin"
+
+UnusedTilesetJohtoColl::
+INCLUDE "data/tilesets/unused_johto_collision.asm"
 
 TilesetTraditionalHouseGFX::
 INCBIN "gfx/tilesets/traditional_house.2bpp.lz"
@@ -90,7 +96,7 @@ TilesetMansionMeta::
 INCBIN "data/tilesets/mansion_metatiles.bin"
 
 TilesetMansionColl::
-	dr $1eebc, $1efbc
+INCLUDE "data/tilesets/mansion_collision.asm"
 
 TilesetCaveGFX::
 INCBIN "gfx/tilesets/cave.2bpp.lz"
@@ -122,7 +128,7 @@ TilesetLabMeta::
 INCBIN "data/tilesets/lab_metatiles.bin"
 
 TilesetLabColl::
-	dr $21281, $21381
+INCLUDE "data/tilesets/lab_collision.asm"
 
 TilesetFacilityGFX::
 INCBIN "gfx/tilesets/facility.2bpp.lz"
@@ -140,7 +146,7 @@ TilesetMartMeta::
 INCBIN "data/tilesets/mart_metatiles.bin"
 
 TilesetMartColl::
-	dr $22451, $22551
+INCLUDE "data/tilesets/mart_collision.asm"
 
 TilesetGameCornerGFX::
 INCBIN "gfx/tilesets/game_corner.2bpp.lz"
@@ -191,7 +197,7 @@ TilesetRuinsOfAlphMeta::
 INCBIN "data/tilesets/ruins_of_alph_metatiles.bin"
 
 TilesetRuinsOfAlphColl::
-	dr $31a70, $31b70
+INCLUDE "data/tilesets/ruins_of_alph_collision.asm"
 
 TilesetRadioTowerGFX::
 INCBIN "gfx/tilesets/radio_tower.2bpp.lz"
@@ -200,7 +206,7 @@ TilesetRadioTowerMeta::
 INCBIN "data/tilesets/radio_tower_metatiles.bin"
 
 TilesetRadioTowerColl::
-	dr $323c0, $324c0
+INCLUDE "data/tilesets/radio_tower_collision.asm"
 
 TilesetUndergroundGFX::
 INCBIN "gfx/tilesets/underground.2bpp.lz"

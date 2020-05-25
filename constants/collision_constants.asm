@@ -20,11 +20,13 @@ COLL_TALL_GRASS        EQU $18
 COLL_CUT_TREE_1A       EQU $1a ; unused
 COLL_LONG_GRASS_1C     EQU $1c ; unused
 COLL_HEADBUTT_TREE_1D  EQU $1d ; unused
+COLL_1E                EQU $1e ; ?
+COLL_1F                EQU $1f ; ?
 COLL_WATER_21          EQU $21 ; unused
 COLL_ICE               EQU $23
 COLL_WHIRLPOOL         EQU $24
 COLL_BUOY              EQU $27
-COLL_CUT_28            EQU $28 ; garbage
+COLL_CUT_28            EQU $28
 COLL_WATER             EQU $29
 COLL_ICE_2B            EQU $2b ; unused
 COLL_WHIRLPOOL_2C      EQU $2c ; unused
@@ -45,8 +47,8 @@ COLL_WALK_DOWN         EQU $44 ; unused
 COLL_BRAKE_45          EQU $45 ; garbage
 COLL_BRAKE_46          EQU $46 ; unused
 COLL_BRAKE_47          EQU $47 ; unused
-COLL_GRASS_48          EQU $48 ; unused
-COLL_GRASS_49          EQU $49 ; unused
+COLL_GRASS_48          EQU $48
+COLL_GRASS_49          EQU $49
 COLL_GRASS_4A          EQU $4a ; garbage
 COLL_GRASS_4B          EQU $4b ; garbage
 COLL_GRASS_4C          EQU $4c ; unused
@@ -81,6 +83,8 @@ COLL_WARP_PANEL        EQU $7c
 COLL_DOOR_7D           EQU $7d ; unused
 COLL_WARP_CARPET_RIGHT EQU $7e
 COLL_WARP_7F           EQU $7f ; unused
+COLL_88                EQU $88 ; ?
+COLL_89                EQU $89 ; ?
 COLL_COUNTER           EQU $90
 COLL_BOOKSHELF         EQU $91
 COLL_PC                EQU $93
