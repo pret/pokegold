@@ -342,7 +342,192 @@ StatsScreen_InitUpperHalf:
 	dw wBufferMonNick
 
 PinkPage:
-	dr $50de1, $50f5d
+	push bc
+	push bc
+	xor a
+	ldh [hBGMapMode], a
+
+; Load graphics
+	ld a, [wBaseDexNo]
+	ld [wDeciramBuffer], a
+	ld [wCurSpecies], a
+	ld b, 1
+	call StatsScreen_LoadPageIndicators
+	hlcoord 0, 8
+	lb bc, 10, 20
+	call ClearBox
+	hlcoord 0, 9
+	ld b, 0
+	call DrawPlayerHP
+	hlcoord 8, 9
+	ld [hl], $41 ; right HP/exp bar end cap
+	hlcoord 0, 12
+	ld de, .Status_Type
+	call PlaceString
+	ld a, [wTempMonPokerusStatus]
+	ld b, a
+	and $f
+	jr nz, .HasPokerus
+	ld a, b
+	and $f0
+	jr z, .NotImmuneToPkrs
+	hlcoord 8, 8
+	ld [hl], "." ; Pokérus immunity dot
+.NotImmuneToPkrs:
+	ld a, [wMonType]
+	cp BOXMON
+	jr z, .StatusOK
+	hlcoord 6, 13
+	push hl
+	ld de, wTempMonStatus
+	call PlaceStatusString
+	pop hl
+	jr .StatusOK
+.HasPokerus:
+	ld de, .PkrsStr
+	hlcoord 1, 13
+	call PlaceString
+	jr .done_status
+.StatusOK:
+	ld de, .OK_str
+	call z, PlaceString
+.done_status
+	hlcoord 1, 15
+	call PrintMonTypes
+	ld bc, 9
+	decoord 0, 16
+	hlcoord 0, 17
+	call CopyBytes
+	ld a, " "
+	ld bc, 9
+	hlcoord 0, 17
+	call ByteFill
+	hlcoord 9, 8
+	ld de, SCREEN_WIDTH
+	ld b, 10
+	ld a, $31 ; vertical divider
+.vertical_divider
+	ld [hl], a
+	add hl, de
+	dec b
+	jr nz, .vertical_divider
+	hlcoord 10, 9
+	ld de, .ExpPointStr
+	call PlaceString
+
+; Print next level
+	ld a, [wTempMonLevel]
+	push af
+	cp MAX_LEVEL
+	jr z, .got_level
+	inc a
+	ld [wTempMonLevel], a
+.got_level
+	hlcoord 17, 14
+	call PrintLevel
+	pop af
+	ld [wTempMonLevel], a
+	ld de, wTempMonExp
+	hlcoord 13, 10
+	lb bc, 3, 7
+	call PrintNum
+
+; Level-up graphics and strings
+	call .CalcExpToNextLevel
+	ld de, wBuffer1
+	hlcoord 13, 13
+	lb bc, 3, 7
+	call PrintNum
+	hlcoord 10, 12
+	ld de, .LevelUpStr
+	call PlaceString
+	hlcoord 14, 14
+	ld de, .ToStr
+	call PlaceString
+	ld a, [wTempMonLevel]
+	ld b, a
+	ld de, wTempMonExp + 2
+	hlcoord 11, 16
+	predef FillInExpBar
+	hlcoord 10, 16
+	ld [hl], $40 ; left exp bar end cap
+	hlcoord 19, 16
+	ld [hl], $41 ; right exp bar end cap
+
+; Load palettes
+	pop bc
+	farcall LoadStatsScreenPals
+	call WaitBGMap
+	ld a, 1
+	ldh [hBGMapMode], a
+
+; Place frontpic
+	pop bc
+	ld a, b
+	and a
+	jp z, StatsScreen_PlaceFrontpic
+	ret
+
+.CalcExpToNextLevel:
+	ld a, [wTempMonLevel]
+	cp MAX_LEVEL
+	jr z, .AlreadyAtMaxLevel
+	inc a
+	ld d, a
+	call CalcExpAtLevel
+	ld hl, wTempMonExp + 2
+	ld hl, wTempMonExp + 2
+	ldh a, [hQuotient + 3]
+	sub [hl]
+	dec hl
+	ld [wBuffer3], a
+	ldh a, [hQuotient + 2]
+	sbc [hl]
+	dec hl
+	ld [wBuffer2], a
+	ldh a, [hQuotient + 1]
+	sbc [hl]
+	ld [wBuffer1], a
+	ret
+
+.AlreadyAtMaxLevel:
+	ld hl, wBuffer1
+	xor a
+	ld [hli], a
+	ld [hli], a
+	ld [hl], a
+	ret
+
+.Status_Type:
+	db   "STATUS/"
+	next "TYPE/@"
+
+.OK_str:
+	db "OK @"
+
+.ExpPointStr:
+	db "EXP POINTS@"
+
+.LevelUpStr:
+	db "LEVEL UP@"
+
+.ToStr:
+	db "TO@"
+
+.PkrsStr:
+	db "#RUS@"
+
+Unreferenced_Function50f4d:
+	hlcoord 7, 0
+	ld bc, SCREEN_WIDTH
+	ld d, SCREEN_HEIGHT
+.loop
+	ld a, $31 ; vertical divider
+	ld [hl], a
+	add hl, bc
+	dec d
+	jr nz, .loop
+	ret
 
 StatsScreen_PlaceHorizontalDivider:
 	hlcoord 0, 7
@@ -370,10 +555,18 @@ StatsScreen_PlaceShinyIcon:
 	ret
 
 GreenPage:
-	dr $50f84, $5100b
+	push bc
+	push bc
+	xor a
+	ldh [hBGMapMode], a
+	dr $50f89, $5100b
 
 BluePage:
-	dr $5100b, $510bb
+	push bc
+	push bc
+	xor a
+	ldh [hBGMapMode], a
+	dr $51010, $510bb
 
 IDNoString:
 	db "<ID>№.@"
