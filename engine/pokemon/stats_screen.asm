@@ -12,14 +12,14 @@ StatsScreenInit:
 	xor a
 	ldh [hMapAnims], a ; disable overworld tile animations
 	ld c, 1
-	call StatsScreen_CopyToTempMon
+	call StatsScreenMain
 
 	; restore old values
 	pop af
 	ldh [hMapAnims], a
 	ret
 
-StatsScreen_CopyToTempMon:
+StatsScreenMain:
 	push bc
 	ld a, [wMonType]
 	cp TEMPMON
@@ -50,31 +50,32 @@ StatsScreen_CopyToTempMon:
 	call ClearTilemap
 	call UpdateSprites
 	callfar StatsScreen_LoadFont
+
 	pop bc
 	ld a, [wCurPartySpecies]
 	cp EGG
 	jp z, EggStatsInit
 
+;MonStatsScreen
 	call StatsScreen_InitUpperHalf
 	ld b, 0
 	jp StatsScreen_SetJumptableIndex
 
-Function50c11:
+StatsScreen_LoadPage:
 	push bc
-	ld de, Function50c17
+	ld de, MonStatsInit
 	push de
 	jp hl
 
-Function50c17:
+MonStatsInit:
 	pop bc
 	ld b, 1
-
-StatsScreen_GetJoypad:
-.loop
+; fall through
+MonStatsJoypadLoop:
 	call GetJoypad
 	ld a, [wMonType]
 	cp TEMPMON
-	jr nz, .notbreedmon
+	jr nz, .not_tempmon
 	push hl
 	push de
 	push bc
@@ -84,18 +85,18 @@ StatsScreen_GetJoypad:
 	pop hl
 	ld a, [wMenuJoypad]
 	and D_DOWN | D_UP
-	jr nz, StatsScreen_CopyToTempMon
+	jr nz, StatsScreenMain
 	ld a, [wMenuJoypad]
 	jr .joypad_action
 
-.notbreedmon
+.not_tempmon
 	ldh a, [hJoyPressed]
 
 .joypad_action
 	and D_DOWN | D_UP | D_LEFT | D_RIGHT | A_BUTTON | B_BUTTON
-	jr z, .loop
+	jr z, MonStatsJoypadLoop
 	bit B_BUTTON_F, a
-	jp nz, Function50cfc ; .b_button
+	jp nz, StatsScreen_Exit
 	bit D_LEFT_F, a
 	jr nz, .d_left
 	bit D_RIGHT_F, a
@@ -108,7 +109,7 @@ StatsScreen_GetJoypad:
 ;.d_down
 	ld a, [wMonType]
 	cp BOXMON
-	jr nc, StatsScreen_GetJoypad
+	jr nc, MonStatsJoypadLoop
 	and a
 	ld a, [wPartyCount]
 	jr z, .next_mon
@@ -119,7 +120,7 @@ StatsScreen_GetJoypad:
 	ld a, [wCurPartyMon]
 	inc a
 	cp b
-	jr z, StatsScreen_GetJoypad
+	jr z, MonStatsJoypadLoop
 	ld [wCurPartyMon], a
 	ld b, a
 	ld a, [wMonType]
@@ -133,7 +134,7 @@ StatsScreen_GetJoypad:
 .d_up
 	ld a, [wCurPartyMon]
 	and a
-	jr z, StatsScreen_GetJoypad
+	jr z, MonStatsJoypadLoop
 	dec a
 	ld [wCurPartyMon], a
 	ld b, a
@@ -144,12 +145,12 @@ StatsScreen_GetJoypad:
 	inc a
 	ld [wPartyMenuCursor], a
 .load_mon
-	jp StatsScreen_CopyToTempMon
+	jp StatsScreenMain
 
 .a_button:
 	ld a, c
 	cp BLUE_PAGE ; last page
-	jr z, Function50cfc ; .b_button
+	jr z, StatsScreen_Exit
 
 .d_right:
 	inc c
@@ -165,7 +166,7 @@ StatsScreen_GetJoypad:
 	ld c, BLUE_PAGE ; last page
 
 StatsScreen_SetJumptableIndex:
-	ld hl, Jumptable_50d45
+	ld hl, StatsScreen_PageJumptable
 	push bc
 	dec c
 	ld b, 0
@@ -175,15 +176,14 @@ StatsScreen_SetJumptableIndex:
 	ld h, [hl]
 	ld l, a
 	pop bc
-	jp Function50c11
+	jp StatsScreen_LoadPage
 
 EggStatsInit:
 	push bc
 	call EggStatsScreen
 	pop bc
 
-EggStatsJoypad:
-.loop
+EggStatsJoypadLoop:
 	call GetJoypad
 	ld a, [wMonType]
 	cp TEMPMON
@@ -197,7 +197,7 @@ EggStatsJoypad:
 	pop hl
 	ld a, [wMenuJoypad]
 	and D_DOWN | D_UP
-	jp nz, StatsScreen_CopyToTempMon
+	jp nz, StatsScreenMain
 	ld a, [wMenuJoypad]
 	jr .joypad_action
 
@@ -206,41 +206,158 @@ EggStatsJoypad:
 
 .joypad_action
 	and D_DOWN | D_UP | A_BUTTON | B_BUTTON
-	jr z, .loop
+	jr z, EggStatsJoypadLoop
 	bit A_BUTTON_F, a
-	jr nz, Function50cfc
+	jr nz, StatsScreen_Exit
 	bit B_BUTTON_F, a
-	jr nz, Function50cfc
+	jr nz, StatsScreen_Exit
 	bit D_UP_F, a
-	jr nz, Function50d2c
+	jr nz, EggStats_UpAction
 	bit D_DOWN_F, a
-	jp Function50d03
+	jp EggStats_DownAction
 
-Function50cfc:
-	dr $50cfc, $50d03
+StatsScreen_Exit:
+	call ClearBGPalettes
+	call ClearTilemap
+	ret
 
-Function50d03:
-	dr $50d03, $50d2c
+EggStats_DownAction:
+	ld a, [wMonType]
+	cp BOXMON
+	jr nc, EggStatsJoypadLoop
+	and a
+	ld a, [wPartyCount]
+	jr z, .next_mon
+	ld a, [wOTPartyCount]
+.next_mon
+	ld b, a
+	ld a, [wCurPartyMon]
+	inc a
+	cp b
+	jr z, EggStatsJoypadLoop
+	ld [wCurPartyMon], a
+	ld b, a
+	ld a, [wMonType]
+	and a
+	jr nz, EggStats_ScrollToLoadMon
+	ld a, b
+	inc a
+	ld [wPartyMenuCursor], a
+	jr EggStats_ScrollToLoadMon
 
-Function50d2c:
-	dr $50d2c, $50d45
+EggStats_UpAction:
+	ld a, [wCurPartyMon]
+	and a
+	jr z, EggStatsJoypadLoop
+	dec a
+	ld [wCurPartyMon], a
+	ld b, a
+	ld a, [wMonType]
+	and a
+	jr nz, EggStats_ScrollToLoadMon
+	ld a, b
+	inc a
+	ld [wPartyMenuCursor], a
+; fall through
+EggStats_ScrollToLoadMon:
+	jp StatsScreenMain
 
-Jumptable_50d45:
+StatsScreen_PageJumptable:
 ; entries correspond to *_PAGE constants
 	dw PinkPage
 	dw GreenPage
 	dw BluePage
 
 StatsScreen_InitUpperHalf:
-	dr $50d4b, $50de1
+	push bc
+	xor a
+	ldh [hBGMapMode], a
+	ld a, [wBaseDexNo]
+	ld [wDeciramBuffer], a
+	ld [wCurSpecies], a
+	hlcoord 8, 0
+	ld [hl], "№"
+	inc hl
+	ld [hl], "."
+	inc hl
+	ld de, wDeciramBuffer
+	lb bc, PRINTNUM_LEADINGZEROS | 1, 3
+	call PrintNum
+	hlcoord 14, 0
+	call PrintLevel
+	ld hl, .NicknamePointers
+	call GetNicknamePointer
+
+;.copy_nickname
+	ld a, [wMonType]
+	cp BOXMON
+	ld a, BANK(sBoxMonNicknames)
+	call z, OpenSRAM
+	ld d, h
+	ld e, l
+	hlcoord 8, 2
+	call PlaceString
+	ld a, [wMonType]
+	cp BOXMON
+	call z, CloseSRAM
+	call GetGender
+	jr c, .next
+	ld a, "♂"
+	jr nz, .place_gender_char
+	ld a, "♀"
+.place_gender_char
+	hlcoord 18, 0
+	ld [hl], a
+.next
+	hlcoord 9, 4
+	ld a, "/"
+	ld [hli], a
+	ld a, [wBaseDexNo]
+	ld [wNamedObjectIndexBuffer], a
+	call GetPokemonName
+	call PlaceString
+	call StatsScreen_PlaceHorizontalDivider
+	call StatsScreen_PlacePageSwitchArrows
+	call StatsScreen_PlaceShinyIcon
+;.place_hp_bar
+	ld hl, wTempMonHP
+	ld a, [hli]
+	ld b, a
+	ld c, [hl]
+	ld hl, wTempMonMaxHP
+	ld a, [hli]
+	ld d, a
+	ld e, [hl]
+	callfar ComputeHPBarPixels
+	ld hl, wCurHPPal
+	call SetHPPal
+	ld b, SCGB_STATS_SCREEN_HP_PALS
+	call GetSGBLayout
+	pop bc
+	ret
+
+.NicknamePointers:
+	dw wPartyMonNicknames
+	dw wOTPartyMonNicknames
+	dw sBoxMonNicknames
+	dw wBufferMonNick
+
 PinkPage:
-	dr $50de1, $50f84
+	dr $50de1, $50f5d
+StatsScreen_PlaceHorizontalDivider:
+	dr $50f5d, $50f69
+StatsScreen_PlacePageSwitchArrows:
+	dr $50f69, $50f74
+StatsScreen_PlaceShinyIcon:
+	dr $50f74, $50f84
 GreenPage:
 	dr $50f84, $5100b
 BluePage:
 	dr $5100b, $510ed
 EggStatsScreen:
-	dr $510ed, $5128f
+	dr $510ed, $51278
+GetNicknamePointer:
+	dr $51278, $5128f
 
 PrintTempMonStats:
 ; Print wTempMon's stats at hl, with spacing bc.
