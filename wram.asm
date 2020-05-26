@@ -1583,15 +1583,14 @@ wMailboxItems:: ds MAILBOX_CAPACITY
 wMailboxEnd::
 ENDU ; cffc
 
-wcffc:: ds 1 ; cffc
-wcffd:: ds 1 ; cffd
+wListPointer:: dw ; cffc
 wUnusedCFFE:: dw ; cffe
 
 
 SECTION "WRAM 1", WRAMX
 
-wd000:: ds 1 ; d000
-wd001:: ds 1 ; d001
+wItemAttributesPtr:: dw ; d000
+
 wCurItem:: db ; d002
 wCurItemQuantity:: ; d003
 wMartItemID::

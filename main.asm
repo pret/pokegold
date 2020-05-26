@@ -356,83 +356,27 @@ INCLUDE "engine/pokemon/mail.asm"
 
 SECTION "bank14", ROMX
 
-SelectMonFromParty::
-	dr $50000, $5001d
-SelectTradeOrDayCareMon::
-	dr $5001d, $5004f
-LoadPartyMenuGFX::
-	dr $5004f, $5005f
-WritePartyMenuTilemap::
-	dr $5005f, $50355
-InitPartyMenuGFX::
-	dr $50355, $5037a
-InitPartyMenuWithCancel::
-	dr $5037a, $503a2
-InitPartyMenuNoCancel::
-	dr $503a2, $503cc
-PartyMenuSelect::
-	dr $503cc, $5040f
-PrintPartyMenuText::
-	dr $5040f, $504db
-PrintPartyMenuActionText::
-	dr $504db, $5054f
-LoadFishingGFX::
-	dr $5054f, $50610
-DoPoisonStep::
-	dr $50610, $506f2
-SweetScentFromMenu::
-	dr $506f2, $50763
-_Squirtbottle::
-	dr $50763, $507ac
-_CardKey::
-	dr $507ac, $507e7
-_BasementKey::
-	dr $507e7, $50819
-_SacredAsh::
-	dr $50819, $5087d
-CopyMonToTempMon::
-	dr $5087d, $50940
-PrintMonTypes::
-	dr $50940, $5096d
-PrintMoveType::
-	dr $5096d, $50986
-PrintType::
-	dr $50986, $50997
-GetTypeName::
-	dr $50997, $50b3d
-DrawPlayerHP::
-	dr $50b3d, $50b41
-DrawEnemyHP::
-	dr $50b41, $50bae
-StatsScreenInit::
-	dr $50bae, $5128f
 
-PrintTempMonStats::
-	dr $5128f, $512f1
-GetGender::
-	dr $512f1, $51364
-ListMovePP::
-	dr $51364, $513e4
-Unused_PlaceEnemyHPLevel::
-	dr $513e4, $51437
-PlaceNonFaintStatus::
-	dr $51437, $51478
-ListMoves::
-	dr $51478, $514c2
-InitList::
-	dr $514c2, $51524
-CalcLevel::
-	dr $51524, $51550
-CalcExpAtLevel::
-	dr $51550, $5161b
-_SwitchPartyMons::
-	dr $5161b, $51749
+INCLUDE "engine/pokemon/party_menu.asm"
+INCLUDE "engine/events/fishing_gfx.asm"
+INCLUDE "engine/events/poisonstep.asm"
+INCLUDE "engine/events/sweet_scent.asm"
+INCLUDE "engine/events/squirtbottle.asm"
+INCLUDE "engine/events/card_key.asm"
+INCLUDE "engine/events/basement_key.asm"
+INCLUDE "engine/events/sacred_ash.asm"
+INCLUDE "engine/pokemon/tempmon.asm"
+INCLUDE "engine/pokemon/types.asm"
+INCLUDE "engine/battle/unreferenced_getgen1trainerclassname.asm"
+INCLUDE "engine/pokemon/mon_stats.asm"
+INCLUDE "engine/link/init_list.asm"
+INCLUDE "engine/pokemon/experience.asm"
+INCLUDE "engine/pokemon/switchpartymons.asm"
 INCLUDE "engine/gfx/load_pics.asm"
 INCLUDE "engine/pokemon/move_mon_wo_mail.asm"
 INCLUDE "data/pokemon/base_stats.asm"
+INCLUDE "data/pokemon/unused_pic_banks.asm"
 
-Unknown53a6b::
-	dr $53a6b, $53a83
 EggPic::
 INCBIN "gfx/pokemon/egg/front.2bpp.lz"
 
@@ -705,8 +649,10 @@ _DepositPKMN::
 _WithdrawPKMN::
 	dr $e2d71, $e2f47
 _MovePKMNWithoutMail::
-	dr $e2f47, $e3d25
+	dr $e2f47, $e3773
 
+StatsScreenDPad::
+	dr $e3773, $e3d25
 _ChangeBox::
 	dr $e3d25, $e3f74
 
@@ -756,7 +702,9 @@ _LoadFontsBattleExtra::
 LoadBattleFontsHPBar::
 	dr $f8066, $f8081
 LoadHPBar::
-	dr $f8081, $f80d9
+	dr $f8081, $f80a6
+StatsScreen_LoadFont::
+	dr $f80a6, $f80d9
 LoadStatsScreenPageTilesGFX::
 	dr $f80d9, $f8bb2
 EnemyHPBarBorderGFX::
