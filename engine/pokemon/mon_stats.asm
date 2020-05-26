@@ -84,6 +84,45 @@ DrawHP:
 
 INCLUDE "engine/pokemon/stats_screen.asm"
 
+PrintTempMonStats:
+; Print wTempMon's stats at hl, with spacing bc.
+	push bc
+	push hl
+	ld de, .StatNames
+	call PlaceString
+	pop hl
+	pop bc
+	add hl, bc
+	ld bc, SCREEN_WIDTH
+	add hl, bc
+	ld de, wTempMonAttack
+	lb bc, 2, 3
+	call .PrintStat
+	ld de, wTempMonDefense
+	call .PrintStat
+	ld de, wTempMonSpclAtk
+	call .PrintStat
+	ld de, wTempMonSpclDef
+	call .PrintStat
+	ld de, wTempMonSpeed
+	jp PrintNum
+
+.PrintStat:
+	push hl
+	call PrintNum
+	pop hl
+	ld de, SCREEN_WIDTH * 2
+	add hl, de
+	ret
+
+.StatNames:
+	db   "ATTACK"
+	next "DEFENSE"
+	next "SPCL.ATK"
+	next "SPCL.DEF"
+	next "SPEED"
+	next "@"
+
 GetGender:
 ; Return the gender of a given monster (wCurPartyMon/wCurOTMon/wCurWildMon).
 ; When calling this function, a should be set to an appropriate wMonType value.

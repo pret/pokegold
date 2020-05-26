@@ -2,15 +2,13 @@
 	const PINK_PAGE  ; 1
 	const GREEN_PAGE ; 2
 	const BLUE_PAGE  ; 3
-NUM_STAT_PAGES EQU const_value - 1
-
-STAT_PAGE_MASK EQU %00000011
 
 StatsScreenInit:
 	ldh a, [hMapAnims]
 	push af
 	xor a
 	ldh [hMapAnims], a ; disable overworld tile animations
+
 	ld c, 1
 	call StatsScreenMain
 
@@ -31,20 +29,19 @@ StatsScreenMain:
 	ld de, wTempMon
 	ld bc, PARTYMON_STRUCT_LENGTH
 	call CopyBytes
-	jr .ok
+	jr .got_stats
 
 .not_tempmon
 	call CopyMonToTempMon
 	ld a, [wCurPartySpecies]
-; skip CalcTempmonStats if egg or boxmon
 	cp EGG
-	jp z, .ok
+	jp z, .got_stats
 	ld a, [wMonType]
 	cp BOXMON
-	jr c, .ok
+	jr c, .got_stats
 	call CalcTempmonStats
 
-.ok
+.got_stats
 	call ClearBGPalettes
 	call ClearTilemap
 	call UpdateSprites
@@ -54,23 +51,23 @@ StatsScreenMain:
 	ld a, [wCurPartySpecies]
 	cp EGG
 	jp z, EggStatsInit
-
-;MonStatsScreen ; ?
 	call StatsScreen_InitUpperHalf
 	ld b, 0
-	jp StatsScreen_SetJumptableIndex
+	jp StatsScreen_JumpToLoadPageFunction
 
-StatsScreen_LoadPage: ; ?
+StatsScreen_LoadPage:
 	push bc
-	ld de, MonStatsInit
+	ld de, .done_loading
 	push de
+; first jump to LoadPage function in jumptable
 	jp hl
 
-MonStatsInit: ; ?
+; return here after LoadPage function finishes
+.done_loading
 	pop bc
 	ld b, 1
-; fall through
-MonStatsJoypadLoop:
+
+.joypad_loop
 	call GetJoypad
 	ld a, [wMonType]
 	cp TEMPMON
@@ -93,7 +90,7 @@ MonStatsJoypadLoop:
 
 .joypad_action
 	and D_DOWN | D_UP | D_LEFT | D_RIGHT | A_BUTTON | B_BUTTON
-	jr z, MonStatsJoypadLoop
+	jr z, .joypad_loop
 	bit B_BUTTON_F, a
 	jp nz, StatsScreen_Exit
 	bit D_LEFT_F, a
@@ -105,21 +102,20 @@ MonStatsJoypadLoop:
 	bit D_UP_F, a
 	jr nz, .d_up
 
-;.d_down
+; .d_down
 	ld a, [wMonType]
 	cp BOXMON
-	jr nc, MonStatsJoypadLoop
+	jr nc, .joypad_loop
 	and a
 	ld a, [wPartyCount]
 	jr z, .next_mon
 	ld a, [wOTPartyCount]
-
 .next_mon
 	ld b, a
 	ld a, [wCurPartyMon]
 	inc a
 	cp b
-	jr z, MonStatsJoypadLoop
+	jr z, .joypad_loop
 	ld [wCurPartyMon], a
 	ld b, a
 	ld a, [wMonType]
@@ -133,7 +129,7 @@ MonStatsJoypadLoop:
 .d_up
 	ld a, [wCurPartyMon]
 	and a
-	jr z, MonStatsJoypadLoop
+	jr z, .joypad_loop
 	dec a
 	ld [wCurPartyMon], a
 	ld b, a
@@ -143,29 +139,31 @@ MonStatsJoypadLoop:
 	ld a, b
 	inc a
 	ld [wPartyMenuCursor], a
+; fall through
 .load_mon
 	jp StatsScreenMain
 
-.a_button:
+.a_button
 	ld a, c
 	cp BLUE_PAGE ; last page
 	jr z, StatsScreen_Exit
 
-.d_right:
+.d_right
 	inc c
 	ld a, BLUE_PAGE ; last page
 	cp c
-	jr nc, StatsScreen_SetJumptableIndex
+	jr nc, StatsScreen_JumpToLoadPageFunction
 	ld c, PINK_PAGE ; first page
-	jr StatsScreen_SetJumptableIndex
+	jr StatsScreen_JumpToLoadPageFunction
 
-.d_left:
+.d_left
 	dec c
-	jr nz, StatsScreen_SetJumptableIndex
+	jr nz, StatsScreen_JumpToLoadPageFunction
 	ld c, BLUE_PAGE ; last page
+; fall through
 
-StatsScreen_SetJumptableIndex: ; ?
-	ld hl, StatsScreen_PageJumptable
+StatsScreen_JumpToLoadPageFunction:
+	ld hl, StatsScreen_LoadPageJumptable
 	push bc
 	dec c
 	ld b, 0
@@ -181,12 +179,14 @@ EggStatsInit:
 	push bc
 	call EggStatsScreen
 	pop bc
+; fall through
 
-EggStatsJoypadLoop:
+EggStats_JoypadLoop:
 	call GetJoypad
 	ld a, [wMonType]
 	cp TEMPMON
 	jr nz, .not_tempmon
+; .tempmon
 	push hl
 	push de
 	push bc
@@ -202,10 +202,9 @@ EggStatsJoypadLoop:
 
 .not_tempmon
 	ldh a, [hJoyPressed]
-
 .joypad_action
 	and D_DOWN | D_UP | A_BUTTON | B_BUTTON
-	jr z, EggStatsJoypadLoop
+	jr z, EggStats_JoypadLoop
 	bit A_BUTTON_F, a
 	jr nz, StatsScreen_Exit
 	bit B_BUTTON_F, a
@@ -223,7 +222,7 @@ StatsScreen_Exit:
 EggStats_DownAction:
 	ld a, [wMonType]
 	cp BOXMON
-	jr nc, EggStatsJoypadLoop
+	jr nc, EggStats_JoypadLoop
 	and a
 	ld a, [wPartyCount]
 	jr z, .next_mon
@@ -233,7 +232,7 @@ EggStats_DownAction:
 	ld a, [wCurPartyMon]
 	inc a
 	cp b
-	jr z, EggStatsJoypadLoop
+	jr z, EggStats_JoypadLoop
 	ld [wCurPartyMon], a
 	ld b, a
 	ld a, [wMonType]
@@ -247,7 +246,7 @@ EggStats_DownAction:
 EggStats_UpAction:
 	ld a, [wCurPartyMon]
 	and a
-	jr z, EggStatsJoypadLoop
+	jr z, EggStats_JoypadLoop
 	dec a
 	ld [wCurPartyMon], a
 	ld b, a
@@ -258,14 +257,15 @@ EggStats_UpAction:
 	inc a
 	ld [wPartyMenuCursor], a
 ; fall through
+
 EggStats_ScrollToLoadMon:
 	jp StatsScreenMain
 
-StatsScreen_PageJumptable:
+StatsScreen_LoadPageJumptable:
 ; entries correspond to *_PAGE constants
-	dw PinkPage
-	dw GreenPage
-	dw BluePage
+	dw LoadPinkPage
+	dw LoadGreenPage
+	dw LoadBluePage
 
 StatsScreen_InitUpperHalf:
 	push bc
@@ -286,8 +286,7 @@ StatsScreen_InitUpperHalf:
 	call PrintLevel
 	ld hl, .NicknamePointers
 	call GetNicknamePointer
-
-;.copy_nickname
+; Nickname
 	ld a, [wMonType]
 	cp BOXMON
 	ld a, BANK(sBoxMonNicknames)
@@ -299,12 +298,13 @@ StatsScreen_InitUpperHalf:
 	ld a, [wMonType]
 	cp BOXMON
 	call z, CloseSRAM
+; Gender character
 	call GetGender
 	jr c, .next
 	ld a, "♂"
-	jr nz, .place_gender_char
+	jr nz, .got_gender
 	ld a, "♀"
-.place_gender_char
+.got_gender
 	hlcoord 18, 0
 	ld [hl], a
 .next
@@ -318,7 +318,7 @@ StatsScreen_InitUpperHalf:
 	call StatsScreen_PlaceHorizontalDivider
 	call StatsScreen_PlacePageSwitchArrows
 	call StatsScreen_PlaceShinyIcon
-;.place_hp_bar
+; Place HP bar
 	ld hl, wTempMonHP
 	ld a, [hli]
 	ld b, a
@@ -341,18 +341,18 @@ StatsScreen_InitUpperHalf:
 	dw sBoxMonNicknames
 	dw wBufferMonNick
 
-PinkPage:
+LoadPinkPage:
 	push bc
 	push bc
 	xor a
 	ldh [hBGMapMode], a
-
-; Load graphics
 	ld a, [wBaseDexNo]
 	ld [wDeciramBuffer], a
 	ld [wCurSpecies], a
-	ld b, 1
+	ld b, PINK_PAGE
 	call StatsScreen_LoadPageIndicators
+
+; Load graphics
 	hlcoord 0, 8
 	lb bc, 10, 20
 	call ClearBox
@@ -414,8 +414,7 @@ PinkPage:
 	hlcoord 10, 9
 	ld de, .ExpPointStr
 	call PlaceString
-
-; Print next level
+; print next level
 	ld a, [wTempMonLevel]
 	push af
 	cp MAX_LEVEL
@@ -431,8 +430,7 @@ PinkPage:
 	hlcoord 13, 10
 	lb bc, 3, 7
 	call PrintNum
-
-; Level-up graphics and strings
+; level-up graphics and strings
 	call .CalcExpToNextLevel
 	ld de, wBuffer1
 	hlcoord 13, 13
@@ -454,14 +452,12 @@ PinkPage:
 	hlcoord 19, 16
 	ld [hl], $41 ; right exp bar end cap
 
-; Load palettes
+; Load palettes / place frontpic
 	pop bc
 	farcall LoadStatsScreenPals
 	call WaitBGMap
 	ld a, 1
 	ldh [hBGMapMode], a
-
-; Place frontpic
 	pop bc
 	ld a, b
 	and a
@@ -554,19 +550,168 @@ StatsScreen_PlaceShinyIcon:
 	ld [hl], "⁂"
 	ret
 
-GreenPage:
+LoadGreenPage:
 	push bc
 	push bc
 	xor a
 	ldh [hBGMapMode], a
-	dr $50f89, $5100b
+	ld b, GREEN_PAGE
+	call StatsScreen_LoadPageIndicators
 
-BluePage:
+; Load graphics
+	hlcoord 0, 8
+	lb bc, 10, 20
+	call ClearBox
+; item info
+	hlcoord 0, 8
+	ld de, .Item
+	call PlaceString
+	ld a, [wTempMonItem]
+	and a
+	ld de, .ThreeDashes
+	jr z, .got_item_name
+	ld b, a
+	farcall TimeCapsule_ReplaceTeruSama
+	ld a, b
+	ld [wNamedObjectIndexBuffer], a
+	call GetItemName
+.got_item_name
+	hlcoord 6, 8
+	call PlaceString
+; move info
+	ld hl, wTempMonMoves
+	ld de, wListMoves_MoveIndicesBuffer
+	ld bc, NUM_MOVES
+	call CopyBytes
+	hlcoord 0, 10
+	ld de, .Move
+	call PlaceString
+	hlcoord 8, 10
+	ld a, SCREEN_WIDTH * 2
+	ld [wBuffer1], a
+	call ListMoves
+	hlcoord 12, 11
+	ld a, SCREEN_WIDTH * 2
+	ld [wBuffer1], a
+	call ListMovePP
+
+; Load palettes / place frontpic
+	pop bc
+	farcall LoadStatsScreenPals
+	call WaitBGMap
+	ld a, 1
+	ldh [hBGMapMode], a
+	pop bc
+	ld a, b
+	and a
+	jp z, StatsScreen_PlaceFrontpic
+	ret
+
+.Item:
+	db "ITEM@"
+
+.ThreeDashes:
+	db "---@"
+
+.Move:
+	db "MOVE@"
+
+LoadBluePage:
 	push bc
 	push bc
 	xor a
 	ldh [hBGMapMode], a
-	dr $51010, $510bb
+	ld b, BLUE_PAGE
+	call StatsScreen_LoadPageIndicators
+
+; Load graphics
+	hlcoord 0, 8
+	lb bc, 10, 20
+	call ClearBox
+	call .PlaceOTInfo
+	hlcoord 10, 8
+	ld de, SCREEN_WIDTH
+	ld b, 10
+	ld a, $31 ; vertical divider
+.vertical_divider
+	ld [hl], a
+	add hl, de
+	dec b
+	jr nz, .vertical_divider
+	hlcoord 11, 8
+	ld bc, 6
+	call PrintTempMonStats
+
+; Load palettes / place frontpic
+	pop bc
+	farcall LoadStatsScreenPals
+	call WaitBGMap
+	ld a, 1
+	ldh [hBGMapMode], a
+	pop bc
+	ld a, b
+	and a
+	jp z, StatsScreen_PlaceFrontpic
+	ret
+
+.PlaceOTInfo:
+	hlcoord 0, 9
+	ld de, IDNoString
+	call PlaceString
+	hlcoord 0, 12
+	ld de, OTString
+	call PlaceString
+	hlcoord 2, 10
+	ld de, wTempMonID
+	lb bc, PRINTNUM_LEADINGZEROS | 2, 5
+	call PrintNum
+	ld hl, .OTNamePointers
+	call GetNicknamePointer
+; OT name
+	ld a, [wMonType]
+	cp BOXMON
+	ld a, BANK(sBoxMonOT)
+	call z, OpenSRAM
+	ld de, wStringBuffer1
+	push de
+	ld bc, NAME_LENGTH
+	call CopyBytes
+	pop de
+	ld a, [wMonType]
+	cp BOXMON
+	call z, CloseSRAM
+	callfar CorrectNickErrors
+	push de
+
+; Adjust coordinate of OT name based on index of nickname terminator
+	lb bc, 0, -1
+.loop
+	inc c
+	ld a, [de]
+	inc de
+	cp "@"
+	jr nz, .loop
+; remove left padding if name was 8-10 chars (somehow?)
+	ld a, NAME_LENGTH - 1
+	sub c
+	cp 3 ; NAME_LENGTH - PLAYER_NAME_LENGTH
+; otherwise, use 2 spaces of left padding
+	jr c, .ok
+	ld a, 2 ; NAME_LENGTH - PLAYER_NAME_LENGTH - 1
+.ok
+	ld c, a
+	hlcoord 0, 13
+	add hl, bc
+; that's finally over ... place string, quit forever
+	pop de
+	call PlaceString
+	ret
+
+.OTNamePointers:
+	dw wPartyMonOT
+	dw wOTPartyMonOT
+	dw sBoxMonOT
+	dw wBufferMonOT
 
 IDNoString:
 	db "<ID>№.@"
@@ -721,42 +866,3 @@ GetNicknamePointer:
 	ret z
 	ld a, [wCurPartyMon]
 	jp SkipNames
-
-PrintTempMonStats:
-; Print wTempMon's stats at hl, with spacing bc.
-	push bc
-	push hl
-	ld de, .StatNames
-	call PlaceString
-	pop hl
-	pop bc
-	add hl, bc
-	ld bc, SCREEN_WIDTH
-	add hl, bc
-	ld de, wTempMonAttack
-	lb bc, 2, 3
-	call .PrintStat
-	ld de, wTempMonDefense
-	call .PrintStat
-	ld de, wTempMonSpclAtk
-	call .PrintStat
-	ld de, wTempMonSpclDef
-	call .PrintStat
-	ld de, wTempMonSpeed
-	jp PrintNum
-
-.PrintStat:
-	push hl
-	call PrintNum
-	pop hl
-	ld de, SCREEN_WIDTH * 2
-	add hl, de
-	ret
-
-.StatNames:
-	db   "ATTACK"
-	next "DEFENSE"
-	next "SPCL.ATK"
-	next "SPCL.DEF"
-	next "SPEED"
-	next "@"
