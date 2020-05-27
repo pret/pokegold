@@ -1,3 +1,5 @@
+; Left-over debug code from pokegold-debug
+
 	const_def $6a
 	const DEBUGTEST_TICKS_1 ; $6a
 	const DEBUGTEST_TICKS_2 ; $6b
@@ -22,26 +24,26 @@
 	const DEBUGTEST_E       ; $7e
 	const DEBUGTEST_F       ; $7f
 
-ColorTest:
+DebugColorPicker:
 ; A debug menu to test monster and trainer palettes at runtime.
 
 	ldh a, [hCGB]
 	and a
-	jr nz, .asm_fd2d2
+	jr nz, .set
 	ldh a, [hSGB]
 	and a
 	ret z
 
-.asm_fd2d2
+.set
 	ldh a, [hInMenu]
 	push af
-	ld a, $1
+	ld a, 1
 	ldh [hInMenu], a
 	call DisableLCD
-	call Functionfd365
-	call Functionfd399
-	call Functionfd3c4
-	call Functionfd311
+	call DebugColor_InitVRAM
+	call DebugColor_LoadGFX
+	call DebugColor_InitPalettes
+	call DebugColor_InitMonColor
 	call EnableLCD
 	ld de, MUSIC_NONE
 	call PlayMusic
@@ -49,126 +51,133 @@ ColorTest:
 	ld [wJumptableIndex], a
 	ld [wce66], a
 	ld [wceee], a
-.asm_fd2fb
+.loop
 	ld a, [wJumptableIndex]
 	bit 7, a
-	jr nz, .asm_fd30d
-	call Functionfd487
-	call Functionfd967
+	jr nz, .exit
+	call DebugColorMain
+	call DebugColor_PlaceCursor
 	call DelayFrame
-	jr .asm_fd2fb
+	jr .loop
 
-.asm_fd30d
+.exit
 	pop af
 	ldh [hInMenu], a
 	ret
 
-Functionfd311:
+DebugColor_InitMonColor:
 	ld a, [wceed]
 	and a
-	jr nz, Functionfd32e
+	jr nz, DebugColor_InitTrainerColor
 	ld hl, PokemonPalettes
 
-Functionfd31a:
+DebugColor_InitMonColor2:
 	ld de, wOverworldMapBlocks
 	ld c, NUM_POKEMON + 1
-.asm_fd31f
+.loop
 	push bc
 	push hl
-	call Functionfd345
+	call DebugColor_InitColor
 	pop hl
 	ld bc, 8
 	add hl, bc
 	pop bc
 	dec c
-	jr nz, .asm_fd31f
+	jr nz, .loop
 	ret
 
-Functionfd32e:
+DebugColor_InitTrainerColor:
 	ld hl, TrainerPalettes
 	ld de, wOverworldMapBlocks
 	ld c, NUM_TRAINER_CLASSES
-.asm_fd336
+.loop
 	push bc
 	push hl
-	call Functionfd345
+	call DebugColor_InitColor
 	pop hl
 	ld bc, 4
 	add hl, bc
 	pop bc
 	dec c
-	jr nz, .asm_fd336
+	jr nz, .loop
 	ret
 
-Functionfd345:
+DebugColor_InitColor:
 	ld a, BANK(PokemonPalettes) ; aka BANK(TrainerPalettes)
 	call GetFarByte
 	ld [de], a
 	inc de
 	inc hl
+
 	ld a, BANK(PokemonPalettes) ; aka BANK(TrainerPalettes)
 	call GetFarByte
 	ld [de], a
 	inc de
 	inc hl
+
 	ld a, BANK(PokemonPalettes) ; aka BANK(TrainerPalettes)
 	call GetFarByte
 	ld [de], a
 	inc de
 	inc hl
+
 	ld a, BANK(PokemonPalettes) ; aka BANK(TrainerPalettes)
 	call GetFarByte
 	ld [de], a
 	inc de
 	ret
 
-Functionfd365:
-	ld a, $1
+DebugColor_InitVRAM:
+	ld a, 1
 	ldh [rVBK], a
 	ld hl, vTiles0
 	ld bc, sScratch - vTiles0
 	xor a
 	call ByteFill
-	ld a, $0
+
+	ld a, 0
 	ldh [rVBK], a
 	ld hl, vTiles0
 	ld bc, sScratch - vTiles0
 	xor a
 	call ByteFill
+
 	hlcoord 0, 0, wAttrmap
 	ld bc, SCREEN_WIDTH * SCREEN_HEIGHT
 	xor a
 	call ByteFill
+
 	hlcoord 0, 0
 	ld bc, SCREEN_WIDTH * SCREEN_HEIGHT
 	xor a
 	call ByteFill
+
 	call ClearSprites
 	ret
 
-Functionfd399:
-	ld hl, DebugColorTestGFX
+DebugColor_LoadGFX:
+	ld hl, DebugColor_GFX
 	ld de, vTiles2 tile DEBUGTEST_TICKS_1
 	ld bc, 22 tiles
 	call CopyBytes
-	ld hl, DebugUpArrowGFX
+	ld hl, DebugColor_UpArrowGFX
 	ld de, vTiles0
 	ld bc, 1 tiles
 	call CopyBytes
 	call LoadStandardFont
 	ld hl, vTiles1
 	lb bc, 8, 0
-.asm_fd3ba
+.loop
 	ld a, [hl]
 	xor $ff
 	ld [hli], a
 	dec bc
 	ld a, c
 	or b
-	jr nz, .asm_fd3ba
+	jr nz, .loop
 	ret
 
-Functionfd3c4:
+DebugColor_InitPalettes:
 	ldh a, [hCGB]
 	and a
 	ret z
@@ -181,19 +190,21 @@ Functionfd3c4:
 	ld hl, Palette_DebugBG
 	ld c, 8 palettes
 	xor a
-.asm_fd3de
+.loop1
 	ldh [rBGPD], a
 	dec c
-	jr nz, .asm_fd3de
+	jr nz, .loop1
+
 	ld a, 1 << rOBPI_AUTO_INCREMENT
 	ldh [rOBPI], a
 	ld hl, Palette_DebugOB
 	ld c, 8 palettes
-.asm_fd3ec
+.loop2
 	ld a, [hli]
 	ldh [rOBPD], a
 	dec c
-	jr nz, .asm_fd3ec
+	jr nz, .loop2
+
 	ld a, $94
 	ld [wc508], a
 	ld a, $52
@@ -210,18 +221,18 @@ INCLUDE "gfx/debug/bg.pal"
 Palette_DebugOB:
 INCLUDE "gfx/debug/ob.pal"
 
-Functionfd487:
+DebugColorMain:
 	call JoyTextDelay
 	ld a, [wJumptableIndex]
-	cp $4
+	cp 4
 	jr nc, .asm_fd49e
 	ld hl, hJoyLast
 	ld a, [hl]
 	and SELECT
-	jr nz, .asm_fd4ad
+	jr nz, .NextMon
 	ld a, [hl]
 	and START
-	jr nz, .asm_fd4be
+	jr nz, .PreviousMon
 
 .asm_fd49e
 	ld a, [wJumptableIndex]
@@ -235,53 +246,52 @@ Functionfd487:
 	ld l, a
 	jp hl
 
-.asm_fd4ad
-	call Functionfd8d3
-	call Functionfd4d6
+.NextMon:
+	call DebugColor_BackupSpriteColors
+	call DebugColor_SetMaxNum
 	ld e, a
 	ld a, [wce66]
 	inc a
 	cp e
-	jr c, .asm_fd4cd
+	jr c, .SwitchMon
 	xor a
-	jr .asm_fd4cd
+	jr .SwitchMon
 
-.asm_fd4be
-	call Functionfd8d3
+.PreviousMon:
+	call DebugColor_BackupSpriteColors
 	ld a, [wce66]
 	dec a
-	cp $ff
-	jr nz, .asm_fd4cd
-	call Functionfd4d6
+	cp -1
+	jr nz, .SwitchMon
+	call DebugColor_SetMaxNum
 	dec a
 
-.asm_fd4cd
+.SwitchMon:
 	ld [wce66], a
-	ld a, $0
+	ld a, 0 ; ScreenInitNo
 	ld [wJumptableIndex], a
 	ret
 
-Functionfd4d6:
-; Looping back around the pic set.
+DebugColor_SetMaxNum:
 	ld a, [wceed]
 	and a
-	jr nz, .asm_fd4df
-	ld a, NUM_POKEMON ; CELEBI
+	jr nz, .trainer
+; .mon
+	ld a, NUM_POKEMON
 	ret
-
-.asm_fd4df
-	ld a, NUM_TRAINER_CLASSES - 1 ; MYSTICALMAN
+.trainer
+	ld a, NUM_TRAINER_CLASSES - 1
 	ret
 
 Jumptable_fd4e2:
-	dw Functionfd4ee
+	dw DebugColor_InitScreen
 	dw Functionfd62b
 	dw Functionfd646
 	dw Functionfd6cb
 	dw Functionfd797
 	dw Functionfd7b8
 
-Functionfd4ee:
+DebugColor_InitScreen:
 	xor a
 	ldh [hBGMapMode], a
 	hlcoord 0, 0
@@ -291,17 +301,17 @@ Functionfd4ee:
 	hlcoord 1, 3
 	lb bc, 7, 18
 	ld a, DEBUGTEST_WHITE
-	call Bank3f_FillBoxWithByte
+	call DebugColor_FillBoxWithByte
 	hlcoord 11, 0
 	lb bc, 2, 3
 	ld a, DEBUGTEST_LIGHT
-	call Bank3f_FillBoxWithByte
+	call DebugColor_FillBoxWithByte
 	hlcoord 16, 0
 	lb bc, 2, 3
 	ld a, DEBUGTEST_DARK
-	call Bank3f_FillBoxWithByte
-	call Functionfd5d3
-	call Functionfd607
+	call DebugColor_FillBoxWithByte
+	call DebugColor_LoadRGBMeter
+	call DebugColor_SetRGBMeter
 	ld a, [wce66]
 	inc a
 	ld [wCurPartySpecies], a
@@ -312,8 +322,10 @@ Functionfd4ee:
 	call PrintNum
 	ld a, [wceed]
 	and a
-	jr nz, .asm_fd58d
-	ld a, $1
+	jr nz, .Trainer
+
+.MonSpriteViewer:
+	ld a, 1
 	ld [wUnownLetter], a
 	call GetPokemonName
 	hlcoord 4, 1
@@ -331,22 +343,24 @@ Functionfd4ee:
 	predef PlaceGraphic
 	ld a, [wceee]
 	and a
-	jr z, .asm_fd579
-	ld de, String_fd5c2
-	jr .asm_fd57c
+	jr z, .load_normal_text
 
-.asm_fd579
-	ld de, String_fd5c7
+.load_shiny_text
+	ld de, DebugColor_ShinyText
+	jr .place_switch_text
 
-.asm_fd57c
+.load_normal_text
+	ld de, DebugColor_NormalText
+
+.place_switch_text
 	hlcoord 7, 17
 	call PlaceString
 	hlcoord 0, 17
-	ld de, String_fd5cc
+	ld de, DebugColor_SwitchText
 	call PlaceString
 	jr .asm_fd5bc
 
-.asm_fd58d
+.Trainer:
 	ld a, [wDeciramBuffer]
 	ld [wTrainerClass], a
 	callfar GetTrainerAttributes
@@ -363,46 +377,51 @@ Functionfd4ee:
 	predef PlaceGraphic
 
 .asm_fd5bc
-	ld a, $1
+	ld a, 1
 	ld [wJumptableIndex], a
 	ret
 
-String_fd5c2: db "レア", DEBUGTEST_BLACK, DEBUGTEST_BLACK, "@" ; rare (shiny)
-String_fd5c7: db "ノーマル@" ; normal
-String_fd5cc: db DEBUGTEST_A, "きりかえ▶@" ; (A) switches
+DebugColor_ShinyText:
+	db "レア", DEBUGTEST_BLACK, DEBUGTEST_BLACK, "@" ; Rare (shiny)
 
-Functionfd5d3:
+DebugColor_NormalText:
+	db "ノーマル@" ; Normal
+
+DebugColor_SwitchText:
+	db DEBUGTEST_A, "きりかえ▶@" ; Switch
+
+DebugColor_LoadRGBMeter:
 	decoord 0, 11, wAttrmap
 	hlcoord 2, 11
-	ld a, $1
+	ld a, 1
 	call Functionfd5f1
 	decoord 0, 13, wAttrmap
 	hlcoord 2, 13
-	ld a, $2
+	ld a, 2
 	call Functionfd5f1
 	decoord 0, 15, wAttrmap
 	hlcoord 2, 15
-	ld a, $3
+	ld a, 3
 
 Functionfd5f1:
 	push af
 	ld a, DEBUGTEST_TICKS_1
 	ld [hli], a
-	ld bc, $f
+	ld bc, 15
 	ld a, DEBUGTEST_TICKS_2
 	call ByteFill
 	ld l, e
 	ld h, d
 	pop af
-	ld bc, $28
+	ld bc, 20 * 2
 	call ByteFill
 	ret
 
-Functionfd607:
+DebugColor_SetRGBMeter:
 	ld a, [wce66]
 	inc a
 	ld l, a
-	ld h, $0
+	ld h, 0
 	add hl, hl
 	add hl, hl
 	ld de, wOverworldMapBlocks
@@ -414,14 +433,14 @@ Functionfd607:
 	ld [wce64], a
 	ld [wce65], a
 	ld de, wc508
-	call Functionfd8ae
+	call DebugColor_CalculateRGB
 	ret
 
 Functionfd62b:
 	ldh a, [hCGB]
 	and a
 	jr z, .asm_fd63d
-	ld a, $2
+	ld a, 2
 	ldh [hBGMapMode], a
 	call DelayFrame
 	call DelayFrame
@@ -429,17 +448,19 @@ Functionfd62b:
 
 .asm_fd63d
 	call WaitBGMap
-	ld a, $2
+	ld a, 2
 	ld [wJumptableIndex], a
 	ret
 
 Functionfd646:
 	ldh a, [hCGB]
 	and a
-	jr z, .asm_fd672
+	jr z, .sgb
+
+.cgb
 	ld hl, wBGPals2
 	ld de, wc508
-	ld c, $1
+	ld c, 1
 	call Functionfd8ec
 	hlcoord 10, 2
 	ld de, wc508
@@ -447,13 +468,13 @@ Functionfd646:
 	hlcoord 15, 2
 	ld de, wc508 + 2
 	call Functionfd6b0
-	ld a, $1
+	ld a, 1
 	ldh [hCGBPalUpdate], a
-	ld a, $3
+	ld a, 3
 	ld [wJumptableIndex], a
 	ret
 
-.asm_fd672
+.sgb
 	ld hl, wSGBPals
 	ld a, 1
 	ld [hli], a
@@ -481,7 +502,7 @@ Functionfd646:
 	hlcoord 15, 2
 	ld de, wc508 + 2
 	call Functionfd6b0
-	ld a, $3
+	ld a, 3
 	ld [wJumptableIndex], a
 	ret
 
@@ -514,7 +535,7 @@ Functionfd6cb:
 	and A_BUTTON
 	jr nz, .asm_fd6ee
 	ld a, [wce64]
-	and $3
+	and 3
 	ld e, a
 	ld d, 0
 	ld hl, Jumptable_fd70b
@@ -526,7 +547,7 @@ Functionfd6cb:
 	jp hl
 
 .asm_fd6e8
-	ld a, $4
+	ld a, 4
 	ld [wJumptableIndex], a
 	ret
 
@@ -535,120 +556,120 @@ Functionfd6cb:
 	and a
 	ret nz
 	ld a, [wceee]
-	xor $4
+	xor 4
 	ld [wceee], a
 	ld c, a
 	ld b, 0
 	ld hl, PokemonPalettes
 	add hl, bc
-	call Functionfd31a
-	ld a, $0
+	call DebugColor_InitMonColor2
+	ld a, 0
 	ld [wJumptableIndex], a
 	ret
 
 Jumptable_fd70b:
-	dw Functionfd713
-	dw Functionfd73d
-	dw Functionfd74f
-	dw Functionfd761
+	dw DebugColor_SelectColorBox
+	dw DebugColor_ChangeRedValue
+	dw DebugColor_ChangeGreenValue
+	dw DebugColor_ChangeBlueValue
 
-Functionfd713:
+DebugColor_SelectColorBox:
 	ld hl, hJoyLast
 	ld a, [hl]
 	and D_DOWN
-	jr nz, Functionfd792
+	jr nz, DebugColor_NextRGBColor
 	ld a, [hl]
 	and D_LEFT
-	jr nz, .asm_fd726
+	jr nz, .lightcolor
 	ld a, [hl]
 	and D_RIGHT
-	jr nz, .asm_fd731
+	jr nz, .darkcolor
 	ret
 
-.asm_fd726
+.lightcolor:
 	xor a
 	ld [wce65], a
 	ld de, wc508
-	call Functionfd8ae
+	call DebugColor_CalculateRGB
 	ret
 
-.asm_fd731
-	ld a, $1
+.darkcolor:
+	ld a, 1
 	ld [wce65], a
 	ld de, wc508 + 2
-	call Functionfd8ae
+	call DebugColor_CalculateRGB
 	ret
 
-Functionfd73d:
+DebugColor_ChangeRedValue:
 	ld hl, hJoyLast
 	ld a, [hl]
 	and D_DOWN
-	jr nz, Functionfd792
+	jr nz, DebugColor_NextRGBColor
 	ld a, [hl]
 	and D_UP
-	jr nz, Functionfd78d
+	jr nz, DebugColor_PreviousRGBColor
 	ld hl, wc508 + 10
-	jr Functionfd76c
+	jr DebugColor_UpdateSpriteColor
 
-Functionfd74f:
+DebugColor_ChangeGreenValue:
 	ld hl, hJoyLast
 	ld a, [hl]
 	and D_DOWN
-	jr nz, Functionfd792
+	jr nz, DebugColor_NextRGBColor
 	ld a, [hl]
 	and D_UP
-	jr nz, Functionfd78d
+	jr nz, DebugColor_PreviousRGBColor
 	ld hl, wc508 + 11
-	jr Functionfd76c
+	jr DebugColor_UpdateSpriteColor
 
-Functionfd761:
+DebugColor_ChangeBlueValue:
 	ld hl, hJoyLast
 	ld a, [hl]
 	and D_UP
-	jr nz, Functionfd78d
+	jr nz, DebugColor_PreviousRGBColor
 	ld hl, wc508 + 12
 
-Functionfd76c:
+DebugColor_UpdateSpriteColor:
 	ldh a, [hJoyLast]
 	and D_RIGHT
-	jr nz, Functionfd779
+	jr nz, .increment_color_value
 	ldh a, [hJoyLast]
 	and D_LEFT
-	jr nz, Functionfd780
+	jr nz, .decrement_color_value
 	ret
 
-Functionfd779:
+.increment_color_value
 	ld a, [hl]
 	cp $1f
 	ret nc
 	inc [hl]
-	jr Functionfd784
+	jr .asm_fd784
 
-Functionfd780:
+.decrement_color_value
 	ld a, [hl]
 	and a
 	ret z
 	dec [hl]
 
-Functionfd784:
-	call Functionfd870
-	ld a, $2
+.asm_fd784
+	call DebugColor_CalculatePalette
+	ld a, 2
 	ld [wJumptableIndex], a
 	ret
 
-Functionfd78d:
+DebugColor_PreviousRGBColor:
 	ld hl, wce64
 	dec [hl]
 	ret
 
-Functionfd792:
+DebugColor_NextRGBColor:
 	ld hl, wce64
 	inc [hl]
 	ret
 
 Functionfd797:
 	hlcoord 0, 10
-	ld bc, $a0
+	ld bc, 20 * 8
 	ld a, DEBUGTEST_BLACK
 	call ByteFill
 	hlcoord 2, 12
@@ -657,7 +678,7 @@ Functionfd797:
 	xor a
 	ld [wceef], a
 	call Functionfd7fd
-	ld a, $5
+	ld a, 5
 	ld [wJumptableIndex], a
 	ret
 
@@ -665,21 +686,24 @@ Functionfd7b8:
 	ld hl, hJoyPressed
 	ld a, [hl]
 	and B_BUTTON
-	jr nz, .asm_fd7b8
-	call Functionfd7d0
+	jr nz, .cancel
+;	ld a,(hl)
+;	and A_BUTTON
+;	jr nz, .exit
+	call DebugColor_TMHMJoypad
 	ret
 
-.asm_fd7b8
-	ld a, $0
+.cancel
+	ld a, 0
 	ld [wJumptableIndex], a
 	ret
 
-Functionfd7ca:
+.exit
 	ld hl, wJumptableIndex
 	set 7, [hl]
 	ret
 
-Functionfd7d0:
+DebugColor_TMHMJoypad:
 	ld hl, hJoyLast
 	ld a, [hl]
 	and D_UP
@@ -691,7 +715,7 @@ Functionfd7d0:
 
 .asm_fd7de
 	ld a, [wceef]
-	cp $38
+	cp 56
 	jr z, .asm_fd7e8
 	inc a
 	jr .asm_fd7f6
@@ -708,7 +732,7 @@ Functionfd7d0:
 	jr .asm_fd7f6
 
 .asm_fd7f4
-	ld a, $38
+	ld a, 56
 
 .asm_fd7f6
 	ld [wceef], a
@@ -739,26 +763,29 @@ Functionfd7fd:
 	predef CanLearnTMHMMove
 	ld a, c
 	and a
-	ld de, String_fd84f
-	jr nz, .asm_fd848
-	ld de, String_fd856
+	ld de, DebugColor_AbleText
+	jr nz, .place_string
+	ld de, DebugColor_NotAbleText
 
-.asm_fd848
+.place_string
 	hlcoord 10, 14
 	call PlaceString
 	ret
 
-String_fd84f: db "おぼえられる@" ; can be taught
-String_fd856: db "おぼえられない@" ; cannot be taught
+DebugColor_AbleText:
+	db "おぼえられる@" ; Learnable
+
+DebugColor_NotAbleText:
+	db "おぼえられない@" ; Not learnable
 
 Functionfd85e:
-	cp $32
-	jr c, .asm_fd864
+	cp NUM_TMS
+	jr c, .tm
+.hm
 	inc a
 	inc a
-
-.asm_fd864
-	add $bf
+.tm
+	add TM01
 	ret
 
 Functionfd867:
@@ -767,44 +794,46 @@ Functionfd867:
 	call ByteFill
 	ret
 
-Functionfd870:
+DebugColor_CalculatePalette:
 	ld a, [wc508 + 10]
-	and $1f
+	and %00011111
 	ld e, a
 	ld a, [wc508 + 11]
-	and $7
+	and %00000111
 	sla a
 	swap a
 	or e
 	ld e, a
 	ld a, [wc508 + 11]
-	and $18
+	and %00011000
 	sla a
 	swap a
 	ld d, a
 	ld a, [wc508 + 12]
-	and $1f
+	and %00011111
 	sla a
 	sla a
 	or d
 	ld d, a
 	ld a, [wce65]
 	and a
-	jr z, .asm_fd8a5
+	jr z, .LightPalette
+
+.DarkPalette
 	ld a, e
 	ld [wc508 + 2], a
 	ld a, d
 	ld [wc508 + 3], a
 	ret
 
-.asm_fd8a5
+.LightPalette
 	ld a, e
 	ld [wc508], a
 	ld a, d
 	ld [wc508 + 1], a
 	ret
 
-Functionfd8ae:
+DebugColor_CalculateRGB:
 	ld a, [de]
 	and $1f
 	ld [wc508 + 10], a
@@ -815,7 +844,7 @@ Functionfd8ae:
 	ld b, a
 	inc de
 	ld a, [de]
-	and $3
+	and 3
 	swap a
 	srl a
 	or b
@@ -827,14 +856,14 @@ Functionfd8ae:
 	ld [wc508 + 12], a
 	ret
 
-Functionfd8d3:
+DebugColor_BackupSpriteColors:
 	ld a, [wce66]
 	inc a
 	ld l, a
-	ld h, $0
+	ld h, 0
 	add hl, hl
 	add hl, hl
-	ld de, wOverworldMapBlocks
+	ld de, wOverworldMapBlocks ; MonPalette
 	add hl, de
 	ld e, l
 	ld d, h
@@ -844,7 +873,8 @@ Functionfd8d3:
 	ret
 
 Functionfd8ec:
-.asm_fd8ec
+; Set palette buffer
+.loop
 	ld a, LOW(PALRGB_WHITE)
 	ld [hli], a
 	ld a, HIGH(PALRGB_WHITE)
@@ -865,10 +895,10 @@ Functionfd8ec:
 	ld [hli], a
 	ld [hli], a
 	dec c
-	jr nz, .asm_fd8ec
+	jr nz, .loop
 	ret
 
-Bank3f_FillBoxWithByte:
+DebugColor_FillBoxWithByte:
 ; For some reason, we have another copy of FillBoxWithByte here
 .row
 	push bc
@@ -886,6 +916,8 @@ Bank3f_FillBoxWithByte:
 	ret
 
 Functionfd915:
+; SGB Related
+
 	ld a, [wd8ba]
 	push af
 	set 7, a
@@ -897,7 +929,7 @@ Functionfd915:
 
 Functionfd926:
 	ld a, [hl]
-	and $7
+	and 7
 	ret z
 	ld b, a
 .asm_fd92b
@@ -908,7 +940,7 @@ Functionfd926:
 	ldh [rJOYP], a
 	ld b, $10
 .asm_fd935
-	ld e, $8
+	ld e, 8
 	ld a, [hli]
 	ld d, a
 .asm_fd939
@@ -916,7 +948,6 @@ Functionfd926:
 	ld a, $10
 	jr nz, .asm_fd941
 	ld a, $20
-
 .asm_fd941
 	ldh [rJOYP], a
 	ld a, $30
@@ -931,20 +962,20 @@ Functionfd926:
 	ld a, $30
 	ldh [rJOYP], a
 	ld de, 7000
-.asm_fd95a
+.wait
 	nop
 	nop
 	nop
 	dec de
 	ld a, d
 	or e
-	jr nz, .asm_fd95a
+	jr nz, .wait
 	pop bc
 	dec b
 	jr nz, .asm_fd92b
 	ret
 
-Functionfd967:
+DebugColor_PlaceCursor:
 	ld a, DEBUGTEST_BLACK
 	hlcoord 10, 0
 	ld [hl], a
@@ -957,8 +988,8 @@ Functionfd967:
 	hlcoord 1, 15
 	ld [hl], a
 	ld a, [wJumptableIndex]
-	cp $3
-	jr nz, .asm_fd9d2
+	cp 3
+	jr nz, .clearsprites
 	ld a, [wce64]
 	and a
 	jr z, .asm_fd996
@@ -966,32 +997,34 @@ Functionfd967:
 	hlcoord 1, 11
 	ld bc, 2 * SCREEN_WIDTH
 	call AddNTimes
-	ld [hl], $ed
+	ld [hl], "▶"
 
 .asm_fd996
 	ld a, [wce65]
 	and a
-	jr z, .asm_fd9a1
-	hlcoord 15, 0
-	jr .asm_fd9a4
+	jr z, .lightcolor
 
-.asm_fd9a1
+.darkcolor
+	hlcoord 15, 0
+	jr .place
+
+.lightcolor
 	hlcoord 10, 0
 
-.asm_fd9a4
-	ld [hl], $ed
+.place
+	ld [hl], "▶"
 	ld b, $70
-	ld c, $5
+	ld c, 5
 	ld hl, wVirtualOAM
 	ld de, wc508 + 10
-	call .asm_fd9c0
+	call .PlaceSprites
 	ld de, wc508 + 11
-	call .asm_fd9c0
+	call .PlaceSprites
 	ld de, wc508 + 12
-	call .asm_fd9c0
+	call .PlaceSprites
 	ret
 
-.asm_fd9c0
+.PlaceSprites:
 	ld a, b
 	ld [hli], a ; y
 	ld a, [de]
@@ -1009,7 +1042,7 @@ Functionfd967:
 	inc c
 	ret
 
-.asm_fd9d2
+.clearsprites
 	call ClearSprites
 	ret
 
@@ -1019,14 +1052,15 @@ String_fd9d6:
 	next "いいえ<DOT><DOT>", DEBUGTEST_B ; NO..(B)
 	db   "@"
 
-DebugUpArrowGFX:
+DebugColor_UpArrowGFX:
 INCBIN "gfx/debug/up_arrow.2bpp"
 
-DebugColorTestGFX:
+DebugColor_GFX:
 INCBIN "gfx/debug/color_test.2bpp"
 
 TilesetColorTest:
 	ret
+; dummied out
 	xor a
 	ld [wJumptableIndex], a
 	ld [wce64], a
@@ -1038,13 +1072,13 @@ TilesetColorTest:
 	call WaitBGMap2
 	xor a
 	ldh [hBGMapMode], a
-	ld de, DebugColorTestGFX
+	ld de, DebugColor_GFX
 	ld hl, vTiles2 tile DEBUGTEST_TICKS_1
-	lb bc, BANK(DebugColorTestGFX), 22
+	lb bc, BANK(DebugColor_GFX), 22
 	call Request2bpp
-	ld de, DebugUpArrowGFX
+	ld de, DebugColor_UpArrowGFX
 	ld hl, vTiles1
-	lb bc, BANK(DebugUpArrowGFX), 1
+	lb bc, BANK(DebugColor_UpArrowGFX), 1
 	call Request2bpp
 	ld a, HIGH(vBGMap1)
 	ldh [hBGMapAddress + 1], a
@@ -1054,7 +1088,7 @@ TilesetColorTest:
 	call ByteFill
 	hlcoord 0, 0, wAttrmap
 	ld bc, SCREEN_WIDTH * SCREEN_HEIGHT
-	ld a, $7
+	ld a, 7
 	call ByteFill
 	ld de, $15
 	ld a, DEBUGTEST_WHITE
@@ -1103,12 +1137,12 @@ endr
 
 Functionfdbfd:
 	hlcoord 2, 4
-	call Functionfdc0c
+	call .Place
 	hlcoord 2, 6
-	call Functionfdc0c
+	call .Place
 	hlcoord 2, 8
 
-Functionfdc0c:
+.Place:
 	ld a, DEBUGTEST_TICKS_1
 	ld [hli], a
 	ld bc, $10 - 1
@@ -1119,7 +1153,7 @@ Functionfdc0c:
 Functionfdc18:
 	ld a, [wce64]
 	ld l, a
-	ld h, $0
+	ld h, 0
 	add hl, hl
 	add hl, hl
 	add hl, hl
@@ -1129,10 +1163,10 @@ Functionfdc18:
 	ld bc, 8
 	call CopyBytes
 	ld de, wc508
-	call Functionfd8ae
+	call DebugColor_CalculateRGB
 	ret
 
-Functionfdc35:
+DebugColorMain2:
 	ld hl, hJoyLast
 	ld a, [hl]
 	and SELECT
@@ -1147,8 +1181,8 @@ Functionfdc35:
 	ld hl, wce64
 	ld a, [hl]
 	inc a
-	and $7
-	cp $7
+	and 7
+	cp 7
 	jr nz, .asm_fdc52
 	xor a
 
@@ -1169,11 +1203,11 @@ Functionfdc35:
 	ld de, wc508
 	ld bc, 1 palettes
 	call CopyBytes
-	ld a, $2
+	ld a, 2
 	ldh [hBGMapMode], a
 	ld c, 3
 	call DelayFrames
-	ld a, $1
+	ld a, 1
 	ldh [hBGMapMode], a
 	ret
 
@@ -1206,7 +1240,7 @@ Functionfdc98:
 	hlcoord 16, 0
 	ld de, wc508 + 6
 	call Functionfd6b0
-	ld a, $1
+	ld a, 1
 	ldh [hCGBPalUpdate], a
 	call DelayFrame
 	ret
@@ -1216,7 +1250,7 @@ Functionfdcdb:
 	and 3
 	ld e, a
 	ld d, 0
-	ld hl, .dw
+	ld hl, .PointerTable
 	add hl, de
 	add hl, de
 	ld a, [hli]
@@ -1224,13 +1258,13 @@ Functionfdcdb:
 	ld l, a
 	jp hl
 
-.dw
-	dw Functionfdcf4
-	dw Functionfdd24
-	dw Functionfdd36
-	dw Functionfdd48
+.PointerTable:
+	dw DebugColor_SelectColorBox2
+	dw Functionfdd24 ; Red
+	dw Functionfdd36 ; Green
+	dw Functionfdd48 ; Blue
 
-Functionfdcf4:
+DebugColor_SelectColorBox2:
 	ld hl, hJoyLast
 	ld a, [hl]
 	and D_DOWN
@@ -1253,16 +1287,16 @@ Functionfdcf4:
 	inc a
 
 .asm_fdd11
-	and $3
+	and 3
 	ld [wce66], a
 	ld e, a
-	ld d, $0
+	ld d, 0
 	ld hl, wc508
 	add hl, de
 	add hl, de
 	ld e, l
 	ld d, h
-	call Functionfd8ae
+	call DebugColor_CalculateRGB
 	ret
 
 Functionfdd24:
@@ -1336,7 +1370,7 @@ Functionfdd7c:
 	and $1f
 	ld e, a
 	ld a, [wc508 + 11]
-	and $7
+	and 7
 	sla a
 	swap a
 	or e
@@ -1354,7 +1388,7 @@ Functionfdd7c:
 	ld d, a
 	ld a, [wce66]
 	ld c, a
-	ld b, $0
+	ld b, 0
 	ld hl, wc508
 	add hl, bc
 	add hl, bc
@@ -1363,7 +1397,7 @@ Functionfdd7c:
 	ld [hl], d
 	ret
 
-Functionfddb1:
+DebugColor_PlaceCursor2:
 	ld a, DEBUGTEST_BLACK
 	hlcoord 0, 4
 	ld [hl], a
@@ -1386,36 +1420,36 @@ Functionfddb1:
 	hlcoord 0, 4
 	ld bc, 2 * SCREEN_WIDTH
 	call AddNTimes
-	ld [hl], $ed
+	ld [hl], "▶"
 
 .asm_fdde1
 	ld a, [wce66]
 	hlcoord 0, 2
-	ld bc, $5
+	ld bc, 5
 	call AddNTimes
-	ld [hl], $ed
+	ld [hl], "▶"
 	ld b, $78
 	ld hl, wVirtualOAM
 	ld de, wc508 + 10
-	call .asm_fde07
+	call .PlaceSprites
 	ld de, wc508 + 11
-	call .asm_fde07
+	call .PlaceSprites
 	ld de, wc508 + 12
-	call .asm_fde07
+	call .PlaceSprites
 	ret
 
-.asm_fde07
+.PlaceSprites:
 	ld a, b
-	ld [hli], a
+	ld [hli], a ; y
 	ld a, [de]
 	add a
 	add a
 	add 3 * TILE_WIDTH
-	ld [hli], a
+	ld [hli], a ; x
 	ld a, 16 * TILE_WIDTH
-	ld [hli], a
-	ld a, $5
-	ld [hli], a
+	ld [hli], a ; tile id
+	ld a, 5
+	ld [hli], a ; attributes
 	ld a, 2 * TILE_WIDTH
 	add b
 	ld b, a
