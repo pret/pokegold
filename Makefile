@@ -11,7 +11,8 @@ data/pokemon/dex_entries.o \
 data/pokemon/egg_moves.o \
 data/pokemon/evos_attacks.o \
 engine/overworld/events.o \
-gfx/sprites.o
+gfx/sprites.o \
+gfx/tilesets.o
 
 # Distinguish asm files which are game-exclusive for building (*_[gold|silver].asm)
 gs_excl_asm := gfx/pics

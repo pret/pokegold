@@ -176,7 +176,7 @@ MainMenu_PrintCurrentTimeAndDay:
 	call GetWeekday
 	ld b, a
 	decoord 1, 14
-	call .PlaceCurrentDay
+	call PrintDayOfWeek
 	decoord 4, 16
 	ldh a, [hHours]
 	ld c, a
@@ -205,7 +205,7 @@ MainMenu_PrintCurrentTimeAndDay:
 	text_far _MainMenuTimeUnknownText
 	text_end
 
-.PlaceCurrentDay:
+PrintDayOfWeek:
 	push de
 	ld hl, .Days
 	ld a, b

@@ -394,9 +394,9 @@ def export_2bpp_to_png(filein, fileout=None, pal_file=None, height=0, width=0, t
     }
     arguments.update(read_filename_arguments(filein))
 
-    if pal_file == None:
-        if os.path.exists(os.path.splitext(fileout)[0]+'.pal'):
-            arguments['pal_file'] = os.path.splitext(fileout)[0]+'.pal'
+    #if pal_file == None:
+    #    if os.path.exists(os.path.splitext(fileout)[0]+'.pal'):
+    #        arguments['pal_file'] = os.path.splitext(fileout)[0]+'.pal'
 
     result = convert_2bpp_to_png(image, **arguments)
     width, height, palette, greyscale, bitdepth, px_map = result

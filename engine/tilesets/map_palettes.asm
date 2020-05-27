@@ -37,7 +37,7 @@ _SwapTextboxPalettes::
 .asm_8038
 	ld a, [wMapGroup]
 	dec a
-	ld hl, Unknown85d7
+	ld hl, MapGroupPalettes
 	add l
 	ld l, a
 	jr nc, .asm_8044
@@ -93,7 +93,7 @@ _ScrollBGMapPalettes::
 .asm_8083
 	ld a, [wMapGroup]
 	dec a
-	ld hl, Unknown85d7
+	ld hl, MapGroupPalettes
 	add l
 	ld l, a
 	jr nc, .asm_808f

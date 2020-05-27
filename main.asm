@@ -96,138 +96,23 @@ INCLUDE "engine/events/mom.asm"
 INCLUDE "engine/events/daycare.asm"
 INCLUDE "engine/events/print_unown.asm"
 INCLUDE "engine/events/print_photo.asm"
-INCLUDE "unknown/bank05_704d.asm"
+INCLUDE "engine/link/mystery_gift_gfx.asm"
 INCLUDE "engine/pokemon/breeding.asm"
 
 
-SECTION "bank6", ROMX
+SECTION "Roofs", ROMX
 
-TilesetKantoMeta::
-	dr $18000, $18800
-TilesetKantoColl::
-	dr $18800, $18a00
-Tileset0GFX::
-TilesetJohtoGFX::
-	dr $18a00, $19006
-
-Tileset0Meta::
-TilesetJohtoMeta::
-	dr $19006, $19806
-Tileset0Coll::
-TilesetJohtoColl::
-	dr $19806, $19a06
-TilesetJohtoModernGFX::
-	dr $19a06, $1a00c
-
-TilesetJohtoModernMeta::
-	dr $1a00c, $1a80c
-TilesetJohtoModernColl::
-	dr $1a80c, $1b40c
-
-TilesetTraditionalHouseGFX::
-	dr $1b40c, $1b8bc
-TilesetTraditionalHouseMeta::
-	dr $1b8bc, $1bcbc
-TilesetTraditionalHouseColl::
-	dr $1bcbc, $1bdbc
+INCLUDE "engine/tilesets/mapgroup_roofs.asm"
 
 
-SECTION "bank7", ROMX
+SECTION "Clock Reset", ROMX
 
-LoadMapGroupRoof::
-	dr $1c000, $1c30c
-TilesetGateGFX::
-	dr $1c30c, $1c70c
-TilesetGateMeta::
-	dr $1c70c, $1cb0c
-TilesetGateColl::
-	dr $1cb0c, $1cc0c
-TilesetPokecenterGFX::
-	dr $1cc0c, $1d03c
-
-TilesetPokecenterMeta::
-	dr $1d03c, $1d43c
-TilesetPokecenterColl::
-	dr $1d43c, $1d53c
-TilesetPortGFX::
-	dr $1d53c, $1d94c
-TilesetPortMeta::
-	dr $1d94c, $1dd4c
-TilesetPortColl::
-	dr $1dd4c, $1de4c
-TilesetPlayersHouseGFX::
-	dr $1de4c, $1e22c
-
-TilesetPlayersHouseMeta::
-	dr $1e22c, $1e62c
-TilesetPlayersHouseColl::
-	dr $1e62c, $1e72c
-TilesetMansionGFX::
-	dr $1e72c, $1eabc
-TilesetMansionMeta::
-	dr $1eabc, $1eebc
-TilesetMansionColl::
-	dr $1eebc, $1efbc
-TilesetCaveGFX::
-	dr $1efbc, $1f34c
-
-TilesetCaveMeta::
-TilesetDarkCaveMeta::
-	dr $1f34c, $1f74c
-TilesetCaveColl::
-TilesetDarkCaveColl::
-	dr $1f74c, $1f84c
+INCLUDE "engine/rtc/restart_clock.asm"
 
 
-SECTION "bank8", ROMX
+SECTION "Catch Tutorial", ROMX
 
-RestartClock_GetWraparoundTime::
-	dr $20000, $20021
-RestartClock::
-	dr $20021, $20181
-TilesetTowerGFX::
-	dr $20181, $205b1
-TilesetTowerMeta::
-	dr $205b1, $209b1
-TilesetTowerColl::
-	dr $209b1, $20ab1
-TilesetLabGFX::
-	dr $20ab1, $20e81
-TilesetLabMeta::
-	dr $20e81, $21281
-
-TilesetLabColl::
-	dr $21281, $21381
-TilesetFacilityGFX::
-	dr $21381, $217a1
-TilesetFacilityMeta::
-	dr $217a1, $21ba1
-TilesetFacilityColl::
-	dr $21ba1, $21ca1
-TilesetMartGFX::
-	dr $21ca1, $22051
-
-TilesetMartMeta::
-	dr $22051, $22451
-TilesetMartColl::
-	dr $22451, $22551
-TilesetGameCornerGFX::
-	dr $22551, $22951
-TilesetGameCornerMeta::
-	dr $22951, $22d51
-TilesetGameCornerColl::
-	dr $22d51, $22e51
-TilesetTrainStationGFX::
-	dr $22e51, $231f1
-
-TilesetTrainStationMeta::
-	dr $231f1, $235f1
-TilesetTrainStationColl::
-	dr $235f1, $236f1
-TilesetForestMeta::
-	dr $236f1, $23971
-CatchTutorial::
-	dr $23971, $239fe
+INCLUDE "engine/events/catch_tutorial.asm"
 
 
 SECTION "bank9", ROMX
@@ -269,53 +154,6 @@ INCLUDE "engine/link/mystery_gift_2.asm"
 INCLUDE "engine/items/tmhm.asm"
 INCLUDE "engine/pokemon/print_move_description.asm"
 INCLUDE "engine/events/pokerus/pokerus.asm"
-
-
-SECTION "bankC", ROMX
-
-TilesetEliteFourRoomGFX::
-	dr $30000, $304e0
-TilesetEliteFourRoomMeta::
-	dr $304e0, $308e0
-TilesetEliteFourRoomColl::
-	dr $308e0, $309e0
-TilesetParkGFX::
-	dr $309e0, $30e40
-TilesetParkMeta::
-	dr $30e40, $31240
-
-TilesetParkColl::
-	dr $31240, $31340
-TilesetRuinsOfAlphGFX::
-	dr $31340, $31670
-TilesetRuinsOfAlphMeta::
-	dr $31670, $31a70
-TilesetRuinsOfAlphColl::
-	dr $31a70, $31b70
-TilesetRadioTowerGFX::
-	dr $31b70, $31fc0
-TilesetRadioTowerMeta::
-	dr $31fc0, $323c0
-
-TilesetRadioTowerColl::
-	dr $323c0, $324c0
-TilesetUndergroundGFX::
-	dr $324c0, $32890
-TilesetUndergroundMeta::
-	dr $32890, $32c90
-TilesetUndergroundColl::
-	dr $32c90, $32d90
-TilesetIcePathGFX::
-	dr $32d90, $331d0
-
-TilesetIcePathMeta::
-	dr $331d0, $335d0
-TilesetIcePathColl::
-	dr $335d0, $336d0
-TilesetDarkCaveGFX::
-	dr $336d0, $33a10
-TilesetForestGFX::
-	dr $33a10, $33d81
 
 
 SECTION "Effect Commands", ROMX
@@ -403,7 +241,8 @@ HallOfFame::
 RedCredits::
 	dr $86446, $86632
 _HallOfFamePC::
-	dr $86632, $87bfd
+	dr $86632, $87b65
+INCLUDE "data/credits_strings_pointers.asm"
 
 
 SECTION "bank23", ROMX
@@ -598,36 +437,6 @@ FontInversed:
 INCBIN "gfx/font/font_inversed.1bpp"
 
 
-SECTION "bank37_2", ROMX
-
-TilesetChampionsRoomGFX::
-	dr $dd773, $ddc33
-TilesetChampionsRoomMeta::
-	dr $ddc33, $de033
-TilesetChampionsRoomColl::
-	dr $de033, $de133
-TilesetHouseGFX::
-	dr $de133, $de5d3
-TilesetHouseMeta::
-	dr $de5d3, $de9d3
-TilesetHouseColl::
-	dr $de9d3, $dead3
-TilesetLighthouseGFX::
-	dr $dead3, $deed3
-TilesetLighthouseMeta::
-	dr $deed3, $df2d3
-TilesetLighthouseColl::
-	dr $df2d3, $df3d3
-TilesetPlayersRoomGFX::
-	dr $df3d3, $df893
-TilesetPlayersRoomMeta::
-	dr $df893, $dfc93
-TilesetPlayersRoomColl::
-	dr $dfc93, $dfd93
-TilesetForestColl::
-	dr $dfd93, $dfe93
-
-
 SECTION "bank38", ROMX
 
 	ret
@@ -706,7 +515,9 @@ LoadHPBar::
 StatsScreen_LoadFont::
 	dr $f80a6, $f80d9
 LoadStatsScreenPageTilesGFX::
-	dr $f80d9, $f8bb2
+	dr $f80d9, $f8aa2
+StatsScreenPageTilesGFX::
+	dr $f8aa2, $f8bb2
 EnemyHPBarBorderGFX::
 	dr $f8bb2, $f8bd2
 HPExpBarBorderGFX::
@@ -721,8 +532,7 @@ Footprints::
 
 UnownFont::
 	dr $fb30e, $fb4be
-TileCollisionTable::
-	dr $fb4be, $fb5be
+INCLUDE "data/collision_permissions.asm"
 Shrink1Pic::
 	dr $fb5be, $fb64e
 Shrink2Pic::
@@ -769,59 +579,13 @@ DoBadgeTypeBoosts::
 	dr $fbf2b, $fbf93
 
 
-SECTION "bank3f", ROMX
+SECTION "bank3F", ROMX
 
-	nop
-DummyPredef3A::
-	ret
-	ret
-_AnimateTileset::
-	dr $fc003, $fc01e
-Tileset0Anim::
-TilesetJohtoModernAnim::
-TilesetKantoAnim::
-TilesetParkAnim::
-TilesetForestAnim::
-	dr $fc01e, $fc04a
-TilesetJohtoAnim::
-	dr $fc04a, $fc0d6
-TilesetPortAnim::
-	dr $fc0d6, $fc106
-TilesetEliteFourRoomAnim::
-	dr $fc106, $fc18e
-TilesetCaveAnim::
-TilesetDarkCaveAnim::
-	dr $fc18e, $fc1da
-TilesetIcePathAnim::
-	dr $fc1da, $fc226
-TilesetTowerAnim::
-	dr $fc226, $fc28e
-TilesetHouseAnim::
-TilesetPlayersHouseAnim::
-TilesetPokecenterAnim::
-TilesetGateAnim::
-TilesetLabAnim::
-TilesetFacilityAnim::
-TilesetMartAnim::
-TilesetMansionAnim::
-TilesetGameCornerAnim::
-TilesetTraditionalHouseAnim::
-TilesetTrainStationAnim::
-TilesetChampionsRoomAnim::
-TilesetLighthouseAnim::
-TilesetPlayersRoomAnim::
-TilesetRuinsOfAlphAnim::
-TilesetRadioTowerAnim::
-TilesetUndergroundAnim::
-	dr $fc28e, $fc9ae
-NPCTrade::
-	dr $fc9ae, $fcd87
-MomTriesToBuySomething::
-	dr $fcd87, $fcf6a
-StagePartyDataForMysteryGift::
-	dr $fcf6a, $fcfb2
-InitMysteryGiftLayout::
-	dr $fcfb2, $fde20
+INCLUDE "engine/tilesets/tileset_anims.asm"
+INCLUDE "engine/events/npc_trade.asm"
+INCLUDE "engine/events/mom_phone.asm"
+INCLUDE "engine/link/mystery_gift_3.asm"
+INCLUDE "engine/menus/debug.asm"
 
 
 SECTION "Standard Scripts", ROMX
@@ -867,40 +631,20 @@ INCLUDE "data/items/descriptions.asm"
 
 SECTION "bank70", ROMX
 
-PrintPage1::
-	dr $1c0000, $1c0407
-TilesetKantoGFX::
-	dr $1c0407, $1c0a1f
-PrintHoursMins::
-	dr $1c0a1f, $1c0a66
-UpdateTimePredef::
-	dr $1c0a66, $1c0a7a
-StubbedGetFrontpic::
-	ret
-LoadSGBPokedexGFX::
-	dr $1c0a7b, $1c0a85
-LoadSGBPokedexGFX2::
-	dr $1c0a85, $1c0c36
-LoadQuestionMarkPic::
-	dr $1c0c36, $1c0cd0
-DrawPokedexListWindow::
-	dr $1c0cd0, $1c0d30
-DrawPokedexSearchResultsWindow::
-	dr $1c0d30, $1c0da6
-DrawDexEntryScreenRightEdge::
-	dr $1c0da6, $1c0de9
-_DudeAutoInput_A::
-	dr $1c0de9, $1c0dee
-_DudeAutoInput_RightA::
-	dr $1c0dee, $1c0df3
-_DudeAutoInput_DownA::
-	dr $1c0df3, $1c0e24
-TownMap_ConvertLineBreakCharacters::
-	dr $1c0e24, $1c0e43
-PokegearGFX::
-	dr $1c0e43, $1c1127
-CreditsStrings::
-	dr $1c1127, $1c168c
+INCLUDE "engine/printer/print_party.asm"
+
+
+SECTION "bank70_2", ROMX
+
+INCLUDE "engine/rtc/print_hours_mins.asm"
+INCLUDE "engine/pokedex/pokedex_3.asm"
+INCLUDE "engine/events/catch_tutorial_input.asm"
+INCLUDE "engine/pokegear/townmap_convertlinebreakcharacters.asm"
+
+PokegearGFX:
+INCBIN "gfx/pokegear/pokegear.2bpp.lz"
+
+INCLUDE "data/credits_strings.asm"
 
 
 SECTION "Stadium Data", ROMX
