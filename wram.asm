@@ -415,6 +415,12 @@ wOverworldMapBlocks:: ds 1300 ; c700
 wOverworldMapBlocksEnd::
 
 NEXTU ; c700
+; GB Printer screen RAM
+wGameboyPrinterRAM::
+wGameboyPrinterScreen:: ds SCREEN_HEIGHT * SCREEN_WIDTH ; c700
+wGameboyPrinterScreenEnd:: ; c868
+
+NEXTU ; c700
 ; GB Printer data
 wGameboyPrinter2bppSource:: ds 40 tiles
 wGameboyPrinter2bppSourceEnd::

@@ -221,10 +221,11 @@ INCBIN "gfx/pokemon/egg/front.2bpp.lz"
 
 SECTION "bank21", ROMX
 
-Printer_StartTransmission::
-	dr $84000, $842db
-_PrinterReceive::
-	dr $842db, $8442c
+
+INCLUDE "engine/printer/printer_serial.asm"
+
+SendScreenToPrinter::
+	dr $843f0, $8442c
 PrintDexEntry::
 	dr $8442c, $84560
 PrintUnownStamp::
