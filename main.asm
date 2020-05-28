@@ -224,10 +224,7 @@ SECTION "bank21", ROMX
 
 INCLUDE "engine/printer/printer_serial.asm"
 INCLUDE "engine/printer/printer.asm"
-
-AnimObj00GFX:
-	dr $84a2a, $8640a
-
+INCLUDE "gfx/battle_anims.asm"
 INCLUDE "engine/events/halloffame.asm"
 INCLUDE "engine/movie/credits.asm"
 
