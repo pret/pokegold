@@ -120,7 +120,7 @@ ROMX $2b
 ROMX $2e
 	"Pics 14"
 	org $6300
-	"bank2e_2"
+	"bank2E_2"
 ROMX $30
 	"Sprites 1"
 ROMX $31
@@ -153,7 +153,7 @@ ROMX $3c
 ROMX $3d
 	"Songs 4"
 ROMX $3e
-	"bank3e"
+	"bank3E"
 ROMX $3f
 	"bank3F"
 ROMX $40

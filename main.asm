@@ -194,7 +194,6 @@ INCLUDE "engine/pokemon/mail.asm"
 
 SECTION "bank14", ROMX
 
-
 INCLUDE "engine/pokemon/party_menu.asm"
 INCLUDE "engine/events/fishing_gfx.asm"
 INCLUDE "engine/events/poisonstep.asm"
@@ -373,7 +372,7 @@ GSIntroTilemap::
 ENDC
 
 
-SECTION "bank2e_2", ROMX
+SECTION "bank2E_2", ROMX
 
 INCLUDE "engine/events/checkforhiddenitems.asm"
 INCLUDE "engine/events/treemons.asm"
@@ -500,7 +499,7 @@ GoldSilverIntro::
 ENDC
 
 
-SECTION "bank3e", ROMX
+SECTION "bank3E", ROMX
 
 _LoadStandardFont::
 	dr $f8000, $f800c

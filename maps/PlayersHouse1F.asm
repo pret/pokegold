@@ -119,8 +119,8 @@ MomScript:
 	closetext
 	end
 
-TVScript:
-	jumptext TVText
+TVMovieScript:
+	jumptext TVMovieText
 
 StoveScript:
 	jumptext StoveText
@@ -276,7 +276,7 @@ FridgeText:
 	line "tasty LEMONADE!"
 	done
 
-TVText:
+TVMovieText:
 	text "There's a movie on"
 	line "TV: Stars dot the"
 
@@ -301,7 +301,7 @@ PlayersHouse1F_MapEvents:
 	bg_event  0,  1, BGEVENT_READ, StoveScript
 	bg_event  1,  1, BGEVENT_READ, SinkScript
 	bg_event  2,  1, BGEVENT_READ, FridgeScript
-	bg_event  4,  1, BGEVENT_READ, TVScript
+	bg_event  4,  1, BGEVENT_READ, TVMovieScript
 
 	db 4 ; object events
 	object_event  7,  3, SPRITE_MOM, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, MomScript, EVENT_PLAYERS_HOUSE_MOM_1

@@ -1,14 +1,15 @@
 SECTION "Scratch", SRAM
 
-UNION ; a000
-sScratchTilemap:: ds BG_MAP_WIDTH * BG_MAP_HEIGHT
-sScratchAttrmap:: ds $200
-
-NEXTU ; a000
 sScratch::
+
+UNION ; a000
 sDecompressScratch:: ds $188
 sDecompressBuffer:: ds 7 * 7 tiles ; a188
-ENDU
+
+NEXTU ; a000
+sScratchTilemap:: ds BG_MAP_WIDTH * BG_MAP_HEIGHT
+sScratchAttrmap:: ds $200 ; a200
+ENDU ; a498
 
 
 SECTION "SRAM Bank 0", SRAM
