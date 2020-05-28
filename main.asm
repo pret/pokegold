@@ -223,19 +223,10 @@ SECTION "bank21", ROMX
 
 
 INCLUDE "engine/printer/printer_serial.asm"
+INCLUDE "engine/printer/printer.asm"
 
-SendScreenToPrinter::
-	dr $843f0, $8442c
-PrintDexEntry::
-	dr $8442c, $84560
-PrintUnownStamp::
-	dr $84560, $845d4
-PrintMailAndExit::
-	dr $845d4, $84616
-PrintPartymon::
-	dr $84616, $84684
-_PrintDiploma::
-	dr $84684, $8640a
+AnimObj00GFX:
+	dr $84a2a, $8640a
 
 HallOfFame::
 	dr $8640a, $86446
@@ -243,6 +234,7 @@ RedCredits::
 	dr $86446, $86632
 _HallOfFamePC::
 	dr $86632, $87b65
+
 INCLUDE "data/credits_strings_pointers.asm"
 
 
@@ -443,7 +435,11 @@ SECTION "bank38", ROMX
 	ret
 	ret
 _Diploma::
-	dr $e0002, $e081b
+	dr $e0002, $e0009
+PlaceDiplomaOnScreen::
+	dr $e0009, $e00ae
+PrintDiplomaPage2::
+	dr $e00ae, $e081b
 RotateUnownFrontpic::
 	dr $e081b, $e0909
 _CardFlip::
