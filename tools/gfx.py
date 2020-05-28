@@ -226,10 +226,11 @@ def filepath_rules(filepath):
             args['width'] = 16
 
     elif 'gfx/tilesets' in filedir:
-        if filedir != 'gfx/tilesets':
+        if filedir == 'gfx/tilesets/roofs':
+            args['width'] = 24
+        elif filedir != 'gfx/tilesets':
             args['width'] = 8
         else:
-            args['width'] = 128
             args['tileset'] = True
 
     elif 'gfx/trainer_card' in filedir:
