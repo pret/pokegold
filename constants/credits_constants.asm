@@ -76,3 +76,13 @@
 	const US_COORDINATION
 	const TEXT_TRANSLATION
 	const PAAD_TESTING
+
+; CreditsScript indexes (see data/credits_script.asm)
+	const_def -7
+	const CREDITS_THEEND
+	const CREDITS_WAIT2
+	const CREDITS_MUSIC
+	const CREDITS_CLEAR
+	const CREDITS_SCENE
+	const CREDITS_WAIT
+	const CREDITS_END
