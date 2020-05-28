@@ -56,7 +56,7 @@ silver: pokesilver.gbc
 
 clean:
 	rm -f $(roms) $(gold_obj) $(silver_obj) $(roms:.gbc=.map) $(roms:.gbc=.sym) rgbdscheck.o
-	find gfx \( -name "*.lz" \) -delete
+	find gfx \( -name "*.[12]bpp" -o -name "*.lz" ! -path "gfx/pokemon/alakazam/back_silver.2bpp.lz" \) -delete
 	$(MAKE) clean -C tools/
 
 tidy:
@@ -116,6 +116,7 @@ pokesilver.gbc: $(silver_obj) layout.link
 	$(RGBLINK) -n pokesilver.sym -m pokesilver.map -l layout.link -o $@ $(silver_obj)
 	$(RGBFIX) -cjsv -i AAXE -k 01 -l 0x33 -m 0x10 -p 0 -r 3 -t "POKEMON_SLV" $@
 
+
 ### LZ compression rules
 
 # Delete this line if you don't care about matching and just want optimal compression.
@@ -123,6 +124,81 @@ include gfx/lz.mk
 
 %.lz: %
 	tools/lzcomp $(LZFLAGS) -- $< $@
+
+
+### Misc file-specific graphics rules
+
+gfx/pokemon/%/front.2bpp: rgbgfx += -h
+gfx/pokemon/%/front_gold.2bpp: rgbgfx += -h
+gfx/pokemon/%/front_silver.2bpp: rgbgfx += -h
+
+gfx/pokemon/%/back.2bpp: rgbgfx += -h
+gfx/pokemon/%/back_gold.2bpp: rgbgfx += -h
+gfx/pokemon/%/back_silver.2bpp: rgbgfx += -h
+
+gfx/trainers/%.2bpp: rgbgfx += -h
+
+gfx/mail/dragonite.1bpp: tools/gfx += --remove-whitespace
+gfx/mail/large_note.1bpp: tools/gfx += --remove-whitespace
+gfx/mail/surf_mail_border.1bpp: tools/gfx += --remove-whitespace
+gfx/mail/flower_mail_border.1bpp: tools/gfx += --remove-whitespace
+gfx/mail/litebluemail_border.1bpp: tools/gfx += --remove-whitespace
+
+gfx/pokedex/pokedex.2bpp: tools/gfx += --trim-whitespace
+gfx/pokedex/pokedex_sgb.2bpp: tools/gfx += --trim-whitespace
+gfx/pokedex/question_mark.2bpp: rgbgfx += -h
+gfx/pokedex/slowpoke.2bpp: tools/gfx += --trim-whitespace
+
+gfx/pokegear/pokegear.2bpp: rgbgfx += -x2
+gfx/pokegear/pokegear_sprites.2bpp: tools/gfx += --trim-whitespace
+
+gfx/mystery_gift/mystery_gift.2bpp: tools/gfx += --remove-whitespace
+gfx/mystery_gift/mystery_gift_2.2bpp: tools/gfx += --trim-whitespace
+gfx/mystery_gift/question_mark.1bpp: tools/gfx += --remove-whitespace
+
+gfx/trade/ball.2bpp: tools/gfx += --remove-whitespace
+
+gfx/slots/slots_1.2bpp: tools/gfx += --trim-whitespace
+gfx/slots/slots_2.2bpp: tools/gfx += --interleave --png=$<
+gfx/slots/slots_3.2bpp: tools/gfx += --interleave --png=$< --remove-duplicates --keep-whitespace --remove-xflip
+
+gfx/player/chris.2bpp: rgbgfx += -h
+gfx/player/chris_back.2bpp: rgbgfx += -h
+
+gfx/trainer_card/leaders.2bpp: tools/gfx += --trim-whitespace
+
+gfx/overworld/chris_fish.2bpp: tools/gfx += --trim-whitespace
+
+gfx/sprites/big_onix.2bpp: tools/gfx += --remove-whitespace --remove-xflip
+
+gfx/battle/dude.2bpp: rgbgfx += -h
+
+gfx/sgb/gold_border.2bpp: tools/gfx += --trim-whitespace
+gfx/sgb/silver_border.2bpp: tools/gfx += --trim-whitespace
+
+
+### Catch-all graphics rules
+
+gfx/pokemon/%/back_gold.2bpp: gfx/pokemon/%/back.png
+	$(RGBGFX) $(rgbgfx) -o $@ $<
+	$(if $(tools/gfx),\
+		tools/gfx $(tools/gfx) -o $@ $@)
+
+# TODO: alakazam/back_silver.2bpp should be an exception, made by decompressing its lz
+gfx/pokemon/%/back_silver.2bpp: gfx/pokemon/%/back.png
+	$(RGBGFX) $(rgbgfx) -o $@ $<
+	$(if $(tools/gfx),\
+		tools/gfx $(tools/gfx) -o $@ $@)
+
+%.2bpp: %.png
+	$(RGBGFX) $(rgbgfx) -o $@ $<
+	$(if $(tools/gfx),\
+		tools/gfx $(tools/gfx) -o $@ $@)
+
+%.1bpp: %.png
+	$(RGBGFX) $(rgbgfx) -d1 -o $@ $<
+	$(if $(tools/gfx),\
+		tools/gfx $(tools/gfx) -d1 -o $@ $@)
 
 pngs:
 	find gfx -iname "*.lz"      -exec $(gfx) unlz {} +
