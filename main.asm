@@ -221,12 +221,10 @@ INCBIN "gfx/pokemon/egg/front.2bpp.lz"
 
 SECTION "bank21", ROMX
 
-
 INCLUDE "engine/printer/printer_serial.asm"
 INCLUDE "engine/printer/printer.asm"
 INCLUDE "gfx/battle_anims.asm"
 INCLUDE "engine/events/halloffame.asm"
-INCLUDE "engine/movie/credits.asm"
 
 
 SECTION "bank23", ROMX

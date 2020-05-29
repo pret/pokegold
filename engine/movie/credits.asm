@@ -1,3 +1,8 @@
+INCLUDE "constants.asm"
+
+
+SECTION "Credits", ROMX
+
 Credits::
 	ld b, a
 	bit 6, b ; Hall Of Fame
@@ -297,7 +302,7 @@ ParseCredits:
 	call .get
 	ld bc, SCREEN_WIDTH * 2
 	call AddNTimes
-	ld a, $70
+	ld a, BANK(CreditsStrings)
 	call FarString
 	jr .loop
 
@@ -324,7 +329,7 @@ ParseCredits:
 
 .music
 ; Play the credits music.
-	ld de, $24
+	ld de, MUSIC_CREDITS
 	call HallOfFame_PlayMusicDE
 	jr .loop
 
@@ -423,7 +428,7 @@ ConstructCreditsTilemap:
 	xor a
 	ldh [hBGMapMode], a
 	ldh [hBGMapAddress], a
-	ld hl, wTilemap
+	hlcoord 0, 0
 	call .InitTopPortion
 	hlcoord 0, 14
 	call .InitTopPortion
@@ -488,7 +493,7 @@ GetCreditsPalette:
 	ld a, [hli]
 	ld e, a
 	ld d, [hl]
-	farcall Function908e
+	farcall SGB_ApplyCreditsPals
 	ret
 
 .asm_6bcf
@@ -501,11 +506,11 @@ GetCreditsPalette:
 	ld a, 8
 	call .UpdatePals
 
-	ld hl, wBGPals1 + 14
+	ld hl, wBGPals1 palette PAL_BG_RED color 3
 	xor a
 	ld [hli], a
 	ld [hl], a
-	ld hl, wBGPals1 + 142
+	ld hl, wBGPals2 palette PAL_BG_RED color 3
 	xor a
 	ld [hli], a
 	ld [hl], a
@@ -582,24 +587,24 @@ Credits_LoadBorderGFX:
 
 .Frames:
 	dw CreditsBellossomGFX
-	dw CreditsBellossomGFX     + 16 tiles
+	dw CreditsBellossomGFX + 16 tiles
 	dw CreditsBellossomGFX
-	dw CreditsBellossomGFX     + 32 tiles
+	dw CreditsBellossomGFX + 32 tiles
 
 	dw CreditsTogepiGFX
-	dw CreditsTogepiGFX     + 16 tiles
+	dw CreditsTogepiGFX    + 16 tiles
 	dw CreditsTogepiGFX
-	dw CreditsTogepiGFX     + 32 tiles
+	dw CreditsTogepiGFX    + 32 tiles
 
 	dw CreditsElekidGFX
-	dw CreditsElekidGFX     + 16 tiles
+	dw CreditsElekidGFX    + 16 tiles
 	dw CreditsElekidGFX
-	dw CreditsElekidGFX     + 32 tiles
+	dw CreditsElekidGFX    + 32 tiles
 
 	dw CreditsSentretGFX
-	dw CreditsSentretGFX     + 16 tiles
-	dw CreditsSentretGFX     + 32 tiles
-	dw CreditsSentretGFX     + 48 tiles
+	dw CreditsSentretGFX   + 16 tiles
+	dw CreditsSentretGFX   + 32 tiles
+	dw CreditsSentretGFX   + 48 tiles
 
 Credits_TheEnd:
 	ld a, $40

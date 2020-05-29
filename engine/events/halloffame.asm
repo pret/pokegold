@@ -14,6 +14,9 @@ HallOfFame::
 	ld hl, wStatusFlags
 	set STATUSFLAGS_HALL_OF_FAME_F, [hl]
 
+; Bug: Gold/Silver fail to (conditionally) erase the previous save and
+; initialize the current save, if the player did not save on this playthrough!
+
 	ld hl, wHallOfFameCount
 	ld a, [hl]
 	cp HOF_MASTER_COUNT
@@ -65,7 +68,7 @@ HallOfFame_FadeOutMusic:
 	ld c, 100
 	jp DelayFrames
 
-HallOfFame_PlayMusicDE:
+HallOfFame_PlayMusicDE::
 	push de
 	ld de, MUSIC_NONE
 	call PlayMusic
@@ -550,7 +553,7 @@ HOF_AnimatePlayerPic:
 	ld bc, SCREEN_WIDTH * SCREEN_HEIGHT
 	ld a, " "
 	call ByteFill
-	ld a, $0c
+	ld a, CAL
 	ld [wTrainerClass], a
 	ld de, vTiles2
 	farcall GetTrainerPic

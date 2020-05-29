@@ -104,6 +104,7 @@ ROMX $20
 	"Pics 13"
 ROMX $21
 	"bank21"
+	"Credits"
 ROMX $23
 	"bank23"
 ROMX $24
