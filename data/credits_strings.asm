@@ -52,12 +52,12 @@ Credits_KazuyoshiOsawa::      db "  KAZUYOSHI OSAWA@"
 Credits_KimikoNakamichi::     db "  KIMIKO NAKAMICHI@"
 Credits_End::                 db "END@"                       ; "おしまい@"
 Credits_Staff::               db "      #MON"                 ; "ポケットモンスター"
-                           IF DEF(_GOLD)
-                           next "    GOLD VERSION"
-                           ELIF DEF(_SILVER)
-                           next "   SILVER VERSION"
-                           ENDC
-                           next "       STAFF@"
+                            IF DEF(_GOLD)
+                            next "    GOLD VERSION"
+                            ELIF DEF(_SILVER)
+                            next "   SILVER VERSION"
+                            ENDC
+                            next "       STAFF@"
 Credits_Director::            db "      DIRECTOR@"            ; "エグゼクティブ　ディレクター@"
 Credits_SubDirector::         db "    SUB DIRECTOR@"
 Credits_Programmers::         db "    PROGRAMMERS@"           ; "プログラム@"

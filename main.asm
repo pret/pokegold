@@ -396,7 +396,7 @@ INCLUDE "data/moves/animations.asm"
 LoadPoisonBGPals::
 	dr $cbc76, $cbcbd
 TheEndGFX::
-	dr $cbcbd, $cbdba
+INCBIN "gfx/credits/theend.2bpp"
 
 
 SECTION "Move Animations", ROMX

@@ -64,7 +64,7 @@ CreditsScript:
 	db CREDITS_WAIT, 12
 	db CREDITS_WAIT, 0
 
-	; Clear the banner.
+; Clear the banner.
 	db CREDITS_CLEAR
 
 	db CREDITS_WAIT, 1
