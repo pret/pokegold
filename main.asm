@@ -375,11 +375,7 @@ SECTION "bank31_2", ROMX
 
 INCLUDE "engine/events/pokerus/check_pokerus.asm"
 INCLUDE "engine/events/lucky_number.asm"
-
-CheckPartyFullAfterContest::
-	dr $c7bbf, $c7cd0
-GiveANickname_YesNo::
-	dr $c7cd0, $c7cde
+INCLUDE "engine/pokemon/caught_data.asm"
 
 
 SECTION "bank32", ROMX
