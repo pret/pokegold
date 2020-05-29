@@ -373,8 +373,8 @@ INCLUDE "engine/pokemon/mail_2.asm"
 
 SECTION "bank31_2", ROMX
 
-_CheckPokerus::
-	dr $c7a40, $c7a5a
+INCLUDE "engine/events/pokerus/check_pokerus.asm"
+
 CheckForLuckyNumberWinners::
 	dr $c7a5a, $c7bad
 PrintTodaysLuckyNumber::
