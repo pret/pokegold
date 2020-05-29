@@ -106,6 +106,14 @@ def filepath_rules(filepath):
             args['pic_dimensions'] = 6, 6
         elif name == 'balls':
             args['width'] = 32
+	
+    elif 'gfx/credits' in filedir:
+        if name in ['bellossom', 'togepi', 'elekid', 'sentret']:
+            args['width'] = 32
+        elif name == 'theend':
+            args['width'] = 64
+        elif name == 'border':
+            args['width'] = 72
 
     elif 'gfx/debug' in filedir:
         if name == 'color_test':
@@ -218,10 +226,11 @@ def filepath_rules(filepath):
             args['width'] = 16
 
     elif 'gfx/tilesets' in filedir:
-        if filedir != 'gfx/tilesets':
+        if filedir == 'gfx/tilesets/roofs':
+            args['width'] = 24
+        elif filedir != 'gfx/tilesets':
             args['width'] = 8
         else:
-            args['width'] = 128
             args['tileset'] = True
 
     elif 'gfx/trainer_card' in filedir:

@@ -76,7 +76,7 @@ Unused_CheckShininess:
 	and a
 	ret
 
-Function908e:
+SGB_ApplyCreditsPals::
 	push de
 	push bc
 	ld hl, PalPacket_a155

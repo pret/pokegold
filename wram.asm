@@ -287,6 +287,10 @@ wInitMinuteBuffer:: db ; c526
 wTimeSetBufferEnd::
 
 NEXTU ; c508
+; hall of fame temp struct
+wHallOfFameTemp:: hall_of_fame wHallOfFameTemp
+
+NEXTU ; c508
 ; link engine data
 wLink_c508:: ds 10
 wc512:: ds 10
@@ -413,6 +417,12 @@ UNION ; c700
 ; overworld map blocks
 wOverworldMapBlocks:: ds 1300 ; c700
 wOverworldMapBlocksEnd::
+
+NEXTU ; c700
+; GB Printer screen RAM
+wGameboyPrinterRAM::
+wGameboyPrinterScreen:: ds SCREEN_HEIGHT * SCREEN_WIDTH ; c700
+wGameboyPrinterScreenEnd:: ; c868
 
 NEXTU ; c700
 ; GB Printer data
@@ -543,6 +553,11 @@ wLYOverridesBackup:: ds SCREEN_HEIGHT_PX
 wLYOverridesBackupEnd:: ds 112
 
 UNION ; c900
+; blank credits tile buffer
+wCreditsBlankFrame2bpp:: ds 4 * 4 tiles
+wCreditsBlankFrame2bppEnd::
+
+NEXTU ; c900
 ; mystery gift data
 wc900:: db
 wc901:: db
@@ -1009,6 +1024,12 @@ wTitleScreenTimer:: dw
 ENDU
 
 NEXTU ; ce64
+; credits data
+wCreditsBorderFrame:: db
+wCreditsBorderMon:: db
+wCreditsLYOverride:: db
+
+NEXTU ; ce64
 ; pokedex
 wPrevDexEntryJumptableIndex:: db
 wPrevDexEntryBackup::
@@ -1037,6 +1058,7 @@ NEXTU ; ce64
 wFrameCounter::
 wMomBankDigitCursorPosition::
 wNamingScreenLetterCase::
+wHallOfFameMonCounter::
 wSlotsDelay::
 	db
 wPrinterQueueLength:: db
@@ -1206,6 +1228,11 @@ wDefaultSpawnpoint:: db
 UNION ; ceed
 ; mail temp storage
 wTempMail:: mailmsg wTempMail
+
+NEXTU ; ceed
+; credits
+wCreditsPos:: dw
+wCreditsTimer:: db
 
 NEXTU ; ceed
 ; mon buffer

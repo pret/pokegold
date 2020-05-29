@@ -220,28 +220,10 @@ INCBIN "gfx/pokemon/egg/front.2bpp.lz"
 
 SECTION "bank21", ROMX
 
-Printer_StartTransmission::
-	dr $84000, $842db
-_PrinterReceive::
-	dr $842db, $8442c
-PrintDexEntry::
-	dr $8442c, $84560
-PrintUnownStamp::
-	dr $84560, $845d4
-PrintMailAndExit::
-	dr $845d4, $84616
-PrintPartymon::
-	dr $84616, $84684
-_PrintDiploma::
-	dr $84684, $8640a
-
-HallOfFame::
-	dr $8640a, $86446
-RedCredits::
-	dr $86446, $86632
-_HallOfFamePC::
-	dr $86632, $87b65
-INCLUDE "data/credits_strings_pointers.asm"
+INCLUDE "engine/printer/printer_serial.asm"
+INCLUDE "engine/printer/printer.asm"
+INCLUDE "gfx/battle_anims.asm"
+INCLUDE "engine/events/halloffame.asm"
 
 
 SECTION "bank23", ROMX
@@ -319,7 +301,11 @@ FreezeMonIcons::
 UnfreezeMonIcons::
 	dr $8e922, $8e93d
 HoldSwitchmonIcon::
-	dr $8e93d, $8fe43
+	dr $8e93d, $8fdbe
+InitDisplayForHallOfFame::
+	dr $8fdbe, $8fdff
+InitDisplayForRedCredits::
+	dr $8fdff, $8fe43
 
 ELIF DEF(_SILVER)
 	dr $8d332, $8e6e3
@@ -338,7 +324,11 @@ FreezeMonIcons::
 UnfreezeMonIcons::
 	dr $8e908, $8e923
 HoldSwitchmonIcon::
-	dr $8e923, $8fe29
+	dr $8e923, $8fda4
+InitDisplayForHallOfFame::
+	dr $8fda4, $8fde5
+InitDisplayForRedCredits::
+	dr $8fde5, $8fe43
 ENDC
 
 
@@ -403,7 +393,9 @@ DummyPredef2F::
 INCLUDE "data/moves/animations.asm"
 
 LoadPoisonBGPals::
-	dr $cbc76, $cbdba
+	dr $cbc76, $cbcbd
+TheEndGFX::
+INCBIN "gfx/credits/theend.2bpp"
 
 
 SECTION "Move Animations", ROMX
@@ -441,7 +433,11 @@ SECTION "bank38", ROMX
 	ret
 	ret
 _Diploma::
-	dr $e0002, $e081b
+	dr $e0002, $e0009
+PlaceDiplomaOnScreen::
+	dr $e0009, $e00ae
+PrintDiplomaPage2::
+	dr $e00ae, $e081b
 RotateUnownFrontpic::
 	dr $e081b, $e0909
 _CardFlip::
@@ -514,7 +510,10 @@ LoadHPBar::
 StatsScreen_LoadFont::
 	dr $f80a6, $f80d9
 LoadStatsScreenPageTilesGFX::
-	dr $f80d9, $f8aa2
+	dr $f80d9, $f80f2
+
+FontExtra:
+	dr $f80f2, $f8aa2
 StatsScreenPageTilesGFX::
 	dr $f8aa2, $f8bb2
 EnemyHPBarBorderGFX::
@@ -525,13 +524,14 @@ ExpBarGFX::
 	dr $f8c02, $f8c92
 TownMapGFX::
 	dr $f8c92, $f930e
-
 Footprints::
 	dr $f930e, $fb30e
 
 UnownFont::
 	dr $fb30e, $fb4be
+
 INCLUDE "data/collision_permissions.asm"
+
 Shrink1Pic::
 	dr $fb5be, $fb64e
 Shrink2Pic::
