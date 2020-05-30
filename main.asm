@@ -231,9 +231,8 @@ SECTION "bank23", ROMX
 
 INCLUDE "engine/menus/savemenu_copytilemapatonce.asm"
 INCLUDE "engine/phone/phonering_copytilemapatonce.asm"
+INCLUDE "engine/rtc/reset_password.asm"
 
-_ResetClock::
-	dr $8c17a, $8c310
 _DeleteSaveData::
 	dr $8c310, $8c355
 DummyPredef35::
