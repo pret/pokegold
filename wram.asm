@@ -2100,17 +2100,15 @@ wObjectMasks:: ds NUM_OBJECTS ; d545
 wVariableSprites:: ds $100 - SPRITE_VARS ; d555
 
 wEnteredMapFromContinue:: db ; d565
-wd566:: ds 1 ; d566
-wd567:: ds 1 ; d567
+	ds 2
 wTimeOfDayPal:: db
-wd569:: ds 1 ; d569
-wd56a:: ds 1 ; d56a
-wd56b:: ds 1 ; d56b
-wd56c:: ds 1 ; d56c
-wd56d:: ds 1 ; d56d
+	ds 4
+wTimeOfDayPalFlags:: db ; d56d
 wTimeOfDayPalset:: db ; d56e
-wd56f:: ds 1 ; d56f
-wd570:: ds 1 ; d570
+wCurTimeOfDay:: db ; d56f
+
+	ds 1
+
 wPlayerData2End::
 wPlayerData3::
 wStatusFlags::

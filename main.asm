@@ -233,27 +233,8 @@ INCLUDE "engine/menus/savemenu_copytilemapatonce.asm"
 INCLUDE "engine/phone/phonering_copytilemapatonce.asm"
 INCLUDE "engine/rtc/reset_password.asm"
 INCLUDE "engine/menus/delete_save.asm"
+INCLUDE "engine/tilesets/timeofday_pals.asm"
 
-DummyPredef35::
-DummyPredef36::
-	ret
-
-UpdateTimeOfDayPal::
-	dr $8c356, $8c366
-_TimeOfDayPals::
-	dr $8c366, $8c397
-_UpdateTimePals::
-	dr $8c397, $8c3a0
-FadeInPalettes::
-	dr $8c3a0, $8c3ab
-FadeOutPalettes::
-	dr $8c3ab, $8c3b9
-FadeInQuickly::
-	dr $8c3b9, $8c3c4
-FadeBlackQuickly::
-	dr $8c3c4, $8c3e9
-ReplaceTimeOfDayPals::
-	dr $8c3e9, $8c513
 DoBattleTransition::
 	dr $8c513, $8ca5e
 PlayWhirlpoolSound::
