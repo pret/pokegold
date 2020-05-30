@@ -347,20 +347,19 @@ SECTION "bank26", ROMX
 
 IF DEF(_GOLD)
 TitleScreenGFX1::
-	dr $98000, $98476
+INCBIN "gfx/title/logo_bottom_gold.2bpp.lz"
 TitleScreenGFX2::
-	dr $98476, $98616
-GSIntroTilemap::
-	dr $98616, $98857
+INCBIN "gfx/title/logo_top_gold.2bpp.lz"
 
 ELIF DEF(_SILVER)
 TitleScreenGFX1::
-	dr $98000, $98498
+INCBIN "gfx/title/logo_bottom_silver.2bpp.lz"
 TitleScreenGFX2::
-	dr $98498, $9862a
-GSIntroTilemap::
-	dr $9862a, $9886b
+INCBIN "gfx/title/logo_top_silver.2bpp.lz"
 ENDC
+
+TitleScreenTilemap::
+INCBIN "gfx/title/logo.tilemap"
 
 
 SECTION "bank2e_2", ROMX

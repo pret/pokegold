@@ -7,8 +7,11 @@ TitleScreen:
 	call ClearTilemap
 	call DisableLCD
 	call ClearSprites
+
+; Turn BG Map update off
 	xor a
 	ldh [hBGMapMode], a
+
 	ldh [hMapAnims], a
 	ldh [hSCY], a
 	ldh [hSCX], a
@@ -19,21 +22,25 @@ TitleScreen:
 	call ByteFill
 	farcall ClearSpriteAnims
 
+; Decompress lower part of title screen
 	ld hl, TitleScreenGFX1
 	ld de, vTiles2
 	ld a, BANK(TitleScreenGFX1)
 	call FarDecompress
 
+; Decompress upper part of title screen
 	ld hl, TitleScreenGFX2
 	ld de, vTiles1
 	ld a, BANK(TitleScreenGFX2)
 	call FarDecompress
 
+; Decompress Ho-Oh/Lugia sprite
 	ld hl, TitleScreenGFX4
 	ld de, vTiles0
 	ld a, BANK(TitleScreenGFX4)
 	call FarDecompress
 
+; Decompress Ho-Oh/Lugia sparkle
 	ld hl, TitleScreenGFX3
 	ld de, vTiles1 tile $78
 	ld bc, 8 tiles
@@ -41,7 +48,7 @@ TitleScreen:
 	call FarCopyBytes
 
 	call FillTitleScreenPals
-	call Function63b6
+	call LoadTitleScreenTilemap
 	ld hl, wSpriteAnimDict
 	xor a
 	ld [hli], a
@@ -49,12 +56,15 @@ TitleScreen:
 	ld hl, rLCDC
 	set rLCDC_SPRITE_SIZE, [hl]
 	call EnableLCD
+
+; Reset timing variables
 	xor a
 	ld hl, wJumptableIndex
 	ld [hli], a ; wJumptableIndex
 	ld [hli], a ; wIntroSceneFrameCounter
 	ld [hli], a ; wTitleScreenTimer
 	ld [hl], a  ; wTitleScreenTimer + 1
+
 	depixel 12, 11
 	ld a, SPRITE_ANIM_INDEX_GS_INTRO_HO_OH
 	call InitSpriteAnimStruct
@@ -63,7 +73,8 @@ TitleScreen:
 	ld bc, NUM_SPRITE_ANIM_STRUCTS
 	call CopyBytes
 	ld hl, wSpriteAnim1
-	ld [hl], $0
+	ld [hl], 0
+
 	ld hl, wLYOverrides
 	ld bc, wLYOverridesEnd - wLYOverrides
 	xor a
@@ -168,20 +179,20 @@ DrawTitleGraphic:
 	jr nz, .bgrows
 	ret
 
-Function63b6:
-	ld hl, GSIntroTilemap
+LoadTitleScreenTilemap:
+	ld hl, TitleScreenTilemap
 	debgcoord 0, 0
-.asm_63bc
-	ld a, BANK(GSIntroTilemap)
+.loop
+	ld a, BANK(TitleScreenTilemap)
 	call GetFarByte
 	cp -1
-	jr z, .asm_63ca
+	jr z, .done
 	inc hl
 	ld [de], a
 	inc de
-	jr .asm_63bc
+	jr .loop
 
-.asm_63ca
+.done
 	ldh a, [hCGB]
 	and a
 	ret nz
