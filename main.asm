@@ -229,10 +229,9 @@ INCLUDE "engine/events/halloffame.asm"
 
 SECTION "bank23", ROMX
 
-SaveMenu_CopyTilemapAtOnce::
-	dr $8c000, $8c0b9
-PhoneRing_CopyTilemapAtOnce::
-	dr $8c0b9, $8c17a
+INCLUDE "engine/menus/savemenu_copytilemapatonce.asm"
+INCLUDE "engine/phone/phonering_copytilemapatonce.asm"
+
 _ResetClock::
 	dr $8c17a, $8c310
 _DeleteSaveData::
