@@ -234,9 +234,8 @@ INCLUDE "engine/phone/phonering_copytilemapatonce.asm"
 INCLUDE "engine/rtc/reset_password.asm"
 INCLUDE "engine/menus/delete_save.asm"
 INCLUDE "engine/tilesets/timeofday_pals.asm"
+INCLUDE "engine/battle/battle_transition.asm"
 
-DoBattleTransition::
-	dr $8c513, $8ca5e
 PlayWhirlpoolSound::
 	dr $8ca5e, $8ca6b
 BlindingFlash::
