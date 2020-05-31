@@ -237,28 +237,10 @@ INCLUDE "engine/tilesets/timeofday_pals.asm"
 INCLUDE "engine/battle/battle_transition.asm"
 INCLUDE "engine/events/field_moves.asm"
 INCLUDE "engine/events/magnet_train.asm"
+INCLUDE "engine/gfx/sprites.asm"
 
-ClearSpriteAnims::
-	dr $8d174, $8d183
-PlaySpriteAnimationsAndDelayFrame::
-	dr $8d183, $8d18a
-PlaySpriteAnimations::
-	dr $8d18a, $8d19b
-DoNextFrameForAllSprites::
-	dr $8d19b, $8d1c9
-DoNextFrameForFirst16Sprites::
-	dr $8d1c9, $8d1f7
-_InitSpriteAnimStruct::
-	dr $8d1f7, $8d332
-
-_ReinitSpriteAnimFrame::
-IF DEF(_GOLD)
-	dr $8d332, $8e6fd
-AnimateEndOfExpBar::
-	dr $8e6fd, $8e774
-ClearSpriteAnims2::
-	dr $8e774, $8e78b
 LoadOverworldMonIcon::
+IF DEF(_GOLD)
 	dr $8e78b, $8e79f
 LoadMenuMonIcon::
 	dr $8e79f, $8e88f
@@ -276,12 +258,6 @@ InitDisplayForRedCredits::
 	dr $8fdff, $8fe43
 
 ELIF DEF(_SILVER)
-	dr $8d332, $8e6e3
-AnimateEndOfExpBar::
-	dr $8e6e3, $8e75a
-ClearSpriteAnims2::
-	dr $8e75a, $8e771
-LoadOverworldMonIcon::
 	dr $8e771, $8e785
 LoadMenuMonIcon::
 	dr $8e785, $8e875
