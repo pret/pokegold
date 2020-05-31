@@ -235,19 +235,8 @@ INCLUDE "engine/rtc/reset_password.asm"
 INCLUDE "engine/menus/delete_save.asm"
 INCLUDE "engine/tilesets/timeofday_pals.asm"
 INCLUDE "engine/battle/battle_transition.asm"
+INCLUDE "engine/events/field_moves.asm"
 
-PlayWhirlpoolSound::
-	dr $8ca5e, $8ca6b
-BlindingFlash::
-	dr $8ca6b, $8ca8e
-ShakeHeadbuttTree::
-	dr $8ca8e, $8cbb8
-OWCutAnimation::
-	dr $8cbb8, $8cd65
-FlyFromAnim::
-	dr $8cd65, $8cdab
-FlyToAnim::
-	dr $8cdab, $8ce7c
 MagnetTrain::
 	dr $8ce7c, $8d174
 
@@ -256,7 +245,9 @@ ClearSpriteAnims::
 PlaySpriteAnimationsAndDelayFrame::
 	dr $8d183, $8d18a
 PlaySpriteAnimations::
-	dr $8d18a, $8d1c9
+	dr $8d18a, $8d19b
+DoNextFrameForAllSprites::
+	dr $8d19b, $8d1c9
 DoNextFrameForFirst16Sprites::
 	dr $8d1c9, $8d1f7
 _InitSpriteAnimStruct::
