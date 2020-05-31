@@ -1054,6 +1054,12 @@ wTrainerCardBadgeTileID:: db
 wTrainerCardBadgeAttributes:: db
 
 NEXTU ; ce64
+; magnet train
+wMagnetTrainOffset:: db
+wMagnetTrainPosition:: db
+wMagnetTrainWaitCounter:: db
+
+NEXTU ; ce64
 ; miscellaneous
 wFrameCounter::
 wMomBankDigitCursorPosition::
@@ -1228,6 +1234,15 @@ wDefaultSpawnpoint:: db
 UNION ; ceed
 ; mail temp storage
 wTempMail:: mailmsg wTempMail
+
+NEXTU ; ceed
+; magnet train
+wMagnetTrain:: ; used only for BANK(wMagnetTrain)
+wMagnetTrainDirection:: db
+wMagnetTrainInitPosition:: db
+wMagnetTrainHoldPosition:: db
+wMagnetTrainFinalPosition:: db
+wMagnetTrainPlayerSpriteInitX:: db
 
 NEXTU ; ceed
 ; credits

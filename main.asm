@@ -236,9 +236,7 @@ INCLUDE "engine/menus/delete_save.asm"
 INCLUDE "engine/tilesets/timeofday_pals.asm"
 INCLUDE "engine/battle/battle_transition.asm"
 INCLUDE "engine/events/field_moves.asm"
-
-MagnetTrain::
-	dr $8ce7c, $8d174
+INCLUDE "engine/events/magnet_train.asm"
 
 ClearSpriteAnims::
 	dr $8d174, $8d183
