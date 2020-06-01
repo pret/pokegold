@@ -321,7 +321,7 @@ AddOrSubtractX:
 	bit OAM_X_FLIP, [hl]
 	jr z, .ok
 	; -8 - a
-	add $8
+	add 8
 	xor $ff
 	inc a
 
@@ -486,9 +486,10 @@ GetSpriteAnimFrame:
 	ret
 
 GetFrameOAMPointer:
+; Load OAM data pointer
 	ld e, a
 	ld d, 0
-	ld hl, $5dbd
+	ld hl, SpriteAnimOAMData
 	add hl, de
 	add hl, de
 	add hl, de
@@ -497,10 +498,10 @@ GetFrameOAMPointer:
 Unreferenced_BrokenGetStdGraphics:
 	push hl
 	ld l, a
-	ld h, $00
+	ld h, 0
 	add hl, hl
 	add hl, hl
-	ld de, $6666
+	ld de, BrokenStdGFXPointers ; broken 2bpp pointers
 	add hl, de
 	ld c, [hl]
 	inc hl
@@ -519,18 +520,120 @@ INCLUDE "data/sprite_anims/sequences.asm"
 
 INCLUDE "engine/gfx/sprite_anims.asm"
 
-SpriteAnimFrameData:
-	dr $8dbfe, $8e68a
+INCLUDE "data/sprite_anims/framesets.asm"
+
+INCLUDE "data/sprite_anims/oam.asm"
+
+BrokenStdGFXPointers:
+	; tile count, bank, pointer
+	; (all pointers were dummied out to .deleted)
+	dbbw 128, $01, .deleted
+	dbbw 128, $01, .deleted
+	dbbw 128, $01, .deleted
+	dbbw 128, $01, .deleted
+	dbbw 16, $37, .deleted
+	dbbw 16, $11, .deleted
+	dbbw 16, $39, .deleted
+	dbbw 16, $24, .deleted
+	dbbw 16, $21, .deleted
+
+.deleted
 
 Sprites_Cosine:
 ; a = d * cos(a * pi/32)
 	add %010000 ; cos(x) = sin(x + pi/2)
 	; fallthrough
 Sprites_Sine:
-	dr $8e68c, $8e6fd
+; a = d * sin(a * pi/32)
+	calc_sine_wave .SineWave
 
-AnimateEndOfExpBar::
-	dr $8e6fd, $8e774
+.SineWave:
+	sine_table 256
 
-ClearSpriteAnims2::
-	dr $8e774, $8e78b
+AnimateEndOfExpBar:
+	ldh a, [hSGB]
+	ld de, EndOfExpBarGFX
+	and a
+	jr z, .load
+	ld de, SGBEndOfExpBarGFX
+
+.load
+	ld hl, vTiles0 tile $00
+	lb bc, BANK(EndOfExpBarGFX), 1
+	call Request2bpp
+	ld c, 8
+	ld d, 0
+.loop
+	push bc
+	call .AnimateFrame
+	call DelayFrame
+	pop bc
+	inc d
+	inc d
+	dec c
+	jr nz, .loop
+	call ClearSprites
+	ret
+
+.AnimateFrame:
+	ld hl, wVirtualOAMSprite00
+	ld c, 8 ; number of animated circles
+.anim_loop
+	ld a, c
+	and a
+	ret z
+	dec c
+	ld a, c
+; multiply by 8
+	sla a
+	sla a
+	sla a
+	push af
+
+	push de
+	push hl
+	call Sprites_Sine
+	pop hl
+	pop de
+	add 13 * TILE_WIDTH
+	ld [hli], a ; y
+
+	pop af
+	push de
+	push hl
+	call Sprites_Cosine
+	pop hl
+	pop de
+	add 10 * TILE_WIDTH + 4
+	ld [hli], a ; x
+
+	ld a, $0
+	ld [hli], a ; tile id
+	ld a, PAL_BATTLE_OB_BLUE
+	ld [hli], a ; attributes
+	jr .anim_loop
+
+EndOfExpBarGFX:
+INCBIN "gfx/battle/expbarend.2bpp"
+SGBEndOfExpBarGFX:
+INCBIN "gfx/battle/expbarend_sgb.2bpp"
+
+ClearSpriteAnims2:
+	push hl
+	push de
+	push bc
+	push af
+	ld hl, wSpriteAnimDict
+	ld bc, wSpriteAnimsEnd - wSpriteAnimDict
+.loop
+	ld [hl], 0
+	inc hl
+	dec bc
+	ld a, c
+	or b
+	jr nz, .loop
+	pop af
+	pop bc
+	pop de
+	pop hl
+	ret

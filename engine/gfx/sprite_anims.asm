@@ -711,6 +711,7 @@ DoAnimFrame:
 	call .AnonymousJumptable
 	jp hl
 
+IF DEF(_GOLD)
 ; anonymous jumptable
 	dw .Function8d835
 	dw .Function8d84c
@@ -735,7 +736,6 @@ DoAnimFrame:
 	ld a, [hl]
 	cp $a4
 	jr nc, .asm_5881
-
 	ld hl, $0d
 	add hl, bc
 	add $4
@@ -766,13 +766,57 @@ DoAnimFrame:
 	call DeinitializeSprite
 	ret
 
+ELIF DEF(_SILVER)
+; anonymous jumptable
+	dw .Function8d835
+	dw .Function8d856
+
+.Function8d835:
+	ld a, [wIntroSceneTimer]
+	and $30
+	swap a
+	add $3
+	ld d, a
+	ld hl, $0c
+	add hl, bc
+	ld a, [wIntroSceneTimer]
+	and $30
+	swap a
+	add $07
+	add [hl]
+	ld [hl], a
+	call .Sprites_Sine
+	ld hl, $07
+	add hl, bc
+	ld [hl], a
+.Function8d856:
+	ld hl, $04
+	add hl, bc
+	ld a, [hl]
+	cp $a4
+	jr nc, .asm_5863
+	add $4
+	ld [hl], a
+	ret
+
+.asm_5863
+	call DeinitializeSprite
+	ret
+ENDC
+
 .Function8d885:
 	ld hl, $0c
 	add hl, bc
 	ld a, [hl]
+IF DEF(_GOLD)
 	inc a
 	ld [hl], a
 	ld d, 2
+ELIF DEF(_SILVER)
+	dec a
+	ld [hl], a
+	ld d, 8
+ENDC
 	call .Sprites_Sine
 	ld hl, $07
 	add hl, bc
