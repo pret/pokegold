@@ -1,5 +1,4 @@
 SpriteAnimOAMData:
-IF DEF(_GOLD)
 ; entries correspond to SPRITE_ANIM_OAMSET_* constants
 	; vtile offset, data pointer
 	dbw $00, .OAMData_RedWalk                  ; SPRITE_ANIM_OAMSET_RED_WALK_1
@@ -10,9 +9,9 @@ IF DEF(_GOLD)
 	dbw $6e, .OAMData_GSIntroShellder          ; SPRITE_ANIM_OAMSET_GS_INTRO_SHELLDER_2
 	dbw $2d, .OAMData_GSIntroMagikarp          ; SPRITE_ANIM_OAMSET_GS_INTRO_MAGIKARP_1
 	dbw $4d, .OAMData_GSIntroMagikarp          ; SPRITE_ANIM_OAMSET_GS_INTRO_MAGIKARP_2
- 	dbw $60, .OAMData_8e1e9
- 	dbw $00, .OAMData_8e212
- 	dbw $00, .OAMData_8e27f
+ 	dbw $60, .OAMData_8e1e9                    ; 
+ 	dbw $00, .OAMData_8e212                    ; 
+ 	dbw $00, .OAMData_8e27f                    ; 
 	dbw $06, .OAMData_GSIntroLapras            ; SPRITE_ANIM_OAMSET_GS_INTRO_LAPRAS_4
 	dbw $0c, .OAMData_GSIntroNote              ; SPRITE_ANIM_OAMSET_GS_INTRO_NOTE
 	dbw $0d, .OAMData_1x1_Palette0             ; SPRITE_ANIM_OAMSET_GS_INTRO_INVISIBLE_NOTE
@@ -26,7 +25,7 @@ IF DEF(_GOLD)
 	dbw $80, .OAMData_GSIntroPikachuTail       ; SPRITE_ANIM_OAMSET_GS_INTRO_PIKACHU_TAIL_1
 	dbw $85, .OAMData_GSIntroPikachuTail       ; SPRITE_ANIM_OAMSET_GS_INTRO_PIKACHU_TAIL_2
 	dbw $8a, .OAMData_GSIntroPikachuTail       ; SPRITE_ANIM_OAMSET_GS_INTRO_PIKACHU_TAIL_3
- 	dbw $00, .OAMData_8df09
+ 	dbw $00, .OAMData_8df09                    ; 
 	dbw $01, .OAMData_TradePoofBubble          ; SPRITE_ANIM_OAMSET_GS_INTRO_MED_FIREBALL
 	dbw $09, .OAMData_GSIntroBigFireball       ; SPRITE_ANIM_OAMSET_GS_INTRO_BIG_FIREBALL
 	dbw $10, .OAMData_GSIntroStarter           ; SPRITE_ANIM_OAMSET_GS_INTRO_CHIKORITA
@@ -88,11 +87,19 @@ IF DEF(_GOLD)
 	dbw $00, .OAMData_CutTree4                 ; SPRITE_ANIM_OAMSET_CUT_TREE_4
 	dbw $00, .OAMData_1x1_Palette0             ; SPRITE_ANIM_OAMSET_EGG_CRACK
 	dbw $01, .OAMData_1x1_Palette0             ; SPRITE_ANIM_OAMSET_EGG_HATCH
+	IF DEF(_GOLD)
 	dbw $00, .OAMData_GSIntroHoOh1             ; SPRITE_ANIM_OAMSET_GS_INTRO_HO_OH_1
 	dbw $00, .OAMData_GSIntroHoOh2             ; SPRITE_ANIM_OAMSET_GS_INTRO_HO_OH_2
 	dbw $00, .OAMData_GSIntroHoOh3             ; SPRITE_ANIM_OAMSET_GS_INTRO_HO_OH_3
 	dbw $00, .OAMData_GSIntroHoOh4             ; SPRITE_ANIM_OAMSET_GS_INTRO_HO_OH_4
 	dbw $00, .OAMData_GSIntroHoOh5             ; SPRITE_ANIM_OAMSET_GS_INTRO_HO_OH_5
+	ELIF DEF(_SILVER)
+	dbw $00, .OAMData_GSIntroLugia1             ; SPRITE_ANIM_OAMSET_GS_INTRO_HO_OH_1
+	dbw $20, .OAMData_GSIntroLugia1             ; SPRITE_ANIM_OAMSET_GS_INTRO_HO_OH_2
+	dbw $40, .OAMData_GSIntroLugia2             ; SPRITE_ANIM_OAMSET_GS_INTRO_HO_OH_3
+	dbw $60, .OAMData_GSIntroLugia2             ; SPRITE_ANIM_OAMSET_GS_INTRO_HO_OH_4
+	dbw $00, .OAMData_GSIntroLugia1             ; SPRITE_ANIM_OAMSET_GS_INTRO_HO_OH_5
+	ENDC
 	dbw $04, .OAMData_Tree                     ; SPRITE_ANIM_OAMSET_HEADBUTT_TREE_2
 
 .OAMData_1x1_Palette0
@@ -612,6 +619,7 @@ IF DEF(_GOLD)
 	dbsprite -2,  0,  0,  0, $02, PAL_OW_TREE
 	dbsprite  1,  0,  0,  0, $03, PAL_OW_TREE
 
+IF DEF(_GOLD)
 .OAMData_GSIntroHoOh1
 	db 19
 	dbsprite -4, -1,  0,  0, $00, 0
@@ -716,5 +724,106 @@ IF DEF(_GOLD)
 	dbsprite -1, -1,  4,  4, $00, 1 | OBP_NUM
 
 ELIF DEF(_SILVER)
-	dr $8dda3, $8e64c
+.OAMData_GSIntroLugia1:
+	db 16
+	db $f0, $d8, $00, $00
+	db $00, $d8, $02, $00
+	db $f0, $e0, $04, $00
+	db $00, $e0, $06, $00
+	db $f8, $e8, $08, $00
+	db $f8, $f0, $0a, $00
+	db $f0, $f8, $0c, $00
+	db $00, $f8, $0e, $00
+	db $f0, $00, $10, $00
+	db $00, $00, $12, $00
+	db $f0, $08, $14, $00
+	db $00, $08, $16, $00
+	db $f0, $10, $18, $00
+	db $00, $10, $1a, $00
+	db $f8, $18, $1c, $00
+	db $f8, $20, $1e, $00
+
+.OAMData_GSIntroLugia2:
+	db 16
+	db $f0, $d8, $00, $00
+	db $00, $d8, $02, $00
+	db $f0, $e0, $04, $00
+	db $00, $e0, $06, $00
+	db $f8, $e8, $08, $00
+	db $f8, $f0, $0a, $00
+	db $f0, $f8, $0c, $00
+	db $00, $f8, $0e, $00
+	db $f0, $00, $10, $00
+	db $00, $00, $12, $00
+	db $f0, $08, $14, $00
+	db $00, $08, $16, $00
+	db $f0, $10, $18, $00
+	db $00, $10, $1a, $00
+	db $f0, $18, $1c, $00
+	db $f0, $20, $1e, $00
+	db $11, $f0, $d8, $3c
+	db $00, $00, $d8, $3e
+	db $00, $f0, $e0, $40
+
+.OAMData_GSIntroLugia3:
+	db 0
+	db $00, $e0, $42, $00
+	db $f8, $e8, $44, $00
+	db $f0, $f0, $46, $00
+	db $00, $f0, $48, $00
+	db $f0, $f8, $4a, $00
+	db $00, $f8, $78, $00
+	db $f0, $00, $4c, $00
+	db $00, $00, $7a, $00
+	db $f0, $08, $4e, $00
+	db $00, $08, $50, $00
+	db $f0, $10, $52, $00
+	db $00, $10, $54, $00
+	db $f8, $18, $56, $00
+	db $f8, $20, $58, $00
+	db $11, $f0, $d8, $5a
+
+.OAMData_GSIntroLugia4:
+	db 0
+	db $00, $d8, $5c, $00
+	db $f0, $e0, $5e, $00
+	db $00, $e0, $60, $00
+	db $f8, $e8, $62, $00
+	db $f0, $f0, $64, $00
+	db $00, $f0, $66, $00
+	db $f0, $f8, $68, $00
+	db $00, $f8, $78, $00
+	db $f0, $00, $6a, $00
+	db $00, $00, $7a, $00
+	db $f0, $08, $6c, $00
+	db $00, $08, $6e, $00
+	db $f0, $10, $70, $00
+	db $00, $10, $72, $00
+	db $f8, $18, $74, $00
+	db $f8, $20, $76, $00
+	db $11, $f0, $d8, $5a
+
+.OAMData_GSIntroLugia5:
+	db 0
+	db $00, $d8, $5c, $00
+	db $f0, $e0, $5e, $00
+	db $00, $e0, $60, $00
+	db $f8, $e8, $62, $00
+	db $f0, $f0, $64, $00
+	db $00, $f0, $66, $00
+	db $f0, $f8, $68, $00
+	db $00, $f8, $78, $00
+	db $f0, $00, $6a, $00
+	db $00, $00, $7a, $00
+	db $f0, $08, $6c, $00
+	db $00, $08, $6e, $00
+	db $f0, $10, $70, $00
+	db $00, $10, $72, $00
+	db $f8, $18, $74, $00
+	db $f8, $20, $76, $00
+
+.OAMData_GSTitleTrail
+	db 2
+	db $f8, $f8, $00, $00
+	db $f8, $00, $02, $00
 ENDC
