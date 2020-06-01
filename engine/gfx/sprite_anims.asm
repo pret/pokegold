@@ -310,7 +310,6 @@ DoAnimFrame:
 	ld [wBattleMonLevel], a
 	ret
 
-
 .Call_023_560b:
 	ld hl, $0c
 	add hl, bc
@@ -367,12 +366,10 @@ DoAnimFrame:
 	add hl, bc
 	and $2
 	ret z
-
 	ld hl, $05
 	add hl, bc
 	dec [hl]
 	ret
-
 
 .asm_5667:
 	call DeinitializeSprite
