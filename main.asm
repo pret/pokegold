@@ -239,18 +239,7 @@ INCLUDE "engine/events/field_moves.asm"
 INCLUDE "engine/events/magnet_train.asm"
 INCLUDE "engine/gfx/sprites.asm"
 INCLUDE "engine/gfx/mon_icons.asm"
-
-InitDisplayForHallOfFame::
-IF DEF(_GOLD)
-	dr $8fdbe, $8fdff
-InitDisplayForRedCredits::
-	dr $8fdff, $8fe43
-
-ELIF DEF(_SILVER)
-	dr $8fda4, $8fde5
-InitDisplayForRedCredits::
-	dr $8fde5, $8fe43
-ENDC
+INCLUDE "engine/movie/init_hof_credits.asm"
 
 
 SECTION "bank24", ROMX
