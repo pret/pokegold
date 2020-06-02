@@ -419,6 +419,10 @@ wOverworldMapBlocks:: ds 1300 ; c700
 wOverworldMapBlocksEnd::
 
 NEXTU ; c700
+; decompress buffer in wram
+wDecompressScratch:: ds 40 tiles
+
+NEXTU ; c700
 ; GB Printer screen RAM
 wGameboyPrinterRAM::
 wGameboyPrinterScreen:: ds SCREEN_HEIGHT * SCREEN_WIDTH ; c700

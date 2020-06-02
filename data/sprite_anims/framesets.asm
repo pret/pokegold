@@ -1,4 +1,5 @@
 SpriteAnimFrameData:
+; entries correspond to SPRITE_ANIM_FRAMESET_* constants
 	dw .Frameset_00
 	dw .Frameset_PartyMon
 	dw .Frameset_PartyMonWithMail
@@ -49,7 +50,7 @@ SpriteAnimFrameData:
 	dw .Frameset_Leaf
 	dw .Frameset_CutTree
 	dw .Frameset_EggCrack
-	dw .Frameset_EggHatch
+	dw .Frameset_EggHatch1
 	dw .Frameset_EggHatch2
 	dw .Frameset_EggHatch3
 	dw .Frameset_EggHatch4
@@ -354,7 +355,7 @@ ENDC
 	frame SPRITE_ANIM_OAMSET_EGG_CRACK, 32
 	endanim
 
-.Frameset_EggHatch:
+.Frameset_EggHatch1:
 	frame SPRITE_ANIM_OAMSET_EGG_HATCH, 32
 	endanim
 

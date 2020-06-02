@@ -25,9 +25,8 @@ DoBattleTransition:
 
 .loop
 	ld a, [wJumptableIndex]
-	bit 7, a
+	bit 7, a ; BATTLETRANSITION_END?
 	jr nz, .done
-
 	call BattleTransitionJumptable
 	call DelayFrame
 	jr .loop
@@ -74,7 +73,7 @@ DoBattleTransition:
 	ret
 
 ConvertTrainerBattlePokeballTilesTo2bpp:
-	ld hl, wc700
+	ld hl, wDecompressScratch
 	ld bc, $28 tiles
 .loop
 	ld [hl], -1
@@ -84,7 +83,7 @@ ConvertTrainerBattlePokeballTilesTo2bpp:
 	or b
 	jr nz, .loop
 
-	ld de, wc700
+	ld de, wDecompressScratch
 	ld hl, vBGMap2
 	ld b, BANK(@)
 	ld c, $28
@@ -101,16 +100,7 @@ TrainerBattlePokeballTiles:
 INCBIN "gfx/overworld/trainer_battle_pokeball_tiles.2bpp"
 
 BattleTransitionJumptable:
-	ld a, [wJumptableIndex]
-	ld e, a
-	ld d, 0
-	ld hl, .Jumptable
-	add hl, de
-	add hl, de
-	ld a, [hli]
-	ld h, [hl]
-	ld l, a
-	jp hl
+	jumptable .Jumptable, wJumptableIndex
 
 .Jumptable
 	dw StartTrainerBattle_DetermineWhichAnimation ; 00
@@ -604,12 +594,10 @@ StartTrainerBattle_LoadPokeBallGraphics:
 	ld de, wBGPals2 palette PAL_BG_TEXT
 	ld bc, 1 palettes
 	call CopyBytes
-
 	hlcoord 0, 0, wAttrmap
 	ld bc, SCREEN_HEIGHT * SCREEN_WIDTH
 	ld a, %00000111
 	call ByteFill
-
 	ld a, 1
 	ldh [hCGBPalUpdate], a
 	call DelayFrame
@@ -689,6 +677,7 @@ StartTrainerBattle_DrawSineWave:
 StartTrainerBattle_ZoomToBlack:
 	farcall Function55a1
 	ld de, .boxes
+
 .loop
 	ld a, [de]
 	cp -1

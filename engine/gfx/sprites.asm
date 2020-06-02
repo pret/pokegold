@@ -415,9 +415,9 @@ GetSpriteAnimFrame:
 	inc [hl]
 	call .GetPointer ; load pointer from SpriteAnimFrameData
 	ld a, [hli]
-	cp $fe
+	cp dorestart_command
 	jr z, .restart
-	cp $ff
+	cp endanim_command
 	jr z, .repeat_last
 
 	push af

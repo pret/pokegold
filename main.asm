@@ -332,7 +332,9 @@ INCBIN "gfx/font/font_inversed.1bpp"
 
 SECTION "bank38", ROMX
 
+ret_e0000:
 	ret
+; unused
 	ret
 _Diploma::
 	dr $e0002, $e0009
@@ -341,7 +343,9 @@ PlaceDiplomaOnScreen::
 PrintDiplomaPage2::
 	dr $e00ae, $e081b
 RotateUnownFrontpic::
-	dr $e081b, $e0909
+	dr $e081b, $e0908
+ret_e0908::
+	ret
 _CardFlip::
 	dr $e0909, $e199d
 
@@ -349,7 +353,9 @@ _UnownPuzzle::
 	dr $e199d, $e2668
 
 _DummyGame::
-	dr $e2668, $e2b9e
+	dr $e2668, $e29ae
+DummyGame_InterpretJoypad_AnimateCursor::
+	dr $e29ae, $e2b9e
 _DepositPKMN::
 	dr $e2b9e, $e2d71
 _WithdrawPKMN::
