@@ -238,38 +238,15 @@ INCLUDE "engine/battle/battle_transition.asm"
 INCLUDE "engine/events/field_moves.asm"
 INCLUDE "engine/events/magnet_train.asm"
 INCLUDE "engine/gfx/sprites.asm"
+INCLUDE "engine/gfx/mon_icons.asm"
 
-LoadOverworldMonIcon::
-IF DEF(_GOLD)
-	dr $8e78b, $8e79f
-LoadMenuMonIcon::
-	dr $8e79f, $8e88f
-GetSpeciesIcon::
-	dr $8e88f, $8e8fb
-FreezeMonIcons::
-	dr $8e8fb, $8e922
-UnfreezeMonIcons::
-	dr $8e922, $8e93d
-HoldSwitchmonIcon::
-	dr $8e93d, $8fdbe
 InitDisplayForHallOfFame::
+IF DEF(_GOLD)
 	dr $8fdbe, $8fdff
 InitDisplayForRedCredits::
 	dr $8fdff, $8fe43
 
 ELIF DEF(_SILVER)
-	dr $8e771, $8e785
-LoadMenuMonIcon::
-	dr $8e785, $8e875
-GetSpeciesIcon::
-	dr $8e875, $8e8e1
-FreezeMonIcons::
-	dr $8e8e1, $8e908
-UnfreezeMonIcons::
-	dr $8e908, $8e923
-HoldSwitchmonIcon::
-	dr $8e923, $8fda4
-InitDisplayForHallOfFame::
 	dr $8fda4, $8fde5
 InitDisplayForRedCredits::
 	dr $8fde5, $8fe43
