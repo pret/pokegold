@@ -378,14 +378,12 @@ INCLUDE "engine/pokemon/caught_data.asm"
 
 SECTION "bank32", ROMX
 
-ExecuteBGEffects::
-	dr $c8000, $c80d6
-DummyPredef2F::
-	dr $c80d6, $c900a
+INCLUDE "engine/battle_anims/bg_effects.asm"
 INCLUDE "data/moves/animations.asm"
 
 LoadPoisonBGPals::
 	dr $cbc76, $cbcbd
+
 TheEndGFX::
 INCBIN "gfx/credits/theend.2bpp"
 
@@ -408,10 +406,14 @@ BattleAnimCmd_RaiseSub::
 BattleAnimCmd_MinimizeOpp::
 	dr $cc67c, $cc836
 ClearBattleAnims::
-	dr $cc836, $ce6aa
+	dr $cc836, $cc8f0
+QueueBattleAnimation::
+	dr $cc8f0, $ce6aa
 
 BattleAnim_Sine_e::
-	dr $ce6aa, $cfce3
+	dr $ce6aa, $ce6b0
+BattleAnim_Cosine_e::
+	dr $ce6b0, $cfce3
 
 
 SECTION "Font Inversed", ROMX

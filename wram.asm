@@ -612,7 +612,41 @@ wBattleAnimVar:: db ; ca16
 wBattleAnimByte:: db ; ca17
 wBattleAnimOAMPointerLo:: db ; ca18
 
-	ds 207
+UNION ; ca19
+; unidentified
+wBattleAnimTemp0:: db
+wBattleAnimTemp1:: db
+wBattleAnimTemp2:: db
+wBattleAnimTemp3:: db
+
+NEXTU ; ca19
+wBattleObjectTempID:: db
+wBattleObjectTempXCoord:: db
+wBattleObjectTempYCoord:: db
+wBattleObjectTempParam:: db
+
+NEXTU ; ca19
+wBattleAnimTempOAMFlags:: db
+wBattleAnimTempField02:: db
+wBattleAnimTempTileID:: db
+wBattleAnimTempXCoord:: db
+wBattleAnimTempYCoord:: db
+wBattleAnimTempXOffset:: db
+wBattleAnimTempYOffset:: db
+wBattleAnimTempFrameOAMFlags:: db
+wBattleAnimTempPalette:: db
+ENDU ; ca22
+
+UNION ; ca22
+	ds $32
+wBattleAnimEnd::
+
+NEXTU ; ca22
+wSurfWaveBGEffect:: ds $40
+wSurfWaveBGEffectEnd::
+ENDU ; ca62
+
+ds 134
 
 wBattle:: ; cae8
 wEnemyMoveStruct:: move_struct wEnemyMoveStruct
