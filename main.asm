@@ -380,9 +380,7 @@ SECTION "bank32", ROMX
 
 INCLUDE "engine/battle_anims/bg_effects.asm"
 INCLUDE "data/moves/animations.asm"
-
-LoadPoisonBGPals::
-	dr $cbc76, $cbcbd
+INCLUDE "engine/events/poisonstep_pals.asm"
 
 TheEndGFX::
 INCBIN "gfx/credits/theend.2bpp"
