@@ -646,7 +646,7 @@ wSurfWaveBGEffect:: ds $40
 wSurfWaveBGEffectEnd::
 ENDU ; ca62
 
-ds 134
+	ds 134
 
 wBattle:: ; cae8
 wEnemyMoveStruct:: move_struct wEnemyMoveStruct

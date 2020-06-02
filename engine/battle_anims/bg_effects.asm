@@ -984,7 +984,7 @@ BattleBGEffect_Whirlpool:
 	ld a, $5e
 	ldh [hLYOverrideEnd], a
 	lb de, 2, 2
-	call Function_032_4ec9
+	call Functionc8ec9
 	ret
 
 .one
@@ -1028,7 +1028,7 @@ BattleBGEffect_30:
 	jr nc, .done
 	inc [hl]
 	inc [hl]
-	call Function_032_4f35
+	call Functionc8f35
 	ret
 
 .done
@@ -1057,7 +1057,7 @@ BattleBGEffect_Psychic:
 	ld a, $5f
 	ldh [hLYOverrideEnd], a
 	lb de, 6, 5
-	call Function_032_4ec9
+	call Functionc8ec9
 	ld hl, BG_EFFECT_STRUCT_03
 	add hl, bc
 	ld [hl], $0
@@ -1090,7 +1090,7 @@ BattleBGEffect_Teleport:
 	ld a, LOW(rSCX)
 	call BattleBGEffect_SetLCDStatCustoms1
 	lb de, 6, 5
-	call Function_032_4ec9
+	call Functionc8ec9
 	ret
 
 .one
@@ -1117,7 +1117,7 @@ BattleBGEffect_NightShade:
 	add hl, bc
 	ld e, [hl]
 	ld d, 2
-	call Function_032_4ec9
+	call Functionc8ec9
 	ret
 
 .one
@@ -1238,7 +1238,7 @@ BattleBGEffect_AcidArmor:
 	add hl, bc
 	ld e, [hl]
 	ld d, 2
-	call Function_032_4ec9
+	call Functionc8ec9
 	ld h, HIGH(wLYOverridesBackup)
 	ldh a, [hLYOverrideEnd]
 	ld l, a
@@ -1443,7 +1443,7 @@ Tackle_BGEffect25_2d_one:
 .reached_limit
 	call BattleBGEffects_IncrementJumptable
 .finish
-	call Function_032_486e
+	call Functionc886e
 	ld hl, BG_EFFECT_STRUCT_BATTLE_TURN
 	add hl, bc
 	ld a, [hl]
@@ -1461,7 +1461,7 @@ Tackle_BGEffect25_2d_two:
 	jr nz, .asm_485c
 	call BattleBGEffects_IncrementJumptable
 .asm_485c
-	call Function_032_486e
+	call Functionc886e
 	ld hl, BG_EFFECT_STRUCT_BATTLE_TURN
 	add hl, bc
 	ld a, [hl]
@@ -1473,7 +1473,7 @@ Tackle_BGEffect25_2d_two:
 	ld [hl], a
 	ret
 
-Function_032_486e:
+Functionc886e:
 	push af
 	ld a, [wFXAnimID + 1] ; FXAnimID + 1
 	or a
@@ -1688,7 +1688,7 @@ BattleBGEffect_27:
 	inc [hl]
 	ld d, a
 	ld e, 4
-	call Function_032_4ec9
+	call Functionc8ec9
 	ret
 
 .two
@@ -1700,7 +1700,7 @@ BattleBGEffect_27:
 	dec [hl]
 	ld d, a
 	ld e, 4
-	call Function_032_4ec9
+	call Functionc8ec9
 	ret
 
 .reset
@@ -1894,7 +1894,7 @@ BattleBGEffect_2a:
 	and $f
 	ld d, a
 	ld e, a
-	call Function_032_4ec9
+	call Functionc8ec9
 	ret
 
 .done
@@ -2217,7 +2217,7 @@ BattleBGEffect_WobbleMon:
 	ret
 
 BattleBGEffect_2d:
-	call Function_032_4cd4
+	call Functionc8cd4
 	jr c, .xor_a
 	bit 7, a
 	jr z, .okay
@@ -2234,7 +2234,7 @@ BattleBGEffect_2d:
 	ret
 
 BattleBGEffect_1f:
-	call Function_032_4cd4
+	call Functionc8cd4
 	jr nc, .skip
 	xor a
 .skip
@@ -2242,14 +2242,14 @@ BattleBGEffect_1f:
 	ret
 
 BattleBGEffect_20:
-	call Function_032_4cd4
+	call Functionc8cd4
 	jr nc, .skip
 	xor a
 .skip
 	ldh [hSCY], a
 	ret
 
-Function_032_4cd4:
+Functionc8cd4:
 	ld hl, BG_EFFECT_STRUCT_JT_INDEX
 	add hl, bc
 	ld a, [hl]
@@ -2607,7 +2607,7 @@ BattleBGEffects_ResetVideoHRAM:
 	call BattleBGEffects_ClearLYOverrides
 	ret
 
-Function_032_4ec9:
+Functionc8ec9:
 	push bc
 	xor a
 	ld [wBattleAnimTemp0], a
@@ -2670,7 +2670,7 @@ InitSurfWaves:
 	pop bc
 	ret
 
-Function_032_4f35:
+Functionc8f35:
 	push bc
 	ld [wBattleAnimTemp3], a
 	ld a, e
@@ -2797,7 +2797,6 @@ BGEffect_DisplaceLYOverridesBackup:
 	dec d
 	jr nz, .loop2
 	ret
-
 
 BGEffect_CheckBattleTurn:
 	ld hl, BG_EFFECT_STRUCT_BATTLE_TURN
