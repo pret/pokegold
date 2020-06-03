@@ -419,6 +419,10 @@ wOverworldMapBlocks:: ds 1300 ; c700
 wOverworldMapBlocksEnd::
 
 NEXTU ; c700
+; decompress buffer in wram
+wDecompressScratch:: ds 40 tiles
+
+NEXTU ; c700
 ; GB Printer screen RAM
 wGameboyPrinterRAM::
 wGameboyPrinterScreen:: ds SCREEN_HEIGHT * SCREEN_WIDTH ; c700
@@ -466,6 +470,12 @@ NEXTU ; c700
 ; raw link data
 wLinkData:: ds $514
 wLinkDataEnd::
+
+NEXTU ; c700
+; unused (engine/gfx/sprite_anims.asm)
+	ds 4
+wc704:: ds 19
+wc717:: ds 1
 
 NEXTU ; c700
 ; link data members
@@ -1088,6 +1098,12 @@ wTrainerCardBadgeTileID:: db
 wTrainerCardBadgeAttributes:: db
 
 NEXTU ; ce64
+; magnet train
+wMagnetTrainOffset:: db
+wMagnetTrainPosition:: db
+wMagnetTrainWaitCounter:: db
+
+NEXTU ; ce64
 ; miscellaneous
 wFrameCounter::
 wMomBankDigitCursorPosition::
@@ -1262,6 +1278,15 @@ wDefaultSpawnpoint:: db
 UNION ; ceed
 ; mail temp storage
 wTempMail:: mailmsg wTempMail
+
+NEXTU ; ceed
+; magnet train
+wMagnetTrain:: ; used only for BANK(wMagnetTrain)
+wMagnetTrainDirection:: db
+wMagnetTrainInitPosition:: db
+wMagnetTrainHoldPosition:: db
+wMagnetTrainFinalPosition:: db
+wMagnetTrainPlayerSpriteInitX:: db
 
 NEXTU ; ceed
 ; credits
@@ -2134,17 +2159,15 @@ wObjectMasks:: ds NUM_OBJECTS ; d545
 wVariableSprites:: ds $100 - SPRITE_VARS ; d555
 
 wEnteredMapFromContinue:: db ; d565
-wd566:: ds 1 ; d566
-wd567:: ds 1 ; d567
+	ds 2
 wTimeOfDayPal:: db
-wd569:: ds 1 ; d569
-wd56a:: ds 1 ; d56a
-wd56b:: ds 1 ; d56b
-wd56c:: ds 1 ; d56c
-wd56d:: ds 1 ; d56d
+	ds 4
+wTimeOfDayPalFlags:: db ; d56d
 wTimeOfDayPalset:: db ; d56e
-wd56f:: ds 1 ; d56f
-wd570:: ds 1 ; d570
+wCurTimeOfDay:: db ; d56f
+
+	ds 1
+
 wPlayerData2End::
 wPlayerData3::
 wStatusFlags::

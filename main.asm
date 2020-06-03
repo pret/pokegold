@@ -228,108 +228,17 @@ INCLUDE "engine/events/halloffame.asm"
 
 SECTION "bank23", ROMX
 
-SaveMenu_CopyTilemapAtOnce::
-	dr $8c000, $8c0b9
-PhoneRing_CopyTilemapAtOnce::
-	dr $8c0b9, $8c17a
-_ResetClock::
-	dr $8c17a, $8c310
-_DeleteSaveData::
-	dr $8c310, $8c355
-DummyPredef35::
-DummyPredef36::
-	ret
-UpdateTimeOfDayPal::
-	dr $8c356, $8c366
-_TimeOfDayPals::
-	dr $8c366, $8c397
-_UpdateTimePals::
-	dr $8c397, $8c3a0
-FadeInPalettes::
-	dr $8c3a0, $8c3ab
-FadeOutPalettes::
-	dr $8c3ab, $8c3b9
-FadeInQuickly::
-	dr $8c3b9, $8c3c4
-FadeBlackQuickly::
-	dr $8c3c4, $8c3e9
-ReplaceTimeOfDayPals::
-	dr $8c3e9, $8c513
-DoBattleTransition::
-	dr $8c513, $8ca5e
-PlayWhirlpoolSound::
-	dr $8ca5e, $8ca6b
-BlindingFlash::
-	dr $8ca6b, $8ca8e
-ShakeHeadbuttTree::
-	dr $8ca8e, $8cbb8
-OWCutAnimation::
-	dr $8cbb8, $8cd65
-FlyFromAnim::
-	dr $8cd65, $8cdab
-FlyToAnim::
-	dr $8cdab, $8ce7c
-MagnetTrain::
-	dr $8ce7c, $8d174
-
-ClearSpriteAnims::
-	dr $8d174, $8d183
-PlaySpriteAnimationsAndDelayFrame::
-	dr $8d183, $8d18a
-PlaySpriteAnimations::
-	dr $8d18a, $8d1c9
-DoNextFrameForFirst16Sprites::
-	dr $8d1c9, $8d1f7
-_InitSpriteAnimStruct::
-	dr $8d1f7, $8d332
-
-_ReinitSpriteAnimFrame::
-IF DEF(_GOLD)
-	dr $8d332, $8e6fd
-AnimateEndOfExpBar::
-	dr $8e6fd, $8e774
-ClearSpriteAnims2::
-	dr $8e774, $8e78b
-LoadOverworldMonIcon::
-	dr $8e78b, $8e79f
-LoadMenuMonIcon::
-	dr $8e79f, $8e88f
-GetSpeciesIcon::
-	dr $8e88f, $8e8fb
-FreezeMonIcons::
-	dr $8e8fb, $8e922
-UnfreezeMonIcons::
-	dr $8e922, $8e93d
-HoldSwitchmonIcon::
-	dr $8e93d, $8fdbe
-InitDisplayForHallOfFame::
-	dr $8fdbe, $8fdff
-InitDisplayForRedCredits::
-	dr $8fdff, $8fe43
-
-ELIF DEF(_SILVER)
-	dr $8d332, $8e6e3
-AnimateEndOfExpBar::
-	dr $8e6e3, $8e75a
-ClearSpriteAnims2::
-	dr $8e75a, $8e771
-LoadOverworldMonIcon::
-	dr $8e771, $8e785
-LoadMenuMonIcon::
-	dr $8e785, $8e875
-GetSpeciesIcon::
-	dr $8e875, $8e8e1
-FreezeMonIcons::
-	dr $8e8e1, $8e908
-UnfreezeMonIcons::
-	dr $8e908, $8e923
-HoldSwitchmonIcon::
-	dr $8e923, $8fda4
-InitDisplayForHallOfFame::
-	dr $8fda4, $8fde5
-InitDisplayForRedCredits::
-	dr $8fde5, $8fe43
-ENDC
+INCLUDE "engine/menus/savemenu_copytilemapatonce.asm"
+INCLUDE "engine/phone/phonering_copytilemapatonce.asm"
+INCLUDE "engine/rtc/reset_password.asm"
+INCLUDE "engine/menus/delete_save.asm"
+INCLUDE "engine/tilesets/timeofday_pals.asm"
+INCLUDE "engine/battle/battle_transition.asm"
+INCLUDE "engine/events/field_moves.asm"
+INCLUDE "engine/events/magnet_train.asm"
+INCLUDE "engine/gfx/sprites.asm"
+INCLUDE "engine/gfx/mon_icons.asm"
+INCLUDE "engine/movie/init_hof_credits.asm"
 
 
 SECTION "bank24", ROMX
@@ -422,7 +331,9 @@ INCBIN "gfx/font/font_inversed.1bpp"
 
 SECTION "bank38", ROMX
 
+ret_e0000:
 	ret
+; unused
 	ret
 _Diploma::
 	dr $e0002, $e0009
@@ -431,7 +342,9 @@ PlaceDiplomaOnScreen::
 PrintDiplomaPage2::
 	dr $e00ae, $e081b
 RotateUnownFrontpic::
-	dr $e081b, $e0909
+	dr $e081b, $e0908
+ret_e0908::
+	ret
 _CardFlip::
 	dr $e0909, $e199d
 
@@ -439,7 +352,9 @@ _UnownPuzzle::
 	dr $e199d, $e2668
 
 _DummyGame::
-	dr $e2668, $e2b9e
+	dr $e2668, $e29ae
+DummyGame_InterpretJoypad_AnimateCursor::
+	dr $e29ae, $e2b9e
 _DepositPKMN::
 	dr $e2b9e, $e2d71
 _WithdrawPKMN::
