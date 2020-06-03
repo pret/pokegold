@@ -194,7 +194,6 @@ INCLUDE "engine/pokemon/mail.asm"
 
 SECTION "bank14", ROMX
 
-
 INCLUDE "engine/pokemon/party_menu.asm"
 INCLUDE "engine/events/fishing_gfx.asm"
 INCLUDE "engine/events/poisonstep.asm"
@@ -271,7 +270,7 @@ TitleScreenTilemap::
 INCBIN "gfx/title/logo.tilemap"
 
 
-SECTION "bank2e_2", ROMX
+SECTION "bank2E_2", ROMX
 
 INCLUDE "engine/events/checkforhiddenitems.asm"
 INCLUDE "engine/events/treemons.asm"
@@ -288,14 +287,10 @@ INCLUDE "engine/pokemon/caught_data.asm"
 
 SECTION "bank32", ROMX
 
-ExecuteBGEffects::
-	dr $c8000, $c80d6
-DummyPredef2F::
-	dr $c80d6, $c900a
+INCLUDE "engine/battle_anims/bg_effects.asm"
 INCLUDE "data/moves/animations.asm"
+INCLUDE "engine/events/poisonstep_pals.asm"
 
-LoadPoisonBGPals::
-	dr $cbc76, $cbcbd
 TheEndGFX::
 INCBIN "gfx/credits/theend.2bpp"
 
@@ -318,10 +313,14 @@ BattleAnimCmd_RaiseSub::
 BattleAnimCmd_MinimizeOpp::
 	dr $cc67c, $cc836
 ClearBattleAnims::
-	dr $cc836, $ce6aa
+	dr $cc836, $cc8f0
+QueueBattleAnimation::
+	dr $cc8f0, $ce6aa
 
 BattleAnim_Sine_e::
-	dr $ce6aa, $cfce3
+	dr $ce6aa, $ce6b0
+BattleAnim_Cosine_e::
+	dr $ce6b0, $cfce3
 
 
 SECTION "Font Inversed", ROMX
@@ -403,7 +402,7 @@ GoldSilverIntro::
 ENDC
 
 
-SECTION "bank3e", ROMX
+SECTION "bank3E", ROMX
 
 _LoadStandardFont::
 	dr $f8000, $f800c

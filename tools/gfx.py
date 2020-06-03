@@ -106,7 +106,7 @@ def filepath_rules(filepath):
             args['pic_dimensions'] = 6, 6
         elif name == 'balls':
             args['width'] = 32
-	
+
     elif 'gfx/credits' in filedir:
         if name in ['bellossom', 'togepi', 'elekid', 'sentret']:
             args['width'] = 32
@@ -233,6 +233,10 @@ def filepath_rules(filepath):
         else:
             args['tileset'] = True
 
+    elif 'gfx/title' in filedir:
+        if name in ['logo_bottom_gold', 'logo_bottom_silver', 'logo_top_gold', 'logo_top_silver']:
+            args['width'] = 160
+
     elif 'gfx/trainer_card' in filedir:
         if name in ['badges', 'trainer_card']:
             args['width'] = 16
@@ -310,8 +314,11 @@ def to_png(filename, **kwargs):
     elif ext == '.2bpp':
         basedir, basename = os.path.split(filename)
         name, ext = os.path.splitext(basename)
-        # TODO: how to actually make big_onix.png (reusing one from pokecrystal for now)
+        # TODO: how to actually make big_onix/slots_3 pngs (reusing one from pokecrystal for now)
         if name in ['big_onix', 'slots_3']:
+            return
+        # TODO: same question for most/all battle anims
+        if basedir == 'gfx/battle_anims':
             return
         if name in ['back_gold', 'back_silver']:
             kwargs['fileout'] = os.path.join(basedir, 'back.png')
