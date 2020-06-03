@@ -472,6 +472,12 @@ wLinkData:: ds $514
 wLinkDataEnd::
 
 NEXTU ; c700
+; unused (engine/gfx/sprite_anims.asm)
+	ds 4
+wc704:: ds 19
+wc717:: ds 1
+
+NEXTU ; c700
 ; link data members
 wLinkPlayerName:: ds NAME_LENGTH
 wLinkPartyCount:: db
