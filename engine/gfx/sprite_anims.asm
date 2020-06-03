@@ -20,8 +20,8 @@ DoAnimFrame:
 	dw .GSIntroBubble
 	dw .GSIntroShellder
 	dw .GSIntroMagikarp
-	dw .UnusedLapras
 	dw .GSIntroLapras
+	dw .GSIntroLapras2
 	dw .GSIntroNote
 	dw .GSIntroJigglypuff
 	dw .GSIntroPikachu
@@ -227,7 +227,7 @@ DoAnimFrame:
 	call DeinitializeSprite
 	ret
 
-.UnusedLapras
+.GSIntroLapras
 	ld hl, SPRITEANIMSTRUCT_XCOORD
 	add hl, bc
 	ld a, [hl]
@@ -251,7 +251,7 @@ DoAnimFrame:
 	call DeinitializeSprite
 	ret
 
-.GSIntroLapras
+.GSIntroLapras2
 	call .AnonymousJumptable
 	jp hl
 
@@ -871,10 +871,10 @@ ENDC
 	ret
 
 .Data_8d8b4
-	db SPRITE_ANIM_FRAMESET_GS_INTRO_PIKACHU_4
-	db SPRITE_ANIM_FRAMESET_GS_INTRO_PIKACHU_5
-	db SPRITE_ANIM_FRAMESET_GS_INTRO_PIKACHU_4
-	db SPRITE_ANIM_FRAMESET_GS_INTRO_PIKACHU_6
+	db SPRITE_ANIM_FRAMESET_UNUSED_PIKACHU
+	db SPRITE_ANIM_FRAMESET_UNUSED_PIKACHU_2
+	db SPRITE_ANIM_FRAMESET_UNUSED_PIKACHU
+	db SPRITE_ANIM_FRAMESET_UNUSED_PIKACHU_3
 
 .UnusedPikachuTail
 	farcall ret_e0000

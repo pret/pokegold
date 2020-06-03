@@ -23,9 +23,9 @@ SpriteAnimFrameData:
 	dw .Frameset_GSIntroCyndaquil
 	dw .Frameset_GSIntroTotodile
 	dw .Frameset_GSTitleTrail
-	dw .Frameset_GSIntroPikachu
-	dw .Frameset_GSIntroPikachu2
-	dw .Frameset_GSIntroPikachu4
+	dw .Frameset_GSIntroPikachu  ; SPRITE_ANIM_FRAMESET_UNUSED_PIKACHU
+	dw .Frameset_GSIntroPikachu2 ; SPRITE_ANIM_FRAMESET_UNUSED_PIKACHU_2
+	dw .Frameset_GSIntroPikachu4 ; SPRITE_ANIM_FRAMESET_UNUSED_PIKACHU_3
 	dw .Frameset_TextEntryCursor
 	dw .Frameset_TextEntryCursorBig
 	dw .Frameset_GameFreakLogo
