@@ -297,13 +297,8 @@ INCBIN "gfx/credits/theend.2bpp"
 
 SECTION "Move Animations", ROMX
 
-DisplayCaughtContestMonStats::
-	dr $cc000, $cc0c8
-DisplayAlreadyCaughtText::
-	dr $cc0c8, $cc0d6
-DummyPredef38::
-DummyPredef39::
-	ret
+INCLUDE "engine/events/bug_contest/display_stats.asm"
+
 PlayBattleAnim::
 	dr $cc0d7, $cc283
 BattleAnimCommands::
