@@ -297,30 +297,15 @@ INCBIN "gfx/credits/theend.2bpp"
 
 SECTION "Move Animations", ROMX
 
-DisplayCaughtContestMonStats::
-	dr $cc000, $cc0c8
-DisplayAlreadyCaughtText::
-	dr $cc0c8, $cc0d6
-DummyPredef38::
-DummyPredef39::
-	ret
-PlayBattleAnim::
-	dr $cc0d7, $cc283
-BattleAnimCommands::
-	dr $cc283, $cc5f7
-BattleAnimCmd_RaiseSub::
-	dr $cc5f7, $cc67c
-BattleAnimCmd_MinimizeOpp::
-	dr $cc67c, $cc836
-ClearBattleAnims::
-	dr $cc836, $cc8f0
-QueueBattleAnimation::
-	dr $cc8f0, $ce6aa
-
-BattleAnim_Sine_e::
-	dr $ce6aa, $ce6b0
-BattleAnim_Cosine_e::
-	dr $ce6b0, $cfce3
+INCLUDE "engine/events/bug_contest/display_stats.asm"
+INCLUDE "engine/battle_anims/anim_commands.asm"
+INCLUDE "engine/battle_anims/core.asm"
+INCLUDE "data/battle_anims/objects.asm"
+INCLUDE "engine/battle_anims/functions.asm"
+INCLUDE "engine/battle_anims/helpers.asm"
+INCLUDE "data/battle_anims/framesets.asm"
+INCLUDE "data/battle_anims/oam.asm"
+INCLUDE "data/battle_anims/object_gfx.asm"
 
 
 SECTION "Font Inversed", ROMX
