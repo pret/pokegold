@@ -272,6 +272,9 @@ def filepath_rules(filepath):
     elif 'gfx/title' in filedir:
         if name in ['logo_bottom_gold', 'logo_bottom_silver', 'logo_top_gold', 'logo_top_silver']:
             args['width'] = 160
+        elif name == 'lugia_silver'
+            args['width'] = 64
+            args['pic_dimensions'] = 8, 4
 
     elif 'gfx/trainer_card' in filedir:
         if name in ['badges', 'trainer_card']:
