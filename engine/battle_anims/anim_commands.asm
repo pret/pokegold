@@ -131,6 +131,7 @@ BattleAnimRestoreHuds:
 	call BattleAnimDelayFrame
 	call WaitTop
 
+; this block should just be "call UpdateBattleHuds"
 	ld hl, UpdateBattleHuds
 	ld a, BANK(UpdatePlayerHUD)
 	rst FarCall
@@ -539,7 +540,6 @@ BattleAnimCmd_IfParamEqual:
 	ld [hl], d
 	ret
 
-
 BattleAnimCmd_IfParamAnd:
 	call GetBattleAnimByte
 	ld e, a
@@ -892,7 +892,7 @@ BattleAnimCmd_Transform:
 	ret
 
 BattleAnimCmd_RaiseSub:
-	xor a
+	xor a ; sScratch
 	call OpenSRAM
 
 GetSubstitutePic: ; used only for BANK(GetSubstitutePic)
