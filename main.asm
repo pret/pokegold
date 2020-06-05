@@ -300,9 +300,8 @@ SECTION "Move Animations", ROMX
 INCLUDE "engine/events/bug_contest/display_stats.asm"
 INCLUDE "engine/battle_anims/anim_commands.asm"
 INCLUDE "engine/battle_anims/core.asm"
+INCLUDE "data/battle_anims/objects.asm"
 
-BattleAnimObjects::
-	dr $ccaa5, $ccf0d
 DoBattleAnimFrame::
 	dr $ccf0d, $ce6aa
 
