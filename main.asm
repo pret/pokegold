@@ -299,23 +299,22 @@ SECTION "Move Animations", ROMX
 
 INCLUDE "engine/events/bug_contest/display_stats.asm"
 INCLUDE "engine/battle_anims/anim_commands.asm"
+INCLUDE "engine/battle_anims/core.asm"
 
-QueueBattleAnimation::
-	dr $cc8f0, $cc958
-BattleAnimOAMUpdate::
-	dr $cc958, $cca97
-_ExecuteBGEffects::
-	dr $cca97, $cca9e
-_QueueBGEffect::
-	dr $cca9e, $ccf0d
+BattleAnimObjects::
+	dr $ccaa5, $ccf0d
 DoBattleAnimFrame::
 	dr $ccf0d, $ce6aa
 
 BattleAnim_Sine_e::
 	dr $ce6aa, $ce6b0
 BattleAnim_Cosine_e::
-	dr $ce6b0, $ce78b
+	dr $ce6b0, $ce716
 
+GetBattleAnimFrame::
+	dr $ce716, $ce781
+GetBattleAnimOAMPointer::
+	dr $ce781, $ce78b
 LoadBattleAnimGFX::
 	dr $ce78b, $cfce3
 
