@@ -344,15 +344,7 @@ ENDC
 
 INCLUDE "engine/menus/options_menu.asm"
 INCLUDE "engine/movie/gamefreak_presents.asm"
-
-IF DEF(_GOLD)
-GoldSilverIntro::
-	dr $e4cb1, $e7678
-
-ELIF DEF(_SILVER)
-GoldSilverIntro::
-	dr $e4af9, $e74c0
-ENDC
+INCLUDE "engine/movie/gs_intro.asm"
 
 
 SECTION "bank3E", ROMX

@@ -141,7 +141,7 @@ SGB_ApplyPartyMenuHPPals:
 	ld [hl], e
 	ret
 
-Unreferenced_Function9102:
+Function9102:
 	call CheckCGB
 	ret z
 ; CGB only

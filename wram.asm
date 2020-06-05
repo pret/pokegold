@@ -720,7 +720,20 @@ wPlayerMoveStruct:: move_struct wPlayerMoveStruct
 wEnemyMonNick:: ds MON_NAME_LENGTH ; caf6
 wBattleMonNick:: ds MON_NAME_LENGTH ; cb01
 
+UNION ; cb0c
+; battle mon
 wBattleMon:: battle_struct wBattleMon ; cb0c
+
+NEXTU ; cb0c
+	ds 4
+wIntroJumptableIndex:: db
+wcb11:: dw
+wcb13:: dw
+wcb15:: dw
+wcb17:: db
+wcb18:: db
+wcb19:: db
+ENDU ; cb2c
 
 wcb2c:: ds 1 ; cb2c
 wcb2d:: ds 1 ; cb2d
