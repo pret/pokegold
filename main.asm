@@ -322,9 +322,7 @@ ret_e0000:
 	ret
 
 INCLUDE "engine/events/diploma.asm"
-
-RotateUnownFrontpic::
-	dr $e081b, $e0908
+INCLUDE "engine/events/print_unown_2.asm"
 
 ret_e0908::
 	ret
