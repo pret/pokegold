@@ -233,6 +233,14 @@ wTempTilemap::
 	ds SCREEN_WIDTH * SCREEN_HEIGHT ; $168 = 360
 
 NEXTU ; c508
+; unown puzzle
+wUnownPuzzle::
+	ds 200
+wPuzzlePieces:: ds 6 * 6
+	ds 244
+wUnownPuzzleEnd::
+
+NEXTU ; c508
 
 ; This union spans 200 bytes from c508 to c5d0.
 UNION ; c508
@@ -392,6 +400,34 @@ wSlotsDataEnd::
 wSlotsEnd::
 
 NEXTU ; c5d0
+; card flip
+wCardFlip:: ; c5d0
+wDeck:: ds 24
+wDeckEnd::
+; c5e8
+wCardFlipNumCardsPlayed:: db
+wCardFlipFaceUpCard:: db
+wDiscardPile:: ds 24
+wDiscardPileEnd::
+wCardFlipEnd::
+
+NEXTU ; c5d0
+; dummy game
+wDummyGame:: ; c5d0
+wDummyGameCards:: ds 9 * 5
+wDummyGameCardsEnd::
+wDummyGameLastCardPicked:: db ; c5fd
+wDummyGameCard1:: db ; c5fe
+wDummyGameCard2:: db ; c5ff
+wDummyGameCard1Location:: db ; c600
+wDummyGameCard2Location:: db ; c601
+wDummyGameNumberTriesRemaining:: db ; c602
+wDummyGameLastMatches:: ds 5 ; c603
+wDummyGameCounter:: db ; c608
+wDummyGameNumCardsMatched:: db ; c609
+wDummyGameEnd::
+
+NEXTU ; c5d0
 ; unused (engine/gfx/color.asm)
 	ds 50
 
@@ -461,6 +497,25 @@ wPrinterMargins:: db ; cafa
 wPrinterExposureTime:: db ; cafb
 	ds 16
 wGameboyPrinterRAMEnd::
+
+NEXTU ; c700
+; bill's pc data
+wBillsPCData::
+wBillsPCPokemonList::
+; (species, box number, list index) x30
+	ds 3 * 30
+	ds 720
+wBillsPC_ScrollPosition:: db
+wBillsPC_CursorPosition:: db
+wBillsPC_NumMonsInBox:: db
+wBillsPC_NumMonsOnScreen:: db
+wBillsPC_LoadedBox:: db ; 0 if party, 1 - 14 if box, 15 if active box
+wBillsPC_BackupScrollPosition:: db
+wBillsPC_BackupCursorPosition:: db
+wBillsPC_BackupLoadedBox:: db
+wBillsPC_MonHasMail:: db
+	ds 5
+wBillsPCDataEnd::
 
 NEXTU ; c700
 ; Hall of Fame data
@@ -1098,10 +1153,22 @@ wTrainerCardBadgeTileID:: db
 wTrainerCardBadgeAttributes:: db
 
 NEXTU ; ce64
+; card flip data
+wCardFlipCursorY:: db
+wCardFlipCursorX:: db
+wCardFlipWhichCard:: db
+
+NEXTU ; ce64
 ; magnet train
 wMagnetTrainOffset:: db
 wMagnetTrainPosition:: db
 wMagnetTrainWaitCounter:: db
+
+NEXTU ; ce64
+; unown puzzle data
+wHoldingUnownPuzzlePiece:: db
+wUnownPuzzleCursorPosition:: db
+wUnownPuzzleHeldPiece:: db
 
 NEXTU ; ce64
 ; miscellaneous

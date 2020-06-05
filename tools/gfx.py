@@ -107,6 +107,16 @@ def filepath_rules(filepath):
         elif name == 'balls':
             args['width'] = 32
 
+    elif 'gfx/card_flip' in filedir:
+        if name == 'card_flip_1':
+            args['width'] = 128
+        elif name == 'card_flip_2':
+            args['width'] = 24
+            args['rows'] = [
+                (0, 2), (0, 2), (0, 2), (0, 2), (0, 2), (0, 2), (0, 2), (0, 2),
+                (0, 3), (0, 3), (0, 3), (0, 3), (0, 3), (0, 3), (0, 3), (0, 3), (0, 3), (0, 3), (0, 3), (0, 3)
+            ]
+
     elif 'gfx/credits' in filedir:
         if name in ['bellossom', 'togepi', 'elekid', 'sentret']:
             args['width'] = 32
@@ -118,6 +128,14 @@ def filepath_rules(filepath):
     elif 'gfx/debug' in filedir:
         if name == 'color_test':
             args['width'] = 176
+
+    elif 'gfx/diploma' in filedir:
+        if name == 'diploma':
+            args['width'] = 128
+
+    elif 'gfx/dummy_game' in filedir:
+        if name == 'dummy_game':
+            args['width'] = 16
 
     elif 'gfx/font' in filedir:
         if name == 'font_inversed':
@@ -259,6 +277,12 @@ def filepath_rules(filepath):
             args['width'] = 24
         elif name == 'game_boy':
             args['width'] = 56
+
+    elif 'gfx/unown_puzzle' in filedir:
+        if name == 'start_cancel':
+            args['width'] = 152
+        elif name == 'tile_borders':
+            args['width'] = 64
 
     elif os.path.join(filedir, name) in pics:
         args['pic'] = True

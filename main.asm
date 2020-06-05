@@ -316,41 +316,12 @@ INCBIN "gfx/font/font_inversed.1bpp"
 
 SECTION "bank38", ROMX
 
-ret_e0000:
-	ret
-; unused
-	ret
-_Diploma::
-	dr $e0002, $e0009
-PlaceDiplomaOnScreen::
-	dr $e0009, $e00ae
-PrintDiplomaPage2::
-	dr $e00ae, $e081b
-RotateUnownFrontpic::
-	dr $e081b, $e0908
-ret_e0908::
-	ret
-_CardFlip::
-	dr $e0909, $e199d
-
-_UnownPuzzle::
-	dr $e199d, $e2668
-
-_DummyGame::
-	dr $e2668, $e29ae
-DummyGame_InterpretJoypad_AnimateCursor::
-	dr $e29ae, $e2b9e
-_DepositPKMN::
-	dr $e2b9e, $e2d71
-_WithdrawPKMN::
-	dr $e2d71, $e2f47
-_MovePKMNWithoutMail::
-	dr $e2f47, $e3773
-
-StatsScreenDPad::
-	dr $e3773, $e3d25
-_ChangeBox::
-	dr $e3d25, $e3f74
+INCLUDE "engine/events/diploma.asm"
+INCLUDE "engine/events/print_unown_2.asm"
+INCLUDE "engine/games/card_flip.asm"
+INCLUDE "engine/games/unown_puzzle.asm"
+INCLUDE "engine/games/dummy_game.asm"
+INCLUDE "engine/pokemon/bills_pc.asm"
 
 
 SECTION "bank39", ROMX
