@@ -325,18 +325,14 @@ INCLUDE "engine/events/diploma.asm"
 INCLUDE "engine/events/print_unown_2.asm"
 INCLUDE "engine/games/card_flip.asm"
 INCLUDE "engine/games/unown_puzzle.asm"
+INCLUDE "engine/games/dummy_game.asm"
 
-_DummyGame::
-	dr $e2668, $e29ae
-DummyGame_InterpretJoypad_AnimateCursor::
-	dr $e29ae, $e2b9e
 _DepositPKMN::
 	dr $e2b9e, $e2d71
 _WithdrawPKMN::
 	dr $e2d71, $e2f47
 _MovePKMNWithoutMail::
 	dr $e2f47, $e3773
-
 StatsScreenDPad::
 	dr $e3773, $e3d25
 _ChangeBox::

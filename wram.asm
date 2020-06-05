@@ -412,6 +412,22 @@ wDiscardPileEnd::
 wCardFlipEnd::
 
 NEXTU ; c5d0
+; dummy game
+wDummyGame:: ; c5d0
+wDummyGameCards:: ds 9 * 5
+wDummyGameCardsEnd::
+wDummyGameLastCardPicked:: db ; c5fd
+wDummyGameCard1:: db ; c5fe
+wDummyGameCard2:: db ; c5ff
+wDummyGameCard1Location:: db ; c600
+wDummyGameCard2Location:: db ; c601
+wDummyGameNumberTriesRemaining:: db ; c602
+wDummyGameLastMatches:: ds 5 ; c603
+wDummyGameCounter:: db ; c608
+wDummyGameNumCardsMatched:: db ; c609
+wDummyGameEnd::
+
+NEXTU ; c5d0
 ; unused (engine/gfx/color.asm)
 	ds 50
 
