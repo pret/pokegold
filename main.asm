@@ -323,11 +323,7 @@ ret_e0000:
 
 INCLUDE "engine/events/diploma.asm"
 INCLUDE "engine/events/print_unown_2.asm"
-
-ret_e0908::
-	ret
-_CardFlip::
-	dr $e0909, $e199d
+INCLUDE "engine/games/card_flip.asm"
 
 _UnownPuzzle::
 	dr $e199d, $e2668

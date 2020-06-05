@@ -392,6 +392,18 @@ wSlotsDataEnd::
 wSlotsEnd::
 
 NEXTU ; c5d0
+; card flip
+wCardFlip:: ; c5d0
+wDeck:: ds 24
+wDeckEnd::
+; c5e8
+wCardFlipNumCardsPlayed:: db
+wCardFlipFaceUpCard:: db
+wDiscardPile:: ds 24
+wDiscardPileEnd::
+wCardFlipEnd::
+
+NEXTU ; c5d0
 ; unused (engine/gfx/color.asm)
 	ds 50
 
@@ -1096,6 +1108,12 @@ NEXTU ; ce64
 wTrainerCardBadgeFrameCounter:: db
 wTrainerCardBadgeTileID:: db
 wTrainerCardBadgeAttributes:: db
+
+NEXTU ; ce64
+; card flip data
+wCardFlipCursorY:: db
+wCardFlipCursorX:: db
+wCardFlipWhichCard:: db
 
 NEXTU ; ce64
 ; magnet train
