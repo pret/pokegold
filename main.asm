@@ -301,14 +301,7 @@ INCLUDE "engine/events/bug_contest/display_stats.asm"
 INCLUDE "engine/battle_anims/anim_commands.asm"
 INCLUDE "engine/battle_anims/core.asm"
 INCLUDE "data/battle_anims/objects.asm"
-
-DoBattleAnimFrame::
-	dr $ccf0d, $ce6aa
-BattleAnim_Sine_e::
-	dr $ce6aa, $ce6b0
-BattleAnim_Cosine_e::
-	dr $ce6b0, $ce704
-
+INCLUDE "engine/battle_anims/functions.asm"
 INCLUDE "engine/battle_anims/helpers.asm"
 INCLUDE "data/battle_anims/framesets.asm"
 INCLUDE "data/battle_anims/oam.asm"
