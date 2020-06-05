@@ -7,7 +7,7 @@ CARDFLIP_DECK_SIZE EQU 4 * 6
 Unknown_e0908:
 ; Graphics for an unused Game Corner
 ; game were meant to be here.
-ret_e0908::
+ret_e0908:
 	ret
 
 _CardFlip:
@@ -495,7 +495,7 @@ CardFlip_UpdateCoinBalanceDisplay:
 
 CardFlip_PrintCoinBalance:
 	hlcoord 9, 15
-	ld bc, $0109
+	lb bc, 1, 9
 	call Textbox
 	hlcoord 10, 16
 	ld de, .CoinStr

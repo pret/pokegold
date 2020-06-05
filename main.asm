@@ -316,11 +316,6 @@ INCBIN "gfx/font/font_inversed.1bpp"
 
 SECTION "bank38", ROMX
 
-ret_e0000:
-	ret
-; unused
-	ret
-
 INCLUDE "engine/events/diploma.asm"
 INCLUDE "engine/events/print_unown_2.asm"
 INCLUDE "engine/games/card_flip.asm"

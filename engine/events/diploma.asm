@@ -1,3 +1,8 @@
+ret_e0000:
+	ret
+
+	ret ; unused
+
 _Diploma:
 	call PlaceDiplomaOnScreen
 	call WaitPressAorB_BlinkCursor
