@@ -298,24 +298,26 @@ INCBIN "gfx/credits/theend.2bpp"
 SECTION "Move Animations", ROMX
 
 INCLUDE "engine/events/bug_contest/display_stats.asm"
+INCLUDE "engine/battle_anims/anim_commands.asm"
 
-PlayBattleAnim::
-	dr $cc0d7, $cc283
-BattleAnimCommands::
-	dr $cc283, $cc5f7
-BattleAnimCmd_RaiseSub::
-	dr $cc5f7, $cc67c
-BattleAnimCmd_MinimizeOpp::
-	dr $cc67c, $cc836
-ClearBattleAnims::
-	dr $cc836, $cc8f0
 QueueBattleAnimation::
-	dr $cc8f0, $ce6aa
+	dr $cc8f0, $cc958
+BattleAnimOAMUpdate::
+	dr $cc958, $cca97
+_ExecuteBGEffects::
+	dr $cca97, $cca9e
+_QueueBGEffect::
+	dr $cca9e, $ccf0d
+DoBattleAnimFrame::
+	dr $ccf0d, $ce6aa
 
 BattleAnim_Sine_e::
 	dr $ce6aa, $ce6b0
 BattleAnim_Cosine_e::
-	dr $ce6b0, $cfce3
+	dr $ce6b0, $ce78b
+
+LoadBattleAnimGFX::
+	dr $ce78b, $cfce3
 
 
 SECTION "Font Inversed", ROMX
