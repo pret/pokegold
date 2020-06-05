@@ -233,6 +233,14 @@ wTempTilemap::
 	ds SCREEN_WIDTH * SCREEN_HEIGHT ; $168 = 360
 
 NEXTU ; c508
+; unown puzzle
+wUnownPuzzle::
+	ds 200
+wPuzzlePieces:: ds 6 * 6
+	ds 244
+wUnownPuzzleEnd::
+
+NEXTU ; c508
 
 ; This union spans 200 bytes from c508 to c5d0.
 UNION ; c508
@@ -1120,6 +1128,12 @@ NEXTU ; ce64
 wMagnetTrainOffset:: db
 wMagnetTrainPosition:: db
 wMagnetTrainWaitCounter:: db
+
+NEXTU ; ce64
+; unown puzzle data
+wHoldingUnownPuzzlePiece:: db
+wUnownPuzzleCursorPosition:: db
+wUnownPuzzleHeldPiece:: db
 
 NEXTU ; ce64
 ; miscellaneous

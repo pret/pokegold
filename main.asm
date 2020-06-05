@@ -324,9 +324,7 @@ ret_e0000:
 INCLUDE "engine/events/diploma.asm"
 INCLUDE "engine/events/print_unown_2.asm"
 INCLUDE "engine/games/card_flip.asm"
-
-_UnownPuzzle::
-	dr $e199d, $e2668
+INCLUDE "engine/games/unown_puzzle.asm"
 
 _DummyGame::
 	dr $e2668, $e29ae
