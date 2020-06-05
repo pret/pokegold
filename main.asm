@@ -304,18 +304,15 @@ INCLUDE "data/battle_anims/objects.asm"
 
 DoBattleAnimFrame::
 	dr $ccf0d, $ce6aa
-
 BattleAnim_Sine_e::
 	dr $ce6aa, $ce6b0
 BattleAnim_Cosine_e::
-	dr $ce6b0, $ce716
+	dr $ce6b0, $ce704
 
-GetBattleAnimFrame::
-	dr $ce716, $ce781
-GetBattleAnimOAMPointer::
-	dr $ce781, $ce78b
-LoadBattleAnimGFX::
-	dr $ce78b, $cfce3
+INCLUDE "engine/battle_anims/helpers.asm"
+INCLUDE "data/battle_anims/framesets.asm"
+INCLUDE "data/battle_anims/oam.asm"
+INCLUDE "data/battle_anims/object_gfx.asm"
 
 
 SECTION "Font Inversed", ROMX
