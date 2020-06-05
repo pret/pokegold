@@ -320,14 +320,12 @@ ret_e0000:
 	ret
 ; unused
 	ret
-_Diploma::
-	dr $e0002, $e0009
-PlaceDiplomaOnScreen::
-	dr $e0009, $e00ae
-PrintDiplomaPage2::
-	dr $e00ae, $e081b
+
+INCLUDE "engine/events/diploma.asm"
+
 RotateUnownFrontpic::
 	dr $e081b, $e0908
+
 ret_e0908::
 	ret
 _CardFlip::
