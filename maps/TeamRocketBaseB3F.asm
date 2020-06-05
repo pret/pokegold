@@ -1,4 +1,4 @@
-	const_def 2 ; object constants
+	object_const_def ; object_event constants
 	const TEAMROCKETBASEB3F_LANCE
 	const TEAMROCKETBASEB3F_ROCKET1
 	const TEAMROCKETBASEB3F_MOLTRES
@@ -12,7 +12,6 @@
 	const TEAMROCKETBASEB3F_POKE_BALL2
 	const TEAMROCKETBASEB3F_POKE_BALL3
 	const TEAMROCKETBASEB3F_POKE_BALL4
-	const TEAMROCKETBASEB3F_POKE_BALL5
 
 TeamRocketBaseB3F_MapScripts:
 	db 4 ; scene scripts

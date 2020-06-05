@@ -1,4 +1,4 @@
-	const_def 2 ; object constants
+	object_const_def ; object_event constants
 	const PLAYERSHOUSE1F_MOM1
 	const PLAYERSHOUSE1F_MOM2
 	const PLAYERSHOUSE1F_MOM3
@@ -27,7 +27,7 @@ MeetMomScript:
 	opentext
 	writetext ElmsLookingForYouText
 	promptbutton
-	getstring STRING_BUFFER_4, GearName
+	getstring STRING_BUFFER_4, PokegearName
 	scall PlayersHouse1FReceiveItemStd
 	setflag ENGINE_POKEGEAR
 	setflag ENGINE_PHONE_CARD
@@ -71,11 +71,11 @@ MeetMomScript:
 	writetext InstructionsNextText
 	waitbutton
 	closetext
-	applymovement PLAYERSHOUSE1F_MOM1, MomTurnsBackMovement
+	applymovement PLAYERSHOUSE1F_MOM1, MomWalksBackMovement
 	special RestartMapMusic
 	end
 
-GearName:
+PokegearName:
 	db "#GEAR@"
 
 PlayersHouse1FReceiveItemStd:
@@ -141,7 +141,7 @@ MomWalksToPlayerMovement:
 	slow_step UP
 	step_end
 
-MomTurnsBackMovement:
+MomWalksBackMovement:
 	slow_step DOWN
 	slow_step LEFT
 	slow_step LEFT

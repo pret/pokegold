@@ -1,4 +1,4 @@
-	const_def 2 ; object constants
+	object_const_def ; object_event constants
 	const ROUTE36_YOUNGSTER1
 	const ROUTE36_YOUNGSTER2
 	const ROUTE36_WEIRD_TREE
@@ -53,7 +53,7 @@ WateredWeirdTreeScript:: ; export (for when you use Squirtbottle from pack)
 	loadwildmon SUDOWOODO, 20
 	startbattle
 	setevent EVENT_FOUGHT_SUDOWOODO
-	ifequal $2, DidntCatchSudowoodo
+	ifequal DRAW, DidntCatchSudowoodo
 	disappear ROUTE36_WEIRD_TREE
 	variablesprite SPRITE_WEIRD_TREE, SPRITE_TWIN
 	reloadmapafterbattle
@@ -124,7 +124,7 @@ TrainerSchoolboyAlan1:
 	iftrue .NumberAccepted
 	checkevent EVENT_ALAN_ASKED_FOR_PHONE_NUMBER
 	iftrue .AskAgainForPhoneNumber
-	writetext UnknownText_0x1947aa
+	writetext SchoolboyAlanBooksText
 	promptbutton
 	setevent EVENT_ALAN_ASKED_FOR_PHONE_NUMBER
 	scall .AskNumber1
@@ -307,7 +307,7 @@ RockSmashGuyText2:
 	cont "have this."
 	done
 
-UnknownText_0x19451a:
+UnusedReceivedTM08Text:
 	text "<PLAYER> received"
 	line "TM08."
 	done
@@ -376,7 +376,7 @@ SchoolboyAlan1BeatenText:
 	line "error?"
 	done
 
-UnknownText_0x1947aa:
+SchoolboyAlanBooksText:
 	text "Darn. I study five"
 	line "hours a day too."
 

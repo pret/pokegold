@@ -1,9 +1,8 @@
-	const_def 2 ; object constants
+	object_const_def ; object_event constants
 	const RADIOTOWER5F_DIRECTOR
 	const RADIOTOWER5F_ROCKET
 	const RADIOTOWER5F_ROCKET_GIRL
 	const RADIOTOWER5F_ROCKER
-	const RADIOTOWER5F_POKE_BALL
 
 RadioTower5F_MapScripts:
 	db 3 ; scene scripts
@@ -129,16 +128,16 @@ RadioTower5FRocketBossScene:
 	setscene SCENE_RADIOTOWER5F_NOTHING
 	setevent EVENT_GOT_RAINBOW_WING
 	setevent EVENT_TEAM_ROCKET_DISBANDED
-	sjump .UselessJump
-.SilverWing
+	sjump .GotWing
+
+.SilverWing:
 	verbosegiveitem SILVER_WING
 	writetext RadioTower5FDirectorDescribeSilverWingText
 	waitbutton
 	closetext
 	setscene SCENE_RADIOTOWER5F_NOTHING
 	setevent EVENT_GOT_SILVER_WING
-
-.UselessJump:
+.GotWing:
 	applymovement RADIOTOWER5F_DIRECTOR, RadioTower5FDirectorWalksOut
 	playsound SFX_EXIT_BUILDING
 	disappear RADIOTOWER5F_DIRECTOR

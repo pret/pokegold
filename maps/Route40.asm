@@ -1,4 +1,4 @@
-	const_def 2 ; object constants
+	object_const_def ; object_event constants
 	const ROUTE40_OLIVINE_RIVAL1
 	const ROUTE40_OLIVINE_RIVAL2
 	const ROUTE40_SWIMMER_GIRL1
@@ -6,11 +6,8 @@
 	const ROUTE40_ROCK1
 	const ROUTE40_ROCK2
 	const ROUTE40_ROCK3
-	const ROUTE40_LASS1
+	const ROUTE40_LASS
 	const ROUTE40_MONICA
-	const ROUTE40_POKEFAN_M
-	const ROUTE40_LASS2
-	const ROUTE40_STANDING_YOUNGSTER
 
 Route40_MapScripts:
 	db 0 ; scene scripts

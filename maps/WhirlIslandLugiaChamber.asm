@@ -1,4 +1,4 @@
-	const_def 2 ; object constants
+	object_const_def ; object_event constants
 	const WHIRLISLANDLUGIACHAMBER_LUGIA
 
 WhirlIslandLugiaChamber_MapScripts:
@@ -32,7 +32,6 @@ Lugia:
 	setevent EVENT_FOUGHT_LUGIA
 	checkver
 	iftrue .Silver
-
 	loadvar VAR_BATTLETYPE, BATTLETYPE_FORCEITEM
 	loadwildmon LUGIA, 70
 	startbattle

@@ -1,4 +1,4 @@
-	const_def 2 ; object constants
+	object_const_def ; object_event constants
 	const DARKCAVEVIOLETENTRANCE_POKE_BALL1
 	const DARKCAVEVIOLETENTRANCE_ROCK1
 	const DARKCAVEVIOLETENTRANCE_ROCK2
@@ -6,7 +6,6 @@
 	const DARKCAVEVIOLETENTRANCE_ROCK4
 	const DARKCAVEVIOLETENTRANCE_POKE_BALL2
 	const DARKCAVEVIOLETENTRANCE_POKE_BALL3
-	const DARKCAVEVIOLETENTRANCE_POKE_BALL4
 
 DarkCaveVioletEntrance_MapScripts:
 	db 0 ; scene scripts

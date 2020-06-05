@@ -1,8 +1,7 @@
-	const_def 2 ; object constants
-	const ROUTE34ILEXFORESTGATE_TEACHER1
+	object_const_def ; object_event constants
+	const ROUTE34ILEXFORESTGATE_TEACHER
 	const ROUTE34ILEXFORESTGATE_BUTTERFREE
 	const ROUTE34ILEXFORESTGATE_LASS
-	const ROUTE34ILEXFORESTGATE_TEACHER2
 
 Route34IlexForestGate_MapScripts:
 	db 0 ; scene scripts

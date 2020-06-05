@@ -1,5 +1,4 @@
-	const_def 2 ; object constants
-	const CELADONMANSIONROOF_FISHER
+	object_const_def ; object_event constants
 
 CeladonMansionRoof_MapScripts:
 	db 0 ; scene scripts

@@ -14,7 +14,7 @@ FlowerShopTeacherScript:
 	iffalse .Lalala
 	faceplayer
 	opentext
-	writetext UnknownText_0x554c2
+	writetext GoldenrodFlowerShopTeacherBetterThanWhitneyText
 	promptbutton
 	verbosegiveitem SQUIRTBOTTLE
 	setevent EVENT_GOT_SQUIRTBOTTLE
@@ -23,7 +23,7 @@ FlowerShopTeacherScript:
 .Lalala:
 	turnobject GOLDENRODFLOWERSHOP_TEACHER, LEFT
 	opentext
-	writetext UnknownText_0x5552e
+	writetext GoldenrodFlowerShopTeacherLalalaHavePlentyOfWaterText
 	waitbutton
 	closetext
 	end
@@ -33,13 +33,13 @@ FlowerShopFloriaScript:
 	opentext
 	checkflag ENGINE_PLAINBADGE
 	iffalse .NoPlainBadge
-	writetext UnknownText_0x555e6
+	writetext GoldenrodFlowerShopFloriaJumpsInSurpriseText
 	waitbutton
 	closetext
 	end
 
 .NoPlainBadge:
-	writetext UnknownText_0x55561
+	writetext GoldenrodFlowerShopFloriaMustBeAMonText
 	waitbutton
 	closetext
 	end
@@ -56,7 +56,7 @@ FlowerShopRadio:
 ; unused
 	jumpstd radio2
 
-UnknownText_0x554c2:
+GoldenrodFlowerShopTeacherBetterThanWhitneyText:
 	text "Oh, you're better"
 	line "than WHITNEY."
 
@@ -72,13 +72,13 @@ UnknownText_0x554c2:
 	cont "you should be OK."
 	done
 
-UnknownText_0x5552e:
+GoldenrodFlowerShopTeacherLalalaHavePlentyOfWaterText:
 	text "Lalala lalalala."
 	line "Have plenty of"
 	cont "water, my lovely!"
 	done
 
-UnknownText_0x55561:
+GoldenrodFlowerShopFloriaMustBeAMonText:
 	text "When I watered"
 	line "that moving tree"
 
@@ -94,7 +94,7 @@ UnknownText_0x55561:
 	cont "ER, to beat it."
 	done
 
-UnknownText_0x555e6:
+GoldenrodFlowerShopFloriaJumpsInSurpriseText:
 	text "Do you know about"
 	line "the moving tree?"
 

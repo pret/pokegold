@@ -1,11 +1,10 @@
-	const_def 2 ; object constants
+	object_const_def ; object_event constants
 	const ECRUTEAKGYM_MORTY
 	const ECRUTEAKGYM_SAGE1
 	const ECRUTEAKGYM_SAGE2
 	const ECRUTEAKGYM_GRANNY1
 	const ECRUTEAKGYM_GRANNY2
 	const ECRUTEAKGYM_GYM_GUY
-	const ECRUTEAKGYM_GRAMPS
 
 EcruteakGym_MapScripts:
 	db 0 ; scene scripts

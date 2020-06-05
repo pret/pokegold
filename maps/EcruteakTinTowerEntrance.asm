@@ -1,4 +1,4 @@
-	const_def 2 ; object constants
+	object_const_def ; object_event constants
 	const ECRUTEAKTINTOWERENTRANCE_SAGE1
 	const ECRUTEAKTINTOWERENTRANCE_SAGE2
 	const ECRUTEAKTINTOWERENTRANCE_SAGE3
@@ -19,7 +19,7 @@ EcruteakTinTowerEntrance_MapScripts:
 
 EcruteakTinTowerEntrance_CoordEvent1:
 	checkevent EVENT_RANG_CLEAR_BELL_2
-	iftrue EcruteakTinTowerEntrance_CoordEventEmpty
+	iftrue EcruteakTinTowerEntrance_CoordEvent_DontMove
 	applymovement ECRUTEAKTINTOWERENTRANCE_SAGE2, MovementData_0x980c7
 	moveobject ECRUTEAKTINTOWERENTRANCE_SAGE1, 4, 6
 	appear ECRUTEAKTINTOWERENTRANCE_SAGE1
@@ -29,7 +29,7 @@ EcruteakTinTowerEntrance_CoordEvent1:
 
 EcruteakTinTowerEntrance_CoordEvent2:
 	checkevent EVENT_RANG_CLEAR_BELL_1
-	iftrue EcruteakTinTowerEntrance_CoordEventEmpty
+	iftrue EcruteakTinTowerEntrance_CoordEvent_DontMove
 	applymovement ECRUTEAKTINTOWERENTRANCE_SAGE1, MovementData_0x980cc
 	moveobject ECRUTEAKTINTOWERENTRANCE_SAGE2, 5, 6
 	appear ECRUTEAKTINTOWERENTRANCE_SAGE2
@@ -37,7 +37,7 @@ EcruteakTinTowerEntrance_CoordEvent2:
 	disappear ECRUTEAKTINTOWERENTRANCE_SAGE1
 	end
 
-EcruteakTinTowerEntrance_CoordEventEmpty:
+EcruteakTinTowerEntrance_CoordEvent_DontMove:
 	end
 
 EcruteakTinTowerEntranceSageScript:
@@ -67,7 +67,7 @@ EcruteakTinTowerEntranceWanderingSageScript:
 	end
 
 .GotRainbowWing:
-	writetext EcruteakTinTowerEntranceWanderingSageText_GotClearBell
+	writetext EcruteakTinTowerEntranceWanderingSageText_GotRainbowWing
 	waitbutton
 	closetext
 	end
@@ -122,7 +122,7 @@ EcruteakTinTowerEntranceWanderingSageText:
 	line "flying #MON."
 	done
 
-EcruteakTinTowerEntranceWanderingSageText_GotClearBell:
+EcruteakTinTowerEntranceWanderingSageText_GotRainbowWing:
 	text "The TIN TOWER"
 	line "shook! A #MON"
 

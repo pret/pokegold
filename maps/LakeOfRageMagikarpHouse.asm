@@ -1,4 +1,4 @@
-	const_def 2 ; object constants
+	object_const_def ; object_event constants
 	const LAKEOFRAGEMAGIKARPHOUSE_FISHING_GURU
 
 LakeOfRageMagikarpHouse_MapScripts:
@@ -203,7 +203,9 @@ LakeOfRageMagikarpHouseUnusedRecordText:
 	text " caught by"
 	line "@"
 	text_ram wStringBuffer4
-	db "@@"
+	text_end
+
+	text_end ; unused
 
 LakeOfRageMagikarpHouse_MapEvents:
 	db 0, 0 ; filler

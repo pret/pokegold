@@ -1,4 +1,4 @@
-	const_def 2 ; object constants
+	object_const_def ; object_event constants
 	const BLACKTHORNGYM1F_CLAIR
 	const BLACKTHORNGYM1F_COOLTRAINER_M1
 	const BLACKTHORNGYM1F_COOLTRAINER_M2
@@ -58,7 +58,7 @@ BlackthornGymClairScript:
 .FightDone:
 	checkitem DRAGON_FANG
 	iftrue .HasDragonFang
-	writetext ClairText_TooMuchToExpect
+	writetext ClairText_WhatsTheMatter
 	waitbutton
 	closetext
 	end
@@ -85,6 +85,7 @@ BlackthornGymClairScript:
 .GotTM24:
 	writetext BlackthornGymClairText_League
 	waitbutton
+
 .BagFull:
 	closetext
 	end
@@ -218,7 +219,7 @@ ClairText_GoToDragonsDen:
 	cont "BADGE."
 	done
 
-ClairText_TooMuchToExpect:
+ClairText_WhatsTheMatter:
 	text "CLAIR: What's"
 	line "the matter?"
 
@@ -268,7 +269,6 @@ BlackthornGymClairText_DescribeTM24:
 	cont "to take it."
 	done
 
-BlackthornGymClairText_BagFull:
 BlackthornGymClairText_League:
 	text "So you've col-"
 	line "lected all the"

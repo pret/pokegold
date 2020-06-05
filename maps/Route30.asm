@@ -1,4 +1,4 @@
-	const_def 2 ; object constants
+	object_const_def ; object_event constants
 	const ROUTE30_YOUNGSTER1
 	const ROUTE30_YOUNGSTER2
 	const ROUTE30_YOUNGSTER3
@@ -9,7 +9,6 @@
 	const ROUTE30_FRUIT_TREE1
 	const ROUTE30_FRUIT_TREE2
 	const ROUTE30_COOLTRAINER_F
-	const ROUTE30_POKE_BALL
 
 Route30_MapScripts:
 	db 0 ; scene scripts

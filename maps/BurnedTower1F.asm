@@ -1,4 +1,4 @@
-	object_const_def ; object constants
+	object_const_def ; object_event constants
 	const BURNEDTOWER1F_FIREBREATHER_DICK
 	const BURNEDTOWER1F_FIREBREATHER_NED
 	const BURNEDTOWER1F_ROCK1

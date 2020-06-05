@@ -1,6 +1,5 @@
-	const_def 2 ; object constants
+	object_const_def ; object_event constants
 	const RUINSOFALPHKABUTOCHAMBER_RECEPTIONIST
-	const RUINSOFALPHKABUTOCHAMBER_SCIENTIST
 
 RuinsOfAlphKabutoChamber_MapScripts:
 	db 0 ; scene scripts

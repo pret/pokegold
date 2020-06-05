@@ -1,4 +1,4 @@
-	const_def 2 ; object constants
+	object_const_def ; object_event constants
 	const ROUTE44_FISHER1
 	const ROUTE44_FISHER2
 	const ROUTE44_YOUNGSTER1
@@ -9,7 +9,6 @@
 	const ROUTE44_FRUIT_TREE
 	const ROUTE44_POKE_BALL1
 	const ROUTE44_POKE_BALL2
-	const ROUTE44_POKE_BALL3
 
 Route44_MapScripts:
 	db 0 ; scene scripts

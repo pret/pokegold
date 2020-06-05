@@ -1,7 +1,6 @@
-	const_def 2 ; object constants
-	const OLIVINECAFE_SAILOR1
+	object_const_def ; object_event constants
+	const OLIVINECAFE_SAILOR
 	const OLIVINECAFE_FISHING_GURU
-	const OLIVINECAFE_SAILOR2
 
 OlivineCafe_MapScripts:
 	db 0 ; scene scripts

@@ -1,4 +1,4 @@
-	const_def 2 ; object constants
+	object_const_def ; object_event constants
 	const SILVERCAVEROOM3_RED
 
 SilverCaveRoom3_MapScripts:
@@ -10,17 +10,17 @@ Red:
 	special FadeOutMusic
 	faceplayer
 	opentext
-	writetext .Text1
+	writetext RedSeenText
 	waitbutton
 	closetext
-	winlosstext .Text2, .Text2
+	winlosstext RedWinLossText, RedWinLossText
 	loadtrainer RED, RED1
 	startbattle
 	dontrestartmapmusic
 	reloadmapafterbattle
 	special FadeOutMusic
 	opentext
-	writetext .Text3
+	writetext RedLeavesText
 	waitbutton
 	closetext
 	special FadeBlackQuickly
@@ -34,16 +34,16 @@ Red:
 	credits
 	end
 
-.Text1:
+RedSeenText:
 	text "…"
 	line "…"
 	done
 
-.Text2:
+RedWinLossText:
 	text "…"
 	done
 
-.Text3:
+RedLeavesText:
 	text "…"
 	line "…"
 	done

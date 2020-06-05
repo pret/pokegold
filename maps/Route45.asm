@@ -1,4 +1,4 @@
-	const_def 2 ; object constants
+	object_const_def ; object_event constants
 	const ROUTE45_POKEFAN_M1
 	const ROUTE45_POKEFAN_M2
 	const ROUTE45_POKEFAN_M3
@@ -11,7 +11,6 @@
 	const ROUTE45_POKE_BALL2
 	const ROUTE45_POKE_BALL3
 	const ROUTE45_POKE_BALL4
-	const ROUTE45_YOUNGSTER
 
 Route45_MapScripts:
 	db 0 ; scene scripts

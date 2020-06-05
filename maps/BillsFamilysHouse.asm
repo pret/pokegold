@@ -1,4 +1,4 @@
-	const_def 2 ; object constants
+	object_const_def ; object_event constants
 	const BILLSFAMILYSHOUSE_BILL
 	const BILLSFAMILYSHOUSE_POKEFAN_F
 	const BILLSFAMILYSHOUSE_TWIN
@@ -54,13 +54,13 @@ BillsMomScript:
 	opentext
 	checkevent EVENT_MET_BILL
 	iffalse .HaventMetBill
-	writetext BillsPopText
+	writetext BillsMomText_BeforeEcruteak
 	waitbutton
 	closetext
 	end
 
 .HaventMetBill:
-	writetext BillsMomText
+	writetext BillsMomText_AfterEcruteak
 	waitbutton
 	closetext
 	end
@@ -171,7 +171,7 @@ BillPopWontWorkText:
 	line "follow-up."
 	done
 
-BillsPopText:
+BillsMomText_BeforeEcruteak:
 	text "Oh, you collect"
 	line "#MON? My son"
 	cont "BILL is an expert."
@@ -183,7 +183,7 @@ BillsPopText:
 	line "CITY."
 	done
 
-BillsMomText:
+BillsMomText_AfterEcruteak:
 	text "I am so glad to"
 	line "see my son again."
 	done

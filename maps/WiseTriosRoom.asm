@@ -1,5 +1,3 @@
-	const_def 2 ; object constants
-
 WiseTriosRoom_MapScripts:
 	db 0 ; scene scripts
 

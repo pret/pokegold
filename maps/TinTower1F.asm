@@ -1,3 +1,6 @@
+	object_const_def ; object_event constants
+	const TINTOWER1F_SAGE
+
 TinTower1F_MapScripts:
 	db 0 ; scene scripts
 

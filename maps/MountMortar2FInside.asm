@@ -1,11 +1,10 @@
-	const_def 2 ; object constants
+	object_const_def ; object_event constants
 	const MOUNTMORTAR2FINSIDE_POKE_BALL1
 	const MOUNTMORTAR2FINSIDE_POKE_BALL2
 	const MOUNTMORTAR2FINSIDE_POKE_BALL3
 	const MOUNTMORTAR2FINSIDE_POKE_BALL4
 	const MOUNTMORTAR2FINSIDE_POKE_BALL5
 	const MOUNTMORTAR2FINSIDE_POKE_BALL6
-	const MOUNTMORTAR2FINSIDE_SUPER_NERD
 
 MountMortar2FInside_MapScripts:
 	db 0 ; scene scripts

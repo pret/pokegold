@@ -1,4 +1,4 @@
-	const_def 2 ; object constants
+	object_const_def ; object_event constants
 	const TINTOWER4F_POKE_BALL1
 	const TINTOWER4F_POKE_BALL2
 	const TINTOWER4F_POKE_BALL3
@@ -11,7 +11,7 @@ TinTower4F_MapScripts:
 TinTower4FUltraBall:
 	itemball ULTRA_BALL
 
-TinTower4FPPUp:
+TinTower4FSuperPotion:
 	itemball SUPER_POTION
 
 TinTower4FEscapeRope:
@@ -36,5 +36,5 @@ TinTower4F_MapEvents:
 
 	db 3 ; object events
 	object_event 14, 10, SPRITE_POKE_BALL, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_ITEMBALL, 0, TinTower4FUltraBall, EVENT_TIN_TOWER_4F_ULTRA_BALL
-	object_event 17, 14, SPRITE_POKE_BALL, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_ITEMBALL, 0, TinTower4FPPUp, EVENT_TIN_TOWER_4F_PP_UP
+	object_event 17, 14, SPRITE_POKE_BALL, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_ITEMBALL, 0, TinTower4FSuperPotion, EVENT_TIN_TOWER_4F_SUPER_POTION
 	object_event  2, 12, SPRITE_POKE_BALL, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_ITEMBALL, 0, TinTower4FEscapeRope, EVENT_TIN_TOWER_4F_ESCAPE_ROPE

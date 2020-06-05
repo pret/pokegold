@@ -1,13 +1,7 @@
-	const_def 2 ; object constants
+	object_const_def ; object_event constants
 	const DRAGONSDENB1F_POKE_BALL1
 	const DRAGONSDENB1F_CLAIR
 	const DRAGONSDENB1F_SILVER
-	const DRAGONSDENB1F_COOLTRAINER_M
-	const DRAGONSDENB1F_COOLTRAINER_F
-	const DRAGONSDENB1F_TWIN1
-	const DRAGONSDENB1F_TWIN2
-	const DRAGONSDENB1F_POKE_BALL2
-	const DRAGONSDENB1F_POKE_BALL3
 
 DragonsDenB1F_MapScripts:
 	db 0 ; scene scripts
@@ -70,7 +64,7 @@ DragonsDenB1FDragonFangScript:
 	promptbutton
 	sjump .ClairLastText
 .ClairLastText
-	writetext ClairText_WhatsTheMatterDragonDen
+	writetext ClairText_CollectedAllBadges
 	waitbutton
 	closetext
 	applymovement DRAGONSDENB1F_CLAIR, MovementDragonsDen_ClairWalksAway
@@ -185,7 +179,7 @@ ClairText_DescribeDragonbreathDragonDen:
 	cont "to take it."
 	done
 
-ClairText_WhatsTheMatterDragonDen:
+ClairText_CollectedAllBadges:
 	text "So, you've col-"
 	line "lected all the"
 	cont "BADGES."

@@ -1,4 +1,4 @@
-	const_def 2 ; object constants
+	object_const_def ; object_event constants
 	const POKECENTER2F_TRADE_RECEPTIONIST
 	const POKECENTER2F_BATTLE_RECEPTIONIST
 	const POKECENTER2F_TIME_CAPSULE_RECEPTIONIST
@@ -90,7 +90,7 @@ LinkReceptionistScript_Trade:
 
 .FriendNotReady:
 	special WaitForOtherPlayerToExit
-	writetext Text_FriendNotReady
+	writetext YourFriendIsNotReadyText
 	closetext
 	end
 
@@ -151,7 +151,7 @@ LinkReceptionistScript_Battle:
 
 .FriendNotReady:
 	special WaitForOtherPlayerToExit
-	writetext Text_FriendNotReady
+	writetext YourFriendIsNotReadyText
 	closetext
 	end
 
@@ -227,16 +227,16 @@ LinkReceptionistScript_TimeCapsule:
 	waitbutton
 	closetext
 	readvar VAR_FACING
-	ifequal LEFT, .MaleFacingLeft
-	ifequal RIGHT, .MaleFacingRight
-	applymovementlasttalked Pokecenter2FMovementData_ReceptionistWalksLeft_LookRight
+	ifequal LEFT, .FacingLeft
+	ifequal RIGHT, .FacingRight
+	applymovementlasttalked Pokecenter2FMovementData_ReceptionistStepsLeftLooksDown
 	applymovement PLAYER, Pokecenter2FMovementData_PlayerTakesTwoStepsUp
 	warpcheck
 	end
 
 .FriendNotReady:
 	special WaitForOtherPlayerToExit
-	writetext Text_FriendNotReady
+	writetext YourFriendIsNotReadyText
 	closetext
 	end
 
@@ -266,15 +266,15 @@ LinkReceptionistScript_TimeCapsule:
 	closetext
 	end
 
-.MaleFacingLeft:
-	applymovementlasttalked Pokecenter2FMovementData_ReceptionistWalksLeft_LookRight
-	applymovement PLAYER, Pokecenter2FMovementData_PlayerTakesStepsLeftUp
+.FacingLeft:
+	applymovementlasttalked Pokecenter2FMovementData_ReceptionistStepsLeftLooksDown
+	applymovement PLAYER, Pokecenter2FMovementData_PlayerWalksLeftAndUp
 	warpcheck
 	end
 
-.MaleFacingRight:
+.FacingRight:
 	applymovementlasttalked Pokecenter2FMovementData_ReceptionistStepsRightLooksDown
-	applymovement PLAYER, Pokecenter2FMovementData_PlayerTakesStepsRightUp
+	applymovement PLAYER, Pokecenter2FMovementData_PlayerWalksRightAndUp
 	warpcheck
 	end
 
@@ -282,7 +282,7 @@ Script_LeftCableTradeCenter:
 	special WaitForOtherPlayerToExit
 	applymovement POKECENTER2F_TRADE_RECEPTIONIST, Pokecenter2FMovementData_ReceptionistStepsRightLooksDown_3
 	applymovement PLAYER, Pokecenter2FMovementData_PlayerTakesThreeStepsDown
-	applymovement POKECENTER2F_TRADE_RECEPTIONIST, Pokecenter2FMovementData_ReceptionistStepsRightLooksDown_1
+	applymovement POKECENTER2F_TRADE_RECEPTIONIST, Pokecenter2FMovementData_ReceptionistStepsRightAndDown
 	setscene SCENE_DEFAULT
 	setmapscene TRADE_CENTER, SCENE_DEFAULT
 	end
@@ -291,7 +291,7 @@ Script_LeftCableColosseum:
 	special WaitForOtherPlayerToExit
 	applymovement POKECENTER2F_BATTLE_RECEPTIONIST, Pokecenter2FMovementData_ReceptionistStepsRightLooksDown_3
 	applymovement PLAYER, Pokecenter2FMovementData_PlayerTakesThreeStepsDown
-	applymovement POKECENTER2F_BATTLE_RECEPTIONIST, Pokecenter2FMovementData_ReceptionistStepsRightLooksDown_1
+	applymovement POKECENTER2F_BATTLE_RECEPTIONIST, Pokecenter2FMovementData_ReceptionistStepsRightAndDown
 	setscene SCENE_DEFAULT
 	setmapscene COLOSSEUM, SCENE_DEFAULT
 	end
@@ -346,7 +346,7 @@ Pokecenter2FOfficerScript:
 
 Pokecenter2FMovementData_ReceptionistWalksUpAndLeft_LookRight:
 	slow_step UP
-Pokecenter2FMovementData_ReceptionistWalksLeft_LookRight:
+Pokecenter2FMovementData_ReceptionistStepsLeftLooksDown:
 	slow_step LEFT
 	turn_head DOWN
 	step_end
@@ -363,12 +363,12 @@ Pokecenter2FMovementData_PlayerTakesTwoStepsUp:
 	step UP
 	step_end
 
-Pokecenter2FMovementData_PlayerTakesStepsLeftUp:
+Pokecenter2FMovementData_PlayerWalksLeftAndUp:
 	step LEFT
 	step UP
 	step_end
 
-Pokecenter2FMovementData_PlayerTakesStepsRightUp:
+Pokecenter2FMovementData_PlayerWalksRightAndUp:
 	step RIGHT
 	step UP
 	step_end
@@ -384,7 +384,7 @@ Pokecenter2FMovementData_PlayerTakesTwoStepsDown:
 	step DOWN
 	step_end
 
-Pokecenter2FMovementData_ReceptionistStepsRightLooksDown_1:
+Pokecenter2FMovementData_ReceptionistStepsRightAndDown:
 	slow_step RIGHT
 	slow_step DOWN
 	step_end
@@ -440,7 +440,7 @@ Text_TimeCapsuleReceptionistIntro:
 	line "trade across time?"
 	done
 
-Text_FriendNotReady:
+YourFriendIsNotReadyText:
 	text "Your friend is not"
 	line "ready."
 	prompt

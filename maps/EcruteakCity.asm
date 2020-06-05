@@ -1,11 +1,10 @@
-	const_def 2 ; object constants
+	object_const_def ; object_event constants
 	const ECRUTEAKCITY_GRAMPS1
 	const ECRUTEAKCITY_GRAMPS2
 	const ECRUTEAKCITY_LASS1
 	const ECRUTEAKCITY_LASS2
 	const ECRUTEAKCITY_FISHER
 	const ECRUTEAKCITY_YOUNGSTER
-	const ECRUTEAKCITY_GRAMPS3
 
 EcruteakCity_MapScripts:
 	db 0 ; scene scripts

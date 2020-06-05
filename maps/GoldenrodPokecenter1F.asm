@@ -1,7 +1,8 @@
-	const_def 2 ; object constants
+	object_const_def ; object_event constants
 	const GOLDENRODPOKECENTER1F_NURSE
 	const GOLDENRODPOKECENTER1F_GAMEBOY_KID
-	const GOLDENRODPOKECENTER1F_LASS
+	const GOLDENRODPOKECENTER1F_FISHER
+	const GOLDENRODPOKECENTER1F_TWIN
 
 GoldenrodPokecenter1F_MapScripts:
 	db 0 ; scene scripts

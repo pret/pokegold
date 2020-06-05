@@ -1,4 +1,4 @@
-	const_def 2 ; object constants
+	object_const_def ; object_event constants
 	const RUINSOFALPHRESEARCHCENTER_SCIENTIST1
 	const RUINSOFALPHRESEARCHCENTER_SCIENTIST2
 	const RUINSOFALPHRESEARCHCENTER_SCIENTIST3
@@ -118,13 +118,14 @@ RuinsOfAlphResearchCenterComputer:
 	checkevent EVENT_RUINS_OF_ALPH_RESEARCH_CENTER_SCIENTIST
 	iftrue .SkipChecking
 	readvar VAR_UNOWNCOUNT
-	ifequal NUM_UNOWN, .FullUnownDex
+	ifequal NUM_UNOWN, .GotAllUnown
 .SkipChecking:
 	writetext RuinsOfAlphResearchCenterComputerText
 	waitbutton
 	closetext
 	end
-.FullUnownDex:
+
+.GotAllUnown:
 	writetext RuinsOfAlphResearchCenterComputerText_GotAllUnown
 	waitbutton
 	closetext

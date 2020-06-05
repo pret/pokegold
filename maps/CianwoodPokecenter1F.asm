@@ -1,8 +1,7 @@
-	const_def 2 ; object constants
+	object_const_def ; object_event constants
 	const CIANWOODPOKECENTER1F_NURSE
 	const CIANWOODPOKECENTER1F_LASS
 	const CIANWOODPOKECENTER1F_GYM_GUY
-	const CIANWOODPOKECENTER1F_SUPER_NERD
 
 CianwoodPokecenter1F_MapScripts:
 	db 0 ; scene scripts

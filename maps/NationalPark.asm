@@ -1,4 +1,4 @@
-	const_def 2 ; object constants
+	object_const_def ; object_event constants
 	const NATIONALPARK_LASS1
 	const NATIONALPARK_POKEFAN_F1
 	const NATIONALPARK_TEACHER1
@@ -81,7 +81,7 @@ TrainerSchoolboyJack1:
 	iftrue .NumberAccepted
 	checkevent EVENT_JACK_ASKED_FOR_PHONE_NUMBER
 	iftrue .AskAgain
-	writetext UnknownText_0x5c4f3
+	writetext SchoolboyJackTradeMonText
 	promptbutton
 	setevent EVENT_JACK_ASKED_FOR_PHONE_NUMBER
 	scall .AskNumber1
@@ -175,7 +175,7 @@ TrainerPokefanfBeverly1:
 	iftrue .NumberAccepted
 	checkevent EVENT_BEVERLY_ASKED_FOR_PHONE_NUMBER
 	iftrue .AskAgain
-	writetext UnknownText_0x5c68a
+	writetext PokefanBeverlyCuteMonText
 	promptbutton
 	setevent EVENT_BEVERLY_ASKED_FOR_PHONE_NUMBER
 	scall .AskNumber1
@@ -375,7 +375,7 @@ SchoolboyJack1BeatenText:
 	text "Wha-wha-what?"
 	done
 
-UnknownText_0x5c4f3:
+SchoolboyJackTradeMonText:
 	text "There is a lot"
 	line "to learn."
 
@@ -402,7 +402,7 @@ PokefanfBeverly1BeatenText:
 	line "lot nicer."
 	done
 
-UnknownText_0x5c68a:
+PokefanBeverlyCuteMonText:
 	text "My friend has a"
 	line "MARILL. It's so"
 

@@ -1,14 +1,13 @@
-	const_def 2 ; object constants
+	object_const_def ; object_event constants
 	const ROUTE39_SAILOR
 	const ROUTE39_POKEFAN_M
-	const ROUTE39_POKEFAN_F1
+	const ROUTE39_POKEFAN_F
 	const ROUTE39_MILTANK1
 	const ROUTE39_MILTANK2
 	const ROUTE39_MILTANK3
 	const ROUTE39_MILTANK4
 	const ROUTE39_PSYCHIC_NORMAN
 	const ROUTE39_FRUIT_TREE
-	const ROUTE39_POKEFAN_F2
 
 Route39_MapScripts:
 	db 0 ; scene scripts
