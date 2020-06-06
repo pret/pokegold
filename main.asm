@@ -360,85 +360,24 @@ ENDC
 
 SECTION "bank3E", ROMX
 
-_LoadStandardFont::
-	dr $f8000, $f800c
-_LoadFontsExtra::
-	dr $f800c, $f8032
-_LoadFontsBattleExtra::
-	dr $f8032, $f8066
-LoadBattleFontsHPBar::
-	dr $f8066, $f8081
-LoadHPBar::
-	dr $f8081, $f80a6
-StatsScreen_LoadFont::
-	dr $f80a6, $f80d9
-LoadStatsScreenPageTilesGFX::
-	dr $f80d9, $f80f2
-
-FontExtra:
-	dr $f80f2, $f8aa2
-StatsScreenPageTilesGFX::
-	dr $f8aa2, $f8bb2
-EnemyHPBarBorderGFX::
-	dr $f8bb2, $f8bd2
-HPExpBarBorderGFX::
-	dr $f8bd2, $f8c02
-ExpBarGFX::
-	dr $f8c02, $f8c92
-TownMapGFX::
-	dr $f8c92, $f930e
-Footprints::
-	dr $f930e, $fb30e
-
-UnownFont::
-	dr $fb30e, $fb4be
-
+INCLUDE "engine/gfx/load_font.asm"
 INCLUDE "data/collision_permissions.asm"
 
-Shrink1Pic::
-	dr $fb5be, $fb64e
-Shrink2Pic::
-	dr $fb64e, $fb68e
-ValidateOTTrademon::
-	dr $fb68e, $fb6ed
-Functionfb6ed::
-	dr $fb6ed, $fb71d
-PlaceTradePartnerNamesAndParty::
-	dr $fb71d, $fb760
-KantoMonSpecials::
-	dr $fb760, $fb7f7
-_NameRater::
-	dr $fb7f7, $fb94b
-PlaySlowCry::
-	dr $fb94b, $fb981
-NewPokedexEntry::
-	dr $fb981, $fb9fb
-ConvertMon_2to1::
-	dr $fb9fb, $fba12
-ConvertMon_1to2::
-	dr $fba12, $fbb22
-UpdateUnownDex::
-	dr $fbb22, $fbb38
-PrintUnownWord::
-	dr $fbb38, $fbc3c
-CheckMagikarpLength::
-	dr $fbc3c, $fbd00
-CalcMagikarpLength::
-	dr $fbd00, $fbdd6
-MagikarpHouseSign::
-	dr $fbdd6, $fbdf1
-HiddenPowerDamage::
-	dr $fbdf1, $fbe5a
-_DisappearUser::
-	dr $fbe5a, $fbe6f
-_AppearUserRaiseSub::
-	dr $fbe6f, $fbe77
-_AppearUserLowerSub::
-	dr $fbe77, $fbeaa
-DoWeatherModifiers::
-	dr $fbeaa, $fbf2b
-DoBadgeTypeBoosts::
-	dr $fbf2b, $fbf93
+Shrink1Pic:
+INCBIN "gfx/new_game/shrink1.2bpp.lz"
+
+Shrink2Pic:
+INCBIN "gfx/new_game/shrink2.2bpp.lz"
+
+INCLUDE "engine/link/time_capsule.asm"
+INCLUDE "engine/events/name_rater.asm"
+INCLUDE "engine/events/play_slow_cry.asm"
+INCLUDE "engine/pokedex/new_pokedex_entry.asm"
+INCLUDE "engine/link/time_capsule_2.asm"
+INCLUDE "engine/pokedex/unown_dex.asm"
+INCLUDE "engine/events/magikarp.asm"
+INCLUDE "engine/battle/hidden_power.asm"
+INCLUDE "engine/battle/misc.asm"
 
 
 SECTION "bank3F", ROMX

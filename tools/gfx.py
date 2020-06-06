@@ -104,8 +104,12 @@ def filepath_rules(filepath):
     elif 'gfx/battle' in filedir:
         if name == 'dude':
             args['pic_dimensions'] = 6, 6
-        elif name == 'balls':
+        elif name in ['balls', 'enemy_hp_bar_border']:
             args['width'] = 32
+        elif name == 'expbar':
+            args['width'] = 72
+        elif name == 'hp_exp_bar_border':
+            args['width'] = 48
 
     elif 'gfx/card_flip' in filedir:
         if name == 'card_flip_1':
@@ -138,8 +142,13 @@ def filepath_rules(filepath):
             args['width'] = 16
 
     elif 'gfx/font' in filedir:
-        if name == 'font_inversed':
+        if name in ['font', 'font_inversed', 'font_battle_extra', 'font_extra']:
             args['width'] = 128
+        elif name == 'unused_bold_font':
+            args['width'] = 256
+
+    elif 'gfx/frames' in filedir:
+        args['width'] = 24
 
     elif 'gfx/icons' in filedir:
         if name == 'mail_big':
@@ -175,6 +184,11 @@ def filepath_rules(filepath):
     elif 'gfx/naming_screen' in filedir:
         args['width'] = 8
 
+    elif 'gfx/new_game' in filedir:
+        if name in ['shrink1', 'shrink2']:
+            args['width'] = 56
+            args['pic_dimensions'] = 7, 7
+
     elif 'gfx/overworld' in filedir:
         if name == 'heal_machine':
             args['width'] = 8
@@ -205,7 +219,7 @@ def filepath_rules(filepath):
         if name == 'pokegear_sprites':
             args['width'] = 16
 
-        elif name == 'pokegear':
+        elif name in ['pokegear', 'town_map']:
             args['width'] = 128
 
     elif 'gfx/mystery_gift' in filedir:
@@ -242,6 +256,10 @@ def filepath_rules(filepath):
             args['rows'] = [(0, 4), (0, 4), (1, 2), (1, 2)]
         else:
             args['width'] = 16
+
+    elif 'gfx/stats' in filedir:
+        if name == 'stats_tiles':
+            args['width'] = 136
 
     elif 'gfx/tilesets' in filedir:
         if filedir == 'gfx/tilesets/roofs':

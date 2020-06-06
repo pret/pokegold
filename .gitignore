@@ -49,6 +49,7 @@ used_space.png
 #*.1bpp
 
 # ... except for specific 2bpp files generated from lz's)
+gfx/new_game/shrink*.2bpp
 gfx/pokemon/**/*.2bpp
 gfx/trainers/*.2bpp
 gfx/battle/dude.2bpp
@@ -56,6 +57,7 @@ gfx/player/chris_back.2bpp
 gfx/trade/game_boy.2bpp
 gfx/pokegear/pokegear_sprites.2bpp
 gfx/pokegear/pokegear.2bpp
+gfx/pokegear/town_map.2bpp
 gfx/slots/slots_*.2bpp
 gfx/pokedex/pokedex.2bpp
 gfx/pokedex/slowpoke.2bpp
