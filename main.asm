@@ -365,39 +365,7 @@ ENDC
 
 SECTION "bank3E", ROMX
 
-_LoadStandardFont::
-	dr $f8000, $f800c
-_LoadFontsExtra::
-	dr $f800c, $f8032
-_LoadFontsBattleExtra::
-	dr $f8032, $f8066
-LoadBattleFontsHPBar::
-	dr $f8066, $f8081
-LoadHPBar::
-	dr $f8081, $f80a6
-StatsScreen_LoadFont::
-	dr $f80a6, $f80d9
-LoadStatsScreenPageTilesGFX::
-	dr $f80d9, $f80f2
-
-FontExtra:
-	dr $f80f2, $f8aa2
-StatsScreenPageTilesGFX::
-	dr $f8aa2, $f8bb2
-EnemyHPBarBorderGFX::
-	dr $f8bb2, $f8bd2
-HPExpBarBorderGFX::
-	dr $f8bd2, $f8c02
-ExpBarGFX::
-	dr $f8c02, $f8c92
-TownMapGFX::
-	dr $f8c92, $f930e
-Footprints::
-	dr $f930e, $fb30e
-
-UnownFont::
-	dr $fb30e, $fb4be
-
+INCLUDE "engine/gfx/load_font.asm"
 INCLUDE "data/collision_permissions.asm"
 
 Shrink1Pic::
