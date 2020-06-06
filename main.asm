@@ -379,11 +379,7 @@ INCLUDE "engine/events/name_rater.asm"
 INCLUDE "engine/events/play_slow_cry.asm"
 INCLUDE "engine/pokedex/new_pokedex_entry.asm"
 INCLUDE "engine/link/time_capsule_2.asm"
-
-UpdateUnownDex::
-	dr $fbb22, $fbb38
-PrintUnownWord::
-	dr $fbb38, $fbc3c
+INCLUDE "engine/pokedex/unown_dex.asm"
 
 CheckMagikarpLength::
 	dr $fbc3c, $fbd00
