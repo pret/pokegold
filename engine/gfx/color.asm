@@ -172,7 +172,7 @@ Function9102:
 	RGB 08, 16, 28
 	RGB 00, 00, 00
 
-Unreferenced_Function9136:
+Function9136:
 	call CheckCGB
 	ret nz
 	ldh a, [hSGB]
