@@ -376,9 +376,7 @@ INCBIN "gfx/new_game/shrink2.2bpp.lz"
 
 INCLUDE "engine/link/time_capsule.asm"
 INCLUDE "engine/events/name_rater.asm"
-
-PlaySlowCry::
-	dr $fb94b, $fb981
+INCLUDE "engine/events/play_slow_cry.asm"
 
 NewPokedexEntry::
 	dr $fb981, $fb9fb
