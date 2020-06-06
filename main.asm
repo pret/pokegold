@@ -382,17 +382,7 @@ INCLUDE "engine/link/time_capsule_2.asm"
 INCLUDE "engine/pokedex/unown_dex.asm"
 INCLUDE "engine/events/magikarp.asm"
 INCLUDE "engine/battle/hidden_power.asm"
-
-_DisappearUser::
-	dr $fbe5a, $fbe6f
-_AppearUserRaiseSub::
-	dr $fbe6f, $fbe77
-_AppearUserLowerSub::
-	dr $fbe77, $fbeaa
-DoWeatherModifiers::
-	dr $fbeaa, $fbf2b
-DoBadgeTypeBoosts::
-	dr $fbf2b, $fbf93
+INCLUDE "engine/battle/misc.asm"
 
 
 SECTION "bank3F", ROMX
