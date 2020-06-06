@@ -375,29 +375,34 @@ Shrink2Pic:
 INCBIN "gfx/new_game/shrink2.2bpp.lz"
 
 INCLUDE "engine/link/time_capsule.asm"
+INCLUDE "engine/events/name_rater.asm"
 
-_NameRater::
-	dr $fb7f7, $fb94b
 PlaySlowCry::
 	dr $fb94b, $fb981
+
 NewPokedexEntry::
 	dr $fb981, $fb9fb
+
 ConvertMon_2to1::
 	dr $fb9fb, $fba12
 ConvertMon_1to2::
 	dr $fba12, $fbb22
+
 UpdateUnownDex::
 	dr $fbb22, $fbb38
 PrintUnownWord::
 	dr $fbb38, $fbc3c
+
 CheckMagikarpLength::
 	dr $fbc3c, $fbd00
 CalcMagikarpLength::
 	dr $fbd00, $fbdd6
 MagikarpHouseSign::
 	dr $fbdd6, $fbdf1
+
 HiddenPowerDamage::
 	dr $fbdf1, $fbe5a
+
 _DisappearUser::
 	dr $fbe5a, $fbe6f
 _AppearUserRaiseSub::

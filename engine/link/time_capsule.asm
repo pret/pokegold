@@ -1,4 +1,6 @@
-ValidateOTTrademon::
+; These functions seem to be related to backwards compatibility
+
+ValidateOTTrademon:
 	ld a, [wceee]
 	ld hl, wOTPartyMon1Species
 	call GetPartyLocation
@@ -62,7 +64,7 @@ ValidateOTTrademon::
 	scf
 	ret
 
-Functionfb6ed::
+Functionfb6ed:
 	ld a, [wceed]
 	ld d, a
 	ld a, [wPartyCount]

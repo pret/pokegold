@@ -1557,7 +1557,7 @@ _EggPhotoText::
 	line "is worth more…"
 	done
 
-UnknownText_0x1c0043::
+_NameRaterHelloText::
 	text "Hello, hello! I'm"
 	line "the NAME RATER."
 
@@ -1568,13 +1568,13 @@ UnknownText_0x1c0043::
 	line "to rate names?"
 	done
 
-UnknownText_0x1c00a0::
+_NameRaterWhichMonText::
 	text "Which #MON's"
 	line "nickname should I"
 	cont "rate for you?"
 	prompt
 
-UnknownText_0x1c00cd::
+_NameRaterBetterNameText::
 	text "Hm… @"
 	text_ram wStringBuffer1
 	text "…"
@@ -1589,24 +1589,25 @@ UnknownText_0x1c00cd::
 	line "a better name?"
 	done
 
-UnknownText_0x1c0142::
+_NameRaterWhatNameText::
 	text "All right. What"
 	line "name should we"
 	cont "give it, then?"
 	prompt
 
-UnknownText_0x1c0171::
+_NameRaterFinishedText::
 	text "That's a better"
 	line "name than before!"
 
 	para "Well done!"
 	done
 
-UnknownText_0x1c019e::
+_NameRaterComeAgainText::
 	text "OK, then. Come"
 	line "again sometime."
 	done
 
+_NameRaterPerfectNameText::
 	text "Hm… @"
 	text_ram wStringBuffer1
 	text "?"
@@ -1619,12 +1620,12 @@ UnknownText_0x1c019e::
 	line "with loving care."
 	done
 
-UnknownText_0x1c0208::
+_NameRaterEggText::
 	text "Whoa… That's just"
 	line "an EGG."
 	done
 
-UnknownText_0x1c0222::
+_NameRaterSameNameText::
 	text "It might look the"
 	line "same as before,"
 
@@ -1634,7 +1635,7 @@ UnknownText_0x1c0222::
 	para "Well done!"
 	done
 
-UnknownText_0x1c0272::
+_NameRaterNamedText::
 	text "All right. This"
 	line "#MON is now"
 	cont "named @"
