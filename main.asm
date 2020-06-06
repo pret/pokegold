@@ -377,14 +377,8 @@ INCBIN "gfx/new_game/shrink2.2bpp.lz"
 INCLUDE "engine/link/time_capsule.asm"
 INCLUDE "engine/events/name_rater.asm"
 INCLUDE "engine/events/play_slow_cry.asm"
-
-NewPokedexEntry::
-	dr $fb981, $fb9fb
-
-ConvertMon_2to1::
-	dr $fb9fb, $fba12
-ConvertMon_1to2::
-	dr $fba12, $fbb22
+INCLUDE "engine/pokedex/new_pokedex_entry.asm"
+INCLUDE "engine/link/time_capsule_2.asm"
 
 UpdateUnownDex::
 	dr $fbb22, $fbb38
