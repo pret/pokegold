@@ -40,6 +40,7 @@ UnusedBoldFontGFX:
 INCBIN "gfx/font/unused_bold_font.1bpp"
 
 TextboxSpaceGFX:
+; StatsScreen_LoadTextboxSpaceGFX reads 2bpp; LoadFrame reads first half as 1bpp
 INCBIN "gfx/font/space.2bpp"
 
 FontsExtra_SolidBlackGFX:
