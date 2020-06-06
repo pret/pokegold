@@ -368,18 +368,14 @@ SECTION "bank3E", ROMX
 INCLUDE "engine/gfx/load_font.asm"
 INCLUDE "data/collision_permissions.asm"
 
-Shrink1Pic::
-	dr $fb5be, $fb64e
-Shrink2Pic::
-	dr $fb64e, $fb68e
-ValidateOTTrademon::
-	dr $fb68e, $fb6ed
-Functionfb6ed::
-	dr $fb6ed, $fb71d
-PlaceTradePartnerNamesAndParty::
-	dr $fb71d, $fb760
-KantoMonSpecials::
-	dr $fb760, $fb7f7
+Shrink1Pic:
+INCBIN "gfx/new_game/shrink1.2bpp.lz"
+
+Shrink2Pic:
+INCBIN "gfx/new_game/shrink2.2bpp.lz"
+
+INCLUDE "engine/link/time_capsule.asm"
+
 _NameRater::
 	dr $fb7f7, $fb94b
 PlaySlowCry::
