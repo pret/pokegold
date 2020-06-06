@@ -138,6 +138,9 @@ gfx/pokemon/%/back_silver.2bpp: rgbgfx += -h
 
 gfx/trainers/%.2bpp: rgbgfx += -h
 
+gfx/new_game/shrink1.2bpp: rgbgfx += -h
+gfx/new_game/shrink2.2bpp: rgbgfx += -h
+
 gfx/mail/dragonite.1bpp: tools/gfx += --remove-whitespace
 gfx/mail/large_note.1bpp: tools/gfx += --remove-whitespace
 gfx/mail/surf_mail_border.1bpp: tools/gfx += --remove-whitespace
@@ -162,6 +165,27 @@ gfx/slots/slots_1.2bpp: tools/gfx += --trim-whitespace
 gfx/slots/slots_2.2bpp: tools/gfx += --interleave --png=$<
 gfx/slots/slots_3.2bpp: tools/gfx += --interleave --png=$< --remove-duplicates --keep-whitespace --remove-xflip
 
+gfx/card_flip/card_flip_1.2bpp: tools/gfx += --trim-whitespace
+gfx/card_flip/card_flip_2.2bpp: tools/gfx += --remove-whitespace
+
+gfx/battle_anims/angels.2bpp: tools/gfx += --trim-whitespace
+gfx/battle_anims/beam.2bpp: tools/gfx += --remove-xflip --remove-yflip --remove-whitespace
+gfx/battle_anims/bubble.2bpp: tools/gfx += --trim-whitespace
+gfx/battle_anims/charge.2bpp: tools/gfx += --trim-whitespace
+gfx/battle_anims/egg.2bpp: tools/gfx += --remove-whitespace
+gfx/battle_anims/explosion.2bpp: tools/gfx += --remove-whitespace
+gfx/battle_anims/hit.2bpp: tools/gfx += --remove-whitespace
+gfx/battle_anims/horn.2bpp: tools/gfx += --remove-whitespace
+gfx/battle_anims/lightning.2bpp: tools/gfx += --remove-whitespace
+gfx/battle_anims/misc.2bpp: tools/gfx += --remove-duplicates --remove-xflip
+gfx/battle_anims/noise.2bpp: tools/gfx += --remove-whitespace
+gfx/battle_anims/objects.2bpp: tools/gfx += --remove-whitespace --remove-xflip
+gfx/battle_anims/pokeball.2bpp: tools/gfx += --remove-xflip --keep-whitespace
+gfx/battle_anims/reflect.2bpp: tools/gfx += --remove-whitespace
+gfx/battle_anims/rocks.2bpp: tools/gfx += --remove-whitespace
+gfx/battle_anims/skyattack.2bpp: tools/gfx += --remove-whitespace
+gfx/battle_anims/status.2bpp: tools/gfx += --remove-whitespace
+
 gfx/player/chris.2bpp: rgbgfx += -h
 gfx/player/chris_back.2bpp: rgbgfx += -h
 
@@ -172,6 +196,8 @@ gfx/overworld/chris_fish.2bpp: tools/gfx += --trim-whitespace
 gfx/sprites/big_onix.2bpp: tools/gfx += --remove-whitespace --remove-xflip
 
 gfx/battle/dude.2bpp: rgbgfx += -h
+
+gfx/font/unused_bold_font.1bpp: tools/gfx += --trim-whitespace
 
 gfx/sgb/gold_border.2bpp: tools/gfx += --trim-whitespace
 gfx/sgb/silver_border.2bpp: tools/gfx += --trim-whitespace
