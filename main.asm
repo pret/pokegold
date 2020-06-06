@@ -381,9 +381,7 @@ INCLUDE "engine/pokedex/new_pokedex_entry.asm"
 INCLUDE "engine/link/time_capsule_2.asm"
 INCLUDE "engine/pokedex/unown_dex.asm"
 INCLUDE "engine/events/magikarp.asm"
-
-HiddenPowerDamage::
-	dr $fbdf1, $fbe5a
+INCLUDE "engine/battle/hidden_power.asm"
 
 _DisappearUser::
 	dr $fbe5a, $fbe6f
