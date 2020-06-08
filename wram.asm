@@ -1661,7 +1661,6 @@ wTMHMPocketScrollPosition:: db ; cfd2
 wSwitchMon::
 wSwitchItem::
 wMoveSwapBuffer::
-wcfd3::
 	db
 
 wMenuScrollPosition:: ds 4
@@ -1741,8 +1740,7 @@ wCurPartyMon:: ; d005
 ; is being dealt with at the moment
 ; 0-5
 	db
-
-wd006:: ds 1 ; d006
+	ds 1
 
 wWhichHPBar:: ; d007
 ; 0: Enemy
@@ -1787,23 +1785,8 @@ wPrevWarp:: db ; d046
 wPrevMapGroup:: db ; d047
 wPrevMapNumber:: db ; d048
 
-wd049:: ds 1 ; d049
-wd04a:: ds 1 ; d04a
-wd04b:: ds 1 ; d04b
-wd04c:: ds 1 ; d04c
-wd04d:: ds 1 ; d04d
-wd04e:: ds 1 ; d04e
-wd04f:: ds 1 ; d04f
-wd050:: ds 1 ; d050
-wd051:: ds 1 ; d051
-wd052:: ds 1 ; d052
-wd053:: ds 1 ; d053
-wd054:: ds 1 ; d054
-wd055:: ds 1 ; d055
-wd056:: ds 1 ; d056
-wd057:: ds 1 ; d057
-wd058:: ds 1 ; d058
-wd059:: ds 1 ; d059
+	ds 17
+
 wUnusedD05A:: db
 
 wBGMapAnchor:: dw ; d05b
@@ -1888,15 +1871,8 @@ wEvolutionCanceled:: db ; d0d6
 
 NEXTU
 
-wd0d3:: ds 1
-wd0d4:: ds 1
-wd0d5:: ds 1
-wd0d6:: ds 1
-wd0d7:: ds 1
-wd0d8:: ds 1
-wd0d9:: ds 1
-wd0da:: ds 1
-wd0db:: ds 1
+	ds 9
+
 wd0dc:: ds 1
 
 NEXTU ; d0d3
@@ -1936,7 +1912,8 @@ wOtherTrainerClass:: ; d118
 
 ; BATTLETYPE_* values
 wBattleType:: db ; d119
-wd11a:: ds 1 ; d11a
+
+	ds 1
 
 wOtherTrainerID:: ; d11b
 ; which trainer of the class that you're fighting
@@ -1981,10 +1958,12 @@ wBaseEggGroups:: db ; d137
 wBaseTMHM:: flag_array NUM_TMS + NUM_HMS ; d138
 wCurBaseDataEnd::
 
-wd140:: ds 1 ; d140
+	ds 1
+
 wCurDamage:: dw ; d141
-wd143:: ds 1 ; d143
-wd144:: ds 1 ; d144
+
+	ds 2
+
 wMornEncounterRate::  db ; d145
 wDayEncounterRate::   db ; d146
 wNiteEncounterRate::  db ; d147
@@ -2024,7 +2003,8 @@ wFarByte::
 wTempBank:: db ; d156
 
 wTimeOfDay:: db ; d157
-wd158:: ds 1 ; d158
+
+	ds 1
 
 wMapStatus:: db ; d159
 wMapEventStatus:: db ; d15a
@@ -2058,36 +2038,34 @@ wScriptTextBank::
 wPriorityScriptAddr::
 wScriptTextAddr::
 	dw ; d176
-wd178:: ds 1 ; d178
+	ds 1
 wWildEncounterCooldown:: db ; d179
 wXYComparePointer:: dw ; d17a
 wd17c:: ds 1 ; d17c
-wd17d:: ds 1 ; d17d
-wd17e:: ds 1 ; d17e
-wd17f:: ds 1 ; d17f
+	ds 3
 wBattleScriptFlags:: dw ; d180
 wPlayerSpriteSetupFlags:: ; d182
 	db
 wMapReentryScriptQueueFlag:: db ; d183
 wMapReentryScriptBank:: db
 wMapReentryScriptAddress:: dw ; d185
-wd187:: ds 1 ; d187
-wd188:: ds 1 ; d188
-wd189:: ds 1 ; d189
-wd18a:: ds 1 ; d18a
+
+	ds 4
+
 wTimeCyclesSinceLastCall:: db ; d18b
 wReceiveCallDelay_MinsRemaining:: db ; d18c
 wReceiveCallDelay_StartTime:: ds 3 ; d18d
-wd190:: ds 1 ; d190
-wd191:: ds 1 ; d191
-wd192:: ds 1 ; d192
+
+	ds 3
+
 wBugContestMinsRemaining:: db ; d193
 wBugContestSecsRemaining:: db ; d194
-wd195:: ds 1 ; d195
-wd196:: ds 1 ; d196
+
+	ds 2
+
 wMapStatusEnd::
-wd197:: ds 1 ; d197
-wd198:: ds 1 ; d198
+
+	ds 2
 
 wOptions:: ; d199
 ; bit 0-2: number of frames to delay when printing text
@@ -2293,55 +2271,13 @@ wPlayerState:: db ; d682
 
 wHallOfFameCount:: dw
 wTradeFlags:: flag_array NUM_NPC_TRADES ; d685
-wd686:: ds 1 ; d686
-wd687:: ds 1 ; d687
-wd688:: ds 1 ; d688
-wd689:: ds 1 ; d689
-wd68a:: ds 1 ; d68a
-wd68b:: ds 1 ; d68b
-wd68c:: ds 1 ; d68c
-wd68d:: ds 1 ; d68d
-wd68e:: ds 1 ; d68e
-wd68f:: ds 1 ; d68f
-wd690:: ds 1 ; d690
-wd691:: ds 1 ; d691
-wd692:: ds 1 ; d692
-wd693:: ds 1 ; d693
-wd694:: ds 1 ; d694
-wd695:: ds 1 ; d695
-wd696:: ds 1 ; d696
-wd697:: ds 1 ; d697
-wd698:: ds 1 ; d698
-wd699:: ds 1 ; d699
-wd69a:: ds 1 ; d69a
-wd69b:: ds 1 ; d69b
-wd69c:: ds 1 ; d69c
-wd69d:: ds 1 ; d69d
-wd69e:: ds 1 ; d69e
-wd69f:: ds 1 ; d69f
-wd6a0:: ds 1 ; d6a0
-wd6a1:: ds 1 ; d6a1
-wd6a2:: ds 1 ; d6a2
-wd6a3:: ds 1 ; d6a3
-wd6a4:: ds 1 ; d6a4
-wd6a5:: ds 1 ; d6a5
-wd6a6:: ds 1 ; d6a6
+
+	ds 33
+
 wMooMooBerries:: db ; d6a7
 wUndergroundSwitchPositions:: db ; d6a8
-wd6a9:: ds 1 ; d6a9
-wd6aa:: ds 1 ; d6aa
-wd6ab:: ds 1 ; d6ab
-wd6ac:: ds 1 ; d6ac
-wd6ad:: ds 1 ; d6ad
-wd6ae:: ds 1 ; d6ae
-wd6af:: ds 1 ; d6af
-wd6b0:: ds 1 ; d6b0
-wd6b1:: ds 1 ; d6b1
-wd6b2:: ds 1 ; d6b2
-wd6b3:: ds 1 ; d6b3
-wd6b4:: ds 1 ; d6b4
-wd6b5:: ds 1 ; d6b5
-wd6b6:: ds 1 ; d6b6
+
+	ds 14
 
 wPokecenter2FSceneID::                            db ; d6b7
 wTradeCenterSceneID::                             db ; d6b8
@@ -2403,222 +2339,27 @@ wFastShip1FSceneID::                              db ; d6ef
 wFastShipB1FSceneID::                             db ; d6f0
 wMountMoonSquareSceneID::                         db ; d6f1
 
-wd6f2:: ds 1 ; d6f2
-wd6f3:: ds 1 ; d6f3
-wd6f4:: ds 1 ; d6f4
-wd6f5:: ds 1 ; d6f5
-wd6f6:: ds 1 ; d6f6
-wd6f7:: ds 1 ; d6f7
-wd6f8:: ds 1 ; d6f8
-wd6f9:: ds 1 ; d6f9
-wd6fa:: ds 1 ; d6fa
-wd6fb:: ds 1 ; d6fb
-wd6fc:: ds 1 ; d6fc
-wd6fd:: ds 1 ; d6fd
-wd6fe:: ds 1 ; d6fe
-wd6ff:: ds 1 ; d6ff
-wd700:: ds 1 ; d700
-wd701:: ds 1 ; d701
-wd702:: ds 1 ; d702
-wd703:: ds 1 ; d703
-wd704:: ds 1 ; d704
-wd705:: ds 1 ; d705
-wd706:: ds 1 ; d706
-wd707:: ds 1 ; d707
-wd708:: ds 1 ; d708
-wd709:: ds 1 ; d709
-wd70a:: ds 1 ; d70a
-wd70b:: ds 1 ; d70b
-wd70c:: ds 1 ; d70c
-wd70d:: ds 1 ; d70d
-wd70e:: ds 1 ; d70e
-wd70f:: ds 1 ; d70f
-wd710:: ds 1 ; d710
-wd711:: ds 1 ; d711
-wd712:: ds 1 ; d712
-wd713:: ds 1 ; d713
-wd714:: ds 1 ; d714
-wd715:: ds 1 ; d715
-wd716:: ds 1 ; d716
-wd717:: ds 1 ; d717
-wd718:: ds 1 ; d718
-wd719:: ds 1 ; d719
-wd71a:: ds 1 ; d71a
-wd71b:: ds 1 ; d71b
-wd71c:: ds 1 ; d71c
-wd71d:: ds 1 ; d71d
-wd71e:: ds 1 ; d71e
-wd71f:: ds 1 ; d71f
-wd720:: ds 1 ; d720
-wd721:: ds 1 ; d721
-wd722:: ds 1 ; d722
-wd723:: ds 1 ; d723
-wd724:: ds 1 ; d724
-wd725:: ds 1 ; d725
-wd726:: ds 1 ; d726
-wd727:: ds 1 ; d727
-wd728:: ds 1 ; d728
-wd729:: ds 1 ; d729
-wd72a:: ds 1 ; d72a
-wd72b:: ds 1 ; d72b
-wd72c:: ds 1 ; d72c
-wd72d:: ds 1 ; d72d
-wd72e:: ds 1 ; d72e
-wd72f:: ds 1 ; d72f
-wd730:: ds 1 ; d730
-wd731:: ds 1 ; d731
-wd732:: ds 1 ; d732
-wd733:: ds 1 ; d733
-wd734:: ds 1 ; d734
-wd735:: ds 1 ; d735
-wd736:: ds 1 ; d736
-wd737:: ds 1 ; d737
-wd738:: ds 1 ; d738
-wd739:: ds 1 ; d739
-wd73a:: ds 1 ; d73a
-wd73b:: ds 1 ; d73b
-wd73c:: ds 1 ; d73c
-wd73d:: ds 1 ; d73d
-wd73e:: ds 1 ; d73e
-wd73f:: ds 1 ; d73f
-wd740:: ds 1 ; d740
-wd741:: ds 1 ; d741
-wd742:: ds 1 ; d742
-wd743:: ds 1 ; d743
-wd744:: ds 1 ; d744
-wd745:: ds 1 ; d745
-wd746:: ds 1 ; d746
-wd747:: ds 1 ; d747
-wd748:: ds 1 ; d748
-wd749:: ds 1 ; d749
-wd74a:: ds 1 ; d74a
-wd74b:: ds 1 ; d74b
-wd74c:: ds 1 ; d74c
-wd74d:: ds 1 ; d74d
-wd74e:: ds 1 ; d74e
-wd74f:: ds 1 ; d74f
-wd750:: ds 1 ; d750
-wd751:: ds 1 ; d751
-wd752:: ds 1 ; d752
-wd753:: ds 1 ; d753
-wd754:: ds 1 ; d754
-wd755:: ds 1 ; d755
-wd756:: ds 1 ; d756
-wd757:: ds 1 ; d757
-wd758:: ds 1 ; d758
-wd759:: ds 1 ; d759
-wd75a:: ds 1 ; d75a
-wd75b:: ds 1 ; d75b
-wd75c:: ds 1 ; d75c
-wd75d:: ds 1 ; d75d
-wd75e:: ds 1 ; d75e
-wd75f:: ds 1 ; d75f
-wd760:: ds 1 ; d760
-wd761:: ds 1 ; d761
-wd762:: ds 1 ; d762
-wd763:: ds 1 ; d763
-wd764:: ds 1 ; d764
-wd765:: ds 1 ; d765
-wd766:: ds 1 ; d766
-wd767:: ds 1 ; d767
-wd768:: ds 1 ; d768
-wd769:: ds 1 ; d769
-wd76a:: ds 1 ; d76a
-wd76b:: ds 1 ; d76b
-wd76c:: ds 1 ; d76c
-wd76d:: ds 1 ; d76d
-wd76e:: ds 1 ; d76e
-wd76f:: ds 1 ; d76f
-wd770:: ds 1 ; d770
-wd771:: ds 1 ; d771
-wd772:: ds 1 ; d772
-wd773:: ds 1 ; d773
-wd774:: ds 1 ; d774
-wd775:: ds 1 ; d775
-wd776:: ds 1 ; d776
-wd777:: ds 1 ; d777
-wd778:: ds 1 ; d778
-wd779:: ds 1 ; d779
-wd77a:: ds 1 ; d77a
-wd77b:: ds 1 ; d77b
-wd77c:: ds 1 ; d77c
-wd77d:: ds 1 ; d77d
-wd77e:: ds 1 ; d77e
-wd77f:: ds 1 ; d77f
-wd780:: ds 1 ; d780
-wd781:: ds 1 ; d781
-wd782:: ds 1 ; d782
-wd783:: ds 1 ; d783
-wd784:: ds 1 ; d784
-wd785:: ds 1 ; d785
-wd786:: ds 1 ; d786
-wd787:: ds 1 ; d787
-wd788:: ds 1 ; d788
-wd789:: ds 1 ; d789
-wd78a:: ds 1 ; d78a
-wd78b:: ds 1 ; d78b
-wd78c:: ds 1 ; d78c
-wd78d:: ds 1 ; d78d
-wd78e:: ds 1 ; d78e
-wd78f:: ds 1 ; d78f
-wd790:: ds 1 ; d790
-wd791:: ds 1 ; d791
-wd792:: ds 1 ; d792
-wd793:: ds 1 ; d793
-wd794:: ds 1 ; d794
-wd795:: ds 1 ; d795
-wd796:: ds 1 ; d796
-wd797:: ds 1 ; d797
-wd798:: ds 1 ; d798
-wd799:: ds 1 ; d799
-wd79a:: ds 1 ; d79a
-wd79b:: ds 1 ; d79b
-wd79c:: ds 1 ; d79c
-wd79d:: ds 1 ; d79d
-wd79e:: ds 1 ; d79e
-wd79f:: ds 1 ; d79f
-wd7a0:: ds 1 ; d7a0
-wd7a1:: ds 1 ; d7a1
-wd7a2:: ds 1 ; d7a2
-wd7a3:: ds 1 ; d7a3
-wd7a4:: ds 1 ; d7a4
-wd7a5:: ds 1 ; d7a5
-wd7a6:: ds 1 ; d7a6
-wd7a7:: ds 1 ; d7a7
-wd7a8:: ds 1 ; d7a8
-wd7a9:: ds 1 ; d7a9
-wd7aa:: ds 1 ; d7aa
-wd7ab:: ds 1 ; d7ab
-wd7ac:: ds 1 ; d7ac
-wd7ad:: ds 1 ; d7ad
-wd7ae:: ds 1 ; d7ae
-wd7af:: ds 1 ; d7af
-wd7b0:: ds 1 ; d7b0
-wd7b1:: ds 1 ; d7b1
-wd7b2:: ds 1 ; d7b2
-wd7b3:: ds 1 ; d7b3
-wd7b4:: ds 1 ; d7b4
-wd7b5:: ds 1 ; d7b5
-wd7b6:: ds 1 ; d7b6
+	ds 197
 
 wEventFlags:: flag_array NUM_EVENTS ; d7b7
 
-wd8b1:: ds 1 ; d8b1
-wd8b2:: ds 1 ; d8b2
-wd8b3:: ds 1 ; d8b3
-wd8b4:: ds 1 ; d8b4
-wd8b5:: ds 1 ; d8b5
-wd8b6:: ds 1 ; d8b6
-wd8b7:: ds 1 ; d8b7
+	ds 6
+
+wd8b7:: db
+
 wGameTimerPause:: db ; d8b8
-wd8b9:: ds 1 ; d8b9
+
+	ds 1
+
 wd8ba:: ; d8ba
 ; bits 4, 6, or 7 can be used to disable joypad input
 ; bit 4
 ; bit 6: mon fainted?
 ; bit 7: SGB flag?
 	db
-wd8bb:: ds 1 ; d8bb
+
+	ds 1
+
 wCurBox:: db ; d8bc
 
 	ds 2
@@ -2626,10 +2367,14 @@ wCurBox:: db ; d8bc
 ; 8 chars + $50
 wBoxNames:: ds BOX_NAME_LENGTH * NUM_BOXES ; d8bf
 
-wd93d:: ds 1 ; d93d
-wd93e:: ds 1 ; d93e
-wBikeFlags:: db ; d93f
-wd940:: ds 1 ; d940
+	ds 2
+
+wBikeFlags:: ; d93f
+; bit 0: using strength
+; bit 1: always on bike
+; bit 2: downhill
+	db
+	ds 1 ; cleared along with wBikeFlags by ResetBikeFlags
 
 wCurMapSceneScriptPointer:: dw ; d941
 
@@ -2676,71 +2421,15 @@ wFruitTreeFlags:: flag_array NUM_FRUIT_TREES ; d971
 	ds 2
 
 wLuckyNumberDayBuffer:: dw ; d977
-wd979:: ds 1 ; d979
-wd97a:: ds 1 ; d97a
+	ds 2
 wSpecialPhoneCallID:: db ; d97b
-wd97c:: ds 1 ; d97c
-wd97d:: ds 1 ; d97d
-wd97e:: ds 1 ; d97e
+	ds 3
 wBugContestStartTime:: ds 4 ; day, hour, min, sec ; d97f
 wUnusedTwoDayTimerOn:: db ; d983
 wUnusedTwoDayTimer:: db
 wUnusedTwoDayTimerStartDate:: db
-wd986:: ds 1 ; d986
-wd987:: ds 1 ; d987
-wd988:: ds 1 ; d988
-wd989:: ds 1 ; d989
-wd98a:: ds 1 ; d98a
-wd98b:: ds 1 ; d98b
-wd98c:: ds 1 ; d98c
-wd98d:: ds 1 ; d98d
-wd98e:: ds 1 ; d98e
-wd98f:: ds 1 ; d98f
-wd990:: ds 1 ; d990
-wd991:: ds 1 ; d991
-wd992:: ds 1 ; d992
-wd993:: ds 1 ; d993
-wd994:: ds 1 ; d994
-wd995:: ds 1 ; d995
-wd996:: ds 1 ; d996
-wd997:: ds 1 ; d997
-wd998:: ds 1 ; d998
-wd999:: ds 1 ; d999
-wd99a:: ds 1 ; d99a
-wd99b:: ds 1 ; d99b
-wd99c:: ds 1 ; d99c
-wd99d:: ds 1 ; d99d
-wd99e:: ds 1 ; d99e
-wd99f:: ds 1 ; d99f
-wd9a0:: ds 1 ; d9a0
-wd9a1:: ds 1 ; d9a1
-wd9a2:: ds 1 ; d9a2
-wd9a3:: ds 1 ; d9a3
-wd9a4:: ds 1 ; d9a4
-wd9a5:: ds 1 ; d9a5
-wd9a6:: ds 1 ; d9a6
-wd9a7:: ds 1 ; d9a7
-wd9a8:: ds 1 ; d9a8
-wd9a9:: ds 1 ; d9a9
-wd9aa:: ds 1 ; d9aa
-wd9ab:: ds 1 ; d9ab
-wd9ac:: ds 1 ; d9ac
-wd9ad:: ds 1 ; d9ad
-wd9ae:: ds 1 ; d9ae
-wd9af:: ds 1 ; d9af
-wd9b0:: ds 1 ; d9b0
-wd9b1:: ds 1 ; d9b1
-wd9b2:: ds 1 ; d9b2
-wd9b3:: ds 1 ; d9b3
-wd9b4:: ds 1 ; d9b4
-wd9b5:: ds 1 ; d9b5
-wd9b6:: ds 1 ; d9b6
-wd9b7:: ds 1 ; d9b7
-wd9b8:: ds 1 ; d9b8
-wd9b9:: ds 1 ; d9b9
-wd9ba:: ds 1 ; d9ba
-wd9bb:: ds 1 ; d9bb
-wd9bc:: ds 1 ; d9bc
+
+	ds 55
 
 wStepCount:: db ; d9bd
 wPoisonStepCount:: db ; d9be
@@ -2785,8 +2474,8 @@ wBackupMapNumber::  db ; d9f7
 wLastSpawnMapGroup:: db
 wLastSpawnMapNumber:: db
 
-wd9fd:: ds 1 ; d9fd
-wd9fe:: ds 1 ; d9fe
+	ds 2
+
 wWarpNumber:: db ; d9ff
 wMapGroup:: db ; da00
 wMapNumber:: db ; da01
