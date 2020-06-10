@@ -997,7 +997,7 @@ ENDC
 
 .asm_8d968
 	ld a, 1
-	ld [wce64], a
+	ld [wIntroSceneFrameCounter], a
 	call DeinitializeSprite
 	ret
 

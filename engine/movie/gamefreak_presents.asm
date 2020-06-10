@@ -27,7 +27,7 @@ Copyright_GFPresents:
 	call .GetGFLogoGFX
 
 .loop
-	call GFPresents_PlayFrame
+	call .PlayFrame
 	jr nc, .loop
 
 	; high bits of wJumptableIndex are recycled for some flags
@@ -78,7 +78,7 @@ Copyright_GFPresents:
 	call DmgToCgbObjPals
 	ret
 
-GFPresents_PlayFrame:
+.PlayFrame:
 ; Play one frame of GFPresents sequence.
 ; Return carry when the sequence completes or is canceled.
 
@@ -95,7 +95,7 @@ GFPresents_PlayFrame:
 
 	farcall PlaySpriteAnimations
 
-	call GFPresents_HandleFrame
+	call GFPresentsJumper
 	call DelayFrame
 
 	; ensure carry is cleared
@@ -118,19 +118,8 @@ GFPresents_PlayFrame:
 	scf
 	ret
 
-GFPresents_HandleFrame:
-; Dispatch to the current scene handler
-
-	ld a, [wJumptableIndex]
-	ld e, a
-	ld d, 0
-	ld hl, .scenes
-	add hl, de
-	add hl, de
-	ld a, [hli]
-	ld h, [hl]
-	ld l, a
-	jp hl
+GFPresentsJumper:
+	jumptable .scenes, wJumptableIndex
 
 .scenes
 	dw GFPresents_Star
@@ -145,15 +134,13 @@ GFPresents_NextScene:
 	inc [hl]
 	ret
 
-; unused?
-Functione4a8d:
+Unreferenced_Functione4a8d:
 	ld c, 64
 	call DelayFrames
 	call GFPresents_NextScene
 	ret
 
 GFPresents_Star:
-
 	; tell GFPresents_PlaceLogo we haven't finished yet
 	xor a
 	ld [wIntroSceneFrameCounter], a
@@ -162,8 +149,7 @@ GFPresents_Star:
 	ld a, SPRITE_ANIM_INDEX_GS_INTRO_STAR
 	call InitSpriteAnimStruct
 
-	; TODO set some flag in the struct?
-	ld hl, $c
+	ld hl, SPRITEANIMSTRUCT_0C
 	add hl, bc
 	ld [hl], $80
 
@@ -177,7 +163,7 @@ GFPresents_PlaceLogo:
 ; Draw the Game Freak logo (may be initially invisible due to palette)
 
 	; wait until the star animation completed
-	; TODO this is cleared above, but when is it set?
+	; this counter is set in DoAnimFrame.GSIntroStar in engine/gfx/sprite_anims.asm
 	ld a, [wIntroSceneFrameCounter]
 	and a
 	ret z
@@ -194,7 +180,6 @@ GFPresents_PlaceLogo:
 	ret
 
 GFPresents_LogoSparkles:
-
 	ld hl, wIntroSceneTimer
 	ld a, [hl]
 	and a
@@ -210,7 +195,7 @@ GFPresents_LogoSparkles:
 	ret
 
 .done
-	; set (unused?) timer for GFPresents_PlacePresents
+	; set timer for GFPresents_PlacePresents
 	ld [hl], $80
 	call GFPresents_NextScene
 	ret
@@ -286,8 +271,6 @@ GFPresents_UpdateLogoPal:
 
 GFPresents_Sparkle:
 ; Initialize and configure a sparkle sprite.
-; TODO unclear how this relates to the actual screen display,
-; seems to be called more times than there are visible sparkles?
 
 	; run only every second frame
 	ld d, a

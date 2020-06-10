@@ -733,13 +733,14 @@ UNION ; cb0c
 wBattleMon:: battle_struct wBattleMon ; cb0c
 
 NEXTU ; cb0c
+; intro water/grass/fire cutscene data
 	ds 4
 wIntroJumptableIndex:: db
 wIntroBGMapPointer:: dw
 wIntroTilemapPointer:: dw
 wIntroTilesPointer:: dw
-wIntroSceneFrameCounter1:: db
-wIntroSceneFrameCounter2:: db
+wIntroFrameCounter1:: db
+wIntroFrameCounter2:: db
 wcb19:: db
 ENDU ; cb2c
 
@@ -1135,7 +1136,7 @@ wce65:: db
 wce66:: db
 
 NEXTU ; ce64
-; intro and title data
+; gfpresents, title, and intro menu timers
 wIntroSceneFrameCounter:: db
 UNION ; ce65
 wIntroSceneTimer:: db

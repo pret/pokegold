@@ -292,6 +292,11 @@ def filepath_rules(filepath):
         elif name == 'lugia_silver':
             args['width'] = 64
             args['pic_dimensions'] = 8, 4
+        elif name == 'hooh_gold':
+            args['width'] = 64
+            args['pic_dimensions'] = 8, 6
+        elif name in ['title_trail_gold', 'title_trail_silver']:
+            args['width'] = 32
 
     elif 'gfx/trainer_card' in filedir:
         if name in ['badges', 'trainer_card']:
@@ -372,7 +377,16 @@ def to_2bpp(filename, **kwargs):
 
 def to_png(filename, **kwargs):
     name, ext = os.path.splitext(filename)
-    if   ext == '.1bpp': gfx.export_1bpp_to_png(filename, **kwargs)
+    if   ext == '.1bpp':
+        basedir, basename = os.path.split(filename)
+        name, ext = os.path.splitext(basename)
+        # Ignoring these for convenience only
+        if basedir in ['gfx/footprints', 'gfx/font']:
+            return
+        # Ignoring these for convenience only
+        if name in ['hp_exp_bar_border']:
+            return
+        gfx.export_1bpp_to_png(filename, **kwargs)
     elif ext == '.2bpp':
         basedir, basename = os.path.split(filename)
         name, ext = os.path.splitext(basename)
@@ -381,6 +395,9 @@ def to_png(filename, **kwargs):
             return
         # TODO: same question for most/all battle anims
         if basedir == 'gfx/battle_anims':
+            return
+        # Ignoring these for convenience only
+        if basedir == 'gfx/font':
             return
         if name in ['back_gold', 'back_silver']:
             kwargs['fileout'] = os.path.join(basedir, 'back.png')

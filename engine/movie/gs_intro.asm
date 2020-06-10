@@ -1,7 +1,7 @@
 GoldSilverIntro:
 	call .Init
 .Loop:
-	call .Joypad
+	call .PlayFrame
 	jr nc, .Loop
 	ret
 
@@ -12,7 +12,7 @@ GoldSilverIntro:
 	ldh [hBGMapMode], a
 	ret
 
-.Joypad:
+.PlayFrame:
 	call JoyTextDelay
 	ldh a, [hJoyLast]
 	and BUTTONS
@@ -46,9 +46,9 @@ GoldSilverIntro:
 	ret
 
 IntroSceneJumper:
-	jumptable .IntroScenes, wIntroJumptableIndex
+	jumptable .scenes, wIntroJumptableIndex
 
-.IntroScenes:
+.scenes
 	dw IntroScene1
 	dw IntroScene2
 	dw IntroScene3
@@ -122,9 +122,9 @@ IntroScene1:
 	ld a, $58
 	ldh [hSCX], a
 	xor a
-	ld [wIntroSceneFrameCounter2], a
+	ld [wIntroFrameCounter2], a
 	ld a, $80
-	ld [wIntroSceneFrameCounter1], a
+	ld [wIntroFrameCounter1], a
 	ld a, $42
 	ldh [hLCDCPointer], a
 	call Functione5095
@@ -148,7 +148,7 @@ IntroScene1:
 IntroScene2:
 ; shellders underwater
 	call Functione50af
-	ld hl, wIntroSceneFrameCounter1
+	ld hl, wIntroFrameCounter1
 	ld a, [hl]
 	and a
 	jr z, .skip_intro
@@ -178,7 +178,7 @@ IntroScene4:
 	ld a, [wcb19]
 	and a
 	jr nz, .next
-	ld hl, wIntroSceneFrameCounter2
+	ld hl, wIntroFrameCounter2
 	inc [hl]
 	ld a, [hl]
 	and $f
@@ -195,11 +195,11 @@ IntroScene4:
 	ld hl, wIntroJumptableIndex
 	inc [hl]
 	xor a
-	ld [wIntroSceneFrameCounter1], a
+	ld [wIntroFrameCounter1], a
 
 IntroScene5:
 ; fade out
-	ld hl, wIntroSceneFrameCounter1
+	ld hl, wIntroFrameCounter1
 	ld a, [hl]
 	inc [hl]
 	swap a
@@ -234,12 +234,13 @@ IntroScene17:
 	call DelayFrame
 	dec c
 	jr nz, .loop
+; set done flag
 	ld hl, wIntroJumptableIndex
 	set 7, [hl]
 	ret
 
 Functione4e67:
-	ld hl, wIntroSceneFrameCounter2
+	ld hl, wIntroFrameCounter2
 	inc [hl]
 	ld a, [hl]
 	and 3
@@ -257,7 +258,7 @@ Functione4e67:
 	dec [hl]
 	and $f
 	call z, Intro_UpdateTilemapAndBGMap
-	ld a, [wIntroSceneFrameCounter1]
+	ld a, [wIntroFrameCounter1]
 	and a
 	jr z, .asm_e4e8e
 
@@ -270,7 +271,7 @@ Functione4e67:
 	ret
 
 Functione4e90:
-	jumptable .dw, wIntroSceneFrameCounter1
+	jumptable .dw, wIntroFrameCounter1
 
 .dw
 	dw Functione4eca
@@ -307,7 +308,7 @@ Functione4ece:
 	ret
 
 Functione4ed5:
-	ld hl, wIntroSceneFrameCounter2
+	ld hl, wIntroFrameCounter2
 	ld a, [hl]
 	and %00011111
 	jr z, .asm_e4ee1
@@ -328,7 +329,7 @@ Functione4eec:
 	ret
 
 Intro_InitBubble:
-	ld hl, wIntroSceneFrameCounter1
+	ld hl, wIntroFrameCounter1
 	ld a, [hl]
 	and $f
 	ret nz
@@ -363,7 +364,7 @@ Intro_InitMagikarps:
 	depixel 4, 3, 0, 7
 
 .ok
-	ld hl, wIntroSceneFrameCounter2
+	ld hl, wIntroFrameCounter2
 	ld a, [hl]
 	and e
 	ret nz
@@ -405,7 +406,7 @@ Intro_InitShellders:
 	ret
 
 Intro_InitLapras:
-	ld a, [wIntroSceneFrameCounter2]
+	ld a, [wIntroFrameCounter2]
 	and %00011111
 	ret nz
 	depixel 16, 24
@@ -464,7 +465,7 @@ Intro_UpdateTilemapAndBGMap:
 	ld [wRequested2bppSource + 1], a
 	ld a, 4
 	ld [wRequested2bppSize], a
-	ld hl, wIntroSceneFrameCounter1
+	ld hl, wIntroFrameCounter1
 	dec [hl]
 
 	pop de
@@ -473,7 +474,7 @@ Intro_UpdateTilemapAndBGMap:
 
 Functione4fde:
 ; something to do with water scene sprite anims?
-	ld hl, wIntroSceneFrameCounter2
+	ld hl, wIntroFrameCounter2
 	ld a, [hl]
 	and 3
 	cp 3
@@ -616,7 +617,7 @@ IntroScene6:
 	ld [wGlobalAnimXOffset], a
 
 	xor a
-	ld [wIntroSceneFrameCounter2], a
+	ld [wIntroFrameCounter2], a
 	call EnableLCD
 	ld b, SCGB_GS_INTRO
 	ld c, 1
@@ -633,7 +634,7 @@ IntroScene6:
 IntroScene7:
 ; scroll left to Jigglypuff
 	call Intro_InitNote
-	ld hl, wIntroSceneFrameCounter2
+	ld hl, wIntroFrameCounter2
 	ld a, [hl]
 	inc [hl]
 	and 3
@@ -649,7 +650,7 @@ IntroScene7:
 
 .next
 	ld a, -1
-	ld [wIntroSceneFrameCounter1], a
+	ld [wIntroFrameCounter1], a
 	call Intro_InitPikachu
 	ld hl, wIntroJumptableIndex
 	inc [hl]
@@ -657,19 +658,19 @@ IntroScene7:
 
 IntroScene8:
 ; stop scrolling, Pikachu attacks
-	ld hl, wIntroSceneFrameCounter1
+	ld hl, wIntroFrameCounter1
 	ld a, [hl]
 	and a
 	jr z, .next
 	dec [hl]
 	call Intro_InitNote
-	ld hl, wIntroSceneFrameCounter2
+	ld hl, wIntroFrameCounter2
 	inc [hl]
 	ret
 
 .next
 	xor a
-	ld [wIntroSceneFrameCounter1], a
+	ld [wIntroFrameCounter1], a
 	ld hl, wIntroJumptableIndex
 	inc [hl]
 	callfar Function9136
@@ -677,7 +678,7 @@ IntroScene8:
 
 IntroScene9:
 ; scroll down and fade out
-	ld hl, wIntroSceneFrameCounter1
+	ld hl, wIntroFrameCounter1
 	ld a, [hl]
 	inc [hl]
 	srl a
@@ -713,7 +714,7 @@ Intro_InitNote:
 	ld a, [wcb19]
 	and a
 	ret nz
-	ld hl, wIntroSceneFrameCounter2
+	ld hl, wIntroFrameCounter2
 	ld a, [hl]
 	and %00111111
 	ret nz
@@ -793,7 +794,7 @@ IntroScene10:
 	ld [wGlobalAnimXOffset], a
 
 	xor a
-	ld [wIntroSceneFrameCounter2], a
+	ld [wIntroFrameCounter2], a
 	ld b, SCGB_GS_INTRO
 	ld c, 2
 	call GetSGBLayout
@@ -810,7 +811,7 @@ IntroScene10:
 
 IntroScene11:
 ; scroll up to Charizard silhoutte, flash Johto starters
-	ld hl, wIntroSceneFrameCounter2
+	ld hl, wIntroFrameCounter2
 	ld a, [hl]
 	inc [hl]
 	and 1
@@ -827,12 +828,12 @@ IntroScene11:
 	ld hl, wIntroJumptableIndex
 	inc [hl]
 	xor a
-	ld [wIntroSceneFrameCounter1], a
+	ld [wIntroFrameCounter1], a
 ; fall through
 
 IntroScene12:
 ; load Charizard palettes
-	ld hl, wIntroSceneFrameCounter1
+	ld hl, wIntroFrameCounter1
 	ld a, [hl]
 	inc [hl]
 	srl a
@@ -855,7 +856,7 @@ IntroScene12:
 	ld hl, wIntroJumptableIndex
 	inc [hl]
 	ld a, $80
-	ld [wIntroSceneFrameCounter1], a
+	ld [wIntroFrameCounter1], a
 	ret
 
 .palettes
@@ -863,7 +864,7 @@ IntroScene12:
 
 IntroScene13:
 ; Charizard mouth closed
-	ld hl, wIntroSceneFrameCounter1
+	ld hl, wIntroFrameCounter1
 	ld a, [hl]
 	and a
 	jr z, .next
@@ -876,12 +877,12 @@ IntroScene13:
 	ld a, 1
 	call Functione5422
 	ld a, 4
-	ld [wIntroSceneFrameCounter1], a
+	ld [wIntroFrameCounter1], a
 	ret
 
 IntroScene14:
 ; Charizard mouth open
-	ld hl, wIntroSceneFrameCounter1
+	ld hl, wIntroFrameCounter1
 	ld a, [hl]
 	and a
 	jr z, .next
@@ -894,9 +895,9 @@ IntroScene14:
 	ld a, 2
 	call Functione5422
 	ld a, 64
-	ld [wIntroSceneFrameCounter1], a
+	ld [wIntroFrameCounter1], a
 	xor a
-	ld [wIntroSceneFrameCounter2], a
+	ld [wIntroFrameCounter2], a
 	ld de, SFX_GS_INTRO_CHARIZARD_FIREBALL
 	call PlaySFX
 ; fall through
@@ -904,7 +905,7 @@ IntroScene14:
 IntroScene15:
 ; Charizard mouth wide open / fireball starts
 	call Functione5473
-	ld hl, wIntroSceneFrameCounter1
+	ld hl, wIntroFrameCounter1
 	ld a, [hl]
 	and a
 	jr z, .next
@@ -915,13 +916,13 @@ IntroScene15:
 	ld hl, wIntroJumptableIndex
 	inc [hl]
 	xor a
-	ld [wIntroSceneFrameCounter1], a
+	ld [wIntroFrameCounter1], a
 	ret
 
 IntroScene16:
 ; continue fireball / fade out palettes
 	call Functione5473
-	ld hl, wIntroSceneFrameCounter1
+	ld hl, wIntroFrameCounter1
 	ld a, [hl]
 	inc [hl]
 	swap a
@@ -1122,7 +1123,7 @@ endr
 	dwcoord 8, 6
 
 Functione5473:
-	ld hl, wIntroSceneFrameCounter2
+	ld hl, wIntroFrameCounter2
 	ld a, [hl]
 	inc [hl]
 	and 3

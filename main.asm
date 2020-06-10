@@ -332,6 +332,7 @@ INCBIN "gfx/intro/copyright.2bpp"
 IF DEF(_GOLD)
 TitleScreenGFX3:
 INCBIN "gfx/title/title_trail_gold.2bpp"
+	ds $40
 TitleScreenGFX4:
 INCBIN "gfx/title/hooh_gold.2bpp.lz"
 
