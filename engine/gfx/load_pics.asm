@@ -216,7 +216,7 @@ FixPicBank:
 	db $1f, $2e
 	db -1
 
-Function1587f:
+GSIntroGetMonFrontpic:
 	ld a, c
 	push de
 	ld hl, PokemonPicPointers

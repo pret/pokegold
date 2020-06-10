@@ -309,8 +309,8 @@ DoAnimFrame:
 
 .asm_8d602
 	call DeinitializeSprite
-	ld a, $1
-	ld [wBattleMonLevel], a
+	ld a, 1
+	ld [wcb19], a
 	ret
 
 .Function8d60b
@@ -392,7 +392,7 @@ DoAnimFrame:
 	dw .Function8d680
 
 .Function8d673
-	ld a, [wBattleMonLevel]
+	ld a, [wcb19]
 	and a
 	ret z
 	call .IncrementJumptableIndex
@@ -479,7 +479,7 @@ DoAnimFrame:
 
 .asm_8d6e9
 	ld a, 1
-	ld [wBattleMonLevel], a
+	ld [wcb19], a
 	call .IncrementJumptableIndex
 	ret
 
@@ -562,7 +562,7 @@ DoAnimFrame:
 	jr z, .asm_8d761
 	dec [hl]
 	dec [hl]
-	ld a, [wBattleMonLevel]
+	ld a, [wcb19]
 	and a
 	ret nz
 	dec [hl]

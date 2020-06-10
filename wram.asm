@@ -612,10 +612,18 @@ wc8f9:: ds 7
 NEXTU ; c700
 ; LCD expects wLYOverrides to have an alignment of $100
 wLYOverrides:: ds SCREEN_HEIGHT_PX
-wLYOverridesEnd:: ds 112
+wLYOverridesEnd::
 
+UNION ; c790
+	ds 16
+wLYOverrides2:: ds SCREEN_HEIGHT_PX
+wLYOverrides2End::
+
+NEXTU ; c790
+	ds $100 - SCREEN_HEIGHT_PX
 wLYOverridesBackup:: ds SCREEN_HEIGHT_PX
-wLYOverridesBackupEnd:: ds 112
+wLYOverridesBackupEnd:: ds $100 - SCREEN_HEIGHT_PX
+ENDU
 
 UNION ; c900
 ; blank credits tile buffer
@@ -727,11 +735,11 @@ wBattleMon:: battle_struct wBattleMon ; cb0c
 NEXTU ; cb0c
 	ds 4
 wIntroJumptableIndex:: db
-wcb11:: dw
-wcb13:: dw
-wcb15:: dw
-wcb17:: db
-wcb18:: db
+wIntroBGMapPointer:: dw
+wIntroTilemapPointer:: dw
+wIntroTilesPointer:: dw
+wIntroSceneFrameCounter1:: db
+wIntroSceneFrameCounter2:: db
 wcb19:: db
 ENDU ; cb2c
 

@@ -163,6 +163,23 @@ def filepath_rules(filepath):
             args['width'] = 104
         elif name == 'copyright':
             args['width'] = 240
+        elif name == 'charizard1':
+            args['width'] = 72
+            args['rows'] = [
+                (1, 8), (1, 8), (1, 8), (1, 8), (1, 8), (1, 8), (1, 8), (1, 8),
+                (0, 9), (0, 9), (0, 9), (0, 9), (0, 9), (0, 9), (0, 9)
+            ]
+        elif name == 'charizard2':
+            args['width'] = 72
+            args['pad_indices'] = [0]
+        elif name == 'charizard3':
+            args['width'] = 64
+            args['rows'] = [
+                (0, 8), (0, 8), (0, 0), (1, 6), (1, 6), (1, 6), (1, 6), (1, 6), (1, 6),
+                (1, 6), (1, 6), (1, 6), (1, 6), (1, 6), (1, 6), (1, 6), (1, 6)
+            ]
+        elif name in ['grass1', 'grass2', 'water1', 'water2']:
+            args['width'] = 128
 
     elif 'gfx/mail' in filedir:
         if name in mail_px8:
@@ -272,7 +289,7 @@ def filepath_rules(filepath):
     elif 'gfx/title' in filedir:
         if name in ['logo_bottom_gold', 'logo_bottom_silver', 'logo_top_gold', 'logo_top_silver']:
             args['width'] = 160
-        elif name == 'lugia_silver'
+        elif name == 'lugia_silver':
             args['width'] = 64
             args['pic_dimensions'] = 8, 4
 

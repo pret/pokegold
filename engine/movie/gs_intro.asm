@@ -1,17 +1,11 @@
-IF DEF(_GOLD)
-BANK39_OFFSET EQU 0
-ELIF DEF(_SILVER)
-BANK39_OFFSET EQU $1b8
-ENDC
-
 GoldSilverIntro:
-	call .InitRAMAddrs
+	call .Init
 .loop
 	call .JoypadLoop
 	jr nc, .loop
 	ret
 
-.InitRAMAddrs:
+.Init:
 	farcall ClearSpriteAnims
 	xor a
 	ld [wIntroJumptableIndex], a
@@ -50,18 +44,9 @@ GoldSilverIntro:
 	ret
 
 IntroSceneJumper:
-	ld a, [wIntroJumptableIndex]
-	ld e, a
-	ld d, 0
-	ld hl, IntroScenes
-	add hl, de
-	add hl, de
-	ld a, [hli]
-	ld h, [hl]
-	ld l, a
-	jp hl
+	jumptable .IntroScenes, wIntroJumptableIndex
 
-IntroScenes:
+.IntroScenes:
 	dw IntroScene1
 	dw IntroScene2
 	dw IntroScene3
@@ -81,10 +66,11 @@ IntroScenes:
 	dw IntroScene17
 
 IntroScene1:
+; Set up water cutscene (Shellders/Magikarp/Lapras)
 	call ClearBGPalettes
 	call ClearTilemap
 	ld hl, wIntroJumptableIndex
-	inc [hl]
+	inc [hl] ; only run once
 	call DisableLCD
 	xor a
 	ldh [hBGMapMode], a
@@ -97,27 +83,27 @@ IntroScene1:
 	call ByteFill
 	ld a, 0
 	ldh [rVBK], a
-	call Functione54dd
+	call Intro_ResetLYOverrides
 	ld de, vTiles2 tile $00
-	ld hl, GFX_e54e8
+	ld hl, GSIntroWaterGFX1
 	call Decompress
-	ld a, LOW(GFX_e5bc8)
-	ld [wcb15 + 0], a
-	ld a, HIGH(GFX_e5bc8)
-	ld [wcb15 + 1], a
+	ld a, LOW(GSIntroWaterMeta)
+	ld [wIntroTilesPointer + 0], a
+	ld a, HIGH(GSIntroWaterMeta)
+	ld [wIntroTilesPointer + 1], a
 	hlbgcoord 0, 0, vBGMap2
 	ld a, l
-	ld [wcb11 + 0], a
+	ld [wIntroBGMapPointer + 0], a
 	ld a, h
-	ld [wcb11 + 1], a
-	ld de, GFX_e5ab8
+	ld [wIntroBGMapPointer + 1], a
+	ld de, GSIntroWaterTilemap + 15 tiles
 	ld a, e
-	ld [wcb13 + 0], a
+	ld [wIntroTilemapPointer + 0], a
 	ld a, d
-	ld [wcb13 + 1], a
+	ld [wIntroTilemapPointer + 1], a
 	call Functione5498
 	ld de, vTiles0 tile $00
-	ld hl, GFX_e5cd8
+	ld hl, GSIntroWaterGFX2
 	call Decompress
 	ld hl, wSpriteAnimDict
 	ld a, 0
@@ -130,10 +116,10 @@ IntroScene1:
 	ld [wGlobalAnimXOffset], a
 	ld a, $58
 	ldh [hSCX], a
-	xor a ; LOW(vTiles0 tile $00)
-	ld [wcb17 + 1], a
-	ld a, HIGH(vTiles0 tile $00)
-	ld [wcb17 + 0], a
+	xor a
+	ld [wIntroSceneFrameCounter2], a
+	ld a, $80
+	ld [wIntroSceneFrameCounter1], a
 	ld a, $42
 	ldh [hLCDCPointer], a
 	call Functione5095
@@ -148,19 +134,20 @@ IntroScene1:
 	call DmgToCgbBGPals
 	depixel 28, 28
 	call DmgToCgbObjPals
-	call Functione4f5a
+	call InitShellders
 	ld de, MUSIC_GS_OPENING
 	call PlayMusic
 	ret
 
 IntroScene2:
+; shellders underwater
 	call Functione50af
-	ld hl, wcb17
+	ld hl, wIntroSceneFrameCounter1
 	ld a, [hl]
 	and a
 	jr z, .asm_e4df5
 	dec [hl]
-	call Functione4ef0
+	call InitBubble
 	ret
 
 .asm_e4df5:
@@ -169,20 +156,23 @@ IntroScene2:
 	inc [hl]
 
 IntroScene3:
+; rise towards the surface
 	call Functione4e90
 	call Functione4e67
 	ret nc
-	call Functione54dd
+.next
+	call Intro_ResetLYOverrides
 	ld hl, hSCY
 	inc [hl]
 	ld hl, wIntroJumptableIndex
 	inc [hl]
 
 IntroScene4:
+; at surface, Lapras surfs to left of screen
 	ld a, [wcb19]
 	and a
-	jr nz, .asm_e4e25
-	ld hl, wcb18
+	jr nz, .next
+	ld hl, wIntroSceneFrameCounter2
 	inc [hl]
 	ld a, [hl]
 	and $0f
@@ -191,18 +181,19 @@ IntroScene4:
 	dec [hl]
 	dec [hl]
 
-.asm_e4e21:
+.asm_e4e21
 	call Functione4fde
 	ret
 
-.asm_e4e25:
+.next
 	ld hl, wIntroJumptableIndex
 	inc [hl]
 	xor a
-	ld [wcb17], a
+	ld [wIntroSceneFrameCounter1], a
 
 IntroScene5:
-	ld hl, wcb17
+; fade out
+	ld hl, wIntroSceneFrameCounter1
 	ld a, [hl]
 	inc [hl]
 	swap a
@@ -213,7 +204,7 @@ IntroScene5:
 	add hl, de
 	ld a, [hl]
 	cp -1
-	jr z, .asm_e4e4e
+	jr z, .next
 	call DmgToCgbBGPals
 	call Functione4fde
 	ld hl, hSCX
@@ -221,7 +212,7 @@ IntroScene5:
 	dec [hl]
 	ret
 
-.asm_e4e4e
+.next
 	ld hl, wIntroJumptableIndex
 	inc [hl]
 	ret
@@ -231,6 +222,7 @@ IntroScene5:
 	db -1
 
 IntroScene17:
+; delay a bit before leading into the title screen
 	ld c, 64
 .loop
 	call DelayFrame
@@ -241,7 +233,7 @@ IntroScene17:
 	ret
 
 Functione4e67:
-	ld hl, wcb18
+	ld hl, wIntroSceneFrameCounter2
 	inc [hl]
 	ld a, [hl]
 	and $03
@@ -259,7 +251,7 @@ Functione4e67:
 	dec [hl]
 	and $0f
 	call z, Functione4f87
-	ld a, [wcb17]
+	ld a, [wIntroSceneFrameCounter1]
 	and a
 	jr z, .asm_e4e8e
 
@@ -272,16 +264,7 @@ Functione4e67:
 	ret
 
 Functione4e90:
-	ld a, [wcb17]
-	ld e, a
-	ld d, 0
-	ld hl, .dw
-	add hl, de
-	add hl, de
-	ld a, [hli]
-	ld h, [hl]
-	ld l, a
-	jp hl
+	jumptable .dw, wIntroSceneFrameCounter1
 
 .dw
 	dw Functione4eca
@@ -303,7 +286,7 @@ Functione4e90:
 	dw Functione4eec
 
 Functione4ec1:
-	call Functione4f6f
+	call InitLapras
 	depixel 28, 28, 4, 4
 	call DmgToCgbObjPals
 ; fall through
@@ -312,16 +295,16 @@ Functione4eca:
 	ret
 
 Functione4ece:
-	call Functione4f19
+	call InitMagikarps
 	call Functione4fde
 	ret
 
 Functione4ed5:
-	ld hl, wcb18
+	ld hl, wIntroSceneFrameCounter2
 	ld a, [hl]
-	and $1f
+	and %00011111
 	jr z, .asm_e4ee1
-	call Functione4f19
+	call InitMagikarps
 	ret
 
 .asm_e4ee1
@@ -337,8 +320,8 @@ Functione4eec:
 	call Functione50af
 	ret
 
-Functione4ef0:
-	ld hl, wcb17
+InitBubble:
+	ld hl, wIntroSceneFrameCounter1
 	ld a, [hl]
 	and $0f
 	ret nz
@@ -365,15 +348,15 @@ Functione4ef0:
 	db  4 * 8, 13 * 8
 	db  8 * 8, 17 * 8
 
-Functione4f19:
+InitMagikarps:
 	depixel 8, 7, 0, 7
 	ldh a, [hSGB]
 	and a
-	jr z, .asm_e4f24
+	jr z, .ok
 	depixel 4, 3, 0, 7
 
-.asm_e4f24
-	ld hl, wcb18
+.ok
+	ld hl, wIntroSceneFrameCounter2
 	ld a, [hl]
 	and e
 	ret nz
@@ -381,50 +364,49 @@ Functione4f19:
 	and d
 	jr nz, .asm_e4f41
 	depixel 29, 28
-	call Functione4f54
+	call .InitAnim
 	depixel 26, 0
-	call Functione4f54
+	call .InitAnim
 	depixel 0, 24
-	call Functione4f54
+	call .InitAnim
 	ret
 
 .asm_e4f41
 	depixel 28, 30
-	call Functione4f54
+	call .InitAnim
 	depixel 31, 24
-	call Functione4f54
+	call .InitAnim
 	depixel 2, 28
-	call Functione4f54
+	call .InitAnim
 	ret
 
-Functione4f54:
+.InitAnim:
 	ld a, SPRITE_ANIM_INDEX_GS_INTRO_MAGIKARP
 	call InitSpriteAnimStruct
 	ret
 
-Functione4f5a:
+InitShellders:
 	depixel 18, 7
-	call Functione4f69
+	call .InitAnim
 	depixel 14, 10
-	call Functione4f69
+	call .InitAnim
 	depixel 16, 15
 
-Functione4f69:
+.InitAnim:
 	ld a, SPRITE_ANIM_INDEX_GS_INTRO_SHELLDER
 	call InitSpriteAnimStruct
 	ret
 
-Functione4f6f:
-	ld a, [wcb18]
-	and $1f
+InitLapras:
+	ld a, [wIntroSceneFrameCounter2]
+	and %00011111
 	ret nz
 	depixel 16, 24
 	ld a, SPRITE_ANIM_INDEX_GS_INTRO_LAPRAS_2
 	call InitSpriteAnimStruct
 	ret
 
-; unused?
-Functione4f7e:
+UnusedInitLapras:
 	depixel 2, 0
 	ld a, SPRITE_ANIM_INDEX_GS_INTRO_LAPRAS
 	call InitSpriteAnimStruct
@@ -433,18 +415,18 @@ Functione4f7e:
 Functione4f87:
 	push hl
 	push de
-	ld a, [wcb13 + 0]
+	ld a, [wIntroTilemapPointer + 0]
 	ld e, a
-	ld a, [wcb13 + 1]
+	ld a, [wIntroTilemapPointer + 1]
 	ld d, a
 	ld hl, -$10
 	add hl, de
 	ld a, l
 	ld e, l
-	ld [wcb13 + 0], a
+	ld [wIntroTilemapPointer + 0], a
 	ld a, h
 	ld d, h
-	ld [wcb13 + 1], a
+	ld [wIntroTilemapPointer + 1], a
 	hlcoord 0, 0
 	ld c, $10
 
@@ -452,19 +434,19 @@ Functione4f87:
 	call Functione54ae
 	dec c
 	jr nz, .loop
-	ld a, [wcb11 + 0]
+	ld a, [wIntroBGMapPointer + 0]
 	ld e, a
-	ld a, [wcb11 + 1]
+	ld a, [wIntroBGMapPointer + 1]
 	ld d, a
 	ld hl, hCurSpriteYCoord
 	add hl, de
 	ld a, l
-	ld [wcb11 + 0], a
+	ld [wIntroBGMapPointer + 0], a
 	ld [wRequested2bppDest + 0], a
 	ld a, h
 	and $fb
 	or $08
-	ld [wcb11 + 1], a
+	ld [wIntroBGMapPointer + 1], a
 	ld [wRequested2bppDest + 1], a
 	ld a, LOW(wTilemap)
 	ld [wRequested2bppSource + 0], a
@@ -472,14 +454,14 @@ Functione4f87:
 	ld [wRequested2bppSource + 1], a
 	ld a, 4
 	ld [wRequested2bppSize], a
-	ld hl, wcb17
+	ld hl, wIntroSceneFrameCounter1
 	dec [hl]
 	pop de
 	pop hl
 	ret
 
 Functione4fde:
-	ld hl, wcb18
+	ld hl, wIntroSceneFrameCounter2
 	ld a, [hl]
 	and $03
 	cp $03
@@ -495,7 +477,7 @@ Functione4fde:
 rept 5
 	add hl, hl
 endr
-	ld de, GFX_e5015
+	ld de, .data_e5015
 	add hl, de
 	ld a, l
 	ld [wRequested2bppSource + 0], a
@@ -509,13 +491,24 @@ endr
 	ld [wRequested2bppSize], a
 	ret
 
-GFX_e5015:
-	dr ($e5015 - BANK39_OFFSET), ($e5095 - BANK39_OFFSET)
+.data_e5015
+rept 8
+	db $70, $71, $72, $73
+endr
+rept 8
+	db $74, $75, $76, $77
+endr
+rept 8
+	db $78, $79, $7a, $7b
+endr
+rept 8
+	db $7c, $7d, $7e, $7f
+endr
 
 Functione5095:
-	ld bc, $c7a0 ; ?
-	ld a, $90 ; ?
-	ld de, $0400 ; ?
+	ld bc, wLYOverrides2
+	ld a, wLYOverrides2End - wLYOverrides2
+	ld de, vBGMap1 - vBGMap0
 
 .loop
 	push af
@@ -532,8 +525,8 @@ Functione5095:
 	ret
 
 Functione50af:
-	ld bc, $c700 ; ?
-	ld e, $10 ; ?
+	ld bc, wLYOverrides
+	ld e, $10
 
 .loop1
 	ldh a, [hSCY]
@@ -542,11 +535,11 @@ Functione50af:
 	dec e
 	jr nz, .loop1
 
-	ld hl, $c7a0 ; ?
-	ld de, $c7a1 ; ?
+	ld hl, wLYOverrides2
+	ld de, wLYOverrides2 + 1
 	ld a, [hl]
 	push af
-	ld a, $80 ; ?
+	ld a, $80
 
 .loop2
 	push af
@@ -567,33 +560,34 @@ Functione50af:
 	ret
 
 IntroScene6:
+; Set up grass cutscene (Pikachu/Jigglypuff)
 	ld hl, wIntroJumptableIndex
 	inc [hl]
 	call DisableLCD
 	callfar ClearSpriteAnims
-	call Functione54dd
+	call Intro_ResetLYOverrides
 	ld de, vTiles2
-	ld hl, GFX_e6058
+	ld hl, GSIntroGrassGFX1
 	call Decompress
-	ld a, LOW(GFX_e6338)
-	ld [wcb15 + 0], a
-	ld a, HIGH(GFX_e6338)
-	ld [wcb15 + 1], a
+	ld a, LOW(GSIntroGrassMeta)
+	ld [wIntroTilesPointer + 0], a
+	ld a, HIGH(GSIntroGrassMeta)
+	ld [wIntroTilesPointer + 1], a
 	ld hl, vBGMap0
 	ld a, l
-	ld [wcb11 + 0], a
+	ld [wIntroBGMapPointer + 0], a
 	ld a, h
-	ld [wcb11 + 1], a
-	ld de, GFX_e6238
+	ld [wIntroBGMapPointer + 1], a
+	ld de, GSIntroGrassTilemap
 	ld a, e
-	ld [wcb13 + 0], a
+	ld [wIntroTilemapPointer + 0], a
 	ld a, d
-	ld [wcb13 + 1], a
+	ld [wIntroTilemapPointer + 1], a
 	call Functione5498
 	ld de, vTiles0
-	ld hl, GFX_e63a8
+	ld hl, GSIntroGrassGFX2
 	call Decompress
-	ld hl, $c508 ; ?
+	ld hl, wSpriteAnimDict
 	ld a, $01
 	ld [hli], a
 	ld a, $00
@@ -606,7 +600,7 @@ IntroScene6:
 	ld a, $a0
 	ld [wGlobalAnimXOffset], a
 	xor a
-	ld [wcb18], a
+	ld [wIntroSceneFrameCounter2], a
 	call EnableLCD
 	ld b, SCGB_GS_INTRO
 	ld c, 1
@@ -615,14 +609,15 @@ IntroScene6:
 	call DmgToCgbBGPals
 	depixel 28, 28, 4, 4
 	call DmgToCgbObjPals
-	call Functione51ef
+	call InitJigglypuffAnim
 	xor a
 	ld [wcb19], a
 	ret
 
 IntroScene7:
-	call Functione51cc
-	ld hl, wcb18
+; scroll left to Jigglypuff
+	call InitNoteAnim
+	ld hl, wIntroSceneFrameCounter2
 	ld a, [hl]
 	inc [hl]
 	and $03
@@ -630,41 +625,43 @@ IntroScene7:
 	ld hl, hSCX
 	ld a, [hl]
 	and a
-	jr z, .asm_e516e
+	jr z, .next
 	dec [hl]
 	ld hl, wGlobalAnimXOffset
 	inc [hl]
 	ret
 
-.asm_e516e
+.next
 	ld a, -1
-	ld [wcb17], a
-	call Functione51f8
+	ld [wIntroSceneFrameCounter1], a
+	call InitPikachuAnim
 	ld hl, wIntroJumptableIndex
 	inc [hl]
 	ret
 
 IntroScene8:
-	ld hl, wcb17
+; stop scrolling, Pikachu attacks
+	ld hl, wIntroSceneFrameCounter1
 	ld a, [hl]
 	and a
-	jr z, .asm_e518b
+	jr z, .next
 	dec [hl]
-	call Functione51cc
-	ld hl, wcb18
+	call InitNoteAnim
+	ld hl, wIntroSceneFrameCounter2
 	inc [hl]
 	ret
 
-.asm_e518b:
+.next
 	xor a
-	ld [wcb17], a
+	ld [wIntroSceneFrameCounter1], a
 	ld hl, wIntroJumptableIndex
 	inc [hl]
 	callfar Function9136
 	ret
 
 IntroScene9:
-	ld hl, wcb17
+; scroll down and fade out
+	ld hl, wIntroSceneFrameCounter1
 	ld a, [hl]
 	inc [hl]
 	srl a
@@ -696,35 +693,35 @@ IntroScene9:
 
 	ret ; unused
 
-Functione51cc:
+InitNoteAnim:
 	ld a, [wcb19]
 	and a
 	ret nz
-	ld hl, wcb18
+	ld hl, wIntroSceneFrameCounter2
 	ld a, [hl]
-	and $3f
+	and %00111111
 	ret nz
 	ld a, [hl]
-	and $7f
-	jr z, .asm_e51e6
+	and %01111111
+	jr z, .invisible
 	depixel 11, 6, 4, 0
 	ld a, SPRITE_ANIM_INDEX_GS_INTRO_NOTE
 	call InitSpriteAnimStruct
 	ret
 
-.asm_e51e6:
+.invisible
 	depixel 10, 6, 4, 0
 	ld a, SPRITE_ANIM_INDEX_GS_INTRO_INVISIBLE_NOTE
 	call InitSpriteAnimStruct
 	ret
 
-Functione51ef:
+InitJigglypuffAnim:
 	depixel 14, 6
 	ld a, SPRITE_ANIM_INDEX_GS_INTRO_JIGGLYPUFF
 	call InitSpriteAnimStruct
 	ret
 
-Functione51f8:
+InitPikachuAnim:
 	depixel 14, 24
 	ld a, SPRITE_ANIM_INDEX_GS_INTRO_PIKACHU
 	call InitSpriteAnimStruct
@@ -734,47 +731,48 @@ Functione51f8:
 	ret
 
 IntroScene10:
+; Set up fireball cutscene (Charizard, Johto starters)
 	ld hl, wIntroJumptableIndex
 	inc [hl]
 	call DisableLCD
 	callfar ClearSpriteAnims
-	call Functione54dd
+	call Intro_ResetLYOverrides
 	call Functione5361
 	ld de, vTiles2
-	ld hl, GFX_e6908
+	ld hl, GSIntroCharizardGFX1
 	call Decompress
 	ld de, vTiles1
-	ld hl, GFX_e6e48
+	ld hl, GSIntroCharizardGFX2
 	call Decompress
 	ld de, vTiles0
-	ld hl, GFX_e71c8
+	ld hl, GSIntroCharizardGFX3
 	ld bc, vTiles1 - vTiles0
 	call Decompress
 	ld c, CHIKORITA
 	ld de, vTiles0 tile $10
-	farcall Function1587f
+	farcall GSIntroGetMonFrontpic
 	ld c, CYNDAQUIL
 	ld de, vTiles0 tile $29
-	farcall Function1587f
+	farcall GSIntroGetMonFrontpic
 	ld c, TOTODILE
 	ld de, vTiles0 tile $42
-	farcall Function1587f
-	ld hl, $c508 ; ?
+	farcall GSIntroGetMonFrontpic
+	ld hl, wSpriteAnimDict
 	ld a, $01
 	ld [hli], a
 	ld a, $00
 	ld [hli], a
 	call EnableLCD
-	ld a, LOW(vTiles0)
+	ld a, 0
 	call Functione5422
-	ld a, HIGH(vTiles0)
+	ld a, $80
 	ldh [hSCY], a
 	xor a
 	ldh [hSCX], a
 	ld [wGlobalAnimYOffset], a
 	ld [wGlobalAnimXOffset], a
 	xor a
-	ld [wcb18], a
+	ld [wIntroSceneFrameCounter2], a
 	ld b, SCGB_GS_INTRO
 	ld c, $02
 	call GetSGBLayout
@@ -790,111 +788,115 @@ IntroScene10:
 	ret
 
 IntroScene11:
-	ld hl, wcb18
+; scroll up to Charizard silhoutte, flash Johto starters
+	ld hl, wIntroSceneFrameCounter2
 	ld a, [hl]
 	inc [hl]
 	and $01
 	ret z
-	call Functione5376
+	call CheckSCYEvents
 	ld hl, hSCY
 	ld a, [hl]
 	and a
-	jr z, .asm_e52b3
+	jr z, .done_scrolling
 	inc [hl]
 	ret
 
-.asm_e52b3
+.done_scrolling
 	ld hl, wIntroJumptableIndex
 	inc [hl]
 	xor a
-	ld [wcb17], a
-; fall through
+	ld [wIntroSceneFrameCounter1], a
 IntroScene12:
-	ld hl, wcb17
+; load Charizard palettes
+	ld hl, wIntroSceneFrameCounter1
 	ld a, [hl]
 	inc [hl]
 	srl a
 	srl a
-	and $03
+	and %11
 	ld e, a
 	ld d, 0
 	ld hl, .pals
 	add hl, de
 	ld a, [hl]
 	and a
-	jr z, .asm_e52da
+	jr z, .next
 	call DmgToCgbBGPals
 	ld e, a
 	ld d, a
 	call DmgToCgbObjPals
 	ret
 
-.asm_e52da
+.next
 	ld hl, wIntroJumptableIndex
 	inc [hl]
-	ld a, $80 ; ?
-	ld [wcb17], a
+	ld a, $80
+	ld [wIntroSceneFrameCounter1], a
 	ret
 
 .pals
 	db %01101010, %10100101, %11100100, %00000000
 
 IntroScene13:
-	ld hl, wcb17
+; Charizard mouth closed
+	ld hl, wIntroSceneFrameCounter1
 	ld a, [hl]
 	and a
-	jr z, .asm_e52f1
+	jr z, .next
 	dec [hl]
 	ret
 
-.asm_e52f1
+.next
 	ld hl, wIntroJumptableIndex
 	inc [hl]
 	ld a, $01
 	call Functione5422
 	ld a, $04
-	ld [wcb17], a
+	ld [wIntroSceneFrameCounter1], a
 	ret
 
 IntroScene14:
-	ld hl, wcb17
+; Charizard mouth open
+	ld hl, wIntroSceneFrameCounter1
 	ld a, [hl]
 	and a
-	jr z, .asm_e5309
+	jr z, .next
 	dec [hl]
 	ret
 
-.asm_e5309
+.next
 	ld hl, wIntroJumptableIndex
 	inc [hl]
 	ld a, $02
 	call Functione5422
 	ld a, $40
-	ld [wcb17], a
+	ld [wIntroSceneFrameCounter1], a
 	xor a
-	ld [wcb18], a
+	ld [wIntroSceneFrameCounter2], a
 	ld de, SFX_GS_INTRO_CHARIZARD_FIREBALL
 	call PlaySFX
-; fall through
 IntroScene15:
+; Charizard mouth wide open / fireball starts
 	call Functione5473
-	ld hl, wcb17
+	ld hl, wIntroSceneFrameCounter1
 	ld a, [hl]
 	and a
-	jr z, .asm_e532d
+	jr z, .next
 	dec [hl]
 	ret
 
-.asm_e532d:
+.next
 	ld hl, wIntroJumptableIndex
 	inc [hl]
 	xor a
-	ld [wcb17], a
+	ld [wIntroSceneFrameCounter1], a
 	ret
 
 IntroScene16:
+; continue fireball / fade out palettes
 	call Functione5473
-	ld hl, wcb17
+	ld hl, wIntroSceneFrameCounter1
 	ld a, [hl]
 	inc [hl]
 	swap a
@@ -932,29 +934,105 @@ Functione5361:
 	call ByteFill
 	ret
 
-Functione5376:
+CheckSCYEvents:
 	ldh a, [hSCY]
 	ld c, a
-	ld hl, .unknown_e538b
+	ld hl, .scy_jumptable
 
-.asm_e537c:
+.asm_e537c
 	ld a, [hli]
 	cp -1
 	ret z
 	cp c
-	jr z, .asm_e5387
+	jr z, .value_found
 	inc hl
 	inc hl
 	jr .asm_e537c
 
-.asm_e5387:
+.value_found
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
 	jp hl
 
-.unknown_e538b
-	dr ($e538b - BANK39_OFFSET), ($e5422 - BANK39_OFFSET)
+.scy_jumptable
+	dbw $86, Functione53f7
+	dbw $87, ChikoritaAppears
+	dbw $88, Functione53e0
+	dbw $98, Functione53eb
+	dbw $99, Functione5400
+	dbw $af, CyndaquilAppears
+	dbw $b0, Functione53e0
+	dbw $c0, Functione53eb
+	dbw $c1, Functione5409
+	dbw $d7, TotodileAppears
+	dbw $d8, Functione53e0
+	dbw $e8, Functione53eb
+	dbw $e9, Functione5412
+	db -1
+
+ChikoritaAppears:
+	ld de, SFX_GS_INTRO_POKEMON_APPEARS
+	call PlaySFX
+	depixel 22, 1
+	ld a, SPRITE_ANIM_INDEX_GS_INTRO_CHIKORITA
+	call InitSpriteAnimStruct
+	ret
+
+CyndaquilAppears:
+	ld de, SFX_GS_INTRO_POKEMON_APPEARS
+	call PlaySFX
+	depixel 22, 20
+	ld a, SPRITE_ANIM_INDEX_GS_INTRO_CYNDAQUIL
+	call InitSpriteAnimStruct
+	ret
+
+TotodileAppears:
+	ld de, SFX_GS_INTRO_POKEMON_APPEARS
+	call PlaySFX
+	depixel 22, 1
+	ld a, SPRITE_ANIM_INDEX_GS_INTRO_TOTODILE
+	call InitSpriteAnimStruct
+	ret
+
+Functione53e0:
+	depixel 28, 28, 4, 4
+	call DmgToCgbObjPals
+	xor a
+	call DmgToCgbBGPals
+	ret
+
+Functione53eb:
+	depixel 31, 31, 7, 7
+	call DmgToCgbObjPals
+	ld a, %00111111
+	call DmgToCgbBGPals
+	ret
+
+Functione53f7:
+	ld c, CHIKORITA
+	farcall Function9178
+	ret
+
+Functione5400:
+	ld c, CYNDAQUIL
+	farcall Function9178
+	ret
+
+Functione5409:
+	ld c, TOTODILE
+	farcall Function9178
+	ret
+
+Functione5412:
+	ldh a, [hCGB]
+	and a
+	ld c, CYNDAQUIL
+	jr nz, .got_mon
+	ld c, CHARIZARD
+.got_mon
+	farcall Function9178
+	ret
 
 Functione5422:
 	push af
@@ -969,7 +1047,7 @@ Functione5422:
 	pop af
 	ld e, a
 	ld d, 0
-	ld hl, .unknown_e5464
+	ld hl, .data_e5464
 rept 5
 	add hl, de
 endr
@@ -993,7 +1071,7 @@ endr
 	dec c
 	jr nz, .loop2_inner
 	pop hl
-	ld bc, $0014
+	ld bc, SCREEN_WIDTH
 	add hl, bc
 	pop bc
 	dec b
@@ -1008,13 +1086,17 @@ endr
 	ldh [hBGMapMode], a
 	ret
 
-.unknown_e5464
-	db $00, $08, $08, $22, $c4
-	db $40, $09, $08, $21, $c4
-	db $88, $09, $08, $20, $c4
+.data_e5464
+; tile id, width, height, tilemap addr?
+	db $00, 8, 8
+	dwcoord 10, 6
+	db $40, 9, 8
+	dwcoord 9, 6
+	db $88, 9, 8
+	dwcoord 8, 6
 
 Functione5473:
-	ld hl, wcb18
+	ld hl, wIntroSceneFrameCounter2
 	ld a, [hl]
 	inc [hl]
 	and $03
@@ -1067,9 +1149,9 @@ Functione54ae:
 	ld a, [de]
 	ld l, a
 	ld h, $00
-	ld a, [wcb15 + 0]
+	ld a, [wIntroTilesPointer + 0]
 	ld e, a
-	ld a, [wcb15 + 1]
+	ld a, [wIntroTilesPointer + 1]
 	ld d, a
 	add hl, hl
 	add hl, hl
@@ -1100,35 +1182,45 @@ Functione54ae:
 	pop bc
 	ret
 
-Functione54dd:
-	ld hl, $c700 ; ?
+Intro_ResetLYOverrides:
+	ld hl, wLYOverrides
 	xor a
-	ld c, $a0
+	ld c, wLYOverrides2 - wLYOverrides
 .loop
 	ld [hli], a
 	dec c
 	jr nz, .loop
 	ret
 
-GFX_e54e8:
-	dr ($e54e8 - BANK39_OFFSET), ($e5ab8 - BANK39_OFFSET)
-GFX_e5ab8:
-	dr ($e5ab8 - BANK39_OFFSET), ($e5bc8 - BANK39_OFFSET)
-GFX_e5bc8:
-	dr ($e5bc8 - BANK39_OFFSET), ($e5cd8 - BANK39_OFFSET)
-GFX_e5cd8:
-	dr ($e5cd8 - BANK39_OFFSET), ($e6058 - BANK39_OFFSET)
-GFX_e6058:
-	dr ($e6058 - BANK39_OFFSET), ($e6238 - BANK39_OFFSET)
-GFX_e6238:
-	dr ($e6238 - BANK39_OFFSET), ($e6338 - BANK39_OFFSET)
-GFX_e6338:
-	dr ($e6338 - BANK39_OFFSET), ($e63a8 - BANK39_OFFSET)
-GFX_e63a8:
-	dr ($e63a8 - BANK39_OFFSET), ($e6908 - BANK39_OFFSET)
-GFX_e6908:
-	dr ($e6908 - BANK39_OFFSET), ($e6e48 - BANK39_OFFSET)
-GFX_e6e48:
-	dr ($e6e48 - BANK39_OFFSET), ($e71c8 - BANK39_OFFSET)
-GFX_e71c8:
-	dr ($e71c8 - BANK39_OFFSET), ($e7678 - BANK39_OFFSET)
+GSIntroWaterGFX1:
+INCBIN "gfx/intro/water1.2bpp.lz"
+
+GSIntroWaterTilemap:
+INCBIN "gfx/intro/water.tilemap"
+
+GSIntroWaterMeta:
+INCBIN "gfx/intro/water.bin"
+
+GSIntroWaterGFX2:
+INCBIN "gfx/intro/water2.2bpp.lz"
+
+GSIntroGrassGFX1:
+INCBIN "gfx/intro/grass1.2bpp.lz"
+
+GSIntroGrassTilemap:
+INCBIN "gfx/intro/grass.tilemap"
+
+GSIntroGrassMeta:
+INCBIN "gfx/intro/grass.bin"
+
+GSIntroGrassGFX2:
+INCBIN "gfx/intro/grass2.2bpp.lz"
+
+GSIntroCharizardGFX1:
+INCBIN "gfx/intro/charizard1.2bpp.lz"
+
+GSIntroCharizardGFX2:
+INCBIN "gfx/intro/charizard2.2bpp.lz"
+
+GSIntroCharizardGFX3:
+INCBIN "gfx/intro/charizard3.2bpp.lz"
