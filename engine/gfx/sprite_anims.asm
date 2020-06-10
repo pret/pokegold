@@ -20,8 +20,8 @@ DoAnimFrame:
 	dw .GSIntroBubble
 	dw .GSIntroShellder
 	dw .GSIntroMagikarp
+	dw .UnusedLapras
 	dw .GSIntroLapras
-	dw .GSIntroLapras2
 	dw .GSIntroNote
 	dw .GSIntroJigglypuff
 	dw .GSIntroPikachu
@@ -227,7 +227,7 @@ DoAnimFrame:
 	call DeinitializeSprite
 	ret
 
-.GSIntroLapras
+.UnusedLapras
 	ld hl, SPRITEANIMSTRUCT_XCOORD
 	add hl, bc
 	ld a, [hl]
@@ -251,7 +251,7 @@ DoAnimFrame:
 	call DeinitializeSprite
 	ret
 
-.GSIntroLapras2
+.GSIntroLapras
 	call .AnonymousJumptable
 	jp hl
 
