@@ -344,8 +344,7 @@ INCBIN "gfx/title/lugia_silver.2bpp.lz"
 ENDC
 
 INCLUDE "engine/menus/options_menu.asm"
-INCLUDE "engine/movie/gamefreak_presents.asm"
-INCLUDE "engine/movie/gs_intro.asm"
+INCLUDE "engine/movie/gold_silver_intro.asm"
 
 
 SECTION "bank3E", ROMX
