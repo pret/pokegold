@@ -20,11 +20,3 @@ INCLUDE "macros/scripts/gfx_anims.asm"
 ;   - Leave out for now so no code depending on legacy macros gets introduced
 ;
 ; INCLUDE "macros/legacy.asm"
-
-dr: macro
-IF DEF(_GOLD)
-INCBIN "baserom-gold.gbc", \1, \2 - \1
-ELIF DEF(_SILVER)
-INCBIN "baserom-silver.gbc", \1, \2 - \1
-ENDC
-ENDM
