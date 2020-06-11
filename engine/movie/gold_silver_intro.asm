@@ -936,7 +936,7 @@ IntroScene6:
 	ld [wIntroTilesPointer + 0], a
 	ld a, HIGH(Intro_GrassMeta)
 	ld [wIntroTilesPointer + 1], a
-	ld hl, vBGMap0
+	hlbgcoord 0, 0
 	ld a, l
 	ld [wIntroBGMapPointer + 0], a
 	ld a, h
@@ -1302,7 +1302,7 @@ Intro_BlankTilemapAndBGMap:
 	ld bc, wTilemapEnd - wTilemap
 	xor a
 	call ByteFill
-	ld hl, vBGMap0
+	hlbgcoord 0, 0
 	ld bc, vBGMap1 - vBGMap0
 	xor a
 	call ByteFill

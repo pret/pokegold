@@ -147,7 +147,7 @@ FillTitleScreenPals:
 	ld bc, 18 * BG_MAP_WIDTH
 	xor a
 	call ByteFill
-	ld hl, vBGMap2
+	hlbgcoord 0, 0, vBGMap2
 	lb bc, 7, SCREEN_WIDTH
 	ld a, 1
 	call DrawTitleGraphic
