@@ -296,21 +296,19 @@ GFPresents_Sparkle:
 	add hl, de
 
 ; set the angle and distance for this sprite
-; bc+$b <- hl (angle), bc+$c <- 0, bc+$d <- hl+1 (distance)
 	ld e, l
 	ld d, h
 	ld hl, SPRITEANIMSTRUCT_JUMPTABLE_INDEX
 	add hl, bc
 	ld a, [de]
-	ld [hl], a
+	ld [hl], a ; angle
 	inc de
 	ld hl, SPRITEANIMSTRUCT_0C
 	add hl, bc
 	ld [hl], 0
 	inc hl ; SPRITEANIMSTRUCT_0D
 	ld a, [de]
-	ld [hl], a
-
+	ld [hl], a ; distance
 	ret
 
 .sparkle_vectors
