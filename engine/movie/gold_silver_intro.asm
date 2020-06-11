@@ -30,13 +30,13 @@ Copyright_GFPresents:
 	call .PlayFrame
 	jr nc, .loop
 
-	; high bits of wJumptableIndex are recycled for some flags
-	; this was set if user canceled by pressing a button
+; high bits of wJumptableIndex are recycled for some flags
+; this was set if user canceled by pressing a button
 	ld a, [wJumptableIndex]
 	bit 6, a
 	jr nz, .canceled
 
-	; clear carry flag from GFPresents_PlayFrame
+; clear carry flag from GFPresents_PlayFrame
 	and a
 	ret
 
@@ -87,8 +87,8 @@ Copyright_GFPresents:
 	and BUTTONS
 	jr nz, .pressed_button
 
-	; high bits of wJumptableIndex are recycled for some flags
-	; this is set when the sequence finished
+; high bits of wJumptableIndex are recycled for some flags
+; this is set when the sequence finished
 	ld a, [wJumptableIndex]
 	bit 7, a
 	jr nz, .finish
@@ -98,12 +98,12 @@ Copyright_GFPresents:
 	call GFPresentsJumper
 	call DelayFrame
 
-	; ensure carry is cleared
+; ensure carry is cleared
 	and a
 	ret
 
 .pressed_button
-	; high bits of wJumptableIndex are recycled for some flags
+; high bits of wJumptableIndex are recycled for some flags
 	ld hl, wJumptableIndex
 	set 6, [hl]
 
@@ -141,7 +141,7 @@ Unreferenced_Functione4a8d:
 	ret
 
 GFPresents_Star:
-	; tell GFPresents_PlaceLogo we haven't finished yet
+; tell GFPresents_PlaceLogo we haven't finished yet
 	xor a
 	ld [wIntroSceneFrameCounter], a
 
@@ -162,8 +162,8 @@ GFPresents_Star:
 GFPresents_PlaceLogo:
 ; Draw the Game Freak logo (may be initially invisible due to palette)
 
-	; wait until the star animation completed
-	; this counter is set in DoAnimFrame.GSIntroStar in engine/gfx/sprite_anims.asm
+; wait until the star animation completed
+; this counter is set in DoAnimFrame.GSIntroStar in engine/gfx/sprite_anims.asm
 	ld a, [wIntroSceneFrameCounter]
 	and a
 	ret z
@@ -174,7 +174,7 @@ GFPresents_PlaceLogo:
 
 	call GFPresents_NextScene
 
-	; set timer for GFPresents_LogoSparkles
+; set timer for GFPresents_LogoSparkles
 	ld a, $80
 	ld [wIntroSceneTimer], a
 	ret
@@ -186,16 +186,16 @@ GFPresents_LogoSparkles:
 	jr z, .done
 	dec [hl]
 
-	; add first text when timer passes half
+; add first text when timer passes half
 	cp $3f
 	call z, GFPresents_PlaceGameFreak
 
-	; add sparkles continuously
+; add sparkles continuously
 	call GFPresents_Sparkle
 	ret
 
 .done
-	; set timer for GFPresents_PlacePresents
+; set timer for GFPresents_PlacePresents
 	ld [hl], $80
 	call GFPresents_NextScene
 	ret
@@ -208,7 +208,6 @@ GFPresents_PlaceGameFreak:
 
 .game_freak
 	db $80, $81, $82, $83, $8d, $84, $85, $83, $81, $86
-.end
 	db "@"
 
 GFPresents_PlacePresents:
@@ -218,14 +217,13 @@ GFPresents_PlacePresents:
 
 	call GFPresents_NextScene
 
-	; set timer for GFPresents_WaitForTimer
+; set timer for GFPresents_WaitForTimer
 	ld a, $80
 	ld [wIntroSceneTimer], a
 	ret
 
 .presents
 	db $87, $88, $89, $8a, $8b, $8c
-.end
 	db "@"
 
 GFPresents_SetDoneFlag:
@@ -247,22 +245,22 @@ GFPresents_WaitForTimer:
 	ret
 
 GFPresents_UpdateLogoPal:
-; called from 23:5928
+; called from DoAnimFrame.GameFreakLogo
 ; OBP1 was initialized at end of GFPresents_Init
 
-	; once we reached the final state, leave it alone
+; once we reached the final state, leave it alone
 	ldh a, [rOBP1]
 	cp %10010000
 	ret z
 
-	; wait 16 frames before next change
+; wait 16 frames before next change
 	ld a, [wIntroSceneTimer]
 	and $f
 	ret nz
 
-	; rotate OBP1 by one color slot (2 bits)
-	; DMG: logo is white, then light gray, then dark gray
-	; CGB: logo is white, then yellow
+; rotate OBP1 by one color slot (2 bits)
+; DMG: logo is white, then light gray, then dark gray
+; CGB: logo is white, then yellow
 	ldh a, [rOBP1]
 	rrca
 	rrca
@@ -272,24 +270,24 @@ GFPresents_UpdateLogoPal:
 GFPresents_Sparkle:
 ; Initialize and configure a sparkle sprite.
 
-	; run only every second frame
+; run only every second frame
 	ld d, a
 	and 1
 	ret nz
 
-	; shift over so our index is still changing by 1 each time
+; shift over so our index is still changing by 1 each time
 	ld a, d
 	srl a
 
-	; set up a new sparkle sprite
+; set up a new sparkle sprite
 	push af
 	depixel 11, 11
 	ld a, SPRITE_ANIM_INDEX_GS_INTRO_SPARKLE
 	call InitSpriteAnimStruct
 	pop af
 
-	; take the bottom 4 bits of a as an index into
-	; sparkle_vectors (16 entries)
+; take the bottom 4 bits of a as an index into
+; sparkle_vectors (16 entries)
 	and %00001111
 	ld e, a
 	ld d, 0
@@ -297,29 +295,29 @@ GFPresents_Sparkle:
 	add hl, de
 	add hl, de
 
-	; set the angle and distance for this sprite
-	; bc+$b <- hl (angle), bc+$c <- 0, bc+$d <- hl+1 (distance)
+; set the angle and distance for this sprite
+; bc+$b <- hl (angle), bc+$c <- 0, bc+$d <- hl+1 (distance)
 	ld e, l
 	ld d, h
-	ld hl, $b
+	ld hl, SPRITEANIMSTRUCT_JUMPTABLE_INDEX
 	add hl, bc
 	ld a, [de]
 	ld [hl], a
 	inc de
-	ld hl, $c
+	ld hl, SPRITEANIMSTRUCT_0C
 	add hl, bc
 	ld [hl], 0
-	inc hl
+	inc hl ; SPRITEANIMSTRUCT_0D
 	ld a, [de]
 	ld [hl], a
 
 	ret
 
 .sparkle_vectors
-	; values control final position of each sparkle
-	; position is automatically animated along the vector
-	; each entry emits two sparkles in opposite directions
-	; angle (6 bits) and distance (tiles?)
+; values control final position of each sparkle
+; position is automatically animated along the vector
+; each entry emits two sparkles in opposite directions
+; angle (6 bits) and distance (tiles?)
 	db $00, $03
 	db $08, $04
 	db $04, $03
@@ -366,6 +364,7 @@ GoldSilverIntro:
 	and BUTTONS
 	jr nz, .Finish
 
+; check done flag
 	ld a, [wIntroJumptableIndex]
 	bit 7, a
 	jr nz, .Finish
@@ -1038,7 +1037,7 @@ IntroScene9:
 	add hl, de
 	ld a, [hl]
 	cp -1
-	jr z, .done
+	jr z, .next
 	call DmgToCgbBGPals
 	ld hl, hSCY
 	inc [hl]
@@ -1046,7 +1045,7 @@ IntroScene9:
 	dec [hl]
 	ret
 
-.done
+.next
 	ld hl, wIntroJumptableIndex
 	inc [hl]
 	ret
@@ -1330,15 +1329,15 @@ Intro_CheckSCYEvent:
 	jp hl
 
 .scy_jumptable
-	dbw $86, Functione53f7
+	dbw $86, Intro_LoadChikoritaPalette
 	dbw $87, Intro_ChikoritaAppears
 	dbw $88, Functione53e0
 	dbw $98, Functione53eb
-	dbw $99, Functione5400
+	dbw $99, Intro_LoadCyndaquilPalette
 	dbw $af, Intro_CyndaquilAppears
 	dbw $b0, Functione53e0
 	dbw $c0, Functione53eb
-	dbw $c1, Functione5409
+	dbw $c1, Intro_LoadTotodilePalette
 	dbw $d7, Intro_TotodileAppears
 	dbw $d8, Functione53e0
 	dbw $e8, Functione53eb
@@ -1383,19 +1382,19 @@ Functione53eb:
 	call DmgToCgbBGPals
 	ret
 
-Functione53f7:
+Intro_LoadChikoritaPalette:
 	ld c, CHIKORITA
-	farcall Function9178
+	farcall Intro_LoadMonPalette
 	ret
 
-Functione5400:
+Intro_LoadCyndaquilPalette:
 	ld c, CYNDAQUIL
-	farcall Function9178
+	farcall Intro_LoadMonPalette
 	ret
 
-Functione5409:
+Intro_LoadTotodilePalette:
 	ld c, TOTODILE
-	farcall Function9178
+	farcall Intro_LoadMonPalette
 	ret
 
 Functione5412:
@@ -1405,7 +1404,7 @@ Functione5412:
 	jr nz, .got_mon
 	ld c, CHARIZARD
 .got_mon
-	farcall Function9178
+	farcall Intro_LoadMonPalette
 	ret
 
 Functione5422:
@@ -1462,7 +1461,7 @@ endr
 	ret
 
 .data_e5464
-; vtile offset, width, height, x, y?
+; vtile offset, width, height, x, y
 	db $00, 8, 8
 	dwcoord 10, 6
 	db $40, 9, 8

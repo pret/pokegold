@@ -211,7 +211,7 @@ Unreferenced_Function915e:
 	call GetPredefPal
 	jp LoadHLPaletteIntoDE
 
-Function9178:
+Intro_LoadMonPalette:
 	call CheckCGB
 	jr nz, .cgb
 	ldh a, [hSGB]
