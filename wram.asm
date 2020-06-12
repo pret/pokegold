@@ -612,10 +612,18 @@ wc8f9:: ds 7
 NEXTU ; c700
 ; LCD expects wLYOverrides to have an alignment of $100
 wLYOverrides:: ds SCREEN_HEIGHT_PX
-wLYOverridesEnd:: ds 112
+wLYOverridesEnd::
 
+UNION ; c790
+	ds 16
+wLYOverrides2:: ds SCREEN_HEIGHT_PX
+wLYOverrides2End::
+
+NEXTU ; c790
+	ds $100 - SCREEN_HEIGHT_PX
 wLYOverridesBackup:: ds SCREEN_HEIGHT_PX
-wLYOverridesBackupEnd:: ds 112
+wLYOverridesBackupEnd:: ds $100 - SCREEN_HEIGHT_PX
+ENDU
 
 UNION ; c900
 ; blank credits tile buffer
@@ -720,7 +728,21 @@ wPlayerMoveStruct:: move_struct wPlayerMoveStruct
 wEnemyMonNick:: ds MON_NAME_LENGTH ; caf6
 wBattleMonNick:: ds MON_NAME_LENGTH ; cb01
 
+UNION ; cb0c
+; battle mon
 wBattleMon:: battle_struct wBattleMon ; cb0c
+
+NEXTU ; cb0c
+; intro water/grass/fire cutscene data
+	ds 4
+wIntroJumptableIndex:: db
+wIntroBGMapPointer:: dw
+wIntroTilemapPointer:: dw
+wIntroTilesPointer:: dw
+wIntroFrameCounter1:: db
+wIntroFrameCounter2:: db
+wcb19:: db
+ENDU ; cb2c
 
 wcb2c:: ds 1 ; cb2c
 wcb2d:: ds 1 ; cb2d
@@ -1114,7 +1136,7 @@ wce65:: db
 wce66:: db
 
 NEXTU ; ce64
-; intro and title data
+; gfpresents, title, and intro menu timers
 wIntroSceneFrameCounter:: db
 UNION ; ce65
 wIntroSceneTimer:: db

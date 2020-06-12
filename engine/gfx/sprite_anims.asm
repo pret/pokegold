@@ -20,8 +20,8 @@ DoAnimFrame:
 	dw .GSIntroBubble
 	dw .GSIntroShellder
 	dw .GSIntroMagikarp
+	dw .UnusedLapras
 	dw .GSIntroLapras
-	dw .GSIntroLapras2
 	dw .GSIntroNote
 	dw .GSIntroJigglypuff
 	dw .GSIntroPikachu
@@ -227,7 +227,7 @@ DoAnimFrame:
 	call DeinitializeSprite
 	ret
 
-.GSIntroLapras
+.UnusedLapras
 	ld hl, SPRITEANIMSTRUCT_XCOORD
 	add hl, bc
 	ld a, [hl]
@@ -251,7 +251,7 @@ DoAnimFrame:
 	call DeinitializeSprite
 	ret
 
-.GSIntroLapras2
+.GSIntroLapras
 	call .AnonymousJumptable
 	jp hl
 
@@ -309,8 +309,8 @@ DoAnimFrame:
 
 .asm_8d602
 	call DeinitializeSprite
-	ld a, $1
-	ld [wBattleMonLevel], a
+	ld a, 1
+	ld [wcb19], a
 	ret
 
 .Function8d60b
@@ -392,7 +392,7 @@ DoAnimFrame:
 	dw .Function8d680
 
 .Function8d673
-	ld a, [wBattleMonLevel]
+	ld a, [wcb19]
 	and a
 	ret z
 	call .IncrementJumptableIndex
@@ -479,7 +479,7 @@ DoAnimFrame:
 
 .asm_8d6e9
 	ld a, 1
-	ld [wBattleMonLevel], a
+	ld [wcb19], a
 	call .IncrementJumptableIndex
 	ret
 
@@ -562,7 +562,7 @@ DoAnimFrame:
 	jr z, .asm_8d761
 	dec [hl]
 	dec [hl]
-	ld a, [wBattleMonLevel]
+	ld a, [wcb19]
 	and a
 	ret nz
 	dec [hl]
@@ -997,7 +997,7 @@ ENDC
 
 .asm_8d968
 	ld a, 1
-	ld [wce64], a
+	ld [wIntroSceneFrameCounter], a
 	call DeinitializeSprite
 	ret
 

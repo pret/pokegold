@@ -7,8 +7,8 @@ SpriteAnimFrameData:
 	dw .Frameset_GSIntroBubble
 	dw .Frameset_GSIntroShellder
 	dw .Frameset_GSIntroMagikarp
+	dw .Frameset_UnusedLapras
 	dw .Frameset_GSIntroLapras
-	dw .Frameset_GSIntroLapras2
 	dw .Frameset_GSIntroNote
 	dw .Frameset_GSIntroInvisibleNote
 	dw .Frameset_GSIntroJigglypuff
@@ -98,15 +98,15 @@ SpriteAnimFrameData:
 	frame SPRITE_ANIM_OAMSET_GS_INTRO_MAGIKARP_2,  $41
 	dorestart
 
-.Frameset_GSIntroLapras:
-	frame SPRITE_ANIM_OAMSET_GS_INTRO_LAPRAS_1,  $47
+.Frameset_UnusedLapras:
+	frame SPRITE_ANIM_OAMSET_UNUSED_LAPRAS,  $47
 	endanim
 
-.Frameset_GSIntroLapras2:
+.Frameset_GSIntroLapras:
+	frame SPRITE_ANIM_OAMSET_GS_INTRO_LAPRAS_1,  7
 	frame SPRITE_ANIM_OAMSET_GS_INTRO_LAPRAS_2,  7
 	frame SPRITE_ANIM_OAMSET_GS_INTRO_LAPRAS_3,  7
-	frame SPRITE_ANIM_OAMSET_GS_INTRO_LAPRAS_4,  7
-	frame SPRITE_ANIM_OAMSET_GS_INTRO_LAPRAS_2,  7
+	frame SPRITE_ANIM_OAMSET_GS_INTRO_LAPRAS_1,  7
 	dorestart
 
 .Frameset_GSIntroNote:

@@ -254,19 +254,19 @@ INCLUDE "engine/games/slot_machine.asm"
 SECTION "bank26", ROMX
 
 IF DEF(_GOLD)
-TitleScreenGFX1::
+TitleScreenGFX1:
 INCBIN "gfx/title/logo_bottom_gold.2bpp.lz"
-TitleScreenGFX2::
+TitleScreenGFX2:
 INCBIN "gfx/title/logo_top_gold.2bpp.lz"
 
 ELIF DEF(_SILVER)
-TitleScreenGFX1::
+TitleScreenGFX1:
 INCBIN "gfx/title/logo_bottom_silver.2bpp.lz"
-TitleScreenGFX2::
+TitleScreenGFX2:
 INCBIN "gfx/title/logo_top_silver.2bpp.lz"
 ENDC
 
-TitleScreenTilemap::
+TitleScreenTilemap:
 INCBIN "gfx/title/logo.tilemap"
 
 
@@ -330,32 +330,20 @@ CopyrightGFX::
 INCBIN "gfx/intro/copyright.2bpp"
 
 IF DEF(_GOLD)
-TitleScreenGFX3::
-	dr $e41e0, $e4260
-TitleScreenGFX4::
-	dr $e4260, $e4608
-_OptionsMenu::
-	dr $e4608, $e49a8
+TitleScreenGFX3:
+INCBIN "gfx/title/title_trail_gold.2bpp"
+TitleScreenGFX4:
+INCBIN "gfx/title/hooh_gold.2bpp.lz"
 
 ELIF DEF(_SILVER)
-TitleScreenGFX3::
-	dr $e41e0, $e4220
-TitleScreenGFX4::
-	dr $e4220, $e4450
-_OptionsMenu::
-	dr $e4450, $e47f0
+TitleScreenGFX3:
+INCBIN "gfx/title/title_trail_silver.2bpp"
+TitleScreenGFX4:
+INCBIN "gfx/title/lugia_silver.2bpp.lz"
 ENDC
 
-INCLUDE "engine/movie/gamefreak_presents.asm"
-
-IF DEF(_GOLD)
-GoldSilverIntro::
-	dr $e4cb1, $e7678
-
-ELIF DEF(_SILVER)
-GoldSilverIntro::
-	dr $e4af9, $e74c0
-ENDC
+INCLUDE "engine/menus/options_menu.asm"
+INCLUDE "engine/movie/gold_silver_intro.asm"
 
 
 SECTION "bank3E", ROMX

@@ -9,10 +9,10 @@ SpriteAnimOAMData:
 	dbw $6e, .OAMData_GSIntroShellder          ; SPRITE_ANIM_OAMSET_GS_INTRO_SHELLDER_2
 	dbw $2d, .OAMData_GSIntroMagikarp          ; SPRITE_ANIM_OAMSET_GS_INTRO_MAGIKARP_1
 	dbw $4d, .OAMData_GSIntroMagikarp          ; SPRITE_ANIM_OAMSET_GS_INTRO_MAGIKARP_2
- 	dbw $60, .OAMData_GSIntroLapras1           ; SPRITE_ANIM_OAMSET_GS_INTRO_LAPRAS_1
+ 	dbw $60, .OAMData_UnusedLapras             ; SPRITE_ANIM_OAMSET_UNUSED_LAPRAS
+ 	dbw $00, .OAMData_GSIntroLapras1           ; SPRITE_ANIM_OAMSET_GS_INTRO_LAPRAS_1
  	dbw $00, .OAMData_GSIntroLapras2           ; SPRITE_ANIM_OAMSET_GS_INTRO_LAPRAS_2
- 	dbw $00, .OAMData_GSIntroLapras3           ; SPRITE_ANIM_OAMSET_GS_INTRO_LAPRAS_3
-	dbw $06, .OAMData_GSIntroLapras4           ; SPRITE_ANIM_OAMSET_GS_INTRO_LAPRAS_4
+	dbw $06, .OAMData_GSIntroLapras3           ; SPRITE_ANIM_OAMSET_GS_INTRO_LAPRAS_3
 	dbw $0c, .OAMData_GSIntroNote              ; SPRITE_ANIM_OAMSET_GS_INTRO_NOTE
 	dbw $0d, .OAMData_1x1_Palette0             ; SPRITE_ANIM_OAMSET_GS_INTRO_INVISIBLE_NOTE
 	dbw $00, .OAMData_GSIntroJigglypuffPikachu ; SPRITE_ANIM_OAMSET_GS_INTRO_JIGGLYPUFF_1
@@ -355,7 +355,7 @@ ENDC
 	dbsprite -1,  0,  4,  0, $11, 1
 	dbsprite  0,  0,  4,  0, $12, 1
 
-.OAMData_GSIntroLapras1:
+.OAMData_UnusedLapras:
 	db 10
 	dbsprite -2, -2,  0,  4, $00, 0
 	dbsprite -1, -2,  0,  4, $01, 0
@@ -368,7 +368,7 @@ ENDC
 	dbsprite -1,  0,  0,  4, $09, 0
 	dbsprite  0,  0,  0,  4, $0a, 0
 
-.OAMData_GSIntroLapras2:
+.OAMData_GSIntroLapras1:
 	db 27
 	dbsprite -3, -3,  0,  0, $00, 0
 	dbsprite -2, -3,  0,  0, $01, 0
@@ -398,7 +398,7 @@ ENDC
 	dbsprite  1,  2,  0,  0, $54, 0 | PRIORITY
 	dbsprite  2,  2,  0,  0, $55, 0 | PRIORITY
 
-.OAMData_GSIntroLapras3:
+.OAMData_GSIntroLapras2:
 	db 27
 	dbsprite -3, -3,  0,  0, $0d, 0
 	dbsprite -2, -3,  0,  0, $0e, 0
@@ -428,7 +428,7 @@ ENDC
 	dbsprite  1,  2,  0,  0, $54, 0 | PRIORITY
 	dbsprite  2,  2,  0,  0, $55, 0 | PRIORITY
 
-.OAMData_GSIntroLapras4:
+.OAMData_GSIntroLapras3:
 	db 29
 	dbsprite -3, -3,  0,  0, $00, 0
 	dbsprite -2, -3,  0,  0, $01, 0

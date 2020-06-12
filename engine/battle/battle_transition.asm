@@ -84,7 +84,7 @@ ConvertTrainerBattlePokeballTilesTo2bpp:
 	jr nz, .loop
 
 	ld de, wDecompressScratch
-	ld hl, vBGMap2
+	hlbgcoord 0, 0, vBGMap2
 	ld b, BANK(@)
 	ld c, $28
 	call Request2bpp

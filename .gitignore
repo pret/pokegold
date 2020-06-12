@@ -66,6 +66,7 @@ gfx/pokedex/question_mark.2bpp
 gfx/tilesets/*.2bpp
 gfx/battle_anims/*.2bpp
 gfx/title/*.2bpp
+!gfx/title/title_trail_*.2bpp
 gfx/card_flip/card_flip_*.2bpp
 gfx/diploma/diploma.2bpp
 gfx/dummy_game/dummy_game.2bpp
@@ -75,3 +76,4 @@ gfx/unown_puzzle/hooh.2bpp
 gfx/unown_puzzle/kabuto.2bpp
 gfx/unown_puzzle/omanyte.2bpp
 gfx/unown_puzzle/start_cancel.2bpp
+gfx/intro/*.2bpp

@@ -2,10 +2,6 @@
 
 These instructions explain how to set up the tools required to build **pokegold**, including [**rgbds**](https://github.com/rednex/rgbds), which assembles the source files into a ROM.
 
-Currently building requires that you provide a base ROM for both versions. You can find the sha1 for each version in [README.md](README.md) to confirm you have the right one.
-
-You will need to rename the Gold ROM to **baserom-gold.gbc** and the Silver ROM to **baserom-silver.gbc** in order to build either version.
-
 If you run into trouble, ask for help on IRC or Discord (see [README.md](README.md)).
 
 ## Windows 10
