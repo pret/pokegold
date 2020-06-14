@@ -249,7 +249,7 @@ Unreferenced_Function92d7a:
 
 Unreferenced_Function92d95:
 ; animate OAM tiles?
-	ld hl, wSlotsCE66
+	ld hl, wce66
 	ld a, [hl]
 	inc [hl]
 	and $7

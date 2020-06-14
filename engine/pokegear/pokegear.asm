@@ -92,7 +92,7 @@ PokeGear:
 	ld [wJumptableIndex], a ; POKEGEARSTATE_CLOCKINIT
 	ld [wPokegearCard], a ; POKEGEARCARD_CLOCK
 	ld [wPokegearMapRegion], a ; JOHTO_REGION
-	ld [wPokegearCE66], a
+	ld [wce66], a
 	ld [wPokegearPhoneScrollPosition], a
 	ld [wPokegearPhoneCursorPosition], a
 	ld [wPokegearPhoneSelectedPerson], a

@@ -744,14 +744,13 @@ wIntroFrameCounter2:: db
 wcb19:: db
 ENDU ; cb2c
 
-wcb2c:: ds 1 ; cb2c
-wcb2d:: ds 1 ; cb2d
+	ds 2
+
 wEnemyTrainerItem1:: db ; cb2e
 wEnemyTrainerItem2:: db ; cb2f
 wEnemyTrainerBaseReward:: db ; cb30
-wcb31:: ds 1 ; cb31
-wcb32:: ds 1 ; cb32
-wcb33:: ds 1 ; cb33
+
+	ds 3
 
 wOTClassName:: ds TRAINER_CLASS_NAME_LENGTH ; cb34
 
@@ -1160,7 +1159,6 @@ NEXTU ; ce64
 ; pokegear
 wPokegearCard:: db
 wPokegearMapRegion:: db
-wPokegearCE66:: db
 
 NEXTU ; ce64
 ; pack
@@ -1201,9 +1199,6 @@ wHallOfFameMonCounter::
 wSlotsDelay::
 	db
 wPrinterQueueLength:: db
-wSlotsCE66::
-wPokedexCE66::
-	db
 ENDU ; ce67
 
 wRequested2bpp::
@@ -1221,18 +1216,7 @@ wMinutesSince:: db ; ce72
 wHoursSince:: db ; ce73
 wDaysSince:: db ; ce74
 
-wce75:: ds 1 ; ce75
-wce76:: ds 1 ; ce76
-wce77:: ds 1 ; ce77
-wce78:: ds 1 ; ce78
-wce79:: ds 1 ; ce79
-wce7a:: ds 1 ; ce7a
-wce7b:: ds 1 ; ce7b
-wce7c:: ds 1 ; ce7c
-wce7d:: ds 1 ; ce7d
-wce7e:: ds 1 ; ce7e
-wce7f:: ds 1 ; ce7f
-wce80:: ds 1 ; ce80
+	ds 12
 
 wPlayerBGMapOffsetX:: db ; used in FollowNotExact; unit is pixels
 wPlayerBGMapOffsetY:: db ; used in FollowNotExact; unit is pixels
@@ -1244,15 +1228,16 @@ wPlayerStepDirection:: db ; ce86
 
 wPlayerNextMovement:: db ; ce87
 wPlayerMovement:: db ; ce88
-wce89:: ds 1 ; ce89
-wce8a:: ds 1 ; ce8a
+
+	ds 2
+
 wMovementObject:: db ; ce8b
 wMovementDataBank:: db ; ce8c
 wMovementDataAddress:: dw ; ce8d
-wce8f:: ds 1 ; ce8f
-wce90:: ds 1 ; ce90
-wce91:: ds 1 ; ce91
-wce92:: ds 1 ; ce92
+wce8f:: db ; ce8f
+
+	ds 3
+
 wMovementByteWasControlSwitch:: db ; ce93
 wMovementPointer:: dw ; ce94
 
@@ -1484,34 +1469,16 @@ wceed:: db
 wceee:: db
 wceef:: db
 
-	ds 1
-wcef1:: ds 2
-wcef3:: ds 2
-	ds 2
-wcef7:: ds 1
+	ds 8
+
 wcef8:: ds 1
 	ds 1
 wcefa:: ds 1
-wcefb:: ds 1
+	ds 1
 wcefc:: ds 1
 wcefd:: ds 1
-wcefe:: ds 1
-wceff:: ds 2
-	ds 1
-wcf02:: ds 1
-wcf03:: ds 1
-wcf04:: ds 1
-	ds 19
-wcf18:: ds 1
-wcf19:: ds 1
-wcf1a:: ds 1
-wcf1b:: ds 1
-wcf1c:: ds 1
-wcf1d:: ds 1
-wcf1e:: ds 1
-wcf1f:: ds 2
-wcf21:: ds 2
-	ds 6
+
+	ds 43
 
 UNION ; cf29
 ; trainer data
@@ -1720,7 +1687,9 @@ wBattleResult:: ; cfe9
 ; WIN, LOSE, or DRAW
 ; bit 7: box full
 	db
-wcfea:: ds 1 ; cfea
+
+	ds 1
+
 wUsingItemWithSelect:: db ; cfeb
 
 UNION ; cfec
@@ -2365,7 +2334,7 @@ wMountMoonSquareSceneID::                         db ; d6f1
 
 wEventFlags:: flag_array NUM_EVENTS ; d7b7
 
-	ds 6
+	ds 14
 
 wd8b7:: db
 
