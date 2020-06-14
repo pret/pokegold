@@ -38,20 +38,17 @@ RGBFIX  ?= $(RGBDS)rgbfix
 RGBGFX  ?= $(RGBDS)rgbgfx
 RGBLINK ?= $(RGBDS)rgblink
 
-PYTHON := python
-gfx := $(PYTHON) tools/gfx.py
-
 
 ### Build targets
 
 .SUFFIXES:
-.PHONY: all gold silver clean tidy pngs compare tools
+.PHONY: all gold silver clean tidy compare tools
 .SECONDEXPANSION:
 .PRECIOUS:
 .SECONDARY:
 
 all: $(roms)
-gold: pokegold.gbc
+gold:   pokegold.gbc
 silver: pokesilver.gbc
 
 clean:
@@ -110,11 +107,11 @@ endif
 
 pokegold.gbc: $(gold_obj) layout.link
 	$(RGBLINK) -n pokegold.sym -m pokegold.map -l layout.link -o $@ $(gold_obj)
-	$(RGBFIX) -cjsv -i AAUE -k 01 -l 0x33 -m 0x10 -p 0 -r 3 -t "POKEMON_GLD" $@
+	$(RGBFIX) -cjsv -t POKEMON_GLD -i AAUE -k 01 -l 0x33 -m 0x10 -r 3 -p 0 $@
 
 pokesilver.gbc: $(silver_obj) layout.link
 	$(RGBLINK) -n pokesilver.sym -m pokesilver.map -l layout.link -o $@ $(silver_obj)
-	$(RGBFIX) -cjsv -i AAXE -k 01 -l 0x33 -m 0x10 -p 0 -r 3 -t "POKEMON_SLV" $@
+	$(RGBFIX) -cjsv -t POKEMON_SLV -i AAXE -k 01 -l 0x33 -m 0x10 -r 3 -p 0 $@
 
 
 ### LZ compression rules
@@ -135,6 +132,16 @@ gfx/pokemon/%/front_silver.2bpp: rgbgfx += -h
 gfx/pokemon/%/back.2bpp: rgbgfx += -h
 gfx/pokemon/%/back_gold.2bpp: rgbgfx += -h
 gfx/pokemon/%/back_silver.2bpp: rgbgfx += -h
+
+gfx/pokemon/%/back_gold.2bpp: gfx/pokemon/%/back.png
+	$(RGBGFX) $(rgbgfx) -o $@ $<
+	$(if $(tools/gfx),\
+		tools/gfx $(tools/gfx) -o $@ $@)
+
+gfx/pokemon/%/back_silver.2bpp: gfx/pokemon/%/back.png
+	$(RGBGFX) $(rgbgfx) -o $@ $<
+	$(if $(tools/gfx),\
+		tools/gfx $(tools/gfx) -o $@ $@)
 
 gfx/trainers/%.2bpp: rgbgfx += -h
 
@@ -205,16 +212,6 @@ gfx/sgb/silver_border.2bpp: tools/gfx += --trim-whitespace
 
 ### Catch-all graphics rules
 
-gfx/pokemon/%/back_gold.2bpp: gfx/pokemon/%/back.png
-	$(RGBGFX) $(rgbgfx) -o $@ $<
-	$(if $(tools/gfx),\
-		tools/gfx $(tools/gfx) -o $@ $@)
-
-gfx/pokemon/%/back_silver.2bpp: gfx/pokemon/%/back.png
-	$(RGBGFX) $(rgbgfx) -o $@ $<
-	$(if $(tools/gfx),\
-		tools/gfx $(tools/gfx) -o $@ $@)
-
 %.2bpp: %.png
 	$(RGBGFX) $(rgbgfx) -o $@ $<
 	$(if $(tools/gfx),\
@@ -224,9 +221,3 @@ gfx/pokemon/%/back_silver.2bpp: gfx/pokemon/%/back.png
 	$(RGBGFX) $(rgbgfx) -d1 -o $@ $<
 	$(if $(tools/gfx),\
 		tools/gfx $(tools/gfx) -d1 -o $@ $@)
-
-pngs:
-	find gfx -iname "*.lz"      -exec $(gfx) unlz {} +
-	find gfx -iname "*.[12]bpp" -exec $(gfx) png  {} +
-	find gfx -iname "*.[12]bpp" -exec touch {} +
-	find gfx -iname "*.lz"      -exec touch {} +

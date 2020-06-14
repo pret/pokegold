@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 """
-Usage: python3 used_space.py [pokecrystal.map] [used_space.png]
+Usage: python3 used_space.py [pokegold.map] [used_space.png]
 
 Generate a PNG visualizing the space used by each bank in the ROM.
 """

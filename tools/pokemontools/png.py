@@ -646,9 +646,9 @@ class Writer:
 
         # http://www.w3.org/TR/PNG/#11IHDR
         write_chunk(outfile, b'IHDR',
-                    struct.pack("!2I5B", int(self.width), int(self.height),
-                                self.bitdepth, int(self.color_type),
-                                0, 0, int(self.interlace)))
+                    struct.pack("!2I5B", self.width, self.height,
+                                self.bitdepth, self.color_type,
+                                0, 0, self.interlace))
 
         # See :chunk:order
         # http://www.w3.org/TR/PNG/#11gAMA

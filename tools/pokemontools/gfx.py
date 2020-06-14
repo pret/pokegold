@@ -2,20 +2,19 @@
 
 import os
 import sys
-import io
-from . import png
+import png
 from math import sqrt, floor, ceil
 import argparse
 import operator
 
-from .lz import Compressed, Decompressed
+from lz import Compressed, Decompressed
 
 
 def split(list_, interval):
     """
     Split a list by length.
     """
-    for i in range(0, len(list_), interval):
+    for i in xrange(0, len(list_), interval):
         j = min(i + interval, len(list_))
         yield list_[i:j]
 
@@ -67,7 +66,7 @@ def transpose(tiles, width=None):
     """
     if width == None:
         width = int(sqrt(len(tiles))) # assume square image
-    tiles = sorted(enumerate(tiles), key= lambda i_tile: i_tile[0] % width)
+    tiles = sorted(enumerate(tiles), key= lambda (i, tile): i % width)
     return [tile for i, tile in tiles]
 
 def transpose_tiles(image, width=None):
@@ -90,7 +89,7 @@ def interleave(tiles, width):
 
 def deinterleave(tiles, width):
     """
-      00 02 04 06 08 0a     00 01 02 03 04 05
+      00 02 04 06 08 0a     00 01 02 03 04 05 
       01 03 05 07 09 0b     06 07 08 09 0a 0b
       0c 0e 10 12 14 16 --> 0c 0d 0e 0f 10 11
       0d 0f 11 13 15 17     12 13 14 15 16 17
@@ -171,16 +170,16 @@ def test_condense_tiles_to_map():
 
 def to_file(filename, data):
     """
-    Apparently io.open(filename, 'wb').write(bytearray(data)) won't work.
+    Apparently open(filename, 'wb').write(bytearray(data)) won't work.
     """
-    file = io.open(filename, 'wb')
+    file = open(filename, 'wb')
     for byte in data:
         file.write('%c' % byte)
     file.close()
 
 
 def decompress_file(filein, fileout=None):
-    image = bytearray(io.open(filein).read())
+    image = bytearray(open(filein).read())
     de = Decompressed(image)
 
     if fileout == None:
@@ -189,7 +188,7 @@ def decompress_file(filein, fileout=None):
 
 
 def compress_file(filein, fileout=None):
-    image = bytearray(io.open(filein).read())
+    image = bytearray(open(filein).read())
     lz = Compressed(image)
 
     if fileout == None:
@@ -206,7 +205,7 @@ def bin_to_rgb(word):
     return (red, green, blue)
 
 def convert_binary_pal_to_text_by_filename(filename):
-    pal = bytearray(io.open(filename).read())
+    pal = bytearray(open(filename).read())
     return convert_binary_pal_to_text(pal)
 
 def convert_binary_pal_to_text(pal):
@@ -232,7 +231,7 @@ def read_rgb_macros(lines):
 def rewrite_binary_pals_to_text(filenames):
     for filename in filenames:
         pal_text = convert_binary_pal_to_text_by_filename(filename)
-        with io.open(filename, 'w') as out:
+        with open(filename, 'w') as out:
             out.write(pal_text)
 
 
@@ -245,7 +244,7 @@ def flatten(planar):
         bottom = bottom
         top = top
         strip = []
-        for i in range(7,-1,-1):
+        for i in xrange(7,-1,-1):
             color = (
                 (bottom >> i & 1) +
                 (top *2 >> i & 2)
@@ -260,14 +259,14 @@ def to_lines(image, width):
     """
     tile_width = 8
     tile_height = 8
-    num_columns = width // tile_width
-    height = len(image) // width
+    num_columns = width / tile_width
+    height = len(image) / width
 
     lines = []
-    for cur_line in range(height):
-        tile_row = cur_line // tile_height
+    for cur_line in xrange(height):
+        tile_row = cur_line / tile_height
         line = []
-        for column in range(num_columns):
+        for column in xrange(num_columns):
             anchor = (
                 num_columns * tile_row * tile_width * tile_height +
                 column * tile_width * tile_height +
@@ -288,7 +287,7 @@ def dmg2rgb(word):
             value >>= 5
     word = shift(word)
     # distribution is less even w/ << 3
-    red, green, blue = [int(color * 8.25) for color in [word.next() for _ in range(3)]]
+    red, green, blue = [int(color * 8.25) for color in [word.next() for _ in xrange(3)]]
     alpha = 255
     return (red, green, blue, alpha)
 
@@ -307,7 +306,7 @@ def pal_to_png(filename):
     """
     Interpret a .pal file as a png palette.
     """
-    with io.open(filename) as rgbs:
+    with open(filename) as rgbs:
         colors = read_rgb_macros(rgbs.readlines())
     a = 255
     palette = []
@@ -381,7 +380,7 @@ def export_2bpp_to_png(filein, fileout=None, pal_file=None, height=0, width=0, t
     if fileout == None:
         fileout = os.path.splitext(filein)[0] + '.png'
 
-    image = io.open(filein, 'rb').read()
+    image = open(filein, 'rb').read()
 
     arguments = {
         'width': width,
@@ -389,14 +388,12 @@ def export_2bpp_to_png(filein, fileout=None, pal_file=None, height=0, width=0, t
         'pal_file': pal_file,
         'tile_padding': tile_padding,
         'pic_dimensions': pic_dimensions,
-        'pad_indices': kwargs.get('pad_indices', None),
-        'rows': kwargs.get('rows', None)
     }
     arguments.update(read_filename_arguments(filein))
 
-    #if pal_file == None:
-    #    if os.path.exists(os.path.splitext(fileout)[0]+'.pal'):
-    #        arguments['pal_file'] = os.path.splitext(fileout)[0]+'.pal'
+    if pal_file == None:
+        if os.path.exists(os.path.splitext(fileout)[0]+'.pal'):
+            arguments['pal_file'] = os.path.splitext(fileout)[0]+'.pal'
 
     result = convert_2bpp_to_png(image, **arguments)
     width, height, palette, greyscale, bitdepth, px_map = result
@@ -409,7 +406,7 @@ def export_2bpp_to_png(filein, fileout=None, pal_file=None, height=0, width=0, t
         greyscale=greyscale,
         bitdepth=bitdepth
     )
-    with io.open(fileout, 'wb') as f:
+    with open(fileout, 'wb') as f:
         w.write(f, px_map)
 
 
@@ -428,12 +425,10 @@ def convert_2bpp_to_png(image, **kwargs):
     pic_dimensions = kwargs.get('pic_dimensions', None)
     pal_file       = kwargs.get('pal_file', None)
     interleave     = kwargs.get('interleave', False)
-    pad_indices    = kwargs.get('pad_indices', None)
-    rows           = kwargs.get('rows', None)
 
     # Width must be specified to interleave.
     if interleave and width:
-        image = interleave_tiles(image, width // 8)
+        image = interleave_tiles(image, width / 8)
 
     # Pad the image by a given number of tiles if asked.
     image += pad_color * 0x10 * tile_padding
@@ -448,66 +443,34 @@ def convert_2bpp_to_png(image, **kwargs):
         trailing = len(image) % pic_length
 
         pic = []
-        for i in range(0, len(image) - trailing, pic_length):
+        for i in xrange(0, len(image) - trailing, pic_length):
             pic += transpose_tiles(image[i:i+pic_length], h)
         image = bytearray(pic) + image[len(image) - trailing:]
 
         # Pad out trailing lines.
-        image += pad_color * 0x10 * ((w - (len(image) // 0x10) % h) % w)
+        image += pad_color * 0x10 * ((w - (len(image) / 0x10) % h) % w)
 
     def px_length(img):
         return len(img) * 4
     def tile_length(img):
-        return len(img) * 4 // (8*8)
+        return len(img) * 4 / (8*8)
 
     if width and height:
-        tile_width = width // 8
+        tile_width = width / 8
         more_tile_padding = (tile_width - (tile_length(image) % tile_width or tile_width))
         image += pad_color * 0x10 * more_tile_padding
-
-    # Manually define at which tile indices padding tiles should be inserted
-    elif width and pad_indices:
-        padding = pad_color * 0x10
-        cur_offset = 0
-        cur_idx = 0
-        for idx in pad_indices:
-            next_offset = cur_offset + 0x10 * (idx - cur_idx)
-            image = image[cur_offset:next_offset] + padding + image[next_offset:]
-            cur_offset = next_offset + 0x10
-            cur_idx = idx
-
-    # Define width in pixels, and an array of (left_offset, tile_width) pairs
-    elif width and rows:
-        newimage = bytearray([])
-        padding = pad_color * 0x10
-        height = len(rows) * 8
-        cur_index = 0
-        for left_offset, tile_width in rows:
-            # add padding if the row is offset from the leftmost tile
-            newimage += padding * left_offset
-
-            # add number of tiles to place horizontally, from base image
-            next_index = min(len(image), cur_index + 0x10 * tile_width)
-            newimage += image[cur_index:next_index]
-            cur_index = next_index
-
-            # add padding if there are more tiles in the row
-            right_offset = max(0, width//8 - left_offset - tile_width)
-            newimage += padding * right_offset
-
-        image = newimage
 
     elif width and not height:
-        tile_width = width // 8
+        tile_width = width / 8
         more_tile_padding = (tile_width - (tile_length(image) % tile_width or tile_width))
         image += pad_color * 0x10 * more_tile_padding
-        height = px_length(image) // width
+        height = px_length(image) / width
 
     elif height and not width:
-        tile_height = height // 8
+        tile_height = height / 8
         more_tile_padding = (tile_height - (tile_length(image) % tile_height or tile_height))
         image += pad_color * 0x10 * more_tile_padding
-        width = px_length(image) // height
+        width = px_length(image) / height
 
     # at least one dimension should be given
     if width * height != px_length(image):
@@ -515,15 +478,15 @@ def convert_2bpp_to_png(image, **kwargs):
         matches = []
         # Height need not be divisible by 8, but width must.
         # See pokered gfx/minimize_pic.1bpp.
-        for w in range(8, px_length(image) // 2 + 1, 8):
-            h = px_length(image) // w
+        for w in range(8, px_length(image) / 2 + 1, 8):
+            h = px_length(image) / w
             if w * h == px_length(image):
                 matches += [(w, h)]
         # go for the most square image
         if len(matches):
-            width, height = sorted(matches, key=lambda w_h: (w_h[1] % 8 != 0, w_h[1] + w_h[0]))[0] # favor height
+            width, height = sorted(matches, key= lambda (w, h): (h % 8 != 0, w + h))[0] # favor height
         else:
-            raise Exception('Image can\'t be divided into tiles ({} px)!'.format(px_length(image)))
+            raise Exception, 'Image can\'t be divided into tiles (%d px)!' % (px_length(image))
 
     # convert tiles to lines
     lines = to_lines(flatten(image), width)
@@ -554,7 +517,7 @@ def get_pic_animation(tmap, w, h):
     base = frames.pop(0)
     bitmasks = []
 
-    for i in range(len(frames)):
+    for i in xrange(len(frames)):
         frame_text += '\tdw .frame{}\n'.format(i + 1)
 
     for i, frame in enumerate(frames):
@@ -606,7 +569,7 @@ def export_png_to_2bpp(filein, fileout=None, palout=None, **kwargs):
         frame_text, bitmask_text = get_pic_animation(tmap, *arguments['pic_dimensions'])
 
         frames_path = os.path.join(os.path.split(fileout)[0], 'frames.asm')
-        with io.open(frames_path, 'w') as out:
+        with open(frames_path, 'w') as out:
             out.write(frame_text)
 
         bitmask_path = os.path.join(os.path.split(fileout)[0], 'bitmask.asm')
@@ -618,7 +581,7 @@ def export_png_to_2bpp(filein, fileout=None, palout=None, **kwargs):
                 bitmasks[-1] = bitmasks[-1].replace('1', '0')
                 bitmask_text = ';'.join(bitmasks)
 
-        with io.open(bitmask_path, 'w') as out:
+        with open(bitmask_path, 'w') as out:
             out.write(bitmask_text)
 
     elif tmap != None and arguments.get('tilemap', False):
@@ -668,9 +631,9 @@ def png_to_2bpp(filein, **kwargs):
     arguments.update(kwargs)
 
     if type(filein) is str:
-        filein = io.open(filein)
+        filein = open(filein)
 
-    assert hasattr(filein, 'read')
+    assert type(filein) is file
 
     width, height, rgba, info = png.Reader(filein).asRGBA8()
 
@@ -680,16 +643,16 @@ def png_to_2bpp(filein, **kwargs):
     palette = []
     for line in rgba:
         newline = []
-        for px in range(0, len(line), len_px):
+        for px in xrange(0, len(line), len_px):
             color = dict(zip('rgba', line[px:px+len_px]))
             if color not in palette:
                 if len(palette) < 4:
                     palette += [color]
                 else:
                     # TODO Find the nearest match
-                    print('WARNING: %s: Color %s truncated to' % (filein, color))
+                    print 'WARNING: %s: Color %s truncated to' % (filein, color),
                     color = sorted(palette, key=lambda x: sum(x.values()))[0]
-                    print(color)
+                    print color
             newline += [color]
         image += [newline]
 
@@ -736,11 +699,11 @@ def png_to_2bpp(filein, **kwargs):
     num_rows = max(height, tile_height) / tile_height
     image = []
 
-    for row in range(num_rows):
-        for column in range(num_columns):
+    for row in xrange(num_rows):
+        for column in xrange(num_columns):
 
             # Split it up into strips to convert to planar data
-            for strip in range(min(tile_height, height)):
+            for strip in xrange(min(tile_height, height)):
                 anchor = (
                     row * num_columns * tile_width * tile_height +
                     column * tile_width +
@@ -766,13 +729,13 @@ def png_to_2bpp(filein, **kwargs):
 
         tiles = get_tiles(image)
         pic_length = w * h
-        tile_width = width // 8
+        tile_width = width / 8
         trailing = len(tiles) % pic_length
         new_image = []
-        for block in range(len(tiles) // pic_length):
-            offset = (h * tile_width) * ((block * w) // tile_width) + ((block * w) % tile_width)
+        for block in xrange(len(tiles) / pic_length):
+            offset = (h * tile_width) * ((block * w) / tile_width) + ((block * w) % tile_width)
             pic = []
-            for row in range(h):
+            for row in xrange(h):
                 index = offset + (row * tile_width)
                 pic += tiles[index:index + w]
             new_image += transpose(pic, w)
@@ -807,7 +770,7 @@ def export_palette(palette, filename):
     if os.path.exists(filename):
 
         # Pic palettes are 2 colors (black/white are added later).
-        with io.open(filename) as rgbs:
+        with open(filename) as rgbs:
             colors = read_rgb_macros(rgbs.readlines())
 
         if len(colors) == 2:
@@ -823,7 +786,7 @@ def png_to_lz(filein):
     name = os.path.splitext(filein)[0]
 
     export_png_to_2bpp(filein)
-    image = io.open(name+'.2bpp', 'rb').read()
+    image = open(name+'.2bpp', 'rb').read()
     to_file(name+'.2bpp'+'.lz', Compressed(image).output)
 
 
@@ -845,33 +808,32 @@ def convert_1bpp_to_2bpp(data):
 
 def export_2bpp_to_1bpp(filename):
     name, extension = os.path.splitext(filename)
-    image = io.open(filename, 'rb').read()
+    image = open(filename, 'rb').read()
     image = convert_2bpp_to_1bpp(image)
     to_file(name + '.1bpp', image)
 
 def export_1bpp_to_2bpp(filename):
     name, extension = os.path.splitext(filename)
-    image = io.open(filename, 'rb').read()
+    image = open(filename, 'rb').read()
     image = convert_1bpp_to_2bpp(image)
     to_file(name + '.2bpp', image)
 
 
-def export_1bpp_to_png(filename, fileout=None, **arguments):
+def export_1bpp_to_png(filename, fileout=None):
 
     if fileout == None:
         fileout = os.path.splitext(filename)[0] + '.png'
 
-    if arguments is None :
-        arguments = read_filename_arguments(filename)
+    arguments = read_filename_arguments(filename)
 
-    image = io.open(filename, 'rb').read()
+    image = open(filename, 'rb').read()
     image = convert_1bpp_to_2bpp(image)
 
     result = convert_2bpp_to_png(image, **arguments)
     width, height, palette, greyscale, bitdepth, px_map = result
 
     w = png.Writer(width, height, palette=palette, compression=9, greyscale=greyscale, bitdepth=bitdepth)
-    with io.open(fileout, 'wb') as f:
+    with open(fileout, 'wb') as f:
         w.write(f, px_map)
 
 
@@ -900,7 +862,7 @@ def convert_to_2bpp(filenames=[]):
         elif extension == '.png':
             export_png_to_2bpp(filename)
         else:
-            raise Exception("Don't know how to convert {} to 2bpp!".format(filename))
+            raise Exception, "Don't know how to convert {} to 2bpp!".format(filename)
 
 def convert_to_1bpp(filenames=[]):
     for filename in filenames:
@@ -912,7 +874,7 @@ def convert_to_1bpp(filenames=[]):
         elif extension == '.png':
             export_png_to_1bpp(filename)
         else:
-            raise Exception("Don't know how to convert {} to 1bpp!".format(filename))
+            raise Exception, "Don't know how to convert {} to 1bpp!".format(filename)
 
 def convert_to_png(filenames=[]):
     for filename in filenames:
@@ -924,18 +886,18 @@ def convert_to_png(filenames=[]):
         elif extension == '.png':
             pass
         else:
-            raise Exception("Don't know how to convert {} to png!".format(filename))
+            raise Exception, "Don't know how to convert {} to png!".format(filename)
 
 def compress(filenames=[]):
     for filename in filenames:
-        data = io.open(filename, 'rb').read()
+        data = open(filename, 'rb').read()
         lz_data = Compressed(data).output
         to_file(filename + '.lz', lz_data)
 
 def decompress(filenames=[]):
     for filename in filenames:
         name, extension = os.path.splitext(filename)
-        lz_data = io.open(filename, 'rb').read()
+        lz_data = open(filename, 'rb').read()
         data = Decompressed(lz_data).output
         to_file(name, data)
 
@@ -968,7 +930,7 @@ def main():
     }.get(args.mode, None)
 
     if method == None:
-        raise Exception("Unknown conversion method!")
+        raise Exception, "Unknown conversion method!"
 
     method(args.filenames)
 

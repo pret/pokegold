@@ -1,6 +1,9 @@
+#!/usr/bin/env python2
+# -*- coding: utf-8 -*-
+
 """Supplementary scripts for graphics conversion."""
 
-import os, re
+import os
 import argparse
 
 from pokemontools import gfx, lz
@@ -28,42 +31,109 @@ base_stats = None
 def get_base_stats():
     global base_stats
     if not base_stats:
-        base_stats = recursive_read('data/pokemon/base_stats.asm')
+        base_stats = recursive_read('data/base_stats.asm')
     return base_stats
 
-def get_pokemon_dimensions(name):
+def get_pokemon_dimensions(path):
     try:
-        if name == 'egg':
-            return 5, 5
-        if name == 'questionmark':
-            return 7, 7
-        if name.startswith('unown_'):
-            name = 'unown'
-        base_stats = get_base_stats()
-        # hack for pidgeot/mew (previously caught by being substrings of pidgeotto/mewtwo)
-        pattern = re.compile('\s+db {0}\s+'.format(name.upper()))
-        start = pattern.search(base_stats).start()
-        start = base_stats.find('\tdn ', start)
-        end = base_stats.find('\n', start)
-        line = base_stats[start:end].replace(',', ' ')
-        w, h = map(int, line.split()[1:3])
-        return w, h
+        byte = bytearray(open(path, 'rb').read())[0]
+        width = byte & 0xf
+        height = (byte >> 8) & 0xf
+        return width, height
     except:
-        return 7, 7
+        return None
 
-mail_px8 =  ['eon_mail_border_2', 'grass', 'lovely_mail_border', 'lovely_mail_underline',
-             'morph_mail_border', 'morph_mail_divider', 'portrail_mail_border',
-             'portraitmail_border', 'portraitmail_underline', 'small_heart', 'small_note',
-             'small_pokeball', 'small_triangle', 'wave']
-mail_px16 = ['eon_mail_border_1', 'flower_1', 'flower_2', 'large_circle', 'large_heart',
-             'large_pokeball', 'large_triangle', 'morph_mail_corner','music_mail_border', 'oddish',
-             'sentret', 'unused_grass']
-mail_px24 = ['cloud', 'ditto', 'dratini', 'eevee', 'lapras', 'mew', 'natu', 'poliwag']
-mail_border_stretch = ['surf_mail_border', 'flower_mail_border', 'litebluemail_border']
 
-overworld_px8 =  ['boulder_dust', 'fishing_rod', 'grass_rustle', 'heal_machine', 'shadow',
-                  'trainer_battle_pokeball_tiles']
-overworld_px16 = ['chris_fish', 'cut_grass', 'cut_tree', 'headbutt_tree']
+def get_animation_frames(path=None, w=7, h=7, bitmask_path=None, frame_path=None):
+    """Retrieve animation frame tilemaps from generated frame/bitmask data."""
+    if not path:
+        path = bitmask_path
+    if not path:
+        path = frame_path
+    if not path:
+        raise Exception("need at least one of path, bitmask_path or frame_path")
+
+    if not bitmask_path:
+        bitmask_path = os.path.join(os.path.split(path)[0], 'bitmask.asm')
+    if not frame_path:
+        frame_path = os.path.join(os.path.split(path)[0], 'frames.asm')
+    bitmask_lines = open(bitmask_path).readlines()
+    frame_lines = open(frame_path).readlines()
+
+    bitmask_length = w * h
+
+    bitmasks = []
+    bitmask = []
+    for line in bitmask_lines:
+        if '\tdb ' in line:
+            value = line.split('\tdb ')[1].strip().replace('%', '0b')
+            value = int(value, 0)
+            #print line.strip(), value, len(bitmasks), len(bitmask)
+            for bit in xrange(8):
+                bitmask += [(value >> bit) & 1]
+                if len(bitmask) >= bitmask_length:
+                    bitmasks += [bitmask]
+                    bitmask = []
+                    break
+    if bitmask:
+        bitmasks += [bitmask]
+
+    frames = []
+    frame_labels = []
+    i = 0
+    for line in frame_lines:
+        if '\tdw ' in line:
+            frame_labels += [line.split('\tdw ')[1].strip()]
+        else:
+            for part in line.split():
+                part = part.strip()
+                if part in frame_labels:
+                    frames += [(part, i)]
+        i += 1
+
+    results = []
+
+    for label, i in frames:
+        result = []
+
+        # get the bitmask and tile ids for each frame
+        # don't care if we read past bounds, so just read the rest of the file
+        values = []
+        for line in frame_lines[i:]:
+            if '\tdb ' in line:
+                values += line.split('\tdb ')[1].split(';')[0].split(',')
+
+        #print bitmasks
+        #print values[0]
+        #print int(values[0].replace('$', '0x'), 0)
+        bitmask = bitmasks[int(values[0].replace('$', '0x'), 0)]
+        tiles = values[1:]
+        k = 0
+        j = 0
+        for bit in bitmask:
+            if bit:
+                result += [int(tiles[k].replace('$', '0x'), 0)]
+                k += 1
+            else:
+                result += [j]
+            j += 1
+
+        results += [result]
+
+    return results
+
+def get_animated_graphics(path, w=7, h=7, bitmask_path=None, frame_path=None):
+    frames = get_animation_frames(path, w, h, bitmask_path, frame_path)
+    new_path = path.replace('.animated.2bpp', '.2bpp')
+    tiles = gfx.get_tiles(bytearray(open(path, 'rb').read()))
+    new_tiles = tiles[:w * h]
+    for frame in frames:
+        for tile in frame:
+            new_tiles += [tiles[tile]]
+    new_graphic = gfx.connect(new_tiles)
+    print new_path, list(new_graphic)
+    open(new_path, 'wb').write(bytearray(new_graphic))
+    return new_path
 
 def filepath_rules(filepath):
     """Infer attributes of certain graphics by their location in the filesystem."""
@@ -85,250 +155,22 @@ def filepath_rules(filepath):
             index = filedir.find(pokemon_name)
             if index != -1:
                 filedir = filedir[:index + len('unown')] + filedir[index + len('unown_a'):]
-        # startswith to handle front_gold / front_silver
-        if name.startswith('front'):
+        if name == 'front' or name == 'front.animated':
             args['pal_file'] = os.path.join(filedir, 'normal.pal')
             args['pic'] = True
-            # TODO: way to handle Crystal and Gold/Silver simultaneously?
-            # args['animate'] = True
-        # startswith to handle back_gold / back_silver
-        elif name.startswith('back'):
+            args['animate'] = True
+        elif name == 'back':
             args['pal_file'] = os.path.join(filedir, 'normal.pal')
             args['pic'] = True
 
     elif 'gfx/trainers' in filedir:
-        trainer_name = filedir.split('/')[-1]
-        args['pal_file'] = os.path.join(filedir, name + '.pal')
         args['pic'] = True
-
-    elif 'gfx/battle' in filedir:
-        if name == 'dude':
-            args['pic_dimensions'] = 6, 6
-        elif name in ['balls', 'enemy_hp_bar_border']:
-            args['width'] = 32
-        elif name == 'expbar':
-            args['width'] = 72
-        elif name == 'hp_exp_bar_border':
-            args['width'] = 48
-
-    elif 'gfx/card_flip' in filedir:
-        if name == 'card_flip_1':
-            args['width'] = 128
-        elif name == 'card_flip_2':
-            args['width'] = 24
-            args['rows'] = [
-                (0, 2), (0, 2), (0, 2), (0, 2), (0, 2), (0, 2), (0, 2), (0, 2),
-                (0, 3), (0, 3), (0, 3), (0, 3), (0, 3), (0, 3), (0, 3), (0, 3), (0, 3), (0, 3), (0, 3), (0, 3)
-            ]
-
-    elif 'gfx/credits' in filedir:
-        if name in ['bellossom', 'togepi', 'elekid', 'sentret']:
-            args['width'] = 32
-        elif name == 'theend':
-            args['width'] = 64
-        elif name == 'border':
-            args['width'] = 72
-
-    elif 'gfx/debug' in filedir:
-        if name == 'color_test':
-            args['width'] = 176
-
-    elif 'gfx/diploma' in filedir:
-        if name == 'diploma':
-            args['width'] = 128
-
-    elif 'gfx/dummy_game' in filedir:
-        if name == 'dummy_game':
-            args['width'] = 16
-
-    elif 'gfx/font' in filedir:
-        if name in ['font', 'font_inversed', 'font_battle_extra', 'font_extra']:
-            args['width'] = 128
-        elif name == 'unused_bold_font':
-            args['width'] = 256
-
-    elif 'gfx/frames' in filedir:
-        args['width'] = 24
-
-    elif 'gfx/icons' in filedir:
-        if name == 'mail_big':
-            args['width'] = 16
-
-    elif 'gfx/intro' in filedir:
-        if name == 'logo_star':
-            args['width'] = 8
-        elif name in ['gamefreak_logo', 'logo_sparkle']:
-            args['width'] = 24
-        elif name == 'gamefreak_presents':
-            args['width'] = 104
-        elif name == 'copyright':
-            args['width'] = 240
-        elif name == 'charizard1':
-            args['width'] = 72
-            args['rows'] = [
-                (1, 8), (1, 8), (1, 8), (1, 8), (1, 8), (1, 8), (1, 8), (1, 8),
-                (0, 9), (0, 9), (0, 9), (0, 9), (0, 9), (0, 9), (0, 9)
-            ]
-        elif name == 'charizard2':
-            args['width'] = 72
-            args['pad_indices'] = [0]
-        elif name == 'charizard3':
-            args['width'] = 64
-            args['rows'] = [
-                (0, 8), (0, 8), (0, 0), (1, 6), (1, 6), (1, 6), (1, 6), (1, 6), (1, 6),
-                (1, 6), (1, 6), (1, 6), (1, 6), (1, 6), (1, 6), (1, 6), (1, 6)
-            ]
-        elif name in ['grass1', 'grass2', 'water1', 'water2']:
-            args['width'] = 128
-
-    elif 'gfx/mail' in filedir:
-        if name in mail_px8:
-            args['width'] = 8
-        elif name in mail_px16:
-            args['width'] = 16
-        elif name in mail_px24:
-            args['width'] = 24
-        elif name in mail_border_stretch:
-            args['width'] = 24
-            args['pad_indices'] = [4]
-        elif name == 'large_note':
-            args['width'] = 16
-            args['rows'] = [(1, 1), (0, 2)]
-        elif name == 'dragonite':
-            args['width'] = 56
-            args['rows'] = [(0, 6), (1, 6), (2, 6)]
-
-    elif 'gfx/naming_screen' in filedir:
-        args['width'] = 8
-
-    elif 'gfx/new_game' in filedir:
-        if name in ['shrink1', 'shrink2']:
-            args['width'] = 56
-            args['pic_dimensions'] = 7, 7
-
-    elif 'gfx/overworld' in filedir:
-        if name == 'heal_machine':
-            args['width'] = 8
-        elif name in overworld_px8:
-            args['width'] = 8
-        elif name in overworld_px16:
-            args['width'] = 16
-
-    elif 'gfx/pack' in filedir:
-        if name == 'pack':
-            args['width'] = 40
-        elif name == 'pack_menu':
-            args['width'] = 128
-
-    elif 'gfx/player' in filedir:
-        if name == 'chris_back':
-            args['pic_dimensions'] = 6, 6
-
-    elif 'gfx/pokedex' in filedir:
-        if name in ['slowpoke', 'pokedex', 'pokedex_sgb']:
-            args['width'] = 128
-
-        elif name == 'question_mark':
-            args['width'] = 56
-            args['pic_dimensions'] = 7, 7
-
-    elif 'gfx/pokegear' in filedir:
-        if name == 'pokegear_sprites':
-            args['width'] = 16
-
-        elif name in ['pokegear', 'town_map']:
-            args['width'] = 128
-
-    elif 'gfx/mystery_gift' in filedir:
-        if name == 'mystery_gift':
-            args['width'] = 128
-            args['rows'] = [(0, 15), (0, 15), (0, 2)]
-        elif name == 'mystery_gift_2':
-            args['width'] = 128
-        # TODO: this is incomplete
-        elif name == 'question_mark':
-            args['width'] = 40
-            args['rows'] = [(1, 4), (0, 0), (0, 0), (2, 3), (2, 1)]
-        elif name == 'border':
-            args['width'] = 56
-
-    elif 'gfx/sgb' in filedir:
-        args['width'] = 128
-        #args['pal_file'] = os.path.join(filedir, name + '.pal')
-
-    elif 'gfx/slots' in filedir:
-        if name == 'slots_1':
-            args['width'] = 16
-        elif name == 'slots_2':
-            args['width'] = 16
-            args['pic_dimensions'] = 2, 2
-        # TODO: this is incomplete
-        elif name == 'slots_3':
-            args['width'] = 24
-
-    elif 'gfx/sprites' in filedir:
-        # TODO: this is incomplete
-        if name == 'big_onix':
-            args['width'] = 32
-            args['rows'] = [(0, 4), (0, 4), (1, 2), (1, 2)]
-        else:
-            args['width'] = 16
-
-    elif 'gfx/stats' in filedir:
-        if name == 'stats_tiles':
-            args['width'] = 136
-
-    elif 'gfx/tilesets' in filedir:
-        if filedir == 'gfx/tilesets/roofs':
-            args['width'] = 24
-        elif filedir != 'gfx/tilesets':
-            args['width'] = 8
-        else:
-            args['tileset'] = True
-
-    elif 'gfx/title' in filedir:
-        if name in ['logo_bottom_gold', 'logo_bottom_silver', 'logo_top_gold', 'logo_top_silver']:
-            args['width'] = 160
-        elif name == 'lugia_silver':
-            args['width'] = 64
-            args['pic_dimensions'] = 8, 4
-        elif name == 'hooh_gold':
-            args['width'] = 64
-            args['pic_dimensions'] = 8, 6
-        elif name in ['title_trail_gold', 'title_trail_silver']:
-            args['width'] = 32
-
-    elif 'gfx/trainer_card' in filedir:
-        if name in ['badges', 'trainer_card']:
-            args['width'] = 16
-        elif name == 'card_status':
-            args['width'] = 48
-        elif name == 'chris_card':
-            args['width'] = 40
-        elif name == 'leaders':
-            args['width'] = 80
-
-    elif 'gfx/trade' in filedir:
-        if name in ['arrow_left', 'arrow_right', 'cable']:
-            args['width'] = 8
-        elif name in ['bubble', 'poof']:
-            args['width'] = 16
-        elif name == 'ball':
-            args['width'] = 16
-            args['rows'] = [(0, 1), (0, 1), (0, 2), (0, 2)]
-        elif name == 'border_tiles':
-            args['width'] = 24
-        elif name == 'game_boy':
-            args['width'] = 56
-
-    elif 'gfx/unown_puzzle' in filedir:
-        if name == 'start_cancel':
-            args['width'] = 152
-        elif name == 'tile_borders':
-            args['width'] = 64
 
     elif os.path.join(filedir, name) in pics:
         args['pic'] = True
+
+    elif filedir == 'gfx/tilesets':
+        args['tileset'] = True
 
     if args.get('pal_file'):
         if os.path.exists(args['pal_file']):
@@ -342,12 +184,10 @@ def filepath_rules(filepath):
             w = min(w/8, h/8)
             args['pic_dimensions'] = w, w
         elif ext == '.2bpp':
-            # startswith to handle front_gold / front_silver
-            if pokemon_name and name.startswith('front'):
-                w, h = get_pokemon_dimensions(pokemon_name)
+            if pokemon_name and name == 'front' or name == 'front.animated':
+                w, h = get_pokemon_dimensions(filepath.replace(ext, '.dimensions')) or (7, 7)
                 args['pic_dimensions'] = w, w
-            # startswith to handle back_gold / back_silver
-            elif pokemon_name and name.startswith('back'):
+            elif pokemon_name and name == 'back':
                 args['pic_dimensions'] = 6, 6
             else:
                 args['pic_dimensions'] = 7, 7
@@ -377,31 +217,12 @@ def to_2bpp(filename, **kwargs):
 
 def to_png(filename, **kwargs):
     name, ext = os.path.splitext(filename)
-    if   ext == '.1bpp':
-        basedir, basename = os.path.split(filename)
-        name, ext = os.path.splitext(basename)
-        # Ignoring these for convenience only
-        if basedir in ['gfx/footprints', 'gfx/font']:
-            return
-        # Ignoring these for convenience only
-        if name in ['hp_exp_bar_border']:
-            return
-        gfx.export_1bpp_to_png(filename, **kwargs)
-    elif ext == '.2bpp':
-        basedir, basename = os.path.split(filename)
-        name, ext = os.path.splitext(basename)
-        # TODO: how to actually make big_onix/slots_3 pngs (reusing one from pokecrystal for now)
-        if name in ['big_onix', 'slots_3']:
-            return
-        # TODO: same question for most/all battle anims
-        if basedir == 'gfx/battle_anims':
-            return
-        # Ignoring these for convenience only
-        if basedir == 'gfx/font':
-            return
-        if name in ['back_gold', 'back_silver']:
-            kwargs['fileout'] = os.path.join(basedir, 'back.png')
-        gfx.export_2bpp_to_png(filename, **kwargs)
+    if   ext == '.1bpp': gfx.export_1bpp_to_png(filename, **kwargs)
+    elif ext == '.2bpp' and name.endswith('.animated'):
+        w, h = kwargs.get('pic_dimensions') or (7, 7)
+        new_path = get_animated_graphics(filename, w=w, h=h)
+        return to_png(new_path, **kwargs)
+    elif ext == '.2bpp': gfx.export_2bpp_to_png(filename, **kwargs)
     elif ext == '.png':  pass
     elif ext == '.lz':
         decompress(filename, **kwargs)
@@ -415,8 +236,6 @@ def compress(filename, **kwargs):
 def decompress(filename, **kwargs):
     lz_data = open(filename, 'rb').read()
     data = lz.Decompressed(lz_data).output
-    # hack to work for Alakazam's silver backsprite; needs to be multiple of 8 anyway
-    data = data[:len(data)//8*8]
     name, ext = os.path.splitext(filename)
     open(name, 'wb').write(bytearray(data))
 

@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
 
-import os, re
 from sys import stderr, exit
 from subprocess import Popen, PIPE
 from struct import unpack, calcsize
@@ -31,25 +30,18 @@ signal(SIGPIPE,SIG_DFL)
 
 import argparse
 parser = argparse.ArgumentParser(description="Parse the symfile to find unnamed symbols")
-parser.add_argument('symfile', type=str, help="the filename with the list of symbols")
+parser.add_argument('symfile', type=argparse.FileType('r'), help="the list of symbols")
 parser.add_argument('-r', '--rootdir', type=str, help="scan the output files to obtain a list of files with unnamed symbols (NOTE: will rebuild objects as necessary)")
 args = parser.parse_args()
 
 # Get list of object files
 objects = None
-obj_suffix = '_obj := '
-m = re.match('poke(.*)\.sym', args.symfile)
-sym_game = m.group(1)
-def match_obj(game, line):
-    return (sym_game == game) and line.startswith(game + obj_suffix)
 if args.rootdir:
     for line in Popen(["make", "-C", args.rootdir, "-s", "-p"],
             stdout=PIPE).stdout.read().decode().split("\n"):
-        if match_obj('gold', line) or match_obj('silver', line):
-            offset = len(sym_game) + len(obj_suffix)
-            objects = line[offset:].strip().split()
+        if line.startswith("crystal_obj := "):
+            objects = line[15:].strip().split()
             break
-
     else:
         print("Error: Object files not found!", file=stderr)
         exit(1)
@@ -57,7 +49,7 @@ if args.rootdir:
 # Scan all unnamed symbols from the symfile
 symbols_total = 0
 symbols = set()
-for line in open(args.symfile, 'r'):
+for line in args.symfile:
     line = line.split(";")[0].strip()
     split = line.split(" ")
     if len(split) < 2:

@@ -31,6 +31,7 @@ void optimize (struct command * commands, unsigned short count) {
           break;
         case 1:
           if (commands -> value != next -> value) break;
+          // fallthrough
         case 3:
           if ((commands -> count + next -> count) <= MAX_COMMAND_COUNT) {
             commands -> count += next -> count;

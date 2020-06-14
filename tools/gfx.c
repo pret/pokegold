@@ -132,10 +132,10 @@ void trim_whitespace(struct Graphic *graphic) {
 void remove_whitespace(struct Graphic *graphic) {
 	int tile_size = Options.depth * 8;
 	if (Options.interleave) tile_size *= 2;
-
+	
 	// Make sure we have a whole number of tiles, round down if required
 	graphic->size &= ~(tile_size - 1);
-
+	
 	int i = 0;
 	for (int j = 0, d = 0; i < graphic->size && j < graphic->size; i += tile_size, j += tile_size) {
 		while (j < graphic->size && is_whitespace(&graphic->data[j], tile_size) && !is_preserved(j / tile_size - d)) {
@@ -172,10 +172,10 @@ void remove_duplicates(struct Graphic *graphic) {
 	int tile_size = Options.depth * 8;
 	if (Options.interleave) tile_size *= 2;
 	int num_tiles = 0;
-
+	
 	// Make sure we have a whole number of tiles, round down if required
 	graphic->size &= ~(tile_size - 1);
-
+	
 	for (int i = 0, j = 0, d = 0; i < graphic->size && j < graphic->size; i += tile_size, j += tile_size) {
 		while (j < graphic->size && tile_exists(&graphic->data[j], graphic->data, tile_size, num_tiles)) {
 			if ((Options.keep_whitespace && is_whitespace(&graphic->data[j], tile_size)) || is_preserved(j / tile_size - d)) {
@@ -226,10 +226,10 @@ void remove_flip(struct Graphic *graphic, bool xflip, bool yflip) {
 	int tile_size = Options.depth * 8;
 	if (Options.interleave) tile_size *= 2;
 	int num_tiles = 0;
-
+	
 	// Make sure we have a whole number of tiles, round down if required
 	graphic->size &= ~(tile_size - 1);
-
+	
 	for (int i = 0, j = 0, d = 0; i < graphic->size && j < graphic->size; i += tile_size, j += tile_size) {
 		while (j < graphic->size && flip_exists(&graphic->data[j], graphic->data, tile_size, num_tiles, xflip, yflip)) {
 			if ((Options.keep_whitespace && is_whitespace(&graphic->data[j], tile_size)) || is_preserved(j / tile_size - d)) {
