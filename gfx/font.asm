@@ -31,7 +31,7 @@ ExpBarGFX:
 INCBIN "gfx/battle/expbar.2bpp"
 
 TownMapGFX:
-INCBIN "gfx/pokegear/town_map.2bpp.lz"
+INCBIN "gfx/pokegear/town_map.2bpp.lz.bin"
 
 PokegearPhoneIconGFX:
 INCBIN "gfx/font/phone_icon.2bpp"
