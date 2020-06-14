@@ -56,7 +56,7 @@ silver: pokesilver.gbc
 
 clean:
 	rm -f $(roms) $(gold_obj) $(silver_obj) $(roms:.gbc=.map) $(roms:.gbc=.sym) rgbdscheck.o
-	find gfx \( -name "*.[12]bpp" -o -name "*.lz" ! -path "gfx/pokemon/alakazam/back_silver.2bpp.lz" \) -delete
+	find gfx \( -name "*.[12]bpp" -o -name "*.lz" \) -delete
 	$(MAKE) clean -C tools/
 
 tidy:
@@ -210,7 +210,6 @@ gfx/pokemon/%/back_gold.2bpp: gfx/pokemon/%/back.png
 	$(if $(tools/gfx),\
 		tools/gfx $(tools/gfx) -o $@ $@)
 
-# TODO: alakazam/back_silver.2bpp should be an exception, made by decompressing its lz
 gfx/pokemon/%/back_silver.2bpp: gfx/pokemon/%/back.png
 	$(RGBGFX) $(rgbgfx) -o $@ $<
 	$(if $(tools/gfx),\

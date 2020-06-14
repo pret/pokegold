@@ -47,6 +47,3 @@ used_space.png
 *.lz
 *.2bpp
 *.1bpp
-
-# with the singular exception of Alakazam's silver lz
-!gfx/pokemon/alakazam/back_silver.2bpp.lz
