@@ -5,6 +5,7 @@ CFLAGS := -O3 -std=c99 -Wall -Wextra -Wno-missing-field-initializers
 
 tools := \
 	lzcomp \
+	png_dimensions \
 	scan_includes \
 	gfx
 all: $(tools)

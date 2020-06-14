@@ -11,7 +11,11 @@
 	db 100 ; unknown 1
 	db 40 ; step cycles to hatch
 	db 5 ; unknown 2
-	dn 6, 6 ; frontpic dimensions
+IF DEF(_GOLD)
+	INCBIN "gfx/pokemon/chansey/front_gold.dimensions"
+ELIF DEF(_SILVER)
+	INCBIN "gfx/pokemon/chansey/front_silver.dimensions"
+ENDC
 	db 0, 0, 0, 0 ; padding
 	db GROWTH_FAST ; growth rate
 	dn EGG_FAIRY, EGG_FAIRY ; egg groups
