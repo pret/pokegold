@@ -53,7 +53,7 @@ silver: pokesilver.gbc
 
 clean:
 	rm -f $(roms) $(gold_obj) $(silver_obj) $(roms:.gbc=.map) $(roms:.gbc=.sym) rgbdscheck.o
-	find gfx \( -name "*.[12]bpp" -o -name "*.lz" \) -delete
+	find gfx \( -name "*.[12]bpp" -o -name "*.lz" -o -name "*.gbcpal" \) -delete
 	$(MAKE) clean -C tools/
 
 tidy:
@@ -221,3 +221,6 @@ gfx/sgb/silver_border.2bpp: tools/gfx += --trim-whitespace
 	$(RGBGFX) $(rgbgfx) -d1 -o $@ $<
 	$(if $(tools/gfx),\
 		tools/gfx $(tools/gfx) -d1 -o $@ $@)
+
+%.gbcpal: %.png
+	$(RGBGFX) -p $@ $<

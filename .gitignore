@@ -17,6 +17,9 @@
 *.sgm
 *.sav
 *.rtc
+*.sn*
+*.sa*
+*.sg1
 
 # rgbds extras
 *.map
@@ -44,6 +47,7 @@ used_space.png
 .DS_STORE
 
 # compiled graphics
-*.lz
-*.2bpp
 *.1bpp
+*.2bpp
+*.lz
+*.gbcpal
