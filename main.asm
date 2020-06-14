@@ -255,15 +255,15 @@ SECTION "bank26", ROMX
 
 IF DEF(_GOLD)
 TitleScreenGFX1:
-INCBIN "gfx/title/logo_bottom_gold.2bpp.lz"
+INCBIN "gfx/title/logo_bottom_gold.2bpp.lz.bin"
 TitleScreenGFX2:
-INCBIN "gfx/title/logo_top_gold.2bpp.lz"
+INCBIN "gfx/title/logo_top_gold.2bpp.lz.bin"
 
 ELIF DEF(_SILVER)
 TitleScreenGFX1:
-INCBIN "gfx/title/logo_bottom_silver.2bpp.lz"
+INCBIN "gfx/title/logo_bottom_silver.2bpp.lz.bin"
 TitleScreenGFX2:
-INCBIN "gfx/title/logo_top_silver.2bpp.lz"
+INCBIN "gfx/title/logo_top_silver.2bpp.lz.bin"
 ENDC
 
 TitleScreenTilemap:
@@ -333,13 +333,13 @@ IF DEF(_GOLD)
 TitleScreenGFX3:
 INCBIN "gfx/title/title_trail_gold.2bpp"
 TitleScreenGFX4:
-INCBIN "gfx/title/hooh_gold.2bpp.lz"
+INCBIN "gfx/title/hooh_gold.2bpp.lz.bin"
 
 ELIF DEF(_SILVER)
 TitleScreenGFX3:
 INCBIN "gfx/title/title_trail_silver.2bpp"
 TitleScreenGFX4:
-INCBIN "gfx/title/lugia_silver.2bpp.lz"
+INCBIN "gfx/title/lugia_silver.2bpp.lz.bin"
 ENDC
 
 INCLUDE "engine/menus/options_menu.asm"
