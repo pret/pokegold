@@ -1571,7 +1571,7 @@ Intro_ResetLYOverrides:
 	ret
 
 Intro_WaterGFX1:
-INCBIN "gfx/intro/water1.2bpp.lz.bin"
+INCBIN "gfx/intro/water1.2bpp.lz"
 
 Intro_WaterTilemap:
 INCBIN "gfx/intro/water.tilemap"
@@ -1580,10 +1580,10 @@ Intro_WaterMeta:
 INCBIN "gfx/intro/water.bin"
 
 Intro_WaterGFX2:
-INCBIN "gfx/intro/water2.2bpp.lz.bin"
+INCBIN "gfx/intro/water2.2bpp.lz"
 
 Intro_GrassGFX1:
-INCBIN "gfx/intro/grass1.2bpp.lz.bin"
+INCBIN "gfx/intro/grass1.2bpp.lz"
 
 Intro_GrassTilemap:
 INCBIN "gfx/intro/grass.tilemap"
@@ -1592,13 +1592,13 @@ Intro_GrassMeta:
 INCBIN "gfx/intro/grass.bin"
 
 Intro_GrassGFX2:
-INCBIN "gfx/intro/grass2.2bpp.lz.bin"
+INCBIN "gfx/intro/grass2.2bpp.lz"
 
 Intro_FireGFX1:
-INCBIN "gfx/intro/charizard1.2bpp.lz.bin"
+INCBIN "gfx/intro/charizard1.2bpp.lz"
 
 Intro_FireGFX2:
-INCBIN "gfx/intro/charizard2.2bpp.lz.bin"
+INCBIN "gfx/intro/charizard2.2bpp.lz"
 
 Intro_FireGFX3:
-INCBIN "gfx/intro/charizard3.2bpp.lz.bin"
+INCBIN "gfx/intro/charizard3.2bpp.lz"

@@ -10,8 +10,13 @@ gfx/diploma/diploma.2bpp.lz: LZFLAGS += --method 8 --align 1
 
 gfx/dummy_game/dummy_game.2bpp.lz: LZFLAGS += --method 2 --align 4
 
+gfx/intro/%.2bpp.lz: LZFLAGS += --align 4
+gfx/intro/water1.2bpp.lz: LZFLAGS += --method 2 --align 4
+
 gfx/new_game/shrink1.2bpp.lz: LZFLAGS += --align 4
 gfx/new_game/shrink2.2bpp.lz: LZFLAGS += --align 4
+
+gfx/pc/pc.2bpp.lz: LZFLAGS += --align 4
 
 gfx/player/chris_back.2bpp.lz: LZFLAGS += --align 4
 
@@ -22,6 +27,7 @@ gfx/pokedex/slowpoke.2bpp.lz: LZFLAGS = --compressor null --method 1 --align 1
 
 gfx/pokegear/pokegear.2bpp.lz: LZFLAGS = --compressor null --method 1 --align 1
 gfx/pokegear/pokegear_sprites.2bpp.lz: LZFLAGS += --align 4
+gfx/pokegear/town_map.2bpp.lz: LZFLAGS = --compressor null --method 1 --align 1
 
 gfx/pokemon/hitmontop/back_gold.2bpp.lz: LZFLAGS += --method 4
 gfx/pokemon/miltank/back_gold.2bpp.lz: LZFLAGS += --method 4
@@ -41,6 +47,11 @@ gfx/tilesets/mart.2bpp.lz: LZFLAGS += --method 2 --align 4
 gfx/tilesets/radio_tower.2bpp.lz: LZFLAGS += --method 2 --align 4
 gfx/tilesets/ruins_of_alph.2bpp.lz: LZFLAGS += --method 2 --align 4
 gfx/tilesets/tower.2bpp.lz: LZFLAGS += --method 2 --align 4
+
+gfx/title/logo_bottom_gold.2bpp.lz: LZFLAGS += --method 9 --align 1
+gfx/title/logo_bottom_silver.2bpp.lz: LZFLAGS += --method 9 --align 1
+gfx/title/logo_top_gold.2bpp.lz: LZFLAGS += --method 9 --align 1
+gfx/title/logo_top_silver.2bpp.lz: LZFLAGS += --method 9 --align 1
 
 gfx/unown_puzzle/%.lz: LZFLAGS += --align 4
 gfx/unown_puzzle/start_cancel.2bpp.lz: LZFLAGS += --method 8 --align 1

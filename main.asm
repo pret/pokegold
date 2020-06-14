@@ -255,15 +255,15 @@ SECTION "bank26", ROMX
 
 IF DEF(_GOLD)
 TitleScreenGFX1:
-INCBIN "gfx/title/logo_bottom_gold.2bpp.lz.bin"
+INCBIN "gfx/title/logo_bottom_gold.2bpp.lz"
 TitleScreenGFX2:
-INCBIN "gfx/title/logo_top_gold.2bpp.lz.bin"
+INCBIN "gfx/title/logo_top_gold.2bpp.lz"
 
 ELIF DEF(_SILVER)
 TitleScreenGFX1:
-INCBIN "gfx/title/logo_bottom_silver.2bpp.lz.bin"
+INCBIN "gfx/title/logo_bottom_silver.2bpp.lz"
 TitleScreenGFX2:
-INCBIN "gfx/title/logo_top_silver.2bpp.lz.bin"
+INCBIN "gfx/title/logo_top_silver.2bpp.lz"
 ENDC
 
 TitleScreenTilemap:
