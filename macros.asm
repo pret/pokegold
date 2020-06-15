@@ -16,7 +16,4 @@ INCLUDE "macros/scripts/battle_anims.asm"
 INCLUDE "macros/scripts/trade_anims.asm"
 INCLUDE "macros/scripts/gfx_anims.asm"
 
-; TODO: Should this be included or not?
-;   - Leave out for now so no code depending on legacy macros gets introduced
-;
-; INCLUDE "macros/legacy.asm"
+INCLUDE "macros/legacy.asm"
