@@ -96,7 +96,7 @@ CheckForLuckyNumberWinners:
 .SkipBox:
 	inc c
 	ld a, c
-	cp NUM_BOXES_JAPANESE
+	cp NUM_BOXES_JAPANESE ; fails to find winning mon in boxes 10-14 if not the active box
 	jr c, .BoxesLoop
 
 	call CloseSRAM

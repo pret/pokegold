@@ -7,7 +7,7 @@ UpdateBGMapBuffer::
 ; Return carry on success.
 
 	ldh a, [hBGMapUpdate]
-	and a ; 0
+	and a
 	ret z
 
 	ld [hSPBuffer], sp
@@ -93,7 +93,7 @@ UpdateBGMap::
 ; Update the BG Map, in thirds, from wTilemap and wAttrmap.
 
 	ldh a, [hBGMapMode]
-	and a
+	and a ; 0
 	ret z
 
 ; BG Map 0
@@ -239,8 +239,6 @@ endr
 	ret
 
 Serve1bppRequest::
-; Only call during the first fifth of VBlank
-
 	ld a, [wRequested1bpp]
 	and a
 	ret z
@@ -310,8 +308,6 @@ endr
 	ret
 
 Serve2bppRequest::
-; Only call during the first fifth of VBlank
-
 	ld a, [wRequested2bpp]
 	and a
 	ret z
@@ -373,8 +369,6 @@ endr
 	ret
 
 AnimateTileset::
-; Only call during the first fifth of VBlank
-
 	ldh a, [hMapAnims]
 	and a
 	ret z
@@ -390,8 +384,10 @@ AnimateTileset::
 	rst Bankswitch
 	ret
 
+; unused
 	ret
 
+; unused
 	ld hl, rLCDC
 	set 1, [hl]
 	ret
@@ -415,7 +411,7 @@ Function1642::
 	ld l, a
 	ld de, SCREEN_WIDTH
 	add hl, de
-	ld b, $12
+	ld b, SCREEN_HEIGHT
 	ld a, $60
 .loop1
 rept 12
