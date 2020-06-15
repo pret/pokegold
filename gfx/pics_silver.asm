@@ -60,6 +60,9 @@ LaprasFrontpic:      INCBIN "gfx/pokemon/lapras/front_silver.2bpp.lz"
 KimonoGirlPic:       INCBIN "gfx/trainers/kimono_girl.2bpp.lz"
 MagnetonFrontpic:    INCBIN "gfx/pokemon/magneton/front_silver.2bpp.lz"
 KadabraFrontpic:     INCBIN "gfx/pokemon/kadabra/front_silver.2bpp.lz"
+; alakazam/back_silver.2bpp has an extra $80 byte at the end, and lzcomp
+; cannot perfectly match the way it's compressed.
+; Delete the ".bin" if you don't care about matching.
 AlakazamBackpic:     INCBIN "gfx/pokemon/alakazam/back_silver.2bpp.lz.bin"
 HitmontopBackpic:    INCBIN "gfx/pokemon/hitmontop/back_silver.2bpp.lz"
 CloysterBackpic:     INCBIN "gfx/pokemon/cloyster/back.2bpp.lz"

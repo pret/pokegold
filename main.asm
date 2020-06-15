@@ -333,13 +333,13 @@ IF DEF(_GOLD)
 TitleScreenGFX3:
 INCBIN "gfx/title/title_trail_gold.2bpp"
 TitleScreenGFX4:
-INCBIN "gfx/title/hooh_gold.2bpp.lz.bin"
+INCBIN "gfx/title/hooh_gold.2bpp.lz"
 
 ELIF DEF(_SILVER)
 TitleScreenGFX3:
 INCBIN "gfx/title/title_trail_silver.2bpp"
 TitleScreenGFX4:
-INCBIN "gfx/title/lugia_silver.2bpp.lz.bin"
+INCBIN "gfx/title/lugia_silver.2bpp.lz"
 ENDC
 
 INCLUDE "engine/menus/options_menu.asm"
