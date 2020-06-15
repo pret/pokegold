@@ -235,10 +235,10 @@ endr
 	; PokerusStatus
 	ld [de], a
 	inc de
-	; CaughtData/CaughtTime/CaughtLevel
+	; Unused1
 	ld [de], a
 	inc de
-	; CaughtGender/CaughtLocation
+	; Unused2
 	ld [de], a
 	inc de
 
@@ -298,10 +298,10 @@ endr
 	; PokerusStatus
 	ld [de], a
 	inc de
-	; CaughtData/CaughtTime/CaughtLevel
+	; Unused1
 	ld [de], a
 	inc de
-	; CaughtGender/CaughtLocation
+	; Unused2
 	ld [de], a
 	inc de
 

@@ -59,8 +59,7 @@ TMHMMoves:
 	db FLASH
 	db WHIRLPOOL
 	db WATERFALL
-; Move tutor (Crystal-only)
-	db 0
-	db 0
-	db 0
 	db 0 ; end
+	db 0
+	db 0
+	db 0
