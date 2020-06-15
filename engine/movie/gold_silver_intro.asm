@@ -1595,10 +1595,10 @@ Intro_GrassGFX2:
 INCBIN "gfx/intro/grass2.2bpp.lz"
 
 Intro_FireGFX1:
-INCBIN "gfx/intro/charizard1.2bpp.lz"
+INCBIN "gfx/intro/fire1.2bpp.lz"
 
 Intro_FireGFX2:
-INCBIN "gfx/intro/charizard2.2bpp.lz"
+INCBIN "gfx/intro/fire2.2bpp.lz"
 
 Intro_FireGFX3:
-INCBIN "gfx/intro/charizard3.2bpp.lz"
+INCBIN "gfx/intro/fire3.2bpp.lz"
