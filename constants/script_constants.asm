@@ -229,15 +229,6 @@ NUM_FRUIT_TREES EQU const_value - 1
 	const DECODESC_BIG_DOLL   ; 3
 	const DECODESC_CONSOLE    ; 4
 
-; swarm arguments
-; StoreSwarmMapIndices arguments
-; tentative/placeholder, this is just the order from swarm_grass.asm
-	const_def
-	const SWARM_YANMA     ; 0
-	const SWARM_SNUBBULL  ; 1
-	const SWARM_DUNSPARCE ; 2
-	const SWARM_MARILL    ; 3
-
 ; ActivateFishingSwarm setval arguments
 	const_def
 	const FISHSWARM_NONE     ; 0

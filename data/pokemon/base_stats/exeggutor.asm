@@ -16,7 +16,7 @@ IF DEF(_GOLD)
 ELIF DEF(_SILVER)
 	INCBIN "gfx/pokemon/exeggutor/front_silver.dimensions"
 ENDC
-	db 0, 0, 0, 0 ; padding
+	dw NULL, NULL ; unused (beta front/back pics)
 	db GROWTH_SLOW ; growth rate
 	dn EGG_PLANT, EGG_PLANT ; egg groups
 

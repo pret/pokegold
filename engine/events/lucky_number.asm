@@ -96,6 +96,8 @@ CheckForLuckyNumberWinners:
 .SkipBox:
 	inc c
 	ld a, c
+
+	; BUG: fails to find winning mon in boxes 10-14 if not the active box
 	cp NUM_BOXES_JAPANESE
 	jr c, .BoxesLoop
 

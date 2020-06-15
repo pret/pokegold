@@ -18,7 +18,7 @@ EcruteakTinTowerEntrance_MapScripts:
 	end
 
 EcruteakTinTowerEntrance_CoordEvent1:
-	checkevent EVENT_RANG_CLEAR_BELL_2
+	checkevent EVENT_ECRUTEAK_TIN_TOWER_ENTRANCE_SAGE_RIGHT
 	iftrue EcruteakTinTowerEntrance_CoordEvent_DontMove
 	applymovement ECRUTEAKTINTOWERENTRANCE_SAGE2, MovementData_0x980c7
 	moveobject ECRUTEAKTINTOWERENTRANCE_SAGE1, 4, 6
@@ -28,7 +28,7 @@ EcruteakTinTowerEntrance_CoordEvent1:
 	end
 
 EcruteakTinTowerEntrance_CoordEvent2:
-	checkevent EVENT_RANG_CLEAR_BELL_1
+	checkevent EVENT_ECRUTEAK_TIN_TOWER_ENTRANCE_SAGE_LEFT
 	iftrue EcruteakTinTowerEntrance_CoordEvent_DontMove
 	applymovement ECRUTEAKTINTOWERENTRANCE_SAGE1, MovementData_0x980cc
 	moveobject ECRUTEAKTINTOWERENTRANCE_SAGE2, 5, 6
@@ -158,7 +158,7 @@ EcruteakTinTowerEntrance_MapEvents:
 	db 0 ; bg events
 
 	db 4 ; object events
-	object_event  4,  6, SPRITE_SAGE, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, EcruteakTinTowerEntranceSageScript, EVENT_RANG_CLEAR_BELL_1
-	object_event  5,  6, SPRITE_SAGE, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, EcruteakTinTowerEntranceSageScript, EVENT_RANG_CLEAR_BELL_2
+	object_event  4,  6, SPRITE_SAGE, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, EcruteakTinTowerEntranceSageScript, EVENT_ECRUTEAK_TIN_TOWER_ENTRANCE_SAGE_LEFT
+	object_event  5,  6, SPRITE_SAGE, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, EcruteakTinTowerEntranceSageScript, EVENT_ECRUTEAK_TIN_TOWER_ENTRANCE_SAGE_RIGHT
 	object_event  6,  9, SPRITE_SAGE, SPRITEMOVEDATA_WANDER, 1, 1, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, EcruteakTinTowerEntranceWanderingSageScript, -1
 	object_event  3, 11, SPRITE_GRAMPS, SPRITEMOVEDATA_WANDER, 1, 1, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, EcruteakTinTowerEntranceGrampsScript, -1

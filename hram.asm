@@ -22,7 +22,6 @@ hSeconds:: db ; ff9a
 
 hVBlankCounter:: db ; ff9d
 
-; hDMATransfer?
 hFF9E:: db ; ff9e
 
 hROMBank:: db ; ff9f
