@@ -669,10 +669,7 @@ WipeLYOverrides:
 	ret
 
 StartTrainerBattle_DrawSineWave:
-	calc_sine_wave .SineWave
-
-.SineWave:
-	sine_table 256
+	calc_sine_wave
 
 StartTrainerBattle_ZoomToBlack:
 	farcall Function55a1

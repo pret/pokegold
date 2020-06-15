@@ -4151,4 +4151,4 @@ BattleAnim_AbsCosinePrecise:
 	ret
 
 BattleAnimSineWave:
-	sine_table 256
+	sine_table 32
