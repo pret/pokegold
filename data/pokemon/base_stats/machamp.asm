@@ -16,7 +16,7 @@ IF DEF(_GOLD)
 ELIF DEF(_SILVER)
 	INCBIN "gfx/pokemon/machamp/front_silver.dimensions"
 ENDC
-	db 0, 0, 0, 0 ; padding
+	dw NULL, NULL ; unused (beta front/back pics)
 	db GROWTH_MEDIUM_SLOW ; growth rate
 	dn EGG_HUMANSHAPE, EGG_HUMANSHAPE ; egg groups
 

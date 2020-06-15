@@ -16,7 +16,7 @@ IF DEF(_GOLD)
 ELIF DEF(_SILVER)
 	INCBIN "gfx/pokemon/clefable/front_silver.dimensions"
 ENDC
-	db 0, 0, 0, 0 ; padding
+	dw NULL, NULL ; unused (beta front/back pics)
 	db GROWTH_FAST ; growth rate
 	dn EGG_FAIRY, EGG_FAIRY ; egg groups
 
