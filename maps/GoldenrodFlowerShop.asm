@@ -46,15 +46,15 @@ FlowerShopFloriaScript:
 
 FlowerShopShelf1:
 ; unused
-	jumpstd picturebookshelf
+	jumpstd PictureBookshelfScript
 
 FlowerShopShelf2:
 ; unused
-	jumpstd magazinebookshelf
+	jumpstd MagazineBookshelfScript
 
 FlowerShopRadio:
 ; unused
-	jumpstd radio2
+	jumpstd Radio2Script
 
 GoldenrodFlowerShopTeacherBetterThanWhitneyText:
 	text "Oh, you're better"

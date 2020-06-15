@@ -10,7 +10,7 @@ MountMortar1FInside_MapScripts:
 	db 0 ; callbacks
 
 MountMortar1FBoulder:
-	jumpstd strengthboulder
+	jumpstd StrengthBoulderScript
 
 MountMortar1FInsideEscapeRope:
 	itemball ESCAPE_ROPE

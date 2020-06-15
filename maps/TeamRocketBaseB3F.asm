@@ -199,7 +199,7 @@ TeamRocketBaseB3FLockedDoor:
 	end
 
 TeamRocketBaseB3FOathScript:
-	jumpstd teamrocketoath
+	jumpstd TeamRocketOathScript
 
 TeamRocketBaseB3FFullHeal:
 	itemball FULL_HEAL

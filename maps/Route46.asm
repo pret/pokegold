@@ -78,31 +78,31 @@ TrainerPicnickerErin1:
 	end
 
 Route46AskNumber1F:
-	jumpstd asknumber1f
+	jumpstd AskNumber1FScript
 	end
 
 Route46AskNumber2F:
-	jumpstd asknumber2f
+	jumpstd AskNumber2FScript
 	end
 
 Route46RegisteredNumberF:
-	jumpstd registerednumberf
+	jumpstd RegisteredNumberFScript
 	end
 
 Route46NumberAcceptedF:
-	jumpstd numberacceptedf
+	jumpstd NumberAcceptedFScript
 	end
 
 Route46NumberDeclinedF:
-	jumpstd numberdeclinedf
+	jumpstd NumberDeclinedFScript
 	end
 
 Route46PhoneFullF:
-	jumpstd phonefullf
+	jumpstd PhoneFullFScript
 	end
 
 Route46RematchF:
-	jumpstd rematchf
+	jumpstd RematchFScript
 	end
 
 TrainerHikerBailey:

@@ -10,7 +10,7 @@ PlayersNeighborsDaughterScript:
 	jumptextfaceplayer PlayersNeighborsDaughterText
 
 PlayersNeighborsHouseBookshelfScript:
-	jumpstd magazinebookshelf
+	jumpstd MagazineBookshelfScript
 
 PlayersNeighborsHouseRadioScript:
 	checkevent EVENT_GOT_A_POKEMON_FROM_ELM
@@ -32,7 +32,7 @@ PlayersNeighborsHouseRadioScript:
 	setevent EVENT_LISTENED_TO_INITIAL_RADIO
 	end
 .NormalRadio:
-	jumpstd radio1
+	jumpstd Radio1Script
 .AbbreviatedRadio:
 	opentext
 	writetext PlayerNeighborRadioText4

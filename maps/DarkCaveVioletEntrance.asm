@@ -22,7 +22,7 @@ DarkCaveVioletEntranceHyperPotion:
 	itemball HYPER_POTION
 
 DarkCaveVioletEntranceRock:
-	jumpstd smashrock
+	jumpstd SmashRockScript
 
 DarkCaveVioletEntranceHiddenElixer:
 	hiddenitem ELIXER, EVENT_DARK_CAVE_VIOLET_ENTRANCE_HIDDEN_ELIXER

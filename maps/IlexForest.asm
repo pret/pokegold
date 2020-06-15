@@ -299,7 +299,7 @@ IlexForestHiddenFullHeal:
 
 IlexForestBoulder:
 ; unused
-	jumpstd strengthboulder
+	jumpstd StrengthBoulderScript
 
 IlexForestSignpost:
 	jumptext IlexForestSignpostText

@@ -79,7 +79,7 @@ PokegearName:
 	db "#GEAR@"
 
 PlayersHouse1FReceiveItemStd:
-	jumpstd receiveitem
+	jumpstd ReceiveItemScript
 	end
 
 MomScript:

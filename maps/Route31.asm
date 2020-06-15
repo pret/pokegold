@@ -78,31 +78,31 @@ TrainerBugCatcherWade1:
 	end
 
 .AskPhoneNumberSTD:
-	jumpstd asknumber1m
+	jumpstd AskNumber1MScript
 	end
 
 .AskAgainSTD:
-	jumpstd asknumber2m
+	jumpstd AskNumber2MScript
 	end
 
 .RegisterNumberSTD:
-	jumpstd registerednumberm
+	jumpstd RegisteredNumberMScript
 	end
 
 .AcceptedNumberSTD:
-	jumpstd numberacceptedm
+	jumpstd NumberAcceptedMScript
 	end
 
 .DeclinedNumberSTD:
-	jumpstd numberdeclinedm
+	jumpstd NumberDeclinedMScript
 	end
 
 .PhoneFullSTD:
-	jumpstd phonefullm
+	jumpstd PhoneFullMScript
 	end
 
 .RematchSTD:
-	jumpstd rematchm
+	jumpstd RematchMScript
 	end
 
 

@@ -105,10 +105,10 @@ OlivineLighthouseSign:
 	jumptext OlivineLighthouseSignText
 
 OlivineCityPokecenterSign:
-	jumpstd pokecentersign
+	jumpstd PokecenterSignScript
 
 OlivineCityMartSign:
-	jumpstd martsign
+	jumpstd MartSignScript
 
 MovementData_0x1a88d2:
 	step DOWN

@@ -88,7 +88,7 @@ BurnedTowerB1FHPUp:
 BurnedTowerB1FTMEndure:
 	itemball TM_ENDURE
 BurnedTowerB1FBoulder:
-	jumpstd strengthboulder
+	jumpstd StrengthBoulderScript
 
 BurnedTowerB1FHiddenUltraBall:
 	hiddenitem ULTRA_BALL, EVENT_BURNED_TOWER_B1F_HIDDEN_ULTRA_BALL

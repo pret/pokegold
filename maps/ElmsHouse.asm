@@ -17,7 +17,7 @@ ElmsHousePC:
 	jumptext ElmsHousePCText
 
 ElmsHouseBookshelf:
-	jumpstd difficultbookshelf
+	jumpstd DifficultBookshelfScript
 
 ElmsWifeText:
 	text "Hi, <PLAYER>! My"

@@ -25,7 +25,7 @@ GoldenrodGameCorner_MapScripts:
 	db 0 ; callbacks
 
 GoldenrodGameCornerCoinVendorScript:
-	jumpstd gamecornercoinvendor
+	jumpstd GameCornerCoinVendorScript
 
 GoldenrodGameCornerTMVendorScript:
 	faceplayer

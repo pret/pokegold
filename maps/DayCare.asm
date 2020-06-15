@@ -45,7 +45,7 @@ DayCareLadyScript:
 	end
 
 DayCareBookshelf:
-	jumpstd difficultbookshelf
+	jumpstd DifficultBookshelfScript
 
 Text_GrampsLookingForYou:
 	text "Gramps was looking"
