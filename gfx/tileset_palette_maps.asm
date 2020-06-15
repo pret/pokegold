@@ -1,8 +1,9 @@
 tilepal: MACRO
 ; used in gfx/tilesets/*_palette_map.asm
-; pals
-rept _NARG / 2
-	dn PAL_BG_\2, PAL_BG_\1
+; vram bank, pals
+x = \1 << OAM_TILE_BANK
+rept (_NARG - 1) / 2
+	dn (x | PAL_BG_\3), (x | PAL_BG_\2)
 	shift 2
 endr
 ENDM
