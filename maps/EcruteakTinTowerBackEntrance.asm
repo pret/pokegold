@@ -1,9 +1,9 @@
-WiseTriosRoom_MapScripts:
+EcruteakTinTowerBackEntrance_MapScripts:
 	db 0 ; scene scripts
 
 	db 0 ; callbacks
 
-WiseTriosRoom_MapEvents:
+EcruteakTinTowerBackEntrance_MapEvents:
 	db 0, 0 ; filler
 
 	db 3 ; warp events

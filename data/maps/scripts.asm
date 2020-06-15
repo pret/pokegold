@@ -231,7 +231,7 @@ INCLUDE "maps/Route42EcruteakGate.asm"
 SECTION "Map Scripts 17", ROMX
 
 INCLUDE "maps/EcruteakTinTowerEntrance.asm"
-INCLUDE "maps/WiseTriosRoom.asm"
+INCLUDE "maps/EcruteakTinTowerBackEntrance.asm"
 INCLUDE "maps/EcruteakPokecenter1F.asm"
 INCLUDE "maps/EcruteakLugiaSpeechHouse.asm"
 INCLUDE "maps/DanceTheatre.asm"

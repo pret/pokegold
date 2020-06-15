@@ -473,7 +473,7 @@ ENDM
 	map_attributes SafariZoneBeta, SAFARI_ZONE_BETA, $13, 0
 	map_attributes VictoryRoad, VICTORY_ROAD, $1d, 0
 	map_attributes EcruteakTinTowerEntrance, ECRUTEAK_TIN_TOWER_ENTRANCE, $00, 0
-	map_attributes WiseTriosRoom, WISE_TRIOS_ROOM, $00, 0
+	map_attributes EcruteakTinTowerBackEntrance, ECRUTEAK_TIN_TOWER_BACK_ENTRANCE, $00, 0
 	map_attributes EcruteakPokecenter1F, ECRUTEAK_POKECENTER_1F, $00, 0
 	map_attributes EcruteakLugiaSpeechHouse, ECRUTEAK_LUGIA_SPEECH_HOUSE, $00, 0
 	map_attributes DanceTheatre, DANCE_THEATRE, $00, 0

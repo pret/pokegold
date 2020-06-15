@@ -983,8 +983,8 @@ GoldenrodFlowerShop_Blocks:
 MountMoonSquare_Blocks:
 	INCBIN "maps/MountMoonSquare.blk"
 
-WiseTriosRoom_Blocks:
-	INCBIN "maps/WiseTriosRoom.blk"
+EcruteakTinTowerBackEntrance_Blocks:
+	INCBIN "maps/EcruteakTinTowerBackEntrance.blk"
 
 DragonsDen1F_Blocks:
 	INCBIN "maps/DragonsDen1F.blk"
