@@ -16,8 +16,6 @@ HallOfFame::
 
 ; Bug: Gold/Silver fail to (conditionally) erase the previous save and
 ; initialize the current save, if the player did not save on this playthrough.
-; pokecrystal does the following here (routine doesn't exist in Gold/Silver):
-;	farcall HallOfFame_InitSaveIfNeeded
 
 	ld hl, wHallOfFameCount
 	ld a, [hl]
