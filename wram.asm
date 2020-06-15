@@ -2612,11 +2612,17 @@ ENDU ; df01
 
 wPokemonDataEnd::
 wGameDataEnd::
+; df01
 
 
 SECTION "Stack", WRAMX
 
+	ds 2
+wStackBottom::
+	ds $fc
+wStack::
 wStackTop::
+	ds 1
 
 
 INCLUDE "sram.asm"

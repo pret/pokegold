@@ -262,14 +262,14 @@ WRAM0
 	"Overworld Map"
 	"Video"
 WRAMX 1
-	org $d000
 	"WRAM 1"
 	"Game Data"
 	"Party"
-	org $dfff
 	"Stack"
 VRAM $00
+	"VRAM0"
 VRAM $01
+	"VRAM1"
 SRAM $00
 	"Scratch"
 	org $a600
