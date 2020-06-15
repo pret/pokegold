@@ -110,8 +110,7 @@ CoinString:
 ShowMoney_TerminatorString:
 	db "@@"
 
-Unreferenced_Function24ab8:
-; related to safari?
+Unreferenced_StartMenu_PrintSafariGameStatus:
 	ld hl, wOptions
 	ld a, [hl]
 	push af

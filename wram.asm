@@ -230,7 +230,7 @@ wBoxPartialDataEnd::
 NEXTU ; c508
 ; 20x18 grid of 8x8 tiles
 wTempTilemap::
-	ds SCREEN_WIDTH * SCREEN_HEIGHT ; $168 = 360
+	ds SCREEN_WIDTH * SCREEN_HEIGHT
 
 NEXTU ; c508
 ; unown puzzle
@@ -428,15 +428,13 @@ wDummyGameNumCardsMatched:: db ; c609
 wDummyGameEnd::
 
 NEXTU ; c5d0
-; unused (engine/gfx/color.asm)
+; beta poker game
 	ds 50
-
-wc602:: db ; c602
+wBetaPokerSGBPals:: db ; c602
 	ds 2
-
-wc605:: db ; c605
-wc606:: db ; c606
-wc607:: db ; c607
+wBetaPokerSGBAttr:: db ; c605
+wBetaPokerSGBCol:: db ; c606
+wBetaPokerSGBRow:: db ; c607
 ENDU ; c6e8
 
 ENDU ; c6e8
@@ -2432,9 +2430,9 @@ wParkBallsRemaining::
 wSafariBallsRemaining:: db ; d9c3
 wSafariTimeRemaining:: dw ; d9c4
 
-wPhoneList:: ds CONTACT_LIST_SIZE ; d9c6
-; d9d0
-	ds 23
+wPhoneList:: ds CONTACT_LIST_SIZE + 1 ; d9c6
+
+	ds 22
 
 wLuckyNumberShowFlag:: db ; d9e7
 	ds 1

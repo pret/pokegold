@@ -1110,7 +1110,7 @@ CheckMimicUsed:
 	call GetBattleVar
 	cp MIMIC
 	jr z, .mimic
-;
+
 	ld b, 0
 	add hl, bc
 	ld a, [hl]
@@ -1545,7 +1545,7 @@ BattleCommand_DamageVariation:
 	call Multiply
 
 ; ...divide by 100%...
-	ld a, $ff ; 100%
+	ld a, 100 percent
 	ldh [hDivisor], a
 	ld b, $4
 	call Divide

@@ -339,7 +339,7 @@ endr
 
 .SGB_BetaPoker:
 	ld hl, BlkPacket_9ee5
-	ld de, wc602
+	ld de, wBetaPokerSGBPals
 	ld bc, PALPACKET_LENGTH
 	call CopyBytes
 	ld hl, PalPacket_BetaPoker

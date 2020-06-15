@@ -1427,10 +1427,10 @@ Function28a16:
 	ld bc, SCREEN_WIDTH - 2
 	call ByteFill
 	hlcoord 2, 16
-	ld de, .Cancel
+	ld de, .CancelString
 	jp PlaceString
 
-.Cancel:
+.CancelString:
 	db "CANCEL@"
 
 Function28a3c:

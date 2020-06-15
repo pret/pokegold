@@ -401,11 +401,11 @@ ScrollingMenu_UpdateDisplay:
 	ld a, [wMenuDataFlags]
 	bit 0, a ; call function on cancel
 	jr nz, .call_function
-	ld de, .string_24787
+	ld de, .CancelString
 	call PlaceString
 	ret
 
-.string_24787
+.CancelString
 	db "CANCEL@"
 
 .call_function

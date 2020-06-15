@@ -367,7 +367,7 @@ TrainerCard_InitBorder:
 
 	ld a, $23
 	ld [hli], a
-	ld e, SCREEN_HEIGHT - 1
+	ld e, SCREEN_WIDTH - 3
 	ld a, " "
 .loop2
 	ld [hli], a
@@ -378,11 +378,12 @@ TrainerCard_InitBorder:
 	ld [hli], a
 	ld a, $23
 	ld [hli], a
+
 .loop3
 	ld a, $23
 	ld [hli], a
 
-	ld e, SCREEN_HEIGHT
+	ld e, SCREEN_WIDTH - 2
 	ld a, " "
 .loop4
 	ld [hli], a
@@ -391,6 +392,7 @@ TrainerCard_InitBorder:
 
 	ld a, $23
 	ld [hli], a
+
 	dec d
 	jr nz, .loop3
 
@@ -399,14 +401,16 @@ TrainerCard_InitBorder:
 	ld a, $24
 	ld [hli], a
 
-	ld e, SCREEN_HEIGHT - 1
+	ld e, SCREEN_WIDTH - 3
 	ld a, " "
 .loop5
 	ld [hli], a
 	dec e
 	jr nz, .loop5
+
 	ld a, $23
 	ld [hli], a
+
 	ld e, SCREEN_WIDTH
 .loop6
 	ld a, $23

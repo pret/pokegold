@@ -1,4 +1,4 @@
-PrintMoveDesc:
+PrintMoveDescription:
 	push hl
 	ld hl, MoveDescriptions
 	ld a, [wCurSpecies]

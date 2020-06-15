@@ -247,13 +247,13 @@ Unreferenced_Function91b4:
 	ldh a, [hCGB]
 	and a
 	jr nz, .cgb
-	ld hl, wc602
+	ld hl, wBetaPokerSGBPals
 	jp PushSGBPals
 
 .cgb
-	ld a, [wc606] ; col
+	ld a, [wBetaPokerSGBCol]
 	ld c, a
-	ld a, [wc607] ; row
+	ld a, [wBetaPokerSGBRow]
 	hlcoord 0, 0, wAttrmap
 	ld de, SCREEN_WIDTH
 .loop
@@ -267,7 +267,7 @@ Unreferenced_Function91b4:
 	ld b, $0
 	add hl, bc
 	lb bc, 6, 4
-	ld a, [wc605] ; value
+	ld a, [wBetaPokerSGBAttr]
 	and $3
 	call FillBoxCGB
 	call CopyTilemapAtOnce
@@ -1235,6 +1235,9 @@ INCLUDE "gfx/diploma/diploma.pal"
 
 PartyMenuOBPals:
 INCLUDE "gfx/stats/party_menu_ob.pal"
+
+UnusedBattleObjectPals:
+INCLUDE "gfx/battle_anims/unused_battle_anims.pal"
 
 GSTitleBGPals:
 IF DEF(_GOLD)

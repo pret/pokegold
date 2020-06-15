@@ -249,7 +249,7 @@ SetClock::
 	call CloseSRAM ; unlatch clock, disable clock r/w
 	ret
 
-ClearRTCStatus::
+UnreferencedClearRTCStatus::
 ; clear sRTCStatusFlags
 	xor a
 	push af
