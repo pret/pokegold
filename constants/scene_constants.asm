@@ -62,11 +62,6 @@ SCENE_FINISHED EQU 1
 	const SCENE_ROUTE35NATIONALPARKGATE_UNUSED              ; 1
 	const SCENE_ROUTE35NATIONALPARKGATE_LEAVE_CONTEST_EARLY ; 2
 
-; wRoute36SceneID
-	const_def
-	const SCENE_ROUTE36_NOTHING ; 0
-	const SCENE_ROUTE36_SUICUNE ; 1
-
 ; wRoute36NationalParkGateSceneID
 	const_def
 	const SCENE_ROUTE36NATIONALPARKGATE_NOTHING             ; 0
@@ -77,22 +72,11 @@ SCENE_FINISHED EQU 1
 	const_def
 	const SCENE_AZALEATOWN_NOTHING              ; 0
 	const SCENE_AZALEATOWN_RIVAL_BATTLE         ; 1
-	const SCENE_AZALEATOWN_KURT_RETURNS_GS_BALL ; 2
 
 ; wGoldenrodGymSceneID
 	const_def
 	const SCENE_GOLDENRODGYM_NOTHING              ; 0
 	const SCENE_GOLDENRODGYM_WHITNEY_STOPS_CRYING ; 1
-
-; wRoute42SceneID
-	const_def
-	const SCENE_ROUTE42_NOTHING ; 0
-	const SCENE_ROUTE42_SUICUNE ; 1
-
-; wCianwoodCitySceneID
-	const_def
-	const SCENE_CIANWOODCITY_NOTHING            ; 0
-	const SCENE_CIANWOODCITY_SUICUNE_AND_EUSINE ; 1
 
 ; wBurnedTower1FSceneID
 	const_def 1
@@ -135,11 +119,6 @@ SCENE_FINISHED EQU 1
 	const SCENE_TEAMROCKETBASEB3F_RIVAL_ENCOUNTER ; 1
 	const SCENE_TEAMROCKETBASEB3F_ROCKET_BOSS     ; 2
 	const SCENE_TEAMROCKETBASEB3F_NOTHING         ; 3
-
-; wDragonsDenB1FSceneID
-	const_def
-	const SCENE_DRAGONSDENB1F_NOTHING        ; 0
-	const SCENE_DRAGONSDENB1F_CLAIR_GIVES_TM ; 1
 
 ; wOlivinePortSceneID
 	const_def 1

@@ -58,7 +58,7 @@ MapScenes::
 	scene_var GOLDENROD_UNDERGROUND_SWITCH_ROOM_ENTRANCES, wGoldenrodUndergroundSwitchRoomEntrancesSceneID
 	scene_var SILVER_CAVE_ROOM_3,                          wSilverCaveRoom3SceneID ; unused
 	scene_var VICTORY_ROAD,                                wVictoryRoadSceneID
-	scene_var DRAGONS_DEN_B1F,                             wDragonsDenB1FSceneID
+	scene_var DRAGONS_DEN_B1F,                             wDragonsDenB1FSceneID ; unused
 	scene_var OLIVINE_PORT,                                wOlivinePortSceneID
 	scene_var VERMILION_PORT,                              wVermilionPortSceneID
 	scene_var FAST_SHIP_1F,                                wFastShip1FSceneID
