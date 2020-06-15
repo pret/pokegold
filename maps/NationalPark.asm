@@ -102,7 +102,7 @@ TrainerSchoolboyJack1:
 	winlosstext SchoolboyJack1BeatenText, 0
 	checkevent EVENT_CLEARED_RADIO_TOWER
 	iftrue .LoadFight2
-	checkflag EVENT_MANIA_TOOK_SHUCKIE_OR_LET_YOU_KEEP_HIM ; XXX ???
+	checkflag ENGINE_FLYPOINT_OLIVINE
 	iftrue .LoadFight1
 	loadtrainer SCHOOLBOY, JACK1
 	startbattle
@@ -196,7 +196,7 @@ TrainerPokefanfBeverly1:
 	winlosstext PokefanfBeverly1BeatenText, 0
 	checkevent EVENT_CLEARED_RADIO_TOWER
 	iftrue .LoadFight2
-	checkflag EVENT_GOT_PINK_BOW_FROM_MARY
+	checkflag ENGINE_FLYPOINT_MAHOGANY
 	iftrue .LoadFight1
 	loadtrainer POKEFANF, BEVERLY1
 	startbattle
