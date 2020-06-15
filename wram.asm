@@ -2495,7 +2495,7 @@ wPartyMonOT:: ds NAME_LENGTH * PARTY_LENGTH ; db4a
 wPartyMonNicknames:: ds MON_NAME_LENGTH * PARTY_LENGTH ; db8c
 wPartyMonNicknamesEnd::
 
-	ds 22 ; equivalent to NAME_LENGTH + MON_NAME_LENGTH, possibly a reference to 7 pokemon?
+	ds 22
 
 wPokedexCaught:: flag_array NUM_POKEMON ; dbe4
 wEndPokedexCaught::
