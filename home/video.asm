@@ -392,20 +392,23 @@ AnimateTileset::
 	set 1, [hl]
 	ret
 
-BlackOutBGMap::
+FillBGMap0WithBlack::
 	nop
-	ldh a, [hBlackOutBGMapThird]
-	and a
+	ldh a, [hFillBGMap0WithBlackThird]
+	and a ; 0
 	ret z
 
-	dec a
+	dec a ; 1
 	jr z, .one
-	dec a
+	dec a ; 2
 	jr z, .two
+	; 3
+
+BG_THIRD_HEIGHT EQU (BG_MAP_HEIGHT - SCREEN_HEIGHT) / 2
 
 ; Black out the 18 BG Map rows right of the screen area
 	ld a, 2
-	ldh [hBlackOutBGMapThird], a
+	ldh [hFillBGMap0WithBlackThird], a
 	ld hl, hBGMapAddress
 	ld a, [hli]
 	ld h, [hl]
@@ -432,16 +435,16 @@ endr
 .one
 ; Black out the bottom 7 BG Map rows below the screen area
 	xor a
-	ld de, BG_MAP_WIDTH * (SCREEN_HEIGHT + 7)
+	ld de, BG_MAP_WIDTH * (SCREEN_HEIGHT + BG_THIRD_HEIGHT)
 
 .go
-	ldh [hBlackOutBGMapThird], a
+	ldh [hFillBGMap0WithBlackThird], a
 	ld hl, hBGMapAddress
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
 	add hl, de
-	ld b, 7 * 2
+	ld b, BG_THIRD_HEIGHT * 2
 	ld a, "■"
 .loop2
 rept BG_MAP_WIDTH / 2
