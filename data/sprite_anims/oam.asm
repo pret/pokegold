@@ -9,7 +9,7 @@ SpriteAnimOAMData:
 	dbw $6e, .OAMData_GSIntroShellder          ; SPRITE_ANIM_OAMSET_GS_INTRO_SHELLDER_2
 	dbw $2d, .OAMData_GSIntroMagikarp          ; SPRITE_ANIM_OAMSET_GS_INTRO_MAGIKARP_1
 	dbw $4d, .OAMData_GSIntroMagikarp          ; SPRITE_ANIM_OAMSET_GS_INTRO_MAGIKARP_2
- 	dbw $60, .OAMData_UnusedLapras             ; SPRITE_ANIM_OAMSET_UNUSED_LAPRAS
+ 	dbw $60, .OAMData_UnusedLapras             ; SPRITE_ANIM_OAMSET_GS_INTRO_UNUSED_LAPRAS
  	dbw $00, .OAMData_GSIntroLapras1           ; SPRITE_ANIM_OAMSET_GS_INTRO_LAPRAS_1
  	dbw $00, .OAMData_GSIntroLapras2           ; SPRITE_ANIM_OAMSET_GS_INTRO_LAPRAS_2
 	dbw $06, .OAMData_GSIntroLapras3           ; SPRITE_ANIM_OAMSET_GS_INTRO_LAPRAS_3

@@ -7,7 +7,6 @@ main.o \
 wram.o \
 data/text/common.o \
 data/maps/map_data.o \
-data/pokemon/dex_entries.o \
 data/pokemon/egg_moves.o \
 data/pokemon/evos_attacks.o \
 engine/movie/credits.o \
@@ -16,10 +15,12 @@ gfx/sprites.o \
 gfx/tilesets.o
 
 # Distinguish asm files which are game-exclusive for building (*_[gold|silver].asm)
-gs_excl_asm := gfx/pics
+gs_excl_asm := \
+data/pokemon/dex_entries \
+gfx/pics
+
 gold_excl_obj := $(addsuffix _gold.o,$(gs_excl_asm))
 silver_excl_obj := $(addsuffix _silver.o,$(gs_excl_asm))
-
 gold_obj := $(rom_obj:.o=_gold.o) $(gold_excl_obj)
 silver_obj := $(rom_obj:.o=_silver.o) $(silver_excl_obj)
 

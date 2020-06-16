@@ -51,7 +51,7 @@ BlkPacket_9f55:
 	attr_blk_data %111, 1,1,0, 01,04, 07,10
 	ds 8
 
-BlkPacket_9f65:
+BlkPacket_Pokedex_5x5:
 	attr_blk 1
 	attr_blk_data %111, 1,1,0, 01,01, 05,05
 	ds 8

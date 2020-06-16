@@ -61,7 +61,7 @@ LoadSGBLayoutCGB:
 	dw _CGB_TrainerOrMonFrontpicPals
 	dw _CGB_MysteryGift
 	dw _CGB1e
-	dw _CGB_Pokedex_5_5
+	dw _CGB_Pokedex_5x5
 
 _CGB_BattleGrayscale:
 	ld hl, PalPacket_BattleGrayscale + 1
@@ -229,7 +229,7 @@ _CGB_Pokedex:
 	call FillBoxCGB
 	jp _CGB_Pokedex_Resume
 
-_CGB_Pokedex_5_5:
+_CGB_Pokedex_5x5:
 	call _CGB_Pokedex_Init
 	hlcoord 1, 1, wAttrmap
 	lb bc, 5, 5

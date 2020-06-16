@@ -23,9 +23,9 @@ SpriteAnimFrameData:
 	dw .Frameset_GSIntroCyndaquil
 	dw .Frameset_GSIntroTotodile
 	dw .Frameset_GSTitleTrail
-	dw .Frameset_GSIntroPikachu  ; SPRITE_ANIM_FRAMESET_UNUSED_PIKACHU
-	dw .Frameset_GSIntroPikachu2 ; SPRITE_ANIM_FRAMESET_UNUSED_PIKACHU_2
-	dw .Frameset_GSIntroPikachu4 ; SPRITE_ANIM_FRAMESET_UNUSED_PIKACHU_3
+	dw .Frameset_GSIntroPikachu
+	dw .Frameset_GSIntroPikachu2
+	dw .Frameset_GSIntroPikachu4
 	dw .Frameset_TextEntryCursor
 	dw .Frameset_TextEntryCursorBig
 	dw .Frameset_GameFreakLogo
@@ -46,7 +46,7 @@ SpriteAnimFrameData:
 	dw .Frameset_EvolutionBallOfLight
 	dw .Frameset_RadioTuningKnob
 	dw .Frameset_MagnetTrainRed
-	dw .Frameset_Unused1C
+	dw .Frameset_Unused2E
 	dw .Frameset_Leaf
 	dw .Frameset_CutTree
 	dw .Frameset_EggCrack
@@ -94,12 +94,12 @@ SpriteAnimFrameData:
 	dorestart
 
 .Frameset_GSIntroMagikarp:
-	frame SPRITE_ANIM_OAMSET_GS_INTRO_MAGIKARP_1,  $41
-	frame SPRITE_ANIM_OAMSET_GS_INTRO_MAGIKARP_2,  $41
+	frame SPRITE_ANIM_OAMSET_GS_INTRO_MAGIKARP_1,  1, OAM_X_FLIP
+	frame SPRITE_ANIM_OAMSET_GS_INTRO_MAGIKARP_2,  1, OAM_X_FLIP
 	dorestart
 
 .Frameset_UnusedLapras:
-	frame SPRITE_ANIM_OAMSET_UNUSED_LAPRAS,  $47
+	frame SPRITE_ANIM_OAMSET_GS_INTRO_UNUSED_LAPRAS,  7, OAM_X_FLIP
 	endanim
 
 .Frameset_GSIntroLapras:
@@ -118,14 +118,14 @@ SpriteAnimFrameData:
 	endanim
 
 .Frameset_GSIntroJigglypuff:
-	frame SPRITE_ANIM_OAMSET_GS_INTRO_JIGGLYPUFF_1,  $59
+	frame SPRITE_ANIM_OAMSET_GS_INTRO_JIGGLYPUFF_1, 25, OAM_X_FLIP
 	frame SPRITE_ANIM_OAMSET_GS_INTRO_JIGGLYPUFF_3,  9
-	frame SPRITE_ANIM_OAMSET_GS_INTRO_JIGGLYPUFF_1,  $19
+	frame SPRITE_ANIM_OAMSET_GS_INTRO_JIGGLYPUFF_1, 25
 	frame SPRITE_ANIM_OAMSET_GS_INTRO_JIGGLYPUFF_3,  9
 	dorestart
 
 .Frameset_GSIntroJigglypuff2:
-	frame SPRITE_ANIM_OAMSET_GS_INTRO_JIGGLYPUFF_2,  32
+	frame SPRITE_ANIM_OAMSET_GS_INTRO_JIGGLYPUFF_2, 32
 	endanim
 
 .Frameset_GSIntroPikachu:
@@ -139,7 +139,7 @@ SpriteAnimFrameData:
 	endanim
 
 .Frameset_GSIntroPikachu3:
-	frame SPRITE_ANIM_OAMSET_GS_INTRO_PIKACHU_3,  32
+	frame SPRITE_ANIM_OAMSET_GS_INTRO_PIKACHU_3, 32
 	endanim
 
 .Frameset_GSIntroPikachuTail:
@@ -150,7 +150,7 @@ SpriteAnimFrameData:
 	dorestart
 
 .Frameset_GSIntroPikachuTail2:
-	frame SPRITE_ANIM_OAMSET_GS_INTRO_PIKACHU_TAIL_1,  $1f
+	frame SPRITE_ANIM_OAMSET_GS_INTRO_PIKACHU_TAIL_1, 31
 	endanim
 
 .Frameset_GSIntroFireball:
@@ -160,15 +160,15 @@ SpriteAnimFrameData:
 	delanim
 
 .Frameset_GSIntroChikorita:
-	frame SPRITE_ANIM_OAMSET_GS_INTRO_CHIKORITA,  $18
+	frame SPRITE_ANIM_OAMSET_GS_INTRO_CHIKORITA, 24
 	delanim
 
 .Frameset_GSIntroCyndaquil:
-	frame SPRITE_ANIM_OAMSET_GS_INTRO_CYNDAQUIL,  $58
+	frame SPRITE_ANIM_OAMSET_GS_INTRO_CYNDAQUIL, 24, OAM_X_FLIP
 	delanim
 
 .Frameset_GSIntroTotodile:
-	frame SPRITE_ANIM_OAMSET_GS_INTRO_TOTODILE,  $18
+	frame SPRITE_ANIM_OAMSET_GS_INTRO_TOTODILE, 24
 	delanim
 
 .Frameset_GSTitleTrail:
@@ -177,14 +177,14 @@ IF DEF(_GOLD)
 	frame SPRITE_ANIM_OAMSET_GS_TITLE_TRAIL_2,  1
 	dorestart
 ELIF DEF(_SILVER)
-	frame SPRITE_ANIM_OAMSET_GS_TITLE_TRAIL_1,  32
+	frame SPRITE_ANIM_OAMSET_GS_TITLE_TRAIL_1, 32
 	endanim
 ENDC
 
 .Frameset_GSIntroPikachu4:
 	frame SPRITE_ANIM_OAMSET_GS_INTRO_PIKACHU_2,  0
-	frame SPRITE_ANIM_OAMSET_GS_INTRO_PIKACHU_3,  15
-	frame SPRITE_ANIM_OAMSET_GS_INTRO_PIKACHU_4,  15
+	frame SPRITE_ANIM_OAMSET_GS_INTRO_PIKACHU_3, 15
+	frame SPRITE_ANIM_OAMSET_GS_INTRO_PIKACHU_4, 15
 	endanim
 
 .Frameset_TextEntryCursor:
@@ -334,7 +334,7 @@ ENDC
 	dowait 3
 	dorestart
 
-.Frameset_Unused1C:
+.Frameset_Unused2E:
 	dowait 32
 	endanim
 

@@ -1071,6 +1071,8 @@ BeatUpAttackText:
 	line "attack!"
 	done
 
+; BUG: Pokémon names 8-10 characters long can overflow the textbox,
+; printing as "Enemy 1234567890 can't": up to 21 characters, over 18.
 CantReceiveGiftText:
 	text "<TARGET> can't"
 	line "receive the gift!"

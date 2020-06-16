@@ -278,6 +278,8 @@ ENDM
 	add_hm WATERFALL    ; f9
 NUM_HMS EQU const_value - HM01
 
+NUM_TM_HM EQU __enum__ - 1
+
 	const ITEM_FA       ; fa
 
 USE_SCRIPT_VAR EQU $00

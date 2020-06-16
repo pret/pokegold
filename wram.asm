@@ -1948,7 +1948,7 @@ wBaseUnusedFrontpic:: dw ; d132
 wBaseUnusedBackpic:: dw ; d134
 wBaseGrowthRate:: db ; d136
 wBaseEggGroups:: db ; d137
-wBaseTMHM:: flag_array NUM_TMS + NUM_HMS ; d138
+wBaseTMHM:: flag_array NUM_TM_HM ; d138
 wCurBaseDataEnd::
 
 	ds 1

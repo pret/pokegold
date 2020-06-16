@@ -1,21 +1,21 @@
 ; sprite_anim_struct members (see macros/wram.asm)
 	const_def
-	const SPRITEANIMSTRUCT_INDEX           ; 00
-	const SPRITEANIMSTRUCT_FRAMESET_ID     ; 01
-	const SPRITEANIMSTRUCT_ANIM_SEQ_ID     ; 02
-	const SPRITEANIMSTRUCT_TILE_ID         ; 03
-	const SPRITEANIMSTRUCT_XCOORD          ; 04
-	const SPRITEANIMSTRUCT_YCOORD          ; 05
-	const SPRITEANIMSTRUCT_XOFFSET         ; 06
-	const SPRITEANIMSTRUCT_YOFFSET         ; 07
-	const SPRITEANIMSTRUCT_DURATION        ; 08
-	const SPRITEANIMSTRUCT_DURATIONOFFSET  ; 09
-	const SPRITEANIMSTRUCT_FRAME           ; 0a
-	const SPRITEANIMSTRUCT_JUMPTABLE_INDEX ; 0b
-	const SPRITEANIMSTRUCT_0C              ; 0c
-	const SPRITEANIMSTRUCT_0D              ; 0d
-	const SPRITEANIMSTRUCT_0E              ; 0e
-	const SPRITEANIMSTRUCT_0F              ; 0f
+	const SPRITEANIMSTRUCT_INDEX           ; 0
+	const SPRITEANIMSTRUCT_FRAMESET_ID     ; 1
+	const SPRITEANIMSTRUCT_ANIM_SEQ_ID     ; 2
+	const SPRITEANIMSTRUCT_TILE_ID         ; 3
+	const SPRITEANIMSTRUCT_XCOORD          ; 4
+	const SPRITEANIMSTRUCT_YCOORD          ; 5
+	const SPRITEANIMSTRUCT_XOFFSET         ; 6
+	const SPRITEANIMSTRUCT_YOFFSET         ; 7
+	const SPRITEANIMSTRUCT_DURATION        ; 8
+	const SPRITEANIMSTRUCT_DURATIONOFFSET  ; 9
+	const SPRITEANIMSTRUCT_FRAME           ; a
+	const SPRITEANIMSTRUCT_JUMPTABLE_INDEX ; b
+	const SPRITEANIMSTRUCT_0C              ; c
+	const SPRITEANIMSTRUCT_0D              ; d
+	const SPRITEANIMSTRUCT_0E              ; e
+	const SPRITEANIMSTRUCT_0F              ; f
 SPRITEANIMSTRUCT_LENGTH EQU const_value
 NUM_SPRITE_ANIM_STRUCTS EQU 10 ; see wSpriteAnimationStructs
 
@@ -65,7 +65,7 @@ NUM_SPRITE_ANIM_STRUCTS EQU 10 ; see wSpriteAnimationStructs
 	const SPRITE_ANIM_INDEX_CUT_TREE                ; 29
 	const SPRITE_ANIM_INDEX_FLY_LEAF                ; 2a
 	const SPRITE_ANIM_INDEX_EGG_CRACK               ; 2b
-	const SPRITE_ANIM_INDEX_GS_INTRO_HO_OH          ; 2c
+	const SPRITE_ANIM_INDEX_GS_INTRO_HO_OH_LUGIA    ; 2c
 	const SPRITE_ANIM_INDEX_HEADBUTT                ; 2d
 	const SPRITE_ANIM_INDEX_EGG_HATCH               ; 2e
 
@@ -162,7 +162,7 @@ NUM_SPRITE_ANIM_STRUCTS EQU 10 ; see wSpriteAnimationStructs
 	const SPRITE_ANIM_FRAMESET_EVOLUTION_BALL_OF_LIGHT  ; 2b
 	const SPRITE_ANIM_FRAMESET_RADIO_TUNING_KNOB        ; 2c
 	const SPRITE_ANIM_FRAMESET_MAGNET_TRAIN_RED         ; 2d
-	const SPRITE_ANIM_FRAMESET_UNUSED_1C                ; 2e
+	const SPRITE_ANIM_FRAMESET_UNUSED_2E                ; 2e
 	const SPRITE_ANIM_FRAMESET_LEAF                     ; 2f
 	const SPRITE_ANIM_FRAMESET_CUT_TREE                 ; 30
 	const SPRITE_ANIM_FRAMESET_EGG_CRACK                ; 31
@@ -183,7 +183,7 @@ NUM_SPRITE_ANIM_STRUCTS EQU 10 ; see wSpriteAnimationStructs
 	const SPRITE_ANIM_OAMSET_GS_INTRO_SHELLDER_2        ; 05
 	const SPRITE_ANIM_OAMSET_GS_INTRO_MAGIKARP_1        ; 06
 	const SPRITE_ANIM_OAMSET_GS_INTRO_MAGIKARP_2        ; 07
-	const SPRITE_ANIM_OAMSET_UNUSED_LAPRAS              ; 08
+	const SPRITE_ANIM_OAMSET_GS_INTRO_UNUSED_LAPRAS     ; 08
 	const SPRITE_ANIM_OAMSET_GS_INTRO_LAPRAS_1          ; 09
 	const SPRITE_ANIM_OAMSET_GS_INTRO_LAPRAS_2          ; 0a
 	const SPRITE_ANIM_OAMSET_GS_INTRO_LAPRAS_3          ; 0b
