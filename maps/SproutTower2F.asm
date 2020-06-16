@@ -33,7 +33,7 @@ TrainerSageEdmond:
 SproutTower2FStatue:
 	jumptext SproutTower2FStatueText
 
-SproutTower2FXAccuracy:
+SproutTower2FXDefend:
 	itemball X_DEFEND
 
 SageNicoSeenText:
@@ -99,4 +99,4 @@ SproutTower2F_MapEvents:
 	db 3 ; object events
 	object_event 14,  4, SPRITE_SAGE, SPRITEMOVEDATA_SPINRANDOM_FAST, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_TRAINER, 2, TrainerSageNico, -1
 	object_event  3, 15, SPRITE_SAGE, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_TRAINER, 4, TrainerSageEdmond, -1
-	object_event  3,  1, SPRITE_POKE_BALL, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_ITEMBALL, 0, SproutTower2FXAccuracy, EVENT_SPROUT_TOWER2F_X_ACCURACY
+	object_event  3,  1, SPRITE_POKE_BALL, SPRITEMOVEDATA_STILL, 0, 0, -1, -1, 0, OBJECTTYPE_ITEMBALL, 0, SproutTower2FXDefend, EVENT_SPROUT_TOWER_2F_X_DEFEND
