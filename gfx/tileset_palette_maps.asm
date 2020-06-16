@@ -94,6 +94,5 @@ INCLUDE "gfx/tilesets/ice_path_palette_map.asm"
 TilesetForestPalMap:
 INCLUDE "gfx/tilesets/forest_palette_map.asm"
 
-; referenced in engine/tilesets/map_palettes.asm
 MapGroupPalettes:
 	ds NUM_MAP_GROUPS, PAL_BG_ROOF
