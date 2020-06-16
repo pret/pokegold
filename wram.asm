@@ -1232,15 +1232,18 @@ wPlayerMovement:: db ; ce88
 wMovementObject:: db ; ce8b
 wMovementDataBank:: db ; ce8c
 wMovementDataAddress:: dw ; ce8d
-wce8f:: db ; ce8f
+wce8f:: dw ; ce8f
 
-	ds 3
+	ds 2
 
 wMovementByteWasControlSwitch:: db ; ce93
+
+UNION ; ce94
+wObjectPriorities:: ds NUM_OBJECT_STRUCTS ; ce94
+
+NEXTU ; ce94
 wMovementPointer:: dw ; ce94
-
 	ds 3
-
 wTempObjectCopyMapObjectIndex:: db ; ce99
 wTempObjectCopySprite:: db ; ce9a
 wTempObjectCopySpriteVTile:: db ; ce9b
@@ -1250,6 +1253,7 @@ wTempObjectCopyRange:: db ; ce9e
 wTempObjectCopyX:: db ; ce9f
 wTempObjectCopyY:: db ; cea0
 wTempObjectCopyRadius:: db ; cea1
+ENDU ; cea1
 
 	ds 1
 
