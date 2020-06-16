@@ -1910,14 +1910,14 @@ RestoreHP:
 	ld b, a
 	ld a, [hl]
 	sbc b
-	jr c, .asm_3ccd5
+	jr c, .overflow
 	ld a, b
 	ld [hli], a
 	ld [wBuffer6], a
 	ld a, c
 	ld [hl], a
 	ld [wBuffer5], a
-.asm_3ccd5
+.overflow
 
 	call SwitchTurnCore
 	call UpdateHPBarBattleHuds
@@ -3198,7 +3198,7 @@ ScoreMonTypeMatchups:
 .loop5
 	call BattleRandom
 	and $7
-	cp 6
+	cp PARTY_LENGTH
 	jr nc, .loop5
 	ld b, a
 	ld a, [wCurOTMon]
@@ -5945,7 +5945,7 @@ LoadEnemyMon:
 	jr z, .Happiness
 ; 40% chance of not flooring
 	call Random
-	cp 40 percent - 2
+	cp 39 percent + 1
 	jr c, .Happiness
 ; Try again if length < 1024 mm (i.e. if HIGH(length) < 3 feet)
 	ld a, [wMagikarpLength]
@@ -7710,7 +7710,7 @@ GetEnemyMonFrontpic_DoAnim:
 	ldh a, [hBattleTurn]
 	push af
 	call SetEnemyTurn
-	ld a, BANK(BattleAnimCmd_MinimizeOpp)
+	ld a, BANK(BattleAnimCommands)
 	rst FarCall
 	pop af
 	ldh [hBattleTurn], a
@@ -7802,7 +7802,7 @@ InitEnemyTrainer:
 	xor a
 	ld [wOTPartyMon1Item], a
 
-.ok:
+.ok
 	ld de, vTiles2
 	callfar GetTrainerPic
 	xor a
@@ -7928,14 +7928,14 @@ Unreferenced_Function3f41a:
 
 ExitBattle:
 	call IsLinkBattle
-	jr nz, .handle_end_of_battle
+	jr nz, .HandleEndOfBattle
 	call ShowLinkBattleParticipantsAfterEnd
-	jr .clean_up_battle_ram
+	jr .CleanUpBattleRAM
 
-.handle_end_of_battle
+.HandleEndOfBattle:
 	ld a, [wBattleResult]
 	and $f
-	jr nz, .clean_up_battle_ram
+	jr nz, .CleanUpBattleRAM
 	; WIN
 	call CheckPayDay
 	xor a
@@ -7943,7 +7943,7 @@ ExitBattle:
 	predef EvolveAfterBattle
 	farcall GivePokerusAndConvertBerries
 
-.clean_up_battle_ram
+.CleanUpBattleRAM:
 	call BattleEnd_HandleRoamMons
 	xor a
 	ld [wLowHealthAlarm], a
@@ -8020,10 +8020,10 @@ ShowLinkBattleParticipantsAfterEnd:
 	ld a, [wBattleResult]
 	and $f
 	cp LOSE
-	ld de, .Win
-	jr c, .store_result
-	ld de, .Lose
-	jr z, .store_result
+	ld de, .YouWin
+	jr c, .store_result ; WIN
+	ld de, .YouLose
+	jr z, .store_result ; LOSE
 	; DRAW
 	ld de, .Draw
 
@@ -8045,9 +8045,9 @@ ShowLinkBattleParticipantsAfterEnd:
 	call ClearTilemap
 	ret
 
-.Win:
+.YouWin:
 	db "YOU WIN@"
-.Lose:
+.YouLose:
 	db "YOU LOSE@"
 .Draw:
 	db "  DRAW@"
@@ -8358,6 +8358,7 @@ AddLastLinkBattleToLinkRecord:
 	call .StoreResult
 	call .FindOpponentAndAppendRecord
 	ret
+
 .StoreResult:
 	ld a, [wBattleResult]
 	and $f
@@ -8574,6 +8575,9 @@ InitBackPic:
 	ret
 
 GetTrainerBackpic:
+; Load the player character's backpic (6x6) into VRAM starting from vTiles2 tile $31.
+
+; Special exception for Dude.
 	ld hl, ChrisBackpic
 	ld a, [wBattleType]
 	cp BATTLETYPE_TUTORIAL
@@ -8582,7 +8586,7 @@ GetTrainerBackpic:
 
 .ok:
 	ld de, vTiles2 tile $31
-	ld b, BANK(ChrisBackpic)
+	ld b, BANK(ChrisBackpic) ; aka BANK(DudeBackpic)
 	ld c, 7 * 7
 	predef DecompressGet2bpp
 	ret
@@ -8590,7 +8594,7 @@ GetTrainerBackpic:
 CopyBackpic:
 	ld a, BANK(sDecompressBuffer)
 	call OpenSRAM
-	ld hl, vTiles3
+	ld hl, vTiles0
 	ld de, sDecompressBuffer
 	ldh a, [hROMBank]
 	ld b, a
@@ -8598,7 +8602,7 @@ CopyBackpic:
 	call Request2bpp
 	call CloseSRAM
 	call .LoadTrainerBackpicAsOAM
-	ld a, 7 * 7
+	ld a, $31
 	ldh [hGraphicStartTile], a
 	hlcoord 2, 6
 	lb bc, 6, 6

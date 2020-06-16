@@ -87,7 +87,7 @@ HideHeadbuttTree:
 	ld h, [hl]
 	ld l, a
 
-	ld a, 5 ; grass block
+	ld a, $05 ; grass block
 	ld [hli], a
 	ld [hld], a
 	ld bc, SCREEN_WIDTH
@@ -228,7 +228,7 @@ Cut_SpawnLeaf:
 	ld [hl], FIELDMOVE_GRASS
 	ld hl, SPRITEANIMSTRUCT_0E
 	add hl, bc
-	ld [hl], 4
+	ld [hl], $4
 	pop af
 	ld hl, SPRITEANIMSTRUCT_0C
 	add hl, bc
@@ -418,7 +418,7 @@ FlyFunction_FrameTimer:
 	dec [hl]
 	cp $40
 	ret c
-	and 7
+	and $7
 	ret nz
 	ld de, SFX_FLY
 	call PlaySFX
@@ -433,7 +433,7 @@ FlyFunction_FrameTimer:
 	ld hl, wce65
 	ld a, [hl]
 	inc [hl]
-	and 7
+	and $7
 	ret nz
 	ld a, [hl]
 	and (6 * 8) >> 1
@@ -441,7 +441,7 @@ FlyFunction_FrameTimer:
 	add 8 * 8 ; gives a number in [$40, $50, $60, $70]
 	ld d, a
 	ld e, 0
-	ld a, SPRITE_ANIM_INDEX_FLY_LEAF ; fly land
+	ld a, SPRITE_ANIM_INDEX_FLY_LEAF
 	call InitSpriteAnimStruct
 	ld hl, SPRITEANIMSTRUCT_TILE_ID
 	add hl, bc

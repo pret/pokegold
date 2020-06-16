@@ -539,7 +539,6 @@ _QueueBattleAnimation:
 	callfar QueueBattleAnimation
 	ret
 
-
 BattleBGEffect_26:
 	call BattleBGEffects_AnonJumptable
 .anon_dw

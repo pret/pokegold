@@ -5045,10 +5045,9 @@ BattleCommand_ForceSwitch:
 	call UpdateBattleMonInParty
 	xor a
 	ld [wNumHits], a
-	inc a
+	inc a ; TRUE
 	ld [wForcedSwitch], a
-	; set battle draw
-	inc a
+	inc a ; DRAW
 	ld [wBattleResult], a
 	ld a, [wPlayerMoveStructAnimation]
 	jp .succeed
@@ -5140,10 +5139,9 @@ BattleCommand_ForceSwitch:
 	call UpdateBattleMonInParty
 	xor a
 	ld [wNumHits], a
-	inc a
+	inc a ; TRUE
 	ld [wForcedSwitch], a
-	; set battle draw
-	inc a
+	inc a ; DRAW
 	ld [wBattleResult], a
 	ld a, [wEnemyMoveStructAnimation]
 	jr .succeed

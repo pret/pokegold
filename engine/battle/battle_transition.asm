@@ -21,7 +21,7 @@ DoBattleTransition:
 	ld hl, hVBlank
 	ld a, [hl]
 	push af
-	ld [hl], 1
+	ld [hl], $1
 
 .loop
 	ld a, [wJumptableIndex]
@@ -533,14 +533,14 @@ StartTrainerBattle_LoadPokeBallGraphics:
 	hlcoord 2, 1
 	ld de, .PokeBallTransition
 	ld b, SCREEN_WIDTH - 4
-.loop
+.tile_loop
 	push hl
 	ld c, 2
-.loop2
+.row_loop
 	push hl
 	ld a, [de]
 	inc de
-.loop3
+.col_loop
 ; Loading is done bit by bit
 	and a
 	jr z, .done
@@ -549,7 +549,7 @@ StartTrainerBattle_LoadPokeBallGraphics:
 	ld [hl], BATTLETRANSITION_SQUARE
 .no_load
 	inc hl
-	jr .loop3
+	jr .col_loop
 
 .done
 	pop hl
@@ -558,7 +558,7 @@ StartTrainerBattle_LoadPokeBallGraphics:
 	add hl, bc
 	pop bc
 	dec c
-	jr nz, .loop2
+	jr nz, .row_loop
 
 	pop hl
 	push bc
@@ -566,7 +566,7 @@ StartTrainerBattle_LoadPokeBallGraphics:
 	add hl, bc
 	pop bc
 	dec b
-	jr nz, .loop
+	jr nz, .tile_loop
 
 	ldh a, [hCGB]
 	and a
@@ -594,10 +594,12 @@ StartTrainerBattle_LoadPokeBallGraphics:
 	ld de, wBGPals2 palette PAL_BG_TEXT
 	ld bc, 1 palettes
 	call CopyBytes
+
 	hlcoord 0, 0, wAttrmap
 	ld bc, SCREEN_HEIGHT * SCREEN_WIDTH
-	ld a, %00000111
+	ld a, PAL_BG_TEXT
 	call ByteFill
+
 	ld a, 1
 	ldh [hCGBPalUpdate], a
 	call DelayFrame

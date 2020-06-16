@@ -19,10 +19,10 @@ _DummyGame:
 	ld bc, 4 tiles
 	ld a, BANK(Unknown_e0908)
 	call FarCopyBytes
-	ld a, 8
+	ld a, $8
 	ld hl, wc508
 	ld [hli], a
-	ld [hl], 0
+	ld [hl], $0
 	hlcoord 0, 0
 	ld bc, SCREEN_HEIGHT * SCREEN_WIDTH
 	xor a

@@ -107,7 +107,7 @@ AnimateHallOfFame:
 
 .done
 	call HOF_AnimatePlayerPic
-	ld a, 4
+	ld a, $4
 	ld [wMusicFade], a
 	call RotateThreePalettesRight
 	ld c, 8
@@ -378,7 +378,7 @@ _HallOfFamePC:
 	hlcoord 11, 2
 
 .finish
-	ld de, .EmptyString1
+	ld de, .EmptyString
 	call PlaceString
 	call WaitBGMap
 	ld b, SCGB_PLAYER_OR_MON_FRONTPIC_PALS
@@ -389,10 +389,10 @@ _HallOfFamePC:
 	and a
 	ret
 
-.EmptyString1:
+.EmptyString:
 	db "@"
 
-.EmptyString2:
+.UnreferencedEmptyString:
 	db "@"
 
 .HOFMaster:

@@ -870,18 +870,18 @@ BattleAnimCmd_Transform:
 	and a
 	jr z, .player
 
-	ld a, [wTempBattleMonSpecies] ; TempBattleMonSpecies
-	ld [wCurPartySpecies], a ; CurPartySpecies
-	ld hl, wBattleMonDVs ; BattleMonDVs
+	ld a, [wTempBattleMonSpecies]
+	ld [wCurPartySpecies], a
+	ld hl, wBattleMonDVs
 	predef GetUnownLetter
 	ld de, vTiles2 tile $00
 	predef GetMonFrontpic
 	jr .done
 
 .player
-	ld a, [wTempEnemyMonSpecies] ; TempEnemyMonSpecies
-	ld [wCurPartySpecies], a ; CurPartySpecies
-	ld hl, wEnemyMonDVs ; EnemyMonDVs
+	ld a, [wTempEnemyMonSpecies]
+	ld [wCurPartySpecies], a
+	ld hl, wEnemyMonDVs
 	predef GetUnownLetter
 	ld de, vTiles2 tile $31
 	predef GetMonBackpic
@@ -892,7 +892,7 @@ BattleAnimCmd_Transform:
 	ret
 
 BattleAnimCmd_RaiseSub:
-	xor a ; sScratch
+	xor a ; BANK(sScratch)
 	call OpenSRAM
 
 GetSubstitutePic: ; used only for BANK(GetSubstitutePic)
@@ -1050,7 +1050,7 @@ BattleAnimCmd_BeatUp:
 
 .done
 	pop af
-	ld [wCurPartySpecies], a ; CurPartySpecies
+	ld [wCurPartySpecies], a
 	ld b, SCGB_BATTLE_COLORS
 	call GetSGBLayout
 	ret

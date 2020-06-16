@@ -4,7 +4,7 @@ LoadBattleMenu:
 	jr Function24e78
 
 SafariBattleMenu:
-	; untranslated
+; untranslated
 	ld hl, MenuHeader_0x24eae
 	call LoadMenuHeader
 	jr Function24e78

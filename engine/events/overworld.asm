@@ -342,7 +342,7 @@ SurfFunction:
 .TrySurf:
 	ld de, ENGINE_FOGBADGE
 	call CheckBadge
-	jr c, .asm_c980
+	jr c, .nofogbadge
 	ld hl, wBikeFlags
 	bit BIKEFLAGS_ALWAYS_ON_BIKE_F, [hl]
 	jr nz, .cannotsurf
@@ -359,7 +359,7 @@ SurfFunction:
 	jr c, .cannotsurf
 	ld a, $1
 	ret
-.asm_c980
+.nofogbadge
 	ld a, $80
 	ret
 .alreadyfail

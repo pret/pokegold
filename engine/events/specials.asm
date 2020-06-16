@@ -291,7 +291,7 @@ StoreSwarmMapIndices::
 	ld [wSwarmMapGroup], a
 	ld a, e
 	ld [wSwarmMapNumber], a
-	; fallthrough
+
 SetSwarmFlag:
 	ld hl, wDailyFlags1
 	set DAILYFLAGS1_SWARM_F, [hl]
@@ -332,7 +332,7 @@ CheckLuckyNumberShowFlag:
 
 CountUnown:
 	ld hl, wUnownDex
-	ld b, $0
+	ld b, 0
 .loop
 	ld a, [hli]
 	and a
@@ -350,7 +350,7 @@ SelectApricornForKurt:
 	and a
 	ret z
 	ld [wCurItem], a
-	ld a, $1
+	ld a, 1
 	ld [wItemQuantityChangeBuffer], a
 	ld hl, wNumItems
 	call TossItem
