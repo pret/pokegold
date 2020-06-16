@@ -22,7 +22,7 @@ hSeconds:: db ; ff9a
 
 hVBlankCounter:: db ; ff9d
 
-hFF9E:: db ; ff9e
+hBlackOutBGMapThird:: db ; ff9e
 
 hROMBank:: db ; ff9f
 hVBlank:: db ; ffa0

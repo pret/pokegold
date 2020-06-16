@@ -63,10 +63,10 @@ ReanchorBGMap_NoOAMUpdate::
 	ld a, 1
 	ldh [hOAMUpdate], a
 	ld a, 3
-	ldh [hFF9E], a
+	ldh [hBlackOutBGMapThird], a
 .asm_65bc
 	call DelayFrame
-	ldh a, [hFF9E]
+	ldh a, [hBlackOutBGMapThird]
 	and a
 	jr nz, .asm_65bc
 	pop af

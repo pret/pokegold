@@ -98,7 +98,7 @@ VBlank0::
 	call Serve2bppRequest
 	call Serve1bppRequest
 	call AnimateTileset
-	call Function1642
+	call BlackOutBGMap
 
 .done
 
