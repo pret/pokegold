@@ -185,9 +185,9 @@ FixPicBank:
 ; Postcondition: a = repaired bank for pic
 ;
 ; Pic bank values that will get repaired (and what they'll be repaired to):
-;     $13 -> $1f
-;     $14 -> $20
-;     $1f -> $2e
+;     $13 -> BANK("Pics 12")
+;     $14 -> BANK("Pics 13")
+;     $1f -> BANK("Pics 14")
 ;
 ; Otherwise, the repaired bank will match the defined bank.
 	push hl
@@ -211,9 +211,9 @@ FixPicBank:
 	ret
 
 .FixPicBankTable:
-	db $13, $1f
-	db $14, $20
-	db $1f, $2e
+	db $13, BANK("Pics 12")
+	db $14, BANK("Pics 13")
+	db $1f, BANK("Pics 14")
 	db -1
 
 Intro_GetMonFrontpic:

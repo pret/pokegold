@@ -1,5 +1,11 @@
 ; VBlank is the interrupt responsible for updating VRAM.
 
+; In Pokemon Gold and Silver, VBlank has been hijacked to act as the
+; main loop. After time-sensitive graphics operations have been
+; performed, joypad input and sound functions are executed.
+
+; This prevents the display and audio output from lagging.
+
 VBlank::
 	push af
 	push bc
@@ -168,7 +174,7 @@ VBlank1::
 	jr z, .skip_lcd
 	ld c, a
 	ld a, [wLYOverrides]
-	ld [$ff00+c], a
+	ldh [c], a
 
 .skip_lcd
 	xor a
@@ -294,7 +300,7 @@ VBlank5::
 	xor a
 	ldh [rIF], a
 	; enable ints
-	ld a, %11111
+	ld a, IE_DEFAULT
 	ldh [rIE], a
 	ret
 
@@ -372,9 +378,11 @@ VBlank3::
 	ld [wTextDelayFrames], a
 
 .okay
+	; discard requested ints
 	xor a
 	ldh [rIF], a
-	ld a, %10 ; lcd stat
+	; enable lcd stat
+	ld a, 1 << LCD_STAT
 	ldh [rIE], a
 	; request lcd stat
 	ldh [rIF], a
@@ -387,6 +395,7 @@ VBlank3::
 	rst Bankswitch
 	di
 
+	; discard requested ints
 	xor a
 	ldh [rIF], a
 	; enable ints

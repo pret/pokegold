@@ -3,7 +3,6 @@
 ; Control characters (see home/text.asm)
 
 	charmap "<NULL>",    $00
-	charmap "<PLAY_G>",  $14 ; "<PLAYER>くん" or "<PLAYER>ちゃん"; same as "<PLAYER>" in English
 	charmap "<CR>",      $16
 	charmap "¯",         $1f ; soft linebreak
 	charmap "<LF>",      $22
@@ -210,7 +209,8 @@
 
 ; Japanese control characters (see home/text.asm)
 
-	charmap "<JP_18>",   $18 ; "ノ゛"? (ungrammatical)
+	charmap "<JP_14>",   $14 ; "ナﾞ" (ungrammatical)
+	charmap "<JP_18>",   $18 ; "ノ゛" (ungrammatical)
 	charmap "<NI>",      $1d ; "に　"
 	charmap "<TTE>",     $1e ; "って"
 	charmap "<WO>",      $1f ; "を　"

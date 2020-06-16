@@ -11,7 +11,6 @@ ResetGameTime::
 GameTimer::
 	nop
 
-UpdateGameTimer::
 ; Increment the game timer by one frame.
 ; The game timer is capped at 999:59:59.00.
 

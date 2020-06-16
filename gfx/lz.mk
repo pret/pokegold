@@ -10,7 +10,7 @@ gfx/diploma/diploma.2bpp.lz: LZFLAGS += --method 8 --align 1
 
 gfx/dummy_game/dummy_game.2bpp.lz: LZFLAGS += --method 2 --align 4
 
-gfx/intro/%.2bpp.lz: LZFLAGS += --align 4
+gfx/intro/%.lz: LZFLAGS += --align 4
 gfx/intro/water1.2bpp.lz: LZFLAGS += --method 2 --align 4
 
 gfx/new_game/shrink1.2bpp.lz: LZFLAGS += --align 4

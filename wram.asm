@@ -2034,8 +2034,7 @@ wScriptTextAddr::
 	ds 1
 wWildEncounterCooldown:: db ; d179
 wXYComparePointer:: dw ; d17a
-wd17c:: ds 1 ; d17c
-	ds 3
+wd17c:: flag_array 32 ; d17c
 wBattleScriptFlags:: dw ; d180
 wPlayerSpriteSetupFlags:: ; d182
 	db

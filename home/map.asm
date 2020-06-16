@@ -1233,6 +1233,8 @@ LoadTilesetGFX::
 	ld de, vTiles2
 	ld a, [wTilesetBank]
 	call FarDecompress
+
+; These tilesets support dynamic per-mapgroup roof tiles.
 	ld a, [wMapTileset]
 	cp TILESET_JOHTO
 	jr z, .load_roof

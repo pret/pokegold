@@ -10,8 +10,8 @@ UpdateBGMapBuffer::
 	and a
 	ret z
 
+; Relocate the stack pointer to wBGMapBufferPtrs
 	ld [hSPBuffer], sp
-
 	ld hl, wBGMapBufferPtrs
 	ld sp, hl
 
@@ -59,6 +59,7 @@ endr
 
 	jr nz, .next
 
+; Restore the stack pointer
 	ldh a, [hSPBuffer]
 	ld l, a
 	ldh a, [hSPBuffer + 1]

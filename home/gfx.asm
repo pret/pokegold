@@ -1,3 +1,5 @@
+TILES_PER_CYCLE EQU 8
+
 FarCopyBytesDouble_DoubleBankSwitch::
 	ld b, a
 	ldh a, [hROMBank]
@@ -8,7 +10,7 @@ FarCopyBytesDouble_DoubleBankSwitch::
 	ld a, BANK(sDecompressBuffer)
 	call OpenSRAM
 	ld hl, sDecompressBuffer
-	ld bc, 7 * 7 * $10
+	ld bc, 7 * 7 tiles
 	xor a
 	call ByteFill
 
@@ -130,9 +132,9 @@ Request2bpp::
 	ld [wRequested2bppDest], a
 	ld a, h
 	ld [wRequested2bppDest + 1], a
-.check
+.loop
 	ld a, c
-	cp 8 ; TilesPerCycle
+	cp TILES_PER_CYCLE
 	jr nc, .cycle
 
 	ld [wRequested2bpp], a
@@ -146,14 +148,14 @@ Request2bpp::
 	ret
 
 .cycle
-	ld a, 8 ; TilesPerCycle
+	ld a, TILES_PER_CYCLE
 	ld [wRequested2bpp], a
 
 	call DelayFrame
 	ld a, c
-	sub 8 ; TilesPerCycle
+	sub TILES_PER_CYCLE
 	ld c, a
-	jr .check
+	jr .loop
 
 Request1bpp::
 ; Load 1bpp at b:de to occupy c tiles of hl.
@@ -175,9 +177,9 @@ Request1bpp::
 	ld [wRequested1bppDest], a
 	ld a, h
 	ld [wRequested1bppDest + 1], a
-.check
+.loop
 	ld a, c
-	cp 8 ; TilesPerCycle
+	cp TILES_PER_CYCLE
 	jr nc, .cycle
 
 	ld [wRequested1bpp], a
@@ -191,14 +193,14 @@ Request1bpp::
 	ret
 
 .cycle
-	ld a, 8 ; TilesPerCycle
+	ld a, TILES_PER_CYCLE
 	ld [wRequested1bpp], a
 
 	call DelayFrame
 	ld a, c
-	sub 8 ; TilesPerCycle
+	sub TILES_PER_CYCLE
 	ld c, a
-	jr .check
+	jr .loop
 
 Get2bpp::
 	ldh a, [rLCDC]
@@ -216,7 +218,7 @@ Copy2bpp:
 ; bank
 	ld a, b
 
-; bc = c * $10
+; bc = c * LEN_2BPP_TILE
 	push af
 	swap c
 	ld a, $f
@@ -244,7 +246,7 @@ Copy1bpp::
 ; bank
 	ld a, b
 
-; bc = c * $10 / 2
+; bc = c * LEN_1BPP_TILE
 	push af
 	ld h, 0
 	ld l, c
@@ -258,19 +260,19 @@ Copy1bpp::
 	pop hl
 	jp FarCopyBytesDouble
 
-UnusedGet2bpp::
+Unreferenced_Get2bpp::
 	ldh a, [rLCDC]
 	add a
 	jp c, Request2bpp
 
-UnusedCopy2bpp::
+Unreferenced_Copy2bpp::
 	push de
 	push hl
 
 ; bank
 	ld a, b
 
-; bc = c * $10
+; bc = c * LEN_2BPP_TILE
 	ld h, 0
 	ld l, c
 	add hl, hl

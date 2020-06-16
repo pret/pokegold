@@ -300,3 +300,39 @@ PrintNum::
 .inc
 	inc hl
 	ret
+
+Unreferenced_PrintHexNumber::
+; Print c-digit hex number from de to hl
+.loop
+	push bc
+	call .HandleByte
+	pop bc
+	dec c
+	jr nz, .loop
+	ret
+
+.HandleByte:
+	ld a, [de]
+	swap a
+	and $f
+	call .PrintDigit
+	ld [hli], a
+	ld a, [de]
+	and $f
+	call .PrintDigit
+	ld [hli], a
+	inc de
+	ret
+
+.PrintDigit:
+	ld bc, .HexDigits
+	add c
+	ld c, a
+	ld a, 0
+	adc b
+	ld b, a
+	ld a, [bc]
+	ret
+
+.HexDigits:
+	db "0123456789ABCDEF"

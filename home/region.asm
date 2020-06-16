@@ -52,10 +52,10 @@ Function2ffe::
 	add $4
 	ld d, a
 	ld a, [wPlayerStandingMapY]
-	ld a, $4 ; add $4
+	ld a, $4 ; should be "add $4"?
 	ld e, a
 	push bc
-	ld c, $0
+	ld c, 0
 .loop
 	ld a, [hl]
 	cp $ff
@@ -72,7 +72,7 @@ Function2ffe::
 	ld b, SET_FLAG
 	push de
 	push bc
-	ld d, $0
+	ld d, 0
 	predef SmallFarFlagAction
 	pop bc
 	pop de
@@ -83,7 +83,7 @@ Function2ffe::
 	inc hl
 	inc c
 	ld a, c
-	cp $20
+	cp 32
 	jr c, .loop
 .done
 	pop bc

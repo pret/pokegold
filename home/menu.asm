@@ -345,6 +345,7 @@ VerticalMenu::
 .cancel
 	scf
 	ret
+
 .okay
 	and a
 	ret
@@ -740,7 +741,7 @@ MenuClickSound::
 	push af
 	and A_BUTTON | B_BUTTON
 	jr z, .nosound
-	ld hl, wMenuHeader
+	ld hl, wMenuFlags
 	bit 3, a
 	jr nz, .nosound
 	call PlayClickSFX

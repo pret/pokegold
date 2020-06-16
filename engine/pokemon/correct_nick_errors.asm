@@ -65,7 +65,7 @@ CorrectNickErrors::
 ; format:
 	;      ≥           <
 	db "<NULL>",   "ガ"
-	db "<PLAY_G>", "<JP_18>" + 1
+	db "<JP_14>",  "<JP_18>" + 1
 	db "<NI>",     "<NO>"    + 1
 	db "<ROUTE>",  "<GREEN>" + 1
 	db "<ENEMY>",  "<ENEMY>" + 1

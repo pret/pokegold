@@ -263,11 +263,11 @@ ReloadPalettes::
 	ld bc, SCREEN_WIDTH * SCREEN_HEIGHT
 .loop
 	ld a, [hli]
-	cp $60
-	jr c, .pal_map
-	ld a, 7
+	cp "■"
+	jr c, .skip
+	ld a, PAL_BG_TEXT
 	ld [de], a
-.pal_map
+.skip
 	inc de
 	dec bc
 	ld a, b

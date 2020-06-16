@@ -100,41 +100,6 @@ CopyDataUntil::
 
 INCLUDE "home/print_num.asm"
 
-Function33ce::
-; Print c-digit hex number from de to hl
-.asm_33ce
-	push bc
-	call Function33d7
-	pop bc
-	dec c
-	jr nz, .asm_33ce
-	ret
-
-Function33d7::
-	ld a, [de]
-	swap a
-	and $f
-	call Function33e9
-	ld [hli], a
-	ld a, [de]
-	and $f
-	call Function33e9
-	ld [hli], a
-	inc de
-	ret
-
-Function33e9::
-	ld bc, .digits
-	add c
-	ld c, a
-	ld a, $0
-	adc b
-	ld b, a
-	ld a, [bc]
-	ret
-
-.digits db "0123456789ABCDEF"
-
 FarPrintText::
 	ld [wTempBank], a
 	ldh a, [hROMBank]

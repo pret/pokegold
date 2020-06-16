@@ -102,17 +102,17 @@ ENDM
 
 ; Reverses FixPicBank in engine/gfx/load_pics.asm
 ;
-; Takes the actual bank of the pic in the ROM and returns the "defined" bank
-;     $1f -> $13
-;     $20 -> $14
-;     $2e -> $1f
+; Takes the actual bank of the pic in the ROM and returns the "defined" bank:
+;     BANK("Pics 12") -> $13
+;     BANK("Pics 13") -> $14
+;     BANK("Pics 14") -> $1f
 ;
 ; Otherwise, the ROM bank will match the defined bank.
 dba_pic: MACRO ; dbw bank, address
-	db (BANK(\1) == $1f) * ($13 - $1f) \
-	 + (BANK(\1) == $20) * ($14 - $20) \
-	 + (BANK(\1) == $2e) * ($1f - $2e) \
-	 + (BANK(\1))
+	db (BANK(\1) == BANK("Pics 12")) * ($13 - BANK("Pics 12")) \
+		+ (BANK(\1) == BANK("Pics 13")) * ($14 - BANK("Pics 13")) \
+		+ (BANK(\1) == BANK("Pics 14")) * ($1f - BANK("Pics 14")) \
+		+ (BANK(\1))
 	dw \1
 ENDM
 
@@ -128,6 +128,6 @@ sine_table: MACRO
 x = 0
 rept \1
 	dw (sin(x) + (sin(x) & $ff)) >> 8 ; round up
-x = x + DIV(32768, \1); a circle has 65536 "degrees"
+x = x + DIV(32768, \1) ; a circle has 65536 "degrees"
 endr
 ENDM

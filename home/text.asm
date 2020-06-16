@@ -228,7 +228,7 @@ ENDM
 	dict "<USER>",    PlaceMoveUsersName
 	dict "<ENEMY>",   PlaceEnemysName
 	dict "ﾟ",         .diacritic
-	cp $e5
+	cp "ﾞ"
 	jr nz, .not_diacritic
 
 .diacritic

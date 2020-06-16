@@ -16,11 +16,11 @@ Reset::
 _Start::
 	cp $11
 	jr z, .cgb
-	xor a
+	xor a ; FALSE
 	jr .load
 
 .cgb
-	ld a, $1
+	ld a, TRUE
 
 .load
 	ldh [hCGB], a
@@ -145,7 +145,7 @@ Init::
 
 	call DelayFrame
 
-	predef InitSGBBorder ; SGB init
+	predef InitSGBBorder
 
 	call InitSound
 	xor a
