@@ -37,7 +37,7 @@ CloseText::
 	ld a, $90
 	ldh [hWY], a
 	farcall _ClearSprites
-	call ReplaceChrisSprite
+	call UpdatePlayerSprite
 	ld hl, wEnteredMapFromContinue
 	res 7, [hl]
 	call ResetBGWindow

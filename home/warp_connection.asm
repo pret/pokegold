@@ -90,7 +90,7 @@ RefreshMapSprites::
 	call ResetBGWindow
 	call GetMovementPermissions
 	farcall RefreshPlayerSprite
-	farcall CheckReplaceChrisSprite
+	farcall CheckUpdatePlayerSprite
 	ld hl, wPlayerSpriteSetupFlags
 	bit PLAYERSPRITESETUP_SKIP_RELOAD_GFX_F, [hl]
 	jr nz, .skip

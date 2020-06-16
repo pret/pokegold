@@ -26,8 +26,8 @@ FarCopyBytesDouble_DoubleBankSwitch::
 	rst Bankswitch
 	ret
 
-ReplaceChrisSprite::
-	farcall _ReplaceChrisSprite
+UpdatePlayerSprite::
+	farcall _UpdatePlayerSprite
 	ret
 
 LoadStandardFont::

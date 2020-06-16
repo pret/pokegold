@@ -67,7 +67,7 @@ ShakeHeadbuttTree:
 	ld bc, wVirtualOAMEnd - wVirtualOAMSprite36
 	xor a
 	call ByteFill
-	call ReplaceChrisSprite
+	call UpdatePlayerSprite
 	ret
 
 HeadbuttTreeGFX:

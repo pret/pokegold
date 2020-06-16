@@ -1,5 +1,5 @@
-_ReplaceChrisSprite::
-	call GetChrisSprite
+_UpdatePlayerSprite::
+	call GetPlayerSprite
 	ld a, [wUsedSprites]
 	ld c, a
 	ld a, [wUsedSprites + 1]
@@ -39,11 +39,11 @@ RefreshSprites::
 	ld bc, SPRITE_GFX_LIST_CAPACITY * 2
 	ld hl, wUsedSprites
 	call ByteFill
-	call GetChrisSprite
+	call GetPlayerSprite
 	call AddMapSprites
 	ret
 
-GetChrisSprite:
+GetPlayerSprite:
 	ld a, [wPlayerState]
 	ld c, a
 ; Get Chris's sprite.
