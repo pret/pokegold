@@ -209,11 +209,11 @@ BillsPC_WithdrawMenu:
 Unreferenced_Functione548:
 	ld a, [wPartyCount]
 	cp PARTY_LENGTH
-	jr nc, .asm_e551
+	jr nc, .party_full
 	and a
 	ret
 
-.asm_e551
+.party_full
 	ld hl, PCCantTakeText
 	call MenuTextboxBackup
 	scf

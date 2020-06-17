@@ -1,9 +1,9 @@
 DrawPlayerHP:
-	ld a, 1
+	ld a, $1
 	jr DrawHP
 
 DrawEnemyHP:
-	ld a, 2
+	ld a, $2
 
 DrawHP:
 	ld [wWhichHPBar], a

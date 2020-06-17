@@ -455,7 +455,7 @@ LoadElmCallScript:
 
 RingTwice_StartCall:
 	call .Ring
-; fall through (rings a second time)
+; fallthrough (rings a second time)
 .Ring:
 	call Phone_StartRinging
 	call Phone_Wait20Frames
@@ -480,7 +480,7 @@ PhoneCall::
 	ld a, d
 	ld [wPhoneCaller + 1], a
 	call Phone_Ring
-; fall through (rings a second time)
+; fallthrough (rings a second time)
 Phone_Ring:
 	call Phone_StartRinging
 	call Phone_Wait20Frames

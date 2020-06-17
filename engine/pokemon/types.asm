@@ -19,7 +19,7 @@ PrintMonTypes:
 	pop hl
 	jr z, .hide_type_2
 
-	ld bc, $28
+	ld bc, SCREEN_WIDTH * 2
 	add hl, bc
 
 .Print:

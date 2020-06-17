@@ -1,4 +1,4 @@
-Copyright_GFPresents:
+Copyright_GameFreakPresents:
 ; Play the copyright screen and GameFreak Presents sequence.
 ; Return carry if user cancels animation by pressing a button.
 
@@ -36,7 +36,7 @@ Copyright_GFPresents:
 	bit 6, a
 	jr nz, .canceled
 
-; clear carry flag from GFPresents_PlayFrame
+; clear carry flag from GameFreakPresents_PlayFrame
 	and a
 	ret
 
@@ -47,14 +47,14 @@ Copyright_GFPresents:
 .GetGFLogoGFX:
 ; Load gfx and initialize variables
 
-	ld de, GFPresentsGFX1
+	ld de, GameFreakPresentsGFX1
 	ld hl, vTiles1
-	lb bc, BANK(GFPresentsGFX1), 28
+	lb bc, BANK(GameFreakPresentsGFX1), 28
 	call Get1bpp
 
-	ld de, GFPresentsGFX2
+	ld de, GameFreakPresentsGFX2
 	ld hl, vTiles1 tile 28
-	lb bc, BANK(GFPresentsGFX2), 5
+	lb bc, BANK(GameFreakPresentsGFX2), 5
 	call Request2bpp
 
 	farcall ClearSpriteAnims
@@ -79,7 +79,7 @@ Copyright_GFPresents:
 	ret
 
 .PlayFrame:
-; Play one frame of GFPresents sequence.
+; Play one frame of GameFreakPresents sequence.
 ; Return carry when the sequence completes or is canceled.
 
 	call JoyTextDelay
@@ -95,7 +95,7 @@ Copyright_GFPresents:
 
 	farcall PlaySpriteAnimations
 
-	call GFPresentsJumper
+	call PlaceGameFreakPresents
 	call DelayFrame
 
 ; ensure carry is cleared
@@ -118,18 +118,18 @@ Copyright_GFPresents:
 	scf
 	ret
 
-GFPresentsJumper:
+PlaceGameFreakPresents:
 	jumptable .scenes, wJumptableIndex
 
 .scenes
-	dw GFPresents_Star
-	dw GFPresents_PlaceLogo
-	dw GFPresents_LogoSparkles
-	dw GFPresents_PlacePresents
-	dw GFPresents_WaitForTimer
-	dw GFPresents_SetDoneFlag
+	dw GameFreakPresents_Star
+	dw GameFreakPresents_PlaceLogo
+	dw GameFreakPresents_LogoSparkles
+	dw GameFreakPresents_PlacePresents
+	dw GameFreakPresents_WaitForTimer
+	dw GameFreakPresents_SetDoneFlag
 
-GFPresents_NextScene:
+GameFreakPresents_NextScene:
 	ld hl, wJumptableIndex
 	inc [hl]
 	ret
@@ -137,11 +137,11 @@ GFPresents_NextScene:
 Unreferenced_Functione4a8d:
 	ld c, 64
 	call DelayFrames
-	call GFPresents_NextScene
+	call GameFreakPresents_NextScene
 	ret
 
-GFPresents_Star:
-; tell GFPresents_PlaceLogo we haven't finished yet
+GameFreakPresents_Star:
+; tell GameFreakPresents_PlaceLogo we haven't finished yet
 	xor a
 	ld [wIntroSceneFrameCounter], a
 
@@ -156,10 +156,10 @@ GFPresents_Star:
 	ld de, SFX_GAME_FREAK_LOGO_GS
 	call PlaySFX
 
-	call GFPresents_NextScene
+	call GameFreakPresents_NextScene
 	ret
 
-GFPresents_PlaceLogo:
+GameFreakPresents_PlaceLogo:
 ; Draw the Game Freak logo (may be initially invisible due to palette)
 
 ; wait until the star animation completed
@@ -172,14 +172,14 @@ GFPresents_PlaceLogo:
 	ld a, SPRITE_ANIM_INDEX_GAMEFREAK_LOGO
 	call InitSpriteAnimStruct
 
-	call GFPresents_NextScene
+	call GameFreakPresents_NextScene
 
-; set timer for GFPresents_LogoSparkles
+; set timer for GameFreakPresents_LogoSparkles
 	ld a, $80
 	ld [wIntroSceneTimer], a
 	ret
 
-GFPresents_LogoSparkles:
+GameFreakPresents_LogoSparkles:
 	ld hl, wIntroSceneTimer
 	ld a, [hl]
 	and a
@@ -188,19 +188,19 @@ GFPresents_LogoSparkles:
 
 ; add first text when timer passes half
 	cp $3f
-	call z, GFPresents_PlaceGameFreak
+	call z, GameFreakPresents_PlaceGameFreak
 
 ; add sparkles continuously
-	call GFPresents_Sparkle
+	call GameFreakPresents_Sparkle
 	ret
 
 .done
-; set timer for GFPresents_PlacePresents
+; set timer for GameFreakPresents_PlacePresents
 	ld [hl], $80
-	call GFPresents_NextScene
+	call GameFreakPresents_NextScene
 	ret
 
-GFPresents_PlaceGameFreak:
+GameFreakPresents_PlaceGameFreak:
 	hlcoord 5, 12
 	ld de, .game_freak
 	call PlaceString
@@ -210,14 +210,14 @@ GFPresents_PlaceGameFreak:
 	db $80, $81, $82, $83, $8d, $84, $85, $83, $81, $86
 	db "@"
 
-GFPresents_PlacePresents:
+GameFreakPresents_PlacePresents:
 	hlcoord 7, 13
 	ld de, .presents
 	call PlaceString
 
-	call GFPresents_NextScene
+	call GameFreakPresents_NextScene
 
-; set timer for GFPresents_WaitForTimer
+; set timer for GameFreakPresents_WaitForTimer
 	ld a, $80
 	ld [wIntroSceneTimer], a
 	ret
@@ -226,14 +226,14 @@ GFPresents_PlacePresents:
 	db $87, $88, $89, $8a, $8b, $8c
 	db "@"
 
-GFPresents_SetDoneFlag:
-; Tell GFPresents_PlayFrame and TitleScreenFrame that we're finished.
+GameFreakPresents_SetDoneFlag:
+; Tell GameFreakPresents_PlayFrame and TitleScreenFrame that we're finished.
 
 	ld hl, wJumptableIndex
 	set 7, [hl]
 	ret
 
-GFPresents_WaitForTimer:
+GameFreakPresents_WaitForTimer:
 	ld hl, wIntroSceneTimer
 	ld a, [hl]
 	and a
@@ -241,12 +241,12 @@ GFPresents_WaitForTimer:
 	dec [hl]
 	ret
 .done
-	call GFPresents_NextScene
+	call GameFreakPresents_NextScene
 	ret
 
-GFPresents_UpdateLogoPal:
+GameFreakPresents_UpdateLogoPal:
 ; called from DoAnimFrame.GameFreakLogo
-; OBP1 was initialized at end of GFPresents_Init
+; OBP1 was initialized at end of GameFreakPresents_Init
 
 ; once we reached the final state, leave it alone
 	ldh a, [rOBP1]
@@ -267,7 +267,7 @@ GFPresents_UpdateLogoPal:
 	call DmgToCgbObjPal1
 	ret
 
-GFPresents_Sparkle:
+GameFreakPresents_Sparkle:
 ; Initialize and configure a sparkle sprite.
 
 ; run only every second frame
@@ -333,11 +333,11 @@ GFPresents_Sparkle:
 	db $34, $02
 	db $3c, $04
 
-GFPresentsGFX1:
+GameFreakPresentsGFX1:
 INCBIN "gfx/intro/gamefreak_presents.1bpp"
 INCBIN "gfx/intro/gamefreak_logo.1bpp"
 
-GFPresentsGFX2:
+GameFreakPresentsGFX2:
 INCBIN "gfx/intro/logo_star.2bpp"
 INCBIN "gfx/intro/logo_sparkle.2bpp"
 
@@ -641,7 +641,7 @@ Functione4ec1:
 	call Intro_InitLapras
 	depixel 28, 28, 4, 4
 	call DmgToCgbObjPals
-; fall through
+; fallthrough
 
 Functione4eca:
 	call Functione4fde
@@ -1174,7 +1174,7 @@ IntroScene11:
 	inc [hl]
 	xor a
 	ld [wIntroFrameCounter1], a
-; fall through
+; fallthrough
 
 IntroScene12:
 ; load Charizard palettes
@@ -1245,7 +1245,7 @@ IntroScene14:
 	ld [wIntroFrameCounter2], a
 	ld de, SFX_GS_INTRO_CHARIZARD_FIREBALL
 	call PlaySFX
-; fall through
+; fallthrough
 
 IntroScene15:
 ; Charizard mouth wide open / fireball starts

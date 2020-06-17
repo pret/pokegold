@@ -1,5 +1,5 @@
 CheckPartyFullAfterContest:
-	ld a, [wContestMon]
+	ld a, [wContestMonSpecies]
 	and a
 	jp z, .DidntCatchAnything
 	ld [wCurPartySpecies], a
@@ -14,7 +14,7 @@ CheckPartyFullAfterContest:
 	ld c, a
 	ld b, 0
 	add hl, bc
-	ld a, [wContestMon]
+	ld a, [wContestMonSpecies]
 	ld [hli], a
 	ld [wCurSpecies], a
 	ld a, -1
@@ -65,7 +65,7 @@ CheckPartyFullAfterContest:
 	call CopyBytes
 	xor a
 	ld [wContestMonSpecies], a
-	and a
+	and a ; BUGCONTEST_CAUGHT_MON
 	ld [wScriptVar], a
 	ret
 

@@ -2,6 +2,9 @@
 	const PINK_PAGE  ; 1
 	const GREEN_PAGE ; 2
 	const BLUE_PAGE  ; 3
+NUM_STAT_PAGES EQU const_value - 1
+
+STAT_PAGE_MASK EQU %00000011
 
 StatsScreenInit:
 	ldh a, [hMapAnims]
@@ -9,7 +12,7 @@ StatsScreenInit:
 	xor a
 	ldh [hMapAnims], a ; disable overworld tile animations
 
-	ld c, 1
+	ld c, PINK_PAGE ; first_page
 	call StatsScreenMain
 
 	; restore old values
@@ -59,10 +62,8 @@ StatsScreen_LoadPage:
 	push bc
 	ld de, .done_loading
 	push de
-; first jump to LoadPage function in jumptable
 	jp hl
 
-; return here after LoadPage function finishes
 .done_loading
 	pop bc
 	ld b, 1
@@ -102,7 +103,7 @@ StatsScreen_LoadPage:
 	bit D_UP_F, a
 	jr nz, .d_up
 
-; .d_down
+; down
 	ld a, [wMonType]
 	cp BOXMON
 	jr nc, .joypad_loop
@@ -139,7 +140,6 @@ StatsScreen_LoadPage:
 	ld a, b
 	inc a
 	ld [wPartyMenuCursor], a
-; fall through
 .load_mon
 	jp StatsScreenMain
 
@@ -160,7 +160,7 @@ StatsScreen_LoadPage:
 	dec c
 	jr nz, StatsScreen_JumpToLoadPageFunction
 	ld c, BLUE_PAGE ; last page
-; fall through
+; fallthrough
 
 StatsScreen_JumpToLoadPageFunction:
 	ld hl, StatsScreen_LoadPageJumptable
@@ -179,14 +179,13 @@ EggStatsInit:
 	push bc
 	call EggStatsScreen
 	pop bc
-; fall through
+; fallthrough
 
 EggStats_JoypadLoop:
 	call GetJoypad
 	ld a, [wMonType]
 	cp TEMPMON
 	jr nz, .not_tempmon
-; .tempmon
 	push hl
 	push de
 	push bc
@@ -256,7 +255,7 @@ EggStats_UpAction:
 	ld a, b
 	inc a
 	ld [wPartyMenuCursor], a
-; fall through
+; fallthrough
 
 EggStats_ScrollToLoadMon:
 	jp StatsScreenMain
@@ -357,7 +356,7 @@ LoadPinkPage:
 	lb bc, 10, 20
 	call ClearBox
 	hlcoord 0, 9
-	ld b, 0
+	ld b, $0
 	call DrawPlayerHP
 	hlcoord 8, 9
 	ld [hl], $41 ; right HP/exp bar end cap
@@ -694,10 +693,10 @@ LoadBluePage:
 ; remove left padding if name was 8-10 chars (somehow?)
 	ld a, NAME_LENGTH - 1
 	sub c
-	cp 3 ; NAME_LENGTH - PLAYER_NAME_LENGTH
+	cp NAME_LENGTH - PLAYER_NAME_LENGTH
 ; otherwise, use 2 spaces of left padding
 	jr c, .ok
-	ld a, 2 ; NAME_LENGTH - PLAYER_NAME_LENGTH - 1
+	ld a, NAME_LENGTH - PLAYER_NAME_LENGTH - 1
 .ok
 	ld c, a
 	hlcoord 0, 13

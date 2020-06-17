@@ -948,7 +948,7 @@ ENDC
 	ret
 
 .GameFreakLogo:
-	callfar GFPresents_UpdateLogoPal
+	callfar GameFreakPresents_UpdateLogoPal
 	ret
 
 .GSIntroStar

@@ -836,7 +836,7 @@ Intro_PlaceChrisSprite:
 	db 10 * 8 + 4, 10 * 8, 3
 
 IntroSequence:
-	callfar Copyright_GFPresents
+	callfar Copyright_GameFreakPresents
 	jr c, StartTitleScreen
 	callfar GoldSilverIntro
 

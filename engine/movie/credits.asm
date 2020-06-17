@@ -74,9 +74,9 @@ Credits::
 	call SetPalettes
 	ldh a, [hVBlank]
 	push af
-	ld a, 5
+	ld a, $5
 	ldh [hVBlank], a
-	ld a, 1
+	ld a, TRUE
 	ldh [hInMenu], a
 	xor a
 	ldh [hBGMapMode], a

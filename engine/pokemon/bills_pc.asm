@@ -1633,7 +1633,7 @@ BillsPC_IsMonAnEgg:
 BillsPC_StatsScreen:
 	call LowVolume
 	call BillsPC_CopyMon
-	ld a, 3
+	ld a, TEMPMON
 	ld [wMonType], a
 	predef StatsScreenInit
 	call BillsPC_InitGFX

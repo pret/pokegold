@@ -294,7 +294,7 @@ Function29fc9:
 Function2a037:
 	call Function2a073
 	jp nz, Function2a103
-; fall through
+; fallthrough
 Function2a03d:
 	call Function2a166
 	jp nz, Function2a103
@@ -322,7 +322,7 @@ Function2a073:
 	ld b, $1
 	call Function2a184
 	ret nz
-; fall through
+; fallthrough
 Function2a07c:
 	call Function2a461
 	ldh a, [hMGStatusFlags]
