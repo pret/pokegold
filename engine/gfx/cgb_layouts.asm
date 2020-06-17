@@ -113,9 +113,9 @@ _CGB_BattleColors:
 	ld [wSGBPredef], a
 	call ApplyPals
 _CGB_FinishBattleScreenLayout:
-	ld hl, TilesetBGPalette + 7 * 8
+	ld hl, TilesetBGPalette palette 7
 	ld de, wBGPals1 palette 7
-	ld bc, $8
+	ld bc, 1 palettes
 	call CopyBytes
 	hlcoord 0, 0, wAttrmap
 	ld bc, SCREEN_WIDTH * SCREEN_HEIGHT
@@ -282,15 +282,15 @@ _CGB_BillsPC:
 	ld a, [wCurPartySpecies]
 	cp $ff
 	jr nz, .GetMonPalette
-	ld hl, .BillsPCOrangePalette
+	ld hl, BillsPCOrangePalette
 	call LoadHLPaletteIntoDE
-	jr .Resume
+	jr .GotPalette
 
 .GetMonPalette:
 	ld bc, wTempMonDVs
 	call GetPlayerOrMonPalettePointer
 	call LoadPalette_White_Col1_Col2_Black
-.Resume:
+.GotPalette:
 	call WipeAttrmap
 	hlcoord 1, 4, wAttrmap
 	lb bc, 7, 7
@@ -303,16 +303,16 @@ _CGB_BillsPC:
 	ldh [hCGBPalUpdate], a
 	ret
 
-.Function9009:
-	ld hl, .BillsPCOrangePalette
+Function9009:
+	ld hl, BillsPCOrangePalette
 	call LoadHLPaletteIntoDE
-	jr .asm_95b1
+	jr .GotPalette
 
-.unused
+.GetMonPalette:
 	ld bc, wTempMonDVs
 	call GetPlayerOrMonPalettePointer
 	call LoadPalette_White_Col1_Col2_Black
-.asm_95b1
+.GotPalette:
 	call WipeAttrmap
 	hlcoord 1, 1, wAttrmap
 	lb bc, 7, 7
@@ -325,7 +325,7 @@ _CGB_BillsPC:
 	ldh [hCGBPalUpdate], a
 	ret
 
-.BillsPCOrangePalette:
+BillsPCOrangePalette:
 INCLUDE "gfx/pc/orange.pal"
 
 _CGB_PokedexUnownMode:
@@ -624,11 +624,12 @@ _CGB_TrainerCard:
 	; card border
 	hlcoord 0, 0, wAttrmap
 	ld bc, SCREEN_WIDTH * SCREEN_HEIGHT
-	ld a, $1 ; FALKNER
+	ld a, $1 ; falkner
 	call ByteFill
+	; trainer sprite area
 	hlcoord 14, 1, wAttrmap
 	lb bc, 7, 5
-	xor a ; CHRIS
+	xor a ; chris
 	call FillBoxCGB
 	; top-right corner still uses the border's palette
 	hlcoord 18, 1, wAttrmap
@@ -863,3 +864,19 @@ _CGB_TrainerOrMonFrontpicPals:
 	call ApplyAttrmap
 	call ApplyPals
 	ret
+
+_CGB_MysteryGift:
+	ld hl, .MysteryGiftPalette
+	ld de, wBGPals1
+	ld bc, 1 palettes
+	call CopyBytes
+	call ApplyPals
+	call WipeAttrmap
+	call ApplyAttrmap
+	ret
+
+.MysteryGiftPalette:
+	RGB 31, 31, 31
+	RGB 09, 31, 31
+	RGB 10, 12, 31
+	RGB 00, 03, 19

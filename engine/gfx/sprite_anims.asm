@@ -775,7 +775,7 @@ IF DEF(_GOLD)
 	ld a, [hl]
 	sla a
 	sla a
-	ld d, 2
+	ld d, $2
 
 	ld hl, SPRITEANIMSTRUCT_0C
 	add hl, bc
@@ -840,11 +840,11 @@ ENDC
 IF DEF(_GOLD)
 	inc a
 	ld [hl], a
-	ld d, 2
+	ld d, $2
 ELIF DEF(_SILVER)
 	dec a
 	ld [hl], a
-	ld d, 8
+	ld d, $8
 ENDC
 	call .Sprites_Sine
 
@@ -1086,9 +1086,9 @@ ENDC
 	callfar Slots_AnimateChansey
 	ld hl, wce64
 	ld a, [hl]
-	cp 2
+	cp $2
 	ret nz
-	ld [hl], 3
+	ld [hl], $3
 	ld a, SPRITE_ANIM_FRAMESET_SLOTS_CHANSEY_2
 	call _ReinitSpriteAnimFrame
 	ret
@@ -1099,7 +1099,7 @@ ENDC
 	ld a, [hl]
 	dec [hl]
 	ld e, a
-	and 1
+	and $1
 	jr z, .move_vertical
 
 	ld hl, SPRITEANIMSTRUCT_XCOORD
@@ -1108,7 +1108,7 @@ ENDC
 	cp 15 * 8
 	jr c, .move_right
 	call DeinitializeSprite
-	ld a, 4
+	ld a, $4
 	ld [wce64], a
 	ld de, SFX_PLACE_PUZZLE_PIECE_DOWN
 	call PlaySFX
@@ -1450,7 +1450,7 @@ ENDC
 	ld d, a
 	and a
 	jr z, .asm_8dbce
-	sub 2
+	sub $2
 	ld [hl], a
 .asm_8dbce
 	ld hl, SPRITEANIMSTRUCT_0E
@@ -1465,7 +1465,7 @@ ENDC
 	ret
 
 .AnonymousJumptable:
-	ld hl, sp+$0
+	ld hl, sp+0
 	ld e, [hl]
 	inc hl
 	ld d, [hl]

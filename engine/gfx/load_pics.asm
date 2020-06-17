@@ -283,6 +283,8 @@ GetTrainerPic:
 	ret
 
 DecompressGet2bpp:
+; Decompress lz data from b:hl to sDecompressBuffer, then copy it to address de.
+
 	push de
 	push bc
 	ld a, BANK(sDecompressBuffer)
@@ -385,12 +387,12 @@ PadFrontpic:
 rept 4
 	srl c
 endr
-.loop
+.fill_loop
 rept 16
 	ld [hli], a
 endr
 	dec c
-	jr nz, .loop
+	jr nz, .fill_loop
 	ret
 
 LoadOrientedFrontpic:

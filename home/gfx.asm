@@ -281,7 +281,7 @@ Unreferenced_Copy2bpp::
 	add hl, hl
 	ld b, h
 	ld c, l
-	pop de
 
+	pop de
 	pop hl
 	jp FarCopyBytes

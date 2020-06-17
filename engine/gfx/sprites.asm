@@ -306,7 +306,7 @@ AddOrSubtractY:
 	bit OAM_Y_FLIP, [hl]
 	jr z, .ok
 	; -8 - a
-	add $8
+	add 8
 	xor $ff
 	inc a
 

@@ -747,7 +747,7 @@ HeavyBallMultiplier:
 	add hl, de
 	rlca
 	rlca
-	and %11
+	maskbits NUM_DEX_ENTRY_BANKS
 	add BANK("Pokedex Entries 001-064")
 	ld d, a
 	ld a, BANK(PokedexDataPointerTable)
@@ -2069,16 +2069,15 @@ XAccuracyEffect:
 
 PokeDollEffect:
 	ld a, [wBattleMode]
-	dec a
-	jr nz, .asm_f4f6
-	inc a
+	dec a ; WILD_BATTLE?
+	jr nz, .not_wild
+	inc a ; TRUE
 	ld [wForcedSwitch], a
-	; set battle draw
-	inc a
+	inc a ; DRAW
 	ld [wBattleResult], a
 	jp UseItemText
 
-.asm_f4f6
+.not_wild
 	xor a
 	ld [wItemEffectSucceeded], a
 	ret

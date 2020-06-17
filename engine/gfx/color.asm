@@ -264,7 +264,7 @@ Unreferenced_Function91b4:
 	jr .loop
 
 .done
-	ld b, $0
+	ld b, 0
 	add hl, bc
 	lb bc, 6, 4
 	ld a, [wBetaPokerSGBAttr]
@@ -408,22 +408,6 @@ LoadMailPalettes:
 INCLUDE "gfx/mail/mail.pal"
 
 INCLUDE "engine/gfx/cgb_layouts.asm"
-
-_CGB_MysteryGift:
-	ld hl, .Palette
-	ld de, wBGPals1
-	ld bc, 1 palettes
-	call CopyBytes
-	call ApplyPals
-	call WipeAttrmap
-	call ApplyAttrmap
-	ret
-
-.Palette:
-	RGB 31, 31, 31
-	RGB 09, 31, 31
-	RGB 10, 12, 31
-	RGB 00, 03, 19
 
 CopyFourPalettes:
 	ld de, wBGPals1
@@ -908,7 +892,7 @@ PushSGBBorder:
 	ret
 
 .LoadSGBBorderPointers:
-	ld hl, SGBBorder
+	ld hl, SGBBorderGFX
 	ld de, SGBBorderMap
 	ret
 
@@ -1108,18 +1092,22 @@ INCLUDE "gfx/sgb/predef.pal"
 
 IF DEF(_GOLD)
 SGBBorderMap:
+; interleaved tile ids and palette ids, without the center 20x18 screen area
 INCBIN "gfx/sgb/gold_border.sgb.tilemap"
 SGBBorderPalettes:
+; assumed to come after SGBBorderMap
 INCLUDE "gfx/sgb/gold_border.pal"
-SGBBorder:
+SGBBorderGFX:
 INCBIN "gfx/sgb/gold_border.2bpp"
 
 ELIF DEF(_SILVER)
 SGBBorderMap:
+; interleaved tile ids and palette ids, without the center 20x18 screen area
 INCBIN "gfx/sgb/silver_border.sgb.tilemap"
 SGBBorderPalettes:
+; assumed to come after SGBBorderMap
 INCLUDE "gfx/sgb/silver_border.pal"
-SGBBorder:
+SGBBorderGFX:
 INCBIN "gfx/sgb/silver_border.2bpp"
 ENDC
 
