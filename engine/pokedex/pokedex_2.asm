@@ -233,14 +233,14 @@ GetDexEntryPointer:
 	ld d, [hl]
 	rlca
 	rlca
-	and %11
+	maskbits NUM_DEX_ENTRY_BANKS
 	add BANK("Pokedex Entries 001-064")
 	ld b, a
 	pop hl
 	ret
 
 GetDexEntryPagePointer:
-	call GetDexEntryPointer ; b:de
+	call GetDexEntryPointer
 	push hl
 	ld h, d
 	ld l, e

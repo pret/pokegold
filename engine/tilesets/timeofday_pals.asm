@@ -57,37 +57,37 @@ _TimeOfDayPals::
 	ret
 
 _UpdateTimePals::
-	ld c, 9 ; normal
+	ld c, $9 ; normal
 	call GetTimePalFade
 	call DmgToCgbTimePals
 	ret
 
 FadeInPalettes::
-	ld c, 18
+	ld c, $12
 	call GetTimePalFade
-	ld b, 4
+	ld b, $4
 	call ConvertTimePalsDecHL
 	ret
 
 FadeOutPalettes::
 	call FillWhiteBGColor
-	ld c, 9
+	ld c, $9
 	call GetTimePalFade
-	ld b, 4
+	ld b, $4
 	call ConvertTimePalsIncHL
 	ret
 
 FadeInQuickly:
-	ld c, 0
+	ld c, $0
 	call GetTimePalFade
-	ld b, 4
+	ld b, $4
 	call ConvertTimePalsIncHL
 	ret
 
 FadeBlackQuickly:
-	ld c, 9
+	ld c, $9
 	call GetTimePalFade
-	ld b, 4
+	ld b, $4
 	call ConvertTimePalsDecHL
 	ret
 
@@ -114,9 +114,9 @@ endr
 ReplaceTimeOfDayPals::
 	ld hl, .BrightnessLevels
 	ld a, [wMapTimeOfDay]
-	cp 4 ; Dark cave, needs Flash
-	jr z, .DarkCave
-	and 7
+	cp PALETTE_DARK
+	jr z, .NeedsFlash
+	and $7
 	add l
 	ld l, a
 	ld a, 0
@@ -126,7 +126,7 @@ ReplaceTimeOfDayPals::
 	ld [wTimeOfDayPalset], a
 	ret
 
-.DarkCave:
+.NeedsFlash:
 	ld a, [wStatusFlags]
 	bit STATUSFLAGS_FLASH_F, a
 	jr nz, .UsedFlash

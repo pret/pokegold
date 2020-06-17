@@ -55,7 +55,7 @@ DrawPokedexListWindow:
 	ld a, $51
 	hlcoord 11, 1
 	ld b, SCREEN_HEIGHT - 3
-	call Bank70_FillColumn
+	call Pokedex_FillColumn2
 	ld [hl], $52
 	jr .Done
 
@@ -66,7 +66,7 @@ DrawPokedexListWindow:
 	ld a, $67
 	hlcoord 11, 1
 	ld b, SCREEN_HEIGHT - 3
-	call Bank70_FillColumn
+	call Pokedex_FillColumn2
 	ld [hl], $68
 .Done:
 	ret
@@ -89,7 +89,7 @@ DrawPokedexSearchResultsWindow:
 	ld a, $67
 	hlcoord 11, 1
 	ld b, SCREEN_HEIGHT / 2
-	call Bank70_FillColumn
+	call Pokedex_FillColumn2
 	ld [hl], $68
 	ld a, $34
 	hlcoord 0, 11
@@ -104,7 +104,7 @@ DrawPokedexSearchResultsWindow:
 	ld a, $67
 	hlcoord 11, 12
 	ld b, 5
-	call Bank70_FillColumn
+	call Pokedex_FillColumn2
 	ld [hl], $68
 	hlcoord 0, 12
 	lb bc, 5, 11
@@ -137,14 +137,14 @@ DrawDexEntryScreenRightEdge:
 	hlcoord 19, 1
 	ld a, $67
 	ld b, 15
-	call Bank70_FillColumn
+	call Pokedex_FillColumn2
 	ld [hl], $68
 	hlcoord 19, 17
 	ld [hl], $3c
 	xor a
 	ld b, SCREEN_HEIGHT
 	hlcoord 19, 0, wAttrmap
-	call Bank70_FillColumn
+	call Pokedex_FillColumn2
 	call WaitBGMap2
 	pop hl
 	ld a, l
@@ -153,7 +153,8 @@ DrawDexEntryScreenRightEdge:
 	ldh [hBGMapAddress + 1], a
 	ret
 
-Bank70_FillColumn:
+Pokedex_FillColumn2:
+; A local duplicate of Pokedex_FillColumn.
 	push de
 	ld de, SCREEN_WIDTH
 .loop

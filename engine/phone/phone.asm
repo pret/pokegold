@@ -148,7 +148,7 @@ CheckPhoneCall::
 ; unused
 	ret
 
-UnusedInitCallReceiveDelay:
+UnreferencedInitCallReceiveDelay:
 	farcall InitCallReceiveDelay
 	ret
 

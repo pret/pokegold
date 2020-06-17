@@ -19,7 +19,7 @@ _SwapTextboxPalettes::
 	and $f
 	bit 3, a
 	jr z, .next
-	jr .asm_8038
+	jr .by_map_group
 
 .UpperNybble:
 	ld hl, wTilesetPalettes
@@ -34,15 +34,15 @@ _SwapTextboxPalettes::
 	bit 3, a
 	jr z, .next
 
-.asm_8038
+.by_map_group
 	ld a, [wMapGroup]
 	dec a
 	ld hl, MapGroupPalettes
 	add l
 	ld l, a
-	jr nc, .asm_8044
+	jr nc, .no_carry
 	inc h
-.asm_8044
+.no_carry
 	ld a, [hl]
 
 .next
@@ -75,7 +75,7 @@ _ScrollBGMapPalettes::
 	and $f
 	bit 3, a
 	jr z, .next
-	jr .asm_8083
+	jr .by_map_group
 
 .UpperNybble:
 	ld hl, wTilesetPalettes
@@ -90,15 +90,15 @@ _ScrollBGMapPalettes::
 	bit 3, a
 	jr z, .next
 
-.asm_8083
+.by_map_group
 	ld a, [wMapGroup]
 	dec a
 	ld hl, MapGroupPalettes
 	add l
 	ld l, a
-	jr nc, .asm_808f
+	jr nc, .no_carry
 	inc h
-.asm_808f
+.no_carry
 	ld a, [hl]
 
 .next

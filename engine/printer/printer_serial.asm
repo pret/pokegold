@@ -73,7 +73,7 @@ Printer_NextSection:
 	ret
 
 Printer_SectionOne:
-	ld a, 1
+	ld a, $1
 	ld [wJumptableIndex], a
 	ret
 
@@ -118,7 +118,7 @@ Printer_StartTransmittingTilemap:
 
 Printer_EndTilemapTransmission:
 	; ensure that we go from here to routine 7
-	ld a, 6
+	ld a, $6
 	ld [wJumptableIndex], a
 	; send packet 4
 	ld hl, PrinterDataPacket4 ; signal no transmission
@@ -168,7 +168,7 @@ Printer_WaitSerial:
 	ld hl, wPrinterSerialFrameDelay
 	inc [hl]
 	ld a, [hl]
-	cp 6
+	cp $6
 	ret c
 	xor a
 	ld [hl], a
@@ -179,7 +179,7 @@ Printer_WaitSerialAndLoopBack2:
 	ld hl, wPrinterSerialFrameDelay
 	inc [hl]
 	ld a, [hl]
-	cp 6
+	cp $6
 	ret c
 	xor a
 	ld [hl], a
@@ -205,11 +205,11 @@ Printer_CheckConnectionStatus:
 	cp $81
 	jr nz, .printer_error
 	ld a, [wPrinterStatusFlags]
-	cp 0
+	cp $0
 	jr nz, .printer_error
 	ld hl, wPrinterConnectionOpen
 	set 1, [hl]
-	ld a, 5
+	ld a, $5
 	ld [wHandshakeFrameDelay], a
 	call _Printer_NextSection
 	ret
@@ -275,7 +275,7 @@ Printer_WaitHandshake:
 	xor a
 	ld [wPrinterSendByteOffset], a
 	ld [wPrinterSendByteOffset + 1], a
-	ld a, 1
+	ld a, $1
 	ld [wPrinterOpcode], a
 	ld a, $88
 	ldh [rSB], a
@@ -351,7 +351,7 @@ Printer_ComputeChecksum:
 	ret
 
 Printer_StageHeaderForSend:
-	ld a, 1
+	ld a, $1
 	ld [wGameboyPrinter2bppSource + 0], a
 	ld a, [wPrinterMargins]
 	ld [wGameboyPrinter2bppSource + 1], a

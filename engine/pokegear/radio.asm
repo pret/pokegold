@@ -653,7 +653,7 @@ PokedexShow2:
 	add hl, bc
 	rlca
 	rlca
-	and %11
+	maskbits NUM_DEX_ENTRY_BANKS
 	add BANK("Pokedex Entries 001-064")
 	push af
 	ld a, BANK(PokedexDataPointerTable)
