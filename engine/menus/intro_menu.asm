@@ -1,4 +1,3 @@
-MainMenu_NewGame:
 NewGame:
 	xor a
 	ld [wDebugFlags], a
@@ -242,7 +241,6 @@ LoadOrRegenerateLuckyIDNumber:
 	ld [sLuckyIDNumber + 1], a
 	jp CloseSRAM
 
-MainMenu_Continue:
 Continue:
 	farcall TryLoadSaveFile
 	jr c, .FailToLoad
@@ -521,7 +519,7 @@ OakSpeech:
 	call GetBaseData
 
 	hlcoord 6, 4
-	hlcoord 6, 4 ; TriHard
+	hlcoord 6, 4 ; redundant
 	call PrepMonFrontpic
 
 	xor a
@@ -714,14 +712,14 @@ ShrinkPlayer:
 
 MovePlayerPicRight:
 	hlcoord 6, 4
-	ld de, $1
+	ld de, 1
 	jr MovePlayerPic
 
 MovePlayerPicLeft:
 	hlcoord 13, 4
 	ld de, -1
 MovePlayerPic:
-	ld c, $8
+	ld c, 7 + 1
 .loop
 	push bc
 	push hl
@@ -822,7 +820,7 @@ Intro_PlaceChrisSprite:
 	inc de
 	ld [hli], a ; tile id
 	xor a ; PAL_OW_RED
-	ld [hli], a
+	ld [hli], a ; attributes
 	dec c
 	jr nz, .loop
 	ret
@@ -983,6 +981,8 @@ TitleScreenMain:
 	and D_DOWN + B_BUTTON + SELECT
 	cp  D_DOWN + B_BUTTON + SELECT
 	jr z, .clock_reset
+
+; Press Start or A to start the game.
 	ld a, [hl]
 	and START | A_BUTTON
 	jr nz, .incave

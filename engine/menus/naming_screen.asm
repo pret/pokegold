@@ -195,7 +195,7 @@ NamingScreen:
 	ld hl, wSpriteAnimDict
 	ld [hli], a
 	ld [hl], a
-	lb de, $24, $20
+	depixel 4, 4, 4, 0
 	ld a, SPRITE_ANIM_INDEX_RED_WALK
 	call InitSpriteAnimStruct
 	ret
@@ -649,11 +649,11 @@ NamingScreen_AnimateCursor:
 NamingScreen_TryAddCharacter:
 	ld a, [wNamingScreenLastCharacter]
 	ld hl, Dakutens
-	cp "ﾞ" ; $e5
-	jr z, asm_11f06
+	cp "ﾞ"
+	jr z, AddDakutenToCharacter
 	ld hl, Handakutens
-	cp "ﾟ" ; $e4
-	jr z, asm_11f06
+	cp "ﾟ"
+	jr z, AddDakutenToCharacter
 
 MailComposition_TryAddCharacter:
 	ld a, [wNamingScreenMaxNameLength]
@@ -683,7 +683,7 @@ NamingScreen_AdvanceCursor_CheckEndOfString:
 	scf
 	ret
 
-asm_11f06:
+AddDakutenToCharacter:
 	ld a, [wNamingScreenCurNameLength]
 	and a
 	ret z
@@ -696,7 +696,7 @@ asm_11f06:
 
 .loop
 	ld a, [hli]
-	cp $ff
+	cp -1
 	jr z, NamingScreen_AdvanceCursor_CheckEndOfString
 	cp c
 	jr z, .done
@@ -960,8 +960,8 @@ INCBIN "gfx/icons/mail_big.2bpp"
 	ld [wNamingScreenMaxNameLength], a
 	ret
 
-.UnusedString11f7a:
-	db "メールを かいてね@"
+.Unreferenced_PleaseWriteAMailString:
+	db "メールを　かいてね@"
 
 .InitCharset:
 	call WaitTop
@@ -1334,13 +1334,13 @@ ComposeMail_GetCursorPosition:
 MailComposition_TryAddLastCharacter:
 	ld a, [wNamingScreenLastCharacter]
 	ld hl, Dakutens
-	cp "ﾞ" ; $e5
-	jr z, .asm_1258b
+	cp "ﾞ"
+	jr z, .add_dakuten
 	ld hl, Handakutens
-	cp "ﾟ" ; $e4
+	cp "ﾟ"
 	jp nz, MailComposition_TryAddCharacter
 
-.asm_1258b
+.add_dakuten
 	ld a, [wNamingScreenCurNameLength]
 	and a
 	ret z

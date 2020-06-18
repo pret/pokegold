@@ -442,8 +442,9 @@ _PushWindow::
 	inc hl
 	ld d, [hl]
 	push de
-	ld b, $10
-	ld hl, wMenuFlags
+
+	ld b, wMenuHeaderEnd - wMenuHeader
+	ld hl, wMenuHeader
 .loop
 	ld a, [hli]
 	ld [de], a

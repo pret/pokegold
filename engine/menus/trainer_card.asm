@@ -367,6 +367,7 @@ TrainerCard_InitBorder:
 
 	ld a, $23
 	ld [hli], a
+
 	ld e, SCREEN_WIDTH - 3
 	ld a, " "
 .loop2
@@ -374,7 +375,7 @@ TrainerCard_InitBorder:
 	dec e
 	jr nz, .loop2
 
-	ld a, $4
+	ld a, $04
 	ld [hli], a
 	ld a, $23
 	ld [hli], a
@@ -618,8 +619,8 @@ TrainerCard_JohtoBadgesOAM:
 	db $1c,            $20, $24, $20 | (1 << 7)
 	db $1c | (1 << 7), $20, $24, $20 | (1 << 7)
 
-ChrisCardPic: INCBIN "gfx/trainer_card/chris_card.2bpp"
-CardGFX: INCBIN "gfx/trainer_card/trainer_card.2bpp"
+ChrisCardPic:  INCBIN "gfx/trainer_card/chris_card.2bpp"
+CardGFX:       INCBIN "gfx/trainer_card/trainer_card.2bpp"
 CardStatusGFX: INCBIN "gfx/trainer_card/card_status.2bpp"
 
 LeaderGFX:  INCBIN "gfx/trainer_card/leaders.2bpp"

@@ -108,7 +108,8 @@ MoneyString:
 CoinString:
 	db "COIN@"
 ShowMoney_TerminatorString:
-	db "@@"
+	db "@"
+	db "@" ; unused
 
 Unreferenced_StartMenu_PrintSafariGameStatus:
 	ld hl, wOptions

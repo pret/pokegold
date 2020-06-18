@@ -1,3 +1,16 @@
+	; MainMenuItems indexes
+	const_def
+	const MAINMENU_NEW_GAME ; 0
+	const MAINMENU_CONTINUE ; 1
+	const MAINMENU_MYSTERY  ; 2
+
+	; MainMenu.Strings and MainMenu.Jumptable indexes
+	const_def
+	const MAINMENUITEM_CONTINUE     ; 0
+	const MAINMENUITEM_NEW_GAME     ; 1
+	const MAINMENUITEM_OPTION       ; 2
+	const MAINMENUITEM_MYSTERY_GIFT ; 3
+
 MainMenu:
 	ld de, MUSIC_NONE
 	call PlayMusic
@@ -45,43 +58,41 @@ MainMenu:
 	dw .Strings
 
 .Strings:
+; entries correspond to MAINMENUITEM_* constants
 	db "CONTINUE@"
 	db "NEW GAME@"
 	db "OPTION@"
 	db "MYSTERY GIFT@"
 
 .Jumptable:
-	dw MainMenu_Continue
-	dw MainMenu_NewGame
-	dw MainMenu_Options
-	dw MainMenu_MysteryGift
-
-CONTINUE       EQU 0
-NEW_GAME       EQU 1
-OPTION         EQU 2
-MYSTERY_GIFT   EQU 3
+; entries correspond to MAINMENUITEM_* constants
+	dw Continue
+	dw NewGame
+	dw Option
+	dw MysteryGift
 
 MainMenuItems:
+; entries correspond to MAINMENU_* constants
 
-NewGameMenu:
+	; MAINMENU_NEW_GAME
 	db 2
-	db NEW_GAME
-	db OPTION
+	db MAINMENUITEM_NEW_GAME
+	db MAINMENUITEM_OPTION
 	db -1
 
-ContinueMenu:
+	; MAINMENU_CONTINUE
 	db 3
-	db CONTINUE
-	db NEW_GAME
-	db OPTION
+	db MAINMENUITEM_CONTINUE
+	db MAINMENUITEM_NEW_GAME
+	db MAINMENUITEM_OPTION
 	db -1
 
-MysteryMenu:
+	; MAINMENU_MYSTERY
 	db 4
-	db CONTINUE
-	db NEW_GAME
-	db OPTION
-	db MYSTERY_GIFT
+	db MAINMENUITEM_CONTINUE
+	db MAINMENUITEM_NEW_GAME
+	db MAINMENUITEM_OPTION
+	db MAINMENUITEM_MYSTERY_GIFT
 	db -1
 
 MainMenu_GetWhichMenu:
@@ -91,22 +102,22 @@ MainMenu_GetWhichMenu:
 	ld a, [wSaveFileExists]
 	and a
 	jr nz, .next
-	ld a, $0 ; New Game
+	ld a, MAINMENU_NEW_GAME
 	ret
 
 .next
 	ldh a, [hCGB]
-	cp $1
-	ld a, $1
+	cp TRUE
+	ld a, MAINMENU_CONTINUE
 	ret nz
 	ld a, BANK(sNumDailyMysteryGiftPartnerIDs)
 	call OpenSRAM
 	ld a, [sNumDailyMysteryGiftPartnerIDs]
 	cp -1
 	call CloseSRAM
-	ld a, $1 ; Continue
+	ld a, MAINMENU_CONTINUE
 	ret z
-	ld a, $2 ; New Game
+	ld a, MAINMENU_MYSTERY
 	ret
 
 MainMenuJoypadLoop:
@@ -240,14 +251,12 @@ ClearTilemapEtc:
 	call ClearWindowData
 	ret
 
-MainMenu_MysteryGift:
 MysteryGift:
 	call UpdateTime
 	farcall DoMysteryGiftIfDayHasPassed
 	farcall DoMysteryGift
 	ret
 
-MainMenu_Options:
-OptionsMenu:
-	farcall _OptionsMenu
+Option:
+	farcall _Option
 	ret

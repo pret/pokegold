@@ -591,7 +591,7 @@ TryLoadSaveData:
 	call OpenSRAM
 	ld hl, sPlayerData + wStartDay - wPlayerData
 	ld de, wStartDay
-	ld bc, $e
+	ld bc, 14
 	call CopyBytes
 	call CloseSRAM
 	ret
@@ -606,7 +606,7 @@ TryLoadSaveData:
 	call OpenSRAM
 	ld hl, sBackupPlayerData1 + wStartDay - wPlayerData
 	ld de, wStartDay
-	ld bc, $e
+	ld bc, 14
 	call CopyBytes
 	call CloseSRAM
 	ret
