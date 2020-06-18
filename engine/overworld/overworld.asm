@@ -36,7 +36,7 @@ RefreshSprites::
 
 .Refresh:
 	xor a
-	ld bc, SPRITE_GFX_LIST_CAPACITY * 2
+	ld bc, wUsedSpritesEnd - wUsedSprites
 	ld hl, wUsedSprites
 	call ByteFill
 	call GetPlayerSprite
@@ -44,9 +44,9 @@ RefreshSprites::
 	ret
 
 GetPlayerSprite:
+; Get Chris's sprite.
 	ld a, [wPlayerState]
 	ld c, a
-; Get Chris's sprite.
 	ld hl, ChrisStateSprites
 .loop
 	ld a, [hli]
@@ -265,13 +265,16 @@ GetSprite:
 	ld b, 0
 	ld a, NUM_SPRITEDATA_FIELDS
 	call AddNTimes
+	; load the address into de
 	ld a, [hli]
 	ld e, a
 	ld a, [hli]
 	ld d, a
+	; load the length into c
 	ld a, [hli]
 	swap a
 	ld c, a
+	; load the sprite bank into both b and h
 	ld b, [hl]
 	pop hl
 	ret
@@ -437,10 +440,12 @@ Unreferenced_Function1438a:
 	ld a, c
 	jr GetUsedSprite
 
+Unreferenced_Function1438d:
 	ld a, c
 	ld b, 0
 	jr GetUsedSprite
 
+Unreferenced_Function14392:
 	ld a, c
 	ld b, SPRITE_GFX_LIST_CAPACITY
 	jr GetUsedSprite

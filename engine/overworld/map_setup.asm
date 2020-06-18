@@ -111,12 +111,12 @@ EnableTextAcceleration:
 	ld [wDisableTextAcceleration], a
 	ret
 
-UnusedActivateMapAnims:
+Unreferenced_ActivateMapAnims:
 	ld a, $1
 	ldh [hMapAnims], a
 	ret
 
-UnusedSuspendMapAnims:
+Unreferenced_SuspendMapAnims:
 	xor a
 	ldh [hMapAnims], a
 	ret

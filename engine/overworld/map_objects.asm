@@ -2369,7 +2369,7 @@ HandleNPCStep::
 	ld [wPlayerStepVectorX], a
 	ld [wPlayerStepVectorY], a
 	ld [wPlayerStepFlags], a
-	ld a, $ff
+	ld a, STANDING
 	ld [wPlayerStepDirection], a
 	ret
 
