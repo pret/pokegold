@@ -1212,7 +1212,7 @@ StatStrings:
 
 GetStatExpRelativePointer:
 	ld a, [wCurItem]
-	ld hl, Table_eeeb
+	ld hl, Table_ef3f
 .next
 	cp [hl]
 	inc hl
@@ -1226,7 +1226,7 @@ GetStatExpRelativePointer:
 	ld b, 0
 	ret
 
-Table_eeeb:
+Table_ef3f:
 	db HP_UP,    MON_HP_EXP - MON_STAT_EXP
 	db PROTEIN, MON_ATK_EXP - MON_STAT_EXP
 	db IRON,    MON_DEF_EXP - MON_STAT_EXP
@@ -1347,7 +1347,7 @@ HealPowderEffect:
 	call UseStatusHealer
 
 	cp $0
-	jr nz, .asm_efc9
+	jr nz, .asm_f01f
 	ld c, HAPPINESS_BITTERPOWDER
 	farcall ChangeHappiness
 
@@ -1355,7 +1355,7 @@ HealPowderEffect:
 
 	ld a, $0
 
-.asm_efc9
+.asm_f01f
 	jp StatusHealer_Jumptable
 
 StatusHealingEffect:
@@ -1481,14 +1481,14 @@ RevivalHerbEffect:
 
 	call RevivePokemon
 	cp 0
-	jr nz, .asm_f0c5
+	jr nz, .asm_f11b
 
 	ld c, HAPPINESS_REVIVALHERB
 	farcall ChangeHappiness
 	call LooksBitterMessage
 	ld a, 0
 
-.asm_f0c5
+.asm_f11b
 	jp StatusHealer_Jumptable
 
 ReviveEffect:

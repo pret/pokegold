@@ -2333,7 +2333,7 @@ CableClubCheckWhichChris:
 LinkCommsBorderGFX:
 INCBIN "gfx/trade/border_tiles.2bpp"
 
-Unreferenced_Function29fe4:
+Unreferenced_Function29deb:
 	ld a, BANK(sPartyMail)
 	call OpenSRAM
 	ld d, FALSE

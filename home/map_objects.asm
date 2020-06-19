@@ -237,7 +237,7 @@ CheckObjectTime::
 	ld a, [hl]
 	cp -1
 	jr z, .timeofday_always
-	ld hl, .TimeOfDayValues_191e
+	ld hl, .TimeOfDayValues_17bb
 	ld a, [wTimeOfDay]
 	add l
 	ld l, a
@@ -257,7 +257,7 @@ CheckObjectTime::
 	and a
 	ret
 
-.TimeOfDayValues_191e:
+.TimeOfDayValues_17bb:
 ; entries correspond to TimeOfDay values
 	db MORN
 	db DAY
@@ -362,7 +362,7 @@ CopyPlayerObjectTemplate::
 	call CopyBytes
 	ret
 
-Unreferenced_Function19b8:
+Unreferenced_Function1855:
 	call GetMapObject
 	ld hl, MAPOBJECT_OBJECT_STRUCT_ID
 	add hl, bc

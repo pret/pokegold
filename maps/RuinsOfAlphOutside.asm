@@ -60,10 +60,10 @@ RuinsOfAlphOutsideScientistSceneContinue:
 	closetext
 	playmusic MUSIC_SHOW_ME_AROUND
 	follow RUINSOFALPHOUTSIDE_SCIENTIST, PLAYER
-	applymovement RUINSOFALPHOUTSIDE_SCIENTIST, MovementData_0x580ba
+	applymovement RUINSOFALPHOUTSIDE_SCIENTIST, MovementData_0x110092
 	disappear RUINSOFALPHOUTSIDE_SCIENTIST
 	stopfollow
-	applymovement PLAYER, MovementData_0x580c5
+	applymovement PLAYER, MovementData_0x11009d
 	setmapscene RUINS_OF_ALPH_RESEARCH_CENTER, SCENE_RUINSOFALPHRESEARCHCENTER_GET_UNOWN_DEX
 	warpcheck
 	end
@@ -99,7 +99,7 @@ RuinsOfAlphSign:
 RuinsOfAlphResearchCenterSign:
 	jumptext RuinsOfAlphResearchCenterSignText
 
-MovementData_0x580ba:
+MovementData_0x110092:
 	step RIGHT
 	step RIGHT
 	step RIGHT
@@ -112,7 +112,7 @@ MovementData_0x580ba:
 	step UP
 	step_end
 
-MovementData_0x580c5:
+MovementData_0x11009d:
 	step UP
 	step_end
 

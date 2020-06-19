@@ -61,7 +61,7 @@ PalPacket_BattleGrayscale:
 PalPacket_Pokegear:
 	sgb_pal_set POKEGEAR, ROUTES, ROUTES, ROUTES
 
-UnreferencedPalPacket_9c86:
+UnreferencedPalPacket_a0f5:
 	sgb_pal_set PACK, ROUTES, ROUTES, ROUTES
 
 PalPacket_SlotMachine:

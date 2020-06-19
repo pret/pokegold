@@ -50,12 +50,12 @@ LanceGetPasswordScript:
 	pause 5
 	turnobject TEAMROCKETBASEB3F_MOLTRES, RIGHT
 	pause 20
-	applymovement TEAMROCKETBASEB3F_LANCE, MovementData_0x6e12a
+	applymovement TEAMROCKETBASEB3F_LANCE, MovementData_0x115de0
 	opentext
 	writetext LanceGetPasswordText
 	waitbutton
 	closetext
-	applymovement TEAMROCKETBASEB3F_LANCE, MovementData_0x6e12c
+	applymovement TEAMROCKETBASEB3F_LANCE, MovementData_0x115de2
 	disappear TEAMROCKETBASEB3F_LANCE
 	setscene SCENE_TEAMROCKETBASEB3F_RIVAL_ENCOUNTER
 	end
@@ -84,11 +84,11 @@ TeamRocketBaseB3FRocketScript:
 	jumptextfaceplayer TeamRocketBaseB3FRocketText
 
 RocketBaseBossLeft:
-	applymovement PLAYER, MovementData_0x6e133
+	applymovement PLAYER, MovementData_0x115de9
 	sjump RocketBaseBoss
 
 RocketBaseBossRight:
-	applymovement PLAYER, MovementData_0x6e13a
+	applymovement PLAYER, MovementData_0x115df0
 RocketBaseBoss:
 	pause 30
 	showemote EMOTE_SHOCK, TEAMROCKETBASEB3F_ROCKET1, 15
@@ -98,7 +98,7 @@ RocketBaseBoss:
 	writetext ExecutiveM4BeforeText
 	waitbutton
 	closetext
-	applymovement TEAMROCKETBASEB3F_ROCKET1, MovementData_0x6e142
+	applymovement TEAMROCKETBASEB3F_ROCKET1, MovementData_0x115df8
 	winlosstext ExecutiveM4BeatenText, 0
 	setlasttalked TEAMROCKETBASEB3F_ROCKET1
 	loadtrainer EXECUTIVEM, EXECUTIVEM_4
@@ -109,9 +109,9 @@ RocketBaseBoss:
 	writetext ExecutiveM4AfterText
 	waitbutton
 	closetext
-	applymovement TEAMROCKETBASEB3F_ROCKET1, MovementData_0x6e144
+	applymovement TEAMROCKETBASEB3F_ROCKET1, MovementData_0x115dfa
 	playsound SFX_TACKLE
-	applymovement TEAMROCKETBASEB3F_ROCKET1, MovementData_0x6e147
+	applymovement TEAMROCKETBASEB3F_ROCKET1, MovementData_0x115dfd
 	disappear TEAMROCKETBASEB3F_ROCKET1
 	setscene SCENE_TEAMROCKETBASEB3F_NOTHING
 	end
@@ -213,11 +213,11 @@ TeamRocketBaseB3FProtein:
 TeamRocketBaseB3FIceHeal:
 	itemball ICE_HEAL
 
-MovementData_0x6e12a:
+MovementData_0x115de0:
 	step RIGHT
 	step_end
 
-MovementData_0x6e12c:
+MovementData_0x115de2:
 	step DOWN
 	step LEFT
 	step LEFT
@@ -226,7 +226,7 @@ MovementData_0x6e12c:
 	step LEFT
 	step_end
 
-MovementData_0x6e133:
+MovementData_0x115de9:
 	step UP
 	step UP
 	step UP
@@ -235,7 +235,7 @@ MovementData_0x6e133:
 	turn_head UP
 	step_end
 
-MovementData_0x6e13a:
+MovementData_0x115df0:
 	step UP
 	step UP
 	step LEFT
@@ -245,16 +245,16 @@ MovementData_0x6e13a:
 	turn_head UP
 	step_end
 
-MovementData_0x6e142:
+MovementData_0x115df8:
 	step DOWN
 	step_end
 
-MovementData_0x6e144:
+MovementData_0x115dfa:
 	big_step RIGHT
 	big_step RIGHT
 	step_end
 
-MovementData_0x6e147:
+MovementData_0x115dfd:
 	fix_facing
 	fast_jump_step LEFT
 	remove_fixed_facing

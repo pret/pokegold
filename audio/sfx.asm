@@ -4492,18 +4492,18 @@ Sfx_Thunder_Ch8:
 Sfx_Supersonic_Ch5:
 	duty_cycle 2
 	square_note 15, 3, -7, 1984
-Sfx_Supersonic_branch_f21ef:
+Sfx_Supersonic_branch_f21ec:
 	square_note 15, 13, -7, 1984
-	sound_loop 4, Sfx_Supersonic_branch_f21ef
+	sound_loop 4, Sfx_Supersonic_branch_f21ec
 	square_note 15, 13, 1, 1984
 	sound_ret
 
 Sfx_Supersonic_Ch6:
 	duty_cycle_pattern 2, 3, 0, 3
 	square_note 15, 2, -7, 1992
-Sfx_Supersonic_branch_f2202:
+Sfx_Supersonic_branch_f21ff:
 	square_note 15, 12, -7, 1991
-	sound_loop 4, Sfx_Supersonic_branch_f2202
+	sound_loop 4, Sfx_Supersonic_branch_f21ff
 	square_note 15, 12, 1, 1992
 	sound_ret
 
@@ -4835,10 +4835,10 @@ Sfx_HyperBeam_Ch5:
 	square_note 2, 15, 1, 1984
 	square_note 2, 15, 1, 1792
 	square_note 2, 15, 1, 2000
-Sfx_HyperBeam_branch_f24f8:
+Sfx_HyperBeam_branch_f24f5:
 	square_note 2, 15, 1, 1792
 	square_note 2, 15, 1, 2016
-	sound_loop 12, Sfx_HyperBeam_branch_f24f8
+	sound_loop 12, Sfx_HyperBeam_branch_f24f5
 	square_note 15, 15, 1, 1792
 	sound_ret
 
@@ -4855,10 +4855,10 @@ Sfx_HyperBeam_Ch6:
 	square_note 2, 15, 1, 1985
 	square_note 2, 15, 1, 1793
 	square_note 2, 15, 1, 2001
-Sfx_HyperBeam_branch_f2537:
+Sfx_HyperBeam_branch_f2534:
 	square_note 2, 15, 1, 1793
 	square_note 2, 15, 1, 2017
-	sound_loop 12, Sfx_HyperBeam_branch_f2537
+	sound_loop 12, Sfx_HyperBeam_branch_f2534
 	square_note 15, 15, 1, 1793
 	sound_ret
 
@@ -4949,7 +4949,7 @@ Sfx_Metronome_Ch5:
 	sound_ret
 
 Sfx_Unknown5F_Ch5:
-Sfx_Unknown5F_branch_f2617:
+Sfx_Unknown5F_branch_f25f5:
 	square_note 2, 15, 7, 1537
 	square_note 2, 15, 7, 1793
 	sound_loop 8, Sfx_Unknown5F_Ch5
@@ -4959,7 +4959,7 @@ Sfx_Unknown5F_Ch6:
 	square_note 1, 15, 7, 65535
 	square_note 2, 15, 7, 1538
 	square_note 2, 15, 7, 1794
-	sound_loop 8, Sfx_Unknown5F_branch_f2617
+	sound_loop 8, Sfx_Unknown5F_branch_f25f5
 	sound_ret
 
 Sfx_Fanfare2_Ch5:
@@ -5143,9 +5143,9 @@ Sfx_Sandstorm_Ch8:
 Sfx_Elevator_Ch5:
 	duty_cycle 2
 	pitch_sweep 5, -2
-Sfx_Elevator_branch_f2726:
+Sfx_Elevator_branch_f2704:
 	square_note 2, 15, 1, 768
-	sound_loop 48, Sfx_Elevator_branch_f2726
+	sound_loop 48, Sfx_Elevator_branch_f2704
 	pitch_sweep 0, 8
 	duty_cycle 2
 	square_note 15, 15, 3, 1840

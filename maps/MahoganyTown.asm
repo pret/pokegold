@@ -26,13 +26,13 @@ MahoganyTown_MapScripts:
 
 MahoganyTownTryARageCandyBarScript:
 	showemote EMOTE_SHOCK, MAHOGANYTOWN_POKEFAN_M, 15
-	applymovement MAHOGANYTOWN_POKEFAN_M, MovementData_0x1900a9
+	applymovement MAHOGANYTOWN_POKEFAN_M, MovementData_0x124b5e
 	follow PLAYER, MAHOGANYTOWN_POKEFAN_M
-	applymovement PLAYER, MovementData_0x1900a7
+	applymovement PLAYER, MovementData_0x124b5c
 	stopfollow
 	turnobject PLAYER, RIGHT
 	scall RageCandyBarMerchantScript
-	applymovement MAHOGANYTOWN_POKEFAN_M, MovementData_0x1900ad
+	applymovement MAHOGANYTOWN_POKEFAN_M, MovementData_0x124b62
 	end
 
 MahoganyTownPokefanMScript:
@@ -121,21 +121,21 @@ MahoganyGymSign:
 MahoganyTownPokecenterSign:
 	jumpstd PokecenterSignScript
 
-MovementData_0x1900a4:
+MovementData_0x124b59:
 	step DOWN
 	big_step UP
 	turn_head DOWN
-MovementData_0x1900a7:
+MovementData_0x124b5c:
 	step LEFT
 	step_end
 
-MovementData_0x1900a9:
+MovementData_0x124b5e:
 	step RIGHT
 	step DOWN
 	turn_head LEFT
 	step_end
 
-MovementData_0x1900ad:
+MovementData_0x124b62:
 	step UP
 	turn_head DOWN
 	step_end

@@ -922,7 +922,7 @@ MapObjectMovementPattern:
 	and %00000011
 	ld e, a
 	ld d, 0
-	ld hl, .data_4a81
+	ld hl, .data_4a5a
 	add hl, de
 	add hl, de
 	ld d, [hl]
@@ -939,7 +939,7 @@ MapObjectMovementPattern:
 	ld [hl], STEP_TYPE_TRACKING_OBJECT
 	ret
 
-.data_4a81
+.data_4a5a
 	;   x,  y
 	db  0, -4
 	db  0,  8

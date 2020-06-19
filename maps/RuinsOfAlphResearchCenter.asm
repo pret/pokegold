@@ -29,7 +29,7 @@ RuinsOfAlphResearchCenter_MapScripts:
 	return
 
 .GetUnownDexScript:
-	applymovement RUINSOFALPHRESEARCHCENTER_SCIENTIST3, MovementData_0x5926f
+	applymovement RUINSOFALPHRESEARCHCENTER_SCIENTIST3, MovementData_0x110b15
 	playsound SFX_BOOT_PC
 	pause 60
 	playsound SFX_SWITCH_POKEMON
@@ -43,7 +43,7 @@ RuinsOfAlphResearchCenter_MapScripts:
 	writetext RuinsOfAlphResearchCenterModifiedDexText
 	waitbutton
 	closetext
-	applymovement RUINSOFALPHRESEARCHCENTER_SCIENTIST3, MovementData_0x59274
+	applymovement RUINSOFALPHRESEARCHCENTER_SCIENTIST3, MovementData_0x110b1a
 	opentext
 	writetext RuinsOfAlphResearchCenterDexUpgradedText
 	playsound SFX_ITEM
@@ -52,7 +52,7 @@ RuinsOfAlphResearchCenter_MapScripts:
 	writetext RuinsOfAlphResearchCenterScientist3Text
 	waitbutton
 	closetext
-	applymovement RUINSOFALPHRESEARCHCENTER_SCIENTIST3, MovementData_0x59276
+	applymovement RUINSOFALPHRESEARCHCENTER_SCIENTIST3, MovementData_0x110b1c
 	setscene SCENE_RUINSOFALPHRESEARCHCENTER_NOTHING
 	special RestartMapMusic
 	end
@@ -157,18 +157,18 @@ RuinsOfAlphResearchCenterPhoto:
 RuinsOfAlphResearchCenterBookshelf:
 	jumptext RuinsOfAlphResearchCenterAcademicBooksText
 
-MovementData_0x5926f:
+MovementData_0x110b15:
 	step UP
 	step UP
 	step LEFT
 	turn_head UP
 	step_end
 
-MovementData_0x59274:
+MovementData_0x110b1a:
 	step DOWN
 	step_end
 
-MovementData_0x59276:
+MovementData_0x110b1c:
 	step UP
 	step_end
 

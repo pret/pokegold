@@ -221,9 +221,9 @@ Cry_Magcargo_Ch6:
 
 Cry_Magcargo_Ch8:
 	noise_note 2, 14, 8, 59
-Cry_Magcargo_branch_f2ef5:
+Cry_Magcargo_branch_f2eb5:
 	noise_note 1, 15, 1, 78
-	sound_loop 5, Cry_Magcargo_branch_f2ef5
+	sound_loop 5, Cry_Magcargo_branch_f2eb5
 	noise_note 2, 13, 8, 63
 	noise_note 20, 12, 2, 95
 	sound_ret
@@ -348,7 +348,7 @@ Cry_Marill_Ch8:
 Cry_Togepi_Ch5:
 	pitch_offset 2
 Cry_Togepi_Ch6:
-Cry_Togetic_branch_f3022:
+Cry_Togetic_branch_f2fe2:
 	duty_cycle_pattern 1, 1, 0, 2
 	square_note 4, 15, 1, 1942
 	square_note 4, 15, 1, 1837
@@ -359,7 +359,7 @@ Cry_Togetic_branch_f3022:
 Cry_Togetic_Ch5:
 	pitch_offset 2
 Cry_Togetic_Ch6:
-	sound_call Cry_Togetic_branch_f3022
+	sound_call Cry_Togetic_branch_f2fe2
 	sound_loop 2, Cry_Togetic_Ch6
 	square_note 14, 0, 0, 0
 	square_note 8, 15, 2, 1986
@@ -436,12 +436,12 @@ Cry_Hoothoot_Ch5:
 
 Cry_Hoothoot_Ch6:
 	duty_cycle_pattern 0, 2, 0, 2
-Cry_Hoothoot_branch_f30fb:
+Cry_Hoothoot_branch_f30bb:
 	square_note 2, 10, 1, 1536
-	sound_loop 3, Cry_Hoothoot_branch_f30fb
-Cry_Hoothoot_branch_f3103:
+	sound_loop 3, Cry_Hoothoot_branch_f30bb
+Cry_Hoothoot_branch_f30c3:
 	square_note 2, 10, 1, 1584
-	sound_loop 4, Cry_Hoothoot_branch_f3103
+	sound_loop 4, Cry_Hoothoot_branch_f30c3
 	square_note 4, 10, 2, 1588
 	square_note 4, 9, 1, 1592
 	sound_ret
@@ -456,11 +456,11 @@ Cry_Hoothoot_Ch8:
 Cry_Sentret_Ch5:
 	pitch_offset 32
 	duty_cycle 0
-	sound_jump Cry_Sentret_branch_f312b
+	sound_jump Cry_Sentret_branch_f30eb
 
 Cry_Sentret_Ch6:
 	duty_cycle_pattern 0, 1, 2, 3
-Cry_Sentret_branch_f312b:
+Cry_Sentret_branch_f30eb:
 	square_note 8, 3, -1, 1837
 	square_note 8, 15, 1, 1824
 	sound_ret
@@ -473,12 +473,12 @@ Cry_Sentret_Ch8:
 Cry_Mareep_Ch5:
 	pitch_offset 32
 	duty_cycle 0
-	sound_jump Cry_Mareep_branch_f3145
+	sound_jump Cry_Mareep_branch_f3105
 
 Cry_Mareep_Ch6:
 	duty_cycle_pattern 0, 0, 0, 1
-Cry_Mareep_branch_f3145:
-Cry_Gligar_branch_f3145:
+Cry_Mareep_branch_f3105:
+Cry_Gligar_branch_f3105:
 	square_note 4, 3, -2, 1853
 	square_note 6, 15, 8, 1890
 	square_note 6, 15, 8, 1888
@@ -490,14 +490,14 @@ Cry_Cyndaquil_Ch5:
 Cry_Cyndaquil_Ch6:
 	duty_cycle 2
 	square_note 8, 2, -7, 263
-Cry_Cyndaquil_branch_f315f:
+Cry_Cyndaquil_branch_f311f:
 	square_note 0, 14, 1, 1155
 	square_note 0, 5, 1, 1102
-	sound_loop 4, Cry_Cyndaquil_branch_f315f
-Cry_Cyndaquil_branch_f316b:
+	sound_loop 4, Cry_Cyndaquil_branch_f311f
+Cry_Cyndaquil_branch_f312b:
 	square_note 0, 14, 1, 986
 	square_note 1, 5, 1, 786
-	sound_loop 4, Cry_Cyndaquil_branch_f316b
+	sound_loop 4, Cry_Cyndaquil_branch_f312b
 	sound_ret
 
 Cry_Gligar_Ch8:
@@ -524,16 +524,16 @@ Cry_Chikorita_Ch8:
 
 Cry_Gligar_Ch5:
 	duty_cycle_pattern 2, 2, 0, 2
-	sound_jump Cry_Gligar_branch_f3145
+	sound_jump Cry_Gligar_branch_f3105
 
 Cry_Girafarig_Ch5:
 	duty_cycle 1
 	pitch_offset 4
-	sound_jump Cry_Girafarig_branch_f31af
+	sound_jump Cry_Girafarig_branch_f316f
 
 Cry_Girafarig_Ch6:
 	duty_cycle_pattern 1, 0, 0, 1
-Cry_Girafarig_branch_f31af:
+Cry_Girafarig_branch_f316f:
 	square_note 4, 6, 8, 1880
 	square_note 2, 14, 8, 1888
 	square_note 2, 14, 8, 1895
@@ -568,11 +568,11 @@ Cry_Slugma_Ch8:
 Cry_Ledyba_Ch5:
 	pitch_offset 2
 	duty_cycle 2
-	sound_jump Cry_Ledyba_branch_f3202
+	sound_jump Cry_Ledyba_branch_f31c2
 
 Cry_Ledyba_Ch6:
 	duty_cycle_pattern 0, 0, 0, 1
-Cry_Ledyba_branch_f3202:
+Cry_Ledyba_branch_f31c2:
 	square_note 3, 15, 8, 1937
 	square_note 3, 13, 8, 1933
 	square_note 2, 0, 0, 0
@@ -631,24 +631,24 @@ Cry_Donphan_Ch8:
 Cry_Teddiursa_Ch5:
 Cry_Typhlosion_Ch5:
 	duty_cycle_pattern 0, 1, 0, 2
-Cry_Teddiursa_branch_f3286:
+Cry_Teddiursa_branch_f3246:
 	square_note 3, 12, 1, 1937
-	sound_loop 3, Cry_Teddiursa_branch_f3286
-Cry_Teddiursa_branch_f328e:
+	sound_loop 3, Cry_Teddiursa_branch_f3246
+Cry_Teddiursa_branch_f324e:
 	square_note 3, 13, 1, 1201
-	sound_loop 6, Cry_Teddiursa_branch_f328e
-Cry_Teddiursa_branch_f3296:
+	sound_loop 6, Cry_Teddiursa_branch_f324e
+Cry_Teddiursa_branch_f3256:
 	square_note 1, 13, 1, 1169
 	square_note 1, 11, 1, 1105
-	sound_loop 6, Cry_Teddiursa_branch_f3296
-Cry_Teddiursa_branch_f32a2:
+	sound_loop 6, Cry_Teddiursa_branch_f3256
+Cry_Teddiursa_branch_f3262:
 	square_note 1, 10, 3, 1137
 	square_note 1, 8, 1, 1089
-	sound_loop 6, Cry_Teddiursa_branch_f32a2
-Cry_Teddiursa_branch_f32ae:
+	sound_loop 6, Cry_Teddiursa_branch_f3262
+Cry_Teddiursa_branch_f326e:
 	square_note 1, 4, 1, 1057
 	square_note 1, 2, 1, 1025
-	sound_loop 4, Cry_Teddiursa_branch_f32ae
+	sound_loop 4, Cry_Teddiursa_branch_f326e
 	sound_ret
 
 Cry_Teddiursa_Ch6:
@@ -672,12 +672,12 @@ Cry_Typhlosion_Ch8:
 
 Cry_Natu_Ch5:
 	duty_cycle_pattern 3, 1, 3, 2
-Cry_Mantine_branch_f32e9:
-Cry_Sunflora_branch_f32e9:
+Cry_Mantine_branch_f32a9:
+Cry_Sunflora_branch_f32a9:
 	square_note 4, 15, 8, 1969
 	square_note 4, 15, 8, 1968
 	square_note 4, 4, 8, 1967
-Cry_Mantine_branch_f32f5:
+Cry_Mantine_branch_f32b5:
 	square_note 4, 15, 8, 1970
 	square_note 4, 15, 8, 1971
 	square_note 4, 4, 8, 1972
@@ -685,12 +685,12 @@ Cry_Mantine_branch_f32f5:
 
 Cry_Natu_Ch6:
 Cry_Sunflora_Ch6:
-Cry_Mantine_branch_f3302:
+Cry_Mantine_branch_f32c2:
 	duty_cycle_pattern 3, 3, 0, 2
 	square_note 4, 15, 8, 1970
 	square_note 4, 15, 8, 1969
 	square_note 4, 2, 8, 1968
-Cry_Mantine_branch_f3310:
+Cry_Mantine_branch_f32d0:
 	square_note 4, 15, 8, 1972
 	square_note 4, 15, 8, 1974
 	square_note 4, 4, 8, 1976
@@ -698,11 +698,11 @@ Cry_Mantine_branch_f3310:
 
 Cry_Natu_Ch8:
 Cry_Sunflora_Ch8:
-Cry_Mantine_branch_f331d:
+Cry_Mantine_branch_f32dd:
 	noise_note 4, 8, 8, 5
 	noise_note 4, 8, 8, 4
 	noise_note 4, 3, 8, 3
-Cry_Mantine_branch_f3326:
+Cry_Mantine_branch_f32e6:
 	noise_note 4, 8, 8, 5
 	noise_note 4, 8, 8, 4
 	noise_note 4, 8, 7, 4
@@ -715,30 +715,30 @@ Cry_Teddiursa_Ch8:
 
 Cry_Sunflora_Ch5:
 	duty_cycle 0
-	sound_jump Cry_Sunflora_branch_f32e9
+	sound_jump Cry_Sunflora_branch_f32a9
 
 Cry_Mantine_Ch5:
 	duty_cycle 0
-	sound_call Cry_Mantine_branch_f32e9
-	sound_call Cry_Mantine_branch_f32f5
+	sound_call Cry_Mantine_branch_f32a9
+	sound_call Cry_Mantine_branch_f32b5
 	sound_ret
 
 Cry_Mantine_Ch6:
-	sound_call Cry_Mantine_branch_f3302
-	sound_call Cry_Mantine_branch_f3310
+	sound_call Cry_Mantine_branch_f32c2
+	sound_call Cry_Mantine_branch_f32d0
 	sound_ret
 
 Cry_Mantine_Ch8:
-	sound_call Cry_Mantine_branch_f331d
-	sound_call Cry_Mantine_branch_f3326
+	sound_call Cry_Mantine_branch_f32dd
+	sound_call Cry_Mantine_branch_f32e6
 	sound_ret
 
 Cry_Ampharos_Ch5:
 	duty_cycle_pattern 3, 1, 3, 2
-Cry_Ampharos_branch_f3355:
+Cry_Ampharos_branch_f3315:
 	square_note 1, 12, 1, 1312
 	square_note 1, 10, 1, 1056
-	sound_loop 4, Cry_Ampharos_branch_f3355
+	sound_loop 4, Cry_Ampharos_branch_f3315
 	duty_cycle 0
 	square_note 4, 7, 8, 1888
 	square_note 4, 7, 8, 1840
@@ -833,15 +833,15 @@ Cry_Aipom_Ch5:
 
 Cry_Aipom_Ch6:
 	duty_cycle_pattern 0, 2, 1, 3
-Cry_Aipom_branch_f3443:
+Cry_Aipom_branch_f3403:
 	square_note 1, 15, 1, 1972
-	sound_loop 8, Cry_Aipom_branch_f3443
-Cry_Aipom_branch_f344b:
+	sound_loop 8, Cry_Aipom_branch_f3403
+Cry_Aipom_branch_f340b:
 	square_note 1, 12, 1, 1936
-	sound_loop 3, Cry_Aipom_branch_f344b
-Cry_Aipom_branch_f3453:
+	sound_loop 3, Cry_Aipom_branch_f340b
+Cry_Aipom_branch_f3413:
 	square_note 1, 11, 1, 1933
-	sound_loop 2, Cry_Aipom_branch_f3453
+	sound_loop 2, Cry_Aipom_branch_f3413
 	square_note 16, 9, 2, 1941
 	sound_ret
 

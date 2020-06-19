@@ -202,19 +202,19 @@ Text_Warping::
 	text "Warping…"
 	done
 
-UnknownText_0x1bd05e::
+UnknownText_0x1902f9::
 	text "Which number"
 	line "should be changed?"
 	done
 
-UnknownText_0x1bd07f::
+UnknownText_0x19031a::
 	text "Will you play with"
 	line "@"
 	text_ram wStringBuffer2
 	text "?"
 	done
 
-UnknownText_0x1bd09a::
+UnknownText_0x190335::
 	text "You need two #-"
 	line "MON for breeding."
 	prompt
@@ -224,7 +224,7 @@ Text_BreedingIsNotPossible::
 	line "possible."
 	prompt
 
-UnknownText_0x1bd0d8::
+UnknownText_0x190373::
 	text "The compatibility"
 	line "is @"
 	text_decimal wBreedingCompatibility, 1, 3
@@ -232,17 +232,17 @@ UnknownText_0x1bd0d8::
 	cont "Should they breed?"
 	done
 
-UnknownText_0x1bd109::
+UnknownText_0x1903a4::
 	text "There is no EGG."
 	line ""
 	prompt
 
-UnknownText_0x1bd11c::
+UnknownText_0x1903b7::
 	text "It's going to"
 	line "hatch!"
 	prompt
 
-UnknownText_0x1bd131::
+UnknownText_0x1903cc::
 	text "Test event"
 	line "@"
 	text_decimal wStringBuffer2, 1, 2
@@ -256,30 +256,30 @@ UnknownText_0x1bd131::
 	text "You can have this."
 	prompt
 
-UnknownText_0x1bd188::
+UnknownText_0x190414::
 	text "The BOX is full!"
 	done
 
-UnknownText_0x1bd2a0::
+UnknownText_0x190426::
 	text "Obtained the"
 	line "VOLTORBBADGE!"
 	done
 
-UnknownText_0x1bc42c::
+UnknownText_0x190442::
 	text "The password is:"
 	line ""
 	done
 
-UnknownText_0x1bc43f::
+UnknownText_0x190455::
 	text "Is this OK?"
 	done
 
-UnknownText_0x1bc44c::
+UnknownText_0x190462::
 	text "Enter the"
 	line "ID no."
 	done
 
-UnknownText_0x1bc45e::
+UnknownText_0x190474::
 	text "Enter the"
 	line "amount."
 	done

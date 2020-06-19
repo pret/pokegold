@@ -1066,14 +1066,14 @@ TryStrengthOW:
 WhirlpoolFunction:
 	call FieldMoveJumptableReset
 .loop
-	ld hl, Jumptable_cdae
+	ld hl, Jumptable_cdb1
 	call FieldMoveJumptable
 	jr nc, .loop
 	and $7f
 	ld [wFieldMoveSucceeded], a
 	ret
 
-Jumptable_cdae:
+Jumptable_cdb1:
 	dw .TryWhirlpool
 	dw .DoWhirlpool
 	dw .FailWhirlpool

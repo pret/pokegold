@@ -192,7 +192,7 @@ SentAllToMomText:
 	text "Sent all to MOM!"
 	prompt
 
-BattleText_0x80a4f:
+BattleText_0x101415:
 	text "<RIVAL>: Huh? I"
 	line "should've chosen"
 	cont "your #MON!"
@@ -208,7 +208,7 @@ BattleText_UseNextMon:
 	text "Use next #MON?"
 	done
 
-BattleText_0x80a93:
+BattleText_0x101459:
 	text "<RIVAL>: Yes!"
 	line "I guess I chose a"
 	cont "good #MON!"

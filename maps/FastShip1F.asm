@@ -23,9 +23,9 @@ FastShip1F_MapScripts:
 	end
 
 .EnterFastShipScript:
-	applymovement FASTSHIP1F_SAILOR1, MovementData_0x7520e
-	applymovement PLAYER, MovementData_0x75217
-	applymovement FASTSHIP1F_SAILOR1, MovementData_0x75211
+	applymovement FASTSHIP1F_SAILOR1, MovementData_0x16c980
+	applymovement PLAYER, MovementData_0x16c989
+	applymovement FASTSHIP1F_SAILOR1, MovementData_0x16c983
 	pause 30
 	playsound SFX_BOAT
 	earthquake 30
@@ -89,13 +89,13 @@ FastShip1FSailor1Script:
 .LetThePlayerOut:
 	readvar VAR_FACING
 	ifequal RIGHT, .YouAreFacingRight
-	applymovement FASTSHIP1F_SAILOR1, MovementData_0x7520e
-	applymovement PLAYER, MovementData_0x75235
+	applymovement FASTSHIP1F_SAILOR1, MovementData_0x16c980
+	applymovement PLAYER, MovementData_0x16c9a7
 	end
 
 .YouAreFacingRight:
-	applymovement FASTSHIP1F_SAILOR1, MovementData_0x75214
-	applymovement PLAYER, MovementData_0x75238
+	applymovement FASTSHIP1F_SAILOR1, MovementData_0x16c986
+	applymovement PLAYER, MovementData_0x16c9aa
 	end
 
 FastShip1FSailor2Script:
@@ -122,53 +122,53 @@ WorriedGrandpaSceneRight:
 
 WorriedGrandpaSceneLeft:
 	appear FASTSHIP1F_GENTLEMAN
-	applymovement FASTSHIP1F_GENTLEMAN, MovementData_0x7521b
+	applymovement FASTSHIP1F_GENTLEMAN, MovementData_0x16c98d
 	playsound SFX_TACKLE
-	applymovement PLAYER, MovementData_0x7522e
-	applymovement FASTSHIP1F_GENTLEMAN, MovementData_0x75220
+	applymovement PLAYER, MovementData_0x16c9a0
+	applymovement FASTSHIP1F_GENTLEMAN, MovementData_0x16c992
 	opentext
 	writetext FastShip1FGrandpaText
 	waitbutton
 	closetext
 	turnobject PLAYER, RIGHT
-	applymovement FASTSHIP1F_GENTLEMAN, MovementData_0x75222
+	applymovement FASTSHIP1F_GENTLEMAN, MovementData_0x16c994
 	disappear FASTSHIP1F_GENTLEMAN
 	setscene SCENE_DEFAULT
 	end
 
-MovementData_0x7520e:
+MovementData_0x16c980:
 	slow_step LEFT
 	turn_head RIGHT
 	step_end
 
-MovementData_0x75211:
+MovementData_0x16c983:
 	slow_step RIGHT
 	turn_head DOWN
 	step_end
 
-MovementData_0x75214:
+MovementData_0x16c986:
 	slow_step DOWN
 	turn_head UP
 	step_end
 
-MovementData_0x75217:
+MovementData_0x16c989:
 	step DOWN
 	step DOWN
 	turn_head DOWN
 	step_end
 
-MovementData_0x7521b:
+MovementData_0x16c98d:
 	big_step RIGHT
 	big_step RIGHT
 	big_step RIGHT
 	big_step RIGHT
 	step_end
 
-MovementData_0x75220:
+MovementData_0x16c992:
 	step RIGHT
 	step_end
 
-MovementData_0x75222:
+MovementData_0x16c994:
 	big_step DOWN
 	big_step RIGHT
 	big_step RIGHT
@@ -182,25 +182,25 @@ MovementData_0x75222:
 	big_step DOWN
 	step_end
 
-MovementData_0x7522e:
+MovementData_0x16c9a0:
 	big_step RIGHT
 	turn_head LEFT
 	step_end
 
-MovementData_0x75231:
+MovementData_0x16c9a3:
 	step UP
 	step_end
 
-MovementData_0x75233:
+MovementData_0x16c9a5:
 	step DOWN
 	step_end
 
-MovementData_0x75235:
+MovementData_0x16c9a7:
 	step UP
 	step UP
 	step_end
 
-MovementData_0x75238:
+MovementData_0x16c9aa:
 	step RIGHT
 	step UP
 	step_end

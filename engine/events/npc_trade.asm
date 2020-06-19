@@ -283,14 +283,14 @@ CopyTradeName:
 	call CopyBytes
 	ret
 
-Unreferenced_Functionfcdfb:
+Unreferenced_Functionfcbc7:
 	ld bc, 4
 	call CopyBytes
 	ld a, "@"
 	ld [de], a
 	ret
 
-Unreferenced_Functionfce05:
+Unreferenced_Functionfcbd1:
 	ld bc, 3
 	call CopyBytes
 	ld a, "@"

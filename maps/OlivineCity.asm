@@ -30,15 +30,15 @@ OlivineCityRivalSceneTop:
 	playsound SFX_ENTER_DOOR
 	appear OLIVINECITY_OLIVINE_RIVAL
 	waitsfx
-	applymovement OLIVINECITY_OLIVINE_RIVAL, MovementData_0x1a88d2
+	applymovement OLIVINECITY_OLIVINE_RIVAL, MovementData_0x1240af
 	playmusic MUSIC_RIVAL_ENCOUNTER
 	opentext
 	writetext OlivineCityRivalText
 	waitbutton
 	closetext
-	applymovement PLAYER, MovementData_0x1a88f4
+	applymovement PLAYER, MovementData_0x1240d1
 	turnobject PLAYER, RIGHT
-	applymovement OLIVINECITY_OLIVINE_RIVAL, MovementData_0x1a88db
+	applymovement OLIVINECITY_OLIVINE_RIVAL, MovementData_0x1240b8
 	setscene SCENE_FINISHED
 	disappear OLIVINECITY_OLIVINE_RIVAL
 	special RestartMapMusic
@@ -54,15 +54,15 @@ OlivineCityRivalSceneBottom:
 	playsound SFX_ENTER_DOOR
 	appear OLIVINECITY_OLIVINE_RIVAL
 	waitsfx
-	applymovement OLIVINECITY_OLIVINE_RIVAL, MovementData_0x1a88d6
+	applymovement OLIVINECITY_OLIVINE_RIVAL, MovementData_0x1240b3
 	playmusic MUSIC_RIVAL_ENCOUNTER
 	opentext
 	writetext OlivineCityRivalText
 	waitbutton
 	closetext
-	applymovement PLAYER, MovementData_0x1a88f7
+	applymovement PLAYER, MovementData_0x1240d4
 	turnobject PLAYER, RIGHT
-	applymovement OLIVINECITY_OLIVINE_RIVAL, MovementData_0x1a88e8
+	applymovement OLIVINECITY_OLIVINE_RIVAL, MovementData_0x1240c5
 	disappear OLIVINECITY_OLIVINE_RIVAL
 	setscene SCENE_FINISHED
 	special RestartMapMusic
@@ -110,20 +110,20 @@ OlivineCityPokecenterSign:
 OlivineCityMartSign:
 	jumpstd MartSignScript
 
-MovementData_0x1a88d2:
+MovementData_0x1240af:
 	step DOWN
 	step RIGHT
 	step RIGHT
 	step_end
 
-MovementData_0x1a88d6:
+MovementData_0x1240b3:
 	step DOWN
 	step DOWN
 	step RIGHT
 	step RIGHT
 	step_end
 
-MovementData_0x1a88db:
+MovementData_0x1240b8:
 	step RIGHT
 	step RIGHT
 	step RIGHT
@@ -138,7 +138,7 @@ MovementData_0x1a88db:
 	step UP
 	step_end
 
-MovementData_0x1a88e8:
+MovementData_0x1240c5:
 	step RIGHT
 	step RIGHT
 	step RIGHT
@@ -152,12 +152,12 @@ MovementData_0x1a88e8:
 	step UP
 	step_end
 
-MovementData_0x1a88f4:
+MovementData_0x1240d1:
 	step DOWN
 	turn_head UP
 	step_end
 
-MovementData_0x1a88f7:
+MovementData_0x1240d4:
 	step UP
 	turn_head DOWN
 	step_end

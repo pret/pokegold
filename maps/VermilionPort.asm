@@ -23,7 +23,7 @@ VermilionPort_MapScripts:
 	return
 
 .LeaveFastShipScript:
-	applymovement PLAYER, MovementData_0x74ef3
+	applymovement PLAYER, MovementData_0x16c65b
 	appear VERMILIONPORT_SAILOR1
 	setscene SCENE_DEFAULT
 	setevent EVENT_FAST_SHIP_CABINS_SE_SSE_CAPTAINS_CABIN_TWIN_1
@@ -48,7 +48,7 @@ VermilionPortSailorAtGangwayScript:
 	playsound SFX_EXIT_BUILDING
 	disappear VERMILIONPORT_SAILOR1
 	waitsfx
-	applymovement PLAYER, MovementData_0x74ef1
+	applymovement PLAYER, MovementData_0x16c659
 	playsound SFX_EXIT_BUILDING
 	special FadeOutPalettes
 	waitsfx
@@ -101,28 +101,28 @@ VermilionPortWalkUpToShipScript:
 	waitbutton
 	closetext
 	setevent EVENT_TEMPORARY_UNTIL_MAP_RELOAD_2
-	applymovement PLAYER, MovementData_0x74ef8
+	applymovement PLAYER, MovementData_0x16c660
 	sjump VermilionPortSailorAtGangwayScript
 
 .NoTicket:
 	writetext VermilionPortNoTicketText
 	waitbutton
 	closetext
-	applymovement PLAYER, MovementData_0x74ef5
+	applymovement PLAYER, MovementData_0x16c65d
 	end
 
 .NextShipWednesday:
 	writetext VermilionPortSailMondayText
 	waitbutton
 	closetext
-	applymovement PLAYER, MovementData_0x74ef5
+	applymovement PLAYER, MovementData_0x16c65d
 	end
 
 .NextShipSunday:
 	writetext VermilionPortSailSundayText
 	waitbutton
 	closetext
-	applymovement PLAYER, MovementData_0x74ef5
+	applymovement PLAYER, MovementData_0x16c65d
 	end
 
 .skip:
@@ -138,7 +138,7 @@ VermilionPortNotRidingMoveAwayScript:
 	writetext VermilionPortComeAgainText
 	waitbutton
 	closetext
-	applymovement PLAYER, MovementData_0x74ef5
+	applymovement PLAYER, MovementData_0x16c65d
 	end
 
 VermilionPortSailorScript:
@@ -163,7 +163,7 @@ VermilionPortSailorScript:
 	waitbutton
 	closetext
 	setevent EVENT_TEMPORARY_UNTIL_MAP_RELOAD_2
-	applymovement PLAYER, MovementData_0x74efe
+	applymovement PLAYER, MovementData_0x16c666
 	sjump VermilionPortSailorAtGangwayScript
 
 .NoTicket:
@@ -195,20 +195,20 @@ VermilionPortSuperNerdScript:
 VermilionPortHiddenIron:
 	hiddenitem IRON, EVENT_VERMILION_PORT_HIDDEN_IRON
 
-MovementData_0x74ef1:
+MovementData_0x16c659:
 	step DOWN
 	step_end
 
-MovementData_0x74ef3:
+MovementData_0x16c65b:
 	step UP
 	step_end
 
-MovementData_0x74ef5:
+MovementData_0x16c65d:
 	step RIGHT
 	turn_head LEFT
 	step_end
 
-MovementData_0x74ef8:
+MovementData_0x16c660:
 	step DOWN
 	step DOWN
 	step DOWN
@@ -216,7 +216,7 @@ MovementData_0x74ef8:
 	step DOWN
 	step_end
 
-MovementData_0x74efe:
+MovementData_0x16c666:
 	step RIGHT
 	step DOWN
 	step DOWN

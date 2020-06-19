@@ -1316,7 +1316,7 @@ _MoveMonWOMailSaveText::
 	cont "will be saved. OK?"
 	done
 
-UnknownText_0x1c4693::
+UnknownText_0x195b29::
 	text "The window save"
 	line "area was exceeded."
 	done
@@ -1326,7 +1326,7 @@ _WindowPoppingErrorText::
 	line "able for popping."
 	done
 
-UnknownText_0x1c46dc::
+UnknownText_0x195b72::
 	text "Corrupted event!"
 	prompt
 

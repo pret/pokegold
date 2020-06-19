@@ -22,7 +22,7 @@ OlivinePort_MapScripts:
 	end
 
 .LeaveFastShipScript:
-	applymovement PLAYER, MovementData_0x74a32
+	applymovement PLAYER, MovementData_0x16c190
 	appear OLIVINEPORT_SAILOR1
 	setscene SCENE_DEFAULT
 	setevent EVENT_TEMPORARY_UNTIL_MAP_RELOAD_1
@@ -42,7 +42,7 @@ OlivinePortSailorAtGangwayScript:
 	playsound SFX_EXIT_BUILDING
 	disappear OLIVINEPORT_SAILOR1
 	waitsfx
-	applymovement PLAYER, MovementData_0x74a30
+	applymovement PLAYER, MovementData_0x16c18e
 	playsound SFX_EXIT_BUILDING
 	special FadeOutPalettes
 	waitsfx
@@ -100,28 +100,28 @@ OlivinePortWalkUpToShipScript:
 	waitbutton
 	closetext
 	setevent EVENT_TEMPORARY_UNTIL_MAP_RELOAD_2
-	applymovement PLAYER, MovementData_0x74a37
+	applymovement PLAYER, MovementData_0x16c195
 	sjump OlivinePortSailorAtGangwayScript
 
 .NoTicket:
 	writetext OlivinePortNoTicketText
 	waitbutton
 	closetext
-	applymovement PLAYER, MovementData_0x74a34
+	applymovement PLAYER, MovementData_0x16c192
 	end
 
 .NextShipMonday:
 	writetext OlivinePortMondayShipText
 	waitbutton
 	closetext
-	applymovement PLAYER, MovementData_0x74a34
+	applymovement PLAYER, MovementData_0x16c192
 	end
 
 .NextShipFriday:
 	writetext OlivinePortFridayShipText
 	waitbutton
 	closetext
-	applymovement PLAYER, MovementData_0x74a34
+	applymovement PLAYER, MovementData_0x16c192
 	end
 
 .skip:
@@ -137,7 +137,7 @@ OlivinePortNotRidingMoveAwayScript:
 	writetext OlivinePortComeAgainText
 	waitbutton
 	closetext
-	applymovement PLAYER, MovementData_0x74a34
+	applymovement PLAYER, MovementData_0x16c192
 	end
 
 OlivinePortSailorAfterHOFScript:
@@ -167,11 +167,11 @@ OlivinePortSailorAfterHOFScript:
 	setevent EVENT_TEMPORARY_UNTIL_MAP_RELOAD_2
 	readvar VAR_FACING
 	ifequal RIGHT, .Right
-	applymovement PLAYER, MovementData_0x74a3f
+	applymovement PLAYER, MovementData_0x16c19d
 	sjump OlivinePortSailorAtGangwayScript
 
 .Right:
-	applymovement PLAYER, MovementData_0x74a49
+	applymovement PLAYER, MovementData_0x16c1a7
 	sjump OlivinePortSailorAtGangwayScript
 
 .NoTicket:
@@ -234,20 +234,20 @@ OlivinePortCooltrainerFScript:
 OlivinePortHiddenProtein:
 	hiddenitem PROTEIN, EVENT_OLIVINE_PORT_HIDDEN_PROTEIN
 
-MovementData_0x74a30:
+MovementData_0x16c18e:
 	step DOWN
 	step_end
 
-MovementData_0x74a32:
+MovementData_0x16c190:
 	step UP
 	step_end
 
-MovementData_0x74a34:
+MovementData_0x16c192:
 	step RIGHT
 	turn_head LEFT
 	step_end
 
-MovementData_0x74a37:
+MovementData_0x16c195:
 	step DOWN
 	step DOWN
 	step DOWN
@@ -257,7 +257,7 @@ MovementData_0x74a37:
 	step DOWN
 	step_end
 
-MovementData_0x74a3f:
+MovementData_0x16c19d:
 	step RIGHT
 	step DOWN
 	step DOWN
@@ -269,7 +269,7 @@ MovementData_0x74a3f:
 	step DOWN
 	step_end
 
-MovementData_0x74a49:
+MovementData_0x16c1a7:
 	step UP
 	step RIGHT
 	step RIGHT

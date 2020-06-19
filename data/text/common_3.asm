@@ -83,7 +83,7 @@ _PhoneThankYouText::
 	done
 
 ; unused
-UnknownText_0x1c55d6::
+UnknownText_0x198152::
 	text "  :"
 	done
 

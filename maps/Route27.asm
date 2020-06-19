@@ -25,13 +25,13 @@ Route27_MapScripts:
 FirstStepIntoKantoLeftScene:
 	turnobject ROUTE27_FISHER, LEFT
 	showemote EMOTE_SHOCK, ROUTE27_FISHER, 15
-	applymovement ROUTE27_FISHER, MovementData_0x1a0a66
+	applymovement ROUTE27_FISHER, MovementData_0x128865
 	sjump FirstStepIntoKantoScene_Continue
 
 FirstStepIntoKantoRightScene:
 	turnobject ROUTE27_FISHER, LEFT
 	showemote EMOTE_SHOCK, ROUTE27_FISHER, 15
-	applymovement ROUTE27_FISHER, MovementData_0x1a0a69
+	applymovement ROUTE27_FISHER, MovementData_0x128868
 FirstStepIntoKantoScene_Continue:
 	turnobject PLAYER, RIGHT
 	opentext
@@ -265,12 +265,12 @@ Route27TMSolarbeam:
 Route27RareCandy:
 	itemball RARE_CANDY
 
-MovementData_0x1a0a66:
+MovementData_0x128865:
 	step LEFT
 	step LEFT
 	step_end
 
-MovementData_0x1a0a69:
+MovementData_0x128868:
 	step LEFT
 	step_end
 
