@@ -1112,7 +1112,7 @@ EvoStoneEffect:
 	cp EVERSTONE
 	jr z, .NoEffect
 
-	ld a, $1
+	ld a, TRUE
 	ld [wForceEvolution], a
 	farcall EvolvePokemon
 
