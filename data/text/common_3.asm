@@ -82,8 +82,7 @@ _PhoneThankYouText::
 	text "Thank you!"
 	done
 
-; unused
-UnknownText_0x198152::
+_SpaceSpaceColonText:: ; unreferenced
 	text "  :"
 	done
 
@@ -168,7 +167,7 @@ Text_MoveForgetCount::
 	text_pause
 	text_end
 
-	text_end ; unused
+	text_end ; unreferenced
 
 _MoveForgotText::
 	text " Poof!@"
@@ -266,7 +265,7 @@ Text_BallCaught::
 	sound_caught_mon
 	text_end
 
-	text_end ; unused
+	text_end ; unreferenced
 
 _WaitButtonText::
 	text_promptbutton
@@ -332,7 +331,7 @@ Text_PlayedPokeFlute::
 	text_promptbutton
 	text_end
 
-	text_end ; unused
+	text_end ; unreferenced
 
 ; BUG: "done" is not a valid terminator here, needs to change to "text_end"
 _CoinCaseCountText::

@@ -160,7 +160,7 @@ _RodNothingText::
 	text "Not even a nibble!"
 	prompt
 
-; unused
+; unreferenced
 _UnusedNothingHereText::
 	text "Looks like there's"
 	line "nothing here."
@@ -379,7 +379,7 @@ Text_BattleEffectActivate::
 	text_ram wStringBuffer2
 	text_end
 
-	text_end ; unused
+	text_end ; unreferenced
 
 _BattleStatWentWayUpText::
 	text_pause
@@ -396,7 +396,7 @@ Text_BattleFoeEffectActivate::
 	text_ram wStringBuffer2
 	text_end
 
-	text_end ; unused
+	text_end ; unreferenced
 
 _BattleStatSharplyFellText::
 	text_pause
@@ -1316,7 +1316,7 @@ _MoveMonWOMailSaveText::
 	cont "will be saved. OK?"
 	done
 
-UnknownText_0x195b29::
+_WindowAreaExceededErrorText:: ; unreferenced
 	text "The window save"
 	line "area was exceeded."
 	done
@@ -1326,7 +1326,7 @@ _WindowPoppingErrorText::
 	line "able for popping."
 	done
 
-UnknownText_0x195b72::
+_CorruptedEventText:: ; unreferenced
 	text "Corrupted event!"
 	prompt
 
@@ -1372,7 +1372,7 @@ _CongratulationsYourPokemonText::
 	text_ram wStringBuffer2
 	text_end
 
-	text_end ; unused
+	text_end ; unreferenced
 
 _EvolvedIntoText::
 	text_start

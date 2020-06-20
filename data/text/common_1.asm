@@ -171,17 +171,17 @@ _EnemyUsedOnText::
 	text "!"
 	prompt
 
-Text_ThatCantBeUsedRightNow::
+_ThatCantBeUsedRightNowText:: ; unreferenced
 	text "That can't be used"
 	line "right now."
 	prompt
 
-Text_ThatItemCantBePutInThePack::
+_ThatItemCantBePutInThePackText:: ; unreferenced
 	text "That item can't be"
 	line "put in the PACK."
 	done
 
-Text_TheItemWasPutInThePack::
+_TheItemWasPutInThePackText:: ; unreferenced
 	text "The @"
 	text_ram wStringBuffer1
 	text_start
@@ -189,42 +189,42 @@ Text_TheItemWasPutInThePack::
 	cont "PACK."
 	done
 
-Text_RemainingTime::
+_RemainingTimeText:: ; unreferenced
 	text "Remaining Time"
 	done
 
-Text_YourMonsHPWasHealed::
+_YourMonsHPWasHealedText:: ; unreferenced
 	text "Your #MON's HP"
 	line "was healed."
 	prompt
 
-Text_Warping::
+_WarpingText:: ; unreferenced
 	text "Warping…"
 	done
 
-UnknownText_0x1902f9::
+_ChangeWhichNumberText:: ; unreferenced
 	text "Which number"
 	line "should be changed?"
 	done
 
-UnknownText_0x19031a::
+_WillYouPlayWithMonText:: ; unreferenced
 	text "Will you play with"
 	line "@"
 	text_ram wStringBuffer2
 	text "?"
 	done
 
-UnknownText_0x190335::
+_YouNeedTwoMonForBreedingText:: ; unreferenced
 	text "You need two #-"
 	line "MON for breeding."
 	prompt
 
-Text_BreedingIsNotPossible::
+_BreedingIsNotPossibleText:: ; unreferenced
 	text "Breeding is not"
 	line "possible."
 	prompt
 
-UnknownText_0x190373::
+_CompatibilityShouldTheyBreedText:: ; unreferenced
 	text "The compatibility"
 	line "is @"
 	text_decimal wBreedingCompatibility, 1, 3
@@ -232,54 +232,56 @@ UnknownText_0x190373::
 	cont "Should they breed?"
 	done
 
-UnknownText_0x1903a4::
+_ThereIsNoEggText:: ; unreferenced
 	text "There is no EGG."
 	line ""
 	prompt
 
-UnknownText_0x1903b7::
+_ItsGoingToHatchText:: ; unreferenced
 	text "It's going to"
 	line "hatch!"
 	prompt
 
-UnknownText_0x1903cc::
+_TestEventText:: ; unreferenced
 	text "Test event"
 	line "@"
 	text_decimal wStringBuffer2, 1, 2
 	text "?"
 	done
 
+_WhatDoYouWantToPlayWithText:: ; unreferenced
 	text "What do you want"
 	line "to play with?"
 	done
 
+_YouCanHaveThisText:: ; unreferenced
 	text "You can have this."
 	prompt
 
-UnknownText_0x190414::
+_TheBoxIsFullText:: ; unreferenced
 	text "The BOX is full!"
 	done
 
-UnknownText_0x190426::
+_ObtainedTheVoltorbBadgeText:: ; unreferenced
 	text "Obtained the"
 	line "VOLTORBBADGE!"
 	done
 
-UnknownText_0x190442::
+_ThePasswordIsText:: ; unreferenced
 	text "The password is:"
 	line ""
 	done
 
-UnknownText_0x190455::
+_IsThisOKText:: ; unreferenced
 	text "Is this OK?"
 	done
 
-UnknownText_0x190462::
+_EnterTheIDNoText:: ; unreferenced
 	text "Enter the"
 	line "ID no."
 	done
 
-UnknownText_0x190474::
+_EnterTheAmountText:: ; unreferenced
 	text "Enter the"
 	line "amount."
 	done
@@ -451,7 +453,7 @@ _WillTradeText::
 	text_ram wOTTrademonSpeciesName
 	text_end
 
-	text_end ; unused
+	text_end ; unreferenced
 
 _ForYourMonWillTradeText::
 	text "for @"
@@ -485,7 +487,7 @@ _OPT_OakText1::
 	text_ram wMonOrItemNameBuffer
 	text_end
 
-	text_end ; unused
+	text_end ; unreferenced
 
 _OPT_OakText2::
 	text_start
@@ -825,7 +827,7 @@ _PnP_Text4::
 	text_ram wStringBuffer1
 	text_end
 
-	text_end ; unused
+	text_end ; unreferenced
 
 _PnP_CuteText::
 	text_start
@@ -913,7 +915,7 @@ _PnP_Text5::
 	text_ram wStringBuffer1
 	text_end
 
-	text_end ; unused
+	text_end ; unreferenced
 
 _RocketRadioText1::
 	text_start

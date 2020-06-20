@@ -154,7 +154,7 @@ MahoganyMart1FLanceGoDownStairsMovement:
 	slow_step RIGHT
 	step_end
 
-UnknownText_0x1140cb:
+MahoganyMart1FRageCandyBarText: ; unreferenced
 	text "Hello, youngster!"
 
 	para "How would you like"

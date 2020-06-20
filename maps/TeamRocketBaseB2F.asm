@@ -176,12 +176,12 @@ LanceHealsCommon:
 	setevent EVENT_LANCE_HEALED_YOU_IN_TEAM_ROCKET_BASE
 	readvar VAR_FACING
 	ifequal RIGHT, .FacingRight
-	applymovement TEAMROCKETBASEB2F_LANCE, UnknownText_0x114eca
+	applymovement TEAMROCKETBASEB2F_LANCE, MovementData_0x114eca
 	disappear TEAMROCKETBASEB2F_LANCE
 	end
 
 .FacingRight:
-	applymovement TEAMROCKETBASEB2F_LANCE, UnknownText_0x114ed1
+	applymovement TEAMROCKETBASEB2F_LANCE, MovementData_0x114ed1
 	disappear TEAMROCKETBASEB2F_LANCE
 	end
 
@@ -355,7 +355,7 @@ TeamRocketBaseB2FTMThief:
 TeamRocketBaseB2FHiddenFullHeal:
 	hiddenitem FULL_HEAL, EVENT_TEAM_ROCKET_BASE_B2F_HIDDEN_FULL_HEAL
 
-UnknownText_0x114eca:
+MovementData_0x114eca:
 	step RIGHT
 	step RIGHT
 	step RIGHT
@@ -364,7 +364,7 @@ UnknownText_0x114eca:
 	step RIGHT
 	step_end
 
-UnknownText_0x114ed1:
+MovementData_0x114ed1:
 	step RIGHT
 	step RIGHT
 	step RIGHT
@@ -730,8 +730,7 @@ RocketBaseLanceElectrodeDoneText:
 	cont "any need for it."
 	done
 
-; unused
-UnknownText_0x11559e:
+RocketBaseReceivedHM06Text: ; unused
 	text "<PLAYER> received"
 	line "HM06."
 	done
