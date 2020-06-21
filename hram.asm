@@ -160,3 +160,5 @@ hBattleTurn::
 hCGBPalUpdate:: db
 hCGB::          db
 hSGB::          db
+
+	ds 21

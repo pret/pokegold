@@ -1,6 +1,6 @@
 ; Functions relating to the timer interrupt and the real-time-clock.
 
-Unreferenced_Timer::
+Timer:: ; unreferenced
 	reti
 
 LatchClock::
@@ -249,7 +249,7 @@ SetClock::
 	call CloseSRAM ; unlatch clock, disable clock r/w
 	ret
 
-UnreferencedClearRTCStatus::
+ClearRTCStatus:: ; unreferenced
 ; clear sRTCStatusFlags
 	xor a
 	push af

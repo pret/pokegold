@@ -737,7 +737,7 @@ ENDM
 	jr nz, .row
 	ret
 
-Unreferenced_Function8ca53:
+Function8ca53: ; unreferenced
 	ld a, 1
 	ldh [hBGMapMode], a
 	call WaitBGMap

@@ -960,7 +960,7 @@ INCBIN "gfx/icons/mail_big.2bpp"
 	ld [wNamingScreenMaxNameLength], a
 	ret
 
-.Unreferenced_PleaseWriteAMailString:
+.PleaseWriteAMailString: ; unreferenced
 	db "メールを　かいてね@"
 
 .InitCharset:

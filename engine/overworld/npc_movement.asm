@@ -274,7 +274,7 @@ WillObjectBumpIntoSomeoneElse:
 	ld e, [hl]
 	jr IsNPCAtCoord
 
-Unreferenced_Function70f4:
+Function70f4: ; unreferenced
 	ldh a, [hMapObjectIndexBuffer]
 	call GetObjectStruct
 	call .CheckWillBeFacingNPC
@@ -473,7 +473,7 @@ IsObjectMovingOffEdgeOfScreen:
 	scf
 	ret
 
-Unreferenced_Function71f2:
+Function71f2: ; unreferenced
 	ld a, [wPlayerStandingMapX]
 	ld d, a
 	ld a, [wPlayerStandingMapY]

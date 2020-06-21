@@ -193,7 +193,7 @@ DisplayHourOClock:
 	pop hl
 	ret
 
-UnreferencedFunction907ba:
+Function907ba: ; unreferenced
 	ld h, d
 	ld l, e
 	push hl

@@ -1323,9 +1323,8 @@ TradeAnim_WaitAnim:
 	call TradeAnim_AdvanceScriptPointer
 	ret
 
-Unreferenced_DebugTrade:
-; This function is not referenced.
-; It was meant for use in Japanese versions, so the
+DebugTrade: ; unreferenced
+; This function was meant for use in Japanese versions, so the
 ; constant used for copy length was changed by accident.
 
 	ld hl, .DebugTradeData

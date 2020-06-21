@@ -128,8 +128,8 @@ SpeechTextbox::
 	ld c, TEXTBOX_INNERW
 	jp Textbox
 
-UnreferencedTestText::
-	text "ゲームフりーク！"
+GameFreakText:: ; unreferenced
+	text "ゲームフりーク！" ; "GAMEFREAK!"
 	done
 
 RadioTerminator::
@@ -633,10 +633,7 @@ TextCommands::
 	dw TextCommand_FAR                ; TX_FAR
 
 TextCommand_START::
-; text_start
 ; write text until "@"
-; [$00]["...@"]
-
 	ld d, h
 	ld e, l
 	ld h, b
@@ -648,11 +645,7 @@ TextCommand_START::
 	ret
 
 TextCommand_RAM::
-; text_ram
-; write text from a ram address
-; little endian
-; [$01][addr]
-
+; write text from a ram address (little endian)
 	ld a, [hli]
 	ld e, a
 	ld a, [hli]
@@ -665,11 +658,7 @@ TextCommand_RAM::
 	ret
 
 TextCommand_FAR::
-; text_far
-; write text from a different bank
-; little endian
-; [$16][addr][bank]
-
+; write text from a different bank (little endian)
 	ldh a, [hROMBank]
 	push af
 
@@ -694,11 +683,7 @@ TextCommand_FAR::
 	ret
 
 TextCommand_BCD::
-; text_bcd
 ; write bcd from address, typically ram
-; [$02][addr][flags]
-; flags: see PrintBCDNumber
-
 	ld a, [hli]
 	ld e, a
 	ld a, [hli]
@@ -715,10 +700,7 @@ TextCommand_BCD::
 	ret
 
 TextCommand_MOVE::
-; text_move
 ; move to a new tile
-; [$03][addr]
-
 	ld a, [hli]
 	ld [wMenuScrollPosition + 2], a
 	ld c, a
@@ -728,11 +710,7 @@ TextCommand_MOVE::
 	ret
 
 TextCommand_BOX::
-; text_box
-; draw a box
-; little endian
-; [$04][addr][height][width]
-
+; draw a box (height, width)
 	ld a, [hli]
 	ld e, a
 	ld a, [hli]
@@ -749,19 +727,12 @@ TextCommand_BOX::
 	ret
 
 TextCommand_LOW::
-; text_low
 ; write text at (1,16)
-; [$05]
-
 	bccoord TEXTBOX_INNERX, TEXTBOX_INNERY + 2
 	ret
 
 TextCommand_PROMPT_BUTTON::
-; text_promptbutton
-; wait for button press
-; show arrow
-; [06]
-
+; wait for button press; show arrow
 	ld a, [wLinkMode]
 	cp LINK_COLOSSEUM
 	jp z, TextCommand_LINK_PROMPT_BUTTON
@@ -776,7 +747,6 @@ TextCommand_PROMPT_BUTTON::
 	ret
 
 TextCommand_SCROLL::
-; text_scroll
 ; pushes text up two lines and sets the BC cursor to the border tile
 ; below the first character column of the text box.
 	push hl
@@ -788,13 +758,11 @@ TextCommand_SCROLL::
 	ret
 
 TextCommand_START_ASM::
-; text_asm
-
+; run assembly code
 	jp hl
 
 TextCommand_NUM::
-; text_decimal
-; [$09][addr][hi:bytes lo:digits]
+; print a number
 	ld a, [hli]
 	ld e, a
 	ld a, [hli]
@@ -818,7 +786,7 @@ TextCommand_NUM::
 	ret
 
 TextCommand_PAUSE::
-; text_pause
+; wait for button press or 30 frames
 	push hl
 	push bc
 	call GetJoypad
@@ -833,10 +801,7 @@ TextCommand_PAUSE::
 	ret
 
 TextCommand_SOUND::
-; chars:
-;   $0b, $0e, $0f, $10, $11, $12, $13
-; see TextSFX
-
+; play a sound effect from TextSFX
 	push bc
 	dec hl
 	ld a, [hli]
@@ -867,8 +832,8 @@ TextCommand_SOUND::
 	pop bc
 	ret
 
-Unreferenced_Function13a2::
-; sound_cry
+TextCommand_CRY:: ; unreferenced
+; play a pokemon cry
 	push de
 	ld e, [hl]
 	inc hl
@@ -890,8 +855,7 @@ TextSFX::
 	db -1
 
 TextCommand_DOTS::
-; text_dots
-; [$0C][num]
+; wait for button press or 30 frames while printing "…"s
 	ld a, [hli]
 	ld d, a
 	push hl
@@ -919,9 +883,7 @@ TextCommand_DOTS::
 	ret
 
 TextCommand_LINK_PROMPT_BUTTON::
-; text_linkpromptbutton
-; wait for key down
-; display arrow
+; wait for button press; display arrow
 	push hl
 	push bc
 	call PromptButton
@@ -930,7 +892,6 @@ TextCommand_LINK_PROMPT_BUTTON::
 	ret
 
 TextCommand_STRINGBUFFER::
-; text_buffer
 ; Print a string from one of the following:
 ; 0: wStringBuffer3
 ; 1: wStringBuffer4
@@ -939,8 +900,6 @@ TextCommand_STRINGBUFFER::
 ; 4: wStringBuffer1
 ; 5: wEnemyMonNick
 ; 6: wBattleMonNick
-; [$14][id]
-
 	ld a, [hli]
 	push hl
 	ld e, a
@@ -959,8 +918,7 @@ TextCommand_STRINGBUFFER::
 	ret
 
 TextCommand_DAY::
-; text_today
-
+; print the day of the week
 	call GetWeekday
 	push hl
 	push bc

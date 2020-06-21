@@ -916,8 +916,7 @@ CountStep:
 	scf
 	ret
 
-; unused
-.unreferenced
+.whiteout ; unreferenced
 	ld a, PLAYEREVENT_WHITEOUT
 	scf
 	ret

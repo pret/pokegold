@@ -139,7 +139,7 @@ BillsPC_DepositMenu:
 	and a
 	ret
 
-Unreferenced_Functione4ed:
+Functione4ed: ; unreferenced
 	ld a, [wPartyCount]
 	and a
 	jr z, .no_mon
@@ -206,7 +206,7 @@ BillsPC_WithdrawMenu:
 	and a
 	ret
 
-Unreferenced_Functione548:
+Functione548: ; unreferenced
 	ld a, [wPartyCount]
 	cp PARTY_LENGTH
 	jr nc, .party_full
@@ -261,7 +261,7 @@ CopyBoxmonToTempMon:
 	call CloseSRAM
 	ret
 
-Unreferenced_LoadBoxMonListing:
+LoadBoxMonListing: ; unreferenced
 	ld a, [wCurBox]
 	cp b
 	jr z, .same_box

@@ -625,7 +625,7 @@ MonMenu_Fly:
 	ld a, $0
 	ret
 
-.Unreferenced:
+.NoReload: ; unreferenced
 	ld a, $1
 	ret
 

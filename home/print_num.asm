@@ -301,8 +301,8 @@ PrintNum::
 	inc hl
 	ret
 
-Unreferenced_PrintHexNumber::
-; Print c-digit hex number from de to hl
+PrintHexNumber:: ; unreferenced
+; Print the c-byte value from de to hl as hexadecimal digits.
 .loop
 	push bc
 	call .HandleByte

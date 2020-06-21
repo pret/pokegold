@@ -512,7 +512,7 @@ LoadPinkPage:
 .PkrsStr:
 	db "#RUS@"
 
-Unreferenced_Function50f4d:
+Function50f4d: ; unreferenced
 	hlcoord 7, 0
 	ld bc, SCREEN_WIDTH
 	ld d, SCREEN_HEIGHT

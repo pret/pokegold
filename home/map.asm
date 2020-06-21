@@ -231,8 +231,7 @@ CheckIndoorMap::
 	cp GATE
 	ret
 
-; unused
-UnreferencedCheckEnvironment::
+CheckUnknownMap:: ; unreferenced
 	cp INDOOR
 	ret z
 	cp GATE
@@ -1218,7 +1217,7 @@ UpdateBGMapColumn::
 	ldh [hBGMapTileCount], a
 	ret
 
-Unreferenced_Function2939::
+Function2939:: ; unreferenced
 	ld hl, wBGMapBuffer
 	ld bc, wBGMapBufferEnd - wBGMapBuffer
 	xor a

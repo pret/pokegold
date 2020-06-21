@@ -2,6 +2,7 @@ INCLUDE "constants.asm"
 
 INCLUDE "macros/wram.asm"
 
+
 INCLUDE "vram.asm"
 
 
@@ -1731,6 +1732,7 @@ wCurPartyMon::
 ; is being dealt with at the moment
 ; 0-5
 	db
+
 	ds 1
 
 wWhichHPBar::
@@ -1762,6 +1764,7 @@ wPartyMenuActionText:: db
 wItemAttributeParamBuffer:: db
 
 wCurPartyLevel:: db
+
 wScrollingMenuListSize:: db
 
 wLinkMode:: db
@@ -1879,7 +1882,7 @@ ENDU
 
 wLinkBattleRNs:: ds 10
 
-wTempEnemyMonSpecies:: db
+wTempEnemyMonSpecies::  db
 wTempBattleMonSpecies:: db
 
 wEnemyMon:: battle_struct wEnemyMon
@@ -2101,17 +2104,20 @@ wPlayerData1::
 wPlayerID:: dw
 
 wPlayerName:: ds NAME_LENGTH
-wMomsName:: ds NAME_LENGTH
-wRivalName:: ds NAME_LENGTH
-wRedsName:: ds NAME_LENGTH
+wMomsName::   ds NAME_LENGTH
+wRivalName::  ds NAME_LENGTH
+wRedsName::   ds NAME_LENGTH
 wGreensName:: ds NAME_LENGTH
 
 wSavedAtLeastOnce:: db
 wSpawnAfterChampion:: db
+
+; init time set at newgame
 wStartDay:: db
 wStartHour:: db
 wStartMinute:: db
 wStartSecond:: db
+
 wRTC:: ds 4
 
 wDSTBackupDay:: db

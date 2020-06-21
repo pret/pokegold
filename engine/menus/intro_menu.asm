@@ -931,7 +931,7 @@ TitleScreenScene:
 	dw TitleScreenMain
 	dw TitleScreenEnd
 
-.Unreferenced_NextScene:
+TitleScreenNextScene: ; unreferenced
 	ld hl, wJumptableIndex
 	inc [hl]
 	ret

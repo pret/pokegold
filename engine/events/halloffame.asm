@@ -392,7 +392,7 @@ _HallOfFamePC:
 .EmptyString:
 	db "@"
 
-.UnreferencedEmptyString:
+.EmptyString2: ; unreferenced
 	db "@"
 
 .HOFMaster:

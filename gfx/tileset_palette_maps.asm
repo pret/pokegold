@@ -95,4 +95,7 @@ TilesetForestPalMap:
 INCLUDE "gfx/tilesets/forest_palette_map.asm"
 
 MapGroupPalettes:
-	ds NUM_MAP_GROUPS, PAL_BG_ROOF
+; entries correspond to GROUP_* constants
+rept NUM_MAP_GROUPS
+	db PAL_BG_ROOF
+endr

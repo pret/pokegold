@@ -571,7 +571,7 @@ PlacePrinterStatusString:
 	ld [wPrinterStatus], a
 	ret
 
-Unreferenced_Function847b9:
+Function847b9: ; unreferenced
 	ld a, [wPrinterStatus]
 	and a
 	ret z

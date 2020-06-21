@@ -1846,7 +1846,7 @@ GetMaxHP:
 	ld c, a
 	ret
 
-Unreferenced_GetHalfHP:
+GetHalfHP: ; unreferenced
 	ld hl, wBattleMonHP
 	ldh a, [hBattleTurn]
 	and a
@@ -6232,7 +6232,7 @@ CheckUnownLetter:
 
 INCLUDE "data/wild/unlocked_unowns.asm"
 
-Unreferenced_SwapBattlerLevels:
+SwapBattlerLevels: ; unreferenced
 	push bc
 	ld a, [wBattleMonLevel]
 	ld b, a
@@ -6592,7 +6592,7 @@ _LoadHPBar:
 	callfar LoadHPBar
 	ret
 
-Unreferenced_LoadHPExpBarGFX:
+LoadHPExpBarGFX: ; unreferenced
 	ld de, EnemyHPBarBorderGFX
 	ld hl, vTiles2 tile $6c
 	lb bc, BANK(EnemyHPBarBorderGFX), 4
@@ -7477,7 +7477,7 @@ ComeBackText:
 	text_far _ComeBackText
 	text_end
 
-Unreferenced_HandleSafariAngerEatingStatus:
+HandleSafariAngerEatingStatus: ; unreferenced
 	ld hl, wSafariMonEating
 	ld a, [hl]
 	and a
@@ -7875,7 +7875,7 @@ InitEnemyWildmon:
 	predef PlaceGraphic
 	ret
 
-Unreferenced_Function3f41a:
+Function3f41a: ; unreferenced
 	ld hl, wEnemyMonMoves
 	ld de, wListMoves_MoveIndicesBuffer
 	ld b, NUM_MOVES

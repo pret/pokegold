@@ -380,7 +380,7 @@ LinkDataReceived::
 	ldh [rSC], a
 	ret
 
-Unreferenced_Function8ca::
+Function8ca:: ; unreferenced
 	ld a, [wLinkMode]
 	and a
 	ret nz

@@ -102,7 +102,7 @@ SGB_ApplyCreditsPals::
 InitPartyMenuPalettes:
 	call CheckCGB
 	jr nz, .cgb
-	ld hl, BlkPacket_9fa5
+	ld hl, BlkPacket_PartyMenu
 	ld de, wSGBPals + 1
 	ld bc, 6 palettes
 	jp CopyBytes
@@ -181,7 +181,7 @@ Function9136:
 	ld hl, BlkPacket_9ee5
 	jp PushSGBPals
 
-Unreferenced_Function9144:
+Function9144: ; unreferenced
 	call CheckCGB
 	jr nz, .cgb
 	ldh a, [hSGB]
@@ -196,7 +196,7 @@ Unreferenced_Function9144:
 	call GetPredefPal
 	jp LoadHLPaletteIntoDE
 
-Unreferenced_Function915e:
+Function915e: ; unreferenced
 	call CheckCGB
 	jr nz, .cgb
 	ldh a, [hSGB]
@@ -243,7 +243,7 @@ Intro_LoadMonPalette:
 	call LoadPalette_White_Col1_Col2_Black
 	ret
 
-Unreferenced_Function91b4:
+Function91b4: ; unreferenced
 	ldh a, [hCGB]
 	and a
 	jr nz, .cgb
@@ -646,7 +646,7 @@ GetMonPalettePointer:
 	call _GetMonPalettePointer
 	ret
 
-Unreferenced_Function9be8:
+Function9be8: ; unreferenced
 	ret
 	call CheckCGB
 	ret z
@@ -668,7 +668,7 @@ Unreferenced_Function9be8:
 BattleObjectPals:
 INCLUDE "gfx/battle_anims/battle_anims.pal"
 
-Unreferenced_Function9c39:
+Function9c39: ; unreferenced
 	call CheckCGB
 	ret z
 	ld a, $90
@@ -869,7 +869,7 @@ _InitSGBBorderPals:
 	dw DataSndPacket7
 	dw DataSndPacket8
 
-Unreferenced_Function9d70:
+Function9d70: ; unreferenced
 	di
 	xor a
 	ldh [rJOYP], a

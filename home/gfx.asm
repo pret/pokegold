@@ -260,12 +260,12 @@ Copy1bpp::
 	pop hl
 	jp FarCopyBytesDouble
 
-Unreferenced_Get2bpp::
+DuplicateGet2bpp:: ; unreferenced
 	ldh a, [rLCDC]
 	add a
 	jp c, Request2bpp
 
-Unreferenced_Copy2bpp::
+DuplicateCopy2bpp: ; unreferenced
 	push de
 	push hl
 

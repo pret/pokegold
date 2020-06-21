@@ -402,7 +402,7 @@ UpdatePlayerStep:
 	set PLAYERSTEP_CONTINUE_F, [hl]
 	ret
 
-Unreferenced_Function4732:
+Function4732: ; unreferenced
 	push bc
 	ld e, a
 	ld d, 0

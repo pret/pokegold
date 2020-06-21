@@ -134,7 +134,7 @@ GameFreakPresents_NextScene:
 	inc [hl]
 	ret
 
-Unreferenced_Functione4a8d:
+Functione4a8d: ; unreferenced
 	ld c, 64
 	call DelayFrames
 	call GameFreakPresents_NextScene
@@ -1482,7 +1482,7 @@ Functione5473:
 	inc [hl]
 	ret
 
-Unreferenced_Functione548c:
+Functione548c: ; unreferenced
 	ld bc, vTiles1 - vTiles0
 .loop
 	ld a, [de]

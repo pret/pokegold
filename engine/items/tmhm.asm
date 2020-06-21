@@ -435,7 +435,7 @@ TMHMPocket_GetCurrentLineCoord:
 	jr nz, .loop
 	ret
 
-Unreferenced_Function2c89a:
+Function2c89a: ; unreferenced
 	pop hl
 	ld bc, 3
 	add hl, bc
@@ -483,7 +483,7 @@ TMHM_PlaySFX_ReadText2:
 	pop de
 	ret
 
-Unreferenced_Function2c8e4:
+Function2c8e4: ; unreferenced
 	call ConvertCurItemIntoCurTMHM
 	call .CheckHaveRoomForTMHM
 	ld hl, .NoRoomTMHMText

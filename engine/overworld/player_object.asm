@@ -113,7 +113,7 @@ RefreshPlayerCoords:
 	ret nz
 	ret
 
-Unreferenced_SpawnObject1:
+SpawnObject1: ; unreferenced
 	ld a, 1
 	ld hl, UnusedObject1Template
 	call CopyPlayerObjectTemplate

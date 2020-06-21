@@ -35,7 +35,7 @@ _LoadMapPart::
 	jr nz, .loop
 	ret
 
-Unreferenced_Function153ba:
+Function153ba: ; unreferenced
 	decoord 2, 2
 	ld bc, (SURROUNDING_WIDTH + 1) * 2
 	add hl, bc
@@ -66,7 +66,7 @@ Unreferenced_Function153ba:
 	jr nz, .loop
 	ret
 
-Unreferenced_Function153dd:
+Function153dd: ; unreferenced
 	decoord 4, 4
 	ld bc, (SURROUNDING_WIDTH + 1) * 4
 	add hl, bc
@@ -128,7 +128,7 @@ Ureferenced_Function15400:
 	jr nz, .loop
 	ret
 
-Unreferenced_Function15423:
+Function15423: ; unreferenced
 	decoord 8, 8
 	ld bc, (SURROUNDING_WIDTH + 1) * 8
 	add hl, bc

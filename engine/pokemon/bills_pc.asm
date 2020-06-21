@@ -1521,7 +1521,7 @@ endr
 	dbsprite 19, 4, 0, 7, $07, 0
 	db -1
 
-Unreferenced_BillsPC_FillBox:
+BillsPC_FillBox: ; unreferenced
 .row
 	push bc
 	push hl

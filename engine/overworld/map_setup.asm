@@ -111,13 +111,13 @@ EnableTextAcceleration:
 	ld [wDisableTextAcceleration], a
 	ret
 
-Unreferenced_ActivateMapAnims:
-	ld a, $1
+DuplicateActivateMapAnims: ; unreferenced
+	ld a, TRUE
 	ldh [hMapAnims], a
 	ret
 
-Unreferenced_SuspendMapAnims:
-	xor a
+DuplicateSuspendMapAnims: ; unreferenced
+	xor a ; FALSE
 	ldh [hMapAnims], a
 	ret
 
@@ -221,12 +221,12 @@ FadeOutMapMusic:
 	ret
 
 ActivateMapAnims:
-	ld a, $1
+	ld a, TRUE
 	ldh [hMapAnims], a
 	ret
 
 SuspendMapAnims:
-	xor a
+	xor a ; FALSE
 	ldh [hMapAnims], a
 	ret
 

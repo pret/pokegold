@@ -436,16 +436,16 @@ endr
 .done:
 	ret
 
-Unreferenced_Function1438a:
+Function1438a: ; unreferenced
 	ld a, c
 	jr GetUsedSprite
 
-Unreferenced_Function1438d:
+Function1438d: ; unreferenced
 	ld a, c
 	ld b, 0
 	jr GetUsedSprite
 
-Unreferenced_Function14392:
+Function14392: ; unreferenced
 	ld a, c
 	ld b, SPRITE_GFX_LIST_CAPACITY
 	jr GetUsedSprite
