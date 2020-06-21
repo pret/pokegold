@@ -8742,7 +8742,7 @@
 0f:6437 MoveSelectionScreen.move_disabled
 0f:643c MoveSelectionScreen.no_pp_left
 0f:643f MoveSelectionScreen.place_textbox_start_over
-0f:6448 MoveSelectionScreen.string_3e448
+0f:6448 MoveSelectionScreen.empty_string
 0f:6449 MoveSelectionScreen.pressed_up
 0f:645a MoveSelectionScreen.pressed_down
 0f:646f MoveSelectionScreen.CheckPlayerHasUsableMoves
