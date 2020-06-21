@@ -320,8 +320,6 @@
 00:116c PlaceJPRouteText
 00:116c PlaceWatashiText
 00:116c PlaceKokoWaText
-00:116c ChanSuffixText
-00:116c KunSuffixText
 00:116d NextLineChar
 00:1176 LineFeedChar
 00:117f LineChar
@@ -345,8 +343,8 @@
 00:1255 LoadBlinkingCursor
 00:125b UnloadBlinkingCursor
 00:1261 FarString
-00:126d PokeFluteTerminatorCharacter
-00:1271 PokeFluteTerminatorCharacter.stop
+00:126d PokeFluteTerminator
+00:1271 PokeFluteTerminator.stop
 00:1272 PlaceHLTextAtBC
 00:1283 DoTextUntilTerminator
 00:128c DoTextUntilTerminator.TextCommand
@@ -1186,8 +1184,8 @@
 00:3e75 MaxVolume
 00:3e7b LowVolume
 00:3e81 MinVolume
-00:3e86 Unused_FadeOutMusic
-00:3e8c FadeInMusic
+00:3e86 FadeOutToMusic
+00:3e8c FadeInToMusic
 00:3e92 SkipMusic
 00:3e92 SkipMusic.loop
 00:3e9a FadeToMapMusic
@@ -35589,7 +35587,6 @@
 00:ffe1 hTileAnimFrame
 00:ffe2 hLastTalked
 00:ffe3 hRandomAdd
-00:ffe3 hRandom
 00:ffe4 hRandomSub
 00:ffe5 hUnusedBackup
 00:ffe6 hBattleTurn
