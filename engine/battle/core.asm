@@ -5133,7 +5133,7 @@ MoveSelectionScreen:
 	dec a
 	jr nz, .interpret_joypad
 	hlcoord 11, 14
-	ld de, .string_3e448
+	ld de, .empty_string
 	call PlaceString
 	jr .interpret_joypad
 
@@ -5229,7 +5229,7 @@ MoveSelectionScreen:
 	call SafeLoadTempTilemapToTilemap
 	jp MoveSelectionScreen
 
-.string_3e448
+.empty_string
 	db "@"
 
 .pressed_up
@@ -7746,7 +7746,7 @@ StartBattle:
 	call ShowLinkBattleParticipants
 	farcall ClearBattleRAM
 	ld hl, rLCDC
-	res rLCDC_WINDOW_TILEMAP, [hl] ; select 9800-9BFF
+	res rLCDC_WINDOW_TILEMAP, [hl] ; select vBGMap0/vBGMap2
 	ld a, [wOtherTrainerClass]
 	and a
 	jr nz, .trainer
@@ -7767,7 +7767,7 @@ StartBattle:
 	xor a
 	ldh [hBGMapMode], a
 	ld hl, rLCDC
-	set rLCDC_WINDOW_TILEMAP, [hl] ; select 9C00-9FFF
+	set rLCDC_WINDOW_TILEMAP, [hl] ; select vBGMap1/vBGMap3
 	call EmptyBattleTextbox
 	hlcoord 9, 7
 	lb bc, 5, 11

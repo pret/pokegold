@@ -2,19 +2,18 @@ SECTION "Scratch", SRAM
 
 sScratch::
 
-UNION ; a000
+UNION
 sDecompressScratch:: ds $188
-sDecompressBuffer:: ds 7 * 7 tiles ; a188
+sDecompressBuffer:: ds 7 * 7 tiles
 
-NEXTU ; a000
+NEXTU
 sScratchTilemap:: ds BG_MAP_WIDTH * BG_MAP_HEIGHT
-sScratchAttrmap:: ds $200 ; a200
-ENDU ; a498
+sScratchAttrmap:: ds $200
+ENDU
 
 
 SECTION "SRAM Bank 0", SRAM
 
-; a600
 sPartyMail::
 sPartyMon1Mail:: mailmsg sPartyMon1Mail
 sPartyMon2Mail:: mailmsg sPartyMon2Mail
@@ -23,7 +22,6 @@ sPartyMon4Mail:: mailmsg sPartyMon4Mail
 sPartyMon5Mail:: mailmsg sPartyMon5Mail
 sPartyMon6Mail:: mailmsg sPartyMon6Mail
 
-; a71a
 sPartyMailBackup::
 sPartyMon1MailBackup:: mailmsg sPartyMon1MailBackup
 sPartyMon2MailBackup:: mailmsg sPartyMon2MailBackup
@@ -32,7 +30,6 @@ sPartyMon4MailBackup:: mailmsg sPartyMon4MailBackup
 sPartyMon5MailBackup:: mailmsg sPartyMon5MailBackup
 sPartyMon6MailBackup:: mailmsg sPartyMon6MailBackup
 
-; a834
 sMailboxCount:: db
 sMailbox::
 sMailbox1::  mailmsg sMailbox1
@@ -46,7 +43,6 @@ sMailbox8::  mailmsg sMailbox8
 sMailbox9::  mailmsg sMailbox9
 sMailbox10:: mailmsg sMailbox10
 
-; aa0b
 sMailboxCountBackup:: db
 sMailboxBackup::
 sMailbox1Backup::  mailmsg sMailbox1Backup
@@ -60,7 +56,6 @@ sMailbox8Backup::  mailmsg sMailbox8Backup
 sMailbox9Backup::  mailmsg sMailbox9Backup
 sMailbox10Backup:: mailmsg sMailbox10Backup
 
-; abe2
 sMysteryGiftItem:: db
 sMysteryGiftUnlocked:: db
 sBackupMysteryGiftItem:: db
@@ -74,7 +69,7 @@ sMysteryGiftTimerStartDay:: db
 sMysteryGiftTrainerHouseFlag:: db
 sMysteryGiftPartnerName:: ds NAME_LENGTH
 s0_ac09:: ds 1
-sMysteryGiftTrainer:: ds (1 + 1 + NUM_MOVES) * PARTY_LENGTH + 2 ; ac0a
+sMysteryGiftTrainer:: ds (1 + 1 + NUM_MOVES) * PARTY_LENGTH + 2
 sBackupMysteryGiftItemEnd::
 
 	ds $30
@@ -86,11 +81,8 @@ sLuckyIDNumber::  dw
 
 SECTION "Backup Save 1", SRAM
 
-; ac6b
 sBackupPlayerData3:: ds wPlayerDataEnd - wPlayerData3
-; b0e8
 sBackupPokemonData:: ds wPokemonDataEnd - wPokemonData
-; b5c7
 sBackupPlayerData1:: ds wPlayerData1End - wPlayerData
 
 
@@ -112,7 +104,7 @@ sOptions:: ds wOptionsEnd - wOptions
 
 sCheckValue1:: db ; loaded with SAVE_CHECK_VALUE_1, used to check save corruption
 
-sGameData:: ; a009
+sGameData::
 sPlayerData::
 sPlayerData1::  ds wPlayerData1End - wPlayerData1
 sPlayerData2::  ds wPlayerData2End - wPlayerData2
@@ -128,15 +120,15 @@ sCheckValue2:: db ; loaded with SAVE_CHECK_VALUE_2, used to check save corruptio
 
 SECTION "Active Box", SRAM
 
-sBox:: curbox sBox ; ad6c
+sBox:: curbox sBox
 
 
 SECTION "Link Battle Data", SRAM
 
 sLinkBattleStats::
-sLinkBattleWins::   dw ; b1ba
-sLinkBattleLosses:: dw ; b1bc
-sLinkBattleDraws::  dw ; b1be
+sLinkBattleWins::   dw
+sLinkBattleLosses:: dw
+sLinkBattleDraws::  dw
 
 sLinkBattleRecord::
 sLinkBattleRecord1:: link_battle_record sLinkBattleRecord1
@@ -149,7 +141,7 @@ sLinkBattleStatsEnd::
 
 SECTION "SRAM Hall of Fame", SRAM
 
-sHallOfFame:: ; b21a
+sHallOfFame::
 sHallOfFame01:: hall_of_fame sHallOfFame01
 sHallOfFame02:: hall_of_fame sHallOfFame02
 sHallOfFame03:: hall_of_fame sHallOfFame03
@@ -185,7 +177,6 @@ sHallOfFameEnd::
 
 SECTION "Backup Save 2", SRAM
 
-; bd96
 sBackupPlayerData2:: ds wPlayerData2End - wPlayerData2
 
 
@@ -213,10 +204,8 @@ sBox14:: box sBox14
 
 SECTION "Backup Save 3", SRAM
 
-; be30
 sBackupOptions:: ds wOptionsEnd - wOptions
 sBackupCheckValue1:: db ; loaded with SAVE_CHECK_VALUE_1, used to check save corruption
-; be39
 sBackupCurMapData:: ds wCurMapDataEnd - wCurMapData
 sBackupChecksum:: dw
 sBackupCheckValue2:: db ; loaded with SAVE_CHECK_VALUE_2, used to check save corruption

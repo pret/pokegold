@@ -502,7 +502,7 @@ Printer_RestartMapMusic:
 
 CheckPrinterStatus:
 ; Check for printer errors
-; If [ca88] == -1, we're disconnected
+; If [wPrinterHandshake] == -1, we're disconnected
 	ld a, [wPrinterHandshake]
 	cp -1
 	jr nz, .printer_connected
@@ -510,7 +510,6 @@ CheckPrinterStatus:
 	cp -1
 	jr z, .error_2
 .printer_connected
-; ca89 contains printer status flags
 	ld a, [wPrinterStatusFlags]
 	and %11100000
 	ret z ; no error
