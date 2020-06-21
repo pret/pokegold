@@ -16,8 +16,9 @@ UpdateCGBPals::
 	ldh a, [hCGBPalUpdate]
 	and a
 	ret z
+	; fallthrough
 
-ForceUpdateCGBPals::
+ForceUpdateCGBPals:: ; unreferenced
 	ld hl, wBGPals2
 
 ; copy 8 pals to bgpd

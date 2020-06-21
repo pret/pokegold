@@ -3,7 +3,7 @@ ClearBox::
 	ld a, " "
 	; fallthrough
 
-FillBoxWithByte::
+FillBoxWithByte:: ; unreferenced
 	ld de, SCREEN_WIDTH
 .row
 	push hl
@@ -374,9 +374,7 @@ String_Space::    db " @"
 ; These strings have been dummied out.
 PlaceJPRouteText::
 PlaceWatashiText::
-PlaceKokoWaText::
-KunSuffixText::
-ChanSuffixText::  db "@"
+PlaceKokoWaText:: db "@"
 
 NextLineChar::
 	pop hl
@@ -562,7 +560,7 @@ FarString::
 	rst Bankswitch
 	ret
 
-PokeFluteTerminatorCharacter::
+PokeFluteTerminator:: ; unreferenced
 	ld hl, .stop
 	ret
 

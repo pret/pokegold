@@ -8,8 +8,9 @@ FarCall_hl::
 	ld a, [wTempBank]
 	rst Bankswitch
 	call FarCall_JumpToHL
+	; fallthrough
 
-ReturnFarCall::
+ReturnFarCall:: ; unreferenced
 ; We want to retain the contents of f.
 ; To do this, we can pop to bc instead of af.
 

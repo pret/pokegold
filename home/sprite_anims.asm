@@ -14,7 +14,7 @@ InitSpriteAnimStruct::
 
 	ret
 
-ReinitSpriteAnimFrame::
+ReinitSpriteAnimFrame:: ; unreferenced
 	ld [wSpriteAnimIDBuffer], a
 	ldh a, [hROMBank]
 	push af

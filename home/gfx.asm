@@ -1,6 +1,6 @@
 TILES_PER_CYCLE EQU 8
 
-FarCopyBytesDouble_DoubleBankSwitch::
+FarCopyBytesDouble_DoubleBankSwitch:: ; unreferenced
 	ld b, a
 	ldh a, [hROMBank]
 	push af
@@ -206,8 +206,9 @@ Get2bpp::
 	ldh a, [rLCDC]
 	bit rLCDC_ENABLE, a
 	jp nz, Request2bpp
+	; fallthrough
 
-Copy2bpp:
+Copy2bpp: ; unreferenced
 ; copy c 2bpp tiles from b:de to hl
 
 	push hl
@@ -235,8 +236,9 @@ Get1bpp::
 	ldh a, [rLCDC]
 	bit rLCDC_ENABLE, a
 	jp nz, Request1bpp
+	; fallthrough
 
-Copy1bpp::
+Copy1bpp:: ; unreferenced
 ; copy c 1bpp tiles from b:de to hl
 
 	push de
@@ -264,6 +266,7 @@ DuplicateGet2bpp:: ; unreferenced
 	ldh a, [rLCDC]
 	add a
 	jp c, Request2bpp
+	; fallthrough
 
 DuplicateCopy2bpp: ; unreferenced
 	push de
