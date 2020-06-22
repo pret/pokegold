@@ -26,9 +26,9 @@ VictoryRoadRivalLeft:
 	special FadeOutMusic
 	pause 15
 	appear VICTORYROAD_SILVER
-	applymovement VICTORYROAD_SILVER, MovementData_0x109a61
+	applymovement VICTORYROAD_SILVER, VictoryRoadRivalBattleApproachMovement1
 	scall VictoryRoadRivalNext
-	applymovement VICTORYROAD_SILVER, MovementData_0x109a74
+	applymovement VICTORYROAD_SILVER, VictoryRoadRivalBattleExitMovement1
 	disappear VICTORYROAD_SILVER
 	setscene SCENE_FINISHED
 	playmapmusic
@@ -40,9 +40,9 @@ VictoryRoadRivalRight:
 	special FadeOutMusic
 	pause 15
 	appear VICTORYROAD_SILVER
-	applymovement VICTORYROAD_SILVER, MovementData_0x109a6a
+	applymovement VICTORYROAD_SILVER, VictoryRoadRivalBattleApproachMovement2
 	scall VictoryRoadRivalNext
-	applymovement VICTORYROAD_SILVER, MovementData_0x109a7d
+	applymovement VICTORYROAD_SILVER, VictoryRoadRivalBattleExitMovement2
 	disappear VICTORYROAD_SILVER
 	setscene SCENE_FINISHED
 	playmapmusic
@@ -115,7 +115,7 @@ VictoryRoadHiddenMaxPotion:
 VictoryRoadHiddenFullHeal:
 	hiddenitem FULL_HEAL, EVENT_VICTORY_ROAD_HIDDEN_FULL_HEAL
 
-MovementData_0x109a61:
+VictoryRoadRivalBattleApproachMovement1:
 	step LEFT
 	step LEFT
 	step LEFT
@@ -126,7 +126,7 @@ MovementData_0x109a61:
 	step UP
 	step_end
 
-MovementData_0x109a6a:
+VictoryRoadRivalBattleApproachMovement2:
 	step UP
 	step UP
 	step LEFT
@@ -138,7 +138,7 @@ MovementData_0x109a6a:
 	step UP
 	step_end
 
-MovementData_0x109a74:
+VictoryRoadRivalBattleExitMovement1:
 	step DOWN
 	step DOWN
 	step RIGHT
@@ -149,7 +149,7 @@ MovementData_0x109a74:
 	step RIGHT
 	step_end
 
-MovementData_0x109a7d:
+VictoryRoadRivalBattleExitMovement2:
 	step DOWN
 	step DOWN
 	step RIGHT
