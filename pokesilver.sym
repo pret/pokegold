@@ -20276,10 +20276,10 @@
 42:5a59 VictoryRoadXSpecial
 42:5a5b VictoryRoadHiddenMaxPotion
 42:5a5e VictoryRoadHiddenFullHeal
-42:5a61 MovementData_0x109a61
-42:5a6a MovementData_0x109a6a
-42:5a74 MovementData_0x109a74
-42:5a7d MovementData_0x109a7d
+42:5a61 VictoryRoadRivalBattleApproachMovement1
+42:5a6a VictoryRoadRivalBattleApproachMovement2
+42:5a74 VictoryRoadRivalBattleExitMovement1
+42:5a7d VictoryRoadRivalBattleExitMovement2
 42:5a87 VictoryRoadRivalBeforeText
 42:5b65 VictoryRoadRivalDefeatText
 42:5bf6 VictoryRoadRivalAfterText
