@@ -875,7 +875,7 @@ Script_variablesprite:
 
 Script_appear:
 	call GetScriptByte
-	call _CopyObjectStruct
+	call UnmaskCopyMapObjectStruct
 	ldh a, [hMapObjectIndexBuffer]
 	ld b, 0 ; clear
 	call ApplyEventActionAppearDisappear

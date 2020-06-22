@@ -676,7 +676,7 @@ PlaceNthMenuStrings::
 	call PlaceString
 	ret
 
-Function1e08:: ; unreferenced
+GetNthMenuStrings:: ; unreferenced
 	call GetMenuDataPointerTableEntry
 	inc hl
 	inc hl

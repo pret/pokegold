@@ -27,8 +27,8 @@ hBlackOutBGMapThird:: db
 hROMBank:: db
 hVBlank:: db
 hMapEntryMethod:: db
-hMenuReturn:: db
 
+hMenuReturn:: db
 hUnusedFFA3:: db
 
 hJoypadReleased:: db
