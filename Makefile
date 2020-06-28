@@ -173,6 +173,8 @@ gfx/mystery_gift/question_mark.1bpp: tools/gfx += --remove-whitespace
 
 gfx/title/logo_bottom_gold.2bpp: tools/gfx += --trim-whitespace
 gfx/title/logo_bottom_silver.2bpp: tools/gfx += --trim-whitespace
+gfx/title/hooh_gold.2bpp: tools/gfx += --interleave --png=$<
+gfx/title/lugia_silver.2bpp: tools/gfx += --interleave --png=$<
 
 gfx/trade/ball.2bpp: tools/gfx += --remove-whitespace
 
