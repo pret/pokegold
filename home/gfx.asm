@@ -203,13 +203,10 @@ Request1bpp::
 	jr .loop
 
 Get2bpp::
+; copy c 2bpp tiles from b:de to hl
 	ldh a, [rLCDC]
 	bit rLCDC_ENABLE, a
 	jp nz, Request2bpp
-	; fallthrough
-
-Copy2bpp: ; unreferenced
-; copy c 2bpp tiles from b:de to hl
 
 	push hl
 	ld h, d
@@ -233,13 +230,10 @@ Copy2bpp: ; unreferenced
 	jp FarCopyBytes
 
 Get1bpp::
+; copy c 1bpp tiles from b:de to hl
 	ldh a, [rLCDC]
 	bit rLCDC_ENABLE, a
 	jp nz, Request1bpp
-	; fallthrough
-
-Copy1bpp:: ; unreferenced
-; copy c 1bpp tiles from b:de to hl
 
 	push de
 	ld d, h
@@ -266,9 +260,7 @@ DuplicateGet2bpp:: ; unreferenced
 	ldh a, [rLCDC]
 	add a
 	jp c, Request2bpp
-	; fallthrough
 
-DuplicateCopy2bpp: ; unreferenced
 	push de
 	push hl
 

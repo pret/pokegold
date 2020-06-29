@@ -1,9 +1,6 @@
 ClearBox::
 ; Fill a c*b box at hl with blank tiles.
 	ld a, " "
-	; fallthrough
-
-FillBoxWithByte:: ; unreferenced
 	ld de, SCREEN_WIDTH
 .row
 	push hl

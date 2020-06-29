@@ -1,19 +1,15 @@
 FarCall_hl::
 ; Call a:hl.
 ; Preserves other registers.
-
 	ld [wTempBank], a
 	ldh a, [hROMBank]
 	push af
 	ld a, [wTempBank]
 	rst Bankswitch
 	call FarCall_JumpToHL
-	; fallthrough
 
-ReturnFarCall:: ; unreferenced
 ; We want to retain the contents of f.
 ; To do this, we can pop to bc instead of af.
-
 	ld a, b
 	ld [wFarCallBCBuffer], a
 	ld a, c
@@ -24,6 +20,7 @@ ReturnFarCall:: ; unreferenced
 	ld a, b
 	rst Bankswitch
 
+; Restore the contents of bc.
 	ld a, [wFarCallBCBuffer]
 	ld b, a
 	ld a, [wFarCallBCBuffer + 1]

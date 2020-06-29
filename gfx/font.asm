@@ -45,10 +45,8 @@ INCBIN "gfx/font/unused_bold_font.1bpp"
 TextboxSpaceGFX:
 INCBIN "gfx/font/space.1bpp"
 
-FontsExtra_SolidBlackGFX:
+FontsExtra_SolidBlackAndUpArrowGFX:
 INCBIN "gfx/font/black.1bpp"
-
-FontsExtra2_UpArrowGFX:
 INCBIN "gfx/font/up_arrow.1bpp"
 
 Footprints:

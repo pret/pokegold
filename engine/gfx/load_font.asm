@@ -5,9 +5,9 @@ _LoadStandardFont::
 	jp Get1bpp
 
 _LoadFontsExtra::
-	ld de, FontsExtra_SolidBlackGFX
+	ld de, FontsExtra_SolidBlackAndUpArrowGFX
 	ld hl, vTiles2 tile "■" ; $60
-	lb bc, BANK(FontsExtra_SolidBlackGFX), 2
+	lb bc, BANK(FontsExtra_SolidBlackAndUpArrowGFX), 2
 	call Get1bpp
 	ld de, PokegearPhoneIconGFX
 	ld hl, vTiles2 tile "☎" ; $62
