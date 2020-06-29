@@ -44,8 +44,9 @@ gfx/tilesets/johto_modern.2bpp.lz: LZFLAGS = --compressor null --method 1 --alig
 gfx/tilesets/kanto.2bpp.lz: LZFLAGS = --compressor null --method 1 --align 1
 gfx/tilesets/mansion.2bpp.lz: LZFLAGS += --method 2 --align 4
 gfx/tilesets/mart.2bpp.lz: LZFLAGS += --method 2 --align 4
+gfx/tilesets/players_room.2bpp.lz: LZFLAGS += --method 4 --align 4
 gfx/tilesets/radio_tower.2bpp.lz: LZFLAGS += --method 2 --align 4
-gfx/tilesets/ruins_of_alph.2bpp.lz: LZFLAGS += --method 2 --align 4
+gfx/tilesets/ruins_of_alph.2bpp.lz: LZFLAGS += --method 6 --align 4
 gfx/tilesets/tower.2bpp.lz: LZFLAGS += --method 2 --align 4
 
 gfx/title/hooh_gold.2bpp.lz: LZFLAGS += --align 3
