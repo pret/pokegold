@@ -23,7 +23,7 @@ box_struct: MACRO
 \1Unused1::        db
 \1Unused2::        db
 \1Level::          db
-\1End::
+\1BoxEnd::
 ENDM
 
 party_struct: MACRO
@@ -38,7 +38,7 @@ party_struct: MACRO
 \1Speed::          dw
 \1SpclAtk::        dw
 \1SpclDef::        dw
-\1StatsEnd::
+\1StructEnd::
 ENDM
 
 red_box_struct: MACRO
@@ -91,7 +91,6 @@ battle_struct: MACRO
 \1Speed::     dw
 \1SpclAtk::   dw
 \1SpclDef::   dw
-\1StatsEnd::
 \1Type::
 \1Type1::     db
 \1Type2::     db

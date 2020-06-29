@@ -699,7 +699,7 @@ EnemyWithdrewText:
 	text_far _EnemyWithdrewText
 	text_end
 
-Function384c7: ; This appears to be unused
+EnemyUsedFullHealRed: ; unreferenced
 	call AIUsedItemSound
 	call AI_HealStatus
 	ld a, FULL_HEAL_RED ; X_SPEED
@@ -746,7 +746,7 @@ EnemyUsedDireHit:
 	ld a, DIRE_HIT
 	jp PrintText_UsedItemOn_AND_AIUpdateHUD
 
-Function38510: ; This appears to be unused
+Function38510: ; unreferenced
 	ldh [hDivisor], a
 	ld hl, wEnemyMonMaxHP
 	ld a, [hli]
