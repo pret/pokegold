@@ -1348,6 +1348,7 @@ wTextDelayFrames:: db
 wVBlankOccurred:: db
 
 wceeb:: db
+
 wDefaultSpawnpoint:: db
 
 UNION

@@ -83,7 +83,7 @@ Init::
 
 	call ClearSprites
 
-	ld a, BANK(WriteOAMDMACodeToHRAM)
+	ld a, BANK(WriteOAMDMACodeToHRAM) ; aka BANK(GameInit)
 	rst Bankswitch
 
 	call WriteOAMDMACodeToHRAM

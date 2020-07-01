@@ -235,16 +235,7 @@ DebugColorMain:
 	jr nz, .PreviousMon
 
 .asm_fd49e
-	ld a, [wJumptableIndex]
-	ld e, a
-	ld d, 0
-	ld hl, Jumptable_fd4e2
-	add hl, de
-	add hl, de
-	ld a, [hli]
-	ld h, [hl]
-	ld l, a
-	jp hl
+	jumptable Jumptable_fd4e2, wJumptableIndex
 
 .NextMon:
 	call DebugColor_BackupSpriteColors
