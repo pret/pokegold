@@ -21,8 +21,9 @@ gfx/pics
 
 gold_excl_obj := $(addsuffix _gold.o,$(gs_excl_asm))
 silver_excl_obj := $(addsuffix _silver.o,$(gs_excl_asm))
-gold_obj := $(rom_obj:.o=_gold.o) $(gold_excl_obj)
-silver_obj := $(rom_obj:.o=_silver.o) $(silver_excl_obj)
+
+pokegold_obj := $(rom_obj:.o=_gold.o) $(gold_excl_obj)
+pokesilver_obj := $(rom_obj:.o=_silver.o) $(silver_excl_obj)
 
 
 ### Build tools
@@ -53,12 +54,12 @@ gold:   pokegold.gbc
 silver: pokesilver.gbc
 
 clean:
-	rm -f $(roms) $(gold_obj) $(silver_obj) $(roms:.gbc=.map) $(roms:.gbc=.sym) rgbdscheck.o
+	rm -f $(roms) $(pokegold_obj) $(pokesilver_obj) $(roms:.gbc=.map) $(roms:.gbc=.sym) rgbdscheck.o
 	find gfx \( -name "*.[12]bpp" -o -name "*.lz" -o -name "*.gbcpal" -o -name "*.dimensions" -o -name "*.sgb.tilemap" \) -delete
 	$(MAKE) clean -C tools/
 
 tidy:
-	rm -f $(roms) $(gold_obj) $(silver_obj) $(roms:.gbc=.map) $(roms:.gbc=.sym) rgbdscheck.o
+	rm -f $(roms) $(pokegold_obj) $(pokesilver_obj) $(roms:.gbc=.map) $(roms:.gbc=.sym) rgbdscheck.o
 	$(MAKE) clean -C tools/
 
 compare: $(roms)
@@ -74,8 +75,8 @@ ifeq ($(DEBUG),1)
 RGBASMFLAGS += -E
 endif
 
-$(gold_obj):   RGBASMFLAGS += -D _GOLD
-$(silver_obj): RGBASMFLAGS += -D _SILVER
+$(pokegold_obj):   RGBASMFLAGS += -D _GOLD
+$(pokesilver_obj): RGBASMFLAGS += -D _SILVER
 
 rgbdscheck.o: rgbdscheck.asm
 	$(RGBASM) -o $@ $<
@@ -95,9 +96,9 @@ ifeq (,$(filter clean tools,$(MAKECMDGOALS)))
 $(info $(shell $(MAKE) -C tools))
 
 # Dependencies for shared objects (drop _gold and _silver from asm file basenames)
-$(foreach obj, $(filter-out $(gold_excl_obj), $(gold_obj)), \
+$(foreach obj, $(filter-out $(gold_excl_obj), $(pokegold_obj)), \
 	$(eval $(call DEP,$(obj),$(obj:_gold.o=.asm))))
-$(foreach obj, $(filter-out $(silver_excl_obj), $(silver_obj)), \
+$(foreach obj, $(filter-out $(silver_excl_obj), $(pokesilver_obj)), \
 	$(eval $(call DEP,$(obj),$(obj:_silver.o=.asm))))
 
 # Dependencies for game-exclusive objects (keep _gold and _silver in asm file basenames)
@@ -106,13 +107,12 @@ $(foreach obj, $(gold_excl_obj) $(silver_excl_obj), $(eval $(call DEP,$(obj),$(o
 endif
 
 
-pokegold.gbc: $(gold_obj) layout.link
-	$(RGBLINK) -n pokegold.sym -m pokegold.map -l layout.link -o $@ $(gold_obj)
-	$(RGBFIX) -cjsv -t POKEMON_GLD -i AAUE -k 01 -l 0x33 -m 0x10 -r 3 -p 0 $@
+pokegold_opt   = -cjsv -t POKEMON_GLD -i AAUE -k 01 -l 0x33 -m 0x10 -r 3 -p 0
+pokesilver_opt = -cjsv -t POKEMON_SLV -i AAXE -k 01 -l 0x33 -m 0x10 -r 3 -p 0
 
-pokesilver.gbc: $(silver_obj) layout.link
-	$(RGBLINK) -n pokesilver.sym -m pokesilver.map -l layout.link -o $@ $(silver_obj)
-	$(RGBFIX) -cjsv -t POKEMON_SLV -i AAXE -k 01 -l 0x33 -m 0x10 -r 3 -p 0 $@
+%.gbc: $$(%_obj) layout.link
+	$(RGBLINK) -n $*.sym -m $*.map -l layout.link -o $@ $(filter %.o,$^)
+	$(RGBFIX) $($*_opt) $@
 
 
 ### LZ compression rules
