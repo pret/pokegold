@@ -39,8 +39,8 @@ objects = None
 if args.rootdir:
     for line in Popen(["make", "-C", args.rootdir, "-s", "-p"],
             stdout=PIPE).stdout.read().decode().split("\n"):
-        if line.startswith("gold_obj := "):
-            objects = line[12:].strip().split()
+        if line.startswith("pokegold_obj := "):
+            objects = line[16:].strip().split()
             break
     else:
         print("Error: Object files not found!", file=stderr)
