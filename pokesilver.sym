@@ -2125,7 +2125,7 @@
 02:4c24 UnusedFrontpicPredefPredef
 02:4c27 UpdateTimePredefPredef
 02:4c2d LoadSGBLayout
-02:4c3b LoadSGBLayout.not_ram
+02:4c3b LoadSGBLayout.not_default
 02:4c50 LoadSGBLayout.Jumptable
 02:4c90 LoadSGBLayout.SGB_BattleGrayscale
 02:4c97 LoadSGBLayout.SGB_BattleColors
@@ -2206,7 +2206,7 @@
 02:52c1 LoadMailPalettes.MailPals
 02:5311 CheckCGB
 02:5315 LoadSGBLayoutCGB
-02:531d LoadSGBLayoutCGB.not_ram
+02:531d LoadSGBLayoutCGB.not_default
 02:5335 LoadSGBLayoutCGB.ReturnFromJumpTable
 02:5336 LoadSGBLayoutCGB.dw
 02:5376 _CGB_BattleGrayscale
@@ -33395,8 +33395,8 @@
 00:cc20 wBGMapBuffer
 00:cc48 wBGMapPalBuffer
 00:cc70 wBGMapBufferPtrs
-00:cc98 wSGBPredef
 00:cc98 wBGMapBufferEnd
+00:cc98 wDefaultSGBLayout
 00:cc99 wPlayerHPPal
 00:cc9a wEnemyHPPal
 00:cc9b wHPPals
