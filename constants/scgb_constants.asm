@@ -33,8 +33,8 @@
 	const SCGB_1E
 	const SCGB_POKEDEX_5X5
 
-SCGB_PARTY_MENU_HP_PALS  EQU -4
-SCGB_RAM EQU -1
+SCGB_PARTY_MENU_HP_BARS EQU $fc
+SCGB_DEFAULT EQU $ff
 
 ; PredefPals indexes (see gfx/sgb/predef.pal)
 ; GetPredefPal arguments (see engine/gfx/color.asm)

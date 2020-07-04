@@ -1079,7 +1079,7 @@ wBGMapPalBuffer::  ds 40
 wBGMapBufferPtrs:: ds 40 ; 20 bg map addresses (16x8 tiles)
 wBGMapBufferEnd::
 
-wSGBPredef:: db
+wDefaultSGBLayout:: db
 
 wPlayerHPPal:: db
 wEnemyHPPal:: db
