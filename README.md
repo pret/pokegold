@@ -9,6 +9,7 @@ It builds the following ROMs:
 
 To set up the repository, see [INSTALL.md](INSTALL.md).
 
+
 ## See also
 
 - **Discord:** [pret][discord]
@@ -22,7 +23,7 @@ Other disassembly projects:
 - [**Pokémon Pinball**][pokepinball]
 - [**Pokémon TCG**][poketcg]
 - [**Pokémon Ruby**][pokeruby]
-- [**Pokémon Fire Red**][pokefirered]
+- [**Pokémon FireRed**][pokefirered]
 - [**Pokémon Emerald**][pokeemerald]
 
 [pokered]: https://github.com/pret/pokered
