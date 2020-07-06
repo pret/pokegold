@@ -198,10 +198,22 @@
 	const ITEM_BE      ; be
 
 add_tm: MACRO
+; Defines three constants:
+; - TM_\1: the item id, starting at $bf
+; - \1_TMNUM: the learnable TM/HM flag, starting at 1
+; - TM##_MOVE: alias for the move id, equal to the value of \1
+; The first usage also defines TM01 as the first TM item id.
 if !DEF(TM01)
 TM01 EQU const_value
 	enum_start 1
 endc
+if __enum__ < 10
+MOVE_FOR_TM EQUS "TM0{d:__enum__}_MOVE"
+else
+MOVE_FOR_TM EQUS "TM{d:__enum__}_MOVE"
+endc
+MOVE_FOR_TM = \1
+PURGE MOVE_FOR_TM
 	const TM_\1
 	enum \1_TMNUM
 ENDM
@@ -259,12 +271,26 @@ ENDM
 	add_tm FIRE_PUNCH   ; f0
 	add_tm FURY_CUTTER  ; f1
 	add_tm NIGHTMARE    ; f2
-NUM_TMS EQU const_value - TM01 - 2 ; discount ITEM_C3 and ITEM_DC
+NUM_TMS EQU __enum__ - 1
 
 add_hm: MACRO
+; Defines three constants:
+; - HM_\1: the item id, starting at $f3
+; - \1_TMNUM: the learnable TM/HM flag, starting at 51
+; - HM##_MOVE: alias for the move id, equal to the value of \1
+; The first usage also defines HM01 as the first TM item id.
 if !DEF(HM01)
 HM01 EQU const_value
 endc
+HM_VALUE EQU __enum__ - NUM_TMS
+if HM_VALUE < 10
+MOVE_FOR_HM EQUS "HM0{d:HM_VALUE}_MOVE"
+else
+MOVE_FOR_HM EQUS "HM{d:HM_VALUE}_MOVE"
+endc
+MOVE_FOR_HM = \1
+PURGE MOVE_FOR_HM
+PURGE HM_VALUE
 	const HM_\1
 	enum \1_TMNUM
 ENDM
@@ -276,7 +302,7 @@ ENDM
 	add_hm FLASH        ; f7
 	add_hm WHIRLPOOL    ; f8
 	add_hm WATERFALL    ; f9
-NUM_HMS EQU const_value - HM01
+NUM_HMS EQU __enum__ - NUM_TMS - 1
 
 NUM_TM_HM EQU __enum__ - 1
 
