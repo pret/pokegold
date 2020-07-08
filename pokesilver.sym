@@ -178,9 +178,11 @@
 00:0af0 FarDecompress
 00:0b00 Decompress
 00:0b08 Decompress.Main
+00:0b12 Decompress.long
 00:0b22 Decompress.short
 00:0b2a Decompress.command
 00:0b3d Decompress.lloop
+00:0b3d Decompress.Literal
 00:0b44 Decompress.lnext
 00:0b49 Decompress.Iter
 00:0b4a Decompress.iloop
@@ -194,6 +196,7 @@
 00:0b70 Decompress.zloop
 00:0b77 Decompress.znext
 00:0b7b Decompress.rewrite
+00:0b82 Decompress.negative
 00:0b8d Decompress.positive
 00:0b99 Decompress.ok
 00:0ba6 Decompress.Repeat
@@ -272,6 +275,7 @@
 00:1014 CheckDict.__9231
 00:1030 CheckDict.diacritic
 00:1037 CheckDict.not_diacritic
+00:103f CheckDict.dakuten
 00:1047 CheckDict.hiragana_dakuten
 00:1049 CheckDict.katakana_dakuten
 00:1050 CheckDict.handakuten
@@ -388,6 +392,7 @@
 00:14ea UpdateBGMap.Attr
 00:14f9 UpdateBGMap.Tiles
 00:14fc UpdateBGMap.update
+00:1507 UpdateBGMap.bottom
 00:1519 UpdateBGMap.middle
 00:152c UpdateBGMap.top
 00:1535 UpdateBGMap.start
@@ -443,6 +448,7 @@
 00:182d ApplyDeletionToMapObject.ok
 00:183c DeleteObjectStruct
 00:1843 CopyPlayerObjectTemplate
+00:1855 DeleteFollowerMapObject
 00:187b DeleteFollowerMapObject.ok
 00:1886 LoadMovementDataPointer
 00:18b0 FindFirstEmptyObjectStruct
@@ -639,6 +645,7 @@
 00:2362 EnterMapWarp.SaveDigWarp
 00:2388 EnterMapWarp.not_mt_moon_or_tin_tower
 00:239b EnterMapWarp.SetSpawn
+00:23c0 EnterMapWarp.pokecenter
 00:23cd CheckOutdoorMap
 00:23d3 CheckIndoorMap
 00:23df CheckUnknownMap
@@ -926,9 +933,11 @@
 00:323d PrintNum
 00:324a PrintNum.moneyflag
 00:324f PrintNum.main
+00:3261 PrintNum.long
 00:326e PrintNum.word
 00:3277 PrintNum.byte
 00:327a PrintNum.start
+00:329c PrintNum.seven
 00:32ae PrintNum.six
 00:32c0 PrintNum.five
 00:32d1 PrintNum.four
@@ -1105,10 +1114,12 @@
 00:3ac5 GetNick
 00:3ade PrintBCDNumber
 00:3af0 PrintBCDNumber.loop
+00:3b02 PrintBCDNumber.numberEqualsZero
 00:3b07 PrintBCDNumber.skipLeftAlignmentAdjustment
 00:3b0e PrintBCDNumber.skipCurrencySymbol
 00:3b14 PrintBCDNumber.done
 00:3b15 PrintBCDDigit
+00:3b1a PrintBCDDigit.nonzeroDigit
 00:3b27 PrintBCDDigit.skipCurrencySymbol
 00:3b29 PrintBCDDigit.outputDigit
 00:3b2f PrintBCDDigit.zeroDigit
@@ -1195,6 +1206,7 @@
 00:3f25 RestartMapMusic
 00:3f40 SpecialMapMusic
 00:3f52 SpecialMapMusic.no
+00:3f54 SpecialMapMusic.bike
 00:3f59 SpecialMapMusic.surf
 00:3f5e SpecialMapMusic.contest
 00:3f70 SpecialMapMusic.ranking
@@ -1215,6 +1227,7 @@
 01:4046 WriteOAMDMACodeToHRAM.pushoam_loop
 01:404a WriteOAMDMACodeToHRAM.PushOAMEnd
 01:404a Facings
+01:408a Facings.End
 01:408c FacingStepDown0
 01:408c FacingStepDown2
 01:408c FacingWeirdTree0
@@ -1306,14 +1319,18 @@
 01:46d9 StepVectors
 01:4709 GetStepVectorSign
 01:4711 UpdatePlayerStep
+01:4732 Function4732
 01:4742 RestoreDefaultMovement
 01:4756 RestoreDefaultMovement.ok
+01:4759 ClearObjectMovementByteIndex
 01:4760 IncrementObjectMovementByteIndex
 01:4766 DecrementObjectMovementByteIndex
 01:476c MovementAnonymousJumptable
 01:4774 ClearObjectStructField1c
 01:477b IncrementObjectStructField1c
 01:4781 Field1cAnonymousJumptable
+01:4789 GetValueObjectStructField1c
+01:478f SetValueObjectStructField1c
 01:4795 ObjectMovementReset
 01:47b6 MapObjectMovementPattern
 01:47c2 MapObjectMovementPattern.Pointers
@@ -1627,6 +1644,7 @@
 01:57a2 SetFollowerIfVisible
 01:57bd ResetFollower
 01:57d2 SetFlagsForMovement_1
+01:57e4 Function57e4
 01:57f0 Function57f0
 01:57f4 Function57f0.loop
 01:5800 Function57f0.next
@@ -1634,6 +1652,7 @@
 01:582f Function582f
 01:5834 Function582f.loop
 01:5840 Function582f.next
+01:584e Function584e
 01:5859 Function5859
 01:5879 Function5879
 01:5892 Function5879.standing_movefns
@@ -1652,6 +1671,7 @@
 01:5960 InitSprites.InitSpritesByPriority
 01:5963 InitSprites.next_sprite
 01:597a InitSprites.InitSprite
+01:597b InitSprites.skip1
 01:5986 InitSprites.skip2
 01:598c InitSprites.skip3
 01:599d InitSprites.skip4
@@ -1680,8 +1700,10 @@
 01:5b45 MainMenu_PrintCurrentTimeAndDay.PlaceBox
 01:5b57 MainMenu_PrintCurrentTimeAndDay.TimeFail
 01:5b5b MainMenu_PrintCurrentTimeAndDay.PlaceTime
+01:5b97 MainMenu_PrintCurrentTimeAndDay.min
 01:5b9c MainMenu_PrintCurrentTimeAndDay.PrintTimeNotSet
 01:5ba6 MainMenu_PrintCurrentTimeAndDay.TimeNotSet
+01:5bb3 MainMenu_PrintCurrentTimeAndDay.MainMenuTimeUnknownText
 01:5bb8 PrintDayOfWeek
 01:5bcf PrintDayOfWeek.Days
 01:5bf3 PrintDayOfWeek.Day
@@ -1791,6 +1813,7 @@
 01:6401 Function63fe
 01:640d TitleScreenScene
 01:6419 TitleScreenScene.scenes
+01:641f TitleScreenNextScene
 01:6424 TitleScreenTimer
 01:6432 TitleScreenMain
 01:645a TitleScreenMain.incave
@@ -1874,6 +1897,7 @@
 01:7096 CheckFacingObject.asm_70d0
 01:70ac CheckFacingObject.standing
 01:70ae WillObjectBumpIntoSomeoneElse
+01:70ba Function70f4
 01:70c6 Function70f4.CheckWillBeFacingNPC
 01:70e0 Function70f4.down
 01:70e2 Function70f4.up
@@ -1893,6 +1917,7 @@
 01:71a3 IsObjectMovingOffEdgeOfScreen.check_y
 01:71b4 IsObjectMovingOffEdgeOfScreen.nope
 01:71b6 IsObjectMovingOffEdgeOfScreen.yes
+01:71b8 Function71f2
 01:71c4 Function71f2.loop
 01:71db Function71f2.not_snorlax
 01:71f3 Function71f2.check_current_coords
@@ -1982,6 +2007,7 @@
 02:44b7 TilesetChampionsRoomPalMap
 02:44e7 TilesetLighthousePalMap
 02:4517 TilesetPlayersRoomPalMap
+02:4547 UnusedMuseumPalMap
 02:4577 TilesetIcePathPalMap
 02:45a7 TilesetForestPalMap
 02:45d7 MapGroupPalettes
@@ -1992,6 +2018,7 @@
 02:4664 PlayerSpawn_ConvertCoords
 02:4676 WriteObjectXY
 02:468d RefreshPlayerCoords
+02:46bc SpawnObject1
 02:46ca UnusedObject1Template
 02:46d7 CopyObjectStruct
 02:46e4 CopyObjectStruct.loop
@@ -2171,8 +2198,10 @@
 02:502f MapGroupRoofSGBPalInds
 02:504a _LoadSGBLayout_ReturnFromJumpTable
 02:5052 CheckShininess
+02:506e CheckShininess.Shiny
 02:5070 CheckShininess.NotShiny
 02:5072 Unused_CheckShininess
+02:508a Unused_CheckShininess.Shiny
 02:508c Unused_CheckShininess.NotShiny
 02:508e SGB_ApplyCreditsPals
 02:50bb InitPartyMenuPalettes
@@ -2183,10 +2212,13 @@
 02:5126 Function9102.BGPal
 02:512e Function9102.OBPal
 02:5136 Function9136
+02:5144 Function9144
 02:5153 Function9144.cgb
+02:515e Function915e
 02:516d Function915e.cgb
 02:5178 Intro_LoadMonPalette
 02:51a9 Intro_LoadMonPalette.cgb
+02:51b4 Function91b4
 02:51bf Function91b4.cgb
 02:51cc Function91b4.loop
 02:51d3 Function91b4.done
@@ -2227,6 +2259,8 @@
 02:5561 _CGB_BillsPC
 02:557b _CGB_BillsPC.GetMonPalette
 02:5584 _CGB_BillsPC.GotPalette
+02:55a0 Function95a0
+02:55a8 Function95a0.GetMonPalette
 02:55b1 Function95a0.GotPalette
 02:55cd BillsPCOrangePalette
 02:55d5 _CGB_PokedexUnownMode
@@ -2296,8 +2330,10 @@
 02:5bd3 GetFrontpicPalettePointer
 02:5bda GetTrainerPalettePointer
 02:5be4 GetMonPalettePointer
+02:5be8 Function9be8
 02:5bf6 Function9be8.loop
 02:5c09 BattleObjectPals
+02:5c39 Function9c39
 02:5c52 Function9c39.PushPalette
 02:5c54 Function9c39.loop
 02:5c5b _GetMonPalettePointer
@@ -2318,6 +2354,7 @@
 02:5d4a _InitSGBBorderPals
 02:5d4f _InitSGBBorderPals.loop
 02:5d5e _InitSGBBorderPals.PacketPointerTable
+02:5d70 Function9d70
 02:5d8b PushSGBBorder
 02:5d97 PushSGBBorder.LoadSGBBorderPointers
 02:5d9e SGB_ClearVRAM
@@ -2358,6 +2395,7 @@
 02:6035 PalPacket_UnownPuzzle
 02:6045 PalPacket_a045
 02:6055 PalPacket_GSIntroShellderLapras
+02:6065 PalPacket_BetaIntroLapras
 02:6075 PalPacket_GSIntroJigglypuffPikachu
 02:6085 PalPacket_GSIntroStartersTransition
 02:6095 PalPacket_BetaIntroVenusaur
@@ -2366,6 +2404,7 @@
 02:60c5 PalPacket_PartyMenu
 02:60d5 PalPacket_BattleGrayscale
 02:60e5 PalPacket_Pokegear
+02:60f5 PalPacket_a0f5
 02:6105 PalPacket_SlotMachine
 02:6115 PalPacket_BetaTitleScreen
 02:6125 PalPacket_Diploma
@@ -2390,6 +2429,7 @@
 02:6255 DataSndPacket8
 02:6265 PredefPals
 02:64dd SGBBorderMap
+02:690d SGBBorderPalettes
 02:698d SGBBorderGFX
 02:6d2d HPBarPals
 02:6d39 ExpBarPalette
@@ -2411,6 +2451,7 @@
 02:79ae RoofPals
 02:7a86 DiplomaPalettes
 02:7ac6 PartyMenuOBPals
+02:7b06 UnusedBattleObjectPals
 02:7b36 GSTitleBGPals
 02:7b5e GSTitleOBPals
 02:7b6e PokegearPals
@@ -2422,6 +2463,7 @@
 03:4024 EngineFlagAction.ceiling
 03:4029 EngineFlagAction.invalid
 03:402c EngineFlagAction.read
+03:403e EngineFlagAction.check
 03:4042 EngineFlagAction.set
 03:4046 EngineFlagAction.reset
 03:404d EngineFlags
@@ -2609,6 +2651,7 @@
 03:45fe SnorlaxAwake.ProximityCoords
 03:4609 PlayCurMonCry
 03:460f GameboyCheck
+03:4619 GameboyCheck.gb
 03:461c GameboyCheck.sgb
 03:4620 GameboyCheck.cgb
 03:4622 GameboyCheck.done
@@ -2619,6 +2662,7 @@
 03:465f SmallFarFlagAction
 03:4674 SmallFarFlagAction.shift
 03:4678 SmallFarFlagAction.shifted
+03:467f SmallFarFlagAction.reset
 03:4685 SmallFarFlagAction.set
 03:468a SmallFarFlagAction.check
 03:4693 SmallFarFlagAction.farcheck
@@ -2675,6 +2719,7 @@
 03:48e2 WhirlpoolBlockPointers.johto
 03:48e6 FlashFunction
 03:48ef FlashFunction.CheckUseFlash
+03:4901 FlashFunction.useflash
 03:4907 FlashFunction.notadarkcave
 03:490d FlashFunction.nozephyrbadge
 03:4910 UseFlash
@@ -2767,6 +2812,7 @@
 03:4ce4 TeleportFunction.TeleportTo
 03:4ce6 StrengthFunction
 03:4cef StrengthFunction.TryStrength
+03:4cf9 StrengthFunction.AlreadyUsingStrength
 03:4d02 StrengthFunction.AlreadyUsingStrengthText
 03:4d07 StrengthFunction.Failed
 03:4d0a StrengthFunction.UseStrength
@@ -2833,6 +2879,7 @@
 03:4f73 MaySmashText
 03:4f78 AskRockSmashText
 03:4f7d HasRockSmash
+03:4f84 HasRockSmash.no
 03:4f88 HasRockSmash.yes
 03:4f8b HasRockSmash.done
 03:4f8f FishFunction
@@ -2863,6 +2910,7 @@
 03:5094 PutTheRodAway
 03:50af RodBiteText
 03:50b4 RodNothingText
+03:50b9 UnusedNothingHereText
 03:50be BikeFunction
 03:50c7 BikeFunction.TryBike
 03:50d9 BikeFunction.GetOnBike
@@ -2956,6 +3004,7 @@
 03:541c GetTMHMNumber.skip
 03:541d GetTMHMNumber.done
 03:5422 GetNumberedTMHM
+03:542b GetNumberedTMHM.skip_two
 03:542c GetNumberedTMHM.skip_one
 03:542d GetNumberedTMHM.done
 03:5432 _CheckTossableItem
@@ -3143,6 +3192,7 @@
 03:628e GivePoke
 03:62c7 GivePoke.failed
 03:62f8 GivePoke.done
+03:6345 GivePoke.otnameloop
 03:635e GivePoke.send_to_box
 03:637f GivePoke.wildmon
 03:638b GivePoke.skip_nickname
@@ -3169,6 +3219,7 @@
 03:64cd BillsPC_MovePKMNMenu.quit
 03:64d2 BillsPC_MovePKMNMenu.PCMonHoldingMailText
 03:64d7 BillsPC_DepositMenu
+03:64eb Functione4ed
 03:64f7 Functione4ed.no_mon
 03:64ff Functione4ed.only_one_mon
 03:6507 Functione4ed.PCNoSingleMonText
@@ -3179,11 +3230,13 @@
 03:652e CheckCurPartyMonFainted.done
 03:6530 CheckCurPartyMonFainted.notfainted
 03:6532 BillsPC_WithdrawMenu
+03:6546 Functione548
 03:654f Functione548.party_full
 03:6557 PCCantTakeText
 03:655c BillsPC_ChangeBoxMenu
 03:6564 ClearPCItemScreen
 03:6594 CopyBoxmonToTempMon
+03:65b2 LoadBoxMonListing
 03:65ca LoadBoxMonListing.same_box
 03:65cf LoadBoxMonListing.okay
 03:65e1 LoadBoxMonListing.loop
@@ -3277,6 +3330,8 @@
 03:6dda FastBallMultiplier.next
 03:6dde LevelBallMultiplier
 03:6dfa LevelBallMultiplier.max
+03:6dfd BallDodgedText
+03:6e02 BallMissedText
 03:6e07 BallBrokeFreeText
 03:6e0c BallAppearedCaughtText
 03:6e11 BallAlmostHadItText
@@ -3367,6 +3422,8 @@
 03:7361 IsMonFainted
 03:736f IsMonAtFullHealth
 03:737c LoadCurHPIntoBuffer5
+03:738a LoadHPIntoBuffer5
+03:7393 LoadHPFromBuffer5
 03:739c LoadCurHPToBuffer3
 03:73aa LoadHPFromBuffer3
 03:73b3 LoadMaxHPToBuffer1
@@ -3423,6 +3480,7 @@
 03:7612 RestorePPEffect.loop2
 03:762c RestorePPEffect.ppup
 03:7674 RestorePPEffect.CantUsePPUpOnSketch
+03:7674 RestorePPEffect.pp_is_maxed_out
 03:767c RestorePPEffect.do_ppup
 03:7691 FinishPPRestore
 03:7697 BattleRestorePP
@@ -3465,6 +3523,9 @@
 03:782d CantUseOnEggMessage
 03:7832 IsntTheTimeMessage
 03:7837 WontHaveAnyEffectMessage
+03:783c BelongsToSomeoneElseMessage
+03:7841 CyclingIsntAllowedMessage
+03:7846 CantGetOnYourBikeMessage
 03:7849 CantUseItemMessage
 03:7850 ItemLooksBitterText
 03:7855 ItemCantUseOnEggText
@@ -3477,6 +3538,8 @@
 03:7878 ItemCantGetOnText
 03:787d BallBoxFullText
 03:7882 ItemUsedText
+03:7887 ItemGotOnText
+03:788c ItemGotOffText
 03:7891 ApplyPPUp
 03:78a9 ApplyPPUp.loop
 03:78bb ApplyPPUp.use
@@ -3646,6 +3709,7 @@
 04:4785 UseItem.Field
 04:4794 TossMenu
 04:47cc TossMenu.finish
+04:47cd ResetPocketCursorPositions
 04:47da ResetPocketCursorPositions.balls
 04:47e2 ResetPocketCursorPositions.items
 04:47ea ResetPocketCursorPositions.key
@@ -3750,6 +3814,7 @@
 04:4ded DrawPocketName.col
 04:4dfc DrawPocketName.tilemap
 04:4e38 Pack_GetItemName
+04:4e45 Pack_ClearTilemap
 04:4e51 ClearPocketList
 04:4e5b Pack_InitColors
 04:4e6a ItemsPocketMenuHeader
@@ -3764,6 +3829,7 @@
 04:4ed2 BallsPocketMenuHeader.MenuData
 04:4ee2 PC_Mart_BallsPocketMenuHeader
 04:4eea PC_Mart_BallsPocketMenuHeader.MenuData
+04:4efa PackNoItemText
 04:4eff AskThrowAwayText
 04:4f04 AskQuantityThrowAwayText
 04:4f09 ThrewAwayText
@@ -3773,6 +3839,7 @@
 04:4f1d CantRegisterText
 04:4f22 AskItemMoveText
 04:4f27 PackEmptyText
+04:4f2c YouCantUseItInABattleText
 04:4f31 PackMenuGFX
 04:5431 PackGFX
 04:57f1 _InitializeStartDay
@@ -3797,6 +3864,7 @@
 04:58c9 InitializeStartDay
 04:58d3 CheckPokerusTick
 04:58e6 CheckPokerusTick.done
+04:58e8 SetUnusedTwoDayTimer
 04:58f8 CheckUnusedTwoDayTimer
 04:5917 RestartLuckyNumberCountdown
 04:5920 RestartLuckyNumberCountdown.GetDaysUntilNextFriday
@@ -3808,10 +3876,13 @@
 04:5972 UpdateTimeRemaining
 04:597c UpdateTimeRemaining.ok
 04:5981 UpdateTimeRemaining.set_carry
+04:5985 GetSecondsSinceIfLessThan60
 04:599a GetMinutesSinceIfLessThan60
+04:59aa GetHoursSinceIfLessThan24
 04:59b4 GetDaysSince
 04:59b8 GetTimeElapsed_ExceedsUnitLimit
 04:59bb CalcDaysSince
+04:59be CalcHoursDaysSince
 04:59c2 CalcMinsHoursDaysSince
 04:59c7 CalcSecsMinsHoursDaysSince
 04:59d2 CalcSecsMinsHoursDaysSince.skip
@@ -3823,6 +3894,7 @@
 04:59fa _CalcDaysSince.skip
 04:59ff CopyDayHourMinSecToHL
 04:5a0d CopyDayToHL
+04:5a12 CopyDayHourToHL
 04:5a1a CopyDayHourMinToHL
 04:5a25 CanLearnTMHMMove
 04:5a3b CanLearnTMHMMove.loop
@@ -3928,6 +4000,8 @@
 04:60b4 NameInputLower
 04:6109 BoxNameInputLower
 04:616f NameInputUpper
+04:61c4 BoxNameInputUpper
+04:622a NamingScreenGFX_End
 04:6232 NamingScreenGFX_MiddleLine
 04:623a NamingScreenGFX_UnderLine
 04:6242 _ComposeMailMessage
@@ -3935,6 +4009,7 @@
 04:6267 _ComposeMailMessage.InitBlankMail
 04:62c1 _ComposeMailMessage.MailIcon
 04:6341 _ComposeMailMessage.initwNamingScreenMaxNameLength
+04:6347 _ComposeMailMessage.PleaseWriteAMailString
 04:6351 _ComposeMailMessage.InitCharset
 04:6376 _ComposeMailMessage.PlaceMailCharset
 04:637b _ComposeMailMessage.next
@@ -4201,6 +4276,7 @@
 04:71f7 MonMenu_Fly
 04:720d MonMenu_Fly.Fail
 04:7210 MonMenu_Fly.Error
+04:7213 MonMenu_Fly.NoReload
 04:7216 MonMenu_Flash
 04:7228 MonMenu_Flash.Fail
 04:722b MonMenu_Strength
@@ -4407,11 +4483,13 @@
 04:7ded ContestReturnMons
 04:7df6 ContestReturnMons.loop
 04:7dfe ContestReturnMons.done
+05:4000 StopRTC
 05:4019 StartRTC
 05:4032 GetTimeOfDay
 05:4037 GetTimeOfDay.check
 05:403e GetTimeOfDay.match
 05:4044 TimesOfDay
+05:404e BetaTimesOfDay
 05:4056 StageRTCTimeForSave
 05:406a SaveRTC
 05:4089 StartClock
@@ -4475,6 +4553,9 @@
 05:434b CopyToVram
 05:4367 CopyToVram.skip
 05:4389 CopyToVram.done
+05:438a Function1438a
+05:438d Function1438d
+05:4392 Function14392
 05:4397 GetUsedSprite
 05:43a3 LoadEmote
 05:43c1 Emotes
@@ -4623,18 +4704,23 @@
 05:53a7 _LoadMapPart.loop
 05:53a9 _LoadMapPart.loop2
 05:53b6 _LoadMapPart.carry
+05:53ba Function153ba
 05:53c3 Function153ba.loop
 05:53c5 Function153ba.loop2
 05:53d2 Function153ba.carry1
 05:53d9 Function153ba.carry2
+05:53dd Function153dd
 05:53e6 Function153dd.loop
 05:53e8 Function153dd.loop2
 05:53f5 Function153dd.carry1
 05:53fc Function153dd.carry2
+05:5400 Ureferenced_Function15400
 05:5409 Ureferenced_Function15400.loop
 05:540b Ureferenced_Function15400.loop2
 05:5418 Ureferenced_Function15400.carry1
 05:541f Ureferenced_Function15400.carry2
+05:5423 Function15423
+05:542a Function15423.loop
 05:543a Function15423.carry
 05:5440 EnterMapSpawnPoint
 05:5462 EnterMapSpawnPoint.spawn_n_a
@@ -4661,6 +4747,8 @@
 05:5557 ReadMapSetupScript.go
 05:555e MapSetupCommands
 05:55e5 EnableTextAcceleration
+05:55ea DuplicateActivateMapAnims
+05:55ef DuplicateSuspendMapAnims
 05:55f3 LoadMapObjects
 05:5606 ResetPlayerObjectAction
 05:560c SkipUpdateMapSprites
@@ -4866,6 +4954,7 @@
 05:6108 SellMenu
 05:6111 SellMenu.loop
 05:6123 SellMenu.quit
+05:6128 SellMenu.NothingToSell
 05:6130 SellMenu.NothingToSellText
 05:6135 SellMenu.TryToSellItem
 05:6143 SellMenu.dw
@@ -4875,6 +4964,7 @@
 05:61c3 SellMenu.declined
 05:61c8 MartSellHowManyText
 05:61cd MartSellPriceText
+05:61d2 MartSellPriceText.UnusedString161d2
 05:61d8 MartWelcomeText
 05:61dd MenuHeader_BuySell
 05:61e5 MenuHeader_BuySell.MenuData
@@ -5058,6 +5148,7 @@
 05:6a3b DayCareAskDepositPokemon.OnlyOneMon
 05:6a3f DayCareAskDepositPokemon.OutOfUsableMons
 05:6a43 DayCareAskDepositPokemon.HoldingMail
+05:6a47 DayCareAskDepositPokemon.DaycareDummyText
 05:6a4c DayCare_DepositPokemonText
 05:6a5d DayCare_AskWithdrawBreedMon
 05:6a6f DayCare_AskWithdrawBreedMon.grew_at_least_one_level
@@ -5227,6 +5318,7 @@
 05:782a DayCareMonCompatibilityText.BreedAppearsToCareForText
 05:782f DayCareMonCompatibilityText.BreedFriendlyText
 05:7834 DayCareMonCompatibilityText.BreedShowsInterestText
+05:7839 DayCareMonPrintEmptyString
 05:783d DayCareMonPrintEmptyString.string
 06:4000 TilesetKantoMeta
 06:4800 TilesetKantoColl
@@ -5311,7 +5403,10 @@
 08:4112 RestartClock.pressed_right
 08:411d RestartClock.done_scroll
 08:411f RestartClock.PrintTime
+08:4160 RestartClock.UnusedPlaceCharsFragment
 08:4168 RestartClock.PlaceChars
+08:417c JPHourString
+08:417e JPMinuteString
 08:4181 TilesetTowerGFX
 08:45b1 TilesetTowerMeta
 08:49b1 TilesetTowerColl
@@ -5541,6 +5636,7 @@
 09:4519 ScrollingMenu_InitDisplay
 09:4531 ScrollingMenuJoyAction
 09:4531 ScrollingMenuJoyAction.loop
+09:4568 ScrollingMenuJoyAction.no_zero_no_carry
 09:456c ScrollingMenuJoyAction.a_button
 09:4597 ScrollingMenuJoyAction.b_button
 09:459b ScrollingMenuJoyAction.select
@@ -5622,12 +5718,14 @@
 09:4aab MoneyString
 09:4ab1 CoinString
 09:4ab6 ShowMoney_TerminatorString
+09:4ab8 StartMenu_PrintSafariGameStatus
 09:4af8 StartMenu_PrintSafariGameStatus.slash_500
 09:4afd StartMenu_PrintSafariGameStatus.booru_ko
 09:4b05 StartMenu_DrawBugContestStatusBox
 09:4b10 StartMenu_PrintBugContestStatus
 09:4b47 StartMenu_PrintBugContestStatus.no_contest_mon
 09:4b67 StartMenu_PrintBugContestStatus.skip_level
+09:4b6c StartMenu_PrintBugContestStatus.Balls_JP
 09:4b74 StartMenu_PrintBugContestStatus.CAUGHT
 09:4b7b StartMenu_PrintBugContestStatus.Balls_EN
 09:4b82 StartMenu_PrintBugContestStatus.None
@@ -5678,6 +5776,7 @@
 09:4e44 MenuHeader_0x24e44
 09:4e4c MenuData_0x24e4c
 09:4e62 LoadBattleMenu
+09:4e6a SafariBattleMenu
 09:4e72 ContestBattleMenu
 09:4e78 Function24e78
 09:4e8b BattleMenuHeader
@@ -5730,9 +5829,11 @@
 09:510c TrainerCard_Page1_LoadGFX
 09:512d TrainerCard_Page1_Joypad
 09:5139 TrainerCard_Page1_Joypad.pressed_right_a
+09:513f TrainerCard_Page1_Joypad.KantoBadgeCheck
 09:514a TrainerCard_Page2_LoadGFX
 09:5177 TrainerCard_Page2_Joypad
 09:518b TrainerCard_Page2_Joypad.d_left
+09:5191 TrainerCard_Page2_Joypad.KantoBadgeCheck
 09:519c TrainerCard_Page2_Joypad.Quit
 09:51a2 TrainerCard_Page3_LoadGFX
 09:51cf TrainerCard_Page3_Joypad
@@ -5774,6 +5875,7 @@
 09:5414 TrainerCard_Page2_3_OAMUpdate.facing2
 09:5425 TrainerCard_JohtoBadgesOAM
 09:547f ChrisCardPic
+09:56af CardGFX
 09:570f CardStatusGFX
 09:576f LeaderGFX
 09:5ccf LeaderGFX2
@@ -5945,9 +6047,11 @@
 09:70c8 GetDecorationName_c
 09:70d5 SetSpecificDecorationFlag
 09:70df GetDecorationID
+09:70ec SetAllDecorationFlags
 09:70ef SetAllDecorationFlags.loop
 09:70fd SetAllDecorationFlags.done
 09:70fe DecorationIDs
+09:7129 TrophyIDs
 09:712c DescribeDecoration
 09:7132 DescribeDecoration.JumpTable
 09:713c DecorationDesc_Poster
@@ -6241,6 +6345,7 @@
 0a:49bd Function2884a.LinkAbnormalMonText
 0a:49c2 Function289c2
 0a:49cd Function289cd.loop1
+0a:49cd Function289cd
 0a:49d2 Function289cd.loop2
 0a:49f0 Function289cd.a_button
 0a:4a04 Function28a04
@@ -6397,6 +6502,7 @@
 0a:56b3 LoadTradeBubbleGFX
 0a:56d2 TradeAnim_WaitAnim
 0a:56db TradeAnim_WaitAnim.done
+0a:56df DebugTrade
 0a:56eb DebugTrade.loop1
 0a:56fa DebugTrade.loop2
 0a:5701 DebugTrade.DebugTradeData
@@ -6438,6 +6544,7 @@
 0a:5c42 Function29bf4.vblank
 0a:5c46 Link_CheckCommunicationError
 0a:5c59 Link_CheckCommunicationError.loop
+0a:5c59 Link_CheckCommunicationError.acknowledge_serial
 0a:5c65 Link_CheckCommunicationError.load_true
 0a:5c67 Link_CheckCommunicationError.load_scriptvar
 0a:5c71 TryQuickSave
@@ -6456,6 +6563,7 @@
 0a:5d4e CableClubCheckWhichChris
 0a:5d57 CableClubCheckWhichChris.yes
 0a:5d5b LinkCommsBorderGFX
+0a:5deb Function29deb
 0a:5dff DoMysteryGift
 0a:5e77 DoMysteryGift.skip_checks
 0a:5e97 DoMysteryGift.skip_append_save
@@ -6777,11 +6885,13 @@
 0b:45f4 AskTeachTMHM.TM
 0b:4600 AskTeachTMHM.NotTMHM
 0b:4606 ChooseMonToLearnTMHM
+0b:4615 ChooseMonToLearnTMHM_NoRefresh
 0b:462c ChooseMonToLearnTMHM_NoRefresh.loopback
 0b:465f ChooseMonToLearnTMHM_NoRefresh.egg
 0b:4672 TeachTMHM
 0b:4696 TeachTMHM.compatible
 0b:46bb TeachTMHM.nope
+0b:46bd TeachTMHM.unused
 0b:46c2 TeachTMHM.learned_move
 0b:46c4 BootedTMText
 0b:46c9 BootedHMText
@@ -6810,11 +6920,13 @@
 0b:488a TMHM_DisplayPocketItems.done
 0b:488b TMHMPocket_GetCurrentLineCoord
 0b:4895 TMHMPocket_GetCurrentLineCoord.loop
+0b:489a Function2c89a
 0b:48b3 TMHM_CancelString
 0b:48ba TMHM_GetCurrentPocketPosition
 0b:48c4 TMHM_GetCurrentPocketPosition.loop
 0b:48cf Tutorial_TMHMPocket
 0b:48db TMHM_PlaySFX_ReadText2
+0b:48e4 Function2c8e4
 0b:48f2 Function2c8e4.print
 0b:48f5 Function2c8e4.NoRoomTMHMText
 0b:48fa Function2c8e4.ReceivedTMHMText
@@ -6866,6 +6978,7 @@
 0d:4092 DoMove.DoMoveEffectCommand
 0d:4093 CheckTurn
 0d:4093 BattleCommand_CheckTurn
+0d:40ba CheckPlayerTurn
 0d:40cf CheckPlayerTurn.no_recharge
 0d:40eb CheckPlayerTurn.woke_up
 0d:4108 CheckPlayerTurn.fast_asleep
@@ -6984,6 +7097,7 @@
 0d:499a BattleCommand_ResetTypeMatchup.reset
 0d:499e CheckPlayerMoveTypeMatchups
 0d:49b1 CheckPlayerMoveTypeMatchups.loop
+0d:49d8 CheckPlayerMoveTypeMatchups.not_very_effective
 0d:49e1 CheckPlayerMoveTypeMatchups.neutral
 0d:49e5 CheckPlayerMoveTypeMatchups.super_effective
 0d:49eb CheckPlayerMoveTypeMatchups.next
@@ -7125,6 +7239,7 @@
 0d:542a DittoMetalPowder.done
 0d:542e BattleCommand_DamageStats
 0d:5434 PlayerAttackDamage
+0d:5443 PlayerAttackDamage.physical
 0d:5454 PlayerAttackDamage.physicalcrit
 0d:5467 PlayerAttackDamage.special
 0d:5478 PlayerAttackDamage.specialcrit
@@ -7132,6 +7247,7 @@
 0d:548e PlayerAttackDamage.thickclub
 0d:5491 PlayerAttackDamage.done
 0d:549f TruncateHL_BC
+0d:549f TruncateHL_BC.loop
 0d:54b0 TruncateHL_BC.done_bc
 0d:54bd TruncateHL_BC.done
 0d:54bf CheckDamageStatsCritical
@@ -7143,6 +7259,7 @@
 0d:552a SpeciesItemBoost.CompareSpecies
 0d:5530 SpeciesItemBoost.GetItemHeldEffect
 0d:553d EnemyAttackDamage
+0d:554c EnemyAttackDamage.physical
 0d:555d EnemyAttackDamage.physicalcrit
 0d:5570 EnemyAttackDamage.Special
 0d:5581 EnemyAttackDamage.specialcrit
@@ -7796,6 +7913,7 @@
 0d:7f92 AppearUserLowerSub
 0d:7f99 AppearUserRaiseSub
 0e:4000 AI_SwitchOrTryItem
+0e:402c AI_SwitchOrTryItem.ok
 0e:403b DontSwitch
 0e:403f SwitchOften
 0e:405b SwitchOften.not_10
@@ -7809,13 +7927,16 @@
 0e:40d7 SwitchSometimes.not_10
 0e:40e5 SwitchSometimes.not_20
 0e:40ed SwitchSometimes.switch
+0e:40f9 CheckSubstatusCantRun
 0e:40ff AI_TryItem
 0e:4121 AI_TryItem.loop
 0e:4134 AI_TryItem.has_item
 0e:413f AI_TryItem.callback
+0e:4145 AI_TryItem.used_item
 0e:4161 AI_TryItem.IsHighestLevel
 0e:416d AI_TryItem.next
 0e:4172 AI_TryItem.ok
+0e:4183 AI_TryItem.no
 0e:4185 AI_TryItem.yes
 0e:4187 AI_Items
 0e:41af AI_Items.FullHeal
@@ -7832,6 +7953,7 @@
 0e:4275 AI_Items.HyperPotion
 0e:4283 AI_Items.SuperPotion
 0e:4291 AI_Items.Potion
+0e:429f AI_Items.asm_3829f
 0e:42c6 AI_Items.check_50_percent
 0e:42d5 AI_Items.dont_use
 0e:42d8 AI_Items.check_40_percent
@@ -7864,10 +7986,12 @@
 0e:445d AI_Switch
 0e:4494 AI_Switch.skiptext
 0e:44c2 EnemyWithdrewText
+0e:44c7 EnemyUsedFullHealRed
 0e:44d2 AI_HealStatus
 0e:44e9 EnemyUsedXAccuracy
 0e:44f6 EnemyUsedGuardSpec
 0e:4503 EnemyUsedDireHit
+0e:4510 Function38510
 0e:4533 EnemyUsedXAttack
 0e:4539 EnemyUsedXDefend
 0e:453f EnemyUsedXSpeed
@@ -8010,6 +8134,7 @@
 0e:4cdc AI_Smart_Spite.foundmove
 0e:4cec AI_Smart_Spite.discourage
 0e:4cee AI_Smart_Spite.encourage
+0e:4cf7 CallAIDiscourageMove
 0e:4cfa AI_Smart_DestinyBond
 0e:4cfa AI_Smart_Reversal
 0e:4cfa AI_Smart_SkullBash
@@ -8419,6 +8544,7 @@
 0f:4b28 HandleScreens.LightScreenTick
 0f:4b39 HandleScreens.ReflectTick
 0f:4b46 HandleWeather
+0f:4b64 HandleWeather.player_first
 0f:4b6f HandleWeather.enemy_first
 0f:4b78 HandleWeather.SandstormDamage
 0f:4b8b HandleWeather.ok
@@ -8440,6 +8566,7 @@
 0f:4c53 GetHalfMaxHP.end
 0f:4c54 GetMaxHP
 0f:4c5f GetMaxHP.ok
+0f:4c6a GetHalfHP
 0f:4c75 GetHalfHP.ok
 0f:4c86 CheckUserHasEnoughHP
 0f:4c91 CheckUserHasEnoughHP.ok
@@ -8516,6 +8643,7 @@
 0f:51b1 ForcePlayerMonChoice.send_out_pokemon
 0f:51f7 PlayerPartyMonEntrance
 0f:5224 SetUpBattlePartyMenu_NoLoop
+0f:5227 SetUpBattlePartyMenu
 0f:523a PickPartyMonInBattle.loop
 0f:523a PickPartyMonInBattle
 0f:5262 SwitchMonAlreadyOut
@@ -8812,6 +8940,7 @@
 0f:69f3 UnlockedUnownLetterSets.Set_L_R
 0f:69fb UnlockedUnownLetterSets.Set_S_W
 0f:6a01 UnlockedUnownLetterSets.Set_X_Z
+0f:6a05 SwapBattlerLevels
 0f:6a16 BattleWinSlideInEnemyTrainerFrontpic
 0f:6a31 BattleWinSlideInEnemyTrainerFrontpic.outer_loop
 0f:6a3f BattleWinSlideInEnemyTrainerFrontpic.inner_loop
@@ -8842,6 +8971,7 @@
 0f:6bb5 BoostStat
 0f:6bd8 _LoadBattleFontsHPBar
 0f:6bdf _LoadHPBar
+0f:6be6 LoadHPExpBarGFX
 0f:6c0a EmptyBattleTextbox
 0f:6c10 EmptyBattleTextbox.empty
 0f:6c11 _BattleRandom
@@ -8896,6 +9026,7 @@
 0f:7157 OKComeBackText
 0f:715c GoodComeBackText
 0f:7161 ComeBackText
+0f:7166 HandleSafariAngerEatingStatus
 0f:7173 HandleSafariAngerEatingStatus.angry
 0f:718e HandleSafariAngerEatingStatus.finish
 0f:7196 FillInExpBar
@@ -8925,6 +9056,7 @@
 0f:73c4 InitEnemyTrainer.done
 0f:73c5 InitEnemyWildmon
 0f:7400 InitEnemyWildmon.skip_unown
+0f:741a Function3f41a
 0f:7422 Function3f41a.loop
 0f:7446 Function3f41a.clear
 0f:7448 Function3f41a.clearpp
@@ -8934,6 +9066,7 @@
 0f:74be ExitBattle.loop
 0f:74c6 CheckPayDay
 0f:74e6 CheckPayDay.okay
+0f:74f6 PlayerPickedUpPayDayMoney
 0f:74fb ShowLinkBattleParticipantsAfterEnd
 0f:7525 ShowLinkBattleParticipantsAfterEnd.store_result
 0f:7545 ShowLinkBattleParticipantsAfterEnd.YouWin
@@ -8945,6 +9078,7 @@
 0f:75f0 ReadAndPrintLinkBattleRecord.PrintFormatString
 0f:75f6 ReadAndPrintLinkBattleRecord.next
 0f:7607 ReadAndPrintLinkBattleRecord.PrintBattleRecord
+0f:764f ReadAndPrintLinkBattleRecord.quit
 0f:7650 ReadAndPrintLinkBattleRecord.PrintZerosIfNoSaveFileExists
 0f:7659 ReadAndPrintLinkBattleRecord.Scores
 0f:765b ReadAndPrintLinkBattleRecord.Format
@@ -9104,6 +9238,7 @@
 10:47ea String_SELECT_OPTION
 10:47f2 String_START_SEARCH
 10:47fd Pokedex_DrawDexEntryScreenBG
+10:484f Pokedex_DrawDexEntryScreenBG.Unused
 10:4852 Pokedex_DrawDexEntryScreenBG.Height
 10:485c Pokedex_DrawDexEntryScreenBG.Weight
 10:4867 Pokedex_DrawDexEntryScreenBG.MenuItems
@@ -9301,6 +9436,7 @@
 10:656c ShiftMoves.loop
 10:6573 EvoFlagAction
 10:657d EvolutionAnimation
+10:65fa EvolutionAnimation.AnimationSequence
 10:6600 EvolutionAnimation.loop
 10:661e EvolutionAnimation.return
 10:6646 EvolutionAnimation.cancel_evo
@@ -9625,6 +9761,7 @@
 11:4240 DisplayDexEntry
 11:42a3 DisplayDexEntry.skip_height
 11:42c0 DisplayDexEntry.skip_weight
+11:4324 POKeString
 11:4326 GetDexEntryPointer
 11:433d GetDexEntryPagePointer
 11:4343 GetDexEntryPagePointer.loop1
@@ -9802,6 +9939,8 @@
 14:4479 WhichPKMNString
 14:4483 TeachWhichPKMNString
 14:4493 MoveToWhereString
+14:44a2 ChooseAFemalePKMNString
+14:44b0 ChooseAMalePKMNString
 14:44be ToWhichPKMNString
 14:44cb YouHaveNoPKMNString
 14:44db PrintPartyMenuActionText
@@ -9834,6 +9973,7 @@
 14:46b8 DoPoisonStep.party_loop
 14:46d2 DoPoisonStep.mon_not_fainted
 14:46e8 DoPoisonStep.PoisonFaintText
+14:46ed DoPoisonStep.PoisonWhiteoutText
 14:46f2 SweetScentFromMenu
 14:46fe SweetScentFromMenu.SweetScent
 14:471b SweetScentFromMenu.BugCatchingContest
@@ -9904,6 +10044,7 @@
 14:4a49 Steel
 14:4a4f Dragon
 14:4a56 Dark
+14:4a5b GetGen1TrainerClassName
 14:4a6d GetGen1TrainerClassName.copy
 14:4a75 Gen1TrainerClassNames
 14:4ad3 Gen1TrainerClassNames.Youngster
@@ -9979,6 +10120,7 @@
 14:4f3c LoadPinkPage.LevelUpStr
 14:4f45 LoadPinkPage.ToStr
 14:4f48 LoadPinkPage.PkrsStr
+14:4f4d Function50f4d
 14:4f55 Function50f4d.loop
 14:4f5d StatsScreen_PlaceHorizontalDivider
 14:4f64 StatsScreen_PlaceHorizontalDivider.loop
@@ -10069,11 +10211,13 @@
 14:5780 GetMonFrontpic
 14:5786 UnusedFrontpicPredef
 14:5794 GetFrontpic
+14:57a2 GetFrontpic.is_a_pokemon
 14:57c9 GetFrontpic.unown
 14:57ce GetFrontpic.not_egg
 14:57e3 GetFrontpic.ok
 14:57f5 Load2bppToSRAM
 14:5803 GetMonBackpic
+14:580e GetMonBackpic.is_a_pokemon
 14:5825 GetMonBackpic.ok
 14:5863 FixPicBank
 14:5869 FixPicBank.loop
@@ -10106,6 +10250,7 @@
 14:5ad6 InsertDataIntoBoxOrParty.loop
 14:5afc InsertDataIntoBoxOrParty.insert
 14:5b0b BaseData
+14:7a6b BetaMonPicBanks
 14:7a83 EggPic
 15:4000 GirafarigFrontpic
 15:41dd AzumarillFrontpic
@@ -10695,6 +10840,8 @@
 21:42bd PrinterDataPacket2
 21:42c3 PrinterDataPacket3
 21:42c9 PrinterDataPacket4
+21:42cf PrinterDataPacket5
+21:42d5 PrinterDataPacket6
 21:42db _PrinterReceive
 21:42ea _PrinterReceive.Jumptable
 21:432a Printer_NextInstruction
@@ -10755,6 +10902,7 @@
 21:477b CheckPrinterStatus.error_2
 21:477d CheckPrinterStatus.load_text_index
 21:4781 PlacePrinterStatusString
+21:47b9 Function847b9
 21:47f1 String_PressBToCancel
 21:4803 PrinterStatusStringPointers
 21:4813 PrintPCBox_Page1
@@ -10852,6 +11000,7 @@
 21:66a8 _HallOfFamePC.print_num_hof
 21:66c0 _HallOfFamePC.finish
 21:66d9 _HallOfFamePC.EmptyString
+21:66da _HallOfFamePC.EmptyString2
 21:66db _HallOfFamePC.HOFMaster
 21:66eb _HallOfFamePC.TimeFamer
 21:66fb LoadHOFTeam
@@ -11098,6 +11247,7 @@
 23:4a41 StartTrainerBattle_ZoomToBlack.Copy
 23:4a43 StartTrainerBattle_ZoomToBlack.row
 23:4a45 StartTrainerBattle_ZoomToBlack.col
+23:4a53 Function8ca53
 23:4a5e PlayWhirlpoolSound
 23:4a6b BlindingFlash
 23:4a8e ShakeHeadbuttTree
@@ -11209,6 +11359,7 @@
 23:538d GetSpriteAnimFrame.restart
 23:539b GetSpriteAnimFrame.GetPointer
 23:53b4 GetFrameOAMPointer
+23:53be BrokenGetStdGraphics
 23:53d6 SpriteAnimSeqData
 23:5463 DoAnimFrame
 23:5473 DoAnimFrame.Jumptable
@@ -11427,6 +11578,9 @@
 23:64e1 SpriteAnimOAMData.OAMData_CutTree4
 23:64f2 SpriteAnimOAMData.OAMData_GSIntroLugia1
 23:6533 SpriteAnimOAMData.OAMData_GSIntroLugia2
+23:6574 SpriteAnimOAMData.OAMData_GSIntroLugia3
+23:65b9 SpriteAnimOAMData.OAMData_GSIntroLugia4
+23:65fe SpriteAnimOAMData.OAMData_GSIntroLugia5
 23:6643 SpriteAnimOAMData.OAMData_GSTitleTrail
 23:664c BrokenStdGFXPointers
 23:6670 Sprites_Cosine
@@ -11546,6 +11700,7 @@
 24:4074 CheckPhoneCall
 24:40a4 CheckPhoneCall.no_call
 24:40a6 CheckPhoneCall.timecheck
+24:40ae FarInitCallReceiveDelay
 24:40b5 CheckPhoneContactTimeOfDay
 24:40c7 ChooseRandomCaller
 24:40e4 ChooseRandomCaller.NothingToSample
@@ -11575,6 +11730,7 @@
 24:4249 Script_ReceivePhoneCall
 24:425d Script_SpecialBillCall
 24:4264 Script_SpecialBillCall.LoadBillScript
+24:4269 LoadElmCallScript
 24:4272 LoadElmCallScript.LoadElmScript
 24:4277 RingTwice_StartCall
 24:427a RingTwice_StartCall.Ring
@@ -11585,6 +11741,7 @@
 24:42d7 Phone_NoSignal
 24:42df HangUp
 24:42e5 Phone_CallEnd
+24:430a Function9030a
 24:4311 HangUp_Beep
 24:431e PhoneClickText
 24:4323 HangUp_BoopOn
@@ -11615,6 +11772,7 @@
 24:462a PhoneOutOfAreaText
 24:462f PhoneScript_JustTalkToThem
 24:4633 PhoneJustTalkToThemText
+24:4638 PhoneThankYouTextScript
 24:463c PhoneThankYouText
 24:4641 InitClock
 24:46b2 InitClock.loop
@@ -11631,6 +11789,7 @@
 24:478f SetHour.okay
 24:47a5 SetHour.Confirm
 24:47a7 DisplayHourOClock
+24:47ba Function907ba
 24:47d9 SetMinutes
 24:47f1 SetMinutes.d_down
 24:47fa SetMinutes.decrease
@@ -11866,6 +12025,7 @@
 24:56e3 RadioChannels.ok
 24:56e6 RadioChannels.NoSignal
 24:56ea RadioChannels.InJohto
+24:56f5 RadioChannels.kanto
 24:56f7 RadioChannels.johto
 24:56f9 LoadStation_OaksPokemonTalk
 24:570c LoadStation_PokedexShow
@@ -11877,6 +12037,7 @@
 24:578a LoadStation_RocketRadio
 24:579f LoadStation_PokeFluteRadio
 24:57b4 LoadStation_EvolutionRadio
+24:57c9 DummyLoadStation
 24:57ca RadioMusicRestartDE
 24:57de RadioMusicRestartPokemonChannel
 24:57f2 Radio_BackUpFarCallParams
@@ -11935,6 +12096,7 @@
 24:5bfd ret_91bfd
 24:5bfe FlyMap
 24:5c18 FlyMap.CheckRegion
+24:5c1c FlyMap.JohtoFlyMap
 24:5c35 FlyMap.KantoFlyMap
 24:5c56 FlyMap.NoKanto
 24:5c67 FlyMap.MapHud
@@ -11958,6 +12120,7 @@
 24:5df3 Pokedex_GetArea.clear_oam
 24:5dfe Pokedex_GetArea.PlayerOAM
 24:5e0b Pokedex_GetArea.CheckPlayerLocation
+24:5e16 Pokedex_GetArea.kanto
 24:5e1e Pokedex_GetArea.johto
 24:5e24 Pokedex_GetArea.ok
 24:5e26 Pokedex_GetArea.clear
@@ -11982,6 +12145,7 @@
 24:60bb KantoMap
 24:6224 PokedexNestIconGFX
 24:6234 FlyMapLabelBorderGFX
+24:6264 Function92264
 24:62c1 Function92264.loop
 24:62e2 Function92264.pressedB
 24:62e6 Function92264.pressedA
@@ -12023,6 +12187,7 @@
 24:6621 MtMortarName
 24:662b DragonsDenName
 24:6638 IcePathName
+24:6641 NotApplicableName
 24:6645 PalletTownName
 24:6651 ViridianCityName
 24:665f PewterCityName
@@ -12038,7 +12203,11 @@
 24:66e9 MtMoonName
 24:66f1 RockTunnelName
 24:66fd LavRadioTowerName
+24:670d SilphCoName
+24:6717 SafariZoneName
 24:6723 SeafoamIslandsName
+24:6733 PokemonMansionName
+24:6740 CeruleanCaveName
 24:674e Route1Name
 24:6756 Route2Name
 24:675e Route3Name
@@ -12089,6 +12258,7 @@
 24:68ed IlexForestName
 24:68f9 BurnedTowerName
 24:6906 FastShipName
+24:6910 ViridianForestName
 24:6920 DiglettsCaveName
 24:692e TohjoFallsName
 24:693a UndergroundName
@@ -12159,6 +12329,8 @@
 24:6d3c SlotsLoop.Stubbed_Function92d3c
 24:6d53 SlotsLoop.matching_sevens
 24:6d61 SlotsLoop.PrintCoinsAndPayout
+24:6d7a Function92d7a
+24:6d95 Function92d95
 24:6da2 Function92d95.loop
 24:6dad SlotsJumptable
 24:6dbc SlotsJumptable.Jumptable
@@ -12211,6 +12383,7 @@
 24:70ea Slots_UpdateReelPositionAndOAM.load
 24:70ec Slots_UpdateReelPositionAndOAM.LoadOAM
 24:70f3 Slots_UpdateReelPositionAndOAM.loop
+24:7127 Function93127
 24:7137 Function93127.Unknown_93137
 24:713d ReelActionJumptable
 24:714d ReelActionJumptable.Jumptable
@@ -12760,6 +12933,13 @@
 25:6614 DisableEvents
 25:6619 EnableEvents
 25:661f CheckBit5_ScriptFlags3
+25:6625 DisableWarpsConnxns
+25:662b DisableCoordEvents
+25:6631 DisableStepCount
+25:6637 DisableWildEncounters
+25:663d EnableWarpsConnxns
+25:6643 EnableCoordEvents
+25:6649 EnableStepCount
 25:664f EnableWildEncounters
 25:6655 CheckWarpConnxnScriptFlag
 25:665b CheckCoordEventScriptFlag
@@ -12769,6 +12949,7 @@
 25:6683 EnterMap
 25:669f EnterMap.dont_enable
 25:66a9 EnterMap.dontresetpoison
+25:66b2 UnusedWait30Frames
 25:66b8 HandleMap
 25:66da MapEvents
 25:66e2 MapEvents.jumps
@@ -12800,6 +12981,7 @@
 25:67f4 CheckWildEncounterCooldown
 25:67fe SetUpFiveStepWildEncounterCooldown
 25:6804 ret_96804
+25:6805 SetMinTwoStepWildEncounterCooldown
 25:6811 Dummy_CheckScriptFlags3Bit5
 25:6819 RunSceneScript
 25:6865 RunSceneScript.nope
@@ -12807,6 +12989,7 @@
 25:687e CheckTimeEvents.do_daily
 25:6897 CheckTimeEvents.nothing
 25:6899 CheckTimeEvents.end_bug_contest
+25:68a3 CheckTimeEvents.unused
 25:68a7 OWPlayerInput
 25:68c0 OWPlayerInput.NoAction
 25:68c2 OWPlayerInput.Action
@@ -12865,6 +13048,7 @@
 25:6afc CountStep.done
 25:6afe CountStep.doscript
 25:6b02 CountStep.hatch
+25:6b06 CountStep.whiteout
 25:6b0a DoRepelStep
 25:6b1e DoPlayerEvent
 25:6b3f PlayerEventScriptPointers
@@ -13058,6 +13242,7 @@
 25:7547 Script_getitemname
 25:7550 Script_getitemname.ok
 25:755b Script_getcurlandmarkname
+25:7566 ConvertLandmarkToText
 25:7573 Script_gettrainername
 25:7583 Script_getmoney
 25:7598 Script_getcoins
@@ -13119,6 +13304,7 @@
 25:791d Script_changeblock
 25:7934 Script_reloadmappart
 25:7944 Script_warpcheck
+25:794f Script_enableevents
 25:7956 Script_newloadmap
 25:7964 Script_reloadandreturn
 25:796a Script_opentext
@@ -13181,6 +13367,7 @@
 25:7c39 HandleCmdQueue
 25:7c3d HandleCmdQueue.loop
 25:7c4a HandleCmdQueue.skip
+25:7c56 GetNthCmdQueueEntry
 25:7c62 WriteCmdQueue
 25:7c76 WriteCmdQueue.GetNextEmptyEntry
 25:7c7e WriteCmdQueue.loop
@@ -13194,6 +13381,7 @@
 25:7cc5 HandleQueuedCommand.Jumptable
 25:7cd4 CmdQueueAnonymousJumptable
 25:7cdc CmdQueueAnonJT_Increment
+25:7ce2 CmdQueueAnonJT_Decrement
 25:7ce8 CmdQueue_Null
 25:7ce9 CmdQueue_Type1
 25:7ced CmdQueue_Type4
@@ -13218,13 +13406,18 @@
 2a:4276 Route36_Blocks
 2a:4384 Route44_Blocks
 2a:4492 Route28_Blocks
+2a:4546 BetaPlayersHouse2F_Blocks
 2a:4552 CeladonCity_Blocks
 2a:46ba SaffronCity_Blocks
 2a:4822 Route2_Blocks
 2a:4930 ElmsHouse_Blocks
+2a:4940 BetaSproutTower1_Blocks
 2a:499a Route11_Blocks
+2a:4a4e BetaSproutTower5_Blocks
 2a:4aa8 Route15_Blocks
+2a:4b5c BetaSproutTower9_Blocks
 2a:4b80 Route19_Blocks
+2a:4c34 BetaBlackthornCity_Blocks
 2a:4d9c Route10South_Blocks
 2a:4df6 CinnabarPokecenter2FBeta_Blocks
 2a:4df6 CeruleanPokecenter2FBeta_Blocks
@@ -13246,10 +13439,16 @@
 2a:5497 PalletTown_Blocks
 2a:54f1 Route25_Blocks
 2a:55ff Route24_Blocks
+2a:5659 BetaVioletCity_Blocks
 2a:57c1 Route3_Blocks
 2a:58cf PewterCity_Blocks
+2a:5a37 BetaSilverCaveOutside_Blocks
+2a:5b9f BetaSproutTower2_Blocks
 2a:5bf9 Route12_Blocks
+2a:5d07 BetaGoldenrodCity_Blocks
 2a:5e6f Route20_Blocks
+2a:5f7d BetaSproutTower6_Blocks
+2a:5fd7 BetaPokecenter_Blocks
 2a:5ff7 Route30_Blocks
 2a:6105 Route26_Blocks
 2a:6321 Route42_Blocks
@@ -13257,6 +13456,7 @@
 2a:653d Route46_Blocks
 2a:65f1 FuchsiaCity_Blocks
 2a:6759 Route38_Blocks
+2a:680d BetaCianwoodCity_Blocks
 2a:6867 OlivineTimsHouse_Blocks
 2a:6867 OlivineHouseBeta_Blocks
 2a:6867 OlivinePunishmentSpeechHouse_Blocks
@@ -13306,6 +13506,7 @@
 2a:6867 GuideGentsHouse_Blocks
 2a:6867 CherrygroveEvolutionSpeechHouse_Blocks
 2a:6867 Route30BerryHouse_Blocks
+2a:6867 PokeSeersHouse_Blocks
 2a:6877 SafariZoneFuchsiaGateBeta_Blocks
 2a:6877 Route19FuchsiaGate_Blocks
 2a:6877 Route43MahoganyGate_Blocks
@@ -13317,13 +13518,19 @@
 2a:6877 Route2Gate_Blocks
 2a:6877 Route29Route46Gate_Blocks
 2a:6877 Route5SaffronGate_Blocks
+2a:6877 Route40BattleTowerGate_Blocks
+2a:688b BetaEcruteakCity_Blocks
+2a:69f3 BetaCherrygroveCity_Blocks
 2a:6a4d CinnabarIsland_Blocks
 2a:6aa7 Route4_Blocks
 2a:6b5b Route8_Blocks
+2a:6c0f BetaSproutTower3_Blocks
 2a:6c69 ViridianCity_Blocks
 2a:6dd1 Route13_Blocks
 2a:6edf Route21_Blocks
+2a:6f93 BetaSproutTower7_Blocks
 2a:6fed Route17_Blocks
+2a:71af BetaMahoganyTown_Blocks
 2a:7209 Route31_Blocks
 2a:72bd Route27_Blocks
 2a:7425 Route35_Blocks
@@ -13340,7 +13547,10 @@
 2a:76af Route7SaffronGate_Blocks
 2a:76af Route17Route18Gate_Blocks
 2a:76af Route31VioletGate_Blocks
+2a:76c3 BetaAzaleaTown_Blocks
 2a:782b VermilionCity_Blocks
+2a:7993 BetaOlivineCity_Blocks
+2a:7afb BetaNewBarkTown_Blocks
 2a:7b55 ElmsLab_Blocks
 2a:7b73 CeruleanCity_Blocks
 2a:7cdb Route1_Blocks
@@ -13348,6 +13558,7 @@
 2a:7de9 Route9_Blocks
 2a:7ef7 Route22_Blocks
 2b:4000 Route14_Blocks
+2b:40b4 BetaSproutTower8_Blocks
 2b:410e OlivineMart_Blocks
 2b:410e EcruteakMart_Blocks
 2b:410e BlackthornMart_Blocks
@@ -13362,6 +13573,7 @@
 2b:410e SaffronMart_Blocks
 2b:410e CherrygroveMart_Blocks
 2b:4126 Route10North_Blocks
+2b:4180 BetaLakeOfRage_Blocks
 2b:42e8 OlivinePokecenter1F_Blocks
 2b:42e8 MahoganyPokecenter1F_Blocks
 2b:42e8 EcruteakPokecenter1F_Blocks
@@ -13383,7 +13595,13 @@
 2b:42e8 ViridianPokecenter1F_Blocks
 2b:42e8 SaffronPokecenter1F_Blocks
 2b:42e8 CherrygrovePokecenter1F_Blocks
+2b:42fc BetaPewterMuseumOfScience1F_Blocks
+2b:4324 BetaPewterMuseumOfScience2F_Blocks
 2b:4340 EarlsPokemonAcademy_Blocks
+2b:4360 BetaCinnabarPokemonLabHallway_Blocks
+2b:4384 BetaCinnabarPokemonLabRoom1_Blocks
+2b:4394 BetaCinnabarPokemonLabRoom2_Blocks
+2b:43a4 BetaCinnabarPokemonLabRoom3_Blocks
 2b:43b4 GoldenrodDeptStore1F_Blocks
 2b:43b4 CeladonDeptStore1F_Blocks
 2b:43d4 GoldenrodDeptStore2F_Blocks
@@ -13402,6 +13620,7 @@
 2b:448c CeladonMansion2F_Blocks
 2b:44a0 CeladonMansion3F_Blocks
 2b:44b4 CeladonMansionRoof_Blocks
+2b:44c8 BetaHouse_Blocks
 2b:44d8 CeladonGameCorner_Blocks
 2b:451e CeladonGameCornerPrizeRoom_Blocks
 2b:4527 Colosseum_Blocks
@@ -13411,6 +13630,7 @@
 2b:454f EcruteakItemfinderHouse_Blocks
 2b:454f VioletNicknameSpeechHouse_Blocks
 2b:454f VioletKylesHouse_Blocks
+2b:455f BetaUnionCave_Blocks
 2b:45b9 UnionCaveB1F_Blocks
 2b:466d UnionCaveB2F_Blocks
 2b:4721 UnionCave1F_Blocks
@@ -13418,17 +13638,22 @@
 2b:47d5 NationalParkBugContest_Blocks
 2b:49f1 Route6UndergroundPathEntrance_Blocks
 2b:49f1 Route5UndergroundPathEntrance_Blocks
+2b:4a01 BetaCapsuleHouse_Blocks
 2b:4a11 KurtsHouse_Blocks
 2b:4a31 GoldenrodMagnetTrainStation_Blocks
 2b:4a8b RuinsOfAlphOutside_Blocks
+2b:4b3f BetaRuinsOfAlphUnsolvedPuzzleRoom_Blocks
 2b:4b53 RuinsOfAlphHoOhChamber_Blocks
 2b:4b53 RuinsOfAlphKabutoChamber_Blocks
 2b:4b53 RuinsOfAlphOmanyteChamber_Blocks
 2b:4b53 RuinsOfAlphAerodactylChamber_Blocks
 2b:4b67 RuinsOfAlphInnerChamber_Blocks
 2b:4bf3 SproutTower1F_Blocks
+2b:4c43 BetaSproutTowerCutOut1_Blocks
 2b:4c4d SproutTower2F_Blocks
+2b:4c9d BetaSproutTowerCutOut2_Blocks
 2b:4ca7 SproutTower3F_Blocks
+2b:4cf7 BetaSproutTowerCutOut3_Blocks
 2b:4d01 RadioTower1F_Blocks
 2b:4d25 RadioTower2F_Blocks
 2b:4d49 RadioTower3F_Blocks
@@ -13454,6 +13679,7 @@
 2b:5db4 GoldenrodUndergroundSwitchRoomEntrances_Blocks
 2b:5ec2 GoldenrodDeptStoreB1F_Blocks
 2b:5f1c GoldenrodUndergroundWarehouse_Blocks
+2b:5f76 BetaElevator_Blocks
 2b:5f8f TinTower1F_Blocks
 2b:5fe9 TinTower2F_Blocks
 2b:6043 TinTower3F_Blocks
@@ -13466,6 +13692,7 @@
 2b:62b9 TinTowerRoof_Blocks
 2b:6313 BurnedTower1F_Blocks
 2b:636d BurnedTowerB1F_Blocks
+2b:63c7 BetaCaveTestMap_Blocks
 2b:64d5 MountMortar1FOutside_Blocks
 2b:663d MountMortar1FInside_Blocks
 2b:6859 MountMortar2FInside_Blocks
@@ -13486,11 +13713,16 @@
 2b:71d7 SilverCaveRoom1_Blocks
 2b:728b SilverCaveRoom2_Blocks
 2b:7399 SilverCaveRoom3_Blocks
+2b:744d BetaRocketHideoutB2F_Blocks
+2b:755b BetaRocketHideoutB1F_Blocks
+2b:7669 BetaRocketHideout1F_Blocks
+2b:7777 BetaRocketHideoutB3F_Blocks
 2b:7885 MahoganyMart1F_Blocks
 2b:7885 MountMoonGiftShop_Blocks
 2b:7895 TeamRocketBaseB1F_Blocks
 2b:791c TeamRocketBaseB2F_Blocks
 2b:79a3 TeamRocketBaseB3F_Blocks
+2b:7a2a BetaRoute23_Blocks
 2b:7a84 IndigoPlateauPokecenter1F_Blocks
 2b:7ac3 WillsRoom_Blocks
 2b:7af0 KogasRoom_Blocks
@@ -13502,6 +13734,7 @@
 2b:7c21 EcruteakGym_Blocks
 2b:7c4e MahoganyGym_Blocks
 2b:7c7b OlivineGym_Blocks
+2b:7ca3 BetaUnknownGym_Blocks
 2b:7cb7 CianwoodGym_Blocks
 2b:7ce4 BlackthornGym1F_Blocks
 2b:7d11 BlackthornGym2F_Blocks
@@ -13602,6 +13835,7 @@
 2e:6545 NoTreeMon
 2e:654d GetTreeScore
 2e:6564 GetTreeScore.ok
+2e:6568 GetTreeScore.bad
 2e:656a GetTreeScore.good
 2e:656d GetTreeScore.rare
 2e:6570 GetTreeScore.CoordScore
@@ -13614,6 +13848,7 @@
 2e:666b PrintRadioLine
 2e:668b PrintRadioLine.print
 2e:668e PrintRadioLine.skip
+2e:6699 ReplacePeriodsWithSpaces
 2e:669c ReplacePeriodsWithSpaces.loop
 2e:66a3 ReplacePeriodsWithSpaces.next
 2e:66a9 RadioScroll
@@ -13856,9 +14091,11 @@
 2e:747a MailGFX_PlaceMessage
 2e:74c2 MailGFX_PlaceMessage.place_author
 2e:74c5 Functionbb4c5.loop
+2e:74c5 Functionbb4c5
 2e:74cf DrawMailBorder
 2e:74f2 DrawMailBorder2
 2e:7515 Mail_Place14TileAlternatingRow
+2e:751a Mail_Place16TileAlternatingRow
 2e:751f Mail_Place18TileAlternatingRow
 2e:7522 Mail_PlaceAlternatingRow
 2e:7522 Mail_PlaceAlternatingRow.loop
@@ -13866,6 +14103,7 @@
 2e:7531 Mail_Place16TileAlternatingColumn
 2e:7534 Mail_PlaceAlternatingColumn
 2e:7534 Mail_PlaceAlternatingColumn.loop
+2e:7543 Mail_Draw7TileRow
 2e:7547 Mail_Draw13TileRow
 2e:754b Mail_Draw16TileRow
 2e:754f Mail_DrawTopBottomBorder
@@ -13902,6 +14140,8 @@
 2e:76fd MailDittoGFX
 2e:772d MailMewGFX
 2e:77bd MailDragoniteGFX
+2e:7845 MailSentretGFX
+2e:7865 MailUnusedGrassGFX
 2e:7875 PortraitMailLargePokeballGFX
 2e:7895 MailOddishGFX
 2e:78b5 SurfLiteBlueMailLargeShapesGFX
@@ -14089,6 +14329,7 @@
 32:41a3 BattleBGEffect_08
 32:41ad BattleBGEffect_08.Pals
 32:41b1 BattleBGEffect_HideMon
+32:41b4 BattleBGEffect_HideMon.anon_dw
 32:41be BattleBGEffect_HideMon.zero
 32:41cf BattleBGEffect_HideMon.player_side
 32:41d5 BattleBGEffect_HideMon.got_pointer
@@ -14100,6 +14341,7 @@
 32:4207 BattleBGEffect_ShowMon.PlayerData
 32:420b BattleBGEffect_ShowMon.EnemyData
 32:420f BattleBGEffect_BattlerObj_1Row
+32:4212 BattleBGEffect_BattlerObj_1Row.anon_dw
 32:421e BattleBGEffect_BattlerObj_1Row.zero
 32:422b BattleBGEffect_BattlerObj_1Row.not_flying_digging
 32:423d BattleBGEffect_BattlerObj_1Row.player_side
@@ -14109,6 +14351,7 @@
 32:426c BattleBGEffect_BattlerObj_1Row.okay2
 32:4275 BattleBGEffect_BattlerObj_1Row.five
 32:427c BattleBGEffect_BattlerObj_2Row
+32:427f BattleBGEffect_BattlerObj_2Row.anon_dw
 32:428b BattleBGEffect_BattlerObj_2Row.zero
 32:4298 BattleBGEffect_BattlerObj_2Row.not_flying_digging
 32:42aa BattleBGEffect_BattlerObj_2Row.player_side
@@ -14119,6 +14362,7 @@
 32:42e2 BattleBGEffect_BattlerObj_2Row.five
 32:42e9 _QueueBattleAnimation
 32:42f0 BattleBGEffect_26
+32:42f3 BattleBGEffect_26.anon_dw
 32:42fd BattleBGEffect_26.zero
 32:4310 BattleBGEffect_26.user
 32:4312 BattleBGEffect_26.okay
@@ -14142,6 +14386,7 @@
 32:43bc BattleBGEffect_ReturnMon.PlayerData
 32:43d2 BattleBGEffect_ReturnMon.EnemyData
 32:43e8 BattleBGEffect_RunPicResizeScript
+32:43eb BattleBGEffect_RunPicResizeScript.anon_dw
 32:43f5 BattleBGEffect_RunPicResizeScript.zero
 32:4418 BattleBGEffect_RunPicResizeScript.skip
 32:4420 BattleBGEffect_RunPicResizeScript.clear
@@ -14160,6 +14405,7 @@
 32:451e BattleBGEffect_RunPicResizeScript.FiveByFive
 32:4537 BattleBGEffect_RunPicResizeScript.ThreeByThree
 32:4540 BattleBGEffect_Surf
+32:4543 BattleBGEffect_Surf.anon_dw
 32:4549 BattleBGEffect_Surf.zero
 32:4552 BattleBGEffect_Surf.one
 32:455c BattleBGEffect_Surf.two
@@ -14169,6 +14415,7 @@
 32:4586 BattleBGEffect_Surf.load_zero
 32:4587 BattleBGEffect_Surf.okay
 32:4594 BattleBGEffect_Whirlpool
+32:4597 BattleBGEffect_Whirlpool.anon_dw
 32:459d BattleBGEffect_Whirlpool.zero
 32:45b5 BattleBGEffect_Whirlpool.one
 32:45b9 BattleBGEffect_Whirlpool.two
@@ -14177,18 +14424,22 @@
 32:45f7 BattleBGEffect_30.done
 32:45fe BattleBGEffect_31
 32:4602 BattleBGEffect_Psychic
+32:4605 BattleBGEffect_Psychic.anon_dw
 32:460b BattleBGEffect_Psychic.zero
 32:4629 BattleBGEffect_Psychic.one
 32:4636 BattleBGEffect_Psychic.two
 32:463a BattleBGEffect_Teleport
+32:463d BattleBGEffect_Teleport.anon_dw
 32:4643 BattleBGEffect_Teleport.zero
 32:4655 BattleBGEffect_Teleport.one
 32:4659 BattleBGEffect_Teleport.two
 32:465d BattleBGEffect_NightShade
+32:4660 BattleBGEffect_NightShade.anon_dw
 32:4666 BattleBGEffect_NightShade.zero
 32:467c BattleBGEffect_NightShade.one
 32:4680 BattleBGEffect_NightShade.two
 32:4684 BattleBGEffect_DoubleTeam
+32:4687 BattleBGEffect_DoubleTeam.anon_dw
 32:4693 BattleBGEffect_DoubleTeam.zero
 32:46aa BattleBGEffect_DoubleTeam.one
 32:46b8 BattleBGEffect_DoubleTeam.three
@@ -14199,16 +14450,19 @@
 32:46f5 BattleBGEffect_DoubleTeam.loop
 32:4700 BattleBGEffect_DoubleTeam.five
 32:4704 BattleBGEffect_AcidArmor
+32:4707 BattleBGEffect_AcidArmor.anon_dw
 32:470d BattleBGEffect_AcidArmor.zero
 32:472d BattleBGEffect_AcidArmor.one
 32:4735 BattleBGEffect_AcidArmor.loop
 32:474d BattleBGEffect_AcidArmor.okay
 32:4758 BattleBGEffect_AcidArmor.two
 32:475c BattleBGEffect_Withdraw
+32:475f BattleBGEffect_Withdraw.anon_dw
 32:4765 BattleBGEffect_Withdraw.zero
 32:477c BattleBGEffect_Withdraw.one
 32:479e BattleBGEffect_Withdraw.two
 32:47a2 BattleBGEffect_Dig
+32:47a5 BattleBGEffect_Dig.anon_dw
 32:47ad BattleBGEffect_Dig.zero
 32:47ca BattleBGEffect_Dig.one
 32:47d4 BattleBGEffect_Dig.next
@@ -14216,6 +14470,7 @@
 32:47f1 BattleBGEffect_Dig.skip
 32:47fc BattleBGEffect_Dig.three
 32:4800 BattleBGEffect_Tackle
+32:4803 BattleBGEffect_Tackle.anon_dw
 32:480b BattleBGEffect_Tackle.zero
 32:482a BattleBGEffect_Tackle.player_side
 32:482c BattleBGEffect_Tackle.okay
@@ -14233,31 +14488,38 @@
 32:48a9 Functionc886e.skip3
 32:48ab Functionc886e.loop
 32:48b0 BattleBGEffect_2c
+32:48b3 BattleBGEffect_2c.anon_dw
 32:48bb BattleBGEffect_2c.three
 32:48bf BGEffect2d_2f_zero
 32:48de BGEffect2d_2f_zero.player_turn
 32:48e0 BGEffect2d_2f_zero.okay
 32:48e2 BattleBGEffect_2e
+32:48e5 BattleBGEffect_2e.anon_dw
 32:48ef BattleBGEffect_2e.four
 32:48f2 BattleBGEffect_2e.two
 32:48f3 BattleBGEffect_25
+32:48f6 BattleBGEffect_25.anon_dw
 32:48fc BattleBGEffect_25.zero
 32:4913 BattleBGEffect_25.one
 32:4929 BattleBGEffect_25.two
 32:492d BattleBGEffect_2b
+32:4930 BattleBGEffect_2b.anon_dw
 32:4936 BattleBGEffect_2b.zero
 32:494e BattleBGEffect_2b.one
 32:497a BattleBGEffect_2b.two
 32:497e BattleBGEffect_27
+32:4981 BattleBGEffect_27.anon_dw
 32:4987 BattleBGEffect_27.zero
 32:4993 BattleBGEffect_27.one
 32:49a3 BattleBGEffect_27.two
 32:49b3 BattleBGEffect_27.reset
 32:49b7 BattleBGEffect_BounceDown
+32:49ba BattleBGEffect_BounceDown.anon_dw
 32:49c0 BattleBGEffect_BounceDown.zero
 32:49dd BattleBGEffect_BounceDown.one
 32:49ff BattleBGEffect_BounceDown.two
 32:4a03 BattleBGEffect_29
+32:4a06 BattleBGEffect_29.anon_dw
 32:4a12 BattleBGEffect_29.zero
 32:4a29 BattleBGEffect_29.loop
 32:4a32 BattleBGEffect_29.done
@@ -14273,10 +14535,12 @@
 32:4a79 BattleBGEffect_29.GetLYOverride
 32:4a90 BattleBGEffect_29.data
 32:4a95 BattleBGEffect_2a
+32:4a98 BattleBGEffect_2a.anon_dw
 32:4a9c BattleBGEffect_2a.zero
 32:4aae BattleBGEffect_2a.one
 32:4ac5 BattleBGEffect_2a.done
 32:4ac9 BattleBGEffect_1c
+32:4ad1 BattleBGEffect_1c.anon_dw
 32:4ad7 BattleBGEffect_1c.zero
 32:4aeb BattleBGEffect_1c.one
 32:4b16 BattleBGEffect_1c.player
@@ -14312,10 +14576,12 @@
 32:4c1e BattleBGEffect_1e
 32:4c25 BattleBGEffect_1e.Pals
 32:4c2a BattleBGEffect_VibrateMon
+32:4c2d BattleBGEffect_VibrateMon.anon_dw
 32:4c31 BattleBGEffect_VibrateMon.zero
 32:4c4e BattleBGEffect_VibrateMon.one
 32:4c67 BattleBGEffect_VibrateMon.finish
 32:4c6b BattleBGEffect_WobbleMon
+32:4c6e BattleBGEffect_WobbleMon.anon_dw
 32:4c74 BattleBGEffect_WobbleMon.zero
 32:4c8c BattleBGEffect_WobbleMon.one
 32:4ca6 BattleBGEffect_WobbleMon.two
@@ -14496,6 +14762,7 @@
 32:5b35 BattleAnim_Thunder
 32:5b58 BattleAnim_RazorWind
 32:5b63 BattleAnim_RazorWind.loop
+32:5b9b BattleAnim_Sonicboom_JP
 32:5b9e BattleAnim_Sonicboom_JP.loop
 32:5bd1 BattleAnim_Gust
 32:5bd1 BattleAnim_Sonicboom
@@ -14867,6 +15134,7 @@
 33:41df BattleAnimDelayFrame.wait
 33:41e6 ClearActorHud
 33:41f5 ClearActorHud.player
+33:41ff Functioncc1ff
 33:421c BattleAnim_ClearOAM
 33:4228 BattleAnim_ClearOAM.loop
 33:4233 BattleAnim_ClearOAM.delete
@@ -15006,6 +15274,7 @@
 33:4a58 InitBattleAnimBuffer.check_kinesis_softboiled_milkdrink
 33:4a6f InitBattleAnimBuffer.kinesis
 33:4a6f InitBattleAnimBuffer.softboiled
+33:4a6f InitBattleAnimBuffer.milk_drink
 33:4a74 InitBattleAnimBuffer.no_sub
 33:4a75 InitBattleAnimBuffer.done
 33:4a80 GetBattleAnimTileOffset
@@ -15018,6 +15287,7 @@
 33:4f0d DoBattleAnimFrame
 33:4f1d DoBattleAnimFrame.Jumptable
 33:4fbd BattleAnimFunction_Null
+33:4fc0 BattleAnimFunction_Null.anon_dw
 33:4fc4 BattleAnimFunction_Null.one
 33:4fc7 BattleAnimFunction_Null.zero
 33:4fc8 BattleAnimFunction_ThrowFromPlayerToEnemyAndDisappear
@@ -15025,15 +15295,18 @@
 33:4ff5 BattleAnimFunction_04
 33:5002 BattleAnimFunction_04.asm_cd002
 33:5032 BattleAnimFunction_03
+33:5035 BattleAnimFunction_03.anon_dw
 33:5039 BattleAnimFunction_03.zero
 33:5048 BattleAnimFunction_03.asm_cd048
 33:5055 BattleAnimFunction_03.one
 33:5079 BattleAnimFunction_01
+33:507c BattleAnimFunction_01.anon_dw
 33:5080 BattleAnimFunction_01.one
 33:5084 BattleAnimFunction_01.zero
 33:5095 BattleAnimFunction_02
 33:50a7 BattleAnimFunction_02.asm_cd0a7
 33:50ab BattleAnimFunction_PokeBall
+33:50ae BattleAnimFunction_PokeBall.anon_dw
 33:50c6 BattleAnimFunction_PokeBall.zero
 33:50cd BattleAnimFunction_PokeBall.one
 33:50e5 BattleAnimFunction_PokeBall.three
@@ -15047,6 +15320,7 @@
 33:513d BattleAnimFunction_PokeBall.ten
 33:515d BattleAnimFunction_PokeBall.eleven
 33:5161 BattleAnimFunction_PokeBallBlocked
+33:5164 BattleAnimFunction_PokeBallBlocked.anon_dw
 33:516a BattleAnimFunction_PokeBallBlocked.zero
 33:5171 BattleAnimFunction_PokeBallBlocked.one
 33:517e BattleAnimFunction_PokeBallBlocked.next
@@ -15057,16 +15331,19 @@
 33:51aa GetBallAnimPal.load
 33:51b1 BallColors
 33:51c9 BattleAnimFunction_10
+33:51cc BattleAnimFunction_10.anon_dw
 33:51d6 BattleAnimFunction_10.zero
 33:51e5 BattleAnimFunction_10.one
 33:51f6 BattleAnimFunction_10.two
 33:51fa BattleAnimFunction_10.three
 33:5202 BattleAnimFunction_10.four
 33:5203 BattleAnimFunction_07
+33:5206 BattleAnimFunction_07.anon_dw
 33:520a BattleAnimFunction_07.zero
 33:5216 BattleAnimFunction_07.one
 33:5247 BattleAnimFunction_07.done
 33:524b BattleAnimFunction_08
+33:524e BattleAnimFunction_08.anon_dw
 33:5256 BattleAnimFunction_08.zero
 33:5263 BattleAnimFunction_08.next
 33:5266 BattleAnimFunction_08.one
@@ -15078,11 +15355,13 @@
 33:52d3 BattleAnimFunction_08.SetCoords
 33:52ee BattleAnimFunction_08.loop
 33:52f3 BattleAnimFunction_09
+33:52f6 BattleAnimFunction_09.anon_dw
 33:52fc BattleAnimFunction_09.zero
 33:5311 BattleAnimFunction_09.one
 33:531b BattleAnimFunction_09.done_one
 33:5333 BattleAnimFunction_09.two
 33:5337 BattleAnimFunction_0A
+33:533a BattleAnimFunction_0A.anon_dw
 33:534e BattleAnimFunction_0A.zero
 33:5362 BattleAnimFunction_0A.seven
 33:5374 BattleAnimFunction_0A.set_up_eight
@@ -15095,6 +15374,7 @@
 33:53b7 BattleAnimFunction_0A.three
 33:53bc BattleAnimFunction_0A.six
 33:53bd BattleAnimFunction_RazorLeaf
+33:53c0 BattleAnimFunction_RazorLeaf.anon_dw
 33:53d2 BattleAnimFunction_RazorLeaf.zero
 33:53db BattleAnimFunction_RazorLeaf.one
 33:5401 BattleAnimFunction_RazorLeaf.sine_cosine
@@ -15115,16 +15395,19 @@
 33:54c7 Functioncd49c.minus_384
 33:54cb Functioncd49c.minus_256
 33:54cf BattleAnimFunction_4E
+33:54d2 BattleAnimFunction_4E.anon_dw
 33:54d6 BattleAnimFunction_4E.zero
 33:54ef BattleAnimFunction_4E.one
 33:54fc BattleAnimFunction_4E.sine_cosine
 33:552e BattleAnimFunction_0C
+33:5531 BattleAnimFunction_0C.anon_dw
 33:5537 BattleAnimFunction_0C.zero
 33:5540 BattleAnimFunction_0C.one
 33:5552 BattleAnimFunction_0C.next
 33:5560 BattleAnimFunction_0C.two
 33:5584 BattleAnimFunction_0C.okay
 33:55af BattleAnimFunction_0D
+33:55b2 BattleAnimFunction_0D.anon_dw
 33:55bc BattleAnimFunction_0D.zero
 33:55cc BattleAnimFunction_0D.one
 33:55e0 BattleAnimFunction_0D.asm_cd5e0
@@ -15133,10 +15416,12 @@
 33:561b BattleAnimFunction_0D.four
 33:561f asm_cd61f
 33:5628 BattleAnimFunction_0E
+33:562b BattleAnimFunction_0E.anon_dw
 33:562f Functioncd62f
 33:563c Functioncd63c
 33:5649 Functioncd63c.asm_cd649
 33:565f BattleAnimFunction_0F
+33:5662 BattleAnimFunction_0F.anon_dw
 33:566a Functioncd66a
 33:566d Functioncd66d
 33:568c Functioncd66d.asm_cd68c
@@ -15146,14 +15431,17 @@
 33:56bc BattleAnimFunction_11
 33:56c9 BattleAnimFunction_11.asm_cd6c9
 33:56e9 BattleAnimFunction_14
+33:56ec BattleAnimFunction_14.anon_dw
 33:56f0 Functioncd6f0
 33:5717 Functioncd717
 33:5723 Functioncd717.asm_cd723
 33:5751 BattleAnimFunction_15
+33:5754 BattleAnimFunction_15.anon_dw
 33:575c Functioncd75c
 33:5764 Functioncd764
 33:5765 Functioncd765
 33:5769 BattleAnimFunction_16
+33:576c BattleAnimFunction_16.anon_dw
 33:577a Functioncd77a
 33:5797 Functioncd77a.asm_cd797
 33:579d Functioncd77a.asm_cd79d
@@ -15163,6 +15451,7 @@
 33:57d4 Functioncd7d4
 33:57d8 Functioncd7d8
 33:57df BattleAnimFunction_17
+33:57e2 BattleAnimFunction_17.anon_dw
 33:57f0 Functioncd7f0
 33:5803 Functioncd7f0.asm_cd803
 33:5809 Functioncd7f0.asm_cd809
@@ -15172,10 +15461,12 @@
 33:583a Functioncd83a
 33:583e Functioncd83e
 33:5845 BattleAnimFunction_18
+33:5848 BattleAnimFunction_18.anon_dw
 33:584c Functioncd84c
 33:5858 Functioncd858
 33:5895 Functioncd858.asm_cd895
 33:5899 BattleAnimFunction_19
+33:589c BattleAnimFunction_19.anon_dw
 33:58a6 Functioncd8a6
 33:58af Functioncd8af
 33:58b3 Functioncd8b3
@@ -15190,9 +15481,11 @@
 33:595c BattleAnimFunction_1C.asm_cd95c
 33:5971 BattleAnimFunction_1C.asm_cd971
 33:5976 BattleAnimFunction_1F
+33:5979 BattleAnimFunction_1F.anon_dw
 33:597f Functioncd97f
 33:5991 Functioncd991
 33:5992 BattleAnimFunction_LeechSeed
+33:5995 BattleAnimFunction_LeechSeed.anon_dw
 33:599d BattleAnimFunction_LeechSeed.zero
 33:59a7 BattleAnimFunction_LeechSeed.one
 33:59b4 BattleAnimFunction_LeechSeed.sprout
@@ -15201,12 +15494,14 @@
 33:59d1 BattleAnimFunction_LeechSeed.three
 33:59d2 Functioncd9d2
 33:5a1b BattleAnimFunction_3F
+33:5a1e BattleAnimFunction_3F.anon_dw
 33:5a24 Functioncda24
 33:5a2e Functioncda2e
 33:5a3b Functioncda2e.asm_cda3b
 33:5a3e Functioncda3e
 33:5a3f BattleAnimFunction_1A
 33:5a4b BattleAnimFunction_1B
+33:5a4e BattleAnimFunction_1B.anon_dw
 33:5a58 Functioncda58
 33:5a59 Functioncda59
 33:5a69 Functioncda59.asm_cda69
@@ -15214,6 +15509,7 @@
 33:5a95 Functioncda95
 33:5aaa Functioncdaaa
 33:5ac5 BattleAnimFunction_1D
+33:5ac8 BattleAnimFunction_1D.anon_dw
 33:5ae4 Functioncdae4
 33:5af8 Functioncdaf8
 33:5b02 Functioncdaf8.asm_cdb02
@@ -15236,6 +15532,7 @@
 33:5beb BattleAnimFunction_1E
 33:5bfb BattleAnimFunction_1E.asm_cdbfb
 33:5c08 BattleAnimFunction_21
+33:5c0b BattleAnimFunction_21.anon_dw
 33:5c0f Functioncdc0f
 33:5c1e Functioncdc0f.asm_cdc1e
 33:5c32 Functioncdc32
@@ -15243,15 +15540,18 @@
 33:5c43 Functioncdc43
 33:5c65 Functioncdc43.asm_cdc65
 33:5c6f BattleAnimFunction_22
+33:5c72 BattleAnimFunction_22.anon_dw
 33:5c76 Functioncdc76
 33:5c94 Functioncdc94
 33:5ccc Functioncdc94.asm_cdccc
 33:5cd5 BattleAnimFunction_23
+33:5cd8 BattleAnimFunction_23.anon_dw
 33:5cdc Functioncdcdc
 33:5d01 Functioncdd01
 33:5d35 Functioncdd01.asm_cdd35
 33:5d3a Functioncdd01.asm_cdd3a
 33:5d3e BattleAnimFunction_24
+33:5d41 BattleAnimFunction_24.anon_dw
 33:5d47 Functioncdd47
 33:5d65 Functioncdd65
 33:5d66 Functioncdd66
@@ -15259,10 +15559,12 @@
 33:5d6d BattleAnimFunction_25
 33:5d99 BattleAnimFunction_26
 33:5db0 BattleAnimFunction_27
+33:5db3 BattleAnimFunction_27.anon_dw
 33:5db7 Functioncddb7
 33:5dc8 Functioncddb7.asm_cddc8
 33:5dcd Functioncddcd
 33:5dce BattleAnimFunction_28
+33:5dd1 BattleAnimFunction_28.anon_dw
 33:5dd5 Functioncddd5
 33:5df7 Functioncddd5.asm_cddf7
 33:5e04 Functioncde04
@@ -15272,6 +15574,7 @@
 33:5e60 BattleAnimFunction_2D
 33:5e9a BattleAnimFunction_2D.asm_cde9a
 33:5e9e BattleAnimFunction_PoisonGas
+33:5ea1 BattleAnimFunction_PoisonGas.anon_dw
 33:5ea5 Functioncdea5
 33:5ecd Functioncdea5.next
 33:5ed1 BattleAnimFunction_34
@@ -15279,23 +15582,27 @@
 33:5f10 BattleAnimFunction_3C
 33:5f4c BattleAnimFunction_3C.asm_cdf4c
 33:5f50 BattleAnimFunction_35
+33:5f53 BattleAnimFunction_35.anon_dw
 33:5f59 Functioncdf59
 33:5f68 Functioncdf68
 33:5f72 Functioncdf68.asm_cdf72
 33:5f8b Functioncdf68.asm_cdf8b
 33:5fa4 Functioncdfa4
 33:5fa8 BattleAnimFunction_Horn
+33:5fab BattleAnimFunction_Horn.anon_dw
 33:5fb3 BattleAnimFunction_Horn.zero
 33:5fc8 BattleAnimFunction_Horn.one
 33:5fd6 BattleAnimFunction_Horn.two
 33:5fe3 Functioncdfe3
 33:600a BattleAnimFunction_2C
+33:600d BattleAnimFunction_2C.anon_dw
 33:6013 Functionce013
 33:6022 Functionce022
 33:6035 Functionce022.asm_ce035
 33:603d Functionce03d
 33:604a Functionce03d.asm_ce04a
 33:6053 BattleAnimFunction_2E
+33:6056 BattleAnimFunction_2E.anon_dw
 33:605a Functionce05a
 33:606f Functionce06f
 33:608e Functionce06f.asm_ce08e
@@ -15307,12 +15614,15 @@
 33:60f5 BattleAnimFunction_42
 33:6124 BattleAnimFunction_42.asm_ce124
 33:612c BattleAnimFunction_30
+33:612f BattleAnimFunction_30.anon_dw
 33:6133 Functionce133
 33:6140 Functionce140
 33:616b BattleAnimFunction_31
+33:616e BattleAnimFunction_31.anon_dw
 33:6172 Functionce172
 33:6199 Functionce199
 33:619a BattleAnimFunction_32
+33:619d BattleAnimFunction_32.anon_dw
 33:61a5 Functionce1a5
 33:61b1 Functionce1a5.asm_ce1b1
 33:61b3 Functionce1a5.asm_ce1b3
@@ -15327,6 +15637,7 @@
 33:620d Unknown_ce20d
 33:6211 BattleAnimFunction_33
 33:6242 BattleAnimFunction_36
+33:6245 BattleAnimFunction_36.anon_dw
 33:624b Functionce24b
 33:625e Functionce24b.asm_ce25e
 33:6275 Functionce275
@@ -15334,10 +15645,12 @@
 33:6291 Functionce291
 33:62a0 Functionce291.asm_ce2a0
 33:62a4 BattleAnimFunction_37
+33:62a7 BattleAnimFunction_37.anon_dw
 33:62ab Functionce2ab
 33:62ba Functionce2ba
 33:62c8 Functionce2ba.asm_ce2c8
 33:62ce BattleAnimFunction_38
+33:62d1 BattleAnimFunction_38.anon_dw
 33:62d7 Functionce2d7
 33:62e1 Functionce2e1
 33:62eb Functionce2e1.asm_ce2eb
@@ -15346,15 +15659,18 @@
 33:6317 BattleAnimFunction_3A
 33:6324 BattleAnimFunction_3A.asm_ce324
 33:6344 BattleAnimFunction_3B
+33:6347 BattleAnimFunction_3B.anon_dw
 33:634b Functionce34b
 33:6357 Functionce357
 33:635b BattleAnimFunction_3D
 33:637f BattleAnimFunction_3E
+33:6382 BattleAnimFunction_3E.anon_dw
 33:6388 Functionce388
 33:63aa Functionce3aa
 33:63d0 Functionce3aa.asm_ce3d0
 33:63d5 Functionce3d5
 33:63e1 BattleAnimFunction_40
+33:63e4 BattleAnimFunction_40.anon_dw
 33:63e8 Functionce3e8
 33:63f5 Functionce3f5
 33:641d Functionce3f5.asm_ce41d
@@ -15364,12 +15680,14 @@
 33:6473 BattleAnimFunction_43.asm_ce473
 33:6477 BattleAnimFunction_44
 33:64a0 BattleAnimFunction_45
+33:64a3 BattleAnimFunction_45.anon_dw
 33:64a9 Functionce4a9
 33:64b3 Functionce4b3
 33:64bc Functionce4bc
 33:64d0 Functionce4bc.asm_ce4d0
 33:64d4 asm_ce4d4
 33:64d8 BattleAnimFunction_46
+33:64db BattleAnimFunction_46.anon_dw
 33:64df Functionce4df
 33:64f5 Functionce4df.asm_ce4f5
 33:64f8 Functionce4f8
@@ -15377,12 +15695,14 @@
 33:6521 BattleAnimFunction_48
 33:652f BattleAnimFunction_48.disappear
 33:6533 BattleAnimFunction_49
+33:6536 BattleAnimFunction_49.anon_dw
 33:653e Functionce53e
 33:654f Functionce54f
 33:655d Functionce55d
 33:6561 asm_ce561
 33:6567 Functionce567
 33:6574 BattleAnimFunction_4A
+33:6577 BattleAnimFunction_4A.anon_dw
 33:657f Functionce57f
 33:658d Functionce58d
 33:6599 Functionce58d.asm_ce599
@@ -15408,6 +15728,8 @@
 33:66a2 BattleAnim_Sine.even_41063
 33:66aa BattleAnim_Sine_e
 33:66b0 BattleAnim_Cosine_e
+33:66b6 BattleAnim_AbsSinePrecise
+33:66bd BattleAnim_AbsCosinePrecise
 33:66c4 BattleAnimSineWave
 33:6704 ReinitBattleAnimFrameset
 33:6716 GetBattleAnimFrame
@@ -15697,6 +16019,7 @@
 33:7d8d Music_PostCredits_Ch2
 33:7d9f Music_PostCredits_Ch2.mainloop
 36:4000 FontInversed
+37:4000 BetaSlowpokeWell1F_Blocks
 37:4023 SlowpokeWellB1F_Blocks
 37:407d SlowpokeWellB2F_Blocks
 37:40d7 IlexForest_Blocks
@@ -15711,6 +16034,7 @@
 37:45dc Route36NationalParkGate_Blocks
 37:45f0 FastShip1F_Blocks
 37:4680 FastShipB1F_Blocks
+37:4700 BetaFastShipInsideCutOut_Blocks
 37:4710 FastShipCabins_NNW_NNE_NE_Blocks
 37:4750 FastShipCabins_SW_SSW_NW_Blocks
 37:4790 FastShipCabins_SE_SSE_CaptainsCabin_Blocks
@@ -15741,7 +16065,9 @@
 37:4c7e SoulHouse_Blocks
 37:4c92 PewterGym_Blocks
 37:4cb5 CeladonGym_Blocks
+37:4ce2 BetaCeladonMansion1F_Blocks
 37:4cf6 CeladonCafe_Blocks
+37:4d0e BetaCeladonMansion2F_Blocks
 37:4d26 RockTunnel1F_Blocks
 37:4e34 RockTunnelB1F_Blocks
 37:4f42 DiglettsCave_Blocks
@@ -15861,6 +16187,7 @@
 38:4d10 CardFlip_CopyToBox.col
 38:4d20 CardFlip_CopyOAM
 38:4d24 CardFlip_CopyOAM.loop
+38:4d38 CardFlip_ShiftDigitsUpOnePixel
 38:4d4b CardFlip_BlankDiscardedCardSlot
 38:4d6a CardFlip_BlankDiscardedCardSlot.Jumptable
 38:4d76 CardFlip_BlankDiscardedCardSlot.Level1
@@ -16109,6 +16436,7 @@
 38:6bf6 _DepositPKMN.Init
 38:6c27 _DepositPKMN.HandleJoypad
 38:6c50 _DepositPKMN.a_button
+38:6c5f _DepositPKMN.go_back
 38:6c64 _DepositPKMN.b_button
 38:6c6a _DepositPKMN.WhatsUp
 38:6c8a _DepositPKMN.Submenu
@@ -16129,6 +16457,7 @@
 38:6dca _WithdrawPKMN.Init
 38:6e00 _WithdrawPKMN.Joypad
 38:6e29 _WithdrawPKMN.a_button
+38:6e38 _WithdrawPKMN.unused
 38:6e3d _WithdrawPKMN.b_button
 38:6e43 _WithdrawPKMN.PrepSubmenu
 38:6e63 BillsPC_Withdraw
@@ -16150,6 +16479,7 @@
 38:6fd9 _MovePKMNWithoutMail.Joypad
 38:7004 _MovePKMNWithoutMail.d_pad
 38:7011 _MovePKMNWithoutMail.a_button
+38:7020 _MovePKMNWithoutMail.unused
 38:7025 _MovePKMNWithoutMail.b_button
 38:702b _MovePKMNWithoutMail.PrepSubmenu
 38:704b _MovePKMNWithoutMail.MoveMonWOMailSubmenu
@@ -16234,6 +16564,7 @@
 38:7670 BillsPC_UpdateInsertCursor.loop
 38:768a BillsPC_UpdateInsertCursor.OAM
 38:76b3 BillsPC_FillBox.row
+38:76b3 BillsPC_FillBox
 38:76b5 BillsPC_FillBox.col
 38:76c3 BillsPC_CheckSpaceInDestination
 38:76d6 BillsPC_CheckSpaceInDestination.party
@@ -16301,6 +16632,7 @@
 38:7cd9 PCString_Bye
 38:7cde PCString_Stored
 38:7ce6 PCString_Got
+38:7ceb PCString_Non
 38:7cf0 PCString_BoxFull
 38:7d01 PCString_PartyFull
 38:7d12 PCString_NoReleasingEGGS
@@ -16437,6 +16769,7 @@
 39:48b5 PlaceGameFreakPresents
 39:48c4 PlaceGameFreakPresents.scenes
 39:48d0 GameFreakPresents_NextScene
+39:48d5 Functione4a8d
 39:48de GameFreakPresents_Star
 39:48fa GameFreakPresents_PlaceLogo
 39:4910 GameFreakPresents_LogoSparkles
@@ -16494,6 +16827,7 @@
 39:4da2 Intro_InitShellders
 39:4db1 Intro_InitShellders.InitAnim
 39:4db7 Intro_InitLapras
+39:4dc6 Intro_UnusedInitLapras
 39:4dcf Intro_UpdateTilemapAndBGMap
 39:4dec Intro_UpdateTilemapAndBGMap.loop
 39:4e26 Functione4fde
@@ -16551,6 +16885,7 @@
 39:528d Functione5422.loop2_inner
 39:52ac Functione5422.data_e5464
 39:52bb Functione5473
+39:52d4 Functione548c
 39:52d7 Functione548c.loop
 39:52e0 Intro_DrawBackground
 39:52e2 Intro_DrawBackground.outer_loop
@@ -16596,17 +16931,20 @@
 3a:41a2 UpdateChannels.ch1_noise_sampling
 3a:41bc UpdateChannels.Channel2
 3a:41bc UpdateChannels.Channel6
+3a:41db UpdateChannels.ch2_frequency_override
 3a:41e6 UpdateChannels.ch2_vibrato_override
 3a:41f7 UpdateChannels.ch2_rest
 3a:4204 UpdateChannels.ch2_noise_sampling
 3a:421e UpdateChannels.Channel3
 3a:421e UpdateChannels.Channel7
+3a:422f UpdateChannels.ch3_frequency_override
 3a:423a UpdateChannels.ch3_vibrato_override
 3a:4240 UpdateChannels.ch3_rest
 3a:424d UpdateChannels.ch3_noise_sampling
 3a:4268 UpdateChannels.load_wave_pattern
 3a:42b4 UpdateChannels.Channel4
 3a:42b4 UpdateChannels.Channel8
+3a:42c1 UpdateChannels.ch4_frequency_override
 3a:42c7 UpdateChannels.ch4_rest
 3a:42d4 UpdateChannels.ch4_noise_sampling
 3a:42e7 _CheckSFX
@@ -17492,6 +17830,7 @@
 3b:7648 Music_MagnetTrain_Ch2
 3b:767d Music_MagnetTrain_Ch3
 3b:76f4 Music_MagnetTrain_Ch4
+3b:7711 Music_MagnetTrain_Ch4.sub1
 3b:771e Music_MagnetTrain_Ch4.sub2
 3b:772f Music_LavenderTown
 3b:7739 Music_LavenderTown_Ch1
@@ -17707,9 +18046,13 @@
 3c:4b3f Sfx_DexFanfare5079
 3c:4b3f Sfx_LevelUp
 3c:4b4b Sfx_LevelUp_Ch5
+3c:4b4b Sfx_DexFanfare5079_Ch5
 3c:4b5f Sfx_LevelUp_Ch6
+3c:4b5f Sfx_DexFanfare5079_Ch6
 3c:4b6d Sfx_LevelUp_Ch7
+3c:4b6d Sfx_DexFanfare5079_Ch7
 3c:4b7f Sfx_LevelUp_Ch8
+3c:4b7f Sfx_DexFanfare5079_Ch8
 3c:4b86 Sfx_KeyItem
 3c:4b92 Sfx_KeyItem_Ch5
 3c:4ba8 Sfx_KeyItem_Ch6
@@ -17736,6 +18079,7 @@
 3c:4d32 Sfx_DexFanfare80109_Ch7
 3c:4d4e Sfx_DexFanfare80109_Ch8
 3c:4d56 Sfx_Fanfare2
+3c:4d5f Sfx_Unused
 3c:4d6b Sfx_Unused_Ch5
 3c:4d8a Sfx_Unused_Ch6
 3c:4da6 Sfx_Unused_Ch7
@@ -17979,6 +18323,7 @@
 3c:5d6c Sfx_Bump_Ch5
 3c:5d77 Sfx_ExitBuilding_Ch8
 3c:5d87 Sfx_ReadText2_Ch5
+3c:5d87 Sfx_ReadText_Ch5
 3c:5d9a Sfx_Potion_Ch5
 3c:5da9 Sfx_Poison_Ch5
 3c:5dbc Sfx_FullHeal_Ch5
@@ -18117,6 +18462,7 @@
 3c:66cf Sfx_HangUp_Ch5
 3c:66dd Sfx_NoSignal_Ch5
 3c:66ec Sfx_Sandstorm_Ch8
+3c:66ec Sfx_Unknown5F_Ch8
 3c:6700 Sfx_Elevator_Ch5
 3c:6704 Sfx_Elevator_Ch5.loop
 3c:6729 Sfx_Elevator_Ch6
@@ -18192,6 +18538,7 @@
 3c:70e1 Cry_Sentret_Ch5
 3c:70e9 Cry_Sentret_Ch6
 3c:70eb Cry_Sentret_Ch6.body
+3c:70f4 Cry_Sentret_Ch8
 3c:70fb Cry_Mareep_Ch5
 3c:7103 Cry_Mareep_Ch6
 3c:7105 Cry_Mareep_Ch6.body
@@ -18301,6 +18648,9 @@
 3c:7578 Cry_Vileplume
 3c:7581 Cry_Vulpix
 3c:758a Cry_Weepinbell
+3c:7593 Cry_Unused_Ch5
+3c:75ae Cry_Unused_Ch6
+3c:75c9 Cry_Unused_Ch8
 3c:75df Cry_Raichu_Ch5
 3c:75fc Cry_Raichu_Ch6
 3c:761d Cry_Raichu_Ch8
@@ -18923,6 +19273,7 @@
 3e:4081 LoadHPBar
 3e:40a6 StatsScreen_LoadFont
 3e:40d9 LoadStatsScreenPageTilesGFX
+3e:40e6 LoadFontsBattleLevel
 3e:40f2 FontExtra
 3e:42f2 Font
 3e:46f2 FontBattleExtra
@@ -18932,7 +19283,9 @@
 3e:4bd2 HPExpBarBorderGFX
 3e:4c02 ExpBarGFX
 3e:4c92 TownMapGFX
+3e:4f96 UnusedWeekdayKanjiGFX
 3e:5016 PokegearPhoneIconGFX
+3e:5026 UnusedBoldFontGFX
 3e:52f6 TextboxSpaceGFX
 3e:52fe FontsExtra_SolidBlackAndUpArrowGFX
 3e:530e Footprints
@@ -19083,12 +19436,17 @@
 3f:401e TilesetParkAnim
 3f:401e TilesetForestAnim
 3f:404a TilesetJohtoAnim
+3f:407e UnusedTilesetAnim_fc07e
+3f:40aa UnusedTilesetAnim_fc0aa
 3f:40d6 TilesetPortAnim
 3f:4106 TilesetEliteFourRoomAnim
+3f:4126 UnusedTilesetAnim_fc126
+3f:4156 UnusedTilesetAnim_fc156
 3f:418e TilesetCaveAnim
 3f:418e TilesetDarkCaveAnim
 3f:41da TilesetIcePathAnim
 3f:4226 TilesetTowerAnim
+3f:4266 UnusedTilesetAnim_fc266
 3f:428e TilesetHouseAnim
 3f:428e TilesetPlayersHouseAnim
 3f:428e TilesetPokecenterAnim
@@ -19110,6 +19468,7 @@
 3f:42a5 WaitTileAnimation
 3f:42a6 StandingTileFrame8
 3f:42b0 ScrollTileRightLeft
+3f:42bf ScrollTileUpDown
 3f:42ce ScrollTileLeft
 3f:42d2 ScrollTileLeft.loop
 3f:42e2 ScrollTileRight
@@ -19133,6 +19492,7 @@
 3f:44bd WriteTileToBuffer
 3f:44c7 WriteTile
 3f:44f2 AnimateWaterPalette
+3f:450f AnimateWaterPalette.color1
 3f:4519 AnimateWaterPalette.color0
 3f:4523 AnimateWaterPalette.color2
 3f:452d FlickeringCaveEntrancePalette
@@ -19181,6 +19541,8 @@
 3f:4baa Trade_GetAttributeOfLastPartymon
 3f:4bb4 GetTradeMonName
 3f:4bc0 CopyTradeName
+3f:4bc7 Functionfcbc7
+3f:4bd1 Functionfcbd1
 3f:4bdb Trade_CopyTwoBytes
 3f:4be1 Trade_CopyTwoBytesReverseEndian
 3f:4be7 GetTradeMonNames
@@ -19255,6 +19617,7 @@
 3f:50c2 InitMysteryGiftLayout.Load16Row
 3f:50c4 InitMysteryGiftLayout.row_loop
 3f:50c9 MysteryGiftGFX
+3f:52c9 DebugColorPicker
 3f:52d2 DebugColorPicker.set
 3f:52fb DebugColorPicker.loop
 3f:530d DebugColorPicker.exit
@@ -19281,6 +19644,8 @@
 3f:54df DebugColor_SetMaxNum.trainer
 3f:54e2 Jumptable_fd4e2
 3f:54ee DebugColor_InitScreen
+3f:553f DebugColor_InitScreen.MonSpriteViewer
+3f:5574 DebugColor_InitScreen.load_shiny_text
 3f:5579 DebugColor_InitScreen.load_normal_text
 3f:557c DebugColor_InitScreen.place_switch_text
 3f:558d DebugColor_InitScreen.Trainer
@@ -19294,6 +19659,7 @@
 3f:562b Functionfd62b
 3f:563d Functionfd62b.asm_fd63d
 3f:5646 Functionfd646
+3f:564b Functionfd646.cgb
 3f:5672 Functionfd646.sgb
 3f:56b0 Functionfd6b0
 3f:56c5 Functionfd6c5
@@ -19316,6 +19682,7 @@
 3f:5797 Functionfd797
 3f:57b8 Functionfd7b8
 3f:57c4 Functionfd7b8.cancel
+3f:57ca Functionfd7b8.exit
 3f:57d0 DebugColor_TMHMJoypad
 3f:57de DebugColor_TMHMJoypad.asm_fd7de
 3f:57e8 DebugColor_TMHMJoypad.asm_fd7e8
@@ -19327,9 +19694,11 @@
 3f:584f DebugColor_AbleText
 3f:5856 DebugColor_NotAbleText
 3f:585e Functionfd85e
+3f:5862 Functionfd85e.hm
 3f:5864 Functionfd85e.tm
 3f:5867 Functionfd867
 3f:5870 DebugColor_CalculatePalette
+3f:589c DebugColor_CalculatePalette.DarkPalette
 3f:58a5 DebugColor_CalculatePalette.LightPalette
 3f:58ae DebugColor_CalculateRGB
 3f:58d3 DebugColor_BackupSpriteColors
@@ -19347,6 +19716,7 @@
 3f:595a Functionfd926.wait
 3f:5967 DebugColor_PlaceCursor
 3f:5996 DebugColor_PlaceCursor.asm_fd996
+3f:599c DebugColor_PlaceCursor.darkcolor
 3f:59a1 DebugColor_PlaceCursor.lightcolor
 3f:59a4 DebugColor_PlaceCursor.place
 3f:59c0 DebugColor_PlaceCursor.PlaceSprites
@@ -19354,12 +19724,14 @@
 3f:59d6 String_fd9d6
 3f:59ec DebugColor_UpArrowGFX
 3f:59fc DebugColor_GFX
+3f:5b5c TilesetColorTest
 3f:5bdb Functionfdbdb
 3f:5be1 Functionfdbe1
 3f:5be7 Functionfdbe7
 3f:5bfd Functionfdbfd
 3f:5c0c Functionfdbfd.Place
 3f:5c18 Functionfdc18
+3f:5c35 DebugColorMain2
 3f:5c46 DebugColorMain2.loop7
 3f:5c52 DebugColorMain2.asm_fdc52
 3f:5c8e DebugColorMain2.asm_fdc8e
@@ -19380,6 +19752,7 @@
 3f:5d72 Functionfdd72
 3f:5d77 Functionfdd77
 3f:5d7c Functionfdd7c
+3f:5db1 DebugColor_PlaceCursor2
 3f:5de1 DebugColor_PlaceCursor2.asm_fdde1
 3f:5e07 DebugColor_PlaceCursor2.PlaceSprites
 40:4000 StdScripts
@@ -19621,8 +19994,10 @@
 40:53c2 SentSomeToMomText
 40:53f0 SentHalfToMomText
 40:5403 SentAllToMomText
+40:5415 BattleText_0x101415
 40:543b BattleText_MonFainted
 40:5449 BattleText_UseNextMon
+40:5459 BattleText_0x101459
 40:547f LostAgainstText
 40:5490 BattleText_EnemyIsAboutToUseWillPlayerChangeMon
 40:54be BattleText_EnemySentOut
@@ -19826,6 +20201,7 @@
 41:4208 ElmPhoneCallerScript.assistant
 41:4215 ElmPhoneCallerScript.rocket
 41:421c ElmPhoneCallerScript.gift
+41:4223 ElmPhoneCallerScript.unused
 41:422a JackPhoneCalleeScript
 41:4234 JackPhoneCallerScript
 41:424c JackPhoneCallerScript.WantsBattle
@@ -19942,6 +20318,7 @@
 41:48b6 PhoneScript_GreetPhone_Female.day
 41:48bb PhoneScript_GreetPhone_Female.nite
 41:48c0 Phone_GenericCall_Male_SkipMon
+41:48d1 Phone_GenericCall_Female_SkipMon
 41:48e2 Phone_LookingAwesome_Male_SkipMon
 41:48e9 Phone_DressedUp_Female_SkipMon
 41:48f0 Phone_GenericCall_Male
@@ -19969,6 +20346,7 @@
 41:49aa PhoneScriptRareWildMon
 41:49ae PhoneNationalParkText
 41:49bc PhoneLighthouseText
+41:49c7 PhoneUndergroundText
 41:49d3 PhoneDarkCaveText
 41:49dd PhoneMtMortarText
 41:49e7 PhoneRoute26Text
@@ -19980,6 +20358,7 @@
 41:4a1d PhoneRoute34Text
 41:4a26 PhoneRoute35Text
 41:4a2f PhoneRoute36Text
+41:4a38 PhoneRoute37Text
 41:4a41 PhoneRoute38Text
 41:4a4a PhoneRoute39Text
 41:4a53 PhoneRoute42Text
@@ -20166,6 +20545,8 @@
 42:4d93 TinTower8FFullRestore
 42:4d95 TinTower8F_MapEvents
 42:4de0 TinTower9F_MapScripts
+42:4de2 TinTower9FUnusedHoOhText
+42:4df3 TinTower9FUnusedLugiaText
 42:4e03 TinTower9F_MapEvents
 42:4e2c BurnedTower1F_MapScripts
 42:4e3a BurnedTower1F_MapScripts.RivalScene
@@ -20202,6 +20583,7 @@
 42:53c2 BurnedTowerB1F_MapScripts.DummyScene0
 42:53c3 BurnedTowerB1F_MapScripts.DummyScene1
 42:53c4 ReleaseTheBeasts
+42:5428 UnusedEnteiScript
 42:543d UnusedEnteiScript.next
 42:5441 BurnedTowerB1FHPUp
 42:5443 BurnedTowerB1FTMEndure
@@ -20440,6 +20822,7 @@
 43:55be RadioTower1FLuckyChannelSignText
 43:561b RadioTower1F_MapEvents
 43:5688 RadioTower2F_MapScripts
+43:568a RadioTower2FUnusedDummyScene
 43:568b RadioTower2FSuperNerdScript
 43:568e RadioTower2FTeacherScript
 43:569c RadioTower2FTeacherScript.Rockets
@@ -20618,6 +21001,7 @@
 44:4044 RuinsOfAlphOutsideScientistSceneContinue
 44:4061 TrainerPsychicNathan
 44:406d TrainerPsychicNathan.Script
+44:4075 TrainerSuperNerdStan
 44:4081 TrainerSuperNerdStan.Script
 44:4089 RuinsOfAlphOutsideMysteryChamberSign
 44:408c RuinsOfAlphSign
@@ -20710,6 +21094,7 @@
 44:4af3 RuinsOfAlphResearchCenterPrinter
 44:4b00 RuinsOfAlphResearchCenterPrinter.SkipChecking
 44:4b06 RuinsOfAlphResearchCenterPrinter.PrinterAvailable
+44:4b0f RuinsOfAlphResearchCenterPhoto
 44:4b12 RuinsOfAlphResearchCenterBookshelf
 44:4b15 MovementData_0x110b15
 44:4b1a MovementData_0x110b1a
@@ -20745,6 +21130,7 @@
 44:5053 UnionCave1FPotion
 44:5055 UnionCave1FXAttack
 44:5057 UnionCave1FAwakening
+44:5059 UnionCave1FUnusedSign
 44:505c HikerRussellSeenText
 44:50b0 HikerRussellBeatenText
 44:50bd HikerRussellAfterBattleText
@@ -20935,6 +21321,7 @@
 44:6d53 OlivineLighthouseJasmine.FacingDown
 44:6d5a OlivineLighthouseJasmine.FacingRight
 44:6d61 OlivineLighthouseJasmine.no
+44:6d75 OlivineLighthouseUnusedDummyScript
 44:6d76 OlivineLighthouseAmphy
 44:6d8d OlivineLighthouseAmphy.HealthyNow
 44:6da2 OlivineLighthouse6FSuperPotion
@@ -20972,6 +21359,7 @@
 45:40c1 MahoganyMart1FLanceApproachPharmacistMovement
 45:40c5 MahoganyMart1FLanceApproachHiddenStairsMovement
 45:40c9 MahoganyMart1FLanceGoDownStairsMovement
+45:40cb MahoganyMart1FRageCandyBarText
 45:4126 MahoganyMart1FPharmacistText_LanceEntered
 45:414f MahoganyMart1FBlackBeltText
 45:41bc MahoganyMart1FBlackBeltText_LanceEntered
@@ -21124,6 +21512,7 @@
 45:5387 RockerBaseLanceElectrodeFaintText
 45:54a2 RocketBaseLancesSideText
 45:54c1 RocketBaseLanceElectrodeDoneText
+45:559e RocketBaseReceivedHM06Text
 45:55b0 RocketBaseLanceWhirlpoolText
 45:564c RocketBaseLanceMonMasterText
 45:574f LanceHealsText1
@@ -21242,6 +21631,7 @@
 45:697a IlexForestHiddenEther
 45:697d IlexForestHiddenSuperPotion
 45:6980 IlexForestHiddenFullHeal
+45:6983 IlexForestBoulder
 45:6986 IlexForestSignpost
 45:6989 IlexForestShrineScript
 45:698c MovementData_Farfetchd_Pos1_Pos2
@@ -21283,6 +21673,7 @@
 46:403e GoldenrodUnderground_MapScripts.CheckBasementKey
 46:4045 GoldenrodUnderground_MapScripts.LockBasementDoor
 46:404a GoldenrodUnderground_MapScripts.CheckDayOfWeek
+46:4064 GoldenrodUnderground_MapScripts.Sunday
 46:406d GoldenrodUnderground_MapScripts.Monday
 46:4076 GoldenrodUnderground_MapScripts.NotMondayMorning
 46:407d GoldenrodUnderground_MapScripts.Tuesday
@@ -21692,6 +22083,7 @@
 47:459c ClairText_GiveDragonbreathDragonDen
 47:45e1 DragonShrinePlayerReceivedRisingBadgeText
 47:45fa DragonShrineRisingBadgeExplanationText
+47:46c4 NotifyReceiveDragonbreath
 47:46d6 ClairText_DescribeDragonbreathDragonDen
 47:4754 ClairText_CollectedAllBadges
 47:4881 DragonShrineSignpostText
@@ -21719,6 +22111,7 @@
 48:40cb NewBarkTownPlayersHouseSign
 48:40ce NewBarkTownElmsLabSign
 48:40d1 NewBarkTownElmsHouseSign
+48:40d4 MrChronoScript
 48:40de Movement_TeacherRunsToYou1_NBT
 48:40e3 Movement_TeacherRunsToYou2_NBT
 48:40ea Movement_TeacherBringsYouBack1_NBT
@@ -21777,6 +22170,7 @@
 48:4596 GuideGentMovement6
 48:4599 CherrygroveCity_RivalWalksToYou
 48:459f CherrygroveCity_RivalPushesYouOutOfTheWay
+48:45a2 CherrygroveCity_UnusedMovementData
 48:45a5 CherrygroveCity_RivalExitsStageLeft
 48:45ae GuideGentIntroText
 48:463a GuideGentTourText1
@@ -21854,6 +22248,7 @@
 48:5196 AzaleaTownTeacherScript
 48:5199 AzaleaTownYoungsterScript
 48:519c AzaleaTownSlowpokeScript
+48:51ab UnusedWoosterScript
 48:51b6 AzaleaTownSign
 48:51b9 KurtsHouseSign
 48:51bc AzaleaGymSign
@@ -21896,6 +22291,7 @@
 48:5912 CianwoodCityYoungster
 48:5915 CianwoodCityPokefanM
 48:5918 CianwoodCityLass
+48:591b CianwoodCityUnusedScript
 48:591e CianwoodCitySign
 48:5921 CianwoodGymSign
 48:5924 CianwoodPharmacySign
@@ -22025,6 +22421,7 @@
 49:454e EcruteakCityPokecenterSign
 49:4551 EcruteakCityMartSign
 49:4554 EcruteakCityHiddenHyperPotion
+49:4557 UnusedMissingDaughterText
 49:4604 EcruteakCityGramps1Text
 49:4646 EcruteakCityGramps2Text
 49:46de EcruteakCityLass1Text
@@ -22059,6 +22456,7 @@
 49:4b50 MahoganyTownRagecandybarSign
 49:4b53 MahoganyGymSign
 49:4b56 MahoganyTownPokecenterSign
+49:4b59 MovementData_0x124b59
 49:4b5c MovementData_0x124b5c
 49:4b5e MovementData_0x124b5e
 49:4b62 MovementData_0x124b62
@@ -22374,6 +22772,7 @@
 4a:503f Route29YoungsterText
 4a:5097 Route29TeacherText
 4a:5104 Route29FisherText
+4a:5141 Text_WaitingForDay
 4a:5177 Route29CooltrainerMText_WaitingForNight
 4a:51a7 Route29CooltrainerMText_WaitingForMorning
 4a:51dd MeetTuscanyText
@@ -22493,6 +22892,7 @@
 4b:401d Route32_MapScripts.FriedaAppears
 4b:4020 Route32CooltrainerMScript
 4b:4021 Route32CooltrainerMContinueScene
+4b:403a Route32CooltrainerMContinueScene.GoToSproutTower
 4b:4040 Route32CooltrainerMContinueScene.GiveMiracleSeed
 4b:4050 Route32CooltrainerMContinueScene.DontHaveZephyrBadge
 4b:4056 Route32CooltrainerMContinueScene.GotMiracleSeed
@@ -22576,6 +22976,12 @@
 4b:46a4 FisherRalph1SeenText
 4b:46d3 FisherRalph1BeatenText
 4b:46f1 FisherRalphAfterText
+4b:4730 Route32UnusedFisher1SeenText
+4b:477f Route32UnusedFisher1BeatenText
+4b:47a4 Route32UnusedFisher1AfterText
+4b:47d4 Route32UnusedFisher2SeenText
+4b:4807 Route32UnusedFisher2BeatenText
+4b:4826 Route32UnusedFisher2AfterText
 4b:4863 FisherHenrySeenText
 4b:487d FisherHenryBeatenText
 4b:4886 FisherHenryAfterText
@@ -22594,6 +23000,7 @@
 4b:4b0c BirdKeeperPeterSeenText
 4b:4b41 BirdKeeperPeterBeatenText
 4b:4b61 BirdKeeperPeterAfterText
+4b:4b92 Route32UnusedText
 4b:4bc0 Text_RoarIntro
 4b:4c19 Text_RoarOutro
 4b:4c4e MeetFriedaText
@@ -22686,6 +23093,7 @@
 4b:52b7 TrainerCooltrainerfKate.Script
 4b:52cc TrainerCooltrainerfKate.GotSoftSand
 4b:52d0 TrainerCooltrainerfKate.BagFull
+4b:52d2 Route34IlexForestSign
 4b:52d5 Route34Sign
 4b:52d8 Route34TrainerTips
 4b:52db DayCareSign
@@ -22846,6 +23254,7 @@
 4b:6360 SudowoodoAttackedText
 4b:63a7 RockSmashGuyText1
 4b:6408 RockSmashGuyText2
+4b:6452 UnusedReceivedTM08Text
 4b:6464 RockSmashGuyText3
 4b:64f0 Route36LassText
 4b:6568 Route36LassText_ClearedSudowoodo
@@ -23020,6 +23429,9 @@
 4c:4f68 Route40Sign
 4c:4f6b Route40Rock
 4c:4f6e Route40HiddenHyperPotion
+4c:4f71 MovementData_0x130f71
+4c:4f79 MovementData_0x130f79
+4c:4f7f MovementData_0x130f7f
 4c:4f84 SwimmermSimonSeenText
 4c:4fc3 SwimmermSimonBeatenText
 4c:4fd7 SwimmermSimonAfterBattleText
@@ -23061,6 +23473,7 @@
 4c:547f TrainerSwimmermKirk.Script
 4c:5487 TrainerSwimmermMathew
 4c:5493 TrainerSwimmermMathew.Script
+4c:549b Route41Rock
 4c:549e Route41HiddenMaxEther
 4c:54a1 SwimmermCharlieSeenText
 4c:54e4 SwimmermCharlieBeatenText
@@ -23324,6 +23737,7 @@
 4d:53b2 CooltrainerfKellySeenText
 4d:5405 CooltrainerfKellyBeatenText
 4d:5414 CooltrainerfKellyAfterBattleText
+4d:5473 Route45DummyText
 4d:5490 Route45SignText
 4d:54ad Route45_MapEvents
 4d:555e Route46_MapScripts
@@ -24198,6 +24612,7 @@
 51:429c Jasmine_BetterTrainer
 51:431b Text_ReceivedMineralBadge
 51:4335 Jasmine_BadgeSpeech
+51:4374 Text_ReceivedTM09
 51:4386 Jasmine_IronTailSpeech
 51:43b2 Jasmine_GoodLuck
 51:43e3 OlivineGymGuyText
@@ -24228,6 +24643,7 @@
 51:46fc GoodRodGuru
 51:471b GoodRodGuru.DontWantIt
 51:4721 GoodRodGuru.AlreadyGotItem
+51:4727 GoodRodHouseBookshelf
 51:472a OfferGoodRodText
 51:47bc GiveGoodRodText
 51:47e8 GaveGoodRodText
@@ -24300,12 +24716,15 @@
 51:50b3 FarmerMText_Milking
 51:50cd FarmerFText_InTrouble
 51:512d FarmerFText_HealedMiltank
+51:518c Text_ReceivedTM13
 51:519e FarmerFText_SnoreSpeech
 51:5219 Route39Farmhouse_MapEvents
 51:524d MahoganyRedGyaradosSpeechHouse_MapScripts
 51:524f MahoganyRedGyaradosSpeechHouseBlackBeltScript
 51:5252 MahoganyRedGyaradosSpeechHouseTeacherScript
 51:5260 MahoganyRedGyaradosSpeechHouseTeacherScript.RocketsInRadioTower
+51:5266 MahoganyRedGyaradosSpeechHouseUnusedBookshelf1
+51:5269 MahoganyRedGyaradosSpeechHouseUnusedBookshelf2
 51:526c MahoganyRedGyaradosSpeechHouseBlackBeltText
 51:52de MahoganyRedGyaradosSpeechHouseTeacherText
 51:530d MahoganyRedGyaradosSpeechHouseTeacherText_RocketsInRadioTower
@@ -24550,6 +24969,7 @@
 53:4391 ClairText_WhatsTheMatter
 53:43f0 BlackthornGymClairText_Cheat
 53:4451 BlackthornGymClairText_YouKeptMeWaiting
+53:4495 BlackthornGymText_ReceivedTM24
 53:44a7 BlackthornGymClairText_DescribeTM24
 53:4525 BlackthornGymClairText_League
 53:4651 CooltrainermPaulSeenText
@@ -24589,6 +25009,8 @@
 53:4c4f BlackthornDragonSpeechHouse_MapScripts
 53:4c51 BlackthornDragonSpeechHouseGrannyScript
 53:4c54 BlackthornDragonSpeechHouseDratiniScript
+53:4c5e BlackthornDragonSpeechHousePictureBookshelf
+53:4c61 BlackthornDragonSpeechHouseMagazineBookshelf
 53:4c64 BlackthornDragonSpeechHouseGrannyText
 53:4ca4 BlackthornDragonSpeechHouseDratiniText
 53:4cb4 BlackthornDragonSpeechHouse_MapEvents
@@ -24664,6 +25086,7 @@
 53:56ec MagikarpLengthRaterScript.TooShort
 53:56f2 MagikarpLengthRaterScript.NotMagikarp
 53:56f8 MagikarpLengthRaterScript.Refused
+53:56fe LakeOfRageMagikarpHouseUnusedRecordSign
 53:5701 MagikarpHouseBookshelf
 53:5704 MagikarpLengthRaterText_LakeOfRageHistory
 53:5823 MagikarpLengthRaterText_MenInBlack
@@ -24714,6 +25137,7 @@
 53:5cf2 RocketText_AllYouGot
 53:5d13 RocketText_MakingABundle
 53:5d6d OfficerText_FoundTM
+53:5ded Text_ReceivedTM30
 53:5dff OfficerText_AvoidGrass
 53:5e2d Route43Gate_MapEvents
 54:4000 CeruleanGymBadgeSpeechHouse_MapScripts
@@ -24936,6 +25360,7 @@
 55:4616 Kurt1.RunAround
 55:462a Kurt1.ClearedSlowpokeWell
 55:4637 Kurt1.GotLureBall
+55:4671 Kurt1.CheckApricorns
 55:4696 Kurt1.AskApricorn
 55:46bf Kurt1.Blu
 55:46c5 Kurt1.Ylw
@@ -25089,6 +25514,7 @@
 56:485f AcademyBlackboard.Text
 56:4878 AcademyNotebook
 56:4892 AcademyNotebook.Done
+56:4894 AcademyStickerMachine
 56:4897 AcademyBookshelf
 56:489a AcademyEarlSpinMovement
 56:48a8 AcademyEarlIntroText
@@ -25101,6 +25527,7 @@
 56:4b74 EarlsPokemonAcademyGameboyKid2Text
 56:4ba6 EarlsPokemonAcademyYoungster2Text
 56:4c1f AcademyBlackboardText
+56:4c58 AcademyBlackboardText2
 56:4c6b AcademyPoisonText
 56:4ced AcademyParalysisText
 56:4d4f AcademySleepText
@@ -25311,6 +25738,7 @@
 56:699f BugCatchingContestant9BScript.StillCompeting
 56:69a5 BugCatchingContestant10BScript
 56:69b3 BugCatchingContestant10BScript.StillCompeting
+56:69b9 UnusedBugCatchingContestExplanationSign
 56:69bc Route36NationalParkGatePlayerWaitWithContestantsMovement
 56:69c0 Route36NationalParkGateOfficer1AskToParticipateText
 56:6a70 Route36NationalParkGateOfficer1GiveParkBallsText
@@ -25349,6 +25777,7 @@
 56:7327 BugCatchingContestant9BStillCompetingText
 56:7356 BugCatchingContestant10BText
 56:7396 BugCatchingContestant10BStillCompetingText
+56:73ce UnusedSudowoodoText
 56:7433 UnusedBugCatchingContestExplanationText
 56:74dd Route36NationalParkGateOfficer1WellHoldPrizeText
 56:754c Route36NationalParkGateOfficer1HeresThePrizeText
@@ -25405,9 +25834,11 @@
 57:46b1 GoldenrodGymGuyWinText
 57:46e7 GoldenrodGym_MapEvents
 57:4757 GoldenrodBikeShop_MapScripts
+57:4759 GoldenrodBikeShop_MapScripts.DummyScene
 57:475a GoldenrodBikeShopClerkScript
 57:477f GoldenrodBikeShopClerkScript.GotBicycle
 57:4785 GoldenrodBikeShopClerkScript.Refused
+57:478b GoldenrodBikeShopJustReleasedCompactBike
 57:478e GoldenrodBikeShopBicycle
 57:4791 GoldenrodBikeShopClerkIntroText
 57:4802 GoldenrodBikeShopClerkAgreedText
@@ -25493,6 +25924,9 @@
 57:52ea FlowerShopTeacherScript.Lalala
 57:52f4 FlowerShopFloriaScript
 57:5302 FlowerShopFloriaScript.NoPlainBadge
+57:5308 FlowerShopShelf1
+57:530b FlowerShopShelf2
+57:530e FlowerShopRadio
 57:5311 GoldenrodFlowerShopTeacherBetterThanWhitneyText
 57:53b6 GoldenrodFlowerShopTeacherLalalaHavePlentyOfWaterText
 57:53e9 GoldenrodFlowerShopFloriaMustBeAMonText
@@ -25520,6 +25954,14 @@
 57:5821 GoldenrodNameRater
 57:5829 GoldenrodNameRaterBookshelf
 57:582c GoldenrodNameRaterRadio
+57:582f UnusedSweetHoneyText
+57:587b UnusedSweetHoneyBagFullText
+57:58be UnusedSweetHoneyGiveText
+57:58e3 UnusedGotSweetHoneyText
+57:58fc UnusedSweetHoneyAfterText1
+57:5956 UnusedSweetHoneyAfterText2
+57:598f UnusedSweetHoneyAfterText3
+57:59e4 UnusedSweetHoneyButterfreeText
 57:59f8 GoldenrodNameRater_MapEvents
 57:5a24 GoldenrodDeptStore1F_MapScripts
 57:5a26 GoldenrodDeptStore1FReceptionistScript
@@ -25542,6 +25984,8 @@
 57:5c07 GoldenrodDeptStore2FGentlemanScript
 57:5c0a GoldenrodDeptStore2FDirectory
 57:5c0d GoldenrodDeptStore2FElevatorButton
+57:5c10 GoldenrodDeptStore2FUnusedText1
+57:5c67 GoldenrodDeptStore2FUnusedText2
 57:5cb7 GoldenrodDeptStore2FYoungsterText
 57:5d0d GoldenrodDeptStore2FCooltrainerFText
 57:5d49 GoldenrodDeptStore2FGentlemanText
@@ -25716,6 +26160,7 @@
 59:4000 VermilionFishingSpeechHouse_MapScripts
 59:4002 FishingDude
 59:4005 FishingDudesHousePhoto
+59:4008 FishingDudesHouseBookshelf
 59:400b FishingDudeText
 59:40fa FishingDudesHousePhotoText
 59:4136 VermilionFishingSpeechHouse_MapEvents
@@ -25860,6 +26305,7 @@
 59:5872 DaisyCantGroomEggText
 59:58a3 BluesHouse_MapEvents
 59:58c0 OaksLab_MapScripts
+59:58c2 OaksLab_MapScripts.DummyScene
 59:58c3 Oak
 59:58d8 Oak.CheckBadges
 59:58e5 Oak.CheckPokedex
@@ -26172,6 +26618,8 @@
 5b:4992 MovementData_0x16c992
 5b:4994 MovementData_0x16c994
 5b:49a0 MovementData_0x16c9a0
+5b:49a3 MovementData_0x16c9a3
+5b:49a5 MovementData_0x16c9a5
 5b:49a7 MovementData_0x16c9a7
 5b:49aa MovementData_0x16c9aa
 5b:49ad FastShip1FSailor1Text_ToVermilion
@@ -26255,6 +26703,7 @@
 5b:551a FastShipArrivedVermilionText
 5b:554d FastShipCabins_SW_SSW_NW_MapEvents
 5b:55af FastShipCabins_SE_SSE_CaptainsCabin_MapScripts
+5b:55b1 FastShipCabins_SE_SSE_CaptainsCabin_MapScripts.DummyScene
 5b:55b2 SSAquaCaptain
 5b:55c0 SSAquaCaptain.LaterTrip
 5b:55c6 SSAquaGranddaughterBefore
@@ -26597,9 +27046,12 @@
 5c:5130 Text_PleaseWait
 5c:513e Text_LinkTimedOut
 5c:519a Text_PleaseComeAgain
+5c:51ae Text_PleaseComeIn
+5c:51bf Text_TemporaryStagingInLinkRoom
 5c:51f2 Text_CantLinkToThePast
 5c:5213 Text_IncompatibleRooms
 5c:5238 Text_PleaseComeIn2
+5c:5249 Text_PleaseEnter
 5c:5258 Text_RejectNewMon
 5c:5275 Text_RejectMonWithNewMove
 5c:529c Text_RejectMonWithMail
@@ -26619,6 +27071,7 @@
 5c:54a3 TradeCenter_MapScripts.Chris2
 5c:54a8 TradeCenter_MapScripts.InitializeAndPreparePokecenter2F
 5c:54af TradeCenterConsoleScript
+5c:54b5 TradeCenterFriendScript
 5c:54bc TradeCenterFriendScript.FriendReadyText
 5c:54d3 TradeCenter_MapEvents
 5c:5507 Colosseum_MapScripts
@@ -26675,6 +27128,7 @@
 5d:441c LavenderNameRater_MapScripts
 5d:4422 LavenderNameRater_MapScripts.DummyScene
 5d:4423 LavenderNameRater
+5d:442b LavenderNameRaterUnusedBookshelf
 5d:442e LavenderNameRater_MapEvents
 5d:444b LavenderMart_MapScripts
 5d:444d LavenderMartClerkScript
@@ -26706,6 +27160,7 @@
 5d:47e3 LavRadioTower1FSuperNerd2Script.GotExpnCard
 5d:47e9 LavRadioTower1FDirectory
 5d:47ec LavRadioTower1FPokeFluteSign
+5d:47ef LavRadioTower1FReferenceLibrary
 5d:47f2 LavRadioTower1FReceptionistText
 5d:482d LavRadioTower1FOfficerText
 5d:48c3 LavRadioTower1FSuperNerd1Text
@@ -26727,6 +27182,7 @@
 5d:4de3 Route12SuperRodHouseFishingGuruScript.GotSuperRod
 5d:4de9 Route12SuperRodHouseFishingGuruScript.Refused
 5d:4ded Route12SuperRodHouseFishingGuruScript.NoRoom
+5d:4def SuperRodHouseBookshelf
 5d:4df2 OfferSuperRodText
 5d:4e72 GiveSuperRodText
 5d:4ebf GaveSuperRodText
@@ -26741,7 +27197,9 @@
 5d:4fd4 ManiaScript.wrong
 5d:4fda ManiaScript.superhappy
 5d:4fe3 ManiaScript.refused
+5d:4fe9 ManiaScript.nothingleft
 5d:4fef ManiaScript.default_postevent
+5d:4ff5 ManiasHouseUnusedBookshelf
 5d:4ff8 ManiaText_AskLookAfterShuckle
 5d:50e2 ManiaText_TakeCareOfShuckle
 5d:5110 ManiaText_GotShuckle
@@ -26903,6 +27361,7 @@
 5e:481f CeladonDeptStore6FVendingMachine.MenuHeader
 5e:4827 CeladonDeptStore6FVendingMachine.MenuData
 5e:4866 CeladonDeptStore6FDirectory
+5e:4869 CeladonDeptStore6FElevatorButton
 5e:486c CeladonVendingText
 5e:4890 CeladonClangText
 5e:48aa CeladonVendingNoMoneyText
@@ -26942,6 +27401,7 @@
 5e:4cb2 GameFreakGraphicArtistScript
 5e:4cc0 GameFreakGraphicArtistScript.CanPrintDiploma
 5e:4ccc GameFreakGraphicArtistScript.Refused
+5e:4cd2 GameFreakGraphicArtistScript.CancelPrinting
 5e:4cd8 GameFreakProgrammerScript
 5e:4cdb GameFreakCharacterDesignerScript
 5e:4cde CeladonMansion3FDevRoomSign
@@ -26964,6 +27424,7 @@
 5e:4fb2 CeladonMansion3FReferenceMaterialText
 5e:4ff1 CeladonMansion3F_MapEvents
 5e:5053 CeladonMansionRoof_MapScripts
+5e:5055 CeladonMansionRoofGraffiti
 5e:5058 CeladonMansionRoofGraffitiText
 5e:506c CeladonMansionRoof_MapEvents
 5e:5081 CeladonMansionRoofHouse_MapScripts
@@ -27007,6 +27468,7 @@
 5e:555a CeladonGameCornerCardFlipScript
 5e:5561 CeladonGameCornerLighterScript
 5e:5564 CeladonGameCornerSodaCanScript
+5e:556e CeladonGameCornerUnusedMovementData
 5e:5571 CeladonGameCornerReceptionistText
 5e:55b6 CeladonGameCornerPokefanMText
 5e:55e3 CeladonGameCornerTeacherText
@@ -27236,6 +27698,7 @@
 5f:4e26 Route2NuggetHouseFisherScript
 5f:4e3b Route2NuggetHouseFisherScript.GotNugget
 5f:4e3f Route2NuggetHouseFisherScript.NoRoom
+5f:4e41 Route2NuggetHouseBookshelf
 5f:4e44 Route2NuggetHouseFisherText
 5f:4ec4 Route2NuggetHouseFisherText_GotNugget
 5f:4f12 Route2NuggetHouse_MapEvents
@@ -27324,6 +27787,7 @@
 60:43a1 ElmsLabTravelTip3
 60:43a4 ElmsLabTravelTip4
 60:43a7 ElmsLabTrashcan
+60:43aa ElmsLabTrashcan2
 60:43ad ElmsLabBookshelf
 60:43b0 ElmsLab_WalkUpToElmMovement
 60:43bb ElmsLab_CantLeaveMovement
@@ -27379,6 +27843,7 @@
 60:4ee7 ElmGiveMasterBallText2
 60:4fa4 ElmGiveTicketText1
 60:5020 ElmGiveTicketText2
+60:50bc ElmsLabSignpostText_Egg
 60:50e9 AideText_GiveYouPotion
 60:5116 AideText_AlwaysBusy
 60:5146 AideText_TheftTestimony
@@ -27434,6 +27899,7 @@
 60:5b28 PlayersHouse1FTVText
 60:5b89 PlayersHouse1F_MapEvents
 60:5be6 PlayersHouse2F_MapScripts
+60:5bee PlayersHouse2F_MapScripts.Null
 60:5bef PlayersHouse2F_MapScripts.InitializeRoom
 60:5bff PlayersHouse2F_MapScripts.SkipInitialization
 60:5c00 PlayersHouse2F_MapScripts.SetUpTileDecorations
@@ -27473,6 +27939,8 @@
 60:5eb5 ElmsHouseBookshelf
 60:5eb8 ElmsWifeText
 60:5f2c ElmsSonText
+60:5f7d ElmsHouseLabFoodText
+60:5fad ElmsHousePokemonFoodText
 60:5fdc ElmsHousePCText
 60:60ab ElmsHouse_MapEvents
 60:60e4 Route26HealHouse_MapScripts
@@ -29141,6 +29609,7 @@
 70:43f7 GBPrinterHPIcon
 70:43ff GBPrinterLvIcon
 70:4407 TilesetKantoGFX
+70:4a0d Function1c0a0d
 70:4a1f PrintHoursMins
 70:4a2b PrintHoursMins.AM
 70:4a30 PrintHoursMins.PM
