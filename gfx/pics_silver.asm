@@ -10,6 +10,16 @@ SECTION "Pic Pointers", ROMX
 INCLUDE "data/pokemon/pic_pointers.asm"
 
 
+SECTION "Unown Pic Pointers", ROMX
+
+INCLUDE "data/pokemon/unown_pic_pointers.asm"
+
+
+SECTION "Trainer Pic Pointers", ROMX
+
+INCLUDE "data/trainers/pic_pointers.asm"
+
+
 SECTION "Pics 1", ROMX
 
 MachampFrontpic:     INCBIN "gfx/pokemon/machamp/front_silver.2bpp.lz"
@@ -559,11 +569,6 @@ UnownHBackpic:       INCBIN "gfx/pokemon/unown_h/back.2bpp.lz"
 SnorlaxBackpic:      INCBIN "gfx/pokemon/snorlax/back.2bpp.lz"
 
 
-SECTION "Unown Pic Pointers", ROMX
-
-INCLUDE "data/pokemon/unown_pic_pointers.asm"
-
-
 SECTION "Pics 12", ROMX
 
 SuicuneFrontpic:     INCBIN "gfx/pokemon/suicune/front.2bpp.lz"
@@ -596,11 +601,6 @@ BrunoPic:            INCBIN "gfx/trainers/bruno.2bpp.lz"
 PrimeapeFrontpic:    INCBIN "gfx/pokemon/primeape/front_silver.2bpp.lz"
 ScytherFrontpic:     INCBIN "gfx/pokemon/scyther/front_silver.2bpp.lz"
 DragonairFrontpic:   INCBIN "gfx/pokemon/dragonair/front_silver.2bpp.lz"
-
-
-SECTION "Trainer Pic Pointers", ROMX
-
-INCLUDE "data/trainers/pic_pointers.asm"
 
 
 SECTION "Pics 13", ROMX

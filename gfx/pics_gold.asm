@@ -10,6 +10,16 @@ SECTION "Pic Pointers", ROMX
 INCLUDE "data/pokemon/pic_pointers.asm"
 
 
+SECTION "Unown Pic Pointers", ROMX
+
+INCLUDE "data/pokemon/unown_pic_pointers.asm"
+
+
+SECTION "Trainer Pic Pointers", ROMX
+
+INCLUDE "data/trainers/pic_pointers.asm"
+
+
 SECTION "Pics 1", ROMX
 
 NidokingFrontpic:    INCBIN "gfx/pokemon/nidoking/front_gold.2bpp.lz"
@@ -558,11 +568,6 @@ UnownGFrontpic:      INCBIN "gfx/pokemon/unown_g/front.2bpp.lz"
 UnownVBackpic:       INCBIN "gfx/pokemon/unown_v/back.2bpp.lz"
 
 
-SECTION "Unown Pic Pointers", ROMX
-
-INCLUDE "data/pokemon/unown_pic_pointers.asm"
-
-
 SECTION "Pics 12", ROMX
 
 SuicuneFrontpic:     INCBIN "gfx/pokemon/suicune/front.2bpp.lz"
@@ -595,11 +600,6 @@ SlowkingFrontpic:    INCBIN "gfx/pokemon/slowking/front_gold.2bpp.lz"
 VictreebelFrontpic:  INCBIN "gfx/pokemon/victreebel/front_gold.2bpp.lz"
 BlackbeltTPic:       INCBIN "gfx/trainers/blackbelt_t.2bpp.lz"
 UnownCBackpic:       INCBIN "gfx/pokemon/unown_c/back.2bpp.lz"
-
-
-SECTION "Trainer Pic Pointers", ROMX
-
-INCLUDE "data/trainers/pic_pointers.asm"
 
 
 SECTION "Pics 13", ROMX
