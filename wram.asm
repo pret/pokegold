@@ -2331,8 +2331,6 @@ wMountMoonSquareSceneID::                         db
 
 wEventFlags:: flag_array NUM_EVENTS
 
-	ds 14
-
 wd8b7:: db
 
 wGameTimerPause:: db
