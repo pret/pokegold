@@ -86,7 +86,7 @@ HMENURETURN_ASM    EQU %11111111
 	const PARTYMENUACTION_GIVE_MON_FEMALE ; unused
 	const PARTYMENUACTION_GIVE_ITEM
 ; PrintPartyMenuActionText arguments (see engine/pokemon/party_menu.asm)
-	const_def $f0
+	const_next $f0
 	const PARTYMENUTEXT_HEAL_PSN
 	const PARTYMENUTEXT_HEAL_BRN
 	const PARTYMENUTEXT_HEAL_FRZ
