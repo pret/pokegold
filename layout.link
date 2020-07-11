@@ -276,7 +276,7 @@ SRAM $00
 	"SRAM Bank 0"
 	"Backup Save 1"
 	"SRAM Stack"
-	org $bfff
+	org $b800
 	"SRAM Window Stack"
 SRAM $01
 	"Save"

@@ -1,5 +1,3 @@
-; Left-over debug code from pokegold-debug
-
 	const_def $6a
 	const DEBUGTEST_TICKS_1 ; $6a
 	const DEBUGTEST_TICKS_2 ; $6b

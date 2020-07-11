@@ -160,4 +160,10 @@ hCGBPalUpdate:: db
 hCGB::          db
 hSGB::          db
 
-	ds 21
+IF DEF(_DEBUG)
+hDebugRoomMenuPage:: db
+ELSE
+	ds 1
+ENDC
+
+	ds 20

@@ -130,12 +130,12 @@ _GetClock:
 	bit 6, a ; halt
 	ret z
 
-	ld a, BANK(sRTCStatusFlags)
+	ld a, BANK(sRTCHaltCheckValue)
 	call OpenSRAM
-	ld a, $34
-	ld [sUnusedRTCMinutes], a
-	ld a, $12
-	ld [sUnusedRTCHours], a
+	ld a, LOW(RTC_HALT_VALUE)
+	ld [sRTCHaltCheckValue + 0], a
+	ld a, HIGH(RTC_HALT_VALUE)
+	ld [sRTCHaltCheckValue + 1], a
 	call CloseSRAM
 	ret
 

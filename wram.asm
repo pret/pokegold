@@ -1060,6 +1060,33 @@ wBattleEnd::
 
 ENDU
 
+IF DEF(_DEBUG)
+NEXTU
+; debug room paged values
+UNION
+; debug room new item values
+wDebugRoomItemID::       db
+wDebugRoomItemQuantity:: db
+NEXTU
+; debug room new pokemon values
+wDebugRoomMon::    box_struct wDebugRoomMon
+wDebugRoomMonBox:: db
+NEXTU
+; debug room RTC values
+wDebugRoomRTCSec::  db
+wDebugRoomRTCMin::  db
+wDebugRoomRTCHour:: db
+wDebugRoomRTCDay::  dw
+wDebugRoomRTCCurSec::  db
+wDebugRoomRTCCurMin::  db
+wDebugRoomRTCCurHour:: db
+wDebugRoomRTCCurDay::  dw
+NEXTU
+; debug room GB ID values
+wDebugRoomGBID:: dw
+ENDU
+ENDC
+
 ENDU
 
 
@@ -1456,6 +1483,19 @@ wKeepSevenBiasChance:: ; used in the slots to handle the favoring of 7 symbol st
 	ds 2
 wStartFlypoint:: db
 wEndFlypoint:: db
+
+IF DEF(_DEBUG)
+NEXTU
+; debug room paged values
+wDebugRoomCurPage::        db
+wDebugRoomCurValue::       db
+wDebugRoomAFunction::      dw
+wDebugRoomStartFunction::  dw
+wDebugRoomSelectFunction:: dw
+wDebugRoomAutoFunction::   dw
+wDebugRoomPageCount::      db
+wDebugRoomPagedValuesPtr:: dw
+ENDC
 
 NEXTU
 ; unidentified
