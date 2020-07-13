@@ -30050,9 +30050,10 @@
 00:b0e8 sBackupPokemonData
 00:b5c7 sBackupPlayerData1
 00:b7ed sStackTop
-00:b7ef sUnusedRTCMinutes
-00:b7f0 sUnusedRTCHours
+00:b7ef sRTCHaltCheckValue
+00:b800 sWindowStackBottom
 00:bfff sWindowStackTop
+00:bfff sWindowStack
 01:a000 sOptions
 01:a008 sCheckValue1
 01:a009 sPlayerData
