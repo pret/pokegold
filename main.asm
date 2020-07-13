@@ -374,7 +374,7 @@ INCLUDE "engine/tilesets/tileset_anims.asm"
 INCLUDE "engine/events/npc_trade.asm"
 INCLUDE "engine/events/mom_phone.asm"
 INCLUDE "engine/link/mystery_gift_3.asm"
-INCLUDE "engine/menus/debug.asm"
+INCLUDE "engine/debug/color_picker.asm"
 
 
 SECTION "Standard Scripts", ROMX
@@ -421,6 +421,9 @@ INCLUDE "data/items/descriptions.asm"
 SECTION "bank70", ROMX
 
 INCLUDE "engine/printer/print_party.asm"
+IF DEF(_DEBUG)
+INCLUDE "engine/debug/debug_room.asm"
+ENDC
 
 
 SECTION "bank70_2", ROMX
@@ -439,7 +442,15 @@ INCLUDE "data/credits_strings.asm"
 SECTION "Stadium Data", ROMX
 
 IF DEF(_GOLD)
+IF DEF(_DEBUG)
+INCBIN "data/stadium/stadium_gold_debug.bin"
+ELSE
 INCBIN "data/stadium/stadium_gold.bin"
+ENDC
 ELIF DEF(_SILVER)
+IF DEF(_DEBUG)
+INCBIN "data/stadium/stadium_silver_debug.bin"
+ELSE
 INCBIN "data/stadium/stadium_silver.bin"
+ENDC
 ENDC

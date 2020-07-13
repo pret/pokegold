@@ -89,13 +89,16 @@ sBackupPlayerData1:: ds wPlayerData1End - wPlayerData
 SECTION "SRAM Stack", SRAM
 
 sStackTop:: dw
-sUnusedRTCMinutes:: db
-sUnusedRTCHours:: db
+sRTCHaltCheckValue:: dw
 
 
 SECTION "SRAM Window Stack", SRAM
 
-sWindowStackTop:: ds 1
+sWindowStackBottom::
+	ds $800 - 1
+sWindowStack::
+sWindowStackTop::
+	ds 1
 
 
 SECTION "Save", SRAM

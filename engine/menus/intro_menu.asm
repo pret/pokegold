@@ -13,6 +13,12 @@ NewGame:
 	ldh [hMapEntryMethod], a
 	jp FinishContinueFunction
 
+IF DEF(_DEBUG)
+DebugRoom:
+	farcall _DebugRoom
+	ret
+ENDC
+
 ResetWRAM:
 	xor a
 	ldh [hBGMapMode], a

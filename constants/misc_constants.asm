@@ -23,6 +23,9 @@ ENDC
 SAVE_CHECK_VALUE_1 EQU 99
 SAVE_CHECK_VALUE_2 EQU 127
 
+; RTC halted check value
+RTC_HALT_VALUE EQU $1234
+
 ; time of day boundaries
 MORN_HOUR EQU 4  ; 4 AM
 DAY_HOUR  EQU 10 ; 10 AM

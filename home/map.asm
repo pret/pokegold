@@ -1043,7 +1043,7 @@ MaskObject::
 	ld d, $0
 	ld hl, wObjectMasks
 	add hl, de
-	ld [hl], -1 ; , masked
+	ld [hl], -1 ; masked
 	ret
 
 UnmaskObject::
