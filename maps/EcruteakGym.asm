@@ -4,7 +4,7 @@
 	const ECRUTEAKGYM_SAGE2
 	const ECRUTEAKGYM_GRANNY1
 	const ECRUTEAKGYM_GRANNY2
-	const ECRUTEAKGYM_GYM_GUY
+	const ECRUTEAKGYM_GYM_GUIDE
 
 EcruteakGym_MapScripts:
 	db 0 ; scene scripts
@@ -111,18 +111,18 @@ TrainerMediumGrace:
 	closetext
 	end
 
-EcruteakGymGuyScript:
+EcruteakGymGuideScript:
 	faceplayer
 	opentext
 	checkevent EVENT_BEAT_MORTY
-	iftrue .EcruteakGymGuyWinScript
-	writetext EcruteakGymGuyText
+	iftrue .EcruteakGymGuideWinScript
+	writetext EcruteakGymGuideText
 	waitbutton
 	closetext
 	end
 
-.EcruteakGymGuyWinScript:
-	writetext EcruteakGymGuyWinText
+.EcruteakGymGuideWinScript:
+	writetext EcruteakGymGuideWinText
 	waitbutton
 	closetext
 	end
@@ -309,7 +309,7 @@ MediumGraceAfterBattleText:
 	line "before our eyes!"
 	done
 
-EcruteakGymGuyText:
+EcruteakGymGuideText:
 	text "The trainers here"
 	line "have secret mo-"
 	cont "tives."
@@ -321,7 +321,7 @@ EcruteakGymGuyText:
 	line "ECRUTEAK."
 	done
 
-EcruteakGymGuyWinText:
+EcruteakGymGuideWinText:
 	text "Whew, <PLAYER>."
 	line "You did great!"
 
@@ -380,4 +380,4 @@ EcruteakGym_MapEvents:
 	object_event  3, 13, SPRITE_SAGE, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, PAL_NPC_BLUE, OBJECTTYPE_TRAINER, 3, TrainerSagePing, -1
 	object_event  7,  5, SPRITE_GRANNY, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, PAL_NPC_BROWN, OBJECTTYPE_TRAINER, 1, TrainerMediumMartha, -1
 	object_event  7,  9, SPRITE_GRANNY, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, PAL_NPC_BROWN, OBJECTTYPE_TRAINER, 1, TrainerMediumGrace, -1
-	object_event  7, 15, SPRITE_GYM_GUY, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_SCRIPT, 0, EcruteakGymGuyScript, -1
+	object_event  7, 15, SPRITE_GYM_GUIDE, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_SCRIPT, 0, EcruteakGymGuideScript, -1
