@@ -18,7 +18,7 @@ CianwoodCity_MapScripts:
 
 .FlyPoint:
 	setflag ENGINE_FLYPOINT_CIANWOOD
-	return
+	endcallback
 
 CianwoodCityChucksWife:
 	faceplayer

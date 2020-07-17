@@ -13,12 +13,12 @@ RuinsOfAlphKabutoChamberReceptionistScript:
 RuinsOfAlphKabutoChamberHiddenDoors:
 	checkevent EVENT_SOLVED_KABUTO_PUZZLE
 	iffalse .FloorClosed
-	return
+	endcallback
 
 .FloorClosed:
 	changeblock 2, 2, $01 ; left floor
 	changeblock 4, 2, $02 ; right floor
-	return
+	endcallback
 
 RuinsOfAlphKabutoChamberPuzzle:
 	refreshscreen

@@ -14,7 +14,7 @@ EcruteakCity_MapScripts:
 
 .FlyPoint:
 	setflag ENGINE_FLYPOINT_ECRUTEAK
-	return
+	endcallback
 
 EcruteakCityGramps1Script:
 	jumptextfaceplayer EcruteakCityGramps1Text

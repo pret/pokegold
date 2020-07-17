@@ -387,11 +387,11 @@ Function901a1:
 
 LoadPhoneScriptBank:
 	memcall wPhoneScriptBank
-	return
+	endcallback
 
 LoadOutOfAreaScript:
 	scall PhoneOutOfAreaScript
-	return
+	endcallback
 
 LoadCallerScript:
 	nop

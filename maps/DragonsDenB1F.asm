@@ -13,18 +13,18 @@ DragonsDenB1F_MapScripts:
 	checkevent EVENT_BEAT_RIVAL_IN_MT_MOON
 	iftrue .CheckDay
 	disappear DRAGONSDENB1F_SILVER
-	return
+	endcallback
 
 .CheckDay:
 	readvar VAR_WEEKDAY
 	ifequal TUESDAY, .AppearSilver
 	ifequal THURSDAY, .AppearSilver
 	disappear DRAGONSDENB1F_SILVER
-	return
+	endcallback
 
 .AppearSilver:
 	appear DRAGONSDENB1F_SILVER
-	return
+	endcallback
 
 DragonsDenB1FDragonFangScript:
 	giveitem DRAGON_FANG

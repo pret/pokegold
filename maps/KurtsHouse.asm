@@ -17,13 +17,13 @@ KurtsHouse_MapScripts:
 	iftrue .MakingBalls
 	disappear KURTSHOUSE_KURT2
 	appear KURTSHOUSE_KURT1
-	return
+	endcallback
 
 .MakingBalls:
 	disappear KURTSHOUSE_KURT1
 	appear KURTSHOUSE_KURT2
 .Done:
-	return
+	endcallback
 
 Kurt1:
 	faceplayer

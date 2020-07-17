@@ -894,9 +894,9 @@ stopandsjump: MACRO
 	dw \1 ; pointer
 ENDM
 
-	const return_command ; $8f
-return: MACRO
-	db return_command
+	const endcallback_command ; $8f
+endcallback: MACRO
+	db endcallback_command
 ENDM
 
 	const end_command ; $90
@@ -904,9 +904,9 @@ end: MACRO
 	db end_command
 ENDM
 
-	const reloadandreturn_command ; $91
-reloadandreturn: MACRO
-	db reloadandreturn_command
+	const reloadend_command ; $91
+reloadend: MACRO
+	db reloadend_command
 	db \1 ; which_method
 ENDM
 

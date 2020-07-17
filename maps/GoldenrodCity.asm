@@ -23,7 +23,7 @@ GoldenrodCity_MapScripts:
 .FlyPoint:
 	setflag ENGINE_FLYPOINT_GOLDENROD
 	setflag ENGINE_REACHED_GOLDENROD
-	return
+	endcallback
 
 GoldenrodCityPokefanMScript:
 	jumptextfaceplayer GoldenrodCityPokefanMText

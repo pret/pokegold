@@ -963,17 +963,17 @@ DoPlayerEvent:
 
 PlayerEventScriptPointers:
 ; entries correspond to PLAYEREVENT_* constants
-	dba Invalid_0x96b60          ; PLAYEREVENT_NONE
-	dba SeenByTrainerScript      ; PLAYEREVENT_SEENBYTRAINER
-	dba TalkToTrainerScript      ; PLAYEREVENT_TALKTOTRAINER
-	dba FindItemInBallScript     ; PLAYEREVENT_ITEMBALL
-	dba EdgeWarpScript           ; PLAYEREVENT_CONNECTION
-	dba WarpToNewMapScript       ; PLAYEREVENT_WARP
-	dba FallIntoMapScript        ; PLAYEREVENT_FALL
-	dba Script_OverworldWhiteout ; PLAYEREVENT_WHITEOUT
-	dba HatchEggScript           ; PLAYEREVENT_HATCH
-	dba ChangeDirectionScript    ; PLAYEREVENT_JOYCHANGEFACING
-	dba Invalid_0x96b60          ; (NUM_PLAYER_EVENTS)
+	dba Invalid_0x96b60         ; PLAYEREVENT_NONE
+	dba SeenByTrainerScript     ; PLAYEREVENT_SEENBYTRAINER
+	dba TalkToTrainerScript     ; PLAYEREVENT_TALKTOTRAINER
+	dba FindItemInBallScript    ; PLAYEREVENT_ITEMBALL
+	dba EdgeWarpScript          ; PLAYEREVENT_CONNECTION
+	dba WarpToNewMapScript      ; PLAYEREVENT_WARP
+	dba FallIntoMapScript       ; PLAYEREVENT_FALL
+	dba OverworldWhiteoutScript ; PLAYEREVENT_WHITEOUT
+	dba HatchEggScript          ; PLAYEREVENT_HATCH
+	dba ChangeDirectionScript   ; PLAYEREVENT_JOYCHANGEFACING
+	dba Invalid_0x96b60         ; (NUM_PLAYER_EVENTS)
 
 Invalid_0x96b60:
 	end
@@ -1006,10 +1006,10 @@ LandAfterPitfallScript:
 	earthquake 16
 	end
 
-EdgeWarpScript: ; 4
-	reloadandreturn MAPSETUP_CONNECTION
+EdgeWarpScript:
+	reloadend MAPSETUP_CONNECTION
 
-ChangeDirectionScript: ; 9
+ChangeDirectionScript:
 	deactivatefacing 3
 	callasm EnableWildEncounters
 	end
