@@ -1,7 +1,5 @@
 SECTION "HRAM", HRAM
 
-hTransferVirtualOAM:: ds 10
-
 	ds 5
 
 hRTCDayHi::   db
