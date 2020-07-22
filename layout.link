@@ -290,4 +290,5 @@ SRAM $03
 	"Boxes 8-14"
 	"Backup Save 3"
 HRAM
+	"OAM DMA"
 	"HRAM"

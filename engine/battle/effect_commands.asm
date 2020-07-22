@@ -2526,7 +2526,7 @@ EndMoveEffect:
 	ld l, a
 	ld a, [wBattleScriptBufferAddress + 1]
 	ld h, a
-	ld a, $ff
+	ld a, endmove_command
 	ld [hli], a
 	ld [hli], a
 	ld [hl], a
