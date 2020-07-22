@@ -87,7 +87,7 @@ INCLUDE "data/maps/spawn_points.asm"
 INCLUDE "engine/overworld/load_map_part.asm"
 INCLUDE "engine/overworld/spawn_points.asm"
 INCLUDE "engine/overworld/map_setup.asm"
-INCLUDE "data/tilesets.asm"
+INCLUDE "data/overworld/tilesets.asm"
 INCLUDE "engine/events/pokecenter_pc.asm"
 INCLUDE "engine/items/mart.asm"
 INCLUDE "engine/events/money.asm"
@@ -349,7 +349,7 @@ INCLUDE "engine/movie/intro.asm"
 SECTION "bank3E", ROMX
 
 INCLUDE "engine/gfx/load_font.asm"
-INCLUDE "data/collision_permissions.asm"
+INCLUDE "data/overworld/collision_permissions.asm"
 
 Shrink1Pic:
 INCBIN "gfx/new_game/shrink1.2bpp.lz"
