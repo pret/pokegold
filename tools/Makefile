@@ -7,7 +7,8 @@ tools := \
 	lzcomp \
 	png_dimensions \
 	scan_includes \
-	gfx
+	gfx \
+	stadium
 all: $(tools)
 	@:
 

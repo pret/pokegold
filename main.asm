@@ -439,18 +439,12 @@ INCBIN "gfx/pokegear/pokegear.2bpp.lz"
 INCLUDE "data/credits_strings.asm"
 
 
-SECTION "Stadium Data", ROMX
+SECTION "Stadium 2 Checksums", ROMX[$7DF8], BANK[$7F]
 
-IF DEF(_GOLD)
-IF DEF(_DEBUG)
-INCBIN "data/stadium/stadium_gold_debug.bin"
-ELSE
-INCBIN "data/stadium/stadium_gold.bin"
-ENDC
-ELIF DEF(_SILVER)
-IF DEF(_DEBUG)
-INCBIN "data/stadium/stadium_silver_debug.bin"
-ELSE
-INCBIN "data/stadium/stadium_silver.bin"
-ENDC
-ENDC
+; The end of the ROM is taken up by checksums of the content, apparently used
+; by Pokémon Stadium 2 due to the checksums' "N64PS3" header. (In Japan,
+; Pokémon Stadium Gold and Silver was the third Stadium release for N64.)
+; This SECTION reserves space for those checksums.
+; If it is removed, also remove the "tools/stadium" command in the Makefile.
+
+	ds $208
