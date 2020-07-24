@@ -251,7 +251,7 @@ ROMX $70
 	"bank70_2"
 ROMX $7f
 	org $7df8
-	"Stadium Data"
+	"Stadium 2 Checksums"
 WRAM0
 	"Audio RAM"
 	"WRAM"
