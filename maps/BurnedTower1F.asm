@@ -1,4 +1,4 @@
-	object_const_def ; object_event constants
+	object_const_def
 	const BURNEDTOWER1F_FIREBREATHER_DICK
 	const BURNEDTOWER1F_FIREBREATHER_NED
 	const BURNEDTOWER1F_ROCK1
@@ -9,12 +9,12 @@
 	const BURNEDTOWER1F_POKE_BALL2
 
 BurnedTower1F_MapScripts:
-	db 3 ; scene scripts
+	def_scene_scripts
 	scene_script .RivalScene ; SCENE_DEFAULT
 	scene_script .DummyScene1 ; SCENE_BURNEDTOWER1F_RIVAL_BATTLE
 	scene_script .DummyScene2 ; SCENE_BURNEDTOWER1F_NOTHING
 
-	db 0 ; callbacks
+	def_callbacks
 
 .RivalScene:
 	prioritysjump .Rival
@@ -279,7 +279,7 @@ FirebreatherNedAfterText:
 BurnedTower1F_MapEvents:
 	db 0, 0 ; filler
 
-	db 14 ; warp events
+	def_warp_events
 	warp_event  9, 15, ECRUTEAK_CITY, 13
 	warp_event 10, 15, ECRUTEAK_CITY, 13
 	warp_event  5,  4, BURNED_TOWER_B1F, 1
@@ -295,13 +295,13 @@ BurnedTower1F_MapEvents:
 	warp_event 15, 14, BURNED_TOWER_B1F, 5
 	warp_event  7, 15, BURNED_TOWER_B1F, 6
 
-	db 1 ; coord events
+	def_coord_events
 	coord_event 8,  1, SCENE_BURNEDTOWER1F_RIVAL_BATTLE, FirebreatherDickFight
 
-	db 1 ; bg events
+	def_bg_events
 	bg_event  8,  7, BGEVENT_ITEM, BurnedTower1FHiddenEther
 
-	db 8 ; object events
+	def_object_events
 	object_event 8, 3, SPRITE_FISHER, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_SCRIPT, 0, FirebreatherDickPostBattle, EVENT_BURNED_TOWER_FIREBREATHER_DICK_NORMAL
 	object_event 16, 8, SPRITE_FISHER, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_RED, OBJECTTYPE_TRAINER, 3, TrainerFirebreatherNed, -1
 	object_event 4, 3, SPRITE_ROCK, SPRITEMOVEDATA_SMASHABLE_ROCK, 0, 0, -1, -1, 0, OBJECTTYPE_SCRIPT, 0, BurnedTower1FRock, -1

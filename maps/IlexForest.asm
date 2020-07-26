@@ -1,4 +1,4 @@
-	object_const_def ; object_event constants
+	object_const_def
 	const ILEXFOREST_FARFETCHD1
 	const ILEXFOREST_FARFETCHD2
 	const ILEXFOREST_FARFETCHD3
@@ -15,9 +15,9 @@
 	const ILEXFOREST_POKE_BALL
 
 IlexForest_MapScripts:
-	db 0 ; scene scripts
+	def_scene_scripts
 
-	db 0 ; callbacks
+	def_callbacks
 
 IlexForestCharcoalApprenticeScript:
 	faceplayer
@@ -660,21 +660,21 @@ Text_IlexForestShrine:
 IlexForest_MapEvents:
 	db 0, 0 ; filler
 
-	db 3 ; warp events
+	def_warp_events
 	warp_event  1,  5, ROUTE_34_ILEX_FOREST_GATE, 3
 	warp_event  3, 42, ILEX_FOREST_AZALEA_GATE, 1
 	warp_event  3, 43, ILEX_FOREST_AZALEA_GATE, 2
 
-	db 0 ; coord events
+	def_coord_events
 
-	db 5 ; bg events
+	def_bg_events
 	bg_event  3, 17, BGEVENT_READ, IlexForestSignpost
 	bg_event 27,  1, BGEVENT_ITEM, IlexForestHiddenEther
 	bg_event 17,  7, BGEVENT_ITEM, IlexForestHiddenSuperPotion
 	bg_event  9, 17, BGEVENT_ITEM, IlexForestHiddenFullHeal
 	bg_event  8, 22, BGEVENT_READ, IlexForestShrineScript
 
-	db 14 ; object events
+	def_object_events
 	object_event 14, 31, SPRITE_BIRD, SPRITEMOVEDATA_SPINRANDOM_SLOW, 0, 0, -1, -1, PAL_NPC_BROWN, OBJECTTYPE_SCRIPT, 0, FarfetchdPosition1, EVENT_ILEX_FOREST_FARFETCHD_1
 	object_event 15, 25, SPRITE_BIRD, SPRITEMOVEDATA_SPINRANDOM_SLOW, 0, 0, -1, -1, PAL_NPC_BROWN, OBJECTTYPE_SCRIPT, 0, FarfetchdPosition2, EVENT_ILEX_FOREST_FARFETCHD_2
 	object_event 20, 24, SPRITE_BIRD, SPRITEMOVEDATA_SPINRANDOM_SLOW, 0, 0, -1, -1, PAL_NPC_BROWN, OBJECTTYPE_SCRIPT, 0, FarfetchdPosition3, EVENT_ILEX_FOREST_FARFETCHD_3

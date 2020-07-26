@@ -1,4 +1,4 @@
-	object_const_def ; object_event constants
+	object_const_def
 	const ROUTE12_FISHER1
 	const ROUTE12_FISHER2
 	const ROUTE12_FISHER3
@@ -7,9 +7,9 @@
 	const ROUTE12_POKE_BALL2
 
 Route12_MapScripts:
-	db 0 ; scene scripts
+	def_scene_scripts
 
-	db 0 ; callbacks
+	def_callbacks
 
 TrainerFisherKyle:
 	trainer FISHER, KYLE, EVENT_BEAT_FISHER_KYLE, FisherKyleSeenText, FisherKyleBeatenText, 0, .Script
@@ -167,17 +167,17 @@ FishingSpotSignText:
 Route12_MapEvents:
 	db 0, 0 ; filler
 
-	db 1 ; warp events
+	def_warp_events
 	warp_event 11, 33, ROUTE_12_SUPER_ROD_HOUSE, 1
 
-	db 0 ; coord events
+	def_coord_events
 
-	db 3 ; bg events
+	def_bg_events
 	bg_event 11, 27, BGEVENT_READ, Route12Sign
 	bg_event 13,  9, BGEVENT_READ, FishingSpotSign
 	bg_event 14, 13, BGEVENT_ITEM, Route12HiddenElixer
 
-	db 6 ; object events
+	def_object_events
 	object_event  5, 15, SPRITE_FISHER, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_TRAINER, 3, TrainerFisherMartin, -1
 	object_event 15, 28, SPRITE_FISHER, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_TRAINER, 1, TrainerFisherStephen, -1
 	object_event 13, 39, SPRITE_FISHER, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, PAL_NPC_GREEN, OBJECTTYPE_TRAINER, 3, TrainerFisherBarney, -1

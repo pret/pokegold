@@ -1,18 +1,18 @@
 EcruteakTinTowerBackEntrance_MapScripts:
-	db 0 ; scene scripts
+	def_scene_scripts
 
-	db 0 ; callbacks
+	def_callbacks
 
 EcruteakTinTowerBackEntrance_MapEvents:
 	db 0, 0 ; filler
 
-	db 3 ; warp events
+	def_warp_events
 	warp_event  7,  4, ECRUTEAK_CITY, 4
 	warp_event  7,  5, ECRUTEAK_CITY, 5
 	warp_event  2,  4, ECRUTEAK_TIN_TOWER_ENTRANCE, 5
 
-	db 0 ; coord events
+	def_coord_events
 
-	db 0 ; bg events
+	def_bg_events
 
-	db 0 ; object events
+	def_object_events
