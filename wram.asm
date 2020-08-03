@@ -1151,13 +1151,14 @@ wce65:: db
 wce66:: db
 
 NEXTU
-; gfpresents, title, and intro menu timers
+; intro data
 wIntroSceneFrameCounter:: db
-UNION
 wIntroSceneTimer:: db
+
 NEXTU
+; title data
+wTitleScreenSelectedOption:: db
 wTitleScreenTimer:: dw
-ENDU
 
 NEXTU
 ; credits data

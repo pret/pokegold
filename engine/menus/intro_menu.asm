@@ -864,8 +864,8 @@ StartTitleScreen:
 	ld b, SCGB_DIPLOMA
 	call GetSGBLayout
 	call UpdateTimePals
-	ld a, [wIntroSceneFrameCounter]
-	cp $5
+	ld a, [wTitleScreenSelectedOption]
+	cp 5
 	jr c, .ok
 	xor a
 .ok
@@ -1002,7 +1002,7 @@ TitleScreenMain:
 	ld a, 1
 
 .done
-	ld [wIntroSceneFrameCounter], a
+	ld [wTitleScreenSelectedOption], a
 
 ; Return to the intro sequence.
 	ld hl, wJumptableIndex
@@ -1027,7 +1027,7 @@ TitleScreenMain:
 
 .clock_reset
 	ld a, 4
-	ld [wIntroSceneFrameCounter], a
+	ld [wTitleScreenSelectedOption], a
 
 ; Return to the intro sequence.
 	ld hl, wJumptableIndex
@@ -1045,7 +1045,7 @@ TitleScreenEnd:
 	ret nz
 
 	ld a, 2
-	ld [wIntroSceneFrameCounter], a
+	ld [wTitleScreenSelectedOption], a
 
 ; Back to the intro.
 	ld hl, wJumptableIndex
