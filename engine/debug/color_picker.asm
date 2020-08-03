@@ -457,7 +457,7 @@ Functionfd646:
 	hlcoord 15, 2
 	ld de, wc508 + 2
 	call Functionfd6b0
-	ld a, 1
+	ld a, TRUE
 	ldh [hCGBPalUpdate], a
 	ld a, 3
 	ld [wJumptableIndex], a
@@ -1229,7 +1229,7 @@ Functionfdc98:
 	hlcoord 16, 0
 	ld de, wc508 + 6
 	call Functionfd6b0
-	ld a, 1
+	ld a, TRUE
 	ldh [hCGBPalUpdate], a
 	call DelayFrame
 	ret

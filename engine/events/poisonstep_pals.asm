@@ -33,7 +33,7 @@ LoadPoisonBGPals:
 	ld [hli], a
 	dec c
 	jr nz, .loop
-	ld a, $1
+	ld a, TRUE
 	ldh [hCGBPalUpdate], a
 	ld c, 4
 	call DelayFrames

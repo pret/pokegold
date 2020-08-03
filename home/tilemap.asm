@@ -180,7 +180,7 @@ ClearPalettes::
 	ld a, $ff
 	call ByteFill
 ; Request palette update
-	ld a, 1
+	ld a, TRUE
 	ldh [hCGBPalUpdate], a
 	ret
 

@@ -1300,7 +1300,7 @@ BattleAnim_SetBGPals:
 	ld b, a
 	ld c, 2
 	call CopyPals
-	ld a, $1
+	ld a, TRUE
 	ldh [hCGBPalUpdate], a
 	ret
 
@@ -1315,7 +1315,7 @@ BattleAnim_SetOBPals:
 	ld b, a
 	ld c, 2
 	call CopyPals
-	ld a, $1
+	ld a, TRUE
 	ldh [hCGBPalUpdate], a
 	ret
 

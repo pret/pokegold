@@ -166,7 +166,7 @@ INCBIN "gfx/overworld/heal_machine.2bpp"
 	ld de, wOBPals2 palette PAL_OW_TREE
 	ld bc, 1 palettes
 	call CopyBytes
-	ld a, $1
+	ld a, TRUE
 	ldh [hCGBPalUpdate], a
 	ret
 
@@ -223,7 +223,7 @@ INCLUDE "gfx/overworld/heal_machine.pal"
 	ld a, e
 	ld [hl], a
 
-	ld a, $1
+	ld a, TRUE
 	ldh [hCGBPalUpdate], a
 	ret
 
