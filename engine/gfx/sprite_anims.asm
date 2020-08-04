@@ -775,12 +775,12 @@ IF DEF(_GOLD)
 	ld a, [hl]
 	sla a
 	sla a
-	ld d, $2
 
+	ld d, 2
 	ld hl, SPRITEANIMSTRUCT_0C
 	add hl, bc
 	ld a, [hl]
-	add $3
+	add 3
 	ld [hl], a
 	call .Sprites_Sine
 
@@ -840,11 +840,11 @@ ENDC
 IF DEF(_GOLD)
 	inc a
 	ld [hl], a
-	ld d, $2
+	ld d, 2
 ELIF DEF(_SILVER)
 	dec a
 	ld [hl], a
-	ld d, $8
+	ld d, 8
 ENDC
 	call .Sprites_Sine
 
@@ -1118,7 +1118,7 @@ ENDC
 	inc [hl]
 .move_vertical
 	ld a, e
-	ld d, $20
+	ld d, 32
 	call .Sprites_Sine
 
 	ld hl, SPRITEANIMSTRUCT_YOFFSET
@@ -1183,10 +1183,10 @@ ENDC
 	ld hl, SPRITEANIMSTRUCT_0C
 	add hl, bc
 	ld a, [hl]
-	cp $30
+	cp 48
 	jr c, .asm_8da7b
 	dec [hl]
-	ld d, $28
+	ld d, 40
 	call .Sprites_Sine
 
 	ld hl, SPRITEANIMSTRUCT_YOFFSET
@@ -1219,8 +1219,8 @@ ENDC
 	ld a, [hl]
 	and a
 	jr z, .asm_8daca
-	ld d, a
 
+	ld d, a
 	ld hl, SPRITEANIMSTRUCT_0C
 	add hl, bc
 	ld a, [hl]
