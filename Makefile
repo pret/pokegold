@@ -59,10 +59,8 @@ silver:       pokesilver.gbc
 gold_debug:   pokegold_debug.gbc
 silver_debug: pokesilver_debug.gbc
 
-clean:
-	rm -f $(roms) $(pokegold_obj) $(pokesilver_obj) $(pokegold_debug_obj) $(pokesilver_debug_obj) $(roms:.gbc=.map) $(roms:.gbc=.sym) rgbdscheck.o
+clean: tidy
 	find gfx \( -name "*.[12]bpp" -o -name "*.lz" -o -name "*.gbcpal" -o -name "*.dimensions" -o -name "*.sgb.tilemap" \) -delete
-	$(MAKE) clean -C tools/
 
 tidy:
 	rm -f $(roms) $(pokegold_obj) $(pokesilver_obj) $(pokegold_debug_obj) $(pokesilver_debug_obj) $(roms:.gbc=.map) $(roms:.gbc=.sym) rgbdscheck.o
