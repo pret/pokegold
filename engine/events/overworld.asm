@@ -282,7 +282,7 @@ FlashFunction:
 	farcall CheckBadge
 	jr c, .nozephyrbadge
 	ld a, [wTimeOfDayPalset]
-	cp %11111111 ; 3, 3, 3, 3
+	cp DARKNESS_PALSET
 	jr nz, .notadarkcave
 .useflash
 	call UseFlash

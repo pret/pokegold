@@ -220,7 +220,7 @@ StartTrainerBattle_Flash:
 
 .DoFlashAnimation:
 	ld a, [wTimeOfDayPalset]
-	cp %11111111 ; dark cave
+	cp DARKNESS_PALSET
 	jr z, .done
 	ld hl, wce64
 	ld a, [hl]
@@ -578,13 +578,13 @@ StartTrainerBattle_LoadPokeBallGraphics:
 	jr .nextscene
 
 .cgb
-	ld hl, .daypals
+	ld hl, .pals
 	ld a, [wTimeOfDayPal]
 	maskbits NUM_DAYTIMES
 	cp DARKNESS_F
-	jr nz, .daytime
-	ld hl, .nightpals
-.daytime
+	jr nz, .not_dark
+	ld hl, .darkpals
+.not_dark
 	call .copypals
 	push hl
 	ld de, wBGPals1 palette PAL_BG_TEXT
@@ -651,11 +651,11 @@ popo
 	pop hl
 	ret
 
-.daypals
-INCLUDE "gfx/overworld/trainer_battle_day.pal"
+.pals
+INCLUDE "gfx/overworld/trainer_battle.pal"
 
-.nightpals
-INCLUDE "gfx/overworld/trainer_battle_nite.pal"
+.darkpals
+INCLUDE "gfx/overworld/trainer_battle_dark.pal"
 
 WipeLYOverrides:
 	ld hl, wLYOverrides
