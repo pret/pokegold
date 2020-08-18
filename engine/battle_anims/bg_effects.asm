@@ -2502,7 +2502,7 @@ BGEffects_LoadBGPal0_OBPal1:
 	ld c, $1
 	call CopyPals
 	pop bc
-	ld a, $1
+	ld a, TRUE
 	ldh [hCGBPalUpdate], a
 	ret
 
@@ -2521,7 +2521,7 @@ BGEffects_LoadBGPal1_OBPal0:
 	ld c, $1
 	call CopyPals
 	pop bc
-	ld a, $1
+	ld a, TRUE
 	ldh [hCGBPalUpdate], a
 	ret
 

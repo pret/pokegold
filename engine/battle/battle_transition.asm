@@ -600,7 +600,7 @@ StartTrainerBattle_LoadPokeBallGraphics:
 	ld a, PAL_BG_TEXT
 	call ByteFill
 
-	ld a, 1
+	ld a, TRUE
 	ldh [hCGBPalUpdate], a
 	call DelayFrame
 	call CGBOnly_CopyTilemapAtOnce
