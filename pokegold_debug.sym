@@ -6407,7 +6407,7 @@
 0a:4b83 LinkTrade.asm_28b83
 0a:4c92 LinkTrade.player_2
 0a:4c97 LinkTrade.done_animation
-0a:4cf4 LinkTrade.loop
+0a:4cf4 LinkTrade.send_checkbyte
 0a:4d0e LinkTrade.save
 0a:4d3c Function28d3c
 0a:4d44 String28d44
