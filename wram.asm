@@ -2069,10 +2069,14 @@ wScriptTextAddr::
 	ds 1
 wWildEncounterCooldown:: db
 wXYComparePointer:: dw
+
 wd17c:: flag_array 32
-wBattleScriptFlags:: dw
+
+wBattleScriptFlags:: db
+	ds 1
 wPlayerSpriteSetupFlags::
 	db
+
 wMapReentryScriptQueueFlag:: db
 wMapReentryScriptBank:: db
 wMapReentryScriptAddress:: dw
