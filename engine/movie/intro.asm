@@ -47,14 +47,14 @@ Copyright_GameFreakPresents:
 .GetGFLogoGFX:
 ; Load gfx and initialize variables
 
-	ld de, GameFreakPresentsGFX1
+	ld de, GameFreakLogoGFX
 	ld hl, vTiles1
-	lb bc, BANK(GameFreakPresentsGFX1), 28
+	lb bc, BANK(GameFreakLogoGFX), 28
 	call Get1bpp
 
-	ld de, GameFreakPresentsGFX2
+	ld de, GameFreakLogoStarsGFX
 	ld hl, vTiles1 tile 28
-	lb bc, BANK(GameFreakPresentsGFX2), 5
+	lb bc, BANK(GameFreakLogoStarsGFX), 5
 	call Request2bpp
 
 	farcall ClearSpriteAnims
@@ -333,14 +333,13 @@ GameFreakPresents_Sparkle:
 	db $34, $02
 	db $3c, $04
 
-GameFreakPresentsGFX1:
-INCBIN "gfx/intro/gamefreak_presents.1bpp"
-INCBIN "gfx/intro/gamefreak_logo.1bpp"
+GameFreakLogoGFX:
+INCBIN "gfx/splash/gamefreak_presents.1bpp"
+INCBIN "gfx/splash/gamefreak_logo.1bpp"
 
-GameFreakPresentsGFX2:
-INCBIN "gfx/intro/logo_star.2bpp"
-INCBIN "gfx/intro/logo_sparkle.2bpp"
-
+GameFreakLogoStarsGFX:
+INCBIN "gfx/splash/logo_star.2bpp"
+INCBIN "gfx/splash/logo_sparkle.2bpp"
 
 GoldSilverIntro:
 	call .Init
