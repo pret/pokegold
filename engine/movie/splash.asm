@@ -151,7 +151,7 @@ GameFreakPresents_Star:
 	ld a, SPRITE_ANIM_INDEX_GS_INTRO_STAR
 	call InitSpriteAnimStruct
 
-	ld hl, SPRITEANIMSTRUCT_0C
+	ld hl, SPRITEANIMSTRUCT_VAR1
 	add hl, bc
 	ld [hl], $80
 
@@ -305,10 +305,10 @@ GameFreakPresents_Sparkle:
 	ld a, [de]
 	ld [hl], a ; angle
 	inc de
-	ld hl, SPRITEANIMSTRUCT_0C
+	ld hl, SPRITEANIMSTRUCT_VAR1
 	add hl, bc
 	ld [hl], 0
-	inc hl ; SPRITEANIMSTRUCT_0D
+	inc hl ; SPRITEANIMSTRUCT_VAR2
 	ld a, [de]
 	ld [hl], a ; distance
 	ret

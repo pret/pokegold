@@ -81,7 +81,7 @@ DoAnimFrame:
 	add hl, bc
 	ld [hl], 8 * 3
 
-	ld hl, SPRITEANIMSTRUCT_0C
+	ld hl, SPRITEANIMSTRUCT_VAR1
 	add hl, bc
 	ld a, [hl]
 	ld d, a
@@ -89,7 +89,7 @@ DoAnimFrame:
 	and $f
 	ret nz
 
-	ld hl, SPRITEANIMSTRUCT_0D
+	ld hl, SPRITEANIMSTRUCT_VAR2
 	add hl, bc
 	ld e, [hl]
 
@@ -138,7 +138,7 @@ DoAnimFrame:
 	ret
 
 .GSIntroBubble
-	ld hl, SPRITEANIMSTRUCT_0D
+	ld hl, SPRITEANIMSTRUCT_VAR2
 	add hl, bc
 	ld a, [hl]
 	inc [hl]
@@ -148,7 +148,7 @@ DoAnimFrame:
 	ld hl, SPRITEANIMSTRUCT_YOFFSET
 	add hl, bc
 	dec [hl]
-	ld hl, SPRITEANIMSTRUCT_0C
+	ld hl, SPRITEANIMSTRUCT_VAR1
 	add hl, bc
 	ld a, [hl]
 	add $02
@@ -191,7 +191,7 @@ DoAnimFrame:
 
 	and $03
 	swap a
-	ld hl, SPRITEANIMSTRUCT_0C
+	ld hl, SPRITEANIMSTRUCT_VAR1
 	add hl, bc
 	ld [hl], a
 
@@ -211,7 +211,7 @@ DoAnimFrame:
 
 	add d
 	ld [hl], a
-	ld hl, SPRITEANIMSTRUCT_0C
+	ld hl, SPRITEANIMSTRUCT_VAR1
 	add hl, bc
 	ld a, [hl]
 	add e
@@ -235,7 +235,7 @@ DoAnimFrame:
 	jr nc, .asm_8d5bb
 
 	inc [hl]
-	ld hl, SPRITEANIMSTRUCT_0C
+	ld hl, SPRITEANIMSTRUCT_VAR1
 	add hl, bc
 	ld a, [hl]
 	inc [hl]
@@ -276,14 +276,14 @@ DoAnimFrame:
 
 .asm_8d5d8
 	call .IncrementJumptableIndex
-	ld hl, SPRITEANIMSTRUCT_0D
+	ld hl, SPRITEANIMSTRUCT_VAR2
 	add hl, bc
 	ld [hl], $b0
 	ret
 
 .Function8d5e2
 	call .Function8d60b
-	ld hl, SPRITEANIMSTRUCT_0D
+	ld hl, SPRITEANIMSTRUCT_VAR2
 	add hl, bc
 	ld a, [hl]
 	and a
@@ -314,7 +314,7 @@ DoAnimFrame:
 	ret
 
 .Function8d60b
-	ld hl, SPRITEANIMSTRUCT_0C
+	ld hl, SPRITEANIMSTRUCT_VAR1
 	add hl, bc
 	ld a, [hl]
 	inc [hl]
@@ -323,7 +323,7 @@ DoAnimFrame:
 	ld hl, SPRITEANIMSTRUCT_YOFFSET
 	add hl, bc
 	ld [hl], a
-	ld hl, SPRITEANIMSTRUCT_0C
+	ld hl, SPRITEANIMSTRUCT_VAR1
 	add hl, bc
 	ld a, [hl]
 	and $1
@@ -346,7 +346,7 @@ DoAnimFrame:
 	swap a
 	sla a
 
-	ld hl, SPRITEANIMSTRUCT_0C
+	ld hl, SPRITEANIMSTRUCT_VAR1
 	add hl, bc
 	ld [hl], a
 .Function8d63e
@@ -358,7 +358,7 @@ DoAnimFrame:
 	inc [hl]
 	ld d, $04
 
-	ld hl, SPRITEANIMSTRUCT_0C
+	ld hl, SPRITEANIMSTRUCT_VAR1
 	add hl, bc
 	ld a, [hl]
 	add $02
@@ -369,7 +369,7 @@ DoAnimFrame:
 	add hl, bc
 	ld [hl], a
 
-	ld hl, SPRITEANIMSTRUCT_0C
+	ld hl, SPRITEANIMSTRUCT_VAR1
 	add hl, bc
 	and $2
 	ret z
@@ -433,7 +433,7 @@ DoAnimFrame:
 
 .asm_8d6a7
 	call .IncrementJumptableIndex
-	ld hl, SPRITEANIMSTRUCT_0D
+	ld hl, SPRITEANIMSTRUCT_VAR2
 	add hl, bc
 	ld [hl], $30
 	ld a, SPRITE_ANIM_FRAMESET_GS_INTRO_PIKACHU_2
@@ -441,7 +441,7 @@ DoAnimFrame:
 	ret
 
 .Function8d6b6
-	ld hl, SPRITEANIMSTRUCT_0D
+	ld hl, SPRITEANIMSTRUCT_VAR2
 	add hl, bc
 	ld a, [hl]
 	and a
@@ -456,7 +456,7 @@ DoAnimFrame:
 	ret
 
 .Function8d6c9
-	ld hl, SPRITEANIMSTRUCT_0C
+	ld hl, SPRITEANIMSTRUCT_VAR1
 	add hl, bc
 	ld a, [hl]
 	add $04
@@ -518,7 +518,7 @@ DoAnimFrame:
 .asm_8d717
 	call .IncrementJumptableIndex
 
-	ld hl, SPRITEANIMSTRUCT_0D
+	ld hl, SPRITEANIMSTRUCT_VAR2
 	add hl, bc
 	ld [hl], $30
 	ld a, SPRITE_ANIM_FRAMESET_GS_INTRO_PIKACHU_TAIL_2
@@ -526,7 +526,7 @@ DoAnimFrame:
 	ret
 
 .Function8d726
-	ld hl, SPRITEANIMSTRUCT_0D
+	ld hl, SPRITEANIMSTRUCT_VAR2
 	add hl, bc
 	ld a, [hl]
 	and a
@@ -543,7 +543,7 @@ DoAnimFrame:
 	ret
 
 .Function8d73c
-	ld hl, SPRITEANIMSTRUCT_0C
+	ld hl, SPRITEANIMSTRUCT_VAR1
 	add hl, bc
 	ld a, [hl]
 	add $04
@@ -593,7 +593,7 @@ DoAnimFrame:
 	and $3
 	swap a
 	add e
-	ld hl, SPRITEANIMSTRUCT_0C
+	ld hl, SPRITEANIMSTRUCT_VAR1
 	add hl, bc
 	ld [hl], a
 	ret
@@ -606,14 +606,14 @@ DoAnimFrame:
 	dec [hl]
 	dec [hl]
 
-	ld hl, SPRITEANIMSTRUCT_0D
+	ld hl, SPRITEANIMSTRUCT_VAR2
 	add hl, bc
 	ld a, [hl]
 	ld d, a
 	add $8
 	ld [hl], a
 
-	ld hl, SPRITEANIMSTRUCT_0C
+	ld hl, SPRITEANIMSTRUCT_VAR1
 	add hl, bc
 	ld a, [hl]
 	push af
@@ -643,16 +643,16 @@ DoAnimFrame:
 
 .Function8d7b9
 	call .IncrementJumptableIndex
-	ld hl, SPRITEANIMSTRUCT_0C
+	ld hl, SPRITEANIMSTRUCT_VAR1
 	add hl, bc
 	ld [hl], $30
-	ld hl, SPRITEANIMSTRUCT_0D
+	ld hl, SPRITEANIMSTRUCT_VAR2
 	add hl, bc
 	ld [hl], $30
 	ret
 
 .Function8d7c9
-	ld hl, SPRITEANIMSTRUCT_0C
+	ld hl, SPRITEANIMSTRUCT_VAR1
 	add hl, bc
 	ld a, [hl]
 	cp $3c
@@ -667,7 +667,7 @@ DoAnimFrame:
 	add hl, bc
 	ld [hl], a
 
-	ld hl, SPRITEANIMSTRUCT_0D
+	ld hl, SPRITEANIMSTRUCT_VAR2
 	add hl, bc
 	ld a, [hl]
 	inc [hl]
@@ -691,16 +691,16 @@ DoAnimFrame:
 
 .Function8d7f7
 	call .IncrementJumptableIndex
-	ld hl, SPRITEANIMSTRUCT_0C
+	ld hl, SPRITEANIMSTRUCT_VAR1
 	add hl, bc
 	ld [hl], $30
-	ld hl, SPRITEANIMSTRUCT_0D
+	ld hl, SPRITEANIMSTRUCT_VAR2
 	add hl, bc
 	ld [hl], $10
 	ret
 
 .Function8d807
-	ld hl, SPRITEANIMSTRUCT_0C
+	ld hl, SPRITEANIMSTRUCT_VAR1
 	add hl, bc
 	ld a, [hl]
 	cp $3c
@@ -712,7 +712,7 @@ DoAnimFrame:
 	ld hl, SPRITEANIMSTRUCT_YOFFSET
 	add hl, bc
 	ld [hl], a
-	ld hl, SPRITEANIMSTRUCT_0D
+	ld hl, SPRITEANIMSTRUCT_VAR2
 	add hl, bc
 	ld a, [hl]
 	inc [hl]
@@ -740,14 +740,14 @@ IF DEF(_GOLD)
 	add hl, bc
 	ld a, [hl]
 
-	ld hl, SPRITEANIMSTRUCT_0D
+	ld hl, SPRITEANIMSTRUCT_VAR2
 	add hl, bc
 	and $3
 	ld [hl], a
 	inc [hl]
 	swap a
 
-	ld hl, SPRITEANIMSTRUCT_0C
+	ld hl, SPRITEANIMSTRUCT_VAR1
 	add hl, bc
 	ld [hl], a
 
@@ -758,7 +758,7 @@ IF DEF(_GOLD)
 	cp $a4
 	jr nc, .asm_8d881
 
-	ld hl, SPRITEANIMSTRUCT_0D
+	ld hl, SPRITEANIMSTRUCT_VAR2
 	add hl, bc
 	add $4
 
@@ -770,14 +770,14 @@ IF DEF(_GOLD)
 	add hl, bc
 	inc [hl]
 
-	ld hl, SPRITEANIMSTRUCT_0D
+	ld hl, SPRITEANIMSTRUCT_VAR2
 	add hl, bc
 	ld a, [hl]
 	sla a
 	sla a
 
 	ld d, 2
-	ld hl, SPRITEANIMSTRUCT_0C
+	ld hl, SPRITEANIMSTRUCT_VAR1
 	add hl, bc
 	ld a, [hl]
 	add 3
@@ -805,7 +805,7 @@ ELIF DEF(_SILVER)
 	add $3
 	ld d, a
 
-	ld hl, SPRITEANIMSTRUCT_0C
+	ld hl, SPRITEANIMSTRUCT_VAR1
 	add hl, bc
 	ld a, [wIntroSceneTimer]
 	and $30
@@ -834,7 +834,7 @@ ELIF DEF(_SILVER)
 ENDC
 
 .GSIntroHoOhLugia
-	ld hl, SPRITEANIMSTRUCT_0C
+	ld hl, SPRITEANIMSTRUCT_VAR1
 	add hl, bc
 	ld a, [hl]
 IF DEF(_GOLD)
@@ -906,7 +906,7 @@ ENDC
 	ret
 
 .Function8d8e1
-	ld hl, SPRITEANIMSTRUCT_0C
+	ld hl, SPRITEANIMSTRUCT_VAR1
 	add hl, bc
 	ld a, [hl]
 	inc [hl]
@@ -952,7 +952,7 @@ ENDC
 	ret
 
 .GSIntroStar
-	ld hl, SPRITEANIMSTRUCT_0C
+	ld hl, SPRITEANIMSTRUCT_VAR1
 	add hl, bc
 	ld a, [hl]
 	and a
@@ -963,7 +963,7 @@ ENDC
 	and $1f
 	jr nz, .asm_8d943
 
-	ld hl, SPRITEANIMSTRUCT_0D
+	ld hl, SPRITEANIMSTRUCT_VAR2
 	add hl, bc
 	dec [hl]
 .asm_8d943
@@ -985,7 +985,7 @@ ENDC
 	add hl, bc
 	ld [hl], a
 
-	ld hl, SPRITEANIMSTRUCT_0D
+	ld hl, SPRITEANIMSTRUCT_VAR2
 	add hl, bc
 	ld a, [hl]
 
@@ -1002,13 +1002,13 @@ ENDC
 	ret
 
 .GSIntroSparkle
-	ld hl, SPRITEANIMSTRUCT_0C
+	ld hl, SPRITEANIMSTRUCT_VAR1
 	add hl, bc
 	ld a, [hli]
 	or [hl]
 	jr z, .asm_8d9cc
 
-	ld hl, SPRITEANIMSTRUCT_0F
+	ld hl, SPRITEANIMSTRUCT_VAR4
 	add hl, bc
 	ld d, [hl]
 
@@ -1030,13 +1030,13 @@ ENDC
 	add hl, bc
 	ld [hl], a
 
-	ld hl, SPRITEANIMSTRUCT_0C
+	ld hl, SPRITEANIMSTRUCT_VAR1
 	add hl, bc
 	ld e, [hl]
 	inc hl
 	ld d, [hl]
 
-	ld hl, SPRITEANIMSTRUCT_0E
+	ld hl, SPRITEANIMSTRUCT_VAR3
 	add hl, bc
 	ld a, [hli]
 	ld h, [hl]
@@ -1045,13 +1045,13 @@ ENDC
 	ld e, l
 	ld d, h
 
-	ld hl, SPRITEANIMSTRUCT_0E
+	ld hl, SPRITEANIMSTRUCT_VAR3
 	add hl, bc
 	ld [hl], e
 	inc hl
 	ld [hl], d
 
-	ld hl, SPRITEANIMSTRUCT_0C
+	ld hl, SPRITEANIMSTRUCT_VAR1
 	add hl, bc
 	ld a, [hli]
 	ld h, [hl]
@@ -1061,7 +1061,7 @@ ENDC
 	ld e, l
 	ld d, h
 
-	ld hl, SPRITEANIMSTRUCT_0C
+	ld hl, SPRITEANIMSTRUCT_VAR1
 	add hl, bc
 	ld [hl], e
 	inc hl
@@ -1158,13 +1158,13 @@ ENDC
 	add hl, bc
 	ld [hl], $2
 
-	ld hl, SPRITEANIMSTRUCT_0C
+	ld hl, SPRITEANIMSTRUCT_VAR1
 	add hl, bc
 	ld [hl], $20
 	ret
 
 .TradePokeBall_two
-	ld hl, SPRITEANIMSTRUCT_0C
+	ld hl, SPRITEANIMSTRUCT_VAR1
 	add hl, bc
 	ld a, [hl]
 	and a
@@ -1175,12 +1175,12 @@ ENDC
 .asm_8da5d
 	call .IncrementJumptableIndex
 
-	ld hl, SPRITEANIMSTRUCT_0C
+	ld hl, SPRITEANIMSTRUCT_VAR1
 	add hl, bc
 	ld [hl], $40
 
 .TradePokeBall_three
-	ld hl, SPRITEANIMSTRUCT_0C
+	ld hl, SPRITEANIMSTRUCT_VAR1
 	add hl, bc
 	ld a, [hl]
 	cp 48
@@ -1204,24 +1204,24 @@ ENDC
 	add hl, bc
 	ld [hl], $4
 
-	ld hl, SPRITEANIMSTRUCT_0C
+	ld hl, SPRITEANIMSTRUCT_VAR1
 	add hl, bc
 	ld [hl], $30
 
-	ld hl, SPRITEANIMSTRUCT_0D
+	ld hl, SPRITEANIMSTRUCT_VAR2
 	add hl, bc
 	ld [hl], $24
 	ret
 
 .TradePokeBall_four
-	ld hl, SPRITEANIMSTRUCT_0D
+	ld hl, SPRITEANIMSTRUCT_VAR2
 	add hl, bc
 	ld a, [hl]
 	and a
 	jr z, .asm_8daca
 
 	ld d, a
-	ld hl, SPRITEANIMSTRUCT_0C
+	ld hl, SPRITEANIMSTRUCT_VAR1
 	add hl, bc
 	ld a, [hl]
 	call Sprites_Sine
@@ -1230,18 +1230,18 @@ ENDC
 	add hl, bc
 	ld [hl], a
 
-	ld hl, SPRITEANIMSTRUCT_0C
+	ld hl, SPRITEANIMSTRUCT_VAR1
 	add hl, bc
 	inc [hl]
 	ld a, [hl]
 	and $3f
 	ret nz
 
-	ld hl, SPRITEANIMSTRUCT_0C
+	ld hl, SPRITEANIMSTRUCT_VAR1
 	add hl, bc
 	ld [hl], $20
 
-	ld hl, SPRITEANIMSTRUCT_0D
+	ld hl, SPRITEANIMSTRUCT_VAR2
 	add hl, bc
 	ld a, [hl]
 	sub $c
@@ -1285,7 +1285,7 @@ ENDC
 	ret
 
 .RevealNewMon:
-	ld hl, SPRITEANIMSTRUCT_0C
+	ld hl, SPRITEANIMSTRUCT_VAR1
 	add hl, bc
 	ld a, [hl]
 	cp $80
@@ -1326,7 +1326,7 @@ ENDC
 	ret
 
 .CutLeaves
-	ld hl, SPRITEANIMSTRUCT_0D
+	ld hl, SPRITEANIMSTRUCT_VAR2
 	add hl, bc
 	ld e, [hl]
 	inc hl
@@ -1336,13 +1336,13 @@ ENDC
 	ld e, l
 	ld d, h
 
-	ld hl, SPRITEANIMSTRUCT_0D
+	ld hl, SPRITEANIMSTRUCT_VAR2
 	add hl, bc
 	ld [hl], e
 	inc hl
 	ld [hl], d
 
-	ld hl, SPRITEANIMSTRUCT_0C
+	ld hl, SPRITEANIMSTRUCT_VAR1
 	add hl, bc
 	ld a, [hl]
 	inc [hl]
@@ -1371,7 +1371,7 @@ ENDC
 	and a
 	ret z
 
-	ld hl, SPRITEANIMSTRUCT_0D
+	ld hl, SPRITEANIMSTRUCT_VAR2
 	add hl, bc
 	ld a, [hl]
 	inc [hl]
@@ -1383,7 +1383,7 @@ ENDC
 	dec [hl]
 	dec [hl]
 
-	ld hl, SPRITEANIMSTRUCT_0F
+	ld hl, SPRITEANIMSTRUCT_VAR4
 	add hl, bc
 	ld a, [hl]
 	ld d, a
@@ -1392,7 +1392,7 @@ ENDC
 	add $8
 	ld [hl], a
 .skip
-	ld hl, SPRITEANIMSTRUCT_0E
+	ld hl, SPRITEANIMSTRUCT_VAR3
 	add hl, bc
 	ld a, [hl]
 	inc [hl]
@@ -1417,7 +1417,7 @@ ENDC
 	dec [hl]
 
 	ld d, $40
-	ld hl, SPRITEANIMSTRUCT_0C
+	ld hl, SPRITEANIMSTRUCT_VAR1
 	add hl, bc
 	ld a, [hl]
 	inc [hl]
@@ -1444,7 +1444,7 @@ ENDC
 	inc [hl]
 	inc [hl]
 
-	ld hl, SPRITEANIMSTRUCT_0F
+	ld hl, SPRITEANIMSTRUCT_VAR4
 	add hl, bc
 	ld a, [hl]
 	ld d, a
@@ -1453,7 +1453,7 @@ ENDC
 	sub $2
 	ld [hl], a
 .asm_8dbce
-	ld hl, SPRITEANIMSTRUCT_0E
+	ld hl, SPRITEANIMSTRUCT_VAR3
 	add hl, bc
 	ld a, [hl]
 	inc [hl]
