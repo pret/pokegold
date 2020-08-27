@@ -327,7 +327,7 @@ INCLUDE "engine/pokemon/bills_pc.asm"
 SECTION "bank39", ROMX
 
 CopyrightGFX::
-INCBIN "gfx/intro/copyright.2bpp"
+INCBIN "gfx/splash/copyright.2bpp"
 
 IF DEF(_GOLD)
 TitleScreenGFX3:
@@ -343,6 +343,7 @@ INCBIN "gfx/title/lugia_silver.2bpp.lz"
 ENDC
 
 INCLUDE "engine/menus/options_menu.asm"
+INCLUDE "engine/movie/splash.asm"
 INCLUDE "engine/movie/intro.asm"
 
 
