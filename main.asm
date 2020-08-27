@@ -343,6 +343,7 @@ INCBIN "gfx/title/lugia_silver.2bpp.lz"
 ENDC
 
 INCLUDE "engine/menus/options_menu.asm"
+INCLUDE "engine/movie/splash.asm"
 INCLUDE "engine/movie/intro.asm"
 
 
