@@ -1,7 +1,8 @@
-Copyright_GameFreakPresents:
+SplashScreen:
 ; Play the copyright screen and GameFreak Presents sequence.
 ; Return carry if user cancels animation by pressing a button.
 
+; Reinitialize everything
 	call ClearBGPalettes
 	call ClearTilemap
 	ld a, HIGH(vBGMap0)
@@ -19,15 +20,18 @@ Copyright_GameFreakPresents:
 	call SetPalettes
 	ld c, 10
 	call DelayFrames
+
+; Draw copyright screen
 	callfar Copyright
 	call WaitBGMap
 	ld c, 100
 	call DelayFrames
 	call ClearTilemap
-	call .GetGFLogoGFX
 
+; Play GameFreak logo animation
+	call GameFreakPresentsInit
 .loop
-	call .PlayFrame
+	call GameFreakPresentsFrame
 	jr nc, .loop
 
 ; high bits of wJumptableIndex are recycled for some flags
@@ -44,9 +48,7 @@ Copyright_GameFreakPresents:
 	scf
 	ret
 
-.GetGFLogoGFX:
-; Load gfx and initialize variables
-
+GameFreakPresentsInit:
 	ld de, GameFreakLogoGFX
 	ld hl, vTiles1
 	lb bc, BANK(GameFreakLogoGFX), 28
@@ -78,7 +80,7 @@ Copyright_GameFreakPresents:
 	call DmgToCgbObjPals
 	ret
 
-.PlayFrame:
+GameFreakPresentsFrame:
 ; Play one frame of GameFreakPresents sequence.
 ; Return carry when the sequence completes or is canceled.
 
@@ -95,7 +97,7 @@ Copyright_GameFreakPresents:
 
 	farcall PlaySpriteAnimations
 
-	call PlaceGameFreakPresents
+	call GameFreakPresentsScene
 	call DelayFrame
 
 ; ensure carry is cleared
@@ -118,7 +120,7 @@ Copyright_GameFreakPresents:
 	scf
 	ret
 
-PlaceGameFreakPresents:
+GameFreakPresentsScene:
 	jumptable .scenes, wJumptableIndex
 
 .scenes
@@ -175,7 +177,7 @@ GameFreakPresents_PlaceLogo:
 	call GameFreakPresents_NextScene
 
 ; set timer for GameFreakPresents_LogoSparkles
-	ld a, $80
+	ld a, 128
 	ld [wIntroSceneTimer], a
 	ret
 
@@ -187,7 +189,7 @@ GameFreakPresents_LogoSparkles:
 	dec [hl]
 
 ; add first text when timer passes half
-	cp $3f
+	cp 63
 	call z, GameFreakPresents_PlaceGameFreak
 
 ; add sparkles continuously
@@ -195,8 +197,8 @@ GameFreakPresents_LogoSparkles:
 	ret
 
 .done
-; set timer for GameFreakPresents_PlacePresents
-	ld [hl], $80
+; go to the next scene
+	ld [hl], 128
 	call GameFreakPresents_NextScene
 	ret
 
@@ -218,7 +220,7 @@ GameFreakPresents_PlacePresents:
 	call GameFreakPresents_NextScene
 
 ; set timer for GameFreakPresents_WaitForTimer
-	ld a, $80
+	ld a, 128
 	ld [wIntroSceneTimer], a
 	ret
 

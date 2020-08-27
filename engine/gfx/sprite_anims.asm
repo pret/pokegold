@@ -947,7 +947,7 @@ ENDC
 	callfar ComposeMail_AnimateCursor
 	ret
 
-.GameFreakLogo:
+.GameFreakLogo
 	callfar GameFreakPresents_UpdateLogoPal
 	ret
 
