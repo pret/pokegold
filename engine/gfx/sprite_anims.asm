@@ -36,8 +36,8 @@ DoAnimFrame:
 	dw .UnusedJigglypuff
 	dw .NamingScreenCursor
 	dw .GameFreakLogo
-	dw .GSIntroStar
-	dw .GSIntroSparkle
+	dw .GSGameFreakLogoStar
+	dw .GSGameFreakLogoSparkle
 	dw .SlotsGolem
 	dw .SlotsChansey
 	dw .SlotsChanseyEgg
@@ -951,7 +951,7 @@ ENDC
 	callfar GameFreakPresents_UpdateLogoPal
 	ret
 
-.GSIntroStar
+.GSGameFreakLogoStar
 	ld hl, SPRITEANIMSTRUCT_VAR1
 	add hl, bc
 	ld a, [hl]
@@ -1001,7 +1001,7 @@ ENDC
 	call DeinitializeSprite
 	ret
 
-.GSIntroSparkle
+.GSGameFreakLogoSparkle
 	ld hl, SPRITEANIMSTRUCT_VAR1
 	add hl, bc
 	ld a, [hli]
