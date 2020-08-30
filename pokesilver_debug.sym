@@ -33961,8 +33961,6 @@
 00:cb62 wEnemyDamageTaken
 00:cb64 wBattleReward
 00:cb67 wBattleAnimParam
-00:cb67 wPresentPower
-00:cb67 wKickCounter
 00:cb68 wBattleScriptBuffer
 00:cb90 wBattleScriptBufferAddress
 00:cb92 wTurnEnded
