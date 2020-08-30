@@ -133,7 +133,7 @@ BattleCommand_CheckTurn:
 	xor a
 	ld [wAttackMissed], a
 	ld [wEffectFailed], a
-	ld [wKickCounter], a
+	ld [wBattleAnimParam], a
 	ld [wAlreadyDisobeyed], a
 	ld [wAlreadyFailed], a
 	ld [wSomeoneIsRampaging], a
@@ -1937,7 +1937,7 @@ BattleCommand_LowerSub:
 	ld [wNumHits], a
 	ld [wFXAnimID + 1], a
 	inc a
-	ld [wKickCounter], a
+	ld [wBattleAnimParam], a
 	ld a, SUBSTITUTE
 	jp LoadAnim
 
@@ -1998,7 +1998,7 @@ BattleCommand_MoveAnimNoSub:
 	cp EFFECT_TRIPLE_KICK
 	jr z, .triplekick
 	xor a
-	ld [wKickCounter], a
+	ld [wBattleAnimParam], a
 
 .triplekick
 	ld a, BATTLE_VARS_MOVE_ANIM
@@ -2017,10 +2017,10 @@ BattleCommand_MoveAnimNoSub:
 	jp AppearUserLowerSub
 
 .alternate_anim
-	ld a, [wKickCounter]
+	ld a, [wBattleAnimParam]
 	and 1
 	xor 1
-	ld [wKickCounter], a
+	ld [wBattleAnimParam], a
 	ld a, [de]
 	cp 1
 	push af
@@ -2058,7 +2058,7 @@ BattleCommand_StatDownAnim:
 BattleCommand_StatUpDownAnim:
 	ld [wNumHits], a
 	xor a
-	ld [wKickCounter], a
+	ld [wBattleAnimParam], a
 	ld a, BATTLE_VARS_MOVE_ANIM
 	call GetBattleVar
 	ld e, a
@@ -2090,7 +2090,7 @@ BattleCommand_RaiseSub:
 	ld [wNumHits], a
 	ld [wFXAnimID + 1], a
 	ld a, $2
-	ld [wKickCounter], a
+	ld [wBattleAnimParam], a
 	ld a, SUBSTITUTE
 	jp LoadAnim
 
@@ -2278,7 +2278,7 @@ endr
 	ld hl, CrashedText
 	call StdBattleTextbox
 	ld a, $1
-	ld [wKickCounter], a
+	ld [wBattleAnimParam], a
 	call LoadMoveAnim
 	ld c, TRUE
 	ldh a, [hBattleTurn]
@@ -2435,7 +2435,7 @@ BattleCommand_CheckFaint:
 	ld [wNumHits], a
 	ld [wFXAnimID + 1], a
 	inc a
-	ld [wKickCounter], a
+	ld [wBattleAnimParam], a
 	ld a, DESTINY_BOND
 	call LoadAnim
 	call BattleCommand_SwitchTurn
@@ -5062,7 +5062,7 @@ BattleCommand_ForceSwitch:
 	jr z, .switch_fail
 	call UpdateEnemyMonInParty
 	ld a, $1
-	ld [wKickCounter], a
+	ld [wBattleAnimParam], a
 	call AnimateCurrentMove
 	ld c, $14
 	call DelayFrames
@@ -5158,7 +5158,7 @@ BattleCommand_ForceSwitch:
 
 	call UpdateBattleMonInParty
 	ld a, $1
-	ld [wKickCounter], a
+	ld [wBattleAnimParam], a
 	call AnimateCurrentMove
 	ld c, 20
 	call DelayFrames
@@ -5209,7 +5209,7 @@ BattleCommand_ForceSwitch:
 	ld a, DRAW
 	ld [wBattleResult], a
 	ld a, $1
-	ld [wKickCounter], a
+	ld [wBattleAnimParam], a
 	call AnimateCurrentMove
 	ld c, 20
 	call DelayFrames
@@ -5562,7 +5562,7 @@ BattleCommand_Charge:
 	xor a
 	ld [wNumHits], a
 	inc a
-	ld [wKickCounter], a
+	ld [wBattleAnimParam], a
 	call LoadMoveAnim
 	ld a, BATTLE_VARS_MOVE_ANIM
 	call GetBattleVar
@@ -6690,11 +6690,11 @@ AnimateCurrentMoveEitherSide:
 	push hl
 	push de
 	push bc
-	ld a, [wKickCounter]
+	ld a, [wBattleAnimParam]
 	push af
 	call BattleCommand_LowerSub
 	pop af
-	ld [wKickCounter], a
+	ld [wBattleAnimParam], a
 	call PlayDamageAnim
 	call BattleCommand_RaiseSub
 	pop bc
@@ -6706,11 +6706,11 @@ AnimateCurrentMove:
 	push hl
 	push de
 	push bc
-	ld a, [wKickCounter]
+	ld a, [wBattleAnimParam]
 	push af
 	call BattleCommand_LowerSub
 	pop af
-	ld [wKickCounter], a
+	ld [wBattleAnimParam], a
 	call LoadMoveAnim
 	call BattleCommand_RaiseSub
 	pop bc

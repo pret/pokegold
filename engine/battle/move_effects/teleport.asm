@@ -75,7 +75,7 @@ BattleCommand_Teleport:
 	inc a
 	ld [wBattleResult], a
 	ld a, 1
-	ld [wKickCounter], a
+	ld [wBattleAnimParam], a
 	call BattleCommand_LowerSub
 	call LoadMoveAnim
 	ld c, 20

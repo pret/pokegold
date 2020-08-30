@@ -5,11 +5,11 @@ BattleCommand_Metronome:
 	call CheckUserIsCharging
 	jr nz, .asm_3752a
 
-	ld a, [wKickCounter]
+	ld a, [wBattleAnimParam]
 	push af
 	call BattleCommand_LowerSub
 	pop af
-	ld [wKickCounter], a
+	ld [wBattleAnimParam], a
 
 .asm_3752a
 	call LoadMoveAnim
