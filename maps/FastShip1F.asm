@@ -23,9 +23,9 @@ FastShip1F_MapScripts:
 	end
 
 .EnterFastShipScript:
-	applymovement FASTSHIP1F_SAILOR1, MovementData_0x16c980
-	applymovement PLAYER, MovementData_0x16c989
-	applymovement FASTSHIP1F_SAILOR1, MovementData_0x16c983
+	applymovement FASTSHIP1F_SAILOR1, FastShip1F_SailorStepAsideMovement
+	applymovement PLAYER, FastShip1F_PlayerEntersShipMovement
+	applymovement FASTSHIP1F_SAILOR1, FastShip1F_SailorBlocksDoorMovement
 	pause 30
 	playsound SFX_BOAT
 	earthquake 30
@@ -89,13 +89,13 @@ FastShip1FSailor1Script:
 .LetThePlayerOut:
 	readvar VAR_FACING
 	ifequal RIGHT, .YouAreFacingRight
-	applymovement FASTSHIP1F_SAILOR1, MovementData_0x16c980
-	applymovement PLAYER, MovementData_0x16c9a7
+	applymovement FASTSHIP1F_SAILOR1, FastShip1F_SailorStepAsideMovement
+	applymovement PLAYER, FastShip1F_PlayerLeavesShipMovement
 	end
 
 .YouAreFacingRight:
-	applymovement FASTSHIP1F_SAILOR1, MovementData_0x16c986
-	applymovement PLAYER, MovementData_0x16c9aa
+	applymovement FASTSHIP1F_SAILOR1, FastShip1F_SailorStepAsideDownMovement
+	applymovement PLAYER, FastShip1F_PlayerLeavesShipRightMovement
 	end
 
 FastShip1FSailor2Script:
@@ -122,53 +122,53 @@ WorriedGrandpaSceneRight:
 
 WorriedGrandpaSceneLeft:
 	appear FASTSHIP1F_GENTLEMAN
-	applymovement FASTSHIP1F_GENTLEMAN, MovementData_0x16c98d
+	applymovement FASTSHIP1F_GENTLEMAN, FastShip1F_GrandpaRunsInMovement
 	playsound SFX_TACKLE
-	applymovement PLAYER, MovementData_0x16c9a0
-	applymovement FASTSHIP1F_GENTLEMAN, MovementData_0x16c992
+	applymovement PLAYER, FastShip1F_PlayerHitByGrandpaMovement
+	applymovement FASTSHIP1F_GENTLEMAN, FastShip1F_GrandpaApproachesPlayerMovement
 	opentext
 	writetext FastShip1FGrandpaText
 	waitbutton
 	closetext
 	turnobject PLAYER, RIGHT
-	applymovement FASTSHIP1F_GENTLEMAN, MovementData_0x16c994
+	applymovement FASTSHIP1F_GENTLEMAN, FastShip1F_GrandpaRunsOutMovement
 	disappear FASTSHIP1F_GENTLEMAN
 	setscene SCENE_DEFAULT
 	end
 
-MovementData_0x16c980:
+FastShip1F_SailorStepAsideMovement:
 	slow_step LEFT
 	turn_head RIGHT
 	step_end
 
-MovementData_0x16c983:
+FastShip1F_SailorBlocksDoorMovement:
 	slow_step RIGHT
 	turn_head DOWN
 	step_end
 
-MovementData_0x16c986:
+FastShip1F_SailorStepAsideDownMovement:
 	slow_step DOWN
 	turn_head UP
 	step_end
 
-MovementData_0x16c989:
+FastShip1F_PlayerEntersShipMovement:
 	step DOWN
 	step DOWN
 	turn_head DOWN
 	step_end
 
-MovementData_0x16c98d:
+FastShip1F_GrandpaRunsInMovement:
 	big_step RIGHT
 	big_step RIGHT
 	big_step RIGHT
 	big_step RIGHT
 	step_end
 
-MovementData_0x16c992:
+FastShip1F_GrandpaApproachesPlayerMovement:
 	step RIGHT
 	step_end
 
-MovementData_0x16c994:
+FastShip1F_GrandpaRunsOutMovement:
 	big_step DOWN
 	big_step RIGHT
 	big_step RIGHT
@@ -182,25 +182,25 @@ MovementData_0x16c994:
 	big_step DOWN
 	step_end
 
-MovementData_0x16c9a0:
+FastShip1F_PlayerHitByGrandpaMovement:
 	big_step RIGHT
 	turn_head LEFT
 	step_end
 
-MovementData_0x16c9a3:
+FastShip1F_StepUpMovement: ; unreferenced
 	step UP
 	step_end
 
-MovementData_0x16c9a5:
+FastShip1F_StepDownMovement: ; unreferenced
 	step DOWN
 	step_end
 
-MovementData_0x16c9a7:
+FastShip1F_PlayerLeavesShipMovement:
 	step UP
 	step UP
 	step_end
 
-MovementData_0x16c9aa:
+FastShip1F_PlayerLeavesShipRightMovement:
 	step RIGHT
 	step UP
 	step_end

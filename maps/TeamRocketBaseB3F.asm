@@ -50,12 +50,12 @@ LanceGetPasswordScript:
 	pause 5
 	turnobject TEAMROCKETBASEB3F_MOLTRES, RIGHT
 	pause 20
-	applymovement TEAMROCKETBASEB3F_LANCE, MovementData_0x115de0
+	applymovement TEAMROCKETBASEB3F_LANCE, RocketBaseLanceApproachesPlayerMovement
 	opentext
 	writetext LanceGetPasswordText
 	waitbutton
 	closetext
-	applymovement TEAMROCKETBASEB3F_LANCE, MovementData_0x115de2
+	applymovement TEAMROCKETBASEB3F_LANCE, RocketBaseLanceLeavesMovement
 	disappear TEAMROCKETBASEB3F_LANCE
 	setscene SCENE_TEAMROCKETBASEB3F_RIVAL_ENCOUNTER
 	end
@@ -74,7 +74,7 @@ RocketBaseRival:
 	closetext
 	playsound SFX_TACKLE
 	applymovement PLAYER, RocketBaseRivalShovesPlayerMovement
-	applymovement TEAMROCKETBASEB3F_SILVER, RocketBaseRivalLeaveMovement
+	applymovement TEAMROCKETBASEB3F_SILVER, RocketBaseRivalLeavesMovement
 	disappear TEAMROCKETBASEB3F_SILVER
 	setscene SCENE_TEAMROCKETBASEB3F_ROCKET_BOSS
 	special RestartMapMusic
@@ -84,11 +84,11 @@ TeamRocketBaseB3FRocketScript:
 	jumptextfaceplayer TeamRocketBaseB3FRocketText
 
 RocketBaseBossLeft:
-	applymovement PLAYER, MovementData_0x115de9
+	applymovement PLAYER, RocketBasePlayerApproachesBossLeftMovement
 	sjump RocketBaseBoss
 
 RocketBaseBossRight:
-	applymovement PLAYER, MovementData_0x115df0
+	applymovement PLAYER, RocketBasePlayerApproachesBossRightMovement
 RocketBaseBoss:
 	pause 30
 	showemote EMOTE_SHOCK, TEAMROCKETBASEB3F_ROCKET1, 15
@@ -98,7 +98,7 @@ RocketBaseBoss:
 	writetext ExecutiveM4BeforeText
 	waitbutton
 	closetext
-	applymovement TEAMROCKETBASEB3F_ROCKET1, MovementData_0x115df8
+	applymovement TEAMROCKETBASEB3F_ROCKET1, RocketBaseBossApproachesPlayerMovement
 	winlosstext ExecutiveM4BeatenText, 0
 	setlasttalked TEAMROCKETBASEB3F_ROCKET1
 	loadtrainer EXECUTIVEM, EXECUTIVEM_4
@@ -109,9 +109,9 @@ RocketBaseBoss:
 	writetext ExecutiveM4AfterText
 	waitbutton
 	closetext
-	applymovement TEAMROCKETBASEB3F_ROCKET1, MovementData_0x115dfa
+	applymovement TEAMROCKETBASEB3F_ROCKET1, RocketBaseBossHitsTableMovement
 	playsound SFX_TACKLE
-	applymovement TEAMROCKETBASEB3F_ROCKET1, MovementData_0x115dfd
+	applymovement TEAMROCKETBASEB3F_ROCKET1, RocketBaseBossLeavesMovement
 	disappear TEAMROCKETBASEB3F_ROCKET1
 	setscene SCENE_TEAMROCKETBASEB3F_NOTHING
 	end
@@ -213,11 +213,11 @@ TeamRocketBaseB3FProtein:
 TeamRocketBaseB3FIceHeal:
 	itemball ICE_HEAL
 
-MovementData_0x115de0:
+RocketBaseLanceApproachesPlayerMovement:
 	step RIGHT
 	step_end
 
-MovementData_0x115de2:
+RocketBaseLanceLeavesMovement:
 	step DOWN
 	step LEFT
 	step LEFT
@@ -226,7 +226,7 @@ MovementData_0x115de2:
 	step LEFT
 	step_end
 
-MovementData_0x115de9:
+RocketBasePlayerApproachesBossLeftMovement:
 	step UP
 	step UP
 	step UP
@@ -235,7 +235,7 @@ MovementData_0x115de9:
 	turn_head UP
 	step_end
 
-MovementData_0x115df0:
+RocketBasePlayerApproachesBossRightMovement:
 	step UP
 	step UP
 	step LEFT
@@ -245,16 +245,16 @@ MovementData_0x115df0:
 	turn_head UP
 	step_end
 
-MovementData_0x115df8:
+RocketBaseBossApproachesPlayerMovement:
 	step DOWN
 	step_end
 
-MovementData_0x115dfa:
+RocketBaseBossHitsTableMovement:
 	big_step RIGHT
 	big_step RIGHT
 	step_end
 
-MovementData_0x115dfd:
+RocketBaseBossLeavesMovement:
 	fix_facing
 	fast_jump_step LEFT
 	remove_fixed_facing
@@ -296,7 +296,7 @@ RocketBaseRivalEnterMovement:
 	step RIGHT
 	step_end
 
-RocketBaseRivalLeaveMovement:
+RocketBaseRivalLeavesMovement:
 	step LEFT
 	step LEFT
 	step UP

@@ -49,7 +49,7 @@ SSAquaGranddaughterBefore:
 	special FadeBlackQuickly
 	special ReloadSpritesNoPalettes
 	disappear FASTSHIPCABINS_SE_SSE_CAPTAINSCABIN_TWIN2
-	applymovement PLAYER, MovementData_0x16d700
+	applymovement PLAYER, SSAquaCaptainsCabinWarpsToGrandpasCabinMovement
 	moveobject FASTSHIPCABINS_SE_SSE_CAPTAINSCABIN_TWIN1, 3, 19
 	appear FASTSHIPCABINS_SE_SSE_CAPTAINSCABIN_TWIN1
 	turnobject PLAYER, UP
@@ -57,14 +57,14 @@ SSAquaGranddaughterBefore:
 	special FadeInQuickly
 	turnobject FASTSHIPCABINS_SE_SSE_CAPTAINSCABIN_GENTLEMAN, DOWN
 	showemote EMOTE_SHOCK, FASTSHIPCABINS_SE_SSE_CAPTAINSCABIN_GENTLEMAN, 15
-	applymovement FASTSHIPCABINS_SE_SSE_CAPTAINSCABIN_TWIN1, MovementData_0x16d708
+	applymovement FASTSHIPCABINS_SE_SSE_CAPTAINSCABIN_TWIN1, SSAquaGranddaughterEntersCabinMovement
 	turnobject FASTSHIPCABINS_SE_SSE_CAPTAINSCABIN_GENTLEMAN, RIGHT
 	opentext
 	writetext SSAquaGranddaughterWasPlayingMText
 	waitbutton
 	closetext
 	turnobject FASTSHIPCABINS_SE_SSE_CAPTAINSCABIN_TWIN2, DOWN
-	applymovement FASTSHIPCABINS_SE_SSE_CAPTAINSCABIN_GENTLEMAN, MovementData_0x16d70c
+	applymovement FASTSHIPCABINS_SE_SSE_CAPTAINSCABIN_GENTLEMAN, SSAquaGrandpaApproachesPlayerMovement
 	opentext
 	writetext SSAquaEntertainedGranddaughterText
 	promptbutton
@@ -208,7 +208,7 @@ TrainerSupernerdShawn:
 FastShipCaptainsCabinTrashcan:
 	jumpstd TrashCanScript
 
-MovementData_0x16d700:
+SSAquaCaptainsCabinWarpsToGrandpasCabinMovement:
 	big_step RIGHT
 	big_step UP
 	big_step UP
@@ -218,13 +218,13 @@ MovementData_0x16d700:
 	big_step UP
 	step_end
 
-MovementData_0x16d708:
+SSAquaGranddaughterEntersCabinMovement:
 	step UP
 	step UP
 	turn_head LEFT
 	step_end
 
-MovementData_0x16d70c:
+SSAquaGrandpaApproachesPlayerMovement:
 	step DOWN
 	step_end
 
