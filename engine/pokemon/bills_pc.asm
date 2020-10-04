@@ -498,16 +498,16 @@ _MovePKMNWithoutMail:
 	inc a
 	ld [wBillsPC_LoadedBox], a
 	call DelayFrame
-.asm_e2f6f
+.loop
 	call JoyTextDelay
 	ld a, [wJumptableIndex]
 	bit 7, a
-	jr nz, .asm_e2f81
+	jr nz, .done
 	call .RunJumptable
 	call DelayFrame
-	jr .asm_e2f6f
+	jr .loop
 
-.asm_e2f81
+.done
 	call ClearSprites
 	pop af
 	ldh [hInMenu], a

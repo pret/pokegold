@@ -158,7 +158,7 @@ CmdQueue_Null:
 	ret
 
 CmdQueue_Type1:
-	call Function2ffe
+	call SetXYCompareFlags
 	ret
 
 CmdQueue_Type4:

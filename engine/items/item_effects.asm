@@ -1345,17 +1345,16 @@ HealPowderEffect:
 	jp c, StatusHealer_ExitMenu
 
 	call UseStatusHealer
+	cp FALSE
+	jr nz, .not_used
 
-	cp $0
-	jr nz, .asm_f01f
 	ld c, HAPPINESS_BITTERPOWDER
 	farcall ChangeHappiness
-
 	call LooksBitterMessage
 
 	ld a, $0
 
-.asm_f01f
+.not_used
 	jp StatusHealer_Jumptable
 
 StatusHealingEffect:
@@ -1369,7 +1368,7 @@ FullyHealStatus:
 
 UseStatusHealer:
 	call IsMonFainted
-	ld a, $1
+	ld a, TRUE
 	ret z
 	call GetItemHealingAction
 	ld a, MON_STATUS
@@ -1378,7 +1377,7 @@ UseStatusHealer:
 	and c
 	jr nz, .good
 	call IsItemUsedOnConfusedMon
-	ld a, $1
+	ld a, TRUE
 	ret nc
 	ld b, PARTYMENUTEXT_HEAL_CONFUSION
 .good
@@ -1390,7 +1389,7 @@ UseStatusHealer:
 	call Play_SFX_FULL_HEAL
 	call ItemActionTextWaitButton
 	call UseDisposableItem
-	ld a, $0
+	ld a, FALSE
 	ret
 
 IsItemUsedOnConfusedMon:
@@ -1480,15 +1479,16 @@ RevivalHerbEffect:
 	jp c, StatusHealer_ExitMenu
 
 	call RevivePokemon
-	cp 0
-	jr nz, .asm_f11b
+	cp FALSE
+	jr nz, .not_used
 
 	ld c, HAPPINESS_REVIVALHERB
 	farcall ChangeHappiness
 	call LooksBitterMessage
-	ld a, 0
 
-.asm_f11b
+	ld a, $0
+
+.not_used
 	jp StatusHealer_Jumptable
 
 ReviveEffect:
@@ -1501,7 +1501,7 @@ ReviveEffect:
 
 RevivePokemon:
 	call IsMonFainted
-	ld a, 1
+	ld a, TRUE
 	ret nz
 	ld a, [wBattleMode]
 	and a
@@ -1542,7 +1542,7 @@ RevivePokemon:
 	ld [wPartyMenuActionText], a
 	call ItemActionTextWaitButton
 	call UseDisposableItem
-	ld a, 0
+	ld a, FALSE
 	ret
 
 FullRestoreEffect:

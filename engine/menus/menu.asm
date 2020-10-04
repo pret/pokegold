@@ -556,14 +556,14 @@ _ExitMenu::
 	call CloseSRAM
 	ld hl, wWindowStackSize
 	dec [hl]
-	call Function2434b
+	call RestoreOverworldMapTiles
 	ld a, [wSpriteUpdatesEnabled]
 	cp 0
 	ret z
 	call ReloadPalettes
 	ret
 
-Function2434b:
+RestoreOverworldMapTiles:
 	ld a, [wVramState]
 	bit 0, a
 	ret z

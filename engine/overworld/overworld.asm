@@ -168,7 +168,7 @@ LoadUsedSpritesGFX:
 	call GetUsedSprites
 	ret c
 
-	call _LoadMiscTiles
+	call LoadStillSpriteTiles
 	call LoadMiscTiles
 	ret
 
@@ -213,27 +213,24 @@ GetUsedSprites:
 	scf
 	ret
 
-_LoadMiscTiles:
+LoadStillSpriteTiles:
 	ld a, [wUsedSprites + (SPRITE_GFX_LIST_CAPACITY - 2) * 2]
 	and a
-	jr z, .asm_14274
-
+	jr z, .no_still_sprite_1
 	call GetSprite
 	ld hl, vTiles0 tile $78
 	call Get2bpp
-
-.asm_14274
+.no_still_sprite_1
 	ld a, $78
 	ld [wUsedSprites + (SPRITE_GFX_LIST_CAPACITY - 2) * 2 + 1], a
+
 	ld a, [wUsedSprites + (SPRITE_GFX_LIST_CAPACITY - 1) * 2]
 	and a
-	jr z, .asm_14288
-
+	jr z, .no_still_sprite_2
 	call GetSprite
 	ld hl, vTiles0 tile $7c
 	call Get2bpp
-
-.asm_14288
+.no_still_sprite_2
 	ld a, $7c
 	ld [wUsedSprites + (SPRITE_GFX_LIST_CAPACITY - 1) * 2 + 1], a
 	ret

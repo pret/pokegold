@@ -903,7 +903,7 @@ Printer_PlaceEmptyBoxSlotString:
 .loop
 	push bc
 	push hl
-	ld de, String84a21
+	ld de, .EmptyBoxSlotString
 	call PlaceString
 	pop hl
 	ld bc, 3 * SCREEN_WIDTH
@@ -913,5 +913,5 @@ Printer_PlaceEmptyBoxSlotString:
 	jr nz, .loop
 	ret
 
-String84a21:
+.EmptyBoxSlotString:
 	db "  ------@"

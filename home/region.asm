@@ -31,10 +31,10 @@ IsInJohto::
 	ld a, KANTO_REGION
 	ret
 
-Function2ffe::
+SetXYCompareFlags::
 	push hl
 	xor a
-	ld hl, wd17c
+	ld hl, wXYCompareFlags
 	ld [hli], a
 	ld [hli], a
 	ld [hli], a
@@ -52,13 +52,13 @@ Function2ffe::
 	add $4
 	ld d, a
 	ld a, [wPlayerStandingMapY]
-	ld a, $4 ; should be "add $4"?
+	ld a, $4 ; should be "add $4"
 	ld e, a
 	push bc
 	ld c, 0
 .loop
 	ld a, [hl]
-	cp $ff
+	cp -1 ; end?
 	jr z, .done
 	push hl
 	ld a, d
@@ -68,7 +68,7 @@ Function2ffe::
 	ld a, e
 	cp [hl]
 	jr nz, .next
-	ld hl, wd17c
+	ld hl, wXYCompareFlags
 	ld b, SET_FLAG
 	push de
 	push bc
@@ -83,7 +83,7 @@ Function2ffe::
 	inc hl
 	inc c
 	ld a, c
-	cp 32
+	cp MAX_XYCOMPARE_LENGTH
 	jr c, .loop
 .done
 	pop bc

@@ -2067,9 +2067,9 @@ wScriptTextAddr::
 	dw
 	ds 1
 wWildEncounterCooldown:: db
-wXYComparePointer:: dw
 
-wd17c:: flag_array 32
+wXYComparePointer:: dw
+wXYCompareFlags:: flag_array MAX_XYCOMPARE_LENGTH
 
 wBattleScriptFlags:: db
 	ds 1

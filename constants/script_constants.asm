@@ -148,6 +148,8 @@ CMDQUEUE_CAPACITY EQU 4
 	const CMDQUEUE_TYPE4
 NUM_CMDQUEUE_TYPES EQU const_value
 
+MAX_XYCOMPARE_LENGTH EQU 32
+
 ; elevfloor macro values
 ; ElevatorFloorNames indexes (see data/events/elevator_floors.asm)
 	const_def

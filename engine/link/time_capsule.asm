@@ -64,7 +64,7 @@ ValidateOTTrademon:
 	scf
 	ret
 
-Functionfb6ed:
+CheckAnyOtherAliveMonsForTrade:
 	ld a, [wceed]
 	ld d, a
 	ld a, [wPartyCount]

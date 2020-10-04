@@ -477,7 +477,7 @@ endr
 GetCreditsPalette:
 	ldh a, [hCGB]
 	and a
-	jr nz, .asm_6bcf
+	jr nz, .cgb
 
 	ldh a, [hSGB]
 	and a
@@ -496,7 +496,7 @@ GetCreditsPalette:
 	farcall SGB_ApplyCreditsPals
 	ret
 
-.asm_6bcf
+.cgb
 	call .GetPalAddress
 
 	push hl
