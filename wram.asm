@@ -697,7 +697,7 @@ wBattleObjectTempParam:: db
 
 NEXTU
 wBattleAnimTempOAMFlags:: db
-wBattleAnimTempField02:: db
+wBattleAnimTempFixY:: db
 wBattleAnimTempTileID:: db
 wBattleAnimTempXCoord:: db
 wBattleAnimTempYCoord:: db
