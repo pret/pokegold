@@ -15161,7 +15161,7 @@
 32:7a1d BattleAnim_BeatUp
 32:7a34 BattleAnim_BeatUp.current_mon
 32:7a4c BattleAnimSub_Drain
-32:7a75 BattleAnimSub_ShakeEnemy
+32:7a75 BattleAnimSub_EyeBeams
 32:7aab BattleAnimSub_WarpAway
 32:7ad2 BattleAnimSub_Beam
 32:7afb BattleAnimSub_Explosion1
