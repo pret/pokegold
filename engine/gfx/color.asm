@@ -79,7 +79,7 @@ Unused_CheckShininess:
 SGB_ApplyCreditsPals::
 	push de
 	push bc
-	ld hl, PalPacket_a155
+	ld hl, PalPacket_Pal01
 	ld de, wSGBPals
 	ld bc, PALPACKET_LENGTH
 	call CopyBytes
@@ -95,7 +95,7 @@ SGB_ApplyCreditsPals::
 	ld [wSGBPals + 6], a
 	ld hl, wSGBPals
 	call PushSGBPals
-	ld hl, BlkPacket_9ee5
+	ld hl, BlkPacket_AllPal0
 	call PushSGBPals
 	ret
 
@@ -178,7 +178,7 @@ Function9136:
 	ldh a, [hSGB]
 	and a
 	ret z
-	ld hl, BlkPacket_9ee5
+	ld hl, BlkPacket_AllPal0
 	jp PushSGBPals
 
 Function9144: ; unreferenced
@@ -219,7 +219,7 @@ Intro_LoadMonPalette:
 	ret z
 	ld a, c
 	push af
-	ld hl, PalPacket_a155
+	ld hl, PalPacket_Pal01
 	ld de, wSGBPals
 	ld bc, PALPACKET_LENGTH
 	call CopyBytes
@@ -374,7 +374,7 @@ LoadMailPalettes:
 	call CheckCGB
 	jr nz, .cgb
 	push hl
-	ld hl, PalPacket_a155
+	ld hl, PalPacket_Pal01
 	ld de, wSGBPals
 	ld bc, PALPACKET_LENGTH
 	call CopyBytes
@@ -391,7 +391,7 @@ LoadMailPalettes:
 	ld [wSGBPals + 6], a
 	ld hl, wSGBPals
 	call PushSGBPals
-	ld hl, BlkPacket_9ee5
+	ld hl, BlkPacket_AllPal0
 	call PushSGBPals
 	ret
 

@@ -28,7 +28,7 @@ PalPacket_BetaPoker:
 PalPacket_UnownPuzzle:
 	sgb_pal_set UNOWN_PUZZLE, UNOWN_PUZZLE, UNOWN_PUZZLE, UNOWN_PUZZLE
 
-PalPacket_a045:
+PalPacket_Routes:
 	sgb_pal_set ROUTES, ROUTES, ROUTES, ROUTES
 
 PalPacket_GSIntroShellderLapras:
@@ -61,7 +61,7 @@ PalPacket_BattleGrayscale:
 PalPacket_Pokegear:
 	sgb_pal_set POKEGEAR, ROUTES, ROUTES, ROUTES
 
-PalPacket_a0f5: ; unreferenced
+PalPacket_Pack2: ; unreferenced
 	sgb_pal_set PACK, ROUTES, ROUTES, ROUTES
 
 PalPacket_SlotMachine:
@@ -79,7 +79,7 @@ PalPacket_TradeTube:
 PalPacket_GamefreakLogo:
 	sgb_pal_set GS_INTRO_GAMEFREAK_LOGO, ROUTES, ROUTES, ROUTES
 
-PalPacket_a155:
+PalPacket_Pal01:
 	sgb_pal01
 	RGB 31, 31, 31
 rept 6
@@ -87,7 +87,7 @@ rept 6
 endr
 	db 0
 
-PalPacket_a165:
+PalPacket_Pal23:
 	sgb_pal23
 	RGB 31, 31, 31
 rept 6

@@ -13,7 +13,7 @@ attr_blk_data: MACRO
 	db \5, \6, \7, \8 ; x1, y1, x2, y2
 ENDM
 
-BlkPacket_9ee5:
+BlkPacket_AllPal0:
 	attr_blk 1
 	attr_blk_data %011, 0,0,0, 00,00, 19,17
 	ds 8, 0
@@ -46,7 +46,7 @@ BlkPacket_Pokedex_PC:
 	attr_blk_data %111, 1,1,0, 00,01, 07,07 ; mon: pal 1
 	ds 8, 0
 
-BlkPacket_9f55:
+BlkPacket_Bills_PC:
 	attr_blk 1
 	attr_blk_data %111, 1,1,0, 01,04, 07,10
 	ds 8, 0
