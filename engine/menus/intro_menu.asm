@@ -898,7 +898,7 @@ StartTitleScreen:
 INCLUDE "engine/movie/title.asm"
 
 RunTitleScreen:
-	call Function63fe
+	call ScrollTitleScreenClouds
 	ld a, [wJumptableIndex]
 	bit 7, a
 	jr nz, .done_title
@@ -917,7 +917,7 @@ RunTitleScreen:
 	scf
 	ret
 
-Function63fe:
+ScrollTitleScreenClouds:
 IF DEF(_GOLD)
 	ldh a, [hVBlankCounter]
 	and $7
@@ -926,7 +926,7 @@ ENDC
 	ld hl, wLYOverrides + $5f
 	ld a, [hl]
 	dec a
-	ld bc, 2 * SCREEN_WIDTH
+	ld bc, $28
 	call ByteFill
 	ret
 

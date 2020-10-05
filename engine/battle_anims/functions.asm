@@ -858,7 +858,7 @@ BattleAnimFunction_RazorLeaf:
 	ld hl, BATTLEANIMSTRUCT_YOFFSET
 	add hl, bc
 	ld [hl], a
-	call Functioncd49c
+	call BattleAnim_ScatterHorizontal
 	ld hl, BATTLEANIMSTRUCT_VAR2
 	add hl, bc
 	ld a, [hl]
@@ -951,8 +951,8 @@ BattleAnimFunction_RazorLeaf:
 	call BattleAnim_StepToTarget
 	ret
 
-Functioncd49c:
-; Affects sine movement based on bit 7 of Obj Param
+BattleAnim_ScatterHorizontal:
+; Affects horizontal sine movement based on bit 7 of Obj Param
 	ld hl, BATTLEANIMSTRUCT_PARAM
 	add hl, bc
 	ld a, [hl]
@@ -1037,7 +1037,7 @@ BattleAnimFunction_RockSmash:
 	ld hl, BATTLEANIMSTRUCT_YOFFSET
 	add hl, bc
 	ld [hl], a
-	call Functioncd49c
+	call BattleAnim_ScatterHorizontal
 	ld hl, BATTLEANIMSTRUCT_VAR2
 	add hl, bc
 	ld a, [hl]
@@ -1680,7 +1680,7 @@ BattleAnimFunction_Gust:
 	call BattleAnim_IncAnonJumptableIndex
 	ld hl, BATTLEANIMSTRUCT_PARAM
 	add hl, bc
-	ld [hl], $0
+	ld [hl], 0
 .one
 .three
 	call .GustWobble
@@ -1753,10 +1753,10 @@ BattleAnimFunction_Gust:
 	add hl, bc
 	ld a, [hl]
 	and a
-	jr z, .asm_cd91c
+	jr z, .start_wobble
 	cp $c2
-	jr c, .asm_cd927
-.asm_cd91c
+	jr c, .finish_wobble
+.start_wobble
 	dec a
 	ld [hl], a
 	and $7
@@ -1766,7 +1766,7 @@ BattleAnimFunction_Gust:
 	inc [hl]
 	ret
 
-.asm_cd927
+.finish_wobble
 	xor a
 	ld hl, BATTLEANIMSTRUCT_VAR2
 	add hl, bc
