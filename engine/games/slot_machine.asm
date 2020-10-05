@@ -229,8 +229,7 @@ SlotsLoop:
 	call PrintNum
 	ret
 
-Function92d7a: ; unreferenced
-; debug function?
+DebugPrintSlotBias: ; unreferenced
 	ld a, [wSlotBias]
 	add 0
 	daa
@@ -247,8 +246,8 @@ Function92d7a: ; unreferenced
 	ld [hl], a
 	ret
 
-Function92d95: ; unreferenced
-; animate OAM tiles?
+AnimateSlotReelIcons: ; unreferenced
+; This animation was present in pokegold-spaceworld.
 	ld hl, wce66
 	ld a, [hl]
 	inc [hl]
@@ -258,7 +257,7 @@ Function92d95: ; unreferenced
 	ld c, NUM_SPRITE_OAM_STRUCTS - 16
 .loop
 	ld a, [hl]
-	xor %00100000
+	xor $20 ; alternate between $00-$1f and $20-$3f
 	ld [hli], a ; tile id
 rept SPRITEOAMSTRUCT_LENGTH - 1
 	inc hl
@@ -844,7 +843,9 @@ Slots_UpdateReelPositionAndOAM:
 	jr nz, .loop
 	ret
 
-Function93127: ; unreferenced
+GetUnknownSlotReelData: ; unreferenced
+; Used to get OAM attribute values for slot reels?
+; (final Slots_UpdateReelPositionAndOAM above reuses tile IDs as OAM palettes)
 	push hl
 	srl a
 	srl a

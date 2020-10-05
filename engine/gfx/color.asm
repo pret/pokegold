@@ -646,12 +646,13 @@ GetMonPalettePointer:
 	call _GetMonPalettePointer
 	ret
 
-Function9be8: ; unreferenced
+CGBCopyBattleObjectPals: ; unreferenced
+; dummied out
 	ret
 	call CheckCGB
 	ret z
 	ld hl, BattleObjectPals
-	ld a, $90
+	ld a, (1 << rOBPI_AUTO_INCREMENT) | $10
 	ldh [rOBPI], a
 	ld c, 6 palettes
 .loop
@@ -671,7 +672,7 @@ INCLUDE "gfx/battle_anims/battle_anims.pal"
 Function9c39: ; unreferenced
 	call CheckCGB
 	ret z
-	ld a, $90
+	ld a, (1 << rOBPI_AUTO_INCREMENT) | $10
 	ldh [rOBPI], a
 	ld a, PREDEFPAL_TRADE_TUBE
 	call GetPredefPal
@@ -869,7 +870,7 @@ _InitSGBBorderPals:
 	dw DataSndPacket7
 	dw DataSndPacket8
 
-Function9d70: ; unreferenced
+UpdateSGBBorder: ; unreferenced
 	di
 	xor a
 	ldh [rJOYP], a

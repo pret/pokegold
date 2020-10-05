@@ -512,7 +512,8 @@ LoadPinkPage:
 .PkrsStr:
 	db "#RUS@"
 
-Function50f4d: ; unreferenced
+StatsScreen_PlaceVerticalDivider: ; unreferenced
+; The Japanese stats screen has a vertical divider.
 	hlcoord 7, 0
 	ld bc, SCREEN_WIDTH
 	ld d, SCREEN_HEIGHT

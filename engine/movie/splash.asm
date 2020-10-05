@@ -136,7 +136,7 @@ GameFreakPresents_NextScene:
 	inc [hl]
 	ret
 
-Functione4a8d: ; unreferenced
+GameFreakPresents_Wait64Frames: ; unreferenced
 	ld c, 64
 	call DelayFrames
 	call GameFreakPresents_NextScene

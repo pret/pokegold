@@ -746,7 +746,14 @@ EnemyUsedDireHit:
 	ld a, DIRE_HIT
 	jp PrintText_UsedItemOn_AND_AIUpdateHUD
 
-Function38510: ; unreferenced
+AICheckEnemyFractionMaxHP: ; unreferenced
+; Input: a = divisor
+; Work: bc = [wEnemyMonMaxHP] / a
+; Work: de = [wEnemyMonHP]
+; Output:
+; -  c, nz if [wEnemyMonHP] > [wEnemyMonMaxHP] / a
+; - nc,  z if [wEnemyMonHP] = [wEnemyMonMaxHP] / a
+; - nc, nz if [wEnemyMonHP] < [wEnemyMonMaxHP] / a
 	ldh [hDivisor], a
 	ld hl, wEnemyMonMaxHP
 	ld a, [hli]

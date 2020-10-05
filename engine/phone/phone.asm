@@ -529,7 +529,7 @@ Phone_CallEnd:
 	call HangUp_Wait20Frames
 	ret
 
-Function9030a:
+HangUp_ShutDown: ; unreferenced
 	ld de, SFX_SHUT_DOWN_PC
 	call PlaySFX
 	ret

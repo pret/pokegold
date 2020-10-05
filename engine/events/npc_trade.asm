@@ -283,14 +283,14 @@ CopyTradeName:
 	call CopyBytes
 	ret
 
-Functionfcbc7: ; unreferenced
+Trade_CopyFourCharString: ; unreferenced
 	ld bc, 4
 	call CopyBytes
 	ld a, "@"
 	ld [de], a
 	ret
 
-Functionfcbd1: ; unreferenced
+Trade_CopyThreeCharString: ; unreferenced
 	ld bc, 3
 	call CopyBytes
 	ld a, "@"
