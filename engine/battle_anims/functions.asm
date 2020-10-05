@@ -974,7 +974,7 @@ Functioncd49c:
 	ret
 
 .negative
-	and $3f
+	and %00111111
 	cp $20
 	jr nc, .minus_256
 	cp $18
@@ -1989,7 +1989,7 @@ BattleAnimFunction_Kick:
 	dw .one
 	dw .two   ; Jump Kick, Hi Jump Kick
 	dw .three ; Rolling Kick
-	dw .four
+	dw .four  ; Rolling Kick (continued)
 
 .zero
 	ret
@@ -1999,13 +1999,13 @@ BattleAnimFunction_Kick:
 	add hl, bc
 	ld a, [hl]
 	cp $30
-	jr c, .unknown_cda69
+	jr c, .move_down
 	ld hl, BATTLEANIMSTRUCT_JUMPTABLE_INDEX
 	add hl, bc
 	ld [hl], $0
 	ret
 
-.unknown_cda69
+.move_down
 	add $4
 	ld [hl], a
 	ret

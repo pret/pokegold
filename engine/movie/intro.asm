@@ -312,12 +312,12 @@ Functione4ed5:
 	ld hl, wIntroFrameCounter2
 	ld a, [hl]
 	and %00011111
-	jr z, .asm_e4ee1
+	jr z, .load_palettes
 	call Intro_InitMagikarps
 	ret
 
-.asm_e4ee1
-	callfar Function9102
+.load_palettes
+	callfar Intro_LoadMagikarpPalettes
 	ret
 
 Functione4ee8:
@@ -674,7 +674,7 @@ IntroScene8:
 	ld [wIntroFrameCounter1], a
 	ld hl, wIntroJumptableIndex
 	inc [hl]
-	callfar Function9136
+	callfar Intro_LoadAllPal0
 	ret
 
 IntroScene9:

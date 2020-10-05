@@ -184,7 +184,7 @@ SlotsLoop:
 	ld [wCurSpriteOAMAddr], a
 	callfar DoNextFrameForFirst16Sprites
 	call .PrintCoinsAndPayout
-	call .Stubbed_Function92d3c
+	call .Stubbed_AlternateMatchingSevensPalette
 	call DelayFrame
 	and a
 	ret
@@ -193,7 +193,7 @@ SlotsLoop:
 	scf
 	ret
 
-.Stubbed_Function92d3c:
+.Stubbed_AlternateMatchingSevensPalette:
 ; dummied out
 	ret
 	ld a, [wReel1ReelAction]
@@ -214,7 +214,7 @@ SlotsLoop:
 	and $7
 	ret nz
 	ldh a, [rBGP]
-	xor %00001100
+	xor %00001100 ; alternates two palettes
 	call DmgToCgbBGPals
 	ret
 
@@ -848,17 +848,22 @@ Function93127: ; unreferenced
 	push hl
 	srl a
 	srl a
-	add LOW(.Unknown_93137)
+	add LOW(.data)
 	ld l, a
 	ld a, 0
-	adc HIGH(.Unknown_93137)
+	adc HIGH(.data)
 	ld h, a
 	ld a, [hl]
 	pop hl
 	ret
 
-.Unknown_93137:
-	db 0, 1, 2, 3, 4, 5
+.data:
+	db 0 ; SLOTS_SEVEN
+	db 1 ; SLOTS_POKEBALL
+	db 2 ; SLOTS_CHERRY
+	db 3 ; SLOTS_PIKACHU
+	db 4 ; SLOTS_SQUIRTLE
+	db 5 ; SLOTS_STARYU
 
 ReelActionJumptable:
 	ld hl, REEL_ACTION
@@ -1089,11 +1094,11 @@ ReelAction_WaitReel2SkipTo7:
 	add hl, bc
 	ld a, [hl]
 	and a
-	jr z, .asm_9326b
+	jr z, .ready
 	dec [hl]
 	ret
 
-.asm_9326b
+.ready
 	ld a, SFX_THROW_BALL
 	call Slots_PlaySFX
 	ld hl, REEL_ACTION
