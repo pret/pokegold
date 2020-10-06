@@ -435,7 +435,8 @@ TMHMPocket_GetCurrentLineCoord:
 	jr nz, .loop
 	ret
 
-Function2c89a: ; unreferenced
+PlaceMoveNameAfterTMHMName: ; unreferenced
+; Similar to a part of TMHM_DisplayPocketItems.
 	pop hl
 	ld bc, 3
 	add hl, bc

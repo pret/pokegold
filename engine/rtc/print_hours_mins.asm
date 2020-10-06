@@ -1,9 +1,10 @@
 Function1c0a0d: ; unreferenced
 ; Debug function?
+; Input: bc = value, de = destination
 	ld a, b
 	ld b, c
 	ld c, a
-	push bc
+	push bc ; de points to this on the stack for PrintNum
 	push de
 	ld hl, sp+2
 	ld d, h

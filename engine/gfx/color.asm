@@ -669,7 +669,7 @@ CGBCopyBattleObjectPals: ; unreferenced
 BattleObjectPals:
 INCLUDE "gfx/battle_anims/battle_anims.pal"
 
-Function9c39: ; unreferenced
+CGBCopyTwoPredefObjectPals: ; unreferenced
 	call CheckCGB
 	ret z
 	ld a, (1 << rOBPI_AUTO_INCREMENT) | $10

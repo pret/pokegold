@@ -433,21 +433,22 @@ endr
 .done:
 	ret
 
-Function1438a: ; unreferenced
+GetUsedSpriteTileB: ; unreferenced
 	ld a, c
 	jr GetUsedSprite
 
-Function1438d: ; unreferenced
+GetUsedSpriteFirst: ; unreferenced
 	ld a, c
-	ld b, 0
+	ld b, $00
 	jr GetUsedSprite
 
-Function14392: ; unreferenced
+GetUsedSpriteSecond: ; unreferenced
 	ld a, c
-	ld b, SPRITE_GFX_LIST_CAPACITY
+	ld b, $0c
 	jr GetUsedSprite
 
 GetUsedSprite:
+; Input: b = tile id, c = index
 	push bc
 	ld a, c
 	ldh [hUsedSpriteIndex], a

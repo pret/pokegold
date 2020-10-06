@@ -193,7 +193,7 @@ DisplayHourOClock:
 	pop hl
 	ret
 
-Function907ba: ; unreferenced
+DisplayHoursMinutesWithMinString: ; unreferenced
 	ld h, d
 	ld l, e
 	push hl

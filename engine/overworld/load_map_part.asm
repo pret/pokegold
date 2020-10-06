@@ -35,7 +35,8 @@ _LoadMapPart::
 	jr nz, .loop
 	ret
 
-Function153ba: ; unreferenced
+ForceApplyFlashlight1: ; unreferenced
+; See pokegold-spaceworld's ApplyFlashlight.force_1 in home/map.asm.
 	decoord 2, 2
 	ld bc, (SURROUNDING_WIDTH + 1) * 2
 	add hl, bc
@@ -66,7 +67,8 @@ Function153ba: ; unreferenced
 	jr nz, .loop
 	ret
 
-Function153dd: ; unreferenced
+ForceApplyFlashlight2: ; unreferenced
+; See pokegold-spaceworld's ApplyFlashlight.force_2 in home/map.asm.
 	decoord 4, 4
 	ld bc, (SURROUNDING_WIDTH + 1) * 4
 	add hl, bc
@@ -97,7 +99,8 @@ Function153dd: ; unreferenced
 	jr nz, .loop
 	ret
 
-Ureferenced_Function15400:
+ForceApplyFlashlight3: ; unreferenced
+; See pokegold-spaceworld's ApplyFlashlight.force_3 in home/map.asm.
 	decoord 6, 6
 	ld bc, (SURROUNDING_WIDTH + 1) * 6
 	add hl, bc
@@ -128,7 +131,8 @@ Ureferenced_Function15400:
 	jr nz, .loop
 	ret
 
-Function15423: ; unreferenced
+ForceApplyFlashlight4: ; unreferenced
+; See pokegold-spaceworld's ApplyFlashlight.force_4 in home/map.asm.
 	decoord 8, 8
 	ld bc, (SURROUNDING_WIDTH + 1) * 8
 	add hl, bc
