@@ -2082,7 +2082,7 @@ BattleBGEffect_RapidFlash: ; unused
 	db $e4, $6c, $fe
 
 BattleBGEffect_FadeMonToLight:
-; BG_EFFECT_STRUCT_BATTLE_TURN: 0 = target of animation, 1 = user
+; BG_EFFECT_STRUCT_BATTLE_TURN = BG_EFFECT_TARGET or BG_EFFECT_USER
 	ld de, .Pals
 	call BGEffect_RapidCyclePals
 	ret
@@ -2091,7 +2091,7 @@ BattleBGEffect_FadeMonToLight:
 	db $e4, $90, $40, $ff
 
 BattleBGEffect_FadeMonToBlack:
-; BG_EFFECT_STRUCT_BATTLE_TURN: 0 = target of animation, 1 = user
+; BG_EFFECT_STRUCT_BATTLE_TURN = BG_EFFECT_TARGET or BG_EFFECT_USER
 	ld de, .Pals
 	call BGEffect_RapidCyclePals
 	ret
@@ -2100,7 +2100,7 @@ BattleBGEffect_FadeMonToBlack:
 	db $e4, $f8, $fc, $ff
 
 BattleBGEffect_FadeMonToLightRepeating:
-; BG_EFFECT_STRUCT_BATTLE_TURN: 0 = target of animation, 1 = user
+; BG_EFFECT_STRUCT_BATTLE_TURN = BG_EFFECT_TARGET or BG_EFFECT_USER
 	ld de, .Pals
 	call BGEffect_RapidCyclePals
 	ret
@@ -2109,7 +2109,7 @@ BattleBGEffect_FadeMonToLightRepeating:
 	db $e4, $90, $40, $90, $fe
 
 BattleBGEffect_FadeMonToBlackRepeating:
-; BG_EFFECT_STRUCT_BATTLE_TURN: 0 = target of animation, 1 = user
+; BG_EFFECT_STRUCT_BATTLE_TURN = BG_EFFECT_TARGET or BG_EFFECT_USER
 	ld de, .Pals
 	call BGEffect_RapidCyclePals
 	ret
@@ -2118,7 +2118,7 @@ BattleBGEffect_FadeMonToBlackRepeating:
 	db $e4, $f8, $fc, $f8, $fe
 
 BattleBGEffect_CycleMonLightDarkRepeating:
-; BG_EFFECT_STRUCT_BATTLE_TURN: 0 = target of animation, 1 = user
+; BG_EFFECT_STRUCT_BATTLE_TURN = BG_EFFECT_TARGET or BG_EFFECT_USER
 	ld de, .Pals
 	call BGEffect_RapidCyclePals
 	ret
@@ -2127,7 +2127,7 @@ BattleBGEffect_CycleMonLightDarkRepeating:
 	db $e4, $f8, $fc, $f8, $e4, $90, $40, $90, $fe
 
 BattleBGEffect_FlashMonRepeating: ; unused
-; BG_EFFECT_STRUCT_BATTLE_TURN: 0 = target of animation, 1 = user
+; BG_EFFECT_STRUCT_BATTLE_TURN = BG_EFFECT_TARGET or BG_EFFECT_USER
 	ld de, .Pals
 	call BGEffect_RapidCyclePals
 	ret
@@ -2136,7 +2136,7 @@ BattleBGEffect_FlashMonRepeating: ; unused
 	db $e4, $fc, $e4, $00, $fe
 
 BattleBGEffect_FadeMonToWhiteWaitFadeBack:
-; BG_EFFECT_STRUCT_BATTLE_TURN: 0 = target of animation, 1 = user
+; BG_EFFECT_STRUCT_BATTLE_TURN = BG_EFFECT_TARGET or BG_EFFECT_USER
 	ld de, .Pals
 	call BGEffect_RapidCyclePals
 	ret
@@ -2145,7 +2145,7 @@ BattleBGEffect_FadeMonToWhiteWaitFadeBack:
 	db $e4, $90, $40, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $40, $90, $e4, $ff
 
 BattleBGEffect_FadeMonFromWhite: ; unused
-; BG_EFFECT_STRUCT_BATTLE_TURN: 0 = target of animation, 1 = user
+; BG_EFFECT_STRUCT_BATTLE_TURN = BG_EFFECT_TARGET or BG_EFFECT_USER
 	ld de, .Pals
 	call BGEffect_RapidCyclePals
 	ret
@@ -2155,7 +2155,7 @@ BattleBGEffect_FadeMonFromWhite: ; unused
 
 BattleBGEffect_VibrateMon:
 ; Moves mon back and forth sideways for $20 frames
-; BG_EFFECT_STRUCT_BATTLE_TURN: 0 = target of animation, 1 = user
+; BG_EFFECT_STRUCT_BATTLE_TURN = BG_EFFECT_TARGET or BG_EFFECT_USER
 	call BattleBGEffects_AnonJumptable
 .anon_dw
 	dw .zero

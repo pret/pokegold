@@ -1,4 +1,4 @@
-Function1c0a0d: ; unreferenced
+PrintFiveDigitNumber: ; unreferenced
 ; Debug function?
 ; Input: bc = value, de = destination
 	ld a, b

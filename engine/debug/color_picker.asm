@@ -261,7 +261,7 @@ DebugColorMain:
 
 .SwitchMon:
 	ld [wce66], a
-	ld a, 0 ; ScreenInitNo
+	ld a, 0
 	ld [wJumptableIndex], a
 	ret
 
@@ -1048,7 +1048,8 @@ INCBIN "gfx/debug/up_arrow.2bpp"
 DebugColor_GFX:
 INCBIN "gfx/debug/color_test.2bpp"
 
-TilesetColorTest:
+TilesetColorPicker:
+; A debug function to test tileset palettes at runtime.
 ; dummied out
 	ret
 	xor a
@@ -1078,21 +1079,21 @@ TilesetColorTest:
 	call ByteFill
 	hlcoord 0, 0, wAttrmap
 	ld bc, SCREEN_WIDTH * SCREEN_HEIGHT
-	ld a, $07
+	ld a, PAL_BG_TEXT
 	call ByteFill
-	ld de, $15
+	decoord 1, 1, 0
 	ld a, DEBUGTEST_WHITE
-	call Functionfdbdb
-	ld de, $1a
+	call DebugTileset_DrawColorSwatch
+	decoord 6, 1, 0
 	ld a, DEBUGTEST_LIGHT
-	call Functionfdbdb
-	ld de, $1f
+	call DebugTileset_DrawColorSwatch
+	decoord 11, 1, 0
 	ld a, DEBUGTEST_DARK
-	call Functionfdbdb
-	ld de, $24
+	call DebugTileset_DrawColorSwatch
+	decoord 16, 1, 0
 	ld a, DEBUGTEST_BLACK
-	call Functionfdbdb
-	call Functionfdbfd
+	call DebugTileset_DrawColorSwatch
+	call DebugTileset_LoadRGBMeter
 	call Functionfdc18
 	call WaitBGMap2
 	ld [wJumptableIndex], a
@@ -1100,42 +1101,39 @@ TilesetColorTest:
 	ldh [hWY], a
 	ret
 
-Functionfdbdb:
+DebugTileset_DrawColorSwatch:
 	hlcoord 0, 0
-	call Functionfdbe7
+	call _DebugColor_DrawSwatch
 
-Functionfdbe1:
+DebugColor_DrawAttributeSwatch:
 	ld a, [wce64]
 	hlcoord 0, 0, wAttrmap
 
-Functionfdbe7:
+_DebugColor_DrawSwatch:
+; Fills a 4x3 box at de with byte a.
 	add hl, de
 rept 4
 	ld [hli], a
 endr
-	ld bc, $10
+rept 2
+	ld bc, SCREEN_WIDTH - 4
 	add hl, bc
 rept 4
 	ld [hli], a
 endr
-	ld bc, $10
-	add hl, bc
-rept 4
-	ld [hli], a
 endr
 	ret
 
-Functionfdbfd:
+DebugTileset_LoadRGBMeter:
 	hlcoord 2, 4
 	call .Place
 	hlcoord 2, 6
 	call .Place
 	hlcoord 2, 8
-
 .Place:
 	ld a, DEBUGTEST_TICKS_1
 	ld [hli], a
-	ld bc, $10 - 1
+	ld bc, 15
 	ld a, DEBUGTEST_TICKS_2
 	call ByteFill
 	ret
@@ -1150,7 +1148,7 @@ Functionfdc18:
 	ld de, wBGPals1
 	add hl, de
 	ld de, wc508
-	ld bc, 8
+	ld bc, 1 palettes
 	call CopyBytes
 	ld de, wc508
 	call DebugColor_CalculateRGB
@@ -1163,7 +1161,7 @@ DebugColorMain2: ; unreferenced
 	jr nz, .loop7
 	ld a, [hl]
 	and B_BUTTON
-	jr nz, .asm_fdc8e
+	jr nz, .cancel
 	call Functionfdcdb
 	ret
 
@@ -1171,20 +1169,20 @@ DebugColorMain2: ; unreferenced
 	ld hl, wce64
 	ld a, [hl]
 	inc a
-	and 7
-	cp 7
-	jr nz, .asm_fdc52
-	xor a
-.asm_fdc52
+	and PALETTE_MASK
+	cp PAL_BG_TEXT
+	jr nz, .palette_ok
+	xor a ; PAL_BG_GRAY
+.palette_ok
 	ld [hl], a
-	ld de, $15
-	call Functionfdbe1
-	ld de, $1a
-	call Functionfdbe1
-	ld de, $1f
-	call Functionfdbe1
-	ld de, $24
-	call Functionfdbe1
+	decoord 1, 1, 0
+	call DebugColor_DrawAttributeSwatch
+	decoord 6, 1, 0
+	call DebugColor_DrawAttributeSwatch
+	decoord 11, 1, 0
+	call DebugColor_DrawAttributeSwatch
+	decoord 16, 1, 0
+	call DebugColor_DrawAttributeSwatch
 	ld hl, wBGPals2
 	ld a, [wce64]
 	ld bc, 1 palettes
@@ -1200,7 +1198,7 @@ DebugColorMain2: ; unreferenced
 	ldh [hBGMapMode], a
 	ret
 
-.asm_fdc8e
+.cancel
 	call ClearSprites
 	ldh a, [hWY]
 	xor %11010000

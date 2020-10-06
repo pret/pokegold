@@ -72,7 +72,8 @@ TilesetJohtoAnim:
 	dw NULL,  StandingTileFrame8
 	dw NULL,  DoneTileAnimation
 
-UnusedTilesetAnim_fc07e:
+UnusedTilesetAnim1: ; unreferenced
+; Scrolls tile $03 like cave water, but also has the standard $03 flower tile.
 	dw vTiles2 tile $03, WriteTileToBuffer
 	dw wTileAnimBuffer, ScrollTileRightLeft
 	dw vTiles2 tile $03, WriteTileFromBuffer
@@ -85,7 +86,8 @@ UnusedTilesetAnim_fc07e:
 	dw NULL,  WaitTileAnimation
 	dw NULL,  DoneTileAnimation
 
-UnusedTilesetAnim_fc0aa:
+UnusedTilesetAnim2: ; unreferenced
+; Scrolls tile $14 like cave water.
 	dw vTiles2 tile $14, WriteTileToBuffer
 	dw wTileAnimBuffer, ScrollTileRightLeft
 	dw vTiles2 tile $14, WriteTileFromBuffer
@@ -122,7 +124,8 @@ TilesetEliteFourRoomAnim:
 	dw NULL,  StandingTileFrame8
 	dw NULL,  DoneTileAnimation
 
-UnusedTilesetAnim_fc126:
+UnusedTilesetAnim3: ; unreferenced
+; Scrolls tile $53 like a waterfall; scrolls tile $03 like cave water.
 	dw vTiles2 tile $53, WriteTileToBuffer
 	dw wTileAnimBuffer, ScrollTileDown
 	dw wTileAnimBuffer, ScrollTileDown
@@ -136,7 +139,8 @@ UnusedTilesetAnim_fc126:
 	dw vTiles2 tile $53, WriteTileFromBuffer
 	dw NULL,  DoneTileAnimation
 
-UnusedTilesetAnim_fc156:
+UnusedTilesetAnim4: ; unreferenced
+; Scrolls tile $54 like a waterfall; scrolls tile $03 like cave water.
 	dw vTiles2 tile $54, WriteTileToBuffer
 	dw wTileAnimBuffer, ScrollTileDown
 	dw wTileAnimBuffer, ScrollTileDown
@@ -213,7 +217,8 @@ TilesetTowerAnim:
 	dw NULL,  WaitTileAnimation
 	dw NULL,  DoneTileAnimation
 
-UnusedTilesetAnim_fc266:
+UnusedTilesetAnim5: ; unreferenced
+; Scrolls tile $4f like cave water.
 	dw vTiles2 tile $4f, WriteTileToBuffer
 	dw wTileAnimBuffer, ScrollTileRightLeft
 	dw vTiles2 tile $4f, WriteTileFromBuffer

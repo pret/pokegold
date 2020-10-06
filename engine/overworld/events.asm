@@ -372,10 +372,9 @@ SetUpFiveStepWildEncounterCooldown:
 	ld [wWildEncounterCooldown], a
 	ret
 
-ret_96804:
-	ret
-
 SetMinTwoStepWildEncounterCooldown:
+; dummied out
+	ret
 	ld a, [wWildEncounterCooldown]
 	cp 2
 	ret nc
@@ -764,7 +763,7 @@ PlayerMovement:
 	ret
 
 .jump:
-	call ret_96804
+	call SetMinTwoStepWildEncounterCooldown
 	xor a
 	ld c, a
 	ret

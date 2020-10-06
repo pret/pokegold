@@ -139,7 +139,8 @@ BuySellToss_UpdateQuantityDisplay:
 	push de
 	ret
 
-ret_24ff3:
+NoPriceToDisplay:
+; Does nothing.
 	ret
 
 DisplayPurchasePrice:
@@ -202,7 +203,7 @@ BuySell_DisplaySubtotal:
 TossItem_MenuHeader:
 	db MENU_BACKUP_TILES ; flags
 	menu_coords 15, 9, SCREEN_WIDTH - 1, TEXTBOX_Y - 1
-	dw ret_24ff3
+	dw NoPriceToDisplay
 	db 0 ; default option
 
 BuyItem_MenuHeader:
