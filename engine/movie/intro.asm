@@ -183,12 +183,12 @@ IntroScene4:
 	inc [hl]
 	ld a, [hl]
 	and $f
-	jr nz, .asm_e4e21
+	jr nz, .skip_move_left
 	ld hl, hSCX
 	dec [hl]
 	dec [hl]
 
-.asm_e4e21
+.skip_move_left
 	call Functione4fde
 	ret
 
@@ -245,13 +245,13 @@ Functione4e67:
 	inc [hl]
 	ld a, [hl]
 	and 3
-	jr nz, .asm_e4e74
+	jr nz, .skip_move_left
 	ld hl, hSCX
 	dec [hl]
 
-.asm_e4e74
+.skip_move_left
 	and 1
-	jr nz, .asm_e4e8c
+	jr nz, .no_carry
 	ld hl, wGlobalAnimYOffset
 	inc [hl]
 	ld hl, hSCY
@@ -261,13 +261,13 @@ Functione4e67:
 	call z, Intro_UpdateTilemapAndBGMap
 	ld a, [wIntroFrameCounter1]
 	and a
-	jr z, .asm_e4e8e
+	jr z, .carry
 
-.asm_e4e8c
+.no_carry
 	and a
 	ret
 
-.asm_e4e8e
+.carry
 	scf
 	ret
 
@@ -371,7 +371,7 @@ Intro_InitMagikarps:
 	ret nz
 	ld a, [hl]
 	and d
-	jr nz, .asm_e4f41
+	jr nz, .alternate_frame
 	depixel 29, 28
 	call .InitAnim
 	depixel 26, 0
@@ -380,7 +380,7 @@ Intro_InitMagikarps:
 	call .InitAnim
 	ret
 
-.asm_e4f41
+.alternate_frame
 	depixel 28, 30
 	call .InitAnim
 	depixel 31, 24

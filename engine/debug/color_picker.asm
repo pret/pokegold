@@ -27,12 +27,12 @@ DebugColorPicker:
 
 	ldh a, [hCGB]
 	and a
-	jr nz, .set
+	jr nz, .cgb
 	ldh a, [hSGB]
 	and a
 	ret z
 
-.set
+.cgb
 	ldh a, [hInMenu]
 	push af
 	ld a, 1
@@ -126,14 +126,14 @@ DebugColor_InitColor:
 	ret
 
 DebugColor_InitVRAM:
-	ld a, 1
+	ld a, BANK(vTiles3)
 	ldh [rVBK], a
-	ld hl, vTiles0
-	ld bc, sScratch - vTiles0
+	ld hl, vTiles3
+	ld bc, sScratch - vTiles3
 	xor a
 	call ByteFill
 
-	ld a, 0
+	ld a, BANK(vTiles0)
 	ldh [rVBK], a
 	ld hl, vTiles0
 	ld bc, sScratch - vTiles0
@@ -158,13 +158,15 @@ DebugColor_LoadGFX:
 	ld de, vTiles2 tile DEBUGTEST_TICKS_1
 	ld bc, 22 tiles
 	call CopyBytes
+
 	ld hl, DebugColor_UpArrowGFX
 	ld de, vTiles0
 	ld bc, 1 tiles
 	call CopyBytes
+
 	call LoadStandardFont
 	ld hl, vTiles1
-	lb bc, 8, 0
+	ld bc, $80 tiles
 .loop
 	ld a, [hl]
 	xor $ff
@@ -179,29 +181,31 @@ DebugColor_InitPalettes:
 	ldh a, [hCGB]
 	and a
 	ret z
+
 	ld hl, Palette_DebugBG
 	ld de, wBGPals2
 	ld bc, 16 palettes
 	call CopyBytes
+
 	ld a, 1 << rBGPI_AUTO_INCREMENT
 	ldh [rBGPI], a
 	ld hl, Palette_DebugBG
 	ld c, 8 palettes
 	xor a
-.loop1
+.bg_loop
 	ldh [rBGPD], a
 	dec c
-	jr nz, .loop1
+	jr nz, .bg_loop
 
 	ld a, 1 << rOBPI_AUTO_INCREMENT
 	ldh [rOBPI], a
 	ld hl, Palette_DebugOB
 	ld c, 8 palettes
-.loop2
+.ob_loop
 	ld a, [hli]
 	ldh [rOBPD], a
 	dec c
-	jr nz, .loop2
+	jr nz, .ob_loop
 
 	ld a, $94
 	ld [wc508], a
@@ -262,14 +266,15 @@ DebugColorMain:
 	ret
 
 DebugColor_SetMaxNum:
+; Looping back around the pic set.
 	ld a, [wceed]
 	and a
 	jr nz, .trainer
 ; .mon
-	ld a, NUM_POKEMON
+	ld a, NUM_POKEMON ; CELEBI
 	ret
 .trainer
-	ld a, NUM_TRAINER_CLASSES - 1
+	ld a, NUM_TRAINER_CLASSES - 1 ; MYSTICALMAN
 	ret
 
 Jumptable_fd4e2:
@@ -311,10 +316,10 @@ DebugColor_InitScreen:
 	call PrintNum
 	ld a, [wceed]
 	and a
-	jr nz, .Trainer
+	jr nz, .trainer
 
-.MonSpriteViewer:
-	ld a, 1
+; .mon
+	ld a, UNOWN_A
 	ld [wUnownLetter], a
 	call GetPokemonName
 	hlcoord 4, 1
@@ -330,11 +335,11 @@ DebugColor_InitScreen:
 	hlcoord 12, 4
 	lb bc, 6, 6
 	predef PlaceGraphic
+
 	ld a, [wceee]
 	and a
 	jr z, .load_normal_text
-
-.load_shiny_text
+; .load_shiny_text
 	ld de, DebugColor_ShinyText
 	jr .place_switch_text
 
@@ -347,9 +352,9 @@ DebugColor_InitScreen:
 	hlcoord 0, 17
 	ld de, DebugColor_SwitchText
 	call PlaceString
-	jr .asm_fd5bc
+	jr .done
 
-.Trainer:
+.trainer
 	ld a, [wDeciramBuffer]
 	ld [wTrainerClass], a
 	callfar GetTrainerAttributes
@@ -365,7 +370,7 @@ DebugColor_InitScreen:
 	lb bc, 7, 7
 	predef PlaceGraphic
 
-.asm_fd5bc
+.done
 	ld a, 1
 	ld [wJumptableIndex], a
 	ret
@@ -377,20 +382,20 @@ DebugColor_NormalText:
 	db "ノーマル@" ; Normal
 
 DebugColor_SwitchText:
-	db DEBUGTEST_A, "きりかえ▶@" ; Switch
+	db DEBUGTEST_A, "きりかえ▶@" ; (A) Switches
 
 DebugColor_LoadRGBMeter:
 	decoord 0, 11, wAttrmap
 	hlcoord 2, 11
-	ld a, 1
+	ld a, $1
 	call Functionfd5f1
 	decoord 0, 13, wAttrmap
 	hlcoord 2, 13
-	ld a, 2
+	ld a, $2
 	call Functionfd5f1
 	decoord 0, 15, wAttrmap
 	hlcoord 2, 15
-	ld a, 3
+	ld a, $3
 
 Functionfd5f1:
 	push af
@@ -428,14 +433,14 @@ DebugColor_SetRGBMeter:
 Functionfd62b:
 	ldh a, [hCGB]
 	and a
-	jr z, .asm_fd63d
+	jr z, .sgb
 	ld a, 2
 	ldh [hBGMapMode], a
 	call DelayFrame
 	call DelayFrame
 	call DelayFrame
 
-.asm_fd63d
+.sgb
 	call WaitBGMap
 	ld a, 2
 	ld [wJumptableIndex], a
@@ -446,10 +451,10 @@ Functionfd646:
 	and a
 	jr z, .sgb
 
-.cgb
+; .cgb
 	ld hl, wBGPals2
 	ld de, wc508
-	ld c, 1
+	ld c, $1
 	call Functionfd8ec
 	hlcoord 10, 2
 	ld de, wc508
@@ -459,6 +464,7 @@ Functionfd646:
 	call Functionfd6b0
 	ld a, TRUE
 	ldh [hCGBPalUpdate], a
+
 	ld a, 3
 	ld [wJumptableIndex], a
 	ret
@@ -491,6 +497,7 @@ Functionfd646:
 	hlcoord 15, 2
 	ld de, wc508 + 2
 	call Functionfd6b0
+
 	ld a, 3
 	ld [wJumptableIndex], a
 	ret
@@ -519,12 +526,12 @@ Functionfd6c5:
 Functionfd6cb:
 	ldh a, [hJoyLast]
 	and B_BUTTON
-	jr nz, .asm_fd6e8
+	jr nz, .b
 	ldh a, [hJoyLast]
 	and A_BUTTON
-	jr nz, .asm_fd6ee
+	jr nz, .a
 	ld a, [wce64]
-	and 3
+	and $3
 	ld e, a
 	ld d, 0
 	ld hl, Jumptable_fd70b
@@ -535,17 +542,17 @@ Functionfd6cb:
 	ld l, a
 	jp hl
 
-.asm_fd6e8
+.b
 	ld a, 4
 	ld [wJumptableIndex], a
 	ret
 
-.asm_fd6ee
+.a
 	ld a, [wceed]
 	and a
 	ret nz
 	ld a, [wceee]
-	xor 4
+	xor %00000100
 	ld [wceee], a
 	ld c, a
 	ld b, 0
@@ -583,7 +590,7 @@ DebugColor_SelectColorBox:
 	ret
 
 .darkcolor:
-	ld a, 1
+	ld a, $1
 	ld [wce65], a
 	ld de, wc508 + 2
 	call DebugColor_CalculateRGB
@@ -629,10 +636,10 @@ DebugColor_UpdateSpriteColor:
 
 .increment_color_value
 	ld a, [hl]
-	cp $1f
+	cp 31
 	ret nc
 	inc [hl]
-	jr .asm_fd784
+	jr .done
 
 .decrement_color_value
 	ld a, [hl]
@@ -640,7 +647,7 @@ DebugColor_UpdateSpriteColor:
 	ret z
 	dec [hl]
 
-.asm_fd784
+.done
 	call DebugColor_CalculatePalette
 	ld a, 2
 	ld [wJumptableIndex], a
@@ -658,11 +665,11 @@ DebugColor_NextRGBColor:
 
 Functionfd797:
 	hlcoord 0, 10
-	ld bc, 20 * 8
+	ld bc, SCREEN_WIDTH * 8
 	ld a, DEBUGTEST_BLACK
 	call ByteFill
 	hlcoord 2, 12
-	ld de, String_fd9d6
+	ld de, DebugColor_AreYouFinishedString
 	call PlaceString
 	xor a
 	ld [wceef], a
@@ -676,9 +683,6 @@ Functionfd7b8:
 	ld a, [hl]
 	and B_BUTTON
 	jr nz, .cancel
-;	ld a,(hl)
-;	and A_BUTTON
-;	jr nz, .exit
 	call DebugColor_TMHMJoypad
 	ret
 
@@ -687,7 +691,7 @@ Functionfd7b8:
 	ld [wJumptableIndex], a
 	ret
 
-.exit
+.exit ; unreferenced
 	ld hl, wJumptableIndex
 	set 7, [hl]
 	ret
@@ -696,34 +700,34 @@ DebugColor_TMHMJoypad:
 	ld hl, hJoyLast
 	ld a, [hl]
 	and D_UP
-	jr nz, .asm_fd7de
+	jr nz, .up
 	ld a, [hl]
 	and D_DOWN
-	jr nz, .asm_fd7eb
+	jr nz, .down
 	ret
 
-.asm_fd7de
+.up
 	ld a, [wceef]
-	cp 56
-	jr z, .asm_fd7e8
+	cp NUM_TM_HM - 1
+	jr z, .wrap_down
 	inc a
-	jr .asm_fd7f6
+	jr .done
 
-.asm_fd7e8
+.wrap_down
 	xor a
-	jr .asm_fd7f6
+	jr .done
 
-.asm_fd7eb
+.down
 	ld a, [wceef]
 	and a
-	jr z, .asm_fd7f4
+	jr z, .wrap_up
 	dec a
-	jr .asm_fd7f6
+	jr .done
 
-.asm_fd7f4
-	ld a, 56
+.wrap_up
+	ld a, NUM_TM_HM - 1
 
-.asm_fd7f6
+.done
 	ld [wceef], a
 	call Functionfd7fd
 	ret
@@ -755,7 +759,6 @@ Functionfd7fd:
 	ld de, DebugColor_AbleText
 	jr nz, .place_string
 	ld de, DebugColor_NotAbleText
-
 .place_string
 	hlcoord 10, 14
 	call PlaceString
@@ -770,7 +773,7 @@ DebugColor_NotAbleText:
 Functionfd85e:
 	cp NUM_TMS
 	jr c, .tm
-.hm
+; .hm
 	inc a
 	inc a
 .tm
@@ -808,7 +811,7 @@ DebugColor_CalculatePalette:
 	and a
 	jr z, .LightPalette
 
-.DarkPalette
+; .DarkPalette
 	ld a, e
 	ld [wc508 + 2], a
 	ld a, d
@@ -824,22 +827,22 @@ DebugColor_CalculatePalette:
 
 DebugColor_CalculateRGB:
 	ld a, [de]
-	and $1f
+	and %00011111
 	ld [wc508 + 10], a
 	ld a, [de]
-	and $e0
+	and %11100000
 	swap a
 	srl a
 	ld b, a
 	inc de
 	ld a, [de]
-	and 3
+	and %00000011
 	swap a
 	srl a
 	or b
 	ld [wc508 + 11], a
 	ld a, [de]
-	and $7c
+	and %01111100
 	srl a
 	srl a
 	ld [wc508 + 12], a
@@ -905,47 +908,45 @@ DebugColor_FillBoxWithByte:
 	ret
 
 Functionfd915:
-; SGB Related
-
 	ld a, [wd8ba]
 	push af
 	set 7, a
 	ld [wd8ba], a
-	call Functionfd926
+	call DebugColor_PushSGBPals
 	pop af
 	ld [wd8ba], a
 	ret
 
-Functionfd926:
+DebugColor_PushSGBPals:
 	ld a, [hl]
-	and 7
+	and $7
 	ret z
 	ld b, a
-.asm_fd92b
+.loop
 	push bc
 	xor a
 	ldh [rJOYP], a
 	ld a, $30
 	ldh [rJOYP], a
 	ld b, $10
-.asm_fd935
-	ld e, 8
+.loop2
+	ld e, $8
 	ld a, [hli]
 	ld d, a
-.asm_fd939
+.loop3
 	bit 0, d
 	ld a, $10
-	jr nz, .asm_fd941
+	jr nz, .okay
 	ld a, $20
-.asm_fd941
+.okay
 	ldh [rJOYP], a
 	ld a, $30
 	ldh [rJOYP], a
 	rr d
 	dec e
-	jr nz, .asm_fd939
+	jr nz, .loop3
 	dec b
-	jr nz, .asm_fd935
+	jr nz, .loop2
 	ld a, $20
 	ldh [rJOYP], a
 	ld a, $30
@@ -961,7 +962,7 @@ Functionfd926:
 	jr nz, .wait
 	pop bc
 	dec b
-	jr nz, .asm_fd92b
+	jr nz, .loop
 	ret
 
 DebugColor_PlaceCursor:
@@ -993,7 +994,7 @@ DebugColor_PlaceCursor:
 	and a
 	jr z, .lightcolor
 
-.darkcolor
+; .darkcolor
 	hlcoord 15, 0
 	jr .place
 
@@ -1006,14 +1007,14 @@ DebugColor_PlaceCursor:
 	ld c, 5
 	ld hl, wVirtualOAM
 	ld de, wc508 + 10
-	call .PlaceSprites
+	call .placesprite
 	ld de, wc508 + 11
-	call .PlaceSprites
+	call .placesprite
 	ld de, wc508 + 12
-	call .PlaceSprites
+	call .placesprite
 	ret
 
-.PlaceSprites:
+.placesprite:
 	ld a, b
 	ld [hli], a ; y
 	ld a, [de]
@@ -1035,7 +1036,7 @@ DebugColor_PlaceCursor:
 	call ClearSprites
 	ret
 
-String_fd9d6:
+DebugColor_AreYouFinishedString:
 	db   "おわりますか？" ; Are you finished?
 	next "はい<DOT><DOT><DOT>", DEBUGTEST_A ; YES...(A)
 	next "いいえ<DOT><DOT>", DEBUGTEST_B ; NO..(B)
@@ -1048,8 +1049,8 @@ DebugColor_GFX:
 INCBIN "gfx/debug/color_test.2bpp"
 
 TilesetColorTest:
-	ret
 ; dummied out
+	ret
 	xor a
 	ld [wJumptableIndex], a
 	ld [wce64], a
@@ -1077,7 +1078,7 @@ TilesetColorTest:
 	call ByteFill
 	hlcoord 0, 0, wAttrmap
 	ld bc, SCREEN_WIDTH * SCREEN_HEIGHT
-	ld a, 7
+	ld a, $07
 	call ByteFill
 	ld de, $15
 	ld a, DEBUGTEST_WHITE
@@ -1155,7 +1156,7 @@ Functionfdc18:
 	call DebugColor_CalculateRGB
 	ret
 
-DebugColorMain2:
+DebugColorMain2: ; unreferenced
 	ld hl, hJoyLast
 	ld a, [hl]
 	and SELECT
@@ -1174,7 +1175,6 @@ DebugColorMain2:
 	cp 7
 	jr nz, .asm_fdc52
 	xor a
-
 .asm_fdc52
 	ld [hl], a
 	ld de, $15
@@ -1203,7 +1203,7 @@ DebugColorMain2:
 .asm_fdc8e
 	call ClearSprites
 	ldh a, [hWY]
-	xor $d0
+	xor %11010000
 	ldh [hWY], a
 	ret
 
@@ -1260,23 +1260,23 @@ DebugColor_SelectColorBox2:
 	jr nz, Functionfdd77
 	ld a, [hl]
 	and D_LEFT
-	jr nz, .asm_fdd07
+	jr nz, .left
 	ld a, [hl]
 	and D_RIGHT
-	jr nz, .asm_fdd0d
+	jr nz, .right
 	ret
 
-.asm_fdd07
+.left
 	ld a, [wce66]
 	dec a
-	jr .asm_fdd11
+	jr .done
 
-.asm_fdd0d
+.right
 	ld a, [wce66]
 	inc a
 
-.asm_fdd11
-	and 3
+.done
+	and $3
 	ld [wce66], a
 	ld e, a
 	ld d, 0
@@ -1320,26 +1320,26 @@ Functionfdd48:
 Functionfdd53:
 	ldh a, [hJoyLast]
 	and D_RIGHT
-	jr nz, .asm_fdd60
+	jr nz, .right
 	ldh a, [hJoyLast]
 	and D_LEFT
-	jr nz, .asm_fdd67
+	jr nz, .left
 	ret
 
-.asm_fdd60
+.right
 	ld a, [hl]
-	cp $1f
+	cp 31
 	ret nc
 	inc [hl]
-	jr .asm_fdd6b
+	jr .done
 
-.asm_fdd67
+.left
 	ld a, [hl]
 	and a
 	ret z
 	dec [hl]
 
-.asm_fdd6b
+.done
 	call Functionfdd7c
 	call Functionfdc98
 	ret
@@ -1356,21 +1356,21 @@ Functionfdd77:
 
 Functionfdd7c:
 	ld a, [wc508 + 10]
-	and $1f
+	and %00011111
 	ld e, a
 	ld a, [wc508 + 11]
-	and 7
+	and %0000111
 	sla a
 	swap a
 	or e
 	ld e, a
 	ld a, [wc508 + 11]
-	and $18
+	and %00011000
 	sla a
 	swap a
 	ld d, a
 	ld a, [wc508 + 12]
-	and $1f
+	and %00011111
 	sla a
 	sla a
 	or d
@@ -1420,14 +1420,14 @@ DebugColor_PlaceCursor2:
 	ld b, $78
 	ld hl, wVirtualOAM
 	ld de, wc508 + 10
-	call .PlaceSprites
+	call .placesprite
 	ld de, wc508 + 11
-	call .PlaceSprites
+	call .placesprite
 	ld de, wc508 + 12
-	call .PlaceSprites
+	call .placesprite
 	ret
 
-.PlaceSprites:
+.placesprite:
 	ld a, b
 	ld [hli], a ; y
 	ld a, [de]

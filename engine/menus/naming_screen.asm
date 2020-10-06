@@ -544,24 +544,24 @@ NamingScreen_AnimateCursor:
 .right
 	call NamingScreen_GetCursorPosition
 	and a
-	jr nz, .asm_11e76
+	jr nz, .target_right
 	ld hl, SPRITEANIMSTRUCT_VAR1
 	add hl, bc
 	ld a, [hl]
 	cp $8
-	jr nc, .asm_11e73
+	jr nc, .wrap_left
 	inc [hl]
 	ret
 
-.asm_11e73
+.wrap_left
 	ld [hl], $0
 	ret
 
-.asm_11e76
+.target_right
 	cp $3
-	jr nz, .asm_11e7b
+	jr nz, .no_wrap_target_left
 	xor a
-.asm_11e7b
+.no_wrap_target_left
 	ld e, a
 	add a
 	add e
@@ -573,24 +573,24 @@ NamingScreen_AnimateCursor:
 .left
 	call NamingScreen_GetCursorPosition
 	and a
-	jr nz, .asm_11e97
+	jr nz, .target_left
 	ld hl, SPRITEANIMSTRUCT_VAR1
 	add hl, bc
 	ld a, [hl]
 	and a
-	jr z, .asm_11e94
+	jr z, .wrap_right
 	dec [hl]
 	ret
 
-.asm_11e94
+.wrap_right
 	ld [hl], $8
 	ret
 
-.asm_11e97
+.target_left
 	cp $1
-	jr nz, .asm_11e9d
+	jr nz, .no_wrap_target_right
 	ld a, $4
-.asm_11e9d
+.no_wrap_target_right
 	dec a
 	dec a
 	ld e, a
@@ -606,19 +606,19 @@ NamingScreen_AnimateCursor:
 	add hl, bc
 	ld a, [hl]
 	call NamingScreen_IsTargetBox
-	jr nz, .asm_11eb8
+	jr nz, .not_box
 	cp $5
-	jr nc, .asm_11ebe
+	jr nc, .wrap_up
 	inc [hl]
 	ret
 
-.asm_11eb8
+.not_box
 	cp $4
-	jr nc, .asm_11ebe
+	jr nc, .wrap_up
 	inc [hl]
 	ret
 
-.asm_11ebe
+.wrap_up
 	ld [hl], $0
 	ret
 
@@ -627,11 +627,11 @@ NamingScreen_AnimateCursor:
 	add hl, bc
 	ld a, [hl]
 	and a
-	jr z, .asm_11ecb
+	jr z, .wrap_down
 	dec [hl]
 	ret
 
-.asm_11ecb
+.wrap_down
 	ld [hl], $4
 	call NamingScreen_IsTargetBox
 	ret nz
@@ -1328,32 +1328,32 @@ MailComposition_TryAddLastCharacter:
 	and a
 	ret z
 	cp $11
-	jr nz, .asm_1259c
+	jr nz, .one_back
 	push hl
 	ld hl, wNamingScreenCurNameLength
 	dec [hl]
 	dec [hl]
-	jr .asm_125a1
+	jr .continue
 
-.asm_1259c
+.one_back
 	push hl
 	ld hl, wNamingScreenCurNameLength
 	dec [hl]
 
-.asm_125a1
+.continue
 	call NamingScreen_GetTextCursorPosition
 	ld c, [hl]
 	pop hl
-.asm_125a6
+.loop
 	ld a, [hli]
-	cp $ff
+	cp -1 ; end?
 	jp z, NamingScreen_AdvanceCursor_CheckEndOfString
 	cp c
-	jr z, .asm_125b2
+	jr z, .done
 	inc hl
-	jr .asm_125a6
+	jr .loop
 
-.asm_125b2
+.done
 	ld a, [hl]
 	jp NamingScreen_LoadNextCharacter
 
