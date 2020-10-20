@@ -11280,7 +11280,7 @@
 23:46f8 StartTrainerBattle_SetUpForSpinOutro
 23:4706 StartTrainerBattle_SpinToBlack
 23:4731 StartTrainerBattle_SpinToBlack.end
-23:4747 StartTrainerBattle_SpinToBlack.spintable
+23:4747 StartTrainerBattle_SpinToBlack.spin_quadrants
 23:47ac StartTrainerBattle_SpinToBlack.load
 23:47b3 StartTrainerBattle_SpinToBlack.loop
 23:47b7 StartTrainerBattle_SpinToBlack.loop1
