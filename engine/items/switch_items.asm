@@ -15,76 +15,76 @@ SwitchItemsInBag:
 	ld a, [wSwitchItem]
 	dec a
 	ld [wSwitchItem], a
-	call Function248cf
-	jp c, Function248f9
+	call .try_combining_stacks
+	jp c, .combine_stacks
 	ld a, [wScrollingMenuCursorPosition]
 	ld c, a
 	ld a, [wSwitchItem]
 	cp c
-	jr c, .asm_248a2
-	jr .asm_24872
+	jr c, .above
+	jr .below
 
-.init
+.init:
 	ld a, [wScrollingMenuCursorPosition]
 	inc a
 	ld [wSwitchItem], a
 	ret
 
-.trivial
+.trivial:
 	xor a
 	ld [wSwitchItem], a
 	ret
 
-.asm_24872
+.below:
 	ld a, [wSwitchItem]
-	call Function24968
+	call ItemSwitch_CopyItemToBuffer
 	ld a, [wScrollingMenuCursorPosition]
 	ld d, a
 	ld a, [wSwitchItem]
 	ld e, a
-	call Function24994
+	call ItemSwitch_GetItemOffset
 	push bc
 	ld a, [wSwitchItem]
 	call ItemSwitch_GetNthItem
 	dec hl
 	push hl
-	call ItemSwitch_ConvertItemFormatToDW
+	call ItemSwitch_GetItemFormatSize
 	add hl, bc
 	ld d, h
 	ld e, l
 	pop hl
 	pop bc
-	call Function249d3
+	call ItemSwitch_BackwardsCopyBytes
 	ld a, [wScrollingMenuCursorPosition]
-	call Function24975
+	call ItemSwitch_CopyBufferToItem
 	xor a
 	ld [wSwitchItem], a
 	ret
 
-.asm_248a2
+.above:
 	ld a, [wSwitchItem]
-	call Function24968
+	call ItemSwitch_CopyItemToBuffer
 	ld a, [wScrollingMenuCursorPosition]
 	ld d, a
 	ld a, [wSwitchItem]
 	ld e, a
-	call Function24994
+	call ItemSwitch_GetItemOffset
 	push bc
 	ld a, [wSwitchItem]
 	call ItemSwitch_GetNthItem
 	ld d, h
 	ld e, l
-	call ItemSwitch_ConvertItemFormatToDW
+	call ItemSwitch_GetItemFormatSize
 	add hl, bc
 	pop bc
 	call CopyBytes
 	ld a, [wScrollingMenuCursorPosition]
-	call Function24975
+	call ItemSwitch_CopyBufferToItem
 	xor a
 	ld [wSwitchItem], a
 	ret
 
-Function248cf:
+.try_combining_stacks:
 	ld a, [wSwitchItem]
 	call ItemSwitch_GetNthItem
 	ld d, h
@@ -93,24 +93,23 @@ Function248cf:
 	call ItemSwitch_GetNthItem
 	ld a, [de]
 	cp [hl]
-	jr nz, .asm_248f5
+	jr nz, .no_combine
 	ld a, [wScrollingMenuCursorPosition]
-	call Function249bf
+	call ItemSwitch_GetItemQuantity
 	cp MAX_ITEM_STACK
-	jr z, .asm_248f5
+	jr z, .no_combine
 	ld a, [wSwitchItem]
-	call Function249bf
+	call ItemSwitch_GetItemQuantity
 	cp MAX_ITEM_STACK
-	jr nz, .asm_248f7
-.asm_248f5
+	jr nz, .combine
+.no_combine
 	and a
 	ret
-
-.asm_248f7
+.combine
 	scf
 	ret
 
-Function248f9:
+.combine_stacks:
 	ld a, [wSwitchItem]
 	call ItemSwitch_GetNthItem
 	inc hl
@@ -122,7 +121,7 @@ Function248f9:
 	pop hl
 	add [hl]
 	cp MAX_ITEM_STACK + 1
-	jr c, .asm_24929
+	jr c, .merge_stacks
 	sub MAX_ITEM_STACK
 	push af
 	ld a, [wScrollingMenuCursorPosition]
@@ -138,7 +137,7 @@ Function248f9:
 	ld [wSwitchItem], a
 	ret
 
-.asm_24929
+.merge_stacks:
 	push af
 	ld a, [wScrollingMenuCursorPosition]
 	call ItemSwitch_GetNthItem
@@ -151,18 +150,18 @@ Function248f9:
 	ld l, a
 	ld a, [wSwitchItem]
 	cp [hl]
-	jr nz, .asm_2494d
+	jr nz, .not_combining_last_item
 	dec [hl]
 	ld a, [wSwitchItem]
 	call ItemSwitch_GetNthItem
-	ld [hl], $ff
+	ld [hl], -1 ; end
 	xor a
 	ld [wSwitchItem], a
 	ret
 
-.asm_2494d
+.not_combining_last_item:
 	dec [hl]
-	call ItemSwitch_ConvertItemFormatToDW
+	call ItemSwitch_GetItemFormatSize
 	push bc
 	ld a, [wSwitchItem]
 	call ItemSwitch_GetNthItem
@@ -170,35 +169,35 @@ Function248f9:
 	push hl
 	add hl, bc
 	pop de
-.asm_2495c
+.copy_loop
 	ld a, [hli]
 	ld [de], a
 	inc de
-	cp $ff
-	jr nz, .asm_2495c
+	cp -1 ; end?
+	jr nz, .copy_loop
 	xor a
 	ld [wSwitchItem], a
 	ret
 
-Function24968:
+ItemSwitch_CopyItemToBuffer:
 	call ItemSwitch_GetNthItem
-	ld de, wceed
-	call ItemSwitch_ConvertItemFormatToDW
+	ld de, wSwitchItemBuffer
+	call ItemSwitch_GetItemFormatSize
 	call CopyBytes
 	ret
 
-Function24975:
+ItemSwitch_CopyBufferToItem:
 	call ItemSwitch_GetNthItem
 	ld d, h
 	ld e, l
-	ld hl, wceed
-	call ItemSwitch_ConvertItemFormatToDW
+	ld hl, wSwitchItemBuffer
+	call ItemSwitch_GetItemFormatSize
 	call CopyBytes
 	ret
 
 ItemSwitch_GetNthItem:
 	push af
-	call ItemSwitch_ConvertItemFormatToDW
+	call ItemSwitch_GetItemFormatSize
 	ld hl, wMenuData_ItemsPointerAddr
 	ld a, [hli]
 	ld h, [hl]
@@ -208,9 +207,9 @@ ItemSwitch_GetNthItem:
 	call AddNTimes
 	ret
 
-Function24994:
+ItemSwitch_GetItemOffset:
 	push hl
-	call ItemSwitch_ConvertItemFormatToDW
+	call ItemSwitch_GetItemFormatSize
 	ld a, d
 	sub e
 	jr nc, .dont_negate
@@ -224,12 +223,12 @@ Function24994:
 	pop hl
 	ret
 
-ItemSwitch_ConvertItemFormatToDW:
+ItemSwitch_GetItemFormatSize:
 	push hl
 	ld a, [wMenuData_ScrollingMenuItemFormat]
 	ld c, a
 	ld b, 0
-	ld hl, .format_dws
+	ld hl, .item_format_sizes
 	add hl, bc
 	add hl, bc
 	ld c, [hl]
@@ -238,29 +237,30 @@ ItemSwitch_ConvertItemFormatToDW:
 	pop hl
 	ret
 
-.format_dws
-	dw 0
-	dw 1
-	dw 2
+.item_format_sizes:
+; entries correspond to SCROLLINGMENU_ITEMS_* constants
+	dw 0 ; unused
+	dw 1 ; SCROLLINGMENU_ITEMS_NORMAL
+	dw 2 ; SCROLLINGMENU_ITEMS_QUANTITY
 
-Function249bf:
+ItemSwitch_GetItemQuantity:
 	push af
-	call ItemSwitch_ConvertItemFormatToDW
+	call ItemSwitch_GetItemFormatSize
 	ld a, c
 	cp 2
-	jr nz, .not_2
+	jr nz, .no_quantity
 	pop af
 	call ItemSwitch_GetNthItem
 	inc hl
 	ld a, [hl]
 	ret
 
-.not_2
+.no_quantity
 	pop af
-	ld a, $1
+	ld a, 1
 	ret
 
-Function249d3:
+ItemSwitch_BackwardsCopyBytes:
 .loop
 	ld a, [hld]
 	ld [de], a

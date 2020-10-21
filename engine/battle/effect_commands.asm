@@ -2538,10 +2538,10 @@ DittoMetalPowder:
 	ldh a, [hBattleTurn]
 	and a
 	ld a, [hl]
-	jr nz, .Ditto
+	jr nz, .got_species
 	ld a, [wTempEnemyMonSpecies]
 
-.Ditto:
+.got_species
 	cp DITTO
 	ret nz
 
