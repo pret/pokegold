@@ -23519,9 +23519,9 @@
 4c:4f68 Route40Sign
 4c:4f6b Route40Rock
 4c:4f6e Route40HiddenHyperPotion
-4c:4f71 MovementData_0x130f71
-4c:4f79 MovementData_0x130f79
-4c:4f7f MovementData_0x130f7f
+4c:4f71 Route40_StepRightUp6Movement
+4c:4f79 Route40_StepUp5Movement
+4c:4f7f Route40_StepUp4Movement
 4c:4f84 SwimmermSimonSeenText
 4c:4fc3 SwimmermSimonBeatenText
 4c:4fd7 SwimmermSimonAfterBattleText
