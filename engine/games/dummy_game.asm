@@ -14,10 +14,10 @@ _DummyGame:
 	ld hl, DummyGameLZ
 	ld de, vTiles2 tile $00
 	call Decompress
-	ld hl, Unknown_e0908
+	ld hl, DummyGameGFX
 	ld de, vTiles0 tile $00
 	ld bc, 4 tiles
-	ld a, BANK(Unknown_e0908)
+	ld a, BANK(DummyGameGFX)
 	call FarCopyBytes
 	ld a, $8
 	ld hl, wc508
@@ -77,7 +77,7 @@ _DummyGame:
 	ret
 
 .ResetBoard:
-	call ret_e0908
+	call UnusedCursor_InterpretJoypad_AnimateCursor
 	jr nc, .proceed
 	ld hl, wJumptableIndex
 	set 7, [hl]
@@ -232,7 +232,7 @@ endr
 	ld hl, wJumptableIndex
 	inc [hl]
 .AskPlayAgain:
-	call ret_e0908
+	call UnusedCursor_InterpretJoypad_AnimateCursor
 	jr nc, .restart
 	ld hl, wJumptableIndex
 	set 7, [hl]

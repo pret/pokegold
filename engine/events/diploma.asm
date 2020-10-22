@@ -1,7 +1,8 @@
-ret_e0000:
+AnimateUnusedPikachu:
 	ret
 
-	ret ; unused
+AnimateUnusedPikachu2: ; unreferenced
+	ret
 
 _Diploma:
 	call PlaceDiplomaOnScreen

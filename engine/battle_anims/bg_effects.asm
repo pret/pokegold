@@ -163,7 +163,7 @@ DummyPredef2F::
 	ld l, a
 	jp hl
 
-BattleBGEffects_IncrementJumptable:
+BattleBGEffects_IncAnonJumptableIndex:
 	ld hl, BG_EFFECT_STRUCT_JT_INDEX
 	add hl, bc
 	inc [hl]
@@ -342,13 +342,13 @@ BattleBGEffect_HideMon:
 	call BattleBGEffects_AnonJumptable
 .anon_dw
 	dw .zero
-	dw BattleBGEffects_IncrementJumptable
-	dw BattleBGEffects_IncrementJumptable
-	dw BattleBGEffects_IncrementJumptable
+	dw BattleBGEffects_IncAnonJumptableIndex
+	dw BattleBGEffects_IncAnonJumptableIndex
+	dw BattleBGEffects_IncAnonJumptableIndex
 	dw .four
 
 .zero
-	call BattleBGEffects_IncrementJumptable
+	call BattleBGEffects_IncAnonJumptableIndex
 	push bc
 	call BGEffect_CheckBattleTurn
 	jr nz, .player_side
@@ -406,9 +406,9 @@ BattleBGEffect_BattlerObj_1Row:
 .anon_dw
 	dw .zero
 	dw .one
-	dw BattleBGEffects_IncrementJumptable
-	dw BattleBGEffects_IncrementJumptable
-	dw BattleBGEffects_IncrementJumptable
+	dw BattleBGEffects_IncAnonJumptableIndex
+	dw BattleBGEffects_IncAnonJumptableIndex
+	dw BattleBGEffects_IncAnonJumptableIndex
 	dw .five
 
 .zero
@@ -420,7 +420,7 @@ BattleBGEffect_BattlerObj_1Row:
 	ret
 
 .not_flying_digging
-	call BattleBGEffects_IncrementJumptable
+	call BattleBGEffects_IncAnonJumptableIndex
 	push bc
 	call BGEffect_CheckBattleTurn
 	jr nz, .player_side
@@ -444,7 +444,7 @@ BattleBGEffect_BattlerObj_1Row:
 	ret
 
 .one
-	call BattleBGEffects_IncrementJumptable
+	call BattleBGEffects_IncAnonJumptableIndex
 	push bc
 	call BGEffect_CheckBattleTurn
 	jr nz, .player_side_2
@@ -473,9 +473,9 @@ BattleBGEffect_BattlerObj_2Row:
 .anon_dw
 	dw .zero
 	dw .one
-	dw BattleBGEffects_IncrementJumptable
-	dw BattleBGEffects_IncrementJumptable
-	dw BattleBGEffects_IncrementJumptable
+	dw BattleBGEffects_IncAnonJumptableIndex
+	dw BattleBGEffects_IncAnonJumptableIndex
+	dw BattleBGEffects_IncAnonJumptableIndex
 	dw .five
 
 .zero
@@ -487,7 +487,7 @@ BattleBGEffect_BattlerObj_2Row:
 	ret
 
 .not_flying_digging
-	call BattleBGEffects_IncrementJumptable
+	call BattleBGEffects_IncAnonJumptableIndex
 	push bc
 	call BGEffect_CheckBattleTurn
 	jr nz, .player_side
@@ -511,7 +511,7 @@ BattleBGEffect_BattlerObj_2Row:
 	ret
 
 .one
-	call BattleBGEffects_IncrementJumptable
+	call BattleBGEffects_IncAnonJumptableIndex
 	push bc
 	call BGEffect_CheckBattleTurn
 	jr nz, .player_side_2
@@ -545,12 +545,12 @@ BattleBGEffect_RemoveMon:
 .anon_dw
 	dw .zero
 	dw .one
-	dw BattleBGEffects_IncrementJumptable
-	dw BattleBGEffects_IncrementJumptable
+	dw BattleBGEffects_IncAnonJumptableIndex
+	dw BattleBGEffects_IncAnonJumptableIndex
 	dw .four
 
 .zero
-	call BattleBGEffects_IncrementJumptable
+	call BattleBGEffects_IncAnonJumptableIndex
 	call BGEffect_CheckBattleTurn
 	ld [hl], a
 	ld hl, BG_EFFECT_STRUCT_BATTLE_TURN
@@ -617,7 +617,7 @@ BattleBGEffect_RemoveMon:
 	ldh [hBGMapThird], a
 	ld a, $1
 	ldh [hBGMapMode], a
-	call BattleBGEffects_IncrementJumptable
+	call BattleBGEffects_IncAnonJumptableIndex
 	ld hl, BG_EFFECT_STRUCT_03
 	add hl, bc
 	dec [hl]
@@ -706,8 +706,8 @@ BattleBGEffect_RunPicResizeScript:
 	call BattleBGEffects_AnonJumptable
 .anon_dw
 	dw .zero
-	dw BattleBGEffects_IncrementJumptable
-	dw BattleBGEffects_IncrementJumptable
+	dw BattleBGEffects_IncAnonJumptableIndex
+	dw BattleBGEffects_IncAnonJumptableIndex
 	dw .restart
 	dw .end
 
@@ -733,7 +733,7 @@ BattleBGEffect_RunPicResizeScript:
 	jr z, .skip
 	call .PlaceGraphic
 .skip
-	call BattleBGEffects_IncrementJumptable
+	call BattleBGEffects_IncAnonJumptableIndex
 	ld a, $1
 	ldh [hBGMapMode], a
 	ret
@@ -909,7 +909,7 @@ BattleBGEffect_Surf:
 	dw .two
 
 .zero
-	call BattleBGEffects_IncrementJumptable
+	call BattleBGEffects_IncAnonJumptableIndex
 	lb de, 2, 2
 	call InitSurfWaves
 
@@ -975,7 +975,7 @@ BattleBGEffect_Whirlpool:
 	dw .two
 
 .zero
-	call BattleBGEffects_IncrementJumptable
+	call BattleBGEffects_IncAnonJumptableIndex
 	call BattleBGEffects_ClearLYOverrides
 	ld a, LOW(rSCY)
 	ldh [hLCDCPointer], a
@@ -1050,7 +1050,7 @@ BattleBGEffect_Psychic:
 	dw .two
 
 .zero
-	call BattleBGEffects_IncrementJumptable
+	call BattleBGEffects_IncAnonJumptableIndex
 	call BattleBGEffects_ClearLYOverrides
 	ld a, LOW(rSCX)
 	ldh [hLCDCPointer], a
@@ -1087,7 +1087,7 @@ BattleBGEffect_Teleport:
 	dw .two
 
 .zero
-	call BattleBGEffects_IncrementJumptable
+	call BattleBGEffects_IncAnonJumptableIndex
 	call BattleBGEffects_ClearLYOverrides
 	ld a, LOW(rSCX)
 	call BattleBGEffect_SetLCDStatCustoms1
@@ -1111,7 +1111,7 @@ BattleBGEffect_NightShade:
 	dw .two
 
 .zero
-	call BattleBGEffects_IncrementJumptable
+	call BattleBGEffects_IncAnonJumptableIndex
 	call BattleBGEffects_ClearLYOverrides
 	ld a, LOW(rSCY)
 	call BattleBGEffect_SetLCDStatCustoms1
@@ -1141,7 +1141,7 @@ BattleBGEffect_DoubleTeam:
 	dw .five
 
 .zero
-	call BattleBGEffects_IncrementJumptable
+	call BattleBGEffects_IncAnonJumptableIndex
 	call BattleBGEffects_ClearLYOverrides
 	ld a, LOW(rSCX)
 	call BattleBGEffect_SetLCDStatCustoms1
@@ -1174,7 +1174,7 @@ BattleBGEffect_DoubleTeam:
 	ret
 
 .next
-	call BattleBGEffects_IncrementJumptable
+	call BattleBGEffects_IncAnonJumptableIndex
 	ret
 
 .two
@@ -1232,7 +1232,7 @@ BattleBGEffect_AcidArmor:
 	dw .two
 
 .zero
-	call BattleBGEffects_IncrementJumptable
+	call BattleBGEffects_IncAnonJumptableIndex
 	call BattleBGEffects_ClearLYOverrides
 	ld a, LOW(rSCY)
 	call BattleBGEffect_SetLCDStatCustoms1
@@ -1294,7 +1294,7 @@ BattleBGEffect_Withdraw:
 	dw .two
 
 .zero
-	call BattleBGEffects_IncrementJumptable
+	call BattleBGEffects_IncAnonJumptableIndex
 	call BattleBGEffects_ClearLYOverrides
 	ld a, LOW(rSCY)
 	call BattleBGEffect_SetLCDStatCustoms1
@@ -1343,7 +1343,7 @@ BattleBGEffect_Dig:
 	dw .three
 
 .zero
-	call BattleBGEffects_IncrementJumptable
+	call BattleBGEffects_IncAnonJumptableIndex
 	call BattleBGEffects_ClearLYOverrides
 	ld a, LOW(rSCY)
 	call BattleBGEffect_SetLCDStatCustoms1
@@ -1369,7 +1369,7 @@ BattleBGEffect_Dig:
 
 .next
 	ld [hl], $10
-	call BattleBGEffects_IncrementJumptable
+	call BattleBGEffects_IncAnonJumptableIndex
 .two
 	ldh a, [hLYOverrideStart]
 	ld l, a
@@ -1412,7 +1412,7 @@ BattleBGEffect_Tackle:
 ; Prepares mon to move forward (player moves right, enemy moves left)
 ; BG_EFFECT_STRUCT_03 will keep track of distance moved, so it's reset to 0 here
 ; BG_EFFECT_STRUCT_BATTLE_TURN is set to 2 or -2 depending on target
-	call BattleBGEffects_IncrementJumptable
+	call BattleBGEffects_IncAnonJumptableIndex
 	call BattleBGEffects_ClearLYOverrides
 	ld a, LOW(rSCX)
 	call BattleBGEffect_SetLCDStatCustoms1
@@ -1449,7 +1449,7 @@ Tackle_MoveForward:
 	cp 8
 	jr nz, .finish
 .reached_limit
-	call BattleBGEffects_IncrementJumptable
+	call BattleBGEffects_IncAnonJumptableIndex
 .finish
 	call Rollout_FillLYOverridesBackup
 	ld hl, BG_EFFECT_STRUCT_BATTLE_TURN
@@ -1470,7 +1470,7 @@ Tackle_ReturnMove:
 	ld a, [hl]
 	and a
 	jr nz, .move_back
-	call BattleBGEffects_IncrementJumptable
+	call BattleBGEffects_IncAnonJumptableIndex
 .move_back
 	call Rollout_FillLYOverridesBackup
 	ld hl, BG_EFFECT_STRUCT_BATTLE_TURN
@@ -1551,7 +1551,7 @@ BattleBGEffect_BetaPursuit: ; unused
 VitalThrow_MoveBackwards:
 ; Prepares mon to move back back (player moves left, enemy moves right)
 ; BG_EFFECT_STRUCT_03: keeps track of distance moved, so it's reset to 0 here
-	call BattleBGEffects_IncrementJumptable
+	call BattleBGEffects_IncAnonJumptableIndex
 	call BattleBGEffects_ClearLYOverrides
 	ld a, LOW(rSCX)
 	call BattleBGEffect_SetLCDStatCustoms1
@@ -1595,7 +1595,7 @@ BattleBGEffect_WobbleMon:
 	dw .two
 
 .zero
-	call BattleBGEffects_IncrementJumptable
+	call BattleBGEffects_IncAnonJumptableIndex
 	call BattleBGEffects_ClearLYOverrides
 	ld a, LOW(rSCX)
 	call BattleBGEffect_SetLCDStatCustoms1
@@ -1633,7 +1633,7 @@ BattleBGEffect_Flail:
 	dw .two
 
 .zero
-	call BattleBGEffects_IncrementJumptable
+	call BattleBGEffects_IncAnonJumptableIndex
 	call BattleBGEffects_ClearLYOverrides
 	ld a, LOW(rSCX)
 	call BattleBGEffect_SetLCDStatCustoms1
@@ -1687,7 +1687,7 @@ BattleBGEffect_WaveDeformMon:
 	dw .two
 
 .zero
-	call BattleBGEffects_IncrementJumptable
+	call BattleBGEffects_IncAnonJumptableIndex
 	call BattleBGEffects_ClearLYOverrides
 	ld a, LOW(rSCX)
 	call BattleBGEffect_SetLCDStatCustoms1
@@ -1729,7 +1729,7 @@ BattleBGEffect_BounceDown:
 	dw .two
 
 .zero
-	call BattleBGEffects_IncrementJumptable
+	call BattleBGEffects_IncAnonJumptableIndex
 	call BattleBGEffects_ClearLYOverrides
 	ld a, LOW(rSCY)
 	call BattleBGEffect_SetLCDStatCustoms1
@@ -1782,7 +1782,7 @@ BattleBGEffect_BetaSendOutMon1: ; unused
 	dw .five
 
 .zero
-	call BattleBGEffects_IncrementJumptable
+	call BattleBGEffects_IncAnonJumptableIndex
 	ld a, $e4
 	call BattleBGEffects_SetLYOverrides
 	ld a, $47
@@ -1822,7 +1822,7 @@ BattleBGEffect_BetaSendOutMon1: ; unused
 	ldh a, [hLYOverrideStart]
 	inc a
 	ldh [hLYOverrideStart], a
-	call BattleBGEffects_IncrementJumptable
+	call BattleBGEffects_IncAnonJumptableIndex
 	ret
 
 .three
@@ -1836,7 +1836,7 @@ BattleBGEffect_BetaSendOutMon1: ; unused
 	ret
 
 .finish
-	call BattleBGEffects_IncrementJumptable
+	call BattleBGEffects_IncAnonJumptableIndex
 	ret
 
 .SetLYOverridesBackup:
@@ -1886,7 +1886,7 @@ BattleBGEffect_BetaSendOutMon2: ; unused
 	dw .one
 
 .zero
-	call BattleBGEffects_IncrementJumptable
+	call BattleBGEffects_IncAnonJumptableIndex
 	call BattleBGEffects_ClearLYOverrides
 	ld a, LOW(rSCX)
 	call BattleBGEffect_SetLCDStatCustoms1
@@ -1926,7 +1926,7 @@ BattleBGEffect_FadeMonsToBlackRepeating:
 	dw .two
 
 .zero
-	call BattleBGEffects_IncrementJumptable
+	call BattleBGEffects_IncAnonJumptableIndex
 	ld a, $e4
 	call BattleBGEffects_SetLYOverrides
 	ld a, LOW(rBGP)
@@ -2010,7 +2010,7 @@ BattleBGEffect_FadeMonsToBlackRepeating:
 	dw .cgb_two
 
 .cgb_zero
-	call BattleBGEffects_IncrementJumptable
+	call BattleBGEffects_IncAnonJumptableIndex
 	ld hl, BG_EFFECT_STRUCT_03
 	add hl, bc
 	ld [hl], $0
@@ -2162,7 +2162,7 @@ BattleBGEffect_VibrateMon:
 	dw .one
 
 .zero
-	call BattleBGEffects_IncrementJumptable
+	call BattleBGEffects_IncAnonJumptableIndex
 	call BattleBGEffects_ClearLYOverrides
 	ld a, LOW(rSCX)
 	call BattleBGEffect_SetLCDStatCustoms1
@@ -2208,7 +2208,7 @@ BattleBGEffect_WobblePlayer:
 	dw .two
 
 .zero
-	call BattleBGEffects_IncrementJumptable
+	call BattleBGEffects_IncAnonJumptableIndex
 	call BattleBGEffects_ClearLYOverrides
 	ld a, LOW(rSCX)
 	ldh [hLCDCPointer], a
@@ -2373,7 +2373,7 @@ BGEffect_RapidCyclePals:
 	dw .two_dmg
 
 .zero_dmg
-	call BattleBGEffects_IncrementJumptable
+	call BattleBGEffects_IncAnonJumptableIndex
 	ld a, $e4
 	call BattleBGEffects_SetLYOverrides
 	ld a, $47
@@ -2439,10 +2439,10 @@ BGEffect_RapidCyclePals:
 .zero_cgb
 	call BGEffect_CheckBattleTurn
 	jr nz, .player_turn_cgb
-	call BattleBGEffects_IncrementJumptable
-	call BattleBGEffects_IncrementJumptable
+	call BattleBGEffects_IncAnonJumptableIndex
+	call BattleBGEffects_IncAnonJumptableIndex
 .player_turn_cgb
-	call BattleBGEffects_IncrementJumptable
+	call BattleBGEffects_IncAnonJumptableIndex
 	ld hl, BG_EFFECT_STRUCT_03
 	add hl, bc
 	ld a, [hl]

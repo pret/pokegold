@@ -13,59 +13,59 @@ DoAnimFrame:
 
 .Jumptable:
 ; entries correspond to SPRITE_ANIM_SEQ_* constants
-	dw .Null
-	dw .PartyMon
-	dw .PartyMonSwitch
-	dw .PartyMonSelected
-	dw .GSIntroBubble
-	dw .GSIntroShellder
-	dw .GSIntroMagikarp
-	dw .UnusedLapras
-	dw .GSIntroLapras
-	dw .GSIntroNote
-	dw .GSIntroJigglypuff
-	dw .GSIntroPikachu
-	dw .GSIntroPikachuTail
-	dw .GSIntroFireball
-	dw .GSIntroChikoritaTotodile
-	dw .GSIntroCyndaquil
-	dw .GSTitleTrail
-	dw .UnusedPikachu
-	dw .UnusedPikachuTail
-	dw .UnusedNote
-	dw .UnusedJigglypuff
-	dw .NamingScreenCursor
-	dw .GameFreakLogo
-	dw .GSGameFreakLogoStar
-	dw .GSGameFreakLogoSparkle
-	dw .SlotsGolem
-	dw .SlotsChansey
-	dw .SlotsChanseyEgg
-	dw .MailCursor
-	dw .UnusedCursor
-	dw .DummyGameCursor
-	dw .PokegearArrow
-	dw .TradePokeBall
-	dw .TradeTubeBulge
-	dw .TrademonInTube
-	dw .RevealNewMon
-	dw .RadioTuningKnob
-	dw .CutLeaves
-	dw .FlyFrom
-	dw .FlyLeaf
-	dw .FlyTo
-	dw .GSIntroHoOhLugia
+	dw AnimSeq_Null
+	dw AnimSeq_PartyMon
+	dw AnimSeq_PartyMonSwitch
+	dw AnimSeq_PartyMonSelected
+	dw AnimSeq_GSIntroBubble
+	dw AnimSeq_GSIntroShellder
+	dw AnimSeq_GSIntroMagikarp
+	dw AnimSeq_UnusedLapras
+	dw AnimSeq_GSIntroLapras
+	dw AnimSeq_GSIntroNote
+	dw AnimSeq_GSIntroJigglypuff
+	dw AnimSeq_GSIntroPikachu
+	dw AnimSeq_GSIntroPikachuTail
+	dw AnimSeq_GSIntroFireball
+	dw AnimSeq_GSIntroChikoritaTotodile
+	dw AnimSeq_GSIntroCyndaquil
+	dw AnimSeq_GSTitleTrail
+	dw AnimSeq_UnusedPikachu
+	dw AnimSeq_UnusedPikachuTail
+	dw AnimSeq_UnusedNote
+	dw AnimSeq_UnusedJigglypuff
+	dw AnimSeq_NamingScreenCursor
+	dw AnimSeq_GameFreakLogo
+	dw AnimSeq_GSGameFreakLogoStar
+	dw AnimSeq_GSGameFreakLogoSparkle
+	dw AnimSeq_SlotsGolem
+	dw AnimSeq_SlotsChansey
+	dw AnimSeq_SlotsChanseyEgg
+	dw AnimSeq_MailCursor
+	dw AnimSeq_UnusedCursor
+	dw AnimSeq_DummyGameCursor
+	dw AnimSeq_PokegearArrow
+	dw AnimSeq_TradePokeBall
+	dw AnimSeq_TradeTubeBulge
+	dw AnimSeq_TrademonInTube
+	dw AnimSeq_RevealNewMon
+	dw AnimSeq_RadioTuningKnob
+	dw AnimSeq_CutLeaves
+	dw AnimSeq_FlyFrom
+	dw AnimSeq_FlyLeaf
+	dw AnimSeq_FlyTo
+	dw AnimSeq_GSIntroHoOhLugia
 
-.Null:
+AnimSeq_Null:
 	ret
 
-.PartyMon
+AnimSeq_PartyMon:
 	ld a, [wMenuCursorY]
 
 	ld hl, SPRITEANIMSTRUCT_INDEX
 	add hl, bc
 	cp [hl]
-	jr z, .PartyMonSwitch
+	jr z, AnimSeq_PartyMonSwitch
 
 	ld hl, SPRITEANIMSTRUCT_XCOORD
 	add hl, bc
@@ -76,7 +76,7 @@ DoAnimFrame:
 	ld [hl], 0
 	ret
 
-.PartyMonSwitch
+AnimSeq_PartyMonSwitch:
 	ld hl, SPRITEANIMSTRUCT_XCOORD
 	add hl, bc
 	ld [hl], 8 * 3
@@ -118,7 +118,7 @@ DoAnimFrame:
 	ld [hl], a
 	ret
 
-.PartyMonSelected
+AnimSeq_PartyMonSelected:
 	ld a, [wMenuCursorY]
 
 	ld hl, SPRITEANIMSTRUCT_INDEX
@@ -137,13 +137,13 @@ DoAnimFrame:
 	ld [hl], 8 * 3
 	ret
 
-.GSIntroBubble
+AnimSeq_GSIntroBubble:
 	ld hl, SPRITEANIMSTRUCT_VAR2
 	add hl, bc
 	ld a, [hl]
 	inc [hl]
 	cp $40
-	jr nc, .asm_8d54a
+	jr nc, .delete
 
 	ld hl, SPRITEANIMSTRUCT_YOFFSET
 	add hl, bc
@@ -151,20 +151,20 @@ DoAnimFrame:
 	ld hl, SPRITEANIMSTRUCT_VAR1
 	add hl, bc
 	ld a, [hl]
-	add $02
+	add 2
 	ld [hl], a
-	ld d, $08
-	call .Sprites_Sine
+	ld d, 8
+	call AnimSeqs_Sine
 	ld hl, SPRITEANIMSTRUCT_XOFFSET
 	add hl, bc
 	ld [hl], a
 	ret
 
-.asm_8d54a
+.delete
 	call DeinitializeSprite
 	ret
 
-.GSIntroShellder
+AnimSeq_GSIntroShellder:
 	ld a, [wGlobalAnimYOffset]
 	ld hl, SPRITEANIMSTRUCT_YCOORD
 	add hl, bc
@@ -174,40 +174,38 @@ DoAnimFrame:
 	call DeinitializeSprite
 	ret
 
-.GSIntroMagikarp
-	call .AnonymousJumptable
+AnimSeq_GSIntroMagikarp:
+	call AnimSeqs_AnonJumptable
 	jp hl
+.anon_dw
+	dw .zero
+	dw .one
 
-; Anonymous dw (see .AnonymousJumptable)
-	dw .Function8d565
-	dw .Function8d576
-
-.Function8d565
-	call .IncrementJumptableIndex
+.zero
+	call AnimSeqs_IncAnonJumptableIndex
 
 	ld hl, SPRITEANIMSTRUCT_INDEX
 	add hl, bc
 	ld a, [hl]
 
-	and $03
+	and $3
 	swap a
 	ld hl, SPRITEANIMSTRUCT_VAR1
 	add hl, bc
 	ld [hl], a
 
-.Function8d576
-	ld de, $0201
+.one
+	lb de, 2, 1
 	ldh a, [hSGB]
 	and a
-	jr z, .asm_8d581
-	ld de, $0402
-
-.asm_8d581
+	jr z, .sgb
+	lb de, 4, 2
+.sgb
 	ld hl, SPRITEANIMSTRUCT_XOFFSET
 	add hl, bc
 	ld a, [hl]
 	cp $f0
-	jr nc, .asm_8d59e
+	jr nc, .delete
 
 	add d
 	ld [hl], a
@@ -216,23 +214,23 @@ DoAnimFrame:
 	ld a, [hl]
 	add e
 	ld [hl], a
-	ld d, $08
-	call .Sprites_Sine
+	ld d, 8
+	call AnimSeqs_Sine
 	ld hl, SPRITEANIMSTRUCT_YOFFSET
 	add hl, bc
 	ld [hl], a
 	ret
 
-.asm_8d59e
+.delete
 	call DeinitializeSprite
 	ret
 
-.UnusedLapras
+AnimSeq_UnusedLapras:
 	ld hl, SPRITEANIMSTRUCT_XCOORD
 	add hl, bc
 	ld a, [hl]
 	cp $b0
-	jr nc, .asm_8d5bb
+	jr nc, .delete
 
 	inc [hl]
 	ld hl, SPRITEANIMSTRUCT_VAR1
@@ -247,79 +245,77 @@ DoAnimFrame:
 	inc [hl]
 	ret
 
-.asm_8d5bb
+.delete
 	call DeinitializeSprite
 	ret
 
-.GSIntroLapras
-	call .AnonymousJumptable
+AnimSeq_GSIntroLapras:
+	call AnimSeqs_AnonJumptable
 	jp hl
+.anon_dw
+	dw .zero
+	dw .one
+	dw .two
 
-; anonymous jumptable
-	dw .Function8d5c9
-	dw .Function8d5e2
-	dw .Function8d5f3
-
-.Function8d5c9
-	call .Function8d60b
+.zero
+	call .update_y_offset
 	ret z
 
 	ld hl, SPRITEANIMSTRUCT_XCOORD
 	add hl, bc
 	ld a, [hl]
 	cp $58
-	jr c, .asm_8d5d8
+	jr c, .next1
 
 	dec [hl]
 	ret
 
-
-.asm_8d5d8
-	call .IncrementJumptableIndex
+.next1
+	call AnimSeqs_IncAnonJumptableIndex
 	ld hl, SPRITEANIMSTRUCT_VAR2
 	add hl, bc
 	ld [hl], $b0
 	ret
 
-.Function8d5e2
-	call .Function8d60b
+.one
+	call .update_y_offset
 	ld hl, SPRITEANIMSTRUCT_VAR2
 	add hl, bc
 	ld a, [hl]
 	and a
-	jr z, .asm_8d5ef
+	jr z, .next2
 
 	dec [hl]
 	ret
 
-.asm_8d5ef
-	call .IncrementJumptableIndex
+.next2
+	call AnimSeqs_IncAnonJumptableIndex
 	ret
 
-.Function8d5f3
-	call .Function8d60b
+.two
+	call .update_y_offset
 	ret z
 	ld hl, SPRITEANIMSTRUCT_XCOORD
 	add hl, bc
 	ld a, [hl]
 	cp $d0
-	jr z, .asm_8d602
+	jr z, .delete
 	dec [hl]
 	ret
 
-.asm_8d602
+.delete
 	call DeinitializeSprite
 	ld a, 1
 	ld [wcb19], a
 	ret
 
-.Function8d60b
+.update_y_offset
 	ld hl, SPRITEANIMSTRUCT_VAR1
 	add hl, bc
 	ld a, [hl]
 	inc [hl]
 	ld d, 4
-	call .Sprites_Sine
+	call AnimSeqs_Sine
 	ld hl, SPRITEANIMSTRUCT_YOFFSET
 	add hl, bc
 	ld [hl], a
@@ -329,16 +325,15 @@ DoAnimFrame:
 	and $1
 	ret
 
-.GSIntroNote
-	call .AnonymousJumptable
+AnimSeq_GSIntroNote:
+	call AnimSeqs_AnonJumptable
 	jp hl
+.anon_dw
+	dw .zero
+	dw .one
 
-; anonymous jumptable
-	dw .Function8d62b
-	dw .Function8d63e
-
-.Function8d62b
-	call .IncrementJumptableIndex
+.zero
+	call AnimSeqs_IncAnonJumptableIndex
 	ld hl, 0
 	add hl, bc
 	ld a, [hl]
@@ -349,21 +344,22 @@ DoAnimFrame:
 	ld hl, SPRITEANIMSTRUCT_VAR1
 	add hl, bc
 	ld [hl], a
-.Function8d63e
+
+.one
 	ld hl, SPRITEANIMSTRUCT_XOFFSET
 	add hl, bc
 	ld a, [hl]
 	cp $80
-	jr nc, .asm_8d667
+	jr nc, .delete
 	inc [hl]
-	ld d, $04
 
+	ld d, 4
 	ld hl, SPRITEANIMSTRUCT_VAR1
 	add hl, bc
 	ld a, [hl]
-	add $02
+	add 2
 	ld [hl], a
-	call .Sprites_Sine
+	call AnimSeqs_Sine
 
 	ld hl, SPRITEANIMSTRUCT_YOFFSET
 	add hl, bc
@@ -379,60 +375,59 @@ DoAnimFrame:
 	dec [hl]
 	ret
 
-.asm_8d667
+.delete
 	call DeinitializeSprite
 	ret
 
-.GSIntroJigglypuff
-	call .AnonymousJumptable
+AnimSeq_GSIntroJigglypuff:
+	call AnimSeqs_AnonJumptable
 	jp hl
+.anon_dw
+	dw .zero
+	dw .one
 
-; anonymous jumptable
-	dw .Function8d673
-	dw .Function8d680
-
-.Function8d673
+.zero
 	ld a, [wcb19]
 	and a
 	ret z
-	call .IncrementJumptableIndex
+	call AnimSeqs_IncAnonJumptableIndex
 	ld a, SPRITE_ANIM_FRAMESET_GS_INTRO_JIGGLYPUFF_2
 	call _ReinitSpriteAnimFrame
-.Function8d680
+
+.one
 	ld hl, SPRITEANIMSTRUCT_XCOORD
 	add hl, bc
 	ld a, [hl]
 	cp $d0
-	jr z, .asm_8d68c
+	jr z, .delete
 	dec [hl]
 	dec [hl]
 	ret
 
-.asm_8d68c
+.delete
 	call DeinitializeSprite
 	ret
 
-.GSIntroPikachu
-	call .AnonymousJumptable
+AnimSeq_GSIntroPikachu:
+	call AnimSeqs_AnonJumptable
 	jp hl
+.anon_dw
+	dw .zero
+	dw .one
+	dw .two
+	dw .three
 
-; anonymous jumptable
-	dw .Function8d69c
-	dw .Function8d6b6
-	dw .Function8d6c9
-	dw .Function8d6f2
-
-.Function8d69c
+.zero
 	ld hl, SPRITEANIMSTRUCT_XCOORD
 	add hl, bc
 	ld a, [hl]
 	cp $80
-	jr z, .asm_8d6a7
+	jr z, .next1
 	dec [hl]
 	ret
 
-.asm_8d6a7
-	call .IncrementJumptableIndex
+.next1
+	call AnimSeqs_IncAnonJumptableIndex
 	ld hl, SPRITEANIMSTRUCT_VAR2
 	add hl, bc
 	ld [hl], $30
@@ -440,29 +435,29 @@ DoAnimFrame:
 	call _ReinitSpriteAnimFrame
 	ret
 
-.Function8d6b6
+.one
 	ld hl, SPRITEANIMSTRUCT_VAR2
 	add hl, bc
 	ld a, [hl]
 	and a
-	jr z, .asm_8d6c0
+	jr z, .next2
 	dec [hl]
 	ret
 
-.asm_8d6c0
-	call .IncrementJumptableIndex
+.next2
+	call AnimSeqs_IncAnonJumptableIndex
 	ld a, SPRITE_ANIM_FRAMESET_GS_INTRO_PIKACHU_3
 	call _ReinitSpriteAnimFrame
 	ret
 
-.Function8d6c9
+.two
 	ld hl, SPRITEANIMSTRUCT_VAR1
 	add hl, bc
 	ld a, [hl]
-	add $04
+	add 4
 	ld [hl], a
-	ld d, $04
-	call .Sprites_Sine
+	ld d, 4
+	call AnimSeqs_Sine
 	ld hl, SPRITEANIMSTRUCT_YOFFSET
 	add hl, bc
 	ld [hl], a
@@ -470,53 +465,52 @@ DoAnimFrame:
 	add hl, bc
 	ld a, [hl]
 	cp $50
-	jr z, .asm_8d6e9
+	jr z, .next3
 	dec [hl]
 	dec [hl]
 	dec [hl]
 	dec [hl]
 	ret
 
-.asm_8d6e9
+.next3
 	ld a, 1
 	ld [wcb19], a
-	call .IncrementJumptableIndex
+	call AnimSeqs_IncAnonJumptableIndex
 	ret
 
-.Function8d6f2
+.three
 	ld hl, SPRITEANIMSTRUCT_XCOORD
 	add hl, bc
 	ld a, [hl]
 	cp $d0
-	jr z, .asm_8d6fe
+	jr z, .delete
 	dec [hl]
 	dec [hl]
 	ret
 
-.asm_8d6fe
+.delete
 	call DeinitializeSprite
 	ret
 
-.GSIntroPikachuTail
-	call .AnonymousJumptable
+AnimSeq_GSIntroPikachuTail:
+	call AnimSeqs_AnonJumptable
 	jp hl
+.anon_dw
+	dw .zero
+	dw .one
+	dw .two
 
-; anonymous jumptable
-	dw .Function8d70c
-	dw .Function8d726
-	dw .Function8d73c
-
-.Function8d70c
+.zero
 	ld hl, SPRITEANIMSTRUCT_XCOORD
 	add hl, bc
 	ld a, [hl]
 	cp $80
-	jr z, .asm_8d717
+	jr z, .next1
 	dec [hl]
 	ret
 
-.asm_8d717
-	call .IncrementJumptableIndex
+.next1
+	call AnimSeqs_IncAnonJumptableIndex
 
 	ld hl, SPRITEANIMSTRUCT_VAR2
 	add hl, bc
@@ -525,12 +519,12 @@ DoAnimFrame:
 	call _ReinitSpriteAnimFrame
 	ret
 
-.Function8d726
+.one
 	ld hl, SPRITEANIMSTRUCT_VAR2
 	add hl, bc
 	ld a, [hl]
 	and a
-	jr z, .asm_8d738
+	jr z, .next2
 	dec [hl]
 	cp $20
 	ret nz
@@ -538,18 +532,18 @@ DoAnimFrame:
 	call _ReinitSpriteAnimFrame
 	ret
 
-.asm_8d738
-	call .IncrementJumptableIndex
+.next2
+	call AnimSeqs_IncAnonJumptableIndex
 	ret
 
-.Function8d73c
+.two
 	ld hl, SPRITEANIMSTRUCT_VAR1
 	add hl, bc
 	ld a, [hl]
-	add $04
+	add 4
 	ld [hl], a
-	ld d, $04
-	call .Sprites_Sine
+	ld d, 4
+	call AnimSeqs_Sine
 
 	ld hl, SPRITEANIMSTRUCT_YOFFSET
 	add hl, bc
@@ -559,7 +553,7 @@ DoAnimFrame:
 	add hl, bc
 	ld a, [hl]
 	cp $d0
-	jr z, .asm_8d761
+	jr z, .delete
 	dec [hl]
 	dec [hl]
 	ld a, [wcb19]
@@ -569,20 +563,19 @@ DoAnimFrame:
 	dec [hl]
 	ret
 
-.asm_8d761
+.delete
 	call DeinitializeSprite
 	ret
 
-.GSIntroFireball
-	call .AnonymousJumptable
+AnimSeq_GSIntroFireball:
+	call AnimSeqs_AnonJumptable
 	jp hl
+.anon_dw
+	dw .zero
+	dw .one
 
-; anonymous jumptable
-	dw .Function8d76d
-	dw .Function8d786
-
-.Function8d76d
-	call .IncrementJumptableIndex
+.zero
+	call AnimSeqs_IncAnonJumptableIndex
 	ld hl, 0
 	add hl, bc
 	ld a, [hl]
@@ -598,7 +591,7 @@ DoAnimFrame:
 	ld [hl], a
 	ret
 
-.Function8d786
+.one
 	ld hl, SPRITEANIMSTRUCT_XCOORD
 	add hl, bc
 	dec [hl]
@@ -610,7 +603,7 @@ DoAnimFrame:
 	add hl, bc
 	ld a, [hl]
 	ld d, a
-	add $8
+	add 8
 	ld [hl], a
 
 	ld hl, SPRITEANIMSTRUCT_VAR1
@@ -618,31 +611,29 @@ DoAnimFrame:
 	ld a, [hl]
 	push af
 	push de
-	call .Sprites_Sine
+	call AnimSeqs_Sine
 
 	ld hl, SPRITEANIMSTRUCT_YOFFSET
 	add hl, bc
 	ld [hl], a
 	pop de
 	pop af
-	call .Sprites_Cosine
+	call AnimSeqs_Cosine
 
 	ld hl, SPRITEANIMSTRUCT_XOFFSET
 	add hl, bc
 	ld [hl], a
 	ret
 
-; flash down/right
-.GSIntroChikoritaTotodile
-	call .AnonymousJumptable
+AnimSeq_GSIntroChikoritaTotodile:
+	call AnimSeqs_AnonJumptable
 	jp hl
+.anon_dw
+	dw .zero
+	dw .one
 
-; anonymous jumptable
-	dw .Function8d7b9
-	dw .Function8d7c9
-
-.Function8d7b9
-	call .IncrementJumptableIndex
+.zero
+	call AnimSeqs_IncAnonJumptableIndex
 	ld hl, SPRITEANIMSTRUCT_VAR1
 	add hl, bc
 	ld [hl], $30
@@ -651,7 +642,8 @@ DoAnimFrame:
 	ld [hl], $30
 	ret
 
-.Function8d7c9
+.one
+; flash down/right
 	ld hl, SPRITEANIMSTRUCT_VAR1
 	add hl, bc
 	ld a, [hl]
@@ -661,7 +653,7 @@ DoAnimFrame:
 	inc [hl]
 	inc [hl]
 	ld d, $90
-	call .Sprites_Sine
+	call AnimSeqs_Sine
 
 	ld hl, SPRITEANIMSTRUCT_YOFFSET
 	add hl, bc
@@ -673,24 +665,22 @@ DoAnimFrame:
 	inc [hl]
 	inc [hl]
 	ld d, $90
-	call .Sprites_Cosine
+	call AnimSeqs_Cosine
 
 	ld hl, SPRITEANIMSTRUCT_XOFFSET
 	add hl, bc
 	ld [hl], a
 	ret
 
-; flash down/left
-.GSIntroCyndaquil
-	call .AnonymousJumptable
+AnimSeq_GSIntroCyndaquil:
+	call AnimSeqs_AnonJumptable
 	jp hl
+.anon_dw
+	dw .zero
+	dw .one
 
-; anonymous jumptable
-	dw .Function8d7f7
-	dw .Function8d807
-
-.Function8d7f7
-	call .IncrementJumptableIndex
+.zero
+	call AnimSeqs_IncAnonJumptableIndex
 	ld hl, SPRITEANIMSTRUCT_VAR1
 	add hl, bc
 	ld [hl], $30
@@ -699,7 +689,8 @@ DoAnimFrame:
 	ld [hl], $10
 	ret
 
-.Function8d807
+.one
+; flash down/left
 	ld hl, SPRITEANIMSTRUCT_VAR1
 	add hl, bc
 	ld a, [hl]
@@ -708,7 +699,7 @@ DoAnimFrame:
 	inc [hl]
 	inc [hl]
 	ld d, $90
-	call .Sprites_Sine
+	call AnimSeqs_Sine
 	ld hl, SPRITEANIMSTRUCT_YOFFSET
 	add hl, bc
 	ld [hl], a
@@ -718,23 +709,22 @@ DoAnimFrame:
 	inc [hl]
 	inc [hl]
 	ld d, $90
-	call .Sprites_Cosine
+	call AnimSeqs_Cosine
 	ld hl, SPRITEANIMSTRUCT_XOFFSET
 	add hl, bc
 	ld [hl], a
 	ret
 
-.GSTitleTrail
-	call .AnonymousJumptable
+AnimSeq_GSTitleTrail:
+	call AnimSeqs_AnonJumptable
 	jp hl
+.anon_dw
+	dw .zero
+	dw .one
 
 IF DEF(_GOLD)
-; anonymous jumptable
-	dw .Function8d835
-	dw .Function8d84c
-
-.Function8d835
-	call .IncrementJumptableIndex
+.zero
+	call AnimSeqs_IncAnonJumptableIndex
 
 	ld hl, SPRITEANIMSTRUCT_INDEX
 	add hl, bc
@@ -751,16 +741,16 @@ IF DEF(_GOLD)
 	add hl, bc
 	ld [hl], a
 
-.Function8d84c
+.one
 	ld hl, SPRITEANIMSTRUCT_XCOORD
 	add hl, bc
 	ld a, [hl]
 	cp $a4
-	jr nc, .asm_8d881
+	jr nc, .delete
 
 	ld hl, SPRITEANIMSTRUCT_VAR2
 	add hl, bc
-	add $4
+	add 4
 
 	ld hl, SPRITEANIMSTRUCT_XCOORD
 	add hl, bc
@@ -782,58 +772,50 @@ IF DEF(_GOLD)
 	ld a, [hl]
 	add 3
 	ld [hl], a
-	call .Sprites_Sine
+	call AnimSeqs_Sine
 
 	ld hl, SPRITEANIMSTRUCT_YOFFSET
 	add hl, bc
 	ld [hl], a
 	ret
 
-.asm_8d881
-	call DeinitializeSprite
-	ret
-
 ELIF DEF(_SILVER)
-; anonymous jumptable
-	dw .Function8d835
-	dw .Function8d856
-
-.Function8d835
+.zero
 	ld a, [wIntroSceneTimer]
 	and $30
 	swap a
-	add $3
+	add 3
 	ld d, a
-
 	ld hl, SPRITEANIMSTRUCT_VAR1
 	add hl, bc
 	ld a, [wIntroSceneTimer]
 	and $30
 	swap a
-	add $07
+	add 7
 	add [hl]
 	ld [hl], a
-	call .Sprites_Sine
+	call AnimSeqs_Sine
 
 	ld hl, SPRITEANIMSTRUCT_YOFFSET
 	add hl, bc
 	ld [hl], a
-.Function8d856
+
+.one
 	ld hl, SPRITEANIMSTRUCT_XCOORD
 	add hl, bc
 	ld a, [hl]
 	cp $a4
-	jr nc, .asm_8d863
-	add $4
+	jr nc, .delete
+	add 4
 	ld [hl], a
-	ret
-
-.asm_8d863
-	call DeinitializeSprite
 	ret
 ENDC
 
-.GSIntroHoOhLugia
+.delete
+	call DeinitializeSprite
+	ret
+
+AnimSeq_GSIntroHoOhLugia:
 	ld hl, SPRITEANIMSTRUCT_VAR1
 	add hl, bc
 	ld a, [hl]
@@ -846,16 +828,16 @@ ELIF DEF(_SILVER)
 	ld [hl], a
 	ld d, 8
 ENDC
-	call .Sprites_Sine
+	call AnimSeqs_Sine
 
 	ld hl, SPRITEANIMSTRUCT_YOFFSET
 	add hl, bc
 	ld [hl], a
 	ret
 
-.UnusedPikachu
+AnimSeq_UnusedPikachu:
 	push bc
-	farcall ret_e0000
+	farcall AnimateUnusedPikachu
 	pop bc
 	ld hl, wc704
 	ld a, [hl]
@@ -864,32 +846,31 @@ ENDC
 	ld [hl], 0
 	ld e, a
 	ld d, 0
-	ld hl, .Data_8d8b4
+	ld hl, .pikachu_framesets
 	add hl, de
 	ld a, [hl]
 	call _ReinitSpriteAnimFrame
 	ret
 
-.Data_8d8b4
+.pikachu_framesets
 	db SPRITE_ANIM_FRAMESET_UNUSED_PIKACHU
 	db SPRITE_ANIM_FRAMESET_UNUSED_PIKACHU_2
 	db SPRITE_ANIM_FRAMESET_UNUSED_PIKACHU
 	db SPRITE_ANIM_FRAMESET_UNUSED_PIKACHU_3
 
-.UnusedPikachuTail
-	farcall ret_e0000
+AnimSeq_UnusedPikachuTail:
+	farcall AnimateUnusedPikachu
 	ret
 
-.UnusedNote
-	call .AnonymousJumptable
+AnimSeq_UnusedNote:
+	call AnimSeqs_AnonJumptable
 	jp hl
+.anon_dw
+	dw .zero
+	dw .delete
 
-; anonymous jumptable
-	dw .Function8d8c7
-	dw .Function8d8d9
-
-.Function8d8c7
-	call .Function8d8e1
+.zero
+	call .initialize
 	ld a, [wc717]
 	ld hl, SPRITEANIMSTRUCT_XCOORD
 	add hl, bc
@@ -899,13 +880,14 @@ ENDC
 	ret nc
 	cp $a8
 	ret c
-.Function8d8d9
+
+.delete
 	call DeinitializeSprite
 	ld hl, wSpriteAnimCount
 	dec [hl]
 	ret
 
-.Function8d8e1
+.initialize
 	ld hl, SPRITEANIMSTRUCT_VAR1
 	add hl, bc
 	ld a, [hl]
@@ -914,7 +896,7 @@ ENDC
 	srl a
 	ld e, a
 	ld d, 0
-	ld hl, .Data_8d8f9
+	ld hl, .y_offsets
 	add hl, de
 	ld a, [hl]
 	ld hl, SPRITEANIMSTRUCT_YOFFSET
@@ -922,13 +904,12 @@ ENDC
 	ld [hl], a
 	ret
 
-.Data_8d8f9
+.y_offsets
 	db  4,  7,  9,  10,  9,  7,  4,  0
 	db -4, -7, -9, -10, -9, -7, -4,  0
 
-.UnusedJigglypuff
+AnimSeq_UnusedJigglypuff:
 	ld a, [wc717]
-
 	ld hl, SPRITEANIMSTRUCT_XCOORD
 	add hl, bc
 	add [hl]
@@ -939,47 +920,48 @@ ENDC
 	ld [wc717], a
 	ret
 
-.NamingScreenCursor
+AnimSeq_NamingScreenCursor:
 	callfar NamingScreen_AnimateCursor
 	ret
 
-.MailCursor
+AnimSeq_MailCursor:
 	callfar ComposeMail_AnimateCursor
 	ret
 
-.GameFreakLogo
+AnimSeq_GameFreakLogo:
 	callfar GameFreakPresents_UpdateLogoPal
 	ret
 
-.GSGameFreakLogoStar
+AnimSeq_GSGameFreakLogoStar:
 	ld hl, SPRITEANIMSTRUCT_VAR1
 	add hl, bc
 	ld a, [hl]
 	and a
-	jr z, .asm_8d968
+	jr z, .delete
+
 	dec [hl]
 	dec [hl]
 	ld d, a
 	and $1f
-	jr nz, .asm_8d943
-
+	jr nz, .stay
 	ld hl, SPRITEANIMSTRUCT_VAR2
 	add hl, bc
 	dec [hl]
-.asm_8d943
+
+.stay
 	ld hl, SPRITEANIMSTRUCT_JUMPTABLE_INDEX
 	add hl, bc
 	ld a, [hl]
 	push af
 	push de
-	call .Sprites_Sine
+	call AnimSeqs_Sine
 
 	ld hl, SPRITEANIMSTRUCT_YOFFSET
 	add hl, bc
 	ld [hl], a
 	pop de
 	pop af
-	call .Sprites_Cosine
+	call AnimSeqs_Cosine
 
 	ld hl, SPRITEANIMSTRUCT_XOFFSET
 	add hl, bc
@@ -995,18 +977,18 @@ ENDC
 	ld [hl], a
 	ret
 
-.asm_8d968
+.delete
 	ld a, 1
 	ld [wIntroSceneFrameCounter], a
 	call DeinitializeSprite
 	ret
 
-.GSGameFreakLogoSparkle
+AnimSeq_GSGameFreakLogoSparkle:
 	ld hl, SPRITEANIMSTRUCT_VAR1
 	add hl, bc
 	ld a, [hli]
 	or [hl]
-	jr z, .asm_8d9cc
+	jr z, .delete
 
 	ld hl, SPRITEANIMSTRUCT_VAR4
 	add hl, bc
@@ -1017,14 +999,14 @@ ENDC
 	ld a, [hl]
 	push af
 	push de
-	call .Sprites_Sine
+	call AnimSeqs_Sine
 
 	ld hl, SPRITEANIMSTRUCT_YOFFSET
 	add hl, bc
 	ld [hl], a
 	pop de
 	pop af
-	call .Sprites_Cosine
+	call AnimSeqs_Cosine
 
 	ld hl, SPRITEANIMSTRUCT_XOFFSET
 	add hl, bc
@@ -1074,15 +1056,15 @@ ENDC
 	ld [hl], a
 	ret
 
-.asm_8d9cc
+.delete
 	call DeinitializeSprite
 	ret
 
-.SlotsGolem:
+AnimSeq_SlotsGolem:
 	callfar Slots_AnimateGolem
 	ret
 
-.SlotsChansey:
+AnimSeq_SlotsChansey:
 	callfar Slots_AnimateChansey
 	ld hl, wce64
 	ld a, [hl]
@@ -1093,7 +1075,7 @@ ENDC
 	call _ReinitSpriteAnimFrame
 	ret
 
-.SlotsChanseyEgg:
+AnimSeq_SlotsChanseyEgg:
 	ld hl, SPRITEANIMSTRUCT_JUMPTABLE_INDEX
 	add hl, bc
 	ld a, [hl]
@@ -1119,87 +1101,86 @@ ENDC
 .move_vertical
 	ld a, e
 	ld d, 32
-	call .Sprites_Sine
+	call AnimSeqs_Sine
 
 	ld hl, SPRITEANIMSTRUCT_YOFFSET
 	add hl, bc
 	ld [hl], a
 	ret
 
-.UnusedCursor
-	callfar ret_e0908
+AnimSeq_UnusedCursor:
+	callfar UnusedCursor_InterpretJoypad_AnimateCursor
 	ret
 
-.PokegearArrow
+AnimSeq_PokegearArrow:
 	callfar AnimatePokegearModeIndicatorArrow
 	ret
 
-.DummyGameCursor
+AnimSeq_DummyGameCursor:
 	callfar DummyGame_InterpretJoypad_AnimateCursor
 	ret
 
-.TradePokeBall
-	call .AnonymousJumptable
+AnimSeq_TradePokeBall:
+	call AnimSeqs_AnonJumptable
 	jp hl
+.anon_dw
+	dw .zero
+	dw .one
+	dw .two
+	dw .three
+	dw .four
+	dw .delete
 
-; Anonymous dw (see .AnonymousJumptable)
-	dw .TradePokeBall_zero
-	dw .TradePokeBall_one
-	dw .TradePokeBall_two
-	dw .TradePokeBall_three
-	dw .TradePokeBall_four
-	dw .TradePokeBall_five
-
-.TradePokeBall_zero
+.zero
 	ld a, SPRITE_ANIM_FRAMESET_TRADE_POKE_BALL_WOBBLE
 	call _ReinitSpriteAnimFrame
 
 	ld hl, SPRITEANIMSTRUCT_JUMPTABLE_INDEX
 	add hl, bc
-	ld [hl], $2
+	ld [hl], 2 ; .two
 
 	ld hl, SPRITEANIMSTRUCT_VAR1
 	add hl, bc
 	ld [hl], $20
 	ret
 
-.TradePokeBall_two
+.two
 	ld hl, SPRITEANIMSTRUCT_VAR1
 	add hl, bc
 	ld a, [hl]
 	and a
-	jr z, .asm_8da5d
+	jr z, .next
 	dec [hl]
 	ret
 
-.asm_8da5d
-	call .IncrementJumptableIndex
+.next
+	call AnimSeqs_IncAnonJumptableIndex
 
 	ld hl, SPRITEANIMSTRUCT_VAR1
 	add hl, bc
 	ld [hl], $40
 
-.TradePokeBall_three
+.three
 	ld hl, SPRITEANIMSTRUCT_VAR1
 	add hl, bc
 	ld a, [hl]
 	cp 48
-	jr c, .asm_8da7b
+	jr c, .done
 	dec [hl]
 	ld d, 40
-	call .Sprites_Sine
+	call AnimSeqs_Sine
 
 	ld hl, SPRITEANIMSTRUCT_YOFFSET
 	add hl, bc
 	ld [hl], a
 	ret
 
-.asm_8da7b
+.done
 	ld de, SFX_GOT_SAFARI_BALLS
 	call PlaySFX
-	jr .TradePokeBall_five
+	jr .delete
 
-.TradePokeBall_one
+.one
 	ld hl, SPRITEANIMSTRUCT_JUMPTABLE_INDEX
 	add hl, bc
 	ld [hl], $4
@@ -1213,12 +1194,12 @@ ENDC
 	ld [hl], $24
 	ret
 
-.TradePokeBall_four
+.four
 	ld hl, SPRITEANIMSTRUCT_VAR2
 	add hl, bc
 	ld a, [hl]
 	and a
-	jr z, .asm_8daca
+	jr z, .done2
 
 	ld d, a
 	ld hl, SPRITEANIMSTRUCT_VAR1
@@ -1250,20 +1231,20 @@ ENDC
 	call PlaySFX
 	ret
 
-.asm_8daca
+.done2
 	xor a
 
 	ld hl, SPRITEANIMSTRUCT_YOFFSET
 	add hl, bc
 	ld [hl], a
-	call .IncrementJumptableIndex
+	call AnimSeqs_IncAnonJumptableIndex
 	ret
 
-.TradePokeBall_five
+.delete
 	call DeinitializeSprite
 	ret
 
-.TradeTubeBulge
+AnimSeq_TradeTubeBulge:
 	ld hl, SPRITEANIMSTRUCT_XCOORD
 	add hl, bc
 	ld a, [hl]
@@ -1280,18 +1261,18 @@ ENDC
 	call DeinitializeSprite
 	ret
 
-.TrademonInTube
+AnimSeq_TrademonInTube:
 	callfar TradeAnim_AnimateTrademonInTube
 	ret
 
-.RevealNewMon:
+AnimSeq_RevealNewMon:
 	ld hl, SPRITEANIMSTRUCT_VAR1
 	add hl, bc
 	ld a, [hl]
 	cp $80
 	jr nc, .finish_EggShell
 	ld d, a
-	add $8
+	add 8
 	ld [hl], a
 
 	ld hl, SPRITEANIMSTRUCT_JUMPTABLE_INDEX
@@ -1302,7 +1283,7 @@ ENDC
 
 	push af
 	push de
-	call .Sprites_Sine
+	call AnimSeqs_Sine
 
 	ld hl, SPRITEANIMSTRUCT_YOFFSET
 	add hl, bc
@@ -1310,7 +1291,7 @@ ENDC
 
 	pop de
 	pop af
-	call .Sprites_Cosine
+	call AnimSeqs_Cosine
 
 	ld hl, SPRITEANIMSTRUCT_XOFFSET
 	add hl, bc
@@ -1321,11 +1302,11 @@ ENDC
 	call DeinitializeSprite
 	ret
 
-.RadioTuningKnob:
+AnimSeq_RadioTuningKnob:
 	callfar AnimateTuningKnob
 	ret
 
-.CutLeaves
+AnimSeq_CutLeaves:
 	ld hl, SPRITEANIMSTRUCT_VAR2
 	add hl, bc
 	ld e, [hl]
@@ -1350,21 +1331,21 @@ ENDC
 	inc [hl]
 	push af
 	push de
-	call .Sprites_Sine
+	call AnimSeqs_Sine
 
 	ld hl, SPRITEANIMSTRUCT_YOFFSET
 	add hl, bc
 	ld [hl], a
 	pop de
 	pop af
-	call .Sprites_Cosine
+	call AnimSeqs_Cosine
 
 	ld hl, SPRITEANIMSTRUCT_XOFFSET
 	add hl, bc
 	ld [hl], a
 	ret
 
-.FlyFrom:
+AnimSeq_FlyFrom:
 	ld hl, SPRITEANIMSTRUCT_YCOORD
 	add hl, bc
 	ld a, [hl]
@@ -1389,21 +1370,21 @@ ENDC
 	ld d, a
 	cp $40
 	jr nc, .skip
-	add $8
+	add 8
 	ld [hl], a
 .skip
 	ld hl, SPRITEANIMSTRUCT_VAR3
 	add hl, bc
 	ld a, [hl]
 	inc [hl]
-	call .Sprites_Cosine
+	call AnimSeqs_Cosine
 
 	ld hl, SPRITEANIMSTRUCT_XOFFSET
 	add hl, bc
 	ld [hl], a
 	ret
 
-.FlyLeaf:
+AnimSeq_FlyLeaf:
 	ld hl, SPRITEANIMSTRUCT_XCOORD
 	add hl, bc
 	ld a, [hl]
@@ -1421,7 +1402,7 @@ ENDC
 	add hl, bc
 	ld a, [hl]
 	inc [hl]
-	call .Sprites_Cosine
+	call AnimSeqs_Cosine
 
 	ld hl, SPRITEANIMSTRUCT_XOFFSET
 	add hl, bc
@@ -1432,7 +1413,7 @@ ENDC
 	call DeinitializeSprite
 	ret
 
-.FlyTo:
+AnimSeq_FlyTo:
 	ld hl, SPRITEANIMSTRUCT_YCOORD
 	add hl, bc
 	ld a, [hl]
@@ -1449,22 +1430,22 @@ ENDC
 	ld a, [hl]
 	ld d, a
 	and a
-	jr z, .asm_8dbce
+	jr z, .stay
 	sub $2
 	ld [hl], a
-.asm_8dbce
+.stay
 	ld hl, SPRITEANIMSTRUCT_VAR3
 	add hl, bc
 	ld a, [hl]
 	inc [hl]
-	call .Sprites_Cosine
+	call AnimSeqs_Cosine
 
 	ld hl, SPRITEANIMSTRUCT_XOFFSET
 	add hl, bc
 	ld [hl], a
 	ret
 
-.AnonymousJumptable:
+AnimSeqs_AnonJumptable:
 	ld hl, sp+0
 	ld e, [hl]
 	inc hl
@@ -1482,16 +1463,16 @@ ENDC
 	ld l, a
 	ret
 
-.IncrementJumptableIndex:
+AnimSeqs_IncAnonJumptableIndex:
 	ld hl, SPRITEANIMSTRUCT_JUMPTABLE_INDEX
 	add hl, bc
 	inc [hl]
 	ret
 
-.Sprites_Sine:
+AnimSeqs_Sine:
 	call Sprites_Sine
 	ret
 
-.Sprites_Cosine:
+AnimSeqs_Cosine:
 	call Sprites_Cosine
 	ret
