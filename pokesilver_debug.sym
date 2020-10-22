@@ -16931,8 +16931,8 @@
 39:4cbc Functione4e67.skip_move_left
 39:4cd4 Functione4e67.no_carry
 39:4cd6 Functione4e67.carry
-39:4cd8 Functione4e90
-39:4ce7 Functione4e90.dw
+39:4cd8 IntroScene3Jumper
+39:4ce7 IntroScene3Jumper.dw
 39:4d09 Functione4ec1
 39:4d12 Functione4eca
 39:4d16 Functione4ece
@@ -17001,11 +17001,11 @@
 39:5251 Intro_LoadTotodilePalette
 39:525a Functione5412
 39:5263 Functione5412.got_mon
-39:526a Functione5422
-39:5271 Functione5422.loop1
-39:528b Functione5422.loop2_outer
-39:528d Functione5422.loop2_inner
-39:52ac Functione5422.data_e5464
+39:526a DrawIntroCharizardGraphic
+39:5271 DrawIntroCharizardGraphic.loop1
+39:528b DrawIntroCharizardGraphic.loop2_outer
+39:528d DrawIntroCharizardGraphic.loop2_inner
+39:52ac DrawIntroCharizardGraphic.charizard_data
 39:52bb Functione5473
 39:52d4 Functione548c
 39:52d7 Functione548c.loop
@@ -19758,7 +19758,7 @@
 3f:5407 Palette_DebugBG
 3f:5447 Palette_DebugOB
 3f:5487 DebugColorMain
-3f:549e DebugColorMain.asm_fd49e
+3f:549e DebugColorMain.no_start_select
 3f:54ad DebugColorMain.NextMon
 3f:54be DebugColorMain.PreviousMon
 3f:54cd DebugColorMain.SwitchMon
@@ -19832,7 +19832,7 @@
 3f:5941 DebugColor_PushSGBPals.okay
 3f:595a DebugColor_PushSGBPals.wait
 3f:5967 DebugColor_PlaceCursor
-3f:5996 DebugColor_PlaceCursor.asm_fd996
+3f:5996 DebugColor_PlaceCursor.place_cursor
 3f:59a1 DebugColor_PlaceCursor.lightcolor
 3f:59a4 DebugColor_PlaceCursor.place
 3f:59c0 DebugColor_PlaceCursor.placesprite
@@ -19869,7 +19869,7 @@
 3f:5d77 Functionfdd77
 3f:5d7c Functionfdd7c
 3f:5db1 DebugColor_PlaceCursor2
-3f:5de1 DebugColor_PlaceCursor2.asm_fdde1
+3f:5de1 DebugColor_PlaceCursor2.place_cursor
 3f:5e07 DebugColor_PlaceCursor2.placesprite
 40:4000 StdScripts
 40:4000 PokecenterNurseScriptStdScript
