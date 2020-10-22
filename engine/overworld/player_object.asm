@@ -442,7 +442,7 @@ CopyTempObjectToObjectStruct:
 
 	ld hl, OBJECT_STEP_TYPE
 	add hl, de
-	ld [hl], STEP_TYPE_00
+	ld [hl], STEP_TYPE_RESET
 
 	ld hl, OBJECT_FACING_STEP
 	add hl, de
@@ -685,7 +685,7 @@ FollowNotExact::
 	ld [hl], SPRITEMOVEDATA_FOLLOWNOTEXACT
 	ld hl, OBJECT_STEP_TYPE
 	add hl, de
-	ld [hl], STEP_TYPE_00
+	ld [hl], STEP_TYPE_RESET
 	ret
 
 GetRelativeFacing::
