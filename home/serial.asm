@@ -380,7 +380,8 @@ LinkDataReceived::
 	ldh [rSC], a
 	ret
 
-Function8ca:: ; unreferenced
+SetBitsForTimeCapsuleRequestIfNotLinked:: ; unreferenced
+; Similar to SetBitsForTimeCapsuleRequest (see engine/link/link.asm).
 	ld a, [wLinkMode]
 	and a
 	ret nz

@@ -565,9 +565,12 @@ ENDU
 
 NEXTU
 ; mystery gift data
-wMysteryGiftPartyTemp:: ; ds PARTY_LENGTH * (1 + 1 + NUM_MOVES)
-wMysteryGiftStaging::
-wc700:: ds 80
+UNION
+wMysteryGiftPartyTemp:: ds (1 + 1 + NUM_MOVES) * PARTY_LENGTH
+
+NEXTU
+wMysteryGiftStaging:: ds 80
+ENDU
 
 wMysteryGiftTrainerData:: ds (1 + 1 + NUM_MOVES) * PARTY_LENGTH + 2
 wMysteryGiftTrainerDataEnd::
@@ -1502,18 +1505,20 @@ wDebugRoomPagedValuesPtr:: dw
 ENDC
 
 NEXTU
+; link battle record data
+wLinkBattleRecordName::   ds NAME_LENGTH
+wLinkBattleRecordWins::   dw
+wLinkBattleRecordLosses:: dw
+wLinkBattleRecordDraws::  dw
+
+NEXTU
 ; unidentified
 wceed:: db
 wceee:: db
 wceef:: db
 
-	ds 8
+	ds 13
 
-wcef8:: ds 1
-	ds 1
-wcefa:: ds 1
-	ds 1
-wcefc:: ds 1
 wcefd:: ds 1
 
 	ds 43
@@ -1641,7 +1646,7 @@ ENDU
 	ds 1
 
 wBoxAlignment:: db
-wUnusedBufferCF3C:: dw
+wFarDecompressPicPointer:: dw
 wFXAnimID:: dw
 ENDU
 
@@ -2005,7 +2010,6 @@ wInitListType:: db
 wWildMon:: db
 wBattleHasJustStarted:: db
 
-; wd151 has many different short-term uses
 wNamedObjectIndexBuffer::
 wDeciramBuffer::
 wTempByteValue::
@@ -2022,7 +2026,6 @@ wBreedingCompatibility::
 wMoveGrammar::
 wApplyStatLevelMultipliersToEnemy::
 wUsePPUp::
-wd151::
 	db
 
 wFailedToFlee:: db

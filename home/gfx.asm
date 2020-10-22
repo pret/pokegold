@@ -1,6 +1,6 @@
 TILES_PER_CYCLE EQU 8
 
-FarCopyBytesDouble_DoubleBankSwitch:: ; unreferenced
+FarDecompressBufferedPic:: ; unreferenced
 	ld b, a
 	ldh a, [hROMBank]
 	push af
@@ -14,7 +14,7 @@ FarCopyBytesDouble_DoubleBankSwitch:: ; unreferenced
 	xor a
 	call ByteFill
 
-	ld hl, wUnusedBufferCF3C
+	ld hl, wFarDecompressPicPointer
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
