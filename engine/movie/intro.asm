@@ -164,7 +164,7 @@ IntroScene2:
 
 IntroScene3:
 ; rise towards the surface
-	call Functione4e90
+	call IntroScene3Jumper
 	call Functione4e67
 	ret nc
 ; next scene if carry flag is set
@@ -271,7 +271,7 @@ Functione4e67:
 	scf
 	ret
 
-Functione4e90:
+IntroScene3Jumper:
 	jumptable .dw, wIntroFrameCounter1
 
 .dw
@@ -785,7 +785,7 @@ IntroScene10:
 	ld [hli], a
 	call EnableLCD
 	ld a, 0
-	call Functione5422
+	call DrawIntroCharizardGraphic
 
 	ld a, $80
 	ldh [hSCY], a
@@ -864,24 +864,6 @@ IntroScene12:
 	db %01101010, %10100101, %11100100, %00000000
 
 IntroScene13:
-; Charizard mouth closed
-	ld hl, wIntroFrameCounter1
-	ld a, [hl]
-	and a
-	jr z, .next
-	dec [hl]
-	ret
-
-.next
-	ld hl, wIntroJumptableIndex
-	inc [hl]
-	ld a, 1
-	call Functione5422
-	ld a, 4
-	ld [wIntroFrameCounter1], a
-	ret
-
-IntroScene14:
 ; Charizard mouth open
 	ld hl, wIntroFrameCounter1
 	ld a, [hl]
@@ -893,8 +875,26 @@ IntroScene14:
 .next
 	ld hl, wIntroJumptableIndex
 	inc [hl]
+	ld a, 1
+	call DrawIntroCharizardGraphic
+	ld a, 4
+	ld [wIntroFrameCounter1], a
+	ret
+
+IntroScene14:
+; Charizard breathing fire
+	ld hl, wIntroFrameCounter1
+	ld a, [hl]
+	and a
+	jr z, .next
+	dec [hl]
+	ret
+
+.next
+	ld hl, wIntroJumptableIndex
+	inc [hl]
 	ld a, 2
-	call Functione5422
+	call DrawIntroCharizardGraphic
 	ld a, 64
 	ld [wIntroFrameCounter1], a
 	xor a
@@ -1061,10 +1061,10 @@ Functione5412:
 	farcall Intro_LoadMonPalette
 	ret
 
-Functione5422:
+DrawIntroCharizardGraphic:
 	push af
 	hlcoord 0, 6
-	ld c, $a0
+	ld c, SCREEN_WIDTH * 8
 	xor a
 .loop1
 	ld [hli], a
@@ -1074,7 +1074,7 @@ Functione5422:
 	pop af
 	ld e, a
 	ld d, 0
-	ld hl, .data_e5464
+	ld hl, .charizard_data
 rept 5
 	add hl, de
 endr
@@ -1114,12 +1114,15 @@ endr
 	ldh [hBGMapMode], a
 	ret
 
-.data_e5464
-; vtile offset, width, height, x, y
+.charizard_data
+; db vtile offset, width, height; dwcoord x, y
+; mouth closed
 	db $00, 8, 8
 	dwcoord 10, 6
+; mouth open
 	db $40, 9, 8
 	dwcoord 9, 6
+; breathing fire
 	db $88, 9, 8
 	dwcoord 8, 6
 
