@@ -303,7 +303,7 @@ _CGB_BillsPC:
 	ldh [hCGBPalUpdate], a
 	ret
 
-Function95a0:
+Function95a0: ; unreferenced
 	ld hl, BillsPCOrangePalette
 	call LoadHLPaletteIntoDE
 	jr .GotPalette

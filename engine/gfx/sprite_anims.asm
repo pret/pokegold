@@ -305,8 +305,8 @@ AnimSeq_GSIntroLapras:
 
 .delete
 	call DeinitializeSprite
-	ld a, 1
-	ld [wcb19], a
+	ld a, TRUE
+	ld [wIntroSpriteStateFlag], a
 	ret
 
 .update_y_offset
@@ -387,7 +387,7 @@ AnimSeq_GSIntroJigglypuff:
 	dw .one
 
 .zero
-	ld a, [wcb19]
+	ld a, [wIntroSpriteStateFlag]
 	and a
 	ret z
 	call AnimSeqs_IncAnonJumptableIndex
@@ -473,8 +473,8 @@ AnimSeq_GSIntroPikachu:
 	ret
 
 .next3
-	ld a, 1
-	ld [wcb19], a
+	ld a, TRUE
+	ld [wIntroSpriteStateFlag], a
 	call AnimSeqs_IncAnonJumptableIndex
 	ret
 
@@ -556,7 +556,7 @@ AnimSeq_GSIntroPikachuTail:
 	jr z, .delete
 	dec [hl]
 	dec [hl]
-	ld a, [wcb19]
+	ld a, [wIntroSpriteStateFlag]
 	and a
 	ret nz
 	dec [hl]
@@ -839,9 +839,9 @@ AnimSeq_UnusedPikachu:
 	push bc
 	farcall AnimateUnusedPikachu
 	pop bc
-	ld hl, wc704
+	ld hl, wUnusedPikachuFrameset
 	ld a, [hl]
-	and $3
+	maskbits 4 ; .pikachu_framesets length
 	ret z
 	ld [hl], 0
 	ld e, a
@@ -852,7 +852,7 @@ AnimSeq_UnusedPikachu:
 	call _ReinitSpriteAnimFrame
 	ret
 
-.pikachu_framesets
+.pikachu_framesets:
 	db SPRITE_ANIM_FRAMESET_UNUSED_PIKACHU
 	db SPRITE_ANIM_FRAMESET_UNUSED_PIKACHU_2
 	db SPRITE_ANIM_FRAMESET_UNUSED_PIKACHU
@@ -871,7 +871,7 @@ AnimSeq_UnusedNote:
 
 .zero
 	call .initialize
-	ld a, [wc717]
+	ld a, [wUnusedJigglypuffNoteXCoord]
 	ld hl, SPRITEANIMSTRUCT_XCOORD
 	add hl, bc
 	add [hl]
@@ -909,7 +909,7 @@ AnimSeq_UnusedNote:
 	db -4, -7, -9, -10, -9, -7, -4,  0
 
 AnimSeq_UnusedJigglypuff:
-	ld a, [wc717]
+	ld a, [wUnusedJigglypuffNoteXCoord]
 	ld hl, SPRITEANIMSTRUCT_XCOORD
 	add hl, bc
 	add [hl]
@@ -917,7 +917,7 @@ AnimSeq_UnusedJigglypuff:
 	cp $30
 	ret nz
 	xor a
-	ld [wc717], a
+	ld [wUnusedJigglypuffNoteXCoord], a
 	ret
 
 AnimSeq_NamingScreenCursor:

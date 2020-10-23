@@ -58,8 +58,8 @@ DebugColorPicker:
 
 	xor a ; DEBUGCOLORMAIN_INITSCREEN
 	ld [wJumptableIndex], a
-	ld [wce66], a
-	ld [wceee], a
+	ld [wDebugColorCurMon], a
+	ld [wDebugColorIsShiny], a
 .loop
 	ld a, [wJumptableIndex]
 	bit 7, a
@@ -75,14 +75,14 @@ DebugColorPicker:
 	ret
 
 DebugColor_InitMonOrTrainerColor:
-	ld a, [wceed]
+	ld a, [wDebugColorIsTrainer]
 	and a
 	jr nz, DebugColor_InitTrainerColor
 	ld hl, PokemonPalettes
 	; fallthrough
 
 DebugColor_InitMonColor:
-	ld de, wOverworldMapBlocks
+	ld de, wDebugOriginalColors
 	ld c, NUM_POKEMON + 1
 .loop
 	push bc
@@ -98,7 +98,7 @@ DebugColor_InitMonColor:
 
 DebugColor_InitTrainerColor:
 	ld hl, TrainerPalettes
-	ld de, wOverworldMapBlocks
+	ld de, wDebugOriginalColors
 	ld c, NUM_TRAINER_CLASSES
 .loop
 	push bc
@@ -113,24 +113,13 @@ DebugColor_InitTrainerColor:
 	ret
 
 DebugColor_InitColor:
+rept 3
 	ld a, BANK(PokemonPalettes) ; aka BANK(TrainerPalettes)
 	call GetFarByte
 	ld [de], a
 	inc de
 	inc hl
-
-	ld a, BANK(PokemonPalettes) ; aka BANK(TrainerPalettes)
-	call GetFarByte
-	ld [de], a
-	inc de
-	inc hl
-
-	ld a, BANK(PokemonPalettes) ; aka BANK(TrainerPalettes)
-	call GetFarByte
-	ld [de], a
-	inc de
-	inc hl
-
+endr
 	ld a, BANK(PokemonPalettes) ; aka BANK(TrainerPalettes)
 	call GetFarByte
 	ld [de], a
@@ -220,14 +209,14 @@ DebugColor_InitPalettes:
 	dec c
 	jr nz, .ob_loop
 
-	ld a, $94
-	ld [wc508], a
-	ld a, $52
-	ld [wc508 + 1], a
-	ld a, $4a
-	ld [wc508 + 2], a
-	ld a, $29
-	ld [wc508 + 3], a
+	ld a, LOW(palred 20 + palgreen 20 + palblue 20)
+	ld [wDebugLightColor + 0], a
+	ld a, HIGH(palred 20 + palgreen 20 + palblue 20)
+	ld [wDebugLightColor + 1], a
+	ld a, LOW(palred 10 + palgreen 10 + palblue 10)
+	ld [wDebugDarkColor + 0], a
+	ld a, HIGH(palred 10 + palgreen 10 + palblue 10)
+	ld [wDebugDarkColor + 1], a
 	ret
 
 Palette_DebugBG:
@@ -256,7 +245,7 @@ DebugColorMain:
 	call DebugColor_BackupSpriteColors
 	call .SetMaxNum
 	ld e, a
-	ld a, [wce66]
+	ld a, [wDebugColorCurMon]
 	inc a
 	cp e
 	jr c, .SwitchMon
@@ -265,7 +254,7 @@ DebugColorMain:
 
 .PreviousMon:
 	call DebugColor_BackupSpriteColors
-	ld a, [wce66]
+	ld a, [wDebugColorCurMon]
 	dec a
 	cp -1
 	jr nz, .SwitchMon
@@ -273,14 +262,14 @@ DebugColorMain:
 	dec a
 
 .SwitchMon:
-	ld [wce66], a
+	ld [wDebugColorCurMon], a
 	ld a, DEBUGCOLORMAIN_INITSCREEN
 	ld [wJumptableIndex], a
 	ret
 
 .SetMaxNum:
 ; Looping back around the pic set.
-	ld a, [wceed]
+	ld a, [wDebugColorIsTrainer]
 	and a
 	jr nz, .trainer
 ; mon
@@ -320,7 +309,7 @@ DebugColor_InitScreen:
 	call DebugColor_FillBoxWithByte
 	call DebugColor_LoadRGBMeter
 	call DebugColor_SetRGBMeter
-	ld a, [wce66]
+	ld a, [wDebugColorCurMon]
 	inc a
 	ld [wCurPartySpecies], a
 	ld [wDeciramBuffer], a
@@ -328,7 +317,7 @@ DebugColor_InitScreen:
 	ld de, wDeciramBuffer
 	lb bc, PRINTNUM_LEADINGZEROS | 1, 3
 	call PrintNum
-	ld a, [wceed]
+	ld a, [wDebugColorIsTrainer]
 	and a
 	jr nz, .trainer
 
@@ -350,7 +339,7 @@ DebugColor_InitScreen:
 	lb bc, 6, 6
 	predef PlaceGraphic
 
-	ld a, [wceee]
+	ld a, [wDebugColorIsShiny]
 	and a
 	jr z, .normal
 ; shiny
@@ -423,21 +412,21 @@ DebugColor_LoadRGBMeter:
 	ret
 
 DebugColor_SetRGBMeter:
-	ld a, [wce66]
+	ld a, [wDebugColorCurMon]
 	inc a
 	ld l, a
 	ld h, 0
 	add hl, hl
 	add hl, hl
-	ld de, wOverworldMapBlocks
+	ld de, wDebugOriginalColors
 	add hl, de
-	ld de, wc508
+	ld de, wDebugMiddleColors
 	ld bc, 4
 	call CopyBytes
 	xor a
-	ld [wce64], a
-	ld [wce65], a
-	ld de, wc508
+	ld [wDebugColorRGBJumptableIndex], a
+	ld [wDebugColorCurColor], a
+	ld de, wDebugLightColor
 	call DebugColor_CalculateRGB
 	ret
 
@@ -466,15 +455,15 @@ DebugColor_UpdatePalettes:
 
 ; cgb
 	ld hl, wBGPals2
-	ld de, wc508
+	ld de, wDebugMiddleColors
 	ld c, 1
 	call DebugColor_LoadPalettes_White_Col1_Col2_Black
 
 	hlcoord 10, 2
-	ld de, wc508
+	ld de, wDebugLightColor
 	call DebugColor_PrintHexColor
 	hlcoord 15, 2
-	ld de, wc508 + 2
+	ld de, wDebugDarkColor
 	call DebugColor_PrintHexColor
 
 	ld a, TRUE
@@ -492,13 +481,13 @@ DebugColor_UpdatePalettes:
 	ld [hli], a
 	ld a, HIGH(PALRGB_WHITE)
 	ld [hli], a
-	ld a, [wc508]
+	ld a, [wDebugLightColor + 0]
 	ld [hli], a
-	ld a, [wc508 + 1]
+	ld a, [wDebugLightColor + 1]
 	ld [hli], a
-	ld a, [wc508 + 2]
+	ld a, [wDebugDarkColor + 0]
 	ld [hli], a
-	ld a, [wc508 + 3]
+	ld a, [wDebugDarkColor + 1]
 	ld [hli], a
 	xor a
 	ld [hli], a
@@ -509,10 +498,10 @@ DebugColor_UpdatePalettes:
 	call DebugColor_PushSGBPals
 
 	hlcoord 10, 2
-	ld de, wc508
+	ld de, wDebugLightColor
 	call DebugColor_PrintHexColor
 	hlcoord 15, 2
-	ld de, wc508 + 2
+	ld de, wDebugDarkColor
 	call DebugColor_PrintHexColor
 
 	ld a, DEBUGCOLORMAIN_JOYPAD
@@ -547,7 +536,7 @@ DebugColor_Joypad:
 	and A_BUTTON
 	jr nz, .toggle_shiny
 
-	ld a, [wce64]
+	ld a, [wDebugColorRGBJumptableIndex]
 	maskbits 4 ; .PointerTable length
 	ld e, a
 	ld d, 0
@@ -567,13 +556,13 @@ DebugColor_Joypad:
 
 .toggle_shiny
 ; Toggle between the normal and shiny mon colors.
-	ld a, [wceed]
+	ld a, [wDebugColorIsTrainer]
 	and a
 	ret nz
 
-	ld a, [wceee]
+	ld a, [wDebugColorIsShiny]
 	xor %00000100
-	ld [wceee], a
+	ld [wDebugColorIsShiny], a
 	ld c, a
 	ld b, 0
 	ld hl, PokemonPalettes
@@ -604,16 +593,16 @@ DebugColor_SelectColorBox:
 	ret
 
 .light
-	xor a
-	ld [wce65], a
-	ld de, wc508
+	xor a ; FALSE
+	ld [wDebugColorCurColor], a
+	ld de, wDebugLightColor
 	call DebugColor_CalculateRGB
 	ret
 
 .dark
 	ld a, TRUE
-	ld [wce65], a
-	ld de, wc508 + 2
+	ld [wDebugColorCurColor], a
+	ld de, wDebugDarkColor
 	call DebugColor_CalculateRGB
 	ret
 
@@ -625,7 +614,7 @@ DebugColor_ChangeRedValue:
 	ld a, [hl]
 	and D_UP
 	jr nz, DebugColor_PreviousRGBColor
-	ld hl, wc508 + 10
+	ld hl, wDebugRedChannel
 	jr DebugColor_UpdateRGBColor
 
 DebugColor_ChangeGreenValue:
@@ -636,7 +625,7 @@ DebugColor_ChangeGreenValue:
 	ld a, [hl]
 	and D_UP
 	jr nz, DebugColor_PreviousRGBColor
-	ld hl, wc508 + 11
+	ld hl, wDebugGreenChannel
 	jr DebugColor_UpdateRGBColor
 
 DebugColor_ChangeBlueValue:
@@ -644,7 +633,8 @@ DebugColor_ChangeBlueValue:
 	ld a, [hl]
 	and D_UP
 	jr nz, DebugColor_PreviousRGBColor
-	ld hl, wc508 + 12
+	ld hl, wDebugBlueChannel
+	; fallthrough
 
 DebugColor_UpdateRGBColor:
 	ldh a, [hJoyLast]
@@ -675,12 +665,12 @@ DebugColor_UpdateRGBColor:
 	ret
 
 DebugColor_PreviousRGBColor:
-	ld hl, wce64
+	ld hl, wDebugColorRGBJumptableIndex
 	dec [hl]
 	ret
 
 DebugColor_NextRGBColor:
-	ld hl, wce64
+	ld hl, wDebugColorRGBJumptableIndex
 	inc [hl]
 	ret
 
@@ -693,7 +683,7 @@ DebugColor_InitTMHM:
 	ld de, DebugColor_AreYouFinishedString
 	call PlaceString
 	xor a
-	ld [wceef], a
+	ld [wDebugColorCurTMHM], a
 	call DebugColor_PrintTMHMMove
 	ld a, DEBUGCOLORMAIN_TMHMJOYPAD
 	ld [wJumptableIndex], a
@@ -728,7 +718,7 @@ DebugColor_TMHMJoypad:
 	ret
 
 .up
-	ld a, [wceef]
+	ld a, [wDebugColorCurTMHM]
 	cp NUM_TM_HM - 1
 	jr z, .wrap_down
 	inc a
@@ -739,7 +729,7 @@ DebugColor_TMHMJoypad:
 	jr .done
 
 .down
-	ld a, [wceef]
+	ld a, [wDebugColorCurTMHM]
 	and a
 	jr z, .wrap_up
 	dec a
@@ -749,7 +739,7 @@ DebugColor_TMHMJoypad:
 	ld a, NUM_TM_HM - 1
 
 .done
-	ld [wceef], a
+	ld [wDebugColorCurTMHM], a
 	call DebugColor_PrintTMHMMove
 	ret
 
@@ -763,7 +753,7 @@ DebugColor_PrintTMHMMove:
 	hlcoord 10, 14
 	call .ClearRow
 
-	ld a, [wceef]
+	ld a, [wDebugColorCurTMHM]
 	inc a
 	ld [wTempTMHM], a
 	predef GetTMHMMove
@@ -773,7 +763,7 @@ DebugColor_PrintTMHMMove:
 	hlcoord 10, 12
 	call PlaceString
 
-	ld a, [wceef]
+	ld a, [wDebugColorCurTMHM]
 	call .GetNumberedTMHM
 	ld [wCurItem], a
 	predef CanLearnTMHMMove
@@ -810,48 +800,48 @@ DebugColor_PrintTMHMMove:
 	ret
 
 DebugColor_CalculatePalette:
-	ld a, [wc508 + 10]
+	ld a, [wDebugRedChannel]
 	and %00011111
 	ld e, a
-	ld a, [wc508 + 11]
+	ld a, [wDebugGreenChannel]
 	and %00000111
 	sla a
 	swap a
 	or e
 	ld e, a
-	ld a, [wc508 + 11]
+	ld a, [wDebugGreenChannel]
 	and %00011000
 	sla a
 	swap a
 	ld d, a
-	ld a, [wc508 + 12]
+	ld a, [wDebugBlueChannel]
 	and %00011111
 	sla a
 	sla a
 	or d
 	ld d, a
-	ld a, [wce65]
+	ld a, [wDebugColorCurColor]
 	and a
 	jr z, .light
 
 ; dark
 	ld a, e
-	ld [wc508 + 2], a
+	ld [wDebugDarkColor + 0], a
 	ld a, d
-	ld [wc508 + 3], a
+	ld [wDebugDarkColor + 1], a
 	ret
 
 .light
 	ld a, e
-	ld [wc508], a
+	ld [wDebugLightColor + 0], a
 	ld a, d
-	ld [wc508 + 1], a
+	ld [wDebugLightColor + 1], a
 	ret
 
 DebugColor_CalculateRGB:
 	ld a, [de]
 	and %00011111
-	ld [wc508 + 10], a
+	ld [wDebugRedChannel], a
 	ld a, [de]
 	and %11100000
 	swap a
@@ -863,26 +853,26 @@ DebugColor_CalculateRGB:
 	swap a
 	srl a
 	or b
-	ld [wc508 + 11], a
+	ld [wDebugGreenChannel], a
 	ld a, [de]
 	and %01111100
 	srl a
 	srl a
-	ld [wc508 + 12], a
+	ld [wDebugBlueChannel], a
 	ret
 
 DebugColor_BackupSpriteColors:
-	ld a, [wce66]
+	ld a, [wDebugColorCurMon]
 	inc a
 	ld l, a
 	ld h, 0
 	add hl, hl
 	add hl, hl
-	ld de, wOverworldMapBlocks ; MonPalette
+	ld de, wDebugOriginalColors
 	add hl, de
 	ld e, l
 	ld d, h
-	ld hl, wc508
+	ld hl, wDebugMiddleColors
 	ld bc, 4
 	call CopyBytes
 	ret
@@ -997,7 +987,7 @@ DebugColor_PlaceCursor:
 	cp DEBUGCOLORMAIN_JOYPAD
 	jr nz, .clearsprites
 
-	ld a, [wce64]
+	ld a, [wDebugColorRGBJumptableIndex]
 	and a
 	jr z, .place_cursor
 	dec a
@@ -1007,7 +997,7 @@ DebugColor_PlaceCursor:
 	ld [hl], "▶"
 
 .place_cursor
-	ld a, [wce65]
+	ld a, [wDebugColorCurColor]
 	and a
 	jr z, .light
 ; dark
@@ -1021,11 +1011,11 @@ DebugColor_PlaceCursor:
 	ld b, $70 ; initial tile id
 	ld c, 5 ; initial palette
 	ld hl, wVirtualOAM
-	ld de, wc508 + 10
+	ld de, wDebugRedChannel
 	call .placesprite
-	ld de, wc508 + 11
+	ld de, wDebugGreenChannel
 	call .placesprite
-	ld de, wc508 + 12
+	ld de, wDebugBlueChannel
 	call .placesprite
 	ret
 
@@ -1070,9 +1060,9 @@ TilesetColorPicker:
 
 	xor a
 	ld [wJumptableIndex], a
-	ld [wce64], a
-	ld [wce65], a
-	ld [wce66], a
+	ld [wDebugTilesetCurPalette], a
+	ld [wDebugTilesetRGBJumptableIndex], a
+	ld [wDebugTilesetCurColor], a
 	ldh [hMapAnims], a
 	call ClearSprites
 	call OverworldTextModeSwitch
@@ -1122,8 +1112,9 @@ DebugTileset_DrawColorSwatch:
 	call _DebugColor_DrawSwatch
 
 DebugColor_DrawAttributeSwatch:
-	ld a, [wce64]
+	ld a, [wDebugTilesetCurPalette]
 	hlcoord 0, 0, wAttrmap
+	; fallthrough
 
 _DebugColor_DrawSwatch:
 ; Fills a 4x3 box at de with byte a.
@@ -1155,7 +1146,7 @@ DebugTileset_LoadRGBMeter:
 	ret
 
 DebugTileset_LoadPalettes:
-	ld a, [wce64]
+	ld a, [wDebugTilesetCurPalette]
 	ld l, a
 	ld h, 0
 	add hl, hl
@@ -1163,10 +1154,10 @@ DebugTileset_LoadPalettes:
 	add hl, hl
 	ld de, wBGPals1
 	add hl, de
-	ld de, wc508
+	ld de, wDebugPalette
 	ld bc, 1 palettes
 	call CopyBytes
-	ld de, wc508
+	ld de, wDebugPalette
 	call DebugColor_CalculateRGB
 	ret
 
@@ -1174,15 +1165,15 @@ DebugColorMain2: ; unreferenced
 	ld hl, hJoyLast
 	ld a, [hl]
 	and SELECT
-	jr nz, .loop7
+	jr nz, .next_palette
 	ld a, [hl]
 	and B_BUTTON
 	jr nz, .cancel
 	call DebugTileset_Joypad
 	ret
 
-.loop7
-	ld hl, wce64
+.next_palette
+	ld hl, wDebugTilesetCurPalette
 	ld a, [hl]
 	inc a
 	and PALETTE_MASK
@@ -1200,10 +1191,10 @@ DebugColorMain2: ; unreferenced
 	decoord 16, 1, 0
 	call DebugColor_DrawAttributeSwatch
 	ld hl, wBGPals2
-	ld a, [wce64]
+	ld a, [wDebugTilesetCurPalette]
 	ld bc, 1 palettes
 	call AddNTimes
-	ld de, wc508
+	ld de, wDebugPalette
 	ld bc, 1 palettes
 	call CopyBytes
 	ld a, 2
@@ -1223,26 +1214,26 @@ DebugColorMain2: ; unreferenced
 
 DebugTileset_UpdatePalettes:
 	ld hl, wBGPals2
-	ld a, [wce64]
+	ld a, [wDebugTilesetCurPalette]
 	ld bc, 1 palettes
 	call AddNTimes
 	ld e, l
 	ld d, h
-	ld hl, wc508
+	ld hl, wDebugPalette
 	ld bc, 1 palettes
 	call CopyBytes
 
 	hlcoord 1, 0
-	ld de, wc508
+	ld de, wDebugWhiteTileColor
 	call DebugColor_PrintHexColor
 	hlcoord 6, 0
-	ld de, wc508 + 2
+	ld de, wDebugLightTileColor
 	call DebugColor_PrintHexColor
 	hlcoord 11, 0
-	ld de, wc508 + 4
+	ld de, wDebugDarkTileColor
 	call DebugColor_PrintHexColor
 	hlcoord 16, 0
-	ld de, wc508 + 6
+	ld de, wDebugBlackTileColor
 	call DebugColor_PrintHexColor
 
 	ld a, TRUE
@@ -1252,7 +1243,7 @@ DebugTileset_UpdatePalettes:
 	ret
 
 DebugTileset_Joypad:
-	ld a, [wce65]
+	ld a, [wDebugTilesetRGBJumptableIndex]
 	maskbits 4 ; .PointerTable length
 	ld e, a
 	ld d, 0
@@ -1284,20 +1275,20 @@ DebugTileset_SelectColorBox:
 	ret
 
 .left
-	ld a, [wce66]
+	ld a, [wDebugTilesetCurColor]
 	dec a
 	jr .done
 
 .right
-	ld a, [wce66]
+	ld a, [wDebugTilesetCurColor]
 	inc a
 
 .done
-	and $3
-	ld [wce66], a
+	maskbits NUM_PAL_COLORS
+	ld [wDebugTilesetCurColor], a
 	ld e, a
 	ld d, 0
-	ld hl, wc508
+	ld hl, wDebugPalette
 	add hl, de
 	add hl, de
 	ld e, l
@@ -1313,7 +1304,7 @@ DebugTileset_ChangeRedValue:
 	ld a, [hl]
 	and D_UP
 	jr nz, DebugTileset_PreviousRGBColor
-	ld hl, wc508 + 10
+	ld hl, wDebugRedChannel
 	jr DebugTileset_UpdateRGBColor
 
 DebugTileset_ChangeGreenValue:
@@ -1324,7 +1315,7 @@ DebugTileset_ChangeGreenValue:
 	ld a, [hl]
 	and D_UP
 	jr nz, DebugTileset_PreviousRGBColor
-	ld hl, wc508 + 11
+	ld hl, wDebugGreenChannel
 	jr DebugTileset_UpdateRGBColor
 
 DebugTileset_ChangeBlueValue:
@@ -1332,7 +1323,8 @@ DebugTileset_ChangeBlueValue:
 	ld a, [hl]
 	and D_UP
 	jr nz, DebugTileset_PreviousRGBColor
-	ld hl, wc508 + 12
+	ld hl, wDebugBlueChannel
+	; fallthrough
 
 DebugTileset_UpdateRGBColor:
 	ldh a, [hJoyLast]
@@ -1362,40 +1354,40 @@ DebugTileset_UpdateRGBColor:
 	ret
 
 DebugTileset_PreviousRGBColor:
-	ld hl, wce65
+	ld hl, wDebugTilesetRGBJumptableIndex
 	dec [hl]
 	ret
 
 DebugTileset_NextRGBColor:
-	ld hl, wce65
+	ld hl, wDebugTilesetRGBJumptableIndex
 	inc [hl]
 	ret
 
 DebugTileset_CalculatePalette:
-	ld a, [wc508 + 10]
+	ld a, [wDebugRedChannel]
 	and %00011111
 	ld e, a
-	ld a, [wc508 + 11]
+	ld a, [wDebugGreenChannel]
 	and %0000111
 	sla a
 	swap a
 	or e
 	ld e, a
-	ld a, [wc508 + 11]
+	ld a, [wDebugGreenChannel]
 	and %00011000
 	sla a
 	swap a
 	ld d, a
-	ld a, [wc508 + 12]
+	ld a, [wDebugBlueChannel]
 	and %00011111
 	sla a
 	sla a
 	or d
 	ld d, a
-	ld a, [wce66]
+	ld a, [wDebugTilesetCurColor]
 	ld c, a
 	ld b, 0
-	ld hl, wc508
+	ld hl, wDebugPalette
 	add hl, bc
 	add hl, bc
 	ld a, e
@@ -1420,7 +1412,7 @@ DebugTileset_PlaceCursor: ; unreferenced
 	hlcoord 15, 2
 	ld [hl], a
 
-	ld a, [wce65]
+	ld a, [wDebugTilesetRGBJumptableIndex]
 	and a
 	jr z, .place_cursor
 	dec a
@@ -1430,7 +1422,7 @@ DebugTileset_PlaceCursor: ; unreferenced
 	ld [hl], "▶"
 
 .place_cursor
-	ld a, [wce66]
+	ld a, [wDebugTilesetCurColor]
 	hlcoord 0, 2
 	ld bc, 5
 	call AddNTimes
@@ -1438,11 +1430,11 @@ DebugTileset_PlaceCursor: ; unreferenced
 
 	ld b, $78 ; initial tile id
 	ld hl, wVirtualOAM
-	ld de, wc508 + 10
+	ld de, wDebugRedChannel
 	call .placesprite
-	ld de, wc508 + 11
+	ld de, wDebugGreenChannel
 	call .placesprite
-	ld de, wc508 + 12
+	ld de, wDebugBlueChannel
 	call .placesprite
 	ret
 

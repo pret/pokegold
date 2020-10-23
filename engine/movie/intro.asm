@@ -130,8 +130,8 @@ IntroScene1:
 	ldh [hLCDCPointer], a
 	call Intro_InitSineLYOverrides
 
-	xor a
-	ld [wcb19], a
+	xor a ; FALSE
+	ld [wIntroSpriteStateFlag], a
 	call EnableLCD
 	call DelayFrame
 	ld b, SCGB_GS_INTRO
@@ -176,7 +176,7 @@ IntroScene3:
 
 IntroScene4:
 ; at surface; Lapras surfs to left of screen
-	ld a, [wcb19]
+	ld a, [wIntroSpriteStateFlag]
 	and a
 	jr nz, .next
 	ld hl, wIntroFrameCounter2
@@ -632,8 +632,8 @@ IntroScene6:
 	depixel 28, 28, 4, 4
 	call DmgToCgbObjPals
 	call Intro_InitJigglypuff
-	xor a
-	ld [wcb19], a
+	xor a ; FALSE
+	ld [wIntroSpriteStateFlag], a
 	ret
 
 IntroScene7:
@@ -722,7 +722,7 @@ IntroScene9:
 	ret ; unused
 
 Intro_InitNote:
-	ld a, [wcb19]
+	ld a, [wIntroSpriteStateFlag]
 	and a
 	ret nz
 	ld hl, wIntroFrameCounter2

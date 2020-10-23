@@ -305,8 +305,26 @@ wLink_c508:: ds 10
 wc512:: ds 10
 
 NEXTU
-; unused (engine/menus/debug.asm)
-wc508:: ds 13
+; debug mon color picker
+wDebugMiddleColors::
+wDebugLightColor:: ds 2
+wDebugDarkColor::  ds 2
+	ds 6
+wDebugRedChannel::   db
+wDebugGreenChannel:: db
+wDebugBlueChannel::  db
+
+NEXTU
+; debug tileset color picker
+wDebugPalette::
+wDebugWhiteTileColor:: ds 2
+wDebugLightTileColor:: ds 2
+wDebugDarkTileColor::  ds 2
+wDebugBlackTileColor:: ds 2
+
+NEXTU
+; dummy game
+wc508:: dw
 ENDU
 
 ; This union spans 280 bytes.
@@ -519,15 +537,20 @@ NEXTU
 wHallOfFamePokemonList:: hall_of_fame wHallOfFamePokemonList
 
 NEXTU
+; debug color picker
+wDebugOriginalColors:: ds 256 * 4
+
+NEXTU
+; unused sprite anims
+	ds 4
+wUnusedPikachuFrameset:: db
+	ds 18
+wUnusedJigglypuffNoteXCoord:: db
+
+NEXTU
 ; raw link data
 wLinkData:: ds $514
 wLinkDataEnd::
-
-NEXTU
-; unused (engine/gfx/sprite_anims.asm)
-	ds 4
-wc704:: ds 19
-wc717:: ds 1
 
 NEXTU
 ; link data members
@@ -741,7 +764,7 @@ wIntroTilemapPointer:: dw
 wIntroTilesPointer:: dw
 wIntroFrameCounter1:: db
 wIntroFrameCounter2:: db
-wcb19:: db
+wIntroSpriteStateFlag:: db
 ENDU
 
 	ds 2
@@ -1210,6 +1233,18 @@ wUnownPuzzleCursorPosition:: db
 wUnownPuzzleHeldPiece:: db
 
 NEXTU
+; debug mon color picker
+wDebugColorRGBJumptableIndex:: db
+wDebugColorCurColor:: db
+wDebugColorCurMon:: db
+
+NEXTU
+; debug tileset color picker
+wDebugTilesetCurPalette:: db
+wDebugTilesetRGBJumptableIndex:: db
+wDebugTilesetCurColor:: db
+
+NEXTU
 ; miscellaneous
 wFrameCounter::
 wMomBankDigitCursorPosition::
@@ -1490,6 +1525,12 @@ wKeepSevenBiasChance:: ; used in the slots to handle the favoring of 7 symbol st
 	ds 2
 wStartFlypoint:: db
 wEndFlypoint:: db
+
+NEXTU
+; debug color picker
+wDebugColorIsTrainer:: db
+wDebugColorIsShiny:: db
+wDebugColorCurTMHM:: db
 
 IF DEF(_DEBUG)
 NEXTU
