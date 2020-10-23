@@ -128,7 +128,7 @@ IntroScene1:
 	ld [wIntroFrameCounter1], a
 	ld a, $42
 	ldh [hLCDCPointer], a
-	call Functione5095
+	call Intro_InitSineLYOverrides
 
 	xor a
 	ld [wcb19], a
@@ -148,7 +148,7 @@ IntroScene1:
 
 IntroScene2:
 ; shellders underwater
-	call Functione50af
+	call Intro_UpdateLYOverrides
 	ld hl, wIntroFrameCounter1
 	ld a, [hl]
 	and a
@@ -164,8 +164,8 @@ IntroScene2:
 
 IntroScene3:
 ; rise towards the surface
-	call IntroScene3Jumper
-	call Functione4e67
+	call IntroScene3_Jumper
+	call IntroScene3_ScrollToSurface
 	ret nc
 ; next scene if carry flag is set
 	call Intro_ResetLYOverrides
@@ -189,7 +189,7 @@ IntroScene4:
 	dec [hl]
 
 .skip_move_left
-	call Functione4fde
+	call Intro_AnimateOceanWaves
 	ret
 
 .next
@@ -213,7 +213,7 @@ IntroScene5:
 	cp -1
 	jr z, .next
 	call DmgToCgbBGPals
-	call Functione4fde
+	call Intro_AnimateOceanWaves
 	ld hl, hSCX
 	dec [hl]
 	dec [hl]
@@ -224,8 +224,12 @@ IntroScene5:
 	inc [hl]
 	ret
 
-.palettes
-	db %11100100, %11100100, %10010000, %01000000, %00000000
+.palettes:
+	db %11100100
+	db %11100100
+	db %10010000
+	db %01000000
+	db %00000000
 	db -1
 
 IntroScene17:
@@ -240,7 +244,7 @@ IntroScene17:
 	set 7, [hl]
 	ret
 
-Functione4e67:
+IntroScene3_ScrollToSurface:
 	ld hl, wIntroFrameCounter2
 	inc [hl]
 	ld a, [hl]
@@ -271,44 +275,44 @@ Functione4e67:
 	scf
 	ret
 
-IntroScene3Jumper:
+IntroScene3_Jumper:
 	jumptable .dw, wIntroFrameCounter1
 
 .dw
-	dw Functione4eca
-	dw Functione4eca
-	dw Functione4eca
-	dw Functione4ec1
-	dw Functione4eca
-	dw Functione4eca
-	dw Functione4ece
-	dw Functione4ece
-	dw Functione4ece
-	dw Functione4ed5
-	dw Functione4ee8
-	dw Functione4eec
-	dw Functione4eec
-	dw Functione4eec
-	dw Functione4eec
-	dw Functione4eec
-	dw Functione4eec
+	dw .scene3_2
+	dw .scene3_2
+	dw .scene3_2
+	dw .scene3_1
+	dw .scene3_2
+	dw .scene3_2
+	dw .scene3_3
+	dw .scene3_3
+	dw .scene3_3
+	dw .scene3_4
+	dw .scene3_5
+	dw .scene3_6
+	dw .scene3_6
+	dw .scene3_6
+	dw .scene3_6
+	dw .scene3_6
+	dw .scene3_6
 
-Functione4ec1:
+.scene3_1:
 	call Intro_InitLapras
 	depixel 28, 28, 4, 4
 	call DmgToCgbObjPals
 ; fallthrough
 
-Functione4eca:
-	call Functione4fde
+.scene3_2:
+	call Intro_AnimateOceanWaves
 	ret
 
-Functione4ece:
+.scene3_3:
 	call Intro_InitMagikarps
-	call Functione4fde
+	call Intro_AnimateOceanWaves
 	ret
 
-Functione4ed5:
+.scene3_4:
 	ld hl, wIntroFrameCounter2
 	ld a, [hl]
 	and %00011111
@@ -320,13 +324,13 @@ Functione4ed5:
 	callfar Intro_LoadMagikarpPalettes
 	ret
 
-Functione4ee8:
+.scene3_5:
 	xor a
 	ldh [hLCDCPointer], a
 	ret
 
-Functione4eec:
-	call Functione50af
+.scene3_6:
+	call Intro_UpdateLYOverrides
 	ret
 
 Intro_InitBubble:
@@ -415,7 +419,7 @@ Intro_InitLapras:
 	call InitSpriteAnimStruct
 	ret
 
-Intro_UnusedInitLapras:
+Intro_UnusedInitLapras: ; unreferenced
 	depixel 2, 0
 	ld a, SPRITE_ANIM_INDEX_UNUSED_LAPRAS
 	call InitSpriteAnimStruct
@@ -438,11 +442,11 @@ Intro_UpdateTilemapAndBGMap:
 	ld a, h
 	ld d, h
 	ld [wIntroTilemapPointer + 1], a
+
 	hlcoord 0, 0
 	ld c, BG_MAP_WIDTH / 2
-
 .loop
-	call Functione54ae
+	call Intro_Draw2x2Tiles
 	dec c
 	jr nz, .loop
 
@@ -473,8 +477,8 @@ Intro_UpdateTilemapAndBGMap:
 	pop hl
 	ret
 
-Functione4fde:
-; something to do with water scene sprite anims?
+Intro_AnimateOceanWaves:
+; uses a 2bpp request to copy tile IDs to the BG map
 	ld hl, wIntroFrameCounter2
 	ld a, [hl]
 	and 3
@@ -491,7 +495,7 @@ Functione4fde:
 rept 5
 	add hl, hl
 endr
-	ld de, .data_e5015
+	ld de, .wave_tiles
 	add hl, de
 	ld a, l
 	ld [wRequested2bppSource + 0], a
@@ -505,7 +509,7 @@ endr
 	ld [wRequested2bppSize], a
 	ret
 
-.data_e5015
+.wave_tiles:
 rept 8
 	db $70, $71, $72, $73
 endr
@@ -519,7 +523,7 @@ rept 8
 	db $7c, $7d, $7e, $7f
 endr
 
-Functione5095:
+Intro_InitSineLYOverrides:
 	ld bc, wLYOverrides2
 	ld a, wLYOverrides2End - wLYOverrides2
 	ld de, vBGMap1 - vBGMap0
@@ -538,7 +542,7 @@ Functione5095:
 	jr nz, .loop
 	ret
 
-Functione50af:
+Intro_UpdateLYOverrides:
 	ld bc, wLYOverrides
 	ld e, $10
 
@@ -704,9 +708,15 @@ IntroScene9:
 	inc [hl]
 	ret
 
-.palettes
-	db %11100100, %11100100, %11100100, %11100100
-	db %11100100, %10010000, %01000000, %00000000
+.palettes:
+	db %11100100
+	db %11100100
+	db %11100100
+	db %11100100
+	db %11100100
+	db %10010000
+	db %01000000
+	db %00000000
 	db -1
 
 	ret ; unused
@@ -860,8 +870,11 @@ IntroScene12:
 	ld [wIntroFrameCounter1], a
 	ret
 
-.palettes
-	db %01101010, %10100101, %11100100, %00000000
+.palettes:
+	db %01101010
+	db %10100101
+	db %11100100
+	db %00000000
 
 IntroScene13:
 ; Charizard mouth open
@@ -905,7 +918,7 @@ IntroScene14:
 
 IntroScene15:
 ; Charizard mouth wide open / fireball starts
-	call Functione5473
+	call Intro_AnimateFireball
 	ld hl, wIntroFrameCounter1
 	ld a, [hl]
 	and a
@@ -922,7 +935,7 @@ IntroScene15:
 
 IntroScene16:
 ; continue fireball / fade out palettes
-	call Functione5473
+	call Intro_AnimateFireball
 	ld hl, wIntroFrameCounter1
 	ld a, [hl]
 	inc [hl]
@@ -946,8 +959,11 @@ IntroScene16:
 	inc [hl]
 	ret
 
-.palettes
-	db %11100100, %10010000, %01000000, %00000000
+.palettes:
+	db %11100100
+	db %10010000
+	db %01000000
+	db %00000000
 	db -1
 
 Intro_BlankTilemapAndBGMap:
@@ -985,17 +1001,17 @@ Intro_CheckSCYEvent:
 .scy_jumptable
 	dbw $86, Intro_LoadChikoritaPalette
 	dbw $87, Intro_ChikoritaAppears
-	dbw $88, Functione53e0
-	dbw $98, Functione53eb
+	dbw $88, Intro_FlashMonPalette
+	dbw $98, Intro_FlashSilhouette
 	dbw $99, Intro_LoadCyndaquilPalette
 	dbw $af, Intro_CyndaquilAppears
-	dbw $b0, Functione53e0
-	dbw $c0, Functione53eb
+	dbw $b0, Intro_FlashMonPalette
+	dbw $c0, Intro_FlashSilhouette
 	dbw $c1, Intro_LoadTotodilePalette
 	dbw $d7, Intro_TotodileAppears
-	dbw $d8, Functione53e0
-	dbw $e8, Functione53eb
-	dbw $e9, Functione5412
+	dbw $d8, Intro_FlashMonPalette
+	dbw $e8, Intro_FlashSilhouette
+	dbw $e9, Intro_LoadCharizardPalette
 	db -1
 
 Intro_ChikoritaAppears:
@@ -1022,15 +1038,15 @@ Intro_TotodileAppears:
 	call InitSpriteAnimStruct
 	ret
 
-Functione53e0:
-	depixel 28, 28, 4, 4
+Intro_FlashMonPalette:
+	lb de, %11100100, %11100100
 	call DmgToCgbObjPals
 	xor a
 	call DmgToCgbBGPals
 	ret
 
-Functione53eb:
-	depixel 31, 31, 7, 7
+Intro_FlashSilhouette:
+	lb de, %11111111, %11111111
 	call DmgToCgbObjPals
 	ld a, %00111111
 	call DmgToCgbBGPals
@@ -1051,7 +1067,7 @@ Intro_LoadTotodilePalette:
 	farcall Intro_LoadMonPalette
 	ret
 
-Functione5412:
+Intro_LoadCharizardPalette:
 	ldh a, [hCGB]
 	and a
 	ld c, CYNDAQUIL
@@ -1126,7 +1142,7 @@ endr
 	db $88, 9, 8
 	dwcoord 8, 6
 
-Functione5473:
+Intro_AnimateFireball:
 	ld hl, wIntroFrameCounter2
 	ld a, [hl]
 	inc [hl]
@@ -1141,8 +1157,8 @@ Functione5473:
 	inc [hl]
 	ret
 
-Functione548c: ; unreferenced
-	ld bc, vTiles1 - vTiles0
+Copy128Tiles: ; unreferenced
+	ld bc, 128 tiles
 .loop
 	ld a, [de]
 	inc de
@@ -1155,15 +1171,13 @@ Functione548c: ; unreferenced
 
 Intro_DrawBackground:
 	ld b, BG_MAP_WIDTH / 2
-
 .outer_loop
 	push hl
 	ld c, BG_MAP_HEIGHT / 2
 .inner_loop
-	call Functione54ae
+	call Intro_Draw2x2Tiles
 	dec c
 	jr nz, .inner_loop
-
 	pop hl
 	push bc
 	ld bc, 2 * BG_MAP_WIDTH
@@ -1171,10 +1185,9 @@ Intro_DrawBackground:
 	pop bc
 	dec b
 	jr nz, .outer_loop
-
 	ret
 
-Functione54ae:
+Intro_Draw2x2Tiles:
 ; load tile data into a 2x2 section of the bgmap or tilemap
 	push bc
 	push de
