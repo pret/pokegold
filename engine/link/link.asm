@@ -2371,10 +2371,10 @@ CableClubCheckWhichChris:
 LinkCommsBorderGFX:
 INCBIN "gfx/trade/border_tiles.2bpp"
 
-Function29deb: ; unreferenced
-	ld a, BANK(sPartyMail)
+CheckSRAM0Flag: ; unreferenced
+	ld a, BANK("SRAM Bank 0")
 	call OpenSRAM
-	ld d, BANK(sPartyMail)
+	ld d, 0
 	ld b, CHECK_FLAG
 	predef SmallFarFlagAction
 	call CloseSRAM
