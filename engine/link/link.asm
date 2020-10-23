@@ -15,7 +15,7 @@ LinkCommunications:
 	call UpdateSprites
 	call LoadStandardFont
 	call LoadFontsBattleExtra
-	call LoadTradeScreenBorder
+	call LoadTradeScreenBorderGFX
 	call SetTradeRoomBGPals
 	call WaitBGMap
 	hlcoord 3, 8
@@ -99,9 +99,9 @@ Gen2ToGen1LinkComms:
 	ld a, [hl]
 	pop hl
 	and a
-	jp z, Function28a04
+	jp z, ExitLinkCommunications
 	cp $7
-	jp nc, Function28a04
+	jp nc, ExitLinkCommunications
 	ld de, wLinkData
 	ld bc, $1a2
 	call Link_CopyOTData
@@ -161,7 +161,7 @@ Gen2ToGen1LinkComms:
 .done_party
 	ld [de], a
 	ld hl, wTimeCapsulePartyMon1Species
-	call Function285db
+	call Link_ConvertPartyStruct1to2
 	ld a, LOW(wOTPartyMonOT)
 	ld [wUnusedCFFE], a
 	ld a, HIGH(wOTPartyMonOT)
@@ -180,7 +180,7 @@ Gen2ToGen2LinkComms:
 	call ClearLinkData
 	call Link_PrepPartyData_Gen2
 	call FixDataForLinkTransfer
-	call Function29bf4
+	call CheckLinkTimeout_Gen2
 	ld a, [wScriptVar]
 	and a
 	jp z, LinkTimeout
@@ -418,7 +418,7 @@ Gen2ToGen2LinkComms:
 	pop af
 	ld [wOptions], a
 	farcall LoadPokemonData
-	jp Function28a04
+	jp ExitLinkCommunications
 
 .ready_to_trade
 	ld de, MUSIC_ROUTE_30
@@ -772,9 +772,9 @@ Link_PrepPartyData_Gen2:
 ; Fill 5 bytes at wc8f4 with $20
 	ld de, wc8f4
 	ld a, $20
-	call Function285d3
+	call Link_CopyMailPreamble
 
-; Copy all the mail messages to wc9f9
+; Copy all the mail messages to wc8f9
 	ld a, BANK(sPartyMail)
 	call OpenSRAM
 	ld hl, sPartyMail
@@ -788,7 +788,7 @@ Link_PrepPartyData_Gen2:
 	pop bc
 	dec b
 	jr nz, .loop2
-; Copy the mail data to wcabf
+; Copy the mail data to wc9bf
 	ld hl, sPartyMail
 	ld b, PARTY_LENGTH
 .loop3
@@ -838,7 +838,8 @@ Link_PrepPartyData_Gen2:
 	ld [de], a
 	ret
 
-Function285d3:
+Link_CopyMailPreamble:
+; fill 5 bytes with the value of a, starting at de
 	ld c, 5
 .loop
 	ld [de], a
@@ -847,7 +848,7 @@ Function285d3:
 	jr nz, .loop
 	ret
 
-Function285db:
+Link_ConvertPartyStruct1to2:
 	push hl
 	ld d, h
 	ld e, l
@@ -1076,9 +1077,9 @@ Link_FindFirstNonControlCharacter_AllowZero:
 
 InitTradeMenuDisplay:
 	call ClearTilemap
-	call LoadTradeScreenBorder
-	call Function28dcf
-	call Function28a16
+	call LoadTradeScreenBorderGFX
+	call PlaceTradeScreenTextbox
+	call PlaceTradeScreenFooter
 	xor a
 	ld hl, wOtherPlayerLinkMode
 	ld [hli], a
@@ -1144,7 +1145,7 @@ LinkTradeOTPartymonMenuLoop:
 .not_d_up
 	bit D_DOWN_F, a
 	jp z, LinkTradePartiesMenuMasterLoop
-	jp Function289c2
+	jp LinkTradeCheckCancel
 
 LinkTrade_PlayerPartyMenu:
 	xor a
@@ -1177,7 +1178,7 @@ LinkTradePartymonMenuLoop:
 .check_joypad
 	bit A_BUTTON_F, a
 	jr z, .not_a_button
-	jp Function2884a
+	jp LinkTrade_TradeStatsMenu
 
 .not_a_button
 	bit D_DOWN_F, a
@@ -1211,7 +1212,7 @@ LinkTradePartiesMenuMasterLoop:
 	jp z, LinkTradePartymonMenuLoop ; PARTYMON
 	jp LinkTradeOTPartymonMenuLoop  ; OTPARTYMON
 
-Function2884a:
+LinkTrade_TradeStatsMenu:
 	call HideCursor
 	call LoadTilemapToTempTilemap
 	call PlaceHollowCursor
@@ -1307,7 +1308,7 @@ Function2884a:
 	cp $f
 	jp z, InitTradeMenuDisplay
 	ld [wceee], a
-	call Function28a3c
+	call LinkTradePlaceArrow
 	ld c, 100
 	call DelayFrames
 	farcall ValidateOTTrademon
@@ -1372,12 +1373,11 @@ Function2884a:
 	text_far _LinkAbnormalMonText
 	text_end
 
-Function289c2:
+LinkTradeCheckCancel:
 	ld a, [wMenuCursorY]
 	cp 1
 	jp nz, LinkTradePartiesMenuMasterLoop
 	call HideCursor
-Function289cd:
 .loop1
 	ld a, "▶"
 	ldcoord_a 1, 16
@@ -1405,7 +1405,7 @@ Function289cd:
 	ld a, [wOtherPlayerLinkMode]
 	cp $f
 	jr nz, .loop1
-Function28a04:
+ExitLinkCommunications:
 	xor a
 	ld [wd8b7], a
 	xor a
@@ -1417,15 +1417,18 @@ Function28a04:
 	ldh [rSC], a
 	ret
 
-Function28a16:
+PlaceTradeScreenFooter:
+; Fill the screen footer with pattern tile
 	hlcoord 0, 16
-	ld a, "┘"
+	ld a, $7e
 	ld bc, 2 * SCREEN_WIDTH
 	call ByteFill
+; Clear out area for cancel string
 	hlcoord 1, 16
 	ld a, " "
 	ld bc, SCREEN_WIDTH - 2
 	call ByteFill
+; Place the string
 	hlcoord 2, 16
 	ld de, .CancelString
 	jp PlaceString
@@ -1433,7 +1436,8 @@ Function28a16:
 .CancelString:
 	db "CANCEL@"
 
-Function28a3c:
+LinkTradePlaceArrow:
+; Indicates which pokemon the other player has selected to trade
 	ld a, [wOtherPlayerLinkMode]
 	hlcoord 6, 9
 	ld bc, SCREEN_WIDTH
@@ -1453,11 +1457,11 @@ LinkMonStatsScreen:
 	call ClearTilemap
 	call ClearBGPalettes
 	call MaxVolume
-	call LoadTradeScreenBorder
+	call LoadTradeScreenBorderGFX
 	call SetTradeRoomBGPals
 	call WaitBGMap
-	call Function28dcf
-	jp Function28a16
+	call PlaceTradeScreenTextbox
+	jp PlaceTradeScreenFooter
 
 LinkTrade:
 	xor a
@@ -1495,7 +1499,7 @@ LinkTrade:
 	ld b, 3
 	ld c, 7
 	call LinkTextboxAtHL
-	ld de, String28d44
+	ld de, String_TradeCancel
 	hlcoord 12, 8
 	call PlaceString
 	ld a, 8
@@ -1521,12 +1525,12 @@ LinkTrade:
 	call SafeLoadTempTilemapToTilemap
 	pop af
 	bit 1, a
-	jr nz, .asm_28b16
+	jr nz, .canceled
 	ld a, [wMenuCursorY]
 	dec a
-	jr z, .asm_28b34
+	jr z, .try_trade
 
-.asm_28b16
+.canceled
 	ld a, $1
 	ld [wPlayerLinkAction], a
 	hlcoord 0, 12
@@ -1537,15 +1541,16 @@ LinkTrade:
 	ld de, String_TooBadTheTradeWasCanceled
 	call PlaceString
 	call Serial_PrintWaitingTextAndSyncAndExchangeNybble
-	jp Function28d3c
+	jp InitTradeMenuDisplay_Delay
 
-.asm_28b34
+.try_trade
 	ld a, $2
 	ld [wPlayerLinkAction], a
 	call Serial_PrintWaitingTextAndSyncAndExchangeNybble
 	ld a, [wOtherPlayerLinkMode]
 	dec a
-	jr nz, .asm_28b58
+	jr nz, .do_trade
+; If we're here, the other player canceled the trade
 	hlcoord 0, 12
 	ld b, 4
 	ld c, 18
@@ -1553,9 +1558,9 @@ LinkTrade:
 	hlcoord 1, 14
 	ld de, String_TooBadTheTradeWasCanceled
 	call PlaceString
-	jp Function28d3c
+	jp InitTradeMenuDisplay_Delay
 
-.asm_28b58
+.do_trade:
 	ld hl, sPartyMail
 	ld a, [wceed]
 	ld bc, MAIL_STRUCT_LENGTH
@@ -1568,18 +1573,18 @@ LinkTrade:
 	add hl, bc
 	ld a, [wceed]
 	ld c, a
-.asm_28b73
+.copy_mail
 	inc c
 	ld a, c
 	cp PARTY_LENGTH
-	jr z, .asm_28b83
+	jr z, .copy_player_data
 	push bc
 	ld bc, MAIL_STRUCT_LENGTH
 	call CopyBytes
 	pop bc
-	jr .asm_28b73
+	jr .copy_mail
 
-.asm_28b83
+.copy_player_data
 	ld hl, sPartyMail
 	ld a, [wPartyCount]
 	dec a
@@ -1594,10 +1599,14 @@ LinkTrade:
 	ld bc, MAIL_STRUCT_LENGTH
 	call CopyBytes
 	call CloseSRAM
+
+; Buffer player data
+; nickname
 	ld hl, wPlayerName
 	ld de, wPlayerTrademonSenderName
 	ld bc, NAME_LENGTH
 	call CopyBytes
+; species
 	ld a, [wceed]
 	ld hl, wPartySpecies
 	ld b, 0
@@ -1606,12 +1615,14 @@ LinkTrade:
 	ld a, [hl]
 	ld [wPlayerTrademonSpecies], a
 	push af
+; OT name
 	ld a, [wceed]
 	ld hl, wPartyMonOT
 	call SkipNames
 	ld de, wPlayerTrademonOTName
 	ld bc, NAME_LENGTH
 	call CopyBytes
+; ID
 	ld hl, wPartyMon1ID
 	ld a, [wceed]
 	call GetPartyLocation
@@ -1619,6 +1630,7 @@ LinkTrade:
 	ld [wPlayerTrademonID], a
 	ld a, [hl]
 	ld [wPlayerTrademonID + 1], a
+; DVs
 	ld hl, wPartyMon1DVs
 	ld a, [wceed]
 	call GetPartyLocation
@@ -1626,10 +1638,14 @@ LinkTrade:
 	ld [wPlayerTrademonDVs], a
 	ld a, [hl]
 	ld [wPlayerTrademonDVs + 1], a
+
+; Buffer other player data
+; nickname
 	ld hl, wOTPlayerName
 	ld de, wOTTrademonSenderName
 	ld bc, NAME_LENGTH
 	call CopyBytes
+; species
 	ld a, [wceee]
 	ld hl, wOTPartySpecies
 	ld b, 0
@@ -1637,12 +1653,14 @@ LinkTrade:
 	add hl, bc
 	ld a, [hl]
 	ld [wOTTrademonSpecies], a
+; OT name
 	ld a, [wceee]
 	ld hl, wOTPartyMonOT
 	call SkipNames
 	ld de, wOTTrademonOTName
 	ld bc, NAME_LENGTH
 	call CopyBytes
+; ID
 	ld hl, wOTPartyMon1ID
 	ld a, [wceee]
 	call GetPartyLocation
@@ -1650,6 +1668,7 @@ LinkTrade:
 	ld [wOTTrademonID], a
 	ld a, [hl]
 	ld [wOTTrademonID + 1], a
+; DVs
 	ld hl, wOTPartyMon1DVs
 	ld a, [wceee]
 	call GetPartyLocation
@@ -1657,6 +1676,7 @@ LinkTrade:
 	ld [wOTTrademonDVs], a
 	ld a, [hl]
 	ld [wOTTrademonDVs + 1], a
+
 	ld a, [wceed]
 	ld [wCurPartyMon], a
 	ld hl, wPartySpecies
@@ -1665,6 +1685,7 @@ LinkTrade:
 	add hl, bc
 	ld a, [hl]
 	ld [wceed], a
+
 	xor a ; REMOVE_PARTY
 	ld [wPokemonWithdrawDepositParameter], a
 	callfar RemoveMonFromPartyOrBox
@@ -1681,6 +1702,7 @@ LinkTrade:
 	add hl, bc
 	ld a, [hl]
 	ld [wceee], a
+
 	ld c, 100
 	call DelayFrames
 	call ClearTilemap
@@ -1716,7 +1738,7 @@ LinkTrade:
 	ld [wCurPartyMon], a
 	callfar EvolvePokemon
 	call ClearTilemap
-	call LoadTradeScreenBorder
+	call LoadTradeScreenBorderGFX
 	call SetTradeRoomBGPals
 	call WaitBGMap
 
@@ -1768,7 +1790,7 @@ LinkTrade:
 	ld c, 18
 	call LinkTextboxAtHL
 	hlcoord 1, 14
-	ld de, String28d56
+	ld de, String_TradeCompleted
 	call PlaceString
 	ld c, 50
 	call DelayFrames
@@ -1777,12 +1799,12 @@ LinkTrade:
 	jp z, Gen2ToGen1LinkComms
 	jp Gen2ToGen2LinkComms
 
-Function28d3c:
+InitTradeMenuDisplay_Delay:
 	ld c, 100
 	call DelayFrames
 	jp InitTradeMenuDisplay
 
-String28d44:
+String_TradeCancel:
 	db   "TRADE"
 	next "CANCEL@"
 
@@ -1790,7 +1812,7 @@ LinkAskTradeForText:
 	text_far _LinkAskTradeForText
 	text_end
 
-String28d56:
+String_TradeCompleted:
 	db   "Trade completed!@"
 
 String_TooBadTheTradeWasCanceled:
@@ -1836,7 +1858,7 @@ LinkTextboxAtHL:
 	jr nz, .row_loop
 	ret
 
-LoadTradeScreenBorder:
+LoadTradeScreenBorderGFX:
 	ld de, LinkCommsBorderGFX
 	ld hl, vTiles2 tile $76
 	lb bc, BANK(LinkCommsBorderGFX), 9
@@ -1847,7 +1869,7 @@ SetTradeRoomBGPals:
 	call GetSGBLayout
 	jp SetPalettes
 
-Function28dcf:
+PlaceTradeScreenTextbox:
 	hlcoord 0, 0
 	ld b, 6
 	ld c, 18
@@ -1930,19 +1952,20 @@ CheckTimeCapsuleCompatibility:
 	call GetMoveName
 	call CopyName1
 	pop bc
-	call Function29ab3
+	call GetIncompatibleMonName
 	ld a, $2
 	jr .done
 
 .mon_has_mail
-	call Function29ab3
+	call GetIncompatibleMonName
 	ld a, $3
 
 .done
 	ld [wScriptVar], a
 	ret
 
-Function29ab3:
+GetIncompatibleMonName:
+; Calulate which pokemon is incompatible, and get that pokemon's name
 	ld a, [wPartyCount]
 	sub b
 	ld c, a
@@ -2102,7 +2125,7 @@ WaitForLinkedFriend:
 	ld [wScriptVar], a
 	ret
 
-CheckLinkTimeout:
+CheckLinkTimeout_Receptionist:
 	ld a, $1
 	ld [wPlayerLinkAction], a
 	ld hl, wLinkTimeoutFrames
@@ -2123,11 +2146,12 @@ CheckLinkTimeout:
 	ret nz
 	jp Link_ResetSerialRegistersAfterLinkClosure
 
-Function29bf4:
+CheckLinkTimeout_Gen2:
+; if wScriptVar = 0 on exit, link connection is closed
 	ld a, $5
 	ld [wPlayerLinkAction], a
 	ld hl, wLinkTimeoutFrames
-	ld a, $3
+	ld a, 3
 	ld [hli], a
 	xor a
 	ld [hl], a
@@ -2139,33 +2163,39 @@ Function29bf4:
 	call Link_CheckCommunicationError
 	ld a, [wScriptVar]
 	and a
-	jr z, .vblank
-	ld bc, -1
+	jr z, .exit
+
+; Wait for ~$70000 cycles to give the other GB time to be ready
+	ld bc, $ffff
 .wait
 	dec bc
 	ld a, b
 	or c
 	jr nz, .wait
+
+; If other GB is not ready at this point, disconnect due to timeout
 	ld a, [wOtherPlayerLinkMode]
 	cp $5
-	jr nz, .script_var
+	jr nz, .timeout
+
+; Another check to increase reliability
 	ld a, $6
 	ld [wPlayerLinkAction], a
 	ld hl, wLinkTimeoutFrames
-	ld a, $1
+	ld a, 1
 	ld [hli], a
-	ld [hl], $32
+	ld [hl], 50
 	call Link_CheckCommunicationError
 	ld a, [wOtherPlayerLinkMode]
 	cp $6
-	jr z, .vblank
+	jr z, .exit
 
-.script_var
+.timeout
 	xor a
 	ld [wScriptVar], a
 	ret
 
-.vblank
+.exit
 	xor a
 	ldh [hVBlank], a
 	ret
@@ -2174,6 +2204,7 @@ Link_CheckCommunicationError:
 	xor a
 	ldh [hSerialReceivedNewData], a
 	call WaitLinkTransfer
+ 
 	ld hl, wLinkTimeoutFrames
 	ld a, [hli]
 	inc a
@@ -2181,23 +2212,23 @@ Link_CheckCommunicationError:
 	ld a, [hl]
 	inc a
 	jr nz, .load_true
+ 
 	ld b, 10
-
-.acknowledge_serial
 .loop
 	call DelayFrame
 	call LinkDataReceived
 	dec b
 	jr nz, .loop
-
-	xor a
-	jr .load_scriptvar
-
+ 
+	xor a ; FALSE
+	jr .done
+ 
 .load_true
-	ld a, $1
-
-.load_scriptvar
+	ld a, TRUE
+ 
+.done
 	ld [wScriptVar], a
+ 
 	ld hl, wLinkTimeoutFrames
 	xor a
 	ld [hli], a
@@ -2340,10 +2371,11 @@ CableClubCheckWhichChris:
 LinkCommsBorderGFX:
 INCBIN "gfx/trade/border_tiles.2bpp"
 
-Function29deb: ; unreferenced
-	ld a, BANK(sPartyMail)
+CheckSRAM0Flag: ; unreferenced
+; input: hl = unknown flag array in "SRAM Bank 0"
+	ld a, BANK("SRAM Bank 0")
 	call OpenSRAM
-	ld d, FALSE
+	ld d, 0
 	ld b, CHECK_FLAG
 	predef SmallFarFlagAction
 	call CloseSRAM
