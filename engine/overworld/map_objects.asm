@@ -111,8 +111,8 @@ HandleStepType:
 	jr z, .zero
 	ld hl, OBJECT_FLAGS2
 	add hl, bc
-	bit OBJ_FLAGS2_5, [hl]
-	jr nz, .bit5
+	bit FROZEN_F, [hl]
+	jr nz, .frozen
 	cp STEP_TYPE_FROM_MOVEMENT
 	jr z, .one
 	jr .ok3
@@ -121,8 +121,8 @@ HandleStepType:
 	call StepFunction_Reset
 	ld hl, OBJECT_FLAGS2
 	add hl, bc
-	bit OBJ_FLAGS2_5, [hl]
-	jr nz, .bit5
+	bit FROZEN_F, [hl]
+	jr nz, .frozen
 .one
 	call StepFunction_FromMovement
 	ld hl, OBJECT_STEP_TYPE
@@ -137,7 +137,7 @@ HandleStepType:
 	rst JumpTable
 	ret
 
-.bit5
+.frozen
 	ret
 
 HandleObjectAction:
@@ -149,7 +149,7 @@ HandleObjectAction:
 	add hl, bc
 	bit OBJ_FLAGS2_6, [hl]
 	jr nz, SetFacingStanding
-	bit OBJ_FLAGS2_5, [hl]
+	bit FROZEN_F, [hl]
 	jr nz, _CallFrozenObjectAction
 ; use first column (normal)
 	ld de, ObjectActionPairPointers
@@ -1848,7 +1848,7 @@ GetIndexedMovementByte2:
 	ld e, [hl]
 	inc [hl]
 	ld d, 0
-	ld hl, wce8f
+	ld hl, wIndexedMovement2Pointer
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
@@ -2129,7 +2129,7 @@ CopyTempObjectData:
 	ld [hl], -1
 	ret
 
-Function557f::
+UpdateAllObjectsFrozen::
 	ld a, [wVramState]
 	bit 0, a
 	ret z
@@ -2139,7 +2139,7 @@ Function557f::
 	ldh [hMapObjectIndexBuffer], a
 	call DoesObjectHaveASprite
 	jr z, .ok
-	call Function55ef
+	call UpdateObjectFrozen
 .ok
 	ld hl, OBJECT_LENGTH
 	add hl, bc
@@ -2151,23 +2151,23 @@ Function557f::
 	jr nz, .loop
 	ret
 
-Function55a1:
+RespawnPlayerAndOpponent:
 ; called at battle start
-	call Function55d8 ; clear sprites
+	call HideAllObjects
 	ld a, PLAYER
-	call Function55bc ; respawn player
+	call RespawnObject
 	ld a, [wBattleScriptFlags]
 	bit 7, a
-	jr z, .ok
+	jr z, .skip_opponent
 	ldh a, [hLastTalked]
 	and a
-	jr z, .ok
-	call Function55bc ; respawn opponent
-.ok
+	jr z, .skip_opponent
+	call RespawnObject
+.skip_opponent
 	call _UpdateSprites
 	ret
 
-Function55bc:
+RespawnObject:
 	cp NUM_OBJECTS
 	ret nc
 	call GetMapObject
@@ -2181,10 +2181,10 @@ Function55bc:
 	call GetObjectStruct
 	call DoesObjectHaveASprite
 	ret z
-	call Function5606
+	call UpdateRespawnedObjectFrozen
 	ret
 
-Function55d8:
+HideAllObjects:
 	xor a
 	ld bc, wObjectStructs
 .loop
@@ -2200,20 +2200,20 @@ Function55d8:
 	jr nz, .loop
 	ret
 
-Function55ef:
+UpdateObjectFrozen:
 	push bc
-	call Function5660
+	call CheckObjectCoveredByTextbox
 	pop bc
 	jr c, SetFacing_Standing
-	call Function5636
+	call CheckObjectOnScreen
 	jr c, SetFacing_Standing
-	call Function561b
+	call UpdateObjectNextTile
 	farcall HandleFrozenObjectAction ; no need to farcall
 	xor a
 	ret
 
-Function5606:
-	call Function5636
+UpdateRespawnedObjectFrozen:
+	call CheckObjectOnScreen
 	jr c, SetFacing_Standing
 	farcall HandleFrozenObjectAction ; no need to farcall
 	xor a
@@ -2226,7 +2226,7 @@ SetFacing_Standing:
 	scf
 	ret
 
-Function561b:
+UpdateObjectNextTile:
 	push bc
 	ld hl, OBJECT_NEXT_MAP_X
 	add hl, bc
@@ -2242,7 +2242,7 @@ Function561b:
 	farcall UpdateTallGrassFlags ; no need to farcall
 	ret
 
-Function5636:
+CheckObjectOnScreen:
 	ld hl, OBJECT_NEXT_MAP_X
 	add hl, bc
 	ld d, [hl]
@@ -2274,7 +2274,8 @@ Function5636:
 	scf
 	ret
 
-Function5660:
+CheckObjectCoveredByTextbox:
+; Check whether the object fits in the screen width.
 	ld a, [wPlayerBGMapOffsetX]
 	ld d, a
 	ld hl, OBJECT_SPRITE_X_OFFSET
@@ -2286,15 +2287,17 @@ Function5660:
 	add d
 	cp $f0
 	jr nc, .ok1
-	cp $a0
+	cp SCREEN_WIDTH_PX
 	jp nc, .nope
 .ok1
+; Account for objects currently moving left/right.
 	and %00000111
 	ld d, 2
-	cp 4
+	cp TILE_WIDTH / 2
 	jr c, .ok2
 	ld d, 3
 .ok2
+; Convert pixels to tiles.
 	ld a, [hl]
 	srl a
 	srl a
@@ -2304,6 +2307,8 @@ Function5660:
 	sub BG_MAP_WIDTH
 .ok3
 	ldh [hCurSpriteXCoord], a
+
+; Check whether the object fits in the screen height.
 	ld a, [wPlayerBGMapOffsetY]
 	ld e, a
 	ld hl, OBJECT_SPRITE_Y_OFFSET
@@ -2315,15 +2320,17 @@ Function5660:
 	add e
 	cp $f0
 	jr nc, .ok4
-	cp $90
+	cp SCREEN_HEIGHT_PX
 	jr nc, .nope
 .ok4
+; Account for objects currently moving up/down.
 	and %00000111
 	ld e, 2
-	cp 4
+	cp TILE_WIDTH / 2
 	jr c, .ok5
 	ld e, 3
 .ok5
+; Convert pixels to tiles.
 	ld a, [hl]
 	srl a
 	srl a
@@ -2333,6 +2340,8 @@ Function5660:
 	sub BG_MAP_HEIGHT
 .ok6
 	ldh [hCurSpriteYCoord], a
+
+; Account for big objects that are twice as wide and high.
 	ld hl, OBJECT_PALETTE
 	add hl, bc
 	bit BIG_OBJECT_F, [hl]
@@ -2346,6 +2355,7 @@ Function5660:
 .ok7
 	ld a, d
 	ldh [hCurSpriteXPixel], a
+
 .loop
 	ldh a, [hCurSpriteXPixel]
 	ld d, a
@@ -2376,6 +2386,7 @@ Function5660:
 .ok9
 	dec e
 	jr nz, .loop
+
 	and a
 	ret
 
@@ -2384,11 +2395,11 @@ Function5660:
 	ret
 
 HandleNPCStep::
-	call .ResetStepVector
-	call .DoStepsForAllObjects
+	call ResetStepVector
+	call DoStepsForAllObjects
 	ret
 
-.ResetStepVector:
+ResetStepVector:
 	xor a
 	ld [wPlayerStepVectorX], a
 	ld [wPlayerStepVectorY], a
@@ -2397,7 +2408,7 @@ HandleNPCStep::
 	ld [wPlayerStepDirection], a
 	ret
 
-.DoStepsForAllObjects:
+DoStepsForAllObjects:
 	ld bc, wObjectStructs
 	xor a
 .loop
@@ -2423,13 +2434,13 @@ RefreshPlayerSprite::
 	xor a
 	ld [wPlayerTurningDirection], a
 	ld [wPlayerObjectStepFrame], a
-	call .TryResetPlayerAction
+	call TryResetPlayerAction
 	farcall CheckWarpFacingDown
 	call c, SpawnInFacingDown
-	call .SpawnInCustomFacing
+	call SpawnInCustomFacing
 	ret
 
-.TryResetPlayerAction:
+TryResetPlayerAction:
 	ld hl, wPlayerSpriteSetupFlags
 	bit PLAYERSPRITESETUP_RESET_ACTION_F, [hl]
 	jr nz, .ok
@@ -2442,7 +2453,7 @@ RefreshPlayerSprite::
 	ld [wPlayerAction], a
 	ret
 
-.SpawnInCustomFacing:
+SpawnInCustomFacing:
 	ld hl, wPlayerSpriteSetupFlags
 	bit PLAYERSPRITESETUP_CUSTOM_FACING_F, [hl]
 	ret z
@@ -2450,11 +2461,11 @@ RefreshPlayerSprite::
 	and PLAYERSPRITESETUP_FACING_MASK
 	add a
 	add a
-	jr ContinueSpawnFacing
+	jr _ContinueSpawnFacing
 
 SpawnInFacingDown:
 	ld a, DOWN
-ContinueSpawnFacing:
+_ContinueSpawnFacing:
 	ld bc, wPlayerStruct
 	call SetSpriteDirection
 	ret
@@ -2508,34 +2519,34 @@ ResetFollower:
 	cp -1
 	ret z
 	call GetObjectStruct
-	farcall Function5859 ; no need to bankswitch
+	farcall ResetObject ; no need to farcall
 	ld a, -1
 	ld [wObjectFollow_Follower], a
 	ret
 
-SetFlagsForMovement_1::
+FreezeAllOtherObjects::
 	ld a, c
 	call CheckObjectVisibility
 	ret c
 	push bc
-	call Function57f0
+	call FreezeAllObjects
 	pop bc
 	ld hl, OBJECT_FLAGS2
 	add hl, bc
-	res OBJ_FLAGS2_5, [hl]
+	res FROZEN_F, [hl]
 	xor a
 	ret
 
-Function57e4:
+FreezeObject: ; unreferenced
 	call CheckObjectVisibility
 	ret c
 	ld hl, OBJECT_FLAGS2
 	add hl, bc
-	set OBJ_FLAGS2_5, [hl]
+	set FROZEN_F, [hl]
 	xor a
 	ret
 
-Function57f0:
+FreezeAllObjects:
 	ld bc, wObjectStructs
 	xor a
 .loop
@@ -2544,7 +2555,7 @@ Function57f0:
 	jr z, .next
 	ld hl, OBJECT_FLAGS2
 	add hl, bc
-	set OBJ_FLAGS2_5, [hl]
+	set FROZEN_F, [hl]
 .next
 	ld hl, OBJECT_LENGTH
 	add hl, bc
@@ -2556,7 +2567,7 @@ Function57f0:
 	jr nz, .loop
 	ret
 
-_SetFlagsForMovement_2::
+_UnfreezeFollowerObject::
 	ld a, [wObjectFollow_Leader]
 	cp -1
 	ret z
@@ -2574,10 +2585,10 @@ _SetFlagsForMovement_2::
 	call GetObjectStruct
 	ld hl, OBJECT_FLAGS2
 	add hl, bc
-	res OBJ_FLAGS2_5, [hl]
+	res FROZEN_F, [hl]
 	ret
 
-Function582f::
+UnfreezeAllObjects::
 	push bc
 	ld bc, wObjectStructs
 	xor a
@@ -2587,7 +2598,7 @@ Function582f::
 	jr z, .next
 	ld hl, OBJECT_FLAGS2
 	add hl, bc
-	res OBJ_FLAGS2_5, [hl]
+	res FROZEN_F, [hl]
 .next
 	ld hl, OBJECT_LENGTH
 	add hl, bc
@@ -2600,20 +2611,20 @@ Function582f::
 	pop bc
 	ret
 
-Function584e:
+UnfreezeObject: ; unreferenced
 	call CheckObjectVisibility
 	ret c
 	ld hl, OBJECT_FLAGS2
 	add hl, bc
-	res OBJ_FLAGS2_5, [hl]
+	res FROZEN_F, [hl]
 	ret
 
-Function5859::
+ResetObject::
 	ld hl, OBJECT_MAP_OBJECT_INDEX
 	add hl, bc
 	ld a, [hl]
 	cp -1
-	jp z, Function5879 ; a jr would have been appropriate here
+	jp z, .set_standing ; a jr would have been appropriate here
 	push bc
 	call GetMapObject
 	ld hl, MAPOBJECT_MOVEMENT
@@ -2628,7 +2639,7 @@ Function5859::
 	ld [hl], STEP_TYPE_RESET
 	ret
 
-Function5879:
+.set_standing:
 	call GetSpriteDirection
 	rrca
 	rrca

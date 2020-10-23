@@ -1253,7 +1253,7 @@ wPlayerMovement:: db
 wMovementObject:: db
 wMovementDataBank:: db
 wMovementDataAddress:: dw
-wce8f:: dw
+wIndexedMovement2Pointer:: dw
 
 	ds 2
 
