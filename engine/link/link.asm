@@ -180,7 +180,7 @@ Gen2ToGen2LinkComms:
 	call ClearLinkData
 	call Link_PrepPartyData_Gen2
 	call FixDataForLinkTransfer
-	call Function29bf4
+	call CheckLinkTimeout_Gen2
 	ld a, [wScriptVar]
 	and a
 	jp z, LinkTimeout
@@ -772,9 +772,9 @@ Link_PrepPartyData_Gen2:
 ; Fill 5 bytes at wc8f4 with $20
 	ld de, wc8f4
 	ld a, $20
-	call Link_Fill5Bytes
+	call Link_CopyMailPreamble
 
-; Copy all the mail messages to wc9f9
+; Copy all the mail messages to wc8f9
 	ld a, BANK(sPartyMail)
 	call OpenSRAM
 	ld hl, sPartyMail
@@ -788,7 +788,7 @@ Link_PrepPartyData_Gen2:
 	pop bc
 	dec b
 	jr nz, .loop2
-; Copy the mail data to wcabf
+; Copy the mail data to wc9bf
 	ld hl, sPartyMail
 	ld b, PARTY_LENGTH
 .loop3
@@ -838,7 +838,7 @@ Link_PrepPartyData_Gen2:
 	ld [de], a
 	ret
 
-Link_Fill5Bytes:
+Link_CopyMailPreamble:
 ; fill 5 bytes with the value of a, starting at de
 	ld c, 5
 .loop
@@ -1528,7 +1528,7 @@ LinkTrade:
 	jr nz, .canceled
 	ld a, [wMenuCursorY]
 	dec a
-	jr z, .trytrade
+	jr z, .try_trade
 
 .canceled
 	ld a, $1
@@ -1543,7 +1543,7 @@ LinkTrade:
 	call Serial_PrintWaitingTextAndSyncAndExchangeNybble
 	jp InitTradeMenuDisplay_Delay
 
-.trytrade
+.try_trade
 	ld a, $2
 	ld [wPlayerLinkAction], a
 	call Serial_PrintWaitingTextAndSyncAndExchangeNybble
@@ -1573,18 +1573,18 @@ LinkTrade:
 	add hl, bc
 	ld a, [wceed]
 	ld c, a
-.copymail
+.copy_mail
 	inc c
 	ld a, c
 	cp PARTY_LENGTH
-	jr z, .asm_28b83
+	jr z, .copy_player_data
 	push bc
 	ld bc, MAIL_STRUCT_LENGTH
 	call CopyBytes
 	pop bc
-	jr .copymail
+	jr .copy_mail
 
-.asm_28b83
+.copy_player_data
 	ld hl, sPartyMail
 	ld a, [wPartyCount]
 	dec a
@@ -1600,8 +1600,8 @@ LinkTrade:
 	call CopyBytes
 	call CloseSRAM
 
-; Player
-; name
+; Buffer player data
+; nickname
 	ld hl, wPlayerName
 	ld de, wPlayerTrademonSenderName
 	ld bc, NAME_LENGTH
@@ -1639,8 +1639,8 @@ LinkTrade:
 	ld a, [hl]
 	ld [wPlayerTrademonDVs + 1], a
 
-; Other player
-; name
+; Buffer other player data
+; nickname
 	ld hl, wOTPlayerName
 	ld de, wOTTrademonSenderName
 	ld bc, NAME_LENGTH
@@ -1685,6 +1685,7 @@ LinkTrade:
 	add hl, bc
 	ld a, [hl]
 	ld [wceed], a
+
 	xor a ; REMOVE_PARTY
 	ld [wPokemonWithdrawDepositParameter], a
 	callfar RemoveMonFromPartyOrBox
@@ -1701,6 +1702,7 @@ LinkTrade:
 	add hl, bc
 	ld a, [hl]
 	ld [wceee], a
+
 	ld c, 100
 	call DelayFrames
 	call ClearTilemap
@@ -2123,7 +2125,7 @@ WaitForLinkedFriend:
 	ld [wScriptVar], a
 	ret
 
-CheckLinkTimeout:
+CheckLinkTimeout_Receptionist:
 	ld a, $1
 	ld [wPlayerLinkAction], a
 	ld hl, wLinkTimeoutFrames
@@ -2144,7 +2146,7 @@ CheckLinkTimeout:
 	ret nz
 	jp Link_ResetSerialRegistersAfterLinkClosure
 
-Function29bf4:
+CheckLinkTimeout_Gen2:
 ; if wScriptVar = 0 on exit, link connection is closed
 	ld a, $5
 	ld [wPlayerLinkAction], a
@@ -2163,7 +2165,7 @@ Function29bf4:
 	and a
 	jr z, .exit
 
-; Wait for ~$70000 cycles to make sure other GB is ready
+; Wait for ~$70000 cycles to give the other GB time to be ready
 	ld bc, $ffff
 .wait
 	dec bc
@@ -2171,9 +2173,12 @@ Function29bf4:
 	or c
 	jr nz, .wait
 
+; If other GB is not ready at this point, disconnect due to timeout
 	ld a, [wOtherPlayerLinkMode]
 	cp $5
 	jr nz, .timeout
+
+; Another check to increase reliability
 	ld a, $6
 	ld [wPlayerLinkAction], a
 	ld hl, wLinkTimeoutFrames
@@ -2369,7 +2374,7 @@ INCBIN "gfx/trade/border_tiles.2bpp"
 Function29deb: ; unreferenced
 	ld a, BANK(sPartyMail)
 	call OpenSRAM
-	ld d, FALSE
+	ld d, BANK(sPartyMail)
 	ld b, CHECK_FLAG
 	predef SmallFarFlagAction
 	call CloseSRAM
