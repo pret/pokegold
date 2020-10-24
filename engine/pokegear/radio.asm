@@ -119,7 +119,7 @@ PrintRadioLine:
 	ld [wRadioTextDelay], a
 	ret
 
-ReplacePeriodsWithSpaces:
+ReplacePeriodsWithSpaces: ; unreferenced
 	push hl
 	ld b, SCREEN_WIDTH * 2
 .loop
@@ -127,7 +127,6 @@ ReplacePeriodsWithSpaces:
 	cp "."
 	jr nz, .next
 	ld [hl], " "
-
 .next
 	inc hl
 	dec b
@@ -1378,7 +1377,7 @@ CopyRadioTextToRAM:
 	cp TX_FAR
 	jp z, FarCopyRadioText
 	ld de, wRadioText
-	ld bc, SCREEN_WIDTH * 2
+	ld bc, 2 * SCREEN_WIDTH
 	jp CopyBytes
 
 StartRadioStation:

@@ -1723,7 +1723,6 @@ GivePoke::
 	ld d, h
 	ld e, l
 	pop hl
-.otnameloop
 	ld a, [wScriptBank]
 	call FarCopyBytes
 	ld a, [wCurPartyMon]

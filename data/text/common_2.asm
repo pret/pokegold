@@ -160,7 +160,6 @@ _RodNothingText::
 	text "Not even a nibble!"
 	prompt
 
-; unreferenced
 _UnusedNothingHereText::
 	text "Looks like there's"
 	line "nothing here."

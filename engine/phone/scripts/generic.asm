@@ -74,8 +74,8 @@ PhoneScript_GreetPhone_Female:
 	promptbutton
 	end
 
-; Huey
 Phone_GenericCall_Male_SkipMon:
+; only used by HueyPhoneCalleeScript and HueyPhoneCallerScript
 	special RandomPhoneMon
 	scall PhoneScript_Random2
 	ifequal 0, Phone_LookingAwesome_Male_SkipMon
@@ -83,8 +83,7 @@ Phone_GenericCall_Male_SkipMon:
 	promptbutton
 	sjump PhoneScript_SeeYouLater
 
-; unused
-Phone_GenericCall_Female_SkipMon:
+Phone_GenericCall_Female_SkipMon: ; unreferenced
 	special RandomPhoneMon
 	scall PhoneScript_Random2
 	ifequal 0, Phone_DressedUp_Female_SkipMon
@@ -92,13 +91,11 @@ Phone_GenericCall_Female_SkipMon:
 	promptbutton
 	sjump PhoneScript_ByeBye
 
-; Huey
 Phone_LookingAwesome_Male_SkipMon:
 	writetext PhoneMaleLookingAwesomeText
 	promptbutton
 	sjump PhoneScript_ByeBye
 
-; unused
 Phone_DressedUp_Female_SkipMon:
 	writetext PhoneFemaleDressedUpText
 	promptbutton

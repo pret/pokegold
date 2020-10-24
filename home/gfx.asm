@@ -137,7 +137,7 @@ Request2bpp::
 	cp TILES_PER_CYCLE
 	jr nc, .cycle
 
-	ld [wRequested2bpp], a
+	ld [wRequested2bppSize], a
 	call DelayFrame
 
 	pop af
@@ -149,7 +149,7 @@ Request2bpp::
 
 .cycle
 	ld a, TILES_PER_CYCLE
-	ld [wRequested2bpp], a
+	ld [wRequested2bppSize], a
 
 	call DelayFrame
 	ld a, c
@@ -182,7 +182,7 @@ Request1bpp::
 	cp TILES_PER_CYCLE
 	jr nc, .cycle
 
-	ld [wRequested1bpp], a
+	ld [wRequested1bppSize], a
 	call DelayFrame
 
 	pop af
@@ -194,7 +194,7 @@ Request1bpp::
 
 .cycle
 	ld a, TILES_PER_CYCLE
-	ld [wRequested1bpp], a
+	ld [wRequested1bppSize], a
 
 	call DelayFrame
 	ld a, c

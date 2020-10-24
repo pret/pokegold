@@ -160,7 +160,7 @@ DayCareAskDepositPokemon:
 	scf
 	ret
 
-.DaycareDummyText:
+.DaycareDummyText: ; unreferenced
 	text_far _DaycareDummyText
 	text_end
 

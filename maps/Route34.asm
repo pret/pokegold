@@ -372,8 +372,7 @@ TrainerCooltrainerfKate:
 	closetext
 	end
 
-Route34IlexForestSign:
-; unused
+Route34IlexForestSign: ; unreferenced
 	jumptext Route34IlexForestSignText
 
 Route34Sign:

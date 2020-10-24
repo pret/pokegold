@@ -284,7 +284,6 @@ FlashFunction:
 	ld a, [wTimeOfDayPalset]
 	cp DARKNESS_PALSET
 	jr nz, .notadarkcave
-.useflash
 	call UseFlash
 	ld a, $81
 	ret
@@ -1391,7 +1390,7 @@ HasRockSmash:
 	ld d, ROCK_SMASH
 	call CheckPartyMove
 	jr nc, .yes
-.no
+; no
 	ld a, 1
 	jr .done
 .yes
@@ -1596,7 +1595,7 @@ RodNothingText:
 	text_far _RodNothingText
 	text_end
 
-UnusedNothingHereText: ; unused
+UnusedNothingHereText: ; unreferenced
 	text_far _UnusedNothingHereText
 	text_end
 

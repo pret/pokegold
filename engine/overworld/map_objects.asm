@@ -2823,18 +2823,17 @@ InitSprites:
 
 .InitSprite:
 	xor a
-.skip1
 	ld hl, OBJECT_FLAGS2
 	add hl, bc
 	ld e, [hl]
 	bit OBJ_FLAGS2_7, e
-	jr z, .skip2
+	jr z, .not_priority
 	or PRIORITY
-.skip2
+.not_priority
 	bit USE_OBP1_F, e
-	jr z, .skip3
+	jr z, .not_obp_num
 	or OBP_NUM
-.skip3
+.not_obp_num
 	ld hl, OBJECT_PALETTE
 	add hl, bc
 	ld d, a
@@ -2844,9 +2843,9 @@ InitSprites:
 	ld d, a
 	xor a
 	bit OVERHEAD_F, e
-	jr z, .skip4
+	jr z, .not_overhead
 	or PRIORITY
-.skip4
+.not_overhead
 	ldh [hCurSpriteOAMFlags], a
 	ld hl, OBJECT_SPRITE_TILE
 	add hl, bc

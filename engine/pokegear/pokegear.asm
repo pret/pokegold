@@ -1520,7 +1520,7 @@ RadioChannels:
 	jr z, .johto
 	cp KANTO_LANDMARK
 	jr c, .johto
-.kanto
+; kanto
 	and a
 	ret
 
@@ -2216,7 +2216,7 @@ FlyMap:
 ; The first 46 locations are part of Johto. The rest are in Kanto.
 	cp KANTO_LANDMARK
 	jr nc, .KantoFlyMap
-.JohtoFlyMap:
+; Johto fly map
 ; Note that .NoKanto should be modified in tandem with this branch
 	push af
 	ld a, JOHTO_FLYPOINT ; first Johto flypoint
@@ -2512,7 +2512,7 @@ Pokedex_GetArea:
 	jr z, .johto
 	cp KANTO_LANDMARK
 	jr c, .johto
-.kanto
+; kanto
 	ld a, [wTownMapCursorLandmark]
 	and a
 	jr z, .clear

@@ -762,7 +762,7 @@ ELIF DEF(_SILVER)
 	dbsprite  3, -2,  0,  0, $1c, 0
 	dbsprite  4, -2,  0,  0, $1e, 0
 
-.OAMData_GSIntroLugia3:
+.OAMData_GSIntroLugia3: ; unreferenced
 	db 17
 	dbsprite -5, -2,  0,  0, $3c, 0
 	dbsprite -5,  0,  0,  0, $3e, 0
@@ -782,7 +782,7 @@ ELIF DEF(_SILVER)
 	dbsprite  3, -1,  0,  0, $56, 0
 	dbsprite  4, -1,  0,  0, $58, 0
 
-.OAMData_GSIntroLugia4:
+.OAMData_GSIntroLugia4: ; unreferenced
 	db 17
 	dbsprite -5, -2,  0,  0, $5a, 0
 	dbsprite -5,  0,  0,  0, $5c, 0
@@ -802,8 +802,7 @@ ELIF DEF(_SILVER)
 	dbsprite  3, -1,  0,  0, $74, 0
 	dbsprite  4, -1,  0,  0, $76, 0
 
-; unused / copy of intro4
-.OAMData_GSIntroLugia5:
+.OAMData_GSIntroLugia5: ; unreferenced
 	db 17
 	dbsprite -5, -2,  0,  0, $5a, 0
 	dbsprite -5,  0,  0,  0, $5c, 0

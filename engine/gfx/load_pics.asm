@@ -69,7 +69,6 @@ GetFrontpic:
 	cp EGG + 1
 	ret nc
 
-.is_a_pokemon
 	push de
 	call GetBaseData
 	ld a, [wBasePicSize]
@@ -133,7 +132,6 @@ GetMonBackpic:
 	cp EGG + 1
 	ret nc
 
-.is_a_pokemon
 	push de
 	ld a, BANK(sDecompressBuffer)
 	call OpenSRAM

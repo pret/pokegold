@@ -1520,7 +1520,7 @@ PC_Mart_BallsPocketMenuHeader:
 	dba PlaceMenuItemQuantity
 	dba UpdateItemDescription
 
-PackNoItemText:
+PackNoItemText: ; unreferenced
 	text_far _PackNoItemText
 	text_end
 
@@ -1560,7 +1560,7 @@ PackEmptyText:
 	text_far _PackEmptyText
 	text_end
 
-YouCantUseItInABattleText:
+YouCantUseItInABattleText: ; unreferenced
 	text_far _YouCantUseItInABattleText
 	text_end
 

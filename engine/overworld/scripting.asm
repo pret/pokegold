@@ -1518,8 +1518,6 @@ Script_getcurlandmarkname:
 	ld a, [wMapNumber]
 	ld c, a
 	call GetWorldMapLocation
-
-ConvertLandmarkToText:
 	ld e, a
 	farcall GetLandmarkName
 	ld de, wStringBuffer1
@@ -2059,8 +2057,7 @@ Script_warpcheck:
 	farcall EnableEvents
 	ret
 
-Script_enableevents:
-; unused
+Script_enableevents: ; unreferenced
 	farcall EnableEvents
 	ret
 

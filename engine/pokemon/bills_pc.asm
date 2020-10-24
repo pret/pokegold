@@ -101,7 +101,7 @@ _DepositPKMN:
 	ld [wJumptableIndex], a
 	ret
 
-.go_back
+.go_back ; unreferenced
 	ld hl, wJumptableIndex
 	dec [hl]
 	ret
@@ -343,7 +343,7 @@ _WithdrawPKMN:
 	ld [wJumptableIndex], a
 	ret
 
-.unused
+.go_back ; unreferenced
 	ld hl, wJumptableIndex
 	dec [hl]
 	ret
@@ -594,7 +594,7 @@ _MovePKMNWithoutMail:
 	ld [wJumptableIndex], a
 	ret
 
-.unused
+.go_back ; unreferenced
 	ld hl, wJumptableIndex
 	dec [hl]
 	ret
@@ -2200,7 +2200,7 @@ PCString_ReleasedPKMN: db "Released <PK><MN>.@"
 PCString_Bye: db "Bye,@"
 PCString_Stored: db "Stored @"
 PCString_Got: db "Got @"
-PCString_Non: db "Non.@"
+PCString_Non: db "Non.@" ; unreferenced
 PCString_BoxFull: db "The BOX is full.@"
 PCString_PartyFull: db "The party's full!@"
 PCString_NoReleasingEGGS: db "No releasing EGGS!@"
@@ -2246,16 +2246,16 @@ _ChangeBox_MenuHeader:
 	dw .MenuData
 	db 1 ; default option
 
-.MenuData
+.MenuData:
 	db SCROLLINGMENU_CALL_FUNCTION3_NO_SWITCH | SCROLLINGMENU_ENABLE_FUNCTION3 ; flags
 	db 4, 0 ; rows, columns
 	db SCROLLINGMENU_ITEMS_NORMAL ; item format
-	dba .boxes
-	dba .boxnames
+	dba .Boxes
+	dba .PrintBoxNames
 	dba NULL
 	dba BillsPC_PrintBoxCountAndCapacity
 
-.boxes
+.Boxes:
 	db NUM_BOXES
 x = 1
 rept NUM_BOXES
@@ -2264,7 +2264,7 @@ x = x + 1
 endr
 	db -1
 
-.boxnames
+.PrintBoxNames:
 	push de
 	ld a, [wMenuSelection]
 	dec a

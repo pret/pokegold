@@ -1644,7 +1644,7 @@ HandleWeather:
 	cp USING_EXTERNAL_CLOCK
 	jr z, .enemy_first
 
-.player_first
+; player first
 	call SetPlayerTurn
 	call .SandstormDamage
 	call SetEnemyTurn
@@ -2609,7 +2609,7 @@ AskUseNextPokemon:
 ForcePlayerMonChoice:
 	call EmptyBattleTextbox
 	call LoadStandardMenuHeader
-	call SetUpBattlePartyMenu_NoLoop
+	call SetUpBattlePartyMenu
 	call ForcePickPartyMonInBattle
 	ld a, [wLinkMode]
 	cp LINK_COLOSSEUM
@@ -2681,9 +2681,8 @@ PlayerPartyMonEntrance:
 	call SetPlayerTurn
 	jp SpikesDamage
 
-SetUpBattlePartyMenu_NoLoop:
+SetUpBattlePartyMenu:
 	call ClearBGPalettes
-SetUpBattlePartyMenu: ; switch to fullscreen menu?
 	farcall LoadPartyMenuGFX
 	farcall InitPartyMenuWithCancel
 	farcall InitPartyMenuGFX
@@ -3296,7 +3295,7 @@ OfferSwitch:
 	ld a, [wMenuCursorY]
 	dec a
 	jr nz, .said_no
-	call SetUpBattlePartyMenu_NoLoop
+	call SetUpBattlePartyMenu
 	call PickSwitchMonInBattle
 	jr c, .canceled_switch
 	ld a, [wCurBattleMon]
@@ -8005,7 +8004,7 @@ CheckPayDay:
 	call StdBattleTextbox
 	ret
 
-PlayerPickedUpPayDayMoney:
+PlayerPickedUpPayDayMoney: ; unreferenced
 	text_far _PlayerPickedUpPayDayMoney
 	text_end
 
@@ -8180,7 +8179,6 @@ ReadAndPrintLinkBattleRecord:
 	lb bc, 2, 4
 	call PrintNum
 
-.quit
 	ret
 
 .PrintZerosIfNoSaveFileExists:
@@ -8556,14 +8554,15 @@ InitBattleDisplay:
 	call OpenSRAM
 
 	ld hl, sDecompressScratch
-	ld bc, sScratchAttrmap - sDecompressScratch
+	ld bc, BG_MAP_WIDTH * BG_MAP_HEIGHT
 	ld a, " "
 	call ByteFill
 
 	ld de, sDecompressScratch
 	hlbgcoord 0, 0
-	lb bc, BANK(.BlankBGMap), $40
+	lb bc, BANK(@), (BG_MAP_WIDTH * BG_MAP_HEIGHT) / LEN_2BPP_TILE
 	call Request2bpp
+
 	call CloseSRAM
 	ret
 

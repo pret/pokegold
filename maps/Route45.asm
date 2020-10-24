@@ -386,7 +386,7 @@ CooltrainerfKellyAfterBattleText:
 	cont "to harm #MON."
 	done
 
-Route45DummyText:
+Route45DummyText: ; unreferenced
 	text "I'm pretty good at"
 	line "#MON too."
 	done

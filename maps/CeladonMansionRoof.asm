@@ -5,10 +5,10 @@ CeladonMansionRoof_MapScripts:
 
 	def_callbacks
 
-CeladonMansionRoofGraffiti:
-	jumptext CeladonMansionRoofGraffitiText
+CeladonMansionRoofSign: ; unreferenced
+	jumptext CeladonMansionRoofSignText
 
-CeladonMansionRoofGraffitiText:
+CeladonMansionRoofSignText:
 	text "I KNOW EVERYTHING!"
 	done
 

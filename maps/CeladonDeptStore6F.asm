@@ -93,8 +93,7 @@ CeladonDeptStore6FVendingMachine:
 CeladonDeptStore6FDirectory:
 	jumptext CeladonDeptStore6FDirectoryText
 
-; unused
-CeladonDeptStore6FElevatorButton:
+CeladonDeptStore6FElevatorButton: ; unreferenced
 	jumpstd ElevatorButtonScript
 
 CeladonVendingText:

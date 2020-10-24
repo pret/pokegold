@@ -148,7 +148,7 @@ CmdQueues_IncAnonJumptableIndex:
 	inc [hl]
 	ret
 
-CmdQueues_DecAnonJumptableIndex:
+CmdQueues_DecAnonJumptableIndex: ; unreferenced
 	ld hl, CMDQUEUE_05
 	add hl, bc
 	dec [hl]
@@ -163,7 +163,7 @@ CmdQueue_Type1:
 
 CmdQueue_Type4:
 	call CmdQueues_AnonJumptable
-	; anonymous dw
+.anon_dw
 	dw .zero
 	dw .one
 

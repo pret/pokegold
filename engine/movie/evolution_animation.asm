@@ -65,7 +65,6 @@ EvolutionAnimation:
 	ld c, TRUE
 	call .GetSGBLayout
 
-.AnimationSequence:
 	call ClearJoypad
 	lb bc, 1, 16 ; flash b times, wait c frames in between
 .loop

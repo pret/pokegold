@@ -105,8 +105,8 @@ Gen2ToGen1LinkComms:
 	ld de, wLinkData
 	ld bc, $1a2
 	call Link_CopyOTData
-	ld de, wPlayerTrademonSpecies
-	ld hl, wTimeCapsulePartyMon1Species
+	ld de, wPlayerTrademon
+	ld hl, wTimeCapsulePlayerData
 	ld c, 2
 .loop
 	ld a, [de]
@@ -160,7 +160,7 @@ Gen2ToGen1LinkComms:
 
 .done_party
 	ld [de], a
-	ld hl, wTimeCapsulePartyMon1Species
+	ld hl, wTimeCapsulePlayerData
 	call Link_ConvertPartyStruct1to2
 	ld a, LOW(wOTPartyMonOT)
 	ld [wUnusedCFFE], a
@@ -251,8 +251,8 @@ Gen2ToGen2LinkComms:
 	ld de, wLinkData
 	ld bc, $1b9
 	call Link_CopyOTData
-	ld de, wPlayerTrademonSpecies
-	ld hl, wLinkPlayerPartyMon1Species
+	ld de, wPlayerTrademon
+	ld hl, wLinkPlayerData
 	ld c, 2
 .loop1
 	ld a, [de]
@@ -525,7 +525,7 @@ FixDataForLinkTransfer:
 	ld [hli], a
 	dec b
 	jr nz, .loop3
-	ld hl, wTimeCapsulePartyMon1 - 1 + PARTY_LENGTH
+	ld hl, wTimeCapsulePlayerData - 1 + PARTY_LENGTH
 	ld de, wc512
 	lb bc, 0, 0
 .loop4

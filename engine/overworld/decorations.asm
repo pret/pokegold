@@ -932,7 +932,7 @@ GetDecorationID:
 	pop hl
 	ret
 
-SetAllDecorationFlags:
+SetAllDecorationFlags: ; unreferenced
 	ld hl, DecorationIDs
 .loop
 	ld a, [hli]

@@ -497,8 +497,6 @@ EnterMapWarp::
 	ld a, c
 	cp TILESET_POKECENTER
 	ret nz
-
-.pokecenter
 	ld a, [wPrevMapGroup]
 	ld [wLastSpawnMapGroup], a
 	ld a, [wPrevMapNumber]

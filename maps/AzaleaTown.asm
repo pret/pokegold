@@ -138,8 +138,7 @@ AzaleaTownSlowpokeScript:
 	closetext
 	end
 
-UnusedWoosterScript:
-; unused
+UnusedWoosterScript: ; unreferenced
 	faceplayer
 	opentext
 	writetext WoosterText

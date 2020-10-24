@@ -308,7 +308,7 @@ Function95a0: ; unreferenced
 	call LoadHLPaletteIntoDE
 	jr .GotPalette
 
-.GetMonPalette:
+.GetMonPalette: ; unreferenced
 	ld bc, wTempMonDVs
 	call GetPlayerOrMonPalettePointer
 	call LoadPalette_White_Col1_Col2_Black

@@ -158,7 +158,7 @@ CheckPokerusTick::
 	xor a
 	ret
 
-SetUnusedTwoDayTimer:
+SetUnusedTwoDayTimer: ; unreferenced
 	ld a, 2
 	ld hl, wUnusedTwoDayTimer
 	ld [hl], a
@@ -263,7 +263,7 @@ UpdateTimeRemaining:
 	scf
 	ret
 
-GetSecondsSinceIfLessThan60:
+GetSecondsSinceIfLessThan60: ; unreferenced
 	ld a, [wDaysSince]
 	and a
 	jr nz, GetTimeElapsed_ExceedsUnitLimit
@@ -285,7 +285,7 @@ GetMinutesSinceIfLessThan60:
 	ld a, [wMinutesSince]
 	ret
 
-GetHoursSinceIfLessThan24:
+GetHoursSinceIfLessThan24: ; unreferenced
 	ld a, [wDaysSince]
 	and a
 	jr nz, GetTimeElapsed_ExceedsUnitLimit
@@ -304,7 +304,7 @@ CalcDaysSince:
 	xor a
 	jr _CalcDaysSince
 
-CalcHoursDaysSince:
+CalcHoursDaysSince: ; unreferenced
 	inc hl
 	xor a
 	jr _CalcHoursDaysSince
@@ -378,7 +378,7 @@ CopyDayToHL:
 	ld [hl], a
 	ret
 
-CopyDayHourToHL:
+CopyDayHourToHL: ; unreferenced
 	ld a, [wCurDay]
 	ld [hli], a
 	ldh a, [hHours]
