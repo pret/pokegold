@@ -7486,7 +7486,8 @@ HandleSafariAngerEatingStatus: ; unreferenced
 	jr .finish
 
 .angry
-	dec hl ; wSafariMonAngerCount
+	dec hl
+	assert wSafariMonEating - 1 == wSafariMonAngerCount
 	ld a, [hl]
 	and a
 	ret z

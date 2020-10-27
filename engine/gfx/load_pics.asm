@@ -137,7 +137,8 @@ GetMonBackpic:
 	call OpenSRAM
 
 	; These are assumed to be at the same address in their respective banks.
-	ld hl, PokemonPicPointers ; UnownPicPointers
+	assert PokemonPicPointers == UnownPicPointers
+	ld hl, PokemonPicPointers
 	ld a, [wCurPartySpecies]
 	ld d, BANK(PokemonPicPointers)
 	cp UNOWN

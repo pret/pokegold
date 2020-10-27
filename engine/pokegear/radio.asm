@@ -312,6 +312,7 @@ OaksPKMNTalk8:
 	; so no need for a retry loop
 	call Random
 	maskbits NUM_OAKS_POKEMON_TALK_ADVERBS
+	assert_power_of_2 NUM_OAKS_POKEMON_TALK_ADVERBS
 	ld e, a
 	ld d, 0
 	ld hl, .Adverbs
@@ -411,6 +412,7 @@ OaksPKMNTalk9:
 	; so no need for a retry loop
 	call Random
 	maskbits NUM_OAKS_POKEMON_TALK_ADJECTIVES
+	assert_power_of_2 NUM_OAKS_POKEMON_TALK_ADJECTIVES
 	ld e, a
 	ld d, 0
 	ld hl, .Adjectives
@@ -1090,6 +1092,7 @@ PeoplePlaces5:
 	; so no need for a retry loop
 	call Random
 	maskbits NUM_PNP_PEOPLE_ADJECTIVES
+	assert_power_of_2 NUM_PNP_PEOPLE_ADJECTIVES
 	ld e, a
 	ld d, 0
 	ld hl, .Adjectives
@@ -1223,6 +1226,7 @@ PeoplePlaces7:
 	; so no need for a retry loop
 	call Random
 	maskbits NUM_PNP_PLACES_ADJECTIVES
+	assert_power_of_2 NUM_PNP_PLACES_ADJECTIVES
 	ld e, a
 	ld d, 0
 	ld hl, .Adjectives
