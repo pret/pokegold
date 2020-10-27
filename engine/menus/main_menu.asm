@@ -132,7 +132,7 @@ MainMenu_GetWhichMenu:
 	ld a, BANK(sNumDailyMysteryGiftPartnerIDs)
 	call OpenSRAM
 	ld a, [sNumDailyMysteryGiftPartnerIDs]
-	cp -1
+	cp -1 ; locked?
 	call CloseSRAM
 	ld a, MAINMENU_CONTINUE
 	ret z

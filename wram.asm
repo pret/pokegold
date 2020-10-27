@@ -569,20 +569,15 @@ ENDU
 
 NEXTU
 ; mystery gift data
-UNION
-wMysteryGiftPartyTemp:: ds (1 + 1 + NUM_MOVES) * PARTY_LENGTH
-
-NEXTU
 wMysteryGiftStaging:: ds 80
-ENDU
 
-wMysteryGiftTrainerData:: ds (1 + 1 + NUM_MOVES) * PARTY_LENGTH + 2
-wMysteryGiftTrainerDataEnd::
+wMysteryGiftTrainer:: ds 1 + (1 + 1 + NUM_MOVES) * PARTY_LENGTH + 1
+wMysteryGiftTrainerEnd::
 
 	ds 138
 
 wMysteryGiftPartnerData::
-wc800:: db
+wMysteryGiftGameVersion:: db
 wMysteryGiftPartnerID:: dw
 wMysteryGiftPartnerName:: ds NAME_LENGTH
 wMysteryGiftPartnerDexCaught:: db
@@ -636,9 +631,9 @@ wCreditsBlankFrame2bppEnd::
 
 NEXTU
 ; mystery gift data
-wc900:: db
-wc901:: db
-wc902:: db
+wUnusedMysteryGiftStagedDataLength:: db
+wMysteryGiftMessageCount:: db
+wMysteryGiftStagedDataLength:: db
 
 NEXTU
 ; link

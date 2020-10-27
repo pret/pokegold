@@ -45,8 +45,8 @@ StagePartyDataForMysteryGift:
 .party_end
 	ld a, -1
 	ld [de], a
-	ld a, $26
-	ld [wc900], a
+	ld a, wMysteryGiftTrainerEnd - wMysteryGiftTrainer
+	ld [wUnusedMysteryGiftStagedDataLength], a
 	jp CloseSRAM
 
 InitMysteryGiftLayout:
