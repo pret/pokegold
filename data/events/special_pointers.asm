@@ -60,8 +60,8 @@ SpecialsPointers::
 	add_special UnownPuzzle
 	add_special SlotMachine
 	add_special CardFlip
-	add_special DummyNonfunctionalGameCornerGame
-	add_special ClearBGPalettesBufferScreen
+	add_special UnusedDummyGame ; unused
+	add_special ClearBGPalettesBufferScreen ; unused
 	add_special FadeOutPalettes
 	add_special FadeBlackQuickly
 	add_special FadeInPalettes
@@ -69,21 +69,21 @@ SpecialsPointers::
 	add_special ReloadSpritesNoPalettes, 2
 	add_special ClearBGPalettes
 	add_special UpdateTimePals
-	add_special ClearTilemap
+	add_special ClearTilemap ; unused as special
 	add_special UpdateSprites
 	add_special UpdatePlayerSprite
 	add_special GameCornerPrizeMonCheckDex
-	add_special UnusedSetSeenMon
+	add_special UnusedSetSeenMon ; unused
 	add_special WaitSFX, 3
 	add_special PlayMapMusic
 	add_special RestartMapMusic
 	add_special HealMachineAnim
 	add_special SurfStartStep
-	add_special FindPartyMonAboveLevel
-	add_special FindPartyMonAtLeastThatHappy
+	add_special FindPartyMonAboveLevel ; unused
+	add_special FindPartyMonAtLeastThatHappy ; unused
 	add_special FindPartyMonThatSpecies
 	add_special FindPartyMonThatSpeciesYourTrainerID
-	add_special UnusedCheckUnusedTwoDayTimer
+	add_special UnusedCheckUnusedTwoDayTimer ; unused
 	add_special DayCareMon1
 	add_special DayCareMon2
 	add_special SelectRandomBugContestContestants
@@ -127,4 +127,4 @@ SpecialsPointers::
 	add_special InitialSetDSTFlag
 	add_special InitialClearDSTFlag
 	add_special MrChrono
-	add_special DummySpecial_c389
+	add_special UnusedDummySpecial ; unused

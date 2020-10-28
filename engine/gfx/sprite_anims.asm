@@ -1066,7 +1066,7 @@ AnimSeq_SlotsGolem:
 
 AnimSeq_SlotsChansey:
 	callfar Slots_AnimateChansey
-	ld hl, wce64
+	ld hl, wSlotsDelay
 	ld a, [hl]
 	cp $2
 	ret nz
@@ -1091,7 +1091,7 @@ AnimSeq_SlotsChanseyEgg:
 	jr c, .move_right
 	call DeinitializeSprite
 	ld a, $4
-	ld [wce64], a
+	ld [wSlotsDelay], a
 	ld de, SFX_PLACE_PUZZLE_PIECE_DOWN
 	call PlaySFX
 	ret

@@ -299,7 +299,7 @@ wHallOfFameTemp:: hall_of_fame wHallOfFameTemp
 
 NEXTU
 ; link engine data
-wLink_c508:: ds 10
+wc508:: ds 10
 wc512:: ds 10
 
 NEXTU
@@ -467,7 +467,7 @@ NEXTU
 wGameboyPrinterRAM::
 wGameboyPrinter2bppSource:: ds 40 tiles
 wGameboyPrinter2bppSourceEnd::
-wc980:: db
+wUnusedGameboyPrinterSafeCancelFlag:: db
 wPrinterRowIndex:: db
 
 ; Printer data
@@ -1085,12 +1085,6 @@ wNamedObjectTypeBuffer:: db
 wJumptableIndex:: db
 
 UNION
-; unidentified
-wce64:: db
-wce65:: db
-wce66:: db
-
-NEXTU
 ; intro data
 wIntroSceneFrameCounter:: db
 wIntroSceneTimer:: db
@@ -1111,11 +1105,13 @@ NEXTU
 wPrevDexEntryJumptableIndex:: db
 wPrevDexEntryBackup::
 wPokedexStatus:: db
+wUnusedPokedexByte:: db
 
 NEXTU
 ; pokegear
 wPokegearCard:: db
 wPokegearMapRegion:: db
+wUnusedPokegearByte:: db
 
 NEXTU
 ; pack
@@ -1130,10 +1126,20 @@ wTrainerCardBadgeTileID:: db
 wTrainerCardBadgeAttributes:: db
 
 NEXTU
-; card flip data
+; slot machine
+wSlotsDelay:: db
+	ds 1
+wUnusedSlotReelIconDelay:: db
+
+NEXTU
+; card flip
 wCardFlipCursorY:: db
 wCardFlipCursorX:: db
 wCardFlipWhichCard:: db
+
+NEXTU
+; dummy game
+wDummyGameCardChoice:: db
 
 NEXTU
 ; magnet train
@@ -1146,6 +1152,16 @@ NEXTU
 wHoldingUnownPuzzlePiece:: db
 wUnownPuzzleCursorPosition:: db
 wUnownPuzzleHeldPiece:: db
+
+NEXTU
+; battle transitions
+wBattleTransitionCounter:: db
+wBattleTransitionSineWaveOffset::
+wBattleTransitionSpinQuadrant:: db
+
+NEXTU
+; bill's pc
+wUnusedBillsPCData:: ds 3
 
 NEXTU
 ; debug mon color picker
@@ -1165,9 +1181,12 @@ wFrameCounter::
 wMomBankDigitCursorPosition::
 wNamingScreenLetterCase::
 wHallOfFameMonCounter::
-wSlotsDelay::
+wTradeDialog::
 	db
-wPrinterQueueLength:: db
+wFrameCounter2::
+wPrinterQueueLength::
+wUnusedSGB1eColorOffset::
+	db
 ENDU
 
 wRequested2bppSize:: db
@@ -1317,7 +1336,7 @@ wOverworldDelay:: db
 wTextDelayFrames:: db
 wVBlankOccurred:: db
 
-wceeb:: db
+wUnusedInitializedToZero:: db
 
 wDefaultSpawnpoint:: db
 
@@ -1415,6 +1434,11 @@ wBankOfBoxToPrint:: db
 wWhichBoxToPrint:: db
 
 NEXTU
+; Unown printing
+wPrintedUnownTileSource:: ds 1 tiles
+wPrintedUnownTileDest:: ds 1 tiles
+
+NEXTU
 ; trainer HUD data
 	ds 1
 wPlaceBallsDirection:: db
@@ -1469,11 +1493,7 @@ wceed:: db
 wceee:: db
 wceef:: db
 
-	ds 13
-
-wcefd:: ds 1
-
-	ds 43
+	ds 57
 
 UNION
 ; trainer data
@@ -1706,7 +1726,7 @@ wMailboxItems:: ds MAILBOX_CAPACITY
 ENDU
 
 wListPointer:: dw
-wUnusedCFFE:: dw
+wUnusedNamesPointer:: dw
 
 
 SECTION "WRAM 1", WRAMX
@@ -1774,7 +1794,7 @@ wPrevMapNumber:: db
 
 	ds 17
 
-wUnusedD05A:: db
+wUnusedAddOutdoorSpritesReturnValue:: db
 
 wBGMapAnchor:: dw
 
@@ -1857,9 +1877,8 @@ wEvolutionPicOffset:: db
 wEvolutionCanceled:: db
 
 NEXTU
-
+; link
 	ds 9
-
 wd0dc:: ds 1
 
 NEXTU
@@ -2328,15 +2347,17 @@ wEventFlags:: flag_array NUM_EVENTS
 
 wd8b7:: db
 
-wGameTimerPause:: db
+wGameTimerPaused::
+; bit 7: game timer paused
+	db
 
 	ds 1
 
-wd8ba::
+wJoypadDisable::
 ; bits 4, 6, or 7 can be used to disable joypad input
 ; bit 4
-; bit 6: mon fainted?
-; bit 7: SGB flag?
+; bit 6: ongoing mon faint animation
+; bit 7: ongoing sgb data transfer
 	db
 
 	ds 1

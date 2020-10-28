@@ -119,7 +119,7 @@ AddOutdoorSprites:
 	dec c
 	jr nz, .loop
 
-	ld a, [wUnusedD05A]
+	ld a, [wUnusedAddOutdoorSpritesReturnValue]
 	ld c, a
 	ret
 

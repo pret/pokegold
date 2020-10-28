@@ -82,9 +82,9 @@ Gen2ToGen1LinkComms:
 	call Serial_ExchangeBytes
 	ld a, SERIAL_NO_DATA_BYTE
 	ld [de], a
-	ld hl, wLink_c508
+	ld hl, wc508
 	ld de, wTrademons
-	ld bc, wTrademons - wLink_c508
+	ld bc, wTrademons - wc508
 	call Serial_ExchangeBytes
 	xor a
 	ldh [rIF], a
@@ -163,9 +163,9 @@ Gen2ToGen1LinkComms:
 	ld hl, wTimeCapsulePlayerData
 	call Link_ConvertPartyStruct1to2
 	ld a, LOW(wOTPartyMonOT)
-	ld [wUnusedCFFE], a
+	ld [wUnusedNamesPointer], a
 	ld a, HIGH(wOTPartyMonOT)
-	ld [wUnusedCFFE + 1], a
+	ld [wUnusedNamesPointer + 1], a
 	ld de, MUSIC_NONE
 	call PlayMusic
 	ldh a, [hSerialConnectionStatus]
@@ -226,9 +226,9 @@ Gen2ToGen2LinkComms:
 	call Serial_ExchangeBytes
 	ld a, SERIAL_NO_DATA_BYTE
 	ld [de], a
-	ld hl, wLink_c508
+	ld hl, wc508
 	ld de, wTrademons
-	ld bc, wTrademons - wLink_c508
+	ld bc, wTrademons - wc508
 	call Serial_ExchangeBytes
 	ld a, [wLinkMode]
 	cp LINK_TRADECENTER
@@ -377,9 +377,9 @@ Gen2ToGen2LinkComms:
 	ld bc, wOTPartyDataEnd - wOTPartyMons
 	call CopyBytes
 	ld a, LOW(wOTPartyMonOT)
-	ld [wUnusedCFFE], a
+	ld [wUnusedNamesPointer], a
 	ld a, HIGH(wOTPartyMonOT)
-	ld [wUnusedCFFE + 1], a
+	ld [wUnusedNamesPointer + 1], a
 	ld de, MUSIC_NONE
 	call PlayMusic
 	ldh a, [hSerialConnectionStatus]
@@ -514,7 +514,7 @@ FixDataForLinkTransfer:
 	ld [hli], a
 	dec b
 	jr nz, .loop2
-	ld hl, wLink_c508
+	ld hl, wc508
 	ld a, SERIAL_PREAMBLE_BYTE
 	ld [hli], a
 	ld [hli], a

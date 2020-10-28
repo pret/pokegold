@@ -344,8 +344,8 @@ FinishContinueFunction:
 .loop
 	xor a
 	ld [wDontPlayMapMusicOnReload], a
-	ld hl, wGameTimerPause
-	set GAMETIMERPAUSE_TIMER_PAUSED_F, [hl]
+	ld hl, wGameTimerPaused
+	set GAME_TIMER_PAUSED_F, [hl]
 	farcall OverworldLoop
 	ld a, [wSpawnAfterChampion]
 	cp SPAWN_RED

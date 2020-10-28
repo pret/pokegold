@@ -56,11 +56,12 @@ NPCTrade::
 	call DisableSpriteUpdates
 	ld a, [wJumptableIndex]
 	push af
-	ld a, [wce64]
+	; wTradeDialog aliases wFrameCounter, which TradeAnimation uses
+	ld a, [wTradeDialog]
 	push af
 	predef TradeAnimation
 	pop af
-	ld [wce64], a
+	ld [wTradeDialog], a
 	pop af
 	ld [wJumptableIndex], a
 	call ReturnToMapWithSpeechTextbox
@@ -107,7 +108,7 @@ Trade_GetDialog:
 	ld e, NPCTRADE_DIALOG
 	call GetTradeAttribute
 	ld a, [hl]
-	ld [wce64], a
+	ld [wTradeDialog], a
 	ret
 
 DoNPCTrade:
@@ -366,7 +367,7 @@ PrintTradeText:
 rept 6
 	add hl, de
 endr
-	ld a, [wce64]
+	ld a, [wTradeDialog]
 	ld e, a
 	add hl, de
 	add hl, de

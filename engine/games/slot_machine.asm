@@ -248,7 +248,7 @@ DebugPrintSlotBias: ; unreferenced
 
 AnimateSlotReelIcons: ; unreferenced
 ; This animation was present in pokegold-spaceworld.
-	ld hl, wce66
+	ld hl, wUnusedSlotReelIconDelay
 	ld a, [hl]
 	inc [hl]
 	and $7

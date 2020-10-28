@@ -208,7 +208,7 @@ StartTrainerBattle_NextScene:
 StartTrainerBattle_SetUpBGMap:
 	call StartTrainerBattle_NextScene
 	xor a
-	ld [wce64], a
+	ld [wBattleTransitionCounter], a
 	ldh [hBGMapMode], a
 	ret
 
@@ -222,7 +222,7 @@ StartTrainerBattle_Flash:
 	ld a, [wTimeOfDayPalset]
 	cp DARKNESS_PALSET
 	jr z, .done
-	ld hl, wce64
+	ld hl, wBattleTransitionCounter
 	ld a, [hl]
 	inc [hl]
 	srl a
@@ -240,7 +240,7 @@ StartTrainerBattle_Flash:
 
 .done
 	xor a
-	ld [wce64], a
+	ld [wBattleTransitionCounter], a
 	scf
 	ret
 
@@ -271,12 +271,12 @@ StartTrainerBattle_SetUpForWavyOutro:
 	ld a, $90
 	ldh [hLYOverrideEnd], a
 	xor a
-	ld [wce64], a
-	ld [wce65], a
+	ld [wBattleTransitionCounter], a
+	ld [wBattleTransitionSineWaveOffset], a
 	ret
 
 StartTrainerBattle_SineWave:
-	ld a, [wce64]
+	ld a, [wBattleTransitionCounter]
 	cp $60
 	jr nc, .end
 	call .DoSineWave
@@ -288,10 +288,10 @@ StartTrainerBattle_SineWave:
 	ret
 
 .DoSineWave:
-	ld hl, wce65
+	ld hl, wBattleTransitionSineWaveOffset
 	ld a, [hl]
 	inc [hl]
-	ld hl, wce64
+	ld hl, wBattleTransitionCounter
 	ld d, [hl]
 	add [hl]
 	ld [hl], a
@@ -319,13 +319,13 @@ StartTrainerBattle_SetUpForSpinOutro:
 	farcall RespawnPlayerAndOpponent
 	call StartTrainerBattle_NextScene
 	xor a
-	ld [wce64], a
+	ld [wBattleTransitionCounter], a
 	ret
 
 StartTrainerBattle_SpinToBlack:
 	xor a
 	ldh [hBGMapMode], a
-	ld a, [wce64]
+	ld a, [wBattleTransitionCounter]
 	ld e, a
 	ld d, 0
 	ld hl, .spin_quadrants
@@ -335,13 +335,13 @@ endr
 	ld a, [hli]
 	cp -1
 	jr z, .end
-	ld [wce65], a
+	ld [wBattleTransitionSpinQuadrant], a
 	call .load
 	ld a, 1
 	ldh [hBGMapMode], a
 	call DelayFrame
 	call DelayFrame
-	ld hl, wce64
+	ld hl, wBattleTransitionCounter
 	inc [hl]
 	ret
 
@@ -411,7 +411,7 @@ ENDM
 	inc de
 .loop1
 	ld [hl], BATTLETRANSITION_BLACK
-	ld a, [wce65]
+	ld a, [wBattleTransitionSpinQuadrant]
 	bit RIGHT_QUADRANT_F, a
 	jr z, .leftside
 	inc hl
@@ -422,7 +422,7 @@ ENDM
 	dec c
 	jr nz, .loop1
 	pop hl
-	ld a, [wce65]
+	ld a, [wBattleTransitionSpinQuadrant]
 	bit LOWER_QUADRANT_F, a
 	ld bc, SCREEN_WIDTH
 	jr z, .upper
@@ -437,7 +437,7 @@ ENDM
 	jr z, .loop
 	ld c, a
 .loop2
-	ld a, [wce65]
+	ld a, [wBattleTransitionSpinQuadrant]
 	bit RIGHT_QUADRANT_F, a
 	jr z, .leftside2
 	dec hl
@@ -459,13 +459,13 @@ StartTrainerBattle_SetUpForRandomScatterOutro:
 	farcall RespawnPlayerAndOpponent
 	call StartTrainerBattle_NextScene
 	ld a, $10
-	ld [wce64], a
+	ld [wBattleTransitionCounter], a
 	ld a, 1
 	ldh [hBGMapMode], a
 	ret
 
 StartTrainerBattle_SpeckleToBlack:
-	ld hl, wce64
+	ld hl, wBattleTransitionCounter
 	ld a, [hl]
 	and a
 	jr z, .done

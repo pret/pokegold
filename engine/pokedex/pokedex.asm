@@ -91,7 +91,7 @@ InitPokedex:
 	ld [wJumptableIndex], a
 	ld [wPrevDexEntryJumptableIndex], a
 	ld [wPrevDexEntryBackup], a
-	ld [wce66], a
+	ld [wUnusedPokedexByte], a
 
 	call Pokedex_CheckUnlockedUnownMode
 

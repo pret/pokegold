@@ -27,7 +27,7 @@ hVBlank:: db
 hMapEntryMethod:: db
 
 hMenuReturn:: db
-hUnusedFFA3:: db
+hUnusedByte:: db
 
 hJoypadReleased:: db
 hJoypadPressed::  db

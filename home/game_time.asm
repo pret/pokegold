@@ -20,8 +20,8 @@ GameTimer::
 	ret nz
 
 ; Is the timer paused?
-	ld hl, wGameTimerPause
-	bit GAMETIMERPAUSE_TIMER_PAUSED_F, [hl]
+	ld hl, wGameTimerPaused
+	bit GAME_TIMER_PAUSED_F, [hl]
 	ret z
 
 ; Is the timer already capped?

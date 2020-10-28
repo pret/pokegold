@@ -15,7 +15,7 @@ Special::
 
 INCLUDE "data/events/special_pointers.asm"
 
-DummySpecial_c389:
+UnusedDummySpecial:
 	ret
 
 GameCornerPrizeMonCheckDex:
@@ -205,7 +205,7 @@ CardFlip:
 	call StartGameCornerGame
 	ret
 
-DummyNonfunctionalGameCornerGame:
+UnusedDummyGame:
 	call CheckCoinsAndCoinCase
 	ret c
 	ld a, BANK(_DummyGame)
