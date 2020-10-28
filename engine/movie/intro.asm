@@ -719,7 +719,8 @@ IntroScene9:
 	db %00000000
 	db -1
 
-	ret ; unused
+Intro_DummyFunction: ; unreferenced
+	ret
 
 Intro_InitNote:
 	ld a, [wIntroSpriteStateFlag]

@@ -2009,7 +2009,8 @@ GetMapEnvironment::
 	pop hl
 	ret
 
-	ret ; unused
+Map_DummyFunction:: ; unreferenced
+	ret
 
 GetAnyMapEnvironment::
 	push hl

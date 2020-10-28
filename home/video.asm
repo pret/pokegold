@@ -385,10 +385,10 @@ AnimateTileset::
 	rst Bankswitch
 	ret
 
-; unused
+Video_DummyFunction:: ; unreferenced
 	ret
 
-; unused
+EnableSpriteDisplay:: ; unreferenced
 	ld hl, rLCDC
 	set 1, [hl]
 	ret

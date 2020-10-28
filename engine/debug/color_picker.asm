@@ -1456,9 +1456,9 @@ DebugTileset_PlaceCursor: ; unreferenced
 	inc c
 	ret
 
-; unused
+.clearsprites: ; unreferenced
 	call ClearSprites
 	ret
 
-; unused
+.dummy: ; unreferenced
 	ret

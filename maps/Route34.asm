@@ -603,7 +603,6 @@ CooltrainerfKateAfterText:
 	done
 
 Route34IlexForestSignText:
-; unused
 	text "ILEX FOREST"
 	line "Through the Gate"
 	done

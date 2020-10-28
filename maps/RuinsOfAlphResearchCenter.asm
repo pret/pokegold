@@ -301,7 +301,6 @@ RuinsOfAlphResearchCenterUnownPrinterText:
 	done
 
 RuinsOfAlphResearchCenterProfSilktreePhotoText:
-; unused
 	text "It's a photo of"
 	line "the RESEARCH"
 

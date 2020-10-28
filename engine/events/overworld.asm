@@ -1701,7 +1701,7 @@ Script_GetOnBike_Register:
 	special UpdatePlayerSprite
 	end
 
-; unused
+Overworld_DummyFunction: ; unreferenced
 	nop
 	ret
 

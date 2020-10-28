@@ -2087,7 +2087,8 @@ Script_writeunusedbytebuffer:
 	ld [wUnusedScriptByteBuffer], a
 	ret
 
-	db closetext_command ; unused
+UnusedClosetextScript: ; unreferenced
+	closetext
 
 Script_closetext:
 	ldh a, [hOAMUpdate]
@@ -2221,7 +2222,7 @@ ReturnFromCredits:
 	call StopScript
 	ret
 
-; unused
+Script_checkver_duplicate: ; unreferenced
 	ld a, [.gs_version]
 	ld [wScriptVar], a
 	ret

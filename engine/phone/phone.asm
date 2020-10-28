@@ -145,7 +145,7 @@ CheckPhoneCall::
 	farcall CheckReceiveCallTimer
 	ret
 
-; unused
+.unused ; unreferenced
 	ret
 
 FarInitCallReceiveDelay: ; unreferenced

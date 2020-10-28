@@ -5668,7 +5668,7 @@ BattleCommand_Charge:
 	text_far _BattleDugText
 	text_end
 
-BattleCommand3c:
+BattleCommand_Unused3C:
 ; unused
 	ret
 
@@ -6439,7 +6439,7 @@ INCLUDE "engine/battle/move_effects/sandstorm.asm"
 
 INCLUDE "engine/battle/move_effects/rollout.asm"
 
-BattleCommand5d:
+BattleCommand_Unused5D:
 ; unused
 	ret
 

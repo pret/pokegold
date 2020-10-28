@@ -161,11 +161,13 @@ ClearVRAM::
 
 BlankBGMap::
 	ld a, " "
-	jr .fill
-; unused; would fill BG Map with value in l
-	ld a, l
+	jr FillBGMap
 
-.fill
+FillBGMap_l:: ; unreferenced
+	ld a, l
+	; fallthrough
+
+FillBGMap::
 	ld de, vBGMap1 - vBGMap0
 	ld l, e
 .loop

@@ -459,5 +459,4 @@ TrainerHouse:
 	ld [wScriptVar], a
 	jp CloseSRAM
 
-; unused
-	nop
+	nop ; unused

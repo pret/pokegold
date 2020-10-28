@@ -175,12 +175,12 @@ CheckUnusedTwoDayTimer:
 	call UpdateTimeRemaining
 	ret
 
-; unused
+UnusedSetSwarmFlag: ; unreferenced
 	ld hl, wDailyFlags1
 	set DAILYFLAGS1_SWARM_F, [hl]
 	ret
 
-; unused
+UnusedCheckSwarmFlag: ; unreferenced
 	and a
 	ld hl, wDailyFlags1
 	bit DAILYFLAGS1_SWARM_F, [hl]
