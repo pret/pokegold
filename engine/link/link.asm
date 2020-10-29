@@ -1409,7 +1409,7 @@ LinkTradeCheckCancel:
 	jr nz, .loop1
 ExitLinkCommunications:
 	xor a
-	ld [wd8b7], a
+	ld [wUnusedLinkCommunicationByte], a
 	xor a
 	ldh [rSB], a
 	ldh [hSerialSend], a

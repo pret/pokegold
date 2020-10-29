@@ -2391,7 +2391,7 @@ wMountMoonSquareSceneID::                         db
 
 wEventFlags:: flag_array NUM_EVENTS
 
-wd8b7:: db
+wUnusedLinkCommunicationByte:: db
 
 wGameTimerPaused::
 ; bit 7: game timer paused
