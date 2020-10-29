@@ -512,7 +512,7 @@ FillMoves:
 	ld a, [wEvolutionOldSpecies]
 	and a
 	jr z, .CheckMove
-	ld a, [wceed]
+	ld a, [wPrevPartyLevel]
 	cp b
 	jr nc, .GetMove
 
