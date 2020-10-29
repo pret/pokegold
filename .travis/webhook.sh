@@ -4,7 +4,7 @@ set -e
 root="$(readlink -e "$(dirname "$0")/..")"
 
 # Report unnamed symbols
-content="$("$root/tools/unnamed.py" -r "$root" "$root/pokegold.sym" | head)"
+content="$("$root/tools/unnamed.py" "$root/pokegold.sym" | head -n 20)"
 
 curl -H 'Content-Type: application/json' -X POST "$POKEGOLD_DISCORD_WEBHOOK_URL" -d@- << EOF
 {
