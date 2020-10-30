@@ -32,7 +32,7 @@
 	const DEBUGCOLORMAIN_INITTMHM       ; 4
 	const DEBUGCOLORMAIN_TMHMJOYPAD     ; 5
 
-DebugColorPicker:
+DebugColorPicker: ; unreferenced
 ; A debug menu to test monster and trainer palettes at runtime.
 	ldh a, [hCGB]
 	and a
@@ -913,13 +913,13 @@ DebugColor_FillBoxWithByte:
 	ret
 
 DebugColor_PushSGBPals:
-	ld a, [wd8ba]
+	ld a, [wJoypadDisable]
 	push af
-	set 7, a
-	ld [wd8ba], a
+	set JOYPAD_DISABLE_SGB_TRANSFER_F, a
+	ld [wJoypadDisable], a
 	call _DebugColor_PushSGBPals
 	pop af
-	ld [wd8ba], a
+	ld [wJoypadDisable], a
 	ret
 
 _DebugColor_PushSGBPals:
@@ -1053,7 +1053,7 @@ INCBIN "gfx/debug/up_arrow.2bpp"
 DebugColor_GFX:
 INCBIN "gfx/debug/color_test.2bpp"
 
-TilesetColorPicker:
+TilesetColorPicker: ; unreferenced
 ; A debug menu to test tileset palettes at runtime.
 ; dummied out
 	ret
@@ -1456,9 +1456,9 @@ DebugTileset_PlaceCursor: ; unreferenced
 	inc c
 	ret
 
-; unused
+.clearsprites: ; unreferenced
 	call ClearSprites
 	ret
 
-; unused
+.dummy: ; unreferenced
 	ret

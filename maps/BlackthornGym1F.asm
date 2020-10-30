@@ -251,7 +251,7 @@ BlackthornGymClairText_YouKeptMeWaiting:
 	line "this TM."
 	done
 
-BlackthornGymText_ReceivedTM24:
+BlackthornGymText_ReceivedTM24: ; unreferenced
 	text "<PLAYER> received"
 	line "TM24."
 	done

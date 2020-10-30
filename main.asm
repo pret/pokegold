@@ -350,7 +350,7 @@ INCLUDE "engine/movie/intro.asm"
 SECTION "bank3E", ROMX
 
 INCLUDE "engine/gfx/load_font.asm"
-INCLUDE "data/collision_permissions.asm"
+INCLUDE "data/collision/collision_permissions.asm"
 
 Shrink1Pic:
 INCBIN "gfx/new_game/shrink1.2bpp.lz"

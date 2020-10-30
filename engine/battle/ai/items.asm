@@ -25,7 +25,7 @@ AI_SwitchOrTryItem:
 	ld hl, TrainerClassAttributes + TRNATTR_AI_ITEM_SWITCH
 	ld bc, NUM_TRAINER_ATTRIBUTES
 	call AddNTimes
-.ok
+
 	bit SWITCH_OFTEN_F, [hl]
 	jp nz, SwitchOften
 	bit SWITCH_RARELY_F, [hl]
@@ -141,7 +141,7 @@ SwitchSometimes:
 	ld [wEnemySwitchMonIndex], a
 	jp AI_TrySwitch
 
-CheckSubstatusCantRun:
+CheckSubstatusCantRun: ; unreferenced
 	ld a, [wEnemySubStatus5]
 	bit SUBSTATUS_CANT_RUN, a
 	ret
@@ -204,7 +204,7 @@ AI_TryItem:
 	inc hl
 	jr c, .loop
 
-.used_item
+; used item
 	xor a
 	ld [de], a
 	inc a
@@ -247,7 +247,7 @@ AI_TryItem:
 	cp e
 	jr nc, .yes
 
-.no
+.no ; unreferenced
 	and a
 	ret
 

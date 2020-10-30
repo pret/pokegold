@@ -1,7 +1,8 @@
 CARDFLIP_LIGHT_OFF EQU "♂" ; $ef
 CARDFLIP_LIGHT_ON  EQU "♀" ; $f5
 
-CARDFLIP_DECK_SIZE EQU 4 * 6
+CARDFLIP_DECK_SIZE EQUS "(wDeckEnd - wDeck)"
+	assert wDiscardPileEnd - wDiscardPile == wDeckEnd - wDeck
 
 DummyGameGFX:
 ; Graphics for an unused Game Corner
@@ -577,7 +578,7 @@ CardFlip_CopyOAM:
 	jr nz, .loop
 	ret
 
-CardFlip_ShiftDigitsUpOnePixel:
+CardFlip_ShiftDigitsUpOnePixel: ; unreferenced
 ; The top rows of digits 1-9 become the bottom rows of 0-8,
 ; so this routine relies on the top rows being blank.
 	ld de, vTiles0 tile "0"

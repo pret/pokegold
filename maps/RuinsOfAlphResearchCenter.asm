@@ -150,8 +150,7 @@ RuinsOfAlphResearchCenterPrinter:
 	closetext
 	end
 
-RuinsOfAlphResearchCenterPhoto:
-; unreferenced
+RuinsOfAlphResearchCenterPhoto: ; unreferenced
 	jumptext RuinsOfAlphResearchCenterProfSilktreePhotoText
 
 RuinsOfAlphResearchCenterBookshelf:
@@ -302,7 +301,6 @@ RuinsOfAlphResearchCenterUnownPrinterText:
 	done
 
 RuinsOfAlphResearchCenterProfSilktreePhotoText:
-; unused
 	text "It's a photo of"
 	line "the RESEARCH"
 

@@ -145,7 +145,7 @@ BattleCommand_CheckTurn:
 	and a
 	jp nz, CheckEnemyTurn
 
-CheckPlayerTurn:
+; check player turn
 	ld hl, wPlayerSubStatus4
 	bit SUBSTATUS_RECHARGE, [hl]
 	jr z, .no_recharge
@@ -2592,7 +2592,7 @@ PlayerAttackDamage:
 	cp SPECIAL
 	jr nc, .special
 
-.physical
+; physical
 	ld hl, wEnemyMonDefense
 	ld a, [hli]
 	ld b, a
@@ -2660,7 +2660,6 @@ PlayerAttackDamage:
 	ret
 
 TruncateHL_BC:
-.loop
 ; Truncate 16-bit values hl and bc to 8-bit values b and c respectively.
 ; b = hl, c = bc
 
@@ -2821,9 +2820,9 @@ EnemyAttackDamage:
 
 	ld a, [hl]
 	cp SPECIAL
-	jr nc, .Special
+	jr nc, .special
 
-.physical
+; physical
 	ld hl, wBattleMonDefense
 	ld a, [hli]
 	ld b, a
@@ -2847,7 +2846,7 @@ EnemyAttackDamage:
 	ld hl, wEnemyAttack
 	jr .thickclub
 
-.Special:
+.special
 	ld hl, wBattleMonSpclDef
 	ld a, [hli]
 	ld b, a
@@ -5669,7 +5668,7 @@ BattleCommand_Charge:
 	text_far _BattleDugText
 	text_end
 
-BattleCommand3c:
+BattleCommand_Unused3C:
 ; unused
 	ret
 
@@ -6075,7 +6074,7 @@ INCLUDE "engine/battle/move_effects/conversion.asm"
 BattleCommand_ResetStats:
 ; resetstats
 
-	ld a, 7 ; neutral
+	ld a, BASE_STAT_LEVEL
 	ld hl, wPlayerStatLevels
 	call .Fill
 	ld hl, wEnemyStatLevels
@@ -6098,7 +6097,7 @@ BattleCommand_ResetStats:
 	jp StdBattleTextbox
 
 .Fill:
-	ld b, wPlayerStatLevelsEnd - wPlayerStatLevels
+	ld b, NUM_LEVEL_STATS
 .next
 	ld [hli], a
 	dec b
@@ -6440,7 +6439,7 @@ INCLUDE "engine/battle/move_effects/sandstorm.asm"
 
 INCLUDE "engine/battle/move_effects/rollout.asm"
 
-BattleCommand5d:
+BattleCommand_Unused5D:
 ; unused
 	ret
 

@@ -138,6 +138,7 @@ RadioTerminator::
 
 PrintText::
 	call SetUpTextbox
+	; fallthrough
 
 PrintTextboxText::
 	bccoord TEXTBOX_INNERX, TEXTBOX_INNERY
@@ -154,6 +155,7 @@ SetUpTextbox::
 
 PlaceString::
 	push hl
+	; fallthrough
 
 PlaceNextChar::
 	ld a, [de]
@@ -164,7 +166,9 @@ PlaceNextChar::
 	pop hl
 	ret
 
-	pop de ; unused
+DummyChar:: ; unreferenced
+	pop de
+	; fallthrough
 
 NextChar::
 	inc de
@@ -238,18 +242,19 @@ ENDM
 .not_diacritic
 	cp FIRST_REGULAR_TEXT_CHAR
 	jr nc, .place
-
+; dakuten or handakuten
 	cp "パ"
 	jr nc, .handakuten
-
-.dakuten
+; dakuten
 	cp FIRST_HIRAGANA_DAKUTEN_CHAR
 	jr nc, .hiragana_dakuten
+; katakana dakuten
 	add "カ" - "ガ"
-	jr .katakana_dakuten
+	jr .place_dakuten
+
 .hiragana_dakuten
 	add "か" - "が"
-.katakana_dakuten
+.place_dakuten
 	ld b, "ﾞ" ; dakuten
 	call Diacritic
 	jr .place
@@ -257,11 +262,13 @@ ENDM
 .handakuten
 	cp "ぱ"
 	jr nc, .hiragana_handakuten
+; katakana handakuten
 	add "ハ" - "パ"
-	jr .katakana_handakuten
+	jr .place_handakuten
+
 .hiragana_handakuten
 	add "は" - "ぱ"
-.katakana_handakuten
+.place_handakuten
 	ld b, "ﾟ" ; handakuten
 	call Diacritic
 
@@ -298,12 +305,13 @@ PlaceKokoWa:  print_name PlaceKokoWaText
 PlaceMoveTargetsName::
 	ldh a, [hBattleTurn]
 	xor 1
-	jr PlaceMoveUsersName.place
+	jr PlaceBattlersName
 
 PlaceMoveUsersName::
 	ldh a, [hBattleTurn]
+	; fallthrough
 
-.place:
+PlaceBattlersName:
 	push de
 	and a
 	jr nz, .enemy

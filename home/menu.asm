@@ -251,6 +251,7 @@ MenuBoxCoord2Tile::
 	ld c, a
 	ld a, [wMenuBorderTopCoord]
 	ld b, a
+	; fallthrough
 
 Coord2Tile::
 ; Return the address of wTilemap(c, b) in hl.
@@ -294,7 +295,7 @@ MenuTextbox::
 	pop hl
 	jp PrintText
 
-; unused
+Menu_DummyFunction:: ; unreferenced
 	ret
 
 LoadMenuTextbox::

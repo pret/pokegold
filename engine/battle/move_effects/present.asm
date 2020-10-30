@@ -67,7 +67,7 @@ BattleCommand_Present:
 	add a
 	jr nc, .do_animation
 	call AnimateFailedMove
-	ld hl, CantReceiveGiftText
+	ld hl, PresentFailedText
 	call StdBattleTextbox
 .do_animation
 	jp EndMoveEffect

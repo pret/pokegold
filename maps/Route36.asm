@@ -307,7 +307,7 @@ RockSmashGuyText2:
 	cont "have this."
 	done
 
-UnusedReceivedTM08Text:
+Text_ReceivedTM08: ; unreferenced
 	text "<PLAYER> received"
 	line "TM08."
 	done

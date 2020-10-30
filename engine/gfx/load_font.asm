@@ -94,7 +94,7 @@ LoadStatsScreenPageTilesGFX:
 	call Get2bpp
 	ret
 
-LoadFontsBattleLevel:
+LoadFontsBattleLevel: ; unreferenced
 	ld de, FontBattleExtra + 14 tiles
 	ld hl, vTiles2 tile "<LV>" ; $6e
 	lb bc, BANK(FontBattleExtra), 1

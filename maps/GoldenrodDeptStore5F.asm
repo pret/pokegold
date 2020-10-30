@@ -105,7 +105,7 @@ Carrie:
 	faceplayer
 	opentext
 	special GameboyCheck
-	ifnotequal GBCHECK_CGB, .NotGBC ; This is a dummy check from Gold/Silver
+	ifnotequal GBCHECK_CGB, .NotGBC
 	writetext GoldenrodDeptStore5FCarrieMysteryGiftExplanationText
 	waitbutton
 	closetext

@@ -3,8 +3,7 @@ LoadBattleMenu:
 	call LoadMenuHeader
 	jr CommonBattleMenu
 
-SafariBattleMenu:
-; untranslated
+SafariBattleMenu: ; unreferenced
 	ld hl, SafariBattleMenuHeader
 	call LoadMenuHeader
 	jr CommonBattleMenu
@@ -12,7 +11,8 @@ SafariBattleMenu:
 ContestBattleMenu:
 	ld hl, ContestBattleMenuHeader
 	call LoadMenuHeader
-; fallthrough
+	; fallthrough
+
 CommonBattleMenu:
 	ld a, [wBattleMenuCursorBuffer]
 	ld [wMenuCursorBuffer], a

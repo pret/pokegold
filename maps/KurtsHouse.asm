@@ -85,7 +85,6 @@ Kurt1:
 	iftrue .GiveLoveBall
 	writetext KurtsHouseKurtBallsFromApricornsText
 	promptbutton
-.CheckApricorns:
 	checkitem RED_APRICORN
 	iftrue .AskApricorn
 	checkitem BLU_APRICORN

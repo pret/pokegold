@@ -137,7 +137,7 @@ NewBarkTownElmsLabSign:
 NewBarkTownElmsHouseSign:
 	jumptext NewBarkTownElmsHouseSignText
 
-MrChronoScript:
+MrChronoScript: ; unreferenced
 	faceplayer
 	opentext
 	writetext MrChronoText

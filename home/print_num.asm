@@ -35,7 +35,6 @@ PrintNum::
 	cp 2
 	jr z, .word
 ; maximum 3 bytes
-.long
 	ld a, [de]
 	ldh [hPrintNumBuffer + 1], a
 	inc de
@@ -81,7 +80,7 @@ PrintNum::
 	cp 6
 	jr z, .six
 
-.seven
+; seven
 	ld a, HIGH(1000000 >> 8)
 	ldh [hPrintNumBuffer + 4], a
 	ld a, HIGH(1000000) ; mid
@@ -301,7 +300,7 @@ PrintNum::
 	inc hl
 	ret
 
-PrintHexNumber:: ; unreferenced
+PrintHexNumber::
 ; Print the c-byte value from de to hl as hexadecimal digits.
 .loop
 	push bc

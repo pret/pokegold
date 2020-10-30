@@ -208,7 +208,7 @@ GetTreeScore:
 	cp 5
 	jr c, .good
 
-.bad
+; bad
 	xor a ; TREEMON_SCORE_BAD
 	ret
 

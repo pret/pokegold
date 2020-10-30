@@ -432,11 +432,11 @@ Script_verbosegiveitem:
 	ld de, GiveItemScript
 	jp ScriptCall
 
-ret_96e71:
+GiveItemScript_DummyFunction:
 	ret
 
 GiveItemScript:
-	callasm ret_96e71
+	callasm GiveItemScript_DummyFunction
 	writetext .ReceivedItemText
 	iffalse .Full
 	waitsfx
@@ -1518,8 +1518,6 @@ Script_getcurlandmarkname:
 	ld a, [wMapNumber]
 	ld c, a
 	call GetWorldMapLocation
-
-ConvertLandmarkToText:
 	ld e, a
 	farcall GetLandmarkName
 	ld de, wStringBuffer1
@@ -1589,7 +1587,7 @@ Script_givepokemail:
 	push bc
 	inc hl
 	ld bc, MAIL_MSG_LENGTH
-	ld de, wceed
+	ld de, wMonMailMessageBuffer
 	ld a, [wScriptBank]
 	call FarCopyBytes
 	pop bc
@@ -2059,8 +2057,7 @@ Script_warpcheck:
 	farcall EnableEvents
 	ret
 
-Script_enableevents:
-; unused
+Script_enableevents: ; unreferenced
 	farcall EnableEvents
 	ret
 
@@ -2090,7 +2087,8 @@ Script_writeunusedbytebuffer:
 	ld [wUnusedScriptByteBuffer], a
 	ret
 
-	db closetext_command ; unused
+UnusedClosetextScript: ; unreferenced
+	closetext
 
 Script_closetext:
 	ldh a, [hOAMUpdate]
@@ -2208,11 +2206,11 @@ Script_endall:
 	ret
 
 Script_halloffame:
-	ld hl, wGameTimerPause
-	res GAMETIMERPAUSE_TIMER_PAUSED_F, [hl]
+	ld hl, wGameTimerPaused
+	res GAME_TIMER_PAUSED_F, [hl]
 	farcall HallOfFame
-	ld hl, wGameTimerPause
-	set GAMETIMERPAUSE_TIMER_PAUSED_F, [hl]
+	ld hl, wGameTimerPaused
+	set GAME_TIMER_PAUSED_F, [hl]
 	jr ReturnFromCredits
 
 Script_credits:
@@ -2224,7 +2222,7 @@ ReturnFromCredits:
 	call StopScript
 	ret
 
-; unused
+Script_checkver_duplicate: ; unreferenced
 	ld a, [.gs_version]
 	ld [wScriptVar], a
 	ret

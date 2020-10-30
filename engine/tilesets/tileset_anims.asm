@@ -1,9 +1,12 @@
-	db 0 ; unused
+DummyPredef3A_DummyData: ; unreferenced
+	db 0
 
 DummyPredef3A:
 	ret
 
-	ret ; unused
+DummyPredef3A_DummyFunction: ; unreferenced
+	ret
+
 
 _AnimateTileset::
 ; Iterate over a given pointer array of
@@ -279,7 +282,7 @@ ScrollTileRightLeft:
 	jr nz, ScrollTileLeft
 	jr ScrollTileRight
 
-ScrollTileUpDown:
+ScrollTileUpDown: ; unreferenced
 ; Scroll up for 4 ticks, then down for 4 ticks.
 	ld a, [wTileAnimationTimer]
 	inc a
@@ -665,7 +668,7 @@ AnimateWaterPalette:
 	cp %100 ; frame 4
 	jr z, .color2
 
-.color1
+; color1
 	ld hl, wBGPals1 palette PAL_BG_WATER color 1
 	ld a, [hli]
 	ldh [rBGPD], a
@@ -754,4 +757,5 @@ WhirlpoolTiles2: INCBIN "gfx/tilesets/whirlpool/2.2bpp"
 WhirlpoolTiles3: INCBIN "gfx/tilesets/whirlpool/3.2bpp"
 WhirlpoolTiles4: INCBIN "gfx/tilesets/whirlpool/4.2bpp"
 
-	ret ; unused
+TilesetAnims_DummyFunction: ; unreferenced
+	ret

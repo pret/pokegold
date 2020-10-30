@@ -69,7 +69,6 @@ GetFrontpic:
 	cp EGG + 1
 	ret nc
 
-.is_a_pokemon
 	push de
 	call GetBaseData
 	ld a, [wBasePicSize]
@@ -133,13 +132,13 @@ GetMonBackpic:
 	cp EGG + 1
 	ret nc
 
-.is_a_pokemon
 	push de
 	ld a, BANK(sDecompressBuffer)
 	call OpenSRAM
 
 	; These are assumed to be at the same address in their respective banks.
-	ld hl, PokemonPicPointers ; UnownPicPointers
+	assert PokemonPicPointers == UnownPicPointers
+	ld hl, PokemonPicPointers
 	ld a, [wCurPartySpecies]
 	ld d, BANK(PokemonPicPointers)
 	cp UNOWN

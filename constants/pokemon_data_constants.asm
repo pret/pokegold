@@ -160,7 +160,7 @@ NUM_TREEMON_SETS EQU const_value
 	const TREEMON_SCORE_RARE ; 2
 
 ; ChangeHappiness arguments (see data/happiness_changes.asm)
-const_value = 1
+	const_def 1
 	const HAPPINESS_GAINLEVEL         ; 01
 	const HAPPINESS_USEDITEM          ; 02
 	const HAPPINESS_USEDXITEM         ; 03
@@ -179,7 +179,6 @@ const_value = 1
 	const HAPPINESS_ENERGYROOT        ; 10
 	const HAPPINESS_REVIVALHERB       ; 11
 	const HAPPINESS_GROOMING          ; 12
-	const HAPPINESS_GAINLEVELATHOME   ; 13
 
 ; significant happiness values
 BASE_HAPPINESS        EQU 70

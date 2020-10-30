@@ -76,7 +76,6 @@ ChooseMonToLearnTMHM:
 	ld bc, 12
 	call CopyBytes
 	call ClearBGPalettes
-ChooseMonToLearnTMHM_NoRefresh:
 	farcall LoadPartyMenuGFX
 	farcall InitPartyMenuWithCancel
 	farcall InitPartyMenuGFX
@@ -158,7 +157,7 @@ TeachTMHM:
 	and a
 	ret
 
-.unused
+.didnt_use ; unreferenced
 	ld a, 2
 	ld [wItemEffectSucceeded], a
 .learned_move

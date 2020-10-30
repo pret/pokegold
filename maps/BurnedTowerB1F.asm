@@ -65,7 +65,7 @@ ReleaseTheBeasts:
 	special InitRoamMons
 	end
 
-UnusedEnteiScript:
+UnusedEnteiScript: ; unreferenced
 	opentext
 	writetext UnusedEnteiText
 	cry ENTEI

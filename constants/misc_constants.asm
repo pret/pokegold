@@ -18,6 +18,8 @@ GS_VERSION EQU 0
 ELIF DEF(_SILVER)
 GS_VERSION EQU 1
 ENDC
+; Pokémon Pikachu 2, a step counter / virtual pet device (used by Mystery Gift)
+POKEMON_PIKACHU_2_VERSION EQU 3
 
 ; save file corruption check values
 SAVE_CHECK_VALUE_1 EQU 99

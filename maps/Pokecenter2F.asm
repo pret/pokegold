@@ -80,7 +80,7 @@ LinkReceptionistScript_Trade:
 	iffalse .LinkedToFirstGen
 	special CheckBothSelectedSameRoom
 	iffalse .IncompatibleRooms
-	writetext Text_PleaseComeIn2
+	writetext Text_PleaseComeIn
 	waitbutton
 	closetext
 	applymovementlasttalked Pokecenter2FMovementData_ReceptionistWalksUpAndLeft_LookRight
@@ -141,7 +141,7 @@ LinkReceptionistScript_Battle:
 	iffalse .LinkedToFirstGen
 	special CheckBothSelectedSameRoom
 	iffalse .IncompatibleRooms
-	writetext Text_PleaseComeIn2
+	writetext Text_PleaseComeIn
 	waitbutton
 	closetext
 	applymovementlasttalked Pokecenter2FMovementData_ReceptionistWalksUpAndLeft_LookRight
@@ -223,7 +223,7 @@ LinkReceptionistScript_TimeCapsule:
 
 .OK:
 	special EnterTimeCapsule
-	writetext Text_PleaseComeIn2
+	writetext Text_PleaseComeIn
 	waitbutton
 	closetext
 	readvar VAR_FACING
@@ -469,11 +469,11 @@ Text_PleaseComeAgain:
 	text "Please come again."
 	prompt
 
-Text_PleaseComeIn:
+Text_PleaseComeInDuplicate: ; unreferenced
 	text "Please come in."
 	prompt
 
-Text_TemporaryStagingInLinkRoom:
+Text_TemporaryStagingInLinkRoom: ; unreferenced
 	text "We'll put you in"
 	line "the link room for"
 	cont "the time being."
@@ -489,11 +489,11 @@ Text_IncompatibleRooms:
 	line "a different room."
 	prompt
 
-Text_PleaseComeIn2:
+Text_PleaseComeIn:
 	text "Please come in."
 	done
 
-Text_PleaseEnter:
+Text_PleaseEnter: ; unreferenced
 	text "Please enter."
 	prompt
 

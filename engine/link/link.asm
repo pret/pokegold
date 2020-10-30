@@ -25,10 +25,11 @@ LinkCommunications:
 	hlcoord 4, 10
 	ld de, String_PleaseWait
 	call PlaceString
-	ld hl, wce5d
-	xor a ; LOW($5000)
+	ld hl, wLinkByteTimeout
+	assert LOW(SERIAL_LINK_BYTE_TIMEOUT) == 0
+	xor a ; LOW(SERIAL_LINK_BYTE_TIMEOUT)
 	ld [hli], a
-	ld [hl], HIGH($5000)
+	ld [hl], HIGH(SERIAL_LINK_BYTE_TIMEOUT)
 	ld a, [wLinkMode]
 	cp LINK_TIMECAPSULE
 	jp nz, Gen2ToGen2LinkComms
@@ -82,9 +83,9 @@ Gen2ToGen1LinkComms:
 	call Serial_ExchangeBytes
 	ld a, SERIAL_NO_DATA_BYTE
 	ld [de], a
-	ld hl, wLink_c508
+	ld hl, wc508
 	ld de, wTrademons
-	ld bc, wTrademons - wLink_c508
+	ld bc, wTrademons - wc508
 	call Serial_ExchangeBytes
 	xor a
 	ldh [rIF], a
@@ -105,8 +106,8 @@ Gen2ToGen1LinkComms:
 	ld de, wLinkData
 	ld bc, $1a2
 	call Link_CopyOTData
-	ld de, wPlayerTrademonSpecies
-	ld hl, wTimeCapsulePartyMon1Species
+	ld de, wPlayerTrademon
+	ld hl, wTimeCapsulePlayerData
 	ld c, 2
 .loop
 	ld a, [de]
@@ -160,12 +161,12 @@ Gen2ToGen1LinkComms:
 
 .done_party
 	ld [de], a
-	ld hl, wTimeCapsulePartyMon1Species
+	ld hl, wTimeCapsulePlayerData
 	call Link_ConvertPartyStruct1to2
 	ld a, LOW(wOTPartyMonOT)
-	ld [wUnusedCFFE], a
+	ld [wUnusedNamesPointer], a
 	ld a, HIGH(wOTPartyMonOT)
-	ld [wUnusedCFFE + 1], a
+	ld [wUnusedNamesPointer + 1], a
 	ld de, MUSIC_NONE
 	call PlayMusic
 	ldh a, [hSerialConnectionStatus]
@@ -226,9 +227,9 @@ Gen2ToGen2LinkComms:
 	call Serial_ExchangeBytes
 	ld a, SERIAL_NO_DATA_BYTE
 	ld [de], a
-	ld hl, wLink_c508
+	ld hl, wc508
 	ld de, wTrademons
-	ld bc, wTrademons - wLink_c508
+	ld bc, wTrademons - wc508
 	call Serial_ExchangeBytes
 	ld a, [wLinkMode]
 	cp LINK_TRADECENTER
@@ -251,8 +252,8 @@ Gen2ToGen2LinkComms:
 	ld de, wLinkData
 	ld bc, $1b9
 	call Link_CopyOTData
-	ld de, wPlayerTrademonSpecies
-	ld hl, wLinkPlayerPartyMon1Species
+	ld de, wPlayerTrademon
+	ld hl, wLinkPlayerData
 	ld c, 2
 .loop1
 	ld a, [de]
@@ -377,9 +378,9 @@ Gen2ToGen2LinkComms:
 	ld bc, wOTPartyDataEnd - wOTPartyMons
 	call CopyBytes
 	ld a, LOW(wOTPartyMonOT)
-	ld [wUnusedCFFE], a
+	ld [wUnusedNamesPointer], a
 	ld a, HIGH(wOTPartyMonOT)
-	ld [wUnusedCFFE + 1], a
+	ld [wUnusedNamesPointer + 1], a
 	ld de, MUSIC_NONE
 	call PlayMusic
 	ldh a, [hSerialConnectionStatus]
@@ -451,6 +452,8 @@ LinkTimeout:
 	text_end
 
 ExchangeBytes:
+; This is similar to Serial_ExchangeBytes,
+; but without a SERIAL_PREAMBLE_BYTE check.
 	ld a, TRUE
 	ldh [hSerialIgnoringInitialData], a
 .loop
@@ -461,9 +464,9 @@ ExchangeBytes:
 	ld b, a
 	inc hl
 	ld a, 48
-.delay_cycles
+.wait
 	dec a
-	jr nz, .delay_cycles
+	jr nz, .wait
 	ldh a, [hSerialIgnoringInitialData]
 	and a
 	ld a, b
@@ -514,7 +517,7 @@ FixDataForLinkTransfer:
 	ld [hli], a
 	dec b
 	jr nz, .loop2
-	ld hl, wLink_c508
+	ld hl, wc508
 	ld a, SERIAL_PREAMBLE_BYTE
 	ld [hli], a
 	ld [hli], a
@@ -525,7 +528,7 @@ FixDataForLinkTransfer:
 	ld [hli], a
 	dec b
 	jr nz, .loop3
-	ld hl, wTimeCapsulePartyMon1 - 1 + PARTY_LENGTH
+	ld hl, wTimeCapsulePlayerData - 1 + PARTY_LENGTH
 	ld de, wc512
 	lb bc, 0, 0
 .loop4
@@ -1301,13 +1304,13 @@ LinkTrade_TradeStatsMenu:
 	pop af
 	ld [wMenuCursorY], a
 	dec a
-	ld [wceed], a
+	ld [wCurTradePartyMon], a
 	ld [wPlayerLinkAction], a
 	call Serial_PrintWaitingTextAndSyncAndExchangeNybble
 	ld a, [wOtherPlayerLinkMode]
 	cp $f
 	jp z, InitTradeMenuDisplay
-	ld [wceee], a
+	ld [wCurOTTradePartyMon], a
 	call LinkTradePlaceArrow
 	ld c, 100
 	call DelayFrames
@@ -1331,7 +1334,7 @@ LinkTrade_TradeStatsMenu:
 	xor a
 	ld [wce57], a
 	ld [wOtherPlayerLinkAction], a
-	ld a, [wceee]
+	ld a, [wCurOTTradePartyMon]
 	ld hl, wOTPartySpecies
 	ld c, a
 	ld b, 0
@@ -1407,7 +1410,7 @@ LinkTradeCheckCancel:
 	jr nz, .loop1
 ExitLinkCommunications:
 	xor a
-	ld [wd8b7], a
+	ld [wUnusedLinkCommunicationByte], a
 	xor a
 	ldh [rSB], a
 	ldh [hSerialSend], a
@@ -1471,7 +1474,7 @@ LinkTrade:
 	ld b, 4
 	ld c, 18
 	call LinkTextboxAtHL
-	ld a, [wceed]
+	ld a, [wCurTradePartyMon]
 	ld hl, wPartySpecies
 	ld c, a
 	ld b, 0
@@ -1480,10 +1483,10 @@ LinkTrade:
 	ld [wNamedObjectIndexBuffer], a
 	call GetPokemonName
 	ld hl, wStringBuffer1
-	ld de, wceef
+	ld de, wBufferTrademonNick
 	ld bc, MON_NAME_LENGTH
 	call CopyBytes
-	ld a, [wceee]
+	ld a, [wCurOTTradePartyMon]
 	ld hl, wOTPartySpecies
 	ld c, a
 	ld b, 0
@@ -1562,7 +1565,7 @@ LinkTrade:
 
 .do_trade:
 	ld hl, sPartyMail
-	ld a, [wceed]
+	ld a, [wCurTradePartyMon]
 	ld bc, MAIL_STRUCT_LENGTH
 	call AddNTimes
 	ld a, BANK(sPartyMail)
@@ -1571,7 +1574,7 @@ LinkTrade:
 	ld e, l
 	ld bc, MAIL_STRUCT_LENGTH
 	add hl, bc
-	ld a, [wceed]
+	ld a, [wCurTradePartyMon]
 	ld c, a
 .copy_mail
 	inc c
@@ -1592,7 +1595,7 @@ LinkTrade:
 	call AddNTimes
 	push hl
 	ld hl, wc8f4
-	ld a, [wceee]
+	ld a, [wCurOTTradePartyMon]
 	ld bc, MAIL_STRUCT_LENGTH
 	call AddNTimes
 	pop de
@@ -1607,7 +1610,7 @@ LinkTrade:
 	ld bc, NAME_LENGTH
 	call CopyBytes
 ; species
-	ld a, [wceed]
+	ld a, [wCurTradePartyMon]
 	ld hl, wPartySpecies
 	ld b, 0
 	ld c, a
@@ -1616,7 +1619,7 @@ LinkTrade:
 	ld [wPlayerTrademonSpecies], a
 	push af
 ; OT name
-	ld a, [wceed]
+	ld a, [wCurTradePartyMon]
 	ld hl, wPartyMonOT
 	call SkipNames
 	ld de, wPlayerTrademonOTName
@@ -1624,7 +1627,7 @@ LinkTrade:
 	call CopyBytes
 ; ID
 	ld hl, wPartyMon1ID
-	ld a, [wceed]
+	ld a, [wCurTradePartyMon]
 	call GetPartyLocation
 	ld a, [hli]
 	ld [wPlayerTrademonID], a
@@ -1632,7 +1635,7 @@ LinkTrade:
 	ld [wPlayerTrademonID + 1], a
 ; DVs
 	ld hl, wPartyMon1DVs
-	ld a, [wceed]
+	ld a, [wCurTradePartyMon]
 	call GetPartyLocation
 	ld a, [hli]
 	ld [wPlayerTrademonDVs], a
@@ -1646,7 +1649,7 @@ LinkTrade:
 	ld bc, NAME_LENGTH
 	call CopyBytes
 ; species
-	ld a, [wceee]
+	ld a, [wCurOTTradePartyMon]
 	ld hl, wOTPartySpecies
 	ld b, 0
 	ld c, a
@@ -1654,7 +1657,7 @@ LinkTrade:
 	ld a, [hl]
 	ld [wOTTrademonSpecies], a
 ; OT name
-	ld a, [wceee]
+	ld a, [wCurOTTradePartyMon]
 	ld hl, wOTPartyMonOT
 	call SkipNames
 	ld de, wOTTrademonOTName
@@ -1662,7 +1665,7 @@ LinkTrade:
 	call CopyBytes
 ; ID
 	ld hl, wOTPartyMon1ID
-	ld a, [wceee]
+	ld a, [wCurOTTradePartyMon]
 	call GetPartyLocation
 	ld a, [hli]
 	ld [wOTTrademonID], a
@@ -1670,21 +1673,21 @@ LinkTrade:
 	ld [wOTTrademonID + 1], a
 ; DVs
 	ld hl, wOTPartyMon1DVs
-	ld a, [wceee]
+	ld a, [wCurOTTradePartyMon]
 	call GetPartyLocation
 	ld a, [hli]
 	ld [wOTTrademonDVs], a
 	ld a, [hl]
 	ld [wOTTrademonDVs + 1], a
 
-	ld a, [wceed]
+	ld a, [wCurTradePartyMon]
 	ld [wCurPartyMon], a
 	ld hl, wPartySpecies
 	ld b, 0
 	ld c, a
 	add hl, bc
 	ld a, [hl]
-	ld [wceed], a
+	ld [wCurTradePartyMon], a
 
 	xor a ; REMOVE_PARTY
 	ld [wPokemonWithdrawDepositParameter], a
@@ -1694,14 +1697,14 @@ LinkTrade:
 	ld [wCurPartyMon], a
 	ld a, TRUE
 	ld [wForceEvolution], a
-	ld a, [wceee]
+	ld a, [wCurOTTradePartyMon]
 	push af
 	ld hl, wOTPartySpecies
 	ld b, 0
 	ld c, a
 	add hl, bc
 	ld a, [hl]
-	ld [wceee], a
+	ld [wCurOTTradePartyMon], a
 
 	ld c, 100
 	call DelayFrames
@@ -2129,7 +2132,7 @@ CheckLinkTimeout_Receptionist:
 	ld a, $1
 	ld [wPlayerLinkAction], a
 	ld hl, wLinkTimeoutFrames
-	ld a, $3
+	ld a, 3
 	ld [hli], a
 	xor a
 	ld [hl], a

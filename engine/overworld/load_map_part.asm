@@ -136,7 +136,6 @@ ForceApplyFlashlight4: ; unreferenced
 	decoord 8, 8
 	ld bc, (SURROUNDING_WIDTH + 1) * 8
 	add hl, bc
-.loop
 	ld a, [hli]
 	ld [de], a
 	inc de

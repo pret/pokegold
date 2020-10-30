@@ -5,8 +5,8 @@ Reset::
 	call ClearPalettes
 	ei
 
-	ld hl, wd8ba
-	set 7, [hl]
+	ld hl, wJoypadDisable
+	set JOYPAD_DISABLE_SGB_TRANSFER_F, [hl]
 
 	ld c, 32
 	call DelayFrames
@@ -43,7 +43,7 @@ Init::
 	ldh [rOBP1], a
 	ldh [rTMA], a
 	ldh [rTAC], a
-	ld [wceeb], a
+	ld [wBetaTitleSequenceOpeningType], a
 
 	ld a, %100 ; Start timer at 4096Hz
 	ldh [rTAC], a
@@ -161,11 +161,13 @@ ClearVRAM::
 
 BlankBGMap::
 	ld a, " "
-	jr .fill
-; unused; would fill BG Map with value in l
-	ld a, l
+	jr FillBGMap
 
-.fill
+FillBGMap_l:: ; unreferenced
+	ld a, l
+	; fallthrough
+
+FillBGMap::
 	ld de, vBGMap1 - vBGMap0
 	ld l, e
 .loop

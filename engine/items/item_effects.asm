@@ -1029,14 +1029,13 @@ LevelBallMultiplier:
 	ld b, $ff
 	ret
 
-; These two texts were carried over from gen 1.
-; They are not used in gen 2, and are dummied out.
+; BallDodgedText and BallMissedText were used in Gen 1.
 
-BallDodgedText:
+BallDodgedText: ; unreferenced
 	text_far _BallDodgedText
 	text_end
 
-BallMissedText:
+BallMissedText: ; unreferenced
 	text_far _BallMissedText
 	text_end
 
@@ -1864,14 +1863,14 @@ LoadCurHPIntoBuffer5:
 	ld [wBuffer5], a
 	ret
 
-LoadHPIntoBuffer5:
+LoadHPIntoBuffer5: ; unreferenced
 	ld a, d
 	ld [wBuffer6], a
 	ld a, e
 	ld [wBuffer5], a
 	ret
 
-LoadHPFromBuffer5:
+LoadHPFromBuffer5: ; unreferenced
 	ld a, [wBuffer6]
 	ld d, a
 	ld a, [wBuffer5]
@@ -2133,11 +2132,12 @@ INCLUDE "data/items/x_stats.asm"
 PokeFluteEffect:
 	ld a, [wBattleMode]
 	and a
-	jr nz, .dummy
-.dummy
+	jr nz, .in_battle
+	; overworld flute code was dummied out here
 
+.in_battle
 	xor a
-	ld [wceed], a
+	ld [wPokeFluteCuredSleep], a
 
 	ld b, $ff ^ SLP
 
@@ -2160,7 +2160,7 @@ PokeFluteEffect:
 	and b
 	ld [hl], a
 
-	ld a, [wceed]
+	ld a, [wPokeFluteCuredSleep]
 	and a
 	ld hl, .PlayedFluteText
 	jp z, PrintText
@@ -2169,22 +2169,22 @@ PokeFluteEffect:
 
 	ld a, [wLowHealthAlarm]
 	and 1 << DANGER_ON_F
-	jr nz, .dummy2
-.dummy2
+	jr nz, .dummy
+	; more code was dummied out here
+.dummy
 	ld hl, .FluteWakeUpText
 	jp PrintText
 
 .CureSleep:
 	ld de, PARTYMON_STRUCT_LENGTH
 	ld c, PARTY_LENGTH
-
 .loop
 	ld a, [hl]
 	push af
 	and SLP
 	jr z, .not_asleep
-	ld a, 1
-	ld [wceed], a
+	ld a, TRUE
+	ld [wPokeFluteCuredSleep], a
 .not_asleep
 	pop af
 	and b
@@ -2253,7 +2253,7 @@ ItemfinderEffect:
 
 RestorePPEffect:
 	ld a, [wCurItem]
-	ld [wceed], a
+	ld [wTempRestorePPItem], a
 
 .loop
 	; Party Screen opens to choose on which mon to use the Item
@@ -2262,14 +2262,14 @@ RestorePPEffect:
 	jp c, PPRestoreItem_Cancel
 
 .loop2
-	ld a, [wceed]
+	ld a, [wTempRestorePPItem]
 	cp MAX_ELIXER
 	jp z, Elixer_RestorePPofAllMoves
 	cp ELIXER
 	jp z, Elixer_RestorePPofAllMoves
 
 	ld hl, RaiseThePPOfWhichMoveText
-	ld a, [wceed]
+	ld a, [wTempRestorePPItem]
 	cp PP_UP
 	jr z, .ppup
 	ld hl, RestoreThePPOfWhichMoveText
@@ -2300,7 +2300,7 @@ RestorePPEffect:
 	call CopyName1
 	pop hl
 
-	ld a, [wceed]
+	ld a, [wTempRestorePPItem]
 	cp PP_UP
 	jp nz, Not_PP_Up
 
@@ -2315,7 +2315,6 @@ RestorePPEffect:
 	jr c, .do_ppup
 
 .CantUsePPUpOnSketch:
-.pp_is_maxed_out
 	ld hl, PPIsMaxedOutText
 	call PrintText
 	jr .loop2
@@ -2450,7 +2449,7 @@ RestorePP:
 	cp b
 	jr nc, .dont_restore
 
-	ld a, [wceed]
+	ld a, [wTempRestorePPItem]
 	cp MAX_ELIXER
 	jr z, .restore_all
 	cp MAX_ETHER
@@ -2612,16 +2611,17 @@ WontHaveAnyEffectMessage:
 	ld hl, ItemWontHaveEffectText
 	jr CantUseItemMessage
 
-BelongsToSomeoneElseMessage:
+BelongsToSomeoneElseMessage: ; unreferenced
 	ld hl, ItemBelongsToSomeoneElseText
 	jr CantUseItemMessage
 
-CyclingIsntAllowedMessage:
+CyclingIsntAllowedMessage: ; unreferenced
 	ld hl, NoCyclingText
 	jr CantUseItemMessage
 
-CantGetOnYourBikeMessage:
+CantGetOnYourBikeMessage: ; unreferenced
 	ld hl, ItemCantGetOnText
+	; fallthrough
 
 CantUseItemMessage:
 ; Item couldn't be used.
@@ -2673,11 +2673,11 @@ ItemUsedText:
 	text_far _ItemUsedText
 	text_end
 
-ItemGotOnText:
+ItemGotOnText: ; unreferenced
 	text_far _ItemGotOnText
 	text_end
 
-ItemGotOffText:
+ItemGotOffText: ; unreferenced
 	text_far _ItemGotOffText
 	text_end
 

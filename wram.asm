@@ -8,18 +8,16 @@ INCLUDE "vram.asm"
 
 SECTION "Audio RAM", WRAM0
 
-wMusic::
-
 ; nonzero if playing
 wMusicPlaying:: db
 
-wChannels::
+wAudio::
+
 wChannel1:: channel_struct wChannel1
 wChannel2:: channel_struct wChannel2
 wChannel3:: channel_struct wChannel3
 wChannel4:: channel_struct wChannel4
 
-wSFXChannels::
 wChannel5:: channel_struct wChannel5
 wChannel6:: channel_struct wChannel6
 wChannel7:: channel_struct wChannel7
@@ -109,12 +107,12 @@ wSFXDuration:: db
 wCurSFX::
 ; id of sfx currently playing
 	db
-wChannelsEnd::
+
+wAudioEnd::
 
 wMapMusic:: db
 
 wDontPlayMapMusicOnReload:: db
-wMusicEnd::
 
 
 SECTION "WRAM", WRAM0
@@ -301,7 +299,7 @@ wHallOfFameTemp:: hall_of_fame wHallOfFameTemp
 
 NEXTU
 ; link engine data
-wLink_c508:: ds 10
+wc508:: ds 10
 wc512:: ds 10
 
 NEXTU
@@ -321,10 +319,6 @@ wDebugWhiteTileColor:: ds 2
 wDebugLightTileColor:: ds 2
 wDebugDarkTileColor::  ds 2
 wDebugBlackTileColor:: ds 2
-
-NEXTU
-; dummy game
-wc508:: dw
 ENDU
 
 ; This union spans 280 bytes.
@@ -362,7 +356,7 @@ NEXTU
 wPokegearPhoneLoadNameBuffer:: db
 wPokegearPhoneCursorPosition:: db
 wPokegearPhoneScrollPosition:: db
-wPokegearPhoneSelectedPerson:: db ; cd3
+wPokegearPhoneSelectedPerson:: db
 wPokegearPhoneSubmenuCursor:: db
 wPokegearMapCursorObjectPointer:: dw
 wPokegearMapCursorLandmark:: db
@@ -376,7 +370,6 @@ NEXTU
 wTrademons::
 wPlayerTrademon:: trademon wPlayerTrademon
 wOTTrademon::     trademon wOTTrademon
-wTrademonsEnd::
 wTradeAnimAddress:: dw
 wLinkPlayer1Name:: ds NAME_LENGTH
 wLinkPlayer2Name:: ds NAME_LENGTH
@@ -419,18 +412,15 @@ wSlotsEnd::
 
 NEXTU
 ; card flip
-wCardFlip::
-wDeck:: ds 24
+wDeck:: ds 4 * 6
 wDeckEnd::
 wCardFlipNumCardsPlayed:: db
 wCardFlipFaceUpCard:: db
-wDiscardPile:: ds 24
+wDiscardPile:: ds 4 * 6
 wDiscardPileEnd::
-wCardFlipEnd::
 
 NEXTU
 ; dummy game
-wDummyGame::
 wDummyGameCards:: ds 9 * 5
 wDummyGameCardsEnd::
 wDummyGameLastCardPicked:: db
@@ -442,7 +432,6 @@ wDummyGameNumberTriesRemaining:: db
 wDummyGameLastMatches:: ds 5
 wDummyGameCounter:: db
 wDummyGameNumCardsMatched:: db
-wDummyGameEnd::
 
 NEXTU
 ; beta poker game
@@ -474,16 +463,11 @@ NEXTU
 wDecompressScratch:: ds 40 tiles
 
 NEXTU
-; GB Printer screen RAM
-wGameboyPrinterRAM::
-wGameboyPrinterScreen:: ds SCREEN_HEIGHT * SCREEN_WIDTH
-wGameboyPrinterScreenEnd::
-
-NEXTU
 ; GB Printer data
+wGameboyPrinterRAM::
 wGameboyPrinter2bppSource:: ds 40 tiles
 wGameboyPrinter2bppSourceEnd::
-wc980:: db
+wUnusedGameboyPrinterSafeCancelFlag:: db
 wPrinterRowIndex:: db
 
 ; Printer data
@@ -504,7 +488,6 @@ wPrinterSendByteCounter:: dw
 
 ; tilemap backup?
 wPrinterTilemapBuffer:: ds SCREEN_HEIGHT * SCREEN_WIDTH
-wPrinterTilemapBufferEnd::
 wPrinterStatus:: db
 	ds 1
 ; High nibble is for margin before the image, low nibble is for after.
@@ -570,7 +553,6 @@ wTimeCapsulePartyMon5:: red_party_struct wTimeCapsulePartyMon5
 wTimeCapsulePartyMon6:: red_party_struct wTimeCapsulePartyMon6
 wTimeCapsulePartyMonOTNames:: ds PARTY_LENGTH * NAME_LENGTH
 wTimeCapsulePartyMonNicks:: ds PARTY_LENGTH * MON_NAME_LENGTH
-wTimeCapsulePlayerDataEnd::
 
 NEXTU
 ; link player data
@@ -583,25 +565,19 @@ wLinkPlayerPartyMon5:: party_struct wLinkPlayerPartyMon5
 wLinkPlayerPartyMon6:: party_struct wLinkPlayerPartyMon6
 wLinkPlayerPartyMonOTNames:: ds PARTY_LENGTH * NAME_LENGTH
 wLinkPlayerPartyMonNicks:: ds PARTY_LENGTH * MON_NAME_LENGTH
-wLinkPlayerDataEnd::
 ENDU
 
 NEXTU
 ; mystery gift data
-UNION
-wMysteryGiftPartyTemp:: ds (1 + 1 + NUM_MOVES) * PARTY_LENGTH
-
-NEXTU
 wMysteryGiftStaging:: ds 80
-ENDU
 
-wMysteryGiftTrainerData:: ds (1 + 1 + NUM_MOVES) * PARTY_LENGTH + 2
-wMysteryGiftTrainerDataEnd::
+wMysteryGiftTrainer:: ds 1 + (1 + 1 + NUM_MOVES) * PARTY_LENGTH + 1
+wMysteryGiftTrainerEnd::
 
 	ds 138
 
 wMysteryGiftPartnerData::
-wc800:: db
+wMysteryGiftGameVersion:: db
 wMysteryGiftPartnerID:: dw
 wMysteryGiftPartnerName:: ds NAME_LENGTH
 wMysteryGiftPartnerDexCaught:: db
@@ -655,9 +631,9 @@ wCreditsBlankFrame2bppEnd::
 
 NEXTU
 ; mystery gift data
-wc900:: db
-wc901:: db
-wc902:: db
+wUnusedMysteryGiftStagedDataLength:: db
+wMysteryGiftMessageCount:: db
+wMysteryGiftStagedDataLength:: db
 
 NEXTU
 ; link
@@ -687,7 +663,6 @@ wAnimObject07:: battle_anim_struct wAnimObject07
 wAnimObject08:: battle_anim_struct wAnimObject08
 wAnimObject09:: battle_anim_struct wAnimObject09
 wAnimObject10:: battle_anim_struct wAnimObject10
-wActiveAnimObjectsEnd::
 
 wActiveBGEffects::
 wBGEffect1:: battle_bg_effect wBGEffect1
@@ -695,7 +670,6 @@ wBGEffect2:: battle_bg_effect wBGEffect2
 wBGEffect3:: battle_bg_effect wBGEffect3
 wBGEffect4:: battle_bg_effect wBGEffect4
 wBGEffect5:: battle_bg_effect wBGEffect5
-wActiveBGEffectsEnd::
 
 wLastAnimObjectIndex:: db
 
@@ -772,9 +746,7 @@ ENDU
 wEnemyTrainerItem1:: db
 wEnemyTrainerItem2:: db
 wEnemyTrainerBaseReward:: db
-
-	ds 3
-
+wEnemyTrainerAIFlags:: ds 3
 wOTClassName:: ds TRAINER_CLASS_NAME_LENGTH
 
 wCurOTMon:: db
@@ -804,71 +776,17 @@ wAttackMissed::
 ; nonzero for a miss
 	db
 
-wPlayerSubStatus1::
-; bit
-; 0 nightmare
-; 1 curse
-; 2 protect
-; 3 identified
-; 4 perish song
-; 5 endure
-; 6 rollout
-; 7 in love
-	db
-wPlayerSubStatus2::
-; bit
-; 0 curled
-; 1-7 unused
-	db
-wPlayerSubStatus3::
-; bit
-; 0 bide
-; 1 rampage
-; 2 in loop
-; 3 flinched
-; 4 charged
-; 5 underground
-; 6 flying
-; 7 confused
-	db
-wPlayerSubStatus4::
-; bit
-; 0 x accuracy
-; 1 mist
-; 2 focus energy
-; 3
-; 4 substitute
-; 5 recharge
-; 6 rage
-; 7 leech seed
-	db
-wPlayerSubStatus5::
-; bit
-; 0 toxic
-; 1
-; 2
-; 3 transformed
-; 4 encored
-; 5 lock-on
-; 6 destiny bond
-; 7 can't run
-	db
+wPlayerSubStatus1:: db
+wPlayerSubStatus2:: db
+wPlayerSubStatus3:: db
+wPlayerSubStatus4:: db
+wPlayerSubStatus5:: db
 
-wEnemySubStatus1::
-; see wPlayerSubStatus1
-	db
-wEnemySubStatus2::
-; see wPlayerSubStatus2
-	db
-wEnemySubStatus3::
-; see wPlayerSubStatus3
-	db
-wEnemySubStatus4::
-; see wPlayerSubStatus4
-	db
-wEnemySubStatus5::
-; see wPlayerSubStatus5
-	db
+wEnemySubStatus1:: db
+wEnemySubStatus2:: db
+wEnemySubStatus3:: db
+wEnemySubStatus4:: db
+wEnemySubStatus5:: db
 
 wPlayerRolloutCount:: db
 wPlayerConfuseCount:: db
@@ -889,7 +807,7 @@ wEnemyFuryCutterCount:: db
 wEnemyProtectCount:: db
 
 wPlayerDamageTaken:: dw
-wEnemyDamageTaken:: dw
+wEnemyDamageTaken::  dw
 
 wBattleReward:: ds 3
 
@@ -903,56 +821,53 @@ wTurnEnded:: db
 	ds 1
 
 wPlayerStats::
-wPlayerAttack:: dw
+wPlayerAttack::  dw
 wPlayerDefense:: dw
-wPlayerSpeed:: dw
-wPlayerSpAtk:: dw
-wPlayerSpDef:: dw
+wPlayerSpeed::   dw
+wPlayerSpAtk::   dw
+wPlayerSpDef::   dw
 	ds 1
 
 wEnemyStats::
-wEnemyAttack:: dw
+wEnemyAttack::  dw
 wEnemyDefense:: dw
-wEnemySpeed:: dw
-wEnemySpAtk:: dw
-wEnemySpDef:: dw
+wEnemySpeed::   dw
+wEnemySpAtk::   dw
+wEnemySpDef::   dw
 	ds 1
 
 wPlayerStatLevels::
-; 07 neutral
-wPlayerAtkLevel:: db
-wPlayerDefLevel:: db
-wPlayerSpdLevel:: db
+wPlayerAtkLevel::  db
+wPlayerDefLevel::  db
+wPlayerSpdLevel::  db
 wPlayerSAtkLevel:: db
 wPlayerSDefLevel:: db
-wPlayerAccLevel:: db
-wPlayerEvaLevel:: db
+wPlayerAccLevel::  db
+wPlayerEvaLevel::  db
 	ds 1
-wPlayerStatLevelsEnd::
 
 wEnemyStatLevels::
-; 07 neutral
-wEnemyAtkLevel:: db
-wEnemyDefLevel:: db
-wEnemySpdLevel:: db
+wEnemyAtkLevel::  db
+wEnemyDefLevel::  db
+wEnemySpdLevel::  db
 wEnemySAtkLevel:: db
 wEnemySDefLevel:: db
-wEnemyAccLevel:: db
-wEnemyEvaLevel:: db
+wEnemyAccLevel::  db
+wEnemyEvaLevel::  db
 	ds 1
 
-wEnemyTurnsTaken:: db
+wEnemyTurnsTaken::  db
 wPlayerTurnsTaken:: db
 	ds 1
 
 wPlayerSubstituteHP:: db
-wEnemySubstituteHP:: db
+wEnemySubstituteHP::  db
 
 wUnusedPlayerLockedMove:: db
 	ds 1
 
 wCurPlayerMove:: db
-wCurEnemyMove:: db
+wCurEnemyMove::  db
 
 wLinkBattleRNCount::
 ; how far through the prng stream
@@ -965,7 +880,7 @@ wCurEnemyMoveNum:: db
 wEnemyHPAtTimeOfPlayerSwitch:: dw
 wPayDayMoney:: ds 3
 
-wSafariMonAngerCount:: db
+wSafariMonAngerCount:: db ; unreferenced
 wSafariMonEating:: db
 	ds 1
 wEnemyBackupDVs:: dw ; used when enemy is transformed
@@ -1050,7 +965,7 @@ wEnemyFutureSightCount:: db
 
 wGivingExperienceToExpShareHolders:: db
 
-wBackupEnemyMonBaseStats:: ds 5
+wBackupEnemyMonBaseStats:: ds NUM_EXP_STATS
 wBackupEnemyMonCatchRate:: db
 wBackupEnemyMonBaseExp:: db
 
@@ -1157,7 +1072,7 @@ wPlayerLinkAction:: db
 wce57:: db
 	ds 3
 wLinkTimeoutFrames:: dw
-wce5d:: dw
+wLinkByteTimeout:: dw
 
 wMonType:: db
 
@@ -1170,12 +1085,6 @@ wNamedObjectTypeBuffer:: db
 wJumptableIndex:: db
 
 UNION
-; unidentified
-wce64:: db
-wce65:: db
-wce66:: db
-
-NEXTU
 ; intro data
 wIntroSceneFrameCounter:: db
 wIntroSceneTimer:: db
@@ -1196,11 +1105,13 @@ NEXTU
 wPrevDexEntryJumptableIndex:: db
 wPrevDexEntryBackup::
 wPokedexStatus:: db
+wUnusedPokedexByte:: db
 
 NEXTU
 ; pokegear
 wPokegearCard:: db
 wPokegearMapRegion:: db
+wUnusedPokegearByte:: db
 
 NEXTU
 ; pack
@@ -1215,10 +1126,20 @@ wTrainerCardBadgeTileID:: db
 wTrainerCardBadgeAttributes:: db
 
 NEXTU
-; card flip data
+; slot machine
+wSlotsDelay:: db
+	ds 1
+wUnusedSlotReelIconDelay:: db
+
+NEXTU
+; card flip
 wCardFlipCursorY:: db
 wCardFlipCursorX:: db
 wCardFlipWhichCard:: db
+
+NEXTU
+; dummy game
+wDummyGameCardChoice:: db
 
 NEXTU
 ; magnet train
@@ -1231,6 +1152,16 @@ NEXTU
 wHoldingUnownPuzzlePiece:: db
 wUnownPuzzleCursorPosition:: db
 wUnownPuzzleHeldPiece:: db
+
+NEXTU
+; battle transitions
+wBattleTransitionCounter:: db
+wBattleTransitionSineWaveOffset::
+wBattleTransitionSpinQuadrant:: db
+
+NEXTU
+; bill's pc
+wUnusedBillsPCData:: ds 3
 
 NEXTU
 ; debug mon color picker
@@ -1250,17 +1181,18 @@ wFrameCounter::
 wMomBankDigitCursorPosition::
 wNamingScreenLetterCase::
 wHallOfFameMonCounter::
-wSlotsDelay::
+wTradeDialog::
 	db
-wPrinterQueueLength:: db
+wFrameCounter2::
+wPrinterQueueLength::
+wUnusedSGB1eColorOffset::
+	db
 ENDU
 
-wRequested2bpp::
 wRequested2bppSize:: db
 wRequested2bppSource:: dw
 wRequested2bppDest:: dw
 
-wRequested1bpp::
 wRequested1bppSize:: db
 wRequested1bppSource:: dw
 wRequested1bppDest:: dw
@@ -1404,17 +1336,20 @@ wOverworldDelay:: db
 wTextDelayFrames:: db
 wVBlankOccurred:: db
 
-wceeb:: db
+wBetaTitleSequenceOpeningType::
+; This selected the title screen animation (fire/notes) in pokegold-spaceworld.
+	db
 
 wDefaultSpawnpoint:: db
 
 UNION
-; mail temp storage
-wTempMail:: mailmsg wTempMail
+; mon buffer
+wBufferMonNick:: ds MON_NAME_LENGTH
+wBufferMonOT:: ds NAME_LENGTH
+wBufferMon:: party_struct wBufferMon
 
 NEXTU
 ; magnet train
-wMagnetTrain:: ; used only for BANK(wMagnetTrain)
 wMagnetTrainDirection:: db
 wMagnetTrainInitPosition:: db
 wMagnetTrainHoldPosition:: db
@@ -1427,11 +1362,8 @@ wCreditsPos:: dw
 wCreditsTimer:: db
 
 NEXTU
-; mon buffer
-wBufferMonNick:: ds MON_NAME_LENGTH
-wBufferMonOT:: ds NAME_LENGTH
-wBufferMon:: party_struct wBufferMon
-	ds 8
+; mail temp storage
+wTempMail:: mailmsg wTempMail
 
 NEXTU
 ; bug-catching contest
@@ -1465,6 +1397,8 @@ wTownMapCursorLandmark:: db
 wTownMapCursorObjectPointer:: dw
 NEXTU
 wTownMapCursorCoordinates:: dw
+wStartFlypoint:: db
+wEndFlypoint:: db
 ENDU
 
 NEXTU
@@ -1481,7 +1415,6 @@ wNumRadioLinesPrinted:: db
 wOaksPKMNTalkSegmentCounter:: db
 	ds 5
 wRadioText:: ds 2 * SCREEN_WIDTH
-wRadioTextEnd::
 
 NEXTU
 ; lucky number show
@@ -1504,10 +1437,19 @@ wBankOfBoxToPrint:: db
 wWhichBoxToPrint:: db
 
 NEXTU
+; Unown printing
+wPrintedUnownTileSource:: ds 1 tiles
+wPrintedUnownTileDest:: ds 1 tiles
+
+NEXTU
 ; trainer HUD data
 	ds 1
 wPlaceBallsDirection:: db
 wTrainerHUDTiles:: ds 4
+
+NEXTU
+; battle exp gain
+wExperienceGained:: ds 3
 
 NEXTU
 ; earthquake data buffer
@@ -1518,13 +1460,62 @@ NEXTU
 wSwitchItemBuffer:: ds 2 ; may store 1 or 2 bytes
 
 NEXTU
+; switching pokemon in party
+; may store NAME_LENGTH, PARTYMON_STRUCT_LENGTH, or MAIL_STRUCT_LENGTH bytes
+wSwitchMonBuffer:: ds 48
+
+NEXTU
+; giving pokemon mail
+wMonMailMessageBuffer:: ds MAIL_MSG_LENGTH + 1
+
+NEXTU
+; bill's pc
+UNION
+wBoxNameBuffer:: ds BOX_NAME_LENGTH
+NEXTU
+	ds 1
+wBillsPCTempListIndex:: db
+wBillsPCTempBoxCount:: db
+ENDU
+
+NEXTU
+; prof. oak's pc
+wTempPokedexSeenCount:: db
+wTempPokedexCaughtCount:: db
+
+NEXTU
+; player's room pc
+UNION
+wDecoNameBuffer:: ds ITEM_NAME_LENGTH
+NEXTU
+wNumOwnedDecoCategories:: db
+wOwnedDecoCategories:: ds 16
+ENDU
+
+NEXTU
+; trade
+wCurTradePartyMon:: db
+wCurOTTradePartyMon:: db
+wBufferTrademonNick:: ds MON_NAME_LENGTH
+
+NEXTU
+; link battle record data
+wLinkBattleRecordBuffer::
+wLinkBattleRecordName::   ds NAME_LENGTH
+wLinkBattleRecordWins::   dw
+wLinkBattleRecordLosses:: dw
+wLinkBattleRecordDraws::  dw
+
+NEXTU
 ; miscellaneous
 wTempDayOfWeek::
-wKeepSevenBiasChance:: ; used in the slots to handle the favoring of 7 symbol streaks
+wPrevPartyLevel::
+wCurBeatUpPartyMon::
+wUnownPuzzleCornerTile::
+wKeepSevenBiasChance::
+wPokeFluteCuredSleep::
+wTempRestorePPItem::
 	db
-	ds 2
-wStartFlypoint:: db
-wEndFlypoint:: db
 
 NEXTU
 ; debug color picker
@@ -1546,23 +1537,9 @@ wDebugRoomPagedValuesPtr:: dw
 ENDC
 
 NEXTU
-; link battle record data
-wLinkBattleRecordName::   ds NAME_LENGTH
-wLinkBattleRecordWins::   dw
-wLinkBattleRecordLosses:: dw
-wLinkBattleRecordDraws::  dw
-
-NEXTU
-; unidentified
-wceed:: db
-wceee:: db
-wceef:: db
-
-	ds 13
-
-wcefd:: ds 1
-
-	ds 43
+; Every previous NEXTU takes up 60 or fewer bytes,
+; except the initial "mon buffer" UNION.
+	ds 60
 
 UNION
 ; trainer data
@@ -1792,11 +1769,10 @@ wCurMessageScrollPosition:: db
 wCurMessageIndex:: db
 wMailboxCount:: db
 wMailboxItems:: ds MAILBOX_CAPACITY
-wMailboxEnd::
 ENDU
 
 wListPointer:: dw
-wUnusedCFFE:: dw
+wUnusedNamesPointer:: dw
 
 
 SECTION "WRAM 1", WRAMX
@@ -1864,7 +1840,7 @@ wPrevMapNumber:: db
 
 	ds 17
 
-wUnusedD05A:: db
+wUnusedAddOutdoorSpritesReturnValue:: db
 
 wBGMapAnchor:: dw
 
@@ -1947,9 +1923,8 @@ wEvolutionPicOffset:: db
 wEvolutionCanceled:: db
 
 NEXTU
-
+; link
 	ds 9
-
 wd0dc:: ds 1
 
 NEXTU
@@ -1969,7 +1944,7 @@ wTempEnemyMonSpecies::  db
 wTempBattleMonSpecies:: db
 
 wEnemyMon:: battle_struct wEnemyMon
-wEnemyMonBaseStats:: ds 5
+wEnemyMonBaseStats:: ds NUM_EXP_STATS
 wEnemyMonCatchRate:: db
 wEnemyMonBaseExp::   db
 wEnemyMonEnd::
@@ -2087,9 +2062,8 @@ wMapEventStatus:: db
 wScriptFlags::
 ; bit 3: priority jump
 	db
+	ds 1
 wScriptFlags2::
-	db
-wScriptFlags3::
 ; bit 0: count steps
 ; bit 1: coord events
 ; bit 2: warps and connections
@@ -2198,15 +2172,15 @@ wSavedAtLeastOnce:: db
 wSpawnAfterChampion:: db
 
 ; init time set at newgame
-wStartDay:: db
-wStartHour:: db
+wStartDay::    db
+wStartHour::   db
 wStartMinute:: db
 wStartSecond:: db
 
 wRTC:: ds 4
 
-wDSTBackupDay:: db
-wDSTBackupHours:: db
+wDSTBackupDay::     db
+wDSTBackupHours::   db
 wDSTBackupMinutes:: db
 wDSTBackupSeconds:: db
 
@@ -2253,7 +2227,6 @@ wPlayerData2::
 NEXTU
 wObject11Struct:: object_struct wObject11
 wObject12Struct:: object_struct wObject12
-wObjectStructsEnd::
 ENDU
 
 wCmdQueue:: ds CMDQUEUE_CAPACITY * CMDQUEUE_ENTRY_SIZE
@@ -2277,7 +2250,6 @@ wMap12Object::  map_object wMap12
 wMap13Object::  map_object wMap13
 wMap14Object::  map_object wMap14
 wMap15Object::  map_object wMap15
-wMapObjectsEnd::
 
 wObjectMasks:: ds NUM_OBJECTS
 
@@ -2316,23 +2288,18 @@ wJohtoBadges:: flag_array NUM_JOHTO_BADGES
 wKantoBadges:: flag_array NUM_KANTO_BADGES
 
 wTMsHMs:: ds NUM_TMS + NUM_HMS
-wTMsHMsEnd::
 
 wNumItems:: db
 wItems:: ds MAX_ITEMS * 2 + 1
-wItemsEnd::
 
 wNumKeyItems:: db
 wKeyItems:: ds MAX_KEY_ITEMS + 1
-wKeyItemsEnd::
 
 wNumBalls:: db
 wBalls:: ds MAX_BALLS * 2 + 1
-wBallsEnd::
 
 wNumPCItems:: db
 wPCItems:: ds MAX_PC_ITEMS * 2 + 1
-wPCItemsEnd::
 
 wPokegearFlags::
 ; bit 0: map
@@ -2424,17 +2391,19 @@ wMountMoonSquareSceneID::                         db
 
 wEventFlags:: flag_array NUM_EVENTS
 
-wd8b7:: db
+wUnusedLinkCommunicationByte:: db
 
-wGameTimerPause:: db
+wGameTimerPaused::
+; bit 7: game timer paused
+	db
 
 	ds 1
 
-wd8ba::
+wJoypadDisable::
 ; bits 4, 6, or 7 can be used to disable joypad input
 ; bit 4
-; bit 6: mon fainted?
-; bit 7: SGB flag?
+; bit 6: ongoing mon faint animation
+; bit 7: ongoing sgb data transfer
 	db
 
 	ds 1
@@ -2604,10 +2573,9 @@ wDayCareMan::
 ; bit 0: monster 1 in day-care
 	db
 
-wBreedMon1::
-wBreedMon1Nick::  ds MON_NAME_LENGTH
-wBreedMon1OT::    ds NAME_LENGTH
-wBreedMon1Stats:: box_struct wBreedMon1
+wBreedMon1Nick:: ds MON_NAME_LENGTH
+wBreedMon1OT::   ds NAME_LENGTH
+wBreedMon1::     box_struct wBreedMon1
 
 wDayCareLady::
 ; bit 7: active
@@ -2621,10 +2589,9 @@ wBreedMotherOrNonDitto::
 ; nz: no
 	db
 
-wBreedMon2::
-wBreedMon2Nick::  ds MON_NAME_LENGTH
-wBreedMon2OT::    ds NAME_LENGTH
-wBreedMon2Stats:: box_struct wBreedMon2
+wBreedMon2Nick:: ds MON_NAME_LENGTH
+wBreedMon2OT::   ds NAME_LENGTH
+wBreedMon2::     box_struct wBreedMon2
 
 wEggNick:: ds MON_NAME_LENGTH
 wEggOT::   ds NAME_LENGTH
@@ -2669,22 +2636,6 @@ wOTPartyEnd::     db ; older code doesn't check PartyCount
 ENDU
 
 UNION
-; catch tutorial dude pack
-wDudeBag::
-wDudeNumItems:: db
-wDudeItems:: ds 2 * 4
-wDudeItemsEnd:: db
-
-wDudeNumKeyItems:: db
-wDudeKeyItems:: ds 18
-wDudeKeyItemsEnd:: db
-
-wDudeNumBalls:: db
-wDudeBalls:: ds 2 * 4
-wDudeBallsEnd:: db
-wDudeBagEnd::
-
-NEXTU
 ; ot party mons
 wOTPartyMons::
 wOTPartyMon1:: party_struct wOTPartyMon1
@@ -2698,6 +2649,17 @@ wOTPartyMonsEnd::
 wOTPartyMonOT:: ds NAME_LENGTH * PARTY_LENGTH
 wOTPartyMonNicknames:: ds MON_NAME_LENGTH * PARTY_LENGTH
 wOTPartyDataEnd::
+
+NEXTU
+; catch tutorial dude pack
+wDudeNumItems:: db
+wDudeItems:: ds 2 * 4 + 1
+
+wDudeNumKeyItems:: db
+wDudeKeyItems:: ds 18 + 1
+
+wDudeNumBalls:: db
+wDudeBalls:: ds 2 * 4 + 1
 ENDU
 
 wPokemonDataEnd::
@@ -2709,7 +2671,6 @@ SECTION "Stack", WRAMX
 	ds 2
 wStackBottom::
 	ds $fc
-wStack::
 wStackTop::
 	ds 1
 

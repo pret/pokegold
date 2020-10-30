@@ -12,6 +12,7 @@
 ; - AlphabeticalPokedexOrder (see data/pokemon/dex_order_alpha.asm)
 ; - NewPokedexOrder (see data/pokemon/dex_order_new.asm)
 ; - Pokered_MonIndices (see data/pokemon/gen1_order.asm)
+; - Footprints (see gfx/footprints.asm)
 	const_def 1
 	const BULBASAUR  ; 01
 	const IVYSAUR    ; 02

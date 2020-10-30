@@ -91,7 +91,7 @@ InitPokedex:
 	ld [wJumptableIndex], a
 	ld [wPrevDexEntryJumptableIndex], a
 	ld [wPrevDexEntryBackup], a
-	ld [wce66], a
+	ld [wUnusedPokedexByte], a
 
 	call Pokedex_CheckUnlockedUnownMode
 
@@ -1166,7 +1166,7 @@ Pokedex_DrawDexEntryScreenBG:
 	call Pokedex_PlaceFrontpicTopLeftCorner
 	ret
 
-.Unused:
+.Number: ; unreferenced
 	db $5c, $5d, -1 ; No.
 .Height:
 	db "HT  ?", $5e, "??", $5f, -1 ; HT  ?'??"
@@ -2487,14 +2487,14 @@ Pokedex_LoadUnownFont:
 	ld a, BANK(sScratch)
 	call OpenSRAM
 	ld hl, UnownFont
-	ld de, sScratch + $188
+	ld de, sDecompressBuffer
 	ld bc, 39 tiles
 	ld a, BANK(UnownFont)
 	call FarCopyBytes
-	ld hl, sScratch + $188
+	ld hl, sDecompressBuffer
 	ld bc, (NUM_UNOWN + 1) tiles
 	call Pokedex_InvertTiles
-	ld de, sScratch + $188
+	ld de, sDecompressBuffer
 	ld hl, vTiles2 tile FIRST_UNOWN_CHAR
 	lb bc, BANK(Pokedex_LoadUnownFont), NUM_UNOWN + 1
 	call Request2bpp
