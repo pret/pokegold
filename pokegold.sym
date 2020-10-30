@@ -2217,8 +2217,8 @@
 02:50d9 SGB_ApplyPartyMenuHPPals
 02:50f2 SGB_ApplyPartyMenuHPPals.okay
 02:5102 Intro_LoadMagikarpPalettes
-02:5126 Intro_LoadMagikarpPalettes.BGPal
-02:512e Intro_LoadMagikarpPalettes.OBPal
+02:5126 Intro_LoadMagikarpPalettes.MagikarpBGPal
+02:512e Intro_LoadMagikarpPalettes.MagikarpOBPal
 02:5136 Intro_LoadAllPal0
 02:5144 Intro_LoadBetaIntroVenusaurPalettes
 02:5153 Intro_LoadBetaIntroVenusaurPalettes.cgb
@@ -11438,7 +11438,7 @@
 23:538d GetSpriteAnimFrame.restart
 23:539b GetSpriteAnimFrame.GetPointer
 23:53b4 GetFrameOAMPointer
-23:53be BrokenGetStdGraphics
+23:53be UnusedLoadSpriteAnimGFX
 23:53d6 SpriteAnimSeqData
 23:5463 DoAnimFrame
 23:5473 DoAnimFrame.Jumptable
@@ -11684,9 +11684,9 @@
 23:65d7 SpriteAnimOAMData.OAMData_GSIntroHoOh4
 23:661c SpriteAnimOAMData.OAMData_GSIntroHoOh5
 23:6661 SpriteAnimOAMData.OAMData_GSTitleTrail
-23:6666 BrokenStdGFXPointers
+23:6666 UnusedSpriteAnimGFX
 23:668a Sprites_Cosine
-23:668a BrokenStdGFXPointers.deleted
+23:668a UnusedSpriteAnimGFX.DeletedGFX
 23:668c Sprites_Sine
 23:6697 Sprites_Sine.negative_41035
 23:66a1 Sprites_Sine.apply_41035
