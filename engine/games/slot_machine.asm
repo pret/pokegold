@@ -143,7 +143,7 @@ _SlotMachine:
 	call ByteFill
 	call Slots_InitReelTiles
 	call Slots_GetPals
-	ld a, $7
+	ld a, SPRITE_ANIM_DICT_SLOTS
 	ld hl, wSpriteAnimDict
 	ld [hli], a
 	ld [hl], $40
@@ -158,7 +158,7 @@ _SlotMachine:
 	call Random
 	and %00101010
 	ret nz
-	ld a, 1
+	ld a, TRUE
 	ld [wKeepSevenBiasChance], a ; 12.5% chance
 	ret
 

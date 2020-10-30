@@ -112,9 +112,9 @@ IntroScene1:
 	ld hl, Intro_WaterGFX2
 	call Decompress
 	ld hl, wSpriteAnimDict
-	ld a, 0
+	ld a, SPRITE_ANIM_DICT_DEFAULT
 	ld [hli], a
-	ld a, 0
+	ld a, $00
 	ld [hli], a
 	xor a
 	ldh [hSCY], a
@@ -609,9 +609,9 @@ IntroScene6:
 	ld hl, Intro_GrassGFX2
 	call Decompress
 	ld hl, wSpriteAnimDict
-	ld a, 1
+	ld a, SPRITE_ANIM_DICT_GS_INTRO
 	ld [hli], a
-	ld a, 0
+	ld a, $00
 	ld [hli], a
 	xor a
 	ldh [hSCY], a
@@ -790,9 +790,9 @@ IntroScene10:
 	farcall Intro_GetMonFrontpic
 
 	ld hl, wSpriteAnimDict
-	ld a, 1
+	ld a, SPRITE_ANIM_DICT_GS_INTRO
 	ld [hli], a
-	ld a, 0
+	ld a, $00
 	ld [hli], a
 	call EnableLCD
 	ld a, 0

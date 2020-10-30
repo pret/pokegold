@@ -62,7 +62,7 @@ GameFreakPresentsInit:
 	farcall ClearSpriteAnims
 
 	ld hl, wSpriteAnimDict
-	ld a, 6
+	ld a, SPRITE_ANIM_DICT_GS_SPLASH
 	ld [hli], a
 	ld a, $8d
 	ld [hl], a

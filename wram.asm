@@ -243,10 +243,13 @@ NEXTU
 
 ; This union spans 200 bytes.
 UNION
-; wSpriteAnimDict is a 10x2 dictionary
-; keys: taken from third column of SpriteAnimSeqData
-; values: vTiles
-wSpriteAnimDict:: ds 10 * 2
+wSpriteAnimData::
+
+wSpriteAnimDict::
+; wSpriteAnimDict pairs keys with values
+; keys: SPRITE_ANIM_DICT_* indexes (taken from SpriteAnimSeqData)
+; values: vTiles0 offsets
+	ds NUM_SPRITEANIMDICT_ENTRIES * 2
 
 wSpriteAnimationStructs::
 ; field  0:   index
@@ -280,7 +283,9 @@ wCurAnimXOffset:: db
 wCurAnimYOffset:: db
 wGlobalAnimYOffset:: db
 wGlobalAnimXOffset:: db
-wSpriteAnimsEnd::
+
+wSpriteAnimDataEnd::
+
 	ds 7
 
 NEXTU
@@ -650,7 +655,11 @@ wcb9e:: ds 130
 
 NEXTU
 ; battle
-wBattleAnimTileDict:: ds 10
+wBattleAnimTileDict::
+; wBattleAnimTileDict pairs keys with values
+; keys: ANIM_GFX_* indexes (taken from anim_*gfx arguments)
+; values: vTiles0 offsets
+	ds NUM_BATTLEANIMTILEDICT_ENTRIES * 2
 
 wActiveAnimObjects::
 wAnimObject01:: battle_anim_struct wAnimObject01

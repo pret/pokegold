@@ -53,7 +53,7 @@ TitleScreen:
 	call FillTitleScreenPals
 	call LoadTitleScreenTilemap
 	ld hl, wSpriteAnimDict
-	xor a
+	xor a ; SPRITE_ANIM_DICT_DEFAULT and tile offset $00
 	ld [hli], a
 	ld [hl], a
 	ld hl, rLCDC
