@@ -444,21 +444,10 @@ _CGB_GSIntro:
 	ret
 
 .ShellderLaprasBGPalette:
-	RGB 19, 31, 19
-	RGB 18, 23, 31
-	RGB 11, 21, 28
-	RGB 04, 16, 24
+INCLUDE "gfx/intro/shellder_lapras_bg.pal"
 
 .ShellderLaprasOBPals:
-	RGB 29, 29, 29
-	RGB 20, 19, 20
-	RGB 19, 06, 04
-	RGB 03, 04, 06
-
-	RGB 31, 31, 31
-	RGB 31, 31, 31
-	RGB 31, 00, 00
-	RGB 03, 04, 06
+INCLUDE "gfx/intro/shellder_lapras_ob.pal"
 
 .JigglypuffPikachuScene:
 	ld de, wBGPals1
@@ -875,7 +864,4 @@ _CGB_MysteryGift:
 	ret
 
 .MysteryGiftPalette:
-	RGB 31, 31, 31
-	RGB 09, 31, 31
-	RGB 10, 12, 31
-	RGB 00, 03, 19
+INCLUDE "gfx/mystery_gift/mystery_gift.pal"
