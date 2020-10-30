@@ -4,6 +4,7 @@ These instructions explain how to set up the tools required to build **pokegold*
 
 If you run into trouble, ask for help on IRC or Discord (see [README.md](README.md)).
 
+
 ## Windows 10
 
 Download and install [**Windows Subsystem for Linux**](https://docs.microsoft.com/en-us/windows/wsl/install-win10). Then open the **WSL terminal**.
@@ -18,9 +19,10 @@ cd /mnt/c/Users/<user>/Desktop
 
 (The Windows `C:\` drive is called `/mnt/c/` in WSL. Replace *\<user>* in the example path with your username.)
 
-If successful, follow [the regular Linux instructions](#linux) below for whatever distribution you installed for WSL.
+If this works, then follow [the instructions for **Linux**](#linux) below for whatever distribution you installed for WSL.
 
-Otherwise, continue reading below for [the regular Windows instructions](#windows).
+Otherwise, continue reading below for [the older Windows instructions](#windows).
+
 
 ## Windows
 
@@ -102,6 +104,36 @@ git clone -b v0.4.1 --depth=1 https://github.com/gbdev/rgbds
 sudo make -C rgbds install
 ```
 
+### Arch Linux
+
+To install the software required for **pokegold**:
+
+```bash
+sudo pacman -S make gcc git rgbds
+```
+
+If you want to compile and install **rgbds** manually instead of using the Arch package:
+
+```bash
+sudo pacman -S pkg-config flex bison libpng
+git clone -b v0.4.1 --depth=1 https://github.com/gbdev/rgbds
+sudo make -C rgbds install
+```
+
+### Termux
+
+To install the software required for **pokegold**:
+
+```bash
+sudo apt install make clang git sed
+```
+
+To install **rgbds**:
+
+```bash
+sudo apt install rgbds
+```
+
 ### Other distros
 
 If your distro is not listed here, try to find the required software in its repositories:
@@ -126,6 +158,7 @@ sudo make -C rgbds install
 ```
 
 Now you're ready to [build **pokegold**](#build-pokegold).
+
 
 ## Build pokegold
 

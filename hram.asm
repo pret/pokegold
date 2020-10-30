@@ -7,6 +7,7 @@ hRTCDayLo::   db
 hRTCHours::   db
 hRTCMinutes:: db
 hRTCSeconds:: db
+
 	ds 2
 
 hHours:: db
@@ -49,7 +50,6 @@ hMoveMon:: db
 UNION
 hMapObjectIndexBuffer:: db
 hObjectStructIndexBuffer:: db
-
 NEXTU
 hConnectionStripLength:: db
 hConnectedMapWidth:: db

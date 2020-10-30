@@ -124,12 +124,12 @@ LoadMetatiles::
 	ld a, [wOverworldMapAnchor + 1]
 	ld d, a
 	ld hl, wSurroundingTiles
-	ld b, SURROUNDING_HEIGHT / METATILE_WIDTH ; 5
+	ld b, SCREEN_META_HEIGHT
 
 .row
 	push de
 	push hl
-	ld c, SURROUNDING_WIDTH / METATILE_WIDTH ; 6
+	ld c, SCREEN_META_WIDTH
 
 .col
 	push de
@@ -195,7 +195,7 @@ endr
 	add hl, de
 	pop de
 	ld a, [wMapWidth]
-	add 6
+	add MAP_CONNECTION_PADDING_WIDTH * 2
 	add e
 	ld e, a
 	jr nc, .ok2
@@ -562,45 +562,43 @@ GetMapScreenCoords::
 	ld hl, wOverworldMapBlocks
 	ld a, [wXCoord]
 	bit 0, a
-	jr nz, .increment_then_halve1
+	jr nz, .odd_x
+; even x
 	srl a
-	add $1
-	jr .resume
-
-.increment_then_halve1
-	add $1
+	add 1
+	jr .got_block_x
+.odd_x
+	add 1
 	srl a
-
-.resume
+.got_block_x
 	ld c, a
-	ld b, $0
+	ld b, 0
 	add hl, bc
 	ld a, [wMapWidth]
-	add $6
+	add MAP_CONNECTION_PADDING_WIDTH * 2
 	ld c, a
-	ld b, $0
+	ld b, 0
 	ld a, [wYCoord]
 	bit 0, a
-	jr nz, .increment_then_halve2
+	jr nz, .odd_y
+; even y
 	srl a
-	add $1
-	jr .resume2
-
-.increment_then_halve2
-	add $1
+	add 1
+	jr .got_block_y
+.odd_y
+	add 1
 	srl a
-
-.resume2
+.got_block_y
 	call AddNTimes
 	ld a, l
 	ld [wOverworldMapAnchor], a
 	ld a, h
 	ld [wOverworldMapAnchor + 1], a
 	ld a, [wYCoord]
-	and $1
+	and 1
 	ld [wMetatileStandingY], a
 	ld a, [wXCoord]
-	and $1
+	and 1
 	ld [wMetatileStandingX], a
 	ret
 

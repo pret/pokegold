@@ -70,12 +70,12 @@ All the bugs documented here were fixed in Pokémon Crystal. Any that weren't ar
 
 ## Present's text overflows when it fails to heal an enemy Pokémon with a long name
 
-**Fix:** Edit `CantReceiveGiftText` in [data/text/battle.asm](https://github.com/pret/pokegold/blob/master/data/text/battle.asm):
+**Fix:** Edit `PresentFailedText` in [data/text/battle.asm](https://github.com/pret/pokegold/blob/master/data/text/battle.asm):
 
 ```diff
 -; BUG: Pokémon names 8-10 characters long can overflow the textbox,
 -; printing as "Enemy 1234567890 can't": up to 21 characters, over 18.
- CantReceiveGiftText:
+ PresentFailedText:
 -	text "<TARGET> can't"
 -	line "receive the gift!"
 +	text "<TARGET>"
