@@ -256,14 +256,14 @@ DoMysteryGift:
 
 ExchangeMysteryGiftData:
 	farcall ClearChannels
-	call InitializeMysteryGiftInterrupts
+	call InitializeIRCommunicationInterrupts
 
 .restart
 	call BeginIRCommunication
 	call InitializeIRCommunicationRoles
 	ldh a, [hMGStatusFlags]
 	cp MG_CANCELED
-	jp z, EndOrContinueIRCommunication
+	jp z, EndOrContinueMysteryGiftIRCommunication
 	cp MG_OKAY
 	jr nz, .restart
 
@@ -275,8 +275,8 @@ ExchangeMysteryGiftData:
 	ld b, 1
 	call TryReceivingIRDataBlock
 	jr nz, .failed
-	call ReceiveIRDataPayload_GotRegionPrefix
-	jp nz, EndOrContinueIRCommunication
+	call ReceiveMysteryGiftDataPayload_GotRegionPrefix
+	jp nz, EndOrContinueMysteryGiftIRCommunication
 	jr ReceiverExchangeMysteryGiftDataPayloads_GotPayload
 
 .failed
@@ -324,52 +324,52 @@ ExchangeMysteryGiftData:
 	jr z, .continue
 	ld a, MG_CANCELED
 	ldh [hMGStatusFlags], a
-	jp EndOrContinueIRCommunication
+	jp EndOrContinueMysteryGiftIRCommunication
 
 ReceiverExchangeMysteryGiftDataPayloads:
 	; Receive the data payload
-	call ReceiveIRDataPayload
-	jp nz, EndOrContinueIRCommunication
+	call ReceiveMysteryGiftDataPayload
+	jp nz, EndOrContinueMysteryGiftIRCommunication
 	; fallthrough
 ReceiverExchangeMysteryGiftDataPayloads_GotPayload:
 	; Switch roles
 	call BeginSendingIRCommunication
-	jp nz, EndOrContinueIRCommunication
+	jp nz, EndOrContinueMysteryGiftIRCommunication
 	; Send the data payload
-	call SendIRDataPayload
-	jp nz, EndOrContinueIRCommunication
+	call SendMysteryGiftDataPayload
+	jp nz, EndOrContinueMysteryGiftIRCommunication
 	; Switch roles
 	call BeginReceivingIRCommunication
-	jp nz, EndOrContinueIRCommunication
+	jp nz, EndOrContinueMysteryGiftIRCommunication
 	; Receive an empty block
 	call ReceiveEmptyIRDataBlock
-	jp EndOrContinueIRCommunication
+	jp EndOrContinueMysteryGiftIRCommunication
 
 SenderExchangeMysteryGiftDataPayloads:
 	; Send the data payload
-	call SendIRDataPayload
-	jp nz, EndOrContinueIRCommunication
+	call SendMysteryGiftDataPayload
+	jp nz, EndOrContinueMysteryGiftIRCommunication
 	; Switch roles
 	call BeginReceivingIRCommunication
-	jp nz, EndOrContinueIRCommunication
+	jp nz, EndOrContinueMysteryGiftIRCommunication
 	; Receive the data payload
-	call ReceiveIRDataPayload
-	jp nz, EndOrContinueIRCommunication
+	call ReceiveMysteryGiftDataPayload
+	jp nz, EndOrContinueMysteryGiftIRCommunication
 	; Switch roles
 	call BeginSendingIRCommunication
-	jp nz, EndOrContinueIRCommunication
+	jp nz, EndOrContinueMysteryGiftIRCommunication
 	; Send an empty block
 	call SendEmptyIRDataBlock
-	jp EndOrContinueIRCommunication
+	jp EndOrContinueMysteryGiftIRCommunication
 
-ReceiveIRDataPayload:
+ReceiveMysteryGiftDataPayload:
 	; Receive the region prefix
 	ld hl, hMGExchangedByte
 	ld b, 1
 	call TryReceivingIRDataBlock
 	ret nz
 	; fallthrough
-ReceiveIRDataPayload_GotRegionPrefix:
+ReceiveMysteryGiftDataPayload_GotRegionPrefix:
 	; Receive an empty block
 	call ReceiveEmptyIRDataBlock
 	ldh a, [hMGStatusFlags]
@@ -409,7 +409,7 @@ ReceiveIRDataPayload_GotRegionPrefix:
 	cp MG_OKAY
 	ret
 
-SendIRDataPayload:
+SendMysteryGiftDataPayload:
 	; Send the region prefix
 	ld a, REGION_PREFIX
 	ldh [hMGExchangedByte], a
@@ -454,7 +454,7 @@ SendIRDataPayload:
 	cp MG_OKAY
 	ret
 
-EndOrContinueIRCommunication:
+EndOrContinueMysteryGiftIRCommunication:
 	nop
 	ldh a, [hMGStatusFlags]
 	; Quit if player canceled
@@ -487,12 +487,12 @@ EndOrContinueIRCommunication:
 	jr z, .sender
 ; receiver
 	call BeginReceivingIRCommunication
-	jr nz, EndOrContinueIRCommunication
+	jr nz, EndOrContinueMysteryGiftIRCommunication
 	jp ReceiverExchangeMysteryGiftDataPayloads
 
 .sender
 	call BeginSendingIRCommunication
-	jr nz, EndOrContinueIRCommunication
+	jr nz, EndOrContinueMysteryGiftIRCommunication
 	jp SenderExchangeMysteryGiftDataPayloads
 
 .quit
@@ -541,7 +541,7 @@ TryReceivingIRDataBlock:
 	cp MG_OKAY
 	ret
 
-InitializeMysteryGiftInterrupts:
+InitializeIRCommunicationInterrupts:
 	call StartFastIRTimer
 	ld a, 1 << TIMER
 	ldh [rIE], a
