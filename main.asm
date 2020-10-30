@@ -300,12 +300,8 @@ SECTION "Move Animations", ROMX
 INCLUDE "engine/events/bug_contest/display_stats.asm"
 INCLUDE "engine/battle_anims/anim_commands.asm"
 INCLUDE "engine/battle_anims/core.asm"
-INCLUDE "data/battle_anims/objects.asm"
 INCLUDE "engine/battle_anims/functions.asm"
 INCLUDE "engine/battle_anims/helpers.asm"
-INCLUDE "data/battle_anims/framesets.asm"
-INCLUDE "data/battle_anims/oam.asm"
-INCLUDE "data/battle_anims/object_gfx.asm"
 
 
 SECTION "Font Inversed", ROMX
@@ -381,7 +377,6 @@ INCLUDE "engine/debug/color_picker.asm"
 SECTION "Standard Scripts", ROMX
 
 INCLUDE "engine/events/std_scripts.asm"
-INCLUDE "data/text/std_text.asm"
 INCLUDE "data/text/battle.asm"
 
 

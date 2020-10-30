@@ -776,3 +776,5 @@ Movement_ContestResults_WalkAfterWarp:
 	step DOWN
 	turn_head UP
 	step_end
+
+INCLUDE "data/text/std_text.asm"

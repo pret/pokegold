@@ -112,8 +112,8 @@ _CGB_BattleColors:
 	ld [wDefaultSGBLayout], a
 	call ApplyPals
 _CGB_FinishBattleScreenLayout:
-	ld hl, TilesetBGPalette palette 7
-	ld de, wBGPals1 palette 7
+	ld hl, TilesetBGPalette palette PAL_BATTLE_BG_TEXT
+	ld de, wBGPals1 palette PAL_BATTLE_BG_TEXT
 	ld bc, 1 palettes
 	call CopyBytes
 	hlcoord 0, 0, wAttrmap
