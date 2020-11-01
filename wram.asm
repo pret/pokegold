@@ -1934,7 +1934,8 @@ wEvolutionCanceled:: db
 NEXTU
 ; link
 	ds 9
-wd0dc:: ds 1
+wLinkBattleRNPreamble:: ds SERIAL_RN_PREAMBLE_LENGTH
+wLinkBattleRNs:: ds SERIAL_RNS_LENGTH
 
 NEXTU
 ; miscellaneous
@@ -1944,10 +1945,6 @@ wOtherDecoration::    db
 	ds 3
 wCurEnemyItem:: db
 ENDU
-
-	ds 3
-
-wLinkBattleRNs:: ds 10
 
 wTempEnemyMonSpecies::  db
 wTempBattleMonSpecies:: db
