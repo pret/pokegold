@@ -1148,7 +1148,7 @@ LinkTradeOTPartymonMenuLoop:
 .not_d_up
 	bit D_DOWN_F, a
 	jp z, LinkTradePartiesMenuMasterLoop
-	jp LinkTradeCheckCancel
+	jp LinkTradeOTPartymonMenuCheckCancel
 
 LinkTrade_PlayerPartyMenu:
 	xor a
@@ -1376,11 +1376,12 @@ LinkTrade_TradeStatsMenu:
 	text_far _LinkAbnormalMonText
 	text_end
 
-LinkTradeCheckCancel:
+LinkTradeOTPartymonMenuCheckCancel:
 	ld a, [wMenuCursorY]
 	cp 1
 	jp nz, LinkTradePartiesMenuMasterLoop
 	call HideCursor
+
 .loop1
 	ld a, "▶"
 	ldcoord_a 1, 16
@@ -1408,6 +1409,8 @@ LinkTradeCheckCancel:
 	ld a, [wOtherPlayerLinkMode]
 	cp $f
 	jr nz, .loop1
+	; fallthrough
+
 ExitLinkCommunications:
 	xor a
 	ld [wUnusedLinkCommunicationByte], a

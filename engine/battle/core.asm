@@ -7335,7 +7335,7 @@ SendOutMonText:
 	and a
 	jr z, .not_linked
 
-	ld hl, JumpText_GoMon ; If we're in a LinkBattle print just "Go <PlayerMon>"
+	ld hl, GoMonText ; If we're in a LinkBattle print just "Go <PlayerMon>"
 
 	ld a, [wBattleHasJustStarted] ; unless this (unidentified) variable is set
 	and a
@@ -7346,7 +7346,7 @@ SendOutMonText:
 	ld hl, wEnemyMonHP
 	ld a, [hli]
 	or [hl]
-	ld hl, JumpText_GoMon
+	ld hl, GoMonText
 	jr z, .skip_to_textbox
 
 	; compute enemy helth remaining as a percentage
@@ -7375,36 +7375,36 @@ SendOutMonText:
 	call Divide
 
 	ldh a, [hQuotient + 3]
-	ld hl, JumpText_GoMon
+	ld hl, GoMonText
 	cp 70
 	jr nc, .skip_to_textbox
 
-	ld hl, JumpText_DoItMon
+	ld hl, DoItMonText
 	cp 40
 	jr nc, .skip_to_textbox
 
-	ld hl, JumpText_GoForItMon
+	ld hl, GoForItMonText
 	cp 10
 	jr nc, .skip_to_textbox
 
-	ld hl, JumpText_YourFoesWeakGetmMon
+	ld hl, YourFoesWeakGetmMonText
 .skip_to_textbox
 	jp PrintText
 
-JumpText_GoMon:
-	text_far Text_GoMon
+GoMonText:
+	text_far _GoMonText
 	text_end
 
-JumpText_DoItMon:
-	text_far Text_DoItMon
+DoItMonText:
+	text_far _DoItMonText
 	text_end
 
-JumpText_GoForItMon:
-	text_far Text_GoForItMon
+GoForItMonText:
+	text_far _GoForItMonText
 	text_end
 
-JumpText_YourFoesWeakGetmMon:
-	text_far Text_YourFoesWeakGetmMon
+YourFoesWeakGetmMonText:
+	text_far _YourFoesWeakGetmMonText
 	text_end
 
 WithdrawMonText:
@@ -7412,7 +7412,7 @@ WithdrawMonText:
 	jp PrintText
 
 .WithdrawMonText:
-	text_far Text_BattleMonNickComma
+	text_far _BattleMonNickCommaText
 	text_asm
 ; Print text to withdraw mon
 ; depending on HP the message is different
