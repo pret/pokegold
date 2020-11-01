@@ -6324,10 +6324,10 @@
 0a:43b4 ClearLinkData
 0a:43ba ClearLinkData.loop
 0a:43c2 FixDataForLinkTransfer
-0a:43c9 FixDataForLinkTransfer.loop1
-0a:43cf FixDataForLinkTransfer.loop2
-0a:43e5 FixDataForLinkTransfer.loop3
-0a:43f2 FixDataForLinkTransfer.loop4
+0a:43c9 FixDataForLinkTransfer.preamble_loop
+0a:43cf FixDataForLinkTransfer.rn_loop
+0a:43e5 FixDataForLinkTransfer.loop1
+0a:43f2 FixDataForLinkTransfer.loop2
 0a:4408 FixDataForLinkTransfer.got_value
 0a:440d FixDataForLinkTransfer.next2
 0a:441a FixDataForLinkTransfer.next1
@@ -34469,8 +34469,8 @@
 01:d0da wCurEnemyItem
 01:d0da wCurHPBarPixels
 01:d0db wNewHPBarPixels
+01:d0dc wLinkBattleRNPreamble
 01:d0dc wCurHPAnimDeltaHP
-01:d0dc wd0dc
 01:d0de wCurHPAnimLowHP
 01:d0df wCurHPAnimHighHP
 01:d0e3 wLinkBattleRNs
