@@ -7,7 +7,7 @@ SpriteAnimFrameData:
 	dw .Frameset_GSIntroBubble
 	dw .Frameset_GSIntroShellder
 	dw .Frameset_GSIntroMagikarp
-	dw .Frameset_UnusedLapras
+	dw .Frameset_UnusedIntroAerodactyl
 	dw .Frameset_GSIntroLapras
 	dw .Frameset_GSIntroNote
 	dw .Frameset_GSIntroInvisibleNote
@@ -98,8 +98,8 @@ SpriteAnimFrameData:
 	frame SPRITE_ANIM_OAMSET_GS_INTRO_MAGIKARP_2,  1, OAM_X_FLIP
 	dorestart
 
-.Frameset_UnusedLapras:
-	frame SPRITE_ANIM_OAMSET_GS_INTRO_UNUSED_LAPRAS,  7, OAM_X_FLIP
+.Frameset_UnusedIntroAerodactyl:
+	frame SPRITE_ANIM_OAMSET_UNUSED_INTRO_AERODACTYL,  7, OAM_X_FLIP
 	endanim
 
 .Frameset_GSIntroLapras:
@@ -380,7 +380,6 @@ IF DEF(_GOLD)
 	frame SPRITE_ANIM_OAMSET_GS_INTRO_HO_OH_LUGIA_3,  9
 	frame SPRITE_ANIM_OAMSET_GS_INTRO_HO_OH_LUGIA_5, 10
 	dorestart
-
 ELIF DEF(_SILVER)
 	frame SPRITE_ANIM_OAMSET_GS_INTRO_HO_OH_LUGIA_2,  3
 	frame SPRITE_ANIM_OAMSET_GS_INTRO_HO_OH_LUGIA_1,  7

@@ -419,9 +419,9 @@ Intro_InitLapras:
 	call InitSpriteAnimStruct
 	ret
 
-Intro_UnusedInitLapras: ; unreferenced
+Intro_UnusedInitAerodactyl: ; unreferenced
 	depixel 2, 0
-	ld a, SPRITE_ANIM_INDEX_UNUSED_LAPRAS
+	ld a, SPRITE_ANIM_INDEX_UNUSED_INTRO_AERODACTYL
 	call InitSpriteAnimStruct
 	ret
 

@@ -20,7 +20,7 @@ DoAnimFrame:
 	dw AnimSeq_GSIntroBubble
 	dw AnimSeq_GSIntroShellder
 	dw AnimSeq_GSIntroMagikarp
-	dw AnimSeq_UnusedLapras
+	dw AnimSeq_UnusedIntroAerodactyl
 	dw AnimSeq_GSIntroLapras
 	dw AnimSeq_GSIntroNote
 	dw AnimSeq_GSIntroJigglypuff
@@ -225,7 +225,7 @@ AnimSeq_GSIntroMagikarp:
 	call DeinitializeSprite
 	ret
 
-AnimSeq_UnusedLapras:
+AnimSeq_UnusedIntroAerodactyl:
 	ld hl, SPRITEANIMSTRUCT_XCOORD
 	add hl, bc
 	ld a, [hl]
