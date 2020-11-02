@@ -537,7 +537,19 @@ wUnusedJigglypuffNoteXCoord:: db
 
 NEXTU
 ; raw link data
-wLinkData:: ds $514
+wLinkData:: ds 271
+wc80f:: ds 229
+wc8f4:: ds 5
+wc8f9:: ds 198
+wc9bf:: ds 79
+wca0e:: ds 5
+wca13:: ds 113
+wca84:: ds 100
+wcae8:: dw
+wLinkOTPartyMonTypes:: ds 2 * PARTY_LENGTH
+	ds 84
+wcb4a:: ds 84
+wcb9e:: ds 118
 wLinkDataEnd::
 
 NEXTU
@@ -586,7 +598,6 @@ wMysteryGiftGameVersion:: db
 wMysteryGiftPartnerID:: dw
 wMysteryGiftPartnerName:: ds NAME_LENGTH
 wMysteryGiftPartnerDexCaught:: db
-wc80f::
 wMysteryGiftPartnerSentDeco:: db
 wMysteryGiftPartnerWhichItem:: db
 wMysteryGiftPartnerWhichDeco:: db
@@ -607,11 +618,6 @@ wMysteryGiftPlayerWhichDeco:: db
 wMysteryGiftPlayerBackupItem:: db
 	ds 1
 wMysteryGiftPlayerDataEnd::
-
-	ds 144
-
-wc8f4:: ds 5
-wc8f9:: ds 7
 
 NEXTU
 ; LCD expects wLYOverrides to have an alignment of $100
@@ -639,19 +645,6 @@ NEXTU
 wUnusedMysteryGiftStagedDataLength:: db
 wMysteryGiftMessageCount:: db
 wMysteryGiftStagedDataLength:: db
-
-NEXTU
-; link
-	ds 191
-wc9bf:: ds 79
-wca0e:: ds 5
-wca13:: ds 113
-wca84:: ds 100
-wcae8:: dw
-wLinkOTPartyMonTypes:: ds 2 * PARTY_LENGTH
-	ds 84
-wcb4a:: ds 84
-wcb9e:: ds 130
 
 NEXTU
 ; battle
