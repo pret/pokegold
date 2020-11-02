@@ -11457,8 +11457,8 @@
 23:5576 AnimSeq_GSIntroMagikarp.one
 23:5581 AnimSeq_GSIntroMagikarp.sgb
 23:559e AnimSeq_GSIntroMagikarp.delete
-23:55a2 AnimSeq_UnusedLapras
-23:55bb AnimSeq_UnusedLapras.delete
+23:55a2 AnimSeq_UnusedIntroAerodactyl
+23:55bb AnimSeq_UnusedIntroAerodactyl.delete
 23:55bf AnimSeq_GSIntroLapras
 23:55c3 AnimSeq_GSIntroLapras.anon_dw
 23:55c9 AnimSeq_GSIntroLapras.zero
@@ -11577,7 +11577,7 @@
 23:5c6b SpriteAnimFrameData.Frameset_GSIntroBubble
 23:5c70 SpriteAnimFrameData.Frameset_GSIntroShellder
 23:5c75 SpriteAnimFrameData.Frameset_GSIntroMagikarp
-23:5c7a SpriteAnimFrameData.Frameset_UnusedLapras
+23:5c7a SpriteAnimFrameData.Frameset_UnusedIntroAerodactyl
 23:5c7d SpriteAnimFrameData.Frameset_GSIntroLapras
 23:5c86 SpriteAnimFrameData.Frameset_GSIntroNote
 23:5c89 SpriteAnimFrameData.Frameset_GSIntroInvisibleNote
@@ -11653,7 +11653,7 @@
 23:6194 SpriteAnimOAMData.OAMData_PartyMonWithItem1
 23:61a5 SpriteAnimOAMData.OAMData_PartyMonWithItem2
 23:61b6 SpriteAnimOAMData.OAMData_GSIntroMagikarp
-23:61cf SpriteAnimOAMData.OAMData_UnusedLapras
+23:61cf SpriteAnimOAMData.OAMData_UnusedIntroAerodactyl
 23:61f8 SpriteAnimOAMData.OAMData_GSIntroLapras1
 23:6265 SpriteAnimOAMData.OAMData_GSIntroLapras2
 23:62d2 SpriteAnimOAMData.OAMData_GSIntroLapras3
@@ -16935,7 +16935,7 @@
 39:4da2 Intro_InitShellders
 39:4db1 Intro_InitShellders.InitAnim
 39:4db7 Intro_InitLapras
-39:4dc6 Intro_UnusedInitLapras
+39:4dc6 Intro_UnusedInitAerodactyl
 39:4dcf Intro_UpdateTilemapAndBGMap
 39:4dec Intro_UpdateTilemapAndBGMap.loop
 39:4e26 Intro_AnimateOceanWaves
