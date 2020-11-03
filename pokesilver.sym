@@ -2609,7 +2609,7 @@
 03:43ec FoundOne
 03:43f2 FoundNone
 03:43f7 NameRival
-03:440c NameRival.default
+03:440c NameRival.DefaultName
 03:4411 NameRater
 03:4418 OverworldTownMap
 03:4425 UnownPrinter
@@ -5054,7 +5054,6 @@
 05:62f4 TakeCoins.okay
 05:62f6 CheckCoins
 05:62fe Marts
-05:6342 Marts.End
 05:6342 MartCherrygrove
 05:6348 MartCherrygroveDex
 05:634f MartViolet
