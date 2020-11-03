@@ -6300,7 +6300,7 @@
 0a:412d Gen2ToGen1LinkComms.party_loop
 0a:4146 Gen2ToGen1LinkComms.done_party
 0a:416f Gen2ToGen2LinkComms
-0a:41a6 Gen2ToGen2LinkComms.Player1
+0a:41a6 Gen2ToGen2LinkComms.player_1
 0a:41f5 Gen2ToGen2LinkComms.not_trading
 0a:421c Gen2ToGen2LinkComms.loop1
 0a:423b Gen2ToGen2LinkComms.next1
