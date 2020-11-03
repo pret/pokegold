@@ -18,7 +18,7 @@ BattleCommand_BellyDrum:
 	callfar SubtractHPFromUser
 	call UpdateUserInParty
 
-rept 5
+rept MAX_STAT_LEVEL - BASE_STAT_LEVEL - 1
 	call BattleCommand_AttackUp2
 endr
 

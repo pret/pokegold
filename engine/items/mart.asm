@@ -8,7 +8,7 @@
 
 GetMart:
 	ld a, e
-	cp (Marts.End - Marts) / 2
+	cp NUM_MARTS
 	jr c, .IsAMart
 	ld b, BANK(DefaultMart)
 	ld de, DefaultMart

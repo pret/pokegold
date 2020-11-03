@@ -193,7 +193,7 @@ SchoolboyBillyAfterBattleText:
 	done
 
 Route15SignText:
-	text "Route 15"
+	text "Route 15" ; should be "ROUTE 15"
 
 	para "FUCHSIA CITY -"
 	line "LAVENDER TOWN"

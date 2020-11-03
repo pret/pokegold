@@ -7006,7 +7006,7 @@ GiveExperiencePoints:
 
 .skip_active_mon_update
 	; level up happiness mod
-	ld c, 1
+	ld c, HAPPINESS_GAINLEVEL
 	callfar ChangeHappiness
 	ld a, [wCurBattleMon]
 	ld b, a

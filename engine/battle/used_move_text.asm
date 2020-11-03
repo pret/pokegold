@@ -1,5 +1,5 @@
 BattleCommand_UsedMoveText:
-; battle command 03
+; usedmovetext
 	ld hl, UsedMoveText
 	call PrintText
 	jp WaitBGMap

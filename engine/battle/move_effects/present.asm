@@ -34,7 +34,7 @@ BattleCommand_Present:
 
 .heal_effect
 	pop bc
-	ld a, 3
+	ld a, $3 ; heal animation
 	ld [wBattleAnimParam], a
 	call AnimateCurrentMove
 	call BattleCommand_SwitchTurn

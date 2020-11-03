@@ -1304,7 +1304,7 @@ RareCandyEffect:
 	ld a, [hl]
 	adc b
 	ld [hl], a
-	ld c, 1
+	ld c, HAPPINESS_GAINLEVEL
 	farcall ChangeHappiness
 
 	ld a, PARTYMENUTEXT_LEVEL_UP
