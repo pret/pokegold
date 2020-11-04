@@ -1897,13 +1897,10 @@ wEvolvableFlags:: flag_array PARTY_LENGTH
 wForceEvolution:: db
 
 UNION
-; unidentified
-wBuffer1:: db
-wBuffer2:: db
-wBuffer3:: db
-wBuffer4:: db
-wBuffer5:: db
-wBuffer6:: db
+; general-purpose HP buffers
+wHPBuffer1:: dw
+wHPBuffer2:: dw
+wHPBuffer3:: dw
 
 NEXTU
 ; HP bar animations
