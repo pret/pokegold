@@ -419,6 +419,7 @@ Gen2ToGen2LinkComms:
 	ld [wOtherTrainerClass], a
 	call ClearTilemap
 	call WaitBGMap
+
 	ld hl, wOptions
 	ld a, [hl]
 	push af
@@ -430,19 +431,19 @@ Gen2ToGen2LinkComms:
 	ld bc, NAME_LENGTH
 	call CopyBytes
 	call ReturnToMapFromSubmenu
-
-	; LET'S DO THIS
 	ld a, [wDisableTextAcceleration]
 	push af
 	ld a, 1
 	ld [wDisableTextAcceleration], a
 
+	; LET'S DO THIS
 	predef StartBattle
 
 	pop af
 	ld [wDisableTextAcceleration], a
 	pop af
 	ld [wOptions], a
+
 	farcall LoadPokemonData
 	jp ExitLinkCommunications
 

@@ -232,7 +232,7 @@ Kurt_SelectApricorn:
 
 .MenuData:
 	db SCROLLINGMENU_ENABLE_SELECT | SCROLLINGMENU_ENABLE_FUNCTION3
-	dbw 0, wBuffer1
+	dbw 0, wKurtApricornCount
 	dw .Name
 	dw NULL
 
@@ -251,9 +251,10 @@ Kurt_SelectApricorn:
 
 FindApricornsInBag:
 ; Checks the bag for Apricorns.
-	ld hl, wBuffer1
+	ld hl, wKurtApricornCount
 	xor a
 	ld [hli], a
+	assert wKurtApricornCount + 1 == wKurtApricornItems
 	dec a
 	ld bc, 10
 	call ByteFill
@@ -279,15 +280,15 @@ FindApricornsInBag:
 .done
 	xor a
 	call .addtobuffer
-	ld a, [wBuffer1]
+	ld a, [wKurtApricornCount]
 	cp 1
 	ret nz
 	scf
 	ret
 
-.addtobuffer
+.addtobuffer:
 	push hl
-	ld hl, wBuffer1
+	ld hl, wKurtApricornCount
 	inc [hl]
 	ld e, [hl]
 	ld d, 0

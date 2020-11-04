@@ -431,7 +431,7 @@ LoadPinkPage:
 	call PrintNum
 ; level-up graphics and strings
 	call .CalcExpToNextLevel
-	ld de, wBuffer1
+	ld de, wExpToNextLevel
 	hlcoord 13, 13
 	lb bc, 3, 7
 	call PrintNum
@@ -475,18 +475,18 @@ LoadPinkPage:
 	ldh a, [hQuotient + 3]
 	sub [hl]
 	dec hl
-	ld [wBuffer3], a
+	ld [wExpToNextLevel + 2], a
 	ldh a, [hQuotient + 2]
 	sbc [hl]
 	dec hl
-	ld [wBuffer2], a
+	ld [wExpToNextLevel + 1], a
 	ldh a, [hQuotient + 1]
 	sbc [hl]
-	ld [wBuffer1], a
+	ld [wExpToNextLevel], a
 	ret
 
 .AlreadyAtMaxLevel:
-	ld hl, wBuffer1
+	ld hl, wExpToNextLevel
 	xor a
 	ld [hli], a
 	ld [hli], a
@@ -588,11 +588,11 @@ LoadGreenPage:
 	call PlaceString
 	hlcoord 8, 10
 	ld a, SCREEN_WIDTH * 2
-	ld [wBuffer1], a
+	ld [wListMovesLineSpacing], a
 	call ListMoves
 	hlcoord 12, 11
 	ld a, SCREEN_WIDTH * 2
-	ld [wBuffer1], a
+	ld [wListMovesLineSpacing], a
 	call ListMovePP
 
 ; Load palettes / place frontpic

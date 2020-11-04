@@ -7,9 +7,9 @@ SelectQuantityToToss:
 SelectQuantityToBuy:
 	farcall GetItemPrice
 	ld a, d
-	ld [wBuffer1], a
+	ld [wBuySellItemPrice + 0], a
 	ld a, e
-	ld [wBuffer2], a
+	ld [wBuySellItemPrice + 1], a
 	ld hl, BuyItem_MenuHeader
 	call LoadMenuHeader
 	call Toss_Sell_Loop
@@ -18,9 +18,9 @@ SelectQuantityToBuy:
 SelectQuantityToSell:
 	farcall GetItemPrice
 	ld a, d
-	ld [wBuffer1], a
+	ld [wBuySellItemPrice + 0], a
 	ld a, e
-	ld [wBuffer2], a
+	ld [wBuySellItemPrice + 1], a
 	ld hl, SellItem_MenuHeader
 	call LoadMenuHeader
 	call Toss_Sell_Loop
@@ -157,9 +157,9 @@ DisplaySellingPrice:
 BuySell_MultiplyPrice:
 	xor a
 	ldh [hMultiplicand + 0], a
-	ld a, [wBuffer1]
+	ld a, [wBuySellItemPrice + 0]
 	ldh [hMultiplicand + 1], a
-	ld a, [wBuffer2]
+	ld a, [wBuySellItemPrice + 1]
 	ldh [hMultiplicand + 2], a
 	ld a, [wItemQuantityChangeBuffer]
 	ldh [hMultiplier], a
