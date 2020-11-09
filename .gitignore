@@ -49,8 +49,5 @@ used_space.png
 .*.swp
 *~
 
-# Visual Studio files
-.vs/*
-
 # macos files
 .DS_STORE
