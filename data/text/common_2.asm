@@ -982,11 +982,11 @@ _OakPCText4::
 	line "OAK's PC closed."
 	done
 
-_DummyGameYeahText::
+_MemoryGameYeahText::
 	text " , yeah!"
 	done
 
-_DummyGameDarnText::
+_MemoryGameDarnText::
 	text "Darn…"
 	done
 
