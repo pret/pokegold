@@ -635,7 +635,7 @@ ContinueGettingMenuJoypad:
 	call GetMenuIndexSet
 	ld a, [wMenuCursorY]
 	ld l, a
-	ld h, $0
+	ld h, 0
 	add hl, de
 	ld a, [hl]
 	ld [wMenuSelection], a
@@ -698,7 +698,7 @@ MenuJumptable::
 
 GetMenuDataPointerTableEntry::
 	ld e, a
-	ld d, $0
+	ld d, 0
 	ld hl, wMenuDataPointerTableAddr
 	ld a, [hli]
 	ld h, [hl]

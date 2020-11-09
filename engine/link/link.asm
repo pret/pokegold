@@ -341,7 +341,7 @@ Gen2ToGen2LinkComms:
 	jr z, .start_copying_mail
 	ld hl, wcb4a
 	dec a
-	ld b, $0
+	ld b, 0
 	ld c, a
 	add hl, bc
 	ld [hl], SERIAL_NO_DATA_BYTE

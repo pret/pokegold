@@ -134,7 +134,7 @@ PlacePartyHPBar:
 	ld hl, wHPPals
 	ld a, [wSGBPals]
 	ld c, a
-	ld b, $0
+	ld b, 0
 	add hl, bc
 	call SetHPPal
 	ld b, SCGB_PARTY_MENU_HP_BARS
@@ -604,7 +604,7 @@ PartyMenuSelect:
 	dec a
 	ld [wCurPartyMon], a
 	ld c, a
-	ld b, $0
+	ld b, 0
 	ld hl, wPartySpecies
 	add hl, bc
 	ld a, [hl]
@@ -637,7 +637,7 @@ PrintPartyMenuText:
 	and $f ; drop high nibble
 	ld hl, PartyMenuStrings
 	ld e, a
-	ld d, $0
+	ld d, 0
 	add hl, de
 	add hl, de
 	ld a, [hli]

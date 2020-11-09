@@ -1029,7 +1029,7 @@ CoordinatesEventText::
 CheckObjectMask::
 	ldh a, [hMapObjectIndexBuffer]
 	ld e, a
-	ld d, $0
+	ld d, 0
 	ld hl, wObjectMasks
 	add hl, de
 	ld a, [hl]
@@ -1038,7 +1038,7 @@ CheckObjectMask::
 MaskObject::
 	ldh a, [hMapObjectIndexBuffer]
 	ld e, a
-	ld d, $0
+	ld d, 0
 	ld hl, wObjectMasks
 	add hl, de
 	ld [hl], -1 ; masked
@@ -1047,7 +1047,7 @@ MaskObject::
 UnmaskObject::
 	ldh a, [hMapObjectIndexBuffer]
 	ld e, a
-	ld d, $0
+	ld d, 0
 	ld hl, wObjectMasks
 	add hl, de
 	ld [hl], 0 ; unmasked
@@ -1565,7 +1565,7 @@ GetCoordTile::
 	and a
 	jr z, .nope
 	ld l, a
-	ld h, $0
+	ld h, 0
 	add hl, hl
 	add hl, hl
 	ld a, [wTilesetCollisionAddress]

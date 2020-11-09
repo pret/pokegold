@@ -654,7 +654,7 @@ BattleAnimCmd_5GFX:
 	push bc
 	push hl
 	ld l, a
-	ld h, $0
+	ld h, 0
 rept 4
 	add hl, hl
 endr

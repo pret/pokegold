@@ -119,7 +119,7 @@ SGB_ApplyPartyMenuHPPals:
 	ld hl, wHPPals
 	ld a, [wSGBPals]
 	ld e, a
-	ld d, $0
+	ld d, 0
 	add hl, de
 	ld e, l
 	ld d, h
@@ -424,7 +424,7 @@ CopyPalettes:
 
 GetPredefPal:
 	ld l, a
-	ld h, $0
+	ld h, 0
 	add hl, hl
 	add hl, hl
 	add hl, hl
@@ -568,7 +568,7 @@ CGB_ApplyPartyMenuHPPals:
 	ld hl, wHPPals
 	ld a, [wSGBPals]
 	ld e, a
-	ld d, $0
+	ld d, 0
 	add hl, de
 	ld e, l
 	ld d, h
@@ -688,7 +688,7 @@ CGBCopyTwoPredefObjectPals: ; unreferenced
 
 _GetMonPalettePointer:
 	ld l, a
-	ld h, $0
+	ld h, 0
 	add hl, hl
 	add hl, hl
 	add hl, hl
