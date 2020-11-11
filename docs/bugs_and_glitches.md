@@ -20,6 +20,7 @@ All the bugs documented here were fixed in Pokémon Crystal. Any that weren't ar
 - [The Lucky Number Show does not find winning ID numbers in inactive boxes 10-14](#the-lucky-number-show-does-not-find-winning-id-numbers-in-inactive-boxes-10-14)
 - [Present's text overflows when it fails to heal an enemy Pokémon with a long name](#presents-text-overflows-when-it-fails-to-heal-an-enemy-pokémon-with-a-long-name)
 - [You can fish in the water in Cerulean Gym](#you-can-fish-in-the-water-in-cerulean-gym)
+- ["Route 15" is not capitalized in a signpost](#route-15-is-not-capitalized-in-a-signpost)
 
 
 ## Using the Coin Case can cause arbitrary code execution
@@ -92,3 +93,15 @@ All the bugs documented here were fixed in Pokémon Crystal. Any that weren't ar
 -	map CeruleanGym, TILESET_PORT, INDOOR, LANDMARK_CERULEAN_CITY, MUSIC_GYM, TRUE, PALETTE_DAY, FISHGROUP_SHORE
 +	map CeruleanGym, TILESET_PORT, INDOOR, LANDMARK_CERULEAN_CITY, MUSIC_GYM, TRUE, PALETTE_DAY, FISHGROUP_NONE
 ```
+
+
+## "Route 15" is not capitalized in a signpost
+
+**Fix:** Edit `Route15SignText` in [maps/Route15.asm](https://github.com/pret/pokegold/blob/master/maps/Route15.asm):
+
+```diff
+-	text "Route 15" ; should be "ROUTE 15"
++	text "ROUTE 15"
+```
+
+(There are many other text changes between Gold/Silver and Crystal, but they are more subjective edits, not definite corrections.)
