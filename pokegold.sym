@@ -10327,6 +10327,7 @@
 14:5ad6 InsertDataIntoBoxOrParty.loop
 14:5afc InsertDataIntoBoxOrParty.insert
 14:5b0b BaseData
+14:7a6b BaseData.End
 14:7a6b BetaMonPicBanks
 14:7a83 EggPic
 15:4000 KingdraFrontpic
