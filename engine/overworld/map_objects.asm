@@ -1755,7 +1755,8 @@ StepFunction_ScreenShake:
 	ret
 
 StepFunction_16:
-	call Field1c_AnonJumptable ; ????
+	call Field1c_AnonJumptable
+	; jumptable was dummied out here
 
 StepFunction_17:
 	call Field1c_AnonJumptable

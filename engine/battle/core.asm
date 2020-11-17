@@ -2304,17 +2304,19 @@ WinTrainerBattle:
 	call BattleWinSlideInEnemyTrainerFrontpic
 	ld c, 40
 	call DelayFrames
+
 	ld a, [wBattleType]
 	cp BATTLETYPE_CANLOSE
 	jr nz, .skip_heal
 	predef HealParty
 .skip_heal
+
 	ld a, [wDebugFlags]
 	bit DEBUG_BATTLE_F, a
-	jr nz, .GiveMoney
+	jr nz, .skip_win_loss_text
 	call PrintWinLossText
+.skip_win_loss_text
 
-.GiveMoney:
 	ld a, [wAmuletCoin]
 	and a
 	call nz, .DoubleReward
@@ -2576,7 +2578,8 @@ UpdateFaintedPlayerMon:
 	ld a, [wWhichMonFaintedFirst]
 	and a
 	ret z
-	ret ; ??????????
+	; code was probably dummied out here
+	ret
 
 AskUseNextPokemon:
 	call EmptyBattleTextbox
@@ -2971,7 +2974,8 @@ EnemySwitch_SetMode:
 	jp ShowSetEnemyMonAndSendOutAnimation
 
 CheckWhetherSwitchmonIsPredetermined:
-; returns carry if: ???
+; returns the enemy switchmon index in b, or
+; returns carry if the index is not yet determined.
 	ld a, [wLinkMode]
 	and a
 	jr z, .not_linked
@@ -2993,7 +2997,7 @@ CheckWhetherSwitchmonIsPredetermined:
 .check_wBattleHasJustStarted
 	ld a, [wBattleHasJustStarted]
 	and a
-	ld b, $0
+	ld b, 0
 	jr nz, .return_carry
 
 	and a

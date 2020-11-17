@@ -13,6 +13,7 @@ FEMALE EQU 1
 	const CHECK_FLAG
 
 ; G/S version ID: 0 = Gold, 1 = Silver (used by checkver)
+; Mystery Gift uses incremented values 1 and 2
 IF DEF(_GOLD)
 GS_VERSION EQU 0
 ELIF DEF(_SILVER)
@@ -20,6 +21,7 @@ GS_VERSION EQU 1
 ENDC
 ; Pokémon Pikachu 2, a step counter / virtual pet device (used by Mystery Gift)
 POKEMON_PIKACHU_2_VERSION EQU 3
+RESERVED_GAME_VERSION EQU 4
 
 ; save file corruption check values
 SAVE_CHECK_VALUE_1 EQU 99

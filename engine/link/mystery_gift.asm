@@ -86,7 +86,7 @@ DoMysteryGift:
 	jr z, .skip_append_save
 	call .AddMysteryGiftPartnerID
 	ld a, [wMysteryGiftGameVersion]
-	cp 4 ; ???
+	cp RESERVED_GAME_VERSION
 	jr z, .skip_append_save
 	call .SaveMysteryGiftTrainerName
 .skip_append_save

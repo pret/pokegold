@@ -21,5 +21,5 @@ ELIF DEF(_SILVER)
 	db "OSCAR@"
 	db "MAX@"
 ENDC
-	db 2 ; ????
+	db 2 ; title indent
 	db "NAME@" ; title
