@@ -1696,14 +1696,15 @@ wNumHits:: db
 
 	ds 1
 
-wMonOrItemNameBuffer:: ds 22
+wMonOrItemNameBuffer:: ds NAME_LENGTH
+	ds NAME_LENGTH
 wTMHMMoveNameBackup:: ds MOVE_NAME_LENGTH
 
-wStringBuffer1:: ds 19
-wStringBuffer2:: ds 19
-wStringBuffer3:: ds 19
-wStringBuffer4:: ds 19
-wStringBuffer5:: ds 13
+wStringBuffer1:: ds STRING_BUFFER_LENGTH
+wStringBuffer2:: ds STRING_BUFFER_LENGTH
+wStringBuffer3:: ds STRING_BUFFER_LENGTH
+wStringBuffer4:: ds STRING_BUFFER_LENGTH
+wStringBuffer5:: ds MOVE_NAME_LENGTH
 
 wBattleMenuCursorBuffer:: dw
 wCurBattleMon:: db
