@@ -274,7 +274,7 @@ CHRIS EQU __trainer_class__
 	const GRUNTM_9
 	const GRUNTM_10
 	const GRUNTM_11
-	const GRUNTM_12
+	const GRUNTM_12_UNUSED
 	const GRUNTM_13
 	const GRUNTM_14
 	const GRUNTM_15
@@ -284,15 +284,15 @@ CHRIS EQU __trainer_class__
 	const GRUNTM_19
 	const GRUNTM_20
 	const GRUNTM_21
-	const GRUNTM_22
-	const GRUNTM_23
+	const GRUNTM_22_UNUSED
+	const GRUNTM_23_UNUSED
 	const GRUNTM_24
 	const GRUNTM_25
-	const GRUNTM_26
-	const GRUNTM_27
+	const GRUNTM_26_UNUSED
+	const GRUNTM_27_UNUSED
 	const GRUNTM_28
 	const GRUNTM_29
-	const GRUNTM_30
+	const GRUNTM_30_UNUSED
 	const GRUNTM_31
 
 	trainerclass GENTLEMAN ; 20
