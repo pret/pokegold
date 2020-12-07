@@ -29,4 +29,4 @@ PrintItemDescription:
 	ld e, l
 	pop hl
 	ld a, BANK(ItemDescriptions)
-	jp FarString
+	jp PlaceFarString

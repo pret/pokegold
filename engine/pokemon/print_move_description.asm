@@ -13,4 +13,4 @@ PrintMoveDescription:
 	ld e, l
 	pop hl
 	ld a, BANK(MoveDescriptions)
-	jp FarString
+	jp PlaceFarString

@@ -303,7 +303,7 @@ ParseCredits:
 	ld bc, SCREEN_WIDTH * 2
 	call AddNTimes
 	ld a, BANK(CreditsStrings)
-	call FarString
+	call PlaceFarString
 	jr .loop
 
 .theend
