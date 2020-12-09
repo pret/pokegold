@@ -32741,10 +32741,10 @@
 00:c508 wDebugPalette
 00:c508 wTempTilemap
 00:c508 wDebugMiddleColors
-00:c508 wc508
 00:c508 wTimeSetBuffer
 00:c508 wBoxPartialData
 00:c508 wHallOfFameTempWinCount
+00:c508 wPlayerPatchLists
 00:c508 wHallOfFameTemp
 00:c508 wDebugLightColor
 00:c508 wSpriteAnimData
@@ -32761,7 +32761,6 @@
 00:c50e wDebugBlackTileColor
 00:c50f wHallOfFameTempMon1Nickname
 00:c512 wDebugRedChannel
-00:c512 wc512
 00:c513 wDebugGreenChannel
 00:c514 wDebugBlueChannel
 00:c519 wHallOfFameTempMon2
@@ -32995,6 +32994,7 @@
 00:c5d0 wSlots
 00:c5d0 wReel1
 00:c5d0 wPuzzlePieces
+00:c5d0 wOTPatchLists
 00:c5d0 wPlayerTrademon
 00:c5d0 wPokedexOrder
 00:c5d0 wMemoryGameCards
@@ -33003,7 +33003,6 @@
 00:c5d0 wNamingScreenDestinationPointer
 00:c5d0 wPokedexDataStart
 00:c5d0 wPlayerTrademonSpecies
-00:c5d0 wTrademons
 00:c5d1 wPokegearPhoneCursorPosition
 00:c5d1 wReel1TilemapAddr
 00:c5d1 wPlayerTrademonSpeciesName
@@ -33195,6 +33194,7 @@
 00:c712 wLinkPartyEnd
 00:c712 wHallOfFamePokemonListMon2ID
 00:c713 wTimeCapsulePlayerData
+00:c713 wLinkPatchList1
 00:c713 wLinkPlayerPartyMon1Species
 00:c713 wLinkPlayerData
 00:c713 wDebugRoomMonSpcExp
@@ -33562,7 +33562,7 @@
 00:c80e wLinkPlayerPartyMon6HPExp
 00:c80e wMysteryGiftPartnerDexCaught
 00:c80e wLinkPlayerPartyMon6StatExp
-00:c80f wc80f
+00:c80f wLinkPatchList2
 00:c80f wMysteryGiftPartnerSentDeco
 00:c810 wLinkPlayerPartyMon6AtkExp
 00:c810 wMysteryGiftPartnerWhichItem
@@ -33613,8 +33613,10 @@
 00:c864 wMysteryGiftPlayerDataEnd
 00:c875 wLinkPlayerPartyMonNicks
 00:c890 wLYOverridesBackupEnd
-00:c8f4 wc8f4
-00:c8f9 wc8f9
+00:c8f4 wLinkPlayerMail
+00:c8f4 wLinkReceivedMail
+00:c8f4 wLinkPlayerMailPreamble
+00:c8f9 wLinkPlayerMailMessages
 00:c900 wBattleAnimTileDict
 00:c900 wUnusedMysteryGiftStagedDataLength
 00:c900 wCreditsBlankFrame2bpp
@@ -33773,7 +33775,7 @@
 00:c9bc wAnimObject08YOffset
 00:c9bd wAnimObject08Param
 00:c9be wAnimObject08Duration
-00:c9bf wc9bf
+00:c9bf wLinkPlayerMailMetadata
 00:c9bf wAnimObject08Frame
 00:c9c0 wAnimObject08JumptableIndex
 00:c9c1 wAnimObject08Var1
@@ -33842,12 +33844,12 @@
 00:ca0c wBGEffect5BattleTurn
 00:ca0d wBGEffect5Param
 00:ca0e wLastAnimObjectIndex
-00:ca0e wca0e
+00:ca0e wLinkReceivedMailEnd
 00:ca0f wBattleAnimFlags
 00:ca10 wBattleAnimAddress
 00:ca12 wBattleAnimDelay
-00:ca13 wca13
 00:ca13 wBattleAnimParent
+00:ca13 wLinkPlayerMailPatchSet
 00:ca15 wBattleAnimLoops
 00:ca16 wBattleAnimVar
 00:ca17 wBattleAnimByte
@@ -33890,9 +33892,11 @@
 00:ca38 wBillsPCDataEnd
 00:ca54 wBattleAnimEnd
 00:ca62 wSurfWaveBGEffectEnd
-00:ca84 wca84
+00:ca7a wLinkPlayerMailEnd
+00:ca84 wLinkOTMail
+00:ca84 wLinkOTMailMessages
 00:cae8 wEnemyMoveStructAnimation
-00:cae8 wcae8
+00:cae8 wCurLinkOTPartyMonTypePtr
 00:cae8 wEnemyMoveStruct
 00:cae8 wBattle
 00:cae9 wEnemyMoveStructEffect
@@ -33958,8 +33962,8 @@
 00:cb47 wPlayerSubStatus2
 00:cb48 wPlayerSubStatus3
 00:cb49 wPlayerSubStatus4
+00:cb4a wLinkOTMailMetadata
 00:cb4a wPlayerSubStatus5
-00:cb4a wcb4a
 00:cb4b wEnemySubStatus1
 00:cb4c wEnemySubStatus2
 00:cb4d wEnemySubStatus3
@@ -33994,7 +33998,7 @@
 00:cb98 wPlayerSpeed
 00:cb9a wPlayerSpAtk
 00:cb9c wPlayerSpDef
-00:cb9e wcb9e
+00:cb9e wOTPlayerMailPatchSet
 00:cb9f wEnemyAttack
 00:cb9f wEnemyStats
 00:cba1 wEnemyDefense
@@ -34077,6 +34081,7 @@
 00:cc07 wEnemyFutureSightDamage
 00:cc09 wPlayerRageCounter
 00:cc0a wEnemyRageCounter
+00:cc0a wLinkOTMailEnd
 00:cc0b wBeatUpHitAtLeastOnce
 00:cc0c wPlayerTrappingMove
 00:cc0d wEnemyTrappingMove
@@ -34111,7 +34116,7 @@
 00:ce52 wOtherPlayerLinkAction
 00:ce52 wBattleAction
 00:ce56 wPlayerLinkAction
-00:ce57 wce57
+00:ce57 wUnusedLinkAction
 00:ce5b wLinkTimeoutFrames
 00:ce5d wLinkByteTimeout
 00:ce5f wMonType
@@ -36063,6 +36068,7 @@
 01:dd34 wBestMagikarpLengthInches
 01:dd35 wMagikarpRecordHoldersName
 01:dd40 wOTPlayerName
+01:dd40 wOTPartyData
 01:dd40 wPokedexShowPointerAddr
 01:dd40 wUnusedEggHatchFlag
 01:dd42 wPokedexShowPointerBank
