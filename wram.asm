@@ -240,6 +240,11 @@ wPuzzlePieces:: ds 6 * 6
 wUnownPuzzleEnd::
 
 NEXTU
+; link patch lists
+wPlayerPatchLists:: ds 200
+wOTPatchLists:: ds 200
+
+NEXTU
 
 ; This union spans 200 bytes.
 UNION
@@ -301,11 +306,6 @@ wTimeSetBufferEnd::
 NEXTU
 ; hall of fame temp struct
 wHallOfFameTemp:: hall_of_fame wHallOfFameTemp
-
-NEXTU
-; link engine data
-wc508:: ds 10
-wc512:: ds 10
 
 NEXTU
 ; debug mon color picker
@@ -372,7 +372,6 @@ wPokegearRadioMusicPlaying:: db
 
 NEXTU
 ; trade
-wTrademons::
 wPlayerTrademon:: trademon wPlayerTrademon
 wOTTrademon::     trademon wOTTrademon
 wTradeAnimAddress:: dw
@@ -537,19 +536,7 @@ wUnusedJigglypuffNoteXCoord:: db
 
 NEXTU
 ; raw link data
-wLinkData:: ds 271
-wc80f:: ds 229
-wc8f4:: ds 5
-wc8f9:: ds 198
-wc9bf:: ds 79
-wca0e:: ds 5
-wca13:: ds 113
-wca84:: ds 100
-wcae8:: dw
-wLinkOTPartyMonTypes:: ds 2 * PARTY_LENGTH
-	ds 84
-wcb4a:: ds 84
-wcb9e:: ds 118
+wLinkData:: ds 1300
 wLinkDataEnd::
 
 NEXTU
@@ -560,18 +547,6 @@ wLinkPartySpecies:: ds PARTY_LENGTH
 wLinkPartyEnd:: db ; older code doesn't check PartyCount
 
 UNION
-; time capsule party data
-wTimeCapsulePlayerData::
-wTimeCapsulePartyMon1:: red_party_struct wTimeCapsulePartyMon1
-wTimeCapsulePartyMon2:: red_party_struct wTimeCapsulePartyMon2
-wTimeCapsulePartyMon3:: red_party_struct wTimeCapsulePartyMon3
-wTimeCapsulePartyMon4:: red_party_struct wTimeCapsulePartyMon4
-wTimeCapsulePartyMon5:: red_party_struct wTimeCapsulePartyMon5
-wTimeCapsulePartyMon6:: red_party_struct wTimeCapsulePartyMon6
-wTimeCapsulePartyMonOTNames:: ds PARTY_LENGTH * NAME_LENGTH
-wTimeCapsulePartyMonNicks:: ds PARTY_LENGTH * MON_NAME_LENGTH
-
-NEXTU
 ; link player data
 wLinkPlayerData::
 wLinkPlayerPartyMon1:: party_struct wLinkPlayerPartyMon1
@@ -580,9 +555,55 @@ wLinkPlayerPartyMon3:: party_struct wLinkPlayerPartyMon3
 wLinkPlayerPartyMon4:: party_struct wLinkPlayerPartyMon4
 wLinkPlayerPartyMon5:: party_struct wLinkPlayerPartyMon5
 wLinkPlayerPartyMon6:: party_struct wLinkPlayerPartyMon6
-wLinkPlayerPartyMonOTNames:: ds PARTY_LENGTH * NAME_LENGTH
-wLinkPlayerPartyMonNicks:: ds PARTY_LENGTH * MON_NAME_LENGTH
+wLinkPlayerPartyMonOTNames:: ds NAME_LENGTH * PARTY_LENGTH
+wLinkPlayerPartyMonNicks:: ds MON_NAME_LENGTH * PARTY_LENGTH
+
+NEXTU
+; time capsule party data
+wTimeCapsulePlayerData::
+wTimeCapsulePartyMon1:: red_party_struct wTimeCapsulePartyMon1
+wTimeCapsulePartyMon2:: red_party_struct wTimeCapsulePartyMon2
+wTimeCapsulePartyMon3:: red_party_struct wTimeCapsulePartyMon3
+wTimeCapsulePartyMon4:: red_party_struct wTimeCapsulePartyMon4
+wTimeCapsulePartyMon5:: red_party_struct wTimeCapsulePartyMon5
+wTimeCapsulePartyMon6:: red_party_struct wTimeCapsulePartyMon6
+wTimeCapsulePartyMonOTNames:: ds NAME_LENGTH * PARTY_LENGTH
+wTimeCapsulePartyMonNicks:: ds MON_NAME_LENGTH * PARTY_LENGTH
+
+NEXTU
+; link patch lists
+wLinkPatchList1:: ds SERIAL_PATCH_LIST_LENGTH
+wLinkPatchList2:: ds SERIAL_PATCH_LIST_LENGTH
 ENDU
+
+NEXTU
+; link data prep
+	ds 1000
+wCurLinkOTPartyMonTypePtr:: dw
+wLinkOTPartyMonTypes:: ds 2 * PARTY_LENGTH
+
+NEXTU
+; link mail data
+	ds 500
+wLinkPlayerMail::
+wLinkPlayerMailPreamble:: ds SERIAL_MAIL_PREAMBLE_LENGTH
+wLinkPlayerMailMessages:: ds (MAIL_MSG_LENGTH + 1) * PARTY_LENGTH
+wLinkPlayerMailMetadata:: ds (MAIL_STRUCT_LENGTH - (MAIL_MSG_LENGTH + 1)) * PARTY_LENGTH
+wLinkPlayerMailPatchSet:: ds 103
+wLinkPlayerMailEnd::
+	ds 10
+wLinkOTMail::
+wLinkOTMailMessages:: ds (MAIL_MSG_LENGTH + 1) * PARTY_LENGTH
+wLinkOTMailMetadata:: ds (MAIL_STRUCT_LENGTH - (MAIL_MSG_LENGTH + 1)) * PARTY_LENGTH
+wOTPlayerMailPatchSet:: ds 103 + SERIAL_MAIL_PREAMBLE_LENGTH
+wLinkOTMailEnd::
+	ds 10
+
+NEXTU
+; received link mail data
+	ds 500
+wLinkReceivedMail:: ds MAIL_STRUCT_LENGTH * PARTY_LENGTH
+wLinkReceivedMailEnd:: db
 
 NEXTU
 ; mystery gift data
@@ -1084,7 +1105,7 @@ wOtherPlayerLinkAction::
 wBattleAction:: db
 	ds 3
 wPlayerLinkAction:: db
-wce57:: db
+wUnusedLinkAction:: db
 	ds 3
 wLinkTimeoutFrames:: dw
 wLinkByteTimeout:: dw
@@ -2746,6 +2767,7 @@ wUnusedEggHatchFlag:: db
 
 NEXTU
 ; enemy party
+wOTPartyData::
 wOTPlayerName:: ds NAME_LENGTH
 wOTPlayerID:: dw
 	ds 8
