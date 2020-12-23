@@ -512,7 +512,7 @@
 00:1b98 Coord2Tile
 00:1bac LoadMenuHeader
 00:1bb3 CopyMenuHeader
-00:1bbd StoreTo_wMenuCursorBuffer
+00:1bbd StoreMenuCursorPosition
 00:1bc1 MenuTextbox
 00:1bc9 Menu_DummyFunction
 00:1bca LoadMenuTextbox
@@ -7601,7 +7601,7 @@
 0d:66a8 LowerStat.cant_lower_anymore
 0d:66ae BattleCommand_TriStatusChance
 0d:66b1 BattleCommand_TriStatusChance.loop
-0d:66c0 BattleCommand_TriStatusChance.ptrs
+0d:66c0 BattleCommand_TriStatusChance.StatusCommands
 0d:66c6 BattleCommand_Curl
 0d:66ce BattleCommand_RaiseSubNoAnim
 0d:66d9 BattleCommand_RaiseSubNoAnim.PlayerTurn
@@ -13409,7 +13409,7 @@
 25:7964 Script_reloadend
 25:796a Script_opentext
 25:796e Script_refreshscreen
-25:7975 Script_writeunusedbytebuffer
+25:7975 Script_writeunusedbyte
 25:797c UnusedClosetextScript
 25:797d Script_closetext
 25:798e Script_autoinput
@@ -17030,7 +17030,7 @@
 3a:40fc _UpdateSound.sound_channel_on
 3a:4102 _UpdateSound.nextchannel
 3a:4125 UpdateChannels
-3a:4136 UpdateChannels.ChannelFnPtrs
+3a:4136 UpdateChannels.ChannelFunctions
 3a:4146 UpdateChannels.Channel1
 3a:414c UpdateChannels.Channel5
 3a:4159 UpdateChannels.noPitchSweep
@@ -19648,7 +19648,7 @@
 3f:4a50 TradeFlagAction
 3f:4a5f Trade_GetDialog
 3f:4a69 DoNPCTrade
-3f:4b8e GetTradeAttribute
+3f:4b8e GetTradeAttr
 3f:4ba3 Trade_GetAttributeOfCurrentPartymon
 3f:4baa Trade_GetAttributeOfLastPartymon
 3f:4bb4 GetTradeMonName
@@ -29765,9 +29765,9 @@
 70:47f6 DebugRoom_UpdateValueCursor
 70:47ff DebugRoom_PrevPagedValue
 70:4811 DebugRoom_PrevPagedValue.decrement
-70:4814 DebugRoom_GetNthPagePtr
-70:4825 _DebugRoom_GetPageBValueCPtr
-70:4834 DebugRoom_GetCurPagedValuePtr
+70:4814 DebugRoom_GetNthPagePointer
+70:4825 _DebugRoom_GetPageBValueCPointer
+70:4834 DebugRoom_GetCurPagedValuePointer
 70:483e DebugRoom_ShowHideCursor
 70:484e DebugRoom_InitializePagedValues
 70:4851 DebugRoom_InitializePagedValues.page_loop
@@ -32519,7 +32519,7 @@
 00:c1cb wDebugFlags
 00:c1cc wGameLogicPaused
 00:c1cd wSpriteUpdatesEnabled
-00:c1ce wUnusedScriptByteBuffer
+00:c1ce wUnusedScriptByte
 00:c1cf wMapTimeOfDay
 00:c1d3 wPrinterConnectionOpen
 00:c1d4 wPrinterOpcode
@@ -32979,7 +32979,7 @@
 00:c5be wCurIcon
 00:c5bf wCurIconTile
 00:c5c0 wCurSpriteOAMFlags
-00:c5c0 wSpriteAnimIDBuffer
+00:c5c0 wSpriteAnimID
 00:c5c0 wSpriteAnimAddrBackup
 00:c5c2 wCurAnimVTile
 00:c5c3 wCurAnimXCoord
@@ -32997,7 +32997,7 @@
 00:c5d0 wPlayerTrademon
 00:c5d0 wPokedexOrder
 00:c5d0 wMemoryGameCards
-00:c5d0 wPokegearPhoneLoadNameBuffer
+00:c5d0 wPokegearPhoneDisplayPosition
 00:c5d0 wDeck
 00:c5d0 wNamingScreenDestinationPointer
 00:c5d0 wPokedexDataStart
@@ -33894,8 +33894,8 @@
 00:ca7a wLinkPlayerMailEnd
 00:ca84 wLinkOTMail
 00:ca84 wLinkOTMailMessages
+00:cae8 wCurLinkOTPartyMonTypePointer
 00:cae8 wEnemyMoveStructAnimation
-00:cae8 wCurLinkOTPartyMonTypePtr
 00:cae8 wEnemyMoveStruct
 00:cae8 wBattle
 00:cae9 wEnemyMoveStructEffect
@@ -34100,7 +34100,7 @@
 00:cc1f wBattleEnd
 00:cc20 wBGMapBuffer
 00:cc48 wBGMapPalBuffer
-00:cc70 wBGMapBufferPtrs
+00:cc70 wBGMapBufferPointers
 00:cc98 wBGMapBufferEnd
 00:cc98 wDefaultSGBLayout
 00:cc99 wPlayerHPPal
@@ -34120,7 +34120,7 @@
 00:ce5d wLinkByteTimeout
 00:ce5f wMonType
 00:ce60 wCurSpecies
-00:ce61 wNamedObjectTypeBuffer
+00:ce61 wNamedObjectType
 00:ce63 wJumptableIndex
 00:ce64 wPrevDexEntryJumptableIndex
 00:ce64 wDebugColorRGBJumptableIndex
@@ -34225,7 +34225,7 @@
 00:cebb wMenuBorderBottomCoord
 00:cebc wMenuBorderRightCoord
 00:cebd wMenuDataPointer
-00:cebf wMenuCursorBuffer
+00:cebf wMenuCursorPosition
 00:cec8 wMenuData
 00:cec8 wMenuDataFlags
 00:cec8 wMenuHeaderEnd
@@ -34355,8 +34355,8 @@
 00:cef7 wBugContestThirdPlaceScore
 00:cef7 wDebugRoomPageCount
 00:cef8 wBufferMonOT
-00:cef8 wDebugRoomPagedValuesPtr
 00:cef8 wLinkBattleRecordWins
+00:cef8 wDebugRoomPagesPointer
 00:cef9 wMartItem5BCD
 00:cef9 wBugContestTempWinnerID
 00:cef9 wBugContestWinnersEnd
@@ -34463,8 +34463,8 @@
 00:cf2f wFacingDirection
 00:cf2f wBufferMonSpclAtk
 00:cf30 wPoisonStepDataEnd
-00:cf30 wMenuCursorBufferBackup
 00:cf30 wWalkingX
+00:cf30 wMenuCursorPositionBackup
 00:cf30 wSeenTextPointer
 00:cf31 wMenuScrollPositionBackup
 00:cf31 wWalkingY
@@ -34495,7 +34495,7 @@
 00:cf91 wStringBuffer3
 00:cfa4 wStringBuffer4
 00:cfb7 wStringBuffer5
-00:cfc4 wBattleMenuCursorBuffer
+00:cfc4 wBattleMenuCursorPosition
 00:cfc6 wCurBattleMon
 00:cfc7 wCurMoveNum
 00:cfc8 wLastPocket
@@ -34510,14 +34510,14 @@
 00:cfd2 wTMHMPocketScrollPosition
 00:cfd3 wSwitchMon
 00:cfd3 wSwitchItem
-00:cfd3 wMoveSwapBuffer
+00:cfd3 wSwappingMove
 00:cfd4 wMenuScrollPosition
 00:cfd8 wQueuedScriptBank
 00:cfd9 wQueuedScriptAddr
 00:cfdb wPredefID
-00:cfdc wPredefTemp
+00:cfdc wPredefHL
 00:cfde wPredefAddress
-00:cfe0 wFarCallBCBuffer
+00:cfe0 wFarCallBC
 00:cfe3 wNumMoves
 00:cfe4 wFieldMoveSucceeded
 00:cfe4 wSolvedUnownPuzzle
@@ -34536,7 +34536,7 @@
 00:cffc wCurMartEnd
 00:cffc wListPointer
 00:cffe wUnusedNamesPointer
-01:d000 wItemAttributesPtr
+01:d000 wItemAttributesPointer
 01:d002 wCurItem
 01:d003 wMartItemID
 01:d003 wCurItemQuantity
@@ -34544,8 +34544,8 @@
 01:d005 wCurPartyMon
 01:d007 wWhichHPBar
 01:d008 wPokemonWithdrawDepositParameter
-01:d009 wItemQuantityChangeBuffer
-01:d00a wItemQuantityBuffer
+01:d009 wItemQuantityChange
+01:d00a wItemQuantity
 01:d00b wTempMon
 01:d00b wTempMonSpecies
 01:d00c wTempMonItem
@@ -34580,7 +34580,7 @@
 01:d03b wSpriteFlags
 01:d03c wHandlePlayerStep
 01:d03e wPartyMenuActionText
-01:d03f wItemAttributeParamBuffer
+01:d03f wItemAttributeValue
 01:d040 wCurPartyLevel
 01:d041 wScrollingMenuListSize
 01:d042 wLinkMode
@@ -34669,8 +34669,8 @@
 01:d0d3 wPPUpPPBuffer
 01:d0d3 wCurMailAuthorID
 01:d0d3 wTreeMonCoordScore
+01:d0d3 wPCItemQuantityChange
 01:d0d3 wMagikarpLength
-01:d0d3 wPCItemQuantityChangeBuffer
 01:d0d3 wFieldMoveJumptableIndex
 01:d0d3 wFinalCatchRate
 01:d0d3 wTempMysteryGiftTimer
@@ -34822,15 +34822,15 @@
 01:d151 wTempSpecies
 01:d151 wUsePPUp
 01:d151 wTempTMHM
+01:d151 wTextDecimalByte
 01:d151 wBreedingCompatibility
 01:d151 wTempPP
 01:d151 wTempIconSpecies
-01:d151 wNamedObjectIndexBuffer
 01:d151 wNumSetBits
 01:d151 wTempByteValue
+01:d151 wNamedObjectIndex
 01:d151 wTypeMatchup
 01:d151 wChosenCableClubRoom
-01:d151 wDeciramBuffer
 01:d151 wApplyStatLevelMultipliersToEnemy
 01:d152 wFailedToFlee
 01:d153 wNumFleeAttempts
@@ -35696,7 +35696,7 @@
 01:d969 wDailyFlags2
 01:d96d wTimerEventStartDay
 01:d971 wFruitTreeFlags
-01:d977 wLuckyNumberDayBuffer
+01:d977 wLuckyNumberDayTimer
 01:d97b wSpecialPhoneCallID
 01:d97f wBugContestStartTime
 01:d983 wUnusedTwoDayTimerOn
