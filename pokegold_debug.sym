@@ -36307,9 +36307,9 @@
 00:ffaf hGraphicStartTile
 00:ffb0 hMoveMon
 00:ffb1 hConnectionStripLength
-00:ffb1 hMapObjectIndexBuffer
+00:ffb1 hMapObjectIndex
 00:ffb2 hConnectedMapWidth
-00:ffb2 hObjectStructIndexBuffer
+00:ffb2 hObjectStructIndex
 00:ffb3 hEnemyMonSpeed
 00:ffb5 hQuotient
 00:ffb5 hMGExchangedByte
