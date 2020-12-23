@@ -502,7 +502,7 @@ NullChar::
 	ret
 
 .ErrorText
-	text_decimal hObjectStructIndexBuffer, 1, 2
+	text_decimal hObjectStructIndex, 1, 2
 	text "エラー"
 	done
 

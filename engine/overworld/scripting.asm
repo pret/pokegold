@@ -876,7 +876,7 @@ Script_variablesprite:
 Script_appear:
 	call GetScriptByte
 	call UnmaskCopyMapObjectStruct
-	ldh a, [hMapObjectIndexBuffer]
+	ldh a, [hMapObjectIndex]
 	ld b, 0 ; clear
 	call ApplyEventActionAppearDisappear
 	ret
@@ -888,7 +888,7 @@ Script_disappear:
 	ldh a, [hLastTalked]
 .ok
 	call DeleteObjectStruct
-	ldh a, [hMapObjectIndexBuffer]
+	ldh a, [hMapObjectIndex]
 	ld b, 1 ; set
 	call ApplyEventActionAppearDisappear
 	farcall _UpdateSprites

@@ -48,8 +48,8 @@ hGraphicStartTile:: db
 hMoveMon:: db
 
 UNION
-hMapObjectIndexBuffer:: db
-hObjectStructIndexBuffer:: db
+hMapObjectIndex:: db
+hObjectStructIndex:: db
 NEXTU
 hConnectionStripLength:: db
 hConnectedMapWidth:: db
