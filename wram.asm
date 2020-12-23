@@ -131,7 +131,7 @@ wDebugFlags:: db
 wGameLogicPaused:: db
 wSpriteUpdatesEnabled:: db
 
-wUnusedScriptByteBuffer:: db
+wUnusedScriptByte:: db
 
 wMapTimeOfDay:: db
 
@@ -277,10 +277,12 @@ wCurSpriteOAMAddr:: db
 wCurIcon:: db
 
 wCurIconTile:: db
-wSpriteAnimAddrBackup::
-wSpriteAnimIDBuffer::
-wCurSpriteOAMFlags::
-	dw
+UNION
+wSpriteAnimID::
+wCurSpriteOAMFlags:: db
+NEXTU
+wSpriteAnimAddrBackup:: dw
+ENDU
 wCurAnimVTile:: db
 wCurAnimXCoord:: db
 wCurAnimYCoord:: db
@@ -358,7 +360,7 @@ wPokedexDataEnd::
 
 NEXTU
 ; pokegear
-wPokegearPhoneLoadNameBuffer:: db
+wPokegearPhoneDisplayPosition:: db
 wPokegearPhoneCursorPosition:: db
 wPokegearPhoneScrollPosition:: db
 wPokegearPhoneSelectedPerson:: db
@@ -579,7 +581,7 @@ ENDU
 NEXTU
 ; link data prep
 	ds 1000
-wCurLinkOTPartyMonTypePtr:: dw
+wCurLinkOTPartyMonTypePointer:: dw
 wLinkOTPartyMonTypes:: ds 2 * PARTY_LENGTH
 
 NEXTU
@@ -1071,7 +1073,7 @@ SECTION "Video", WRAM0
 ; wBGMapBuffer
 wBGMapBuffer::     ds 40
 wBGMapPalBuffer::  ds 40
-wBGMapBufferPtrs:: ds 40 ; 20 bg map addresses (16x8 tiles)
+wBGMapBufferPointers:: ds 20 * 2
 wBGMapBufferEnd::
 
 wDefaultSGBLayout:: db
@@ -1114,7 +1116,7 @@ wMonType:: db
 
 wCurSpecies:: db
 
-wNamedObjectTypeBuffer:: db
+wNamedObjectType:: db
 
 	ds 1
 
@@ -1306,8 +1308,8 @@ wMenuBorderLeftCoord:: db
 wMenuBorderBottomCoord:: db
 wMenuBorderRightCoord:: db
 wMenuDataPointer:: dw
-wMenuCursorBuffer:: dw
-	ds 7
+wMenuCursorPosition:: db
+	ds 8
 wMenuHeaderEnd::
 
 wMenuData::
@@ -1569,7 +1571,7 @@ wDebugRoomStartFunction::  dw
 wDebugRoomSelectFunction:: dw
 wDebugRoomAutoFunction::   dw
 wDebugRoomPageCount::      db
-wDebugRoomPagedValuesPtr:: dw
+wDebugRoomPagesPointer::   dw
 ENDC
 
 NEXTU
@@ -1686,7 +1688,7 @@ wCallerContact:: ds PHONE_CONTACT_SIZE
 NEXTU
 ; backup menu data
 	ds 7
-wMenuCursorBufferBackup:: db
+wMenuCursorPositionBackup:: db
 wMenuScrollPositionBackup:: db
 
 NEXTU
@@ -1727,7 +1729,10 @@ wStringBuffer3:: ds STRING_BUFFER_LENGTH
 wStringBuffer4:: ds STRING_BUFFER_LENGTH
 wStringBuffer5:: ds MOVE_NAME_LENGTH
 
-wBattleMenuCursorBuffer:: dw
+wBattleMenuCursorPosition:: db
+
+	ds 1
+
 wCurBattleMon:: db
 wCurMoveNum:: db
 wLastPocket:: db
@@ -1747,7 +1752,7 @@ wTMHMPocketScrollPosition:: db
 
 wSwitchMon::
 wSwitchItem::
-wMoveSwapBuffer::
+wSwappingMove::
 	db
 
 wMenuScrollPosition:: ds 4
@@ -1756,9 +1761,9 @@ wQueuedScriptBank:: db
 wQueuedScriptAddr:: dw
 
 wPredefID:: db
-wPredefTemp:: dw
+wPredefHL:: dw
 wPredefAddress:: dw
-wFarCallBCBuffer:: dw
+wFarCallBC:: dw
 	ds 1
 
 wNumMoves:: db
@@ -1814,7 +1819,7 @@ wUnusedNamesPointer:: dw
 
 SECTION "WRAM 1", WRAMX
 
-wItemAttributesPtr:: dw
+wItemAttributesPointer:: dw
 
 wCurItem:: db
 wCurItemQuantity::
@@ -1844,8 +1849,8 @@ wPokemonWithdrawDepositParameter::
 ; 3: Put into Day-Care
 	db
 
-wItemQuantityChangeBuffer:: db
-wItemQuantityBuffer:: db
+wItemQuantityChange:: db
+wItemQuantity:: db
 
 wTempMon:: party_struct wTempMon
 
@@ -1857,7 +1862,7 @@ wHandlePlayerStep:: db
 
 wPartyMenuActionText:: db
 
-wItemAttributeParamBuffer:: db
+wItemAttributeValue:: db
 
 wCurPartyLevel:: db
 
@@ -2030,7 +2035,7 @@ wCurDecorationCategory::  db
 
 NEXTU
 ; withdraw/deposit items
-wPCItemQuantityChangeBuffer:: db
+wPCItemQuantityChange:: db
 wPCItemQuantity:: db
 
 NEXTU
@@ -2166,8 +2171,8 @@ wInitListType:: db
 wWildMon:: db
 wBattleHasJustStarted:: db
 
-wNamedObjectIndexBuffer::
-wDeciramBuffer::
+wNamedObjectIndex::
+wTextDecimalByte::
 wTempByteValue::
 wNumSetBits::
 wTypeMatchup::
@@ -2608,7 +2613,7 @@ wFruitTreeFlags:: flag_array NUM_FRUIT_TREES
 
 	ds 2
 
-wLuckyNumberDayBuffer:: dw
+wLuckyNumberDayTimer:: dw
 	ds 2
 wSpecialPhoneCallID:: db
 	ds 3

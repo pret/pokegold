@@ -114,7 +114,7 @@ BattleCommand_BeatUp:
 	ld hl, wOTPartySpecies
 	add hl, bc
 	ld a, [hl]
-	ld [wNamedObjectIndexBuffer], a
+	ld [wNamedObjectIndex], a
 	call GetPokemonName
 	jr .got_enemy_nick
 
@@ -152,7 +152,7 @@ BattleCommand_BeatUp:
 
 .wild
 	ld a, [wEnemyMonSpecies]
-	ld [wNamedObjectIndexBuffer], a
+	ld [wNamedObjectIndex], a
 	call GetPokemonName
 	ld hl, BeatUpAttackText
 	call StdBattleTextbox

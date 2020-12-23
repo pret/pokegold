@@ -110,7 +110,7 @@ CheckForLuckyNumberWinners:
 	and a
 	push af
 	ld a, [wCurPartySpecies]
-	ld [wNamedObjectIndexBuffer], a
+	ld [wNamedObjectIndex], a
 	call GetPokemonName
 	ld hl, .LuckyNumberMatchPartyText
 	pop af

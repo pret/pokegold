@@ -282,7 +282,7 @@ _AskThrowAwayText::
 
 _AskQuantityThrowAwayText::
 	text "Throw away @"
-	text_decimal wItemQuantityChangeBuffer, 1, 2
+	text_decimal wItemQuantityChange, 1, 2
 	text_start
 	line "@"
 	text_ram wStringBuffer2
@@ -745,7 +745,7 @@ _PlayersPCHowManyWithdrawText::
 
 _PlayersPCWithdrewItemsText::
 	text "Withdrew @"
-	text_decimal wItemQuantityChangeBuffer, 1, 2
+	text_decimal wItemQuantityChange, 1, 2
 	text_start
 	line "@"
 	text_ram wStringBuffer2
@@ -768,7 +768,7 @@ _PlayersPCHowManyDepositText::
 
 _PlayersPCDepositItemsText::
 	text "Deposited @"
-	text_decimal wItemQuantityChangeBuffer, 1, 2
+	text_decimal wItemQuantityChange, 1, 2
 	text_start
 	line "@"
 	text_ram wStringBuffer2
@@ -1004,7 +1004,7 @@ _ItemsTossOutHowManyText::
 
 _ItemsThrowAwayText::
 	text "Throw away @"
-	text_decimal wItemQuantityChangeBuffer, 1, 2
+	text_decimal wItemQuantityChange, 1, 2
 	text_start
 	line "@"
 	text_ram wStringBuffer2
@@ -1401,7 +1401,7 @@ _MartHowManyText::
 	done
 
 _MartFinalPriceText::
-	text_decimal wItemQuantityChangeBuffer, 1, 2
+	text_decimal wItemQuantityChange, 1, 2
 	text " @"
 	text_ram wStringBuffer2
 	text "(S)"
@@ -1430,7 +1430,7 @@ _HerbalLadyHowManyText::
 	done
 
 _HerbalLadyFinalPriceText::
-	text_decimal wItemQuantityChangeBuffer, 1, 2
+	text_decimal wItemQuantityChange, 1, 2
 	text " @"
 	text_ram wStringBuffer2
 	text "(S)"
@@ -1513,7 +1513,7 @@ _PharmacyHowManyText::
 	done
 
 _PharmacyFinalPriceText::
-	text_decimal wItemQuantityChangeBuffer, 1, 2
+	text_decimal wItemQuantityChange, 1, 2
 	text " @"
 	text_ram wStringBuffer2
 	text "(S)"

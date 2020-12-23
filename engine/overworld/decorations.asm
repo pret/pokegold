@@ -16,7 +16,7 @@ _PlayerDecorationMenu:
 	ld [wCurDecorationCategory], a
 .top_loop
 	ld a, [wCurDecorationCategory]
-	ld [wMenuCursorBuffer], a
+	ld [wMenuCursorPosition], a
 	call .FindCategoriesWithOwnedDecos
 	call DoNthMenu
 	ld a, [wMenuCursorY]
@@ -554,7 +554,7 @@ GetDecoName:
 
 .getpokename
 	push bc
-	ld [wNamedObjectIndexBuffer], a
+	ld [wNamedObjectIndex], a
 	call GetPokemonName
 	pop bc
 	jr .copy

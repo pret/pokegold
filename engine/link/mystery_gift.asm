@@ -118,7 +118,7 @@ DoMysteryGift:
 	farcall MysteryGiftGetItem
 	ld a, c
 	ld [sBackupMysteryGiftItem], a
-	ld [wNamedObjectIndexBuffer], a
+	ld [wNamedObjectIndex], a
 	call CloseSRAM
 	call GetItemName
 	ld hl, .MysteryGiftSentText ; sent item/decoration

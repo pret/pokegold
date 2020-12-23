@@ -392,9 +392,9 @@ DebugRoom_EditPagedValues:
 	ld a, [hli]
 	ld [wDebugRoomPageCount], a
 	ld a, l
-	ld [wDebugRoomPagedValuesPtr], a
+	ld [wDebugRoomPagesPointer], a
 	ld a, h
-	ld [wDebugRoomPagedValuesPtr+1], a
+	ld [wDebugRoomPagesPointer+1], a
 	ld hl, hInMenu
 	ld a, [hl]
 	push af
@@ -488,7 +488,7 @@ DebugRoom_PageString:
 	db " P  @"
 
 DebugRoom_IncrementPagedValue:
-	call DebugRoom_GetCurPagedValuePtr
+	call DebugRoom_GetCurPagedValuePointer
 	ld e, [hl] ; de = value address
 	inc hl
 	ld d, [hl]
@@ -503,7 +503,7 @@ DebugRoom_IncrementPagedValue:
 	ret
 
 DebugRoom_DecrementPagedValue:
-	call DebugRoom_GetCurPagedValuePtr
+	call DebugRoom_GetCurPagedValuePointer
 	ld e, [hl] ; de = value address
 	inc hl
 	ld d, [hl]
@@ -528,7 +528,7 @@ DebugRoom_NextPage:
 	ld [wDebugRoomCurPage], a
 	call DebugRoom_PrintPage
 	ld a, [wDebugRoomCurPage]
-	call DebugRoom_GetNthPagePtr
+	call DebugRoom_GetNthPagePointer
 	ld a, [wDebugRoomCurValue]
 	cp [hl]
 	jr c, .skip
@@ -550,7 +550,7 @@ DebugRoom_PrevPage:
 	ld [wDebugRoomCurPage], a
 	call DebugRoom_PrintPage
 	ld a, [wDebugRoomCurPage]
-	call DebugRoom_GetNthPagePtr
+	call DebugRoom_GetNthPagePointer
 	ld a, [wDebugRoomCurValue]
 	cp [hl]
 	jr c, .skip
@@ -566,7 +566,7 @@ DebugRoom_NextPagedValue:
 	ld a, " "
 	call DebugRoom_ShowHideCursor
 	ld a, [wDebugRoomCurPage]
-	call DebugRoom_GetNthPagePtr
+	call DebugRoom_GetNthPagePointer
 	ld a, [wDebugRoomCurValue]
 	inc a
 	cp [hl] ; incremented value < paged_value count?
@@ -595,15 +595,15 @@ DebugRoom_PrevPagedValue:
 	dec a
 	jr DebugRoom_UpdateValueCursor
 
-DebugRoom_GetNthPagePtr:
+DebugRoom_GetNthPagePointer:
 ; Input: a = page index
 ; Output: hl = pointer to paged_data list
 	ld h, 0
 	ld l, a
 	add hl, hl
-	ld a, [wDebugRoomPagedValuesPtr]
+	ld a, [wDebugRoomPagesPointer]
 	ld e, a
-	ld a, [wDebugRoomPagedValuesPtr+1]
+	ld a, [wDebugRoomPagesPointer+1]
 	ld d, a
 	add hl, de
 	ld a, [hli]
@@ -611,10 +611,10 @@ DebugRoom_GetNthPagePtr:
 	ld l, a
 	ret
 
-_DebugRoom_GetPageBValueCPtr:
+_DebugRoom_GetPageBValueCPointer:
 	push bc
 	ld a, b
-	call DebugRoom_GetNthPagePtr
+	call DebugRoom_GetNthPagePointer
 	pop bc
 	inc hl
 	ld a, c
@@ -622,12 +622,12 @@ _DebugRoom_GetPageBValueCPtr:
 	call AddNTimes
 	ret
 
-DebugRoom_GetCurPagedValuePtr:
+DebugRoom_GetCurPagedValuePointer:
 	ld a, [wDebugRoomCurPage]
 	ld b, a
 	ld a, [wDebugRoomCurValue]
 	ld c, a
-	jr _DebugRoom_GetPageBValueCPtr
+	jr _DebugRoom_GetPageBValueCPointer
 
 DebugRoom_ShowHideCursor:
 	push af
@@ -656,9 +656,9 @@ DebugRoom_InitializePagedValues:
 	ld h, 0
 	ld l, a
 	add hl, hl
-	ld a, [wDebugRoomPagedValuesPtr]
+	ld a, [wDebugRoomPagesPointer]
 	ld e, a
-	ld a, [wDebugRoomPagedValuesPtr+1]
+	ld a, [wDebugRoomPagesPointer+1]
 	ld d, a
 	add hl, de
 	ld a, [hli]
@@ -679,9 +679,9 @@ DebugRoom_InitializePagedValues:
 	ld h, 0
 	ld l, b
 	add hl, hl
-	ld a, [wDebugRoomPagedValuesPtr]
+	ld a, [wDebugRoomPagesPointer]
 	ld e, a
-	ld a, [wDebugRoomPagedValuesPtr+1]
+	ld a, [wDebugRoomPagesPointer+1]
 	ld d, a
 	add hl, de
 	ld a, [hli]
@@ -716,9 +716,9 @@ DebugRoom_PrintPage:
 	ld h, 0
 	ld l, a
 	add hl, hl
-	ld a, [wDebugRoomPagedValuesPtr]
+	ld a, [wDebugRoomPagesPointer]
 	ld e, a
-	ld a, [wDebugRoomPagedValuesPtr+1]
+	ld a, [wDebugRoomPagesPointer+1]
 	ld d, a
 	add hl, de
 	ld a, [hli]
@@ -746,9 +746,9 @@ DebugRoom_PrintPagedValue:
 	ld h, 0
 	ld l, b
 	add hl, hl
-	ld a, [wDebugRoomPagedValuesPtr]
+	ld a, [wDebugRoomPagesPointer]
 	ld e, a
-	ld a, [wDebugRoomPagedValuesPtr+1]
+	ld a, [wDebugRoomPagesPointer+1]
 	ld d, a
 	add hl, de
 	ld a, [hli]
@@ -902,7 +902,7 @@ DebugRoom_SaveItem:
 	done
 
 DebugRoom_PrintItemName:
-	ld [wNamedObjectIndexBuffer], a
+	ld [wNamedObjectIndex], a
 	push bc
 	call GetItemName
 	pop hl
@@ -1048,19 +1048,19 @@ DebugRoom_SavePokemon:
 	done
 
 DebugRoom_PrintPokemonName:
-	ld [wNamedObjectIndexBuffer], a
+	ld [wNamedObjectIndex], a
 	push bc
 	call GetPokemonName
 	jr _DebugRoom_FinishGetName
 
 DebugRoom_PrintItemName2:
-	ld [wNamedObjectIndexBuffer], a
+	ld [wNamedObjectIndex], a
 	push bc
 	call GetItemName
 	jr _DebugRoom_FinishGetName
 
 DebugRoom_PrintMoveName:
-	ld [wNamedObjectIndexBuffer], a
+	ld [wNamedObjectIndex], a
 	push bc
 	call GetMoveName
 	jr _DebugRoom_FinishGetName

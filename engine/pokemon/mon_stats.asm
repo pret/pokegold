@@ -435,7 +435,7 @@ ListMoves:
 	push hl
 	ld [wCurSpecies], a
 	ld a, MOVE_NAME
-	ld [wNamedObjectTypeBuffer], a
+	ld [wNamedObjectType], a
 	call GetName
 	ld de, wStringBuffer1
 	pop hl

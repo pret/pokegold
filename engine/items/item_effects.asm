@@ -1,6 +1,6 @@
 _DoItemEffect::
 	ld a, [wCurItem]
-	ld [wNamedObjectIndexBuffer], a
+	ld [wNamedObjectIndex], a
 	call GetItemName
 	call CopyName1
 	ld a, 1
@@ -556,7 +556,7 @@ PokeBallEffect:
 	call PrintText
 
 	ld a, [wCurPartySpecies]
-	ld [wNamedObjectIndexBuffer], a
+	ld [wNamedObjectIndex], a
 	call GetPokemonName
 
 	call YesNoBox
@@ -614,7 +614,7 @@ PokeBallEffect:
 	call PrintText
 
 	ld a, [wCurPartySpecies]
-	ld [wNamedObjectIndexBuffer], a
+	ld [wNamedObjectIndex], a
 	call GetPokemonName
 
 	call YesNoBox
@@ -690,7 +690,7 @@ PokeBallEffect:
 .toss
 	ld hl, wNumItems
 	inc a
-	ld [wItemQuantityChangeBuffer], a
+	ld [wItemQuantityChange], a
 	jp TossItem
 
 .used_park_ball
@@ -2295,7 +2295,7 @@ RestorePPEffect:
 
 	push hl
 	ld a, [hl]
-	ld [wNamedObjectIndexBuffer], a
+	ld [wNamedObjectIndex], a
 	call GetMoveName
 	call CopyName1
 	pop hl
@@ -2556,7 +2556,7 @@ UseItemText:
 UseDisposableItem:
 	ld hl, wNumItems
 	ld a, 1
-	ld [wItemQuantityChangeBuffer], a
+	ld [wItemQuantityChange], a
 	jp TossItem
 
 UseBallInTrainerBattle:

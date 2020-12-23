@@ -4,7 +4,7 @@ _InitializeStartDay:
 
 ClearDailyTimers:
 	xor a
-	ld [wLuckyNumberDayBuffer], a
+	ld [wLuckyNumberDayTimer], a
 	ld [wUnusedTwoDayTimer], a
 	ld [wDailyResetTimer], a
 	ret
@@ -190,7 +190,7 @@ UnusedCheckSwarmFlag: ; unreferenced
 
 RestartLuckyNumberCountdown:
 	call .GetDaysUntilNextFriday
-	ld hl, wLuckyNumberDayBuffer
+	ld hl, wLuckyNumberDayTimer
 	jp InitNDaysCountdown
 
 .GetDaysUntilNextFriday:
@@ -208,7 +208,7 @@ RestartLuckyNumberCountdown:
 	ret
 
 _CheckLuckyNumberShowFlag:
-	ld hl, wLuckyNumberDayBuffer
+	ld hl, wLuckyNumberDayTimer
 	jp CheckDayDependentEventHL
 
 DoMysteryGiftIfDayHasPassed:

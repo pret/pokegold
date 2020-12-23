@@ -21,7 +21,7 @@ NPCTrade::
 	jr c, .done
 
 	ld e, NPCTRADE_GIVEMON
-	call GetTradeAttribute
+	call GetTradeAttr
 	ld a, [wCurPartySpecies]
 	cp [hl]
 	ld a, TRADE_DIALOG_WRONG
@@ -72,7 +72,7 @@ CheckTradeGender:
 	ld [wMonType], a
 
 	ld e, NPCTRADE_GENDER
-	call GetTradeAttribute
+	call GetTradeAttr
 	ld a, [hl]
 	and a ; TRADE_GENDER_EITHER
 	jr z, .matching
@@ -106,19 +106,19 @@ TradeFlagAction:
 
 Trade_GetDialog:
 	ld e, NPCTRADE_DIALOG
-	call GetTradeAttribute
+	call GetTradeAttr
 	ld a, [hl]
 	ld [wTradeDialog], a
 	ret
 
 DoNPCTrade:
 	ld e, NPCTRADE_GIVEMON
-	call GetTradeAttribute
+	call GetTradeAttr
 	ld a, [hl]
 	ld [wPlayerTrademonSpecies], a
 
 	ld e, NPCTRADE_GETMON
-	call GetTradeAttribute
+	call GetTradeAttr
 	ld a, [hl]
 	ld [wOTTrademonSpecies], a
 
@@ -168,7 +168,7 @@ DoNPCTrade:
 	predef TryAddMonToParty
 
 	ld e, NPCTRADE_NICK
-	call GetTradeAttribute
+	call GetTradeAttr
 	ld de, wOTTrademonNickname
 	call CopyTradeName
 
@@ -179,7 +179,7 @@ DoNPCTrade:
 	call CopyTradeName
 
 	ld e, NPCTRADE_OT_NAME
-	call GetTradeAttribute
+	call GetTradeAttr
 	push hl
 	ld de, wOTTrademonOTName
 	call CopyTradeName
@@ -194,7 +194,7 @@ DoNPCTrade:
 	call CopyTradeName
 
 	ld e, NPCTRADE_DVS
-	call GetTradeAttribute
+	call GetTradeAttr
 	ld de, wOTTrademonDVs
 	call Trade_CopyTwoBytes
 
@@ -205,7 +205,7 @@ DoNPCTrade:
 	call Trade_CopyTwoBytes
 
 	ld e, NPCTRADE_OT_ID
-	call GetTradeAttribute
+	call GetTradeAttr
 	ld de, wOTTrademonID + 1
 	call Trade_CopyTwoBytesReverseEndian
 
@@ -216,7 +216,7 @@ DoNPCTrade:
 	call Trade_CopyTwoBytes
 
 	ld e, NPCTRADE_ITEM
-	call GetTradeAttribute
+	call GetTradeAttr
 	push hl
 	ld hl, wPartyMon1Item
 	ld bc, PARTYMON_STRUCT_LENGTH
@@ -243,7 +243,7 @@ DoNPCTrade:
 	pop af
 	ret
 
-GetTradeAttribute:
+GetTradeAttr:
 	ld d, 0
 	push de
 	ld a, [wJumptableIndex]
@@ -273,7 +273,7 @@ Trade_GetAttributeOfLastPartymon:
 
 GetTradeMonName:
 	push de
-	ld [wNamedObjectIndexBuffer], a
+	ld [wNamedObjectIndex], a
 	call GetBasePokemonName
 	ld hl, wStringBuffer1
 	pop de
@@ -316,7 +316,7 @@ Trade_CopyTwoBytesReverseEndian:
 
 GetTradeMonNames:
 	ld e, NPCTRADE_GETMON
-	call GetTradeAttribute
+	call GetTradeAttr
 	ld a, [hl]
 	call GetTradeMonName
 
@@ -324,7 +324,7 @@ GetTradeMonNames:
 	call CopyTradeName
 
 	ld e, NPCTRADE_GIVEMON
-	call GetTradeAttribute
+	call GetTradeAttr
 	ld a, [hl]
 	call GetTradeMonName
 
@@ -340,7 +340,7 @@ GetTradeMonNames:
 	dec hl
 	push hl
 	ld e, NPCTRADE_GENDER
-	call GetTradeAttribute
+	call GetTradeAttr
 	ld a, [hl]
 	pop hl
 	and a ; TRADE_GENDER_EITHER

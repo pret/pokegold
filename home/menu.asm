@@ -285,8 +285,8 @@ CopyMenuHeader::
 	call CopyBytes
 	ret
 
-StoreTo_wMenuCursorBuffer::
-	ld [wMenuCursorBuffer], a
+StoreMenuCursorPosition::
+	ld [wMenuCursorPosition], a
 	ret
 
 MenuTextbox::
@@ -640,7 +640,7 @@ ContinueGettingMenuJoypad:
 	ld a, [hl]
 	ld [wMenuSelection], a
 	ld a, [wMenuCursorY]
-	ld [wMenuCursorBuffer], a
+	ld [wMenuCursorPosition], a
 	and a
 	ret
 
@@ -789,7 +789,7 @@ _2DMenu::
 	pop bc
 	ld a, b
 	rst Bankswitch
-	ld a, [wMenuCursorBuffer]
+	ld a, [wMenuCursorPosition]
 	ret
 
 ResetBGWindow::

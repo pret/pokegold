@@ -271,14 +271,14 @@ StatsScreen_InitUpperHalf:
 	xor a
 	ldh [hBGMapMode], a
 	ld a, [wBaseDexNo]
-	ld [wDeciramBuffer], a
+	ld [wTextDecimalByte], a
 	ld [wCurSpecies], a
 	hlcoord 8, 0
 	ld [hl], "№"
 	inc hl
 	ld [hl], "."
 	inc hl
-	ld de, wDeciramBuffer
+	ld de, wTextDecimalByte
 	lb bc, PRINTNUM_LEADINGZEROS | 1, 3
 	call PrintNum
 	hlcoord 14, 0
@@ -311,7 +311,7 @@ StatsScreen_InitUpperHalf:
 	ld a, "/"
 	ld [hli], a
 	ld a, [wBaseDexNo]
-	ld [wNamedObjectIndexBuffer], a
+	ld [wNamedObjectIndex], a
 	call GetPokemonName
 	call PlaceString
 	call StatsScreen_PlaceHorizontalDivider
@@ -346,7 +346,7 @@ LoadPinkPage:
 	xor a
 	ldh [hBGMapMode], a
 	ld a, [wBaseDexNo]
-	ld [wDeciramBuffer], a
+	ld [wTextDecimalByte], a
 	ld [wCurSpecies], a
 	ld b, PINK_PAGE
 	call StatsScreen_LoadPageIndicators
@@ -573,7 +573,7 @@ LoadGreenPage:
 	ld b, a
 	farcall TimeCapsule_ReplaceTeruSama
 	ld a, b
-	ld [wNamedObjectIndexBuffer], a
+	ld [wNamedObjectIndex], a
 	call GetItemName
 .got_item_name
 	hlcoord 6, 8

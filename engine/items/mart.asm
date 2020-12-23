@@ -316,7 +316,7 @@ BuyMenu:
 	xor a
 	ld [wMenuScrollPositionBackup], a
 	ld a, 1
-	ld [wMenuCursorBufferBackup], a
+	ld [wMenuCursorPositionBackup], a
 .loop
 	call BuyMenuLoop ; menu loop
 	jr nc, .loop
@@ -405,15 +405,15 @@ BuyMenuLoop:
 	call UpdateSprites
 	ld hl, MenuHeader_Buy
 	call CopyMenuHeader
-	ld a, [wMenuCursorBufferBackup]
-	ld [wMenuCursorBuffer], a
+	ld a, [wMenuCursorPositionBackup]
+	ld [wMenuCursorPosition], a
 	ld a, [wMenuScrollPositionBackup]
 	ld [wMenuScrollPosition], a
 	call ScrollingMenu
 	ld a, [wMenuScrollPosition]
 	ld [wMenuScrollPositionBackup], a
 	ld a, [wMenuCursorY]
-	ld [wMenuCursorBufferBackup], a
+	ld [wMenuCursorPositionBackup], a
 	call SpeechTextbox
 	ld a, [wMenuJoypad]
 	cp B_BUTTON
@@ -473,7 +473,7 @@ BuyMenuLoop:
 
 StandardMartAskPurchaseQuantity:
 	ld a, MAX_ITEM_STACK
-	ld [wItemQuantityBuffer], a
+	ld [wItemQuantity], a
 	ld a, MARTTEXT_HOW_MANY
 	call LoadBuyMenuText
 	farcall SelectQuantityToBuy
@@ -489,7 +489,7 @@ MartConfirmPurchase:
 
 BargainShopAskPurchaseQuantity:
 	ld a, 1
-	ld [wItemQuantityChangeBuffer], a
+	ld [wItemQuantityChange], a
 	ld a, [wMartItemID]
 	ld e, a
 	ld d, 0
@@ -680,7 +680,7 @@ SellMenu:
 
 .TryToSellItem:
 	farcall CheckItemMenu
-	ld a, [wItemAttributeParamBuffer]
+	ld a, [wItemAttributeValue]
 	ld hl, .dw
 	rst JumpTable
 	ret
@@ -699,7 +699,7 @@ SellMenu:
 
 .try_sell
 	farcall _CheckTossableItem
-	ld a, [wItemAttributeParamBuffer]
+	ld a, [wItemAttributeValue]
 	and a
 	jr z, .okay_to_sell
 	ld hl, MartCantBuyText
