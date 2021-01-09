@@ -102,7 +102,7 @@ GetFrontpic:
 	push af
 	inc hl
 	ld a, d
-	call GetFarHalfword
+	call GetFarWord
 	pop af
 
 .ok
@@ -228,7 +228,7 @@ Intro_GetMonFrontpic:
 	push af
 	inc hl
 	ld a, BANK(PokemonPicPointers)
-	call GetFarHalfword
+	call GetFarWord
 	pop af
 	pop de
 	call FarDecompress

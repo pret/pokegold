@@ -1275,7 +1275,7 @@ StdScript:
 	ld b, a
 	inc hl
 	ld a, BANK(StdScripts)
-	call GetFarHalfword
+	call GetFarWord
 	ret
 
 SkipTwoScriptBytes:

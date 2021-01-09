@@ -751,7 +751,7 @@ HeavyBallMultiplier:
 	add BANK("Pokedex Entries 001-064")
 	ld d, a
 	ld a, BANK(PokedexDataPointerTable)
-	call GetFarHalfword
+	call GetFarWord
 
 .SkipText:
 	ld a, d
@@ -764,7 +764,7 @@ HeavyBallMultiplier:
 	push bc
 	inc hl
 	inc hl
-	call GetFarHalfword
+	call GetFarWord
 
 	srl h
 	rr l
@@ -868,7 +868,7 @@ MoonBallMultiplier:
 	add hl, bc
 	add hl, bc
 	ld a, BANK(EvosAttacksPointers)
-	call GetFarHalfword
+	call GetFarWord
 	pop bc
 
 	push bc

@@ -28,7 +28,7 @@ GetDexNumber:: ; unreferenced
 	call AddNTimes
 	pop bc
 	ld a, BANK(BaseData)
-	call GetFarHalfword
+	call GetFarWord
 	ld b, l
 	ld c, h
 	pop hl

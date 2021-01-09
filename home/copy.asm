@@ -35,7 +35,7 @@ GetFarByte::
 	ld a, [wFarByte]
 	ret
 
-GetFarHalfword::
+GetFarWord::
 ; retrieve a halfword from a:hl, and return it in hl.
 	; bankswitch to new bank
 	ld [wTempBank], a

@@ -649,7 +649,7 @@ PokedexShow2:
 	add BANK("Pokedex Entries 001-064")
 	push af
 	ld a, BANK(PokedexDataPointerTable)
-	call GetFarHalfword
+	call GetFarWord
 	pop af
 	push af
 	push hl

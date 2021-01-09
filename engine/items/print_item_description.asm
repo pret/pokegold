@@ -24,7 +24,7 @@ PrintItemDescription:
 	add hl, bc
 	add hl, bc
 	ld a, BANK(ItemDescriptions)
-	call GetFarHalfword
+	call GetFarWord
 	ld d, h
 	ld e, l
 	pop hl

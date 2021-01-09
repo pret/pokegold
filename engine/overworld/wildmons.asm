@@ -894,7 +894,7 @@ RandomPhoneMon:
 	add hl, bc
 	add hl, bc
 	ld a, BANK(TrainerGroups)
-	call GetFarHalfword
+	call GetFarWord
 
 .skip_trainer
 	dec e

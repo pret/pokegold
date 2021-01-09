@@ -8,7 +8,7 @@ PrintMoveDescription:
 	add hl, bc
 	add hl, bc
 	ld a, BANK(MoveDescriptions)
-	call GetFarHalfword
+	call GetFarWord
 	ld d, h
 	ld e, l
 	pop hl
