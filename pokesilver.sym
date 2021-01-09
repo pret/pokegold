@@ -897,7 +897,7 @@
 00:311e CopyBytes.CopyByte
 00:3121 CopyBytes.HandleLoop
 00:3128 GetFarByte
-00:313c GetFarHalfword
+00:313c GetFarWord
 00:314c ByteFill
 00:3150 ByteFill.PutByte
 00:3151 ByteFill.HandleLoop
