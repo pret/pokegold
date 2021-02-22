@@ -124,8 +124,8 @@
 00:07d8 Serial_ExchangeByte.short_delay_loop
 00:07dc CheckLinkTimeoutFramesNonzero
 00:07e4 SerialDisconnected
-00:07ec Serial_ExchangeLinkMenuSelection
-00:07f8 Serial_ExchangeLinkMenuSelection.exchange
+00:07ec Serial_ExchangeSyncBytes
+00:07f8 Serial_ExchangeSyncBytes.exchange
 00:0813 Serial_PrintWaitingTextAndSyncAndExchangeNybble
 00:0822 Serial_SyncAndExchangeNybble
 00:082e WaitLinkTransfer
@@ -34112,9 +34112,11 @@
 00:ccd9 wAttrmap
 00:ce41 wAttrmapEnd
 00:ce41 wTileAnimBuffer
+00:ce51 wLinkReceivedSyncBuffer
 00:ce51 wOtherPlayerLinkMode
 00:ce52 wOtherPlayerLinkAction
 00:ce52 wBattleAction
+00:ce56 wLinkPlayerSyncBuffer
 00:ce56 wPlayerLinkAction
 00:ce57 wUnusedLinkAction
 00:ce5b wLinkTimeoutFrames
