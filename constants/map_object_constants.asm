@@ -199,6 +199,7 @@ NUM_SPRITEMOVEDATA EQU const_value
 	const SPRITEMOVEFN_SPIN_COUNTERCLOCKWISE ; 19
 	const SPRITEMOVEFN_BOULDERDUST           ; 1a
 	const SPRITEMOVEFN_GRASS                 ; 1b
+NUM_SPRITEMOVEFN EQU const_value
 
 ; StepTypesJumptable indexes (see engine/overworld/map_objects.asm)
 	const_def
@@ -227,6 +228,7 @@ NUM_SPRITEMOVEDATA EQU const_value
 	const STEP_TYPE_16               ; 16
 	const STEP_TYPE_17               ; 17
 	const STEP_TYPE_DELETE           ; 18
+NUM_STEP_TYPES EQU const_value
 
 ; ObjectActionPairPointers indexes (see engine/overworld/map_object_action.asm)
 	const_def
@@ -246,6 +248,7 @@ NUM_SPRITEMOVEDATA EQU const_value
 	const OBJECT_ACTION_BIG_DOLL      ; 0d
 	const OBJECT_ACTION_BOULDER_DUST  ; 0e
 	const OBJECT_ACTION_GRASS_SHAKE   ; 0f
+NUM_OBJECT_ACTIONS EQU const_value
 
 ; Facings indexes (see data/sprites/facings.asm)
 	const_def
@@ -281,6 +284,7 @@ NUM_SPRITEMOVEDATA EQU const_value
 	const FACING_BOULDER_DUST_2 ; 1d
 	const FACING_GRASS_1        ; 1e
 	const FACING_GRASS_2        ; 1f
+NUM_FACINGS EQU const_value
 
 ; DoPlayerMovement.DoStep arguments (see engine/overworld/player_movement.asm)
 	const_def
@@ -292,3 +296,4 @@ NUM_SPRITEMOVEDATA EQU const_value
 	const STEP_TURN          ; 5
 	const STEP_BACK_LEDGE    ; 6
 	const STEP_WALK_IN_PLACE ; 7
+NUM_STEPS EQU const_value

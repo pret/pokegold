@@ -6,6 +6,7 @@ ENDM
 
 EngineFlags:
 ; entries correspond to ENGINE_* constants
+	table_width 3, EngineFlags
 
 	; pokegear
 	engine_flag wPokegearFlags, POKEGEAR_RADIO_CARD_F
@@ -118,3 +119,5 @@ EngineFlags:
 	engine_flag wDailyFlags2, DAILYFLAGS2_GOLDENROD_DEPT_STORE_TM27_RETURN_F
 	engine_flag wDailyFlags2, DAILYFLAGS2_DAISYS_GROOMING_F
 	engine_flag wDailyFlags2, DAILYFLAGS2_INDIGO_PLATEAU_RIVAL_FIGHT_F
+
+	assert_table_length NUM_ENGINE_FLAGS

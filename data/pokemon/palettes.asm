@@ -6,6 +6,9 @@ PokemonPalettes:
 ; (Back sprites are used since they are the same in Gold and Silver.)
 ; Shiny palettes are defined directly, not generated.
 
+	; 2 middle palettes, front and shiny, with 2 colors each
+	table_width PAL_COLOR_SIZE * 2 * 2, PokemonPalettes
+
 ; 000
 	RGB 30, 22, 17
 	RGB 16, 14, 19
@@ -516,6 +519,8 @@ INCLUDE "gfx/pokemon/ho_oh/shiny.pal"
 INCBIN "gfx/pokemon/celebi/back.gbcpal", middle_colors
 INCLUDE "gfx/pokemon/celebi/shiny.pal"
 
+	assert_table_length NUM_POKEMON + 1
+
 ; 252
 	RGB 30, 26, 11
 	RGB 23, 16, 00
@@ -525,6 +530,8 @@ INCLUDE "gfx/pokemon/celebi/shiny.pal"
 
 INCBIN "gfx/pokemon/egg/front.gbcpal", middle_colors
 INCLUDE "gfx/pokemon/egg/shiny.pal"
+
+	assert_table_length EGG + 1
 
 ; 254
 	RGB 30, 26, 11
@@ -539,3 +546,5 @@ INCLUDE "gfx/pokemon/egg/shiny.pal"
 ; 255 shiny
 	RGB 23, 23, 23
 	RGB 17, 17, 17
+
+	assert_table_length $100

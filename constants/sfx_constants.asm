@@ -1,6 +1,5 @@
 ; SFX indexes (see audio/sfx_pointers.asm)
 	const_def
-
 	const SFX_DEX_FANFARE_50_79           ; 00
 	const SFX_ITEM                        ; 01
 	const SFX_CAUGHT_MON                  ; 02
@@ -189,3 +188,4 @@
 	const SFX_TRAIN_ARRIVED               ; b9
 	const SFX_STOP_SLOT                   ; ba
 	const SFX_2_BOOPS                     ; bb
+NUM_SFX EQU const_value

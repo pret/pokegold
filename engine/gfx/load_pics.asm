@@ -238,7 +238,7 @@ GetTrainerPic:
 	ld a, [wTrainerClass]
 	and a
 	ret z
-	cp NUM_TRAINER_CLASSES
+	cp NUM_TRAINER_CLASSES + 1
 	ret nc
 	ld a, 0
 	call WaitBGMap

@@ -22,6 +22,7 @@ CHRIS EQU __trainer_class__
 	const PHONECONTACT_BIKESHOP
 	const PHONECONTACT_BILL
 	const PHONECONTACT_ELM
+NUM_NONTRAINER_PHONECONTACTS EQU const_value - 1
 
 	trainerclass FALKNER ; 1
 	const FALKNER1
@@ -656,4 +657,4 @@ CHRIS EQU __trainer_class__
 	const GRUNTF_4
 	const GRUNTF_5
 
-NUM_TRAINER_CLASSES EQU __trainer_class__
+NUM_TRAINER_CLASSES EQU __trainer_class__ - 1

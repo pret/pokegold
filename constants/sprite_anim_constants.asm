@@ -83,6 +83,7 @@ NUM_SPRITEANIMDICT_ENTRIES EQU 10
 	const SPRITE_ANIM_INDEX_GS_INTRO_HO_OH_LUGIA      ; 2c
 	const SPRITE_ANIM_INDEX_HEADBUTT                  ; 2d
 	const SPRITE_ANIM_INDEX_EGG_HATCH                 ; 2e
+NUM_SPRITE_ANIM_INDEXES EQU const_value
 
 ; DoAnimFrame.Jumptable indexes (see engine/gfx/sprite_anims.asm)
 	const_def
@@ -128,6 +129,7 @@ NUM_SPRITEANIMDICT_ENTRIES EQU 10
 	const SPRITE_ANIM_SEQ_FLY_LEAF                    ; 27
 	const SPRITE_ANIM_SEQ_FLY_TO                      ; 28
 	const SPRITE_ANIM_SEQ_GS_INTRO_HO_OH_LUGIA        ; 29
+NUM_SPRITE_ANIM_SEQS EQU const_value
 
 ; SpriteAnimFrameData indexes (see data/sprite_anims/framesets.asm)
 	const_def
@@ -187,6 +189,7 @@ NUM_SPRITEANIMDICT_ENTRIES EQU 10
 	const SPRITE_ANIM_FRAMESET_EGG_HATCH_4               ; 35
 	const SPRITE_ANIM_FRAMESET_GS_INTRO_HO_OH_LUGIA      ; 36
 	const SPRITE_ANIM_FRAMESET_HEADBUTT                  ; 37
+NUM_SPRITE_ANIM_FRAMESETS EQU const_value
 
 ; SpriteAnimOAMData indexes (see data/sprite_anims/oam.asm)
 	const_def
@@ -282,3 +285,4 @@ NUM_SPRITEANIMDICT_ENTRIES EQU 10
 	const SPRITE_ANIM_OAMSET_GS_INTRO_HO_OH_LUGIA_4      ; 59
 	const SPRITE_ANIM_OAMSET_GS_INTRO_HO_OH_LUGIA_5      ; 5a
 	const SPRITE_ANIM_OAMSET_HEADBUTT_TREE_2             ; 5b
+NUM_SPRITE_ANIM_OAMSETS EQU const_value

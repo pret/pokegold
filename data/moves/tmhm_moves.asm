@@ -3,6 +3,7 @@
 
 TMHMMoves:
 ; entries correspond to *_TMNUM constants (see constants/item_constants.asm)
+	table_width 1, TMHMMoves
 
 ; TMs
 n = 1
@@ -29,6 +30,8 @@ endc
 PURGE MOVE_FOR_HM
 n = n + 1
 endr
+
+	assert_table_length NUM_TM_HM
 
 	db 0 ; end
 

@@ -171,6 +171,7 @@ MAX_XYCOMPARE_LENGTH EQU 32
 	const FLOOR_10F
 	const FLOOR_11F
 	const FLOOR_ROOF
+NUM_FLOORS EQU const_value
 
 ; showemote arguments
 ; Emotes indexes (see data/sprites/emotes.asm)
@@ -187,7 +188,9 @@ MAX_XYCOMPARE_LENGTH EQU 32
 	const EMOTE_ROD ; 9
 	const EMOTE_BOULDER_DUST ; 10
 	const EMOTE_GRASS_RUSTLE ; 11
+NUM_EMOTES EQU const_value
 EMOTE_FROM_MEM EQU -1
+EMOTE_LENGTH EQU 6
 
 ; fruittree arguments
 ; FruitTreeItems indexes (see data/items/fruit_trees.asm)
@@ -232,6 +235,7 @@ NUM_FRUIT_TREES EQU const_value - 1
 	const DECODESC_RIGHT_DOLL ; 2
 	const DECODESC_BIG_DOLL   ; 3
 	const DECODESC_CONSOLE    ; 4
+NUM_DECODESCS EQU const_value
 
 ; ActivateFishingSwarm setval arguments
 	const_def
