@@ -3,7 +3,7 @@
 SwarmGrassWildMons:
 
 ; Yanma swarm
-	map_id ROUTE_35
+	def_grass_wildmons ROUTE_35
 	db 10 percent, 10 percent, 10 percent ; encounter rates: morn/day/nite
 	; morn
 	db 12, NIDORAN_M
@@ -29,11 +29,11 @@ SwarmGrassWildMons:
 	db 14, HOOTHOOT
 	db 10, DITTO
 	db 10, DITTO
+	end_grass_wildmons
 
 ; Snubbull swarm
-	map_id ROUTE_38
+	def_grass_wildmons ROUTE_38
 	db 10 percent, 10 percent, 10 percent ; encounter rates: morn/day/nite
-
 	IF DEF(_GOLD)
 	; morn
 	db 16, SNUBBULL
@@ -59,7 +59,6 @@ SwarmGrassWildMons:
 	db 13, MILTANK
 	db 13, TAUROS
 	db 13, TAUROS
-
 	ELIF DEF(_SILVER)
 	; morn
 	db 16, SNUBBULL
@@ -86,9 +85,10 @@ SwarmGrassWildMons:
 	db 13, TAUROS
 	db 13, TAUROS
 	ENDC
+	end_grass_wildmons
 
 ; Dunsparce swarm
-	map_id DARK_CAVE_VIOLET_ENTRANCE
+	def_grass_wildmons DARK_CAVE_VIOLET_ENTRANCE
 	db 4 percent, 4 percent, 4 percent ; encounter rates: morn/day/nite
 	; morn
 	db 3, GEODUDE
@@ -114,9 +114,10 @@ SwarmGrassWildMons:
 	db 2, DUNSPARCE
 	db 4, DUNSPARCE
 	db 4, DUNSPARCE
+	end_grass_wildmons
 
 ; Marill swarm
-	map_id MOUNT_MORTAR_1F_OUTSIDE
+	def_grass_wildmons MOUNT_MORTAR_1F_OUTSIDE
 	db 6 percent, 6 percent, 6 percent ; encounter rates: morn/day/nite
 	; morn
 	db 13, MARILL
@@ -142,5 +143,6 @@ SwarmGrassWildMons:
 	db 14, GEODUDE
 	db 16, RATTATA
 	db 16, RATTATA
+	end_grass_wildmons
 
 	db -1 ; end
