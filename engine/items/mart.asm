@@ -96,9 +96,10 @@ LoadMartPointer:
 	ld [wMartPointer], a
 	ld a, d
 	ld [wMartPointer + 1], a
-	ld hl, wCurMart
+	ld hl, wCurMartCount
+	assert wCurMartCount + 1 == wCurMartItems
 	xor a
-	ld bc, wCurMartEnd - wCurMart
+	ld bc, 16
 	call ByteFill
 	xor a ; STANDARDMART_HOWMAYIHELPYOU
 	ld [wMartJumptableIndex], a
@@ -196,7 +197,7 @@ FarReadMart:
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
-	ld de, wCurMart
+	ld de, wCurMartCount
 .CopyMart:
 	ld a, [wMartPointerBank]
 	call GetFarByte
@@ -206,7 +207,7 @@ FarReadMart:
 	cp -1
 	jr nz, .CopyMart
 	ld hl, wMartItem1BCD
-	ld de, wCurMart + 1
+	ld de, wCurMartItems
 .ReadMartItem:
 	ld a, [de]
 	inc de
@@ -274,9 +275,9 @@ ReadMart:
 ; set hl to the first item
 	inc hl
 	ld bc, wMartItem1BCD
-	ld de, wCurMart + 1
+	ld de, wCurMartItems
 .loop
-; copy the item to wCurMart + (ItemIndex)
+; copy the items to wCurMartItems
 	ld a, [hli]
 	ld [de], a
 	inc de
@@ -305,7 +306,7 @@ ReadMart:
 .done
 	pop hl
 	ld a, [hl]
-	ld [wCurMart], a
+	ld [wCurMartCount], a
 	ret
 
 INCLUDE "data/items/bargain_shop.asm"
@@ -545,7 +546,7 @@ MenuHeader_Buy:
 	db SCROLLINGMENU_DISPLAY_ARROWS | SCROLLINGMENU_ENABLE_FUNCTION3 ; flags
 	db 4, 8 ; rows, columns
 	db SCROLLINGMENU_ITEMS_NORMAL ; item format
-	dbw 0, wCurMart
+	dbw 0, wCurMartCount
 	dba PlaceMenuItemName
 	dba .PrintBCDPrices
 	dba UpdateItemDescription
