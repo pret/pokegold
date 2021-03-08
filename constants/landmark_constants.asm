@@ -1,6 +1,5 @@
 ; Landmarks indexes (see data/maps/landmarks.asm)
 	const_def
-
 ; Johto landmarks
 	const LANDMARK_SPECIAL           ; 00
 	const LANDMARK_NEW_BARK_TOWN     ; 01
@@ -48,7 +47,6 @@
 	const LANDMARK_DARK_CAVE         ; 2b
 	const LANDMARK_ROUTE_46          ; 2c
 	const LANDMARK_SILVER_CAVE       ; 2d
-
 KANTO_LANDMARK EQU const_value
 	const LANDMARK_PALLET_TOWN       ; 2e
 	const LANDMARK_ROUTE_1           ; 2f
@@ -99,6 +97,7 @@ KANTO_LANDMARK EQU const_value
 	const LANDMARK_TOHJO_FALLS       ; 5c
 	const LANDMARK_ROUTE_28          ; 5d
 	const LANDMARK_FAST_SHIP         ; 5e
+NUM_LANDMARKS EQU const_value
 
 ; Regions
 	const_def

@@ -4,6 +4,8 @@ TrainerPalettes:
 ; Each .gbcpal is generated from the corresponding .png, and
 ; only the middle two colors are included, not black or white.
 
+	table_width PAL_COLOR_SIZE * 2, TrainerPalettes
+
 PlayerPalette: ; Chris uses the same colors as Cal
 INCBIN "gfx/trainers/cal.gbcpal", middle_colors
 INCBIN "gfx/trainers/falkner.gbcpal", middle_colors
@@ -72,3 +74,5 @@ INCBIN "gfx/trainers/red.gbcpal", middle_colors
 INCBIN "gfx/trainers/blue.gbcpal", middle_colors
 INCBIN "gfx/trainers/officer.gbcpal", middle_colors
 INCBIN "gfx/trainers/grunt_f.gbcpal", middle_colors
+
+	assert_table_length NUM_TRAINER_CLASSES + 1

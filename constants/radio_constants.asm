@@ -14,6 +14,7 @@
 	const POKE_FLUTE_RADIO       ; 07
 	const UNOWN_RADIO            ; 08
 	const EVOLUTION_RADIO        ; 09
+NUM_RADIO_CHANNELS EQU const_value
 ; internal indexes for channel segments
 	const OAKS_POKEMON_TALK_2    ; 0a
 	const OAKS_POKEMON_TALK_3    ; 0b
@@ -72,6 +73,7 @@
 	const POKEDEX_SHOW_6         ; 40
 	const POKEDEX_SHOW_7         ; 41
 	const POKEDEX_SHOW_8         ; 42
+NUM_RADIO_SEGMENTS EQU const_value
 
 ; PlayRadio.StationPointers indexes (see engine/pokegear/pokegear.asm)
 	const_def
@@ -84,9 +86,6 @@
 	const MAPRADIO_PLACES_PEOPLE
 	const MAPRADIO_LETS_ALL_SING
 	const MAPRADIO_ROCKET
-
-; OaksPKMNTalkRoutes size (see data/radio/oaks_pkmn_talk_routes.asm)
-NUM_OAKS_POKEMON_TALK_ROUTES EQU 15
 
 ; These tables in engine/pokegear/radio.asm are all sized to a power of 2
 ; so there's no need for a rejection sampling loop

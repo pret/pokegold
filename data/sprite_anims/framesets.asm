@@ -1,5 +1,6 @@
 SpriteAnimFrameData:
-; entries correspond to SPRITE_ANIM_FRAMESET_* constants
+; entries correspond to SPRITE_ANIM_FRAMESET_* constants (see constants/sprite_anim_constants.asm)
+	table_width 2, SpriteAnimFrameData
 	dw .Frameset_00
 	dw .Frameset_PartyMon
 	dw .Frameset_PartyMonWithMail
@@ -56,6 +57,7 @@ SpriteAnimFrameData:
 	dw .Frameset_EggHatch4
 	dw .Frameset_GSIntroHoOhLugia
 	dw .Frameset_HeadbuttTree
+	assert_table_length NUM_SPRITE_ANIM_FRAMESETS
 
 .Frameset_00:
 	frame SPRITE_ANIM_OAMSET_RED_WALK_1, 32

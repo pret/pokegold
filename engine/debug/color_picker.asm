@@ -99,7 +99,7 @@ DebugColor_InitMonColor:
 DebugColor_InitTrainerColor:
 	ld hl, TrainerPalettes
 	ld de, wDebugOriginalColors
-	ld c, NUM_TRAINER_CLASSES
+	ld c, NUM_TRAINER_CLASSES + 1
 .loop
 	push bc
 	push hl
@@ -276,7 +276,7 @@ DebugColorMain:
 	ld a, NUM_POKEMON ; CELEBI
 	ret
 .trainer
-	ld a, NUM_TRAINER_CLASSES - 1 ; MYSTICALMAN
+	ld a, NUM_TRAINER_CLASSES ; GRUNTF
 	ret
 
 .Jumptable:

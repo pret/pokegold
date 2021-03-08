@@ -2,7 +2,7 @@
 
 KantoGrassWildMons:
 
-	map_id DIGLETTS_CAVE
+	def_grass_wildmons DIGLETTS_CAVE
 	db 4 percent, 2 percent, 8 percent ; encounter rates: morn/day/nite
 	; morn
 	db 15, DIGLETT
@@ -28,10 +28,10 @@ KantoGrassWildMons:
 	db 19, DUGTRIO
 	db 24, DUGTRIO
 	db 29, DUGTRIO
+	end_grass_wildmons
 
-	map_id MOUNT_MOON
+	def_grass_wildmons MOUNT_MOON
 	db 6 percent, 6 percent, 6 percent ; encounter rates: morn/day/nite
-
 	IF DEF(_GOLD)
 	; morn
 	db 6, ZUBAT
@@ -57,7 +57,6 @@ KantoGrassWildMons:
 	db 10, SANDSLASH
 	db 8, CLEFAIRY
 	db 8, CLEFAIRY
-
 	ELIF DEF(_SILVER)
 	; morn
 	db 6, ZUBAT
@@ -84,8 +83,9 @@ KantoGrassWildMons:
 	db 8, CLEFAIRY
 	db 8, CLEFAIRY
 	ENDC
+	end_grass_wildmons
 
-	map_id ROCK_TUNNEL_1F
+	def_grass_wildmons ROCK_TUNNEL_1F
 	db 6 percent, 6 percent, 6 percent ; encounter rates: morn/day/nite
 	; morn
 	db 10, CUBONE
@@ -111,8 +111,9 @@ KantoGrassWildMons:
 	db 14, MACHOKE
 	db 13, CUBONE
 	db 13, CUBONE
+	end_grass_wildmons
 
-	map_id ROCK_TUNNEL_B1F
+	def_grass_wildmons ROCK_TUNNEL_B1F
 	db 6 percent, 6 percent, 6 percent ; encounter rates: morn/day/nite
 	; morn
 	db 12, CUBONE
@@ -138,10 +139,10 @@ KantoGrassWildMons:
 	db 14, MAROWAK
 	db 14, KANGASKHAN
 	db 14, KANGASKHAN
+	end_grass_wildmons
 
-	map_id VICTORY_ROAD
+	def_grass_wildmons VICTORY_ROAD
 	db 6 percent, 6 percent, 6 percent ; encounter rates: morn/day/nite
-
 	IF DEF(_GOLD)
 	; morn
 	db 32, GRAVELER
@@ -167,7 +168,6 @@ KantoGrassWildMons:
 	db 36, ONIX
 	db 35, RHYHORN
 	db 35, RHYHORN
-
 	ELIF DEF(_SILVER)
 	; morn
 	db 32, GRAVELER
@@ -194,8 +194,9 @@ KantoGrassWildMons:
 	db 35, RHYHORN
 	db 35, RHYHORN
 	ENDC
+	end_grass_wildmons
 
-	map_id TOHJO_FALLS
+	def_grass_wildmons TOHJO_FALLS
 	IF DEF(_GOLD)
 	db 4 percent, 4 percent, 4 percent ; encounter rates: morn/day/nite
 	ELIF DEF(_SILVER)
@@ -225,8 +226,9 @@ KantoGrassWildMons:
 	db 20, RATTATA
 	db 23, SLOWPOKE
 	db 23, SLOWPOKE
+	end_grass_wildmons
 
-	map_id ROUTE_1
+	def_grass_wildmons ROUTE_1
 	db 10 percent, 10 percent, 10 percent ; encounter rates: morn/day/nite
 	; morn
 	db 2, PIDGEY
@@ -252,10 +254,10 @@ KantoGrassWildMons:
 	db 6, RATTATA
 	db 4, HOOTHOOT
 	db 4, HOOTHOOT
+	end_grass_wildmons
 
-	map_id ROUTE_2
+	def_grass_wildmons ROUTE_2
 	db 10 percent, 10 percent, 10 percent ; encounter rates: morn/day/nite
-
 	IF DEF(_GOLD)
 	; morn
 	db 3, CATERPIE
@@ -281,7 +283,6 @@ KantoGrassWildMons:
 	db 7, ARIADOS
 	db 4, PIKACHU
 	db 4, PIKACHU
-
 	ELIF DEF(_SILVER)
 	; morn
 	db 3, WEEDLE
@@ -308,10 +309,10 @@ KantoGrassWildMons:
 	db 4, PIKACHU
 	db 4, PIKACHU
 	ENDC
+	end_grass_wildmons
 
-	map_id ROUTE_3
+	def_grass_wildmons ROUTE_3
 	db 10 percent, 10 percent, 10 percent ; encounter rates: morn/day/nite
-
 	IF DEF(_GOLD)
 	; morn
 	db 5, SPEAROW
@@ -337,7 +338,6 @@ KantoGrassWildMons:
 	db 10, RATTATA
 	db 8, RATTATA
 	db 8, RATTATA
-
 	ELIF DEF(_SILVER)
 	; morn
 	db 5, SPEAROW
@@ -364,11 +364,11 @@ KantoGrassWildMons:
 	db 8, RATTATA
 	db 8, RATTATA
 	ENDC
+	end_grass_wildmons
 
-	map_id ROUTE_4
+	def_grass_wildmons ROUTE_4
 	db 10 percent, 10 percent, 10 percent ; encounter rates: morn/day/nite
 	; morn
-
 	IF DEF(_GOLD)
 	; morn
 	db 5, SPEAROW
@@ -394,7 +394,6 @@ KantoGrassWildMons:
 	db 10, RATTATA
 	db 8, RATTATA
 	db 8, RATTATA
-
 	ELIF DEF(_SILVER)
 	; morn
 	db 5, SPEAROW
@@ -421,10 +420,10 @@ KantoGrassWildMons:
 	db 8, RATTATA
 	db 8, RATTATA
 	ENDC
+	end_grass_wildmons
 
-	map_id ROUTE_5
+	def_grass_wildmons ROUTE_5
 	db 10 percent, 10 percent, 10 percent ; encounter rates: morn/day/nite
-
 	IF DEF(_GOLD)
 	; morn
 	db 13, PIDGEY
@@ -450,7 +449,6 @@ KantoGrassWildMons:
 	db 12, ABRA
 	db 14, ABRA
 	db 14, ABRA
-
 	ELIF DEF(_SILVER)
 	; morn
 	db 13, PIDGEY
@@ -477,10 +475,10 @@ KantoGrassWildMons:
 	db 14, ABRA
 	db 14, ABRA
 	ENDC
+	end_grass_wildmons
 
-	map_id ROUTE_6
+	def_grass_wildmons ROUTE_6
 	db 10 percent, 10 percent, 10 percent ; encounter rates: morn/day/nite
-
 	IF DEF(_GOLD)
 	; morn
 	db 13, PIDGEY
@@ -506,7 +504,6 @@ KantoGrassWildMons:
 	db 12, ABRA
 	db 14, ABRA
 	db 14, ABRA
-
 	ELIF DEF(_SILVER)
 	; morn
 	db 13, PIDGEY
@@ -533,10 +530,10 @@ KantoGrassWildMons:
 	db 14, ABRA
 	db 14, ABRA
 	ENDC
+	end_grass_wildmons
 
-	map_id ROUTE_7
+	def_grass_wildmons ROUTE_7
 	db 10 percent, 10 percent, 10 percent ; encounter rates: morn/day/nite
-
 	IF DEF(_GOLD)
 	; morn
 	db 17, RATTATA
@@ -562,7 +559,6 @@ KantoGrassWildMons:
 	db 19, MURKROW
 	db 15, HOUNDOUR
 	db 15, HOUNDOUR
-
 	ELIF DEF(_SILVER)
 	; morn
 	db 17, MEOWTH
@@ -589,10 +585,10 @@ KantoGrassWildMons:
 	db 15, HOUNDOUR
 	db 15, HOUNDOUR
 	ENDC
+	end_grass_wildmons
 
-	map_id ROUTE_8
+	def_grass_wildmons ROUTE_8
 	db 10 percent, 10 percent, 10 percent ; encounter rates: morn/day/nite
-
 	IF DEF(_GOLD)
 	; morn
 	db 17, PIDGEOTTO
@@ -618,7 +614,6 @@ KantoGrassWildMons:
 	db 18, GROWLITHE
 	db 15, KADABRA
 	db 15, KADABRA
-
 	ELIF DEF(_SILVER)
 	; morn
 	db 17, MEOWTH
@@ -645,10 +640,10 @@ KantoGrassWildMons:
 	db 15, KADABRA
 	db 15, KADABRA
 	ENDC
+	end_grass_wildmons
 
-	map_id ROUTE_9
+	def_grass_wildmons ROUTE_9
 	db 10 percent, 10 percent, 10 percent ; encounter rates: morn/day/nite
-
 	IF DEF(_GOLD)
 	; morn
 	db 13, MANKEY
@@ -674,7 +669,6 @@ KantoGrassWildMons:
 	db 15, RATICATE
 	db 15, PRIMEAPE
 	db 15, PRIMEAPE
-
 	ELIF DEF(_SILVER)
 	; morn
 	db 13, RATTATA
@@ -701,8 +695,9 @@ KantoGrassWildMons:
 	db 15, RATICATE
 	db 15, RATICATE
 	ENDC
+	end_grass_wildmons
 
-	map_id ROUTE_10_NORTH
+	def_grass_wildmons ROUTE_10_NORTH
 	db 10 percent, 10 percent, 10 percent ; encounter rates: morn/day/nite
 	; morn
 	db 16, SPEAROW
@@ -728,8 +723,9 @@ KantoGrassWildMons:
 	db 18, RATICATE
 	db 15, ELECTABUZZ
 	db 15, ELECTABUZZ
+	end_grass_wildmons
 
-	map_id ROUTE_11
+	def_grass_wildmons ROUTE_11
 	db 10 percent, 10 percent, 10 percent ; encounter rates: morn/day/nite
 	; morn
 	db 14, DROWZEE
@@ -755,10 +751,10 @@ KantoGrassWildMons:
 	db 16, HYPNO
 	db 16, HYPNO
 	db 16, HYPNO
+	end_grass_wildmons
 
-	map_id ROUTE_13
+	def_grass_wildmons ROUTE_13
 	db 10 percent, 10 percent, 10 percent ; encounter rates: morn/day/nite
-
 	IF DEF(_GOLD)
 	; morn
 	db 23, NIDORINA
@@ -784,7 +780,6 @@ KantoGrassWildMons:
 	db 24, QUAGSIRE
 	db 24, QUAGSIRE
 	db 25, CHANSEY
-
 	ELIF DEF(_SILVER)
 	; morn
 	db 23, NIDORINO
@@ -811,10 +806,10 @@ KantoGrassWildMons:
 	db 24, QUAGSIRE
 	db 25, CHANSEY
 	ENDC
+	end_grass_wildmons
 
-	map_id ROUTE_14
+	def_grass_wildmons ROUTE_14
 	db 10 percent, 10 percent, 10 percent ; encounter rates: morn/day/nite
-
 	IF DEF(_GOLD)
 	; morn
 	db 23, NIDORINA
@@ -840,7 +835,6 @@ KantoGrassWildMons:
 	db 24, QUAGSIRE
 	db 24, QUAGSIRE
 	db 25, CHANSEY
-
 	ELIF DEF(_SILVER)
 	; morn
 	db 23, NIDORINO
@@ -867,10 +861,10 @@ KantoGrassWildMons:
 	db 24, QUAGSIRE
 	db 25, CHANSEY
 	ENDC
+	end_grass_wildmons
 
-	map_id ROUTE_15
+	def_grass_wildmons ROUTE_15
 	db 10 percent, 10 percent, 10 percent ; encounter rates: morn/day/nite
-
 	IF DEF(_GOLD)
 	; morn
 	db 23, NIDORINA
@@ -896,7 +890,6 @@ KantoGrassWildMons:
 	db 24, QUAGSIRE
 	db 24, QUAGSIRE
 	db 25, CHANSEY
-
 	ELIF DEF(_SILVER)
 	; morn
 	db 23, NIDORINO
@@ -923,8 +916,9 @@ KantoGrassWildMons:
 	db 24, QUAGSIRE
 	db 25, CHANSEY
 	ENDC
+	end_grass_wildmons
 
-	map_id ROUTE_16
+	def_grass_wildmons ROUTE_16
 	db 10 percent, 10 percent, 10 percent ; encounter rates: morn/day/nite
 	; morn
 	db 26, GRIMER
@@ -950,8 +944,9 @@ KantoGrassWildMons:
 	db 27, SLUGMA
 	db 30, MUK
 	db 30, MUK
+	end_grass_wildmons
 
-	map_id ROUTE_17
+	def_grass_wildmons ROUTE_17
 	db 10 percent, 10 percent, 10 percent ; encounter rates: morn/day/nite
 	; morn
 	db 28, FEAROW
@@ -977,8 +972,9 @@ KantoGrassWildMons:
 	db 29, SLUGMA
 	db 32, MUK
 	db 32, MUK
+	end_grass_wildmons
 
-	map_id ROUTE_18
+	def_grass_wildmons ROUTE_18
 	db 10 percent, 10 percent, 10 percent ; encounter rates: morn/day/nite
 	; morn
 	db 26, GRIMER
@@ -1004,8 +1000,9 @@ KantoGrassWildMons:
 	db 27, SLUGMA
 	db 30, MUK
 	db 30, MUK
+	end_grass_wildmons
 
-	map_id ROUTE_21
+	def_grass_wildmons ROUTE_21
 	db 6 percent, 6 percent, 6 percent ; encounter rates: morn/day/nite
 	; morn
 	db 30, TANGELA
@@ -1031,8 +1028,9 @@ KantoGrassWildMons:
 	db 30, TANGELA
 	db 28, MR__MIME
 	db 28, MR__MIME
+	end_grass_wildmons
 
-	map_id ROUTE_22
+	def_grass_wildmons ROUTE_22
 	db 10 percent, 10 percent, 10 percent ; encounter rates: morn/day/nite
 	; morn
 	db 3, RATTATA
@@ -1058,8 +1056,9 @@ KantoGrassWildMons:
 	db 6, PONYTA
 	db 7, RATTATA
 	db 7, RATTATA
+	end_grass_wildmons
 
-	map_id ROUTE_24
+	def_grass_wildmons ROUTE_24
 	db 10 percent, 10 percent, 10 percent ; encounter rates: morn/day/nite
 	; morn
 	db 8, BELLSPROUT
@@ -1085,8 +1084,9 @@ KantoGrassWildMons:
 	db 10, BELLSPROUT
 	db 10, VENOMOTH
 	db 10, VENOMOTH
+	end_grass_wildmons
 
-	map_id ROUTE_25
+	def_grass_wildmons ROUTE_25
 	db 10 percent, 10 percent, 10 percent ; encounter rates: morn/day/nite
 	; morn
 	db 8, PIDGEY
@@ -1112,10 +1112,10 @@ KantoGrassWildMons:
 	db 14, WEEPINBELL
 	db 10, BELLSPROUT
 	db 10, BELLSPROUT
+	end_grass_wildmons
 
-	map_id ROUTE_26
+	def_grass_wildmons ROUTE_26
 	db 10 percent, 10 percent, 10 percent ; encounter rates: morn/day/nite
-
 	IF DEF(_GOLD)
 	; morn
 	db 28, DODUO
@@ -1141,7 +1141,6 @@ KantoGrassWildMons:
 	db 30, QUAGSIRE
 	db 32, QUAGSIRE
 	db 32, QUAGSIRE
-
 	ELIF DEF(_SILVER)
 	; morn
 	db 28, DODUO
@@ -1168,10 +1167,10 @@ KantoGrassWildMons:
 	db 30, ARBOK
 	db 30, ARBOK
 	ENDC
+	end_grass_wildmons
 
-	map_id ROUTE_27
+	def_grass_wildmons ROUTE_27
 	db 10 percent, 10 percent, 10 percent ; encounter rates: morn/day/nite
-
 	IF DEF(_GOLD)
 	; morn
 	db 28, DODUO
@@ -1197,7 +1196,6 @@ KantoGrassWildMons:
 	db 32, PONYTA
 	db 30, SANDSLASH
 	db 30, SANDSLASH
-
 	ELIF DEF(_SILVER)
 	; morn
 	db 28, DODUO
@@ -1224,10 +1222,10 @@ KantoGrassWildMons:
 	db 32, QUAGSIRE
 	db 32, QUAGSIRE
 	ENDC
+	end_grass_wildmons
 
-	map_id ROUTE_28
+	def_grass_wildmons ROUTE_28
 	db 10 percent, 10 percent, 10 percent ; encounter rates: morn/day/nite
-
 	IF DEF(_GOLD)
 	; morn
 	db 39, TANGELA
@@ -1253,7 +1251,6 @@ KantoGrassWildMons:
 	db 42, RAPIDASH
 	db 42, RAPIDASH
 	db 42, RAPIDASH
-
 	ELIF DEF(_SILVER)
 	; morn
 	db 39, TANGELA
@@ -1280,5 +1277,6 @@ KantoGrassWildMons:
 	db 42, RAPIDASH
 	db 42, RAPIDASH
 	ENDC
+	end_grass_wildmons
 
 	db -1 ; end

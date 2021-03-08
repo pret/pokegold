@@ -1,5 +1,6 @@
 SpriteAnimOAMData:
-; entries correspond to SPRITE_ANIM_OAMSET_* constants
+; entries correspond to SPRITE_ANIM_OAMSET_* constants (see constants/sprite_anim_constants.asm)
+	table_width 3, SpriteAnimOAMData
 	; vtile offset, data pointer
 	dbw $00, .OAMData_RedWalk                  ; SPRITE_ANIM_OAMSET_RED_WALK_1
 	dbw $04, .OAMData_RedWalk                  ; SPRITE_ANIM_OAMSET_RED_WALK_2
@@ -101,6 +102,7 @@ ELIF DEF(_SILVER)
 	dbw $00, .OAMData_GSIntroLugia1            ; SPRITE_ANIM_OAMSET_GS_INTRO_HO_OH_5
 ENDC
 	dbw $04, .OAMData_Tree                     ; SPRITE_ANIM_OAMSET_HEADBUTT_TREE_2
+	assert_table_length NUM_SPRITE_ANIM_OAMSETS
 
 .OAMData_1x1_Palette0:
 	db 1

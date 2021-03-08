@@ -1,9 +1,12 @@
 TreeMons:
 ; entries correspond to TREEMON_SET_* constants
+	table_width 2, TreeMons
 	dw TreeMonSet_None
 	dw TreeMonSet_Forest
 	dw TreeMonSet_Canyon
 	dw TreeMonSet_Rock
+	assert_table_length NUM_TREEMON_SETS
+; last two are unused/ignored
 	dw TreeMonSet_Unused
 	dw TreeMonSet_City
 

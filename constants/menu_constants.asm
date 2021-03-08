@@ -63,6 +63,7 @@
 	const MONMENUITEM_MOVE       ; 19
 	const MONMENUITEM_MAIL       ; 20
 	const MONMENUITEM_ERROR      ; 21
+NUM_MONMENUITEMS EQU const_value - 1
 
 ; MonMenuOptions categories
 MONMENU_FIELD_MOVE EQU 0
@@ -85,6 +86,7 @@ HMENURETURN_ASM    EQU %11111111
 	const PARTYMENUACTION_GIVE_MON
 	const PARTYMENUACTION_GIVE_MON_FEMALE ; unused
 	const PARTYMENUACTION_GIVE_ITEM
+NUM_PARTYMENUACTIONS EQU const_value
 ; PrintPartyMenuActionText arguments (see engine/pokemon/party_menu.asm)
 	const_next $f0
 	const PARTYMENUTEXT_HEAL_PSN

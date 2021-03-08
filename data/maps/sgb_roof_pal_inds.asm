@@ -1,5 +1,6 @@
 MapGroupRoofSGBPalInds:
 ; entries correspond to map groups
+	table_width 1, MapGroupRoofSGBPalInds
 	db PREDEFPAL_ROUTES
 	db PREDEFPAL_OLIVINE
 	db PREDEFPAL_MAHOGANY
@@ -27,3 +28,4 @@ MapGroupRoofSGBPalInds:
 	db PREDEFPAL_NEW_BARK
 	db PREDEFPAL_SAFFRON
 	db PREDEFPAL_CHERRYGROVE
+	assert_table_length NUM_MAP_GROUPS + 1
