@@ -34324,14 +34324,14 @@
 00:cfe5 wVramState
 00:cfe9 wBattleResult
 00:cfeb wUsingItemWithSelect
+00:cfec wCurElevatorCount
 00:cfec wCurMessageScrollPosition
-00:cfec wCurElevator
-00:cfec wCurMart
+00:cfec wCurMartCount
 00:cfed wCurElevatorFloors
+00:cfed wCurMartItems
 00:cfed wCurMessageIndex
 00:cfee wMailboxCount
 00:cfef wMailboxItems
-00:cffc wCurMartEnd
 00:cffc wListPointer
 00:cffe wUnusedNamesPointer
 01:d000 wItemAttributesPointer
