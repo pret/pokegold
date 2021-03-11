@@ -1009,3 +1009,5 @@ warpfacing: MACRO
 	db \3 ; x
 	db \4 ; y
 ENDM
+
+NUM_EVENT_COMMANDS EQU const_value

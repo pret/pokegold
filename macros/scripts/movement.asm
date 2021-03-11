@@ -213,3 +213,5 @@ return_dig: MACRO
 	db movement_return_dig
 	db \1 ; length
 ENDM
+
+NUM_MOVEMENT_CMDS EQU const_value
