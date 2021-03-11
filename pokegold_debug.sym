@@ -28178,10 +28178,10 @@
 60:5c48 PlayersHousePCScript.Warp
 60:5c4e PlayersHousePosterScript
 60:5c52 PlayersHousePosterScript.Script
-60:5c54 Doll1Script
-60:5c56 Doll2Script
-60:5c58 BigDollScript
-60:5c5a GameConsoleScript
+60:5c54 PlayersHouseDoll1Script
+60:5c56 PlayersHouseDoll2Script
+60:5c58 PlayersHouseBigDollScript
+60:5c5a PlayersHouseGameConsoleScript
 60:5c5c PlayersRadioText1
 60:5c8d PlayersRadioText2
 60:5c9c PlayersRadioText3
