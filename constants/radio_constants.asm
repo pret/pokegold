@@ -75,7 +75,7 @@ NUM_RADIO_CHANNELS EQU const_value
 	const POKEDEX_SHOW_8         ; 42
 NUM_RADIO_SEGMENTS EQU const_value
 
-; PlayRadio.StationPointers indexes (see engine/pokegear/pokegear.asm)
+; PlayRadioStationPointers indexes (see engine/pokegear/pokegear.asm)
 	const_def
 	const MAPRADIO_POKEMON_CHANNEL
 	const MAPRADIO_OAKS_POKEMON_TALK
@@ -86,6 +86,7 @@ NUM_RADIO_SEGMENTS EQU const_value
 	const MAPRADIO_PLACES_PEOPLE
 	const MAPRADIO_LETS_ALL_SING
 	const MAPRADIO_ROCKET
+NUM_MAP_RADIO_STATIONS EQU const_value
 
 ; These tables in engine/pokegear/radio.asm are all sized to a power of 2
 ; so there's no need for a rejection sampling loop
