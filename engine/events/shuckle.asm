@@ -67,7 +67,7 @@ SpecialShuckleOT:
 SpecialShuckleNick:
 	db "SHUCKIE@"
 
-ReturnShuckle:
+ReturnShuckie:
 	farcall SelectMonFromParty
 	jr c, .refused
 

@@ -8,7 +8,7 @@ OverworldLoop::
 	ld [wMapStatus], a
 .loop
 	ld a, [wMapStatus]
-	ld hl, .jumps
+	ld hl, .Jumptable
 	rst JumpTable
 	ld a, [wMapStatus]
 	cp MAPSTATUS_DONE
@@ -16,7 +16,7 @@ OverworldLoop::
 .done
 	ret
 
-.jumps
+.Jumptable:
 ; entries correspond to MAPSTATUS_* constants
 	dw StartMap
 	dw EnterMap
@@ -157,22 +157,22 @@ HandleMap:
 
 MapEvents:
 	ld a, [wMapEventStatus]
-	ld hl, .jumps
+	ld hl, .Jumptable
 	rst JumpTable
 	ret
 
-.jumps
+.Jumptable:
 ; entries correspond to MAPEVENTS_* constants
 	dw .events
 	dw .no_events
 
-.events
+.events:
 	call PlayerEvents
 	call DisableEvents
 	farcall ScriptEvents
 	ret
 
-.no_events
+.no_events:
 	ret
 
 MaxOverworldDelay:
@@ -545,7 +545,7 @@ TryObjectEvent:
 ; Bug: If IsInArray returns nc, data at bc will be executed as code.
 	push bc
 	ld de, 3
-	ld hl, .pointers
+	ld hl, ObjectEventTypeArray
 	call IsInArray
 	jr nc, .nope
 	pop bc
@@ -561,7 +561,8 @@ TryObjectEvent:
 	xor a
 	ret
 
-.pointers
+ObjectEventTypeArray:
+	table_width 3, ObjectEventTypeArray
 	dbw OBJECTTYPE_SCRIPT, .script
 	dbw OBJECTTYPE_ITEMBALL, .itemball
 	dbw OBJECTTYPE_TRAINER, .trainer
@@ -570,7 +571,8 @@ TryObjectEvent:
 	dbw OBJECTTYPE_4, .four
 	dbw OBJECTTYPE_5, .five
 	dbw OBJECTTYPE_6, .six
-	db -1
+	assert_table_length NUM_OBJECT_TYPES
+	db -1 ; end
 
 .script
 	ld hl, MAPOBJECT_SCRIPT_POINTER
@@ -626,11 +628,12 @@ TryBGEvent:
 
 .is_bg_event:
 	ld a, [wCurBGEventType]
-	ld hl, .bg_events
+	ld hl, BGEventJumptable
 	rst JumpTable
 	ret
 
-.bg_events
+BGEventJumptable:
+	table_width 2, BGEventJumptable
 	dw .read
 	dw .up
 	dw .down
@@ -640,27 +643,30 @@ TryBGEvent:
 	dw .ifnotset
 	dw .itemifset
 	dw .copy
+	assert_table_length NUM_BGEVENTS
 
-.up
+.up:
 	ld b, OW_UP
 	jr .checkdir
-.down
+
+.down:
 	ld b, OW_DOWN
 	jr .checkdir
-.right
+
+.right:
 	ld b, OW_RIGHT
 	jr .checkdir
-.left
+
+.left:
 	ld b, OW_LEFT
 	jr .checkdir
 
-.checkdir
+.checkdir:
 	ld a, [wPlayerDirection]
 	and %1100
 	cp b
 	jp nz, .dontread
-
-.read
+.read:
 	call PlayTalkObject
 	ld hl, wCurBGEventScriptAddr
 	ld a, [hli]
@@ -671,7 +677,7 @@ TryBGEvent:
 	scf
 	ret
 
-.itemifset
+.itemifset:
 	call CheckBGEventFlag
 	jp nz, .dontread
 	call PlayTalkObject
@@ -685,7 +691,7 @@ TryBGEvent:
 	scf
 	ret
 
-.copy
+.copy:
 	call CheckBGEventFlag
 	jr nz, .dontread
 	call GetMapScriptsBank
@@ -694,16 +700,15 @@ TryBGEvent:
 	call FarCopyBytes
 	jr .dontread
 
-.ifset
+.ifset:
 	call CheckBGEventFlag
 	jr z, .dontread
 	jr .thenread
 
-.ifnotset
+.ifnotset:
 	call CheckBGEventFlag
 	jr nz, .dontread
-
-.thenread
+.thenread:
 	push hl
 	call PlayTalkObject
 	pop hl
@@ -716,7 +721,7 @@ TryBGEvent:
 	scf
 	ret
 
-.dontread
+.dontread:
 	xor a
 	ret
 
@@ -740,13 +745,14 @@ CheckBGEventFlag:
 PlayerMovement:
 	farcall DoPlayerMovement
 	ld a, c
-	ld hl, .pointers
+	ld hl, PlayerMovementPointers
 	rst JumpTable
 	ld a, c
 	ret
 
-.pointers
+PlayerMovementPointers:
 ; entries correspond to PLAYERMOVEMENT_* constants
+	table_width 2, PlayerMovementPointers
 	dw .normal
 	dw .warp
 	dw .turn
@@ -755,6 +761,7 @@ PlayerMovement:
 	dw .continue
 	dw .exit_water
 	dw .jump
+	assert_table_length NUM_PLAYER_MOVEMENTS
 
 .normal:
 .finish:
@@ -962,6 +969,7 @@ DoPlayerEvent:
 
 PlayerEventScriptPointers:
 ; entries correspond to PLAYEREVENT_* constants
+	table_width 3, PlayerEventScriptPointers
 	dba InvalidEventScript      ; PLAYEREVENT_NONE
 	dba SeenByTrainerScript     ; PLAYEREVENT_SEENBYTRAINER
 	dba TalkToTrainerScript     ; PLAYEREVENT_TALKTOTRAINER
@@ -973,6 +981,7 @@ PlayerEventScriptPointers:
 	dba HatchEggScript          ; PLAYEREVENT_HATCH
 	dba ChangeDirectionScript   ; PLAYEREVENT_JOYCHANGEFACING
 	dba InvalidEventScript      ; (NUM_PLAYER_EVENTS)
+	assert_table_length NUM_PLAYER_EVENTS + 1
 
 InvalidEventScript:
 	end
