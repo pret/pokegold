@@ -14,7 +14,7 @@ _NameRater:
 	cp EGG
 	jr z, .egg
 ; ... or a Pokemon you got from a trade.
-	call GetCurNick
+	call GetCurNickname
 	call CheckIfMonIsYourOT
 	jr c, .traded
 ; This name is good, but we can do better.  How about it?
@@ -57,7 +57,7 @@ _NameRater:
 
 .samename
 	push hl
-	call GetCurNick
+	call GetCurNickname
 	ld hl, NameRaterNamedText
 	call PrintText
 	pop hl
@@ -80,7 +80,7 @@ _NameRater:
 
 CheckIfMonIsYourOT:
 ; Checks to see if the partymon loaded in [wCurPartyMon] has the different OT as you.  Returns carry if not.
-	ld hl, wPartyMonOT
+	ld hl, wPartyMonOTs
 	ld bc, NAME_LENGTH
 	ld a, [wCurPartyMon]
 	call AddNTimes

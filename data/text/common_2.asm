@@ -467,7 +467,7 @@ _BreedAskNicknameText::
 
 _LeftWithDayCareLadyText::
 	text "It's @"
-	text_ram wBreedMon2Nick
+	text_ram wBreedMon2Nickname
 	text_start
 	line "that was left with"
 	cont "the DAY-CARE LADY."
@@ -475,7 +475,7 @@ _LeftWithDayCareLadyText::
 
 _LeftWithDayCareManText::
 	text "It's @"
-	text_ram wBreedMon1Nick
+	text_ram wBreedMon1Nickname
 	text_start
 	line "that was left with"
 	cont "the DAY-CARE MAN."
@@ -1264,7 +1264,7 @@ _LinkAbnormalMonText::
 
 _LinkAskTradeForText::
 	text "Trade @"
-	text_ram wBufferTrademonNick
+	text_ram wBufferTrademonNickname
 	text_start
 	line "for @"
 	text_ram wStringBuffer1

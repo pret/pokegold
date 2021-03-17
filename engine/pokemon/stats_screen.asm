@@ -338,7 +338,7 @@ StatsScreen_InitUpperHalf:
 	dw wPartyMonNicknames
 	dw wOTPartyMonNicknames
 	dw sBoxMonNicknames
-	dw wBufferMonNick
+	dw wBufferMonNickname
 
 LoadPinkPage:
 	push bc
@@ -670,7 +670,7 @@ LoadBluePage:
 ; OT name
 	ld a, [wMonType]
 	cp BOXMON
-	ld a, BANK(sBoxMonOT)
+	ld a, BANK(sBoxMonOTs)
 	call z, OpenSRAM
 	ld de, wStringBuffer1
 	push de
@@ -708,9 +708,9 @@ LoadBluePage:
 	ret
 
 .OTNamePointers:
-	dw wPartyMonOT
-	dw wOTPartyMonOT
-	dw sBoxMonOT
+	dw wPartyMonOTs
+	dw wOTPartyMonOTs
+	dw sBoxMonOTs
 	dw wBufferMonOT
 
 IDNoString:

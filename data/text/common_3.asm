@@ -259,7 +259,7 @@ _BallSoCloseText::
 
 Text_BallCaught::
 	text "Gotcha! @"
-	text_ram wEnemyMonNick
+	text_ram wEnemyMonNickname
 	text_start
 	line "was caught!@"
 	sound_caught_mon
@@ -278,7 +278,7 @@ _BallSentToPCText::
 	prompt
 
 _NewDexDataText::
-	text_ram wEnemyMonNick
+	text_ram wEnemyMonNickname
 	text "'s data"
 	line "was newly added to"
 	cont "the #DEX.@"

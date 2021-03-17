@@ -268,11 +268,11 @@ GetBaseData::
 	pop bc
 	ret
 
-GetCurNick::
+GetCurNickname::
 	ld a, [wCurPartyMon]
 	ld hl, wPartyMonNicknames
 
-GetNick::
+GetNickname::
 ; Get nickname a from list hl.
 
 	push hl

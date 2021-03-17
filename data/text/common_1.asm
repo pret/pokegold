@@ -157,7 +157,7 @@ _EnemyWithdrewText::
 	text "<ENEMY>"
 	line "withdrew"
 	cont "@"
-	text_ram wEnemyMonNick
+	text_ram wEnemyMonNickname
 	text "!"
 	prompt
 
@@ -167,7 +167,7 @@ _EnemyUsedOnText::
 	text_ram wMonOrItemNameBuffer
 	text_start
 	cont "on @"
-	text_ram wEnemyMonNick
+	text_ram wEnemyMonNickname
 	text "!"
 	prompt
 
@@ -1666,32 +1666,32 @@ _ExpPointsText::
 
 _GoMonText::
 	text "Go! @"
-	text_ram wBattleMonNick
+	text_ram wBattleMonNickname
 	text "!"
 	done
 
 _DoItMonText::
 	text "Do it! @"
-	text_ram wBattleMonNick
+	text_ram wBattleMonNickname
 	text "!"
 	done
 
 _GoForItMonText::
 	text "Go for it,"
 	line "@"
-	text_ram wBattleMonNick
+	text_ram wBattleMonNickname
 	text "!"
 	done
 
 _YourFoesWeakGetmMonText::
 	text "Your foe's weak!"
 	line "Get'm, @"
-	text_ram wBattleMonNick
+	text_ram wBattleMonNickname
 	text "!"
 	done
 
 _BattleMonNickCommaText::
-	text_ram wBattleMonNick
+	text_ram wBattleMonNickname
 	text ",@@"
 
 _ThatsEnoughComeBackText::
