@@ -43,7 +43,7 @@ def fix_pal(filename):
 	assert len(palette) == 4
 	data = [list(map(palette.index, rgb5_pixels(row))) for row in data]
 	if palette == ((31, 31, 31), (21, 21, 21), (10, 10, 10), (0, 0, 0)):
-		data = [[3 - v for v in row] for row in data]
+		data = [[3 - c for c in row] for row in data]
 		writer = png.Writer(width, height, greyscale=True, bitdepth=2, compression=9)
 	else:
 		palette = tuple(map(rgb5_to_rgb8, palette))
@@ -54,7 +54,7 @@ def fix_pal(filename):
 
 def main():
 	if len(sys.argv) < 2:
-		print('Usage: %s pic.png' % sys.argv[0], file=sys.stderr)
+		print('Usage:', sys.argv[0], 'pic.png', file=sys.stderr)
 		sys.exit(1)
 	for filename in sys.argv[1:]:
 		if not filename.lower().endswith('.png'):
