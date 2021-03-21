@@ -1028,7 +1028,8 @@ EraseBoxes:
 	ret
 
 BoxAddresses:
-; dbww bank, address, address
+	table_width 5, BoxAddresses
+	; dbww bank, start address, end address
 	dbww BANK(sBox1),  sBox1,  sBox1End
 	dbww BANK(sBox2),  sBox2,  sBox2End
 	dbww BANK(sBox3),  sBox3,  sBox3End
@@ -1043,6 +1044,7 @@ BoxAddresses:
 	dbww BANK(sBox12), sBox12, sBox12End
 	dbww BANK(sBox13), sBox13, sBox13End
 	dbww BANK(sBox14), sBox14, sBox14End
+	assert_table_length NUM_BOXES
 
 Checksum:
 	ld de, 0
