@@ -17,6 +17,7 @@ endc
 PURGE MOVE_FOR_TM
 n = n + 1
 endr
+	assert_table_length NUM_TMS
 
 ; HMs
 n = 1
@@ -30,7 +31,6 @@ endc
 PURGE MOVE_FOR_HM
 n = n + 1
 endr
-
 	assert_table_length NUM_TM_HM
 
 	db 0 ; end

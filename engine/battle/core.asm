@@ -8058,9 +8058,6 @@ ShowLinkBattleParticipantsAfterEnd:
 .Draw:
 	db "  DRAW@"
 
-LINK_BATTLE_RECORD_LENGTH EQUS "(sLinkBattleRecord1End - sLinkBattleRecord1)" ; 18
-NUM_LINK_BATTLE_RECORDS EQUS "((sLinkBattleStatsEnd - sLinkBattleRecord) / LINK_BATTLE_RECORD_LENGTH)" ; 5
-
 _DisplayLinkRecord:
 	ld a, BANK(sLinkBattleStats)
 	call OpenSRAM
