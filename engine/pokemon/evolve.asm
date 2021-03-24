@@ -219,6 +219,7 @@ EvolveAfterBattle_MasterLoop:
 	ld a, $1
 	ldh [hBGMapMode], a
 	call ClearSprites
+
 	call EvolutionAnimation
 
 	push af

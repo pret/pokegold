@@ -2684,7 +2684,7 @@ _UpdateSprites::
 	ret
 
 .fill
-	ld b, OBJECT_LENGTH * SPRITEOAMSTRUCT_LENGTH
+	ld b, NUM_SPRITE_OAM_STRUCTS * SPRITEOAMSTRUCT_LENGTH
 	ldh a, [hUsedSpriteIndex]
 	cp b
 	ret nc

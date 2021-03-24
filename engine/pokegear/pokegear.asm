@@ -1677,6 +1677,7 @@ NoRadioStation:
 	call PlayMusic
 	ld a, ENTER_MAP_MUSIC
 	ld [wPokegearRadioMusicPlaying], a
+
 ; no radio name
 	xor a
 	ldh [hBGMapMode], a
@@ -1686,6 +1687,7 @@ NoRadioStation:
 	hlcoord 0, 12
 	lb bc, 4, 18
 	call Textbox
+
 ; no radio channel
 	xor a
 	ld [wPokegearRadioChannelBank], a

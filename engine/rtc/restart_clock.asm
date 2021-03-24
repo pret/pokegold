@@ -100,11 +100,11 @@ RestartClock:
 	ld hl, .ClockHasResetText
 	call PrintText
 	call WaitPressAorB_BlinkCursor
-	xor a
+	xor a ; FALSE
 	ret
 
 .cancel
-	ld a, $1
+	ld a, TRUE
 	ret
 
 .ClockIsThisOKText:
