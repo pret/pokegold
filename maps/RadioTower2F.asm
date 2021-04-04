@@ -115,7 +115,7 @@ RadioTower2FSuperNerdText:
 RadioTower2FTeacherText:
 	text "Lullabies on the"
 	line "radio may make"
-	cont "#MON sleep."
+	cont "POKéMON sleep."
 	done
 
 RadioTower2FTeacherText_Rockets:
@@ -174,7 +174,7 @@ GruntM4AfterBattleText:
 GruntM5SeenText:
 	text "We're TEAM ROCKET,"
 	line "the exploiters of"
-	cont "#MON!"
+	cont "POKéMON!"
 
 	para "We love being"
 	line "evil! Scared?"
@@ -237,7 +237,7 @@ RadioTower2FSalesSignText:
 	done
 
 RadioTower2FOaksPKMNTalkSignText:
-	text "PROF.OAK'S #MON"
+	text "PROF.OAK'S POKéMON"
 	line "TALK"
 
 	para "The Hottest Show"
@@ -246,7 +246,7 @@ RadioTower2FOaksPKMNTalkSignText:
 
 RadioTower2FPokemonRadioSignText:
 	text "Anywhere, Anytime"
-	line "#MON Radio"
+	line "POKéMON Radio"
 	done
 
 RadioTower2F_MapEvents:

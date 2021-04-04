@@ -38,10 +38,10 @@ Route34IlexForestGateLassScript:
 
 Route34IlexForestGateTeacherText:
 	text "Oh, honey. You're"
-	line "making a #DEX?"
+	line "making a POKéDEX?"
 
 	para "It must be hard if"
-	line "#MON won't"
+	line "POKéMON won't"
 
 	para "appear. Try using"
 	line "this TM."
@@ -51,9 +51,9 @@ Route34IlexForestGateTeacher_GotSweetScent:
 	text "It's SWEET SCENT."
 
 	para "Use it wherever"
-	line "#MON appear."
+	line "POKéMON appear."
 
-	para "#MON will be"
+	para "POKéMON will be"
 	line "enticed by it."
 	done
 
@@ -72,7 +72,7 @@ Route34IlexForestGateLassText:
 
 	para "I think that it"
 	line "must be a grass-"
-	cont "type #MON."
+	cont "type POKéMON."
 	done
 
 Route34IlexForestGate_MapEvents:

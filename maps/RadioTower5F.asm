@@ -333,7 +333,7 @@ RadioTower5FDirectorThankYouText:
 	para "Your courageous"
 	line "actions have saved"
 
-	para "#MON nation-"
+	para "POKéMON nation-"
 	line "wide."
 
 	para "I know it's not"
@@ -358,13 +358,13 @@ RadioTower5FDirectorDescribeRainbowWingText:
 	cont "that at the top."
 
 	para "I heard that giant"
-	line "#MON used to"
+	line "POKéMON used to"
 
 	para "fly over GOLDENROD"
 	line "in the past."
 
 	para "Maybe that fell"
-	line "off a #MON."
+	line "off a POKéMON."
 
 	para "Maybe like the one"
 	line "that appears at"
@@ -393,13 +393,13 @@ RadioTower5FDirectorDescribeSilverWingText:
 	cont "that at the top."
 
 	para "I heard that giant"
-	line "#MON used to"
+	line "POKéMON used to"
 
 	para "fly over GOLDENROD"
 	line "in the past."
 
 	para "Maybe that fell"
-	line "off a #MON."
+	line "off a POKéMON."
 
 	para "Maybe like the one"
 	line "that appears at"
@@ -416,13 +416,13 @@ RadioTower5FDirectorText:
 	line "<PLAYER>!"
 
 	para "You know, I love"
-	line "#MON."
+	line "POKéMON."
 
 	para "I built this RADIO"
 	line "TOWER so I could"
 
 	para "express my love"
-	line "of #MON."
+	line "of POKéMON."
 
 	para "It would be nice"
 	line "if people enjoyed"

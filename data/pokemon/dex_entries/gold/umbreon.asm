@@ -2,7 +2,7 @@
 	dw 303, 600 ; height, weight
 
 	db   "When agitated,"
-	next "this #MON pro-"
+	next "this POKéMON pro-"
 	next "tects itself by"
 
 	page "spraying poisonous"

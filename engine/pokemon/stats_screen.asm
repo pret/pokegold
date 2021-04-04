@@ -510,7 +510,7 @@ LoadPinkPage:
 	db "TO@"
 
 .PkrsStr:
-	db "#RUS@"
+	db "POKéRUS@"
 
 StatsScreen_PlaceVerticalDivider: ; unreferenced
 ; The Japanese stats screen has a vertical divider.

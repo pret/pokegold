@@ -6,5 +6,5 @@
 	next "make it highly"
 
 	page "popular. However,"
-	next "this cute #MON"
+	next "this cute POKéMON"
 	next "is rarely found.@"

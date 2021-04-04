@@ -3,7 +3,7 @@
 
 	db   "If it fell from a"
 	next "great height, this"
-	next "#MON could save"
+	next "POKéMON could save"
 
 	page "itself by rolling"
 	next "into a ball and"

@@ -345,7 +345,7 @@ Route36LassText_ClearedSudowoodo:
 	cont "trace."
 
 	para "Oh! That tree was"
-	line "really a #MON?"
+	line "really a POKéMON?"
 	done
 
 PsychicMarkSeenText:
@@ -368,7 +368,7 @@ PsychicMarkAfterBattleText:
 SchoolboyAlan1SeenText:
 	text "Thanks to my stud-"
 	line "ies, I'm ready for"
-	cont "any #MON!"
+	cont "any POKéMON!"
 	done
 
 SchoolboyAlan1BeatenText:
@@ -399,7 +399,7 @@ ArthurGivesGiftText:
 	done
 
 ArthurGaveGiftText:
-	text "ARTHUR: A #MON"
+	text "ARTHUR: A POKéMON"
 	line "that uses rock-"
 
 	para "type moves should"
@@ -435,7 +435,7 @@ RuinsOfAlphNorthSignText:
 Route36TrainerTips1Text:
 	text "TRAINER TIPS"
 
-	para "#MON stats"
+	para "POKéMON stats"
 	line "vary--even within"
 	cont "the same species."
 
@@ -446,7 +446,7 @@ Route36TrainerTips1Text:
 	line "ences will become"
 
 	para "pronounced as the"
-	line "#MON grow."
+	line "POKéMON grow."
 	done
 
 Route36TrainerTips2Text:

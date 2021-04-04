@@ -133,7 +133,7 @@ BugCatcherKenBeatenText:
 
 BugCatcherKenAfterBattleText:
 	text "You can find lots"
-	line "of #MON in the"
+	line "of POKéMON in the"
 	cont "trees of JOHTO!"
 	done
 

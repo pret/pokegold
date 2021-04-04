@@ -38,7 +38,7 @@ LavenderMartRockerText:
 	text "I heard about a"
 	line "craftsman who"
 
-	para "makes custom #"
+	para "makes custom POKé"
 	line "BALLS in the JOHTO"
 
 	para "town of AZALEA. I"

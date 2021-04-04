@@ -155,7 +155,7 @@ ClairIntroText:
 	para "I can hold my own"
 	line "against even the"
 
-	para "#MON LEAGUE's"
+	para "POKéMON LEAGUE's"
 	line "ELITE FOUR."
 
 	para "Do you still want"
@@ -187,7 +187,7 @@ ClairText_GoToDragonsDen:
 	line "but you're still"
 
 	para "not ready for the"
-	line "#MON LEAGUE."
+	line "POKéMON LEAGUE."
 
 	para "I know. You should"
 	line "take the dragon"
@@ -275,7 +275,7 @@ BlackthornGymClairText_League:
 	cont "BADGES."
 
 	para "Your destination"
-	line "is the #MON"
+	line "is the POKéMON"
 
 	para "LEAGUE in INDIGO"
 	line "PLATEAU."
@@ -291,7 +291,7 @@ BlackthornGymClairText_League:
 	cont "very tough."
 
 	para "Don't you dare"
-	line "lose at the #-"
+	line "lose at the POKé-"
 	cont "MON LEAGUE!"
 
 	para "If you do, I'll"
@@ -341,7 +341,7 @@ CooltrainermMikeAfterBattleText:
 
 CooltrainerfLolaSeenText:
 	text "Dragons are sacred"
-	line "#MON."
+	line "POKéMON."
 
 	para "They are full of"
 	line "life energy."
@@ -376,7 +376,7 @@ BlackthornGymGuideText:
 	para "CLAIR uses the"
 	line "mythical and sac-"
 	cont "red dragon-type"
-	cont "#MON."
+	cont "POKéMON."
 
 	para "You can't damage"
 	line "them very easily."
@@ -393,12 +393,12 @@ BlackthornGymGuideWinText:
 	line "beat CLAIR!"
 
 	para "All that's left is"
-	line "the #MON LEAGUE"
+	line "the POKéMON LEAGUE"
 	cont "challenge."
 
 	para "You're on the way"
 	line "to becoming the"
-	cont "#MON CHAMPION!"
+	cont "POKéMON CHAMPION!"
 	done
 
 BlackthornGym1F_MapEvents:

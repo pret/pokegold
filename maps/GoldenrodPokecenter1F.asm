@@ -31,7 +31,7 @@ GoldenrodPokecenter1FGameboyKidText:
 	text "The COLOSSEUM--"
 	line "upstairs at any"
 
-	para "#MON CENTER--is"
+	para "POKéMON CENTER--is"
 	line "for link battles." 
 
 	para "Battle records are"
@@ -43,7 +43,7 @@ GoldenrodPokecenter1FGameboyKidText:
 
 GoldenrodPokecenter1FPersonText:
 	text "I wonder how many"
-	line "kinds of #MON"
+	line "kinds of POKéMON"
 
 	para "there are in the"
 	line "world."
@@ -57,7 +57,7 @@ GoldenrodPokecenter1FPersonText:
 
 GoldenrodPokecenter1FLassText:
 	text "A higher level"
-	line "#MON doesn't"
+	line "POKéMON doesn't"
 	cont "always win."
 
 	para "After all, it may"
@@ -67,7 +67,7 @@ GoldenrodPokecenter1FLassText:
 	para "I don't think"
 	line "there is a single"
 
-	para "#MON that is"
+	para "POKéMON that is"
 	line "the toughest."
 	done
 

@@ -211,7 +211,7 @@ ENDM
 	dict "<KOKO_WA>", PlaceKokoWa
 	dict "<RED>",     PrintRedsName
 	dict "<GREEN>",   PrintGreensName
-	dict "#",         PlacePOKe
+	dict "POKé",      PlacePOKe
 	dict "<PC>",      PCChar
 	dict "<ROCKET>",  RocketChar
 	dict "<TM>",      TMChar
@@ -371,7 +371,7 @@ TMCharText::      db "TM@"
 TrainerCharText:: db "TRAINER@"
 PCCharText::      db "PC@"
 RocketCharText::  db "ROCKET@"
-PlacePOKeText::   db "POKé@"
+PlacePOKeText::   db "P","O","K","é","@"
 KougekiText::     db "こうげき@"
 SixDotsCharText:: db "……@"
 EnemyText::       db "Enemy @"

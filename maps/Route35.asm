@@ -262,7 +262,7 @@ Route35FruitTree:
 
 CamperIvanSeenText:
 	text "I've been getting"
-	line "#MON data off"
+	line "POKéMON data off"
 
 	para "my radio. I think"
 	line "I'm good."
@@ -275,7 +275,7 @@ CamperIvanBeatenText:
 CamperIvanAfterBattleText:
 	text "Music on the radio"
 	line "changes the moods"
-	cont "of wild #MON."
+	cont "of wild POKéMON."
 	done
 
 CamperElliotSeenText:
@@ -308,7 +308,7 @@ PicnickerBrookeBeatenText:
 
 PicnickerBrookeAfterBattleText:
 	text "I can count on my"
-	line "#MON more than"
+	line "POKéMON more than"
 	cont "my boyfriend."
 	done
 
@@ -329,7 +329,7 @@ PicnickerKimAfterBattleText:
 	done
 
 BirdKeeperBryanSeenText:
-	text "What kinds of #"
+	text "What kinds of POKé"
 	line "BALL do you use?"
 	done
 
@@ -339,7 +339,7 @@ BirdKeeperBryanBeatenText:
 	done
 
 BirdKeeperBryanAfterBattleText:
-	text "Some #MON flee"
+	text "Some POKéMON flee"
 	line "right away."
 
 	para "Try catching them"
@@ -351,7 +351,7 @@ BirdKeeperBryanAfterBattleText:
 	cont "take it to KURT."
 
 	para "He turns it into a"
-	line "custom # BALL."
+	line "custom POKé BALL."
 	done
 
 JugglerIrwin1SeenText:
@@ -367,7 +367,7 @@ JugglerIrwin1BeatenText:
 JugglerIrwinAfterBattleText:
 	text "I was going to"
 	line "dazzle you with my"
-	cont "prize #MON."
+	cont "prize POKéMON."
 
 	para "But your prowess"
 	line "electrified me!"
@@ -375,7 +375,7 @@ JugglerIrwinAfterBattleText:
 
 BugCatcherArnieSeenText:
 	text "I'll go anywhere"
-	line "if bug #MON"
+	line "if bug POKéMON"
 	cont "appear there."
 	done
 
@@ -403,9 +403,9 @@ FirebreatherWaltBeatenText:
 	done
 
 FirebreatherWaltAfterBattleText:
-	text "The #MON March"
+	text "The POKéMON March"
 	line "on the radio lures"
-	cont "wild #MON."
+	cont "wild POKéMON."
 	done
 
 OfficerDirkSeenText:
@@ -427,7 +427,7 @@ OfficerDirkAfterBattleText:
 	done
 
 OfficerDirkPrettyToughText:
-	text "Your #MON look"
+	text "Your POKéMON look"
 	line "pretty tough."
 
 	para "You could go any-"

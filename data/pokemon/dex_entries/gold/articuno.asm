@@ -6,5 +6,5 @@
 	next "cent wings of this"
 
 	page "legendary bird"
-	next "#MON are said"
+	next "POKéMON are said"
 	next "to be made of ice.@"

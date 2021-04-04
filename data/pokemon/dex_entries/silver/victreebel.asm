@@ -2,7 +2,7 @@
 	dw 507, 340 ; height, weight
 
 	db   "This horrifying"
-	next "plant #MON at-"
+	next "plant POKéMON at-"
 	next "tracts prey with"
 
 	page "aromatic honey,"

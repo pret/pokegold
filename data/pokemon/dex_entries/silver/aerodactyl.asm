@@ -1,7 +1,7 @@
 	db "FOSSIL@" ; species name
 	dw 511, 1300 ; height, weight
 
-	db   "This vicious #-"
+	db   "This vicious POKé-"
 	next "MON is said to"
 	next "have flown in an-"
 

@@ -222,7 +222,7 @@ Route38FruitTree:
 BirdKeeperTobySeenText:
 	text "Fly high into the"
 	line "sky, my beloved"
-	cont "bird #MON!"
+	cont "bird POKéMON!"
 	done
 
 BirdKeeperTobyBeatenText:
@@ -234,7 +234,7 @@ BirdKeeperTobyAfterBattleText:
 	text "I plan to train in"
 	line "CIANWOOD CITY to"
 
-	para "teach my #MON"
+	para "teach my POKéMON"
 	line "how to fly."
 	done
 
@@ -254,7 +254,7 @@ SchoolboyChadSoManyTestsText:
 	line "many tests, I"
 
 	para "don't have much"
-	line "time for #MON."
+	line "time for POKéMON."
 
 	para "So when I do get"
 	line "to play, I really"
@@ -288,16 +288,16 @@ BeautyValerieSeenText:
 	line "cute trainer!"
 
 	para "May I see your"
-	line "#MON?"
+	line "POKéMON?"
 	done
 
 BeautyValerieBeatenText:
 	text "I'm glad I got to"
-	line "see your #MON!"
+	line "see your POKéMON!"
 	done
 
 BeautyValerieAfterBattleText:
-	text "When I see #-"
+	text "When I see POKé-"
 	line "MON, it seems to"
 	cont "soothe my nerves."
 	done
@@ -307,7 +307,7 @@ SailorHarrySeenText:
 	line "seas, so I know"
 
 	para "about all sorts of"
-	line "#MON!"
+	line "POKéMON!"
 	done
 
 SailorHarryBeatenText:
@@ -320,7 +320,7 @@ SailorHarryAfterBattleText:
 	line "ple around the"
 
 	para "world live happily"
-	line "with #MON."
+	line "with POKéMON."
 	done
 
 Route38SignText:
@@ -333,7 +333,7 @@ Route38SignText:
 Route38TrainerTipsText:
 	text "TRAINER TIPS"
 
-	para "If a #MON is"
+	para "If a POKéMON is"
 	line "trying to evolve,"
 	cont "you can stop it."
 
@@ -342,7 +342,7 @@ Route38TrainerTipsText:
 	cont "tion."
 
 	para "That startles the"
-	line "#MON and stops"
+	line "POKéMON and stops"
 	cont "its evolution."
 	done
 

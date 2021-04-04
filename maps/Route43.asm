@@ -250,13 +250,13 @@ Route43MaxEther:
 	itemball MAX_ETHER
 
 PokemaniacBenSeenText:
-	text "I love #MON!"
+	text "I love POKéMON!"
 
 	para "That's why I"
 	line "started--and why"
 
 	para "I'll keep on col-"
-	line "lecting #MON!"
+	line "lecting POKéMON!"
 	done
 
 PokemaniacBenBeatenText:
@@ -267,7 +267,7 @@ PokemaniacBenBeatenText:
 PokemaniacBenAfterBattleText:
 	text "What else do I"
 	line "like besides"
-	cont "#MON?"
+	cont "POKéMON?"
 
 	para "MARY on the radio."
 	line "I bet she's cute!"
@@ -275,18 +275,18 @@ PokemaniacBenAfterBattleText:
 
 PokemaniacBrentSeenText:
 	text "Hey! Do you have"
-	line "any rare #MON?"
+	line "any rare POKéMON?"
 	done
 
 PokemaniacBrentBeatenText:
-	text "Oh, my poor #-"
+	text "Oh, my poor POKé-"
 	line "MON! Darlings!"
 	done
 
 PokemaniacBrentAfterBattleText:
 	text "I'd be happy just"
 	line "to own a single"
-	cont "rare #MON."
+	cont "rare POKéMON."
 	done
 
 PokemaniacRonSeenText:
@@ -295,9 +295,9 @@ PokemaniacRonSeenText:
 
 	para "Some <RIVAL> guy"
 	line "made fun of my"
-	cont "#MON!"
+	cont "POKéMON!"
 
-	para "Darn it! My #-"
+	para "Darn it! My POKé-"
 	line "MON's great!"
 	done
 
@@ -311,9 +311,9 @@ PokemaniacRonAfterBattleText:
 	line "people to like"
 
 	para "different types"
-	line "of #MON."
+	line "of POKéMON."
 
-	para "#MON isn't just"
+	para "POKéMON isn't just"
 	line "about having the"
 	cont "most powerful one."
 	done
@@ -338,7 +338,7 @@ FisherMarvinAfterBattleText:
 	line "is the best for"
 
 	para "catching hooked"
-	line "#MON."
+	line "POKéMON."
 
 	para "It's much more"
 	line "effective than a"
@@ -347,7 +347,7 @@ FisherMarvinAfterBattleText:
 
 CamperSpencerSeenText:
 	text "I can do so much"
-	line "with my #MON--"
+	line "with my POKéMON--"
 	cont "it's super-fun!"
 	done
 
@@ -378,7 +378,7 @@ PicnickerTiffanyBeatenText:
 
 PicnickerTiffanyWantsPicnicText:
 	text "I'm having a pic-"
-	line "nic with #MON."
+	line "nic with POKéMON."
 
 	para "Won't you join us?"
 	done
@@ -400,7 +400,7 @@ Route43Sign2Text:
 Route43TrainerTipsText:
 	text "TRAINER TIPS"
 
-	para "All #MON have"
+	para "All POKéMON have"
 	line "pros and cons"
 
 	para "depending on their"
@@ -409,14 +409,14 @@ Route43TrainerTipsText:
 	para "If their types"
 	line "differ, a higher-"
 
-	para "level #MON may"
+	para "level POKéMON may"
 	line "lose in battle."
 
 	para "Learn which types"
 	line "are strong and"
 
 	para "weak against your"
-	line "#MON's type."
+	line "POKéMON's type."
 	done
 
 Route43_MapEvents:

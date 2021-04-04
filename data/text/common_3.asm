@@ -228,17 +228,17 @@ _BallDodgedText::
 	text "It dodged the"
 	line "thrown BALL!"
 
-	para "This #MON"
+	para "This POKéMON"
 	line "can't be caught!"
 	prompt
 
 _BallMissedText::
 	text "You missed the"
-	line "#MON!"
+	line "POKéMON!"
 	prompt
 
 _BallBrokeFreeText::
-	text "Oh no! The #MON"
+	text "Oh no! The POKéMON"
 	line "broke free!"
 	prompt
 
@@ -281,7 +281,7 @@ _NewDexDataText::
 	text_ram wEnemyMonNickname
 	text "'s data"
 	line "was newly added to"
-	cont "the #DEX.@"
+	cont "the POKéDEX.@"
 	sound_slot_machine_start
 	text_promptbutton
 	text_end
@@ -303,7 +303,7 @@ _ItemStatRoseText::
 
 _ItemCantUseOnMonText::
 	text "That can't be used"
-	line "on this #MON."
+	line "on this POKéMON."
 	prompt
 
 _RepelUsedEarlierIsStillInEffectText::
@@ -313,7 +313,7 @@ _RepelUsedEarlierIsStillInEffectText::
 	prompt
 
 _PlayedFluteText::
-	text "Played the #"
+	text "Played the POKé"
 	line "FLUTE."
 
 	para "Now, that's a"
@@ -322,12 +322,12 @@ _PlayedFluteText::
 
 _FluteWakeUpText::
 	text "All sleeping"
-	line "#MON woke up."
+	line "POKéMON woke up."
 	prompt
 
 Text_PlayedPokeFlute::
 	text "<PLAYER> played the"
-	line "# FLUTE.@"
+	line "POKé FLUTE.@"
 	text_promptbutton
 	text_end
 
@@ -425,7 +425,7 @@ _ItemCantGetOnText::
 	prompt
 
 _BallBoxFullText::
-	text "The #MON BOX"
+	text "The POKéMON BOX"
 	line "is full. That"
 	cont "can't be used now."
 	prompt
@@ -461,7 +461,7 @@ _KnowsMoveText::
 	prompt
 
 _MoveKnowsOneText::
-	text "That #MON knows"
+	text "That POKéMON knows"
 	line "only one move."
 	done
 
@@ -473,7 +473,7 @@ _AskDeleteMoveText::
 	done
 
 _DeleterForgotMoveText::
-	text "Done! Your #MON"
+	text "Done! Your POKéMON"
 	line "forgot the move."
 	done
 
@@ -496,15 +496,15 @@ _DeleterIntroText::
 	text "Um… Oh, yes, I'm"
 	line "the MOVE DELETER."
 
-	para "I can make #MON"
+	para "I can make POKéMON"
 	line "forget moves."
 
 	para "Shall I make a"
-	line "#MON forget?"
+	line "POKéMON forget?"
 	done
 
 _DeleterAskWhichMonText::
-	text "Which #MON?"
+	text "Which POKéMON?"
 	prompt
 
 _DSTIsThatOKText::
@@ -550,7 +550,7 @@ _TimesetAskAdjustDSTText::
 _MomLostGearBookletText::
 	text "I lost the in-"
 	line "struction booklet"
-	cont "for the #GEAR."
+	cont "for the POKéGEAR."
 
 	para "Come back again in"
 	line "a while."

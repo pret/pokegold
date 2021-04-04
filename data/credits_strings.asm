@@ -51,7 +51,7 @@ Credits_TerukiMurakawa::      db "  TERUKI MURAKAWA@"
 Credits_KazuyoshiOsawa::      db "  KAZUYOSHI OSAWA@"
 Credits_KimikoNakamichi::     db "  KIMIKO NAKAMICHI@"
 Credits_End::                 db "END@"                       ; "おしまい@"
-Credits_Staff::               db "      #MON"                 ; "ポケットモンスター"
+Credits_Staff::               db "      POKéMON"              ; "ポケットモンスター"
                             IF DEF(_GOLD)
                             next "    GOLD VERSION"
                             ELIF DEF(_SILVER)

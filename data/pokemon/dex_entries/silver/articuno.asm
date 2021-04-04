@@ -2,7 +2,7 @@
 	dw 507, 1220 ; height, weight
 
 	db   "One of the legen-"
-	next "dary bird #MON,"
+	next "dary bird POKéMON,"
 	next "it chills moisture"
 
 	page "in the atmosphere"

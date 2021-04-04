@@ -162,7 +162,7 @@ SailorEugeneSeenText:
 	line "OLIVINE."
 
 	para "So how about a"
-	line "#MON battle?"
+	line "POKéMON battle?"
 	done
 
 SailorEugeneBeatenText:
@@ -170,7 +170,7 @@ SailorEugeneBeatenText:
 	done
 
 SailorEugeneAfterBattleText:
-	text "My #MON were"
+	text "My POKéMON were"
 	line "caught and raised"
 	cont "overseas."
 
@@ -182,7 +182,7 @@ SailorEugeneAfterBattleText:
 PokefanmDerekSeenText:
 	text "Would you mind if"
 	line "I bragged about"
-	cont "my #MON?"
+	cont "my POKéMON?"
 	done
 
 PokefanmDerekBeatenText:
@@ -194,7 +194,7 @@ PokefanMDerekText_NotBragging:
 	text "I'm not listening"
 	line "to your bragging!"
 
-	para "We # FANS have"
+	para "We POKé FANS have"
 	line "a policy of not"
 
 	para "listening to other"
@@ -203,10 +203,10 @@ PokefanMDerekText_NotBragging:
 
 PokefanfRuthSeenText:
 	text "Such darling"
-	line "#MON."
+	line "POKéMON."
 
 	para "Let's show our"
-	line "#MON together"
+	line "POKéMON together"
 	cont "at the same time."
 	done
 
@@ -217,7 +217,7 @@ PokefanfRuthBeatenText:
 
 PokefanfRuthAfterBattleText:
 	text "Do you know about"
-	line "baby #MON?"
+	line "baby POKéMON?"
 
 	para "I bet they're just"
 	line "adorable!"
@@ -225,17 +225,17 @@ PokefanfRuthAfterBattleText:
 
 PsychicNormanSeenText:
 	text "Let me see what"
-	line "your #MON are"
+	line "your POKéMON are"
 	cont "capable of."
 	done
 
 PsychicNormanBeatenText:
-	text "Ooh, your #MON"
+	text "Ooh, your POKéMON"
 	line "have potential."
 	done
 
 PsychicNormanAfterBattleText:
-	text "You know how #-"
+	text "You know how POKé-"
 	line "MON have different"
 	cont "abilities?"
 
@@ -264,10 +264,10 @@ Route39TrainerTipsText:
 
 	para "Use HEADBUTT on"
 	line "trees to shake"
-	cont "#MON out."
+	cont "POKéMON out."
 
 	para "Different kinds of"
-	line "#MON drop out"
+	line "POKéMON drop out"
 	cont "of trees."
 
 	para "Use HEADBUTT on"

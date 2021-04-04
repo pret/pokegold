@@ -7,4 +7,4 @@
 
 	page "ties that are"
 	next "built on groups of"
-	next "these #MON.@"
+	next "these POKéMON.@"

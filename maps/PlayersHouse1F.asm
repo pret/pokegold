@@ -76,7 +76,7 @@ MeetMomScript:
 	end
 
 PokegearName:
-	db "#GEAR@"
+	db "POKéGEAR@"
 
 PlayersHouse1FReceiveItemStd:
 	jumpstd ReceiveItemScript
@@ -159,7 +159,7 @@ ElmsLookingForYouText:
 	cont "thing for him."
 
 	para "Oh! I almost for-"
-	line "got! Your #MON"
+	line "got! Your POKéMON"
 
 	para "GEAR is back from"
 	line "the repair shop."
@@ -168,8 +168,8 @@ ElmsLookingForYouText:
 	done
 
 MomGivesPokegearText:
-	text "#MON GEAR, or"
-	line "just #GEAR."
+	text "POKéMON GEAR, or"
+	line "just POKéGEAR."
 
 	para "It's essential if"
 	line "you want to be a"
@@ -201,7 +201,7 @@ ComeHomeForDSTText:
 
 KnowTheInstructionsText:
 	text "Don't you just"
-	line "turn the #GEAR"
+	line "turn the POKéGEAR"
 
 	para "on and select the"
 	line "PHONE icon?"
@@ -211,7 +211,7 @@ DontKnowTheInstructionsText:
 	text "I'll read the"
 	line "instructions."
 
-	para "Turn the #GEAR"
+	para "Turn the POKéGEAR"
 	line "on and select the"
 	cont "PHONE icon."
 	done

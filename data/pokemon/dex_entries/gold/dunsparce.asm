@@ -2,7 +2,7 @@
 	dw 411, 310 ; height, weight
 
 	db   "When spotted, this"
-	next "#MON escapes"
+	next "POKéMON escapes"
 	next "backward by furi-"
 
 	page "ously boring into"

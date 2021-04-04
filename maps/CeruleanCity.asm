@@ -161,7 +161,7 @@ CeruleanCityCooltrainerMText1:
 CeruleanCityCooltrainerMText2:
 	text "You're collecting"
 	line "every single kind"
-	cont "of #MON?"
+	cont "of POKéMON?"
 
 	para "That must be quite"
 	line "a challenge, but"
@@ -212,7 +212,7 @@ CeruleanCityYoungsterText1:
 	line "cave here that had"
 
 	para "horribly powerful"
-	line "#MON in it."
+	line "POKéMON in it."
 	done
 
 CeruleanCityYoungsterText2:
@@ -231,7 +231,7 @@ CeruleanCitySignText:
 
 CeruleanGymSignText:
 	text "CERULEAN CITY"
-	line "#MON GYM"
+	line "POKéMON GYM"
 	cont "LEADER: MISTY"
 
 	para "The Tomboyish"

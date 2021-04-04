@@ -549,7 +549,7 @@ OaksPKMNTalk11:
 	jp PlaceRadioString
 
 .pokemon_string
-	db "#MON@"
+	db "POKéMON@"
 
 OaksPKMNTalk12:
 	ld hl, wRadioTextDelay
@@ -561,7 +561,7 @@ OaksPKMNTalk12:
 	jp PlaceRadioString
 
 .pokemon_channel_string
-	db "#MON Channel@"
+	db "POKéMON Channel@"
 
 OaksPKMNTalk13:
 	ld hl, wRadioTextDelay

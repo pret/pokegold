@@ -228,7 +228,7 @@ RadioTower1FLuckyNumberManAskToPlayText:
 
 	para "Want me to check"
 	line "the ID numbers of"
-	cont "your #MON?"
+	cont "your POKéMON?"
 
 	para "If you get lucky,"
 	line "you win a prize."
@@ -311,7 +311,7 @@ RadioTower1FRadioCardWomanOfferQuizText:
 	cont "win a RADIO CARD."
 
 	para "Slide it into your"
-	line "#GEAR to play"
+	line "POKéGEAR to play"
 
 	para "the radio anytime,"
 	line "anywhere."
@@ -325,7 +325,7 @@ RadioTower1FRadioCardWomanQuestion1Text:
 
 	para "Can the TOWN MAP"
 	line "be displayed on a"
-	cont "#GEAR?"
+	cont "POKéGEAR?"
 	done
 
 RadioTower1FRadioCardWomanQuestion2Text:
@@ -341,7 +341,7 @@ RadioTower1FRadioCardWomanQuestion3Text:
 	line "Question 3:"
 
 	para "Does KURT, the"
-	line "# BALL crafts-"
+	line "POKé BALL crafts-"
 	cont "man, use APRIKORN?"
 	done
 
@@ -358,7 +358,7 @@ RadioTower1FRadioCardWomanQuestion5Text:
 	line "Here's the final"
 	cont "question:"
 
-	para "PROF.OAK'S #MON"
+	para "PROF.OAK'S POKéMON"
 	line "TALK is a very"
 	cont "popular program."
 
@@ -375,7 +375,7 @@ RadioTower1FRadioCardWomanYouWinText:
 	done
 
 RadioTower1FPokegearIsARadioText:
-	text "<PLAYER>'s #GEAR"
+	text "<PLAYER>'s POKéGEAR"
 	line "can now double as"
 	cont "a radio!"
 	done
@@ -409,7 +409,7 @@ RadioTower1FLassText:
 
 RadioTower1FYoungsterText:
 	text "I love MARY, from"
-	line "#MON TALK."
+	line "POKéMON TALK."
 
 	para "I only know what"
 	line "she sounds like,"
@@ -458,10 +458,10 @@ RadioTower1FDirectoryText:
 RadioTower1FLuckyChannelSignText:
 	text "LUCKY CHANNEL!"
 
-	para "Win with #MON"
+	para "Win with POKéMON"
 	line "ID numbers!"
 
-	para "Trade your #MON"
+	para "Trade your POKéMON"
 	line "to collect differ-"
 	cont "ent ID numbers!"
 	done

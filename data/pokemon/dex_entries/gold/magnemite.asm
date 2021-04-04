@@ -7,4 +7,4 @@
 
 	page "approach trainers"
 	next "if they are using"
-	next "their #GEAR.@"
+	next "their POKéGEAR.@"

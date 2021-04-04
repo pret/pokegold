@@ -3,7 +3,7 @@
 
 	db   "Its crystalline"
 	next "orbs appear to"
-	next "give this #MON"
+	next "give this POKéMON"
 
 	page "the power to"
 	next "freely control the"

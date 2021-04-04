@@ -232,7 +232,7 @@ LanceBattleIntroText:
 	para "As the most power-"
 	line "ful trainer and as"
 
-	para "the #MON LEAGUE"
+	para "the POKéMON LEAGUE"
 	line "CHAMPION…"
 
 	para "I, LANCE the drag-"
@@ -264,7 +264,7 @@ LanceBattleAfterText:
 	line "truly powerful,"
 	cont "<PLAYER>."
 
-	para "Your #MON have"
+	para "Your POKéMON have"
 	line "responded to your"
 
 	para "strong and up-"
@@ -274,7 +274,7 @@ LanceBattleAfterText:
 	line "will continue to"
 
 	para "grow strong with"
-	line "your #MON."
+	line "your POKéMON."
 	done
 
 LancesRoomMaryOhNoOakText:
@@ -302,10 +302,10 @@ LancesRoomOakCongratulationsText:
 	para "Your dedication,"
 	line "trust and love for"
 
-	para "your #MON made"
+	para "your POKéMON made"
 	line "this happen."
 
-	para "Your #MON were"
+	para "Your POKéMON were"
 	line "outstanding too."
 
 	para "Because they be-"

@@ -5,6 +5,6 @@
 	next "passionate nature."
 	next "If it sees a sick"
 
-	page "#MON, it will"
+	page "POKéMON, it will"
 	next "nurse the sufferer"
 	next "back to health.@"

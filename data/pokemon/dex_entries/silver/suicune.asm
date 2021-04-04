@@ -1,7 +1,7 @@
 	db "AURORA@" ; species name
 	dw 607, 4120 ; height, weight
 
-	db   "This #MON races"
+	db   "This POKéMON races"
 	next "across the land."
 	next "It is said that"
 

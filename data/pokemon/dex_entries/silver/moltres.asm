@@ -2,7 +2,7 @@
 	dw 607, 1320 ; height, weight
 
 	db   "This legendary"
-	next "bird #MON is"
+	next "bird POKéMON is"
 	next "said to bring"
 
 	page "early spring to"

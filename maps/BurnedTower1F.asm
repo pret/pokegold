@@ -169,7 +169,7 @@ BurnedTowerSilver_BeforeText:
 	line "stronger, so you"
 
 	para "came for the leg-"
-	line "endary #MON"
+	line "endary POKéMON"
 
 	para "that's supposed to"
 	line "be here. That's"
@@ -184,7 +184,7 @@ BurnedTowerSilver_BeforeText:
 	para "I'm going to be"
 	line "the world's great-"
 	cont "est trainer, so a"
-	cont "legendary #MON"
+	cont "legendary POKéMON"
 	cont "would be perfect"
 	cont "for me."
 
@@ -212,7 +212,7 @@ BurnedTowerSilver_AfterText1:
 	para "You would never be"
 	line "able to catch a"
 
-	para "legendary #MON"
+	para "legendary POKéMON"
 	line "anyway."
 	done
 
@@ -262,7 +262,7 @@ FirebreatherNedBeatenText:
 
 FirebreatherNedAfterText:
 	text "In the past, there"
-	line "were these #MON"
+	line "were these POKéMON"
 
 	para "that ran through"
 	line "grass at super-"

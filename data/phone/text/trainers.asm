@@ -118,7 +118,7 @@ PhoneFemaleGreetNiteText:
 
 PhoneMaleReallyEnergeticText:
 	text "How are your"
-	line "#MON doing?"
+	line "POKéMON doing?"
 
 	para "My @"
 	text_ram wStringBuffer4
@@ -129,7 +129,7 @@ PhoneMaleReallyEnergeticText:
 
 PhoneFemaleTopShapeText:
 	text "How are your"
-	line "#MON doing?"
+	line "POKéMON doing?"
 
 	para "I always keep my"
 	line "@"
@@ -137,7 +137,7 @@ PhoneFemaleTopShapeText:
 	text " in top"
 
 	para "shape by going to"
-	line "#MON CENTERS."
+	line "POKéMON CENTERS."
 	done
 
 PhoneMaleLookingAwesomeText:

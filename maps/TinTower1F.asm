@@ -14,11 +14,11 @@ TinTowerSageText:
 	line "cover the secret"
 
 	para "of the legendary"
-	line "#MON that is"
+	line "POKéMON that is"
 	cont "said to land here."
 
 	para "They say that the"
-	line "#MON has flown"
+	line "POKéMON has flown"
 
 	para "continuously ever"
 	line "since the TOWER in"
@@ -27,7 +27,7 @@ TinTowerSageText:
 	para "So, I thought that"
 	line "if I had what the"
 
-	para "#MON has, it"
+	para "POKéMON has, it"
 	line "would be attracted"
 	cont "by that item."
 

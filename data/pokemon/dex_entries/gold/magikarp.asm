@@ -2,7 +2,7 @@
 	dw 211, 220 ; height, weight
 
 	db   "An underpowered,"
-	next "pathetic #MON."
+	next "pathetic POKéMON."
 	next "It may jump high"
 
 	page "on rare occasions,"

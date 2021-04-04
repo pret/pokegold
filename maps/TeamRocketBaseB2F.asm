@@ -694,7 +694,7 @@ RockerBaseLanceElectrodeFaintText:
 	line "strange signal."
 
 	para "It's no fault of"
-	line "the #MON, so it"
+	line "the POKéMON, so it"
 
 	para "makes me feel"
 	line "guilty."
@@ -720,7 +720,7 @@ RocketBaseLanceElectrodeDoneText:
 	line "Let me thank you"
 
 	para "on behalf of all"
-	line "the #MON."
+	line "the POKéMON."
 
 	para "Oh, yes. You"
 	line "should take this."
@@ -739,7 +739,7 @@ RocketBaseLanceWhirlpoolText:
 	text "That's WHIRLPOOL."
 	line "Teach it to a"
 
-	para "#MON to get"
+	para "POKéMON to get"
 	line "across wild water."
 
 	para "But keep this in"
@@ -756,7 +756,7 @@ RocketBaseLanceMonMasterText:
 	text "<PLAYER>…"
 
 	para "The journey to be-"
-	line "coming the #MON"
+	line "coming the POKéMON"
 
 	para "MASTER is long and"
 	line "difficult."
@@ -786,7 +786,7 @@ LanceHealsText1:
 	text "LANCE: Are you all"
 	line "right?"
 
-	para "Your #MON are"
+	para "Your POKéMON are"
 	line "hurt and tired."
 
 	para "Here, give them"
@@ -797,7 +797,7 @@ LanceHealsText1:
 LanceHealsText2:
 	text "LANCE: <PLAYER>,"
 	line "let's give it our"
-	cont "best for #MON."
+	cont "best for POKéMON."
 	done
 
 GruntM17SeenText:
@@ -842,7 +842,7 @@ GruntM18AfterBattleText:
 	cont "by a kid too."
 
 	para "When we were ab-"
-	line "ducting #MON,"
+	line "ducting POKéMON,"
 
 	para "this kid with long"
 	line "red hair and mean-"

@@ -131,7 +131,7 @@ Route46FruitTree2:
 HikerBaileySeenText:
 	text "Awright! I'll show"
 	line "you the power of"
-	cont "mountain #MON!"
+	cont "mountain POKéMON!"
 	done
 
 HikerBaileyBeatenText:
@@ -146,7 +146,7 @@ HikerBaileyAfterBattleText:
 	done
 
 CamperTedSeenText:
-	text "I'm raising #-"
+	text "I'm raising POKé-"
 	line "MON too!"
 
 	para "Will you battle"
@@ -166,7 +166,7 @@ CamperTedAfterBattleText:
 	done
 
 PicnickerErin1SeenText:
-	text "I raise #MON"
+	text "I raise POKéMON"
 	line "too!"
 
 	para "Let's battle!"

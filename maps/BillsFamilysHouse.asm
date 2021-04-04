@@ -154,7 +154,7 @@ BillEeveeMayEvolveText:
 BillPartyFullText:
 	text "Whoa, wait. You"
 	line "can't carry any"
-	cont "more #MON."
+	cont "more POKéMON."
 	done
 
 BillNoEeveeText:
@@ -173,11 +173,11 @@ BillPopWontWorkText:
 
 BillsMomText_BeforeEcruteak:
 	text "Oh, you collect"
-	line "#MON? My son"
+	line "POKéMON? My son"
 	cont "BILL is an expert."
 
 	para "He had to leave"
-	line "for the #MON"
+	line "for the POKéMON"
 
 	para "CENTER in ECRUTEAK"
 	line "CITY."
@@ -203,7 +203,7 @@ RecordedBillsNumberText:
 
 BillsSisterRefusedNumberText:
 	text "My brother made"
-	line "the PC #MON"
+	line "the PC POKéMON"
 	cont "storage system."
 
 	para "I was going to"
@@ -220,7 +220,7 @@ BillsSisterStorageSystemText:
 	text "My big brother"
 	line "BILL made the PC"
 
-	para "#MON storage"
+	para "POKéMON storage"
 	line "system."
 	done
 

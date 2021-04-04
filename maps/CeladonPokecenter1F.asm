@@ -23,7 +23,7 @@ CeladonPokecenter1FPharmacistScript:
 
 CeladonPokecenter1FCooltrainerFText:
 	text "ERIKA is a master"
-	line "of grass #MON."
+	line "of grass POKéMON."
 
 	para "She'll make you"
 	line "pay if you don't"

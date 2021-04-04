@@ -2,7 +2,7 @@
 	dw 503, 1160 ; height, weight
 
 	db   "This legendary"
-	next "bird #MON is"
+	next "bird POKéMON is"
 	next "said to appear"
 
 	page "only when a thun-"
