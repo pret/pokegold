@@ -145,8 +145,6 @@ wDisableTextAcceleration:: db
 wPCItemsCursor:: db
 wPCItemsScrollPosition:: db
 
-	ds 39
-
 
 SECTION "GBC Palettes", WRAM0
 
@@ -462,7 +460,8 @@ wUnusedMapBuffer:: ds 24
 wUnusedMapBufferEnd::
 
 
-SECTION "Overworld Map", WRAM0
+SECTION "Overworld Map", WRAM0, ALIGN[8]
+; LCD expects wLYOverrides to have an alignment of $100
 
 UNION
 ; overworld map blocks

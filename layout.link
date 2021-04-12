@@ -255,12 +255,15 @@ ROMX $7f
 WRAM0
 	"Audio RAM"
 	"WRAM"
+	align 8
 	"GBC Palettes"
+	align 8
 	"Sprites"
 	"Tilemap"
 	"Miscellaneous"
 	align 8
 	"Overworld Map"
+	align 4
 	"Video"
 WRAMX 1
 	"WRAM 1"
