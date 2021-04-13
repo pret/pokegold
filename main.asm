@@ -214,9 +214,6 @@ INCLUDE "engine/pokemon/move_mon_wo_mail.asm"
 INCLUDE "data/pokemon/base_stats.asm"
 INCLUDE "data/pokemon/unused_pic_banks.asm"
 
-EggPic::
-INCBIN "gfx/pokemon/egg/front.2bpp.lz"
-
 
 SECTION "bank21", ROMX
 
@@ -251,25 +248,6 @@ INCLUDE "engine/events/fish.asm"
 INCLUDE "engine/games/slot_machine.asm"
 
 
-SECTION "bank26", ROMX
-
-IF DEF(_GOLD)
-TitleScreenGFX1:
-INCBIN "gfx/title/logo_bottom_gold.2bpp.lz"
-TitleScreenGFX2:
-INCBIN "gfx/title/logo_top_gold.2bpp.lz"
-
-ELIF DEF(_SILVER)
-TitleScreenGFX1:
-INCBIN "gfx/title/logo_bottom_silver.2bpp.lz"
-TitleScreenGFX2:
-INCBIN "gfx/title/logo_top_silver.2bpp.lz"
-ENDC
-
-TitleScreenTilemap:
-INCBIN "gfx/title/logo.tilemap"
-
-
 SECTION "bank2E_2", ROMX
 
 INCLUDE "engine/events/checkforhiddenitems.asm"
@@ -291,9 +269,6 @@ INCLUDE "engine/battle_anims/bg_effects.asm"
 INCLUDE "data/moves/animations.asm"
 INCLUDE "engine/events/poisonstep_pals.asm"
 
-TheEndGFX::
-INCBIN "gfx/credits/theend.2bpp"
-
 
 SECTION "Move Animations", ROMX
 
@@ -302,12 +277,6 @@ INCLUDE "engine/battle_anims/anim_commands.asm"
 INCLUDE "engine/battle_anims/core.asm"
 INCLUDE "engine/battle_anims/functions.asm"
 INCLUDE "engine/battle_anims/helpers.asm"
-
-
-SECTION "Font Inversed", ROMX
-
-FontInversed:
-INCBIN "gfx/font/font_inversed.1bpp"
 
 
 SECTION "bank38", ROMX
@@ -322,22 +291,6 @@ INCLUDE "engine/pokemon/bills_pc.asm"
 
 SECTION "bank39", ROMX
 
-CopyrightGFX::
-INCBIN "gfx/splash/copyright.2bpp"
-
-IF DEF(_GOLD)
-TitleScreenGFX3:
-INCBIN "gfx/title/title_trail_gold.2bpp"
-TitleScreenGFX4:
-INCBIN "gfx/title/hooh_gold.2bpp.lz"
-
-ELIF DEF(_SILVER)
-TitleScreenGFX3:
-INCBIN "gfx/title/title_trail_silver.2bpp"
-TitleScreenGFX4:
-INCBIN "gfx/title/lugia_silver.2bpp.lz"
-ENDC
-
 INCLUDE "engine/menus/options_menu.asm"
 INCLUDE "engine/movie/splash.asm"
 INCLUDE "engine/movie/intro.asm"
@@ -348,11 +301,8 @@ SECTION "bank3E", ROMX
 INCLUDE "engine/gfx/load_font.asm"
 INCLUDE "data/collision/collision_permissions.asm"
 
-Shrink1Pic:
-INCBIN "gfx/new_game/shrink1.2bpp.lz"
 
-Shrink2Pic:
-INCBIN "gfx/new_game/shrink2.2bpp.lz"
+SECTION "bank3E_2", ROMX
 
 INCLUDE "engine/link/time_capsule.asm"
 INCLUDE "engine/events/name_rater.asm"
@@ -429,8 +379,8 @@ INCLUDE "engine/pokedex/pokedex_3.asm"
 INCLUDE "engine/events/catch_tutorial_input.asm"
 INCLUDE "engine/pokegear/townmap_convertlinebreakcharacters.asm"
 
-PokegearGFX:
-INCBIN "gfx/pokegear/pokegear.2bpp.lz"
+
+SECTION "Credits Strings", ROMX
 
 INCLUDE "data/credits_strings.asm"
 

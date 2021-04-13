@@ -75,6 +75,7 @@ ROMX $12
 	"Pics 1"
 ROMX $14
 	"bank14"
+	"Egg Pic"
 ROMX $15
 	"Pics 2"
 ROMX $16
@@ -113,7 +114,7 @@ ROMX $25
 	"Maps"
 	"Events"
 ROMX $26
-	"bank26"
+	"Title Screen"
 ROMX $2a
 	"Map Blocks 1"
 ROMX $2b
@@ -130,6 +131,7 @@ ROMX $31
 	"bank31_2"
 ROMX $32
 	"bank32"
+	"The End"
 ROMX $33
 	"Move Animations"
 	"Extra Songs 2"
@@ -141,6 +143,8 @@ ROMX $37
 ROMX $38
 	"bank38"
 ROMX $39
+	"Copyright"
+	"Title Screen 2"
 	"bank39"
 ROMX $3a
 	"Audio"
@@ -155,6 +159,8 @@ ROMX $3d
 	"Songs 4"
 ROMX $3e
 	"bank3E"
+	"Shrink Pics"
+	"bank3E_2"
 ROMX $3f
 	"bank3F"
 ROMX $40
@@ -249,6 +255,8 @@ ROMX $70
 	"bank70"
 	"Tileset Data 6"
 	"bank70_2"
+	"Pokégear GFX"
+	"Credits Strings"
 ROMX $7f
 	org $7df8
 	"Stadium 2 Checksums"
