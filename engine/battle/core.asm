@@ -6166,7 +6166,7 @@ LoadEnemyMon:
 	and a
 	ret z
 
-; Update enemy nick
+; Update enemy nickname
 	ld hl, wStringBuffer1
 	ld de, wEnemyMonNickname
 	ld bc, MON_NAME_LENGTH

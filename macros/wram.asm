@@ -97,13 +97,23 @@ battle_struct: MACRO
 ENDM
 
 curbox: MACRO
-\1Count::        db
-\1Species::      ds MONS_PER_BOX + 1
+\1Count::   db
+\1Species:: ds MONS_PER_BOX + 1
 \1Mons::
-\1Mon1::         box_struct \1Mon1
-\1Mon2::         ds BOXMON_STRUCT_LENGTH * (MONS_PER_BOX - 1)
-\1MonOTs::       ds NAME_LENGTH * MONS_PER_BOX
-\1MonNicknames:: ds MON_NAME_LENGTH * MONS_PER_BOX
+; \1Mon1 - \1Mon20
+for n, 1, MONS_PER_BOX + 1
+\1Mon{d:n}:: box_struct \1Mon{d:n}
+endr
+\1MonOTs::
+; \1Mon1OT - \1Mon20OT
+for n, 1, MONS_PER_BOX + 1
+\1Mon{d:n}OT:: ds NAME_LENGTH
+endr
+\1MonNicknames::
+; \1Mon1Nickname - \1Mon20Nickname
+for n, 1, MONS_PER_BOX + 1
+\1Mon{d:n}Nickname:: ds MON_NAME_LENGTH
+endr
 \1MonNicknamesEnd::
 \1End::
 ENDM
@@ -206,12 +216,10 @@ ENDM
 
 hall_of_fame: MACRO
 \1WinCount:: db
-\1Mon1:: hof_mon \1Mon1
-\1Mon2:: hof_mon \1Mon2
-\1Mon3:: hof_mon \1Mon3
-\1Mon4:: hof_mon \1Mon4
-\1Mon5:: hof_mon \1Mon5
-\1Mon6:: hof_mon \1Mon6
+; \1Mon1 - \1Mon6
+for n, 1, PARTY_LENGTH + 1
+\1Mon{d:n}:: hof_mon \1Mon{d:n}
+endr
 \1End:: db
 ENDM
 
