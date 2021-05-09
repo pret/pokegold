@@ -271,7 +271,7 @@
 00:0f7e DummyChar
 00:0f7f NextChar
 00:0f83 CheckDict
-00:1014 CheckDict.__u7948
+00:1014 CheckDict.not_u7948
 00:1030 CheckDict.diacritic
 00:1037 CheckDict.not_diacritic
 00:1047 CheckDict.hiragana_dakuten
@@ -39015,7 +39015,6 @@
 00:c3a0 wVirtualOAMEnd
 00:c3a0 wTilemap
 00:c508 wTilemapEnd
-00:c508 wUnownPuzzle
 00:c508 wDebugWhiteTileColor
 00:c508 wDebugPalette
 00:c508 wTempTilemap
@@ -39419,7 +39418,6 @@
 00:c6e3 wBackupDexListingPage
 00:c6e4 wDexCurLocation
 00:c6e5 wPokedexDataEnd
-00:c6e8 wUnownPuzzleEnd
 00:c6e8 wBoxPartialDataEnd
 00:c6e8 wUnusedMapBuffer
 00:c700 wUnusedMapBufferEnd
