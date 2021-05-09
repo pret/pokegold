@@ -166,41 +166,39 @@ wTilemap::
 wTilemapEnd::
 
 
-SECTION "Miscellaneous", WRAM0
-
 ; This union spans 480 bytes.
-UNION
+SECTION UNION "Miscellaneous", WRAM0
+
 ; surrounding tiles
 ; This buffer determines the size for the rest of the union;
 ; it uses exactly 480 bytes.
 wSurroundingTiles:: ds SURROUNDING_WIDTH * SURROUNDING_HEIGHT
 
-NEXTU
+
+SECTION UNION "Miscellaneous", WRAM0
+
 ; box save buffer
 ; SaveBoxAddress uses this buffer in three steps because it
 ; needs more space than the buffer can hold.
 wBoxPartialData:: ds 480
 wBoxPartialDataEnd::
 
-NEXTU
+
+SECTION UNION "Miscellaneous", WRAM0
+
 ; 20x18 grid of 8x8 tiles
 wTempTilemap::
 	ds SCREEN_WIDTH * SCREEN_HEIGHT
 
-NEXTU
-; unown puzzle
-wUnownPuzzle::
-	ds 200
-wPuzzlePieces:: ds 6 * 6
-	ds 244
-wUnownPuzzleEnd::
 
-NEXTU
+SECTION UNION "Miscellaneous", WRAM0
+
 ; link patch lists
 wPlayerPatchLists:: ds 200
 wOTPatchLists:: ds 200
 
-NEXTU
+
+SECTION UNION "Miscellaneous", WRAM0
 
 ; This union spans 200 bytes.
 UNION
@@ -397,9 +395,14 @@ wBetaPokerSGBPals:: db
 wBetaPokerSGBAttr:: db
 wBetaPokerSGBCol:: db
 wBetaPokerSGBRow:: db
+
+NEXTU
+; unown puzzle
+wPuzzlePieces:: ds 6 * 6
 ENDU
 
-ENDU
+
+SECTION "Unused Map Buffer", WRAM0
 
 ; This was a buffer for map-related pointers in the 1997 G/S prototype.
 ; See wMapBuffer in pokegold-spaceworld's wram.asm.
@@ -407,19 +410,21 @@ wUnusedMapBuffer:: ds 24
 wUnusedMapBufferEnd::
 
 
-SECTION "Overworld Map", WRAM0, ALIGN[8]
-; LCD expects wLYOverrides to have an alignment of $100
+SECTION UNION "Overworld Map", WRAM0
 
-UNION
 ; overworld map blocks
 wOverworldMapBlocks:: ds 1300
 wOverworldMapBlocksEnd::
 
-NEXTU
+
+SECTION UNION "Overworld Map", WRAM0
+
 ; decompress buffer in wram
 wDecompressScratch:: ds 40 tiles
 
-NEXTU
+
+SECTION UNION "Overworld Map", WRAM0
+
 ; GB Printer data
 wGameboyPrinterRAM::
 wGameboyPrinter2bppSource:: ds 40 tiles
@@ -453,7 +458,9 @@ wPrinterExposureTime:: db
 	ds 16
 wGameboyPrinterRAMEnd::
 
-NEXTU
+
+SECTION UNION "Overworld Map", WRAM0
+
 ; bill's pc data
 wBillsPCData::
 wBillsPCPokemonList::
@@ -472,27 +479,37 @@ wBillsPC_MonHasMail:: db
 	ds 5
 wBillsPCDataEnd::
 
-NEXTU
+
+SECTION UNION "Overworld Map", WRAM0
+
 ; Hall of Fame data
 wHallOfFamePokemonList:: hall_of_fame wHallOfFamePokemonList
 
-NEXTU
+
+SECTION UNION "Overworld Map", WRAM0
+
 ; debug color picker
 wDebugOriginalColors:: ds 256 * 4
 
-NEXTU
+
+SECTION UNION "Overworld Map", WRAM0
+
 ; unused sprite anims
 	ds 4
 wUnusedPikachuFrameset:: db
 	ds 18
 wUnusedJigglypuffNoteXCoord:: db
 
-NEXTU
+
+SECTION UNION "Overworld Map", WRAM0
+
 ; raw link data
 wLinkData:: ds 1300
 wLinkDataEnd::
 
-NEXTU
+
+SECTION UNION "Overworld Map", WRAM0
+
 ; link data members
 wLinkPlayerName:: ds NAME_LENGTH
 wLinkPartyCount:: db
@@ -545,7 +562,9 @@ wLinkPatchList1:: ds SERIAL_PATCH_LIST_LENGTH
 wLinkPatchList2:: ds SERIAL_PATCH_LIST_LENGTH
 ENDU
 
-NEXTU
+
+SECTION UNION "Overworld Map", WRAM0
+
 ; link data prep
 	ds 1000
 wCurLinkOTPartyMonTypePointer:: dw
@@ -556,7 +575,9 @@ for n, 1, PARTY_LENGTH + 1
 wLinkOTPartyMon{d:n}Type:: dw
 endr
 
-NEXTU
+
+SECTION UNION "Overworld Map", WRAM0
+
 ; link mail data
 	ds 500
 wLinkPlayerMail::
@@ -573,13 +594,17 @@ wOTPlayerMailPatchSet:: ds 103 + SERIAL_MAIL_PREAMBLE_LENGTH
 wLinkOTMailEnd::
 	ds 10
 
-NEXTU
+
+SECTION UNION "Overworld Map", WRAM0
+
 ; received link mail data
 	ds 500
 wLinkReceivedMail:: ds MAIL_STRUCT_LENGTH * PARTY_LENGTH
 wLinkReceivedMailEnd:: db
 
-NEXTU
+
+SECTION UNION "Overworld Map", WRAM0
+
 ; mystery gift data
 wMysteryGiftStaging:: ds 80
 
@@ -614,7 +639,9 @@ wMysteryGiftPlayerBackupItem:: db
 	ds 1
 wMysteryGiftPlayerDataEnd::
 
-NEXTU
+
+SECTION UNION "Overworld Map", WRAM0
+
 ; LCD expects wLYOverrides to have an alignment of $100
 wLYOverrides:: ds SCREEN_HEIGHT_PX
 wLYOverridesEnd::
@@ -1003,8 +1030,10 @@ wBattleEnd::
 
 ENDU
 
+
 IF DEF(_DEBUG)
-NEXTU
+SECTION UNION "Overworld Map", WRAM0
+
 ; debug room paged values
 UNION
 ; debug room new item values
@@ -1028,9 +1057,8 @@ NEXTU
 ; debug room GB ID values
 wDebugRoomGBID:: dw
 ENDU
-ENDC
 
-ENDU
+ENDC
 
 
 SECTION "Video", WRAM0
@@ -2511,7 +2539,6 @@ wCurBox:: db
 
 	ds 2
 
-; 8 chars + $50
 wBoxNames:: ds BOX_NAME_LENGTH * NUM_BOXES
 
 	ds 2
