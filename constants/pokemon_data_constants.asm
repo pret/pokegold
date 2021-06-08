@@ -89,7 +89,7 @@ MON_SPC_EXP            rw
 MON_DVS                rw
 MON_PP                 rb NUM_MOVES
 MON_HAPPINESS          rb
-MON_PKRUS              rb
+MON_POKERUS            rb
                        rb_skip 2
 MON_LEVEL              rb
 BOXMON_STRUCT_LENGTH EQU _RS
