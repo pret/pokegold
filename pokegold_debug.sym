@@ -13468,7 +13468,7 @@
 25:73ed StdScript
 25:7408 SkipTwoScriptBytes
 25:740f ScriptJump
-25:741c Script_prioritysjump
+25:741c Script_sdefer
 25:7434 Script_checkscene
 25:743d Script_checkscene.no_scene
 25:7443 Script_checkmapscene
@@ -41326,9 +41326,9 @@
 01:d173 wScriptVar
 01:d174 wScriptDelay
 01:d175 wScriptTextBank
-01:d175 wPriorityScriptBank
-01:d176 wPriorityScriptAddr
+01:d175 wDeferredScriptBank
 01:d176 wScriptTextAddr
+01:d176 wDeferredScriptAddr
 01:d179 wWildEncounterCooldown
 01:d17a wXYComparePointer
 01:d17c wXYCompareFlags
