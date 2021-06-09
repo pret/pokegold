@@ -17,7 +17,7 @@ BurnedTower1F_MapScripts:
 	def_callbacks
 
 .RivalScene:
-	prioritysjump .Rival
+	sdefer .Rival
 	end
 
 .DummyScene1:

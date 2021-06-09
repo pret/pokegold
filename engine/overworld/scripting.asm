@@ -204,7 +204,7 @@ ScriptCommandTable:
 	dw Script_newloadmap                 ; 89
 	dw Script_pause                      ; 8a
 	dw Script_deactivatefacing           ; 8b
-	dw Script_prioritysjump              ; 8c
+	dw Script_sdefer                     ; 8c
 	dw Script_warpcheck                  ; 8d
 	dw Script_stopandsjump               ; 8e
 	dw Script_endcallback                ; 8f
@@ -1294,13 +1294,13 @@ ScriptJump:
 	ld [wScriptPos + 1], a
 	ret
 
-Script_prioritysjump:
+Script_sdefer:
 	ld a, [wScriptBank]
-	ld [wPriorityScriptBank], a
+	ld [wDeferredScriptBank], a
 	call GetScriptByte
-	ld [wPriorityScriptAddr], a
+	ld [wDeferredScriptAddr], a
 	call GetScriptByte
-	ld [wPriorityScriptAddr + 1], a
+	ld [wDeferredScriptAddr + 1], a
 	ld hl, wScriptFlags
 	set 3, [hl]
 	ret

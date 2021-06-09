@@ -11,7 +11,7 @@ Colosseum_MapScripts:
 	callback MAPCALLBACK_OBJECTS, .SetWhichChris
 
 .InitializeColosseum:
-	prioritysjump .InitializeAndPreparePokecenter2F
+	sdefer .InitializeAndPreparePokecenter2F
 	end
 
 .DummyScene1:

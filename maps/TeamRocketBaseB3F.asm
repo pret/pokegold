@@ -24,7 +24,7 @@ TeamRocketBaseB3F_MapScripts:
 	callback MAPCALLBACK_TILES, .CheckGiovanniDoor
 
 .LanceGetsPassword:
-	prioritysjump LanceGetPasswordScript
+	sdefer LanceGetPasswordScript
 	end
 
 .DummyScene1:

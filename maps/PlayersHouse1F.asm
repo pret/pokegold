@@ -12,7 +12,7 @@ PlayersHouse1F_MapScripts:
 	def_callbacks
 
 .DummyScene0:
-	prioritysjump MeetMomScript
+	sdefer MeetMomScript
 	end
 
 .DummyScene1:

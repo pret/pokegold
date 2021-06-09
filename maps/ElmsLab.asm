@@ -18,7 +18,7 @@ ElmsLab_MapScripts:
 	def_callbacks
 
 .MeetElm:
-	prioritysjump .WalkUpToElm
+	sdefer .WalkUpToElm
 	end
 
 .DummyScene1:
