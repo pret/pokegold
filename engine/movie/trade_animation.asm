@@ -15,7 +15,7 @@ add_tradeanim: MACRO
 ENDM
 
 tradeanim: MACRO
-	db (\1_TradeCmd - DoTradeAnimation.JumpTable) / 2
+	db (\1_TradeCmd - DoTradeAnimation.Jumptable) / 2
 ENDM
 
 TradeAnimation:
@@ -224,9 +224,9 @@ DoTradeAnimation:
 	ret
 
 .DoTradeAnimCommand:
-	jumptable .JumpTable, wJumptableIndex
+	jumptable .Jumptable, wJumptableIndex
 
-.JumpTable:
+.Jumptable:
 ; entries correspond to tradeanim_* constants (see macros/scripts/trade_anims.asm)
 	add_tradeanim TradeAnim_AdvanceScriptPointer ; 00
 	add_tradeanim TradeAnim_ShowGivemonData      ; 01
