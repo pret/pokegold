@@ -1,4 +1,4 @@
-# Pokémon Gold and Silver [![Build Status][travis-badge]][travis]
+# Pokémon Gold and Silver [![Build Status][ci-badge]][ci]
 
 This is a disassembly of Pokémon Gold and Pokémon Silver.
 
@@ -38,5 +38,5 @@ Other disassembly projects:
 [pokeemerald]: https://github.com/pret/pokeemerald
 [discord]: https://discord.gg/d5dubZ3
 [irc]: https://kiwiirc.com/client/irc.freenode.net/?#pret
-[travis]: https://travis-ci.org/pret/pokegold
-[travis-badge]: https://travis-ci.org/pret/pokegold.svg?branch=master
+[ci]: https://github.com/pret/pokegold/actions
+[ci-badge]: https://github.com/pret/pokegold/actions/workflows/main.yml/badge.svg
