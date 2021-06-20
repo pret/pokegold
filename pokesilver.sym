@@ -2204,7 +2204,7 @@
 02:5029 SGBLayoutJumptable.env5
 02:502c SGBLayoutJumptable.gate
 02:502f MapGroupRoofSGBPalInds
-02:504a _LoadSGBLayout_ReturnFromJumpTable
+02:504a _LoadSGBLayout_ReturnFromJumptable
 02:5052 CheckShininess
 02:5070 CheckShininess.not_shiny
 02:5072 Unused_CheckShininess
@@ -4822,7 +4822,7 @@
 05:58a3 PokemonCenterPC.shutdown
 05:58ad PokemonCenterPC.TopMenu
 05:58b5 PokemonCenterPC.MenuData
-05:58bd PokemonCenterPC.JumpTable
+05:58bd PokemonCenterPC.Jumptable
 05:58d1 PokemonCenterPC.String_PlayersPC
 05:58d7 PokemonCenterPC.String_BillsPC
 05:58e0 PokemonCenterPC.String_OaksPC
@@ -6099,7 +6099,7 @@
 09:70fd SetAllDecorationFlags.done
 09:70fe DecorationIDs
 09:712c DescribeDecoration
-09:7132 DescribeDecoration.JumpTable
+09:7132 DescribeDecoration.Jumptable
 09:713c DecorationDesc_Poster
 09:7150 DecorationDesc_Poster.nope
 09:7157 DecorationDesc_PosterPointers
@@ -6431,7 +6431,7 @@
 0a:4f2f DoTradeAnimation
 0a:4f48 DoTradeAnimation.finished
 0a:4f4d DoTradeAnimation.DoTradeAnimCommand
-0a:4f5c DoTradeAnimation.JumpTable
+0a:4f5c DoTradeAnimation.Jumptable
 0a:4f5c TradeAnim_AdvanceScriptPointer_TradeCmd
 0a:4f5e TradeAnim_ShowGivemonData_TradeCmd
 0a:4f60 TradeAnim_ShowGetmonData_TradeCmd
@@ -10052,7 +10052,7 @@
 11:4953 MailboxPC.exit
 11:4955 MailboxPC.Submenu
 11:496b MailboxPC.subexit
-11:496c MailboxPC.JumpTable
+11:496c MailboxPC.Jumptable
 11:4974 MailboxPC.ReadMail
 11:4982 MailboxPC.PutInPack
 11:49a9 MailboxPC.put_in_bag
