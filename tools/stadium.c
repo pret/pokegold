@@ -1,7 +1,5 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <stdint.h>
+#define PROGRAM_NAME "stadium"
+#define USAGE_OPTS "pokegold.gbc"
 
 #include "common.h"
 
@@ -74,16 +72,14 @@ void calculate_checksums(uint8_t *file, int filesize) {
 }
 
 int main(int argc, char *argv[]) {
-	if (argc != 2) {
-		fprintf(stderr, "Usage: stadium romfile\n");
-		exit(1);
+	if (argc < 2) {
+		usage_exit(1);
 	}
 
 	char *filename = argv[1];
-	int filesize;
+	long filesize;
 	uint8_t *file = read_u8(filename, &filesize);
 	calculate_checksums(file, filesize);
 	write_u8(filename, file, filesize);
-
 	return 0;
 }

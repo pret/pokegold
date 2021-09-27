@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 """
-Usage: ./sym_comments.py file.asm [pokecrystal.sym] > file_commented.asm
+Usage: python3 sym_comments.py file.asm [pokegold.sym] > file_commented.asm
 
 Comments each label in file.asm with its bank:address from the sym file.
 """
@@ -11,10 +11,10 @@ import sys
 import re
 
 if len(sys.argv) != 2 and len(sys.argv) != 3:
-	print('Usage: %s file.asm [pokecrystal.sym] > file_commented.asm' % sys.argv[0], file=sys.stderr)
+	print('Usage: %s file.asm [pokegold.sym] > file_commented.asm' % sys.argv[0], file=sys.stderr)
 
 wram_name = sys.argv[1]
-sym_name = sys.argv[2] if len(sys.argv) == 3 else 'pokecrystal.sym'
+sym_name = sys.argv[2] if len(sys.argv) == 3 else 'pokegold.sym'
 
 sym_format = r'[A-Za-z_][A-Za-z0-9_#@]*'
 sym_def_rx = re.compile(r'(^%s)(:.*)|(^\.%s)(.*)' % (sym_format, sym_format))
