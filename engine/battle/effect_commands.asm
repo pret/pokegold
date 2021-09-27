@@ -1426,7 +1426,7 @@ CheckTypeMatchup:
 	ld b, [hl]
 	inc hl
 	ld c, [hl]
-	ld a, 10 ; 1.0
+	ld a, EFFECTIVE
 	ld [wTypeMatchup], a
 	ld hl, TypeMatchups
 .TypesLoop:
@@ -1489,7 +1489,7 @@ BattleCommand_ResetTypeMatchup:
 	call BattleCheckTypeMatchup
 	ld a, [wTypeMatchup]
 	and a
-	ld a, 10 ; 1.0
+	ld a, EFFECTIVE
 	jr nz, .reset
 	call ResetDamage
 	xor a
@@ -2365,7 +2365,7 @@ BattleCommand_SuperEffectiveText:
 
 	ld a, [wTypeModifier]
 	and $7f
-	cp 10 ; 1.0
+	cp EFFECTIVE
 	ret z
 	ld hl, SuperEffectiveText
 	jr nc, .print
