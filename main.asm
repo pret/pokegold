@@ -248,7 +248,7 @@ INCLUDE "engine/events/fish.asm"
 INCLUDE "engine/games/slot_machine.asm"
 
 
-SECTION "bank2E_2", ROMX
+SECTION "bank2E", ROMX
 
 INCLUDE "engine/events/checkforhiddenitems.asm"
 INCLUDE "engine/events/treemons.asm"
@@ -256,7 +256,7 @@ INCLUDE "engine/pokegear/radio.asm"
 INCLUDE "engine/pokemon/mail_2.asm"
 
 
-SECTION "bank31_2", ROMX
+SECTION "bank31", ROMX
 
 INCLUDE "engine/events/pokerus/check_pokerus.asm"
 INCLUDE "engine/events/lucky_number.asm"
