@@ -77,7 +77,10 @@ GetFrontpic:
 	push bc
 	ld a, BANK(sDecompressBuffer)
 	call OpenSRAM
-	ld hl, PokemonPicPointers ; UnownPicPointers
+
+	; These are assumed to be at the same address in their respective banks.
+	assert PokemonPicPointers == UnownPicPointers
+	ld hl, PokemonPicPointers
 	ld a, [wCurPartySpecies]
 	ld d, BANK(PokemonPicPointers)
 	cp UNOWN
