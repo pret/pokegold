@@ -82,18 +82,21 @@ UnusedEnteiScript: ; unreferenced
 	disappear BURNEDTOWERB1F_ENTEI1
 	end
 
-
 BurnedTowerB1FHPUp:
 	itemball HP_UP
+
 BurnedTowerB1FTMEndure:
 	itemball TM_ENDURE
+
 BurnedTowerB1FBoulder:
 	jumpstd StrengthBoulderScript
 
 BurnedTowerB1FHiddenUltraBall:
 	hiddenitem ULTRA_BALL, EVENT_BURNED_TOWER_B1F_HIDDEN_ULTRA_BALL
+
 BurnedTowerB1FHiddenBurnHeal:
 	hiddenitem BURN_HEAL, EVENT_BURNED_TOWER_B1F_HIDDEN_BURN_HEAL
+
 BurnedTowerB1FHiddenNugget:
 	hiddenitem NUGGET, EVENT_BURNED_TOWER_B1F_HIDDEN_NUGGET
 
