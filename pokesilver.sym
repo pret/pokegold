@@ -20849,7 +20849,7 @@
 42:53c3 BurnedTowerB1F_MapScripts.DummyScene1
 42:53c4 ReleaseTheBeasts
 42:5428 UnusedEnteiScript
-42:543d UnusedEnteiScript.next
+42:543d UnusedEnteiScript.draw
 42:5441 BurnedTowerB1FHPUp
 42:5443 BurnedTowerB1FTMEndure
 42:5445 BurnedTowerB1FBoulder
