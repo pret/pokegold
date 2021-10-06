@@ -73,13 +73,13 @@ UnusedEnteiScript: ; unreferenced
 	closetext
 	loadwildmon ENTEI, 40
 	startbattle
-	ifequal 2, .next
-	disappear 4
+	ifequal DRAW, .draw
+	disappear BURNEDTOWERB1F_ENTEI1
 	reloadmapafterbattle
 	end
-.next
+.draw
 	reloadmapafterbattle
-	disappear 4
+	disappear BURNEDTOWERB1F_ENTEI1
 	end
 
 
