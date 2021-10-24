@@ -4,8 +4,6 @@
 	const BLUE_PAGE  ; 3
 NUM_STAT_PAGES EQU const_value - 1
 
-STAT_PAGE_MASK EQU %00000011
-
 StatsScreenInit:
 	ldh a, [hMapAnims]
 	push af
@@ -262,9 +260,11 @@ EggStats_ScrollToLoadMon:
 
 StatsScreen_LoadPageJumptable:
 ; entries correspond to *_PAGE constants
+	table_width 2, StatsScreen_LoadPageJumptable
 	dw LoadPinkPage
 	dw LoadGreenPage
 	dw LoadBluePage
+	assert_table_length NUM_STAT_PAGES
 
 StatsScreen_InitUpperHalf:
 	push bc
