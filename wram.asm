@@ -373,6 +373,13 @@ wCardFlipFaceUpCard:: db
 wDiscardPile:: ds 4 * 6
 wDiscardPileEnd::
 
+; beta poker game
+wBetaPokerSGBPals:: db
+	ds 2
+wBetaPokerSGBAttr:: db
+wBetaPokerSGBCol:: db
+wBetaPokerSGBRow:: db
+
 NEXTU
 ; unused memory game
 wMemoryGameCards:: ds 9 * 5
@@ -386,15 +393,6 @@ wMemoryGameNumberTriesRemaining:: db
 wMemoryGameLastMatches:: ds 5
 wMemoryGameCounter:: db
 wMemoryGameNumCardsMatched:: db
-
-NEXTU
-; beta poker game
-	ds 50
-wBetaPokerSGBPals:: db
-	ds 2
-wBetaPokerSGBAttr:: db
-wBetaPokerSGBCol:: db
-wBetaPokerSGBRow:: db
 
 NEXTU
 ; unown puzzle
