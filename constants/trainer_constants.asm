@@ -71,7 +71,7 @@ NUM_NONTRAINER_PHONECONTACTS EQU const_value - 1
 	const WILL1
 
 	trainerclass CAL ; c
-	const CAL1
+	const CAL1 ; unused
 	const CAL2
 	const CAL3
 
@@ -139,12 +139,12 @@ NUM_NONTRAINER_PHONECONTACTS EQU const_value - 1
 	const ALAN3
 	const CHAD2
 	const CHAD3
-	const JACK4
-	const JACK5
-	const ALAN4
-	const ALAN5
-	const CHAD4
-	const CHAD5
+	const JACK4 ; unused
+	const JACK5 ; unused
+	const ALAN4 ; unused
+	const ALAN5 ; unused
+	const CHAD4 ; unused
+	const CHAD5 ; unused
 
 	trainerclass BIRD_KEEPER ; 18
 	const ROD
@@ -179,8 +179,8 @@ NUM_NONTRAINER_PHONECONTACTS EQU const_value - 1
 	const MICHELLE
 	const DANA1
 	const ELLEN
-	const CONNIE2
-	const CONNIE3
+	const CONNIE2 ; unused
+	const CONNIE3 ; unused
 	const DANA2
 	const DANA3
 
@@ -200,12 +200,12 @@ NUM_NONTRAINER_PHONECONTACTS EQU const_value - 1
 	const GAVEN3
 	const BLAKE
 	const BRIAN
-	const ERICK
-	const ANDY
-	const TYLER
+	const ERICK ; unused
+	const ANDY ; unused
+	const TYLER ; unused
 	const SEAN
 	const KEVIN
-	const STEVE
+	const STEVE ; unused
 	const ALLEN
 
 	trainerclass COOLTRAINERF ; 1c
@@ -233,19 +233,19 @@ NUM_NONTRAINER_PHONECONTACTS EQU const_value - 1
 	trainerclass BEAUTY ; 1d
 	const VICTORIA
 	const SAMANTHA
-	const JULIE
-	const JACLYN
-	const BRENDA
+	const JULIE ; unused
+	const JACLYN ; unused
+	const BRENDA ; unused
 	const CASSIE
-	const CAROLINE
-	const CARLENE
-	const JESSICA
-	const RACHAEL
-	const ANGELICA
-	const KENDRA
-	const VERONICA
+	const CAROLINE ; unused
+	const CARLENE ; unused
+	const JESSICA ; unused
+	const RACHAEL ; unused
+	const ANGELICA ; unused
+	const KENDRA ; unused
+	const VERONICA ; unused
 	const JULIA
-	const THERESA
+	const THERESA ; unused
 	const VALERIE
 
 	trainerclass POKEMANIAC ; 1e
@@ -275,7 +275,7 @@ NUM_NONTRAINER_PHONECONTACTS EQU const_value - 1
 	const GRUNTM_9
 	const GRUNTM_10
 	const GRUNTM_11
-	const GRUNTM_12_UNUSED
+	const GRUNTM_12 ; unused
 	const GRUNTM_13
 	const GRUNTM_14
 	const GRUNTM_15
@@ -285,22 +285,22 @@ NUM_NONTRAINER_PHONECONTACTS EQU const_value - 1
 	const GRUNTM_19
 	const GRUNTM_20
 	const GRUNTM_21
-	const GRUNTM_22_UNUSED
-	const GRUNTM_23_UNUSED
+	const GRUNTM_22 ; unused
+	const GRUNTM_23 ; unused
 	const GRUNTM_24
 	const GRUNTM_25
-	const GRUNTM_26_UNUSED
-	const GRUNTM_27_UNUSED
+	const GRUNTM_26 ; unused
+	const GRUNTM_27 ; unused
 	const GRUNTM_28
 	const GRUNTM_29
-	const GRUNTM_30_UNUSED
+	const GRUNTM_30 ; unused
 	const GRUNTM_31
 
 	trainerclass GENTLEMAN ; 20
 	const PRESTON
 	const EDWARD
 	const GREGORY
-	const VIRGIL
+	const VIRGIL ; unused
 	const ALFRED
 
 	trainerclass SKIER ; 21
@@ -364,18 +364,18 @@ NUM_NONTRAINER_PHONECONTACTS EQU const_value - 1
 	const BERKE
 	const KIRK
 	const MATHEW
-	const HAL
-	const PATON
-	const DARYL
-	const WALTER
-	const TONY
+	const HAL ; unused
+	const PATON ; unused
+	const DARYL ; unused
+	const WALTER ; unused
+	const TONY ; unused
 	const JEROME
 	const TUCKER
-	const RICK
+	const RICK ; unused
 	const CAMERON
 	const SETH
-	const JAMES
-	const LEWIS
+	const JAMES ; unused
+	const LEWIS ; unused
 	const PARKER
 
 	trainerclass SWIMMERF ; 27
@@ -386,15 +386,15 @@ NUM_NONTRAINER_PHONECONTACTS EQU const_value - 1
 	const DENISE
 	const KARA
 	const WENDY
-	const LISA
-	const JILL
+	const LISA ; unused
+	const JILL ; unused
 	const MARY
-	const KATIE
+	const KATIE ; unused
 	const DAWN
-	const TARA
+	const TARA ; unused
 	const NICOLE
 	const LORI
-	const JODY
+	const JODY ; unused
 	const NIKKI
 	const DIANA
 	const BRIANA
@@ -416,16 +416,16 @@ NUM_NONTRAINER_PHONECONTACTS EQU const_value - 1
 	trainerclass SUPER_NERD ; 29
 	const STAN
 	const ERIC
-	const GREGG
-	const JAY
-	const DAVE
+	const GREGG ; unused
+	const JAY ; unused
+	const DAVE ; unused
 	const SAM
 	const TOM
 	const PAT
 	const SHAWN
 	const TERU
-	const RUSS
-	const NORTON
+	const RUSS ; unused
+	const NORTON ; unused
 
 	trainerclass RIVAL2 ; 2a
 	const RIVAL2_1_CHIKORITA
@@ -462,8 +462,8 @@ NUM_NONTRAINER_PHONECONTACTS EQU const_value - 1
 	const PARRY3
 
 	trainerclass BIKER ; 2d
-	const KAZU1
-	const KAZU2
+	const KAZU1 ; unused
+	const KAZU2 ; unused
 	const DWAYNE
 	const HARRIS
 	const ZEKE
@@ -560,15 +560,15 @@ NUM_NONTRAINER_PHONECONTACTS EQU const_value - 1
 	const LLOYD
 	const DEAN
 	const SID
-	const HARVEY
-	const DALE
+	const HARVEY ; unused
+	const DALE ; unused
 	const TED
 	const TODD2
 	const TODD3
-	const THOMAS
-	const LEROY
-	const DAVID
-	const JOHN
+	const THOMAS ; unused
+	const LEROY ; unused
+	const DAVID ; unused
+	const JOHN ; unused
 	const JERRY
 	const SPENCER
 
@@ -590,9 +590,9 @@ NUM_NONTRAINER_PHONECONTACTS EQU const_value - 1
 	trainerclass MEDIUM ; 39
 	const MARTHA
 	const GRACE
-	const BETHANY
-	const MARGRET
-	const ETHEL
+	const BETHANY ; unused
+	const MARGRET ; unused
+	const ETHEL ; unused
 	const REBECCA
 	const DORIS
 
@@ -616,7 +616,7 @@ NUM_NONTRAINER_PHONECONTACTS EQU const_value - 1
 	const ALEX
 
 	trainerclass KIMONO_GIRL ; 3c
-	const KYOKO
+	const KYOKO ; unused
 	const NAOKO
 	const SAYO
 	const ZUKI
