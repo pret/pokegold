@@ -389,7 +389,7 @@ SaveOptions:
 	ld bc, wOptionsEnd - wOptions
 	call CopyBytes
 	ld a, [wOptions]
-	and $ff ^ (1 << NO_TEXT_SCROLL)
+	and ~(1 << NO_TEXT_SCROLL)
 	ld [sOptions], a
 	jp CloseSRAM
 
@@ -677,7 +677,7 @@ CheckTextDelay:
 	cp TEXT_DELAY_SLOW
 	ret z
 	ld a, [wOptions]
-	and $ff ^ TEXT_DELAY_MASK
+	and ~TEXT_DELAY_MASK
 	or (1 << FAST_TEXT_DELAY_F) | (1 << NO_TEXT_DELAY_F)
 	ld [wOptions], a
 	ret

@@ -2155,7 +2155,7 @@ PokeFluteEffect:
 	xor a
 	ld [wPokeFluteCuredSleep], a
 
-	ld b, $ff ^ SLP
+	ld b, ~SLP
 
 	ld hl, wPartyMon1Status
 	call .CureSleep
