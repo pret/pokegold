@@ -144,7 +144,7 @@ sBackupPlayerData2:: ds wPlayerData2End - wPlayerData2
 box_n = 0
 boxes: MACRO
 rept \1
-box_n = box_n + 1
+box_n += 1
 sBox{d:box_n}:: box sBox{d:box_n}
 endr
 ENDM
