@@ -388,7 +388,7 @@ NUM_NONTRAINER_PHONECONTACTS EQU const_value - 1
 	const WENDY
 	const LISA ; unused
 	const JILL ; unused
-	const MARY
+	const MARY ; unused
 	const KATIE ; unused
 	const DAWN
 	const TARA ; unused
