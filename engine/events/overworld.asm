@@ -1298,7 +1298,7 @@ TryRockSmashFromMenu:
 	call GetFacingObject
 	jr c, .no_rock
 	ld a, d
-	cp $18
+	cp SPRITEMOVEDATA_SMASHABLE_ROCK
 	jr nz, .no_rock
 
 	ld hl, RockSmashFromMenuScript
