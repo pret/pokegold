@@ -1867,7 +1867,7 @@ GetAnyMapPointer::
 	; find the cth map within the group
 	dec c
 	ld b, 0
-	ld a, 9
+	ld a, MAP_LENGTH
 	call AddNTimes
 	ret
 
