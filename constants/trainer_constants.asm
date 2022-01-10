@@ -408,8 +408,8 @@ NUM_NONTRAINER_PHONECONTACTS EQU const_value - 1
 	const HUEY3
 
 	trainerclass SUPER_NERD ; 29
-	const ERIC1 ; unused
-	const ERIC2
+	const ERIC_UNUSED
+	const ERIC
 	const GREGG ; unused
 	const JAY ; unused
 	const DAVE ; unused
