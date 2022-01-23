@@ -710,14 +710,14 @@ GetMenuDataPointerTableEntry::
 	ret
 
 ClearWindowData::
-	ld hl, wWindowStackPointer
-	call .bytefill
+	ld hl, wMenuMetadata
+	call .ClearMenuData
 	ld hl, wMenuHeader
-	call .bytefill
-	ld hl, wMenuDataFlags
-	call .bytefill
-	ld hl, w2DMenuCursorInitY
-	call .bytefill
+	call .ClearMenuData
+	ld hl, wMenuData
+	call .ClearMenuData
+	ld hl, wMoreMenuData
+	call .ClearMenuData
 
 	xor a
 	call OpenSRAM
@@ -734,8 +734,11 @@ ClearWindowData::
 	call CloseSRAM
 	ret
 
-.bytefill
-	ld bc, $10
+.ClearMenuData:
+	ld bc, wMenuMetadataEnd - wMenuMetadata
+	assert wMenuMetadataEnd - wMenuMetadata == wMenuHeaderEnd - wMenuHeader
+	assert wMenuMetadataEnd - wMenuMetadata == wMenuDataEnd - wMenuData
+	assert wMenuMetadataEnd - wMenuMetadata == wMoreMenuDataEnd - wMoreMenuData
 	xor a
 	call ByteFill
 	ret
