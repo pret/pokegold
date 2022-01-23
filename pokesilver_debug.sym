@@ -564,7 +564,7 @@
 00:1e11 MenuJumptable
 00:1e1b GetMenuDataPointerTableEntry
 00:1e29 ClearWindowData
-00:1e57 ClearWindowData.bytefill
+00:1e57 ClearWindowData.ClearMenuData
 00:1e5f MenuClickSound
 00:1e6e MenuClickSound.nosound
 00:1e70 PlayClickSFX
@@ -40684,6 +40684,7 @@
 00:cea5 wTileLeft
 00:cea6 wTileRight
 00:cea7 wTilePermissions
+00:cea8 wMenuMetadata
 00:cea8 wWindowStackPointer
 00:ceaa wMenuJoypad
 00:ceab wMenuSelection
@@ -40693,6 +40694,7 @@
 00:ceaf wWindowStackSize
 00:ceb8 wMenuHeader
 00:ceb8 wMenuFlags
+00:ceb8 wMenuMetadataEnd
 00:ceb9 wMenuBorderTopCoord
 00:ceba wMenuBorderLeftCoord
 00:cebb wMenuBorderBottomCoord
@@ -40721,6 +40723,7 @@
 00:ced2 wMenuData_ScrollingMenuFunction2
 00:ced5 wMenuData_ScrollingMenuFunction3
 00:ced8 w2DMenuCursorInitY
+00:ced8 wMoreMenuData
 00:ced8 w2DMenuData
 00:ced8 wMenuDataEnd
 00:ced9 w2DMenuCursorInitX
@@ -40736,6 +40739,7 @@
 00:cee2 wCursorOffCharacter
 00:cee3 wCursorCurrentTile
 00:cee8 wOverworldDelay
+00:cee8 wMoreMenuDataEnd
 00:cee9 wTextDelayFrames
 00:ceea wVBlankOccurred
 00:ceeb wBetaTitleSequenceOpeningType
