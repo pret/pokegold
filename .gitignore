@@ -51,3 +51,6 @@ used_space.png
 
 # macos files
 .DS_STORE
+
+#Ignore RGBDS
+rgbds/
