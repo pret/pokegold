@@ -1,8 +1,16 @@
-# Pokémon Gold and Silver [![Build Status][ci-badge]][ci]
+# Pokémon Dark Gold and Dark Silver [![Build Status][ci-badge]][ci]
 
-This is a disassembly of Pokémon Gold and Pokémon Silver.
+This is a Rom Hack based on the disassembly of Pokémon Gold and Pokémon Silver. There is no clear goal for this project at this time.
+I wanted to learn about ROM hacking and assembly, as well as make something fun for my Friends and Family.
+Many of the changes are based on things I wanted from a ROM Hack or my Friends or Family asked for.
+You are more than welcome to give it a play, suggest changes, and propose code improvements. 
+Please be nice, I literrally have no idea what i'm doing, this is purely for fun!
+I will be using code obtained from other projects, I will try to include references on where code was obtained where possible to give credit.
+I chose to Gold/Silver, because I wanted to find a way to keep the version differences and encourage trading/battleing with my friends/family.
+I also made a janky "girlversion" branch, that will replace the main character with the female Kris sprites/Images. It was easier to do this than
+adding a bunch of new code. 
 
-It builds the following ROMs:
+The original disassembly builds the following ROMs:
 
 - Pokemon - Gold Version (UE) [C][!].gbc `sha1: d8b8a3600a465308c9953dfa04f0081c05bdcb94`
 - Pokemon - Silver Version (UE) [C][!].gbc `sha1: 49b163f7e57702bc939d642a18f591de55d92dae`
