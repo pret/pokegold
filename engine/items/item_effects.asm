@@ -872,7 +872,7 @@ LureBallMultiplier:
 	ret
 
 MoonBallMultiplier:
-; This function is buggy.
+; This function is buggy. FIXED
 ; Intent:  multiply catch rate by 4 if mon evolves with moon stone
 ; Reality: no boost
 	push bc
@@ -904,7 +904,7 @@ MoonBallMultiplier:
 	push bc
 	ld a, BANK("Evolutions and Attacks")
 	call GetFarByte
-	cp MOON_STONE_RED ; BURN_HEAL
+	cp MOON_STONE ; BURN_HEAL FIXED
 	pop bc
 	ret nz
 
@@ -918,7 +918,7 @@ MoonBallMultiplier:
 	ret
 
 LoveBallMultiplier:
-; This function is buggy.
+; This function is buggy. FIXED!
 ; Intent:  multiply catch rate by 8 if mons are of same species, different sex
 ; Reality: multiply catch rate by 8 if mons are of same species, same sex
 
@@ -963,7 +963,7 @@ LoveBallMultiplier:
 	pop de
 	cp d
 	pop bc
-	ret nz ; for the intended effect, this should be "ret z"
+	ret z ; for the intended effect, this should be "ret z" FIXED!
 
 	sla b
 	jr c, .max
@@ -983,7 +983,7 @@ LoveBallMultiplier:
 	ret
 
 FastBallMultiplier:
-; This function is buggy.
+; This function is buggy. FIXED
 ; Intent:  multiply catch rate by 4 if enemy mon is in one of the three
 ;          FleeMons tables.
 ; Reality: multiply catch rate by 4 if enemy mon is one of the first three in
@@ -1001,7 +1001,7 @@ FastBallMultiplier:
 	cp -1
 	jr z, .next
 	cp c
-	jr nz, .next ; for the intended effect, this should be "jr nz, .loop"
+	jr nz, .loop ; for the intended effect, this should be "jr nz, .loop" FIXED
 	sla b
 	jr c, .max
 
