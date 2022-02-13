@@ -18,7 +18,7 @@ The original disassembly builds the following ROMs:
 - mons2_slv_ps3_debug.bin `sha1: 4c2fafebdbc7551f4cd3f348bdd17e420b93b6e7`
 
 To set up the repository, see [INSTALL.md](INSTALL.md).
-
+To view the changelog, see [CHANGELOG.MD](docs/CHANGELOG.md).
 
 ## See also
 
