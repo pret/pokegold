@@ -199,8 +199,8 @@ GoldenrodPokecenter1F_MapEvents:
 	warp_event  0,  7, POKECENTER_2F, 1
 
 	def_coord_events
-	coord_event  3,  7, SCENE_GOLDENROD_POKECENTER_1F_GSBALL, GoldenrodPokecenter1F_GSBallSceneLeft
-	coord_event  4,  7, SCENE_GOLDENROD_POKECENTER_1F_GSBALL, GoldenrodPokecenter1F_GSBallSceneRight
+	coord_event  3,  7, SCENE_GOLDENROD_POKECENTER_1F_NOTHING, GoldenrodPokecenter1F_GSBallSceneLeft
+	coord_event  4,  7, SCENE_GOLDENROD_POKECENTER_1F_NOTHING, GoldenrodPokecenter1F_GSBallSceneRight
 
 	def_bg_events
 
