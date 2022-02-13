@@ -625,6 +625,13 @@ ENDC
 	dbsprite -2,  0,  0,  0, $02, PAL_OW_TREE
 	dbsprite  1,  0,  0,  0, $03, PAL_OW_TREE
 
+.OAMData_Celebi:
+        db 4
+        dbsprite -1, -1,  0,  0, $00, PAL_OW_GREEN
+        dbsprite  0, -1,  0,  0, $01, PAL_OW_GREEN
+        dbsprite -1,  0,  0,  0, $02, PAL_OW_GREEN
+        dbsprite  0,  0,  0,  0, $03, PAL_OW_GREEN
+
 IF DEF(_GOLD)
 .OAMData_GSIntroHoOh1:
 	db 19
@@ -832,12 +839,5 @@ ELIF DEF(_SILVER)
 	db 2
 	dbsprite -1, -1,  0,  0, $00, 0
 	dbsprite  0, -1,  0,  0, $02, 0
-
-.OAMData_Celebi:
-	db 4
-	dbsprite -1, -1,  0,  0, $00, PAL_OW_GREEN
-	dbsprite  0, -1,  0,  0, $01, PAL_OW_GREEN
-	dbsprite -1,  0,  0,  0, $02, PAL_OW_GREEN
-	dbsprite  0,  0,  0,  0, $03, PAL_OW_GREEN
 
 ENDC
