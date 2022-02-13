@@ -57,6 +57,8 @@ SpriteAnimFrameData:
 	dw .Frameset_EggHatch4
 	dw .Frameset_GSIntroHoOhLugia
 	dw .Frameset_HeadbuttTree
+	dw .Frameset_CelebiLeft
+	dw .Frameset_CelebiRight
 	assert_table_length NUM_SPRITE_ANIM_FRAMESETS
 
 .Frameset_00:
@@ -401,3 +403,13 @@ ENDC
 	frame SPRITE_ANIM_OAMSET_TREE_1,           2
 	frame SPRITE_ANIM_OAMSET_HEADBUTT_TREE_2,  2, OAM_X_FLIP
 	dorestart
+
+.Frameset_CelebiLeft:
+	frame SPRITE_ANIM_OAMSET_CELEBI_1,  8
+	frame SPRITE_ANIM_OAMSET_CELEBI_2,  8
+	endanim
+
+.Frameset_CelebiRight:
+	frame SPRITE_ANIM_OAMSET_CELEBI_1,  8, OAM_X_FLIP
+	frame SPRITE_ANIM_OAMSET_CELEBI_2,  8, OAM_X_FLIP
+	endanim

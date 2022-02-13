@@ -5016,6 +5016,8 @@ BattleCommand_ForceSwitch:
 	jp z, .fail
 	cp BATTLETYPE_TRAP
 	jp z, .fail
+	cp BATTLETYPE_CELEBI
+	jp z, .fail
 	ldh a, [hBattleTurn]
 	and a
 	jp nz, .force_player_switch

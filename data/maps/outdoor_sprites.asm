@@ -241,6 +241,7 @@ EcruteakGroupSprites:
 	db SPRITE_FRUIT_TREE
 
 AzaleaGroupSprites:
+	db SPRITE_KURT_OUTSIDE
 	db SPRITE_GRAMPS
 	db SPRITE_YOUNGSTER
 	db SPRITE_OFFICER

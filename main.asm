@@ -191,6 +191,9 @@ INCLUDE "engine/battle/start_battle.asm"
 INCLUDE "engine/gfx/place_graphic.asm"
 INCLUDE "engine/pokemon/mail.asm"
 
+SECTION "Crystal Features 1", ROMX
+
+INCLUDE "engine/events/celebi.asm"
 
 SECTION "bank14", ROMX
 

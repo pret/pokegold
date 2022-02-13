@@ -6,6 +6,8 @@ BattleCommand_Teleport:
 	jr z, .failed
 	cp BATTLETYPE_TRAP
 	jr z, .failed
+	cp BATTLETYPE_CELEBI
+	jr z, .failed	
 
 	ld a, BATTLE_VARS_SUBSTATUS5_OPP
 	call GetBattleVar

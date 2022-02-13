@@ -192,7 +192,12 @@
 	const EVENT_LAKE_OF_RAGE_HIDDEN_RARE_CANDY
 	const EVENT_LAKE_OF_RAGE_HIDDEN_MAX_POTION
 	const EVENT_SILVER_CAVE_OUTSIDE_HIDDEN_FULL_RESTORE
-; Unused: next 15 events
+; Crystal-exclusive events in Johto ported to Gold / Silver
+	const EVENT_BUGGING_KURT_TOO_MUCH
+	const EVENT_CAN_GIVE_GS_BALL_TO_KURT
+	const EVENT_GAVE_GS_BALL_TO_KURT
+	const EVENT_FOREST_IS_RESTLESS
+; Unused: next 11 events
 
 	const_next 200
 ; Kanto story events
@@ -466,7 +471,9 @@
 	const EVENT_GOT_FIRE_STONE_FROM_BILLS_GRANDPA
 	const EVENT_GOT_THUNDERSTONE_FROM_BILLS_GRANDPA
 	const EVENT_LISTENED_TO_INITIAL_RADIO
-; Unused: next 194 events
+; More Crystal-exclusive events in Johto ported to Gold / Silver
+	const EVENT_GOT_GS_BALL_FROM_POKECOM_CENTER
+; Unused: next 193 events
 
 	const_next 1000
 ; Trainer flags
@@ -1172,6 +1179,8 @@
 	const EVENT_ILEX_FOREST_FARFETCHD_10
 	const EVENT_ILEX_FOREST_APPRENTICE
 	const EVENT_ILEX_FOREST_CHARCOAL_MASTER
+	const EVENT_ROUTE_34_ILEX_FOREST_GATE_LASS
+	const EVENT_ILEX_FOREST_LASS
 	const EVENT_CHARCOAL_KILN_FARFETCH_D
 	const EVENT_CHARCOAL_KILN_APPRENTICE
 	const EVENT_CHARCOAL_KILN_BOSS
@@ -1324,7 +1333,10 @@
 	const EVENT_ROUTE_12_NUGGET
 	const EVENT_ROUTE_15_PP_UP
 	const EVENT_ROUTE_25_PROTEIN
-; Unused: next 116 events
+; New events imported from Crystal into Gold/Silver
+	const EVENT_AZALEA_TOWN_KURT
+	const EVENT_ILEX_FOREST_KURT
+; Unused: next 115 events
 
 	const_next 2048
 NUM_EVENTS EQU const_value ; 800

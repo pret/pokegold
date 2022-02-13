@@ -128,7 +128,7 @@ ItemEffects:
 	dw NoEffect            ; EVERSTONE
 	dw NoEffect            ; SPELL_TAG
 	dw RestoreHPEffect     ; RAGECANDYBAR
-	dw NoEffect            ; ITEM_73
+	dw NoEffect            ; GS_BALL
 	dw NoEffect            ; ITEM_74
 	dw NoEffect            ; MIRACLE_SEED
 	dw NoEffect            ; THICK_CLUB
@@ -544,6 +544,12 @@ PokeBallEffect:
 	ld a, [wBattleType]
 	cp BATTLETYPE_CONTEST
 	jp z, .catch_bug_contest_mon
+	cp BATTLETYPE_CELEBI
+	jr nz, .not_celebi
+	ld hl, wBattleResult
+	set BATTLERESULT_CAUGHT_CELEBI, [hl]
+.not_celebi
+
 	ld a, [wPartyCount]
 	cp PARTY_LENGTH
 	jr z, .SendToPC

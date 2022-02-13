@@ -7,6 +7,37 @@ Route34IlexForestGate_MapScripts:
 	def_scene_scripts
 
 	def_callbacks
+	callback MAPCALLBACK_OBJECTS, .IsForestRestless
+
+.IsForestRestless:
+	checkevent EVENT_FOREST_IS_RESTLESS
+	iffalse .Normal
+	;disappear ROUTE34ILEXFORESTGATE_TEACHER1
+	;appear ROUTE34ILEXFORESTGATE_TEACHER2
+	endcallback
+
+.Normal:
+	;disappear ROUTE34ILEXFORESTGATE_TEACHER2
+	;appear ROUTE34ILEXFORESTGATE_TEACHER1
+	endcallback
+
+Route34IlexForestGateCelebiEvent:
+	checkevent EVENT_FOREST_IS_RESTLESS
+	iffalse .skip
+	showemote EMOTE_SHOCK, ROUTE34ILEXFORESTGATE_TEACHER, 20
+	turnobject ROUTE34ILEXFORESTGATE_TEACHER, LEFT
+	turnobject PLAYER, RIGHT
+	follow PLAYER, ROUTE34ILEXFORESTGATE_TEACHER
+	applymovement PLAYER, Route34IlexForestGateTeacherBlocksPlayerMovement
+	stopfollow
+	turnobject PLAYER, DOWN
+	opentext
+	writetext Route34IlexForestGateTeacher_ForestIsRestless
+	waitbutton
+	closetext
+	applymovement ROUTE34ILEXFORESTGATE_TEACHER, Route34IlexForestGateTeacherReturnsMovement
+.skip:
+	end
 
 Route34IlexForestGateTeacherScript:
 	faceplayer
@@ -36,6 +67,16 @@ Route34IlexForestGateButterfreeScript:
 Route34IlexForestGateLassScript:
 	jumptextfaceplayer Route34IlexForestGateLassText
 
+Route34IlexForestGateTeacherBlocksPlayerMovement:
+	step UP
+	step UP
+	step_end
+
+Route34IlexForestGateTeacherReturnsMovement:
+	step DOWN
+	step RIGHT
+	step_end
+
 Route34IlexForestGateTeacherText:
 	text "Oh, honey. You're"
 	line "making a #DEX?"
@@ -55,6 +96,14 @@ Route34IlexForestGateTeacher_GotSweetScent:
 
 	para "#MON will be"
 	line "enticed by it."
+	done
+
+Route34IlexForestGateTeacher_ForestIsRestless:
+	text "Something's wrong"
+	line "in ILEX FOREST…"
+
+	para "You should stay"
+	line "away right now."
 	done
 
 Route34IlexForestGateButterfreeText:
@@ -85,6 +134,7 @@ Route34IlexForestGate_MapEvents:
 	warp_event  5,  7, ILEX_FOREST, 1
 
 	def_coord_events
+	coord_event 4, 7, SCENE_DEFAULT, Route34IlexForestGateCelebiEvent
 
 	def_bg_events
 

@@ -405,6 +405,192 @@ AnimateWaterTile:
 .WaterTileFrames:
 	INCBIN "gfx/tilesets/water/water.2bpp"
 
+ForestTreeLeftAnimation:
+; Save the stack pointer in bc for WriteTile to restore
+	ld hl, sp+0
+	ld b, h
+	ld c, l
+
+; Only animate this during the Celebi event
+	ld a, [wCelebiEvent]
+	bit CELEBIEVENT_FOREST_IS_RESTLESS_F, a
+	jr nz, .do_animation
+	ld hl, ForestTreeLeftFrames
+	jr .got_frames
+
+.do_animation
+; A cycle of 2 frames, updating every tick
+	ld a, [wTileAnimationTimer]
+	call GetForestTreeFrame
+
+; hl = ForestTreeLeftFrames + a * 8
+; (a was pre-multiplied by 2 from GetForestTreeFrame)
+	add a
+	add a
+	add a
+	add LOW(ForestTreeLeftFrames)
+	ld l, a
+	ld a, 0
+	adc HIGH(ForestTreeLeftFrames)
+	ld h, a
+
+.got_frames
+; Write the tile graphic from hl (now sp) to tile $0c (now hl)
+	ld sp, hl
+	ld hl, vTiles2 tile $0c
+	jp WriteTile
+
+ForestTreeLeftFrames:
+	INCBIN "gfx/tilesets/forest-tree/1.2bpp"
+	INCBIN "gfx/tilesets/forest-tree/2.2bpp"
+
+ForestTreeRightFrames:
+	INCBIN "gfx/tilesets/forest-tree/3.2bpp"
+	INCBIN "gfx/tilesets/forest-tree/4.2bpp"
+
+ForestTreeRightAnimation:
+; Save the stack pointer in bc for WriteTile to restore
+	ld hl, sp+0
+	ld b, h
+	ld c, l
+
+; Only animate this during the Celebi event
+	ld a, [wCelebiEvent]
+	bit CELEBIEVENT_FOREST_IS_RESTLESS_F, a
+	jr nz, .do_animation
+	ld hl, ForestTreeRightFrames
+	jr .got_frames
+
+.do_animation
+; A cycle of 2 frames, updating every tick
+	ld a, [wTileAnimationTimer]
+	call GetForestTreeFrame
+
+; hl = ForestTreeRightFrames + a * 8
+; (a was pre-multiplied by 2 from GetForestTreeFrame)
+	add a
+	add a
+	add a
+	add LOW(ForestTreeLeftFrames)
+	ld l, a
+	ld a, 0
+	adc HIGH(ForestTreeLeftFrames)
+	ld h, a
+	push bc
+	ld bc, ForestTreeRightFrames - ForestTreeLeftFrames
+	add hl, bc
+	pop bc
+
+.got_frames
+; Write the tile graphic from hl (now sp) to tile $0f (now hl)
+	ld sp, hl
+	ld hl, vTiles2 tile $0f
+	jp WriteTile
+
+ForestTreeLeftAnimation2:
+; Save the stack pointer in bc for WriteTile to restore
+	ld hl, sp+0
+	ld b, h
+	ld c, l
+
+; Only animate this during the Celebi event
+	ld a, [wCelebiEvent]
+	bit CELEBIEVENT_FOREST_IS_RESTLESS_F, a
+	jr nz, .do_animation
+	ld hl, ForestTreeLeftFrames
+	jr .got_frames
+
+.do_animation
+; A cycle of 2 frames, updating every tick
+	ld a, [wTileAnimationTimer]
+	call GetForestTreeFrame
+
+; Offset by 1 frame from ForestTreeLeftAnimation
+	xor %10
+
+; hl = ForestTreeLeftFrames + a * 8
+; (a was pre-multiplied by 2 from GetForestTreeFrame)
+	add a
+	add a
+	add a
+	add LOW(ForestTreeLeftFrames)
+	ld l, a
+	ld a, 0
+	adc HIGH(ForestTreeLeftFrames)
+	ld h, a
+
+.got_frames
+; Write the tile graphic from hl (now sp) to tile $0c (now hl)
+	ld sp, hl
+	ld hl, vTiles2 tile $0c
+	jp WriteTile
+
+ForestTreeRightAnimation2:
+; Save the stack pointer in bc for WriteTile to restore
+	ld hl, sp+0
+	ld b, h
+	ld c, l
+
+; Only animate this during the Celebi event
+	ld a, [wCelebiEvent]
+	bit CELEBIEVENT_FOREST_IS_RESTLESS_F, a
+	jr nz, .do_animation
+	ld hl, ForestTreeRightFrames
+	jr .got_frames
+
+.do_animation
+; A cycle of 2 frames, updating every tick
+	ld a, [wTileAnimationTimer]
+	call GetForestTreeFrame
+
+; Offset by 1 frame from ForestTreeRightAnimation
+	xor %10
+
+; hl = ForestTreeRightFrames + a * 8
+; (a was pre-multiplied by 2 from GetForestTreeFrame)
+	add a
+	add a
+	add a
+	add LOW(ForestTreeLeftFrames)
+	ld l, a
+	ld a, 0
+	adc HIGH(ForestTreeLeftFrames)
+	ld h, a
+	push bc
+	ld bc, ForestTreeRightFrames - ForestTreeLeftFrames
+	add hl, bc
+	pop bc
+
+.got_frames
+; Write the tile graphic from hl (now sp) to tile $0f (now hl)
+	ld sp, hl
+	ld hl, vTiles2 tile $0f
+	jp WriteTile
+
+GetForestTreeFrame:
+; Return 0 if a is even, or 2 if odd.
+	and a
+	jr z, .even
+	cp 1
+	jr z, .odd
+	cp 2
+	jr z, .even
+	cp 3
+	jr z, .odd
+	cp 4
+	jr z, .even
+	cp 5
+	jr z, .odd
+	cp 6
+	jr z, .even
+.odd
+	ld a, 2
+	scf
+	ret
+.even
+	xor a
+	ret
+
 AnimateFlowerTile:
 ; Save the stack pointer in bc for WriteTile to restore
 	ld hl, sp+0

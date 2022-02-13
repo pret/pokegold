@@ -13,6 +13,8 @@ KurtsHouse_MapScripts:
 .KurtCallback:
 	checkevent EVENT_CLEARED_SLOWPOKE_WELL
 	iffalse .Done
+	checkevent EVENT_FOREST_IS_RESTLESS
+	iftrue .Done
 	checkflag ENGINE_KURT_MAKING_BALLS
 	iftrue .MakingBalls
 	disappear KURTSHOUSE_KURT2
@@ -64,6 +66,14 @@ Kurt1:
 	verbosegiveitem LURE_BALL
 	iffalse .NoRoomForBall
 	setevent EVENT_KURT_GAVE_YOU_LURE_BALL
+.NoGSBall
+	checkevent EVENT_TEMPORARY_UNTIL_MAP_RELOAD_2
+	iftrue .GotLureBall
+	checkevent EVENT_TEMPORARY_UNTIL_MAP_RELOAD_3
+	iftrue .GotLureBall
+	writetext KurtsHouseKurtBallsFromApricornsText
+	waitbutton
+
 .GotLureBall:
 	checkevent EVENT_TEMPORARY_UNTIL_MAP_RELOAD_2
 	iftrue .ThatTurnedOutGreat
@@ -83,6 +93,8 @@ Kurt1:
 	iftrue .GiveHeavyBall
 	checkevent EVENT_GAVE_KURT_PNK_APRICORN
 	iftrue .GiveLoveBall
+	checkevent EVENT_CAN_GIVE_GS_BALL_TO_KURT
+	iftrue .CanGiveGSBallToKurt
 	writetext KurtsHouseKurtBallsFromApricornsText
 	promptbutton
 	checkitem RED_APRICORN
@@ -241,6 +253,90 @@ Kurt1:
 	clearevent EVENT_GAVE_KURT_PNK_APRICORN
 	sjump ._ThatTurnedOutGreat
 
+.CanGiveGSBallToKurt
+	checkevent EVENT_GAVE_GS_BALL_TO_KURT
+	iftrue .GaveGSBallToKurt
+	checkitem GS_BALL
+	iffalse .NoGSBall
+	writetext KurtsHouseKurtWhatIsThatText
+	waitbutton
+	closetext
+	setevent EVENT_GAVE_GS_BALL_TO_KURT
+	takeitem GS_BALL
+	setflag ENGINE_KURT_MAKING_BALLS
+	end
+
+.GaveGSBallToKurt:
+	checkflag ENGINE_KURT_MAKING_BALLS
+	iffalse .NotMakingBalls
+	writetext KurtsHouseKurtImCheckingItNowText
+	waitbutton
+	writetext KurtsHouseKurtAhHaISeeText
+	waitbutton
+	closetext
+	end
+
+.NotMakingBalls:
+	writetext KurtsHouseKurtThisBallStartedToShakeText
+	waitbutton
+	closetext
+	setevent EVENT_FOREST_IS_RESTLESS
+	clearevent EVENT_CAN_GIVE_GS_BALL_TO_KURT
+	clearevent EVENT_GAVE_GS_BALL_TO_KURT
+	special FadeOutMusic
+	pause 20
+	showemote EMOTE_SHOCK, KURTSHOUSE_KURT1, 30
+	readvar VAR_FACING
+	ifequal UP, .GSBallRunAround
+	turnobject PLAYER, DOWN
+	playsound SFX_FLY
+	applymovement KURTSHOUSE_KURT1, KurtsHouseKurtExitHouseMovement
+	sjump .KurtHasLeftTheBuilding
+
+.GSBallRunAround:
+	turnobject PLAYER, DOWN
+	playsound SFX_FLY
+	applymovement KURTSHOUSE_KURT1, KurtsHouseKurtGoAroundPlayerThenExitHouseMovement
+.KurtHasLeftTheBuilding:
+	playsound SFX_EXIT_BUILDING
+	disappear KURTSHOUSE_KURT1
+	clearevent EVENT_AZALEA_TOWN_KURT
+	waitsfx
+	special RestartMapMusic
+	setmapscene AZALEA_TOWN, SCENE_AZALEATOWN_KURT_RETURNS_GS_BALL
+	end
+
+Kurt2:
+	faceplayer
+	opentext
+	checkevent EVENT_GAVE_GS_BALL_TO_KURT
+	iftrue KurtScript_ImCheckingItNow
+KurtMakingBallsScript:
+	checkevent EVENT_BUGGING_KURT_TOO_MUCH
+	iffalse Script_FirstTimeBuggingKurt
+	writetext KurtsHouseKurtDontBotherMeText
+	waitbutton
+	closetext
+	turnobject KURTSHOUSE_KURT2, UP
+	end
+
+Script_FirstTimeBuggingKurt:
+	writetext KurtsHouseKurtGranddaughterHelpingWorkFasterText
+	waitbutton
+	closetext
+	turnobject KURTSHOUSE_KURT2, UP
+	setevent EVENT_BUGGING_KURT_TOO_MUCH
+	end
+
+KurtScript_ImCheckingItNow:
+	writetext KurtsHouseKurtImCheckingItNowText
+	waitbutton
+	turnobject KURTSHOUSE_KURT2, UP
+	writetext KurtsHouseKurtAhHaISeeText
+	waitbutton
+	closetext
+	end
+
 KurtsGranddaughter:
 	faceplayer
 	opentext
@@ -271,6 +367,15 @@ KurtsGranddaughter:
 	writetext KurtsGranddaughterDadText
 	waitbutton
 	closetext
+	end
+	turnobject KURTSHOUSE_TWIN, RIGHT  ; There is no twin 2, lets try this instead
+
+.GSBall:
+	writetext KurtsGranddaughterGSBallText
+	waitbutton
+	closetext
+	;turnobject KURTSHOUSE_TWIN2, RIGHT
+	turnobject KURTSHOUSE_TWIN, RIGHT  ; There is no twin 2, lets try this instead
 	end
 
 KurtsHouseSlowpoke:
@@ -423,6 +528,51 @@ KurtsHouseKurtTurnedOutGreatText:
 	line "#MON with it."
 	done
 
+KurtsHouseKurtGranddaughterHelpingWorkFasterText:
+	text "KURT: Now that my"
+	line "granddaughter is"
+
+	para "helping me, I can"
+	line "work much faster."
+	done
+
+KurtsHouseKurtWhatIsThatText:
+	text "Wh-what is that?"
+
+	para "I've never seen"
+	line "one before."
+
+	para "It looks a lot"
+	line "like a # BALL,"
+
+	para "but it appears to"
+	line "be something else."
+
+	para "Let me check it"
+	line "for you."
+	done
+
+KurtsHouseKurtImCheckingItNowText:
+	text "I'm checking it"
+	line "now."
+	done
+
+KurtsHouseKurtAhHaISeeText:
+	text "Ah-ha! I see!"
+	line "So…"
+	done
+
+KurtsHouseKurtThisBallStartedToShakeText:
+	text "<PLAYER>!"
+
+	para "This BALL started"
+	line "to shake while I"
+	cont "was checking it."
+
+	para "There must be"
+	line "something to this!"
+	done
+
 KurtsGranddaughterSlowpokeGoneText:
 	text "The SLOWPOKE are"
 	line "gone… Were they"
@@ -452,6 +602,14 @@ KurtsGranddaughterDadText:
 	para "I have to stay"
 	line "home with Grandpa"
 	cont "and SLOWPOKE."
+	done
+
+KurtsGranddaughterGSBallText:
+	text "Grandpa's checking"
+	line "a BALL right now."
+
+	para "So I'm waiting"
+	line "till he's done."
 	done
 
 KurtsHouseSlowpokeText:

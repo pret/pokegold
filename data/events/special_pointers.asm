@@ -128,3 +128,7 @@ SpecialsPointers::
 	add_special InitialClearDSTFlag
 	add_special MrChrono
 	add_special UnusedDummySpecial ; unused
+
+; Crystal Special Pointers ported to Gold/Silver
+	add_special CelebiShrineEvent
+	add_special CheckCaughtCelebi
