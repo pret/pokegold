@@ -3,8 +3,11 @@ next   EQUS "db \"<NEXT>\","  ; Move a line down.
 line   EQUS "db \"<LINE>\","  ; Start writing at the bottom line.
 page   EQUS "db \"@\","       ; Start a new Pokédex page.
 para   EQUS "db \"<PARA>\","  ; Start a new paragraph.
+autopara  EQUS "db \"<ATPRA>\"," ; Automatically start a new paragraph.
 cont   EQUS "db \"<CONT>\","  ; Scroll to the next line.
+scroll EQUS "db \"<SCROLL>\","; Scroll to the next line, pausing shortly.
 done   EQUS "db \"<DONE>\""   ; End a text box.
+autodone  EQUS "db \"<ATDNE>\""; Automatically ends a text box.
 prompt EQUS "db \"<PROMPT>\"" ; Prompt the player to end a text box (initiating some other event).
 
 ; TextCommands indexes (see home/text.asm)

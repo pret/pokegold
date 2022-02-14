@@ -156,20 +156,20 @@ _OakTimeIsItText::
 _EnemyWithdrewText::
 	text "<ENEMY>"
 	line "withdrew"
-	cont "@"
+	scroll "@"
 	text_ram wEnemyMonNickname
 	text "!"
-	prompt
+	autodone
 
 _EnemyUsedOnText::
 	text "<ENEMY>"
 	line "used @"
 	text_ram wMonOrItemNameBuffer
 	text_start
-	cont "on @"
+	scroll "on @"
 	text_ram wEnemyMonNickname
 	text "!"
-	prompt
+	autodone
 
 _ThatCantBeUsedRightNowText:: ; unreferenced
 	text "That can't be used"
