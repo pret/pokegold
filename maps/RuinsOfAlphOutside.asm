@@ -85,7 +85,7 @@ TrainerSuperNerdEricUnused: ; unreferenced
 .Script:
 	endifjustbattled
 	opentext
-	writetext SuperNerdEricUnusedBattleText
+	writetext SuperNerdEricUnusedAfterBattleText
 	waitbutton
 	closetext
 	end
