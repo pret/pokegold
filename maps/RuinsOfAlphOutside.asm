@@ -79,13 +79,13 @@ TrainerPsychicNathan:
 	closetext
 	end
 
-TrainerSuperNerdStan: ; unreferenced
-	trainer SUPER_NERD, STAN, EVENT_BEAT_SUPER_NERD_STAN, SuperNerdStanSeenText, SuperNerdStanBeatenText, 0, .Script
+TrainerSuperNerdEricUnused: ; unreferenced
+	trainer SUPER_NERD, ERIC_UNUSED, EVENT_BEAT_SUPER_NERD_ERIC_UNUSED, SuperNerdEricUnusedSeenText, SuperNerdEricUnusedBeatenText, 0, .Script
 
 .Script:
 	endifjustbattled
 	opentext
-	writetext SuperNerdStanAfterBattleText
+	writetext SuperNerdEricUnusedBattleText
 	waitbutton
 	closetext
 	end
@@ -145,13 +145,13 @@ RuinsOfAlphOutsideScientistText:
 	cont "DEX. Follow me."
 	done
 
-SuperNerdStanSeenText:
+SuperNerdEricUnusedSeenText:
 	text "What do you want?"
 	line "I'm studying--"
 	cont "don't disturb me!"
 	done
 
-SuperNerdStanBeatenText:
+SuperNerdEricUnusedBeatenText:
 	text "Sorry…"
 	line "I'm frustrated by"
 
@@ -159,7 +159,7 @@ SuperNerdStanBeatenText:
 	line "understanding…"
 	done
 
-SuperNerdStanAfterBattleText:
+SuperNerdEricUnusedAfterBattleText:
 	text "The RUINS are from"
 	line "about 1500 years"
 	cont "ago."
