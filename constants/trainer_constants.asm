@@ -139,12 +139,6 @@ NUM_NONTRAINER_PHONECONTACTS EQU const_value - 1
 	const ALAN3
 	const CHAD2
 	const CHAD3
-	const JACK4 ; unused
-	const JACK5 ; unused
-	const ALAN4 ; unused
-	const ALAN5 ; unused
-	const CHAD4 ; unused
-	const CHAD5 ; unused
 
 	trainerclass BIRD_KEEPER ; 18
 	const ROD
@@ -320,7 +314,7 @@ NUM_NONTRAINER_PHONECONTACTS EQU const_value - 1
 	const ROB
 	const ED
 	const WADE1
-	const BUG_CATCHER_BENNY
+	const BENNY
 	const AL
 	const JOSH
 	const ARNIE1
@@ -414,7 +408,7 @@ NUM_NONTRAINER_PHONECONTACTS EQU const_value - 1
 	const HUEY3
 
 	trainerclass SUPER_NERD ; 29
-	const STAN
+	const ERIC_UNUSED
 	const ERIC
 	const GREGG ; unused
 	const JAY ; unused

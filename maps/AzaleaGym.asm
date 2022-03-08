@@ -90,7 +90,7 @@ TrainerTwinsAmyandmay2:
 	end
 
 TrainerBugCatcherBenny:
-	trainer BUG_CATCHER, BUG_CATCHER_BENNY, EVENT_BEAT_BUG_CATCHER_BENNY, BugCatcherBennySeenText, BugCatcherBennyBeatenText, 0, .AfterScript
+	trainer BUG_CATCHER, BENNY, EVENT_BEAT_BUG_CATCHER_BENNY, BugCatcherBennySeenText, BugCatcherBennyBeatenText, 0, .AfterScript
 
 .AfterScript:
 	endifjustbattled
