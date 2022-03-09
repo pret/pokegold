@@ -64,7 +64,7 @@ clean: tidy
 	find gfx \( -name "*.[12]bpp" -o -name "*.lz" -o -name "*.gbcpal" -o -name "*.dimensions" -o -name "*.sgb.tilemap" \) -delete
 
 tidy:
-	rm -f $(roms) $(pokegold_obj) $(pokesilver_obj) $(pokegold_debug_obj) $(pokesilver_debug_obj) $(roms:.gbc=.map) $(roms:.gbc=.sym) rgbdscheck.o
+	$(RM) $(roms) $(pokegold_obj) $(pokesilver_obj) $(pokegold_debug_obj) $(pokesilver_debug_obj) $(roms:.gbc=.map) $(roms:.gbc=.sym) rgbdscheck.o
 	$(MAKE) clean -C tools/
 
 compare: $(roms)
