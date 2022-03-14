@@ -24,8 +24,8 @@ rom_obj := \
 
 # Distinguish asm files which are game-exclusive for building (*_[gold|silver].asm)
 gs_excl_asm := \
-data/pokemon/dex_entries \
-gfx/pics
+	data/pokemon/dex_entries \
+	gfx/pics
 
 gold_excl_obj         := $(addsuffix _gold.o,$(gs_excl_asm))
 silver_excl_obj       := $(addsuffix _silver.o,$(gs_excl_asm))
