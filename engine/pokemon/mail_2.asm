@@ -48,7 +48,13 @@ ReadAnyMail:
 	ldh a, [hJoyPressed]
 	and A_BUTTON | B_BUTTON | START
 	jr z, .loop
+	vc_patch print_forbid_4
+if DEF(_GOLD_VC) || DEF(_SILVER_VC)
+	and 0
+else
 	and START
+endc
+	vc_patch_end
 	jr nz, .pressed_start
 	ret
 

@@ -65,7 +65,13 @@ Gen2ToGen1LinkComms:
 .player_1
 	ld de, MUSIC_NONE
 	call PlayMusic
+	vc_patch NetworkDelay1
+if DEF(_GOLD_VC) || DEF(_SILVER_VC)
+	ld c, 26
+else
 	ld c, 3
+endc
+	vc_patch_end
 	call DelayFrames
 	xor a
 	ldh [rIF], a
@@ -75,6 +81,7 @@ Gen2ToGen1LinkComms:
 	ld hl, wLinkBattleRNPreamble
 	ld de, wEnemyMon
 	ld bc, SERIAL_RN_PREAMBLE_LENGTH + SERIAL_RNS_LENGTH
+	vc_hook Network358
 	call Serial_ExchangeBytes
 	ld a, SERIAL_NO_DATA_BYTE
 	ld [de], a
@@ -82,6 +89,7 @@ Gen2ToGen1LinkComms:
 	ld hl, wLinkData
 	ld de, wOTPartyData
 	ld bc, SERIAL_PREAMBLE_LENGTH + NAME_LENGTH + 1 + PARTY_LENGTH + 1 + (REDMON_STRUCT_LENGTH + NAME_LENGTH * 2) * PARTY_LENGTH + 3
+	vc_hook Network359
 	call Serial_ExchangeBytes
 	ld a, SERIAL_NO_DATA_BYTE
 	ld [de], a
@@ -89,6 +97,7 @@ Gen2ToGen1LinkComms:
 	ld hl, wPlayerPatchLists
 	ld de, wOTPatchLists
 	ld bc, 200
+	vc_hook Network364
 	call Serial_ExchangeBytes
 
 	xor a
@@ -222,7 +231,13 @@ Gen2ToGen2LinkComms:
 .player_1
 	ld de, MUSIC_NONE
 	call PlayMusic
+	vc_patch NetworkDelay4
+if DEF(_GOLD_VC) || DEF(_SILVER_VC)
+	ld c, 26
+else
 	ld c, 3
+endc
+	vc_patch_end
 	call DelayFrames
 	xor a
 	ldh [rIF], a
@@ -232,6 +247,7 @@ Gen2ToGen2LinkComms:
 	ld hl, wLinkBattleRNPreamble
 	ld de, wEnemyMon
 	ld bc, SERIAL_RN_PREAMBLE_LENGTH + SERIAL_RNS_LENGTH
+	vc_hook Network360
 	call Serial_ExchangeBytes
 	ld a, SERIAL_NO_DATA_BYTE
 	ld [de], a
@@ -239,6 +255,7 @@ Gen2ToGen2LinkComms:
 	ld hl, wLinkData
 	ld de, wOTPartyData
 	ld bc, SERIAL_PREAMBLE_LENGTH + NAME_LENGTH + 1 + PARTY_LENGTH + 1 + 2 + (PARTYMON_STRUCT_LENGTH + NAME_LENGTH * 2) * PARTY_LENGTH + 3
+	vc_hook Network361
 	call Serial_ExchangeBytes
 	ld a, SERIAL_NO_DATA_BYTE
 	ld [de], a
@@ -246,6 +263,7 @@ Gen2ToGen2LinkComms:
 	ld hl, wPlayerPatchLists
 	ld de, wOTPatchLists
 	ld bc, 200
+	vc_hook Network362
 	call Serial_ExchangeBytes
 
 	ld a, [wLinkMode]
@@ -254,6 +272,7 @@ Gen2ToGen2LinkComms:
 	ld hl, wLinkPlayerMail
 	ld de, wLinkOTMail
 	ld bc, wLinkPlayerMailEnd - wLinkPlayerMail
+	vc_hook Network363
 	call ExchangeBytes
 
 .not_trading
@@ -1463,6 +1482,7 @@ ExitLinkCommunications:
 	ldh [rSC], a
 	ld a, (1 << rSC_ON) | (1 << rSC_CLOCK)
 	ldh [rSC], a
+	vc_hook ret_heya
 	ret
 
 PlaceTradeScreenFooter:
@@ -1840,6 +1860,7 @@ LinkTrade:
 	hlcoord 1, 14
 	ld de, String_TradeCompleted
 	call PlaceString
+	vc_hook save_game_end
 	ld c, 50
 	call DelayFrames
 	ld a, [wLinkMode]
@@ -2027,10 +2048,19 @@ GetIncompatibleMonName:
 	ret
 
 EnterTimeCapsule:
+	vc_patch NetworkDelay2
+if DEF(_GOLD_VC) || DEF(_SILVER_VC)
+	ld c, $1a
+	call DelayFrames
+	ld a, $4
+	call Link_EnsureSync
+else
 	ld a, $4
 	call Link_EnsureSync
 	ld c, 40
 	call DelayFrames
+endc
+	vc_patch_end
 	xor a
 	ldh [hVBlank], a
 	inc a ; LINK_TIMECAPSULE
@@ -2074,6 +2104,7 @@ WaitForOtherPlayerToExit:
 	ld [hl], a
 	ldh [hVBlank], a
 	ld [wLinkMode], a
+	vc_hook term_exit
 	ret
 
 SetBitsForLinkTradeRequest:
@@ -2138,6 +2169,7 @@ WaitForLinkedFriend:
 	ld a, (0 << rSC_ON) | (0 << rSC_CLOCK)
 	ldh [rSC], a
 	ld a, (1 << rSC_ON) | (0 << rSC_CLOCK)
+	vc_hook linkCable_fake_begin
 	ldh [rSC], a
 	ld a, [wLinkTimeoutFrames]
 	dec a
@@ -2230,7 +2262,13 @@ CheckLinkTimeout_Gen2:
 	ld a, $6
 	ld [wPlayerLinkAction], a
 	ld hl, wLinkTimeoutFrames
+	vc_patch NetworkDelay6
+if DEF(_GOLD_VC) || DEF(_SILVER_VC)
+	ld a, $3
+else
 	ld a, 1
+endc
+	vc_patch_end
 	ld [hli], a
 	ld [hl], 50
 	call Link_CheckCommunicationError
@@ -2251,9 +2289,11 @@ CheckLinkTimeout_Gen2:
 Link_CheckCommunicationError:
 	xor a
 	ldh [hSerialReceivedNewData], a
+	vc_hook linkCable_fake_end
 	call WaitLinkTransfer
 
 	ld hl, wLinkTimeoutFrames
+	vc_hook Network_RECHECK
 	ld a, [hli]
 	inc a
 	jr nz, .load_true
@@ -2261,7 +2301,13 @@ Link_CheckCommunicationError:
 	inc a
 	jr nz, .load_true
 
+	vc_patch NetworkDelay3
+if DEF(_GOLD_VC) || DEF(_SILVER_VC)
+	ld b, 26
+else
 	ld b, 10
+endc
+	vc_patch_end
 .loop
 	call DelayFrame
 	call LinkDataReceived
@@ -2287,8 +2333,10 @@ TryQuickSave:
 	ld a, [wChosenCableClubRoom]
 	push af
 	farcall Link_SaveGame
+	vc_hook linkCable_block_input
 	ld a, TRUE
 	jr nc, .return_result
+	vc_hook linkCable_block_input2
 	xor a ; FALSE
 .return_result
 	ld [wScriptVar], a
@@ -2325,6 +2373,7 @@ CheckBothSelectedSameRoom:
 	ret
 
 TimeCapsule:
+	vc_hook to_play2_mons1
 	ld a, LINK_TIMECAPSULE
 	ld [wLinkMode], a
 	call DisableSpriteUpdates
@@ -2335,6 +2384,7 @@ TimeCapsule:
 	ret
 
 TradeCenter:
+	vc_hook to_play2_trade
 	ld a, LINK_TRADECENTER
 	ld [wLinkMode], a
 	call DisableSpriteUpdates
@@ -2345,6 +2395,7 @@ TradeCenter:
 	ret
 
 Colosseum:
+	vc_hook to_play2_battle
 	ld a, LINK_COLOSSEUM
 	ld [wLinkMode], a
 	call DisableSpriteUpdates
@@ -2357,6 +2408,7 @@ Colosseum:
 CloseLink:
 	ld c, 3
 	call DelayFrames
+	vc_hook room_check
 	jp Link_ResetSerialRegistersAfterLinkClosure
 
 FailedLinkToPast:

@@ -5671,6 +5671,7 @@ LinkBattleSendReceiveAction:
 
 .use_move
 	ld [wPlayerLinkAction], a
+	vc_hook send_byt2
 	callfar PlaceWaitingText
 
 .waiting
@@ -5680,20 +5681,35 @@ LinkBattleSendReceiveAction:
 	inc a
 	jr z, .waiting
 
+	vc_hook send_byt2_ret
+	vc_patch send_byt2_wait
+if DEF(_GOLD_VC) || DEF(_SILVER_VC)
+	ld b, 26
+else
 	ld b, 10
+endc
+	vc_patch_end
 .receive
 	call DelayFrame
 	call LinkTransfer
 	dec b
 	jr nz, .receive
 
+	vc_hook send_dummy
+	vc_patch send_dummy_wait
+if DEF(_GOLD_VC) || DEF(_SILVER_VC)
+	ld b, 26
+else
 	ld b, 10
+endc
+	vc_patch_end
 .acknowledge
 	call DelayFrame
 	call LinkDataReceived
 	dec b
 	jr nz, .acknowledge
 
+	vc_hook send_dummy_end
 	ret
 
 LoadEnemyMon:
@@ -8544,6 +8560,7 @@ InitBattleDisplay:
 	predef PlaceGraphic
 	xor a
 	ldh [hWY], a
+	vc_hook fight_begin
 	ldh [rWY], a
 	call WaitBGMap
 	call HideSprites
