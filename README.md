@@ -9,7 +9,7 @@ It builds the following ROMs:
 - mons2_gld_ps3_debug.bin `sha1: 53783c57378122805c5b4859d19e1a224f02a1ed`
 - mons2_slv_ps3_debug.bin `sha1: 4c2fafebdbc7551f4cd3f348bdd17e420b93b6e7`
 - DMGAAUP0.J56.patch `sha1: b8253b915ade89c784c71adfdb11cf60bc1f7b59`
-- DMGAAXS0.K10.patch `sha1: a38c0dec807e8a9e3626a0ec0fdf96bfb795ef3a`
+- DMGAAXP0.J57.patch `sha1: a38c0dec807e8a9e3626a0ec0fdf96bfb795ef3a`
 
 To set up the repository, see [INSTALL.md](INSTALL.md).
 
