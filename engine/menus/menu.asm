@@ -215,6 +215,7 @@ _ScrollingMenuJoypad::
 	jr .loopRTC
 
 .pressed
+	vc_hook print_forbid_3
 	call _2DMenuInterpretJoypad
 	jp c, .done
 	ld a, [w2DMenuFlags1]
@@ -244,6 +245,7 @@ Menu_WasButtonPressed:
 	and a
 	ret z
 	scf
+	vc_hook print_forbid_2
 	ret
 
 _2DMenuInterpretJoypad:

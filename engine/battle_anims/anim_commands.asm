@@ -39,6 +39,7 @@ BattleAnimRunScript:
 	bit 7, a
 	jr nz, .disabled
 
+	vc_hook Reduce_move_anim_flashing
 	call BattleAnimClearHud
 	call RunBattleAnimScript
 
@@ -142,6 +143,7 @@ BattleAnimRestoreHuds:
 	call BattleAnimDelayFrame
 	call BattleAnimDelayFrame
 	call WaitTop
+	vc_hook Stop_reducing_move_anim_flashing
 	ret
 
 BattleAnimRequestPals:
@@ -646,6 +648,7 @@ BattleAnimCmd_5GFX:
 	xor a
 	ld [wBattleAnimGFXTempTileID], a
 .loop
+	vc_hook FPA_042801_Begin
 	ld a, [wBattleAnimGFXTempTileID]
 	cp (vTiles1 - vTiles0) / LEN_2BPP_TILE - BATTLEANIM_BASE_TILE
 	ret nc

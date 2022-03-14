@@ -761,6 +761,7 @@ _PushSGBPals:
 
 InitSGBBorder:
 	call CheckCGB
+	vc_hook Network_RESET
 	ret nz
 
 ; SGB/DMG only
