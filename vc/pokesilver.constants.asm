@@ -1,6 +1,6 @@
 INCLUDE "constants.asm"
 
-; These are all the asm constants needed to make the silvervc patch.
+; These are all the asm constants needed to make the silver_vc patch.
 
 vc_const: MACRO
 x = \1

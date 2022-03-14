@@ -1,6 +1,6 @@
 INCLUDE "constants.asm"
 
-; These are all the asm constants needed to make the goldvc patch.
+; These are all the asm constants needed to make the gold_vc patch.
 
 vc_const: MACRO
 x = \1
