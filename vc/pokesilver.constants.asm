@@ -27,7 +27,8 @@ ENDM
 ; [FPA 004 Begin]
 	vc_const "Y"
 	vc_const "P"
-charmap "<SPACE>", " "
+	; "<SPACE>" is necessary since spaces separate template command arguments
+	charmap "<SPACE>", " "
 	vc_const "<SPACE>"
 
 ; [FPA 005 Begin]
@@ -39,6 +40,9 @@ charmap "<SPACE>", " "
 ; [FPA 007 Begin]
 	vc_const "A"
 	vc_const "@"
+
+; [FPA 042801 Begin]
+	vc_const ANIM_GFX_BUBBLE
 
 ; [fight begin]
 	vc_const SCREEN_HEIGHT_PX

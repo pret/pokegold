@@ -423,9 +423,9 @@ Dark0 = 5
 MotionBEnable0 = 3                                                                                                                               
 MotionBlur0 = 11                                                                                                                                 
 ConditionType = 0                                                                                                                                
-ConditionValueA = {dws_ wStringBuffer2 wStringBuffer2+1 wStringBuffer2+2 wStringBuffer2+3 wStringBuffer2+4 wStringBuffer2+5 wMysteryGiftStagedDataLength}                                                                              
-ConditionValueB = {dws_ ==             ==               ==               ==               ==               ==               ==                          }                                                                                 
-ConditionValueC = {dws_ "P"            "R"              "E"              "S"              "E"              "N"              0x0d                        }                                                                                 
+ConditionValueA = {dws_ wStringBuffer2 wStringBuffer2+1 wStringBuffer2+2 wStringBuffer2+3 wStringBuffer2+4 wStringBuffer2+5 wBattleAnimTileDict+2}                                                                              
+ConditionValueB = {dws_ ==             ==               ==               ==               ==               ==               ==                   }                                                                                 
+ConditionValueC = {dws_ "P"            "R"              "E"              "S"              "E"              "N"              ANIM_GFX_BUBBLE      }                                                                                 
 
                                                    
 
@@ -688,12 +688,12 @@ Fixcode={PATCH}
 ;00029fc8h: 30 3E 3A 21 E9 4F CF CD 8C 61 CD C4 61 CD 0B 62 
 ;00029fd8h: F0 BE FE 10                                     
                                 
-[infrared fake 1]                                                  
+[infrared fake 1@infrared_fake]                                                  
 Mode = 1                                                          
 Address = {hex @}                                      
-Fixcode={patch +0 21}      
+Fixcode={patch 0 21}      
 
-[infrared fake 2]                    
+[infrared fake 2@infrared_fake]                    
 Mode = 2                             
 Address = {hex @}                    
 Type = 101    

@@ -1,24 +1,26 @@
-roms    := pokegold.gbc \
-           pokesilver.gbc \
-           pokegold_debug.gbc \
-           pokesilver_debug.gbc
-patches := pokegold.patch \
-           pokesilver.patch
+roms := \
+	pokegold.gbc \
+	pokesilver.gbc \
+	pokegold_debug.gbc \
+	pokesilver_debug.gbc
+patches := \
+	pokegold.patch \
+	pokesilver.patch
 
 rom_obj := \
-audio.o \
-home.o \
-main.o \
-wram.o \
-data/text/common.o \
-data/maps/map_data.o \
-data/pokemon/egg_moves.o \
-data/pokemon/evos_attacks.o \
-engine/movie/credits.o \
-engine/overworld/events.o \
-gfx/misc.o \
-gfx/sprites.o \
-gfx/tilesets.o
+	audio.o \
+	home.o \
+	main.o \
+	wram.o \
+	data/text/common.o \
+	data/maps/map_data.o \
+	data/pokemon/egg_moves.o \
+	data/pokemon/evos_attacks.o \
+	engine/movie/credits.o \
+	engine/overworld/events.o \
+	gfx/misc.o \
+	gfx/sprites.o \
+	gfx/tilesets.o
 
 # Distinguish asm files which are game-exclusive for building (*_[gold|silver].asm)
 gs_excl_asm := \
@@ -82,7 +84,8 @@ clean: tidy
 
 tidy:
 	$(RM) $(roms) \
-	      $(patches:.patch=.gbc) \
+	      $(roms:.gbc=.sym) \
+	      $(roms:.gbc=.map) \
 	      $(patches) \
 	      $(patches:.patch=_vc.gbc) \
 	      $(patches:.patch=_vc.sym) \
@@ -95,7 +98,6 @@ tidy:
 	      $(pokegold_debug_obj) \
 	      $(pokesilver_debug_obj) \
 	      rgbdscheck.o
-	$(RM) $(roms) $(pokegold_obj) $(pokesilver_obj) $(pokegold_debug_obj) $(pokesilver_debug_obj) $(roms:.gbc=.map) $(roms:.gbc=.sym) rgbdscheck.o
 	$(MAKE) clean -C tools/
 
 compare: $(roms) $(patches)
@@ -118,10 +120,8 @@ $(pokesilver_debug_obj): RGBASMFLAGS += -D _SILVER -D _DEBUG
 $(pokegold_vc_obj):      RGBASMFLAGS += -D _GOLD -D _GOLD_VC
 $(pokesilver_vc_obj):    RGBASMFLAGS += -D _SILVER -D _GOLD_VC
 
-%.patch: %_vc.sym vc/%.constants.sym %_vc.gbc %.gbc vc/%.patch.template
-	tools/make_patch $^ $@
-
-%.sym: ;
+%.patch: vc/%.constants.sym %_vc.gbc %.gbc vc/%.patch.template
+	tools/make_patch $*_vc.sym $^ $@
 
 rgbdscheck.o: rgbdscheck.asm
 	$(RGBASM) -o $@ $<
@@ -152,7 +152,7 @@ $(foreach obj, $(filter-out $(silver_debug_excl_obj), $(pokesilver_debug_obj)), 
 $(foreach obj, $(filter-out $(gold_vc_excl_obj), $(pokegold_vc_obj)), \
 	$(eval $(call DEP,$(obj),$(obj:_gold_vc.o=.asm))))
 $(foreach obj, $(filter-out $(silver_vc_excl_obj), $(pokesilver_vc_obj)), \
-        $(eval $(call DEP,$(obj),$(obj:_silver_vc.o=.asm))))
+	$(eval $(call DEP,$(obj),$(obj:_silver_vc.o=.asm))))
 
 # Dependencies for game-exclusive objects (keep _gold and _silver in asm file basenames)
 $(foreach obj, $(gold_excl_obj) $(silver_excl_obj), \
@@ -162,9 +162,9 @@ $(foreach obj, $(gold_debug_excl_obj), \
 $(foreach obj, $(silver_debug_excl_obj), \
 	$(eval $(call DEP,$(obj),$(obj:_silver_debug.o=_silver.asm))))
 $(foreach obj, $(gold_vc_excl_obj), \
-        $(eval $(call DEP,$(obj),$(obj:_gold_vc.o=_gold.asm))))
+	$(eval $(call DEP,$(obj),$(obj:_gold_vc.o=_gold.asm))))
 $(foreach obj, $(silver_vc_excl_obj), \
-        $(eval $(call DEP,$(obj),$(obj:_silver_vc.o=_silver.asm))))
+	$(eval $(call DEP,$(obj),$(obj:_silver_vc.o=_silver.asm))))
 
 # Dependencies for VC files that need to run scan_includes
 %.constants.sym: %.constants.asm $(shell tools/scan_includes %.constants.asm) | rgbdscheck.o

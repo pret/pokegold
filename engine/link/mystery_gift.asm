@@ -265,15 +265,15 @@ endc
 
 ExchangeMysteryGiftData:
 	farcall ClearChannels
-	vc_hook infrared_fake_2
-	vc_patch infrared_fake_1
+	vc_patch infrared_fake
 if DEF(_GOLD_VC) || DEF(_SILVER_VC)
 	nop
 	vc_hook infrared_fake_5
 	nop
 	nop
+
 .restart ; same location as unpatched .restart
-	ld d, $ef
+	ld d, 239
 .loop
 	dec d
 	ld a, d
@@ -288,7 +288,7 @@ if DEF(_GOLD_VC) || DEF(_SILVER_VC)
 	cp MG_OKAY
 	jr nz, .restart
 	ret
-	db LOW(hMGRole)
+	db LOW(hMGRole) ; unpatched byte left from 'ldh a, [hMGRole]'
 else
 	call InitializeIRCommunicationInterrupts
 

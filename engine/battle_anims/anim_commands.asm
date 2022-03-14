@@ -39,7 +39,7 @@ BattleAnimRunScript:
 	bit 7, a
 	jr nz, .disabled
 
-        vc_hook Reduce_move_anim_flashing
+	vc_hook Reduce_move_anim_flashing
 	call BattleAnimClearHud
 	call RunBattleAnimScript
 

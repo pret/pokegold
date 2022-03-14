@@ -2050,7 +2050,7 @@ GetIncompatibleMonName:
 EnterTimeCapsule:
 	vc_patch NetworkDelay2
 if DEF(_GOLD_VC) || DEF(_SILVER_VC)
-	ld c, $1a
+	ld c, 26
 	call DelayFrames
 	ld a, $4
 	call Link_EnsureSync
@@ -2264,7 +2264,7 @@ CheckLinkTimeout_Gen2:
 	ld hl, wLinkTimeoutFrames
 	vc_patch NetworkDelay6
 if DEF(_GOLD_VC) || DEF(_SILVER_VC)
-	ld a, $3
+	ld a, 3
 else
 	ld a, 1
 endc
