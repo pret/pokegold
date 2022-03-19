@@ -145,8 +145,8 @@ FuchsiaCity_Blocks:
 Route38_Blocks:
 	INCBIN "maps/Route38.blk"
 
-BetaUnusedTown_Blocks: ; unreferenced
-	INCBIN "maps/unused/BetaUnusedTown.blk"
+BetaTown_Blocks: ; unreferenced
+	INCBIN "maps/unused/BetaTown.blk"
 
 OlivineTimsHouse_Blocks:
 OlivineHouseBeta_Blocks:
@@ -446,8 +446,8 @@ VioletNicknameSpeechHouse_Blocks:
 VioletKylesHouse_Blocks:
 	INCBIN "maps/House2.blk"
 
-BetaCaveTestMap_Blocks: ; unreferenced
-	INCBIN "maps/unused/BetaCaveTestMap.blk"
+BetaCave1_Blocks: ; unreferenced
+	INCBIN "maps/unused/BetaCave1.blk"
 
 UnionCaveB1F_Blocks:
 	INCBIN "maps/UnionCaveB1F.blk"
@@ -622,8 +622,8 @@ BurnedTower1F_Blocks:
 BurnedTowerB1F_Blocks:
 	INCBIN "maps/BurnedTowerB1F.blk"
 
-BetaBurnedTowerB2F_Blocks: ; unreferenced
-	INCBIN "maps/unused/BetaBurnedTowerB2F.blk"
+BetaCave3_Blocks: ; unreferenced
+	INCBIN "maps/unused/BetaCave3.blk"
 
 MountMortar1FOutside_Blocks:
 	INCBIN "maps/MountMortar1FOutside.blk"
@@ -685,17 +685,17 @@ SilverCaveRoom2_Blocks:
 SilverCaveRoom3_Blocks:
 	INCBIN "maps/SilverCaveRoom3.blk"
 
-BetaHauntedHouse1F_Blocks: ; unreferenced
-	INCBIN "maps/unused/BetaHauntedHouse1F.blk"
+BetaDungeon1F_Blocks: ; unreferenced
+	INCBIN "maps/unused/BetaDungeon1F.blk"
 
-BetaHauntedHouse2F_Blocks: ; unreferenced
-	INCBIN "maps/unused/BetaHauntedHouse2F.blk"
+BetaDungeon2F_Blocks: ; unreferenced
+	INCBIN "maps/unused/BetaDungeon2F.blk"
 
-BetaHauntedHouse3F_Blocks: ; unreferenced
-	INCBIN "maps/unused/BetaHauntedHouse3F.blk"
+BetaDungeon3F_Blocks: ; unreferenced
+	INCBIN "maps/unused/BetaDungeon3F.blk"
 
-BetaHauntedHouseB1F_Blocks: ; unreferenced
-	INCBIN "maps/unused/BetaHauntedHouseB1F.blk"
+BetaDungeonB1F_Blocks: ; unreferenced
+	INCBIN "maps/unused/BetaDungeonB1F.blk"
 
 MahoganyMart1F_Blocks:
 MountMoonGiftShop_Blocks:
@@ -779,8 +779,8 @@ OlivineLighthouse6F_Blocks:
 
 SECTION "Map Blocks 3", ROMX
 
-BetaUnusedCave_Blocks: ; unreferenced
-	INCBIN "maps/unused/BetaUnusedCave.blk"
+BetaCave2_Blocks: ; unreferenced
+	INCBIN "maps/unused/BetaCave2.blk"
 
 SlowpokeWellB1F_Blocks:
 	INCBIN "maps/SlowpokeWellB1F.blk"
