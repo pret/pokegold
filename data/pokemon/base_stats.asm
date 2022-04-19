@@ -1,5 +1,5 @@
 ; used in data/pokemon/base_stats/*.asm
-tmhm: MACRO
+MACRO tmhm
 ; initialize bytes to 0
 for n, (NUM_TM_HM + 7) / 8
 	DEF _tm{d:n} = 0

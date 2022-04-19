@@ -1,7 +1,7 @@
 ; Special routines can be used with the "special" map script command.
 ; They often use wScriptVar for arguments and return values.
 
-add_special: MACRO
+MACRO add_special
 ; Some ROM0 specials have a nonzero bank.
 \1Special::
 if _NARG == 1

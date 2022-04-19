@@ -1108,7 +1108,7 @@ ENDC
 
 IF DEF(_GOLD)
 .TitleTrailCoords:
-trail_coords: MACRO
+MACRO trail_coords
 rept _NARG / 2
 	DEF _dx = 4
 if \1 == 0 && \2 == 0

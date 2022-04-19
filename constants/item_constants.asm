@@ -200,12 +200,12 @@ DEF NUM_ITEMS EQU const_value - 1
 
 DEF __tmhm_value__ = 1
 
-add_tmnum: MACRO
+MACRO add_tmnum
 	DEF \1_TMNUM EQU __tmhm_value__
 	DEF __tmhm_value__ += 1
 ENDM
 
-add_tm: MACRO
+MACRO add_tm
 ; Defines three constants:
 ; - TM_\1: the item id, starting at $bf
 ; - \1_TMNUM: the learnable TM/HM flag, starting at 1
@@ -271,7 +271,7 @@ DEF TM01 EQU const_value
 	add_tm NIGHTMARE    ; f2
 DEF NUM_TMS EQU __tmhm_value__ - 1
 
-add_hm: MACRO
+MACRO add_hm
 ; Defines three constants:
 ; - HM_\1: the item id, starting at $f3
 ; - \1_TMNUM: the learnable TM/HM flag, starting at 51

@@ -9,7 +9,7 @@
 	const PARTYMENUQUALITY_EVO_STONE_COMPAT
 	const PARTYMENUQUALITY_GENDER
 
-partymenuqualities: MACRO
+MACRO partymenuqualities
 rept _NARG
 	db PARTYMENUQUALITY_\1
 	shift

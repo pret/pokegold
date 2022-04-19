@@ -1027,7 +1027,7 @@ EraseBoxes:
 	jr nz, .next
 	ret
 
-box_address: MACRO
+MACRO box_address
 	assert BANK(\1) == BANK(\2)
 	db BANK(\1)
 	dw \1, \2

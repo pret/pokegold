@@ -1355,7 +1355,7 @@ BillsPC_RefreshTextboxes:
 .Placeholder:
 	db "-----@"
 
-copy_box_data: MACRO
+MACRO copy_box_data
 .loop\@
 	ld a, [hl]
 	cp -1

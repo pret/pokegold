@@ -175,7 +175,7 @@ NextChar::
 	jp PlaceNextChar
 
 CheckDict::
-dict: MACRO
+MACRO dict
 assert CHARLEN(\1) == 1
 if \1 == 0
 	and a
@@ -275,7 +275,7 @@ ENDM
 	call PrintLetterDelay
 	jp NextChar
 
-print_name: MACRO
+MACRO print_name
 	push de
 	ld de, \1
 	jp PlaceCommandCharacter
