@@ -1,23 +1,23 @@
 ; sprite_anim_struct members (see macros/wram.asm)
 rsreset
-SPRITEANIMSTRUCT_INDEX           rb ; 0
-SPRITEANIMSTRUCT_FRAMESET_ID     rb ; 1
-SPRITEANIMSTRUCT_ANIM_SEQ_ID     rb ; 2
-SPRITEANIMSTRUCT_TILE_ID         rb ; 3
-SPRITEANIMSTRUCT_XCOORD          rb ; 4
-SPRITEANIMSTRUCT_YCOORD          rb ; 5
-SPRITEANIMSTRUCT_XOFFSET         rb ; 6
-SPRITEANIMSTRUCT_YOFFSET         rb ; 7
-SPRITEANIMSTRUCT_DURATION        rb ; 8
-SPRITEANIMSTRUCT_DURATIONOFFSET  rb ; 9
-SPRITEANIMSTRUCT_FRAME           rb ; a
-SPRITEANIMSTRUCT_JUMPTABLE_INDEX rb ; b
-SPRITEANIMSTRUCT_VAR1            rb ; c
-SPRITEANIMSTRUCT_VAR2            rb ; d
-SPRITEANIMSTRUCT_VAR3            rb ; e
-SPRITEANIMSTRUCT_VAR4            rb ; f
-SPRITEANIMSTRUCT_LENGTH EQU _RS
-NUM_SPRITE_ANIM_STRUCTS EQU 10 ; see wSpriteAnimationStructs
+DEF SPRITEANIMSTRUCT_INDEX           rb ; 0
+DEF SPRITEANIMSTRUCT_FRAMESET_ID     rb ; 1
+DEF SPRITEANIMSTRUCT_ANIM_SEQ_ID     rb ; 2
+DEF SPRITEANIMSTRUCT_TILE_ID         rb ; 3
+DEF SPRITEANIMSTRUCT_XCOORD          rb ; 4
+DEF SPRITEANIMSTRUCT_YCOORD          rb ; 5
+DEF SPRITEANIMSTRUCT_XOFFSET         rb ; 6
+DEF SPRITEANIMSTRUCT_YOFFSET         rb ; 7
+DEF SPRITEANIMSTRUCT_DURATION        rb ; 8
+DEF SPRITEANIMSTRUCT_DURATIONOFFSET  rb ; 9
+DEF SPRITEANIMSTRUCT_FRAME           rb ; a
+DEF SPRITEANIMSTRUCT_JUMPTABLE_INDEX rb ; b
+DEF SPRITEANIMSTRUCT_VAR1            rb ; c
+DEF SPRITEANIMSTRUCT_VAR2            rb ; d
+DEF SPRITEANIMSTRUCT_VAR3            rb ; e
+DEF SPRITEANIMSTRUCT_VAR4            rb ; f
+DEF SPRITEANIMSTRUCT_LENGTH EQU _RS
+DEF NUM_SPRITE_ANIM_STRUCTS EQU 10 ; see wSpriteAnimationStructs
 
 ; wSpriteAnimDict keys (see wram.asm)
 ; UnusedSpriteAnimGFX indexes (see data/sprite_anims/unused_gfx.asm)
@@ -30,10 +30,10 @@ NUM_SPRITE_ANIM_STRUCTS EQU 10 ; see wSpriteAnimationStructs
 	const SPRITE_ANIM_DICT_GS_SPLASH    ; 6
 	const SPRITE_ANIM_DICT_SLOTS        ; 7
 	const SPRITE_ANIM_DICT_ARROW_CURSOR ; 8
-NUM_SPRITE_ANIM_GFX EQU const_value
+DEF NUM_SPRITE_ANIM_GFX EQU const_value
 
 ; wSpriteAnimDict size (see wram.asm)
-NUM_SPRITEANIMDICT_ENTRIES EQU 10
+DEF NUM_SPRITEANIMDICT_ENTRIES EQU 10
 
 ; SpriteAnimSeqData indexes (see data/sprite_anims/sequences.asm)
 	const_def
@@ -84,7 +84,7 @@ NUM_SPRITEANIMDICT_ENTRIES EQU 10
 	const SPRITE_ANIM_INDEX_GS_INTRO_HO_OH_LUGIA      ; 2c
 	const SPRITE_ANIM_INDEX_HEADBUTT                  ; 2d
 	const SPRITE_ANIM_INDEX_EGG_HATCH                 ; 2e
-NUM_SPRITE_ANIM_INDEXES EQU const_value
+DEF NUM_SPRITE_ANIM_INDEXES EQU const_value
 
 ; DoAnimFrame.Jumptable indexes (see engine/gfx/sprite_anims.asm)
 	const_def
@@ -130,7 +130,7 @@ NUM_SPRITE_ANIM_INDEXES EQU const_value
 	const SPRITE_ANIM_SEQ_FLY_LEAF                    ; 27
 	const SPRITE_ANIM_SEQ_FLY_TO                      ; 28
 	const SPRITE_ANIM_SEQ_GS_INTRO_HO_OH_LUGIA        ; 29
-NUM_SPRITE_ANIM_SEQS EQU const_value
+DEF NUM_SPRITE_ANIM_SEQS EQU const_value
 
 ; SpriteAnimFrameData indexes (see data/sprite_anims/framesets.asm)
 	const_def
@@ -190,7 +190,7 @@ NUM_SPRITE_ANIM_SEQS EQU const_value
 	const SPRITE_ANIM_FRAMESET_EGG_HATCH_4               ; 35
 	const SPRITE_ANIM_FRAMESET_GS_INTRO_HO_OH_LUGIA      ; 36
 	const SPRITE_ANIM_FRAMESET_HEADBUTT                  ; 37
-NUM_SPRITE_ANIM_FRAMESETS EQU const_value
+DEF NUM_SPRITE_ANIM_FRAMESETS EQU const_value
 
 ; SpriteAnimOAMData indexes (see data/sprite_anims/oam.asm)
 	const_def
@@ -286,4 +286,4 @@ NUM_SPRITE_ANIM_FRAMESETS EQU const_value
 	const SPRITE_ANIM_OAMSET_GS_INTRO_HO_OH_LUGIA_4      ; 59
 	const SPRITE_ANIM_OAMSET_GS_INTRO_HO_OH_LUGIA_5      ; 5a
 	const SPRITE_ANIM_OAMSET_HEADBUTT_TREE_2             ; 5b
-NUM_SPRITE_ANIM_OAMSETS EQU const_value
+DEF NUM_SPRITE_ANIM_OAMSETS EQU const_value

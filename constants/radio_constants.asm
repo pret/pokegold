@@ -14,7 +14,7 @@
 	const POKE_FLUTE_RADIO       ; 07
 	const UNOWN_RADIO            ; 08
 	const EVOLUTION_RADIO        ; 09
-NUM_RADIO_CHANNELS EQU const_value
+DEF NUM_RADIO_CHANNELS EQU const_value
 ; internal indexes for channel segments
 	const OAKS_POKEMON_TALK_2    ; 0a
 	const OAKS_POKEMON_TALK_3    ; 0b
@@ -73,7 +73,7 @@ NUM_RADIO_CHANNELS EQU const_value
 	const POKEDEX_SHOW_6         ; 40
 	const POKEDEX_SHOW_7         ; 41
 	const POKEDEX_SHOW_8         ; 42
-NUM_RADIO_SEGMENTS EQU const_value
+DEF NUM_RADIO_SEGMENTS EQU const_value
 
 ; PlayRadioStationPointers indexes (see engine/pokegear/pokegear.asm)
 	const_def
@@ -86,11 +86,11 @@ NUM_RADIO_SEGMENTS EQU const_value
 	const MAPRADIO_PLACES_PEOPLE
 	const MAPRADIO_LETS_ALL_SING
 	const MAPRADIO_ROCKET
-NUM_MAP_RADIO_STATIONS EQU const_value
+DEF NUM_MAP_RADIO_STATIONS EQU const_value
 
 ; These tables in engine/pokegear/radio.asm are all sized to a power of 2
 ; so there's no need for a rejection sampling loop
-NUM_OAKS_POKEMON_TALK_ADVERBS    EQU 16 ; OaksPKMNTalk8.Adverbs
-NUM_OAKS_POKEMON_TALK_ADJECTIVES EQU 16 ; OaksPKMNTalk9.Adjectives
-NUM_PNP_PEOPLE_ADJECTIVES        EQU 16 ; PeoplePlaces5.Adjectives
-NUM_PNP_PLACES_ADJECTIVES        EQU 16 ; PeoplePlaces7.Adjectives
+DEF NUM_OAKS_POKEMON_TALK_ADVERBS    EQU 16 ; OaksPKMNTalk8.Adverbs
+DEF NUM_OAKS_POKEMON_TALK_ADJECTIVES EQU 16 ; OaksPKMNTalk9.Adjectives
+DEF NUM_PNP_PEOPLE_ADJECTIVES        EQU 16 ; PeoplePlaces5.Adjectives
+DEF NUM_PNP_PLACES_ADJECTIVES        EQU 16 ; PeoplePlaces7.Adjectives

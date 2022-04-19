@@ -5,38 +5,38 @@ map_id: MACRO
 	db GROUP_\1, MAP_\1
 ENDM
 
-object_const_def EQUS "const_def 2"
+DEF object_const_def EQUS "const_def 2"
 
 def_scene_scripts: MACRO
-REDEF _NUM_SCENE_SCRIPTS EQUS "_NUM_SCENE_SCRIPTS_\@"
+	REDEF _NUM_SCENE_SCRIPTS EQUS "_NUM_SCENE_SCRIPTS_\@"
 	db {_NUM_SCENE_SCRIPTS}
-{_NUM_SCENE_SCRIPTS} = 0
+	DEF {_NUM_SCENE_SCRIPTS} = 0
 ENDM
 
 scene_script: MACRO
 ;\1: script pointer
 	dw \1
 	dw 0 ; filler
-{_NUM_SCENE_SCRIPTS} += 1
+	DEF {_NUM_SCENE_SCRIPTS} += 1
 ENDM
 
 def_callbacks: MACRO
-REDEF _NUM_CALLBACKS EQUS "_NUM_CALLBACKS_\@"
+	REDEF _NUM_CALLBACKS EQUS "_NUM_CALLBACKS_\@"
 	db {_NUM_CALLBACKS}
-{_NUM_CALLBACKS} = 0
+	DEF {_NUM_CALLBACKS} = 0
 ENDM
 
 callback: MACRO
 ;\1: type: a MAPCALLBACK_* constant
 ;\2: script pointer
 	dbw \1, \2
-{_NUM_CALLBACKS} += 1
+	DEF {_NUM_CALLBACKS} += 1
 ENDM
 
 def_warp_events: MACRO
-REDEF _NUM_WARP_EVENTS EQUS "_NUM_WARP_EVENTS_\@"
+	REDEF _NUM_WARP_EVENTS EQUS "_NUM_WARP_EVENTS_\@"
 	db {_NUM_WARP_EVENTS}
-{_NUM_WARP_EVENTS} = 0
+	DEF {_NUM_WARP_EVENTS} = 0
 ENDM
 
 warp_event: MACRO
@@ -46,13 +46,13 @@ warp_event: MACRO
 ;\4: warp destination: starts at 1
 	db \2, \1, \4
 	map_id \3
-{_NUM_WARP_EVENTS} += 1
+	DEF {_NUM_WARP_EVENTS} += 1
 ENDM
 
 def_coord_events: MACRO
-REDEF _NUM_COORD_EVENTS EQUS "_NUM_COORD_EVENTS_\@"
+	REDEF _NUM_COORD_EVENTS EQUS "_NUM_COORD_EVENTS_\@"
 	db {_NUM_COORD_EVENTS}
-{_NUM_COORD_EVENTS} = 0
+	DEF {_NUM_COORD_EVENTS} = 0
 ENDM
 
 coord_event: MACRO
@@ -64,13 +64,13 @@ coord_event: MACRO
 	db 0 ; filler
 	dw \4
 	dw 0 ; filler
-{_NUM_COORD_EVENTS} += 1
+	DEF {_NUM_COORD_EVENTS} += 1
 ENDM
 
 def_bg_events: MACRO
-REDEF _NUM_BG_EVENTS EQUS "_NUM_BG_EVENTS_\@"
+	REDEF _NUM_BG_EVENTS EQUS "_NUM_BG_EVENTS_\@"
 	db {_NUM_BG_EVENTS}
-{_NUM_BG_EVENTS} = 0
+	DEF {_NUM_BG_EVENTS} = 0
 ENDM
 
 bg_event: MACRO
@@ -80,13 +80,13 @@ bg_event: MACRO
 ;\4: script pointer
 	db \2, \1, \3
 	dw \4
-{_NUM_BG_EVENTS} += 1
+	DEF {_NUM_BG_EVENTS} += 1
 ENDM
 
 def_object_events: MACRO
-REDEF _NUM_OBJECT_EVENTS EQUS "_NUM_OBJECT_EVENTS_\@"
+	REDEF _NUM_OBJECT_EVENTS EQUS "_NUM_OBJECT_EVENTS_\@"
 	db {_NUM_OBJECT_EVENTS}
-{_NUM_OBJECT_EVENTS} = 0
+	DEF {_NUM_OBJECT_EVENTS} = 0
 ENDM
 
 object_event: MACRO
@@ -114,7 +114,7 @@ object_event: MACRO
 	dw \<12>, \<13>
 ; the dummy PlayerObjectTemplate object_event has no def_object_events
 if DEF(_NUM_OBJECT_EVENTS)
-{_NUM_OBJECT_EVENTS} += 1
+	DEF {_NUM_OBJECT_EVENTS} += 1
 endc
 ENDM
 

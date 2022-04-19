@@ -7,7 +7,7 @@ ENDM
 vc_patch: MACRO
 if DEF(_GOLD_VC) || DEF(_SILVER_VC)
 	assert !DEF(CURRENT_VC_PATCH), "Already started a vc_patch"
-CURRENT_VC_PATCH EQUS "\1"
+	DEF CURRENT_VC_PATCH EQUS "\1"
 .VC_{CURRENT_VC_PATCH}::
 endc
 ENDM

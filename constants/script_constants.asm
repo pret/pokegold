@@ -1,15 +1,15 @@
 ; object constants
-PLAYER      EQU  0
-LAST_TALKED EQU -2
+DEF PLAYER      EQU  0
+DEF LAST_TALKED EQU -2
 
 ; string buffer constants
 	const_def
 	const STRING_BUFFER_3 ; use wStringBuffer3
 	const STRING_BUFFER_4 ; use wStringBuffer4
 	const STRING_BUFFER_5 ; use wStringBuffer5
-NUM_STRING_BUFFERS EQU const_value
+DEF NUM_STRING_BUFFERS EQU const_value
 
-STRING_BUFFER_LENGTH EQU 19
+DEF STRING_BUFFER_LENGTH EQU 19
 
 ; checkmoney/takemoney accounts
 	const_def
@@ -66,12 +66,12 @@ STRING_BUFFER_LENGTH EQU 19
 	const VAR_XCOORD           ; 12
 	const VAR_YCOORD           ; 13
 	const VAR_SPECIALPHONECALL ; 14
-NUM_VARS EQU const_value           ; 15
+DEF NUM_VARS EQU const_value           ; 15
 
 ; variable action types
-RETVAR_STRBUF2 EQU 0 << 6
-RETVAR_ADDR_DE EQU 1 << 6
-RETVAR_EXECUTE EQU 2 << 6
+DEF RETVAR_STRBUF2 EQU 0 << 6
+DEF RETVAR_ADDR_DE EQU 1 << 6
+DEF RETVAR_EXECUTE EQU 2 << 6
 
 ; PlayerEventScriptPointers indexes (see engine/overworld/events.asm)
 	const_def -1
@@ -86,7 +86,7 @@ RETVAR_EXECUTE EQU 2 << 6
 	const PLAYEREVENT_WHITEOUT
 	const PLAYEREVENT_HATCH
 	const PLAYEREVENT_JOYCHANGEFACING
-NUM_PLAYER_EVENTS EQU const_value
+DEF NUM_PLAYER_EVENTS EQU const_value
 
 ; PlayerMovementPointers indexes (see engine/overworld/events.asm)
 	const_def
@@ -98,15 +98,15 @@ NUM_PLAYER_EVENTS EQU const_value
 	const PLAYERMOVEMENT_CONTINUE
 	const PLAYERMOVEMENT_EXIT_WATER
 	const PLAYERMOVEMENT_JUMP
-NUM_PLAYER_MOVEMENTS EQU const_value
+DEF NUM_PLAYER_MOVEMENTS EQU const_value
 
 ; script data sizes (see macros/scripts/maps.asm)
-SCENE_SCRIPT_SIZE EQU  4 ; scene_script
-CALLBACK_SIZE     EQU  3 ; callback
-WARP_EVENT_SIZE   EQU  5 ; warp_event
-COORD_EVENT_SIZE  EQU  8 ; coord_event
-BG_EVENT_SIZE     EQU  5 ; bg_event
-OBJECT_EVENT_SIZE EQU 13 ; object_event
+DEF SCENE_SCRIPT_SIZE EQU  4 ; scene_script
+DEF CALLBACK_SIZE     EQU  3 ; callback
+DEF WARP_EVENT_SIZE   EQU  5 ; warp_event
+DEF COORD_EVENT_SIZE  EQU  8 ; coord_event
+DEF BG_EVENT_SIZE     EQU  5 ; bg_event
+DEF OBJECT_EVENT_SIZE EQU 13 ; object_event
 
 ; bg_event types
 ; BGEventJumptable indexes (see engine/overworld/events.asm)
@@ -120,7 +120,7 @@ OBJECT_EVENT_SIZE EQU 13 ; object_event
 	const BGEVENT_IFNOTSET
 	const BGEVENT_ITEM
 	const BGEVENT_COPY
-NUM_BGEVENTS EQU const_value
+DEF NUM_BGEVENTS EQU const_value
 
 ; object_event types
 ; ObjectEventTypeArray indexes (see engine/overworld/events.asm)
@@ -132,17 +132,17 @@ NUM_BGEVENTS EQU const_value
 	const OBJECTTYPE_4
 	const OBJECTTYPE_5
 	const OBJECTTYPE_6
-NUM_OBJECT_TYPES EQU const_value
+DEF NUM_OBJECT_TYPES EQU const_value
 
 ; command queue members
-CMDQUEUE_TYPE  EQU 0
-CMDQUEUE_ADDR  EQU 1
-CMDQUEUE_02    EQU 2
-CMDQUEUE_03    EQU 3
-CMDQUEUE_04    EQU 4
-CMDQUEUE_05    EQU 5
-CMDQUEUE_ENTRY_SIZE EQU 6
-CMDQUEUE_CAPACITY EQU 4
+DEF CMDQUEUE_TYPE  EQU 0
+DEF CMDQUEUE_ADDR  EQU 1
+DEF CMDQUEUE_02    EQU 2
+DEF CMDQUEUE_03    EQU 3
+DEF CMDQUEUE_04    EQU 4
+DEF CMDQUEUE_05    EQU 5
+DEF CMDQUEUE_ENTRY_SIZE EQU 6
+DEF CMDQUEUE_CAPACITY EQU 4
 
 ; HandleQueuedCommand.Jumptable indexes (see engine/overworld/events.asm)
 	const_def
@@ -151,9 +151,9 @@ CMDQUEUE_CAPACITY EQU 4
 	const CMDQUEUE_STONETABLE
 	const CMDQUEUE_TYPE3
 	const CMDQUEUE_TYPE4
-NUM_CMDQUEUE_TYPES EQU const_value
+DEF NUM_CMDQUEUE_TYPES EQU const_value
 
-MAX_XYCOMPARE_LENGTH EQU 32
+DEF MAX_XYCOMPARE_LENGTH EQU 32
 
 ; elevfloor macro values
 ; ElevatorFloorNames indexes (see data/events/elevator_floors.asm)
@@ -174,7 +174,7 @@ MAX_XYCOMPARE_LENGTH EQU 32
 	const FLOOR_10F
 	const FLOOR_11F
 	const FLOOR_ROOF
-NUM_FLOORS EQU const_value
+DEF NUM_FLOORS EQU const_value
 
 ; showemote arguments
 ; Emotes indexes (see data/sprites/emotes.asm)
@@ -191,9 +191,9 @@ NUM_FLOORS EQU const_value
 	const EMOTE_ROD
 	const EMOTE_BOULDER_DUST
 	const EMOTE_GRASS_RUSTLE
-NUM_EMOTES EQU const_value
-EMOTE_FROM_MEM EQU -1
-EMOTE_LENGTH EQU 6
+DEF NUM_EMOTES EQU const_value
+DEF EMOTE_FROM_MEM EQU -1
+DEF EMOTE_LENGTH EQU 6
 
 ; fruittree arguments
 ; FruitTreeItems indexes (see data/items/fruit_trees.asm)
@@ -228,7 +228,7 @@ EMOTE_LENGTH EQU 6
 	const FRUITTREE_PEWTER_CITY_1 ; 1c
 	const FRUITTREE_PEWTER_CITY_2 ; 1d
 	const FRUITTREE_FUCHSIA_CITY  ; 1e
-NUM_FRUIT_TREES EQU const_value - 1
+DEF NUM_FRUIT_TREES EQU const_value - 1
 
 ; describedecoration arguments
 ; DescribeDecoration.JumpTable indexes (see engine/overworld/decorations.asm)
@@ -238,7 +238,7 @@ NUM_FRUIT_TREES EQU const_value - 1
 	const DECODESC_RIGHT_DOLL ; 2
 	const DECODESC_BIG_DOLL   ; 3
 	const DECODESC_CONSOLE    ; 4
-NUM_DECODESCS EQU const_value
+DEF NUM_DECODESCS EQU const_value
 
 ; ActivateFishingSwarm setval arguments
 	const_def
@@ -274,12 +274,12 @@ NUM_DECODESCS EQU const_value
 	const BUGCONTEST_NO_CATCH   ; 2
 
 ; Bug-Catching Contest values
-BUG_CONTEST_BALLS EQU 20
-BUG_CONTEST_MINUTES EQU 20
-BUG_CONTEST_SECONDS EQU 0
-BUG_CONTEST_PLAYER EQU 1
-NUM_BUG_CONTESTANTS EQU 10 ; not counting the player
-BUG_CONTESTANT_SIZE EQU 4
+DEF BUG_CONTEST_BALLS EQU 20
+DEF BUG_CONTEST_MINUTES EQU 20
+DEF BUG_CONTEST_SECONDS EQU 0
+DEF BUG_CONTEST_PLAYER EQU 1
+DEF NUM_BUG_CONTESTANTS EQU 10 ; not counting the player
+DEF BUG_CONTESTANT_SIZE EQU 4
 
 ; HealMachineAnim setval arguments
 ; HealMachineAnim.Pointers indexes (see engine/events/heal_machine_anim.asm)
@@ -295,4 +295,4 @@ BUG_CONTESTANT_SIZE EQU 4
 	const UNOWNPUZZLE_OMANYTE    ; 1
 	const UNOWNPUZZLE_AERODACTYL ; 2
 	const UNOWNPUZZLE_HO_OH      ; 3
-NUM_UNOWN_PUZZLES EQU const_value
+DEF NUM_UNOWN_PUZZLES EQU const_value

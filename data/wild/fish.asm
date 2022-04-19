@@ -1,4 +1,4 @@
-time_group EQUS "0," ; use the nth TimeFishGroups entry
+DEF time_group EQUS "0," ; use the nth TimeFishGroups entry
 
 fishgroup: MACRO
 ; chance, old rod, good rod, super rod

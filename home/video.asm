@@ -157,7 +157,7 @@ UpdateBGMap::
 	jr z, .middle
 	; 2
 
-THIRD_HEIGHT EQU SCREEN_HEIGHT / 3
+DEF THIRD_HEIGHT EQU SCREEN_HEIGHT / 3
 
 ; bottom
 	ld de, 2 * THIRD_HEIGHT * SCREEN_WIDTH
@@ -405,7 +405,7 @@ FillBGMap0WithBlack::
 	jr z, .two
 	; 3
 
-BG_THIRD_HEIGHT EQU (BG_MAP_HEIGHT - SCREEN_HEIGHT) / 2
+DEF BG_THIRD_HEIGHT EQU (BG_MAP_HEIGHT - SCREEN_HEIGHT) / 2
 
 ; Black out the 18 BG Map rows right of the screen area
 	ld a, 2

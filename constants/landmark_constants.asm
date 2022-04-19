@@ -47,7 +47,7 @@
 	const LANDMARK_DARK_CAVE         ; 2b
 	const LANDMARK_ROUTE_46          ; 2c
 	const LANDMARK_SILVER_CAVE       ; 2d
-KANTO_LANDMARK EQU const_value
+DEF KANTO_LANDMARK EQU const_value
 	const LANDMARK_PALLET_TOWN       ; 2e
 	const LANDMARK_ROUTE_1           ; 2f
 	const LANDMARK_VIRIDIAN_CITY     ; 30
@@ -97,10 +97,10 @@ KANTO_LANDMARK EQU const_value
 	const LANDMARK_TOHJO_FALLS       ; 5c
 	const LANDMARK_ROUTE_28          ; 5d
 	const LANDMARK_FAST_SHIP         ; 5e
-NUM_LANDMARKS EQU const_value
+DEF NUM_LANDMARKS EQU const_value
 
 ; Regions
 	const_def
 	const JOHTO_REGION ; 0
 	const KANTO_REGION ; 1
-NUM_REGIONS EQU const_value
+DEF NUM_REGIONS EQU const_value

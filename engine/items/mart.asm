@@ -116,7 +116,7 @@ LoadMartPointer:
 	const STANDARDMART_QUIT           ; 4
 	const STANDARDMART_ANYTHINGELSE   ; 5
 
-STANDARDMART_EXIT EQU -1
+DEF STANDARDMART_EXIT EQU -1
 
 StandardMart:
 .loop

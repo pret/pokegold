@@ -73,7 +73,7 @@ fast_jump_step: MACRO
 	db movement_fast_jump_step | \1
 ENDM
 
-const_inc = 1
+DEF const_inc = 1
 
 ; Control
 	const movement_remove_sliding ; $38
@@ -214,4 +214,4 @@ return_dig: MACRO
 	db \1 ; length
 ENDM
 
-NUM_MOVEMENT_CMDS EQU const_value
+DEF NUM_MOVEMENT_CMDS EQU const_value
