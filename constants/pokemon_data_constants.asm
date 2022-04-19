@@ -20,9 +20,9 @@ rsset BASE_ITEMS
 DEF BASE_ITEM_1      rb
 DEF BASE_ITEM_2      rb
 DEF BASE_GENDER      rb
-                 rb_skip
+                     rb_skip
 DEF BASE_EGG_STEPS   rb
-                 rb_skip
+                     rb_skip
 DEF BASE_PIC_SIZE    rb
 DEF BASE_FRONTPIC    rw
 DEF BASE_BACKPIC     rw
@@ -90,11 +90,11 @@ DEF MON_DVS                rw
 DEF MON_PP                 rb NUM_MOVES
 DEF MON_HAPPINESS          rb
 DEF MON_POKERUS            rb
-                       rb_skip 2
+                           rb_skip 2
 DEF MON_LEVEL              rb
 DEF BOXMON_STRUCT_LENGTH EQU _RS
 DEF MON_STATUS             rb
-                       rb_skip
+                           rb_skip
 DEF MON_HP                 rw
 DEF MON_MAXHP              rw
 DEF MON_STATS              rw NUM_BATTLE_STATS
