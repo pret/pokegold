@@ -257,3 +257,4 @@ MoveNames::
 	li "DRAGON ANGER"
 	li "HORN CHARGE"
 	
+	assert_list_length NUM_ATTACKS
