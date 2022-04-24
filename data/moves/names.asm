@@ -251,4 +251,9 @@ MoveNames::
 	li "ROCK SMASH"
 	li "WHIRLPOOL"
 	li "BEAT UP"
-	assert_list_length NUM_ATTACKS
+	li "SCYTHE SWORD"
+	li "SHADOW THIEF"
+	li "SLAYER"
+	li "DRAGON ANGER"
+	li "HORN CHARGE"
+	
