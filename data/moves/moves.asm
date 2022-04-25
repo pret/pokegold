@@ -144,7 +144,7 @@ Moves:
 	move SWIFT,        EFFECT_ALWAYS_HIT,         42, NORMAL,       100, 20,   0
 	move SKULL_BASH,   EFFECT_SKULL_BASH,         70, NORMAL,       100, 15,   0
 	move SPIKE_CANNON, EFFECT_MULTI_HIT,          14, NORMAL,       100, 15,   0
-	move CONSTRICT,    EFFECT_SPEED_DOWN_HIT,     7, NORMAL,       100, 35,  10
+	move CONSTRICT,    EFFECT_SPEED_DOWN_HIT,      7, NORMAL,       100, 35,  10
 	move AMNESIA,      EFFECT_SP_DEF_UP_2,         0, PSYCHIC_TYPE, 100, 20,   0
 	move KINESIS,      EFFECT_ACCURACY_DOWN,       0, PSYCHIC_TYPE,  80, 15,   0
 	move SOFTBOILED,   EFFECT_HEAL,                0, NORMAL,       100, 10,   0
@@ -236,7 +236,7 @@ Moves:
 	move SACRED_FIRE,  EFFECT_SACRED_FIRE,        49, FIRE,          95,  5,  50
 	move MAGNITUDE,    EFFECT_MAGNITUDE,           1, GROUND,       100, 30,   0
 	move DYNAMICPUNCH, EFFECT_CONFUSE_HIT,        49, FIGHTING,      50,  5, 100
-	move MEGAHORN,     EFFECT_NORMAL_HIT,         84, BUG,           85, 10,   0
+	move MEGAHORN,     EFFECT_NORMAL_HIT,         84, BUG,           90, 10,   0
 	move DRAGONBREATH, EFFECT_PARALYZE_HIT,       42, DRAGON,       100, 20,  30
 	move BATON_PASS,   EFFECT_BATON_PASS,          0, NORMAL,       100, 40,   0
 	move ENCORE,       EFFECT_ENCORE,              0, NORMAL,       100,  5,   0
@@ -265,8 +265,8 @@ Moves:
 	move WHIRLPOOL,    EFFECT_TRAP_TARGET,        11, WATER,         70, 15,   0
 	move BEAT_UP,      EFFECT_BEAT_UP,             7, DARK,         100, 10,   0
 	move SCYTHE_SWORD, EFFECT_NORMAL_HIT,         49, BUG,          100, 15,   0
-	move SHADOW_THIEF, EFFECT_SP_DEF_DOWN_HIT,    56, GHOST,         90, 15,  20
+	move SHADOW_THIEF, EFFECT_SP_DEF_DOWN_HIT,    56, GHOST,        100, 15,  20
 	move SLAYER,       EFFECT_DEFENSE_DOWN_HIT,   42, DRAGON,        95, 20,  20
-	move DRAGON_ANGER, EFFECT_NORMAL_HIT,         70, DRAGON,        85, 10,   0
-	move HORN_CHARGE,  EFFECT_HYPER_BEAM,         84, BUG,           90, 10,   0
+	move DRAGON_ANGER, EFFECT_ATTACK_DOWN_HIT,    70, DRAGON,        90, 10,  10
+	move HORN_CHARGE,  EFFECT_SKULL_BASH,         84, BUG,           95,  5,   0
 	assert_table_length NUM_ATTACKS
