@@ -59,7 +59,7 @@ ItemNames::
 	li "EXP.SHARE"
 	li "OLD ROD"
 	li "GOOD ROD"
-	li "SILVER LEAF"
+	li "GS BALL"
 	li "SUPER ROD"
 	li "PP UP"
 	li "ETHER"
