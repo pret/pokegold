@@ -253,6 +253,11 @@ BattleAnimations::
 	dw BattleAnim_RockSmash
 	dw BattleAnim_Whirlpool
 	dw BattleAnim_BeatUp
+	dw BattleAnim_ScytheSword
+	dw BattleAnim_ShadowThief
+	dw BattleAnim_Slayer
+	dw BattleAnim_DragonAnger
+	dw BattleAnim_HornCharge
 	assert_table_length NUM_ATTACKS + 1
 	dw BattleAnim_252
 	dw BattleAnim_253
@@ -4594,6 +4599,51 @@ BattleAnim_BeatUp:
 	anim_obj ANIM_OBJ_HIT_BIG_YFIX, 136, 48, $0
 	anim_wait 8
 	anim_call BattleAnim_ShowMon_0
+	anim_ret
+
+BattleAnim_ScytheSword:
+	anim_1gfx ANIM_GFX_CUT
+	anim_sound 0, 1, SFX_CUT
+	anim_obj ANIM_OBJ_CUT_LONG_DOWN_LEFT, 152, 40, $0
+	anim_obj ANIM_OBJ_CUT_LONG_DOWN_LEFT, 148, 36, $0
+	anim_wait 32
+	anim_ret
+
+BattleAnim_ShadowThief:
+	anim_2gfx ANIM_GFX_EGG, ANIM_GFX_SMOKE
+	anim_bgp $1b
+	anim_sound 6, 2, SFX_SLUDGE_BOMB
+	anim_obj ANIM_OBJ_SHADOW_BALL, 64, 92, $2
+	anim_wait 32
+	anim_obj ANIM_OBJ_BALL_POOF, 132, 56, $10
+	anim_wait 24
+	anim_ret
+	
+BattleAnim_Slayer:
+	anim_1gfx ANIM_GFX_CUT
+	anim_sound 0, 1, SFX_CUT
+	anim_obj ANIM_OBJ_CUT_LONG_DOWN_LEFT, 152, 40, $0
+	anim_obj ANIM_OBJ_CUT_LONG_DOWN_LEFT, 148, 36, $0
+	anim_wait 32
+	anim_ret
+	
+BattleAnim_DragonAnger:
+	anim_1gfx ANIM_GFX_FIRE
+.loop
+	anim_sound 6, 2, SFX_EMBER
+	anim_obj ANIM_OBJ_DRAGON_RAGE, 64, 92, $0
+	anim_wait 3
+	anim_loop 16, .loop
+	anim_wait 64
+	anim_ret
+	
+BattleAnim_HornCharge:
+	anim_1gfx ANIM_GFX_BEAM
+	anim_bgeffect ANIM_BG_SHAKE_SCREEN_X, $30, $4, $10
+	anim_bgeffect ANIM_BG_FLASH_INVERTED, $0, $8, $40
+	anim_bgeffect ANIM_BG_CYCLE_OBPALS_GRAY_AND_YELLOW, $0, $2, $0
+	anim_call BattleAnimSub_Beam
+	anim_wait 48
 	anim_ret
 
 BattleAnimSub_Drain:
