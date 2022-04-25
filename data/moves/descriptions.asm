@@ -252,6 +252,11 @@ MoveDescriptions::
 	dw RockSmashDescription
 	dw WhirlpoolDescription
 	dw BeatUpDescription
+	dw ScytheSwordDescription
+	dw ShadowThiefDescription
+	dw SlayerDescription
+	dw DragonAngerDescription
+	dw HornChargeDescription
 	assert_table_length NUM_ATTACKS
 	dw MoveFCDescription
 	dw MoveFDDescription
@@ -1270,3 +1275,23 @@ WhirlpoolDescription:
 BeatUpDescription:
 	db   "Party #MON join"
 	next "in the attack.@"
+	
+ScytheSwordDescription:
+	db   "A powerfull BUG"
+	next "slashing attack.@"
+	
+ShadowThiefDescription:
+	db   "Strikes shadow and"
+	next "hurts foe.@"
+	
+SlayerDescription:
+	db   "A fast and violent"
+	next "strike, no mercy.@"
+	
+DragonAngerDescription:
+	db   "Powerful and angry"
+	next "DRAGON attack.@"
+	
+HornChargeDescription:
+	db   "User lowers 1st,"
+	next "then impacts.@"
