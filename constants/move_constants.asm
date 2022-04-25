@@ -257,34 +257,39 @@
 	const ROCK_SMASH   ; f9
 	const WHIRLPOOL    ; fa
 	const BEAT_UP      ; fb
+	const SCYTHE SWORD ; fc
+	const SHADOW THIEF ; fd
+	const SLAYER       ; fe
+	const DRAGON ANGER ; ff
+	const HORN CHARGE  ; 100
 NUM_ATTACKS EQU const_value - 1
 
 ; Battle animations use the same constants as the moves up to this point
-	const_next $ff
-	const ANIM_SWEET_SCENT_2     ; ff
-	const ANIM_THROW_POKE_BALL   ; 100
-	const ANIM_SEND_OUT_MON      ; 101
-	const ANIM_RETURN_MON        ; 102
-	const ANIM_CONFUSED          ; 103
-	const ANIM_SLP               ; 104
-	const ANIM_BRN               ; 105
-	const ANIM_PSN               ; 106
-	const ANIM_SAP               ; 107
-	const ANIM_FRZ               ; 108
-	const ANIM_PAR               ; 109
-	const ANIM_IN_LOVE           ; 10a
-	const ANIM_IN_SANDSTORM      ; 10b
-	const ANIM_IN_NIGHTMARE      ; 10c
-	const ANIM_IN_WHIRLPOOL      ; 10d
+	const_next $101
+	const ANIM_SWEET_SCENT_2     ; 101
+	const ANIM_THROW_POKE_BALL   ; 102
+	const ANIM_SEND_OUT_MON      ; 103
+	const ANIM_RETURN_MON        ; 104
+	const ANIM_CONFUSED          ; 105
+	const ANIM_SLP               ; 106
+	const ANIM_BRN               ; 107
+	const ANIM_PSN               ; 108
+	const ANIM_SAP               ; 109
+	const ANIM_FRZ               ; 10a
+	const ANIM_PAR               ; 10b
+	const ANIM_IN_LOVE           ; 10c
+	const ANIM_IN_SANDSTORM      ; 10d
+	const ANIM_IN_NIGHTMARE      ; 10e
+	const ANIM_IN_WHIRLPOOL      ; 10f
 ; battle anims
-	const ANIM_MISS              ; 10e
-	const ANIM_ENEMY_DAMAGE      ; 10f
-	const ANIM_ENEMY_STAT_DOWN   ; 110
-	const ANIM_PLAYER_STAT_DOWN  ; 111
-	const ANIM_PLAYER_DAMAGE     ; 112
-	const ANIM_WOBBLE            ; 113
-	const ANIM_SHAKE             ; 114
-	const ANIM_HIT_CONFUSION     ; 115
+	const ANIM_MISS              ; 110
+	const ANIM_ENEMY_DAMAGE      ; 111
+	const ANIM_ENEMY_STAT_DOWN   ; 112
+	const ANIM_PLAYER_STAT_DOWN  ; 113
+	const ANIM_PLAYER_DAMAGE     ; 114
+	const ANIM_WOBBLE            ; 115
+	const ANIM_SHAKE             ; 116
+	const ANIM_HIT_CONFUSION     ; 117
 NUM_BATTLE_ANIMS EQU const_value - 1
 
 ; wNumHits uses offsets from ANIM_MISS
