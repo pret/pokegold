@@ -179,7 +179,7 @@ Moves:
 	move SUBSTITUTE,   EFFECT_SUBSTITUTE,          0, NORMAL,       100, 10,   0
 	move STRUGGLE,     EFFECT_RECOIL_HIT,         35, NORMAL,       100,  1,   0
 	move SKETCH,       EFFECT_SKETCH,              0, NORMAL,       100,  1,   0
-	move TRIPLE_KICK,  EFFECT_TRIPLE_KICK,         7, FIGHTING,      90, 10,   0
+	move TRIPLE_KICK,  EFFECT_TRIPLE_KICK,        12, FIGHTING,      90, 10,   0
 	move THIEF,        EFFECT_THIEF,              28, DARK,         100, 10, 100
 	move SPIDER_WEB,   EFFECT_MEAN_LOOK,           0, BUG,          100, 10,   0
 	move MIND_READER,  EFFECT_LOCK_ON,             0, NORMAL,       100,  5,   0
@@ -250,7 +250,7 @@ Moves:
 	move SYNTHESIS,    EFFECT_SYNTHESIS,           0, GRASS,        100,  5,   0
 	move MOONLIGHT,    EFFECT_MOONLIGHT,           0, NORMAL,       100,  5,   0
 	move HIDDEN_POWER, EFFECT_HIDDEN_POWER,        1, NORMAL,       100, 15,   0
-	move CROSS_CHOP,   EFFECT_NORMAL_HIT,         70, FIGHTING,      80,  5,   0
+	move CROSS_CHOP,   EFFECT_NORMAL_HIT,         70, FIGHTING,      85,  5,   0
 	move TWISTER,      EFFECT_TWISTER,            28, DRAGON,       100, 20,  20
 	move RAIN_DANCE,   EFFECT_RAIN_DANCE,          0, WATER,         90,  5,   0
 	move SUNNY_DAY,    EFFECT_SUNNY_DAY,           0, FIRE,          90,  5,   0
