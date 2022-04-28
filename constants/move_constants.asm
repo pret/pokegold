@@ -257,11 +257,11 @@
 	const ROCK_SMASH   ; f9
 	const WHIRLPOOL    ; fa
 	const BEAT_UP      ; fb
-	const SCYTHE SWORD ; fc
-	const SHADOW THIEF ; fd
+	const SCYTHE_SWORD ; fc
+	const SHADOW_THIEF ; fd
 	const SLAYER       ; fe
-	const DRAGON ANGER ; ff
-	const HORN CHARGE  ; 100
+	const DRAGON_ANGER ; ff
+	const HORN_CHARGE  ; 100
 NUM_ATTACKS EQU const_value - 1
 
 ; Battle animations use the same constants as the moves up to this point
