@@ -286,7 +286,7 @@ IlexForestHeadbuttGuyScript:
 	end
 
 IlexForestRevive:
-	itemball REVIVE
+	itemball GS_BALL
 
 IlexForestHiddenEther:
 	hiddenitem ETHER, EVENT_ILEX_FOREST_HIDDEN_ETHER
