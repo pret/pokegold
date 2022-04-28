@@ -438,13 +438,12 @@ NidoranMEvosAttacks:
 	db 0 ; no more evolutions
 	db 1, LEER
 	db 1, TACKLE
-	db 8, HORN_ATTACK
-	db 12, DOUBLE_KICK
-	db 17, POISON_STING
-	db 23, FOCUS_ENERGY
+	db 10, DOUBLE_KICK
+	db 15, POISON_STING
+	db 21, FOCUS_ENERGY
+	db 27, HORN_CHARGE
 	db 30, FURY_ATTACK
 	db 35, HORN_DRILL
-	db 40, HORN_CHARGE
 	db 0 ; no more level-up moves
 
 NidorinoEvosAttacks:
@@ -452,19 +451,18 @@ NidorinoEvosAttacks:
 	db 0 ; no more evolutions
 	db 1, LEER
 	db 1, TACKLE
-	db 8, HORN_ATTACK
-	db 12, DOUBLE_KICK
-	db 19, POISON_STING
-	db 27, FOCUS_ENERGY
+	db 10, DOUBLE_KICK
+	db 15, POISON_STING
+	db 24, FOCUS_ENERGY
+	db 31, HORN_CHARGE
 	db 36, FURY_ATTACK
 	db 40, HORN_DRILL
-	db 45, HORN_CHARGE
 	db 0 ; no more level-up moves
 
 NidokingEvosAttacks:
 	db 0 ; no more evolutions
 	db 1, TACKLE
-	db 1, HORN_ATTACK
+	db 1, HORN_DRILL
 	db 1, DOUBLE_KICK
 	db 1, POISON_STING
 	db 23, THRASH
@@ -992,11 +990,10 @@ GeodudeEvosAttacks:
 	db 6, DEFENSE_CURL
 	db 11, ROCK_THROW
 	db 16, MAGNITUDE
-	db 21, SELFDESTRUCT
+	db 21, EXPLOSION
 	db 26, HARDEN
 	db 31, ROLLOUT
 	db 36, EARTHQUAKE
-	db 41, EXPLOSION
 	db 0 ; no more level-up moves
 
 GravelerEvosAttacks:
@@ -1008,11 +1005,10 @@ GravelerEvosAttacks:
 	db 6, DEFENSE_CURL
 	db 11, ROCK_THROW
 	db 16, MAGNITUDE
-	db 21, SELFDESTRUCT
+	db 21, EXPLOSION
 	db 27, HARDEN
 	db 34, ROLLOUT
 	db 41, EARTHQUAKE
-	db 48, EXPLOSION
 	db 0 ; no more level-up moves
 
 GolemEvosAttacks:
@@ -1024,11 +1020,10 @@ GolemEvosAttacks:
 	db 6, DEFENSE_CURL
 	db 11, ROCK_THROW
 	db 16, MAGNITUDE
-	db 21, SELFDESTRUCT
+	db 21, EXPLOSION
 	db 27, HARDEN
 	db 37, ROLLOUT
 	db 45, EARTHQUAKE
-	db 52, EXPLOSION
 	db 0 ; no more level-up moves
 
 PonytaEvosAttacks:
@@ -1361,11 +1356,10 @@ VoltorbEvosAttacks:
 	db 1, TACKLE
 	db 9, SCREECH
 	db 17, SONICBOOM
-	db 23, SELFDESTRUCT
+	db 25, EXPLOSION
 	db 29, ROLLOUT
 	db 33, LIGHT_SCREEN
 	db 37, SWIFT
-	db 39, EXPLOSION
 	db 41, MIRROR_COAT
 	db 0 ; no more level-up moves
 
@@ -1374,15 +1368,14 @@ ElectrodeEvosAttacks:
 	db 1, TACKLE
 	db 1, SCREECH
 	db 1, SONICBOOM
-	db 1, SELFDESTRUCT
+	db 1, EXPLOSION
 	db 9, SCREECH
 	db 17, SONICBOOM
-	db 23, SELFDESTRUCT
+	db 25, EXPLOSION
 	db 29, ROLLOUT
 	db 34, LIGHT_SCREEN
-	db 40, SWIFT
-	db 44, EXPLOSION
-	db 48, MIRROR_COAT
+	db 39, SWIFT
+	db 45, MIRROR_COAT
 	db 0 ; no more level-up moves
 
 ExeggcuteEvosAttacks:
@@ -1489,12 +1482,11 @@ KoffingEvosAttacks:
 	db 1, POISON_GAS
 	db 1, TACKLE
 	db 9, SMOG
-	db 17, SELFDESTRUCT
+	db 17, EXPLOSION
 	db 21, SLUDGE
 	db 25, SMOKESCREEN
 	db 33, HAZE
-	db 41, EXPLOSION
-	db 45, DESTINY_BOND
+	db 41, DESTINY_BOND
 	db 0 ; no more level-up moves
 
 WeezingEvosAttacks:
@@ -1502,20 +1494,19 @@ WeezingEvosAttacks:
 	db 1, POISON_GAS
 	db 1, TACKLE
 	db 1, SMOG
-	db 1, SELFDESTRUCT
+	db 1, EXPLOSION
 	db 9, SMOG
-	db 17, SELFDESTRUCT
+	db 17, EXPLOSION
 	db 21, SLUDGE
 	db 25, SMOKESCREEN
 	db 33, HAZE
-	db 44, EXPLOSION
-	db 51, DESTINY_BOND
+	db 44, DESTINY_BOND
 	db 0 ; no more level-up moves
 
 RhyhornEvosAttacks:
 	db EVOLVE_LEVEL, 42, RHYDON
 	db 0 ; no more evolutions
-	db 1, HORN_ATTACK
+	db 1, FLAIL
 	db 1, TAIL_WHIP
 	db 13, STOMP
 	db 19, FURY_ATTACK
@@ -1523,12 +1514,12 @@ RhyhornEvosAttacks:
 	db 31, HORN_DRILL
 	db 40, HORN_CHARGE
 	db 49, TAKE_DOWN
-	db 55, EARTHQUAKE
+	db 54, EARTHQUAKE
 	db 0 ; no more level-up moves
 
 RhydonEvosAttacks:
 	db 0 ; no more evolutions
-	db 1, HORN_ATTACK
+	db 1, FLAIL
 	db 1, TAIL_WHIP
 	db 1, STOMP
 	db 1, FURY_ATTACK
@@ -1537,8 +1528,8 @@ RhydonEvosAttacks:
 	db 26, SCARY_FACE
 	db 31, HORN_DRILL
 	db 40, HORN_CHARGE
-	db 54, TAKE_DOWN
-	db 65, EARTHQUAKE
+	db 53, TAKE_DOWN
+	db 58, EARTHQUAKE
 	db 0 ; no more level-up moves
 
 ChanseyEvosAttacks:
@@ -1617,7 +1608,7 @@ GoldeenEvosAttacks:
 	db 1, PECK
 	db 1, TAIL_WHIP
 	db 10, SUPERSONIC
-	db 15, HORN_ATTACK
+	db 15, HORN_DRILL
 	db 24, FLAIL
 	db 29, FURY_ATTACK
 	db 38, WATERFALL
@@ -1631,7 +1622,7 @@ SeakingEvosAttacks:
 	db 1, TAIL_WHIP
 	db 1, TAIL_WHIP
 	db 10, SUPERSONIC
-	db 15, HORN_ATTACK
+	db 15, HORN_DRILL
 	db 24, FLAIL
 	db 29, FURY_ATTACK
 	db 41, WATERFALL
@@ -1757,7 +1748,7 @@ TaurosEvosAttacks:
 	db 1, TACKLE
 	db 4, TAIL_WHIP
 	db 8, RAGE
-	db 13, HORN_ATTACK
+	db 13, STOMP
 	db 19, SCARY_FACE
 	db 26, PURSUIT
 	db 34, REST
@@ -2714,7 +2705,7 @@ SlowkingEvosAttacks:
 MisdreavusEvosAttacks:
 	db 0 ; no more evolutions
 	db 1, GROWL
-	db 1, PSYWAVE
+	db 1, CONFUSION
 	db 6, SPITE
 	db 12, CONFUSE_RAY
 	db 19, MEAN_LOOK
@@ -2756,27 +2747,25 @@ PinecoEvosAttacks:
 	db 0 ; no more evolutions
 	db 1, TACKLE
 	db 1, PROTECT
-	db 8, SELFDESTRUCT
+	db 8, EXPLOSION
 	db 15, TAKE_DOWN
 	db 22, RAPID_SPIN
 	db 29, BIDE
-	db 34, EXPLOSION
-	db 40, SPIKES
-	db 46, DOUBLE_EDGE
+	db 33, SPIKES
+	db 38, DOUBLE_EDGE
 	db 0 ; no more level-up moves
 
 ForretressEvosAttacks:
 	db 0 ; no more evolutions
 	db 1, TACKLE
 	db 1, PROTECT
-	db 1, SELFDESTRUCT
-	db 8, SELFDESTRUCT
+	db 1, EXPLOSION
+	db 8, EXPLOSION
 	db 15, TAKE_DOWN
 	db 22, RAPID_SPIN
 	db 29, BIDE
-	db 37, EXPLOSION
-	db 44, SPIKES
-	db 51, DOUBLE_EDGE
+	db 36, SPIKES
+	db 43, DOUBLE_EDGE
 	db 0 ; no more level-up moves
 
 DunsparceEvosAttacks:
@@ -2884,14 +2873,13 @@ HeracrossEvosAttacks:
 	db 0 ; no more evolutions
 	db 1, TACKLE
 	db 1, LEER
-	db 6, HORN_ATTACK
-	db 12, ENDURE
-	db 19, FURY_ATTACK
-	db 25, COUNTER
-	db 29, TAKE_DOWN
-	db 34, HORN_CHARGE
-	db 38, REVERSAL
-	db 45, MEGAHORN
+	db 10, ENDURE
+	db 17, FURY_ATTACK
+	db 23, COUNTER
+	db 28, HORN_CHARGE
+	db 32, TAKE_DOWN
+	db 37, REVERSAL
+	db 43, MEGAHORN
 	db 0 ; no more level-up moves
 
 SneaselEvosAttacks:
@@ -2979,7 +2967,7 @@ SwinubEvosAttacks:
 
 PiloswineEvosAttacks:
 	db 0 ; no more evolutions
-	db 1, HORN_ATTACK
+	db 1, TACKLE
 	db 1, POWDER_SNOW
 	db 1, ENDURE
 	db 10, POWDER_SNOW
@@ -3112,7 +3100,7 @@ PhanpyEvosAttacks:
 
 DonphanEvosAttacks:
 	db 0 ; no more evolutions
-	db 1, HORN_ATTACK
+	db 1, TAKE_DOWN
 	db 1, GROWL
 	db 9, DEFENSE_CURL
 	db 17, FLAIL
