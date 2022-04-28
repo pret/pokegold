@@ -31,7 +31,6 @@ BattleAnimations::
 	dw BattleAnim_RollingKick
 	dw BattleAnim_SandAttack
 	dw BattleAnim_Headbutt
-	dw BattleAnim_HornAttack
 	dw BattleAnim_FuryAttack
 	dw BattleAnim_HornDrill
 	dw BattleAnim_Tackle
@@ -150,7 +149,6 @@ BattleAnimations::
 	dw BattleAnim_DizzyPunch
 	dw BattleAnim_Spore
 	dw BattleAnim_Flash
-	dw BattleAnim_Psywave
 	dw BattleAnim_Splash
 	dw BattleAnim_AcidArmor
 	dw BattleAnim_Crabhammer
@@ -260,8 +258,6 @@ BattleAnimations::
 	dw BattleAnim_HornCharge
 	assert_table_length NUM_ATTACKS + 1
 	dw BattleAnim_252
-	dw BattleAnim_253
-	dw BattleAnim_254
 	dw BattleAnim_SweetScent2
 	assert_table_length $105
 ; $105
@@ -291,8 +287,6 @@ BattleAnimations::
 
 BattleAnim_0:
 BattleAnim_252:
-BattleAnim_253:
-BattleAnim_254:
 BattleAnim_MirrorMove:
 	anim_ret
 
