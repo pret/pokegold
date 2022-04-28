@@ -647,7 +647,7 @@ BirdKeeperGroup:
 LassGroup:
 	; LASS (1)
 	db "CARRIE@", TRAINERTYPE_MOVES
-	db 25 SNUBBULL,   SCARY_FACE, CHARM, BITE, LICK
+	db 25, SNUBBULL,   SCARY_FACE, CHARM, BITE, LICK
 	db -1 ; end
 
 	; LASS (2)
