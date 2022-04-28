@@ -29,117 +29,117 @@
 
 
 
-[send_send_buf2]
+[send_send_buf2@Wireless_WaitLinkTransfer]
 Mode = 2
 Address = {HEX @ 4}
 Type = 29
 
-[send_send_buf2_ret]
+[send_send_buf2_ret@Wireless_WaitLinkTransfer_ret]
 Mode = 2
 Address = {HEX @ 4}
 Type = 30
 
-[send_byt2]
+[send_byt2@Wireless_start_exchange]
 Mode = 2
 Address = {HEX @+5}
 Type = 31
 
-[send_byt2_ret]
+[send_byt2_ret@Wireless_end_exchange]
 Mode = 2
 Address = {HEX @}
 Type = 32
 
-[send_byt2_wait]
+[send_byt2_wait@Wireless_net_delay_1]
 Mode = 1
 Address = {HEX @+1}
 Fixcode = {PATCH +1}
 
-[send_dummy]
+[send_dummy@Wireless_start_send_zero_bytes]
 Mode = 2
 Address = {HEX @}
 Type = 33
 
-[send_dummy_wait]
+[send_dummy_wait@Wireless_net_delay_2]
 Mode = 1
 Address = {HEX @+1}
 Fixcode = {PATCH +1}
 
-[send_dummy_end]
+[send_dummy_end@Wireless_end_send_zero_bytes]
 Mode = 2
 Address = {HEX @}
 Type = 34
 
-[Network10]
+[Network10@Wireless_net_delay_3]
 Mode = 1
 Address = {HEX @+1 4}
 Fixcode = {PATCH +1}
 
-[Network11]
+[Network11@Wireless_net_delay_4]
 Mode = 1
 Address = {HEX @+1 4}
 Fixcode = {PATCH +1}
 
-[NetworkDelay1]
+[NetworkDelay1@Wireless_net_delay_5]
 Mode = 1
 Address = {HEX @+1}
 Fixcode = {PATCH +1}
 
-[NetworkDelay2]
+[NetworkDelay2@Wireless_net_delay_6]
 Mode = 1
 Address = {HEX @}
 Fixcode = {PATCH}
 
-[NetworkDelay3]
+[NetworkDelay3@Wireless_net_delay_7]
 Mode = 1
 Address = {HEX @+1}
 Fixcode = {PATCH +1}
 
-[NetworkDelay4]
+[NetworkDelay4@Wireless_net_delay_8]
 Mode = 1
 Address = {HEX @+1}
 Fixcode = {PATCH +1}
 
-[NetworkDelay6]
+[NetworkDelay6@Wireless_net_delay_9]
 Mode = 1
 Address = {HEX @+1}
 Fixcode = {PATCH +1}
 
-[Network358]
+[Network358@Wireless_ExchangeBytes_1]
 Mode = 2
 Address = {HEX @}
 Type = 4
 
-[Network359]
+[Network359@Wireless_ExchangeBytes_2]
 Mode = 2
 Address = {HEX @}
 Type = 4
 
-[Network364]
+[Network364@Wireless_ExchangeBytes_3_Gen2toGen1Fix]
 Mode = 2
 Address = {HEX @}
 Type = 26
 
-[Network360]
+[Network360@Wireless_ExchangeBytes_4]
 Mode = 2
 Address = {HEX @}
 Type = 4
 
-[Network361]
+[Network361@Wireless_ExchangeBytes_5]
 Mode = 2
 Address = {HEX @}
 Type = 4
 
-[Network362]
+[Network362@Wireless_ExchangeBytes_6]
 Mode = 2
 Address = {HEX @}
 Type = 4
 
-[Network363]
+[Network363@Wireless_ExchangeBytes_7]
 Mode = 2
 Address = {HEX @}
 Type = 4
 
-[Network_RECHECK]
+[Network_RECHECK@Wireless_net_recheck]
 Mode = 2
 Address = {HEX @}
 Type = 7
@@ -154,60 +154,60 @@ Type = 7
 ;Address = 0xF4D3C
 ;Type = 9
 
-[Network_RESET]
+[Network_RESET@Unknown_network_reset]
 Mode = 2
 Address = {HEX @ 5}
 Type = 10
 
-[E_YESNO]
+[E_YESNO@Unknown_yesorno_ret]
 Mode = 2
 Address = {HEX @}
 Type = 15
 
-[linkCable fake begin]
+[linkCable fake begin@Link_fake_connection_status]
 Mode = 2
 Address = {HEX @}
 Type = 16
 
-[linkCable fake end]
+[linkCable fake end@Wireless_prompt]
 Mode = 2
 Address = {HEX @}
 Type = 17  
 
 ;MURIYARI
-[linkCable block input]
+[linkCable block input@Wireless_TryQuickSave_block_input_1]
 Mode = 2
 Address = {HEX @}
 Type = 18
-[linkCable block input2]
+[linkCable block input2@Wireless_TryQuickSave_block_input_2]
 Mode = 2
 Address = {HEX @}
 Type = 24
-[save game end]
+[save game end@Trade_save_game_end]
 Mode = 2
 Address = {HEX @}
 Type = 20
-[term_exit]
+[term_exit@Wireless_term_exit]
 Mode = 2
 Address = {HEX @}
 Type = 25
-[room_check]
+[room_check@Wireless_room_check]
 Mode = 2
 Address = {HEX @}
 Type = 27
-[to_play2_mons1]
+[to_play2_mons1@Wireless_TimeCapsule]
 Mode = 2
 Address = {HEX @}
 Type = 11
-[to_play2_trade]
+[to_play2_trade@Wireless_TradeCenter]
 Mode = 2
 Address = {HEX @}
 Type = 12
-[to_play2_battle]
+[to_play2_battle@Wireless_Colosseum]
 Mode = 2
 Address = {HEX @}
 Type = 13
-[ret_heya]
+[ret_heya@ExitLinkCommunications_ret]
 Mode = 2
 Address = {HEX @}
 Type = 14
@@ -414,7 +414,7 @@ ConditionValueC = {dws_ "F"            "L"              "A"              "S"    
  ; ******0xcccccccccffffffff8***********---------------   Mem Write: pc32 = 0x3180 addr = 0xcf85 value = 0x50
  
                                                                                                                                                 
-[FPA 042801 Begin]                                                                                                                               
+[FPA 042801 Begin@Reduce_move_anim_flashing_PRESENT]                                                                                                                               
 Mode = 3                                                                                                                                         
 Type = 0                                                                                                                                         
 Address = {HEX @}                                                                                                                              
@@ -448,7 +448,7 @@ Address = {hex @}
 
 ;******ffa0***000000000000---------------   Mem Write: pc32 = 0x8c52d addr = 0xffa0 value = 0x1
 ;-----ddddff0xff690xff69fffff----0xce57 no ....----5555555577777---------..........Mem Write: pc32 = 0x8c483 addr = 0xce57 value = 0x1a
-[FPA link fight begin]
+[FPA link fight begin@Reduce_battle_transition_flashing]
 Mode = 3                                                          
 Type = 0                                                          
 Address = {hex @}
@@ -471,30 +471,30 @@ MotionBlur0 = 11
 
 
 ;40 90 e4 01 3E at 3E
-[FPA link fight End0]                                                     
+[FPA link fight End0@Stop_reducing_battle_transition_flashing_WavyOutro]                                                     
 Mode = 3                                                          
 Type = 1                                                          
 Address = {HEX @}
 
 ;3D 20 EF C9 3E 01 at 3E
-[FPA link fight End1]                                                     
+[FPA link fight End1@Stop_reducing_battle_transition_flashing_SpinOutro]                                                     
 Mode = 3                                                          
 Type = 1                                                          
 Address = {HEX @}
 
 ;01 FF 3E 01 at 3E
-[FPA link fight End2]                                                     
+[FPA link fight End2@Stop_reducing_battle_transition_flashing_ScatterOutro]                                                     
 Mode = 3                                                          
 Type = 1                                                          
 Address = {HEX @}  
 
 ;32 00 19 00 3e 01 at 3e
-[FPA link fight End3]                                                     
+[FPA link fight End3@Stop_reducing_battle_transition_flashing_ZoomToBlack]                                                     
 Mode = 3                                                          
 Type = 1                                                          
 Address = {HEX @}
 
-[FPA link fight End4]                                                     
+[FPA link fight End4@Stop_reducing_battle_transition_flashing]                                                     
 Mode = 3                                                          
 Type = 1                                                          
 Address = {hex @} 
@@ -521,7 +521,7 @@ Address = {hex @}
 ;ROM:3F93D                 xor     a     
 ;0003f8c6h: AF E0 D4 E0 4A                            
 
-[fight begin]                        
+[fight begin@Unknown_InitBattleDisplay]                        
 Mode = 11                       
 Type = 0                        
 Index = 1                       
@@ -544,7 +544,7 @@ Fixcode={db SCREEN_HEIGHT_PX}
 ;    
 ; change "and 1" to "and 0"
 ;00016ecch: E6 01 20 08                                 
-[print forbid 1]                                                   
+[print forbid 1@Forbid_printing_Unown]                                                   
 Mode = 1                                                                                                                  
 Address = {hex @}
 Fixcode={patch}     
@@ -581,7 +581,7 @@ Fixcode={patch}
 ;0002419bh: C9 CD 7A 1A CB 47 C2 44 42 CB 4F C2 44 42 CB 57 
 ;000241abh: C2 44 42 CB                                     
 ;                            
-[print forbid 2]                                                                           
+[print forbid 2@Forbid_printing_PC_Box]                                                                           
 Mode = 6                                                                                       
 Type = 0                                                                                       
 Address = {hex @}                                                                          
@@ -596,7 +596,7 @@ ConditionValueC = {dws_ 0xb7                0xb9                  A_BUTTON    0x
 ; 0xd9c7 is the room number.
 ;
 
-[print forbid 3]                                                          
+[print forbid 3@Forbid_printing_photo_studio]                                                          
 Mode = 6                                                                      
 Type = 0                                                                      
 Address = {hex @}                                                             
@@ -616,7 +616,7 @@ ConditionValueC = {dws_ 0xcd                0xbf                  NO_INPUT    0x
 ;ROM:BB2A9                 ret    
 ; 000baf1ah: E6 08 20 01                                     
 ; change "and 1" to "and 0"                                                      
-[print forbid 4]                                                  
+[print forbid 4@Forbid_printing_mail]                                                  
 Mode = 1                                                          
 Address = {hex @}                                               
 Fixcode={patch}            
@@ -637,7 +637,7 @@ Fixcode={patch}
 ; -----6666666666ddddddddd88888----0xc6d8 no ..............Mem Write: pc32 = 0x4109b addr = 0xc6d8 value = 0x0
 
 ; 00040266h: 7E E6 01 20 08                            
-[print forbid 5]                                                                                           
+[print forbid 5@Forbid_printing_Pokedex]                                                                                           
 Mode = 6                                                                                          
 Type = 0                                                                                          
 Address = {hex @}                                                                                
@@ -678,7 +678,7 @@ ConditionValueC = {dws_ 0xbd                0xbd                  A_BUTTON    0x
 ;
 
 ;00029e23h: 3E 02 EA 01 C9                                      
-[infrared fake 0]                                                  
+[infrared fake 0@Infrared_stage_party_data]                                                  
 Mode = 1                                                          
 Address = {hex @}                                        
 Fixcode={PATCH}  
@@ -688,27 +688,27 @@ Fixcode={PATCH}
 ;00029fc8h: 30 3E 3A 21 E9 4F CF CD 8C 61 CD C4 61 CD 0B 62 
 ;00029fd8h: F0 BE FE 10                                     
                                 
-[infrared fake 1@infrared_fake]                                                  
+[infrared fake 1@Infrared_ExchangeMysteryGiftData_function]                                                  
 Mode = 1                                                          
 Address = {hex @}                                      
 Fixcode={patch 0 21}      
 
-[infrared fake 2@infrared_fake]                    
+[infrared fake 2@Infrared_ExchangeMysteryGiftData_start]                    
 Mode = 2                             
 Address = {hex @}                    
 Type = 101    
 
-[infrared fake 5]          
+[infrared fake 5@Infrared_ExchangeMysteryGiftData_unknown_Mode100]          
 Mode = 2                   
 Address = {hex @}         
 Type = 100                                       
                                      
-[infrared fake 3]                    
+[infrared fake 3@Infrared_ExchangeMysteryGiftData_loop_done]                    
 Mode = 2                             
 Address = {hex @}                    
 Type = 102                           
                                      
-[infrared fake 4]                    
+[infrared fake 4@Infrared_ExchangeMysteryGiftData_end]                    
 Mode = 2                             
 Address = {hex @}                   
 Type = 103                           

@@ -5671,7 +5671,7 @@ LinkBattleSendReceiveAction:
 
 .use_move
 	ld [wPlayerLinkAction], a
-	vc_hook send_byt2
+	vc_hook Wireless_start_exchange
 	callfar PlaceWaitingText
 
 .waiting
@@ -5681,8 +5681,8 @@ LinkBattleSendReceiveAction:
 	inc a
 	jr z, .waiting
 
-	vc_hook send_byt2_ret
-	vc_patch send_byt2_wait
+	vc_hook Wireless_end_exchange
+	vc_patch Wireless_net_delay_1
 if DEF(_GOLD_VC) || DEF(_SILVER_VC)
 	ld b, 26
 else
@@ -5695,8 +5695,8 @@ endc
 	dec b
 	jr nz, .receive
 
-	vc_hook send_dummy
-	vc_patch send_dummy_wait
+	vc_hook Wireless_start_send_zero_bytes
+	vc_patch Wireless_net_delay_2
 if DEF(_GOLD_VC) || DEF(_SILVER_VC)
 	ld b, 26
 else
@@ -5709,7 +5709,7 @@ endc
 	dec b
 	jr nz, .acknowledge
 
-	vc_hook send_dummy_end
+	vc_hook Wireless_end_send_zero_bytes
 	ret
 
 LoadEnemyMon:
@@ -8560,7 +8560,7 @@ InitBattleDisplay:
 	predef PlaceGraphic
 	xor a
 	ldh [hWY], a
-	vc_hook fight_begin
+	vc_hook Unknown_InitBattleDisplay
 	ldh [rWY], a
 	call WaitBGMap
 	call HideSprites

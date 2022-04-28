@@ -648,7 +648,7 @@ BattleAnimCmd_5GFX:
 	xor a
 	ld [wBattleAnimGFXTempTileID], a
 .loop
-	vc_hook FPA_042801_Begin
+	vc_hook Reduce_move_anim_flashing_PRESENT
 	ld a, [wBattleAnimGFXTempTileID]
 	cp (vTiles1 - vTiles0) / LEN_2BPP_TILE - BATTLEANIM_BASE_TILE
 	ret nc
