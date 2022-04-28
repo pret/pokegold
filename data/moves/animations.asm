@@ -120,7 +120,6 @@ BattleAnimations::
 	dw BattleAnim_Bide
 	dw BattleAnim_Metronome
 	dw BattleAnim_MirrorMove
-	dw BattleAnim_Selfdestruct
 	dw BattleAnim_EggBomb
 	dw BattleAnim_Lick
 	dw BattleAnim_Smog
@@ -252,11 +251,11 @@ BattleAnimations::
 	dw BattleAnim_Whirlpool
 	dw BattleAnim_BeatUp
 	dw BattleAnim_ScytheSword
+	dw BattleAnim_ShadowThief
 	dw BattleAnim_Slayer
+	dw BattleAnim_DragonAnger
 	dw BattleAnim_HornCharge
 	assert_table_length NUM_ATTACKS + 1
-	dw BattleAnim_DragonAnger
-	dw BattleAnim_ShadowThief
 	dw BattleAnim_252
 	dw BattleAnim_SweetScent2
 	assert_table_length $105
