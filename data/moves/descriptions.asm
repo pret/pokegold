@@ -30,7 +30,6 @@ MoveDescriptions::
 	dw RollingKickDescription
 	dw SandAttackDescription
 	dw HeadbuttDescription
-	dw HornAttackDescription
 	dw FuryAttackDescription
 	dw HornDrillDescription
 	dw TackleDescription
@@ -120,7 +119,6 @@ MoveDescriptions::
 	dw BideDescription
 	dw MetronomeDescription
 	dw MirrorMoveDescription
-	dw SelfdestructDescription
 	dw EggBombDescription
 	dw LickDescription
 	dw SmogDescription
@@ -149,7 +147,6 @@ MoveDescriptions::
 	dw DizzyPunchDescription
 	dw SporeDescription
 	dw FlashDescription
-	dw PsywaveDescription
 	dw SplashDescription
 	dw AcidArmorDescription
 	dw CrabhammerDescription
