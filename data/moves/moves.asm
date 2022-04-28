@@ -42,7 +42,6 @@ Moves:
 	move ROLLING_KICK, EFFECT_FLINCH_HIT,         42, FIGHTING,      85, 15,  30
 	move SAND_ATTACK,  EFFECT_ACCURACY_DOWN,       0, GROUND,       100, 15,   0
 	move HEADBUTT,     EFFECT_FLINCH_HIT,         49, NORMAL,       100, 15,  30
-	move HORN_ATTACK,  EFFECT_NORMAL_HIT,         46, NORMAL,       100, 25,   0
 	move FURY_ATTACK,  EFFECT_MULTI_HIT,          11, NORMAL,        85, 20,   0
 	move HORN_DRILL,   EFFECT_OHKO,                1, NORMAL,        30,  5,   0
 	move TACKLE,       EFFECT_NORMAL_HIT,         25, NORMAL,        95, 35,   0
@@ -132,7 +131,6 @@ Moves:
 	move BIDE,         EFFECT_BIDE,                0, NORMAL,       100, 10,   0
 	move METRONOME,    EFFECT_METRONOME,           0, NORMAL,       100, 10,   0
 	move MIRROR_MOVE,  EFFECT_MIRROR_MOVE,         0, FLYING,       100, 20,   0
-	move SELFDESTRUCT, EFFECT_SELFDESTRUCT,      140, NORMAL,       100,  5,   0
 	move EGG_BOMB,     EFFECT_NORMAL_HIT,         70, NORMAL,        75, 10,   0
 	move LICK,         EFFECT_PARALYZE_HIT,       14, GHOST,        100, 30,  30
 	move SMOG,         EFFECT_POISON_HIT,         14, POISON,        70, 20,  40
@@ -160,8 +158,7 @@ Moves:
 	move BUBBLE,       EFFECT_SPEED_DOWN_HIT,     14, WATER,        100, 30,  10
 	move DIZZY_PUNCH,  EFFECT_CONFUSE_HIT,        49, NORMAL,       100, 10,  20
 	move SPORE,        EFFECT_SLEEP,               0, GRASS,        100, 15,   0
-	move FLASH,        EFFECT_ACCURACY_DOWN,       0, NORMAL,        70, 20,   0
-	move PSYWAVE,      EFFECT_PSYWAVE,             1, PSYCHIC_TYPE,  80, 15,   0
+	move FLASH,        EFFECT_ACCURACY_DOWN,       0, NORMAL,        80, 20,   0
 	move SPLASH,       EFFECT_SPLASH,              0, NORMAL,       100, 40,   0
 	move ACID_ARMOR,   EFFECT_DEFENSE_UP_2,        0, POISON,       100, 40,   0
 	move CRABHAMMER,   EFFECT_NORMAL_HIT,         70, WATER,         85, 10,   0
