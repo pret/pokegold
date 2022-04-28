@@ -23,7 +23,7 @@ JohtoGrassWildMons:
 	; nite
 	db 7, GASTLY
 	db 8, GASTLY
-	db 7, BELLSRPOUT
+	db 7, BELLSPROUT
 	db 7, RATTATA
 	db 9, GASTLY
 	db 8, RATTATA
@@ -44,7 +44,7 @@ JohtoGrassWildMons:
 	db 7, RATTATA
 	db 8, BELLSPROUT
 	db 7, RATTATA
-	db 7, BELLSRPOUT
+	db 7, BELLSPROUT
 	db 9, RATTATA
 	db 8, GASTLY
 	db 8, MISDREAVUS
@@ -67,7 +67,7 @@ JohtoGrassWildMons:
 	db 29, SLUGMA
 	db 29, RATTATA
 	db 30, RATTATA
-	db 30, GR0WLITHE
+	db 30, GROWLITHE
 	; day
 	db 27, RATTATA
 	db 28, RATTATA
@@ -151,7 +151,7 @@ JohtoGrassWildMons:
 	db 29, SLUGMA
 	db 29, RATTATA
 	db 30, RATTATA
-	db 30, GR0WLITHE
+	db 30, GROWLITHE
 	; day
 	db 27, RATTATA
 	db 28, RATTATA
@@ -235,7 +235,7 @@ JohtoGrassWildMons:
 	db 29, SLUGMA
 	db 29, RATTATA
 	db 30, RATTATA
-	db 30, GR0WLITHE
+	db 30, GROWLITHE
 	; day
 	db 27, RATTATA
 	db 28, RATTATA
