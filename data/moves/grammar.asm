@@ -39,7 +39,6 @@ MoveGrammar:
 	db RECOVER
 	db TELEPORT
 	db BIDE
-	db SELFDESTRUCT
 	db AMNESIA
 	db FLAIL
 	db 0 ; end set
@@ -63,7 +62,6 @@ MoveGrammar:
 	db FLY
 	db BIND
 	db SLAM
-	db HORN_ATTACK
 	db WRAP
 	db THRASH
 	db TAIL_WHIP
