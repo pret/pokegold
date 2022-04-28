@@ -29,7 +29,6 @@ MoveNames::
 	li "ROLLING KICK"
 	li "SAND-ATTACK"
 	li "HEADBUTT"
-	li "HORN ATTACK"
 	li "FURY ATTACK"
 	li "HORN DRILL"
 	li "TACKLE"
