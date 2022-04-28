@@ -258,8 +258,8 @@ BattleAnimations::
 	assert_table_length NUM_ATTACKS + 1
 	dw BattleAnim_252
 	dw BattleAnim_SweetScent2
-	assert_table_length $105
-; $105
+	assert_table_length $100
+; $100
 	dw BattleAnim_ThrowPokeBall
 	dw BattleAnim_SendOutMon
 	dw BattleAnim_ReturnMon
