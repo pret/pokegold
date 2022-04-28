@@ -10,10 +10,10 @@
 	const PARTYMENUQUALITY_GENDER
 
 MACRO partymenuqualities
-rept _NARG
-	db PARTYMENUQUALITY_\1
-	shift
-endr
+	rept _NARG
+		db PARTYMENUQUALITY_\1
+		shift
+	endr
 	db -1 ; end
 ENDM
 
