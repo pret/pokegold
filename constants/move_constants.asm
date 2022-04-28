@@ -35,7 +35,6 @@
 	const ROLLING_KICK ; 1b
 	const SAND_ATTACK  ; 1c
 	const HEADBUTT     ; 1d
-	const HORN_ATTACK  ; 1e
 	const FURY_ATTACK  ; 1f
 	const HORN_DRILL   ; 20
 	const TACKLE       ; 21
@@ -125,7 +124,6 @@
 	const BIDE         ; 75
 	const METRONOME    ; 76
 	const MIRROR_MOVE  ; 77
-	const SELFDESTRUCT ; 78
 	const EGG_BOMB     ; 79
 	const LICK         ; 7a
 	const SMOG         ; 7b
@@ -154,7 +152,6 @@
 	const DIZZY_PUNCH  ; 92
 	const SPORE        ; 93
 	const FLASH        ; 94
-	const PSYWAVE      ; 95
 	const SPLASH       ; 96
 	const ACID_ARMOR   ; 97
 	const CRABHAMMER   ; 98
@@ -261,12 +258,12 @@
 	const SHADOW_THIEF ; fd
 	const SLAYER       ; fe
 	const DRAGON_ANGER ; ff
-	const HORN_CHARGE  ; 100
+	const HORN_CHARGE  ; fd
 NUM_ATTACKS EQU const_value - 1
 
 ; Battle animations use the same constants as the moves up to this point
-	const_next $101
-	const ANIM_SWEET_SCENT_2     ; 101
+	const_next $ff
+	const ANIM_SWEET_SCENT_2     ; 100
 	const ANIM_THROW_POKE_BALL   ; 102
 	const ANIM_SEND_OUT_MON      ; 103
 	const ANIM_RETURN_MON        ; 104
