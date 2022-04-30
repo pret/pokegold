@@ -330,6 +330,10 @@ ScientistGroup:
 	; SCIENTIST (5)
 	db "RICH@", TRAINERTYPE_MOVES
 	db 40, PORYGON,    CONVERSION, CONVERSION2, RECOVER, TRI_ATTACK
+	db 40, DITTO,      TRANSFORM, NO_MOVE, NO_MOVE, NO_MOVE
+	db 40, DITTO,      TRANSFORM, NO_MOVE, NO_MOVE, NO_MOVE
+	db 40, MEW,        TRANSFORM, MEGA_PUNCH, METRONOME, PSYCHIC_M
+
 	db -1 ; end
 
 ErikaGroup:
@@ -601,7 +605,7 @@ BirdKeeperGroup:
 
 	; BIRD_KEEPER (12)
 	db "JOSE@", TRAINERTYPE_NORMAL
-	db 50, ARTICUNO
+	db 50, ZAPDOS
 	db -1 ; end
 
 	; BIRD_KEEPER (13)
@@ -613,7 +617,7 @@ BirdKeeperGroup:
 
 	; BIRD_KEEPER (14)
 	db "JOSE@", TRAINERTYPE_NORMAL
-	db 51, ARTICUNO
+	db 51, ZAPDOS
 	db -1 ; end
 
 	; BIRD_KEEPER (15)
@@ -629,7 +633,7 @@ BirdKeeperGroup:
 
 	; BIRD_KEEPER (17)
 	db "JOSE@", TRAINERTYPE_NORMAL
-	db 52, ARTICUNO
+	db 52, ZAPDOS
 	db -1 ; end
 
 	; BIRD_KEEPER (18)
