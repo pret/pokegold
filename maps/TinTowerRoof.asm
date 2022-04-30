@@ -33,7 +33,7 @@ TinTowerHoOh:
 	checkver
 	iftrue .Silver
 	loadvar VAR_BATTLETYPE, BATTLETYPE_FORCEITEM
-	loadwildmon HO_OH, 40
+	loadwildmon HO_OH, 60
 	startbattle
 	disappear TINTOWERROOF_HO_OH
 	reloadmapafterbattle
