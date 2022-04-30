@@ -41,7 +41,7 @@ Lugia:
 
 .Silver:
 	loadvar VAR_BATTLETYPE, BATTLETYPE_FORCEITEM
-	loadwildmon LUGIA, 40
+	loadwildmon LUGIA, 60
 	startbattle
 	disappear WHIRLISLANDLUGIACHAMBER_LUGIA
 	reloadmapafterbattle
