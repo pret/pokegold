@@ -416,29 +416,29 @@ JohtoGrassWildMons:
 	def_grass_wildmons RUINS_OF_ALPH_INNER_CHAMBER
 	db 6 percent, 6 percent, 6 percent ; encounter rates: morn/day/nite
 	; morn
-	db 5, UNOWN
-	db 5, UNOWN
-	db 5, UNOWN
-	db 5, UNOWN
-	db 5, UNOWN
-	db 5, UNOWN
-	db 5, UNOWN
+	db 12, UNOWN
+	db 12, UNOWN
+	db 12, UNOWN
+	db 12, UNOWN
+	db 12, UNOWN
+	db 12, UNOWN
+	db 12, UNOWN
 	; day
-	db 5, UNOWN
-	db 5, UNOWN
-	db 5, UNOWN
-	db 5, UNOWN
-	db 5, UNOWN
-	db 5, UNOWN
-	db 5, UNOWN
+	db 12, UNOWN
+	db 12, UNOWN
+	db 12, UNOWN
+	db 12, UNOWN
+	db 12, UNOWN
+	db 12, UNOWN
+	db 12, UNOWN
 	; nite
-	db 5, UNOWN
-	db 5, UNOWN
-	db 5, UNOWN
-	db 5, UNOWN
-	db 5, UNOWN
-	db 5, UNOWN
-	db 5, UNOWN
+	db 12, UNOWN
+	db 12, UNOWN
+	db 12, UNOWN
+	db 12, UNOWN
+	db 12, UNOWN
+	db 12, UNOWN
+	db 12, UNOWN
 	end_grass_wildmons
 
 	def_grass_wildmons UNION_CAVE_1F
@@ -1572,29 +1572,29 @@ JohtoGrassWildMons:
 	def_grass_wildmons ROUTE_29
 	db 10 percent, 10 percent, 10 percent ; encounter rates: morn/day/nite
 	; morn
-	db 6, PIDGEY
-	db 7, SENTRET
-	db 7, PIDGEY
-	db 6, SENTRET
-	db 8, LEDYBA
-	db 8, PIDGEY
-	db 8, PIDGEY
-	; day
-	db 6, PIDGEY
-	db 7, SENTRET
-	db 7, PIDGEY
-	db 6, SENTRET
-	db 8, LEDYBA
-	db 8, PIDGEY
-	db 8, PIDGEY
-	; nite
-	db 6, HOOTHOOT
-	db 7, HOOTHOOT
+	db 4, PIDGEY
+	db 5, SENTRET
+	db 5, PIDGEY
+	db 4, SENTRET
 	db 7, LEDYBA
-	db 6, RATTATA
-	db 8, RATTATA
-	db 8, SPEAROW
-	db 8, HOOTHOOT
+	db 7, PIDGEY
+	db 7, PIDGEY
+	; day
+	db 4, PIDGEY
+	db 5, SENTRET
+	db 5, PIDGEY
+	db 4, SENTRET
+	db 7, LEDYBA
+	db 7, PIDGEY
+	db 7, PIDGEY
+	; nite
+	db 4, HOOTHOOT
+	db 5, HOOTHOOT
+	db 5, LEDYBA
+	db 4, RATTATA
+	db 7, RATTATA
+	db 7, SPEAROW
+	db 7, HOOTHOOT
 	end_grass_wildmons
 
 	def_grass_wildmons ROUTE_30
