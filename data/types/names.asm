@@ -9,7 +9,7 @@ TypeNames:
 	dw Rock
 	dw Bird
 	dw Bug
-	dw Ghost
+	dw Dragon
 	dw Steel
 	assert_table_length UNUSED_TYPES
 	dw Normal
@@ -29,7 +29,7 @@ TypeNames:
 	dw Electric
 	dw Psychic
 	dw Ice
-	dw Dragon
+	dw Ghost
 	dw Dark
 	assert_table_length TYPES_END
 
