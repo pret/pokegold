@@ -4,11 +4,11 @@
 MACRO add_special
 ; Some ROM0 specials have a nonzero bank.
 \1Special::
-if _NARG == 1
-	dba \1
-else
-	dbw \2, \1
-endc
+	if _NARG == 1
+		dba \1
+	else
+		dbw \2, \1
+	endc
 ENDM
 
 SpecialsPointers::

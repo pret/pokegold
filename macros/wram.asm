@@ -100,20 +100,20 @@ MACRO curbox
 \1Count::   db
 \1Species:: ds MONS_PER_BOX + 1
 \1Mons::
-; \1Mon1 - \1Mon20
-for n, 1, MONS_PER_BOX + 1
-\1Mon{d:n}:: box_struct \1Mon{d:n}
-endr
+	; \1Mon1 - \1Mon20
+	for n, 1, MONS_PER_BOX + 1
+	\1Mon{d:n}:: box_struct \1Mon{d:n}
+	endr
 \1MonOTs::
-; \1Mon1OT - \1Mon20OT
-for n, 1, MONS_PER_BOX + 1
-\1Mon{d:n}OT:: ds NAME_LENGTH
-endr
+	; \1Mon1OT - \1Mon20OT
+	for n, 1, MONS_PER_BOX + 1
+	\1Mon{d:n}OT:: ds NAME_LENGTH
+	endr
 \1MonNicknames::
-; \1Mon1Nickname - \1Mon20Nickname
-for n, 1, MONS_PER_BOX + 1
-\1Mon{d:n}Nickname:: ds MON_NAME_LENGTH
-endr
+	; \1Mon1Nickname - \1Mon20Nickname
+	for n, 1, MONS_PER_BOX + 1
+	\1Mon{d:n}Nickname:: ds MON_NAME_LENGTH
+	endr
 \1MonNicknamesEnd::
 \1End::
 ENDM
@@ -216,10 +216,10 @@ ENDM
 
 MACRO hall_of_fame
 \1WinCount:: db
-; \1Mon1 - \1Mon6
-for n, 1, PARTY_LENGTH + 1
-\1Mon{d:n}:: hof_mon \1Mon{d:n}
-endr
+	; \1Mon1 - \1Mon6
+	for n, 1, PARTY_LENGTH + 1
+	\1Mon{d:n}:: hof_mon \1Mon{d:n}
+	endr
 \1End:: db
 ENDM
 
