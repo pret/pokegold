@@ -532,8 +532,8 @@ MysteryEggDesc:
 	next "from MR.#MON.@"
 
 GSBallDesc:
-	db   "Looks like a #BALL"
-	next "...but very old@"
+	db   "A very mystical"
+	next "looking #BALL@"
 
 SilverWingDesc:
 	db   "A strange, silver-"
