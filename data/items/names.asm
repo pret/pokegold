@@ -69,7 +69,7 @@ ItemNames::
 	li "SECRETPOTION"
 	li "S.S.TICKET"
 	li "MYSTERY EGG"
-	li "TERU-SAMA"
+	li "GS BALL"
 	li "SILVER WING"
 	li "MOOMOO MILK"
 	li "QUICK CLAW"
