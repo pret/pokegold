@@ -32,7 +32,7 @@ GoldenrodPokecenter1FGameboyKidText:
 	line "upstairs at any"
 
 	para "#MON CENTER--is"
-	line "for link battles." 
+	line "for link battles."
 
 	para "Battle records are"
 	line "posted on the"
