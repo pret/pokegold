@@ -403,7 +403,7 @@ PlaceNonFaintStatus:
 	bit PAR, a
 	jr nz, .place
 	ld de, SlpString
-	and SLP
+	and SLP_MASK
 	jr z, .no_status
 
 .place
