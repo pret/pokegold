@@ -1,6 +1,4 @@
 BattleCommand_Present:
-; present
-
 	call BattleCommand_Stab
 	ld a, [wTypeMatchup]
 	and a
