@@ -1,4 +1,4 @@
-TILES_PER_CYCLE EQU 8
+DEF TILES_PER_CYCLE EQU 8
 
 FarDecompressBufferedPic:: ; unreferenced
 	ld b, a

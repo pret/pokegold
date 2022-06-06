@@ -9,11 +9,11 @@
 	const PARTYMENUQUALITY_EVO_STONE_COMPAT
 	const PARTYMENUQUALITY_GENDER
 
-partymenuqualities: MACRO
-rept _NARG
-	db PARTYMENUQUALITY_\1
-	shift
-endr
+MACRO partymenuqualities
+	rept _NARG
+		db PARTYMENUQUALITY_\1
+		shift
+	endr
 	db -1 ; end
 ENDM
 

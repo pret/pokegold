@@ -2,7 +2,7 @@
 	const PINK_PAGE  ; 1
 	const GREEN_PAGE ; 2
 	const BLUE_PAGE  ; 3
-NUM_STAT_PAGES EQU const_value - 1
+DEF NUM_STAT_PAGES EQU const_value - 1
 
 StatsScreenInit:
 	ldh a, [hMapAnims]

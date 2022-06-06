@@ -1,8 +1,8 @@
-__trainer_class__ = 0
+DEF __trainer_class__ = 0
 
-trainerclass: MACRO
-\1 EQU __trainer_class__
-__trainer_class__ += 1
+MACRO trainerclass
+	DEF \1 EQU __trainer_class__
+	DEF __trainer_class__ += 1
 	const_def 1
 ENDM
 
@@ -16,13 +16,13 @@ ENDM
 ; - TrainerPicPointers (see data/trainers/pic_pointers.asm)
 ; - TrainerPalettes (see data/trainers/palettes.asm)
 ; trainer constants are Trainers indexes, for the sub-tables of TrainerGroups (see data/trainers/parties.asm)
-CHRIS EQU __trainer_class__
+DEF CHRIS EQU __trainer_class__
 	trainerclass TRAINER_NONE ; 0
 	const PHONECONTACT_MOM
 	const PHONECONTACT_BIKESHOP
 	const PHONECONTACT_BILL
 	const PHONECONTACT_ELM
-NUM_NONTRAINER_PHONECONTACTS EQU const_value - 1
+DEF NUM_NONTRAINER_PHONECONTACTS EQU const_value - 1
 
 	trainerclass FALKNER ; 1
 	const FALKNER1
@@ -651,4 +651,4 @@ NUM_NONTRAINER_PHONECONTACTS EQU const_value - 1
 	const GRUNTF_4
 	const GRUNTF_5
 
-NUM_TRAINER_CLASSES EQU __trainer_class__ - 1
+DEF NUM_TRAINER_CLASSES EQU __trainer_class__ - 1

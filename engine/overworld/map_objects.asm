@@ -2740,9 +2740,9 @@ ApplyBGMapAnchorToObjects::
 	pop hl
 	ret
 
-PRIORITY_LOW  EQU $10
-PRIORITY_NORM EQU $20
-PRIORITY_HIGH EQU $30
+DEF PRIORITY_LOW  EQU $10
+DEF PRIORITY_NORM EQU $20
+DEF PRIORITY_HIGH EQU $30
 
 InitSprites:
 	call .DeterminePriorities

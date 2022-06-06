@@ -33,10 +33,10 @@
 	const SCGB_MYSTERY_GIFT
 	const SCGB_1E
 	const SCGB_POKEDEX_5X5
-NUM_SCGB_LAYOUTS EQU const_value
+DEF NUM_SCGB_LAYOUTS EQU const_value
 
-SCGB_PARTY_MENU_HP_BARS EQU $fc
-SCGB_DEFAULT EQU $ff
+DEF SCGB_PARTY_MENU_HP_BARS EQU $fc
+DEF SCGB_DEFAULT EQU $ff
 
 ; PredefPals indexes (see gfx/sgb/predef.pal)
 ; GetPredefPal arguments (see engine/gfx/color.asm)
@@ -120,7 +120,7 @@ SCGB_DEFAULT EQU $ff
 	const PREDEFPAL_UNOWN_PUZZLE
 	const PREDEFPAL_GAMEFREAK_LOGO_OB
 	const PREDEFPAL_GAMEFREAK_LOGO_BG
-NUM_PREDEF_PALS EQU const_value
+DEF NUM_PREDEF_PALS EQU const_value
 
 ; SGB system command codes
 ; http://gbdev.gg8.se/wiki/articles/SGB_Functions#SGB_System_Command_Table
@@ -151,4 +151,4 @@ NUM_PREDEF_PALS EQU const_value
 	const SGB_MASK_EN
 	const SGB_OBJ_TRN
 
-PALPACKET_LENGTH EQU $10
+DEF PALPACKET_LENGTH EQU $10

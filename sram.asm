@@ -141,12 +141,12 @@ sBackupPlayerData2:: ds wPlayerData2End - wPlayerData2
 
 ; The PC boxes will not fit into one SRAM bank,
 ; so they use multiple SECTIONs
-box_n = 0
-boxes: MACRO
-rept \1
-box_n += 1
-sBox{d:box_n}:: box sBox{d:box_n}
-endr
+DEF box_n = 0
+MACRO boxes
+	rept \1
+		DEF box_n += 1
+	sBox{d:box_n}:: box sBox{d:box_n}
+	endr
 ENDM
 
 SECTION "Boxes 1-7", SRAM

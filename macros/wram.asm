@@ -1,10 +1,10 @@
 ; Used in wram.asm
 
-flag_array: MACRO
+MACRO flag_array
 	ds ((\1) + 7) / 8
 ENDM
 
-box_struct: MACRO
+MACRO box_struct
 \1Species::        db
 \1Item::           db
 \1Moves::          ds NUM_MOVES
@@ -26,7 +26,7 @@ box_struct: MACRO
 \1BoxEnd::
 ENDM
 
-party_struct: MACRO
+MACRO party_struct
 	box_struct \1
 \1Status::         db
 \1Unused::         db
@@ -41,7 +41,7 @@ party_struct: MACRO
 \1StructEnd::
 ENDM
 
-red_box_struct: MACRO
+MACRO red_box_struct
 \1Species::    db
 \1HP::         dw
 \1BoxLevel::   db
@@ -62,7 +62,7 @@ red_box_struct: MACRO
 \1PP::         ds NUM_MOVES
 ENDM
 
-red_party_struct: MACRO
+MACRO red_party_struct
 	red_box_struct \1
 \1Level::      db
 \1Stats::
@@ -73,7 +73,7 @@ red_party_struct: MACRO
 \1Special::    dw
 ENDM
 
-battle_struct: MACRO
+MACRO battle_struct
 \1Species::   db
 \1Item::      db
 \1Moves::     ds NUM_MOVES
@@ -96,34 +96,34 @@ battle_struct: MACRO
 \1StructEnd::
 ENDM
 
-curbox: MACRO
+MACRO curbox
 \1Count::   db
 \1Species:: ds MONS_PER_BOX + 1
 \1Mons::
-; \1Mon1 - \1Mon20
-for n, 1, MONS_PER_BOX + 1
-\1Mon{d:n}:: box_struct \1Mon{d:n}
-endr
+	; \1Mon1 - \1Mon20
+	for n, 1, MONS_PER_BOX + 1
+	\1Mon{d:n}:: box_struct \1Mon{d:n}
+	endr
 \1MonOTs::
-; \1Mon1OT - \1Mon20OT
-for n, 1, MONS_PER_BOX + 1
-\1Mon{d:n}OT:: ds NAME_LENGTH
-endr
+	; \1Mon1OT - \1Mon20OT
+	for n, 1, MONS_PER_BOX + 1
+	\1Mon{d:n}OT:: ds NAME_LENGTH
+	endr
 \1MonNicknames::
-; \1Mon1Nickname - \1Mon20Nickname
-for n, 1, MONS_PER_BOX + 1
-\1Mon{d:n}Nickname:: ds MON_NAME_LENGTH
-endr
+	; \1Mon1Nickname - \1Mon20Nickname
+	for n, 1, MONS_PER_BOX + 1
+	\1Mon{d:n}Nickname:: ds MON_NAME_LENGTH
+	endr
 \1MonNicknamesEnd::
 \1End::
 ENDM
 
-box: MACRO
+MACRO box
 	curbox \1
 	ds 2 ; padding
 ENDM
 
-map_connection_struct: MACRO
+MACRO map_connection_struct
 \1ConnectedMapGroup::       db
 \1ConnectedMapNumber::      db
 \1ConnectionStripPointer::  dw
@@ -135,7 +135,7 @@ map_connection_struct: MACRO
 \1ConnectionWindow::        dw
 ENDM
 
-channel_struct: MACRO
+MACRO channel_struct
 \1MusicID::           dw
 \1MusicBank::         db
 \1Flags1::            db ; 0:on/off 1:subroutine 2:looping 3:sfx 4:noise 5:rest
@@ -179,7 +179,7 @@ channel_struct: MACRO
                       ds 1
 ENDM
 
-mailmsg: MACRO
+MACRO mailmsg
 \1Message::     ds MAIL_MSG_LENGTH
 \1MessageEnd::  db
 \1Author::      ds PLAYER_NAME_LENGTH
@@ -190,7 +190,7 @@ mailmsg: MACRO
 \1End::
 ENDM
 
-roam_struct: MACRO
+MACRO roam_struct
 \1Species::   db
 \1Level::     db
 \1MapGroup::  db
@@ -199,13 +199,13 @@ roam_struct: MACRO
 \1DVs::       dw
 ENDM
 
-bugcontestwinner: MACRO
+MACRO bugcontestwinner
 \1WinnerID:: db
 \1Mon::      db
 \1Score::    dw
 ENDM
 
-hof_mon: MACRO
+MACRO hof_mon
 \1Species::  db
 \1ID::       dw
 \1DVs::      dw
@@ -214,16 +214,16 @@ hof_mon: MACRO
 \1End::
 ENDM
 
-hall_of_fame: MACRO
+MACRO hall_of_fame
 \1WinCount:: db
-; \1Mon1 - \1Mon6
-for n, 1, PARTY_LENGTH + 1
-\1Mon{d:n}:: hof_mon \1Mon{d:n}
-endr
+	; \1Mon1 - \1Mon6
+	for n, 1, PARTY_LENGTH + 1
+	\1Mon{d:n}:: hof_mon \1Mon{d:n}
+	endr
 \1End:: db
 ENDM
 
-link_battle_record: MACRO
+MACRO link_battle_record
 \1ID::     dw
 \1Name::   ds NAME_LENGTH - 1
 \1Wins::   dw
@@ -232,7 +232,7 @@ link_battle_record: MACRO
 \1End::
 ENDM
 
-trademon: MACRO
+MACRO trademon
 \1Species::     db
 \1SpeciesName:: ds MON_NAME_LENGTH
 \1Nickname::    ds MON_NAME_LENGTH
@@ -243,7 +243,7 @@ trademon: MACRO
 \1End::
 ENDM
 
-move_struct: MACRO
+MACRO move_struct
 \1Animation::    db
 \1Effect::       db
 \1Power::        db
@@ -253,7 +253,7 @@ move_struct: MACRO
 \1EffectChance:: db
 ENDM
 
-slot_reel: MACRO
+MACRO slot_reel
 \1ReelAction::   db
 \1TilemapAddr::  dw
 \1Position::     db
@@ -270,7 +270,7 @@ slot_reel: MACRO
 \1StopDelay::    db
 ENDM
 
-object_struct: MACRO
+MACRO object_struct
 \1Sprite::            db
 \1MapObjectIndex::    db
 \1SpriteTile::        db
@@ -307,7 +307,7 @@ object_struct: MACRO
 \1StructEnd::
 ENDM
 
-map_object: MACRO
+MACRO map_object
 \1ObjectStructID::  db
 \1ObjectSprite::    db
 \1ObjectYCoord::    db
@@ -323,7 +323,7 @@ map_object: MACRO
 	ds 2
 ENDM
 
-sprite_oam_struct: MACRO
+MACRO sprite_oam_struct
 \1YCoord::     db
 \1XCoord::     db
 \1TileID::     db
@@ -336,7 +336,7 @@ sprite_oam_struct: MACRO
 ; bit 2-0: pal # (cgb only)
 ENDM
 
-sprite_anim_struct: MACRO
+MACRO sprite_anim_struct
 \1Index::          db
 \1FramesetID::     db
 \1AnimSeqID::      db
@@ -355,7 +355,7 @@ sprite_anim_struct: MACRO
 \1Var4::           ds 1
 ENDM
 
-battle_anim_struct: MACRO
+MACRO battle_anim_struct
 \1Index::          db
 \1OAMFlags::       db
 \1FixY::           db
@@ -376,7 +376,7 @@ battle_anim_struct: MACRO
 	ds 7
 ENDM
 
-battle_bg_effect: MACRO
+MACRO battle_bg_effect
 \1Function::       db
 \1JumptableIndex:: db
 \1BattleTurn::     db

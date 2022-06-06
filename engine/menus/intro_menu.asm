@@ -847,7 +847,7 @@ Intro_PlaceChrisSprite:
 	const TITLESCREENOPTION_RESTART
 	const TITLESCREENOPTION_UNUSED
 	const TITLESCREENOPTION_RESET_CLOCK
-NUM_TITLESCREENOPTIONS EQU const_value
+DEF NUM_TITLESCREENOPTIONS EQU const_value
 
 IntroSequence:
 	callfar SplashScreen
@@ -1108,15 +1108,15 @@ ENDC
 
 IF DEF(_GOLD)
 .TitleTrailCoords:
-trail_coords: MACRO
-rept _NARG / 2
-_dx = 4
-if \1 == 0 && \2 == 0
-_dx = 0
-endc
-	dbpixel \1, \2, _dx, 0
-	shift 2
-endr
+MACRO trail_coords
+	rept _NARG / 2
+		DEF _dx = 4
+		if \1 == 0 && \2 == 0
+			DEF _dx = 0
+		endc
+		dbpixel \1, \2, _dx, 0
+		shift 2
+	endr
 ENDM
 	; frame 0 y, x; frame 1 y, x
 	trail_coords 11, 10,  0,  0
