@@ -640,19 +640,18 @@ wMysteryGiftPlayerDataEnd::
 
 SECTION UNION "Overworld Map", WRAM0
 
-align 8
+	align 8
 wLYOverrides:: ds SCREEN_HEIGHT_PX
 wLYOverridesEnd::
 
 UNION
-align 8, SCREEN_HEIGHT_PX
 	ds 16
 wLYOverrides2:: ds SCREEN_HEIGHT_PX
 wLYOverrides2End::
 
 NEXTU
 	ds 112
-align 8
+	align 8
 wLYOverridesBackup:: ds SCREEN_HEIGHT_PX
 wLYOverridesBackupEnd::
 ENDU
