@@ -1,11 +1,3 @@
-INCLUDE "constants.asm"
-
-INCLUDE "macros/wram.asm"
-
-
-INCLUDE "vram.asm"
-
-
 SECTION "Audio RAM", WRAM0
 
 ; nonzero if playing
@@ -2818,8 +2810,3 @@ wStackBottom::
 	ds $fc
 wStackTop::
 	ds 1
-
-
-INCLUDE "sram.asm"
-
-INCLUDE "hram.asm"
