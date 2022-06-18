@@ -640,7 +640,7 @@ wMysteryGiftPlayerDataEnd::
 
 SECTION UNION "Overworld Map", WRAM0
 
-; LCD expects wLYOverrides to have an alignment of $100
+	align 8
 wLYOverrides:: ds SCREEN_HEIGHT_PX
 wLYOverridesEnd::
 
@@ -650,10 +650,14 @@ wLYOverrides2:: ds SCREEN_HEIGHT_PX
 wLYOverrides2End::
 
 NEXTU
-	ds $100 - SCREEN_HEIGHT_PX
+	ds 112
+
+	align 8
 wLYOverridesBackup:: ds SCREEN_HEIGHT_PX
-wLYOverridesBackupEnd:: ds $100 - SCREEN_HEIGHT_PX
+wLYOverridesBackupEnd::
 ENDU
+
+	ds 112
 
 UNION
 ; blank credits tile buffer
