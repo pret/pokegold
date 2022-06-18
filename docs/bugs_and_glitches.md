@@ -43,6 +43,8 @@ All the bugs documented here were fixed in Pokémon Crystal. Any that weren't ar
 
 ## The game can incorrectly run in GB mode when this is a GBC
 
+([Video 1](https://www.youtube.com/watch?v=P-aK0sOXGdc), [Video 2](https://www.youtube.com/watch?v=GnvZXutzb1Y))
+
 **Fix:** No fix is available at this time.
 
 
