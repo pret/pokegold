@@ -720,7 +720,7 @@ TryEnemyFlee:
 	jr nz, .Stay
 
 	ld a, [wEnemyMonStatus]
-	and 1 << FRZ | SLP
+	and 1 << FRZ | SLP_MASK
 	jr nz, .Stay
 
 	ld a, [wTempEnemyMonSpecies]
