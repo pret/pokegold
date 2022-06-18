@@ -16,6 +16,7 @@ All the bugs documented here were fixed in Pokémon Crystal. Any that weren't ar
 ## Contents
 
 - [Using the Coin Case can cause arbitrary code execution](#using-the-coin-case-can-cause-arbitrary-code-execution)
+- [The game can incorrectly run in GB mode when this is a GBC](#the-game-can-incorrectly-run-in-gb-mode-when-this-is-a-gbc)
 - [Entering the Hall of Fame without a save file can corrupt the PC boxes](#entering-the-hall-of-fame-without-a-save-file-can-corrupt-the-pc-boxes)
 - [The Lucky Number Show does not find winning ID numbers in inactive boxes 10-14](#the-lucky-number-show-does-not-find-winning-id-numbers-in-inactive-boxes-10-14)
 - [Present's text overflows when it fails to heal an enemy Pokémon with a long name](#presents-text-overflows-when-it-fails-to-heal-an-enemy-pokémon-with-a-long-name)
@@ -38,6 +39,11 @@ All the bugs documented here were fixed in Pokémon Crystal. Any that weren't ar
 -	done
 +	text_end
 ```
+
+
+## The game can incorrectly run in GB mode when this is a GBC
+
+**Fix:** No fix is available at this time.
 
 
 ## Entering the Hall of Fame without a save file can corrupt the PC boxes
