@@ -30,7 +30,7 @@ BattleIntroSlidingPics:
 
 .subfunction1
 	push bc
-	ld hl, wVirtualOAMSprite00XCoord
+	ld hl, wShadowOAMSprite00XCoord
 	ld c, $12 ; 18
 	ld de, SPRITEOAMSTRUCT_LENGTH
 .loop2
