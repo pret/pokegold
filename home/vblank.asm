@@ -111,7 +111,7 @@ VBlank0::
 	ldh a, [hOAMUpdate]
 	and a
 	jr nz, .done_oam
-	call hTransferVirtualOAM
+	call hTransferShadowOAM
 .done_oam
 
 	; vblank-sensitive operations are done
@@ -166,7 +166,7 @@ VBlank1::
 	call UpdateBGMap
 	call Serve2bppRequest
 
-	call hTransferVirtualOAM
+	call hTransferShadowOAM
 
 .done
 	ldh a, [hLCDCPointer]
@@ -239,7 +239,7 @@ VBlank4::
 	call UpdateBGMap
 	call Serve2bppRequest
 
-	call hTransferVirtualOAM
+	call hTransferShadowOAM
 
 	call UpdateJoypad
 
@@ -366,7 +366,7 @@ VBlank3::
 	call Serve2bppRequest
 	call Serve1bppRequest
 	call AnimateTileset
-	call hTransferVirtualOAM
+	call hTransferShadowOAM
 
 	xor a
 	ld [wVBlankOccurred], a
