@@ -1010,7 +1010,7 @@ DebugColor_PlaceCursor:
 
 	ld b, $70 ; initial tile id
 	ld c, 5 ; initial palette
-	ld hl, wVirtualOAM
+	ld hl, wShadowOAM
 	ld de, wDebugRedChannel
 	call .placesprite
 	ld de, wDebugGreenChannel
@@ -1429,7 +1429,7 @@ DebugTileset_PlaceCursor: ; unreferenced
 	ld [hl], "▶"
 
 	ld b, $78 ; initial tile id
-	ld hl, wVirtualOAM
+	ld hl, wShadowOAM
 	ld de, wDebugRedChannel
 	call .placesprite
 	ld de, wDebugGreenChannel
