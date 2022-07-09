@@ -1071,9 +1071,8 @@ BeatUpAttackText:
 	line "attack!"
 	done
 
-; BUG: Pokémon names 8-10 characters long can overflow the textbox,
-; printing as "Enemy 1234567890 can't": up to 21 characters, over 18.
 PresentFailedText:
+; BUG: Present's text overflows when it fails to heal an enemy Pokémon with a long name (see docs/bugs_and_glitches.md)
 	text "<TARGET> can't"
 	line "receive the gift!"
 	prompt

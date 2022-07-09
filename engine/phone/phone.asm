@@ -499,6 +499,7 @@ PhoneCall::
 	ld [hl], "☎"
 	inc hl
 	inc hl
+; BUG: The unused phonecall script command may crash (see docs/bugs_and_glitches.md)
 	ld a, [wPhoneScriptBank]
 	ld b, a
 	ld a, [wPhoneCaller]

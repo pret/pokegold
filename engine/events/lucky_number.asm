@@ -97,7 +97,7 @@ CheckForLuckyNumberWinners:
 	inc c
 	ld a, c
 
-	; BUG: fails to find winning mon in boxes 10-14 if not the active box
+	; BUG: The Lucky Number Show does not find winning ID numbers in inactive boxes 10-14 (see docs/bugs_and_glitches.md)
 	cp NUM_BOXES_JAPANESE
 	jr c, .BoxesLoop
 

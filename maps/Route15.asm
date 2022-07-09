@@ -193,7 +193,8 @@ SchoolboyBillyAfterBattleText:
 	done
 
 Route15SignText:
-	text "Route 15" ; should be "ROUTE 15"
+; BUG: "Route 15" is not capitalized in a signpost (see docs/bugs_and_glitches.md)
+	text "Route 15"
 
 	para "FUCHSIA CITY -"
 	line "LAVENDER TOWN"

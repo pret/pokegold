@@ -333,8 +333,8 @@ Text_PlayedPokeFlute::
 
 	text_end ; unreferenced
 
-; BUG: "done" is not a valid terminator here, needs to change to "text_end"
 _CoinCaseCountText::
+; BUG: Using the Coin Case can cause arbitrary code execution (see docs/bugs_and_glitches.md)
 	text "Coins:"
 	line "@"
 	text_decimal wCoins, 2, 4

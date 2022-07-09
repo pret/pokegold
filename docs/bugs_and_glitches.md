@@ -30,8 +30,8 @@ All the bugs documented here were fixed in Pokémon Crystal. Any that weren't ar
 **Fix:** Edit `_CoinCaseCountText` in [data/text/common_3.asm](https://github.com/pret/pokegold/blob/master/data/text/common_3.asm):
 
 ```diff
--; BUG: "done" is not a valid terminator here, needs to change to "text_end"
  _CoinCaseCountText::
+-; BUG: Using the Coin Case can cause arbitrary code execution (see docs/bugs_and_glitches.md)
  	text "Coins:"
  	line "@"
  	text_decimal wCoins, 2, 4
@@ -47,8 +47,8 @@ All the bugs documented here were fixed in Pokémon Crystal. Any that weren't ar
 **Fix:** Edit `HallOfFame` in [engine/events/halloffame.asm](https://github.com/pret/pokegold/blob/master/engine/events/halloffame.asm):
 
 ```diff
--; Bug: Gold/Silver fail to (conditionally) erase the previous save and
--; initialize the current save, if the player did not save on this playthrough.
+-; BUG: Entering the Hall of Fame without a save file can corrupt the PC boxes (see docs/bugs_and_glitches.md)
+
 +	ld a, [wSavedAtLeastOnce]
 +	and a
 +	jr nz, .saved
@@ -62,7 +62,7 @@ All the bugs documented here were fixed in Pokémon Crystal. Any that weren't ar
 **Fix:** Edit `CheckForLuckyNumberWinners` in [engine/events/lucky_number.asm](https://github.com/pret/pokegold/blob/master/engine/events/lucky_number.asm):
 
 ```diff
--	; BUG: fails to find winning mon in boxes 10-14 if not the active box
+-	; BUG: The Lucky Number Show does not find winning ID numbers in inactive boxes 10-14 (see docs/bugs_and_glitches.md)
 -	cp NUM_BOXES_JAPANESE
 +	cp NUM_BOXES
  	jr c, .BoxesLoop
@@ -74,9 +74,8 @@ All the bugs documented here were fixed in Pokémon Crystal. Any that weren't ar
 **Fix:** Edit `PresentFailedText` in [data/text/battle.asm](https://github.com/pret/pokegold/blob/master/data/text/battle.asm):
 
 ```diff
--; BUG: Pokémon names 8-10 characters long can overflow the textbox,
--; printing as "Enemy 1234567890 can't": up to 21 characters, over 18.
  PresentFailedText:
+-; BUG: Present's text overflows when it fails to heal an enemy Pokémon with a long name (see docs/bugs_and_glitches.md)
 -	text "<TARGET> can't"
 -	line "receive the gift!"
 +	text "<TARGET>"
@@ -90,6 +89,7 @@ All the bugs documented here were fixed in Pokémon Crystal. Any that weren't ar
 **Fix:** Edit `MapGroup_Cerulean` in [data/maps/maps.asm](https://github.com/pret/pokegold/blob/master/data/maps/maps.asm):
 
 ```diff
+-; BUG: You can fish in the water in Cerulean Gym (see docs/bugs_and_glitches.md)
 -	map CeruleanGym, TILESET_PORT, INDOOR, LANDMARK_CERULEAN_CITY, MUSIC_GYM, TRUE, PALETTE_DAY, FISHGROUP_SHORE
 +	map CeruleanGym, TILESET_PORT, INDOOR, LANDMARK_CERULEAN_CITY, MUSIC_GYM, TRUE, PALETTE_DAY, FISHGROUP_NONE
 ```
@@ -100,8 +100,14 @@ All the bugs documented here were fixed in Pokémon Crystal. Any that weren't ar
 **Fix:** Edit `Route15SignText` in [maps/Route15.asm](https://github.com/pret/pokegold/blob/master/maps/Route15.asm):
 
 ```diff
--	text "Route 15" ; should be "ROUTE 15"
+ Route15SignText:
+-; BUG: "Route 15" is not capitalized in a signpost (see docs/bugs_and_glitches.md)
+-	text "Route 15"
 +	text "ROUTE 15"
+
+	para "FUCHSIA CITY -"
+	line "LAVENDER TOWN"
+	done
 ```
 
 (There are many other text changes between Gold/Silver and Crystal, but they are more subjective edits, not definite corrections.)
