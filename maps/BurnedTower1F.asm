@@ -10,9 +10,9 @@
 
 BurnedTower1F_MapScripts:
 	def_scene_scripts
-	scene_script .RivalScene ; SCENE_DEFAULT
-	scene_script .DummyScene1 ; SCENE_BURNEDTOWER1F_RIVAL_BATTLE
-	scene_script .DummyScene2 ; SCENE_BURNEDTOWER1F_NOTHING
+	scene_script .RivalScene,  SCENE_BURNEDTOWER1F_RIVAL_BATTLE
+	scene_script .DummyScene1, SCENE_BURNEDTOWER1F_FIREBREATHER_DICK
+	scene_script .DummyScene2, SCENE_BURNEDTOWER1F_NOOP
 
 	def_callbacks
 
@@ -84,7 +84,7 @@ BurnedTower1F_MapScripts:
 	applymovement BURNEDTOWER1F_SILVER, BurnedTowerMovement_SilverLeaves
 	playsound SFX_EXIT_BUILDING
 	disappear BURNEDTOWER1F_SILVER
-	setscene SCENE_BURNEDTOWER1F_RIVAL_BATTLE
+	setscene SCENE_BURNEDTOWER1F_FIREBREATHER_DICK
 	waitsfx
 	playmapmusic
 	end
@@ -107,7 +107,7 @@ FirebreatherDickFight:
 	appear BURNEDTOWER1F_FIREBREATHER_DICK_ASHES
 	reloadmapafterbattle
 	setevent EVENT_BEAT_FIREBREATHER_DICK
-	setscene SCENE_BURNEDTOWER1F_NOTHING
+	setscene SCENE_BURNEDTOWER1F_NOOP
 	clearevent EVENT_BURNED_TOWER_FIREBREATHER_DICK_NORMAL
 	setevent EVENT_BURNED_TOWER_FIREBREATHER_DICK_ASHES
 	end
@@ -296,7 +296,7 @@ BurnedTower1F_MapEvents:
 	warp_event  7, 15, BURNED_TOWER_B1F, 6
 
 	def_coord_events
-	coord_event 8,  1, SCENE_BURNEDTOWER1F_RIVAL_BATTLE, FirebreatherDickFight
+	coord_event 8,  1, SCENE_BURNEDTOWER1F_FIREBREATHER_DICK, FirebreatherDickFight
 
 	def_bg_events
 	bg_event  8,  7, BGEVENT_ITEM, BurnedTower1FHiddenEther

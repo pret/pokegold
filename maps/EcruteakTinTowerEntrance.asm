@@ -6,8 +6,8 @@
 
 EcruteakTinTowerEntrance_MapScripts:
 	def_scene_scripts
-	scene_script .DummyScene0 ; SCENE_DEFAULT
-	scene_script .DummyScene1 ; SCENE_FINISHED
+	scene_script .DummyScene0, SCENE_ECRUTEAKTINTOWERENTRANCE_SAGE_BLOCKS
+	scene_script .DummyScene1, SCENE_ECRUTEAKTINTOWERENTRANCE_NOOP
 
 	def_callbacks
 
@@ -152,8 +152,8 @@ EcruteakTinTowerEntrance_MapEvents:
 	warp_event 17,  3, ECRUTEAK_TIN_TOWER_BACK_ENTRANCE, 3
 
 	def_coord_events
-	coord_event  4,  7, SCENE_DEFAULT, EcruteakTinTowerEntranceSageBlocksLeft
-	coord_event  5,  7, SCENE_DEFAULT, EcruteakTinTowerEntranceSageBlocksRight
+	coord_event  4,  7, SCENE_ECRUTEAKTINTOWERENTRANCE_SAGE_BLOCKS, EcruteakTinTowerEntranceSageBlocksLeft
+	coord_event  5,  7, SCENE_ECRUTEAKTINTOWERENTRANCE_SAGE_BLOCKS, EcruteakTinTowerEntranceSageBlocksRight
 
 	def_bg_events
 

@@ -31,7 +31,7 @@ EcruteakGymMortyScript:
 	setflag ENGINE_FOGBADGE
 	readvar VAR_BADGES
 	scall EcruteakGymActivateRockets
-	setmapscene ECRUTEAK_TIN_TOWER_ENTRANCE, SCENE_FINISHED
+	setmapscene ECRUTEAK_TIN_TOWER_ENTRANCE, SCENE_ECRUTEAKTINTOWERENTRANCE_NOOP
 .FightDone:
 	checkevent EVENT_GOT_TM30_SHADOW_BALL
 	iftrue .GotShadowBall
