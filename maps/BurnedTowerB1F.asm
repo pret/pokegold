@@ -11,8 +11,8 @@
 
 BurnedTowerB1F_MapScripts:
 	def_scene_scripts
-	scene_script .DummyScene0 ; SCENE_DEFAULT
-	scene_script .DummyScene1 ; SCENE_FINISHED
+	scene_script .DummyScene0, SCENE_BURNEDTOWERB1F_RELEASE_THE_BEASTS
+	scene_script .DummyScene1, SCENE_BURNEDTOWERB1F_NOOP
 
 	def_callbacks
 
@@ -60,7 +60,7 @@ ReleaseTheBeasts:
 	disappear BURNEDTOWERB1F_SUICUNE1
 	waitsfx
 	special RestartMapMusic
-	setscene SCENE_FINISHED
+	setscene SCENE_BURNEDTOWERB1F_NOOP
 	setevent EVENT_RELEASED_THE_BEASTS
 	special InitRoamMons
 	end
@@ -140,7 +140,7 @@ BurnedTowerB1F_MapEvents:
 	warp_event  7, 15, BURNED_TOWER_1F, 14
 
 	def_coord_events
-	coord_event  9,  5, SCENE_DEFAULT, ReleaseTheBeasts
+	coord_event  9,  5, SCENE_BURNEDTOWERB1F_RELEASE_THE_BEASTS, ReleaseTheBeasts
 
 	def_bg_events
 	bg_event  2, 13, BGEVENT_ITEM, BurnedTowerB1FHiddenUltraBall

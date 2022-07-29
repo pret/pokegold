@@ -6,10 +6,10 @@
 
 Pokecenter2F_MapScripts:
 	def_scene_scripts
-	scene_script .Scene0 ; SCENE_DEFAULT
-	scene_script .Scene1 ; SCENE_POKECENTER2F_LEAVE_TRADE_CENTER
-	scene_script .Scene2 ; SCENE_POKECENTER2F_LEAVE_COLOSSEUM
-	scene_script .Scene3 ; SCENE_POKECENTER2F_LEAVE_TIME_CAPSULE
+	scene_script .Scene0, SCENE_POKECENTER2F_NOOP
+	scene_script .Scene1, SCENE_POKECENTER2F_LEAVE_TRADE_CENTER
+	scene_script .Scene2, SCENE_POKECENTER2F_LEAVE_COLOSSEUM
+	scene_script .Scene3, SCENE_POKECENTER2F_LEAVE_TIME_CAPSULE
 
 	def_callbacks
 
@@ -283,8 +283,8 @@ Script_LeftCableTradeCenter:
 	applymovement POKECENTER2F_TRADE_RECEPTIONIST, Pokecenter2FMovementData_ReceptionistStepsRightLooksDown_3
 	applymovement PLAYER, Pokecenter2FMovementData_PlayerTakesThreeStepsDown
 	applymovement POKECENTER2F_TRADE_RECEPTIONIST, Pokecenter2FMovementData_ReceptionistStepsRightAndDown
-	setscene SCENE_DEFAULT
-	setmapscene TRADE_CENTER, SCENE_DEFAULT
+	setscene SCENE_POKECENTER2F_NOOP
+	setmapscene TRADE_CENTER, SCENE_TRADECENTER_INITIALIZE
 	end
 
 Script_LeftCableColosseum:
@@ -292,8 +292,8 @@ Script_LeftCableColosseum:
 	applymovement POKECENTER2F_BATTLE_RECEPTIONIST, Pokecenter2FMovementData_ReceptionistStepsRightLooksDown_3
 	applymovement PLAYER, Pokecenter2FMovementData_PlayerTakesThreeStepsDown
 	applymovement POKECENTER2F_BATTLE_RECEPTIONIST, Pokecenter2FMovementData_ReceptionistStepsRightAndDown
-	setscene SCENE_DEFAULT
-	setmapscene COLOSSEUM, SCENE_DEFAULT
+	setscene SCENE_POKECENTER2F_NOOP
+	setmapscene COLOSSEUM, SCENE_COLOSSEUM_INITIALIZE
 	end
 
 Script_LeftTimeCapsule:
@@ -301,8 +301,8 @@ Script_LeftTimeCapsule:
 	applymovement POKECENTER2F_TIME_CAPSULE_RECEPTIONIST, Pokecenter2FMovementData_ReceptionistStepsLeftLooksRight
 	applymovement PLAYER, Pokecenter2FMovementData_PlayerTakesTwoStepsDown
 	applymovement POKECENTER2F_TIME_CAPSULE_RECEPTIONIST, Pokecenter2FMovementData_ReceptionistStepsRightLooksDown_2
-	setscene SCENE_DEFAULT
-	setmapscene TIME_CAPSULE, SCENE_DEFAULT
+	setscene SCENE_POKECENTER2F_NOOP
+	setmapscene TIME_CAPSULE, SCENE_TIMECAPSULE_INITIALIZE
 	end
 
 Pokecenter2FLinkRecordSign:

@@ -8,12 +8,13 @@
 
 ElmsLab_MapScripts:
 	def_scene_scripts
-	scene_script .MeetElm ; SCENE_DEFAULT
-	scene_script .DummyScene1 ; SCENE_ELMSLAB_CANT_LEAVE
-	scene_script .DummyScene2 ; SCENE_ELMSLAB_NOTHING
-	scene_script .DummyScene3 ; SCENE_ELMSLAB_MEET_OFFICER
-	scene_script .DummyScene4 ; SCENE_ELMSLAB_UNUSED
-	scene_script .DummyScene5 ; SCENE_ELMSLAB_AIDE_GIVES_POTION
+	scene_script .MeetElm,     SCENE_ELMSLAB_MEET_ELM
+	scene_script .DummyScene1, SCENE_ELMSLAB_CANT_LEAVE
+	scene_script .DummyScene2, SCENE_ELMSLAB_NOOP
+	scene_script .DummyScene3, SCENE_ELMSLAB_MEET_OFFICER
+	scene_script .DummyScene4, SCENE_ELMSLAB_UNUSED
+	scene_script .DummyScene5, SCENE_ELMSLAB_AIDE_GIVES_POTION
+	scene_const SCENE_ELMSLAB_AIDE_GIVES_POKE_BALLS
 
 	def_callbacks
 
@@ -232,7 +233,7 @@ ElmDirectionsScript:
 	setevent EVENT_GOT_A_POKEMON_FROM_ELM
 	setevent EVENT_RIVAL_CHERRYGROVE_CITY
 	setscene SCENE_ELMSLAB_AIDE_GIVES_POTION
-	setmapscene NEW_BARK_TOWN, SCENE_FINISHED
+	setmapscene NEW_BARK_TOWN, SCENE_NEWBARKTOWN_NOOP
 	end
 
 ElmDescribesMrPokemonScript:
@@ -434,7 +435,7 @@ AideScript_GivePotion:
 	writetext AideText_AlwaysBusy
 	waitbutton
 	closetext
-	setscene SCENE_ELMSLAB_NOTHING
+	setscene SCENE_ELMSLAB_NOOP
 	end
 
 AideScript_WalkBalls1:
@@ -462,7 +463,7 @@ AideScript_GiveYouBalls:
 	promptbutton
 	itemnotify
 	closetext
-	setscene SCENE_ELMSLAB_NOTHING
+	setscene SCENE_ELMSLAB_NOOP
 	end
 
 AideScript_ReceiveTheBalls:
@@ -517,7 +518,7 @@ CopScript:
 	closetext
 	applymovement ELMSLAB_OFFICER, OfficerLeavesMovement
 	disappear ELMSLAB_OFFICER
-	setscene SCENE_ELMSLAB_NOTHING
+	setscene SCENE_ELMSLAB_NOOP
 	end
 
 ElmsLabWindow:
