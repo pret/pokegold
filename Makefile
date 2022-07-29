@@ -217,6 +217,7 @@ gfx/pokemon/%/back_silver.2bpp: gfx/pokemon/%/back.png
 
 gfx/trainers/%.2bpp: rgbgfx += -h
 
+gfx/intro/fire.2bpp: tools/gfx += --remove-whitespace
 gfx/intro/fire1.2bpp: gfx/intro/charizard1.2bpp gfx/intro/charizard2_top.2bpp gfx/intro/space.2bpp ; cat $^ > $@
 gfx/intro/fire2.2bpp: gfx/intro/charizard2_bottom.2bpp gfx/intro/charizard3.2bpp ; cat $^ > $@
 gfx/intro/fire3.2bpp: gfx/intro/fire.2bpp gfx/intro/unused_blastoise_venusaur.2bpp ; cat $^ > $@
