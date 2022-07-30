@@ -14,9 +14,9 @@ CianwoodCity_MapScripts:
 	def_scene_scripts
 
 	def_callbacks
-	callback MAPCALLBACK_NEWMAP, .FlyPoint
+	callback MAPCALLBACK_NEWMAP, CianwoodCityFlypointCallback
 
-.FlyPoint:
+CianwoodCityFlypointCallback:
 	setflag ENGINE_FLYPOINT_CIANWOOD
 	endcallback
 

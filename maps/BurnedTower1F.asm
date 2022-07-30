@@ -10,23 +10,23 @@
 
 BurnedTower1F_MapScripts:
 	def_scene_scripts
-	scene_script .RivalScene,  SCENE_BURNEDTOWER1F_RIVAL_BATTLE
-	scene_script .DummyScene1, SCENE_BURNEDTOWER1F_FIREBREATHER_DICK
-	scene_script .DummyScene2, SCENE_BURNEDTOWER1F_NOOP
+	scene_script BurnedTower1FRivalBattleScene, SCENE_BURNEDTOWER1F_RIVAL_BATTLE
+	scene_script BurnedTower1FNoop1Scene,       SCENE_BURNEDTOWER1F_FIREBREATHER_DICK
+	scene_script BurnedTower1FNoop2Scene,       SCENE_BURNEDTOWER1F_NOOP
 
 	def_callbacks
 
-.RivalScene:
-	sdefer .Rival
+BurnedTower1FRivalBattleScene:
+	sdefer BurnedTower1FRivalBattleScript
 	end
 
-.DummyScene1:
+BurnedTower1FNoop1Scene:
 	end
 
-.DummyScene2:
+BurnedTower1FNoop2Scene:
 	end
 
-.Rival:
+BurnedTower1FRivalBattleScript:
 	turnobject PLAYER, UP
 	showemote EMOTE_SHOCK, PLAYER, 15
 	special FadeOutMusic

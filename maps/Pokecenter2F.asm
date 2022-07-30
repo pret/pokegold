@@ -6,33 +6,32 @@
 
 Pokecenter2F_MapScripts:
 	def_scene_scripts
-	scene_script .Scene0, SCENE_POKECENTER2F_NOOP
-	scene_script .Scene1, SCENE_POKECENTER2F_LEAVE_TRADE_CENTER
-	scene_script .Scene2, SCENE_POKECENTER2F_LEAVE_COLOSSEUM
-	scene_script .Scene3, SCENE_POKECENTER2F_LEAVE_TIME_CAPSULE
+	scene_script Pokecenter2FCheckMysteryGiftScene, SCENE_POKECENTER2F_CHECK_MYSTERY_GIFT
+	scene_script Pokecenter2FLeaveTradeCenterScene, SCENE_POKECENTER2F_LEAVE_TRADE_CENTER
+	scene_script Pokecenter2FLeaveColosseumScene,   SCENE_POKECENTER2F_LEAVE_COLOSSEUM
+	scene_script Pokecenter2FLeaveTimeCapsuleScene, SCENE_POKECENTER2F_LEAVE_TIME_CAPSULE
 
 	def_callbacks
 
-.Scene0:
+Pokecenter2FCheckMysteryGiftScene:
 	special CheckMysteryGift
-	ifequal $0, .Scene0Done
+	ifequal $0, .done
 	clearevent EVENT_MYSTERY_GIFT_DELIVERY_GUY
 	checkevent EVENT_TEMPORARY_UNTIL_MAP_RELOAD_2
-	iftrue .Scene0Done
+	iftrue .done
 	sdefer Pokecenter2F_AppearMysteryGiftDeliveryGuy
-
-.Scene0Done:
+.done
 	end
 
-.Scene1:
+Pokecenter2FLeaveTradeCenterScene:
 	sdefer Script_LeftCableTradeCenter
 	end
 
-.Scene2:
+Pokecenter2FLeaveColosseumScene:
 	sdefer Script_LeftCableColosseum
 	end
 
-.Scene3:
+Pokecenter2FLeaveTimeCapsuleScene:
 	sdefer Script_LeftTimeCapsule
 	end
 
@@ -283,7 +282,7 @@ Script_LeftCableTradeCenter:
 	applymovement POKECENTER2F_TRADE_RECEPTIONIST, Pokecenter2FMovementData_ReceptionistStepsRightLooksDown_3
 	applymovement PLAYER, Pokecenter2FMovementData_PlayerTakesThreeStepsDown
 	applymovement POKECENTER2F_TRADE_RECEPTIONIST, Pokecenter2FMovementData_ReceptionistStepsRightAndDown
-	setscene SCENE_POKECENTER2F_NOOP
+	setscene SCENE_POKECENTER2F_CHECK_MYSTERY_GIFT
 	setmapscene TRADE_CENTER, SCENE_TRADECENTER_INITIALIZE
 	end
 
@@ -292,7 +291,7 @@ Script_LeftCableColosseum:
 	applymovement POKECENTER2F_BATTLE_RECEPTIONIST, Pokecenter2FMovementData_ReceptionistStepsRightLooksDown_3
 	applymovement PLAYER, Pokecenter2FMovementData_PlayerTakesThreeStepsDown
 	applymovement POKECENTER2F_BATTLE_RECEPTIONIST, Pokecenter2FMovementData_ReceptionistStepsRightAndDown
-	setscene SCENE_POKECENTER2F_NOOP
+	setscene SCENE_POKECENTER2F_CHECK_MYSTERY_GIFT
 	setmapscene COLOSSEUM, SCENE_COLOSSEUM_INITIALIZE
 	end
 
@@ -301,7 +300,7 @@ Script_LeftTimeCapsule:
 	applymovement POKECENTER2F_TIME_CAPSULE_RECEPTIONIST, Pokecenter2FMovementData_ReceptionistStepsLeftLooksRight
 	applymovement PLAYER, Pokecenter2FMovementData_PlayerTakesTwoStepsDown
 	applymovement POKECENTER2F_TIME_CAPSULE_RECEPTIONIST, Pokecenter2FMovementData_ReceptionistStepsRightLooksDown_2
-	setscene SCENE_POKECENTER2F_NOOP
+	setscene SCENE_POKECENTER2F_CHECK_MYSTERY_GIFT
 	setmapscene TIME_CAPSULE, SCENE_TIMECAPSULE_INITIALIZE
 	end
 

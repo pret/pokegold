@@ -7,9 +7,9 @@ DragonsDenB1F_MapScripts:
 	def_scene_scripts
 
 	def_callbacks
-	callback MAPCALLBACK_NEWMAP, .CheckSilver
+	callback MAPCALLBACK_NEWMAP, DragonsDenB1FCheckSilverCallback
 
-.CheckSilver:
+DragonsDenB1FCheckSilverCallback:
 	checkevent EVENT_BEAT_RIVAL_IN_MT_MOON
 	iftrue .CheckDay
 	disappear DRAGONSDENB1F_SILVER

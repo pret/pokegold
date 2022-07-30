@@ -4,20 +4,20 @@
 
 Colosseum_MapScripts:
 	def_scene_scripts
-	scene_script .InitializeColosseum, SCENE_COLOSSEUM_INITIALIZE
-	scene_script .DummyScene1,         SCENE_COLOSSEUM_NOOP
+	scene_script ColosseumInitializeScene, SCENE_COLOSSEUM_INITIALIZE
+	scene_script ColosseumNoop1Scene,      SCENE_COLOSSEUM_NOOP
 
 	def_callbacks
-	callback MAPCALLBACK_OBJECTS, .SetWhichChris
+	callback MAPCALLBACK_OBJECTS, ColosseumSetWhichChrisCallback
 
-.InitializeColosseum:
-	sdefer .InitializeAndPreparePokecenter2F
+ColosseumInitializeScene:
+	sdefer ColosseumInitializeAndPreparePokecenter2FScript
 	end
 
-.DummyScene1:
+ColosseumNoop1Scene:
 	end
 
-.SetWhichChris:
+ColosseumSetWhichChrisCallback:
 	special CableClubCheckWhichChris
 	iffalse .Chris2
 	disappear COLOSSEUM_CHRIS2
@@ -29,7 +29,7 @@ Colosseum_MapScripts:
 	appear COLOSSEUM_CHRIS2
 	endcallback
 
-.InitializeAndPreparePokecenter2F:
+ColosseumInitializeAndPreparePokecenter2FScript:
 	setscene SCENE_COLOSSEUM_NOOP
 	setmapscene POKECENTER_2F, SCENE_POKECENTER2F_LEAVE_COLOSSEUM
 	end
