@@ -15,9 +15,9 @@ SpriteAnimOAMData:
 	spriteanimoam $6e, .OAMData_GSIntroShellder          ; SPRITE_ANIM_OAMSET_GS_INTRO_SHELLDER_2
 	spriteanimoam $2d, .OAMData_GSIntroMagikarp          ; SPRITE_ANIM_OAMSET_GS_INTRO_MAGIKARP_1
 	spriteanimoam $4d, .OAMData_GSIntroMagikarp          ; SPRITE_ANIM_OAMSET_GS_INTRO_MAGIKARP_2
- 	spriteanimoam $60, .OAMData_UnusedIntroAerodactyl    ; SPRITE_ANIM_OAMSET_UNUSED_INTRO_AERODACTYL
- 	spriteanimoam $00, .OAMData_GSIntroLapras1           ; SPRITE_ANIM_OAMSET_GS_INTRO_LAPRAS_1
- 	spriteanimoam $00, .OAMData_GSIntroLapras2           ; SPRITE_ANIM_OAMSET_GS_INTRO_LAPRAS_2
+	spriteanimoam $60, .OAMData_UnusedIntroAerodactyl    ; SPRITE_ANIM_OAMSET_UNUSED_INTRO_AERODACTYL
+	spriteanimoam $00, .OAMData_GSIntroLapras1           ; SPRITE_ANIM_OAMSET_GS_INTRO_LAPRAS_1
+	spriteanimoam $00, .OAMData_GSIntroLapras2           ; SPRITE_ANIM_OAMSET_GS_INTRO_LAPRAS_2
 	spriteanimoam $06, .OAMData_GSIntroLapras3           ; SPRITE_ANIM_OAMSET_GS_INTRO_LAPRAS_3
 	spriteanimoam $0c, .OAMData_GSIntroNote              ; SPRITE_ANIM_OAMSET_GS_INTRO_NOTE
 	spriteanimoam $0d, .OAMData_1x1_Palette0             ; SPRITE_ANIM_OAMSET_GS_INTRO_INVISIBLE_NOTE
@@ -31,7 +31,7 @@ SpriteAnimOAMData:
 	spriteanimoam $80, .OAMData_GSIntroPikachuTail       ; SPRITE_ANIM_OAMSET_GS_INTRO_PIKACHU_TAIL_1
 	spriteanimoam $85, .OAMData_GSIntroPikachuTail       ; SPRITE_ANIM_OAMSET_GS_INTRO_PIKACHU_TAIL_2
 	spriteanimoam $8a, .OAMData_GSIntroPikachuTail       ; SPRITE_ANIM_OAMSET_GS_INTRO_PIKACHU_TAIL_3
- 	spriteanimoam $00, .OAMData_GSIntroSmallFireball     ; SPRITE_ANIM_OAMSET_GS_INTRO_SMALL_FIREBALL
+	spriteanimoam $00, .OAMData_GSIntroSmallFireball     ; SPRITE_ANIM_OAMSET_GS_INTRO_SMALL_FIREBALL
 	spriteanimoam $01, .OAMData_TradePoofBubble          ; SPRITE_ANIM_OAMSET_GS_INTRO_MED_FIREBALL
 	spriteanimoam $09, .OAMData_GSIntroBigFireball       ; SPRITE_ANIM_OAMSET_GS_INTRO_BIG_FIREBALL
 	spriteanimoam $10, .OAMData_GSIntroStarter           ; SPRITE_ANIM_OAMSET_GS_INTRO_CHIKORITA
