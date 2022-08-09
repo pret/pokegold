@@ -5,12 +5,12 @@ RuinsOfAlphKabutoChamber_MapScripts:
 	def_scene_scripts
 
 	def_callbacks
-	callback MAPCALLBACK_TILES, RuinsOfAlphKabutoChamberHiddenDoors
+	callback MAPCALLBACK_TILES, RuinsOfAlphKabutoChamberHiddenDoorsCallback
 
 RuinsOfAlphKabutoChamberReceptionistScript:
 	jumptextfaceplayer RuinsOfAlphKabutoChamberReceptionistText
 
-RuinsOfAlphKabutoChamberHiddenDoors:
+RuinsOfAlphKabutoChamberHiddenDoorsCallback:
 	checkevent EVENT_SOLVED_KABUTO_PUZZLE
 	iffalse .FloorClosed
 	endcallback

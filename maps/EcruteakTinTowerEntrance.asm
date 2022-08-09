@@ -6,15 +6,15 @@
 
 EcruteakTinTowerEntrance_MapScripts:
 	def_scene_scripts
-	scene_script .DummyScene0, SCENE_ECRUTEAKTINTOWERENTRANCE_SAGE_BLOCKS
-	scene_script .DummyScene1, SCENE_ECRUTEAKTINTOWERENTRANCE_NOOP
+	scene_script EcruteakTinTowerEntranceNoop1Scene, SCENE_ECRUTEAKTINTOWERENTRANCE_SAGE_BLOCKS
+	scene_script EcruteakTinTowerEntranceNoop2Scene, SCENE_ECRUTEAKTINTOWERENTRANCE_NOOP
 
 	def_callbacks
 
-.DummyScene0:
+EcruteakTinTowerEntranceNoop1Scene:
 	end
 
-.DummyScene1:
+EcruteakTinTowerEntranceNoop2Scene:
 	end
 
 EcruteakTinTowerEntranceSageBlocksLeft:

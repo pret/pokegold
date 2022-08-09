@@ -11,9 +11,9 @@ Route36_MapScripts:
 	def_scene_scripts
 
 	def_callbacks
-	callback MAPCALLBACK_OBJECTS, .ArthurCallback
+	callback MAPCALLBACK_OBJECTS, Route36ArthurCallback
 
-.ArthurCallback:
+Route36ArthurCallback:
 	readvar VAR_WEEKDAY
 	ifequal THURSDAY, .ArthurAppears
 	disappear ROUTE36_ARTHUR

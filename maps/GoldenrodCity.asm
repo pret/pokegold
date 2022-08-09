@@ -18,9 +18,9 @@ GoldenrodCity_MapScripts:
 	def_scene_scripts
 
 	def_callbacks
-	callback MAPCALLBACK_NEWMAP, .FlyPoint
+	callback MAPCALLBACK_NEWMAP, GoldenrodCityFlypointCallback
 
-.FlyPoint:
+GoldenrodCityFlypointCallback:
 	setflag ENGINE_FLYPOINT_GOLDENROD
 	setflag ENGINE_REACHED_GOLDENROD
 	endcallback

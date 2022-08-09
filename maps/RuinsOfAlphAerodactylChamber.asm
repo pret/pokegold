@@ -2,9 +2,9 @@ RuinsOfAlphAerodactylChamber_MapScripts:
 	def_scene_scripts
 
 	def_callbacks
-	callback MAPCALLBACK_TILES, .HiddenDoors
+	callback MAPCALLBACK_TILES, RuinsOfAlphAerodactylChamberHiddenDoorsCallback
 
-.HiddenDoors:
+RuinsOfAlphAerodactylChamberHiddenDoorsCallback:
 	checkevent EVENT_SOLVED_AERODACTYL_PUZZLE
 	iffalse .FloorClosed
 	endcallback

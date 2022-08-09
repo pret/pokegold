@@ -8,9 +8,9 @@ KurtsHouse_MapScripts:
 	def_scene_scripts
 
 	def_callbacks
-	callback MAPCALLBACK_OBJECTS, .KurtCallback
+	callback MAPCALLBACK_OBJECTS, KurtsHouseKurtCallback
 
-.KurtCallback:
+KurtsHouseKurtCallback:
 	checkevent EVENT_CLEARED_SLOWPOKE_WELL
 	iffalse .Done
 	checkflag ENGINE_KURT_MAKING_BALLS

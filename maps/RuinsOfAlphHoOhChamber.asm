@@ -2,9 +2,9 @@ RuinsOfAlphHoOhChamber_MapScripts:
 	def_scene_scripts
 
 	def_callbacks
-	callback MAPCALLBACK_TILES, .HiddenDoors
+	callback MAPCALLBACK_TILES, RuinsOfAlphHoOhChamberHiddenDoorsCallback
 
-.HiddenDoors:
+RuinsOfAlphHoOhChamberHiddenDoorsCallback:
 	checkevent EVENT_SOLVED_HO_OH_PUZZLE
 	iffalse .FloorClosed
 	endcallback

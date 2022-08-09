@@ -2,9 +2,9 @@ RuinsOfAlphOmanyteChamber_MapScripts:
 	def_scene_scripts
 
 	def_callbacks
-	callback MAPCALLBACK_TILES, .HiddenDoors
+	callback MAPCALLBACK_TILES, RuinsOfAlphOmanyteChamberHiddenDoorsCallback
 
-.HiddenDoors:
+RuinsOfAlphOmanyteChamberHiddenDoorsCallback:
 	checkevent EVENT_SOLVED_OMANYTE_PUZZLE
 	iffalse .FloorClosed
 	endcallback
