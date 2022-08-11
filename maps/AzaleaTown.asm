@@ -8,7 +8,7 @@
 	const AZALEATOWN_SLOWPOKE3
 	const AZALEATOWN_SLOWPOKE4
 	const AZALEATOWN_FRUIT_TREE
-	const AZALEATOWN_SILVER
+	const AZALEATOWN_RIVAL
 	const AZALEATOWN_AZALEA_ROCKET3
 
 AzaleaTown_MapScripts:
@@ -30,13 +30,13 @@ AzaleaTownFlypointCallback:
 	endcallback
 
 AzaleaTownRivalBattleScene1:
-	moveobject AZALEATOWN_SILVER, 11, 11
+	moveobject AZALEATOWN_RIVAL, 11, 11
 	turnobject PLAYER, RIGHT
 	showemote EMOTE_SHOCK, PLAYER, 15
 	special FadeOutMusic
 	pause 15
-	appear AZALEATOWN_SILVER
-	applymovement AZALEATOWN_SILVER, AzaleaTownRivalBattleApproachMovement1
+	appear AZALEATOWN_RIVAL
+	applymovement AZALEATOWN_RIVAL, AzaleaTownRivalBattleApproachMovement1
 	turnobject PLAYER, DOWN
 	sjump AzaleaTownRivalBattleScript
 
@@ -45,8 +45,8 @@ AzaleaTownRivalBattleScene2:
 	showemote EMOTE_SHOCK, PLAYER, 15
 	special FadeOutMusic
 	pause 15
-	appear AZALEATOWN_SILVER
-	applymovement AZALEATOWN_SILVER, AzaleaTownRivalBattleApproachMovement2
+	appear AZALEATOWN_RIVAL
+	applymovement AZALEATOWN_RIVAL, AzaleaTownRivalBattleApproachMovement2
 	turnobject PLAYER, UP
 AzaleaTownRivalBattleScript:
 	playmusic MUSIC_RIVAL_ENCOUNTER
@@ -60,7 +60,7 @@ AzaleaTownRivalBattleScript:
 	checkevent EVENT_GOT_CHIKORITA_FROM_ELM
 	iftrue .Chikorita
 	winlosstext AzaleaTownRivalWinText, AzaleaTownRivalLossText
-	setlasttalked AZALEATOWN_SILVER
+	setlasttalked AZALEATOWN_RIVAL
 	loadtrainer RIVAL1, RIVAL1_2_TOTODILE
 	startbattle
 	dontrestartmapmusic
@@ -69,7 +69,7 @@ AzaleaTownRivalBattleScript:
 
 .Totodile:
 	winlosstext AzaleaTownRivalWinText, AzaleaTownRivalLossText
-	setlasttalked AZALEATOWN_SILVER
+	setlasttalked AZALEATOWN_RIVAL
 	loadtrainer RIVAL1, RIVAL1_2_CHIKORITA
 	startbattle
 	dontrestartmapmusic
@@ -78,7 +78,7 @@ AzaleaTownRivalBattleScript:
 
 .Chikorita:
 	winlosstext AzaleaTownRivalWinText, AzaleaTownRivalLossText
-	setlasttalked AZALEATOWN_SILVER
+	setlasttalked AZALEATOWN_RIVAL
 	loadtrainer RIVAL1, RIVAL1_2_CYNDAQUIL
 	startbattle
 	dontrestartmapmusic
@@ -92,9 +92,9 @@ AzaleaTownRivalBattleScript:
 	waitbutton
 	closetext
 	turnobject PLAYER, LEFT
-	applymovement AZALEATOWN_SILVER, AzaleaTownRivalBattleExitMovement
+	applymovement AZALEATOWN_RIVAL, AzaleaTownRivalBattleExitMovement
 	playsound SFX_EXIT_BUILDING
-	disappear AZALEATOWN_SILVER
+	disappear AZALEATOWN_RIVAL
 	setscene SCENE_AZALEATOWN_NOOP
 	waitsfx
 	playmapmusic
