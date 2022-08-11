@@ -131,7 +131,7 @@ NamingScreen:
 	db "YOUR NAME?@"
 
 .Rival:
-	ld de, SilverSpriteGFX
+	ld de, RivalSpriteGFX
 	call .LoadSprite
 	hlcoord 5, 2
 	ld de, .RivalNameString
