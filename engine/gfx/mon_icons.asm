@@ -228,8 +228,8 @@ endr
 	ret
 
 HeldItemIcons:
-INCBIN "gfx/icons/mail.2bpp"
-INCBIN "gfx/icons/item.2bpp"
+INCBIN "gfx/stats/mail.2bpp"
+INCBIN "gfx/stats/item.2bpp"
 
 FreezeMonIcons:
 	ld hl, wSpriteAnimationStructs
