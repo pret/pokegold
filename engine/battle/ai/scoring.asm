@@ -1256,7 +1256,7 @@ AI_Smart_Rage:
 	call AICheckEnemyHalfHP
 	jr nc, .discourage
 
-; 50% chance to encourage this move otherwise.
+; 20% chance to encourage this move otherwise.
 	call AI_80_20
 	ret nc
 	dec [hl]
