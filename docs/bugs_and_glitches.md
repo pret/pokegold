@@ -21,6 +21,7 @@ All the bugs documented here were fixed in Pokémon Crystal. Any that weren't ar
 - [Present's text overflows when it fails to heal an enemy Pokémon with a long name](#presents-text-overflows-when-it-fails-to-heal-an-enemy-pok%C3%A9mon-with-a-long-name)
 - [You can fish in the water in Cerulean Gym](#you-can-fish-in-the-water-in-cerulean-gym)
 - ["Route 15" is not capitalized in a signpost](#route-15-is-not-capitalized-in-a-signpost)
+- [You can Surf on top of NPCs](#you-can-surf-on-top-of-npcs)
 
 
 ## Using the Coin Case can cause arbitrary code execution
@@ -109,5 +110,37 @@ All the bugs documented here were fixed in Pokémon Crystal. Any that weren't ar
 	line "LAVENDER TOWN"
 	done
 ```
+
+
+## You can Surf on top of NPCs
+
+**Fix:** Edit `SurfFunction` in [engine/events/overworld.asm](https://github.com/pret/pokegold/blob/master/engine/events/overworld.asm):
+
+```diff
+ .TrySurf:
+-; BUG: You can Surf on top of NPCs (see docs/bugs_and_glitches.md)
+ 	ld de, ENGINE_FOGBADGE
+ 	call CheckBadge
+ 	jr c, .nofogbadge
+ 	ld hl, wBikeFlags
+ 	bit BIKEFLAGS_ALWAYS_ON_BIKE_F, [hl]
+ 	jr nz, .cannotsurf
+ 	ld a, [wPlayerState]
+ 	cp PLAYER_SURF
+ 	jr z, .alreadyfail
+ 	cp PLAYER_SURF_PIKA
+ 	jr z, .alreadyfail
+ 	call GetFacingTileCoord
+ 	call GetTileCollision
+ 	cp WATER_TILE
+ 	jr nz, .cannotsurf
+ 	call CheckDirection
+ 	jr c, .cannotsurf
++	farcall CheckFacingObject
++	jr c, .cannotsurf
+ 	ld a, $1
+ 	ret
+```
+
 
 (There are many other text changes between Gold/Silver and Crystal, but they are more subjective edits, not definite corrections.)
