@@ -19,9 +19,9 @@ All the bugs documented here were fixed in Pokémon Crystal. Any that weren't ar
 - [Entering the Hall of Fame without a save file can corrupt the PC boxes](#entering-the-hall-of-fame-without-a-save-file-can-corrupt-the-pc-boxes)
 - [The Lucky Number Show does not find winning ID numbers in inactive boxes 10-14](#the-lucky-number-show-does-not-find-winning-id-numbers-in-inactive-boxes-10-14)
 - [Present's text overflows when it fails to heal an enemy Pokémon with a long name](#presents-text-overflows-when-it-fails-to-heal-an-enemy-pok%C3%A9mon-with-a-long-name)
+- [You can Surf on top of NPCs](#you-can-surf-on-top-of-npcs)
 - [You can fish in the water in Cerulean Gym](#you-can-fish-in-the-water-in-cerulean-gym)
 - ["Route 15" is not capitalized in a signpost](#route-15-is-not-capitalized-in-a-signpost)
-- [You can Surf on top of NPCs](#you-can-surf-on-top-of-npcs)
 
 
 ## Using the Coin Case can cause arbitrary code execution
@@ -85,33 +85,6 @@ All the bugs documented here were fixed in Pokémon Crystal. Any that weren't ar
 ```
 
 
-## You can fish in the water in Cerulean Gym
-
-**Fix:** Edit `MapGroup_Cerulean` in [data/maps/maps.asm](https://github.com/pret/pokegold/blob/master/data/maps/maps.asm):
-
-```diff
--; BUG: You can fish in the water in Cerulean Gym (see docs/bugs_and_glitches.md)
--	map CeruleanGym, TILESET_PORT, INDOOR, LANDMARK_CERULEAN_CITY, MUSIC_GYM, TRUE, PALETTE_DAY, FISHGROUP_SHORE
-+	map CeruleanGym, TILESET_PORT, INDOOR, LANDMARK_CERULEAN_CITY, MUSIC_GYM, TRUE, PALETTE_DAY, FISHGROUP_NONE
-```
-
-
-## "Route 15" is not capitalized in a signpost
-
-**Fix:** Edit `Route15SignText` in [maps/Route15.asm](https://github.com/pret/pokegold/blob/master/maps/Route15.asm):
-
-```diff
- Route15SignText:
--; BUG: "Route 15" is not capitalized in a signpost (see docs/bugs_and_glitches.md)
--	text "Route 15"
-+	text "ROUTE 15"
-
-	para "FUCHSIA CITY -"
-	line "LAVENDER TOWN"
-	done
-```
-
-
 ## You can Surf on top of NPCs
 
 **Fix:** Edit `SurfFunction` in [engine/events/overworld.asm](https://github.com/pret/pokegold/blob/master/engine/events/overworld.asm):
@@ -142,5 +115,31 @@ All the bugs documented here were fixed in Pokémon Crystal. Any that weren't ar
  	ret
 ```
 
+
+## You can fish in the water in Cerulean Gym
+
+**Fix:** Edit `MapGroup_Cerulean` in [data/maps/maps.asm](https://github.com/pret/pokegold/blob/master/data/maps/maps.asm):
+
+```diff
+-; BUG: You can fish in the water in Cerulean Gym (see docs/bugs_and_glitches.md)
+-	map CeruleanGym, TILESET_PORT, INDOOR, LANDMARK_CERULEAN_CITY, MUSIC_GYM, TRUE, PALETTE_DAY, FISHGROUP_SHORE
++	map CeruleanGym, TILESET_PORT, INDOOR, LANDMARK_CERULEAN_CITY, MUSIC_GYM, TRUE, PALETTE_DAY, FISHGROUP_NONE
+```
+
+
+## "Route 15" is not capitalized in a signpost
+
+**Fix:** Edit `Route15SignText` in [maps/Route15.asm](https://github.com/pret/pokegold/blob/master/maps/Route15.asm):
+
+```diff
+ Route15SignText:
+-; BUG: "Route 15" is not capitalized in a signpost (see docs/bugs_and_glitches.md)
+-	text "Route 15"
++	text "ROUTE 15"
+
+	para "FUCHSIA CITY -"
+	line "LAVENDER TOWN"
+	done
+```
 
 (There are many other text changes between Gold/Silver and Crystal, but they are more subjective edits, not definite corrections.)
