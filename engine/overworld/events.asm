@@ -336,7 +336,7 @@ CheckTileEvent:
 	ret
 
 .warp_tile
-	ld a, [wPlayerStandingTile]
+	ld a, [wPlayerTile]
 	call CheckPitTile
 	jr nz, .not_pit
 	ld a, PLAYEREVENT_FALL
@@ -1179,7 +1179,7 @@ CanUseSweetScent::
 	jr nc, .no
 
 .ice_check
-	ld a, [wPlayerStandingTile]
+	ld a, [wPlayerTile]
 	call CheckIceTile
 	jr z, .no
 	scf
@@ -1250,7 +1250,7 @@ ChooseWildEncounter_BugContest::
 	ret
 
 TryWildEncounter_BugContest:
-	ld a, [wPlayerStandingTile]
+	ld a, [wPlayerTile]
 	call CheckSuperTallGrassTile
 	ld b, 40 percent
 	jr z, .ok

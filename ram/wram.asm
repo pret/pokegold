@@ -1255,7 +1255,7 @@ wIndexedMovement2Pointer:: dw
 
 	ds 2
 
-wMovementByteWasControlSwitch:: db
+wContinueReadingMovement:: db
 
 UNION
 wObjectPriorities:: ds NUM_OBJECT_STRUCTS
@@ -1888,8 +1888,8 @@ wUsedSpritesEnd::
 	ds 8
 
 wOverworldMapAnchor:: dw
-wMetatileStandingY:: db
-wMetatileStandingX:: db
+wPlayerMetatileY:: db
+wPlayerMetatileX:: db
 
 wMapPartial::
 wMapAttributesBank:: db

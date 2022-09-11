@@ -21,7 +21,7 @@ ObjectActionPairPointers:
 	assert_table_length NUM_OBJECT_ACTIONS
 
 SetFacingStanding:
-	ld hl, OBJECT_FACING_STEP
+	ld hl, OBJECT_FACING
 	add hl, bc
 	ld [hl], STANDING
 	ret
@@ -29,13 +29,13 @@ SetFacingStanding:
 SetFacingCurrent:
 	call GetSpriteDirection
 	or FACING_STEP_DOWN_0 ; useless
-	ld hl, OBJECT_FACING_STEP
+	ld hl, OBJECT_FACING
 	add hl, bc
 	ld [hl], a
 	ret
 
 SetFacingStandAction:
-	ld hl, OBJECT_FACING_STEP
+	ld hl, OBJECT_FACING
 	add hl, bc
 	ld a, [hl]
 	and 1
@@ -63,7 +63,7 @@ SetFacingStepAction:
 	call GetSpriteDirection
 	or FACING_STEP_DOWN_0 ; useless
 	or d
-	ld hl, OBJECT_FACING_STEP
+	ld hl, OBJECT_FACING
 	add hl, bc
 	ld [hl], a
 	ret
@@ -88,18 +88,18 @@ SetFacingBumpAction:
 	call GetSpriteDirection
 	or FACING_STEP_DOWN_0 ; useless
 	or d
-	ld hl, OBJECT_FACING_STEP
+	ld hl, OBJECT_FACING
 	add hl, bc
 	ld [hl], a
 	ret
 
 SetFacingCounterclockwiseSpin:
 	call CounterclockwiseSpinAction
-	ld hl, OBJECT_FACING
+	ld hl, OBJECT_DIRECTION
 	add hl, bc
 	ld a, [hl]
 	or FACING_STEP_DOWN_0 ; useless
-	ld hl, OBJECT_FACING_STEP
+	ld hl, OBJECT_FACING
 	add hl, bc
 	ld [hl], a
 	ret
@@ -142,7 +142,7 @@ CounterclockwiseSpinAction:
 	ld hl, .facings
 	add hl, de
 	ld a, [hl]
-	ld hl, OBJECT_FACING
+	ld hl, OBJECT_DIRECTION
 	add hl, bc
 	ld [hl], a
 	ret
@@ -158,25 +158,25 @@ SetFacingFish:
 	rrca
 	rrca
 	add FACING_FISH_DOWN
-	ld hl, OBJECT_FACING_STEP
+	ld hl, OBJECT_FACING
 	add hl, bc
 	ld [hl], a
 	ret
 
 SetFacingShadow:
-	ld hl, OBJECT_FACING_STEP
+	ld hl, OBJECT_FACING
 	add hl, bc
 	ld [hl], FACING_SHADOW
 	ret
 
 SetFacingEmote:
-	ld hl, OBJECT_FACING_STEP
+	ld hl, OBJECT_FACING
 	add hl, bc
 	ld [hl], FACING_EMOTE
 	ret
 
 SetFacingBigDollSym:
-	ld hl, OBJECT_FACING_STEP
+	ld hl, OBJECT_FACING
 	add hl, bc
 	ld [hl], FACING_BIG_DOLL_SYM
 	ret
@@ -190,13 +190,13 @@ SetFacingBounce:
 	ld [hl], a
 	and %00001000
 	jr z, SetFacingFreezeBounce
-	ld hl, OBJECT_FACING_STEP
+	ld hl, OBJECT_FACING
 	add hl, bc
 	ld [hl], FACING_STEP_UP_0
 	ret
 
 SetFacingFreezeBounce:
-	ld hl, OBJECT_FACING_STEP
+	ld hl, OBJECT_FACING
 	add hl, bc
 	ld [hl], FACING_STEP_DOWN_0
 	ret
@@ -211,13 +211,13 @@ SetFacingWeirdTree:
 	rrca
 	rrca
 	add FACING_WEIRD_TREE_0
-	ld hl, OBJECT_FACING_STEP
+	ld hl, OBJECT_FACING
 	add hl, bc
 	ld [hl], a
 	ret
 
 SetFacingBigDollAsym:
-	ld hl, OBJECT_FACING_STEP
+	ld hl, OBJECT_FACING
 	add hl, bc
 	ld [hl], FACING_BIG_DOLL_ASYM
 	ret
@@ -232,7 +232,7 @@ SetFacingBigDoll:
 	ld d, FACING_BIG_DOLL_ASYM ; asymmetric
 
 .ok
-	ld hl, OBJECT_FACING_STEP
+	ld hl, OBJECT_FACING
 	add hl, bc
 	ld [hl], d
 	ret
@@ -243,7 +243,7 @@ SetFacingBoulderDust:
 	inc [hl]
 	ld a, [hl]
 
-	ld hl, OBJECT_FACING_STEP
+	ld hl, OBJECT_FACING
 	add hl, bc
 	and 2
 	ld a, FACING_BOULDER_DUST_1
@@ -259,7 +259,7 @@ SetFacingGrassShake:
 	add hl, bc
 	inc [hl]
 	ld a, [hl]
-	ld hl, OBJECT_FACING_STEP
+	ld hl, OBJECT_FACING
 	add hl, bc
 	and 4
 	ld a, FACING_GRASS_1

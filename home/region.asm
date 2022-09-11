@@ -48,10 +48,10 @@ SetXYCompareFlags::
 	ldh a, [hROMBank]
 	push af
 	call SwitchToMapScriptsBank
-	ld a, [wPlayerStandingMapX]
+	ld a, [wPlayerMapX]
 	add $4
 	ld d, a
-	ld a, [wPlayerStandingMapY]
+	ld a, [wPlayerMapY]
 	ld a, $4 ; should be "add $4"
 	ld e, a
 	push bc

@@ -154,7 +154,7 @@ UpdateOverworldMap:
 	or HIGH(vBGMap0)
 	ld [wBGMapAnchor + 1], a
 .not_overflowed
-	ld hl, wMetatileStandingY
+	ld hl, wPlayerMetatileY
 	inc [hl]
 	ld a, [hl]
 	cp 2 ; was 1
@@ -185,7 +185,7 @@ UpdateOverworldMap:
 	or HIGH(vBGMap0)
 	ld [wBGMapAnchor + 1], a
 .not_underflowed
-	ld hl, wMetatileStandingY
+	ld hl, wPlayerMetatileY
 	dec [hl]
 	ld a, [hl]
 	cp -1 ; was 0
@@ -217,7 +217,7 @@ UpdateOverworldMap:
 	and $1f
 	or d
 	ld [wBGMapAnchor], a
-	ld hl, wMetatileStandingX
+	ld hl, wPlayerMetatileX
 	dec [hl]
 	ld a, [hl]
 	cp -1
@@ -246,7 +246,7 @@ UpdateOverworldMap:
 	and $1f
 	or d
 	ld [wBGMapAnchor], a
-	ld hl, wMetatileStandingX
+	ld hl, wPlayerMetatileX
 	inc [hl]
 	ld a, [hl]
 	cp 2
