@@ -1,3 +1,5 @@
+; Virtual Console macros
+
 MACRO vc_hook
 	if DEF(_GOLD_VC) || DEF(_SILVER_VC)
 	.VC_\1::
