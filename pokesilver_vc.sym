@@ -13050,7 +13050,7 @@
 25:5c8d EcruteakTinTowerBackEntrance_MapAttributes
 25:5c99 EcruteakPokecenter1F_MapAttributes
 25:5ca5 EcruteakLugiaSpeechHouse_MapAttributes
-25:5cb1 DanceTheatre_MapAttributes
+25:5cb1 DanceTheater_MapAttributes
 25:5cbd EcruteakMart_MapAttributes
 25:5cc9 EcruteakGym_MapAttributes
 25:5cd5 EcruteakItemfinderHouse_MapAttributes
@@ -16363,7 +16363,7 @@
 37:43d4 DarkCaveBlackthornEntrance_Blocks
 37:44e2 RuinsOfAlphResearchCenter_Blocks
 37:44f2 GoldenrodBikeShop_Blocks
-37:4502 DanceTheatre_Blocks
+37:4502 DanceTheater_Blocks
 37:452c EcruteakTinTowerEntrance_Blocks
 37:4586 GoldenrodGameCorner_Blocks
 37:45cc Route35NationalParkGate_Blocks
@@ -25170,7 +25170,7 @@
 52:46d3 EcruteakLugiaSpeechHouseGrampsText
 52:4782 EcruteakLugiaSpeechHouseYoungsterText
 52:47c7 EcruteakLugiaSpeechHouse_MapEvents
-52:47f6 DanceTheatre_MapScripts
+52:47f6 DanceTheater_MapScripts
 52:47f8 TrainerKimonoGirlNaoko
 52:4804 TrainerKimonoGirlNaoko.Script
 52:480c TrainerKimonoGirlSayo
@@ -25186,9 +25186,9 @@
 52:488f DanceTheaterSurfGuy.GetSurf
 52:489f SurfGuyAlreadyGaveSurf
 52:48a5 DanceTheaterRhydon
-52:48af DanceTheatreCooltrainerMScript
-52:48b2 DanceTheatreGrannyScript
-52:48b5 DanceTheatreFancyPanel
+52:48af DanceTheaterCooltrainerMScript
+52:48b2 DanceTheaterGrannyScript
+52:48b5 DanceTheaterFancyPanel
 52:48b8 KimonoGirlNaokoSeenText
 52:48e9 KimonoGirlNaokoBeatenText
 52:4903 KimonoGirlNaokoAfterBattleText
@@ -25210,10 +25210,10 @@
 52:4cdf SurfGuySurfExplanationText
 52:4d19 SurfGuyElegantKimonoGirlsText
 52:4d4e RhydonText
-52:4d68 DanceTheatreCooltrainerMText
-52:4dee DanceTheatreGrannyText
-52:4ebd DanceTheatreFancyPanelText
-52:4eee DanceTheatre_MapEvents
+52:4d68 DanceTheaterCooltrainerMText
+52:4dee DanceTheaterGrannyText
+52:4ebd DanceTheaterFancyPanelText
+52:4eee DanceTheater_MapEvents
 52:4f7d EcruteakMart_MapScripts
 52:4f7f EcruteakMartClerkScript
 52:4f86 EcruteakMartSuperNerdScript
