@@ -34,11 +34,14 @@ uint8_t n64ps3[N64PS3SIZE] = {'N', '6', '4', 'P', 'S', '3'};
 	file[(off) + 1] = (uint8_t)(((v) & 0x00FF) >> 0); \
 } while (0)
 
-void calculate_checksums(uint8_t *file, int filesize) {
-	if (filesize != ROMSIZE) {
-		return;
+uint16_t calculate_checksum(uint16_t checksum, uint8_t *file, int start, int size) {
+	for (int j = start; j < start + size; j++) {
+		checksum += file[j];
 	}
+	return checksum;
+}
 
+void calculate_checksums(uint8_t *file) {
 	// Initialize the CRC table
 	uint16_t crc_table[256];
 	for (int i = 0; i < 256; i++) {
@@ -60,10 +63,7 @@ void calculate_checksums(uint8_t *file, int filesize) {
 
 	// Calculate the half-bank checksums
 	for (int i = 0; i < NUMBANKS * 2; i++) {
-		uint16_t checksum = CRC_INIT;
-		for (int j = 0; j < BANKSIZE / 2; j++) {
-			checksum += file[i * BANKSIZE / 2 + j];
-		}
+		uint16_t checksum = calculate_checksum(CRC_INIT, file, i * BANKSIZE / 2, BANKSIZE / 2);
 		SET_U16BE(file, DATAOFF + HEADERSIZE + i * 2, checksum);
 	}
 
@@ -75,10 +75,7 @@ void calculate_checksums(uint8_t *file, int filesize) {
 	SET_U16BE(file, DATAOFF + HEADERSIZE - 2, crc);
 
 	// Calculate the global checksum
-	uint16_t globalsum = 0;
-	for (int i = 0; i < filesize; i++) {
-		globalsum += file[i];
-	}
+	uint16_t globalsum = calculate_checksum(0, file, 0, ROMSIZE);
 	SET_U16BE(file, GLOBALOFF, globalsum);
 }
 
@@ -90,7 +87,9 @@ int main(int argc, char *argv[]) {
 	char *filename = argv[1];
 	long filesize;
 	uint8_t *file = read_u8(filename, &filesize);
-	calculate_checksums(file, filesize);
+	if (filesize == ROMSIZE) {
+		calculate_checksums(file);
+	}
 	write_u8(filename, file, filesize);
 	return 0;
 }
