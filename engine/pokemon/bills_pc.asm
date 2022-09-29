@@ -1064,7 +1064,7 @@ PCMonInfo:
 	hlcoord 1, 12
 	call PrintLevel
 
-	ld a, $3
+	ld a, TEMPMON
 	ld [wMonType], a
 	farcall GetGender
 	jr c, .skip_gender
