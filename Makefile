@@ -126,6 +126,12 @@ $(pokesilver_vc_obj):    RGBASMFLAGS += -D _SILVER -D _GOLD_VC
 rgbdscheck.o: rgbdscheck.asm
 	$(RGBASM) -o $@ $<
 
+# Build tools when building the rom.
+# This has to happen before the rules are processed, since that's when scan_includes is run.
+ifeq (,$(filter clean tidy tools,$(MAKECMDGOALS)))
+
+$(info $(shell $(MAKE) -C tools))
+
 # The dep rules have to be explicit or else missing files won't be reported.
 # As a side effect, they're evaluated immediately instead of when the rule is invoked.
 # It doesn't look like $(shell) can be deferred so there might not be a better way.
@@ -134,12 +140,6 @@ define DEP
 $1: $2 $$(shell tools/scan_includes $2) $(preinclude_deps) | rgbdscheck.o
 	$$(RGBASM) $$(RGBASMFLAGS) -o $$@ $$<
 endef
-
-# Build tools when building the rom.
-# This has to happen before the rules are processed, since that's when scan_includes is run.
-ifeq (,$(filter clean tidy tools,$(MAKECMDGOALS)))
-
-$(info $(shell $(MAKE) -C tools))
 
 # Dependencies for shared objects (drop _gold and _silver from asm file basenames)
 $(foreach obj, $(filter-out $(gold_excl_obj), $(pokegold_obj)), \
