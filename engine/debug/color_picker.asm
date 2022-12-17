@@ -348,7 +348,7 @@ DebugColor_InitScreen:
 .normal
 	ld de, .NormalText
 .place_text
-	hlcoord 7, 17
+	hlcoord 8, 17
 	call PlaceString
 	hlcoord 0, 17
 	ld de, .SwitchText
@@ -377,13 +377,13 @@ DebugColor_InitScreen:
 	ret
 
 .ShinyText:
-	db "レア", DEBUGTEST_BLACK, DEBUGTEST_BLACK, "@" ; Rare (shiny)
+	db "SHINY", DEBUGTEST_BLACK, DEBUGTEST_BLACK, "@" ; Rare (shiny)
 
 .NormalText:
-	db "ノーマル@" ; Normal
+	db "NORMAL@" ; Normal
 
 .SwitchText:
-	db DEBUGTEST_A, "きりかえ▶@" ; (A) Switches
+	db DEBUGTEST_A, "SWITCH▶@" ; (A) Switches
 
 DebugColor_LoadRGBMeter:
 	decoord 0, 11, wAttrmap
@@ -679,7 +679,7 @@ DebugColor_InitTMHM:
 	ld bc, SCREEN_WIDTH * 8
 	ld a, DEBUGTEST_BLACK
 	call ByteFill
-	hlcoord 2, 12
+	hlcoord 0, 12
 	ld de, DebugColor_AreYouFinishedString
 	call PlaceString
 	xor a
@@ -760,7 +760,7 @@ DebugColor_PrintTMHMMove:
 	ld a, [wTempTMHM]
 	ld [wPutativeTMHMMove], a
 	call GetMoveName
-	hlcoord 10, 12
+	hlcoord 7, 12
 	call PlaceString
 
 	ld a, [wDebugColorCurTMHM]
@@ -773,15 +773,15 @@ DebugColor_PrintTMHMMove:
 	jr nz, .place_string
 	ld de, .NotAbleText
 .place_string
-	hlcoord 10, 14
+	hlcoord 7, 14
 	call PlaceString
 	ret
 
 .AbleText:
-	db "おぼえられる@" ; Learnable
+	db "Can", DEBUGTEST_BLACK, "Learn@" ; Learnable
 
 .NotAbleText:
-	db "おぼえられない@" ; Not learnable
+	db "Can't", DEBUGTEST_BLACK, "Learn@" ; Not learnable
 
 .GetNumberedTMHM:
 	cp NUM_TMS
@@ -1042,9 +1042,9 @@ DebugColor_PlaceCursor:
 	ret
 
 DebugColor_AreYouFinishedString:
-	db   "おわりますか？"                        ; Are you finished?
-	next "はい<DOT><DOT><DOT>", DEBUGTEST_A ; YES...(A)
-	next "いいえ<DOT><DOT>", DEBUGTEST_B     ; NO..(B)
+	db   "Done？"                        ; Are you finished?
+	next "YES<DOT><DOT><DOT>", DEBUGTEST_A ; YES...(A)
+	next "NO", DEBUGTEST_BLACK, "<DOT><DOT><DOT>", DEBUGTEST_B     ; NO..(B)
 	db   "@"
 
 DebugColor_UpArrowGFX:
