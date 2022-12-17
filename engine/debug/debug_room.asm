@@ -19,11 +19,13 @@ DEF DEBUGROOMMENU_NUM_PAGES EQU const_value
 	const DEBUGROOMMENUITEM_BTL_REC_CLR  ; a
 	const DEBUGROOMMENUITEM_POKEDEX_CLR  ; b
 	const DEBUGROOMMENUITEM_HALT_CHK_CLR ; c
+	const DEBUGROOMMENUITEM_COLOR_MENU	 ; d
+	const DEBUGROOMMENUITEM_TRAINER_MENU ; e
 
 _DebugRoom:
 	ldh a, [hJoyDown]
-	and SELECT | START
-	cp SELECT | START
+	and A_BUTTON
+	cp A_BUTTON
 	ret nz
 	ldh a, [hDebugRoomMenuPage]
 	push af
@@ -87,6 +89,8 @@ _DebugRoom:
 	db "BTL REC CLR@"
 	db "#DEX CLR@"
 	db "HALT CHK CLR@"
+	db "#MON MENU@"
+	db "TRAINER MENU@"
 
 .Jumptable:
 ; entries correspond to DEBUGROOMMENUITEM_* constants
@@ -103,6 +107,8 @@ _DebugRoom:
 	dw DebugRoomMenu_BtlRecClr
 	dw DebugRoomMenu_PokedexClr
 	dw DebugRoomMenu_HaltChkClr
+	dw DebugRoomMenu_ColorMenu
+	dw DebugRoomMenu_TrainerMenu
 
 .MenuItems:
 ; entries correspond to DEBUGROOMMENU_* constants
@@ -120,12 +126,14 @@ _DebugRoom:
 	db -1
 
 	; DEBUGROOMMENU_PAGE_2
-	db 6
+	db 8
 	db DEBUGROOMMENUITEM_POKEMON_GET
 	db DEBUGROOMMENUITEM_ITEM_GET
 	db DEBUGROOMMENUITEM_POKEDEX_COMP
 	db DEBUGROOMMENUITEM_POKEDEX_CLR
 	db DEBUGROOMMENUITEM_DECORATE_ALL
+	db DEBUGROOMMENUITEM_COLOR_MENU
+	db DEBUGROOMMENUITEM_TRAINER_MENU
 	db DEBUGROOMMENUITEM_NEXT
 	db -1
 
@@ -1379,4 +1387,11 @@ DebugRoomMenu_BtlRecClr:
 	ld bc, sLinkBattleStatsEnd - sLinkBattleStats
 	call ByteFill
 	call CloseSRAM
+	ret
+
+DebugRoomMenu_TrainerMenu:
+	ld a, 1
+	ld [wDebugColorIsTrainer], a
+DebugRoomMenu_ColorMenu:
+	farcall DebugColorPicker
 	ret
