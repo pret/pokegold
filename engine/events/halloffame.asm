@@ -16,6 +16,11 @@ HallOfFame::
 
 ; BUG: Entering the Hall of Fame without a save file can corrupt the PC boxes (see docs/bugs_and_glitches.md)
 
+	ld a, [wSavedAtLeastOnce]
+	and a
+	jr nz, .saved
+	farcall ErasePreviousSave
+.saved
 	ld hl, wHallOfFameCount
 	ld a, [hl]
 	cp HOF_MASTER_COUNT
