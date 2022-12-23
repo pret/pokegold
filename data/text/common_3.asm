@@ -338,7 +338,8 @@ _CoinCaseCountText::
 	text "Coins:"
 	line "@"
 	text_decimal wCoins, 2, 4
-	done
+;	done
+	text_end
 
 _RaiseThePPOfWhichMoveText::
 	text "Raise the PP of"
