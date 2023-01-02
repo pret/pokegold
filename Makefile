@@ -310,7 +310,7 @@ gfx/sgb/silver_border.sgb.tilemap: gfx/sgb/silver_border.bin ; tr < $< -d '\000'
 		tools/gfx $(tools/gfx) -d1 -o $@ $@)
 
 %.gbcpal: %.png
-	$(RGBGFX) -p $@ $<
+	$(RGBGFX) -c embedded -p $@ $<
 
 %.dimensions: %.png
 	tools/png_dimensions $< $@
