@@ -186,8 +186,8 @@ wTempTilemap::
 SECTION UNION "Miscellaneous", WRAM0
 
 ; link patch lists
-wPlayerPatchLists:: ds 200
-wOTPatchLists:: ds 200
+wPlayerPatchLists:: ds SERIAL_PATCH_LIST_LENGTH
+wOTPatchLists:: ds SERIAL_PATCH_LIST_LENGTH
 
 
 SECTION UNION "Miscellaneous", WRAM0
@@ -548,8 +548,8 @@ endr
 
 NEXTU
 ; link patch lists
-wLinkPatchList1:: ds SERIAL_PATCH_LIST_LENGTH
-wLinkPatchList2:: ds SERIAL_PATCH_LIST_LENGTH
+wLinkPatchData1:: ds SERIAL_PATCH_DATA_SIZE
+wLinkPatchData2:: ds SERIAL_PATCH_DATA_SIZE
 ENDU
 
 
