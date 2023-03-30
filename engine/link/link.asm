@@ -386,7 +386,7 @@ endc
 	jr nz, .copy_mail_loop
 	ld de, wLinkReceivedMail
 	ld b, PARTY_LENGTH
-.fix_mail_loop
+.copy_author_loop
 	push bc
 	ld a, LOW(MAIL_MSG_LENGTH + 1)
 	add e
@@ -398,7 +398,7 @@ endc
 	call CopyBytes
 	pop bc
 	dec b
-	jr nz, .fix_mail_loop
+	jr nz, .copy_author_loop
 	ld de, wLinkReceivedMailEnd
 	xor a
 	ld [de], a
@@ -834,7 +834,7 @@ Link_PrepPartyData_Gen2:
 	ret nz
 
 ; Fill 5 bytes at wLinkPlayerMailPreamble with $20
-	ld de, wLinkPlayerMailPreamble
+	ld de, wLinkPlayerMail
 	ld a, SERIAL_MAIL_PREAMBLE_BYTE
 	call Link_CopyMailPreamble
 
@@ -852,6 +852,7 @@ Link_PrepPartyData_Gen2:
 	pop bc
 	dec b
 	jr nz, .loop2
+
 ; Copy the mail data to wLinkPlayerMailMetadata
 	ld hl, sPartyMail
 	ld b, PARTY_LENGTH
@@ -866,6 +867,7 @@ Link_PrepPartyData_Gen2:
 	jr nz, .loop3
 	call CloseSRAM
 
+; The SERIAL_NO_DATA_BYTE value isn't allowed anywhere in message text
 	ld hl, wLinkPlayerMailMessages
 	ld bc, (MAIL_MSG_LENGTH + 1) * PARTY_LENGTH
 .loop4
@@ -880,6 +882,7 @@ Link_PrepPartyData_Gen2:
 	or c
 	jr nz, .loop4
 
+; Calculate the patch offsets for the mail metadata
 	ld hl, wLinkPlayerMailMetadata
 	ld de, wLinkPlayerMailPatchSet
 	ld b, (MAIL_STRUCT_LENGTH - (MAIL_MSG_LENGTH + 1)) * PARTY_LENGTH
