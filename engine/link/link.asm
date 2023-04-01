@@ -124,7 +124,7 @@ endc
 	call Link_CopyOTData
 
 	ld de, wOTPatchLists
-	ld hl, wLinkPatchData1
+	ld hl, wLinkPlayerData
 	ld c, 2
 .loop
 	ld a, [de]
@@ -150,11 +150,11 @@ endc
 	jr .loop
 
 .next
-	ld hl, wLinkPatchData2
+	ld hl, wLinkPlayerData + SERIAL_PATCH_DATA_SIZE
 	dec c
 	jr nz, .loop
 
-	ld hl, wLinkPlayerName
+	ld hl, wLinkData
 	ld de, wOTPlayerName
 	ld bc, NAME_LENGTH
 	call CopyBytes
@@ -291,8 +291,8 @@ endc
 	ld bc, NAME_LENGTH + 1 + PARTY_LENGTH + 1 + 2 + (PARTYMON_STRUCT_LENGTH + NAME_LENGTH * 2) * PARTY_LENGTH
 	call Link_CopyOTData
 
-	ld de, wPlayerTrademon
-	ld hl, wLinkPatchData1
+	ld de, wOTPatchLists
+	ld hl, wLinkPlayerData
 	ld c, 2
 .loop1
 	ld a, [de]
@@ -318,7 +318,7 @@ endc
 	jr .loop1
 
 .next1
-	ld hl, wLinkPatchData2
+	ld hl, wLinkPlayerData + SERIAL_PATCH_DATA_SIZE
 	dec c
 	jr nz, .loop1
 
@@ -337,10 +337,14 @@ endc
 	cp SERIAL_MAIL_PREAMBLE_BYTE
 	jr z, .loop3
 	dec hl
+
 	ld de, wLinkOTMail
 	ld bc, wLinkDataEnd - wLinkOTMail ; should be wLinkOTMailEnd - wLinkOTMail
 	call CopyBytes
-	ld hl, wLinkOTMail
+
+; Replace SERIAL_MAIL_REPLACEMENT_BYTE with SERIAL_NO_DATA_BYTE across all mail
+; message bodies.
+	ld hl, wLinkOTMailMessages
 	ld bc, (MAIL_MSG_LENGTH + 1) * PARTY_LENGTH
 .loop4
 	ld a, [hl]
@@ -353,6 +357,7 @@ endc
 	ld a, b
 	or c
 	jr nz, .loop4
+
 	ld de, wLinkOTMailPatchSet
 .loop5
 	ld a, [de]
@@ -404,7 +409,7 @@ endc
 	ld [de], a
 
 .skip_mail
-	ld hl, wLinkPlayerName
+	ld hl, wLinkData
 	ld de, wOTPlayerName
 	ld bc, NAME_LENGTH
 	call CopyBytes
