@@ -14983,11 +14983,8 @@
 32:4ff8 BattleBGEffects_Sine
 32:5001 BattleBGEffects_Cosine
 32:500a BattleAnimations
-32:5236 BattleAnim_0
+32:5236 BattleAnim_Dummy
 32:5236 BattleAnim_MirrorMove
-32:5236 BattleAnim_252
-32:5236 BattleAnim_253
-32:5236 BattleAnim_254
 32:5237 BattleAnim_SweetScent2
 32:525c BattleAnim_ThrowPokeBall
 32:528d BattleAnim_ThrowPokeBall.TheTrainerBlockedTheBall
