@@ -349,7 +349,7 @@ Intro_InitBubble:
 	ld e, [hl]
 	inc hl
 	ld d, [hl]
-	ld a, SPRITE_ANIM_INDEX_GS_INTRO_BUBBLE
+	ld a, SPRITE_ANIM_OBJ_GS_INTRO_BUBBLE
 	call InitSpriteAnimStruct
 	ret
 
@@ -394,7 +394,7 @@ Intro_InitMagikarps:
 	ret
 
 .InitAnim:
-	ld a, SPRITE_ANIM_INDEX_GS_INTRO_MAGIKARP
+	ld a, SPRITE_ANIM_OBJ_GS_INTRO_MAGIKARP
 	call InitSpriteAnimStruct
 	ret
 
@@ -406,7 +406,7 @@ Intro_InitShellders:
 	depixel 16, 15
 
 .InitAnim:
-	ld a, SPRITE_ANIM_INDEX_GS_INTRO_SHELLDER
+	ld a, SPRITE_ANIM_OBJ_GS_INTRO_SHELLDER
 	call InitSpriteAnimStruct
 	ret
 
@@ -415,13 +415,13 @@ Intro_InitLapras:
 	and %00011111
 	ret nz
 	depixel 16, 24
-	ld a, SPRITE_ANIM_INDEX_GS_INTRO_LAPRAS
+	ld a, SPRITE_ANIM_OBJ_GS_INTRO_LAPRAS
 	call InitSpriteAnimStruct
 	ret
 
 Intro_UnusedInitAerodactyl: ; unreferenced
 	depixel 2, 0
-	ld a, SPRITE_ANIM_INDEX_UNUSED_INTRO_AERODACTYL
+	ld a, SPRITE_ANIM_OBJ_UNUSED_INTRO_AERODACTYL
 	call InitSpriteAnimStruct
 	ret
 
@@ -734,28 +734,28 @@ Intro_InitNote:
 	and %01111111
 	jr z, .invisible
 	depixel 11, 6, 4, 0
-	ld a, SPRITE_ANIM_INDEX_GS_INTRO_NOTE
+	ld a, SPRITE_ANIM_OBJ_GS_INTRO_NOTE
 	call InitSpriteAnimStruct
 	ret
 
 .invisible
 	depixel 10, 6, 4, 0
-	ld a, SPRITE_ANIM_INDEX_GS_INTRO_INVISIBLE_NOTE
+	ld a, SPRITE_ANIM_OBJ_GS_INTRO_INVISIBLE_NOTE
 	call InitSpriteAnimStruct
 	ret
 
 Intro_InitJigglypuff:
 	depixel 14, 6
-	ld a, SPRITE_ANIM_INDEX_GS_INTRO_JIGGLYPUFF
+	ld a, SPRITE_ANIM_OBJ_GS_INTRO_JIGGLYPUFF
 	call InitSpriteAnimStruct
 	ret
 
 Intro_InitPikachu:
 	depixel 14, 24
-	ld a, SPRITE_ANIM_INDEX_GS_INTRO_PIKACHU
+	ld a, SPRITE_ANIM_OBJ_GS_INTRO_PIKACHU
 	call InitSpriteAnimStruct
 	depixel 14, 24
-	ld a, SPRITE_ANIM_INDEX_GS_INTRO_PIKACHU_TAIL
+	ld a, SPRITE_ANIM_OBJ_GS_INTRO_PIKACHU_TAIL
 	call InitSpriteAnimStruct
 	ret
 
@@ -1019,7 +1019,7 @@ Intro_ChikoritaAppears:
 	ld de, SFX_GS_INTRO_POKEMON_APPEARS
 	call PlaySFX
 	depixel 22, 1
-	ld a, SPRITE_ANIM_INDEX_GS_INTRO_CHIKORITA
+	ld a, SPRITE_ANIM_OBJ_GS_INTRO_CHIKORITA
 	call InitSpriteAnimStruct
 	ret
 
@@ -1027,7 +1027,7 @@ Intro_CyndaquilAppears:
 	ld de, SFX_GS_INTRO_POKEMON_APPEARS
 	call PlaySFX
 	depixel 22, 20
-	ld a, SPRITE_ANIM_INDEX_GS_INTRO_CYNDAQUIL
+	ld a, SPRITE_ANIM_OBJ_GS_INTRO_CYNDAQUIL
 	call InitSpriteAnimStruct
 	ret
 
@@ -1035,7 +1035,7 @@ Intro_TotodileAppears:
 	ld de, SFX_GS_INTRO_POKEMON_APPEARS
 	call PlaySFX
 	depixel 22, 1
-	ld a, SPRITE_ANIM_INDEX_GS_INTRO_TOTODILE
+	ld a, SPRITE_ANIM_OBJ_GS_INTRO_TOTODILE
 	call InitSpriteAnimStruct
 	ret
 
@@ -1150,7 +1150,7 @@ Intro_AnimateFireball:
 	and 3
 	ret nz
 	depixel 12, 10, 4, 4
-	ld a, SPRITE_ANIM_INDEX_GS_INTRO_FIREBALL
+	ld a, SPRITE_ANIM_OBJ_GS_INTRO_FIREBALL
 	call InitSpriteAnimStruct
 	ld hl, hSCX
 	dec [hl]

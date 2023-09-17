@@ -148,7 +148,7 @@ GameFreakPresents_Star:
 	ld [wIntroSceneFrameCounter], a
 
 	depixel 10, 11, 4, 0
-	ld a, SPRITE_ANIM_INDEX_GS_GAMEFREAK_LOGO_STAR
+	ld a, SPRITE_ANIM_OBJ_GS_GAMEFREAK_LOGO_STAR
 	call InitSpriteAnimStruct
 
 	ld hl, SPRITEANIMSTRUCT_VAR1
@@ -165,13 +165,13 @@ GameFreakPresents_PlaceLogo:
 ; Draw the Game Freak logo (may be initially invisible due to palette)
 
 ; wait until the star animation completed
-; this counter is set in DoAnimFrame.GSIntroStar in engine/gfx/sprite_anims.asm
+; this counter is set in DoSpriteAnimFrame.GSIntroStar in engine/sprite_anims/functions.asm
 	ld a, [wIntroSceneFrameCounter]
 	and a
 	ret z
 
 	depixel 10, 11, 4, 0
-	ld a, SPRITE_ANIM_INDEX_GAMEFREAK_LOGO
+	ld a, SPRITE_ANIM_OBJ_GAMEFREAK_LOGO
 	call InitSpriteAnimStruct
 
 	call GameFreakPresents_NextScene
@@ -247,7 +247,7 @@ GameFreakPresents_WaitForTimer:
 	ret
 
 GameFreakPresents_UpdateLogoPal:
-; called from DoAnimFrame.GameFreakLogo
+; called from DoSpriteAnimFrame.GameFreakLogo
 ; OBP1 was initialized at end of GameFreakPresents_Init
 
 ; once we reached the final state, leave it alone
@@ -284,7 +284,7 @@ GameFreakPresents_Sparkle:
 ; set up a new sparkle sprite
 	push af
 	depixel 11, 11
-	ld a, SPRITE_ANIM_INDEX_GS_GAMEFREAK_LOGO_SPARKLE
+	ld a, SPRITE_ANIM_OBJ_GS_GAMEFREAK_LOGO_SPARKLE
 	call InitSpriteAnimStruct
 	pop af
 

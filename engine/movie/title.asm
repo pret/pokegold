@@ -69,7 +69,7 @@ TitleScreen:
 	ld [hl], a  ; wTitleScreenTimer + 1
 
 	depixel 12, 11
-	ld a, SPRITE_ANIM_INDEX_GS_INTRO_HO_OH_LUGIA
+	ld a, SPRITE_ANIM_OBJ_GS_INTRO_HO_OH_LUGIA
 	call InitSpriteAnimStruct
 	ld hl, wSpriteAnim1
 	ld de, wSpriteAnim10

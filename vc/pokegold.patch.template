@@ -420,7 +420,7 @@ MotionBlur0 = 11
 ConditionType = 0                                                                                                                                
 ConditionValueA = {dws_ wStringBuffer2 wStringBuffer2+1 wStringBuffer2+2 wStringBuffer2+3 wStringBuffer2+4 wStringBuffer2+5 wBattleAnimTileDict+2}                                                                              
 ConditionValueB = {dws_ ==             ==               ==               ==               ==               ==               ==                   }                                                                                 
-ConditionValueC = {dws_ "P"            "R"              "E"              "S"              "E"              "N"              ANIM_GFX_BUBBLE      }                                                                                 
+ConditionValueC = {dws_ "P"            "R"              "E"              "S"              "E"              "N"              BATTLE_ANIM_GFX_BUBBLE      }                                                                                 
 
                                                    
 

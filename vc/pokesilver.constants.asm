@@ -40,7 +40,7 @@ ENDM
 	vc_const "@"
 
 ; [FPA 042801 Begin]
-	vc_const ANIM_GFX_BUBBLE
+	vc_const BATTLE_ANIM_GFX_BUBBLE
 
 ; [fight begin]
 	vc_const SCREEN_HEIGHT_PX

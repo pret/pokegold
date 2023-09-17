@@ -1,4 +1,4 @@
-DoAnimFrame:
+DoSpriteAnimFrame:
 	ld hl, SPRITEANIMSTRUCT_ANIM_SEQ_ID
 	add hl, bc
 	ld e, [hl]
@@ -12,8 +12,8 @@ DoAnimFrame:
 	jp hl
 
 .Jumptable:
-; entries correspond to SPRITE_ANIM_SEQ_* constants (see constants/sprite_anim_constants.asm)
-	table_width 2, DoAnimFrame.Jumptable
+; entries correspond to SPRITE_ANIM_FUNC_* constants (see constants/sprite_anim_constants.asm)
+	table_width 2, DoSpriteAnimFrame.Jumptable
 	dw AnimSeq_Null
 	dw AnimSeq_PartyMon
 	dw AnimSeq_PartyMonSwitch
@@ -56,7 +56,7 @@ DoAnimFrame:
 	dw AnimSeq_FlyLeaf
 	dw AnimSeq_FlyTo
 	dw AnimSeq_GSIntroHoOhLugia
-	assert_table_length NUM_SPRITE_ANIM_SEQS
+	assert_table_length NUM_SPRITE_ANIM_FUNCS
 
 AnimSeq_Null:
 	ret
