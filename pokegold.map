@@ -11800,9 +11800,9 @@ ROMX bank #35:
 	         $539b = GetSpriteAnimFrame.GetPointer
 	         $53b4 = GetFrameOAMPointer
 	         $53be = UnusedLoadSpriteAnimGFX
-	         $53d6 = SpriteAnimSeqData
-	         $5463 = DoAnimFrame
-	         $5473 = DoAnimFrame.Jumptable
+	         $53d6 = SpriteAnimObjects
+	         $5463 = DoSpriteAnimFrame
+	         $5473 = DoSpriteAnimFrame.Jumptable
 	         $54c7 = AnimSeq_Null
 	         $54c8 = AnimSeq_PartyMon
 	         $54df = AnimSeq_PartyMonSwitch

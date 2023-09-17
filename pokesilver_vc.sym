@@ -11659,9 +11659,9 @@
 23:539b GetSpriteAnimFrame.GetPointer
 23:53b4 GetFrameOAMPointer
 23:53be UnusedLoadSpriteAnimGFX
-23:53d6 SpriteAnimSeqData
-23:5463 DoAnimFrame
-23:5473 DoAnimFrame.Jumptable
+23:53d6 SpriteAnimObjects
+23:5463 DoSpriteAnimFrame
+23:5473 DoSpriteAnimFrame.Jumptable
 23:54c7 AnimSeq_Null
 23:54c8 AnimSeq_PartyMon
 23:54df AnimSeq_PartyMonSwitch
