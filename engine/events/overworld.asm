@@ -1739,24 +1739,24 @@ GotOffBikeText:
 	text_end
 
 SkateboardFunction:
-	call .TryBike
+	call .TrySkateboard
 	and $7f
 	ld [wFieldMoveSucceeded], a
 	ret
 
-.TryBike:
+.TrySkateboard:
 	call .CheckEnvironment
-	jr c, .CannotUseBike
+	jr c, .CannotUseSkateboard
 	ld a, [wPlayerState]
 	cp PLAYER_NORMAL
-	jr z, .GetOnBike
-	cp PLAYER_SKATEBOARD
-	jr z, .GetOffBike
-	jr .CannotUseBike
+	jr z, .GetOnSkateboard
+	cp PLAYER_SKATE
+	jr z, .GetOffSkateboard
+	jr .CannotUseSkateboard
 
-.GetOnBike:
-	ld hl, Script_GetOnBike
-	ld de, Script_GetOnBike_Register
+.GetOnSkateboard:
+	ld hl, Script_GetOnSkateboard
+	ld de, Script_GetOnSkateboard_Register
 	call .CheckIfRegistered
 	call QueueScript
 	xor a
@@ -1772,21 +1772,21 @@ SkateboardFunction:
 	ld a, $1
 	ret
 
-.GetOffBike:
+.GetOffSkateboard:
 	ld hl, wBikeFlags
 	bit BIKEFLAGS_ALWAYS_ON_BIKE_F, [hl]
-	jr nz, .CantGetOffBike
-	ld hl, Script_GetOffBike
-	ld de, Script_GetOffBike_Register
+	jr nz, .CantGetOffSkateboard
+	ld hl, Script_GetOffSkateboard
+	ld de, Script_GetOffSkateboard_Register
 	call .CheckIfRegistered
-	ld a, BANK(Script_GetOffBike)
+	ld a, BANK(Script_GetOffSkateboard)
 	jr .done
 
-.CantGetOffBike:
-	ld hl, Script_CantGetOffBike
+.CantGetOffSkateboard:
+	ld hl, Script_CantGetOffSkateboard
 	jr .done
 
-.CannotUseBike:
+.CannotUseSkateboard:
 	ld a, $0
 	ret
 
@@ -1824,54 +1824,54 @@ SkateboardFunction:
 	scf
 	ret
 
-Script_GetOnBike:
+Script_GetOnSkateboard:
 	reloadmappart
 	special UpdateTimePals
-	loadvar VAR_MOVEMENT, PLAYER_SKATEBOARD
-	writetext GotOnBikeText
+	loadvar VAR_MOVEMENT, PLAYER_SKATE
+	writetext GotOnSkateboardText
 	waitbutton
 	closetext
 	special UpdatePlayerSprite
 	end
 
-Script_GetOnBike_Register:
-	loadvar VAR_MOVEMENT, PLAYER_SKATEBOARD
+Script_GetOnSkateboard_Register:
+	loadvar VAR_MOVEMENT, PLAYER_SKATE
 	closetext
 	special UpdatePlayerSprite
 	end
 
-Script_GetOffBike:
+Script_GetOffSkateboard:
 	reloadmappart
 	special UpdateTimePals
 	loadvar VAR_MOVEMENT, PLAYER_NORMAL
-	writetext GotOffBikeText
+	writetext GotOffSkateboardText
 	waitbutton
 
-FinishGettingOffBike:
+FinishGettingOffSkateboard:
 	closetext
 	special UpdatePlayerSprite
 	special PlayMapMusic
 	end
 
-Script_GetOffBike_Register:
+Script_GetOffSkateboard_Register:
 	loadvar VAR_MOVEMENT, PLAYER_NORMAL
-	sjump FinishGettingOffBike
+	sjump FinishGettingOffSkateboard
 
-Script_CantGetOffBike:
-	writetext .CantGetOffBikeText
+Script_CantGetOffSkateboard:
+	writetext .CantGetOffSkateboardText
 	waitbutton
 	closetext
 	end
 
-.CantGetOffBikeText:
+.CantGetOffSkateboardText:
 	text_far _CantGetOffBikeText
 	text_end
 
-GotOnBikeText:
+GotOnSkateboardText:
 	text_far _GotOnBikeText
 	text_end
 
-GotOffBikeText:
+GotOffSkateboardText:
 	text_far _GotOffBikeText
 	text_end
 
