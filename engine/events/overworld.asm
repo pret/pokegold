@@ -1738,6 +1738,143 @@ GotOffBikeText:
 	text_far _GotOffBikeText
 	text_end
 
+SkateboardFunction:
+	call .TryBike
+	and $7f
+	ld [wFieldMoveSucceeded], a
+	ret
+
+.TryBike:
+	call .CheckEnvironment
+	jr c, .CannotUseBike
+	ld a, [wPlayerState]
+	cp PLAYER_NORMAL
+	jr z, .GetOnBike
+	cp PLAYER_SKATEBOARD
+	jr z, .GetOffBike
+	jr .CannotUseBike
+
+.GetOnBike:
+	ld hl, Script_GetOnBike
+	ld de, Script_GetOnBike_Register
+	call .CheckIfRegistered
+	call QueueScript
+	xor a
+	ld [wMusicFade], a
+	ld de, MUSIC_NONE
+	call PlayMusic
+	call DelayFrame
+	call MaxVolume
+	ld de, MUSIC_BICYCLE
+	ld a, e
+	ld [wMapMusic], a
+	call PlayMusic
+	ld a, $1
+	ret
+
+.GetOffBike:
+	ld hl, wBikeFlags
+	bit BIKEFLAGS_ALWAYS_ON_BIKE_F, [hl]
+	jr nz, .CantGetOffBike
+	ld hl, Script_GetOffBike
+	ld de, Script_GetOffBike_Register
+	call .CheckIfRegistered
+	ld a, BANK(Script_GetOffBike)
+	jr .done
+
+.CantGetOffBike:
+	ld hl, Script_CantGetOffBike
+	jr .done
+
+.CannotUseBike:
+	ld a, $0
+	ret
+
+.done
+	call QueueScript
+	ld a, $1
+	ret
+
+.CheckIfRegistered:
+	ld a, [wUsingItemWithSelect]
+	and a
+	ret z
+	ld h, d
+	ld l, e
+	ret
+
+.CheckEnvironment:
+	call GetMapEnvironment
+	call CheckOutdoorMap
+	jr z, .ok
+	cp CAVE
+	jr z, .ok
+	cp GATE
+	jr z, .ok
+	jr .nope
+
+.ok
+	call GetPlayerTile
+	and $f ; lo nybble only
+	jr nz, .nope ; not FLOOR_TILE
+	xor a
+	ret
+
+.nope
+	scf
+	ret
+
+Script_GetOnBike:
+	reloadmappart
+	special UpdateTimePals
+	loadvar VAR_MOVEMENT, PLAYER_SKATEBOARD
+	writetext GotOnBikeText
+	waitbutton
+	closetext
+	special UpdatePlayerSprite
+	end
+
+Script_GetOnBike_Register:
+	loadvar VAR_MOVEMENT, PLAYER_SKATEBOARD
+	closetext
+	special UpdatePlayerSprite
+	end
+
+Script_GetOffBike:
+	reloadmappart
+	special UpdateTimePals
+	loadvar VAR_MOVEMENT, PLAYER_NORMAL
+	writetext GotOffBikeText
+	waitbutton
+
+FinishGettingOffBike:
+	closetext
+	special UpdatePlayerSprite
+	special PlayMapMusic
+	end
+
+Script_GetOffBike_Register:
+	loadvar VAR_MOVEMENT, PLAYER_NORMAL
+	sjump FinishGettingOffBike
+
+Script_CantGetOffBike:
+	writetext .CantGetOffBikeText
+	waitbutton
+	closetext
+	end
+
+.CantGetOffBikeText:
+	text_far _CantGetOffBikeText
+	text_end
+
+GotOnBikeText:
+	text_far _GotOnBikeText
+	text_end
+
+GotOffBikeText:
+	text_far _GotOffBikeText
+	text_end
+
 TryCutOW::
 	ld d, CUT
 	call CheckPartyMove

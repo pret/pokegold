@@ -53,6 +53,8 @@ DoPlayerMovement::
 	ret c
 	call .TryJump
 	ret c
+	call .TryJumpSkateboard
+	ret c
 	call .CheckWarp
 	ret c
 	jr .NotMoving
@@ -78,6 +80,8 @@ DoPlayerMovement::
 	call .TryStep
 	ret c
 	call .TryJump
+	ret c
+	call .TryJumpSkateboard
 	ret c
 	call .CheckWarp
 	ret c
@@ -389,6 +393,48 @@ DoPlayerMovement::
 	db FACE_DOWN | FACE_LEFT  ; COLL_HOP_DOWN_LEFT
 	db FACE_UP | FACE_RIGHT   ; COLL_HOP_UP_RIGHT
 	db FACE_UP | FACE_LEFT    ; COLL_HOP_UP_LEFT
+	
+.TryJumpSkateboard:
+	ld a, [wPlayerState]
+	cp PLAYER_SKATE
+	jr nz, .DontJumpSkateboard
+	ld a, [wPlayerTile]
+	ld e, a
+	and $f0
+	cp HI_NYBBLE_SKATE_JUMP
+	jr nz, .DontJumpSkateboard
+
+	ld a, e
+	and 7
+	ld e, a
+	ld d, 0
+	ld hl, .ledge_table_skateboard
+	add hl, de
+	ld a, [wFacingDirection]
+	and [hl]
+	jr z, .DontJumpSkateboard
+
+	ld de, SFX_JUMP_OVER_LEDGE
+	call PlaySFX
+	ld a, STEP_LEDGE
+	call .DoStep
+	ld a, PLAYERMOVEMENT_JUMP
+	scf
+	ret
+
+.DontJumpSkateboard:
+	xor a
+	ret
+
+.ledge_table_skateboard
+	db FACE_RIGHT             ; COLL_HOP_RIGHT
+	db FACE_LEFT              ; COLL_HOP_LEFT
+	db FACE_UP                ; COLL_HOP_UP
+	db FACE_DOWN              ; COLL_HOP_DOWN
+	db FACE_RIGHT | FACE_DOWN ; COLL_HOP_DOWN_RIGHT
+	db FACE_DOWN | FACE_LEFT  ; COLL_HOP_DOWN_LEFT
+	db FACE_UP | FACE_RIGHT   ; COLL_HOP_UP_RIGHT
+	db FACE_UP | FACE_LEFT    ; COLL_HOP_UP_LEFT	
 
 .CheckWarp:
 ; BUG: No bump noise if standing on tile $3E (see docs/bugs_and_glitches.md)

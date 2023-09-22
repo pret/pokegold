@@ -38,7 +38,7 @@ ItemEffects:
 	dw EvoStoneEffect      ; FIRE_STONE
 	dw EvoStoneEffect      ; THUNDERSTONE
 	dw EvoStoneEffect      ; WATER_STONE
-	dw NoEffect            ; ITEM_19
+	dw SkateboardEffect    ; SKATEBOARD
 	dw VitaminEffect       ; HP_UP
 	dw VitaminEffect       ; PROTEIN
 	dw VitaminEffect       ; IRON
@@ -1112,6 +1112,10 @@ TownMapEffect:
 
 BicycleEffect:
 	farcall BikeFunction
+	ret
+	
+SkateboardEffect:
+	farcall SkateboardFunction
 	ret
 
 EvoStoneEffect:
