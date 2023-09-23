@@ -2201,20 +2201,20 @@ _ChangeBox:
 .loop
 	xor a
 	ldh [hBGMapMode], a
-	call BillsPC_PrintBoxName
-	call BillsPC_PlaceChooseABoxString
+;	call BillsPC_PrintBoxName
+;	call BillsPC_PlaceChooseABoxString
 	ld hl, _ChangeBox_MenuHeader
 	call CopyMenuHeader
 	xor a
 	ld [wMenuScrollPosition], a
-	hlcoord 0, 4
-	lb bc, 8, 9
-	call Textbox
+;	hlcoord 0, 4
+;	lb bc, 8, 9
+;	call Textbox
 	call ScrollingMenu
 	ld a, [wMenuJoypad]
 	cp B_BUTTON
 	jr z, .done
-	call BillsPC_PlaceWhatsUpString
+;	call BillsPC_PlaceWhatsUpString
 	call BillsPC_ChangeBoxSubmenu
 	jr .loop
 .done
@@ -2232,13 +2232,13 @@ BillsPC_ClearTilemap:
 
 _ChangeBox_MenuHeader:
 	db MENU_BACKUP_TILES ; flags
-	menu_coords 1, 5, 9, 12
+	menu_coords 0, 0, 13, 11
 	dw .MenuData
 	db 1 ; default option
 
 .MenuData:
 	db SCROLLINGMENU_CALL_FUNCTION3_NO_SWITCH | SCROLLINGMENU_ENABLE_FUNCTION3 ; flags
-	db 4, 0 ; rows, columns
+	db 6, 0 ; rows, columns
 	db SCROLLINGMENU_ITEMS_NORMAL ; item format
 	dba .Boxes
 	dba .PrintBoxNames
@@ -2256,6 +2256,16 @@ endr
 	push de
 	ld a, [wMenuSelection]
 	dec a
+	ld bc, 6
+	ld hl, BoxListText
+	call AddNTimes
+	ld d, h
+	ld e, l
+	pop hl
+	call PlaceString
+	push bc
+	ld a, [wMenuSelection]
+	dec a	
 	call GetBoxName
 	pop hl
 	call PlaceString
@@ -2268,26 +2278,50 @@ GetBoxName:
 	ld d, h
 	ld e, l
 	ret
+	
+BoxListText:
+	db "№<DOT>01 @"
+	db "№<DOT>02 @"
+	db "№<DOT>03 @"
+	db "№<DOT>04 @"
+	db "№<DOT>05 @"
+	db "№<DOT>06 @"
+	db "№<DOT>07 @"
+	db "№<DOT>08 @"
+	db "№<DOT>09 @"
+	db "№<DOT>10 @"
+	db "№<DOT>11 @"
+	db "№<DOT>12 @"
+	db "№<DOT>13 @"
+	db "№<DOT>14 @"
 
 BillsPC_PrintBoxCountAndCapacity:
-	hlcoord 11, 7
-	lb bc, 5, 7
+	hlcoord 0, 12
+	lb bc, 4, 18
 	call Textbox
 	ld a, [wMenuSelection]
 	cp -1
-	ret z
-	hlcoord 12, 9
-	ld de, .Pokemon
+	jr z, .HoveringOnCancel
+	hlcoord 1, 14
+	ld de, .CurrentString
 	call PlaceString
 	call GetBoxCount
 	ld [wTextDecimalByte], a
-	hlcoord 13, 11
+	hlcoord 5, 16
 	ld de, wTextDecimalByte
 	lb bc, 1, 2
 	call PrintNum
 	ld de, .OutOf20
 	call PlaceString
 	ret
+.HoveringOnCancel
+	hlcoord 1, 14
+	lb bc, 3, 9
+	call ClearBox	
+	ret
+
+.CurrentString:
+	db "CURRENT:@"
 
 .Pokemon:
 	db "#MON@"
@@ -2449,7 +2483,7 @@ BillsPC_PlaceChooseABoxString:
 	jr BillsPC_PlaceChangeBoxString
 
 .ChooseABox:
-	db "Choose a BOX.@"
+	db "Capacity@"
 
 BillsPC_PlaceWhatsUpString:
 	ld de, .WhatsUp
@@ -2473,11 +2507,11 @@ BillsPC_PlaceEmptyBoxString_SFX:
 
 BillsPC_PlaceChangeBoxString:
 	push de
-	hlcoord 0, 14
-	lb bc, 2, 18
+	hlcoord 0, 12
+	lb bc, 4, 18
 	call Textbox
 	pop de
-	hlcoord 1, 16
+	hlcoord 1, 14
 	call PlaceString
 	ld a, $1
 	ldh [hBGMapMode], a
