@@ -71,6 +71,9 @@ Pack:
 	ret
 
 .ItemsPocketMenu:
+	hlcoord 0, 0
+	ld de, .Menu
+	call PlaceString
 	ld hl, ItemsPocketMenuHeader
 	call CopyMenuHeader
 	ld a, [wItemsPocketCursor]
@@ -88,6 +91,9 @@ Pack:
 	ret c
 	call ItemBallsKey_LoadSubmenu
 	ret
+	
+.Menu:
+	db   "        Pack        @"
 
 .InitKeyItemsPocket:
 	ld a, KEY_ITEM_POCKET
@@ -1094,7 +1100,7 @@ TutorialPack:
 	ld hl, .ItemsMenuHeader
 	jr .DisplayPocket
 
-.ItemsMenuHeader:
+.ItemsMenuHeader: 
 	db MENU_BACKUP_TILES ; flags
 	menu_coords 7, 1, SCREEN_WIDTH - 1, TEXTBOX_Y - 1
 	dw .ItemsMenuData
@@ -1207,27 +1213,7 @@ Pack_PrintTextNoScroll:
 
 WaitBGMap_DrawPackGFX:
 	call WaitBGMap
-DrawPackGFX:
-	ld a, [wCurPocket]
-	maskbits NUM_POCKETS
-	ld e, a
-	ld d, 0
-	ld hl, PackGFXPointers
-	add hl, de
-	add hl, de
-	ld a, [hli]
-	ld e, a
-	ld d, [hl]
-	ld hl, vTiles2 tile $50
-	lb bc, BANK(PackGFX), 15
-	call Request2bpp
 	ret
-
-PackGFXPointers:
-	dw PackGFX + (15 tiles) * 1 ; ITEM_POCKET
-	dw PackGFX + (15 tiles) * 3 ; BALL_POCKET
-	dw PackGFX + (15 tiles) * 0 ; KEY_ITEM_POCKET
-	dw PackGFX + (15 tiles) * 2 ; TM_HM_POCKET
 
 Pack_InterpretJoypad:
 	ld hl, wMenuJoypad
@@ -1320,35 +1306,18 @@ Pack_InitGFX:
 	call DisableLCD
 	ld hl, PackMenuGFX
 	ld de, vTiles2
-	ld bc, $60 tiles
+	ld bc, $3 tiles
 	ld a, BANK(PackMenuGFX)
 	call FarCopyBytes
-; Background
-	hlcoord 0, 1
-	ld bc, 11 * SCREEN_WIDTH
-	ld a, $24
-	call ByteFill
-; This is where the items themselves will be listed.
-	hlcoord 5, 1
-	lb bc, 11, 15
-	call ClearBox
-; ◀▶ POCKET       ▼▲ ITEMS
-	hlcoord 0, 0
-	ld a, $28
-	ld c, SCREEN_WIDTH
-.loop
-	ld [hli], a
-	inc a
-	dec c
-	jr nz, .loop
-	call DrawPocketName
-	call PlacePackGFX
+; Place the item menu box
+	hlcoord 1, 1
+	lb bc, 9, 16
+	call Textbox	
 ; Place the textbox for displaying the item description
 	hlcoord 0, SCREEN_HEIGHT - 4 - 2
 	lb bc, 4, SCREEN_WIDTH - 2
-	call Textbox
+	call Textbox	
 	call EnableLCD
-	call DrawPackGFX
 	ret
 
 PlacePackGFX:
@@ -1369,38 +1338,7 @@ PlacePackGFX:
 	ret
 
 DrawPocketName:
-	ld a, [wCurPocket]
-	; * 15
-	ld d, a
-	swap a
-	sub d
-	ld d, 0
-	ld e, a
-	ld hl, .tilemap
-	add hl, de
-	ld d, h
-	ld e, l
-	hlcoord 0, 7
-	ld c, 3
-.row
-	ld b, 5
-.col
-	ld a, [de]
-	inc de
-	ld [hli], a
-	dec b
-	jr nz, .col
-	ld a, c
-	ld c, SCREEN_WIDTH - 5
-	add hl, bc
-	ld c, a
-	dec c
-	jr nz, .row
 	ret
-
-.tilemap: ; 5x12
-; the 5x3 pieces correspond to *_POCKET constants
-INCBIN "gfx/pack/pack_menu.tilemap"
 
 Pack_GetItemName:
 	ld a, [wCurItem]
@@ -1417,8 +1355,8 @@ Pack_ClearTilemap: ; unreferenced
 	ret
 
 ClearPocketList:
-	hlcoord 5, 2
-	lb bc, 10, SCREEN_WIDTH - 5
+	hlcoord 2, 2
+	lb bc, 9, 16 ; Y, X
 	call ClearBox
 	ret
 
@@ -1430,15 +1368,15 @@ Pack_InitColors:
 	call DelayFrame
 	ret
 
-ItemsPocketMenuHeader:
+ItemsPocketMenuHeader: ; list is drawn here
 	db MENU_BACKUP_TILES ; flags
-	menu_coords 7, 1, SCREEN_WIDTH - 1, TEXTBOX_Y - 1
+	menu_coords 2, 2, SCREEN_WIDTH - 3, TEXTBOX_Y - 2
 	dw .MenuData
 	db 1 ; default option
 
 .MenuData:
 	db STATICMENU_ENABLE_SELECT | STATICMENU_ENABLE_LEFT_RIGHT | STATICMENU_ENABLE_START | STATICMENU_WRAP | STATICMENU_CURSOR ; flags
-	db 5, 8 ; rows, columns
+	db 4, 8 ; rows, columns
 	db SCROLLINGMENU_ITEMS_QUANTITY ; item format
 	dbw 0, wNumItems
 	dba PlaceMenuItemIcon

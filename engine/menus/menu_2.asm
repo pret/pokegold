@@ -16,7 +16,7 @@ PlaceMenuItemIcon:
 	jr PlaceMenuItemName
 
 .attribute_icon:
-	db $7f, $00, $02, $01, $7f, $7f, $7f
+	db $7f, $01, $02, $00, $7f, $7f, $7f
 
 .Quit
 	ld h, d
