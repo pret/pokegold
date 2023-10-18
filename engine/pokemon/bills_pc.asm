@@ -127,6 +127,8 @@ _DepositPKMN:
 	ret
 
 .Submenu:
+	call BillsPCDepositFuncDeposit
+	ret
 	ld hl, BillsPCDepositMenuHeader
 	call CopyMenuHeader
 	ld a, [wMenuCursorY]

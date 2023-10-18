@@ -80,26 +80,30 @@ _BillsPC:
 	dw .strings
 
 .strings
+	db "CHECK <PK><MN>@"
 	db "WITHDRAW <PK><MN>@"
 	db "DEPOSIT <PK><MN>@"
+	db "RELEASE <PK><MN>@"
 	db "CHANGE BOX@"
-	db "MOVE <PK><MN> W/O MAIL@"
 	db "SEE YA!@"
 
 .Jumptable:
+	dw BillsPC_SeeYa
 	dw BillsPC_WithdrawMenu
 	dw BillsPC_DepositMenu
 	dw BillsPC_ChangeBoxMenu
-	dw BillsPC_MovePKMNMenu
+	dw BillsPC_SeeYa
+	dw BillsPC_ChangeBoxMenu
 	dw BillsPC_SeeYa
 
 .items
-	db 5 ; # items
+	db 6 ; # items
 	db 0 ; WITHDRAW
 	db 1 ; DEPOSIT
 	db 2 ; CHANGE BOX
 	db 3 ; MOVE PKMN
 	db 4 ; SEE YA!
+	db 5
 	db -1
 
 BillsPC_SeeYa:
