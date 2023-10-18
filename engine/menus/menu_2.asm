@@ -1,3 +1,33 @@
+PlaceMenuItemIcon:
+	ld a, [wMenuSelection]
+	cp $ff
+	jr z, .Quit
+	push de
+	farcall CheckItemMenu
+	ld a, [wItemAttributeValue]
+	ld e, a
+	ld d, $00
+	ld hl, .attribute_icon
+	add hl, de
+	ld a, [hl]
+	pop de
+	ld [de], a
+	inc de
+	jr PlaceMenuItemName
+
+.attribute_icon:
+	db $7f, $00, $02, $01, $7f, $7f, $7f
+
+.Quit
+	ld h, d
+	ld l, e
+	ld de, .Quit_Text
+	call PlaceString
+	ret
+
+.Quit_Text:
+	db "Quit@"
+
 PlaceMenuItemName:
 	push de
 	ld a, [wMenuSelection]

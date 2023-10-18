@@ -186,7 +186,7 @@ ItemEffects:
 	dw NoEffect            ; POLKADOT_BOW
 	dw NoEffect            ; ITEM_AB
 	dw NoEffect            ; UP_GRADE
-	dw RestoreHPEffect     ; BERRY
+	dw BallHolderEffect    ; BERRY
 	dw RestoreHPEffect     ; GOLD_BERRY
 	dw SquirtbottleEffect  ; SQUIRTBOTTLE
 	dw NoEffect            ; ITEM_B0
@@ -2907,4 +2907,13 @@ GetMthMoveOfCurrentMon:
 	ld c, a
 	ld b, 0
 	add hl, bc
+	ret
+
+BallHolderEffect:
+	ld a, [wBattleMode]
+	cp 0
+	jr nz, .InBattle
+	farcall InitBallsPocket
+.InBattle	
+	farcall InitBallsPocket_Battle
 	ret

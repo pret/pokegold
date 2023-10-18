@@ -43,8 +43,8 @@ Pack:
 	dw .InitGFX            ;  0
 	dw .InitItemsPocket    ;  1
 	dw .ItemsPocketMenu    ;  2
-	dw .InitBallsPocket    ;  3
-	dw .BallsPocketMenu    ;  4
+	dw InitBallsPocket    ;  3
+	dw BallsPocketMenu    ;  4
 	dw .InitKeyItemsPocket ;  5
 	dw .KeyItemsPocketMenu ;  6
 	dw .InitTMHMPocket     ;  7
@@ -86,7 +86,7 @@ Pack:
 	ld c, PACKSTATE_INITBALLSPOCKET ; right
 	call Pack_InterpretJoypad
 	ret c
-	call .ItemBallsKey_LoadSubmenu
+	call ItemBallsKey_LoadSubmenu
 	ret
 
 .InitKeyItemsPocket:
@@ -114,7 +114,7 @@ Pack:
 	ld c, PACKSTATE_INITTMHMPOCKET ; right
 	call Pack_InterpretJoypad
 	ret c
-	call .ItemBallsKey_LoadSubmenu
+	call ItemBallsKey_LoadSubmenu
 	ret
 
 .InitTMHMPocket:
@@ -211,7 +211,7 @@ Pack:
 	call Pack_InitColors
 	ret
 
-.InitBallsPocket:
+InitBallsPocket:
 	ld a, BALL_POCKET
 	ld [wCurPocket], a
 	call ClearPocketList
@@ -220,7 +220,7 @@ Pack:
 	call Pack_JumptableNext
 	ret
 
-.BallsPocketMenu:
+BallsPocketMenu:
 	ld hl, BallsPocketMenuHeader
 	call CopyMenuHeader
 	ld a, [wBallsPocketCursor]
@@ -236,10 +236,10 @@ Pack:
 	ld c, PACKSTATE_INITKEYITEMSPOCKET ; right
 	call Pack_InterpretJoypad
 	ret c
-	call .ItemBallsKey_LoadSubmenu
+	call ItemBallsKey_LoadSubmenu
 	ret
 
-.ItemBallsKey_LoadSubmenu:
+ItemBallsKey_LoadSubmenu:
 	farcall _CheckTossableItem
 	ld a, [wItemAttributeValue]
 	and a
@@ -433,7 +433,7 @@ UseItem:
 ; entries correspond to ITEMMENU_* constants
 	dw .Oak     ; ITEMMENU_NOUSE
 	dw .Oak
-	dw .Oak
+	dw .Current
 	dw .Oak
 	dw .Current ; ITEMMENU_CURRENT
 	dw .Party   ; ITEMMENU_PARTY
@@ -652,8 +652,8 @@ BattlePack:
 	dw .InitGFX            ;  0
 	dw .InitItemsPocket    ;  1
 	dw .ItemsPocketMenu    ;  2
-	dw .InitBallsPocket    ;  3
-	dw .BallsPocketMenu    ;  4
+	dw InitBallsPocket_Battle    ;  3
+	dw BallsPocketMenu_Battle    ;  4
 	dw .InitKeyItemsPocket ;  5
 	dw .KeyItemsPocketMenu ;  6
 	dw .InitTMHMPocket     ;  7
@@ -749,7 +749,7 @@ BattlePack:
 	call TMHMSubmenu
 	ret
 
-.InitBallsPocket:
+InitBallsPocket_Battle:
 	ld a, BALL_POCKET
 	ld [wCurPocket], a
 	call ClearPocketList
@@ -758,7 +758,7 @@ BattlePack:
 	call Pack_JumptableNext
 	ret
 
-.BallsPocketMenu:
+BallsPocketMenu_Battle:
 	ld hl, BallsPocketMenuHeader
 	call CopyMenuHeader
 	ld a, [wBallsPocketCursor]
@@ -776,7 +776,7 @@ BattlePack:
 	ret c
 	call ItemSubmenu
 	ret
-
+	
 ItemSubmenu:
 	farcall CheckItemContext
 	ld a, [wItemAttributeValue]
@@ -843,7 +843,7 @@ TMHMSubmenu:
 ; entries correspond to ITEMMENU_* constants
 	dw .Oak         ; ITEMMENU_NOUSE
 	dw .Oak
-	dw .Oak
+	dw .Unused ; Need to add a new function to handle battle
 	dw .Oak
 	dw .Unused      ; ITEMMENU_CURRENT
 	dw .BattleField ; ITEMMENU_PARTY
@@ -856,9 +856,9 @@ TMHMSubmenu:
 
 .Unused:
 	call DoItemEffect
-	ld a, [wItemEffectSucceeded]
-	and a
-	jr nz, .ReturnToBattle
+;	ld a, [wItemEffectSucceeded]
+;	and a
+;	jr nz, .ReturnToBattle
 	ret
 
 .BattleField:
@@ -1441,7 +1441,7 @@ ItemsPocketMenuHeader:
 	db 5, 8 ; rows, columns
 	db SCROLLINGMENU_ITEMS_QUANTITY ; item format
 	dbw 0, wNumItems
-	dba PlaceMenuItemName
+	dba PlaceMenuItemIcon
 	dba PlaceMenuItemQuantity
 	dba UpdateItemDescription
 
@@ -1501,7 +1501,7 @@ BallsPocketMenuHeader:
 	db 5, 8 ; rows, columns
 	db SCROLLINGMENU_ITEMS_QUANTITY ; item format
 	dbw 0, wNumBalls
-	dba PlaceMenuItemName
+	dba PlaceMenuItemIcon
 	dba PlaceMenuItemQuantity
 	dba UpdateItemDescription
 
