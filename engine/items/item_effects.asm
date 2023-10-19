@@ -148,9 +148,9 @@ ItemEffects:
 	dw NoEffect            ; STAR_PIECE
 	dw BasementKeyEffect   ; BASEMENT_KEY
 	dw NoEffect            ; PASS
-	dw NoEffect            ; ITEM_87
-	dw NoEffect            ; ITEM_88
-	dw NoEffect            ; ITEM_89
+	dw KeyItemEffect       ; ITEM_87
+	dw BallHolderEffect    ; ITEM_88
+	dw TMHMHolderEffect    ; ITEM_89
 	dw NoEffect            ; CHARCOAL
 	dw RestoreHPEffect     ; BERRY_JUICE
 	dw NoEffect            ; SCOPE_LENS
@@ -2913,7 +2913,38 @@ BallHolderEffect:
 	ld a, [wBattleMode]
 	cp 0
 	jr nz, .InBattle
-	farcall InitBallsPocket
-.InBattle	
-	farcall InitBallsPocket_Battle
+	ld b, 5
+	farcall BallHolderFunction
+	jr .Finished
+.InBattle
+	ld a, 0
+	ld [wBattlePlayerAction], a
+	farcall BallHolderFunction
+.Finished
+	ret
+	
+KeyItemEffect:
+	ld a, [wBattleMode]
+	cp 0
+	jr nz, .InBattle
+	farcall KeyItemHolderFunction
+	jr .Finished
+.InBattle
+	ld a, 0
+	ld [wBattlePlayerAction], a
+	farcall KeyItemHolderFunction
+.Finished
+	ret
+	
+TMHMHolderEffect:
+	ld a, [wBattleMode]
+	cp 0
+	jr nz, .InBattle
+	farcall TMHMHolderFunction
+	jr .Finished
+.InBattle
+	ld a, 0
+	ld [wBattlePlayerAction], a
+	farcall TMHMHolderFunction
+.Finished
 	ret

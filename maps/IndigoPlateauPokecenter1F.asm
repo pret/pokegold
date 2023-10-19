@@ -168,6 +168,9 @@ TeleportGuyScript:
 	end
 
 AbraScript:
+	giveitem KEY_HOLDER
+	giveitem BALL_HOLDER
+	giveitem TMHM_HOLDER
 	opentext
 	writetext AbraText
 	cry ABRA

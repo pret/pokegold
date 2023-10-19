@@ -186,14 +186,14 @@ TMHM_PocketLoop:
 	call TMHM_DisplayPocketItems
 	ld a, 2
 	ld [w2DMenuCursorInitY], a
-	ld a, 7
+	ld a, 3
 	ld [w2DMenuCursorInitX], a
 	ld a, 1
 	ld [w2DMenuNumCols], a
-	ld a, 5
+	ld a, 4
 	sub d
 	inc a
-	cp 6
+	cp 5
 	jr nz, .okay
 	dec a
 .okay
@@ -238,10 +238,26 @@ TMHM_JoypadLoop:
 TMHM_ShowTMMoveDescription:
 	call TMHM_CheckHoveringOverCancel
 	jp nc, TMHM_ExitPocket
-	hlcoord 0, 12
-	ld b, 4
+	hlcoord 0, 11
+	ld b, 5
 	ld c, SCREEN_WIDTH - 2
 	call Textbox
+
+; Place the TM/HM box box
+	hlcoord 2, 0
+	lb bc, 9, 16
+	call Textbox
+
+	hlcoord 0, 10
+	ld de, String_MoveType_Top_TMHolder
+	call PlaceString
+	hlcoord 0, 11
+	ld de, String_MoveType_Bottom_TMHolder
+	call PlaceString
+	hlcoord 11, 12
+	ld de, String_MoveAtk_TMHolder
+	call PlaceString	
+	
 	ld a, [wCurItem]
 	cp NUM_TMS + NUM_HMS + 1
 	jr nc, TMHM_JoypadLoop
@@ -251,7 +267,42 @@ TMHM_ShowTMMoveDescription:
 	ld [wCurSpecies], a
 	hlcoord 1, 14
 	call PrintMoveDescription
+	
+	ld a, [wCurSpecies] ; type
+	ld b, a
+	hlcoord 2, 12
+	predef PrintMoveType
+
+	ld a, [wCurSpecies] ; power
+	dec a
+	ld hl, Moves + MOVE_POWER
+	ld bc, MOVE_LENGTH
+	call AddNTimes
+	ld a, BANK(Moves)
+	call GetFarByte
+	hlcoord 16, 12
+	cp 2
+	jr c, .no_power
+	ld [wTextDecimalByte], a
+	ld de, wTextDecimalByte
+	lb bc, 1, 3
+	call PrintNum
+.continueprinting	
 	jp TMHM_JoypadLoop
+	
+.no_power
+	ld de, String_MoveNoPower_TMHolder
+	call PlaceString
+	jr .continueprinting
+	
+String_MoveType_Top_TMHolder:
+	db "┌─────┐@"
+String_MoveType_Bottom_TMHolder:
+	db "│TYPE/└@"
+String_MoveAtk_TMHolder:
+	db "ATTK/@"
+String_MoveNoPower_TMHolder:
+	db "---@"	
 
 TMHM_ChooseTMorHM:
 	call TMHM_PlaySFX_ReadText2
@@ -311,7 +362,7 @@ TMHM_ScrollPocket:
 
 .skip
 	call TMHM_GetCurrentPocketPosition
-	ld b, 5
+	ld b, 4
 .loop
 	inc c
 	ld a, c
@@ -330,14 +381,14 @@ TMHM_ScrollPocket:
 TMHM_DisplayPocketItems:
 	ld a, [wBattleType]
 	cp BATTLETYPE_TUTORIAL
-	jp z, Tutorial_TMHMPocket
+	jp z, Tutorial_TMHMPocket	
 
-	hlcoord 5, 2
-	lb bc, 10, 15
+	hlcoord 3, 1
+	lb bc, 9, 16
 	ld a, " "
 	call ClearBox
 	call TMHM_GetCurrentPocketPosition
-	ld d, $5
+	ld d, $4
 .loop2
 	inc c
 	ld a, c
@@ -421,10 +472,10 @@ TMHM_DisplayPocketItems:
 .done
 	ret
 
-TMHMPocket_GetCurrentLineCoord:
-	hlcoord 5, 0
+TMHMPocket_GetCurrentLineCoord: ; coord
+	hlcoord 4, 0
 	ld bc, 2 * SCREEN_WIDTH
-	ld a, 6
+	ld a, 5
 	sub d
 	ld e, a
 	; AddNTimes

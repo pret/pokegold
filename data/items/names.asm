@@ -134,7 +134,7 @@ ItemNames::
 	li "STAR PIECE"
 	li "BASEMENT KEY"
 	li "PASS"
-	li "KEY ITEMs"
+	li "KEY ITEM BAG"
 	li "BALL HOLDER"
 	li "TM HOLDER"
 	li "CHARCOAL"

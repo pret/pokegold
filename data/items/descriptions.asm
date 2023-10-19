@@ -780,13 +780,16 @@ PassDesc:
 	next "MAGNET TRAIN.@"
 
 TeruSama13Desc:
-	db   "?@"
+	db   "A holder for"
+	next "important items.@"
 
 TeruSama14Desc:
-	db   "?@"
-
+	db   "A holder for"
+	next "BALLs.@"
+	
 TeruSama15Desc:
-	db   "?@"
+	db   "A holder for"
+	next "TMs and HMs.@"
 
 CharcoalDesc:
 	db   "Powers up fire-"
