@@ -20,12 +20,12 @@ rom_obj := \
 	engine/overworld/events.o \
 	gfx/misc.o \
 	gfx/sprites.o \
-	gfx/tilesets.o
+	gfx/tilesets.o \
+	gfx/pics.o
 
 # Distinguish asm files which are game-exclusive for building (*_[gold|silver].asm)
 gs_excl_asm := \
-	data/pokemon/dex_entries \
-	gfx/pics
+	data/pokemon/dex_entries
 
 gold_excl_obj         := $(addsuffix _gold.o,$(gs_excl_asm))
 silver_excl_obj       := $(addsuffix _silver.o,$(gs_excl_asm))
@@ -198,13 +198,13 @@ include gfx/lz.mk
 
 ### Misc file-specific graphics rules
 
-gfx/pokemon/%/front.2bpp: rgbgfx += -Z -c embedded
-gfx/pokemon/%/front_gold.2bpp: rgbgfx += -Z -c embedded
-gfx/pokemon/%/front_silver.2bpp: rgbgfx += -Z -c embedded
+gfx/pokemon/%/front.2bpp: rgbgfx += -Z 
+gfx/pokemon/%/front_gold.2bpp: rgbgfx += -Z 
+gfx/pokemon/%/front_silver.2bpp: rgbgfx += -Z 
 
-gfx/pokemon/%/back.2bpp: rgbgfx += -Z -c embedded
-gfx/pokemon/%/back_gold.2bpp: rgbgfx += -Z -c embedded
-gfx/pokemon/%/back_silver.2bpp: rgbgfx += -Z -c embedded
+gfx/pokemon/%/back.2bpp: rgbgfx += -Z 
+gfx/pokemon/%/back_gold.2bpp: rgbgfx += -Z 
+gfx/pokemon/%/back_silver.2bpp: rgbgfx += -Z 
 
 gfx/pokemon/%/back_gold.2bpp: gfx/pokemon/%/back.png
 	$(RGBGFX) $(rgbgfx) -o $@ $<
