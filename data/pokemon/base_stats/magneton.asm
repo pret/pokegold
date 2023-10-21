@@ -12,9 +12,9 @@
 	db 20 ; step cycles to hatch
 	db 5 ; unknown 2
 IF DEF(_GOLD)
-	INCBIN "gfx/pokemon/magneton/front_gold.dimensions"
+	INCBIN "gfx/pokemon/magneton/front.dimensions"
 ELIF DEF(_SILVER)
-	INCBIN "gfx/pokemon/magneton/front_silver.dimensions"
+	INCBIN "gfx/pokemon/magneton/front.dimensions"
 ENDC
 	dw NULL, NULL ; unused (beta front/back pics)
 	db GROWTH_MEDIUM_FAST ; growth rate

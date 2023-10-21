@@ -12,9 +12,9 @@
 	db 40 ; step cycles to hatch
 	db 5 ; unknown 2
 IF DEF(_GOLD)
-	INCBIN "gfx/pokemon/chansey/front_gold.dimensions"
+	INCBIN "gfx/pokemon/chansey/front.dimensions"
 ELIF DEF(_SILVER)
-	INCBIN "gfx/pokemon/chansey/front_silver.dimensions"
+	INCBIN "gfx/pokemon/chansey/front.dimensions"
 ENDC
 	dw NULL, NULL ; unused (beta front/back pics)
 	db GROWTH_FAST ; growth rate

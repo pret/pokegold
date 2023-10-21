@@ -216,7 +216,7 @@ gfx/pokemon/%/back_silver.2bpp: gfx/pokemon/%/back.png
 	$(if $(tools/gfx),\
 		tools/gfx $(tools/gfx) -o $@ $@)
 
-gfx/trainers/%.2bpp: rgbgfx += -Z -c embedded
+gfx/trainers/%.2bpp: rgbgfx += -Z
 
 gfx/intro/fire.2bpp: tools/gfx += --remove-whitespace
 gfx/intro/fire1.2bpp: gfx/intro/charizard1.2bpp gfx/intro/charizard2_top.2bpp gfx/intro/space.2bpp ; cat $^ > $@

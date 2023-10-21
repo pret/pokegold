@@ -12,9 +12,9 @@
 	db 40 ; step cycles to hatch
 	db 5 ; unknown 2
 IF DEF(_GOLD)
-	INCBIN "gfx/pokemon/tyranitar/front_gold.dimensions"
+	INCBIN "gfx/pokemon/tyranitar/front.dimensions"
 ELIF DEF(_SILVER)
-	INCBIN "gfx/pokemon/tyranitar/front_silver.dimensions"
+	INCBIN "gfx/pokemon/tyranitar/front.dimensions"
 ENDC
 	dw NULL, NULL ; unused (beta front/back pics)
 	db GROWTH_SLOW ; growth rate

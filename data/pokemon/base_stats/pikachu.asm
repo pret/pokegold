@@ -12,9 +12,9 @@
 	db 10 ; step cycles to hatch
 	db 5 ; unknown 2
 IF DEF(_GOLD)
-	INCBIN "gfx/pokemon/pikachu/front_gold.dimensions"
+	INCBIN "gfx/pokemon/pikachu/front.dimensions"
 ELIF DEF(_SILVER)
-	INCBIN "gfx/pokemon/pikachu/front_silver.dimensions"
+	INCBIN "gfx/pokemon/pikachu/front.dimensions"
 ENDC
 	dw NULL, NULL ; unused (beta front/back pics)
 	db GROWTH_MEDIUM_FAST ; growth rate
