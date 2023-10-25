@@ -15,14 +15,7 @@ Reset::
 
 _Start::
 	cp $11
-	jr z, .cgb
 	xor a ; FALSE
-	jr .load
-
-.cgb
-	ld a, TRUE
-
-.load
 	ldh [hCGB], a
 
 Init::

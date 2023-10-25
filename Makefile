@@ -1,8 +1,8 @@
 roms := \
-	pokegold.gbc \
-	pokesilver.gbc \
-	pokegold_debug.gbc \
-	pokesilver_debug.gbc
+	pokegold.sgb \
+	pokesilver.sgb \
+	pokegold_debug.sgb \
+	pokesilver_debug.sgb
 patches := \
 	pokegold.patch \
 	pokesilver.patch
@@ -66,10 +66,10 @@ RGBLINK ?= $(RGBDS)rgblink
 .SECONDARY:
 
 all: $(roms)
-gold:         pokegold.gbc
-silver:       pokesilver.gbc
-gold_debug:   pokegold_debug.gbc
-silver_debug: pokesilver_debug.gbc
+gold:         pokegold.sgb
+silver:       pokesilver.sgb
+gold_debug:   pokegold_debug.sgb
+silver_debug: pokesilver_debug.sgb
 gold_vc:      pokegold.patch
 silver_vc:    pokesilver.patch
 
@@ -77,17 +77,17 @@ clean: tidy
 	find gfx \
 	     \( -name "*.[12]bpp" \
 	        -o -name "*.lz" \
-	        -o -name "*.gbcpal" \
+	        -o -name "*.sgbpal" \
 	        -o -name "*.dimensions" \
 	        -o -name "*.sgb.tilemap" \) \
 	     -delete
 
 tidy:
 	$(RM) $(roms) \
-	      $(roms:.gbc=.sym) \
-	      $(roms:.gbc=.map) \
+	      $(roms:.sgb=.sym) \
+	      $(roms:.sgb=.map) \
 	      $(patches) \
-	      $(patches:.patch=_vc.gbc) \
+	      $(patches:.patch=_vc.sgb) \
 	      $(patches:.patch=_vc.sym) \
 	      $(patches:.patch=_vc.map) \
 	      $(patches:%.patch=vc/%.constants.sym) \
@@ -120,7 +120,7 @@ $(pokesilver_debug_obj): RGBASMFLAGS += -D _SILVER -D _DEBUG
 $(pokegold_vc_obj):      RGBASMFLAGS += -D _GOLD -D _GOLD_VC
 $(pokesilver_vc_obj):    RGBASMFLAGS += -D _SILVER -D _GOLD_VC
 
-%.patch: vc/%.constants.sym %_vc.gbc %.gbc vc/%.patch.template
+%.patch: vc/%.constants.sym %_vc.sgb %.sgb vc/%.patch.template
 	tools/make_patch $*_vc.sym $^ $@
 
 rgbdscheck.o: rgbdscheck.asm
@@ -174,14 +174,14 @@ $(foreach obj, $(silver_vc_excl_obj), \
 endif
 
 
-pokegold_opt         = -cjsv -t POKEMON_GLD -i AAUE -k 01 -l 0x33 -m 0x10 -r 3 -p 0
-pokesilver_opt       = -cjsv -t POKEMON_SLV -i AAXE -k 01 -l 0x33 -m 0x10 -r 3 -p 0
-pokegold_debug_opt   = -cjsv -t POKEMON_GLD -i AAUE -k 01 -l 0x33 -m 0x10 -r 3 -p 0
-pokesilver_debug_opt = -cjsv -t POKEMON_SLV -i AAXE -k 01 -l 0x33 -m 0x10 -r 3 -p 0
-pokegold_vc_opt      = -cjsv -t POKEMON_GLD -i AAUE -k 01 -l 0x33 -m 0x10 -r 3 -p 0
-pokesilver_vc_opt    = -cjsv -t POKEMON_SLV -i AAXE -k 01 -l 0x33 -m 0x10 -r 3 -p 0
+pokegold_opt         = -jsv -t POKEMON2GOLD   -k 01 -l 0x33 -m 0x10 -r 3 -p 0
+pokesilver_opt       = -jsv -t POKEMON2SILVER -k 01 -l 0x33 -m 0x10 -r 3 -p 0
+pokegold_debug_opt   = -jsv -t POKEMON2GOLD   -k 01 -l 0x33 -m 0x10 -r 3 -p 0
+pokesilver_debug_opt = -jsv -t POKEMON2SILVER -k 01 -l 0x33 -m 0x10 -r 3 -p 0
+pokegold_vc_opt      = -jsv -t POKEMON2GOLD   -k 01 -l 0x33 -m 0x10 -r 3 -p 0
+pokesilver_vc_opt    = -jsv -t POKEMON2SILVER -k 01 -l 0x33 -m 0x10 -r 3 -p 0
 
-%.gbc: $$(%_obj) layout.link
+%.sgb: $$(%_obj) layout.link
 	$(RGBLINK) -n $*.sym -m $*.map -l layout.link -o $@ $(filter %.o,$^)
 	$(RGBFIX) $($*_opt) $@
 	tools/stadium $@
@@ -309,7 +309,7 @@ gfx/sgb/silver_border.sgb.tilemap: gfx/sgb/silver_border.bin ; tr < $< -d '\000'
 	$(if $(tools/gfx),\
 		tools/gfx $(tools/gfx) -d1 -o $@ $@)
 
-%.gbcpal: %.png
+%.sgbpal: %.png
 	$(RGBGFX) -c embedded -p $@ $<
 
 %.dimensions: %.png
