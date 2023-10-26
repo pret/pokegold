@@ -724,7 +724,6 @@ AnimSeq_GSTitleTrail:
 	dw .zero
 	dw .one
 
-IF DEF(_GOLD)
 .zero
 	call AnimSeqs_IncAnonJumptableIndex
 
@@ -781,38 +780,6 @@ IF DEF(_GOLD)
 	ld [hl], a
 	ret
 
-ELIF DEF(_SILVER)
-.zero
-	ld a, [wIntroSceneTimer]
-	and $30
-	swap a
-	add 3
-	ld d, a
-	ld hl, SPRITEANIMSTRUCT_VAR1
-	add hl, bc
-	ld a, [wIntroSceneTimer]
-	and $30
-	swap a
-	add 7
-	add [hl]
-	ld [hl], a
-	call AnimSeqs_Sine
-
-	ld hl, SPRITEANIMSTRUCT_YOFFSET
-	add hl, bc
-	ld [hl], a
-
-.one
-	ld hl, SPRITEANIMSTRUCT_XCOORD
-	add hl, bc
-	ld a, [hl]
-	cp $a4
-	jr nc, .delete
-	add 4
-	ld [hl], a
-	ret
-ENDC
-
 .delete
 	call DeinitializeSprite
 	ret
@@ -821,15 +788,9 @@ AnimSeq_GSIntroHoOhLugia:
 	ld hl, SPRITEANIMSTRUCT_VAR1
 	add hl, bc
 	ld a, [hl]
-IF DEF(_GOLD)
 	inc a
 	ld [hl], a
 	ld d, 2
-ELIF DEF(_SILVER)
-	dec a
-	ld [hl], a
-	ld d, 8
-ENDC
 	call AnimSeqs_Sine
 
 	ld hl, SPRITEANIMSTRUCT_YOFFSET
