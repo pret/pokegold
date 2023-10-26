@@ -97,7 +97,7 @@ StatsScreen_LoadPage:
 	bit D_RIGHT_F, a
 	jr nz, .d_right
 	bit A_BUTTON_F, a
-	jr nz, .a_button
+	jr nz, .d_right
 	bit D_UP_F, a
 	jr nz, .d_up
 
@@ -307,7 +307,7 @@ StatsScreen_InitUpperHalf:
 	hlcoord 18, 0
 	ld [hl], a
 .next
-	hlcoord 9, 4
+	hlcoord 9, 3
 	ld a, "/"
 	ld [hli], a
 	ld a, [wBaseDexNo]
@@ -536,10 +536,14 @@ StatsScreen_PlaceHorizontalDivider:
 	ret
 
 StatsScreen_PlacePageSwitchArrows:
-	hlcoord 12, 6
-	ld [hl], "◀"
-	hlcoord 19, 6
-	ld [hl], "▶"
+	hlcoord 14, 6
+	ld [hl], $32
+	hlcoord 15, 6
+	ld [hl], $33
+	hlcoord 16, 6
+	ld [hl], $34
+	hlcoord 17, 6
+	ld [hl], $35	
 	ret
 
 StatsScreen_PlaceShinyIcon:
@@ -821,23 +825,23 @@ EggALotMoreTimeString:
 	next "hatch.@"
 
 StatsScreen_LoadPageIndicators:
-	hlcoord 13, 5
+	hlcoord 13, 4
 	ld a, $36 ; first of 4 small square tiles
 	call .load_square
-	hlcoord 15, 5
+	hlcoord 15, 4
 	ld a, $36 ; " " " "
 	call .load_square
-	hlcoord 17, 5
+	hlcoord 17, 4
 	ld a, $36 ; " " " "
 	call .load_square
 	ld a, b
 	cp GREEN_PAGE
 	ld a, $3a ; first of 4 large square tiles
-	hlcoord 13, 5 ; PINK_PAGE (< GREEN_PAGE)
+	hlcoord 15, 4 ; PINK_PAGE (< GREEN_PAGE)
 	jr c, .load_square
-	hlcoord 15, 5 ; GREEN_PAGE (= GREEN_PAGE)
+	hlcoord 17, 4 ; GREEN_PAGE (= GREEN_PAGE)
 	jr z, .load_square
-	hlcoord 17, 5 ; BLUE_PAGE (> GREEN_PAGE)
+	hlcoord 13, 4 ; BLUE_PAGE (> GREEN_PAGE)
 .load_square
 	ld [hli], a
 	inc a
