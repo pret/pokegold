@@ -919,11 +919,9 @@ RunTitleScreen:
 	ret
 
 ScrollTitleScreenClouds:
-IF DEF(_GOLD)
 	ldh a, [hVBlankCounter]
 	and $7
 	ret nz
-ENDC
 	ld hl, wLYOverrides + $5f
 	ld a, [hl]
 	dec a
@@ -959,11 +957,7 @@ TitleScreenTimer:
 
 ; Start a timer
 	ld hl, wTitleScreenTimer
-IF DEF(_GOLD)
 	ld de, 84 * 60 + 16
-ELIF DEF(_SILVER)
-	ld de, 73 * 60 + 36
-ENDC
 	ld [hl], e
 	inc hl
 	ld [hl], d
@@ -1075,7 +1069,6 @@ UpdateTitleTrailSprite:
 	ld a, [wTitleScreenTimer]
 	and %00000011
 	ret nz
-IF DEF(_GOLD)
 	ld bc, wSpriteAnim10
 	ld hl, SPRITEANIMSTRUCT_FRAME
 	add hl, bc
@@ -1099,14 +1092,10 @@ IF DEF(_GOLD)
 	ret z
 	ld e, a
 	ld d, [hl]
-ELIF DEF(_SILVER)
-	depixel 15, 11, 4, 0
-ENDC
 	ld a, SPRITE_ANIM_OBJ_GS_TITLE_TRAIL
 	call InitSpriteAnimStruct
 	ret
 
-IF DEF(_GOLD)
 .TitleTrailCoords:
 MACRO trail_coords
 	rept _NARG / 2
@@ -1125,7 +1114,6 @@ ENDM
 	trail_coords 11, 17, 11, 15
 	trail_coords  0,  0, 11, 15
 	trail_coords  0,  0, 11, 11
-ENDC
 
 Copyright:
 	call ClearTilemap

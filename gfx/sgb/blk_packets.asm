@@ -81,9 +81,13 @@ BlkPacket_PartyMenu:
 	ds 4, 0
 
 BlkPacket_GSTitleScreen:
-	attr_blk 2
-	attr_blk_data %111, 0,0,3, 00,00, 19,06
-	attr_blk_data %010, 0,1,0, 05,06, 14,06
+	attr_blk 6
+	attr_blk_data %111, 2,2,3, 00,00, 19,05
+	attr_blk_data %010, 0,0,0, 04,05, 14,05
+	attr_blk_data %010, 0,0,0, 15,01, 19,01
+	attr_blk_data %010, 0,0,0, 15,02, 19,02
+	attr_blk_data %010, 0,0,0, 15,03, 19,03
+	attr_blk_data %010, 0,0,0, 15,04, 19,04
 	ds 2, 0
 
 BlkPacket_BetaTitleScreen:

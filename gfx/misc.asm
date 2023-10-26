@@ -43,18 +43,10 @@ INCBIN "gfx/splash/copyright.2bpp"
 
 SECTION "Title Screen 2", ROMX
 
-IF DEF(_GOLD)
 TitleScreenGFX3::
 INCBIN "gfx/title/title_trail_gold.2bpp"
 TitleScreenGFX4::
 INCBIN "gfx/title/hooh_gold.2bpp.lz"
-
-ELIF DEF(_SILVER)
-TitleScreenGFX3::
-INCBIN "gfx/title/title_trail_silver.2bpp"
-TitleScreenGFX4::
-INCBIN "gfx/title/lugia_silver.2bpp.lz"
-ENDC
 
 
 SECTION "Shrink Pics", ROMX

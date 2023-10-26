@@ -102,33 +102,19 @@ LoadTitleScreenPals:
 	jr nz, .sgb
 	ld a, %11011000
 	ldh [rBGP], a
-IF DEF(_GOLD)
-	ld a, %11111111
+	ld a, %11111011
 	ldh [rOBP0], a
 	ld a, %11111000
 	ldh [rOBP1], a
-ELIF DEF(_SILVER)
-	ld a, %11110000
-	ldh [rOBP0], a
-	ld a, %11110000
-	ldh [rOBP1], a
-ENDC
 	ret
 
 .sgb
 	ld a, %11100100
 	ldh [rBGP], a
-IF DEF(_GOLD)
-	ld a, %11111111
+	ld a, %11111011
 	ldh [rOBP0], a
 	ld a, %11100100
 	ldh [rOBP1], a
-ELIF DEF(_SILVER)
-	ld a, %11110000
-	ldh [rOBP0], a
-	ld a, %11100000
-	ldh [rOBP1], a
-ENDC
 	ret
 
 .cgb
@@ -196,11 +182,4 @@ LoadTitleScreenTilemap:
 	jr .loop
 
 .done
-	ldh a, [hCGB]
-	and a
-	ret nz
-	hlbgcoord 0, 11
-	ld bc, BG_MAP_WIDTH
-	ld a, "@"
-	call ByteFill
 	ret
