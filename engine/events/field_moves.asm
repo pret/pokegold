@@ -71,7 +71,7 @@ ShakeHeadbuttTree:
 	ret
 
 HeadbuttTreeGFX:
-INCBIN "gfx/overworld/headbutt_tree.2bpp"
+	ret
 
 HideHeadbuttTree:
 	xor a

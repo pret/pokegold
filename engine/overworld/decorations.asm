@@ -1,8 +1,4 @@
 InitDecorations:
-	ld a, DECO_FEATHERY_BED
-	ld [wDecoBed], a
-	ld a, DECO_TOWN_MAP
-	ld [wDecoPoster], a
 	ret
 
 _PlayerDecorationMenu:

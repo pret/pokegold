@@ -14,32 +14,34 @@ Tilesets::
 ; entries correspond to TILESET_* constants (see constants/tileset_constants.asm)
 	table_width TILESET_LENGTH, Tilesets
 	tileset Tileset0
-	tileset TilesetJohto
-	tileset TilesetJohtoModern
+	tileset TilesetNihon
+	tileset TilesetNihonOld
+	tileset TilesetNihonWest
+	tileset TilesetNihonHiTech
+	tileset TilesetNihonFont
+	tileset TilesetNihonBirdon
+	tileset TilesetNihonNorth
 	tileset TilesetKanto
+	tileset TilesetNihonSouth
 	tileset TilesetHouse
-	tileset TilesetPlayersHouse
-	tileset TilesetPokecenter
-	tileset TilesetGate
-	tileset TilesetPort
 	tileset TilesetLab
-	tileset TilesetFacility
-	tileset TilesetMart
-	tileset TilesetMansion
-	tileset TilesetGameCorner
-	tileset TilesetEliteFourRoom
 	tileset TilesetTraditionalHouse
-	tileset TilesetTrainStation
-	tileset TilesetChampionsRoom
-	tileset TilesetLighthouse
-	tileset TilesetPlayersRoom
+	tileset TilesetPokecenter
+	tileset TilesetMart
+	tileset TilesetAquarium
 	tileset TilesetTower
-	tileset TilesetCave
-	tileset TilesetPark
-	tileset TilesetRuinsOfAlph
+	tileset TilesetDeptStore
+	tileset TilesetGate
 	tileset TilesetRadioTower
-	tileset TilesetUnderground
-	tileset TilesetIcePath
-	tileset TilesetDarkCave
+	tileset TilesetRocketHideout
+	tileset TilesetGym
+	tileset TilesetOffice
+	tileset TilesetRuins
+	tileset TilesetCave
+	tileset TilesetPowerPlant
+	tileset TilesetShip
+	tileset TilesetPort
 	tileset TilesetForest
-	assert_table_length NUM_TILESETS + 1
+	tileset TilesetDarkCave
+	tileset TilesetTrainStation
+	assert_table_length NUM_TILESETS +1
