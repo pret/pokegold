@@ -40,11 +40,10 @@ ROMX $04
 ROMX $05
 	"bank5"
 ROMX $06
+	"Extra Songs 1"
 	"Tileset Data 1"
 ROMX $07
-	"Roofs"
 	"Tileset Data 2"
-	"Extra Songs 1"
 ROMX $08
 	"Clock Reset"
 	"Tileset Data 3"

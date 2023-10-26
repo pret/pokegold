@@ -97,11 +97,6 @@ INCLUDE "engine/link/mystery_gift_gfx.asm"
 INCLUDE "engine/pokemon/breeding.asm"
 
 
-SECTION "Roofs", ROMX
-
-INCLUDE "engine/tilesets/mapgroup_roofs.asm"
-
-
 SECTION "Clock Reset", ROMX
 
 INCLUDE "engine/rtc/restart_clock.asm"
