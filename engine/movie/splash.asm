@@ -76,8 +76,11 @@ GameFreakPresentsInit:
 	ldh [hBGMapMode], a
 	ld a, SCREEN_HEIGHT_PX
 	ldh [hWY], a
-	lb de, %00100100, %11111000
-	call DmgToCgbObjPals
+
+	ld a, %11100100
+	ldh [rOBP0], a
+	ld a, %00100100
+	ldh [rOBP1], a
 	ret
 
 GameFreakPresentsFrame:
