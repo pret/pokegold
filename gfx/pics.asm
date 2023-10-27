@@ -590,10 +590,6 @@ PolitoedFrontpic:    INCBIN "gfx/pokemon/politoed/front.2bpp.lz"
 ElectabuzzFrontpic:  INCBIN "gfx/pokemon/electabuzz/front.2bpp.lz"
 TentacruelFrontpic:  INCBIN "gfx/pokemon/tentacruel/front.2bpp.lz"
 NidokingBackpic:     INCBIN "gfx/pokemon/nidoking/back.2bpp.lz"
-PokefanmPic:         INCBIN "gfx/trainers/pokefan_m.2bpp.lz"
-BoarderPic:          INCBIN "gfx/trainers/boarder.2bpp.lz"
-UrsaringFrontpic:    INCBIN "gfx/pokemon/ursaring/front.2bpp.lz"
-MachampBackpic:      INCBIN "gfx/pokemon/machamp/back.2bpp.lz"
 
 
 SECTION "Pics 14", ROMX
@@ -697,3 +693,7 @@ SunkernBackpic:      INCBIN "gfx/pokemon/sunkern/back.2bpp.lz"
 PorygonBackpic:      INCBIN "gfx/pokemon/porygon/back.2bpp.lz"
 ClefairyFrontpic:    INCBIN "gfx/pokemon/clefairy/front.2bpp.lz"
 BulbasaurBackpic:    INCBIN "gfx/pokemon/bulbasaur/back.2bpp.lz"
+PokefanmPic:         INCBIN "gfx/trainers/pokefan_m.2bpp.lz"
+BoarderPic:          INCBIN "gfx/trainers/boarder.2bpp.lz"
+UrsaringFrontpic:    INCBIN "gfx/pokemon/ursaring/front.2bpp.lz"
+MachampBackpic:      INCBIN "gfx/pokemon/machamp/back.2bpp.lz"
