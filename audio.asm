@@ -50,7 +50,6 @@ INCLUDE "audio/music/dragonsden.asm"
 INCLUDE "audio/music/ruinsofalphradio.asm"
 INCLUDE "audio/music/lookbeauty.asm"
 INCLUDE "audio/music/route26.asm"
-INCLUDE "audio/music/ecruteakcity.asm"
 INCLUDE "audio/music/lakeofragerocketradio.asm"
 INCLUDE "audio/music/magnettrain.asm"
 INCLUDE "audio/music/lavendertown.asm"
@@ -72,7 +71,6 @@ INCLUDE "audio/music/printer.asm"
 
 SECTION "Songs 4", ROMX
 
-INCLUDE "audio/music/viridiancity.asm"
 INCLUDE "audio/music/celadoncity.asm"
 
 INCLUDE "audio/music/wildpokemonvictory.asm"
@@ -128,6 +126,8 @@ SECTION "Songs 5", ROMX
 INCLUDE "audio/music/lookpokemaniac.asm"
 INCLUDE "audio/music/trainervictory.asm"
 INCLUDE "audio/music/newbarktown.asm"
+INCLUDE "audio/music/ecruteakcity.asm"
+INCLUDE "audio/music/viridiancity.asm"
 
 
 SECTION "Extra Songs 1", ROMX
