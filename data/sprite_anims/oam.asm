@@ -35,7 +35,7 @@ SpriteAnimOAMData:
 	spriteanimoam $01, .OAMData_TradePoofBubble          ; SPRITE_ANIM_OAMSET_GS_INTRO_MED_FIREBALL
 	spriteanimoam $09, .OAMData_GSIntroBigFireball       ; SPRITE_ANIM_OAMSET_GS_INTRO_BIG_FIREBALL
 	spriteanimoam $10, .OAMData_GSIntroStarter           ; SPRITE_ANIM_OAMSET_GS_INTRO_CHIKORITA
-	spriteanimoam $29, .OAMData_GSIntroStarter           ; SPRITE_ANIM_OAMSET_GS_INTRO_CYNDAQUIL
+	spriteanimoam $40, .OAMData_GSIntroStarter           ; SPRITE_ANIM_OAMSET_GS_INTRO_CYNDAQUIL
 	spriteanimoam $42, .OAMData_GSIntroStarter           ; SPRITE_ANIM_OAMSET_GS_INTRO_TOTODILE
 	spriteanimoam $f8, .OAMData_GSTitleTrail             ; SPRITE_ANIM_OAMSET_GS_TITLE_TRAIL_1
 	spriteanimoam $f8, .OAMData_GSTitleTrail             ; SPRITE_ANIM_OAMSET_GS_TITLE_TRAIL_2
@@ -237,32 +237,43 @@ SpriteAnimOAMData:
 	dbsprite  1,  1,  0,  0, $33, 0
 
 .OAMData_GSIntroStarter:
-	db 25
-	dbsprite -3, -3,  4,  4, $00, 0
-	dbsprite -3, -2,  4,  4, $01, 0
-	dbsprite -3, -1,  4,  4, $02, 0
-	dbsprite -3,  0,  4,  4, $03, 0
-	dbsprite -3,  1,  4,  4, $04, 0
-	dbsprite -2, -3,  4,  4, $05, 0
-	dbsprite -2, -2,  4,  4, $06, 0
-	dbsprite -2, -1,  4,  4, $07, 0
-	dbsprite -2,  0,  4,  4, $08, 0
-	dbsprite -2,  1,  4,  4, $09, 0
-	dbsprite -1, -3,  4,  4, $0a, 0
-	dbsprite -1, -2,  4,  4, $0b, 0
-	dbsprite -1, -1,  4,  4, $0c, 0
-	dbsprite -1,  0,  4,  4, $0d, 0
-	dbsprite -1,  1,  4,  4, $0e, 0
-	dbsprite  0, -3,  4,  4, $0f, 0
-	dbsprite  0, -2,  4,  4, $10, 0
-	dbsprite  0, -1,  4,  4, $11, 0
-	dbsprite  0,  0,  4,  4, $12, 0
-	dbsprite  0,  1,  4,  4, $13, 0
-	dbsprite  1, -3,  4,  4, $14, 0
-	dbsprite  1, -2,  4,  4, $15, 0
-	dbsprite  1, -1,  4,  4, $16, 0
-	dbsprite  1,  0,  4,  4, $17, 0
-	dbsprite  1,  1,  4,  4, $18, 0
+	db 36
+	dbsprite -4, -4, 4,  4, $00, 0
+	dbsprite -3, -4, 4,  4, $01, 0
+	dbsprite -2, -4, 4,  4, $02, 0
+	dbsprite -1, -4, 4,  4, $03, 0
+	dbsprite  0, -4, 4,  4, $04, 0
+	dbsprite  1, -4, 4,  4, $05, 0	
+	dbsprite -4, -3, 4,  4, $06, 0
+	dbsprite -3, -3, 4,  4, $07, 0
+	dbsprite -2, -3, 4,  4, $08, 0
+	dbsprite -1, -3, 4,  4, $09, 0
+	dbsprite  0, -3, 4,  4, $0A, 0
+	dbsprite  1, -3, 4,  4, $0B, 0	
+	dbsprite -4, -2, 4,  4, $0C, 0
+	dbsprite -3, -2, 4,  4, $0D, 0
+	dbsprite -2, -2, 4,  4, $0E, 0
+	dbsprite -1, -2, 4,  4, $0F, 0
+	dbsprite  0, -2, 4,  4, $10, 0
+	dbsprite  1, -2, 4,  4, $11, 0	
+	dbsprite -4, -1, 4,  4, $12, 0
+	dbsprite -3, -1, 4,  4, $13, 0
+	dbsprite -2, -1, 4,  4, $14, 0
+	dbsprite -1, -1, 4,  4, $15, 0
+	dbsprite  0, -1, 4,  4, $16, 0
+	dbsprite  1, -1, 4,  4, $17, 0	
+	dbsprite -4,  0, 4,  4, $18, 0
+	dbsprite -3,  0, 4,  4, $19, 0
+	dbsprite -2,  0, 4,  4, $1A, 0
+	dbsprite -1,  0, 4,  4, $1B, 0
+	dbsprite  0,  0, 4,  4, $1C, 0
+	dbsprite  1,  0, 4,  4, $1D, 0	
+	dbsprite -4,  1, 4,  4, $1E, 0
+	dbsprite -3,  1, 4,  4, $1F, 0
+	dbsprite -2,  1, 4,  4, $20, 0
+	dbsprite -1,  1, 4,  4, $21, 0
+	dbsprite  0,  1, 4,  4, $22, 0
+	dbsprite  1,  1, 4,  4, $23, 0
 
 .OAMData_Unknown2: ; unreferenced
 	db 36
@@ -358,16 +369,16 @@ SpriteAnimOAMData:
 ; These OAM sprite definitions, with the vtile offset $60 from SpriteAnimOAMData,
 ; correspond to unused Aerodactyl graphics in pokegold-spaceworld's gfx/intro/water_pokemon.png.
 	db 10
-	dbsprite -2, -2,  0,  4, $00, 0
-	dbsprite -1, -2,  0,  4, $01, 0
-	dbsprite  0, -2,  0,  4, $02, 0
-	dbsprite  1, -2,  0,  4, $03, 0
-	dbsprite -2, -1,  0,  4, $04, 0
-	dbsprite -1, -1,  0,  4, $05, 0
-	dbsprite  0, -1,  0,  4, $06, 0
-	dbsprite -2,  0,  0,  4, $08, 0
-	dbsprite -1,  0,  0,  4, $09, 0
-	dbsprite  0,  0,  0,  4, $0a, 0
+	dbsprite -2, -2,  0, 4, $00, 0
+	dbsprite -1, -2,  0, 4, $01, 0
+	dbsprite  0, -2,  0, 4, $02, 0
+	dbsprite  1, -2,  0, 4, $03, 0
+	dbsprite -2, -1,  0, 4, $04, 0
+	dbsprite -1, -1,  0, 4, $05, 0
+	dbsprite  0, -1,  0, 4, $06, 0
+	dbsprite -2,  0,  0, 4, $08, 0
+	dbsprite -1,  0,  0, 4, $09, 0
+	dbsprite  0,  0,  0, 4, $0a, 0
 
 .OAMData_GSIntroLapras1:
 	db 27

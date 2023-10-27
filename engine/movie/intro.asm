@@ -417,6 +417,9 @@ Intro_InitLapras:
 	depixel 16, 24
 	ld a, SPRITE_ANIM_OBJ_GS_INTRO_LAPRAS
 	call InitSpriteAnimStruct
+	depixel 2, 0
+	ld a, SPRITE_ANIM_OBJ_UNUSED_INTRO_AERODACTYL
+	call InitSpriteAnimStruct	
 	ret
 
 Intro_UnusedInitAerodactyl: ; unreferenced
@@ -779,15 +782,9 @@ IntroScene10:
 	ld bc, vTiles1 - vTiles0
 	call Decompress
 
-	ld c, CHIKORITA
 	ld de, vTiles0 tile $10
-	farcall Intro_GetMonFrontpic
-	ld c, CYNDAQUIL
-	ld de, vTiles0 tile $29
-	farcall Intro_GetMonFrontpic
-	ld c, TOTODILE
-	ld de, vTiles0 tile $42
-	farcall Intro_GetMonFrontpic
+	ld hl, Intro_VenusaurBlastoiseGFX
+	call Decompress
 
 	ld hl, wSpriteAnimDict
 	ld a, SPRITE_ANIM_DICT_GS_INTRO
@@ -1000,43 +997,23 @@ Intro_CheckSCYEvent:
 	jp hl
 
 .scy_jumptable
-	dbw $86, Intro_LoadChikoritaPalette
-	dbw $87, Intro_ChikoritaAppears
+	dbw $86, Intro_LoadBlastoisePalette
+	dbw $87, Intro_BlastoiseAppears
 	dbw $88, Intro_FlashMonPalette
 	dbw $98, Intro_FlashSilhouette
-	dbw $99, Intro_LoadCyndaquilPalette
-	dbw $af, Intro_CyndaquilAppears
-	dbw $b0, Intro_FlashMonPalette
-	dbw $c0, Intro_FlashSilhouette
-	dbw $c1, Intro_LoadTotodilePalette
-	dbw $d7, Intro_TotodileAppears
-	dbw $d8, Intro_FlashMonPalette
-	dbw $e8, Intro_FlashSilhouette
-	dbw $e9, Intro_LoadCharizardPalette
+	dbw $99, Intro_LoadVenusaurPalette
+	dbw $bf, Intro_VenusaurAppears
+	dbw $c0, Intro_FlashMonPalette
+	dbw $d0, Intro_FlashSilhouette
+	dbw $d1, Intro_LoadCharizardPalette
 	db -1
 
-Intro_ChikoritaAppears:
-	ld de, SFX_GS_INTRO_POKEMON_APPEARS
-	call PlaySFX
-	depixel 22, 1
-	ld a, SPRITE_ANIM_OBJ_GS_INTRO_CHIKORITA
-	call InitSpriteAnimStruct
+Intro_BlastoiseAppears:
+	call Intro_LoadBlastoiseObject
 	ret
 
-Intro_CyndaquilAppears:
-	ld de, SFX_GS_INTRO_POKEMON_APPEARS
-	call PlaySFX
-	depixel 22, 20
-	ld a, SPRITE_ANIM_OBJ_GS_INTRO_CYNDAQUIL
-	call InitSpriteAnimStruct
-	ret
-
-Intro_TotodileAppears:
-	ld de, SFX_GS_INTRO_POKEMON_APPEARS
-	call PlaySFX
-	depixel 22, 1
-	ld a, SPRITE_ANIM_OBJ_GS_INTRO_TOTODILE
-	call InitSpriteAnimStruct
+Intro_VenusaurAppears:
+	call Intro_LoadVenusaurObject
 	ret
 
 Intro_FlashMonPalette:
@@ -1053,28 +1030,18 @@ Intro_FlashSilhouette:
 	call DmgToCgbBGPals
 	ret
 
-Intro_LoadChikoritaPalette:
-	ld c, CHIKORITA
+Intro_LoadVenusaurPalette:
+	ld c, VENUSAUR
 	farcall Intro_LoadMonPalette
 	ret
 
-Intro_LoadCyndaquilPalette:
-	ld c, CYNDAQUIL
-	farcall Intro_LoadMonPalette
-	ret
-
-Intro_LoadTotodilePalette:
-	ld c, TOTODILE
+Intro_LoadBlastoisePalette:
+	ld c, BLASTOISE
 	farcall Intro_LoadMonPalette
 	ret
 
 Intro_LoadCharizardPalette:
-	ldh a, [hCGB]
-	and a
-	ld c, CYNDAQUIL
-	jr nz, .got_mon
 	ld c, CHARIZARD
-.got_mon
 	farcall Intro_LoadMonPalette
 	ret
 
@@ -1157,6 +1124,18 @@ Intro_AnimateFireball:
 	ld hl, wGlobalAnimXOffset
 	inc [hl]
 	ret
+	
+Intro_LoadBlastoiseObject:
+	depixel 22, 1
+	ld a, SPRITE_ANIM_OBJ_GS_INTRO_CHIKORITA
+	call InitSpriteAnimStruct
+	ret
+
+Intro_LoadVenusaurObject:
+	depixel 22, 20
+	ld a, SPRITE_ANIM_OBJ_GS_INTRO_CYNDAQUIL
+	call InitSpriteAnimStruct
+	ret	
 
 Copy128Tiles: ; unreferenced
 	ld bc, 128 tiles
@@ -1275,3 +1254,6 @@ INCBIN "gfx/intro/fire2.2bpp.lz"
 
 Intro_FireGFX3:
 INCBIN "gfx/intro/fire3.2bpp.lz"
+
+Intro_VenusaurBlastoiseGFX:
+INCBIN "gfx/intro/unused_blastoise_venusaur.2bpp.lz"
