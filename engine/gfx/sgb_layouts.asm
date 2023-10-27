@@ -55,8 +55,20 @@ SGBLayoutJumptable:
 	dw .SGB_MysteryGift
 	dw .SGB_Unused1E
 	dw .SGB_Pokedex_5x5
+	dw .SGB_PokegearMap
+	dw .SGB_PokegearRadio
 	assert_table_length NUM_SCGB_LAYOUTS
 
+.SGB_PokegearMap:
+	ld hl, PalPacket_PokegearMap
+	ld de, BlkPacket_PokegearMap
+	ret
+	
+.SGB_PokegearRadio:
+	ld hl, PalPacket_PokegearRadio
+	ld de, BlkPacket_PokegearRadio
+	ret
+	
 .SGB_BattleGrayscale:
 	ld hl, PalPacket_BattleGrayscale
 	ld de, BlkPacket_Battle

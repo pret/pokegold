@@ -17,6 +17,16 @@ BlkPacket_AllPal0:
 	attr_blk 1
 	attr_blk_data %011, 0,0,0, 00,00, 19,17
 	ds 8, 0
+	
+BlkPacket_PokegearMap:
+	attr_blk 2
+	attr_blk_data %011, 0,0,0, 00,00, 19,03
+	attr_blk_data %011, 1,1,1, 00,03, 19,17
+	
+BlkPacket_PokegearRadio:
+	attr_blk 2
+	attr_blk_data %011, 0,0,0, 00,00, 19,03
+	attr_blk_data %011, 1,1,1, 00,03, 19,17
 
 BlkPacket_GSIntroJigglypuffPikachu:
 	attr_blk 1

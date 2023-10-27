@@ -61,6 +61,12 @@ PalPacket_BattleGrayscale:
 PalPacket_Pokegear:
 	sgb_pal_set POKEGEAR, ROUTES, ROUTES, ROUTES
 
+PalPacket_PokegearMap:
+	sgb_pal_set POKEGEAR, POKEGEAR_MAP, ROUTES, ROUTES
+	
+PalPacket_PokegearRadio:
+	sgb_pal_set POKEGEAR, POKEGEAR_RADIO, ROUTES, ROUTES
+
 PalPacket_Pack2: ; unreferenced
 	sgb_pal_set PACK, ROUTES, ROUTES, ROUTES
 

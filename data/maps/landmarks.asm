@@ -8,7 +8,7 @@ Landmarks:
 ; entries correspond to constants/landmark_constants.asm
 	table_width 4, Landmarks
 	landmark  -8, -16, SpecialMapName
-	landmark 140, 100, NewBarkTownName
+	landmark 100, 116, NewBarkTownName
 	landmark 128, 100, Route29Name
 	landmark 100, 100, CherrygroveCityName
 	landmark 100,  80, Route30Name
@@ -105,7 +105,7 @@ Landmarks:
 	landmark 140, 116, FastShipName
 	assert_table_length NUM_LANDMARKS
 
-NewBarkTownName:     db "NEW BARK¯TOWN@"
+NewBarkTownName:     db "TEAL BURG@"
 CherrygroveCityName: db "CHERRYGROVE¯CITY@"
 VioletCityName:      db "VIOLET CITY@"
 AzaleaTownName:      db "AZALEA TOWN@"

@@ -62,7 +62,13 @@ CGBLayoutJumptable:
 	dw _CGB_MysteryGift
 	dw _CGB_Unused1E
 	dw _CGB_Pokedex_5x5
+	dw _CGB_PokegearMap
+	dw _CGB_PokegearRadio
 	assert_table_length NUM_SCGB_LAYOUTS
+
+_CGB_PokegearRadio:
+_CGB_PokegearMap:
+	ret
 
 _CGB_BattleGrayscale:
 	ld hl, PalPacket_BattleGrayscale + 1

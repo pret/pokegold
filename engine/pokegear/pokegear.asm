@@ -176,10 +176,10 @@ AnimatePokegearModeIndicatorArrow:
 	ret
 
 .XCoords:
-	db $00 ; POKEGEARCARD_CLOCK
-	db $10 ; POKEGEARCARD_MAP
-	db $20 ; POKEGEARCARD_PHONE
-	db $30 ; POKEGEARCARD_RADIO
+	db $aa ; POKEGEARCARD_CLOCK
+	db $0a ; POKEGEARCARD_MAP
+	db $3a ; POKEGEARCARD_PHONE
+	db $22 ; POKEGEARCARD_RADIO
 
 TownMap_GetCurrentLandmark:
 	ld a, [wMapGroup]
@@ -234,7 +234,7 @@ InitPokegearTilemap:
 	ldh [hBGMapMode], a
 	hlcoord 0, 0
 	ld bc, SCREEN_WIDTH * SCREEN_HEIGHT
-	ld a, $4f
+	ld a, $30
 	call ByteFill
 	ld a, [wPokegearCard]
 	maskbits NUM_POKEGEAR_CARDS
@@ -302,17 +302,19 @@ InitPokegearTilemap:
 .Clock:
 	ld de, ClockTilemapRLE
 	call Pokegear_LoadTilemapRLE
-	hlcoord 13, 1
+	hlcoord 5, 5
 	ld de, .switch
 	call PlaceString
 	hlcoord 0, 12
 	lb bc, 4, 18
 	call Textbox
+	call PlacePhoneBars
 	call Pokegear_UpdateClock
+	call Pokegear_UpdateWeekday
 	ret
 
 .switch
-	db "SWITCH▶@"
+	db "Today is...@"
 
 .Map:
 	ld a, [wPokegearMapPlayerIconLandmark]
@@ -328,16 +330,9 @@ InitPokegearTilemap:
 	ld e, 1
 .ok
 	farcall PokegearMap
-	ld a, $07
-	ld bc, SCREEN_WIDTH - 2
-	hlcoord 1, 2
-	call ByteFill
-	hlcoord 0, 2
-	ld [hl], $06
-	hlcoord 19, 2
-	ld [hl], $17
 	ld a, [wPokegearMapCursorLandmark]
 	call PokegearMap_UpdateLandmarkName
+	call Pokegear_UpdateClock
 	ret
 
 .Radio:
@@ -346,6 +341,7 @@ InitPokegearTilemap:
 	hlcoord 0, 12
 	lb bc, 4, 18
 	call Textbox
+	call Pokegear_UpdateClock
 	ret
 
 .Phone:
@@ -354,35 +350,21 @@ InitPokegearTilemap:
 	hlcoord 0, 12
 	lb bc, 4, 18
 	call Textbox
-	call .PlacePhoneBars
 	call PokegearPhone_UpdateDisplayList
+	call Pokegear_UpdateClock
 	ret
 
-.PlacePhoneBars:
-	hlcoord 17, 1
-	ld a, $3c
-	ld [hli], a
-	inc a
-	ld [hl], a
-	hlcoord 17, 2
-	inc a
-	ld [hli], a
+PlacePhoneBars:
+	hlcoord 2, 5
+	ld [hl], $21
 	call GetMapPhoneService
 	and a
 	ret nz
-	hlcoord 18, 2
-	ld [hl], $3f
+	hlcoord 2, 5
+	ld [hl], $20
 	ret
 
 Pokegear_FinishTilemap:
-	hlcoord 0, 0
-	ld bc, $8
-	ld a, $4f
-	call ByteFill
-	hlcoord 0, 1
-	ld bc, $8
-	ld a, $4f
-	call ByteFill
 	ld de, wPokegearFlags
 	ld a, [de]
 	bit POKEGEAR_MAP_CARD_F, a
@@ -393,23 +375,20 @@ Pokegear_FinishTilemap:
 	ld a, [de]
 	bit POKEGEAR_RADIO_CARD_F, a
 	call nz, .PlaceRadioIcon
-	hlcoord 0, 0
-	ld a, $46
-	call .PlacePokegearCardIcon
 	ret
 
 .PlaceMapIcon:
-	hlcoord 2, 0
+	hlcoord 1, 0
 	ld a, $40
 	jr .PlacePokegearCardIcon
 
 .PlacePhoneIcon:
-	hlcoord 4, 0
+	hlcoord 7, 0
 	ld a, $44
 	jr .PlacePokegearCardIcon
 
 .PlaceRadioIcon:
-	hlcoord 6, 0
+	hlcoord 4, 0
 	ld a, $42
 .PlacePokegearCardIcon:
 	ld [hli], a
@@ -444,6 +423,9 @@ PokegearJumptable:
 
 PokegearClock_Init:
 	call InitPokegearTilemap
+	ld b, SCGB_POKEGEAR_PALS
+	call GetSGBLayout
+	call SetPalettes		
 	ld hl, PokegearPressButtonText
 	call PrintText
 	ld hl, wJumptableIndex
@@ -452,13 +434,13 @@ PokegearClock_Init:
 	ret
 
 PokegearClock_Joypad:
-	call .UpdateClock
+	call UpdateClockPokegear
 	ld hl, hJoyLast
 	ld a, [hl]
-	and A_BUTTON | B_BUTTON | START | SELECT
+	and B_BUTTON | START | SELECT
 	jr nz, .quit
 	ld a, [hl]
-	and D_RIGHT
+	and A_BUTTON
 	ret z
 	ld a, [wPokegearFlags]
 	bit POKEGEAR_MAP_CARD_F, a
@@ -469,18 +451,18 @@ PokegearClock_Joypad:
 
 .no_map_card
 	ld a, [wPokegearFlags]
-	bit POKEGEAR_PHONE_CARD_F, a
+	bit POKEGEAR_RADIO_CARD_F, a
 	jr z, .no_phone_card
-	ld c, POKEGEARSTATE_PHONEINIT
-	ld b, POKEGEARCARD_PHONE
+	ld c, POKEGEARSTATE_RADIOINIT
+	ld b, POKEGEARCARD_RADIO
 	jr .done
 
 .no_phone_card
 	ld a, [wPokegearFlags]
-	bit POKEGEAR_RADIO_CARD_F, a
+	bit POKEGEAR_PHONE_CARD_F, a
 	ret z
-	ld c, POKEGEARSTATE_RADIOINIT
-	ld b, POKEGEARCARD_RADIO
+	ld c, POKEGEARSTATE_PHONEINIT
+	ld b, POKEGEARCARD_PHONE
 .done
 	call Pokegear_SwitchPage
 	ret
@@ -490,7 +472,7 @@ PokegearClock_Joypad:
 	set 7, [hl]
 	ret
 
-.UpdateClock:
+UpdateClockPokegear:
 	xor a
 	ldh [hBGMapMode], a
 	call Pokegear_UpdateClock
@@ -499,22 +481,81 @@ PokegearClock_Joypad:
 	ret
 
 Pokegear_UpdateClock:
-	hlcoord 3, 5
-	lb bc, 5, 14
-	call ClearBox
-	ldh a, [hHours]
-	ld b, a
-	ldh a, [hMinutes]
-	ld c, a
-	decoord 6, 8
-	farcall PrintHoursMins
-	ld hl, .GearTodayText
-	bccoord 6, 6
-	call PlaceHLTextAtBC
+
+
+	ld de, hHours
+	coord hl, 11, 1
+	lb bc, PRINTNUM_LEADINGZEROS | 1, 2
+	call PrintNum
+	ld [hl], ":"
+	inc hl
+	ld de, hMinutes
+	lb bc, PRINTNUM_LEADINGZEROS | 1, 2
+	call PrintNum
+	ld [hl], ":"
+	inc hl
+	ld de, hSeconds
+	lb bc, PRINTNUM_LEADINGZEROS | 1, 2
+	call PrintNum
 	ret
 
-	db "ごぜん@"
-	db "ごご@"
+Pokegear_UpdateWeekday:
+	hlcoord 4, 5
+	lb bc, 1, 14
+	call ClearBox
+	ld hl, .GearTodayText
+	bccoord 4, 5
+	call PlaceHLTextAtBC
+	
+	ld a, [hHours]
+	cp 3
+	jr z, .Morning
+	cp 4
+	jr z, .Morning
+	cp 5
+	jr z, .Morning
+	cp 6
+	jr z, .Morning
+	cp 7
+	jr z, .Morning
+	cp 8
+	jr z, .Morning
+	cp 9
+	jr z, .Morning
+	cp 10
+	jr z, .Day
+	cp 11
+	jr z, .Day
+	cp 12
+	jr z, .Day
+	cp 13
+	jr z, .Day
+	cp 14
+	jr z, .Day
+	cp 15
+	jr z, .Day
+	cp 16
+	jr z, .Day
+	cp 17
+	jr z, .Day	
+	hlcoord 4, 7
+	ld de, .Night_String
+	jr .TimeOfDayString
+.Morning	
+	hlcoord 4, 7
+	ld de, .Morning_String
+	jr .TimeOfDayString
+.Day	
+	hlcoord 4, 7
+	ld de, .Day_String
+.TimeOfDayString
+	call PlaceString
+	ret
+
+.Morning_String:	db "MORNING@"
+.Day_String:	    db "DAYTIME@"
+.Night_String:      db "NIGHT@"
+
 
 .GearTodayText:
 	text_far _GearTodayText
@@ -540,6 +581,9 @@ PokegearMap_CheckRegion:
 
 PokegearMap_Init:
 	call InitPokegearTilemap
+	ld b, SCGB_POKEGEAR_MAP
+	call GetSGBLayout
+	call SetPalettes	
 	ld a, [wPokegearMapPlayerIconLandmark]
 	call PokegearMap_InitPlayerIcon
 	ld a, [wPokegearMapCursorLandmark]
@@ -567,38 +611,31 @@ PokegearMap_ContinueMap:
 	ld a, [hl]
 	and D_RIGHT
 	jr nz, .right
-	ld a, [hl]
-	and D_LEFT
-	jr nz, .left
 	call .DPad
+	call UpdateClockPokegear
 	ret
 
 .right
 	ld a, [wPokegearFlags]
-	bit POKEGEAR_PHONE_CARD_F, a
-	jr z, .no_phone
-	ld c, POKEGEARSTATE_PHONEINIT
-	ld b, POKEGEARCARD_PHONE
-	jr .done
-
-.no_phone
-	ld a, [wPokegearFlags]
 	bit POKEGEAR_RADIO_CARD_F, a
-	ret z
+	jr z, .no_radio
 	ld c, POKEGEARSTATE_RADIOINIT
 	ld b, POKEGEARCARD_RADIO
 	jr .done
 
-.left
+.no_radio
+	ld a, [wPokegearFlags]
+	bit POKEGEAR_PHONE_CARD_F, a
+	ret z
+	ld c, POKEGEARSTATE_PHONEINIT
+	ld b, POKEGEARCARD_PHONE
+	jr .done
+
+.cancel
 	ld c, POKEGEARSTATE_CLOCKINIT
 	ld b, POKEGEARCARD_CLOCK
 .done
 	call Pokegear_SwitchPage
-	ret
-
-.cancel
-	ld hl, wJumptableIndex
-	set 7, [hl]
 	ret
 
 .DPad:
@@ -684,8 +721,8 @@ PokegearMap_InitCursor:
 
 PokegearMap_UpdateLandmarkName:
 	push af
-	hlcoord 8, 0
-	lb bc, 2, 12
+	hlcoord 0, 17
+	lb bc, 1, 20
 	call ClearBox
 	pop af
 	ld e, a
@@ -693,8 +730,8 @@ PokegearMap_UpdateLandmarkName:
 	farcall GetLandmarkName
 	pop de
 	farcall TownMap_ConvertLineBreakCharacters
-	hlcoord 8, 0
-	ld [hl], $34
+	hlcoord 0, 17
+	ld [hl], $4d
 	ret
 
 PokegearMap_UpdateCursorPosition:
@@ -725,6 +762,9 @@ TownMap_GetKantoLandmarkLimits:
 
 PokegearRadio_Init:
 	call InitPokegearTilemap
+	ld b, SCGB_POKEGEAR_RADIO
+	call GetSGBLayout
+	call SetPalettes
 	depixel 4, 10, 4, 4
 	ld a, SPRITE_ANIM_OBJ_RADIO_TUNING_KNOB
 	call InitSpriteAnimStruct
@@ -737,10 +777,14 @@ PokegearRadio_Init:
 	ret
 
 PokegearRadio_Joypad:
+	call UpdateClockPokegear
 	ld hl, hJoyLast
 	ld a, [hl]
 	and B_BUTTON
 	jr nz, .cancel
+	ld a, [hl]
+	and D_RIGHT
+	jr nz, .right	
 	ld a, [hl]
 	and D_LEFT
 	jr nz, .left
@@ -754,32 +798,27 @@ PokegearRadio_Joypad:
 	rst FarCall
 	ret
 
-.left
+.right
 	ld a, [wPokegearFlags]
 	bit POKEGEAR_PHONE_CARD_F, a
-	jr z, .no_phone
+	ret z
 	ld c, POKEGEARSTATE_PHONEINIT
 	ld b, POKEGEARCARD_PHONE
 	jr .switch_page
 
-.no_phone
+.left
 	ld a, [wPokegearFlags]
 	bit POKEGEAR_MAP_CARD_F, a
-	jr z, .no_map
+	ret z
 	ld c, POKEGEARSTATE_MAPCHECKREGION
 	ld b, POKEGEARCARD_MAP
 	jr .switch_page
 
-.no_map
+.cancel
 	ld c, POKEGEARSTATE_CLOCKINIT
 	ld b, POKEGEARCARD_CLOCK
 .switch_page
 	call Pokegear_SwitchPage
-	ret
-
-.cancel
-	ld hl, wJumptableIndex
-	set 7, [hl]
 	ret
 
 PokegearPhone_Init:
@@ -790,12 +829,16 @@ PokegearPhone_Init:
 	ld [wPokegearPhoneCursorPosition], a
 	ld [wPokegearPhoneSelectedPerson], a
 	call InitPokegearTilemap
+	ld b, SCGB_POKEGEAR_PALS
+	call GetSGBLayout
+	call SetPalettes	
 	call ExitPokegearRadio_HandleMusic
 	ld hl, PokegearAskWhoCallText
 	call PrintText
 	ret
 
 PokegearPhone_Joypad:
+	call UpdateClockPokegear
 	ld hl, hJoyPressed
 	ld a, [hl]
 	and B_BUTTON
@@ -807,38 +850,22 @@ PokegearPhone_Joypad:
 	ld a, [hl]
 	and D_LEFT
 	jr nz, .left
-	ld a, [hl]
-	and D_RIGHT
-	jr nz, .right
 	call PokegearPhone_GetDPad
 	ret
 
 .left
 	ld a, [wPokegearFlags]
-	bit POKEGEAR_MAP_CARD_F, a
-	jr z, .no_map
-	ld c, POKEGEARSTATE_MAPCHECKREGION
-	ld b, POKEGEARCARD_MAP
-	jr .switch_page
-
-.no_map
-	ld c, POKEGEARSTATE_CLOCKINIT
-	ld b, POKEGEARCARD_CLOCK
-	jr .switch_page
-
-.right
-	ld a, [wPokegearFlags]
 	bit POKEGEAR_RADIO_CARD_F, a
 	ret z
 	ld c, POKEGEARSTATE_RADIOINIT
 	ld b, POKEGEARCARD_RADIO
-.switch_page
-	call Pokegear_SwitchPage
-	ret
+	jr .switch_page
 
 .b
-	ld hl, wJumptableIndex
-	set 7, [hl]
+	ld c, POKEGEARSTATE_CLOCKINIT
+	ld b, POKEGEARCARD_CLOCK
+.switch_page
+	call Pokegear_SwitchPage
 	ret
 
 .a
@@ -1850,24 +1877,6 @@ _TownMap:
 	ld e, KANTO_REGION
 .okay_tilemap
 	farcall PokegearMap
-	ld a, $07
-	ld bc, 6
-	hlcoord 1, 0
-	call ByteFill
-	hlcoord 0, 0
-	ld [hl], $06
-	hlcoord 7, 0
-	ld [hl], $17
-	hlcoord 7, 1
-	ld [hl], $16
-	hlcoord 7, 2
-	ld [hl], $26
-	ld a, $07
-	ld bc, NAME_LENGTH
-	hlcoord 8, 2
-	call ByteFill
-	hlcoord 19, 2
-	ld [hl], $17
 	ld a, [wTownMapCursorLandmark]
 	call PokegearMap_UpdateLandmarkName
 	farcall TownMapPals
@@ -2400,17 +2409,10 @@ Pokedex_GetArea:
 	ret
 
 .PlaceString_MonsNest:
-	hlcoord 0, 0
-	ld bc, SCREEN_WIDTH
-	ld a, " "
-	call ByteFill
-	hlcoord 0, 1
-	ld a, $06
-	ld [hli], a
-	ld bc, SCREEN_WIDTH - 2
-	ld a, $07
-	call ByteFill
-	ld [hl], $17
+;	hlcoord 0, 0
+;	ld bc, SCREEN_WIDTH
+;	ld a, " "
+;	call ByteFill
 	call GetPokemonName
 	hlcoord 2, 0
 	call PlaceString
