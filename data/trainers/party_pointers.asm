@@ -68,5 +68,18 @@ TrainerGroups:
 	dw RedGroup
 	dw BlueGroup
 	dw OfficerGroup
-	dw GruntFGroup
+	dw GruntFGroup	
+	dw TrioGroup
+	dw FledglingGroup
+	dw TeacherMGroup
+	dw ManchildGroup
+	dw EngineerGroup
+	dw RockClimberGroup
+	dw SportsmanGroup
+	dw KungFuMasterGroup
+	dw FortuneTellerGroup
+	dw HooliganGroup
+	dw SoldierGroup
+	dw GiovanniGroup
+	dw LoreleiGroup
 	assert_table_length NUM_TRAINER_CLASSES

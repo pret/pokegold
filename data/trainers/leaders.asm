@@ -11,18 +11,16 @@ GymLeaders:
 	db MORTY
 	db PRYCE
 	db JASMINE
-	db CHUCK
+	db RED
 	db CLAIR
-	db WILL
+	db LORELEI
 	db BRUNO
-	db KAREN
+	db MISTY
 	db KOGA
 	db CHAMPION
-	db RED
 ; fallthrough
 KantoGymLeaders:
 	db BROCK
-	db MISTY
 	db LT_SURGE
 	db ERIKA
 	db JANINE

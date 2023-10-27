@@ -69,4 +69,17 @@ TrainerPicPointers::
 	dba_pic BluePic
 	dba_pic OfficerPic
 	dba_pic GruntfPic
+	dba_pic TrioPic
+	dba_pic FledglingPic
+	dba_pic TeacherMPic
+	dba_pic ManchildPic
+	dba_pic EngineerPic
+	dba_pic RockClimberPic
+	dba_pic SportsmanPic
+	dba_pic KungFuMasterPic
+	dba_pic FortuneTellerPic
+	dba_pic HooliganPic
+	dba_pic SoldierPic
+	dba_pic GiovanniPic
+	dba_pic LoreleiPic
 	assert_table_length NUM_TRAINER_CLASSES

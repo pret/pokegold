@@ -650,5 +650,31 @@ DEF NUM_NONTRAINER_PHONECONTACTS EQU const_value - 1
 	const GRUNTF_3
 	const GRUNTF_4
 	const GRUNTF_5
+	
+	trainerclass TRIO
+	
+	trainerclass FLEDGLING
+	
+	trainerclass TEACHER_M
+	
+	trainerclass MANCHILD
+	
+	trainerclass ENGINEER
+	
+	trainerclass ROCK_CLIMBER
+	
+	trainerclass SPORTSMAN
+	
+	trainerclass KUNG_FU_MASTER
+	
+	trainerclass FORTUNE_TELLER
+	
+	trainerclass HOOLIGAN
+	
+	trainerclass SOLDIER
+	
+	trainerclass GIOVANNI
+	
+	trainerclass LORELEI
 
 DEF NUM_TRAINER_CLASSES EQU __trainer_class__ - 1

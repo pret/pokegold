@@ -697,3 +697,20 @@ PokefanmPic:         INCBIN "gfx/trainers/pokefan_m.2bpp.lz"
 BoarderPic:          INCBIN "gfx/trainers/boarder.2bpp.lz"
 UrsaringFrontpic:    INCBIN "gfx/pokemon/ursaring/front.2bpp.lz"
 MachampBackpic:      INCBIN "gfx/pokemon/machamp/back.2bpp.lz"
+
+
+SECTION "Pics 17", ROMX
+
+TrioPic:             INCBIN "gfx/trainers/trio.2bpp.lz"
+FledglingPic:        INCBIN "gfx/trainers/fledgling.2bpp.lz"
+TeacherMPic:         INCBIN "gfx/trainers/teacher_m.2bpp.lz"
+ManchildPic:         INCBIN "gfx/trainers/manchild.2bpp.lz"
+EngineerPic:         INCBIN "gfx/trainers/engineer.2bpp.lz"
+RockClimberPic:      INCBIN "gfx/trainers/rock_climber.2bpp.lz"
+SportsmanPic:        INCBIN "gfx/trainers/sportsman.2bpp.lz"
+KungFuMasterPic:     INCBIN "gfx/trainers/kung_fu_master.2bpp.lz"
+FortuneTellerPic:    INCBIN "gfx/trainers/fortune_teller.2bpp.lz"
+HooliganPic:         INCBIN "gfx/trainers/hooligan.2bpp.lz"
+SoldierPic:          INCBIN "gfx/trainers/soldier.2bpp.lz"
+GiovanniPic:         INCBIN "gfx/trainers/giovanni.2bpp.lz"
+LoreleiPic:          INCBIN "gfx/trainers/lorelei.2bpp.lz"
