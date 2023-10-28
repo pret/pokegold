@@ -2442,8 +2442,9 @@ wPokegearFlags::
 ; bit 7: on/off
 	db
 wRadioTuningKnob:: db
+wRadioTuningKnobReverse:: db
 wLastDexMode:: db
-	ds 1
+	
 wWhichRegisteredItem:: db
 wRegisteredItem:: db
 

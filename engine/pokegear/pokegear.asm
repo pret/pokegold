@@ -36,6 +36,7 @@ PokeGear:
 	ld a, [wVramState]
 	push af
 	xor a
+	ld [wRadioTuningKnobReverse], a
 	ld [wVramState], a
 	call .InitTilemap
 	call DelayFrame
@@ -435,7 +436,7 @@ PokegearClock_Init:
 
 PokegearClock_Joypad:
 	call UpdateClockPokegear
-	ld hl, hJoyLast
+	ld hl, hJoyPressed
 	ld a, [hl]
 	and B_BUTTON | START | SELECT
 	jr nz, .quit
@@ -765,7 +766,7 @@ PokegearRadio_Init:
 	ld b, SCGB_POKEGEAR_RADIO
 	call GetSGBLayout
 	call SetPalettes
-	depixel 4, 10, 4, 4
+	depixel 7, 6, 4, 4
 	ld a, SPRITE_ANIM_OBJ_RADIO_TUNING_KNOB
 	call InitSpriteAnimStruct
 	ld hl, SPRITEANIMSTRUCT_TILE_ID
@@ -1391,29 +1392,41 @@ AnimateTuningKnob:
 .TuningKnob:
 	ld hl, hJoyLast
 	ld a, [hl]
-	and D_DOWN
-	jr nz, .down
-	ld a, [hl]
-	and D_UP
-	jr nz, .up
+	and A_BUTTON
+	jr nz, .a_radio
 	ret
 
-.down
+.a_radio
+	ld a, [wRadioTuningKnobReverse]
+	cp 1
+	jr z, .a_radio_down
+.a_radio_up
+	ld hl, wRadioTuningKnob
+	ld a, [hl]
+	cp 94
+	jr z, .a_radio_reverse
+	inc [hl]
+	inc [hl]
+	jr .update
+
+.a_radio_down
 	ld hl, wRadioTuningKnob
 	ld a, [hl]
 	and a
-	ret z
+	jr z, .a_radio_regular
 	dec [hl]
 	dec [hl]
 	jr .update
-
-.up
-	ld hl, wRadioTuningKnob
-	ld a, [hl]
-	cp 80
-	ret nc
-	inc [hl]
-	inc [hl]
+	
+.a_radio_reverse
+	ld a, 1
+	ld [wRadioTuningKnobReverse], a
+	jr .a_radio
+	
+.a_radio_regular
+	xor a
+	ld [wRadioTuningKnobReverse], a
+	jr .a_radio
 .update
 UpdateRadioStation:
 	ld hl, wRadioTuningKnob
@@ -1706,8 +1719,8 @@ NoRadioStation:
 ; no radio name
 	xor a
 	ldh [hBGMapMode], a
-	hlcoord 1, 8
-	lb bc, 3, 18
+	hlcoord 2, 9
+	lb bc, 2, 16
 	call ClearBox
 	hlcoord 0, 12
 	lb bc, 4, 18
