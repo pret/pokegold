@@ -26,57 +26,29 @@ LoadQuestionMarkPic:
 .QuestionMarkLZ:
 INCBIN "gfx/pokedex/question_mark.2bpp.lz"
 
-DrawPokedexListWindow:
-	ld a, $32
-	hlcoord 0, 17
-	ld bc, 12
-	call ByteFill
-	hlcoord 0, 1
-	lb bc, 15, 11
+DrawPokedexListWindow: ; erosunica: modded to mimic sw97 pokédex
+	hlcoord 1, 1
+	lb bc, 16, 11
 	call ClearBox
 	ld a, $34
-	hlcoord 0, 0
+	hlcoord 1, 0
 	ld bc, 11
 	call ByteFill
 	ld a, $39
-	hlcoord 0, 16
+	hlcoord 1, 17
 	ld bc, 11
 	call ByteFill
-	hlcoord 5, 0
+	hlcoord 6, 0
 	ld [hl], $3f
-	hlcoord 10, 0
-	ld [hl], $3f
-	hlcoord 15, 0
-	ld [hl], $3f
-	hlcoord 19, 0
-	ld [hl], $3f	
-	hlcoord 20, 0
-	ld [hl], $3f	
-	hlcoord 5, 16
+	hlcoord 6, 17
 	ld [hl], $40
-	ld a, [wCurDexMode]
-	cp DEXMODE_OLD
-	jr z, .OldMode
-; scroll bar
-	hlcoord 11, 0
-	ld [hl], $50
-	ld a, $51
-	hlcoord 11, 1
-	ld b, SCREEN_HEIGHT - 3
+	hlcoord 0, 0
+	ld [hl], $33
+	ld a, $36
+	hlcoord 0, 1
+	ld b, SCREEN_HEIGHT - 2
 	call Pokedex_FillColumn2
-	ld [hl], $52
-	jr .Done
-
-.OldMode:
-; no scroll bar
-	hlcoord 11, 0
-	ld [hl], $66
-	ld a, $67
-	hlcoord 11, 1
-	ld b, SCREEN_HEIGHT - 3
-	call Pokedex_FillColumn2
-	ld [hl], $68
-.Done:
+	ld [hl], $38
 	ret
 
 DrawPokedexSearchResultsWindow:
