@@ -18,12 +18,7 @@ BlkPacket_AllPal0:
 	attr_blk_data %011, 0,0,0, 00,00, 19,17
 	ds 8, 0
 	
-BlkPacket_PokegearMap:
-	attr_blk 2
-	attr_blk_data %011, 0,0,0, 00,00, 19,03
-	attr_blk_data %011, 1,1,1, 00,03, 19,17
-	
-BlkPacket_PokegearRadio:
+BlkPacket_Pokegear:
 	attr_blk 2
 	attr_blk_data %011, 0,0,0, 00,00, 19,03
 	attr_blk_data %011, 1,1,1, 00,03, 19,17
@@ -55,6 +50,11 @@ BlkPacket_Pokedex_PC:
 	attr_blk 1
 	attr_blk_data %111, 1,1,0, 01,01, 07,07 ; mon: pal 1
 	ds 8, 0
+	
+BlkPacket_PokedexMap:
+	attr_blk 1
+	attr_blk_data %111, 1,1,0, 01,01, 18,16
+	ds 8, 0	
 
 BlkPacket_Bills_PC:
 	attr_blk 1

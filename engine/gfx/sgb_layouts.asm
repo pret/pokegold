@@ -57,16 +57,18 @@ SGBLayoutJumptable:
 	dw .SGB_Pokedex_5x5
 	dw .SGB_PokegearMap
 	dw .SGB_PokegearRadio
+	dw .SGB_Pokedex_Map
+	dw .SGB_Pokedex_List
 	assert_table_length NUM_SCGB_LAYOUTS
 
 .SGB_PokegearMap:
 	ld hl, PalPacket_PokegearMap
-	ld de, BlkPacket_PokegearMap
+	ld de, BlkPacket_Pokegear
 	ret
 	
 .SGB_PokegearRadio:
 	ld hl, PalPacket_PokegearRadio
-	ld de, BlkPacket_PokegearRadio
+	ld de, BlkPacket_Pokegear
 	ret
 	
 .SGB_BattleGrayscale:
@@ -168,7 +170,7 @@ SGBLayoutJumptable:
 
 .SGB_PokegearPals:
 	ld hl, PalPacket_Pokegear
-	ld de, BlkPacket_AllPal0
+	ld de, BlkPacket_Pokegear
 	ret
 
 .SGB_StatsScreenHPPals:
@@ -236,6 +238,16 @@ SGBLayoutJumptable:
 	ld [wSGBPals + 12], a
 	ld hl, wSGBPals
 	ld de, BlkPacket_Pokedex_PC
+	ret
+	
+.SGB_Pokedex_Map:
+	ld hl, PalPacket_PokedexMap
+	ld de, BlkPacket_PokedexMap
+	ret
+	
+.SGB_Pokedex_List:
+	ld hl, PalPacket_PokedexList
+	ld de, BlkPacket_AllPal0
 	ret
 
 .SGB_Pokedex_5x5:

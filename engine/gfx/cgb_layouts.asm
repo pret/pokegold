@@ -64,8 +64,12 @@ CGBLayoutJumptable:
 	dw _CGB_Pokedex_5x5
 	dw _CGB_PokegearMap
 	dw _CGB_PokegearRadio
+	dw _CGB_PokedexMap
+	dw _CGB_PokedexList
 	assert_table_length NUM_SCGB_LAYOUTS
 
+_CGB_PokedexList:
+_CGB_PokedexMap:
 _CGB_PokegearRadio:
 _CGB_PokegearMap:
 	ret

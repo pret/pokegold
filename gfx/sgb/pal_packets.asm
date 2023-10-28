@@ -46,9 +46,15 @@ PalPacket_GSIntroStartersTransition:
 PalPacket_BetaIntroVenusaur:
 	sgb_pal_set BETA_INTRO_VENUSAUR, ROUTES, ROUTES, ROUTES
 
+PalPacket_PokedexMap:
+	sgb_pal_set POKEDEX, POKEGEAR_MAP, ROUTES, ROUTES
+
 PalPacket_Pack:
 	sgb_pal_set PACK, ROUTES, ROUTES, ROUTES
 
+PalPacket_PokedexList:
+	sgb_pal_set POKEDEX_LIST_PAL, ROUTES, ROUTES, ROUTES
+	
 PalPacket_BetaPikachuMinigame:
 	sgb_pal_set GS_INTRO_JIGGLYPUFF_PIKACHU_OB, ROUTES, ROUTES, ROUTES
 
@@ -59,7 +65,7 @@ PalPacket_BattleGrayscale:
 	sgb_pal_set BLACKOUT, BLACKOUT, BLACKOUT, BLACKOUT
 
 PalPacket_Pokegear:
-	sgb_pal_set POKEGEAR, ROUTES, ROUTES, ROUTES
+	sgb_pal_set POKEGEAR, POKEGEAR, ROUTES, ROUTES
 
 PalPacket_PokegearMap:
 	sgb_pal_set POKEGEAR, POKEGEAR_MAP, ROUTES, ROUTES

@@ -2305,13 +2305,16 @@ FlyMap:
 
 Pokedex_GetArea:
 ; e: Current landmark
-	ld a, [wTownMapPlayerIconLandmark]
-	push af
-	ld a, [wTownMapCursorLandmark]
-	push af
+;	ld a, [wTownMapPlayerIconLandmark]
+;	push af
+;	ld a, [wTownMapCursorLandmark]
+;	push af
 	ld a, e
 	ld [wTownMapPlayerIconLandmark], a
 	call ClearSprites
+	ld b, SCGB_POKEDEX_MAP ; change pal
+	call GetSGBLayout
+	call SetPalettes	
 	xor a
 	ldh [hBGMapMode], a
 	ld a, $1
@@ -2330,14 +2333,12 @@ Pokedex_GetArea:
 	call TownMapPals
 	hlbgcoord 0, 0, vBGMap1
 	call TownMapBGUpdate
-	call FillJohtoMap
+	call FillHonshuMap
 	call .PlaceString_MonsNest
 	call TownMapPals
 	hlbgcoord 0, 0
 	call TownMapBGUpdate
-	ld b, SCGB_POKEGEAR_PALS
-	call GetSGBLayout
-	call SetPalettes
+
 	xor a
 	ldh [hBGMapMode], a
 	xor a ; JOHTO_REGION
@@ -2363,10 +2364,10 @@ Pokedex_GetArea:
 
 .a_b
 	call ClearSprites
-	pop af
-	ld [wTownMapCursorLandmark], a
-	pop af
-	ld [wTownMapPlayerIconLandmark], a
+;	pop af
+;	ld [wTownMapCursorLandmark], a
+;	pop af
+;	ld [wTownMapPlayerIconLandmark], a	
 	ret
 
 .LeftRightInput:
@@ -2427,7 +2428,7 @@ Pokedex_GetArea:
 ;	ld a, " "
 ;	call ByteFill
 	call GetPokemonName
-	hlcoord 2, 0
+	hlcoord 1, 1
 	call PlaceString
 	ld h, b
 	ld l, c
@@ -2595,7 +2596,9 @@ TownMapBGUpdate:
 FillJohtoMap:
 	ld de, JohtoMap
 	jr FillTownMap
-
+FillHonshuMap:
+	ld de, HonshuMap
+	jr FillTownMap
 FillKantoMap:
 	ld de, KantoMap
 FillTownMap:
@@ -2735,6 +2738,9 @@ INCBIN "gfx/pokegear/johto.bin"
 
 KantoMap:
 INCBIN "gfx/pokegear/kanto.bin"
+
+HonshuMap:
+INCBIN "gfx/pokegear/honshu.bin"
 
 PokedexNestIconGFX:
 INCBIN "gfx/pokegear/dexmap_nest_icon.2bpp"

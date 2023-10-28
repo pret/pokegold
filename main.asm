@@ -236,8 +236,11 @@ INCLUDE "engine/phone/phone.asm"
 INCLUDE "engine/rtc/timeset.asm"
 INCLUDE "engine/pokegear/pokegear.asm"
 INCLUDE "engine/overworld/landmarks.asm"
-INCLUDE "engine/events/fish.asm"
 INCLUDE "engine/games/slot_machine.asm"
+
+SECTION "bank24-fish", ROMX
+
+INCLUDE "engine/events/fish.asm"
 
 
 SECTION "bank2E", ROMX

@@ -216,15 +216,6 @@ Pokedex_InitMainScreen:
 	call ByteFill	
 	call Pokedex_DrawMainScreenBG
 	farcall DrawPokedexListWindow	
-	hlcoord 13, 8
-	ld de, String_START_SELECT_1
-	call Pokedex_PlaceString	
-	hlcoord 12, 9
-	ld de, String_START_SELECT_2
-	call Pokedex_PlaceString	
-	hlcoord 12, 10
-	ld de, String_START_SELECT_3
-	call Pokedex_PlaceString		
 	ld a, 7
 	ld [wDexListingHeight], a
 	call Pokedex_PrintListing
@@ -232,7 +223,7 @@ Pokedex_InitMainScreen:
 	call Pokedex_ResetBGMapMode
 	ld a, -1
 	ld [wCurPartySpecies], a
-	ld a, SCGB_POKEDEX
+	ld a, SCGB_POKEDEX_LIST
 	call Pokedex_GetSGBLayout	
 	call Pokedex_UpdateCursorOAM
 	call Pokedex_IncrementDexPointer
@@ -288,19 +279,19 @@ Pokedex_UpdateMainScreen:
 	ret
 
 Pokedex_InitDexEntryScreen:
-	hlcoord 1, 1
-	lb bc, 15, 18
-	call ClearBox
-	ld c, 3
-	call DelayFrames
-	ld a, SCGB_POKEDEX
-	call Pokedex_GetSGBLayout
 	call LowVolume
 	xor a ; page 1
 	ld [wPokedexStatus], a
-	call Pokedex_ResetBGMapMode	
-	call Pokedex_DrawDexEntryScreenBG
+	call Pokedex_ResetBGMapMode
 	call ClearSprites
+	hlcoord 1, 1
+	lb bc, 16, 18
+	call ClearBox
+	hlcoord 0, 0
+	lb bc, 16, 18
+	call Pokedex_PlaceBorder	
+	call WaitBGMap
+	call Pokedex_DrawDexEntryScreenBG
 	call Pokedex_InitArrowCursor
 	call Pokedex_GetSelectedMon
 	ld [wPrevDexEntry], a
@@ -311,8 +302,8 @@ Pokedex_InitDexEntryScreen:
 	ld [wCurPartySpecies], a
 	ld a, SCGB_POKEDEX
 	call Pokedex_GetSGBLayout
-	ld c, 30
-	call DelayFrames
+	ld c, 20
+	call DelayFrames	
 	call Pokedex_PlaceFrontpicTopLeftCorner
 	ld a, [wCurPartySpecies]
 	call PlayMonCry
@@ -349,6 +340,14 @@ Pokedex_UpdateDexEntryScreen:
 
 .max_volume
 	call MaxVolume
+	hlcoord 1, 1
+	lb bc, 7, 7
+	call ClearBox
+	call WaitBGMap
+	ld a, SCGB_POKEDEX_LIST
+	call Pokedex_GetSGBLayout		
+	ld c, 20
+	call DelayFrames
 	ld a, [wPrevDexEntryJumptableIndex]
 	ld [wJumptableIndex], a
 	ret
@@ -365,10 +364,9 @@ Pokedex_Page:
 
 Pokedex_ReinitDexEntryScreen:
 	hlcoord 1, 1
-	lb bc, 15, 18
+	lb bc, 16, 18
 	call ClearBox
-	ld c, 3
-	call DelayFrames	
+	call WaitBGMap
 	xor a ; page 1
 	ld [wPokedexStatus], a
 	call Pokedex_ResetBGMapMode	
@@ -384,7 +382,7 @@ Pokedex_ReinitDexEntryScreen:
 	ld [wCurPartySpecies], a
 	ld a, SCGB_POKEDEX
 	call Pokedex_GetSGBLayout
-	ld c, 30
+	ld c, 20
 	call DelayFrames
 	call Pokedex_PlaceFrontpicTopLeftCorner	
 	ld a, [wCurPartySpecies]
@@ -407,24 +405,34 @@ DexEntryScreen_MenuActionJumptable:
 	dw .Print
 
 .Area:
-	call Pokedex_BlackOutBG
+	hlcoord 1, 1
+	lb bc, 16, 18
+	call ClearBox
+	call WaitBGMap
 	call Pokedex_GetSelectedMon
 	ld a, [wDexCurLocation]
 	ld e, a
 	predef Pokedex_GetArea
-	call Pokedex_BlackOutBG
-	call DelayFrame
-	call Pokedex_ResetBGMapMode
+;	call ClearTilemap
+	hlcoord 1, 1
+	lb bc, 16, 18
+	call ClearBox
+	hlcoord 0, 0
+	lb bc, 16, 18
+	call Pokedex_PlaceBorder
+	call WaitBGMap
 	ld a, $90
 	ldh [hWY], a
+	ld c, 30
+	call DelayFrames
 	call Pokedex_RedisplayDexEntry
 	call Pokedex_LoadSelectedMonTiles
 	call Pokedex_PlaceFrontpicTopLeftCorner
+	ld a, SCGB_POKEDEX
+	call Pokedex_GetSGBLayout	
 	call WaitBGMap
 	call Pokedex_GetSelectedMon
 	ld [wCurPartySpecies], a
-	ld a, SCGB_POKEDEX
-	call Pokedex_GetSGBLayout
 	ret
 
 .Cry:
@@ -1031,17 +1039,13 @@ Pokedex_FillColumn:
 Pokedex_DrawMainScreenBG:
 ; Draws the left sidebar and the bottom bar on the main screen.
 	call Pokedex_FillBackgroundColor2
-	hlcoord 12, 0
-	lb bc, 7, 7
-	call Pokedex_PlaceMainBorder1
-	hlcoord 12, 9
-	ld [hl], $68
-	hlcoord 12, 10
-	ld [hl], $68
-	hlcoord 12, 11
-	lb bc, 5, 6
-	call Pokedex_PlaceMainBorder2
-	hlcoord 13, 12
+	hlcoord 13, 10
+	lb bc, 6, 5
+	call Pokedex_PlaceBorder ; Seen / Owned Box
+	hlcoord 0, 0
+	lb bc, 16, 11
+	call Pokedex_PlaceBorder ; List Box	
+	hlcoord 14, 12
 	ld de, String_SEEN
 	call Pokedex_PlaceString
 	ld hl, wPokedexSeen
@@ -1051,7 +1055,7 @@ Pokedex_DrawMainScreenBG:
 	hlcoord 16, 13
 	lb bc, 1, 3
 	call PrintNum
-	hlcoord 13, 15
+	hlcoord 14, 15
 	ld de, String_OWN
 	call Pokedex_PlaceString
 	ld hl, wPokedexCaught
@@ -1061,20 +1065,17 @@ Pokedex_DrawMainScreenBG:
 	hlcoord 16, 16
 	lb bc, 1, 3
 	call PrintNum
-;	call Pokedex_LoadSelectedMonTiles
-;	call Pokedex_PlaceFrontpicTopRightCorner
+	hlcoord 13, 9
+	ld de, String_SELECT_OPTION
+	call Pokedex_PlaceString	
 	ret
 
 String_SEEN:
 	db "SEEN", -1
 String_OWN:
 	db "OWNED", -1
-String_START_SELECT_1:
+String_SELECT_OPTION:
 	db $42, $43, $44, $45, $46, $47, $48, -1
-String_START_SELECT_2:
-	db $49, $4a, $4b, $4c, $4d, $4e, $4f, $50, -1
-String_START_SELECT_3:
-	db $51, $52, $53, $54, $55, $56, $57, $58, -1
 
 Pokedex_DrawDexEntryScreenBG:
 	call Pokedex_FillBackgroundColor2
