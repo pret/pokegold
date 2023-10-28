@@ -53,7 +53,7 @@ BlkPacket_MoveList:
 
 BlkPacket_Pokedex_PC:
 	attr_blk 1
-	attr_blk_data %111, 1,1,0, 00,01, 07,07 ; mon: pal 1
+	attr_blk_data %111, 1,1,0, 01,01, 07,07 ; mon: pal 1
 	ds 8, 0
 
 BlkPacket_Bills_PC:

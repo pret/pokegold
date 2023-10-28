@@ -44,6 +44,14 @@ DrawPokedexListWindow:
 	call ByteFill
 	hlcoord 5, 0
 	ld [hl], $3f
+	hlcoord 10, 0
+	ld [hl], $3f
+	hlcoord 15, 0
+	ld [hl], $3f
+	hlcoord 19, 0
+	ld [hl], $3f	
+	hlcoord 20, 0
+	ld [hl], $3f	
 	hlcoord 5, 16
 	ld [hl], $40
 	ld a, [wCurDexMode]
