@@ -492,3 +492,8 @@ INCLUDE "maps/CherrygroveEvolutionSpeechHouse.asm"
 INCLUDE "maps/Route30BerryHouse.asm"
 INCLUDE "maps/MrPokemonsHouse.asm"
 INCLUDE "maps/Route31VioletGate.asm"
+
+
+SECTION "Map Scripts 33", ROMX
+
+INCLUDE "maps/WestPort.asm"

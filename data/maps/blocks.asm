@@ -851,3 +851,8 @@ DragonsDenB1F_Blocks:
 
 TohjoFalls_Blocks:
 	INCBIN "maps/TohjoFalls.blk"
+
+
+SECTION "Map Blocks 4", ROMX
+WestPort_Blocks:
+	INCBIN "maps/WestPort.blk"
