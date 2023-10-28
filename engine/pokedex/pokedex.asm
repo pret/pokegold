@@ -233,7 +233,7 @@ Pokedex_InitMainScreen:
 	ld a, -1
 	ld [wCurPartySpecies], a
 	ld a, SCGB_POKEDEX
-	call Pokedex_GetSGBLayout
+	call Pokedex_GetSGBLayout	
 	call Pokedex_UpdateCursorOAM
 	call Pokedex_IncrementDexPointer
 	ret
@@ -252,9 +252,9 @@ Pokedex_UpdateMainScreen:
 	ld a, [hl]
 	and START
 	jr nz, .start
+	call Pokedex_UpdateCursorOAM
 	call Pokedex_ListingHandleDPadInput
 	ret nc
-	call Pokedex_UpdateCursorOAM
 	call Pokedex_PrintListing
 	call Pokedex_SetBGMapMode3
 	call Pokedex_ResetBGMapMode
@@ -1996,34 +1996,66 @@ Pokedex_UpdateCursorOAM:
 	ret
 
 Pokedex_PutOldModeCursorOAM:
-	ld hl, .CursorOAM
+	ld hl, wDexArrowCursorBlinkCounter
+	ld a, [hl]
+	inc [hl]
+	and $4
+	jr z, .blink_on
+	ld hl, OldModeCursorBlankOAM
 	call Pokedex_LoadCursorOAM
 	ret
 
-.CursorOAM: ; erosunica: modded to accommodate the new graphic
+.blink_on
+	ld hl, OldModeCursorOAM
+	call Pokedex_LoadCursorOAM
+	ret
+
+OldModeCursorOAM: ; erosunica: modded to accommodate the new graphic
 ; x tile, y tile, x pixel, y pixel, vtile offset, attributes
-	dbsprite  2,  4, -1,  0, $0c, 7
-	dbsprite  3,  4, -1,  0, $0d, 7
-	dbsprite  4,  4, -1,  0, $0d, 7
-	dbsprite  5,  4, -1,  0, $0d, 7
-	dbsprite  6,  4, -1,  0, $0d, 7
-	;dbsprite  7,  4, -1,  0, $0d, 7
-	dbsprite  8,  4,  0,  0, $0d, 7
-	dbsprite  9,  4,  0,  0, $0d, 7
-	dbsprite 10,  4,  0,  0, $0d, 7
-	dbsprite 11,  4,  0,  0, $0d, 7
-	dbsprite 12,  4,  0,  0, $0c, 7 | X_FLIP
-	dbsprite  2,  5, -1,  0, $0c, 7 | Y_FLIP
-	dbsprite  3,  5, -1,  0, $0d, 7 | Y_FLIP
-	dbsprite  4,  5, -1,  0, $0d, 7 | Y_FLIP
-	dbsprite  5,  5, -1,  0, $0d, 7 | Y_FLIP
-	dbsprite  6,  5, -1,  0, $0d, 7 | Y_FLIP
-	;dbsprite  7,  5, -1,  0, $0d, 7 | Y_FLIP
-	dbsprite  8,  5,  0,  0, $0d, 7 | Y_FLIP
-	dbsprite  9,  5,  0,  0, $0d, 7 | Y_FLIP
-	dbsprite 10,  5,  0,  0, $0d, 7 | Y_FLIP
-	dbsprite 11,  5,  0,  0, $0d, 7 | Y_FLIP
-	dbsprite 12,  5,  0,  0, $0c, 7 | Y_FLIP | X_FLIP
+	dbsprite  3,  5,  0, -2, $0c, 7
+	dbsprite  4,  5,  0, -2, $0d, 7
+	dbsprite  5,  5,  0, -2, $0d, 7
+	dbsprite  6,  5,  0, -2, $0d, 7
+	dbsprite  7,  5,  0, -2, $0d, 7
+	dbsprite  8,  5,  0, -2, $0d, 7
+	dbsprite  9,  5,  0, -2, $0d, 7
+	dbsprite 10,  5,  0, -2, $0d, 7
+	dbsprite 11,  5,  0, -2, $0d, 7
+	dbsprite 12,  5,  0, -2, $0c, 7 | X_FLIP
+	dbsprite  3,  5,  0,  2, $0c, 7 | Y_FLIP
+	dbsprite  4,  5,  0,  2, $0d, 7 | Y_FLIP
+	dbsprite  5,  5,  0,  2, $0d, 7 | Y_FLIP
+	dbsprite  6,  5,  0,  2, $0d, 7 | Y_FLIP
+	dbsprite  7,  5,  0,  2, $0d, 7 | Y_FLIP
+	dbsprite  8,  5,  0,  2, $0d, 7 | Y_FLIP
+	dbsprite  9,  5,  0,  2, $0d, 7 | Y_FLIP
+	dbsprite 10,  5,  0,  2, $0d, 7 | Y_FLIP
+	dbsprite 11,  5,  0,  2, $0d, 7 | Y_FLIP
+	dbsprite 12,  5,  0,  2, $0c, 7 | Y_FLIP | X_FLIP
+	db -1
+	
+OldModeCursorBlankOAM: ; erosunica: modded to accommodate the new graphic
+; x tile, y tile, x pixel, y pixel, vtile offset, attributes
+	dbsprite  3,  5,  0, -2, $0e, 7
+	dbsprite  4,  5,  0, -2, $0e, 7
+	dbsprite  5,  5,  0, -2, $0e, 7
+	dbsprite  6,  5,  0, -2, $0e, 7
+	dbsprite  7,  5,  0, -2, $0e, 7
+	dbsprite  8,  5,  0, -2, $0e, 7
+	dbsprite  9,  5,  0, -2, $0e, 7
+	dbsprite 10,  5,  0, -2, $0e, 7
+	dbsprite 11,  5,  0, -2, $0e, 7
+	dbsprite 12,  5,  0, -2, $0e, 7 | X_FLIP
+	dbsprite  3,  5,  0,  2, $0e, 7 | Y_FLIP
+	dbsprite  4,  5,  0,  2, $0e, 7 | Y_FLIP
+	dbsprite  5,  5,  0,  2, $0e, 7 | Y_FLIP
+	dbsprite  6,  5,  0,  2, $0e, 7 | Y_FLIP
+	dbsprite  7,  5,  0,  2, $0e, 7 | Y_FLIP
+	dbsprite  8,  5,  0,  2, $0e, 7 | Y_FLIP
+	dbsprite  9,  5,  0,  2, $0e, 7 | Y_FLIP
+	dbsprite 10,  5,  0,  2, $0e, 7 | Y_FLIP
+	dbsprite 11,  5,  0,  2, $0e, 7 | Y_FLIP
+	dbsprite 12,  5,  0,  2, $0e, 7 | Y_FLIP | X_FLIP
 	db -1
 
 Pokedex_PutNewModeABCModeCursorOAM:
