@@ -656,7 +656,7 @@ CGBCopyBattleObjectPals: ; unreferenced
 	dec c
 	jr nz, .loop
 	ld hl, BattleObjectPals
-	ld de, wOBPals1 palette 2
+	ld de, wOBPals1 palette PAL_BATTLE_OB_GRAY
 	ld bc, 2 palettes
 	call CopyBytes
 	ret
