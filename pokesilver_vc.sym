@@ -14942,8 +14942,8 @@
 32:4dfe BGEffect_RapidCyclePals.okay_3_cgb
 32:4e0c BGEffect_RapidCyclePals.okay_4_cgb
 32:4e12 BGEffect_RapidCyclePals.four_cgb
-32:4e1b BGEffects_LoadBGPal0_OBPal1
-32:4e3c BGEffects_LoadBGPal1_OBPal0
+32:4e1b BGEffects_LoadPlayerPals
+32:4e3c BGEffects_LoadEnemyPals
 32:4e5d BattleBGEffect_GetFirstDMGPal
 32:4e63 BattleBGEffect_GetNextDMGPal
 32:4e77 BattleBGEffect_GetNextDMGPal.repeat
