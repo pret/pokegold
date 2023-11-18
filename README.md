@@ -18,7 +18,9 @@ To set up the repository, see [INSTALL.md](INSTALL.md).
 
 - [**Symbols**][symbols]
 
-For contacts and other pret projects, see [pret.github.io](https://pret.github.io/).
+You can find us on [Discord (pret, #pokecrystal)](https://discord.gg/d5dubZ3).
+
+For other pret projects, see [pret.github.io](https://pret.github.io/).
 
 [symbols]: https://github.com/pret/pokegold/tree/symbols
 [ci]: https://github.com/pret/pokegold/actions
