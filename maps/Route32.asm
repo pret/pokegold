@@ -534,7 +534,7 @@ Text_MillionDollarSlowpokeTail:
 	line "SLOWPOKETAIL?"
 
 	para "For you right now,"
-	line "just ¥1,000,000!"
+	line "just 1,000,000¥!"
 
 	para "You'll want this!"
 	done

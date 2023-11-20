@@ -534,7 +534,7 @@ GoldenrodUndergroundOlderHaircutBrotherOfferHaircutText:
 
 	para "I can make your"
 	line "#MON beautiful"
-	cont "for just ¥500."
+	cont "for just 500¥."
 
 	para "Would you like me"
 	line "to do that?"
@@ -581,7 +581,7 @@ GoldenrodUndergroundYoungerHaircutBrotherOfferHaircutText:
 
 	para "I'll spiff up your"
 	line "#MON for just"
-	cont "¥300."
+	cont "300¥."
 
 	para "So? How about it?"
 	done

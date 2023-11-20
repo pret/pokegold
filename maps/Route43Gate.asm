@@ -196,7 +196,7 @@ RocketText_TollFee:
 	text "Hold it there,"
 	line "mister!"
 
-	para "The toll is ¥{d:ROUTE43GATE_TOLL}"
+	para "The toll is {d:ROUTE43GATE_TOLL}¥"
 	line "to go through."
 	done
 

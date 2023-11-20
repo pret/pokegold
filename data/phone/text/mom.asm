@@ -73,9 +73,9 @@ MomDeterminedText:
 
 MomCheckBalanceText:
 	text "By the way, you've"
-	line "saved up ¥@"
+	line "saved up @"
 	text_ram wStringBuffer3
-	text "."
+	text "¥."
 
 	para "Do you want to"
 	line "keep on saving?"
@@ -96,9 +96,9 @@ MomYoureNotSavingText:
 
 MomYouveSavedText:
 	text "By the way, you've"
-	line "saved up ¥@"
+	line "saved up @"
 	text_ram wStringBuffer3
-	text "."
+	text "¥."
 
 	para "Want to start"
 	line "saving again?"

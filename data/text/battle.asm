@@ -2,9 +2,9 @@ BattleText:: ; used only for BANK(BattleText)
 
 BattleText_PlayerPickedUpPayDayMoney:
 	text "<PLAYER> picked up"
-	line "¥@"
+	line "@"
 	text_decimal wPayDayMoney, 3, 6
-	text "!"
+	text "¥!"
 	prompt
 
 WildPokemonAppearedText:
@@ -160,10 +160,10 @@ BattleText_EnemyMonFainted:
 	prompt
 
 GotMoneyForWinningText:
-	text "<PLAYER> got ¥@"
+	text "<PLAYER> got @"
 	text_decimal wBattleReward, 3, 6
 	text_start
-	line "for winning!"
+	line "¥ for winning!"
 	prompt
 
 BattleText_EnemyWasDefeated:
@@ -177,10 +177,10 @@ TiedAgainstText:
 	prompt
 
 SentSomeToMomText:
-	text "<PLAYER> got ¥@"
+	text "<PLAYER> got @"
 	text_decimal wBattleReward, 3, 6
 	text_start
-	line "for winning!"
+	line "¥ for winning!"
 	cont "Sent some to MOM!"
 	prompt
 
