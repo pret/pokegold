@@ -153,7 +153,7 @@ RageCandyBarMerchantTryOneText:
 
 	para "Right now, it can"
 	line "be yours for just"
-	cont "¥300! Want one?"
+	cont "300¥! Want one?"
 	done
 
 RageCandyBarMerchantSavorItText:

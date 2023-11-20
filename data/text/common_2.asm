@@ -1405,9 +1405,9 @@ _MartFinalPriceText::
 	text " @"
 	text_ram wStringBuffer2
 	text "(S)"
-	line "will be ¥@"
+	line "will be @"
 	text_decimal hMoneyTemp, 3, 6
-	text "."
+	text "¥."
 	done
 
 _HerbShopLadyIntroText::
@@ -1434,9 +1434,9 @@ _HerbalLadyFinalPriceText::
 	text " @"
 	text_ram wStringBuffer2
 	text "(S)"
-	line "will be ¥@"
+	line "will be @"
 	text_decimal hMoneyTemp, 3, 6
-	text "."
+	text "¥."
 	done
 
 _HerbalLadyThanksText::
@@ -1473,9 +1473,9 @@ _BargainShopIntroText::
 _BargainShopFinalPriceText::
 	text_ram wStringBuffer2
 	text " costs"
-	line "¥@"
+	line "@"
 	text_decimal hMoneyTemp, 3, 6
-	text ". Want it?"
+	text "¥. Want it?"
 	done
 
 _BargainShopThanksText::
@@ -1517,9 +1517,9 @@ _PharmacyFinalPriceText::
 	text " @"
 	text_ram wStringBuffer2
 	text "(S)"
-	line "will cost ¥@"
+	line "will cost @"
 	text_decimal hMoneyTemp, 3, 6
-	text "."
+	text "¥."
 	done
 
 _PharmacyThanksText::
@@ -1553,9 +1553,9 @@ _MartSellHowManyText::
 
 _MartSellPriceText::
 	text "I can pay you"
-	line "¥@"
+	line "@"
 	text_decimal hMoneyTemp, 3, 6
-	text "."
+	text "¥."
 
 	para "Is that OK?"
 	done
@@ -1595,9 +1595,9 @@ _MartAskMoreText::
 	done
 
 _MartBoughtText::
-	text "Got ¥@"
+	text "Got @"
 	text_decimal hMoneyTemp, 3, 6
-	text " for"
+	text "¥ for"
 	line "@"
 	text_ram wStringBuffer2
 	text "(S)."

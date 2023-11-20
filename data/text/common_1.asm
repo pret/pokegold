@@ -1441,9 +1441,9 @@ _YourMonHasGrownText::
 
 	para "If you want your"
 	line "#MON back, it"
-	cont "will cost ¥@"
+	cont "will cost @"
 	text_decimal wStringBuffer2 + 2, 3, 4
-	text "."
+	text "¥."
 	done
 
 _PerfectHeresYourMonText::
@@ -1468,7 +1468,7 @@ _BackAlreadyText::
 
 	para "If you want your"
 	line "#MON back, it"
-	cont "will cost ¥100."
+	cont "will cost 100¥."
 	done
 
 _HaveNoRoomText::
@@ -1716,9 +1716,9 @@ _ComeBackText::
 
 _PlayerPickedUpPayDayMoney::
 	text "<PLAYER> picked up"
-	line "¥@"
+	line "@"
 	text_decimal wPayDayMoney, 3, 6
-	text "!"
+	text "¥!"
 	prompt
 
 _BootedTMText::
