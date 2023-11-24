@@ -337,15 +337,21 @@ _ActorNameText::
 	text "<USER>@@"
 
 _UsedMove1Text::
-	text_start
-	line "used @@"
+	text " used"
+	line "@@"
 
 _UsedMove2Text::
-	text_start
-	line "used @@"
+_UsedMove3Text::
+	text " did"
+	line "@@"
+
+_UsedMove4Text::
+_UsedMove5Text::
+	text "'s"
+	line "@@"
 
 _UsedInsteadText::
-	text "instead,"
+	text " instead used"
 	cont "@@"
 
 _MoveNameText::
@@ -353,23 +359,14 @@ _MoveNameText::
 	db "@@"
 
 _EndUsedMove1Text::
-	text "!"
-	done
-
 _EndUsedMove2Text::
-	text "!"
-	done
-
 _EndUsedMove3Text::
+_EndUsedMove5Text::
 	text "!"
 	done
 
 _EndUsedMove4Text::
-	text "!"
-	done
-
-_EndUsedMove5Text::
-	text "!"
+	text " attack!"
 	done
 
 Text_BattleEffectActivate::
