@@ -342,8 +342,8 @@ _UsedMove1Text::
 
 _UsedMove2Text::
 _UsedMove3Text::
-	text " did"
-	line "@@"
+	text " "
+	line "did @@"
 
 _UsedMove4Text::
 _UsedMove5Text::
