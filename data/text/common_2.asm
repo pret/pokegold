@@ -341,19 +341,8 @@ _UsedMove1Text::
 	line "used @@"
 
 _UsedMove2Text::
-<<<<<<< HEAD
-_UsedMove3Text::
-	text " "
-	line "did @@"
-
-_UsedMove4Text::
-_UsedMove5Text::
-	text "'s"
-	line "@@"
-=======
 	text_start
 	line "used @@"
->>>>>>> parent of 25b48607... Restore japanese move grammar table
 
 _UsedInsteadText::
 	text "instead,"
