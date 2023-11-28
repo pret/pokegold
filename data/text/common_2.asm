@@ -366,7 +366,8 @@ _EndUsedMove5Text::
 	done
 
 _EndUsedMove4Text::
-	text " attack!"
+	text " "
+	cont "attack!"
 	done
 
 Text_BattleEffectActivate::
