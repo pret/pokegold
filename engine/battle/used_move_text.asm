@@ -38,26 +38,20 @@ UsedMoveText:
 .grammar
 	call GetMoveGrammar ; convert move id to grammar index
 
+; everything except 'CheckObedience' made redundant in localization
+
 	; check obedience
 	ld a, [wAlreadyDisobeyed]
 	and a
+	ld hl, UsedMove2Text
 	ret nz
 
 	; check move grammar
 	ld a, [wMoveGrammar]
-	and a
-	ld hl, UsedMove1Text
-	ret z
-	dec a
+	cp $3
 	ld hl, UsedMove2Text
-	ret z
-	dec a
-	ld hl, UsedMove3Text
-	ret z
-	dec a
-	ld hl, UsedMove4Text
-	ret z
-	ld hl, UsedMove5Text
+	ret c
+	ld hl, UsedMove1Text
 	ret
 
 UsedMove1Text:
@@ -68,27 +62,12 @@ UsedMove1Text:
 UsedMove2Text:
 	text_far _UsedMove2Text
 	text_asm
-	jr UsedMoveText_CheckObedience
-	
-UsedMove3Text:
-	text_far _UsedMove3Text
-	text_asm
-	jr UsedMoveText_CheckObedience
-
-UsedMove4Text:
-	text_far _UsedMove4Text
-	text_asm
-	jr UsedMoveText_CheckObedience
-
-UsedMove5Text:
-	text_far _UsedMove5Text
-	text_asm
 UsedMoveText_CheckObedience:
 ; check obedience
 	ld a, [wAlreadyDisobeyed]
 	and a
 	jr z, .GetMoveNameText
-; print "instead used"
+; print "instead,"
 	ld hl, .UsedInsteadText
 	ret
 

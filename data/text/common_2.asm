@@ -337,10 +337,11 @@ _ActorNameText::
 	text "<USER>@@"
 
 _UsedMove1Text::
-	text " used"
-	line "@@"
+	text_start
+	line "used @@"
 
 _UsedMove2Text::
+<<<<<<< HEAD
 _UsedMove3Text::
 	text " "
 	line "did @@"
@@ -349,9 +350,13 @@ _UsedMove4Text::
 _UsedMove5Text::
 	text "'s"
 	line "@@"
+=======
+	text_start
+	line "used @@"
+>>>>>>> parent of 25b48607... Restore japanese move grammar table
 
 _UsedInsteadText::
-	text " instead used"
+	text "instead,"
 	cont "@@"
 
 _MoveNameText::
@@ -359,14 +364,23 @@ _MoveNameText::
 	db "@@"
 
 _EndUsedMove1Text::
+	text "!"
+	done
+
 _EndUsedMove2Text::
+	text "!"
+	done
+
 _EndUsedMove3Text::
-_EndUsedMove5Text::
 	text "!"
 	done
 
 _EndUsedMove4Text::
-	text " attack!"
+	text "!"
+	done
+
+_EndUsedMove5Text::
+	text "!"
 	done
 
 Text_BattleEffectActivate::
