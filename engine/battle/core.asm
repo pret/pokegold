@@ -135,7 +135,7 @@ WildFled_EnemyFled_LinkBattleCanceled:
 	call StdBattleTextbox
 	call StopDangerSound
 	ld de, SFX_RUN
-	call PlaySFX
+	call WaitPlaySFX
 	call SetPlayerTurn
 	callfar DummyPredef38
 	ld a, 1
