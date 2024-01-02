@@ -132,6 +132,7 @@ WildFled_EnemyFled_LinkBattleCanceled:
 	ld hl, BattleText_EnemyFled
 
 .print_text
+; BUG: SFX_RUN does not play correctly when a wild Pokemon flees from battle (see docs/bugs_and_glitches.md)
 	call StdBattleTextbox
 	call StopDangerSound
 	ld de, SFX_RUN
