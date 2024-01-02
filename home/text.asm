@@ -222,8 +222,8 @@ ENDM
 	dict "<PROMPT>",  PromptText
 	dict "<PKMN>",    PlacePKMN
 	dict "<POKE>",    PlacePOKE
-	dict "%",         NextChar
-	dict "¯",         " "
+	dict "<WBR>",     NextChar
+	dict "<BSP>",     " "
 	dict "<DEXEND>",  PlaceDexEnd
 	dict "<TARGET>",  PlaceMoveTargetsName
 	dict "<USER>",    PlaceMoveUsersName
