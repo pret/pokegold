@@ -21,7 +21,7 @@ RuinsOfAlphKabutoChamberHiddenDoorsCallback:
 	endcallback
 
 RuinsOfAlphKabutoChamberPuzzle:
-	refreshscreen
+	reanchormap
 	setval UNOWNPUZZLE_KABUTO
 	special UnownPuzzle
 	closetext
@@ -38,7 +38,7 @@ RuinsOfAlphKabutoChamberPuzzle:
 	showemote EMOTE_SHOCK, PLAYER, 15
 	changeblock 2, 2, $18 ; left hole
 	changeblock 4, 2, $19 ; right hole
-	reloadmappart
+	refreshmap
 	playsound SFX_STRENGTH
 	earthquake 80
 	warpcheck

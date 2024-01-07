@@ -1054,9 +1054,9 @@ ENDC
 
 SECTION "Video", WRAM0
 
-; wBGMapBuffer
-wBGMapBuffer::     ds 40
-wBGMapPalBuffer::  ds 40
+; bg map
+wBGMapBuffer::    ds 2 * SCREEN_WIDTH
+wBGMapPalBuffer:: ds 2 * SCREEN_WIDTH
 wBGMapBufferPointers:: ds 20 * 2
 wBGMapBufferEnd::
 
