@@ -550,12 +550,12 @@ GetDestinationWarpNumber::
 	ld a, [wPlayerMapX]
 	sub 4
 	ld d, a
-	ld a, [wCurMapWarpCount]
+	ld a, [wCurMapWarpEventCount]
 	and a
 	ret z
 
 	ld c, a
-	ld hl, wCurMapWarpsPointer
+	ld hl, wCurMapWarpEventsPointer
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
@@ -588,7 +588,7 @@ GetDestinationWarpNumber::
 	call .IncreaseHLTwice
 	ret nc ; never encountered
 
-	ld a, [wCurMapWarpCount]
+	ld a, [wCurMapWarpEventCount]
 	inc a
 	sub c
 	ld c, a
@@ -615,7 +615,7 @@ CopyWarpData::
 
 .CopyWarpData:
 	push bc
-	ld hl, wCurMapWarpsPointer
+	ld hl, wCurMapWarpEventsPointer
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
@@ -775,7 +775,7 @@ ReadMapEvents::
 	ld l, a
 	inc hl
 	inc hl
-	call ReadWarps
+	call ReadWarpEvents
 	call ReadCoordEvents
 	call ReadBGEvents
 
@@ -885,14 +885,14 @@ ReadMapCallbacks::
 	call AddNTimes
 	ret
 
-ReadWarps::
+ReadWarpEvents::
 	ld a, [hli]
 	ld c, a
-	ld [wCurMapWarpCount], a
+	ld [wCurMapWarpEventCount], a
 	ld a, l
-	ld [wCurMapWarpsPointer], a
+	ld [wCurMapWarpEventsPointer], a
 	ld a, h
-	ld [wCurMapWarpsPointer + 1], a
+	ld [wCurMapWarpEventsPointer + 1], a
 	ld a, c
 	and a
 	ret z

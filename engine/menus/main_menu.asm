@@ -29,7 +29,7 @@ MainMenu:
 	ld b, SCGB_DIPLOMA
 	call GetSGBLayout
 	ld hl, wGameTimerPaused
-	res GAME_TIMER_PAUSED_F, [hl]
+	res GAME_TIMER_COUNTING_F, [hl]
 	call MainMenu_GetWhichMenu
 	ld [wWhichIndexSet], a
 	call MainMenu_PrintCurrentTimeAndDay

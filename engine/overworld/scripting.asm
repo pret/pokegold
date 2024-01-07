@@ -1101,7 +1101,7 @@ Script_reloadmapafterbattle:
 	jr z, .done
 	ld b, BANK(Script_SpecialBillCall)
 	ld de, Script_SpecialBillCall
-	farcall LoadScriptBDE
+	farcall LoadMemScript
 .done
 	jp Script_reloadmap
 
@@ -2206,10 +2206,10 @@ Script_endall:
 
 Script_halloffame:
 	ld hl, wGameTimerPaused
-	res GAME_TIMER_PAUSED_F, [hl]
+	res GAME_TIMER_COUNTING_F, [hl]
 	farcall HallOfFame
 	ld hl, wGameTimerPaused
-	set GAME_TIMER_PAUSED_F, [hl]
+	set GAME_TIMER_COUNTING_F, [hl]
 	jr ReturnFromCredits
 
 Script_credits:
