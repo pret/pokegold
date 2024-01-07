@@ -142,7 +142,7 @@ PrintText::
 
 PrintTextboxText::
 	bccoord TEXTBOX_INNERX, TEXTBOX_INNERY
-	call PlaceHLTextAtBC
+	call PrintTextboxTextAt
 	ret
 
 SetUpTextbox::
@@ -576,7 +576,7 @@ PokeFluteTerminator:: ; unreferenced
 .stop:
 	text_end
 
-PlaceHLTextAtBC::
+PrintTextboxTextAt::
 	ld a, [wTextboxFlags]
 	push af
 	set TEXT_DELAY_F, a

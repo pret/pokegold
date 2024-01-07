@@ -83,7 +83,7 @@ ChooseMonToLearnTMHM:
 	ld [wPartyMenuActionText], a
 .loopback
 	farcall WritePartyMenuTilemap
-	farcall PrintPartyMenuText
+	farcall PlacePartyMenuText
 	call WaitBGMap
 	call SetDefaultBGPAndOBP
 	call DelayFrame

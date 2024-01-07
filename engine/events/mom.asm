@@ -300,13 +300,13 @@ DSTChecks:
 	call .ClearBox
 	bccoord 1, 14
 	ld hl, .TimesetAskAdjustDSTText
-	call PlaceHLTextAtBC
+	call PrintTextboxTextAt
 	call YesNoBox
 	ret c
 	call .ClearBox
 	bccoord 1, 14
 	ld hl, .MomLostGearBookletText
-	call PlaceHLTextAtBC
+	call PrintTextboxTextAt
 	ret
 
 .loop
@@ -316,7 +316,7 @@ DSTChecks:
 	bit 7, a
 	jr z, .SetDST
 	ld hl, .TimesetAskNotDSTText
-	call PlaceHLTextAtBC
+	call PrintTextboxTextAt
 	call YesNoBox
 	ret c
 	ld a, [wDST]
@@ -327,12 +327,12 @@ DSTChecks:
 	call .ClearBox
 	bccoord 1, 14
 	ld hl, .TimesetNotDSTText
-	call PlaceHLTextAtBC
+	call PrintTextboxTextAt
 	ret
 
 .SetDST:
 	ld hl, .TimesetAskDSTText
-	call PlaceHLTextAtBC
+	call PrintTextboxTextAt
 	call YesNoBox
 	ret c
 	ld a, [wDST]
@@ -343,7 +343,7 @@ DSTChecks:
 	call .ClearBox
 	bccoord 1, 14
 	ld hl, .TimesetDSTText
-	call PlaceHLTextAtBC
+	call PrintTextboxTextAt
 	ret
 
 .SetClockForward:

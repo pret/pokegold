@@ -31,7 +31,7 @@ InitPartyMenuLayout:
 	call InitPartyMenuWithCancel
 	call InitPartyMenuGFX
 	call WritePartyMenuTilemap
-	call PrintPartyMenuText
+	call PlacePartyMenuText
 	ret
 
 LoadPartyMenuGFX:
@@ -625,7 +625,7 @@ PartyMenuSelect:
 	scf
 	ret
 
-PrintPartyMenuText:
+PlacePartyMenuText:
 	hlcoord 0, 14
 	lb bc, 2, 18
 	call Textbox

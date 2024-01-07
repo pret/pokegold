@@ -2697,7 +2697,7 @@ PickPartyMonInBattle:
 	ld a, PARTYMENUACTION_SWITCH
 	ld [wPartyMenuActionText], a
 	farcall WritePartyMenuTilemap
-	farcall PrintPartyMenuText
+	farcall PlacePartyMenuText
 	call WaitBGMap
 	call SetDefaultBGPAndOBP
 	call DelayFrame
@@ -4791,7 +4791,7 @@ BattleMenuPKMN_Loop:
 	xor a
 	ld [wPartyMenuActionText], a
 	farcall WritePartyMenuTilemap
-	farcall PrintPartyMenuText
+	farcall PlacePartyMenuText
 	call WaitBGMap
 	call SetDefaultBGPAndOBP
 	call DelayFrame
@@ -8690,7 +8690,7 @@ BattleStartMessage:
 	callfar Battle_GetTrainerName
 
 	ld hl, WantsToBattleText
-	jr .PlaceBattleStartText
+	jr .PrintBattleStartText
 
 .wild
 	call BattleCheckEnemyShininess
@@ -8713,13 +8713,13 @@ BattleStartMessage:
 	ld hl, HookedPokemonAttackedText
 	ld a, [wBattleType]
 	cp BATTLETYPE_FISH
-	jr z, .PlaceBattleStartText
+	jr z, .PrintBattleStartText
 	ld hl, PokemonFellFromTreeText
 	cp BATTLETYPE_TREE
-	jr z, .PlaceBattleStartText
+	jr z, .PrintBattleStartText
 	ld hl, WildPokemonAppearedText
 
-.PlaceBattleStartText:
+.PrintBattleStartText:
 	push hl
 	farcall BattleStart_TrainerHuds
 	pop hl
