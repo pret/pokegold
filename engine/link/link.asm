@@ -1950,7 +1950,7 @@ LoadTradeScreenBorderGFX:
 SetTradeRoomBGPals:
 	ld b, SCGB_DIPLOMA
 	call GetSGBLayout
-	jp SetPalettes
+	jp SetDefaultBGPAndOBP
 
 PlaceTradeScreenTextbox:
 	hlcoord 0, 0

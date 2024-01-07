@@ -10,14 +10,14 @@ PlayWhirlpoolSound:
 	ret
 
 BlindingFlash:
-	farcall FadeOutPalettes
+	farcall FadeOutToWhite
 	ld hl, wStatusFlags
 	set STATUSFLAGS_FLASH_F, [hl]
 	farcall ReplaceTimeOfDayPals
 	farcall UpdateTimeOfDayPal
 	ld b, SCGB_MAPPALS
 	call GetSGBLayout
-	farcall FadeInPalettes
+	farcall FadeInFromWhite
 	ret
 
 ShakeHeadbuttTree:
@@ -58,7 +58,7 @@ ShakeHeadbuttTree:
 	jr .loop
 
 .done
-	call OverworldTextModeSwitch
+	call LoadOverworldTilemapAndAttrmapPals
 	call WaitBGMap
 	xor a
 	ldh [hBGMapMode], a

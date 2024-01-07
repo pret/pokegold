@@ -647,7 +647,7 @@ Hatch_UpdateFrontpicBGMapCenter:
 	predef PlaceGraphic
 	pop af
 	call Hatch_LoadFrontpicPal
-	call SetPalettes
+	call SetDefaultBGPAndOBP
 	jp WaitBGMap
 
 EggHatch_DoAnimFrame:

@@ -579,7 +579,7 @@ PokeFluteTerminator:: ; unreferenced
 PlaceHLTextAtBC::
 	ld a, [wTextboxFlags]
 	push af
-	set NO_TEXT_DELAY_F, a
+	set TEXT_DELAY_F, a
 	ld [wTextboxFlags], a
 
 	call DoTextUntilTerminator

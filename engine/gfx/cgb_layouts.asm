@@ -29,6 +29,7 @@ LoadSGBLayoutCGB:
 	ret
 
 CGBLayoutJumptable:
+; entries correspond to SCGB_* constants (see constants/scgb_constants.asm)
 	table_width 2, CGBLayoutJumptable
 	dw _CGB_BattleGrayscale
 	dw _CGB_BattleColors
@@ -741,7 +742,7 @@ INCLUDE "gfx/pack/pack.pal"
 
 _CGB_Pokepic:
 	call _CGB_MapPals
-	call SwapTextboxPalettes
+	call LoadOverworldAttrmapPals
 	ld de, SCREEN_WIDTH
 	hlcoord 0, 0, wAttrmap
 	ld a, [wMenuBorderTopCoord]

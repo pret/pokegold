@@ -1716,7 +1716,7 @@ ChooseMonToUseItemOn:
 	farcall WritePartyMenuTilemap
 	farcall PrintPartyMenuText
 	call WaitBGMap
-	call SetPalettes
+	call SetDefaultBGPAndOBP
 	call DelayFrame
 	farcall PartyMenuSelect
 	ret
@@ -1733,7 +1733,7 @@ ItemActionText:
 	farcall WritePartyMenuTilemap
 	farcall PrintPartyMenuActionText
 	call WaitBGMap
-	call SetPalettes
+	call SetDefaultBGPAndOBP
 	call DelayFrame
 	pop bc
 	pop de

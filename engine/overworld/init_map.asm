@@ -27,10 +27,10 @@ ReanchorBGMap_NoOAMUpdate::
 	res 2, [hl]
 	ld a, $90
 	ldh [hWY], a
-	call OverworldTextModeSwitch
+	call LoadOverworldTilemapAndAttrmapPals
 	ld a, HIGH(vBGMap1)
 	call .LoadBGMapAddrIntoHRAM
-	call _OpenAndCloseMenu_HDMATransferTilemapAndAttrmap
+	call HDMATransferTilemapAndAttrmap_Menu
 	xor a
 	ldh [hBGMapMode], a
 	ldh [hWY], a

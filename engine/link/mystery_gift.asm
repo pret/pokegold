@@ -64,7 +64,7 @@ endc
 	call WaitBGMap
 	ld b, SCGB_DIPLOMA
 	call GetSGBLayout
-	call SetPalettes
+	call SetDefaultBGPAndOBP
 	pop de
 
 	hlcoord 2, 8

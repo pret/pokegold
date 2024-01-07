@@ -1065,7 +1065,7 @@ TilesetColorPicker: ; unreferenced
 	ld [wDebugTilesetCurColor], a
 	ldh [hMapAnims], a
 	call ClearSprites
-	call OverworldTextModeSwitch
+	call LoadOverworldTilemapAndAttrmapPals
 	call WaitBGMap2
 	xor a
 	ldh [hBGMapMode], a

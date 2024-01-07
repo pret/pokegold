@@ -1119,11 +1119,9 @@ TryTileCollisionEvent::
 	ret
 
 RandomEncounter::
-; Random encounter
-
 	call CheckWildEncounterCooldown
 	jr c, .nope
-	call CanUseSweetScent
+	call CanEncounterWildMonInThisTile
 	jr nc, .nope
 	ld hl, wStatusFlags2
 	bit STATUSFLAGS2_BUG_CONTEST_TIMER_F, [hl]
@@ -1163,7 +1161,7 @@ WildBattleScript:
 	reloadmapafterbattle
 	end
 
-CanUseSweetScent::
+CanEncounterWildMonInThisTile::
 	ld hl, wStatusFlags
 	bit STATUSFLAGS_NO_WILD_ENCOUNTERS_F, [hl]
 	jr nz, .no

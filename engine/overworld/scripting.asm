@@ -2044,7 +2044,7 @@ Script_changeblock:
 Script_reloadmappart::
 	xor a
 	ldh [hBGMapMode], a
-	call OverworldTextModeSwitch
+	call LoadOverworldTilemapAndAttrmapPals
 	call GetMovementPermissions
 	call ApplyTilemap
 	call UpdateSprites

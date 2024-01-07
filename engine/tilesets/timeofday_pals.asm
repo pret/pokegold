@@ -62,14 +62,14 @@ _UpdateTimePals::
 	call DmgToCgbTimePals
 	ret
 
-FadeInPalettes::
+FadeInFromWhite::
 	ld c, $12
 	call GetTimePalFade
 	ld b, $4
 	call ConvertTimePalsDecHL
 	ret
 
-FadeOutPalettes::
+FadeOutToWhite::
 	call FillWhiteBGColor
 	ld c, $9
 	call GetTimePalFade
@@ -77,14 +77,14 @@ FadeOutPalettes::
 	call ConvertTimePalsIncHL
 	ret
 
-FadeInQuickly:
+FadeInFromBlack:
 	ld c, $0
 	call GetTimePalFade
 	ld b, $4
 	call ConvertTimePalsIncHL
 	ret
 
-FadeBlackQuickly:
+FadeOutToBlack:
 	ld c, $9
 	call GetTimePalFade
 	ld b, $4

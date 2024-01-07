@@ -2637,7 +2637,7 @@ ForcePlayerMonChoice:
 	call LoadTilemapToTempTilemap
 	call WaitBGMap
 	call GetMemSGBLayout
-	call SetPalettes
+	call SetDefaultBGPAndOBP
 	xor a
 	ret
 
@@ -2655,7 +2655,7 @@ ForcePlayerMonChoice:
 	call _LoadHPBar
 	call CloseWindow
 	call GetMemSGBLayout
-	call SetPalettes
+	call SetDefaultBGPAndOBP
 	call SendOutMonText
 	call NewBattleMonStatus
 	call BreakAttraction
@@ -2699,7 +2699,7 @@ PickPartyMonInBattle:
 	farcall WritePartyMenuTilemap
 	farcall PrintPartyMenuText
 	call WaitBGMap
-	call SetPalettes
+	call SetDefaultBGPAndOBP
 	call DelayFrame
 	farcall PartyMenuSelect
 	ret c
@@ -2786,7 +2786,7 @@ LostBattle:
 ; Grayscale
 	ld b, SCGB_BATTLE_GRAYSCALE
 	call GetSGBLayout
-	call SetPalettes
+	call SetDefaultBGPAndOBP
 	jr .end
 
 .LostLinkBattle:
@@ -4774,7 +4774,7 @@ BattleMenu_Pack:
 	and BATTLERESULT_BITMASK
 	ld [wBattleResult], a ; WIN
 	call ClearWindowData
-	call SetPalettes
+	call SetDefaultBGPAndOBP
 	scf
 	ret
 
@@ -4793,7 +4793,7 @@ BattleMenuPKMN_Loop:
 	farcall WritePartyMenuTilemap
 	farcall PrintPartyMenuText
 	call WaitBGMap
-	call SetPalettes
+	call SetDefaultBGPAndOBP
 	call DelayFrame
 	farcall PartyMenuSelect
 	jr c, .Cancel
@@ -4823,7 +4823,7 @@ BattleMenuPKMN_Loop:
 	call CloseWindow
 	call LoadTilemapToTempTilemap
 	call GetMemSGBLayout
-	call SetPalettes
+	call SetDefaultBGPAndOBP
 	jp BattleMenu
 
 Battle_StatsScreen:
@@ -4900,7 +4900,7 @@ TryPlayerSwitch:
 	call _LoadHPBar
 	call CloseWindow
 	call GetMemSGBLayout
-	call SetPalettes
+	call SetDefaultBGPAndOBP
 	ld a, [wCurPartyMon]
 	ld [wCurBattleMon], a
 PlayerSwitch:
@@ -6727,7 +6727,7 @@ FinishBattleAnim:
 	push hl
 	ld b, SCGB_BATTLE_COLORS
 	call GetSGBLayout
-	call SetPalettes
+	call SetDefaultBGPAndOBP
 	call DelayFrame
 	pop hl
 	pop de
@@ -8093,7 +8093,7 @@ _DisplayLinkRecord:
 	call WaitBGMap2
 	ld b, SCGB_DIPLOMA
 	call GetSGBLayout
-	call SetPalettes
+	call SetDefaultBGPAndOBP
 	ld c, 8
 	call DelayFrames
 	call WaitPressAorB_BlinkCursor
@@ -8568,7 +8568,7 @@ InitBattleDisplay:
 	call HideSprites
 	ld b, SCGB_BATTLE_COLORS
 	call GetSGBLayout
-	call SetPalettes
+	call SetDefaultBGPAndOBP
 	ld a, $90
 	ldh [hWY], a
 	xor a

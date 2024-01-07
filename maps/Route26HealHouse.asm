@@ -12,12 +12,12 @@ Route26HealHouseTeacherScript:
 	writetext Route26HealHouseRestAWhileText
 	waitbutton
 	closetext
-	special FadeBlackQuickly
+	special FadeOutToBlack
 	special ReloadSpritesNoPalettes
 	playmusic MUSIC_HEAL
 	special HealParty
 	pause 60
-	special FadeInQuickly
+	special FadeInFromBlack
 	special RestartMapMusic
 	opentext
 	writetext Route26HealHouseKeepAtItText
