@@ -44,8 +44,8 @@ WaitScript:
 WaitScriptMovement:
 	call StopScript
 
-	ld hl, wVramState
-	bit 7, [hl]
+	ld hl, wStateFlags
+	bit SCRIPTED_MOVEMENT_STATE_F, [hl]
 	ret nz
 
 	farcall UnfreezeAllObjects

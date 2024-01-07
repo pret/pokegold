@@ -33,10 +33,10 @@ PokeGear:
 	push af
 	ld a, $1
 	ldh [hInMenu], a
-	ld a, [wVramState]
+	ld a, [wStateFlags]
 	push af
 	xor a
-	ld [wVramState], a
+	ld [wStateFlags], a
 	call .InitTilemap
 	call DelayFrame
 .loop
@@ -55,7 +55,7 @@ PokeGear:
 	call PlaySFX
 	call WaitSFX
 	pop af
-	ld [wVramState], a
+	ld [wStateFlags], a
 	pop af
 	ldh [hInMenu], a
 	pop af
@@ -1716,10 +1716,10 @@ _TownMap:
 	ld a, $1
 	ldh [hInMenu], a
 
-	ld a, [wVramState]
+	ld a, [wStateFlags]
 	push af
 	xor a
-	ld [wVramState], a
+	ld [wStateFlags], a
 
 	call ClearBGPalettes
 	call ClearTilemap
@@ -1771,7 +1771,7 @@ _TownMap:
 
 .resume
 	pop af
-	ld [wVramState], a
+	ld [wStateFlags], a
 	pop af
 	ldh [hInMenu], a
 	pop af

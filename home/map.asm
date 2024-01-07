@@ -230,7 +230,7 @@ HandleContinueMap::
 	ret
 
 LoadMapTimeOfDay::
-	ld a, $1
+	ld a, TRUE
 	ld [wSpriteUpdatesEnabled], a
 	farcall ReplaceTimeOfDayPals
 	farcall UpdateTimeOfDayPal
@@ -309,8 +309,8 @@ RefreshMapSprites::
 	ld hl, wPlayerSpriteSetupFlags
 	bit PLAYERSPRITESETUP_SKIP_RELOAD_GFX_F, [hl]
 	jr nz, .skip
-	ld hl, wVramState
-	set 0, [hl]
+	ld hl, wStateFlags
+	set SPRITE_UPDATES_DISABLED_F, [hl]
 	call SafeUpdateSprites
 .skip
 	xor a
@@ -2294,7 +2294,7 @@ FinishExitMenu::
 
 ReturnToMapWithSpeechTextbox::
 	push af
-	ld a, $1
+	ld a, TRUE
 	ld [wSpriteUpdatesEnabled], a
 	call ClearBGPalettes
 	call ClearSprites
@@ -2302,8 +2302,8 @@ ReturnToMapWithSpeechTextbox::
 	hlcoord 0, 12
 	lb bc, 4, 18
 	call Textbox
-	ld hl, wVramState
-	set 0, [hl]
+	ld hl, wStateFlags
+	set SPRITE_UPDATES_DISABLED_F, [hl]
 	call UpdateSprites
 	call WaitBGMap2
 	ld b, SCGB_MAPPALS

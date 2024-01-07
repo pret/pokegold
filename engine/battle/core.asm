@@ -7787,8 +7787,8 @@ StartBattle:
 .back_up_bgmap2
 	ld b, 0
 	call GetSGBLayout
-	ld hl, wVramState
-	res 0, [hl]
+	ld hl, wStateFlags
+	res SPRITE_UPDATES_DISABLED_F, [hl]
 	call InitBattleDisplay
 	call BattleStartMessage
 	xor a

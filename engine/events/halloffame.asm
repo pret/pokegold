@@ -41,7 +41,7 @@ RedCredits::
 	ld [wMusicFade], a
 	farcall FadeOutToWhite
 	xor a
-	ld [wVramState], a
+	ld [wStateFlags], a
 	ldh [hMapAnims], a
 	farcall InitDisplayForRedCredits
 	ld c, 8
@@ -61,7 +61,7 @@ HallOfFame_FadeOutMusic:
 	ld [wMusicFade], a
 	farcall FadeOutToWhite
 	xor a
-	ld [wVramState], a
+	ld [wStateFlags], a
 	ldh [hMapAnims], a
 	farcall InitDisplayForHallOfFame
 	ld c, 100
