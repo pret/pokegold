@@ -27332,7 +27332,7 @@ ROMX bank #91:
 	         $4714 = VermilionPortComeAgainText
 	         $472f = VermilionPortSSTicketText
 	         $4764 = VermilionPortNoTicketText
-	         $47cb = VermilionPortSailMondayText
+	         $47cb = VermilionPortSailWednesdayText
 	         $47f2 = VermilionPortSailSundayText
 	         $4818 = VermilionPortSuperNerdText
 	         $4855 = VermilionPort_MapEvents
