@@ -576,7 +576,8 @@ ParsePlayerAction:
 	jr nz, .locked_in
 	xor a
 	ld [wMoveSelectionMenuType], a
-	inc a ; POUND
+	assert POUND == 1
+	inc a
 	ld [wFXAnimID], a
 	call MoveSelectionScreen
 	push af
@@ -3609,7 +3610,8 @@ TryToRunAwayFromBattle:
 	cp BATTLEACTION_FORFEIT
 	ld a, DRAW
 	jr z, .fled
-	dec a ; LOSE
+	assert DRAW - 1 == LOSE
+	dec a
 .fled
 	ld b, a
 	ld a, [wBattleResult]

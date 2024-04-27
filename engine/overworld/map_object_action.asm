@@ -248,8 +248,8 @@ SetFacingBoulderDust:
 	and 2
 	ld a, FACING_BOULDER_DUST_1
 	jr z, .ok
-	inc a
 	assert FACING_BOULDER_DUST_1 + 1 == FACING_BOULDER_DUST_2
+	inc a
 .ok
 	ld [hl], a
 	ret
@@ -264,8 +264,8 @@ SetFacingGrassShake:
 	and 4
 	ld a, FACING_GRASS_1
 	jr z, .ok
-	inc a ; FACING_GRASS_2
-
+	assert FACING_GRASS_1 + 1 == FACING_GRASS_2
+	inc a
 .ok
 	ld [hl], a
 	ret
