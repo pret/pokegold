@@ -31,7 +31,7 @@ MagnetTrain:
 	ld hl, hVBlank
 	ld a, [hl]
 	push af
-	ld [hl], 1
+	ld [hl], VBLANK_CUTSCENE
 .loop
 	ld a, [wJumptableIndex]
 	bit 7, a

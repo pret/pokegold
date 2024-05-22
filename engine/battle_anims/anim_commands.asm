@@ -15,7 +15,7 @@ PlayBattleAnim:
 	ld a, [hl]
 	push af
 
-	ld [hl], 1
+	ld [hl], VBLANK_CUTSCENE
 	call BattleAnimRunScript
 
 	pop af

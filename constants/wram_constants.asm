@@ -299,3 +299,16 @@ DEF DAYCARELADY_HAS_MON_F        EQU 0
 
 ; shared flag between wDayCareMan and wDayCareLady
 DEF DAYCARE_INTRO_SEEN_F         EQU 7
+
+; hVBlank::
+; VBlankHandlers indexes (see home/vblank.asm)
+	const_def
+	const VBLANK_NORMAL     ; 0
+	const VBLANK_CUTSCENE   ; 1
+	const VBLANK_SOUND_ONLY ; 2
+	const VBLANK_UNUSED_3   ; 3
+	const VBLANK_SERIAL     ; 4
+	const VBLANK_CREDITS    ; 5
+	const VBLANK_UNUSED_6   ; 6
+	const VBLANK_UNUSED_7   ; 7
+DEF NUM_VBLANK_HANDLERS EQU const_value
