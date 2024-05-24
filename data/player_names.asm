@@ -1,5 +1,5 @@
 NameMenuHeader:
-	db STATICMENU_NO_TOP_SPACING ; flags
+	db MENU_BACKUP_TILES ; flags
 	menu_coords 0, 0, 10, TEXTBOX_Y - 1
 	dw .Names
 	db 1 ; default option
