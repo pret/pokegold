@@ -1925,7 +1925,7 @@ ApplyMovementToFollower:
 	ret z
 	cp movement_step_end
 	ret z
-	cp movement_step_4b
+	cp movement_step_stop
 	ret z
 	cp movement_step_bump
 	ret z
