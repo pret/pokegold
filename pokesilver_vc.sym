@@ -1497,10 +1497,10 @@
 01:514a Movement_fish_cast_rod
 01:5157 Movement_step_loop
 01:5160 Movement_step_end
-01:517a Movement_48
+01:517a Movement_step_wait_end
 01:519c Movement_remove_object
 01:51a9 Movement_remove_object.not_leading
-01:51af Movement_4b
+01:51af Movement_step_stop
 01:51c1 Movement_step_sleep_1
 01:51c5 Movement_step_sleep_2
 01:51c9 Movement_step_sleep_3
@@ -13310,7 +13310,7 @@
 25:687e CheckTimeEvents.do_daily
 25:6897 CheckTimeEvents.nothing
 25:6899 CheckTimeEvents.end_bug_contest
-25:68a3 CheckTimeEvents.unused
+25:68a3 CheckTimeEvents.hatch
 25:68a7 OWPlayerInput
 25:68c0 OWPlayerInput.NoAction
 25:68c2 OWPlayerInput.Action
