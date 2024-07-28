@@ -65,7 +65,7 @@ AIChooseMove:
 	ld hl, TrainerClassAttributes + TRNATTR_AI_MOVE_WEIGHTS
 	ld a, [wTrainerClass]
 	dec a
-	ld bc, 7 ; Trainer2AI - Trainer1AI
+	ld bc, NUM_TRAINER_ATTRIBUTES
 	call AddNTimes
 	lb bc, CHECK_FLAG, 0
 	push bc
