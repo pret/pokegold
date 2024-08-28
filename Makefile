@@ -198,13 +198,13 @@ include gfx/lz.mk
 
 ### Misc file-specific graphics rules
 
-gfx/pokemon/%/front.2bpp: rgbgfx += -Z -c embedded
-gfx/pokemon/%/front_gold.2bpp: rgbgfx += -Z -c embedded
-gfx/pokemon/%/front_silver.2bpp: rgbgfx += -Z -c embedded
+gfx/pokemon/%/front.2bpp: rgbgfx += --columns --colors embedded
+gfx/pokemon/%/front_gold.2bpp: rgbgfx += --columns --colors embedded
+gfx/pokemon/%/front_silver.2bpp: rgbgfx += --columns --colors embedded
 
-gfx/pokemon/%/back.2bpp: rgbgfx += -Z -c embedded
-gfx/pokemon/%/back_gold.2bpp: rgbgfx += -Z -c embedded
-gfx/pokemon/%/back_silver.2bpp: rgbgfx += -Z -c embedded
+gfx/pokemon/%/back.2bpp: rgbgfx += --columns --colors embedded
+gfx/pokemon/%/back_gold.2bpp: rgbgfx += --columns --colors embedded
+gfx/pokemon/%/back_silver.2bpp: rgbgfx += --columns --colors embedded
 
 gfx/pokemon/%/back_gold.2bpp: gfx/pokemon/%/back.png
 	$(RGBGFX) $(rgbgfx) -o $@ $<
@@ -216,15 +216,15 @@ gfx/pokemon/%/back_silver.2bpp: gfx/pokemon/%/back.png
 	$(if $(tools/gfx),\
 		tools/gfx $(tools/gfx) -o $@ $@)
 
-gfx/trainers/%.2bpp: rgbgfx += -Z -c embedded
+gfx/trainers/%.2bpp: rgbgfx += --columns --colors embedded
 
 gfx/intro/fire.2bpp: tools/gfx += --remove-whitespace
 gfx/intro/fire1.2bpp: gfx/intro/charizard1.2bpp gfx/intro/charizard2_top.2bpp gfx/intro/space.2bpp ; cat $^ > $@
 gfx/intro/fire2.2bpp: gfx/intro/charizard2_bottom.2bpp gfx/intro/charizard3.2bpp ; cat $^ > $@
 gfx/intro/fire3.2bpp: gfx/intro/fire.2bpp gfx/intro/unused_blastoise_venusaur.2bpp ; cat $^ > $@
 
-gfx/new_game/shrink1.2bpp: rgbgfx += -Z
-gfx/new_game/shrink2.2bpp: rgbgfx += -Z
+gfx/new_game/shrink1.2bpp: rgbgfx += --columns
+gfx/new_game/shrink2.2bpp: rgbgfx += --columns
 
 gfx/mail/dragonite.1bpp: tools/gfx += --remove-whitespace
 gfx/mail/large_note.1bpp: tools/gfx += --remove-whitespace
@@ -234,10 +234,10 @@ gfx/mail/litebluemail_border.1bpp: tools/gfx += --remove-whitespace
 
 gfx/pokedex/pokedex.2bpp: tools/gfx += --trim-whitespace
 gfx/pokedex/pokedex_sgb.2bpp: tools/gfx += --trim-whitespace
-gfx/pokedex/question_mark.2bpp: rgbgfx += -Z
+gfx/pokedex/question_mark.2bpp: rgbgfx += --columns
 gfx/pokedex/slowpoke.2bpp: tools/gfx += --trim-whitespace
 
-gfx/pokegear/pokegear.2bpp: rgbgfx += -x2
+gfx/pokegear/pokegear.2bpp: rgbgfx += --trim-end 2
 gfx/pokegear/pokegear_sprites.2bpp: tools/gfx += --trim-whitespace
 
 gfx/mystery_gift/mystery_gift.2bpp: tools/gfx += --remove-whitespace
@@ -278,8 +278,8 @@ gfx/battle_anims/rocks.2bpp: tools/gfx += --remove-whitespace
 gfx/battle_anims/skyattack.2bpp: tools/gfx += --remove-whitespace
 gfx/battle_anims/status.2bpp: tools/gfx += --remove-whitespace
 
-gfx/player/chris.2bpp: rgbgfx += -Z
-gfx/player/chris_back.2bpp: rgbgfx += -Z
+gfx/player/chris.2bpp: rgbgfx += --columns
+gfx/player/chris_back.2bpp: rgbgfx += --columns
 
 gfx/trainer_card/leaders.2bpp: tools/gfx += --trim-whitespace
 
@@ -287,7 +287,7 @@ gfx/overworld/chris_fish.2bpp: tools/gfx += --trim-whitespace
 
 gfx/sprites/big_onix.2bpp: tools/gfx += --remove-whitespace --remove-xflip
 
-gfx/battle/dude.2bpp: rgbgfx += -Z
+gfx/battle/dude.2bpp: rgbgfx += --columns
 
 gfx/font/unused_bold_font.1bpp: tools/gfx += --trim-whitespace
 
@@ -305,12 +305,12 @@ gfx/sgb/silver_border.sgb.tilemap: gfx/sgb/silver_border.bin ; tr < $< -d '\000'
 		tools/gfx $(tools/gfx) -o $@ $@)
 
 %.1bpp: %.png
-	$(RGBGFX) $(rgbgfx) -d1 -o $@ $<
+	$(RGBGFX) $(rgbgfx) --depth 1 -o $@ $<
 	$(if $(tools/gfx),\
-		tools/gfx $(tools/gfx) -d1 -o $@ $@)
+		tools/gfx $(tools/gfx) --depth 1 -o $@ $@)
 
 %.gbcpal: %.png
-	$(RGBGFX) -c embedded -p $@ $<
+	$(RGBGFX) --colors embedded -p $@ $<
 
 %.dimensions: %.png
 	tools/png_dimensions $< $@
