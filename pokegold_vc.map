@@ -30725,7 +30725,6 @@ SRAM bank #0:
 	         $a600 = sPartyMon1MailMessage
 	         $a620 = sPartyMon1MailMessageEnd
 	         $a621 = sPartyMon1MailAuthor
-	         $a629 = sPartyMon1MailNationality
 	         $a62b = sPartyMon1MailAuthorID
 	         $a62d = sPartyMon1MailSpecies
 	         $a62e = sPartyMon1MailType
@@ -30734,7 +30733,6 @@ SRAM bank #0:
 	         $a62f = sPartyMon2Mail
 	         $a64f = sPartyMon2MailMessageEnd
 	         $a650 = sPartyMon2MailAuthor
-	         $a658 = sPartyMon2MailNationality
 	         $a65a = sPartyMon2MailAuthorID
 	         $a65c = sPartyMon2MailSpecies
 	         $a65d = sPartyMon2MailType
@@ -30743,7 +30741,6 @@ SRAM bank #0:
 	         $a65e = sPartyMon3Mail
 	         $a67e = sPartyMon3MailMessageEnd
 	         $a67f = sPartyMon3MailAuthor
-	         $a687 = sPartyMon3MailNationality
 	         $a689 = sPartyMon3MailAuthorID
 	         $a68b = sPartyMon3MailSpecies
 	         $a68c = sPartyMon3MailType
@@ -30752,7 +30749,6 @@ SRAM bank #0:
 	         $a68d = sPartyMon4Mail
 	         $a6ad = sPartyMon4MailMessageEnd
 	         $a6ae = sPartyMon4MailAuthor
-	         $a6b6 = sPartyMon4MailNationality
 	         $a6b8 = sPartyMon4MailAuthorID
 	         $a6ba = sPartyMon4MailSpecies
 	         $a6bb = sPartyMon4MailType
@@ -30761,7 +30757,6 @@ SRAM bank #0:
 	         $a6bc = sPartyMon5Mail
 	         $a6dc = sPartyMon5MailMessageEnd
 	         $a6dd = sPartyMon5MailAuthor
-	         $a6e5 = sPartyMon5MailNationality
 	         $a6e7 = sPartyMon5MailAuthorID
 	         $a6e9 = sPartyMon5MailSpecies
 	         $a6ea = sPartyMon5MailType
@@ -30770,7 +30765,6 @@ SRAM bank #0:
 	         $a6eb = sPartyMon6Mail
 	         $a70b = sPartyMon6MailMessageEnd
 	         $a70c = sPartyMon6MailAuthor
-	         $a714 = sPartyMon6MailNationality
 	         $a716 = sPartyMon6MailAuthorID
 	         $a718 = sPartyMon6MailSpecies
 	         $a719 = sPartyMon6MailType
@@ -30780,7 +30774,6 @@ SRAM bank #0:
 	         $a71a = sPartyMon1MailBackupMessage
 	         $a73a = sPartyMon1MailBackupMessageEnd
 	         $a73b = sPartyMon1MailBackupAuthor
-	         $a743 = sPartyMon1MailBackupNationality
 	         $a745 = sPartyMon1MailBackupAuthorID
 	         $a747 = sPartyMon1MailBackupSpecies
 	         $a748 = sPartyMon1MailBackupType
@@ -30789,7 +30782,6 @@ SRAM bank #0:
 	         $a749 = sPartyMon1MailBackupEnd
 	         $a769 = sPartyMon2MailBackupMessageEnd
 	         $a76a = sPartyMon2MailBackupAuthor
-	         $a772 = sPartyMon2MailBackupNationality
 	         $a774 = sPartyMon2MailBackupAuthorID
 	         $a776 = sPartyMon2MailBackupSpecies
 	         $a777 = sPartyMon2MailBackupType
@@ -30798,7 +30790,6 @@ SRAM bank #0:
 	         $a778 = sPartyMon2MailBackupEnd
 	         $a798 = sPartyMon3MailBackupMessageEnd
 	         $a799 = sPartyMon3MailBackupAuthor
-	         $a7a1 = sPartyMon3MailBackupNationality
 	         $a7a3 = sPartyMon3MailBackupAuthorID
 	         $a7a5 = sPartyMon3MailBackupSpecies
 	         $a7a6 = sPartyMon3MailBackupType
@@ -30807,7 +30798,6 @@ SRAM bank #0:
 	         $a7a7 = sPartyMon4MailBackupMessage
 	         $a7c7 = sPartyMon4MailBackupMessageEnd
 	         $a7c8 = sPartyMon4MailBackupAuthor
-	         $a7d0 = sPartyMon4MailBackupNationality
 	         $a7d2 = sPartyMon4MailBackupAuthorID
 	         $a7d4 = sPartyMon4MailBackupSpecies
 	         $a7d5 = sPartyMon4MailBackupType
@@ -30816,7 +30806,6 @@ SRAM bank #0:
 	         $a7d6 = sPartyMon5MailBackup
 	         $a7f6 = sPartyMon5MailBackupMessageEnd
 	         $a7f7 = sPartyMon5MailBackupAuthor
-	         $a7ff = sPartyMon5MailBackupNationality
 	         $a801 = sPartyMon5MailBackupAuthorID
 	         $a803 = sPartyMon5MailBackupSpecies
 	         $a804 = sPartyMon5MailBackupType
@@ -30825,7 +30814,6 @@ SRAM bank #0:
 	         $a805 = sPartyMon5MailBackupEnd
 	         $a825 = sPartyMon6MailBackupMessageEnd
 	         $a826 = sPartyMon6MailBackupAuthor
-	         $a82e = sPartyMon6MailBackupNationality
 	         $a830 = sPartyMon6MailBackupAuthorID
 	         $a832 = sPartyMon6MailBackupSpecies
 	         $a833 = sPartyMon6MailBackupType
@@ -30836,7 +30824,6 @@ SRAM bank #0:
 	         $a835 = sMailbox1Message
 	         $a855 = sMailbox1MessageEnd
 	         $a856 = sMailbox1Author
-	         $a85e = sMailbox1Nationality
 	         $a860 = sMailbox1AuthorID
 	         $a862 = sMailbox1Species
 	         $a863 = sMailbox1Type
@@ -30845,7 +30832,6 @@ SRAM bank #0:
 	         $a864 = sMailbox2
 	         $a884 = sMailbox2MessageEnd
 	         $a885 = sMailbox2Author
-	         $a88d = sMailbox2Nationality
 	         $a88f = sMailbox2AuthorID
 	         $a891 = sMailbox2Species
 	         $a892 = sMailbox2Type
@@ -30854,7 +30840,6 @@ SRAM bank #0:
 	         $a893 = sMailbox3Message
 	         $a8b3 = sMailbox3MessageEnd
 	         $a8b4 = sMailbox3Author
-	         $a8bc = sMailbox3Nationality
 	         $a8be = sMailbox3AuthorID
 	         $a8c0 = sMailbox3Species
 	         $a8c1 = sMailbox3Type
@@ -30863,7 +30848,6 @@ SRAM bank #0:
 	         $a8c2 = sMailbox4
 	         $a8e2 = sMailbox4MessageEnd
 	         $a8e3 = sMailbox4Author
-	         $a8eb = sMailbox4Nationality
 	         $a8ed = sMailbox4AuthorID
 	         $a8ef = sMailbox4Species
 	         $a8f0 = sMailbox4Type
@@ -30872,7 +30856,6 @@ SRAM bank #0:
 	         $a8f1 = sMailbox5
 	         $a911 = sMailbox5MessageEnd
 	         $a912 = sMailbox5Author
-	         $a91a = sMailbox5Nationality
 	         $a91c = sMailbox5AuthorID
 	         $a91e = sMailbox5Species
 	         $a91f = sMailbox5Type
@@ -30881,7 +30864,6 @@ SRAM bank #0:
 	         $a920 = sMailbox6Message
 	         $a940 = sMailbox6MessageEnd
 	         $a941 = sMailbox6Author
-	         $a949 = sMailbox6Nationality
 	         $a94b = sMailbox6AuthorID
 	         $a94d = sMailbox6Species
 	         $a94e = sMailbox6Type
@@ -30890,7 +30872,6 @@ SRAM bank #0:
 	         $a94f = sMailbox7
 	         $a96f = sMailbox7MessageEnd
 	         $a970 = sMailbox7Author
-	         $a978 = sMailbox7Nationality
 	         $a97a = sMailbox7AuthorID
 	         $a97c = sMailbox7Species
 	         $a97d = sMailbox7Type
@@ -30899,7 +30880,6 @@ SRAM bank #0:
 	         $a97e = sMailbox8Message
 	         $a99e = sMailbox8MessageEnd
 	         $a99f = sMailbox8Author
-	         $a9a7 = sMailbox8Nationality
 	         $a9a9 = sMailbox8AuthorID
 	         $a9ab = sMailbox8Species
 	         $a9ac = sMailbox8Type
@@ -30908,7 +30888,6 @@ SRAM bank #0:
 	         $a9ad = sMailbox9Message
 	         $a9cd = sMailbox9MessageEnd
 	         $a9ce = sMailbox9Author
-	         $a9d6 = sMailbox9Nationality
 	         $a9d8 = sMailbox9AuthorID
 	         $a9da = sMailbox9Species
 	         $a9db = sMailbox9Type
@@ -30917,7 +30896,6 @@ SRAM bank #0:
 	         $a9dc = sMailbox9End
 	         $a9fc = sMailbox10MessageEnd
 	         $a9fd = sMailbox10Author
-	         $aa05 = sMailbox10Nationality
 	         $aa07 = sMailbox10AuthorID
 	         $aa09 = sMailbox10Species
 	         $aa0a = sMailbox10Type
@@ -30928,7 +30906,6 @@ SRAM bank #0:
 	         $aa0c = sMailbox1BackupMessage
 	         $aa2c = sMailbox1BackupMessageEnd
 	         $aa2d = sMailbox1BackupAuthor
-	         $aa35 = sMailbox1BackupNationality
 	         $aa37 = sMailbox1BackupAuthorID
 	         $aa39 = sMailbox1BackupSpecies
 	         $aa3a = sMailbox1BackupType
@@ -30937,7 +30914,6 @@ SRAM bank #0:
 	         $aa3b = sMailbox1BackupEnd
 	         $aa5b = sMailbox2BackupMessageEnd
 	         $aa5c = sMailbox2BackupAuthor
-	         $aa64 = sMailbox2BackupNationality
 	         $aa66 = sMailbox2BackupAuthorID
 	         $aa68 = sMailbox2BackupSpecies
 	         $aa69 = sMailbox2BackupType
@@ -30946,7 +30922,6 @@ SRAM bank #0:
 	         $aa6a = sMailbox3Backup
 	         $aa8a = sMailbox3BackupMessageEnd
 	         $aa8b = sMailbox3BackupAuthor
-	         $aa93 = sMailbox3BackupNationality
 	         $aa95 = sMailbox3BackupAuthorID
 	         $aa97 = sMailbox3BackupSpecies
 	         $aa98 = sMailbox3BackupType
@@ -30955,7 +30930,6 @@ SRAM bank #0:
 	         $aa99 = sMailbox4BackupMessage
 	         $aab9 = sMailbox4BackupMessageEnd
 	         $aaba = sMailbox4BackupAuthor
-	         $aac2 = sMailbox4BackupNationality
 	         $aac4 = sMailbox4BackupAuthorID
 	         $aac6 = sMailbox4BackupSpecies
 	         $aac7 = sMailbox4BackupType
@@ -30964,7 +30938,6 @@ SRAM bank #0:
 	         $aac8 = sMailbox5Backup
 	         $aae8 = sMailbox5BackupMessageEnd
 	         $aae9 = sMailbox5BackupAuthor
-	         $aaf1 = sMailbox5BackupNationality
 	         $aaf3 = sMailbox5BackupAuthorID
 	         $aaf5 = sMailbox5BackupSpecies
 	         $aaf6 = sMailbox5BackupType
@@ -30973,7 +30946,6 @@ SRAM bank #0:
 	         $aaf7 = sMailbox6Backup
 	         $ab17 = sMailbox6BackupMessageEnd
 	         $ab18 = sMailbox6BackupAuthor
-	         $ab20 = sMailbox6BackupNationality
 	         $ab22 = sMailbox6BackupAuthorID
 	         $ab24 = sMailbox6BackupSpecies
 	         $ab25 = sMailbox6BackupType
@@ -30982,7 +30954,6 @@ SRAM bank #0:
 	         $ab26 = sMailbox7BackupMessage
 	         $ab46 = sMailbox7BackupMessageEnd
 	         $ab47 = sMailbox7BackupAuthor
-	         $ab4f = sMailbox7BackupNationality
 	         $ab51 = sMailbox7BackupAuthorID
 	         $ab53 = sMailbox7BackupSpecies
 	         $ab54 = sMailbox7BackupType
@@ -30991,7 +30962,6 @@ SRAM bank #0:
 	         $ab55 = sMailbox8Backup
 	         $ab75 = sMailbox8BackupMessageEnd
 	         $ab76 = sMailbox8BackupAuthor
-	         $ab7e = sMailbox8BackupNationality
 	         $ab80 = sMailbox8BackupAuthorID
 	         $ab82 = sMailbox8BackupSpecies
 	         $ab83 = sMailbox8BackupType
@@ -31000,7 +30970,6 @@ SRAM bank #0:
 	         $ab84 = sMailbox9BackupMessage
 	         $aba4 = sMailbox9BackupMessageEnd
 	         $aba5 = sMailbox9BackupAuthor
-	         $abad = sMailbox9BackupNationality
 	         $abaf = sMailbox9BackupAuthorID
 	         $abb1 = sMailbox9BackupSpecies
 	         $abb2 = sMailbox9BackupType
@@ -31009,7 +30978,6 @@ SRAM bank #0:
 	         $abb3 = sMailbox10Backup
 	         $abd3 = sMailbox10BackupMessageEnd
 	         $abd4 = sMailbox10BackupAuthor
-	         $abdc = sMailbox10BackupNationality
 	         $abde = sMailbox10BackupAuthorID
 	         $abe0 = sMailbox10BackupSpecies
 	         $abe1 = sMailbox10BackupType
@@ -37128,9 +37096,9 @@ SRAM bank #3:
 	         $a9d3 = sBox10Mon9Unused1
 	         $a9d4 = sBox10Mon9Unused2
 	         $a9d5 = sBox10Mon9Level
-	         $a9d6 = sBox10Mon10Species
-	         $a9d6 = sBox10Mon10
 	         $a9d6 = sBox10Mon9BoxEnd
+	         $a9d6 = sBox10Mon10
+	         $a9d6 = sBox10Mon10Species
 	         $a9d7 = sBox10Mon10Item
 	         $a9d8 = sBox10Mon10Moves
 	         $a9dc = sBox10Mon10ID
@@ -37148,8 +37116,8 @@ SRAM bank #3:
 	         $a9f3 = sBox10Mon10Unused1
 	         $a9f4 = sBox10Mon10Unused2
 	         $a9f5 = sBox10Mon10Level
-	         $a9f6 = sBox10Mon11Species
 	         $a9f6 = sBox10Mon10BoxEnd
+	         $a9f6 = sBox10Mon11Species
 	         $a9f6 = sBox10Mon11
 	         $a9f7 = sBox10Mon11Item
 	         $a9f8 = sBox10Mon11Moves
@@ -41307,6 +41275,7 @@ WRAM0 bank #0:
 	         $ceeb = wBetaTitleSequenceOpeningType
 	         $ceec = wDefaultSpawnpoint
 	         $ceed = wMagnetTrainDirection
+	         $ceed = wCreditsPos
 	         $ceed = wPrevPartyLevel
 	         $ceed = wEarthquakeMovementDataBuffer
 	         $ceed = wBugContestResults
@@ -41318,7 +41287,6 @@ WRAM0 bank #0:
 	         $ceed = wUnownPuzzleCornerTile
 	         $ceed = wNumOwnedDecoCategories
 	         $ceed = wMovementBufferCount
-	         $ceed = wCreditsPos
 	         $ceed = wPhoneScriptBank
 	         $ceed = wSwitchItemBuffer
 	         $ceed = wTempMail
@@ -41416,7 +41384,6 @@ WRAM0 bank #0:
 	         $cf12 = wBufferMonDefExp
 	         $cf14 = wBufferMonSpdExp
 	         $cf16 = wBufferMonSpcExp
-	         $cf16 = wTempMailNationality
 	         $cf18 = wBufferMonDVs
 	         $cf18 = wTempMailAuthorID
 	         $cf1a = wTempMailSpecies
@@ -41705,10 +41672,10 @@ WRAMX bank #1:
 	         $d0d3 = wFinalCatchRate
 	         $d0d3 = wCurDecoration
 	         $d0d3 = wCurMapScriptBank
+	         $d0d3 = wSkipMovesBeforeLevelUp
 	         $d0d3 = wPPUpPPBuffer
 	         $d0d3 = wExpToNextLevel
 	         $d0d3 = wCurMailAuthorID
-	         $d0d3 = wSkipMovesBeforeLevelUp
 	         $d0d3 = wFieldMoveData
 	         $d0d3 = wHPBuffer1
 	         $d0d3 = wCurHPAnimMaxHP
@@ -41755,8 +41722,8 @@ WRAMX bank #1:
 	         $d0d5 = wBottomRightYCoord
 	         $d0d6 = wBottomRightXCoord
 	         $d0d6 = wRestartClockDay
-	         $d0d6 = wOtherDecoration
 	         $d0d6 = wEvolutionCanceled
+	         $d0d6 = wOtherDecoration
 	         $d0d7 = wCurHPAnimNewHP
 	         $d0d7 = wCutWhirlpoolReplacementBlock
 	         $d0d7 = wChangedDecorations

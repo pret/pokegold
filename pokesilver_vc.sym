@@ -30072,7 +30072,6 @@
 00:a600 sPartyMon1MailMessage
 00:a620 sPartyMon1MailMessageEnd
 00:a621 sPartyMon1MailAuthor
-00:a629 sPartyMon1MailNationality
 00:a62b sPartyMon1MailAuthorID
 00:a62d sPartyMon1MailSpecies
 00:a62e sPartyMon1MailType
@@ -30081,7 +30080,6 @@
 00:a62f sPartyMon2Mail
 00:a64f sPartyMon2MailMessageEnd
 00:a650 sPartyMon2MailAuthor
-00:a658 sPartyMon2MailNationality
 00:a65a sPartyMon2MailAuthorID
 00:a65c sPartyMon2MailSpecies
 00:a65d sPartyMon2MailType
@@ -30090,7 +30088,6 @@
 00:a65e sPartyMon3Mail
 00:a67e sPartyMon3MailMessageEnd
 00:a67f sPartyMon3MailAuthor
-00:a687 sPartyMon3MailNationality
 00:a689 sPartyMon3MailAuthorID
 00:a68b sPartyMon3MailSpecies
 00:a68c sPartyMon3MailType
@@ -30099,7 +30096,6 @@
 00:a68d sPartyMon4Mail
 00:a6ad sPartyMon4MailMessageEnd
 00:a6ae sPartyMon4MailAuthor
-00:a6b6 sPartyMon4MailNationality
 00:a6b8 sPartyMon4MailAuthorID
 00:a6ba sPartyMon4MailSpecies
 00:a6bb sPartyMon4MailType
@@ -30108,7 +30104,6 @@
 00:a6bc sPartyMon5Mail
 00:a6dc sPartyMon5MailMessageEnd
 00:a6dd sPartyMon5MailAuthor
-00:a6e5 sPartyMon5MailNationality
 00:a6e7 sPartyMon5MailAuthorID
 00:a6e9 sPartyMon5MailSpecies
 00:a6ea sPartyMon5MailType
@@ -30117,7 +30112,6 @@
 00:a6eb sPartyMon6Mail
 00:a70b sPartyMon6MailMessageEnd
 00:a70c sPartyMon6MailAuthor
-00:a714 sPartyMon6MailNationality
 00:a716 sPartyMon6MailAuthorID
 00:a718 sPartyMon6MailSpecies
 00:a719 sPartyMon6MailType
@@ -30127,7 +30121,6 @@
 00:a71a sPartyMon1MailBackupMessage
 00:a73a sPartyMon1MailBackupMessageEnd
 00:a73b sPartyMon1MailBackupAuthor
-00:a743 sPartyMon1MailBackupNationality
 00:a745 sPartyMon1MailBackupAuthorID
 00:a747 sPartyMon1MailBackupSpecies
 00:a748 sPartyMon1MailBackupType
@@ -30136,7 +30129,6 @@
 00:a749 sPartyMon1MailBackupEnd
 00:a769 sPartyMon2MailBackupMessageEnd
 00:a76a sPartyMon2MailBackupAuthor
-00:a772 sPartyMon2MailBackupNationality
 00:a774 sPartyMon2MailBackupAuthorID
 00:a776 sPartyMon2MailBackupSpecies
 00:a777 sPartyMon2MailBackupType
@@ -30145,7 +30137,6 @@
 00:a778 sPartyMon2MailBackupEnd
 00:a798 sPartyMon3MailBackupMessageEnd
 00:a799 sPartyMon3MailBackupAuthor
-00:a7a1 sPartyMon3MailBackupNationality
 00:a7a3 sPartyMon3MailBackupAuthorID
 00:a7a5 sPartyMon3MailBackupSpecies
 00:a7a6 sPartyMon3MailBackupType
@@ -30154,7 +30145,6 @@
 00:a7a7 sPartyMon4MailBackupMessage
 00:a7c7 sPartyMon4MailBackupMessageEnd
 00:a7c8 sPartyMon4MailBackupAuthor
-00:a7d0 sPartyMon4MailBackupNationality
 00:a7d2 sPartyMon4MailBackupAuthorID
 00:a7d4 sPartyMon4MailBackupSpecies
 00:a7d5 sPartyMon4MailBackupType
@@ -30163,7 +30153,6 @@
 00:a7d6 sPartyMon5MailBackup
 00:a7f6 sPartyMon5MailBackupMessageEnd
 00:a7f7 sPartyMon5MailBackupAuthor
-00:a7ff sPartyMon5MailBackupNationality
 00:a801 sPartyMon5MailBackupAuthorID
 00:a803 sPartyMon5MailBackupSpecies
 00:a804 sPartyMon5MailBackupType
@@ -30172,7 +30161,6 @@
 00:a805 sPartyMon5MailBackupEnd
 00:a825 sPartyMon6MailBackupMessageEnd
 00:a826 sPartyMon6MailBackupAuthor
-00:a82e sPartyMon6MailBackupNationality
 00:a830 sPartyMon6MailBackupAuthorID
 00:a832 sPartyMon6MailBackupSpecies
 00:a833 sPartyMon6MailBackupType
@@ -30183,7 +30171,6 @@
 00:a835 sMailbox1Message
 00:a855 sMailbox1MessageEnd
 00:a856 sMailbox1Author
-00:a85e sMailbox1Nationality
 00:a860 sMailbox1AuthorID
 00:a862 sMailbox1Species
 00:a863 sMailbox1Type
@@ -30192,7 +30179,6 @@
 00:a864 sMailbox2
 00:a884 sMailbox2MessageEnd
 00:a885 sMailbox2Author
-00:a88d sMailbox2Nationality
 00:a88f sMailbox2AuthorID
 00:a891 sMailbox2Species
 00:a892 sMailbox2Type
@@ -30201,7 +30187,6 @@
 00:a893 sMailbox3Message
 00:a8b3 sMailbox3MessageEnd
 00:a8b4 sMailbox3Author
-00:a8bc sMailbox3Nationality
 00:a8be sMailbox3AuthorID
 00:a8c0 sMailbox3Species
 00:a8c1 sMailbox3Type
@@ -30210,7 +30195,6 @@
 00:a8c2 sMailbox4
 00:a8e2 sMailbox4MessageEnd
 00:a8e3 sMailbox4Author
-00:a8eb sMailbox4Nationality
 00:a8ed sMailbox4AuthorID
 00:a8ef sMailbox4Species
 00:a8f0 sMailbox4Type
@@ -30219,7 +30203,6 @@
 00:a8f1 sMailbox5
 00:a911 sMailbox5MessageEnd
 00:a912 sMailbox5Author
-00:a91a sMailbox5Nationality
 00:a91c sMailbox5AuthorID
 00:a91e sMailbox5Species
 00:a91f sMailbox5Type
@@ -30228,7 +30211,6 @@
 00:a920 sMailbox6Message
 00:a940 sMailbox6MessageEnd
 00:a941 sMailbox6Author
-00:a949 sMailbox6Nationality
 00:a94b sMailbox6AuthorID
 00:a94d sMailbox6Species
 00:a94e sMailbox6Type
@@ -30237,7 +30219,6 @@
 00:a94f sMailbox7
 00:a96f sMailbox7MessageEnd
 00:a970 sMailbox7Author
-00:a978 sMailbox7Nationality
 00:a97a sMailbox7AuthorID
 00:a97c sMailbox7Species
 00:a97d sMailbox7Type
@@ -30246,7 +30227,6 @@
 00:a97e sMailbox8Message
 00:a99e sMailbox8MessageEnd
 00:a99f sMailbox8Author
-00:a9a7 sMailbox8Nationality
 00:a9a9 sMailbox8AuthorID
 00:a9ab sMailbox8Species
 00:a9ac sMailbox8Type
@@ -30255,7 +30235,6 @@
 00:a9ad sMailbox9Message
 00:a9cd sMailbox9MessageEnd
 00:a9ce sMailbox9Author
-00:a9d6 sMailbox9Nationality
 00:a9d8 sMailbox9AuthorID
 00:a9da sMailbox9Species
 00:a9db sMailbox9Type
@@ -30264,7 +30243,6 @@
 00:a9dc sMailbox9End
 00:a9fc sMailbox10MessageEnd
 00:a9fd sMailbox10Author
-00:aa05 sMailbox10Nationality
 00:aa07 sMailbox10AuthorID
 00:aa09 sMailbox10Species
 00:aa0a sMailbox10Type
@@ -30275,7 +30253,6 @@
 00:aa0c sMailbox1BackupMessage
 00:aa2c sMailbox1BackupMessageEnd
 00:aa2d sMailbox1BackupAuthor
-00:aa35 sMailbox1BackupNationality
 00:aa37 sMailbox1BackupAuthorID
 00:aa39 sMailbox1BackupSpecies
 00:aa3a sMailbox1BackupType
@@ -30284,7 +30261,6 @@
 00:aa3b sMailbox1BackupEnd
 00:aa5b sMailbox2BackupMessageEnd
 00:aa5c sMailbox2BackupAuthor
-00:aa64 sMailbox2BackupNationality
 00:aa66 sMailbox2BackupAuthorID
 00:aa68 sMailbox2BackupSpecies
 00:aa69 sMailbox2BackupType
@@ -30293,7 +30269,6 @@
 00:aa6a sMailbox3Backup
 00:aa8a sMailbox3BackupMessageEnd
 00:aa8b sMailbox3BackupAuthor
-00:aa93 sMailbox3BackupNationality
 00:aa95 sMailbox3BackupAuthorID
 00:aa97 sMailbox3BackupSpecies
 00:aa98 sMailbox3BackupType
@@ -30302,7 +30277,6 @@
 00:aa99 sMailbox4BackupMessage
 00:aab9 sMailbox4BackupMessageEnd
 00:aaba sMailbox4BackupAuthor
-00:aac2 sMailbox4BackupNationality
 00:aac4 sMailbox4BackupAuthorID
 00:aac6 sMailbox4BackupSpecies
 00:aac7 sMailbox4BackupType
@@ -30311,7 +30285,6 @@
 00:aac8 sMailbox5Backup
 00:aae8 sMailbox5BackupMessageEnd
 00:aae9 sMailbox5BackupAuthor
-00:aaf1 sMailbox5BackupNationality
 00:aaf3 sMailbox5BackupAuthorID
 00:aaf5 sMailbox5BackupSpecies
 00:aaf6 sMailbox5BackupType
@@ -30320,7 +30293,6 @@
 00:aaf7 sMailbox6Backup
 00:ab17 sMailbox6BackupMessageEnd
 00:ab18 sMailbox6BackupAuthor
-00:ab20 sMailbox6BackupNationality
 00:ab22 sMailbox6BackupAuthorID
 00:ab24 sMailbox6BackupSpecies
 00:ab25 sMailbox6BackupType
@@ -30329,7 +30301,6 @@
 00:ab26 sMailbox7BackupMessage
 00:ab46 sMailbox7BackupMessageEnd
 00:ab47 sMailbox7BackupAuthor
-00:ab4f sMailbox7BackupNationality
 00:ab51 sMailbox7BackupAuthorID
 00:ab53 sMailbox7BackupSpecies
 00:ab54 sMailbox7BackupType
@@ -30338,7 +30309,6 @@
 00:ab55 sMailbox8Backup
 00:ab75 sMailbox8BackupMessageEnd
 00:ab76 sMailbox8BackupAuthor
-00:ab7e sMailbox8BackupNationality
 00:ab80 sMailbox8BackupAuthorID
 00:ab82 sMailbox8BackupSpecies
 00:ab83 sMailbox8BackupType
@@ -30347,7 +30317,6 @@
 00:ab84 sMailbox9BackupMessage
 00:aba4 sMailbox9BackupMessageEnd
 00:aba5 sMailbox9BackupAuthor
-00:abad sMailbox9BackupNationality
 00:abaf sMailbox9BackupAuthorID
 00:abb1 sMailbox9BackupSpecies
 00:abb2 sMailbox9BackupType
@@ -30356,7 +30325,6 @@
 00:abb3 sMailbox10Backup
 00:abd3 sMailbox10BackupMessageEnd
 00:abd4 sMailbox10BackupAuthor
-00:abdc sMailbox10BackupNationality
 00:abde sMailbox10BackupAuthorID
 00:abe0 sMailbox10BackupSpecies
 00:abe1 sMailbox10BackupType
@@ -36453,9 +36421,9 @@
 03:a9d3 sBox10Mon9Unused1
 03:a9d4 sBox10Mon9Unused2
 03:a9d5 sBox10Mon9Level
-03:a9d6 sBox10Mon10Species
-03:a9d6 sBox10Mon10
 03:a9d6 sBox10Mon9BoxEnd
+03:a9d6 sBox10Mon10
+03:a9d6 sBox10Mon10Species
 03:a9d7 sBox10Mon10Item
 03:a9d8 sBox10Mon10Moves
 03:a9dc sBox10Mon10ID
@@ -36473,8 +36441,8 @@
 03:a9f3 sBox10Mon10Unused1
 03:a9f4 sBox10Mon10Unused2
 03:a9f5 sBox10Mon10Level
-03:a9f6 sBox10Mon11Species
 03:a9f6 sBox10Mon10BoxEnd
+03:a9f6 sBox10Mon11Species
 03:a9f6 sBox10Mon11
 03:a9f7 sBox10Mon11Item
 03:a9f8 sBox10Mon11Moves
@@ -40617,6 +40585,7 @@
 00:ceeb wBetaTitleSequenceOpeningType
 00:ceec wDefaultSpawnpoint
 00:ceed wMagnetTrainDirection
+00:ceed wCreditsPos
 00:ceed wPrevPartyLevel
 00:ceed wEarthquakeMovementDataBuffer
 00:ceed wBugContestResults
@@ -40628,7 +40597,6 @@
 00:ceed wUnownPuzzleCornerTile
 00:ceed wNumOwnedDecoCategories
 00:ceed wMovementBufferCount
-00:ceed wCreditsPos
 00:ceed wPhoneScriptBank
 00:ceed wSwitchItemBuffer
 00:ceed wTempMail
@@ -40726,7 +40694,6 @@
 00:cf12 wBufferMonDefExp
 00:cf14 wBufferMonSpdExp
 00:cf16 wBufferMonSpcExp
-00:cf16 wTempMailNationality
 00:cf18 wBufferMonDVs
 00:cf18 wTempMailAuthorID
 00:cf1a wTempMailSpecies
@@ -41011,10 +40978,10 @@
 01:d0d3 wFinalCatchRate
 01:d0d3 wCurDecoration
 01:d0d3 wCurMapScriptBank
+01:d0d3 wSkipMovesBeforeLevelUp
 01:d0d3 wPPUpPPBuffer
 01:d0d3 wExpToNextLevel
 01:d0d3 wCurMailAuthorID
-01:d0d3 wSkipMovesBeforeLevelUp
 01:d0d3 wFieldMoveData
 01:d0d3 wHPBuffer1
 01:d0d3 wCurHPAnimMaxHP
@@ -41061,8 +41028,8 @@
 01:d0d5 wBottomRightYCoord
 01:d0d6 wBottomRightXCoord
 01:d0d6 wRestartClockDay
-01:d0d6 wOtherDecoration
 01:d0d6 wEvolutionCanceled
+01:d0d6 wOtherDecoration
 01:d0d7 wCurHPAnimNewHP
 01:d0d7 wCutWhirlpoolReplacementBlock
 01:d0d7 wChangedDecorations
