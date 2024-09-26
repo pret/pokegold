@@ -182,8 +182,7 @@ ENDM
 MACRO mailmsg
 \1Message::     ds MAIL_MSG_LENGTH
 \1MessageEnd::  db
-\1Author::      ds PLAYER_NAME_LENGTH
-\1Nationality:: dw
+\1Author::      ds NAME_LENGTH - 1
 \1AuthorID::    dw
 \1Species::     db
 \1Type::        db
