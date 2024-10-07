@@ -152,8 +152,7 @@ MACRO channel_struct
 \1Pitch::             db ; 0:rest 1-c:note
 \1Octave::            db ; 7-0 (0 is highest)
 \1Transposition::     db ; raises existing octaves (to repeat phrases)
-\1NoteDuration::      db ; frames remaining for the current note
-\1Field16::           ds 1
+\1NoteDuration::      dw ; frames remaining for the current note
                       ds 1
 \1LoopCount::         db
 \1Tempo::             dw
