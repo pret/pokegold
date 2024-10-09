@@ -665,7 +665,7 @@ ENDM
 
 	ld hl, OBJECT_FLAGS2
 	add hl, bc
-	set 2, [hl]
+	set OBJ_FLAGS2_2, [hl]
 
 	ld a, [wWalkingDirection]
 	ld d, a
