@@ -2162,7 +2162,7 @@ RespawnPlayerAndOpponent:
 	ld a, PLAYER
 	call RespawnObject
 	ld a, [wBattleScriptFlags]
-	bit 7, a
+	bit BATTLESCRIPT_SCRIPTED_F, a
 	jr z, .skip_opponent
 	ldh a, [hLastTalked]
 	and a
