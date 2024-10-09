@@ -23,8 +23,8 @@ ReanchorBGMap_NoOAMUpdate::
 	ldh [hLCDCPointer], a
 	ldh [hBGMapMode], a
 	ld hl, wEnteredMapFromContinue
-	set 7, [hl]
-	res 2, [hl]
+	set ENTERED_MAP_FROM_CONTINUE_7, [hl]
+	res ENTERED_MAP_FROM_CONTINUE_2, [hl]
 	ld a, $90
 	ldh [hWY], a
 	call LoadOverworldTilemapAndAttrmapPals
