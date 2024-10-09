@@ -605,7 +605,7 @@ FlyFunction:
 	callasm FlyToAnim
 	special WaitSFX
 	special UpdatePlayerSprite
-	callasm _ClearSprites
+	callasm LoadWalkingSpritesGFX
 	end
 
 WaterfallFunction:

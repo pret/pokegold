@@ -36,7 +36,7 @@ BattleAnimRunScript:
 	jr nz, .hi_byte
 
 	ld a, [wOptions]
-	bit 7, a
+	bit BATTLE_SCENE, a
 	jr nz, .disabled
 
 	vc_hook Reduce_move_anim_flashing
@@ -1206,7 +1206,7 @@ PlayHitSound:
 
 .okay
 	ld a, [wTypeModifier]
-	and $7f
+	and EFFECTIVENESS_MASK
 	ret z
 
 	cp EFFECTIVE

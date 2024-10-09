@@ -7,7 +7,7 @@ Serial::
 	push hl
 
 	ld a, [wPrinterConnectionOpen]
-	bit 0, a
+	bit PRINTER_CONNECTION_OPEN, a
 	jr nz, .printer
 
 	ldh a, [hSerialConnectionStatus]
@@ -54,7 +54,7 @@ Serial::
 	ldh [rDIV], a
 .delay_loop
 	ldh a, [rDIV]
-	bit 7, a
+	bit 7, a ; wait until rDIV has incremented from 3 to $80 or more
 	jr nz, .delay_loop
 
 	ld a, (0 << rSC_ON) | (0 << rSC_CLOCK)

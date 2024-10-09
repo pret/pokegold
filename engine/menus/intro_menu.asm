@@ -327,7 +327,7 @@ ConfirmContinue:
 
 Continue_CheckRTC_RestartClock:
 	call CheckRTCStatus
-	and %10000000 ; Day count exceeded 16383
+	and RTC_RESET
 	jr z, .pass
 	farcall RestartClock
 	ld a, c
@@ -358,7 +358,7 @@ FinishContinueFunction:
 
 DisplaySaveInfoOnContinue:
 	call CheckRTCStatus
-	and %10000000
+	and RTC_RESET
 	jr z, .clock_ok
 	lb de, 4, 8
 	call DisplayContinueDataWithRTCError
@@ -1071,7 +1071,7 @@ ResetClock:
 	jp Init
 
 UpdateTitleTrailSprite:
-	; If bit 0 or 1 of [wTitleScreenTimer] is set, we don't need to be here.
+	; Only update every 4 seconds, when the low 2 bits of [wTitleScreenTimer] are 0.
 	ld a, [wTitleScreenTimer]
 	and %00000011
 	ret nz
@@ -1085,7 +1085,7 @@ IF DEF(_GOLD)
 	add hl, hl
 	ld de, .TitleTrailCoords
 	add hl, de
-	; If bit 2 of [wTitleScreenTimer] is set, get the second coords; else, get the first coords
+	; Every 8 seconds (i.e. every other update), get the second coords; else, get the first coords
 	ld a, [wTitleScreenTimer]
 	and %00000100
 	srl a

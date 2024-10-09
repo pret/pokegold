@@ -1090,7 +1090,7 @@ Script_reloadmapafterbattle:
 	jp ScriptJump
 
 .notblackedout
-	bit 0, d
+	bit BATTLESCRIPT_WILD_F, d
 	jr z, .was_wild
 	farcall MomTriesToBuySomething
 	jr .done
@@ -1299,7 +1299,7 @@ Script_sdefer:
 	call GetScriptByte
 	ld [wDeferredScriptAddr + 1], a
 	ld hl, wScriptFlags
-	set 3, [hl]
+	set RUN_DEFERRED_SCRIPT, [hl]
 	ret
 
 Script_checkscene:
@@ -2150,7 +2150,7 @@ Script_end:
 	ld a, SCRIPT_OFF
 	ld [wScriptMode], a
 	ld hl, wScriptFlags
-	res 0, [hl]
+	res UNUSED_SCRIPT_FLAG_0, [hl]
 	call StopScript
 	ret
 
@@ -2159,7 +2159,7 @@ Script_endcallback:
 	jr c, .dummy
 .dummy
 	ld hl, wScriptFlags
-	res 0, [hl]
+	res UNUSED_SCRIPT_FLAG_0, [hl]
 	call StopScript
 	ret
 
@@ -2200,7 +2200,7 @@ Script_endall:
 	ld a, SCRIPT_OFF
 	ld [wScriptMode], a
 	ld hl, wScriptFlags
-	res 0, [hl]
+	res UNUSED_SCRIPT_FLAG_0, [hl]
 	call StopScript
 	ret
 
