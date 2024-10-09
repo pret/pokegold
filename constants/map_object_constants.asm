@@ -65,14 +65,14 @@ DEF EMOTE_OBJECT  EQU 1 << EMOTE_OBJECT_F
 
 ; object_struct OBJECT_FLAGS2 bit flags
 	const_def
-	const LOW_PRIORITY_F  ; 0
-	const HIGH_PRIORITY_F ; 1
-	const OBJ_FLAGS2_2    ; 2
-	const OVERHEAD_F      ; 3
-	const USE_OBP1_F      ; 4
-	const FROZEN_F        ; 5
-	const OBJ_FLAGS2_6    ; 6
-	const OBJ_FLAGS2_7    ; 7
+	const LOW_PRIORITY_F   ; 0
+	const HIGH_PRIORITY_F  ; 1
+	const BOULDER_MOVING_F ; 2
+	const OVERHEAD_F       ; 3
+	const USE_OBP1_F       ; 4
+	const FROZEN_F         ; 5
+	const OFF_SCREEN_F     ; 6
+	const OBJ_FLAGS2_7     ; 7
 
 DEF LOW_PRIORITY  EQU 1 << LOW_PRIORITY_F
 DEF HIGH_PRIORITY EQU 1 << HIGH_PRIORITY_F

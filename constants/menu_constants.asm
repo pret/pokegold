@@ -1,11 +1,10 @@
 ; MenuHeader flags
 	const_def
 	shift_const MENU_RESTORE_TILES ; Will be set if MENU_BACKUP_TILES(_2) is set.
-	shift_const MENU_UNUSED_1
-	shift_const MENU_UNUSED_2
+	const_skip 2
 	shift_const MENU_NO_CLICK_SFX
 	shift_const MENU_SPRITE_ANIMS
-	shift_const MENU_UNUSED_3
+	shift_const MENU_UNUSED
 	shift_const MENU_BACKUP_TILES
 	shift_const MENU_BACKUP_TILES_2
 
@@ -25,8 +24,8 @@
 	const_def
 	shift_const SCROLLINGMENU_CALL_FUNCTION1_CANCEL
 	shift_const SCROLLINGMENU_CALL_FUNCTION3_NO_SWITCH
-	shift_const SCROLLINGMENU_ENABLE_LEFT
 	shift_const SCROLLINGMENU_ENABLE_RIGHT
+	shift_const SCROLLINGMENU_ENABLE_LEFT
 	shift_const SCROLLINGMENU_DISPLAY_ARROWS
 	shift_const SCROLLINGMENU_ENABLE_FUNCTION3
 	shift_const SCROLLINGMENU_ENABLE_START
@@ -36,6 +35,22 @@
 	const_def 1
 	const SCROLLINGMENU_ITEMS_NORMAL
 	const SCROLLINGMENU_ITEMS_QUANTITY
+
+; _2DMenu more flags
+	const_def
+	shift_const _2DMENU_EXIT_RIGHT
+	shift_const _2DMENU_EXIT_LEFT
+	shift_const _2DMENU_EXIT_UP
+	shift_const _2DMENU_EXIT_DOWN
+	shift_const _2DMENU_WRAP_LEFT_RIGHT
+	shift_const _2DMENU_WRAP_UP_DOWN
+	shift_const _2DMENU_ENABLE_SPRITE_ANIMS
+	shift_const _2DMENU_DISABLE_JOYPAD_FILTER
+
+; _2DMenu more flags 2
+	const_def
+	const_skip 7
+	shift_const _2DMENU_EXITING
 
 ; MonMenuOptions indexes (see data/mon_menu.asm)
 ; used by PokemonActionSubmenu (see engine/pokemon/mon_menu.asm)
