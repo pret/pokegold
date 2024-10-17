@@ -4,8 +4,9 @@ CC := gcc
 CFLAGS := -O3 -flto -std=c11 -Wall -Wextra -pedantic
 
 tools := \
-	lzcomp \
+	gbcpal \
 	gfx \
+	lzcomp \
 	make_patch \
 	png_dimensions \
 	scan_includes \
@@ -17,14 +18,9 @@ all: $(tools)
 clean:
 	$(RM) $(tools)
 
-gfx: common.h
-png_dimensions: common.h
-scan_includes: common.h
-stadium: common.h
-
 lzcomp: CFLAGS += -Wno-strict-overflow -Wno-sign-compare
 lzcomp: $(wildcard lz/*.c) $(wildcard lz/*.h)
 	$(CC) $(CFLAGS) -o $@ lz/*.c
 
-%: %.c
+%: %.c common.h
 	$(CC) $(CFLAGS) -o $@ $<

@@ -1,7 +1,7 @@
 SECTION "Egg Pic", ROMX
 
 EggPic::
-INCBIN "gfx/pokemon/egg/front.2bpp.lz"
+INCBIN "gfx/pokemon/egg/egg.2bpp.lz"
 
 
 SECTION "Title Screen", ROMX
