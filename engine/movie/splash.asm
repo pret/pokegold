@@ -1,3 +1,5 @@
+DEF SKIP_SPLASH_F EQU 6
+
 SplashScreen:
 ; Play the copyright screen and GameFreak Presents sequence.
 ; Return carry if user cancels animation by pressing a button.
@@ -37,7 +39,7 @@ SplashScreen:
 ; high bits of wJumptableIndex are recycled for some flags
 ; this was set if user canceled by pressing a button
 	ld a, [wJumptableIndex]
-	bit 6, a
+	bit SKIP_SPLASH_F, a
 	jr nz, .canceled
 
 ; clear carry flag from GameFreakPresents_PlayFrame
@@ -107,7 +109,7 @@ GameFreakPresentsFrame:
 .pressed_button
 ; high bits of wJumptableIndex are recycled for some flags
 	ld hl, wJumptableIndex
-	set 6, [hl]
+	set SKIP_SPLASH_F, [hl]
 
 .finish
 	callfar ClearSpriteAnims

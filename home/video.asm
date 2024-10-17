@@ -390,7 +390,7 @@ Video_DummyFunction:: ; unreferenced
 
 EnableSpriteDisplay:: ; unreferenced
 	ld hl, rLCDC
-	set 1, [hl]
+	set rLCDC_SPRITES_ENABLE, [hl]
 	ret
 
 FillBGMap0WithBlack::

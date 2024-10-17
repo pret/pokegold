@@ -36,10 +36,10 @@ CloseText::
 	call SafeUpdateSprites
 	ld a, $90
 	ldh [hWY], a
-	farcall _ClearSprites
+	farcall LoadWalkingSpritesGFX
 	call UpdatePlayerSprite
 	ld hl, wEnteredMapFromContinue
-	res 7, [hl]
+	res ENTERED_MAP_FROM_CONTINUE_7, [hl]
 	call ResetBGWindow
 	ret
 
