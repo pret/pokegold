@@ -35918,8 +35918,8 @@ SRAM bank #2:
 	         $bd31 = sBox7Mon18OT
 	         $bd3c = sBox7Mon19OT
 	         $bd47 = sBox7Mon20OT
-	         $bd52 = sBox7MonNicknames
 	         $bd52 = sBox7Mon1Nickname
+	         $bd52 = sBox7MonNicknames
 	         $bd5d = sBox7Mon2Nickname
 	         $bd68 = sBox7Mon3Nickname
 	         $bd73 = sBox7Mon4Nickname
@@ -40150,8 +40150,8 @@ WRAM0 bank #0:
 	         $c72f = wLinkPlayerPartyMon1PokerusStatus
 	         $c730 = wLinkPlayerPartyMon1Unused1
 	         $c730 = wTimeCapsulePartyMon1PP
-	         $c731 = wHallOfFamePokemonListMon4Species
 	         $c731 = wHallOfFamePokemonListMon3End
+	         $c731 = wHallOfFamePokemonListMon4Species
 	         $c731 = wLinkPlayerPartyMon1Unused2
 	         $c731 = wHallOfFamePokemonListMon4
 	         $c732 = wHallOfFamePokemonListMon4ID
@@ -41601,10 +41601,10 @@ WRAMX bank #1:
 	         $d0d3 = wFinalCatchRate
 	         $d0d3 = wCurDecoration
 	         $d0d3 = wCurMapScriptBank
+	         $d0d3 = wSkipMovesBeforeLevelUp
 	         $d0d3 = wPPUpPPBuffer
 	         $d0d3 = wExpToNextLevel
 	         $d0d3 = wCurMailAuthorID
-	         $d0d3 = wSkipMovesBeforeLevelUp
 	         $d0d3 = wFieldMoveData
 	         $d0d3 = wHPBuffer1
 	         $d0d3 = wCurHPAnimMaxHP

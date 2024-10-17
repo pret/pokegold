@@ -35320,8 +35320,8 @@
 02:bd31 sBox7Mon18OT
 02:bd3c sBox7Mon19OT
 02:bd47 sBox7Mon20OT
-02:bd52 sBox7MonNicknames
 02:bd52 sBox7Mon1Nickname
+02:bd52 sBox7MonNicknames
 02:bd5d sBox7Mon2Nickname
 02:bd68 sBox7Mon3Nickname
 02:bd73 sBox7Mon4Nickname
@@ -39533,8 +39533,8 @@
 00:c72f wLinkPlayerPartyMon1PokerusStatus
 00:c730 wLinkPlayerPartyMon1Unused1
 00:c730 wTimeCapsulePartyMon1PP
-00:c731 wHallOfFamePokemonListMon4Species
 00:c731 wHallOfFamePokemonListMon3End
+00:c731 wHallOfFamePokemonListMon4Species
 00:c731 wLinkPlayerPartyMon1Unused2
 00:c731 wHallOfFamePokemonListMon4
 00:c732 wHallOfFamePokemonListMon4ID
@@ -40586,7 +40586,6 @@
 00:ceeb wBetaTitleSequenceOpeningType
 00:ceec wDefaultSpawnpoint
 00:ceed wMagnetTrainDirection
-00:ceed wCreditsPos
 00:ceed wPrevPartyLevel
 00:ceed wEarthquakeMovementDataBuffer
 00:ceed wBugContestResults
@@ -40598,6 +40597,7 @@
 00:ceed wUnownPuzzleCornerTile
 00:ceed wNumOwnedDecoCategories
 00:ceed wMovementBufferCount
+00:ceed wCreditsPos
 00:ceed wPhoneScriptBank
 00:ceed wSwitchItemBuffer
 00:ceed wTempMail

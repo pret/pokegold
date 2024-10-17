@@ -35248,8 +35248,8 @@
 02:bd31 sBox7Mon18OT
 02:bd3c sBox7Mon19OT
 02:bd47 sBox7Mon20OT
-02:bd52 sBox7MonNicknames
 02:bd52 sBox7Mon1Nickname
+02:bd52 sBox7MonNicknames
 02:bd5d sBox7Mon2Nickname
 02:bd68 sBox7Mon3Nickname
 02:bd73 sBox7Mon4Nickname
@@ -39461,8 +39461,8 @@
 00:c72f wLinkPlayerPartyMon1PokerusStatus
 00:c730 wLinkPlayerPartyMon1Unused1
 00:c730 wTimeCapsulePartyMon1PP
-00:c731 wHallOfFamePokemonListMon4Species
 00:c731 wHallOfFamePokemonListMon3End
+00:c731 wHallOfFamePokemonListMon4Species
 00:c731 wLinkPlayerPartyMon1Unused2
 00:c731 wHallOfFamePokemonListMon4
 00:c732 wHallOfFamePokemonListMon4ID
@@ -40907,10 +40907,10 @@
 01:d0d3 wFinalCatchRate
 01:d0d3 wCurDecoration
 01:d0d3 wCurMapScriptBank
+01:d0d3 wSkipMovesBeforeLevelUp
 01:d0d3 wPPUpPPBuffer
 01:d0d3 wExpToNextLevel
 01:d0d3 wCurMailAuthorID
-01:d0d3 wSkipMovesBeforeLevelUp
 01:d0d3 wFieldMoveData
 01:d0d3 wHPBuffer1
 01:d0d3 wCurHPAnimMaxHP

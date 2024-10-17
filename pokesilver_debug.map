@@ -36083,8 +36083,8 @@ SRAM bank #2:
 	         $bd31 = sBox7Mon18OT
 	         $bd3c = sBox7Mon19OT
 	         $bd47 = sBox7Mon20OT
-	         $bd52 = sBox7MonNicknames
 	         $bd52 = sBox7Mon1Nickname
+	         $bd52 = sBox7MonNicknames
 	         $bd5d = sBox7Mon2Nickname
 	         $bd68 = sBox7Mon3Nickname
 	         $bd73 = sBox7Mon4Nickname
@@ -40347,8 +40347,8 @@ WRAM0 bank #0:
 	         $c72f = wLinkPlayerPartyMon1PokerusStatus
 	         $c730 = wLinkPlayerPartyMon1Unused1
 	         $c730 = wTimeCapsulePartyMon1PP
-	         $c731 = wHallOfFamePokemonListMon4Species
 	         $c731 = wHallOfFamePokemonListMon3End
+	         $c731 = wHallOfFamePokemonListMon4Species
 	         $c731 = wLinkPlayerPartyMon1Unused2
 	         $c731 = wHallOfFamePokemonListMon4
 	         $c732 = wHallOfFamePokemonListMon4ID
@@ -41401,7 +41401,6 @@ WRAM0 bank #0:
 	         $ceeb = wBetaTitleSequenceOpeningType
 	         $ceec = wDefaultSpawnpoint
 	         $ceed = wMagnetTrainDirection
-	         $ceed = wCreditsPos
 	         $ceed = wPrevPartyLevel
 	         $ceed = wEarthquakeMovementDataBuffer
 	         $ceed = wBugContestResults
@@ -41413,6 +41412,7 @@ WRAM0 bank #0:
 	         $ceed = wUnownPuzzleCornerTile
 	         $ceed = wNumOwnedDecoCategories
 	         $ceed = wMovementBufferCount
+	         $ceed = wCreditsPos
 	         $ceed = wPhoneScriptBank
 	         $ceed = wSwitchItemBuffer
 	         $ceed = wTempMail
