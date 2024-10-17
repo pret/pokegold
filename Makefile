@@ -196,27 +196,71 @@ include gfx/lz.mk
 	tools/lzcomp $(LZFLAGS) -- $< $@
 
 
+### Pokemon and trainer sprite rules
+
+define PIC
+$1/back.2bpp: rgbgfx += --columns
+$1/back.2bpp: $1/back.png $1/normal.gbcpal
+	$$(RGBGFX) $$(rgbgfx) --colors gbc:$$(word 2,$$^) -o $$@ $$<
+$1/front.2bpp: rgbgfx += --columns
+$1/front.2bpp: $1/front.png $1/normal.gbcpal
+	$$(RGBGFX) $$(rgbgfx) --colors gbc:$$(word 2,$$^) -o $$@ $$<
+$1/normal.gbcpal: $1/front.gbcpal $1/back.gbcpal
+	tools/gbcpal $$(tools/gbcpal) $$@ $$^
+endef
+$(foreach pic, $(wildcard gfx/pokemon/*/front.png),\
+	$(eval $(call PIC,$(pic:/front.png=))))
+
+define PIC_GS
+$1/back.2bpp: rgbgfx += --columns
+$1/back.2bpp: $1/back.png $1/normal.gbcpal
+	$$(RGBGFX) $$(rgbgfx) --colors gbc:$$(word 2,$$^) -o $$@ $$<
+$1/front_gold.2bpp: rgbgfx += --columns
+$1/front_gold.2bpp: $1/front_gold.png $1/normal.gbcpal
+	$$(RGBGFX) $$(rgbgfx) --colors gbc:$$(word 2,$$^) -o $$@ $$<
+$1/front_silver.2bpp: rgbgfx += --columns
+$1/front_silver.2bpp: $1/front_silver.png $1/normal.gbcpal
+	$$(RGBGFX) $$(rgbgfx) --colors gbc:$$(word 2,$$^) -o $$@ $$<
+$1/normal.gbcpal: $1/front_gold.gbcpal $1/front_silver.gbcpal $1/back.gbcpal
+	tools/gbcpal $$(tools/gbcpal) $$@ $$^
+endef
+$(foreach pic, $(wildcard gfx/pokemon/*/front_gold.png),\
+	$(eval $(call PIC_GS,$(pic:/front_gold.png=))))
+
+gfx/trainers/%.2bpp: rgbgfx += --columns
+gfx/trainers/%.2bpp: gfx/trainers/%.png gfx/trainers/%.gbcpal
+	$(RGBGFX) $(rgbgfx) --colors gbc:$(word 2,$^) -o $@ $<
+
+# A few back sprites have different compression settings for Gold and Silver
+gfx/pokemon/%/back_gold.2bpp: gfx/pokemon/%/back.2bpp ; cp -f $^ $@
+gfx/pokemon/%/back_silver.2bpp: gfx/pokemon/%/back.2bpp ; cp -f $^ $@
+
+# Egg does not have a back sprite, so it only uses egg.gbcpal
+gfx/pokemon/egg/egg.2bpp: gfx/pokemon/egg/egg.png gfx/pokemon/egg/egg.gbcpal
+gfx/pokemon/egg/egg.2bpp: rgbgfx += --columns --colors gbc:$(word 2,$^)
+
+# Unown letters share one normal.gbcpal
+unown_pngs := $(wildcard gfx/pokemon/unown_*/front.png) $(wildcard gfx/pokemon/unown_*/back.png)
+$(foreach png, $(unown_pngs),\
+	$(eval $(png:.png=.2bpp): $(png) gfx/pokemon/unown/normal.gbcpal))
+gfx/pokemon/unown_%/back.2bpp: rgbgfx += --colors gbc:$(word 2,$^)
+gfx/pokemon/unown_%/front.2bpp: rgbgfx += --colors gbc:$(word 2,$^)
+gfx/pokemon/unown/normal.gbcpal: $(subst .png,.gbcpal,$(unown_pngs))
+	tools/gbcpal $(tools/gbcpal) $@ $^
+
+
 ### Misc file-specific graphics rules
 
-gfx/pokemon/%/front.2bpp: rgbgfx += --columns --colors embedded
-gfx/pokemon/%/front_gold.2bpp: rgbgfx += --columns --colors embedded
-gfx/pokemon/%/front_silver.2bpp: rgbgfx += --columns --colors embedded
+gfx/pokemon/squirtle/normal.gbcpal: tools/gbcpal += --reverse
+gfx/pokemon/wartortle/normal.gbcpal: tools/gbcpal += --reverse
+gfx/pokemon/caterpie/normal.gbcpal: tools/gbcpal += --reverse
+gfx/pokemon/farfetch_d/normal.gbcpal: tools/gbcpal += --reverse
+gfx/pokemon/hitmonlee/normal.gbcpal: tools/gbcpal += --reverse
+gfx/pokemon/scyther/normal.gbcpal: tools/gbcpal += --reverse
+gfx/pokemon/bellossom/normal.gbcpal: tools/gbcpal += --reverse
+gfx/pokemon/porygon2/normal.gbcpal: tools/gbcpal += --reverse
 
-gfx/pokemon/%/back.2bpp: rgbgfx += --columns --colors embedded
-gfx/pokemon/%/back_gold.2bpp: rgbgfx += --columns --colors embedded
-gfx/pokemon/%/back_silver.2bpp: rgbgfx += --columns --colors embedded
-
-gfx/pokemon/%/back_gold.2bpp: gfx/pokemon/%/back.png
-	$(RGBGFX) $(rgbgfx) -o $@ $<
-	$(if $(tools/gfx),\
-		tools/gfx $(tools/gfx) -o $@ $@)
-
-gfx/pokemon/%/back_silver.2bpp: gfx/pokemon/%/back.png
-	$(RGBGFX) $(rgbgfx) -o $@ $<
-	$(if $(tools/gfx),\
-		tools/gfx $(tools/gfx) -o $@ $@)
-
-gfx/trainers/%.2bpp: rgbgfx += --columns --colors embedded
+gfx/trainers/swimmer_m.gbcpal: tools/gbcpal += --reverse
 
 gfx/intro/fire.2bpp: tools/gfx += --remove-whitespace
 gfx/intro/fire1.2bpp: gfx/intro/charizard1.2bpp gfx/intro/charizard2_top.2bpp gfx/intro/space.2bpp ; cat $^ > $@
@@ -302,15 +346,16 @@ gfx/sgb/silver_border.sgb.tilemap: gfx/sgb/silver_border.bin ; tr < $< -d '\000'
 %.2bpp: %.png
 	$(RGBGFX) $(rgbgfx) -o $@ $<
 	$(if $(tools/gfx),\
-		tools/gfx $(tools/gfx) -o $@ $@)
+		tools/gfx $(tools/gfx) -o $@ $@ || $$($(RM) $@ && false))
 
 %.1bpp: %.png
 	$(RGBGFX) $(rgbgfx) --depth 1 -o $@ $<
 	$(if $(tools/gfx),\
-		tools/gfx $(tools/gfx) --depth 1 -o $@ $@)
+		tools/gfx $(tools/gfx) --depth 1 -o $@ $@ || $$($(RM) $@ && false))
 
 %.gbcpal: %.png
-	$(RGBGFX) --colors embedded -p $@ $<
+	$(RGBGFX) -p $@ $<
+	tools/gbcpal $(tools/gbcpal) $@ $@ || $$($(RM) $@ && false)
 
 %.dimensions: %.png
 	tools/png_dimensions $< $@
