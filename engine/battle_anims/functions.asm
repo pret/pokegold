@@ -807,6 +807,9 @@ BattleAnimFunction_FireBlast:
 	ret
 
 BattleAnimFunction_RazorLeaf:
+; Object moves at an arc
+; Obj Param: Bit 6 defines offset from base frameset BATTLE_ANIM_FRAMESET_RAZOR_LEAF_2
+;            Rest defines arc radius
 	call BattleAnim_AnonJumptable
 .anon_dw
 	dw .zero
@@ -935,7 +938,7 @@ BattleAnimFunction_RazorLeaf:
 	call ReinitBattleAnimFrameset
 	ld hl, BATTLEANIMSTRUCT_OAMFLAGS
 	add hl, bc
-	res 5, [hl]
+	res OAM_X_FLIP, [hl]
 .four
 .five
 .six
@@ -995,7 +998,7 @@ BattleAnim_ScatterHorizontal:
 BattleAnimFunction_RockSmash:
 ; Object moves at an arc
 ; Obj Param: Bit 7 makes arc flip horizontally
-;            Bit 6 defines offset from base frameset FRAMESET_19
+;            Bit 6 defines offset from base frameset BATTLE_ANIM_FRAMESET_BIG_ROCK
 ;            Rest defines arc radius
 	call BattleAnim_AnonJumptable
 .anon_dw
@@ -1308,7 +1311,7 @@ BattleAnimFunction_WaterGun:
 	ld hl, BATTLEANIMSTRUCT_OAMFLAGS
 	add hl, bc
 	ld a, [hl]
-	and $1
+	and 1 << BATTLEANIMSTRUCT_OAMFLAGS_FIX_COORDS_F
 	ld [hl], a
 .two
 	ld hl, BATTLEANIMSTRUCT_YOFFSET
@@ -2026,7 +2029,7 @@ BattleAnimFunction_Kick:
 	inc [hl]
 	ld hl, BATTLEANIMSTRUCT_OAMFLAGS
 	add hl, bc
-	set 0, [hl]
+	set BATTLEANIMSTRUCT_OAMFLAGS_FIX_COORDS_F, [hl]
 	ld hl, BATTLEANIMSTRUCT_FIX_Y
 	add hl, bc
 	ld [hl], $90
