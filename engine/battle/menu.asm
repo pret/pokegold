@@ -69,7 +69,7 @@ SafariBattleMenuHeader:
 
 ContestBattleMenuHeader:
 	db MENU_BACKUP_TILES ; flags
-	menu_coords 2, 12, SCREEN_WIDTH - 1, SCREEN_HEIGHT - 1
+	menu_coords 0, 12, SCREEN_WIDTH - 1, SCREEN_HEIGHT - 1
 	dw .MenuData
 	db 1 ; default option
 
@@ -82,18 +82,12 @@ ContestBattleMenuHeader:
 
 .Text:
 	db "FIGHT@"
-	db "PARKBALL@"
+	db "PARKBALL×  @"
 	db "PKMN@"
 	db "RUN@"
 	
-.AmmountText:
-	db "×@"
-	
 .PrintParkBallsRemaining:
-	ld de, .AmmountText
-	hlcoord 16, 15
-	call PlaceString
-	hlcoord 17, 15
+	hlcoord 17, 14
 	ld de, wParkBallsRemaining
 	lb bc, PRINTNUM_LEADINGZEROS | 1, 2
 	call PrintNum
