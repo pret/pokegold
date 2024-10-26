@@ -34,7 +34,7 @@ DudeAutoInput_DownA:
 	db NO_INPUT, $fe
 	db NO_INPUT, $fe
 	db NO_INPUT, $fe
-	db D_DOWN,   $00
+	db D_RIGHT,   $00
 	db NO_INPUT, $fe
 	db NO_INPUT, $fe
 	db NO_INPUT, $fe
