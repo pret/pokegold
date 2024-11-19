@@ -1172,9 +1172,9 @@ Pokedex_DrawDexEntryScreenBG:
 .Number: ; unreferenced
 	db $5c, $5d, -1 ; No.
 .Height:
-	db "HT  ?", $5e, "??", $5f, -1 ; HT  ?'??"
+	db "HT   ???m", -1
 .Weight:
-	db "WT   ???lb", -1
+	db "WT   ???kg", -1
 .MenuItems:
 	db $3b, " PAGE AREA CRY PRNT", -1
 
