@@ -1,5 +1,5 @@
 	db "TINY MOUSE@" ; species name
-	dw 100, 40 ; height, weight
+	dw 3, 20 ; height, weight
 
 	db   "It is not yet"
 	next "skilled at storing"

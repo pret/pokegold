@@ -1,5 +1,5 @@
 	db "TURTLE@" ; species name
-	dw 303, 500 ; height, weight
+	dw 10, 225 ; height, weight
 
 	db   "It cleverly con-"
 	next "trols its furry"

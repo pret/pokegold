@@ -1,5 +1,5 @@
 	db "MOUSE@" ; species name
-	dw 303, 650 ; height, weight
+	dw 10, 295 ; height, weight
 
 	db   "If it digs at an"
 	next "incredible pace,"

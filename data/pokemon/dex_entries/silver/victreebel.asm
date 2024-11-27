@@ -1,5 +1,5 @@
 	db "FLYCATCHER@" ; species name
-	dw 507, 340 ; height, weight
+	dw 17, 155 ; height, weight
 
 	db   "This horrifying"
 	next "plant #MON at-"

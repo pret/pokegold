@@ -1,5 +1,5 @@
 	db "POISON PIN@" ; species name
-	dw 108, 200 ; height, weight
+	dw 5, 90 ; height, weight
 
 	db   "It raises its big"
 	next "ears to check its"

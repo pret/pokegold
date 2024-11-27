@@ -1,5 +1,5 @@
 	db "RIVER CRAB@" ; species name
-	dw 104, 140 ; height, weight
+	dw 4, 65 ; height, weight
 
 	db   "If it senses dan-"
 	next "ger approaching,"

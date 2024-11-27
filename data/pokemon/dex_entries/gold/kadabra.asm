@@ -1,5 +1,5 @@
 	db "PSI@" ; species name
-	dw 403, 1250 ; height, weight
+	dw 13, 565 ; height, weight
 
 	db   "It possesses"
 	next "strong spiritual"

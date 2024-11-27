@@ -1,5 +1,5 @@
 	db "ELECTRIC@" ; species name
-	dw 307, 660 ; height, weight
+	dw 11, 300 ; height, weight
 
 	db   "Its body constant-"
 	next "ly discharges"

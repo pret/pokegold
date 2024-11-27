@@ -1,5 +1,5 @@
 	db "ROYAL@" ; species name
-	dw 607, 1750 ; height, weight
+	dw 20, 795 ; height, weight
 
 	db   "It has incredible"
 	next "intellect and in-"

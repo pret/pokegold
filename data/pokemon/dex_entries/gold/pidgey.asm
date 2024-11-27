@@ -1,5 +1,5 @@
 	db "TINY BIRD@" ; species name
-	dw 100, 40 ; height, weight
+	dw 3, 18 ; height, weight
 
 	db   "It usually hides"
 	next "in tall grass. Be-"

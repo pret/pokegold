@@ -1,5 +1,5 @@
 	db "FREEZE@" ; species name
-	dw 507, 1220 ; height, weight
+	dw 17, 554 ; height, weight
 
 	db   "One of the legen-"
 	next "dary bird #MON,"

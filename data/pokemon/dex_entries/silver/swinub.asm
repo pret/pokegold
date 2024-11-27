@@ -1,5 +1,5 @@
 	db "PIG@" ; species name
-	dw 104, 140 ; height, weight
+	dw 4, 65 ; height, weight
 
 	db   "If it smells some-"
 	next "thing enticing, it"

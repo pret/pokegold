@@ -1,5 +1,5 @@
 	db "CORAL@" ; species name
-	dw 200, 110 ; height, weight
+	dw 6, 50 ; height, weight
 
 	db   "It continuously"
 	next "sheds and grows."

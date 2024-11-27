@@ -1,5 +1,5 @@
 	db "STARSHAPE@" ; species name
-	dw 207, 760 ; height, weight
+	dw 8, 345 ; height, weight
 
 	db   "At night, the cen-"
 	next "ter of its body"

@@ -1,5 +1,5 @@
 	db "SHELLFISH@" ; species name
-	dw 503, 1890 ; height, weight
+	dw 16, 855 ; height, weight
 
 	db   "It deliberately"
 	next "makes itself heavy"

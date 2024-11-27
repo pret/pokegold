@@ -1,5 +1,5 @@
 	db "DRILL@" ; species name
-	dw 407, 1370 ; height, weight
+	dw 14, 620 ; height, weight
 
 	db   "Its tail is thick"
 	next "and powerful. If"

@@ -1,5 +1,5 @@
 	db "WILD BULL@" ; species name
-	dw 407, 1950 ; height, weight
+	dw 14, 884 ; height, weight
 
 	db   "They fight each"
 	next "other by locking"

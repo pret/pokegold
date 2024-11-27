@@ -1,5 +1,5 @@
 	db "DUCK@" ; species name
-	dw 507, 1690 ; height, weight
+	dw 17, 766 ; height, weight
 
 	db   "It appears by"
 	next "waterways at dusk."

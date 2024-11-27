@@ -1,5 +1,5 @@
 	db "HERB@" ; species name
-	dw 511, 2220 ; height, weight
+	dw 18, 1005 ; height, weight
 
 	db   "The aroma that"
 	next "rises from its"

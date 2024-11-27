@@ -1,5 +1,5 @@
 	db "ROCK@" ; species name
-	dw 104, 440 ; height, weight
+	dw 4, 200 ; height, weight
 
 	db   "Most people may"
 	next "not notice, but"

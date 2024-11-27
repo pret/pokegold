@@ -1,5 +1,5 @@
 	db "VINE@" ; species name
-	dw 303, 770 ; height, weight
+	dw 10, 350 ; height, weight
 
 	db   "The vines that"
 	next "cloak its entire"

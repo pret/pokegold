@@ -1,5 +1,5 @@
 	db "HANDSTAND@" ; species name
-	dw 407, 1060 ; height, weight
+	dw 14, 480 ; height, weight
 
 	db   "It launches kicks"
 	next "while spinning. If"

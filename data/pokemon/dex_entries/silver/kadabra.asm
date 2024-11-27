@@ -1,5 +1,5 @@
 	db "PSI@" ; species name
-	dw 403, 1250 ; height, weight
+	dw 13, 565 ; height, weight
 
 	db   "If it uses its"
 	next "abilities, it"

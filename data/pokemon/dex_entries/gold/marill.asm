@@ -1,5 +1,5 @@
 	db "AQUAMOUSE@" ; species name
-	dw 104, 190 ; height, weight
+	dw 4, 85 ; height, weight
 
 	db   "The tip of its"
 	next "tail, which con-"

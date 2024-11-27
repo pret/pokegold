@@ -1,5 +1,5 @@
 	db "DARK@" ; species name
-	dw 407, 770 ; height, weight
+	dw 14, 350 ; height, weight
 
 	db   "If you are burned"
 	next "by the flames it"

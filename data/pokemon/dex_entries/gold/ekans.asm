@@ -1,5 +1,5 @@
 	db "SNAKE@" ; species name
-	dw 607, 150 ; height, weight
+	dw 20, 69 ; height, weight
 
 	db   "It can freely de-"
 	next "tach its jaw to"

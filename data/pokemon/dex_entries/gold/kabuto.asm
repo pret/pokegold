@@ -1,5 +1,5 @@
 	db "SHELLFISH@" ; species name
-	dw 108, 250 ; height, weight
+	dw 5, 115 ; height, weight
 
 	db   "On rare occasions,"
 	next "some have been"

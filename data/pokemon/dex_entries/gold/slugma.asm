@@ -1,5 +1,5 @@
 	db "LAVA@" ; species name
-	dw 204, 770 ; height, weight
+	dw 7, 350 ; height, weight
 
 	db   "It never sleeps."
 	next "It has to keep"

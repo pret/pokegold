@@ -1,5 +1,5 @@
 	db "EGG@" ; species name
-	dw 307, 760 ; height, weight
+	dw 11, 346 ; height, weight
 
 	db   "It walks carefully"
 	next "to prevent its"

@@ -1,5 +1,5 @@
 	db "HAPPINESS@" ; species name
-	dw 411, 1030 ; height, weight
+	dw 15, 468 ; height, weight
 
 	db   "Anyone who takes"
 	next "even one bite of"

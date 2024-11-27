@@ -1,5 +1,5 @@
 	db "SEED@" ; species name
-	dw 204, 150 ; height, weight
+	dw 7, 69 ; height, weight
 
 	db   "The seed on its"
 	next "back is filled"

@@ -1,5 +1,5 @@
 	db "FIVE STAR@" ; species name
-	dw 407, 780 ; height, weight
+	dw 14, 356 ; height, weight
 
 	db   "When the stars"
 	next "flicker in the"

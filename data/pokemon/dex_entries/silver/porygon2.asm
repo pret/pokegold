@@ -1,5 +1,5 @@
 	db "VIRTUAL@" ; species name
-	dw 200, 720 ; height, weight
+	dw 6, 325 ; height, weight
 
 	db   "Further research"
 	next "enhanced its abil-"

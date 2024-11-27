@@ -1,5 +1,5 @@
 	db "KICKING@" ; species name
-	dw 411, 1100 ; height, weight
+	dw 15, 498 ; height, weight
 
 	db   "If it starts kick-"
 	next "ing repeatedly,"

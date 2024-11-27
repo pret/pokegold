@@ -1,5 +1,5 @@
 	db "DOPEY@" ; species name
-	dw 311, 790 ; height, weight
+	dw 12, 360 ; height, weight
 
 	db   "A sweet sap leaks"
 	next "from its tail's"

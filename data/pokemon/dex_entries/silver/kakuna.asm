@@ -1,5 +1,5 @@
 	db "COCOON@" ; species name
-	dw 200, 220 ; height, weight
+	dw 6, 100 ; height, weight
 
 	db   "From this form,"
 	next "it will grow into"

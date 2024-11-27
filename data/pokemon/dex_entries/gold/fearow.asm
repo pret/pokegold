@@ -1,5 +1,5 @@
 	db "BEAK@" ; species name
-	dw 311, 840 ; height, weight
+	dw 12, 380 ; height, weight
 
 	db   "It shoots itself"
 	next "suddenly high into"

@@ -1,5 +1,5 @@
 	db "SCRATCHCAT@" ; species name
-	dw 104, 90 ; height, weight
+	dw 4, 42 ; height, weight
 
 	db   "It loves anything"
 	next "that shines. It"

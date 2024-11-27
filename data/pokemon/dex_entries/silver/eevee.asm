@@ -1,5 +1,5 @@
 	db "EVOLUTION@" ; species name
-	dw 100, 140 ; height, weight
+	dw 3, 65 ; height, weight
 
 	db   "Its irregularly"
 	next "configured DNA is"

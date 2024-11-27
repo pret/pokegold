@@ -1,5 +1,5 @@
 	db "MOONLIGHT@" ; species name
-	dw 303, 600 ; height, weight
+	dw 10, 270 ; height, weight
 
 	db   "When darkness"
 	next "falls, the rings"

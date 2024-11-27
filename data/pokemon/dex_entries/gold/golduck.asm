@@ -1,5 +1,5 @@
 	db "DUCK@" ; species name
-	dw 507, 1690 ; height, weight
+	dw 17, 766 ; height, weight
 
 	db   "When it swims at"
 	next "full speed using"

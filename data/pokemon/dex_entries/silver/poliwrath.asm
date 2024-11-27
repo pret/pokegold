@@ -1,5 +1,5 @@
 	db "TADPOLE@" ; species name
-	dw 403, 1190 ; height, weight
+	dw 13, 540 ; height, weight
 
 	db   "Although an ener-"
 	next "getic, skilled"

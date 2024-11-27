@@ -1,5 +1,5 @@
 	db "PSI@" ; species name
-	dw 411, 1060 ; height, weight
+	dw 15, 480 ; height, weight
 
 	db   "Closing both its"
 	next "eyes heightens all"

@@ -1,5 +1,5 @@
 	db "LIGHTNING@" ; species name
-	dw 207, 540 ; height, weight
+	dw 8, 245 ; height, weight
 
 	db   "It concentrates"
 	next "the weak electric"

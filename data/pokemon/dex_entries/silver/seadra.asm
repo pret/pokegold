@@ -1,5 +1,5 @@
 	db "DRAGON@" ; species name
-	dw 311, 550 ; height, weight
+	dw 12, 250 ; height, weight
 
 	db   "Its fin-tips leak"
 	next "poison. Its fins"

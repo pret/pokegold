@@ -1,5 +1,5 @@
 	db "MOLE@" ; species name
-	dw 204, 730 ; height, weight
+	dw 7, 333 ; height, weight
 
 	db   "Extremely power-"
 	next "ful, they can DIG"

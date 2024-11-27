@@ -1,5 +1,5 @@
 	db "SEED@" ; species name
-	dw 607, 2210 ; height, weight
+	dw 20, 1000 ; height, weight
 
 	db   "It is able to con-"
 	next "vert sunlight into"

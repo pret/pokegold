@@ -1,5 +1,5 @@
 	db "SLUDGE@" ; species name
-	dw 311, 660 ; height, weight
+	dw 12, 300 ; height, weight
 
 	db   "Its body is made"
 	next "of a powerful poi-"

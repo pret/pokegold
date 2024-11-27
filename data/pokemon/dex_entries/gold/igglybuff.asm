@@ -1,5 +1,5 @@
 	db "BALLOON@" ; species name
-	dw 100, 20 ; height, weight
+	dw 3, 10 ; height, weight
 
 	db   "It has a very soft"
 	next "body. If it starts"

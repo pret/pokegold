@@ -1,5 +1,5 @@
 	db "IRON SNAKE@" ; species name
-	dw 3002, 8820 ; height, weight
+	dw 92, 4000 ; height, weight
 
 	db   "It is said that if"
 	next "an ONIX lives for"

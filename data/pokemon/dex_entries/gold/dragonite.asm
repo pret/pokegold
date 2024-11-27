@@ -1,5 +1,5 @@
 	db "DRAGON@" ; species name
-	dw 703, 4630 ; height, weight
+	dw 22, 2100 ; height, weight
 
 	db   "It is said that"
 	next "this #MON con-"

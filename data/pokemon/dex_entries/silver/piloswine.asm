@@ -1,5 +1,5 @@
 	db "SWINE@" ; species name
-	dw 307, 1230 ; height, weight
+	dw 11, 558 ; height, weight
 
 	db   "If it charges at"
 	next "an enemy, the"

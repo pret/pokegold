@@ -1,5 +1,5 @@
 	db "STARSHAPE@" ; species name
-	dw 100, 70 ; height, weight
+	dw 3, 30 ; height, weight
 
 	db   "When numerous me-"
 	next "teors illuminate"

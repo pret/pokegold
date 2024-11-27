@@ -1,5 +1,5 @@
 	db "PUPPY@" ; species name
-	dw 204, 420 ; height, weight
+	dw 7, 190 ; height, weight
 
 	db   "It has a brave and"
 	next "trustworthy na-"

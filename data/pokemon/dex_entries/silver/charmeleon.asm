@@ -1,5 +1,5 @@
 	db "FLAME@" ; species name
-	dw 307, 420 ; height, weight
+	dw 11, 190 ; height, weight
 
 	db   "It has a barbaric"
 	next "nature. In battle,"

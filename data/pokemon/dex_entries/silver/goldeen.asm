@@ -1,5 +1,5 @@
 	db "GOLDFISH@" ; species name
-	dw 200, 330 ; height, weight
+	dw 6, 150 ; height, weight
 
 	db   "A strong swimmer,"
 	next "it is capable of"

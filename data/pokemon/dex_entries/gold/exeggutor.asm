@@ -1,5 +1,5 @@
 	db "COCONUT@" ; species name
-	dw 607, 2650 ; height, weight
+	dw 20, 1200 ; height, weight
 
 	db   "Its three heads"
 	next "think independent-"

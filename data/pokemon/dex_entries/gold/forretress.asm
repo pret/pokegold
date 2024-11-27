@@ -1,5 +1,5 @@
 	db "BAGWORM@" ; species name
-	dw 311, 2770 ; height, weight
+	dw 12, 1258 ; height, weight
 
 	db   "Its entire body is"
 	next "shielded by a"

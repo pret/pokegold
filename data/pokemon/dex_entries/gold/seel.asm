@@ -1,5 +1,5 @@
 	db "SEA LION@" ; species name
-	dw 307, 1980 ; height, weight
+	dw 11, 900 ; height, weight
 
 	db   "Although it can't"
 	next "walk well on land,"

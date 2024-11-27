@@ -1,5 +1,5 @@
 	db "SCISSORS@" ; species name
-	dw 511, 2600 ; height, weight
+	dw 18, 1180 ; height, weight
 
 	db   "It swings its eye-"
 	next "patterned pincers"

@@ -1,5 +1,5 @@
 	db "LEAF@" ; species name
-	dw 311, 350 ; height, weight
+	dw 12, 158 ; height, weight
 
 	db   "The scent of"
 	next "spices comes from"

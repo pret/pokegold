@@ -1,5 +1,5 @@
 	db "WEED@" ; species name
-	dw 108, 120 ; height, weight
+	dw 5, 54 ; height, weight
 
 	db   "Awakened by moon-"
 	next "light, it roams "

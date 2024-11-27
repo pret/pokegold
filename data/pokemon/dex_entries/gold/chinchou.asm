@@ -1,5 +1,5 @@
 	db "ANGLER@" ; species name
-	dw 108, 260 ; height, weight
+	dw 5, 120 ; height, weight
 
 	db   "It shoots positive"
 	next "and negative elec-"

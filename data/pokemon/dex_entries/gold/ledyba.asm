@@ -1,5 +1,5 @@
 	db "FIVE STAR@" ; species name
-	dw 303, 240 ; height, weight
+	dw 10, 108 ; height, weight
 
 	db   "It is very timid."
 	next "It will be afraid"

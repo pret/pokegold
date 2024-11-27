@@ -1,5 +1,5 @@
 	db "ARMOR@" ; species name
-	dw 607, 4450 ; height, weight
+	dw 20, 2020 ; height, weight
 
 	db   "Its body can't be"
 	next "harmed by any sort"

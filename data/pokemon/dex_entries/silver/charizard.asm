@@ -1,5 +1,5 @@
 	db "FLAME@" ; species name
-	dw 507, 2000 ; height, weight
+	dw 17, 905 ; height, weight
 
 	db   "Breathing intense,"
 	next "hot flames, it can"

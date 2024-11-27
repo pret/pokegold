@@ -1,5 +1,5 @@
 	db "DRAGON@" ; species name
-	dw 511, 70 ; height, weight
+	dw 18, 33 ; height, weight
 
 	db   "It is born large"
 	next "to start with. It"

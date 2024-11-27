@@ -1,5 +1,5 @@
 	db "LITTLEBIRD@" ; species name
-	dw 8, 40 ; height, weight
+	dw 2, 20 ; height, weight
 
 	db   "It usually forages"
 	next "for food on the"

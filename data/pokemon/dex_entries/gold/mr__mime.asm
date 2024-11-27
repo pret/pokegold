@@ -1,5 +1,5 @@
 	db "BARRIER@" ; species name
-	dw 403, 1200 ; height, weight
+	dw 13, 545 ; height, weight
 
 	db   "A skilled mime"
 	next "from birth, it"

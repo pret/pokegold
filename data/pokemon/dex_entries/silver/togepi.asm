@@ -1,5 +1,5 @@
 	db "SPIKE BALL@" ; species name
-	dw 100, 30 ; height, weight
+	dw 3, 15 ; height, weight
 
 	db   "A proverb claims"
 	next "that happiness"

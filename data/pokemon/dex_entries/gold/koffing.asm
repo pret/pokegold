@@ -1,5 +1,5 @@
 	db "POISON GAS@" ; species name
-	dw 200, 20 ; height, weight
+	dw 6, 10 ; height, weight
 
 	db   "Its thin, filmy"
 	next "body is filled"

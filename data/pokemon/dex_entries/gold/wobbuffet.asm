@@ -1,5 +1,5 @@
 	db "PATIENT@" ; species name
-	dw 403, 630 ; height, weight
+	dw 13, 285 ; height, weight
 
 	db   "It hates light and"
 	next "shock. If attack-"

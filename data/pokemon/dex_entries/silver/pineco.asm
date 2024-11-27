@@ -1,5 +1,5 @@
 	db "BAGWORM@" ; species name
-	dw 200, 160 ; height, weight
+	dw 6, 72 ; height, weight
 
 	db   "It hangs and waits"
 	next "for flying insect"

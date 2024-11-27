@@ -1,5 +1,5 @@
 	db "INSECT@" ; species name
-	dw 303, 660 ; height, weight
+	dw 10, 300 ; height, weight
 
 	db   "Poison oozes from"
 	next "all over its body."

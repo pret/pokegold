@@ -1,5 +1,5 @@
 	db "FLOWER@" ; species name
-	dw 104, 130 ; height, weight
+	dw 4, 58 ; height, weight
 
 	db   "BELLOSSOM gather"
 	next "at times and"

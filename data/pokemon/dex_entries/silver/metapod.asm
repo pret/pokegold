@@ -1,5 +1,5 @@
 	db "COCOON@" ; species name
-	dw 204, 220 ; height, weight
+	dw 7, 99 ; height, weight
 
 	db   "It prepares for"
 	next "evolution by har-"

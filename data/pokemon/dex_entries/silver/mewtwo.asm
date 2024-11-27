@@ -1,5 +1,5 @@
 	db "GENETIC@" ; species name
-	dw 607, 2690 ; height, weight
+	dw 20, 1220 ; height, weight
 
 	db   "It usually remains"
 	next "motionless to con-"

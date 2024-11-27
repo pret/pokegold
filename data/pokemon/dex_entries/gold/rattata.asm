@@ -1,5 +1,5 @@
 	db "RAT@" ; species name
-	dw 100, 80 ; height, weight
+	dw 3, 35 ; height, weight
 
 	db   "It eats anything."
 	next "Wherever food is"

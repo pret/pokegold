@@ -1,5 +1,5 @@
 	db "NEW SPECIE@" ; species name
-	dw 104, 90 ; height, weight
+	dw 4, 40 ; height, weight
 
 	db   "Apparently, it"
 	next "appears only to"

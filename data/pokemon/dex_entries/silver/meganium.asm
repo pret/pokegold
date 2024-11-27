@@ -1,5 +1,5 @@
 	db "HERB@" ; species name
-	dw 511, 2220 ; height, weight
+	dw 18, 1005 ; height, weight
 
 	db   "MEGANIUM's breath"
 	next "has the power to"

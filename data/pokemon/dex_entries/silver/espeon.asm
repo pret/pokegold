@@ -1,5 +1,5 @@
 	db "SUN@" ; species name
-	dw 211, 580 ; height, weight
+	dw 9, 265 ; height, weight
 
 	db   "By reading air"
 	next "currents, it can"

@@ -1,5 +1,5 @@
 	db "GAS@" ; species name
-	dw 403, 2 ; height, weight
+	dw 13, 1 ; height, weight
 
 	db   "Its thin body is"
 	next "made of gas. It"

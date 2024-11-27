@@ -1,5 +1,5 @@
 	db "SHADOW@" ; species name
-	dw 411, 890 ; height, weight
+	dw 15, 405 ; height, weight
 
 	db   "It steals heat"
 	next "from its surround-"

@@ -1,5 +1,5 @@
 	db "VOLCANO@" ; species name
-	dw 211, 420 ; height, weight
+	dw 9, 190 ; height, weight
 
 	db   "Be careful if it"
 	next "turns its back"

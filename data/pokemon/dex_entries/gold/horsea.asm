@@ -1,5 +1,5 @@
 	db "DRAGON@" ; species name
-	dw 104, 180 ; height, weight
+	dw 4, 80 ; height, weight
 
 	db   "If attacked by a"
 	next "larger enemy, it"

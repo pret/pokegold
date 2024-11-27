@@ -1,5 +1,5 @@
 	db "BUTTERFLY@" ; species name
-	dw 307, 710 ; height, weight
+	dw 11, 320 ; height, weight
 
 	db   "It collects honey"
 	next "every day. It rubs"

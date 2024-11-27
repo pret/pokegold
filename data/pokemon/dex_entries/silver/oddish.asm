@@ -1,5 +1,5 @@
 	db "WEED@" ; species name
-	dw 108, 120 ; height, weight
+	dw 5, 54 ; height, weight
 
 	db   "If exposed to"
 	next "moonlight, it"

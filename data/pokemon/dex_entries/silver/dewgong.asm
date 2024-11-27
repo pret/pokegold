@@ -1,5 +1,5 @@
 	db "SEA LION@" ; species name
-	dw 507, 2650 ; height, weight
+	dw 17, 1200 ; height, weight
 
 	db   "It loves frigid"
 	next "seas with ice"

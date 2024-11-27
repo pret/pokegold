@@ -1,5 +1,5 @@
 	db "MAGNET@" ; species name
-	dw 100, 130 ; height, weight
+	dw 3, 60 ; height, weight
 
 	db   "The units at the"
 	next "sides of its body"

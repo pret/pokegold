@@ -1,5 +1,5 @@
 	db "SHELLFISH@" ; species name
-	dw 503, 1890 ; height, weight
+	dw 16, 855 ; height, weight
 
 	db   "The rocket cannons"
 	next "on its shell fire"

@@ -1,5 +1,5 @@
 	db "ROCK@" ; species name
-	dw 303, 2320 ; height, weight
+	dw 10, 1050 ; height, weight
 
 	db   "With a free and"
 	next "uncaring nature,"

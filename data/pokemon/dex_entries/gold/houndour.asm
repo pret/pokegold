@@ -1,5 +1,5 @@
 	db "DARK@" ; species name
-	dw 200, 240 ; height, weight
+	dw 6, 108 ; height, weight
 
 	db   "It uses different"
 	next "kinds of cries for"

@@ -1,5 +1,5 @@
 	db "GOLDFISH@" ; species name
-	dw 403, 860 ; height, weight
+	dw 13, 390 ; height, weight
 
 	db   "Using its horn, it"
 	next "bores holes in"

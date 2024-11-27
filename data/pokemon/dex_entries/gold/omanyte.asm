@@ -1,5 +1,5 @@
 	db "SPIRAL@" ; species name
-	dw 104, 170 ; height, weight
+	dw 4, 75 ; height, weight
 
 	db   "Revived from an"
 	next "ancient fossil,"

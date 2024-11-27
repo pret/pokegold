@@ -1,5 +1,5 @@
 	db "EGG@" ; species name
-	dw 104, 60 ; height, weight
+	dw 4, 25 ; height, weight
 
 	db   "The shell is very"
 	next "durable. Even if"

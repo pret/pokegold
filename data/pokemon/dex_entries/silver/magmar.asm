@@ -1,5 +1,5 @@
 	db "SPITFIRE@" ; species name
-	dw 403, 980 ; height, weight
+	dw 13, 445 ; height, weight
 
 	db   "The fiery surface"
 	next "of its body gives"

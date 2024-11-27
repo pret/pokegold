@@ -1,5 +1,5 @@
 	db "MOLD@" ; species name
-	dw 200, 450 ; height, weight
+	dw 6, 205 ; height, weight
 
 	db   "The BERRIES it"
 	next "stores in its"

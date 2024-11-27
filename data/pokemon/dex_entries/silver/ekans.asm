@@ -1,5 +1,5 @@
 	db "SNAKE@" ; species name
-	dw 607, 150 ; height, weight
+	dw 20, 69 ; height, weight
 
 	db   "It always hides in"
 	next "grass. When first"

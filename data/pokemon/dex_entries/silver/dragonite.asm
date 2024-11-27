@@ -1,5 +1,5 @@
 	db "DRAGON@" ; species name
-	dw 703, 4630 ; height, weight
+	dw 22, 2100 ; height, weight
 
 	db   "This marine #-"
 	next "MON has an impres-"

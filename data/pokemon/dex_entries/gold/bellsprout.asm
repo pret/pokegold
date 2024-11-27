@@ -1,5 +1,5 @@
 	db "FLOWER@" ; species name
-	dw 204, 90 ; height, weight
+	dw 7, 40 ; height, weight
 
 	db   "Even though its"
 	next "body is extremely"

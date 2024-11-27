@@ -1,5 +1,5 @@
 	db "SCUFFLE@" ; species name
-	dw 204, 460 ; height, weight
+	dw 7, 210 ; height, weight
 
 	db   "It is always"
 	next "bursting with en-"

@@ -1,5 +1,5 @@
 	db "BIRD@" ; species name
-	dw 307, 660 ; height, weight
+	dw 11, 300 ; height, weight
 
 	db   "It immobilizes its"
 	next "prey using well-"

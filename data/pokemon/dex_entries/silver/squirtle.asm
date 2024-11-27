@@ -1,5 +1,5 @@
 	db "TINYTURTLE@" ; species name
-	dw 108, 200 ; height, weight
+	dw 5, 90 ; height, weight
 
 	db   "The shell, which"
 	next "hardens soon after"

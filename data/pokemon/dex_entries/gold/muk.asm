@@ -1,5 +1,5 @@
 	db "SLUDGE@" ; species name
-	dw 311, 660 ; height, weight
+	dw 12, 300 ; height, weight
 
 	db   "They love to gath-"
 	next "er in smelly areas"

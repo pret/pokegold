@@ -1,5 +1,5 @@
 	db "JET@" ; species name
-	dw 200, 260 ; height, weight
+	dw 6, 120 ; height, weight
 
 	db   "Using its dorsal"
 	next "fin as a suction"

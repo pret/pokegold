@@ -1,5 +1,5 @@
 	db "DRILL@" ; species name
-	dw 403, 1320 ; height, weight
+	dw 13, 600 ; height, weight
 
 	db   "Its body is cover-"
 	next "ed with needle-"

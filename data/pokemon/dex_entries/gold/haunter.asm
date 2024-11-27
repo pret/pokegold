@@ -1,5 +1,5 @@
 	db "GAS@" ; species name
-	dw 503, 2 ; height, weight
+	dw 16, 1 ; height, weight
 
 	db   "In total darkness,"
 	next "where nothing is"

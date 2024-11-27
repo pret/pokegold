@@ -1,5 +1,5 @@
 	db "COBRA@" ; species name
-	dw 1106, 1430 ; height, weight
+	dw 35, 650 ; height, weight
 
 	db   "With a very venge-"
 	next "ful nature, it"

@@ -1,5 +1,5 @@
 	db "TINY BIRD@" ; species name
-	dw 100, 40 ; height, weight
+	dw 3, 20 ; height, weight
 
 	db   "Very protective of"
 	next "its territory, it"

@@ -1,5 +1,5 @@
 	db "PINCER@" ; species name
-	dw 403, 1320 ; height, weight
+	dw 13, 600 ; height, weight
 
 	db   "Its pincers grow"
 	next "peculiarly large."

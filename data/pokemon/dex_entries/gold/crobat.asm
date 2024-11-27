@@ -1,5 +1,5 @@
 	db "BAT@" ; species name
-	dw 511, 1650 ; height, weight
+	dw 18, 750 ; height, weight
 
 	db   "It flies so si-"
 	next "lently through the"

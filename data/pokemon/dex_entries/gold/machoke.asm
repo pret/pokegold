@@ -1,5 +1,5 @@
 	db "SUPERPOWER@" ; species name
-	dw 411, 1550 ; height, weight
+	dw 15, 705 ; height, weight
 
 	db   "It always goes at"
 	next "its full power,"

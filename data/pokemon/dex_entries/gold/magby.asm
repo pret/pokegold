@@ -1,5 +1,5 @@
 	db "LIVE COAL@" ; species name
-	dw 204, 470 ; height, weight
+	dw 7, 214 ; height, weight
 
 	db   "Each and every"
 	next "time it inhales"

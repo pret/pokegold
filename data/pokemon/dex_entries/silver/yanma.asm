@@ -1,5 +1,5 @@
 	db "CLEAR WING@" ; species name
-	dw 311, 840 ; height, weight
+	dw 12, 380 ; height, weight
 
 	db   "Its large eyes can"
 	next "scan 360 degrees."

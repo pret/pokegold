@@ -1,5 +1,5 @@
 	db "MUSHROOM@" ; species name
-	dw 100, 120 ; height, weight
+	dw 3, 54 ; height, weight
 
 	db   "It is doused with"
 	next "mushroom spores"

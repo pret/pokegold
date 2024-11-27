@@ -1,5 +1,5 @@
 	db "GENETIC@" ; species name
-	dw 607, 2690 ; height, weight
+	dw 20, 1220 ; height, weight
 
 	db   "Because its battle"
 	next "abilities were"

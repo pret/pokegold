@@ -1,5 +1,5 @@
 	db "RAT@" ; species name
-	dw 204, 410 ; height, weight
+	dw 7, 185 ; height, weight
 
 	db   "Gnaws on anything"
 	next "with its tough"

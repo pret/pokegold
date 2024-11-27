@@ -1,5 +1,5 @@
 	db "JET@" ; species name
-	dw 211, 630 ; height, weight
+	dw 9, 285 ; height, weight
 
 	db   "It traps enemies"
 	next "with its suction-"

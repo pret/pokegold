@@ -1,5 +1,5 @@
 	db "ELECTRIC@" ; species name
-	dw 200, 520 ; height, weight
+	dw 6, 235 ; height, weight
 
 	db   "It rotates its"
 	next "arms to generate"

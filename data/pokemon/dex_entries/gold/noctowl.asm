@@ -1,5 +1,5 @@
 	db "OWL@" ; species name
-	dw 503, 900 ; height, weight
+	dw 16, 408 ; height, weight
 
 	db   "Its eyes are"
 	next "specially adapted."

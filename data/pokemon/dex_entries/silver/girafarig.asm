@@ -1,5 +1,5 @@
 	db "LONG NECK@" ; species name
-	dw 411, 910 ; height, weight
+	dw 15, 415 ; height, weight
 
 	db   "Its tail, which"
 	next "also contains a"

@@ -1,5 +1,5 @@
 	db "MOUSE@" ; species name
-	dw 104, 130 ; height, weight
+	dw 4, 60 ; height, weight
 
 	db   "This intelligent"
 	next "#MON roasts"

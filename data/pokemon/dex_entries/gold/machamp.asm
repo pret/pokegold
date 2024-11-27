@@ -1,5 +1,5 @@
 	db "SUPERPOWER@" ; species name
-	dw 503, 2870 ; height, weight
+	dw 16, 1300 ; height, weight
 
 	db   "It quickly swings"
 	next "its four arms to"

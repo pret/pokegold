@@ -1,5 +1,5 @@
 	db "MYSTERIOUS@" ; species name
-	dw 307, 1760 ; height, weight
+	dw 11, 800 ; height, weight
 
 	db   "The center section"
 	next "of its body is"

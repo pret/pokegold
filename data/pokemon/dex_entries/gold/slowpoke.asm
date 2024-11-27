@@ -1,5 +1,5 @@
 	db "DOPEY@" ; species name
-	dw 311, 790 ; height, weight
+	dw 12, 360 ; height, weight
 
 	db   "It lazes vacantly"
 	next "near water. If"

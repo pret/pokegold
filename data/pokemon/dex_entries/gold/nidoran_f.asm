@@ -1,5 +1,5 @@
 	db "POISON PIN@" ; species name
-	dw 104, 150 ; height, weight
+	dw 4, 70 ; height, weight
 
 	db   "The poison hidden"
 	next "in its small horn"

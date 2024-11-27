@@ -1,5 +1,5 @@
 	db "BONEKEEPER@" ; species name
-	dw 303, 990 ; height, weight
+	dw 10, 450 ; height, weight
 
 	db   "It collects bones"
 	next "from an unknown"

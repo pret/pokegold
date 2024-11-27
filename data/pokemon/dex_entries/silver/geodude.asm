@@ -1,5 +1,5 @@
 	db "ROCK@" ; species name
-	dw 104, 440 ; height, weight
+	dw 4, 200 ; height, weight
 
 	db   "It uses its arms"
 	next "to steadily climb"

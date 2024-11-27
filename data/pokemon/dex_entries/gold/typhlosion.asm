@@ -1,5 +1,5 @@
 	db "VOLCANO@" ; species name
-	dw 507, 1750 ; height, weight
+	dw 17, 795 ; height, weight
 
 	db   "If its rage peaks,"
 	next "it becomes so hot"

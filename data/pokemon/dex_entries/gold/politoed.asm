@@ -1,5 +1,5 @@
 	db "FROG@" ; species name
-	dw 307, 750 ; height, weight
+	dw 11, 339 ; height, weight
 
 	db   "If POLIWAG and"
 	next "POLIWHIRL hear its"

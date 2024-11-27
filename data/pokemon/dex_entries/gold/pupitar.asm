@@ -1,5 +1,5 @@
 	db "HARD SHELL@" ; species name
-	dw 311, 3350 ; height, weight
+	dw 12, 1520 ; height, weight
 
 	db   "Its shell is as"
 	next "hard as sheet"

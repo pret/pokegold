@@ -1,5 +1,5 @@
 	db "DIVING@" ; species name
-	dw 1701, 4760 ; height, weight
+	dw 52, 2160 ; height, weight
 
 	db   "It is said to be"
 	next "the guardian of"

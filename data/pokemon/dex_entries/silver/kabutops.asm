@@ -1,5 +1,5 @@
 	db "SHELLFISH@" ; species name
-	dw 403, 890 ; height, weight
+	dw 13, 405 ; height, weight
 
 	db   "With sharp claws,"
 	next "this ferocious,"

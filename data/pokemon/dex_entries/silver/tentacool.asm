@@ -1,5 +1,5 @@
 	db "JELLYFISH@" ; species name
-	dw 211, 1000 ; height, weight
+	dw 9, 455 ; height, weight
 
 	db   "It drifts aimless-"
 	next "ly in waves. Very"

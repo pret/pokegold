@@ -1,5 +1,5 @@
 	db "WATER FISH@" ; species name
-	dw 104, 190 ; height, weight
+	dw 4, 85 ; height, weight
 
 	db   "This #MON lives"
 	next "in cold water. It"

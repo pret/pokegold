@@ -1,5 +1,5 @@
 	db "HYPNOSIS@" ; species name
-	dw 503, 1670 ; height, weight
+	dw 16, 756 ; height, weight
 
 	db   "Always holding a"
 	next "pendulum that it"

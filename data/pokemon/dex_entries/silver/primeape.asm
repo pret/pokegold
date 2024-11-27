@@ -1,5 +1,5 @@
 	db "PIG MONKEY@" ; species name
-	dw 303, 710 ; height, weight
+	dw 10, 320 ; height, weight
 
 	db   "It becomes wildly"
 	next "furious if it even"

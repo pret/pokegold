@@ -1,5 +1,5 @@
 	db "LITTLEBEAR@" ; species name
-	dw 200, 190 ; height, weight
+	dw 6, 88 ; height, weight
 
 	db   "If it finds honey,"
 	next "its crescent mark"

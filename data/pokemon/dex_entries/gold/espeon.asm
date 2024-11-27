@@ -1,5 +1,5 @@
 	db "SUN@" ; species name
-	dw 211, 580 ; height, weight
+	dw 9, 265 ; height, weight
 
 	db   "It uses the fine"
 	next "hair that covers"

@@ -1,5 +1,5 @@
 	db "HYPNOSIS@" ; species name
-	dw 503, 1670 ; height, weight
+	dw 16, 756 ; height, weight
 
 	db   "When it is very"
 	next "hungry, it puts"

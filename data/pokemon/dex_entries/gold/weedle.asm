@@ -1,5 +1,5 @@
 	db "HAIRY BUG@" ; species name
-	dw 100, 70 ; height, weight
+	dw 3, 32 ; height, weight
 
 	db   "Its poison stinger"
 	next "is very powerful."

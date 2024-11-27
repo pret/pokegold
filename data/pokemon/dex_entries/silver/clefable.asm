@@ -1,5 +1,5 @@
 	db "FAIRY@" ; species name
-	dw 403, 880 ; height, weight
+	dw 13, 400 ; height, weight
 
 	db   "Its very sensitive"
 	next "ears lets it dis-"

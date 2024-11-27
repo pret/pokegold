@@ -1,5 +1,5 @@
 	db "SEED@" ; species name
-	dw 100, 40 ; height, weight
+	dw 3, 18 ; height, weight
 
 	db   "It may drop out of"
 	next "the sky suddenly."

@@ -1,5 +1,5 @@
 	db "FLYSCORPIO@" ; species name
-	dw 307, 1430 ; height, weight
+	dw 11, 648 ; height, weight
 
 	db   "It usually clings"
 	next "to cliffs. When it"

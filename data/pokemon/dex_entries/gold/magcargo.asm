@@ -1,5 +1,5 @@
 	db "LAVA@" ; species name
-	dw 207, 1210 ; height, weight
+	dw 8, 550 ; height, weight
 
 	db   "The shell on its"
 	next "back is just skin"

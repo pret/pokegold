@@ -1,5 +1,5 @@
 	db "FOX@" ; species name
-	dw 200, 220 ; height, weight
+	dw 6, 99 ; height, weight
 
 	db   "As it develops, "
 	next "its single white"

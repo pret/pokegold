@@ -1,5 +1,5 @@
 	db "TWIN BIRD@" ; species name
-	dw 407, 860 ; height, weight
+	dw 14, 392 ; height, weight
 
 	db   "By alternately"
 	next "raising and lower-"

@@ -1,5 +1,5 @@
 	db "FAIRY@" ; species name
-	dw 200, 170 ; height, weight
+	dw 6, 75 ; height, weight
 
 	db   "The moonlight that"
 	next "it stores in the"

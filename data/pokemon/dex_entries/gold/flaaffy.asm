@@ -1,5 +1,5 @@
 	db "WOOL@" ; species name
-	dw 207, 290 ; height, weight
+	dw 8, 133 ; height, weight
 
 	db   "As a result of"
 	next "storing too much"

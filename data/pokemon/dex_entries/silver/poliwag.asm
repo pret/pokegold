@@ -1,5 +1,5 @@
 	db "TADPOLE@" ; species name
-	dw 200, 270 ; height, weight
+	dw 6, 124 ; height, weight
 
 	db   "The direction of"
 	next "its belly spiral"

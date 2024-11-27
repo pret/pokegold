@@ -1,5 +1,5 @@
 	db "MOLE@" ; species name
-	dw 8, 20 ; height, weight
+	dw 2, 8 ; height, weight
 
 	db   "If a DIGLETT DIGS"
 	next "through a field,"

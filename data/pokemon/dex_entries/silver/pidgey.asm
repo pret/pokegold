@@ -1,5 +1,5 @@
 	db "TINY BIRD@" ; species name
-	dw 100, 40 ; height, weight
+	dw 3, 18 ; height, weight
 
 	db   "Common in grassy"
 	next "areas and forests,"

@@ -1,5 +1,5 @@
 	db "LONELY@" ; species name
-	dw 104, 140 ; height, weight
+	dw 4, 65 ; height, weight
 
 	db   "If it is sad or"
 	next "lonely, the skull"

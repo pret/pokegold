@@ -1,5 +1,5 @@
 	db "SHARP CLAW@" ; species name
-	dw 211, 620 ; height, weight
+	dw 9, 280 ; height, weight
 
 	db   "Vicious in nature,"
 	next "it drives PIDGEY"

@@ -1,5 +1,5 @@
 	db "MILK COW@" ; species name
-	dw 311, 1660 ; height, weight
+	dw 12, 755 ; height, weight
 
 	db   "Its milk is packed"
 	next "with nutrition,"

@@ -1,5 +1,5 @@
 	db "DUCK@" ; species name
-	dw 207, 430 ; height, weight
+	dw 8, 196 ; height, weight
 
 	db   "If its chronic"
 	next "headache peaks, it"

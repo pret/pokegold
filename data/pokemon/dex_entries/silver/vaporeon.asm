@@ -1,5 +1,5 @@
 	db "BUBBLE JET@" ; species name
-	dw 303, 640 ; height, weight
+	dw 10, 290 ; height, weight
 
 	db   "It prefers beauti-"
 	next "ful shores. With"

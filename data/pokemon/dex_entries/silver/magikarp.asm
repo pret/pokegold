@@ -1,5 +1,5 @@
 	db "FISH@" ; species name
-	dw 211, 220 ; height, weight
+	dw 9, 100 ; height, weight
 
 	db   "For no reason, it"
 	next "jumps and splashes"

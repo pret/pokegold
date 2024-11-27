@@ -1,5 +1,5 @@
 	db "BALLOON@" ; species name
-	dw 108, 90 ; height, weight
+	dw 5, 39 ; height, weight
 
 	db   "To fire its poison"
 	next "spikes, it must"

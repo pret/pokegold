@@ -1,5 +1,5 @@
 	db "POISON BEE@" ; species name
-	dw 303, 650 ; height, weight
+	dw 10, 295 ; height, weight
 
 	db   "It can take down"
 	next "any opponent with"

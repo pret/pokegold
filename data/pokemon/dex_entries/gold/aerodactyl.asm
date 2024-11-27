@@ -1,5 +1,5 @@
 	db "FOSSIL@" ; species name
-	dw 511, 1300 ; height, weight
+	dw 18, 590 ; height, weight
 
 	db   "A vicious #MON"
 	next "from the distant"

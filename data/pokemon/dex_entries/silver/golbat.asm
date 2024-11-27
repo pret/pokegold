@@ -1,5 +1,5 @@
 	db "BAT@" ; species name
-	dw 503, 1210 ; height, weight
+	dw 16, 550 ; height, weight
 
 	db   "It can drink more"
 	next "than 10 ounces of"
