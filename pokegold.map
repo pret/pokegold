@@ -539,8 +539,8 @@ ROM0 bank #0:
 	         $1b2f = PlaceVerticalMenuItems.loop
 	         $1b4e = MenuBox
 	         $1b59 = GetMenuTextStartCoord
-	         $1b6b = GetMenuTextStartCoord.bit_6_set
-	         $1b73 = GetMenuTextStartCoord.bit_7_clear
+	         $1b6b = GetMenuTextStartCoord.no_top_spacing
+	         $1b73 = GetMenuTextStartCoord.no_cursor
 	         $1b74 = ClearMenuBoxInterior
 	         $1b84 = ClearWholeMenuBox
 	         $1b90 = MenuBoxCoord2Tile
@@ -583,7 +583,7 @@ ROM0 bank #0:
 	         $1d4b = RunMenuItemPrintingFunction.loop
 	         $1d65 = RunMenuItemPrintingFunction._hl_
 	         $1d69 = InitMenuCursorAndButtonPermissions
-	         $1d78 = InitMenuCursorAndButtonPermissions.disallow_select
+	         $1d78 = InitMenuCursorAndButtonPermissions.disallow_start
 	         $1d83 = InitMenuCursorAndButtonPermissions.disallow_left_right
 	         $1d84 = GetScrollingMenuJoypad
 	         $1d8d = GetStaticMenuJoypad
@@ -4557,7 +4557,7 @@ ROMX bank #5:
 	         $4089 = StartClock
 	         $409a = StartClock.skip_set
 	         $409e = _FixDays
-	         $40ab = _FixDays.set_bit_7
+	         $40ab = _FixDays.reset_rtc
 	         $40b1 = _GetClock
 	         $40dc = ClockContinue
 	         $40f6 = ClockContinue.time_overflow
@@ -4568,8 +4568,8 @@ ROMX bank #5:
 	         $412a = _InitTime.okay_hrs
 	         $413a = _InitTime.okay_days
 	         $413c = _UpdatePlayerSprite
-	         $414b = _RefreshSprites
-	         $415c = _ClearSprites
+	         $414b = LoadStandingSpritesGFX
+	         $415c = LoadWalkingSpritesGFX
 	         $416d = RefreshSprites
 	         $4174 = RefreshSprites.Refresh
 	         $4185 = GetPlayerSprite
@@ -5473,10 +5473,10 @@ ROMX bank #7:
 	         $6abc = TilesetMansionMeta
 	         $6ebc = TilesetMansionColl
 	         $6fbc = TilesetCaveGFX
-	         $734c = TilesetDarkCaveMeta
 	         $734c = TilesetCaveMeta
-	         $774c = TilesetCaveColl
+	         $734c = TilesetDarkCaveMeta
 	         $774c = TilesetDarkCaveColl
+	         $774c = TilesetCaveColl
 	SECTION: $784c-$7fbc ($0771 bytes) ["Extra Songs 1"]
 	         $784c = Music_Credits
 	         $7858 = Music_Credits_Ch1
@@ -5726,10 +5726,10 @@ ROMX bank #9:
 	         $4297 = Place2DMenuCursor.cursor_on
 	         $42a0 = _PushWindow
 	         $42b0 = _PushWindow.loop
-	         $42c1 = _PushWindow.bit_6
+	         $42c1 = _PushWindow.backup_tiles
 	         $42d4 = _PushWindow.row
 	         $42d6 = _PushWindow.col
-	         $42e7 = _PushWindow.not_bit_7
+	         $42e7 = _PushWindow.no_backup_tiles
 	         $42ee = _PushWindow.done
 	         $4306 = _PushWindow.ret
 	         $4307 = _ExitMenu
@@ -7252,7 +7252,7 @@ ROMX bank #11:
 	         $47ad = _TMHM_ExitPack
 	         $47b4 = TMHM_ExitPocket
 	         $47b6 = TMHM_ScrollPocket
-	         $47ca = TMHM_ScrollPocket.skip
+	         $47ca = TMHM_ScrollPocket.down
 	         $47cf = TMHM_ScrollPocket.loop
 	         $47e7 = TMHM_DisplayPocketItems
 	         $47ff = TMHM_DisplayPocketItems.loop2
@@ -31178,8 +31178,8 @@ SRAM bank #1:
 	         $aedf = sBoxMon11Unused1
 	         $aee0 = sBoxMon11Unused2
 	         $aee1 = sBoxMon11Level
-	         $aee2 = sBoxMon12Species
 	         $aee2 = sBoxMon11BoxEnd
+	         $aee2 = sBoxMon12Species
 	         $aee2 = sBoxMon12
 	         $aee3 = sBoxMon12Item
 	         $aee4 = sBoxMon12Moves
@@ -31408,9 +31408,9 @@ SRAM bank #1:
 	         $b1ba = sLinkBattleStats
 	         $b1bc = sLinkBattleLosses
 	         $b1be = sLinkBattleDraws
+	         $b1c0 = sLinkBattleRecord1
 	         $b1c0 = sLinkBattleRecord
 	         $b1c0 = sLinkBattleRecord1ID
-	         $b1c0 = sLinkBattleRecord1
 	         $b1c2 = sLinkBattleRecord1Name
 	         $b1cc = sLinkBattleRecord1Wins
 	         $b1ce = sLinkBattleRecord1Losses
@@ -32572,8 +32572,8 @@ SRAM bank #1:
 	         $bba1 = sHallOfFame25Mon6Nickname
 	         $bbab = sHallOfFame25End
 	         $bbab = sHallOfFame25Mon6End
-	         $bbac = sHallOfFame26
 	         $bbac = sHallOfFame26WinCount
+	         $bbac = sHallOfFame26
 	         $bbad = sHallOfFame26Mon1
 	         $bbad = sHallOfFame26Mon1Species
 	         $bbae = sHallOfFame26Mon1ID
@@ -32995,8 +32995,8 @@ SRAM bank #2:
 	         $a138 = sBox1Mon10Moves
 	         $a13c = sBox1Mon10ID
 	         $a13e = sBox1Mon10Exp
-	         $a141 = sBox1Mon10HPExp
 	         $a141 = sBox1Mon10StatExp
+	         $a141 = sBox1Mon10HPExp
 	         $a143 = sBox1Mon10AtkExp
 	         $a145 = sBox1Mon10DefExp
 	         $a147 = sBox1Mon10SpdExp
@@ -33356,8 +33356,8 @@ SRAM bank #2:
 	         $a503 = sBox2Mon5Unused1
 	         $a504 = sBox2Mon5Unused2
 	         $a505 = sBox2Mon5Level
-	         $a506 = sBox2Mon6
 	         $a506 = sBox2Mon5BoxEnd
+	         $a506 = sBox2Mon6
 	         $a506 = sBox2Mon6Species
 	         $a507 = sBox2Mon6Item
 	         $a508 = sBox2Mon6Moves
@@ -33751,8 +33751,8 @@ SRAM bank #2:
 	         $a8f8 = sBox3Mon3Moves
 	         $a8fc = sBox3Mon3ID
 	         $a8fe = sBox3Mon3Exp
-	         $a901 = sBox3Mon3HPExp
 	         $a901 = sBox3Mon3StatExp
+	         $a901 = sBox3Mon3HPExp
 	         $a903 = sBox3Mon3AtkExp
 	         $a905 = sBox3Mon3DefExp
 	         $a907 = sBox3Mon3SpdExp
@@ -34152,8 +34152,8 @@ SRAM bank #2:
 	         $acf0 = sBox4
 	         $acf0 = sBox4Count
 	         $acf1 = sBox4Species
-	         $ad06 = sBox4Mons
 	         $ad06 = sBox4Mon1Species
+	         $ad06 = sBox4Mons
 	         $ad06 = sBox4Mon1
 	         $ad07 = sBox4Mon1Item
 	         $ad08 = sBox4Mon1Moves
@@ -35996,8 +35996,8 @@ SRAM bank #3:
 	         $a058 = sBox8Mon3Moves
 	         $a05c = sBox8Mon3ID
 	         $a05e = sBox8Mon3Exp
-	         $a061 = sBox8Mon3StatExp
 	         $a061 = sBox8Mon3HPExp
+	         $a061 = sBox8Mon3StatExp
 	         $a063 = sBox8Mon3AtkExp
 	         $a065 = sBox8Mon3DefExp
 	         $a067 = sBox8Mon3SpdExp
@@ -36965,9 +36965,9 @@ SRAM bank #3:
 	         $a973 = sBox10Mon6Unused1
 	         $a974 = sBox10Mon6Unused2
 	         $a975 = sBox10Mon6Level
+	         $a976 = sBox10Mon7Species
 	         $a976 = sBox10Mon6BoxEnd
 	         $a976 = sBox10Mon7
-	         $a976 = sBox10Mon7Species
 	         $a977 = sBox10Mon7Item
 	         $a978 = sBox10Mon7Moves
 	         $a97c = sBox10Mon7ID
@@ -36985,15 +36985,15 @@ SRAM bank #3:
 	         $a993 = sBox10Mon7Unused1
 	         $a994 = sBox10Mon7Unused2
 	         $a995 = sBox10Mon7Level
+	         $a996 = sBox10Mon8Species
 	         $a996 = sBox10Mon8
 	         $a996 = sBox10Mon7BoxEnd
-	         $a996 = sBox10Mon8Species
 	         $a997 = sBox10Mon8Item
 	         $a998 = sBox10Mon8Moves
 	         $a99c = sBox10Mon8ID
 	         $a99e = sBox10Mon8Exp
-	         $a9a1 = sBox10Mon8HPExp
 	         $a9a1 = sBox10Mon8StatExp
+	         $a9a1 = sBox10Mon8HPExp
 	         $a9a3 = sBox10Mon8AtkExp
 	         $a9a5 = sBox10Mon8DefExp
 	         $a9a7 = sBox10Mon8SpdExp
@@ -37005,8 +37005,8 @@ SRAM bank #3:
 	         $a9b3 = sBox10Mon8Unused1
 	         $a9b4 = sBox10Mon8Unused2
 	         $a9b5 = sBox10Mon8Level
-	         $a9b6 = sBox10Mon9
 	         $a9b6 = sBox10Mon9Species
+	         $a9b6 = sBox10Mon9
 	         $a9b6 = sBox10Mon8BoxEnd
 	         $a9b7 = sBox10Mon9Item
 	         $a9b8 = sBox10Mon9Moves
@@ -37025,9 +37025,9 @@ SRAM bank #3:
 	         $a9d3 = sBox10Mon9Unused1
 	         $a9d4 = sBox10Mon9Unused2
 	         $a9d5 = sBox10Mon9Level
-	         $a9d6 = sBox10Mon9BoxEnd
-	         $a9d6 = sBox10Mon10
 	         $a9d6 = sBox10Mon10Species
+	         $a9d6 = sBox10Mon10
+	         $a9d6 = sBox10Mon9BoxEnd
 	         $a9d7 = sBox10Mon10Item
 	         $a9d8 = sBox10Mon10Moves
 	         $a9dc = sBox10Mon10ID
@@ -37045,8 +37045,8 @@ SRAM bank #3:
 	         $a9f3 = sBox10Mon10Unused1
 	         $a9f4 = sBox10Mon10Unused2
 	         $a9f5 = sBox10Mon10Level
-	         $a9f6 = sBox10Mon10BoxEnd
 	         $a9f6 = sBox10Mon11Species
+	         $a9f6 = sBox10Mon10BoxEnd
 	         $a9f6 = sBox10Mon11
 	         $a9f7 = sBox10Mon11Item
 	         $a9f8 = sBox10Mon11Moves
@@ -37066,8 +37066,8 @@ SRAM bank #3:
 	         $aa14 = sBox10Mon11Unused2
 	         $aa15 = sBox10Mon11Level
 	         $aa16 = sBox10Mon12Species
-	         $aa16 = sBox10Mon12
 	         $aa16 = sBox10Mon11BoxEnd
+	         $aa16 = sBox10Mon12
 	         $aa17 = sBox10Mon12Item
 	         $aa18 = sBox10Mon12Moves
 	         $aa1c = sBox10Mon12ID
@@ -37212,8 +37212,8 @@ SRAM bank #3:
 	         $aaf8 = sBox10Mon19Moves
 	         $aafc = sBox10Mon19ID
 	         $aafe = sBox10Mon19Exp
-	         $ab01 = sBox10Mon19StatExp
 	         $ab01 = sBox10Mon19HPExp
+	         $ab01 = sBox10Mon19StatExp
 	         $ab03 = sBox10Mon19AtkExp
 	         $ab05 = sBox10Mon19DefExp
 	         $ab07 = sBox10Mon19SpdExp
@@ -37414,8 +37414,8 @@ SRAM bank #3:
 	         $adc4 = sBox11Mon6Unused2
 	         $adc5 = sBox11Mon6Level
 	         $adc6 = sBox11Mon7
-	         $adc6 = sBox11Mon7Species
 	         $adc6 = sBox11Mon6BoxEnd
+	         $adc6 = sBox11Mon7Species
 	         $adc7 = sBox11Mon7Item
 	         $adc8 = sBox11Mon7Moves
 	         $adcc = sBox11Mon7ID
@@ -38664,8 +38664,8 @@ SRAM bank #3:
 	         $ba18 = sBox14Mon2Moves
 	         $ba1c = sBox14Mon2ID
 	         $ba1e = sBox14Mon2Exp
-	         $ba21 = sBox14Mon2StatExp
 	         $ba21 = sBox14Mon2HPExp
+	         $ba21 = sBox14Mon2StatExp
 	         $ba23 = sBox14Mon2AtkExp
 	         $ba25 = sBox14Mon2DefExp
 	         $ba27 = sBox14Mon2SpdExp
@@ -39094,8 +39094,8 @@ SRAM bank #3:
 WRAM0 bank #0:
 	SECTION: $c000-$c1c1 ($01c2 bytes) ["Audio RAM"]
 	         $c000 = wMusicPlaying
-	         $c001 = wAudio
 	         $c001 = wChannel1MusicID
+	         $c001 = wAudio
 	         $c001 = wChannel1
 	         $c003 = wChannel1MusicBank
 	         $c004 = wChannel1Flags1
@@ -39776,8 +39776,8 @@ WRAM0 bank #0:
 	         $c54c = wHallOfFameTempMon5DVs
 	         $c54c = wSpriteAnim4
 	         $c54d = wSpriteAnim4FramesetID
-	         $c54e = wHallOfFameTempMon5Level
 	         $c54e = wSpriteAnim4AnimSeqID
+	         $c54e = wHallOfFameTempMon5Level
 	         $c54f = wHallOfFameTempMon5Nickname
 	         $c54f = wSpriteAnim4TileID
 	         $c550 = wSpriteAnim4XCoord
@@ -39886,8 +39886,8 @@ WRAM0 bank #0:
 	         $c5a9 = wSpriteAnim9Var2
 	         $c5aa = wSpriteAnim9Var3
 	         $c5ab = wSpriteAnim9Var4
-	         $c5ac = wSpriteAnim10Index
 	         $c5ac = wSpriteAnim10
+	         $c5ac = wSpriteAnim10Index
 	         $c5ad = wSpriteAnim10FramesetID
 	         $c5ae = wSpriteAnim10AnimSeqID
 	         $c5af = wSpriteAnim10TileID
@@ -40326,15 +40326,15 @@ WRAM0 bank #0:
 	         $c7a3 = wTimeCapsulePartyMon4ID
 	         $c7a3 = wLinkPlayerPartyMon4
 	         $c7a4 = wLinkPlayerPartyMon4Item
-	         $c7a5 = wTimeCapsulePartyMon4Exp
 	         $c7a5 = wLinkPlayerPartyMon4Moves
+	         $c7a5 = wTimeCapsulePartyMon4Exp
 	         $c7a8 = wTimeCapsulePartyMon4HPExp
 	         $c7a9 = wLinkPlayerPartyMon4ID
 	         $c7aa = wTimeCapsulePartyMon4AttackExp
 	         $c7ab = wLinkPlayerPartyMon4Exp
 	         $c7ac = wTimeCapsulePartyMon4DefenseExp
-	         $c7ae = wTimeCapsulePartyMon4SpeedExp
 	         $c7ae = wLinkPlayerPartyMon4HPExp
+	         $c7ae = wTimeCapsulePartyMon4SpeedExp
 	         $c7ae = wLinkPlayerPartyMon4StatExp
 	         $c7b0 = wTimeCapsulePartyMon4SpecialExp
 	         $c7b0 = wLinkPlayerPartyMon4AtkExp
@@ -41204,7 +41204,6 @@ WRAM0 bank #0:
 	         $ceeb = wBetaTitleSequenceOpeningType
 	         $ceec = wDefaultSpawnpoint
 	         $ceed = wMagnetTrainDirection
-	         $ceed = wCreditsPos
 	         $ceed = wPrevPartyLevel
 	         $ceed = wEarthquakeMovementDataBuffer
 	         $ceed = wBugContestResults
@@ -41216,6 +41215,7 @@ WRAM0 bank #0:
 	         $ceed = wUnownPuzzleCornerTile
 	         $ceed = wNumOwnedDecoCategories
 	         $ceed = wMovementBufferCount
+	         $ceed = wCreditsPos
 	         $ceed = wPhoneScriptBank
 	         $ceed = wSwitchItemBuffer
 	         $ceed = wTempMail
@@ -41243,6 +41243,7 @@ WRAM0 bank #0:
 	         $ceee = wBugContestFirstPlaceMon
 	         $ceee = wFinishedPrintingBox
 	         $ceee = wPhoneCaller
+	         $ceee = wTownMapCursorCoordinates
 	         $ceee = wMovementBufferObject
 	         $ceee = wPlaceBallsDirection
 	         $ceee = wBillsPCTempListIndex
@@ -41251,7 +41252,6 @@ WRAM0 bank #0:
 	         $ceee = wDebugColorIsShiny
 	         $ceee = wNextRadioLine
 	         $ceee = wOwnedDecoCategories
-	         $ceee = wTownMapCursorCoordinates
 	         $ceef = wAddrOfBoxToPrint
 	         $ceef = wDebugColorCurTMHM
 	         $ceef = wTrainerHUDTiles
@@ -41363,9 +41363,9 @@ WRAM0 bank #0:
 	         $cf2a = wPoisonStepPartyFlags
 	         $cf2a = wSeenTrainerDistance
 	         $cf2b = wItemBallDataEnd
+	         $cf2b = wHiddenItemID
 	         $cf2b = wWalkingIntoLand
 	         $cf2b = wSeenTrainerDirection
-	         $cf2b = wHiddenItemID
 	         $cf2b = wMartPointer
 	         $cf2b = wCurCoordEventMapX
 	         $cf2b = wBufferMonDefense
@@ -41469,8 +41469,8 @@ WRAMX bank #1:
 	SECTION: $d000-$d1a0 ($01a1 bytes) ["WRAM 1"]
 	         $d000 = wItemAttributesPointer
 	         $d002 = wCurItem
-	         $d003 = wCurItemQuantity
 	         $d003 = wMartItemID
+	         $d003 = wCurItemQuantity
 	         $d004 = wCurPartySpecies
 	         $d005 = wCurPartyMon
 	         $d007 = wWhichHPBar
@@ -42530,7 +42530,7 @@ WRAMX bank #1:
 	         $d541 = wMap15ObjectEventFlag
 	         $d545 = wObjectMasks
 	         $d555 = wVariableSprites
-	         $d565 = wEnteredMapFromContinue
+	         $d565 = wUnusedReanchorBGMapFlags
 	         $d568 = wTimeOfDayPal
 	         $d56d = wTimeOfDayPalFlags
 	         $d56e = wTimeOfDayPalset
