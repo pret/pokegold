@@ -36,10 +36,10 @@ CloseText::
 	call SafeUpdateSprites
 	ld a, $90
 	ldh [hWY], a
-	farcall _ClearSprites
+	farcall LoadWalkingSpritesGFX
 	call UpdatePlayerSprite
-	ld hl, wEnteredMapFromContinue
-	res 7, [hl]
+	ld hl, wUnusedReanchorBGMapFlags
+	res UNUSED_REANCHOR_BG_MAP_7, [hl]
 	call ResetBGWindow
 	ret
 

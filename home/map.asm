@@ -1065,7 +1065,7 @@ endr
 GetMapScreenCoords::
 	ld hl, wOverworldMapBlocks
 	ld a, [wXCoord]
-	bit 0, a
+	bit 0, a ; even or odd?
 	jr nz, .odd_x
 ; even x
 	srl a
@@ -1083,7 +1083,7 @@ GetMapScreenCoords::
 	ld c, a
 	ld b, 0
 	ld a, [wYCoord]
-	bit 0, a
+	bit 0, a ; even or odd?
 	jr nz, .odd_y
 ; even y
 	srl a
@@ -1418,7 +1418,7 @@ ExecuteCallbackScript::
 	ld hl, wScriptFlags
 	ld a, [hl]
 	push af
-	set 1, [hl]
+	set UNUSED_SCRIPT_FLAG_1, [hl]
 	farcall EnableScriptMode
 	farcall ScriptEvents
 	pop af
@@ -1957,7 +1957,7 @@ GetMovementPermissions::
 
 .ok_down
 	ld hl, wTilePermissions
-	set 3, [hl]
+	set RIGHT, [hl]
 	ret
 
 .Up:
@@ -1974,7 +1974,7 @@ GetMovementPermissions::
 
 .ok_up
 	ld hl, wTilePermissions
-	set 3, [hl]
+	set RIGHT, [hl]
 	ret
 
 .Right:
@@ -1991,7 +1991,7 @@ GetMovementPermissions::
 
 .ok_right
 	ld hl, wTilePermissions
-	set 3, [hl]
+	set RIGHT, [hl]
 	ret
 
 .Left:
@@ -2008,7 +2008,7 @@ GetMovementPermissions::
 
 .ok_left
 	ld hl, wTilePermissions
-	set 3, [hl]
+	set RIGHT, [hl]
 	ret
 
 .CheckHiNybble:
@@ -2318,7 +2318,7 @@ ReturnToMapWithSpeechTextbox::
 ReloadTilesetAndPalettes::
 	call DisableLCD
 	call ClearSprites
-	farcall _RefreshSprites
+	farcall LoadStandingSpritesGFX
 	call LoadStandardFont
 	call LoadFontsExtra
 	ldh a, [hROMBank]

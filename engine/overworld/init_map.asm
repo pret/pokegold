@@ -22,9 +22,9 @@ ReanchorBGMap_NoOAMUpdate::
 	xor a
 	ldh [hLCDCPointer], a
 	ldh [hBGMapMode], a
-	ld hl, wEnteredMapFromContinue
-	set 7, [hl]
-	res 2, [hl]
+	ld hl, wUnusedReanchorBGMapFlags
+	set UNUSED_REANCHOR_BG_MAP_7, [hl]
+	res UNUSED_REANCHOR_BG_MAP_2, [hl]
 	ld a, $90
 	ldh [hWY], a
 	call LoadOverworldTilemapAndAttrmapPals

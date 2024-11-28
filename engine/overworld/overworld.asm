@@ -7,23 +7,23 @@ _UpdatePlayerSprite::
 	call GetUsedSprite
 	ret
 
-_RefreshSprites::
+LoadStandingSpritesGFX::
 	ld hl, wSpriteFlags
 	ld a, [hl]
 	push af
-	res 7, [hl]
-	set 6, [hl]
+	res SPRITES_SKIP_STANDING_GFX_F, [hl]
+	set SPRITES_SKIP_WALKING_GFX_F, [hl]
 	call LoadUsedSpritesGFX
 	pop af
 	ld [wSpriteFlags], a
 	ret
 
-_ClearSprites::
+LoadWalkingSpritesGFX::
 	ld hl, wSpriteFlags
 	ld a, [hl]
 	push af
-	set 7, [hl]
-	res 6, [hl]
+	set SPRITES_SKIP_STANDING_GFX_F, [hl]
+	res SPRITES_SKIP_WALKING_GFX_F, [hl]
 	call LoadUsedSpritesGFX
 	pop af
 	ld [wSpriteFlags], a
@@ -237,7 +237,7 @@ LoadStillSpriteTiles:
 
 LoadMiscTiles:
 	ld a, [wSpriteFlags]
-	bit 6, a
+	bit SPRITES_SKIP_WALKING_GFX_F, a
 	ret nz
 
 	ld c, EMOTE_SHADOW
@@ -401,7 +401,7 @@ endr
 	push de
 	push bc
 	ld a, [wSpriteFlags]
-	bit 7, a
+	bit SPRITES_SKIP_STANDING_GFX_F, a
 	jr nz, .skip
 	call Get2bpp
 
@@ -425,7 +425,7 @@ endr
 	jr c, .done
 
 	ld a, [wSpriteFlags]
-	bit 6, a
+	bit SPRITES_SKIP_WALKING_GFX_F, a
 	jr nz, .done
 
 	call Get2bpp

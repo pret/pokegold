@@ -180,7 +180,7 @@ MainMenu_PrintCurrentTimeAndDay:
 
 .PlaceBox:
 	call CheckRTCStatus
-	and $80
+	and RTC_RESET
 	jr nz, .TimeFail
 	hlcoord 0, 12
 	ld b, 4
@@ -197,7 +197,7 @@ MainMenu_PrintCurrentTimeAndDay:
 	and a
 	ret z
 	call CheckRTCStatus
-	and %10000000 ; Day count exceeded 16383
+	and RTC_RESET
 	jp nz, .PrintTimeNotSet
 	call UpdateTime
 	hlcoord 1, 13
