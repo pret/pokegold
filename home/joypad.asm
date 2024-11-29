@@ -68,7 +68,7 @@ endr
 	ld b, a
 
 ; Reset the joypad register since we're done with it.
-	ld a, $30
+	ld a, (1 << rJOYP_BUTTONS) | (1 << rJOYP_DPAD)
 	ldh [rJOYP], a
 
 ; To get the delta we xor the last frame's input with the new one.

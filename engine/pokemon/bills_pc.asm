@@ -735,7 +735,7 @@ _MovePKMNWithoutMail:
 .a_button_2
 	call BillsPC_CheckSpaceInDestination
 	jr c, .no_space
-	call MovePKMNWitoutMail_InsertMon
+	call MovePKMNWithoutMail_InsertMon
 	ld a, $0
 	ld [wJumptableIndex], a
 	ret
@@ -1900,7 +1900,7 @@ ReleasePKMN_ByePKMN:
 DEF MOVE_MON_FROM_PARTY_F EQU 0
 DEF MOVE_MON_TO_PARTY_F   EQU 1
 
-MovePKMNWitoutMail_InsertMon:
+MovePKMNWithoutMail_InsertMon:
 	push hl
 	push de
 	push bc

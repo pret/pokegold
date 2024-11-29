@@ -139,7 +139,7 @@ DEF NUM_DAYTIMES EQU const_value
 
 DEF ANYTIME EQU MORN | DAY | NITE
 
-; wTimeOfDayPalFlags
+; wTimeOfDayPalFlags::
 DEF FORCED_PALSET_F EQU 7
 
 ; wTimeOfDayPalset::
