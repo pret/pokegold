@@ -109,7 +109,7 @@ Credits_HandleAButton:
 	and A_BUTTON
 	ret z
 	ld a, [wJumptableIndex]
-	bit 7, a
+	bit JUMPTABLE_EXIT_F, a
 	ret
 
 Credits_HandleBButton:
@@ -222,7 +222,7 @@ Credits_LYOverride:
 
 ParseCredits:
 	ld hl, wJumptableIndex
-	bit 7, [hl]
+	bit JUMPTABLE_EXIT_F, [hl]
 	jp nz, .done
 
 ; Wait until the timer has run out to parse the next command.
@@ -357,7 +357,7 @@ ParseCredits:
 .end
 ; Stop execution.
 	ld hl, wJumptableIndex
-	set 7, [hl]
+	set JUMPTABLE_EXIT_F, [hl]
 	ld a, 32
 	ld [wMusicFade], a
 	ld a, LOW(MUSIC_POST_CREDITS)

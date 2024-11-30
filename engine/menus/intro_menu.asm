@@ -901,7 +901,7 @@ INCLUDE "engine/movie/title.asm"
 RunTitleScreen:
 	call ScrollTitleScreenClouds
 	ld a, [wJumptableIndex]
-	bit 7, a
+	bit JUMPTABLE_EXIT_F, a
 	jr nz, .done_title
 	call TitleScreenScene
 	ld a, $1
@@ -1016,7 +1016,7 @@ TitleScreenMain:
 
 ; Return to the intro sequence.
 	ld hl, wJumptableIndex
-	set 7, [hl]
+	set JUMPTABLE_EXIT_F, [hl]
 	ret
 
 .end
@@ -1041,7 +1041,7 @@ TitleScreenMain:
 
 ; Return to the intro sequence.
 	ld hl, wJumptableIndex
-	set 7, [hl]
+	set JUMPTABLE_EXIT_F, [hl]
 	ret
 
 TitleScreenEnd:
@@ -1059,7 +1059,7 @@ TitleScreenEnd:
 
 ; Back to the intro.
 	ld hl, wJumptableIndex
-	set 7, [hl]
+	set JUMPTABLE_EXIT_F, [hl]
 	ret
 
 DeleteSaveData:
