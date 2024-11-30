@@ -20,7 +20,7 @@ GoldSilverIntro:
 
 ; check done flag
 	ld a, [wIntroJumptableIndex]
-	bit 7, a
+	bit JUMPTABLE_EXIT_F, a
 	jr nz, .Finish
 
 	farcall PlaySpriteAnimations
@@ -241,7 +241,7 @@ IntroScene17:
 	jr nz, .loop
 ; set done flag
 	ld hl, wIntroJumptableIndex
-	set 7, [hl]
+	set JUMPTABLE_EXIT_F, [hl]
 	ret
 
 IntroScene3_ScrollToSurface:

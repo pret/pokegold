@@ -94,7 +94,7 @@ GameFreakPresentsFrame:
 ; high bits of wJumptableIndex are recycled for some flags
 ; this is set when the sequence finished
 	ld a, [wJumptableIndex]
-	bit 7, a
+	bit JUMPTABLE_EXIT_F, a
 	jr nz, .finish
 
 	farcall PlaySpriteAnimations
@@ -234,7 +234,7 @@ GameFreakPresents_SetDoneFlag:
 ; Tell GameFreakPresents_PlayFrame and TitleScreenFrame that we're finished.
 
 	ld hl, wJumptableIndex
-	set 7, [hl]
+	set JUMPTABLE_EXIT_F, [hl]
 	ret
 
 GameFreakPresents_WaitForTimer:
