@@ -48,8 +48,7 @@ DEF CHANNEL_FREQUENCY                   rw
 DEF CHANNEL_PITCH                       rb
 DEF CHANNEL_OCTAVE                      rb
 DEF CHANNEL_TRANSPOSITION               rb
-DEF CHANNEL_NOTE_DURATION               rb
-DEF CHANNEL_FIELD16                     rb
+DEF CHANNEL_NOTE_DURATION               rw
                                         rb_skip
 DEF CHANNEL_LOOP_COUNT                  rb
 DEF CHANNEL_TEMPO                       rw
