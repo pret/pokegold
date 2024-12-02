@@ -36401,8 +36401,8 @@
 03:a918 sBox10Mon4Moves
 03:a91c sBox10Mon4ID
 03:a91e sBox10Mon4Exp
-03:a921 sBox10Mon4StatExp
 03:a921 sBox10Mon4HPExp
+03:a921 sBox10Mon4StatExp
 03:a923 sBox10Mon4AtkExp
 03:a925 sBox10Mon4DefExp
 03:a927 sBox10Mon4SpdExp
