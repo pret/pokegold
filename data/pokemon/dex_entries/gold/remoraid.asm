@@ -7,4 +7,4 @@
 
 	page "strike even moving"
 	next "prey from more"
-	next "than 300 feet.@"
+	next "than 100 metres.@"

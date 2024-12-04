@@ -7,4 +7,4 @@
 
 	page "on rare occasions,"
 	next "but never more"
-	next "than seven feet.@"
+	next "than two metres.@"
