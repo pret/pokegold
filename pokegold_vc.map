@@ -8180,9 +8180,9 @@ ROMX bank #13:
 	         $77f1 = BattleCommand_PerishSong.failed
 	         $77f7 = BattleCommand_StartSandstorm
 	         $7811 = BattleCommand_StartSandstorm.failed
-	         $7817 = BattleCommand_CheckCurl
-	         $7822 = BattleCommand_CheckCurl.ok
-	         $7830 = BattleCommand_CheckCurl.reset
+	         $7817 = BattleCommand_CheckRollout
+	         $7822 = BattleCommand_CheckRollout.ok
+	         $7830 = BattleCommand_CheckRollout.reset
 	         $7833 = BattleCommand_RolloutPower
 	         $7846 = BattleCommand_RolloutPower.got_rollout_count
 	         $784f = BattleCommand_RolloutPower.skip_set_rampage
