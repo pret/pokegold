@@ -107,7 +107,7 @@ tools:
 	$(MAKE) -C tools/
 
 
-RGBASMFLAGS = -Q8 -P includes.asm -Weverything -Wnumeric-string=2 -Wtruncation=1
+RGBASMFLAGS = -Q8 -P includes.asm -Weverything -Wtruncation=1
 # Create a sym/map for debug purposes if `make` run with `DEBUG=1`
 ifeq ($(DEBUG),1)
 RGBASMFLAGS += -E
@@ -174,12 +174,12 @@ $(foreach obj, $(silver_vc_excl_obj), \
 endif
 
 
-pokegold_opt         = -cjsv -t POKEMON_GLD -i AAUE -k 01 -l 0x33 -m 0x10 -r 3 -p 0
-pokesilver_opt       = -cjsv -t POKEMON_SLV -i AAXE -k 01 -l 0x33 -m 0x10 -r 3 -p 0
-pokegold_debug_opt   = -cjsv -t POKEMON_GLD -i AAUE -k 01 -l 0x33 -m 0x10 -r 3 -p 0
-pokesilver_debug_opt = -cjsv -t POKEMON_SLV -i AAXE -k 01 -l 0x33 -m 0x10 -r 3 -p 0
-pokegold_vc_opt      = -cjsv -t POKEMON_GLD -i AAUE -k 01 -l 0x33 -m 0x10 -r 3 -p 0
-pokesilver_vc_opt    = -cjsv -t POKEMON_SLV -i AAXE -k 01 -l 0x33 -m 0x10 -r 3 -p 0
+pokegold_opt         = -cjsv -t POKEMON_GLD -i AAUE -k 01 -l 0x33 -m MBC3+TIMER+RAM+BATTERY -r 3 -p 0
+pokesilver_opt       = -cjsv -t POKEMON_SLV -i AAXE -k 01 -l 0x33 -m MBC3+TIMER+RAM+BATTERY -r 3 -p 0
+pokegold_debug_opt   = -cjsv -t POKEMON_GLD -i AAUE -k 01 -l 0x33 -m MBC3+TIMER+RAM+BATTERY -r 3 -p 0
+pokesilver_debug_opt = -cjsv -t POKEMON_SLV -i AAXE -k 01 -l 0x33 -m MBC3+TIMER+RAM+BATTERY -r 3 -p 0
+pokegold_vc_opt      = -cjsv -t POKEMON_GLD -i AAUE -k 01 -l 0x33 -m MBC3+TIMER+RAM+BATTERY -r 3 -p 0
+pokesilver_vc_opt    = -cjsv -t POKEMON_SLV -i AAXE -k 01 -l 0x33 -m MBC3+TIMER+RAM+BATTERY -r 3 -p 0
 
 %.gbc: $$(%_obj) layout.link
 	$(RGBLINK) -n $*.sym -m $*.map -l layout.link -o $@ $(filter %.o,$^)
