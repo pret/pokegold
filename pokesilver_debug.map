@@ -37077,8 +37077,8 @@ SRAM bank #3:
 	         $a918 = sBox10Mon4Moves
 	         $a91c = sBox10Mon4ID
 	         $a91e = sBox10Mon4Exp
-	         $a921 = sBox10Mon4HPExp
 	         $a921 = sBox10Mon4StatExp
+	         $a921 = sBox10Mon4HPExp
 	         $a923 = sBox10Mon4AtkExp
 	         $a925 = sBox10Mon4DefExp
 	         $a927 = sBox10Mon4SpdExp
