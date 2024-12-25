@@ -27,7 +27,7 @@ DEF NO_AI EQU 0
 	shift_const SWITCH_OFTEN     ; 0
 	shift_const SWITCH_RARELY    ; 1
 	shift_const SWITCH_SOMETIMES ; 2
-	const_skip                   ; 3
+	const_skip
 	shift_const ALWAYS_USE       ; 4
 	shift_const UNKNOWN_USE      ; 5
 	shift_const CONTEXT_USE      ; 6
