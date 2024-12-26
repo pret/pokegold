@@ -7,7 +7,7 @@ SUMMARY:
 	HRAM: 127 bytes used / 0 free
 
 ROM0 bank #0:
-	SECTION: $0000 (0 bytes) ["NULL"]
+	SECTION: $0000 ($0000 bytes) ["NULL"]
 	         $0000 = NULL
 	SECTION: $0000-$0003 ($0004 bytes) ["rst0"]
 	EMPTY: $0004-$0007 ($0004 bytes)
