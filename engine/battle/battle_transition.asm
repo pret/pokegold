@@ -614,8 +614,7 @@ StartTrainerBattle_LoadPokeBallGraphics:
 
 .PokeBallTransition:
 	; 16x16 overlay of a Poke Ball
-pusho
-opt b.X ; . = 0, X = 1
+pusho b.X ; . = 0, X = 1
 	bigdw %......XXXX......
 	bigdw %....XXXXXXXX....
 	bigdw %..XXXX....XXXX..
