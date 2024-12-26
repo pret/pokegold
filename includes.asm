@@ -66,3 +66,10 @@ INCLUDE "constants/tileset_constants.asm"
 INCLUDE "constants/trainer_constants.asm"
 INCLUDE "constants/trainer_data_constants.asm"
 INCLUDE "constants/type_constants.asm"
+
+IF DEF(_GOLD_VC)
+INCLUDE "vc/pokegold.constants.asm"
+ENDC
+IF DEF(_SILVER_VC)
+INCLUDE "vc/pokesilver.constants.asm"
+ENDC

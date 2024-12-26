@@ -1,57 +1,50 @@
 ; These are all the asm constants needed to make the silver_vc patch.
 
-MACRO vc_const
-	DEF x = \1
-	println "{02x:x} \1" ; same format as rgblink's .sym file
-ENDM
-
 ; [FPA 001 Begin]
-	vc_const "F"
-	vc_const "I"
-	vc_const "S"
-	vc_const "U"
-	vc_const "R"
+EXPORT DEF F_CHAR EQU "F"
+EXPORT DEF I_CHAR EQU "I"
+EXPORT DEF S_CHAR EQU "S"
+EXPORT DEF U_CHAR EQU "U"
+EXPORT DEF R_CHAR EQU "R"
 
 ; [FPA 002 Begin]
-	vc_const "E"
-	vc_const "L"
-	vc_const "D"
+EXPORT DEF E_CHAR EQU "E"
+EXPORT DEF L_CHAR EQU "L"
+EXPORT DEF D_CHAR EQU "D"
 
 ; [FPA 003 Begin]
-	vc_const "T"
-	vc_const "H"
-	vc_const "N"
+EXPORT DEF T_CHAR EQU "T"
+EXPORT DEF H_CHAR EQU "H"
+EXPORT DEF N_CHAR EQU "N"
 
 ; [FPA 004 Begin]
-	vc_const "Y"
-	vc_const "P"
-	; "<SPACE>" is necessary since spaces separate template command arguments
-	charmap "<SPACE>", " "
-	vc_const "<SPACE>"
+EXPORT DEF Y_CHAR EQU "Y"
+EXPORT DEF P_CHAR EQU "P"
+EXPORT DEF SPACE_CHAR EQU " "
 
 ; [FPA 005 Begin]
-	vc_const "O"
+EXPORT DEF O_CHAR EQU "O"
 
 ; [FPA 006 Begin]
-	vc_const "X"
+EXPORT DEF X_CHAR EQU "X"
 
 ; [FPA 007 Begin]
-	vc_const "A"
-	vc_const "@"
+EXPORT DEF A_CHAR EQU "A"
+EXPORT DEF AT_CHAR EQU "@"
 
 ; [FPA 042801 Begin]
-	vc_const BATTLE_ANIM_GFX_BUBBLE
+EXPORT BATTLE_ANIM_GFX_BUBBLE
 
 ; [fight begin]
-	vc_const SCREEN_HEIGHT_PX
+EXPORT SCREEN_HEIGHT_PX
 
 ; [print forbid 2]
-	vc_const NO_INPUT
-	vc_const A_BUTTON
-	vc_const B_BUTTON
-	vc_const D_UP
-	vc_const D_DOWN
+EXPORT NO_INPUT
+EXPORT A_BUTTON
+EXPORT B_BUTTON
+EXPORT D_UP
+EXPORT D_DOWN
 
 ; [print forbid 3]
-	vc_const MAPGROUP_CIANWOOD
-	vc_const MAP_CIANWOOD_PHOTO_STUDIO
+EXPORT MAPGROUP_CIANWOOD
+EXPORT MAP_CIANWOOD_PHOTO_STUDIO
