@@ -260,7 +260,7 @@ EggStats_ScrollToLoadMon:
 
 StatsScreen_LoadPageJumptable:
 ; entries correspond to *_PAGE constants
-	table_width 2, StatsScreen_LoadPageJumptable
+	table_width 2
 	dw LoadPinkPage
 	dw LoadGreenPage
 	dw LoadBluePage
