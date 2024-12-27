@@ -36047,8 +36047,8 @@
 03:a563 sBox9Mon8Unused1
 03:a564 sBox9Mon8Unused2
 03:a565 sBox9Mon8Level
-03:a566 sBox9Mon9Species
 03:a566 sBox9Mon8BoxEnd
+03:a566 sBox9Mon9Species
 03:a566 sBox9Mon9
 03:a567 sBox9Mon9Item
 03:a568 sBox9Mon9Moves
@@ -36476,8 +36476,8 @@
 03:a994 sBox10Mon7Unused2
 03:a995 sBox10Mon7Level
 03:a996 sBox10Mon8Species
-03:a996 sBox10Mon8
 03:a996 sBox10Mon7BoxEnd
+03:a996 sBox10Mon8
 03:a997 sBox10Mon8Item
 03:a998 sBox10Mon8Moves
 03:a99c sBox10Mon8ID
@@ -38596,7 +38596,7 @@
 00:c014 wChannel1Octave
 00:c015 wChannel1Transposition
 00:c016 wChannel1NoteDuration
-00:c017 wChannel1Field16
+00:c017 wChannel1NoteDurationModifier
 00:c019 wChannel1LoopCount
 00:c01a wChannel1Tempo
 00:c01c wChannel1Tracks
@@ -38634,7 +38634,7 @@
 00:c046 wChannel2Octave
 00:c047 wChannel2Transposition
 00:c048 wChannel2NoteDuration
-00:c049 wChannel2Field16
+00:c049 wChannel2NoteDurationModifier
 00:c04b wChannel2LoopCount
 00:c04c wChannel2Tempo
 00:c04e wChannel2Tracks
@@ -38672,7 +38672,7 @@
 00:c078 wChannel3Octave
 00:c079 wChannel3Transposition
 00:c07a wChannel3NoteDuration
-00:c07b wChannel3Field16
+00:c07b wChannel3NoteDurationModifier
 00:c07d wChannel3LoopCount
 00:c07e wChannel3Tempo
 00:c080 wChannel3Tracks
@@ -38710,7 +38710,7 @@
 00:c0aa wChannel4Octave
 00:c0ab wChannel4Transposition
 00:c0ac wChannel4NoteDuration
-00:c0ad wChannel4Field16
+00:c0ad wChannel4NoteDurationModifier
 00:c0af wChannel4LoopCount
 00:c0b0 wChannel4Tempo
 00:c0b2 wChannel4Tracks
@@ -38748,7 +38748,7 @@
 00:c0dc wChannel5Octave
 00:c0dd wChannel5Transposition
 00:c0de wChannel5NoteDuration
-00:c0df wChannel5Field16
+00:c0df wChannel5NoteDurationModifier
 00:c0e1 wChannel5LoopCount
 00:c0e2 wChannel5Tempo
 00:c0e4 wChannel5Tracks
@@ -38786,7 +38786,7 @@
 00:c10e wChannel6Octave
 00:c10f wChannel6Transposition
 00:c110 wChannel6NoteDuration
-00:c111 wChannel6Field16
+00:c111 wChannel6NoteDurationModifier
 00:c113 wChannel6LoopCount
 00:c114 wChannel6Tempo
 00:c116 wChannel6Tracks
@@ -38824,7 +38824,7 @@
 00:c140 wChannel7Octave
 00:c141 wChannel7Transposition
 00:c142 wChannel7NoteDuration
-00:c143 wChannel7Field16
+00:c143 wChannel7NoteDurationModifier
 00:c145 wChannel7LoopCount
 00:c146 wChannel7Tempo
 00:c148 wChannel7Tracks
@@ -38862,7 +38862,7 @@
 00:c172 wChannel8Octave
 00:c173 wChannel8Transposition
 00:c174 wChannel8NoteDuration
-00:c175 wChannel8Field16
+00:c175 wChannel8NoteDurationModifier
 00:c177 wChannel8LoopCount
 00:c178 wChannel8Tempo
 00:c17a wChannel8Tracks
