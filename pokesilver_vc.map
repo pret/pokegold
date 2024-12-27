@@ -37004,8 +37004,8 @@ SRAM bank #3:
 	         $a938 = sBox10Mon5Moves
 	         $a93c = sBox10Mon5ID
 	         $a93e = sBox10Mon5Exp
-	         $a941 = sBox10Mon5StatExp
 	         $a941 = sBox10Mon5HPExp
+	         $a941 = sBox10Mon5StatExp
 	         $a943 = sBox10Mon5AtkExp
 	         $a945 = sBox10Mon5DefExp
 	         $a947 = sBox10Mon5SpdExp
@@ -37017,9 +37017,9 @@ SRAM bank #3:
 	         $a953 = sBox10Mon5Unused1
 	         $a954 = sBox10Mon5Unused2
 	         $a955 = sBox10Mon5Level
-	         $a956 = sBox10Mon6Species
 	         $a956 = sBox10Mon6
 	         $a956 = sBox10Mon5BoxEnd
+	         $a956 = sBox10Mon6Species
 	         $a957 = sBox10Mon6Item
 	         $a958 = sBox10Mon6Moves
 	         $a95c = sBox10Mon6ID
@@ -39603,8 +39603,8 @@ WRAM0 bank #0:
 	         $c335 = wShadowOAMSprite13XCoord
 	         $c336 = wShadowOAMSprite13TileID
 	         $c337 = wShadowOAMSprite13Attributes
-	         $c338 = wShadowOAMSprite14
 	         $c338 = wShadowOAMSprite14YCoord
+	         $c338 = wShadowOAMSprite14
 	         $c339 = wShadowOAMSprite14XCoord
 	         $c33a = wShadowOAMSprite14TileID
 	         $c33b = wShadowOAMSprite14Attributes
