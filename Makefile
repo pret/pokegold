@@ -120,7 +120,7 @@ $(pokesilver_debug_obj): RGBASMFLAGS += -D _SILVER -D _DEBUG
 $(pokegold_vc_obj):      RGBASMFLAGS += -D _GOLD -D _GOLD_VC
 $(pokesilver_vc_obj):    RGBASMFLAGS += -D _SILVER -D _GOLD_VC
 
-%.patch: vc/%.constants.sym %_vc.gbc %.gbc vc/%.patch.template
+%.patch: %_vc.gbc %.gbc vc/%.patch.template
 	tools/make_patch $*_vc.sym $^ $@
 
 rgbdscheck.o: rgbdscheck.asm
@@ -166,10 +166,6 @@ $(foreach obj, $(gold_vc_excl_obj), \
 	$(eval $(call DEP,$(obj),$(obj:_gold_vc.o=_gold.asm))))
 $(foreach obj, $(silver_vc_excl_obj), \
 	$(eval $(call DEP,$(obj),$(obj:_silver_vc.o=_silver.asm))))
-
-# Dependencies for VC files that need to run scan_includes
-%.constants.sym: %.constants.asm $(shell tools/scan_includes %.constants.asm) $(preinclude_deps) | rgbdscheck.o
-	$(RGBASM) $(RGBASMFLAGS) $< > $@
 
 endif
 

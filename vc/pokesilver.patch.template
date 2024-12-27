@@ -253,7 +253,7 @@ MotionBlur0 = 10
 ConditionType = 0                                                 
 ConditionValueA = {dws_ wStringBuffer2 wStringBuffer2+1 wStringBuffer2+2 wStringBuffer2+3 wStringBuffer2+4 wStringBuffer2+5}        
 ConditionValueB = {dws_ ==             ==               ==               ==               ==               ==              }        
-ConditionValueC = {dws_ "F"            "I"              "S"              "S"              "U"              "R"             }        
+ConditionValueC = {dws_ F_CHAR         I_CHAR           S_CHAR           S_CHAR           U_CHAR           R_CHAR          }        
  
 ;******0xcccccccccffffffff8***********---------------   Mem Write: pc32 = 0x3180 addr = 0xcf7e value = 0x92 
 ;******0xcccccccccffffffff8***********---------------   Mem Write: pc32 = 0x3180 addr = 0xcf7f value = 0x84 
@@ -276,7 +276,7 @@ MotionBlur0 = 10
 ConditionType = 0                                                          
 ConditionValueA = {dws_ wStringBuffer2 wStringBuffer2+1 wStringBuffer2+2 wStringBuffer2+3 wStringBuffer2+4 wStringBuffer2+5}                 
 ConditionValueB = {dws_ ==             ==               ==               ==               ==               ==              }                 
-ConditionValueC = {dws_ "S"            "E"              "L"              "F"              "D"              "E"             }  
+ConditionValueC = {dws_ S_CHAR         E_CHAR           L_CHAR           F_CHAR           D_CHAR           E_CHAR          }  
 
 ;******0xcccccccccffffffff8***********---------------   Mem Write: pc32 = 0x3180 addr = 0xcf7e value = 0x93
 ;******0xcccccccccffffffff8***********---------------   Mem Write: pc32 = 0x3180 addr = 0xcf7f value = 0x87
@@ -298,7 +298,7 @@ MotionBlur0 = 10
 ConditionType = 0                                                      
 ConditionValueA = {dws_ wStringBuffer2 wStringBuffer2+1 wStringBuffer2+2 wStringBuffer2+3 wStringBuffer2+4 wStringBuffer2+5}             
 ConditionValueB = {dws_ ==             ==               ==               ==               ==               ==              }             
-ConditionValueC = {dws_ "T"            "H"              "U"              "N"              "D"              "E"             }   
+ConditionValueC = {dws_ T_CHAR         H_CHAR           U_CHAR           N_CHAR           D_CHAR           E_CHAR          }   
 
 ;******0xcccccccccffffffff8***********---------------   Mem Write: pc32 = 0x3180 addr = 0xcf7e value = 0x87
 ;******0xcccccccccffffffff8***********---------------   Mem Write: pc32 = 0x3180 addr = 0xcf7f value = 0x98
@@ -322,7 +322,7 @@ MotionBlur0 = 16
 ConditionType = 0                                                                                
 ConditionValueA = {dws_ wStringBuffer2 wStringBuffer2+1 wStringBuffer2+2 wStringBuffer2+3 wStringBuffer2+4 wStringBuffer2+5}              
 ConditionValueB = {dws_ ==             ==               ==               ==               ==               ==              }              
-ConditionValueC = {dws_ "H"            "Y"              "P"              "E"              "R"              "<SPACE>"       }              
+ConditionValueC = {dws_ H_CHAR         Y_CHAR           P_CHAR           E_CHAR           R_CHAR           SPACE_CHAR      }              
  
 
 
@@ -348,7 +348,7 @@ MotionBlur0 = 11
 ConditionType = 0                                                                                
 ConditionValueA = {dws_ wStringBuffer2 wStringBuffer2+1 wStringBuffer2+2 wStringBuffer2+3 wStringBuffer2+4 wStringBuffer2+5}              
 ConditionValueB = {dws_ ==             ==               ==               ==               ==               ==              }              
-ConditionValueC = {dws_ "H"            "O"              "R"              "N"              "<SPACE>"        "D"             }    
+ConditionValueC = {dws_ H_CHAR         O_CHAR           R_CHAR           N_CHAR           SPACE_CHAR       D_CHAR          }    
 
 ;******0xcccccccccffffffff8***********---------------   Mem Write: pc32 = 0x3180 addr = 0xcf7e value = 0x84
 ;******0xcccccccccffffffff8***********---------------   Mem Write: pc32 = 0x3180 addr = 0xcf7f value = 0x97
@@ -371,7 +371,7 @@ MotionBlur0 = 11
 ConditionType = 0                                                                                
 ConditionValueA = {dws_ wStringBuffer2 wStringBuffer2+1 wStringBuffer2+2 wStringBuffer2+3 wStringBuffer2+4 wStringBuffer2+5}              
 ConditionValueB = {dws_ ==             ==               ==               ==               ==               ==              }              
-ConditionValueC = {dws_ "E"            "X"              "P"              "L"              "O"              "S"             }   
+ConditionValueC = {dws_ E_CHAR         X_CHAR           P_CHAR           L_CHAR           O_CHAR           S_CHAR          }   
 
 ;******0xcccccccccffffffff8***********---------------   Mem Write: pc32 = 0x3180 addr = 0xcf7e value = 0x85
 ;******0xcccccccccffffffff8***********---------------   Mem Write: pc32 = 0x3180 addr = 0xcf7f value = 0x8b
@@ -391,7 +391,7 @@ MotionBlur0 = 11
 ConditionType = 0                                                                                
 ConditionValueA = {dws_ wStringBuffer2 wStringBuffer2+1 wStringBuffer2+2 wStringBuffer2+3 wStringBuffer2+4 wStringBuffer2+5}              
 ConditionValueB = {dws_ ==             ==               ==               ==               ==               ==              }              
-ConditionValueC = {dws_ "F"            "L"              "A"              "S"              "H"              "@"             }   
+ConditionValueC = {dws_ F_CHAR         L_CHAR           A_CHAR           S_CHAR           H_CHAR           AT_CHAR         }   
 
 
 
@@ -425,7 +425,7 @@ MotionBlur0 = 11
 ConditionType = 0                                                                                                                                
 ConditionValueA = {dws_ wStringBuffer2 wStringBuffer2+1 wStringBuffer2+2 wStringBuffer2+3 wStringBuffer2+4 wStringBuffer2+5 wBattleAnimTileDict+2}                                                                              
 ConditionValueB = {dws_ ==             ==               ==               ==               ==               ==               ==                   }                                                                                 
-ConditionValueC = {dws_ "P"            "R"              "E"              "S"              "E"              "N"              BATTLE_ANIM_GFX_BUBBLE      }                                                                                 
+ConditionValueC = {dws_ P_CHAR         R_CHAR           E_CHAR           S_CHAR           E_CHAR           N_CHAR           BATTLE_ANIM_GFX_BUBBLE      }                                                                                 
 
                                                    
 
