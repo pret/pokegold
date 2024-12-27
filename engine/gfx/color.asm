@@ -1088,7 +1088,7 @@ INCLUDE "gfx/sgb/pal_packets.asm"
 INCLUDE "data/sgb_ctrl_packets.asm"
 
 PredefPals:
-	table_width PALETTE_SIZE, PredefPals
+	table_width PALETTE_SIZE
 INCLUDE "gfx/sgb/predef.pal"
 	assert_table_length NUM_PREDEF_PALS
 
@@ -1218,7 +1218,7 @@ MapObjectPals::
 INCLUDE "gfx/overworld/npc_sprites.pal"
 
 RoofPals:
-	table_width PAL_COLOR_SIZE * 2 * 2, RoofPals
+	table_width PAL_COLOR_SIZE * 2 * 2
 INCLUDE "gfx/tilesets/roofs.pal"
 	assert_table_length NUM_MAP_GROUPS + 1
 

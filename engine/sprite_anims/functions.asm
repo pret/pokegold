@@ -13,7 +13,7 @@ DoSpriteAnimFrame:
 
 .Jumptable:
 ; entries correspond to SPRITE_ANIM_FUNC_* constants (see constants/sprite_anim_constants.asm)
-	table_width 2, DoSpriteAnimFrame.Jumptable
+	table_width 2
 	dw AnimSeq_Null
 	dw AnimSeq_PartyMon
 	dw AnimSeq_PartyMonSwitch
