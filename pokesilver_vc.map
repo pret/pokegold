@@ -8491,7 +8491,7 @@ ROMX bank #14:
 	         $4ab4 = AI_Smart_Unused2B.discourage
 	         $4ab6 = AI_Smart_Unused2B.dismiss
 	         $4abc = AI_Smart_Confuse
-	         $4ac8 = AI_Smart_Confuse.skipdiscourage
+	         $4ac8 = AI_Smart_Confuse.discourage
 	         $4ace = AI_Smart_SpDefenseUp2
 	         $4aea = AI_Smart_SpDefenseUp2.encourage
 	         $4af1 = AI_Smart_SpDefenseUp2.discourage
@@ -8504,11 +8504,11 @@ ROMX bank #14:
 	         $4b44 = AI_Smart_HyperBeam
 	         $4b53 = AI_Smart_HyperBeam.discourage
 	         $4b60 = AI_Smart_Rage
-	         $4b6d = AI_Smart_Rage.skipencourage
+	         $4b6d = AI_Smart_Rage.encourage
 	         $4b7c = AI_Smart_Rage.notbuilding
 	         $4b87 = AI_Smart_Rage.discourage
 	         $4b89 = AI_Smart_Mimic
-	         $4bb5 = AI_Smart_Mimic.skip_encourage
+	         $4bb5 = AI_Smart_Mimic.encourage
 	         $4bca = AI_Smart_Mimic.dismiss
 	         $4bd0 = AI_Smart_Mimic.discourage
 	         $4bd2 = AI_Smart_Counter
