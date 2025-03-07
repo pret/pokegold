@@ -44,7 +44,7 @@ pokesilver_vc_obj     := $(rom_obj:.o=_silver_vc.o) $(silver_vc_excl_obj)
 
 ### Build tools
 
-ifeq (,$(shell which sha1sum))
+ifeq (,$(shell command -v sha1sum 2>/dev/null))
 SHA1 := shasum
 else
 SHA1 := sha1sum
