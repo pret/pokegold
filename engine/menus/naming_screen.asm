@@ -61,10 +61,10 @@ NamingScreen:
 
 .GetNamingScreenSetup:
 	ld a, [wNamingScreenType]
-	maskbits NUM_NAME_TYPES
+	maskbits NUM_NAMING_SCREEN_TYPES
 	ld e, a
 	ld d, 0
-	ld hl, .Jumptable
+	ld hl, NamingScreenJumptable
 	add hl, de
 	add hl, de
 	ld a, [hli]
@@ -72,8 +72,9 @@ NamingScreen:
 	ld l, a
 	jp hl
 
-.Jumptable:
-; entries correspond to NAME_* constants
+NamingScreenJumptable:
+; entries correspond to NAME_* constants (see constants/menu_constants.asm)
+	table_width 2
 	dw .Pokemon
 	dw .Player
 	dw .Rival
@@ -82,6 +83,7 @@ NamingScreen:
 	dw .Pokemon
 	dw .Pokemon
 	dw .Pokemon
+	assert_table_length NUM_NAMING_SCREEN_TYPES
 
 .Pokemon:
 	ld a, [wCurPartySpecies]
