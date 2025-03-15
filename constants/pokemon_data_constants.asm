@@ -166,10 +166,9 @@ DEF NUM_ROAMMON_MAPS EQU 16 ; RoamMaps table size (see data/wild/roammon_maps.as
 	const TREEMON_SET_FOREST
 	const TREEMON_SET_CANYON
 	const TREEMON_SET_ROCK
-DEF NUM_TREEMON_SETS EQU const_value
-; last two are unused/ignored
 	const TREEMON_SET_UNUSED
 	const TREEMON_SET_CITY
+DEF NUM_TREEMON_SETS EQU const_value
 
 ; treemon scores
 	const_def

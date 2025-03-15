@@ -19,7 +19,7 @@ MACRO const
 ENDM
 
 MACRO shift_const
-	DEF \1 EQU (1 << const_value)
+	DEF \1 EQU 1 << const_value
 	const \1_F
 ENDM
 

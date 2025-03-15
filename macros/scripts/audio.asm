@@ -46,7 +46,7 @@ ENDM
 
 ; MusicCommands indexes (see audio/engine.asm)
 	const_def $d0
-	DEF FIRST_MUSIC_CMD EQU const_value
+DEF FIRST_MUSIC_CMD EQU const_value
 
 	const octave_cmd ; $d0
 MACRO octave

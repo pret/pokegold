@@ -95,9 +95,13 @@ GetTreeMons:
 ; Return the address of TreeMon table a in hl.
 ; Return nc if table a doesn't exist.
 
-	cp NUM_TREEMON_SETS
+	; last two sets are unused/ignored
+	assert TREEMON_SET_UNUSED == NUM_TREEMON_SETS - 2
+	assert TREEMON_SET_CITY == NUM_TREEMON_SETS - 1
+	cp NUM_TREEMON_SETS - 2
 	jr nc, .quit
 
+	assert TREEMON_SET_NONE == 0
 	and a
 	jr z, .quit
 

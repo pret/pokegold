@@ -715,6 +715,9 @@ DEF NUM_BATTLE_ANIM_FRAMESETS EQU const_value
 	const BATTLE_ANIM_OAMSET_D7
 DEF NUM_BATTLE_ANIM_OAMSETS EQU const_value
 
+assert NUM_BATTLE_ANIM_OAMSETS <= FIRST_OAM_CMD, \
+	"BATTLE_ANIM_OAMSET_* constants overlap oam*_command constants"
+
 ; BattleBGEffects indexes (see engine/battle_anims/bg_effects.asm)
 	const_def 1
 	const BATTLE_BG_EFFECT_FLASH_INVERTED                   ; 01
