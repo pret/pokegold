@@ -994,3 +994,5 @@ DragonsDenB1F_Blocks:
 
 TohjoFalls_Blocks:
 	INCBIN "maps/TohjoFalls.blk"
+
+ENDSECTION

@@ -3,19 +3,6 @@
 ; https://github.com/gbdev/hardware.inc
 ; http://gameboy.mongenel.com/dmg/asmmemmap.html
 
-; memory map
-DEF VRAM_Begin  EQU $8000
-DEF VRAM_End    EQU $a000
-DEF SRAM_Begin  EQU $a000
-DEF SRAM_End    EQU $c000
-DEF WRAM0_Begin EQU $c000
-DEF WRAM0_End   EQU $d000
-DEF WRAM1_Begin EQU $d000
-DEF WRAM1_End   EQU $e000
-; hardware registers $ff00-$ff80 (see below)
-DEF HRAM_Begin  EQU $ff80
-DEF HRAM_End    EQU $ffff
-
 ; MBC3
 DEF MBC3SRamEnable EQU $0000
 DEF MBC3RomBank    EQU $2000
@@ -140,6 +127,8 @@ DEF rWY                  EQU $ff4a ; Window Y Position (R/W)
 DEF rWX                  EQU $ff4b ; Window X Position minus 7 (R/W)
 DEF rLCDMODE             EQU $ff4c
 DEF rKEY1                EQU $ff4d ; CGB Mode Only - Prepare Speed Switch
+DEF KEY1_PREPARE         EQU 0     ; 0=No, 1=Prepare (R/W)
+DEF KEY1_DBLSPEED        EQU 7     ; 0=Normal Speed, 1=Double Speed (R)
 DEF rVBK                 EQU $ff4f ; CGB Mode Only - VRAM Bank
 DEF rBLCK                EQU $ff50
 DEF rHDMA1               EQU $ff51 ; CGB Mode Only - New DMA Source, High
@@ -159,6 +148,6 @@ DEF rOBPI_AUTO_INCREMENT EQU 7     ; increment rOBPI after write to rOBPD
 DEF rOBPD                EQU $ff6b ; CGB Mode Only - Sprite Palette Data
 DEF rOPRI                EQU $ff6c ; CGB Mode Only - Object Priority Mode
 DEF rSVBK                EQU $ff70 ; CGB Mode Only - WRAM Bank
-DEF rPCM12               EQU $ff76 ; Channels 1 & 2 Amplitude (R)
-DEF rPCM34               EQU $ff77 ; Channels 3 & 4 Amplitude (R)
+DEF rPCM12               EQU $ff76 ; Channel 1 & 2 Amplitude (R)
+DEF rPCM34               EQU $ff77 ; Channel 3 & 4 Amplitude (R)
 DEF rIE                  EQU $ffff ; Interrupt Enable (R/W)

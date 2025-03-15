@@ -171,3 +171,5 @@ sBackupCheckValue1:: db ; loaded with SAVE_CHECK_VALUE_1, used to check save cor
 sBackupCurMapData:: ds wCurMapDataEnd - wCurMapData
 sBackupChecksum:: dw
 sBackupCheckValue2:: db ; loaded with SAVE_CHECK_VALUE_2, used to check save corruption
+
+ENDSECTION
