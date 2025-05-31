@@ -15729,7 +15729,7 @@ ROMX bank #51:
 	         $4106 = BattleAnimRunScript
 	         $4113 = BattleAnimRunScript.VC_Reduce_move_anim_flashing
 	         $412a = BattleAnimRunScript.disabled
-	         $413f = BattleAnimRunScript.hi_byte
+	         $413f = BattleAnimRunScript.not_move
 	         $4148 = BattleAnimRunScript.done
 	         $414c = RunBattleAnimScript
 	         $414f = RunBattleAnimScript.playframe
@@ -31251,8 +31251,8 @@ SRAM bank #1:
 	         $aee0 = sBoxMon11Unused2
 	         $aee1 = sBoxMon11Level
 	         $aee2 = sBoxMon11BoxEnd
-	         $aee2 = sBoxMon12Species
 	         $aee2 = sBoxMon12
+	         $aee2 = sBoxMon12Species
 	         $aee3 = sBoxMon12Item
 	         $aee4 = sBoxMon12Moves
 	         $aee8 = sBoxMon12ID
@@ -32787,9 +32787,9 @@ SRAM bank #1:
 	         $bcd6 = sHallOfFame29Mon1DVs
 	         $bcd8 = sHallOfFame29Mon1Level
 	         $bcd9 = sHallOfFame29Mon1Nickname
+	         $bce3 = sHallOfFame29Mon2Species
 	         $bce3 = sHallOfFame29Mon1End
 	         $bce3 = sHallOfFame29Mon2
-	         $bce3 = sHallOfFame29Mon2Species
 	         $bce4 = sHallOfFame29Mon2ID
 	         $bce6 = sHallOfFame29Mon2DVs
 	         $bce8 = sHallOfFame29Mon2Level
@@ -37004,8 +37004,8 @@ SRAM bank #3:
 	         $a938 = sBox10Mon5Moves
 	         $a93c = sBox10Mon5ID
 	         $a93e = sBox10Mon5Exp
-	         $a941 = sBox10Mon5HPExp
 	         $a941 = sBox10Mon5StatExp
+	         $a941 = sBox10Mon5HPExp
 	         $a943 = sBox10Mon5AtkExp
 	         $a945 = sBox10Mon5DefExp
 	         $a947 = sBox10Mon5SpdExp
@@ -41484,7 +41484,7 @@ WRAM0 bank #0:
 	         $cf43 = wBGP
 	         $cf44 = wOBP0
 	         $cf45 = wOBP1
-	         $cf46 = wNumHits
+	         $cf46 = wBattleAfterAnim
 	         $cf48 = wMonOrItemNameBuffer
 	         $cf5e = wTMHMMoveNameBackup
 	         $cf6b = wStringBuffer1

@@ -15373,7 +15373,7 @@
 33:40d9 PlayBattleAnim.wait
 33:4106 BattleAnimRunScript
 33:412a BattleAnimRunScript.disabled
-33:413f BattleAnimRunScript.hi_byte
+33:413f BattleAnimRunScript.not_move
 33:4148 BattleAnimRunScript.done
 33:414c RunBattleAnimScript
 33:414f RunBattleAnimScript.playframe
@@ -30517,8 +30517,8 @@
 01:aee0 sBoxMon11Unused2
 01:aee1 sBoxMon11Level
 01:aee2 sBoxMon11BoxEnd
-01:aee2 sBoxMon12Species
 01:aee2 sBoxMon12
+01:aee2 sBoxMon12Species
 01:aee3 sBoxMon12Item
 01:aee4 sBoxMon12Moves
 01:aee8 sBoxMon12ID
@@ -32051,9 +32051,9 @@
 01:bcd6 sHallOfFame29Mon1DVs
 01:bcd8 sHallOfFame29Mon1Level
 01:bcd9 sHallOfFame29Mon1Nickname
+01:bce3 sHallOfFame29Mon2Species
 01:bce3 sHallOfFame29Mon1End
 01:bce3 sHallOfFame29Mon2
-01:bce3 sHallOfFame29Mon2Species
 01:bce4 sHallOfFame29Mon2ID
 01:bce6 sHallOfFame29Mon2DVs
 01:bce8 sHallOfFame29Mon2Level
@@ -40722,7 +40722,7 @@
 00:cf43 wBGP
 00:cf44 wOBP0
 00:cf45 wOBP1
-00:cf46 wNumHits
+00:cf46 wBattleAfterAnim
 00:cf48 wMonOrItemNameBuffer
 00:cf5e wTMHMMoveNameBackup
 00:cf6b wStringBuffer1
