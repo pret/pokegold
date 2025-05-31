@@ -33,7 +33,7 @@ PlayBattleAnim:
 BattleAnimRunScript:
 	ld a, [wFXAnimID + 1]
 	and a
-	jr nz, .hi_byte
+	jr nz, .not_move
 
 	ld a, [wOptions]
 	bit BATTLE_SCENE, a
@@ -53,20 +53,20 @@ BattleAnimRunScript:
 	call BattleAnimRestoreHuds
 
 .disabled
-	ld a, [wNumHits]
+	ld a, [wBattleAfterAnim]
 	and a
 	jr z, .done
 
 	ld l, a
 	ld h, 0
-	ld de, ANIM_MISS
+	ld de, BATTLE_AFTERANIMS
 	add hl, de
 	ld a, l
 	ld [wFXAnimID], a
 	ld a, h
 	ld [wFXAnimID + 1], a
 
-.hi_byte
+.not_move
 	call WaitSFX
 	call PlayHitSound
 	call RunBattleAnimScript
@@ -1198,10 +1198,10 @@ endr
 	dw $0000, $0000
 
 PlayHitSound:
-	ld a, [wNumHits]
-	cp BATTLEANIM_ENEMY_DAMAGE
+	ld a, [wBattleAfterAnim]
+	cp ANIM_ENEMY_DAMAGE - BATTLE_AFTERANIMS
 	jr z, .okay
-	cp BATTLEANIM_PLAYER_DAMAGE
+	cp ANIM_PLAYER_DAMAGE - BATTLE_AFTERANIMS
 	ret nz
 
 .okay

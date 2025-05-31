@@ -367,7 +367,7 @@ HandleBerserkGene:
 	bit SUBSTATUS_CONFUSED, a
 	ret nz
 	xor a
-	ld [wNumHits], a
+	ld [wBattleAfterAnim], a
 	ld de, ANIM_CONFUSED
 	call Call_PlayBattleAnim_OnlyIfVisible
 	call SwitchTurnCore
@@ -972,7 +972,7 @@ ResidualDamage:
 	pop de
 
 	xor a
-	ld [wNumHits], a
+	ld [wBattleAfterAnim], a
 	call Call_PlayBattleAnim_OnlyIfVisible
 	call GetEighthMaxHP
 	ld de, wPlayerToxicCount
@@ -1012,7 +1012,7 @@ ResidualDamage:
 
 	call SwitchTurnCore
 	xor a
-	ld [wNumHits], a
+	ld [wBattleAfterAnim], a
 	ld de, ANIM_SAP
 	ld a, BATTLE_VARS_SUBSTATUS3_OPP
 	call GetBattleVar
@@ -1037,7 +1037,7 @@ ResidualDamage:
 	bit SUBSTATUS_NIGHTMARE, [hl]
 	jr z, .not_nightmare
 	xor a
-	ld [wNumHits], a
+	ld [wBattleAfterAnim], a
 	ld de, ANIM_IN_NIGHTMARE
 	call Call_PlayBattleAnim_OnlyIfVisible
 	call GetQuarterMaxHP
@@ -1055,7 +1055,7 @@ ResidualDamage:
 	jr z, .not_cursed
 
 	xor a
-	ld [wNumHits], a
+	ld [wBattleAfterAnim], a
 	ld de, ANIM_IN_NIGHTMARE
 	call Call_PlayBattleAnim_OnlyIfVisible
 	call GetQuarterMaxHP
@@ -1197,7 +1197,7 @@ HandleWrap:
 
 	call SwitchTurnCore
 	xor a
-	ld [wNumHits], a
+	ld [wBattleAfterAnim], a
 	ld [wFXAnimID + 1], a
 	predef PlayBattleAnim
 	call SwitchTurnCore
@@ -1687,7 +1687,7 @@ HandleWeather:
 
 	call SwitchTurnCore
 	xor a
-	ld [wNumHits], a
+	ld [wBattleAfterAnim], a
 	ld de, ANIM_IN_SANDSTORM
 	call Call_PlayBattleAnim
 	call SwitchTurnCore
@@ -3358,7 +3358,7 @@ ShowSetEnemyMonAndSendOutAnimation:
 	call GetEnemyMonFrontpic
 
 	xor a
-	ld [wNumHits], a
+	ld [wBattleAfterAnim], a
 	ld [wBattleAnimParam], a
 	call SetEnemyTurn
 	ld de, ANIM_SEND_OUT_MON
@@ -3815,7 +3815,7 @@ SendOutPlayerMon:
 	ld [wEnemyWrapCount], a
 	call SetPlayerTurn
 	xor a
-	ld [wNumHits], a
+	ld [wBattleAfterAnim], a
 	ld [wBattleAnimParam], a
 	ld de, ANIM_SEND_OUT_MON
 	call Call_PlayBattleAnim
@@ -3995,7 +3995,7 @@ RecallPlayerMon:
 	push af
 	xor a
 	ldh [hBattleTurn], a
-	ld [wNumHits], a
+	ld [wBattleAfterAnim], a
 	ld de, ANIM_RETURN_MON
 	call Call_PlayBattleAnim
 	pop af
@@ -4127,7 +4127,7 @@ ItemRecoveryAnim:
 	ld [wFXAnimID], a
 	call SwitchTurnCore
 	xor a
-	ld [wNumHits], a
+	ld [wBattleAfterAnim], a
 	ld [wFXAnimID + 1], a
 	predef PlayBattleAnim
 	call SwitchTurnCore
@@ -8700,7 +8700,7 @@ BattleStartMessage:
 	jr nc, .not_shiny
 
 	xor a
-	ld [wNumHits], a
+	ld [wBattleAfterAnim], a
 	ld a, 1
 	ldh [hBattleTurn], a
 	ld a, 1
