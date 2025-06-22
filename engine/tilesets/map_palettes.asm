@@ -20,7 +20,7 @@ _LoadOverworldAttrmapPals::
 	ld h, a
 	ld a, [hl]
 	and $f
-	bit OAM_TILE_BANK, a
+	bit B_OAM_BANK1, a
 	jr z, .next
 	jr .by_map_group
 
@@ -34,7 +34,7 @@ _LoadOverworldAttrmapPals::
 	ld a, [hl]
 	swap a
 	and $f
-	bit OAM_TILE_BANK, a
+	bit B_OAM_BANK1, a
 	jr z, .next
 
 .by_map_group
@@ -76,7 +76,7 @@ _ScrollBGMapPalettes::
 	ld h, a
 	ld a, [hl]
 	and $f
-	bit OAM_TILE_BANK, a
+	bit B_OAM_BANK1, a
 	jr z, .next
 	jr .by_map_group
 
@@ -90,7 +90,7 @@ _ScrollBGMapPalettes::
 	ld a, [hl]
 	swap a
 	and $f
-	bit OAM_TILE_BANK, a
+	bit B_OAM_BANK1, a
 	jr z, .next
 
 .by_map_group

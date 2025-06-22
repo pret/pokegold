@@ -204,7 +204,7 @@ INCBIN "gfx/printer/bold_b.1bpp"
 
 PlaceUnownPrinterFrontpic:
 	hlcoord 0, 0
-	ld bc, SCREEN_WIDTH * SCREEN_HEIGHT
+	ld bc, SCREEN_AREA
 	ld a, " "
 	call ByteFill
 	hlcoord 7, 11

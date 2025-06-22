@@ -867,7 +867,7 @@ StartTitleScreen:
 	call ClearBGPalettes
 
 	ld hl, rLCDC
-	res rLCDC_SPRITE_SIZE, [hl] ; 8x8
+	res B_LCDC_OBJ_SIZE, [hl] ; 8x8
 	call ClearTilemap
 	xor a
 	ldh [hLCDCPointer], a

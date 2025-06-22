@@ -65,7 +65,7 @@ InitMysteryGiftLayout:
 	call ByteFill
 	hlcoord 0, 0
 	ld a, $3d
-	ld bc, SCREEN_HEIGHT * SCREEN_WIDTH
+	ld bc, SCREEN_AREA
 	call ByteFill
 	hlcoord 3, 7
 	lb bc, 9, 15

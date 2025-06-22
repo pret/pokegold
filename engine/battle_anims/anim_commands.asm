@@ -195,9 +195,9 @@ PlaceWindowOverBattleTextbox: ; unreferenced
 	xor a
 	ldh [hBGMapMode], a
 	; bgcoord hBGMapAddress, 0, 20
-	ld a, LOW(vBGMap0 + 20 * BG_MAP_WIDTH)
+	ld a, LOW(vBGMap0 + 20 * TILEMAP_WIDTH)
 	ldh [hBGMapAddress], a
-	ld a, HIGH(vBGMap0 + 20 * BG_MAP_WIDTH)
+	ld a, HIGH(vBGMap0 + 20 * TILEMAP_WIDTH)
 	ldh [hBGMapAddress + 1], a
 	call WaitBGMap2
 	ld a, (SCREEN_HEIGHT - TEXTBOX_HEIGHT) * TILE_WIDTH
@@ -217,13 +217,13 @@ BattleAnim_ClearOAM:
 
 	; Instead of deleting the sprites, make them all use PAL_BATTLE_OB_ENEMY
 	ld hl, wShadowOAMSprite00Attributes
-	ld c, NUM_SPRITE_OAM_STRUCTS
+	ld c, OAM_COUNT
 .loop
 	ld a, [hl]
-	and ~(PALETTE_MASK | VRAM_BANK_1) ; zeros out the palette bits
+	and ~(OAM_PALETTE | OAM_BANK1) ; zeros out the palette bits
 	assert PAL_BATTLE_OB_ENEMY == 0
 	ld [hli], a
-rept SPRITEOAMSTRUCT_LENGTH - 1
+rept OBJ_SIZE - 1
 	inc hl
 endr
 	dec c
@@ -650,7 +650,7 @@ BattleAnimCmd_5GFX:
 .loop
 	vc_hook Reduce_move_anim_flashing_PRESENT
 	ld a, [wBattleAnimGFXTempTileID]
-	cp (vTiles1 - vTiles0) / LEN_2BPP_TILE - BATTLEANIM_BASE_TILE
+	cp (vTiles1 - vTiles0) / TILE_SIZE - BATTLEANIM_BASE_TILE
 	ret nc
 	call GetBattleAnimByte
 	ld [hli], a

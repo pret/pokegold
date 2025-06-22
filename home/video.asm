@@ -169,7 +169,7 @@ DEF THIRD_HEIGHT EQU SCREEN_HEIGHT / 3
 	ldh a, [hBGMapAddress]
 	ld l, a
 
-	ld de, 2 * THIRD_HEIGHT * BG_MAP_WIDTH
+	ld de, 2 * THIRD_HEIGHT * TILEMAP_WIDTH
 	add hl, de
 
 ; Next time: top third
@@ -186,7 +186,7 @@ DEF THIRD_HEIGHT EQU SCREEN_HEIGHT / 3
 	ldh a, [hBGMapAddress]
 	ld l, a
 
-	ld de, THIRD_HEIGHT * BG_MAP_WIDTH
+	ld de, THIRD_HEIGHT * TILEMAP_WIDTH
 	add hl, de
 
 ; Next time: bottom third
@@ -212,7 +212,7 @@ DEF THIRD_HEIGHT EQU SCREEN_HEIGHT / 3
 	ld a, THIRD_HEIGHT
 
 ; Discrepancy between wTilemap and BGMap
-	ld bc, BG_MAP_WIDTH - (SCREEN_WIDTH - 1)
+	ld bc, TILEMAP_WIDTH - (SCREEN_WIDTH - 1)
 
 .row
 ; Copy a row of 20 tiles
@@ -390,7 +390,7 @@ Video_DummyFunction:: ; unreferenced
 
 EnableSpriteDisplay:: ; unreferenced
 	ld hl, rLCDC
-	set rLCDC_SPRITES_ENABLE, [hl]
+	set B_LCDC_OBJS, [hl]
 	ret
 
 FillBGMap0WithBlack::
@@ -405,7 +405,7 @@ FillBGMap0WithBlack::
 	jr z, .two
 	; 3
 
-DEF BG_THIRD_HEIGHT EQU (BG_MAP_HEIGHT - SCREEN_HEIGHT) / 2
+DEF BG_THIRD_HEIGHT EQU (TILEMAP_HEIGHT - SCREEN_HEIGHT) / 2
 
 ; Black out the 18 BG Map rows right of the screen area
 	ld a, 2
@@ -419,7 +419,7 @@ DEF BG_THIRD_HEIGHT EQU (BG_MAP_HEIGHT - SCREEN_HEIGHT) / 2
 	ld b, SCREEN_HEIGHT
 	ld a, "■"
 .loop1
-rept BG_MAP_WIDTH - SCREEN_WIDTH
+rept TILEMAP_WIDTH - SCREEN_WIDTH
 	ld [hli], a
 endr
 	add hl, de
@@ -430,13 +430,13 @@ endr
 .two
 ; Black out the top 7 BG Map rows below the screen area
 	ld a, 1
-	ld de, BG_MAP_WIDTH * SCREEN_HEIGHT
+	ld de, TILEMAP_WIDTH * SCREEN_HEIGHT
 	jr .go
 
 .one
 ; Black out the bottom 7 BG Map rows below the screen area
 	xor a
-	ld de, BG_MAP_WIDTH * (SCREEN_HEIGHT + BG_THIRD_HEIGHT)
+	ld de, TILEMAP_WIDTH * (SCREEN_HEIGHT + BG_THIRD_HEIGHT)
 
 .go
 	ldh [hBlackOutBGMapThird], a
@@ -448,7 +448,7 @@ endr
 	ld b, BG_THIRD_HEIGHT * 2
 	ld a, "■"
 .loop2
-rept BG_MAP_WIDTH / 2
+rept TILEMAP_WIDTH / 2
 	ld [hli], a
 endr
 	dec b

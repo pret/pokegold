@@ -10,7 +10,7 @@ InitDisplayForHallOfFame:
 	ld a, " "
 	call ByteFill
 	hlcoord 0, 0, wAttrmap
-	ld bc, SCREEN_WIDTH * SCREEN_HEIGHT
+	ld bc, SCREEN_AREA
 	xor a
 	call ByteFill
 	xor a
@@ -39,7 +39,7 @@ InitDisplayForRedCredits:
 	ld a, " "
 	call ByteFill
 	hlcoord 0, 0, wAttrmap
-	ld bc, SCREEN_WIDTH * SCREEN_HEIGHT
+	ld bc, SCREEN_AREA
 	xor a
 	call ByteFill
 	ld hl, wBGPals1

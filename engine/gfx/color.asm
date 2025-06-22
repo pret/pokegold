@@ -450,7 +450,7 @@ LoadPalette_White_Col1_Col2_Black:
 	ld [de], a
 	inc de
 
-	ld c, 2 * PAL_COLOR_SIZE
+	ld c, 2 * COLOR_SIZE
 .loop
 	ld a, [hli]
 	ld [de], a
@@ -509,7 +509,7 @@ ResetBGPals:
 
 WipeAttrmap:
 	hlcoord 0, 0, wAttrmap
-	ld bc, SCREEN_WIDTH * SCREEN_HEIGHT
+	ld bc, SCREEN_AREA
 	xor a
 	call ByteFill
 	ret
@@ -523,7 +523,7 @@ ApplyPals:
 
 ApplyAttrmap:
 	ldh a, [rLCDC]
-	bit rLCDC_ENABLE, a
+	bit B_LCDC_ENABLE, a
 	jr z, .UpdateVBank1
 	ldh a, [hBGMapMode]
 	push af
@@ -551,7 +551,7 @@ ApplyAttrmap:
 	inc de
 	dec c
 	jr nz, .col
-	ld a, BG_MAP_WIDTH - SCREEN_WIDTH
+	ld a, TILEMAP_WIDTH - SCREEN_WIDTH
 	add e
 	jr nc, .okay
 	inc d
@@ -647,7 +647,7 @@ CGBCopyBattleObjectPals: ; unreferenced
 	call CheckCGB
 	ret z
 	ld hl, BattleObjectPals
-	ld a, (1 << rOBPI_AUTO_INCREMENT) | $10
+	ld a, OBPI_AUTOINC | $10
 	ldh [rOBPI], a
 	ld c, 6 palettes
 .loop
@@ -667,7 +667,7 @@ INCLUDE "gfx/battle_anims/battle_anims.pal"
 CGBCopyTwoPredefObjectPals: ; unreferenced
 	call CheckCGB
 	ret z
-	ld a, (1 << rOBPI_AUTO_INCREMENT) | $10
+	ld a, OBPI_AUTOINC | $10
 	ldh [rOBPI], a
 	ld a, PREDEFPAL_TRADE_TUBE
 	call GetPredefPal
@@ -807,7 +807,7 @@ InitCGBPals::
 	call ByteFill
 	ld a, BANK(vTiles0)
 	ldh [rVBK], a
-	ld a, 1 << rBGPI_AUTO_INCREMENT
+	ld a, BGPI_AUTOINC
 	ldh [rBGPI], a
 	ld c, 4 * TILE_WIDTH
 .bgpals_loop
@@ -817,7 +817,7 @@ InitCGBPals::
 	ldh [rBGPD], a
 	dec c
 	jr nz, .bgpals_loop
-	ld a, 1 << rOBPI_AUTO_INCREMENT
+	ld a, OBPI_AUTOINC
 	ldh [rOBPI], a
 	ld c, 4 * TILE_WIDTH
 .obpals_loop
@@ -955,7 +955,7 @@ endr
 
 SGBBorder_PushBGPals:
 	call DisableLCD
-	ld a, %11100100
+	ld a, BGP_SGB_TRANSFER
 	ldh [rBGP], a
 	ld hl, PredefPals
 	ld de, vTiles1
@@ -972,7 +972,7 @@ SGBBorder_PushBGPals:
 
 SGBBorder_MorePalPushing:
 	call DisableLCD
-	ld a, $e4
+	ld a, BGP_SGB_TRANSFER
 	ldh [rBGP], a
 	ld de, vTiles1
 	ld bc, (6 + SCREEN_WIDTH + 6) * 5 * 2
@@ -1006,7 +1006,7 @@ SGBBorder_MorePalPushing:
 
 SGBBorder_YetMorePalPushing:
 	call DisableLCD
-	ld a, %11100100
+	ld a, BGP_SGB_TRANSFER
 	ldh [rBGP], a
 	ld de, vTiles1
 	ld b, $80
@@ -1055,7 +1055,7 @@ ClearBytes:
 DrawDefaultTiles:
 ; Draw 240 tiles (2/3 of the screen) from tiles in VRAM
 	hlbgcoord 0, 0 ; BG Map 0
-	ld de, BG_MAP_WIDTH - SCREEN_WIDTH
+	ld de, TILEMAP_WIDTH - SCREEN_WIDTH
 	ld a, $80 ; starting tile
 	ld c, 12 + 1
 .line
@@ -1088,7 +1088,7 @@ INCLUDE "gfx/sgb/pal_packets.asm"
 INCLUDE "data/sgb_ctrl_packets.asm"
 
 PredefPals:
-	table_width PALETTE_SIZE
+	table_width PAL_SIZE
 INCLUDE "gfx/sgb/predef.pal"
 	assert_table_length NUM_PREDEF_PALS
 
@@ -1218,7 +1218,7 @@ MapObjectPals::
 INCLUDE "gfx/overworld/npc_sprites.pal"
 
 RoofPals:
-	table_width PAL_COLOR_SIZE * 2 * 2
+	table_width COLOR_SIZE * 2 * 2
 INCLUDE "gfx/tilesets/roofs.pal"
 	assert_table_length NUM_MAP_GROUPS + 1
 

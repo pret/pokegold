@@ -599,7 +599,7 @@ StartTrainerBattle_LoadPokeBallGraphics:
 	call CopyBytes
 
 	hlcoord 0, 0, wAttrmap
-	ld bc, SCREEN_HEIGHT * SCREEN_WIDTH
+	ld bc, SCREEN_AREA
 	ld a, PAL_BG_TEXT
 	call ByteFill
 

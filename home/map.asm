@@ -106,7 +106,7 @@ LoadOverworldTilemap::
 
 	ld a, "■"
 	hlcoord 0, 0
-	ld bc, SCREEN_WIDTH * SCREEN_HEIGHT
+	ld bc, SCREEN_AREA
 	call ByteFill
 
 	ld a, BANK(_LoadOverworldTilemap)
@@ -276,7 +276,7 @@ LoadMapTimeOfDay::
 	ld [hli], a
 	dec c
 	jr nz, .column
-	ld bc, BG_MAP_WIDTH - SCREEN_WIDTH
+	ld bc, TILEMAP_WIDTH - SCREEN_WIDTH
 	add hl, bc
 	pop bc
 	dec b
@@ -1582,7 +1582,7 @@ ScrollMapDown::
 	ld l, a
 	ld a, [wBGMapAnchor + 1]
 	ld h, a
-	ld bc, BG_MAP_WIDTH tiles
+	ld bc, TILEMAP_WIDTH tiles
 	add hl, bc
 ; cap d at HIGH(vBGMap0)
 	ld a, h
@@ -1667,7 +1667,7 @@ UpdateBGMapRow::
 	push de
 	call .iteration
 	pop de
-	ld a, BG_MAP_WIDTH
+	ld a, TILEMAP_WIDTH
 	add e
 	ld e, a
 
@@ -1701,7 +1701,7 @@ UpdateBGMapColumn::
 	ld [hli], a
 	ld a, d
 	ld [hli], a
-	ld a, BG_MAP_WIDTH
+	ld a, TILEMAP_WIDTH
 	add e
 	ld e, a
 	jr nc, .skip

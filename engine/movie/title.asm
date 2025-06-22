@@ -57,7 +57,7 @@ TitleScreen:
 	ld [hli], a
 	ld [hl], a
 	ld hl, rLCDC
-	set rLCDC_SPRITE_SIZE, [hl]
+	set B_LCDC_OBJ_SIZE, [hl]
 	call EnableLCD
 
 ; Reset timing variables
@@ -147,7 +147,7 @@ FillTitleScreenPals:
 	ld a, 1
 	ldh [rVBK], a
 	hlbgcoord 0, 0
-	ld bc, 18 * BG_MAP_WIDTH
+	ld bc, 18 * TILEMAP_WIDTH
 	xor a
 	call ByteFill
 	hlbgcoord 0, 0, vBGMap2
@@ -159,7 +159,7 @@ FillTitleScreenPals:
 	ld a, 3
 	call DrawTitleGraphic
 	hlbgcoord 0, 12, vBGMap2
-	ld bc, 5 * BG_MAP_WIDTH
+	ld bc, 5 * TILEMAP_WIDTH
 	ld a, 4
 	call ByteFill
 	ld a, 0
@@ -175,7 +175,7 @@ DrawTitleGraphic:
 	dec c
 	jr nz, .col
 	pop hl
-	ld bc, BG_MAP_WIDTH
+	ld bc, TILEMAP_WIDTH
 	add hl, bc
 	pop bc
 	dec b
@@ -200,7 +200,7 @@ LoadTitleScreenTilemap:
 	and a
 	ret nz
 	hlbgcoord 0, 11
-	ld bc, BG_MAP_WIDTH
+	ld bc, TILEMAP_WIDTH
 	ld a, "@"
 	call ByteFill
 	ret

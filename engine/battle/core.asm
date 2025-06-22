@@ -7776,7 +7776,7 @@ StartBattle:
 	call ShowLinkBattleParticipants
 	farcall ClearBattleRAM
 	ld hl, rLCDC
-	res rLCDC_WINDOW_TILEMAP, [hl] ; select vBGMap0/vBGMap2
+	res B_LCDC_WIN_MAP, [hl] ; select vBGMap0/vBGMap2
 	ld a, [wOtherTrainerClass]
 	and a
 	jr nz, .trainer
@@ -7797,7 +7797,7 @@ StartBattle:
 	xor a
 	ldh [hBGMapMode], a
 	ld hl, rLCDC
-	set rLCDC_WINDOW_TILEMAP, [hl] ; select vBGMap1/vBGMap3
+	set B_LCDC_WIN_MAP, [hl] ; select vBGMap1/vBGMap3
 	call EmptyBattleTextbox
 	hlcoord 9, 7
 	lb bc, 5, 11
@@ -8091,7 +8091,7 @@ _DisplayLinkRecord:
 	call CloseSRAM
 	hlcoord 0, 0, wAttrmap
 	xor a
-	ld bc, SCREEN_WIDTH * SCREEN_HEIGHT
+	ld bc, SCREEN_AREA
 	call ByteFill
 	call WaitBGMap2
 	ld b, SCGB_DIPLOMA
@@ -8583,13 +8583,13 @@ InitBattleDisplay:
 	call OpenSRAM
 
 	ld hl, sDecompressScratch
-	ld bc, BG_MAP_WIDTH * BG_MAP_HEIGHT
+	ld bc, TILEMAP_AREA
 	ld a, " "
 	call ByteFill
 
 	ld de, sDecompressScratch
 	hlbgcoord 0, 0
-	lb bc, BANK(@), (BG_MAP_WIDTH * BG_MAP_HEIGHT) / LEN_2BPP_TILE
+	lb bc, BANK(@), (TILEMAP_AREA) / TILE_SIZE
 	call Request2bpp
 
 	call CloseSRAM

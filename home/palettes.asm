@@ -20,7 +20,7 @@ UpdateCGBPals::
 	ld hl, wBGPals2
 
 ; copy 8 pals to bgpd
-	ld a, 1 << rBGPI_AUTO_INCREMENT
+	ld a, BGPI_AUTOINC
 	ldh [rBGPI], a
 	ld c, 8 / 2
 .bgp
@@ -35,7 +35,7 @@ endr
 ; hl is now wOBPals2
 
 ; copy 8 pals to obpd
-	ld a, 1 << rOBPI_AUTO_INCREMENT
+	ld a, OBPI_AUTOINC
 	ldh [rOBPI], a
 	ld c, 8 / 2
 .obp
@@ -191,14 +191,14 @@ CopyPals::
 ; copy c palettes in order b from de to hl
 
 	push bc
-	ld c, NUM_PAL_COLORS
+	ld c, PAL_COLORS
 .loop
 	push de
 	push hl
 
 ; get pal color
 	ld a, b
-	maskbits 1 << PAL_COLOR_SIZE
+	maskbits 1 << COLOR_SIZE
 ; 2 bytes per color
 	add a
 	ld l, a
@@ -216,7 +216,7 @@ CopyPals::
 	ld [hl], d
 	inc hl
 ; next pal color
-rept PAL_COLOR_SIZE
+rept COLOR_SIZE
 	srl b
 endr
 ; source
@@ -226,7 +226,7 @@ endr
 	jr nz, .loop
 
 ; de += 8 (next pal)
-	ld a, PALETTE_SIZE
+	ld a, PAL_SIZE
 	add e
 	jr nc, .ok
 	inc d
@@ -259,7 +259,7 @@ ClearVBank1::
 ReloadPalettes::
 	hlcoord 0, 0
 	decoord 0, 0, wAttrmap
-	ld bc, SCREEN_WIDTH * SCREEN_HEIGHT
+	ld bc, SCREEN_AREA
 .loop
 	ld a, [hli]
 	cp "■"
