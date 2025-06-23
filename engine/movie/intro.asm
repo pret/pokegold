@@ -434,7 +434,7 @@ Intro_UpdateTilemapAndBGMap:
 	ld e, a
 	ld a, [wIntroTilemapPointer + 1]
 	ld d, a
-	ld hl, -BG_MAP_WIDTH / 2
+	ld hl, -TILEMAP_WIDTH / 2
 	add hl, de
 	ld a, l
 	ld e, l
@@ -444,7 +444,7 @@ Intro_UpdateTilemapAndBGMap:
 	ld [wIntroTilemapPointer + 1], a
 
 	hlcoord 0, 0
-	ld c, BG_MAP_WIDTH / 2
+	ld c, TILEMAP_WIDTH / 2
 .loop
 	call Intro_Draw2x2Tiles
 	dec c
@@ -454,7 +454,7 @@ Intro_UpdateTilemapAndBGMap:
 	ld e, a
 	ld a, [wIntroBGMapPointer + 1]
 	ld d, a
-	ld hl, -2 * BG_MAP_WIDTH
+	ld hl, -2 * TILEMAP_WIDTH
 	add hl, de
 	ld a, l
 	ld [wIntroBGMapPointer + 0], a
@@ -1171,17 +1171,17 @@ Copy128Tiles: ; unreferenced
 	ret
 
 Intro_DrawBackground:
-	ld b, BG_MAP_WIDTH / 2
+	ld b, TILEMAP_WIDTH / 2
 .outer_loop
 	push hl
-	ld c, BG_MAP_HEIGHT / 2
+	ld c, TILEMAP_HEIGHT / 2
 .inner_loop
 	call Intro_Draw2x2Tiles
 	dec c
 	jr nz, .inner_loop
 	pop hl
 	push bc
-	ld bc, 2 * BG_MAP_WIDTH
+	ld bc, 2 * TILEMAP_WIDTH
 	add hl, bc
 	pop bc
 	dec b
@@ -1216,7 +1216,7 @@ Intro_Draw2x2Tiles:
 	inc de
 	ld [hli], a
 	pop hl
-	ld bc, BG_MAP_WIDTH
+	ld bc, TILEMAP_WIDTH
 	add hl, bc
 	ld a, [de]
 	inc de

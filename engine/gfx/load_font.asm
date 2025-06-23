@@ -29,7 +29,7 @@ _LoadFontsBattleExtra::
 LoadFrame:
 	ld a, [wTextboxFrame]
 	maskbits NUM_FRAMES
-	ld bc, TEXTBOX_FRAME_TILES * LEN_1BPP_TILE
+	ld bc, TEXTBOX_FRAME_TILES * TILE_1BPP_SIZE
 	ld hl, Frames
 	call AddNTimes
 	ld d, h
@@ -79,7 +79,7 @@ StatsScreen_LoadFont::
 	ld hl, vTiles2 tile $78
 	lb bc, BANK(HPExpBarBorderGFX), 1
 	call Get1bpp
-	ld de, HPExpBarBorderGFX + 3 * LEN_1BPP_TILE
+	ld de, HPExpBarBorderGFX + 3 * TILE_1BPP_SIZE
 	ld hl, vTiles2 tile $76
 	lb bc, BANK(HPExpBarBorderGFX), 2
 	call Get1bpp

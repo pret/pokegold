@@ -120,7 +120,7 @@ _CGB_FinishBattleScreenLayout:
 	ld bc, 1 palettes
 	call CopyBytes
 	hlcoord 0, 0, wAttrmap
-	ld bc, SCREEN_WIDTH * SCREEN_HEIGHT
+	ld bc, SCREEN_AREA
 	ld a, PAL_BATTLE_BG_ENEMY_HP
 	call ByteFill
 	hlcoord 0, 4, wAttrmap
@@ -615,7 +615,7 @@ _CGB_TrainerCard:
 
 	; card border
 	hlcoord 0, 0, wAttrmap
-	ld bc, SCREEN_WIDTH * SCREEN_HEIGHT
+	ld bc, SCREEN_AREA
 	ld a, $1 ; falkner
 	call ByteFill
 	; trainer sprite area

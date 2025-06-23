@@ -19,9 +19,8 @@ INCLUDE "macros/scripts/battle_commands.asm"
 INCLUDE "macros/scripts/battle_anims.asm"
 INCLUDE "macros/scripts/oam_anims.asm"
 
-INCLUDE "macros/legacy.asm"
+INCLUDE "constants/hardware.inc"
 
-INCLUDE "constants/hardware_constants.asm"
 INCLUDE "constants/deco_constants.asm"
 INCLUDE "constants/ram_constants.asm"
 INCLUDE "constants/misc_constants.asm"
@@ -73,3 +72,5 @@ ENDC
 IF DEF(_SILVER_VC)
 INCLUDE "vc/pokesilver.constants.asm"
 ENDC
+
+INCLUDE "macros/legacy.asm"

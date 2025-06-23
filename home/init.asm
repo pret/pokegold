@@ -14,7 +14,7 @@ Reset::
 	jr Init
 
 _Start::
-	cp $11
+	cp BOOTUP_A_CGB
 	jr z, .cgb
 	xor a ; FALSE
 	jr .load
@@ -94,14 +94,14 @@ Init::
 	ldh [hSCY], a
 	ldh [rJOYP], a
 
-	ld a, $8 ; HBlank int enable
+	ld a, STAT_MODE_0
 	ldh [rSTAT], a
 
-	ld a, $90
+	ld a, SCREEN_HEIGHT_PX
 	ldh [hWY], a
 	ldh [rWY], a
 
-	ld a, 7
+	ld a, WX_OFS
 	ldh [hWX], a
 	ldh [rWX], a
 
@@ -122,11 +122,11 @@ Init::
 
 	farcall StartClock
 
-	ld a, SRAM_ENABLE
-	ld [MBC3SRamEnable], a
-	ld a, SRAM_DISABLE
-	ld [MBC3LatchClock], a
-	ld [MBC3SRamEnable], a
+	ld a, RAMG_SRAM_ENABLE
+	ld [rRAMG], a
+	ld a, RAMG_SRAM_DISABLE
+	ld [rRTCLATCH], a
+	ld [rRAMG], a
 
 	ld a, LCDC_DEFAULT ; %11100011
 	; LCD on

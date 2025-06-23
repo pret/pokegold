@@ -574,7 +574,7 @@ RestoreOverworldMapTiles:
 	call OpenSRAM
 	hlcoord 0, 0
 	ld de, sScratch
-	ld bc, SCREEN_WIDTH * SCREEN_HEIGHT
+	ld bc, SCREEN_AREA
 	call CopyBytes
 	call CloseSRAM
 	call LoadOverworldTilemapAndAttrmapPals
@@ -582,7 +582,7 @@ RestoreOverworldMapTiles:
 	call OpenSRAM
 	ld hl, sScratch
 	decoord 0, 0
-	ld bc, SCREEN_WIDTH * SCREEN_HEIGHT
+	ld bc, SCREEN_AREA
 .loop
 	ld a, [hl]
 	cp $61

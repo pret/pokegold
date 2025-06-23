@@ -142,12 +142,12 @@ DebugColor_InitVRAM:
 	call ByteFill
 
 	hlcoord 0, 0, wAttrmap
-	ld bc, SCREEN_WIDTH * SCREEN_HEIGHT
+	ld bc, SCREEN_AREA
 	xor a
 	call ByteFill
 
 	hlcoord 0, 0
-	ld bc, SCREEN_WIDTH * SCREEN_HEIGHT
+	ld bc, SCREEN_AREA
 	xor a
 	call ByteFill
 
@@ -189,7 +189,7 @@ DebugColor_InitPalettes:
 	ld bc, 16 palettes
 	call CopyBytes
 
-	ld a, 1 << rBGPI_AUTO_INCREMENT
+	ld a, BGPI_AUTOINC
 	ldh [rBGPI], a
 	ld hl, Palette_DebugBG
 	ld c, 8 palettes
@@ -199,7 +199,7 @@ DebugColor_InitPalettes:
 	dec c
 	jr nz, .bg_loop
 
-	ld a, 1 << rOBPI_AUTO_INCREMENT
+	ld a, OBPI_AUTOINC
 	ldh [rOBPI], a
 	ld hl, Palette_DebugOB
 	ld c, 8 palettes
@@ -292,7 +292,7 @@ DebugColor_InitScreen:
 	xor a
 	ldh [hBGMapMode], a
 	hlcoord 0, 0
-	ld bc, SCREEN_WIDTH * SCREEN_HEIGHT
+	ld bc, SCREEN_AREA
 	ld a, DEBUGTEST_BLACK
 	call ByteFill
 	hlcoord 1, 3
@@ -1080,11 +1080,11 @@ TilesetColorPicker: ; unreferenced
 	ld a, HIGH(vBGMap1)
 	ldh [hBGMapAddress + 1], a
 	hlcoord 0, 0
-	ld bc, SCREEN_WIDTH * SCREEN_HEIGHT
+	ld bc, SCREEN_AREA
 	ld a, DEBUGTEST_BLACK
 	call ByteFill
 	hlcoord 0, 0, wAttrmap
-	ld bc, SCREEN_WIDTH * SCREEN_HEIGHT
+	ld bc, SCREEN_AREA
 	ld a, PAL_BG_TEXT
 	call ByteFill
 	decoord 1, 1, 0
@@ -1176,7 +1176,7 @@ DebugColorMain2: ; unreferenced
 	ld hl, wDebugTilesetCurPalette
 	ld a, [hl]
 	inc a
-	and PALETTE_MASK
+	and OAM_PALETTE
 	cp PAL_BG_TEXT
 	jr nz, .palette_ok
 	xor a ; PAL_BG_GRAY
@@ -1284,7 +1284,7 @@ DebugTileset_SelectColorBox:
 	inc a
 
 .done
-	maskbits NUM_PAL_COLORS
+	maskbits PAL_COLORS
 	ld [wDebugTilesetCurColor], a
 	ld e, a
 	ld d, 0

@@ -395,7 +395,7 @@ ConstructCreditsTilemap:
 
 	ld a, $28
 	hlcoord 0, 0
-	ld bc, SCREEN_HEIGHT * SCREEN_WIDTH
+	ld bc, SCREEN_AREA
 	call ByteFill
 
 	ld a, $7f

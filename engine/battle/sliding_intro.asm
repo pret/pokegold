@@ -32,7 +32,7 @@ BattleIntroSlidingPics:
 	push bc
 	ld hl, wShadowOAMSprite00XCoord
 	ld c, $12 ; 18
-	ld de, SPRITEOAMSTRUCT_LENGTH
+	ld de, OBJ_SIZE
 .loop2
 	dec [hl]
 	dec [hl]
