@@ -88,7 +88,7 @@ StatsScreen_LoadPage:
 	ldh a, [hJoyPressed]
 
 .joypad_action
-	and PAD_DOWN | PAD_UP | PAD_LEFT | PAD_RIGHT | PAD_A | PAD_B
+	and PAD_CTRL_PAD | PAD_A | PAD_B
 	jr z, .joypad_loop
 	bit B_BUTTON_F, a
 	jp nz, StatsScreen_Exit
