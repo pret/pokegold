@@ -6664,8 +6664,8 @@
 0a:5c49 Link_CheckCommunicationError.VC_Wireless_prompt
 0a:5c4f Link_CheckCommunicationError.VC_Wireless_net_recheck
 0a:5c57 Link_CheckCommunicationError.VC_Wireless_net_delay_7
-0a:5c59 Link_CheckCommunicationError.loop
 0a:5c59 Link_CheckCommunicationError.VC_Wireless_net_delay_7_End
+0a:5c59 Link_CheckCommunicationError.loop
 0a:5c65 Link_CheckCommunicationError.load_true
 0a:5c67 Link_CheckCommunicationError.done
 0a:5c71 TryQuickSave
@@ -31476,8 +31476,8 @@
 01:b758 sHallOfFame14Mon5DVs
 01:b75a sHallOfFame14Mon5Level
 01:b75b sHallOfFame14Mon5Nickname
-01:b765 sHallOfFame14Mon6
 01:b765 sHallOfFame14Mon5End
+01:b765 sHallOfFame14Mon6
 01:b765 sHallOfFame14Mon6Species
 01:b766 sHallOfFame14Mon6ID
 01:b768 sHallOfFame14Mon6DVs
@@ -33894,8 +33894,8 @@
 02:af23 sBox4Mon17Unused1
 02:af24 sBox4Mon17Unused2
 02:af25 sBox4Mon17Level
-02:af26 sBox4Mon18Species
 02:af26 sBox4Mon18
+02:af26 sBox4Mon18Species
 02:af26 sBox4Mon17BoxEnd
 02:af27 sBox4Mon18Item
 02:af28 sBox4Mon18Moves
@@ -35386,8 +35386,8 @@
 03:a053 sBox8Mon2Unused1
 03:a054 sBox8Mon2Unused2
 03:a055 sBox8Mon2Level
-03:a056 sBox8Mon2BoxEnd
 03:a056 sBox8Mon3
+03:a056 sBox8Mon2BoxEnd
 03:a056 sBox8Mon3Species
 03:a057 sBox8Mon3Item
 03:a058 sBox8Mon3Moves
@@ -35841,8 +35841,8 @@
 03:a4a8 sBox9Mon3Moves
 03:a4ac sBox9Mon3ID
 03:a4ae sBox9Mon3Exp
-03:a4b1 sBox9Mon3HPExp
 03:a4b1 sBox9Mon3StatExp
+03:a4b1 sBox9Mon3HPExp
 03:a4b3 sBox9Mon3AtkExp
 03:a4b5 sBox9Mon3DefExp
 03:a4b7 sBox9Mon3SpdExp
@@ -35874,9 +35874,9 @@
 03:a4e3 sBox9Mon4Unused1
 03:a4e4 sBox9Mon4Unused2
 03:a4e5 sBox9Mon4Level
+03:a4e6 sBox9Mon5Species
 03:a4e6 sBox9Mon5
 03:a4e6 sBox9Mon4BoxEnd
-03:a4e6 sBox9Mon5Species
 03:a4e7 sBox9Mon5Item
 03:a4e8 sBox9Mon5Moves
 03:a4ec sBox9Mon5ID
@@ -37359,8 +37359,8 @@
 03:b2b4 sBox12Mon11Unused2
 03:b2b5 sBox12Mon11Level
 03:b2b6 sBox12Mon12
-03:b2b6 sBox12Mon12Species
 03:b2b6 sBox12Mon11BoxEnd
+03:b2b6 sBox12Mon12Species
 03:b2b7 sBox12Mon12Item
 03:b2b8 sBox12Mon12Moves
 03:b2bc sBox12Mon12ID
@@ -39325,8 +39325,8 @@
 00:c5d3 wPokegearPhoneSelectedPerson
 00:c5d3 wNamingScreenMaxNameLength
 00:c5d3 wReel1Position
-00:c5d4 wPokegearPhoneSubmenuCursor
 00:c5d4 wReel1SpinDistance
+00:c5d4 wPokegearPhoneSubmenuCursor
 00:c5d4 wNamingScreenType
 00:c5d5 wPokegearMapCursorObjectPointer
 00:c5d5 wReel1SpinRate
@@ -39386,9 +39386,9 @@
 00:c5fd wMemoryGameLastCardPicked
 00:c5fe wReel3Field0e
 00:c5fe wMemoryGameCard1
+00:c5ff wPlayerTrademonID
 00:c5ff wReel3StopDelay
 00:c5ff wMemoryGameCard2
-00:c5ff wPlayerTrademonID
 00:c600 wReel1Stopped
 00:c600 wMemoryGameCard1Location
 00:c601 wPlayerTrademonEnd
@@ -39458,8 +39458,8 @@
 00:c700 wBillsPCData
 00:c700 wLinkData
 00:c700 wLYOverrides
-00:c700 wHallOfFamePokemonListWinCount
 00:c700 wDebugOriginalColors
+00:c700 wHallOfFamePokemonListWinCount
 00:c700 wOverworldMapBlocks
 00:c700 wDecompressScratch
 00:c700 wGameboyPrinterRAM
@@ -39841,9 +39841,9 @@
 00:c80e wLinkPlayerPartyMon6StatExp
 00:c80e wLinkPlayerPartyMon6HPExp
 00:c80f wMysteryGiftPartnerSentDeco
-00:c810 wMysteryGiftPartnerWhichItem
 00:c810 wLinkPlayerPartyMon6AtkExp
 00:c810 wTimeCapsulePartyMon6Level
+00:c810 wMysteryGiftPartnerWhichItem
 00:c811 wTimeCapsulePartyMon6Stats
 00:c811 wTimeCapsulePartyMon6MaxHP
 00:c811 wMysteryGiftPartnerWhichDeco
@@ -40587,10 +40587,10 @@
 00:ceed wEarthquakeMovementDataBuffer
 00:ceed wBugContestResults
 00:ceed wPokeFluteCuredSleep
-00:ceed wSwitchMonBuffer
 00:ceed wLinkBattleRecordName
 00:ceed wUnownPuzzleCornerTile
 00:ceed wBugContestFirstPlaceWinnerID
+00:ceed wSwitchMonBuffer
 00:ceed wNumOwnedDecoCategories
 00:ceed wMovementBufferCount
 00:ceed wBoxNameBuffer
@@ -42788,7 +42788,7 @@
 00 SCENE_VICTORYROADGATE_BADGE_CHECK
 00 SCENE_VICTORYROAD_RIVAL_BATTLE
 00 SCENE_WILLSROOM_LOCK_DOOR
-01 A_BUTTON
+01 PAD_A
 01 SCENE_AZALEATOWN_RIVAL_BATTLE
 01 SCENE_BRUNOSROOM_NOOP
 01 SCENE_BURNEDTOWER1F_FIREBREATHER_DICK
@@ -42837,7 +42837,7 @@
 01 SCENE_VICTORYROADGATE_NOOP
 01 SCENE_VICTORYROAD_NOOP
 01 SCENE_WILLSROOM_NOOP
-02 B_BUTTON
+02 PAD_B
 02 SCENE_BURNEDTOWER1F_NOOP
 02 SCENE_ELMSLAB_NOOP
 02 SCENE_FASTSHIP1F_MEET_GRANDPA
@@ -42859,11 +42859,11 @@
 08 MAP_CIANWOOD_PHOTO_STUDIO
 0d BATTLE_ANIM_GFX_BUBBLE
 16 MAPGROUP_CIANWOOD
-40 D_UP
+40 PAD_UP
 50 AT_CHAR
 7f SPACE_CHAR
 80 A_CHAR
-80 D_DOWN
+80 PAD_DOWN
 83 D_CHAR
 84 E_CHAR
 85 F_CHAR

@@ -6754,8 +6754,8 @@ ROMX bank #10:
 	         $5c49 = Link_CheckCommunicationError.VC_Wireless_prompt
 	         $5c4f = Link_CheckCommunicationError.VC_Wireless_net_recheck
 	         $5c57 = Link_CheckCommunicationError.VC_Wireless_net_delay_7
-	         $5c59 = Link_CheckCommunicationError.loop
 	         $5c59 = Link_CheckCommunicationError.VC_Wireless_net_delay_7_End
+	         $5c59 = Link_CheckCommunicationError.loop
 	         $5c65 = Link_CheckCommunicationError.load_true
 	         $5c67 = Link_CheckCommunicationError.done
 	         $5c71 = TryQuickSave
@@ -32139,8 +32139,8 @@ SRAM bank #1:
 	         $b758 = sHallOfFame14Mon5DVs
 	         $b75a = sHallOfFame14Mon5Level
 	         $b75b = sHallOfFame14Mon5Nickname
-	         $b765 = sHallOfFame14Mon6
 	         $b765 = sHallOfFame14Mon5End
+	         $b765 = sHallOfFame14Mon6
 	         $b765 = sHallOfFame14Mon6Species
 	         $b766 = sHallOfFame14Mon6ID
 	         $b768 = sHallOfFame14Mon6DVs
@@ -34563,8 +34563,8 @@ SRAM bank #2:
 	         $af23 = sBox4Mon17Unused1
 	         $af24 = sBox4Mon17Unused2
 	         $af25 = sBox4Mon17Level
-	         $af26 = sBox4Mon18Species
 	         $af26 = sBox4Mon18
+	         $af26 = sBox4Mon18Species
 	         $af26 = sBox4Mon17BoxEnd
 	         $af27 = sBox4Mon18Item
 	         $af28 = sBox4Mon18Moves
@@ -36060,8 +36060,8 @@ SRAM bank #3:
 	         $a053 = sBox8Mon2Unused1
 	         $a054 = sBox8Mon2Unused2
 	         $a055 = sBox8Mon2Level
-	         $a056 = sBox8Mon2BoxEnd
 	         $a056 = sBox8Mon3
+	         $a056 = sBox8Mon2BoxEnd
 	         $a056 = sBox8Mon3Species
 	         $a057 = sBox8Mon3Item
 	         $a058 = sBox8Mon3Moves
@@ -36515,8 +36515,8 @@ SRAM bank #3:
 	         $a4a8 = sBox9Mon3Moves
 	         $a4ac = sBox9Mon3ID
 	         $a4ae = sBox9Mon3Exp
-	         $a4b1 = sBox9Mon3HPExp
 	         $a4b1 = sBox9Mon3StatExp
+	         $a4b1 = sBox9Mon3HPExp
 	         $a4b3 = sBox9Mon3AtkExp
 	         $a4b5 = sBox9Mon3DefExp
 	         $a4b7 = sBox9Mon3SpdExp
@@ -36548,9 +36548,9 @@ SRAM bank #3:
 	         $a4e3 = sBox9Mon4Unused1
 	         $a4e4 = sBox9Mon4Unused2
 	         $a4e5 = sBox9Mon4Level
+	         $a4e6 = sBox9Mon5Species
 	         $a4e6 = sBox9Mon5
 	         $a4e6 = sBox9Mon4BoxEnd
-	         $a4e6 = sBox9Mon5Species
 	         $a4e7 = sBox9Mon5Item
 	         $a4e8 = sBox9Mon5Moves
 	         $a4ec = sBox9Mon5ID
@@ -38033,8 +38033,8 @@ SRAM bank #3:
 	         $b2b4 = sBox12Mon11Unused2
 	         $b2b5 = sBox12Mon11Level
 	         $b2b6 = sBox12Mon12
-	         $b2b6 = sBox12Mon12Species
 	         $b2b6 = sBox12Mon11BoxEnd
+	         $b2b6 = sBox12Mon12Species
 	         $b2b7 = sBox12Mon12Item
 	         $b2b8 = sBox12Mon12Moves
 	         $b2bc = sBox12Mon12ID
@@ -40011,8 +40011,8 @@ WRAM0 bank #0:
 	         $c5d3 = wPokegearPhoneSelectedPerson
 	         $c5d3 = wNamingScreenMaxNameLength
 	         $c5d3 = wReel1Position
-	         $c5d4 = wPokegearPhoneSubmenuCursor
 	         $c5d4 = wReel1SpinDistance
+	         $c5d4 = wPokegearPhoneSubmenuCursor
 	         $c5d4 = wNamingScreenType
 	         $c5d5 = wPokegearMapCursorObjectPointer
 	         $c5d5 = wReel1SpinRate
@@ -40072,9 +40072,9 @@ WRAM0 bank #0:
 	         $c5fd = wMemoryGameLastCardPicked
 	         $c5fe = wReel3Field0e
 	         $c5fe = wMemoryGameCard1
+	         $c5ff = wPlayerTrademonID
 	         $c5ff = wReel3StopDelay
 	         $c5ff = wMemoryGameCard2
-	         $c5ff = wPlayerTrademonID
 	         $c600 = wReel1Stopped
 	         $c600 = wMemoryGameCard1Location
 	         $c601 = wPlayerTrademonEnd
@@ -40146,8 +40146,8 @@ WRAM0 bank #0:
 	         $c700 = wBillsPCData
 	         $c700 = wLinkData
 	         $c700 = wLYOverrides
-	         $c700 = wHallOfFamePokemonListWinCount
 	         $c700 = wDebugOriginalColors
+	         $c700 = wHallOfFamePokemonListWinCount
 	         $c700 = wOverworldMapBlocks
 	         $c700 = wDecompressScratch
 	         $c700 = wGameboyPrinterRAM
@@ -40529,9 +40529,9 @@ WRAM0 bank #0:
 	         $c80e = wLinkPlayerPartyMon6StatExp
 	         $c80e = wLinkPlayerPartyMon6HPExp
 	         $c80f = wMysteryGiftPartnerSentDeco
-	         $c810 = wMysteryGiftPartnerWhichItem
 	         $c810 = wLinkPlayerPartyMon6AtkExp
 	         $c810 = wTimeCapsulePartyMon6Level
+	         $c810 = wMysteryGiftPartnerWhichItem
 	         $c811 = wTimeCapsulePartyMon6Stats
 	         $c811 = wTimeCapsulePartyMon6MaxHP
 	         $c811 = wMysteryGiftPartnerWhichDeco
@@ -41276,10 +41276,10 @@ WRAM0 bank #0:
 	         $ceed = wEarthquakeMovementDataBuffer
 	         $ceed = wBugContestResults
 	         $ceed = wPokeFluteCuredSleep
-	         $ceed = wSwitchMonBuffer
 	         $ceed = wLinkBattleRecordName
 	         $ceed = wUnownPuzzleCornerTile
 	         $ceed = wBugContestFirstPlaceWinnerID
+	         $ceed = wSwitchMonBuffer
 	         $ceed = wNumOwnedDecoCategories
 	         $ceed = wMovementBufferCount
 	         $ceed = wBoxNameBuffer
