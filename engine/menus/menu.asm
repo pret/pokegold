@@ -12,7 +12,7 @@ _2DMenu_::
 	bit STATICMENU_ENABLE_SELECT_F, a
 	jr z, .skip
 	call GetMenuJoypad
-	bit SELECT_F, a
+	bit B_PAD_SELECT, a
 	jr nz, .quit1
 
 .skip
@@ -173,14 +173,14 @@ Init2DMenuCursorPosition:
 
 .InitFlags_c:
 	ld hl, wMenuDataFlags
-	ld a, A_BUTTON
+	ld a, PAD_A
 	bit STATICMENU_DISABLE_B_F, [hl]
 	jr nz, .skip
-	or B_BUTTON
+	or PAD_B
 .skip
 	bit STATICMENU_ENABLE_SELECT_F, [hl]
 	jr z, .skip2
-	or SELECT
+	or PAD_SELECT
 .skip2
 	ld [wMenuJoypadFilter], a
 	ret
@@ -254,17 +254,17 @@ _2DMenuInterpretJoypad:
 	jp nz, .a_b_start_select
 	bit B_BUTTON_F, a
 	jp nz, .a_b_start_select
-	bit SELECT_F, a
+	bit B_PAD_SELECT, a
 	jp nz, .a_b_start_select
-	bit START_F, a
+	bit B_PAD_START, a
 	jp nz, .a_b_start_select
-	bit D_RIGHT_F, a
+	bit B_PAD_RIGHT, a
 	jr nz, .d_right
-	bit D_LEFT_F, a
+	bit B_PAD_LEFT, a
 	jr nz, .d_left
-	bit D_UP_F, a
+	bit B_PAD_UP, a
 	jr nz, .d_up
-	bit D_DOWN_F, a
+	bit B_PAD_DOWN, a
 	jr nz, .d_down
 	and a
 	ret
@@ -649,10 +649,10 @@ _InitVerticalMenuCursor::
 	ln a, 2, 0
 	ld [hli], a
 ; wMenuJoypadFilter
-	ld a, A_BUTTON
+	ld a, PAD_A
 	bit STATICMENU_DISABLE_B_F, b
 	jr nz, .skip_bit_1
-	add B_BUTTON
+	add PAD_B
 .skip_bit_1
 	ld [hli], a
 ; wMenuCursorY

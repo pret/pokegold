@@ -48,13 +48,13 @@ BuySellToss_InterpretJoypad:
 	jr nz, .b
 	bit A_BUTTON_F, c
 	jr nz, .a
-	bit D_DOWN_F, c
+	bit B_PAD_DOWN, c
 	jr nz, .down
-	bit D_UP_F, c
+	bit B_PAD_UP, c
 	jr nz, .up
-	bit D_LEFT_F, c
+	bit B_PAD_LEFT, c
 	jr nz, .left
-	bit D_RIGHT_F, c
+	bit B_PAD_RIGHT, c
 	jr nz, .right
 	and a
 	ret

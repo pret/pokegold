@@ -106,7 +106,7 @@ Credits::
 
 Credits_HandleAButton:
 	ldh a, [hJoypadDown]
-	and A_BUTTON
+	and PAD_A
 	ret z
 	ld a, [wJumptableIndex]
 	bit JUMPTABLE_EXIT_F, a
@@ -114,7 +114,7 @@ Credits_HandleAButton:
 
 Credits_HandleBButton:
 	ldh a, [hJoypadDown]
-	and B_BUTTON
+	and PAD_B
 	ret z
 	ld a, [wJumptableIndex]
 	bit ALLOW_SKIPPING_CREDITS_F, a

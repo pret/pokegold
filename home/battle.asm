@@ -164,7 +164,7 @@ FarCopyRadioText::
 	ld d, a
 	ld a, [hli]
 	ldh [hROMBank], a
-	ld [rROMB0], a
+	ld [rROMB], a
 	ld a, e
 	ld l, a
 	ld a, d
@@ -174,7 +174,7 @@ FarCopyRadioText::
 	call CopyBytes
 	pop af
 	ldh [hROMBank], a
-	ld [rROMB0], a
+	ld [rROMB], a
 	ret
 
 

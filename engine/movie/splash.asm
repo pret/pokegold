@@ -88,7 +88,7 @@ GameFreakPresentsFrame:
 
 	call JoyTextDelay
 	ldh a, [hJoyLast]
-	and BUTTONS
+	and PAD_BUTTONS
 	jr nz, .pressed_button
 
 ; high bits of wJumptableIndex are recycled for some flags
