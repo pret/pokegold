@@ -455,10 +455,10 @@ PokegearClock_Joypad:
 	call .UpdateClock
 	ld hl, hJoyLast
 	ld a, [hl]
-	and A_BUTTON | B_BUTTON | START | SELECT
+	and PAD_A | PAD_B | PAD_START | PAD_SELECT
 	jr nz, .quit
 	ld a, [hl]
-	and D_RIGHT
+	and PAD_RIGHT
 	ret z
 	ld a, [wPokegearFlags]
 	bit POKEGEAR_MAP_CARD_F, a
@@ -562,13 +562,13 @@ PokegearMap_JohtoMap:
 PokegearMap_ContinueMap:
 	ld hl, hJoyLast
 	ld a, [hl]
-	and B_BUTTON
+	and PAD_B
 	jr nz, .cancel
 	ld a, [hl]
-	and D_RIGHT
+	and PAD_RIGHT
 	jr nz, .right
 	ld a, [hl]
-	and D_LEFT
+	and PAD_LEFT
 	jr nz, .left
 	call .DPad
 	ret
@@ -604,10 +604,10 @@ PokegearMap_ContinueMap:
 .DPad:
 	ld hl, hJoyLast
 	ld a, [hl]
-	and D_UP
+	and PAD_UP
 	jr nz, .up
 	ld a, [hl]
-	and D_DOWN
+	and PAD_DOWN
 	jr nz, .down
 	ret
 
@@ -739,10 +739,10 @@ PokegearRadio_Init:
 PokegearRadio_Joypad:
 	ld hl, hJoyLast
 	ld a, [hl]
-	and B_BUTTON
+	and PAD_B
 	jr nz, .cancel
 	ld a, [hl]
-	and D_LEFT
+	and PAD_LEFT
 	jr nz, .left
 	ld a, [wPokegearRadioChannelAddr]
 	ld l, a
@@ -798,17 +798,17 @@ PokegearPhone_Init:
 PokegearPhone_Joypad:
 	ld hl, hJoyPressed
 	ld a, [hl]
-	and B_BUTTON
+	and PAD_B
 	jr nz, .b
 	ld a, [hl]
-	and A_BUTTON
+	and PAD_A
 	jr nz, .a
 	ld hl, hJoyLast
 	ld a, [hl]
-	and D_LEFT
+	and PAD_LEFT
 	jr nz, .left
 	ld a, [hl]
-	and D_RIGHT
+	and PAD_RIGHT
 	jr nz, .right
 	call PokegearPhone_GetDPad
 	ret
@@ -923,7 +923,7 @@ PokegearPhone_MakePhoneCall:
 
 PokegearPhone_FinishPhoneCall:
 	ldh a, [hJoyPressed]
-	and A_BUTTON | B_BUTTON
+	and PAD_A | PAD_B
 	ret z
 	farcall HangUp
 	ld a, POKEGEARSTATE_PHONEJOYPAD
@@ -935,10 +935,10 @@ PokegearPhone_FinishPhoneCall:
 PokegearPhone_GetDPad:
 	ld hl, hJoyLast
 	ld a, [hl]
-	and D_UP
+	and PAD_UP
 	jr nz, .up
 	ld a, [hl]
-	and D_DOWN
+	and PAD_DOWN
 	jr nz, .down
 	ret
 
@@ -1127,13 +1127,13 @@ PokegearPhoneContactSubmenu:
 	pop de
 	ld hl, hJoyPressed
 	ld a, [hl]
-	and D_UP
+	and PAD_UP
 	jr nz, .d_up
 	ld a, [hl]
-	and D_DOWN
+	and PAD_DOWN
 	jr nz, .d_down
 	ld a, [hl]
-	and A_BUTTON | B_BUTTON
+	and PAD_A | PAD_B
 	jr nz, .a_b
 	call DelayFrame
 	jr .loop
@@ -1166,7 +1166,7 @@ PokegearPhoneContactSubmenu:
 	ldh [hBGMapMode], a
 	pop hl
 	ldh a, [hJoyPressed]
-	and B_BUTTON
+	and PAD_B
 	jr nz, .Cancel
 	ld a, [wPokegearPhoneSubmenuCursor]
 	ld e, a
@@ -1364,10 +1364,10 @@ AnimateTuningKnob:
 .TuningKnob:
 	ld hl, hJoyLast
 	ld a, [hl]
-	and D_DOWN
+	and PAD_DOWN
 	jr nz, .down
 	ld a, [hl]
-	and D_UP
+	and PAD_UP
 	jr nz, .up
 	ret
 
@@ -1783,16 +1783,16 @@ _TownMap:
 	call JoyTextDelay
 	ld hl, hJoyPressed
 	ld a, [hl]
-	and B_BUTTON
+	and PAD_B
 	ret nz
 
 	ld hl, hJoyLast
 	ld a, [hl]
-	and D_UP
+	and PAD_UP
 	jr nz, .pressed_up
 
 	ld a, [hl]
-	and D_DOWN
+	and PAD_DOWN
 	jr nz, .pressed_down
 .loop2
 	push de
@@ -1884,7 +1884,7 @@ PlayRadio:
 .loop
 	call JoyTextDelay
 	ldh a, [hJoyPressed]
-	and A_BUTTON | B_BUTTON
+	and PAD_A | PAD_B
 	jr nz, .stop
 	ld a, [wPokegearRadioChannelAddr]
 	ld l, a
@@ -1999,10 +1999,10 @@ _FlyMap:
 	call JoyTextDelay
 	ld hl, hJoyPressed
 	ld a, [hl]
-	and B_BUTTON
+	and PAD_B
 	jr nz, .pressedB
 	ld a, [hl]
-	and A_BUTTON
+	and PAD_A
 	jr nz, .pressedA
 	call .HandleDPad
 	call GetMapCursorCoordinates
@@ -2044,10 +2044,10 @@ _FlyMap:
 	ld d, a
 	ld hl, hJoyLast
 	ld a, [hl]
-	and D_UP
+	and PAD_UP
 	jr nz, .ScrollNext
 	ld a, [hl]
-	and D_DOWN
+	and PAD_DOWN
 	jr nz, .ScrollPrev
 	ret
 
@@ -2324,10 +2324,10 @@ Pokedex_GetArea:
 	call JoyTextDelay
 	ld hl, hJoyPressed
 	ld a, [hl]
-	and A_BUTTON | B_BUTTON
+	and PAD_A | PAD_B
 	jr nz, .a_b
 	ldh a, [hJoypadDown]
-	and SELECT
+	and PAD_SELECT
 	jr nz, .select
 	call .LeftRightInput
 	call .BlinkNestIcons
@@ -2349,10 +2349,10 @@ Pokedex_GetArea:
 
 .LeftRightInput:
 	ld a, [hl]
-	and D_LEFT
+	and PAD_LEFT
 	jr nz, .left
 	ld a, [hl]
-	and D_RIGHT
+	and PAD_RIGHT
 	jr nz, .right
 	ret
 
@@ -2768,10 +2768,10 @@ EntireFlyMap: ; unreferenced
 	call JoyTextDelay
 	ld hl, hJoyPressed
 	ld a, [hl]
-	and B_BUTTON
+	and PAD_B
 	jr nz, .pressedB
 	ld a, [hl]
-	and A_BUTTON
+	and PAD_A
 	jr nz, .pressedA
 	call .HandleDPad
 	call GetMapCursorCoordinates
@@ -2809,10 +2809,10 @@ EntireFlyMap: ; unreferenced
 .HandleDPad:
 	ld hl, hJoyLast
 	ld a, [hl]
-	and D_DOWN | D_RIGHT
+	and PAD_DOWN | PAD_RIGHT
 	jr nz, .ScrollNext
 	ld a, [hl]
-	and D_UP | D_LEFT
+	and PAD_UP | PAD_LEFT
 	jr nz, .ScrollPrev
 	ret
 

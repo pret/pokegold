@@ -15,7 +15,7 @@ GoldSilverIntro:
 .PlayFrame:
 	call JoyTextDelay
 	ldh a, [hJoyLast]
-	and BUTTONS
+	and PAD_BUTTONS
 	jr nz, .Finish
 
 ; check done flag

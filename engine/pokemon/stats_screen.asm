@@ -79,7 +79,7 @@ StatsScreen_LoadPage:
 	pop de
 	pop hl
 	ld a, [wMenuJoypad]
-	and D_DOWN | D_UP
+	and PAD_DOWN | PAD_UP
 	jr nz, StatsScreenMain
 	ld a, [wMenuJoypad]
 	jr .joypad_action
@@ -88,17 +88,17 @@ StatsScreen_LoadPage:
 	ldh a, [hJoyPressed]
 
 .joypad_action
-	and D_DOWN | D_UP | D_LEFT | D_RIGHT | A_BUTTON | B_BUTTON
+	and PAD_DOWN | PAD_UP | PAD_LEFT | PAD_RIGHT | PAD_A | PAD_B
 	jr z, .joypad_loop
 	bit B_BUTTON_F, a
 	jp nz, StatsScreen_Exit
-	bit D_LEFT_F, a
+	bit B_PAD_LEFT, a
 	jr nz, .d_left
-	bit D_RIGHT_F, a
+	bit B_PAD_RIGHT, a
 	jr nz, .d_right
 	bit A_BUTTON_F, a
 	jr nz, .a_button
-	bit D_UP_F, a
+	bit B_PAD_UP, a
 	jr nz, .d_up
 
 ; down
@@ -192,7 +192,7 @@ EggStats_JoypadLoop:
 	pop de
 	pop hl
 	ld a, [wMenuJoypad]
-	and D_DOWN | D_UP
+	and PAD_DOWN | PAD_UP
 	jp nz, StatsScreenMain
 	ld a, [wMenuJoypad]
 	jr .joypad_action
@@ -200,15 +200,15 @@ EggStats_JoypadLoop:
 .not_tempmon
 	ldh a, [hJoyPressed]
 .joypad_action
-	and D_DOWN | D_UP | A_BUTTON | B_BUTTON
+	and PAD_DOWN | PAD_UP | PAD_A | PAD_B
 	jr z, EggStats_JoypadLoop
 	bit A_BUTTON_F, a
 	jr nz, StatsScreen_Exit
 	bit B_BUTTON_F, a
 	jr nz, StatsScreen_Exit
-	bit D_UP_F, a
+	bit B_PAD_UP, a
 	jr nz, EggStats_UpAction
-	bit D_DOWN_F, a
+	bit B_PAD_DOWN, a
 	jp EggStats_DownAction
 
 StatsScreen_Exit:
