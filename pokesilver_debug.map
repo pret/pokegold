@@ -36583,8 +36583,8 @@ SRAM bank #3:
 	         $a484 = sBox9Mon1Unused2
 	         $a485 = sBox9Mon1Level
 	         $a486 = sBox9Mon2Species
-	         $a486 = sBox9Mon1BoxEnd
 	         $a486 = sBox9Mon2
+	         $a486 = sBox9Mon1BoxEnd
 	         $a487 = sBox9Mon2Item
 	         $a488 = sBox9Mon2Moves
 	         $a48c = sBox9Mon2ID
@@ -40317,8 +40317,8 @@ WRAM0 bank #0:
 	         $c71e = wLinkPlayerPartyMon1StatExp
 	         $c71e = wLinkPlayerPartyMon1HPExp
 	         $c71e = wDebugRoomMonUnused2
-	         $c71f = wDebugRoomMonLevel
 	         $c71f = wTimeCapsulePartyMon1ID
+	         $c71f = wDebugRoomMonLevel
 	         $c720 = wLinkPlayerPartyMon1AtkExp
 	         $c720 = wDebugRoomMonBox
 	         $c720 = wDebugRoomMonBoxEnd

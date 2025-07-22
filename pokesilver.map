@@ -37963,8 +37963,8 @@ SRAM bank #3:
 	         $b2b4 = sBox12Mon11Unused2
 	         $b2b5 = sBox12Mon11Level
 	         $b2b6 = sBox12Mon12
-	         $b2b6 = sBox12Mon12Species
 	         $b2b6 = sBox12Mon11BoxEnd
+	         $b2b6 = sBox12Mon12Species
 	         $b2b7 = sBox12Mon12Item
 	         $b2b8 = sBox12Mon12Moves
 	         $b2bc = sBox12Mon12ID
