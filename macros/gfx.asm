@@ -2,7 +2,7 @@
 
 MACRO assert_valid_rgb
 	rept _NARG
-		assert 0 <= (\1) && (\1) <= 31, "RGB channel must be 0-31"
+		assert 0 <= (\1) && (\1) <= COLOR_CH_MAX, "RGB channel must be 0-{d:COLOR_CH_MAX}"
 		shift
 	endr
 ENDM
