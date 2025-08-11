@@ -31845,8 +31845,8 @@ SRAM bank #1:
 	         $b40a = sHallOfFame6Mon1Level
 	         $b40b = sHallOfFame6Mon1Nickname
 	         $b415 = sHallOfFame6Mon1End
-	         $b415 = sHallOfFame6Mon2Species
 	         $b415 = sHallOfFame6Mon2
+	         $b415 = sHallOfFame6Mon2Species
 	         $b416 = sHallOfFame6Mon2ID
 	         $b418 = sHallOfFame6Mon2DVs
 	         $b41a = sHallOfFame6Mon2Level
@@ -32024,8 +32024,8 @@ SRAM bank #1:
 	         $b590 = sHallOfFame10Mon1DVs
 	         $b592 = sHallOfFame10Mon1Level
 	         $b593 = sHallOfFame10Mon1Nickname
-	         $b59d = sHallOfFame10Mon1End
 	         $b59d = sHallOfFame10Mon2
+	         $b59d = sHallOfFame10Mon1End
 	         $b59d = sHallOfFame10Mon2Species
 	         $b59e = sHallOfFame10Mon2ID
 	         $b5a0 = sHallOfFame10Mon2DVs
@@ -36253,9 +36253,9 @@ SRAM bank #3:
 	         $a0f3 = sBox8Mon7Unused1
 	         $a0f4 = sBox8Mon7Unused2
 	         $a0f5 = sBox8Mon7Level
+	         $a0f6 = sBox8Mon8
 	         $a0f6 = sBox8Mon7BoxEnd
 	         $a0f6 = sBox8Mon8Species
-	         $a0f6 = sBox8Mon8
 	         $a0f7 = sBox8Mon8Item
 	         $a0f8 = sBox8Mon8Moves
 	         $a0fc = sBox8Mon8ID
@@ -36561,9 +36561,9 @@ SRAM bank #3:
 	         $a450 = sBox9Count
 	         $a450 = sBox9
 	         $a451 = sBox9Species
-	         $a466 = sBox9Mons
 	         $a466 = sBox9Mon1Species
 	         $a466 = sBox9Mon1
+	         $a466 = sBox9Mons
 	         $a467 = sBox9Mon1Item
 	         $a468 = sBox9Mon1Moves
 	         $a46c = sBox9Mon1ID
@@ -40379,8 +40379,8 @@ WRAM0 bank #0:
 	         $c741 = wLinkPlayerPartyMon1SpclDef
 	         $c742 = wHallOfFamePokemonListMon5ID
 	         $c742 = wTimeCapsulePartyMon2BoxLevel
-	         $c743 = wLinkPlayerPartyMon1StructEnd
 	         $c743 = wLinkPlayerPartyMon2
+	         $c743 = wLinkPlayerPartyMon1StructEnd
 	         $c743 = wLinkPlayerPartyMon2Species
 	         $c743 = wTimeCapsulePartyMon2Status
 	         $c744 = wTimeCapsulePartyMon2Type1
@@ -40708,8 +40708,8 @@ WRAM0 bank #0:
 	         $c85d = wTimeCapsulePartyMonNicknames
 	         $c85d = wTimeCapsulePartyMon1Nickname
 	         $c85e = wMysteryGiftPlayerDexCaught
-	         $c85f = wMysteryGiftPlayerSentDeco
 	         $c85f = wLinkPlayerPartyMon5OT
+	         $c85f = wMysteryGiftPlayerSentDeco
 	         $c860 = wMysteryGiftPlayerWhichItem
 	         $c861 = wMysteryGiftPlayerWhichDeco
 	         $c862 = wMysteryGiftPlayerBackupItem
@@ -42625,8 +42625,8 @@ WRAMX bank #1:
 	         $d4ce = wMap8ObjectSightRange
 	         $d4cf = wMap8ObjectScript
 	         $d4d1 = wMap8ObjectEventFlag
-	         $d4d5 = wMap9Object
 	         $d4d5 = wMap9ObjectStructID
+	         $d4d5 = wMap9Object
 	         $d4d6 = wMap9ObjectSprite
 	         $d4d7 = wMap9ObjectYCoord
 	         $d4d8 = wMap9ObjectXCoord
