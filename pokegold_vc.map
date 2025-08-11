@@ -41130,8 +41130,8 @@ WRAM0 bank #0:
 	         $ce64 = wMomBankDigitCursorPosition
 	         $ce64 = wTrainerCardBadgeFrameCounter
 	         $ce64 = wCreditsBorderFrame
-	         $ce64 = wCardFlipCursorY
 	         $ce64 = wNamingScreenLetterCase
+	         $ce64 = wCardFlipCursorY
 	         $ce64 = wPrevDexEntryJumptableIndex
 	         $ce64 = wPokegearCard
 	         $ce64 = wPackJumptableIndex
