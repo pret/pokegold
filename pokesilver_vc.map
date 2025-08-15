@@ -6946,7 +6946,7 @@ ROMX bank #10:
 	         $6779 = _WaterWildmonLookup
 	         $6791 = _JohtoWildmonCheck
 	         $6799 = _SwarmWildmonCheck
-	         $67af = _NoSwarmWildmon
+	         $67af = _SwarmWildmonCheck.noSwarm
 	         $67b1 = _NormalWildmonOK
 	         $67b6 = CopyCurrMapDE
 	         $67bf = LookUpWildmonsForMapDE

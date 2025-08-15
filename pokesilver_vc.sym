@@ -6856,7 +6856,7 @@
 0a:6779 _WaterWildmonLookup
 0a:6791 _JohtoWildmonCheck
 0a:6799 _SwarmWildmonCheck
-0a:67af _NoSwarmWildmon
+0a:67af _SwarmWildmonCheck.noSwarm
 0a:67b1 _NormalWildmonOK
 0a:67b6 CopyCurrMapDE
 0a:67bf LookUpWildmonsForMapDE
