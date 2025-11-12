@@ -1,21 +1,21 @@
 _LoadStandardFont::
 	ld de, Font
 	ld hl, vTiles1
-	lb bc, BANK(Font), 128 ; "A" to "9"
+	lb bc, BANK(Font), 128 ; 'A' to '9'
 	jp Get1bpp
 
 _LoadFontsExtra::
 	ld de, FontsExtra_SolidBlackAndUpArrowGFX
-	ld hl, vTiles2 tile "■" ; $60
+	ld hl, vTiles2 tile '■' ; $60
 	lb bc, BANK(FontsExtra_SolidBlackAndUpArrowGFX), 2
 	call Get1bpp
 	ld de, PokegearPhoneIconGFX
-	ld hl, vTiles2 tile "☎" ; $62
+	ld hl, vTiles2 tile '☎' ; $62
 	lb bc, BANK(PokegearPhoneIconGFX), 1
 	call Get2bpp
-	ld de, FontExtra + 3 tiles ; "<BOLD_D>"
-	ld hl, vTiles2 tile "<BOLD_D>"
-	lb bc, BANK(FontExtra), 22 ; "<BOLD_D>" to "ぉ"
+	ld de, FontExtra + 3 tiles ; '<BOLD_D>'
+	ld hl, vTiles2 tile '<BOLD_D>'
+	lb bc, BANK(FontExtra), 22 ; '<BOLD_D>' to 'ぉ'
 	call Get2bpp
 	jr LoadFrame
 
@@ -34,10 +34,10 @@ LoadFrame:
 	call AddNTimes
 	ld d, h
 	ld e, l
-	ld hl, vTiles2 tile "┌" ; $79
-	lb bc, BANK(Frames), TEXTBOX_FRAME_TILES ; "┌" to "┘"
+	ld hl, vTiles2 tile '┌' ; $79
+	lb bc, BANK(Frames), TEXTBOX_FRAME_TILES ; '┌' to '┘'
 	call Get1bpp
-	ld hl, vTiles2 tile " " ; $7f
+	ld hl, vTiles2 tile ' ' ; $7f
 	ld de, TextboxSpaceGFX
 	lb bc, BANK(TextboxSpaceGFX), 1
 	call Get1bpp
@@ -49,8 +49,8 @@ LoadBattleFontsHPBar:
 	lb bc, BANK(FontBattleExtra), 12
 	call Get2bpp
 	ld hl, vTiles2 tile $70
-	ld de, FontBattleExtra + 16 tiles ; "<DO>"
-	lb bc, BANK(FontBattleExtra), 3 ; "<DO>" to "『"
+	ld de, FontBattleExtra + 16 tiles ; '<DO>'
+	lb bc, BANK(FontBattleExtra), 3 ; '<DO>' to '『'
 	call Get2bpp
 	call LoadFrame
 
@@ -96,7 +96,7 @@ LoadStatsScreenPageTilesGFX:
 
 LoadFontsBattleLevel: ; unreferenced
 	ld de, FontBattleExtra + 14 tiles
-	ld hl, vTiles2 tile "<LV>" ; $6e
+	ld hl, vTiles2 tile '<LV>' ; $6e
 	lb bc, BANK(FontBattleExtra), 1
 	jp Get2bpp
 

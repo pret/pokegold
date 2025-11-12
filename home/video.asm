@@ -417,7 +417,7 @@ DEF BG_THIRD_HEIGHT EQU (TILEMAP_HEIGHT - SCREEN_HEIGHT) / 2
 	ld de, SCREEN_WIDTH
 	add hl, de
 	ld b, SCREEN_HEIGHT
-	ld a, "■"
+	ld a, '■'
 .loop1
 rept TILEMAP_WIDTH - SCREEN_WIDTH
 	ld [hli], a
@@ -446,7 +446,7 @@ endr
 	ld l, a
 	add hl, de
 	ld b, BG_THIRD_HEIGHT * 2
-	ld a, "■"
+	ld a, '■'
 .loop2
 rept TILEMAP_WIDTH / 2
 	ld [hli], a

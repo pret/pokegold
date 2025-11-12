@@ -1560,7 +1560,7 @@ Script_getnum:
 ResetStringBuffer1:
 	ld hl, wStringBuffer1
 	ld bc, MOVE_NAME_LENGTH
-	ld a, "@"
+	ld a, '@'
 	call ByteFill
 	ret
 

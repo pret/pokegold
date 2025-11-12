@@ -171,7 +171,7 @@ SwitchPartyMons:
 	ld a, [wSwitchMon]
 	dec a
 	call AddNTimes
-	ld [hl], "▷"
+	ld [hl], '▷'
 	call WaitBGMap
 	call SetDefaultBGPAndOBP
 	call DelayFrame
@@ -906,7 +906,7 @@ MoveScreenLoop:
 	jp .joy_loop
 
 .moving_move
-	ld a, " "
+	ld a, ' '
 	hlcoord 1, 11
 	ld bc, 5
 	call ByteFill
@@ -1260,7 +1260,7 @@ PlaceMoveScreenLeftArrow:
 
 .legal
 	hlcoord 16, 0
-	ld [hl], "◀"
+	ld [hl], '◀'
 	ret
 
 PlaceMoveScreenRightArrow:
@@ -1291,5 +1291,5 @@ PlaceMoveScreenRightArrow:
 
 .legal
 	hlcoord 18, 0
-	ld [hl], "▶"
+	ld [hl], '▶'
 	ret

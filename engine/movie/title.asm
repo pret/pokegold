@@ -201,6 +201,6 @@ LoadTitleScreenTilemap:
 	ret nz
 	hlbgcoord 0, 11
 	ld bc, TILEMAP_WIDTH
-	ld a, "@"
+	ld a, '@'
 	call ByteFill
 	ret

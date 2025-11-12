@@ -58,7 +58,7 @@ PlaceDiplomaOnScreen:
 PrintDiplomaPage2:
 	hlcoord 0, 0
 	ld bc, SCREEN_AREA
-	ld a, " "
+	ld a, ' '
 	call ByteFill
 	ld hl, DiplomaPage2Tilemap
 	decoord 0, 0
