@@ -36255,8 +36255,8 @@ SRAM bank #3:
 	         $a0f4 = sBox8Mon7Unused2
 	         $a0f5 = sBox8Mon7Level
 	         $a0f6 = sBox8Mon8
-	         $a0f6 = sBox8Mon7BoxEnd
 	         $a0f6 = sBox8Mon8Species
+	         $a0f6 = sBox8Mon7BoxEnd
 	         $a0f7 = sBox8Mon8Item
 	         $a0f8 = sBox8Mon8Moves
 	         $a0fc = sBox8Mon8ID
