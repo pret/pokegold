@@ -475,7 +475,7 @@ Options_Frame:
 UpdateFrame:
 	ld a, [wTextboxFrame]
 	hlcoord 16, 15 ; where on the screen the number is drawn
-	add "1"
+	add '1'
 	ld [hl], a
 	call LoadFontsExtra
 	and a
@@ -545,7 +545,7 @@ Options_UpdateCursorPosition:
 	ld de, SCREEN_WIDTH
 	ld c, SCREEN_HEIGHT - 2
 .loop
-	ld [hl], " "
+	ld [hl], ' '
 	add hl, de
 	dec c
 	jr nz, .loop
@@ -553,5 +553,5 @@ Options_UpdateCursorPosition:
 	ld bc, 2 * SCREEN_WIDTH
 	ld a, [wJumptableIndex]
 	call AddNTimes
-	ld [hl], "▶"
+	ld [hl], '▶'
 	ret

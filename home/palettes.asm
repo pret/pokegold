@@ -262,7 +262,7 @@ ReloadPalettes::
 	ld bc, SCREEN_AREA
 .loop
 	ld a, [hli]
-	cp "■"
+	cp '■'
 	jr c, .skip
 	ld a, PAL_BG_TEXT
 	ld [de], a

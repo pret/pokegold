@@ -1068,9 +1068,9 @@ PCMonInfo:
 	ld [wMonType], a
 	farcall GetGender
 	jr c, .skip_gender
-	ld a, "♂"
+	ld a, '♂'
 	jr nz, .printgender
-	ld a, "♀"
+	ld a, '♀'
 .printgender
 	hlcoord 5, 12
 	ld [hl], a
@@ -1207,9 +1207,9 @@ BillsPC_RefreshTextboxes:
 	call Textbox
 
 	hlcoord 8, 2
-	ld [hl], "└"
+	ld [hl], '└'
 	hlcoord 19, 2
-	ld [hl], "┘"
+	ld [hl], '┘'
 
 	ld a, [wBillsPC_ScrollPosition]
 	ld e, a
@@ -1777,7 +1777,7 @@ DepositPokemon:
 	ld h, b
 	ld de, wStringBuffer1
 	call PlaceString
-	ld a, "!"
+	ld a, '!'
 	ld [bc], a
 	ld c, 50
 	call DelayFrames
@@ -1832,7 +1832,7 @@ TryWithdrawPokemon:
 	ld h, b
 	ld de, wStringBuffer1
 	call PlaceString
-	ld a, "!"
+	ld a, '!'
 	ld [bc], a
 	ld c, 50
 	call DelayFrames
@@ -1891,7 +1891,7 @@ ReleasePKMN_ByePKMN:
 	call PlaceString
 	ld l, c
 	ld h, b
-	ld [hl], "!"
+	ld [hl], '!'
 	ld c, 50
 	call DelayFrames
 	ret
@@ -2230,7 +2230,7 @@ BillsPC_ClearTilemap:
 	ldh [hBGMapMode], a
 	hlcoord 0, 0
 	ld bc, SCREEN_AREA
-	ld a, " "
+	ld a, ' '
 	call ByteFill
 	ret
 

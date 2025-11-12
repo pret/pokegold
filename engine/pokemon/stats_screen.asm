@@ -274,9 +274,9 @@ StatsScreen_InitUpperHalf:
 	ld [wTextDecimalByte], a
 	ld [wCurSpecies], a
 	hlcoord 8, 0
-	ld [hl], "№"
+	ld [hl], '№'
 	inc hl
-	ld [hl], "."
+	ld [hl], '.'
 	inc hl
 	ld de, wTextDecimalByte
 	lb bc, PRINTNUM_LEADINGZEROS | 1, 3
@@ -300,15 +300,15 @@ StatsScreen_InitUpperHalf:
 ; Gender character
 	call GetGender
 	jr c, .next
-	ld a, "♂"
+	ld a, '♂'
 	jr nz, .got_gender
-	ld a, "♀"
+	ld a, '♀'
 .got_gender
 	hlcoord 18, 0
 	ld [hl], a
 .next
 	hlcoord 9, 4
-	ld a, "/"
+	ld a, '/'
 	ld [hli], a
 	ld a, [wBaseDexNo]
 	ld [wNamedObjectIndex], a
@@ -371,7 +371,7 @@ LoadPinkPage:
 	and $f0
 	jr z, .NotImmuneToPkrs
 	hlcoord 8, 8
-	ld [hl], "." ; Pokérus immunity dot
+	ld [hl], '.' ; Pokérus immunity dot
 .NotImmuneToPkrs:
 	ld a, [wMonType]
 	cp BOXMON
@@ -397,7 +397,7 @@ LoadPinkPage:
 	decoord 0, 16
 	hlcoord 0, 17
 	call CopyBytes
-	ld a, " "
+	ld a, ' '
 	ld bc, 9
 	hlcoord 0, 17
 	call ByteFill
@@ -537,9 +537,9 @@ StatsScreen_PlaceHorizontalDivider:
 
 StatsScreen_PlacePageSwitchArrows:
 	hlcoord 12, 6
-	ld [hl], "◀"
+	ld [hl], '◀'
 	hlcoord 19, 6
-	ld [hl], "▶"
+	ld [hl], '▶'
 	ret
 
 StatsScreen_PlaceShinyIcon:
@@ -547,7 +547,7 @@ StatsScreen_PlaceShinyIcon:
 	callfar CheckShininess
 	ret nc
 	hlcoord 19, 0
-	ld [hl], "⁂"
+	ld [hl], '⁂'
 	ret
 
 LoadGreenPage:
@@ -689,7 +689,7 @@ LoadBluePage:
 	inc c
 	ld a, [de]
 	inc de
-	cp "@"
+	cp '@'
 	jr nz, .loop
 ; remove left padding if name was 8-10 chars (somehow?)
 	ld a, NAME_LENGTH - 1

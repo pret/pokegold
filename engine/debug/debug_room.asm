@@ -32,7 +32,7 @@ _DebugRoom:
 .loop
 	ld hl, wTilemap
 	ld bc, wTilemapEnd - wTilemap
-	ld a, " "
+	ld a, ' '
 	call ByteFill
 	call DebugRoom_PrintStackBottomTop
 	call DebugRoom_PrintWindowStackBottomTop
@@ -410,7 +410,7 @@ DebugRoom_EditPagedValues:
 	call DebugRoom_InitializePagedValues
 	xor a
 	call DebugRoom_PrintPage
-	ld a, "▶"
+	ld a, '▶'
 	call DebugRoom_ShowHideCursor
 	xor a
 	ldh [hJoyLast], a
@@ -536,7 +536,7 @@ DebugRoom_NextPage:
 	dec a
 	ld [wDebugRoomCurValue], a
 .skip
-	ld a, "▶"
+	ld a, '▶'
 	call DebugRoom_ShowHideCursor
 	ret
 
@@ -558,12 +558,12 @@ DebugRoom_PrevPage:
 	dec a
 	ld [wDebugRoomCurValue], a
 .skip
-	ld a, "▶"
+	ld a, '▶'
 	call DebugRoom_ShowHideCursor
 	ret
 
 DebugRoom_NextPagedValue:
-	ld a, " "
+	ld a, ' '
 	call DebugRoom_ShowHideCursor
 	ld a, [wDebugRoomCurPage]
 	call DebugRoom_GetNthPagePointer
@@ -577,12 +577,12 @@ DebugRoom_NextPagedValue:
 
 DebugRoom_UpdateValueCursor:
 	ld [wDebugRoomCurValue], a
-	ld a, "▶"
+	ld a, '▶'
 	call DebugRoom_ShowHideCursor
 	ret
 
 DebugRoom_PrevPagedValue:
-	ld a, " "
+	ld a, ' '
 	call DebugRoom_ShowHideCursor
 	ld a, [wDebugRoomCurValue]
 	or a ; pre-decremented value > 0?
@@ -706,7 +706,7 @@ DebugRoom_InitializePagedValues:
 DebugRoom_PrintPage:
 	push af
 	hlcoord 10, 17
-	add "1"
+	add '1'
 	ld [hl], a
 	hlcoord 1, 1
 	lb bc, SCREEN_HEIGHT - 2, SCREEN_WIDTH - 2
@@ -797,7 +797,7 @@ DebugRoom_PrintPagedValue:
 .hex
 	ld c, 1
 	call PrintHexNumber
-	ld [hl], "H"
+	ld [hl], 'H'
 	inc hl
 .printed
 	ld bc, 6
@@ -1222,12 +1222,12 @@ DebugRoomMenu_RTCEdit_UpdateClock:
 	ld de, wDebugRoomRTCCurHour
 	lb bc, PRINTNUM_LEADINGZEROS | 1, 2
 	call PrintNum
-	ld [hl], ":"
+	ld [hl], ':'
 	inc hl
 	ld de, wDebugRoomRTCCurMin
 	lb bc, PRINTNUM_LEADINGZEROS | 1, 2
 	call PrintNum
-	ld [hl], ":"
+	ld [hl], ':'
 	inc hl
 	ld de, wDebugRoomRTCCurSec
 	lb bc, PRINTNUM_LEADINGZEROS | 1, 2

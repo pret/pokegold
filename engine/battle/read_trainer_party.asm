@@ -47,7 +47,7 @@ ReadTrainerParty:
 
 .skip_name
 	ld a, [hli]
-	cp "@"
+	cp '@'
 	jr nz, .skip_name
 
 	ld a, [hli]

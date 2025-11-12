@@ -1306,7 +1306,7 @@ LinkTrade_TradeStatsMenu:
 	call PlaceString
 
 .joy_loop
-	ld a, " "
+	ld a, ' '
 	ldcoord_a 11, 16
 	ld a, PAD_A | PAD_B | PAD_RIGHT
 	ld [wMenuJoypadFilter], a
@@ -1338,7 +1338,7 @@ LinkTrade_TradeStatsMenu:
 	jp LinkTrade_PlayerPartyMenu
 
 .d_right
-	ld a, " "
+	ld a, ' '
 	ldcoord_a 1, 16
 	ld a, PAD_A | PAD_B | PAD_LEFT
 	ld [wMenuJoypadFilter], a
@@ -1459,7 +1459,7 @@ LinkTradeOTPartymonMenuCheckCancel:
 	call HideCursor
 
 .loop1
-	ld a, "▶"
+	ld a, '▶'
 	ldcoord_a 1, 16
 .loop2
 	call JoyTextDelay
@@ -1470,14 +1470,14 @@ LinkTradeOTPartymonMenuCheckCancel:
 	jr nz, .a_button
 	bit B_PAD_UP, a
 	jr z, .loop2
-	ld a, " "
+	ld a, ' '
 	ldcoord_a 1, 16
 	ld a, [wOTPartyCount]
 	ld [wMenuCursorY], a
 	jp LinkTrade_OTPartyMenu
 
 .a_button
-	ld a, "▷"
+	ld a, '▷'
 	ldcoord_a 1, 16
 	ld a, $f
 	ld [wPlayerLinkAction], a
@@ -1508,7 +1508,7 @@ PlaceTradeScreenFooter:
 	call ByteFill
 ; Clear out area for cancel string
 	hlcoord 1, 16
-	ld a, " "
+	ld a, ' '
 	ld bc, SCREEN_WIDTH - 2
 	call ByteFill
 ; Place the string
@@ -1525,7 +1525,7 @@ LinkTradePlaceArrow:
 	hlcoord 6, 9
 	ld bc, SCREEN_WIDTH
 	call AddNTimes
-	ld [hl], "▷"
+	ld [hl], '▷'
 	ret
 
 LinkMonStatsScreen:
@@ -1918,7 +1918,7 @@ LinkTextboxAtHL:
 	push hl
 	ld a, $7b
 	ld [hli], a
-	ld a, " "
+	ld a, ' '
 	call .PlaceRow
 	ld [hl], $77
 	pop hl

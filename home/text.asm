@@ -1,6 +1,6 @@
 ClearBox::
 ; Fill a c*b box at hl with blank tiles.
-	ld a, " "
+	ld a, ' '
 	ld de, SCREEN_WIDTH
 .row
 	push hl
@@ -20,7 +20,7 @@ ClearTilemap::
 ; Fill wTilemap with blank tiles.
 
 	hlcoord 0, 0
-	ld a, " "
+	ld a, ' '
 	ld bc, wTilemapEnd - wTilemap
 	call ByteFill
 
@@ -51,7 +51,7 @@ Textbox::
 TextboxBorder::
 	; Top
 	push hl
-	ld a, "┌"
+	ld a, '┌'
 	ld [hli], a
 	inc a ; "─"
 	call .PlaceChars
@@ -64,11 +64,11 @@ TextboxBorder::
 	add hl, de
 .row
 	push hl
-	ld a, "│"
+	ld a, '│'
 	ld [hli], a
-	ld a, " "
+	ld a, ' '
 	call .PlaceChars
-	ld [hl], "│"
+	ld [hl], '│'
 	pop hl
 
 	ld de, SCREEN_WIDTH
@@ -77,11 +77,11 @@ TextboxBorder::
 	jr nz, .row
 
 	; Bottom
-	ld a, "└"
+	ld a, '└'
 	ld [hli], a
-	ld a, "─"
+	ld a, '─'
 	call .PlaceChars
-	ld [hl], "┘"
+	ld [hl], '┘'
 
 	ret
 
@@ -159,7 +159,7 @@ PlaceString::
 
 PlaceNextChar::
 	ld a, [de]
-	cp "@"
+	cp '@'
 	jr nz, CheckDict
 	ld b, h
 	ld c, l
@@ -176,7 +176,6 @@ NextChar::
 
 CheckDict::
 MACRO dict
-	assert CHARLEN(\1) == 1
 	if \1 == 0
 		and a
 	else
@@ -195,41 +194,41 @@ MACRO dict
 	endc
 ENDM
 
-	dict "<LINE>",    LineChar
-	dict "<NEXT>",    NextLineChar
-	dict "<NULL>",    NullChar
-	dict "<SCROLL>",  _ContTextNoPause
-	dict "<_CONT>",   _ContText
-	dict "<PARA>",    Paragraph
-	dict "<MOM>",     PrintMomsName
-	dict "<PLAYER>",  PrintPlayerName
-	dict "<RIVAL>",   PrintRivalName
-	dict "<ROUTE>",   PlaceJPRoute
-	dict "<WATASHI>", PlaceWatashi
-	dict "<KOKO_WA>", PlaceKokoWa
-	dict "<RED>",     PrintRedsName
-	dict "<GREEN>",   PrintGreensName
-	dict "#",         PlacePOKe
-	dict "<PC>",      PCChar
-	dict "<ROCKET>",  RocketChar
-	dict "<TM>",      TMChar
-	dict "<TRAINER>", TrainerChar
-	dict "<KOUGEKI>", PlaceKougeki
-	dict "<LF>",      LineFeedChar
-	dict "<CONT>",    ContText
-	dict "<……>",      SixDotsChar
-	dict "<DONE>",    DoneText
-	dict "<PROMPT>",  PromptText
-	dict "<PKMN>",    PlacePKMN
-	dict "<POKE>",    PlacePOKE
-	dict "<WBR>",     NextChar
-	dict "<BSP>",     " "
-	dict "<DEXEND>",  PlaceDexEnd
-	dict "<TARGET>",  PlaceMoveTargetsName
-	dict "<USER>",    PlaceMoveUsersName
-	dict "<ENEMY>",   PlaceEnemysName
-	dict "ﾟ",         .diacritic
-	cp "ﾞ"
+	dict '<LINE>',    LineChar
+	dict '<NEXT>',    NextLineChar
+	dict '<NULL>',    NullChar
+	dict '<SCROLL>',  _ContTextNoPause
+	dict '<_CONT>',   _ContText
+	dict '<PARA>',    Paragraph
+	dict '<MOM>',     PrintMomsName
+	dict '<PLAYER>',  PrintPlayerName
+	dict '<RIVAL>',   PrintRivalName
+	dict '<ROUTE>',   PlaceJPRoute
+	dict '<WATASHI>', PlaceWatashi
+	dict '<KOKO_WA>', PlaceKokoWa
+	dict '<RED>',     PrintRedsName
+	dict '<GREEN>',   PrintGreensName
+	dict '#',         PlacePOKe
+	dict '<PC>',      PCChar
+	dict '<ROCKET>',  RocketChar
+	dict '<TM>',      TMChar
+	dict '<TRAINER>', TrainerChar
+	dict '<KOUGEKI>', PlaceKougeki
+	dict '<LF>',      LineFeedChar
+	dict '<CONT>',    ContText
+	dict '<……>',      SixDotsChar
+	dict '<DONE>',    DoneText
+	dict '<PROMPT>',  PromptText
+	dict '<PKMN>',    PlacePKMN
+	dict '<POKE>',    PlacePOKE
+	dict '<WBR>',     NextChar
+	dict '<BSP>',     ' '
+	dict '<DEXEND>',  PlaceDexEnd
+	dict '<TARGET>',  PlaceMoveTargetsName
+	dict '<USER>',    PlaceMoveUsersName
+	dict '<ENEMY>',   PlaceEnemysName
+	dict 'ﾟ',         .diacritic
+	cp 'ﾞ'
 	jr nz, .not_diacritic
 
 .diacritic
@@ -241,33 +240,33 @@ ENDM
 	cp FIRST_REGULAR_TEXT_CHAR
 	jr nc, .place
 ; dakuten or handakuten
-	cp "パ"
+	cp 'パ'
 	jr nc, .handakuten
 ; dakuten
 	cp FIRST_HIRAGANA_DAKUTEN_CHAR
 	jr nc, .hiragana_dakuten
 ; katakana dakuten
-	add "カ" - "ガ"
+	add 'カ' - 'ガ'
 	jr .place_dakuten
 
 .hiragana_dakuten
-	add "か" - "が"
+	add 'か' - 'が'
 .place_dakuten
-	ld b, "ﾞ" ; dakuten
+	ld b, 'ﾞ' ; dakuten
 	call Diacritic
 	jr .place
 
 .handakuten
-	cp "ぱ"
+	cp 'ぱ'
 	jr nc, .hiragana_handakuten
 ; katakana handakuten
-	add "ハ" - "パ"
+	add 'ハ' - 'パ'
 	jr .place_handakuten
 
 .hiragana_handakuten
-	add "は" - "ぱ"
+	add 'は' - 'ぱ'
 .place_handakuten
-	ld b, "ﾟ" ; handakuten
+	ld b, 'ﾟ' ; handakuten
 	call Diacritic
 
 .place
@@ -464,7 +463,7 @@ ContText::
 PlaceDexEnd::
 ; Ends a Pokédex entry in Gen 1.
 ; Dex entries are now regular strings.
-	ld [hl], "."
+	ld [hl], '.'
 	pop hl
 	ret
 
@@ -514,7 +513,7 @@ TextScroll::
 	ld bc, 3 * SCREEN_WIDTH
 	call CopyBytes
 	hlcoord TEXTBOX_INNERX, TEXTBOX_INNERY + 2
-	ld a, " "
+	ld a, ' '
 	ld bc, TEXTBOX_INNERW
 	call ByteFill
 	ld c, 5
@@ -547,12 +546,12 @@ Diacritic::
 	ret
 
 LoadBlinkingCursor::
-	ld a, "▼"
+	ld a, '▼'
 	ldcoord_a 18, 17
 	ret
 
 UnloadBlinkingCursor::
-	ld a, "─"
+	ld a, '─'
 	ldcoord_a 18, 17
 	ret
 
@@ -873,7 +872,7 @@ TextCommand_DOTS::
 
 .loop
 	push de
-	ld a, "…"
+	ld a, '…'
 	ld [hli], a
 	call GetJoypad
 	ldh a, [hJoyDown]

@@ -994,7 +994,7 @@ DebugColor_PlaceCursor:
 	hlcoord 1, 11
 	ld bc, 2 * SCREEN_WIDTH
 	call AddNTimes
-	ld [hl], "▶"
+	ld [hl], '▶'
 
 .place_cursor
 	ld a, [wDebugColorCurColor]
@@ -1006,7 +1006,7 @@ DebugColor_PlaceCursor:
 .light
 	hlcoord 10, 0
 .place
-	ld [hl], "▶"
+	ld [hl], '▶'
 
 	ld b, $70 ; initial tile id
 	ld c, 5 ; initial palette
@@ -1419,14 +1419,14 @@ DebugTileset_PlaceCursor: ; unreferenced
 	hlcoord 0, 4
 	ld bc, 2 * SCREEN_WIDTH
 	call AddNTimes
-	ld [hl], "▶"
+	ld [hl], '▶'
 
 .place_cursor
 	ld a, [wDebugTilesetCurColor]
 	hlcoord 0, 2
 	ld bc, 5
 	call AddNTimes
-	ld [hl], "▶"
+	ld [hl], '▶'
 
 	ld b, $78 ; initial tile id
 	ld hl, wShadowOAM
