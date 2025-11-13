@@ -65,10 +65,21 @@ RGBGFXFLAGS  ?= -Weverything
 ### Build targets
 
 .SUFFIXES:
-.PHONY: all gold silver gold_debug silver_debug clean tidy compare tools
 .SECONDEXPANSION:
 .PRECIOUS:
 .SECONDARY:
+.PHONY: \
+	all \
+	gold \
+	silver \
+	gold_debug \
+	silver_debug \
+	gold_vc \
+	silver_vc \
+	clean \
+	tidy \
+	compare \
+	tools
 
 all: $(roms)
 gold:         pokegold.gbc
