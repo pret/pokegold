@@ -134,7 +134,7 @@ $(pokesilver_obj):       RGBASMFLAGS += -D _SILVER
 $(pokegold_debug_obj):   RGBASMFLAGS += -D _GOLD -D _DEBUG
 $(pokesilver_debug_obj): RGBASMFLAGS += -D _SILVER -D _DEBUG
 $(pokegold_vc_obj):      RGBASMFLAGS += -D _GOLD -D _GOLD_VC
-$(pokesilver_vc_obj):    RGBASMFLAGS += -D _SILVER -D _GOLD_VC
+$(pokesilver_vc_obj):    RGBASMFLAGS += -D _SILVER -D _SILVER_VC
 
 %.patch: %_vc.gbc %.gbc vc/%.patch.template
 # Ignore the checksums added by tools/stadium at the end of the ROM
