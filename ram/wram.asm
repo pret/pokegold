@@ -505,6 +505,8 @@ wLinkPartyEnd:: db ; older code doesn't check PartyCount
 UNION
 ; link player data
 wLinkPlayerData::
+wLinkPlayerID:: dw
+
 ; wLinkPlayerPartyMon1 - wLinkPlayerPartyMon6
 for n, 1, PARTY_LENGTH + 1
 wLinkPlayerPartyMon{d:n}:: party_struct wLinkPlayerPartyMon{d:n}
