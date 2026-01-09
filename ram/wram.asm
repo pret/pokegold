@@ -489,22 +489,54 @@ wUnusedJigglypuffNoteXCoord:: db
 
 SECTION UNION "Overworld Map", WRAM0
 
-; raw link data
+; buffer for various cable link data
 wLinkData:: ds 1300
 wLinkDataEnd::
 
 
 SECTION UNION "Overworld Map", WRAM0
 
-; link data members
+UNION
+; player's party data, formatted for link transfer (Gen 2 link session)
+wLinkSendParty:: ds SERIAL_PREAMBLE_LENGTH + LINK_PARTY_DATA_LENGTH + 3
+
+	ds 50
+; player's party mail, formatted for link transfer, during a link session
+wLinkSendMail::
+wLinkSendMailPreamble:: ds SERIAL_MAIL_PREAMBLE_LENGTH
+wLinkSendMailMessages:: ds (MAIL_MSG_LENGTH + 1) * PARTY_LENGTH
+wLinkSendMailMetadata:: ds (MAIL_STRUCT_LENGTH - (MAIL_MSG_LENGTH + 1)) * PARTY_LENGTH
+wLinkSendMailPatchSet:: ds 100 + SERIAL_PATCH_PREAMBLE_LENGTH
+wLinkSendMailEnd::
+	ds 10
+
+; during a link session, other Game Boy's raw mail data is initially stored here
+wLinkReceivedMail::
+	ds SERIAL_MAIL_PREAMBLE_LENGTH + MAIL_STRUCT_LENGTH * PARTY_LENGTH + 100 + SERIAL_PATCH_PREAMBLE_LENGTH
+wLinkReceivedMailEnd::
+	ds 10
+
+NEXTU
+; player's party data, formatted for link transfer (Time Capsule link session)
+wLinkSendTCParty:: ds SERIAL_PREAMBLE_LENGTH + LINK_TC_PARTY_DATA_LENGTH + 3
+ENDU
+
+
+SECTION UNION "Overworld Map", WRAM0
+
+; After the initial link session, other Game Boy's party and mail data
+; is temporarily stored here before applying patch data
+
+; link player's name and party species are not patched,
+; as they normally don't contain SERIAL_NO_DATA_BYTE
 wLinkPlayerName:: ds NAME_LENGTH
 wLinkPartyCount:: db
 wLinkPartySpecies:: ds PARTY_LENGTH
 wLinkPartyEnd:: db ; older code doesn't check PartyCount
 
 UNION
-; link player data
-wLinkPlayerData::
+; Gen 2 link player party data
+wLinkPlayerPatchedData::
 wLinkPlayerID:: dw
 
 ; wLinkPlayerPartyMon1 - wLinkPlayerPartyMon6
@@ -524,9 +556,15 @@ for n, 1, PARTY_LENGTH + 1
 wLinkPlayerPartyMon{d:n}Nickname:: ds MON_NAME_LENGTH
 endr
 
+	ds 459
+; received mail data, stripped of the serial preamble
+wLinkReceivedMailMessages:: ds (MAIL_MSG_LENGTH + 1) * PARTY_LENGTH
+wLinkReceivedMailMetadata:: ds (MAIL_STRUCT_LENGTH - (MAIL_MSG_LENGTH + 1)) * PARTY_LENGTH
+wLinkReceivedMailPatchSet:: ds 100 + SERIAL_PATCH_PREAMBLE_LENGTH
+
 NEXTU
-; time capsule party data
-wTimeCapsulePlayerData::
+; Gen 1 (Time Tapsule) link player party data
+wTimeCapsulePatchedData::
 ; wTimeCapsulePartyMon1 - wTimeCapsulePartyMon6
 for n, 1, PARTY_LENGTH + 1
 wTimeCapsulePartyMon{d:n}:: red_party_struct wTimeCapsulePartyMon{d:n}
@@ -544,12 +582,13 @@ for n, 1, PARTY_LENGTH + 1
 wTimeCapsulePartyMon{d:n}Nickname:: ds MON_NAME_LENGTH
 endr
 
+wTimeCapsuleUnused:: ds 3
 ENDU
 
 
 SECTION UNION "Overworld Map", WRAM0
 
-; link data prep
+; Time Capsule link data prep
 	ds 1000
 wCurLinkOTPartyMonTypePointer:: dw
 
@@ -562,30 +601,13 @@ endr
 
 SECTION UNION "Overworld Map", WRAM0
 
-; link mail data
+; other Game Boy's link mail data, patched and formatted to mailmsg structure
 	ds 500
-wLinkPlayerMail::
-wLinkPlayerMailPreamble:: ds SERIAL_MAIL_PREAMBLE_LENGTH
-wLinkPlayerMailMessages:: ds (MAIL_MSG_LENGTH + 1) * PARTY_LENGTH
-wLinkPlayerMailMetadata:: ds (MAIL_STRUCT_LENGTH - (MAIL_MSG_LENGTH + 1)) * PARTY_LENGTH
-wLinkPlayerMailPatchSet:: ds 100 + SERIAL_PATCH_PREAMBLE_LENGTH
-wLinkPlayerMailEnd::
-	ds 10
 wLinkOTMail::
-wLinkOTMailMessages:: ds (MAIL_MSG_LENGTH + 1) * PARTY_LENGTH
-wLinkOTMailMetadata:: ds (MAIL_STRUCT_LENGTH - (MAIL_MSG_LENGTH + 1)) * PARTY_LENGTH
-wLinkOTMailPatchSet:: ds 100 + SERIAL_PATCH_PREAMBLE_LENGTH
-wLinkOTMailPadding:: ds SERIAL_MAIL_PREAMBLE_LENGTH
-wLinkOTMailEnd::
-	ds 10
-
-
-SECTION UNION "Overworld Map", WRAM0
-
-; received link mail data
-	ds 500
-wLinkReceivedMail:: ds MAIL_STRUCT_LENGTH * PARTY_LENGTH
-wLinkReceivedMailEnd:: db
+for n, 1, PARTY_LENGTH + 1
+wLinkOTMon{d:n}Mail:: mailmsg wLinkOTMon{d:n}Mail
+endr
+wLinkOTMailEnd:: db
 
 
 SECTION UNION "Overworld Map", WRAM0
@@ -2755,7 +2777,14 @@ wBestMagikarpLengthFeet:: db
 wBestMagikarpLengthInches:: db
 wMagikarpRecordHoldersName:: ds NAME_LENGTH
 
+; This union spans 451 bytes.
 UNION
+; during a link session, other Game Boy's raw party data is initially stored here
+wLinkReceivedPartyData::
+	ds SERIAL_PREAMBLE_LENGTH + LINK_PARTY_DATA_LENGTH + 3
+wLinkReceivedPartyEnd:: db
+
+NEXTU
 wPokedexShowPointerAddr:: dw
 wPokedexShowPointerBank:: db
 	ds 3
@@ -2772,7 +2801,6 @@ wOTPlayerID:: dw
 wOTPartyCount::   db
 wOTPartySpecies:: ds PARTY_LENGTH
 wOTPartyEnd::     db ; older code doesn't check PartyCount
-ENDU
 
 UNION
 ; ot party mons
@@ -2795,6 +2823,9 @@ wOTPartyMon{d:n}Nickname:: ds MON_NAME_LENGTH
 endr
 wOTPartyDataEnd::
 
+wPokemonDataEnd::
+wGameDataEnd::
+
 NEXTU
 ; catch tutorial dude pack
 wDudeNumItems:: db
@@ -2807,13 +2838,11 @@ wDudeNumBalls:: db
 wDudeBalls:: ds 2 * 4 + 1
 ENDU
 
-wPokemonDataEnd::
-wGameDataEnd::
+ENDU
 
 
 SECTION "Stack", WRAMX
 
-	ds 2
 wStackBottom::
 	ds $fc
 wStackTop::
