@@ -506,13 +506,13 @@ wLinkSendMail::
 wLinkSendMailPreamble:: ds SERIAL_MAIL_PREAMBLE_LENGTH
 wLinkSendMailMessages:: ds (MAIL_MSG_LENGTH + 1) * PARTY_LENGTH
 wLinkSendMailMetadata:: ds (MAIL_STRUCT_LENGTH - (MAIL_MSG_LENGTH + 1)) * PARTY_LENGTH
-wLinkSendMailPatchSet:: ds 100 + SERIAL_PATCH_PREAMBLE_LENGTH
+wLinkSendMailPatchSet:: ds SERIAL_MAIL_PATCH_LIST_LENGTH
 wLinkSendMailEnd::
 	ds 10
 
 ; during a link session, other Game Boy's raw mail data is initially stored here
 wLinkReceivedMail::
-	ds SERIAL_MAIL_PREAMBLE_LENGTH + MAIL_STRUCT_LENGTH * PARTY_LENGTH + 100 + SERIAL_PATCH_PREAMBLE_LENGTH
+	ds SERIAL_MAIL_PREAMBLE_LENGTH + MAIL_STRUCT_LENGTH * PARTY_LENGTH + SERIAL_MAIL_PATCH_LIST_LENGTH
 wLinkReceivedMailEnd::
 	ds 10
 
@@ -560,7 +560,7 @@ endr
 ; received mail data, stripped of the serial preamble
 wLinkReceivedMailMessages:: ds (MAIL_MSG_LENGTH + 1) * PARTY_LENGTH
 wLinkReceivedMailMetadata:: ds (MAIL_STRUCT_LENGTH - (MAIL_MSG_LENGTH + 1)) * PARTY_LENGTH
-wLinkReceivedMailPatchSet:: ds 100 + SERIAL_PATCH_PREAMBLE_LENGTH
+wLinkReceivedMailPatchSet:: ds SERIAL_MAIL_PATCH_LIST_LENGTH
 
 NEXTU
 ; Gen 1 (Time Tapsule) link player party data
