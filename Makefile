@@ -7,6 +7,10 @@ patches := \
 	pokegold.patch \
 	pokesilver.patch
 
+# Keep intermediate build products out of the source tree.
+BUILDDIR := build
+OBJDIR := $(BUILDDIR)/obj
+
 rom_obj := \
 	audio.o \
 	home.o \
@@ -27,19 +31,19 @@ gs_excl_asm := \
 	data/pokemon/dex_entries \
 	gfx/pics
 
-gold_excl_obj         := $(addsuffix _gold.o,$(gs_excl_asm))
-silver_excl_obj       := $(addsuffix _silver.o,$(gs_excl_asm))
-gold_debug_excl_obj   := $(addsuffix _gold_debug.o,$(gs_excl_asm))
-silver_debug_excl_obj := $(addsuffix _silver_debug.o,$(gs_excl_asm))
-gold_vc_excl_obj      := $(addsuffix _gold_vc.o,$(gs_excl_asm))
-silver_vc_excl_obj    := $(addsuffix _silver_vc.o,$(gs_excl_asm))
+gold_excl_obj         := $(addprefix $(OBJDIR)/,$(addsuffix _gold.o,$(gs_excl_asm)))
+silver_excl_obj       := $(addprefix $(OBJDIR)/,$(addsuffix _silver.o,$(gs_excl_asm)))
+gold_debug_excl_obj   := $(addprefix $(OBJDIR)/,$(addsuffix _gold_debug.o,$(gs_excl_asm)))
+silver_debug_excl_obj := $(addprefix $(OBJDIR)/,$(addsuffix _silver_debug.o,$(gs_excl_asm)))
+gold_vc_excl_obj      := $(addprefix $(OBJDIR)/,$(addsuffix _gold_vc.o,$(gs_excl_asm)))
+silver_vc_excl_obj    := $(addprefix $(OBJDIR)/,$(addsuffix _silver_vc.o,$(gs_excl_asm)))
 
-pokegold_obj          := $(rom_obj:.o=_gold.o) $(gold_excl_obj)
-pokesilver_obj        := $(rom_obj:.o=_silver.o) $(silver_excl_obj)
-pokegold_debug_obj    := $(rom_obj:.o=_gold_debug.o) $(gold_debug_excl_obj)
-pokesilver_debug_obj  := $(rom_obj:.o=_silver_debug.o) $(silver_debug_excl_obj)
-pokegold_vc_obj       := $(rom_obj:.o=_gold_vc.o) $(gold_vc_excl_obj)
-pokesilver_vc_obj     := $(rom_obj:.o=_silver_vc.o) $(silver_vc_excl_obj)
+pokegold_obj          := $(addprefix $(OBJDIR)/,$(rom_obj:.o=_gold.o)) $(gold_excl_obj)
+pokesilver_obj        := $(addprefix $(OBJDIR)/,$(rom_obj:.o=_silver.o)) $(silver_excl_obj)
+pokegold_debug_obj    := $(addprefix $(OBJDIR)/,$(rom_obj:.o=_gold_debug.o)) $(gold_debug_excl_obj)
+pokesilver_debug_obj  := $(addprefix $(OBJDIR)/,$(rom_obj:.o=_silver_debug.o)) $(silver_debug_excl_obj)
+pokegold_vc_obj       := $(addprefix $(OBJDIR)/,$(rom_obj:.o=_gold_vc.o)) $(gold_vc_excl_obj)
+pokesilver_vc_obj     := $(addprefix $(OBJDIR)/,$(rom_obj:.o=_silver_vc.o)) $(silver_vc_excl_obj)
 
 
 ### Build tools
@@ -90,6 +94,7 @@ gold_vc:      pokegold.patch
 silver_vc:    pokesilver.patch
 
 clean: tidy
+	$(RM) -r $(BUILDDIR)
 	find gfx \
 	     \( -name "*.[12]bpp" \
 	        -o -name "*.lz" \
@@ -113,7 +118,7 @@ tidy:
 	      $(pokesilver_vc_obj) \
 	      $(pokegold_debug_obj) \
 	      $(pokesilver_debug_obj) \
-	      rgbdscheck.o
+	      $(OBJDIR)/rgbdscheck.o
 	$(MAKE) clean -C tools/
 
 compare: $(roms) $(patches)
@@ -123,7 +128,7 @@ tools:
 	$(MAKE) -C tools/
 
 
-RGBASMFLAGS += -Q8 -P includes.asm
+RGBASMFLAGS += -Q8 -P includes.asm -i $(BUILDDIR)
 # Create a sym/map for debug purposes if `make` run with `DEBUG=1`
 ifeq ($(DEBUG),1)
 RGBASMFLAGS += -E
@@ -140,7 +145,8 @@ $(pokesilver_vc_obj):    RGBASMFLAGS += -D _SILVER -D _SILVER_VC
 # Ignore the checksums added by tools/stadium at the end of the ROM
 	tools/make_patch --ignore 0x1ffdf8:0x208 $*_vc.sym $^ $@
 
-rgbdscheck.o: rgbdscheck.asm
+$(OBJDIR)/rgbdscheck.o: rgbdscheck.asm
+	@mkdir -p $(dir $@)
 	$(RGBASM) -o $@ $<
 
 # Build tools when building the rom.
@@ -152,37 +158,60 @@ $(info $(shell $(MAKE) -C tools))
 # The dep rules have to be explicit or else missing files won't be reported.
 # As a side effect, they're evaluated immediately instead of when the rule is invoked.
 # It doesn't look like $(shell) can be deferred so there might not be a better way.
-preinclude_deps := includes.asm $(shell tools/scan_includes includes.asm)
+
+# Redirect dependencies that are generated as part of the build into $(BUILDDIR)/.
+#
+# For INCLUDE/INCBIN dependencies, this logic now lives in tools/scan_includes
+# via its --build-prefix option.
+#
+# For other rules (e.g. compression), keep the Makefile-side heuristic:
+# if a dependency path exists in the source tree, keep it as-is; otherwise,
+# assume it is generated into $(BUILDDIR)/.
+define map_build_deps
+$(strip \
+	$(foreach dep,$1,\
+		$(if $(filter $(BUILDDIR)/%,$(dep)),$(dep),\
+			$(if $(wildcard $(dep)),$(dep),$(BUILDDIR)/$(dep))\
+		)\
+	)\
+)
+endef
+
+SCAN_INCLUDES := tools/scan_includes --build-prefix $(BUILDDIR)
+
+preinclude_deps := includes.asm $(shell $(SCAN_INCLUDES) includes.asm)
 define DEP
-$1: $2 $$(shell tools/scan_includes $2) $(preinclude_deps) | rgbdscheck.o
+
+$1: $2 $$(shell $(SCAN_INCLUDES) $2) $(preinclude_deps) | $(OBJDIR)/rgbdscheck.o
+	@mkdir -p $$(dir $$@)
 	$$(RGBASM) $$(RGBASMFLAGS) -o $$@ $$<
 endef
 
 # Dependencies for shared objects (drop _gold and _silver from asm file basenames)
 $(foreach obj, $(filter-out $(gold_excl_obj), $(pokegold_obj)), \
-	$(eval $(call DEP,$(obj),$(obj:_gold.o=.asm))))
+	$(eval $(call DEP,$(obj),$(patsubst $(OBJDIR)/%,%,$(obj:_gold.o=.asm)))))
 $(foreach obj, $(filter-out $(silver_excl_obj), $(pokesilver_obj)), \
-	$(eval $(call DEP,$(obj),$(obj:_silver.o=.asm))))
+	$(eval $(call DEP,$(obj),$(patsubst $(OBJDIR)/%,%,$(obj:_silver.o=.asm)))))
 $(foreach obj, $(filter-out $(gold_debug_excl_obj), $(pokegold_debug_obj)), \
-	$(eval $(call DEP,$(obj),$(obj:_gold_debug.o=.asm))))
+	$(eval $(call DEP,$(obj),$(patsubst $(OBJDIR)/%,%,$(obj:_gold_debug.o=.asm)))))
 $(foreach obj, $(filter-out $(silver_debug_excl_obj), $(pokesilver_debug_obj)), \
-	$(eval $(call DEP,$(obj),$(obj:_silver_debug.o=.asm))))
+	$(eval $(call DEP,$(obj),$(patsubst $(OBJDIR)/%,%,$(obj:_silver_debug.o=.asm)))))
 $(foreach obj, $(filter-out $(gold_vc_excl_obj), $(pokegold_vc_obj)), \
-	$(eval $(call DEP,$(obj),$(obj:_gold_vc.o=.asm))))
+	$(eval $(call DEP,$(obj),$(patsubst $(OBJDIR)/%,%,$(obj:_gold_vc.o=.asm)))))
 $(foreach obj, $(filter-out $(silver_vc_excl_obj), $(pokesilver_vc_obj)), \
-	$(eval $(call DEP,$(obj),$(obj:_silver_vc.o=.asm))))
+	$(eval $(call DEP,$(obj),$(patsubst $(OBJDIR)/%,%,$(obj:_silver_vc.o=.asm)))))
 
 # Dependencies for game-exclusive objects (keep _gold and _silver in asm file basenames)
 $(foreach obj, $(gold_excl_obj) $(silver_excl_obj), \
-	$(eval $(call DEP,$(obj),$(obj:.o=.asm))))
+	$(eval $(call DEP,$(obj),$(patsubst $(OBJDIR)/%,%,$(obj:.o=.asm)))))
 $(foreach obj, $(gold_debug_excl_obj), \
-	$(eval $(call DEP,$(obj),$(obj:_gold_debug.o=_gold.asm))))
+	$(eval $(call DEP,$(obj),$(patsubst $(OBJDIR)/%,%,$(obj:_gold_debug.o=_gold.asm)))))
 $(foreach obj, $(silver_debug_excl_obj), \
-	$(eval $(call DEP,$(obj),$(obj:_silver_debug.o=_silver.asm))))
+	$(eval $(call DEP,$(obj),$(patsubst $(OBJDIR)/%,%,$(obj:_silver_debug.o=_silver.asm)))))
 $(foreach obj, $(gold_vc_excl_obj), \
-	$(eval $(call DEP,$(obj),$(obj:_gold_vc.o=_gold.asm))))
+	$(eval $(call DEP,$(obj),$(patsubst $(OBJDIR)/%,%,$(obj:_gold_vc.o=_gold.asm)))))
 $(foreach obj, $(silver_vc_excl_obj), \
-	$(eval $(call DEP,$(obj),$(obj:_silver_vc.o=_silver.asm))))
+	$(eval $(call DEP,$(obj),$(patsubst $(OBJDIR)/%,%,$(obj:_silver_vc.o=_silver.asm)))))
 
 endif
 
@@ -206,172 +235,191 @@ pokesilver_vc.gbc:    RGBFIXFLAGS += -t POKEMON_SLV -i AAXE
 # Delete this line if you don't care about matching and just want optimal compression.
 include gfx/lz.mk
 
-%.lz: %
+$(BUILDDIR)/%.lz: $$(call map_build_deps,$$*)
+	@mkdir -p $(dir $@)
 	tools/lzcomp $(LZFLAGS) -- $< $@
 
 
 ### Pokemon and trainer sprite rules
 
 define PIC
-$1/back.2bpp: RGBGFXFLAGS += --columns
-$1/back.2bpp: $1/back.png $1/normal.gbcpal
+$(BUILDDIR)/$1/back.2bpp: RGBGFXFLAGS += --columns
+$(BUILDDIR)/$1/back.2bpp: $1/back.png $(BUILDDIR)/$1/normal.gbcpal
+	@mkdir -p $$(dir $$@)
 	$$(RGBGFX) $$(RGBGFXFLAGS) --colors gbc:$$(word 2,$$^) -o $$@ $$<
-$1/front.2bpp: RGBGFXFLAGS += --columns
-$1/front.2bpp: $1/front.png $1/normal.gbcpal
+$(BUILDDIR)/$1/front.2bpp: RGBGFXFLAGS += --columns
+$(BUILDDIR)/$1/front.2bpp: $1/front.png $(BUILDDIR)/$1/normal.gbcpal
+	@mkdir -p $$(dir $$@)
 	$$(RGBGFX) $$(RGBGFXFLAGS) --colors gbc:$$(word 2,$$^) -o $$@ $$<
-$1/normal.gbcpal: $1/front.gbcpal $1/back.gbcpal
+$(BUILDDIR)/$1/normal.gbcpal: $(BUILDDIR)/$1/front.gbcpal $(BUILDDIR)/$1/back.gbcpal
+	@mkdir -p $$(dir $$@)
 	tools/gbcpal $$(tools/gbcpal) $$@ $$^
 endef
 $(foreach pic, $(wildcard gfx/pokemon/*/front.png),\
 	$(eval $(call PIC,$(pic:/front.png=))))
 
 define PIC_GS
-$1/back.2bpp: RGBGFXFLAGS += --columns
-$1/back.2bpp: $1/back.png $1/normal.gbcpal
+$(BUILDDIR)/$1/back.2bpp: RGBGFXFLAGS += --columns
+$(BUILDDIR)/$1/back.2bpp: $1/back.png $(BUILDDIR)/$1/normal.gbcpal
+	@mkdir -p $$(dir $$@)
 	$$(RGBGFX) $$(RGBGFXFLAGS) --colors gbc:$$(word 2,$$^) -o $$@ $$<
-$1/front_gold.2bpp: RGBGFXFLAGS += --columns
-$1/front_gold.2bpp: $1/front_gold.png $1/normal.gbcpal
+$(BUILDDIR)/$1/front_gold.2bpp: RGBGFXFLAGS += --columns
+$(BUILDDIR)/$1/front_gold.2bpp: $1/front_gold.png $(BUILDDIR)/$1/normal.gbcpal
+	@mkdir -p $$(dir $$@)
 	$$(RGBGFX) $$(RGBGFXFLAGS) --colors gbc:$$(word 2,$$^) -o $$@ $$<
-$1/front_silver.2bpp: RGBGFXFLAGS += --columns
-$1/front_silver.2bpp: $1/front_silver.png $1/normal.gbcpal
+$(BUILDDIR)/$1/front_silver.2bpp: RGBGFXFLAGS += --columns
+$(BUILDDIR)/$1/front_silver.2bpp: $1/front_silver.png $(BUILDDIR)/$1/normal.gbcpal
+	@mkdir -p $$(dir $$@)
 	$$(RGBGFX) $$(RGBGFXFLAGS) --colors gbc:$$(word 2,$$^) -o $$@ $$<
-$1/normal.gbcpal: $1/front_gold.gbcpal $1/front_silver.gbcpal $1/back.gbcpal
+$(BUILDDIR)/$1/normal.gbcpal: $(BUILDDIR)/$1/front_gold.gbcpal $(BUILDDIR)/$1/front_silver.gbcpal $(BUILDDIR)/$1/back.gbcpal
+	@mkdir -p $$(dir $$@)
 	tools/gbcpal $$(tools/gbcpal) $$@ $$^
 endef
 $(foreach pic, $(wildcard gfx/pokemon/*/front_gold.png),\
 	$(eval $(call PIC_GS,$(pic:/front_gold.png=))))
 
-gfx/trainers/%.2bpp: RGBGFXFLAGS += --columns
-gfx/trainers/%.2bpp: gfx/trainers/%.png gfx/trainers/%.gbcpal
+$(BUILDDIR)/gfx/trainers/%.2bpp: RGBGFXFLAGS += --columns
+$(BUILDDIR)/gfx/trainers/%.2bpp: gfx/trainers/%.png $(BUILDDIR)/gfx/trainers/%.gbcpal
+	@mkdir -p $(dir $@)
 	$(RGBGFX) $(RGBGFXFLAGS) --colors gbc:$(word 2,$^) -o $@ $<
 
 # A few back sprites have different compression settings for Gold and Silver
-gfx/pokemon/%/back_gold.2bpp: gfx/pokemon/%/back.2bpp ; cp -f $^ $@
-gfx/pokemon/%/back_silver.2bpp: gfx/pokemon/%/back.2bpp ; cp -f $^ $@
+$(BUILDDIR)/gfx/pokemon/%/back_gold.2bpp: $(BUILDDIR)/gfx/pokemon/%/back.2bpp ; cp -f $^ $@
+$(BUILDDIR)/gfx/pokemon/%/back_silver.2bpp: $(BUILDDIR)/gfx/pokemon/%/back.2bpp ; cp -f $^ $@
 
 # Egg does not have a back sprite, so it only uses egg.gbcpal
-gfx/pokemon/egg/egg.2bpp: gfx/pokemon/egg/egg.png gfx/pokemon/egg/egg.gbcpal
-gfx/pokemon/egg/egg.2bpp: RGBGFXFLAGS += --columns --colors gbc:$(word 2,$^)
+$(BUILDDIR)/gfx/pokemon/egg/egg.2bpp: gfx/pokemon/egg/egg.png $(BUILDDIR)/gfx/pokemon/egg/egg.gbcpal
+$(BUILDDIR)/gfx/pokemon/egg/egg.2bpp: RGBGFXFLAGS += --columns --colors gbc:$(word 2,$^)
 
 # Unown letters share one normal.gbcpal
 unown_pngs := $(wildcard gfx/pokemon/unown_*/front.png) $(wildcard gfx/pokemon/unown_*/back.png)
 $(foreach png, $(unown_pngs),\
-	$(eval $(png:.png=.2bpp): $(png) gfx/pokemon/unown/normal.gbcpal))
-gfx/pokemon/unown_%/back.2bpp: RGBGFXFLAGS += --colors gbc:$(word 2,$^)
-gfx/pokemon/unown_%/front.2bpp: RGBGFXFLAGS += --colors gbc:$(word 2,$^)
-gfx/pokemon/unown/normal.gbcpal: $(subst .png,.gbcpal,$(unown_pngs))
+	$(eval $(BUILDDIR)/$(png:.png=.2bpp): $(png) $(BUILDDIR)/gfx/pokemon/unown/normal.gbcpal))
+$(BUILDDIR)/gfx/pokemon/unown_%/back.2bpp: RGBGFXFLAGS += --colors gbc:$(word 2,$^)
+$(BUILDDIR)/gfx/pokemon/unown_%/front.2bpp: RGBGFXFLAGS += --colors gbc:$(word 2,$^)
+$(BUILDDIR)/gfx/pokemon/unown/normal.gbcpal: $(addprefix $(BUILDDIR)/,$(subst .png,.gbcpal,$(unown_pngs)))
+	@mkdir -p $(dir $@)
 	tools/gbcpal $(tools/gbcpal) $@ $^
 
 
 ### Misc file-specific graphics rules
 
-gfx/pokemon/squirtle/normal.gbcpal: tools/gbcpal += --reverse
-gfx/pokemon/wartortle/normal.gbcpal: tools/gbcpal += --reverse
-gfx/pokemon/caterpie/normal.gbcpal: tools/gbcpal += --reverse
-gfx/pokemon/farfetch_d/normal.gbcpal: tools/gbcpal += --reverse
-gfx/pokemon/hitmonlee/normal.gbcpal: tools/gbcpal += --reverse
-gfx/pokemon/scyther/normal.gbcpal: tools/gbcpal += --reverse
-gfx/pokemon/bellossom/normal.gbcpal: tools/gbcpal += --reverse
-gfx/pokemon/porygon2/normal.gbcpal: tools/gbcpal += --reverse
+$(BUILDDIR)/gfx/pokemon/squirtle/normal.gbcpal: tools/gbcpal += --reverse
+$(BUILDDIR)/gfx/pokemon/wartortle/normal.gbcpal: tools/gbcpal += --reverse
+$(BUILDDIR)/gfx/pokemon/caterpie/normal.gbcpal: tools/gbcpal += --reverse
+$(BUILDDIR)/gfx/pokemon/farfetch_d/normal.gbcpal: tools/gbcpal += --reverse
+$(BUILDDIR)/gfx/pokemon/hitmonlee/normal.gbcpal: tools/gbcpal += --reverse
+$(BUILDDIR)/gfx/pokemon/scyther/normal.gbcpal: tools/gbcpal += --reverse
+$(BUILDDIR)/gfx/pokemon/bellossom/normal.gbcpal: tools/gbcpal += --reverse
+$(BUILDDIR)/gfx/pokemon/porygon2/normal.gbcpal: tools/gbcpal += --reverse
 
-gfx/trainers/swimmer_m.gbcpal: tools/gbcpal += --reverse
+$(BUILDDIR)/gfx/trainers/swimmer_m.gbcpal: tools/gbcpal += --reverse
 
-gfx/intro/fire.2bpp: tools/gfx += --remove-whitespace
-gfx/intro/fire1.2bpp: gfx/intro/charizard1.2bpp gfx/intro/charizard2_top.2bpp gfx/intro/space.2bpp ; cat $^ > $@
-gfx/intro/fire2.2bpp: gfx/intro/charizard2_bottom.2bpp gfx/intro/charizard3.2bpp ; cat $^ > $@
-gfx/intro/fire3.2bpp: gfx/intro/fire.2bpp gfx/intro/unused_blastoise_venusaur.2bpp ; cat $^ > $@
+$(BUILDDIR)/gfx/intro/fire.2bpp: tools/gfx += --remove-whitespace
+$(BUILDDIR)/gfx/intro/fire1.2bpp: $(BUILDDIR)/gfx/intro/charizard1.2bpp $(BUILDDIR)/gfx/intro/charizard2_top.2bpp $(BUILDDIR)/gfx/intro/space.2bpp ; @mkdir -p $(dir $@) && cat $^ > $@
+$(BUILDDIR)/gfx/intro/fire2.2bpp: $(BUILDDIR)/gfx/intro/charizard2_bottom.2bpp $(BUILDDIR)/gfx/intro/charizard3.2bpp ; @mkdir -p $(dir $@) && cat $^ > $@
+$(BUILDDIR)/gfx/intro/fire3.2bpp: $(BUILDDIR)/gfx/intro/fire.2bpp $(BUILDDIR)/gfx/intro/unused_blastoise_venusaur.2bpp ; @mkdir -p $(dir $@) && cat $^ > $@
 
-gfx/new_game/shrink1.2bpp: RGBGFXFLAGS += --columns
-gfx/new_game/shrink2.2bpp: RGBGFXFLAGS += --columns
+$(BUILDDIR)/gfx/new_game/shrink1.2bpp: RGBGFXFLAGS += --columns
+$(BUILDDIR)/gfx/new_game/shrink2.2bpp: RGBGFXFLAGS += --columns
 
-gfx/mail/dragonite.1bpp: tools/gfx += --remove-whitespace
-gfx/mail/large_note.1bpp: tools/gfx += --remove-whitespace
-gfx/mail/surf_mail_border.1bpp: tools/gfx += --remove-whitespace
-gfx/mail/flower_mail_border.1bpp: tools/gfx += --remove-whitespace
-gfx/mail/litebluemail_border.1bpp: tools/gfx += --remove-whitespace
+$(BUILDDIR)/gfx/mail/dragonite.1bpp: tools/gfx += --remove-whitespace
+$(BUILDDIR)/gfx/mail/large_note.1bpp: tools/gfx += --remove-whitespace
+$(BUILDDIR)/gfx/mail/surf_mail_border.1bpp: tools/gfx += --remove-whitespace
+$(BUILDDIR)/gfx/mail/flower_mail_border.1bpp: tools/gfx += --remove-whitespace
+$(BUILDDIR)/gfx/mail/litebluemail_border.1bpp: tools/gfx += --remove-whitespace
 
-gfx/pokedex/pokedex.2bpp: tools/gfx += --trim-whitespace
-gfx/pokedex/pokedex_sgb.2bpp: tools/gfx += --trim-whitespace
-gfx/pokedex/question_mark.2bpp: RGBGFXFLAGS += --columns
-gfx/pokedex/slowpoke.2bpp: tools/gfx += --trim-whitespace
+$(BUILDDIR)/gfx/pokedex/pokedex.2bpp: tools/gfx += --trim-whitespace
+$(BUILDDIR)/gfx/pokedex/pokedex_sgb.2bpp: tools/gfx += --trim-whitespace
+$(BUILDDIR)/gfx/pokedex/question_mark.2bpp: RGBGFXFLAGS += --columns
+$(BUILDDIR)/gfx/pokedex/slowpoke.2bpp: tools/gfx += --trim-whitespace
 
-gfx/pokegear/pokegear.2bpp: RGBGFXFLAGS += --trim-end 2
-gfx/pokegear/pokegear_sprites.2bpp: tools/gfx += --trim-whitespace
+$(BUILDDIR)/gfx/pokegear/pokegear.2bpp: RGBGFXFLAGS += --trim-end 2
+$(BUILDDIR)/gfx/pokegear/pokegear_sprites.2bpp: tools/gfx += --trim-whitespace
 
-gfx/mystery_gift/mystery_gift.2bpp: tools/gfx += --remove-whitespace
-gfx/mystery_gift/mystery_gift_2.2bpp: tools/gfx += --trim-whitespace
-gfx/mystery_gift/question_mark.1bpp: tools/gfx += --remove-whitespace
+$(BUILDDIR)/gfx/mystery_gift/mystery_gift.2bpp: tools/gfx += --remove-whitespace
+$(BUILDDIR)/gfx/mystery_gift/mystery_gift_2.2bpp: tools/gfx += --trim-whitespace
+$(BUILDDIR)/gfx/mystery_gift/question_mark.1bpp: tools/gfx += --remove-whitespace
 
-gfx/title/logo_bottom_gold.2bpp: tools/gfx += --trim-whitespace
-gfx/title/logo_bottom_silver.2bpp: tools/gfx += --trim-whitespace
-gfx/title/hooh_gold.2bpp: tools/gfx += --interleave --png=$<
-gfx/title/lugia_silver.2bpp: tools/gfx += --interleave --png=$<
+$(BUILDDIR)/gfx/title/logo_bottom_gold.2bpp: tools/gfx += --trim-whitespace
+$(BUILDDIR)/gfx/title/logo_bottom_silver.2bpp: tools/gfx += --trim-whitespace
+$(BUILDDIR)/gfx/title/hooh_gold.2bpp: tools/gfx += --interleave --png=$<
+$(BUILDDIR)/gfx/title/lugia_silver.2bpp: tools/gfx += --interleave --png=$<
 
-gfx/trade/ball.2bpp: tools/gfx += --remove-whitespace
-gfx/trade/game_boy.2bpp: tools/gfx += --remove-duplicates --preserve=0x23,0x27
-gfx/trade/game_boy_cable.2bpp: gfx/trade/game_boy.2bpp gfx/trade/link_cable.2bpp ; cat $^ > $@
+$(BUILDDIR)/gfx/trade/ball.2bpp: tools/gfx += --remove-whitespace
+$(BUILDDIR)/gfx/trade/game_boy.2bpp: tools/gfx += --remove-duplicates --preserve=0x23,0x27
+$(BUILDDIR)/gfx/trade/game_boy_cable.2bpp: $(BUILDDIR)/gfx/trade/game_boy.2bpp $(BUILDDIR)/gfx/trade/link_cable.2bpp ; @mkdir -p $(dir $@) && cat $^ > $@
 
-gfx/slots/slots_1.2bpp: tools/gfx += --trim-whitespace
-gfx/slots/slots_2.2bpp: tools/gfx += --interleave --png=$<
-gfx/slots/slots_3.2bpp: tools/gfx += --interleave --png=$< --remove-duplicates --keep-whitespace --remove-xflip
+$(BUILDDIR)/gfx/slots/slots_1.2bpp: tools/gfx += --trim-whitespace
+$(BUILDDIR)/gfx/slots/slots_2.2bpp: tools/gfx += --interleave --png=$<
+$(BUILDDIR)/gfx/slots/slots_3.2bpp: tools/gfx += --interleave --png=$< --remove-duplicates --keep-whitespace --remove-xflip
 
-gfx/card_flip/card_flip_1.2bpp: tools/gfx += --trim-whitespace
-gfx/card_flip/card_flip_2.2bpp: tools/gfx += --remove-whitespace
+$(BUILDDIR)/gfx/card_flip/card_flip_1.2bpp: tools/gfx += --trim-whitespace
+$(BUILDDIR)/gfx/card_flip/card_flip_2.2bpp: tools/gfx += --remove-whitespace
 
-gfx/battle_anims/angels.2bpp: tools/gfx += --trim-whitespace
-gfx/battle_anims/beam.2bpp: tools/gfx += --remove-xflip --remove-yflip --remove-whitespace
-gfx/battle_anims/bubble.2bpp: tools/gfx += --trim-whitespace
-gfx/battle_anims/charge.2bpp: tools/gfx += --trim-whitespace
-gfx/battle_anims/egg.2bpp: tools/gfx += --remove-whitespace
-gfx/battle_anims/explosion.2bpp: tools/gfx += --remove-whitespace
-gfx/battle_anims/hit.2bpp: tools/gfx += --remove-whitespace
-gfx/battle_anims/horn.2bpp: tools/gfx += --remove-whitespace
-gfx/battle_anims/lightning.2bpp: tools/gfx += --remove-whitespace
-gfx/battle_anims/misc.2bpp: tools/gfx += --remove-duplicates --remove-xflip
-gfx/battle_anims/noise.2bpp: tools/gfx += --remove-whitespace
-gfx/battle_anims/objects.2bpp: tools/gfx += --remove-whitespace --remove-xflip
-gfx/battle_anims/pokeball.2bpp: tools/gfx += --remove-xflip --keep-whitespace
-gfx/battle_anims/reflect.2bpp: tools/gfx += --remove-whitespace
-gfx/battle_anims/rocks.2bpp: tools/gfx += --remove-whitespace
-gfx/battle_anims/skyattack.2bpp: tools/gfx += --remove-whitespace
-gfx/battle_anims/status.2bpp: tools/gfx += --remove-whitespace
+$(BUILDDIR)/gfx/battle_anims/angels.2bpp: tools/gfx += --trim-whitespace
+$(BUILDDIR)/gfx/battle_anims/beam.2bpp: tools/gfx += --remove-xflip --remove-yflip --remove-whitespace
+$(BUILDDIR)/gfx/battle_anims/bubble.2bpp: tools/gfx += --trim-whitespace
+$(BUILDDIR)/gfx/battle_anims/charge.2bpp: tools/gfx += --trim-whitespace
+$(BUILDDIR)/gfx/battle_anims/egg.2bpp: tools/gfx += --remove-whitespace
+$(BUILDDIR)/gfx/battle_anims/explosion.2bpp: tools/gfx += --remove-whitespace
+$(BUILDDIR)/gfx/battle_anims/hit.2bpp: tools/gfx += --remove-whitespace
+$(BUILDDIR)/gfx/battle_anims/horn.2bpp: tools/gfx += --remove-whitespace
+$(BUILDDIR)/gfx/battle_anims/lightning.2bpp: tools/gfx += --remove-whitespace
+$(BUILDDIR)/gfx/battle_anims/misc.2bpp: tools/gfx += --remove-duplicates --remove-xflip
+$(BUILDDIR)/gfx/battle_anims/noise.2bpp: tools/gfx += --remove-whitespace
+$(BUILDDIR)/gfx/battle_anims/objects.2bpp: tools/gfx += --remove-whitespace --remove-xflip
+$(BUILDDIR)/gfx/battle_anims/pokeball.2bpp: tools/gfx += --remove-xflip --keep-whitespace
+$(BUILDDIR)/gfx/battle_anims/reflect.2bpp: tools/gfx += --remove-whitespace
+$(BUILDDIR)/gfx/battle_anims/rocks.2bpp: tools/gfx += --remove-whitespace
+$(BUILDDIR)/gfx/battle_anims/skyattack.2bpp: tools/gfx += --remove-whitespace
+$(BUILDDIR)/gfx/battle_anims/status.2bpp: tools/gfx += --remove-whitespace
 
-gfx/player/chris.2bpp: RGBGFXFLAGS += --columns
-gfx/player/chris_back.2bpp: RGBGFXFLAGS += --columns
+$(BUILDDIR)/gfx/player/chris.2bpp: RGBGFXFLAGS += --columns
+$(BUILDDIR)/gfx/player/chris_back.2bpp: RGBGFXFLAGS += --columns
 
-gfx/trainer_card/leaders.2bpp: tools/gfx += --trim-whitespace
+$(BUILDDIR)/gfx/trainer_card/leaders.2bpp: tools/gfx += --trim-whitespace
 
-gfx/overworld/chris_fish.2bpp: tools/gfx += --trim-whitespace
+$(BUILDDIR)/gfx/overworld/chris_fish.2bpp: tools/gfx += --trim-whitespace
 
-gfx/sprites/big_onix.2bpp: tools/gfx += --remove-whitespace --remove-xflip
+$(BUILDDIR)/gfx/sprites/big_onix.2bpp: tools/gfx += --remove-whitespace --remove-xflip
 
-gfx/battle/dude.2bpp: RGBGFXFLAGS += --columns
+$(BUILDDIR)/gfx/battle/dude.2bpp: RGBGFXFLAGS += --columns
 
-gfx/font/unused_bold_font.1bpp: tools/gfx += --trim-whitespace
+$(BUILDDIR)/gfx/font/unused_bold_font.1bpp: tools/gfx += --trim-whitespace
 
-gfx/sgb/gold_border.2bpp: tools/gfx += --trim-whitespace
-gfx/sgb/silver_border.2bpp: tools/gfx += --trim-whitespace
-gfx/sgb/gold_border.sgb.tilemap: gfx/sgb/gold_border.bin ; tr < $< -d '\000' > $@
-gfx/sgb/silver_border.sgb.tilemap: gfx/sgb/silver_border.bin ; tr < $< -d '\000' > $@
+$(BUILDDIR)/gfx/sgb/gold_border.2bpp: tools/gfx += --trim-whitespace
+$(BUILDDIR)/gfx/sgb/silver_border.2bpp: tools/gfx += --trim-whitespace
+$(BUILDDIR)/gfx/sgb/gold_border.sgb.tilemap: gfx/sgb/gold_border.bin
+	@mkdir -p $(dir $@)
+	tr < $< -d '\000' > $@
+$(BUILDDIR)/gfx/sgb/silver_border.sgb.tilemap: gfx/sgb/silver_border.bin
+	@mkdir -p $(dir $@)
+	tr < $< -d '\000' > $@
 
 
 ### Catch-all graphics rules
 
-%.2bpp: %.png
+
+$(BUILDDIR)/%.2bpp: %.png
+	@mkdir -p $(dir $@)
 	$(RGBGFX) --colors dmg $(RGBGFXFLAGS) -o $@ $<
 	$(if $(tools/gfx),\
 		tools/gfx $(tools/gfx) -o $@ $@ || $$($(RM) $@ && false))
 
-%.1bpp: %.png
+$(BUILDDIR)/%.1bpp: %.png
+	@mkdir -p $(dir $@)
 	$(RGBGFX) --colors dmg $(RGBGFXFLAGS) --depth 1 -o $@ $<
 	$(if $(tools/gfx),\
 		tools/gfx $(tools/gfx) --depth 1 -o $@ $@ || $$($(RM) $@ && false))
 
-%.gbcpal: %.png
+$(BUILDDIR)/%.gbcpal: %.png
+	@mkdir -p $(dir $@)
 	$(RGBGFX) -p $@ $<
 	tools/gbcpal $(tools/gbcpal) $@ $@ || $$($(RM) $@ && false)
 
-%.dimensions: %.png
+$(BUILDDIR)/%.dimensions: %.png
+	@mkdir -p $(dir $@)
 	tools/png_dimensions $< $@
 
 
