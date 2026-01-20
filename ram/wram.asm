@@ -497,7 +497,7 @@ wLinkDataEnd::
 SECTION UNION "Overworld Map", WRAM0
 
 ; player's party data, formatted for link transfer (Gen 2 link session)
-wLinkSendParty:: ds SERIAL_PREAMBLE_LENGTH + LINK_PARTY_DATA_LENGTH + 3
+wLinkSendParty:: ds SERIAL_PREAMBLE_LENGTH + LINK_PARTY_DATA_LENGTH
 
 	ds 50
 ; player's party mail, formatted for link transfer, during a link session
@@ -521,7 +521,7 @@ wLinkReceivedMailEnd::
 SECTION UNION "Overworld Map", WRAM0
 
 ; player's party data, formatted for link transfer (Time Capsule link session)
-wLinkSendTimeCapsuleParty:: ds SERIAL_PREAMBLE_LENGTH + LINK_TIME_CAPSULE_PARTY_DATA_LENGTH + 3
+wLinkSendTimeCapsuleParty:: ds SERIAL_PREAMBLE_LENGTH + LINK_TIME_CAPSULE_PARTY_DATA_LENGTH
 
 
 SECTION UNION "Overworld Map", WRAM0
@@ -585,7 +585,7 @@ for n, 1, PARTY_LENGTH + 1
 wTimeCapsulePartyMon{d:n}Nickname:: ds MON_NAME_LENGTH
 endr
 
-	ds 3
+	ds LINK_PARTY_DATA_PADDING ; unused but written to
 ENDU
 
 
@@ -2784,8 +2784,7 @@ wMagikarpRecordHoldersName:: ds NAME_LENGTH
 ; This union spans 451 bytes.
 UNION
 ; during a link session, other player's raw party data is initially stored here
-wLinkReceivedPartyData::
-	ds SERIAL_PREAMBLE_LENGTH + LINK_PARTY_DATA_LENGTH + 3
+wLinkReceivedPartyData:: ds SERIAL_PREAMBLE_LENGTH + LINK_PARTY_DATA_LENGTH
 wLinkReceivedPartyEnd:: db
 
 NEXTU
