@@ -489,14 +489,13 @@ wUnusedJigglypuffNoteXCoord:: db
 
 SECTION UNION "Overworld Map", WRAM0
 
-; buffer for various cable link data
+; buffer for various link transfer data
 wLinkData:: ds 1300
 wLinkDataEnd::
 
 
 SECTION UNION "Overworld Map", WRAM0
 
-UNION
 ; player's party data, formatted for link transfer (Gen 2 link session)
 wLinkSendParty:: ds SERIAL_PREAMBLE_LENGTH + LINK_PARTY_DATA_LENGTH + 3
 
@@ -510,21 +509,24 @@ wLinkSendMailPatchSet:: ds SERIAL_MAIL_PATCH_LIST_LENGTH
 wLinkSendMailEnd::
 	ds 10
 
-; during a link session, other Game Boy's raw mail data is initially stored here
+; during a link session, the other player's raw mail data is initially stored here
 wLinkReceivedMail::
 	ds SERIAL_MAIL_PREAMBLE_LENGTH + MAIL_STRUCT_LENGTH * PARTY_LENGTH + SERIAL_MAIL_PATCH_LIST_LENGTH
 wLinkReceivedMailEnd::
 	ds 10
-
-NEXTU
-; player's party data, formatted for link transfer (Time Capsule link session)
-wLinkSendTCParty:: ds SERIAL_PREAMBLE_LENGTH + LINK_TC_PARTY_DATA_LENGTH + 3
-ENDU
+; wLinkDataEnd should have been used instead of wLinkReceivedMailEnd (see engine/link/link.asm)
+	assert @ == wLinkDataEnd
 
 
 SECTION UNION "Overworld Map", WRAM0
 
-; After the initial link session, other Game Boy's party and mail data
+; player's party data, formatted for link transfer (Time Capsule link session)
+wLinkSendTimeCapsuleParty:: ds SERIAL_PREAMBLE_LENGTH + LINK_TIME_CAPSULE_PARTY_DATA_LENGTH + 3
+
+
+SECTION UNION "Overworld Map", WRAM0
+
+; after the initial link session, the other player's party and mail data
 ; is temporarily stored here before applying patch data
 
 ; link player's name and party species are not patched,
@@ -557,6 +559,7 @@ wLinkPlayerPartyMon{d:n}Nickname:: ds MON_NAME_LENGTH
 endr
 
 	ds 459
+
 ; received mail data, stripped of the serial preamble
 wLinkReceivedMailMessages:: ds (MAIL_MSG_LENGTH + 1) * PARTY_LENGTH
 wLinkReceivedMailMetadata:: ds (MAIL_STRUCT_LENGTH - (MAIL_MSG_LENGTH + 1)) * PARTY_LENGTH
@@ -582,7 +585,7 @@ for n, 1, PARTY_LENGTH + 1
 wTimeCapsulePartyMon{d:n}Nickname:: ds MON_NAME_LENGTH
 endr
 
-wTimeCapsuleUnused:: ds 3
+	ds 3
 ENDU
 
 
@@ -601,9 +604,10 @@ endr
 
 SECTION UNION "Overworld Map", WRAM0
 
-; other Game Boy's link mail data, patched and formatted to mailmsg structure
+; other player's link mail data, patched and formatted to mailmsg structure
 	ds 500
 wLinkOTMail::
+; wLinkOTMon1Mail - wLinkOTMon6Mail
 for n, 1, PARTY_LENGTH + 1
 wLinkOTMon{d:n}Mail:: mailmsg wLinkOTMon{d:n}Mail
 endr
@@ -2779,7 +2783,7 @@ wMagikarpRecordHoldersName:: ds NAME_LENGTH
 
 ; This union spans 451 bytes.
 UNION
-; during a link session, other Game Boy's raw party data is initially stored here
+; during a link session, other player's raw party data is initially stored here
 wLinkReceivedPartyData::
 	ds SERIAL_PREAMBLE_LENGTH + LINK_PARTY_DATA_LENGTH + 3
 wLinkReceivedPartyEnd:: db

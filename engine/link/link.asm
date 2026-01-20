@@ -86,9 +86,9 @@ endc
 	ld a, SERIAL_NO_DATA_BYTE
 	ld [de], a
 
-	ld hl, wLinkSendTCParty
+	ld hl, wLinkSendTimeCapsuleParty
 	ld de, wLinkReceivedPartyData
-	ld bc, SERIAL_PREAMBLE_LENGTH + LINK_TC_PARTY_DATA_LENGTH + 3
+	ld bc, SERIAL_PREAMBLE_LENGTH + LINK_TIME_CAPSULE_PARTY_DATA_LENGTH + 3
 	vc_hook Wireless_ExchangeBytes_Gen2toGen1_party_structs
 	call Serial_ExchangeBytes
 	ld a, SERIAL_NO_DATA_BYTE
@@ -120,7 +120,7 @@ endc
 	jp nc, ExitLinkCommunications
 
 	ld de, wLinkPlayerName
-	ld bc, LINK_TC_PARTY_DATA_LENGTH + 3
+	ld bc, LINK_TIME_CAPSULE_PARTY_DATA_LENGTH + 3
 	call Link_CopyOTData
 
 	ld de, wOTPatchLists
