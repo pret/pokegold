@@ -514,7 +514,7 @@ wLinkReceivedMail::
 	ds SERIAL_MAIL_PREAMBLE_LENGTH + MAIL_STRUCT_LENGTH * PARTY_LENGTH + SERIAL_MAIL_PATCH_LIST_LENGTH
 wLinkReceivedMailEnd::
 	ds 10
-; wLinkDataEnd should have been used instead of wLinkReceivedMailEnd (see engine/link/link.asm)
+; wLinkReceivedMailEnd should have been used instead of wLinkDataEnd (see engine/link/link.asm)
 	assert @ == wLinkDataEnd
 
 
