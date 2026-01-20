@@ -566,7 +566,7 @@ wLinkReceivedMailMetadata:: ds (MAIL_STRUCT_LENGTH - (MAIL_MSG_LENGTH + 1)) * PA
 wLinkReceivedMailPatchSet:: ds SERIAL_MAIL_PATCH_LIST_LENGTH
 
 NEXTU
-; Gen 1 (Time Tapsule) link player party data
+; Gen 1 (Time Capsule) link player party data
 wTimeCapsulePatchedData::
 ; wTimeCapsulePartyMon1 - wTimeCapsulePartyMon6
 for n, 1, PARTY_LENGTH + 1
