@@ -88,7 +88,7 @@ endc
 
 	ld hl, wLinkSendTimeCapsuleParty
 	ld de, wLinkReceivedPartyData
-	ld bc, SERIAL_PREAMBLE_LENGTH + LINK_TIME_CAPSULE_PARTY_DATA_LENGTH
+	ld bc, SERIAL_PREAMBLE_LENGTH + LINK_TIME_CAPSULE_PARTY_DATA_LENGTH + SERIAL_PADDING_LENGTH
 	vc_hook Wireless_ExchangeBytes_Gen2toGen1_party_structs
 	call Serial_ExchangeBytes
 	ld a, SERIAL_NO_DATA_BYTE
@@ -120,7 +120,7 @@ endc
 	jp nc, ExitLinkCommunications
 
 	ld de, wLinkPlayerName
-	ld bc, LINK_TIME_CAPSULE_PARTY_DATA_LENGTH
+	ld bc, LINK_TIME_CAPSULE_PARTY_DATA_LENGTH + SERIAL_PADDING_LENGTH
 	call Link_CopyOTData
 
 	ld de, wOTPatchLists
@@ -254,7 +254,7 @@ endc
 
 	ld hl, wLinkSendParty
 	ld de, wLinkReceivedPartyData
-	ld bc, SERIAL_PREAMBLE_LENGTH + LINK_PARTY_DATA_LENGTH
+	ld bc, SERIAL_PREAMBLE_LENGTH + LINK_PARTY_DATA_LENGTH + SERIAL_PADDING_LENGTH
 	vc_hook Wireless_ExchangeBytes_party_structs
 	call Serial_ExchangeBytes
 	ld a, SERIAL_NO_DATA_BYTE
@@ -288,7 +288,7 @@ endc
 	ld hl, wLinkReceivedPartyData
 	call Link_FindFirstNonControlCharacter_SkipZero
 	ld de, wLinkPlayerName
-	ld bc, LINK_PARTY_DATA_LENGTH - LINK_PARTY_DATA_PADDING
+	ld bc, LINK_PARTY_DATA_LENGTH
 	call Link_CopyOTData
 
 	ld de, wOTPatchLists
