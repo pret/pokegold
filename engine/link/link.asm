@@ -590,7 +590,8 @@ endr
 	jr nz, .clear_loop
 
 ; Loop through all the patchable link data
-	ld hl, wLinkData + SERIAL_PREAMBLE_LENGTH + NAME_LENGTH + (1 + PARTY_LENGTH + 1) - 1
+	ld hl, wLinkSendParty + SERIAL_PREAMBLE_LENGTH + NAME_LENGTH + (1 + PARTY_LENGTH + 1) - 1
+	assert wLinkSendParty == wLinkSendTimeCapsuleParty
 	ld de, wPlayerPatchLists + SERIAL_RNS_LENGTH
 	lb bc, 0, 0
 .patch_loop
@@ -641,7 +642,7 @@ endr
 	ret
 
 Link_PrepPartyData_Gen1:
-	ld de, wLinkData
+	ld de, wLinkSendTimeCapsuleParty
 	ld a, SERIAL_PREAMBLE_BYTE
 	ld b, SERIAL_PREAMBLE_LENGTH
 .loop1
@@ -811,7 +812,7 @@ Link_PrepPartyData_Gen1:
 	ret
 
 Link_PrepPartyData_Gen2:
-	ld de, wLinkData
+	ld de, wLinkSendParty
 	ld a, SERIAL_PREAMBLE_BYTE
 	ld b, SERIAL_PREAMBLE_LENGTH
 .preamble_loop
