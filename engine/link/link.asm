@@ -107,6 +107,7 @@ endc
 
 	call Link_CopyRandomNumbers
 
+; check if we have received a valid party count
 	ld hl, wLinkReceivedPartyData
 	call Link_FindFirstNonControlCharacter_SkipZero
 	push hl
@@ -116,10 +117,11 @@ endc
 	pop hl
 	and a
 	jp z, ExitLinkCommunications
-	cp $7
+	cp PARTY_LENGTH + 1
 	jp nc, ExitLinkCommunications
 
 	ld de, wLinkPlayerName
+	; this should be "ld bc, LINK_TIME_CAPSULE_PARTY_DATA_LENGTH"
 	ld bc, LINK_TIME_CAPSULE_PARTY_DATA_LENGTH + SERIAL_PADDING_LENGTH
 	call Link_CopyOTData
 
@@ -136,7 +138,7 @@ endc
 	cp SERIAL_NO_DATA_BYTE
 	jr z, .loop
 	cp SERIAL_PATCH_LIST_PART_TERMINATOR
-	jr z, .next
+	jr z, .next_patch_list
 	push hl
 	push bc
 	ld b, 0
@@ -149,7 +151,7 @@ endc
 	pop hl
 	jr .loop
 
-.next
+.next_patch_list
 	ld hl, wTimeCapsulePatchedData + SERIAL_PATCH_DATA_SIZE
 	dec c
 	jr nz, .loop
@@ -164,10 +166,10 @@ endc
 	ld [de], a
 	inc de
 
-.party_loop
+.species_loop
 	ld a, [hli]
 	cp -1
-	jr z, .done_party
+	jr z, .convert_party_struct
 	ld [wTempSpecies], a
 	push hl
 	push de
@@ -177,10 +179,10 @@ endc
 	ld a, [wTempSpecies]
 	ld [de], a
 	inc de
-	jr .party_loop
+	jr .species_loop
 
-.done_party
-	ld [de], a
+.convert_party_struct
+	ld [de], a ; write terminator
 	ld hl, wTimeCapsulePatchedData
 	call Link_ConvertPartyStruct1to2
 
@@ -645,11 +647,11 @@ Link_PrepPartyData_Gen1:
 	ld de, wLinkSendTimeCapsuleParty
 	ld a, SERIAL_PREAMBLE_BYTE
 	ld b, SERIAL_PREAMBLE_LENGTH
-.loop1
+.preamble_loop
 	ld [de], a
 	inc de
 	dec b
-	jr nz, .loop1
+	jr nz, .preamble_loop
 
 	ld hl, wPlayerName
 	ld bc, NAME_LENGTH
@@ -660,10 +662,10 @@ Link_PrepPartyData_Gen1:
 	ld a, [hli]
 	ld [de], a
 	inc de
-.loop2
+.species_loop
 	ld a, [hli]
 	cp -1
-	jr z, .done_party
+	jr z, .convert_party_struct
 	ld [wTempSpecies], a
 	push hl
 	push de
@@ -673,9 +675,10 @@ Link_PrepPartyData_Gen1:
 	ld a, [wTempSpecies]
 	ld [de], a
 	inc de
-	jr .loop2
-.done_party
-	ld [de], a
+	jr .species_loop
+
+.convert_party_struct
+	ld [de], a ; write terminator
 	pop de
 	ld hl, 1 + PARTY_LENGTH + 1
 	add hl, de
@@ -1015,25 +1018,25 @@ Link_ConvertPartyStruct1to2:
 	ld [de], a
 	inc de
 	pop bc
-	ld bc, $19
+	ld bc, MON_HAPPINESS - MON_MOVES
 	call CopyBytes
 	pop bc
 	ld d, h
 	ld e, l
-	ld hl, $1f
+	ld hl, MON_LEVEL
 	add hl, bc
 	ld a, [de]
 	inc de
 	ld [hl], a
 	ld [wCurPartyLevel], a
 	push bc
-	ld hl, $24
+	ld hl, MON_MAXHP
 	add hl, bc
 	push hl
 	ld h, d
 	ld l, e
 	pop de
-	ld bc, 8
+	ld bc, MON_SAT - MON_MAXHP
 	call CopyBytes
 	pop bc
 	call GetBaseData
@@ -1066,12 +1069,12 @@ Link_ConvertPartyStruct1to2:
 	ldh a, [hQuotient + 3]
 	ld [hli], a
 	push hl
-	ld hl, $1b
+	ld hl, MON_HAPPINESS
 	add hl, bc
-	ld a, $46
+	ld a, BASE_HAPPINESS
 	ld [hli], a
 	xor a
-	ld [hli], a
+	ld [hli], a ; wOTPartyMon*PokerusStatus
 	ld [hli], a
 	ld [hl], a
 	pop hl
@@ -1123,7 +1126,7 @@ Link_CopyRandomNumbers:
 	ld hl, wOTLinkBattleRNData
 	call Link_FindFirstNonControlCharacter_AllowZero
 	ld de, wLinkBattleRNs
-	ld c, 10
+	ld c, SERIAL_RNS_LENGTH
 .loop
 	ld a, [hli]
 	cp SERIAL_NO_DATA_BYTE

@@ -488,13 +488,8 @@ wUnusedJigglypuffNoteXCoord:: db
 
 
 SECTION UNION "Overworld Map", WRAM0
-
-; buffer for various link transfer data
-wLinkData:: ds 1300
-wLinkDataEnd::
-
-
-SECTION UNION "Overworld Map", WRAM0
+; This union is 1300 bytes, the largest of all link data unions inside "Overworld Map"
+wLinkData::
 
 ; player's party data, formatted for link transfer (Gen 2 link session)
 wLinkSendParty:: ds SERIAL_PREAMBLE_LENGTH + LINK_PARTY_DATA_LENGTH + SERIAL_PADDING_LENGTH
@@ -513,9 +508,9 @@ wLinkSendMailEnd::
 wLinkReceivedMail::
 	ds SERIAL_MAIL_PREAMBLE_LENGTH + MAIL_STRUCT_LENGTH * PARTY_LENGTH + SERIAL_MAIL_PATCH_LIST_LENGTH
 wLinkReceivedMailEnd::
-	ds 10
-; wLinkReceivedMailEnd should have been used instead of wLinkDataEnd (see engine/link/link.asm)
-	assert @ == wLinkDataEnd
+	ds 10 ; unused but written to (see engine/link/link.asm)
+
+wLinkDataEnd::
 
 
 SECTION UNION "Overworld Map", WRAM0
@@ -585,7 +580,7 @@ for n, 1, PARTY_LENGTH + 1
 wTimeCapsulePartyMon{d:n}Nickname:: ds MON_NAME_LENGTH
 endr
 
-	ds SERIAL_PADDING_LENGTH ; unused but written to
+	ds SERIAL_PADDING_LENGTH ; unused but written to (see engine/link/link.asm)
 ENDU
 
 
