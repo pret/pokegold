@@ -257,6 +257,18 @@
 	const ROCK_SMASH   ; f9
 	const WHIRLPOOL    ; fa
 	const BEAT_UP      ; fb
+	; New moves (Gen 3+)
+	const DRAGON_DANCE ; fc
+	const CALM_MIND    ; fd
+	const BULK_UP      ; fe
+	const HONE_CLAWS   ; ff
+	const CLOSE_COMBAT ; 100
+	const BRAVE_BIRD   ; 101
+	const FLARE_BLITZ  ; 102
+	const U_TURN       ; 103
+	const VOLT_SWITCH  ; 104
+	const ROOST        ; 105
+	const WILL_O_WISP  ; 106
 DEF NUM_ATTACKS EQU const_value - 1
 
 DEF CANNOT_MOVE EQU $ff

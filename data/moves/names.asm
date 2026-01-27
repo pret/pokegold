@@ -251,4 +251,16 @@ MoveNames::
 	li "ROCK SMASH"
 	li "WHIRLPOOL"
 	li "BEAT UP"
+	; New moves (Gen 3+)
+	li "DRAGON DANCE"
+	li "CALM MIND"
+	li "BULK UP"
+	li "HONE CLAWS"
+	li "CLOSE COMBAT"
+	li "BRAVE BIRD"
+	li "FLARE BLITZ"
+	li "U-TURN"
+	li "VOLT SWITCH"
+	li "ROOST"
+	li "WILL-O-WISP"
 	assert_list_length NUM_ATTACKS

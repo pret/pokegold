@@ -2077,3 +2077,145 @@ DefenseCurl:
 	statupmessage
 	statupfailtext
 	endmove
+
+; New Gen 3+ move effects
+
+DragonDance:
+; +1 Attack, +1 Speed
+	checkobedience
+	usedmovetext
+	doturn
+	attackup
+	lowersub
+	statupanim
+	raisesub
+	statupmessage
+	speedup
+	lowersub
+	statupanim
+	raisesub
+	statupmessage
+	statupfailtext
+	endmove
+
+CalmMind:
+; +1 Special Attack, +1 Special Defense
+	checkobedience
+	usedmovetext
+	doturn
+	specialattackup
+	lowersub
+	statupanim
+	raisesub
+	statupmessage
+	specialdefenseup
+	lowersub
+	statupanim
+	raisesub
+	statupmessage
+	statupfailtext
+	endmove
+
+BulkUp:
+; +1 Attack, +1 Defense
+	checkobedience
+	usedmovetext
+	doturn
+	attackup
+	lowersub
+	statupanim
+	raisesub
+	statupmessage
+	defenseup
+	lowersub
+	statupanim
+	raisesub
+	statupmessage
+	statupfailtext
+	endmove
+
+HoneClaws:
+; +1 Attack, +1 Accuracy
+	checkobedience
+	usedmovetext
+	doturn
+	attackup
+	lowersub
+	statupanim
+	raisesub
+	statupmessage
+	accuracyup
+	lowersub
+	statupanim
+	raisesub
+	statupmessage
+	statupfailtext
+	endmove
+
+CloseCombat:
+; High power Fighting move that lowers user's Def and SpD
+	checkobedience
+	usedmovetext
+	doturn
+	critical
+	damagestats
+	damagecalc
+	stab
+	damagevariation
+	checkhit
+	moveanim
+	failuretext
+	applydamage
+	criticaltext
+	supereffectivetext
+	checkfaint
+	buildopponentrage
+	; Lower user's defenses
+	switchturn
+	defensedown
+	statdownmessage
+	specialdefensedown
+	statdownmessage
+	switchturn
+	endmove
+
+UTurn:
+; Bug move that deals damage then switches out
+	checkobedience
+	usedmovetext
+	doturn
+	critical
+	damagestats
+	damagecalc
+	stab
+	damagevariation
+	checkhit
+	moveanim
+	failuretext
+	applydamage
+	criticaltext
+	supereffectivetext
+	checkfaint
+	buildopponentrage
+	kingsrock
+	batonpass
+	endmove
+
+Roost:
+; Heal 50% of max HP
+	checkobedience
+	usedmovetext
+	doturn
+	heal
+	endmove
+
+DoBurn:
+; Burns the target (status move)
+	checkobedience
+	usedmovetext
+	doturn
+	checkhit
+	stab
+	checksafeguard
+	burntarget
+	endmove

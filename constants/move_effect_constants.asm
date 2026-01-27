@@ -157,4 +157,13 @@
 	const EFFECT_BEAT_UP
 	const EFFECT_FLY
 	const EFFECT_DEFENSE_CURL
+	; New effects for Gen 3+ moves
+	const EFFECT_DRAGON_DANCE   ; +1 Atk, +1 Spd
+	const EFFECT_CALM_MIND      ; +1 SpA, +1 SpD
+	const EFFECT_BULK_UP        ; +1 Atk, +1 Def
+	const EFFECT_HONE_CLAWS     ; +1 Atk, +1 Acc
+	const EFFECT_CLOSE_COMBAT   ; Attack, -1 user Def, -1 user SpD
+	const EFFECT_U_TURN         ; Attack then switch
+	const EFFECT_ROOST          ; Heal 50% HP
+	const EFFECT_DO_BURN        ; Burn target (status move)
 DEF NUM_MOVE_EFFECTS EQU const_value

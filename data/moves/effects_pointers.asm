@@ -158,4 +158,13 @@ MoveEffectsPointers:
 	dw BeatUp
 	dw Fly
 	dw DefenseCurl
+	; New effects for Gen 3+ moves
+	dw DragonDance
+	dw CalmMind
+	dw BulkUp
+	dw HoneClaws
+	dw CloseCombat
+	dw UTurn
+	dw Roost
+	dw DoBurn
 	assert_table_length NUM_MOVE_EFFECTS
