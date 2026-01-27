@@ -1328,15 +1328,17 @@ AI_Smart_Counter:
 	and a
 	jr z, .skipmove
 
+	ld e, a ; save move number
 	call AIGetEnemyMove
 
 	ld a, [wEnemyMoveStruct + MOVE_POWER]
 	and a
 	jr z, .skipmove
 
-	ld a, [wEnemyMoveStruct + MOVE_TYPE]
-	cp SPECIAL
-	jr nc, .skipmove
+	ld a, e ; restore move number
+	dec a
+	call GetMoveCategory
+	jr nc, .skipmove ; Counter only works vs physical
 
 	inc b
 
@@ -1356,15 +1358,17 @@ AI_Smart_Counter:
 	and a
 	jr z, .done
 
+	ld e, a ; save move number
 	call AIGetEnemyMove
 
 	ld a, [wEnemyMoveStruct + MOVE_POWER]
 	and a
 	jr z, .done
 
-	ld a, [wEnemyMoveStruct + MOVE_TYPE]
-	cp SPECIAL
-	jr nc, .done
+	ld a, e ; restore move number
+	dec a
+	call GetMoveCategory
+	jr nc, .done ; Counter only works vs physical
 
 .encourage
 	call Random
@@ -2490,15 +2494,17 @@ AI_Smart_MirrorCoat:
 	and a
 	jr z, .skipmove
 
+	ld e, a ; save move number
 	call AIGetEnemyMove
 
 	ld a, [wEnemyMoveStruct + MOVE_POWER]
 	and a
 	jr z, .skipmove
 
-	ld a, [wEnemyMoveStruct + MOVE_TYPE]
-	cp SPECIAL
-	jr c, .skipmove
+	ld a, e ; restore move number
+	dec a
+	call GetMoveCategory
+	jr c, .skipmove ; Mirror Coat only works vs special
 
 	inc b
 
@@ -2518,15 +2524,17 @@ AI_Smart_MirrorCoat:
 	and a
 	jr z, .done
 
+	ld e, a ; save move number
 	call AIGetEnemyMove
 
 	ld a, [wEnemyMoveStruct + MOVE_POWER]
 	and a
 	jr z, .done
 
-	ld a, [wEnemyMoveStruct + MOVE_TYPE]
-	cp SPECIAL
-	jr c, .done
+	ld a, e ; restore move number
+	dec a
+	call GetMoveCategory
+	jr c, .done ; Mirror Coat only works vs special
 
 .encourage
 	call Random

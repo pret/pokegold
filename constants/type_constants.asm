@@ -32,8 +32,16 @@ DEF SPECIAL EQU const_value
 	const ICE
 	const DRAGON
 	const DARK
+	const FAIRY
 DEF TYPES_END EQU const_value
 
 DEF NUM_TYPES EQU TYPES_END + UNUSED_TYPES - UNUSED_TYPES_END - 1 ; discount BIRD
+
+; Move categories (Physical/Special split)
+	const_def
+	const CATEGORY_PHYSICAL ; 0
+	const CATEGORY_SPECIAL  ; 1
+	const CATEGORY_STATUS   ; 2
+DEF NUM_CATEGORIES EQU const_value
 
 DEF POKEDEX_TYPE_STRING_LENGTH EQU 9

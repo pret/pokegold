@@ -31,9 +31,11 @@ BattleCommand_MirrorCoat:
 	and a
 	ret z
 
-	ld a, [wStringBuffer1 + MOVE_TYPE]
-	cp SPECIAL
-	ret c
+	ld a, BATTLE_VARS_LAST_COUNTER_MOVE_OPP
+	call GetBattleVar
+	dec a
+	call GetMoveCategory
+	ret c ; Mirror Coat only works against special moves
 
 ; BUG: Counter and Mirror Coat still work if the opponent uses an item (see docs/bugs_and_glitches.md)
 	ld hl, wCurDamage

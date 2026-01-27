@@ -1,7 +1,7 @@
 ; significant level values
 DEF MAX_LEVEL EQU 100
 DEF MIN_LEVEL EQU 2
-DEF EGG_LEVEL EQU 5
+DEF EGG_LEVEL EQU 1
 
 ; maximum moves known per mon
 DEF NUM_MOVES EQU 4
@@ -47,14 +47,16 @@ DEF NUM_LEVEL_STATS EQU const_value
 
 ; move struct members (see data/moves/moves.asm)
 rsreset
-DEF MOVE_ANIM   rb ; 0
-DEF MOVE_EFFECT rb ; 1
-DEF MOVE_POWER  rb ; 2
-DEF MOVE_TYPE   rb ; 3
-DEF MOVE_ACC    rb ; 4
-DEF MOVE_PP     rb ; 5
-DEF MOVE_CHANCE rb ; 6
-DEF MOVE_LENGTH EQU _RS
+DEF MOVE_ANIM     rb ; 0
+DEF MOVE_EFFECT   rb ; 1
+DEF MOVE_POWER    rb ; 2
+DEF MOVE_TYPE     rb ; 3
+DEF MOVE_ACC      rb ; 4
+DEF MOVE_PP       rb ; 5
+DEF MOVE_CHANCE   rb ; 6
+DEF MOVE_STRUCT_LENGTH EQU _RS ; RAM struct size (7 bytes)
+DEF MOVE_CATEGORY rb ; 7
+DEF MOVE_LENGTH EQU _RS ; ROM data size (8 bytes)
 
 ; stat constants
 ; indexes for:
