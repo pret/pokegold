@@ -14,6 +14,7 @@ FruitTreeScript::
 
 .fruit
 	writetext HeyItsFruitText
+	callasm GetRandomBerryCount ; Get 1-3 berries
 	readmem wCurFruit
 	giveitem ITEM_FROM_MEM
 	iffalse .packisfull
@@ -91,6 +92,19 @@ GetFruitTreeItem:
 	ld a, [hl]
 	pop de
 	pop hl
+	ret
+
+GetRandomBerryCount:
+; Returns 1-3 in wItemQuantityChange for berry pickup
+; Distribution: 25% get 1, 50% get 2, 25% get 3
+	call Random
+	and %11 ; 0-3
+	inc a   ; 1-4
+	cp 4
+	jr nz, .store
+	ld a, 2 ; 4 -> 2 (reroll high to middle)
+.store
+	ld [wItemQuantityChange], a
 	ret
 
 INCLUDE "data/items/fruit_trees.asm"

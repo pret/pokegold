@@ -43,17 +43,72 @@ BattleBGMap:
 	ret
 
 HalveMoney:
-; Halve the player's money.
-	ld hl, wMoney
+; Gen VI-style money loss: Level * (Badges + 1) * 8
+; Much less punishing than halving all money
+; e.g., Level 50 with 8 badges = 50 * 9 * 8 = 3600
+	; Find highest level in party
+	ld hl, wPartyMon1Level
+	ld bc, PARTYMON_STRUCT_LENGTH
+	ld a, [wPartyCount]
+	and a
+	jr z, .done ; no party = no loss
+	ld d, a
+	ld e, 0 ; highest level
+.find_highest
 	ld a, [hl]
-	srl a
-	ld [hli], a
-	ld a, [hl]
-	rra
-	ld [hli], a
-	ld a, [hl]
-	rra
-	ld [hl], a
+	cp e
+	jr c, .not_higher
+	ld e, a
+.not_higher
+	add hl, bc
+	dec d
+	jr nz, .find_highest
+	; e = highest level
+	; Count badges
+	push de
+	ld hl, wBadges
+	ld b, 2
+	call CountSetBits
+	ld a, [wNumSetBits]
+	inc a ; badges + 1
+	ld d, a ; d = badges+1
+	pop bc ; b = highest level (was in e)
+	ld c, b
+	; Calculate: level * (badges+1)
+	; Use repeated addition: hl = level * (badges+1)
+	ld h, 0
+	ld l, 0
+.mult_loop
+	ld a, l
+	add c
+	ld l, a
+	ld a, h
+	adc 0
+	ld h, a
+	dec d
+	jr nz, .mult_loop
+	; hl = level * (badges+1), now multiply by 8
+	add hl, hl
+	add hl, hl
+	add hl, hl
+	; hl = money to lose (max ~7200 at level 100, 16 badges)
+	; Subtract from wMoney (3 bytes, big-endian)
+	ld a, [wMoney + 2]
+	sub l
+	ld [wMoney + 2], a
+	ld a, [wMoney + 1]
+	sbc h
+	ld [wMoney + 1], a
+	ld a, [wMoney]
+	sbc 0
+	ld [wMoney], a
+	; If carry, we went negative - set to 0
+	ret nc
+	xor a
+	ld [wMoney], a
+	ld [wMoney + 1], a
+	ld [wMoney + 2], a
+.done
 	ret
 
 GetWhiteoutSpawn:
