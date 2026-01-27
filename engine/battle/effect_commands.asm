@@ -2631,6 +2631,8 @@ PlayerAttackDamage:
 .thickclub
 ; Note: Returns player attack at hl in hl.
 	call ThickClubBoost
+; Light Ball now also boosts Pikachu's physical Attack
+	call LightBallBoost
 
 .done
 	call TruncateHL_BC
@@ -2879,6 +2881,8 @@ EnemyAttackDamage:
 
 .thickclub
 	call ThickClubBoost
+; Light Ball now also boosts Pikachu's physical Attack
+	call LightBallBoost
 
 .done
 	call TruncateHL_BC

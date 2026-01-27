@@ -2,7 +2,7 @@
 
 ConsumableEffects:
 	db HELD_BERRY
-	db HELD_2
+	db HELD_BERRY_QUARTER
 	db HELD_5
 	db HELD_HEAL_POISON
 	db HELD_HEAL_FREEZE
