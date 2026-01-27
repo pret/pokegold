@@ -2621,7 +2621,8 @@ wSafariTimeRemaining:: dw
 
 wPhoneList:: ds CONTACT_LIST_SIZE + 1
 
-	ds 22
+wRepelType:: db ; Which type of repel was used (for continuous repel prompt)
+	ds 21
 
 wLuckyNumberShowFlag:: db
 	ds 1

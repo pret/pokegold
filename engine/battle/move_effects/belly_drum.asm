@@ -1,13 +1,17 @@
 BattleCommand_BellyDrum:
-; BUG: Belly Drum sharply boosts Attack even with under 50% HP (see docs/bugs_and_glitches.md)
+; Fixed: Now checks HP before boosting Attack
+; Belly Drum should fail if user has less than 50% HP
+
+; First check if user has at least 50% HP
+	callfar GetHalfMaxHP
+	callfar CheckUserHasEnoughHP
+	jr nc, .failed
+
+; Check if Attack can be raised (not already maxed)
 	call BattleCommand_AttackUp2
 	ld a, [wAttackMissed]
 	and a
 	jr nz, .failed
-
-	callfar GetHalfMaxHP
-	callfar CheckUserHasEnoughHP
-	jr nc, .failed
 
 	push bc
 	call AnimateCurrentMove

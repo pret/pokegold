@@ -150,7 +150,7 @@ TeachTMHM:
 
 	ld c, HAPPINESS_LEARNMOVE
 	callfar ChangeHappiness
-	call ConsumeTM
+	; call ConsumeTM ; Removed: TMs are now unlimited use
 	jr .learned_move
 
 .nope

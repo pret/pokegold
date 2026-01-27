@@ -298,7 +298,17 @@ DoPlayerMovement::
 	ret
 
 .walk
+; Running Shoes: Hold B to run at bike speed
+	ldh a, [hJoyDown]
+	and PAD_B
+	jr nz, .running
 	ld a, STEP_WALK
+	call .DoStep
+	scf
+	ret
+
+.running
+	ld a, STEP_BIKE
 	call .DoStep
 	scf
 	ret

@@ -1484,7 +1484,7 @@ HandleDefrost:
 	ret nz
 
 	call BattleRandom
-	cp 10 percent
+	cp 20 percent ; Increased defrost chance from 10% to 20%
 	ret nc
 	xor a
 	ld [wBattleMonStatus], a
@@ -1505,7 +1505,7 @@ HandleDefrost:
 	and a
 	ret nz
 	call BattleRandom
-	cp 10 percent
+	cp 20 percent ; Increased defrost chance from 10% to 20%
 	ret nc
 	xor a
 	ld [wEnemyMonStatus], a
@@ -6538,6 +6538,9 @@ BadgeStatBoosts:
 ; 	GlacierBadge: Special Attack and Special Defense
 
 ; The boosted stats are in order, except PlainBadge and MineralBadge's boosts are swapped.
+
+; Badge stat boosts are disabled for competitive fairness
+	ret
 
 	ld a, [wLinkMode]
 	and a

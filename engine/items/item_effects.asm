@@ -335,17 +335,13 @@ PokeBallEffect:
 	jr nz, .statuscheck
 	ld a, 1
 .statuscheck
-; This routine is buggy. It was intended that SLP and FRZ provide a higher
-; catch rate than BRN/PSN/PAR, which in turn provide a higher catch rate than
-; no status effect at all. But instead, it makes BRN/PSN/PAR provide no
-; benefit.
-; Uncomment the line below to fix this.
+; Fixed: BRN/PSN/PAR now correctly provide +5 catch rate bonus
 	ld b, a
 	ld a, [wEnemyMonStatus]
 	and 1 << FRZ | SLP_MASK
 	ld c, 10
 	jr nz, .addstatus
-	; ld a, [wEnemyMonStatus]
+	ld a, [wEnemyMonStatus]
 	and a
 	ld c, 5
 	jr nz, .addstatus
@@ -873,9 +869,8 @@ LureBallMultiplier:
 	ret
 
 MoonBallMultiplier:
-; This function is buggy.
-; Intent:  multiply catch rate by 4 if mon evolves with moon stone
-; Reality: no boost
+; Fixed: Now correctly checks for MOON_STONE evolution
+; multiply catch rate by 4 if mon evolves with moon stone
 	push bc
 	ld a, [wTempEnemyMonSpecies]
 	dec a
@@ -899,13 +894,11 @@ MoonBallMultiplier:
 	inc hl
 	inc hl
 
-; Moon Stone's constant from Pokémon Red is used.
-; No Pokémon evolve with Burn Heal,
-; so Moon Balls always have a catch rate of 1×.
+; Fixed: Use correct MOON_STONE constant instead of MOON_STONE_RED
 	push bc
 	ld a, BANK("Evolutions and Attacks")
 	call GetFarByte
-	cp MOON_STONE_RED ; BURN_HEAL
+	cp MOON_STONE
 	pop bc
 	ret nz
 
@@ -919,9 +912,8 @@ MoonBallMultiplier:
 	ret
 
 LoveBallMultiplier:
-; This function is buggy.
-; Intent:  multiply catch rate by 8 if mons are of same species, different sex
-; Reality: multiply catch rate by 8 if mons are of same species, same sex
+; Fixed: Now correctly boosts catch rate for opposite sex
+; multiply catch rate by 8 if mons are of same species, different sex
 
 	; does species match?
 	ld a, [wTempEnemyMonSpecies]
@@ -964,7 +956,7 @@ LoveBallMultiplier:
 	pop de
 	cp d
 	pop bc
-	ret nz ; for the intended effect, this should be "ret z"
+	ret z ; Fixed: return with no boost when SAME sex, boost when DIFFERENT sex
 
 	sla b
 	jr c, .max
@@ -984,11 +976,8 @@ LoveBallMultiplier:
 	ret
 
 FastBallMultiplier:
-; This function is buggy.
-; Intent:  multiply catch rate by 4 if enemy mon is in one of the three
-;          FleeMons tables.
-; Reality: multiply catch rate by 4 if enemy mon is one of the first three in
-;          the first FleeMons table.
+; Fixed: Now correctly checks all FleeMons tables
+; multiply catch rate by 4 if enemy mon is in one of the FleeMons tables
 	ld a, [wTempEnemyMonSpecies]
 	ld c, a
 	ld hl, FleeMons
@@ -1002,7 +991,7 @@ FastBallMultiplier:
 	cp -1
 	jr z, .next
 	cp c
-	jr nz, .next ; for the intended effect, this should be "jr nz, .loop"
+	jr nz, .loop ; Fixed: continue checking entire list instead of jumping to .next
 	sla b
 	jr c, .max
 
@@ -2070,6 +2059,9 @@ UseRepel:
 
 	ld a, b
 	ld [wRepelEffect], a
+; Store repel type for continuous repel feature
+	ld a, [wCurItem]
+	ld [wRepelType], a
 	jp UseItemText
 
 RepelUsedEarlierIsStillInEffectText:

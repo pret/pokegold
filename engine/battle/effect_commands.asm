@@ -3108,13 +3108,24 @@ DEF DAMAGE_CAP EQU MAX_DAMAGE - MIN_DAMAGE
 	and a
 	ret z
 
-; x2
+; x1.5 (changed from x2)
+; Add half of damage to itself: damage + damage/2 = damage * 1.5
 	ldh a, [hQuotient + 3]
-	sla a
+	ld b, a ; save low byte
+	ldh a, [hQuotient + 2]
+	ld c, a ; save high byte
+
+; Divide by 2 (shift right)
+	srl c
+	rr b
+
+; Add half to original
+	ldh a, [hQuotient + 3]
+	add b
 	ldh [hQuotient + 3], a
 
 	ldh a, [hQuotient + 2]
-	rl a
+	adc c
 	ldh [hQuotient + 2], a
 
 ; Cap at $ffff.
@@ -3588,13 +3599,11 @@ BattleCommand_SleepTarget:
 
 	call AnimateCurrentMove
 
+; Sleep now lasts 1-3 turns instead of 1-7
 .random_loop
 	call BattleRandom
-	and SLP_MASK
-	jr z, .random_loop
-	cp SLP_MASK
-	jr z, .random_loop
-	inc a
+	and %11 ; 0-3 range instead of SLP_MASK (0-7)
+	jr z, .random_loop ; reject 0
 	ld [de], a
 	call UpdateOpponentInParty
 	call RefreshBattleHuds
@@ -3613,6 +3622,9 @@ BattleCommand_SleepTarget:
 	jp StdBattleTextbox
 
 .CheckAIRandomFail:
+; AI no longer has 25% chance to fail with status moves
+	jr .dont_fail
+
 	; Enemy turn
 	ldh a, [hBattleTurn]
 	and a
@@ -3701,6 +3713,9 @@ BattleCommand_Poison:
 	call GetBattleVar
 	and a
 	jr nz, .failed
+
+; AI no longer has 25% chance to fail with poison
+	jr .dont_sample_failure
 
 	ldh a, [hBattleTurn]
 	and a
@@ -4316,6 +4331,9 @@ BattleCommand_StatDown:
 	inc b
 
 .ComputerMiss:
+; AI no longer has 25% chance to fail with stat-lowering moves
+	jr .DidntMiss
+
 ; Computer opponents have a 25% chance of failing.
 	ldh a, [hBattleTurn]
 	and a
@@ -5805,6 +5823,9 @@ BattleCommand_Paralyze:
 	jp StdBattleTextbox
 
 .no_item_protection
+; AI no longer has 25% chance to fail with paralyze
+	jr .dont_sample_failure
+
 	ldh a, [hBattleTurn]
 	and a
 	jr z, .dont_sample_failure

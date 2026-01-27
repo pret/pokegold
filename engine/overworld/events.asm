@@ -931,8 +931,18 @@ DoRepelStep:
 	ld [wRepelEffect], a
 	ret nz
 
+; Continuous Repel: Check if player has more of the same repel type
+	ld a, [wRepelType]
+	ld [wCurItem], a
+	ld hl, wNumItems
+	call CheckItem
+
 	ld a, BANK(RepelWoreOffScript)
 	ld hl, RepelWoreOffScript
+	jr nc, .call_script
+	ld a, BANK(UseAnotherRepelScript)
+	ld hl, UseAnotherRepelScript
+.call_script
 	call CallScript
 	scf
 	ret
