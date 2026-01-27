@@ -32,7 +32,18 @@ CalcLevel:
 
 CalcExpAtLevel:
 ; (a/b)*n**3 + c*n**2 + d*n - e
-; BUG: Experience underflow for level 1 Pokémon with Medium-Slow growth rate (see docs/bugs_and_glitches.md)
+; Fixed: Level 1 Pokemon have 0 experience (prevents Medium-Slow underflow)
+	ld a, d
+	dec a
+	jr nz, .UseExpFormula
+; Pokemon have 0 experience at level 1
+	xor a
+	ldh [hProduct + 1], a
+	ldh [hProduct + 2], a
+	ldh [hProduct + 3], a
+	ret
+
+.UseExpFormula
 	ld a, [wBaseGrowthRate]
 	add a
 	add a

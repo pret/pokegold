@@ -179,12 +179,12 @@ LongAnim_UpdateVariables:
 	ld c, a
 	ld a, [hli]
 	ld b, a
-; BUG: HP bar animation is slow for high HP (see docs/bugs_and_glitches.md)
+; Fixed: Save pixels value before restoring registers
 	call ComputeHPBarPixels
+	ld a, e ; Save computed pixels before pops overwrite e
 	pop bc
 	pop de
 	pop hl
-	ld a, e
 	ld hl, wCurHPBarPixels
 	cp [hl]
 	jr z, .loop

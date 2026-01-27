@@ -73,24 +73,28 @@ DoPoisonStep::
 	or c
 	ret z
 
+; Check if mon is at 1 HP - if so, cure poison instead of fainting
+	ld a, b
+	or a
+	jr nz, .do_damage ; high byte > 0, safe to damage
+	ld a, c
+	cp 1
+	jr nz, .do_damage ; low byte > 1, safe to damage
+
+; Mon is at 1 HP - cure the poison instead of letting it faint
+	ld a, MON_STATUS
+	call GetPartyParamLocation
+	ld [hl], 0
+	ld c, %01 ; flag as damaged but not fainted (plays SFX)
+	scf
+	ret
+
+.do_damage
 ; do 1 HP damage
 	dec bc
 	ld [hl], c
 	dec hl
 	ld [hl], b
-
-; check if mon has fainted as a result of poison damage
-	ld a, b
-	or c
-	jr nz, .not_fainted
-
-; the mon has fainted, reset its status, set carry, and return %10
-	ld a, MON_STATUS
-	call GetPartyParamLocation
-	ld [hl], 0
-	ld c, %10
-	scf
-	ret
 
 .not_fainted
 ; set carry and return %01
