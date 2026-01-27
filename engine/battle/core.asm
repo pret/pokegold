@@ -6767,7 +6767,7 @@ FinishBattleAnim:
 	pop af
 	ret
 
-GiveExperiencePoints:
+GiveExperiencePoints::
 ; Give experience.
 ; Don't give experience if linked or in the Battle Tower.
 	ld a, [wLinkMode]

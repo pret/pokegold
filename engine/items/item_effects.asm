@@ -510,6 +510,18 @@ PokeBallEffect:
 	ld hl, Text_GotchaMonWasCaught
 	call PrintText
 
+; Give experience for catching (Gen 6+ feature)
+; Skip for bug contest and tutorial battles
+	ld a, [wBattleType]
+	cp BATTLETYPE_CONTEST
+	jr z, .skip_catch_exp
+	cp BATTLETYPE_TUTORIAL
+	jr z, .skip_catch_exp
+	xor a
+	ld [wGivingExperienceToExpShareHolders], a
+	farcall GiveExperiencePoints
+.skip_catch_exp
+
 	call ClearSprites
 
 	ld a, [wTempSpecies]
