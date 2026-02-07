@@ -166,7 +166,7 @@ SetDefaultBoxNames:
 	ld [hli], a
 	ld [hl], '@'
 	pop hl
-	ld de, 9
+	ld de, BOX_NAME_LENGTH
 	add hl, de
 	inc c
 	ld a, c
@@ -474,11 +474,7 @@ Continue_DisplayPokedexNumCaught:
 	ret z
 	push hl
 	ld hl, wPokedexCaught
-if NUM_POKEMON % 8
-	ld b, NUM_POKEMON / 8 + 1
-else
-	ld b, NUM_POKEMON / 8
-endc
+	ld b, (NUM_POKEMON + 7) / 8
 	call CountSetBits
 	pop hl
 	ld de, wNumSetBits
