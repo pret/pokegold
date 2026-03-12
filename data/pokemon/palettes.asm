@@ -3,7 +3,6 @@ PokemonPalettes:
 
 ; Each normal.gbcpal is generated from the corresponding .png, and
 ; only the middle two colors are included, not black or white.
-; (Back sprites are used since they are the same in Gold and Silver.)
 ; Shiny palettes are defined directly, not generated.
 
 	; 2 middle palettes, front and shiny, with 2 colors each
