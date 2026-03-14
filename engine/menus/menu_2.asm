@@ -231,7 +231,7 @@ Kurt_SelectApricorn:
 	db 1 ; default option
 
 .MenuData:
-	db SCROLLINGMENU_ENABLE_SELECT | SCROLLINGMENU_ENABLE_FUNCTION3
+	db STATICMENU_CURSOR | STATICMENU_WRAP
 	dbw 0, wKurtApricornCount
 	dw .Name
 	dw NULL

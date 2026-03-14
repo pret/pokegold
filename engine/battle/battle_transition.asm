@@ -57,7 +57,7 @@ DoBattleTransition:
 	farcall ReanchorBGMap_NoOAMUpdate
 	call UpdateSprites
 	call DelayFrame
-	call ConvertTrainerBattlePokeballTilesTo2bpp
+	call LoadBattleTransitionGFX
 	call CGBOnly_CopyTilemapAtOnce
 
 	ld a, SCREEN_HEIGHT_PX
@@ -73,32 +73,33 @@ DoBattleTransition:
 	call WipeLYOverrides
 	ret
 
-ConvertTrainerBattlePokeballTilesTo2bpp:
+LoadBattleTransitionGFX:
 	ld hl, wDecompressScratch
-	ld bc, $28 tiles
+	ld bc, TILEMAP_WIDTH * (TILEMAP_HEIGHT - 12)
 .loop
-	ld [hl], -1
+	ld [hl], BATTLETRANSITION_BLACK
 	inc hl
 	dec bc
 	ld a, c
 	or b
 	jr nz, .loop
 
+; fill visible area of BGMap0 with BATTLETRANSITION_BLACK
 	ld de, wDecompressScratch
-	hlbgcoord 0, 0, vBGMap2
+	hlbgcoord 0, 0
 	ld b, BANK(@)
-	ld c, $28
+	ld c, TILEMAP_WIDTH * (TILEMAP_HEIGHT - 12) / TILE_SIZE
 	call Request2bpp
 
-	ld de, TrainerBattlePokeballTiles
-	ld hl, vTiles3 tile BATTLETRANSITION_SQUARE
-	ld b, BANK(TrainerBattlePokeballTiles)
+	ld de, BattleTransitionTiles
+	ld hl, vTiles0 tile BATTLETRANSITION_SQUARE
+	ld b, BANK(BattleTransitionTiles)
 	ld c, 2
 	call Request2bpp
 	ret
 
-TrainerBattlePokeballTiles:
-INCBIN "gfx/overworld/trainer_battle_pokeball_tiles.2bpp"
+BattleTransitionTiles:
+INCBIN "gfx/overworld/battle_transition_tiles.2bpp"
 
 BattleTransitionJumptable:
 	jumptable .Jumptable, wJumptableIndex
