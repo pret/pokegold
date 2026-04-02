@@ -83,10 +83,4 @@ Credits_TextTranslation::     db "  TEXT TRANSLATION@"
 Credits_PaadTesting::         db "    PAAD TESTING@"
 
 Credits_Copyright::
-	;    (C) 1  9  9  5 - 2  0  0  0     N  i  n  t  e  n  d  o
-	db   $60,$61,$62,$63,$7a,$7b,$7c,$7d,$65,$66,$67,$68,$69,$6a
-	;    (C) 1  9  9  5 - 2  0  0  0    C  r  e  a  t  u  r  e  s     i  n  c .
-	next $60,$61,$62,$63,$7a,$7b,$7c,$7d,$6b,$6c,$6d,$6e,$6f,  $70,$71,$72
-	;    (C) 1  9  9  5 - 2  0  0  0  G  A  M  E  F  R  E  A  K     i  n  c .
-	next $60,$61,$62,$63,$7a,$7b,$7c,$7d,$73,$74,$75,$76,$77,$78,  $79,$71,$72
-	db "@"
+INCLUDE "data/copyright.asm"
