@@ -226,7 +226,7 @@ CopyLastCoordsToCoords:
 UpdateTallGrassFlags:
 	ld hl, OBJECT_FLAGS2
 	add hl, bc
-	bit OVERHEAD_F, [hl]
+	bit IN_GRASS_F, [hl]
 	jr z, .ok
 	ld hl, OBJECT_TILE_COLLISION
 	add hl, bc
@@ -252,13 +252,13 @@ SetTallGrassFlags:
 .set
 	ld hl, OBJECT_FLAGS2
 	add hl, bc
-	set OVERHEAD_F, [hl]
+	set IN_GRASS_F, [hl]
 	ret
 
 .reset
 	ld hl, OBJECT_FLAGS2
 	add hl, bc
-	res OVERHEAD_F, [hl]
+	res IN_GRASS_F, [hl]
 	ret
 
 UselessAndA:
@@ -1143,7 +1143,7 @@ StepFunction_NPCJump:
 	call GetNextTile
 	ld hl, OBJECT_FLAGS2
 	add hl, bc
-	res OVERHEAD_F, [hl]
+	res IN_GRASS_F, [hl]
 	call ObjectStep_IncAnonJumptableIndex
 	ret
 
@@ -1182,7 +1182,7 @@ StepFunction_PlayerJump:
 	call CopyCoordsTileToLastCoordsTile
 	ld hl, OBJECT_FLAGS2
 	add hl, bc
-	res OVERHEAD_F, [hl]
+	res IN_GRASS_F, [hl]
 	ld hl, wPlayerStepFlags
 	set PLAYERSTEP_STOP_F, [hl]
 	set PLAYERSTEP_MIDAIR_F, [hl]
@@ -1248,7 +1248,7 @@ StepFunction_TeleportFrom:
 	ld [hl], 16
 	ld hl, OBJECT_FLAGS2
 	add hl, bc
-	res OVERHEAD_F, [hl]
+	res IN_GRASS_F, [hl]
 	call ObjectStep_IncAnonJumptableIndex
 .DoSpinRise:
 	ld hl, OBJECT_ACTION
@@ -2831,10 +2831,10 @@ InitSprites:
 	ld hl, OBJECT_FLAGS2
 	add hl, bc
 	ld e, [hl]
-	bit OBJ_FLAGS2_7_F, e
-	jr z, .not_priority
+	bit UNDER_TILES_F, e
+	jr z, .not_under_tiles
 	or OAM_PRIO
-.not_priority
+.not_under_tiles
 	bit USE_OBP1_F, e
 	jr z, .not_obp_num
 	or OAM_PAL1
@@ -2847,10 +2847,10 @@ InitSprites:
 	or d
 	ld d, a
 	xor a
-	bit OVERHEAD_F, e
-	jr z, .not_overhead
+	bit IN_GRASS_F, e
+	jr z, .not_in_grass
 	or OAM_PRIO
-.not_overhead
+.not_in_grass
 	ldh [hCurSpriteOAMFlags], a
 	ld hl, OBJECT_SPRITE_TILE
 	add hl, bc
