@@ -2860,7 +2860,7 @@ MonFaintedAnimation:
 	dec b
 	jr nz, .InnerLoop
 
-	ld bc, 20
+	ld bc, SCREEN_WIDTH
 	add hl, bc
 	ld de, .Spaces
 	call PlaceString
