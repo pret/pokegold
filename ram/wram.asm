@@ -2361,7 +2361,7 @@ wFollowMovementQueue:: ds 5
 UNION
 wObjectStructs::
 wPlayerStruct:: object_struct wPlayer ; player is object struct 0
-; wObjectStruct1 - wObjectStruct12
+; wObject1Struct - wObject12Struct
 for n, 1, NUM_OBJECT_STRUCTS
 wObject{d:n}Struct:: object_struct wObject{d:n}
 endr
