@@ -82,7 +82,7 @@ IntroScene1:
 	ld a, 1
 	ldh [rVBK], a
 	hlbgcoord 0, 0, vBGMap2
-	lb bc, 4, 0
+	ld bc, TILEMAP_AREA
 
 	xor a
 	call ByteFill
@@ -96,7 +96,7 @@ IntroScene1:
 	ld [wIntroTilesPointer + 0], a
 	ld a, HIGH(Intro_WaterMeta)
 	ld [wIntroTilesPointer + 1], a
-	hlbgcoord 0, 0, vBGMap2
+	hlbgcoord 0, 0
 	ld a, l
 	ld [wIntroBGMapPointer + 0], a
 	ld a, h
@@ -1171,10 +1171,10 @@ Copy128Tiles: ; unreferenced
 	ret
 
 Intro_DrawBackground:
-	ld b, TILEMAP_WIDTH / 2
+	ld b, TILEMAP_HEIGHT / 2
 .outer_loop
 	push hl
-	ld c, TILEMAP_HEIGHT / 2
+	ld c, TILEMAP_WIDTH / 2
 .inner_loop
 	call Intro_Draw2x2Tiles
 	dec c
