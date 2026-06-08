@@ -11404,9 +11404,9 @@
 23:452f DoBattleTransition.loop
 23:453e DoBattleTransition.done
 23:4563 DoBattleTransition.InitGFX
-23:458a ConvertTrainerBattlePokeballTilesTo2bpp
-23:4590 ConvertTrainerBattlePokeballTilesTo2bpp.loop
-23:45b3 TrainerBattlePokeballTiles
+23:458a LoadBattleTransitionGFX
+23:4590 LoadBattleTransitionGFX.loop
+23:45b3 BattleTransitionTiles
 23:45d3 BattleTransitionJumptable
 23:45e2 BattleTransitionJumptable.Jumptable
 23:4624 StartTrainerBattle_DetermineWhichAnimation
@@ -22717,7 +22717,7 @@
 49:4b50 MahoganyTownRagecandybarSign
 49:4b53 MahoganyGymSign
 49:4b56 MahoganyTownPokecenterSign
-49:4b59 MahoganyTownCollideDownFaceLeftMovement
+49:4b59 MahoganyTownMartSign
 49:4b5c MahoganyTownPlayerStepLeftMovement
 49:4b5e MahoganyTownRageCandyBarMerchantBlocksYouMovement
 49:4b62 MahoganyTownRageCandyBarMerchantReturnsMovement
