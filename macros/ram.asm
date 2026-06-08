@@ -180,12 +180,14 @@ MACRO channel_struct
 ENDM
 
 MACRO mailmsg
-\1Message::     ds MAIL_MSG_LENGTH
-\1MessageEnd::  db
-\1Author::      ds NAME_LENGTH - 1
-\1AuthorID::    dw
-\1Species::     db
-\1Type::        db
+\1Message::	
+\1Line1::     ds MAIL_LINE_LENGTH
+\1LineBreak:: db ; '<NEXT>'
+\1Line2::     ds MAIL_LINE_LENGTH
+\1Author::    ds NAME_LENGTH - 1
+\1AuthorID::  dw
+\1Species::   db
+\1Type::      db
 \1End::
 ENDM
 
