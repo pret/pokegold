@@ -64,7 +64,7 @@ ENDM
 	command charge                  ; 39
 	command checkcharge             ; 3a
 	command traptarget              ; 3b
-	command unused_skiptotraptarget ; 3c
+	command dummy_skiptotraptarget  ; 3c
 	command rampage                 ; 3d
 	command checkrampage            ; 3e
 	command constantdamage          ; 3f
@@ -97,7 +97,7 @@ ENDM
 	command endure                  ; 5a
 	command checkrollout            ; 5b
 	command rolloutpower            ; 5c
-	command unused_swagger          ; 5d
+	command dummy_swagger           ; 5d
 	command furycutter              ; 5e
 	command attract                 ; 5f
 	command happinesspower          ; 60
