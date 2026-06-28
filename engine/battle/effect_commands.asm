@@ -5562,8 +5562,8 @@ BattleCommand_Charge:
 	text_far _BattleDugText
 	text_end
 
-BattleCommand_Unused3C:
-; effect0x3c
+BattleCommand_Dummy_SkipToTrapTarget:
+; Dummied out from pokegold-spaceworld.
 	ret
 
 BattleCommand_TrapTarget:
@@ -6306,8 +6306,8 @@ INCLUDE "engine/battle/move_effects/sandstorm.asm"
 
 INCLUDE "engine/battle/move_effects/rollout.asm"
 
-BattleCommand_Unused5D:
-; effect0x5d
+BattleCommand_Dummy_Swagger:
+; Dummied out from pokegold-spaceworld.
 	ret
 
 INCLUDE "engine/battle/move_effects/fury_cutter.asm"
