@@ -259,7 +259,7 @@ endc
 	vc_hook Wireless_ExchangeBytes_party_structs
 	call Serial_ExchangeBytes
 	ld a, SERIAL_NO_DATA_BYTE
-	ld [de], a
+	ld [de], a ; wLinkReceivedPartyEnd
 
 	ld hl, wPlayerPatchLists
 	ld de, wOTPatchLists
@@ -288,8 +288,8 @@ endc
 
 	ld hl, wLinkReceivedPartyData
 	call Link_FindFirstNonControlCharacter_SkipZero
-	ld de, wLinkPartyData
-	ld bc, wLinkPartyDataEnd - wLinkPartyData
+	ld de, wLinkPlayerPartyData
+	ld bc, wLinkPlayerPartyDataEnd - wLinkPlayerPartyData
 	call Link_CopyOTData
 
 	ld de, wOTPatchLists

@@ -527,14 +527,23 @@ wLinkSendMailEnd::
 
 	ds 10
 
-; during a link session, the other player's raw mail data is initially stored here
+UNION
 wLinkReceivedMail::
+; during a link session, the other player's raw mail data is initially stored here
+	ds SERIAL_MAIL_PREAMBLE_LENGTH
+	ds MAIL_STRUCT_LENGTH * PARTY_LENGTH
+	ds (MAIL_STRUCT_LENGTH - (MAIL_MSG_LENGTH + 1) + 3) * PARTY_LENGTH + 1
+wLinkReceivedMailEnd::
+
+NEXTU
+; it's then processed on location to align data start with wLinkReceivedMailMessages,
+; before applying the mail patch
 wLinkReceivedMailMessages:: ds (MAIL_MSG_LENGTH + 1) * PARTY_LENGTH
 wLinkReceivedMailMetadata:: ds (MAIL_STRUCT_LENGTH - (MAIL_MSG_LENGTH + 1)) * PARTY_LENGTH
 wLinkReceivedMailPatchSet:: ds (MAIL_STRUCT_LENGTH - (MAIL_MSG_LENGTH + 1) + 3) * PARTY_LENGTH + 1
-wLinkReceivedMailEnd::
+ENDU
 
-	ds 15 ; unused but written to (see engine/link/link.asm)
+	ds 10 ; unused but written to (see engine/link/link.asm)
 
 wLinkDataEnd::
 
@@ -568,9 +577,9 @@ wLinkSendTimeCapsulePartyEnd::
 
 SECTION UNION "Overworld Map", WRAM0
 
-; after the initial link session, the other player's party data
+; after the initial link session (Gen 2), the other player's party data
 ; is temporarily stored here before applying patch data
-wLinkPartyData::
+wLinkPlayerPartyData::
 
 ; link player's name and party species are not patched,
 ; as they normally don't contain SERIAL_NO_DATA_BYTE
@@ -579,7 +588,6 @@ wLinkPartyCount::   db
 wLinkPartySpecies:: ds PARTY_LENGTH
 wLinkPartyEnd::     db ; older code doesn't check PartyCount
 
-; Gen 2 link player party data
 wLinkPlayerPatchedData::
 wLinkPlayerID:: dw
 
@@ -600,12 +608,12 @@ for n, 1, PARTY_LENGTH + 1
 wLinkPlayerPartyMon{d:n}Nickname:: ds MON_NAME_LENGTH
 endr
 
-wLinkPartyDataEnd::
+wLinkPlayerPartyDataEnd::
 
 
 SECTION UNION "Overworld Map", WRAM0
 
-; after the initial link session, the other player's party data
+; after the initial link session (Gen 1), the other player's party data
 ; is temporarily stored here before applying patch data
 wLinkTimeCapsulePartyData::
 
@@ -616,7 +624,6 @@ wLinkTimeCapsulePartyCount::   db
 wLinkTimeCapsulePartySpecies:: ds PARTY_LENGTH
 wLinkTimeCapsulePartyEnd::     db ; older code doesn't check PartyCount
 
-; Gen 1 (Time Capsule) link player party data
 wTimeCapsulePatchedData::
 ; wTimeCapsulePartyMon1 - wTimeCapsulePartyMon6
 for n, 1, PARTY_LENGTH + 1
@@ -2835,26 +2842,25 @@ wMagikarpRecordHoldersName:: ds NAME_LENGTH
 ; This union spans 451 bytes.
 UNION
 ; during a link session, other player's raw party data is initially stored here
+; the actual data is contained between SERIAL_PREAMBLE_LENGTH and SERIAL_PADDING_LENGTH,
+; allowing possible data shift due to hardware behavior
 wLinkReceivedPartyData::
-wLinkReceivedPartyPreamble:: ds SERIAL_PREAMBLE_LENGTH
-wLinkReceivedPartyPlayerName:: ds NAME_LENGTH
-wLinkReceivedPartyPartyCount::   db
-wLinkReceivedPartyPartySpecies:: ds PARTY_LENGTH
-wLinkReceivedPartyPartyEnd::     db ; older code doesn't check PartyCount
-wLinkReceivedPartyPlayerID:: dw
-; wLinkReceivedPartyPlayerPartyMon1 - wLinkReceivedPartyPlayerPartyMon6
-for n, 1, PARTY_LENGTH + 1
-wLinkReceivedPartyPlayerPartyMon{d:n}:: party_struct wLinkReceivedPartyPlayerPartyMon{d:n}
-endr
-; wLinkReceivedPartyPlayerPartyMon1OT - wLinkReceivedPartyPlayerPartyMon6OT
-for n, 1, PARTY_LENGTH + 1
-wLinkReceivedPartyPlayerPartyMon{d:n}OT:: ds NAME_LENGTH
-endr
-; wLinkReceivedPartyPlayerPartyMon1Nickname - wLinkReceivedPartyPlayerPartyMon6Nickname
-for n, 1, PARTY_LENGTH + 1
-wLinkReceivedPartyPlayerPartyMon{d:n}Nickname:: ds MON_NAME_LENGTH
-endr
-wLinkReceivedPartyPadding:: ds SERIAL_PADDING_LENGTH
+UNION
+	; Gen 2 link format
+	ds SERIAL_PREAMBLE_LENGTH 
+	ds NAME_LENGTH 
+	ds 1 + PARTY_LENGTH + 1
+	ds 2
+	ds (PARTYMON_STRUCT_LENGTH + NAME_LENGTH * 2) * PARTY_LENGTH
+	ds SERIAL_PADDING_LENGTH
+NEXTU
+	; Gen 1 link format
+	ds SERIAL_PREAMBLE_LENGTH
+	ds NAME_LENGTH
+	ds 1 + PARTY_LENGTH + 1
+	ds (REDMON_STRUCT_LENGTH + NAME_LENGTH * 2) * PARTY_LENGTH
+	ds SERIAL_PADDING_LENGTH
+ENDU
 wLinkReceivedPartyEnd:: db
 
 NEXTU
