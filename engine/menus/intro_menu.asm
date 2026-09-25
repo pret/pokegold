@@ -676,9 +676,7 @@ ShrinkPlayer:
 	ld de, SFX_ESCAPE_ROPE
 	call PlaySFX
 	pop af
-	; bug: calls to Bankswitch should not happen outside of Home Bank
-	; this silent code oversight has been present in all versions since Gen 1
-	rst Bankswitch
+	rst Bankswitch ; pointless (and not allowed outside Home bank)
 
 	ld c, 8
 	call DelayFrames
