@@ -123,9 +123,9 @@ GoldenrodGameCornerTMVendorMenuHeader:
 .MenuData:
 	db STATICMENU_CURSOR ; flags
 	db 4 ; items
-	db "TM25    5500@"
-	db "TM14    5500@"
-	db "TM38    5500@"
+	db "TM25    {d:GOLDENRODGAMECORNER_TM25_COINS}@"
+	db "TM14    {d:GOLDENRODGAMECORNER_TM14_COINS}@"
+	db "TM38    {d:GOLDENRODGAMECORNER_TM38_COINS}@"
 	db "CANCEL@"
 
 GoldenrodGameCornerPrizeMonVendorScript:
@@ -212,9 +212,9 @@ GoldenrodGameCornerPrizeMonVendorScript:
 .Gold_MenuData:
 	db STATICMENU_CURSOR ; flags
 	db 4 ; items
-	db "ABRA        200@"
-	db "EKANS       700@"
-	db "DRATINI    2100@"
+	db "ABRA        {d:GOLDENRODGAMECORNER_ABRA_COINS}@"
+	db "EKANS       {d:GOLDENRODGAMECORNER_EKANS_COINS}@"
+	db "DRATINI    {d:GOLDENRODGAMECORNER_DRATINI_COINS}@"
 	db "CANCEL@"
 
 .Silver_Loop:
@@ -291,9 +291,9 @@ GoldenrodGameCornerPrizeMonVendorScript:
 .Silver_MenuData:
 	db STATICMENU_CURSOR ; flags
 	db 4 ; items
-	db "ABRA        200@"
-	db "SANDSHREW   700@"
-	db "DRATINI    2100@"
+	db "ABRA        {d:GOLDENRODGAMECORNER_ABRA_COINS}@"
+	db "SANDSHREW   {d:GOLDENRODGAMECORNER_SANDSHREW_COINS}@"
+	db "DRATINI    {d:GOLDENRODGAMECORNER_DRATINI_COINS}@"
 	db "CANCEL@"
 
 GoldenrodGameCornerPharmacistScript:
