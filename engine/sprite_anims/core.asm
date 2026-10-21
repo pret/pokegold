@@ -238,7 +238,7 @@ UpdateAnimFrame:
 	ld c, a ; number of objects
 .loop
 	; first byte: y (px)
-	; [de] = [wCurAnimYCoord] + [wCurAnimYOffset] + [wGlobalAnimYOffset] + AddOrSubtractY([hl])
+	; [de] = [wCurAnimYCoord] + [wCurAnimYOffset] + [wGlobalAnimYOffset] + ApplyFlipToCoordY([hl])
 	ld a, [wCurAnimYCoord]
 	ld b, a
 	ld a, [wCurAnimYOffset]
@@ -247,13 +247,13 @@ UpdateAnimFrame:
 	ld a, [wGlobalAnimYOffset]
 	add b
 	ld b, a
-	call AddOrSubtractY
+	call ApplyFlipToCoordY
 	add b
 	ld [de], a
 	inc hl
 	inc de
 	; second byte: x (px)
-	; [de] = [wCurAnimXCoord] + [wCurAnimXOffset] + [wGlobalAnimXOffset] + AddOrSubtractX([hl])
+	; [de] = [wCurAnimXCoord] + [wCurAnimXOffset] + [wGlobalAnimXOffset] + ApplyFlipToCoordX([hl])
 	ld a, [wCurAnimXCoord]
 	ld b, a
 	ld a, [wCurAnimXOffset]
@@ -262,7 +262,7 @@ UpdateAnimFrame:
 	ld a, [wGlobalAnimXOffset]
 	add b
 	ld b, a
-	call AddOrSubtractX
+	call ApplyFlipToCoordX
 	add b
 	ld [de], a
 	inc hl
@@ -301,7 +301,7 @@ UpdateAnimFrame:
 	scf
 	ret
 
-AddOrSubtractY:
+ApplyFlipToCoordY:
 	push hl
 	ld a, [hl]
 	ld hl, wCurSpriteOAMFlags
@@ -316,7 +316,7 @@ AddOrSubtractY:
 	pop hl
 	ret
 
-AddOrSubtractX:
+ApplyFlipToCoordX:
 	push hl
 	ld a, [hl]
 	ld hl, wCurSpriteOAMFlags
