@@ -419,8 +419,8 @@ ROM0 bank #0:
 	         $1454 = TextCommand_DAY.Day
 	         $1458 = UpdateBGMapBuffer
 	         $1469 = UpdateBGMapBuffer.next
-	         $14a9 = WaitTop
-	         $14b7 = WaitTop.done
+	         $14a9 = FinishBGMapTransfer
+	         $14b7 = FinishBGMapTransfer.done
 	         $14bb = UpdateBGMap
 	         $14ea = UpdateBGMap.Attr
 	         $14f9 = UpdateBGMap.Tiles
@@ -11789,10 +11789,10 @@ ROMX bank #35:
 	         $52c8 = UpdateAnimFrame.delete
 	         $52cb = UpdateAnimFrame.done
 	         $52cd = UpdateAnimFrame.reached_the_end
-	         $52d0 = AddOrSubtractY
-	         $52de = AddOrSubtractY.ok
-	         $52e0 = AddOrSubtractX
-	         $52ee = AddOrSubtractX.ok
+	         $52d0 = ApplyFlipToCoordY
+	         $52de = ApplyFlipToCoordY.ok
+	         $52e0 = ApplyFlipToCoordX
+	         $52ee = ApplyFlipToCoordX.ok
 	         $52f0 = GetSpriteOAMAttr
 	         $52fe = InitSpriteAnimBuffer
 	         $531b = GetSpriteAnimVTile
@@ -30794,8 +30794,8 @@ VRAM bank #0:
 	         $8000 = vTiles0
 	         $8800 = vTiles1
 	         $9000 = vTiles2
-	         $9800 = vBGMap0
-	         $9c00 = vBGMap1
+	         $9800 = vTilemap0
+	         $9c00 = vTilemap1
 	TOTAL EMPTY: $0000 bytes
 
 VRAM bank #1:
@@ -30803,8 +30803,8 @@ VRAM bank #1:
 	         $8000 = vTiles3
 	         $8800 = vTiles4
 	         $9000 = vTiles5
-	         $9800 = vBGMap2
-	         $9c00 = vBGMap3
+	         $9800 = vAttrmap0
+	         $9c00 = vAttrmap1
 	TOTAL EMPTY: $0000 bytes
 
 SRAM bank #0:
