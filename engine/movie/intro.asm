@@ -81,7 +81,7 @@ IntroScene1:
 	callfar ClearSpriteAnims
 	ld a, 1
 	ldh [rVBK], a
-	hlbgcoord 0, 0, vBGMap2
+	hlbgcoord 0, 0, vAttrmap0
 	ld bc, TILEMAP_AREA
 
 	xor a
@@ -501,9 +501,9 @@ endr
 	ld [wRequested2bppSource + 0], a
 	ld a, h
 	ld [wRequested2bppSource + 1], a
-	ld a, LOW(vBGMap0 tile $1e)
+	ld a, LOW(vTilemap0 tile $1e)
 	ld [wRequested2bppDest + 0], a
-	ld a, HIGH(vBGMap0 tile $1e)
+	ld a, HIGH(vTilemap0 tile $1e)
 	ld [wRequested2bppDest + 1], a
 	ld a, 2
 	ld [wRequested2bppSize], a
@@ -526,7 +526,7 @@ endr
 Intro_InitSineLYOverrides:
 	ld bc, wLYOverrides2
 	ld a, wLYOverrides2End - wLYOverrides2
-	ld de, vBGMap1 - vBGMap0
+	ld de, vTilemap1 - vTilemap0
 
 .loop
 	push af
@@ -973,7 +973,7 @@ Intro_BlankTilemapAndBGMap:
 	xor a
 	call ByteFill
 	hlbgcoord 0, 0
-	ld bc, vBGMap1 - vBGMap0
+	ld bc, vTilemap1 - vTilemap0
 	xor a
 	call ByteFill
 	ret

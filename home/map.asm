@@ -240,16 +240,16 @@ LoadMapTimeOfDay::
 	ret
 
 .ClearBGMap:
-	ld a, HIGH(vBGMap0)
+	ld a, HIGH(vTilemap0)
 	ld [wBGMapAnchor + 1], a
-	xor a ; LOW(vBGMap0)
+	xor a ; LOW(vTilemap0)
 	ld [wBGMapAnchor], a
 	ldh [hSCY], a
 	ldh [hSCX], a
 	farcall ApplyBGMapAnchorToObjects
 
 	ld a, '■'
-	ld bc, vBGMap1 - vBGMap0
+	ld bc, vTilemap1 - vTilemap0
 	hlbgcoord 0, 0
 	call ByteFill
 	ret
@@ -1584,10 +1584,10 @@ ScrollMapDown::
 	ld h, a
 	ld bc, TILEMAP_WIDTH tiles
 	add hl, bc
-; cap d at HIGH(vBGMap0)
+; cap d at HIGH(vTilemap0)
 	ld a, h
 	and %00000011
-	or HIGH(vBGMap0)
+	or HIGH(vTilemap0)
 	ld e, l
 	ld d, a
 	call UpdateBGMapRow
@@ -1706,10 +1706,10 @@ UpdateBGMapColumn::
 	ld e, a
 	jr nc, .skip
 	inc d
-; cap d at HIGH(vBGMap0)
+; cap d at HIGH(vTilemap0)
 	ld a, d
 	and %11
-	or HIGH(vBGMap0)
+	or HIGH(vTilemap0)
 	ld d, a
 
 .skip

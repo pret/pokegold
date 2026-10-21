@@ -74,11 +74,11 @@ CopyTilemapAtOnce::
 	jr c, .wait
 
 	di
-	ld a, BANK(vBGMap2)
+	ld a, BANK(vAttrmap0)
 	ldh [rVBK], a
 	hlcoord 0, 0, wAttrmap
 	call .CopyBGMapViaStack
-	ld a, BANK(vBGMap0)
+	ld a, BANK(vTilemap0)
 	ldh [rVBK], a
 	hlcoord 0, 0
 	call .CopyBGMapViaStack

@@ -151,7 +151,7 @@ UpdateOverworldMap:
 	ld a, [wBGMapAnchor + 1]
 	inc a
 	and %11
-	or HIGH(vBGMap0)
+	or HIGH(vTilemap0)
 	ld [wBGMapAnchor + 1], a
 .not_overflowed
 	ld hl, wPlayerMetatileY
@@ -182,7 +182,7 @@ UpdateOverworldMap:
 	ld a, [wBGMapAnchor + 1]
 	dec a
 	and %11
-	or HIGH(vBGMap0)
+	or HIGH(vTilemap0)
 	ld [wBGMapAnchor + 1], a
 .not_underflowed
 	ld hl, wPlayerMetatileY

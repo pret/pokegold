@@ -686,7 +686,7 @@ EggHatch_AnimationSequence:
 	call PlayMusic
 	call EnableLCD
 	hlcoord 7, 4
-	ld b, HIGH(vBGMap0)
+	ld b, HIGH(vTilemap0)
 	ld c, $31 ; Egg tiles start here
 	ld a, EGG
 	call Hatch_UpdateFrontpicBGMapCenter
@@ -735,7 +735,7 @@ EggHatch_AnimationSequence:
 	call ClearSprites
 	call Hatch_InitShellFragments
 	hlcoord 6, 3
-	ld b, HIGH(vBGMap0)
+	ld b, HIGH(vTilemap0)
 	ld c, $00 ; Hatchling tiles start here
 	ld a, [wJumptableIndex]
 	call Hatch_UpdateFrontpicBGMapCenter

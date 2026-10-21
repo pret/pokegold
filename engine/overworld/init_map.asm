@@ -28,18 +28,18 @@ ReanchorBGMap_NoOAMUpdate::
 	ld a, $90
 	ldh [hWY], a
 	call LoadOverworldTilemapAndAttrmapPals
-	ld a, HIGH(vBGMap1)
+	ld a, HIGH(vTilemap1)
 	call .LoadBGMapAddrIntoHRAM
 	call HDMATransferTilemapAndAttrmap_Menu
 	xor a
 	ldh [hBGMapMode], a
 	ldh [hWY], a
-	ld a, HIGH(vBGMap0)
+	ld a, HIGH(vTilemap0)
 	call .LoadBGMapAddrIntoHRAM
 	call .WaitTransfer
-	xor a ; LOW(vBGMap0)
+	xor a ; LOW(vTilemap0)
 	ld [wBGMapAnchor], a
-	ld a, HIGH(vBGMap0)
+	ld a, HIGH(vTilemap0)
 	ld [wBGMapAnchor + 1], a
 	xor a
 	ldh [hSCX], a

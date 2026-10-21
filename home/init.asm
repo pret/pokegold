@@ -108,16 +108,16 @@ Init::
 	ld a, CONNECTION_NOT_ESTABLISHED
 	ldh [hSerialConnectionStatus], a
 
-	ld h, HIGH(vBGMap0)
+	ld h, HIGH(vTilemap0)
 	call BlankBGMap
-	ld h, HIGH(vBGMap1)
+	ld h, HIGH(vTilemap1)
 	call BlankBGMap
 
 	callfar InitCGBPals
 
-	ld a, HIGH(vBGMap1)
+	ld a, HIGH(vTilemap1)
 	ldh [hBGMapAddress + 1], a
-	xor a ; LOW(vBGMap1)
+	xor a ; LOW(vTilemap1)
 	ldh [hBGMapAddress], a
 
 	farcall StartClock
@@ -168,7 +168,7 @@ FillBGMap_l:: ; unreferenced
 	; fallthrough
 
 FillBGMap::
-	ld de, vBGMap1 - vBGMap0
+	ld de, vTilemap1 - vTilemap0
 	ld l, e
 .loop
 	ld [hli], a

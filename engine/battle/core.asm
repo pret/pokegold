@@ -7782,7 +7782,7 @@ StartBattle:
 	call ShowLinkBattleParticipants
 	farcall ClearBattleRAM
 	ld hl, rLCDC
-	res B_LCDC_WIN_MAP, [hl] ; select vBGMap0/vBGMap2
+	res B_LCDC_WIN_MAP, [hl] ; select vTilemap0/vAttrmap0
 	ld a, [wOtherTrainerClass]
 	and a
 	jr nz, .trainer
@@ -7803,7 +7803,7 @@ StartBattle:
 	xor a
 	ldh [hBGMapMode], a
 	ld hl, rLCDC
-	set B_LCDC_WIN_MAP, [hl] ; select vBGMap1/vBGMap3
+	set B_LCDC_WIN_MAP, [hl] ; select vTilemap1/vAttrmap1
 	call EmptyBattleTextbox
 	hlcoord 9, 7
 	lb bc, 5, 11
