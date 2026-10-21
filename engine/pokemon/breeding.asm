@@ -630,7 +630,7 @@ GetEggFrontpic:
 
 Hatch_UpdateFrontpicBGMapCenter:
 	push af
-	call WaitTop
+	call FinishBGMapTransfer
 	push hl
 	push bc
 	hlcoord 0, 0

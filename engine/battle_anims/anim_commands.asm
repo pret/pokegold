@@ -118,19 +118,19 @@ RunBattleAnimScript:
 
 BattleAnimClearHud:
 	call BattleAnimDelayFrame
-	call WaitTop
+	call FinishBGMapTransfer
 	call ClearActorHud
 	ld a, $1
 	ldh [hBGMapMode], a
 	call BattleAnimDelayFrame
 	call BattleAnimDelayFrame
 	call BattleAnimDelayFrame
-	call WaitTop
+	call FinishBGMapTransfer
 	ret
 
 BattleAnimRestoreHuds:
 	call BattleAnimDelayFrame
-	call WaitTop
+	call FinishBGMapTransfer
 
 ; this block should just be "call UpdateBattleHuds"
 	ld hl, UpdateBattleHuds
@@ -142,7 +142,7 @@ BattleAnimRestoreHuds:
 	call BattleAnimDelayFrame
 	call BattleAnimDelayFrame
 	call BattleAnimDelayFrame
-	call WaitTop
+	call FinishBGMapTransfer
 	vc_hook Stop_reducing_move_anim_flashing
 	ret
 
@@ -1274,7 +1274,7 @@ ClearBattleAnims::
 	ret
 
 BattleAnim_RevertPals:
-	call WaitTop
+	call FinishBGMapTransfer
 	ld a, %11100100
 	ld [wBGP], a
 	ld [wOBP0], a
